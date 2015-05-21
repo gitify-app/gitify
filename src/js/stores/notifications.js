@@ -14,7 +14,7 @@ var NotificationsStore = Reflux.createStore({
   },
 
   updateTrayIcon: function (notifications) {
-    if (notifications) {
+    if (notifications.length > 0) {
       ipc.sendChannel('update-icon', "IconGreen");
     } else {
       ipc.sendChannel('update-icon', "IconPlain");
