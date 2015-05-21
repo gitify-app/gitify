@@ -18,11 +18,11 @@ var NotificationsStore = Reflux.createStore({
     var tokens = AuthStore.authStatus();
 
     apiRequests
-      .get('https://api.github.com/notifications')
+      .getAuth('https://api.github.com/notifications')
       .end(function (err, response) {
         if (response && response.ok) {
           // Success - Do Something.
-          self._notifications = response.body.repos;
+          self._notifications = response.body;
           Actions.getNotifications.completed();
         } else {
           // Error - Show messages.
@@ -34,10 +34,6 @@ var NotificationsStore = Reflux.createStore({
 
   onGetNotificationsCompleted: function () {
     this.trigger(this._notifications);
-  },
-
-  onGetNotificationsFailed: function () {
-    console.log("Errored.");
   }
 
 });
