@@ -32,6 +32,9 @@ var Notifications = React.createClass({
     return (
       <div className="container-fluid main-container notifications">
         <h1>Notifications</h1>
+        <Loading className='loading-container' shouldShow={this.state.loading}>
+          <div className='loading-text'>working on it</div>
+        </Loading>
         {this.state.notifications.map(function(object, i){
           return <SingleNotification key={object.id} notification={object} />;
         })}

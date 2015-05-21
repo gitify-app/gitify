@@ -22,10 +22,6 @@ var Navigation = React.createClass({
     };
   },
 
-  componentDidMount: function() {
-    this.refreshNotifications();
-  },
-
   refreshNotifications: function () {
     this.setState( {loading: true } );
     Actions.getNotifications();
