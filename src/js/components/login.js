@@ -79,7 +79,7 @@ var Login = React.createClass({
     return (
       <div className="container-fluid main-container login">
         <h1>Login</h1>
-        <button className='btn-default btn-lg' onClick={this.authGithub} block><i className="fa fa-github" />Login to Gihub</button>
+        <button className='btn btn-default btn-lg' onClick={this.authGithub} block><i className="fa fa-github" />Login to Gihub</button>
       </div>
     );
   }
