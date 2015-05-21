@@ -22,6 +22,16 @@ var Navigation = React.createClass({
     };
   },
 
+  componentDidMount: function() {
+    var self = this;
+    var iFrequency = 60000;
+    var myInterval = 0;
+    if (myInterval > 0) clearInterval(myInterval);
+    setInterval( function () {
+      self.refreshNotifications();
+    }, iFrequency );
+  },
+
   refreshNotifications: function () {
     this.setState( {loading: true } );
     Actions.getNotifications();
