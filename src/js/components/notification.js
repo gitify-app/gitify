@@ -12,10 +12,19 @@ var Notification = React.createClass({
   },
 
   render: function () {
+    var typeIconClass;
+
+    if (this.props.notification.subject.type == "Issue") {
+      typeIconClass = "octicon octicon-issue-opened";
+    } else if (this.props.notification.subject.type == "PullRequest") {
+      typeIconClass = "octicon octicon-git-pull-request";
+    } else {
+      typeIconClass = "octicon octicon-question";
+    }
 
     return (
       <div className='row notification' onClick={this.openBrowser}>
-        <div className='subject'>{this.props.notification.subject.title}</div>
+        <span className={typeIconClass} /> {this.props.notification.subject.title}
       </div>
     );
   }

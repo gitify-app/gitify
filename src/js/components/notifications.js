@@ -31,7 +31,6 @@ var Notifications = React.createClass({
   render: function () {
     return (
       <div className="container-fluid main-container notifications">
-        <h1>Notifications</h1>
         <Loading className='loading-container' shouldShow={this.state.loading}>
           <div className='loading-text'>working on it</div>
         </Loading>
