@@ -13,8 +13,6 @@ var Notification = React.createClass({
   },
 
   markAsRead: function () {
-    console.log(AuthStore.authStatus());
-
     apiRequests
       .patchAuth('https://api.github.com/notifications/threads/' + this.props.notification.id)
       .end(function (err, response) {
