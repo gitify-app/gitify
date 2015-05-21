@@ -1,8 +1,8 @@
 var React = require('react');
 var Reflux = require('Reflux');
 
-var AuthStore = require('../stores/auth');
 var Actions = require('../actions/actions');
+var AuthStore = require('../stores/auth');
 
 var Navigation = React.createClass({
   mixins: [
@@ -22,12 +22,17 @@ var Navigation = React.createClass({
     };
   },
 
-  reloadRepos: function () {
-    console.log("Will reload repos at some point...");
+  componentDidMount: function() {
+    this.refreshNotifications();
   },
 
-  refreshDone: function (argument) {
-    console.log("Refresh Done!");
+  refreshNotifications: function () {
+    this.setState( {loading: true } );
+    Actions.getNotifications();
+  },
+
+  refreshDone: function () {
+    this.setState( {loading: false } );
   },
 
   logOut: function () {
@@ -41,7 +46,7 @@ var Navigation = React.createClass({
 
     if (this.state.authStatus) {
       refreshIcon = (
-        <i className={loadingClass} onClick={this.reloadRepos} />
+        <i className={loadingClass} onClick={this.refreshNotifications} />
       );
       logoutIcon = (
         <i className='fa fa-sign-out' onClick={this.logOut} />

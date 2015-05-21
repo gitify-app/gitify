@@ -11,18 +11,18 @@ var AuthStore = Reflux.createStore({
   onLogin: function (token) {
     this._githubtoken = token;
     window.localStorage.setItem('githubtoken', token);
-    this.trigger(this.authStatus());
+    this.trigger(token);
   },
 
   onLogout: function () {
+    console.log("LOGOUT");
     window.localStorage.clear();
     this._githubtoken = false;
-    this.trigger(this.authStatus());
+    this.trigger(false);
   },
 
   authStatus: function () {
-    var self = this;
-    return self._githubtoken;
+    return this._githubtoken;
   }
 });
 

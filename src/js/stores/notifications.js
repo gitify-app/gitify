@@ -22,18 +22,21 @@ var NotificationsStore = Reflux.createStore({
       .end(function (err, response) {
         if (response && response.ok) {
           // Success - Do Something.
-          self._notifications = response.body;
-          Actions.getNotifications.completed();
+          Actions.getNotifications.completed(response.body);
         } else {
           // Error - Show messages.
-          console.log(err);
-          Actions.getNotifications.failed();
+          Actions.getNotifications.failed(err);
         }
       });
   },
 
-  onGetNotificationsCompleted: function () {
+  onGetNotificationsCompleted: function (notifications) {
+    this._notifications = notifications;
     this.trigger(this._notifications);
+  },
+
+  onGetNotificationsFailed: function (error) {
+    console.log("Errored." + error);
   }
 
 });

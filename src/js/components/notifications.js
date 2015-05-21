@@ -15,12 +15,17 @@ var Notifications = React.createClass({
 
   getInitialState: function() {
     return {
-      notifications: []
+      notifications: [],
+      loading: true
     };
   },
 
   componentWillMount: function() {
     Actions.getNotifications();
+  },
+
+  completedNotifications: function () {
+    this.setState( {loading: false } );
   },
 
   render: function () {
