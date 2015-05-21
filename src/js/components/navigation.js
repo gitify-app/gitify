@@ -1,12 +1,38 @@
 var React = require('react');
 var Reflux = require('Reflux');
 
+var AuthStore = require('../stores/auth');
+var Actions = require('../actions/actions');
+
 var Navigation = React.createClass({
+  mixins: [
+    Reflux.connect(AuthStore, 'authStatus'),
+    Reflux.listenTo(Actions.getNotifications.completed, 'refreshDone'),
+    Reflux.listenTo(Actions.getNotifications.failed, 'refreshDone')
+  ],
+
+  contextTypes: {
+    router: React.PropTypes.func
+  },
 
   getInitialState: function () {
     return {
-      // tokens: AuthStore.authStatus()
+      authStatus: AuthStore.authStatus(),
+      loading: false
     };
+  },
+
+  reloadRepos: function () {
+    console.log("Will reload repos at some point...");
+  },
+
+  refreshDone: function (argument) {
+    console.log("Refresh Done!");
+  },
+
+  logOut: function () {
+    Actions.logout();
+    this.context.router.transitionTo('login');
   },
 
   render: function () {
