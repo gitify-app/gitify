@@ -4,11 +4,28 @@ var shell = remote.require('shell');
 var _ = require('underscore');
 
 var AuthStore = require('../stores/auth');
+var apiRequests = require('../utils/api-requests');
 
 var Notification = React.createClass({
 
   openBrowser: function () {
-    shell.openExternal(url + this.props.notificationsubject.url);
+    shell.openExternal(url + this.props.notification.subject.url);
+  },
+
+  markAsRead: function () {
+    console.log(AuthStore.authStatus());
+
+    apiRequests
+      .patchAuth('https://api.github.com/notifications/threads/' + this.props.notification.id)
+      .end(function (err, response) {
+        if (response && response.ok) {
+          // Notification Read
+          // Remove from list?
+        } else {
+          // Error - Show messages.
+          console.log(err);
+        }
+      });
   },
 
   render: function () {
@@ -23,8 +40,10 @@ var Notification = React.createClass({
     }
 
     return (
-      <div className='row notification' onClick={this.openBrowser}>
-        <span className={typeIconClass} /> {this.props.notification.subject.title}
+      <div className='row notification'>
+        <span className={typeIconClass} />
+        <span onClick={this.openBrowser}>{this.props.notification.subject.title}</span>
+        <span className="octicon octicon-check" onClick={this.markAsRead}></span>
       </div>
     );
   }
