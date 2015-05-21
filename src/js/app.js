@@ -2,6 +2,14 @@ var React = require('react');
 var Router = require('react-router');
 
 var Navigation = require('./components/navigation');
+var LoginPage = require('./components/login');
+var NotificationsPage = require('./components/notifications');
+var AuthStore = require('./stores/auth');
+
+var Route = Router.Route;
+var NotFoundRoute = Router.NotFoundRoute;
+var DefaultRoute = Router.DefaultRoute;
+var RouteHandler = Router.RouteHandler;
 
 var App = React.createClass({
   statics: {
@@ -31,8 +39,9 @@ var NotFound = React.createClass({
 
 var routes = (
   <Route handler={App} path="/">
-    <DefaultRoute handler={RepositoriesPage} />
-    <Route name="login" handler={NotFound}/>
+    <DefaultRoute handler={NotificationsPage} />
+    <Route name="notifications" handler={NotificationsPage}/>
+    <Route name="login" handler={LoginPage}/>
     <NotFoundRoute handler={NotFound}/>
   </Route>
 );
