@@ -4,6 +4,7 @@ var Loading = require('reloading');
 
 var Actions = require('../actions/actions');
 var NotificationsStore = require('../stores/notifications');
+var SingleNotification = require('../components/notification');
 
 var Notifications = React.createClass({
   mixins: [
@@ -14,7 +15,7 @@ var Notifications = React.createClass({
 
   getInitialState: function() {
     return {
-      notifications: undefined
+      notifications: []
     };
   },
 
@@ -24,8 +25,11 @@ var Notifications = React.createClass({
 
   render: function () {
     return (
-      <div className="container-fluid main-container">
+      <div className="container-fluid main-container notifications">
         <h1>Notifications</h1>
+        {this.state.notifications.map(function(object, i){
+          return <SingleNotification key={object.id} notification={object} />;
+        })}
       </div>
     );
   }
