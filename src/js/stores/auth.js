@@ -15,10 +15,9 @@ var AuthStore = Reflux.createStore({
   },
 
   onLogout: function () {
-    console.log("LOGOUT");
     window.localStorage.clear();
     this._githubtoken = false;
-    this.trigger(false);
+    this.trigger(this.authStatus());
   },
 
   authStatus: function () {
