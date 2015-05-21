@@ -1,0 +1,237 @@
+/* @group Imports */
+
+@import "node_modules/bootstrap/less/bootstrap";
+@import "node_modules/font-awesome/less/font-awesome.less";
+@import "node_modules/octicons/octicons/octicons.less";
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700);
+
+/* @end Imports */
+
+
+/* @group Colors */
+
+@ThemeBlack: #262626;
+@ThemeGreen: #6cc644;
+
+@White: #ffffff;
+
+/* @end Colors */
+
+/* @group Typography */
+
+@font-face {
+    font-family: 'Open Sans - Light';
+    src: url('../../build/fonts/OpenSans-Light-webfont.eot');
+    src: url('../../build/fonts/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../build/fonts/OpenSans-Light-webfont.woff') format('woff'),
+         url('../../build/fonts/OpenSans-Light-webfont.ttf') format('truetype'),
+         url('../../build/fonts/OpenSans-Light-webfont.svg#open_sanslight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans - Regular';
+    src: url('../../build/fonts/OpenSans-Regular-webfont.eot');
+    src: url('../../build/fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../build/fonts/OpenSans-Regular-webfont.woff') format('woff'),
+         url('../../build/fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+         url('../../build/fonts/OpenSans-Regular-webfont.svg#open_sansregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Open Sans - Semibold';
+    src: url('../../build/fonts/OpenSans-Semibold-webfont.eot');
+    src: url('../../build/fonts/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../../build/fonts/OpenSans-Semibold-webfont.woff') format('woff'),
+         url('../../build/fonts/OpenSans-Semibold-webfont.ttf') format('truetype'),
+         url('../../build/fonts/OpenSans-Semibold-webfont.svg#open_sanssemibold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.FontOpenSansLight() {
+    font-family: 'Open Sans - Light';
+}
+
+.FontOpenSansRegular() {
+    font-family: 'Open Sans - Regular';
+}
+
+.FontOpenSansSemibold() {
+    font-family: 'Open Sans - Semibold';
+}
+
+.FontMonospace() {
+    font-family: monospace;
+}
+
+/* @end Typography */
+
+/* @group Mixins */
+
+// Border Radius (Same Corners)
+.BorderRadius(@radius: 5px) {
+    -webkit-border-radius: @radius;
+    -moz-border-radius:    @radius;
+    border-radius:         @radius;
+
+    -moz-background-clip:    padding;
+    -webkit-background-clip: padding-box;
+    background-clip:         padding-box;
+}
+
+.TruncateText() {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* @end Mixins */
+
+
+/* @group Bootstrap Overrides */
+
+@navbar-height: 35px;
+@octicons-font-path: "../../../build/fonts";
+
+/* @end Bootstrap Overrides */
+
+
+/* @group Misc */
+
+body {
+    .FontOpenSansRegular();
+    cursor: default;
+}
+
+::selection {
+    color: inherit;
+    background: inherit;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+.main-container {
+  position: absolute;
+  top: 35px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: auto;
+}
+
+.btn {
+    .BorderRadius(0);
+    border: 0;
+
+    .fa {
+      margin-right: 10px;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+/* @end Misc */
+
+
+/* @group Loading Service */
+
+.loading-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: @ThemeGreen;
+    z-index: 9999;
+    text-align: center;
+
+    .loading-text {
+        position: relative;
+        top: 120px;
+        font-size: 20px;
+        color: @White;
+        -webkit-animation: loadbars 02.0s cubic-bezier(0.645,0.045,0.355,1) infinite 0s;
+    }
+}
+
+@-webkit-keyframes 'loadbars' {
+    0%{
+        height: 10px;
+        margin-top: 25px;
+    }
+    50%{
+        height:50px;
+        margin-top: 0px;
+    }
+    100%{
+        height: 10px;
+        margin-top: 25px;
+    }
+}
+
+/* @end Loading Service */
+
+
+/* @group Navbar */
+
+.navigation {
+  height: @navbar-height;
+  background-color: @ThemeBlack;
+  color: @White;
+
+  div[class*="col-xs-"] {
+    font-size: 16px;
+    line-height: @navbar-height;
+
+    &.left {
+      .fa {
+        margin: 0 10px;
+      }
+    }
+
+    &.logo {
+      .FontOpenSansLight();
+      text-align: center;
+    }
+
+    &.right {
+      text-align: right;
+
+      .fa {
+        margin: 0 10px;
+      }
+    }
+  }
+}
+
+/* @end Navbar */
+
+
+/* @group Component / Login  */
+
+.login {
+    background-color: @ThemeGreen;
+    color: @White;
+    position: absolute;
+    top: @navbar-height;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding-top: 30px;
+
+    .logo {
+        max-width: 150px;
+        margin: 10px auto 20px;
+    }
+}
+
+/* @end Component / Login  */

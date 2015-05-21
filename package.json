@@ -35,7 +35,6 @@
     "font-awesome": "=4.3.0",
     "octicons": "=2.2.0",
     "react": "=0.13.3",
-    "react-bootstrap": "=0.22.6",
     "react-router": "=0.13.3",
     "reactify": "=1.1.1",
     "reflux": "=0.2.7",
