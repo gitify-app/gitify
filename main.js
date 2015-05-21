@@ -8,7 +8,11 @@ var Menu = require('menu');
 var Tray = require('tray');
 var BrowserWindow = require('browser-window');
 
+var iconPlain = path.join('./images/', 'github-tray-plain.png');
+
 app.on('ready', function(){
+  appIcon = new Tray(iconPlain);
+
   appIcon.on('clicked', function clicked (e, bounds) {
     if (appIcon.window && appIcon.window.isVisible()) {
       return hideWindow();
