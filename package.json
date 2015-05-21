@@ -1,0 +1,59 @@
+{
+  "name": "github-notifier",
+  "version": "0.0.1",
+  "description": "Github Notifications on your menu bar.",
+  "main": "main.js",
+  "scripts": {
+    "build-js": "npm run mkdirs && browserify -t reactify src/js/app.js -o build/js/app.js",
+    "build": "npm install && mkdir -p build/js && grunt build && npm run build-js",
+    "watch-js": "watchify -t reactify src/js/app.js -o build/js/app.js -v",
+    "watch": "grunt build && npm build && npm run watch-js | grunt watch",
+    "start": "electron .",
+    "dist": "rm -rf GithubNotfier.app/ && electron-packager . GithubNotfier --platform=darwin --arch=x64 --version=0.26.0 --prune --ignore=.git --ignore=src",
+    "test": "jsxhint --reporter node_modules/jshint-stylish/stylish.js 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ekonstantinidis/github-notifier.git"
+  },
+  "keywords": [
+    "github",
+    "notifier",
+    "notifications",
+    "native",
+    "app"
+  ],
+  "author": "Emmanouil Konstantinidis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ekonstantinidis/github-notifier/issues"
+  },
+  "homepage": "https://github.com/ekonstantinidis/github-notifier",
+  "dependencies": {
+    "bootstrap": "=3.3.4",
+    "browserify": "=10.2.1",
+    "font-awesome": "=4.3.0",
+    "octicons": "=2.2.0",
+    "react": "=0.13.3",
+    "react-bootstrap": "=0.22.6",
+    "react-router": "=0.13.3",
+    "reactify": "=1.1.1",
+    "reflux": "=0.2.7",
+    "reloading": "0.0.6",
+    "superagent": "=1.2.0",
+    "underscore": "=1.8.3",
+    "watchify": "=3.2.1"
+  },
+  "devDependencies": {
+    "electron-packager": "=4.1.0",
+    "electron-prebuilt": "=0.26.0",
+    "grunt": "=0.4.5",
+    "grunt-contrib-clean": "=0.6.0",
+    "grunt-contrib-copy": "=0.8.0",
+    "grunt-contrib-less": "=1.0.1",
+    "grunt-contrib-watch": "=0.6.1",
+    "jshint-stylish": "=1.0.2",
+    "jsxhint": "=0.15.0",
+    "less": "=2.5.1"
+  }
+}
