@@ -29,14 +29,29 @@ var Notifications = React.createClass({
   },
 
   render: function () {
+    var notifications;
+
+    if (this.state.notifications.length > 0) {
+      notifications = (
+        this.state.notifications.map(function(object, i){
+          return <SingleNotification key={object.id} notification={object} />;
+        })
+      );
+    } else {
+      notifications = (
+        <div className="all-read">
+          <h2>There are no notifications for you.</h2>
+          <h3>All clean!</h3>
+        </div>
+      );
+    }
+
     return (
       <div className="container-fluid main-container notifications">
         <Loading className='loading-container' shouldShow={this.state.loading}>
           <div className='loading-text'>working on it</div>
         </Loading>
-        {this.state.notifications.map(function(object, i){
-          return <SingleNotification key={object.id} notification={object} />;
-        })}
+        {notifications}
       </div>
     );
   }
