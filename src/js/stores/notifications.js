@@ -13,6 +13,14 @@ var NotificationsStore = Reflux.createStore({
     this._notifications = undefined;
   },
 
+  updateTrayIcon: function (notifications) {
+    if (notifications) {
+      ipc.sendChannel('update-icon', "IconGreen");
+    } else {
+      ipc.sendChannel('update-icon', "IconPlain");
+    }
+  },
+
   onGetNotifications: function () {
     var self = this;
     var tokens = AuthStore.authStatus();
@@ -23,6 +31,7 @@ var NotificationsStore = Reflux.createStore({
         if (response && response.ok) {
           // Success - Do Something.
           Actions.getNotifications.completed(response.body);
+          self.updateTrayIcon(response.body);
         } else {
           // Error - Show messages.
           Actions.getNotifications.failed(err);
