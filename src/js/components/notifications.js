@@ -43,7 +43,8 @@ var Notifications = React.createClass({
     if (!_.isEmpty(this.state.notifications)) {
       notifications = (
         _.map(this.state.notifications, function(repo, i) {
-          return <Repository repo={repo} repoName={i} key={i} />;
+          var repoFullName = repo[0].repository.full_name;
+          return <Repository repo={repo} repoName={repoFullName} key={i} />;
         })
       );
     } else {
