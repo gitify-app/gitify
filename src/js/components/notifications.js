@@ -1,7 +1,9 @@
 var React = require('react');
 var Reflux = require('reflux');
-var _ = require('underscore');
 var Loading = require('reloading');
+var _ = require('underscore');
+var remote = window.require('remote');
+var shell = remote.require('shell');
 
 var Actions = require('../actions/actions');
 var NotificationsStore = require('../stores/notifications');
@@ -29,15 +31,21 @@ var Notifications = React.createClass({
     this.setState( {loading: false } );
   },
 
+  openRepoBrowser: function (e) {
+    var url = this.state.notifications[e][0].repository.html_url;
+    shell.openExternal(url);
+  },
+
   render: function () {
     var notifications;
+    var self = this;
 
     if (!_.isEmpty(this.state.notifications)) {
       notifications = (
         _.map(this.state.notifications, function(repo, i) {
           return (
             <div key={i}>
-              <h4>{i}</h4>
+              <h4 onClick={self.openRepoBrowser.bind(self, i)}>{i}</h4>
               {repo.map(function(as, df) {
                 return (
                   <SingleNotification notification={as} key={as.id} />
