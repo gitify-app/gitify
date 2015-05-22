@@ -9,6 +9,7 @@ var Tray = require('tray');
 var BrowserWindow = require('browser-window');
 
 var iconPlain = path.join('./images/', 'github-tray-plain.png');
+var iconGreen = path.join('./images/', 'github-tray-green.png');
 
 app.on('ready', function(){
   appIcon = new Tray(iconPlain);
@@ -61,6 +62,15 @@ app.on('ready', function(){
     appIcon.window.hide();
     appIcon.emit('after-hide');
   }
+
+  ipc.on('update-icon', function(event, arg) {
+    var icon;
+    if (arg == "IconGreen") {
+      appIcon.setImage(iconGreen);
+    } else {
+      appIcon.setImage(iconPlain);
+    }
+  });
 
   app.dock.hide();
   appIcon.setToolTip('Github Notifications on your menu bar.');

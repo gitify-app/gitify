@@ -1,10 +1,10 @@
 var React = require('react');
 var Router = require('react-router');
 
+var AuthStore = require('./stores/auth');
 var Navigation = require('./components/navigation');
 var LoginPage = require('./components/login');
 var NotificationsPage = require('./components/notifications');
-var AuthStore = require('./stores/auth');
 
 var Route = Router.Route;
 var NotFoundRoute = Router.NotFoundRoute;

@@ -1,12 +1,49 @@
 var React = require('react');
 var Reflux = require('Reflux');
 
+var Actions = require('../actions/actions');
+var AuthStore = require('../stores/auth');
+
 var Navigation = React.createClass({
+  mixins: [
+    Reflux.connect(AuthStore, 'authStatus'),
+    Reflux.listenTo(Actions.getNotifications.completed, 'refreshDone'),
+    Reflux.listenTo(Actions.getNotifications.failed, 'refreshDone')
+  ],
+
+  contextTypes: {
+    router: React.PropTypes.func
+  },
 
   getInitialState: function () {
     return {
-      // tokens: AuthStore.authStatus()
+      authStatus: AuthStore.authStatus(),
+      loading: false
     };
+  },
+
+  componentDidMount: function() {
+    var self = this;
+    var iFrequency = 60000;
+    var myInterval = 0;
+    if (myInterval > 0) clearInterval(myInterval);
+    setInterval( function () {
+      self.refreshNotifications();
+    }, iFrequency );
+  },
+
+  refreshNotifications: function () {
+    this.setState( {loading: true } );
+    Actions.getNotifications();
+  },
+
+  refreshDone: function () {
+    this.setState( {loading: false } );
+  },
+
+  logOut: function () {
+    Actions.logout();
+    this.context.router.transitionTo('login');
   },
 
   render: function () {
@@ -15,7 +52,7 @@ var Navigation = React.createClass({
 
     if (this.state.authStatus) {
       refreshIcon = (
-        <i className={loadingClass} onClick={this.reloadRepos} />
+        <i className={loadingClass} onClick={this.refreshNotifications} />
       );
       logoutIcon = (
         <i className='fa fa-sign-out' onClick={this.logOut} />
