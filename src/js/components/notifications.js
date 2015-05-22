@@ -40,8 +40,8 @@ var Notifications = React.createClass({
               <h4>{i}</h4>
               {repo.map(function(as, df) {
                 return (
-                  <SingleNotification notification={as} />)
-                )
+                  <SingleNotification notification={as} key={as.id} />
+                );
               })}
             </div>
           );
