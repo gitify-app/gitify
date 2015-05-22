@@ -1,5 +1,6 @@
 var React = require('react');
 var Reflux = require('reflux');
+var _ = require('underscore');
 var Loading = require('reloading');
 
 var Actions = require('../actions/actions');
@@ -15,7 +16,7 @@ var Notifications = React.createClass({
 
   getInitialState: function() {
     return {
-      notifications: [],
+      notifications: {},
       loading: true
     };
   },
@@ -31,10 +32,19 @@ var Notifications = React.createClass({
   render: function () {
     var notifications;
 
-    if (this.state.notifications.length > 0) {
+    if (!_.isEmpty(this.state.notifications)) {
       notifications = (
-        this.state.notifications.map(function(object, i){
-          return <SingleNotification key={object.id} notification={object} />;
+        _.map(this.state.notifications, function(repo, i) {
+          return (
+            <div key={i}>
+              <h4>{i}</h4>
+              {repo.map(function(as, df) {
+                return (
+                  <SingleNotification notification={as} />)
+                )
+              })}
+            </div>
+          );
         })
       );
     } else {
