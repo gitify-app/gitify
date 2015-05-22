@@ -95,7 +95,7 @@
 /* @group Bootstrap Overrides */
 
 @navbar-height: 35px;
-@octicons-font-path: "../../../build/fonts";
+@octicons-font-path: "../../build/fonts";
 
 /* @end Bootstrap Overrides */
 
@@ -150,7 +150,7 @@ html, body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: @ThemeGreen;
+    background: @ThemeBlack;
     z-index: 9999;
     text-align: center;
 
@@ -235,3 +235,33 @@ html, body {
 }
 
 /* @end Component / Login  */
+
+
+/* @group Component / Notifications  */
+
+.notifications {
+  margin: 0;
+  padding: 0;
+
+  .all-read {
+    h2, h3 {
+      text-align: center;
+    }
+  }
+}
+
+/* @end Component / Notifications  */
+
+
+/* @group Component / Notification  */
+
+.notification {
+  margin: 0;
+  padding: 10px 20px;
+
+  .octicon {
+    margin-right: 10px;
+  }
+}
+
+/* @end Component / Notification  */

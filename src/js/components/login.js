@@ -9,6 +9,9 @@ var Loading = require('reloading');
 var Actions = require('../actions/actions');
 
 var Login = React.createClass({
+  contextTypes: {
+    router: React.PropTypes.func
+  },
 
   authGithub: function () {
     var self = this;
@@ -67,7 +70,7 @@ var Login = React.createClass({
         if (response && response.ok) {
           // Success - Do Something.
           Actions.login(response.body.access_token);
-          console.log(response.body.access_token);
+          self.context.router.transitionTo('notifications');
         } else {
           // Error - Show messages.
           console.log(err);
@@ -78,8 +81,14 @@ var Login = React.createClass({
   render: function () {
     return (
       <div className="container-fluid main-container login">
-        <h1>Login</h1>
-        <button className='btn btn-default btn-lg' onClick={this.authGithub} block><i className="fa fa-github" />Login to Gihub</button>
+        <div className='row'>
+          <div className='col-xs-offset-2 col-xs-8'>
+            <h1>Login</h1>
+            <button className='btn btn-default btn-lg btn-block' onClick={this.authGithub}>
+              <i className="fa fa-github" />Login to Gihub
+            </button>
+          </div>
+        </div>
       </div>
     );
   }
