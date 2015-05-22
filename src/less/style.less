@@ -89,6 +89,13 @@
     text-overflow: ellipsis;
 }
 
+// Opacity
+.Opacity(@opacity: 0.5) {
+    -webkit-opacity:    @opacity;
+    -moz-opacity:       @opacity;
+    opacity:        @opacity;
+}
+
 /* @end Mixins */
 
 
@@ -301,6 +308,10 @@ html, body {
   .octicon {
     margin-right: 10px;
     font-size: 20px;
+  }
+
+  &.read {
+    .Opacity(0.4);
   }
 }
 
