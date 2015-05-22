@@ -7,7 +7,7 @@ var shell = remote.require('shell');
 
 var Actions = require('../actions/actions');
 var NotificationsStore = require('../stores/notifications');
-var SingleNotification = require('../components/notification');
+var Repository = require('../components/repository');
 
 var Notifications = React.createClass({
   mixins: [
@@ -43,16 +43,7 @@ var Notifications = React.createClass({
     if (!_.isEmpty(this.state.notifications)) {
       notifications = (
         _.map(this.state.notifications, function(repo, i) {
-          return (
-            <div key={i}>
-              <h4 onClick={self.openRepoBrowser.bind(self, i)}>{i}</h4>
-              {repo.map(function(as, df) {
-                return (
-                  <SingleNotification notification={as} key={as.id} />
-                );
-              })}
-            </div>
-          );
+          return <Repository repo={repo} repoName={i} key={i} />;
         })
       );
     } else {
