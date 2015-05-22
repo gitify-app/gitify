@@ -40,9 +40,11 @@ var Notification = React.createClass({
 
     return (
       <div className='row notification'>
-        <span className={typeIconClass} />
-        <span onClick={this.openBrowser}>{this.props.notification.subject.title}</span>
-        <span className="octicon octicon-check" onClick={this.markAsRead}></span>
+        <div className='col-xs-1'><span className={typeIconClass} /></div>
+        <div className='col-xs-10 subject' onClick={this.openBrowser}>
+          {this.props.notification.subject.title}
+        </div>
+        <div className='col-xs-1 check-wrapper'><span className="octicon octicon-check" onClick={this.markAsRead} /></div>
       </div>
     );
   }
