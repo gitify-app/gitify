@@ -9,7 +9,8 @@ var apiRequests = require('../utils/api-requests');
 var Notification = React.createClass({
 
   openBrowser: function () {
-    shell.openExternal(url + this.props.notification.subject.url);
+    var url = this.props.notification.subject.url.replace('api.github.com/repos', 'www.github.com');
+    shell.openExternal(url);
   },
 
   markAsRead: function () {
