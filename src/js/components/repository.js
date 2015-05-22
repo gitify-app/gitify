@@ -4,6 +4,10 @@ var _ = require('underscore');
 
 var Repository = React.createClass({
 
+  getAvatar: function () {
+    return this.props.repo[0].repository.owner.avatar_url;
+  },
+
   render: function () {
     var notifications = (
       _.map(this.props.repo, function(notification, i) {
@@ -14,8 +18,11 @@ var Repository = React.createClass({
     );
 
     return (
-      <div>
-        <h3>{this.props.repoName}</h3>
+      <div className='repository'>
+        <div className='row'>
+          <div className='col-xs-2'><img className='avatar' src={this.getAvatar()} /></div>
+          <div className='col-xs-10 name'>{this.props.repoName}</div>
+        </div>
         {notifications}
       </div>
     );
