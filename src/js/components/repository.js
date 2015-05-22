@@ -18,8 +18,8 @@ var Repository = React.createClass({
     );
 
     return (
-      <div className='repository'>
-        <div className='row'>
+      <div>
+        <div className='row repository'>
           <div className='col-xs-2'><img className='avatar' src={this.getAvatar()} /></div>
           <div className='col-xs-10 name'>{this.props.repoName}</div>
         </div>
