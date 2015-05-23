@@ -31,11 +31,6 @@ var Notifications = React.createClass({
     this.setState( {loading: false } );
   },
 
-  openRepoBrowser: function (e) {
-    var url = this.state.notifications[e][0].repository.html_url;
-    shell.openExternal(url);
-  },
-
   render: function () {
     var notifications;
     var self = this;
