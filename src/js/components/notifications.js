@@ -33,6 +33,7 @@ var Notifications = React.createClass({
 
   render: function () {
     var notifications;
+    var wrapperClass = 'container-fluid main-container notifications';
     var self = this;
 
     if (!_.isEmpty(this.state.notifications)) {
@@ -43,16 +44,18 @@ var Notifications = React.createClass({
         })
       );
     } else {
+      wrapperClass += ' all-read';
       notifications = (
-        <div className="all-read">
+        <div>
           <h2>There are no notifications for you.</h2>
           <h3>All clean!</h3>
+          <img className='img-responsive emoji' src='images/rocket.png' />
         </div>
       );
     }
 
     return (
-      <div className="container-fluid main-container notifications">
+      <div className={wrapperClass}>
         <Loading className='loading-container' shouldShow={this.state.loading}>
           <div className='loading-text'>working on it</div>
         </Loading>

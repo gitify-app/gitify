@@ -275,9 +275,17 @@ html, body {
   margin: 0;
   padding: 0;
 
-  .all-read {
+  &.all-read {
+    background-color: @ThemeBlack;
+    color: @White;
+
     h2, h3 {
       text-align: center;
+    }
+
+    .emoji {
+      margin: 0 auto;
+
     }
   }
 }
