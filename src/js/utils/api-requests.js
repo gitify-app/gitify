@@ -11,22 +11,7 @@ var apiRequests = {
   getAuth: function (url) {
     return request
       .get(url)
-      .set('Accept', 'application/json')
-      .set('Authorization', 'token ' + AuthStore.authStatus());
-  },
-
-  post: function (url, params) {
-    return request
-      .post(url)
-      .send(params)
-      .set('Accept', 'application/json');
-  },
-
-  putAuth: function (url, params) {
-    return request
-      .put(url)
-      .send(params)
-      .set('Accept', 'application/json')
+      .set('Accept', 'application/vnd.github.v3+json')
       .set('Authorization', 'token ' + AuthStore.authStatus());
   },
 
@@ -34,6 +19,7 @@ var apiRequests = {
     return request
       .patch(url)
       .send(params)
+      .set('Accept', 'application/vnd.github.v3+json')
       .set('Authorization', 'token ' + AuthStore.authStatus());
   }
 };
