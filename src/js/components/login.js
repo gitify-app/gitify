@@ -83,7 +83,8 @@ var Login = React.createClass({
       <div className="container-fluid main-container login">
         <div className='row'>
           <div className='col-xs-offset-2 col-xs-8'>
-            <h1>Login</h1>
+            <img className='img-responsive logo' src='images/github-logo.png' />
+            <div className='desc'>GitHub notifications in your menu bar.</div>
             <button className='btn btn-default btn-lg btn-block' onClick={this.authGithub}>
               <i className="fa fa-github" />Login to Gihub
             </button>
