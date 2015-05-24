@@ -3,6 +3,7 @@ var Router = require('react-router');
 
 var AuthStore = require('./stores/auth');
 var Navigation = require('./components/navigation');
+var Footer = require('./components/footer');
 var LoginPage = require('./components/login');
 var NotificationsPage = require('./components/notifications');
 
@@ -26,6 +27,7 @@ var App = React.createClass({
       <div>
         <Navigation />
         <RouteHandler />
+        <Footer />
       </div>
     );
   }
