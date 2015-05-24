@@ -18,7 +18,7 @@ var Notifications = React.createClass({
 
   getInitialState: function() {
     return {
-      notifications: null,
+      notifications: [],
       loading: true
     };
   },
@@ -36,14 +36,7 @@ var Notifications = React.createClass({
     var wrapperClass = 'container-fluid main-container notifications';
     var self = this;
 
-    if (!_.isEmpty(this.state.notifications)) {
-      notifications = (
-        _.map(this.state.notifications, function(repo, i) {
-          var repoFullName = repo[0].repository.full_name;
-          return <Repository repo={repo} repoName={repoFullName} key={i} />;
-        })
-      );
-    } else {
+    if (_.isEmpty(this.state.notifications)) {
       wrapperClass += ' all-read';
       notifications = (
         <div>
@@ -52,6 +45,13 @@ var Notifications = React.createClass({
           <img className='img-responsive emoji' src='images/rocket.png' />
         </div>
       );
+    } else {
+      this.state.notifications.map(function(obj, i) {
+        var repoFullName = obj[0].repository.full_name;
+        notifications = (
+          <Repository repo={obj} repoName={repoFullName} key={repoFullName} />
+        );
+      });
     }
 
     return (

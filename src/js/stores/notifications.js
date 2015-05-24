@@ -10,7 +10,7 @@ var NotificationsStore = Reflux.createStore({
   listenables: Actions,
 
   init: function () {
-    this._notifications = undefined;
+    this._notifications = [];
   },
 
   updateTrayIcon: function (notifications) {
@@ -50,7 +50,7 @@ var NotificationsStore = Reflux.createStore({
     });
 
     this._notifications = array;
-    this.trigger(array);
+    this.trigger(this._notifications);
   },
 
   onGetNotificationsFailed: function (error) {
