@@ -46,12 +46,13 @@ var Notifications = React.createClass({
         </div>
       );
     } else {
-      this.state.notifications.map(function(obj, i) {
-        var repoFullName = obj[0].repository.full_name;
-        notifications = (
-          <Repository repo={obj} repoName={repoFullName} key={repoFullName} />
-        );
-      });
+      notifications = (
+        this.state.notifications.map(function(obj, i) {
+          console.log(obj);
+          var repoFullName = obj[0].repository.full_name;
+          return <Repository repo={obj} repoName={repoFullName} key={repoFullName} />;
+        })
+      );
     }
 
     return (
