@@ -13,6 +13,8 @@
 @ThemeBlack: #262626;
 @ThemeGreen: #6cc644;
 
+@ThemeBlue: #4183c4;
+
 @White: #ffffff;
 
 /* @end Colors */
@@ -87,6 +89,13 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+// Opacity
+.Opacity(@opacity: 0.5) {
+    -webkit-opacity:    @opacity;
+    -moz-opacity:       @opacity;
+    opacity:        @opacity;
 }
 
 /* @end Mixins */
@@ -219,7 +228,7 @@ html, body {
 /* @group Component / Login  */
 
 .login {
-    background-color: @ThemeGreen;
+    background-color: @ThemeBlack;
     color: @White;
     position: absolute;
     top: @navbar-height;
@@ -231,6 +240,12 @@ html, body {
     .logo {
         max-width: 150px;
         margin: 10px auto 20px;
+    }
+
+    .desc {
+      font-size: 20px;
+      text-align: center;
+      margin-bottom: 20px;
     }
 }
 
@@ -266,9 +281,18 @@ html, body {
   margin: 0;
   padding: 0;
 
-  .all-read {
+  &.all-read {
+    background-color: @ThemeBlack;
+    color: @White;
+    padding: 30px 20px;
+
     h2, h3 {
       text-align: center;
+    }
+
+    .emoji {
+      margin: 15px auto;
+
     }
   }
 }
@@ -282,6 +306,10 @@ html, body {
   margin: 0;
   padding: 3px 20px;
   border-bottom: 1px solid darken(#f5f5f5, 10%);
+
+  transition: opacity .25s ease-in-out;
+  -moz-transition: opacity .25s ease-in-out;
+  -webkit-transition: opacity .25s ease-in-out;
 
   .col-xs-1,
   .col-xs-10 {
@@ -301,6 +329,20 @@ html, body {
   .octicon {
     margin-right: 10px;
     font-size: 20px;
+
+    &.octicon-check {
+      -webkit-transition: all .8s;
+      -moz-transition: all .8s;
+      transition: all .8s;
+
+      &:hover {
+        color: @ThemeBlue;
+      }
+    }
+  }
+
+  &.read {
+    .Opacity(0.4);
   }
 }
 
