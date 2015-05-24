@@ -8,8 +8,8 @@ var Menu = require('menu');
 var Tray = require('tray');
 var BrowserWindow = require('browser-window');
 
-var iconPlain = path.join('./images/', 'github-tray-plain.png');
-var iconGreen = path.join('./images/', 'github-tray-green.png');
+var iconPlain = path.join(__dirname, 'images', 'github-tray-plain.png');
+var iconGreen = path.join(__dirname, 'images', 'github-tray-green.png');
 
 app.on('ready', function(){
   appIcon = new Tray(iconPlain);
