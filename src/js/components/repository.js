@@ -17,21 +17,17 @@ var Repository = React.createClass({
   },
 
   render: function () {
-    var notifications = (
-      _.map(this.props.repo, function(notification, i) {
-        return (
-          <SingleNotification notification={notification} key={i} />
-        );
-      })
-    );
-
     return (
       <div>
         <div className='row repository'>
           <div className='col-xs-2'><img className='avatar' src={this.getAvatar()} /></div>
           <div className='col-xs-10 name' onClick={this.openBrowser}>{this.props.repoName}</div>
         </div>
-        {notifications}
+
+        {this.props.repo.map(function(obj, i) {
+          return <SingleNotification notification={obj} key={obj.id} />;
+        })}
+
       </div>
     );
   }

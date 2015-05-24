@@ -10,7 +10,7 @@ var NotificationsStore = Reflux.createStore({
   listenables: Actions,
 
   init: function () {
-    this._notifications = undefined;
+    this._notifications = [];
   },
 
   updateTrayIcon: function (notifications) {
@@ -41,11 +41,16 @@ var NotificationsStore = Reflux.createStore({
 
   onGetNotificationsCompleted: function (notifications) {
     var groupedNotifications = _.groupBy(notifications, function(object){
-      return object.repository.name;
+      return object.repository.full_name;
     });
 
-    this._notifications = groupedNotifications;
-    this.trigger(groupedNotifications);
+    var array= [];
+    _.map(groupedNotifications, function(obj, i) {
+      array.push(obj);
+    });
+
+    this._notifications = array;
+    this.trigger(this._notifications);
   },
 
   onGetNotificationsFailed: function (error) {
