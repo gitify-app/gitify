@@ -63,6 +63,10 @@ app.on('ready', function(){
     appIcon.emit('after-hide');
   }
 
+  ipc.on('update-icon', function(event) {
+    appIcon.window.show();
+  });
+
   ipc.on('update-icon', function(event, arg) {
     var icon;
     if (arg == "IconGreen") {
