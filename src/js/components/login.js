@@ -1,4 +1,5 @@
 var remote = window.require('remote');
+var ipc = window.require('ipc');
 var BrowserWindow = remote.require('browser-window');
 
 var React = require('react');
@@ -24,11 +25,10 @@ var Login = React.createClass({
     };
 
     //Build the OAuth consent page URL
-    var authWindow = new BrowserWindow({ width: 800, height: 600, show: false, 'node-integration': false });
+    var authWindow = new BrowserWindow({ width: 800, height: 600, show: true, 'node-integration': false });
     var githubUrl = 'https://github.com/login/oauth/authorize?';
     var authUrl = githubUrl + 'client_id=' + options.client_id + '&scope=' + options.scope;
     authWindow.loadUrl(authUrl);
-    authWindow.show();
 
     authWindow.webContents.on('did-get-redirect-request', function(event, oldUrl, newUrl) {
 
@@ -71,6 +71,7 @@ var Login = React.createClass({
           // Success - Do Something.
           Actions.login(response.body.access_token);
           self.context.router.transitionTo('notifications');
+          ipc.sendChannel('reopen-window');
         } else {
           // Error - Show messages.
           console.log(err);
