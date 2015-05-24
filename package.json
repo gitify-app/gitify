@@ -9,7 +9,7 @@
     "watch-js": "watchify -t reactify src/js/app.js -o build/js/app.js -v",
     "watch": "grunt build && npm build && npm run watch-js | grunt watch",
     "start": "electron .",
-    "dist": "rm -rf GithubNotfier.app/ && electron-packager . GithubNotfier --platform=darwin --arch=x64 --version=0.26.0 --prune --ignore=.git --ignore=src",
+    "dist": "rm -rf Gitify.app/ && electron-packager . Gitify --platform=darwin --arch=x64 --version=0.26.0 --prune --ignore=src",
     "test": "jsxhint --reporter node_modules/jshint-stylish/stylish.js 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js'"
   },
   "repository": {
