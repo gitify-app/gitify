@@ -1,5 +1,6 @@
 var React = require('react');
 var Reflux = require('Reflux');
+var ipc = window.require('ipc');
 
 var Actions = require('../actions/actions');
 var AuthStore = require('../stores/auth');
@@ -44,6 +45,7 @@ var Navigation = React.createClass({
   logOut: function () {
     Actions.logout();
     this.context.router.transitionTo('login');
+    ipc.sendChannel('update-icon', "IconPlain");
   },
 
   render: function () {

@@ -58,9 +58,7 @@ app.on('ready', function(){
 
   function hideWindow () {
     if (!appIcon.window) return;
-    appIcon.emit('hide');
     appIcon.window.hide();
-    appIcon.emit('after-hide');
   }
 
   ipc.on('reopen-window', function(event) {
