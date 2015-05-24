@@ -1,4 +1,5 @@
 var remote = window.require('remote');
+var ipc = window.require('ipc');
 var BrowserWindow = remote.require('browser-window');
 
 var React = require('react');
@@ -71,6 +72,7 @@ var Login = React.createClass({
           // Success - Do Something.
           Actions.login(response.body.access_token);
           self.context.router.transitionTo('notifications');
+          ipc.sendChannel('reopen-window');
         } else {
           // Error - Show messages.
           console.log(err);
