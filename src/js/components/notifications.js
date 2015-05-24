@@ -18,7 +18,7 @@ var Notifications = React.createClass({
 
   getInitialState: function() {
     return {
-      notifications: {},
+      notifications: null,
       loading: true
     };
   },
