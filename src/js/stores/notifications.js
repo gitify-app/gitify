@@ -40,10 +40,7 @@ var NotificationsStore = Reflux.createStore({
   },
 
   onGetNotificationsCompleted: function (notifications) {
-    var groupedNotifications = _.groupBy(notifications, function(object){
-      return object.repository.name;
-    });
-
+    var groupedNotifications = _.groupBy(notifications, 'repository.name');
     this._notifications = groupedNotifications;
     this.trigger(groupedNotifications);
   },
