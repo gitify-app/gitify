@@ -63,7 +63,7 @@ app.on('ready', function(){
     appIcon.emit('after-hide');
   }
 
-  ipc.on('update-icon', function(event) {
+  ipc.on('reopen-window', function(event) {
     appIcon.window.show();
   });
 
