@@ -129,7 +129,7 @@ html, body {
 .main-container {
   position: absolute;
   top: 35px;
-  bottom: 0;
+  bottom: 30px;
   left: 0;
   right: 0;
   overflow: auto;
@@ -208,8 +208,10 @@ html, body {
     }
 
     &.logo {
-      .FontOpenSansLight();
-      text-align: center;
+      .img-responsive {
+        margin: 9px auto;
+        max-width: 70px;
+      }
     }
 
     &.right {
@@ -347,3 +349,22 @@ html, body {
 }
 
 /* @end Component / Notification  */
+
+
+/* @group Component / Footer  */
+
+.footer {
+  margin: 0;
+  padding: 5px 20px;
+
+  background-color: @ThemeBlack;
+  color: @White;
+  .FontOpenSansRegular();
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+/* @end Component / Footer  */

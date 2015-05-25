@@ -48,7 +48,6 @@ var Notifications = React.createClass({
     } else {
       notifications = (
         this.state.notifications.map(function(obj, i) {
-          console.log(obj);
           var repoFullName = obj[0].repository.full_name;
           return <Repository repo={obj} repoName={repoFullName} key={repoFullName} />;
         })
