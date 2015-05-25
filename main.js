@@ -8,11 +8,11 @@ var Menu = require('menu');
 var Tray = require('tray');
 var BrowserWindow = require('browser-window');
 
-var iconPlain = path.join(__dirname, 'images', 'github-tray-plain.png');
-var iconGreen = path.join(__dirname, 'images', 'github-tray-green.png');
+var iconIdle = path.join(__dirname, 'images', 'tray-idle.png');
+var iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
 app.on('ready', function(){
-  appIcon = new Tray(iconPlain);
+  appIcon = new Tray(iconIdle);
   initWindow();
 
   appIcon.on('clicked', function clicked (e, bounds) {
@@ -60,10 +60,10 @@ app.on('ready', function(){
 
   ipc.on('update-icon', function(event, arg) {
     var icon;
-    if (arg == "IconGreen") {
-      appIcon.setImage(iconGreen);
+    if (arg == "TrayActive") {
+      appIcon.setImage(iconActive);
     } else {
-      appIcon.setImage(iconPlain);
+      appIcon.setImage(iconIdle);
     }
   });
 
