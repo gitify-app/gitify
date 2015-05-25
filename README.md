@@ -2,6 +2,8 @@ Gitify [![Build Status](https://magnum.travis-ci.com/ekonstantinidis/gitify.svg?
 ==========
 GitHub Notifications on your menu bar.
 
+![Gitify](images/press.png)
+
 ### Prerequisites
 
  - Electron [+](http://electron.atom.io/)
