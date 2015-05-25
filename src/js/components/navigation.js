@@ -69,7 +69,7 @@ var Navigation = React.createClass({
       <div className='container-fluid'>
         <div className='row navigation'>
           <div className='col-xs-4 left'>{refreshIcon}</div>
-          <div className='col-xs-4 logo'>Gitify</div>
+          <div className='col-xs-4 logo'><img className='img-responsive' src='images/logo-hor-white.png' /></div>
           <div className='col-xs-4 right'>
             {logoutIcon}
             <i className="fa fa-power-off" onClick={this.appQuit} />
