@@ -1,5 +1,5 @@
 {
-  "name": "github-notifier",
+  "name": "gitify",
   "version": "0.0.1",
   "description": "Github Notifications on your menu bar.",
   "main": "main.js",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ekonstantinidis/github-notifier.git"
+    "url": "https://github.com/ekonstantinidis/gitify.git"
   },
   "keywords": [
     "github",
@@ -26,9 +26,9 @@
   "author": "Emmanouil Konstantinidis",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ekonstantinidis/github-notifier/issues"
+    "url": "https://github.com/ekonstantinidis/gitify/issues"
   },
-  "homepage": "https://github.com/ekonstantinidis/github-notifier",
+  "homepage": "https://github.com/ekonstantinidis/gitify",
   "dependencies": {
     "bootstrap": "=3.3.4",
     "browserify": "=10.2.1",
