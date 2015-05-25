@@ -1,15 +1,18 @@
 var React = require('react');
-var Loading = require('reloading');
-
-var Actions = require('../actions/actions');
+var remote = window.require('remote');
+var shell = remote.require('shell');
 
 var Footer = React.createClass({
+
+  openRepoBrowser: function () {
+    shell.openExternal('http://www.github.com/ekonstantinidis/gitify');
+  },
+
   render: function () {
     return (
       <div className='container-fluid footer'>
         <div className='row'>
-          <div className='col-xs-8 left'>Developed by E. Konstantinidis.</div>
-          <div className='col-xs-4 right'>About</div>
+          <div className='col-xs-12 right' onClick={this.openRepoBrowser}>Fork me on <span className="octicon octicon-mark-github"/></div>
         </div>
       </div>
     );
