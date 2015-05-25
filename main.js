@@ -67,6 +67,10 @@ app.on('ready', function(){
     }
   });
 
+  ipc.on('app-quit', function(event) {
+    app.quit();
+  });
+
   app.dock.hide();
   appIcon.setToolTip('Github Notifications on your menu bar.');
 });

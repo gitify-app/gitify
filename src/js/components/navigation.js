@@ -48,6 +48,10 @@ var Navigation = React.createClass({
     ipc.sendChannel('update-icon', "IconPlain");
   },
 
+  appQuit: function () {
+    ipc.sendChannel('app-quit');
+  },
+
   render: function () {
     var refreshIcon, logoutIcon;
     var loadingClass = this.state.loading ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
@@ -66,7 +70,10 @@ var Navigation = React.createClass({
         <div className='row navigation'>
           <div className='col-xs-4 left'>{refreshIcon}</div>
           <div className='col-xs-4 logo'>GitHub</div>
-          <div className='col-xs-4 right'>{logoutIcon}</div>
+          <div className='col-xs-4 right'>
+            {logoutIcon}
+            <i className="fa fa-power-off" onClick={this.appQuit} />
+          </div>
         </div>
       </div>
     );
