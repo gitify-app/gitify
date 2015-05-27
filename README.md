@@ -1,4 +1,4 @@
-Gitify [![Build Status](https://magnum.travis-ci.com/ekonstantinidis/gitify.svg?token=9QR4ewbqbkEmHps6q5sq&branch=master)](https://magnum.travis-ci.com/ekonstantinidis/gitify)
+Gitify [![Build Status](https://travis-ci.org/ekonstantinidis/gitify.svg?branch=master)](https://travis-ci.org/ekonstantinidis/gitify)
 ==========
 GitHub Notifications on your menu bar.
 
