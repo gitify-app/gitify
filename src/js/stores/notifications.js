@@ -26,7 +26,7 @@ var NotificationsStore = Reflux.createStore({
     var tokens = AuthStore.authStatus();
 
     apiRequests
-      .getAuth('https://api.github.com/notifications')
+      .getAuth('https://api.github.com/notifications?now=' + Date.now())
       .end(function (err, response) {
         if (response && response.ok) {
           // Success - Do Something.
