@@ -5,7 +5,7 @@ GitHub Notifications on your menu bar.
 ![Gitify](images/press.png)
 
 ### Installation
-You can download Gitify from the [releases](https://github.com/ekonstantinidis/gitify/releases) page. Currently only support for OS X. [Latest](https://github.com/ekonstantinidis/gitify/releases/download/0.0.10/gitify-osx.zip)
+You can download Gitify from the [releases](https://github.com/ekonstantinidis/gitify/releases) page. Currently only support for OS X.
 
 ### Prerequisites
 
