@@ -21,6 +21,7 @@ var apiRequests = {
       .get(url)
       .set('Accept', 'application/vnd.github.v3+json')
       .set('Authorization', 'token ' + AuthStore.authStatus())
+      .set('Cache-Control', 'no-cache')
       .set('User-Agent', 'Gitify');
   },
 
@@ -30,6 +31,7 @@ var apiRequests = {
       .send(params)
       .set('Accept', 'application/vnd.github.v3+json')
       .set('Authorization', 'token ' + AuthStore.authStatus())
+      .set('Cache-Control', 'no-cache')
       .set('User-Agent', 'Gitify');
   }
 };
