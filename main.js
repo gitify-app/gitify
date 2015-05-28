@@ -36,6 +36,8 @@ app.on('ready', function(){
     appIcon.window = new BrowserWindow(defaults);
     appIcon.window.loadUrl('file://' + __dirname + '/index.html');
     appIcon.window.on('blur', hideWindow);
+
+    initMenu();
   }
 
   function showWindow (bounds) {
@@ -47,6 +49,27 @@ app.on('ready', function(){
 
     appIcon.window.setPosition(options.x, options.y);
     appIcon.window.show();
+  }
+
+  function initMenu () {
+    var template = [{
+      label: 'Edit',
+      submenu: [
+        {
+          label: 'Copy',
+          accelerator: 'Command+C',
+          selector: 'copy:'
+        },
+        {
+          label: 'Paste',
+          accelerator: 'Command+V',
+          selector: 'paste:'
+        }
+      ]
+    }];
+
+    menu = Menu.buildFromTemplate(template);
+    Menu.setApplicationMenu(menu);
   }
 
   function hideWindow () {
