@@ -12,6 +12,14 @@
     "dist": "rm -rf Gitify.app/ && electron-packager . Gitify --platform=darwin --arch=x64 --version=0.27.1 --icon=images/app-icon.icns --prune --ignore=src",
     "test": "jsxhint --reporter node_modules/jshint-stylish/stylish.js 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js' && jscs 'src/js/' && jest"
   },
+  "jshintConfig": {
+    "browserify": true,
+    "unused": true,
+    "undef": true,
+    "globals": {
+      "console": false
+    }
+  },
   "jscsConfig": {
     "esprima": "esprima-fb",
     "disallowMultipleVarDecl": "exceptUndefined",
@@ -50,6 +58,27 @@
     "requireSpaceBeforeObjectValues": true,
     "requireSpacesInForStatement": true
   },
+  "jest": {
+    "scriptPreprocessor": "src/js/__tests__/preprocessor.js",
+    "collectCoverage": true,
+    "collectCoverageOnlyFrom": {
+      "src/js/actions/actions.js": true,
+      "src/js/components/footer.js": true
+    },
+    "unmockedModulePathPatterns": [
+      "node_modules/react",
+      "node_modules/react-tools",
+      "node_modules/underscore"
+    ],
+    "testPathDirs": [
+      "src/js/__tests__/"
+    ],
+    "testPathIgnorePatterns": [
+      "src/js/__tests__/preprocessor.js",
+      "src/js/__tests__/__mocks__/",
+      "node_modules/"
+    ]
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/ekonstantinidis/gitify.git"
@@ -73,6 +102,7 @@
     "font-awesome": "=4.3.0",
     "octicons": "=2.2.0",
     "react": "=0.13.3",
+    "react-tools": "=0.13.3",
     "react-router": "=0.13.3",
     "reactify": "=1.1.1",
     "reflux": "=0.2.7",

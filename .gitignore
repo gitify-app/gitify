@@ -2,5 +2,7 @@
 npm-debug.log
 
 build/
+coverage/
 node_modules/
 Gitify.app/
+
