@@ -50,13 +50,14 @@ var Login = React.createClass({
       if (code) {
         self.requestGithubToken(options, code);
       } else if (error) {
-        alert('Oops! Something went wrong and we couldn\'t log you in using Github. Please try again.');
+        alert('Oops! Something went wrong and we couldn\'t' +
+          'log you in using Github. Please try again.');
       }
 
     });
 
     // If "Done" button is pressed, hide "Loading"
-    authWindow.on('close', function() {
+    authWindow.on('close', function () {
       authWindow = null;
     }, false);
 
@@ -69,7 +70,7 @@ var Login = React.createClass({
       .post('https://github.com/login/oauth/access_token', {
         client_id: options.client_id,
         client_secret: options.client_secret,
-        code: code,
+        code: code
       })
       .end(function (err, response) {
         if (response && response.ok) {

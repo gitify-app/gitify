@@ -9,15 +9,15 @@ var apiRequests = require('../utils/api-requests');
 var NotificationsStore = Reflux.createStore({
   listenables: Actions,
 
-  init: function () {
+  init: function() {
     this._notifications = [];
   },
 
   updateTrayIcon: function (notifications) {
     if (notifications.length > 0) {
-      ipc.sendChannel('update-icon', "TrayActive");
+      ipc.sendChannel('update-icon', 'TrayActive');
     } else {
-      ipc.sendChannel('update-icon', "TrayIdle");
+      ipc.sendChannel('update-icon', 'TrayIdle');
     }
   },
 
@@ -40,7 +40,7 @@ var NotificationsStore = Reflux.createStore({
   },
 
   onGetNotificationsCompleted: function (notifications) {
-    var groupedNotifications = _.groupBy(notifications, function (object){
+    var groupedNotifications = _.groupBy(notifications, function (object) {
       return object.repository.full_name;
     });
 
