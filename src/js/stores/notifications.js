@@ -9,7 +9,7 @@ var apiRequests = require('../utils/api-requests');
 var NotificationsStore = Reflux.createStore({
   listenables: Actions,
 
-  init: function() {
+  init: function () {
     this._notifications = [];
   },
 
