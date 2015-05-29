@@ -17,6 +17,9 @@ var Notification = React.createClass({
 
   openBrowser: function () {
     var url = this.props.notification.subject.url.replace('api.github.com/repos', 'www.github.com');
+    if (url.indexOf("/pulls/") != -1) {
+      url = url.replace("/pulls/", "/pull/");
+    }
     shell.openExternal(url);
   },
 
