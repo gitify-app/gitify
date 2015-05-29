@@ -19,22 +19,27 @@ var Login = React.createClass({
 
     // Start Login
     var options = {
-        client_id: '27a352516d3341cee376',
-        client_secret: '626a199b0656c55b2cbf3a3199e573ce17f549bc',
-        scope: ["user:email", "notifications"]
+      client_id: '27a352516d3341cee376',
+      client_secret: '626a199b0656c55b2cbf3a3199e573ce17f549bc',
+      scope: ['user:email', 'notifications']
     };
 
     //Build the OAuth consent page URL
-    var authWindow = new BrowserWindow({ width: 800, height: 600, show: true, 'node-integration': false });
+    var authWindow = new BrowserWindow({
+      width: 800,
+      height: 600,
+      show: true,
+      'node-integration': false
+    });
     var githubUrl = 'https://github.com/login/oauth/authorize?';
     var authUrl = githubUrl + 'client_id=' + options.client_id + '&scope=' + options.scope;
     authWindow.loadUrl(authUrl);
 
-    authWindow.webContents.on('did-get-redirect-request', function(event, oldUrl, newUrl) {
+    authWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
 
-      var raw_code = /code=([^&]*)/.exec(newUrl) || null,
-        code = (raw_code && raw_code.length > 1) ? raw_code[1] : null,
-        error = /\?error=(.+)$/.exec(newUrl);
+      var raw_code = /code=([^&]*)/.exec(newUrl) || null;
+      var code = (raw_code && raw_code.length > 1) ? raw_code[1] : null;
+      var error = /\?error=(.+)$/.exec(newUrl);
 
       if (code || error) {
         // Close the browser if code found or error
@@ -45,14 +50,14 @@ var Login = React.createClass({
       if (code) {
         self.requestGithubToken(options, code);
       } else if (error) {
-        alert("Oops! Something went wrong and we couldn't log you in using Github. Please try again.");
+        alert('Oops! Something went wrong and we couldn\'t log you in using Github. Please try again.');
       }
 
     });
 
     // If "Done" button is pressed, hide "Loading"
     authWindow.on('close', function() {
-        authWindow = null;
+      authWindow = null;
     }, false);
 
   },

@@ -12,7 +12,11 @@ var Footer = React.createClass({
     return (
       <div className='container-fluid footer'>
         <div className='row'>
-          <div className='col-xs-12 right' onClick={this.openRepoBrowser}>Fork me on <span className="octicon octicon-mark-github"/></div>
+          <div
+            className='col-xs-12 right'
+            onClick={this.openRepoBrowser}>
+              Fork me on <span className="octicon octicon-mark-github"/>
+            </div>
         </div>
       </div>
     );

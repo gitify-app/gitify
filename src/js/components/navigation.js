@@ -27,7 +27,7 @@ var Navigation = React.createClass({
     var self = this;
     var iFrequency = 60000;
     var myInterval = 0;
-    if (myInterval > 0) clearInterval(myInterval);
+    if (myInterval > 0) { clearInterval(myInterval); }
     setInterval( function () {
       self.refreshNotifications();
     }, iFrequency );

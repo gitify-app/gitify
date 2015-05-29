@@ -40,12 +40,12 @@ var NotificationsStore = Reflux.createStore({
   },
 
   onGetNotificationsCompleted: function (notifications) {
-    var groupedNotifications = _.groupBy(notifications, function(object){
+    var groupedNotifications = _.groupBy(notifications, function (object){
       return object.repository.full_name;
     });
 
-    var array= [];
-    _.map(groupedNotifications, function(obj, i) {
+    var array = [];
+    _.map(groupedNotifications, function (obj, i) {
       array.push(obj);
     });
 
@@ -54,7 +54,7 @@ var NotificationsStore = Reflux.createStore({
   },
 
   onGetNotificationsFailed: function (error) {
-    console.log("Errored." + error);
+    console.log('Errored.' + error);
   }
 
 });

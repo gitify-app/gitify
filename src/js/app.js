@@ -16,7 +16,7 @@ var App = React.createClass({
   statics: {
     willTransitionTo: function (transition) {
       if (transition.path !== '/login' && !AuthStore.authStatus()) {
-        console.log("Not logged in. Redirecting to login.");
+        console.log('Not logged in. Redirecting to login.');
         transition.redirect('login', {});
       }
     }
