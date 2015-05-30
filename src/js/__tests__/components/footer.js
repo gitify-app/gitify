@@ -13,15 +13,16 @@ describe('Test for Footer', function () {
 
   beforeEach(function () {
     // Mock Electron's window.require
+    // and remote.require('shell')
     window.require = function () {
       return {
         require: function () {
           return {
             openExternal: function () {
               return {};
-            },
+            }
           };
-        },
+        }
       };
     };
 
