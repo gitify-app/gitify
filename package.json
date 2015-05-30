@@ -1,7 +1,7 @@
 {
   "name": "gitify",
   "version": "0.0.1",
-  "description": "Github Notifications on your menu bar.",
+  "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
     "build-js": "npm run mkdir -p build/js && browserify -t reactify src/js/app.js -o build/js/app.js",
