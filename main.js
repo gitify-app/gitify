@@ -95,5 +95,5 @@ app.on('ready', function(){
   });
 
   app.dock.hide();
-  appIcon.setToolTip('Github Notifications on your menu bar.');
+  appIcon.setToolTip('GitHub Notifications on your menu bar.');
 });
