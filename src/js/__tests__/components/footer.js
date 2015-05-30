@@ -15,7 +15,13 @@ describe('Test for Footer', function () {
     // Mock Electron's window.require
     window.require = function () {
       return {
-        require: jest.genMockFunction()
+        require: function () {
+          return {
+            openExternal: function () {
+              return {};
+            },
+          };
+        },
       };
     };
 
@@ -27,6 +33,8 @@ describe('Test for Footer', function () {
 
     var instance = TestUtils.renderIntoDocument(<Footer />);
     expect(instance.openRepoBrowser).toBeDefined();
+
+    instance.openRepoBrowser();
 
   });
 
