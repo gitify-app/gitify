@@ -7,6 +7,13 @@ GitHub Notifications on your menu bar.
 ### Installation
 You can download Gitify from the [releases](https://github.com/ekonstantinidis/gitify/releases) page. Currently only supports OS X.
 
+Gitify can also be installed using [homebrew cask](https://github.com/phinze/homebrew-cask).
+
+```
+brew cask install gitify
+```
+
+
 ### Prerequisites
 
  - Electron [+](http://electron.atom.io/)
