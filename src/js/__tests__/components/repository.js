@@ -3,16 +3,16 @@
 jest.dontMock('reflux');
 jest.dontMock('../../actions/actions.js');
 jest.dontMock('../../utils/api-requests');
-jest.dontMock('../../components/notification.js');
+jest.dontMock('../../components/repository.js');
 jest.dontMock('../../stores/auth.js');
 jest.dontMock('../../stores/notifications.js');
 
 var React = require('react/addons');
 var TestUtils = React.addons.TestUtils;
 
-describe('Test for Notifications Component', function () {
+describe('Test for Repository Component', function () {
 
-  var Actions, AuthStore, Notification, NotificationsStore;
+  var Actions, Repository;
 
   beforeEach(function () {
     // Mock Electron's window.require
@@ -38,21 +38,12 @@ describe('Test for Notifications Component', function () {
     };
 
     Actions = require('../../actions/actions.js');
-    AuthStore = require('../../stores/auth.js');
-    Notification = require('../../components/notifications.js');
-    NotificationsStore = require('../../stores/notifications.js');
+    Repository = require('../../components/repository.js');
   });
 
-  it('Should render the notifications component', function () {
+  it('Should render the Repository component', function () {
 
-    AuthStore.authStatus = function () {
-      return true;
-    };
-
-    var instance = TestUtils.renderIntoDocument(<Notification />);
-    expect(instance.state.loading).toBeTruthy();
-
-    var response = [[{
+    var repoDetails = [{
       'repository': {
         'full_name': 'ekonstantinidis/gitify',
         'owner': {
@@ -62,14 +53,25 @@ describe('Test for Notifications Component', function () {
       'subject': {
         'type': 'Issue'
       }
-    }]];
+    }];
 
-    NotificationsStore.trigger(response);
-    expect(instance.state.notifications.length).toBe(1);
+    var instance = TestUtils.renderIntoDocument(
+      <Repository
+        repo={repoDetails}
+        repoName='ekonstantinidis/gitify'
+        key='ekonstantinidis/gitify' />
+    );
 
-    expect(instance.state.loading).toBeTruthy();
-    instance.completedNotifications();
-    expect(instance.state.loading).toBeFalsy();
+    expect(instance.props.repo[0].repository.full_name).toBe('ekonstantinidis/gitify');
+    expect(instance.getAvatar).toBeDefined();
+    expect(instance.openBrowser).toBeDefined();
+
+    // Get Avatar
+    var avatar = instance.getAvatar();
+    expect(avatar).toBe('http://avatar.url');
+
+    // Open Browser
+    instance.openBrowser();
 
   });
 
