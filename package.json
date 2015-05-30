@@ -63,7 +63,9 @@
     "collectCoverage": true,
     "collectCoverageOnlyFrom": {
       "src/js/actions/actions.js": true,
-      "src/js/components/footer.js": true
+      "src/js/components/navigation.js": true,
+      "src/js/components/footer.js": true,
+      "src/js/stores/auth.js": true
     },
     "unmockedModulePathPatterns": [
       "node_modules/react",
