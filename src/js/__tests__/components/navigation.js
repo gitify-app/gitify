@@ -107,4 +107,21 @@ describe('Test for Navigation', function () {
 
   });
 
+  it('Should test the interval on componentDidMount', function () {
+
+    spyOn(Actions, 'getNotifications');
+
+    AuthStore.authStatus = function () {
+      return true;
+    };
+
+    var instance = TestUtils.renderIntoDocument(<Navigation />);
+    expect(instance.componentDidMount).toBeDefined();
+
+    // Should refresh on interval
+    jest.runOnlyPendingTimers();
+    expect(Actions.getNotifications).toHaveBeenCalled();
+
+  });
+
 });
