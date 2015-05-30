@@ -3,7 +3,7 @@
 jest.dontMock('reflux');
 jest.dontMock('../../actions/actions.js');
 jest.dontMock('../../utils/api-requests');
-jest.dontMock('../../components/Navigation.js');
+jest.dontMock('../../components/navigation.js');
 jest.dontMock('../../stores/auth.js');
 
 var React = require('react/addons');
