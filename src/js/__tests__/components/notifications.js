@@ -3,7 +3,7 @@
 jest.dontMock('reflux');
 jest.dontMock('../../actions/actions.js');
 jest.dontMock('../../utils/api-requests');
-jest.dontMock('../../components/notification.js');
+jest.dontMock('../../components/notifications.js');
 jest.dontMock('../../stores/auth.js');
 jest.dontMock('../../stores/notifications.js');
 
@@ -12,7 +12,7 @@ var TestUtils = React.addons.TestUtils;
 
 describe('Test for Notifications Component', function () {
 
-  var Actions, AuthStore, Notification, NotificationsStore;
+  var Actions, AuthStore, Notifications, NotificationsStore;
 
   beforeEach(function () {
     // Mock Electron's window.require
@@ -39,7 +39,7 @@ describe('Test for Notifications Component', function () {
 
     Actions = require('../../actions/actions.js');
     AuthStore = require('../../stores/auth.js');
-    Notification = require('../../components/notifications.js');
+    Notifications = require('../../components/notifications.js');
     NotificationsStore = require('../../stores/notifications.js');
   });
 
@@ -49,7 +49,7 @@ describe('Test for Notifications Component', function () {
       return true;
     };
 
-    var instance = TestUtils.renderIntoDocument(<Notification />);
+    var instance = TestUtils.renderIntoDocument(<Notifications />);
     expect(instance.state.loading).toBeTruthy();
 
     var response = [[{

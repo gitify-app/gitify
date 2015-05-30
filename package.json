@@ -65,6 +65,7 @@
     "collectCoverageOnlyFrom": {
       "src/js/actions/actions.js": true,
       "src/js/components/navigation.js": true,
+      "src/js/components/notification.js": true,
       "src/js/components/notifications.js": true,
       "src/js/components/repository.js": true,
       "src/js/components/footer.js": true,
