@@ -13,7 +13,11 @@ describe('Test for Footer', function () {
 
   beforeEach(function () {
     // Mock Electron's window.require
-    window.require = jest.genMockFunction();
+    window.require = function () {
+      return {
+        require: jest.genMockFunction()
+      };
+    };
 
     Actions = require('../../actions/actions.js');
     Footer = require('../../components/footer.js');
