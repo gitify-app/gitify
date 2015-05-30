@@ -107,7 +107,6 @@
   "dependencies": {
     "bootstrap": "=3.3.4",
     "browserify": "=10.2.1",
-    "coveralls": "^2.11.2",
     "font-awesome": "=4.3.0",
     "octicons": "=2.2.0",
     "react": "=0.13.3",
