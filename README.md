@@ -1,4 +1,5 @@
-Gitify [![Build Status](https://travis-ci.org/ekonstantinidis/gitify.svg?branch=master)](https://travis-ci.org/ekonstantinidis/gitify)
+Gitify [![Build Status](https://travis-ci.org/ekonstantinidis/gitify.svg?branch=master)](https://travis-ci.org/ekonstantinidis/gitify) [![Coverage Status](https://coveralls.io/repos/ekonstantinidis/gitify/badge.svg?branch=master)](https://coveralls.io/r/ekonstantinidis/gitify?branch=master)
+
 ==========
 GitHub Notifications on your menu bar.
 
