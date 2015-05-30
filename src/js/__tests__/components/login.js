@@ -44,10 +44,6 @@ describe('Test for Login Component', function () {
 
   it('Should get the token from github', function () {
 
-    AuthStore.authStatus = function () {
-      return false;
-    };
-
     var instance;
     React.withContext({router: new Router()}, function () {
       instance = TestUtils.renderIntoDocument(<Login />);
@@ -64,10 +60,6 @@ describe('Test for Login Component', function () {
   });
 
   it('Should fail to get the token from github', function () {
-
-    AuthStore.authStatus = function () {
-      return false;
-    };
 
     var instance;
     React.withContext({router: new Router()}, function () {
