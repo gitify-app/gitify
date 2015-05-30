@@ -1,5 +1,5 @@
 var React = require('react');
-var Reflux = require('Reflux');
+var Reflux = require('reflux');
 var ipc = window.require('ipc');
 
 var Actions = require('../actions/actions');
