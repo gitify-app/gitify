@@ -1,4 +1,4 @@
-/* global jest, describe, beforeEach, it, expect, spyOn */
+/* global jest, describe, beforeEach, it, expect */
 
 jest.dontMock('reflux');
 jest.dontMock('../../actions/actions.js');
@@ -11,7 +11,7 @@ var TestUtils = React.addons.TestUtils;
 
 describe('Test for Navigation', function () {
 
-  var apiRequests, Actions, Navigation, AuthStore;
+  var apiRequests, Actions, Navigation, AuthStore, Router;
 
   beforeEach(function () {
     // Mock Electron's window.require
@@ -36,6 +36,7 @@ describe('Test for Navigation', function () {
     Actions = require('../../actions/actions.js');
     AuthStore = require('../../stores/auth.js');
     Navigation = require('../../components/navigation.js');
+    Router = require('react-router');
   });
 
   it('Should load the navigation component for logged out users', function () {
@@ -56,19 +57,31 @@ describe('Test for Navigation', function () {
 
   });
 
-
   it('Should load the navigation component for logged in users', function () {
 
     AuthStore.authStatus = function () {
       return true;
     };
 
-    var instance = TestUtils.renderIntoDocument(<Navigation />);
+    var instance;
+    React.withContext({router: new Router()}, function () {
+      instance = TestUtils.renderIntoDocument(<Navigation />);
+    });
+
     expect(instance.state.loading).toBeFalsy();
     expect(instance.refreshNotifications).toBeDefined();
     expect(instance.refreshDone).toBeDefined();
     expect(instance.logOut).toBeDefined();
     expect(instance.appQuit).toBeDefined();
+
+    var logoutIcon = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'fa-sign-out');
+    expect(logoutIcon.length).toBe(1);
+
+    // Now Logout
+    instance.logOut();
+    AuthStore.trigger();
+    logoutIcon = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'fa-sign-out');
+    expect(logoutIcon.length).toBe(0);
 
   });
 
