@@ -131,4 +131,60 @@ describe('Test for Notification Component', function () {
 
   });
 
+  it('Should mark a notification as read succesfully', function () {
+
+    var notification = {
+      'id': '123123123',
+      'repository': {
+        'full_name': 'ekonstantinidis/gitify',
+        'owner': {
+          'avatar_url': 'http://avatar.url'
+        }
+      },
+      'subject': {
+        'type': 'Issue',
+        'url': 'http://www.github.com/ekonstantinidis/gitify/pulls/26/'
+      }
+    };
+
+    var instance = TestUtils.renderIntoDocument(
+      <SingleNotification
+        notification={notification}
+        key={notification.id} />);
+
+    var superagent = require('superagent');
+    superagent.__setResponse(200, 'ok', {}, false);
+
+    instance.markAsRead();
+
+  });
+
+  it('Should fail to mark a notification as read succesfully', function () {
+
+    var notification = {
+      'id': '123123123',
+      'repository': {
+        'full_name': 'ekonstantinidis/gitify',
+        'owner': {
+          'avatar_url': 'http://avatar.url'
+        }
+      },
+      'subject': {
+        'type': 'Issue',
+        'url': 'http://www.github.com/ekonstantinidis/gitify/pulls/26/'
+      }
+    };
+
+    var instance = TestUtils.renderIntoDocument(
+      <SingleNotification
+        notification={notification}
+        key={notification.id} />);
+
+    var superagent = require('superagent');
+    superagent.__setResponse(400, 'notOk', {}, false);
+
+    instance.markAsRead();
+
+  });
+
 });

@@ -37,7 +37,7 @@ var Notification = React.createClass({
           });
         } else {
           // Error - Show messages.
-          console.log(err);
+          // Show appropriate message
         }
       });
   },
