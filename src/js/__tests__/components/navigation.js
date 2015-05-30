@@ -95,16 +95,16 @@ describe('Test for Navigation', function () {
 
   it('Should test the refreshNotifications method', function () {
 
-      spyOn(Actions, 'getNotifications');
+    spyOn(Actions, 'getNotifications');
 
-      AuthStore.authStatus = function () {
-        return true;
-      };
+    AuthStore.authStatus = function () {
+      return true;
+    };
 
-      var instance = TestUtils.renderIntoDocument(<Navigation />);
-      instance.refreshNotifications();
-      expect(Actions.getNotifications).toHaveBeenCalled();
+    var instance = TestUtils.renderIntoDocument(<Navigation />);
+    instance.refreshNotifications();
+    expect(Actions.getNotifications).toHaveBeenCalled();
 
-    });
+  });
 
 });
