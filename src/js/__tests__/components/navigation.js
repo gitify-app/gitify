@@ -1,4 +1,4 @@
-/* global jest, describe, beforeEach, it, expect */
+/* global jest, describe, beforeEach, it, expect, spyOn */
 
 jest.dontMock('reflux');
 jest.dontMock('../../actions/actions.js');
@@ -83,6 +83,28 @@ describe('Test for Navigation', function () {
     logoutIcon = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'fa-sign-out');
     expect(logoutIcon.length).toBe(0);
 
+    // Refresh Completed
+    instance.state.loading = true;
+    instance.refreshDone();
+    expect(instance.state.loading).toBeFalsy();
+
+    // Quit Application
+    instance.appQuit();
+
   });
+
+  it('Should test the refreshNotifications method', function () {
+
+      spyOn(Actions, 'getNotifications');
+
+      AuthStore.authStatus = function () {
+        return true;
+      };
+
+      var instance = TestUtils.renderIntoDocument(<Navigation />);
+      instance.refreshNotifications();
+      expect(Actions.getNotifications).toHaveBeenCalled();
+
+    });
 
 });
