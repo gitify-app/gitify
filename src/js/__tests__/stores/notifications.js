@@ -91,7 +91,43 @@ describe('Tests for NotificationsStore', function () {
     jest.runAllTimers();
 
     var repository = NotificationsStore._notifications[0][0].repository;
+    var subject = NotificationsStore._notifications[0][0].subject;
     expect(repository.full_name).toBe('octocat/Hello-World');
+    expect(subject.title).toBe('Greetings');
+    expect(NotificationsStore.trigger).toHaveBeenCalled();
+
+  });
+
+  it('should get 0(zero) notifications from the GitHub API', function () {
+
+    spyOn(NotificationsStore, 'trigger');
+
+    var response = [];
+
+    var superagent = require('superagent');
+    superagent.__setResponse(200, 'ok', response, false);
+
+    Actions.getNotifications();
+
+    jest.runAllTimers();
+
+    expect(NotificationsStore._notifications.length).toBe(0);
+    expect(NotificationsStore.trigger).toHaveBeenCalled();
+
+  });
+
+  it('should FAIL to create a booking via the API', function () {
+
+    spyOn(NotificationsStore, 'trigger');
+    spyOn(NotificationsStore, 'onGetNotificationsFailed');
+
+    var superagent = require('superagent');
+    superagent.__setResponse(400, false);
+
+    Actions.getNotifications();
+
+    jest.runAllTimers();
+
     expect(NotificationsStore.trigger).toHaveBeenCalled();
 
   });

@@ -23,7 +23,6 @@ var NotificationsStore = Reflux.createStore({
 
   onGetNotifications: function () {
     var self = this;
-    var tokens = AuthStore.authStatus();
 
     apiRequests
       .getAuth('https://api.github.com/notifications')
@@ -45,7 +44,7 @@ var NotificationsStore = Reflux.createStore({
     });
 
     var array = [];
-    _.map(groupedNotifications, function (obj, i) {
+    _.map(groupedNotifications, function (obj) {
       array.push(obj);
     });
 
@@ -53,8 +52,9 @@ var NotificationsStore = Reflux.createStore({
     this.trigger(this._notifications);
   },
 
-  onGetNotificationsFailed: function (error) {
-    console.log('Errored.' + error);
+  onGetNotificationsFailed: function () {
+    this._notifications = [];
+    this.trigger(this._notifications);
   }
 
 });
