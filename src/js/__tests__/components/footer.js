@@ -12,6 +12,9 @@ describe('Test for Footer', function () {
   var Actions, Footer;
 
   beforeEach(function () {
+    // Mock Electron's window.require
+    window.require = jest.genMockFunction();
+
     Actions = require('../../actions/actions.js');
     Footer = require('../../components/footer.js');
   });
@@ -19,8 +22,7 @@ describe('Test for Footer', function () {
   it('Should load the footer', function () {
 
     var instance = TestUtils.renderIntoDocument(<Footer />);
-
-    console.log(instance);
+    expect(instance.openRepoBrowser).toBeDefined();
 
   });
 
