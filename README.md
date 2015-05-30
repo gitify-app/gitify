@@ -1,7 +1,13 @@
-Gitify [![Build Status](https://travis-ci.org/ekonstantinidis/gitify.svg?branch=master)](https://travis-ci.org/ekonstantinidis/gitify) [![Coverage Status](https://coveralls.io/repos/ekonstantinidis/gitify/badge.svg?branch=master)](https://coveralls.io/r/ekonstantinidis/gitify?branch=master)
+# Gitify
+[![travis][travis-image]][travis-url]
+[![coveralls][coveralls-image]][coveralls-url]
 
-==========
-GitHub Notifications on your menu bar.
+[travis-image]: https://travis-ci.org/ekonstantinidis/gitify.svg?branch=master
+[travis-url]: https://travis-ci.org/ekonstantinidis/gitify
+[coveralls-image]: https://coveralls.io/repos/ekonstantinidis/gitify/badge.svg?branch=master
+[coveralls-url]: https://coveralls.io/r/ekonstantinidis/gitify?branch=master
+
+### GitHub Notifications on your menu bar.
 
 ![Gitify](images/press.png)
 
