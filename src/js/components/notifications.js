@@ -34,7 +34,6 @@ var Notifications = React.createClass({
   render: function () {
     var notifications;
     var wrapperClass = 'container-fluid main-container notifications';
-    var self = this;
 
     if (_.isEmpty(this.state.notifications)) {
       wrapperClass += ' all-read';
@@ -47,7 +46,7 @@ var Notifications = React.createClass({
       );
     } else {
       notifications = (
-        this.state.notifications.map(function (obj, i) {
+        this.state.notifications.map(function (obj) {
           var repoFullName = obj[0].repository.full_name;
           return <Repository repo={obj} repoName={repoFullName} key={repoFullName} />;
         })
