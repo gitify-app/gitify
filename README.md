@@ -1,10 +1,17 @@
-Gitify [![Build Status](https://travis-ci.org/ekonstantinidis/gitify.svg?branch=master)](https://travis-ci.org/ekonstantinidis/gitify)
-==========
-GitHub Notifications on your menu bar.
+# Gitify
+[![travis][travis-image]][travis-url]
+[![cc-coverage][cc-coverage-image]][cc-coverage-url]
+
+[travis-image]: https://travis-ci.org/ekonstantinidis/gitify.svg?branch=master
+[travis-url]: https://travis-ci.org/ekonstantinidis/gitify
+[cc-coverage-image]: https://codeclimate.com/github/ekonstantinidis/gitify/badges/coverage.svg
+[cc-coverage-url]: https://codeclimate.com/github/ekonstantinidis/gitify/coverage
+
+### GitHub Notifications on your menu bar.
 
 ![Gitify](images/press.png)
 
-### Installation
+### Download
 You can download Gitify from the [releases](https://github.com/ekonstantinidis/gitify/releases) page. Currently only supports OS X.
 
 ### Prerequisites

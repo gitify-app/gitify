@@ -1,5 +1,5 @@
 var React = require('react');
-var Reflux = require('Reflux');
+var Reflux = require('reflux');
 var ipc = window.require('ipc');
 
 var Actions = require('../actions/actions');
@@ -23,11 +23,11 @@ var Navigation = React.createClass({
     };
   },
 
-  componentDidMount: function() {
+  componentDidMount: function () {
     var self = this;
     var iFrequency = 60000;
     var myInterval = 0;
-    if (myInterval > 0) clearInterval(myInterval);
+    if (myInterval > 0) { clearInterval(myInterval); }
     setInterval( function () {
       self.refreshNotifications();
     }, iFrequency );
@@ -45,7 +45,7 @@ var Navigation = React.createClass({
   logOut: function () {
     Actions.logout();
     this.context.router.transitionTo('login');
-    ipc.sendChannel('update-icon', "IconPlain");
+    ipc.sendChannel('update-icon', 'IconPlain');
   },
 
   appQuit: function () {
@@ -69,7 +69,9 @@ var Navigation = React.createClass({
       <div className='container-fluid'>
         <div className='row navigation'>
           <div className='col-xs-4 left'>{refreshIcon}</div>
-          <div className='col-xs-4 logo'><img className='img-responsive' src='images/logo-hor-white.png' /></div>
+          <div className='col-xs-4 logo'>
+            <img className='img-responsive' src='images/logo-hor-white.png' />
+          </div>
           <div className='col-xs-4 right'>
             {logoutIcon}
             <i className="fa fa-power-off" onClick={this.appQuit} />

@@ -15,15 +15,14 @@ var NotificationsStore = Reflux.createStore({
 
   updateTrayIcon: function (notifications) {
     if (notifications.length > 0) {
-      ipc.sendChannel('update-icon', "TrayActive");
+      ipc.sendChannel('update-icon', 'TrayActive');
     } else {
-      ipc.sendChannel('update-icon', "TrayIdle");
+      ipc.sendChannel('update-icon', 'TrayIdle');
     }
   },
 
   onGetNotifications: function () {
     var self = this;
-    var tokens = AuthStore.authStatus();
 
     apiRequests
       .getAuth('https://api.github.com/notifications')
@@ -40,12 +39,12 @@ var NotificationsStore = Reflux.createStore({
   },
 
   onGetNotificationsCompleted: function (notifications) {
-    var groupedNotifications = _.groupBy(notifications, function(object){
+    var groupedNotifications = _.groupBy(notifications, function (object) {
       return object.repository.full_name;
     });
 
-    var array= [];
-    _.map(groupedNotifications, function(obj, i) {
+    var array = [];
+    _.map(groupedNotifications, function (obj) {
       array.push(obj);
     });
 
@@ -53,8 +52,9 @@ var NotificationsStore = Reflux.createStore({
     this.trigger(this._notifications);
   },
 
-  onGetNotificationsFailed: function (error) {
-    console.log("Errored." + error);
+  onGetNotificationsFailed: function () {
+    this._notifications = [];
+    this.trigger(this._notifications);
   }
 
 });

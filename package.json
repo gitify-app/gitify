@@ -4,13 +4,88 @@
   "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
-    "build-js": "npm run mkdir -p build/js && browserify -t reactify src/js/app.js -o build/js/app.js",
+    "build-js": "mkdir -p build/js && browserify -t reactify src/js/app.js -o build/js/app.js",
     "build": "npm install && mkdir -p build/js && grunt build && npm run build-js",
     "watch-js": "watchify -t reactify src/js/app.js -o build/js/app.js -v",
     "watch": "grunt build && npm build && npm run watch-js | grunt watch",
     "start": "electron .",
     "dist": "rm -rf Gitify.app/ && electron-packager . Gitify --platform=darwin --arch=x64 --version=0.27.1 --icon=images/app-icon.icns --prune --ignore=src",
-    "test": "jsxhint --reporter node_modules/jshint-stylish/stylish.js 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js'"
+    "test": "jsxhint --reporter node_modules/jshint-stylish/stylish.js 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js' && jscs 'src/js/' && jest",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+  },
+  "jshintConfig": {
+    "browserify": true,
+    "unused": true,
+    "undef": true,
+    "globals": {
+      "console": false
+    }
+  },
+  "jscsConfig": {
+    "esprima": "esprima-fb",
+    "disallowMultipleVarDecl": "exceptUndefined",
+    "validateQuoteMarks": {
+      "mark": "'",
+      "escape": false
+    },
+    "validateParameterSeparator": ", ",
+    "validateIndentation": 2,
+    "requireSpacesInFunction": {
+      "beforeOpeningRoundBrace": true,
+      "beforeOpeningCurlyBrace": true
+    },
+    "requireSpacesInConditionalExpression": {
+      "afterTest": true,
+      "beforeConsequent": true,
+      "afterConsequent": true,
+      "beforeAlternate": true
+    },
+    "disallowTrailingWhitespace": true,
+    "maximumLineLength": 100,
+    "requireCurlyBraces": true,
+    "disallowMixedSpacesAndTabs": true,
+    "requireSpaceBeforeBinaryOperators": true,
+    "safeContextKeyword": [
+      "self"
+    ],
+    "disallowMultipleLineBreaks": true,
+    "disallowMultipleLineStrings": true,
+    "disallowSpaceAfterObjectKeys": true,
+    "disallowNewlineBeforeBlockStatements": true,
+    "disallowTrailingComma": true,
+    "requireCommaBeforeLineBreak": true,
+    "requireSpaceBetweenArguments": true,
+    "requireSpaceBeforeBlockStatements": true,
+    "requireSpaceBeforeObjectValues": true,
+    "requireSpacesInForStatement": true
+  },
+  "jest": {
+    "scriptPreprocessor": "src/js/__tests__/preprocessor.js",
+    "collectCoverage": true,
+    "collectCoverageOnlyFrom": {
+      "src/js/actions/actions.js": true,
+      "src/js/components/login.js": true,
+      "src/js/components/navigation.js": true,
+      "src/js/components/notification.js": true,
+      "src/js/components/notifications.js": true,
+      "src/js/components/repository.js": true,
+      "src/js/components/footer.js": true,
+      "src/js/stores/auth.js": true,
+      "src/js/stores/notifications.js": true
+    },
+    "unmockedModulePathPatterns": [
+      "node_modules/react",
+      "node_modules/react-tools",
+      "node_modules/underscore"
+    ],
+    "testPathDirs": [
+      "src/js/__tests__/"
+    ],
+    "testPathIgnorePatterns": [
+      "src/js/__tests__/preprocessor.js",
+      "src/js/__tests__/__mocks__/",
+      "node_modules/"
+    ]
   },
   "repository": {
     "type": "git",
@@ -36,6 +111,7 @@
     "octicons": "=2.2.0",
     "react": "=0.13.3",
     "react-router": "=0.13.3",
+    "react-tools": "=0.13.3",
     "reactify": "=1.1.1",
     "reflux": "=0.2.7",
     "reloading": "0.0.6",
@@ -46,11 +122,14 @@
   "devDependencies": {
     "electron-packager": "=4.1.2",
     "electron-prebuilt": "=0.27.1",
+    "esprima-fb": "=15001.1.0-dev-harmony-fb",
     "grunt": "=0.4.5",
     "grunt-contrib-clean": "=0.6.0",
     "grunt-contrib-copy": "=0.8.0",
     "grunt-contrib-less": "=1.0.1",
     "grunt-contrib-watch": "=0.6.1",
+    "jest-cli": "=0.4.5",
+    "jscs": "^1.13.1",
     "jshint-stylish": "=1.0.2",
     "jsxhint": "=0.15.0",
     "less": "=2.5.1"
