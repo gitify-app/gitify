@@ -70,6 +70,17 @@ describe('Test for Notifications Component', function () {
     expect(instance.state.loading).toBeTruthy();
     instance.completedNotifications();
     expect(instance.state.loading).toBeFalsy();
+    expect(instance.state.errors).toBeFalsy();
+
+    var errors = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'errored');
+    expect(errors.length).toBe(0);
+
+    instance.failedNotifications();
+    expect(instance.state.loading).toBeFalsy();
+    expect(instance.state.errors).toBeTruthy();
+
+    errors = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'errored');
+    expect(errors.length).toBe(1);
 
   });
 
