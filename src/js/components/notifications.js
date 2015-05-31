@@ -13,13 +13,14 @@ var Notifications = React.createClass({
   mixins: [
     Reflux.connect(NotificationsStore, 'notifications'),
     Reflux.listenTo(Actions.getNotifications.completed, 'completedNotifications'),
-    Reflux.listenTo(Actions.getNotifications.failed, 'completedNotifications')
+    Reflux.listenTo(Actions.getNotifications.failed, 'failedNotifications')
   ],
 
   getInitialState: function () {
     return {
       notifications: [],
-      loading: true
+      loading: true,
+      errors: false
     };
   },
 
@@ -28,29 +29,50 @@ var Notifications = React.createClass({
   },
 
   completedNotifications: function () {
-    this.setState( {loading: false } );
+    this.setState({
+      loading: false,
+      errors: false
+    });
+  },
+
+  failedNotifications: function () {
+    this.setState({
+      loading: false,
+      errors: true
+    });
   },
 
   render: function () {
-    var notifications;
+    var notifications, errors;
     var wrapperClass = 'container-fluid main-container notifications';
 
-    if (_.isEmpty(this.state.notifications)) {
-      wrapperClass += ' all-read';
-      notifications = (
+    if (this.state.errors) {
+      wrapperClass += ' errored';
+      errors = (
         <div>
-          <h2>There are no notifications for you.</h2>
-          <h3>All clean!</h3>
-          <img className='img-responsive emoji' src='images/rocket.png' />
+          <h3>Oops something went wrong.</h3>
+          <h4>Couldn't get your notifications.</h4>
+          <img className='img-responsive emoji' src='images/error.png' />
         </div>
       );
     } else {
-      notifications = (
-        this.state.notifications.map(function (obj) {
-          var repoFullName = obj[0].repository.full_name;
-          return <Repository repo={obj} repoName={repoFullName} key={repoFullName} />;
-        })
-      );
+      if (_.isEmpty(this.state.notifications)) {
+        wrapperClass += ' all-read';
+        notifications = (
+          <div>
+            <h2>There are no notifications for you.</h2>
+            <h3>All clean!</h3>
+            <img className='img-responsive emoji' src='images/all-read.png' />
+          </div>
+        );
+      } else {
+        notifications = (
+          this.state.notifications.map(function (obj) {
+            var repoFullName = obj[0].repository.full_name;
+            return <Repository repo={obj} repoName={repoFullName} key={repoFullName} />;
+          })
+        );
+      }
     }
 
     return (
@@ -58,6 +80,7 @@ var Notifications = React.createClass({
         <Loading className='loading-container' shouldShow={this.state.loading}>
           <div className='loading-text'>working on it</div>
         </Loading>
+        {errors}
         {notifications}
       </div>
     );
