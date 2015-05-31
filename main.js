@@ -98,6 +98,8 @@ app.on('ready', function(){
     app.quit();
   });
 
-  //app.dock.hide();
+  if(process.platform === 'darwin'){
+    app.dock.hide();
+  }
   appIcon.setToolTip('GitHub Notifications on your menu bar.');
 });
