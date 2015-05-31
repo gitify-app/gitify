@@ -1,11 +1,11 @@
 # Gitify
 [![travis][travis-image]][travis-url]
-[![coveralls][coveralls-image]][coveralls-url]
+[![cc-coverage][cc-coverage-image]][cc-coverage-url]
 
 [travis-image]: https://travis-ci.org/ekonstantinidis/gitify.svg?branch=master
 [travis-url]: https://travis-ci.org/ekonstantinidis/gitify
-[coveralls-image]: https://coveralls.io/repos/ekonstantinidis/gitify/badge.svg?branch=master
-[coveralls-url]: https://coveralls.io/r/ekonstantinidis/gitify?branch=master
+[cc-coverage-image]: https://codeclimate.com/github/ekonstantinidis/gitify/badges/coverage.svg
+[cc-coverage-url]: https://codeclimate.com/github/ekonstantinidis/gitify/coverage
 
 ### GitHub Notifications on your menu bar.
 
