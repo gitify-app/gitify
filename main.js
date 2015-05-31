@@ -12,7 +12,7 @@ var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
 app.on('ready', function(){
-  appIcon = new Tray(iconIdle);
+  var appIcon = new Tray(iconIdle);
   initWindow();
 
   appIcon.on('clicked', function clicked (e, bounds) {
@@ -68,29 +68,28 @@ app.on('ready', function(){
       ]
     }];
 
-    menu = Menu.buildFromTemplate(template);
+    var menu = Menu.buildFromTemplate(template);
     Menu.setApplicationMenu(menu);
   }
 
   function hideWindow () {
-    if (!appIcon.window) return;
+    if (!appIcon.window) { return; }
     appIcon.window.hide();
   }
 
-  ipc.on('reopen-window', function(event) {
+  ipc.on('reopen-window', function() {
     appIcon.window.show();
   });
 
   ipc.on('update-icon', function(event, arg) {
-    var icon;
-    if (arg == "TrayActive") {
+    if (arg === "TrayActive") {
       appIcon.setImage(iconActive);
     } else {
       appIcon.setImage(iconIdle);
     }
   });
 
-  ipc.on('app-quit', function(event) {
+  ipc.on('app-quit', function() {
     app.quit();
   });
 

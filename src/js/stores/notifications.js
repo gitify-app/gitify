@@ -3,7 +3,6 @@ var _ = require('underscore');
 
 var Reflux = require('reflux');
 var Actions = require('../actions/actions');
-var AuthStore = require('../stores/auth');
 var apiRequests = require('../utils/api-requests');
 
 var NotificationsStore = Reflux.createStore({

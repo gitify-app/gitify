@@ -47,7 +47,7 @@ superagent.mockError = null;
 superagent.mockDelay = false;
 
 function __setResponse (status, ok, body, error) {
-  var mockedResponse = jest.genMockFunction().mockImplementation(function () {
+  var MockedResponse = jest.genMockFunction().mockImplementation(function () {
     this.status = status;
     this.ok = ok;
     this.body = body;
@@ -59,7 +59,7 @@ function __setResponse (status, ok, body, error) {
     }
   };
 
-  superagent.mockResponse = new mockedResponse();
+  superagent.mockResponse = new MockedResponse();
 }
 
 module.exports = {
