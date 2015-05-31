@@ -13,9 +13,8 @@
 @ThemeBlack: #262626;
 @ThemeGreen: #6cc644;
 
-@ThemeBlue: #4183c4;
-
 @White: #ffffff;
+@LightGray: #f5f5f5;
 
 /* @end Colors */
 
@@ -259,7 +258,7 @@ html, body {
 .repository {
   padding: 10px 20px;
   margin: 0;
-  background-color: #f5f5f5;
+  background-color: @LightGray;
 
   .col-xs-2,
   .col-xs-10 {
@@ -313,7 +312,7 @@ html, body {
 .notification {
   margin: 0;
   padding: 3px 20px;
-  border-bottom: 1px solid darken(#f5f5f5, 10%);
+  border-bottom: 1px solid darken(@LightGray, 10%);
 
   transition: opacity .25s ease-in-out;
   -moz-transition: opacity .25s ease-in-out;
@@ -332,6 +331,10 @@ html, body {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   .octicon {
@@ -339,18 +342,23 @@ html, body {
     font-size: 20px;
 
     &.octicon-check {
-      -webkit-transition: all .8s;
-      -moz-transition: all .8s;
-      transition: all .8s;
+      -webkit-transition: all .4s;
+      -moz-transition: all .4s;
+      transition: all .4s;
 
       &:hover {
-        color: @ThemeBlue;
+        color: @ThemeGreen;
+        cursor: pointer;
       }
     }
   }
 
   &.read {
     .Opacity(0.4);
+  }
+
+  &:hover {
+    background-color: @LightGray;
   }
 }
 
