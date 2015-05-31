@@ -11,12 +11,12 @@ var TestUtils = React.addons.TestUtils;
 
 describe('Test for Login Component', function () {
 
-  var apiRequests, Actions, Login, AuthStore, Router;
+  var apiRequests, Actions, Login, AuthStore, Router, browserWindow;
 
   beforeEach(function () {
     // Mock Electron's window.require
     // and remote.ipc
-    var browserWindow = function () {
+    browserWindow = function () {
       return {
         loadUrl: function () {
           return;
@@ -103,7 +103,7 @@ describe('Test for Login Component', function () {
 
   });
 
-  it('Should open the authWindow', function () {
+  it('Should open the authWindow and login successfully', function () {
 
     var instance = TestUtils.renderIntoDocument(<Login />);
     expect(instance.authGithub).toBeDefined();
@@ -113,6 +113,70 @@ describe('Test for Login Component', function () {
     instance.requestGithubToken = function () {
       return;
     };
+
+    instance.authGithub();
+
+  });
+
+});
+
+describe('Test for Login Component - Callback with Error', function () {
+
+  var Login, browserWindow;
+
+  beforeEach(function () {
+    // Mock Electron's window.require
+    // and remote.ipc
+    browserWindow = function () {
+      return {
+        loadUrl: function () {
+          return;
+        },
+        webContents: {
+          on: function (event, callback) {
+
+            if (event == 'did-get-redirect-request') {
+              callback(
+                'did-get-redirect-request',
+                'http://www.github.com/?error=FAILURE',
+                'http://www.github.com/?error=FAILURE'
+              );
+            }
+
+          }
+        },
+        on: function () {
+          return;
+        },
+        close: function () {
+          return;
+        }
+      };
+    };
+
+    window.require = function () {
+      return {
+        require: function () {
+          return browserWindow;
+        },
+        sendChannel: function () {
+          return;
+        }
+      };
+    };
+
+    // Mock alert
+    window.alert = function () {
+      return;
+    };
+
+    Login = require('../../components/login.js');
+  });
+
+  it('Should open the authWindow and fail to login', function () {
+
+    var instance = TestUtils.renderIntoDocument(<Login />);
+    expect(instance.authGithub).toBeDefined();
 
     instance.authGithub();
 
