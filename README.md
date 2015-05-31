@@ -11,7 +11,7 @@
 
 ![Gitify](images/press.png)
 
-### Installation
+### Download
 You can download Gitify from the [releases](https://github.com/ekonstantinidis/gitify/releases) page. Currently only supports OS X.
 
 ### Prerequisites
