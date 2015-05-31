@@ -22,8 +22,16 @@ describe('Test for Login Component', function () {
           return;
         },
         webContents: {
-          on: function () {
-            return;
+          on: function (event, callback) {
+
+            if (event == 'did-get-redirect-request') {
+              callback({
+                event: 'did-get-redirect-request',
+                oldUrl: 'http://www.github.com/?code=123123123',
+                newUrl: 'http://www.github.com/?code=123123123'
+              });
+            }
+
           }
         },
         on: function () {
