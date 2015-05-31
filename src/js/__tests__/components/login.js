@@ -1,4 +1,4 @@
-/* global jest, describe, beforeEach, it, expect, spyOn */
+/* global jest, describe, beforeEach, it, expect */
 
 jest.dontMock('reflux');
 jest.dontMock('../../actions/actions.js');
@@ -16,10 +16,26 @@ describe('Test for Login Component', function () {
   beforeEach(function () {
     // Mock Electron's window.require
     // and remote.ipc
+    var browserWindow = function () {
+      return {
+        loadUrl: function () {
+          return;
+        },
+        webContents: {
+          on: function () {
+            return;
+          }
+        },
+        on: function () {
+          return;
+        }
+      };
+    };
+
     window.require = function () {
       return {
         require: function () {
-          return;
+          return browserWindow;
         },
         sendChannel: function () {
           return;
@@ -73,6 +89,15 @@ describe('Test for Login Component', function () {
     superagent.__setResponse(400, false, false, false);
 
     instance.requestGithubToken({}, '456456');
+
+  });
+
+  it('Should open the authWindow', function () {
+
+    var instance = TestUtils.renderIntoDocument(<Login />);
+    expect(instance.authGithub).toBeDefined();
+
+    instance.authGithub();
 
   });
 
