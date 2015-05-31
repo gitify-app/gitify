@@ -8,7 +8,7 @@ var Menu = require('menu');
 var Tray = require('tray');
 var BrowserWindow = require('browser-window');
 
-var iconIdle = path.join(__dirname, 'images', 'tray-idle.png');
+var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
 app.on('ready', function(){
@@ -95,5 +95,5 @@ app.on('ready', function(){
   });
 
   app.dock.hide();
-  appIcon.setToolTip('Github Notifications on your menu bar.');
+  appIcon.setToolTip('GitHub Notifications on your menu bar.');
 });

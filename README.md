@@ -28,20 +28,20 @@ If you encounter any issues with `npm install`, then run `ulimit -n 512`.
     npm install
 
 
-    ### Development
-    To watch for changes in the `src` directory:
+### Development
+To watch for changes in the `src` directory:
 
-        npm run watch
+    npm run watch
 
-    To run the actual **electron app**:
+To run the actual **electron app**:
 
-        npm start
+    npm start
 
 
 ### Distribution
 To prepare the app for distribution run:
 
-      npm run dist
+    npm run dist
 
 Currently supports only OS X.
 
