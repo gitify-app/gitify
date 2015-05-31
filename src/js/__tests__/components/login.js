@@ -25,16 +25,19 @@ describe('Test for Login Component', function () {
           on: function (event, callback) {
 
             if (event == 'did-get-redirect-request') {
-              callback({
-                event: 'did-get-redirect-request',
-                oldUrl: 'http://www.github.com/?code=123123123',
-                newUrl: 'http://www.github.com/?code=123123123'
-              });
+              callback(
+                'did-get-redirect-request',
+                'http://www.github.com/?code=123123123',
+                'http://www.github.com/?code=123123123'
+              );
             }
 
           }
         },
         on: function () {
+          return;
+        },
+        close: function () {
           return;
         }
       };
@@ -104,6 +107,12 @@ describe('Test for Login Component', function () {
 
     var instance = TestUtils.renderIntoDocument(<Login />);
     expect(instance.authGithub).toBeDefined();
+
+    // Prevent testing requestGithubToken
+    // Tested in another case
+    instance.requestGithubToken = function () {
+      return;
+    };
 
     instance.authGithub();
 
