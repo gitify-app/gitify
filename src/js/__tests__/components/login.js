@@ -145,8 +145,8 @@ describe('Test for Login Component - Callback with Error', function () {
 
           }
         },
-        on: function () {
-          return;
+        on: function (event, callback) {
+          callback();
         },
         close: function () {
           return;
