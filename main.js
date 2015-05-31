@@ -25,8 +25,8 @@ app.on('ready', function(){
 
   function initWindow () {
     var defaults = {
-      width: 400,
-      height: 350,
+      width: 420,
+      height: 370,
       show: false,
       frame: false,
       resizable: false,
@@ -41,9 +41,14 @@ app.on('ready', function(){
   }
 
   function showWindow (bounds) {
+    var ElectronScreen = require('screen');
+    var workAreaSize = ElectronScreen.getPrimaryDisplay().workAreaSize;
+    var windowSize = appIcon.window.getBounds();
+    var defaultX = workAreaSize.width-windowSize.width;
+    var defaultY = 0;
     var options = {
-      x: bounds.x - 200 + (bounds.width / 2),
-      y: bounds.y,
+      x: defaultX || bounds.x - 200 + (bounds.width / 2),
+      y: defaultY || bounds.y,
       index: path.join('./', 'index.html')
     };
 
@@ -93,6 +98,6 @@ app.on('ready', function(){
     app.quit();
   });
 
-  app.dock.hide();
+  //app.dock.hide();
   appIcon.setToolTip('GitHub Notifications on your menu bar.');
 });
