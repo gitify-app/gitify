@@ -4,7 +4,7 @@ var shell = remote.require('shell');
 
 var apiRequests = require('../utils/api-requests');
 
-var Notification = React.createClass({
+var NotificationItem = React.createClass({
 
   getInitialState: function () {
     return {
@@ -67,4 +67,4 @@ var Notification = React.createClass({
   }
 });
 
-module.exports = Notification;
+module.exports = NotificationItem;
