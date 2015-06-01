@@ -170,7 +170,7 @@ describe('Test for Notification Component', function () {
         }
       },
       'subject': {
-        'type': 'Issue',
+        'type': 'Commit',
         'url': 'http://www.github.com/ekonstantinidis/gitify/pulls/26/'
       }
     };
