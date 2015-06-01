@@ -1,9 +1,7 @@
 var React = require('react');
 var remote = window.require('remote');
 var shell = remote.require('shell');
-var _ = require('underscore');
 
-var AuthStore = require('../stores/auth');
 var apiRequests = require('../utils/api-requests');
 
 var Notification = React.createClass({
@@ -49,6 +47,8 @@ var Notification = React.createClass({
       typeIconClass = 'octicon octicon-issue-opened';
     } else if (this.props.notification.subject.type == 'PullRequest') {
       typeIconClass = 'octicon octicon-git-pull-request';
+    } else if (this.props.notification.subject.type == 'Commit') {
+      typeIconClass = 'octicon octicon-git-commit';
     } else {
       typeIconClass = 'octicon octicon-question';
     }
