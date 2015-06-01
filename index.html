@@ -13,4 +13,13 @@
   </body>
 
   <script type="text/javascript" src="build/js/app.js"></script>
+
+  <script type="text/javascript">
+    // Disable zoom
+    document.addEventListener('mousewheel', function(e) {
+      if(e.deltaY % 1 !== 0) {
+        e.preventDefault();
+      }
+    });
+  </script>
 </html>
