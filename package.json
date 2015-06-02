@@ -9,7 +9,7 @@
     "watch-js": "watchify -t reactify src/js/app.js -o build/js/app.js -v",
     "watch": "grunt build && npm build && npm run watch-js | grunt watch",
     "start": "electron .",
-    "dist": "rm -rf Gitify.app/ && electron-packager . Gitify --platform=darwin --arch=x64 --version=0.27.1 --icon=images/app-icon.icns --prune --ignore=src",
+    "dist": "rm -rf Gitify.app/ && electron-packager . Gitify --platform=darwin --arch=x64 --version=0.27.2 --icon=images/app-icon.icns --prune --ignore=src",
     "test": "jsxhint --reporter node_modules/jshint-stylish/stylish.js 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js' && jscs 'src/js/' && jest",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
@@ -121,7 +121,7 @@
   },
   "devDependencies": {
     "electron-packager": "=4.1.2",
-    "electron-prebuilt": "=0.27.1",
+    "electron-prebuilt": "=0.27.2",
     "esprima-fb": "=15001.1.0-dev-harmony-fb",
     "grunt": "=0.4.5",
     "grunt-contrib-clean": "=0.6.0",
