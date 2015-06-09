@@ -5,10 +5,10 @@ var SettingsStore = require('../stores/settings');
 
 var SettingsPage = React.createClass({
   mixins: [
-    Reflux.connect(SettingsStore, 'settings'),
+    Reflux.connect(SettingsStore, 'settings')
   ],
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       settings: undefined
     };
