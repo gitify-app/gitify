@@ -42,6 +42,10 @@ var Navigation = React.createClass({
     this.setState( {loading: false } );
   },
 
+  goToSettings: function () {
+    this.context.router.transitionTo('settings');
+  },
+
   logOut: function () {
     Actions.logout();
     this.context.router.transitionTo('login');
@@ -74,6 +78,7 @@ var Navigation = React.createClass({
           </div>
           <div className='col-xs-4 right'>
             {logoutIcon}
+            <i className='fa fa-cog' onClick={this.goToSettings} />
             <i className="fa fa-power-off" onClick={this.appQuit} />
           </div>
         </div>
