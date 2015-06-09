@@ -8,7 +8,7 @@ var SettingsStore = Reflux.createStore({
     var settings = window.localStorage.getItem('settings') || {
       participating: false
     };
-    var participatingSetting = settings.participating || false;
+    var participatingSetting = settings.participating;
     this._settings = {
       participating: participatingSetting
     };
@@ -20,6 +20,9 @@ var SettingsStore = Reflux.createStore({
 
   onSetSetting: function (setting, value) {
     console.log('Setting: ' + setting + ' to: ' + value);
+    window.localStorage.setItem('settings', this._settings);
+    this._settings.participating = value;
+    this.trigger(this._settings);
   }
 
 });

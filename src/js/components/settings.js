@@ -19,7 +19,7 @@ var SettingsPage = React.createClass({
   },
 
   toggleParticipating: function () {
-    Actions.setSetting('participating', 'true');
+    Actions.setSetting('participating', !this.state.settings.participating);
   },
 
   render: function () {
