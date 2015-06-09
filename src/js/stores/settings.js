@@ -18,7 +18,7 @@ var SettingsStore = Reflux.createStore({
     return this._settings;
   },
 
-  onSetSettings: function (setting, value) {
+  onSetSetting: function (setting, value) {
     console.log('Setting: ' + setting + ' to: ' + value);
   }
 

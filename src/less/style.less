@@ -3,6 +3,7 @@
 @import "node_modules/bootstrap/less/bootstrap";
 @import "node_modules/font-awesome/less/font-awesome.less";
 @import "node_modules/octicons/octicons/octicons.less";
+@import (inline) "node_modules/react-toggle/style.css";
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700);
 
 /* @end Imports */
@@ -231,6 +232,11 @@ html, body {
 .settings {
   background-color: @ThemeBlack;
   color: @White;
+  padding: 20px;
+
+  .col-xs-4 {
+    text-align: right;
+  }
 }
 
 /* @end Settings */

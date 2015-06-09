@@ -1,6 +1,8 @@
 var React = require('react');
 var Reflux = require('reflux');
+var Toggle = require('react-toggle');
 
+var Actions = require('../actions/actions');
 var SettingsStore = require('../stores/settings');
 
 var SettingsPage = React.createClass({
@@ -10,8 +12,14 @@ var SettingsPage = React.createClass({
 
   getInitialState: function () {
     return {
-      settings: undefined
+      settings: {
+        participating: false
+      }
     };
+  },
+
+  toggleParticipating: function () {
+    Actions.setSetting('participating', 'true');
   },
 
   render: function () {
@@ -19,7 +27,11 @@ var SettingsPage = React.createClass({
       <div className="container-fluid main-container settings">
         <div className='row'>
           <div className='col-xs-8'>Setting Title</div>
-          <div className='col-xs-4'>Value</div>
+          <div className='col-xs-4'>
+            <Toggle
+              defaultChecked={this.state.settings.participating}
+              onChange={this.toggleParticipating} />
+          </div>
         </div>
       </div>
     );
