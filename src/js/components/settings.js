@@ -1,23 +1,18 @@
 var React = require('react');
-var Reflux = require('reflux');
 var Toggle = require('react-toggle');
 
 var Actions = require('../actions/actions');
 var SettingsStore = require('../stores/settings');
 
 var SettingsPage = React.createClass({
-  mixins: [
-    Reflux.connect(SettingsStore, 'settings')
-  ],
-
   getInitialState: function () {
     return {
-      settings: Actions.getSettings()
+      participating: SettingsStore.getSettings().participating
     };
   },
 
-  toggleParticipating: function () {
-    Actions.setSetting('participating', !this.state.settings.participating);
+  toggleParticipating: function (event) {
+    Actions.setSetting('participating', event.target.checked);
   },
 
   render: function () {
@@ -27,7 +22,7 @@ var SettingsPage = React.createClass({
           <div className='col-xs-8'>Show only participating</div>
           <div className='col-xs-4'>
             <Toggle
-              defaultChecked={this.state.settings.participating}
+              defaultChecked={this.state.participating}
               onChange={this.toggleParticipating} />
           </div>
         </div>

@@ -9,18 +9,18 @@ var SettingsStore = Reflux.createStore({
 
     if (!settings) {
       settings = {
-        'participating': true
+        'participating': false
       };
     }
 
-    if (settings[0] === "{") {
+    if (settings[0] === '{') {
       settings = JSON.parse(settings);
     }
 
     this._settings = settings;
   },
 
-  onGetSettings: function () {
+  getSettings: function () {
     return this._settings;
   },
 
