@@ -59,10 +59,6 @@ var Navigation = React.createClass({
     this.context.router.transitionTo('notifications');
   },
 
-  appQuit: function () {
-    ipc.sendChannel('app-quit');
-  },
-
   render: function () {
     var refreshIcon, logoutIcon, backIcon, settingsIcon;
     var loadingClass = this.state.loading ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
@@ -95,9 +91,8 @@ var Navigation = React.createClass({
             <img className='img-responsive' src='images/logo-hor-white.png' />
           </div>
           <div className='col-xs-4 right'>
-            {logoutIcon}
             {settingsIcon}
-            <i className="fa fa-power-off" onClick={this.appQuit} />
+            {logoutIcon}
           </div>
         </div>
       </div>

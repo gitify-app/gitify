@@ -1,6 +1,8 @@
 var React = require('react');
 var Toggle = require('react-toggle');
 
+var ipc = window.require('ipc');
+
 var Actions = require('../actions/actions');
 var SettingsStore = require('../stores/settings');
 
@@ -15,6 +17,10 @@ var SettingsPage = React.createClass({
     Actions.setSetting('participating', event.target.checked);
   },
 
+  appQuit: function () {
+    ipc.sendChannel('app-quit');
+  },
+
   render: function () {
     return (
       <div className="container-fluid main-container settings">
@@ -25,6 +31,14 @@ var SettingsPage = React.createClass({
               defaultChecked={this.state.participating}
               onChange={this.toggleParticipating} />
           </div>
+        </div>
+        <div className='row'>
+          <button
+            className='btn btn-block btn-danger btn-close'
+            onClick={this.appQuit}>
+            <i className="fa fa-power-off" />
+            Quit Gitify
+          </button>
         </div>
       </div>
     );
