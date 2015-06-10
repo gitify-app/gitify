@@ -1,5 +1,7 @@
 var React = require('react');
 var Reflux = require('reflux');
+var Router = require('react-router');
+
 var ipc = window.require('ipc');
 
 var Actions = require('../actions/actions');
@@ -7,6 +9,7 @@ var AuthStore = require('../stores/auth');
 
 var Navigation = React.createClass({
   mixins: [
+    Router.State,
     Reflux.connect(AuthStore, 'authStatus'),
     Reflux.listenTo(Actions.getNotifications.completed, 'refreshDone'),
     Reflux.listenTo(Actions.getNotifications.failed, 'refreshDone')
@@ -52,12 +55,16 @@ var Navigation = React.createClass({
     ipc.sendChannel('update-icon', 'IconPlain');
   },
 
+  goBack: function () {
+    this.context.router.transitionTo('notifications');
+  },
+
   appQuit: function () {
     ipc.sendChannel('app-quit');
   },
 
   render: function () {
-    var refreshIcon, logoutIcon;
+    var refreshIcon, logoutIcon, backIcon, settingsIcon;
     var loadingClass = this.state.loading ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
 
     if (this.state.authStatus) {
@@ -67,18 +74,29 @@ var Navigation = React.createClass({
       logoutIcon = (
         <i className='fa fa-sign-out' onClick={this.logOut} />
       );
+      settingsIcon = (
+        <i className='fa fa-cog' onClick={this.goToSettings} />
+      );
+    }
+    if (this.getPath() === '/settings') {
+      backIcon = (
+        <i onClick={this.goBack} className='fa fa-chevron-left' />
+      );
     }
 
     return (
       <div className='container-fluid'>
         <div className='row navigation'>
-          <div className='col-xs-4 left'>{refreshIcon}</div>
+          <div className='col-xs-4 left'>
+            {backIcon}
+            {refreshIcon}
+          </div>
           <div className='col-xs-4 logo'>
             <img className='img-responsive' src='images/logo-hor-white.png' />
           </div>
           <div className='col-xs-4 right'>
             {logoutIcon}
-            <i className='fa fa-cog' onClick={this.goToSettings} />
+            {settingsIcon}
             <i className="fa fa-power-off" onClick={this.appQuit} />
           </div>
         </div>
