@@ -22,4 +22,9 @@ Router.Link = React.createClass({
   }
 });
 
+Router.State = {
+  getPath: function () {},
+  getCurrentPath: function () {}
+};
+
 module.exports = Router;
