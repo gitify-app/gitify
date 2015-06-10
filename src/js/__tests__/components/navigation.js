@@ -50,7 +50,6 @@ describe('Test for Navigation', function () {
     expect(instance.refreshNotifications).toBeDefined();
     expect(instance.refreshDone).toBeDefined();
     expect(instance.logOut).toBeDefined();
-    expect(instance.appQuit).toBeDefined();
 
     var logoutIcon = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'fa-sign-out');
     expect(logoutIcon.length).toBe(0);
@@ -72,7 +71,6 @@ describe('Test for Navigation', function () {
     expect(instance.refreshNotifications).toBeDefined();
     expect(instance.refreshDone).toBeDefined();
     expect(instance.logOut).toBeDefined();
-    expect(instance.appQuit).toBeDefined();
 
     var logoutIcon = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'fa-sign-out');
     expect(logoutIcon.length).toBe(1);
@@ -87,9 +85,6 @@ describe('Test for Navigation', function () {
     instance.state.loading = true;
     instance.refreshDone();
     expect(instance.state.loading).toBeFalsy();
-
-    // Quit Application
-    instance.appQuit();
 
   });
 
