@@ -5,13 +5,19 @@ var SettingsStore = Reflux.createStore({
   listenables: Actions,
 
   init: function () {
-    var settings = window.localStorage.getItem('settings') || {
-      participating: false
-    };
-    var participatingSetting = settings.participating;
-    this._settings = {
-      participating: participatingSetting
-    };
+    var settings = window.localStorage.getItem('settings');
+
+    if (!settings) {
+      settings = {
+        'participating': true
+      };
+    }
+
+    if (settings[0] === "{") {
+      settings = JSON.parse(settings);
+    }
+
+    this._settings = settings;
   },
 
   onGetSettings: function () {
@@ -20,8 +26,8 @@ var SettingsStore = Reflux.createStore({
 
   onSetSetting: function (setting, value) {
     console.log('Setting: ' + setting + ' to: ' + value);
-    window.localStorage.setItem('settings', this._settings);
-    this._settings.participating = value;
+    this._settings[setting] = value;
+    window.localStorage.setItem('settings', JSON.stringify(this._settings));
     this.trigger(this._settings);
   }
 
