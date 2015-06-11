@@ -50,10 +50,15 @@ describe('Test for Navigation', function () {
     expect(instance.refreshNotifications).toBeDefined();
     expect(instance.refreshDone).toBeDefined();
     expect(instance.logOut).toBeDefined();
+    expect(instance.goBack).toBeDefined();
+    expect(instance.goToSettings).toBeDefined();
+    expect(instance.appQuit).toBeDefined();
 
     var logoutIcon = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'fa-sign-out');
     expect(logoutIcon.length).toBe(0);
 
+    var quitIcon = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'fa-power-off');
+    expect(quitIcon.length).toBe(1);
   });
 
   it('Should load the navigation component for logged in users', function () {
@@ -71,6 +76,9 @@ describe('Test for Navigation', function () {
     expect(instance.refreshNotifications).toBeDefined();
     expect(instance.refreshDone).toBeDefined();
     expect(instance.logOut).toBeDefined();
+    expect(instance.goBack).toBeDefined();
+    expect(instance.goToSettings).toBeDefined();
+    expect(instance.appQuit).toBeDefined();
 
     var logoutIcon = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'fa-sign-out');
     expect(logoutIcon.length).toBe(1);
@@ -85,6 +93,9 @@ describe('Test for Navigation', function () {
     instance.state.loading = true;
     instance.refreshDone();
     expect(instance.state.loading).toBeFalsy();
+
+    // Quit Application
+    instance.appQuit();
 
   });
 
@@ -116,6 +127,26 @@ describe('Test for Navigation', function () {
     // Should refresh on interval
     jest.runOnlyPendingTimers();
     expect(Actions.getNotifications).toHaveBeenCalled();
+
+  });
+
+  it('Should test the transitions', function () {
+
+    spyOn(Actions, 'getNotifications');
+
+    AuthStore.authStatus = function () {
+      return true;
+    };
+
+    var instance;
+    React.withContext({router: new Router()}, function () {
+      instance = TestUtils.renderIntoDocument(<Navigation />);
+    });
+
+    expect(instance.componentDidMount).toBeDefined();
+
+    instance.goBack();
+    instance.goToSettings();
 
   });
 
