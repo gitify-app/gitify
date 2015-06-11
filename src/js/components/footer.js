@@ -15,7 +15,9 @@ var Footer = React.createClass({
   },
 
   getInitialState: function () {
-    return {};
+    return {
+      authStatus: AuthStore.authStatus()
+    };
   },
 
   render: function () {
