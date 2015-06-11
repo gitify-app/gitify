@@ -10,17 +10,15 @@ var Repository = require('../components/repository');
 
 var Notifications = React.createClass({
   areIn: function (repoFullName, searchTerm) {
-    if (!searchTerm) {
-      return false;
-    }
     return repoFullName.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0;
   },
 
   matchesSearchTerm: function (obj) {
     var repoFullName = obj[0].repository.full_name;
-    var searchTerms = this.state.searchTerm.split(/\s+?/);
+    var searchTerm = this.state.searchTerm.replace(/^\s+/, '').replace(/\s+$/, '');
+    var searchTerms = searchTerm.split(/\s+/);
 
-    return _.any(searchTerms, this.areIn.bind(null, repoFullName));
+    return _.all(searchTerms, this.areIn.bind(null, repoFullName));
   },
 
   mixins: [
