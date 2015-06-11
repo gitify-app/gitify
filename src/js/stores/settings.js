@@ -25,7 +25,6 @@ var SettingsStore = Reflux.createStore({
   },
 
   onSetSetting: function (setting, value) {
-    console.log('Setting: ' + setting + ' to: ' + value);
     this._settings[setting] = value;
     window.localStorage.setItem('settings', JSON.stringify(this._settings));
     this.trigger(this._settings);
