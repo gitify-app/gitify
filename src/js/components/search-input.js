@@ -1,16 +1,19 @@
 var React = require('react');
+var Reflux = require('reflux');
+var SearchStore = require('../stores/search');
+var Actions = require('../actions/actions');
 
 var SearchInput = React.createClass({
+  mixins: [
+    Reflux.connect(SearchStore, 'searchTerm')
+  ],
+
   onChange: function (event) {
-    this.setState({
-      searchTerm: event.target.value
-    });
+    Actions.updateSearchTerm(event.target.value);
   },
 
   clearSearch: function () {
-    this.setState({
-      searchTerm: undefined
-    });
+    Actions.clearSearchTerm();
   },
 
   getInitialState: function() {
