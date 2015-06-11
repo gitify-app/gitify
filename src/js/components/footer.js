@@ -21,8 +21,6 @@ var Footer = React.createClass({
   },
 
   render: function () {
-    console.log(this.state.authStatus);
-
     return (
       <div className='container-fluid footer'>
         <div className='row'>
