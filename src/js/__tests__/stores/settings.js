@@ -56,7 +56,6 @@ describe('Tests for SettingsStore', function () {
 
 });
 
-
 describe('Tests for SettingsStore', function () {
 
   var SettingsStore, Actions;
