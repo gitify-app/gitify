@@ -55,3 +55,44 @@ describe('Tests for SettingsStore', function () {
   });
 
 });
+
+
+describe('Tests for SettingsStore', function () {
+
+  var SettingsStore, Actions;
+
+  beforeEach(function () {
+
+    // Mock Electron's window.require
+    window.require = function () {
+      return {
+        sendChannel: function () {
+          return;
+        }
+      };
+    };
+
+    // Mock localStorage
+    window.localStorage = {
+      item: false,
+      getItem: function () {
+        return '{}';
+      },
+      setItem: function (item) {
+        this.item = item;
+      }
+    };
+
+    Actions = require('../../actions/actions.js');
+    SettingsStore = require('../../stores/settings.js');
+  });
+
+  it('should get the settings as string', function () {
+
+    spyOn(SettingsStore, 'trigger');
+
+    SettingsStore.getSettings();
+
+  });
+
+});
