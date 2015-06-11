@@ -69,9 +69,11 @@
       "src/js/components/notification.js": true,
       "src/js/components/notifications.js": true,
       "src/js/components/repository.js": true,
+      "src/js/components/settings.js": true,
       "src/js/components/footer.js": true,
       "src/js/stores/auth.js": true,
-      "src/js/stores/notifications.js": true
+      "src/js/stores/notifications.js": true,
+      "src/js/stores/settings.js": true
     },
     "unmockedModulePathPatterns": [
       "node_modules/react",
