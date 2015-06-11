@@ -16,7 +16,7 @@ var SearchInput = React.createClass({
     Actions.clearSearchTerm();
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {};
   },
 

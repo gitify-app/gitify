@@ -1,5 +1,4 @@
 var React = require('react');
-var _ = require('underscore');
 var remote = window.require('remote');
 var shell = remote.require('shell');
 
@@ -24,7 +23,7 @@ var Repository = React.createClass({
           <div className='col-xs-10 name' onClick={this.openBrowser}>{this.props.repoName}</div>
         </div>
 
-        {this.props.repo.map(function (obj, i) {
+        {this.props.repo.map(function (obj) {
           return <SingleNotification notification={obj} key={obj.id} />;
         })}
 
