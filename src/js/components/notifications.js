@@ -2,16 +2,30 @@ var React = require('react');
 var Reflux = require('reflux');
 var Loading = require('reloading');
 var _ = require('underscore');
-var remote = window.require('remote');
-var shell = remote.require('shell');
 
 var Actions = require('../actions/actions');
 var NotificationsStore = require('../stores/notifications');
+var SearchStore = require('../stores/search');
 var Repository = require('../components/repository');
 
 var Notifications = React.createClass({
+  areIn: function (repoFullName, searchTerm) {
+    if (!searchTerm) {
+      return false;
+    }
+    return repoFullName.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0;
+  },
+
+  matchesSearchTerm: function (obj) {
+    var repoFullName = obj[0].repository.full_name;
+    var searchTerms = this.state.searchTerm.split(/\s+?/);
+
+    return _.any(searchTerms, this.areIn.bind(null, repoFullName));
+  },
+
   mixins: [
     Reflux.connect(NotificationsStore, 'notifications'),
+    Reflux.connect(SearchStore, 'searchTerm'),
     Reflux.listenTo(Actions.getNotifications.completed, 'completedNotifications'),
     Reflux.listenTo(Actions.getNotifications.failed, 'failedNotifications')
   ],
@@ -66,8 +80,14 @@ var Notifications = React.createClass({
           </div>
         );
       } else {
+        if (this.state.searchTerm) {
+          notifications = _.filter(this.state.notifications, this.matchesSearchTerm);
+        } else {
+          notifications = this.state.notifications;
+        }
+
         notifications = (
-          this.state.notifications.map(function (obj) {
+          notifications.map(function (obj) {
             var repoFullName = obj[0].repository.full_name;
             return <Repository repo={obj} repoName={repoFullName} key={repoFullName} />;
           })
