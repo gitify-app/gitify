@@ -23,7 +23,9 @@ Router.Link = React.createClass({
 });
 
 Router.State = {
-  getPath: function () {},
+  getPath: function () {
+    return '/settings';
+  },
   getCurrentPath: function () {}
 };
 
