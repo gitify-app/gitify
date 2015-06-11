@@ -59,8 +59,12 @@ var Navigation = React.createClass({
     this.context.router.transitionTo('notifications');
   },
 
+  appQuit: function () {
+    ipc.sendChannel('app-quit');
+  },
+
   render: function () {
-    var refreshIcon, logoutIcon, backIcon, settingsIcon;
+    var refreshIcon, logoutIcon, backIcon, settingsIcon, quitIcon;
     var loadingClass = this.state.loading ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
 
     if (this.state.authStatus) {
@@ -72,6 +76,10 @@ var Navigation = React.createClass({
       );
       settingsIcon = (
         <i className='fa fa-cog' onClick={this.goToSettings} />
+      );
+    } else {
+      quitIcon = (
+        <i className='fa fa-power-off' onClick={this.appQuit} />
       );
     }
     if (this.getPath() === '/settings') {
@@ -93,6 +101,7 @@ var Navigation = React.createClass({
           <div className='col-xs-4 right'>
             {settingsIcon}
             {logoutIcon}
+            {quitIcon}
           </div>
         </div>
       </div>
