@@ -57,9 +57,9 @@ var Notifications = React.createClass({
   render: function () {
     var notifications, errors;
     var wrapperClass = 'container-fluid main-container notifications';
+    var notificationsEmpty = _.isEmpty(this.state.notifications);
 
     if (this.state.errors) {
-      wrapperClass += ' errored';
       errors = (
         <div>
           <h3>Oops something went wrong.</h3>
@@ -68,8 +68,7 @@ var Notifications = React.createClass({
         </div>
       );
     } else {
-      if (_.isEmpty(this.state.notifications)) {
-        wrapperClass += ' all-read';
+      if (notificationsEmpty) {
         notifications = (
           <div>
             <h2>There are no notifications for you.</h2>
@@ -84,17 +83,31 @@ var Notifications = React.createClass({
           notifications = this.state.notifications;
         }
 
-        notifications = (
-          notifications.map(function (obj) {
-            var repoFullName = obj[0].repository.full_name;
-            return <Repository repo={obj} repoName={repoFullName} key={repoFullName} />;
-          })
-        );
+        if (notifications.length) {
+          notifications = (
+            notifications.map(function (obj) {
+              var repoFullName = obj[0].repository.full_name;
+              return <Repository repo={obj} repoName={repoFullName} key={repoFullName} />;
+            })
+          );
+        } else {
+          errors = (
+            <div>
+              <h3>No Search Results.</h3>
+              <h4>No Organisations or Repositories match your search term.</h4>
+              <img className='img-responsive emoji' src='images/all-read.png' />
+            </div>
+          );
+        }
       }
     }
 
     return (
-      <div className={wrapperClass}>
+      <div className={
+          wrapperClass +
+          (this.state.errors ? ' errorred' : '') +
+          (notificationsEmpty || !notifications.length ? ' all-read' : '')
+        }>
         <Loading className='loading-container' shouldShow={this.state.loading}>
           <div className='loading-text'>working on it</div>
         </Loading>
