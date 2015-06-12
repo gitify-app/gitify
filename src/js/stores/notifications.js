@@ -4,6 +4,7 @@ var _ = require('underscore');
 var Reflux = require('reflux');
 var Actions = require('../actions/actions');
 var apiRequests = require('../utils/api-requests');
+var SettingsStore = require('../stores/settings');
 
 var NotificationsStore = Reflux.createStore({
   listenables: Actions,
@@ -22,9 +23,11 @@ var NotificationsStore = Reflux.createStore({
 
   onGetNotifications: function () {
     var self = this;
+    var participating = SettingsStore.getSettings().participating;
 
     apiRequests
-      .getAuth('https://api.github.com/notifications')
+      .getAuth('https://api.github.com/notifications?participating=' +
+        (participating ? 'true' : 'false'))
       .end(function (err, response) {
         if (response && response.ok) {
           // Success - Do Something.

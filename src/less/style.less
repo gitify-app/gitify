@@ -3,6 +3,7 @@
 @import "node_modules/bootstrap/less/bootstrap";
 @import "node_modules/font-awesome/less/font-awesome.less";
 @import "node_modules/octicons/octicons/octicons.less";
+@import (inline) "node_modules/react-toggle/style.css";
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700);
 
 /* @end Imports */
@@ -227,6 +228,29 @@ input {
 }
 
 /* @end Navbar */
+
+
+/* @group Settings */
+
+.settings {
+  background-color: @ThemeBlack;
+  color: @White;
+  padding: 20px;
+
+  .row {
+    margin: 20px 10px;
+
+    .col-xs-4 {
+      text-align: right;
+    }
+
+    .btn-close {
+      padding: 10px;
+    }
+  }
+}
+
+/* @end Settings */
 
 
 /* @group Component / Login  */

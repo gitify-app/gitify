@@ -22,4 +22,11 @@ Router.Link = React.createClass({
   }
 });
 
+Router.State = {
+  getPath: function () {
+    return '/settings';
+  },
+  getCurrentPath: function () {}
+};
+
 module.exports = Router;
