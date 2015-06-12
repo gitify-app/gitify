@@ -133,7 +133,7 @@
     "grunt-contrib-copy": "=0.8.0",
     "grunt-contrib-less": "=1.0.1",
     "grunt-contrib-watch": "=0.6.1",
-    "jest-cli": "=0.4.5",
+    "jest-cli": "=0.4.12",
     "jscs": "^1.13.1",
     "jshint-stylish": "=1.0.2",
     "jsxhint": "=0.15.0",

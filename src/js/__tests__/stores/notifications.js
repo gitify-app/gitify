@@ -30,6 +30,14 @@ describe('Tests for NotificationsStore', function () {
       }
     };
 
+    // Mock Audio
+    window.Audio = function (src) {
+      console.log('Loading Audio: ' + src);
+      return {
+        play: function () {}
+      };
+    };
+
     Actions = require('../../actions/actions.js');
     apiRequests = require('../../utils/api-requests.js');
     NotificationsStore = require('../../stores/notifications.js');
