@@ -26,7 +26,9 @@ var NotificationsStore = Reflux.createStore({
     var participating = SettingsStore.getSettings().participating;
 
     apiRequests
-      .getAuth('https://api.github.com/notifications?participating=' + participating ? 'true' : 'false')
+      .getAuth('https://api.github.com/notifications?participating=' + participating ?
+       'true' : 'false'
+      )
       .end(function (err, response) {
         if (response && response.ok) {
           // Success - Do Something.
