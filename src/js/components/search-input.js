@@ -21,9 +21,17 @@ var SearchInput = React.createClass({
   },
 
   render: function () {
+    var clearSearchIcon;
+
+    if (this.state.searchTerm) {
+      clearSearchIcon = (
+        <span className='octicon octicon-x' onClick={this.clearSearch} />
+      );
+    }
+
     return (
       <div className='search-wrapper'>
-        <span className='octicon octicon-x' onClick={this.clearSearch} />
+        {clearSearchIcon}
         <input
           value={this.state.searchTerm}
           onChange={this.onChange}
