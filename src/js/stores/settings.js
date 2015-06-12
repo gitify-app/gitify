@@ -9,7 +9,8 @@ var SettingsStore = Reflux.createStore({
 
     if (!settings) {
       settings = {
-        'participating': false
+        'participating': false,
+        'playSound': true
       };
     }
 

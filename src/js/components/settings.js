@@ -13,8 +13,8 @@ var SettingsPage = React.createClass({
     };
   },
 
-  toggleParticipating: function (event) {
-    Actions.setSetting('participating', event.target.checked);
+  toggleSetting: function (key, event) {
+    Actions.setSetting(key, event.target.checked);
   },
 
   appQuit: function () {
@@ -29,7 +29,15 @@ var SettingsPage = React.createClass({
           <div className='col-xs-4'>
             <Toggle
               defaultChecked={this.state.participating}
-              onChange={this.toggleParticipating} />
+              onChange={this.toggleSetting.bind(this, 'participating')} />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-xs-8'>Play sound</div>
+          <div className='col-xs-4'>
+            <Toggle
+              defaultChecked={this.state.participating}
+              onChange={this.toggleSetting.bind(this, 'play-sound')} />
           </div>
         </div>
         <div className='row'>
