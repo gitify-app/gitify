@@ -34,6 +34,9 @@ describe('Test for Notifications Component', function () {
       item: false,
       getItem: function () {
         return this.item;
+      },
+      setItem: function (item) {
+        this.item = item;
       }
     };
 
