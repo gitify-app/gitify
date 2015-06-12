@@ -24,6 +24,9 @@ var NotificationsStore = Reflux.createStore({
 
   isNewNotification: function (response) {
     var self = this;
+    var playSound = SettingsStore.getSettings().playSound;
+
+    if (!playSound) { return; }
 
     // Check if notification is already in the store.
     var isNew = false;
@@ -35,8 +38,10 @@ var NotificationsStore = Reflux.createStore({
 
     // Play Sound.
     if (isNew) {
-      var audio = new Audio('sounds/digi.wav');
-      audio.play();
+      if (playSound) {
+        var audio = new Audio('sounds/digi.wav');
+        audio.play();
+      }
     }
 
     // Now Reset the previousNotifications array.
@@ -49,7 +54,6 @@ var NotificationsStore = Reflux.createStore({
   onGetNotifications: function () {
     var self = this;
     var participating = SettingsStore.getSettings().participating;
-    var playSound = SettingsStore.getSettings().playSound;
 
     apiRequests
       .getAuth('https://api.github.com/notifications?participating=' +
@@ -59,10 +63,7 @@ var NotificationsStore = Reflux.createStore({
           // Success - Do Something.
           Actions.getNotifications.completed(response.body);
           self.updateTrayIcon(response.body);
-
-          if (playSound) {
-            self.isNewNotification(response.body);
-          }
+          self.isNewNotification(response.body);
         } else {
           // Error - Show messages.
           Actions.getNotifications.failed(err);
