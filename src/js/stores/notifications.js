@@ -16,6 +16,10 @@ var NotificationsStore = Reflux.createStore({
   updateTrayIcon: function (notifications) {
     if (notifications.length > 0) {
       ipc.sendChannel('update-icon', 'TrayActive');
+
+      var audio = new Audio('sounds/digi.wav');
+      audio.play();
+
     } else {
       ipc.sendChannel('update-icon', 'TrayIdle');
     }
