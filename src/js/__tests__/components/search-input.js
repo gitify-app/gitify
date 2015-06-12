@@ -71,4 +71,17 @@ describe('Test for Search Input Component', function () {
     expect(Actions.clearSearchTerm).toHaveBeenCalled();
   });
 
+  it('Should only render clear button if search term is not empty', function () {
+    var instance = TestUtils.renderIntoDocument(<SearchInput />);
+
+    var clearButton = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'octicon-x');
+    expect(clearButton.length).toBe(0);
+
+    instance.state.searchTerm = 'hello';
+    instance.forceUpdate();
+
+    clearButton = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'octicon-x');
+    expect(clearButton.length).toBe(1);
+  });
+
 });
