@@ -69,9 +69,11 @@
       "src/js/components/notification.js": true,
       "src/js/components/notifications.js": true,
       "src/js/components/repository.js": true,
+      "src/js/components/settings.js": true,
       "src/js/components/footer.js": true,
       "src/js/stores/auth.js": true,
-      "src/js/stores/notifications.js": true
+      "src/js/stores/notifications.js": true,
+      "src/js/stores/settings.js": true
     },
     "unmockedModulePathPatterns": [
       "node_modules/react",
@@ -111,6 +113,7 @@
     "octicons": "=2.2.0",
     "react": "=0.13.3",
     "react-router": "=0.13.3",
+    "react-toggle": "=1.2.3",
     "react-tools": "=0.13.3",
     "reactify": "=1.1.1",
     "reflux": "=0.2.7",
