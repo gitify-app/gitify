@@ -84,7 +84,10 @@ var Navigation = React.createClass({
     }
     if (this.getPath() === '/settings') {
       backIcon = (
-        <i onClick={this.goBack} className='fa fa-chevron-left' />
+        <i className='fa fa-chevron-left' onClick={this.goBack} />
+      );
+      settingsIcon = (
+        <i className='fa fa-cog' onClick={this.goBack} />
       );
     }
 
