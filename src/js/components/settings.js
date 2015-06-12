@@ -11,7 +11,8 @@ var SettingsPage = React.createClass({
     var settings = SettingsStore.getSettings();
     return {
       participating: settings.participating,
-      playSound: settings.playSound
+      playSound: settings.playSound,
+      showNotifications: settings.showNotifications
     };
   },
 
@@ -40,6 +41,14 @@ var SettingsPage = React.createClass({
             <Toggle
               defaultChecked={this.state.playSound}
               onChange={this.toggleSetting.bind(this, 'playSound')} />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-xs-8'>Show notifications</div>
+          <div className='col-xs-4'>
+            <Toggle
+              defaultChecked={this.state.showNotifications}
+              onChange={this.toggleSetting.bind(this, 'showNotifications')} />
           </div>
         </div>
         <div className='row'>

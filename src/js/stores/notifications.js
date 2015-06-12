@@ -25,9 +25,9 @@ var NotificationsStore = Reflux.createStore({
   isNewNotification: function (response) {
     var self = this;
     var playSound = SettingsStore.getSettings().playSound;
-    var showNotification = SettingsStore.getSettings().showNotification;
+    var showNotifications = SettingsStore.getSettings().showNotifications;
 
-    if (!playSound && !showNotification) { return; }
+    if (!playSound && !showNotifications) { return; }
 
     // Check if notification is already in the store.
     var countNew = 0;
@@ -43,10 +43,10 @@ var NotificationsStore = Reflux.createStore({
         var audio = new Audio('sounds/digi.wav');
         audio.play();
       }
-      if (showNotification) {
-        var body = (countNew = 1 ?
+      if (showNotifications) {
+        var body = (countNew == 1 ?
           'You\'ve got a new notification' :
-          'You\'ve got ' + countNew + 'notifications');
+          'You\'ve got ' + countNew + ' notifications.');
         var nativeNotification = new Notification('Gitify', {
           body: body
         });

@@ -9,8 +9,9 @@ var SettingsStore = Reflux.createStore({
 
     if (!settings) {
       settings = {
-        'participating': false,
-        'playSound': true
+        participating: false,
+        playSound: true,
+        showNotifications: true
       };
     }
 
@@ -18,7 +19,18 @@ var SettingsStore = Reflux.createStore({
       settings = JSON.parse(settings);
     }
 
+    if (!settings.participating) {
+      settings.participating = false;
+    }
+    if (!settings.playSound) {
+      settings.playSound = true;
+    }
+    if (!settings.showNotifications) {
+      settings.showNotifications = true;
+    }
+
     this._settings = settings;
+    window.localStorage.setItem('settings', JSON.stringify(this._settings));
   },
 
   getSettings: function () {
