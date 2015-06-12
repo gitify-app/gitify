@@ -8,8 +8,10 @@ var SettingsStore = require('../stores/settings');
 
 var SettingsPage = React.createClass({
   getInitialState: function () {
+    var settings = SettingsStore.getSettings();
     return {
-      participating: SettingsStore.getSettings().participating
+      participating: settings.participating,
+      playSound: settings.playSound
     };
   },
 
@@ -36,8 +38,8 @@ var SettingsPage = React.createClass({
           <div className='col-xs-8'>Play sound</div>
           <div className='col-xs-4'>
             <Toggle
-              defaultChecked={this.state.participating}
-              onChange={this.toggleSetting.bind(this, 'play-sound')} />
+              defaultChecked={this.state.playSound}
+              onChange={this.toggleSetting.bind(this, 'playSound')} />
           </div>
         </div>
         <div className='row'>

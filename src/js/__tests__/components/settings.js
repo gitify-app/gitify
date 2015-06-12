@@ -43,10 +43,10 @@ describe('Test for Settings Component', function () {
     var instance = TestUtils.renderIntoDocument(<Settings />);
 
     expect(instance.state.participating).toBeFalsy();
-    expect(instance.toggleParticipating).toBeDefined();
+    expect(instance.toggleSetting).toBeDefined();
     expect(instance.appQuit).toBeDefined();
 
-    instance.toggleParticipating({
+    instance.toggleSetting('participating', {
       target: {
         checked: true
       }
