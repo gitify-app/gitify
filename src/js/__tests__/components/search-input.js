@@ -65,12 +65,9 @@ describe('Test for Search Input Component', function () {
     spyOn(Actions, 'clearSearchTerm');
 
     var instance = TestUtils.renderIntoDocument(<SearchInput />);
-    var clearButton = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'octicon-x')[0];
-
     expect(Actions.clearSearchTerm).not.toHaveBeenCalled();
 
-    TestUtils.Simulate.click(clearButton);
-
+    instance.clearSearch();
     expect(Actions.clearSearchTerm).toHaveBeenCalled();
   });
 
