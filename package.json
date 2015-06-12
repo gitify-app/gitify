@@ -72,6 +72,7 @@
       "src/js/components/settings.js": true,
       "src/js/components/footer.js": true,
       "src/js/components/search-input.js": true,
+      "src/js/components/settings.js": true,
       "src/js/stores/auth.js": true,
       "src/js/stores/notifications.js": true,
       "src/js/stores/search.js": true,
@@ -103,6 +104,16 @@
     "app"
   ],
   "author": "Emmanouil Konstantinidis",
+  "contributors": [
+    {
+      "name": "Emmanouil Konstantinidis",
+      "url": "https://githib.com/ekonstantinidis"
+    },
+    {
+      "name": "Jake 'Sid' Smith",
+      "url": "https://githib.com/JakeSidSmith"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ekonstantinidis/gitify/issues"
