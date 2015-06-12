@@ -104,6 +104,16 @@
     "app"
   ],
   "author": "Emmanouil Konstantinidis",
+  "contributors": [
+    {
+      "name": "Emmanouil Konstantinidis",
+      "url": "https://githib.com/ekonstantinidis"
+    },
+    {
+      "name": "Jake 'Sid' Smith",
+      "url": "https://githib.com/JakeSidSmith"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ekonstantinidis/gitify/issues"
