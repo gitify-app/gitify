@@ -106,7 +106,7 @@ var Notifications = React.createClass({
     return (
       <div className={
           wrapperClass +
-          (this.state.errors ? ' errorred' : '') +
+          (this.state.errors ? ' errored' : '') +
           (notificationsEmpty ? ' all-read' : '')
         }>
         <Loading className='loading-container' shouldShow={this.state.loading}>
