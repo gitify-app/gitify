@@ -46,7 +46,7 @@ var NotificationsStore = Reflux.createStore({
       if (showNotification) {
         var body = (countNew = 1 ?
           'You\'ve got a new notification' :
-          'You\'ve got ' + countNew + 'notifications'); 
+          'You\'ve got ' + countNew + 'notifications');
         var nativeNotification = new Notification('Gitify', {
           body: body
         });
