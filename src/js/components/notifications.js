@@ -91,6 +91,7 @@ var Notifications = React.createClass({
             })
           );
         } else {
+          notificationsEmpty = true;
           errors = (
             <div>
               <h3>No Search Results.</h3>
@@ -106,7 +107,7 @@ var Notifications = React.createClass({
       <div className={
           wrapperClass +
           (this.state.errors ? ' errorred' : '') +
-          (notificationsEmpty || !notifications.length ? ' all-read' : '')
+          (notificationsEmpty ? ' all-read' : '')
         }>
         <Loading className='loading-container' shouldShow={this.state.loading}>
           <div className='loading-text'>working on it</div>
