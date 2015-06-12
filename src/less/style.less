@@ -111,14 +111,13 @@
 
 /* @group Misc */
 
+html, body {
+  -webkit-user-select: none;
+}
+
 body {
     .FontOpenSansRegular();
     cursor: default;
-}
-
-::selection {
-    color: inherit;
-    background: inherit;
 }
 
 html, body {
@@ -146,6 +145,14 @@ html, body {
     &:focus {
         outline: none;
     }
+}
+
+.right {
+  text-align: right;
+}
+
+input {
+  outline: none;
 }
 
 /* @end Misc */
@@ -214,12 +221,8 @@ html, body {
       }
     }
 
-    &.right {
-      text-align: right;
-
-      .fa {
-        margin: 0 10px;
-      }
+    &.right .fa {
+      margin: 0 10px;
     }
   }
 }
@@ -391,6 +394,9 @@ html, body {
 
 /* @group Component / Footer  */
 
+@SearchHeight: 22px;
+@SearchFontSize: 14px;
+
 .footer {
   margin: 0;
   padding: 5px 20px;
@@ -403,6 +409,44 @@ html, body {
   left: 0;
   right: 0;
   text-align: center;
+  line-height: @SearchHeight;
 }
+
+.github-link {
+  cursor: pointer;
+}
+
+/* @group Search input */
+
+.search-wrapper {
+  position: relative;
+  overflow: hidden;
+
+  .octicon-x {
+    position: absolute;
+    text-align: center;
+    top: 0;
+    right: 0;
+    color: @ThemeBlack;
+    cursor: pointer;
+    height: @SearchHeight;
+    width: @SearchHeight;
+    line-height: @SearchHeight;
+  }
+}
+
+.search {
+  width: 100%;
+  border-radius: @SearchHeight / 2;
+  height: @SearchHeight;
+  padding: 0 8px;
+  color: @ThemeBlack;
+  font-size: @SearchFontSize;
+  border: none;
+  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  -webkit-user-select: text;
+}
+
+/* @end Search input */
 
 /* @end Component / Footer  */

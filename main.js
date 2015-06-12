@@ -64,6 +64,11 @@ app.on('ready', function(){
           label: 'Paste',
           accelerator: 'Command+V',
           selector: 'paste:'
+        },
+        {
+          label: 'Select All',
+          accelerator: 'Command+A',
+          selector: 'selectAll:'
         }
       ]
     }];

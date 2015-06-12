@@ -11,6 +11,19 @@ describe('Test for Footer', function () {
 
   var Actions, Footer;
 
+  window.localStorage = {
+    item: false,
+    setItem: function (item) {
+      this.item = item;
+    },
+    getItem: function () {
+      return this.item;
+    },
+    clear: function () {
+      this.item = false;
+    }
+  };
+
   beforeEach(function () {
     // Mock Electron's window.require
     // and remote.require('shell')
