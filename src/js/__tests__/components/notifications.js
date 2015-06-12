@@ -82,6 +82,47 @@ describe('Test for Notifications Component', function () {
     errors = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'errored');
     expect(errors.length).toBe(1);
 
+    expect(instance.areIn('ekonstantinidis/gitify', 'gitify')).toBeTruthy();
+    expect(instance.areIn('ekonstantinidis/gitify', 'hello')).toBeFalsy();
+
+    instance.state.searchTerm = 'hello';
+    var matches = instance.matchesSearchTerm(response[0]);
+    expect(matches).toBeFalsy();
+
+    instance.state.searchTerm = 'gitify';
+    matches = instance.matchesSearchTerm(response[0]);
+    expect(matches).toBeTruthy();
+  });
+
+  it('Should only render repos that match the search term', function () {
+    AuthStore.authStatus = function () {
+      return true;
+    };
+
+    var instance = TestUtils.renderIntoDocument(<Notifications />);
+
+    var response = [[{
+      'repository': {
+        'full_name': 'ekonstantinidis/gitify',
+        'owner': {
+          'avatar_url': 'http://avatar.url'
+        }
+      },
+      'subject': {
+        'type': 'Issue'
+      }
+    }]];
+
+    NotificationsStore.trigger(response);
+
+    var notifications = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'repository');
+    expect(notifications.length).toBe(1);
+
+    instance.state.searchTerm = 'hello';
+    instance.forceUpdate();
+
+    notifications = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'repository');
+    expect(notifications.length).toBe(0);
   });
 
 });
