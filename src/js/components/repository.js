@@ -29,8 +29,7 @@ var Repository = React.createClass({
         <div className='row repository'>
           <div className='col-xs-2'><img className='avatar' src={this.getAvatar()} /></div>
           <div className='col-xs-10 name' onClick={this.openBrowser}>
-            <span>{repositoryName}</span>
-            /
+            <span>{'/' + repositoryName}</span>
             <span>{organisationName}</span>
           </div>
         </div>
