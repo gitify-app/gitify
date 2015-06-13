@@ -44,10 +44,13 @@ var NotificationsStore = Reflux.createStore({
         audio.play();
       }
       if (showNotifications) {
+        var title = (countNew == 1 ?
+          'Gitify - ' + response[0].repository.full_name :
+          'Gitify');
         var body = (countNew == 1 ?
-          'You\'ve got a new notification' :
+          response[0].subject.title :
           'You\'ve got ' + countNew + ' notifications.');
-        var nativeNotification = new Notification('Gitify', {
+        var nativeNotification = new Notification(title, {
           body: body
         });
         nativeNotification.onclick = function () {
