@@ -33,6 +33,20 @@ describe('Tests for NotificationsStore', function () {
       }
     };
 
+    // Mock Audio
+    window.Audio = function () {
+      return {
+        play: function () {}
+      };
+    };
+
+    // Mock Notifications
+    window.Notification = function () {
+      return {
+        onClick: function () {}
+      };
+    };
+
     Actions = require('../../actions/actions.js');
     apiRequests = require('../../utils/api-requests.js');
     NotificationsStore = require('../../stores/notifications.js');
