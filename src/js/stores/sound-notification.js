@@ -58,7 +58,7 @@ var SoundNotificationStore = Reflux.createStore({
         self.playSound();
       }
       if (showNotifications) {
-        self.showNotification(countNew, response, latestNotification);
+        this.showNotification(countNew, response, latestNotification);
       }
     }
 

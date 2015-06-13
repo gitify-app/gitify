@@ -6,6 +6,8 @@ var Actions = require('../actions/actions');
 var apiRequests = require('../utils/api-requests');
 var SettingsStore = require('../stores/settings');
 
+require('../stores/sound-notification');
+
 var NotificationsStore = Reflux.createStore({
   listenables: Actions,
 
