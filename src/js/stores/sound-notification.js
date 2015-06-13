@@ -3,7 +3,7 @@ var Reflux = require('reflux');
 var _ = require('underscore');
 
 var Actions = require('../actions/actions');
-var SettingsStore = require('../settings');
+var SettingsStore = require('../stores/settings');
 
 var SoundNotificationStore = Reflux.createStore({
   listenables: Actions,
