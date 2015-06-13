@@ -11,7 +11,6 @@ var NotificationsStore = Reflux.createStore({
 
   init: function () {
     this._notifications = [];
-    this._previousNotifications = [];
   },
 
   updateTrayIcon: function (notifications) {
@@ -20,50 +19,6 @@ var NotificationsStore = Reflux.createStore({
     } else {
       ipc.sendChannel('update-icon', 'TrayIdle');
     }
-  },
-
-  isNewNotification: function (response) {
-    var self = this;
-    var playSound = SettingsStore.getSettings().playSound;
-    var showNotifications = SettingsStore.getSettings().showNotifications;
-
-    if (!playSound && !showNotifications) { return; }
-
-    // Check if notification is already in the store.
-    var countNew = 0;
-    _.map(response, function (obj) {
-      if (!_.contains(self._previousNotifications, obj.id)) {
-        countNew ++;
-      }
-    });
-
-    // Play Sound.
-    if (countNew > 0) {
-      if (playSound) {
-        var audio = new Audio('sounds/digi.wav');
-        audio.play();
-      }
-      if (showNotifications) {
-        var title = (countNew == 1 ?
-          'Gitify - ' + response[0].repository.full_name :
-          'Gitify');
-        var body = (countNew == 1 ?
-          response[0].subject.title :
-          'You\'ve got ' + countNew + ' notifications.');
-        var nativeNotification = new Notification(title, {
-          body: body
-        });
-        nativeNotification.onclick = function () {
-          ipc.sendChannel('reopen-window');
-        };
-      }
-    }
-
-    // Now Reset the previousNotifications array.
-    self._previousNotifications = [];
-    _.map(response, function (obj) {
-      self._previousNotifications.push(obj.id);
-    });
   },
 
   onGetNotifications: function () {
@@ -78,7 +33,7 @@ var NotificationsStore = Reflux.createStore({
           // Success - Do Something.
           Actions.getNotifications.completed(response.body);
           self.updateTrayIcon(response.body);
-          self.isNewNotification(response.body);
+          Actions.isNewNotification(response.body);
         } else {
           // Error - Show messages.
           Actions.getNotifications.failed(err);
