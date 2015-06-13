@@ -16,11 +16,23 @@ var Repository = React.createClass({
   },
 
   render: function () {
+    var organisationName, repositoryName;
+
+    if (typeof this.props.repoName === 'string') {
+      var splitName = this.props.repoName.split('/');
+      organisationName = splitName[0];
+      repositoryName = splitName[1];
+    }
+
     return (
       <div>
         <div className='row repository'>
           <div className='col-xs-2'><img className='avatar' src={this.getAvatar()} /></div>
-          <div className='col-xs-10 name' onClick={this.openBrowser}>{this.props.repoName}</div>
+          <div className='col-xs-10 name' onClick={this.openBrowser}>
+            <span>{repositoryName}</span>
+            /
+            <span>{organisationName}</span>
+          </div>
         </div>
 
         {this.props.repo.map(function (obj) {
