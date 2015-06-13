@@ -11,6 +11,7 @@ var NotificationsStore = Reflux.createStore({
 
   init: function () {
     this._notifications = [];
+    this._previousNotifications = [];
   },
 
   updateTrayIcon: function (notifications) {
@@ -19,6 +20,35 @@ var NotificationsStore = Reflux.createStore({
     } else {
       ipc.sendChannel('update-icon', 'TrayIdle');
     }
+  },
+
+  isNewNotification: function (response) {
+    var self = this;
+    var playSound = SettingsStore.getSettings().playSound;
+
+    if (!playSound) { return; }
+
+    // Check if notification is already in the store.
+    var isNew = false;
+    _.map(response, function (obj) {
+      if (!_.contains(self._previousNotifications, obj.id)) {
+        isNew = true;
+      }
+    });
+
+    // Play Sound.
+    if (isNew) {
+      if (playSound) {
+        var audio = new Audio('sounds/digi.wav');
+        audio.play();
+      }
+    }
+
+    // Now Reset the previousNotifications array.
+    self._previousNotifications = [];
+    _.map(response, function (obj) {
+      self._previousNotifications.push(obj.id);
+    });
   },
 
   onGetNotifications: function () {
@@ -33,6 +63,7 @@ var NotificationsStore = Reflux.createStore({
           // Success - Do Something.
           Actions.getNotifications.completed(response.body);
           self.updateTrayIcon(response.body);
+          self.isNewNotification(response.body);
         } else {
           // Error - Show messages.
           Actions.getNotifications.failed(err);
