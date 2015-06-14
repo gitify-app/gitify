@@ -10,8 +10,7 @@
     "watch": "grunt build && npm build && npm run watch-js | grunt watch",
     "start": "electron .",
     "dist": "rm -rf Gitify.app/ && electron-packager . Gitify --platform=darwin --arch=x64 --version=0.27.2 --icon=images/app-icon.icns --prune --ignore=src",
-    "test": "jsxhint --reporter node_modules/jshint-stylish/stylish.js 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js' && jscs 'src/js/' && jest",
-    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
+    "test": "jsxhint --reporter node_modules/jshint-stylish/stylish.js 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js' && jscs 'src/js/' && jest"
   },
   "jshintConfig": {
     "browserify": true,
@@ -76,7 +75,8 @@
       "src/js/stores/auth.js": true,
       "src/js/stores/notifications.js": true,
       "src/js/stores/search.js": true,
-      "src/js/stores/settings.js": true
+      "src/js/stores/settings.js": true,
+      "src/js/stores/sound-notification.js": true
     },
     "unmockedModulePathPatterns": [
       "node_modules/react",

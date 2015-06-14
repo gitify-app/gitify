@@ -27,14 +27,23 @@ describe('Tests for NotificationsStore', function () {
       item: false,
       getItem: function () {
         return this.item;
+      },
+      setItem: function (item) {
+        this.item = item;
       }
     };
 
     // Mock Audio
-    window.Audio = function (src) {
-      console.log('Loading Audio: ' + src);
+    window.Audio = function () {
       return {
         play: function () {}
+      };
+    };
+
+    // Mock Notifications
+    window.Notification = function () {
+      return {
+        onClick: function () {}
       };
     };
 
