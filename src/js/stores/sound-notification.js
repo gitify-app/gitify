@@ -10,11 +10,11 @@ var SoundNotificationStore = Reflux.createStore({
 
   init: function () {
     this._previousNotifications = [];
-    this._audio = new Audio('sounds/digi.wav');
   },
 
   playSound: function () {
-    this._audio.play();
+    var audio = new Audio('sounds/digi.wav');
+    audio.play();
   },
 
   showNotification: function (countNew, response, latestNotification) {
