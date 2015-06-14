@@ -10,11 +10,11 @@ var SoundNotificationStore = Reflux.createStore({
 
   init: function () {
     this._previousNotifications = [];
+    this._audio = new Audio('sounds/digi.wav');
   },
 
   playSound: function () {
-    var audio = new Audio('sounds/digi.wav');
-    audio.play();
+    this._audio.play();
   },
 
   showNotification: function (countNew, response, latestNotification) {
@@ -40,32 +40,26 @@ var SoundNotificationStore = Reflux.createStore({
     if (!playSound && !showNotifications) { return; }
 
     // Check if notification is already in the store.
-    var countNew = 0;
-    var latestNotification = {};
-    _.map(response, function (obj) {
-      if (!_.contains(self._previousNotifications, obj.id)) {
-        countNew ++;
-        latestNotification = {
-          full_name: obj.repository.full_name,
-          subject: obj.subject.title
-        };
-      }
+    var newNotifications = _.filter(response, function (obj) {
+      return !_.contains(self._previousNotifications, obj.id);
     });
 
     // Play Sound / Show Notification.
-    if (countNew > 0) {
+    if (newNotifications && newNotifications.length) {
       if (playSound) {
         self.playSound();
       }
       if (showNotifications) {
-        this.showNotification(countNew, response, latestNotification);
+        this.showNotification(newNotifications.length, response, {
+          full_name: newNotifications[0].repository.full_name,
+          subject: newNotifications[0].subject.title
+        });
       }
     }
 
     // Now Reset the previousNotifications array.
-    self._previousNotifications = [];
-    _.map(response, function (obj) {
-      self._previousNotifications.push(obj.id);
+    self._previousNotifications = _.map(response, function (obj) {
+      return obj.id;
     });
   }
 
