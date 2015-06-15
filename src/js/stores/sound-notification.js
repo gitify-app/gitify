@@ -17,6 +17,16 @@ var SoundNotificationStore = Reflux.createStore({
     audio.play();
   },
 
+  newNotification: function (title, body) {
+    var nativeNotification = new Notification(title, {
+      body: body
+    });
+    nativeNotification.onclick = function () {
+      ipc.sendChannel('reopen-window');
+    };
+    return nativeNotification;
+  },
+
   showNotification: function (countNew, response, latestNotification) {
     var title = (countNew == 1 ?
       'Gitify - ' + latestNotification.full_name :
@@ -24,12 +34,7 @@ var SoundNotificationStore = Reflux.createStore({
     var body = (countNew == 1 ?
       latestNotification.subject :
       'You\'ve got ' + countNew + ' notifications.');
-    var nativeNotification = new Notification(title, {
-      body: body
-    });
-    nativeNotification.onclick = function () {
-      ipc.sendChannel('reopen-window');
-    };
+    this.newNotification(title, body);
   },
 
   onIsNewNotification: function (response) {
