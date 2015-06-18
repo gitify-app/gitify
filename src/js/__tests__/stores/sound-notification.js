@@ -74,4 +74,12 @@ describe('Tests for SoundNotificationStore', function () {
 
   });
 
+  it('Should reopen gitify when a notification is clicked', function () {
+    var nativeNotification = SoundNotificationStore.newNotification('Test', 'Hello, world!');
+
+    expect(nativeNotification.onclick.toString().indexOf('reopen-window') >= 0).toBe(true);
+
+    nativeNotification.onclick();
+  });
+
 });
