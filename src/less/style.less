@@ -98,6 +98,20 @@
     opacity:        @opacity;
 }
 
+.CheckOcticon() {
+  &.octicon-check {
+    -webkit-transition: all .4s;
+    -moz-transition: all .4s;
+    transition: all .4s;
+    color: darken(@LightGray, 20%);
+
+    &:hover {
+      color: @ThemeGreen;
+      cursor: pointer;
+    }
+  }
+}
+
 /* @end Mixins */
 
 
@@ -290,7 +304,7 @@ input {
   &.read {
     .Opacity(0.4);
   }
-  
+
   .col-xs-2,
   .col-xs-10 {
     padding: 0;
@@ -303,9 +317,10 @@ input {
   }
 
   .name {
-    font-size: 18px;
     .FontOpenSansSemibold();
+    font-size: 18px;
     text-align: right;
+    padding: 0 5px;
 
     span {
       display: inline-block;
@@ -314,6 +329,15 @@ input {
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
+    }
+  }
+
+  .check-wrapper {
+    padding: 0 5px;
+
+    .octicon {
+      font-size: 22px;
+      .CheckOcticon();
     }
   }
 }
@@ -380,17 +404,7 @@ input {
   .octicon {
     margin-right: 10px;
     font-size: 20px;
-
-    &.octicon-check {
-      -webkit-transition: all .4s;
-      -moz-transition: all .4s;
-      transition: all .4s;
-
-      &:hover {
-        color: @ThemeGreen;
-        cursor: pointer;
-      }
-    }
+    .CheckOcticon();
   }
 
   &.read {
