@@ -7,6 +7,12 @@ var apiRequests = require('../utils/api-requests');
 
 var Repository = React.createClass({
 
+  getInitialState: function() {
+    return {
+      isRead: false
+    };
+  },
+
   getAvatar: function () {
     return this.props.repo[0].repository.owner.avatar_url;
   },
@@ -17,18 +23,19 @@ var Repository = React.createClass({
   },
 
   markRepoAsRead: function () {
-    // var self = this;
+    var self = this;
     var loginId = this.props.repo[0].repository.owner.login;
     var repoId = this.props.repo[0].repository.name;
 
-    // /repos/:owner/:repo/notifications
-    console.log('https://api.github.com/repos/' + loginId + '/' + repoId + '/notifications');
     apiRequests
       .putAuth('https://api.github.com/repos/' + loginId + '/' + repoId + '/notifications', {})
       .end(function (err, response) {
         if (response && response.ok) {
           // Notification Read
           console.log("SUCCESS!");
+          self.setState({
+            isRead: true
+          });
         } else {
           // Error - Show messages.
           // Show appropriate message
@@ -38,6 +45,7 @@ var Repository = React.createClass({
   },
 
   render: function () {
+    var self = this;
     var organisationName, repositoryName;
 
     if (typeof this.props.repoName === 'string') {
@@ -48,7 +56,7 @@ var Repository = React.createClass({
 
     return (
       <div>
-        <div className='row repository'>
+        <div className={this.state.isRead ? 'row repository read' : 'row repository'}>
           <div className='col-xs-2'><img className='avatar' src={this.getAvatar()} /></div>
           <div className='col-xs-9 name' onClick={this.openBrowser}>
             <span>{'/' + repositoryName}</span>
@@ -60,7 +68,7 @@ var Repository = React.createClass({
         </div>
 
         {this.props.repo.map(function (obj) {
-          return <SingleNotification notification={obj} key={obj.id} />;
+          return <SingleNotification isRead={self.state.isRead} notification={obj} key={obj.id} />;
         })}
 
       </div>

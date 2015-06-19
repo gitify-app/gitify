@@ -8,9 +8,14 @@ var NotificationItem = React.createClass({
 
   getInitialState: function () {
     return {
-      readClass: 'row notification',
-      read: false
+      isRead: this.props.isRead
     };
+  },
+
+  componentWillReceiveProps: function(nextProps) {
+    this.setState({
+      isRead: nextProps.isRead
+    });
   },
 
   openBrowser: function () {
@@ -30,8 +35,7 @@ var NotificationItem = React.createClass({
         if (response && response.ok) {
           // Notification Read
           self.setState({
-            readClass: self.state.readClass + ' read',
-            read: true
+            isRead: true
           });
         } else {
           // Error - Show messages.
@@ -54,7 +58,7 @@ var NotificationItem = React.createClass({
     }
 
     return (
-      <div className={this.state.readClass}>
+      <div className={this.state.isRead ? 'row notification read' : 'row notification'}>
         <div className='col-xs-1'><span className={typeIconClass} /></div>
         <div className='col-xs-10 subject' onClick={this.openBrowser}>
           {this.props.notification.subject.title}
