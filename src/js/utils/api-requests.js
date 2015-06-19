@@ -25,6 +25,16 @@ var apiRequests = {
       .set('User-Agent', 'Gitify');
   },
 
+  putAuth: function (url, params) {
+    return request
+      .put(url)
+      .send(params)
+      .set('Accept', 'application/vnd.github.v3+json')
+      .set('Authorization', 'token ' + AuthStore.authStatus())
+      .set('Cache-Control', 'no-cache')
+      .set('User-Agent', 'Gitify');
+  },
+
   patchAuth: function (url, params) {
     return request
       .patch(url)

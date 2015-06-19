@@ -3,6 +3,7 @@ var remote = window.require('remote');
 var shell = remote.require('shell');
 
 var SingleNotification = require('../components/notification');
+var apiRequests = require('../utils/api-requests');
 
 var Repository = React.createClass({
 
@@ -13,6 +14,27 @@ var Repository = React.createClass({
   openBrowser: function () {
     var url = this.props.repo[0].repository.html_url;
     shell.openExternal(url);
+  },
+
+  markRepoAsRead: function () {
+    // var self = this;
+    var loginId = this.props.repo[0].repository.owner.login;
+    var repoId = this.props.repo[0].repository.name;
+
+    // /repos/:owner/:repo/notifications
+    console.log('https://api.github.com/repos/' + loginId + '/' + repoId + '/notifications');
+    apiRequests
+      .putAuth('https://api.github.com/repos/' + loginId + '/' + repoId + '/notifications', {})
+      .end(function (err, response) {
+        if (response && response.ok) {
+          // Notification Read
+          console.log("SUCCESS!");
+        } else {
+          // Error - Show messages.
+          // Show appropriate message
+        }
+      });
+
   },
 
   render: function () {
@@ -28,9 +50,12 @@ var Repository = React.createClass({
       <div>
         <div className='row repository'>
           <div className='col-xs-2'><img className='avatar' src={this.getAvatar()} /></div>
-          <div className='col-xs-10 name' onClick={this.openBrowser}>
+          <div className='col-xs-9 name' onClick={this.openBrowser}>
             <span>{'/' + repositoryName}</span>
             <span>{organisationName}</span>
+          </div>
+          <div className='col-xs-1 check-wrapper'>
+            <span className='octicon octicon-check' onClick={this.markRepoAsRead} />
           </div>
         </div>
 
