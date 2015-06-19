@@ -12,7 +12,7 @@ var NotificationItem = React.createClass({
     };
   },
 
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps: function (nextProps) {
     this.setState({
       isRead: nextProps.isRead
     });

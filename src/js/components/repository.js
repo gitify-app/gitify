@@ -7,7 +7,7 @@ var apiRequests = require('../utils/api-requests');
 
 var Repository = React.createClass({
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       isRead: false
     };
@@ -32,7 +32,6 @@ var Repository = React.createClass({
       .end(function (err, response) {
         if (response && response.ok) {
           // Notification Read
-          console.log("SUCCESS!");
           self.setState({
             isRead: true
           });
