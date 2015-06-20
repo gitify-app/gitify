@@ -68,8 +68,7 @@ describe('Test for Notification Component', function () {
         notification={notification}
         key={notification.id} />);
 
-    expect(instance.state.readClass).toBe('row notification');
-    expect(instance.state.read).toBeFalsy();
+    expect(instance.state.isRead).toBeFalsy();
     expect(instance.openBrowser).toBeDefined();
     expect(instance.markAsRead).toBeDefined();
 
@@ -99,8 +98,7 @@ describe('Test for Notification Component', function () {
         notification={notification}
         key={notification.id} />);
 
-    expect(instance.state.readClass).toBe('row notification');
-    expect(instance.state.read).toBeFalsy();
+    expect(instance.state.isRead).toBeFalsy();
     expect(instance.openBrowser).toBeDefined();
     expect(instance.markAsRead).toBeDefined();
 
@@ -127,8 +125,7 @@ describe('Test for Notification Component', function () {
         notification={notification}
         key={notification.id} />);
 
-    expect(instance.state.readClass).toBe('row notification');
-    expect(instance.state.read).toBeFalsy();
+    expect(instance.state.isRead).toBeFalsy();
     expect(instance.openBrowser).toBeDefined();
     expect(instance.markAsRead).toBeDefined();
 

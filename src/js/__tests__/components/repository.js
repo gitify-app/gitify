@@ -12,7 +12,7 @@ var TestUtils = React.addons.TestUtils;
 
 describe('Test for Repository Component', function () {
 
-  var Actions, Repository;
+  var apiRequests, Actions, Repository;
 
   beforeEach(function () {
     // Mock Electron's window.require
@@ -37,6 +37,7 @@ describe('Test for Repository Component', function () {
       }
     };
 
+    apiRequests = require('../../utils/api-requests.js');
     Actions = require('../../actions/actions.js');
     Repository = require('../../components/repository.js');
   });
@@ -63,8 +64,10 @@ describe('Test for Repository Component', function () {
     );
 
     expect(instance.props.repo[0].repository.full_name).toBe('ekonstantinidis/gitify');
+    expect(instance.isRead).toBeFalsy();
     expect(instance.getAvatar).toBeDefined();
     expect(instance.openBrowser).toBeDefined();
+    expect(instance.markRepoAsRead).toBeDefined();
 
     // Get Avatar
     var avatar = instance.getAvatar();
@@ -72,6 +75,82 @@ describe('Test for Repository Component', function () {
 
     // Open Browser
     instance.openBrowser();
+
+  });
+
+  it('Should mark a repo as read - successfully', function () {
+
+    var repoDetails = [{
+      'repository': {
+        'name': 'gitify',
+        'full_name': 'ekonstantinidis/gitify',
+        'owner': {
+          'login': 'ekonstantinidis',
+          'avatar_url': 'http://avatar.url'
+        }
+      },
+      'subject': {
+        'type': 'Issue'
+      }
+    }];
+
+    var instance = TestUtils.renderIntoDocument(
+      <Repository
+        repo={repoDetails}
+        repoName='ekonstantinidis/gitify'
+        key='ekonstantinidis/gitify' />
+    );
+
+    expect(instance.state.isRead).toBeFalsy();
+    expect(instance.markRepoAsRead).toBeDefined();
+
+    var superagent = require('superagent');
+    superagent.__setResponse(200, 'ok', {}, false);
+
+    // Mark Repo as Read
+    instance.markRepoAsRead();
+    jest.runAllTimers();
+
+    expect(instance.state.isRead).toBeTruthy();
+
+  });
+
+  it('Should mark a repo as read - fail', function () {
+
+    var repoDetails = [{
+      'repository': {
+        'name': 'gitify',
+        'full_name': 'ekonstantinidis/gitify',
+        'owner': {
+          'login': 'ekonstantinidis',
+          'avatar_url': 'http://avatar.url'
+        }
+      },
+      'subject': {
+        'type': 'Issue'
+      }
+    }];
+
+    var instance = TestUtils.renderIntoDocument(
+      <Repository
+        repo={repoDetails}
+        repoName='ekonstantinidis/gitify'
+        key='ekonstantinidis/gitify' />
+    );
+
+    expect(instance.state.isRead).toBeFalsy();
+    expect(instance.state.errors).toBeFalsy();
+    expect(instance.markRepoAsRead).toBeDefined();
+
+    var superagent = require('superagent');
+    superagent.__setResponse(400, false);
+
+    // Mark Repo as Read
+    instance.markRepoAsRead();
+    jest.runAllTimers();
+
+    expect(instance.state.isRead).toBeFalsy();
+    expect(instance.state.errors).toBeTruthy();
 
   });
 
