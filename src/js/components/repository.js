@@ -35,7 +35,7 @@ var Repository = React.createClass({
           // Notification Read
           self.setState({
             isRead: true,
-            erros: false
+            errors: false
           });
         } else {
           self.setState({
