@@ -29,7 +29,7 @@ var Repository = React.createClass({
     var repoId = this.props.repo[0].repository.name;
 
     apiRequests
-      .putAuth('https://api.github.com/repos22/' + loginId + '/' + repoId + '/notifications', {})
+      .putAuth('https://api.github.com/repos/' + loginId + '/' + repoId + '/notifications', {})
       .end(function (err, response) {
         if (response && response.ok) {
           // Notification Read
