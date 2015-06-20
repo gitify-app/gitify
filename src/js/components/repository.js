@@ -72,7 +72,7 @@ var Repository = React.createClass({
 
         {this.state.errors ?
           <div className="alert alert-danger">
-            <strong>Oops!</strong> We couldn't mark this repo
+            <strong>Oops!</strong> We couldn't mark this repo as read.
           </div> : null
         }
 
