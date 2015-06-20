@@ -17,6 +17,8 @@
 @White: #ffffff;
 @LightGray: #f5f5f5;
 
+@ErrorColor: #DB423C;
+
 /* @end Colors */
 
 /* @group Typography */
@@ -118,6 +120,12 @@
 /* @group Bootstrap Overrides */
 
 @navbar-height: 35px;
+
+@alert-padding: 8px;
+@alert-border-radius: 0;
+@alert-danger-bg: @ErrorColor;
+@alert-danger-text: @White;
+
 @octicons-font-path: "../../build/fonts";
 
 /* @end Bootstrap Overrides */
@@ -167,6 +175,12 @@ html, body {
 
 input {
   outline: none;
+}
+
+.alert {
+  border: 0;
+  text-align: center;
+  margin-bottom: 0;
 }
 
 /* @end Misc */

@@ -9,7 +9,8 @@ var Repository = React.createClass({
 
   getInitialState: function () {
     return {
-      isRead: false
+      isRead: false,
+      errors: false
     };
   },
 
@@ -28,16 +29,19 @@ var Repository = React.createClass({
     var repoId = this.props.repo[0].repository.name;
 
     apiRequests
-      .putAuth('https://api.github.com/repos/' + loginId + '/' + repoId + '/notifications', {})
+      .putAuth('https://api.github.com/repos22/' + loginId + '/' + repoId + '/notifications', {})
       .end(function (err, response) {
         if (response && response.ok) {
           // Notification Read
           self.setState({
-            isRead: true
+            isRead: true,
+            erros: false
           });
         } else {
-          // Error - Show messages.
-          // Show appropriate message
+          self.setState({
+            isRead: false,
+            errors: true
+          });
         }
       });
 
@@ -65,6 +69,12 @@ var Repository = React.createClass({
             <span className='octicon octicon-check' onClick={this.markRepoAsRead} />
           </div>
         </div>
+
+        {this.state.errors ?
+          <div className="alert alert-danger">
+            <strong>Oops!</strong> We couldn't mark this repo
+          </div> : null
+        }
 
         {this.props.repo.map(function (obj) {
           return <SingleNotification isRead={self.state.isRead} notification={obj} key={obj.id} />;
