@@ -120,6 +120,7 @@
   },
   "homepage": "https://github.com/ekonstantinidis/gitify",
   "dependencies": {
+    "auto-launch": "^0.1.18",
     "bootstrap": "=3.3.4",
     "browserify": "=10.2.1",
     "font-awesome": "=4.3.0",

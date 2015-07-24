@@ -11,7 +11,8 @@ var SettingsStore = Reflux.createStore({
       settings = {
         participating: false,
         playSound: true,
-        showNotifications: true
+        showNotifications: true,
+        openAtStartup: false
       };
     }
 
@@ -28,6 +29,9 @@ var SettingsStore = Reflux.createStore({
     if (!settings.showNotifications) {
       settings.showNotifications = true;
     }
+    if (!settings.openAtStartup) {
+      settings.openAtStartup = false;
+    }
 
     this._settings = settings;
     window.localStorage.setItem('settings', JSON.stringify(this._settings));
@@ -41,6 +45,13 @@ var SettingsStore = Reflux.createStore({
     this._settings[setting] = value;
     window.localStorage.setItem('settings', JSON.stringify(this._settings));
     this.trigger(this._settings);
+    if(setting == 'openAtStartup') this.handleStartup(value);
+  },
+
+  handleStartup: function(value) {
+    var ipc = window.require('ipc');
+    var method = (value) ? 'enable' : 'disable';
+    ipc.sendSync('startup-'+method);
   }
 
 });

@@ -12,7 +12,8 @@ var SettingsPage = React.createClass({
     return {
       participating: settings.participating,
       playSound: settings.playSound,
-      showNotifications: settings.showNotifications
+      showNotifications: settings.showNotifications,
+      openAtStartup: settings.openAtStartup
     };
   },
 
@@ -49,6 +50,14 @@ var SettingsPage = React.createClass({
             <Toggle
               defaultChecked={this.state.showNotifications}
               onChange={this.toggleSetting.bind(this, 'showNotifications')} />
+          </div>
+        </div>
+        <div className='row'>
+          <div className='col-xs-8'>Open at startup</div>
+          <div className='col-xs-4'>
+            <Toggle
+              defaultChecked={this.state.openAtStartup}
+              onChange={this.toggleSetting.bind(this, 'openAtStartup')} />
           </div>
         </div>
         <div className='row'>
