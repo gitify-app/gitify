@@ -45,13 +45,15 @@ var SettingsStore = Reflux.createStore({
     this._settings[setting] = value;
     window.localStorage.setItem('settings', JSON.stringify(this._settings));
     this.trigger(this._settings);
-    if(setting == 'openAtStartup') this.handleStartup(value);
+    if(setting == 'openAtStartup') {
+      this.handleStartup(value);
+    }
   },
 
-  handleStartup: function(value) {
+  handleStartup: function (value) {
     var ipc = window.require('ipc');
-    var method = (value) ? 'enable' : 'disable';
-    ipc.sendSync('startup-'+method);
+    var method = (value) ? 'startup-enable' : 'startup-disable';
+    ipc.sendSync(method);
   }
 
 });
