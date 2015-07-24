@@ -53,7 +53,7 @@ var SettingsStore = Reflux.createStore({
   handleStartup: function (value) {
     var ipc = window.require('ipc');
     var method = (value) ? 'startup-enable' : 'startup-disable';
-    ipc.sendSync(method);
+    ipc.send(method);
   }
 
 });
