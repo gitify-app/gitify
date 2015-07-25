@@ -17,6 +17,9 @@ describe('Tests for SettingsStore', function () {
       return {
         sendChannel: function () {
           return;
+        },
+        send: function () {
+          return;
         }
       };
     };
