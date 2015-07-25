@@ -1,3 +1,5 @@
+var ipc = window.require('ipc');
+
 var Reflux = require('reflux');
 var Actions = require('../actions/actions');
 
@@ -51,7 +53,6 @@ var SettingsStore = Reflux.createStore({
   },
 
   handleStartup: function (value) {
-    var ipc = window.require('ipc');
     var method = (value) ? 'startup-enable' : 'startup-disable';
     ipc.send(method);
   }

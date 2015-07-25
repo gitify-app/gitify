@@ -17,6 +17,9 @@ describe('Tests for SettingsStore', function () {
       return {
         sendChannel: function () {
           return;
+        },
+        send: function () {
+          return;
         }
       };
     };
@@ -39,7 +42,6 @@ describe('Tests for SettingsStore', function () {
   it('should get the settings', function () {
 
     spyOn(SettingsStore, 'trigger');
-
     expect(SettingsStore.getSettings().participating).toBe(false);
 
   });
@@ -47,10 +49,16 @@ describe('Tests for SettingsStore', function () {
   it('should set a setting', function () {
 
     spyOn(SettingsStore, 'trigger');
-
     SettingsStore.onSetSetting('participating', true);
-
     expect(SettingsStore.getSettings().participating).toBe(true);
+
+  });
+
+  it('should set the setting: openAtStartup ', function () {
+
+    spyOn(SettingsStore, 'trigger');
+    SettingsStore.onSetSetting('openAtStartup', true);
+    expect(SettingsStore.getSettings().openAtStartup).toBe(true);
 
   });
 
