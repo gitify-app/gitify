@@ -7,14 +7,15 @@ require('crash-reporter').start();
 var Menu = require('menu');
 var Tray = require('tray');
 var BrowserWindow = require('browser-window');
-var AutoLaunch = require('auto-launch')
-  , start = new AutoLaunch({
-      name: 'Gitify',
-      path: process.execPath.match(/.*?\.app/)[0]
-  });
+var AutoLaunch = require('auto-launch');
 
 var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
+
+var autoStart = new AutoLaunch({
+    name: 'Gitify',
+    path: process.execPath.match(/.*?\.app/)[0]
+});
 
 app.on('ready', function(){
   var appIcon = new Tray(iconIdle);
@@ -100,11 +101,11 @@ app.on('ready', function(){
   });
 
   ipc.on('startup-enable', function() {
-    start.enable();
+    autoStart.enable();
   });
 
   ipc.on('startup-disable', function() {
-    start.disable();
+    autoStart.disable();
   });
 
   ipc.on('app-quit', function() {
