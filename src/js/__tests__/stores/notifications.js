@@ -133,7 +133,7 @@ describe('Tests for NotificationsStore', function () {
 
   });
 
-  it('should FAIL to create a booking via the API', function () {
+  it('should FAIL to get the notifications from the GitHub API', function () {
 
     spyOn(NotificationsStore, 'trigger');
     spyOn(NotificationsStore, 'onGetNotificationsFailed');
