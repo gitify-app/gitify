@@ -157,6 +157,8 @@ describe('Test for Notification Component', function () {
 
     instance.markAsRead();
 
+    jest.runAllTimers();
+
   });
 
   it('Should fail to mark a notification as read succesfully', function () {
@@ -181,9 +183,10 @@ describe('Test for Notification Component', function () {
         key={notification.id} />);
 
     var superagent = require('superagent');
-    superagent.__setResponse(400, 'notOk', {}, false);
+    superagent.__setResponse(400, false, {}, false);
 
     instance.markAsRead();
+    expect(instance.isRead).toBeFalsy();
 
   });
 
