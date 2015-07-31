@@ -55,7 +55,7 @@ describe('Test for Notifications Component', function () {
     var instance = TestUtils.renderIntoDocument(<Notifications />);
     expect(instance.state.loading).toBeTruthy();
 
-    var response = [[{
+    var response = [{
       'repository': {
         'full_name': 'ekonstantinidis/gitify',
         'owner': {
@@ -65,7 +65,7 @@ describe('Test for Notifications Component', function () {
       'subject': {
         'type': 'Issue'
       }
-    }]];
+    }];
 
     NotificationsStore.trigger(response);
     expect(instance.state.notifications.length).toBe(1);

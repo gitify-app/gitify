@@ -107,10 +107,10 @@ describe('Tests for NotificationsStore', function () {
 
     jest.runAllTimers();
 
-    var repository = NotificationsStore._notifications[0][0].repository;
-    var subject = NotificationsStore._notifications[0][0].subject;
+    var repository = NotificationsStore._notifications[0].repository;
+    var subjectTitle = NotificationsStore._notifications[0].subject.title;
     expect(repository.full_name).toBe('octocat/Hello-World');
-    expect(subject.title).toBe('Greetings');
+    expect(subjectTitle).toBe('Greetings');
     expect(NotificationsStore.trigger).toHaveBeenCalled();
 
   });
