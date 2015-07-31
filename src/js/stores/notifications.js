@@ -54,19 +54,13 @@ var NotificationsStore = Reflux.createStore({
   },
 
   onRemoveNotification: function (notification) {
-
     var self = this;
 
-    console.log(this._notifications.length);
     this._notifications = _.without(this._notifications, notification);
-    console.log(this._notifications.length);
-
-    // this.trigger(this._notifications);
 
     setTimeout(function () {
-      self.trigger(this._notifications);
+      self.trigger(self._notifications);
     }, 800);
-
   }
 
 });
