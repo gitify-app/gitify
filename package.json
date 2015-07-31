@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "build-js": "mkdir -p build/js && browserify -t reactify src/js/app.js -o build/js/app.js",
-    "build": "ulimit -n 512 && npm install && ulimit -n 512 && grunt build && npm run build-js",
+    "build": "ulimit -n 512 && npm install && grunt build && npm run build-js",
     "watch-js": "watchify -t reactify src/js/app.js -o build/js/app.js -v",
     "watch": "grunt build && npm build && npm run watch-js | grunt watch",
     "start": "electron .",

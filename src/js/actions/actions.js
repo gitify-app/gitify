@@ -5,6 +5,7 @@ var Actions = Reflux.createActions({
   'login': {},
   'logout': {},
   'getNotifications': {asyncResult: true},
+  'removeNotification': {},
   'isNewNotification': {},
   'updateSearchTerm': {},
   'clearSearchTerm': {},

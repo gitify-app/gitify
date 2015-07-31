@@ -84,8 +84,13 @@ var Notifications = React.createClass({
         }
 
         if (notifications.length) {
+
+          var groupedNotifications = _.groupBy(notifications, function (object) {
+            return object.repository.full_name;
+          });
+
           notifications = (
-            notifications.map(function (obj) {
+            _.map(groupedNotifications, function (obj) {
               var repoFullName = obj[0].repository.full_name;
               return <Repository repo={obj} repoName={repoFullName} key={repoFullName} />;
             })
