@@ -9,7 +9,7 @@
     "watch-js": "watchify -t babelify src/js/app.js -o build/js/app.js -v",
     "watch": "npm run build && grunt build && npm run watch-js & grunt watch",
     "start": "electron .",
-    "dist": "rm -rf Gitify.app/ && electron-packager . Gitify --platform=darwin --arch=x64 --version=0.30.2 --icon=images/app-icon.icns --prune --ignore=src",
+    "dist": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.30.2 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
     "test": "jsxhint --reporter=node_modules/jshint-stylish 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js' && jscs 'src/js/' && jest"
   },
   "jshintConfig": {
