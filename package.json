@@ -130,7 +130,7 @@
     "react-toggle": "=1.2.3",
     "react-tools": "=0.13.3",
     "reactify": "=1.1.1",
-    "reflux": "=0.2.11",
+    "reflux": "=0.2.7",
     "reloading": "0.0.6",
     "superagent": "=1.2.0",
     "underscore": "=1.8.3",
