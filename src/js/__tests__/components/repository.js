@@ -45,6 +45,7 @@ describe('Test for Repository Component', function () {
   it('Should render the Repository component', function () {
 
     var repoDetails = [{
+      'id': '123',
       'repository': {
         'full_name': 'ekonstantinidis/gitify',
         'owner': {
@@ -81,6 +82,7 @@ describe('Test for Repository Component', function () {
   it('Should mark a repo as read - successfully', function () {
 
     var repoDetails = [{
+      'id': '123',
       'repository': {
         'name': 'gitify',
         'full_name': 'ekonstantinidis/gitify',
@@ -118,6 +120,7 @@ describe('Test for Repository Component', function () {
   it('Should mark a repo as read - fail', function () {
 
     var repoDetails = [{
+      'id': '123',
       'repository': {
         'name': 'gitify',
         'full_name': 'ekonstantinidis/gitify',
