@@ -4,10 +4,10 @@
   "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
-    "build-js": "mkdir -p build/js && browserify -t reactify src/js/app.js -o build/js/app.js",
+    "build-js": "mkdir -p build/js && browserify -t babelify src/js/app.js -o build/js/app.js",
     "build": "ulimit -n 512 && npm install && grunt build && npm run build-js",
-    "watch-js": "watchify -t reactify src/js/app.js -o build/js/app.js -v",
-    "watch": "grunt build && npm build && npm run watch-js | grunt watch",
+    "watch-js": "watchify -t babelify src/js/app.js -o build/js/app.js -v",
+    "watch": "npm run build && grunt build && npm run watch-js & grunt watch",
     "start": "electron .",
     "dist": "rm -rf Gitify.app/ && electron-packager . Gitify --platform=darwin --arch=x64 --version=0.30.2 --icon=images/app-icon.icns --prune --ignore=src",
     "test": "jsxhint --reporter=node_modules/jshint-stylish 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js' && jscs 'src/js/' && jest"
@@ -121,6 +121,7 @@
   "homepage": "https://github.com/ekonstantinidis/gitify",
   "dependencies": {
     "auto-launch": "=0.1.18",
+    "babelify": "=6.1.3",
     "bootstrap": "=3.3.5",
     "browserify": "=11.0.1",
     "font-awesome": "=4.4.0",
@@ -129,7 +130,6 @@
     "react-router": "=0.13.3",
     "react-toggle": "=1.2.3",
     "react-tools": "=0.13.3",
-    "reactify": "=1.1.1",
     "reflux": "=0.2.7",
     "reloading": "0.0.6",
     "superagent": "=1.2.0",
