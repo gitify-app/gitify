@@ -2,6 +2,7 @@ var React = require('react');
 var remote = window.require('remote');
 var shell = remote.require('shell');
 
+var Actions = require('../actions/actions');
 var apiRequests = require('../utils/api-requests');
 
 var NotificationItem = React.createClass({
@@ -28,7 +29,9 @@ var NotificationItem = React.createClass({
 
   markAsRead: function () {
     var self = this;
+
     if (this.state.read) { return; }
+
     apiRequests
       .patchAuth('https://api.github.com/notifications/threads/' + this.props.notification.id)
       .end(function (err, response) {
@@ -37,9 +40,13 @@ var NotificationItem = React.createClass({
           self.setState({
             isRead: true
           });
+          Actions.removeNotification(self.props.notification);
         } else {
           // Error - Show messages.
           // Show appropriate message
+          self.setState({
+            isRead: false
+          });
         }
       });
   },

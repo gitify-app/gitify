@@ -3,6 +3,7 @@ var remote = window.require('remote');
 var shell = remote.require('shell');
 
 var SingleNotification = require('../components/notification');
+var Actions = require('../actions/actions');
 var apiRequests = require('../utils/api-requests');
 
 var Repository = React.createClass({
@@ -27,6 +28,7 @@ var Repository = React.createClass({
     var self = this;
     var loginId = this.props.repo[0].repository.owner.login;
     var repoId = this.props.repo[0].repository.name;
+    var fullName = this.props.repo[0].repository.full_name;
 
     apiRequests
       .putAuth('https://api.github.com/repos/' + loginId + '/' + repoId + '/notifications', {})
@@ -37,6 +39,8 @@ var Repository = React.createClass({
             isRead: true,
             errors: false
           });
+
+          Actions.removeRepoNotifications(fullName);
         } else {
           self.setState({
             isRead: false,

@@ -107,10 +107,10 @@ describe('Tests for NotificationsStore', function () {
 
     jest.runAllTimers();
 
-    var repository = NotificationsStore._notifications[0][0].repository;
-    var subject = NotificationsStore._notifications[0][0].subject;
+    var repository = NotificationsStore._notifications[0].repository;
+    var subjectTitle = NotificationsStore._notifications[0].subject.title;
     expect(repository.full_name).toBe('octocat/Hello-World');
-    expect(subject.title).toBe('Greetings');
+    expect(subjectTitle).toBe('Greetings');
     expect(NotificationsStore.trigger).toHaveBeenCalled();
 
   });
@@ -133,7 +133,7 @@ describe('Tests for NotificationsStore', function () {
 
   });
 
-  it('should FAIL to create a booking via the API', function () {
+  it('should FAIL to get the notifications from the GitHub API', function () {
 
     spyOn(NotificationsStore, 'trigger');
     spyOn(NotificationsStore, 'onGetNotificationsFailed');
@@ -145,6 +145,55 @@ describe('Tests for NotificationsStore', function () {
 
     jest.runAllTimers();
 
+    expect(NotificationsStore.trigger).toHaveBeenCalled();
+
+  });
+
+  it('should mark a notification as read - remove single notification from store', function () {
+
+    spyOn(NotificationsStore, 'trigger');
+
+    NotificationsStore._notifications = ['abc', 'def'];
+
+    expect(NotificationsStore._notifications.length).toBe(2);
+
+    Actions.removeNotification('abc');
+
+    jest.runAllTimers();
+
+    expect(NotificationsStore._notifications.length).toBe(1);
+    expect(NotificationsStore.trigger).toHaveBeenCalled();
+
+  });
+
+  it('should mark a repo as read - remove notifications from store', function () {
+
+    spyOn(NotificationsStore, 'trigger');
+
+    NotificationsStore._notifications = [
+      {
+        'id': '1',
+        'repository': {
+          'full_name': 'ekonstantinidis/gitify'
+        },
+        'unread': true
+      },
+      {
+        'id': '2',
+        'repository': {
+          'full_name': 'ekonstantinidis/gitify'
+        },
+        'reason': 'subscribed'
+      }
+    ];
+
+    expect(NotificationsStore._notifications.length).toBe(2);
+
+    Actions.removeRepoNotifications('ekonstantinidis/gitify');
+
+    jest.runAllTimers();
+
+    expect(NotificationsStore._notifications.length).toBe(0);
     expect(NotificationsStore.trigger).toHaveBeenCalled();
 
   });

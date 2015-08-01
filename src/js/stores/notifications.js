@@ -44,22 +44,35 @@ var NotificationsStore = Reflux.createStore({
   },
 
   onGetNotificationsCompleted: function (notifications) {
-    var groupedNotifications = _.groupBy(notifications, function (object) {
-      return object.repository.full_name;
-    });
-
-    var array = [];
-    _.map(groupedNotifications, function (obj) {
-      array.push(obj);
-    });
-
-    this._notifications = array;
+    this._notifications = notifications;
     this.trigger(this._notifications);
   },
 
   onGetNotificationsFailed: function () {
     this._notifications = [];
     this.trigger(this._notifications);
+  },
+
+  onRemoveNotification: function (notification) {
+    var self = this;
+
+    this._notifications = _.without(this._notifications, notification);
+
+    setTimeout(function () {
+      self.trigger(self._notifications);
+    }, 800);
+  },
+
+  onRemoveRepoNotifications: function (repoFullName) {
+    var self = this;
+
+    this._notifications = _.reject(this._notifications, function (obj) {
+      return obj.repository.full_name == repoFullName;
+    });
+
+    setTimeout(function () {
+      self.trigger(self._notifications);
+    }, 800);
   }
 
 });

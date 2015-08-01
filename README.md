@@ -26,7 +26,6 @@ You can download Gitify from the [releases](https://github.com/ekonstantinidis/g
 
 
 ### Installation
-If you encounter any issues with `npm install`, then run `ulimit -n 512`.
 
     npm install
 
