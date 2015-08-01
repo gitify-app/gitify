@@ -22,16 +22,19 @@ var SettingsStore = Reflux.createStore({
       settings = JSON.parse(settings);
     }
 
-    if (!settings.participating) {
+    if (typeof settings.participating !== 'boolean') {
       settings.participating = false;
     }
-    if (!settings.playSound) {
+
+    if (typeof settings.playSound !== 'boolean') {
       settings.playSound = true;
     }
-    if (!settings.showNotifications) {
+
+    if (typeof settings.showNotifications !== 'boolean') {
       settings.showNotifications = true;
     }
-    if (!settings.openAtStartup) {
+
+    if (typeof settings.openAtStartup !== 'boolean') {
       settings.openAtStartup = false;
     }
 
