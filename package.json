@@ -1,6 +1,6 @@
 {
   "name": "gitify",
-  "version": "0.0.1",
+  "version": "0.0.14",
   "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
@@ -121,34 +121,34 @@
   "homepage": "https://github.com/ekonstantinidis/gitify",
   "dependencies": {
     "auto-launch": "=0.1.18",
-    "bootstrap": "=3.3.4",
-    "browserify": "=10.2.1",
-    "font-awesome": "=4.3.0",
-    "octicons": "=2.2.0",
+    "bootstrap": "=3.3.5",
+    "browserify": "=11.0.1",
+    "font-awesome": "=4.4.0",
+    "octicons": "=2.4.1",
     "react": "=0.13.3",
     "react-router": "=0.13.3",
     "react-toggle": "=1.2.3",
     "react-tools": "=0.13.3",
     "reactify": "=1.1.1",
-    "reflux": "=0.2.7",
+    "reflux": "=0.2.11",
     "reloading": "0.0.6",
     "superagent": "=1.2.0",
     "underscore": "=1.8.3",
-    "watchify": "=3.2.1"
+    "watchify": "=3.3.1"
   },
   "devDependencies": {
-    "electron-packager": "=4.1.2",
+    "electron-packager": "=5.0.1",
     "electron-prebuilt": "=0.30.2",
-    "esprima-fb": "=15001.1.0-dev-harmony-fb",
+    "esprima-fb": "^15001.1001.0-dev-harmony-fb",
     "grunt": "=0.4.5",
     "grunt-contrib-clean": "=0.6.0",
     "grunt-contrib-copy": "=0.8.0",
     "grunt-contrib-less": "=1.0.1",
     "grunt-contrib-watch": "=0.6.1",
     "jest-cli": "=0.4.17",
-    "jscs": "^1.13.1",
-    "jshint-stylish": "=1.0.2",
-    "jsxhint": "=0.15.0",
+    "jscs": "=2.0.0",
+    "jshint-stylish": "=2.0.1",
+    "jsxhint": "=0.15.1",
     "less": "=2.5.1"
   }
 }
