@@ -149,6 +149,23 @@ describe('Tests for NotificationsStore', function () {
 
   });
 
+  it('should mark a notification as read - remove single notification from store', function () {
+
+    spyOn(NotificationsStore, 'trigger');
+
+    NotificationsStore._notifications = ['abc', 'def'];
+
+    expect(NotificationsStore._notifications.length).toBe(2);
+
+    Actions.removeNotification('abc');
+
+    jest.runAllTimers();
+
+    expect(NotificationsStore._notifications.length).toBe(1);
+    expect(NotificationsStore.trigger).toHaveBeenCalled();
+
+  });
+
   it('should mark a repo as read - remove notifications from store', function () {
 
     spyOn(NotificationsStore, 'trigger');
