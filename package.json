@@ -10,7 +10,7 @@
     "watch": "grunt build && npm build && npm run watch-js | grunt watch",
     "start": "electron .",
     "dist": "rm -rf Gitify.app/ && electron-packager . Gitify --platform=darwin --arch=x64 --version=0.30.2 --icon=images/app-icon.icns --prune --ignore=src",
-    "test": "jsxhint --reporter node_modules/jshint-stylish/stylish.js 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js' && jscs 'src/js/' && jest"
+    "test": "jsxhint --reporter=node_modules/jshint-stylish 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js' && jscs 'src/js/' && jest"
   },
   "jshintConfig": {
     "browserify": true,
