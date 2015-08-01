@@ -73,7 +73,7 @@ var NotificationsStore = Reflux.createStore({
     setTimeout(function () {
       self.trigger(self._notifications);
     }, 800);
-  },
+  }
 
 });
 
