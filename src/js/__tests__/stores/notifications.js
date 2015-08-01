@@ -149,4 +149,36 @@ describe('Tests for NotificationsStore', function () {
 
   });
 
+  it('should mark a repo as read - remove notifications from store', function () {
+
+    spyOn(NotificationsStore, 'trigger');
+
+    NotificationsStore._notifications = [
+      {
+        'id': '1',
+        'repository': {
+          'full_name': 'ekonstantinidis/gitify',
+        },
+        'unread': true
+      },
+      {
+        'id': '2',
+        'repository': {
+          'full_name': 'ekonstantinidis/gitify',
+        },
+        'reason': 'subscribed'
+      }
+    ];
+
+    expect(NotificationsStore._notifications.length).toBe(2);
+
+    Actions.removeRepoNotifications('ekonstantinidis/gitify');
+
+    jest.runAllTimers();
+
+    expect(NotificationsStore._notifications.length).toBe(0);
+    expect(NotificationsStore.trigger).toHaveBeenCalled();
+
+  });
+
 });
