@@ -157,14 +157,14 @@ describe('Tests for NotificationsStore', function () {
       {
         'id': '1',
         'repository': {
-          'full_name': 'ekonstantinidis/gitify',
+          'full_name': 'ekonstantinidis/gitify'
         },
         'unread': true
       },
       {
         'id': '2',
         'repository': {
-          'full_name': 'ekonstantinidis/gitify',
+          'full_name': 'ekonstantinidis/gitify'
         },
         'reason': 'subscribed'
       }
