@@ -18,7 +18,7 @@ var Login = React.createClass({
     // Start Login
     var options = {
       client_id: '27a352516d3341cee376',
-      client_secret: '626a199b0656c55b2cbf3a3199e573ce17f549bc',
+      client_secret: '',
       scope: ['user:email', 'notifications']
     };
 
