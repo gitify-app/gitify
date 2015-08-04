@@ -1,17 +1,17 @@
 {
   "name": "gitify",
-  "version": "0.0.1",
+  "version": "0.0.14",
   "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
-    "build-js": "mkdir -p build/js && browserify -t reactify src/js/app.js -o build/js/app.js",
-    "build": "npm install && mkdir -p build/js && grunt build && npm run build-js",
-    "watch-js": "watchify -t reactify src/js/app.js -o build/js/app.js -v",
-    "watch": "grunt build && npm build && npm run watch-js | grunt watch",
+    "build-js": "mkdir -p build/js && browserify -t babelify src/js/app.js -o build/js/app.js",
+    "build": "ulimit -n 512 && npm install && grunt build && npm run build-js",
+    "watch-js": "watchify -t babelify src/js/app.js -o build/js/app.js -v",
+    "watch": "npm run build && grunt build && npm run watch-js & grunt watch",
     "start": "electron .",
-    "dist": "rm -rf Gitify.app/ && electron-packager . Gitify --platform=darwin --arch=x64 --version=0.27.1 --icon=images/app-icon.icns --prune --ignore=src",
+    "dist": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.30.2 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
     "dist-linux": "rm -rf Gitify-linux/ && electron-packager . Gitify --platform=linux --arch=x64 --version=0.27.1 --icon=images/app-icon.icns --prune --ignore=src",
-    "test": "jsxhint --reporter node_modules/jshint-stylish/stylish.js 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js' && jscs 'src/js/' && jest",
+    "test": "jsxhint --reporter=node_modules/jshint-stylish 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js' && jscs 'src/js/' && jest",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "jshintConfig": {
@@ -70,9 +70,15 @@
       "src/js/components/notification.js": true,
       "src/js/components/notifications.js": true,
       "src/js/components/repository.js": true,
+      "src/js/components/settings.js": true,
       "src/js/components/footer.js": true,
+      "src/js/components/search-input.js": true,
+      "src/js/components/settings.js": true,
       "src/js/stores/auth.js": true,
-      "src/js/stores/notifications.js": true
+      "src/js/stores/notifications.js": true,
+      "src/js/stores/search.js": true,
+      "src/js/stores/settings.js": true,
+      "src/js/stores/sound-notification.js": true
     },
     "unmockedModulePathPatterns": [
       "node_modules/react",
@@ -100,39 +106,51 @@
     "app"
   ],
   "author": "Emmanouil Konstantinidis",
+  "contributors": [
+    {
+      "name": "Emmanouil Konstantinidis",
+      "url": "https://githib.com/ekonstantinidis"
+    },
+    {
+      "name": "Jake 'Sid' Smith",
+      "url": "https://githib.com/JakeSidSmith"
+    }
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ekonstantinidis/gitify/issues"
   },
   "homepage": "https://github.com/ekonstantinidis/gitify",
   "dependencies": {
-    "bootstrap": "=3.3.4",
-    "browserify": "=10.2.1",
-    "font-awesome": "=4.3.0",
-    "octicons": "=2.2.0",
+    "auto-launch": "=0.1.18",
+    "babelify": "=6.1.3",
+    "bootstrap": "=3.3.5",
+    "browserify": "=11.0.1",
+    "font-awesome": "=4.4.0",
+    "octicons": "=2.4.1",
     "react": "=0.13.3",
     "react-router": "=0.13.3",
+    "react-toggle": "=1.2.3",
     "react-tools": "=0.13.3",
-    "reactify": "=1.1.1",
     "reflux": "=0.2.7",
     "reloading": "0.0.6",
     "superagent": "=1.2.0",
     "underscore": "=1.8.3",
-    "watchify": "=3.2.1"
+    "watchify": "=3.3.1"
   },
   "devDependencies": {
-    "electron-packager": "=4.1.2",
-    "electron-prebuilt": "=0.27.1",
-    "esprima-fb": "=15001.1.0-dev-harmony-fb",
+    "electron-packager": "=5.0.1",
+    "electron-prebuilt": "=0.30.2",
+    "esprima-fb": "^15001.1001.0-dev-harmony-fb",
     "grunt": "=0.4.5",
     "grunt-contrib-clean": "=0.6.0",
     "grunt-contrib-copy": "=0.8.0",
     "grunt-contrib-less": "=1.0.1",
     "grunt-contrib-watch": "=0.6.1",
-    "jest-cli": "=0.4.5",
-    "jscs": "^1.13.1",
-    "jshint-stylish": "=1.0.2",
-    "jsxhint": "=0.15.0",
+    "jest-cli": "=0.4.17",
+    "jscs": "=2.0.0",
+    "jshint-stylish": "=2.0.1",
+    "jsxhint": "=0.15.1",
     "less": "=2.5.1"
   }
 }

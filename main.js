@@ -7,9 +7,15 @@ require('crash-reporter').start();
 var Menu = require('menu');
 var Tray = require('tray');
 var BrowserWindow = require('browser-window');
+var AutoLaunch = require('auto-launch');
 
 var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
+
+var autoStart = new AutoLaunch({
+    name: 'Gitify',
+    path: process.execPath.match(/.*?\.app/)[0]
+});
 
 app.on('ready', function(){
   var appIcon = new Tray(iconIdle);
@@ -69,6 +75,11 @@ app.on('ready', function(){
           label: 'Paste',
           accelerator: 'Command+V',
           selector: 'paste:'
+        },
+        {
+          label: 'Select All',
+          accelerator: 'Command+A',
+          selector: 'selectAll:'
         }
       ]
     }];
@@ -92,6 +103,14 @@ app.on('ready', function(){
     } else {
       appIcon.setImage(iconIdle);
     }
+  });
+
+  ipc.on('startup-enable', function() {
+    autoStart.enable();
+  });
+
+  ipc.on('startup-disable', function() {
+    autoStart.disable();
   });
 
   ipc.on('app-quit', function() {

@@ -1,18 +1,22 @@
 var React = require('react');
 var remote = window.require('remote');
 var shell = remote.require('shell');
-var _ = require('underscore');
 
-var AuthStore = require('../stores/auth');
+var Actions = require('../actions/actions');
 var apiRequests = require('../utils/api-requests');
 
-var Notification = React.createClass({
+var NotificationItem = React.createClass({
 
   getInitialState: function () {
     return {
-      readClass: 'row notification',
-      read: false
+      isRead: this.props.isRead
     };
+  },
+
+  componentWillReceiveProps: function (nextProps) {
+    this.setState({
+      isRead: nextProps.isRead
+    });
   },
 
   openBrowser: function () {
@@ -25,19 +29,24 @@ var Notification = React.createClass({
 
   markAsRead: function () {
     var self = this;
+
     if (this.state.read) { return; }
+
     apiRequests
       .patchAuth('https://api.github.com/notifications/threads/' + this.props.notification.id)
       .end(function (err, response) {
         if (response && response.ok) {
           // Notification Read
           self.setState({
-            readClass: self.state.readClass + ' read',
-            read: true
+            isRead: true
           });
+          Actions.removeNotification(self.props.notification);
         } else {
           // Error - Show messages.
           // Show appropriate message
+          self.setState({
+            isRead: false
+          });
         }
       });
   },
@@ -49,12 +58,14 @@ var Notification = React.createClass({
       typeIconClass = 'octicon octicon-issue-opened';
     } else if (this.props.notification.subject.type == 'PullRequest') {
       typeIconClass = 'octicon octicon-git-pull-request';
+    } else if (this.props.notification.subject.type == 'Commit') {
+      typeIconClass = 'octicon octicon-git-commit';
     } else {
       typeIconClass = 'octicon octicon-question';
     }
 
     return (
-      <div className={this.state.readClass}>
+      <div className={this.state.isRead ? 'row notification read' : 'row notification'}>
         <div className='col-xs-1'><span className={typeIconClass} /></div>
         <div className='col-xs-10 subject' onClick={this.openBrowser}>
           {this.props.notification.subject.title}
@@ -67,4 +78,4 @@ var Notification = React.createClass({
   }
 });
 
-module.exports = Notification;
+module.exports = NotificationItem;

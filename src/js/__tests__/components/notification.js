@@ -34,6 +34,9 @@ describe('Test for Notification Component', function () {
       item: false,
       getItem: function () {
         return this.item;
+      },
+      setItem: function (item) {
+        this.item = item;
       }
     };
 
@@ -65,8 +68,7 @@ describe('Test for Notification Component', function () {
         notification={notification}
         key={notification.id} />);
 
-    expect(instance.state.readClass).toBe('row notification');
-    expect(instance.state.read).toBeFalsy();
+    expect(instance.state.isRead).toBeFalsy();
     expect(instance.openBrowser).toBeDefined();
     expect(instance.markAsRead).toBeDefined();
 
@@ -96,8 +98,7 @@ describe('Test for Notification Component', function () {
         notification={notification}
         key={notification.id} />);
 
-    expect(instance.state.readClass).toBe('row notification');
-    expect(instance.state.read).toBeFalsy();
+    expect(instance.state.isRead).toBeFalsy();
     expect(instance.openBrowser).toBeDefined();
     expect(instance.markAsRead).toBeDefined();
 
@@ -124,8 +125,7 @@ describe('Test for Notification Component', function () {
         notification={notification}
         key={notification.id} />);
 
-    expect(instance.state.readClass).toBe('row notification');
-    expect(instance.state.read).toBeFalsy();
+    expect(instance.state.isRead).toBeFalsy();
     expect(instance.openBrowser).toBeDefined();
     expect(instance.markAsRead).toBeDefined();
 
@@ -157,6 +157,8 @@ describe('Test for Notification Component', function () {
 
     instance.markAsRead();
 
+    jest.runAllTimers();
+
   });
 
   it('Should fail to mark a notification as read succesfully', function () {
@@ -170,7 +172,7 @@ describe('Test for Notification Component', function () {
         }
       },
       'subject': {
-        'type': 'Issue',
+        'type': 'Commit',
         'url': 'http://www.github.com/ekonstantinidis/gitify/pulls/26/'
       }
     };
@@ -181,9 +183,10 @@ describe('Test for Notification Component', function () {
         key={notification.id} />);
 
     var superagent = require('superagent');
-    superagent.__setResponse(400, 'notOk', {}, false);
+    superagent.__setResponse(400, false, {}, false);
 
     instance.markAsRead();
+    expect(instance.isRead).toBeFalsy();
 
   });
 
