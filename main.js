@@ -42,6 +42,7 @@ app.on('ready', function(){
     appIcon.window = new BrowserWindow(defaults);
     appIcon.window.loadUrl('file://' + __dirname + '/index.html');
     appIcon.window.on('blur', hideWindow);
+    appIcon.window.setVisibleOnAllWorkspaces(true);
 
     initMenu();
   }
