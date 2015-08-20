@@ -11,6 +11,8 @@
 
 /* @group Colors */
 
+@ThemePrimary: #3893c6;
+
 @ThemeBlack: #262626;
 @ThemeGreen: #6cc644;
 
@@ -149,7 +151,7 @@
 
 /* @group Bootstrap Overrides */
 
-@navbar-height: 35px;
+@navbar-height: 45px;
 
 @alert-padding: 8px;
 @alert-border-radius: 0;
@@ -258,29 +260,37 @@ input {
 /* @group Navbar */
 
 .navigation {
-  height: @navbar-height;
-  background-color: @ThemeBlack;
+  background-color: @ThemePrimary;
   color: @White;
+  height: @navbar-height;
 
   div[class*="col-xs-"] {
     font-size: 16px;
-    line-height: @navbar-height;
+    line-height: 32px;
 
     &.left {
       .fa {
-        margin: 0 10px;
-      }
-    }
+        margin: 0 5px;
 
-    &.logo {
-      .img-responsive {
-        margin: 9px auto;
+        &.fa-refresh {
+          font-size: 14px;
+        }
+      }
+
+      .logo {
+        margin: 9px 5px 9px 0;
         max-width: 70px;
+        display: inline-block;
       }
     }
 
     &.right .fa {
       margin: 0 10px;
+
+      &.fa-chevron-left,
+      &.fa-search {
+        font-size: 14px;
+      }
     }
   }
 }

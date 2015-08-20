@@ -59,12 +59,16 @@ var Navigation = React.createClass({
     this.context.router.transitionTo('notifications');
   },
 
+  showSearch: function () {
+    console.log('Will display search...');
+  },
+
   appQuit: function () {
     ipc.sendChannel('app-quit');
   },
 
   render: function () {
-    var refreshIcon, logoutIcon, backIcon, settingsIcon, quitIcon;
+    var refreshIcon, logoutIcon, backIcon, settingsIcon, quitIcon, searchIcon;
     var loadingClass = this.state.loading ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
 
     if (this.state.authStatus) {
@@ -76,6 +80,9 @@ var Navigation = React.createClass({
       );
       settingsIcon = (
         <i className='fa fa-cog' onClick={this.goToSettings} />
+      );
+      searchIcon = (
+        <i className='fa fa-search' onClick={this.showSearch} />
       );
     } else {
       quitIcon = (
@@ -94,14 +101,13 @@ var Navigation = React.createClass({
     return (
       <div className='container-fluid'>
         <div className='row navigation'>
-          <div className='col-xs-4 left'>
-            {backIcon}
+          <div className='col-xs-6 left'>
+            <img className='img-responsive logo' src='images/logo-hor-white.png' />
             {refreshIcon}
           </div>
-          <div className='col-xs-4 logo'>
-            <img className='img-responsive' src='images/logo-hor-white.png' />
-          </div>
-          <div className='col-xs-4 right'>
+          <div className='col-xs-6 right'>
+            {backIcon}
+            {searchIcon}
             {settingsIcon}
             {logoutIcon}
             {quitIcon}
