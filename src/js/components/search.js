@@ -1,6 +1,3 @@
-var remote = window.require('remote');
-var shell = remote.require('shell');
-
 var React = require('react');
 var Reflux = require('reflux');
 var Actions = require('../actions/actions');
@@ -17,10 +14,6 @@ var Search = React.createClass({
 
   clearSearch: function () {
     Actions.clearSearchTerm();
-  },
-
-  openRepoBrowser: function () {
-    shell.openExternal('http://www.github.com/ekonstantinidis/gitify');
   },
 
   render: function () {

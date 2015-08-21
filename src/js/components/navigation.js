@@ -1,8 +1,10 @@
+var ipc = window.require('ipc');
+var remote = window.require('remote');
+var shell = remote.require('shell');
+
 var React = require('react');
 var Reflux = require('reflux');
 var Router = require('react-router');
-
-var ipc = window.require('ipc');
 
 var Actions = require('../actions/actions');
 var AuthStore = require('../stores/auth');
@@ -72,6 +74,10 @@ var Navigation = React.createClass({
     ipc.sendChannel('app-quit');
   },
 
+  openBrowser: function () {
+    shell.openExternal('http://www.github.com/ekonstantinidis/gitify');
+  },
+
   render: function () {
     var refreshIcon, logoutIcon, backIcon, settingsIcon, quitIcon, searchIcon;
     var loadingClass = this.state.loading ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
@@ -107,7 +113,10 @@ var Navigation = React.createClass({
       <div className='container-fluid'>
         <div className='row navigation'>
           <div className='col-xs-6 left'>
-            <img className='img-responsive logo' src='images/logo-hor-white.png' />
+            <img
+              className='img-responsive logo'
+              src='images/logo-hor-white.png'
+              onClick={this.openBrowser}/>
             {this.state.notifications.length ? (
               <span className='label label-success'>{this.state.notifications.length}</span>
               ) : null }
