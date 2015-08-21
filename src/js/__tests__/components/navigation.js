@@ -14,22 +14,35 @@ describe('Test for Navigation', function () {
   var apiRequests, Actions, Navigation, AuthStore, Router;
 
   beforeEach(function () {
+    // Mock localStorage
+    window.localStorage = {
+      item: false,
+      setItem: function (item) {
+        this.item = item;
+      },
+      getItem: function () {
+        return this.item;
+      },
+      clear: function () {
+        this.item = false;
+      }
+    };
+
     // Mock Electron's window.require
     // and remote.require('shell')
     window.require = function () {
       return {
+        require: function () {
+          return {
+            openExternal: function () {
+              return {};
+            }
+          };
+        },
         sendChannel: function () {
           return;
         }
       };
-    };
-
-    // Mock localStorage
-    window.localStorage = {
-      item: false,
-      getItem: function () {
-        return this.item;
-      }
     };
 
     apiRequests = require('../../utils/api-requests.js');
@@ -144,10 +157,13 @@ describe('Test for Navigation', function () {
     });
 
     expect(instance.componentDidMount).toBeDefined();
+    expect(instance.openBrowser).toBeDefined();
 
     instance.goBack();
     instance.goToSettings();
 
+
+    instance.openBrowser();
   });
 
 });

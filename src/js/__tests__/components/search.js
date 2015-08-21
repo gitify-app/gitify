@@ -1,16 +1,29 @@
-/* global jest, describe, beforeEach, it, expect, spyOn */
+/* global spyOn, jest, describe, beforeEach, it, expect */
 
 jest.dontMock('reflux');
 jest.dontMock('../../actions/actions.js');
-jest.dontMock('../../components/search-input.js');
+jest.dontMock('../../components/search.js');
 jest.dontMock('../../stores/auth.js');
 
 var React = require('react/addons');
 var TestUtils = React.addons.TestUtils;
 
-describe('Test for Search Input Component', function () {
+describe('Test for Footer', function () {
 
-  var Actions, AuthStore, SearchInput;
+  var Actions, AuthStore, Search;
+
+  window.localStorage = {
+    item: false,
+    setItem: function (item) {
+      this.item = item;
+    },
+    getItem: function () {
+      return this.item;
+    },
+    clear: function () {
+      this.item = false;
+    }
+  };
 
   beforeEach(function () {
     // Mock Electron's window.require
@@ -27,17 +40,9 @@ describe('Test for Search Input Component', function () {
       };
     };
 
-    // Mock localStorage
-    window.localStorage = {
-      item: false,
-      getItem: function () {
-        return this.item;
-      }
-    };
-
     Actions = require('../../actions/actions.js');
     AuthStore = require('../../stores/auth.js');
-    SearchInput = require('../../components/search-input.js');
+    Search = require('../../components/search.js');
   });
 
   it('Should make a search', function () {
@@ -45,14 +50,14 @@ describe('Test for Search Input Component', function () {
     spyOn(Actions, 'updateSearchTerm');
     spyOn(Actions, 'clearSearchTerm');
 
-    var instance = TestUtils.renderIntoDocument(<SearchInput />);
+    var instance = TestUtils.renderIntoDocument(<Search showSearch={true} />);
 
     var wrapper = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'search-wrapper');
     expect(wrapper.length).toBe(1);
 
     instance.clearSearch();
 
-    instance.onChange({
+    instance.updateSearchTerm({
       target: {
         value: 'hello'
       }
@@ -61,18 +66,8 @@ describe('Test for Search Input Component', function () {
     expect(Actions.updateSearchTerm).toHaveBeenCalledWith('hello');
   });
 
-  it('Should clear the search', function () {
-    spyOn(Actions, 'clearSearchTerm');
-
-    var instance = TestUtils.renderIntoDocument(<SearchInput />);
-    expect(Actions.clearSearchTerm).not.toHaveBeenCalled();
-
-    instance.clearSearch();
-    expect(Actions.clearSearchTerm).toHaveBeenCalled();
-  });
-
   it('Should only render clear button if search term is not empty', function () {
-    var instance = TestUtils.renderIntoDocument(<SearchInput />);
+    var instance = TestUtils.renderIntoDocument(<Search showSearch={true} />);
 
     var clearButton = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'octicon-x');
     expect(clearButton.length).toBe(0);
@@ -84,4 +79,9 @@ describe('Test for Search Input Component', function () {
     expect(clearButton.length).toBe(1);
   });
 
+  it('Should hide the search bar', function () {
+    var instance = TestUtils.renderIntoDocument(<Search showSearch={false} />);
+    var searchBar = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'search-bar');
+    expect(searchBar.length).toBe(0);
+  });
 });

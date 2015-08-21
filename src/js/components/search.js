@@ -8,7 +8,17 @@ var Search = React.createClass({
     Reflux.connect(SearchStore, 'searchTerm')
   ],
 
-  onChange: function (event) {
+  getInitialState: function() {
+    return {
+      searchTerm: ''
+    };
+  },
+
+  updateSearchTerm: function (event) {
+    console.log(event.target.value);
+    this.setState({
+      searchTerm: event.target.value
+    });
     Actions.updateSearchTerm(event.target.value);
   },
 
@@ -34,7 +44,7 @@ var Search = React.createClass({
                   <input
                     autoFocus
                     value={this.state.searchTerm}
-                    onChange={this.onChange}
+                    onChange={this.updateSearchTerm}
                     className='form-control'
                     type='text'
                     placeholder=' Search...' />
