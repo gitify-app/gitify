@@ -161,8 +161,6 @@ describe('Test for Navigation', function () {
 
     instance.goBack();
     instance.goToSettings();
-
-
     instance.openBrowser();
   });
 

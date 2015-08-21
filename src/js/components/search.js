@@ -8,7 +8,7 @@ var Search = React.createClass({
     Reflux.connect(SearchStore, 'searchTerm')
   ],
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       searchTerm: ''
     };
