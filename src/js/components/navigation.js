@@ -6,11 +6,13 @@ var ipc = window.require('ipc');
 
 var Actions = require('../actions/actions');
 var AuthStore = require('../stores/auth');
+var NotificationsStore = require('../stores/notifications.js');
 
 var Navigation = React.createClass({
   mixins: [
     Router.State,
     Reflux.connect(AuthStore, 'authStatus'),
+    Reflux.connect(NotificationsStore, 'notifications'),
     Reflux.listenTo(Actions.getNotifications.completed, 'refreshDone'),
     Reflux.listenTo(Actions.getNotifications.failed, 'refreshDone')
   ],
@@ -22,7 +24,8 @@ var Navigation = React.createClass({
   getInitialState: function () {
     return {
       authStatus: AuthStore.authStatus(),
-      loading: false
+      loading: false,
+      notifications: []
     };
   },
 
@@ -42,7 +45,9 @@ var Navigation = React.createClass({
   },
 
   refreshDone: function () {
-    this.setState( {loading: false } );
+    this.setState({
+      loading: false,
+    });
   },
 
   goToSettings: function () {
@@ -103,6 +108,9 @@ var Navigation = React.createClass({
         <div className='row navigation'>
           <div className='col-xs-6 left'>
             <img className='img-responsive logo' src='images/logo-hor-white.png' />
+            {this.state.notifications.length ? (
+              <span className='label label-success'>{this.state.notifications.length}</span>
+              ) : null }
             {refreshIcon}
           </div>
           <div className='col-xs-6 right'>
