@@ -65,7 +65,7 @@ var Navigation = React.createClass({
   },
 
   showSearch: function () {
-    console.log('Will display search...');
+    this.props.toggleSearch();
   },
 
   appQuit: function () {

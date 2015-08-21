@@ -181,11 +181,15 @@ html, body {
 
 .main-container {
   position: absolute;
-  top: 35px;
-  bottom: 30px;
+  top: @navbar-height;
+  bottom: 0;
   left: 0;
   right: 0;
   overflow: auto;
+}
+
+.search-bar + .main-container {
+  top: @navbar-height + @navbar-height;
 }
 
 .btn {
@@ -475,31 +479,21 @@ input {
 /* @end Component / Notification  */
 
 
-/* @group Component / Footer  */
+/* @group Component / Search  */
 
 @SearchHeight: 22px;
 @SearchFontSize: 14px;
 
-.footer {
+.search-bar {
   margin: 0;
   padding: 5px 20px;
+  height: @navbar-height;
 
-  background-color: @ThemeBlack;
+  background-color: darken(@ThemePrimary, 10%);
   color: @White;
   .FontOpenSansRegular();
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
   text-align: center;
-  line-height: @SearchHeight;
 }
-
-.github-link {
-  cursor: pointer;
-}
-
-/* @group Search input */
 
 .search-wrapper {
   position: relative;
@@ -532,6 +526,4 @@ input {
   padding-right: 20px;
 }
 
-/* @end Search input */
-
-/* @end Component / Footer  */
+/* @end Component / Search  */
