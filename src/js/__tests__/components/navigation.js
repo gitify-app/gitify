@@ -153,7 +153,9 @@ describe('Test for Navigation', function () {
 
     var instance;
     React.withContext({router: new Router()}, function () {
-      instance = TestUtils.renderIntoDocument(<Navigation />);
+      instance = TestUtils.renderIntoDocument(<Navigation toggleSearch={function () {
+        // Should toggle the search bar
+      }} />);
     });
 
     expect(instance.componentDidMount).toBeDefined();
@@ -162,6 +164,7 @@ describe('Test for Navigation', function () {
     instance.goBack();
     instance.goToSettings();
     instance.openBrowser();
+    instance.showSearch();
   });
 
 });
