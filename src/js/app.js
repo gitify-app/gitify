@@ -23,7 +23,7 @@ var App = React.createClass({
     }
   },
 
-  getInitialState: function() {
+  getInitialState: function () {
     return {
       showSearch: false
     };

@@ -46,7 +46,7 @@ var Navigation = React.createClass({
 
   refreshDone: function () {
     this.setState({
-      loading: false,
+      loading: false
     });
   },
 
