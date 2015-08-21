@@ -18,7 +18,7 @@
 
 @White: #ffffff;
 @DarkGray: darken(@White, 75%);
-@LightGray: #f5f5f5;
+@LightGray: darken(@White, 10%);
 
 @ErrorColor: #DB423C;
 
@@ -509,6 +509,10 @@ input {
 
     outline: none;
     box-shadow: none !important;
+
+    &::-webkit-input-placeholder {
+       color: @LightGray;
+    }
   }
 }
 

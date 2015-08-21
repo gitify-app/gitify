@@ -44,7 +44,7 @@ var Search = React.createClass({
                     onChange={this.onChange}
                     className='form-control'
                     type='text'
-                    placeholder='Search...' />
+                    placeholder=' Search...' />
                 </div>
             </div>
             <div className="col-xs-2">
