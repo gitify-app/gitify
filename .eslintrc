@@ -7,6 +7,7 @@
   "parser": "babel-eslint",
   "rules": {
     "max-len": [1, 100, 2],
+    "indent": [2, 2],
     "semi": 2,
     "strict": 0,
     "quotes": [1, "single", "avoid-escape"]

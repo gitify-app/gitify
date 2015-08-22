@@ -13,8 +13,8 @@ var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
 var autoStart = new AutoLaunch({
-    name: 'Gitify',
-    path: process.execPath.match(/.*?\.app/)[0]
+  name: 'Gitify',
+  path: process.execPath.match(/.*?\.app/)[0]
 });
 
 app.on('ready', function(){
