@@ -94,7 +94,7 @@ app.on('ready', function(){
   });
 
   ipc.on('update-icon', function(event, arg) {
-    if (arg === "TrayActive") {
+    if (arg === 'TrayActive') {
       appIcon.setImage(iconActive);
     } else {
       appIcon.setImage(iconIdle);
