@@ -13,8 +13,8 @@ var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
 var autoStart = new AutoLaunch({
-    name: 'Gitify',
-    path: process.execPath.match(/.*?\.app/)[0]
+  name: 'Gitify',
+  path: process.execPath.match(/.*?\.app/)[0]
 });
 
 app.on('ready', function(){
@@ -94,7 +94,7 @@ app.on('ready', function(){
   });
 
   ipc.on('update-icon', function(event, arg) {
-    if (arg === "TrayActive") {
+    if (arg === 'TrayActive') {
       appIcon.setImage(iconActive);
     } else {
       appIcon.setImage(iconIdle);

@@ -10,53 +10,8 @@
     "watch": "npm run build && grunt build && npm run watch-js & grunt watch",
     "start": "electron .",
     "dist": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.30.2 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
-    "test": "jsxhint --reporter=node_modules/jshint-stylish 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js' && jscs 'src/js/' && jest"
-  },
-  "jshintConfig": {
-    "browserify": true,
-    "unused": true,
-    "undef": true,
-    "globals": {
-      "console": false
-    }
-  },
-  "jscsConfig": {
-    "esprima": "esprima-fb",
-    "disallowMultipleVarDecl": "exceptUndefined",
-    "validateQuoteMarks": {
-      "mark": "'",
-      "escape": false
-    },
-    "validateParameterSeparator": ", ",
-    "validateIndentation": 2,
-    "requireSpacesInFunction": {
-      "beforeOpeningRoundBrace": true,
-      "beforeOpeningCurlyBrace": true
-    },
-    "requireSpacesInConditionalExpression": {
-      "afterTest": true,
-      "beforeConsequent": true,
-      "afterConsequent": true,
-      "beforeAlternate": true
-    },
-    "disallowTrailingWhitespace": true,
-    "maximumLineLength": 100,
-    "requireCurlyBraces": true,
-    "disallowMixedSpacesAndTabs": true,
-    "requireSpaceBeforeBinaryOperators": true,
-    "safeContextKeyword": [
-      "self"
-    ],
-    "disallowMultipleLineBreaks": true,
-    "disallowMultipleLineStrings": true,
-    "disallowSpaceAfterObjectKeys": true,
-    "disallowNewlineBeforeBlockStatements": true,
-    "disallowTrailingComma": true,
-    "requireCommaBeforeLineBreak": true,
-    "requireSpaceBetweenArguments": true,
-    "requireSpaceBeforeBlockStatements": true,
-    "requireSpaceBeforeObjectValues": true,
-    "requireSpacesInForStatement": true
+    "lint": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
+    "test": "npm run lint && jest"
   },
   "jest": {
     "scriptPreprocessor": "src/js/__tests__/preprocessor.js",
@@ -71,7 +26,6 @@
       "src/js/components/search.js": true,
       "src/js/components/settings.js": true,
       "src/js/components/search-input.js": true,
-      "src/js/components/settings.js": true,
       "src/js/stores/auth.js": true,
       "src/js/stores/notifications.js": true,
       "src/js/stores/search.js": true,
@@ -137,18 +91,16 @@
     "watchify": "=3.3.1"
   },
   "devDependencies": {
+    "babel-eslint": "=4.0.10",
     "electron-packager": "=5.0.1",
     "electron-prebuilt": "=0.30.2",
-    "esprima-fb": "^15001.1001.0-dev-harmony-fb",
+    "eslint": "=1.2.1",
     "grunt": "=0.4.5",
     "grunt-contrib-clean": "=0.6.0",
     "grunt-contrib-copy": "=0.8.0",
     "grunt-contrib-less": "=1.0.1",
     "grunt-contrib-watch": "=0.6.1",
     "jest-cli": "=0.4.18",
-    "jscs": "=2.0.0",
-    "jshint-stylish": "=2.0.1",
-    "jsxhint": "=0.15.1",
     "less": "=2.5.1"
   }
 }
