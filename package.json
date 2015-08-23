@@ -92,7 +92,7 @@
   },
   "devDependencies": {
     "babel-eslint": "=4.0.10",
-    "electron-packager": "=5.0.1",
+    "electron-packager": "=5.0.2",
     "electron-prebuilt": "=0.31.0",
     "eslint": "=1.2.1",
     "grunt": "=0.4.5",
