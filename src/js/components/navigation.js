@@ -92,9 +92,11 @@ var Navigation = React.createClass({
       settingsIcon = (
         <i className='fa fa-cog' onClick={this.goToSettings} />
       );
-      searchIcon = (
-        <i className='fa fa-search' onClick={this.showSearch} />
-      );
+      if (this.state.notifications.length) {
+        searchIcon = (
+          <i className='fa fa-search' onClick={this.showSearch} />
+        );
+      }
     } else {
       quitIcon = (
         <i className='fa fa-power-off' onClick={this.appQuit} />

@@ -167,4 +167,26 @@ describe('Test for Navigation', function () {
     instance.showSearch();
   });
 
+  it('Should show the search icon only if notifications', function () {
+
+    spyOn(Actions, 'getNotifications');
+
+    AuthStore.authStatus = function () {
+      return true;
+    };
+
+    var instance = TestUtils.renderIntoDocument(<Navigation />);
+
+    instance.state.notifications = [{
+      title: 'test'
+    }, {
+      title: 'another test'
+    }];
+
+    instance.forceUpdate();
+
+    var searchIcon = TestUtils.findRenderedDOMComponentWithClass(instance, 'fa-search');
+    expect(searchIcon).toBeDefined();
+
+  });
 });
