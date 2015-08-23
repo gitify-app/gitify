@@ -9,7 +9,7 @@
     "watch-js": "watchify -t babelify src/js/app.js -o build/js/app.js -v",
     "watch": "npm run build && grunt build && npm run watch-js & grunt watch",
     "start": "electron .",
-    "dist": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.30.2 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
+    "dist": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.31.0 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
     "lint": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
     "test": "npm run lint && jest"
   },
@@ -92,8 +92,8 @@
   },
   "devDependencies": {
     "babel-eslint": "=4.0.10",
-    "electron-packager": "=5.0.1",
-    "electron-prebuilt": "=0.30.2",
+    "electron-packager": "=5.0.2",
+    "electron-prebuilt": "=0.31.0",
     "eslint": "=1.2.1",
     "grunt": "=0.4.5",
     "grunt-contrib-clean": "=0.6.0",
