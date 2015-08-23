@@ -33,11 +33,10 @@ var Login = React.createClass({
     var authUrl = githubUrl + 'client_id=' + options.client_id + '&scope=' + options.scope;
     authWindow.loadUrl(authUrl);
 
-    authWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
-
-      var raw_code = /code=([^&]*)/.exec(newUrl) || null;
+    authWindow.webContents.on('will-navigate', function (event, url) {
+      var raw_code = /code=([^&]*)/.exec(url) || null;
       var code = (raw_code && raw_code.length > 1) ? raw_code[1] : null;
-      var error = /\?error=(.+)$/.exec(newUrl);
+      var error = /\?error=(.+)$/.exec(url);
 
       if (code || error) {
         // Close the browser if code found or error
