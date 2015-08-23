@@ -167,7 +167,7 @@ describe('Test for Navigation', function () {
     instance.showSearch();
   });
 
-  it('Should show the search icon only if notifications', function () {
+  it('Should show the search icon & count label only if notifications', function () {
 
     spyOn(Actions, 'getNotifications');
 
@@ -187,6 +187,9 @@ describe('Test for Navigation', function () {
 
     var searchIcon = TestUtils.findRenderedDOMComponentWithClass(instance, 'fa-search');
     expect(searchIcon).toBeDefined();
+
+    var countLabel = TestUtils.findRenderedDOMComponentWithClass(instance, 'label-success');
+    expect(countLabel).toBeDefined();
 
   });
 });

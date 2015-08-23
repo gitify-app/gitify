@@ -15,7 +15,6 @@ var Search = React.createClass({
   },
 
   updateSearchTerm: function (event) {
-    console.log(event.target.value);
     this.setState({
       searchTerm: event.target.value
     });

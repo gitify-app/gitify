@@ -79,7 +79,7 @@ var Navigation = React.createClass({
   },
 
   render: function () {
-    var refreshIcon, logoutIcon, backIcon, settingsIcon, quitIcon, searchIcon;
+    var refreshIcon, logoutIcon, backIcon, settingsIcon, quitIcon, searchIcon, countLabel;
     var loadingClass = this.state.loading ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
 
     if (this.state.authStatus) {
@@ -95,6 +95,9 @@ var Navigation = React.createClass({
       if (this.state.notifications.length) {
         searchIcon = (
           <i className='fa fa-search' onClick={this.showSearch} />
+        );
+        countLabel = (
+          <span className='label label-success'>{this.state.notifications.length}</span>
         );
       }
     } else {
@@ -119,9 +122,7 @@ var Navigation = React.createClass({
               className='img-responsive logo'
               src='images/logo-hor-white.png'
               onClick={this.openBrowser}/>
-            {this.state.notifications.length ? (
-              <span className='label label-success'>{this.state.notifications.length}</span>
-              ) : null }
+            {countLabel}
             {refreshIcon}
           </div>
           <div className='col-xs-6 right'>
