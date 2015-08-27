@@ -95,6 +95,9 @@ describe('Test for Notifications Component', function () {
     instance.state.searchTerm = 'gitify';
     matches = instance.matchesSearchTerm(response[0]);
     expect(matches).toBeTruthy();
+
+    instance.state.notifications = ['One', 'Two'];
+    instance.openBrowser();
   });
 
   it('Should only render repos that match the search term', function () {
