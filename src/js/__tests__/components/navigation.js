@@ -14,22 +14,35 @@ describe('Test for Navigation', function () {
   var apiRequests, Actions, Navigation, AuthStore, Router;
 
   beforeEach(function () {
+    // Mock localStorage
+    window.localStorage = {
+      item: false,
+      setItem: function (item) {
+        this.item = item;
+      },
+      getItem: function () {
+        return this.item;
+      },
+      clear: function () {
+        this.item = false;
+      }
+    };
+
     // Mock Electron's window.require
     // and remote.require('shell')
     window.require = function () {
       return {
+        require: function () {
+          return {
+            openExternal: function () {
+              return {};
+            }
+          };
+        },
         sendChannel: function () {
           return;
         }
       };
-    };
-
-    // Mock localStorage
-    window.localStorage = {
-      item: false,
-      getItem: function () {
-        return this.item;
-      }
     };
 
     apiRequests = require('../../utils/api-requests.js');
@@ -140,14 +153,43 @@ describe('Test for Navigation', function () {
 
     var instance;
     React.withContext({router: new Router()}, function () {
-      instance = TestUtils.renderIntoDocument(<Navigation />);
+      instance = TestUtils.renderIntoDocument(<Navigation toggleSearch={function () {
+        // Should toggle the search bar
+      }} />);
     });
 
     expect(instance.componentDidMount).toBeDefined();
+    expect(instance.openBrowser).toBeDefined();
 
     instance.goBack();
     instance.goToSettings();
-
+    instance.openBrowser();
+    instance.showSearch();
   });
 
+  it('Should show the search icon & count label only if notifications', function () {
+
+    spyOn(Actions, 'getNotifications');
+
+    AuthStore.authStatus = function () {
+      return true;
+    };
+
+    var instance = TestUtils.renderIntoDocument(<Navigation />);
+
+    instance.state.notifications = [{
+      title: 'test'
+    }, {
+      title: 'another test'
+    }];
+
+    instance.forceUpdate();
+
+    var searchIcon = TestUtils.findRenderedDOMComponentWithClass(instance, 'fa-search');
+    expect(searchIcon).toBeDefined();
+
+    var countLabel = TestUtils.findRenderedDOMComponentWithClass(instance, 'label-success');
+    expect(countLabel).toBeDefined();
+
+  });
 });

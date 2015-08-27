@@ -1,3 +1,6 @@
+var remote = window.require('remote');
+var shell = remote.require('shell');
+
 var React = require('react');
 var Reflux = require('reflux');
 var Loading = require('reloading');
@@ -36,6 +39,10 @@ var Notifications = React.createClass({
 
   componentWillMount: function () {
     Actions.getNotifications();
+  },
+
+  openBrowser: function () {
+    shell.openExternal('http://www.github.com/ekonstantinidis/gitify');
   },
 
   completedNotifications: function () {
@@ -117,6 +124,11 @@ var Notifications = React.createClass({
         </Loading>
         {errors}
         {notifications}
+        {notifications && notifications.length ? (
+          <div className='fork' onClick={this.openBrowser}>
+            <i className='fa fa-github' /> Star Gitify on GitHub
+          </div>
+        ): null}
       </div>
     );
   }

@@ -23,8 +23,8 @@
       "src/js/components/notification.js": true,
       "src/js/components/notifications.js": true,
       "src/js/components/repository.js": true,
+      "src/js/components/search.js": true,
       "src/js/components/settings.js": true,
-      "src/js/components/footer.js": true,
       "src/js/components/search-input.js": true,
       "src/js/stores/auth.js": true,
       "src/js/stores/notifications.js": true,
@@ -100,7 +100,7 @@
     "grunt-contrib-copy": "=0.8.0",
     "grunt-contrib-less": "=1.0.1",
     "grunt-contrib-watch": "=0.6.1",
-    "jest-cli": "=0.4.17",
+    "jest-cli": "=0.4.18",
     "less": "=2.5.1"
   }
 }

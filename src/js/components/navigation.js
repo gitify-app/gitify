@@ -1,16 +1,20 @@
+var ipc = window.require('ipc');
+var remote = window.require('remote');
+var shell = remote.require('shell');
+
 var React = require('react');
 var Reflux = require('reflux');
 var Router = require('react-router');
 
-var ipc = window.require('ipc');
-
 var Actions = require('../actions/actions');
 var AuthStore = require('../stores/auth');
+var NotificationsStore = require('../stores/notifications.js');
 
 var Navigation = React.createClass({
   mixins: [
     Router.State,
     Reflux.connect(AuthStore, 'authStatus'),
+    Reflux.connect(NotificationsStore, 'notifications'),
     Reflux.listenTo(Actions.getNotifications.completed, 'refreshDone'),
     Reflux.listenTo(Actions.getNotifications.failed, 'refreshDone')
   ],
@@ -22,7 +26,8 @@ var Navigation = React.createClass({
   getInitialState: function () {
     return {
       authStatus: AuthStore.authStatus(),
-      loading: false
+      loading: false,
+      notifications: []
     };
   },
 
@@ -42,7 +47,9 @@ var Navigation = React.createClass({
   },
 
   refreshDone: function () {
-    this.setState( {loading: false } );
+    this.setState({
+      loading: false
+    });
   },
 
   goToSettings: function () {
@@ -59,12 +66,20 @@ var Navigation = React.createClass({
     this.context.router.transitionTo('notifications');
   },
 
+  showSearch: function () {
+    this.props.toggleSearch();
+  },
+
   appQuit: function () {
     ipc.sendChannel('app-quit');
   },
 
+  openBrowser: function () {
+    shell.openExternal('http://www.github.com/ekonstantinidis/gitify');
+  },
+
   render: function () {
-    var refreshIcon, logoutIcon, backIcon, settingsIcon, quitIcon;
+    var refreshIcon, logoutIcon, backIcon, settingsIcon, quitIcon, searchIcon, countLabel;
     var loadingClass = this.state.loading ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
 
     if (this.state.authStatus) {
@@ -77,6 +92,14 @@ var Navigation = React.createClass({
       settingsIcon = (
         <i className='fa fa-cog' onClick={this.goToSettings} />
       );
+      if (this.state.notifications.length) {
+        searchIcon = (
+          <i className='fa fa-search' onClick={this.showSearch} />
+        );
+        countLabel = (
+          <span className='label label-success'>{this.state.notifications.length}</span>
+        );
+      }
     } else {
       quitIcon = (
         <i className='fa fa-power-off' onClick={this.appQuit} />
@@ -94,14 +117,17 @@ var Navigation = React.createClass({
     return (
       <div className='container-fluid'>
         <div className='row navigation'>
-          <div className='col-xs-4 left'>
-            {backIcon}
+          <div className='col-xs-6 left'>
+            <img
+              className='img-responsive logo'
+              src='images/logo-hor-white.png'
+              onClick={this.openBrowser}/>
+            {countLabel}
             {refreshIcon}
           </div>
-          <div className='col-xs-4 logo'>
-            <img className='img-responsive' src='images/logo-hor-white.png' />
-          </div>
-          <div className='col-xs-4 right'>
+          <div className='col-xs-6 right'>
+            {backIcon}
+            {searchIcon}
             {settingsIcon}
             {logoutIcon}
             {quitIcon}

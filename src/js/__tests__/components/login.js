@@ -24,10 +24,9 @@ describe('Test for Login Component', function () {
         webContents: {
           on: function (event, callback) {
 
-            if (event == 'did-get-redirect-request') {
+            if (event == 'will-navigate') {
               callback(
-                'did-get-redirect-request',
-                'http://www.github.com/?code=123123123',
+                'will-navigate',
                 'http://www.github.com/?code=123123123'
               );
             }
@@ -135,10 +134,9 @@ describe('Test for Login Component - Callback with Error', function () {
         webContents: {
           on: function (event, callback) {
 
-            if (event == 'did-get-redirect-request') {
+            if (event == 'will-navigate') {
               callback(
-                'did-get-redirect-request',
-                'http://www.github.com/?error=FAILURE',
+                'will-navigate',
                 'http://www.github.com/?error=FAILURE'
               );
             }

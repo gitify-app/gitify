@@ -11,11 +11,14 @@
 
 /* @group Colors */
 
+@ThemePrimary: #3893c6;
+
 @ThemeBlack: #262626;
 @ThemeGreen: #6cc644;
 
 @White: #ffffff;
-@LightGray: #f5f5f5;
+@DarkGray: darken(@White, 75%);
+@LightGray: darken(@White, 10%);
 
 @ErrorColor: #DB423C;
 
@@ -179,11 +182,15 @@ html, body {
 
 .main-container {
   position: absolute;
-  top: 35px;
-  bottom: 30px;
+  top: @navbar-height;
+  bottom: 0;
   left: 0;
   right: 0;
   overflow: auto;
+}
+
+.search-bar + .main-container {
+  top: @navbar-height + @navbar-height;
 }
 
 .btn {
@@ -224,7 +231,7 @@ input {
     left: 0;
     width: 100%;
     height: 100%;
-    background: @ThemeBlack;
+    background: @ThemePrimary;
     z-index: 9999;
     text-align: center;
 
@@ -258,29 +265,49 @@ input {
 /* @group Navbar */
 
 .navigation {
-  height: @navbar-height;
-  background-color: @ThemeBlack;
+  background-color: @ThemePrimary;
   color: @White;
+  height: @navbar-height;
 
   div[class*="col-xs-"] {
     font-size: 16px;
-    line-height: @navbar-height;
+    line-height: 32px;
 
     &.left {
-      .fa {
-        margin: 0 10px;
+      .logo {
+        margin: 5px;
+        max-width: 50px;
+        display: inline-block;
       }
-    }
 
-    &.logo {
-      .img-responsive {
-        margin: 9px auto;
-        max-width: 70px;
+      .label {
+        margin-right: 5px;
+      }
+
+      .fa {
+        margin: 0 5px;
+
+        &.fa-refresh {
+          font-size: 14px;
+        }
       }
     }
 
     &.right .fa {
       margin: 0 10px;
+
+      &.fa-chevron-left,
+      &.fa-search {
+        font-size: 14px;
+      }
+    }
+
+    .fa {
+
+      &:active,
+      &:hover {
+        color: @DarkGray;
+      }
     }
   }
 }
@@ -291,7 +318,7 @@ input {
 /* @group Settings */
 
 .settings {
-  background-color: @ThemeBlack;
+  background-color: @ThemePrimary;
   color: @White;
   padding: 20px;
 
@@ -314,7 +341,7 @@ input {
 /* @group Component / Login  */
 
 .login {
-    background-color: @ThemeBlack;
+    background-color: @ThemePrimary;
     color: @White;
     position: absolute;
     top: @navbar-height;
@@ -394,7 +421,7 @@ input {
 
   &.errored,
   &.all-read {
-    background-color: @ThemeBlack;
+    background-color: @ThemePrimary;
     color: @White;
     padding: 30px 20px;
 
@@ -405,6 +432,16 @@ input {
     .emoji {
       margin: 15px auto;
 
+    }
+  }
+
+  .fork {
+    padding: 10px 0;
+    font-size: 18px;
+    text-align: center;
+
+    &:hover {
+      cursor: pointer;
     }
   }
 }
@@ -453,63 +490,59 @@ input {
 /* @end Component / Notification  */
 
 
-/* @group Component / Footer  */
+/* @group Component / Search  */
 
 @SearchHeight: 22px;
-@SearchFontSize: 14px;
 
-.footer {
-  margin: 0;
-  padding: 5px 20px;
-
-  background-color: @ThemeBlack;
-  color: @White;
+.search-bar {
   .FontOpenSansRegular();
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  background-color: @ThemePrimary;
+  margin: 0;
+  padding: 0 20px;
+  height: @navbar-height;
   text-align: center;
-  line-height: @SearchHeight;
-}
 
-.github-link {
-  cursor: pointer;
-}
+  div[class*="col-xs-"] {
+    padding: 0;
+  }
 
-/* @group Search input */
+  -webkit-animation: fadein .5s;
 
-.search-wrapper {
-  position: relative;
-  overflow: hidden;
-
-  .octicon-x {
-    position: absolute;
-    text-align: center;
-    top: 0;
-    right: 0;
-    color: @ThemeBlack;
-    cursor: pointer;
-    height: @SearchHeight;
-    width: @SearchHeight;
-    line-height: @SearchHeight;
+  @-webkit-keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 }
 
-.search {
-  width: 100%;
-  border-radius: @SearchHeight / 2;
-  height: @SearchHeight;
-  padding: 0 8px;
-  color: @ThemeBlack;
-  font-size: @SearchFontSize;
-  border: none;
-  box-shadow: inset 0 1px 3px 0 rgba(0, 0, 0, 0.5);
-  -webkit-user-select: text;
-  padding-left: 10px;
-  padding-right: 20px;
+.form-group {
+  margin-bottom: 0;
+
+  .form-control {
+    background-color: @ThemePrimary;
+    color: @White;
+    font-size: 18px;
+    padding: 0 0 0 16px;
+    border: 0;
+
+    outline: none;
+    box-shadow: none !important;
+
+    &::-webkit-input-placeholder {
+       color: @LightGray;
+    }
+  }
 }
 
-/* @end Search input */
+.octicon-x {
+  font-size: 20px;
+  line-height: 36px;
+  text-align: center;
+  color: @White;
+  cursor: pointer;
+}
 
-/* @end Component / Footer  */
+/* @end Component / Search  */
