@@ -126,7 +126,7 @@ var Notifications = React.createClass({
         {notifications}
         {notifications.length ? (
           <div className='fork' onClick={this.openBrowser}>
-            <i className='fa fa-github' /> Star on GitHub
+            <i className='fa fa-github' /> Star Gitify on GitHub
           </div>
         ): null}
       </div>
