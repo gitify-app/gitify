@@ -64,6 +64,9 @@ describe('Test for Footer', function () {
     });
 
     expect(Actions.updateSearchTerm).toHaveBeenCalledWith('hello');
+
+    instance.componentWillReceiveProps({showSearch: false});
+    expect(Actions.updateSearchTerm).toHaveBeenCalledWith('');
   });
 
   it('Should only render clear button if search term is not empty', function () {
