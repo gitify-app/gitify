@@ -25,6 +25,9 @@ describe('Test for Notification Component', function () {
               return {};
             }
           };
+        },
+        sendChannel: function () {
+          return;
         }
       };
     };

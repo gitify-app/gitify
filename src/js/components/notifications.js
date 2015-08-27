@@ -124,7 +124,7 @@ var Notifications = React.createClass({
         </Loading>
         {errors}
         {notifications}
-        {notifications.length ? (
+        {notifications && notifications.length ? (
           <div className='fork' onClick={this.openBrowser}>
             <i className='fa fa-github' /> Star Gitify on GitHub
           </div>
