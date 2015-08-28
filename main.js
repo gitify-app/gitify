@@ -2,6 +2,8 @@ var app = require('app');
 var path = require('path');
 var ipc = require('ipc');
 
+var ghReleases = require('electron-gh-releases');
+
 require('crash-reporter').start();
 
 var Menu = require('menu');
@@ -11,6 +13,52 @@ var AutoLaunch = require('auto-launch');
 
 var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
+
+var ghReleasesOptions = {
+  repo: 'ekonstantinidis/testify',
+  currentVersion: app.getVersion()
+};
+
+var update = new ghReleases(ghReleasesOptions, function (autoUpdater) {
+  // Auto updater event listener
+  console.log('.......');
+  console.log('.......');
+  console.log(app.getVersion());
+  console.log('.......');
+  console.log('.......');
+  // autoUpdater.checkForUpdates();
+
+  autoUpdater
+    // .on('checking-for-update', function() {
+    //   console.log('Checking for update');
+    // })
+    .on('update-downloaded', function (e, rNotes, rName, rDate, uUrl, quitAndUpdate) {
+      // Install the update
+      console.log('Update Downloaded...');
+      quitAndUpdate();
+    });
+});
+
+// Check for updates
+update.check(function (err, status) {
+  console.log('ERR: ' + err + '. STATUS: ' + status);
+
+  if (!err && status) {
+    update.download();
+  }
+});
+
+// autoUpdater
+//
+//   .on('update-available', function() {
+//     console.log('Update available');
+//   })
+//   .on('update-not-available', function() {
+//     console.log('Update not available');
+//   })
+//   .on('update-downloaded', function() {
+//     console.log('Update downloaded');
+//   });
 
 var autoStart = new AutoLaunch({
   name: 'Gitify',
