@@ -15,23 +15,15 @@ var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
 var ghReleasesOptions = {
-  repo: 'ekonstantinidis/testify',
+  repo: 'ekonstantinidis/gitify',
   currentVersion: app.getVersion()
 };
 
 var update = new ghReleases(ghReleasesOptions, function (autoUpdater) {
-  // Auto updater event listener
-  console.log('.......');
-  console.log('.......');
-  console.log(app.getVersion());
-  console.log('.......');
-  console.log('.......');
-  // autoUpdater.checkForUpdates();
-
   autoUpdater
-    // .on('checking-for-update', function() {
-    //   console.log('Checking for update');
-    // })
+    .on('checking-for-update', function() {
+      console.log('Checking for update');
+    })
     .on('update-downloaded', function (e, rNotes, rName, rDate, uUrl, quitAndUpdate) {
       // Install the update
       console.log('Update Downloaded...');
@@ -41,9 +33,13 @@ var update = new ghReleases(ghReleasesOptions, function (autoUpdater) {
 
 // Check for updates
 update.check(function (err, status) {
-  console.log('ERR: ' + err + '. STATUS: ' + status);
+  if (err) {
+    console.log('ERRORED.');
+    console.log('ERR: ' + err + '. STATUS: ' + status);
+  }
 
   if (!err && status) {
+    console.log('There is an update!');
     update.download();
   }
 });
