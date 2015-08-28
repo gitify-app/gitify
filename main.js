@@ -34,7 +34,7 @@ autoUpdater
   });
 
 autoUpdater.setFeedUrl('https://raw.githubusercontent.com/' +
-  'ekonstantinidis/gitify/master/auto_updater.json');
+  'ekonstantinidis/gitify/master/auto-update.json');
 autoUpdater.checkForUpdates();
 
 var autoStart = new AutoLaunch({
