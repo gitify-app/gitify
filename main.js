@@ -1,8 +1,7 @@
 var app = require('app');
 var path = require('path');
 var ipc = require('ipc');
-
-var ghReleases = require('electron-gh-releases');
+var autoUpdater = require('auto-updater');
 
 require('crash-reporter').start();
 
@@ -14,47 +13,29 @@ var AutoLaunch = require('auto-launch');
 var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
-var ghReleasesOptions = {
-  repo: 'ekonstantinidis/gitify',
-  currentVersion: app.getVersion()
-};
-
-var update = new ghReleases(ghReleasesOptions, function (autoUpdater) {
-  autoUpdater
-    .on('checking-for-update', function() {
-      console.log('Checking for update');
-    })
-    .on('update-downloaded', function (e, rNotes, rName, rDate, uUrl, quitAndUpdate) {
-      // Install the update
-      console.log('Update Downloaded...');
-      quitAndUpdate();
-    });
-});
-
-// Check for updates
-update.check(function (err, status) {
-  if (err) {
+autoUpdater
+  .on('error', function(event, message) {
     console.log('ERRORED.');
-    console.log('ERR: ' + err + '. STATUS: ' + status);
-  }
+    console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
+  })
+  .on('checking-for-update', function () {
+    console.log('Checking for update');
+  })
+  .on('update-available', function () {
+    console.log('Update available');
+  })
+  .on('update-not-available', function () {
+    console.log('Update not available');
+  })
+  .on('update-downloaded', function (event, releaseNotes, releaseName,
+    releaseDate, updateUrl, quitAndUpdate) {
+    console.log('Update downloaded');
+    quitAndUpdate();
+  });
 
-  if (!err && status) {
-    console.log('There is an update!');
-    update.download();
-  }
-});
-
-// autoUpdater
-//
-//   .on('update-available', function() {
-//     console.log('Update available');
-//   })
-//   .on('update-not-available', function() {
-//     console.log('Update not available');
-//   })
-//   .on('update-downloaded', function() {
-//     console.log('Update downloaded');
-//   });
+autoUpdater.setFeedUrl('https://raw.githubusercontent.com/' +
+  'ekonstantinidis/gitify/master/auto_updater.json');
+autoUpdater.checkForUpdates();
 
 var autoStart = new AutoLaunch({
   name: 'Gitify',
