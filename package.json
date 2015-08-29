@@ -9,7 +9,7 @@
     "watch-js": "watchify -t babelify src/js/app.js -o build/js/app.js -v",
     "watch": "npm run build && grunt build && npm run watch-js & grunt watch",
     "start": "electron .",
-    "dist": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.31.0 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
+    "dist": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.31.0 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage' && bash scripts/codesign.bash",
     "lint": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
     "test": "npm run lint && jest"
   },
