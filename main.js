@@ -98,12 +98,14 @@ app.on('ready', function(){
       .on('error', function(event, message) {
         console.log('ERRORED.');
         console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
+        app.dock.hide();
       })
       .on('checking-for-update', function () {
         console.log('Checking for update');
       })
       .on('update-available', function () {
         console.log('Update available');
+        // AutoUpdater Downloads the update automatically
       })
       .on('update-not-available', function () {
         console.log('Update not available');
@@ -126,7 +128,7 @@ app.on('ready', function(){
       buttons: ['Update & Restart', 'Cancel'],
       title: 'Update Available',
       cancelId: 99,
-      message: 'There is an update available. Would you like to update the app now?'
+      message: 'There is an update available. Would you like to update Gitify now?'
     }, function (response) {
         console.log('Exit: ' + response);
         app.dock.hide();
