@@ -1,7 +1,7 @@
 var app = require('app');
 var path = require('path');
 var ipc = require('ipc');
-var autoUpdater = require('auto-updater');
+var ghReleases = require('electron-gh-releases');
 
 require('crash-reporter').start();
 
@@ -94,32 +94,34 @@ app.on('ready', function(){
 
   function checkAutoUpdate() {
 
-    autoUpdater
-      .on('error', function(event, message) {
-        console.log('ERRORED.');
-        console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
-        app.dock.hide();
-      })
-      .on('checking-for-update', function () {
-        console.log('Checking for update');
-      })
-      .on('update-available', function () {
-        console.log('Update available');
-        // AutoUpdater Downloads the update automatically
-      })
-      .on('update-not-available', function () {
-        console.log('Update not available');
-        app.dock.hide();
-      })
-      .on('update-downloaded', function (event, releaseNotes, releaseName,
-        releaseDate, updateUrl, quitAndUpdate) {
-        console.log('Update downloaded');
-        confirmAutoUpdate(quitAndUpdate);
-      });
+    var autoUpdateOptions = {
+      repo: 'ekonstantinidis/gitify',
+      currentVersion: app.getVersion()
+    };
 
-    autoUpdater.setFeedUrl('https://raw.githubusercontent.com/' +
-      'ekonstantinidis/gitify/master/auto-update.json');
-    autoUpdater.checkForUpdates();
+    var update = new ghReleases(autoUpdateOptions, function (autoUpdater) {
+      autoUpdater
+        .on('error', function(event, message) {
+          console.log('ERRORED.');
+          console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
+        })
+        .on('update-downloaded', function (event, releaseNotes, releaseName,
+          releaseDate, updateUrl, quitAndUpdate) {
+          console.log('Update downloaded');
+          confirmAutoUpdate(quitAndUpdate);
+        });
+    });
+
+    // Check for updates
+    update.check(function (err, status) {
+      if (err || !status) {
+        app.dock.hide();
+      }
+
+      if (!err && status) {
+        update.download();
+      }
+    });
   }
 
   function confirmAutoUpdate(quitAndUpdate) {
