@@ -1,6 +1,6 @@
 {
   "name": "gitify",
-  "version": "0.0.14",
+  "version": "0.0.16",
   "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
@@ -19,7 +19,7 @@
     "collectCoverageOnlyFrom": {
       "src/js/actions/actions.js": true,
       "src/js/components/login.js": true,
-      "src/js/components/navigation.js": true,
+      "src/js/components/navigation.js": true6
       "src/js/components/notification.js": true,
       "src/js/components/notifications.js": true,
       "src/js/components/repository.js": true,
