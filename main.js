@@ -1,13 +1,15 @@
 var app = require('app');
 var path = require('path');
 var ipc = require('ipc');
+var ghReleases = require('electron-gh-releases');
 
 require('crash-reporter').start();
 
 var Menu = require('menu');
 var Tray = require('tray');
-var BrowserWindow = require('browser-window');
 var AutoLaunch = require('auto-launch');
+var BrowserWindow = require('browser-window');
+var dialog = require('dialog');
 
 var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
@@ -45,6 +47,7 @@ app.on('ready', function(){
     appIcon.window.setVisibleOnAllWorkspaces(true);
 
     initMenu();
+    checkAutoUpdate();
   }
 
   function showWindow (bounds) {
@@ -89,6 +92,55 @@ app.on('ready', function(){
     appIcon.window.hide();
   }
 
+  function checkAutoUpdate() {
+
+    var autoUpdateOptions = {
+      repo: 'ekonstantinidis/gitify',
+      currentVersion: app.getVersion()
+    };
+
+    var update = new ghReleases(autoUpdateOptions, function (autoUpdater) {
+      autoUpdater
+        .on('error', function(event, message) {
+          console.log('ERRORED.');
+          console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
+        })
+        .on('update-downloaded', function (event, releaseNotes, releaseName,
+          releaseDate, updateUrl, quitAndUpdate) {
+          console.log('Update downloaded');
+          confirmAutoUpdate(quitAndUpdate);
+        });
+    });
+
+    // Check for updates
+    update.check(function (err, status) {
+      if (err || !status) {
+        app.dock.hide();
+      }
+
+      if (!err && status) {
+        update.download();
+      }
+    });
+  }
+
+  function confirmAutoUpdate(quitAndUpdate) {
+    dialog.showMessageBox({
+      type: 'question',
+      buttons: ['Update & Restart', 'Cancel'],
+      title: 'Update Available',
+      cancelId: 99,
+      message: 'There is an update available. Would you like to update Gitify now?'
+    }, function (response) {
+        console.log('Exit: ' + response);
+        app.dock.hide();
+        if (response === 0) {
+          quitAndUpdate();
+        }
+      }
+    );
+  }
+
   ipc.on('reopen-window', function() {
     appIcon.window.show();
   });
@@ -113,6 +165,5 @@ app.on('ready', function(){
     app.quit();
   });
 
-  app.dock.hide();
   appIcon.setToolTip('GitHub Notifications on your menu bar.');
 });
