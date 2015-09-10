@@ -8841,6 +8841,11 @@ body {
   color: #ffffff;
   text-align: center;
 }
+.header .jumbotron .logo {
+  width: 100%;
+  max-width: 350px;
+  margin: 20px auto;
+}
 .header .jumbotron .btn {
   margin: 10px 0;
 }
