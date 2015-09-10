@@ -1,3 +1,5 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+
 @import "node_modules/bootstrap/less/bootstrap";
 @import "node_modules/font-awesome/less/font-awesome.less";
 
@@ -12,11 +14,38 @@
 
 /* @group Bootstrap Variables */
 
+@font-family-sans-serif: 'Open Sans', sans-serif;
+@link-hover-decoration: none;
+
 @border-radius-base: 0;
 @border-radius-small: 0;
 @border-radius-large: 0;
 
 /* @end Bootstrap Variables */
+
+/* @group Typography */
+
+.FontOpenSansLight() {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+
+.FontOpenSansRegular() {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
+.FontOpenSansSemibold() {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+
+.FontOpenSansBold() {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+
+/* @end Typography */
 
 
 /* @group Misc */
@@ -68,7 +97,13 @@ html, body {
     .logo {
       width: 100%;
       max-width: 350px;
-      margin: 20px auto;
+      margin: 120px auto 20px;
+    }
+
+    h2 {
+      .FontOpenSansLight();
+      max-width: 350px;
+      margin: 20px auto 10px;
     }
 
     .btn {

@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
 /*!
  * Bootstrap v3.3.5 (http://getbootstrap.com)
  * Copyright 2011-2015 Twitter, Inc.
@@ -1071,7 +1072,7 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 body {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
@@ -1092,7 +1093,7 @@ a {
 a:hover,
 a:focus {
   color: #23527c;
-  text-decoration: underline;
+  text-decoration: none;
 }
 a:focus {
   outline: thin dotted;
@@ -3460,7 +3461,7 @@ fieldset[disabled] .btn-link {
 .btn-link:hover,
 .btn-link:focus {
   color: #23527c;
-  text-decoration: underline;
+  text-decoration: none;
   background-color: transparent;
 }
 .btn-link[disabled]:hover,
@@ -6009,7 +6010,7 @@ button.close {
   position: absolute;
   z-index: 1070;
   display: block;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -6127,7 +6128,7 @@ button.close {
   display: none;
   max-width: 276px;
   padding: 1px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-style: normal;
   font-weight: normal;
   letter-spacing: normal;
@@ -8796,6 +8797,8 @@ button.close {
 /* @end Colours */
 /* @group Bootstrap Variables */
 /* @end Bootstrap Variables */
+/* @group Typography */
+/* @end Typography */
 /* @group Misc */
 html,
 body {
@@ -8844,7 +8847,13 @@ body {
 .header .jumbotron .logo {
   width: 100%;
   max-width: 350px;
-  margin: 20px auto;
+  margin: 120px auto 20px;
+}
+.header .jumbotron h2 {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  max-width: 350px;
+  margin: 20px auto 10px;
 }
 .header .jumbotron .btn {
   margin: 10px 0;
