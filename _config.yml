@@ -1,0 +1,8 @@
+title: Gitify - GitHub Notifications on your menu bar
+description: > # Site Description
+  GitHub Notifications on your menu bar.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://www.gitify.io" # the base hostname & protocol for your site
+
+# Build settings
+exclude: ['node_modules', 'Gruntfile.js', 'package.json']

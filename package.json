@@ -1,0 +1,19 @@
+{
+  "name": "gitify-website",
+  "description": "A static website based on Jekyll for Gitify.",
+  "version": "0.0.1",
+  "scripts": {
+    "build-less": "lessc --silent _less/_base.less static/css/base.css",
+    "watch-less": "watch 'npm run build-less' _less/",
+    "build": "npm run build-less",
+    "start": "npm run build && npm run watch-less & jekyll serve --watch"
+  },
+  "devDependencies": {
+    "less": "=2.5.1",
+    "watch": "=0.16.0"
+  },
+  "dependencies": {
+    "bootstrap": "=3.3.5",
+    "font-awesome": "=4.4.0"
+  }
+}
