@@ -5,4 +5,4 @@ baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://www.gitify.io" # the base hostname & protocol for your site
 
 # Build settings
-exclude: ['node_modules', 'Gruntfile.js', 'package.json']
+exclude: ['.gitignore', 'node_modules', 'package.json']

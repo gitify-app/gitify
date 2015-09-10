@@ -1,2 +1,74 @@
 @import "node_modules/bootstrap/less/bootstrap";
 @import "node_modules/font-awesome/less/font-awesome.less";
+
+/* @group Colours */
+
+@ThemePrimary: #3893c6;
+
+@White: #FFF;
+
+/* @end Colours */
+
+
+/* @group Bootstrap Variables */
+
+@border-radius-base: 0;
+@border-radius-small: 0;
+@border-radius-large: 0;
+
+/* @end Bootstrap Variables */
+
+
+/* @group Misc */
+
+html, body {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+
+.btn {
+  border: 0;
+}
+
+.forkme {
+  -ms-transform: rotate(45deg); /* IE 9 */
+  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
+  transform: rotate(45deg);
+
+  padding: 5px;
+  position: fixed;
+  top: 50px;
+  right: -90px;
+  background-color: @White;
+  color: @ThemePrimary;
+  width: 300px;
+  text-align: center;
+  border-top: 2px solid @ThemePrimary;
+  border-bottom: 2px solid @ThemePrimary;
+  z-index: 9999;
+}
+
+/* @end Misc */
+
+
+/* @group Header */
+
+.header {
+  background-color: @ThemePrimary;
+  #gradient > .vertical(@ThemePrimary, darken(@ThemePrimary, 15%));
+  height: 100%;
+
+  .jumbotron {
+    background-color: transparent;
+    color: @White;
+    text-align: center;
+
+    .btn {
+      margin: 10px 0;
+    }
+  }
+}
+
+/* @end Header */
