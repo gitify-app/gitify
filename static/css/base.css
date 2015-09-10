@@ -8837,7 +8837,7 @@ body {
   background-image: linear-gradient(to bottom, #3893c6 0%, #27678a 100%);
   background-repeat: repeat-x;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3893c6', endColorstr='#ff27678a', GradientType=0);
-  height: 100%;
+  min-height: 100%;
 }
 .header .jumbotron {
   background-color: transparent;
@@ -8847,7 +8847,7 @@ body {
 .header .jumbotron .logo {
   width: 100%;
   max-width: 350px;
-  margin: 120px auto 20px;
+  margin: 100px auto 20px;
 }
 .header .jumbotron h2 {
   font-family: 'Open Sans', sans-serif;
@@ -8857,5 +8857,8 @@ body {
 }
 .header .jumbotron .btn {
   margin: 10px 0;
+}
+.header .jumbotron .screenshot {
+  margin: 80px auto 0;
 }
 /* @end Header */
