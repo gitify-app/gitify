@@ -8866,10 +8866,45 @@ body {
   margin: 30px auto 20px;
 }
 .header .jumbotron .btn-group {
-  margin: 15px 0;
+  margin: 5px 0 10px;
 }
 .header .jumbotron .btn-group .btn {
-  margin: 10px 0;
+  margin: 0;
+  display: block;
+  width: 100%;
+}
+@media (min-width: 768px) {
+  .header .jumbotron .btn-group .btn {
+    display: inline-block;
+    width: auto;
+    margin: 10px 0;
+  }
+}
+.header .jumbotron .latest-version {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  color: #eaeae8;
+  text-align: left;
+  font-size: 0.9em;
+  margin: 0 0 20px;
+  position: relative;
+  top: 15px;
+}
+@media (min-width: 992px) {
+  .header .jumbotron .latest-version {
+    position: static;
+    margin: 0;
+  }
+}
+.header .jumbotron .latest-version .version,
+.header .jumbotron .latest-version .date {
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (min-width: 992px) {
+  .header .jumbotron .latest-version .date {
+    text-align: right;
+  }
 }
 .header .jumbotron .screenshot {
   margin: 20px auto;
