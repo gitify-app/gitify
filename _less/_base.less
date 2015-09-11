@@ -86,32 +86,45 @@ html, body {
 
 .header {
   background-color: @ThemePrimary;
-  #gradient > .vertical(@ThemePrimary, darken(@ThemePrimary, 15%));
+  #gradient > .directional(darken(@ThemePrimary, 15%), @ThemePrimary, 320deg);
   min-height: 100%;
 
   .jumbotron {
     background-color: transparent;
     color: @White;
     text-align: center;
+    margin-top: 50px;
+
+    @media (min-width: @screen-sm-min) {
+      margin-top: 120px;
+    }
+
+    @media (min-width: @screen-md-min) {
+      margin-top: 190px;
+    }
 
     .logo {
       width: 100%;
       max-width: 350px;
-      margin: 100px auto 20px;
+      margin: 20px auto;
     }
 
     h2 {
       .FontOpenSansLight();
       max-width: 350px;
-      margin: 20px auto 10px;
+      margin: 30px auto 20px;
     }
 
-    .btn {
-      margin: 10px 0;
+    .btn-group {
+      margin: 15px 0;
+
+      .btn {
+        margin: 10px 0;
+      }
     }
 
     .screenshot {
-      margin: 80px auto 0;
+      margin: 20px auto;
     }
   }
 }

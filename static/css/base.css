@@ -8832,33 +8832,46 @@ body {
 /* @group Header */
 .header {
   background-color: #3893c6;
-  background-image: -webkit-linear-gradient(top, #3893c6 0%, #27678a 100%);
-  background-image: -o-linear-gradient(top, #3893c6 0%, #27678a 100%);
-  background-image: linear-gradient(to bottom, #3893c6 0%, #27678a 100%);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff3893c6', endColorstr='#ff27678a', GradientType=0);
+  background-image: -webkit-linear-gradient(320deg, #27678a, #3893c6);
+  background-image: -o-linear-gradient(320deg, #27678a, #3893c6);
+  background-image: linear-gradient(320deg, #27678a, #3893c6);
   min-height: 100%;
 }
 .header .jumbotron {
   background-color: transparent;
   color: #ffffff;
   text-align: center;
+  margin-top: 50px;
+}
+@media (min-width: 768px) {
+  .header .jumbotron {
+    margin-top: 120px;
+  }
+}
+@media (min-width: 992px) {
+  .header .jumbotron {
+    margin-top: 190px;
+  }
 }
 .header .jumbotron .logo {
   width: 100%;
   max-width: 350px;
-  margin: 100px auto 20px;
+  margin: 20px auto;
 }
 .header .jumbotron h2 {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   max-width: 350px;
-  margin: 20px auto 10px;
+  margin: 30px auto 20px;
 }
-.header .jumbotron .btn {
+.header .jumbotron .btn-group {
+  margin: 15px 0;
+}
+.header .jumbotron .btn-group .btn {
   margin: 10px 0;
 }
 .header .jumbotron .screenshot {
-  margin: 80px auto 0;
+  margin: 20px auto;
 }
 /* @end Header */
