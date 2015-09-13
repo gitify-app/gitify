@@ -8910,3 +8910,15 @@ body {
   margin: 20px auto;
 }
 /* @end Header */
+/* @group Homepage */
+.section {
+  padding: 50px 15px;
+}
+.section.alt {
+  background-color: #3893c6;
+  color: #ffffff;
+}
+.section h3 {
+  margin: 0 0 30px;
+}
+/* @end Homepage */
