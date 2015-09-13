@@ -6,6 +6,25 @@ $(document).ready(function () {
     return false;
   });
 
+  $('.section').each(function () {
+    $("#" + this.id + " #screenshot").hide();
+  });
+
+  $(window).scroll(function(){
+      var height = $(window).scrollTop();
+
+      $(".section").each(function() {
+        var done = false;
+
+        if (!done && $("#" + this.id + " #screenshot").is(':visible')) {
+          console.log("#" + this.id + " #screenshot");
+          $("#" + this.id + " #screenshot").show("slide", {direction: 'left'});
+          done = true;
+        }
+
+      });
+  });
+
   getLatestReleaseDetails();
 });
 
