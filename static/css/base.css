@@ -8922,3 +8922,15 @@ body {
   margin: 0 0 30px;
 }
 /* @end Homepage */
+/* @group Footer */
+.footer {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+  background-color: #3893c6;
+  color: #ffffff;
+  padding: 20px 0;
+}
+.footer a {
+  color: #e6e6e6;
+}
+/* @end Footer */
