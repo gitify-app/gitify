@@ -1,28 +1,34 @@
 $(document).ready(function () {
+  DONE_CLASS = 'done';
+
   $("#latest-version").hide();
-  $("#screenshot").hide().delay(500).slideToggle(1000,"easeOutBounce");
+  $(".screenshot").hide();
+  $("#screenshot").delay(500).slideToggle(1000,"easeOutBounce");
   $('.scroll-to-top').click(function(){
     $('html, body').animate({scrollTop : 0},800);
     return false;
   });
 
-  $('.section').each(function () {
-    $("#" + this.id + " #screenshot").hide();
-  });
 
   $(window).scroll(function(){
-      var height = $(window).scrollTop();
+    $(".section").each(function() {
+      var section = $(this);
+      var sectionScreenshot = section.find(".screenshot");
 
-      $(".section").each(function() {
-        var done = false;
+      var direction;
+      if (section.hasClass("alt")) {
+        direction = "left";
+      } else {
+        direction = "right";
+      }
 
-        if (!done && $("#" + this.id + " #screenshot").is(':visible')) {
-          console.log("#" + this.id + " #screenshot");
-          $("#" + this.id + " #screenshot").show("slide", {direction: 'left'});
-          done = true;
-        }
-
-      });
+      if (sectionScreenshot.css('display') == 'none' && $(this).find(".screenshot:visible")) {
+        sectionScreenshot.show("slide", {
+          duration: 1000,
+          direction: direction
+        });
+      }
+    });
   });
 
   getLatestReleaseDetails();
