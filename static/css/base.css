@@ -8848,11 +8848,6 @@ body {
   text-align: center;
   margin-top: 0;
 }
-@media (min-width: 768px) {
-  .header .jumbotron {
-    margin-top: 120px;
-  }
-}
 @media (min-width: 992px) {
   .header .jumbotron {
     margin-top: 190px;

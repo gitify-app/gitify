@@ -1,14 +1,12 @@
 $(document).ready(function () {
-  DONE_CLASS = 'done';
-
   $("#latest-version").hide();
   $(".screenshot").hide();
   $("#screenshot").delay(500).slideToggle(1000,"easeOutBounce");
-  $('.scroll-to-top').click(function(){
+
+  $('.scroll-to-top').click(function() {
     $('html, body').animate({scrollTop : 0},800);
     return false;
   });
-
 
   $(window).scroll(function(){
     $(".section").each(function() {
@@ -21,6 +19,7 @@ $(document).ready(function () {
       } else {
         direction = "right";
       }
+
       if (sectionScreenshot.css('display') == 'none' && isScrolledIntoView(section)) {
         sectionScreenshot.show("slide", {
           duration: 1000,
