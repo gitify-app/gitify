@@ -21,8 +21,7 @@ $(document).ready(function () {
       } else {
         direction = "right";
       }
-
-      if (sectionScreenshot.css('display') == 'none' && $(this).find(".screenshot:visible")) {
+      if (sectionScreenshot.css('display') == 'none' && isScrolledIntoView(section)) {
         sectionScreenshot.show("slide", {
           duration: 1000,
           direction: direction
@@ -49,4 +48,17 @@ function getLatestReleaseDetails() {
     $("#latest-version .date span").text(d + "/" + m + "/" + y);
     $("#latest-version").fadeIn(500);
   });
+}
+
+function isScrolledIntoView(elem) {
+  var $elem = $(elem);
+  var $window = $(window);
+
+  var docViewTop = $window.scrollTop();
+  var docViewBottom = docViewTop + $window.height();
+
+  var elemTop = $elem.offset().top;
+  var elemBottom = elemTop + $elem.height();
+
+  return ((elemBottom <= docViewBottom) && (elemTop >= docViewTop));
 }
