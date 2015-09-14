@@ -8842,7 +8842,7 @@ body {
   background-color: transparent;
   color: #ffffff;
   text-align: center;
-  margin-top: 50px;
+  margin-top: 0;
 }
 @media (min-width: 768px) {
   .header .jumbotron {
@@ -8919,7 +8919,10 @@ body {
   color: #ffffff;
 }
 .section h3 {
-  margin: 0 0 30px;
+  margin: 40px 0 30px;
+}
+.section .screenshot {
+  margin: 30px auto;
 }
 /* @end Homepage */
 /* @group Footer */
