@@ -31,12 +31,23 @@ describe('Test for Login Component', function () {
               );
             }
 
+            if (event == 'did-get-redirect-request') {
+              callback(
+                'did-get-redirect-request',
+                'http://www.github.com/?code=123123123',
+                'http://www.github.com/?code=123123123'
+              );
+            }
+
           }
         },
         on: function () {
           return;
         },
         close: function () {
+          return;
+        },
+        destroy: function () {
           return;
         }
       };
@@ -141,12 +152,23 @@ describe('Test for Login Component - Callback with Error', function () {
               );
             }
 
+            if (event == 'did-get-redirect-request') {
+              callback(
+                'did-get-redirect-request',
+                'http://www.github.com/?error=FAILURE',
+                'http://www.github.com/?error=FAILURE'
+              );
+            }
+
           }
         },
         on: function (event, callback) {
           callback();
         },
         close: function () {
+          return;
+        },
+        destroy: function (argument) {
           return;
         }
       };
