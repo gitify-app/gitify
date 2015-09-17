@@ -50,7 +50,7 @@ var Login = React.createClass({
 
       if (code || error) {
         // Close the browser if code found or error
-        authWindow.close();
+        authWindow.destroy();
       }
 
       // If there is a code, proceed to get token from github
@@ -64,8 +64,8 @@ var Login = React.createClass({
 
     // If "Done" button is pressed, hide "Loading"
     authWindow.on('close', function () {
-      authWindow = null;
-    }, false);
+      authWindow.destroy();
+    });
 
   },
 
