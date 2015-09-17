@@ -27,16 +27,19 @@ var Login = React.createClass({
       width: 800,
       height: 600,
       show: true,
-      'node-integration': false
+      'web-preferences': {
+        'node-integration': false
+      }
     });
     var githubUrl = 'https://github.com/login/oauth/authorize?';
     var authUrl = githubUrl + 'client_id=' + options.client_id + '&scope=' + options.scope;
     authWindow.loadUrl(authUrl);
 
-    authWindow.webContents.on('will-navigate', function (event, url) {
-      var raw_code = /code=([^&]*)/.exec(url) || null;
+    authWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
+
+      var raw_code = /code=([^&]*)/.exec(newUrl) || null;
       var code = (raw_code && raw_code.length > 1) ? raw_code[1] : null;
-      var error = /\?error=(.+)$/.exec(url);
+      var error = /\?error=(.+)$/.exec(newUrl);
 
       if (code || error) {
         // Close the browser if code found or error
