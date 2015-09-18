@@ -435,6 +435,49 @@ input {
     }
   }
 
+  &.all-read {
+    @-webkit-keyframes typing {
+      0% {
+        width: 100%;
+      }
+
+      20% {
+        width: 100%;
+      }
+
+      100% {
+        width: 0;
+      }
+    }
+
+    h2 {
+      .FontOpenSansSemibold();
+      font-style: italic;
+      position: relative;
+      margin: 10px auto;
+    }
+
+    h3 {
+      .FontOpenSansLight();
+      position: relative;
+      margin: 5px auto;
+    }
+
+    h2, h3 {
+    }
+
+    h2 .what {
+        position:absolute;
+        top:0;
+        right:0;
+        width:0;
+        background: @ThemePrimary;
+
+        box-sizing: border-box;
+        -webkit-animation: typing 1.5s steps(50, end);
+    }
+  }
+
   .fork {
     padding: 10px 0;
     font-size: 18px;
