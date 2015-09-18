@@ -27,20 +27,30 @@ var Login = React.createClass({
       width: 800,
       height: 600,
       show: true,
-      'node-integration': false
+      'web-preferences': {
+        'node-integration': false
+      }
     });
     var githubUrl = 'https://github.com/login/oauth/authorize?';
     var authUrl = githubUrl + 'client_id=' + options.client_id + '&scope=' + options.scope;
     authWindow.loadUrl(authUrl);
 
     authWindow.webContents.on('will-navigate', function (event, url) {
+      handleCallback(url);
+    });
+
+    authWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
+      handleCallback(newUrl);
+    });
+
+    function handleCallback (url) {
       var raw_code = /code=([^&]*)/.exec(url) || null;
       var code = (raw_code && raw_code.length > 1) ? raw_code[1] : null;
       var error = /\?error=(.+)$/.exec(url);
 
       if (code || error) {
         // Close the browser if code found or error
-        authWindow.close();
+        authWindow.destroy();
       }
 
       // If there is a code, proceed to get token from github
@@ -50,13 +60,12 @@ var Login = React.createClass({
         alert('Oops! Something went wrong and we couldn\'t' +
           'log you in using Github. Please try again.');
       }
-
-    });
+    }
 
     // If "Done" button is pressed, hide "Loading"
     authWindow.on('close', function () {
-      authWindow = null;
-    }, false);
+      authWindow.destroy();
+    });
 
   },
 
