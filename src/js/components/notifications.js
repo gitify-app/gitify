@@ -76,8 +76,8 @@ var Notifications = React.createClass({
       if (notificationsEmpty) {
         notifications = (
           <div>
-            <h2>There are no notifications for you.</h2>
-            <h3>All clean!</h3>
+            <h2>Awesome! <span className='what'>&nbsp;</span></h2>
+            <h3>No new notifications.</h3>
             <img className='img-responsive emoji' src='images/all-read.png' />
           </div>
         );
