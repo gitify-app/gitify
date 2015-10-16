@@ -17,7 +17,7 @@
   <script type="text/javascript">
     // Disable zoom
     document.addEventListener('mousewheel', function(e) {
-      if(e.deltaY % 1 !== 0) {
+      if(e.ctrlKey) {
         e.preventDefault();
       }
     });
