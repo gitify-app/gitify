@@ -71,7 +71,7 @@ var NotificationItem = React.createClass({
           {this.props.notification.subject.title}
         </div>
         <div className='col-xs-1 check-wrapper'>
-          <span className='octicon octicon-check' onClick={this.markAsRead} />
+          <span title="Mark as Read" className='octicon octicon-check' onClick={this.markAsRead} />
         </div>
       </div>
     );

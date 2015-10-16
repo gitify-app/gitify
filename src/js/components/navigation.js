@@ -84,17 +84,17 @@ var Navigation = React.createClass({
 
     if (this.state.authStatus) {
       refreshIcon = (
-        <i className={loadingClass} onClick={this.refreshNotifications} />
+        <i title="Refresh" className={loadingClass} onClick={this.refreshNotifications} />
       );
       logoutIcon = (
-        <i className='fa fa-sign-out' onClick={this.logOut} />
+        <i title="Sign Out" className='fa fa-sign-out' onClick={this.logOut} />
       );
       settingsIcon = (
-        <i className='fa fa-cog' onClick={this.goToSettings} />
+        <i title="Settings" className='fa fa-cog' onClick={this.goToSettings} />
       );
       if (this.state.notifications.length) {
         searchIcon = (
-          <i className='fa fa-search' onClick={this.showSearch} />
+          <i title="Search" className='fa fa-search' onClick={this.showSearch} />
         );
         countLabel = (
           <span className='label label-success'>{this.state.notifications.length}</span>
@@ -102,15 +102,15 @@ var Navigation = React.createClass({
       }
     } else {
       quitIcon = (
-        <i className='fa fa-power-off' onClick={this.appQuit} />
+        <i title="Quit" className='fa fa-power-off' onClick={this.appQuit} />
       );
     }
     if (this.getPath() === '/settings') {
       backIcon = (
-        <i className='fa fa-chevron-left' onClick={this.goBack} />
+        <i title="Back" className='fa fa-chevron-left' onClick={this.goBack} />
       );
       settingsIcon = (
-        <i className='fa fa-cog' onClick={this.goBack} />
+        <i title="Settings" className='fa fa-cog' onClick={this.goBack} />
       );
     }
 
