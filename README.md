@@ -16,7 +16,7 @@
 
 
 ### Download
-You can download Gitify for **free** from either the website [www..gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/ekonstantinidis/gitify/releases) page. Currently only supports OS X.
+You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/ekonstantinidis/gitify/releases) page. Currently only supports OS X.
 
 
 ### Prerequisites
@@ -33,7 +33,7 @@ You can download Gitify for **free** from either the website [www..gitify.io](ht
 
 
 ### Development
-First you will need to set the testing `client_id` and `client_secret_key` in the `src/js/components/login.js`. You can use the development app with the following:
+First you will need to set the testing `client_id` and `client_secret_key` in the `src/js/components/login.js`. You can use the development app credentials(use at your own discretion):
 
     Client Id: 3fef4433a29c6ad8f22c
     Client Secret Key: 9670de733096c15322183ff17ed0fc8704050379
