@@ -21,6 +21,12 @@ var autoStart = new AutoLaunch({
 
 app.on('ready', function(){
   var appIcon = new Tray(iconIdle);
+
+  var options = {
+    x: null,
+    y: null
+  };
+
   initWindow();
 
   appIcon.on('clicked', function clicked (e, bounds) {
@@ -51,13 +57,19 @@ app.on('ready', function(){
   }
 
   function showWindow (bounds) {
-    var options = {
-      x: bounds.x - 200 + (bounds.width / 2),
-      y: bounds.y,
-      index: path.join('./', 'index.html')
-    };
-
-    appIcon.window.setPosition(options.x, options.y);
+    if (options.x) {
+      appIcon.window.show();
+    } else {
+      if (bounds) {
+        options.x = bounds.x - 200 + (bounds.width / 2);
+        options.y = bounds.y;
+        appIcon.window.setPosition(options.x, options.y);
+      } else {
+        var electronScreen = require('screen');
+        var defaultSize = electronScreen.getPrimaryDisplay().workAreaSize;
+        appIcon.window.setPosition(defaultSize.width - 525, 15);
+      }
+    }
     appIcon.window.show();
   }
 
@@ -142,7 +154,7 @@ app.on('ready', function(){
   }
 
   ipc.on('reopen-window', function() {
-    appIcon.window.show();
+    showWindow();
   });
 
   ipc.on('update-icon', function(event, arg) {
