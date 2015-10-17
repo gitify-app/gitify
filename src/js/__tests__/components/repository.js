@@ -34,6 +34,9 @@ describe('Test for Repository Component', function () {
       item: false,
       getItem: function () {
         return this.item;
+      },
+      setItem: function (item) {
+        this.item = item;
       }
     };
 

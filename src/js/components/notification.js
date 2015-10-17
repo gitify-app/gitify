@@ -4,6 +4,7 @@ var shell = remote.require('shell');
 
 var Actions = require('../actions/actions');
 var apiRequests = require('../utils/api-requests');
+var SettingsStore = require('../stores/settings');
 
 var NotificationItem = React.createClass({
 
@@ -17,6 +18,16 @@ var NotificationItem = React.createClass({
     this.setState({
       isRead: nextProps.isRead
     });
+  },
+
+  pressTitle: function () {
+    var markOnClick = SettingsStore.getSettings().markOnClick;
+    if (markOnClick) {
+      this.openBrowser();
+      this.markAsRead();
+    } else {
+      this.openBrowser();
+    }
   },
 
   openBrowser: function () {
@@ -67,7 +78,7 @@ var NotificationItem = React.createClass({
     return (
       <div className={this.state.isRead ? 'row notification read' : 'row notification'}>
         <div className='col-xs-1'><span className={typeIconClass} /></div>
-        <div className='col-xs-10 subject' onClick={this.openBrowser}>
+        <div className='col-xs-10 subject' onClick={this.pressTitle}>
           {this.props.notification.subject.title}
         </div>
         <div className='col-xs-1 check-wrapper'>
