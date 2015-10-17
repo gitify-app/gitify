@@ -53,7 +53,7 @@ app.on('ready', function(){
     appIcon.window.setVisibleOnAllWorkspaces(true);
 
     initMenu();
-    checkAutoUpdate();
+    checkAutoUpdate(false);
   }
 
   function showWindow (bounds) {
@@ -104,7 +104,7 @@ app.on('ready', function(){
     appIcon.window.hide();
   }
 
-  function checkAutoUpdate() {
+  function checkAutoUpdate(showAlert) {
 
     var autoUpdateOptions = {
       repo: 'ekonstantinidis/gitify',
@@ -127,6 +127,14 @@ app.on('ready', function(){
     // Check for updates
     update.check(function (err, status) {
       if (err || !status) {
+        if (showAlert) {
+          dialog.showMessageBox({
+            type: 'info',
+            buttons: ['Close'],
+            title: 'No update available',
+            message: 'You are currently running the latest version of Gitify.'
+          });
+        }
         app.dock.hide();
       }
 
@@ -171,6 +179,10 @@ app.on('ready', function(){
 
   ipc.on('startup-disable', function() {
     autoStart.disable();
+  });
+
+  ipc.on('check-update', function() {
+    checkAutoUpdate(true);
   });
 
   ipc.on('app-quit', function() {
