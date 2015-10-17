@@ -21,6 +21,10 @@ var SettingsPage = React.createClass({
     Actions.setSetting(key, event.target.checked);
   },
 
+  checkForUpdates: function () {
+    ipc.sendChannel('check-update');
+  },
+
   appQuit: function () {
     ipc.sendChannel('app-quit');
   },
@@ -61,12 +65,22 @@ var SettingsPage = React.createClass({
           </div>
         </div>
         <div className='row'>
-          <button
-            className='btn btn-block btn-danger btn-close'
-            onClick={this.appQuit}>
-            <i className="fa fa-power-off" />
-            Quit Gitify
-          </button>
+          <div className='col-xs-6'>
+            <button
+              className='btn btn-block btn-primary btn-close'
+              onClick={this.checkForUpdates}>
+              <i className="fa fa-cloud-download" />
+              Update
+            </button>
+          </div>
+          <div className='col-xs-6'>
+            <button
+              className='btn btn-block btn-danger btn-close'
+              onClick={this.appQuit}>
+              <i className="fa fa-power-off" />
+              Quit Gitify
+            </button>
+          </div>
         </div>
       </div>
     );
