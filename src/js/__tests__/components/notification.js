@@ -123,6 +123,9 @@ describe('Test for Notification Component', function () {
     expect(instance.openBrowser).toBeDefined();
     expect(instance.markAsRead).toBeDefined();
 
+    // Open Browser
+    instance.openBrowser();
+
   });
 
   it('Should render a notification component (OtherType)', function () {
