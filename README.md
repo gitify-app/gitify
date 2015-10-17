@@ -14,8 +14,10 @@
 
 ![Gitify](images/press.png)
 
+
 ### Download
-You can download Gitify from the [releases](https://github.com/ekonstantinidis/gitify/releases) page. Currently only supports OS X.
+You can download Gitify for **free** from either the website [www..gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/ekonstantinidis/gitify/releases) page. Currently only supports OS X.
+
 
 ### Prerequisites
 
@@ -31,6 +33,12 @@ You can download Gitify from the [releases](https://github.com/ekonstantinidis/g
 
 
 ### Development
+First you will need to set the testing `client_id` and `client_secret_key` in the `src/js/components/login.js`. You can use the development app with the following:
+
+    Client Id: 3fef4433a29c6ad8f22c
+    Client Secret Key: 9670de733096c15322183ff17ed0fc8704050379
+
+
 To watch for changes in the `src` directory:
 
     npm run watch
@@ -43,13 +51,13 @@ To run the actual **electron app**:
 ### Distribution
 To prepare the app for distribution run:
 
-    npm run dist
+    npm run package
 
-Currently supports only OS X.
+To publish a new version, you also need to codesign the app running `npm run codesign`. Currently supports only OS X.
 
 
 ### Tests
-There are 3 types of tests: `jest`, `jscs` and `jsxhint`.
+There are 2 types of tests: `jest` and `eslint`.
 To run the tests:
 
     npm test
@@ -63,6 +71,7 @@ To run the tests:
 4. Push to the branch: `git push origin my-new-feature`
 5. Submit a pull request
 6. Make sure tests are passing
+
 
 ### License
 Gitify is licensed under the MIT Open Source license. For more information, see the LICENSE file in this repository.
