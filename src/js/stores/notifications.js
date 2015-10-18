@@ -60,6 +60,7 @@ var NotificationsStore = Reflux.createStore({
 
     setTimeout(function () {
       self.trigger(self._notifications);
+      self.updateTrayIcon(self._notifications);
     }, 800);
   },
 
@@ -72,6 +73,7 @@ var NotificationsStore = Reflux.createStore({
 
     setTimeout(function () {
       self.trigger(self._notifications);
+      self.updateTrayIcon(self._notifications);
     }, 800);
   }
 

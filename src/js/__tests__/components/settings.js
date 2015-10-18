@@ -48,6 +48,7 @@ describe('Test for Settings Component', function () {
     expect(instance.state.participating).toBeFalsy();
     expect(instance.toggleSetting).toBeDefined();
     expect(instance.appQuit).toBeDefined();
+    expect(instance.checkForUpdates).toBeDefined();
 
     instance.toggleSetting('participating', {
       target: {
@@ -57,6 +58,7 @@ describe('Test for Settings Component', function () {
     expect(Actions.setSetting).toHaveBeenCalledWith('participating', true);
 
     instance.appQuit();
+    instance.checkForUpdates();
   });
 
 });

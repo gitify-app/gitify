@@ -1,6 +1,6 @@
 {
   "name": "gitify",
-  "version": "0.0.14",
+  "version": "0.0.18",
   "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
@@ -9,56 +9,13 @@
     "watch-js": "watchify -t babelify src/js/app.js -o build/js/app.js -v",
     "watch": "npm run build && grunt build && npm run watch-js & grunt watch",
     "start": "electron .",
-    "dist-darwin": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.30.2 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
-    "dist-linux": "electron-packager . Gitify --overwrite --platform=linux --arch=x64 --version=0.30.2 --asar=true --icon=images/app-icon.icns --prune --ignore=src --ignore='coverage'",
-    "test": "jsxhint --reporter=node_modules/jshint-stylish 'src/**/*.js', 'index.js' --exclude 'Gruntfile.js' && jscs 'src/js/' && jest",
+    "package-darwin": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.32.3 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
+    "package-linux": "electron-packager . Gitify --overwrite --platform=linux --arch=x64 --version=0.32.3 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
+    "codesign": "bash scripts/codesign.bash",
+    "dist-darwin": "npm run package-darwin && npm run codesign",
+    "lint": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
+    "test": "npm run lint && jest",
     "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
-  },
-  "jshintConfig": {
-    "browserify": true,
-    "unused": true,
-    "undef": true,
-    "globals": {
-      "console": false
-    }
-  },
-  "jscsConfig": {
-    "esprima": "esprima-fb",
-    "disallowMultipleVarDecl": "exceptUndefined",
-    "validateQuoteMarks": {
-      "mark": "'",
-      "escape": false
-    },
-    "validateParameterSeparator": ", ",
-    "validateIndentation": 2,
-    "requireSpacesInFunction": {
-      "beforeOpeningRoundBrace": true,
-      "beforeOpeningCurlyBrace": true
-    },
-    "requireSpacesInConditionalExpression": {
-      "afterTest": true,
-      "beforeConsequent": true,
-      "afterConsequent": true,
-      "beforeAlternate": true
-    },
-    "disallowTrailingWhitespace": true,
-    "maximumLineLength": 100,
-    "requireCurlyBraces": true,
-    "disallowMixedSpacesAndTabs": true,
-    "requireSpaceBeforeBinaryOperators": true,
-    "safeContextKeyword": [
-      "self"
-    ],
-    "disallowMultipleLineBreaks": true,
-    "disallowMultipleLineStrings": true,
-    "disallowSpaceAfterObjectKeys": true,
-    "disallowNewlineBeforeBlockStatements": true,
-    "disallowTrailingComma": true,
-    "requireCommaBeforeLineBreak": true,
-    "requireSpaceBetweenArguments": true,
-    "requireSpaceBeforeBlockStatements": true,
-    "requireSpaceBeforeObjectValues": true,
-    "requireSpacesInForStatement": true
   },
   "jest": {
     "scriptPreprocessor": "src/js/__tests__/preprocessor.js",
@@ -70,10 +27,9 @@
       "src/js/components/notification.js": true,
       "src/js/components/notifications.js": true,
       "src/js/components/repository.js": true,
+      "src/js/components/search.js": true,
       "src/js/components/settings.js": true,
-      "src/js/components/footer.js": true,
       "src/js/components/search-input.js": true,
-      "src/js/components/settings.js": true,
       "src/js/stores/auth.js": true,
       "src/js/stores/notifications.js": true,
       "src/js/stores/search.js": true,
@@ -126,6 +82,7 @@
     "babelify": "=6.1.3",
     "bootstrap": "=3.3.5",
     "browserify": "=11.0.1",
+    "electron-gh-releases": "=1.0.1",
     "font-awesome": "=4.4.0",
     "octicons": "=2.4.1",
     "react": "=0.13.3",
@@ -139,18 +96,16 @@
     "watchify": "=3.3.1"
   },
   "devDependencies": {
-    "electron-packager": "=5.0.1",
-    "electron-prebuilt": "=0.30.2",
-    "esprima-fb": "^15001.1001.0-dev-harmony-fb",
+    "babel-eslint": "=4.0.10",
+    "electron-packager": "=5.1.0",
+    "electron-prebuilt": "=0.32.3",
+    "eslint": "=1.2.1",
     "grunt": "=0.4.5",
     "grunt-contrib-clean": "=0.6.0",
     "grunt-contrib-copy": "=0.8.0",
     "grunt-contrib-less": "=1.0.1",
     "grunt-contrib-watch": "=0.6.1",
-    "jest-cli": "=0.4.17",
-    "jscs": "=2.0.0",
-    "jshint-stylish": "=2.0.1",
-    "jsxhint": "=0.15.1",
+    "jest-cli": "=0.4.18",
     "less": "=2.5.1"
   }
 }

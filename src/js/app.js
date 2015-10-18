@@ -3,7 +3,7 @@ var Router = require('react-router');
 
 var AuthStore = require('./stores/auth');
 var Navigation = require('./components/navigation');
-var Footer = require('./components/footer');
+var SearchBar = require('./components/search');
 var LoginPage = require('./components/login');
 var NotificationsPage = require('./components/notifications');
 var SettingsPage = require('./components/settings');
@@ -23,12 +23,24 @@ var App = React.createClass({
     }
   },
 
+  getInitialState: function () {
+    return {
+      showSearch: false
+    };
+  },
+
+  toggleSearch: function () {
+    this.setState({
+      showSearch: !this.state.showSearch
+    });
+  },
+
   render: function () {
     return (
       <div>
-        <Navigation />
+        <Navigation toggleSearch={this.toggleSearch} />
+        <SearchBar showSearch={this.state.showSearch} />
         <RouteHandler />
-        <Footer />
       </div>
     );
   }

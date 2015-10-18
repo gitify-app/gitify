@@ -14,6 +14,7 @@ var SettingsStore = Reflux.createStore({
         participating: false,
         playSound: true,
         showNotifications: true,
+        markOnClick: false,
         openAtStartup: false
       };
     }
@@ -32,6 +33,10 @@ var SettingsStore = Reflux.createStore({
 
     if (typeof settings.showNotifications !== 'boolean') {
       settings.showNotifications = true;
+    }
+
+    if (typeof settings.markOnClick !== 'boolean') {
+      settings.markOnClick = false;
     }
 
     if (typeof settings.openAtStartup !== 'boolean') {

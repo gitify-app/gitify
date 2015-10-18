@@ -1,3 +1,6 @@
+var remote = window.require('remote');
+var shell = remote.require('shell');
+
 var React = require('react');
 var Reflux = require('reflux');
 var Loading = require('reloading');
@@ -38,6 +41,10 @@ var Notifications = React.createClass({
     Actions.getNotifications();
   },
 
+  openBrowser: function () {
+    shell.openExternal('http://www.github.com/ekonstantinidis/gitify');
+  },
+
   completedNotifications: function () {
     this.setState({
       loading: false,
@@ -69,8 +76,8 @@ var Notifications = React.createClass({
       if (notificationsEmpty) {
         notifications = (
           <div>
-            <h2>There are no notifications for you.</h2>
-            <h3>All clean!</h3>
+            <h2>Awesome! <span className='what'>&nbsp;</span></h2>
+            <h3>No new notifications.</h3>
             <img className='img-responsive emoji' src='images/all-read.png' />
           </div>
         );
@@ -117,6 +124,11 @@ var Notifications = React.createClass({
         </Loading>
         {errors}
         {notifications}
+        {notifications && notifications.length ? (
+          <div className='fork' onClick={this.openBrowser}>
+            <i className='fa fa-github' /> Star Gitify on GitHub
+          </div>
+        ): null}
       </div>
     );
   }

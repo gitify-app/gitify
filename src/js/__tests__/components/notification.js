@@ -6,6 +6,7 @@ jest.dontMock('../../utils/api-requests');
 jest.dontMock('../../components/notification.js');
 jest.dontMock('../../stores/auth.js');
 jest.dontMock('../../stores/notifications.js');
+jest.dontMock('../../stores/settings.js');
 
 var React = require('react/addons');
 var TestUtils = React.addons.TestUtils;
@@ -25,6 +26,9 @@ describe('Test for Notification Component', function () {
               return {};
             }
           };
+        },
+        sendChannel: function () {
+          return;
         }
       };
     };
@@ -45,6 +49,7 @@ describe('Test for Notification Component', function () {
     AuthStore = require('../../stores/auth.js');
     SingleNotification = require('../../components/notification.js');
     NotificationsStore = require('../../stores/notifications.js');
+    SettingsStore = require('../../stores/settings.js');
   });
 
   it('Should render a notification component (Issue)', function () {
@@ -69,11 +74,27 @@ describe('Test for Notification Component', function () {
         key={notification.id} />);
 
     expect(instance.state.isRead).toBeFalsy();
+    expect(instance.pressTitle).toBeDefined();
     expect(instance.openBrowser).toBeDefined();
     expect(instance.markAsRead).toBeDefined();
 
+    spyOn(instance, 'openBrowser');
+    spyOn(instance, 'markAsRead');
+
+    instance.pressTitle();
+    expect(instance.openBrowser).toHaveBeenCalled();
+
     // Open Browser
     instance.openBrowser();
+
+    // If 'markOnClick' is ON
+    SettingsStore.onSetSetting('markOnClick', true);
+
+    instance.pressTitle();
+
+    expect(instance.openBrowser).toHaveBeenCalled();
+    expect(instance.markAsRead).toHaveBeenCalled();
+    jest.runAllTimers();
 
   });
 
@@ -101,6 +122,9 @@ describe('Test for Notification Component', function () {
     expect(instance.state.isRead).toBeFalsy();
     expect(instance.openBrowser).toBeDefined();
     expect(instance.markAsRead).toBeDefined();
+
+    // Open Browser
+    instance.openBrowser();
 
   });
 
