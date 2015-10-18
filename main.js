@@ -14,10 +14,12 @@ var dialog = require('dialog');
 var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
-var autoStart = new AutoLaunch({
-  name: 'Gitify',
-  path: process.execPath.match(/.*?\.app/)[0]
-});
+if (process.platform === 'darwin') {
+  var autoStart = new AutoLaunch({
+    name: 'Gitify',
+    path: process.execPath.match(/.*?\.app/)[0]
+  });
+}
 
 app.on('ready', function(){
   var appIcon = new Tray(iconIdle);
@@ -53,24 +55,14 @@ app.on('ready', function(){
     appIcon.window.setVisibleOnAllWorkspaces(true);
 
     initMenu();
-    checkAutoUpdate(false);
+    showWindow();
+
+    if (process.platform === 'darwin') {
+      checkAutoUpdate(false);
+    }
   }
 
   function showWindow (bounds) {
-
-    // var ElectronScreen = require('screen');
-    // var workAreaSize = ElectronScreen.getPrimaryDisplay().workAreaSize;
-    // var windowSize = appIcon.window.getBounds();
-    // var defaultX = workAreaSize.width-windowSize.width;
-    // var defaultY = 0;
-    // var options = {
-    //   x: defaultX || bounds.x - 200 + (bounds.width / 2),
-    //   y: defaultY || bounds.y,
-    //   index: path.join('./', 'index.html')
-    // };
-    //
-    // appIcon.window.setPosition(options.x, options.y);
-
     if (options.x) {
       appIcon.window.show();
     } else {
