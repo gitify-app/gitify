@@ -204,11 +204,9 @@ app.on('ready', function(){
     app.quit();
   });
 
-<<<<<<< HEAD
   if(process.platform === 'darwin'){
     app.dock.hide();
   }
-=======
->>>>>>> origin/master
+
   appIcon.setToolTip('GitHub Notifications on your menu bar.');
 });
