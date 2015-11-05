@@ -37,8 +37,8 @@ var mb = menubar({
 
 // Application code
 mb.on('ready', function () {
-  // Auto-update not working on Linux
-  if (!isLinux) {
+  // Auto-update not working on Linux and Windows
+  if (isDarwin) {
     checkAutoUpdate(false);
   }
 
