@@ -2,24 +2,34 @@ const electron = require('electron');
 const app = electron.app;
 const ipc = electron.ipcMain;
 
+const BrowserWindow = electron.BrowserWindow;
+const Menu = electron.Menu;
+const Tray = electron.Tray;
+
 var path = require('path');
 var ghReleases = require('electron-gh-releases');
 
 require('crash-reporter').start();
 
-var Menu = require('menu');
-var Tray = require('tray');
 var AutoLaunch = require('auto-launch');
-var BrowserWindow = require('browser-window');
 var dialog = require('dialog');
 
+// Status icons
 var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
-var autoStart = new AutoLaunch({
-  name: 'Gitify',
-  path: process.execPath.match(/.*?\.app/)[0]
-});
+// Utilities
+var isLinux = (process.platform === 'linux');
+var isDarwin = (process.platform === 'darwin');
+// var isWindows = (process.platform === 'win32');
+
+// The auto-start module does not support Linux
+if (!isLinux) {
+  var autoStart = new AutoLaunch({
+    name: 'Gitify',
+    path: process.execPath.match(/.*?\.app/)
+  });
+}
 
 app.on('ready', function() {
   var appIcon = new Tray(iconIdle);
@@ -55,7 +65,10 @@ app.on('ready', function() {
     appIcon.window.setVisibleOnAllWorkspaces(true);
 
     initMenu();
-    checkAutoUpdate(false);
+
+    if (!isLinux) {
+      checkAutoUpdate(false);
+    }
   }
 
   function showWindow (bounds) {
@@ -106,8 +119,7 @@ app.on('ready', function() {
     appIcon.window.hide();
   }
 
-  function checkAutoUpdate(showAlert) {
-
+  function checkAutoUpdate (showAlert) {
     var autoUpdateOptions = {
       repo: 'ekonstantinidis/gitify',
       currentVersion: app.getVersion()
@@ -115,12 +127,12 @@ app.on('ready', function() {
 
     var update = new ghReleases(autoUpdateOptions, function (autoUpdater) {
       autoUpdater
-        .on('error', function(event, message) {
+        .on('error', function (event, message) {
           console.log('ERRORED.');
           console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
         })
         .on('update-downloaded', function (event, releaseNotes, releaseName,
-          releaseDate, updateUrl, quitAndUpdate) {
+            releaseDate, updateUrl, quitAndUpdate) {
           console.log('Update downloaded');
           confirmAutoUpdate(quitAndUpdate);
         });
@@ -137,7 +149,10 @@ app.on('ready', function() {
             message: 'You are currently running the latest version of Gitify.'
           });
         }
-        app.dock.hide();
+
+        if (isDarwin) {
+          app.dock.hide();
+        }
       }
 
       if (!err && status) {
@@ -146,7 +161,7 @@ app.on('ready', function() {
     });
   }
 
-  function confirmAutoUpdate(quitAndUpdate) {
+  function confirmAutoUpdate (quitAndUpdate) {
     dialog.showMessageBox({
       type: 'question',
       buttons: ['Update & Restart', 'Cancel'],
@@ -155,18 +170,20 @@ app.on('ready', function() {
       message: 'There is an update available. Would you like to update Gitify now?'
     }, function (response) {
       console.log('Exit: ' + response);
-      app.dock.hide();
+      if (isDarwin) {
+        app.dock.hide();
+      }
       if (response === 0) {
         quitAndUpdate();
       }
     } );
   }
 
-  ipc.on('reopen-window', function() {
+  ipc.on('reopen-window', function () {
     showWindow();
   });
 
-  ipc.on('update-icon', function(event, arg) {
+  ipc.on('update-icon', function (event, arg) {
     if (arg === 'TrayActive') {
       appIcon.setImage(iconActive);
     } else {
@@ -174,19 +191,23 @@ app.on('ready', function() {
     }
   });
 
-  ipc.on('startup-enable', function() {
-    autoStart.enable();
+  ipc.on('startup-enable', function () {
+    if (!isLinux) {
+      autoStart.enable();
+    }
   });
 
-  ipc.on('startup-disable', function() {
-    autoStart.disable();
+  ipc.on('startup-disable', function () {
+    if (!isLinux) {
+      autoStart.disable();
+    }
   });
 
-  ipc.on('check-update', function() {
+  ipc.on('check-update', function () {
     checkAutoUpdate(true);
   });
 
-  ipc.on('app-quit', function() {
+  ipc.on('app-quit', function () {
     app.quit();
   });
 
