@@ -150,7 +150,9 @@ mb.on('ready', function () {
   });
 
   ipc.on('check-update', function () {
-    checkAutoUpdate(true);
+    if (isDarwin) {
+      checkAutoUpdate(true);
+    }
   });
 
   ipc.on('app-quit', function () {
