@@ -1,124 +1,83 @@
-var app = require('app');
+var menubar = require('menubar');
 var path = require('path');
 var ipc = require('ipc');
-var ghReleases = require('electron-gh-releases');
 
 require('crash-reporter').start();
 
-var Menu = require('menu');
-var Tray = require('tray');
 var AutoLaunch = require('auto-launch');
-var BrowserWindow = require('browser-window');
 var dialog = require('dialog');
 
+// Status icons
 var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
-var autoStart = new AutoLaunch({
-  name: 'Gitify',
-  path: process.execPath.match(/.*?\.app/)[0]
+// Utilities
+var isLinux = (process.platform === 'linux');
+var isDarwin = (process.platform === 'darwin');
+var isWindows = (process.platform === 'win32');
+
+// The auto-start module does not support Linux
+if (!isLinux) {
+  var autoStart = new AutoLaunch({
+    name: 'Gitify',
+    path: process.execPath.match(/.*?\.app/)
+  });
+}
+
+// Create menu
+var mb = menubar({
+  index: 'file://' + __dirname + '/index.html',
+  icon: iconIdle,
+  preloadWindow: true,
+  width: 420,
+  height: 370,
+  resizable: false,
+  'standard-window': false
 });
 
-app.on('ready', function(){
-  var appIcon = new Tray(iconIdle);
-
-  var options = {
-    x: null,
-    y: null
-  };
-
-  initWindow();
-
-  appIcon.on('clicked', function clicked (e, bounds) {
-    if (appIcon.window && appIcon.window.isVisible()) {
-      return hideWindow();
-    } else {
-      showWindow(bounds);
-    }
-  });
-
-  function initWindow () {
-    var defaults = {
-      width: 400,
-      height: 350,
-      show: false,
-      frame: false,
-      resizable: false,
-      'standard-window': false
-    };
-
-    appIcon.window = new BrowserWindow(defaults);
-    appIcon.window.loadUrl('file://' + __dirname + '/index.html');
-    appIcon.window.on('blur', hideWindow);
-    appIcon.window.setVisibleOnAllWorkspaces(true);
-
-    initMenu();
+// Application code
+mb.on('ready', function () {
+  // Auto-update not working on Linux
+  if (!isLinux) {
     checkAutoUpdate(false);
   }
 
-  function showWindow (bounds) {
-    if (options.x) {
-      appIcon.window.show();
-    } else {
-      if (bounds) {
-        options.x = bounds.x - 200 + (bounds.width / 2);
-        options.y = bounds.y;
-        appIcon.window.setPosition(options.x, options.y);
-      } else {
-        var electronScreen = require('screen');
-        var defaultSize = electronScreen.getPrimaryDisplay().workAreaSize;
-        appIcon.window.setPosition(defaultSize.width - 525, 15);
-      }
+  this.on('show', function () {
+    var screen = require('screen');
+    var cursorPointer = screen.getCursorScreenPoint();
+    var displaySize = screen.getPrimaryDisplay().workAreaSize;
+
+    // Determination of the position of the pane with an icon
+    var x = (cursorPointer.x < (displaySize.width / 2)) ? 'left' : 'right';
+    var y = (cursorPointer.y < (displaySize.height / 2)) ? 'top' : 'bottom';
+
+    // If click was made above middle (axis X and Y), then recalculate window position
+    if (x === 'right' && y === 'bottom') {
+      mb.setOption('window-position', (isWindows) ? 'trayBottomCenter' : 'bottomRight');
+    } else if (x === 'right' && y === 'top') {
+      mb.setOption('window-position', 'trayCenter');
+    } else if (x === 'left' && y === 'bottom') {
+      mb.setOption('window-position', 'bottomLeft');
+    } else if (x === 'left' && y === 'top') {
+      mb.setOption('window-position', 'trayCenter');
     }
-    appIcon.window.show();
-  }
+  });
 
-  function initMenu () {
-    var template = [{
-      label: 'Edit',
-      submenu: [
-        {
-          label: 'Copy',
-          accelerator: 'Command+C',
-          selector: 'copy:'
-        },
-        {
-          label: 'Paste',
-          accelerator: 'Command+V',
-          selector: 'paste:'
-        },
-        {
-          label: 'Select All',
-          accelerator: 'Command+A',
-          selector: 'selectAll:'
-        }
-      ]
-    }];
-
-    var menu = Menu.buildFromTemplate(template);
-    Menu.setApplicationMenu(menu);
-  }
-
-  function hideWindow () {
-    if (!appIcon.window) { return; }
-    appIcon.window.hide();
-  }
-
-  function checkAutoUpdate(showAlert) {
-
+  function checkAutoUpdate (showAlert) {
     var autoUpdateOptions = {
       repo: 'ekonstantinidis/gitify',
-      currentVersion: app.getVersion()
+      currentVersion: mb.app.getVersion()
     };
 
+    var ghReleases = require('electron-gh-releases');
     var update = new ghReleases(autoUpdateOptions, function (autoUpdater) {
       autoUpdater
-        .on('error', function(event, message) {
+        .on('error', function (event, message) {
           console.log('ERRORED.');
           console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
         })
         .on('update-downloaded', function (event, releaseNotes, releaseName,
-          releaseDate, updateUrl, quitAndUpdate) {
+                                           releaseDate, updateUrl, quitAndUpdate) {
           console.log('Update downloaded');
           confirmAutoUpdate(quitAndUpdate);
         });
@@ -135,7 +94,10 @@ app.on('ready', function(){
             message: 'You are currently running the latest version of Gitify.'
           });
         }
-        app.dock.hide();
+
+        if (isDarwin) {
+          mb.app.dock.hide();
+        }
       }
 
       if (!err && status) {
@@ -144,7 +106,7 @@ app.on('ready', function(){
     });
   }
 
-  function confirmAutoUpdate(quitAndUpdate) {
+  function confirmAutoUpdate (quitAndUpdate) {
     dialog.showMessageBox({
       type: 'question',
       buttons: ['Update & Restart', 'Cancel'],
@@ -152,42 +114,48 @@ app.on('ready', function(){
       cancelId: 99,
       message: 'There is an update available. Would you like to update Gitify now?'
     }, function (response) {
-        console.log('Exit: ' + response);
-        app.dock.hide();
-        if (response === 0) {
-          quitAndUpdate();
-        }
+      console.log('Exit: ' + response);
+      if (isDarwin) {
+        mb.app.dock.hide();
       }
-    );
+
+      if (response === 0) {
+        quitAndUpdate();
+      }
+    });
   }
 
-  ipc.on('reopen-window', function() {
-    showWindow();
+  ipc.on('reopen-window', function () {
+    mb.window.show();
   });
 
-  ipc.on('update-icon', function(event, arg) {
+  ipc.on('update-icon', function (event, arg) {
     if (arg === 'TrayActive') {
-      appIcon.setImage(iconActive);
+      mb.tray.setImage(iconActive);
     } else {
-      appIcon.setImage(iconIdle);
+      mb.tray.setImage(iconIdle);
     }
   });
 
-  ipc.on('startup-enable', function() {
-    autoStart.enable();
+  ipc.on('startup-enable', function () {
+    if (!isLinux) {
+      autoStart.enable();
+    }
   });
 
-  ipc.on('startup-disable', function() {
-    autoStart.disable();
+  ipc.on('startup-disable', function () {
+    if (!isLinux) {
+      autoStart.disable();
+    }
   });
 
-  ipc.on('check-update', function() {
+  ipc.on('check-update', function () {
     checkAutoUpdate(true);
   });
 
-  ipc.on('app-quit', function() {
-    app.quit();
+  ipc.on('app-quit', function () {
+    mb.app.quit();
   });
 
-  appIcon.setToolTip('GitHub Notifications on your menu bar.');
+  mb.tray.setToolTip('GitHub Notifications on your menu bar.');
 });

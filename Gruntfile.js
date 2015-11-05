@@ -29,7 +29,7 @@ module.exports = function(grunt) {
     watch: {
       less: {
         files: 'src/less/*',
-        tasks: ['less'],
+        tasks: ['less']
       }
     },
 
@@ -47,6 +47,9 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['build']);
-  grunt.registerTask('build', ['less', 'copy']);
   grunt.registerTask('release', ['clean', 'build']);
+  grunt.registerTask('build', function () {
+    grunt.file.mkdir('build/js');
+    grunt.task.run(['less', 'copy']);
+  })
 };
