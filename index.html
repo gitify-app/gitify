@@ -12,12 +12,11 @@
       <div id="app"></div>
   </body>
 
-  <script type="text/javascript" src="build/js/app.js"></script>
-
-  <script type="text/javascript">
+  <script src="build/js/app.js"></script>
+  <script>
     // Disable zoom
     document.addEventListener('mousewheel', function(e) {
-      if(e.ctrlKey) {
+      if (e.ctrlKey) {
         e.preventDefault();
       }
     });
