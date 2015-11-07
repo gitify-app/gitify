@@ -51,5 +51,5 @@ module.exports = function(grunt) {
   grunt.registerTask('build', function () {
     grunt.file.mkdir('build/js');
     grunt.task.run(['less', 'copy']);
-  })
+  });
 };
