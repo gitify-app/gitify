@@ -22,11 +22,10 @@ var NotificationItem = React.createClass({
 
   pressTitle: function () {
     var markOnClick = SettingsStore.getSettings().markOnClick;
+    this.openBrowser();
+    
     if (markOnClick) {
-      this.openBrowser();
       this.markAsRead();
-    } else {
-      this.openBrowser();
     }
   },
 
