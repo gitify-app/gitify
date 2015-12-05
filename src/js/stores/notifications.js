@@ -1,4 +1,7 @@
-var ipc = window.require('ipc');
+var electron = window.require('electron');
+var remote = electron.remote;
+var ipc = remote.ipcRenderer;
+
 var _ = require('underscore');
 
 var Reflux = require('reflux');

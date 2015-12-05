@@ -1,4 +1,6 @@
-var ipc = window.require('ipc');
+var electron = window.require('electron');
+var remote = electron.remote;
+var ipc = remote.ipcRenderer;
 
 var Reflux = require('reflux');
 var Actions = require('../actions/actions');

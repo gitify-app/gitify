@@ -14,7 +14,7 @@ var Search = React.createClass({
     };
   },
 
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps: function (nextProps) {
     if (nextProps.showSearch === false) {
       this.setState({
         searchTerm: ''

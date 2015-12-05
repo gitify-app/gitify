@@ -1,5 +1,7 @@
-var remote = window.require('remote');
-var shell = remote.require('shell');
+var electron = window.require('electron');
+var remote = electron.remote;
+var shell = remote.shell;
+var BrowserWindow = remote.BrowserWindow;
 
 var React = require('react');
 var Reflux = require('reflux');
@@ -11,7 +13,7 @@ var NotificationsStore = require('../stores/notifications');
 var SearchStore = require('../stores/search');
 var Repository = require('../components/repository');
 
-var Notifications = React.createClass({
+var NotificationsPage = React.createClass({
   areIn: function (repoFullName, searchTerm) {
     return repoFullName.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0;
   },
@@ -134,4 +136,4 @@ var Notifications = React.createClass({
   }
 });
 
-module.exports = Notifications;
+module.exports = NotificationsPage;

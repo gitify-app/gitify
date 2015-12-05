@@ -1,0 +1,34 @@
+{
+  "scriptPreprocessor": "src/js/__tests__/preprocessor.js",
+  "collectCoverage": true,
+  "collectCoverageOnlyFrom": {
+    "src/js/actions/actions.js": true,
+    "src/js/components/login.js": true,
+    "src/js/components/navigation.js": true,
+    "src/js/components/notification.js": true,
+    "src/js/components/notifications.js": true,
+    "src/js/components/repository.js": true,
+    "src/js/components/search.js": true,
+    "src/js/components/settings.js": true,
+    "src/js/components/search-input.js": true,
+    "src/js/stores/auth.js": true,
+    "src/js/stores/notifications.js": true,
+    "src/js/stores/search.js": true,
+    "src/js/stores/settings.js": true,
+    "src/js/stores/sound-notification.js": true
+  },
+  "unmockedModulePathPatterns": [
+    "react",
+    "react-dom",
+    "react-addons-test-utils",
+    "underscore"
+  ],
+  "testPathDirs": [
+    "src/js/__tests__/"
+  ],
+  "testPathIgnorePatterns": [
+    "src/js/__tests__/preprocessor.js",
+    "src/js/__tests__/__mocks__/",
+    "node_modules/"
+  ]
+}

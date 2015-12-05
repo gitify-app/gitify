@@ -1,10 +1,12 @@
-var ipc = window.require('ipc');
-var remote = window.require('remote');
-var shell = remote.require('shell');
+var electron = window.require('electron');
+var remote = electron.remote;
+var ipc = remote.ipcRenderer;
+var shell = remote.shell;
 
 var React = require('react');
 var Reflux = require('reflux');
-var Router = require('react-router');
+var ReactRouter = require('react-router');
+var Router = ReactRouter.Router;
 
 var Actions = require('../actions/actions');
 var AuthStore = require('../stores/auth');
@@ -12,15 +14,18 @@ var NotificationsStore = require('../stores/notifications.js');
 
 var Navigation = React.createClass({
   mixins: [
-    Router.State,
     Reflux.connect(AuthStore, 'authStatus'),
     Reflux.connect(NotificationsStore, 'notifications'),
     Reflux.listenTo(Actions.getNotifications.completed, 'refreshDone'),
     Reflux.listenTo(Actions.getNotifications.failed, 'refreshDone')
   ],
 
+  // contextTypes: {
+  //   router: React.PropTypes.func
+  // },
+
   contextTypes: {
-    router: React.PropTypes.func
+    location: React.PropTypes.object
   },
 
   getInitialState: function () {
@@ -105,14 +110,23 @@ var Navigation = React.createClass({
         <i title="Quit" className='fa fa-power-off' onClick={this.appQuit} />
       );
     }
-    if (this.getPath() === '/settings') {
-      backIcon = (
-        <i title="Back" className='fa fa-chevron-left' onClick={this.goBack} />
-      );
-      settingsIcon = (
-        <i title="Settings" className='fa fa-cog' onClick={this.goBack} />
-      );
-    }
+
+    console.log('=============');
+    console.log('=============');
+    console.log(JSON.stringify(this.props.location));
+    console.log(JSON.stringify(this.context.location));
+    console.log(JSON.stringify(this.props.history));
+    console.log('=============');
+    console.log('=============');
+
+    // if (this.getPath() === '/settings') {
+    //   backIcon = (
+    //     <i title="Back" className='fa fa-chevron-left' onClick={this.goBack} />
+    //   );
+    //   settingsIcon = (
+    //     <i title="Settings" className='fa fa-cog' onClick={this.goBack} />
+    //   );
+    // }
 
     return (
       <div className='container-fluid'>

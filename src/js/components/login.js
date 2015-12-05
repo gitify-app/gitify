@@ -1,6 +1,7 @@
-var remote = window.require('remote');
-var ipc = window.require('ipc');
-var BrowserWindow = remote.require('browser-window');
+var electron = window.require('electron');
+var remote = electron.remote;
+var ipc = remote.ipcRenderer;
+var BrowserWindow = remote.BrowserWindow;
 
 var React = require('react');
 var apiRequests = require('../utils/api-requests');
@@ -17,8 +18,8 @@ var Login = React.createClass({
 
     // Start Login
     var options = {
-      client_id: '27a352516d3341cee376',
-      client_secret: '',
+      client_id: '3fef4433a29c6ad8f22c',
+      client_secret: '9670de733096c15322183ff17ed0fc8704050379',
       scope: ['user:email', 'notifications']
     };
 

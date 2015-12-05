@@ -5,8 +5,8 @@ jest.dontMock('../../actions/actions.js');
 jest.dontMock('../../components/settings.js');
 jest.dontMock('../../stores/settings.js');
 
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var TestUtils = require('react-addons-test-utils');
 
 describe('Test for Settings Component', function () {
 
