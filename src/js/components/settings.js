@@ -1,7 +1,9 @@
 var React = require('react');
 var Toggle = require('react-toggle');
 
-var ipc = window.require('ipc');
+var electron = window.require('electron');
+var remote = electron.remote;
+var ipc = remote.ipcRenderer;
 
 var Actions = require('../actions/actions');
 var SettingsStore = require('../stores/settings');

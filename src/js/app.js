@@ -1,6 +1,8 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Router = require('react-router');
+import React from 'react';
+import { render } from 'react-dom';
+import { Router, Route, IndexRoute } from 'react-router';
+
+var createBrowserHistory = require('history/lib/createBrowserHistory');
 
 var AuthStore = require('./stores/auth');
 var Navigation = require('./components/navigation');
@@ -9,20 +11,28 @@ var LoginPage = require('./components/login');
 var NotificationsPage = require('./components/notifications');
 var SettingsPage = require('./components/settings');
 
-var Route = Router.Route;
-var NotFoundRoute = Router.NotFoundRoute;
-var DefaultRoute = Router.DefaultRoute;
-var RouteHandler = Router.RouteHandler;
+var history = createBrowserHistory();
 
 var App = React.createClass({
-  statics: {
-    willTransitionTo: function (transition) {
-      if (transition.path !== '/login' && !AuthStore.authStatus()) {
-        console.log('Not logged in. Redirecting to login.');
-        transition.redirect('login', {});
-      }
-    }
-  },
+  // statics: {
+  //   willTransitionTo: function (transition) {
+  //     console.log('......');
+  //     console.log('......');
+  //     console.log('......');
+  //     console.log('......');
+  //     console.log('......');
+  //     console.log('......');
+  //     console.log('......');
+  //     console.log('......');
+  //     console.log('......');
+  //     console.log('......');
+  //     console.log(transition);
+  //     if (transition.path !== '/login' && !AuthStore.authStatus()) {
+  //       console.log('Not logged in. Redirecting to login.');
+  //       transition.redirect('login', {});
+  //     }
+  //   }
+  // },
 
   getInitialState: function () {
     return {
@@ -41,7 +51,7 @@ var App = React.createClass({
       <div>
         <Navigation toggleSearch={this.toggleSearch} />
         <SearchBar showSearch={this.state.showSearch} />
-        <RouteHandler />
+        {this.props.children}
       </div>
     );
   }
@@ -53,16 +63,22 @@ var NotFound = React.createClass({
   }
 });
 
-var routes = (
-  <Route handler={App} path="/">
-    <DefaultRoute handler={NotificationsPage} />
-    <Route name="login" handler={LoginPage}/>
-    <Route name="notifications" handler={NotificationsPage}/>
-    <Route name="settings" handler={SettingsPage}/>
-    <NotFoundRoute handler={NotFound}/>
-  </Route>
-);
-
-Router.run(routes, function (Handler) {
-  ReactDOM.render(<Handler/>, document.getElementById('app'));
+var Found = React.createClass({
+  render: function () {
+    return <h2>EYSY EYS YddEYS YEYS YES Yfound</h2>;
+  }
 });
+
+// <Route path='*' component={NotFound} />
+
+render(
+  <Router>
+    <Route path='/' component={App}>
+      <IndexRoute component={LoginPage} />
+      <Route path='login' component={LoginPage} />
+      <Route path='notifications' component={NotificationsPage} />
+      <Route path='settings' component={SettingsPage} />
+    </Route>
+  </Router>,
+  document.getElementById('app')
+);
