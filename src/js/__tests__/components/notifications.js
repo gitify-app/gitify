@@ -7,8 +7,8 @@ jest.dontMock('../../components/notifications.js');
 jest.dontMock('../../stores/auth.js');
 jest.dontMock('../../stores/notifications.js');
 
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var TestUtils = require('react-addons-test-utils');
 
 describe('Test for Notifications Component', function () {
 

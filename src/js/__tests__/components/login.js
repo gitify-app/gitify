@@ -6,8 +6,8 @@ jest.dontMock('../../utils/api-requests');
 jest.dontMock('../../components/login.js');
 jest.dontMock('../../stores/auth.js');
 
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var TestUtils = require('react-addons-test-utils');
 
 describe('Test for Login Component', function () {
 
