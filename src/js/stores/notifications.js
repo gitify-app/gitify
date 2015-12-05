@@ -1,9 +1,8 @@
 var electron = window.require('electron');
 var remote = electron.remote;
-var ipc = remote.ipcRenderer;
+var ipcRenderer = window.require('electron').ipcRenderer;
 
 var _ = require('underscore');
-
 var Reflux = require('reflux');
 var Actions = require('../actions/actions');
 var apiRequests = require('../utils/api-requests');
@@ -20,9 +19,9 @@ var NotificationsStore = Reflux.createStore({
 
   updateTrayIcon: function (notifications) {
     if (notifications.length > 0) {
-      ipc.sendChannel('update-icon', 'TrayActive');
+      ipc.send('update-icon', 'TrayActive');
     } else {
-      ipc.sendChannel('update-icon', 'TrayIdle');
+      ipc.send('update-icon', 'TrayIdle');
     }
   },
 

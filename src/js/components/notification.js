@@ -1,6 +1,7 @@
 var React = require('react');
-var remote = window.require('remote');
-var shell = remote.require('shell');
+var electron = window.require('electron');
+var remote = electron.remote;
+var shell = window.require('electron').shell;
 
 var Actions = require('../actions/actions');
 var apiRequests = require('../utils/api-requests');

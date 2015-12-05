@@ -3,7 +3,7 @@ var Toggle = require('react-toggle');
 
 var electron = window.require('electron');
 var remote = electron.remote;
-var ipc = remote.ipcRenderer;
+var ipcRenderer = window.require('electron').ipcRenderer;
 
 var Actions = require('../actions/actions');
 var SettingsStore = require('../stores/settings');
@@ -25,11 +25,11 @@ var SettingsPage = React.createClass({
   },
 
   checkForUpdates: function () {
-    ipc.sendChannel('check-update');
+    ipcRenderer.send('check-update');
   },
 
   appQuit: function () {
-    ipc.sendChannel('app-quit');
+    ipcRenderer.send('app-quit');
   },
 
   render: function () {

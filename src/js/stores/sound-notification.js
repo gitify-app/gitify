@@ -1,6 +1,6 @@
 var electron = window.require('electron');
 var remote = electron.remote;
-var ipc = remote.ipcRenderer;
+var ipcRenderer = window.require('electron').ipcRenderer;
 
 var Reflux = require('reflux');
 var _ = require('underscore');
@@ -25,7 +25,7 @@ var SoundNotificationStore = Reflux.createStore({
       body: body
     });
     nativeNotification.onclick = function () {
-      ipc.sendChannel('reopen-window');
+      ipc.send('reopen-window');
     };
     return nativeNotification;
   },

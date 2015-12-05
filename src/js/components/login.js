@@ -1,13 +1,13 @@
 var electron = window.require('electron');
 var remote = electron.remote;
 var ipcRenderer = window.require('electron').ipcRenderer;
+var BrowserWindow = remote.BrowserWindow;
 
 console.log('!!!!!');
 console.log(electron);
 console.log(ipcRenderer);
 console.log('!!!!!');
 
-var BrowserWindow = remote.BrowserWindow;
 
 import React from 'react';
 import { History } from 'react-router';

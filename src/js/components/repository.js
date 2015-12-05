@@ -2,7 +2,7 @@ var React = require('react');
 
 var electron = window.require('electron');
 var remote = electron.remote;
-var shell = electron.shell;
+var shell = window.require('electron').shell;
 
 var SingleNotification = require('../components/notification');
 var Actions = require('../actions/actions');

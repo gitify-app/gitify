@@ -4,9 +4,9 @@ var ipcRenderer = window.require('electron').ipcRenderer;
 var shell = window.require('electron').shell;
 
 import React from 'react';
-var Reflux = require('reflux');
-
 import { History } from 'react-router';
+
+var Reflux = require('reflux');
 
 var Actions = require('../actions/actions');
 var AuthStore = require('../stores/auth');
