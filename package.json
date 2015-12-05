@@ -14,40 +14,7 @@
     "dist-linux": "electron-packager . Gitify --overwrite --platform=linux --arch=x64 --version=0.35.4 --asar=true --icon=images/app-icon.icns --prune --out=dist --ignore='src' --ignore='^/dist$' --ignore='coverage'",
     "dist-windows": "electron-packager . Gitify --overwrite --platform=win32 --arch=x64 --version=0.35.4 --asar=true --icon=images/app-icon.icns --prune --out=dist --ignore='src' --ignore='^/dist$' --ignore='coverage'",
     "lint": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
-    "test": "npm run lint && jest"
-  },
-  "jest": {
-    "scriptPreprocessor": "src/js/__tests__/preprocessor.js",
-    "collectCoverage": true,
-    "collectCoverageOnlyFrom": {
-      "src/js/actions/actions.js": true,
-      "src/js/components/login.js": true,
-      "src/js/components/navigation.js": true,
-      "src/js/components/notification.js": true,
-      "src/js/components/notifications.js": true,
-      "src/js/components/repository.js": true,
-      "src/js/components/search.js": true,
-      "src/js/components/settings.js": true,
-      "src/js/components/search-input.js": true,
-      "src/js/stores/auth.js": true,
-      "src/js/stores/notifications.js": true,
-      "src/js/stores/search.js": true,
-      "src/js/stores/settings.js": true,
-      "src/js/stores/sound-notification.js": true
-    },
-    "unmockedModulePathPatterns": [
-      "node_modules/react",
-      "node_modules/react-tools",
-      "node_modules/underscore"
-    ],
-    "testPathDirs": [
-      "src/js/__tests__/"
-    ],
-    "testPathIgnorePatterns": [
-      "src/js/__tests__/preprocessor.js",
-      "src/js/__tests__/__mocks__/",
-      "node_modules/"
-    ]
+    "test": "npm run lint && jest --config=jest-config.json"
   },
   "repository": {
     "type": "git",
