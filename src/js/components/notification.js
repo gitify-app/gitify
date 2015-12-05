@@ -1,4 +1,5 @@
-var React = require('react');
+import React from 'react';
+
 var electron = window.require('electron');
 var remote = electron.remote;
 var shell = window.require('electron').shell;

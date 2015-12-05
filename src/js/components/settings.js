@@ -1,9 +1,9 @@
-var React = require('react');
-var Toggle = require('react-toggle');
-
 var electron = window.require('electron');
 var remote = electron.remote;
 var ipcRenderer = window.require('electron').ipcRenderer;
+
+import React from 'react';
+import Toggle from 'react-toggle';
 
 var Actions = require('../actions/actions');
 var SettingsStore = require('../stores/settings');
@@ -21,6 +21,9 @@ var SettingsPage = React.createClass({
   },
 
   toggleSetting: function (key, event) {
+    console.log('!!!>!>!>!>>!>!>');
+    console.log(event.target.checked);
+    console.log('!!!>!>!>!>>!>!>');
     Actions.setSetting(key, event.target.checked);
   },
 

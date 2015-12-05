@@ -1,19 +1,12 @@
 var electron = window.require('electron');
-var remote = electron.remote;
 var ipcRenderer = window.require('electron').ipcRenderer;
+var remote = electron.remote;
 var BrowserWindow = remote.BrowserWindow;
-
-console.log('!!!!!');
-console.log(electron);
-console.log(ipcRenderer);
-console.log('!!!!!');
-
 
 import React from 'react';
 import { History } from 'react-router';
 
 var apiRequests = require('../utils/api-requests');
-
 var Actions = require('../actions/actions');
 
 var Login = React.createClass({

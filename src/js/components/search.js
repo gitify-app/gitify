@@ -1,5 +1,6 @@
-var React = require('react');
-var Reflux = require('reflux');
+import React from 'react';
+import Reflux from 'reflux';
+
 var Actions = require('../actions/actions');
 var SearchStore = require('../stores/search');
 

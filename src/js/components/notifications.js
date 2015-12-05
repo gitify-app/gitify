@@ -3,8 +3,9 @@ var remote = electron.remote;
 var shell = remote.shell;
 var BrowserWindow = remote.BrowserWindow;
 
-var React = require('react');
-var Reflux = require('reflux');
+import React from 'react';
+import Reflux from 'reflux';
+
 var Loading = require('reloading');
 var _ = require('underscore');
 

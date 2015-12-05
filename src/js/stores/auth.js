@@ -1,4 +1,5 @@
-var Reflux = require('reflux');
+import Reflux from 'reflux';
+
 var Actions = require('../actions/actions');
 
 var AuthStore = Reflux.createStore({

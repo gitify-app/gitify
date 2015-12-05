@@ -2,8 +2,9 @@ var electron = window.require('electron');
 var remote = electron.remote;
 var ipcRenderer = window.require('electron').ipcRenderer;
 
+import Reflux from 'reflux';
+
 var _ = require('underscore');
-var Reflux = require('reflux');
 var Actions = require('../actions/actions');
 var apiRequests = require('../utils/api-requests');
 var SettingsStore = require('../stores/settings');

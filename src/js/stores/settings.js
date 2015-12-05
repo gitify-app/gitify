@@ -2,7 +2,7 @@ var electron = window.require('electron');
 var remote = electron.remote;
 var ipcRenderer = window.require('electron').ipcRenderer;
 
-var Reflux = require('reflux');
+import Reflux from 'reflux';
 var Actions = require('../actions/actions');
 
 var SettingsStore = Reflux.createStore({

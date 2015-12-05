@@ -5,8 +5,7 @@ var shell = window.require('electron').shell;
 
 import React from 'react';
 import { History } from 'react-router';
-
-var Reflux = require('reflux');
+import Reflux from 'reflux';
 
 var Actions = require('../actions/actions');
 var AuthStore = require('../stores/auth');
@@ -77,7 +76,7 @@ var Navigation = React.createClass({
   },
 
   appQuit: function () {
-    ipc.sendChannel('app-quit');
+    ipcRenderer.send('app-quit');
   },
 
   openBrowser: function () {
