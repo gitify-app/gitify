@@ -152,13 +152,12 @@ app.on('ready', function(){
       cancelId: 99,
       message: 'There is an update available. Would you like to update Gitify now?'
     }, function (response) {
-        console.log('Exit: ' + response);
-        app.dock.hide();
-        if (response === 0) {
-          quitAndUpdate();
-        }
+      console.log('Exit: ' + response);
+      app.dock.hide();
+      if (response === 0) {
+        quitAndUpdate();
       }
-    );
+    });
   }
 
   ipc.on('reopen-window', function() {
