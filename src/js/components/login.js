@@ -1,14 +1,24 @@
 var electron = window.require('electron');
 var remote = electron.remote;
-var ipc = remote.ipcRenderer;
+var ipcRenderer = window.require('electron').ipcRenderer;
+
+console.log('!!!!!');
+console.log(electron);
+console.log(ipcRenderer);
+console.log('!!!!!');
+
 var BrowserWindow = remote.BrowserWindow;
 
-var React = require('react');
+import React from 'react';
+import { History } from 'react-router';
+
 var apiRequests = require('../utils/api-requests');
 
 var Actions = require('../actions/actions');
 
 var Login = React.createClass({
+  mixins: [ History ],
+
   contextTypes: {
     router: React.PropTypes.func
   },
@@ -34,7 +44,7 @@ var Login = React.createClass({
     });
     var githubUrl = 'https://github.com/login/oauth/authorize?';
     var authUrl = githubUrl + 'client_id=' + options.client_id + '&scope=' + options.scope;
-    authWindow.loadUrl(authUrl);
+    authWindow.loadURL(authUrl);
 
     authWindow.webContents.on('will-navigate', function (event, url) {
       handleCallback(url);
@@ -83,8 +93,11 @@ var Login = React.createClass({
         if (response && response.ok) {
           // Success - Do Something.
           Actions.login(response.body.access_token);
-          self.context.router.transitionTo('notifications');
-          ipc.sendChannel('reopen-window');
+
+          // self.context.router.transitionTo('notifications');
+          self.history.pushState(null, '/notifications');
+
+          ipcRenderer.send('reopen-window');
         } else {
           // Error - Show messages.
           // Show appropriate message

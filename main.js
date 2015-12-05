@@ -1,4 +1,4 @@
-var electron = require("electron");
+var electron = require('electron');
 var ipc = electron.ipcMain;
 var menubar = require('menubar');
 var path = require('path');

@@ -1,12 +1,12 @@
 var electron = window.require('electron');
 var remote = electron.remote;
-var ipc = remote.ipcRenderer;
-var shell = remote.shell;
+var ipcRenderer = window.require('electron').ipcRenderer;
+var shell = window.require('electron').shell;
 
-var React = require('react');
+import React from 'react';
 var Reflux = require('reflux');
-var ReactRouter = require('react-router');
-var Router = ReactRouter.Router;
+
+import { History } from 'react-router';
 
 var Actions = require('../actions/actions');
 var AuthStore = require('../stores/auth');
@@ -14,6 +14,7 @@ var NotificationsStore = require('../stores/notifications.js');
 
 var Navigation = React.createClass({
   mixins: [
+    History,
     Reflux.connect(AuthStore, 'authStatus'),
     Reflux.connect(NotificationsStore, 'notifications'),
     Reflux.listenTo(Actions.getNotifications.completed, 'refreshDone'),
@@ -58,17 +59,17 @@ var Navigation = React.createClass({
   },
 
   goToSettings: function () {
-    this.context.router.transitionTo('settings');
+    this.history.pushState(null, '/settings');
   },
 
   logOut: function () {
     Actions.logout();
-    this.context.router.transitionTo('login');
-    ipc.sendChannel('update-icon', 'IconPlain');
+    this.history.pushState(null, '/login');
+    ipc.send('update-icon', 'IconPlain');
   },
 
   goBack: function () {
-    this.context.router.transitionTo('notifications');
+    this.history.pushState(null, '/notifications');
   },
 
   showSearch: function () {
@@ -112,21 +113,17 @@ var Navigation = React.createClass({
     }
 
     console.log('=============');
-    console.log('=============');
-    console.log(JSON.stringify(this.props.location));
-    console.log(JSON.stringify(this.context.location));
-    console.log(JSON.stringify(this.props.history));
-    console.log('=============');
+    console.log(this.context.location.pathname);
     console.log('=============');
 
-    // if (this.getPath() === '/settings') {
-    //   backIcon = (
-    //     <i title="Back" className='fa fa-chevron-left' onClick={this.goBack} />
-    //   );
-    //   settingsIcon = (
-    //     <i title="Settings" className='fa fa-cog' onClick={this.goBack} />
-    //   );
-    // }
+    if (this.context.location.pathname === '/settings') {
+      backIcon = (
+        <i title="Back" className='fa fa-chevron-left' onClick={this.goBack} />
+      );
+      settingsIcon = (
+        <i title="Settings" className='fa fa-cog' onClick={this.goBack} />
+      );
+    }
 
     return (
       <div className='container-fluid'>

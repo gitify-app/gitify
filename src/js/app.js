@@ -2,16 +2,12 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, Route, IndexRoute } from 'react-router';
 
-var createBrowserHistory = require('history/lib/createBrowserHistory');
-
 var AuthStore = require('./stores/auth');
 var Navigation = require('./components/navigation');
 var SearchBar = require('./components/search');
 var LoginPage = require('./components/login');
 var NotificationsPage = require('./components/notifications');
 var SettingsPage = require('./components/settings');
-
-var history = createBrowserHistory();
 
 var App = React.createClass({
   // statics: {
@@ -63,13 +59,6 @@ var NotFound = React.createClass({
   }
 });
 
-var Found = React.createClass({
-  render: function () {
-    return <h2>EYSY EYS YddEYS YEYS YES Yfound</h2>;
-  }
-});
-
-// <Route path='*' component={NotFound} />
 
 render(
   <Router>
@@ -78,6 +67,7 @@ render(
       <Route path='login' component={LoginPage} />
       <Route path='notifications' component={NotificationsPage} />
       <Route path='settings' component={SettingsPage} />
+      <Route path='*' component={NotFound} />
     </Route>
   </Router>,
   document.getElementById('app')
