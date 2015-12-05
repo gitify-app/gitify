@@ -25,7 +25,7 @@ var SoundNotificationStore = Reflux.createStore({
       body: body
     });
     nativeNotification.onclick = function () {
-      ipc.send('reopen-window');
+      ipcRenderer.send('reopen-window');
     };
     return nativeNotification;
   },

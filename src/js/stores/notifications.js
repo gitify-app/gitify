@@ -20,9 +20,9 @@ var NotificationsStore = Reflux.createStore({
 
   updateTrayIcon: function (notifications) {
     if (notifications.length > 0) {
-      ipc.send('update-icon', 'TrayActive');
+      ipcRenderer.send('update-icon', 'TrayActive');
     } else {
-      ipc.send('update-icon', 'TrayIdle');
+      ipcRenderer.send('update-icon', 'TrayIdle');
     }
   },
 

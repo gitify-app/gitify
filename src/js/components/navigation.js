@@ -64,7 +64,7 @@ var Navigation = React.createClass({
   logOut: function () {
     Actions.logout();
     this.history.pushState(null, '/login');
-    ipc.send('update-icon', 'IconPlain');
+    ipcRenderer.send('update-icon', 'IconPlain');
   },
 
   goBack: function () {
@@ -110,10 +110,6 @@ var Navigation = React.createClass({
         <i title="Quit" className='fa fa-power-off' onClick={this.appQuit} />
       );
     }
-
-    console.log('=============');
-    console.log(this.context.location.pathname);
-    console.log('=============');
 
     if (this.context.location.pathname === '/settings') {
       backIcon = (
