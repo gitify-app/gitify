@@ -9,11 +9,13 @@
     "watch-js": "watchify -t babelify src/js/app.js -o build/js/app.js -v",
     "watch": "npm run build && grunt build && npm run watch-js & grunt watch",
     "start": "electron .",
-    "package": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.32.3 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
+    "package-darwin": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.32.3 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
+    "package-linux": "electron-packager . Gitify --overwrite --platform=linux --arch=x64 --version=0.32.3 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
     "codesign": "bash scripts/codesign.bash",
-    "dist": "npm run package && npm run codesign",
+    "dist-darwin": "npm run package-darwin && npm run codesign",
     "lint": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
-    "test": "npm run lint && jest"
+    "test": "npm run lint && jest",
+    "coveralls": "cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js"
   },
   "jest": {
     "scriptPreprocessor": "src/js/__tests__/preprocessor.js",

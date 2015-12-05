@@ -14,10 +14,12 @@ var dialog = require('dialog');
 var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
-var autoStart = new AutoLaunch({
-  name: 'Gitify',
-  path: process.execPath.match(/.*?\.app/)[0]
-});
+if (process.platform === 'darwin') {
+  var autoStart = new AutoLaunch({
+    name: 'Gitify',
+    path: process.execPath.match(/.*?\.app/)[0]
+  });
+}
 
 app.on('ready', function(){
   var appIcon = new Tray(iconIdle);
@@ -39,8 +41,8 @@ app.on('ready', function(){
 
   function initWindow () {
     var defaults = {
-      width: 400,
-      height: 350,
+      width: 420,
+      height: 370,
       show: false,
       frame: false,
       resizable: false,
@@ -53,7 +55,11 @@ app.on('ready', function(){
     appIcon.window.setVisibleOnAllWorkspaces(true);
 
     initMenu();
-    checkAutoUpdate(false);
+    showWindow();
+
+    if (process.platform === 'darwin') {
+      checkAutoUpdate(false);
+    }
   }
 
   function showWindow (bounds) {
@@ -70,6 +76,7 @@ app.on('ready', function(){
         appIcon.window.setPosition(defaultSize.width - 525, 15);
       }
     }
+
     appIcon.window.show();
   }
 
@@ -187,6 +194,10 @@ app.on('ready', function(){
   ipc.on('app-quit', function() {
     app.quit();
   });
+
+  if(process.platform === 'darwin'){
+    app.dock.hide();
+  }
 
   appIcon.setToolTip('GitHub Notifications on your menu bar.');
 });

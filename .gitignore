@@ -4,4 +4,6 @@ npm-debug.log
 build/
 coverage/
 node_modules/
+
+Gitify-linux/
 Gitify-darwin-x64/
