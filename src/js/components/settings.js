@@ -19,9 +19,6 @@ var SettingsPage = React.createClass({
   },
 
   toggleSetting: function (key, event) {
-    console.log('!!!>!>!>!>>!>!>');
-    console.log(event.target.checked);
-    console.log('!!!>!>!>!>>!>!>');
     Actions.setSetting(key, event.target.checked);
   },
 

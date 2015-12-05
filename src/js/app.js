@@ -10,26 +10,6 @@ var NotificationsPage = require('./components/notifications');
 var SettingsPage = require('./components/settings');
 
 var App = React.createClass({
-  // statics: {
-  //   willTransitionTo: function (transition) {
-  //     console.log('......');
-  //     console.log('......');
-  //     console.log('......');
-  //     console.log('......');
-  //     console.log('......');
-  //     console.log('......');
-  //     console.log('......');
-  //     console.log('......');
-  //     console.log('......');
-  //     console.log('......');
-  //     console.log(transition);
-  //     if (transition.path !== '/login' && !AuthStore.authStatus()) {
-  //       console.log('Not logged in. Redirecting to login.');
-  //       transition.redirect('login', {});
-  //     }
-  //   }
-  // },
-
   getInitialState: function () {
     return {
       showSearch: false
@@ -59,14 +39,19 @@ var NotFound = React.createClass({
   }
 });
 
+function requireAuth (nextState, replaceState) {
+  if (!AuthStore.authStatus()) {
+    replaceState(null, '/login/');
+  }
+}
 
 render(
   <Router>
     <Route path='/' component={App}>
-      <IndexRoute component={LoginPage} />
-      <Route path='login' component={LoginPage} />
-      <Route path='notifications' component={NotificationsPage} />
-      <Route path='settings' component={SettingsPage} />
+      <IndexRoute component={NotificationsPage} onEnter={requireAuth} />
+      <Route path='/notifications' component={NotificationsPage} />
+      <Route path='/login' component={LoginPage} />
+      <Route path='/settings' component={SettingsPage} />
       <Route path='*' component={NotFound} />
     </Route>
   </Router>,
