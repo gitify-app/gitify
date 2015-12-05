@@ -1,11 +1,9 @@
-var electron = window.require('electron');
-var remote = electron.remote;
-var ipcRenderer = window.require('electron').ipcRenderer;
-var shell = window.require('electron').shell;
-
 import React from 'react';
 import { History } from 'react-router';
 import Reflux from 'reflux';
+
+const ipcRenderer = window.require('electron').ipcRenderer;
+const shell = window.require('electron').shell;
 
 var Actions = require('../actions/actions');
 var AuthStore = require('../stores/auth');

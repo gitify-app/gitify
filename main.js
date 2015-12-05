@@ -1,5 +1,6 @@
-var electron = require('electron');
-var ipc = electron.ipcMain;
+const electron = require('electron');
+const ipc = electron.ipcMain;
+
 var menubar = require('menubar');
 var path = require('path');
 

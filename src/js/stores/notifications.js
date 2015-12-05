@@ -1,10 +1,8 @@
-var electron = window.require('electron');
-var remote = electron.remote;
-var ipcRenderer = window.require('electron').ipcRenderer;
-
 import Reflux from 'reflux';
+import _ from 'underscore';
 
-var _ = require('underscore');
+const ipcRenderer = window.require('electron').ipcRenderer;
+
 var Actions = require('../actions/actions');
 var apiRequests = require('../utils/api-requests');
 var SettingsStore = require('../stores/settings');

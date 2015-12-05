@@ -1,13 +1,10 @@
-var electron = window.require('electron');
-var remote = electron.remote;
-var shell = remote.shell;
-var BrowserWindow = remote.BrowserWindow;
-
 import React from 'react';
 import Reflux from 'reflux';
+import _ from 'underscore';
+
+const shell = window.require('electron').shell;
 
 var Loading = require('reloading');
-var _ = require('underscore');
 
 var Actions = require('../actions/actions');
 var NotificationsStore = require('../stores/notifications');
@@ -131,7 +128,7 @@ var NotificationsPage = React.createClass({
           <div className='fork' onClick={this.openBrowser}>
             <i className='fa fa-github' /> Star Gitify on GitHub
           </div>
-        ): null}
+        ) : null}
       </div>
     );
   }

@@ -1,8 +1,6 @@
 import React from 'react';
 
-var electron = window.require('electron');
-var remote = electron.remote;
-var shell = window.require('electron').shell;
+const shell = window.require('electron').shell;
 
 var SingleNotification = require('../components/notification');
 var Actions = require('../actions/actions');

@@ -1,8 +1,7 @@
-var electron = window.require('electron');
-var remote = electron.remote;
-var ipcRenderer = window.require('electron').ipcRenderer;
-
 import Reflux from 'reflux';
+
+const ipcRenderer = window.require('electron').ipcRenderer;
+
 var Actions = require('../actions/actions');
 
 var SettingsStore = Reflux.createStore({
@@ -57,14 +56,14 @@ var SettingsStore = Reflux.createStore({
     this._settings[setting] = value;
     window.localStorage.setItem('settings', JSON.stringify(this._settings));
     this.trigger(this._settings);
-    if(setting == 'openAtStartup') {
+    if (setting == 'openAtStartup') {
       this.handleStartup(value);
     }
   },
 
   handleStartup: function (value) {
     var method = (value) ? 'startup-enable' : 'startup-disable';
-    ipc.send(method);
+    ipcRenderer.send(method);
   }
 
 });
