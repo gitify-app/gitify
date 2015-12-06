@@ -29,7 +29,7 @@
     "src/js/__tests__/components/"
   ],
   "testPathIgnorePatterns": [
-    "src/js/__tests__/__mocks__/",
+    "<rootDir>/src/js/__tests__/__mocks__/",
     "node_modules/"
   ]
 }

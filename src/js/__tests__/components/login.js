@@ -11,21 +11,19 @@ import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
 import { Router } from 'react-router';
 
-var superagent = require('superagent');
-var apiRequests = require('../../utils/api-requests.js');
 var Actions = require('../../actions/actions.js');
-var AuthStore = require('../../stores/auth.js');
-var Login = require('../../components/login.js');
 
-describe('Login Component', () => {
+describe('Login Component', function () {
 
-  beforeEach(() => {
+  var Login, AuthStore, apiRequests;
+
+  beforeEach(function () {
 
     // Mock Electron's window.require
     // and remote.ipc
 
     window.require = function () {
-      return
+      return {
         remote: {
           BrowserWindow: function () {
             return {
@@ -67,30 +65,19 @@ describe('Login Component', () => {
         ipcRenderer: function () {
           return;
         }
+      }
     };
 
-    // Mock localStorage
-    var mockLocalStorage = (function() {
-      var store = {};
-      return {
-        getItem: function(key) {
-          return "githubtoken_abc";
-        }
-      };
-    })();
+    window.localStorage = {
+      item: false,
+      getItem: function () {
+        return this.item;
+      }
+    };
 
-    // var localStorage = {
-    //   item: false,
-    //   getItem: function () {
-    //     console.log('getItem getItem getItem');
-    //     console.log('getItem getItem getItem');
-    //     console.log('getItem getItem getItem');
-    //     return this.item;
-    //   }
-    // };
-
-    Object.defineProperty(window, 'localStorage', { value: mockLocalStorage });
-
+    Login = require('../../components/login.js');
+    AuthStore = require('../../stores/auth.js');
+    apiRequests = require('../../utils/api-requests.js');
 
   });
 
@@ -104,6 +91,14 @@ describe('Login Component', () => {
 
     expect(instance.authGithub).toBeDefined();
     expect(instance.requestGithubToken).toBeDefined();
+
+    var superagent = require('superagent');
+
+    console.log();
+    console.log();
+    console.log(superagent.__setResponse);
+    console.log();
+    console.log();
 
     superagent.__setResponse(200, 'ok', {'access_token': '123123123'}, false);
 
