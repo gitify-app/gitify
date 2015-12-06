@@ -1,5 +1,16 @@
 {
-  "scriptPreprocessor": "src/js/__tests__/preprocessor.js",
+  "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+  "testFileExtensions": ["es6", "js"],
+  "moduleFileExtensions": ["js", "json", "es6"],
+  "modulePathIgnorePatterns": [
+    "<rootDir>/node_modules/"
+  ],
+  "unmockedModulePathPatterns": [
+    "react",
+    "react-dom",
+    "react-addons-test-utils",
+    "underscore"
+  ],
   "collectCoverage": true,
   "collectCoverageOnlyFrom": {
     "src/js/actions/actions.js": true,
@@ -17,17 +28,10 @@
     "src/js/stores/settings.js": true,
     "src/js/stores/sound-notification.js": true
   },
-  "unmockedModulePathPatterns": [
-    "react",
-    "react-dom",
-    "react-addons-test-utils",
-    "underscore"
-  ],
   "testPathDirs": [
     "src/js/__tests__/"
   ],
   "testPathIgnorePatterns": [
-    "src/js/__tests__/preprocessor.js",
     "src/js/__tests__/__mocks__/",
     "node_modules/"
   ]
