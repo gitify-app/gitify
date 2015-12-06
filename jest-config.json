@@ -2,14 +2,11 @@
   "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
   "testFileExtensions": ["es6", "js"],
   "moduleFileExtensions": ["js", "json", "es6"],
-  "modulePathIgnorePatterns": [
-    "<rootDir>/node_modules/"
-  ],
   "unmockedModulePathPatterns": [
-    "react",
-    "react-dom",
-    "react-addons-test-utils",
-    "underscore"
+    "<rootDir>/node_modules/react",
+    "<rootDir>/node_modules/react-dom",
+    "<rootDir>/node_modules/react-addons-test-utils",
+    "<rootDir>/node_modules/underscore"
   ],
   "collectCoverage": true,
   "collectCoverageOnlyFrom": {
@@ -29,7 +26,7 @@
     "src/js/stores/sound-notification.js": true
   },
   "testPathDirs": [
-    "src/js/__tests__/"
+    "src/js/__tests__/components/"
   ],
   "testPathIgnorePatterns": [
     "src/js/__tests__/__mocks__/",
