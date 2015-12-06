@@ -93,13 +93,6 @@ describe('Login Component', function () {
     expect(instance.requestGithubToken).toBeDefined();
 
     var superagent = require('superagent');
-
-    console.log();
-    console.log();
-    console.log(superagent.__setResponse);
-    console.log();
-    console.log();
-
     superagent.__setResponse(200, 'ok', {'access_token': '123123123'}, false);
 
     instance.requestGithubToken({}, '456456');

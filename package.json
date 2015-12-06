@@ -48,7 +48,6 @@
     "bootstrap": "=3.3.6",
     "electron-gh-releases": "=2.0.2",
     "font-awesome": "=4.5.0",
-    "history": "=1.13.1",
     "menubar": "git://github.com/maxogden/menubar.git",
     "octicons": "=3.1.0",
     "react": "=0.14.3",
