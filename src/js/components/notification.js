@@ -62,21 +62,25 @@ var NotificationItem = React.createClass({
   },
 
   render: function () {
-    var typeIconClass;
+    var typeIconClass, typeIconTooltip;
 
     if (this.props.notification.subject.type == 'Issue') {
       typeIconClass = 'octicon octicon-issue-opened';
+      typeIconTooltip = 'Issue';
     } else if (this.props.notification.subject.type == 'PullRequest') {
       typeIconClass = 'octicon octicon-git-pull-request';
+      typeIconTooltip = 'Pull Request';
     } else if (this.props.notification.subject.type == 'Commit') {
       typeIconClass = 'octicon octicon-git-commit';
+      typeIconTooltip = 'Commit';
     } else {
       typeIconClass = 'octicon octicon-question';
+      typeIconTooltip = '';
     }
 
     return (
       <div className={this.state.isRead ? 'row notification read' : 'row notification'}>
-        <div className='col-xs-1'><span className={typeIconClass} /></div>
+        <div className='col-xs-1'><span title={typeIconTooltip} className={typeIconClass} /></div>
         <div className='col-xs-10 subject' onClick={this.pressTitle}>
           {this.props.notification.subject.title}
         </div>
