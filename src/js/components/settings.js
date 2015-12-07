@@ -98,8 +98,7 @@ var SettingsPage = React.createClass({
         </div>
 
         <div className='row footer'>
-          <div className='col-xs-8'>Made by Emmanouil Konstantinidis.</div>
-          <div className='col-xs-4 text-right'>Version: {version}</div>
+          <div className='col-xs-12 text-right'>Gitify - Version: {version}</div>
         </div>
       </div>
     );
