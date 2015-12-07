@@ -70,7 +70,10 @@ var Repository = React.createClass({
             <span>{organisationName}</span>
           </div>
           <div className='col-xs-1 check-wrapper'>
-            <span className='octicon octicon-check' onClick={this.markRepoAsRead} />
+            <span
+              title='Mark Repository as Read'
+              className='octicon octicon-check'
+              onClick={this.markRepoAsRead} />
           </div>
         </div>
 
