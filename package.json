@@ -9,9 +9,9 @@
     "watch-js": "watchify -t [ babelify --presets [ es2015 react ] ] src/js/app.js -o build/js/app.js -v",
     "watch": "npm run build && grunt build && npm run watch-js & grunt watch",
     "codesign": "bash scripts/codesign.bash",
-    "dist-osx": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.34.2 --asar=true --icon=images/app-icon.icns --prune --out=dist --ignore='src' --ignore='^/dist$' --ignore='coverage' && bash scripts/codesign.bash",
-    "dist-linux": "electron-packager . Gitify --overwrite --platform=linux --arch=x64 --version=0.34.2 --asar=true --icon=images/app-icon.icns --prune --out=dist --ignore='src' --ignore='^/dist$' --ignore='coverage'",
-    "dist-windows": "electron-packager . Gitify --overwrite --platform=win32 --arch=x64 --version=0.34.2 --asar=true --icon=images/app-icon.icns --prune --out=dist --ignore='src' --ignore='^/dist$' --ignore='coverage'",
+    "dist-osx": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.35.4 --asar=true --icon=images/app-icon.icns --prune --out=dist --ignore='src' --ignore='^/dist$' --ignore='coverage' && bash scripts/codesign.bash",
+    "dist-linux": "electron-packager . Gitify --overwrite --platform=linux --arch=x64 --version=0.35.4 --asar=true --icon=images/app-icon.icns --prune --out=dist --ignore='src' --ignore='^/dist$' --ignore='coverage'",
+    "dist-windows": "electron-packager . Gitify --overwrite --platform=win32 --arch=x64 --version=0.35.4 --asar=true --icon=images/app-icon.icns --prune --out=dist --ignore='src' --ignore='^/dist$' --ignore='coverage'",
     "lint": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
     "test": "npm run lint && jest --config=jest-config.json",
     "start": "electron . --enable-logging"
