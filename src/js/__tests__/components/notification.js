@@ -22,7 +22,7 @@ describe('Test for Notification Component', function () {
       return {
         shell: {
           openExternal: function () {
-            // Fake sending message to ipcMain
+            // Open External link in Browser
           }
         },
         ipcRenderer: {
