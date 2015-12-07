@@ -131,76 +131,76 @@ describe('Login Component', function () {
 
 });
 
-// describe('Login Component - Callback with Error', () => {
-//
-//   var Login, BrowserWindow;
-//
-//   beforeEach(function () {
-//     // Mock Electron's window.require
-//     // and remote.ipc
-//     BrowserWindow = function () {
-//       return {
-//         loadURL: function () {
-//           return;
-//         },
-//         webContents: {
-//           on: function (event, callback) {
-//
-//             if (event == 'will-navigate') {
-//               callback(
-//                 'will-navigate',
-//                 'http://www.github.com/?error=FAILURE'
-//               );
-//             }
-//
-//             if (event == 'did-get-redirect-request') {
-//               callback(
-//                 'did-get-redirect-request',
-//                 'http://www.github.com/?error=FAILURE',
-//                 'http://www.github.com/?error=FAILURE'
-//               );
-//             }
-//
-//           }
-//         },
-//         on: function (event, callback) {
-//           callback();
-//         },
-//         close: function () {
-//           return;
-//         },
-//         destroy: function (argument) {
-//           return;
-//         }
-//       };
-//     };
-//
-//     window.require = function () {
-//       return {
-//         require: function () {
-//           return BrowserWindow;
-//         },
-//         sendChannel: function () {
-//           return;
-//         }
-//       };
-//     };
-//
-//     // Mock alert
-//     window.alert = function () {
-//       return;
-//     };
-//
-//     Login = require('../../components/login.js');
-//   });
-//
-//   it('Should open the authWindow and fail to login', () => {
-//
-//     var instance = TestUtils.renderIntoDocument(<Login />);
-//     expect(instance.authGithub).toBeDefined();
-//
-//     instance.authGithub();
-//
-//   });
-//
-// });
+describe('Login Component - Callback with Error', () => {
+
+  var Login;
+
+  beforeEach(function () {
+
+    // Mocks for Electron
+    window.require = function () {
+      return {
+        remote: {
+          BrowserWindow: function () {
+            return {
+              loadURL: function () {
+                return;
+              },
+              webContents: {
+                on: function (event, callback) {
+
+                  if (event == 'will-navigate') {
+                    callback(
+                      'will-navigate',
+                      'http://www.github.com/?error=FAILURE'
+                    );
+                  }
+
+                  if (event == 'did-get-redirect-request') {
+                    callback(
+                      'did-get-redirect-request',
+                      'http://www.github.com/?error=FAILURE',
+                      'http://www.github.com/?error=FAILURE'
+                    );
+                  }
+
+                }
+              },
+              on: function () {
+                return;
+              },
+              close: function () {
+                return;
+              },
+              destroy: function () {
+                return;
+              }
+            };
+          }
+        },
+        ipcRenderer: {
+          send: function () {
+            // Fake sending message to ipcMain
+          }
+        },
+      }
+    };
+
+    // Mock alert
+    window.alert = function () {
+      return;
+    };
+
+    Login = require('../../components/login.js');
+  });
+
+  it('Should open the authWindow and fail to login', () => {
+
+    var instance = TestUtils.renderIntoDocument(<Login />);
+    expect(instance.authGithub).toBeDefined();
+
+    instance.authGithub();
+
+  });
+
+});
