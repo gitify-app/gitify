@@ -55,6 +55,7 @@ describe('Test for Notifications Component', function () {
     expect(instance.state.loading).toBeTruthy();
 
     var response = [{
+      'id': '123123123',
       'repository': {
         'full_name': 'ekonstantinidis/gitify',
         'owner': {
@@ -107,6 +108,7 @@ describe('Test for Notifications Component', function () {
     var instance = TestUtils.renderIntoDocument(<Notifications />);
 
     var response = [{
+      'id': '123123123',
       'repository': {
         'full_name': 'ekonstantinidis/gitify',
         'owner': {
