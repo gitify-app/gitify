@@ -26,8 +26,7 @@ var isDarwin = (process.platform === 'darwin');
 // The auto-start module does not support Linux
 if (!isLinux) {
   var autoStart = new AutoLaunch({
-    name: 'Gitify',
-    path: process.execPath.match(/.*?\.app/)
+    name: 'Gitify'
   });
 }
 
