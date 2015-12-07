@@ -11,4 +11,4 @@ script:
 - npm test
 
 after_script:
-  - codeclimate < ./coverage/lcov.info
+  - codeclimate-test-reporter < ./coverage/lcov.info
