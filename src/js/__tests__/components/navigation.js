@@ -107,7 +107,7 @@ describe('Test for Navigation', function () {
       return true;
     };
 
-    var parent = TestUtils.renderIntoDocument(<Stub><Navigation /></Stub>);
+    var parent = TestUtils.renderIntoDocument(<Stub><Navigation toggleSearch={() => {}} showSearch={true} /></Stub>);
     var instance = TestUtils.findRenderedComponentWithType(parent, Navigation);
     instance.history = history;
 
@@ -179,7 +179,7 @@ describe('Test for Navigation', function () {
       return true;
     };
 
-    var parent = TestUtils.renderIntoDocument(<Stub><Navigation toggleSearch={() => {}} /></Stub>);
+    var parent = TestUtils.renderIntoDocument(<Stub><Navigation toggleSearch={() => {}} showSearch={true} /></Stub>);
     var instance = TestUtils.findRenderedComponentWithType(parent, Navigation);
     instance.history = history;
 
@@ -189,7 +189,6 @@ describe('Test for Navigation', function () {
     instance.goBack();
     instance.goToSettings();
     instance.openBrowser();
-    instance.showSearch();
   });
 
   it('Should show the search icon & count label only if notifications', function () {

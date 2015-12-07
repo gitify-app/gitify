@@ -25,7 +25,7 @@ var App = React.createClass({
   render: function () {
     return (
       <div>
-        <Navigation toggleSearch={this.toggleSearch} />
+        <Navigation toggleSearch={this.toggleSearch} showSearch={this.state.showSearch} />
         <SearchBar showSearch={this.state.showSearch} />
         {this.props.children}
       </div>
