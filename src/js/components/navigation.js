@@ -60,6 +60,10 @@ var Navigation = React.createClass({
   },
 
   logOut: function () {
+    if (this.props.showSearch) {
+      this.props.toggleSearch();
+    }
+
     Actions.logout();
     this.history.push('/login');
     ipcRenderer.send('update-icon', 'IconPlain');
@@ -67,10 +71,6 @@ var Navigation = React.createClass({
 
   goBack: function () {
     this.history.push('/notifications');
-  },
-
-  showSearch: function () {
-    this.props.toggleSearch();
   },
 
   appQuit: function () {
@@ -97,7 +97,7 @@ var Navigation = React.createClass({
       );
       if (this.state.notifications.length) {
         searchIcon = (
-          <i title="Search" className='fa fa-search' onClick={this.showSearch} />
+          <i title="Search" className='fa fa-search' onClick={this.props.toggleSearch} />
         );
         countLabel = (
           <span className='label label-success'>{this.state.notifications.length}</span>
