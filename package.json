@@ -4,49 +4,16 @@
   "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
-    "build-js": "mkdir -p build/js && browserify -t babelify src/js/app.js -o build/js/app.js",
+    "build-js": "browserify -t [ babelify --presets [ es2015 react ] ] src/js/app.js -o build/js/app.js",
     "build": "ulimit -n 512 && npm install && grunt build && npm run build-js",
-    "watch-js": "watchify -t babelify src/js/app.js -o build/js/app.js -v",
+    "watch-js": "watchify -t [ babelify --presets [ es2015 react ] ] src/js/app.js -o build/js/app.js -v",
     "watch": "npm run build && grunt build && npm run watch-js & grunt watch",
     "start": "electron .",
     "package": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.32.3 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
     "codesign": "bash scripts/codesign.bash",
     "dist": "npm run package && npm run codesign",
     "lint": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
-    "test": "npm run lint && jest"
-  },
-  "jest": {
-    "scriptPreprocessor": "src/js/__tests__/preprocessor.js",
-    "collectCoverage": true,
-    "collectCoverageOnlyFrom": {
-      "src/js/actions/actions.js": true,
-      "src/js/components/login.js": true,
-      "src/js/components/navigation.js": true,
-      "src/js/components/notification.js": true,
-      "src/js/components/notifications.js": true,
-      "src/js/components/repository.js": true,
-      "src/js/components/search.js": true,
-      "src/js/components/settings.js": true,
-      "src/js/components/search-input.js": true,
-      "src/js/stores/auth.js": true,
-      "src/js/stores/notifications.js": true,
-      "src/js/stores/search.js": true,
-      "src/js/stores/settings.js": true,
-      "src/js/stores/sound-notification.js": true
-    },
-    "unmockedModulePathPatterns": [
-      "node_modules/react",
-      "node_modules/react-tools",
-      "node_modules/underscore"
-    ],
-    "testPathDirs": [
-      "src/js/__tests__/"
-    ],
-    "testPathIgnorePatterns": [
-      "src/js/__tests__/preprocessor.js",
-      "src/js/__tests__/__mocks__/",
-      "node_modules/"
-    ]
+    "test": "npm run lint && jest --config=jest-config.json"
   },
   "repository": {
     "type": "git",
@@ -76,34 +43,42 @@
   },
   "homepage": "https://github.com/ekonstantinidis/gitify",
   "dependencies": {
-    "auto-launch": "=0.1.18",
-    "babelify": "=6.1.3",
-    "bootstrap": "=3.3.5",
-    "browserify": "=11.0.1",
-    "electron-gh-releases": "=1.0.1",
-    "font-awesome": "=4.4.0",
-    "octicons": "=2.4.1",
-    "react": "=0.13.3",
-    "react-router": "=0.13.3",
-    "react-toggle": "=1.2.3",
+    "auto-launch": "=1.0.1",
+    "bootstrap": "=3.3.6",
+    "electron-gh-releases": "=2.0.2",
+    "font-awesome": "=4.5.0",
+    "history": "=1.14.0",
+    "octicons": "=3.1.0",
+    "react": "=0.14.3",
+    "react-addons-test-utils": "=0.14.3",
+    "react-dom": "=0.14.3",
+    "react-router": "=1.0.1",
+    "react-toggle": "=2.0.1",
     "react-tools": "=0.13.3",
-    "reflux": "=0.2.7",
+    "reflux": "=0.3.0",
     "reloading": "0.0.6",
-    "superagent": "=1.2.0",
-    "underscore": "=1.8.3",
-    "watchify": "=3.3.1"
+    "superagent": "=1.5.0",
+    "underscore": "=1.8.3"
   },
   "devDependencies": {
     "babel-eslint": "=4.1.6",
-    "electron-packager": "=5.1.0",
-    "electron-prebuilt": "=0.32.3",
+    "babel-jest": "=6.0.1",
+    "babel-preset-es2015": "=6.3.13",
+    "babel-preset-react": "=6.3.13",
+    "babelify": "=7.2.0",
+    "browserify": "=12.0.1",
+    "electron-debug": "=0.5.1",
+    "electron-packager": "=5.1.1",
+    "electron-prebuilt": "=0.35.4",
     "eslint": "=1.10.3",
+    "eslint-plugin-react": "=3.11.3",
     "grunt": "=0.4.5",
     "grunt-contrib-clean": "=0.7.0",
     "grunt-contrib-copy": "=0.8.2",
     "grunt-contrib-less": "=1.1.0",
     "grunt-contrib-watch": "=0.6.1",
     "jest-cli": "=0.8.0",
-    "less": "=2.5.1"
+    "less": "=2.5.3",
+    "watchify": "=3.6.1"
   }
 }

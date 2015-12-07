@@ -8,28 +8,28 @@ jest.dontMock('../../stores/auth.js');
 jest.dontMock('../../stores/notifications.js');
 jest.dontMock('../../stores/settings.js');
 
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var TestUtils = require('react-addons-test-utils');
 
 describe('Test for Notification Component', function () {
 
-  var apiRequests, Actions, AuthStore, SingleNotification, NotificationsStore;
+  var apiRequests, Actions, AuthStore, SingleNotification, NotificationsStore, SettingsStore;
 
   beforeEach(function () {
-    // Mock Electron's window.require
-    // and remote.require('shell')
+
+    // Mocks for Electron
     window.require = function () {
       return {
-        require: function () {
-          return {
-            openExternal: function () {
-              return {};
-            }
-          };
+        shell: {
+          openExternal: function () {
+            // Open External link in Browser
+          }
         },
-        sendChannel: function () {
-          return;
-        }
+        ipcRenderer: {
+          send: function () {
+            // Fake sending message to ipcMain
+          }
+        },
       };
     };
 

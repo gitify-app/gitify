@@ -1,5 +1,6 @@
-var React = require('react');
-var Reflux = require('reflux');
+import React from 'react';
+import Reflux from 'reflux';
+
 var Actions = require('../actions/actions');
 var SearchStore = require('../stores/search');
 
@@ -14,7 +15,7 @@ var Search = React.createClass({
     };
   },
 
-  componentWillReceiveProps: function(nextProps) {
+  componentWillReceiveProps: function (nextProps) {
     if (nextProps.showSearch === false) {
       this.setState({
         searchTerm: ''

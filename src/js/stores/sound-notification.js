@@ -1,6 +1,7 @@
-var ipc = window.require('ipc');
-var Reflux = require('reflux');
-var _ = require('underscore');
+import Reflux from 'reflux';
+import _ from 'underscore';
+
+const ipcRenderer = window.require('electron').ipcRenderer;
 
 var Actions = require('../actions/actions');
 var SettingsStore = require('../stores/settings');
@@ -22,7 +23,7 @@ var SoundNotificationStore = Reflux.createStore({
       body: body
     });
     nativeNotification.onclick = function () {
-      ipc.sendChannel('reopen-window');
+      ipcRenderer.send('reopen-window');
     };
     return nativeNotification;
   },

@@ -1,6 +1,8 @@
-var app = require('app');
+const electron = require('electron');
+const app = electron.app;
+const ipc = electron.ipcMain;
+
 var path = require('path');
-var ipc = require('ipc');
 var ghReleases = require('electron-gh-releases');
 
 require('crash-reporter').start();
@@ -19,7 +21,7 @@ var autoStart = new AutoLaunch({
   path: process.execPath.match(/.*?\.app/)[0]
 });
 
-app.on('ready', function(){
+app.on('ready', function() {
   var appIcon = new Tray(iconIdle);
 
   var options = {
@@ -29,7 +31,7 @@ app.on('ready', function(){
 
   initWindow();
 
-  appIcon.on('clicked', function clicked (e, bounds) {
+  appIcon.on('click', function (e, bounds) {
     if (appIcon.window && appIcon.window.isVisible()) {
       return hideWindow();
     } else {
@@ -48,7 +50,7 @@ app.on('ready', function(){
     };
 
     appIcon.window = new BrowserWindow(defaults);
-    appIcon.window.loadUrl('file://' + __dirname + '/index.html');
+    appIcon.window.loadURL('file://' + __dirname + '/index.html');
     appIcon.window.on('blur', hideWindow);
     appIcon.window.setVisibleOnAllWorkspaces(true);
 
@@ -157,7 +159,7 @@ app.on('ready', function(){
       if (response === 0) {
         quitAndUpdate();
       }
-    });
+    } );
   }
 
   ipc.on('reopen-window', function() {

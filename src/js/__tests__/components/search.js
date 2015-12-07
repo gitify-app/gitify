@@ -5,44 +5,32 @@ jest.dontMock('../../actions/actions.js');
 jest.dontMock('../../components/search.js');
 jest.dontMock('../../stores/auth.js');
 
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var TestUtils = require('react-addons-test-utils');
 
-describe('Test for Footer', function () {
+describe('Test for Search Component', function () {
 
   var Actions, AuthStore, Search;
 
-  window.localStorage = {
-    item: false,
-    setItem: function (item) {
-      this.item = item;
-    },
-    getItem: function () {
-      return this.item;
-    },
-    clear: function () {
-      this.item = false;
-    }
-  };
-
   beforeEach(function () {
-    // Mock Electron's window.require
-    // and remote.require('shell')
-    window.require = function () {
-      return {
-        require: function () {
-          return {
-            openExternal: function () {
-              return {};
-            }
-          };
-        }
-      };
+
+    window.localStorage = {
+      item: false,
+      setItem: function (item) {
+        this.item = item;
+      },
+      getItem: function () {
+        return this.item;
+      },
+      clear: function () {
+        this.item = false;
+      }
     };
 
     Actions = require('../../actions/actions.js');
     AuthStore = require('../../stores/auth.js');
     Search = require('../../components/search.js');
+
   });
 
   it('Should make a search', function () {

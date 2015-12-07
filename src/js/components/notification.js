@@ -1,6 +1,6 @@
-var React = require('react');
-var remote = window.require('remote');
-var shell = remote.require('shell');
+import React from 'react';
+
+const shell = window.require('electron').shell;
 
 var Actions = require('../actions/actions');
 var apiRequests = require('../utils/api-requests');
@@ -23,7 +23,7 @@ var NotificationItem = React.createClass({
   pressTitle: function () {
     var markOnClick = SettingsStore.getSettings().markOnClick;
     this.openBrowser();
-    
+
     if (markOnClick) {
       this.markAsRead();
     }

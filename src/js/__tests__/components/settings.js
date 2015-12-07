@@ -5,21 +5,23 @@ jest.dontMock('../../actions/actions.js');
 jest.dontMock('../../components/settings.js');
 jest.dontMock('../../stores/settings.js');
 
-var React = require('react/addons');
-var TestUtils = React.addons.TestUtils;
+var React = require('react');
+var TestUtils = require('react-addons-test-utils');
 
 describe('Test for Settings Component', function () {
 
   var Actions, SettingsStore, Settings;
 
   beforeEach(function () {
-    // Mock Electron's window.require
-    // and remote.require('shell')
+
+    // Mocks for Electron
     window.require = function () {
       return {
-        sendChannel: function () {
-          return;
-        }
+        ipcRenderer: {
+          send: function () {
+            // Fake sending message to ipcMain
+          }
+        },
       };
     };
 

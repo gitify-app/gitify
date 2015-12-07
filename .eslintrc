@@ -1,15 +1,34 @@
 {
-  "ecmaFeatures": {
-    "blockBindings": true,
-    "forOf": true,
-    "jsx": true
-  },
   "parser": "babel-eslint",
   "rules": {
     "max-len": [1, 100, 2],
+    "no-undef": 2,
+    "no-unreachable": 2,
+    "no-unused-vars": 2,
+    "no-undef-init": 2,
+    "no-multiple-empty-lines": [2, {"max": 2}],
     "indent": [2, 2],
     "semi": 2,
     "strict": 0,
+    "space-after-keywords": 2,
+    "space-before-keywords": 2,
+    "space-before-blocks": 2,
+    "space-before-function-paren": 0,
+    "space-infix-ops": 2,
+    "space-return-throw-case": 2,
+    "space-unary-ops": 2,
     "quotes": [1, "single", "avoid-escape"]
-  }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "ecmaFeatures": {
+    "jsx": true,
+    "modules": true
+  },
+  "plugins": [
+    "react"
+  ]
 }
