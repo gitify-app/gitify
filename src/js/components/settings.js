@@ -1,7 +1,7 @@
-var React = require('react');
-var Toggle = require('react-toggle');
+import React from 'react';
+import Toggle from 'react-toggle';
 
-var ipc = window.require('ipc');
+const ipcRenderer = window.require('electron').ipcRenderer;
 
 var Actions = require('../actions/actions');
 var SettingsStore = require('../stores/settings');
@@ -23,11 +23,11 @@ var SettingsPage = React.createClass({
   },
 
   checkForUpdates: function () {
-    ipc.sendChannel('check-update');
+    ipcRenderer.send('check-update');
   },
 
   appQuit: function () {
-    ipc.sendChannel('app-quit');
+    ipcRenderer.send('app-quit');
   },
 
   render: function () {

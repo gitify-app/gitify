@@ -1,6 +1,6 @@
-var React = require('react');
-var ReactDOM = require('react-dom');
-var Router = require('react-router');
+import React from 'react';
+import { render } from 'react-dom';
+import { Router, Route, IndexRoute } from 'react-router';
 
 var AuthStore = require('./stores/auth');
 var Navigation = require('./components/navigation');
@@ -9,21 +9,7 @@ var LoginPage = require('./components/login');
 var NotificationsPage = require('./components/notifications');
 var SettingsPage = require('./components/settings');
 
-var Route = Router.Route;
-var NotFoundRoute = Router.NotFoundRoute;
-var DefaultRoute = Router.DefaultRoute;
-var RouteHandler = Router.RouteHandler;
-
 var App = React.createClass({
-  statics: {
-    willTransitionTo: function (transition) {
-      if (transition.path !== '/login' && !AuthStore.authStatus()) {
-        console.log('Not logged in. Redirecting to login.');
-        transition.redirect('login', {});
-      }
-    }
-  },
-
   getInitialState: function () {
     return {
       showSearch: false
@@ -41,7 +27,7 @@ var App = React.createClass({
       <div>
         <Navigation toggleSearch={this.toggleSearch} />
         <SearchBar showSearch={this.state.showSearch} />
-        <RouteHandler />
+        {this.props.children}
       </div>
     );
   }
@@ -53,16 +39,21 @@ var NotFound = React.createClass({
   }
 });
 
-var routes = (
-  <Route handler={App} path="/">
-    <DefaultRoute handler={NotificationsPage} />
-    <Route name="login" handler={LoginPage}/>
-    <Route name="notifications" handler={NotificationsPage}/>
-    <Route name="settings" handler={SettingsPage}/>
-    <NotFoundRoute handler={NotFound}/>
-  </Route>
-);
+function requireAuth (nextState, replaceState) {
+  if (!AuthStore.authStatus()) {
+    replaceState(null, '/login/');
+  }
+}
 
-Router.run(routes, function (Handler) {
-  ReactDOM.render(<Handler/>, document.getElementById('app'));
-});
+render(
+  <Router>
+    <Route path='/' component={App}>
+      <IndexRoute component={NotificationsPage} onEnter={requireAuth} />
+      <Route path='/notifications' component={NotificationsPage} />
+      <Route path='/login' component={LoginPage} />
+      <Route path='/settings' component={SettingsPage} />
+      <Route path='*' component={NotFound} />
+    </Route>
+  </Router>,
+  document.getElementById('app')
+);

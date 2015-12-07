@@ -1,6 +1,8 @@
+const electron = require('electron');
+const ipc = electron.ipcMain;
+
 var menubar = require('menubar');
 var path = require('path');
-var ipc = require('ipc');
 
 require('crash-reporter').start();
 
@@ -19,8 +21,7 @@ var isWindows = (process.platform === 'win32');
 // The auto-start module does not support Linux
 if (!isLinux) {
   var autoStart = new AutoLaunch({
-    name: 'Gitify',
-    path: process.execPath.match(/.*?\.app/)
+    name: 'Gitify'
   });
 }
 

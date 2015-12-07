@@ -1,10 +1,9 @@
-var ipc = window.require('ipc');
-var remote = window.require('remote');
-var shell = remote.require('shell');
+import React from 'react';
+import { History } from 'react-router';
+import Reflux from 'reflux';
 
-var React = require('react');
-var Reflux = require('reflux');
-var Router = require('react-router');
+const ipcRenderer = window.require('electron').ipcRenderer;
+const shell = window.require('electron').shell;
 
 var Actions = require('../actions/actions');
 var AuthStore = require('../stores/auth');
@@ -12,15 +11,19 @@ var NotificationsStore = require('../stores/notifications.js');
 
 var Navigation = React.createClass({
   mixins: [
-    Router.State,
+    History,
     Reflux.connect(AuthStore, 'authStatus'),
     Reflux.connect(NotificationsStore, 'notifications'),
     Reflux.listenTo(Actions.getNotifications.completed, 'refreshDone'),
     Reflux.listenTo(Actions.getNotifications.failed, 'refreshDone')
   ],
 
+  // contextTypes: {
+  //   router: React.PropTypes.func
+  // },
+
   contextTypes: {
-    router: React.PropTypes.func
+    location: React.PropTypes.object
   },
 
   getInitialState: function () {
@@ -53,17 +56,17 @@ var Navigation = React.createClass({
   },
 
   goToSettings: function () {
-    this.context.router.transitionTo('settings');
+    this.history.push('/settings');
   },
 
   logOut: function () {
     Actions.logout();
-    this.context.router.transitionTo('login');
-    ipc.sendChannel('update-icon', 'IconPlain');
+    this.history.push('/login');
+    ipcRenderer.send('update-icon', 'IconPlain');
   },
 
   goBack: function () {
-    this.context.router.transitionTo('notifications');
+    this.history.push('/notifications');
   },
 
   showSearch: function () {
@@ -71,7 +74,7 @@ var Navigation = React.createClass({
   },
 
   appQuit: function () {
-    ipc.sendChannel('app-quit');
+    ipcRenderer.send('app-quit');
   },
 
   openBrowser: function () {
@@ -105,7 +108,8 @@ var Navigation = React.createClass({
         <i title="Quit" className='fa fa-power-off' onClick={this.appQuit} />
       );
     }
-    if (this.getPath() === '/settings') {
+
+    if (this.context.location.pathname === '/settings') {
       backIcon = (
         <i title="Back" className='fa fa-chevron-left' onClick={this.goBack} />
       );

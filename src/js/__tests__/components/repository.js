@@ -15,18 +15,16 @@ describe('Test for Repository Component', function () {
   var apiRequests, Actions, Repository;
 
   beforeEach(function () {
-    // Mock Electron's window.require
-    // and remote.require('shell')
+
+    // Mocks for Electron
     window.require = function () {
       return {
-        require: function () {
-          return {
-            openExternal: function () {
-              return {};
-            }
-          };
-        }
-      };
+        shell: {
+          openExternal: function () {
+            // Fake sending message to ipcMain
+          }
+        },
+      }
     };
 
     // Mock localStorage

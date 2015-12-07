@@ -1,13 +1,17 @@
-var remote = window.require('remote');
-var ipc = window.require('ipc');
-var BrowserWindow = remote.require('browser-window');
+var electron = window.require('electron');
+var ipcRenderer = window.require('electron').ipcRenderer;
+var remote = electron.remote;
+var BrowserWindow = remote.BrowserWindow;
 
-var React = require('react');
+import React from 'react';
+import { History } from 'react-router';
+
 var apiRequests = require('../utils/api-requests');
-
 var Actions = require('../actions/actions');
 
 var Login = React.createClass({
+  mixins: [ History ],
+
   contextTypes: {
     router: React.PropTypes.func
   },
@@ -17,8 +21,8 @@ var Login = React.createClass({
 
     // Start Login
     var options = {
-      client_id: '27a352516d3341cee376',
-      client_secret: '',
+      client_id: '3fef4433a29c6ad8f22c',
+      client_secret: '9670de733096c15322183ff17ed0fc8704050379',
       scope: ['user:email', 'notifications']
     };
 
@@ -33,7 +37,7 @@ var Login = React.createClass({
     });
     var githubUrl = 'https://github.com/login/oauth/authorize?';
     var authUrl = githubUrl + 'client_id=' + options.client_id + '&scope=' + options.scope;
-    authWindow.loadUrl(authUrl);
+    authWindow.loadURL(authUrl);
 
     authWindow.webContents.on('will-navigate', function (event, url) {
       handleCallback(url);
@@ -82,8 +86,8 @@ var Login = React.createClass({
         if (response && response.ok) {
           // Success - Do Something.
           Actions.login(response.body.access_token);
-          self.context.router.transitionTo('notifications');
-          ipc.sendChannel('reopen-window');
+          self.history.push('/notifications');
+          ipcRenderer.send('reopen-window');
         } else {
           // Error - Show messages.
           // Show appropriate message

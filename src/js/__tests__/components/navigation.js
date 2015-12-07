@@ -6,14 +6,55 @@ jest.dontMock('../../utils/api-requests');
 jest.dontMock('../../components/navigation.js');
 jest.dontMock('../../stores/auth.js');
 
-var React = require('react');
-var TestUtils = require('react-addons-test-utils');
+import React from 'react';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
+import createHistory from 'history/lib/createMemoryHistory';
 
 describe('Test for Navigation', function () {
 
-  var apiRequests, Actions, Navigation, AuthStore, Router;
+  var apiRequests, Actions, Navigation, AuthStore, history;
+
+  var Stub = React.createClass({
+    childContextTypes: {
+      location: React.PropTypes.object.isRequired
+    },
+
+    getChildContext: function () {
+      return {
+        location: {
+          pathname: "/settings",
+          anotherOne: function (argument) {
+
+          }
+        }
+      };
+    },
+
+    render: function () {
+      return this.props.children;
+    }
+  });
+
 
   beforeEach(function () {
+
+    // Mocks for Electron
+    window.require = function () {
+      return {
+        shell: {
+          openExternal: function () {
+            // Open External link in Browser
+          }
+        },
+        ipcRenderer: {
+          send: function () {
+            // Fake sending message to ipcMain
+          }
+        },
+      };
+    };
+
     // Mock localStorage
     window.localStorage = {
       item: false,
@@ -28,28 +69,12 @@ describe('Test for Navigation', function () {
       }
     };
 
-    // Mock Electron's window.require
-    // and remote.require('shell')
-    window.require = function () {
-      return {
-        require: function () {
-          return {
-            openExternal: function () {
-              return {};
-            }
-          };
-        },
-        sendChannel: function () {
-          return;
-        }
-      };
-    };
-
     apiRequests = require('../../utils/api-requests.js');
     Actions = require('../../actions/actions.js');
     AuthStore = require('../../stores/auth.js');
     Navigation = require('../../components/navigation.js');
-    Router = require('react-router');
+
+    history = createHistory();
   });
 
   it('Should load the navigation component for logged out users', function () {
@@ -58,7 +83,9 @@ describe('Test for Navigation', function () {
       return false;
     };
 
-    var instance = TestUtils.renderIntoDocument(<Navigation />);
+    var parent = TestUtils.renderIntoDocument(<Stub><Navigation /></Stub>);
+    var instance = TestUtils.findRenderedComponentWithType(parent, Navigation);
+
     expect(instance.state.loading).toBeFalsy();
     expect(instance.refreshNotifications).toBeDefined();
     expect(instance.refreshDone).toBeDefined();
@@ -80,10 +107,9 @@ describe('Test for Navigation', function () {
       return true;
     };
 
-    var instance;
-    React.withContext({router: new Router()}, function () {
-      instance = TestUtils.renderIntoDocument(<Navigation />);
-    });
+    var parent = TestUtils.renderIntoDocument(<Stub><Navigation /></Stub>);
+    var instance = TestUtils.findRenderedComponentWithType(parent, Navigation);
+    instance.history = history;
 
     expect(instance.state.loading).toBeFalsy();
     expect(instance.refreshNotifications).toBeDefined();
@@ -120,7 +146,8 @@ describe('Test for Navigation', function () {
       return true;
     };
 
-    var instance = TestUtils.renderIntoDocument(<Navigation />);
+    var parent = TestUtils.renderIntoDocument(<Stub><Navigation /></Stub>);
+    var instance = TestUtils.findRenderedComponentWithType(parent, Navigation);
     instance.refreshNotifications();
     expect(Actions.getNotifications).toHaveBeenCalled();
 
@@ -134,7 +161,8 @@ describe('Test for Navigation', function () {
       return true;
     };
 
-    var instance = TestUtils.renderIntoDocument(<Navigation />);
+    var parent = TestUtils.renderIntoDocument(<Stub><Navigation /></Stub>);
+    var instance = TestUtils.findRenderedComponentWithType(parent, Navigation);
     expect(instance.componentDidMount).toBeDefined();
 
     // Should refresh on interval
@@ -151,12 +179,9 @@ describe('Test for Navigation', function () {
       return true;
     };
 
-    var instance;
-    React.withContext({router: new Router()}, function () {
-      instance = TestUtils.renderIntoDocument(<Navigation toggleSearch={function () {
-        // Should toggle the search bar
-      }} />);
-    });
+    var parent = TestUtils.renderIntoDocument(<Stub><Navigation toggleSearch={() => {}} /></Stub>);
+    var instance = TestUtils.findRenderedComponentWithType(parent, Navigation);
+    instance.history = history;
 
     expect(instance.componentDidMount).toBeDefined();
     expect(instance.openBrowser).toBeDefined();
@@ -175,7 +200,8 @@ describe('Test for Navigation', function () {
       return true;
     };
 
-    var instance = TestUtils.renderIntoDocument(<Navigation />);
+    var parent = TestUtils.renderIntoDocument(<Stub><Navigation /></Stub>);
+    var instance = TestUtils.findRenderedComponentWithType(parent, Navigation);
 
     instance.state.notifications = [{
       title: 'test'

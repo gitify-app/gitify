@@ -1,17 +1,17 @@
-var remote = window.require('remote');
-var shell = remote.require('shell');
+import React from 'react';
+import Reflux from 'reflux';
+import _ from 'underscore';
 
-var React = require('react');
-var Reflux = require('reflux');
+const shell = window.require('electron').shell;
+
 var Loading = require('reloading');
-var _ = require('underscore');
 
 var Actions = require('../actions/actions');
 var NotificationsStore = require('../stores/notifications');
 var SearchStore = require('../stores/search');
 var Repository = require('../components/repository');
 
-var Notifications = React.createClass({
+var NotificationsPage = React.createClass({
   areIn: function (repoFullName, searchTerm) {
     return repoFullName.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0;
   },
@@ -128,10 +128,10 @@ var Notifications = React.createClass({
           <div className='fork' onClick={this.openBrowser}>
             <i className='fa fa-github' /> Star Gitify on GitHub
           </div>
-        ): null}
+        ) : null}
       </div>
     );
   }
 });
 
-module.exports = Notifications;
+module.exports = NotificationsPage;
