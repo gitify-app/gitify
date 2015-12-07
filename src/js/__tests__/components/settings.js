@@ -13,13 +13,15 @@ describe('Test for Settings Component', function () {
   var Actions, SettingsStore, Settings;
 
   beforeEach(function () {
-    // Mock Electron's window.require
-    // and remote.require('shell')
+
+    // Mocks for Electron
     window.require = function () {
       return {
-        sendChannel: function () {
-          return;
-        }
+        ipcRenderer: {
+          send: function () {
+            // Fake sending message to ipcMain
+          }
+        },
       };
     };
 

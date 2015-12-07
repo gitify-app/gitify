@@ -12,15 +12,14 @@ describe('Tests for SettingsStore', function () {
 
   beforeEach(function () {
 
-    // Mock Electron's window.require
+    // Mocks for Electron
     window.require = function () {
       return {
-        sendChannel: function () {
-          return;
+        ipcRenderer: {
+          send: function () {
+            // Fake sending message to ipcMain
+          }
         },
-        send: function () {
-          return;
-        }
       };
     };
 
