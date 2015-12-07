@@ -86,7 +86,7 @@ var Login = React.createClass({
         if (response && response.ok) {
           // Success - Do Something.
           Actions.login(response.body.access_token);
-          self.history.pushState(null, '/notifications');
+          self.history.push('/notifications');
           ipcRenderer.send('reopen-window');
         } else {
           // Error - Show messages.

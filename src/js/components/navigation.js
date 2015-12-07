@@ -56,17 +56,17 @@ var Navigation = React.createClass({
   },
 
   goToSettings: function () {
-    this.history.pushState(null, '/settings');
+    this.history.push('/settings');
   },
 
   logOut: function () {
     Actions.logout();
-    this.history.pushState(null, '/login');
+    this.history.push('/login');
     ipcRenderer.send('update-icon', 'IconPlain');
   },
 
   goBack: function () {
-    this.history.pushState(null, '/notifications');
+    this.history.push('/notifications');
   },
 
   showSearch: function () {
