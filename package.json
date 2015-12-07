@@ -36,13 +36,17 @@
     {
       "name": "Jake 'Sid' Smith",
       "url": "https://githib.com/JakeSidSmith"
+    },
+    {
+      "name": "Denis Malinochkin",
+      "url": "https://github.com/mrmlnc"
     }
   ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/ekonstantinidis/gitify/issues"
   },
-  "homepage": "https://github.com/ekonstantinidis/gitify",
+  "homepage": "https://www.gitify.io/",
   "dependencies": {
     "auto-launch": "=1.0.1",
     "bootstrap": "=3.3.6",
