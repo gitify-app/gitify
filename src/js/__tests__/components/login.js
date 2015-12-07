@@ -19,9 +19,7 @@ describe('Login Component', function () {
 
   beforeEach(function () {
 
-    // Mock Electron's window.require
-    // and remote.ipc
-
+    // Mocks for Electron
     window.require = function () {
       return {
         remote: {
@@ -62,9 +60,11 @@ describe('Login Component', function () {
             };
           }
         },
-        ipcRenderer: function () {
-          return;
-        }
+        ipcRenderer: {
+          send: function () {
+            // Fake sending message to ipcMain
+          }
+        },
       }
     };
 
@@ -85,11 +85,8 @@ describe('Login Component', function () {
 
   it('Should get the token from github', function () {
 
-    var unlisten = history.listen(function (location) {
-      console.log(location.pathname)
-    })
-
     var instance = TestUtils.renderIntoDocument(<Login />);
+    instance.history = history;
 
     expect(instance.authGithub).toBeDefined();
     expect(instance.requestGithubToken).toBeDefined();
@@ -101,36 +98,36 @@ describe('Login Component', function () {
 
   });
 
-  // it('Should fail to get the token from github', () => {
-  //
-  //   var instance;
-  //   React.withContext({router: new Router()}, function () {
-  //     instance = TestUtils.renderIntoDocument(<Login />);
-  //   });
-  //
-  //   expect(instance.authGithub).toBeDefined();
-  //   expect(instance.requestGithubToken).toBeDefined();
-  //
-  //   superagent.__setResponse(400, false, false, false);
-  //
-  //   instance.requestGithubToken({}, '456456');
-  //
-  // });
-  //
-  // it('Should open the authWindow and login successfully', () => {
-  //
-  //   var instance = TestUtils.renderIntoDocument(<Login />);
-  //   expect(instance.authGithub).toBeDefined();
-  //
-  //   // Prevent testing requestGithubToken
-  //   // Tested in another case
-  //   instance.requestGithubToken = function () {
-  //     return;
-  //   };
-  //
-  //   instance.authGithub();
-  //
-  // });
+  it('Should fail to get the token from github', () => {
+
+    var instance = TestUtils.renderIntoDocument(<Login />);
+    instance.history = history;
+
+    expect(instance.authGithub).toBeDefined();
+    expect(instance.requestGithubToken).toBeDefined();
+
+    var superagent = require('superagent');
+    superagent.__setResponse(400, false, false, false);
+
+    instance.requestGithubToken({}, '456456');
+
+  });
+
+  it('Should open the authWindow and login successfully', () => {
+
+    var instance = TestUtils.renderIntoDocument(<Login />);
+    instance.history = history;
+    expect(instance.authGithub).toBeDefined();
+
+    // Prevent testing requestGithubToken
+    // Tested in another case
+    instance.requestGithubToken = function () {
+      return;
+    };
+
+    instance.authGithub();
+
+  });
 
 });
 

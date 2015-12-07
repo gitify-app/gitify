@@ -25,6 +25,9 @@
   "testPathIgnorePatterns": [
     "<rootDir>/src/js/__tests__/__mocks__/"
   ],
+  "modulePathIgnorePatterns": [
+    "<rootDir>/node_modules/"
+  ],
   "unmockedModulePathPatterns": [
     "<rootDir>/node_modules/react",
     "<rootDir>/node_modules/react-dom",
