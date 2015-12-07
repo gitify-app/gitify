@@ -16,12 +16,12 @@ module.exports = function(grunt) {
     copy: {
       main: {
         files: [
-          {expand: true, cwd: "src/fonts/", src: '**', dest: 'build/fonts/'},
-          {expand: true, cwd: "node_modules/bootstrap/fonts/", src: '**', dest: 'build/fonts/'},
-          {expand: true, cwd: "node_modules/font-awesome/fonts/", src: '**', dest: 'build/fonts/'},
-          {expand: true, cwd: "node_modules/octicons/octicons/", src: '*.eot', dest: 'build/fonts/'},
-          {expand: true, cwd: "node_modules/octicons/octicons/", src: 'octicons.woff', dest: 'build/fonts/'},
-          {expand: true, cwd: "node_modules/octicons/octicons/", src: '*.ttf', dest: 'build/fonts/'}
+          {expand: true, cwd: 'src/fonts/', src: '**', dest: 'build/fonts/'},
+          {expand: true, cwd: 'node_modules/bootstrap/fonts/', src: '**', dest: 'build/fonts/'},
+          {expand: true, cwd: 'node_modules/font-awesome/fonts/', src: '**', dest: 'build/fonts/'},
+          {expand: true, cwd: 'node_modules/octicons/octicons/', src: '*.eot', dest: 'build/fonts/'},
+          {expand: true, cwd: 'node_modules/octicons/octicons/', src: 'octicons.woff', dest: 'build/fonts/'},
+          {expand: true, cwd: 'node_modules/octicons/octicons/', src: '*.ttf', dest: 'build/fonts/'}
         ]
       }
     },
@@ -34,12 +34,12 @@ module.exports = function(grunt) {
     },
 
     clean: {
-      files: ["build/"]
+      files: ['build/']
     }
 
   });
 
-  // Load the plugin that provides the "uglify" task.
+  // Load the plugin that provides the 'uglify' task.
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
@@ -47,6 +47,9 @@ module.exports = function(grunt) {
 
   // Default task(s).
   grunt.registerTask('default', ['build']);
-  grunt.registerTask('build', ['less', 'copy']);
+  grunt.registerTask('build', function () {
+    grunt.file.mkdir('build/js');
+    grunt.task.run(['less', 'copy']);
+  });
   grunt.registerTask('release', ['clean', 'build']);
 };
