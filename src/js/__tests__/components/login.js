@@ -9,13 +9,13 @@ jest.dontMock('../../stores/auth.js');
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';
-import { Router } from 'react-router';
+import createHistory from 'history/lib/createMemoryHistory';
 
 var Actions = require('../../actions/actions.js');
 
 describe('Login Component', function () {
 
-  var Login, AuthStore, apiRequests;
+  var Login, AuthStore, apiRequests, history;
 
   beforeEach(function () {
 
@@ -79,15 +79,17 @@ describe('Login Component', function () {
     AuthStore = require('../../stores/auth.js');
     apiRequests = require('../../utils/api-requests.js');
 
+    history = createHistory();
+
   });
 
-  it('Should get the token from github', () => {
+  it('Should get the token from github', function () {
 
-    // var instance;
-    // React.withContext({router: new Router()}, function () {
-    //   instance = TestUtils.renderIntoDocument(<Login />);
-    // });
-    const instance = TestUtils.renderIntoDocument(<Login />);
+    var unlisten = history.listen(function (location) {
+      console.log(location.pathname)
+    })
+
+    var instance = TestUtils.renderIntoDocument(<Login />);
 
     expect(instance.authGithub).toBeDefined();
     expect(instance.requestGithubToken).toBeDefined();
