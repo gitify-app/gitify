@@ -31,6 +31,9 @@ var SettingsPage = React.createClass({
   },
 
   render: function () {
+    var pjson = require('../../../package.json');
+    var version = pjson.version;
+
     return (
       <div className="container-fluid main-container settings">
         <div className='row'>
@@ -92,6 +95,11 @@ var SettingsPage = React.createClass({
               Quit Gitify
             </button>
           </div>
+        </div>
+
+        <div className='row footer'>
+          <div className='col-xs-8'>Made by Emmanouil Konstantinidis.</div>
+          <div className='col-xs-4 text-right'>Version: {version}</div>
         </div>
       </div>
     );
