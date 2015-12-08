@@ -176,7 +176,7 @@ app.on('ready', function() {
   }
 
   ipc.on('reopen-window', function () {
-    showWindow();
+    showWindow(cachedBounds);
   });
 
   ipc.on('update-icon', function (event, arg) {
