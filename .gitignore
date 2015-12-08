@@ -3,5 +3,6 @@ npm-debug.log
 
 build/
 coverage/
+dist/
 node_modules/
 Gitify-darwin-x64/
