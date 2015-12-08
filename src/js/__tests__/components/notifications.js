@@ -118,6 +118,18 @@ describe('Test for Notifications Component', function () {
       'subject': {
         'type': 'Issue'
       }
+    },
+    {
+      'id': '2424242424242',
+      'repository': {
+        'full_name': 'ekonstantinidis/gitify',
+        'owner': {
+          'avatar_url': 'http://avatar.url'
+        }
+      },
+      'subject': {
+        'type': 'Release'
+      }
     }];
 
     NotificationsStore.trigger(response);

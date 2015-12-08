@@ -73,6 +73,9 @@ var NotificationItem = React.createClass({
     } else if (this.props.notification.subject.type == 'Commit') {
       typeIconClass = 'octicon octicon-git-commit';
       typeIconTooltip = 'Commit';
+    } else if (this.props.notification.subject.type == 'Release') {
+      typeIconClass = 'octicon octicon-tag';
+      typeIconTooltip = 'Release';
     } else {
       typeIconClass = 'octicon octicon-question';
       typeIconTooltip = '';
