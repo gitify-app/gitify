@@ -44,7 +44,9 @@ app.on('ready', function() {
       show: false,
       frame: false,
       resizable: false,
-      'standard-window': false
+      webPreferences: {
+        overlayScrollbars: true
+      }
     };
 
     appIcon.window = new BrowserWindow(defaults);
