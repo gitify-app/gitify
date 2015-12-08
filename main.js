@@ -8,6 +8,7 @@ const Tray = electron.Tray;
 
 var path = require('path');
 var ghReleases = require('electron-gh-releases');
+var Positioner = require('electron-positioner');
 
 require('crash-reporter').start();
 
@@ -31,21 +32,18 @@ if (!isLinux) {
 }
 
 app.on('ready', function() {
+  var cachedBounds;
   var appIcon = new Tray(iconIdle);
-
-  var options = {
-    x: null,
-    y: null
-  };
+  var windowPosition = (process.platform === 'win32') ? 'trayBottomCenter' : 'trayCenter';
 
   initWindow();
 
   appIcon.on('click', function (e, bounds) {
-    if (appIcon.window && appIcon.window.isVisible()) {
-      return hideWindow();
-    } else {
-      showWindow(bounds);
-    }
+    if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) return hideWindow();
+    if (appIcon.window && appIcon.window.isVisible()) return hideWindow();
+    bounds = bounds || cachedBounds;
+    cachedBounds = bounds;
+    showWindow(cachedBounds);
   });
 
   function initWindow () {
@@ -55,10 +53,13 @@ app.on('ready', function() {
       show: false,
       frame: false,
       resizable: false,
-      'standard-window': false
+      webPreferences: {
+        overlayScrollbars: true
+      }
     };
 
     appIcon.window = new BrowserWindow(defaults);
+    appIcon.positioner = new Positioner(appIcon.window);
     appIcon.window.loadURL('file://' + __dirname + '/index.html');
     appIcon.window.on('blur', hideWindow);
     appIcon.window.setVisibleOnAllWorkspaces(true);
@@ -70,20 +71,16 @@ app.on('ready', function() {
     }
   }
 
-  function showWindow (bounds) {
-    if (options.x) {
-      appIcon.window.show();
-    } else {
-      if (bounds) {
-        options.x = bounds.x - 200 + (bounds.width / 2);
-        options.y = bounds.y;
-        appIcon.window.setPosition(options.x, options.y);
-      } else {
-        var electronScreen = require('screen');
-        var defaultSize = electronScreen.getPrimaryDisplay().workAreaSize;
-        appIcon.window.setPosition(defaultSize.width - 525, 15);
-      }
+  function showWindow (trayPos) {
+    // Thanks to https://github.com/maxogden/menubar/
+    // Default the window to the right if `trayPos` bounds are undefined or null.
+    var noBoundsPosition;
+    if (trayPos === undefined || trayPos.x === 0) {
+      noBoundsPosition = (process.platform === 'win32') ? 'bottomRight' : 'topRight';
     }
+
+    var position = appIcon.positioner.calculate(noBoundsPosition || windowPosition, trayPos);
+    appIcon.window.setPosition(position.x, position.y);
     appIcon.window.show();
   }
 
@@ -114,7 +111,7 @@ app.on('ready', function() {
   }
 
   function hideWindow () {
-    if (!appIcon.window) { return; }
+    if (!appIcon.window) return;
     appIcon.window.hide();
   }
 
