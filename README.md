@@ -16,7 +16,15 @@
 
 
 ### Download
-You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/ekonstantinidis/gitify/releases) page. Currently only supports OS X.
+You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/ekonstantinidis/gitify/releases) page. 
+
+You can also install Gitify via [Homebrew Cask](http://caskroom.io/)
+
+```shell
+brew cask install gitify
+```
+
+Gitify currently only supports OS X.
 
 
 ### Prerequisites
