@@ -29,13 +29,14 @@ var SoundNotificationStore = Reflux.createStore({
     return nativeNotification;
   },
 
-  showNotification: function (countNew, response, latestNotification) {
+  showNotification: function (countNew, latestNotification) {
     var title = (countNew == 1 ?
       'Gitify - ' + latestNotification.full_name :
       'Gitify');
     var body = (countNew == 1 ?
       latestNotification.subject :
       'You\'ve got ' + countNew + ' notifications.');
+
     var icon;
     if (countNew == 1) {
       switch (latestNotification.type) {
@@ -73,7 +74,7 @@ var SoundNotificationStore = Reflux.createStore({
         self.playSound();
       }
       if (showNotifications) {
-        this.showNotification(newNotifications.length, response, {
+        this.showNotification(newNotifications.length, {
           full_name: newNotifications[0].repository.full_name,
           subject: newNotifications[0].subject.title,
           type: newNotifications[0].subject.type
