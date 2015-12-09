@@ -71,8 +71,41 @@ describe('Tests for SoundNotificationStore', function () {
     }];
 
     SoundNotificationStore.onIsNewNotification(payload);
-
     expect(SoundNotificationStore.showNotification).toHaveBeenCalled();
+
+  });
+
+  it('Should test notifications type/icon', function () {
+
+    spyOn(SoundNotificationStore, 'newNotification');
+
+    var latestNotification = {
+      'title': 'Greetings', 'url': 'https://api.github.com/repos/octokit/octokit.rb/issues/123', 'type': 'Commit'
+    };
+    SoundNotificationStore.showNotification(1, latestNotification);
+    expect(SoundNotificationStore.newNotification).toHaveBeenCalled();
+
+    var latestNotification = {
+      'title': 'Greetings', 'url': 'https://api.github.com/repos/octokit/octokit.rb/issues/123', 'type': 'Issue'
+    };
+    SoundNotificationStore.showNotification(1, latestNotification);
+    expect(SoundNotificationStore.newNotification).toHaveBeenCalled();
+
+    var latestNotification = {
+      'title': 'Greetings', 'url': 'https://api.github.com/repos/octokit/octokit.rb/issues/123', 'type': 'PullRequest'
+    };
+    SoundNotificationStore.showNotification(1, latestNotification);
+    expect(SoundNotificationStore.newNotification).toHaveBeenCalled();
+
+    var latestNotification = {
+      'title': 'Greetings', 'url': 'https://api.github.com/repos/octokit/octokit.rb/issues/123', 'type': 'AnotherType'
+    };
+    SoundNotificationStore.showNotification(1, latestNotification);
+    expect(SoundNotificationStore.newNotification).toHaveBeenCalled();
+
+    var latestNotification = {};
+    SoundNotificationStore.showNotification(2, latestNotification);
+    expect(SoundNotificationStore.newNotification).toHaveBeenCalled();
 
   });
 
