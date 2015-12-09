@@ -18,10 +18,6 @@ var Navigation = React.createClass({
     Reflux.listenTo(Actions.getNotifications.failed, 'refreshDone')
   ],
 
-  // contextTypes: {
-  //   router: React.PropTypes.func
-  // },
-
   contextTypes: {
     location: React.PropTypes.object
   },
@@ -56,6 +52,10 @@ var Navigation = React.createClass({
   },
 
   goToSettings: function () {
+    if (this.props.showSearch) {
+      this.props.toggleSearch();
+    }
+
     this.history.push('/settings');
   },
 
