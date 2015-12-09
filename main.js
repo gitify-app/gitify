@@ -60,7 +60,7 @@ app.on('ready', function() {
   }
 
   function showWindow (trayPos) {
-    var screen = require('screen');
+    var screen = electron.screen;
     var cursorPointer = screen.getCursorScreenPoint();
     var displaySize = screen.getPrimaryDisplay().workAreaSize;
     var x = (cursorPointer.x < (displaySize.width / 2)) ? 'left' : 'right';
