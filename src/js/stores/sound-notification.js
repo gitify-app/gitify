@@ -18,9 +18,11 @@ var SoundNotificationStore = Reflux.createStore({
     audio.play();
   },
 
-  newNotification: function (title, body) {
+  newNotification: function (title, body, icon) {
+    console.log(title, body);
     var nativeNotification = new Notification(title, {
-      body: body
+      body: body,
+      icon: icon || false
     });
     nativeNotification.onclick = function () {
       ipcRenderer.send('reopen-window');
@@ -29,13 +31,30 @@ var SoundNotificationStore = Reflux.createStore({
   },
 
   showNotification: function (countNew, response, latestNotification) {
+    console.log(JSON.stringify(latestNotification));
     var title = (countNew == 1 ?
       'Gitify - ' + latestNotification.full_name :
       'Gitify');
     var body = (countNew == 1 ?
       latestNotification.subject :
       'You\'ve got ' + countNew + ' notifications.');
-    this.newNotification(title, body);
+    var icon;
+    if (countNew == 1) {
+      switch (latestNotification.type) {
+      case 'Issue':
+        icon = 'images/notifications/issue.png';
+        break;
+      case 'Commit':
+        icon = 'images/notifications/commit.png';
+        break;
+      case 'PullRequest':
+        icon = 'images/notifications/pull-request.png';
+        break;
+      default:
+        icon = 'images/notifications/gitify.png';
+      }
+    }
+    this.newNotification(title, body, icon);
   },
 
   onIsNewNotification: function (response) {
@@ -58,7 +77,8 @@ var SoundNotificationStore = Reflux.createStore({
       if (showNotifications) {
         this.showNotification(newNotifications.length, response, {
           full_name: newNotifications[0].repository.full_name,
-          subject: newNotifications[0].subject.title
+          subject: newNotifications[0].subject.title,
+          type: newNotifications[0].subject.type
         });
       }
     }
