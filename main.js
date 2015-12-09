@@ -60,11 +60,19 @@ app.on('ready', function() {
   }
 
   function showWindow (trayPos) {
-    // Thanks to https://github.com/maxogden/menubar/
-    // Default the window to the right if `trayPos` bounds are undefined or null.
+    var screen = require('screen');
+    var cursorPointer = screen.getCursorScreenPoint();
+    var displaySize = screen.getPrimaryDisplay().workAreaSize;
+    var x = (cursorPointer.x < (displaySize.width / 2)) ? 'left' : 'right';
+    var y = (cursorPointer.y < (displaySize.height / 2)) ? 'top': 'bottom';
+
     var noBoundsPosition;
-    if (trayPos === undefined || trayPos.x === 0) {
-      noBoundsPosition = (process.platform === 'win32') ? 'bottomRight' : 'topRight';
+    if (x === 'right' && y === 'bottom') {
+      noBoundsPosition = (isWindows) ? 'trayBottomCenter' : 'bottomRight';
+    } else if (x === 'left' && y === 'bottom') {
+      noBoundsPosition = 'bottomLeft';
+    } else if (y === 'top') {
+      noBoundsPosition = (isWindows) ? 'trayCenter' : 'topRight';
     }
 
     var position = appIcon.positioner.calculate(noBoundsPosition || windowPosition, trayPos);
