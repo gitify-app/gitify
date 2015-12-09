@@ -46,6 +46,7 @@
     "auto-launch": "=1.0.1",
     "bootstrap": "=3.3.6",
     "electron-gh-releases": "=2.0.2",
+    "electron-positioner": "=2.0.2",
     "font-awesome": "=4.5.0",
     "history": "=1.14.0",
     "octicons": "=3.1.0",
