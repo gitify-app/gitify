@@ -17,6 +17,9 @@ var dialog = require('dialog');
 var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
+// Utilities
+var isWindows = (process.platform === 'win32');
+
 var autoStart = new AutoLaunch({
   name: 'Gitify',
   path: process.execPath.match(/.*?\.app/)[0]
@@ -64,7 +67,7 @@ app.on('ready', function() {
     var cursorPointer = screen.getCursorScreenPoint();
     var displaySize = screen.getPrimaryDisplay().workAreaSize;
     var x = (cursorPointer.x < (displaySize.width / 2)) ? 'left' : 'right';
-    var y = (cursorPointer.y < (displaySize.height / 2)) ? 'top': 'bottom';
+    var y = (cursorPointer.y < (displaySize.height / 2)) ? 'top' : 'bottom';
 
     var noBoundsPosition;
     if (x === 'right' && y === 'bottom') {
