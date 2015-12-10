@@ -18,6 +18,8 @@ var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
 // Utilities
+var isDarwin = (process.platform === 'darwin');
+var isLinux = (process.platform === 'linux');
 var isWindows = (process.platform === 'win32');
 
 var autoStart = new AutoLaunch({
@@ -28,7 +30,7 @@ var autoStart = new AutoLaunch({
 app.on('ready', function() {
   var cachedBounds;
   var appIcon = new Tray(iconIdle);
-  var windowPosition = (process.platform === 'win32') ? 'trayBottomCenter' : 'trayCenter';
+  var windowPosition = (isWindows) ? 'trayBottomCenter' : 'trayCenter';
 
   initWindow();
 
@@ -63,19 +65,30 @@ app.on('ready', function() {
   }
 
   function showWindow (trayPos) {
-    var screen = electron.screen;
-    var cursorPointer = screen.getCursorScreenPoint();
-    var displaySize = screen.getPrimaryDisplay().workAreaSize;
-    var x = (cursorPointer.x < (displaySize.width / 2)) ? 'left' : 'right';
-    var y = (cursorPointer.y < (displaySize.height / 2)) ? 'top' : 'bottom';
-
     var noBoundsPosition;
-    if (x === 'right' && y === 'bottom') {
-      noBoundsPosition = (isWindows) ? 'trayBottomCenter' : 'bottomRight';
-    } else if (x === 'left' && y === 'bottom') {
-      noBoundsPosition = 'bottomLeft';
-    } else if (y === 'top') {
-      noBoundsPosition = (isWindows) ? 'trayCenter' : 'topRight';
+    if (!isDarwin && trayPos !== undefined) {
+      var displaySize = electron.screen.getPrimaryDisplay().workAreaSize;
+      var trayPosX = trayPos.x;
+      var trayPosY = trayPos.y;
+
+      if (isLinux) {
+        var cursorPointer = electron.screen.getCursorScreenPoint();
+        trayPosX = cursorPointer.x;
+        trayPosY = cursorPointer.y;
+      }
+
+      var x = (trayPosX < (displaySize.width / 2)) ? 'left' : 'right';
+      var y = (trayPosY < (displaySize.height / 2)) ? 'top' : 'bottom';
+
+      if (x === 'right' && y === 'bottom') {
+        noBoundsPosition = (isWindows) ? 'trayBottomCenter' : 'bottomRight';
+      } else if (x === 'left' && y === 'bottom') {
+        noBoundsPosition = 'bottomLeft';
+      } else if (y === 'top') {
+        noBoundsPosition = (isWindows) ? 'trayCenter' : 'topRight';
+      }
+    } else {
+      noBoundsPosition = (isWindows) ? 'bottomRight' : 'topRight';
     }
 
     var position = appIcon.positioner.calculate(noBoundsPosition || windowPosition, trayPos);
