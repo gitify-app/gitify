@@ -87,7 +87,7 @@ app.on('ready', function() {
       } else if (y === 'top') {
         noBoundsPosition = (isWindows) ? 'trayCenter' : 'topRight';
       }
-    } else {
+    } else if (trayPos === undefined) {
       noBoundsPosition = (isWindows) ? 'bottomRight' : 'topRight';
     }
 
