@@ -37,7 +37,6 @@ app.on('ready', function() {
   appIcon.on('click', function (e, bounds) {
     if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) return hideWindow();
     if (appIcon.window && appIcon.window.isVisible()) return hideWindow();
-    bounds = bounds || cachedBounds;
     cachedBounds = bounds;
     showWindow(cachedBounds);
   });
