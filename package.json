@@ -1,6 +1,6 @@
 {
   "name": "gitify",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
@@ -56,12 +56,11 @@
     "font-awesome": "=4.5.0",
     "history": "=1.14.0",
     "octicons": "=3.1.0",
-    "react": "=0.14.3",
-    "react-addons-test-utils": "=0.14.3",
-    "react-dom": "=0.14.3",
+    "react": "=0.14.5",
+    "react-addons-test-utils": "=0.14.5",
+    "react-dom": "=0.14.5",
     "react-router": "=1.0.1",
     "react-toggle": "=2.0.1",
-    "react-tools": "=0.13.3",
     "reflux": "=0.3.0",
     "reloading": "0.0.6",
     "superagent": "=1.5.0",
