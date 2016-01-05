@@ -4,14 +4,15 @@
   "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
-    "build-js": "browserify -t [ babelify --presets [ es2015 react ] ] src/js/app.js -o build/js/app.js",
+    "build-js": "webpack",
     "build": "ulimit -n 512 && npm install && grunt build && npm run build-js",
-    "watch-js": "watchify -t [ babelify --presets [ es2015 react ] ] src/js/app.js -o build/js/app.js -v",
+    "watch-js": "webpack --progress --colors --watch",
     "watch": "npm run build && grunt build && npm run watch-js & grunt watch",
     "start": "electron . --enable-logging",
+    "release-js": "webpack --config webpack.rel.config.js",
     "package": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.35.4 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
     "codesign": "bash scripts/codesign.bash",
-    "dist": "npm run package && npm run codesign",
+    "dist": "npm run release-js && npm run package && npm run codesign",
     "lint": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
     "test": "npm run lint && jest --config=jest-config.json"
   },
@@ -61,12 +62,12 @@
     "underscore": "=1.8.3"
   },
   "devDependencies": {
+    "babel-core": "=6.3.26",
     "babel-eslint": "=4.1.6",
     "babel-jest": "=6.0.1",
+    "babel-loader": "=6.2.0",
     "babel-preset-es2015": "=6.3.13",
     "babel-preset-react": "=6.3.13",
-    "babelify": "=7.2.0",
-    "browserify": "=12.0.1",
     "electron-debug": "=0.5.1",
     "electron-packager": "=5.1.1",
     "electron-prebuilt": "=0.35.4",
@@ -79,6 +80,6 @@
     "grunt-contrib-watch": "=0.6.1",
     "jest-cli": "=0.8.0",
     "less": "=2.5.3",
-    "watchify": "=3.6.1"
+    "webpack": "=1.12.9"
   }
 }
