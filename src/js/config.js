@@ -17,6 +17,5 @@ module.exports = {
     return this.github.host.indexOf("github.com") === -1 ?
       this.hostUrl() + "/api/" + this.github.apiVersion :
       "https://api.github.com"
-    }
   }
 };
