@@ -1,17 +1,22 @@
 module.exports = {
   github: {
     proto: "https",
-    host: "github.intuit.com",
+    host: "github.com",
     apiVersion: "v3",
     auth: {
-      clientId: "5c3891a38cd03ea8c8a6",
-      clientSecret: "532d1c443b64dc40ae4921c5ec7a5adcafa9bf46"
+      clientId: "3fef4433a29c6ad8f22c",
+      clientSecret: "9670de733096c15322183ff17ed0fc8704050379"
     }
   },
   hostUrl: function getHostUrl() {
-    return this.github.proto + "://" + this.github.host;
+    return this.github.host.indexOf("github.com") === -1 ?
+      this.github.proto + "://" + this.github.host :
+      "https://github.com";
   },
   apiUrl: function getApiUrl() {
-    return this.hostUrl() + "/api/" + this.github.apiVersion;
+    return this.github.host.indexOf("github.com") === -1 ?
+      this.hostUrl() + "/api/" + this.github.apiVersion :
+      "https://api.github.com"
+    }
   }
 };
