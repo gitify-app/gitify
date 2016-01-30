@@ -1,5 +1,7 @@
 import React from 'react';
 
+var config = require('../config');
+
 const shell = window.require('electron').shell;
 
 var Actions = require('../actions/actions');
@@ -30,7 +32,7 @@ var NotificationItem = React.createClass({
   },
 
   openBrowser: function () {
-    var url = this.props.notification.subject.url.replace('api.github.com/repos', 'www.github.com');
+    var url = this.props.notification.subject.url.replace(config.apiUrl() + '/repos', config.github.host);
     if (url.indexOf('/pulls/') != -1) {
       url = url.replace('/pulls/', '/pull/');
     }
@@ -43,7 +45,7 @@ var NotificationItem = React.createClass({
     if (this.state.read) { return; }
 
     apiRequests
-      .patchAuth('https://api.github.com/notifications/threads/' + this.props.notification.id)
+      .patchAuth(config.apiUrl() + '/notifications/threads/' + this.props.notification.id)
       .end(function (err, response) {
         if (response && response.ok) {
           // Notification Read

@@ -1,6 +1,7 @@
 import React from 'react';
 
 const shell = window.require('electron').shell;
+var config = require('../config');
 
 var SingleNotification = require('../components/notification');
 var Actions = require('../actions/actions');
@@ -31,7 +32,7 @@ var Repository = React.createClass({
     var fullName = this.props.repo[0].repository.full_name;
 
     apiRequests
-      .putAuth('https://api.github.com/repos/' + loginId + '/' + repoId + '/notifications', {})
+      .putAuth(config.apiUrl() + '/repos/' + loginId + '/' + repoId + '/notifications', {})
       .end(function (err, response) {
         if (response && response.ok) {
           // Notification Read

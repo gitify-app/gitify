@@ -1,6 +1,8 @@
 import Reflux from 'reflux';
 import _ from 'underscore';
 
+var config = require('../config');
+
 const ipcRenderer = window.require('electron').ipcRenderer;
 
 var Actions = require('../actions/actions');
@@ -29,7 +31,7 @@ var NotificationsStore = Reflux.createStore({
     var participating = SettingsStore.getSettings().participating;
 
     apiRequests
-      .getAuth('https://api.github.com/notifications?participating=' +
+      .getAuth(config.apiUrl() + '/notifications?participating=' +
         (participating ? 'true' : 'false'))
       .end(function (err, response) {
         if (response && response.ok) {
