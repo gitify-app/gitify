@@ -1,4 +1,4 @@
-var config = require('../../../config');
+var config = require('../../../config.json');
 
 module.exports = {
   config: config,
