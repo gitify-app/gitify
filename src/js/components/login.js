@@ -3,7 +3,7 @@ var ipcRenderer = window.require('electron').ipcRenderer;
 var remote = electron.remote;
 var BrowserWindow = remote.BrowserWindow;
 
-var config = require('../config');
+var configManager = require('../utils/config-manager');
 
 import React from 'react';
 import { History } from 'react-router';
@@ -23,8 +23,8 @@ var Login = React.createClass({
 
     // Start Login
     var options = {
-      client_id: config.github.auth.clientId,
-      client_secret: config.github.auth.clientSecret,
+      client_id: configManager.config.github.auth.clientId,
+      client_secret: configManager.config.github.auth.clientSecret,
       scope: ['user:email', 'notifications']
     };
 
@@ -37,7 +37,7 @@ var Login = React.createClass({
         'node-integration': false
       }
     });
-    var githubUrl = config.hostUrl() + '/login/oauth/authorize?';
+    var githubUrl = configManager.hostUrl() + '/login/oauth/authorize?';
     var authUrl = githubUrl + 'client_id=' + options.client_id + '&scope=' + options.scope;
     authWindow.loadURL(authUrl);
 
@@ -79,7 +79,7 @@ var Login = React.createClass({
     var self = this;
 
     apiRequests
-      .post(config.hostUrl() + '/login/oauth/access_token', {
+      .post(configManager.hostUrl() + '/login/oauth/access_token', {
         client_id: options.client_id,
         client_secret: options.client_secret,
         code: code
