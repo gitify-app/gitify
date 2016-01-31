@@ -9,13 +9,14 @@ module.exports = {
     }
   },
   hostUrl: function getHostUrl() {
-    return this.github.host.indexOf("github.com") === -1 ?
-      this.github.proto + "://" + this.github.host :
-      "https://github.com";
+    return this.github.proto + "://" + this.github.host;
   },
   apiUrl: function getApiUrl() {
     return this.github.host.indexOf("github.com") === -1 ?
       this.hostUrl() + "/api/" + this.github.apiVersion :
-      "https://api.github.com"
+      this.github.proto + "://api." + this.github.host
+  },
+  apiHost: function getApiHostOnly() {
+    return this.apiUrl().replace("https://", "").replace("http://", "");
   }
 };

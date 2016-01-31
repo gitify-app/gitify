@@ -32,8 +32,7 @@ var NotificationItem = React.createClass({
   },
 
   openBrowser: function () {
-    var url = this.props.notification.subject.url.replace(config.apiUrl() + '/repos', config.github.host);
-    console.log("URL " + url);
+    var url = this.props.notification.subject.url.replace(config.apiHost() + '/repos', config.github.host);
     if (url.indexOf('/pulls/') != -1) {
       url = url.replace('/pulls/', '/pull/');
     }
