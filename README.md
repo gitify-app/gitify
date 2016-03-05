@@ -2,13 +2,7 @@
 [![travis][travis-image]][travis-url]
 [![cc-gpa][cc-gpa-image]][cc-gpa-url]
 [![cc-coverage][cc-coverage-image]][cc-coverage-url]
-
-[travis-image]: https://travis-ci.org/ekonstantinidis/gitify.svg?branch=master
-[travis-url]: https://travis-ci.org/ekonstantinidis/gitify
-[cc-gpa-image]: https://codeclimate.com/github/ekonstantinidis/gitify/badges/gpa.svg
-[cc-gpa-url]: https://codeclimate.com/github/ekonstantinidis/gitify
-[cc-coverage-image]: https://codeclimate.com/github/ekonstantinidis/gitify/badges/coverage.svg
-[cc-coverage-url]: https://codeclimate.com/github/ekonstantinidis/gitify/coverage
+[![slack][slack-image]][slack-url]
 
 ### GitHub Notifications on your menu bar.
 
@@ -83,3 +77,13 @@ To run the tests:
 
 ### License
 Gitify is licensed under the MIT Open Source license. For more information, see the LICENSE file in this repository.
+
+
+[travis-image]: https://travis-ci.org/ekonstantinidis/gitify.svg?branch=master
+[travis-url]: https://travis-ci.org/ekonstantinidis/gitify
+[cc-gpa-image]: https://codeclimate.com/github/ekonstantinidis/gitify/badges/gpa.svg
+[cc-gpa-url]: https://codeclimate.com/github/ekonstantinidis/gitify
+[cc-coverage-image]: https://codeclimate.com/github/ekonstantinidis/gitify/badges/coverage.svg
+[cc-coverage-url]: https://codeclimate.com/github/ekonstantinidis/gitify/coverage
+[slack-image]: https://img.shields.io/badge/slack-atomio/gitify-e01563.svg
+[slack-url]: https://atomio.slack.com/
