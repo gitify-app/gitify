@@ -40,23 +40,23 @@ var Search = React.createClass({
 
     if (this.state.searchTerm) {
       clearSearchIcon = (
-        <span className='octicon octicon-x' onClick={this.clearSearch} />
+        <span className="octicon octicon-x" onClick={this.clearSearch} />
       );
     }
 
     return (
       <div className={this.props.showSearch ? 'container-fluid search-bar' : 'container-fluid' }>
         {this.props.showSearch ? (
-            <div className='row'>
+            <div className="row">
               <div className="col-xs-10">
-                <div className='form-group search-wrapper'>
+                <div className="form-group search-wrapper">
                   <input
                     autoFocus
                     value={this.state.searchTerm}
                     onChange={this.updateSearchTerm}
-                    className='form-control'
-                    type='text'
-                    placeholder=' Search...' />
+                    className="form-control"
+                    type="text"
+                    placeholder=" Search..." />
                 </div>
             </div>
             <div className="col-xs-2">

@@ -69,16 +69,16 @@ var NotificationsPage = React.createClass({
         <div>
           <h3>Oops something went wrong.</h3>
           <h4>Couldn't get your notifications.</h4>
-          <img className='img-responsive emoji' src='images/error.png' />
+          <img className="img-responsive emoji" src="images/error.png" />
         </div>
       );
     } else {
       if (notificationsEmpty) {
         notifications = (
           <div>
-            <h2>Awesome! <span className='what'>&nbsp;</span></h2>
+            <h2>Awesome! <span className="what">&nbsp;</span></h2>
             <h3>No new notifications.</h3>
-            <img className='img-responsive emoji' src='images/all-read.png' />
+            <img className="img-responsive emoji" src="images/all-read.png" />
           </div>
         );
       } else {
@@ -106,7 +106,7 @@ var NotificationsPage = React.createClass({
             <div>
               <h3>No Search Results.</h3>
               <h4>No Organisations or Repositories match your search term.</h4>
-              <img className='img-responsive emoji' src='images/all-read.png' />
+              <img className="img-responsive emoji" src="images/all-read.png" />
             </div>
           );
         }
@@ -119,14 +119,14 @@ var NotificationsPage = React.createClass({
           (this.state.errors ? ' errored' : '') +
           (notificationsEmpty ? ' all-read' : '')
         }>
-        <Loading className='loading-container' shouldShow={this.state.loading}>
-          <div className='loading-text'>working on it</div>
+        <Loading className="loading-container" shouldShow={this.state.loading}>
+          <div className="loading-text">working on it</div>
         </Loading>
         {errors}
         {notifications}
         {notifications && notifications.length ? (
-          <div className='fork' onClick={this.openBrowser}>
-            <i className='fa fa-github' /> Star Gitify on GitHub
+          <div className="fork" onClick={this.openBrowser}>
+            <i className="fa fa-github" /> Star Gitify on GitHub
           </div>
         ) : null}
       </div>

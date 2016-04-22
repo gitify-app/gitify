@@ -90,46 +90,46 @@ var Navigation = React.createClass({
         <i title="Refresh" className={loadingClass} onClick={this.refreshNotifications} />
       );
       logoutIcon = (
-        <i title="Sign Out" className='fa fa-sign-out' onClick={this.logOut} />
+        <i title="Sign Out" className="fa fa-sign-out" onClick={this.logOut} />
       );
       settingsIcon = (
-        <i title="Settings" className='fa fa-cog' onClick={this.goToSettings} />
+        <i title="Settings" className="fa fa-cog" onClick={this.goToSettings} />
       );
       if (this.state.notifications.length) {
         searchIcon = (
-          <i title="Search" className='fa fa-search' onClick={this.props.toggleSearch} />
+          <i title="Search" className="fa fa-search" onClick={this.props.toggleSearch} />
         );
         countLabel = (
-          <span className='label label-success'>{this.state.notifications.length}</span>
+          <span className="label label-success">{this.state.notifications.length}</span>
         );
       }
     } else {
       quitIcon = (
-        <i title="Quit" className='fa fa-power-off' onClick={this.appQuit} />
+        <i title="Quit" className="fa fa-power-off" onClick={this.appQuit} />
       );
     }
 
     if (this.context.location.pathname === '/settings') {
       backIcon = (
-        <i title="Back" className='fa fa-chevron-left' onClick={this.goBack} />
+        <i title="Back" className="fa fa-chevron-left" onClick={this.goBack} />
       );
       settingsIcon = (
-        <i title="Settings" className='fa fa-cog' onClick={this.goBack} />
+        <i title="Settings" className="fa fa-cog" onClick={this.goBack} />
       );
     }
 
     return (
-      <div className='container-fluid'>
-        <div className='row navigation'>
-          <div className='col-xs-6 left'>
+      <div className="container-fluid">
+        <div className="row navigation">
+          <div className="col-xs-6 left">
             <img
-              className='img-responsive logo'
-              src='images/logo-hor-white.png'
+              className="img-responsive logo"
+              src="images/logo-hor-white.png"
               onClick={this.openBrowser}/>
             {countLabel}
             {refreshIcon}
           </div>
-          <div className='col-xs-6 right'>
+          <div className="col-xs-6 right">
             {backIcon}
             {searchIcon}
             {settingsIcon}

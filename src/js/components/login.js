@@ -39,14 +39,6 @@ var Login = React.createClass({
     var authUrl = githubUrl + 'client_id=' + options.client_id + '&scope=' + options.scope;
     authWindow.loadURL(authUrl);
 
-    authWindow.webContents.on('will-navigate', function (event, url) {
-      handleCallback(url);
-    });
-
-    authWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
-      handleCallback(newUrl);
-    });
-
     function handleCallback (url) {
       var raw_code = /code=([^&]*)/.exec(url) || null;
       var code = (raw_code && raw_code.length > 1) ? raw_code[1] : null;
@@ -71,6 +63,13 @@ var Login = React.createClass({
       authWindow.destroy();
     });
 
+    authWindow.webContents.on('will-navigate', function (event, url) {
+      handleCallback(url);
+    });
+
+    authWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
+      handleCallback(newUrl);
+    });
   },
 
   requestGithubToken: function (options, code) {
@@ -98,11 +97,11 @@ var Login = React.createClass({
   render: function () {
     return (
       <div className="container-fluid main-container login">
-        <div className='row'>
-          <div className='col-xs-offset-2 col-xs-8'>
-            <img className='img-responsive logo' src='images/github-logo.png' />
-            <div className='desc'>GitHub notifications in your menu bar.</div>
-            <button className='btn btn-default btn-lg btn-block' onClick={this.authGithub}>
+        <div className="row">
+          <div className="col-xs-offset-2 col-xs-8">
+            <img className="img-responsive logo" src="images/github-logo.png" />
+            <div className="desc">GitHub notifications in your menu bar.</div>
+            <button className="btn btn-default btn-lg btn-block" onClick={this.authGithub}>
               <i className="fa fa-github" />Log in to GitHub
             </button>
           </div>

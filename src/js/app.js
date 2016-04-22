@@ -47,12 +47,12 @@ function requireAuth (nextState, replaceState) {
 
 render(
   <Router>
-    <Route path='/' component={App}>
+    <Route path="/" component={App}>
       <IndexRoute component={NotificationsPage} onEnter={requireAuth} />
-      <Route path='/notifications' component={NotificationsPage} />
-      <Route path='/login' component={LoginPage} />
-      <Route path='/settings' component={SettingsPage} />
-      <Route path='*' component={NotFound} />
+      <Route path="/notifications" component={NotificationsPage} />
+      <Route path="/login" component={LoginPage} />
+      <Route path="/settings" component={SettingsPage} />
+      <Route path="*" component={NotFound} />
     </Route>
   </Router>,
   document.getElementById('app')

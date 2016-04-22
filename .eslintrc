@@ -36,7 +36,6 @@
     "eqeqeq": 2,
     "block-scoped-var": 2,
     "no-constant-condition": 2,
-    "no-lonely-if": 2,
     "no-nested-ternary": 2,
     "no-mixed-spaces-and-tabs": 2,
     "no-undef": 2,
