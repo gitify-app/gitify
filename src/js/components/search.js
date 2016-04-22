@@ -1,41 +1,42 @@
 import React from 'react';
-import Reflux from 'reflux';
+// import Reflux from 'reflux';
 
 var Actions = require('../actions/actions');
 var SearchStore = require('../stores/search');
 
-var Search = React.createClass({
-  mixins: [
-    Reflux.connect(SearchStore, 'searchTerm')
-  ],
+export default class SearchBar extends React.Component {
+  // mixins: [
+  //   Reflux.connect(SearchStore, 'searchTerm')
+  // ],
 
-  getInitialState: function () {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       searchTerm: ''
     };
-  },
+  }
 
-  componentWillReceiveProps: function (nextProps) {
+  componentWillReceiveProps(nextProps) {
     if (nextProps.showSearch === false) {
       this.setState({
         searchTerm: ''
       });
       Actions.updateSearchTerm('');
     }
-  },
+  }
 
-  updateSearchTerm: function (event) {
+  updateSearchTerm(event) {
     this.setState({
       searchTerm: event.target.value
     });
     Actions.updateSearchTerm(event.target.value);
-  },
+  }
 
-  clearSearch: function () {
+  clearSearch() {
     Actions.clearSearchTerm();
-  },
+  }
 
-  render: function () {
+  render() {
     var clearSearchIcon;
 
     if (this.state.searchTerm) {
@@ -67,6 +68,4 @@ var Search = React.createClass({
       </div>
     );
   }
-});
-
-module.exports = Search;
+};

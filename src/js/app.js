@@ -6,24 +6,26 @@ import LoginPage from './components/login';
 import Navigation from './components/navigation';
 import NotificationsPage from './components/notifications';
 import SettingsPage from './components/settings';
+import SearchBar from './components/search';
 
 var AuthStore = require('./stores/auth');
-var SearchBar = require('./components/search');
 
-var App = React.createClass({
-  getInitialState: function () {
-    return {
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       showSearch: false
     };
-  },
+  }
 
-  toggleSearch: function () {
+  toggleSearch() {
     this.setState({
       showSearch: !this.state.showSearch
     });
-  },
+  }
 
-  render: function () {
+  render() {
     return (
       <div>
         <Navigation
@@ -35,13 +37,13 @@ var App = React.createClass({
       </div>
     );
   }
-});
+};
 
-var NotFound = React.createClass({
-  render: function () {
+class NotFound extends React.Component {
+  render() {
     return <h2>Not found</h2>;
   }
-});
+};
 
 function requireAuth (nextState, replaceState) {
   if (!AuthStore.authStatus()) {

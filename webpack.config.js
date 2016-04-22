@@ -2,27 +2,19 @@ var webpack = require('webpack');
 
 module.exports = {
   debug: true,
-  devtool: 'cheap-module-eval-source-map',
+  devtool: 'source-map',
 
   entry: {
-    dev: 'webpack-dev-server/client?http://0.0.0.0:3000',
     app: './src/js/app.js'
   },
 
   output: {
     path: __dirname + '/build/js',
-    filename: '[name].js',
-    publicPath: 'http://localhost:3000/build/js/'
+    filename: '[name].js'
   },
 
   plugins: [
-    new webpack.NoErrorsPlugin(),
-    new webpack.DefinePlugin({
-      __DEV__: true,
-      'process.env': {
-        NODE_ENV: JSON.stringify('development')
-      }
-    })
+    new webpack.NoErrorsPlugin()
   ],
 
   module: {
