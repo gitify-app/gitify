@@ -6,31 +6,34 @@ const ipcRenderer = window.require('electron').ipcRenderer;
 var Actions = require('../actions/actions');
 var SettingsStore = require('../stores/settings');
 
-var SettingsPage = React.createClass({
-  getInitialState: function () {
+export default class SettingsPage extends React.Component {
+
+  constructor(props) {
+    super(props);
+
     var settings = SettingsStore.getSettings();
-    return {
+    this.state = {
       participating: settings.participating,
       playSound: settings.playSound,
       showNotifications: settings.showNotifications,
       markOnClick: settings.markOnClick,
       openAtStartup: settings.openAtStartup
     };
-  },
+  }
 
-  toggleSetting: function (key, event) {
+  toggleSetting(key, event) {
     Actions.setSetting(key, event.target.checked);
-  },
+  }
 
-  checkForUpdates: function () {
+  checkForUpdates() {
     ipcRenderer.send('check-update');
-  },
+  }
 
-  appQuit: function () {
+  appQuit() {
     ipcRenderer.send('app-quit');
-  },
+  }
 
-  render: function () {
+  render() {
     var pjson = require('../../../package.json');
     var version = pjson.version;
 
@@ -103,6 +106,4 @@ var SettingsPage = React.createClass({
       </div>
     );
   }
-});
-
-module.exports = SettingsPage;
+};

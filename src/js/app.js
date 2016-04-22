@@ -4,11 +4,11 @@ import { Router, Route, IndexRoute, hashHistory } from 'react-router';
 
 import LoginPage from './components/login';
 import Navigation from './components/navigation';
+import NotificationsPage from './components/notifications';
+import SettingsPage from './components/settings';
 
 var AuthStore = require('./stores/auth');
 var SearchBar = require('./components/search');
-var NotificationsPage = require('./components/notifications');
-var SettingsPage = require('./components/settings');
 
 var App = React.createClass({
   getInitialState: function () {

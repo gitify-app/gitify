@@ -1,65 +1,68 @@
-import React from 'react';
-import Reflux from 'reflux';
 import _ from 'underscore';
+import React from 'react';
+// import Reflux from 'reflux';
 
 const shell = window.require('electron').shell;
 
 var Loading = require('reloading');
 
 var Actions = require('../actions/actions');
-var NotificationsStore = require('../stores/notifications');
-var SearchStore = require('../stores/search');
+// var NotificationsStore = require('../stores/notifications');
+// var SearchStore = require('../stores/search');
 var Repository = require('../components/repository');
 
-var NotificationsPage = React.createClass({
-  areIn: function (repoFullName, searchTerm) {
-    return repoFullName.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0;
-  },
+export default class NotificationsPage extends React.Component {
+  // FIXME!
+  // mixins: [
+  //   Reflux.connect(NotificationsStore, 'notifications'),
+  //   Reflux.connect(SearchStore, 'searchTerm'),
+  //   Reflux.listenTo(Actions.getNotifications.completed, 'completedNotifications'),
+  //   Reflux.listenTo(Actions.getNotifications.failed, 'failedNotifications')
+  // ],
 
-  matchesSearchTerm: function (obj) {
-    var searchTerm = this.state.searchTerm.replace(/^\s+/, '').replace(/\s+$/, '');
-    var searchTerms = searchTerm.split(/\s+/);
-    return _.all(searchTerms, this.areIn.bind(null, obj.repository.full_name));
-  },
+  constructor(props) {
+    super(props);
 
-  mixins: [
-    Reflux.connect(NotificationsStore, 'notifications'),
-    Reflux.connect(SearchStore, 'searchTerm'),
-    Reflux.listenTo(Actions.getNotifications.completed, 'completedNotifications'),
-    Reflux.listenTo(Actions.getNotifications.failed, 'failedNotifications')
-  ],
-
-  getInitialState: function () {
-    return {
+    this.state = {
       notifications: [],
       loading: true,
       errors: false
     };
-  },
+  }
 
-  componentWillMount: function () {
+  areIn(repoFullName, searchTerm) {
+    return repoFullName.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0;
+  }
+
+  matchesSearchTerm(obj) {
+    var searchTerm = this.state.searchTerm.replace(/^\s+/, '').replace(/\s+$/, '');
+    var searchTerms = searchTerm.split(/\s+/);
+    return _.all(searchTerms, this.areIn.bind(null, obj.repository.full_name));
+  }
+
+  componentWillMount() {
     Actions.getNotifications();
-  },
+  }
 
-  openBrowser: function () {
+  openBrowser() {
     shell.openExternal('http://www.github.com/ekonstantinidis/gitify');
-  },
+  }
 
-  completedNotifications: function () {
+  completedNotifications() {
     this.setState({
       loading: false,
       errors: false
     });
-  },
+  }
 
-  failedNotifications: function () {
+  failedNotifications() {
     this.setState({
       loading: false,
       errors: true
     });
-  },
+  }
 
-  render: function () {
+  render() {
     var notifications, errors;
     var wrapperClass = 'container-fluid main-container notifications';
     var notificationsEmpty = _.isEmpty(this.state.notifications);
@@ -132,6 +135,4 @@ var NotificationsPage = React.createClass({
       </div>
     );
   }
-});
-
-module.exports = NotificationsPage;
+};
