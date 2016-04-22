@@ -1,20 +1,25 @@
 import {CALL_API, getJSON} from 'redux-api-middleware';
 
+import Constants from '../utils/constants';
+
 // Authentication
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAILURE = 'LOGIN_FAILURE';
-export function loginUser(username, password) {
+export function loginUser(code) {
   return {
     [CALL_API]: {
-      endpoint: '/api/accounts/login/',
+      endpoint: 'https://github.com/login/oauth/access_token',
       method: 'POST',
       headers: {
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
+        'Accept': 'application/vnd.github.v3+json'
       },
-      body: JSON.stringify({username: username, password: password}),
+      body: JSON.stringify({
+        client_id: Constants.CLIENT_ID,
+        client_secret: Constants.CLIENT_SECRET,
+        code: code
+      }),
       types: [LOGIN_REQUEST, {
         type: LOGIN_SUCCESS,
         payload: (action, state, res) => getJSON(res)

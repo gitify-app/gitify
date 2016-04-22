@@ -4,20 +4,16 @@ var remote = electron.remote;
 var BrowserWindow = remote.BrowserWindow;
 
 import React from 'react';
+import { connect } from 'react-redux';
 
-var apiRequests = require('../utils/api-requests');
+import { loginUser } from '../actions';
+import Constants from '../utils/constants';
+
 var Actions = {}; // FIXME!
 
-export default class LoginPage extends React.Component {
+class LoginPage extends React.Component {
   authGithub () {
     var self = this;
-
-    // Start Login
-    var options = {
-      client_id: '3fef4433a29c6ad8f22c',
-      client_secret: '9670de733096c15322183ff17ed0fc8704050379',
-      scope: ['user:email', 'notifications']
-    };
 
     //Build the OAuth consent page URL
     var authWindow = new BrowserWindow({
@@ -29,7 +25,7 @@ export default class LoginPage extends React.Component {
       }
     });
     var githubUrl = 'https://github.com/login/oauth/authorize?';
-    var authUrl = githubUrl + 'client_id=' + options.client_id + '&scope=' + options.scope;
+    var authUrl = githubUrl + 'client_id=' + Constants.CLIENT_ID + '&scope=' + Constants.SCOPE;
     authWindow.loadURL(authUrl);
 
     function handleCallback (url) {
@@ -44,7 +40,7 @@ export default class LoginPage extends React.Component {
 
       // If there is a code, proceed to get token from github
       if (code) {
-        self.requestGithubToken(options, code);
+        self.requestGithubToken(code);
       } else if (error) {
         alert('Oops! Something went wrong and we couldn\'t' +
           'log you in using Github. Please try again.');
@@ -65,26 +61,8 @@ export default class LoginPage extends React.Component {
     });
   }
 
-  requestGithubToken(options, code) {
-    var self = this;
-
-    apiRequests
-      .post('https://github.com/login/oauth/access_token', {
-        client_id: options.client_id,
-        client_secret: options.client_secret,
-        code: code
-      })
-      .end(function (err, response) {
-        if (response && response.ok) {
-          // Success - Do Something.
-          Actions.login(response.body.access_token);
-          self.context.router.push('/notifications');
-          ipcRenderer.send('reopen-window');
-        } else {
-          // Error - Show messages.
-          // Show appropriate message
-        }
-      });
+  requestGithubToken(code) {
+    this.props.loginUser(code);
   }
 
   render() {
@@ -94,7 +72,7 @@ export default class LoginPage extends React.Component {
           <div className="col-xs-offset-2 col-xs-8">
             <img className="img-responsive logo" src="images/github-logo.png" />
             <div className="desc">GitHub notifications in your menu bar.</div>
-            <button className="btn btn-default btn-lg btn-block" onClick={this.authGithub}>
+            <button className="btn btn-default btn-lg btn-block" onClick={this.authGithub.bind(this)}>
               <i className="fa fa-github" />Log in to GitHub
             </button>
           </div>
@@ -107,3 +85,13 @@ export default class LoginPage extends React.Component {
 LoginPage.contextTypes = {
   router: React.PropTypes.object.isRequired
 };
+
+function mapStateToProps(state) {
+  return {
+    response: state.auth.response,
+    failed: state.auth.failed,
+    isFetching: state.auth.isFetching
+  };
+};
+
+export default connect(mapStateToProps, { loginUser })(LoginPage);
