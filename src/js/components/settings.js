@@ -3,15 +3,16 @@ import Toggle from 'react-toggle';
 
 const ipcRenderer = window.require('electron').ipcRenderer;
 
-var Actions = require('../actions/actions');
-var SettingsStore = require('../stores/settings');
+var Actions = {}; // FIXME!
+// var SettingsStore = require('../stores/settings');
 
 export default class SettingsPage extends React.Component {
 
   constructor(props) {
     super(props);
 
-    var settings = SettingsStore.getSettings();
+    // var settings = SettingsStore.getSettings();
+    var settings = {}; // FIXME!
     this.state = {
       participating: settings.participating,
       playSound: settings.playSound,

@@ -2,8 +2,8 @@ import React from 'react';
 
 const shell = window.require('electron').shell;
 
-var SingleNotification = require('../components/notification');
-var Actions = require('../actions/actions');
+var SingleNotification = require('./notification');
+var Actions = {}; // FIXME!
 var apiRequests = require('../utils/api-requests');
 
 var Repository = React.createClass({

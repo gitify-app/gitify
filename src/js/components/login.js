@@ -6,7 +6,7 @@ var BrowserWindow = remote.BrowserWindow;
 import React from 'react';
 
 var apiRequests = require('../utils/api-requests');
-var Actions = require('../actions/actions');
+var Actions = {}; // FIXME!
 
 export default class LoginPage extends React.Component {
   authGithub () {

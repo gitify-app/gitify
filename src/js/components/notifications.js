@@ -6,10 +6,10 @@ const shell = window.require('electron').shell;
 
 var Loading = require('reloading');
 
-var Actions = require('../actions/actions');
+var Actions = {}; // FIXME!
 // var NotificationsStore = require('../stores/notifications');
 // var SearchStore = require('../stores/search');
-var Repository = require('../components/repository');
+var Repository = require('./repository');
 
 export default class NotificationsPage extends React.Component {
   // FIXME!

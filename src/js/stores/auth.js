@@ -1,6 +1,6 @@
 import Reflux from 'reflux';
 
-var Actions = require('../actions/actions');
+var Actions = {}; // FIXME!
 
 var AuthStore = Reflux.createStore({
   listenables: Actions,

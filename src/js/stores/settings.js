@@ -2,7 +2,7 @@ import Reflux from 'reflux';
 
 const ipcRenderer = window.require('electron').ipcRenderer;
 
-var Actions = require('../actions/actions');
+var Actions = {}; // FIXME!
 
 var SettingsStore = Reflux.createStore({
   listenables: Actions,

@@ -4,8 +4,8 @@ import React from 'react';
 const ipcRenderer = window.require('electron').ipcRenderer;
 const shell = window.require('electron').shell;
 
-var Actions = require('../actions/actions');
-var AuthStore = require('../stores/auth');
+var Actions = {}; // FIXME!
+// var AuthStore = require('../stores/auth');
 // var NotificationsStore = require('../stores/notifications.js');
 
 export default class Navigation extends React.Component {
@@ -22,7 +22,8 @@ export default class Navigation extends React.Component {
     super(props);
 
     this.state = {
-      authStatus: AuthStore.authStatus(),
+      // authStatus: AuthStore.authStatus(), FIXME!
+      authStatus: false,
       loading: false,
       notifications: []
     };

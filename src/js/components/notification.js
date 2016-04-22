@@ -2,7 +2,7 @@ import React from 'react';
 
 const shell = window.require('electron').shell;
 
-var Actions = require('../actions/actions');
+var Actions = {}; // FIXME!
 var apiRequests = require('../utils/api-requests');
 var SettingsStore = require('../stores/settings');
 

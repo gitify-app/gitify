@@ -1,8 +1,8 @@
 import React from 'react';
 // import Reflux from 'reflux';
 
-var Actions = require('../actions/actions');
-var SearchStore = require('../stores/search');
+var Actions = {}; // FIXME!
+// var SearchStore = require('../stores/search');
 
 export default class SearchBar extends React.Component {
   // mixins: [
