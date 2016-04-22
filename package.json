@@ -7,7 +7,7 @@
     "build-js": "webpack",
     "build": "ulimit -n 512 && npm install && grunt build && npm run build-js",
     "watch-js": "webpack --progress --colors --watch",
-    "watch": "npm run build && grunt build && npm run watch-js & grunt watch",
+    "watch": "npm run watch-js & grunt watch",
     "start": "electron . --enable-logging",
     "release-js": "webpack --config webpack.rel.config.js",
     "package": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.35.4 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",

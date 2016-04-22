@@ -4,19 +4,12 @@ var remote = electron.remote;
 var BrowserWindow = remote.BrowserWindow;
 
 import React from 'react';
-import { History } from 'react-router';
 
 var apiRequests = require('../utils/api-requests');
 var Actions = require('../actions/actions');
 
-var Login = React.createClass({
-  mixins: [ History ],
-
-  contextTypes: {
-    router: React.PropTypes.func
-  },
-
-  authGithub: function () {
+export default class LoginPage extends React.Component {
+  authGithub () {
     var self = this;
 
     // Start Login
@@ -70,9 +63,9 @@ var Login = React.createClass({
     authWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
       handleCallback(newUrl);
     });
-  },
+  }
 
-  requestGithubToken: function (options, code) {
+  requestGithubToken(options, code) {
     var self = this;
 
     apiRequests
@@ -85,16 +78,16 @@ var Login = React.createClass({
         if (response && response.ok) {
           // Success - Do Something.
           Actions.login(response.body.access_token);
-          self.history.push('/notifications');
+          self.context.router.push('/notifications');
           ipcRenderer.send('reopen-window');
         } else {
           // Error - Show messages.
           // Show appropriate message
         }
       });
-  },
+  }
 
-  render: function () {
+  render() {
     return (
       <div className="container-fluid main-container login">
         <div className="row">
@@ -109,6 +102,8 @@ var Login = React.createClass({
       </div>
     );
   }
-});
+};
 
-module.exports = Login;
+LoginPage.contextTypes = {
+  router: React.PropTypes.object.isRequired
+};

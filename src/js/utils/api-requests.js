@@ -21,8 +21,7 @@ var apiRequests = {
       .get(url)
       .set('Accept', 'application/vnd.github.v3+json')
       .set('Authorization', 'token ' + AuthStore.authStatus())
-      .set('Cache-Control', 'no-cache')
-      .set('User-Agent', 'Gitify');
+      .set('Cache-Control', 'no-cache');
   },
 
   putAuth: function (url, params) {
@@ -31,8 +30,7 @@ var apiRequests = {
       .send(params)
       .set('Accept', 'application/vnd.github.v3+json')
       .set('Authorization', 'token ' + AuthStore.authStatus())
-      .set('Cache-Control', 'no-cache')
-      .set('User-Agent', 'Gitify');
+      .set('Cache-Control', 'no-cache');
   },
 
   patchAuth: function (url, params) {
@@ -41,8 +39,7 @@ var apiRequests = {
       .send(params)
       .set('Accept', 'application/vnd.github.v3+json')
       .set('Authorization', 'token ' + AuthStore.authStatus())
-      .set('Cache-Control', 'no-cache')
-      .set('User-Agent', 'Gitify');
+      .set('Cache-Control', 'no-cache');
   }
 };
 
