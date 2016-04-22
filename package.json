@@ -63,7 +63,7 @@
   },
   "devDependencies": {
     "babel-core": "=6.3.26",
-    "babel-eslint": "=4.1.6",
+    "babel-eslint": "=5.0.0",
     "babel-jest": "=6.0.1",
     "babel-loader": "=6.2.1",
     "babel-preset-es2015": "=6.3.13",
