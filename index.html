@@ -12,7 +12,18 @@
       <div id="app"></div>
   </body>
 
-  <script src="build/js/app.js"></script>
+  <script src="http://localhost:3000/webpack-dev-server.js"></script>
+  <script src="http://localhost:3000/build/js/app.js"></script>
+
+  <script>
+    (function() {
+      // const script = document.createElement('script');
+      // script.src = 'http://localhost:3000/build/js/app.js';
+      // // script.src = (process.env.HOT) ? 'http://localhost:3000/build/js/app.js' : 'build/js/app.js';
+      // document.write(script.outerHTML);
+    }());
+  </script>
+
   <script>
     // Disable zoom
     document.addEventListener('mousewheel', function(e) {
