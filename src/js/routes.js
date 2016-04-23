@@ -12,7 +12,7 @@ class NotFound extends React.Component {
   }
 };
 
-function requireAuth (nextState, replace, callback?) {
+function requireAuth (nextState, replace) {
   // FIXME!
   // if (!AuthStore.authStatus()) {
   //   replaceState(null, '/login/');
