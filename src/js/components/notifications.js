@@ -41,7 +41,8 @@ export default class NotificationsPage extends React.Component {
   }
 
   componentWillMount() {
-    Actions.getNotifications();
+    // FIXME!
+    // Actions.getNotifications();
   }
 
   openBrowser() {

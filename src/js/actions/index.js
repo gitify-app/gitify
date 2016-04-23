@@ -13,19 +13,23 @@ export function loginUser(code) {
       endpoint: 'https://github.com/login/oauth/access_token',
       method: 'POST',
       headers: {
-        'Accept': 'application/vnd.github.v3+json'
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        client_id: Constants.CLIENT_ID,
-        client_secret: Constants.CLIENT_SECRET,
-        code: code
+        'client_id': Constants.CLIENT_ID,
+        'client_secret': Constants.CLIENT_SECRET,
+        'code': code
       }),
       types: [LOGIN_REQUEST, {
         type: LOGIN_SUCCESS,
         payload: (action, state, res) => getJSON(res)
       }, {
         type: LOGIN_FAILURE,
-        payload: (action, state, res) => getJSON(res)
+        payload: (action, state, res) => {
+          console.log(res);
+          return getJSON(res);
+        }
       }]
     }
   };
