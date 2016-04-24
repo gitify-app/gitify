@@ -12,18 +12,22 @@ class NotFound extends React.Component {
   }
 };
 
-function requireAuth (nextState, replace) {
+function requireAuth (store) {
+  console.log(store);
+  store.dispatch(checkAuth());
   // FIXME!
   // if (!AuthStore.authStatus()) {
   //   replaceState(null, '/login/');
   // }
-  replace('/login/');
+  return (nextState, replace) => {
+    replace('/login/');
+  };
 }
 
 export default (store) => {
   return (
     <Route path="/" component={App}>
-      <IndexRoute component={NotificationsPage} onEnter={requireAuth} />
+      <IndexRoute component={NotificationsPage} onEnter={requireAuth(store)} />
       <Route path="/notifications" component={NotificationsPage} />
       <Route path="/login" component={LoginPage} />
       <Route path="/settings" component={SettingsPage} />
