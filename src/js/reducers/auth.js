@@ -1,5 +1,5 @@
 import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT
+  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT, CHECK_AUTH
 } from '../actions';
 
 const initialState = {
@@ -23,7 +23,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isFetching: false,
-        token: action.payload.token
+        token: action.payload.access_token
       };
     case LOGIN_FAILURE:
       return {
@@ -36,6 +36,11 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         response: null
+      };
+    case CHECK_AUTH:
+      return {
+        ...state,
+        token: action.token
       };
     default:
       return state;

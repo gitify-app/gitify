@@ -17,19 +17,20 @@ export default class SearchBar extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.showSearch === false) {
-      this.setState({
-        searchTerm: ''
-      });
-      Actions.updateSearchTerm('');
-    }
+    // FIXME!
+    // if (nextProps.showSearch === false) {
+    //   this.setState({
+    //     searchTerm: ''
+    //   });
+      // Actions.updateSearchTerm('');
+    // }
   }
 
   updateSearchTerm(event) {
-    this.setState({
-      searchTerm: event.target.value
-    });
-    Actions.updateSearchTerm(event.target.value);
+    // this.setState({
+    //   searchTerm: event.target.value
+    // });
+    // Actions.updateSearchTerm(event.target.value);
   }
 
   clearSearch() {

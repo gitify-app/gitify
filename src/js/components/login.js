@@ -9,9 +9,15 @@ import { connect } from 'react-redux';
 import { loginUser } from '../actions';
 import Constants from '../utils/constants';
 
-var Actions = {}; // FIXME!
-
 class LoginPage extends React.Component {
+  componentWillReceiveProps(nextProps) {
+    const isLoggedIn = nextProps.token !== null;
+    if (isLoggedIn) {
+      ipcRenderer.send('reopen-window');
+      this.context.router.push('/notifications');
+    }
+  }
+
   authGithub () {
     var self = this;
 
@@ -88,6 +94,7 @@ LoginPage.contextTypes = {
 
 function mapStateToProps(state) {
   return {
+    token: state.auth.token,
     response: state.auth.response,
     failed: state.auth.failed,
     isFetching: state.auth.isFetching
