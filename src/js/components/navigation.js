@@ -1,18 +1,18 @@
 import React from 'react';
-// import Reflux from 'reflux';
+import { connect } from 'react-redux';
 
 const ipcRenderer = window.require('electron').ipcRenderer;
 const shell = window.require('electron').shell;
 
+import { logout } from '../actions';
+
 var Actions = {}; // FIXME!
-// var AuthStore = require('../stores/auth');
 // var NotificationsStore = require('../stores/notifications.js');
 
-export default class Navigation extends React.Component {
+class Navigation extends React.Component {
 
   // FIXME!
   // mixins: [
-  //   Reflux.connect(AuthStore, 'authStatus'),
   //   Reflux.connect(NotificationsStore, 'notifications'),
   //   Reflux.listenTo(Actions.getNotifications.completed, 'refreshDone'),
   //   Reflux.listenTo(Actions.getNotifications.failed, 'refreshDone')
@@ -22,9 +22,7 @@ export default class Navigation extends React.Component {
     super(props);
 
     this.state = {
-      // authStatus: AuthStore.authStatus(), FIXME!
-      authStatus: false,
-      loading: false,
+      loading: false, // FIXME!
       notifications: []
     };
   }
@@ -51,12 +49,6 @@ export default class Navigation extends React.Component {
   }
 
   goToSettings() {
-
-    console.log('=========');
-    console.log(this.props);
-    console.log('=========');
-
-
     if (this.props.showSearch) {
       this.props.toggleSearch();
     }
@@ -69,8 +61,8 @@ export default class Navigation extends React.Component {
       this.props.toggleSearch();
     }
 
-    Actions.logout();
-    this.context.router.push('/login');
+    this.props.logout();
+    this.context.router.replace('/login');
     ipcRenderer.send('update-icon', 'IconPlain');
   }
 
@@ -87,10 +79,11 @@ export default class Navigation extends React.Component {
   }
 
   render() {
+    const isLoggedIn = this.props.token !== null;
     var refreshIcon, logoutIcon, backIcon, settingsIcon, quitIcon, searchIcon, countLabel;
     var loadingClass = this.state.loading ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
 
-    if (this.state.authStatus) {
+    if (isLoggedIn) {
       refreshIcon = (
         <i title="Refresh" className={loadingClass} onClick={this.refreshNotifications.bind(this)} />
       );
@@ -151,3 +144,11 @@ Navigation.contextTypes = {
   location: React.PropTypes.object,
   router: React.PropTypes.object.isRequired
 };
+
+function mapStateToProps(state) {
+  return {
+    token: state.auth.token
+  };
+};
+
+export default connect(mapStateToProps, { logout })(Navigation);

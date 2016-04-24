@@ -26,8 +26,8 @@ class LoginPage extends React.Component {
       width: 800,
       height: 600,
       show: true,
-      'web-preferences': {
-        'node-integration': false
+      webPreferences: {
+        nodeIntegration: false
       }
     });
     var githubUrl = 'https://github.com/login/oauth/authorize?';

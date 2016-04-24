@@ -7,7 +7,7 @@ export default store => next => action => {
       break;
 
     case LOGOUT:
-      localStorage.clear();
+      localStorage.removeItem('token');
       break;
   }
 

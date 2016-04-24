@@ -35,7 +35,8 @@ export default function reducer(state = initialState, action) {
     case LOGOUT:
       return {
         ...state,
-        response: null
+        response: null,
+        token: null
       };
     case CHECK_AUTH:
       return {
