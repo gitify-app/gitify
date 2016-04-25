@@ -6,12 +6,9 @@ const ipcRenderer = window.require('electron').ipcRenderer;
 
 import { updateSetting } from '../actions';
 
-var Actions = {}; // FIXME!
-// var SettingsStore = require('../stores/settings');
-
 class SettingsPage extends React.Component {
   toggleSetting(key, event) {
-    Actions.setSetting(key, event.target.checked);
+    this.props.updateSetting(key, event.target.checked);
   }
 
   checkForUpdates() {
