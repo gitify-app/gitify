@@ -13,7 +13,7 @@
     "codesign": "bash scripts/codesign.bash",
     "dist": "npm run release-js && npm run package && npm run codesign",
     "lint": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
-    "test": "npm run lint && jest --config=jest-config.json",
+    "test": "npm run lint",
     "start": "electron . --enable-logging"
   },
   "repository": {
@@ -82,7 +82,6 @@
     "grunt-contrib-copy": "=1.0.0",
     "grunt-contrib-less": "=1.3.0",
     "grunt-contrib-watch": "=1.0.0",
-    "jest-cli": "=11.0.2",
     "json-loader": "=0.5.4",
     "less": "=2.6.1",
     "redux-devtools": "=3.2.0",
