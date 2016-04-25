@@ -1,29 +1,17 @@
 import _ from 'underscore';
 import React from 'react';
 import { connect } from 'react-redux';
-// import Reflux from 'reflux';
+import Loading from 'reloading';
 
 const shell = window.require('electron').shell;
 
-var Loading = require('reloading');
-
-// var SearchStore = require('../stores/search');
 var Repository = require('./repository');
 
 import { fetchNotifications } from '../actions';
 
 class NotificationsPage extends React.Component {
-  // FIXME!
-  // mixins: [
-  //   Reflux.connect(SearchStore, 'searchTerm'),
-  // ],
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      searchTerm: '' // FIXME! Use reducer for search
-    };
+  componentWillMount() {
+    this.props.fetchNotifications();
   }
 
   areIn(repoFullName, searchTerm) {
@@ -31,13 +19,9 @@ class NotificationsPage extends React.Component {
   }
 
   matchesSearchTerm(obj) {
-    var searchTerm = this.state.searchTerm.replace(/^\s+/, '').replace(/\s+$/, '');
+    var searchTerm = this.props.searchQuery.replace(/^\s+/, '').replace(/\s+$/, '');
     var searchTerms = searchTerm.split(/\s+/);
     return _.all(searchTerms, this.areIn.bind(null, obj.repository.full_name));
-  }
-
-  componentWillMount() {
-    this.props.fetchNotifications();
   }
 
   openBrowser() {
@@ -67,8 +51,8 @@ class NotificationsPage extends React.Component {
           </div>
         );
       } else {
-        if (this.state.searchTerm) {
-          notifications = _.filter(this.props.notifications, this.matchesSearchTerm);
+        if (this.props.searchQuery) {
+          notifications = _.filter(this.props.notifications, this.matchesSearchTerm.bind(this));
         } else {
           notifications = this.props.notifications;
         }
@@ -123,7 +107,8 @@ function mapStateToProps(state) {
   return {
     failed: state.notifications.failed,
     isFetching: state.notifications.isFetching,
-    notifications: state.notifications.response
+    notifications: state.notifications.response,
+    searchQuery: state.searchFilter.query
   };
 };
 
