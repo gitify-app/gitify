@@ -27,9 +27,10 @@ export default class SearchBar extends React.Component {
   }
 
   updateSearchTerm(event) {
-    // this.setState({
-    //   searchTerm: event.target.value
-    // });
+    this.setState({
+      searchTerm: event.target.value
+    });
+    // FIXME!
     // Actions.updateSearchTerm(event.target.value);
   }
 
@@ -55,7 +56,7 @@ export default class SearchBar extends React.Component {
                   <input
                     autoFocus
                     value={this.state.searchTerm}
-                    onChange={this.updateSearchTerm}
+                    onChange={this.updateSearchTerm.bind(this)}
                     className="form-control"
                     type="text"
                     placeholder=" Search..." />

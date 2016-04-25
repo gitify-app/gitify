@@ -21,6 +21,9 @@ class NotificationsPage extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      searchTerm: '' // FIXME! Use reducer for search
+    };
   }
 
   areIn(repoFullName, searchTerm) {

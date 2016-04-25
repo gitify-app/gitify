@@ -23,7 +23,7 @@ export default class App extends React.Component {
       <div>
         <Navigation
           location={this.props.location}
-          toggleSearch={this.toggleSearch}
+          toggleSearch={this.toggleSearch.bind(this)}
           showSearch={this.state.showSearch} />
         <SearchBar showSearch={this.state.showSearch} />
         {this.props.children}
