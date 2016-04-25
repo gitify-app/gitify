@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "build-js": "webpack",
-    "build": "ulimit -n 512 && npm install && grunt build && npm run build-js",
+    "build": "grunt build && npm run build-js",
     "watch-js": "webpack --progress --colors --watch",
     "watch": "npm run watch-js & grunt watch",
     "release-js": "webpack --config webpack.rel.config.js",
@@ -21,11 +21,15 @@
     "url": "https://github.com/ekonstantinidis/gitify.git"
   },
   "keywords": [
+    "gitify",
     "github",
     "notifier",
     "notifications",
-    "native",
-    "app"
+    "electron",
+    "atom",
+    "shell"
+    "app",
+    "tray"
   ],
   "author": "Emmanouil Konstantinidis",
   "contributors": [
