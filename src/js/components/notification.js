@@ -2,8 +2,6 @@ import React from 'react';
 
 const shell = window.require('electron').shell;
 
-var SettingsStore = require('../stores/settings');
-
 export default class SingleNotification extends React.Component {
 
   constructor(props) {
@@ -21,12 +19,13 @@ export default class SingleNotification extends React.Component {
   }
 
   pressTitle() {
-    var markOnClick = SettingsStore.getSettings().markOnClick;
-    this.openBrowser();
-
-    if (markOnClick) {
-      this.markAsRead();
-    }
+    // FIXME!
+    // var markOnClick = SettingsStore.getSettings().markOnClick;
+    // this.openBrowser();
+    //
+    // if (markOnClick) {
+    //   this.markAsRead();
+    // }
   }
 
   openBrowser() {
