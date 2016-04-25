@@ -76,3 +76,19 @@ export function fetchNotifications() {
     }
   };
 };
+
+// Search
+export const SEARCH_NOTIFICATIONS = 'SEARCH_NOTIFICATIONS';
+export const CLEAR_SEARCH = 'CLEAR_SEARCH';
+export function searchNotifications(query) {
+  return {
+    type: SEARCH_NOTIFICATIONS,
+    query: query
+  };
+};
+
+export function clearSearch() {
+  return {
+    type: CLEAR_SEARCH
+  };
+};

@@ -1,73 +1,52 @@
 import React from 'react';
-// import Reflux from 'reflux';
+import { connect } from 'react-redux';
 
-var Actions = {}; // FIXME!
-// var SearchStore = require('../stores/search');
+import { searchNotifications, clearSearch } from '../actions';
 
-export default class SearchBar extends React.Component {
-  // mixins: [
-  //   Reflux.connect(SearchStore, 'searchTerm')
-  // ],
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchTerm: ''
-    };
-  }
+class SearchBar extends React.Component {
 
   componentWillReceiveProps(nextProps) {
-    // FIXME!
-    // if (nextProps.showSearch === false) {
-    //   this.setState({
-    //     searchTerm: ''
-    //   });
-      // Actions.updateSearchTerm('');
-    // }
-  }
-
-  updateSearchTerm(event) {
-    this.setState({
-      searchTerm: event.target.value
-    });
-    // FIXME!
-    // Actions.updateSearchTerm(event.target.value);
-  }
-
-  clearSearch() {
-    Actions.clearSearchTerm();
+    if (nextProps.showSearch === false) {
+      this.props.clearSearch();
+    }
   }
 
   render() {
     var clearSearchIcon;
 
-    if (this.state.searchTerm) {
+    if (this.props.query) {
       clearSearchIcon = (
-        <span className="octicon octicon-x" onClick={this.clearSearch} />
+        <span className="octicon octicon-x" onClick={this.props.clearSearch} />
       );
     }
 
     return (
       <div className={this.props.showSearch ? 'container-fluid search-bar' : 'container-fluid' }>
         {this.props.showSearch ? (
-            <div className="row">
-              <div className="col-xs-10">
-                <div className="form-group search-wrapper">
-                  <input
-                    autoFocus
-                    value={this.state.searchTerm}
-                    onChange={this.updateSearchTerm.bind(this)}
-                    className="form-control"
-                    type="text"
-                    placeholder=" Search..." />
-                </div>
-            </div>
-            <div className="col-xs-2">
-              {clearSearchIcon}
-            </div>
-
-          </div>) : null }
+          <div className="row">
+            <div className="col-xs-10">
+              <div className="form-group search-wrapper">
+                <input
+                  autoFocus
+                  value={this.props.query}
+                  onChange={(evt) => this.props.searchNotifications(evt.target.value)}
+                  className="form-control"
+                  type="text"
+                  placeholder=" Search..." />
+              </div>
+          </div>
+          <div className="col-xs-2">{clearSearchIcon}</div>
+        </div>) : null }
       </div>
     );
   }
 };
+
+
+function mapStateToProps(state) {
+  return {
+    query: state.searchFilter.query
+  };
+};
+
+export default connect(mapStateToProps, { searchNotifications, clearSearch })(SearchBar);
