@@ -27,7 +27,7 @@
     "notifications",
     "electron",
     "atom",
-    "shell"
+    "shell",
     "app",
     "tray"
   ],

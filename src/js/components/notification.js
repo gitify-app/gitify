@@ -2,66 +2,67 @@ import React from 'react';
 
 const shell = window.require('electron').shell;
 
-var Actions = {}; // FIXME!
-var apiRequests = require('../utils/api-requests');
 var SettingsStore = require('../stores/settings');
 
-var NotificationItem = React.createClass({
+export default class SingleNotification extends React.Component {
 
-  getInitialState: function () {
-    return {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       isRead: this.props.isRead
     };
-  },
+  }
 
-  componentWillReceiveProps: function (nextProps) {
+  componentWillReceiveProps(nextProps) {
     this.setState({
       isRead: nextProps.isRead
     });
-  },
+  }
 
-  pressTitle: function () {
+  pressTitle() {
     var markOnClick = SettingsStore.getSettings().markOnClick;
     this.openBrowser();
 
     if (markOnClick) {
       this.markAsRead();
     }
-  },
+  }
 
-  openBrowser: function () {
+  openBrowser() {
     var url = this.props.notification.subject.url.replace('api.github.com/repos', 'www.github.com');
     if (url.indexOf('/pulls/') !== -1) {
       url = url.replace('/pulls/', '/pull/');
     }
     shell.openExternal(url);
-  },
+  }
 
-  markAsRead: function () {
-    var self = this;
+  markAsRead() {
+    // FIXME!
+    // var self = this;
 
-    if (this.state.read) { return; }
+    // if (this.state.read) { return; }
 
-    apiRequests
-      .patchAuth('https://api.github.com/notifications/threads/' + this.props.notification.id)
-      .end(function (err, response) {
-        if (response && response.ok) {
-          // Notification Read
-          self.setState({
-            isRead: true
-          });
-          Actions.removeNotification(self.props.notification);
-        } else {
-          // Error - Show messages.
-          // Show appropriate message
-          self.setState({
-            isRead: false
-          });
-        }
-      });
-  },
+    // apiRequests
+    //   .patchAuth('https://api.github.com/notifications/threads/' + this.props.notification.id)
+    //   .end(function (err, response) {
+    //     if (response && response.ok) {
+    //       // Notification Read
+    //       self.setState({
+    //         isRead: true
+    //       });
+    //       Actions.removeNotification(self.props.notification);
+    //     } else {
+    //       // Error - Show messages.
+    //       // Show appropriate message
+    //       self.setState({
+    //         isRead: false
+    //       });
+    //     }
+    //   });
+  }
 
-  render: function () {
+  render() {
     var typeIconClass, typeIconTooltip;
 
     if (this.props.notification.subject.type === 'Issue') {
@@ -93,6 +94,4 @@ var NotificationItem = React.createClass({
       </div>
     );
   }
-});
-
-module.exports = NotificationItem;
+};

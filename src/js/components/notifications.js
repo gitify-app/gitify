@@ -5,9 +5,8 @@ import Loading from 'reloading';
 
 const shell = window.require('electron').shell;
 
-var Repository = require('./repository');
-
 import { fetchNotifications } from '../actions';
+import Repository from './repository';
 
 class NotificationsPage extends React.Component {
   componentWillMount() {
