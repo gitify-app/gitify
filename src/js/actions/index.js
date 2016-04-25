@@ -49,3 +49,29 @@ export function checkAuth() {
     token: userToken
   };
 };
+
+
+// Notifications
+export const NOTIFICATIONS_REQUEST = 'NOTIFICATIONS_REQUEST';
+export const NOTIFICATIONS_SUCCESS = 'NOTIFICATIONS_SUCCESS';
+export const NOTIFICATIONS_FAILURE = 'NOTIFICATIONS_FAILURE';
+export function fetchNotifications() {
+  return {
+    // FIXME! Participating?
+    [CALL_API]: {
+      endpoint: 'https://api.github.com/notifications',
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      types: [NOTIFICATIONS_REQUEST, {
+        type: NOTIFICATIONS_SUCCESS,
+        payload: (action, state, res) => getJSON(res)
+      }, {
+        type: NOTIFICATIONS_FAILURE,
+        payload: (action, state, res) => getJSON(res)
+      }]
+    }
+  };
+};

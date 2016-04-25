@@ -1,5 +1,6 @@
 import _ from 'underscore';
 import React from 'react';
+import { connect } from 'react-redux';
 // import Reflux from 'reflux';
 
 const shell = window.require('electron').shell;
@@ -11,7 +12,9 @@ var Actions = {}; // FIXME!
 // var SearchStore = require('../stores/search');
 var Repository = require('./repository');
 
-export default class NotificationsPage extends React.Component {
+import { fetchNotifications } from '../actions';
+
+class NotificationsPage extends React.Component {
   // FIXME!
   // mixins: [
   //   Reflux.connect(NotificationsStore, 'notifications'),
@@ -43,6 +46,7 @@ export default class NotificationsPage extends React.Component {
   componentWillMount() {
     // FIXME!
     // Actions.getNotifications();
+    this.props.fetchNotifications();
   }
 
   openBrowser() {
@@ -137,3 +141,11 @@ export default class NotificationsPage extends React.Component {
     );
   }
 };
+
+function mapStateToProps(state) {
+  return {
+    notifications: state.notifications.response
+  };
+};
+
+export default connect(mapStateToProps, { fetchNotifications })(NotificationsPage);

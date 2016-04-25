@@ -4,19 +4,9 @@ import { connect } from 'react-redux';
 const ipcRenderer = window.require('electron').ipcRenderer;
 const shell = window.require('electron').shell;
 
-import { logout } from '../actions';
-
-var Actions = {}; // FIXME!
-// var NotificationsStore = require('../stores/notifications.js');
+import { fetchNotifications, logout } from '../actions';
 
 class Navigation extends React.Component {
-
-  // FIXME!
-  // mixins: [
-  //   Reflux.connect(NotificationsStore, 'notifications'),
-  //   Reflux.listenTo(Actions.getNotifications.completed, 'refreshDone'),
-  //   Reflux.listenTo(Actions.getNotifications.failed, 'refreshDone')
-  // ],
 
   constructor(props) {
     super(props);
@@ -38,8 +28,7 @@ class Navigation extends React.Component {
   }
 
   refreshNotifications() {
-    this.setState( {loading: true } );
-    Actions.getNotifications();
+    this.props.fetchNotifications();
   }
 
   refreshDone() {
@@ -151,4 +140,4 @@ function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps, { logout })(Navigation);
+export default connect(mapStateToProps, { fetchNotifications, logout })(Navigation);
