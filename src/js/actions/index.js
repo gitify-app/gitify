@@ -2,6 +2,7 @@ import {CALL_API, getJSON} from 'redux-api-middleware';
 
 import Constants from '../utils/constants';
 
+
 // Authentication
 
 export const LOGIN_REQUEST = 'LOGIN_REQUEST';
@@ -52,6 +53,7 @@ export function checkAuth() {
 
 
 // Notifications
+
 export const NOTIFICATIONS_REQUEST = 'NOTIFICATIONS_REQUEST';
 export const NOTIFICATIONS_SUCCESS = 'NOTIFICATIONS_SUCCESS';
 export const NOTIFICATIONS_FAILURE = 'NOTIFICATIONS_FAILURE';
@@ -77,7 +79,9 @@ export function fetchNotifications() {
   };
 };
 
+
 // Search
+
 export const SEARCH_NOTIFICATIONS = 'SEARCH_NOTIFICATIONS';
 export const CLEAR_SEARCH = 'CLEAR_SEARCH';
 export function searchNotifications(query) {
@@ -90,5 +94,17 @@ export function searchNotifications(query) {
 export function clearSearch() {
   return {
     type: CLEAR_SEARCH
+  };
+};
+
+
+// Settings
+
+export const UPDATE_SETTING = 'UPDATE_SETTING';
+export function updateSetting(setting, value) {
+  return {
+    type: UPDATE_SETTING,
+    setting: setting,
+    value: value
   };
 };
