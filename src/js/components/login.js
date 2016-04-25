@@ -4,19 +4,12 @@ var remote = electron.remote;
 var BrowserWindow = remote.BrowserWindow;
 
 import React from 'react';
-import { History } from 'react-router';
 
 var apiRequests = require('../utils/api-requests');
 var Actions = require('../actions/actions');
 
-var Login = React.createClass({
-  mixins: [ History ],
-
-  contextTypes: {
-    router: React.PropTypes.func
-  },
-
-  authGithub: function () {
+export default class LoginPage extends React.Component {
+  authGithub () {
     var self = this;
 
     // Start Login
@@ -38,14 +31,6 @@ var Login = React.createClass({
     var githubUrl = 'https://github.com/login/oauth/authorize?';
     var authUrl = githubUrl + 'client_id=' + options.client_id + '&scope=' + options.scope;
     authWindow.loadURL(authUrl);
-
-    authWindow.webContents.on('will-navigate', function (event, url) {
-      handleCallback(url);
-    });
-
-    authWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
-      handleCallback(newUrl);
-    });
 
     function handleCallback (url) {
       var raw_code = /code=([^&]*)/.exec(url) || null;
@@ -71,9 +56,16 @@ var Login = React.createClass({
       authWindow.destroy();
     });
 
-  },
+    authWindow.webContents.on('will-navigate', function (event, url) {
+      handleCallback(url);
+    });
 
-  requestGithubToken: function (options, code) {
+    authWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
+      handleCallback(newUrl);
+    });
+  }
+
+  requestGithubToken(options, code) {
     var self = this;
 
     apiRequests
@@ -86,23 +78,23 @@ var Login = React.createClass({
         if (response && response.ok) {
           // Success - Do Something.
           Actions.login(response.body.access_token);
-          self.history.push('/notifications');
+          self.context.router.push('/notifications');
           ipcRenderer.send('reopen-window');
         } else {
           // Error - Show messages.
           // Show appropriate message
         }
       });
-  },
+  }
 
-  render: function () {
+  render() {
     return (
       <div className="container-fluid main-container login">
-        <div className='row'>
-          <div className='col-xs-offset-2 col-xs-8'>
-            <img className='img-responsive logo' src='images/github-logo.png' />
-            <div className='desc'>GitHub notifications in your menu bar.</div>
-            <button className='btn btn-default btn-lg btn-block' onClick={this.authGithub}>
+        <div className="row">
+          <div className="col-xs-offset-2 col-xs-8">
+            <img className="img-responsive logo" src="images/github-logo.png" />
+            <div className="desc">GitHub notifications in your menu bar.</div>
+            <button className="btn btn-default btn-lg btn-block" onClick={this.authGithub}>
               <i className="fa fa-github" />Log in to GitHub
             </button>
           </div>
@@ -110,6 +102,8 @@ var Login = React.createClass({
       </div>
     );
   }
-});
+};
 
-module.exports = Login;
+LoginPage.contextTypes = {
+  router: React.PropTypes.object.isRequired
+};

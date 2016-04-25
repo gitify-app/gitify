@@ -1,13 +1,14 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, IndexRoute } from 'react-router';
+import { Router, Route, IndexRoute, hashHistory } from 'react-router';
+
+import LoginPage from './components/login';
+import Navigation from './components/navigation';
+import NotificationsPage from './components/notifications';
+import SettingsPage from './components/settings';
 
 var AuthStore = require('./stores/auth');
-var Navigation = require('./components/navigation');
 var SearchBar = require('./components/search');
-var LoginPage = require('./components/login');
-var NotificationsPage = require('./components/notifications');
-var SettingsPage = require('./components/settings');
 
 var App = React.createClass({
   getInitialState: function () {
@@ -25,7 +26,10 @@ var App = React.createClass({
   render: function () {
     return (
       <div>
-        <Navigation toggleSearch={this.toggleSearch} showSearch={this.state.showSearch} />
+        <Navigation
+          location={this.props.location}
+          toggleSearch={this.toggleSearch}
+          showSearch={this.state.showSearch} />
         <SearchBar showSearch={this.state.showSearch} />
         {this.props.children}
       </div>
@@ -46,13 +50,13 @@ function requireAuth (nextState, replaceState) {
 }
 
 render(
-  <Router>
-    <Route path='/' component={App}>
+  <Router history={hashHistory}>
+    <Route path="/" component={App}>
       <IndexRoute component={NotificationsPage} onEnter={requireAuth} />
-      <Route path='/notifications' component={NotificationsPage} />
-      <Route path='/login' component={LoginPage} />
-      <Route path='/settings' component={SettingsPage} />
-      <Route path='*' component={NotFound} />
+      <Route path="/notifications" component={NotificationsPage} />
+      <Route path="/login" component={LoginPage} />
+      <Route path="/settings" component={SettingsPage} />
+      <Route path="*" component={NotFound} />
     </Route>
   </Router>,
   document.getElementById('app')

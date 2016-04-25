@@ -69,7 +69,7 @@ var NotificationsStore = Reflux.createStore({
     var self = this;
 
     this._notifications = _.reject(this._notifications, function (obj) {
-      return obj.repository.full_name == repoFullName;
+      return obj.repository.full_name === repoFullName;
     });
 
     setTimeout(function () {

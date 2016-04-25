@@ -30,27 +30,27 @@ var SoundNotificationStore = Reflux.createStore({
   },
 
   showNotification: function (countNew, latestNotification) {
-    var title = (countNew == 1 ?
+    var title = (countNew === 1 ?
       'Gitify - ' + latestNotification.full_name :
       'Gitify');
-    var body = (countNew == 1 ?
+    var body = (countNew === 1 ?
       latestNotification.subject :
       'You\'ve got ' + countNew + ' notifications.');
 
     var icon;
-    if (countNew == 1) {
+    if (countNew === 1) {
       switch (latestNotification.type) {
-      case 'Issue':
-        icon = 'images/notifications/issue.png';
-        break;
-      case 'Commit':
-        icon = 'images/notifications/commit.png';
-        break;
-      case 'PullRequest':
-        icon = 'images/notifications/pull-request.png';
-        break;
-      default:
-        icon = 'images/notifications/gitify.png';
+        case 'Issue':
+          icon = 'images/notifications/issue.png';
+          break;
+        case 'Commit':
+          icon = 'images/notifications/commit.png';
+          break;
+        case 'PullRequest':
+          icon = 'images/notifications/pull-request.png';
+          break;
+        default:
+          icon = 'images/notifications/gitify.png';
       }
     }
     this.newNotification(title, body, icon);

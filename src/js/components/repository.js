@@ -64,15 +64,15 @@ var Repository = React.createClass({
     return (
       <div>
         <div className={this.state.isRead ? 'row repository read' : 'row repository'}>
-          <div className='col-xs-2'><img className='avatar' src={this.getAvatar()} /></div>
-          <div className='col-xs-9 name' onClick={this.openBrowser}>
+          <div className="col-xs-2"><img className="avatar" src={this.getAvatar()} /></div>
+          <div className="col-xs-9 name" onClick={this.openBrowser}>
             <span>{'/' + repositoryName}</span>
             <span>{organisationName}</span>
           </div>
-          <div className='col-xs-1 check-wrapper'>
+          <div className="col-xs-1 check-wrapper">
             <span
-              title='Mark Repository as Read'
-              className='octicon octicon-check'
+              title="Mark Repository as Read"
+              className="octicon octicon-check"
               onClick={this.markRepoAsRead} />
           </div>
         </div>

@@ -56,7 +56,7 @@ var SettingsStore = Reflux.createStore({
     this._settings[setting] = value;
     window.localStorage.setItem('settings', JSON.stringify(this._settings));
     this.trigger(this._settings);
-    if (setting == 'openAtStartup') {
+    if (setting === 'openAtStartup') {
       this.handleStartup(value);
     }
   },

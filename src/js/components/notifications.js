@@ -1,65 +1,68 @@
-import React from 'react';
-import Reflux from 'reflux';
 import _ from 'underscore';
+import React from 'react';
+// import Reflux from 'reflux';
 
 const shell = window.require('electron').shell;
 
 var Loading = require('reloading');
 
 var Actions = require('../actions/actions');
-var NotificationsStore = require('../stores/notifications');
-var SearchStore = require('../stores/search');
+// var NotificationsStore = require('../stores/notifications');
+// var SearchStore = require('../stores/search');
 var Repository = require('../components/repository');
 
-var NotificationsPage = React.createClass({
-  areIn: function (repoFullName, searchTerm) {
-    return repoFullName.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0;
-  },
+export default class NotificationsPage extends React.Component {
+  // FIXME!
+  // mixins: [
+  //   Reflux.connect(NotificationsStore, 'notifications'),
+  //   Reflux.connect(SearchStore, 'searchTerm'),
+  //   Reflux.listenTo(Actions.getNotifications.completed, 'completedNotifications'),
+  //   Reflux.listenTo(Actions.getNotifications.failed, 'failedNotifications')
+  // ],
 
-  matchesSearchTerm: function (obj) {
-    var searchTerm = this.state.searchTerm.replace(/^\s+/, '').replace(/\s+$/, '');
-    var searchTerms = searchTerm.split(/\s+/);
-    return _.all(searchTerms, this.areIn.bind(null, obj.repository.full_name));
-  },
+  constructor(props) {
+    super(props);
 
-  mixins: [
-    Reflux.connect(NotificationsStore, 'notifications'),
-    Reflux.connect(SearchStore, 'searchTerm'),
-    Reflux.listenTo(Actions.getNotifications.completed, 'completedNotifications'),
-    Reflux.listenTo(Actions.getNotifications.failed, 'failedNotifications')
-  ],
-
-  getInitialState: function () {
-    return {
+    this.state = {
       notifications: [],
       loading: true,
       errors: false
     };
-  },
+  }
 
-  componentWillMount: function () {
+  areIn(repoFullName, searchTerm) {
+    return repoFullName.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0;
+  }
+
+  matchesSearchTerm(obj) {
+    var searchTerm = this.state.searchTerm.replace(/^\s+/, '').replace(/\s+$/, '');
+    var searchTerms = searchTerm.split(/\s+/);
+    return _.all(searchTerms, this.areIn.bind(null, obj.repository.full_name));
+  }
+
+  componentWillMount() {
     Actions.getNotifications();
-  },
+  }
 
-  openBrowser: function () {
+  openBrowser() {
     shell.openExternal('http://www.github.com/ekonstantinidis/gitify');
-  },
+  }
 
-  completedNotifications: function () {
+  completedNotifications() {
     this.setState({
       loading: false,
       errors: false
     });
-  },
+  }
 
-  failedNotifications: function () {
+  failedNotifications() {
     this.setState({
       loading: false,
       errors: true
     });
-  },
+  }
 
-  render: function () {
+  render() {
     var notifications, errors;
     var wrapperClass = 'container-fluid main-container notifications';
     var notificationsEmpty = _.isEmpty(this.state.notifications);
@@ -69,16 +72,16 @@ var NotificationsPage = React.createClass({
         <div>
           <h3>Oops something went wrong.</h3>
           <h4>Couldn't get your notifications.</h4>
-          <img className='img-responsive emoji' src='images/error.png' />
+          <img className="img-responsive emoji" src="images/error.png" />
         </div>
       );
     } else {
       if (notificationsEmpty) {
         notifications = (
           <div>
-            <h2>Awesome! <span className='what'>&nbsp;</span></h2>
+            <h2>Awesome! <span className="what">&nbsp;</span></h2>
             <h3>No new notifications.</h3>
-            <img className='img-responsive emoji' src='images/all-read.png' />
+            <img className="img-responsive emoji" src="images/all-read.png" />
           </div>
         );
       } else {
@@ -106,7 +109,7 @@ var NotificationsPage = React.createClass({
             <div>
               <h3>No Search Results.</h3>
               <h4>No Organisations or Repositories match your search term.</h4>
-              <img className='img-responsive emoji' src='images/all-read.png' />
+              <img className="img-responsive emoji" src="images/all-read.png" />
             </div>
           );
         }
@@ -119,19 +122,17 @@ var NotificationsPage = React.createClass({
           (this.state.errors ? ' errored' : '') +
           (notificationsEmpty ? ' all-read' : '')
         }>
-        <Loading className='loading-container' shouldShow={this.state.loading}>
-          <div className='loading-text'>working on it</div>
+        <Loading className="loading-container" shouldShow={this.state.loading}>
+          <div className="loading-text">working on it</div>
         </Loading>
         {errors}
         {notifications}
         {notifications && notifications.length ? (
-          <div className='fork' onClick={this.openBrowser}>
-            <i className='fa fa-github' /> Star Gitify on GitHub
+          <div className="fork" onClick={this.openBrowser}>
+            <i className="fa fa-github" /> Star Gitify on GitHub
           </div>
         ) : null}
       </div>
     );
   }
-});
-
-module.exports = NotificationsPage;
+};
