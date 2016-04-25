@@ -3,7 +3,7 @@ import {
 } from '../actions';
 
 const initialState = {
-  response: {},
+  response: [],
   isFetching: false,
   failed: false
 };

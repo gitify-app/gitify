@@ -7,8 +7,6 @@ const shell = window.require('electron').shell;
 
 var Loading = require('reloading');
 
-var Actions = {}; // FIXME!
-// var NotificationsStore = require('../stores/notifications');
 // var SearchStore = require('../stores/search');
 var Repository = require('./repository');
 
@@ -17,20 +15,12 @@ import { fetchNotifications } from '../actions';
 class NotificationsPage extends React.Component {
   // FIXME!
   // mixins: [
-  //   Reflux.connect(NotificationsStore, 'notifications'),
   //   Reflux.connect(SearchStore, 'searchTerm'),
-  //   Reflux.listenTo(Actions.getNotifications.completed, 'completedNotifications'),
-  //   Reflux.listenTo(Actions.getNotifications.failed, 'failedNotifications')
   // ],
 
   constructor(props) {
     super(props);
 
-    this.state = {
-      notifications: [],
-      loading: true,
-      errors: false
-    };
   }
 
   areIn(repoFullName, searchTerm) {
@@ -44,8 +34,6 @@ class NotificationsPage extends React.Component {
   }
 
   componentWillMount() {
-    // FIXME!
-    // Actions.getNotifications();
     this.props.fetchNotifications();
   }
 
@@ -53,26 +41,12 @@ class NotificationsPage extends React.Component {
     shell.openExternal('http://www.github.com/ekonstantinidis/gitify');
   }
 
-  completedNotifications() {
-    this.setState({
-      loading: false,
-      errors: false
-    });
-  }
-
-  failedNotifications() {
-    this.setState({
-      loading: false,
-      errors: true
-    });
-  }
-
   render() {
     var notifications, errors;
     var wrapperClass = 'container-fluid main-container notifications';
-    var notificationsEmpty = _.isEmpty(this.state.notifications);
+    var notificationsEmpty = _.isEmpty(this.props.notifications);
 
-    if (this.state.errors) {
+    if (this.props.failed) {
       errors = (
         <div>
           <h3>Oops something went wrong.</h3>
@@ -91,9 +65,9 @@ class NotificationsPage extends React.Component {
         );
       } else {
         if (this.state.searchTerm) {
-          notifications = _.filter(this.state.notifications, this.matchesSearchTerm);
+          notifications = _.filter(this.props.notifications, this.matchesSearchTerm);
         } else {
-          notifications = this.state.notifications;
+          notifications = this.props.notifications;
         }
 
         if (notifications.length) {
@@ -124,10 +98,10 @@ class NotificationsPage extends React.Component {
     return (
       <div className={
           wrapperClass +
-          (this.state.errors ? ' errored' : '') +
+          (this.props.failed ? ' errored' : '') +
           (notificationsEmpty ? ' all-read' : '')
         }>
-        <Loading className="loading-container" shouldShow={this.state.loading}>
+        <Loading className="loading-container" shouldShow={this.props.isFetching}>
           <div className="loading-text">working on it</div>
         </Loading>
         {errors}
@@ -144,6 +118,8 @@ class NotificationsPage extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    failed: state.notifications.failed,
+    isFetching: state.notifications.isFetching,
     notifications: state.notifications.response
   };
 };

@@ -63,6 +63,7 @@ export function fetchNotifications() {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
+        'Cache-Control': 'no-cache',
         'Content-Type': 'application/json'
       },
       types: [NOTIFICATIONS_REQUEST, {

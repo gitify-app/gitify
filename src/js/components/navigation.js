@@ -11,10 +11,6 @@ class Navigation extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      loading: false, // FIXME!
-      notifications: []
-    };
   }
 
   componentDidMount() {
@@ -70,7 +66,7 @@ class Navigation extends React.Component {
   render() {
     const isLoggedIn = this.props.token !== null;
     var refreshIcon, logoutIcon, backIcon, settingsIcon, quitIcon, searchIcon, countLabel;
-    var loadingClass = this.state.loading ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
+    var loadingClass = this.props.isFetching ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
 
     if (isLoggedIn) {
       refreshIcon = (
@@ -82,12 +78,12 @@ class Navigation extends React.Component {
       settingsIcon = (
         <i title="Settings" className="fa fa-cog" onClick={this.goToSettings.bind(this)} />
       );
-      if (this.state.notifications.length) {
+      if (this.props.notifications.length) {
         searchIcon = (
           <i title="Search" className="fa fa-search" onClick={this.props.toggleSearch} />
         );
         countLabel = (
-          <span className="label label-success">{this.state.notifications.length}</span>
+          <span className="label label-success">{this.props.notifications.length}</span>
         );
       }
     } else {
@@ -136,6 +132,8 @@ Navigation.contextTypes = {
 
 function mapStateToProps(state) {
   return {
+    isFetching: state.notifications.isFetching,
+    notifications: state.notifications.response,
     token: state.auth.token
   };
 };
