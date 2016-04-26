@@ -20,5 +20,12 @@ export default function configureStore(initialState) {
     authentication,
     storageMiddleware
   )(createStore);
-  return createStoreWithMiddleware(rootReducer, initialState);
+
+  const store = createStoreWithMiddleware(rootReducer, initialState);
+
+  // Load settings from localStorage
+  const load = storage.createLoader(engine);
+  load(store);
+
+  return store;
 };
