@@ -1,33 +1,6 @@
 import _ from 'underscore';
 
-var NotificationsStore = Reflux.createStore({
-  listenables: Actions,
-
-  init: function () {
-    this._notifications = [];
-  },
-
-
-  onGetNotifications: function () {
-    var self = this;
-    var participating = SettingsStore.getSettings().participating;
-
-    apiRequests
-      .getAuth('https://api.github.com/notifications?participating=' +
-        (participating ? 'true' : 'false'))
-      .end(function (err, response) {
-        if (response && response.ok) {
-          // Success - Do Something.
-          Actions.getNotifications.completed(response.body);
-          self.updateTrayIcon(response.body);
-          Actions.isNewNotification(response.body);
-        } else {
-          // Error - Show messages.
-          Actions.getNotifications.failed(err);
-        }
-      });
-  },
-
+export default {
   onRemoveNotification: function (notification) {
     var self = this;
 
@@ -51,7 +24,4 @@ var NotificationsStore = Reflux.createStore({
       self.updateTrayIcon(self._notifications);
     }, 800);
   }
-
-});
-
-module.exports = NotificationsStore;
+};
