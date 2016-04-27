@@ -24,11 +24,8 @@ class Repository extends React.Component {
   markRepoAsRead() {
     const loginId = this.props.repo[0].repository.owner.login;
     const repoId = this.props.repo[0].repository.name;
-    // const fullName = this.props.repo[0].repository.full_name;
-
-    this.props.markRepoNotifications(loginId, repoId);
-
-    // Actions.removeRepoNotifications(fullName);
+    const fullName = this.props.repo[0].repository.full_name;
+    this.props.markRepoNotifications(loginId, repoId, fullName);
   }
 
   render() {
