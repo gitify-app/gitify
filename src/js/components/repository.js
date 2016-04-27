@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 const shell = window.require('electron').shell;
 
@@ -61,9 +62,14 @@ class Repository extends React.Component {
           </div> : null
         }
 
-        {this.props.repo.map(function (obj) {
-          return <SingleNotification isRead={self.state.isRead} notification={obj} key={obj.id} />;
-        })}
+        <ReactCSSTransitionGroup
+          transitionName="notification"
+          transitionEnter={false}
+          transitionLeaveTimeout={325}>
+          {this.props.repo.map(function (obj) {
+            return <SingleNotification isRead={self.state.isRead} notification={obj} key={obj.id} />;
+          })}
+        </ReactCSSTransitionGroup>
 
       </div>
     );

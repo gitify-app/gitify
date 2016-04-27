@@ -25,7 +25,6 @@ class SingleNotification extends React.Component {
 
   markAsRead() {
     this.props.markNotification(this.props.notification.id);
-    // Actions.removeNotification(self.props.notification);
   }
 
   render() {
@@ -68,4 +67,4 @@ function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps, { markNotification })(SingleNotification);
+export default connect(mapStateToProps, { markNotificationsFAKE })(SingleNotification);
