@@ -28,7 +28,6 @@ export function loginUser(code) {
       }, {
         type: LOGIN_FAILURE,
         payload: (action, state, res) => {
-          console.log(res);
           return getJSON(res);
         }
       }]

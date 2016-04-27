@@ -117,36 +117,6 @@
   }
 }
 
-.ReadMixin() {
-  &.read {
-    // Amazing CSS3 tutorial by Sara Soueidan
-    // http://sarasoueidan.com/blog/creative-list-effects/
-    animation: removed-item-animation .8s cubic-bezier(.65,-0.02,.72,.29);
-  }
-
-  @keyframes removed-item-animation {
-    0% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    30% {
-      opacity: 1;
-      transform: translateX(50px);
-    }
-   
-    80% {
-      opacity: 1;
-      transform: translateX(-800px);
-    }
-
-    100% {
-      opacity: 0;
-      transform: translateX(-800px);
-    }
-  }
-}
-
 /* @end Mixins */
 
 
@@ -380,7 +350,6 @@ input {
   padding: 5px 20px;
   margin: 0;
   background-color: @LightGray;
-  .ReadMixin();
 
   .col-xs-2,
   .col-xs-10 {
@@ -508,7 +477,6 @@ input {
   margin: 0;
   padding: 3px 20px;
   border-bottom: 1px solid darken(@LightGray, 10%);
-  .ReadMixin();
 
   .col-xs-1,
   .col-xs-10 {
