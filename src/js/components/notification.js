@@ -67,4 +67,4 @@ function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps, { markNotificationsFAKE })(SingleNotification);
+export default connect(mapStateToProps, { markNotification })(SingleNotification);
