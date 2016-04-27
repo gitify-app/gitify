@@ -16,12 +16,12 @@ export default {
 
   raiseNativeNotification(notifications) {
     const newCount = notifications.length;
-    const title = (newCount === 1 ? 'Gitify - ' + notifications[0].full_name : 'Gitify');
-    const body = (newCount === 1 ? notifications[0].subject : 'You\'ve got ' + newCount + ' notifications.');
+    const title = (newCount === 1 ? 'Gitify - ' + notifications[0].repository.full_name : 'Gitify');
+    const body = (newCount === 1 ? notifications[0].subject.title : 'You\'ve got ' + newCount + ' notifications.');
 
     var icon;
     if (newCount === 1) {
-      switch (notifications[0].type) {
+      switch (notifications[0].subject.type) {
         case 'Issue':
           icon = 'images/notifications/issue.png';
           break;
