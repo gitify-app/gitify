@@ -1,5 +1,7 @@
+import _ from 'underscore';
 import {
-  NOTIFICATIONS_REQUEST, NOTIFICATIONS_SUCCESS, NOTIFICATIONS_FAILURE
+  NOTIFICATIONS_REQUEST, NOTIFICATIONS_SUCCESS, NOTIFICATIONS_FAILURE,
+  MARK_NOTIFICATION_SUCCESS
 } from '../actions';
 
 const initialState = {
@@ -28,6 +30,11 @@ export default function reducer(state = initialState, action) {
         failed: true,
         isFetching: false,
         response: action.payload
+      };
+    case MARK_NOTIFICATION_SUCCESS:
+      return {
+        ...state,
+        response: _.without(state.response, _.findWhere(state.response, {id: action.meta.id}))
       };
     default:
       return state;

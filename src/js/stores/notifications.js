@@ -1,17 +1,6 @@
 import _ from 'underscore';
 
 export default {
-  onRemoveNotification: function (notification) {
-    var self = this;
-
-    this._notifications = _.without(this._notifications, notification);
-
-    setTimeout(function () {
-      self.trigger(self._notifications);
-      self.updateTrayIcon(self._notifications);
-    }, 800);
-  },
-
   onRemoveRepoNotifications: function (repoFullName) {
     var self = this;
 

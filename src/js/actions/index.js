@@ -93,7 +93,10 @@ export function markNotification(id) {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      types: [MARK_NOTIFICATION_REQUEST, MARK_NOTIFICATION_SUCCESS, MARK_NOTIFICATION_FAILURE]
+      types: [MARK_NOTIFICATION_REQUEST, {
+        type: MARK_NOTIFICATION_SUCCESS,
+        meta: { id: id }
+      }, MARK_NOTIFICATION_FAILURE]
     }
   };
 };
