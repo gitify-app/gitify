@@ -8,7 +8,7 @@ import filter from 'redux-storage-decorator-filter';
 import authentication from '../middleware/authentication';
 import constants from '../utils/constants';
 import notifications from '../middleware/notifications';
-import token from '../middleware/token';
+import requests from '../middleware/requests';
 import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
@@ -16,7 +16,7 @@ export default function configureStore(initialState) {
   const storageMiddleware = storage.createMiddleware(engine);
 
   const createStoreWithMiddleware = applyMiddleware(
-    token, // Should be passed before 'apiMiddleware'
+    requests, // Should be passed before 'apiMiddleware'
     apiMiddleware,
     authentication,
     notifications,
