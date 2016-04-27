@@ -1,13 +1,4 @@
-import Reflux from 'reflux';
 import _ from 'underscore';
-
-const ipcRenderer = window.require('electron').ipcRenderer;
-
-var Actions = require('../actions/actions');
-var apiRequests = require('../utils/api-requests');
-var SettingsStore = require('../stores/settings');
-
-require('../stores/sound-notification');
 
 var NotificationsStore = Reflux.createStore({
   listenables: Actions,
@@ -16,13 +7,6 @@ var NotificationsStore = Reflux.createStore({
     this._notifications = [];
   },
 
-  updateTrayIcon: function (notifications) {
-    if (notifications.length > 0) {
-      ipcRenderer.send('update-icon', 'TrayActive');
-    } else {
-      ipcRenderer.send('update-icon', 'TrayIdle');
-    }
-  },
 
   onGetNotifications: function () {
     var self = this;
@@ -42,16 +26,6 @@ var NotificationsStore = Reflux.createStore({
           Actions.getNotifications.failed(err);
         }
       });
-  },
-
-  onGetNotificationsCompleted: function (notifications) {
-    this._notifications = notifications;
-    this.trigger(this._notifications);
-  },
-
-  onGetNotificationsFailed: function () {
-    this._notifications = [];
-    this.trigger(this._notifications);
   },
 
   onRemoveNotification: function (notification) {
