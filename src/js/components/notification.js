@@ -1,31 +1,18 @@
-import React from 'react';
-
 const shell = window.require('electron').shell;
 
-export default class SingleNotification extends React.Component {
+import React from 'react';
+import { connect } from 'react-redux';
 
-  constructor(props) {
-    super(props);
+import { markNotification } from '../actions';
 
-    this.state = {
-      isRead: this.props.isRead
-    };
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({
-      isRead: nextProps.isRead
-    });
-  }
+class SingleNotification extends React.Component {
 
   pressTitle() {
-    // FIXME!
-    // var markOnClick = SettingsStore.getSettings().markOnClick;
-    // this.openBrowser();
-    //
-    // if (markOnClick) {
-    //   this.markAsRead();
-    // }
+    this.openBrowser();
+
+    if (this.props.markOnClick) {
+      this.markAsRead();
+    }
   }
 
   openBrowser() {
@@ -37,28 +24,8 @@ export default class SingleNotification extends React.Component {
   }
 
   markAsRead() {
-    // FIXME!
-    // var self = this;
-
-    // if (this.state.read) { return; }
-
-    // apiRequests
-    //   .patchAuth('https://api.github.com/notifications/threads/' + this.props.notification.id)
-    //   .end(function (err, response) {
-    //     if (response && response.ok) {
-    //       // Notification Read
-    //       self.setState({
-    //         isRead: true
-    //       });
-    //       Actions.removeNotification(self.props.notification);
-    //     } else {
-    //       // Error - Show messages.
-    //       // Show appropriate message
-    //       self.setState({
-    //         isRead: false
-    //       });
-    //     }
-    //   });
+    this.props.markNotification(this.props.notification.id);
+    // Actions.removeNotification(self.props.notification);
   }
 
   render() {
@@ -82,15 +49,23 @@ export default class SingleNotification extends React.Component {
     }
 
     return (
-      <div className={this.state.isRead ? 'row notification read' : 'row notification'}>
+      <div className="row notification">
         <div className="col-xs-1"><span title={typeIconTooltip} className={typeIconClass} /></div>
-        <div className="col-xs-10 subject" onClick={this.pressTitle}>
+        <div className="col-xs-10 subject" onClick={this.pressTitle.bind(this)}>
           {this.props.notification.subject.title}
         </div>
         <div className="col-xs-1 check-wrapper">
-          <span title="Mark as Read" className="octicon octicon-check" onClick={this.markAsRead} />
+          <span title="Mark as Read" className="octicon octicon-check" onClick={this.markAsRead.bind(this)} />
         </div>
       </div>
     );
   }
 };
+
+function mapStateToProps(state) {
+  return {
+    markOnClick: state.settings.markOnClick
+  };
+};
+
+export default connect(mapStateToProps, { markNotification })(SingleNotification);

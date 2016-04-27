@@ -59,7 +59,6 @@ export const NOTIFICATIONS_SUCCESS = 'NOTIFICATIONS_SUCCESS';
 export const NOTIFICATIONS_FAILURE = 'NOTIFICATIONS_FAILURE';
 export function fetchNotifications() {
   return {
-    // FIXME! Participating?
     [CALL_API]: {
       endpoint: 'https://api.github.com/notifications',
       method: 'GET',
@@ -79,6 +78,25 @@ export function fetchNotifications() {
   };
 };
 
+
+// Single notification
+
+export const MARK_NOTIFICATION_REQUEST = 'MARK_NOTIFICATION_REQUEST';
+export const MARK_NOTIFICATION_SUCCESS = 'MARK_NOTIFICATION_SUCCESS';
+export const MARK_NOTIFICATION_FAILURE = 'MARK_NOTIFICATION_FAILURE';
+export function markNotification(id) {
+  return {
+    [CALL_API]: {
+      endpoint: `https://api.github.com/notifications/threads/${id}`,
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      types: [MARK_NOTIFICATION_REQUEST, MARK_NOTIFICATION_SUCCESS, MARK_NOTIFICATION_FAILURE]
+    }
+  };
+};
 
 // Search
 
