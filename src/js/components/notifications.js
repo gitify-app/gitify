@@ -29,78 +29,60 @@ class NotificationsPage extends React.Component {
   }
 
   render() {
-    var notifications, errors;
-    var wrapperClass = 'container-fluid main-container notifications';
-    var notificationsEmpty = _.isEmpty(this.props.notifications);
+    const wrapperClass = 'container-fluid main-container notifications';
+    const notificationsEmpty = _.isEmpty(this.props.notifications);
 
     if (this.props.failed) {
-      errors = (
-        <div>
+      return (
+        <div className={wrapperClass + ' errored'}>
           <h3>Oops something went wrong.</h3>
           <h4>Couldn't get your notifications.</h4>
           <img className="img-responsive emoji" src="images/error.png" />
         </div>
       );
-    } else {
-      if (notificationsEmpty) {
-        notifications = (
-          <div>
-            <h2>Awesome! <span className="what">&nbsp;</span></h2>
-            <h3>No new notifications.</h3>
-            <img className="img-responsive emoji" src="images/all-read.png" />
-          </div>
-        );
-      } else {
-        if (this.props.searchQuery) {
-          notifications = _.filter(this.props.notifications, this.matchesSearchTerm.bind(this));
-        } else {
-          notifications = this.props.notifications;
-        }
-
-        if (notifications.length) {
-
-          var groupedNotifications = _.groupBy(notifications, function (object) {
-            return object.repository.full_name;
-          });
-
-          notifications = (
-            _.map(groupedNotifications, function (obj) {
-              var repoFullName = obj[0].repository.full_name;
-              return <Repository repo={obj} repoName={repoFullName} key={repoFullName} />;
-            })
-          );
-        } else {
-          notificationsEmpty = true;
-          errors = (
-            <div>
-              <h3>No Search Results.</h3>
-              <h4>No Organisations or Repositories match your search term.</h4>
-              <img className="img-responsive emoji" src="images/all-read.png" />
-            </div>
-          );
-        }
-      }
     }
 
+    if (notificationsEmpty && !this.props.searchQuery) {
+      return (
+        <div className={wrapperClass + ' all-read'}>
+          <h2>Awesome! <span className="what">&nbsp;</span></h2>
+          <h3>No new notifications.</h3>
+          <img className="img-responsive emoji" src="images/all-read.png" />
+        </div>
+      );
+    };
+
+    const notifications = this.props.searchQuery ?
+      _.filter(this.props.notifications, this.matchesSearchTerm.bind(this)) : this.props.notifications;
+    var groupedNotifications = _.groupBy(notifications, (object) => object.repository.full_name);
+
+    if (_.isEmpty(groupedNotifications) && this.props.searchQuery) {
+      return (
+        <div className={wrapperClass + ' all-read'}>
+          <h3>No Search Results.</h3>
+          <h4>No Organisations or Repositories match your search term.</h4>
+          <img className="img-responsive emoji" src="images/all-read.png" />
+        </div>
+      );
+    };
+
     return (
-      <div className={
-          wrapperClass +
-          (this.props.failed ? ' errored' : '') +
-          (notificationsEmpty ? ' all-read' : '')
-        }>
+      <div className={wrapperClass + (notificationsEmpty ? ' all-read' : '')}>
         <Loading className="loading-container" shouldShow={this.props.isFetching}>
           <div className="loading-text">working on it</div>
         </Loading>
-        {errors}
 
         <ReactCSSTransitionGroup
           transitionName="repository"
           transitionEnter={false}
           transitionLeaveTimeout={325}>
-          {notifications}
+          {_.map(groupedNotifications, (obj, key) => {
+            const repoFullName = obj[0].repository.full_name;
+            return <Repository repo={obj} repoName={repoFullName} key={key} />;
+          })}
         </ReactCSSTransitionGroup>
 
-        {notifications && notifications.length ? (
+        {!_.isEmpty(groupedNotifications) ? (
           <div className="fork" onClick={this.openBrowser}>
             <i className="fa fa-github" /> Star Gitify on GitHub
           </div>
