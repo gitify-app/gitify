@@ -14,8 +14,7 @@ export default function reducer(state = initialState, action) {
       return {
         ...state,
         isFetching: true,
-        failed: false,
-        response: {}
+        failed: false
       };
     case NOTIFICATIONS_SUCCESS:
       return {
