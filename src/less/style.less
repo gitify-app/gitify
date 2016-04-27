@@ -210,6 +210,21 @@ input {
   }
 }
 
+.repository-leave {
+	opacity: 1;
+	transform:   translate(0,0,0);
+	transform: translate3d(0,0,0);
+	transition-property: transform, opacity;
+	transition-duration: 400ms;
+	transition-timing-function: cubic-bezier(0.175, 0.665, 0.320, 1), linear;
+
+  &.repository-leave-active {
+  	opacity: 0;
+  	transform: translate(-350px, 0);
+  	transform: translate3d(-350px, 0 ,0);
+  }
+}
+
 /* @end Animations */
 
 

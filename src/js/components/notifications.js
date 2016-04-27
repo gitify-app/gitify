@@ -1,5 +1,6 @@
 import _ from 'underscore';
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import Loading from 'reloading';
 
@@ -91,7 +92,14 @@ class NotificationsPage extends React.Component {
           <div className="loading-text">working on it</div>
         </Loading>
         {errors}
-        {notifications}
+
+        <ReactCSSTransitionGroup
+          transitionName="repository"
+          transitionEnter={false}
+          transitionLeaveTimeout={325}>
+          {notifications}
+        </ReactCSSTransitionGroup>
+
         {notifications && notifications.length ? (
           <div className="fork" onClick={this.openBrowser}>
             <i className="fa fa-github" /> Star Gitify on GitHub
