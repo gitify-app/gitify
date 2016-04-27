@@ -1,14 +1,13 @@
 import _ from 'underscore';
 import { NOTIFICATIONS_SUCCESS } from '../actions';
+import NativeNotifications from '../utils/notifications';
 
 export default store => next => action => {
   switch (action.type) {
     case NOTIFICATIONS_SUCCESS:
+      const settings = store.getState().settings;
       const notificationsState = store.getState().notifications;
       const previousNotifications = notificationsState.response.map(obj => obj.id);
-
-      console.log('PREVIOUS');
-      console.log(previousNotifications);
 
       // Check if notification is already in the store.
       const newNotifications = _.filter(action.payload, function (obj) {
@@ -20,6 +19,7 @@ export default store => next => action => {
       console.log(newNotifications);
       console.log('==============================');
 
+      NativeNotifications.setup(newNotifications, settings);
       break;
 
   }
