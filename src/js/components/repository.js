@@ -1,9 +1,11 @@
 import React from 'react';
+import { connect } from 'react-redux';
 const shell = window.require('electron').shell;
 
+import { markRepoNotifications } from '../actions';
 import SingleNotification from './notification';
 
-export default class Repository extends React.Component {
+class Repository extends React.Component {
 
   constructor(props) {
     super(props);
@@ -20,29 +22,13 @@ export default class Repository extends React.Component {
   }
 
   markRepoAsRead() {
-    // FIXME!
-    // const loginId = this.props.repo[0].repository.owner.login;
-    // const repoId = this.props.repo[0].repository.name;
+    const loginId = this.props.repo[0].repository.owner.login;
+    const repoId = this.props.repo[0].repository.name;
     // const fullName = this.props.repo[0].repository.full_name;
 
-    // apiRequests
-    //   .putAuth('https://api.github.com/repos/' + loginId + '/' + repoId + '/notifications', {})
-    //   .end(function (err, response) {
-    //     if (response && response.ok) {
-    //       // Notification Read
-    //       self.setState({
-    //         isRead: true,
-    //         errors: false
-    //       });
-    //
-    //       Actions.removeRepoNotifications(fullName);
-    //     } else {
-    //       self.setState({
-    //         isRead: false,
-    //         errors: true
-    //       });
-    //     }
-    //   });
+    this.props.markRepoNotifications(loginId, repoId);
+
+    // Actions.removeRepoNotifications(fullName);
   }
 
   render() {
@@ -58,9 +44,9 @@ export default class Repository extends React.Component {
 
     return (
       <div>
-        <div className={this.state.isRead ? 'row repository read' : 'row repository'}>
+        <div className="row repository">
           <div className="col-xs-2"><img className="avatar" src={avatarUrl} /></div>
-          <div className="col-xs-9 name" onClick={this.openBrowser}>
+          <div className="col-xs-9 name" onClick={this.openBrowser.bind(this)}>
             <span>{'/' + repositoryName}</span>
             <span>{organisationName}</span>
           </div>
@@ -86,3 +72,5 @@ export default class Repository extends React.Component {
     );
   }
 };
+
+export default connect(null, { markRepoNotifications })(Repository);

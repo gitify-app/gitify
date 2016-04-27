@@ -113,6 +113,7 @@ export function markRepoNotifications(loginId, repoId) {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
+      body: JSON.stringify({}),
       types: [MARK_REPO_NOTIFICATION_REQUEST, MARK_REPO_NOTIFICATION_SUCCESS, MARK_REPO_NOTIFICATION_FAILURE]
     }
   };
