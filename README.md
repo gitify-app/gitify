@@ -17,8 +17,8 @@ It has been a while since this app was made so I decided to give it a good revam
 - [x] From Browserify to Webpack - In the future we can have Hot Module Replacement!
 - [x] React 15.0+ - Major React Update.
 - [x] Use ES6 - Because ES6!
-- [ ] Move from Reflux to Redux - I've spent some time rewriting gitify to redux. It's just amazing.
-- [ ] Update Bootstrap to version 4 - Which means move from LESS to SCSS.
+- [x] Move from Reflux to Redux - I've spent some time rewriting gitify to redux. It's just amazing.
+- [x] Update Bootstrap to version 4 - Which means move from LESS to SCSS.
 - [ ] Revamp the UI. From Scratch?
 - [ ] Rebranding - New Logo! Fresh stuff!
 - [ ] Rewrite tests (Mocha?) - Since gitify is moving from Reflux to Redux, all tests have to be rewritten.
@@ -27,7 +27,7 @@ If you would like to help let me know! There is a slack channel for gitify in th
 
 
 ### Download
-You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/ekonstantinidis/gitify/releases) page. 
+You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/ekonstantinidis/gitify/releases) page.
 
 You can also install Gitify via [Homebrew Cask](http://caskroom.io/)
 
@@ -42,7 +42,7 @@ Gitify currently only supports OS X.
 
  - [Electron](http://electron.atom.io/)
  - [React](https://facebook.github.io/react/)
- - [Grunt](http://gruntjs.com/)
+ - [Webpack](https://webpack.github.io/)
  - [NPM](https://www.npmjs.com/)
 
 
