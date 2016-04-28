@@ -26,9 +26,20 @@ module.exports = {
         query: {
           presets: ['es2015', 'react', 'stage-0']
         }
-      }, {
+      },
+      {
         test: /\.json$/,
         loader: 'json'
+      },
+      {
+        test: /\.(woff|woff2)(\?.*$|$)/,
+        exclude: /node_modules/,
+        loader: 'url-loader'
+      },
+      {
+        test: /\.(eot|ttf|svg)(\?.*$|$)/,
+        exclude: /node_modules/,
+        loader: 'file-loader'
       },
       {
         test: /\.scss$/,

@@ -1,8 +1,7 @@
 /* @group Imports */
 
-@import "node_modules/bootstrap/less/bootstrap";
-@import "node_modules/octicons/octicons/octicons";
-@import "node_modules/react-toggle/style.css";
+@import "node_modules/bootstrap/scss/bootstrap";
+@import "../../node_modules/react-toggle/style.css";
 @import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700");
 
 /* @end Imports */
@@ -26,9 +25,12 @@ $error-color: #DB423C;
 
 /* @group FontAwesome Overrides */
 
-$fa-font-path: "../../dist/fonts";
+// $fa-font-path: "node_modules/font-awesome/fonts";
+// @import "node_modules/font-awesome/scss/font-awesome";
 
-@import "node_modules/font-awesome/scss/font-awesome";
+// $octicons-font-path: "node_modules/octicons/octicons";
+// @import "node_modules/octicons/octicons/octicons.scss";
+
 
 /* @end FontAwesome Overrides */
 
@@ -103,7 +105,7 @@ $fa-font-path: "../../dist/fonts";
 
 // opacity
 @mixin opacity($opacity: .5) {
-  opacity: @opacity;
+  opacity: $opacity;
 }
 
 @mixin check-octicon {
@@ -155,7 +157,7 @@ html {
 
 .main-container {
   position: absolute;
-  top: @navbar-height;
+  top: $navbar-height;
   right: 0;
   bottom: 0;
   left: 0;
@@ -163,7 +165,7 @@ html {
 }
 
 .search-bar + .main-container {
-  top: @navbar-height + @navbar-height;
+  top: $navbar-height + $navbar-height;
 }
 
 .btn {
@@ -275,7 +277,7 @@ input {
 
 .navigation {
   background-color: $theme-primary;
-  height: @navbar-height;
+  height: $navbar-height;
   color: $white;
 
   div[class*="col-xs-"] {
@@ -362,7 +364,7 @@ input {
 
 .login {
   position: absolute;
-  top: @navbar-height;
+  top: $navbar-height;
   left: 0;
   background-color: $theme-primary;
   padding-top: 30px;
@@ -550,7 +552,7 @@ input {
   margin: 0;
   background-color: $theme-primary;
   padding: 0 20px;
-  height: @navbar-height;
+  height: $navbar-height;
   text-align: center;
 
   div[class*="col-xs-"] {
