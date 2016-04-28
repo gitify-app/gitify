@@ -54,6 +54,7 @@
     "electron-positioner": "=2.0.3",
     "font-awesome": "=4.6.1",
     "history": "=2.1.0",
+    "malarkey": "=1.3.3",
     "octicons": "=3.5.0",
     "react": "=15.0.1",
     "react-addons-css-transition-group": "=15.0.1",

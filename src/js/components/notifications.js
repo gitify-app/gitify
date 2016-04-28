@@ -4,9 +4,11 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 import Loading from 'reloading';
 
+
 const shell = window.require('electron').shell;
 
 import { fetchNotifications } from '../actions';
+import AllRead from './all-read';
 import Repository from './repository';
 
 class NotificationsPage extends React.Component {
@@ -43,13 +45,7 @@ class NotificationsPage extends React.Component {
     }
 
     if (notificationsEmpty && !this.props.searchQuery) {
-      return (
-        <div className={wrapperClass + ' all-read'}>
-          <h2>Awesome! <span className="what">&nbsp;</span></h2>
-          <h3>No new notifications.</h3>
-          <img className="img-responsive emoji" src="images/all-read.png" />
-        </div>
-      );
+      return <AllRead />;
     };
 
     const notifications = this.props.searchQuery ?

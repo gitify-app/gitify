@@ -5,5 +5,12 @@ export default {
   SCOPE: ['user:email', 'notifications'],
 
   // Storage
-  STORAGE_KEY: 'settings'
+  STORAGE_KEY: 'settings',
+
+  // Awesome all read messages
+  ALLREAD_MESSAGES: [
+    'Wow! You did it.',
+    'That\'s amazing!',
+    'Yes! All read. Nothing to do here!'
+  ]
 };
