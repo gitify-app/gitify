@@ -86,6 +86,7 @@ $fa-font-path: "../../dist/fonts";
 
 /* @end Typography */
 
+
 /* @group Mixins */
 
 // Border Radius (Same Corners)
@@ -207,15 +208,15 @@ input {
 
   &.notification-leave-active {
     transform: translate(350px, 0);
-    opacity: 0;
     transform: translate3d(350px, 0, 0);
+    opacity: 0;
   }
 }
 
 .repository-leave {
   transform: translate(0, 0, 0);
-  opacity: 1;
   transform: translate3d(0, 0, 0);
+  opacity: 1;
   transition-property: transform, opacity;
   transition-duration: 400ms;
   transition-timing-function: cubic-bezier(.175, .665, .32, 1), linear;
@@ -246,7 +247,7 @@ input {
     top: 120px;
     color: $white;
     font-size: 20px;
-    -webkit-animation: loadbars 2.0s cubic-bezier(.645, .045, .355, 1) infinite 0s;
+    -webkit-animation: loadbars 2s cubic-bezier(.645, .045, .355, 1) infinite 0s;
   }
 }
 
@@ -301,12 +302,14 @@ input {
       }
     }
 
-    &.right .fa {
-      margin: 0 10px;
+    &.right {
+      .fa {
+        margin: 0 10px;
 
-      &.fa-chevron-left,
-      &.fa-search {
-        font-size: 14px;
+        &.fa-chevron-left,
+        &.fa-search {
+          font-size: 14px;
+        }
       }
     }
 
@@ -573,7 +576,7 @@ input {
   .form-control {
     outline: none;
     border: 0;
-    box-shadow: none !important;
+    box-shadow: none;
     background-color: $theme-primary;
     padding: 0 0 0 16px;
     color: $white;

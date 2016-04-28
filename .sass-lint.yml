@@ -7,13 +7,22 @@ rules:
   clean-import-paths: 2
   extends-before-mixins: 2
   extends-before-declarations: 2
-  no-warn: 1
+  force-attribute-nesting: 0 # FIXME! To be removed (div select).
+  no-css-comments: 0
   no-debug: 1
+  no-duplicate-properties:
+    - 2
+    -
+      exclude:
+        - src
+        - transform
   no-ids: 2
   no-important: 2
-  no-css-comments: 0
+  no-transition-all: 0
   no-vendor-prefixes: 0
   no-qualifying-elements: 0
+  no-url-protocols: 0 # FIXME! To be removed (google fonts).
+  no-warn: 1
   hex-notation:
     - 2
     -
