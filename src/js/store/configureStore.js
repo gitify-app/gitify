@@ -5,6 +5,7 @@ import * as storage from 'redux-storage';
 import createEngine from 'redux-storage-engine-localstorage';
 import filter from 'redux-storage-decorator-filter';
 
+import { fetchNotifications } from '../actions';
 import authentication from '../middleware/authentication';
 import constants from '../utils/constants';
 import notifications from '../middleware/notifications';
@@ -27,7 +28,10 @@ export default function configureStore(initialState) {
 
   // Load settings from localStorage
   const load = storage.createLoader(engine);
-  load(store);
+  load(store)
+    .then(function (newState) {
+      store.dispatch(fetchNotifications());
+    });
 
   return store;
 };

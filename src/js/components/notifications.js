@@ -7,15 +7,10 @@ import Loading from 'reloading';
 
 const shell = window.require('electron').shell;
 
-import { fetchNotifications } from '../actions';
 import AllRead from './all-read';
 import Repository from './repository';
 
 class NotificationsPage extends React.Component {
-  componentWillMount() {
-    this.props.fetchNotifications();
-  }
-
   areIn(repoFullName, searchTerm) {
     return repoFullName.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0;
   }
@@ -97,4 +92,4 @@ function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps, { fetchNotifications })(NotificationsPage);
+export default connect(mapStateToProps, null)(NotificationsPage);

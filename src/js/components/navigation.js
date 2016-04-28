@@ -7,12 +7,6 @@ const shell = window.require('electron').shell;
 import { fetchNotifications, logout } from '../actions';
 
 class Navigation extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-  }
-
   componentDidMount() {
     var self = this;
     var iFrequency = 60000;
@@ -25,12 +19,6 @@ class Navigation extends React.Component {
 
   refreshNotifications() {
     this.props.fetchNotifications();
-  }
-
-  refreshDone() {
-    this.setState({
-      loading: false
-    });
   }
 
   goToSettings() {
