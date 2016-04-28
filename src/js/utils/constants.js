@@ -11,6 +11,8 @@ export default {
   ALLREAD_MESSAGES: [
     'Wow! You did it.',
     'That\'s amazing!',
-    'Yes! All read. Nothing to do here!'
+    'Yes! All read.',
+    'All gone! Nice work!',
+    'Yay! Good news.',
   ]
 };
