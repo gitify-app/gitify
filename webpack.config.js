@@ -4,13 +4,11 @@ module.exports = {
   debug: true,
   devtool: 'source-map',
 
-  entry: {
-    app: './src/js/app.js'
-  },
+  entry: './src/js/app.js',
 
   output: {
     path: __dirname + '/build/js',
-    filename: '[name].js'
+    filename: 'app.js'
   },
 
   plugins: [
@@ -32,12 +30,13 @@ module.exports = {
         loader: 'json'
       },
       {
-        test: /\.(otf|eot|svg|ttf|woff|woff2).*$/,
-        loader: 'url?limit=8192'
+        test: /\.(eot|ttf|svg|woff|woff2)(\?.*$|$)/,
+        // exclude: /node_modules/,
+        loader: 'file-loader'
       },
       {
         test: /\.scss$/,
-        exclude: /node_modules/,
+        // exclude: /node_modules/,
         loaders: ['style', 'css', 'sass']
       },
     ]

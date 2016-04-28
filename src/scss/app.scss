@@ -395,10 +395,15 @@ input {
     padding: 30px 20px;
     color: $white;
 
-    h2,
+    h2 {
+      text-align: center;
+      font-weight: 500;
+    }
+
     h3,
     h4 {
       text-align: center;
+      font-weight: 300;
     }
 
     .emoji {
@@ -456,7 +461,7 @@ input {
 .notification {
   margin: 0;
   border-bottom: 1px solid darken($light-gray, 10%);
-  padding: 3px 20px;
+  padding: 2px 20px;
 
   .col-xs-1,
   .col-xs-10 {
@@ -471,6 +476,7 @@ input {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-size: 15px;
 
     &:hover {
       cursor: pointer;
