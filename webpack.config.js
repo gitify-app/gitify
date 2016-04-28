@@ -32,14 +32,8 @@ module.exports = {
         loader: 'json'
       },
       {
-        test: /\.(woff|woff2)(\?.*$|$)/,
-        exclude: /node_modules/,
-        loader: 'url-loader'
-      },
-      {
-        test: /\.(eot|ttf|svg)(\?.*$|$)/,
-        exclude: /node_modules/,
-        loader: 'file-loader'
+        test: /\.(otf|eot|svg|ttf|woff|woff2).*$/,
+        loader: 'url?limit=8192'
       },
       {
         test: /\.scss$/,

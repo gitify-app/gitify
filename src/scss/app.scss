@@ -1,6 +1,5 @@
 /* @group Imports */
 
-@import "node_modules/bootstrap/scss/bootstrap";
 @import "../../node_modules/react-toggle/style.css";
 @import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700");
 
@@ -23,16 +22,23 @@ $error-color: #DB423C;
 /* @end Colors */
 
 
-/* @group FontAwesome Overrides */
+/* @group Fonts Overrides */
 
-// $fa-font-path: "node_modules/font-awesome/fonts";
-// @import "node_modules/font-awesome/scss/font-awesome";
+$fa-font-path: "../../node_modules/font-awesome/fonts";
+@import "node_modules/font-awesome/scss/font-awesome.scss";
 
-// $octicons-font-path: "node_modules/octicons/octicons";
-// @import "node_modules/octicons/octicons/octicons.scss";
+$octicons-font-path: "../../node_modules/octicons/octicons";
+@import "node_modules/octicons/octicons/octicons.scss";
 
 
-/* @end FontAwesome Overrides */
+/* @end Fonts Overrides */
+
+
+/* @group Bootstrap Overrides */
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+/* @end Bootstrap Overrides */
 
 
 /* @group Typography */

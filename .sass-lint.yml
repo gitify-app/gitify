@@ -4,7 +4,7 @@ files:
 
 # Rule Configuration
 rules:
-  clean-import-paths: 2
+  clean-import-paths: 0
   extends-before-mixins: 2
   extends-before-declarations: 2
   force-attribute-nesting: 0 # FIXME! To be removed (div select).
