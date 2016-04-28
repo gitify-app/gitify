@@ -18,16 +18,23 @@ module.exports = {
   ],
 
   module: {
-    loaders: [{
-      test: /\.js$/,
-      exclude: /node_modules/,
-      loader: 'babel-loader',
-      query: {
-        presets: ['es2015', 'react', 'stage-0']
-      }
-    }, {
-      test: /\.json$/,
-      loader: 'json'
-    }]
+    loaders: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react', 'stage-0']
+        }
+      }, {
+        test: /\.json$/,
+        loader: 'json'
+      },
+      {
+        test: /\.scss$/,
+        exclude: /node_modules/,
+        loaders: ['style', 'css', 'sass']
+      },
+    ]
   }
 };

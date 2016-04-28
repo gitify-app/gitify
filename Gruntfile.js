@@ -1,18 +1,6 @@
 module.exports = function(grunt) {
 
   grunt.initConfig({
-
-    less: {
-      options: {
-        cleancss: true
-      },
-      main: {
-        files: {
-          'build/css/style.css': 'src/less/style.less'
-        }
-      }
-    },
-
     copy: {
       main: {
         files: [
@@ -26,13 +14,6 @@ module.exports = function(grunt) {
       }
     },
 
-    watch: {
-      less: {
-        files: 'src/less/*',
-        tasks: ['less'],
-      }
-    },
-
     clean: {
       files: ['build/']
     }
@@ -40,16 +21,12 @@ module.exports = function(grunt) {
   });
 
   // Load the plugin that provides the 'uglify' task.
-  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
 
   // Default task(s).
   grunt.registerTask('default', ['build']);
-  grunt.registerTask('build', function () {
-    grunt.file.mkdir('build/js');
-    grunt.task.run(['less', 'copy']);
-  });
+  grunt.registerTask('build', ['copy']);
   grunt.registerTask('release', ['clean', 'build']);
 };

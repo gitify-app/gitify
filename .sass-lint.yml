@@ -1,0 +1,50 @@
+# File Options
+files:
+  include: 'src/scss/*.scss'
+
+# Rule Configuration
+rules:
+  clean-import-paths: 2
+  extends-before-mixins: 2
+  extends-before-declarations: 2
+  no-warn: 1
+  no-debug: 1
+  no-ids: 2
+  no-important: 2
+  no-css-comments: 0
+  no-vendor-prefixes: 0
+  no-qualifying-elements: 0
+  hex-notation:
+    - 2
+    -
+      style: uppercase
+  indentation:
+    - 2
+    -
+      size: 2
+  variable-name-format:
+    - 2
+    -
+      allow-leading-underscore: false
+      convention: hyphenatedlowercase
+  quotes:
+    - 2
+    -
+      style: double
+  property-sort-order:
+    - 2
+    -
+      order: 'concentric'
+  empty-line-between-blocks: 2
+  space-after-bang: 2
+  space-after-colon: 2
+  space-after-comma: 2
+  space-before-bang: 2
+  space-before-brace: 2
+  space-before-colon: 2
+  space-between-parens: 2
+  trailing-semicolon: 2
+  nesting-depth:
+    - 2
+    -
+      max-depth: 4

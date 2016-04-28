@@ -12,8 +12,9 @@
     "package": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.35.4 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
     "codesign": "bash scripts/codesign.bash",
     "dist": "npm run release-js && npm run package && npm run codesign",
-    "lint": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
-    "test": "npm run lint",
+    "lint-js": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
+    "lint-sass": "sass-lint -c .sass-lint.yml -v -q",
+    "test": "npm run lint-js && npm run lint-sass",
     "start": "electron . --enable-logging"
   },
   "repository": {
@@ -49,7 +50,7 @@
   "homepage": "https://github.com/ekonstantinidis/gitify",
   "dependencies": {
     "auto-launch": "=2.0.1",
-    "bootstrap": "=3.3.6",
+    "bootstrap": "=4.0.0-alpha.2",
     "electron-gh-releases": "=2.0.2",
     "electron-positioner": "=2.0.3",
     "font-awesome": "=4.6.1",
@@ -89,10 +90,11 @@
     "grunt": "=1.0.1",
     "grunt-contrib-clean": "=1.0.0",
     "grunt-contrib-copy": "=1.0.0",
-    "grunt-contrib-less": "=1.3.0",
     "grunt-contrib-watch": "=1.0.0",
     "json-loader": "=0.5.4",
-    "less": "=2.6.1",
+    "node-sass": "=3.6.0",
+    "sass-lint": "=1.7.0",
+    "sass-loader": "=3.2.0",
     "webpack": "=1.13.0"
   }
 }
