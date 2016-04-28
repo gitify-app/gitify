@@ -9,6 +9,23 @@
 ![Gitify](images/press.png)
 
 
+### Roadmap Version 1.0.0
+It has been a while since this app was made so I decided to give it a good revamp and hit **1.0.0**. This will bring the app up to date and prepare it for the future. So below you can find all the changes coming up to Version 1.0.0. From the normal user's point of view, nothing will break. People contributing, will probably want to have a look to the list below. Once we are done with this list(if not at the same time), I think it will be time to distribute the app to Linux & Windows.
+
+- [x] Update all (dev)dependendencies - Things tend to evolve fast in the js commumity.
+- [x] Update Electron - Electron gets better and better in every release.
+- [x] From Browserify to Webpack - In the future we can have Hot Module Replacement!
+- [x] React 15.0+ - Major React Update.
+- [x] Use ES6 - Because ES6!
+- [ ] Move from Reflux to Redux - I've spent some time rewriting gitify to redux. It's just amazing.
+- [ ] Update Bootstrap to version 4 - Which means move from LESS to SCSS.
+- [ ] Revamp the UI. From Scratch?
+- [ ] Rebranding - New Logo! Fresh stuff!
+- [ ] Rewrite tests (Mocha?) - Since gitify is moving from Reflux to Redux, all tests have to be rewritten.
+
+If you would like to help let me know! There is a slack channel for gitify in the [atom](http://atomio.slack.com) team. See badge on the header.
+
+
 ### Download
 You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/ekonstantinidis/gitify/releases) page. 
 
