@@ -52,7 +52,6 @@ class NotificationsPage extends React.Component {
         <div className={wrapperClass + ' all-read'}>
           <h3>No Search Results.</h3>
           <h4>No Organisations or Repositories match your search term.</h4>
-          <img className="img-responsive emoji" src="images/all-read.png" />
         </div>
       );
     };

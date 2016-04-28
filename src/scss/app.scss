@@ -1,7 +1,6 @@
 /* @group Imports */
 
 @import "../../node_modules/react-toggle/style.css";
-@import url("http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700");
 
 /* @end Imports */
 
@@ -36,63 +35,21 @@ $octicons-font-path: "../../node_modules/octicons/octicons";
 
 /* @group Bootstrap Overrides */
 
+$navbar-height: 35px;
+
+$font-family-base:
+-apple-system, BlinkMacSystemFont,
+"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+"Helvetica Neue", sans-serif;
+
+$alert-padding: 8px;
+$alert-border-radius: 0;
+$alert-danger-bg: $error-color;
+$alert-danger-text: $white;
+
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 /* @end Bootstrap Overrides */
-
-
-/* @group Typography */
-
-@font-face {
-  font-family: "Open Sans - Light";
-  font-weight: normal;
-  font-style: normal;
-  src: url("../../build/fonts/OpenSans-Light-webfont.eot");
-  src: url("../../build/fonts/OpenSans-Light-webfont.eot?#iefix") format("embedded-opentype"),
-  url("../../build/fonts/OpenSans-Light-webfont.woff") format("woff"),
-  url("../../build/fonts/OpenSans-Light-webfont.ttf") format("truetype"),
-  url("../../build/fonts/OpenSans-Light-webfont.svg#open_sanslight") format("svg");
-}
-
-@font-face {
-  font-family: "Open Sans - Regular";
-  font-weight: normal;
-  font-style: normal;
-  src: url("../../build/fonts/OpenSans-Regular-webfont.eot");
-  src: url("../../build/fonts/OpenSans-Regular-webfont.eot?#iefix") format("embedded-opentype"),
-  url("../../build/fonts/OpenSans-Regular-webfont.woff") format("woff"),
-  url("../../build/fonts/OpenSans-Regular-webfont.ttf") format("truetype"),
-  url("../../build/fonts/OpenSans-Regular-webfont.svg#open_sansregular") format("svg");
-}
-
-@font-face {
-  font-family: "Open Sans - Semibold";
-  font-weight: normal;
-  font-style: normal;
-  src: url("../../build/fonts/OpenSans-Semibold-webfont.eot");
-  src: url("../../build/fonts/OpenSans-Semibold-webfont.eot?#iefix") format("embedded-opentype"),
-  url("../../build/fonts/OpenSans-Semibold-webfont.woff") format("woff"),
-  url("../../build/fonts/OpenSans-Semibold-webfont.ttf") format("truetype"),
-  url("../../build/fonts/OpenSans-Semibold-webfont.svg#open_sanssemibold") format("svg");
-}
-
-@mixin font-open-sans-light {
-  font-family: "Open Sans - Light";
-}
-
-@mixin font-open-sans-regular {
-  font-family: "Open Sans - Regular";
-}
-
-@mixin font-open-sans-semibold {
-  font-family: "Open Sans - Semibold";
-}
-
-@mixin font-monospace {
-  font-family: monospace;
-}
-
-/* @end Typography */
 
 
 /* @group Mixins */
@@ -129,20 +86,6 @@ $octicons-font-path: "../../node_modules/octicons/octicons";
 /* @end Mixins */
 
 
-/* @group Bootstrap Overrides */
-
-$navbar-height: 35px;
-
-$alert-padding: 8px;
-$alert-border-radius: 0;
-$alert-danger-bg: $error-color;
-$alert-danger-text: $white;
-
-$octicons-font-path: "../../build/fonts";
-
-/* @end Bootstrap Overrides */
-
-
 /* @group Misc */
 
 html,
@@ -151,7 +94,6 @@ body {
 }
 
 body {
-  @include font-open-sans-regular;
   cursor: default;
 }
 
@@ -413,10 +355,10 @@ input {
   }
 
   .name {
-    @include font-open-sans-semibold;
     padding: 5px;
     text-align: right;
     font-size: 16px;
+    font-weight: 600;
 
     span {
       display: inline-block;
@@ -554,7 +496,6 @@ input {
 @SearchHeight: 22px;
 
 .search-bar {
-  @include font-open-sans-regular;
   margin: 0;
   background-color: $theme-primary;
   padding: 0 20px;
