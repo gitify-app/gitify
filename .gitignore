@@ -1,7 +1,7 @@
 .DS_Store
 npm-debug.log
 
-build/
+dist/
 coverage/
 node_modules/
 Gitify-darwin-x64/
