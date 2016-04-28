@@ -117,36 +117,6 @@
   }
 }
 
-.ReadMixin() {
-  &.read {
-    // Amazing CSS3 tutorial by Sara Soueidan
-    // http://sarasoueidan.com/blog/creative-list-effects/
-    animation: removed-item-animation .8s cubic-bezier(.65,-0.02,.72,.29);
-  }
-
-  @keyframes removed-item-animation {
-    0% {
-      opacity: 1;
-      transform: translateX(0);
-    }
-
-    30% {
-      opacity: 1;
-      transform: translateX(50px);
-    }
-   
-    80% {
-      opacity: 1;
-      transform: translateX(-800px);
-    }
-
-    100% {
-      opacity: 0;
-      transform: translateX(-800px);
-    }
-  }
-}
-
 /* @end Mixins */
 
 
@@ -221,6 +191,40 @@ input {
 }
 
 /* @end Misc */
+
+
+/* @group Animations */
+
+.notification-leave {
+	opacity: 1;
+	transform:   translate(0,0,0);
+	transform: translate3d(0,0,0);
+	transition-property: transform, opacity;
+	transition-duration: 400ms;
+	transition-timing-function: cubic-bezier(0.175, 0.665, 0.320, 1), linear;
+
+  &.notification-leave-active {
+  	opacity: 0;
+  	transform: translate(350px, 0);
+  	transform: translate3d(350px, 0, 0);
+  }
+}
+
+.repository-leave {
+	opacity: 1;
+	transform:   translate(0,0,0);
+	transform: translate3d(0,0,0);
+	transition-property: transform, opacity;
+	transition-duration: 400ms;
+	transition-timing-function: cubic-bezier(0.175, 0.665, 0.320, 1), linear;
+
+  &.repository-leave-active {
+  	opacity: 0;
+    transform: scale(0.01);
+  }
+}
+
+/* @end Animations */
 
 
 /* @group Loading Service */
@@ -380,7 +384,6 @@ input {
   padding: 5px 20px;
   margin: 0;
   background-color: @LightGray;
-  .ReadMixin();
 
   .col-xs-2,
   .col-xs-10 {
@@ -443,48 +446,35 @@ input {
       margin: 15px auto;
 
     }
-  }
 
-  &.all-read {
-    @-webkit-keyframes typing {
-      0% {
-        width: 100%;
+    .typed-text {
+      padding: 10px 5px;
+      text-align: center;
+      margin-top: 10px;
+      line-height: 40px;
+
+      .cursor {
+        opacity: 1;
+        animation: blink 0.9s infinite;
+        padding-left: 5px;
+        color: @White;
+
+        @keyframes blink {
+          0% { opacity: 1; }
+          50% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+        @-webkit-keyframes blink {
+          0% { opacity: 1; }
+          50% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+        @-moz-keyframes blink {
+          0% { opacity: 1; }
+          50% { opacity: 0; }
+          100% { opacity: 1; }
+        }
       }
-
-      20% {
-        width: 100%;
-      }
-
-      100% {
-        width: 0;
-      }
-    }
-
-    h2 {
-      .FontOpenSansSemibold();
-      font-style: italic;
-      position: relative;
-      margin: 10px auto;
-    }
-
-    h3 {
-      .FontOpenSansLight();
-      position: relative;
-      margin: 5px auto;
-    }
-
-    h2, h3 {
-    }
-
-    h2 .what {
-        position:absolute;
-        top:0;
-        right:0;
-        width:0;
-        background: @ThemePrimary;
-
-        box-sizing: border-box;
-        -webkit-animation: typing 1.5s steps(50, end);
     }
   }
 
@@ -508,7 +498,6 @@ input {
   margin: 0;
   padding: 3px 20px;
   border-bottom: 1px solid darken(@LightGray, 10%);
-  .ReadMixin();
 
   .col-xs-1,
   .col-xs-10 {

@@ -1,28 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Toggle from 'react-toggle';
 
 const ipcRenderer = window.require('electron').ipcRenderer;
 
-var Actions = require('../actions/actions');
-var SettingsStore = require('../stores/settings');
+import { updateSetting } from '../actions';
 
-export default class SettingsPage extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    var settings = SettingsStore.getSettings();
-    this.state = {
-      participating: settings.participating,
-      playSound: settings.playSound,
-      showNotifications: settings.showNotifications,
-      markOnClick: settings.markOnClick,
-      openAtStartup: settings.openAtStartup
-    };
-  }
-
+class SettingsPage extends React.Component {
   toggleSetting(key, event) {
-    Actions.setSetting(key, event.target.checked);
+    this.props.updateSetting(key, event.target.checked);
   }
 
   checkForUpdates() {
@@ -34,8 +20,8 @@ export default class SettingsPage extends React.Component {
   }
 
   render() {
-    var pjson = require('../../../package.json');
-    var version = pjson.version;
+    const appVersion = require('../../../package.json').version;
+    const settings = this.props.settings;
 
     return (
       <div className="container-fluid main-container settings">
@@ -43,7 +29,7 @@ export default class SettingsPage extends React.Component {
           <div className="col-xs-8">Show only participating</div>
           <div className="col-xs-4">
             <Toggle
-              defaultChecked={this.state.participating}
+              defaultChecked={settings.participating}
               onChange={this.toggleSetting.bind(this, 'participating')} />
           </div>
         </div>
@@ -51,7 +37,7 @@ export default class SettingsPage extends React.Component {
           <div className="col-xs-8">Play sound</div>
           <div className="col-xs-4">
             <Toggle
-              defaultChecked={this.state.playSound}
+              defaultChecked={settings.playSound}
               onChange={this.toggleSetting.bind(this, 'playSound')} />
           </div>
         </div>
@@ -59,7 +45,7 @@ export default class SettingsPage extends React.Component {
           <div className="col-xs-8">Show notifications</div>
           <div className="col-xs-4">
             <Toggle
-              defaultChecked={this.state.showNotifications}
+              defaultChecked={settings.showNotifications}
               onChange={this.toggleSetting.bind(this, 'showNotifications')} />
           </div>
         </div>
@@ -68,7 +54,7 @@ export default class SettingsPage extends React.Component {
           <div className="col-xs-8">On Click, Mark as Read</div>
           <div className="col-xs-4">
             <Toggle
-              defaultChecked={this.state.markOnClick}
+              defaultChecked={settings.markOnClick}
               onChange={this.toggleSetting.bind(this, 'markOnClick')} />
           </div>
         </div>
@@ -77,7 +63,7 @@ export default class SettingsPage extends React.Component {
           <div className="col-xs-8">Open at startup</div>
           <div className="col-xs-4">
             <Toggle
-              defaultChecked={this.state.openAtStartup}
+              defaultChecked={settings.openAtStartup}
               onChange={this.toggleSetting.bind(this, 'openAtStartup')} />
           </div>
         </div>
@@ -101,9 +87,18 @@ export default class SettingsPage extends React.Component {
         </div>
 
         <div className="row footer">
-          <div className="col-xs-12 text-right">Gitify - Version: {version}</div>
+          <div className="col-xs-12 text-right">Gitify - Version: {appVersion}</div>
         </div>
       </div>
     );
   }
 };
+
+
+function mapStateToProps(state) {
+  return {
+    settings: state.settings
+  };
+};
+
+export default connect(mapStateToProps, { updateSetting })(SettingsPage);

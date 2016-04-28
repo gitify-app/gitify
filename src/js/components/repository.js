@@ -1,59 +1,38 @@
 import React from 'react';
-
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { connect } from 'react-redux';
 const shell = window.require('electron').shell;
 
-var SingleNotification = require('../components/notification');
-var Actions = require('../actions/actions');
-var apiRequests = require('../utils/api-requests');
+import { markRepoNotifications } from '../actions';
+import SingleNotification from './notification';
 
-var Repository = React.createClass({
+class Repository extends React.Component {
 
-  getInitialState: function () {
-    return {
+  constructor(props) {
+    super(props);
+
+    this.state = {
       isRead: false,
       errors: false
     };
-  },
+  }
 
-  getAvatar: function () {
-    return this.props.repo[0].repository.owner.avatar_url;
-  },
-
-  openBrowser: function () {
+  openBrowser() {
     var url = this.props.repo[0].repository.html_url;
     shell.openExternal(url);
-  },
+  }
 
-  markRepoAsRead: function () {
-    var self = this;
-    var loginId = this.props.repo[0].repository.owner.login;
-    var repoId = this.props.repo[0].repository.name;
-    var fullName = this.props.repo[0].repository.full_name;
+  markRepoAsRead() {
+    const loginId = this.props.repo[0].repository.owner.login;
+    const repoId = this.props.repo[0].repository.name;
+    const fullName = this.props.repo[0].repository.full_name;
+    this.props.markRepoNotifications(loginId, repoId, fullName);
+  }
 
-    apiRequests
-      .putAuth('https://api.github.com/repos/' + loginId + '/' + repoId + '/notifications', {})
-      .end(function (err, response) {
-        if (response && response.ok) {
-          // Notification Read
-          self.setState({
-            isRead: true,
-            errors: false
-          });
-
-          Actions.removeRepoNotifications(fullName);
-        } else {
-          self.setState({
-            isRead: false,
-            errors: true
-          });
-        }
-      });
-
-  },
-
-  render: function () {
+  render() {
     var self = this;
     var organisationName, repositoryName;
+    const avatarUrl = this.props.repo[0].repository.owner.avatar_url;
 
     if (typeof this.props.repoName === 'string') {
       var splitName = this.props.repoName.split('/');
@@ -63,9 +42,9 @@ var Repository = React.createClass({
 
     return (
       <div>
-        <div className={this.state.isRead ? 'row repository read' : 'row repository'}>
-          <div className="col-xs-2"><img className="avatar" src={this.getAvatar()} /></div>
-          <div className="col-xs-9 name" onClick={this.openBrowser}>
+        <div className="row repository">
+          <div className="col-xs-2"><img className="avatar" src={avatarUrl} /></div>
+          <div className="col-xs-9 name" onClick={this.openBrowser.bind(this)}>
             <span>{'/' + repositoryName}</span>
             <span>{organisationName}</span>
           </div>
@@ -73,7 +52,7 @@ var Repository = React.createClass({
             <span
               title="Mark Repository as Read"
               className="octicon octicon-check"
-              onClick={this.markRepoAsRead} />
+              onClick={this.markRepoAsRead.bind(this)} />
           </div>
         </div>
 
@@ -83,13 +62,18 @@ var Repository = React.createClass({
           </div> : null
         }
 
-        {this.props.repo.map(function (obj) {
-          return <SingleNotification isRead={self.state.isRead} notification={obj} key={obj.id} />;
-        })}
+        <ReactCSSTransitionGroup
+          transitionName="notification"
+          transitionEnter={false}
+          transitionLeaveTimeout={325}>
+          {this.props.repo.map(function (obj) {
+            return <SingleNotification isRead={self.state.isRead} notification={obj} key={obj.id} />;
+          })}
+        </ReactCSSTransitionGroup>
 
       </div>
     );
   }
-});
+};
 
-module.exports = Repository;
+export default connect(null, { markRepoNotifications })(Repository);

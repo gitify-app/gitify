@@ -1,25 +1,31 @@
 var webpack = require('webpack');
 
 module.exports = {
-  context: __dirname + '/src/js',
-  entry: './app.js',
+  debug: true,
+  devtool: 'source-map',
+
+  entry: {
+    app: './src/js/app.js'
+  },
+
   output: {
     path: __dirname + '/build/js',
-    filename: 'app.js'
+    filename: '[name].js'
   },
-  devtool: 'source-map',
+
   plugins: [
     new webpack.NoErrorsPlugin()
   ],
+
   module: {
     loaders: [{
       test: /\.js$/,
       exclude: /node_modules/,
       loader: 'babel-loader',
       query: {
-        presets: ['es2015', 'react']
+        presets: ['es2015', 'react', 'stage-0']
       }
-    },{
+    }, {
       test: /\.json$/,
       loader: 'json'
     }]

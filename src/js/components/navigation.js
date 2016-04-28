@@ -1,33 +1,12 @@
 import React from 'react';
-// import Reflux from 'reflux';
+import { connect } from 'react-redux';
 
 const ipcRenderer = window.require('electron').ipcRenderer;
 const shell = window.require('electron').shell;
 
-var Actions = require('../actions/actions');
-var AuthStore = require('../stores/auth');
-// var NotificationsStore = require('../stores/notifications.js');
+import { fetchNotifications, logout } from '../actions';
 
-export default class Navigation extends React.Component {
-
-  // FIXME!
-  // mixins: [
-  //   Reflux.connect(AuthStore, 'authStatus'),
-  //   Reflux.connect(NotificationsStore, 'notifications'),
-  //   Reflux.listenTo(Actions.getNotifications.completed, 'refreshDone'),
-  //   Reflux.listenTo(Actions.getNotifications.failed, 'refreshDone')
-  // ],
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      authStatus: AuthStore.authStatus(),
-      loading: false,
-      notifications: []
-    };
-  }
-
+class Navigation extends React.Component {
   componentDidMount() {
     var self = this;
     var iFrequency = 60000;
@@ -39,23 +18,10 @@ export default class Navigation extends React.Component {
   }
 
   refreshNotifications() {
-    this.setState( {loading: true } );
-    Actions.getNotifications();
-  }
-
-  refreshDone() {
-    this.setState({
-      loading: false
-    });
+    this.props.fetchNotifications();
   }
 
   goToSettings() {
-
-    console.log('=========');
-    console.log(this.props);
-    console.log('=========');
-
-
     if (this.props.showSearch) {
       this.props.toggleSearch();
     }
@@ -68,8 +34,8 @@ export default class Navigation extends React.Component {
       this.props.toggleSearch();
     }
 
-    Actions.logout();
-    this.context.router.push('/login');
+    this.props.logout();
+    this.context.router.replace('/login');
     ipcRenderer.send('update-icon', 'IconPlain');
   }
 
@@ -86,10 +52,11 @@ export default class Navigation extends React.Component {
   }
 
   render() {
+    const isLoggedIn = this.props.token !== null;
     var refreshIcon, logoutIcon, backIcon, settingsIcon, quitIcon, searchIcon, countLabel;
-    var loadingClass = this.state.loading ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
+    var loadingClass = this.props.isFetching ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
 
-    if (this.state.authStatus) {
+    if (isLoggedIn) {
       refreshIcon = (
         <i title="Refresh" className={loadingClass} onClick={this.refreshNotifications.bind(this)} />
       );
@@ -99,12 +66,12 @@ export default class Navigation extends React.Component {
       settingsIcon = (
         <i title="Settings" className="fa fa-cog" onClick={this.goToSettings.bind(this)} />
       );
-      if (this.state.notifications.length) {
+      if (this.props.notifications.length) {
         searchIcon = (
           <i title="Search" className="fa fa-search" onClick={this.props.toggleSearch} />
         );
         countLabel = (
-          <span className="label label-success">{this.state.notifications.length}</span>
+          <span className="label label-success">{this.props.notifications.length}</span>
         );
       }
     } else {
@@ -150,3 +117,13 @@ Navigation.contextTypes = {
   location: React.PropTypes.object,
   router: React.PropTypes.object.isRequired
 };
+
+function mapStateToProps(state) {
+  return {
+    isFetching: state.notifications.isFetching,
+    notifications: state.notifications.response,
+    token: state.auth.token
+  };
+};
+
+export default connect(mapStateToProps, { fetchNotifications, logout })(Navigation);
