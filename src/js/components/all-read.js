@@ -27,8 +27,7 @@ export default class AllRead extends React.Component {
           <span className="cursor">|</span>
         </h2>
 
-        <h3>No new notifications.</h3>
-        <img className="img-responsive emoji" src="images/all-read.png" />
+        <h4>No new notifications.</h4>
       </div>
     );
   }

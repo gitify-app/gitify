@@ -1,0 +1,554 @@
+/* @group Imports */
+
+@import "../../node_modules/react-toggle/style.css";
+
+/* @end Imports */
+
+
+/* @group Colors */
+
+$theme-primary: #3893C6;
+
+$theme-black: #262626;
+$theme-green: #6CC644;
+
+$white: #FFF;
+$dark-gray: darken($white, 75%);
+$light-gray: darken($white, 10%);
+
+$error-color: #DB423C;
+
+/* @end Colors */
+
+
+/* @group Fonts Overrides */
+
+$fa-font-path: "../../node_modules/font-awesome/fonts";
+@import "node_modules/font-awesome/scss/font-awesome.scss";
+
+$octicons-font-path: "../../node_modules/octicons/octicons";
+@import "node_modules/octicons/octicons/octicons.scss";
+
+
+/* @end Fonts Overrides */
+
+
+/* @group Bootstrap Overrides */
+
+$navbar-height: 35px;
+
+$font-family-base:
+-apple-system, BlinkMacSystemFont,
+"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+"Helvetica Neue", sans-serif;
+
+$alert-padding: 8px;
+$alert-border-radius: 0;
+$alert-danger-bg: $error-color;
+$alert-danger-text: $white;
+
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+/* @end Bootstrap Overrides */
+
+
+/* @group Mixins */
+
+// Border Radius (Same Corners)
+@mixin border-radius($radius: 5px) {
+  border-radius: $radius;
+  background-clip: padding-box;
+}
+
+@mixin truncate-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// opacity
+@mixin opacity($opacity: .5) {
+  opacity: $opacity;
+}
+
+@mixin check-octicon {
+  &.octicon-check {
+    transition: all .4s;
+    color: darken($light-gray, 20%);
+
+    &:hover {
+      cursor: pointer;
+      color: $theme-green;
+    }
+  }
+}
+
+/* @end Mixins */
+
+
+/* @group Misc */
+
+html,
+body {
+  -webkit-user-select: none;
+}
+
+body {
+  cursor: default;
+}
+
+body,
+html {
+  height: 100%;
+  overflow: hidden;
+}
+
+.main-container {
+  position: absolute;
+  top: $navbar-height;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: auto;
+}
+
+.search-bar + .main-container {
+  top: $navbar-height + $navbar-height;
+}
+
+.btn {
+  @include border-radius(0);
+  border: 0;
+
+  .fa {
+    margin-right: 10px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.right {
+  text-align: right;
+}
+
+input {
+  outline: none;
+}
+
+.alert {
+  margin-bottom: 0;
+  border: 0;
+  text-align: center;
+}
+
+/* @end Misc */
+
+
+/* @group Animations */
+
+.notification-leave {
+  transform: translate(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+  transition-property: transform, opacity;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(.175, .665, .32, 1), linear;
+
+  &.notification-leave-active {
+    transform: translate(350px, 0);
+    transform: translate3d(350px, 0, 0);
+    opacity: 0;
+  }
+}
+
+.repository-leave {
+  transform: translate(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+  transition-property: transform, opacity;
+  transition-duration: 400ms;
+  transition-timing-function: cubic-bezier(.175, .665, .32, 1), linear;
+
+  &.repository-leave-active {
+    transform: scale(.01);
+    opacity: 0;
+  }
+}
+
+/* @end Animations */
+
+
+/* @group Loading Service */
+
+.loading-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background: $theme-primary;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+
+  .loading-text {
+    position: relative;
+    top: 120px;
+    color: $white;
+    font-size: 20px;
+    -webkit-animation: loadbars 2s cubic-bezier(.645, .045, .355, 1) infinite 0s;
+  }
+}
+
+@-webkit-keyframes loadbars {
+  0% {
+    margin-top: 25px;
+    height: 10px;
+  }
+
+  50% {
+    margin-top: 0;
+    height: 50px;
+  }
+
+  100% {
+    margin-top: 25px;
+    height: 10px;
+  }
+}
+
+/* @end Loading Service */
+
+
+/* @group Navbar */
+
+.navigation {
+  background-color: $theme-primary;
+  height: $navbar-height;
+  color: $white;
+
+  div[class*="col-xs-"] {
+    line-height: 32px;
+    font-size: 16px;
+
+    &.left {
+      .logo {
+        display: inline-block;
+        margin: 5px;
+        max-width: 50px;
+      }
+
+      .label {
+        margin-right: 5px;
+      }
+
+      .fa {
+        margin: 0 5px;
+
+        &.fa-refresh {
+          font-size: 14px;
+        }
+      }
+    }
+
+    &.right {
+      .fa {
+        margin: 0 10px;
+
+        &.fa-chevron-left,
+        &.fa-search {
+          font-size: 14px;
+        }
+      }
+    }
+
+    .fa {
+
+      &:active,
+      &:hover {
+        color: $dark-gray;
+      }
+    }
+  }
+}
+
+/* @end Navbar */
+
+
+/* @group Settings */
+
+.settings {
+  background-color: $theme-primary;
+  padding: 5px 20px;
+  color: $white;
+
+  .row {
+    margin: 12px 10px;
+
+    .col-xs-4 {
+      text-align: right;
+    }
+
+    .btn-close {
+      padding: 10px;
+    }
+  }
+
+  .footer {
+    padding-top: 5px;
+    font-size: 10px;
+
+    .text-right {
+      padding-right: 18px;
+    }
+  }
+}
+
+/* @end Settings */
+
+
+/* @group Component / Login  */
+
+.login {
+  position: absolute;
+  top: $navbar-height;
+  left: 0;
+  background-color: $theme-primary;
+  padding-top: 30px;
+  width: 100%;
+  height: 100%;
+  color: $white;
+
+  .logo {
+    margin: 10px auto 20px;
+    max-width: 150px;
+  }
+
+  .desc {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 20px;
+  }
+}
+
+/* @end Component / Login  */
+
+
+/* @group Component / Repository  */
+
+.repository {
+  margin: 0;
+  background-color: $light-gray;
+  padding: 5px 20px;
+
+  .col-xs-2,
+  .col-xs-10 {
+    padding: 0;
+  }
+
+  .avatar {
+    @include border-radius(50%);
+    margin-top: 5px;
+    width: 23px;
+    height: 23px;
+  }
+
+  .name {
+    padding: 5px;
+    text-align: right;
+    font-size: 16px;
+    font-weight: 600;
+
+    span {
+      display: inline-block;
+      float: right;
+      max-width: 50%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+  }
+
+  .check-wrapper {
+    padding: 4px 5px;
+
+    .octicon {
+      @include check-octicon;
+      font-size: 22px;
+    }
+  }
+}
+
+/* @end Component / Repository  */
+
+
+/* @group Component / Notifications  */
+
+.notifications {
+  margin: 0;
+  padding: 0;
+
+  &.errored,
+  &.all-read {
+    background-color: $theme-primary;
+    padding: 30px 20px;
+    color: $white;
+
+    h2 {
+      text-align: center;
+      font-weight: 500;
+    }
+
+    h3,
+    h4 {
+      text-align: center;
+      font-weight: 300;
+    }
+
+    .emoji {
+      margin: 15px auto;
+
+    }
+
+    .typed-text {
+      margin-top: 10px;
+      padding: 10px 5px;
+      text-align: center;
+      line-height: 40px;
+
+      .cursor {
+        animation: blink .9s infinite;
+        opacity: 1;
+        padding-left: 5px;
+        color: $white;
+
+        @keyframes blink {
+          0% { opacity: 1; }
+          50% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+        @-webkit-keyframes blink {
+          0% { opacity: 1; }
+          50% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+        @-moz-keyframes blink {
+          0% { opacity: 1; }
+          50% { opacity: 0; }
+          100% { opacity: 1; }
+        }
+      }
+    }
+  }
+
+  .fork {
+    padding: 10px 0;
+    text-align: center;
+    font-size: 18px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
+
+/* @end Component / Notifications  */
+
+
+/* @group Component / Notification  */
+
+.notification {
+  margin: 0;
+  border-bottom: 1px solid darken($light-gray, 10%);
+  padding: 2px 20px;
+
+  .col-xs-1,
+  .col-xs-10 {
+    padding: 5px 0;
+  }
+
+  .check-wrapper {
+    text-align: right;
+  }
+
+  .subject {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 15px;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .octicon {
+    @include check-octicon;
+    margin-right: 10px;
+    font-size: 20px;
+  }
+
+  &:hover {
+    background-color: $light-gray;
+  }
+}
+
+/* @end Component / Notification  */
+
+
+/* @group Component / Search  */
+
+@SearchHeight: 22px;
+
+.search-bar {
+  margin: 0;
+  background-color: $theme-primary;
+  padding: 0 20px;
+  height: $navbar-height;
+  text-align: center;
+
+  div[class*="col-xs-"] {
+    padding: 0;
+  }
+
+  -webkit-animation: fadein .5s;
+
+  @-webkit-keyframes fadein {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+.form-group {
+  margin-bottom: 0;
+
+  .form-control {
+    outline: none;
+    border: 0;
+    box-shadow: none;
+    background-color: $theme-primary;
+    padding: 0 0 0 16px;
+    color: $white;
+    font-size: 18px;
+
+    &::-webkit-input-placeholder {
+      color: $light-gray;
+    }
+  }
+}
+
+.octicon-x {
+  cursor: pointer;
+  text-align: center;
+  line-height: 36px;
+  color: $white;
+  font-size: 20px;
+}
+
+/* @end Component / Search  */
