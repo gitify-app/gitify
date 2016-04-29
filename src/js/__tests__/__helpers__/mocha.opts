@@ -2,4 +2,4 @@
 --require src/js/__tests__/__helpers__/tests-dom.js
 --bail
 --recursive
-src/js/__tests__**/*.js
+src/js/__tests__/**/*.js

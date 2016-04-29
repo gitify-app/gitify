@@ -14,7 +14,7 @@
     "lint-sass": "sass-lint -c .sass-lint.yml -v -q",
     "mocha": "./node_modules/mocha/bin/mocha --opts src/js/__tests__/__helpers__/mocha.opts",
     "coverage": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --opts src/js/__tests__/__helpers__/mocha.opts",
-    "test": "npm run lint-js && npm run lint-sass",
+    "test": "npm run lint-js && npm run lint-sass && npm run coverage",
     "start": "electron . --enable-logging"
   },
   "repository": {
