@@ -1,0 +1,32 @@
+{
+  "name": "gitify-tests",
+  "bail": true,
+  "scriptPreprocessor": "<rootDir>/node_modules/babel-jest",
+  "testFileExtensions": [
+    "es6",
+    "js"
+  ],
+  "moduleFileExtensions": [
+    "js",
+    "json",
+    "es6"
+  ],
+  "collectCoverage": true,
+  "testPathDirs": [
+    "<rootDir>/src/js/__tests__/"
+  ],
+  "testPathIgnorePatterns": [
+    "<rootDir>/src/js/__tests__/__mocks__/"
+  ],
+  "modulePathIgnorePatterns": [
+    "<rootDir>/node_modules/"
+  ],
+  "unmockedModulePathPatterns": [
+    "<rootDir>/node_modules/react",
+    "<rootDir>/node_modules/react-dom",
+    "<rootDir>/node_modules/react-addons-test-utils",
+    "<rootDir>/node_modules/history",
+    "<rootDir>/node_modules/malarkey",
+    "<rootDir>/node_modules/underscore"
+  ]
+}
