@@ -13,6 +13,7 @@
     "lint-js": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
     "lint-sass": "sass-lint -c .sass-lint.yml -v -q",
     "mocha": "./node_modules/mocha/bin/mocha --opts src/js/__tests__/__helpers__/mocha.opts",
+    "coverage": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --opts src/js/__tests__/__helpers__/mocha.opts",
     "test": "npm run lint-js && npm run lint-sass",
     "start": "electron . --enable-logging"
   },
@@ -75,6 +76,7 @@
     "underscore": "=1.8.3"
   },
   "devDependencies": {
+    "babel-cli": "=6.7.7",
     "babel-core": "=6.7.7",
     "babel-eslint": "=6.0.3",
     "babel-jest": "=11.0.2",
@@ -89,6 +91,7 @@
     "eslint": "=2.8.0",
     "eslint-plugin-react": "=5.0.1",
     "file-loader": "=0.8.5",
+    "istanbul": "=1.0.0-alpha.2",
     "jsdom": "=8.4.1",
     "json-loader": "=0.5.4",
     "mocha": "=2.4.5",
