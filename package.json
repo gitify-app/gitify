@@ -13,7 +13,7 @@
     "lint-js": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
     "lint-sass": "sass-lint -c .sass-lint.yml -v -q",
     "jest": "jest --config=jest-config.json",
-    "test": "npm run lint-js && npm run lint-sass",
+    "test": "npm run lint-js && npm run lint-sass && npm run jest",
     "start": "electron . --enable-logging"
   },
   "repository": {
