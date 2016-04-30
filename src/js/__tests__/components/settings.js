@@ -1,43 +1,68 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import TestUtils from 'react-addons-test-utils';
 import { expect } from 'chai';
+import { mount } from 'enzyme';
+import sinon from 'sinon';
+import Toggle from 'react-toggle';
+import { SettingsPage } from '../../components/settings';
 
-describe('settings.js', function () {
-
-  var SettingsPage, mockSettings;
-
-  beforeEach(function () {
-    // Mocks for Electron
-    window.require = function () {
-      return {
-        ipcRenderer: {
-          send: function () {
-            // Fake sending message to ipcMain
-          }
-        },
-      };
-    };
-
-    mockSettings = {
+function setup() {
+  const props = {
+    updateSetting: () => true,
+    settings: {
       participating: false,
       playSound: true,
       showNotifications: true,
       markOnClick: false,
       openAtStartup: false
-    };
+    }
+  };
+  const wrapper = mount(<SettingsPage {...props} />);
 
-    SettingsPage = require('../../components/settings').SettingsPage;
-  });
+  return {
+    props: props,
+    wrapper: wrapper,
+  };
+};
+
+describe('settings.js', function () {
 
   it('should render itself & its children', function () {
-    const instance = TestUtils.renderIntoDocument(
-      <SettingsPage
-        updateSetting={() => true}
-        settings={mockSettings} />
-    );
 
-    const node = TestUtils.findRenderedDOMComponentWithClass(instance, 'settings');
-    expect(node).to.exist;
+    const { wrapper } = setup();
+
+    expect(wrapper).to.exist;
+    expect(wrapper.props().settings.participating).to.be.false;
+    expect(wrapper.find(Toggle).length).to.equal(5);
+    expect(wrapper.find('.footer').find('.text-right').text()).to.contain('Gitify - Version');
+
   });
 
 });
+
+// function setup() {
+//   const props = {
+//     updateSetting: sinon.spy(),
+//   };
+// };
+//
+// describe('settings.js', function () {
+//
+//   it('should render itself & its children', function () {
+//
+//     sinon.spy(SettingsPage.prototype, 'componentDidMount');
+//
+//     const { props } = setup();
+//     // const [ Toggle ] = output.props.children;
+//
+//     const wrapper = mount(<SettingsPage {...props} />);
+//
+//     // expect(SettingsPage.prototype.componentDidMount.calledOnce).to.be.true;
+//     //
+//     // console.log('YES YESY ESY');
+//     // console.log(node);
+//     // expect(output.props.className).toBe('container-fluid main-container settings');
+//
+//     // expect(node).toExist();
+//   });
+//
+// });
