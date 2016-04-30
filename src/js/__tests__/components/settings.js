@@ -43,10 +43,19 @@ describe('settings.js', function () {
     const { wrapper } = setup();
 
     expect(wrapper).to.exist;
-    expect(wrapper.props().settings.participating).to.be.false;
-
-    wrapper.find(Toggle).nodes[0].props.onChange({target: {checked: true}});
+    wrapper.find(Toggle).first().props().onChange({target: {checked: true}});
     expect(wrapper.props().updateSetting.calledOnce).to.be.true;
+
+  });
+
+  it('should check for updates and quit the app', function () {
+
+    const { wrapper } = setup();
+
+    expect(wrapper).to.exist;
+
+    wrapper.find('.btn-primary').simulate('click');
+    wrapper.find('.btn-danger').simulate('click');
 
   });
 
