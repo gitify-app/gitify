@@ -12,6 +12,23 @@ describe('reducers/notifications.js', () => {
     failed: false
   };
 
+  const notifications = [
+    {
+      id: 1,
+      repository: {
+        full_name: 'ekonstantinidis/gitify'
+      },
+      text: 'New Release'
+    },
+    {
+      id: 2,
+      repository: {
+        full_name: 'ekonstantinidis/gitify'
+      },
+      text: 'It\'s Great'
+    }
+  ];
+
   it('should return the initial state', () => {
 
     expect(reducer(undefined, {})).to.eql(initialState);
@@ -34,19 +51,6 @@ describe('reducers/notifications.js', () => {
   });
 
   it('should handle NOTIFICATIONS_SUCCESS', () => {
-
-    const notifications = [
-      {
-        id: 1,
-        repository: 'ekonstantinidis/gitify',
-        text: 'New Release'
-      },
-      {
-        id: 2,
-        repository: 'ekonstantinidis/gitify',
-        text: 'It\'s Great'
-      }
-    ];
 
     expect(reducer(undefined, {})).to.eql(initialState);
 
@@ -95,6 +99,46 @@ describe('reducers/notifications.js', () => {
       failed: true,
       response: response
     });
+
+  });
+
+  it('should handle MARK_NOTIFICATION_SUCCESS', () => {
+
+    const currentState = {
+      ...initialState,
+      response: notifications
+    };
+
+    expect(reducer(currentState, {}).response.length).to.equal(2);
+
+    const action = {
+      type: MARK_NOTIFICATION_SUCCESS,
+      meta: {
+        id: 1
+      }
+    };
+
+    expect(reducer(currentState, action).response.length).to.equal(1);
+
+  });
+
+  it('should handle MARK_REPO_NOTIFICATION_SUCCESS', () => {
+
+    const currentState = {
+      ...initialState,
+      response: notifications
+    };
+
+    expect(reducer(currentState, {}).response.length).to.equal(2);
+
+    const action = {
+      type: MARK_REPO_NOTIFICATION_SUCCESS,
+      meta: {
+        repoFullName: 'ekonstantinidis/gitify'
+      }
+    };
+
+    expect(reducer(currentState, action).response.length).to.equal(0);
 
   });
 });
