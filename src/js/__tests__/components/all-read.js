@@ -3,7 +3,7 @@ jest.unmock('../../components/all-read');
 import React from 'react'; // eslint-disable-line no-unused-vars
 import TestUtils from 'react-addons-test-utils';
 
-describe('Test for Settings Component', function () {
+describe('all-read.js', function () {
 
   const AllRead = require('../../components/all-read').default;
 
