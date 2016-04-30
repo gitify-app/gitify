@@ -7,7 +7,7 @@ import { SettingsPage } from '../../components/settings';
 
 function setup() {
   const props = {
-    updateSetting: () => true,
+    updateSetting: sinon.spy(),
     settings: {
       participating: false,
       playSound: true,
@@ -16,6 +16,7 @@ function setup() {
       openAtStartup: false
     }
   };
+
   const wrapper = mount(<SettingsPage {...props} />);
 
   return {
@@ -37,32 +38,16 @@ describe('settings.js', function () {
 
   });
 
-});
+  it('should update a setting', function () {
 
-// function setup() {
-//   const props = {
-//     updateSetting: sinon.spy(),
-//   };
-// };
-//
-// describe('settings.js', function () {
-//
-//   it('should render itself & its children', function () {
-//
-//     sinon.spy(SettingsPage.prototype, 'componentDidMount');
-//
-//     const { props } = setup();
-//     // const [ Toggle ] = output.props.children;
-//
-//     const wrapper = mount(<SettingsPage {...props} />);
-//
-//     // expect(SettingsPage.prototype.componentDidMount.calledOnce).to.be.true;
-//     //
-//     // console.log('YES YESY ESY');
-//     // console.log(node);
-//     // expect(output.props.className).toBe('container-fluid main-container settings');
-//
-//     // expect(node).toExist();
-//   });
-//
-// });
+    const { wrapper } = setup();
+
+    expect(wrapper).to.exist;
+    expect(wrapper.props().settings.participating).to.be.false;
+
+    wrapper.find(Toggle).nodes[0].props.onChange({target: {checked: true}});
+    expect(wrapper.props().updateSetting.calledOnce).to.be.true;
+
+  });
+
+});
