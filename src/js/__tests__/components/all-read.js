@@ -1,28 +1,33 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
 import { expect } from 'chai';
+import { mount } from 'enzyme';
+import sinon from 'sinon';
+import AllRead from '../../components/all-read';
+
+function setup() {
+  const props = {};
+  const wrapper = mount(<AllRead {...props} />);
+
+  return {
+    props: props,
+    wrapper: wrapper,
+  };
+};
 
 describe('all-read.js', function () {
 
-  var AllRead;
-
-  beforeEach(function () {
-    AllRead = require('../../components/all-read').default;
-  });
-
-
   it('should render itself & its children', function () {
-    var instance = TestUtils.renderIntoDocument(<AllRead />);
 
-    const node = ReactDOM.findDOMNode(instance);
+    sinon.spy(AllRead.prototype, 'componentDidMount');
 
-    expect(node).to.exist;
+    const { wrapper } = setup();
 
-    var heading = node.getElementsByTagName('h4');
+    expect(wrapper).to.exist;
+    expect(AllRead.prototype.componentDidMount.calledOnce).to.be.true;
+    expect(wrapper.find('h4').text()).to.equal('No new notifications.');
 
-    expect(heading.length).to.equal(1);
-    expect(heading[0].textContent).to.equal('No new notifications.');
+    AllRead.prototype.componentDidMount.restore();
+
   });
 
 });
