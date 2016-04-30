@@ -14,7 +14,7 @@ function setup() {
   };
 };
 
-describe('all-read.js', function () {
+describe('components/all-read.js', function () {
 
   it('should render itself & its children', function () {
 

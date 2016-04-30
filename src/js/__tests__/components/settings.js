@@ -25,7 +25,7 @@ function setup() {
   };
 };
 
-describe('settings.js', function () {
+describe('components/settings.js', function () {
 
   it('should render itself & its children', function () {
 
