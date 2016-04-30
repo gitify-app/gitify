@@ -1,11 +1,16 @@
+import React from 'react'; // eslint-disable-line no-unused-vars
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-addons-test-utils';
 import { expect } from 'chai';
 
 describe('all-read.js', function () {
 
-  const React = require('react'); // eslint-disable-line no-unused-vars
-  const ReactDOM = require('react-dom');
-  const TestUtils = require('react-addons-test-utils');
-  const AllRead = require('../../components/all-read').default;
+  var AllRead;
+
+  beforeEach(function () {
+    AllRead = require('../../components/all-read').default;
+  });
+
 
   it('should render itself & its children', function () {
     var instance = TestUtils.renderIntoDocument(<AllRead />);
@@ -14,10 +19,10 @@ describe('all-read.js', function () {
 
     expect(node).to.exist;
 
-    var paragraphs = node.getElementsByTagName('h4');
+    var heading = node.getElementsByTagName('h4');
 
-    expect(paragraphs.length).to.equal(1);
-    expect(paragraphs[0].textContent).to.equal('No new notifications.');
+    expect(heading.length).to.equal(1);
+    expect(heading[0].textContent).to.equal('No new notifications.');
   });
 
 });
