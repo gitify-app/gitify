@@ -120,7 +120,7 @@ describe('components/notification.js', function () {
 
     expect(wrapper).to.exist;
     wrapper.find('.octicon-check').simulate('click');
-    expect(wrapper.props().markNotification.calledOnce).to.be.true;
+    expect(wrapper.props().markNotification).to.have.been.calledOnce;
 
   });
 
@@ -137,7 +137,7 @@ describe('components/notification.js', function () {
     expect(wrapper).to.exist;
     wrapper.find('.subject').simulate('click');
     expect(shell.openExternal).to.have.been.calledOnce;
-    expect(wrapper.props().markNotification.calledOnce).to.be.true;
+    expect(wrapper.props().markNotification).to.have.been.calledOnce;
 
     shell.openExternal().reset();
   });

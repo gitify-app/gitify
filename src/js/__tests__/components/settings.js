@@ -44,7 +44,7 @@ describe('components/settings.js', function () {
 
     expect(wrapper).to.exist;
     wrapper.find(Toggle).first().props().onChange({target: {checked: true}});
-    expect(wrapper.props().updateSetting.calledOnce).to.be.true;
+    expect(wrapper.props().updateSetting).to.have.been.calledOnce;
 
   });
 
