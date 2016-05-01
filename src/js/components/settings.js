@@ -6,7 +6,7 @@ const ipcRenderer = window.require('electron').ipcRenderer;
 
 import { updateSetting } from '../actions';
 
-class SettingsPage extends React.Component {
+export class SettingsPage extends React.Component {
   toggleSetting(key, event) {
     this.props.updateSetting(key, event.target.checked);
   }
