@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { searchNotifications, clearSearch } from '../actions';
 
-class SearchBar extends React.Component {
+export class SearchBar extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.showSearch === false) {
