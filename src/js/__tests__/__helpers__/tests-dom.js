@@ -1,4 +1,5 @@
 import jsdom from 'jsdom';
+import sinon from 'sinon';
 
 global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
 global.window = document.defaultView;
@@ -12,5 +13,8 @@ window.require = function () {
         // Fake sending message to ipcMain
       }
     },
+    shell: {
+      openExternal: (url) => sinon.spy()
+    }
   };
 };

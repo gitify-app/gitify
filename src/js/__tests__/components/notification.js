@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import { SingleNotification } from '../../components/notification';
+const shell = window.require('electron').shell;
 
 function setup(props) {
   const wrapper = mount(<SingleNotification {...props} />);
@@ -20,11 +21,12 @@ describe('components/notification.js', function () {
     subject: {
       title: 'Hello. This is a notification.',
       type: 'Issue',
-      url: 'https://api.github.com/repos/ekonstantinidis/gitify/issues/123'
+      url: 'https://api.github.com/repos/ekonstantinidis/gitify/pulls/123'
     }
   };
 
   it('should render itself & its children', function () {
+
     const props = {
       markNotification: sinon.spy(),
       markOnClick: false,
@@ -85,6 +87,24 @@ describe('components/notification.js', function () {
       }
     });
     expect(wrapper.find('.octicon').first().props().className).to.contain('octicon-question');
+
+  });
+
+  it('should open a notification in the browser', function () {
+
+    const props = {
+      markNotification: sinon.spy(),
+      markOnClick: false,
+      notification: notification
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    wrapper.find('.subject').simulate('click');
+    expect(shell.openExternal).to.have.been.calledOnce;
+
+    shell.openExternal().reset();
 
   });
 
