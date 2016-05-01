@@ -108,4 +108,38 @@ describe('components/notification.js', function () {
 
   });
 
+  it('should mark a notification as read', function () {
+
+    const props = {
+      markNotification: sinon.spy(),
+      markOnClick: false,
+      notification: notification
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    wrapper.find('.octicon-check').simulate('click');
+    expect(wrapper.props().markNotification.calledOnce).to.be.true;
+
+  });
+
+  it('should open a notification in browser & mark it as read', function () {
+
+    const props = {
+      markNotification: sinon.spy(),
+      markOnClick: true,
+      notification: notification
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    wrapper.find('.subject').simulate('click');
+    expect(shell.openExternal).to.have.been.calledOnce;
+    expect(wrapper.props().markNotification.calledOnce).to.be.true;
+
+    shell.openExternal().reset();
+  });
+
 });
