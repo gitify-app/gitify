@@ -142,6 +142,64 @@ describe('actions/index.js', () => {
 
   });
 
+  it('should mark a notification as read with success', () => {
+    const id = 123;
+    const message = 'Success.';
+
+    nock('https://api.github.com/')
+      .patch(`/notifications/threads/${id}`)
+      .reply(200, {
+        body: message
+      });
+
+    const expectedActions = [
+      { type: actions.MARK_NOTIFICATION_REQUEST, payload: undefined, meta: undefined },
+      { type: actions.MARK_NOTIFICATION_SUCCESS, payload: { body: message }, meta: { id } }
+    ];
+
+    const store = createMockStore({ response: [] }, expectedActions);
+
+    return store.dispatch(actions.markNotification(id))
+      .then(() => { // return of async actions
+        expect(store.getActions()).to.eql(expectedActions);
+      });
+
+  });
+
+  it('should mark a notification as read with failure', () => {
+    const id = 123;
+    const message = 'Oops! Something went wrong.';
+
+    nock('https://api.github.com/')
+      .patch(`/notifications/threads/${id}`)
+      .reply(400, {
+        body: { message }
+      });
+
+    const expectedPayload = {
+      message: '400 - Bad Request',
+      name: 'ApiError',
+      status: 400,
+      response: {
+        body: { message }
+      },
+      statusText: 'Bad Request'
+    };
+
+    const expectedActions = [
+      { type: actions.MARK_NOTIFICATION_REQUEST, payload: undefined, meta: undefined },
+      { type: actions.MARK_NOTIFICATION_FAILURE, payload: expectedPayload, error: true, meta: undefined }
+    ];
+
+    const store = createMockStore({ response: [] }, expectedActions);
+
+    return store.dispatch(actions.markNotification(id))
+      .then(() => { // return of async actions
+        expect(store.getActions()).to.eql(expectedActions);
+      });
+
+  });
+
   it('should search the notifications with a query', () => {
 
     const query = 'hello';
