@@ -1,6 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { expect } from 'chai';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import Toggle from 'react-toggle';
 import { SettingsPage } from '../../components/settings';
@@ -17,7 +17,7 @@ function setup() {
     }
   };
 
-  const wrapper = mount(<SettingsPage {...props} />);
+  const wrapper = shallow(<SettingsPage {...props} />);
 
   return {
     props: props,
@@ -32,7 +32,6 @@ describe('components/settings.js', function () {
     const { wrapper } = setup();
 
     expect(wrapper).to.exist;
-    expect(wrapper.props().settings.participating).to.be.false;
     expect(wrapper.find(Toggle).length).to.equal(5);
     expect(wrapper.find('.footer').find('.text-right').text()).to.contain('Gitify - Version');
 
@@ -41,7 +40,6 @@ describe('components/settings.js', function () {
   it('should update a setting', function () {
 
     const { wrapper } = setup();
-
     expect(wrapper).to.exist;
     wrapper.find(Toggle).first().props().onChange({target: {checked: true}});
     expect(wrapper.props().updateSetting).to.have.been.calledOnce;

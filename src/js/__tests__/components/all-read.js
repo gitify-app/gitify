@@ -1,12 +1,12 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { expect } from 'chai';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import AllRead from '../../components/all-read';
 
 function setup() {
   const props = {};
-  const wrapper = mount(<AllRead {...props} />);
+  const wrapper = shallow(<AllRead {...props} />);
 
   return {
     props: props,
@@ -23,7 +23,7 @@ describe('components/all-read.js', function () {
     const { wrapper } = setup();
 
     expect(wrapper).to.exist;
-    expect(AllRead.prototype.componentDidMount.calledOnce).to.be.true;
+    expect(AllRead.prototype.componentDidMount).to.have.been.calledOnce;
     expect(wrapper.find('h4').text()).to.equal('No new notifications.');
 
     AllRead.prototype.componentDidMount.restore();

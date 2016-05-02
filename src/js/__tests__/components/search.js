@@ -1,11 +1,11 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { expect } from 'chai';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { SearchBar } from '../../components/search';
 
 function setup(props) {
-  const wrapper = mount(<SearchBar {...props} />);
+  const wrapper = shallow(<SearchBar {...props} />);
 
   return {
     props: props,

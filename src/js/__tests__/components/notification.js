@@ -1,12 +1,12 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { expect } from 'chai';
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { SingleNotification } from '../../components/notification';
 const shell = window.require('electron').shell;
 
 function setup(props) {
-  const wrapper = mount(<SingleNotification {...props} />);
+  const wrapper = shallow(<SingleNotification {...props} />);
 
   return {
     props: props,
