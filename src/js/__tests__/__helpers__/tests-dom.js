@@ -9,9 +9,7 @@ global.navigator = {userAgent: 'node.js'};
 window.require = function () {
   return {
     ipcRenderer: {
-      send: function () {
-        // Fake sending message to ipcMain
-      }
+      send: (type) => sinon.spy()
     },
     shell: {
       openExternal: (url) => sinon.spy()

@@ -3,6 +3,8 @@ import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
 import { Navigation } from '../../components/navigation';
+const ipcRenderer = window.require('electron').ipcRenderer;
+const shell = window.require('electron').shell;
 
 function setup(props) {
   const options = {
@@ -113,6 +115,54 @@ describe('components/navigation.js', function () {
     expect(wrapper.find('.fa-chevron-left').length).to.equal(1);
 
     Navigation.prototype.componentDidMount.restore();
+
+  });
+
+  it('should quit the app', function () {
+    const props = {
+      isFetching: false,
+      notifications: [],
+      token: null,
+      location: {
+        pathname: ''
+      }
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.fa-refresh').length).to.equal(0);
+    expect(wrapper.find('.fa-sign-out').length).to.equal(0);
+    expect(wrapper.find('.fa-power-off').length).to.equal(1);
+
+    wrapper.find('.fa-power-off').simulate('click');
+    expect(ipcRenderer.send).to.have.been.calledOnce;
+    ipcRenderer.send().reset();
+
+  });
+
+  it('should open the gitify repo in browser', function () {
+
+    const props = {
+      isFetching: false,
+      notifications: [],
+      token: null,
+      location: {
+        pathname: ''
+      }
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.fa-refresh').length).to.equal(0);
+    expect(wrapper.find('.fa-sign-out').length).to.equal(0);
+    expect(wrapper.find('.fa-power-off').length).to.equal(1);
+
+    wrapper.find('.logo').simulate('click');
+
+    expect(shell.openExternal).to.have.been.calledOnce;
+    shell.openExternal().reset();
 
   });
 
