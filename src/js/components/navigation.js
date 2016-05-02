@@ -6,7 +6,7 @@ const shell = window.require('electron').shell;
 
 import { fetchNotifications, logout } from '../actions';
 
-class Navigation extends React.Component {
+export class Navigation extends React.Component {
   componentDidMount() {
     var self = this;
     var iFrequency = 60000;
