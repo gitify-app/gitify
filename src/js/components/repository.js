@@ -6,7 +6,7 @@ const shell = window.require('electron').shell;
 import { markRepoNotifications } from '../actions';
 import SingleNotification from './notification';
 
-class Repository extends React.Component {
+export class Repository extends React.Component {
 
   constructor(props) {
     super(props);

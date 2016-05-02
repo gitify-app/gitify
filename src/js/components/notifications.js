@@ -10,7 +10,7 @@ const shell = window.require('electron').shell;
 import AllRead from './all-read';
 import Repository from './repository';
 
-class NotificationsPage extends React.Component {
+export class NotificationsPage extends React.Component {
   areIn(repoFullName, searchTerm) {
     return repoFullName.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0;
   }
