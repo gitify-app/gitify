@@ -1,10 +1,10 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
-// import sinon from 'sinon';
 import { NotificationsPage } from '../../components/notifications';
+import AllRead from '../../components/all-read';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-// const shell = window.require('electron').shell;
+const shell = window.require('electron').shell;
 
 function setup(props) {
   const wrapper = shallow(<NotificationsPage {...props} />);
@@ -54,17 +54,115 @@ describe('components/notifications.js', function () {
     const { wrapper } = setup(props);
 
     expect(wrapper).to.exist;
-
-    // console.log();
-    // console.log();
-    // console.log(wrapper);
-    // console.log(wrapper.find(Repository));
-    // console.log();
-    // console.log();
-
-    expect(wrapper.find(ReactCSSTransitionGroup).children().length).to.equal(notifications.length);
-    // expect(wrapper.find('.octicon').first().props().className).to.contain('octicon-issue-opened');
+    expect(wrapper.find(ReactCSSTransitionGroup).children().length).to.equal(2);
+    expect(wrapper.find('.fork').text()).to.contain('Star Gitify on GitHub');
+    expect(wrapper.find('.errored').length).to.equal(0);
+    expect(wrapper.find('.all-read').length).to.equal(0);
 
   });
 
+  it('should render an error message if failed', function () {
+
+    const props = {
+      failed: true,
+      isFetching: false,
+      notifications: [],
+      searchQuery: ''
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find(ReactCSSTransitionGroup).length).to.equal(0);
+    expect(wrapper.find('.loading-container').length).to.equal(0);
+    expect(wrapper.find('.fork').length).to.equal(0);
+    expect(wrapper.find('.all-read').length).to.equal(0);
+
+    expect(wrapper.find('.errored').length).to.equal(1);
+    expect(wrapper.find('.errored').children().find('h3').text()).to.contain('Oops something went wrong');
+
+  });
+
+  it('should render the all read screen if no notifications and no search query', function () {
+
+    const props = {
+      failed: false,
+      isFetching: false,
+      notifications: [],
+      searchQuery: ''
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find(ReactCSSTransitionGroup).length).to.equal(0);
+    expect(wrapper.find('.loading-container').length).to.equal(0);
+    expect(wrapper.find('.fork').length).to.equal(0);
+    expect(wrapper.find('.all-read').length).to.equal(0);
+    expect(wrapper.find('.errored').length).to.equal(0);
+
+    expect(wrapper.find(AllRead).length).to.equal(1);
+
+  });
+
+  it('should not find any results for a search query', function () {
+
+    const props = {
+      failed: false,
+      isFetching: false,
+      notifications: notifications,
+      searchQuery: 'llama'
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find(ReactCSSTransitionGroup).children().length).to.equal(0);
+    expect(wrapper.find('.errored').length).to.equal(0);
+    expect(wrapper.find('.fork').length).to.equal(0);
+    expect(wrapper.find('h3').text()).to.contain('No Search Results.');
+
+  });
+
+  it('should find a result for a search query', function () {
+
+    const props = {
+      failed: false,
+      isFetching: false,
+      notifications: notifications,
+      searchQuery: 'trevor'
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.all-read').length).to.equal(0);
+    expect(wrapper.find('.errored').length).to.equal(0);
+    expect(wrapper.find(AllRead).length).to.equal(0);
+
+    expect(wrapper.find(ReactCSSTransitionGroup).children().length).to.equal(1);
+    expect(wrapper.find('.fork').length).to.equal(1);
+
+  });
+
+  it('open the gitify repo in browser', function () {
+
+    const props = {
+      failed: false,
+      isFetching: false,
+      notifications: notifications,
+      searchQuery: ''
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find(ReactCSSTransitionGroup).children().length).to.equal(2);
+    expect(wrapper.find('.fork').length).to.equal(1);
+
+    wrapper.find('.fork').simulate('click');
+    expect(shell.openExternal).to.have.been.calledOnce;
+    shell.openExternal().reset();
+
+  });
 });

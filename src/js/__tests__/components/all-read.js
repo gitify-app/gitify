@@ -1,12 +1,12 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { expect } from 'chai';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import sinon from 'sinon';
 import AllRead from '../../components/all-read';
 
 function setup() {
   const props = {};
-  const wrapper = shallow(<AllRead {...props} />);
+  const wrapper = mount(<AllRead {...props} />);
 
   return {
     props: props,
