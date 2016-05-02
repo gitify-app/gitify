@@ -50,7 +50,67 @@ describe('components/navigation.js', function () {
     expect(wrapper.find('.fa-sign-out').length).to.equal(1);
     expect(wrapper.find('.fa-cog').length).to.equal(1);
     expect(wrapper.find('.fa-search').length).to.equal(1);
+    expect(wrapper.find('.fa-power-off').length).to.equal(0);
+    expect(wrapper.find('.fa-chevron-left').length).to.equal(0);
     expect(wrapper.find('.label-success').text()).to.equal(`${notifications.length}`);
+
+    Navigation.prototype.componentDidMount.restore();
+
+  });
+
+  it('should render itself & its children (logged out)', function () {
+    const props = {
+      isFetching: false,
+      notifications: [],
+      token: null,
+      location: {
+        pathname: '/home'
+      }
+    };
+
+    sinon.spy(Navigation.prototype, 'componentDidMount');
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(Navigation.prototype.componentDidMount).to.have.been.calledOnce;
+    expect(wrapper.find('.fa-refresh').length).to.equal(0);
+    expect(wrapper.find('.fa-sign-out').length).to.equal(0);
+    expect(wrapper.find('.fa-cog').length).to.equal(0);
+    expect(wrapper.find('.fa-search').length).to.equal(0);
+    expect(wrapper.find('.fa-power-off').length).to.equal(1);
+    expect(wrapper.find('.fa-chevron-left').length).to.equal(0);
+    expect(wrapper.find('.label-success').length).to.equal(0);
+
+    Navigation.prototype.componentDidMount.restore();
+
+  });
+
+  it('should render itself & its children (logged in/settings page)', function () {
+    const props = {
+      isFetching: false,
+      notifications: notifications,
+      token: 'IMLOGGEDIN',
+      location: {
+        pathname: '/settings'
+      }
+    };
+
+    sinon.spy(Navigation.prototype, 'componentDidMount');
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(Navigation.prototype.componentDidMount).to.have.been.calledOnce;
+    expect(wrapper.find('.fa-refresh').length).to.equal(1);
+    expect(wrapper.find('.fa-refresh').first().hasClass('fa-spin')).to.be.false;
+    expect(wrapper.find('.fa-sign-out').length).to.equal(1);
+    expect(wrapper.find('.fa-cog').length).to.equal(1);
+    expect(wrapper.find('.fa-search').length).to.equal(1);
+    expect(wrapper.find('.fa-power-off').length).to.equal(0);
+    expect(wrapper.find('.label-success').text()).to.equal(`${notifications.length}`);
+
+    expect(wrapper.find('.fa-chevron-left').length).to.equal(1);
 
     Navigation.prototype.componentDidMount.restore();
 
