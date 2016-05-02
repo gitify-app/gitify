@@ -13,8 +13,8 @@ function setup(props) {
         pathname: ''
       },
       router: {
-        push: () => true,
-        replace: () => true
+        push: sinon.spy(),
+        replace: sinon.spy()
       }
     }
   };
@@ -155,14 +155,59 @@ describe('components/navigation.js', function () {
     const { wrapper } = setup(props);
 
     expect(wrapper).to.exist;
-    expect(wrapper.find('.fa-refresh').length).to.equal(0);
-    expect(wrapper.find('.fa-sign-out').length).to.equal(0);
     expect(wrapper.find('.fa-power-off').length).to.equal(1);
 
     wrapper.find('.logo').simulate('click');
 
     expect(shell.openExternal).to.have.been.calledOnce;
     shell.openExternal().reset();
+
+  });
+
+  it('should go back to home from settings', function () {
+
+    const props = {
+      isFetching: false,
+      notifications: notifications.length,
+      token: 'IMLOGGEDIN',
+      location: {
+        pathname: '/settings'
+      }
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.fa-cog').length).to.equal(1);
+
+    wrapper.find('.fa-chevron-left').simulate('click');
+    expect(wrapper.context().router.push).to.have.been.calledOnce;
+
+  });
+
+  it('should press the logout', function () {
+
+    const props = {
+      logout: sinon.spy(),
+      isFetching: false,
+      notifications: notifications.length,
+      token: 'IMLOGGEDIN',
+      location: {
+        pathname: '/settings'
+      }
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.fa-cog').length).to.equal(1);
+
+    wrapper.find('.fa-sign-out').simulate('click');
+    expect(wrapper.context().router.push).to.have.been.calledOnce;
+    expect(wrapper.props().logout).to.have.been.calledOnce;
+
+    wrapper.context().router.push.reset();
+    wrapper.props().logout.reset();
 
   });
 
