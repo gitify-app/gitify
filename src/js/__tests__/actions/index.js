@@ -73,6 +73,75 @@ describe('actions/index.js', () => {
 
   });
 
+  it('should check auth status', () => {
+
+    const token = 'HELLO';
+    localStorage.setItem('token', token);
+
+    const expectedAction = {
+      type: actions.CHECK_AUTH,
+      token
+    };
+
+    expect(actions.checkAuth()).to.eql(expectedAction);
+
+  });
+
+  it('should fetch notifications with success', () => {
+    const notifications = [
+      {
+        id: 1,
+        title: 'This is a notification.'
+      },
+      {
+        id: 2,
+        title: 'This is another one.'
+      }
+    ];
+
+    nock('https://api.github.com/')
+      .get('/notifications')
+      .reply(200, {
+        body: notifications
+      });
+
+    const expectedActions = [
+      { type: actions.NOTIFICATIONS_REQUEST, payload: undefined, meta: undefined },
+      { type: actions.NOTIFICATIONS_SUCCESS, payload: { body: notifications }, meta: undefined }
+    ];
+
+    const store = createMockStore({ response: [] }, expectedActions);
+
+    return store.dispatch(actions.fetchNotifications())
+      .then(() => { // return of async actions
+        expect(store.getActions()).to.eql(expectedActions);
+      });
+
+  });
+
+  it('should fetch notifications with failure', () => {
+    const message = 'Oops! Something went wrong.';
+
+    nock('https://api.github.com/')
+      .get('/notifications')
+      .reply(400, {
+        body: { message }
+      });
+
+    const expectedActions = [
+      { type: actions.NOTIFICATIONS_REQUEST, payload: undefined, meta: undefined },
+      { type: actions.NOTIFICATIONS_FAILURE, payload: { body: { message } }, error: true, meta: undefined }
+    ];
+
+    const store = createMockStore({ response: [] }, expectedActions);
+
+    return store.dispatch(actions.fetchNotifications())
+      .then(() => { // return of async actions
+        expect(store.getActions()).to.eql(expectedActions);
+      });
+
+  });
+
   it('should search the notifications with a query', () => {
 
     const query = 'hello';
