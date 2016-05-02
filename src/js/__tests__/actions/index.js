@@ -1,7 +1,43 @@
 import { expect } from 'chai';
+import nock from 'nock';
+import { apiMiddleware } from 'redux-api-middleware';
+import configureMockStore from 'redux-mock-store';
 import * as actions from '../../actions';
 
+const middlewares = [ apiMiddleware ];
+const createMockStore = configureMockStore(middlewares);
+
 describe('actions/index.js', () => {
+  afterEach(() => {
+    nock.cleanAll();
+  });
+
+  it('should login a user', () => {
+
+    nock('https://github.com/')
+      .post('/login/oauth/access_token', {
+
+      })
+      .reply(200, {
+        body: { access_token: 'THISISATOKEN' }
+      });
+
+    const code = 'THISISACODE';
+
+    const expectedActions = [
+      { type: actions.LOGIN_REQUEST, code },
+      { type: actions.LOGIN_SUCCESS, body: { access_token: 'THISISATOKEN' } }
+    ];
+
+    const store = createMockStore({ response: [] }, expectedActions);
+
+    return store.dispatch(actions.loginUser(code))
+      .then(() => { // return of async actions
+        expect(store.getActions()).to.eql(expectedActions);
+      });
+
+  });
+
   it('should logout a user', () => {
 
     const expectedAction = {
