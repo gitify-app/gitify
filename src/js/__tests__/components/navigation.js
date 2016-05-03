@@ -33,8 +33,14 @@ describe('components/navigation.js', function () {
   const notifications = [{ id: 1 }, { id: 2 }];
 
   beforeEach(function() {
+    this.clock = sinon.useFakeTimers();
+
     ipcRenderer.send.reset();
     shell.openExternal.reset();
+  });
+
+  afterEach(function() {
+    this.clock = sinon.restore();
   });
 
   it('should render itself & its children (logged in)', function () {
@@ -66,7 +72,29 @@ describe('components/navigation.js', function () {
 
   });
 
+  it('should load notifications after 60000ms', function () {
+
+    const props = {
+      isFetching: false,
+      notifications: notifications,
+      fetchNotifications: sinon.spy(),
+      token: 'IMLOGGEDIN',
+      location: {
+        pathname: '/home'
+      }
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+
+    this.clock.tick(60000);
+    expect(props.fetchNotifications).to.have.been.calledOnce;
+
+  });
+
   it('should render itself & its children (logged out)', function () {
+
     const props = {
       isFetching: false,
       notifications: [],
@@ -95,6 +123,7 @@ describe('components/navigation.js', function () {
   });
 
   it('should render itself & its children (logged in/settings page)', function () {
+
     const props = {
       isFetching: false,
       notifications: notifications,
@@ -125,6 +154,7 @@ describe('components/navigation.js', function () {
   });
 
   it('should quit the app', function () {
+
     const props = {
       isFetching: false,
       notifications: [],
@@ -198,8 +228,10 @@ describe('components/navigation.js', function () {
 
     const props = {
       logout: sinon.spy(),
+      toggleSearch: sinon.spy(),
       isFetching: false,
       notifications: notifications.length,
+      showSearch: true,
       token: 'IMLOGGEDIN',
       location: {
         pathname: '/settings'
@@ -214,6 +246,7 @@ describe('components/navigation.js', function () {
     wrapper.find('.fa-sign-out').simulate('click');
 
     expect(props.logout).to.have.been.calledOnce;
+    expect(props.toggleSearch).to.have.been.calledOnce;
 
     expect(ipcRenderer.send).to.have.been.calledOnce;
     expect(ipcRenderer.send).to.have.been.calledWith('update-icon', 'IconPlain');
@@ -223,6 +256,58 @@ describe('components/navigation.js', function () {
 
     context.router.replace.reset();
     props.logout.reset();
+    props.toggleSearch.reset();
+
+  });
+
+  it('should go to settings from home', function () {
+
+    const props = {
+      toggleSearch: sinon.spy(),
+      isFetching: false,
+      notifications: notifications.length,
+      token: 'IMLOGGEDIN',
+      showSearch: true,
+      location: {
+        pathname: '/home'
+      }
+    };
+
+    const { wrapper, context } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.fa-cog').length).to.equal(1);
+
+    wrapper.find('.fa-cog').simulate('click');
+    expect(props.toggleSearch).to.have.been.calledOnce;
+
+    expect(context.router.push).to.have.been.calledOnce;
+    expect(context.router.push).to.have.been.calledWith('/settings');
+
+    context.router.push.reset();
+
+  });
+
+
+  it('should refresh the notifications', function () {
+
+    const props = {
+      fetchNotifications: sinon.spy(),
+      isFetching: false,
+      notifications: notifications.length,
+      token: 'IMLOGGEDIN',
+      location: {
+        pathname: '/home'
+      }
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.fa-refresh').length).to.equal(1);
+
+    wrapper.find('.fa-refresh').simulate('click');
+    expect(props.fetchNotifications).to.have.been.calledOnce;
 
   });
 
