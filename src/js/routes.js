@@ -7,7 +7,7 @@ import LoginPage from './components/login';
 import NotificationsPage from './components/notifications';
 import SettingsPage from './components/settings';
 
-class NotFound extends React.Component {
+export class NotFound extends React.Component {
   render() {
     return <h2>Not found</h2>;
   }
