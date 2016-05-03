@@ -9,13 +9,9 @@ const createMockStore = configureMockStore(middlewares);
 
 describe('routes.js', () => {
 
-  beforeEach(function() {
-
-  });
-
   it('should return the routes (logged in)', () => {
 
-    const store = createMockStore({ auth: {token: null} });
+    const store = createMockStore({ auth: {token: 'HELLO'} });
     const routes = getRoutes(store);
 
     expect(routes).to.be.ok;
@@ -26,7 +22,7 @@ describe('routes.js', () => {
 
   it('should return the routes (logged out)', () => {
 
-    const store = createMockStore({ auth: {token: 'HELLO'} });
+    const store = createMockStore({ auth: {token: null} });
     const routes = getRoutes(store);
 
     expect(routes).to.be.ok;
