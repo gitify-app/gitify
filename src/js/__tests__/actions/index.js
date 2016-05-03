@@ -200,6 +200,70 @@ describe('actions/index.js', () => {
 
   });
 
+
+  it('should mark a repository\'s notifications as read with success', () => {
+    const loginId = 'ekonstantinidis';
+    const repoId = 'gitify';
+    const repoFullName = `${loginId}/${repoId}`;
+    const message = 'Success.';
+
+    nock('https://api.github.com/')
+      .put(`/repos/${loginId}/${repoId}/notifications`)
+      .reply(200, {
+        body: message
+      });
+
+    const expectedActions = [
+      { type: actions.MARK_REPO_NOTIFICATION_REQUEST, payload: undefined, meta: undefined },
+      { type: actions.MARK_REPO_NOTIFICATION_SUCCESS, payload: { body: message }, meta: { repoFullName } }
+    ];
+
+    const store = createMockStore({ response: [] }, expectedActions);
+
+    return store.dispatch(actions.markRepoNotifications(loginId, repoId, repoFullName))
+      .then(() => { // return of async actions
+        expect(store.getActions()).to.eql(expectedActions);
+      });
+
+  });
+
+  it('should mark a repository\'s notifications as read with failure', () => {
+    const loginId = 'ekonstantinidis';
+    const repoId = 'gitify';
+    const repoFullName = `${loginId}/${repoId}`;
+    const message = 'Oops! Something went wrong.';
+
+    nock('https://api.github.com/')
+    .put(`/repos/${loginId}/${repoId}/notifications`)
+      .reply(400, {
+        body: { message }
+      });
+
+    const expectedPayload = {
+      message: '400 - Bad Request',
+      name: 'ApiError',
+      status: 400,
+      response: {
+        body: { message }
+      },
+      statusText: 'Bad Request'
+    };
+
+    const expectedActions = [
+      { type: actions.MARK_REPO_NOTIFICATION_REQUEST, payload: undefined, meta: undefined },
+      { type: actions.MARK_REPO_NOTIFICATION_FAILURE, payload: expectedPayload, error: true, meta: undefined }
+    ];
+
+    const store = createMockStore({ response: [] }, expectedActions);
+
+    return store.dispatch(actions.markRepoNotifications(loginId, repoId, repoFullName))
+      .then(() => { // return of async actions
+        expect(store.getActions()).to.eql(expectedActions);
+      });
+
+  });
+
+
   it('should search the notifications with a query', () => {
 
     const query = 'hello';
