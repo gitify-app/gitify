@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { loginUser } from '../actions';
 import Constants from '../utils/constants';
 
-class LoginPage extends React.Component {
+export class LoginPage extends React.Component {
   componentWillReceiveProps(nextProps) {
     const isLoggedIn = nextProps.token !== null;
     if (isLoggedIn) {
