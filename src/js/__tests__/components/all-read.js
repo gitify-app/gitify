@@ -23,7 +23,7 @@ describe('components/all-read.js', function () {
     const { wrapper } = setup();
 
     expect(wrapper).to.exist;
-    expect(AllRead.prototype.componentDidMount.calledOnce).to.be.true;
+    expect(AllRead.prototype.componentDidMount).to.have.been.calledOnce;
     expect(wrapper.find('h4').text()).to.equal('No new notifications.');
 
     AllRead.prototype.componentDidMount.restore();

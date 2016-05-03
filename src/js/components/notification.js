@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 
 import { markNotification } from '../actions';
 
-class SingleNotification extends React.Component {
+export class SingleNotification extends React.Component {
 
   pressTitle() {
     this.openBrowser();

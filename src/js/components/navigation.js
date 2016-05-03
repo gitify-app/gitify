@@ -6,7 +6,7 @@ const shell = window.require('electron').shell;
 
 import { fetchNotifications, logout } from '../actions';
 
-class Navigation extends React.Component {
+export class Navigation extends React.Component {
   componentDidMount() {
     var self = this;
     var iFrequency = 60000;
@@ -29,7 +29,7 @@ class Navigation extends React.Component {
     this.context.router.push('/settings');
   }
 
-  logOut() {
+  logoutButton() {
     if (this.props.showSearch) {
       this.props.toggleSearch();
     }
@@ -61,7 +61,7 @@ class Navigation extends React.Component {
         <i title="Refresh" className={loadingClass} onClick={this.refreshNotifications.bind(this)} />
       );
       logoutIcon = (
-        <i title="Sign Out" className="fa fa-sign-out" onClick={this.logOut.bind(this)} />
+        <i title="Sign Out" className="fa fa-sign-out" onClick={this.logoutButton.bind(this)} />
       );
       settingsIcon = (
         <i title="Settings" className="fa fa-cog" onClick={this.goToSettings.bind(this)} />

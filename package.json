@@ -12,7 +12,7 @@
     "dist": "npm run release-js && npm run package && npm run codesign",
     "lint-js": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
     "lint-sass": "sass-lint -c .sass-lint.yml -v -q",
-    "mocha": "./node_modules/mocha/bin/mocha --opts src/js/__tests__/__helpers__/mocha.opts",
+    "mocha": "mocha --opts src/js/__tests__/__helpers__/mocha.opts",
     "coverage": "babel-node ./node_modules/istanbul/lib/cli cover node_modules/mocha/bin/_mocha -- --opts src/js/__tests__/__helpers__/mocha.opts",
     "test": "npm run lint-js && npm run lint-sass && npm run coverage",
     "start": "electron . --enable-logging"
@@ -94,10 +94,13 @@
     "jsdom": "=8.4.1",
     "json-loader": "=0.5.4",
     "mocha": "=2.4.5",
+    "nock": "=8.0.0",
     "node-sass": "=3.6.0",
+    "redux-mock-store": "=1.0.2",
     "sass-lint": "=1.7.0",
     "sass-loader": "=3.2.0",
     "sinon": "=1.17.3",
+    "sinon-chai": "=2.8.0",
     "style-loader": "=0.13.1",
     "webpack": "=1.13.0"
   }

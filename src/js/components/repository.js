@@ -6,17 +6,7 @@ const shell = window.require('electron').shell;
 import { markRepoNotifications } from '../actions';
 import SingleNotification from './notification';
 
-class Repository extends React.Component {
-
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      isRead: false,
-      errors: false
-    };
-  }
-
+export class Repository extends React.Component {
   openBrowser() {
     var url = this.props.repo[0].repository.html_url;
     shell.openExternal(url);
@@ -30,7 +20,6 @@ class Repository extends React.Component {
   }
 
   render() {
-    var self = this;
     var organisationName, repositoryName;
     const avatarUrl = this.props.repo[0].repository.owner.avatar_url;
 
@@ -56,18 +45,12 @@ class Repository extends React.Component {
           </div>
         </div>
 
-        {this.state.errors ?
-          <div className="alert alert-danger">
-            <strong>Oops!</strong> We couldn't mark this repo as read.
-          </div> : null
-        }
-
         <ReactCSSTransitionGroup
           transitionName="notification"
           transitionEnter={false}
           transitionLeaveTimeout={325}>
           {this.props.repo.map(function (obj) {
-            return <SingleNotification isRead={self.state.isRead} notification={obj} key={obj.id} />;
+            return <SingleNotification notification={obj} key={obj.id} />;
           })}
         </ReactCSSTransitionGroup>
 

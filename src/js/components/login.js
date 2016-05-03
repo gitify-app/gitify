@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { loginUser } from '../actions';
 import Constants from '../utils/constants';
 
-class LoginPage extends React.Component {
+export class LoginPage extends React.Component {
   componentWillReceiveProps(nextProps) {
     const isLoggedIn = nextProps.token !== null;
     if (isLoggedIn) {
@@ -48,7 +48,7 @@ class LoginPage extends React.Component {
       if (code) {
         self.requestGithubToken(code);
       } else if (error) {
-        alert('Oops! Something went wrong and we couldn\'t' +
+        alert('Oops! Something went wrong and we couldn\'t ' +
           'log you in using Github. Please try again.');
       }
     }
