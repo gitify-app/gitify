@@ -22,6 +22,7 @@ function setup(props) {
   const wrapper = mount(<Navigation {...props} />, options);
 
   return {
+    context: options.context,
     props: props,
     wrapper: wrapper,
   };
@@ -32,7 +33,8 @@ describe('components/navigation.js', function () {
   const notifications = [{ id: 1 }, { id: 2 }];
 
   beforeEach(function() {
-
+    ipcRenderer.send.reset();
+    shell.openExternal.reset();
   });
 
   it('should render itself & its children (logged in)', function () {
@@ -141,7 +143,7 @@ describe('components/navigation.js', function () {
 
     wrapper.find('.fa-power-off').simulate('click');
     expect(ipcRenderer.send).to.have.been.calledOnce;
-    ipcRenderer.send.reset();
+    expect(ipcRenderer.send).to.have.been.calledWith('app-quit');
 
   });
 
@@ -164,7 +166,7 @@ describe('components/navigation.js', function () {
     wrapper.find('.logo').simulate('click');
 
     expect(shell.openExternal).to.have.been.calledOnce;
-    shell.openExternal.reset();
+    expect(shell.openExternal).to.have.been.calledWith('http://www.github.com/ekonstantinidis/gitify');
 
   });
 
@@ -179,13 +181,16 @@ describe('components/navigation.js', function () {
       }
     };
 
-    const { wrapper } = setup(props);
+    const { wrapper, context } = setup(props);
 
     expect(wrapper).to.exist;
     expect(wrapper.find('.fa-cog').length).to.equal(1);
 
     wrapper.find('.fa-chevron-left').simulate('click');
-    expect(wrapper.context().router.push).to.have.been.calledOnce;
+    expect(context.router.push).to.have.been.calledOnce;
+    expect(context.router.push).to.have.been.calledWith('/notifications');
+
+    context.router.push.reset();
 
   });
 
@@ -201,20 +206,23 @@ describe('components/navigation.js', function () {
       }
     };
 
-    const { wrapper } = setup(props);
+    const { wrapper, context } = setup(props);
 
     expect(wrapper).to.exist;
     expect(wrapper.find('.fa-cog').length).to.equal(1);
 
     wrapper.find('.fa-sign-out').simulate('click');
 
-    // console.log(wrapper.context().router.push);
+    expect(props.logout).to.have.been.calledOnce;
 
-    // expect(wrapper.context().router.push).to.have.been.calledOnce;
-    expect(wrapper.props().logout).to.have.been.calledOnce;
+    expect(ipcRenderer.send).to.have.been.calledOnce;
+    expect(ipcRenderer.send).to.have.been.calledWith('update-icon', 'IconPlain');
 
-    // wrapper.context().router.push.reset();
-    wrapper.props().logout.reset();
+    expect(context.router.replace).to.have.been.calledOnce;
+    expect(context.router.replace).to.have.been.calledWith('/login');
+
+    context.router.replace.reset();
+    props.logout.reset();
 
   });
 
