@@ -12,6 +12,28 @@ global.localStorage = {
   }
 };
 
+// Audio
+global.Audio = function (filename) {
+  this.filename = filename;
+
+  return {
+    play: function () {
+      return sinon.spy();
+    }
+  };
+};
+
+// Notification
+global.Notification = function (title, options) {
+  this.title = title;
+
+  return {
+    onclick: function () {
+      return sinon.spy();
+    }
+  };
+};
+
 // Mocks for Electron
 window.require = function () {
   return {
