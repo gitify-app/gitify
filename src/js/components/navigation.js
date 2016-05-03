@@ -29,7 +29,7 @@ export class Navigation extends React.Component {
     this.context.router.push('/settings');
   }
 
-  logOut() {
+  logoutButton() {
     if (this.props.showSearch) {
       this.props.toggleSearch();
     }
@@ -61,7 +61,7 @@ export class Navigation extends React.Component {
         <i title="Refresh" className={loadingClass} onClick={this.refreshNotifications.bind(this)} />
       );
       logoutIcon = (
-        <i title="Sign Out" className="fa fa-sign-out" onClick={this.logOut.bind(this)} />
+        <i title="Sign Out" className="fa fa-sign-out" onClick={this.logoutButton.bind(this)} />
       );
       settingsIcon = (
         <i title="Settings" className="fa fa-cog" onClick={this.goToSettings.bind(this)} />

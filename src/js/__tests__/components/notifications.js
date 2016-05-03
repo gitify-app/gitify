@@ -162,7 +162,7 @@ describe('components/notifications.js', function () {
 
     wrapper.find('.fork').simulate('click');
     expect(shell.openExternal).to.have.been.calledOnce;
-    shell.openExternal().reset();
+    shell.openExternal.reset();
 
   });
 });

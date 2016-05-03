@@ -5,13 +5,16 @@ const ipcRenderer = window.require('electron').ipcRenderer;
 
 describe('utils/helpers.js', () => {
 
+  beforeEach(function() {
+    ipcRenderer.send.reset();
+  });
+
   it('should send mark the icons as active', () => {
 
     const notifications = [1, 2, 3];
     Helpers.updateTrayIcon(notifications);
     expect(ipcRenderer.send).to.have.been.calledOnce;
-
-    ipcRenderer.send().reset();
+    expect(ipcRenderer.send).to.have.been.calledWith('update-icon', 'TrayActive');
 
   });
 
@@ -20,8 +23,7 @@ describe('utils/helpers.js', () => {
     const notifications = [];
     Helpers.updateTrayIcon(notifications);
     expect(ipcRenderer.send).to.have.been.calledOnce;
-
-    ipcRenderer.send().reset();
+    expect(ipcRenderer.send).to.have.been.calledWith('update-icon', 'TrayIdle');
 
   });
 });

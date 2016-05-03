@@ -57,6 +57,15 @@ describe('utils/notifications.js', () => {
         repository: {
           full_name: 'ekonstantinidis/gitify'
         }
+      },
+      {
+        subject: {
+          title: 'Hello. This is another notification',
+          type: 'PullRequest'
+        },
+        repository: {
+          full_name: 'ekonstantinidis/django-rest-framework-docs'
+        }
       }
     ];
 
@@ -79,6 +88,40 @@ describe('utils/notifications.js', () => {
     expect(NotificationsUtils.raiseNativeNotification).to.not.have.been.calledOnce;
     expect(NotificationsUtils.raiseSoundNotification).to.not.have.been.calledOnce;
 
+  });
+
+  it('should raise a single native notification (with different icons)', () => {
+
+    const settings = {
+      playSound: false,
+      showNotifications: true
+    };
+
+    const notification = {
+      subject: {
+        title: 'Hello. This is a notification',
+        type: 'Issue'
+      },
+      repository: {
+        full_name: 'ekonstantinidis/gitify'
+      }
+    };
+
+    NotificationsUtils.setup([notification], settings);
+    expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
+    expect(NotificationsUtils.raiseSoundNotification).to.not.have.been.calledOnce;
+
+    NotificationsUtils.raiseNativeNotification.reset();
+
+    NotificationsUtils.setup([{
+      ...notification,
+      subject: {
+        ...notification.subject,
+        type: 'PullRequest'
+      }
+    }], settings);
+
+    expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
   });
 
 });

@@ -30,7 +30,7 @@ describe('components/search.js', function () {
     expect(wrapper.find('.octicon-x').length).to.equal(0);
 
     wrapper.find('input').props().onChange({target: {value: 'hello'}});
-    expect(wrapper.props().searchNotifications).to.have.been.calledOnce;
+    expect(props.searchNotifications).to.have.been.calledOnce;
 
   });
 
@@ -87,7 +87,7 @@ describe('components/search.js', function () {
 
     wrapper.setProps({showSearch: false});
 
-    expect(wrapper.props().clearSearch).to.have.been.calledOnce;
+    expect(props.clearSearch).to.have.been.calledOnce;
     expect(SearchBar.prototype.componentWillReceiveProps).to.have.been.calledOnce;
 
   });
