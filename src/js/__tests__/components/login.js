@@ -126,7 +126,6 @@ describe('components/login.js', function () {
 
   });
 
-
   it('should open the login window and get an error', function () {
 
     const error = 'Oops! Something went wrong.';
@@ -161,6 +160,35 @@ describe('components/login.js', function () {
     expect(alert).to.have.been.calledWith(
       'Oops! Something went wrong and we couldn\'t log you in using Github. Please try again.'
     );
+
+    eventStub.restore();
+
+  });
+
+  it('should close the browser window before logging in', function () {
+
+    const eventStub = sinon.stub(BrowserWindow(), 'on', function (event, callback) {
+      if (event === 'close') {
+        callback();
+      }
+    });
+
+    const props = {
+      loginUser: sinon.spy(),
+      token: null,
+      response: {},
+      failed: false,
+      isFetching: false
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+
+    wrapper.find('.btn').simulate('click');
+
+    expect(BrowserWindow().loadURL).to.have.been.calledOnce;
+    expect(props.loginUser).to.not.have.been.calledOnce;
 
     eventStub.restore();
 

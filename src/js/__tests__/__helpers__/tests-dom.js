@@ -43,7 +43,7 @@ const browserWindow = {
   webContents: {
     on: () => {},
   },
-  on: sinon.spy(),
+  on: () => {},
   close: sinon.spy(),
   destroy: sinon.spy()
 };
