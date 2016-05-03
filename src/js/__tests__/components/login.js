@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { LoginPage } from '../../components/login';
 
+const BrowserWindow = window.require('electron').remote.BrowserWindow;
 const ipcRenderer = window.require('electron').ipcRenderer;
 const shell = window.require('electron').shell;
 
@@ -47,6 +48,50 @@ describe('components/login.js', function () {
 
     expect(wrapper).to.exist;
     expect(wrapper.find('.desc').text()).to.equal('GitHub notifications in your menu bar.');
+
+  });
+
+  it('should open the login window and get a code successfully', function () {
+
+    console.log();
+    console.log();
+    console.log(BrowserWindow().webContents);
+    console.log();
+    console.log();
+
+    // BrowserWindow.webContents.on.restore();
+    // sinon.spy(BrowserWindow.webContents, 'on');
+
+    // sinon.stub(BrowserWindow().webContents, 'on', function (event, callback) {
+    //   console.log('---------');
+    //   console.log('---------');
+    //   console.log(event);
+    //   console.log('---------');
+    //   console.log('---------');
+    //   callback('will-navigate', 'http://www.github.com/?code=123123123');
+    // });
+
+    const props = {
+      loginUser: sinon.spy(),
+      token: null,
+      response: {},
+      failed: false,
+      isFetching: false
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+
+    wrapper.find('.btn').simulate('click');
+    // expect(BrowserWindow).to.have.been.calledWithNew;
+
+    // expect(BrowserWindow().loadURL).to.have.been.calledOnce;
+    expect(BrowserWindow().loadURL).to.have.been.calledWith('asd');
+    // expect(props.loginUser).to.have.been.calledOnce;
+    // expect(props.loginUser).to.have.been.calledWith('asd');
+
+    // BrowserWindow.prototype.webContents.restore();
 
   });
 
