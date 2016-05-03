@@ -46,10 +46,9 @@ export class LoginPage extends React.Component {
 
       // If there is a code, proceed to get token from github
       if (code) {
-        console.log('asdsads');
         self.requestGithubToken(code);
       } else if (error) {
-        alert('Oops! Something went wrong and we couldn\'t' +
+        alert('Oops! Something went wrong and we couldn\'t ' +
           'log you in using Github. Please try again.');
       }
     }
