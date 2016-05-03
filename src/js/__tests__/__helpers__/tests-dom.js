@@ -36,6 +36,17 @@ global.Notification = function (title, options) {
 };
 
 // Mocks for Electron
+
+const browserWindow = {
+  loadURL: sinon.spy(),
+  webContents: {
+    on: () => {},
+  },
+  on: sinon.spy(),
+  close: sinon.spy(),
+  destroy: sinon.spy()
+};
+
 const requireElectron = {
   ipcRenderer: {
     send: sinon.spy()
@@ -45,17 +56,9 @@ const requireElectron = {
   },
   remote: {
     BrowserWindow: function () {
-      return {
-        loadURL: sinon.spy(),
-        webContents: {
-          on: () => {},
-        },
-        on: sinon.spy(),
-        close: sinon.spy(),
-        destroy: sinon.spy()
-      };
+      return browserWindow;
     }
-  },
+  }
 };
 
 window.require = function () {

@@ -20,12 +20,6 @@ export class LoginPage extends React.Component {
 
   authGithub () {
     var self = this;
-    console.log('!@£@!£!@£@!£@!£@');
-    console.log('!@£@!£!@£@!£@!£@');
-    console.log('!@£@!£!@£@!£@!£@');
-    console.log('!@£@!£!@£@!£@!£@');
-    console.log('!@£@!£!@£@!£@!£@');
-    console.log('!@£@!£!@£@!£@!£@');
 
     //Build the OAuth consent page URL
     var authWindow = new BrowserWindow({
@@ -38,11 +32,7 @@ export class LoginPage extends React.Component {
     });
     var githubUrl = 'https://github.com/login/oauth/authorize?';
     var authUrl = githubUrl + 'client_id=' + Constants.CLIENT_ID + '&scope=' + Constants.SCOPE;
-    console.log('asdsadsads');
-    console.log('asdsadsads');
     authWindow.loadURL(authUrl);
-    console.log('asdsadsads');
-    console.log('asdsadsads');
 
     function handleCallback (url) {
       var raw_code = /code=([^&]*)/.exec(url) || null;

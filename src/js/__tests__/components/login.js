@@ -53,12 +53,6 @@ describe('components/login.js', function () {
 
   it('should open the login window and get a code successfully', function () {
 
-    console.log();
-    console.log();
-    console.log(BrowserWindow().webContents);
-    console.log();
-    console.log();
-
     // BrowserWindow.webContents.on.restore();
     // sinon.spy(BrowserWindow.webContents, 'on');
 
@@ -70,6 +64,9 @@ describe('components/login.js', function () {
     //   console.log('---------');
     //   callback('will-navigate', 'http://www.github.com/?code=123123123');
     // });
+
+    const expectedUrl = 'https://github.com/login/oauth/' +
+      'authorize?client_id=3fef4433a29c6ad8f22c&scope=user:email,notifications';
 
     const props = {
       loginUser: sinon.spy(),
@@ -84,14 +81,13 @@ describe('components/login.js', function () {
     expect(wrapper).to.exist;
 
     wrapper.find('.btn').simulate('click');
-    // expect(BrowserWindow).to.have.been.calledWithNew;
 
-    // expect(BrowserWindow().loadURL).to.have.been.calledOnce;
-    expect(BrowserWindow().loadURL).to.have.been.calledWith('asd');
+    expect(BrowserWindow().loadURL).to.have.been.calledOnce;
+    expect(BrowserWindow().loadURL).to.have.been.calledWith(expectedUrl);
     // expect(props.loginUser).to.have.been.calledOnce;
     // expect(props.loginUser).to.have.been.calledWith('asd');
 
-    // BrowserWindow.prototype.webContents.restore();
+    // BrowserWindow.prototype.webContents.on.reset();
 
   });
 
