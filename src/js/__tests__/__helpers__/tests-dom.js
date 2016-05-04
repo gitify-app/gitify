@@ -15,7 +15,8 @@ global.localStorage = {
   getItem: function (key) { return this.store[key]; },
   setItem: function (key, item) {
     this.store[key] = item;
-  }
+  },
+  removeItem: sinon.spy()
 };
 
 // Audio
