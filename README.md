@@ -18,7 +18,8 @@ It has been a while since this app was made so I decided to give it a good revam
 - [x] Use ES6 - Because ES6!
 - [x] Move from Reflux to Redux - I've spent some time rewriting gitify to redux. It's just amazing.
 - [x] Update Bootstrap to version 4 - Which means move from LESS to SCSS.
-- [x] `90%` Rewrite tests with Mocha - Since gitify is moving from Reflux to Redux, all tests have to be rewritten.
+- [x] Rewrite tests with Mocha - Since gitify is moving from Reflux to Redux, all tests have to be rewritten.
+- [x] Move to Codecov for coverage with new tests
 - [ ] Revamp the UI. From Scratch?
 - [ ] Rebranding - New Logo! Fresh stuff!
 
@@ -75,10 +76,16 @@ To publish a new version, you also need to codesign the app running `npm run cod
 
 
 ### Tests
-There are 2 types of tests: `jest` and `eslint`.
-To run the tests:
+There are 2 linters for `js` & `scss` and unit tests with `mocha`.
 
-    npm test
+    // Run all tests
+    npm run test
+
+    // Run only unit tests
+    npm run mocha
+
+    // Run unit tests with coverage
+    npm run coverage
 
 
 ### Contributing
