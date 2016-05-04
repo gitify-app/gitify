@@ -1,160 +1,96 @@
-/* global jest, describe, beforeEach, it, expect */
+import React from 'react'; // eslint-disable-line no-unused-vars
+import { expect } from 'chai';
+import { shallow } from 'enzyme';
+import sinon from 'sinon';
+import { Repository } from '../../components/repository';
+// const ipcRenderer = window.require('electron').ipcRenderer;
+const shell = window.require('electron').shell;
 
-jest.dontMock('reflux');
-jest.dontMock('../../actions/actions.js');
-jest.dontMock('../../utils/api-requests');
-jest.dontMock('../../components/repository.js');
-jest.dontMock('../../stores/auth.js');
-jest.dontMock('../../stores/notifications.js');
+function setup(props) {
+  const wrapper = shallow(<Repository {...props} />);
 
-var React = require('react');
-var TestUtils = require('react-addons-test-utils');
+  return {
+    props: props,
+    wrapper: wrapper,
+  };
+};
 
-describe('Test for Repository Component', function () {
+describe('components/repository.js', function () {
 
-  var apiRequests, Actions, Repository;
-
-  beforeEach(function () {
-
-    // Mocks for Electron
-    window.require = function () {
-      return {
-        shell: {
-          openExternal: function () {
-            // Fake sending message to ipcMain
-          }
-        },
+  const repository = [{
+    repository: {
+      full_name: 'ekonstantinidis/gitify',
+      html_url: 'http://github.com/ekonstantinidis/gitify/issues/123',
+      name: 'gitify',
+      owner: {
+        avatar_url: 'http://manos.avatar/img.png',
+        login: 'ekonstantinidis',
+        full_name: 'Emmanouil Konstantinidis'
       }
+    }
+  }];
+
+  beforeEach(function() {
+    shell.openExternal.reset();
+  });
+
+  afterEach(function() {
+
+  });
+
+  it('should render itself & its children (logged in)', function () {
+
+    const props = {
+      repo: repository,
+      repoName: 'ekonstantinidis/gitify'
     };
 
-    // Mock localStorage
-    window.localStorage = {
-      item: false,
-      getItem: function () {
-        return this.item;
-      },
-      setItem: function (item) {
-        this.item = item;
-      }
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.octicon-check').length).to.equal(1);
+    expect(wrapper.find('.name').text()).to.contain('gitify');
+    expect(wrapper.find('.name').text()).to.contain('ekonstantinidis');
+
+  });
+
+  it('should render itself & its children (logged in)', function () {
+
+    const props = {
+      repo: repository,
+      repoName: 'ekonstantinidis/gitify'
     };
 
-    apiRequests = require('../../utils/api-requests.js');
-    Actions = require('../../actions/actions.js');
-    Repository = require('../../components/repository.js');
-  });
+    const { wrapper } = setup(props);
 
-  it('Should render the Repository component', function () {
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.octicon-check').length).to.equal(1);
 
-    var repoDetails = [{
-      'id': '123',
-      'repository': {
-        'full_name': 'ekonstantinidis/gitify',
-        'owner': {
-          'avatar_url': 'http://avatar.url'
-        }
-      },
-      'subject': {
-        'type': 'Issue'
-      }
-    }];
+    wrapper.find('.name').simulate('click');
 
-    var instance = TestUtils.renderIntoDocument(
-      <Repository
-        repo={repoDetails}
-        repoName='ekonstantinidis/gitify'
-        key='ekonstantinidis/gitify' />
-    );
+    expect(wrapper.find('.name').text()).to.contain('gitify');
+    expect(wrapper.find('.name').text()).to.contain('ekonstantinidis');
 
-    expect(instance.props.repo[0].repository.full_name).toBe('ekonstantinidis/gitify');
-    expect(instance.isRead).toBeFalsy();
-    expect(instance.getAvatar).toBeDefined();
-    expect(instance.openBrowser).toBeDefined();
-    expect(instance.markRepoAsRead).toBeDefined();
-
-    // Get Avatar
-    var avatar = instance.getAvatar();
-    expect(avatar).toBe('http://avatar.url');
-
-    // Open Browser
-    instance.openBrowser();
+    expect(shell.openExternal).to.have.been.calledOnce;
+    expect(shell.openExternal).to.have.been.calledWith('http://github.com/ekonstantinidis/gitify/issues/123');
 
   });
 
-  it('Should mark a repo as read - successfully', function () {
+  it('should mark a repo as read', function () {
 
-    var repoDetails = [{
-      'id': '123',
-      'repository': {
-        'name': 'gitify',
-        'full_name': 'ekonstantinidis/gitify',
-        'owner': {
-          'login': 'ekonstantinidis',
-          'avatar_url': 'http://avatar.url'
-        }
-      },
-      'subject': {
-        'type': 'Issue'
-      }
-    }];
+    const props = {
+      repo: repository,
+      repoName: 'ekonstantinidis/gitify',
+      markRepoNotifications: sinon.spy()
+    };
 
-    var instance = TestUtils.renderIntoDocument(
-      <Repository
-        repo={repoDetails}
-        repoName='ekonstantinidis/gitify'
-        key='ekonstantinidis/gitify' />
-    );
+    const { wrapper } = setup(props);
 
-    expect(instance.state.isRead).toBeFalsy();
-    expect(instance.markRepoAsRead).toBeDefined();
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.octicon-check').length).to.equal(1);
 
-    var superagent = require('superagent');
-    superagent.__setResponse(200, 'ok', {}, false);
-
-    // Mark Repo as Read
-    instance.markRepoAsRead();
-    jest.runAllTimers();
-
-    expect(instance.state.isRead).toBeTruthy();
-
-  });
-
-  it('Should mark a repo as read - fail', function () {
-
-    var repoDetails = [{
-      'id': '123',
-      'repository': {
-        'name': 'gitify',
-        'full_name': 'ekonstantinidis/gitify',
-        'owner': {
-          'login': 'ekonstantinidis',
-          'avatar_url': 'http://avatar.url'
-        }
-      },
-      'subject': {
-        'type': 'Issue'
-      }
-    }];
-
-    var instance = TestUtils.renderIntoDocument(
-      <Repository
-        repo={repoDetails}
-        repoName='ekonstantinidis/gitify'
-        key='ekonstantinidis/gitify' />
-    );
-
-    expect(instance.state.isRead).toBeFalsy();
-    expect(instance.state.errors).toBeFalsy();
-    expect(instance.markRepoAsRead).toBeDefined();
-
-    var superagent = require('superagent');
-    superagent.__setResponse(400, false);
-
-    // Mark Repo as Read
-    instance.markRepoAsRead();
-    jest.runAllTimers();
-
-    expect(instance.state.isRead).toBeFalsy();
-    expect(instance.state.errors).toBeTruthy();
+    wrapper.find('.octicon-check').simulate('click');
+    expect(props.markRepoNotifications).to.have.been.calledWith('ekonstantinidis', 'gitify', 'ekonstantinidis/gitify');
 
   });
 

@@ -1,66 +1,60 @@
-/* global jest, describe, beforeEach, it, expect, spyOn */
+import React from 'react'; // eslint-disable-line no-unused-vars
+import { expect } from 'chai';
+import { shallow } from 'enzyme';
+import sinon from 'sinon';
+import Toggle from 'react-toggle';
+import { SettingsPage } from '../../components/settings';
 
-jest.dontMock('reflux');
-jest.dontMock('../../actions/actions.js');
-jest.dontMock('../../components/settings.js');
-jest.dontMock('../../stores/settings.js');
+function setup() {
+  const props = {
+    updateSetting: sinon.spy(),
+    settings: {
+      participating: false,
+      playSound: true,
+      showNotifications: true,
+      markOnClick: false,
+      openAtStartup: false
+    }
+  };
 
-var React = require('react');
-var TestUtils = require('react-addons-test-utils');
+  const wrapper = shallow(<SettingsPage {...props} />);
 
-describe('Test for Settings Component', function () {
+  return {
+    props: props,
+    wrapper: wrapper,
+  };
+};
 
-  var Actions, SettingsStore, Settings;
+describe('components/settings.js', function () {
 
-  beforeEach(function () {
+  it('should render itself & its children', function () {
 
-    // Mocks for Electron
-    window.require = function () {
-      return {
-        ipcRenderer: {
-          send: function () {
-            // Fake sending message to ipcMain
-          }
-        },
-      };
-    };
+    const { wrapper } = setup();
 
-    // Mock localStorage
-    window.localStorage = {
-      item: false,
-      getItem: function () {
-        return this.item;
-      },
-      setItem: function (item) {
-        this.item = item;
-      }
-    };
+    expect(wrapper).to.exist;
+    expect(wrapper.find(Toggle).length).to.equal(5);
+    expect(wrapper.find('.footer').find('.text-right').text()).to.contain('Gitify - Version');
 
-    Actions = require('../../actions/actions.js');
-    SettingsStore = require('../../stores/settings.js');
-    Settings = require('../../components/settings.js');
   });
 
-  it('Should render the settings component', function () {
+  it('should update a setting', function () {
 
-    spyOn(Actions, 'setSetting');
+    const { wrapper, props } = setup();
+    expect(wrapper).to.exist;
+    wrapper.find(Toggle).first().props().onChange({target: {checked: true}});
+    expect(props.updateSetting).to.have.been.calledOnce;
 
-    var instance = TestUtils.renderIntoDocument(<Settings />);
+  });
 
-    expect(instance.state.participating).toBeFalsy();
-    expect(instance.toggleSetting).toBeDefined();
-    expect(instance.appQuit).toBeDefined();
-    expect(instance.checkForUpdates).toBeDefined();
+  it('should check for updates and quit the app', function () {
 
-    instance.toggleSetting('participating', {
-      target: {
-        checked: true
-      }
-    });
-    expect(Actions.setSetting).toHaveBeenCalledWith('participating', true);
+    const { wrapper } = setup();
 
-    instance.appQuit();
-    instance.checkForUpdates();
+    expect(wrapper).to.exist;
+
+    wrapper.find('.btn-primary').simulate('click');
+    wrapper.find('.btn-danger').simulate('click');
+
   });
 
 });

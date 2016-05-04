@@ -1,18 +1,18 @@
 language: node_js
 
 node_js:
-- '4.2.0'
+  - '5.1'
+
+cache:
+  directories:
+    - node_modules
 
 install:
-- npm install -g codeclimate-test-reporter
-- npm install
+  - npm install -g codeclimate-test-reporter
+  - npm install
 
 script:
-- npm test
+  - npm test
 
 after_script:
   - codeclimate-test-reporter < ./coverage/lcov.info
-
-notifications:
-  slack:
-    secure: ITmN/3Db23HEcHP5pwoBjGE3qC5w/vOhCOGoefBTGV133YPqcAft1TDA+qQRcB87Da2qcechiR8DwWYVSbugd52lnOnEgwyb+fpTLKKyzU6u5QP6sMjBo+umLwwQSLp9UlctdbgidEOZlYML7H7LTwXrek5g/HXWawHZ90jr60rLKa0qVqFlljx+663VAiw07ro1gx66q60Ptc40OYstgskCVEG2Nb6vCMhE2bqvLRlTBoFvkdLGJdJW9S+WofJMNlRJBHK/boLpWx2/fS6IJFJxo3HvFHcu79OBoe7Oi3WYPjikZB2iNOAv1rHGq7GlFqAiHgnG4USDLyl8vyagsAqwllIcNtNoPh3Yu3TsfGDYs3opRKSLxMp1pvWNLAI1D7y55zPVCdADUziLjBSYSSd0Mcws/plmex7g+N8y650aQu5lVRysiN0Ug9YnQsOKNIAGL4s7/BIlDRtN5ZkUdPmRjrqrBK74eiKBZi+JVkoQTIBiQ2qr2/UugYfwUuB1NSIiIGujHu9j4KPooeVzgJdRIGYTPCQH9TYQ3Al/iY+cbVBecTf6mbEsXDsNrRfGJcI1K3G3YLP3buzGzQoTpR/buTnwgRMiXMuTIx4/I5jmYFSnvSK86O/kpGbPCMXIG9MMmldBy95y1D10CAKr8WRwiw0dYzJ+cdJz2GKWhEk=

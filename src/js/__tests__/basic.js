@@ -1,7 +1,9 @@
-/* global describe, it, expect */
+import { expect } from 'chai';
 
-describe('basic', function () {
-  it('adds two and two and gets four', function () {
-    expect(2 + 2).toBe(4);
+describe('basic.js', function () {
+
+  it('should make a basic test', function () {
+    expect(2).to.equal(2);
   });
+
 });

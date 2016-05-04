@@ -1,220 +1,314 @@
-/* global jest, describe, beforeEach, it, expect, spyOn */
+import React from 'react'; // eslint-disable-line no-unused-vars
+import { expect } from 'chai';
+import { mount } from 'enzyme';
+import sinon from 'sinon';
+import { Navigation } from '../../components/navigation';
+const ipcRenderer = window.require('electron').ipcRenderer;
+const shell = window.require('electron').shell;
 
-jest.dontMock('reflux');
-jest.dontMock('../../actions/actions.js');
-jest.dontMock('../../utils/api-requests');
-jest.dontMock('../../components/navigation.js');
-jest.dontMock('../../stores/auth.js');
-
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
-import createHistory from 'history/lib/createMemoryHistory';
-
-describe('Test for Navigation', function () {
-
-  var apiRequests, Actions, Navigation, AuthStore, history;
-
-  var Stub = React.createClass({
-    childContextTypes: {
-      location: React.PropTypes.object.isRequired
-    },
-
-    getChildContext: function () {
-      return {
-        location: {
-          pathname: "/settings",
-          anotherOne: function (argument) {
-
-          }
-        }
-      };
-    },
-
-    render: function () {
-      return this.props.children;
+function setup(props) {
+  const options = {
+    context: {
+      location: {
+        pathname: ''
+      },
+      router: {
+        push: sinon.spy(),
+        replace: sinon.spy()
+      }
     }
+  };
+
+  const wrapper = mount(<Navigation {...props} />, options);
+
+  return {
+    context: options.context,
+    props: props,
+    wrapper: wrapper,
+  };
+};
+
+describe('components/navigation.js', function () {
+
+  const notifications = [{ id: 1 }, { id: 2 }];
+
+  beforeEach(function() {
+    this.clock = sinon.useFakeTimers();
+
+    ipcRenderer.send.reset();
+    shell.openExternal.reset();
   });
 
+  afterEach(function() {
+    this.clock = sinon.restore();
+  });
 
-  beforeEach(function () {
-
-    // Mocks for Electron
-    window.require = function () {
-      return {
-        shell: {
-          openExternal: function () {
-            // Open External link in Browser
-          }
-        },
-        ipcRenderer: {
-          send: function () {
-            // Fake sending message to ipcMain
-          }
-        },
-      };
-    };
-
-    // Mock localStorage
-    window.localStorage = {
-      item: false,
-      setItem: function (item) {
-        this.item = item;
-      },
-      getItem: function () {
-        return this.item;
-      },
-      clear: function () {
-        this.item = false;
+  it('should render itself & its children (logged in)', function () {
+    const props = {
+      isFetching: false,
+      notifications: notifications,
+      token: 'IMLOGGEDIN',
+      location: {
+        pathname: '/home'
       }
     };
 
-    apiRequests = require('../../utils/api-requests.js');
-    Actions = require('../../actions/actions.js');
-    AuthStore = require('../../stores/auth.js');
-    Navigation = require('../../components/navigation.js');
+    sinon.spy(Navigation.prototype, 'componentDidMount');
 
-    history = createHistory();
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(Navigation.prototype.componentDidMount).to.have.been.calledOnce;
+    expect(wrapper.find('.fa-refresh').length).to.equal(1);
+    expect(wrapper.find('.fa-refresh').first().hasClass('fa-spin')).to.be.false;
+    expect(wrapper.find('.fa-sign-out').length).to.equal(1);
+    expect(wrapper.find('.fa-cog').length).to.equal(1);
+    expect(wrapper.find('.fa-search').length).to.equal(1);
+    expect(wrapper.find('.fa-power-off').length).to.equal(0);
+    expect(wrapper.find('.fa-chevron-left').length).to.equal(0);
+    expect(wrapper.find('.label-success').text()).to.equal(`${notifications.length}`);
+
+    Navigation.prototype.componentDidMount.restore();
+
   });
 
-  it('Should load the navigation component for logged out users', function () {
+  it('should load notifications after 60000ms', function () {
 
-    AuthStore.authStatus = function () {
-      return false;
+    const props = {
+      isFetching: false,
+      notifications: notifications,
+      fetchNotifications: sinon.spy(),
+      token: 'IMLOGGEDIN',
+      location: {
+        pathname: '/home'
+      }
     };
 
-    var parent = TestUtils.renderIntoDocument(<Stub><Navigation /></Stub>);
-    var instance = TestUtils.findRenderedComponentWithType(parent, Navigation);
+    const { wrapper } = setup(props);
 
-    expect(instance.state.loading).toBeFalsy();
-    expect(instance.refreshNotifications).toBeDefined();
-    expect(instance.refreshDone).toBeDefined();
-    expect(instance.logOut).toBeDefined();
-    expect(instance.goBack).toBeDefined();
-    expect(instance.goToSettings).toBeDefined();
-    expect(instance.appQuit).toBeDefined();
+    expect(wrapper).to.exist;
 
-    var logoutIcon = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'fa-sign-out');
-    expect(logoutIcon.length).toBe(0);
+    this.clock.tick(60000);
+    expect(props.fetchNotifications).to.have.been.calledOnce;
 
-    var quitIcon = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'fa-power-off');
-    expect(quitIcon.length).toBe(1);
   });
 
-  it('Should load the navigation component for logged in users', function () {
+  it('should render itself & its children (logged out)', function () {
 
-    AuthStore.authStatus = function () {
-      return true;
+    const props = {
+      isFetching: false,
+      notifications: [],
+      token: null,
+      location: {
+        pathname: '/home'
+      }
     };
 
-    var parent = TestUtils.renderIntoDocument(<Stub><Navigation toggleSearch={() => {}} showSearch={true} /></Stub>);
-    var instance = TestUtils.findRenderedComponentWithType(parent, Navigation);
-    instance.history = history;
+    sinon.spy(Navigation.prototype, 'componentDidMount');
 
-    expect(instance.state.loading).toBeFalsy();
-    expect(instance.refreshNotifications).toBeDefined();
-    expect(instance.refreshDone).toBeDefined();
-    expect(instance.logOut).toBeDefined();
-    expect(instance.goBack).toBeDefined();
-    expect(instance.goToSettings).toBeDefined();
-    expect(instance.appQuit).toBeDefined();
+    const { wrapper } = setup(props);
 
-    var logoutIcon = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'fa-sign-out');
-    expect(logoutIcon.length).toBe(1);
+    expect(wrapper).to.exist;
+    expect(Navigation.prototype.componentDidMount).to.have.been.calledOnce;
+    expect(wrapper.find('.fa-refresh').length).to.equal(0);
+    expect(wrapper.find('.fa-sign-out').length).to.equal(0);
+    expect(wrapper.find('.fa-cog').length).to.equal(0);
+    expect(wrapper.find('.fa-search').length).to.equal(0);
+    expect(wrapper.find('.fa-power-off').length).to.equal(1);
+    expect(wrapper.find('.fa-chevron-left').length).to.equal(0);
+    expect(wrapper.find('.label-success').length).to.equal(0);
 
-    // Now Logout
-    instance.logOut();
-    AuthStore.trigger();
-    logoutIcon = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'fa-sign-out');
-    expect(logoutIcon.length).toBe(0);
-
-    // Refresh Completed
-    instance.state.loading = true;
-    instance.refreshDone();
-    expect(instance.state.loading).toBeFalsy();
-
-    // Quit Application
-    instance.appQuit();
+    Navigation.prototype.componentDidMount.restore();
 
   });
 
-  it('Should test the refreshNotifications method', function () {
+  it('should render itself & its children (logged in/settings page)', function () {
 
-    spyOn(Actions, 'getNotifications');
-
-    AuthStore.authStatus = function () {
-      return true;
+    const props = {
+      isFetching: false,
+      notifications: notifications,
+      token: 'IMLOGGEDIN',
+      location: {
+        pathname: '/settings'
+      }
     };
 
-    var parent = TestUtils.renderIntoDocument(<Stub><Navigation /></Stub>);
-    var instance = TestUtils.findRenderedComponentWithType(parent, Navigation);
-    instance.refreshNotifications();
-    expect(Actions.getNotifications).toHaveBeenCalled();
+    sinon.spy(Navigation.prototype, 'componentDidMount');
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(Navigation.prototype.componentDidMount).to.have.been.calledOnce;
+    expect(wrapper.find('.fa-refresh').length).to.equal(1);
+    expect(wrapper.find('.fa-refresh').first().hasClass('fa-spin')).to.be.false;
+    expect(wrapper.find('.fa-sign-out').length).to.equal(1);
+    expect(wrapper.find('.fa-cog').length).to.equal(1);
+    expect(wrapper.find('.fa-search').length).to.equal(1);
+    expect(wrapper.find('.fa-power-off').length).to.equal(0);
+    expect(wrapper.find('.label-success').text()).to.equal(`${notifications.length}`);
+
+    expect(wrapper.find('.fa-chevron-left').length).to.equal(1);
+
+    Navigation.prototype.componentDidMount.restore();
 
   });
 
-  it('Should test the interval on componentDidMount', function () {
+  it('should quit the app', function () {
 
-    spyOn(Actions, 'getNotifications');
-
-    AuthStore.authStatus = function () {
-      return true;
+    const props = {
+      isFetching: false,
+      notifications: [],
+      token: null,
+      location: {
+        pathname: ''
+      }
     };
 
-    var parent = TestUtils.renderIntoDocument(<Stub><Navigation /></Stub>);
-    var instance = TestUtils.findRenderedComponentWithType(parent, Navigation);
-    expect(instance.componentDidMount).toBeDefined();
+    const { wrapper } = setup(props);
 
-    // Should refresh on interval
-    jest.runOnlyPendingTimers();
-    expect(Actions.getNotifications).toHaveBeenCalled();
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.fa-refresh').length).to.equal(0);
+    expect(wrapper.find('.fa-sign-out').length).to.equal(0);
+    expect(wrapper.find('.fa-power-off').length).to.equal(1);
+
+    wrapper.find('.fa-power-off').simulate('click');
+    expect(ipcRenderer.send).to.have.been.calledOnce;
+    expect(ipcRenderer.send).to.have.been.calledWith('app-quit');
 
   });
 
-  it('Should test the transitions', function () {
+  it('should open the gitify repo in browser', function () {
 
-    spyOn(Actions, 'getNotifications');
-
-    AuthStore.authStatus = function () {
-      return true;
+    const props = {
+      isFetching: false,
+      notifications: [],
+      token: null,
+      location: {
+        pathname: ''
+      }
     };
 
-    var parent = TestUtils.renderIntoDocument(<Stub><Navigation toggleSearch={() => {}} showSearch={true} /></Stub>);
-    var instance = TestUtils.findRenderedComponentWithType(parent, Navigation);
-    instance.history = history;
+    const { wrapper } = setup(props);
 
-    expect(instance.componentDidMount).toBeDefined();
-    expect(instance.openBrowser).toBeDefined();
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.fa-power-off').length).to.equal(1);
 
-    instance.goBack();
-    instance.goToSettings();
-    instance.openBrowser();
+    wrapper.find('.logo').simulate('click');
+
+    expect(shell.openExternal).to.have.been.calledOnce;
+    expect(shell.openExternal).to.have.been.calledWith('http://www.github.com/ekonstantinidis/gitify');
+
   });
 
-  it('Should show the search icon & count label only if notifications', function () {
+  it('should go back to home from settings', function () {
 
-    spyOn(Actions, 'getNotifications');
-
-    AuthStore.authStatus = function () {
-      return true;
+    const props = {
+      isFetching: false,
+      notifications: notifications.length,
+      token: 'IMLOGGEDIN',
+      location: {
+        pathname: '/settings'
+      }
     };
 
-    var parent = TestUtils.renderIntoDocument(<Stub><Navigation /></Stub>);
-    var instance = TestUtils.findRenderedComponentWithType(parent, Navigation);
+    const { wrapper, context } = setup(props);
 
-    instance.state.notifications = [{
-      title: 'test'
-    }, {
-      title: 'another test'
-    }];
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.fa-cog').length).to.equal(1);
 
-    instance.forceUpdate();
+    wrapper.find('.fa-chevron-left').simulate('click');
+    expect(context.router.push).to.have.been.calledOnce;
+    expect(context.router.push).to.have.been.calledWith('/notifications');
 
-    var searchIcon = TestUtils.findRenderedDOMComponentWithClass(instance, 'fa-search');
-    expect(searchIcon).toBeDefined();
-
-    var countLabel = TestUtils.findRenderedDOMComponentWithClass(instance, 'label-success');
-    expect(countLabel).toBeDefined();
+    context.router.push.reset();
 
   });
+
+  it('should press the logout', function () {
+
+    const props = {
+      logout: sinon.spy(),
+      toggleSearch: sinon.spy(),
+      isFetching: false,
+      notifications: notifications.length,
+      showSearch: true,
+      token: 'IMLOGGEDIN',
+      location: {
+        pathname: '/settings'
+      }
+    };
+
+    const { wrapper, context } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.fa-cog').length).to.equal(1);
+
+    wrapper.find('.fa-sign-out').simulate('click');
+
+    expect(props.logout).to.have.been.calledOnce;
+    expect(props.toggleSearch).to.have.been.calledOnce;
+
+    expect(ipcRenderer.send).to.have.been.calledOnce;
+    expect(ipcRenderer.send).to.have.been.calledWith('update-icon', 'IconPlain');
+
+    expect(context.router.replace).to.have.been.calledOnce;
+    expect(context.router.replace).to.have.been.calledWith('/login');
+
+    context.router.replace.reset();
+    props.logout.reset();
+    props.toggleSearch.reset();
+
+  });
+
+  it('should go to settings from home', function () {
+
+    const props = {
+      toggleSearch: sinon.spy(),
+      isFetching: false,
+      notifications: notifications.length,
+      token: 'IMLOGGEDIN',
+      showSearch: true,
+      location: {
+        pathname: '/home'
+      }
+    };
+
+    const { wrapper, context } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.fa-cog').length).to.equal(1);
+
+    wrapper.find('.fa-cog').simulate('click');
+    expect(props.toggleSearch).to.have.been.calledOnce;
+
+    expect(context.router.push).to.have.been.calledOnce;
+    expect(context.router.push).to.have.been.calledWith('/settings');
+
+    context.router.push.reset();
+
+  });
+
+
+  it('should refresh the notifications', function () {
+
+    const props = {
+      fetchNotifications: sinon.spy(),
+      isFetching: false,
+      notifications: notifications.length,
+      token: 'IMLOGGEDIN',
+      location: {
+        pathname: '/home'
+      }
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.fa-refresh').length).to.equal(1);
+
+    wrapper.find('.fa-refresh').simulate('click');
+    expect(props.fetchNotifications).to.have.been.calledOnce;
+
+  });
+
 });

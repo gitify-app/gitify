@@ -27,7 +27,7 @@ If you would like to help let me know! There is a slack channel for gitify in th
 
 
 ### Download
-You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/ekonstantinidis/gitify/releases) page. 
+You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/ekonstantinidis/gitify/releases) page.
 
 You can also install Gitify via [Homebrew Cask](http://caskroom.io/)
 
@@ -42,7 +42,7 @@ Gitify currently only supports OS X.
 
  - [Electron](http://electron.atom.io/)
  - [React](https://facebook.github.io/react/)
- - [Grunt](http://gruntjs.com/)
+ - [Webpack](https://webpack.github.io/)
  - [NPM](https://www.npmjs.com/)
 
 

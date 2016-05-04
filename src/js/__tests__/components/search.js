@@ -1,78 +1,95 @@
-/* global spyOn, jest, describe, beforeEach, it, expect */
+import React from 'react'; // eslint-disable-line no-unused-vars
+import { expect } from 'chai';
+import { shallow } from 'enzyme';
+import sinon from 'sinon';
+import { SearchBar } from '../../components/search';
 
-jest.dontMock('reflux');
-jest.dontMock('../../actions/actions.js');
-jest.dontMock('../../components/search.js');
-jest.dontMock('../../stores/auth.js');
+function setup(props) {
+  const wrapper = shallow(<SearchBar {...props} />);
 
-var React = require('react');
-var TestUtils = require('react-addons-test-utils');
+  return {
+    props: props,
+    wrapper: wrapper,
+  };
+};
 
-describe('Test for Search Component', function () {
+describe('components/search.js', function () {
 
-  var Actions, AuthStore, Search;
+  it('should render itself & its children', function () {
 
-  beforeEach(function () {
-
-    window.localStorage = {
-      item: false,
-      setItem: function (item) {
-        this.item = item;
-      },
-      getItem: function () {
-        return this.item;
-      },
-      clear: function () {
-        this.item = false;
-      }
+    const props = {
+      searchNotifications: sinon.spy(),
+      clearSearch: sinon.spy(),
+      showSearch: true,
+      query: ''
     };
 
-    Actions = require('../../actions/actions.js');
-    AuthStore = require('../../stores/auth.js');
-    Search = require('../../components/search.js');
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.octicon-x').length).to.equal(0);
+
+    wrapper.find('input').props().onChange({target: {value: 'hello'}});
+    expect(props.searchNotifications).to.have.been.calledOnce;
 
   });
 
-  it('Should make a search', function () {
+  it('should hide the search bar if not showSearch', function () {
 
-    spyOn(Actions, 'updateSearchTerm');
-    spyOn(Actions, 'clearSearchTerm');
+    const props = {
+      searchNotifications: sinon.spy(),
+      clearSearch: sinon.spy(),
+      showSearch: false,
+      query: ''
+    };
 
-    var instance = TestUtils.renderIntoDocument(<Search showSearch={true} />);
+    const { wrapper } = setup(props);
 
-    var wrapper = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'search-wrapper');
-    expect(wrapper.length).toBe(1);
+    expect(wrapper).to.exist;
 
-    instance.clearSearch();
+    expect(wrapper.find('.container-fluid').length).to.equal(1);
+    expect(wrapper.find('.search-bar').length).to.equal(0);
 
-    instance.updateSearchTerm({
-      target: {
-        value: 'hello'
-      }
-    });
-
-    expect(Actions.updateSearchTerm).toHaveBeenCalledWith('hello');
-
-    instance.componentWillReceiveProps({showSearch: false});
-    expect(Actions.updateSearchTerm).toHaveBeenCalledWith('');
   });
 
-  it('Should only render clear button if search term is not empty', function () {
-    var instance = TestUtils.renderIntoDocument(<Search showSearch={true} />);
+  it('should show the clear icon/button', function () {
 
-    var clearButton = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'octicon-x');
-    expect(clearButton.length).toBe(0);
+    const props = {
+      searchNotifications: sinon.spy(),
+      clearSearch: sinon.spy(),
+      showSearch: true,
+      query: 'hello'
+    };
 
-    instance.state.searchTerm = 'hello';
-    instance.forceUpdate();
+    const { wrapper } = setup(props);
 
-    clearButton = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'octicon-x');
-    expect(clearButton.length).toBe(1);
+    expect(wrapper).to.exist;
+
+    wrapper.find('input').props().onChange({target: {value: 'hello'}});
+    expect(wrapper.find('.octicon-x').length).to.equal(1);
+
   });
 
-  it('Should hide the search bar', function () {
-    var instance = TestUtils.renderIntoDocument(<Search showSearch={false} />);
-    var searchBar = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'search-bar');
-    expect(searchBar.length).toBe(0);
+  it('should test the componentWillReceiveProps function', function () {
+
+    sinon.spy(SearchBar.prototype, 'componentWillReceiveProps');
+
+    const props = {
+      searchNotifications: sinon.spy(),
+      clearSearch: sinon.spy(),
+      showSearch: true,
+      query: 'hello'
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+
+    wrapper.setProps({showSearch: false});
+
+    expect(props.clearSearch).to.have.been.calledOnce;
+    expect(SearchBar.prototype.componentWillReceiveProps).to.have.been.calledOnce;
+
   });
+
 });
