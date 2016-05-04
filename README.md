@@ -1,7 +1,6 @@
 # Gitify
 [![travis][travis-image]][travis-url]
-[![cc-gpa][cc-gpa-image]][cc-gpa-url]
-[![cc-coverage][cc-coverage-image]][cc-coverage-url]
+[![codecov][codecov-image]][codecov-url]
 [![slack][slack-image]][slack-url]
 
 ### GitHub Notifications on your menu bar.
@@ -19,9 +18,9 @@ It has been a while since this app was made so I decided to give it a good revam
 - [x] Use ES6 - Because ES6!
 - [x] Move from Reflux to Redux - I've spent some time rewriting gitify to redux. It's just amazing.
 - [x] Update Bootstrap to version 4 - Which means move from LESS to SCSS.
+- [x] `90%` Rewrite tests with Mocha - Since gitify is moving from Reflux to Redux, all tests have to be rewritten.
 - [ ] Revamp the UI. From Scratch?
 - [ ] Rebranding - New Logo! Fresh stuff!
-- [ ] Rewrite tests (Mocha?) - Since gitify is moving from Reflux to Redux, all tests have to be rewritten.
 
 If you would like to help let me know! There is a slack channel for gitify in the [atom](http://atomio.slack.com) team. See badge on the header.
 
@@ -98,9 +97,7 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 
 [travis-image]: https://travis-ci.org/ekonstantinidis/gitify.svg?branch=master
 [travis-url]: https://travis-ci.org/ekonstantinidis/gitify
-[cc-gpa-image]: https://codeclimate.com/github/ekonstantinidis/gitify/badges/gpa.svg
-[cc-gpa-url]: https://codeclimate.com/github/ekonstantinidis/gitify
-[cc-coverage-image]: https://codeclimate.com/github/ekonstantinidis/gitify/badges/coverage.svg
-[cc-coverage-url]: https://codeclimate.com/github/ekonstantinidis/gitify/coverage
+[codecov-image]: https://codecov.io/gh/ekonstantinidis/gitify/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/ekonstantinidis/gitify
 [slack-image]: https://img.shields.io/badge/slack-atomio/gitify-e01563.svg
 [slack-url]: https://atomio.slack.com/
