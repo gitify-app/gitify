@@ -3,4 +3,9 @@ coverage:
   round: down
   range: "70...100"
 
+  status:
+    project: false
+    patch: false
+    changes: false
+
 comment: off
