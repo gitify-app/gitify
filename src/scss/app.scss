@@ -408,12 +408,14 @@ input {
     }
 
     .emoji {
-      display: block;
-      margin: 15px auto;
+      margin: 20px 0;
+      text-align: center;
+      font-size: 55px;
     }
 
     .typed-text {
       margin-top: 10px;
+      margin-bottom: 0;
       padding: 10px 5px;
       text-align: center;
       line-height: 40px;

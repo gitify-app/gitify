@@ -8,6 +8,7 @@ import Loading from 'reloading';
 const shell = window.require('electron').shell;
 
 import AllRead from './all-read';
+import Oops from './oops';
 import Repository from './repository';
 
 export class NotificationsPage extends React.Component {
@@ -30,13 +31,7 @@ export class NotificationsPage extends React.Component {
     const notificationsEmpty = _.isEmpty(this.props.notifications);
 
     if (this.props.failed) {
-      return (
-        <div className={wrapperClass + ' errored'}>
-          <h3>Oops something went wrong.</h3>
-          <h4>Couldn't get your notifications.</h4>
-          <img className="img-responsive emoji" src="images/error.png" />
-        </div>
-      );
+      return <Oops />;
     }
 
     if (notificationsEmpty && !this.props.searchQuery) {
