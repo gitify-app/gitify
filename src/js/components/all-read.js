@@ -1,4 +1,5 @@
 import React from 'react';
+import _ from 'underscore';
 import malarkey from 'malarkey';
 import {emojify} from 'react-emojione';
 
@@ -7,8 +8,7 @@ import constants from '../utils/constants';
 export default class AllRead extends React.Component {
 
   componentDidMount() {
-    const messages = constants.ALLREAD_MESSAGES;
-    const message = messages[Math.floor(Math.random() * messages.length)];
+    const message = _.sample(constants.ALLREAD_MESSAGES);
 
     const elem = document.querySelector('.typed');
     const opts = {
@@ -21,8 +21,7 @@ export default class AllRead extends React.Component {
   }
 
   render() {
-    const emojis = constants.ALLREAD_EMOJIS;
-    const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+    const emoji = _.sample(constants.ALLREAD_EMOJIS);
 
     return (
       <div className="container-fluid main-container notifications all-read">
