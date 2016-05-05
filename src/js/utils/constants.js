@@ -14,6 +14,17 @@ let constants = {
     'Yes! All read.',
     'All gone! Nice work!',
     'Yay! Good news.',
+  ],
+  ALLREAD_EMOJIS: [
+    ':wink:',
+    ':tada:',
+    ':tiger:',
+    ':see_no_evil:',
+    ':balloon:',
+    ':confetti_ball:',
+    ':clap:',
+    ':circus_tent:',
+    ':spaghetti:'
   ]
 };
 

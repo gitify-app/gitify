@@ -1,5 +1,6 @@
 import React from 'react';
 import malarkey from 'malarkey';
+import {emojify} from 'react-emojione';
 
 import constants from '../utils/constants';
 
@@ -20,6 +21,9 @@ export default class AllRead extends React.Component {
   }
 
   render() {
+    const emojis = constants.ALLREAD_EMOJIS;
+    const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+
     return (
       <div className="container-fluid main-container notifications all-read">
         <h2 className="typed-text">
@@ -28,6 +32,7 @@ export default class AllRead extends React.Component {
         </h2>
 
         <h4>No new notifications.</h4>
+        <h1 className="emoji">{emojify(emoji, {output: 'unicode'})}</h1>
       </div>
     );
   }
