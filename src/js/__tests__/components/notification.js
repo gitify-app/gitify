@@ -1,217 +1,145 @@
-/* global jest, describe, beforeEach, it, expect */
+import React from 'react'; // eslint-disable-line no-unused-vars
+import { expect } from 'chai';
+import { shallow } from 'enzyme';
+import sinon from 'sinon';
+import { SingleNotification } from '../../components/notification';
+const shell = window.require('electron').shell;
 
-jest.dontMock('reflux');
-jest.dontMock('../../actions/actions.js');
-jest.dontMock('../../utils/api-requests');
-jest.dontMock('../../components/notification.js');
-jest.dontMock('../../stores/auth.js');
-jest.dontMock('../../stores/notifications.js');
-jest.dontMock('../../stores/settings.js');
+function setup(props) {
+  const wrapper = shallow(<SingleNotification {...props} />);
 
-var React = require('react');
-var TestUtils = require('react-addons-test-utils');
+  return {
+    props: props,
+    wrapper: wrapper,
+  };
+};
 
-describe('Test for Notification Component', function () {
+describe('components/notification.js', function () {
 
-  var apiRequests, Actions, AuthStore, SingleNotification, NotificationsStore, SettingsStore;
+  const notification = {
+    id: 1,
+    subject: {
+      title: 'Hello. This is a notification.',
+      type: 'Issue',
+      url: 'https://api.github.com/repos/ekonstantinidis/gitify/pulls/123'
+    }
+  };
 
-  beforeEach(function () {
+  it('should render itself & its children', function () {
 
-    // Mocks for Electron
-    window.require = function () {
-      return {
-        shell: {
-          openExternal: function () {
-            // Open External link in Browser
-          }
-        },
-        ipcRenderer: {
-          send: function () {
-            // Fake sending message to ipcMain
-          }
-        },
-      };
+    const props = {
+      markNotification: sinon.spy(),
+      markOnClick: false,
+      notification: notification
     };
 
-    // Mock localStorage
-    window.localStorage = {
-      item: false,
-      getItem: function () {
-        return this.item;
-      },
-      setItem: function (item) {
-        this.item = item;
-      }
-    };
+    const { wrapper } = setup(props);
 
-    apiRequests = require('../../utils/api-requests.js');
-    Actions = require('../../actions/actions.js');
-    AuthStore = require('../../stores/auth.js');
-    SingleNotification = require('../../components/notification.js');
-    NotificationsStore = require('../../stores/notifications.js');
-    SettingsStore = require('../../stores/settings.js');
-  });
+    expect(wrapper).to.exist;
 
-  it('Should render a notification component (Issue)', function () {
+    expect(wrapper.find('.subject').text()).to.equal(notification.subject.title);
+    expect(wrapper.find('.octicon').first().props().className).to.contain('octicon-issue-opened');
 
-    var notification = {
-      'id': '123123123',
-      'repository': {
-        'full_name': 'ekonstantinidis/gitify',
-        'owner': {
-          'avatar_url': 'http://avatar.url'
+    wrapper.setProps({
+      ...props,
+      notification: {
+        ...notification,
+        subject: {
+          ...notification.subject,
+          type: 'PullRequest'
         }
-      },
-      'subject': {
-        'type': 'Issue',
-        'url': 'http://www.github.com/ekonstantinidis/gitify/pulls/26/'
       }
-    };
+    });
+    expect(wrapper.find('.octicon').first().props().className).to.contain('octicon-git-pull-request');
 
-    var instance = TestUtils.renderIntoDocument(
-      <SingleNotification
-        notification={notification}
-        key={notification.id} />);
+    wrapper.setProps({
+      ...props,
+      notification: {
+        ...notification,
+        subject: {
+          ...notification.subject,
+          type: 'Commit'
+        }
+      }
+    });
+    expect(wrapper.find('.octicon').first().props().className).to.contain('octicon-git-commit');
 
-    expect(instance.state.isRead).toBeFalsy();
-    expect(instance.pressTitle).toBeDefined();
-    expect(instance.openBrowser).toBeDefined();
-    expect(instance.markAsRead).toBeDefined();
+    wrapper.setProps({
+      ...props,
+      notification: {
+        ...notification,
+        subject: {
+          ...notification.subject,
+          type: 'Release'
+        }
+      }
+    });
+    expect(wrapper.find('.octicon').first().props().className).to.contain('octicon-tag');
 
-    spyOn(instance, 'openBrowser');
-    spyOn(instance, 'markAsRead');
-
-    instance.pressTitle();
-    expect(instance.openBrowser).toHaveBeenCalled();
-
-    // Open Browser
-    instance.openBrowser();
-
-    // If 'markOnClick' is ON
-    SettingsStore.onSetSetting('markOnClick', true);
-
-    instance.pressTitle();
-
-    expect(instance.openBrowser).toHaveBeenCalled();
-    expect(instance.markAsRead).toHaveBeenCalled();
-    jest.runAllTimers();
+    wrapper.setProps({
+      ...props,
+      notification: {
+        ...notification,
+        subject: {
+          ...notification.subject,
+          type: 'AnotherType'
+        }
+      }
+    });
+    expect(wrapper.find('.octicon').first().props().className).to.contain('octicon-question');
 
   });
 
-  it('Should render a notification component (PullRequest)', function () {
+  it('should open a notification in the browser', function () {
 
-    var notification = {
-      'id': '123123123',
-      'repository': {
-        'full_name': 'ekonstantinidis/gitify',
-        'owner': {
-          'avatar_url': 'http://avatar.url'
-        }
-      },
-      'subject': {
-        'type': 'PullRequest',
-        'url': 'http://www.github.com/ekonstantinidis/gitify/pulls/26/'
-      }
+    const props = {
+      markNotification: sinon.spy(),
+      markOnClick: false,
+      notification: notification
     };
 
-    var instance = TestUtils.renderIntoDocument(
-      <SingleNotification
-        notification={notification}
-        key={notification.id} />);
+    const { wrapper } = setup(props);
 
-    expect(instance.state.isRead).toBeFalsy();
-    expect(instance.openBrowser).toBeDefined();
-    expect(instance.markAsRead).toBeDefined();
+    expect(wrapper).to.exist;
+    wrapper.find('.subject').simulate('click');
+    expect(shell.openExternal).to.have.been.calledOnce;
 
-    // Open Browser
-    instance.openBrowser();
+    shell.openExternal.reset();
 
   });
 
-  it('Should render a notification component (OtherType)', function () {
+  it('should mark a notification as read', function () {
 
-    var notification = {
-      'id': '123123123',
-      'repository': {
-        'full_name': 'ekonstantinidis/gitify',
-        'owner': {
-          'avatar_url': 'http://avatar.url'
-        }
-      },
-      'subject': {
-        'type': 'OtherType',
-        'url': 'http://www.github.com/ekonstantinidis/gitify/pulls/26/'
-      }
+    const props = {
+      markNotification: sinon.spy(),
+      markOnClick: false,
+      notification: notification
     };
 
-    var instance = TestUtils.renderIntoDocument(
-      <SingleNotification
-        notification={notification}
-        key={notification.id} />);
+    const { wrapper } = setup(props);
 
-    expect(instance.state.isRead).toBeFalsy();
-    expect(instance.openBrowser).toBeDefined();
-    expect(instance.markAsRead).toBeDefined();
+    expect(wrapper).to.exist;
+    wrapper.find('.octicon-check').simulate('click');
+    expect(props.markNotification).to.have.been.calledOnce;
 
   });
 
-  it('Should mark a notification as read succesfully', function () {
+  it('should open a notification in browser & mark it as read', function () {
 
-    var notification = {
-      'id': '123123123',
-      'repository': {
-        'full_name': 'ekonstantinidis/gitify',
-        'owner': {
-          'avatar_url': 'http://avatar.url'
-        }
-      },
-      'subject': {
-        'type': 'Issue',
-        'url': 'http://www.github.com/ekonstantinidis/gitify/pulls/26/'
-      }
+    const props = {
+      markNotification: sinon.spy(),
+      markOnClick: true,
+      notification: notification
     };
 
-    var instance = TestUtils.renderIntoDocument(
-      <SingleNotification
-        notification={notification}
-        key={notification.id} />);
+    const { wrapper } = setup(props);
 
-    var superagent = require('superagent');
-    superagent.__setResponse(200, 'ok', {}, false);
+    expect(wrapper).to.exist;
+    wrapper.find('.subject').simulate('click');
+    expect(shell.openExternal).to.have.been.calledOnce;
+    expect(props.markNotification).to.have.been.calledOnce;
 
-    instance.markAsRead();
-
-    jest.runAllTimers();
-
-  });
-
-  it('Should fail to mark a notification as read succesfully', function () {
-
-    var notification = {
-      'id': '123123123',
-      'repository': {
-        'full_name': 'ekonstantinidis/gitify',
-        'owner': {
-          'avatar_url': 'http://avatar.url'
-        }
-      },
-      'subject': {
-        'type': 'Commit',
-        'url': 'http://www.github.com/ekonstantinidis/gitify/pulls/26/'
-      }
-    };
-
-    var instance = TestUtils.renderIntoDocument(
-      <SingleNotification
-        notification={notification}
-        key={notification.id} />);
-
-    var superagent = require('superagent');
-    superagent.__setResponse(400, false, {}, false);
-
-    instance.markAsRead();
-    expect(instance.isRead).toBeFalsy();
-
+    shell.openExternal.reset();
   });
 
 });

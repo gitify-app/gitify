@@ -1,22 +1,33 @@
 # Gitify
 [![travis][travis-image]][travis-url]
-[![cc-gpa][cc-gpa-image]][cc-gpa-url]
-[![cc-coverage][cc-coverage-image]][cc-coverage-url]
-
-[travis-image]: https://travis-ci.org/ekonstantinidis/gitify.svg?branch=master
-[travis-url]: https://travis-ci.org/ekonstantinidis/gitify
-[cc-gpa-image]: https://codeclimate.com/github/ekonstantinidis/gitify/badges/gpa.svg
-[cc-gpa-url]: https://codeclimate.com/github/ekonstantinidis/gitify
-[cc-coverage-image]: https://codeclimate.com/github/ekonstantinidis/gitify/badges/coverage.svg
-[cc-coverage-url]: https://codeclimate.com/github/ekonstantinidis/gitify/coverage
+[![codecov][codecov-image]][codecov-url]
+[![slack][slack-image]][slack-url]
 
 ### GitHub Notifications on your menu bar.
 
 ![Gitify](images/press.png)
 
 
+### Roadmap Version 1.0.0
+It has been a while since this app was made so I decided to give it a good revamp and hit **1.0.0**. This will bring the app up to date and prepare it for the future. So below you can find all the changes coming up to Version 1.0.0. From the normal user's point of view, nothing will break. People contributing, will probably want to have a look to the list below. Once we are done with this list(if not at the same time), I think it will be time to distribute the app to Linux & Windows.
+
+- [x] Update all (dev)dependendencies - Things tend to evolve fast in the js commumity.
+- [x] Update Electron - Electron gets better and better in every release.
+- [x] From Browserify to Webpack - In the future we can have Hot Module Replacement!
+- [x] React 15.0+ - Major React Update.
+- [x] Use ES6 - Because ES6!
+- [x] Move from Reflux to Redux - I've spent some time rewriting gitify to redux. It's just amazing.
+- [x] Update Bootstrap to version 4 - Which means move from LESS to SCSS.
+- [x] Rewrite tests with Mocha - Since gitify is moving from Reflux to Redux, all tests have to be rewritten.
+- [x] Move to Codecov for coverage with new tests
+- [ ] Revamp the UI. From Scratch?
+- [ ] Rebranding - New Logo! Fresh stuff!
+
+If you would like to help let me know! There is a slack channel for gitify in the [atom](http://atomio.slack.com) team. See badge on the header.
+
+
 ### Download
-You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/ekonstantinidis/gitify/releases) page. 
+You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/ekonstantinidis/gitify/releases) page.
 
 You can also install Gitify via [Homebrew Cask](http://caskroom.io/)
 
@@ -31,7 +42,7 @@ Gitify currently only supports OS X.
 
  - [Electron](http://electron.atom.io/)
  - [React](https://facebook.github.io/react/)
- - [Grunt](http://gruntjs.com/)
+ - [Webpack](https://webpack.github.io/)
  - [NPM](https://www.npmjs.com/)
 
 
@@ -65,10 +76,16 @@ To publish a new version, you also need to codesign the app running `npm run cod
 
 
 ### Tests
-There are 2 types of tests: `jest` and `eslint`.
-To run the tests:
+There are 2 linters for `js` & `scss` and unit tests with `mocha`.
 
-    npm test
+    // Run all tests
+    npm run test
+
+    // Run only unit tests
+    npm run mocha
+
+    // Run unit tests with coverage
+    npm run coverage
 
 
 ### Contributing
@@ -83,3 +100,11 @@ To run the tests:
 
 ### License
 Gitify is licensed under the MIT Open Source license. For more information, see the LICENSE file in this repository.
+
+
+[travis-image]: https://travis-ci.org/ekonstantinidis/gitify.svg?branch=master
+[travis-url]: https://travis-ci.org/ekonstantinidis/gitify
+[codecov-image]: https://codecov.io/gh/ekonstantinidis/gitify/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/ekonstantinidis/gitify
+[slack-image]: https://img.shields.io/badge/slack-atomio/gitify-e01563.svg
+[slack-url]: https://atomio.slack.com/

@@ -1,147 +1,167 @@
-/* global jest, describe, beforeEach, it, expect */
+import React from 'react'; // eslint-disable-line no-unused-vars
+import { expect } from 'chai';
+import { shallow } from 'enzyme';
+import { NotificationsPage } from '../../components/notifications';
+import AllRead from '../../components/all-read';
+import Oops from '../../components/oops';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+const shell = window.require('electron').shell;
 
-jest.dontMock('reflux');
-jest.dontMock('../../actions/actions.js');
-jest.dontMock('../../utils/api-requests');
-jest.dontMock('../../components/notifications.js');
-jest.dontMock('../../stores/auth.js');
-jest.dontMock('../../stores/notifications.js');
+function setup(props) {
+  const wrapper = shallow(<NotificationsPage {...props} />);
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
+  return {
+    props: props,
+    wrapper: wrapper,
+  };
+};
 
-describe('Test for Notifications Component', function () {
+describe('components/notifications.js', function () {
 
-  var Actions, AuthStore, Notifications, NotificationsStore;
-
-  beforeEach(function () {
-
-    // Mocks for Electron
-    window.require = function () {
-      return {
-        shell: {
-          openExternal: function () {
-            // Fake sending message to ipcMain
-          }
-        },
-      }
-    };
-
-    // Mock localStorage
-    window.localStorage = {
-      item: false,
-      getItem: function () {
-        return this.item;
+  const notifications = [
+    {
+      id: 1,
+      subject: {
+        title: 'Hello. This is a notification.',
+        type: 'Issue',
+        url: 'https://api.github.com/repos/ekonstantinidis/gitify/issues/123'
       },
-      setItem: function (item) {
-        this.item = item;
-      }
-    };
-
-    Actions = require('../../actions/actions.js');
-    AuthStore = require('../../stores/auth.js');
-    Notifications = require('../../components/notifications.js');
-    NotificationsStore = require('../../stores/notifications.js');
-  });
-
-  it('Should render the notifications component', function () {
-
-    AuthStore.authStatus = function () {
-      return true;
-    };
-
-    var instance = TestUtils.renderIntoDocument(<Notifications />);
-    expect(instance.state.loading).toBeTruthy();
-
-    var response = [{
-      'id': '123123123',
-      'repository': {
-        'full_name': 'ekonstantinidis/gitify',
-        'owner': {
-          'avatar_url': 'http://avatar.url'
-        }
-      },
-      'subject': {
-        'type': 'Issue'
-      }
-    }];
-
-    NotificationsStore.trigger(response);
-    expect(instance.state.notifications.length).toBe(1);
-
-    expect(instance.state.loading).toBeTruthy();
-    instance.completedNotifications();
-    expect(instance.state.loading).toBeFalsy();
-    expect(instance.state.errors).toBeFalsy();
-
-    var errors = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'errored');
-    expect(errors.length).toBe(0);
-
-    instance.failedNotifications();
-    expect(instance.state.loading).toBeFalsy();
-    expect(instance.state.errors).toBeTruthy();
-
-    errors = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'errored');
-    expect(errors.length).toBe(1);
-
-    expect(instance.areIn('ekonstantinidis/gitify', 'gitify')).toBeTruthy();
-    expect(instance.areIn('ekonstantinidis/gitify', 'hello')).toBeFalsy();
-
-    instance.state.searchTerm = 'hello';
-    var matches = instance.matchesSearchTerm(response[0]);
-    expect(matches).toBeFalsy();
-
-    instance.state.searchTerm = 'gitify';
-    matches = instance.matchesSearchTerm(response[0]);
-    expect(matches).toBeTruthy();
-
-    instance.state.notifications = ['One', 'Two'];
-    instance.openBrowser();
-  });
-
-  it('Should only render repos that match the search term', function () {
-    AuthStore.authStatus = function () {
-      return true;
-    };
-
-    var instance = TestUtils.renderIntoDocument(<Notifications />);
-
-    var response = [{
-      'id': '123123123',
-      'repository': {
-        'full_name': 'ekonstantinidis/gitify',
-        'owner': {
-          'avatar_url': 'http://avatar.url'
-        }
-      },
-      'subject': {
-        'type': 'Issue'
+      repository: {
+        full_name: 'ekonstantinidis/gitify'
       }
     },
     {
-      'id': '2424242424242',
-      'repository': {
-        'full_name': 'ekonstantinidis/gitify',
-        'owner': {
-          'avatar_url': 'http://avatar.url'
-        }
+      id: 2,
+      subject: {
+        title: 'Another Test.',
+        type: 'PullRequest',
+        url: 'https://api.github.com/repos/ekonstantinidis/gitify/pulls/456'
       },
-      'subject': {
-        'type': 'Release'
+      repository: {
+        full_name: 'ekonstantinidis/trevor'
       }
-    }];
+    }
+  ];
 
-    NotificationsStore.trigger(response);
+  it('should render itself & its children', function () {
 
-    var notifications = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'repository');
-    expect(notifications.length).toBe(1);
+    const props = {
+      failed: false,
+      isFetching: false,
+      notifications: notifications,
+      searchQuery: ''
+    };
 
-    instance.state.searchTerm = 'hello';
-    instance.forceUpdate();
+    const { wrapper } = setup(props);
 
-    notifications = TestUtils.scryRenderedDOMComponentsWithClass(instance, 'repository');
-    expect(notifications.length).toBe(0);
+    expect(wrapper).to.exist;
+    expect(wrapper.find(ReactCSSTransitionGroup).children().length).to.equal(2);
+    expect(wrapper.find('.fork').text()).to.contain('Star Gitify on GitHub');
+    expect(wrapper.find('.errored').length).to.equal(0);
+    expect(wrapper.find('.all-read').length).to.equal(0);
+
   });
 
+  it('should render an error message if failed', function () {
+
+    const props = {
+      failed: true,
+      isFetching: false,
+      notifications: [],
+      searchQuery: ''
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find(ReactCSSTransitionGroup).length).to.equal(0);
+    expect(wrapper.find('.loading-container').length).to.equal(0);
+    expect(wrapper.find('.fork').length).to.equal(0);
+    expect(wrapper.find('.all-read').length).to.equal(0);
+    expect(wrapper.find(Oops).length).to.equal(1);
+
+  });
+
+  it('should render the all read screen if no notifications and no search query', function () {
+
+    const props = {
+      failed: false,
+      isFetching: false,
+      notifications: [],
+      searchQuery: ''
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find(ReactCSSTransitionGroup).length).to.equal(0);
+    expect(wrapper.find('.loading-container').length).to.equal(0);
+    expect(wrapper.find('.fork').length).to.equal(0);
+    expect(wrapper.find('.all-read').length).to.equal(0);
+    expect(wrapper.find('.errored').length).to.equal(0);
+
+    expect(wrapper.find(AllRead).length).to.equal(1);
+
+  });
+
+  it('should not find any results for a search query', function () {
+
+    const props = {
+      failed: false,
+      isFetching: false,
+      notifications: notifications,
+      searchQuery: 'llama'
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find(ReactCSSTransitionGroup).children().length).to.equal(0);
+    expect(wrapper.find('.errored').length).to.equal(0);
+    expect(wrapper.find('.fork').length).to.equal(0);
+    expect(wrapper.find('h3').text()).to.contain('No Search Results.');
+
+  });
+
+  it('should find a result for a search query', function () {
+
+    const props = {
+      failed: false,
+      isFetching: false,
+      notifications: notifications,
+      searchQuery: 'trevor'
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.all-read').length).to.equal(0);
+    expect(wrapper.find('.errored').length).to.equal(0);
+    expect(wrapper.find(AllRead).length).to.equal(0);
+
+    expect(wrapper.find(ReactCSSTransitionGroup).children().length).to.equal(1);
+    expect(wrapper.find('.fork').length).to.equal(1);
+
+  });
+
+  it('open the gitify repo in browser', function () {
+
+    const props = {
+      failed: false,
+      isFetching: false,
+      notifications: notifications,
+      searchQuery: ''
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find(ReactCSSTransitionGroup).children().length).to.equal(2);
+    expect(wrapper.find('.fork').length).to.equal(1);
+
+    wrapper.find('.fork').simulate('click');
+    expect(shell.openExternal).to.have.been.calledOnce;
+    shell.openExternal.reset();
+
+  });
 });

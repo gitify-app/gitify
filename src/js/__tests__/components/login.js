@@ -1,205 +1,245 @@
-/* global jest, describe, beforeEach, it, expect */
+import React from 'react'; // eslint-disable-line no-unused-vars
+import { expect } from 'chai';
+import { shallow } from 'enzyme';
+import sinon from 'sinon';
+import { LoginPage } from '../../components/login';
 
-jest.dontMock('reflux');
-jest.dontMock('../../actions/actions.js');
-jest.dontMock('../../utils/api-requests');
-jest.dontMock('../../components/login.js');
-jest.dontMock('../../stores/auth.js');
+const BrowserWindow = window.require('electron').remote.BrowserWindow;
+const ipcRenderer = window.require('electron').ipcRenderer;
+const shell = window.require('electron').shell;
 
-import React from 'react';
-import ReactDOM from 'react-dom';
-import TestUtils from 'react-addons-test-utils';
-import createHistory from 'history/lib/createMemoryHistory';
-
-var Actions = require('../../actions/actions.js');
-
-describe('Login Component', function () {
-
-  var Login, AuthStore, apiRequests, history;
-
-  beforeEach(function () {
-
-    // Mocks for Electron
-    window.require = function () {
-      return {
-        remote: {
-          BrowserWindow: function () {
-            return {
-              loadURL: function () {
-                return;
-              },
-              webContents: {
-                on: function (event, callback) {
-
-                  if (event == 'will-navigate') {
-                    callback(
-                      'will-navigate',
-                      'http://www.github.com/?code=123123123'
-                    );
-                  }
-
-                  if (event == 'did-get-redirect-request') {
-                    callback(
-                      'did-get-redirect-request',
-                      'http://www.github.com/?code=123123123',
-                      'http://www.github.com/?code=123123123'
-                    );
-                  }
-
-                }
-              },
-              on: function () {
-                return;
-              },
-              close: function () {
-                return;
-              },
-              destroy: function () {
-                return;
-              }
-            };
-          }
-        },
-        ipcRenderer: {
-          send: function () {
-            // Fake sending message to ipcMain
-          }
-        },
+function setup(props) {
+  const options = {
+    context: {
+      router: {
+        push: sinon.spy(),
+        replace: sinon.spy()
       }
+    }
+  };
+
+  const wrapper = shallow(<LoginPage {...props} />, options);
+
+  return {
+    context: options.context,
+    props: props,
+    wrapper: wrapper,
+  };
+};
+
+describe('components/login.js', function () {
+
+  beforeEach(function() {
+    BrowserWindow().loadURL.reset();
+    ipcRenderer.send.reset();
+    shell.openExternal.reset();
+  });
+
+  it('should render itself & its children', function () {
+
+    const props = {
+      isLoggedIn: false,
+      token: null,
+      response: {},
+      failed: false,
+      isFetching: false
     };
 
-    window.localStorage = {
-      item: false,
-      getItem: function () {
-        return this.item;
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.desc').text()).to.equal('GitHub notifications in your menu bar.');
+
+  });
+
+  it('should open the login window and get a code successfully (will-navigate)', function () {
+
+    // BrowserWindow.webContents.on.restore();
+    // sinon.spy(BrowserWindow.webContents, 'on');
+    const code = '123123123';
+
+    const eventStub = sinon.stub(BrowserWindow().webContents, 'on', function (event, callback) {
+      if (event === 'will-navigate') {
+        callback('will-navigate', `http://www.github.com/?code=${code}`);
       }
+    });
+
+    const expectedUrl = 'https://github.com/login/oauth/' +
+      'authorize?client_id=3fef4433a29c6ad8f22c&scope=user:email,notifications';
+
+    const props = {
+      loginUser: sinon.spy(),
+      token: null,
+      response: {},
+      failed: false,
+      isFetching: false
     };
 
-    Login = require('../../components/login.js');
-    AuthStore = require('../../stores/auth.js');
-    apiRequests = require('../../utils/api-requests.js');
+    const { wrapper } = setup(props);
 
-    history = createHistory();
+    expect(wrapper).to.exist;
 
-  });
+    wrapper.find('.btn').simulate('click');
 
-  it('Should get the token from github', function () {
+    expect(BrowserWindow().loadURL).to.have.been.calledOnce;
+    expect(BrowserWindow().loadURL).to.have.been.calledWith(expectedUrl);
+    expect(props.loginUser).to.have.been.calledOnce;
+    expect(props.loginUser).to.have.been.calledWith(code);
 
-    var instance = TestUtils.renderIntoDocument(<Login />);
-    instance.history = history;
-
-    expect(instance.authGithub).toBeDefined();
-    expect(instance.requestGithubToken).toBeDefined();
-
-    var superagent = require('superagent');
-    superagent.__setResponse(200, 'ok', {'access_token': '123123123'}, false);
-
-    instance.requestGithubToken({}, '456456');
+    eventStub.restore();
 
   });
 
-  it('Should fail to get the token from github', () => {
+  it('should open the login window and get a code successfully (did-get-redirect-request)', function () {
 
-    var instance = TestUtils.renderIntoDocument(<Login />);
-    instance.history = history;
+    const code = '123123123';
 
-    expect(instance.authGithub).toBeDefined();
-    expect(instance.requestGithubToken).toBeDefined();
-
-    var superagent = require('superagent');
-    superagent.__setResponse(400, false, false, false);
-
-    instance.requestGithubToken({}, '456456');
-
-  });
-
-  it('Should open the authWindow and login successfully', () => {
-
-    var instance = TestUtils.renderIntoDocument(<Login />);
-    instance.history = history;
-    expect(instance.authGithub).toBeDefined();
-
-    // Prevent testing requestGithubToken
-    // Tested in another case
-    instance.requestGithubToken = function () {
-      return;
-    };
-
-    instance.authGithub();
-
-  });
-
-});
-
-describe('Login Component - Callback with Error', () => {
-
-  var Login;
-
-  beforeEach(function () {
-
-    // Mocks for Electron
-    window.require = function () {
-      return {
-        remote: {
-          BrowserWindow: function () {
-            return {
-              loadURL: function () {
-                return;
-              },
-              webContents: {
-                on: function (event, callback) {
-
-                  if (event == 'will-navigate') {
-                    callback(
-                      'will-navigate',
-                      'http://www.github.com/?error=FAILURE'
-                    );
-                  }
-
-                  if (event == 'did-get-redirect-request') {
-                    callback(
-                      'did-get-redirect-request',
-                      'http://www.github.com/?error=FAILURE',
-                      'http://www.github.com/?error=FAILURE'
-                    );
-                  }
-
-                }
-              },
-              on: function () {
-                return;
-              },
-              close: function () {
-                return;
-              },
-              destroy: function () {
-                return;
-              }
-            };
-          }
-        },
-        ipcRenderer: {
-          send: function () {
-            // Fake sending message to ipcMain
-          }
-        },
+    const eventStub = sinon.stub(BrowserWindow().webContents, 'on', function (event, callback) {
+      if (event === 'did-get-redirect-request') {
+        callback('did-get-redirect-request', null, `http://www.github.com/?code=${code}`);
       }
+    });
+
+    const expectedUrl = 'https://github.com/login/oauth/' +
+      'authorize?client_id=3fef4433a29c6ad8f22c&scope=user:email,notifications';
+
+    const props = {
+      loginUser: sinon.spy(),
+      token: null,
+      response: {},
+      failed: false,
+      isFetching: false
     };
 
-    // Mock alert
-    window.alert = function () {
-      return;
-    };
+    const { wrapper } = setup(props);
 
-    Login = require('../../components/login.js');
+    expect(wrapper).to.exist;
+
+    wrapper.find('.btn').simulate('click');
+
+    expect(BrowserWindow().loadURL).to.have.been.calledOnce;
+    expect(BrowserWindow().loadURL).to.have.been.calledWith(expectedUrl);
+    expect(props.loginUser).to.have.been.calledOnce;
+    expect(props.loginUser).to.have.been.calledWith(code);
+
+    eventStub.restore();
+
   });
 
-  it('Should open the authWindow and fail to login', () => {
+  it('should open the login window and get an error', function () {
 
-    var instance = TestUtils.renderIntoDocument(<Login />);
-    expect(instance.authGithub).toBeDefined();
+    const error = 'Oops! Something went wrong.';
 
-    instance.authGithub();
+    const eventStub = sinon.stub(BrowserWindow().webContents, 'on', function (event, callback) {
+      if (event === 'did-get-redirect-request') {
+        callback('did-get-redirect-request', null, `http://www.github.com/?error=${error}`);
+      }
+    });
+
+    const expectedUrl = 'https://github.com/login/oauth/' +
+      'authorize?client_id=3fef4433a29c6ad8f22c&scope=user:email,notifications';
+
+    const props = {
+      loginUser: sinon.spy(),
+      token: null,
+      response: {},
+      failed: false,
+      isFetching: false
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+
+    wrapper.find('.btn').simulate('click');
+
+    expect(BrowserWindow().loadURL).to.have.been.calledOnce;
+    expect(BrowserWindow().loadURL).to.have.been.calledWith(expectedUrl);
+    expect(props.loginUser).to.not.have.been.calledOnce;
+    expect(alert).to.have.been.calledOnce;
+    expect(alert).to.have.been.calledWith(
+      'Oops! Something went wrong and we couldn\'t log you in using Github. Please try again.'
+    );
+
+    eventStub.restore();
+
+  });
+
+  it('should close the browser window before logging in', function () {
+
+    const eventStub = sinon.stub(BrowserWindow(), 'on', function (event, callback) {
+      if (event === 'close') {
+        callback();
+      }
+    });
+
+    const props = {
+      loginUser: sinon.spy(),
+      token: null,
+      response: {},
+      failed: false,
+      isFetching: false
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+
+    wrapper.find('.btn').simulate('click');
+
+    expect(BrowserWindow().loadURL).to.have.been.calledOnce;
+    expect(props.loginUser).to.not.have.been.calledOnce;
+
+    eventStub.restore();
+
+  });
+
+  it('should redirect to notifications once logged in', function () {
+
+    const props = {
+      token: null,
+      response: {},
+      failed: false,
+      isFetching: false
+    };
+
+    const { wrapper, context } = setup(props);
+
+    expect(wrapper).to.exist;
+    expect(wrapper.find('.desc').text()).to.equal('GitHub notifications in your menu bar.');
+
+    wrapper.setProps({
+      token: 'HELLO'
+    });
+    expect(ipcRenderer.send).to.have.been.calledOnce;
+    expect(ipcRenderer.send).to.have.been.calledWith('reopen-window');
+    expect(context.router.push).to.have.been.calledOnce;
+    expect(context.router.push).to.have.been.calledWith('/notifications');
+
+    context.router.push.reset();
+  });
+
+  it('should request the github token if the oauth code is received', function () {
+
+    const code = 'thisisacode';
+
+    const props = {
+      loginUser: sinon.spy(),
+      token: null,
+      response: {},
+      failed: false,
+      isFetching: false
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).to.exist;
+
+    wrapper.instance().requestGithubToken(code);
+    expect(props.loginUser).to.have.been.calledOnce;
+    expect(props.loginUser).to.have.been.calledWith(code);
+
+    props.loginUser.reset();
 
   });
 

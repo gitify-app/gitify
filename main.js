@@ -10,8 +10,6 @@ var path = require('path');
 var ghReleases = require('electron-gh-releases');
 var Positioner = require('electron-positioner');
 
-require('crash-reporter').start();
-
 var AutoLaunch = require('auto-launch');
 var dialog = require('dialog');
 
@@ -24,9 +22,11 @@ var isLinux = (process.platform === 'linux');
 var isDarwin = (process.platform === 'darwin');
 var isWindows = (process.platform === 'win32');
 
+var autoStart;
+
 // The auto-start module does not support Linux
 if (!isLinux) {
-  var autoStart = new AutoLaunch({
+  autoStart = new AutoLaunch({
     name: 'Gitify'
   });
 }
@@ -36,15 +36,92 @@ app.on('ready', function() {
   var appIcon = new Tray(iconIdle);
   var windowPosition = (isWindows) ? 'trayBottomCenter' : 'trayCenter';
 
-  initWindow();
+  function confirmAutoUpdate(quitAndUpdate) {
+    dialog.showMessageBox({
+      type: 'question',
+      buttons: ['Update & Restart', 'Cancel'],
+      title: 'Update Available',
+      cancelId: 99,
+      message: 'There is an update available. Would you like to update Gitify now?'
+    }, function (response) {
+      console.log('Exit: ' + response);
+      app.dock.hide();
+      if (response === 0) {
+        quitAndUpdate();
+      }
+    } );
+  }
 
-  appIcon.on('click', function (e, bounds) {
-    if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) return hideWindow();
-    if (appIcon.window && appIcon.window.isVisible()) return hideWindow();
-    bounds = bounds || cachedBounds;
-    cachedBounds = bounds;
-    showWindow(cachedBounds);
-  });
+  function checkAutoUpdate(showAlert) {
+
+    var autoUpdateOptions = {
+      repo: 'ekonstantinidis/gitify',
+      currentVersion: app.getVersion()
+    };
+
+    var update = new ghReleases(autoUpdateOptions, function (autoUpdater) {
+      autoUpdater
+        .on('error', function(event, message) {
+          console.log('ERRORED.');
+          console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
+        })
+        .on('update-downloaded', function (event, releaseNotes, releaseName,
+          releaseDate, updateUrl, quitAndUpdate) {
+          console.log('Update downloaded');
+          confirmAutoUpdate(quitAndUpdate);
+        });
+    });
+
+    // Check for updates
+    update.check(function (err, status) {
+      if (err || !status) {
+        if (showAlert) {
+          dialog.showMessageBox({
+            type: 'info',
+            buttons: ['Close'],
+            title: 'No update available',
+            message: 'You are currently running the latest version of Gitify.'
+          });
+        }
+        app.dock.hide();
+      }
+
+      if (!err && status) {
+        update.download();
+      }
+    });
+  }
+
+  function initMenu () {
+    var template = [{
+      label: 'Edit',
+      submenu: [
+        {
+          label: 'Copy',
+          accelerator: 'Command+C',
+          selector: 'copy:'
+        },
+        {
+          label: 'Paste',
+          accelerator: 'Command+V',
+          selector: 'paste:'
+        },
+        {
+          label: 'Select All',
+          accelerator: 'Command+A',
+          selector: 'selectAll:'
+        }
+      ]
+    }];
+
+    var menu = Menu.buildFromTemplate(template);
+    Menu.setApplicationMenu(menu);
+  }
+
+  function hideWindow () {
+    if (!appIcon.window) { return; }
+    appIcon.window.hide();
+  }
 
   function initWindow () {
     var defaults = {
@@ -103,96 +180,15 @@ app.on('ready', function() {
     appIcon.window.show();
   }
 
-  function initMenu () {
-    var template = [{
-      label: 'Edit',
-      submenu: [
-        {
-          label: 'Copy',
-          accelerator: 'Command+C',
-          selector: 'copy:'
-        },
-        {
-          label: 'Paste',
-          accelerator: 'Command+V',
-          selector: 'paste:'
-        },
-        {
-          label: 'Select All',
-          accelerator: 'Command+A',
-          selector: 'selectAll:'
-        }
-      ]
-    }];
+  initWindow();
 
-    var menu = Menu.buildFromTemplate(template);
-    Menu.setApplicationMenu(menu);
-  }
-
-  function hideWindow () {
-    if (!appIcon.window) return;
-    appIcon.window.hide();
-  }
-
-  function checkAutoUpdate (showAlert) {
-    var autoUpdateOptions = {
-      repo: 'ekonstantinidis/gitify',
-      currentVersion: app.getVersion()
-    };
-
-    var update = new ghReleases(autoUpdateOptions, function (autoUpdater) {
-      autoUpdater
-        .on('error', function (event, message) {
-          console.log('ERRORED.');
-          console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
-        })
-        .on('update-downloaded', function (event, releaseNotes, releaseName,
-            releaseDate, updateUrl, quitAndUpdate) {
-          console.log('Update downloaded');
-          confirmAutoUpdate(quitAndUpdate);
-        });
-    });
-
-    // Check for updates
-    update.check(function (err, status) {
-      if (err || !status) {
-        if (showAlert) {
-          dialog.showMessageBox({
-            type: 'info',
-            buttons: ['Close'],
-            title: 'No update available',
-            message: 'You are currently running the latest version of Gitify.'
-          });
-        }
-
-        if (isDarwin) {
-          app.dock.hide();
-        }
-      }
-
-      if (!err && status) {
-        update.download();
-      }
-    });
-  }
-
-  function confirmAutoUpdate (quitAndUpdate) {
-    dialog.showMessageBox({
-      type: 'question',
-      buttons: ['Update & Restart', 'Cancel'],
-      title: 'Update Available',
-      cancelId: 99,
-      message: 'There is an update available. Would you like to update Gitify now?'
-    }, function (response) {
-      console.log('Exit: ' + response);
-      if (isDarwin) {
-        app.dock.hide();
-      }
-      if (response === 0) {
-        quitAndUpdate();
-      }
-    } );
-  }
+  appIcon.on('click', function (e, bounds) {
+    if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) { return hideWindow(); };
+    if (appIcon.window && appIcon.window.isVisible()) { return hideWindow(); };
+    bounds = bounds || cachedBounds;
+    cachedBounds = bounds;
+    showWindow(cachedBounds);
+  });
 
   ipc.on('reopen-window', function () {
     showWindow(cachedBounds);
