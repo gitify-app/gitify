@@ -1,7 +1,6 @@
 import React from 'react';  // eslint-disable-line
 import { Route, IndexRoute } from 'react-router';
 
-import { checkAuth } from './actions';
 import App from './containers/app';
 import LoginPage from './components/login';
 import NotificationsPage from './components/notifications';
@@ -14,7 +13,6 @@ export class NotFound extends React.Component {
 };
 
 function requireAuth (store, b, c) {
-  store.dispatch(checkAuth());
   const isLoggedIn = store.getState().auth.token !== null;
 
   if (!isLoggedIn) {
