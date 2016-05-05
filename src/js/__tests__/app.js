@@ -6,12 +6,12 @@ import { stub } from 'sinon';
 
 describe('app.js', function () {
 
-  it('should make a basic test', function () {
+  it('should render the things', function () {
+
     const renderSpy = stub(ReactDOM, 'render');
     require('../app');
-    expect(renderSpy).to.have.been.calledThrice;
 
-    expect(2).to.equal(2);
+    expect(renderSpy).to.have.been.calledOnce;
 
     renderSpy.restore();
 

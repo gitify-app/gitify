@@ -6,7 +6,9 @@ import sinonChai from 'sinon-chai';
 chai.expect();
 chai.use(sinonChai);
 
-global.document = jsdom.jsdom('<!doctype html><html><body></body></html>');
+global.document = jsdom.jsdom('<!doctype html><html><body></body></html>', {
+  url: 'http://localhost'
+});
 global.window = document.defaultView;
 global.navigator = {userAgent: 'node.js'};
 global.alert = sinon.spy();
