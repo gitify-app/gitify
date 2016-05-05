@@ -321,6 +321,7 @@ input {
   color: $white;
 
   .logo {
+    display: block;
     margin: 10px auto 20px;
     max-width: 150px;
   }
@@ -407,8 +408,8 @@ input {
     }
 
     .emoji {
+      display: block;
       margin: 15px auto;
-
     }
 
     .typed-text {
