@@ -15,6 +15,7 @@ let constants = {
     'All gone! Nice work!',
     'Yay! Good news.',
   ],
+
   ALLREAD_EMOJIS: [
     ':wink:',
     ':tada:',
@@ -24,7 +25,16 @@ let constants = {
     ':confetti_ball:',
     ':clap:',
     ':circus_tent:',
-    ':spaghetti:'
+    ':spaghetti:',
+    ':ok_hand:'
+  ],
+
+  ERROR_EMOJIS: [
+    ':pensive:',
+    ':disappointed:',
+    ':triumph:',
+    ':scream:',
+    ':cry:'
   ]
 };
 

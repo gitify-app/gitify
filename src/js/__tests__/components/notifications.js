@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { NotificationsPage } from '../../components/notifications';
 import AllRead from '../../components/all-read';
+import Oops from '../../components/oops';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 const shell = window.require('electron').shell;
 
@@ -77,9 +78,7 @@ describe('components/notifications.js', function () {
     expect(wrapper.find('.loading-container').length).to.equal(0);
     expect(wrapper.find('.fork').length).to.equal(0);
     expect(wrapper.find('.all-read').length).to.equal(0);
-
-    expect(wrapper.find('.errored').length).to.equal(1);
-    expect(wrapper.find('.errored').children().find('h3').text()).to.contain('Oops something went wrong');
+    expect(wrapper.find(Oops).length).to.equal(1);
 
   });
 
