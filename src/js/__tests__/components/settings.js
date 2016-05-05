@@ -8,6 +8,7 @@ import { SettingsPage } from '../../components/settings';
 function setup() {
   const props = {
     updateSetting: sinon.spy(),
+    fetchNotifications: sinon.spy(),
     settings: {
       participating: false,
       playSound: true,
@@ -41,8 +42,19 @@ describe('components/settings.js', function () {
 
     const { wrapper, props } = setup();
     expect(wrapper).to.exist;
+
+    // Note: First Toggle is "participating"
     wrapper.find(Toggle).first().props().onChange({target: {checked: true}});
     expect(props.updateSetting).to.have.been.calledOnce;
+
+    wrapper.setProps({
+      ...props,
+      settings: {
+        ...props.settings,
+        participating: true
+      }
+    });
+    expect(props.fetchNotifications).to.have.been.calledOnce;
 
   });
 

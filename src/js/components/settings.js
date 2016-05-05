@@ -4,9 +4,15 @@ import Toggle from 'react-toggle';
 
 const ipcRenderer = window.require('electron').ipcRenderer;
 
-import { updateSetting } from '../actions';
+import { fetchNotifications, updateSetting } from '../actions';
 
 export class SettingsPage extends React.Component {
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.settings.participating !== this.props.settings.participating) {
+      this.props.fetchNotifications();
+    }
+  }
+
   toggleSetting(key, event) {
     this.props.updateSetting(key, event.target.checked);
   }
@@ -101,4 +107,4 @@ function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps, { updateSetting })(SettingsPage);
+export default connect(mapStateToProps, { updateSetting, fetchNotifications })(SettingsPage);
