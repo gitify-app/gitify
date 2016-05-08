@@ -10,7 +10,7 @@
 $theme-primary: #3893C6;
 
 $theme-black: #262626;
-$theme-green: #6CC644;
+$theme-green: #5EBA7D;
 
 $white: #FFF;
 $dark-gray: darken($white, 75%);
@@ -36,6 +36,8 @@ $octicons-font-path: "../../node_modules/octicons/octicons";
 /* @group Bootstrap Overrides */
 
 $navbar-height: 35px;
+
+$brand-success: $theme-green;
 
 $font-family-base:
 -apple-system, BlinkMacSystemFont,
@@ -143,6 +145,12 @@ input {
   text-align: center;
 }
 
+.react-toggle--checked {
+  .react-toggle-track {
+    background-color: $theme-green;
+  }
+}
+
 /* @end Misc */
 
 
@@ -235,8 +243,8 @@ input {
     &.left {
       .logo {
         display: inline-block;
-        margin: 5px;
-        max-width: 50px;
+        margin: 0 5px 2px;
+        max-height: 18px;
       }
 
       .label {

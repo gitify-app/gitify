@@ -95,7 +95,7 @@ export class Navigation extends React.Component {
           <div className="col-xs-6 left">
             <img
               className="img-responsive logo"
-              src="images/logo-hor-white.png"
+              src="images/gitify-logo-fill-light-small.png"
               onClick={this.openBrowser}/>
             {countLabel}
             {refreshIcon}
