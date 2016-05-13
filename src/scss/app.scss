@@ -279,7 +279,9 @@ input {
   color: $white;
 
   .row {
-    margin: 12px 10px;
+    margin: 10px 5px;
+    font-size: .95rem;
+    font-weight: 300;
 
     .col-xs-4 {
       text-align: right;
