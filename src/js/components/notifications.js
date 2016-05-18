@@ -27,7 +27,7 @@ export class NotificationsPage extends React.Component {
   }
 
   render() {
-    const wrapperClass = 'container-fluid notifications';
+    const wrapperClass = 'container-fluid main-container notifications';
     const notificationsEmpty = _.isEmpty(this.props.notifications);
 
     if (this.props.failed) {

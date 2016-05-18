@@ -30,7 +30,7 @@ export class SettingsPage extends React.Component {
     const settings = this.props.settings;
 
     return (
-      <div className="container-fluid settings">
+      <div className="container-fluid main-container settings">
         <div className="row">
           <div className="col-xs-8">Show only participating</div>
           <div className="col-xs-4">

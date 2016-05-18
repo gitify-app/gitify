@@ -24,7 +24,7 @@ export default class AllRead extends React.Component {
     const emoji = _.sample(constants.ALLREAD_EMOJIS);
 
     return (
-      <div className="container-fluid notifications all-read">
+      <div className="container-fluid main-container notifications all-read">
         <h2 className="typed-text">
           <span className="typed" />
           <span className="cursor">|</span>

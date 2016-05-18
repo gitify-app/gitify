@@ -73,7 +73,7 @@ export class LoginPage extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid login">
+      <div className="container-fluid main-container login">
         <div className="row">
           <div className="col-xs-offset-2 col-xs-8">
             <img className="img-responsive logo" src="images/gitify-logo-outline-light.png" />
