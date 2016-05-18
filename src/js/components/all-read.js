@@ -7,6 +7,10 @@ import constants from '../utils/constants';
 
 export default class AllRead extends React.Component {
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return false;
+  }
+
   componentDidMount() {
     const message = _.sample(constants.ALLREAD_MESSAGES);
 

@@ -5,6 +5,10 @@ import {emojify} from 'react-emojione';
 import constants from '../utils/constants';
 
 export default class Oops extends React.Component {
+  shouldComponentUpdate(nextProps, nextState) {
+    return false;
+  }
+
   render() {
     const emoji = _.sample(constants.ERROR_EMOJIS);
 
