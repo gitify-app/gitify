@@ -292,7 +292,9 @@ input {
   color: $white;
 
   .row {
-    margin: 12px 10px;
+    margin: 10px 5px;
+    font-size: .95rem;
+    font-weight: 300;
 
     .col-xs-4 {
       text-align: right;
@@ -356,6 +358,10 @@ input {
     padding: 0;
   }
 
+  .col-xs-1 {
+    padding: 5px 0;
+  }
+
   .avatar {
     @include border-radius(50%);
     margin-top: 5px;
@@ -380,10 +386,11 @@ input {
   }
 
   .check-wrapper {
-    padding: 4px 5px;
+    text-align: right;
 
     .octicon {
       @include check-octicon;
+      margin-right: 10px;
       font-size: 22px;
     }
   }

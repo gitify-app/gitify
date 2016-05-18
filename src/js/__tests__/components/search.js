@@ -46,8 +46,7 @@ describe('components/search.js', function () {
     const { wrapper } = setup(props);
 
     expect(wrapper).to.exist;
-
-    expect(wrapper.find('.container-fluid').length).to.equal(1);
+    expect(wrapper.find('.container-fluid').length).to.equal(0);
     expect(wrapper.find('.search-bar').length).to.equal(0);
 
   });

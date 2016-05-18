@@ -1,16 +1,17 @@
+const path = require('path');
+
 const electron = require('electron');
+const BrowserWindow = electron.BrowserWindow;
+const Menu = electron.Menu;
+const Tray = electron.Tray;
 const app = electron.app;
+const dialog = electron.dialog;
 const ipc = electron.ipcMain;
 
-var path = require('path');
 var ghReleases = require('electron-gh-releases');
 var Positioner = require('electron-positioner');
 
-var Menu = require('menu');
-var Tray = require('tray');
 var AutoLaunch = require('auto-launch');
-var BrowserWindow = require('browser-window');
-var dialog = require('dialog');
 
 var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 var iconActive = path.join(__dirname, 'images', 'tray-active.png');
