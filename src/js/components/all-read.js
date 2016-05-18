@@ -1,14 +1,15 @@
-import React from 'react';
 import _ from 'underscore';
+import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 import malarkey from 'malarkey';
 import {emojify} from 'react-emojione';
 
 import constants from '../utils/constants';
 
 export default class AllRead extends React.Component {
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return false;
+  constructor(props) {
+    super(props);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
   }
 
   componentDidMount() {

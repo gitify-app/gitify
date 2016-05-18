@@ -57,6 +57,7 @@
     "octicons": "=3.5.0",
     "react": "=15.0.2",
     "react-addons-css-transition-group": "=15.0.2",
+    "react-addons-pure-render-mixin": "=15.0.2",
     "react-addons-test-utils": "=15.0.2",
     "react-dom": "=15.0.2",
     "react-emojione": "=1.1.1",
