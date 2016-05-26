@@ -52,7 +52,7 @@ Gitify currently only supports OS X.
 
 
 ### Development
-First you will need to set the testing `client_id` and `client_secret_key` in the `src/js/components/login.js`. You can use the development app credentials(use at your own discretion):
+First you will need to set the testing `CLIENT_ID` and `CLIENT_SECRET` in `src/js/utils/constants.js` file. You can use the development app credentials (use at your own discretion):
 
     Client Id: 3fef4433a29c6ad8f22c
     Client Secret Key: 9670de733096c15322183ff17ed0fc8704050379
