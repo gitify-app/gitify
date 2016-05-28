@@ -316,32 +316,39 @@ input {
 /* @end Settings */
 
 
-/* @group Component / Login  */
+/* @group Page / Login  */
 
 .login {
   position: absolute;
   top: $navbar-height;
   left: 0;
-  background-color: $theme-primary;
-  padding-top: 30px;
+  background-color: $gray-lighter;
+  padding-top: 20px;
   width: 100%;
   height: 100%;
   color: $white;
 
   .logo {
     display: block;
-    margin: 10px auto 20px;
-    max-width: 150px;
+    margin: 0 auto 20px;
+    max-width: 115px;
   }
 
   .desc {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     text-align: center;
+    line-height: 22px;
+    color: $gray-dark;
     font-size: 20px;
+  }
+
+  .btn {
+    @include button-variant($white, $gray, $btn-primary-border);
+    padding: .55rem 1.25rem;
   }
 }
 
-/* @end Component / Login  */
+/* @end Page / Login  */
 
 
 /* @group Component / Repository  */
