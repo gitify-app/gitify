@@ -40,22 +40,6 @@ export class SearchBar extends React.Component {
         </div>
       </div>
     );
-    // <div className="container-fluid search-bar">
-    //   <div className="row">
-    //     <div className="col-xs-10">
-    //       <div className="form-group search-wrapper">
-    //         <input
-    //           autoFocus
-    //           value={this.props.query}
-    //           onChange={(evt) => this.props.searchNotifications(evt.target.value)}
-    //           className="form-control"
-    //           type="text"
-    //           placeholder=" Search..." />
-    //       </div>
-    //     </div>
-    //     <div className="col-xs-2">{clearSearchIcon}</div>
-    //   </div>
-    // </div>
   }
 };
 
