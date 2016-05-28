@@ -132,7 +132,8 @@ html {
   }
 }
 
-.right {
+.right,
+.text-right {
   text-align: right;
 }
 
@@ -268,11 +269,10 @@ input {
 /* @group Settings */
 
 .settings {
-  background-color: $theme-primary;
+  background-color: $gray-lighter;
   padding: 5px 20px;
-  color: $white;
 
-  .row {
+  .setting {
     margin: 10px 5px;
     font-size: .95rem;
     font-weight: 300;
@@ -280,15 +280,27 @@ input {
     .col-xs-4 {
       text-align: right;
     }
+  }
 
-    .btn-close {
-      padding: 10px;
+  .nav {
+    display: flex;
+    justify-content: center;
+
+    .nav-link {
+      background-color: $gray;
+      color: $white;
+
+      &:hover {
+        background-color: $gray-dark;
+        cursor: pointer;
+      }
     }
   }
 
   .footer {
+    margin: 10px 5px;
     padding-top: 5px;
-    font-size: 10px;
+    font-size: 12px;
 
     .text-right {
       padding-right: 18px;
