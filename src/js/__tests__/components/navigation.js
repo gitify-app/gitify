@@ -193,7 +193,7 @@ describe('components/navigation.js', function () {
     expect(wrapper).to.exist;
     expect(wrapper.find('.fa-power-off').length).to.equal(1);
 
-    wrapper.find('.logo').simulate('click');
+    wrapper.find('.navbar-brand').simulate('click');
 
     expect(shell.openExternal).to.have.been.calledOnce;
     expect(shell.openExternal).to.have.been.calledWith('http://www.github.com/ekonstantinidis/gitify');
