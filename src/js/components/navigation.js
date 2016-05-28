@@ -58,7 +58,9 @@ export class Navigation extends React.Component {
 
     if (isLoggedIn) {
       refreshIcon = (
-        <i title="Refresh" className={loadingClass} onClick={this.refreshNotifications.bind(this)} />
+        <li className="nav-item">
+          <i title="Refresh" className={'nav-link ' + loadingClass} onClick={this.refreshNotifications.bind(this)} />
+        </li>
       );
       logoutIcon = (
         <i title="Sign Out" className="fa fa-sign-out" onClick={this.logoutButton.bind(this)} />
@@ -90,25 +92,23 @@ export class Navigation extends React.Component {
     }
 
     return (
-      <div className="container-fluid">
-        <div className="row navigation">
-          <div className="col-xs-6 left">
-            <img
-              className="img-responsive logo"
-              src="images/gitify-logo-fill-light-small.png"
-              onClick={this.openBrowser}/>
-            {countLabel}
-            {refreshIcon}
-          </div>
-          <div className="col-xs-6 right">
-            {backIcon}
-            {searchIcon}
-            {settingsIcon}
-            {logoutIcon}
-            {quitIcon}
-          </div>
-        </div>
-      </div>
+      <nav className="navbar navbar-dark bg-inverse">
+        <img
+          className="navbar-brand img-responsive"
+          src="images/gitify-logo-fill-light-small.png"
+          onClick={this.openBrowser} />
+        {countLabel}
+
+        <ul className="nav navbar-nav pull-xs-left">
+          {refreshIcon}
+        </ul>
+
+        <ul className="nav navbar-nav pull-xs-right">
+          <li className="nav-item active">
+            <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
+          </li>
+        </ul>
+      </nav>
     );
   }
 };

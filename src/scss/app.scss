@@ -36,6 +36,8 @@ $octicons-font-path: "../../node_modules/octicons/octicons";
 /* @group Bootstrap Overrides */
 
 $navbar-height: 35px;
+$navbar-padding-vertical: .3rem;
+$navbar-padding-horizontal: 1rem;
 
 $brand-success: $theme-green;
 
@@ -231,51 +233,52 @@ input {
 
 /* @group Navbar */
 
-.navigation {
-  background-color: $theme-primary;
+.navbar {
+  // background-color: $theme-primary;
   height: $navbar-height;
   color: $white;
 
-  div[class*="col-xs-"] {
-    line-height: 32px;
-    font-size: 16px;
+  .navbar-brand {
+    display: inline-block;
+    margin: 0 5px 2px;
+    max-height: 25px;
+  }
 
-    &.left {
-      .logo {
-        display: inline-block;
-        margin: 0 5px 2px;
-        max-height: 18px;
-      }
+  .label {
+    @include border-radius(0);
 
-      .label {
-        margin-right: 5px;
-      }
+    position: relative;
+    top: -$navbar-padding-vertical;
+    left: 5px;
+    float: left;
+    margin-right: 10px;
+    height: $navbar-height;
+    line-height: 28px;
+  }
 
-      .fa {
-        margin: 0 5px;
-
-        &.fa-refresh {
-          font-size: 14px;
-        }
-      }
-    }
-
-    &.right {
-      .fa {
-        margin: 0 10px;
-
-        &.fa-chevron-left,
-        &.fa-search {
-          font-size: 14px;
-        }
-      }
-    }
+  .nav-item {
 
     .fa {
+      margin: 0 5px;
+
+      &.fa-refresh {
+        font-size: 14px;
+      }
 
       &:active,
       &:hover {
         color: $dark-gray;
+      }
+    }
+  }
+
+  &.right {
+    .fa {
+      margin: 0 10px;
+
+      &.fa-chevron-left,
+      &.fa-search {
+        font-size: 14px;
       }
     }
   }
