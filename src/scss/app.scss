@@ -251,36 +251,24 @@ input {
     top: -$navbar-padding-vertical;
     left: 5px;
     float: left;
-    margin-right: 10px;
+    margin-right: .95rem;
+    min-width: 1.5rem;
     height: $navbar-height;
     line-height: 28px;
   }
 
-  .nav-item {
-
-    .fa {
-      margin: 0 5px;
-
-      &.fa-refresh {
-        font-size: 14px;
-      }
-
-      &:active,
-      &:hover {
-        color: $dark-gray;
-      }
-    }
+  .nav-link {
+    padding-top: .3rem;
+    font-size: .95rem;
   }
 
-  &.right {
-    .fa {
-      margin: 0 10px;
+  .fa {
+    // margin: 0 5px;
 
-      &.fa-chevron-left,
-      &.fa-search {
-        font-size: 14px;
-      }
-    }
+    // &:active,
+    // &:hover {
+    //   color: $dark-gray;
+    // }
   }
 }
 

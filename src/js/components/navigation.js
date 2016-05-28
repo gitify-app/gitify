@@ -63,14 +63,20 @@ export class Navigation extends React.Component {
         </li>
       );
       logoutIcon = (
-        <i title="Sign Out" className="fa fa-sign-out" onClick={this.logoutButton.bind(this)} />
+        <li className="nav-item">
+          <i title="Sign Out" className="nav-link fa fa-sign-out" onClick={this.logoutButton.bind(this)} />
+        </li>
       );
       settingsIcon = (
-        <i title="Settings" className="fa fa-cog" onClick={this.goToSettings.bind(this)} />
+        <li className="nav-item">
+          <i title="Settings" className="nav-link fa fa-cog" onClick={this.goToSettings.bind(this)} />
+        </li>
       );
       if (this.props.notifications.length) {
         searchIcon = (
-          <i title="Search" className="fa fa-search" onClick={this.props.toggleSearch} />
+          <li className="nav-item">
+            <i title="Search" className="nav-link fa fa-search" onClick={this.props.toggleSearch} />
+          </li>
         );
         countLabel = (
           <span className="label label-success">{this.props.notifications.length}</span>
@@ -78,16 +84,22 @@ export class Navigation extends React.Component {
       }
     } else {
       quitIcon = (
-        <i title="Quit" className="fa fa-power-off" onClick={this.appQuit.bind(this)} />
+        <li className="nav-item">
+          <i title="Quit" className="nav-link fa fa-power-off" onClick={this.appQuit.bind(this)} />
+        </li>
       );
     }
 
     if (this.props.location.pathname === '/settings') {
       backIcon = (
-        <i title="Back" className="fa fa-chevron-left" onClick={this.goBack.bind(this)} />
+        <li className="nav-item">
+          <i title="Back" className="nav-link fa fa-chevron-left" onClick={this.goBack.bind(this)} />
+        </li>
       );
       settingsIcon = (
-        <i title="Settings" className="fa fa-cog" onClick={this.goBack.bind(this)} />
+        <li className="nav-item">
+          <i title="Settings" className="nav-link fa fa-cog" onClick={this.goBack.bind(this)} />
+        </li>
       );
     }
 
@@ -104,9 +116,11 @@ export class Navigation extends React.Component {
         </ul>
 
         <ul className="nav navbar-nav pull-xs-right">
-          <li className="nav-item active">
-            <a className="nav-link" href="#">Home <span className="sr-only">(current)</span></a>
-          </li>
+          {backIcon}
+          {searchIcon}
+          {settingsIcon}
+          {logoutIcon}
+          {quitIcon}
         </ul>
       </nav>
     );
