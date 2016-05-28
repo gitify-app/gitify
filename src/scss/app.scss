@@ -13,7 +13,6 @@ $theme-black: #262626;
 $theme-green: #5EBA7D;
 
 $white: #FFF;
-$dark-gray: darken($white, 75%);
 $light-gray: darken($white, 10%);
 
 $error-color: #DB423C;
@@ -78,7 +77,7 @@ $alert-danger-text: $white;
 @mixin check-octicon {
   &.octicon-check {
     transition: all .4s;
-    color: darken($light-gray, 20%);
+    color: $gray-light;
 
     &:hover {
       cursor: pointer;
@@ -116,7 +115,7 @@ html {
   overflow: auto;
 }
 
-.search-bar + .main-container {
+.search-form + .main-container {
   top: $navbar-height + $navbar-height;
 }
 
@@ -261,15 +260,6 @@ input {
     padding-top: .3rem;
     font-size: .95rem;
   }
-
-  .fa {
-    // margin: 0 5px;
-
-    // &:active,
-    // &:hover {
-    //   color: $dark-gray;
-    // }
-  }
 }
 
 /* @end Navbar */
@@ -341,7 +331,7 @@ input {
 
 .repository {
   margin: 0;
-  background-color: $light-gray;
+  background-color: $gray-lighter;
   padding: 5px 20px;
 
   .col-xs-2,
@@ -469,7 +459,7 @@ input {
 
 .notification {
   margin: 0;
-  border-bottom: 1px solid darken($light-gray, 10%);
+  border-bottom: 1px solid $gray-lighter;
   padding: 2px 20px;
 
   .col-xs-1,
@@ -499,7 +489,7 @@ input {
   }
 
   &:hover {
-    background-color: $light-gray;
+    background-color: $gray-lightest;
   }
 }
 
@@ -510,54 +500,45 @@ input {
 
 @SearchHeight: 22px;
 
-.search-bar {
+.search-form {
   margin: 0;
-  background-color: $theme-primary;
-  padding: 0 20px;
+  background-color: $gray;
   height: $navbar-height;
   text-align: center;
 
-  div[class*="col-xs-"] {
-    padding: 0;
-  }
-
-  -webkit-animation: fadein .5s;
-
-  @-webkit-keyframes fadein {
-    0% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 1;
-    }
-  }
-}
-
-.form-group {
-  margin-bottom: 0;
+  // -webkit-animation: fadein .5s;
+  //
+  // @-webkit-keyframes fadein {
+  //   0% {
+  //     opacity: 0;
+  //   }
+  //
+  //   100% {
+  //     opacity: 1;
+  //   }
+  // }
 
   .form-control {
     outline: none;
     border: 0;
     box-shadow: none;
-    background-color: $theme-primary;
-    padding: 0 0 0 16px;
+    background-color: $gray;
+    padding: 0 1.5rem;
     color: $white;
     font-size: 18px;
 
     &::-webkit-input-placeholder {
-      color: $light-gray;
+      color: $gray-lighter;
     }
   }
-}
 
-.octicon-x {
-  cursor: pointer;
-  text-align: center;
-  line-height: 36px;
-  color: $white;
-  font-size: 20px;
+  .octicon-x {
+    cursor: pointer;
+    text-align: center;
+    line-height: 28px;
+    color: $white;
+    font-size: 20px;
+  }
 }
 
 /* @end Component / Search  */

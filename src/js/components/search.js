@@ -25,23 +25,37 @@ export class SearchBar extends React.Component {
     }
 
     return (
-      <div className="container-fluid search-bar">
-        <div className="row">
-          <div className="col-xs-10">
-            <div className="form-group search-wrapper">
-              <input
-                autoFocus
-                value={this.props.query}
-                onChange={(evt) => this.props.searchNotifications(evt.target.value)}
-                className="form-control"
-                type="text"
-                placeholder=" Search..." />
-            </div>
-          </div>
-          <div className="col-xs-2">{clearSearchIcon}</div>
+      <div className="row search-form">
+        <div className="col-xs-10">
+          <input
+            autoFocus
+            value={this.props.query}
+            onChange={(evt) => this.props.searchNotifications(evt.target.value)}
+            className="form-control form-control-sm"
+            type="text"
+            placeholder=" Search..." />
+        </div>
+        <div className="col-xs-2">
+          {clearSearchIcon}
         </div>
       </div>
     );
+    // <div className="container-fluid search-bar">
+    //   <div className="row">
+    //     <div className="col-xs-10">
+    //       <div className="form-group search-wrapper">
+    //         <input
+    //           autoFocus
+    //           value={this.props.query}
+    //           onChange={(evt) => this.props.searchNotifications(evt.target.value)}
+    //           className="form-control"
+    //           type="text"
+    //           placeholder=" Search..." />
+    //       </div>
+    //     </div>
+    //     <div className="col-xs-2">{clearSearchIcon}</div>
+    //   </div>
+    // </div>
   }
 };
 
