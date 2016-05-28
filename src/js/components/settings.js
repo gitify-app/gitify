@@ -4,7 +4,7 @@ import Toggle from 'react-toggle';
 
 const ipcRenderer = window.require('electron').ipcRenderer;
 
-import { fetchNotifications, updateSetting } from '../actions';
+import { fetchNotifications, updateSetting, logout } from '../actions';
 
 export class SettingsPage extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -15,6 +15,12 @@ export class SettingsPage extends React.Component {
 
   toggleSetting(key, event) {
     this.props.updateSetting(key, event.target.checked);
+  }
+
+  logout() {
+    this.props.logout();
+    this.context.router.replace('/login');
+    ipcRenderer.send('update-icon', 'IconPlain');
   }
 
   checkForUpdates() {
@@ -31,6 +37,24 @@ export class SettingsPage extends React.Component {
 
     return (
       <div className="container-fluid main-container settings">
+        <ul className="nav nav-pills">
+          <li className="nav-item">
+            <a className="nav-link" onClick={this.checkForUpdates}>
+              <i className="fa fa-cloud-download" /> Update
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" onClick={this.logout.bind(this)}>
+              <i className="fa fa-sign-out" /> Logout
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" onClick={this.appQuit}>
+              <i className="fa fa-power-off" /> Quit Gitify
+            </a>
+          </li>
+        </ul>
+
         <div className="row setting">
           <div className="col-xs-8">Show only participating</div>
           <div className="col-xs-4">
@@ -74,26 +98,8 @@ export class SettingsPage extends React.Component {
           </div>
         </div>
 
-        <ul className="nav nav-pills">
-          <li className="nav-item">
-            <a className="nav-link" onClick={this.checkForUpdates}>
-              <i className="fa fa-cloud-download" /> Update
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" onClick={this.signOut}>
-              <i className="fa fa-sign-out" /> Logout
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" onClick={this.appQuit}>
-              <i className="fa fa-power-off" /> Quit Gitify
-            </a>
-          </li>
-        </ul>
-
         <div className="row footer">
-          <div className="col-xs-6 text-left">Made with ♥ in Brighton, UK.</div>
+          <div className="col-xs-6 text-left">Made with <span className="heart">❤</span> in Brighton, UK.</div>
           <div className="col-xs-6 text-right">Gitify - Version: {appVersion}</div>
         </div>
       </div>
@@ -101,6 +107,9 @@ export class SettingsPage extends React.Component {
   }
 };
 
+SettingsPage.contextTypes = {
+  router: React.PropTypes.object.isRequired
+};
 
 function mapStateToProps(state) {
   return {
@@ -108,4 +117,8 @@ function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps, { updateSetting, fetchNotifications })(SettingsPage);
+export default connect(mapStateToProps, {
+  updateSetting,
+  fetchNotifications,
+  logout
+})(SettingsPage);

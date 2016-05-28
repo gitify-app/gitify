@@ -272,6 +272,26 @@ input {
   background-color: $gray-lighter;
   padding: 5px 20px;
 
+  .nav {
+    display: flex;
+    margin: -5px -20px 5px;
+
+    background-color: $gray-light;
+    padding: 5px 0;
+    justify-content: center;
+
+    .nav-link {
+      color: $gray-dark;
+      font-size: 90%;
+
+      &:active,
+      &:hover {
+        cursor: pointer;
+        color: $white;
+      }
+    }
+  }
+
   .setting {
     margin: 10px 5px;
     font-size: .95rem;
@@ -282,28 +302,13 @@ input {
     }
   }
 
-  .nav {
-    display: flex;
-    justify-content: center;
-
-    .nav-link {
-      background-color: $gray;
-      color: $white;
-
-      &:hover {
-        background-color: $gray-dark;
-        cursor: pointer;
-      }
-    }
-  }
-
   .footer {
     margin: 10px 5px;
     padding-top: 5px;
     font-size: 12px;
 
-    .text-right {
-      padding-right: 18px;
+    .heart {
+      color: $brand-danger;
     }
   }
 }

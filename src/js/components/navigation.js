@@ -53,18 +53,13 @@ export class Navigation extends React.Component {
 
   render() {
     const isLoggedIn = this.props.token !== null;
-    var refreshIcon, logoutIcon, backIcon, settingsIcon, quitIcon, searchIcon, countLabel;
+    var refreshIcon, backIcon, settingsIcon, quitIcon, searchIcon, countLabel;
     var loadingClass = this.props.isFetching ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
 
     if (isLoggedIn) {
       refreshIcon = (
         <li className="nav-item">
           <i title="Refresh" className={'nav-link ' + loadingClass} onClick={this.refreshNotifications.bind(this)} />
-        </li>
-      );
-      logoutIcon = (
-        <li className="nav-item">
-          <i title="Sign Out" className="nav-link fa fa-sign-out" onClick={this.logoutButton.bind(this)} />
         </li>
       );
       settingsIcon = (
@@ -119,7 +114,6 @@ export class Navigation extends React.Component {
           {backIcon}
           {searchIcon}
           {settingsIcon}
-          {logoutIcon}
           {quitIcon}
         </ul>
       </nav>
