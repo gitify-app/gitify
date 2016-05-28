@@ -2,7 +2,6 @@ import _ from 'underscore';
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
-import Loading from 'reloading';
 
 
 const shell = window.require('electron').shell;
@@ -53,10 +52,6 @@ export class NotificationsPage extends React.Component {
 
     return (
       <div className={wrapperClass + (notificationsEmpty ? ' all-read' : '')}>
-        <Loading className="loading-container" shouldShow={this.props.isFetching}>
-          <div className="loading-text">working on it</div>
-        </Loading>
-
         <ReactCSSTransitionGroup
           transitionName="repository"
           transitionEnter={false}
@@ -80,7 +75,6 @@ export class NotificationsPage extends React.Component {
 function mapStateToProps(state) {
   return {
     failed: state.notifications.failed,
-    isFetching: state.notifications.isFetching,
     notifications: state.notifications.response,
     searchQuery: state.searchFilter.query
   };

@@ -53,13 +53,13 @@ export class Navigation extends React.Component {
 
   render() {
     const isLoggedIn = this.props.token !== null;
+    const loadingClass = this.props.isFetching ? ' logo-spin' : '';
     var refreshIcon, backIcon, settingsIcon, quitIcon, searchIcon, countLabel;
-    var loadingClass = this.props.isFetching ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
 
     if (isLoggedIn) {
       refreshIcon = (
         <li className="nav-item">
-          <i title="Refresh" className={'nav-link ' + loadingClass} onClick={this.refreshNotifications.bind(this)} />
+          <i title="Refresh" className={'nav-link fa fa-refresh'} onClick={this.refreshNotifications.bind(this)} />
         </li>
       );
       settingsIcon = (
@@ -101,18 +101,15 @@ export class Navigation extends React.Component {
     return (
       <nav className="navbar navbar-dark bg-inverse">
         <img
-          className="navbar-brand img-responsive"
+          className={'navbar-brand img-responsive' + loadingClass}
           src="images/gitify-logo-fill-light-small.png"
           onClick={this.openBrowser} />
         {countLabel}
 
-        <ul className="nav navbar-nav pull-xs-left">
-          {refreshIcon}
-        </ul>
-
         <ul className="nav navbar-nav pull-xs-right">
           {backIcon}
           {searchIcon}
+          {refreshIcon}
           {settingsIcon}
           {quitIcon}
         </ul>
