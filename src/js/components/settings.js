@@ -4,7 +4,7 @@ import Toggle from 'react-toggle';
 
 const ipcRenderer = window.require('electron').ipcRenderer;
 
-import { fetchNotifications, updateSetting } from '../actions';
+import { fetchNotifications, updateSetting, logout } from '../actions';
 
 export class SettingsPage extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -15,6 +15,12 @@ export class SettingsPage extends React.Component {
 
   toggleSetting(key, event) {
     this.props.updateSetting(key, event.target.checked);
+  }
+
+  logout() {
+    this.props.logout();
+    this.context.router.replace('/login');
+    ipcRenderer.send('update-icon', 'IconPlain');
   }
 
   checkForUpdates() {
@@ -31,7 +37,25 @@ export class SettingsPage extends React.Component {
 
     return (
       <div className="container-fluid main-container settings">
-        <div className="row">
+        <ul className="nav nav-pills">
+          <li className="nav-item">
+            <a className="nav-link" onClick={this.checkForUpdates}>
+              <i className="fa fa-cloud-download" /> Update
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" onClick={this.logout.bind(this)}>
+              <i className="fa fa-sign-out" /> Logout
+            </a>
+          </li>
+          <li className="nav-item">
+            <a className="nav-link" onClick={this.appQuit}>
+              <i className="fa fa-power-off" /> Quit Gitify
+            </a>
+          </li>
+        </ul>
+
+        <div className="row setting">
           <div className="col-xs-8">Show only participating</div>
           <div className="col-xs-4">
             <Toggle
@@ -39,7 +63,7 @@ export class SettingsPage extends React.Component {
               onChange={this.toggleSetting.bind(this, 'participating')} />
           </div>
         </div>
-        <div className="row">
+        <div className="row setting">
           <div className="col-xs-8">Play sound</div>
           <div className="col-xs-4">
             <Toggle
@@ -47,7 +71,7 @@ export class SettingsPage extends React.Component {
               onChange={this.toggleSetting.bind(this, 'playSound')} />
           </div>
         </div>
-        <div className="row">
+        <div className="row setting">
           <div className="col-xs-8">Show notifications</div>
           <div className="col-xs-4">
             <Toggle
@@ -56,7 +80,7 @@ export class SettingsPage extends React.Component {
           </div>
         </div>
 
-        <div className="row">
+        <div className="row setting">
           <div className="col-xs-8">On Click, Mark as Read</div>
           <div className="col-xs-4">
             <Toggle
@@ -65,7 +89,7 @@ export class SettingsPage extends React.Component {
           </div>
         </div>
 
-        <div className="row">
+        <div className="row setting">
           <div className="col-xs-8">Open at startup</div>
           <div className="col-xs-4">
             <Toggle
@@ -73,33 +97,19 @@ export class SettingsPage extends React.Component {
               onChange={this.toggleSetting.bind(this, 'openAtStartup')} />
           </div>
         </div>
-        <div className="row">
-          <div className="col-xs-6">
-            <button
-              className="btn btn-block btn-primary btn-close"
-              onClick={this.checkForUpdates}>
-              <i className="fa fa-cloud-download" />
-              Update
-            </button>
-          </div>
-          <div className="col-xs-6">
-            <button
-              className="btn btn-block btn-danger btn-close"
-              onClick={this.appQuit}>
-              <i className="fa fa-power-off" />
-              Quit Gitify
-            </button>
-          </div>
-        </div>
 
         <div className="row footer">
-          <div className="col-xs-12 text-right">Gitify - Version: {appVersion}</div>
+          <div className="col-xs-6 text-left">Made with <span className="heart">❤</span> in Brighton.</div>
+          <div className="col-xs-6 text-right">Gitify - Version: {appVersion}</div>
         </div>
       </div>
     );
   }
 };
 
+SettingsPage.contextTypes = {
+  router: React.PropTypes.object.isRequired
+};
 
 function mapStateToProps(state) {
   return {
@@ -107,4 +117,8 @@ function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps, { updateSetting, fetchNotifications })(SettingsPage);
+export default connect(mapStateToProps, {
+  updateSetting,
+  fetchNotifications,
+  logout
+})(SettingsPage);

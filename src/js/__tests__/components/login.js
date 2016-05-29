@@ -48,7 +48,7 @@ describe('components/login.js', function () {
     const { wrapper } = setup(props);
 
     expect(wrapper).to.exist;
-    expect(wrapper.find('.desc').text()).to.equal('GitHub notifications in your menu bar.');
+    expect(wrapper.find('.desc').text()).to.contain('in your menu bar.');
 
   });
 
@@ -206,7 +206,6 @@ describe('components/login.js', function () {
     const { wrapper, context } = setup(props);
 
     expect(wrapper).to.exist;
-    expect(wrapper.find('.desc').text()).to.equal('GitHub notifications in your menu bar.');
 
     wrapper.setProps({
       token: 'HELLO'

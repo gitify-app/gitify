@@ -13,7 +13,6 @@ $theme-black: #262626;
 $theme-green: #5EBA7D;
 
 $white: #FFF;
-$dark-gray: darken($white, 75%);
 $light-gray: darken($white, 10%);
 
 $error-color: #DB423C;
@@ -36,6 +35,8 @@ $octicons-font-path: "../../node_modules/octicons/octicons";
 /* @group Bootstrap Overrides */
 
 $navbar-height: 35px;
+$navbar-padding-vertical: .3rem;
+$navbar-padding-horizontal: 1rem;
 
 $brand-success: $theme-green;
 
@@ -76,7 +77,7 @@ $alert-danger-text: $white;
 @mixin check-octicon {
   &.octicon-check {
     transition: all .4s;
-    color: darken($light-gray, 20%);
+    color: $gray-light;
 
     &:hover {
       cursor: pointer;
@@ -114,7 +115,7 @@ html {
   overflow: auto;
 }
 
-.search-bar + .main-container {
+.search-form + .main-container {
   top: $navbar-height + $navbar-height;
 }
 
@@ -131,7 +132,8 @@ html {
   }
 }
 
-.right {
+.right,
+.text-right {
   text-align: right;
 }
 
@@ -188,110 +190,81 @@ input {
 /* @end Animations */
 
 
-/* @group Loading Service */
+/* @group Navigation */
 
-.loading-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  background: $theme-primary;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-
-  .loading-text {
-    position: relative;
-    top: 120px;
-    color: $white;
-    font-size: 20px;
-    -webkit-animation: loadbars 2s cubic-bezier(.645, .045, .355, 1) infinite 0s;
-  }
-}
-
-@-webkit-keyframes loadbars {
-  0% {
-    margin-top: 25px;
-    height: 10px;
-  }
-
-  50% {
-    margin-top: 0;
-    height: 50px;
-  }
-
-  100% {
-    margin-top: 25px;
-    height: 10px;
-  }
-}
-
-/* @end Loading Service */
-
-
-/* @group Navbar */
-
-.navigation {
-  background-color: $theme-primary;
+.navbar {
   height: $navbar-height;
   color: $white;
 
-  div[class*="col-xs-"] {
-    line-height: 32px;
-    font-size: 16px;
+  .navbar-brand {
+    display: inline-block;
+    margin: 0 5px 2px;
+    max-height: 25px;
 
-    &.left {
-      .logo {
-        display: inline-block;
-        margin: 0 5px 2px;
-        max-height: 18px;
-      }
+    &.logo-spin {
+      -webkit-animation: spin 1s infinite linear;
 
-      .label {
-        margin-right: 5px;
-      }
-
-      .fa {
-        margin: 0 5px;
-
-        &.fa-refresh {
-          font-size: 14px;
+      @-webkit-keyframes spin {
+        0%   {
+          transform: rotate(0deg);
         }
-      }
-    }
 
-    &.right {
-      .fa {
-        margin: 0 10px;
-
-        &.fa-chevron-left,
-        &.fa-search {
-          font-size: 14px;
+        100% {
+          transform: rotate(360deg);
         }
-      }
-    }
-
-    .fa {
-
-      &:active,
-      &:hover {
-        color: $dark-gray;
       }
     }
   }
+
+  .label {
+    @include border-radius(0);
+
+    position: relative;
+    top: -$navbar-padding-vertical;
+    left: 5px;
+    float: left;
+    margin-right: .95rem;
+    min-width: 1.5rem;
+    height: $navbar-height;
+    line-height: 29px;
+  }
+
+  .nav-link {
+    padding-top: .3rem;
+    font-size: .95rem;
+  }
 }
 
-/* @end Navbar */
+/* @end Navigation */
 
 
 /* @group Settings */
 
 .settings {
-  background-color: $theme-primary;
+  background-color: $gray-lighter;
   padding: 5px 20px;
-  color: $white;
 
-  .row {
+  .nav {
+    display: flex;
+    margin: -5px -20px 20px;
+
+    background-color: $gray-light;
+    padding: 5px 0;
+    justify-content: center;
+
+    .nav-link {
+      color: $gray-dark;
+      font-size: 90%;
+
+      &:active,
+      &:hover {
+        cursor: pointer;
+        color: $white;
+      }
+    }
+  }
+
+  .setting {
     margin: 10px 5px;
     font-size: .95rem;
     font-weight: 300;
@@ -299,18 +272,15 @@ input {
     .col-xs-4 {
       text-align: right;
     }
-
-    .btn-close {
-      padding: 10px;
-    }
   }
 
   .footer {
+    margin: 10px 5px;
     padding-top: 5px;
-    font-size: 10px;
+    font-size: 12px;
 
-    .text-right {
-      padding-right: 18px;
+    .heart {
+      color: $brand-danger;
     }
   }
 }
@@ -318,39 +288,46 @@ input {
 /* @end Settings */
 
 
-/* @group Component / Login  */
+/* @group Page / Login  */
 
 .login {
   position: absolute;
   top: $navbar-height;
   left: 0;
-  background-color: $theme-primary;
-  padding-top: 30px;
+  background-color: $gray-lighter;
+  padding-top: 20px;
   width: 100%;
   height: 100%;
   color: $white;
 
   .logo {
     display: block;
-    margin: 10px auto 20px;
-    max-width: 150px;
+    margin: 0 auto 20px;
+    max-width: 115px;
   }
 
   .desc {
-    margin-bottom: 20px;
+    margin-bottom: 25px;
     text-align: center;
+    line-height: 22px;
+    color: $gray-dark;
     font-size: 20px;
+  }
+
+  .btn {
+    @include button-variant($white, $gray, $btn-primary-border);
+    padding: .55rem 1.25rem;
   }
 }
 
-/* @end Component / Login  */
+/* @end Page / Login  */
 
 
 /* @group Component / Repository  */
 
 .repository {
   margin: 0;
-  background-color: $light-gray;
+  background-color: $gray-lighter;
   padding: 5px 20px;
 
   .col-xs-2,
@@ -407,9 +384,9 @@ input {
 
   &.errored,
   &.all-read {
-    background-color: $theme-primary;
+    background-color: $gray-lighter;
     padding: 30px 20px;
-    color: $white;
+    color: $gray;
 
     h2 {
       text-align: center;
@@ -439,7 +416,7 @@ input {
         animation: blink .9s infinite;
         opacity: 1;
         padding-left: 5px;
-        color: $white;
+        color: $gray;
 
         @keyframes blink {
           0% { opacity: 1; }
@@ -478,7 +455,7 @@ input {
 
 .notification {
   margin: 0;
-  border-bottom: 1px solid darken($light-gray, 10%);
+  border-bottom: 1px solid $gray-lighter;
   padding: 2px 20px;
 
   .col-xs-1,
@@ -508,7 +485,7 @@ input {
   }
 
   &:hover {
-    background-color: $light-gray;
+    background-color: $gray-lightest;
   }
 }
 
@@ -519,54 +496,33 @@ input {
 
 @SearchHeight: 22px;
 
-.search-bar {
+.search-form {
   margin: 0;
-  background-color: $theme-primary;
-  padding: 0 20px;
+  background-color: $gray;
   height: $navbar-height;
   text-align: center;
-
-  div[class*="col-xs-"] {
-    padding: 0;
-  }
-
-  -webkit-animation: fadein .5s;
-
-  @-webkit-keyframes fadein {
-    0% {
-      opacity: 0;
-    }
-
-    100% {
-      opacity: 1;
-    }
-  }
-}
-
-.form-group {
-  margin-bottom: 0;
 
   .form-control {
     outline: none;
     border: 0;
     box-shadow: none;
-    background-color: $theme-primary;
-    padding: 0 0 0 16px;
+    background-color: $gray;
+    padding: 0 1.5rem;
     color: $white;
     font-size: 18px;
 
     &::-webkit-input-placeholder {
-      color: $light-gray;
+      color: $gray-lighter;
     }
   }
-}
 
-.octicon-x {
-  cursor: pointer;
-  text-align: center;
-  line-height: 36px;
-  color: $white;
-  font-size: 20px;
+  .octicon-x {
+    cursor: pointer;
+    text-align: center;
+    line-height: 28px;
+    color: $white;
+    font-size: 20px;
+  }
 }
 
 /* @end Component / Search  */

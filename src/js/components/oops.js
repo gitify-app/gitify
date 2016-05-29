@@ -16,7 +16,7 @@ export default class Oops extends React.Component {
 
     return (
       <div className="container-fluid main-container notifications errored">
-        <h3>Oops something went wrong.</h3>
+        <h2>Oops something went wrong.</h2>
         <h4>Couldn't get your notifications.</h4>
         <h1 className="emoji">{emojify(emoji, {output: 'unicode'})}</h1>
       </div>

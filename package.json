@@ -7,7 +7,7 @@
     "build": "webpack",
     "watch": "webpack --progress --colors --watch",
     "release-js": "webpack --config webpack.rel.config.js",
-    "package": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=0.35.4 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
+    "package": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --version=1.0.2 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
     "codesign": "bash scripts/codesign.bash",
     "dist": "npm run release-js && npm run package && npm run codesign",
     "lint-js": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
@@ -51,6 +51,8 @@
   "dependencies": {
     "auto-launch": "=2.0.1",
     "bootstrap": "=4.0.0-alpha.2",
+    "electron-gh-releases": "=2.0.2",
+    "electron-positioner": "=3.0.0",
     "font-awesome": "=4.6.1",
     "history": "=2.1.1",
     "malarkey": "=1.3.3",
@@ -70,7 +72,6 @@
     "redux-storage": "=4.0.0",
     "redux-storage-decorator-filter": "=1.1.3",
     "redux-storage-engine-localstorage": "=1.1.0",
-    "reloading": "=0.0.6",
     "underscore": "=1.8.3"
   },
   "devDependencies": {
@@ -83,10 +84,8 @@
     "babel-preset-stage-0": "=6.5.0",
     "chai": "=3.5.0",
     "css-loader": "=0.23.1",
-    "electron-gh-releases": "=2.0.2",
     "electron-packager": "=7.0.1",
     "electron-prebuilt": "=1.0.2",
-    "electron-positioner": "=3.0.0",
     "enzyme": "=2.3.0",
     "eslint": "=2.9.0",
     "eslint-plugin-react": "=5.1.1",
