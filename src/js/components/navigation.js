@@ -29,16 +29,6 @@ export class Navigation extends React.Component {
     this.context.router.push('/settings');
   }
 
-  logoutButton() {
-    if (this.props.showSearch) {
-      this.props.toggleSearch();
-    }
-
-    this.props.logout();
-    this.context.router.replace('/login');
-    ipcRenderer.send('update-icon', 'IconPlain');
-  }
-
   goBack() {
     this.context.router.push('/notifications');
   }
