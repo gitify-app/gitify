@@ -8,7 +8,7 @@ const app = electron.app;
 const dialog = electron.dialog;
 const ipc = electron.ipcMain;
 
-var ghReleases = require('electron-gh-releases');
+const GhReleases = require('electron-gh-releases');
 var Positioner = require('electron-positioner');
 
 var AutoLaunch = require('auto-launch');
@@ -31,7 +31,7 @@ app.on('ready', function() {
   var appIcon = new Tray(iconIdle);
   var windowPosition = (isWindows) ? 'trayBottomCenter' : 'trayCenter';
 
-  function confirmAutoUpdate(quitAndUpdate) {
+  function confirmAutoUpdate(installUpdate) {
     dialog.showMessageBox({
       type: 'question',
       buttons: ['Update & Restart', 'Cancel'],
@@ -42,33 +42,32 @@ app.on('ready', function() {
       console.log('Exit: ' + response);
       app.dock.hide();
       if (response === 0) {
-        quitAndUpdate();
+        installUpdate();
       }
     } );
   }
 
   function checkAutoUpdate(showAlert) {
 
-    var autoUpdateOptions = {
+    let autoUpdateOptions = {
       repo: 'ekonstantinidis/gitify',
       currentVersion: app.getVersion()
     };
 
-    var update = new ghReleases(autoUpdateOptions, function (autoUpdater) {
-      autoUpdater
-        .on('error', function(event, message) {
-          console.log('ERRORED.');
-          console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
-        })
-        .on('update-downloaded', function (event, releaseNotes, releaseName,
-          releaseDate, updateUrl, quitAndUpdate) {
-          console.log('Update downloaded');
-          confirmAutoUpdate(quitAndUpdate);
-        });
+    const updater = new GhReleases(autoUpdateOptions);
+
+    updater.on('error', (event, message) => {
+      console.log('ERRORED.');
+      console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
+    });
+
+    updater.on('update-downloaded', (info) => {
+      console.log('Update downloaded');
+      confirmAutoUpdate(updater.install);
     });
 
     // Check for updates
-    update.check(function (err, status) {
+    updater.check((err, status) => {
       if (err || !status) {
         if (showAlert) {
           dialog.showMessageBox({
@@ -82,7 +81,7 @@ app.on('ready', function() {
       }
 
       if (!err && status) {
-        update.download();
+        updater.download();
       }
     });
   }
