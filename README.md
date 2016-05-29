@@ -21,7 +21,7 @@ It has been a while since this app was made so I decided to give it a good revam
 - [x] Rewrite tests with Mocha - Since gitify is moving from Reflux to Redux, all tests have to be rewritten.
 - [x] Move to Codecov for coverage with new tests
 - [x] Rebranding - New Logo! Fresh stuff!
-- [ ] **In Progress** Revamp the UI. From Scratch?
+- [x] Revamp the UI. From Scratch?
 
 If you would like to help let me know! There is a slack channel for gitify in the [atom](http://atomio.slack.com) team. See badge on the header.
 

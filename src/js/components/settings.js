@@ -99,7 +99,7 @@ export class SettingsPage extends React.Component {
         </div>
 
         <div className="row footer">
-          <div className="col-xs-6 text-left">Made with <span className="heart">❤</span> in Brighton, UK.</div>
+          <div className="col-xs-6 text-left">Made with <span className="heart">❤</span> in Brighton.</div>
           <div className="col-xs-6 text-right">Gitify - Version: {appVersion}</div>
         </div>
       </div>
