@@ -193,7 +193,6 @@ input {
 /* @group Navigation */
 
 .navbar {
-  // background-color: $theme-primary;
   height: $navbar-height;
   color: $white;
 
@@ -502,18 +501,6 @@ input {
   background-color: $gray;
   height: $navbar-height;
   text-align: center;
-
-  // -webkit-animation: fadein .5s;
-  //
-  // @-webkit-keyframes fadein {
-  //   0% {
-  //     opacity: 0;
-  //   }
-  //
-  //   100% {
-  //     opacity: 1;
-  //   }
-  // }
 
   .form-control {
     outline: none;
