@@ -1,9 +1,5 @@
 # Gitify
-[![travis][travis-image]][travis-url]
-[![codecov][codecov-image]][codecov-url]
-[![slack][slack-image]][slack-url]
-
-### GitHub Notifications on your menu bar.
+[![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url] [![slack][slack-image]][slack-url]
 
 ![Gitify](images/press.png)
 
