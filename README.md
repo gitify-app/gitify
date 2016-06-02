@@ -4,8 +4,11 @@
 ![Gitify](images/press.png)
 
 
-### Version 1.0.0
-Gitify finally reaches version **1.0.0**. The app has been rewritten from scratch using React v15, Redux, Bootstrap 4 and more. This allows me to prepare the surface for more features (for GitHub Enterprise etc). Unfortunately, due to a change in the auto-update package API, you will have **to download the update manually**. This is now fixed and you won't have to download any updates manually again.
+### Version 1.0.0 - Coming Soon!
+
+Found a couple of bugs that need to be fixed before the release of version 1.0.0 so will have to postpone the release. Will publish 1.0.0 as soon as these bugs are fixed.
+
+~~Gitify finally reaches version **1.0.0**. The app has been rewritten from scratch using React v15, Redux, Bootstrap 4 and more. This allows me to prepare the surface for more features (for GitHub Enterprise etc). Unfortunately, due to a change in the auto-update package API, you will have **to download the update manually**. This is now fixed and you won't have to download any updates manually again.~~
 
 
 ### Download
