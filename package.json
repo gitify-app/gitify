@@ -1,6 +1,6 @@
 {
   "name": "gitify",
-  "version": "0.0.19",
+  "version": "1.0.0",
   "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
@@ -51,7 +51,7 @@
   "dependencies": {
     "auto-launch": "=2.0.1",
     "bootstrap": "=4.0.0-alpha.2",
-    "electron-gh-releases": "=2.0.2",
+    "electron-gh-releases": "=2.0.3",
     "electron-positioner": "=3.0.0",
     "font-awesome": "=4.6.1",
     "history": "=2.1.1",
