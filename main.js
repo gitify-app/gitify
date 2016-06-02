@@ -31,7 +31,7 @@ app.on('ready', function() {
   var appIcon = new Tray(iconIdle);
   var windowPosition = (isWindows) ? 'trayBottomCenter' : 'trayCenter';
 
-  function confirmAutoUpdate(installUpdate) {
+  function confirmAutoUpdate(updater) {
     dialog.showMessageBox({
       type: 'question',
       buttons: ['Update & Restart', 'Cancel'],
@@ -42,7 +42,7 @@ app.on('ready', function() {
       console.log('Exit: ' + response);
       app.dock.hide();
       if (response === 0) {
-        installUpdate();
+        updater.install();
       }
     } );
   }
@@ -62,8 +62,8 @@ app.on('ready', function() {
     });
 
     updater.on('update-downloaded', (info) => {
-      console.log('Update downloaded');
-      confirmAutoUpdate(updater.install);
+      // Restart the app(ask) and install the update
+      confirmAutoUpdate(updater);
     });
 
     // Check for updates
