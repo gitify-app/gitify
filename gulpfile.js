@@ -1,31 +1,68 @@
-var gulp = require('gulp');
-var sass = require('gulp-sass');
 var browserify = require('browserify');
 var babelify = require('babelify');
+var gulp = require('gulp');
+var gutil = require('gulp-util');
+var sass = require('gulp-sass');
 var source = require('vinyl-source-stream');
+var watchify = require('watchify');
 
-gulp.task('build-js', function () {
-  return browserify({entries: './src/js/app.js', extensions: ['.js'], debug: true})
-		.transform(babelify)
-		.bundle()
-		.pipe(source('app.js'))
-		.pipe(gulp.dest('dist/js'));
+var options = {
+  browserifyOpts: {
+    entries: ['./src/js/app.js'],
+    debug: true,
+
+    cache: {},
+    packageCache: {},
+    fullPaths: true
+  },
+  jsDest: 'dist/js'
+};
+
+var bundler = browserify(options.browserifyOpts);
+
+gulp.task('build:js', function () {
+  return bundler
+    .transform(babelify)
+    .bundle()
+    .pipe(source('app.js'))
+    .pipe(gulp.dest(options.jsDest));
 });
 
-gulp.task('watch-js', ['build-js'], function () {
-  gulp.watch('./src/js/**/*.js', ['build-js']);
+gulp.task('watch:js', function () {
+  var watcher = bundler
+    .plugin(watchify, {ignoreWatch: ['**/node_modules/**']})
+    .transform(babelify);
+
+  function bundle() {
+    return watcher.bundle()
+      // log errors if they happen
+      .on('error', gutil.log.bind(gutil, 'Browserify Error'))
+      .pipe(source('app.js'))
+      .pipe(gulp.dest(options.jsDest));
+  };
+
+  watcher.on('update', bundle); // on any dep update, runs the bundler
+  watcher.on('log', gutil.log); // output build logs to terminal
 });
 
-gulp.task('build-scss', function () {
+gulp.task('build:scss', function () {
   return gulp.src('./src/scss/app.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest('./dist/css'));
 });
 
-gulp.task('watch-scss', ['build-scss'], function () {
+gulp.task('watch:scss', function () {
   gulp.watch('./src/scss/app.scss', ['build-scss']);
 });
 
-gulp.task('build', ['build-js', 'build-scss']);
-gulp.task('watch', ['watch-js', 'watch-scss']);
+gulp.task('copy:fonts', function () {
+  return gulp.src([
+    './node_modules/font-awesome/fonts/*.+(eot|svg|ttf|woff|woff2|otf)',
+    './node_modules/octicons/octicons/*.+(ttf|eot|svg|ttf|woff)',
+  ])
+  .pipe(gulp.dest('./dist/fonts'));
+});
+
+gulp.task('build', ['copy:fonts', 'build:js', 'build:scss']);
+gulp.task('watch', ['watch:js', 'watch:scss']);
 gulp.task('default', ['build']);
