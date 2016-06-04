@@ -5,7 +5,7 @@ let constants = {
   SCOPE: ['user:email', 'notifications'],
 
   // Storage
-  STORAGE_KEY: 'settings',
+  STORAGE_KEY: 'gitify-storage',
 
   // Awesome all read messages
   ALLREAD_MESSAGES: [

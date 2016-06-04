@@ -1,6 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
 import { apiMiddleware } from 'redux-api-middleware';
-import createLogger from 'redux-logger';
 
 import * as storage from 'redux-storage';
 import createEngine from 'redux-storage-engine-localstorage';
@@ -16,14 +15,11 @@ export default function configureStore(initialState) {
   const engine = filter(createEngine(constants.STORAGE_KEY), ['settings', ['auth', 'token']]);
   const storageMiddleware = storage.createMiddleware(engine, [], [UPDATE_SETTING, LOGIN_SUCCESS, LOGOUT]);
 
-  const logger = createLogger();
-
   const createStoreWithMiddleware = applyMiddleware(
     requests, // Should be passed before 'apiMiddleware'
     apiMiddleware,
     notifications,
-    storageMiddleware,
-    logger
+    storageMiddleware
   )(createStore);
 
   const store = createStoreWithMiddleware(rootReducer, initialState);
