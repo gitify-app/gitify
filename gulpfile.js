@@ -56,7 +56,7 @@ gulp.task('build:scss', function () {
 });
 
 gulp.task('watch:scss', function () {
-  gulp.watch('./src/scss/app.scss', ['build-scss']);
+  gulp.watch('./src/scss/app.scss', ['build:scss']);
 });
 
 gulp.task('copy:fonts', function () {
