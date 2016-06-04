@@ -7,8 +7,6 @@
 
 /* @group Colors */
 
-$theme-primary: #3893C6;
-
 $theme-black: #262626;
 $theme-green: #5EBA7D;
 
@@ -22,10 +20,10 @@ $error-color: #DB423C;
 
 /* @group Fonts Overrides */
 
-$fa-font-path: "../../node_modules/font-awesome/fonts";
+$fa-font-path: "../fonts";
 @import "node_modules/font-awesome/scss/font-awesome.scss";
 
-$octicons-font-path: "../../node_modules/octicons/octicons";
+$octicons-font-path: "../fonts";
 @import "node_modules/octicons/octicons/octicons.scss";
 
 

@@ -1,6 +1,3 @@
-// Load Styles
-import '../scss/app.scss';
-
 import React from 'react'; // eslint-disable-line
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
