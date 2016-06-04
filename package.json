@@ -89,17 +89,20 @@
     "eslint": "=2.9.0",
     "eslint-plugin-react": "=5.1.1",
     "gulp": "=3.9.1",
-    "gulp-sass": "^2.3.1",
-    "gulp-util": "^3.0.7",
+    "gulp-sass": "=2.3.1",
+    "gulp-uglify": "=1.5.3",
+    "gulp-util": "=3.0.7",
     "istanbul": "=1.0.0-alpha.2",
     "jsdom": "=9.0.0",
+    "lodash.assign": "=4.0.9",
     "mocha": "=2.4.5",
     "nock": "=8.0.0",
     "redux-mock-store": "=1.0.2",
     "sass-lint": "=1.7.0",
     "sinon": "=1.17.4",
     "sinon-chai": "=2.8.0",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.7.0"
+    "vinyl-buffer": "=1.0.0",
+    "vinyl-source-stream": "=1.1.0",
+    "watchify": "=3.7.0"
   }
 }

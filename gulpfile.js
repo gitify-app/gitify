@@ -1,19 +1,18 @@
-var browserify = require('browserify');
+var assign = require('lodash.assign');
 var babelify = require('babelify');
+var browserify = require('browserify');
+var buffer = require('vinyl-buffer');
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var sass = require('gulp-sass');
 var source = require('vinyl-source-stream');
+var uglify = require('gulp-uglify');
 var watchify = require('watchify');
 
 var options = {
   browserifyOpts: {
-    entries: ['./src/js/app.js'],
-    debug: true,
-
-    cache: {},
-    packageCache: {},
-    fullPaths: true
+    entries: './src/js/app.js',
+    debug: true
   },
   jsDest: 'dist/js'
 };
@@ -25,24 +24,29 @@ gulp.task('build:js', function () {
     .transform(babelify)
     .bundle()
     .pipe(source('app.js'))
+    .pipe(buffer())
+    .pipe(uglify())
     .pipe(gulp.dest(options.jsDest));
 });
 
 gulp.task('watch:js', function () {
-  var watcher = bundler
-    .plugin(watchify, {ignoreWatch: ['**/node_modules/**']})
-    .transform(babelify);
+  var watcherOpts = assign({}, watchify.args, options.browserifyOpts);
+  var watcher = watchify(browserify(watcherOpts)).transform(babelify);
 
   function bundle() {
-    return watcher.bundle()
+    return watcher
+      .bundle()
       // log errors if they happen
       .on('error', gutil.log.bind(gutil, 'Browserify Error'))
       .pipe(source('app.js'))
+      .pipe(buffer())
       .pipe(gulp.dest(options.jsDest));
-  };
+  }
 
   watcher.on('update', bundle); // on any dep update, runs the bundler
   watcher.on('log', gutil.log); // output build logs to terminal
+
+  return bundle();
 });
 
 gulp.task('build:scss', function () {
