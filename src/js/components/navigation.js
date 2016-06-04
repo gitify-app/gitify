@@ -18,7 +18,10 @@ export class Navigation extends React.Component {
   }
 
   refreshNotifications() {
-    this.props.fetchNotifications();
+    const isLoggedIn = this.props.token !== null;
+    if (isLoggedIn) {
+      this.props.fetchNotifications();
+    }
   }
 
   goToSettings() {

@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import reducer from '../../reducers/auth';
 import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT, CHECK_AUTH
+  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT
 } from '../../actions';
 
 describe('reducers/auth.js', () => {
@@ -114,30 +114,4 @@ describe('reducers/auth.js', () => {
 
   });
 
-  it('should handle CHECK_AUTH', () => {
-
-    const fakeState = {
-      isFetching: false,
-      failed: false,
-      response: {},
-      token: null
-    };
-
-    const fakeToken = '123HELLOWORLDTOKEN';
-
-    expect(reducer(fakeState, {}).token).to.be.null;
-
-    const action = {
-      type: CHECK_AUTH,
-      token: fakeToken
-    };
-
-    expect(reducer(fakeState, action)).to.eql({
-      ...initialState,
-      token: fakeToken
-    });
-
-    expect(reducer(fakeState, action).token).to.not.be.null;
-
-  });
 });
