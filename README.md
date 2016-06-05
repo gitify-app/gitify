@@ -6,7 +6,10 @@
 
 ### Version 1.0.0 is now out!
 
-Gitify finally reaches version **1.0.0**. The app has been rewritten from scratch using React v15, Redux, Bootstrap 4 and more. This allows me to prepare the surface for more features (GitHub Enterprise etc). Unfortunately, due to a change in the auto-update package API, you will have **to download the update manually**. This is now fixed and you won't have to download any updates manually again. Finally the user settings will be reset with the new version. Hope you like it and feel free to give me some feedback! - Manos (ekonstantinidis)
+> Gitify finally reaches version **1.0.0**. The app has been rewritten from scratch using React v15, Redux, Bootstrap 4 and more. This allows me to prepare the surface for more features (GitHub Enterprise etc). Unfortunately, due to a change in the auto-update package API, you will have **to download the update manually**. This is now fixed and you won't have to download any updates manually again. Finally the user settings will be reset with the new version. Hope you like it and feel free to give me some feedback!
+
+> Cheers,
+> Manos (ekonstantinidis)
 
 
 ### Download
