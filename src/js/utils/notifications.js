@@ -31,6 +31,9 @@ export default {
         case 'PullRequest':
           icon = 'images/notifications/pull-request.png';
           break;
+        case 'Release':
+          icon = 'images/notifications/release.png';
+          break;
         default:
           icon = 'images/notifications/gitify.png';
       }

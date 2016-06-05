@@ -136,6 +136,17 @@ describe('utils/notifications.js', () => {
     expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
     NotificationsUtils.raiseNativeNotification.reset();
 
+    // Commit
+    NotificationsUtils.setup([{
+      ...notification,
+      subject: {
+        ...notification.subject,
+        type: 'Release'
+      }
+    }], settings);
+    expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
+    NotificationsUtils.raiseNativeNotification.reset();
+
     // AnotherType
     NotificationsUtils.setup([{
       ...notification,

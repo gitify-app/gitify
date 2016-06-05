@@ -1,11 +1,16 @@
-import React from 'react';
 import _ from 'underscore';
+import React from 'react';
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 import malarkey from 'malarkey';
 import {emojify} from 'react-emojione';
 
 import constants from '../utils/constants';
 
 export default class AllRead extends React.Component {
+  constructor(props) {
+    super(props);
+    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
+  }
 
   componentDidMount() {
     const message = _.sample(constants.ALLREAD_MESSAGES);

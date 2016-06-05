@@ -18,7 +18,10 @@ export class Navigation extends React.Component {
   }
 
   refreshNotifications() {
-    this.props.fetchNotifications();
+    const isLoggedIn = this.props.token !== null;
+    if (isLoggedIn) {
+      this.props.fetchNotifications();
+    }
   }
 
   goToSettings() {
@@ -27,16 +30,6 @@ export class Navigation extends React.Component {
     }
 
     this.context.router.push('/settings');
-  }
-
-  logoutButton() {
-    if (this.props.showSearch) {
-      this.props.toggleSearch();
-    }
-
-    this.props.logout();
-    this.context.router.replace('/login');
-    ipcRenderer.send('update-icon', 'IconPlain');
   }
 
   goBack() {
@@ -53,22 +46,25 @@ export class Navigation extends React.Component {
 
   render() {
     const isLoggedIn = this.props.token !== null;
-    var refreshIcon, logoutIcon, backIcon, settingsIcon, quitIcon, searchIcon, countLabel;
-    var loadingClass = this.props.isFetching ? 'fa fa-refresh fa-spin' : 'fa fa-refresh';
+    const loadingClass = this.props.isFetching ? ' logo-spin' : '';
+    var refreshIcon, backIcon, settingsIcon, quitIcon, searchIcon, countLabel;
 
     if (isLoggedIn) {
       refreshIcon = (
-        <i title="Refresh" className={loadingClass} onClick={this.refreshNotifications.bind(this)} />
-      );
-      logoutIcon = (
-        <i title="Sign Out" className="fa fa-sign-out" onClick={this.logoutButton.bind(this)} />
+        <li className="nav-item">
+          <i title="Refresh" className={'nav-link fa fa-refresh'} onClick={this.refreshNotifications.bind(this)} />
+        </li>
       );
       settingsIcon = (
-        <i title="Settings" className="fa fa-cog" onClick={this.goToSettings.bind(this)} />
+        <li className="nav-item">
+          <i title="Settings" className="nav-link fa fa-cog" onClick={this.goToSettings.bind(this)} />
+        </li>
       );
       if (this.props.notifications.length) {
         searchIcon = (
-          <i title="Search" className="fa fa-search" onClick={this.props.toggleSearch} />
+          <li className="nav-item">
+            <i title="Search" className="nav-link fa fa-search" onClick={this.props.toggleSearch} />
+          </li>
         );
         countLabel = (
           <span className="label label-success">{this.props.notifications.length}</span>
@@ -76,39 +72,41 @@ export class Navigation extends React.Component {
       }
     } else {
       quitIcon = (
-        <i title="Quit" className="fa fa-power-off" onClick={this.appQuit.bind(this)} />
+        <li className="nav-item">
+          <i title="Quit" className="nav-link fa fa-power-off" onClick={this.appQuit.bind(this)} />
+        </li>
       );
     }
 
     if (this.props.location.pathname === '/settings') {
       backIcon = (
-        <i title="Back" className="fa fa-chevron-left" onClick={this.goBack.bind(this)} />
+        <li className="nav-item">
+          <i title="Back" className="nav-link fa fa-chevron-left" onClick={this.goBack.bind(this)} />
+        </li>
       );
       settingsIcon = (
-        <i title="Settings" className="fa fa-cog" onClick={this.goBack.bind(this)} />
+        <li className="nav-item">
+          <i title="Settings" className="nav-link fa fa-cog" onClick={this.goBack.bind(this)} />
+        </li>
       );
     }
 
     return (
-      <div className="container-fluid">
-        <div className="row navigation">
-          <div className="col-xs-6 left">
-            <img
-              className="img-responsive logo"
-              src="images/logo-hor-white.png"
-              onClick={this.openBrowser}/>
-            {countLabel}
-            {refreshIcon}
-          </div>
-          <div className="col-xs-6 right">
-            {backIcon}
-            {searchIcon}
-            {settingsIcon}
-            {logoutIcon}
-            {quitIcon}
-          </div>
-        </div>
-      </div>
+      <nav className="navbar navbar-dark bg-inverse">
+        <img
+          className={'navbar-brand img-responsive' + loadingClass}
+          src="images/gitify-logo-fill-light-small.png"
+          onClick={this.openBrowser} />
+        {countLabel}
+
+        <ul className="nav navbar-nav pull-xs-right">
+          {backIcon}
+          {searchIcon}
+          {refreshIcon}
+          {settingsIcon}
+          {quitIcon}
+        </ul>
+      </nav>
     );
   }
 };

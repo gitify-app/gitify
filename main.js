@@ -1,17 +1,16 @@
-const electron = require('electron');
-const app = electron.app;
-const ipc = electron.ipcMain;
+const path = require('path');
 
+const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
 const Tray = electron.Tray;
+const app = electron.app;
+const dialog = electron.dialog;
+const ipc = electron.ipcMain;
 
-var path = require('path');
-var ghReleases = require('electron-gh-releases');
+const GhReleases = require('electron-gh-releases');
 var Positioner = require('electron-positioner');
-
 var AutoLaunch = require('auto-launch');
-var dialog = require('dialog');
 
 // Status icons
 var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
@@ -36,7 +35,7 @@ app.on('ready', function() {
   var appIcon = new Tray(iconIdle);
   var windowPosition = (isWindows) ? 'trayBottomCenter' : 'trayCenter';
 
-  function confirmAutoUpdate(quitAndUpdate) {
+  function confirmAutoUpdate(updater) {
     dialog.showMessageBox({
       type: 'question',
       buttons: ['Update & Restart', 'Cancel'],
@@ -47,33 +46,32 @@ app.on('ready', function() {
       console.log('Exit: ' + response);
       app.dock.hide();
       if (response === 0) {
-        quitAndUpdate();
+        updater.install();
       }
     } );
   }
 
   function checkAutoUpdate(showAlert) {
 
-    var autoUpdateOptions = {
+    let autoUpdateOptions = {
       repo: 'ekonstantinidis/gitify',
       currentVersion: app.getVersion()
     };
 
-    var update = new ghReleases(autoUpdateOptions, function (autoUpdater) {
-      autoUpdater
-        .on('error', function(event, message) {
-          console.log('ERRORED.');
-          console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
-        })
-        .on('update-downloaded', function (event, releaseNotes, releaseName,
-          releaseDate, updateUrl, quitAndUpdate) {
-          console.log('Update downloaded');
-          confirmAutoUpdate(quitAndUpdate);
-        });
+    const updater = new GhReleases(autoUpdateOptions);
+
+    updater.on('error', (event, message) => {
+      console.log('ERRORED.');
+      console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
+    });
+
+    updater.on('update-downloaded', (info) => {
+      // Restart the app(ask) and install the update
+      confirmAutoUpdate(updater);
     });
 
     // Check for updates
-    update.check(function (err, status) {
+    updater.check((err, status) => {
       if (err || !status) {
         if (showAlert) {
           dialog.showMessageBox({
@@ -87,7 +85,7 @@ app.on('ready', function() {
       }
 
       if (!err && status) {
-        update.download();
+        updater.download();
       }
     });
   }

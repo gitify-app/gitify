@@ -61,7 +61,6 @@ describe('components/navigation.js', function () {
     expect(Navigation.prototype.componentDidMount).to.have.been.calledOnce;
     expect(wrapper.find('.fa-refresh').length).to.equal(1);
     expect(wrapper.find('.fa-refresh').first().hasClass('fa-spin')).to.be.false;
-    expect(wrapper.find('.fa-sign-out').length).to.equal(1);
     expect(wrapper.find('.fa-cog').length).to.equal(1);
     expect(wrapper.find('.fa-search').length).to.equal(1);
     expect(wrapper.find('.fa-power-off').length).to.equal(0);
@@ -111,7 +110,6 @@ describe('components/navigation.js', function () {
     expect(wrapper).to.exist;
     expect(Navigation.prototype.componentDidMount).to.have.been.calledOnce;
     expect(wrapper.find('.fa-refresh').length).to.equal(0);
-    expect(wrapper.find('.fa-sign-out').length).to.equal(0);
     expect(wrapper.find('.fa-cog').length).to.equal(0);
     expect(wrapper.find('.fa-search').length).to.equal(0);
     expect(wrapper.find('.fa-power-off').length).to.equal(1);
@@ -141,7 +139,6 @@ describe('components/navigation.js', function () {
     expect(Navigation.prototype.componentDidMount).to.have.been.calledOnce;
     expect(wrapper.find('.fa-refresh').length).to.equal(1);
     expect(wrapper.find('.fa-refresh').first().hasClass('fa-spin')).to.be.false;
-    expect(wrapper.find('.fa-sign-out').length).to.equal(1);
     expect(wrapper.find('.fa-cog').length).to.equal(1);
     expect(wrapper.find('.fa-search').length).to.equal(1);
     expect(wrapper.find('.fa-power-off').length).to.equal(0);
@@ -168,7 +165,6 @@ describe('components/navigation.js', function () {
 
     expect(wrapper).to.exist;
     expect(wrapper.find('.fa-refresh').length).to.equal(0);
-    expect(wrapper.find('.fa-sign-out').length).to.equal(0);
     expect(wrapper.find('.fa-power-off').length).to.equal(1);
 
     wrapper.find('.fa-power-off').simulate('click');
@@ -193,7 +189,7 @@ describe('components/navigation.js', function () {
     expect(wrapper).to.exist;
     expect(wrapper.find('.fa-power-off').length).to.equal(1);
 
-    wrapper.find('.logo').simulate('click');
+    wrapper.find('.navbar-brand').simulate('click');
 
     expect(shell.openExternal).to.have.been.calledOnce;
     expect(shell.openExternal).to.have.been.calledWith('http://www.github.com/ekonstantinidis/gitify');
@@ -221,42 +217,6 @@ describe('components/navigation.js', function () {
     expect(context.router.push).to.have.been.calledWith('/notifications');
 
     context.router.push.reset();
-
-  });
-
-  it('should press the logout', function () {
-
-    const props = {
-      logout: sinon.spy(),
-      toggleSearch: sinon.spy(),
-      isFetching: false,
-      notifications: notifications.length,
-      showSearch: true,
-      token: 'IMLOGGEDIN',
-      location: {
-        pathname: '/settings'
-      }
-    };
-
-    const { wrapper, context } = setup(props);
-
-    expect(wrapper).to.exist;
-    expect(wrapper.find('.fa-cog').length).to.equal(1);
-
-    wrapper.find('.fa-sign-out').simulate('click');
-
-    expect(props.logout).to.have.been.calledOnce;
-    expect(props.toggleSearch).to.have.been.calledOnce;
-
-    expect(ipcRenderer.send).to.have.been.calledOnce;
-    expect(ipcRenderer.send).to.have.been.calledWith('update-icon', 'IconPlain');
-
-    expect(context.router.replace).to.have.been.calledOnce;
-    expect(context.router.replace).to.have.been.calledWith('/login');
-
-    context.router.replace.reset();
-    props.logout.reset();
-    props.toggleSearch.reset();
 
   });
 

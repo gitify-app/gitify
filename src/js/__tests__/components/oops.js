@@ -20,7 +20,7 @@ describe('components/oops.js', function () {
     const { wrapper } = setup();
 
     expect(wrapper).to.exist;
-    expect(wrapper.find('h3').text()).to.equal('Oops something went wrong.');
+    expect(wrapper.find('h2').text()).to.equal('Oops something went wrong.');
 
   });
 

@@ -73,20 +73,6 @@ describe('actions/index.js', () => {
 
   });
 
-  it('should check auth status', () => {
-
-    const token = 'HELLO';
-    localStorage.setItem('token', token);
-
-    const expectedAction = {
-      type: actions.CHECK_AUTH,
-      token
-    };
-
-    expect(actions.checkAuth()).to.eql(expectedAction);
-
-  });
-
   it('should fetch notifications with success', () => {
     const notifications = [
       {

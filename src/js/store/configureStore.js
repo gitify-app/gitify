@@ -5,35 +5,31 @@ import * as storage from 'redux-storage';
 import createEngine from 'redux-storage-engine-localstorage';
 import filter from 'redux-storage-decorator-filter';
 
-import { checkAuth, fetchNotifications } from '../actions';
-import authentication from '../middleware/authentication';
+import { fetchNotifications, UPDATE_SETTING, LOGIN_SUCCESS, LOGOUT } from '../actions';
 import constants from '../utils/constants';
 import notifications from '../middleware/notifications';
 import requests from '../middleware/requests';
 import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
-  const engine = filter(createEngine(constants.STORAGE_KEY), ['settings']);
-  const storageMiddleware = storage.createMiddleware(engine);
+  const engine = filter(createEngine(constants.STORAGE_KEY), ['settings', ['auth', 'token']]);
+  const storageMiddleware = storage.createMiddleware(engine, [], [UPDATE_SETTING, LOGIN_SUCCESS, LOGOUT]);
 
   const createStoreWithMiddleware = applyMiddleware(
     requests, // Should be passed before 'apiMiddleware'
     apiMiddleware,
-    authentication,
     notifications,
     storageMiddleware
   )(createStore);
 
   const store = createStoreWithMiddleware(rootReducer, initialState);
 
-  // Check if the user is logged in
-  store.dispatch(checkAuth());
-  const isLoggedIn = store.getState().auth.token !== null;
-
   // Load settings from localStorage
   const load = storage.createLoader(engine);
   load(store)
     .then(function (newState) {
+      // Check if the user is logged in
+      const isLoggedIn = store.getState().auth.token !== null;
       if (isLoggedIn) { store.dispatch(fetchNotifications()); }
     });
 
