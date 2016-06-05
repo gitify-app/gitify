@@ -40,16 +40,6 @@ export function logout() {
   return { type: LOGOUT };
 };
 
-export const CHECK_AUTH = 'CHECK_AUTH';
-export function checkAuth() {
-  const userToken = localStorage.getItem('token');
-
-  return {
-    type: CHECK_AUTH,
-    token: userToken
-  };
-};
-
 
 // Notifications
 
