@@ -62,22 +62,30 @@ html, body {
   border: 0;
 }
 
-.forkme {
-  -ms-transform: rotate(45deg); /* IE 9 */
-  -webkit-transform: rotate(45deg); /* Chrome, Safari, Opera */
-  transform: rotate(45deg);
+.github-corner:hover .octo-arm {
+  animation:octocat-wave 560ms ease-in-out;
+}
 
-  padding: 5px;
-  position: fixed;
-  top: 50px;
-  right: -90px;
-  background-color: @White;
-  color: @ThemePrimary;
-  width: 300px;
-  text-align: center;
-  border-top: 2px solid @ThemePrimary;
-  border-bottom: 2px solid @ThemePrimary;
-  z-index: 9999;
+@keyframes octocat-wave{
+  0%, 100% {
+    transform:rotate(0)
+  }
+  20%, 60% {
+    transform:rotate(-25deg)
+  }
+  40%, 80% {
+    transform:rotate(10deg)
+  }
+}
+
+@media (max-width:500px) {
+  .github-corner:hover .octo-arm {
+    animation:none
+  }
+
+  .github-corner .octo-arm {
+    animation:octocat-wave 560ms ease-in-out
+  }
 }
 
 /* @end Misc */
@@ -86,8 +94,8 @@ html, body {
 /* @group Header */
 
 .header {
-  background-color: @ThemePrimary;
-  #gradient > .directional(darken(@ThemePrimary, 15%), @ThemePrimary, 320deg);
+  background-color: @gray-lighter;
+  #gradient > .directional(darken(@gray-lighter, 15%), @gray-lighter, 320deg);
 
   @media (min-width: @screen-sm-min) {
     min-height: 100%;
@@ -99,26 +107,24 @@ html, body {
     text-align: center;
     margin-top: 0;
 
-    @media (min-width: @screen-md-min) {
-      margin-top: 190px;
-    }
-
     .logo {
-      width: 100%;
-      max-width: 350px;
-      margin: 20px auto;
+      width: 150px;
+      height: auto;
+      margin: 0 auto;
     }
 
     h2 {
       .FontOpenSansLight();
       max-width: 350px;
-      margin: 30px auto 20px;
+      margin-left: auto;
+      margin-right: auto;
+      color: @gray-darker;
     }
 
     .btn-group {
       margin: 5px 0 10px;
 
-      .btn {
+      .btn-download {
         margin: 0;
         display: block;
         width: 100%;
@@ -126,6 +132,7 @@ html, body {
         @media (min-width: @screen-sm) {
           display: inline-block;
           width: auto;
+          min-width: 165px;
           margin: 10px 0;
         }
       }
@@ -133,7 +140,7 @@ html, body {
 
     .latest-version {
       .FontOpenSansLight();
-      color: @Gray;
+      color: @gray-darker;
       text-align: left;
       font-size: 0.9em;
       margin: 0 0 20px;
@@ -159,6 +166,7 @@ html, body {
     }
 
     .screenshot {
+      max-width: 650px;
       margin: 20px auto;
     }
   }
@@ -173,8 +181,7 @@ html, body {
   padding: 50px 15px;
 
   &.alt {
-    background-color: @ThemePrimary;
-    color: @White;
+    background-color: @gray-lighter;
   }
 
   h3 {

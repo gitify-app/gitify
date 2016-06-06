@@ -8810,32 +8810,39 @@ body {
 .btn {
   border: 0;
 }
-.forkme {
-  -ms-transform: rotate(45deg);
-  /* IE 9 */
-  -webkit-transform: rotate(45deg);
-  /* Chrome, Safari, Opera */
-  transform: rotate(45deg);
-  padding: 5px;
-  position: fixed;
-  top: 50px;
-  right: -90px;
-  background-color: #ffffff;
-  color: #3893c6;
-  width: 300px;
-  text-align: center;
-  border-top: 2px solid #3893c6;
-  border-bottom: 2px solid #3893c6;
-  z-index: 9999;
+.github-corner:hover .octo-arm {
+  animation: octocat-wave 560ms ease-in-out;
+}
+@keyframes octocat-wave {
+  0%,
+  100% {
+    transform: rotate(0);
+  }
+  20%,
+  60% {
+    transform: rotate(-25deg);
+  }
+  40%,
+  80% {
+    transform: rotate(10deg);
+  }
+}
+@media (max-width: 500px) {
+  .github-corner:hover .octo-arm {
+    animation: none;
+  }
+  .github-corner .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+  }
 }
 /* @end Misc */
 /* @group Header */
 .header {
-  background-color: #3893c6;
+  background-color: #eeeeee;
   background-repeat: repeat-x;
-  background-image: -webkit-linear-gradient(320deg, #27678a, #3893c6);
-  background-image: -o-linear-gradient(320deg, #27678a, #3893c6);
-  background-image: linear-gradient(320deg, #27678a, #3893c6);
+  background-image: -webkit-linear-gradient(320deg, #c8c8c8, #eeeeee);
+  background-image: -o-linear-gradient(320deg, #c8c8c8, #eeeeee);
+  background-image: linear-gradient(320deg, #c8c8c8, #eeeeee);
 }
 @media (min-width: 768px) {
   .header {
@@ -8848,41 +8855,39 @@ body {
   text-align: center;
   margin-top: 0;
 }
-@media (min-width: 992px) {
-  .header .jumbotron {
-    margin-top: 190px;
-  }
-}
 .header .jumbotron .logo {
-  width: 100%;
-  max-width: 350px;
-  margin: 20px auto;
+  width: 150px;
+  height: auto;
+  margin: 0 auto;
 }
 .header .jumbotron h2 {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
   max-width: 350px;
-  margin: 30px auto 20px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #222222;
 }
 .header .jumbotron .btn-group {
   margin: 5px 0 10px;
 }
-.header .jumbotron .btn-group .btn {
+.header .jumbotron .btn-group .btn-download {
   margin: 0;
   display: block;
   width: 100%;
 }
 @media (min-width: 768px) {
-  .header .jumbotron .btn-group .btn {
+  .header .jumbotron .btn-group .btn-download {
     display: inline-block;
     width: auto;
+    min-width: 165px;
     margin: 10px 0;
   }
 }
 .header .jumbotron .latest-version {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
-  color: #eaeae8;
+  color: #222222;
   text-align: left;
   font-size: 0.9em;
   margin: 0 0 20px;
@@ -8906,6 +8911,7 @@ body {
   }
 }
 .header .jumbotron .screenshot {
+  max-width: 650px;
   margin: 20px auto;
 }
 /* @end Header */
@@ -8914,8 +8920,7 @@ body {
   padding: 50px 15px;
 }
 .section.alt {
-  background-color: #3893c6;
-  color: #ffffff;
+  background-color: #eeeeee;
 }
 .section h3 {
   margin: 40px 0 30px;
