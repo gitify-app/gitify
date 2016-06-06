@@ -8911,8 +8911,9 @@ body {
   }
 }
 .header .jumbotron .screenshot {
-  max-width: 650px;
-  margin: 20px auto;
+  width: 100%;
+  max-width: 700px;
+  margin: 25px auto;
 }
 /* @end Header */
 /* @group Homepage */
@@ -8933,7 +8934,7 @@ body {
 .footer {
   font-family: 'Open Sans', sans-serif;
   font-weight: 300;
-  background-color: #3893c6;
+  background-color: #777777;
   color: #ffffff;
   padding: 20px 0;
 }
