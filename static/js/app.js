@@ -42,7 +42,7 @@ function getLatestReleaseDetails() {
     var m =  releaseDate.getMonth() + 1;
     var y = releaseDate.getFullYear();
 
-    $("#download-button").attr("href", downloadURL);
+    $("#download-apple").attr("href", downloadURL);
     $("#latest-version .version span").text(release.tag_name);
     $("#latest-version .date span").text(d + "/" + m + "/" + y);
     $("#latest-version").fadeIn(500);
