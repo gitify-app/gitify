@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Toggle from 'react-toggle';
 
-const ipcRenderer = window.require('electron').ipcRenderer;
+const electron = window.require('electron');
+const remote = electron.remote;
+const ipcRenderer =electron.ipcRenderer;
 
 import { fetchNotifications, updateSetting, logout } from '../actions';
 
@@ -33,21 +35,27 @@ export class SettingsPage extends React.Component {
 
   render() {
     const appVersion = require('../../../package.json').version;
+    const isDarwin = remote.process.platform === 'darwin';
     const settings = this.props.settings;
 
     return (
       <div className="container-fluid main-container settings">
         <ul className="nav nav-pills">
-          <li className="nav-item">
-            <a className="nav-link" onClick={this.checkForUpdates}>
-              <i className="fa fa-cloud-download" /> Update
-            </a>
-          </li>
+
+          {isDarwin ? (
+            <li className="nav-item">
+              <a className="nav-link" onClick={this.checkForUpdates}>
+                <i className="fa fa-cloud-download" /> Update
+              </a>
+            </li>
+          ) : null }
+
           <li className="nav-item">
             <a className="nav-link" onClick={this.logout.bind(this)}>
               <i className="fa fa-sign-out" /> Logout
             </a>
           </li>
+
           <li className="nav-item">
             <a className="nav-link" onClick={this.appQuit}>
               <i className="fa fa-power-off" /> Quit Gitify
