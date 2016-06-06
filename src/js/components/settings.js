@@ -4,7 +4,7 @@ import Toggle from 'react-toggle';
 
 const electron = window.require('electron');
 const remote = electron.remote;
-const ipcRenderer =electron.ipcRenderer;
+const ipcRenderer = electron.ipcRenderer;
 
 import { fetchNotifications, updateSetting, logout } from '../actions';
 
