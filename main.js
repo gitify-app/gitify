@@ -1,16 +1,11 @@
 const path = require('path');
 
-const electron = require('electron');
-const BrowserWindow = electron.BrowserWindow;
-const Menu = electron.Menu;
-const Tray = electron.Tray;
-const app = electron.app;
-const dialog = electron.dialog;
-const ipc = electron.ipcMain;
+const electron  = require('electron');
+const { BrowserWindow, Menu, Tray, app, dialog, ipcMain } = electron;
 
 const GhReleases = require('electron-gh-releases');
-var Positioner = require('electron-positioner');
-var AutoLaunch = require('auto-launch');
+const Positioner = require('electron-positioner');
+const AutoLaunch = require('auto-launch');
 
 // Status icons
 var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
@@ -188,11 +183,11 @@ app.on('ready', function() {
     showWindow(cachedBounds);
   });
 
-  ipc.on('reopen-window', function () {
+  ipcMain.on('reopen-window', function () {
     showWindow(cachedBounds);
   });
 
-  ipc.on('update-icon', function (event, arg) {
+  ipcMain.on('update-icon', function (event, arg) {
     if (arg === 'TrayActive') {
       appIcon.setImage(iconActive);
     } else {
@@ -200,23 +195,23 @@ app.on('ready', function() {
     }
   });
 
-  ipc.on('startup-enable', function () {
+  ipcMain.on('startup-enable', function () {
     if (!isLinux) {
       autoStart.enable();
     }
   });
 
-  ipc.on('startup-disable', function () {
+  ipcMain.on('startup-disable', function () {
     if (!isLinux) {
       autoStart.disable();
     }
   });
 
-  ipc.on('check-update', function () {
+  ipcMain.on('check-update', function () {
     checkAutoUpdate(true);
   });
 
-  ipc.on('app-quit', function () {
+  ipcMain.on('app-quit', function () {
     app.quit();
   });
 
