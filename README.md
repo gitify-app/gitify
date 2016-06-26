@@ -1,5 +1,6 @@
-# Gitify
-[![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url] [![slack][slack-image]][slack-url]
+# Gitify [![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url] [![slack][slack-image]][slack-url]
+
+> If you are looking for the mobile version - [ekonstantinidis/gitify-mobile](https://github.com/ekonstantinidis/gitify-mobile/).
 
 ![Gitify](images/press.png)
 
