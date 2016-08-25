@@ -8,6 +8,7 @@ import filter from 'redux-storage-decorator-filter';
 import { fetchNotifications, UPDATE_SETTING, LOGIN_SUCCESS, LOGOUT } from '../actions';
 import constants from '../utils/constants';
 import notifications from '../middleware/notifications';
+import settings from '../middleware/settings';
 import requests from '../middleware/requests';
 import rootReducer from '../reducers';
 
@@ -19,6 +20,7 @@ export default function configureStore(initialState) {
     requests, // Should be passed before 'apiMiddleware'
     apiMiddleware,
     notifications,
+    settings,
     storageMiddleware
   )(createStore);
 
