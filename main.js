@@ -104,7 +104,16 @@ app.on('ready', function() {
           label: 'Select All',
           accelerator: 'Command+A',
           selector: 'selectAll:'
-        }
+        },
+        {
+          label: 'Toggle Developer Tools',
+          accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
+          click: function (item, focusedWindow) {
+            if (focusedWindow) {
+              focusedWindow.webContents.toggleDevTools();
+            };
+          }
+        },
       ]
     }];
 
@@ -134,6 +143,16 @@ app.on('ready', function() {
     appIcon.window.loadURL('file://' + __dirname + '/index.html');
     appIcon.window.on('blur', hideWindow);
     appIcon.window.setVisibleOnAllWorkspaces(true);
+
+    appIcon.window.webContents.on('devtools-opened', (event, deviceList, callback) => {
+      appIcon.window.setSize(800, 600);
+      appIcon.window.setResizable(true);
+    });
+
+    appIcon.window.webContents.on('devtools-closed', (event, deviceList, callback) => {
+      appIcon.window.setSize(400, 350);
+      appIcon.window.setResizable(false);
+    });
 
     initMenu();
     checkAutoUpdate(false);
