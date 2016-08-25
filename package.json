@@ -48,7 +48,7 @@
   },
   "homepage": "https://github.com/ekonstantinidis/gitify",
   "dependencies": {
-    "auto-launch": "=2.0.1",
+    "auto-launch": "=4.0.0",
     "bootstrap": "=4.0.0-alpha.2",
     "electron-gh-releases": "=2.0.3",
     "electron-positioner": "=3.0.0",
