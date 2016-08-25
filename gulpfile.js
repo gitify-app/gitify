@@ -62,7 +62,7 @@ gulp.task('watch:scss', function () {
 gulp.task('copy:fonts', function () {
   return gulp.src([
     './node_modules/font-awesome/fonts/*.+(eot|svg|ttf|woff|woff2|otf)',
-    './node_modules/octicons/octicons/*.+(ttf|eot|svg|ttf|woff)',
+    './node_modules/octicons/build/font/*.+(ttf|eot|svg|ttf|woff)',
   ])
   .pipe(gulp.dest('./dist/fonts'));
 });

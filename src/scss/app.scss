@@ -24,7 +24,7 @@ $fa-font-path: "../fonts";
 @import "node_modules/font-awesome/scss/font-awesome.scss";
 
 $octicons-font-path: "../fonts";
-@import "node_modules/octicons/octicons/octicons.scss";
+@import "node_modules/octicons/lib/octicons.scss";
 
 
 /* @end Fonts Overrides */
@@ -33,8 +33,8 @@ $octicons-font-path: "../fonts";
 /* @group Bootstrap Overrides */
 
 $navbar-height: 35px;
-$navbar-padding-vertical: .3rem;
-$navbar-padding-horizontal: 1rem;
+$navbar-padding-y: .3rem;
+$navbar-padding-x: 1rem;
 
 $brand-success: $theme-green;
 
@@ -218,7 +218,7 @@ input {
     @include border-radius(0);
 
     position: relative;
-    top: -$navbar-padding-vertical;
+    top: -$navbar-padding-y;
     left: 5px;
     float: left;
     margin-right: .95rem;
