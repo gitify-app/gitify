@@ -23,7 +23,8 @@ var isWindows = (process.platform === 'win32');
 
 var autoStart = new AutoLaunch({
   name: 'Gitify',
-  path: process.execPath.match(/.*?\.app/)[0]
+  path: process.execPath.match(/.*?\.app/)[0],
+  isHidden: true
 });
 
 app.on('ready', function() {
