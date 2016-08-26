@@ -1,4 +1,7 @@
 const ipcRenderer = window.require('electron').ipcRenderer;
+const shell = window.require('electron').shell;
+
+import Helpers from '../utils/helpers';
 
 export default {
   setup(notifications, settings) {
@@ -46,7 +49,12 @@ export default {
     });
 
     nativeNotification.onclick = function () {
-      ipcRenderer.send('reopen-window');
+      if (newCount === 1) {
+        var url = Helpers.generateGitHubUrl(notifications[0].subject.url);
+        shell.openExternal(url);
+      } else {
+        ipcRenderer.send('reopen-window');
+      }
     };
 
     return nativeNotification;

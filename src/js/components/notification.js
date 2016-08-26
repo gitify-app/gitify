@@ -4,6 +4,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { markNotification } from '../actions';
+import Helpers from '../utils/helpers';
+
 
 export class SingleNotification extends React.Component {
 
@@ -16,10 +18,7 @@ export class SingleNotification extends React.Component {
   }
 
   openBrowser() {
-    var url = this.props.notification.subject.url.replace('api.github.com/repos', 'www.github.com');
-    if (url.indexOf('/pulls/') !== -1) {
-      url = url.replace('/pulls/', '/pull/');
-    }
+    var url = Helpers.generateGitHubUrl(this.props.notification.subject.url);
     shell.openExternal(url);
   }
 
