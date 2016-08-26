@@ -25,10 +25,8 @@ export default store => next => action => {
       break;
 
     case MARK_REPO_NOTIFICATION_SUCCESS:
-      var newNotifications = _.reject(notificationsState.response, (obj) => {
-        return action.meta.repoId === obj.repository.id;
-      });
-
+      var previousNotifications = notificationsState.response;
+      var newNotifications = _.reject(previousNotifications, (obj) => obj.repository.id === action.meta.repoId);
       Helpers.updateTrayIcon(newNotifications.length);
       break;
   }

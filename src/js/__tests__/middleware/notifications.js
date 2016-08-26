@@ -18,19 +18,19 @@ const notificationsList = [
   {
     id: 123,
     repository: {
-      id: 123
+      id: 111111
     }
   },
   {
     id: 456,
     repository: {
-      id: 123
+      id: 111111
     }
   },
   {
     id: 789,
     repository: {
-      id: 456
+      id: 222222
     }
   }
 ];
@@ -105,7 +105,7 @@ describe('middleware/notifications.js', () => {
     const action = {
       type: actions.MARK_REPO_NOTIFICATION_SUCCESS,
       meta: {
-        repoId: 123
+        repoId: 111111
       }
     };
 
