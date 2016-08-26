@@ -1,13 +1,17 @@
 import { expect } from 'chai';
 import sinon from 'sinon';
 import NotificationsUtils from '../../utils/notifications';
+import Helpers from '../../utils/helpers';
+
 const ipcRenderer = window.require('electron').ipcRenderer;
+const shell = window.require('electron').shell;
 
 
 describe('utils/notifications.js', () => {
 
   beforeEach(function() {
     ipcRenderer.send.reset();
+    shell.openExternal.reset();
     sinon.spy(NotificationsUtils, 'raiseNativeNotification');
     sinon.spy(NotificationsUtils, 'raiseSoundNotification');
   });
@@ -160,12 +164,13 @@ describe('utils/notifications.js', () => {
 
   });
 
-  it('should click on a native notification', () => {
+  it('should click on a native notification (with 1 notification)', () => {
 
     const notification = {
       subject: {
         title: 'Hello. This is a notification',
-        type: 'Issue'
+        type: 'Issue',
+        url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3'
       },
       repository: {
         full_name: 'ekonstantinidis/gitify'
@@ -177,6 +182,46 @@ describe('utils/notifications.js', () => {
 
     const nativeNotification = NotificationsUtils.raiseNativeNotification([notification]);
     nativeNotification.onclick();
+
+    const newUrl = Helpers.generateGitHubUrl(notification.subject.url);
+    expect(shell.openExternal).to.have.been.calledOnce;
+    expect(shell.openExternal).to.have.been.calledWith(newUrl);
+
+    // Put the spy back
+    sinon.spy(NotificationsUtils, 'raiseNativeNotification');
+  });
+
+  it('should click on a native notification (with more than 1 notification)', () => {
+
+    const notifications = [
+      {
+        subject: {
+          title: 'Hello. This is a notification',
+          type: 'Issue',
+          url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3'
+        },
+        repository: {
+          full_name: 'ekonstantinidis/gitify'
+        }
+      },
+      {
+        subject: {
+          title: 'Hello. This is another notification',
+          type: 'Issue',
+          url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3'
+        },
+        repository: {
+          full_name: 'ekonstantinidis/gitify'
+        }
+      },
+    ];
+
+    // Restore functionality so we can test further
+    NotificationsUtils.raiseNativeNotification.restore();
+
+    const nativeNotification = NotificationsUtils.raiseNativeNotification(notifications);
+    nativeNotification.onclick();
+
     expect(ipcRenderer.send).to.have.been.calledOnce;
     expect(ipcRenderer.send).to.have.been.calledWith('reopen-window');
 

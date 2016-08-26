@@ -7,5 +7,13 @@ export default {
     } else {
       ipcRenderer.send('update-icon', 'TrayIdle');
     }
+  },
+
+  generateGitHubUrl(url) {
+    var newUrl = url.replace('api.github.com/repos', 'www.github.com');
+    if (newUrl.indexOf('/pulls/') !== -1) {
+      newUrl = newUrl.replace('/pulls/', '/pull/');
+    }
+    return newUrl;
   }
 };
