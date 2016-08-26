@@ -65,7 +65,7 @@ describe('components/navigation.js', function () {
     expect(wrapper.find('.fa-search').length).to.equal(1);
     expect(wrapper.find('.fa-power-off').length).to.equal(0);
     expect(wrapper.find('.fa-chevron-left').length).to.equal(0);
-    expect(wrapper.find('.label-success').text()).to.equal(`${notifications.length}`);
+    expect(wrapper.find('.tag-success').text()).to.equal(`${notifications.length}`);
 
     Navigation.prototype.componentDidMount.restore();
 
@@ -114,7 +114,7 @@ describe('components/navigation.js', function () {
     expect(wrapper.find('.fa-search').length).to.equal(0);
     expect(wrapper.find('.fa-power-off').length).to.equal(1);
     expect(wrapper.find('.fa-chevron-left').length).to.equal(0);
-    expect(wrapper.find('.label-success').length).to.equal(0);
+    expect(wrapper.find('.tag-success').length).to.equal(0);
 
     Navigation.prototype.componentDidMount.restore();
 
@@ -142,7 +142,7 @@ describe('components/navigation.js', function () {
     expect(wrapper.find('.fa-cog').length).to.equal(1);
     expect(wrapper.find('.fa-search').length).to.equal(1);
     expect(wrapper.find('.fa-power-off').length).to.equal(0);
-    expect(wrapper.find('.label-success').text()).to.equal(`${notifications.length}`);
+    expect(wrapper.find('.tag-success').text()).to.equal(`${notifications.length}`);
 
     expect(wrapper.find('.fa-chevron-left').length).to.equal(1);
 
