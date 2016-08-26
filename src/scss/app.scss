@@ -23,8 +23,8 @@ $error-color: #DB423C;
 $fa-font-path: "../fonts";
 @import "node_modules/font-awesome/scss/font-awesome.scss";
 
-$octicons-font-path: "../fonts";
-@import "node_modules/octicons/lib/octicons.scss";
+$octicons-font-path: "../fonts/";
+@import "node_modules/octicons/build/font/_octicons.scss";
 
 
 /* @end Fonts Overrides */
@@ -214,7 +214,7 @@ input {
     }
   }
 
-  .label {
+  .tag {
     @include border-radius(0);
 
     position: relative;

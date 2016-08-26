@@ -201,7 +201,7 @@ describe('actions/index.js', () => {
 
     const expectedActions = [
       { type: actions.MARK_REPO_NOTIFICATION_REQUEST, payload: undefined, meta: undefined },
-      { type: actions.MARK_REPO_NOTIFICATION_SUCCESS, payload: { body: message }, meta: { repoFullName } }
+      { type: actions.MARK_REPO_NOTIFICATION_SUCCESS, payload: { body: message }, meta: { repoFullName, repoId } }
     ];
 
     const store = createMockStore({ response: [] }, expectedActions);
