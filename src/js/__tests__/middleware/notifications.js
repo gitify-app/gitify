@@ -5,21 +5,42 @@ import notificationsMiddleware from '../../middleware/notifications';
 import NativeNotifications from '../../utils/notifications';
 import Helpers from '../../utils/helpers';
 
-const notifications = [
+const newNotification = [
   {
-    id: 123
+    id: 987654,
+    repo: {
+      id: 13
+    }
   }
 ];
+
+const notificationsList = [
+  {
+    id: 123,
+    repository: {
+      id: 123
+    }
+  },
+  {
+    id: 456,
+    repository: {
+      id: 123
+    }
+  },
+  {
+    id: 789,
+    repository: {
+      id: 456
+    }
+  }
+];
+
 
 const createFakeStore = fakeData => ({
   getState() {
     return {
       notifications: {
-        response: [
-          {
-            id: 456
-          }
-        ]
+        response: notificationsList
       },
       settings: {
         playSound: false,
@@ -48,35 +69,49 @@ describe('middleware/notifications.js', () => {
 
     const action = {
       type: actions.NOTIFICATIONS_SUCCESS,
-      payload: notifications
+      payload: newNotification
     };
 
     expect(dispatchWithStoreOf({}, action)).to.eql(action);
     expect(NativeNotifications.setup).to.have.been.calledOnce;
     expect(NativeNotifications.setup).to.have.been.calledWith(
-      [{ id: 123 }], { playSound: false, showNotifications: false }
+      newNotification, { playSound: false, showNotifications: false }
     );
 
     NativeNotifications.setup.restore();
 
   });
 
-  it('should decide to update the tray icon color', () => {
+  it('should mark a notification and call the update tray icon helper', () => {
 
     sinon.spy(Helpers, 'updateTrayIcon');
 
     const action = {
-      type: actions.MARK_NOTIFICATION_REQUEST,
-      payload: [
-        {
-          id: 123
-        }
-      ]
+      type: actions.MARK_NOTIFICATION_SUCCESS,
     };
 
     expect(dispatchWithStoreOf({}, action)).to.eql(action);
     expect(Helpers.updateTrayIcon).to.have.been.calledOnce;
-    expect(Helpers.updateTrayIcon).to.have.been.calledWith([{ id: 123 }]);
+    expect(Helpers.updateTrayIcon).to.have.been.calledWith(2);
+
+    Helpers.updateTrayIcon.restore();
+
+  });
+
+  it('should mark a repo\'s notification and call the update tray icon helper', () => {
+
+    sinon.spy(Helpers, 'updateTrayIcon');
+
+    const action = {
+      type: actions.MARK_REPO_NOTIFICATION_SUCCESS,
+      meta: {
+        repoId: 123
+      }
+    };
+
+    expect(dispatchWithStoreOf({}, action)).to.eql(action);
+    expect(Helpers.updateTrayIcon).to.have.been.calledOnce;
+    expect(Helpers.updateTrayIcon).to.have.been.calledWith(1);
 
     Helpers.updateTrayIcon.restore();
 

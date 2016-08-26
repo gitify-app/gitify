@@ -11,8 +11,8 @@ describe('utils/helpers.js', () => {
 
   it('should send mark the icons as active', () => {
 
-    const notifications = [1, 2, 3];
-    Helpers.updateTrayIcon(notifications);
+    const notificationsLength = 3;
+    Helpers.updateTrayIcon(notificationsLength);
     expect(ipcRenderer.send).to.have.been.calledOnce;
     expect(ipcRenderer.send).to.have.been.calledWith('update-icon', 'TrayActive');
 
@@ -20,8 +20,8 @@ describe('utils/helpers.js', () => {
 
   it('should send mark the icons as idle', () => {
 
-    const notifications = [];
-    Helpers.updateTrayIcon(notifications);
+    const notificationsLength = 0;
+    Helpers.updateTrayIcon(notificationsLength);
     expect(ipcRenderer.send).to.have.been.calledOnce;
     expect(ipcRenderer.send).to.have.been.calledWith('update-icon', 'TrayIdle');
 

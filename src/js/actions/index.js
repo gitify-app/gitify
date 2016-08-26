@@ -108,7 +108,7 @@ export function markRepoNotifications(loginId, repoId, repoFullName) {
       body: JSON.stringify({}),
       types: [MARK_REPO_NOTIFICATION_REQUEST, {
         type: MARK_REPO_NOTIFICATION_SUCCESS,
-        meta: { repoFullName: repoFullName }
+        meta: { repoFullName, repoId }
       }, MARK_REPO_NOTIFICATION_FAILURE]
     }
   };
