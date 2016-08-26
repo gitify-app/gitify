@@ -14,7 +14,7 @@ export default store => next => action => {
         return !_.contains(previousNotifications, obj.id);
       });
 
-      Helpers.updateTrayIcon(newNotifications);
+      Helpers.updateTrayIcon(action.payload);
       NativeNotifications.setup(newNotifications, settings);
       break;
 
