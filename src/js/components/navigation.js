@@ -67,7 +67,7 @@ export class Navigation extends React.Component {
           </li>
         );
         countLabel = (
-          <span className="label label-success">{this.props.notifications.length}</span>
+          <span className="tag tag-success">{this.props.notifications.length}</span>
         );
       }
     } else {
