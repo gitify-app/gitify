@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import reducer from '../../reducers/settings';
-import { UPDATE_SETTING } from '../../actions';
+import { UPDATE_SETTING, HAS_STARRED_SUCCESS, HAS_STARRED_FAILURE } from '../../actions';
 
 describe('reducers/settings.js', () => {
   const initialState = {
@@ -8,7 +8,8 @@ describe('reducers/settings.js', () => {
     playSound: true,
     showNotifications: true,
     markOnClick: false,
-    openAtStartup: false
+    openAtStartup: false,
+    hasStarred: false
   };
 
   it('should return the initial state', () => {
@@ -42,4 +43,31 @@ describe('reducers/settings.js', () => {
     });
 
   });
+
+  it('should handle HAS_STARRED_SUCCESS', () => {
+
+    const actionParticipating = {
+      type: HAS_STARRED_SUCCESS
+    };
+
+    expect(reducer(undefined, actionParticipating)).to.eql({
+      ...initialState,
+      hasStarred: true
+    });
+
+  });
+
+  it('should handle HAS_STARRED_SUCCESS', () => {
+
+    const actionParticipating = {
+      type: HAS_STARRED_FAILURE
+    };
+
+    expect(reducer(undefined, actionParticipating)).to.eql({
+      ...initialState,
+      hasStarred: false
+    });
+
+  });
+
 });
