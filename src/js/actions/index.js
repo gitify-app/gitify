@@ -115,6 +115,27 @@ export function markRepoNotifications(loginId, repoId, repoFullName) {
 };
 
 
+// Starred
+
+export const HAS_STARRED_REQUEST = 'HAS_STARRED_REQUEST';
+export const HAS_STARRED_SUCCESS = 'HAS_STARRED_SUCCESS';
+export const HAS_STARRED_FAILURE = 'HAS_STARRED_FAILURE';
+export function checkHasStarred() {
+  return {
+    [CALL_API]: {
+      endpoint: `https://api.github.com/user/starred/${Constants.REPO_SLUG}`,
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Cache-Control': 'no-cache',
+        'Content-Type': 'application/json'
+      },
+      types: [HAS_STARRED_REQUEST, HAS_STARRED_SUCCESS, HAS_STARRED_FAILURE]
+    }
+  };
+};
+
+
 // Search
 
 export const SEARCH_NOTIFICATIONS = 'SEARCH_NOTIFICATIONS';

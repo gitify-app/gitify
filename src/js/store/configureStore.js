@@ -5,7 +5,7 @@ import * as storage from 'redux-storage';
 import createEngine from 'redux-storage-engine-localstorage';
 import filter from 'redux-storage-decorator-filter';
 
-import { fetchNotifications, UPDATE_SETTING, LOGIN_SUCCESS, LOGOUT } from '../actions';
+import { checkHasStarred, fetchNotifications, UPDATE_SETTING, LOGIN_SUCCESS, LOGOUT } from '../actions';
 import constants from '../utils/constants';
 import notifications from '../middleware/notifications';
 import settings from '../middleware/settings';
@@ -13,7 +13,11 @@ import requests from '../middleware/requests';
 import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
-  const engine = filter(createEngine(constants.STORAGE_KEY), ['settings', ['auth', 'token']]);
+  const engine = filter(
+    createEngine(constants.STORAGE_KEY),
+    ['settings', ['auth', 'token']],
+    [['settings', 'hasStarred']]
+  );
   const storageMiddleware = storage.createMiddleware(engine, [], [UPDATE_SETTING, LOGIN_SUCCESS, LOGOUT]);
 
   const createStoreWithMiddleware = applyMiddleware(
@@ -32,7 +36,10 @@ export default function configureStore(initialState) {
     .then(function (newState) {
       // Check if the user is logged in
       const isLoggedIn = store.getState().auth.token !== null;
-      if (isLoggedIn) { store.dispatch(fetchNotifications()); }
+      if (isLoggedIn) {
+        store.dispatch(checkHasStarred());
+        store.dispatch(fetchNotifications());
+      }
     });
 
   return store;

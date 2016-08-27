@@ -1,7 +1,9 @@
 import { expect } from 'chai';
 import nock from 'nock';
-import { apiMiddleware } from 'redux-api-middleware';
+import { apiMiddleware, ApiError } from 'redux-api-middleware';
 import configureMockStore from 'redux-mock-store';
+
+import Constants from '../../utils/constants';
 import * as actions from '../../actions';
 
 const middlewares = [ apiMiddleware ];
@@ -186,7 +188,6 @@ describe('actions/index.js', () => {
 
   });
 
-
   it('should mark a repository\'s notifications as read with success', () => {
     const loginId = 'ekonstantinidis';
     const repoId = 'gitify';
@@ -249,6 +250,44 @@ describe('actions/index.js', () => {
 
   });
 
+  it('should check if the user has starred the repository', () => {
+    nock('https://api.github.com/')
+      .get(`/user/starred/${Constants.REPO_SLUG}`)
+      .reply(200);
+
+    const expectedActions = [
+      { type: actions.HAS_STARRED_REQUEST, payload: undefined, meta: undefined },
+      { type: actions.HAS_STARRED_SUCCESS, payload: undefined, meta: undefined }
+    ];
+
+    const store = createMockStore({ response: [] }, expectedActions);
+
+    return store.dispatch(actions.checkHasStarred())
+      .then(() => { // return of async actions
+        expect(store.getActions()).to.eql(expectedActions);
+      });
+
+  });
+
+  it('should check if the user has starred the repository', () => {
+    nock('https://api.github.com/')
+      .get(`/user/starred/${Constants.REPO_SLUG}`)
+      .reply(404);
+
+    const apiError = new ApiError(404, 'Not Found', undefined);
+    const expectedActions = [
+      { type: actions.HAS_STARRED_REQUEST, payload: undefined, meta: undefined },
+      { type: actions.HAS_STARRED_FAILURE, payload: apiError, error: true, meta: undefined }
+    ];
+
+    const store = createMockStore({ response: [] }, expectedActions);
+
+    return store.dispatch(actions.checkHasStarred())
+      .then(() => { // return of async actions
+        expect(store.getActions()).to.eql(expectedActions);
+      });
+
+  });
 
   it('should search the notifications with a query', () => {
 
