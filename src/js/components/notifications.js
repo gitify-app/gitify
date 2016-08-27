@@ -62,7 +62,7 @@ export class NotificationsPage extends React.Component {
           })}
         </ReactCSSTransitionGroup>
 
-        {!_.isEmpty(groupedNotifications) ? (
+        {!_.isEmpty(groupedNotifications) && !this.props.hasStarred ? (
           <div className="fork" onClick={this.openBrowser}>
             <i className="fa fa-github" /> Star Gitify on GitHub
           </div>
@@ -74,6 +74,7 @@ export class NotificationsPage extends React.Component {
 
 function mapStateToProps(state) {
   return {
+    hasStarred: state.settings.hasStarred,
     failed: state.notifications.failed,
     notifications: state.notifications.response,
     searchQuery: state.searchFilter.query
