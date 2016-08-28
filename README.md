@@ -1,6 +1,6 @@
 # Gitify [![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url] [![slack][slack-image]][slack-url]
 
-> If you are looking for the mobile version - [ekonstantinidis/gitify-mobile](https://github.com/ekonstantinidis/gitify-mobile/).
+> If you are looking for the mobile version - [manosim/gitify-mobile](https://github.com/manosim/gitify-mobile/).
 
 ![Gitify](images/press.png)
 
@@ -11,11 +11,11 @@
 
 > Cheers,
 
-> Manos (ekonstantinidis)
+> Manos
 
 
 ### Download
-You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/ekonstantinidis/gitify/releases) page.
+You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/manosim/gitify/releases) page.
 
 You can also install Gitify via [Homebrew Cask](http://caskroom.io/)
 
@@ -90,9 +90,9 @@ There are 2 linters for `js` & `scss` and unit tests with `mocha`.
 Gitify is licensed under the MIT Open Source license. For more information, see the LICENSE file in this repository.
 
 
-[travis-image]: https://travis-ci.org/ekonstantinidis/gitify.svg?branch=master
-[travis-url]: https://travis-ci.org/ekonstantinidis/gitify
-[codecov-image]: https://codecov.io/gh/ekonstantinidis/gitify/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/ekonstantinidis/gitify
+[travis-image]: https://travis-ci.org/manosim/gitify.svg?branch=master
+[travis-url]: https://travis-ci.org/manosim/gitify
+[codecov-image]: https://codecov.io/gh/manosim/gitify/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/manosim/gitify
 [slack-image]: https://img.shields.io/badge/slack-atomio/gitify-e01563.svg
 [slack-url]: https://atomio.slack.com/
