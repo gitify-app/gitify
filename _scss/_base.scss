@@ -1,0 +1,261 @@
+/* @group Imports */
+
+@import "../node_modules/font-awesome/scss/font-awesome.scss";
+
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700);
+
+/* @end Imports */
+
+
+/* @group Colours */
+
+// @ThemePrimary: #3893c6;
+
+$white: #FFF;
+
+/* @end Colours */
+
+
+/* @group Bootstrap Overrides */
+
+$font-family-sans-serif: 'Open Sans', sans-serif;
+$link-hover-decoration: none;
+
+// $border-radius: 0;
+// $border-radius-lg: 0;
+// $border-radius-sm: 0;
+
+// $body-bg: $theme-bg;
+
+// $link-color: $dark-gray;
+// $link-hover-color: darken($theme-primary, 10%);
+// $link-hover-decoration: none;
+
+// $headings-font-family: $font-averia;
+// $headings-color: $theme-alt;
+
+// $code-bg: #ececec;
+
+// $container-max-widths: (
+//   sm: 576px,
+//   md: 720px,
+//   lg: 760px,
+//   xl: 761px
+// );
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";
+
+/* @end Bootstrap Overrides */
+
+
+/* @group Typography */
+
+@mixin font-open-sans-light() {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 300;
+}
+
+@mixin font-open-sans-regular() {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 400;
+}
+
+@mixin font-open-sans-semibold() {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+}
+
+@mixin font-open-sans-bold() {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 700;
+}
+
+/* @end Typography */
+
+
+/* @group Misc */
+
+html, body {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding: 0;
+}
+
+.btn {
+  border: 0;
+}
+
+.github-corner:hover .octo-arm {
+  animation:octocat-wave 560ms ease-in-out;
+}
+
+@keyframes octocat-wave{
+  0%, 100% {
+    transform:rotate(0)
+  }
+  20%, 60% {
+    transform:rotate(-25deg)
+  }
+  40%, 80% {
+    transform:rotate(10deg)
+  }
+}
+
+@include media-breakpoint-down(xs) {
+
+  .github-corner:hover .octo-arm {
+    animation:none
+  }
+
+  .github-corner .octo-arm {
+    animation:octocat-wave 560ms ease-in-out
+  }
+}
+
+/* @end Misc */
+
+
+/* @group Header */
+
+.header {
+  @include gradient-directional(darken($gray-lighter, 15%), $gray-lighter, 320deg);
+
+  @include media-breakpoint-down(sm) {
+    min-height: 100%;
+  }
+
+  background-color: $gray-lighter;
+
+  .jumbotron {
+    background-color: transparent;
+    color: $white;
+    text-align: center;
+    margin-top: 0;
+    padding-bottom: 1rem;
+
+    .logo {
+      width: 150px;
+      height: auto;
+      margin: 0 auto;
+    }
+
+    h2 {
+      @include font-open-sans-light();
+      
+      margin: 1rem auto;
+      max-width: 450px;
+      color: darken($gray-dark, 10%);
+    }
+
+    .desktop {
+      margin-top: 1.5rem;
+
+      .btn-download {
+        margin: 0;
+        display: block;
+        width: 100%;
+
+        @include media-breakpoint-up(md) {
+          display: inline-block;
+          width: auto;
+          min-width: 165px;
+        }
+      }
+
+      .latest-version {
+        @include font-open-sans-light();
+
+        margin: 0 0 20px;
+        padding: .1rem 0;
+        color: darken($gray-dark, 10%);
+        font-size: 0.9em;
+        text-align: left;
+
+        .version,
+        .date {
+          padding-left: 0;
+          padding-right: 0;
+        }
+
+        .date {
+
+        }
+      }
+
+      .screenshot {
+        width: 100%;
+        max-width: 400px;
+        margin: 1rem auto;
+      }
+    }
+
+    .mobile {
+      margin-top: 1.5rem;
+
+      .store-logos {
+        margin: 0 auto 1rem;
+        text-align: center;
+
+        .store-logo {
+          display: inline-block;
+          max-width: 160px;
+          margin: 0 .25rem;
+
+          @include media-breakpoint-down(sm) {
+            margin: .5rem 0;
+          }
+        }
+      }
+
+      .screenshot {
+        max-width: 300px;
+        margin: 3rem auto;
+      }
+    }
+  }
+}
+
+/* @end Header */
+
+
+/* @group Homepage */
+
+.section {
+  padding: 50px 15px;
+
+  &.alt {
+    background-color: $gray-lighter;
+  }
+
+  h3 {
+    margin: 40px 0 30px;
+  }
+
+  .screenshot {
+    margin: 30px auto;
+  }
+}
+
+/* @end Homepage */
+
+
+/* @group Footer */
+
+.footer {
+  @include font-open-sans-light();
+
+  background-color: $gray-light;
+  color: $white;
+  padding: 20px 0;
+
+  a {
+    color: darken($white, 10%);
+  }
+
+  .text-right {
+    text-align: right;
+  }
+}
+
+/* @end Footer */

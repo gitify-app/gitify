@@ -3,17 +3,13 @@
   "description": "A static website based on Jekyll for Gitify.",
   "version": "0.0.1",
   "scripts": {
-    "build-less": "lessc --silent _less/_base.less static/css/base.css",
-    "watch-less": "watch 'npm run build-less' _less/",
-    "build": "npm run build-less",
-    "start": "npm run build && npm run watch-less & jekyll serve --watch"
-  },
-  "devDependencies": {
-    "less": "=2.5.1",
-    "watch": "=0.16.0"
+    "watch": "sass _scss/_base.scss:static/css/base.css --sourcemap=none --watch",
+    "build": "sass _scss/_base.scss:static/css/base.css --sourcemap=none --style compressed",
+    "start": "npm run watch & jekyll serve --watch"
   },
   "dependencies": {
-    "bootstrap": "=3.3.5",
-    "font-awesome": "=4.4.0"
-  }
+    "bootstrap": "=4.0.0-alpha.3",
+    "font-awesome": "=4.6.3"
+  },
+  "devDependencies": {}
 }

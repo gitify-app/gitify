@@ -6,19 +6,43 @@ title: Gitify - GitHub Notifications on your menu bar
 <div class="container-fluid header">
   <div class="jumbotron">
 
-    <img class="img-responsive logo" src="static/images/gitify-logo-outline-dark.png" alt="Gitify - GitHub Notifications on your menu bar" />
-    <h2>GitHub Notifications on your menu bar.</h2>
-    <div class="btn-group">
-      <a class="btn btn-lg btn-download btn-success" id="download-apple" href="#"><i class="fa fa-apple"></i> Mac OSX</a>
-      <a class="btn btn-lg btn-download btn-info" id="download-linux" disabled><i class="fa fa-linux"></i> Linux (Soon)</a>
+    <img class="img-fluid logo" src="static/images/gitify-logo-outline-dark.png" alt="Gitify - GitHub Notifications on your menu bar" />
+    <h2>GitHub Notifications on your menu bar or in your pocket.</h2>
 
-      <div class="row latest-version" id="latest-version">
-        <div class="col-md-6 version">Current Version: <span></span>.</div>
-        <div class="col-md-6 date">Released on <span></span>.</div>
+    <div class="row">
+      <div class="col-md-6 desktop">
+       
+        <div class="row">
+          <div class="col-xs-6">
+            <a class="btn btn-lg btn-download btn-success" id="download-apple" href="#">
+              <i class="fa fa-apple"></i> Mac OSX
+            </a>
+          </div>
+          <div class="col-xs-6 latest-version" id="latest-version">
+            <div class="version">Current Version: <span></span>.</div>
+            <div class="date">Released on <span></span>.</div>
+          </div>
+        </div>
+
+        <img class="img-fluid screenshot" id="screenshot" src="static/images/desktop-mockup.png" alt="Gitify Desktop App" />
+
+      </div>
+      <div class="col-md-6 mobile">
+        
+        <div class="store-logos"> 
+          <a href="https://itunes.apple.com/us/app/gitify/id1123311036?ls=1&mt=8" target="_blank">
+            <img class="img-fluid store-logo" src="static/images/app-store.png" alt="App Store" />
+          </a>
+          <a href="http://play.google.com/store/apps/details?id=com.gitify" target="_blank">
+            <img class="img-fluid store-logo" src="static/images/google-play.png" alt="Google Play Store" />
+          </a>
+        </div>
+
+        <img class="img-fluid screenshot" id="screenshot" src="static/images/mobile-mockup.png" alt="Gitify Mobile App" />
+
       </div>
     </div>
 
-    <img class="img-responsive screenshot" id="screenshot" src="static/images/mockup.png" alt="Gitify App" />
   </div>
 </div>
 
@@ -31,14 +55,14 @@ title: Gitify - GitHub Notifications on your menu bar
         informs you for any GitHub notifications without being annoying and of course without adverts.
       </p>
     </div>
-    <div class="col-md-4 col-md-offset-1"><img class="img-responsive screenshot" src="static/images/screenshot.png" alt="Gitify App" /></div>
+    <div class="col-md-4 col-md-offset-1"><img class="img-fluid screenshot" src="static/images/screenshot.png" alt="Gitify App" /></div>
   </div>
 </div>
 
 <div class="section alt container-fluid" id="section2">
   <div class="container">
   <div class="row">
-    <div class="col-md-4"><img class="img-responsive screenshot" src="static/images/settings.png" alt="Your Preferences, Settings" /></div>
+    <div class="col-md-4"><img class="img-fluid screenshot" src="static/images/settings.png" alt="Your Preferences, Settings" /></div>
     <div class="col-md-7 col-md-offset-1">
       <h3>It's about your preferences.</h3>
       <p class="lead">
@@ -57,6 +81,6 @@ title: Gitify - GitHub Notifications on your menu bar
         With Version 1.0.0 being a complete rewrite of the app, Gitify is based on <a href="http://www.electron.io/" target="_blank">Electron</a> - the base of <a href="http://www.atom.io" target="_blank">Atom Text Editor</a>, <a href="https://facebook.github.io/react/" target="_blank">React</a>, <a href="http://redux.js.org/" target="_blank">Redux</a> and more awesome open source libraries.
       </p>
     </div>
-    <div class="col-md-4 col-md-offset-1"><img class="img-responsive screenshot" src="static/images/open-source.png" alt="Open Source - Electron, React, Redux, SASS, GitHub, Node JS." /></div>
+    <div class="col-md-4 col-md-offset-1"><img class="img-fluid screenshot" src="static/images/open-source.png" alt="Open Source - Electron, React, Redux, SASS, GitHub, Node JS." /></div>
   </div>
 </div>
