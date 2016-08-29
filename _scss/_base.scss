@@ -140,9 +140,10 @@ html, body {
       margin: 0 auto;
     }
 
-    h2 {
+    h1 {
       @include font-open-sans-light();
       
+      font-size: 2rem;
       margin: 1rem auto;
       max-width: 450px;
       color: darken($gray-dark, 10%);

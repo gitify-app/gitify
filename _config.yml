@@ -1,8 +1,11 @@
-title: Gitify - GitHub Notifications on your menu bar
+title: Gitify - GitHub Notifications on your menu bar or in your pocket
 description: > # Site Description
-  GitHub Notifications on your menu bar.
+  GitHub Notifications on your menu bar or in your pocket. Desktop & Mobile Application.
 baseurl: "" # the subpath of your site, e.g. /blog/
 url: "http://www.gitify.io" # the base hostname & protocol for your site
 
 # Build settings
 exclude: ['.gitignore', 'node_modules', 'package.json']
+
+gems:
+  - jekyll-sitemap
