@@ -1,7 +1,5 @@
 $(document).ready(function () {
   $("#latest-version").hide();
-  $(".screenshot").hide();
-  $("#screenshot").delay(500).slideToggle(1000,"easeOutBounce");
 
   $('.scroll-to-top').click(function() {
     $('html, body').animate({scrollTop : 0},800);
