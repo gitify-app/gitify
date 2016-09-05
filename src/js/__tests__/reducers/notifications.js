@@ -97,7 +97,7 @@ describe('reducers/notifications.js', () => {
       ...initialState,
       isFetching: false,
       failed: true,
-      response: response
+      response: []
     });
 
   });
