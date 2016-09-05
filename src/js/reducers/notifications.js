@@ -29,7 +29,7 @@ export default function reducer(state = initialState, action) {
         ...state,
         failed: true,
         isFetching: false,
-        response: action.payload
+        response: []
       };
     case MARK_NOTIFICATION_SUCCESS:
       return {
