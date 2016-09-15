@@ -1,6 +1,6 @@
 {
   "name": "gitify",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
@@ -18,7 +18,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ekonstantinidis/gitify.git"
+    "url": "https://github.com/manosim/gitify.git"
   },
   "keywords": [
     "gitify",
@@ -35,7 +35,7 @@
   "contributors": [
     {
       "name": "Emmanouil Konstantinidis",
-      "url": "https://githib.com/ekonstantinidis"
+      "url": "https://githib.com/manosim"
     },
     {
       "name": "Jake 'Sid' Smith",
@@ -44,9 +44,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ekonstantinidis/gitify/issues"
+    "url": "https://github.com/manosim/gitify/issues"
   },
-  "homepage": "https://github.com/ekonstantinidis/gitify",
+  "homepage": "http://www.gitify.io/",
   "dependencies": {
     "auto-launch": "=4.0.0",
     "bootstrap": "=4.0.0-alpha.3",
