@@ -192,7 +192,7 @@ describe('components/navigation.js', function () {
     wrapper.find('.navbar-brand').simulate('click');
 
     expect(shell.openExternal).to.have.been.calledOnce;
-    expect(shell.openExternal).to.have.been.calledWith('http://www.github.com/ekonstantinidis/gitify');
+    expect(shell.openExternal).to.have.been.calledWith('http://www.github.com/manosim/gitify');
 
   });
 
