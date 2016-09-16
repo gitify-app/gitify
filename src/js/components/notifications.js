@@ -22,7 +22,7 @@ export class NotificationsPage extends React.Component {
   }
 
   openBrowser() {
-    shell.openExternal('http://www.github.com/ekonstantinidis/gitify');
+    shell.openExternal('http://www.github.com/manosim/gitify');
   }
 
   render() {
