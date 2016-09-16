@@ -75,6 +75,13 @@ There are 2 linters for `js` & `scss` and unit tests with `mocha`.
     // Run unit tests with coverage
     npm run coverage
 
+### FAQ
+
+#### My notifications aren't showing?
+
+Some organisations require applications to request access before allowing access to any data (including notifications) about their repositories.
+
+To check if Gitify is approved by your organisation you can go to https://github.com/settings/applications, then click on **Gitify** and scroll to _Organization access_.
 
 ### Contributing
 
