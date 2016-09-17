@@ -51,7 +51,7 @@ app.on('ready', function() {
   function checkAutoUpdate(showAlert) {
 
     let autoUpdateOptions = {
-      repo: 'ekonstantinidis/gitify',
+      repo: 'manosim/gitify',
       currentVersion: app.getVersion()
     };
 
