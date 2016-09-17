@@ -83,6 +83,11 @@ Some organisations require applications to request access before allowing access
 
 To check if Gitify is approved by your organisation you can go to https://github.com/settings/applications, then click on **Gitify** and scroll to _Organization access_.
 
+#### Something looks wrong - How can I debug?
+
+Since version `1.1.0` you can now debug Gitify by pressing `alt+cmd+I`. This will open the devtools and then you can see any logs, network requests etc.
+
+
 ### Contributing
 
 1. Fork it!
