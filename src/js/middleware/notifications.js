@@ -5,7 +5,7 @@ import Helpers from '../utils/helpers';
 
 export default store => next => action => {
   const settings = store.getState().settings;
-  const notificationsState = store.getState().notifications;
+  const notificationsState = store.getState().notifications.toJS();
 
   switch (action.type) {
 
@@ -26,6 +26,7 @@ export default store => next => action => {
 
     case MARK_REPO_NOTIFICATION_SUCCESS:
       var previousNotifications = notificationsState.response;
+      // FIXME! Action now has a repoSlug only
       var newNotifications = _.reject(previousNotifications, (obj) => obj.repository.id === action.meta.repoId);
       Helpers.updateTrayIcon(newNotifications.length);
       break;

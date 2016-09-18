@@ -96,10 +96,10 @@ export function markNotification(id) {
 export const MARK_REPO_NOTIFICATION_REQUEST = 'MARK_REPO_NOTIFICATION_REQUEST';
 export const MARK_REPO_NOTIFICATION_SUCCESS = 'MARK_REPO_NOTIFICATION_SUCCESS';
 export const MARK_REPO_NOTIFICATION_FAILURE = 'MARK_REPO_NOTIFICATION_FAILURE';
-export function markRepoNotifications(loginId, repoId, repoFullName) {
+export function markRepoNotifications(repoSlug) {
   return {
     [CALL_API]: {
-      endpoint: `https://api.github.com/repos/${loginId}/${repoId}/notifications`,
+      endpoint: `https://api.github.com/repos/${repoSlug}/notifications`,
       method: 'PUT',
       headers: {
         'Accept': 'application/json',
@@ -108,7 +108,7 @@ export function markRepoNotifications(loginId, repoId, repoFullName) {
       body: JSON.stringify({}),
       types: [MARK_REPO_NOTIFICATION_REQUEST, {
         type: MARK_REPO_NOTIFICATION_SUCCESS,
-        meta: { repoFullName, repoId }
+        meta: { repoSlug }
       }, MARK_REPO_NOTIFICATION_FAILURE]
     }
   };
