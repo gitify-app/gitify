@@ -3,7 +3,7 @@ const path = require('path');
 const GhReleases = require('electron-gh-releases');
 const AutoLaunch = require('auto-launch');
 
-const menuTemplate = require('./menu-template');
+const appMenuTemplate = require('./electron/app-menu-template');
 const iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 const iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
@@ -120,7 +120,7 @@ app.on('ready', function() {
       }
     });
 
-    const menu = Menu.buildFromTemplate(menuTemplate);
+    const menu = Menu.buildFromTemplate(appMenuTemplate);
     Menu.setApplicationMenu(menu);
     checkAutoUpdate(false);
   }

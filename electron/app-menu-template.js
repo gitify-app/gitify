@@ -1,6 +1,6 @@
 const { shell } = require('electron');
 
-const template = [
+const appMenuTemplate = [
   {
     label: 'Edit',
     submenu: [
@@ -85,7 +85,7 @@ const template = [
 ];
 
 if (process.platform === 'darwin') {
-  template.unshift({
+  appMenuTemplate.unshift({
     label: 'Gitify',
     submenu: [
       {
@@ -120,7 +120,7 @@ if (process.platform === 'darwin') {
   });
 
   // Window menu.
-  template[3].submenu = [
+  appMenuTemplate[3].submenu = [
     {
       label: 'Close',
       accelerator: 'CmdOrCtrl+W',
@@ -145,4 +145,4 @@ if (process.platform === 'darwin') {
   ];
 }
 
-module.exports = template;
+module.exports = appMenuTemplate;
