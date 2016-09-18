@@ -1,4 +1,3 @@
-import _ from 'underscore';
 import { Map, List, fromJS } from 'immutable';
 
 import {
@@ -28,16 +27,13 @@ export default function reducer(state = initialState, action) {
         .set('failed', true)
         .set('response', List());
     case MARK_NOTIFICATION_SUCCESS:
-      return {
-        ...state,
-        response: _.without(state.response, _.findWhere(state.response, {id: action.meta.id}))
-      };
+      return state
+        .set('response', state.get('response')
+          .filterNot((obj) => obj.get('id') === action.meta.id));
     case MARK_REPO_NOTIFICATION_SUCCESS:
-      // FIXME! Action now has a repo slug only!
-      return {
-        ...state,
-        response: _.reject(state.response, (obj) => obj.repository.full_name === action.meta.repoFullName)
-      };
+      return state
+        .set('response', state.get('response')
+          .filterNot((obj) => obj.getIn(['repository', 'full_name']) === action.meta.repoSlug));
     default:
       return state;
   }

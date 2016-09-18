@@ -14,7 +14,7 @@ export class Repository extends React.Component {
 
   markRepoAsRead() {
     const repoSlug = this.props.repo.first().getIn(['repository', 'full_name']);
-    // this.props.markRepoNotifications(repoSlug);
+    this.props.markRepoNotifications(repoSlug);
   }
 
   render() {

@@ -84,7 +84,7 @@ export function markNotification(id) {
       },
       types: [MARK_NOTIFICATION_REQUEST, {
         type: MARK_NOTIFICATION_SUCCESS,
-        meta: { id: id }
+        meta: { id }
       }, MARK_NOTIFICATION_FAILURE]
     }
   };
