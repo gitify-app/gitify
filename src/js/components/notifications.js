@@ -37,8 +37,9 @@ export class NotificationsPage extends React.Component {
           transitionName="repository"
           transitionEnter={false}
           transitionLeaveTimeout={325}>
-          {groupedNotifications.map((obj, key) => {
-            return <Repository repo={obj} repoName={key} key={key} />;
+          {groupedNotifications.valueSeq().map((obj, key) => {
+            const repoSlug = obj.first().getIn(['repository', 'full_name']);
+            return <Repository repo={obj} repoName={repoSlug} key={repoSlug} />;
           })}
         </ReactCSSTransitionGroup>
 
