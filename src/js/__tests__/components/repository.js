@@ -19,6 +19,7 @@ function setup(props) {
 describe('components/repository.js', function () {
 
   const repository = fromJS([{
+    id: '123',
     repository: {
       full_name: 'manosim/gitify',
       html_url: 'http://github.com/manosim/gitify/issues/123',
