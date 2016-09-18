@@ -48,15 +48,15 @@ export class Navigation extends React.Component {
     if (isLoggedIn) {
       refreshIcon = (
         <li className="nav-item">
-          <i title="Refresh" className={'nav-link fa fa-refresh'} onClick={this.refreshNotifications.bind(this)} />
+          <i title="Refresh" className={'nav-link fa fa-refresh'} onClick={() => this.refreshNotifications()} />
         </li>
       );
       settingsIcon = (
         <li className="nav-item">
-          <i title="Settings" className="nav-link fa fa-cog" onClick={this.goToSettings.bind(this)} />
+          <i title="Settings" className="nav-link fa fa-cog" onClick={() => this.goToSettings()} />
         </li>
       );
-      if (this.props.notifications.size) {
+      if (!this.props.notifications.isEmpty()) {
         countLabel = (
           <span className="tag tag-success">{this.props.notifications.size}</span>
         );
@@ -64,7 +64,7 @@ export class Navigation extends React.Component {
     } else {
       quitIcon = (
         <li className="nav-item">
-          <i title="Quit" className="nav-link fa fa-power-off" onClick={this.appQuit.bind(this)} />
+          <i title="Quit" className="nav-link fa fa-power-off" onClick={() => this.appQuit()} />
         </li>
       );
     }
@@ -72,12 +72,12 @@ export class Navigation extends React.Component {
     if (this.props.location.pathname === '/settings') {
       backIcon = (
         <li className="nav-item">
-          <i title="Back" className="nav-link fa fa-chevron-left" onClick={this.goBack.bind(this)} />
+          <i title="Back" className="nav-link fa fa-chevron-left" onClick={() => this.goBack()} />
         </li>
       );
       settingsIcon = (
         <li className="nav-item">
-          <i title="Settings" className="nav-link fa fa-cog" onClick={this.goBack.bind(this)} />
+          <i title="Settings" className="nav-link fa fa-cog" onClick={() => this.goBack()} />
         </li>
       );
     }

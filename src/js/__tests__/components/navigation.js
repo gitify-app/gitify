@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import { fromJS } from 'immutable';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
 import sinon from 'sinon';
@@ -30,7 +31,7 @@ function setup(props) {
 
 describe('components/navigation.js', function () {
 
-  const notifications = [{ id: 1 }, { id: 2 }];
+  const notifications = fromJS([{ id: 1 }, { id: 2 }]);
 
   beforeEach(function() {
     this.clock = sinon.useFakeTimers();
@@ -62,10 +63,9 @@ describe('components/navigation.js', function () {
     expect(wrapper.find('.fa-refresh').length).to.equal(1);
     expect(wrapper.find('.fa-refresh').first().hasClass('fa-spin')).to.be.false;
     expect(wrapper.find('.fa-cog').length).to.equal(1);
-    expect(wrapper.find('.fa-search').length).to.equal(1);
     expect(wrapper.find('.fa-power-off').length).to.equal(0);
     expect(wrapper.find('.fa-chevron-left').length).to.equal(0);
-    expect(wrapper.find('.tag-success').text()).to.equal(`${notifications.length}`);
+    expect(wrapper.find('.tag-success').text()).to.equal(`${notifications.size}`);
 
     Navigation.prototype.componentDidMount.restore();
 
@@ -111,7 +111,6 @@ describe('components/navigation.js', function () {
     expect(Navigation.prototype.componentDidMount).to.have.been.calledOnce;
     expect(wrapper.find('.fa-refresh').length).to.equal(0);
     expect(wrapper.find('.fa-cog').length).to.equal(0);
-    expect(wrapper.find('.fa-search').length).to.equal(0);
     expect(wrapper.find('.fa-power-off').length).to.equal(1);
     expect(wrapper.find('.fa-chevron-left').length).to.equal(0);
     expect(wrapper.find('.tag-success').length).to.equal(0);
@@ -140,9 +139,8 @@ describe('components/navigation.js', function () {
     expect(wrapper.find('.fa-refresh').length).to.equal(1);
     expect(wrapper.find('.fa-refresh').first().hasClass('fa-spin')).to.be.false;
     expect(wrapper.find('.fa-cog').length).to.equal(1);
-    expect(wrapper.find('.fa-search').length).to.equal(1);
     expect(wrapper.find('.fa-power-off').length).to.equal(0);
-    expect(wrapper.find('.tag-success').text()).to.equal(`${notifications.length}`);
+    expect(wrapper.find('.tag-success').text()).to.equal(`${notifications.size}`);
 
     expect(wrapper.find('.fa-chevron-left').length).to.equal(1);
 
@@ -200,7 +198,7 @@ describe('components/navigation.js', function () {
 
     const props = {
       isFetching: false,
-      notifications: notifications.length,
+      notifications: notifications,
       token: 'IMLOGGEDIN',
       location: {
         pathname: '/settings'
@@ -225,7 +223,7 @@ describe('components/navigation.js', function () {
     const props = {
       toggleSearch: sinon.spy(),
       isFetching: false,
-      notifications: notifications.length,
+      notifications: notifications,
       token: 'IMLOGGEDIN',
       showSearch: true,
       location: {
@@ -239,7 +237,6 @@ describe('components/navigation.js', function () {
     expect(wrapper.find('.fa-cog').length).to.equal(1);
 
     wrapper.find('.fa-cog').simulate('click');
-    expect(props.toggleSearch).to.have.been.calledOnce;
 
     expect(context.router.push).to.have.been.calledOnce;
     expect(context.router.push).to.have.been.calledWith('/settings');
@@ -254,7 +251,7 @@ describe('components/navigation.js', function () {
     const props = {
       fetchNotifications: sinon.spy(),
       isFetching: false,
-      notifications: notifications.length,
+      notifications: notifications,
       token: 'IMLOGGEDIN',
       location: {
         pathname: '/home'

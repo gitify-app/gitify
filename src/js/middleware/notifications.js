@@ -16,19 +16,24 @@ export default store => next => action => {
       });
 
       Helpers.updateTrayIcon(action.payload.length);
+      Helpers.setBadge(action.payload.length);
       NativeNotifications.setup(newNotifications, settings);
       break;
 
     case MARK_NOTIFICATION_SUCCESS:
       var previousNotifications = notificationsState.response.map(obj => obj.id);
       Helpers.updateTrayIcon(previousNotifications.length - 1);
+      Helpers.setBadge(previousNotifications.length - 1);
       break;
 
     case MARK_REPO_NOTIFICATION_SUCCESS:
       var previousNotifications = notificationsState.response;
-      // FIXME! Action now has a repoSlug only
-      var newNotifications = _.reject(previousNotifications, (obj) => obj.repository.id === action.meta.repoId);
+      var newNotifications = _.reject(previousNotifications, (obj) => (
+        obj.repository.full_name === action.meta.repoSlug
+      ));
+
       Helpers.updateTrayIcon(newNotifications.length);
+      Helpers.setBadge(newNotifications.length);
       break;
   }
 

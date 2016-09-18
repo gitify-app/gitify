@@ -131,6 +131,7 @@ app.on('ready', function() {
   ipcMain.on('startup-enable', () => autoStart.enable() );
   ipcMain.on('startup-disable', () => autoStart.disable() );
   ipcMain.on('check-update', () => checkAutoUpdate(true) );
+  ipcMain.on('set-badge', (event, count) => app.setBadgeCount(count));
   ipcMain.on('app-quit', () => app.quit() );
   ipcMain.on('update-icon', (event, arg) => {
     if (arg === 'TrayActive') {

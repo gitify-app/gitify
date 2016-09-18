@@ -189,25 +189,24 @@ describe('actions/index.js', () => {
   });
 
   it('should mark a repository\'s notifications as read with success', () => {
-    const loginId = 'ekonstantinidis';
-    const repoId = 'gitify';
-    const repoFullName = `${loginId}/${repoId}`;
+
+    const repoSlug = 'manosim/gitify';
     const message = 'Success.';
 
     nock('https://api.github.com/')
-      .put(`/repos/${loginId}/${repoId}/notifications`)
+      .put(`/repos/${repoSlug}/notifications`)
       .reply(200, {
         body: message
       });
 
     const expectedActions = [
       { type: actions.MARK_REPO_NOTIFICATION_REQUEST, payload: undefined, meta: undefined },
-      { type: actions.MARK_REPO_NOTIFICATION_SUCCESS, payload: { body: message }, meta: { repoFullName, repoId } }
+      { type: actions.MARK_REPO_NOTIFICATION_SUCCESS, payload: { body: message }, meta: { repoSlug } }
     ];
 
     const store = createMockStore({ response: [] }, expectedActions);
 
-    return store.dispatch(actions.markRepoNotifications(loginId, repoId, repoFullName))
+    return store.dispatch(actions.markRepoNotifications(repoSlug))
       .then(() => { // return of async actions
         expect(store.getActions()).to.eql(expectedActions);
       });
@@ -215,13 +214,12 @@ describe('actions/index.js', () => {
   });
 
   it('should mark a repository\'s notifications as read with failure', () => {
-    const loginId = 'ekonstantinidis';
-    const repoId = 'gitify';
-    const repoFullName = `${loginId}/${repoId}`;
+
+    const repoSlug = 'manosim/gitify';
     const message = 'Oops! Something went wrong.';
 
     nock('https://api.github.com/')
-    .put(`/repos/${loginId}/${repoId}/notifications`)
+    .put(`/repos/${repoSlug}/notifications`)
       .reply(400, {
         body: { message }
       });
@@ -243,7 +241,7 @@ describe('actions/index.js', () => {
 
     const store = createMockStore({ response: [] }, expectedActions);
 
-    return store.dispatch(actions.markRepoNotifications(loginId, repoId, repoFullName))
+    return store.dispatch(actions.markRepoNotifications(repoSlug))
       .then(() => { // return of async actions
         expect(store.getActions()).to.eql(expectedActions);
       });

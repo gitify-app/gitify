@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import { fromJS } from 'immutable';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
@@ -17,18 +18,18 @@ function setup(props) {
 
 describe('components/repository.js', function () {
 
-  const repository = [{
+  const repository = fromJS([{
     repository: {
-      full_name: 'ekonstantinidis/gitify',
-      html_url: 'http://github.com/ekonstantinidis/gitify/issues/123',
+      full_name: 'manosim/gitify',
+      html_url: 'http://github.com/manosim/gitify/issues/123',
       name: 'gitify',
       owner: {
         avatar_url: 'http://manos.avatar/img.png',
-        login: 'ekonstantinidis',
+        login: 'manosim',
         full_name: 'Emmanouil Konstantinidis'
       }
     }
-  }];
+  }]);
 
   beforeEach(function() {
     shell.openExternal.reset();
@@ -42,7 +43,7 @@ describe('components/repository.js', function () {
 
     const props = {
       repo: repository,
-      repoName: 'ekonstantinidis/gitify'
+      repoName: 'manosim/gitify'
     };
 
     const { wrapper } = setup(props);
@@ -50,7 +51,7 @@ describe('components/repository.js', function () {
     expect(wrapper).to.exist;
     expect(wrapper.find('.octicon-check').length).to.equal(1);
     expect(wrapper.find('.name').text()).to.contain('gitify');
-    expect(wrapper.find('.name').text()).to.contain('ekonstantinidis');
+    expect(wrapper.find('.name').text()).to.contain('manosim');
 
   });
 
@@ -58,7 +59,7 @@ describe('components/repository.js', function () {
 
     const props = {
       repo: repository,
-      repoName: 'ekonstantinidis/gitify'
+      repoName: 'manosim/gitify'
     };
 
     const { wrapper } = setup(props);
@@ -69,10 +70,10 @@ describe('components/repository.js', function () {
     wrapper.find('.name').simulate('click');
 
     expect(wrapper.find('.name').text()).to.contain('gitify');
-    expect(wrapper.find('.name').text()).to.contain('ekonstantinidis');
+    expect(wrapper.find('.name').text()).to.contain('manosim');
 
     expect(shell.openExternal).to.have.been.calledOnce;
-    expect(shell.openExternal).to.have.been.calledWith('http://github.com/ekonstantinidis/gitify/issues/123');
+    expect(shell.openExternal).to.have.been.calledWith('http://github.com/manosim/gitify/issues/123');
 
   });
 
@@ -80,7 +81,7 @@ describe('components/repository.js', function () {
 
     const props = {
       repo: repository,
-      repoName: 'ekonstantinidis/gitify',
+      repoName: 'manosim/gitify',
       markRepoNotifications: sinon.spy()
     };
 
@@ -90,7 +91,7 @@ describe('components/repository.js', function () {
     expect(wrapper.find('.octicon-check').length).to.equal(1);
 
     wrapper.find('.octicon-check').simulate('click');
-    expect(props.markRepoNotifications).to.have.been.calledWith('ekonstantinidis', 'gitify', 'ekonstantinidis/gitify');
+    expect(props.markRepoNotifications).to.have.been.calledWith('manosim/gitify');
 
   });
 
