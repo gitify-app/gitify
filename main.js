@@ -1,36 +1,45 @@
+const { app, dialog, ipcMain, BrowserWindow, Menu, Tray } = require('electron');
 const path = require('path');
-
-const electron = require('electron');
-const BrowserWindow = electron.BrowserWindow;
-const Menu = electron.Menu;
-const Tray = electron.Tray;
-const app = electron.app;
-const dialog = electron.dialog;
-const ipc = electron.ipcMain;
-
 const GhReleases = require('electron-gh-releases');
-var Positioner = require('electron-positioner');
+const AutoLaunch = require('auto-launch');
 
-var AutoLaunch = require('auto-launch');
+const menuTemplate = require('./menu-template');
+const iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
+const iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
-var iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
-var iconActive = path.join(__dirname, 'images', 'tray-active.png');
+const isDarwin = (process.platform === 'darwin');
+const isLinux = (process.platform === 'linux');
+const isWindows = (process.platform === 'win32');
 
-// Utilities
-var isDarwin = (process.platform === 'darwin');
-var isLinux = (process.platform === 'linux');
-var isWindows = (process.platform === 'win32');
+let appWindow;
+let isQuitting = false;
 
-var autoStart = new AutoLaunch({
+const autoStart = new AutoLaunch({
   name: 'Gitify',
   path: process.execPath.match(/.*?\.app/)[0],
   isHidden: true
 });
 
 app.on('ready', function() {
-  var cachedBounds;
-  var appIcon = new Tray(iconIdle);
-  var windowPosition = (isWindows) ? 'trayBottomCenter' : 'trayCenter';
+  let appIcon = new Tray(iconIdle);
+
+  const trayMenu = Menu.buildFromTemplate([
+    {
+      label: 'Show Gitify',
+      click () { appWindow.show(); }
+    },
+    {
+      type: 'separator'
+    },
+    {
+      label: 'Quit',
+      accelerator: isDarwin ? 'Command+Q' : 'Alt+F4',
+      role: 'quit'
+    }
+  ]);
+
+  appIcon.setToolTip('GitHub Notifications on your menu bar.');
+  appIcon.setContextMenu(trayMenu);
 
   function confirmAutoUpdate(updater) {
     dialog.showMessageBox({
@@ -41,7 +50,6 @@ app.on('ready', function() {
       message: 'There is an update available. Would you like to update Gitify now?'
     }, function (response) {
       console.log('Exit: ' + response);
-      app.dock.hide();
       if (response === 0) {
         updater.install();
       }
@@ -49,6 +57,8 @@ app.on('ready', function() {
   }
 
   function checkAutoUpdate(showAlert) {
+
+    if (isWindows || isLinux) { return; }
 
     let autoUpdateOptions = {
       repo: 'ekonstantinidis/gitify',
@@ -78,7 +88,6 @@ app.on('ready', function() {
             message: 'You are currently running the latest version of Gitify.'
           });
         }
-        app.dock.hide();
       }
 
       if (!err && status) {
@@ -87,125 +96,43 @@ app.on('ready', function() {
     });
   }
 
-  function initMenu () {
-    var template = [{
-      label: 'Edit',
-      submenu: [
-        {
-          label: 'Copy',
-          accelerator: 'Command+C',
-          selector: 'copy:'
-        },
-        {
-          label: 'Paste',
-          accelerator: 'Command+V',
-          selector: 'paste:'
-        },
-        {
-          label: 'Select All',
-          accelerator: 'Command+A',
-          selector: 'selectAll:'
-        },
-        {
-          label: 'Toggle Developer Tools',
-          accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
-          click: function (item, focusedWindow) {
-            if (focusedWindow) {
-              focusedWindow.webContents.toggleDevTools();
-            };
-          }
-        },
-      ]
-    }];
-
-    var menu = Menu.buildFromTemplate(template);
-    Menu.setApplicationMenu(menu);
-  }
-
-  function hideWindow () {
-    if (!appIcon.window) { return; }
-    appIcon.window.hide();
-  }
-
   function initWindow () {
     var defaults = {
-      width: 400,
-      height: 350,
+      width: 800,
+      height: 600,
       show: false,
-      frame: false,
-      resizable: false,
+      center: true,
+      fullscreenable: false,
+      titleBarStyle: 'hidden-inset',
       webPreferences: {
         overlayScrollbars: true
       }
     };
 
-    appIcon.window = new BrowserWindow(defaults);
-    appIcon.positioner = new Positioner(appIcon.window);
-    appIcon.window.loadURL('file://' + __dirname + '/index.html');
-    appIcon.window.on('blur', hideWindow);
-    appIcon.window.setVisibleOnAllWorkspaces(true);
+    appWindow = new BrowserWindow(defaults);
+    appWindow.loadURL('file://' + __dirname + '/index.html');
+    appWindow.show();
 
-    appIcon.window.webContents.on('devtools-opened', (event, deviceList, callback) => {
-      appIcon.window.setSize(800, 600);
-      appIcon.window.setResizable(true);
+    appWindow.on('close', function (event) {
+      if (!isQuitting) {
+        event.preventDefault();
+        appWindow.hide();
+      }
     });
 
-    appIcon.window.webContents.on('devtools-closed', (event, deviceList, callback) => {
-      appIcon.window.setSize(400, 350);
-      appIcon.window.setResizable(false);
-    });
-
-    initMenu();
+    const menu = Menu.buildFromTemplate(menuTemplate);
+    Menu.setApplicationMenu(menu);
     checkAutoUpdate(false);
-  }
-
-  function showWindow (trayPos) {
-    var noBoundsPosition;
-    if (!isDarwin && trayPos !== undefined) {
-      var displaySize = electron.screen.getPrimaryDisplay().workAreaSize;
-      var trayPosX = trayPos.x;
-      var trayPosY = trayPos.y;
-
-      if (isLinux) {
-        var cursorPointer = electron.screen.getCursorScreenPoint();
-        trayPosX = cursorPointer.x;
-        trayPosY = cursorPointer.y;
-      }
-
-      var x = (trayPosX < (displaySize.width / 2)) ? 'left' : 'right';
-      var y = (trayPosY < (displaySize.height / 2)) ? 'top' : 'bottom';
-
-      if (x === 'right' && y === 'bottom') {
-        noBoundsPosition = (isWindows) ? 'trayBottomCenter' : 'bottomRight';
-      } else if (x === 'left' && y === 'bottom') {
-        noBoundsPosition = 'bottomLeft';
-      } else if (y === 'top') {
-        noBoundsPosition = (isWindows) ? 'trayCenter' : 'topRight';
-      }
-    } else if (trayPos === undefined) {
-      noBoundsPosition = (isWindows) ? 'bottomRight' : 'topRight';
-    }
-
-    var position = appIcon.positioner.calculate(noBoundsPosition || windowPosition, trayPos);
-    appIcon.window.setPosition(position.x, position.y);
-    appIcon.window.show();
   }
 
   initWindow();
 
-  appIcon.on('click', function (e, bounds) {
-    if (e.altKey || e.shiftKey || e.ctrlKey || e.metaKey) { return hideWindow(); };
-    if (appIcon.window && appIcon.window.isVisible()) { return hideWindow(); };
-    bounds = bounds || cachedBounds;
-    cachedBounds = bounds;
-    showWindow(cachedBounds);
-  });
-
-  ipc.on('reopen-window', function() {
-    showWindow(cachedBounds);
-  });
-
-  ipc.on('update-icon', function(event, arg) {
+  ipcMain.on('reopen-window', () => appWindow.show() );
+  ipcMain.on('startup-enable', () => autoStart.enable() );
+  ipcMain.on('startup-disable', () => autoStart.disable() );
+  ipcMain.on('check-update', () => checkAutoUpdate(true) );
+  ipcMain.on('app-quit', () => app.quit() );
+  ipcMain.on('update-icon', (event, arg) => {
     if (arg === 'TrayActive') {
       appIcon.setImage(iconActive);
     } else {
@@ -213,21 +140,16 @@ app.on('ready', function() {
     }
   });
 
-  ipc.on('startup-enable', function() {
-    autoStart.enable();
-  });
+});
 
-  ipc.on('startup-disable', function() {
-    autoStart.disable();
-  });
+app.on('activate', () => appWindow.show() );
 
-  ipc.on('check-update', function() {
-    checkAutoUpdate(true);
-  });
-
-  ipc.on('app-quit', function() {
+app.on('window-all-closed', () => {
+  if (!isDarwin) {
     app.quit();
-  });
+  }
+});
 
-  appIcon.setToolTip('GitHub Notifications on your menu bar.');
+app.on('before-quit', (event) => {
+  isQuitting = true;
 });
