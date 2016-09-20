@@ -1,15 +1,14 @@
 import { createStore, applyMiddleware } from 'redux';
-import { apiMiddleware } from 'redux-api-middleware';
+import thunkMiddleware from 'redux-thunk';
 
 import * as storage from 'redux-storage';
 import createEngine from 'redux-storage-engine-localstorage';
 import filter from 'redux-storage-decorator-filter';
 
-import { checkHasStarred, fetchNotifications, UPDATE_SETTING, LOGIN_SUCCESS, LOGOUT } from '../actions';
+import { checkHasStarred, fetchNotifications, UPDATE_SETTING, LOGIN, LOGOUT } from '../actions';
 import constants from '../utils/constants';
 import notifications from '../middleware/notifications';
 import settings from '../middleware/settings';
-import requests from '../middleware/requests';
 import rootReducer from '../reducers';
 
 export default function configureStore(initialState) {
@@ -18,10 +17,9 @@ export default function configureStore(initialState) {
     ['settings', ['auth', 'token']],
     [['settings', 'hasStarred']]
   );
-  const storageMiddleware = storage.createMiddleware(engine, [], [UPDATE_SETTING, LOGIN_SUCCESS, LOGOUT]);
+  const storageMiddleware = storage.createMiddleware(engine, [], [UPDATE_SETTING, LOGIN.SUCCESS, LOGOUT]);
 
   const createStoreWithMiddleware = applyMiddleware(
-    requests, // Should be passed before 'apiMiddleware'
     apiMiddleware,
     notifications,
     settings,

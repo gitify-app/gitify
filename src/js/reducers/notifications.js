@@ -1,8 +1,6 @@
 import _ from 'underscore';
-import {
-  NOTIFICATIONS_REQUEST, NOTIFICATIONS_SUCCESS, NOTIFICATIONS_FAILURE,
-  MARK_NOTIFICATION_SUCCESS, MARK_REPO_NOTIFICATION_SUCCESS
-} from '../actions';
+
+import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION } from '../actions';
 
 const initialState = {
   response: [],
@@ -12,31 +10,31 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case NOTIFICATIONS_REQUEST:
+    case NOTIFICATIONS.REQUEST:
       return {
         ...state,
         isFetching: true,
         failed: false
       };
-    case NOTIFICATIONS_SUCCESS:
+    case NOTIFICATIONS.SUCCESS:
       return {
         ...state,
         isFetching: false,
         response: action.payload
       };
-    case NOTIFICATIONS_FAILURE:
+    case NOTIFICATIONS.FAILURE:
       return {
         ...state,
         failed: true,
         isFetching: false,
         response: []
       };
-    case MARK_NOTIFICATION_SUCCESS:
+    case MARK_NOTIFICATION.SUCCESS:
       return {
         ...state,
         response: _.without(state.response, _.findWhere(state.response, {id: action.meta.id}))
       };
-    case MARK_REPO_NOTIFICATION_SUCCESS:
+    case MARK_REPO_NOTIFICATION.SUCCESS:
       return {
         ...state,
         response: _.reject(state.response, (obj) => obj.repository.full_name === action.meta.repoFullName)

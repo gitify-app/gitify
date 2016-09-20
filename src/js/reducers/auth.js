@@ -1,6 +1,4 @@
-import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT
-} from '../actions';
+import { LOGIN, LOGOUT } from '../actions';
 
 const initialState = {
   response: {},
@@ -11,7 +9,7 @@ const initialState = {
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case LOGIN_REQUEST:
+    case LOGIN.REQUEST:
       return {
         ...state,
         isFetching: true,
@@ -19,13 +17,13 @@ export default function reducer(state = initialState, action) {
         response: {},
         token: null
       };
-    case LOGIN_SUCCESS:
+    case LOGIN.SUCCESS:
       return {
         ...state,
         isFetching: false,
         token: action.payload.access_token
       };
-    case LOGIN_FAILURE:
+    case LOGIN.FAILURE:
       return {
         ...state,
         isFetching: false,

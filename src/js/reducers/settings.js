@@ -1,8 +1,4 @@
-import {
-  UPDATE_SETTING,
-  HAS_STARRED_SUCCESS,
-  HAS_STARRED_FAILURE
-} from '../actions';
+import { UPDATE_SETTING, HAS_STARRED } from '../actions';
 
 const initialState = {
   participating: false,
@@ -20,12 +16,12 @@ export default function reducer(state = initialState, action) {
         ...state,
         [action.setting]: action.value
       };
-    case HAS_STARRED_SUCCESS:
+    case HAS_STARRED.SUCCESS:
       return {
         ...state,
         hasStarred: true
       };
-    case HAS_STARRED_FAILURE:
+    case HAS_STARRED.FAILURE:
       return {
         ...state,
         hasStarred: false
