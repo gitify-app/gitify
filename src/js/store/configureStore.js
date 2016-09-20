@@ -20,7 +20,7 @@ export default function configureStore(initialState) {
   const storageMiddleware = storage.createMiddleware(engine, [], [UPDATE_SETTING, LOGIN.SUCCESS, LOGOUT]);
 
   const createStoreWithMiddleware = applyMiddleware(
-    apiMiddleware,
+    thunkMiddleware,
     notifications,
     settings,
     storageMiddleware
