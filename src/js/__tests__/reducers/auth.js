@@ -1,8 +1,7 @@
 import { expect } from 'chai';
+
 import reducer from '../../reducers/auth';
-import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT
-} from '../../actions';
+import { LOGIN, LOGOUT } from '../../actions';
 
 describe('reducers/auth.js', () => {
   const initialState = {
@@ -18,10 +17,10 @@ describe('reducers/auth.js', () => {
 
   });
 
-  it('should handle LOGIN_REQUEST', () => {
+  it('should handle LOGIN.REQUEST', () => {
 
     const action = {
-      type: LOGIN_REQUEST
+      type: LOGIN.REQUEST
     };
 
     expect(reducer(undefined, action)).to.eql({
@@ -34,7 +33,7 @@ describe('reducers/auth.js', () => {
 
   });
 
-  it('should handle LOGIN_SUCCESS', () => {
+  it('should handle LOGIN.SUCCESS', () => {
 
     const fakeState = {
       isFetching: true,
@@ -46,7 +45,7 @@ describe('reducers/auth.js', () => {
     expect(reducer(fakeState, {}).token).to.be.null;
 
     const action = {
-      type: LOGIN_SUCCESS,
+      type: LOGIN.SUCCESS,
       payload: {
         access_token: '123HELLOWORLDTOKEN'
       }
@@ -62,7 +61,7 @@ describe('reducers/auth.js', () => {
 
   });
 
-  it('should handle LOGIN_FAILURE', () => {
+  it('should handle LOGIN.FAILURE', () => {
 
     const fakeState = {
       isFetching: true,
@@ -74,7 +73,7 @@ describe('reducers/auth.js', () => {
     expect(reducer(fakeState, {}).token).to.be.null;
 
     const action = {
-      type: LOGIN_FAILURE,
+      type: LOGIN.FAILURE,
       payload: 'Failed to login.'
     };
 
