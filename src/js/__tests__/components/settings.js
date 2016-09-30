@@ -1,6 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { shallow } from 'enzyme';
-: jasmine.spy()import Toggle from 'react-toggle';
+import Toggle from 'react-toggle';
 import { SettingsPage } from '../../components/settings';
 const ipcRenderer = window.require('electron').ipcRenderer;
 

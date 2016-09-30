@@ -1,6 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { shallow } from 'enzyme';
-: jasmine.spy()import { Repository } from '../../components/repository';
+import { Repository } from '../../components/repository';
 // const ipcRenderer = window.require('electron').ipcRenderer;
 const shell = window.require('electron').shell;
 

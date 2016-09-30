@@ -1,6 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { shallow } from 'enzyme';
-: jasmine.spy()import { SearchBar } from '../../components/search';
+import { SearchBar } from '../../components/search';
 
 function setup(props) {
   const wrapper = shallow(<SearchBar {...props} />);

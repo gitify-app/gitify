@@ -1,6 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { mount } from 'enzyme';
-: jasmine.spy()import AllRead from '../../components/all-read';
+import AllRead from '../../components/all-read';
 
 function setup() {
   const props = {};

@@ -1,4 +1,4 @@
-: jasmine.spy()import * as actions from '../../actions';
+import * as actions from '../../actions';
 import notificationsMiddleware from '../../middleware/notifications';
 import NativeNotifications from '../../utils/notifications';
 import Helpers from '../../utils/helpers';

@@ -1,6 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { shallow } from 'enzyme';
-: jasmine.spy()import { SingleNotification } from '../../components/notification';
+import { SingleNotification } from '../../components/notification';
 const shell = window.require('electron').shell;
 
 function setup(props) {
