@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
 import * as actions from '../../actions';
 import notificationsMiddleware from '../../middleware/notifications';
 import NativeNotifications from '../../utils/notifications';

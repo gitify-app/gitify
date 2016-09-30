@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import Helpers from '../../utils/helpers';
 const ipcRenderer = window.require('electron').ipcRenderer;
 

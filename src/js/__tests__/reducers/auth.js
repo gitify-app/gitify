@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 
 import reducer from '../../reducers/auth';
 import { LOGIN, LOGOUT } from '../../actions';

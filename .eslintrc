@@ -3,7 +3,8 @@
     browser: true,
     es6: true,
     node: true,
-    mocha: true
+    jasmine: true,
+    jest: true
   },
   "parserOptions": {
     "ecmaVersion": 6,

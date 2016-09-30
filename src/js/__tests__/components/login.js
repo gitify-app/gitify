@@ -1,7 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
+
 import { LoginPage } from '../../components/login';
 
 const BrowserWindow = window.require('electron').remote.BrowserWindow;
@@ -12,8 +11,8 @@ function setup(props) {
   const options = {
     context: {
       router: {
-        push: sinon.spy(),
-        replace: sinon.spy()
+        push: jasmine.spy(),
+        replace: jasmine.spy()
       }
     }
   };
@@ -68,7 +67,7 @@ describe('components/login.js', function () {
       'authorize?client_id=3fef4433a29c6ad8f22c&scope=user:email,notifications';
 
     const props = {
-      loginUser: sinon.spy(),
+      loginUser: jasmine.spy(),
       token: null,
       response: {},
       failed: false,
@@ -104,7 +103,7 @@ describe('components/login.js', function () {
       'authorize?client_id=3fef4433a29c6ad8f22c&scope=user:email,notifications';
 
     const props = {
-      loginUser: sinon.spy(),
+      loginUser: jasmine.spy(),
       token: null,
       response: {},
       failed: false,
@@ -140,7 +139,7 @@ describe('components/login.js', function () {
       'authorize?client_id=3fef4433a29c6ad8f22c&scope=user:email,notifications';
 
     const props = {
-      loginUser: sinon.spy(),
+      loginUser: jasmine.spy(),
       token: null,
       response: {},
       failed: false,
@@ -174,7 +173,7 @@ describe('components/login.js', function () {
     });
 
     const props = {
-      loginUser: sinon.spy(),
+      loginUser: jasmine.spy(),
       token: null,
       response: {},
       failed: false,
@@ -223,7 +222,7 @@ describe('components/login.js', function () {
     const code = 'thisisacode';
 
     const props = {
-      loginUser: sinon.spy(),
+      loginUser: jasmine.spy(),
       token: null,
       response: {},
       failed: false,

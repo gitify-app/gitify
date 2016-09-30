@@ -1,6 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import configureMockStore from 'redux-mock-store';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import getRoutes, { NotFound } from '../routes';
 

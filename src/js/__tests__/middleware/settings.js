@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import * as actions from '../../actions';
 import settingsMiddleware from '../../middleware/settings';
 const ipcRenderer = window.require('electron').ipcRenderer;

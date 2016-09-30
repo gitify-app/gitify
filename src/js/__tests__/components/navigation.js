@@ -1,7 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { expect } from 'chai';
 import { mount } from 'enzyme';
-import sinon from 'sinon';
 import { Navigation } from '../../components/navigation';
 const ipcRenderer = window.require('electron').ipcRenderer;
 const shell = window.require('electron').shell;
@@ -13,8 +11,8 @@ function setup(props) {
         pathname: ''
       },
       router: {
-        push: sinon.spy(),
-        replace: sinon.spy()
+        push: jasmine.spy(),
+        replace: jasmine.spy()
       }
     }
   };
@@ -76,7 +74,7 @@ describe('components/navigation.js', function () {
     const props = {
       isFetching: false,
       notifications: notifications,
-      fetchNotifications: sinon.spy(),
+      fetchNotifications: jasmine.spy(),
       token: 'IMLOGGEDIN',
       location: {
         pathname: '/home'
@@ -223,7 +221,7 @@ describe('components/navigation.js', function () {
   it('should go to settings from home', function () {
 
     const props = {
-      toggleSearch: sinon.spy(),
+      toggleSearch: jasmine.spy(),
       isFetching: false,
       notifications: notifications.length,
       token: 'IMLOGGEDIN',
@@ -252,7 +250,7 @@ describe('components/navigation.js', function () {
   it('should refresh the notifications', function () {
 
     const props = {
-      fetchNotifications: sinon.spy(),
+      fetchNotifications: jasmine.spy(),
       isFetching: false,
       notifications: notifications.length,
       token: 'IMLOGGEDIN',

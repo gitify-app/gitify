@@ -1,5 +1,3 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
 import NotificationsUtils from '../../utils/notifications';
 import Helpers from '../../utils/helpers';
 
@@ -12,8 +10,8 @@ describe('utils/notifications.js', () => {
   beforeEach(function() {
     ipcRenderer.send.reset();
     shell.openExternal.reset();
-    sinon.spy(NotificationsUtils, 'raiseNativeNotification');
-    sinon.spy(NotificationsUtils, 'raiseSoundNotification');
+    spyOn(NotificationsUtils, 'raiseNativeNotification').and.callThrough();
+    spyOn(NotificationsUtils, 'raiseSoundNotification').and.callThrough();
   });
 
   afterEach(function () {

@@ -1,5 +1,4 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { NotificationsPage } from '../../components/notifications';
 import AllRead from '../../components/all-read';

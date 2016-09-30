@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import reducer from '../../reducers/settings';
 import { UPDATE_SETTING, HAS_STARRED } from '../../actions';
 

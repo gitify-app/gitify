@@ -1,7 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import { Repository } from '../../components/repository';
 // const ipcRenderer = window.require('electron').ipcRenderer;
 const shell = window.require('electron').shell;
@@ -81,7 +79,7 @@ describe('components/repository.js', function () {
     const props = {
       repo: repository,
       repoName: 'ekonstantinidis/gitify',
-      markRepoNotifications: sinon.spy()
+      markRepoNotifications: jasmine.spy()
     };
 
     const { wrapper } = setup(props);
