@@ -1,8 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
-import { SearchBar } from '../../components/search';
+: jasmine.spy()import { SearchBar } from '../../components/search';
 
 function setup(props) {
   const wrapper = shallow(<SearchBar {...props} />);
@@ -18,8 +16,8 @@ describe('components/search.js', function () {
   it('should render itself & its children', function () {
 
     const props = {
-      searchNotifications: sinon.spy(),
-      clearSearch: sinon.spy(),
+      searchNotifications: jasmine.spy(),
+      clearSearch: jasmine.spy(),
       showSearch: true,
       query: ''
     };
@@ -37,8 +35,8 @@ describe('components/search.js', function () {
   it('should hide the search bar if not showSearch', function () {
 
     const props = {
-      searchNotifications: sinon.spy(),
-      clearSearch: sinon.spy(),
+      searchNotifications: jasmine.spy(),
+      clearSearch: jasmine.spy(),
       showSearch: false,
       query: ''
     };
@@ -54,8 +52,8 @@ describe('components/search.js', function () {
   it('should show the clear icon/button', function () {
 
     const props = {
-      searchNotifications: sinon.spy(),
-      clearSearch: sinon.spy(),
+      searchNotifications: jasmine.spy(),
+      clearSearch: jasmine.spy(),
       showSearch: true,
       query: 'hello'
     };
@@ -74,8 +72,8 @@ describe('components/search.js', function () {
     sinon.spy(SearchBar.prototype, 'componentWillReceiveProps');
 
     const props = {
-      searchNotifications: sinon.spy(),
-      clearSearch: sinon.spy(),
+      searchNotifications: jasmine.spy(),
+      clearSearch: jasmine.spy(),
       showSearch: true,
       query: 'hello'
     };

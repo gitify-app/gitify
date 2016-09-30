@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import reducer from '../../reducers/notifications';
 import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION } from '../../actions';
 

@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import reducer from '../../reducers/searchFilter';
 import { SEARCH_NOTIFICATIONS, CLEAR_SEARCH } from '../../actions';
 

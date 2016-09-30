@@ -1,8 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
-import Toggle from 'react-toggle';
+: jasmine.spy()import Toggle from 'react-toggle';
 import { SettingsPage } from '../../components/settings';
 const ipcRenderer = window.require('electron').ipcRenderer;
 
@@ -12,8 +10,8 @@ const options = {
       pathname: ''
     },
     router: {
-      push: sinon.spy(),
-      replace: sinon.spy()
+      push: jasmine.spy(),
+      replace: jasmine.spy()
     }
   }
 };
@@ -37,9 +35,9 @@ describe('components/settings.js', function () {
   it('should render itself & its children', function () {
 
     const props = {
-      updateSetting: sinon.spy(),
-      fetchNotifications: sinon.spy(),
-      logout: sinon.spy(),
+      updateSetting: jasmine.spy(),
+      fetchNotifications: jasmine.spy(),
+      logout: jasmine.spy(),
       settings: {
         participating: false,
         playSound: true,
@@ -61,9 +59,9 @@ describe('components/settings.js', function () {
   it('should update a setting', function () {
 
     const props = {
-      updateSetting: sinon.spy(),
-      fetchNotifications: sinon.spy(),
-      logout: sinon.spy(),
+      updateSetting: jasmine.spy(),
+      fetchNotifications: jasmine.spy(),
+      logout: jasmine.spy(),
       settings: {
         participating: false,
         playSound: true,
@@ -94,9 +92,9 @@ describe('components/settings.js', function () {
   it('should check for updates ', function () {
 
     const props = {
-      updateSetting: sinon.spy(),
-      fetchNotifications: sinon.spy(),
-      logout: sinon.spy(),
+      updateSetting: jasmine.spy(),
+      fetchNotifications: jasmine.spy(),
+      logout: jasmine.spy(),
       settings: {
         participating: false,
         playSound: true,
@@ -119,9 +117,9 @@ describe('components/settings.js', function () {
   it('should quit the app', function () {
 
     const props = {
-      updateSetting: sinon.spy(),
-      fetchNotifications: sinon.spy(),
-      logout: sinon.spy(),
+      updateSetting: jasmine.spy(),
+      fetchNotifications: jasmine.spy(),
+      logout: jasmine.spy(),
       settings: {
         participating: false,
         playSound: true,
@@ -144,9 +142,9 @@ describe('components/settings.js', function () {
   it('should press the logout', function () {
 
     const props = {
-      updateSetting: sinon.spy(),
-      fetchNotifications: sinon.spy(),
-      logout: sinon.spy(),
+      updateSetting: jasmine.spy(),
+      fetchNotifications: jasmine.spy(),
+      logout: jasmine.spy(),
       settings: {
         participating: false,
         playSound: true,

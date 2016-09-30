@@ -1,5 +1,4 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
 import { App } from '../../containers/app';
 

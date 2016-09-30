@@ -1,8 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
-import { SingleNotification } from '../../components/notification';
+: jasmine.spy()import { SingleNotification } from '../../components/notification';
 const shell = window.require('electron').shell;
 
 function setup(props) {
@@ -28,7 +26,7 @@ describe('components/notification.js', function () {
   it('should render itself & its children', function () {
 
     const props = {
-      markNotification: sinon.spy(),
+      markNotification: jasmine.spy(),
       markOnClick: false,
       notification: notification
     };
@@ -93,7 +91,7 @@ describe('components/notification.js', function () {
   it('should open a notification in the browser', function () {
 
     const props = {
-      markNotification: sinon.spy(),
+      markNotification: jasmine.spy(),
       markOnClick: false,
       notification: notification
     };
@@ -111,7 +109,7 @@ describe('components/notification.js', function () {
   it('should mark a notification as read', function () {
 
     const props = {
-      markNotification: sinon.spy(),
+      markNotification: jasmine.spy(),
       markOnClick: false,
       notification: notification
     };
@@ -127,7 +125,7 @@ describe('components/notification.js', function () {
   it('should open a notification in browser & mark it as read', function () {
 
     const props = {
-      markNotification: sinon.spy(),
+      markNotification: jasmine.spy(),
       markOnClick: true,
       notification: notification
     };
