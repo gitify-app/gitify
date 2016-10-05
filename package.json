@@ -54,7 +54,6 @@
     "electron-gh-releases": "=2.0.4",
     "electron-positioner": "=3.0.0",
     "font-awesome": "=4.6.3",
-    "history": "=2.1.1",
     "malarkey": "=1.3.3",
     "octicons": "=4.3.0",
     "react": "=15.0.2",
