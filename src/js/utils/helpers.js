@@ -11,7 +11,7 @@ export default {
   },
 
   generateGitHubUrl(subject) {
-    var newUrl = subject.url.replace('api.github.com/repos', 'www.github.com');
+    var newUrl = subject.url.replace('api.github.com/repos', 'github.com');
 
     if (newUrl.indexOf('/pulls/') !== -1) {
       newUrl = newUrl.replace('/pulls/', '/pull/');
