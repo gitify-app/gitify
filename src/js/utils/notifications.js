@@ -50,7 +50,7 @@ export default {
 
     nativeNotification.onclick = function () {
       if (newCount === 1) {
-        var url = Helpers.generateGitHubUrl(notifications[0].subject.url);
+        var url = Helpers.generateGitHubUrl(notifications[0].subject);
         shell.openExternal(url);
       } else {
         ipcRenderer.send('reopen-window');

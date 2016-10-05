@@ -18,7 +18,7 @@ export class SingleNotification extends React.Component {
   }
 
   openBrowser() {
-    var url = Helpers.generateGitHubUrl(this.props.notification.subject.url);
+    var url = Helpers.generateGitHubUrl(this.props.notification.subject);
     shell.openExternal(url);
   }
 

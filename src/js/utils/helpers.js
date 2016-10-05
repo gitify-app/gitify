@@ -1,4 +1,5 @@
 const ipcRenderer = window.require('electron').ipcRenderer;
+import _ from 'underscore';
 
 export default {
   updateTrayIcon(notificationsLength) {
@@ -9,8 +10,8 @@ export default {
     }
   },
 
-  generateGitHubUrl(url) {
-    var newUrl = url.replace('api.github.com/repos', 'www.github.com');
+  generateGitHubUrl(subject) {
+    var newUrl = subject.url.replace('api.github.com/repos', 'www.github.com');
 
     if (newUrl.indexOf('/pulls/') !== -1) {
       newUrl = newUrl.replace('/pulls/', '/pull/');
@@ -19,6 +20,11 @@ export default {
     if (newUrl.indexOf('/releases/') !== -1) {
       newUrl = newUrl.replace('/repos', '');
       newUrl = newUrl.substr(0, newUrl.lastIndexOf('/'));
+    }
+
+    var commentUrl = subject.latest_comment_url;
+    if (commentUrl.indexOf('/comments/') !== -1) {
+      newUrl = newUrl + '#issuecomment-' + _.last(commentUrl.split('/'));;
     }
 
     return newUrl;
