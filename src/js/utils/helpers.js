@@ -23,7 +23,7 @@ export default {
     }
 
     var commentUrl = subject.latest_comment_url;
-    if (commentUrl.indexOf('/comments/') !== -1) {
+    if (commentUrl !== null && commentUrl.indexOf('/comments/') !== -1) {
       newUrl = newUrl + '#issuecomment-' + _.last(commentUrl.split('/'));;
     }
 

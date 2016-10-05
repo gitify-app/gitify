@@ -54,7 +54,7 @@ describe('utils/helpers.js', () => {
 
     var subject = {
       url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/pulls/12345',
-      latest_comment_url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/pulls/12345'
+      latest_comment_url: null
     };
 
     var newUrl = Helpers.generateGitHubUrl(subject);
@@ -66,7 +66,7 @@ describe('utils/helpers.js', () => {
 
     var subject = {
       url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/releases/3988077',
-      latest_comment_url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/releases/3988077'
+      latest_comment_url: null
     };
 
     var newUrl = Helpers.generateGitHubUrl(subject);
