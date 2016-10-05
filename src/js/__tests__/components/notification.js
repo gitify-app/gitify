@@ -21,7 +21,8 @@ describe('components/notification.js', function () {
     subject: {
       title: 'Hello. This is a notification.',
       type: 'Issue',
-      url: 'https://api.github.com/repos/ekonstantinidis/gitify/pulls/123'
+      url: 'https://api.github.com/repos/manosim/gitify/issues/173/',
+      latest_comment_url: 'https://api.github.com/manosim/gitify/issues/173/224367941'
     }
   };
 

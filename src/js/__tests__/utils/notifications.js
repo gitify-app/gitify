@@ -170,7 +170,8 @@ describe('utils/notifications.js', () => {
       subject: {
         title: 'Hello. This is a notification',
         type: 'Issue',
-        url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3'
+        url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3',
+        latest_comment_url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3'
       },
       repository: {
         full_name: 'ekonstantinidis/gitify'
@@ -183,7 +184,7 @@ describe('utils/notifications.js', () => {
     const nativeNotification = NotificationsUtils.raiseNativeNotification([notification]);
     nativeNotification.onclick();
 
-    const newUrl = Helpers.generateGitHubUrl(notification.subject.url);
+    const newUrl = Helpers.generateGitHubUrl(notification.subject);
     expect(shell.openExternal).to.have.been.calledOnce;
     expect(shell.openExternal).to.have.been.calledWith(newUrl);
 
@@ -198,7 +199,8 @@ describe('utils/notifications.js', () => {
         subject: {
           title: 'Hello. This is a notification',
           type: 'Issue',
-          url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3'
+          url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3',
+          latest_comment_url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3'
         },
         repository: {
           full_name: 'ekonstantinidis/gitify'
@@ -208,7 +210,8 @@ describe('utils/notifications.js', () => {
         subject: {
           title: 'Hello. This is another notification',
           type: 'Issue',
-          url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3'
+          url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3',
+          latest_comment_url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3'
         },
         repository: {
           full_name: 'ekonstantinidis/gitify'

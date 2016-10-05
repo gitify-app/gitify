@@ -30,25 +30,47 @@ describe('utils/helpers.js', () => {
 
   it('should generate the GitHub url (issue)', () => {
 
-    var apiUrl = 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3';
-    var newUrl = Helpers.generateGitHubUrl(apiUrl);
-    expect(newUrl).to.equal('https://www.github.com/ekonstantinidis/notifications-test/issues/3');
+    var subject = {
+      url: 'https://api.github.com/repos/manosim/gitify/issues/173',
+      latest_comment_url: 'https://api.github.com/manosim/gitify/issues/173'
+    };
+    var newUrl = Helpers.generateGitHubUrl(subject);
+    expect(newUrl).to.equal('https://github.com/manosim/gitify/issues/173');
+
+  });
+
+  it('should generate the GitHub url (issue with comment)', () => {
+
+    var subject = {
+      url: 'https://api.github.com/repos/manosim/gitify/issues/173',
+      latest_comment_url: 'https://api.github.com/manosim/gitify/issues/173/comments/224367941'
+    };
+    var newUrl = Helpers.generateGitHubUrl(subject);
+    expect(newUrl).to.equal('https://github.com/manosim/gitify/issues/173#issuecomment-224367941');
 
   });
 
   it('should generate the GitHub url (repos)', () => {
 
-    var apiUrl = 'https://api.github.com/repos/ekonstantinidis/notifications-test/pulls/12345';
-    var newUrl = Helpers.generateGitHubUrl(apiUrl);
-    expect(newUrl).to.equal('https://www.github.com/ekonstantinidis/notifications-test/pull/12345');
+    var subject = {
+      url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/pulls/12345',
+      latest_comment_url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/pulls/12345'
+    };
+
+    var newUrl = Helpers.generateGitHubUrl(subject);
+    expect(newUrl).to.equal('https://github.com/ekonstantinidis/notifications-test/pull/12345');
 
   });
 
   it('should generate the GitHub url (release)', () => {
 
-    var apiUrl = 'https://api.github.com/repos/ekonstantinidis/notifications-test/releases/3988077';
-    var newUrl = Helpers.generateGitHubUrl(apiUrl);
-    expect(newUrl).to.equal('https://www.github.com/ekonstantinidis/notifications-test/releases');
+    var subject = {
+      url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/releases/3988077',
+      latest_comment_url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/releases/3988077'
+    };
+
+    var newUrl = Helpers.generateGitHubUrl(subject);
+    expect(newUrl).to.equal('https://github.com/ekonstantinidis/notifications-test/releases');
 
   });
 
