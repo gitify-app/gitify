@@ -1,12 +1,12 @@
 import { expect } from 'chai';
 import nock from 'nock';
-import { apiMiddleware, ApiError } from 'redux-api-middleware';
 import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 
 import Constants from '../../utils/constants';
 import * as actions from '../../actions';
 
-const middlewares = [ apiMiddleware ];
+const middlewares = [ thunk ];
 const createMockStore = configureMockStore(middlewares);
 
 describe('actions/index.js', () => {
@@ -26,8 +26,8 @@ describe('actions/index.js', () => {
       });
 
     const expectedActions = [
-      { type: actions.LOGIN_REQUEST, payload: undefined, meta: undefined },
-      { type: actions.LOGIN_SUCCESS, payload: { body: { access_token: 'THISISATOKEN' } }, meta: undefined }
+      { type: actions.LOGIN.REQUEST },
+      { type: actions.LOGIN.SUCCESS, payload: { body: { access_token: 'THISISATOKEN' } } }
     ];
 
     const store = createMockStore({ response: [] }, expectedActions);
@@ -52,8 +52,8 @@ describe('actions/index.js', () => {
       });
 
     const expectedActions = [
-      { type: actions.LOGIN_REQUEST, payload: undefined, meta: undefined },
-      { type: actions.LOGIN_FAILURE, payload: { body: { message } }, error: true, meta: undefined }
+      { type: actions.LOGIN.REQUEST },
+      { type: actions.LOGIN.FAILURE, payload: { body: { message } } }
     ];
 
     const store = createMockStore({ response: [] }, expectedActions);
@@ -88,17 +88,21 @@ describe('actions/index.js', () => {
     ];
 
     nock('https://api.github.com/')
-      .get('/notifications')
+      .get('/notifications?participating=false')
       .reply(200, {
         body: notifications
       });
 
     const expectedActions = [
-      { type: actions.NOTIFICATIONS_REQUEST, payload: undefined, meta: undefined },
-      { type: actions.NOTIFICATIONS_SUCCESS, payload: { body: notifications }, meta: undefined }
+      { type: actions.NOTIFICATIONS.REQUEST },
+      { type: actions.NOTIFICATIONS.SUCCESS, payload: { body: notifications } }
     ];
 
-    const store = createMockStore({ response: [] }, expectedActions);
+    const store = createMockStore({
+      auth: { token: 'THISISATOKEN' },
+      settings: { participating: false },
+      response: []
+    }, expectedActions);
 
     return store.dispatch(actions.fetchNotifications())
       .then(() => { // return of async actions
@@ -111,17 +115,21 @@ describe('actions/index.js', () => {
     const message = 'Oops! Something went wrong.';
 
     nock('https://api.github.com/')
-      .get('/notifications')
+      .get('/notifications?participating=false')
       .reply(400, {
         body: { message }
       });
 
     const expectedActions = [
-      { type: actions.NOTIFICATIONS_REQUEST, payload: undefined, meta: undefined },
-      { type: actions.NOTIFICATIONS_FAILURE, payload: { body: { message } }, error: true, meta: undefined }
+      { type: actions.NOTIFICATIONS.REQUEST },
+      { type: actions.NOTIFICATIONS.FAILURE, payload: { body: { message } } }
     ];
 
-    const store = createMockStore({ response: [] }, expectedActions);
+    const store = createMockStore({
+      auth: { token: null },
+      settings: { participating: false },
+      response: []
+    }, expectedActions);
 
     return store.dispatch(actions.fetchNotifications())
       .then(() => { // return of async actions
@@ -141,11 +149,14 @@ describe('actions/index.js', () => {
       });
 
     const expectedActions = [
-      { type: actions.MARK_NOTIFICATION_REQUEST, payload: undefined, meta: undefined },
-      { type: actions.MARK_NOTIFICATION_SUCCESS, payload: { body: message }, meta: { id } }
+      { type: actions.MARK_NOTIFICATION.REQUEST },
+      { type: actions.MARK_NOTIFICATION.SUCCESS, payload: { body: message }, meta: { id } }
     ];
 
-    const store = createMockStore({ response: [] }, expectedActions);
+    const store = createMockStore({
+      auth: { token: 'IAMATOKEN' },
+      response: []
+    }, expectedActions);
 
     return store.dispatch(actions.markNotification(id))
       .then(() => { // return of async actions
@@ -164,22 +175,15 @@ describe('actions/index.js', () => {
         body: { message }
       });
 
-    const expectedPayload = {
-      message: '400 - Bad Request',
-      name: 'ApiError',
-      status: 400,
-      response: {
-        body: { message }
-      },
-      statusText: 'Bad Request'
-    };
-
     const expectedActions = [
-      { type: actions.MARK_NOTIFICATION_REQUEST, payload: undefined, meta: undefined },
-      { type: actions.MARK_NOTIFICATION_FAILURE, payload: expectedPayload, error: true, meta: undefined }
+      { type: actions.MARK_NOTIFICATION.REQUEST },
+      { type: actions.MARK_NOTIFICATION.FAILURE, payload: { body: { message } } }
     ];
 
-    const store = createMockStore({ response: [] }, expectedActions);
+    const store = createMockStore({
+      auth: { token: null },
+      response: []
+    }, expectedActions);
 
     return store.dispatch(actions.markNotification(id))
       .then(() => { // return of async actions
@@ -200,11 +204,14 @@ describe('actions/index.js', () => {
       });
 
     const expectedActions = [
-      { type: actions.MARK_REPO_NOTIFICATION_REQUEST, payload: undefined, meta: undefined },
-      { type: actions.MARK_REPO_NOTIFICATION_SUCCESS, payload: { body: message }, meta: { repoSlug } }
+      { type: actions.MARK_REPO_NOTIFICATION.REQUEST },
+      { type: actions.MARK_REPO_NOTIFICATION.SUCCESS, payload: { body: message }, meta: { repoFullName, repoId } }
     ];
 
-    const store = createMockStore({ response: [] }, expectedActions);
+    const store = createMockStore({
+      auth: { token: 'IAMATOKEN' },
+      response: []
+    }, expectedActions);
 
     return store.dispatch(actions.markRepoNotifications(repoSlug))
       .then(() => { // return of async actions
@@ -224,22 +231,15 @@ describe('actions/index.js', () => {
         body: { message }
       });
 
-    const expectedPayload = {
-      message: '400 - Bad Request',
-      name: 'ApiError',
-      status: 400,
-      response: {
-        body: { message }
-      },
-      statusText: 'Bad Request'
-    };
-
     const expectedActions = [
-      { type: actions.MARK_REPO_NOTIFICATION_REQUEST, payload: undefined, meta: undefined },
-      { type: actions.MARK_REPO_NOTIFICATION_FAILURE, payload: expectedPayload, error: true, meta: undefined }
+      { type: actions.MARK_REPO_NOTIFICATION.REQUEST },
+      { type: actions.MARK_REPO_NOTIFICATION.FAILURE, payload: { body: { message } } }
     ];
 
-    const store = createMockStore({ response: [] }, expectedActions);
+    const store = createMockStore({
+      auth: { token: null },
+      response: []
+    }, expectedActions);
 
     return store.dispatch(actions.markRepoNotifications(repoSlug))
       .then(() => { // return of async actions
@@ -248,17 +248,20 @@ describe('actions/index.js', () => {
 
   });
 
-  it('should check if the user has starred the repository', () => {
+  it('should check if the user has starred the repository (has)', () => {
     nock('https://api.github.com/')
       .get(`/user/starred/${Constants.REPO_SLUG}`)
       .reply(200);
 
     const expectedActions = [
-      { type: actions.HAS_STARRED_REQUEST, payload: undefined, meta: undefined },
-      { type: actions.HAS_STARRED_SUCCESS, payload: undefined, meta: undefined }
+      { type: actions.HAS_STARRED.REQUEST },
+      { type: actions.HAS_STARRED.SUCCESS, payload: '' }
     ];
 
-    const store = createMockStore({ response: [] }, expectedActions);
+    const store = createMockStore({
+      auth: { token: 'IAMATOKEN' },
+      response: []
+    }, expectedActions);
 
     return store.dispatch(actions.checkHasStarred())
       .then(() => { // return of async actions
@@ -267,18 +270,20 @@ describe('actions/index.js', () => {
 
   });
 
-  it('should check if the user has starred the repository', () => {
+  it('should check if the user has starred the repository (has not)', () => {
     nock('https://api.github.com/')
       .get(`/user/starred/${Constants.REPO_SLUG}`)
       .reply(404);
 
-    const apiError = new ApiError(404, 'Not Found', undefined);
     const expectedActions = [
-      { type: actions.HAS_STARRED_REQUEST, payload: undefined, meta: undefined },
-      { type: actions.HAS_STARRED_FAILURE, payload: apiError, error: true, meta: undefined }
+      { type: actions.HAS_STARRED.REQUEST },
+      { type: actions.HAS_STARRED.FAILURE, payload: '' }
     ];
 
-    const store = createMockStore({ response: [] }, expectedActions);
+    const store = createMockStore({
+      auth: { token: 'IAMATOKEN' },
+      response: []
+    }, expectedActions);
 
     return store.dispatch(actions.checkHasStarred())
       .then(() => { // return of async actions

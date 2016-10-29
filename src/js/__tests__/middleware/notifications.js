@@ -73,7 +73,7 @@ describe('middleware/notifications.js', () => {
     sinon.spy(NativeNotifications, 'setup');
 
     const action = {
-      type: actions.NOTIFICATIONS_SUCCESS,
+      type: actions.NOTIFICATIONS.SUCCESS,
       payload: newNotification
     };
 
@@ -92,7 +92,7 @@ describe('middleware/notifications.js', () => {
     sinon.spy(Helpers, 'updateTrayIcon');
 
     const action = {
-      type: actions.MARK_NOTIFICATION_SUCCESS,
+      type: actions.MARK_NOTIFICATION.SUCCESS,
     };
 
     expect(dispatchWithStoreOf({}, action)).to.eql(action);
@@ -108,7 +108,7 @@ describe('middleware/notifications.js', () => {
     sinon.spy(Helpers, 'updateTrayIcon');
 
     const action = {
-      type: actions.MARK_REPO_NOTIFICATION_SUCCESS,
+      type: actions.MARK_REPO_NOTIFICATION.SUCCESS,
       meta: {
         repoSlug: 'manosim/gitify'
       }

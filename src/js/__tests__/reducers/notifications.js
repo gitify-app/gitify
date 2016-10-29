@@ -2,10 +2,7 @@ import { Map, List, fromJS } from 'immutable';
 import { expect } from 'chai';
 
 import reducer from '../../reducers/notifications';
-import {
-  NOTIFICATIONS_REQUEST, NOTIFICATIONS_SUCCESS, NOTIFICATIONS_FAILURE,
-  MARK_NOTIFICATION_SUCCESS, MARK_REPO_NOTIFICATION_SUCCESS
-} from '../../actions';
+import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION } from '../../actions';
 
 describe('reducers/notifications.js', () => {
   const initialState = Map({
@@ -37,10 +34,10 @@ describe('reducers/notifications.js', () => {
 
   });
 
-  it('should handle NOTIFICATIONS_REQUEST', () => {
+  it('should handle NOTIFICATIONS.REQUEST', () => {
 
     const action = {
-      type: NOTIFICATIONS_REQUEST
+      type: NOTIFICATIONS.REQUEST
     };
 
     expect(reducer(undefined, action)).to.eql(
@@ -51,12 +48,12 @@ describe('reducers/notifications.js', () => {
 
   });
 
-  it('should handle NOTIFICATIONS_SUCCESS', () => {
+  it('should handle NOTIFICATIONS.SUCCESS', () => {
 
     expect(reducer(undefined, {})).to.eql(initialState);
 
     const action = {
-      type: NOTIFICATIONS_SUCCESS,
+      type: NOTIFICATIONS.SUCCESS,
       payload: notifications
     };
 
@@ -73,7 +70,7 @@ describe('reducers/notifications.js', () => {
 
   });
 
-  it('should handle NOTIFICATIONS_FAILURE', () => {
+  it('should handle NOTIFICATIONS.FAILURE', () => {
 
     const response = {
       error: 404,
@@ -88,7 +85,7 @@ describe('reducers/notifications.js', () => {
     expect(reducer(currentState, {})).to.eql(currentState);
 
     const action = {
-      type: NOTIFICATIONS_FAILURE,
+      type: NOTIFICATIONS.FAILURE,
       payload: response
     };
 
@@ -101,14 +98,14 @@ describe('reducers/notifications.js', () => {
 
   });
 
-  it('should handle MARK_NOTIFICATION_SUCCESS', () => {
+  it('should handle MARK_NOTIFICATION.SUCCESS', () => {
 
     const currentState = initialState.set('response', notifications);
 
     expect(reducer(currentState, {}).get('response').size).to.equal(2);
 
     const action = {
-      type: MARK_NOTIFICATION_SUCCESS,
+      type: MARK_NOTIFICATION.SUCCESS,
       meta: {
         id: 1
       }
@@ -118,14 +115,14 @@ describe('reducers/notifications.js', () => {
 
   });
 
-  it('should handle MARK_REPO_NOTIFICATION_SUCCESS', () => {
+  it('should handle MARK_REPO_NOTIFICATION.SUCCESS', () => {
 
     const currentState = initialState.set('response', notifications);
 
     expect(reducer(currentState, {}).get('response').size).to.equal(2);
 
     const action = {
-      type: MARK_REPO_NOTIFICATION_SUCCESS,
+      type: MARK_REPO_NOTIFICATION.SUCCESS,
       meta: {
         repoSlug: 'manosim/gitify'
       }

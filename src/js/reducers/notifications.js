@@ -1,9 +1,5 @@
 import { Map, List, fromJS } from 'immutable';
-
-import {
-  NOTIFICATIONS_REQUEST, NOTIFICATIONS_SUCCESS, NOTIFICATIONS_FAILURE,
-  MARK_NOTIFICATION_SUCCESS, MARK_REPO_NOTIFICATION_SUCCESS
-} from '../actions';
+import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION } from '../actions';
 
 const initialState = Map({
   response: List(),
@@ -13,24 +9,24 @@ const initialState = Map({
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
-    case NOTIFICATIONS_REQUEST:
+    case NOTIFICATIONS.REQUEST:
       return state
         .set('isFetching', true)
         .set('failed', false);
-    case NOTIFICATIONS_SUCCESS:
+    case NOTIFICATIONS.REQUEST:
       return state
         .set('isFetching', false)
         .set('response', fromJS(action.payload));
-    case NOTIFICATIONS_FAILURE:
+    case NOTIFICATIONS.FAILURE:
       return state
         .set('isFetching', false)
         .set('failed', true)
         .set('response', List());
-    case MARK_NOTIFICATION_SUCCESS:
+    case MARK_NOTIFICATION.SUCCESS:
       return state
         .set('response', state.get('response')
           .filterNot((obj) => obj.get('id') === action.meta.id));
-    case MARK_REPO_NOTIFICATION_SUCCESS:
+    case MARK_REPO_NOTIFICATION.SUCCESS:
       return state
         .set('response', state.get('response')
           .filterNot((obj) => obj.getIn(['repository', 'full_name']) === action.meta.repoSlug));
