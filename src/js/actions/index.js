@@ -1,37 +1,39 @@
-import {CALL_API, getJSON} from 'redux-api-middleware';
+import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 
 import Constants from '../utils/constants';
 
+export function makeAsyncActionSet(actionName) {
+  return {
+    REQUEST: actionName + '_REQUEST',
+    SUCCESS: actionName + '_SUCCESS',
+    FAILURE: actionName + '_FAILURE'
+  };
+}
 
 // Authentication
 
-export const LOGIN_REQUEST = 'LOGIN_REQUEST';
-export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const LOGIN_FAILURE = 'LOGIN_FAILURE';
+export const LOGIN = makeAsyncActionSet('LOGIN');
 export function loginUser(code) {
-  return {
-    [CALL_API]: {
-      endpoint: 'https://github.com/login/oauth/access_token',
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        'client_id': Constants.CLIENT_ID,
-        'client_secret': Constants.CLIENT_SECRET,
-        'code': code
-      }),
-      types: [LOGIN_REQUEST, {
-        type: LOGIN_SUCCESS,
-        payload: (action, state, res) => getJSON(res)
-      }, {
-        type: LOGIN_FAILURE,
-        payload: (action, state, res) => {
-          return getJSON(res);
-        }
-      }]
-    }
+  return (dispatch, getState) => {
+
+    const url = 'https://github.com/login/oauth/access_token';
+    const method = 'POST';
+    const data = {
+      'client_id': Constants.CLIENT_ID,
+      'client_secret': Constants.CLIENT_SECRET,
+      'code': code
+    };
+
+    dispatch({type: LOGIN.REQUEST});
+
+    return apiRequest(url, method, data)
+      .then(function (response) {
+        dispatch({type: LOGIN.SUCCESS, payload: response.data});
+      })
+      .catch(function (error) {
+        dispatch({type: LOGIN.FAILURE, payload: error.response.data});
+      });
+
   };
 };
 
@@ -43,95 +45,97 @@ export function logout() {
 
 // Notifications
 
-export const NOTIFICATIONS_REQUEST = 'NOTIFICATIONS_REQUEST';
-export const NOTIFICATIONS_SUCCESS = 'NOTIFICATIONS_SUCCESS';
-export const NOTIFICATIONS_FAILURE = 'NOTIFICATIONS_FAILURE';
+export const NOTIFICATIONS = makeAsyncActionSet('NOTIFICATIONS');
 export function fetchNotifications() {
-  return {
-    [CALL_API]: {
-      endpoint: 'https://api.github.com/notifications',
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Cache-Control': 'no-cache',
-        'Content-Type': 'application/json'
-      },
-      types: [NOTIFICATIONS_REQUEST, {
-        type: NOTIFICATIONS_SUCCESS,
-        payload: (action, state, res) => getJSON(res)
-      }, {
-        type: NOTIFICATIONS_FAILURE,
-        payload: (action, state, res) => getJSON(res)
-      }]
-    }
+  return (dispatch, getState) => {
+
+    const participating = getState().settings.participating;
+    const url = `https://api.github.com/notifications?participating=${participating}`;
+    const method = 'GET';
+    const token = getState().auth.token;
+
+    dispatch({type: NOTIFICATIONS.REQUEST});
+
+    return apiRequestAuth(url, method, token)
+      .then(function (response) {
+        dispatch({type: NOTIFICATIONS.SUCCESS, payload: response.data});
+      })
+      .catch(function (error) {
+        dispatch({type: NOTIFICATIONS.FAILURE, payload: error.response.data});
+      });
+
   };
 };
 
 
 // Single Notification
 
-export const MARK_NOTIFICATION_REQUEST = 'MARK_NOTIFICATION_REQUEST';
-export const MARK_NOTIFICATION_SUCCESS = 'MARK_NOTIFICATION_SUCCESS';
-export const MARK_NOTIFICATION_FAILURE = 'MARK_NOTIFICATION_FAILURE';
+export const MARK_NOTIFICATION = makeAsyncActionSet('MARK_NOTIFICATION');
 export function markNotification(id) {
-  return {
-    [CALL_API]: {
-      endpoint: `https://api.github.com/notifications/threads/${id}`,
-      method: 'PATCH',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      types: [MARK_NOTIFICATION_REQUEST, {
-        type: MARK_NOTIFICATION_SUCCESS,
-        meta: { id: id }
-      }, MARK_NOTIFICATION_FAILURE]
-    }
+  return (dispatch, getState) => {
+
+    const url = `https://api.github.com/notifications/threads/${id}`;
+    const method = 'PATCH';
+    const token = getState().auth.token;
+
+    dispatch({type: MARK_NOTIFICATION.REQUEST});
+
+    return apiRequestAuth(url, method, token, {})
+      .then(function (response) {
+        dispatch({type: MARK_NOTIFICATION.SUCCESS, payload: response.data, meta: { id }});
+      })
+      .catch(function (error) {
+        dispatch({type: MARK_NOTIFICATION.FAILURE, payload: error.response.data});
+      });
+
   };
 };
 
 
 // Repo's Notification
 
-export const MARK_REPO_NOTIFICATION_REQUEST = 'MARK_REPO_NOTIFICATION_REQUEST';
-export const MARK_REPO_NOTIFICATION_SUCCESS = 'MARK_REPO_NOTIFICATION_SUCCESS';
-export const MARK_REPO_NOTIFICATION_FAILURE = 'MARK_REPO_NOTIFICATION_FAILURE';
+export const MARK_REPO_NOTIFICATION = makeAsyncActionSet('MARK_REPO_NOTIFICATION');
 export function markRepoNotifications(loginId, repoId, repoFullName) {
-  return {
-    [CALL_API]: {
-      endpoint: `https://api.github.com/repos/${loginId}/${repoId}/notifications`,
-      method: 'PUT',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({}),
-      types: [MARK_REPO_NOTIFICATION_REQUEST, {
-        type: MARK_REPO_NOTIFICATION_SUCCESS,
-        meta: { repoFullName, repoId }
-      }, MARK_REPO_NOTIFICATION_FAILURE]
-    }
+  return (dispatch, getState) => {
+
+    const url = `https://api.github.com/repos/${loginId}/${repoId}/notifications`;
+    const method = 'PUT';
+    const token = getState().auth.token;
+
+    dispatch({type: MARK_REPO_NOTIFICATION.REQUEST});
+
+    return apiRequestAuth(url, method, token, {})
+      .then(function (response) {
+        dispatch({type: MARK_REPO_NOTIFICATION.SUCCESS, payload: response.data, meta: { repoFullName, repoId }});
+      })
+      .catch(function (error) {
+        dispatch({type: MARK_REPO_NOTIFICATION.FAILURE, payload: error.response.data});
+      });
+
   };
 };
 
 
 // Starred
 
-export const HAS_STARRED_REQUEST = 'HAS_STARRED_REQUEST';
-export const HAS_STARRED_SUCCESS = 'HAS_STARRED_SUCCESS';
-export const HAS_STARRED_FAILURE = 'HAS_STARRED_FAILURE';
+export const HAS_STARRED = makeAsyncActionSet('HAS_STARRED');
 export function checkHasStarred() {
-  return {
-    [CALL_API]: {
-      endpoint: `https://api.github.com/user/starred/${Constants.REPO_SLUG}`,
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Cache-Control': 'no-cache',
-        'Content-Type': 'application/json'
-      },
-      types: [HAS_STARRED_REQUEST, HAS_STARRED_SUCCESS, HAS_STARRED_FAILURE]
-    }
+  return (dispatch, getState) => {
+
+    const url = `https://api.github.com/user/starred/${Constants.REPO_SLUG}`;
+    const method = 'GET';
+    const token = getState().auth.token;
+
+    dispatch({type: HAS_STARRED.REQUEST});
+
+    return apiRequestAuth(url, method, token)
+      .then(function (response) {
+        dispatch({type: HAS_STARRED.SUCCESS, payload: response.data});
+      })
+      .catch(function (error) {
+        dispatch({type: HAS_STARRED.FAILURE, payload: error.response.data});
+      });
+
   };
 };
 

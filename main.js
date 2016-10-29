@@ -61,7 +61,7 @@ app.on('ready', function() {
     if (isWindows || isLinux) { return; }
 
     let autoUpdateOptions = {
-      repo: 'ekonstantinidis/gitify',
+      repo: 'manosim/gitify',
       currentVersion: app.getVersion()
     };
 

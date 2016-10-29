@@ -49,6 +49,7 @@
   "homepage": "http://www.gitify.io/",
   "dependencies": {
     "auto-launch": "=4.0.1",
+    "axios": "=0.14.0",
     "bootstrap": "=4.0.0-alpha.4",
     "electron-gh-releases": "=2.0.4",
     "font-awesome": "=4.6.3",
@@ -70,6 +71,7 @@
     "redux-storage": "=4.1.1",
     "redux-storage-decorator-filter": "=1.1.6",
     "redux-storage-engine-localstorage": "=1.1.2",
+    "redux-thunk": "=2.1.0",
     "underscore": "=1.8.3"
   },
   "devDependencies": {
