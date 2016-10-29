@@ -85,6 +85,7 @@
     "babelify": "=7.3.0",
     "browserify": "=13.1.0",
     "chai": "=3.5.0",
+    "chai-immutable": "=1.6.0",
     "electron": "=1.4.0",
     "electron-packager": "=8.0.0",
     "enzyme": "=2.4.1",

@@ -194,11 +194,13 @@ describe('actions/index.js', () => {
 
   it('should mark a repository\'s notifications as read with success', () => {
 
-    const repoSlug = 'manosim/gitify';
+    const loginId = 'ekonstantinidis';
+    const repoId = 'gitify';
+    const repoFullName = `${loginId}/${repoId}`;
     const message = 'Success.';
 
     nock('https://api.github.com/')
-      .put(`/repos/${repoSlug}/notifications`)
+      .put(`/repos/${loginId}/${repoId}/notifications`)
       .reply(200, {
         body: message
       });
@@ -213,7 +215,7 @@ describe('actions/index.js', () => {
       response: []
     }, expectedActions);
 
-    return store.dispatch(actions.markRepoNotifications(repoSlug))
+    return store.dispatch(actions.markRepoNotifications(loginId, repoId, repoFullName))
       .then(() => { // return of async actions
         expect(store.getActions()).to.eql(expectedActions);
       });
@@ -222,11 +224,13 @@ describe('actions/index.js', () => {
 
   it('should mark a repository\'s notifications as read with failure', () => {
 
-    const repoSlug = 'manosim/gitify';
+    const loginId = 'ekonstantinidis';
+    const repoId = 'gitify';
+    const repoFullName = `${loginId}/${repoId}`;
     const message = 'Oops! Something went wrong.';
 
     nock('https://api.github.com/')
-    .put(`/repos/${repoSlug}/notifications`)
+    .put(`/repos/${loginId}/${repoId}/notifications`)
       .reply(400, {
         body: { message }
       });
@@ -241,7 +245,7 @@ describe('actions/index.js', () => {
       response: []
     }, expectedActions);
 
-    return store.dispatch(actions.markRepoNotifications(repoSlug))
+    return store.dispatch(actions.markRepoNotifications(loginId, repoId, repoFullName))
       .then(() => { // return of async actions
         expect(store.getActions()).to.eql(expectedActions);
       });

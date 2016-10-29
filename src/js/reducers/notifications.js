@@ -13,7 +13,7 @@ export default function reducer(state = initialState, action) {
       return state
         .set('isFetching', true)
         .set('failed', false);
-    case NOTIFICATIONS.REQUEST:
+    case NOTIFICATIONS.SUCCESS:
       return state
         .set('isFetching', false)
         .set('response', fromJS(action.payload));

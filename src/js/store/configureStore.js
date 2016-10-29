@@ -44,7 +44,7 @@ export default function configureStore(initialState) {
   load(store)
     .then(function (newState) {
       // Check if the user is logged in
-      const isLoggedIn = store.getState().auth.token !== null;
+      const isLoggedIn = store.getState().auth.get('token') !== null;
       if (isLoggedIn) {
         store.dispatch(checkHasStarred());
         store.dispatch(fetchNotifications());
