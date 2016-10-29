@@ -18,17 +18,28 @@ export default function configureStore(initialState) {
     ['settings', ['auth', 'token']],
     [['settings', 'hasStarred']]
   );
+
   const storageMiddleware = storage.createMiddleware(engine, [], [UPDATE_SETTING, LOGIN_SUCCESS, LOGOUT]);
 
-  const createStoreWithMiddleware = applyMiddleware(
+  const middlewares = [
     requests, // Should be passed before 'apiMiddleware'
     apiMiddleware,
     notifications,
     settings,
     storageMiddleware
-  )(createStore);
+  ];
 
-  const store = createStoreWithMiddleware(rootReducer, initialState);
+  if (process.env.NODE_ENV !== 'production') {
+    const createLogger = require('redux-logger');
+    const logger = createLogger();
+    middlewares.push(logger);
+  }
+
+  let store = createStore(
+    rootReducer,
+    initialState,
+    applyMiddleware(...middlewares)
+  );
 
   // Load settings from localStorage
   const load = storage.createLoader(engine);
