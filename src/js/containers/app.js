@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { fetchNotifications } from '../actions';
-import Navigation from '../components/navigation';
+import Sidebar from '../components/sidebar';
 import NetworkStatus from '../components/network-status';
 
 export class App extends React.Component {
@@ -45,7 +45,7 @@ export class App extends React.Component {
 
     return (
       <div>
-        <Navigation
+        <Sidebar
           location={this.props.location}
           toggleSearch={() => this.toggleSearch()} />
         {this.props.children}

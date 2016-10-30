@@ -6,7 +6,7 @@ const shell = window.require('electron').shell;
 
 import { fetchNotifications, logout } from '../actions';
 
-export class Navigation extends React.Component {
+export class Sidebar extends React.Component {
   componentDidMount() {
     var self = this;
     var iFrequency = 60000;
@@ -101,7 +101,7 @@ export class Navigation extends React.Component {
   }
 };
 
-Navigation.contextTypes = {
+Sidebar.contextTypes = {
   location: React.PropTypes.object,
   router: React.PropTypes.object.isRequired
 };
@@ -114,4 +114,4 @@ function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps, { fetchNotifications, logout })(Navigation);
+export default connect(mapStateToProps, { fetchNotifications, logout })(Sidebar);
