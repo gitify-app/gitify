@@ -8,13 +8,9 @@ import { fetchNotifications, updateSetting, logout } from '../actions';
 
 export class SettingsPage extends React.Component {
   componentWillReceiveProps(nextProps) {
-    if (nextProps.settings.participating !== this.props.settings.participating) {
+    if (nextProps.settings.get('participating') !== this.props.settings.get('participating')) {
       this.props.fetchNotifications();
     }
-  }
-
-  toggleSetting(key, event) {
-    this.props.updateSetting(key, event.target.checked);
   }
 
   logout() {
@@ -33,7 +29,7 @@ export class SettingsPage extends React.Component {
 
   render() {
     const appVersion = require('../../../package.json').version;
-    const settings = this.props.settings;
+    const { settings } = this.props;
 
     return (
       <div className="container-fluid main-container settings">
@@ -59,24 +55,24 @@ export class SettingsPage extends React.Component {
           <div className="col-xs-8">Show only participating</div>
           <div className="col-xs-4">
             <Toggle
-              defaultChecked={settings.participating}
-              onChange={this.toggleSetting.bind(this, 'participating')} />
+              defaultChecked={settings.get('participating')}
+              onChange={(evt) => this.props.updateSetting('participating', evt.target.checked)} />
           </div>
         </div>
         <div className="row setting">
           <div className="col-xs-8">Play sound</div>
           <div className="col-xs-4">
             <Toggle
-              defaultChecked={settings.playSound}
-              onChange={this.toggleSetting.bind(this, 'playSound')} />
+              defaultChecked={settings.get('playSound')}
+              onChange={(evt) => this.props.updateSetting('playSound', evt.target.checked)} />
           </div>
         </div>
         <div className="row setting">
           <div className="col-xs-8">Show notifications</div>
           <div className="col-xs-4">
             <Toggle
-              defaultChecked={settings.showNotifications}
-              onChange={this.toggleSetting.bind(this, 'showNotifications')} />
+              defaultChecked={settings.get('showNotifications')}
+              onChange={(evt) => this.props.updateSetting('showNotifications', evt.target.checked)} />
           </div>
         </div>
 
@@ -84,8 +80,8 @@ export class SettingsPage extends React.Component {
           <div className="col-xs-8">On Click, Mark as Read</div>
           <div className="col-xs-4">
             <Toggle
-              defaultChecked={settings.markOnClick}
-              onChange={this.toggleSetting.bind(this, 'markOnClick')} />
+              defaultChecked={settings.get('markOnClick')}
+              onChange={(evt) => this.props.updateSetting('markOnClick', evt.target.checked)} />
           </div>
         </div>
 
@@ -93,8 +89,8 @@ export class SettingsPage extends React.Component {
           <div className="col-xs-8">Open at startup</div>
           <div className="col-xs-4">
             <Toggle
-              defaultChecked={settings.openAtStartup}
-              onChange={this.toggleSetting.bind(this, 'openAtStartup')} />
+              defaultChecked={settings.get('openAtStartup')}
+              onChange={(evt) => this.props.updateSetting('openAtStartup', evt.target.checked)} />
           </div>
         </div>
 

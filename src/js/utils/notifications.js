@@ -8,11 +8,11 @@ export default {
     // If there are no new notifications just stop there
     if (!notifications.length) { return; }
 
-    if (settings.playSound) {
+    if (settings.get('playSound')) {
       this.raiseSoundNotification(notifications);
     }
 
-    if (settings.showNotifications) {
+    if (settings.get('showNotifications')) {
       this.raiseNativeNotification(notifications);
     }
   },
