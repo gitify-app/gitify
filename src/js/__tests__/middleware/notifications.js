@@ -47,10 +47,10 @@ const createFakeStore = fakeData => ({
       notifications: Map({
         response: notificationsList
       }),
-      settings: {
+      settings: Map({
         playSound: false,
         showNotifications: false
-      }
+      })
     };
   }
 });
@@ -80,7 +80,7 @@ describe('middleware/notifications.js', () => {
     expect(dispatchWithStoreOf({}, action)).to.eql(action);
     expect(NativeNotifications.setup).to.have.been.calledOnce;
     expect(NativeNotifications.setup).to.have.been.calledWith(
-      newNotification, { playSound: false, showNotifications: false }
+      newNotification, Map({ playSound: false, showNotifications: false })
     );
 
     NativeNotifications.setup.restore();
