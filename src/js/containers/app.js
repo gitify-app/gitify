@@ -44,7 +44,7 @@ export class App extends React.Component {
     }
 
     return (
-      <div>
+      <div className="wrapper">
         <Sidebar
           location={this.props.location}
           toggleSearch={() => this.toggleSearch()} />

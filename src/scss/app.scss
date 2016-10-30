@@ -32,10 +32,7 @@ $octicons-font-path: "../fonts/";
 
 /* @group Bootstrap Overrides */
 
-$navbar-height: 35px;
-$navbar-padding-y: .3rem;
-$navbar-padding-x: 1rem;
-$navbar-border-radius: 0;
+$sidebar-width: 100px;
 
 $brand-success: $theme-green;
 
@@ -99,20 +96,6 @@ body {
   cursor: default;
 }
 
-body,
-html {
-  height: 100%;
-  overflow: hidden;
-}
-
-.main-container {
-  position: absolute;
-  top: $navbar-height;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: auto;
-}
 
 .btn {
   @include border-radius(0);
@@ -185,52 +168,82 @@ input {
 /* @end Animations */
 
 
-/* @group Navigation */
+/* @group Sidebar */
 
-.navbar {
-  height: $navbar-height;
-  color: $white;
-
-  .navbar-brand {
-    display: inline-block;
-    margin: 0 5px 2px;
-    max-height: 25px;
-
-    &.logo-spin {
-      -webkit-animation: spin 1s infinite linear;
-
-      @-webkit-keyframes spin {
-        0%   {
-          transform: rotate(0deg);
-        }
-
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    }
-  }
-
-  .tag {
-    @include border-radius(0);
-
-    position: relative;
-    top: -$navbar-padding-y;
-    left: 5px;
-    float: left;
-    margin-right: .95rem;
-    min-width: 1.5rem;
-    height: $navbar-height;
-    line-height: 29px;
-  }
-
-  .nav-link {
-    padding-top: .3rem;
-    font-size: .95rem;
-  }
+.wrapper {
+  transition: all .5s ease;
+  padding-left: $sidebar-width;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
 }
 
-/* @end Navigation */
+.sidebar-wrapper {
+  position: fixed;
+  left: $sidebar-width;
+  transition: all .5s ease;
+  z-index: 1000;
+  margin-left: -$sidebar-width;
+  width: $sidebar-width;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  -o-transition: all .5s ease;
+}
+
+.content-wrapper {
+  position: relative;
+  padding: 20px;
+  width: 100%;
+}
+
+
+// .navbar {
+//   height: $navbar-height;
+//   color: $white;
+
+//   .navbar-brand {
+//     display: inline-block;
+//     margin: 0 5px 2px;
+//     max-height: 25px;
+
+//     &.logo-spin {
+//       -webkit-animation: spin 1s infinite linear;
+
+//       @-webkit-keyframes spin {
+//         0%   {
+//           transform: rotate(0deg);
+//         }
+
+//         100% {
+//           transform: rotate(360deg);
+//         }
+//       }
+//     }
+//   }
+
+//   .tag {
+//     @include border-radius(0);
+
+//     position: relative;
+//     top: -$navbar-padding-y;
+//     left: 5px;
+//     float: left;
+//     margin-right: .95rem;
+//     min-width: 1.5rem;
+//     height: $navbar-height;
+//     line-height: 29px;
+//   }
+
+//   .nav-link {
+//     padding-top: .3rem;
+//     font-size: .95rem;
+//   }
+// }
+
+
+/* @end Sidebar */
 
 
 /* @group Settings */
@@ -287,7 +300,8 @@ input {
 
 .login {
   position: absolute;
-  top: $navbar-height;
+  // top: $navbar-height;
+  top: 50px;
   left: 0;
   background-color: $gray-lighter;
   padding-top: 20px;

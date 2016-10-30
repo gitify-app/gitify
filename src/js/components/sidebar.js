@@ -83,7 +83,7 @@ export class Sidebar extends React.Component {
     }
 
     return (
-      <nav className="navbar navbar-dark bg-inverse">
+      <div className="sidebar-wrapper bg-inverse">
         <img
           className={'navbar-brand img-responsive' + loadingClass}
           src="images/gitify-logo-fill-light-small.png"
@@ -96,7 +96,7 @@ export class Sidebar extends React.Component {
           {settingsIcon}
           {quitIcon}
         </ul>
-      </nav>
+      </div>
     );
   }
 };
