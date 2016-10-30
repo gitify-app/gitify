@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { Map, List } from 'immutable';
 import nock from 'nock';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
@@ -89,19 +90,17 @@ describe('actions/index.js', () => {
 
     nock('https://api.github.com/')
       .get('/notifications?participating=false')
-      .reply(200, {
-        body: notifications
-      });
+      .reply(200, notifications);
 
     const expectedActions = [
       { type: actions.NOTIFICATIONS.REQUEST },
-      { type: actions.NOTIFICATIONS.SUCCESS, payload: { body: notifications } }
+      { type: actions.NOTIFICATIONS.SUCCESS, payload: notifications }
     ];
 
     const store = createMockStore({
-      auth: { token: 'THISISATOKEN' },
-      settings: { participating: false },
-      response: []
+      auth: Map({ token: 'THISISATOKEN' }),
+      settings: Map({ participating: false }),
+      notifications: Map({response: List()})
     }, expectedActions);
 
     return store.dispatch(actions.fetchNotifications())
@@ -126,9 +125,9 @@ describe('actions/index.js', () => {
     ];
 
     const store = createMockStore({
-      auth: { token: null },
-      settings: { participating: false },
-      response: []
+      auth: Map({ token: null }),
+      settings: Map({ participating: false }),
+      notifications: Map({response: List()})
     }, expectedActions);
 
     return store.dispatch(actions.fetchNotifications())
@@ -154,8 +153,8 @@ describe('actions/index.js', () => {
     ];
 
     const store = createMockStore({
-      auth: { token: 'IAMATOKEN' },
-      response: []
+      auth: Map({ token: 'IAMATOKEN' }),
+      notifications: Map({response: List()})
     }, expectedActions);
 
     return store.dispatch(actions.markNotification(id))
@@ -181,8 +180,8 @@ describe('actions/index.js', () => {
     ];
 
     const store = createMockStore({
-      auth: { token: null },
-      response: []
+      auth: Map({ token: null }),
+      notifications: Map({response: List()})
     }, expectedActions);
 
     return store.dispatch(actions.markNotification(id))
@@ -193,28 +192,27 @@ describe('actions/index.js', () => {
   });
 
   it('should mark a repository\'s notifications as read with success', () => {
-    const loginId = 'ekonstantinidis';
-    const repoId = 'gitify';
-    const repoFullName = `${loginId}/${repoId}`;
+
+    const repoSlug = 'ekonstantinidis/gitify';
     const message = 'Success.';
 
     nock('https://api.github.com/')
-      .put(`/repos/${loginId}/${repoId}/notifications`)
+      .put(`/repos/${repoSlug}/notifications`)
       .reply(200, {
         body: message
       });
 
     const expectedActions = [
       { type: actions.MARK_REPO_NOTIFICATION.REQUEST },
-      { type: actions.MARK_REPO_NOTIFICATION.SUCCESS, payload: { body: message }, meta: { repoFullName, repoId } }
+      { type: actions.MARK_REPO_NOTIFICATION.SUCCESS, payload: { body: message }, meta: { repoSlug } }
     ];
 
     const store = createMockStore({
-      auth: { token: 'IAMATOKEN' },
-      response: []
+      auth: Map({ token: 'IAMATOKEN' }),
+      notifications: Map({response: List()})
     }, expectedActions);
 
-    return store.dispatch(actions.markRepoNotifications(loginId, repoId, repoFullName))
+    return store.dispatch(actions.markRepoNotifications(repoSlug))
       .then(() => { // return of async actions
         expect(store.getActions()).to.eql(expectedActions);
       });
@@ -222,13 +220,12 @@ describe('actions/index.js', () => {
   });
 
   it('should mark a repository\'s notifications as read with failure', () => {
-    const loginId = 'ekonstantinidis';
-    const repoId = 'gitify';
-    const repoFullName = `${loginId}/${repoId}`;
+
+    const repoSlug = 'ekonstantinidis/gitify';
     const message = 'Oops! Something went wrong.';
 
     nock('https://api.github.com/')
-    .put(`/repos/${loginId}/${repoId}/notifications`)
+    .put(`/repos/${repoSlug}/notifications`)
       .reply(400, {
         body: { message }
       });
@@ -239,11 +236,11 @@ describe('actions/index.js', () => {
     ];
 
     const store = createMockStore({
-      auth: { token: null },
-      response: []
+      auth: Map({ token: null }),
+      notifications: Map({response: List()})
     }, expectedActions);
 
-    return store.dispatch(actions.markRepoNotifications(loginId, repoId, repoFullName))
+    return store.dispatch(actions.markRepoNotifications(repoSlug))
       .then(() => { // return of async actions
         expect(store.getActions()).to.eql(expectedActions);
       });
@@ -261,8 +258,8 @@ describe('actions/index.js', () => {
     ];
 
     const store = createMockStore({
-      auth: { token: 'IAMATOKEN' },
-      response: []
+      auth: Map({ token: 'IAMATOKEN' }),
+      notifications: Map({response: List()})
     }, expectedActions);
 
     return store.dispatch(actions.checkHasStarred())
@@ -283,8 +280,8 @@ describe('actions/index.js', () => {
     ];
 
     const store = createMockStore({
-      auth: { token: 'IAMATOKEN' },
-      response: []
+      auth: Map({ token: 'IAMATOKEN' }),
+      notifications: Map({response: List()})
     }, expectedActions);
 
     return store.dispatch(actions.checkHasStarred())

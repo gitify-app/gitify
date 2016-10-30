@@ -1,10 +1,13 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { List, fromJS } from 'immutable';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
+
 import { NotificationsPage } from '../../components/notifications';
 import AllRead from '../../components/all-read';
 import Oops from '../../components/oops';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+
 const shell = window.require('electron').shell;
 
 function setup(props) {
@@ -18,7 +21,7 @@ function setup(props) {
 
 describe('components/notifications.js', function () {
 
-  const notifications = [
+  const notifications = fromJS([
     {
       id: 1,
       subject: {
@@ -41,7 +44,7 @@ describe('components/notifications.js', function () {
         full_name: 'ekonstantinidis/trevor'
       }
     }
-  ];
+  ]);
 
   it('should render itself & its children', function () {
 
@@ -67,7 +70,7 @@ describe('components/notifications.js', function () {
     const props = {
       failed: true,
       isFetching: false,
-      notifications: [],
+      notifications: List(),
       searchQuery: ''
     };
 
@@ -87,7 +90,7 @@ describe('components/notifications.js', function () {
     const props = {
       failed: false,
       isFetching: false,
-      notifications: [],
+      notifications: List(),
       searchQuery: ''
     };
 
@@ -101,46 +104,6 @@ describe('components/notifications.js', function () {
     expect(wrapper.find('.errored').length).to.equal(0);
 
     expect(wrapper.find(AllRead).length).to.equal(1);
-
-  });
-
-  it('should not find any results for a search query', function () {
-
-    const props = {
-      failed: false,
-      isFetching: false,
-      notifications: notifications,
-      searchQuery: 'llama'
-    };
-
-    const { wrapper } = setup(props);
-
-    expect(wrapper).to.exist;
-    expect(wrapper.find(ReactCSSTransitionGroup).children().length).to.equal(0);
-    expect(wrapper.find('.errored').length).to.equal(0);
-    expect(wrapper.find('.fork').length).to.equal(0);
-    expect(wrapper.find('h3').text()).to.contain('No Search Results.');
-
-  });
-
-  it('should find a result for a search query', function () {
-
-    const props = {
-      failed: false,
-      isFetching: false,
-      notifications: notifications,
-      searchQuery: 'trevor'
-    };
-
-    const { wrapper } = setup(props);
-
-    expect(wrapper).to.exist;
-    expect(wrapper.find('.all-read').length).to.equal(0);
-    expect(wrapper.find('.errored').length).to.equal(0);
-    expect(wrapper.find(AllRead).length).to.equal(0);
-
-    expect(wrapper.find(ReactCSSTransitionGroup).children().length).to.equal(1);
-    expect(wrapper.find('.fork').length).to.equal(1);
 
   });
 

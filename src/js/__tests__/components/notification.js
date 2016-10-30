@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import { Map } from 'immutable';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
@@ -16,14 +17,14 @@ function setup(props) {
 
 describe('components/notification.js', function () {
 
-  const notification = {
+  const notification = Map({
     id: 1,
-    subject: {
+    subject: Map({
       title: 'Hello. This is a notification.',
       type: 'Issue',
-      url: 'https://api.github.com/repos/ekonstantinidis/gitify/pulls/123'
-    }
-  };
+      url: 'https://api.github.com/repos/manosim/gitify/pulls/123'
+    })
+  });
 
   it('should render itself & its children', function () {
 
@@ -36,55 +37,31 @@ describe('components/notification.js', function () {
     const { wrapper } = setup(props);
 
     expect(wrapper).to.exist;
-
-    expect(wrapper.find('.subject').text()).to.equal(notification.subject.title);
+    expect(wrapper.find('.subject').text()).to.equal(notification.getIn(['subject', 'title']));
     expect(wrapper.find('.octicon').first().props().className).to.contain('octicon-issue-opened');
 
     wrapper.setProps({
       ...props,
-      notification: {
-        ...notification,
-        subject: {
-          ...notification.subject,
-          type: 'PullRequest'
-        }
-      }
+      notification: notification.setIn(['subject', 'type'], 'PullRequest')
     });
+
     expect(wrapper.find('.octicon').first().props().className).to.contain('octicon-git-pull-request');
 
     wrapper.setProps({
       ...props,
-      notification: {
-        ...notification,
-        subject: {
-          ...notification.subject,
-          type: 'Commit'
-        }
-      }
+      notification: notification.setIn(['subject', 'type'], 'Commit')
     });
     expect(wrapper.find('.octicon').first().props().className).to.contain('octicon-git-commit');
 
     wrapper.setProps({
       ...props,
-      notification: {
-        ...notification,
-        subject: {
-          ...notification.subject,
-          type: 'Release'
-        }
-      }
+      notification: notification.setIn(['subject', 'type'], 'Release')
     });
     expect(wrapper.find('.octicon').first().props().className).to.contain('octicon-tag');
 
     wrapper.setProps({
       ...props,
-      notification: {
-        ...notification,
-        subject: {
-          ...notification.subject,
-          type: 'AnotherType'
-        }
-      }
+      notification: notification.setIn(['subject', 'type'], 'AnotherType')
     });
     expect(wrapper.find('.octicon').first().props().className).to.contain('octicon-question');
 

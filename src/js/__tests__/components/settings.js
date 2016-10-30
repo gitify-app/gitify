@@ -1,4 +1,5 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import { Map } from 'immutable';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
@@ -40,13 +41,13 @@ describe('components/settings.js', function () {
       updateSetting: sinon.spy(),
       fetchNotifications: sinon.spy(),
       logout: sinon.spy(),
-      settings: {
+      settings: Map({
         participating: false,
         playSound: true,
         showNotifications: true,
         markOnClick: false,
         openAtStartup: false
-      }
+      })
     };
 
     const { wrapper } = setup(props);
@@ -64,13 +65,13 @@ describe('components/settings.js', function () {
       updateSetting: sinon.spy(),
       fetchNotifications: sinon.spy(),
       logout: sinon.spy(),
-      settings: {
+      settings: Map({
         participating: false,
         playSound: true,
         showNotifications: true,
         markOnClick: false,
         openAtStartup: false
-      }
+      })
     };
 
     const { wrapper } = setup(props);
@@ -82,10 +83,10 @@ describe('components/settings.js', function () {
 
     wrapper.setProps({
       ...props,
-      settings: {
+      settings: Map({
         ...props.settings,
         participating: true
-      }
+      })
     });
     expect(props.fetchNotifications).to.have.been.calledOnce;
 
@@ -97,13 +98,13 @@ describe('components/settings.js', function () {
       updateSetting: sinon.spy(),
       fetchNotifications: sinon.spy(),
       logout: sinon.spy(),
-      settings: {
+      settings: Map({
         participating: false,
         playSound: true,
         showNotifications: true,
         markOnClick: false,
         openAtStartup: false
-      }
+      })
     };
 
     const { wrapper } = setup(props);
@@ -122,13 +123,13 @@ describe('components/settings.js', function () {
       updateSetting: sinon.spy(),
       fetchNotifications: sinon.spy(),
       logout: sinon.spy(),
-      settings: {
+      settings: Map({
         participating: false,
         playSound: true,
         showNotifications: true,
         markOnClick: false,
         openAtStartup: false
-      }
+      })
     };
 
     const { wrapper } = setup(props);
@@ -147,13 +148,13 @@ describe('components/settings.js', function () {
       updateSetting: sinon.spy(),
       fetchNotifications: sinon.spy(),
       logout: sinon.spy(),
-      settings: {
+      settings: Map({
         participating: false,
         playSound: true,
         showNotifications: true,
         markOnClick: false,
         openAtStartup: false
-      }
+      })
     };
 
     const { wrapper, context } = setup(props);

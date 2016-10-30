@@ -33,12 +33,8 @@ describe('containers/app.js', function () {
   it('should render itself & its children', function () {
 
     const { wrapper } = setupShallow();
-
     expect(wrapper).to.exist;
-    expect(wrapper.state().showSearch).to.be.false;
 
-    wrapper.instance().toggleSearch();
-    expect(wrapper.state().showSearch).to.be.true;
   });
 
   it('should mount itself & its children', function () {

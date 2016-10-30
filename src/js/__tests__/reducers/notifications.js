@@ -1,30 +1,32 @@
+import { Map, List, fromJS } from 'immutable';
 import { expect } from 'chai';
+
 import reducer from '../../reducers/notifications';
 import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION } from '../../actions';
 
 describe('reducers/notifications.js', () => {
-  const initialState = {
-    response: [],
+  const initialState = Map({
+    response: List(),
     isFetching: false,
     failed: false
-  };
+  });
 
-  const notifications = [
+  const notifications = fromJS([
     {
       id: 1,
       repository: {
-        full_name: 'ekonstantinidis/gitify'
+        full_name: 'manosim/gitify'
       },
       text: 'New Release'
     },
     {
       id: 2,
       repository: {
-        full_name: 'ekonstantinidis/gitify'
+        full_name: 'manosim/gitify'
       },
       text: 'It\'s Great'
     }
-  ];
+  ]);
 
   it('should return the initial state', () => {
 
@@ -35,15 +37,14 @@ describe('reducers/notifications.js', () => {
   it('should handle NOTIFICATIONS.REQUEST', () => {
 
     const action = {
-      type: NOTIFICATIONS.REQUEST,
-      query: 'hello'
+      type: NOTIFICATIONS.REQUEST
     };
 
-    expect(reducer(undefined, action)).to.eql({
-      ...initialState,
-      isFetching: true,
-      failed: false
-    });
+    expect(reducer(undefined, action)).to.eql(
+      initialState
+        .set('isFetching', true)
+        .set('failed', false)
+    );
 
   });
 
@@ -56,17 +57,16 @@ describe('reducers/notifications.js', () => {
       payload: notifications
     };
 
-    const currentState = {
-      ...initialState,
-      isFetching: true,
-      failed: false
-    };
+    const currentState =
+      initialState
+        .set('isFetching', true)
+        .set('failed', false);
 
-    expect(reducer(currentState, action)).to.eql({
-      ...initialState,
-      isFetching: false,
-      response: notifications
-    });
+    expect(reducer(currentState, action)).to.eql(
+      initialState
+        .set('isFetching', false)
+        .set('response', notifications)
+    );
 
   });
 
@@ -77,11 +77,10 @@ describe('reducers/notifications.js', () => {
       message: 'Oops! Something went wrong.'
     };
 
-    const currentState = {
-      ...initialState,
-      isFetching: true,
-      failed: false
-    };
+    const currentState =
+      initialState
+        .set('isFetching', true)
+        .set('failed', false);
 
     expect(reducer(currentState, {})).to.eql(currentState);
 
@@ -90,23 +89,20 @@ describe('reducers/notifications.js', () => {
       payload: response
     };
 
-    expect(reducer(currentState, action)).to.eql({
-      ...initialState,
-      isFetching: false,
-      failed: true,
-      response: []
-    });
+    expect(reducer(currentState, action)).to.eql(
+      initialState
+        .set('isFetching', false)
+        .set('failed', true)
+        .set('response', List())
+    );
 
   });
 
   it('should handle MARK_NOTIFICATION.SUCCESS', () => {
 
-    const currentState = {
-      ...initialState,
-      response: notifications
-    };
+    const currentState = initialState.set('response', notifications);
 
-    expect(reducer(currentState, {}).response.length).to.equal(2);
+    expect(reducer(currentState, {}).get('response').size).to.equal(2);
 
     const action = {
       type: MARK_NOTIFICATION.SUCCESS,
@@ -115,27 +111,24 @@ describe('reducers/notifications.js', () => {
       }
     };
 
-    expect(reducer(currentState, action).response.length).to.equal(1);
+    expect(reducer(currentState, action).get('response').size).to.equal(1);
 
   });
 
   it('should handle MARK_REPO_NOTIFICATION.SUCCESS', () => {
 
-    const currentState = {
-      ...initialState,
-      response: notifications
-    };
+    const currentState = initialState.set('response', notifications);
 
-    expect(reducer(currentState, {}).response.length).to.equal(2);
+    expect(reducer(currentState, {}).get('response').size).to.equal(2);
 
     const action = {
       type: MARK_REPO_NOTIFICATION.SUCCESS,
       meta: {
-        repoFullName: 'ekonstantinidis/gitify'
+        repoSlug: 'manosim/gitify'
       }
     };
 
-    expect(reducer(currentState, action).response.length).to.equal(0);
+    expect(reducer(currentState, action).get('response').size).to.equal(0);
 
   });
 });

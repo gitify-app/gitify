@@ -9,6 +9,10 @@ export default {
     }
   },
 
+  setBadge(notificationsLength) {
+    ipcRenderer.send('set-badge', notificationsLength);
+  },
+
   generateGitHubUrl(url) {
     var newUrl = url.replace('api.github.com/repos', 'www.github.com');
 

@@ -1,3 +1,4 @@
+import { Map, fromJS } from 'immutable';
 import { expect } from 'chai';
 import sinon from 'sinon';
 import * as actions from '../../actions';
@@ -9,43 +10,47 @@ const newNotification = [
   {
     id: 987654,
     repo: {
-      id: 13
+      id: 13,
+      full_name: 'manosim/gitify'
     }
   }
 ];
 
-const notificationsList = [
+const notificationsList = fromJS([
   {
     id: 123,
     repository: {
-      id: 111111
+      id: 111111,
+      full_name: 'manosim/gitify'
     }
   },
   {
     id: 456,
     repository: {
-      id: 111111
+      id: 111111,
+      full_name: 'manosim/gitify'
     }
   },
   {
     id: 789,
     repository: {
-      id: 222222
+      id: 222222,
+      full_name: 'facebook/react'
     }
   }
-];
+]);
 
 
 const createFakeStore = fakeData => ({
   getState() {
     return {
-      notifications: {
+      notifications: Map({
         response: notificationsList
-      },
-      settings: {
+      }),
+      settings: Map({
         playSound: false,
         showNotifications: false
-      }
+      })
     };
   }
 });
@@ -75,7 +80,7 @@ describe('middleware/notifications.js', () => {
     expect(dispatchWithStoreOf({}, action)).to.eql(action);
     expect(NativeNotifications.setup).to.have.been.calledOnce;
     expect(NativeNotifications.setup).to.have.been.calledWith(
-      newNotification, { playSound: false, showNotifications: false }
+      newNotification, Map({ playSound: false, showNotifications: false })
     );
 
     NativeNotifications.setup.restore();
@@ -105,7 +110,7 @@ describe('middleware/notifications.js', () => {
     const action = {
       type: actions.MARK_REPO_NOTIFICATION.SUCCESS,
       meta: {
-        repoId: 111111
+        repoSlug: 'manosim/gitify'
       }
     };
 

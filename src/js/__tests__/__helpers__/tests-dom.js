@@ -1,10 +1,12 @@
 import jsdom from 'jsdom';
 import sinon from 'sinon';
 import chai from 'chai';
+import chaiImmutable from 'chai-immutable';
 import sinonChai from 'sinon-chai';
 
 chai.expect();
 chai.use(sinonChai);
+chai.use(chaiImmutable);
 
 global.document = jsdom.jsdom('<!doctype html><html><body></body></html>', {
   url: 'http://localhost'

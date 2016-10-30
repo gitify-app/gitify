@@ -17,23 +17,34 @@ export default function configureStore(initialState) {
     ['settings', ['auth', 'token']],
     [['settings', 'hasStarred']]
   );
+
   const storageMiddleware = storage.createMiddleware(engine, [], [UPDATE_SETTING, LOGIN.SUCCESS, LOGOUT]);
 
-  const createStoreWithMiddleware = applyMiddleware(
+  const middlewares = [
     thunkMiddleware,
     notifications,
     settings,
     storageMiddleware
-  )(createStore);
+  ];
 
-  const store = createStoreWithMiddleware(rootReducer, initialState);
+  if (process.env.NODE_ENV !== 'production') {
+    const createLogger = require('redux-logger');
+    const logger = createLogger();
+    middlewares.push(logger);
+  }
+
+  let store = createStore(
+    rootReducer,
+    initialState,
+    applyMiddleware(...middlewares)
+  );
 
   // Load settings from localStorage
   const load = storage.createLoader(engine);
   load(store)
     .then(function (newState) {
       // Check if the user is logged in
-      const isLoggedIn = store.getState().auth.token !== null;
+      const isLoggedIn = store.getState().auth.get('token') !== null;
       if (isLoggedIn) {
         store.dispatch(checkHasStarred());
         store.dispatch(fetchNotifications());

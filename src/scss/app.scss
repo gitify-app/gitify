@@ -114,10 +114,6 @@ html {
   overflow: auto;
 }
 
-.search-form + .main-container {
-  top: $navbar-height + $navbar-height;
-}
-
 .btn {
   @include border-radius(0);
   border: 0;
@@ -489,42 +485,6 @@ input {
 }
 
 /* @end Component / Notification  */
-
-
-/* @group Component / Search  */
-
-@SearchHeight: 22px;
-
-.search-form {
-  margin: 0;
-  background-color: $gray;
-  height: $navbar-height;
-  text-align: center;
-
-  .form-control {
-    outline: none;
-    border: 0;
-    box-shadow: none;
-    background-color: $gray;
-    padding: 0 1.5rem;
-    color: $white;
-    font-size: 18px;
-
-    &::-webkit-input-placeholder {
-      color: $gray-lighter;
-    }
-  }
-
-  .octicon-x {
-    cursor: pointer;
-    text-align: center;
-    line-height: 28px;
-    color: $white;
-    font-size: 20px;
-  }
-}
-
-/* @end Component / Search  */
 
 
 /* @group Network Status */

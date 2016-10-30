@@ -8,20 +8,18 @@ import SingleNotification from './notification';
 
 export class Repository extends React.Component {
   openBrowser() {
-    var url = this.props.repo[0].repository.html_url;
+    var url = this.props.repo.first().getIn(['repository', 'html_url']);
     shell.openExternal(url);
   }
 
   markRepoAsRead() {
-    const loginId = this.props.repo[0].repository.owner.login;
-    const repoId = this.props.repo[0].repository.name;
-    const fullName = this.props.repo[0].repository.full_name;
-    this.props.markRepoNotifications(loginId, repoId, fullName);
+    const repoSlug = this.props.repo.first().getIn(['repository', 'full_name']);
+    this.props.markRepoNotifications(repoSlug);
   }
 
   render() {
     var organisationName, repositoryName;
-    const avatarUrl = this.props.repo[0].repository.owner.avatar_url;
+    const avatarUrl = this.props.repo.first().getIn(['repository', 'owner', 'avatar_url']);
 
     if (typeof this.props.repoName === 'string') {
       var splitName = this.props.repoName.split('/');
@@ -33,7 +31,7 @@ export class Repository extends React.Component {
       <div>
         <div className="row repository">
           <div className="col-xs-2"><img className="avatar" src={avatarUrl} /></div>
-          <div className="col-xs-9 name" onClick={this.openBrowser.bind(this)}>
+          <div className="col-xs-9 name" onClick={() => this.openBrowser()}>
             <span>{'/' + repositoryName}</span>
             <span>{organisationName}</span>
           </div>
@@ -41,7 +39,7 @@ export class Repository extends React.Component {
             <span
               title="Mark Repository as Read"
               className="octicon octicon-check"
-              onClick={this.markRepoAsRead.bind(this)} />
+              onClick={() => this.markRepoAsRead()} />
           </div>
         </div>
 
@@ -49,8 +47,8 @@ export class Repository extends React.Component {
           transitionName="notification"
           transitionEnter={false}
           transitionLeaveTimeout={325}>
-          {this.props.repo.map(function (obj) {
-            return <SingleNotification notification={obj} key={obj.id} />;
+          {this.props.repo.map(function (obj, key) {
+            return <SingleNotification notification={obj} key={obj.get('id')} />;
           })}
         </ReactCSSTransitionGroup>
 

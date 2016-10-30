@@ -13,8 +13,7 @@ export class NotFound extends React.Component {
 };
 
 function requireAuth (store, b, c) {
-  const isLoggedIn = store.getState().auth.token !== null;
-
+  const isLoggedIn = store.getState().auth.get('token') !== null;
   if (!isLoggedIn) {
     return (nextState, replace) => {
       replace('/login/');

@@ -11,44 +11,25 @@ import Oops from './oops';
 import Repository from './repository';
 
 export class NotificationsPage extends React.Component {
-  areIn(repoFullName, searchTerm) {
-    return repoFullName.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0;
-  }
-
-  matchesSearchTerm(obj) {
-    var searchTerm = this.props.searchQuery.replace(/^\s+/, '').replace(/\s+$/, '');
-    var searchTerms = searchTerm.split(/\s+/);
-    return _.all(searchTerms, this.areIn.bind(null, obj.repository.full_name));
-  }
-
   openBrowser() {
     shell.openExternal('http://www.github.com/manosim/gitify');
   }
 
   render() {
     const wrapperClass = 'container-fluid main-container notifications';
-    const notificationsEmpty = _.isEmpty(this.props.notifications);
+    const notificationsEmpty = this.props.notifications.isEmpty();
 
     if (this.props.failed) {
       return <Oops />;
     }
 
-    if (notificationsEmpty && !this.props.searchQuery) {
+    if (notificationsEmpty) {
       return <AllRead />;
     };
 
-    const notifications = this.props.searchQuery ?
-      _.filter(this.props.notifications, this.matchesSearchTerm.bind(this)) : this.props.notifications;
-    var groupedNotifications = _.groupBy(notifications, (object) => object.repository.full_name);
-
-    if (_.isEmpty(groupedNotifications) && this.props.searchQuery) {
-      return (
-        <div className={wrapperClass + ' all-read'}>
-          <h3>No Search Results.</h3>
-          <h4>No Organisations or Repositories match your search term.</h4>
-        </div>
-      );
-    };
+    const groupedNotifications = this.props.notifications.groupBy((object) => (
+      object.getIn(['repository', 'full_name']))
+    );
 
     return (
       <div className={wrapperClass + (notificationsEmpty ? ' all-read' : '')}>
@@ -56,9 +37,9 @@ export class NotificationsPage extends React.Component {
           transitionName="repository"
           transitionEnter={false}
           transitionLeaveTimeout={325}>
-          {_.map(groupedNotifications, (obj, key) => {
-            const repoFullName = obj[0].repository.full_name;
-            return <Repository repo={obj} repoName={repoFullName} key={key} />;
+          {groupedNotifications.valueSeq().map((obj, key) => {
+            const repoSlug = obj.first().getIn(['repository', 'full_name']);
+            return <Repository repo={obj} repoName={repoSlug} key={repoSlug} />;
           })}
         </ReactCSSTransitionGroup>
 
@@ -75,9 +56,8 @@ export class NotificationsPage extends React.Component {
 function mapStateToProps(state) {
   return {
     hasStarred: state.settings.hasStarred,
-    failed: state.notifications.failed,
-    notifications: state.notifications.response,
-    searchQuery: state.searchFilter.query
+    failed: state.notifications.get('failed'),
+    notifications: state.notifications.get('response')
   };
 };
 

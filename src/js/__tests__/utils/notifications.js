@@ -1,4 +1,5 @@
 import { expect } from 'chai';
+import { Map } from 'immutable';
 import sinon from 'sinon';
 import NotificationsUtils from '../../utils/notifications';
 import Helpers from '../../utils/helpers';
@@ -23,10 +24,10 @@ describe('utils/notifications.js', () => {
 
   it('should raise a notification', () => {
 
-    const settings = {
+    const settings = Map({
       playSound: true,
       showNotifications: true
-    };
+    });
 
     const notifications = [
       {
@@ -48,10 +49,10 @@ describe('utils/notifications.js', () => {
 
   it('should not raise a notification (because of settings)', () => {
 
-    const settings = {
+    const settings = Map({
       playSound: false,
       showNotifications: false
-    };
+    });
 
     const notifications = [
       {
@@ -97,10 +98,10 @@ describe('utils/notifications.js', () => {
 
   it('should raise a single native notification (with different icons)', () => {
 
-    const settings = {
+    const settings = Map({
       playSound: false,
       showNotifications: true
-    };
+    });
 
     const notification = {
       subject: {

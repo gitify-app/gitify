@@ -25,10 +25,6 @@ export class Navigation extends React.Component {
   }
 
   goToSettings() {
-    if (this.props.showSearch) {
-      this.props.toggleSearch();
-    }
-
     this.context.router.push('/settings');
   }
 
@@ -47,33 +43,28 @@ export class Navigation extends React.Component {
   render() {
     const isLoggedIn = this.props.token !== null;
     const loadingClass = this.props.isFetching ? ' logo-spin' : '';
-    var refreshIcon, backIcon, settingsIcon, quitIcon, searchIcon, countLabel;
+    var refreshIcon, backIcon, settingsIcon, quitIcon, countLabel;
 
     if (isLoggedIn) {
       refreshIcon = (
         <li className="nav-item">
-          <i title="Refresh" className={'nav-link fa fa-refresh'} onClick={this.refreshNotifications.bind(this)} />
+          <i title="Refresh" className={'nav-link fa fa-refresh'} onClick={() => this.refreshNotifications()} />
         </li>
       );
       settingsIcon = (
         <li className="nav-item">
-          <i title="Settings" className="nav-link fa fa-cog" onClick={this.goToSettings.bind(this)} />
+          <i title="Settings" className="nav-link fa fa-cog" onClick={() => this.goToSettings()} />
         </li>
       );
-      if (this.props.notifications.length) {
-        searchIcon = (
-          <li className="nav-item">
-            <i title="Search" className="nav-link fa fa-search" onClick={this.props.toggleSearch} />
-          </li>
-        );
+      if (!this.props.notifications.isEmpty()) {
         countLabel = (
-          <span className="tag tag-success">{this.props.notifications.length}</span>
+          <span className="tag tag-success">{this.props.notifications.size}</span>
         );
       }
     } else {
       quitIcon = (
         <li className="nav-item">
-          <i title="Quit" className="nav-link fa fa-power-off" onClick={this.appQuit.bind(this)} />
+          <i title="Quit" className="nav-link fa fa-power-off" onClick={() => this.appQuit()} />
         </li>
       );
     }
@@ -81,12 +72,12 @@ export class Navigation extends React.Component {
     if (this.props.location.pathname === '/settings') {
       backIcon = (
         <li className="nav-item">
-          <i title="Back" className="nav-link fa fa-chevron-left" onClick={this.goBack.bind(this)} />
+          <i title="Back" className="nav-link fa fa-chevron-left" onClick={() => this.goBack()} />
         </li>
       );
       settingsIcon = (
         <li className="nav-item">
-          <i title="Settings" className="nav-link fa fa-cog" onClick={this.goBack.bind(this)} />
+          <i title="Settings" className="nav-link fa fa-cog" onClick={() => this.goBack()} />
         </li>
       );
     }
@@ -101,7 +92,6 @@ export class Navigation extends React.Component {
 
         <ul className="nav navbar-nav pull-xs-right">
           {backIcon}
-          {searchIcon}
           {refreshIcon}
           {settingsIcon}
           {quitIcon}
@@ -118,9 +108,9 @@ Navigation.contextTypes = {
 
 function mapStateToProps(state) {
   return {
-    isFetching: state.notifications.isFetching,
-    notifications: state.notifications.response,
-    token: state.auth.token
+    isFetching: state.notifications.get('isFetching'),
+    notifications: state.notifications.get('response'),
+    token: state.auth.get('token')
   };
 };
 
