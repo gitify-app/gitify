@@ -94,10 +94,9 @@ LoginPage.contextTypes = {
 
 function mapStateToProps(state) {
   return {
-    token: state.auth.token,
-    response: state.auth.response,
-    failed: state.auth.failed,
-    isFetching: state.auth.isFetching
+    token: state.auth.get('token'),
+    failed: state.auth.get('failed'),
+    isFetching: state.auth.get('isFetching')
   };
 };
 

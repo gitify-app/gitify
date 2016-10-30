@@ -1,16 +1,17 @@
 import { expect } from 'chai';
+import { Map } from 'immutable';
 import reducer from '../../reducers/settings';
 import { UPDATE_SETTING, HAS_STARRED } from '../../actions';
 
 describe('reducers/settings.js', () => {
-  const initialState = {
+  const initialState = Map({
     participating: false,
     playSound: true,
     showNotifications: true,
     markOnClick: false,
     openAtStartup: false,
     hasStarred: false
-  };
+  });
 
   it('should return the initial state', () => {
 
@@ -26,10 +27,10 @@ describe('reducers/settings.js', () => {
       value: true
     };
 
-    expect(reducer(undefined, actionParticipating)).to.eql({
-      ...initialState,
-      participating: true
-    });
+    expect(reducer(undefined, actionParticipating)).to.eql(
+      initialState
+        .set('participating', true)
+    );
 
     const actionOpenAtStartUp = {
       type: UPDATE_SETTING,
@@ -37,10 +38,10 @@ describe('reducers/settings.js', () => {
       value: true
     };
 
-    expect(reducer(undefined, actionOpenAtStartUp)).to.eql({
-      ...initialState,
-      openAtStartup: true
-    });
+    expect(reducer(undefined, actionOpenAtStartUp)).to.eql(
+      initialState
+        .set('openAtStartup', true)
+    );
 
   });
 
@@ -50,10 +51,10 @@ describe('reducers/settings.js', () => {
       type: HAS_STARRED.SUCCESS
     };
 
-    expect(reducer(undefined, actionParticipating)).to.eql({
-      ...initialState,
-      hasStarred: true
-    });
+    expect(reducer(undefined, actionParticipating)).to.eql(
+      initialState
+        .set('hasStarred', true)
+    );
 
   });
 
@@ -63,10 +64,10 @@ describe('reducers/settings.js', () => {
       type: HAS_STARRED.FAILURE
     };
 
-    expect(reducer(undefined, actionParticipating)).to.eql({
-      ...initialState,
-      hasStarred: false
-    });
+    expect(reducer(undefined, actionParticipating)).to.eql(
+      initialState
+        .set('hasStarred', false)
+    );
 
   });
 

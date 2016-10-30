@@ -1,5 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import configureMockStore from 'redux-mock-store';
+import { Map } from 'immutable';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import getRoutes, { NotFound } from '../routes';
@@ -11,7 +12,7 @@ describe('routes.js', () => {
 
   it('should return the routes (logged in)', () => {
 
-    const store = createMockStore({ auth: {token: 'HELLO'} });
+    const store = createMockStore({ auth: Map({token: 'HELLO'}) });
     const routes = getRoutes(store);
 
     expect(routes).to.be.ok;
@@ -22,7 +23,7 @@ describe('routes.js', () => {
 
   it('should return the routes (logged out)', () => {
 
-    const store = createMockStore({ auth: {token: null} });
+    const store = createMockStore({ auth: Map({token: null}) });
     const routes = getRoutes(store);
 
     expect(routes).to.be.ok;

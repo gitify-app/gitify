@@ -110,7 +110,7 @@ function mapStateToProps(state) {
   return {
     isFetching: state.notifications.get('isFetching'),
     notifications: state.notifications.get('response'),
-    token: state.auth.token
+    token: state.auth.get('token')
   };
 };
 

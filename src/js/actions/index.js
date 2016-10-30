@@ -49,10 +49,10 @@ export const NOTIFICATIONS = makeAsyncActionSet('NOTIFICATIONS');
 export function fetchNotifications() {
   return (dispatch, getState) => {
 
-    const participating = getState().settings.participating;
+    const participating = getState().settings.get('participating');
     const url = `https://api.github.com/notifications?participating=${participating}`;
     const method = 'GET';
-    const token = getState().auth.token;
+    const token = getState().auth.get('token');
 
     dispatch({type: NOTIFICATIONS.REQUEST});
 
@@ -76,7 +76,7 @@ export function markNotification(id) {
 
     const url = `https://api.github.com/notifications/threads/${id}`;
     const method = 'PATCH';
-    const token = getState().auth.token;
+    const token = getState().auth.get('token');
 
     dispatch({type: MARK_NOTIFICATION.REQUEST});
 
@@ -99,7 +99,7 @@ export function markRepoNotifications(loginId, repoId, repoFullName) {
 
     const url = `https://api.github.com/repos/${loginId}/${repoId}/notifications`;
     const method = 'PUT';
-    const token = getState().auth.token;
+    const token = getState().auth.get('token');
 
     dispatch({type: MARK_REPO_NOTIFICATION.REQUEST});
 
@@ -122,7 +122,7 @@ export function checkHasStarred() {
 
     const url = `https://api.github.com/user/starred/${Constants.REPO_SLUG}`;
     const method = 'GET';
-    const token = getState().auth.token;
+    const token = getState().auth.get('token');
 
     dispatch({type: HAS_STARRED.REQUEST});
 

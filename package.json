@@ -72,6 +72,7 @@
     "redux-storage": "=4.1.1",
     "redux-storage-decorator-filter": "=1.1.6",
     "redux-storage-engine-localstorage": "=1.1.2",
+    "redux-storage-merger-immutablejs": "=1.0.3",
     "redux-thunk": "=2.1.0",
     "underscore": "=1.8.3"
   },
