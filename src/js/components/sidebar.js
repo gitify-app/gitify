@@ -43,7 +43,7 @@ export class Sidebar extends React.Component {
   render() {
     const isLoggedIn = this.props.token !== null;
     const loadingClass = this.props.isFetching ? ' logo-spin' : '';
-    var refreshIcon, backIcon, settingsIcon, quitIcon, countLabel;
+    var refreshIcon, settingsIcon, countLabel;
 
     if (isLoggedIn) {
       refreshIcon = (
@@ -61,20 +61,9 @@ export class Sidebar extends React.Component {
           <span className="tag tag-success">{this.props.notifications.size}</span>
         );
       }
-    } else {
-      quitIcon = (
-        <li className="nav-item">
-          <i title="Quit" className="nav-link fa fa-power-off" onClick={() => this.appQuit()} />
-        </li>
-      );
     }
 
     if (this.props.location.pathname === '/settings') {
-      backIcon = (
-        <li className="nav-item">
-          <i title="Back" className="nav-link fa fa-chevron-left" onClick={() => this.goBack()} />
-        </li>
-      );
       settingsIcon = (
         <li className="nav-item">
           <i title="Settings" className="nav-link fa fa-cog" onClick={() => this.goBack()} />
@@ -91,10 +80,8 @@ export class Sidebar extends React.Component {
         {countLabel}
 
         <ul className="nav navbar-nav pull-xs-right">
-          {backIcon}
           {refreshIcon}
           {settingsIcon}
-          {quitIcon}
         </ul>
       </div>
     );
