@@ -167,15 +167,53 @@ input {
 
 /* @end Animations */
 
+/* @group Loading */
+
+#nprogress {
+  pointer-events: none;
+
+  .bar {
+    position: fixed;
+    top: 0;
+    left: $sidebar-width;
+    z-index: 1031;
+    background: $brand-inverse;
+
+    width: 100%;
+    height: 2px;
+  }
+
+  /* Fancy blur effect */
+  .peg {
+    display: block;
+    position: absolute;
+    right: 0;
+    transform: rotate(3deg) translate(0, -4px);
+    opacity: 1;
+    box-shadow: 0 0 10px $brand-inverse, 0 0 5px $brand-inverse;
+    width: 100px;
+    height: 100%;
+  }
+}
+
+.nprogress-custom-parent {
+  position: relative;
+  overflow: hidden;
+
+  #nprogress .spinner,
+  #nprogress .bar {
+    position: absolute;
+  }
+}
+
+/* @end Loading */
+
 
 /* @group Sidebar */
 
 .wrapper {
   transition: all .5s ease;
   padding-left: $sidebar-width;
-  -webkit-transition: all .5s ease;
-  -moz-transition: all .5s ease;
-  -o-transition: all .5s ease;
 }
 
 .sidebar-wrapper {
@@ -188,60 +226,12 @@ input {
   width: $sidebar-width;
   height: 100%;
   overflow-y: auto;
-  -webkit-transition: all .5s ease;
-  -moz-transition: all .5s ease;
-  -o-transition: all .5s ease;
 
   .logo {
     margin: .75rem auto;
     max-width: ($sidebar-width / 2) + 20;
-
-    &.logo-spin {
-      -webkit-animation: spin 1s infinite linear;
-
-      @-webkit-keyframes spin {
-        0%   {
-          transform: rotate(0deg);
-        }
-
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    }
   }
 }
-
-.content-wrapper {
-  position: relative;
-  background-color: $gray-lighter;
-  padding: 20px;
-  width: 100%;
-}
-
-// .navbar {
-//   height: $navbar-height;
-//   color: $white;
-
-//   .tag {
-//     @include border-radius(0);
-
-//     position: relative;
-//     top: -$navbar-padding-y;
-//     left: 5px;
-//     float: left;
-//     margin-right: .95rem;
-//     min-width: 1.5rem;
-//     height: $navbar-height;
-//     line-height: 29px;
-//   }
-
-//   .nav-link {
-//     padding-top: .3rem;
-//     font-size: .95rem;
-//   }
-// }
-
 
 /* @end Sidebar */
 
@@ -298,10 +288,10 @@ input {
 /* @group Page / Login  */
 
 .login {
-  position: absolute;
-  // top: $navbar-height;
-  top: 50px;
-  left: 0;
+  // position: absolute;
+  // // top: $navbar-height;
+  // top: 50px;
+  // left: 0;
   padding-top: 20px;
   width: 100%;
   height: 100%;

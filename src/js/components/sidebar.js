@@ -42,7 +42,6 @@ export class Sidebar extends React.Component {
 
   render() {
     const isLoggedIn = this.props.token !== null;
-    const loadingClass = this.props.isFetching ? ' logo-spin' : '';
     var refreshIcon, settingsIcon, countLabel;
 
     if (isLoggedIn) {
@@ -74,7 +73,7 @@ export class Sidebar extends React.Component {
     return (
       <div className="sidebar-wrapper bg-inverse">
         <img
-          className={'img-fluid logo' + loadingClass}
+          className="img-fluid logo"
           src="images/gitify-logo-outline-light.png"
           onClick={this.openBrowser} />
         {countLabel}
@@ -95,7 +94,6 @@ Sidebar.contextTypes = {
 
 function mapStateToProps(state) {
   return {
-    isFetching: state.notifications.get('isFetching'),
     notifications: state.notifications.get('response'),
     token: state.auth.get('token')
   };
