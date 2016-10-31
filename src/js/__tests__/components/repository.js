@@ -68,7 +68,7 @@ describe('components/repository.js', function () {
     expect(wrapper).to.exist;
     expect(wrapper.find('.octicon-check').length).to.equal(1);
 
-    wrapper.find('.name').simulate('click');
+    wrapper.find('.name span').simulate('click');
 
     expect(wrapper.find('.name').text()).to.contain('gitify');
     expect(wrapper.find('.name').text()).to.contain('manosim');

@@ -196,16 +196,6 @@ input {
   }
 }
 
-.nprogress-custom-parent {
-  position: relative;
-  overflow: hidden;
-
-  #nprogress .spinner,
-  #nprogress .bar {
-    position: absolute;
-  }
-}
-
 /* @end Loading */
 
 
