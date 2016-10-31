@@ -85,8 +85,8 @@ export class Sidebar extends React.Component {
     return (
       <div className="sidebar-wrapper bg-inverse">
         <img
-          className={'navbar-brand img-responsive' + loadingClass}
-          src="images/gitify-logo-fill-light-small.png"
+          className={'img-fluid logo' + loadingClass}
+          src="images/gitify-logo-outline-light.png"
           onClick={this.openBrowser} />
         {countLabel}
 
