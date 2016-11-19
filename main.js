@@ -100,6 +100,8 @@ app.on('ready', function() {
     var defaults = {
       width: 800,
       height: 600,
+      minHeight: 300,
+      minWidth: 500,
       show: false,
       center: true,
       fullscreenable: false,

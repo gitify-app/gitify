@@ -5,8 +5,9 @@ const ipcRenderer = window.require('electron').ipcRenderer;
 const shell = window.require('electron').shell;
 
 import { fetchNotifications, logout } from '../actions';
+import Constants from '../utils/constants';
 
-export class Navigation extends React.Component {
+export class Sidebar extends React.Component {
   componentDidMount() {
     var self = this;
     var iFrequency = 60000;
@@ -37,13 +38,12 @@ export class Navigation extends React.Component {
   }
 
   openBrowser() {
-    shell.openExternal('http://www.github.com/manosim/gitify');
+    shell.openExternal(`http://www.github.com/${Constants.REPO_SLUG}`);
   }
 
   render() {
     const isLoggedIn = this.props.token !== null;
-    const loadingClass = this.props.isFetching ? ' logo-spin' : '';
-    var refreshIcon, backIcon, settingsIcon, quitIcon, countLabel;
+    var refreshIcon, settingsIcon, countLabel;
 
     if (isLoggedIn) {
       refreshIcon = (
@@ -61,20 +61,9 @@ export class Navigation extends React.Component {
           <span className="tag tag-success">{this.props.notifications.size}</span>
         );
       }
-    } else {
-      quitIcon = (
-        <li className="nav-item">
-          <i title="Quit" className="nav-link fa fa-power-off" onClick={() => this.appQuit()} />
-        </li>
-      );
     }
 
     if (this.props.location.pathname === '/settings') {
-      backIcon = (
-        <li className="nav-item">
-          <i title="Back" className="nav-link fa fa-chevron-left" onClick={() => this.goBack()} />
-        </li>
-      );
       settingsIcon = (
         <li className="nav-item">
           <i title="Settings" className="nav-link fa fa-cog" onClick={() => this.goBack()} />
@@ -83,35 +72,42 @@ export class Navigation extends React.Component {
     }
 
     return (
-      <nav className="navbar navbar-dark bg-inverse">
+      <div className="sidebar-wrapper bg-inverse">
         <img
-          className={'navbar-brand img-responsive' + loadingClass}
-          src="images/gitify-logo-fill-light-small.png"
+          className="img-fluid logo"
+          src="images/gitify-logo-outline-light.png"
           onClick={this.openBrowser} />
         {countLabel}
 
         <ul className="nav navbar-nav pull-xs-right">
-          {backIcon}
           {refreshIcon}
           {settingsIcon}
-          {quitIcon}
         </ul>
-      </nav>
+
+        <div className="footer">
+
+          {!this.props.hasStarred ? (
+            <button className="btn btn-sm btn-outline-secondary btn-star" onClick={this.openBrowser}>
+              <i className="fa fa-github" /> Star
+            </button>
+          ) : null}
+        </div>
+      </div>
     );
   }
 };
 
-Navigation.contextTypes = {
+Sidebar.contextTypes = {
   location: React.PropTypes.object,
   router: React.PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    isFetching: state.notifications.get('isFetching'),
+    hasStarred: state.settings.get('hasStarred'),
     notifications: state.notifications.get('response'),
     token: state.auth.get('token')
   };
 };
 
-export default connect(mapStateToProps, { fetchNotifications, logout })(Navigation);
+export default connect(mapStateToProps, { fetchNotifications, logout })(Sidebar);

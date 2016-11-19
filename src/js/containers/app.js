@@ -2,8 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { fetchNotifications } from '../actions';
-import Navigation from '../components/navigation';
+import Loading from '../components/loading';
 import NetworkStatus from '../components/network-status';
+import Sidebar from '../components/sidebar';
 
 export class App extends React.Component {
   constructor(props) {
@@ -44,8 +45,9 @@ export class App extends React.Component {
     }
 
     return (
-      <div>
-        <Navigation
+      <div className="wrapper">
+        <Loading isLoading={this.props.isFetching} />
+        <Sidebar
           location={this.props.location}
           toggleSearch={() => this.toggleSearch()} />
         {this.props.children}
@@ -54,4 +56,10 @@ export class App extends React.Component {
   };
 };
 
-export default connect(null, { fetchNotifications })(App);
+function mapStateToProps(state) {
+  return {
+    isFetching: state.notifications.get('isFetching')
+  };
+};
+
+export default connect(mapStateToProps, { fetchNotifications })(App);

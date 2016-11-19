@@ -11,7 +11,10 @@ $theme-black: #262626;
 $theme-green: #5EBA7D;
 
 $white: #FFF;
+$gray-dark: #373A3C;
+
 $light-gray: darken($white, 10%);
+$gray-darker: darken($gray, 5%);
 
 $error-color: #DB423C;
 
@@ -32,10 +35,7 @@ $octicons-font-path: "../fonts/";
 
 /* @group Bootstrap Overrides */
 
-$navbar-height: 35px;
-$navbar-padding-y: .3rem;
-$navbar-padding-x: 1rem;
-$navbar-border-radius: 0;
+$sidebar-width: 100px;
 
 $brand-success: $theme-green;
 
@@ -99,25 +99,7 @@ body {
   cursor: default;
 }
 
-body,
-html {
-  height: 100%;
-  overflow: hidden;
-}
-
-.main-container {
-  position: absolute;
-  top: $navbar-height;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  overflow: auto;
-}
-
 .btn {
-  @include border-radius(0);
-  border: 0;
-
   .fa {
     margin-right: 10px;
   }
@@ -184,59 +166,80 @@ input {
 
 /* @end Animations */
 
+/* @group Loading */
 
-/* @group Navigation */
+#nprogress {
+  pointer-events: none;
 
-.navbar {
-  height: $navbar-height;
-  color: $white;
+  .bar {
+    position: fixed;
+    top: 0;
+    left: $sidebar-width;
+    z-index: 1031;
+    background: $brand-inverse;
 
-  .navbar-brand {
-    display: inline-block;
-    margin: 0 5px 2px;
-    max-height: 25px;
-
-    &.logo-spin {
-      -webkit-animation: spin 1s infinite linear;
-
-      @-webkit-keyframes spin {
-        0%   {
-          transform: rotate(0deg);
-        }
-
-        100% {
-          transform: rotate(360deg);
-        }
-      }
-    }
+    width: 100%;
+    height: 2px;
   }
 
-  .tag {
-    @include border-radius(0);
-
-    position: relative;
-    top: -$navbar-padding-y;
-    left: 5px;
-    float: left;
-    margin-right: .95rem;
-    min-width: 1.5rem;
-    height: $navbar-height;
-    line-height: 29px;
-  }
-
-  .nav-link {
-    padding-top: .3rem;
-    font-size: .95rem;
+  /* Fancy blur effect */
+  .peg {
+    display: block;
+    position: absolute;
+    right: 0;
+    transform: rotate(3deg) translate(0, -4px);
+    opacity: 1;
+    box-shadow: 0 0 10px $brand-inverse, 0 0 5px $brand-inverse;
+    width: 100px;
+    height: 100%;
   }
 }
 
-/* @end Navigation */
+/* @end Loading */
+
+
+/* @group Sidebar */
+
+.wrapper {
+  transition: all .5s ease;
+  padding-left: $sidebar-width;
+}
+
+.sidebar-wrapper {
+  position: fixed;
+  left: $sidebar-width;
+  transition: all .5s ease;
+  z-index: 1000;
+  margin-left: -$sidebar-width;
+  padding: 2rem .75rem;
+  width: $sidebar-width;
+  height: 100%;
+  overflow-y: auto;
+
+  .logo {
+    margin: .75rem auto;
+    max-width: ($sidebar-width / 2) + 20;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 1rem;
+
+    .btn-star {
+
+      &:hover {
+        background-color: $gray-darker;
+      }
+    }
+  }
+}
+
+/* @end Sidebar */
 
 
 /* @group Settings */
 
 .settings {
-  background-color: $gray-lighter;
   padding: 5px 20px;
 
   .nav {
@@ -286,10 +289,10 @@ input {
 /* @group Page / Login  */
 
 .login {
-  position: absolute;
-  top: $navbar-height;
-  left: 0;
-  background-color: $gray-lighter;
+  // position: absolute;
+  // // top: $navbar-height;
+  // top: 50px;
+  // left: 0;
   padding-top: 20px;
   width: 100%;
   height: 100%;
@@ -334,26 +337,16 @@ input {
     padding: 5px 0;
   }
 
-  .avatar {
-    @include border-radius(50%);
-    margin-top: 5px;
-    width: 23px;
-    height: 23px;
-  }
-
   .name {
     padding: 5px;
-    text-align: right;
     font-size: 16px;
     font-weight: 600;
 
-    span {
-      display: inline-block;
-      float: right;
-      max-width: 50%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    .avatar {
+      @include border-radius(50%);
+      margin-right: 1rem;
+      width: 23px;
+      height: 23px;
     }
   }
 
@@ -379,7 +372,6 @@ input {
 
   &.errored,
   &.all-read {
-    background-color: $gray-lighter;
     padding: 30px 20px;
     color: $gray;
 
@@ -429,16 +421,6 @@ input {
           100% { opacity: 1; }
         }
       }
-    }
-  }
-
-  .fork {
-    padding: 10px 0;
-    text-align: center;
-    font-size: 18px;
-
-    &:hover {
-      cursor: pointer;
     }
   }
 }

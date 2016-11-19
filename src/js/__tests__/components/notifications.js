@@ -8,8 +8,6 @@ import { NotificationsPage } from '../../components/notifications';
 import AllRead from '../../components/all-read';
 import Oops from '../../components/oops';
 
-const shell = window.require('electron').shell;
-
 function setup(props) {
   const wrapper = shallow(<NotificationsPage {...props} />);
 
@@ -59,7 +57,6 @@ describe('components/notifications.js', function () {
 
     expect(wrapper).to.exist;
     expect(wrapper.find(ReactCSSTransitionGroup).children().length).to.equal(2);
-    expect(wrapper.find('.fork').text()).to.contain('Star Gitify on GitHub');
     expect(wrapper.find('.errored').length).to.equal(0);
     expect(wrapper.find('.all-read').length).to.equal(0);
 
@@ -79,7 +76,6 @@ describe('components/notifications.js', function () {
     expect(wrapper).to.exist;
     expect(wrapper.find(ReactCSSTransitionGroup).length).to.equal(0);
     expect(wrapper.find('.loading-container').length).to.equal(0);
-    expect(wrapper.find('.fork').length).to.equal(0);
     expect(wrapper.find('.all-read').length).to.equal(0);
     expect(wrapper.find(Oops).length).to.equal(1);
 
@@ -99,7 +95,6 @@ describe('components/notifications.js', function () {
     expect(wrapper).to.exist;
     expect(wrapper.find(ReactCSSTransitionGroup).length).to.equal(0);
     expect(wrapper.find('.loading-container').length).to.equal(0);
-    expect(wrapper.find('.fork').length).to.equal(0);
     expect(wrapper.find('.all-read').length).to.equal(0);
     expect(wrapper.find('.errored').length).to.equal(0);
 
@@ -107,24 +102,4 @@ describe('components/notifications.js', function () {
 
   });
 
-  it('open the gitify repo in browser', function () {
-
-    const props = {
-      failed: false,
-      isFetching: false,
-      notifications: notifications,
-      searchQuery: ''
-    };
-
-    const { wrapper } = setup(props);
-
-    expect(wrapper).to.exist;
-    expect(wrapper.find(ReactCSSTransitionGroup).children().length).to.equal(2);
-    expect(wrapper.find('.fork').length).to.equal(1);
-
-    wrapper.find('.fork').simulate('click');
-    expect(shell.openExternal).to.have.been.calledOnce;
-    shell.openExternal.reset();
-
-  });
 });
