@@ -242,4 +242,25 @@ describe('components/Sidebar.js', function () {
 
   });
 
+
+  it('open the gitify repo in browser', function () {
+
+    const props = {
+      hasStarred: false,
+      notifications: notifications,
+      location: {
+        pathname: '/home'
+      }
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper.find('.btn-star').length).to.equal(1);
+
+    wrapper.find('.btn-star').simulate('click');
+    expect(shell.openExternal).to.have.been.calledOnce;
+    shell.openExternal.reset();
+
+  });
+
 });

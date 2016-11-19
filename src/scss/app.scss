@@ -11,7 +11,10 @@ $theme-black: #262626;
 $theme-green: #5EBA7D;
 
 $white: #FFF;
+$gray-dark: #373A3C;
+
 $light-gray: darken($white, 10%);
+$gray-darker: darken($gray, 5%);
 
 $error-color: #DB423C;
 
@@ -96,11 +99,7 @@ body {
   cursor: default;
 }
 
-
 .btn {
-  @include border-radius(0);
-  border: 0;
-
   .fa {
     margin-right: 10px;
   }
@@ -220,6 +219,18 @@ input {
   .logo {
     margin: .75rem auto;
     max-width: ($sidebar-width / 2) + 20;
+  }
+
+  .footer {
+    position: absolute;
+    bottom: 1rem;
+
+    .btn-star {
+
+      &:hover {
+        background-color: $gray-darker;
+      }
+    }
   }
 }
 
@@ -410,16 +421,6 @@ input {
           100% { opacity: 1; }
         }
       }
-    }
-  }
-
-  .fork {
-    padding: 10px 0;
-    text-align: center;
-    font-size: 18px;
-
-    &:hover {
-      cursor: pointer;
     }
   }
 }

@@ -5,6 +5,7 @@ const ipcRenderer = window.require('electron').ipcRenderer;
 const shell = window.require('electron').shell;
 
 import { fetchNotifications, logout } from '../actions';
+import Constants from '../utils/constants';
 
 export class Sidebar extends React.Component {
   componentDidMount() {
@@ -37,7 +38,7 @@ export class Sidebar extends React.Component {
   }
 
   openBrowser() {
-    shell.openExternal('http://www.github.com/manosim/gitify');
+    shell.openExternal(`http://www.github.com/${Constants.REPO_SLUG}`);
   }
 
   render() {
@@ -82,6 +83,15 @@ export class Sidebar extends React.Component {
           {refreshIcon}
           {settingsIcon}
         </ul>
+
+        <div className="footer">
+
+          {!this.props.hasStarred ? (
+            <button className="btn btn-sm btn-outline-secondary btn-star" onClick={this.openBrowser}>
+              <i className="fa fa-github" /> Star
+            </button>
+          ) : null}
+        </div>
       </div>
     );
   }
@@ -94,6 +104,7 @@ Sidebar.contextTypes = {
 
 function mapStateToProps(state) {
   return {
+    hasStarred: state.settings.get('hasStarred'),
     notifications: state.notifications.get('response'),
     token: state.auth.get('token')
   };
