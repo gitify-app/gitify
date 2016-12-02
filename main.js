@@ -1,5 +1,5 @@
 const path = require('path');
-
+const open = require('open');
 const electron = require('electron');
 const BrowserWindow = electron.BrowserWindow;
 const Menu = electron.Menu;
@@ -144,6 +144,11 @@ app.on('ready', function() {
     appIcon.window.loadURL('file://' + __dirname + '/index.html');
     appIcon.window.on('blur', hideWindow);
     appIcon.window.setVisibleOnAllWorkspaces(true);
+
+    appIcon.window.webContents.on('new-window', function(event, url){
+      event.preventDefault();
+      open(url);
+    });
 
     appIcon.window.webContents.on('devtools-opened', (event, deviceList, callback) => {
       appIcon.window.setSize(800, 600);
