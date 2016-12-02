@@ -130,7 +130,7 @@ app.on('ready', function() {
   function initWindow () {
     var defaults = {
       width: 400,
-      height: 350,
+      height: 380,
       show: false,
       frame: false,
       resizable: false,
