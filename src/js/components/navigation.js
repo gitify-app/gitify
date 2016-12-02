@@ -12,9 +12,13 @@ export class Navigation extends React.Component {
     var iFrequency = 60000;
     var myInterval = 0;
     if (myInterval > 0) { clearInterval(myInterval); }
-    setInterval( function () {
+    this.requestInterval = setInterval( function () {
       self.refreshNotifications();
     }, iFrequency );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.requestInterval);
   }
 
   refreshNotifications() {
