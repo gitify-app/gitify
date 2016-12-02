@@ -98,6 +98,14 @@ export class SettingsPage extends React.Component {
           </div>
         </div>
 
+        <div className="row setting">
+          <div className="col-xs-12">
+            <a href="https://github.com/watching" target="_blank">
+              Managed watched repositories
+            </a>
+          </div>
+        </div>
+
         <div className="row footer">
           <div className="col-xs-6 text-left">Made with <span className="heart">❤</span> in Brighton.</div>
           <div className="col-xs-6 text-right">Gitify - Version: {appVersion}</div>
