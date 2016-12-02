@@ -71,6 +71,37 @@ describe('components/navigation.js', function () {
 
   });
 
+  it('should start an interval for refreshing notifications on mount & stop the interval on unmount', function () {
+    const props = {
+      isFetching: false,
+      notifications: notifications,
+      token: 'IMLOGGEDIN',
+      location: {
+        pathname: '/home'
+      }
+    };
+
+    const instance = {
+      props
+    };
+
+    const setIntervalSpy = sinon.spy(global, 'setInterval');
+    const clearIntervalSpy = sinon.spy(global, 'clearInterval');
+
+    Navigation.prototype.componentDidMount.call(instance);
+
+    expect(setIntervalSpy).to.have.been.called;
+    expect(instance.requestInterval).to.be.ok;
+
+    Navigation.prototype.componentWillUnmount.call(instance);
+
+    expect(clearIntervalSpy).to.have.been.called;
+    expect(clearIntervalSpy).to.have.been.calledWith(instance.requestInterval);
+
+    setIntervalSpy.restore();
+    clearIntervalSpy.restore();
+  });
+
   it('should load notifications after 60000ms', function () {
 
     const props = {
