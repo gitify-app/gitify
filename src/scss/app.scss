@@ -11,6 +11,7 @@ $theme-black: #262626;
 $theme-green: #5EBA7D;
 
 $white: #FFF;
+$gray: #55595C;
 $gray-dark: #373A3C;
 
 $light-gray: darken($white, 10%);
@@ -28,7 +29,6 @@ $fa-font-path: "../fonts";
 
 $octicons-font-path: "../fonts/";
 @import "node_modules/octicons/build/font/_octicons.scss";
-
 
 /* @end Fonts Overrides */
 
