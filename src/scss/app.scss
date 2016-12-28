@@ -244,11 +244,11 @@ input {
 
   .nav {
     display: flex;
+    justify-content: center;
     margin: -5px -20px 20px;
 
     background-color: $gray-light;
     padding: 5px 0;
-    justify-content: center;
 
     .nav-link {
       color: $gray-dark;

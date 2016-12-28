@@ -12,9 +12,6 @@ import { Sidebar } from '../../components/sidebar';
 function setup(props) {
   const options = {
     context: {
-      location: {
-        pathname: ''
-      },
       router: {
         push: sinon.spy(),
         replace: sinon.spy()
@@ -165,30 +162,6 @@ describe('components/Sidebar.js', function () {
 
     expect(shell.openExternal).to.have.been.calledOnce;
     expect(shell.openExternal).to.have.been.calledWith('http://www.github.com/manosim/gitify');
-
-  });
-
-  it('should go back to home from settings', function () {
-
-    const props = {
-      isFetching: false,
-      notifications: notifications,
-      token: 'IMLOGGEDIN',
-      location: {
-        pathname: '/settings'
-      }
-    };
-
-    const { wrapper, context } = setup(props);
-
-    expect(wrapper).to.exist;
-    expect(wrapper.find('.fa-cog').length).to.equal(1);
-
-    wrapper.find('.fa-cog').simulate('click');
-    expect(context.router.push).to.have.been.calledOnce;
-    expect(context.router.push).to.have.been.calledWith('/notifications');
-
-    context.router.push.reset();
 
   });
 
