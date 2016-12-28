@@ -12,9 +12,6 @@ import { Sidebar } from '../../components/sidebar';
 function setup(props) {
   const options = {
     context: {
-      location: {
-        pathname: ''
-      },
       router: {
         push: sinon.spy(),
         replace: sinon.spy()
@@ -31,7 +28,7 @@ function setup(props) {
   };
 };
 
-describe('components/Sidebar.js', function () {
+describe('components/Sidebar.js', () => {
 
   const notifications = fromJS([{ id: 1 }, { id: 2 }]);
 
@@ -46,14 +43,11 @@ describe('components/Sidebar.js', function () {
     this.clock = sinon.restore();
   });
 
-  it('should render itself & its children (logged in)', function () {
+  it('should render itself & its children (logged in)', () => {
     const props = {
       isFetching: false,
       notifications: notifications,
       token: 'IMLOGGEDIN',
-      location: {
-        pathname: '/home'
-      }
     };
 
     sinon.spy(Sidebar.prototype, 'componentDidMount');
@@ -65,9 +59,7 @@ describe('components/Sidebar.js', function () {
     expect(wrapper.find('.fa-refresh').length).to.equal(1);
     expect(wrapper.find('.fa-refresh').first().hasClass('fa-spin')).to.be.false;
     expect(wrapper.find('.fa-cog').length).to.equal(1);
-    expect(wrapper.find('.fa-power-off').length).to.equal(0);
-    expect(wrapper.find('.fa-chevron-left').length).to.equal(0);
-    expect(wrapper.find('.tag-success').text()).to.equal(`${notifications.size}`);
+    expect(wrapper.find('.tag-count').text()).to.equal(`${notifications.size} Unread`);
 
     Sidebar.prototype.componentDidMount.restore();
 
@@ -80,9 +72,6 @@ describe('components/Sidebar.js', function () {
       notifications: notifications,
       fetchNotifications: sinon.spy(),
       token: 'IMLOGGEDIN',
-      location: {
-        pathname: '/home'
-      }
     };
 
     const { wrapper } = setup(props);
@@ -100,9 +89,6 @@ describe('components/Sidebar.js', function () {
       isFetching: false,
       notifications: [],
       token: null,
-      location: {
-        pathname: '/home'
-      }
     };
 
     sinon.spy(Sidebar.prototype, 'componentDidMount');
@@ -119,15 +105,12 @@ describe('components/Sidebar.js', function () {
 
   });
 
-  it('should render itself & its children (logged in/settings page)', function () {
+  it('should render itself & its children (logged in/settings page)', () => {
 
     const props = {
       isFetching: false,
       notifications: notifications,
       token: 'IMLOGGEDIN',
-      location: {
-        pathname: '/settings'
-      }
     };
 
     sinon.spy(Sidebar.prototype, 'componentDidMount');
@@ -139,22 +122,18 @@ describe('components/Sidebar.js', function () {
     expect(wrapper.find('.fa-refresh').length).to.equal(1);
     expect(wrapper.find('.fa-refresh').first().hasClass('fa-spin')).to.be.false;
     expect(wrapper.find('.fa-cog').length).to.equal(1);
-    expect(wrapper.find('.fa-power-off').length).to.equal(0);
-    expect(wrapper.find('.tag-success').text()).to.equal(`${notifications.size}`);
+    expect(wrapper.find('.tag-count').text()).to.equal(`${notifications.size} Unread`);
 
     Sidebar.prototype.componentDidMount.restore();
 
   });
 
-  it('should open the gitify repo in browser', function () {
+  it('should open the gitify repo in browser', () => {
 
     const props = {
       isFetching: false,
       notifications: [],
       token: null,
-      location: {
-        pathname: ''
-      }
     };
 
     const { wrapper } = setup(props);
@@ -168,31 +147,7 @@ describe('components/Sidebar.js', function () {
 
   });
 
-  it('should go back to home from settings', function () {
-
-    const props = {
-      isFetching: false,
-      notifications: notifications,
-      token: 'IMLOGGEDIN',
-      location: {
-        pathname: '/settings'
-      }
-    };
-
-    const { wrapper, context } = setup(props);
-
-    expect(wrapper).to.exist;
-    expect(wrapper.find('.fa-cog').length).to.equal(1);
-
-    wrapper.find('.fa-cog').simulate('click');
-    expect(context.router.push).to.have.been.calledOnce;
-    expect(context.router.push).to.have.been.calledWith('/notifications');
-
-    context.router.push.reset();
-
-  });
-
-  it('should go to settings from home', function () {
+  it('should go to settings from home', () => {
 
     const props = {
       toggleSearch: sinon.spy(),
@@ -200,9 +155,6 @@ describe('components/Sidebar.js', function () {
       notifications: notifications,
       token: 'IMLOGGEDIN',
       showSearch: true,
-      location: {
-        pathname: '/home'
-      }
     };
 
     const { wrapper, context } = setup(props);
@@ -220,16 +172,13 @@ describe('components/Sidebar.js', function () {
   });
 
 
-  it('should refresh the notifications', function () {
+  it('should refresh the notifications', () => {
 
     const props = {
       fetchNotifications: sinon.spy(),
       isFetching: false,
       notifications: notifications,
       token: 'IMLOGGEDIN',
-      location: {
-        pathname: '/home'
-      }
     };
 
     const { wrapper } = setup(props);
@@ -243,14 +192,11 @@ describe('components/Sidebar.js', function () {
   });
 
 
-  it('open the gitify repo in browser', function () {
+  it('open the gitify repo in browser', () => {
 
     const props = {
       hasStarred: false,
       notifications: notifications,
-      location: {
-        pathname: '/home'
-      }
     };
 
     const { wrapper } = setup(props);

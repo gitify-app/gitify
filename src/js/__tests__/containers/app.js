@@ -1,6 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { expect } from 'chai';
-import { shallow, mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import { App } from '../../containers/app';
 
 function setupShallow() {
@@ -15,19 +15,6 @@ function setupShallow() {
   };
 };
 
-function setupMount() {
-  const props = {
-    location: '/home'
-  };
-  const wrapper = mount(<App {...props} />);
-
-  return {
-    props: props,
-    wrapper: wrapper,
-  };
-};
-
-
 describe('containers/app.js', function () {
 
   it('should render itself & its children', function () {
@@ -35,16 +22,6 @@ describe('containers/app.js', function () {
     const { wrapper } = setupShallow();
     expect(wrapper).to.exist;
 
-  });
-
-  it('should mount itself & its children', function () {
-
-    const { wrapper } = setupMount();
-
-    expect(wrapper).to.exist;
-
-    wrapper.instance().handleNetworkStatus();
-    expect(wrapper.state().networkConnected).to.be.false;
   });
 
 });

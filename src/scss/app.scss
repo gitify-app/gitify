@@ -11,6 +11,7 @@ $theme-black: #262626;
 $theme-green: #5EBA7D;
 
 $white: #FFF;
+$gray: #55595C;
 $gray-dark: #373A3C;
 
 $light-gray: darken($white, 10%);
@@ -28,7 +29,6 @@ $fa-font-path: "../fonts";
 
 $octicons-font-path: "../fonts/";
 @import "node_modules/octicons/build/font/_octicons.scss";
-
 
 /* @end Fonts Overrides */
 
@@ -217,13 +217,26 @@ input {
   overflow-y: auto;
 
   .logo {
+    display: block;
     margin: .75rem auto;
     max-width: ($sidebar-width / 2) + 20;
   }
 
+  .tag-count {
+    display: block;
+    margin: 0 0 1em;
+    text-align: center;
+  }
+
+  .nav {
+    text-align: center;
+  }
+
   .footer {
     position: absolute;
+    right: .75rem;
     bottom: 1rem;
+    left: .75rem;
 
     .btn-star {
 
@@ -244,11 +257,11 @@ input {
 
   .nav {
     display: flex;
+    justify-content: center;
     margin: -5px -20px 20px;
 
     background-color: $gray-light;
     padding: 5px 0;
-    justify-content: center;
 
     .nav-link {
       color: $gray-dark;
@@ -445,13 +458,19 @@ input {
   }
 
   .subject {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 15px;
-
     &:hover {
       cursor: pointer;
+    }
+
+    h6 {
+      margin-bottom: .25em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .details {
+      font-size: $font-size-xs;
     }
   }
 

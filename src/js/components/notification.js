@@ -2,13 +2,13 @@ const shell = window.require('electron').shell;
 
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import { markNotification } from '../actions';
 import Helpers from '../utils/helpers';
 
 
 export class SingleNotification extends React.Component {
-
   pressTitle() {
     this.openBrowser();
 
@@ -27,8 +27,13 @@ export class SingleNotification extends React.Component {
   }
 
   render() {
-    var typeIconClass, typeIconTooltip;
+    let typeIconClass, typeIconTooltip;
+
+    const updated = moment(this.props.notification.get('updated_at'));
+    const timeSinceUpdated = updated.fromNow();
+    const reason = this.props.notification.get('reason');
     const type = this.props.notification.getIn(['subject', 'type']);
+
     if (type === 'Issue') {
       typeIconClass = 'octicon octicon-issue-opened';
       typeIconTooltip = 'Issue';
@@ -50,7 +55,11 @@ export class SingleNotification extends React.Component {
       <div className="row notification">
         <div className="col-xs-1"><span title={typeIconTooltip} className={typeIconClass} /></div>
         <div className="col-xs-10 subject" onClick={() => this.pressTitle()}>
-          {this.props.notification.getIn(['subject', 'title'])}
+          <h6>{this.props.notification.getIn(['subject', 'title'])}</h6>
+
+          <div className="details">
+            <span className="text-capitalize">{reason}</span> - Updated {timeSinceUpdated}
+          </div>
         </div>
         <div className="col-xs-1 check-wrapper">
           <span title="Mark as Read" className="octicon octicon-check" onClick={() => this.markAsRead()} />

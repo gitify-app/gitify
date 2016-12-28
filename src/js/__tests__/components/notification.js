@@ -37,7 +37,7 @@ describe('components/notification.js', function () {
     const { wrapper } = setup(props);
 
     expect(wrapper).to.exist;
-    expect(wrapper.find('.subject').text()).to.equal(notification.getIn(['subject', 'title']));
+    expect(wrapper.find('h6').text()).to.equal(notification.getIn(['subject', 'title']));
     expect(wrapper.find('.octicon').first().props().className).to.contain('octicon-issue-opened');
 
     wrapper.setProps({
