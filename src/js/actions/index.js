@@ -166,3 +166,11 @@ export function updateSetting(setting, value) {
     value: value
   };
 };
+
+
+export const TOGGLE_SETTINGS_MODAL = 'TOGGLE_SETTINGS_MODAL';
+export function toggleSettingsModal() {
+  return {
+    type: TOGGLE_SETTINGS_MODAL
+  };
+};

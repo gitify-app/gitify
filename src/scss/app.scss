@@ -100,10 +100,6 @@ body {
 }
 
 .btn {
-  .fa {
-    margin-right: 10px;
-  }
-
   &:focus {
     outline: none;
   }
@@ -253,7 +249,14 @@ input {
 /* @group Settings */
 
 .settings {
-  padding: 5px 20px;
+  .modal-title {
+    margin-bottom: 1.35rem;
+
+    .btn-close {
+      margin-top: 5px;
+      color: $headings-color;
+    }
+  }
 
   .nav {
     display: flex;

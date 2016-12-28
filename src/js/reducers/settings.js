@@ -1,4 +1,4 @@
-import { UPDATE_SETTING, HAS_STARRED } from '../actions';
+import { UPDATE_SETTING, HAS_STARRED, TOGGLE_SETTINGS_MODAL } from '../actions';
 import { Map } from 'immutable';
 
 const initialState = Map({
@@ -7,7 +7,8 @@ const initialState = Map({
   showNotifications: true,
   markOnClick: false,
   openAtStartup: false,
-  hasStarred: false
+  showSettingsModal: false,
+  hasStarred: false,
 });
 
 export default function reducer(state = initialState, action) {
@@ -18,6 +19,8 @@ export default function reducer(state = initialState, action) {
       return state.set('hasStarred', true);
     case HAS_STARRED.FAILURE:
       return state.set('hasStarred', false);
+    case TOGGLE_SETTINGS_MODAL:
+      return state.set('showSettingsModal', !state.get('showSettingsModal'));
     default:
       return state;
   }

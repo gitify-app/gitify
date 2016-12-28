@@ -1,12 +1,34 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import Modal from 'react-modal';
 import Toggle from 'react-toggle';
 
 const ipcRenderer = window.require('electron').ipcRenderer;
 
-import { fetchNotifications, updateSetting, logout } from '../actions';
+import { fetchNotifications, updateSetting, logout, toggleSettingsModal } from '../actions';
 
-export class SettingsPage extends React.Component {
+const modalStyles = {
+  overlay : {
+    backgroundColor   : 'rgba(255, 255, 255, 0.95)',
+    zIndex            : 9999
+  },
+  content : {
+    position                   : 'absolute',
+    top                        : '50px',
+    left                       : '25px',
+    right                      : '25px',
+    bottom                     : '50px',
+    border                     : '1px solid #ccc',
+    background                 : '#fff',
+    overflow                   : 'auto',
+    WebkitOverflowScrolling    : 'touch',
+    borderRadius               : '4px',
+    outline                    : 'none',
+    padding                    : '20px'
+  }
+};
+
+export class SettingsModal extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.settings.get('participating') !== this.props.settings.get('participating')) {
       this.props.fetchNotifications();
@@ -29,10 +51,21 @@ export class SettingsPage extends React.Component {
 
   render() {
     const appVersion = require('../../../package.json').version;
-    const { settings } = this.props;
+    const { settings, isOpen } = this.props;
 
     return (
-      <div className="container-fluid main-container settings">
+      <Modal
+        className="settings"
+        isOpen={isOpen}
+        style={modalStyles}
+        contentLabel="Settings Modal">
+        <h3 className="modal-title">
+          Settings
+          <i
+            className="fa fa-times btn-close pull-right"
+            onClick={() => this.props.toggleSettingsModal()} />
+        </h3>
+
         <ul className="nav nav-pills">
           <li className="nav-item">
             <a className="nav-link" onClick={this.checkForUpdates}>
@@ -59,6 +92,7 @@ export class SettingsPage extends React.Component {
               onChange={(evt) => this.props.updateSetting('participating', evt.target.checked)} />
           </div>
         </div>
+
         <div className="row setting">
           <div className="col-xs-8">Play sound</div>
           <div className="col-xs-4">
@@ -67,6 +101,7 @@ export class SettingsPage extends React.Component {
               onChange={(evt) => this.props.updateSetting('playSound', evt.target.checked)} />
           </div>
         </div>
+
         <div className="row setting">
           <div className="col-xs-8">Show notifications</div>
           <div className="col-xs-4">
@@ -98,13 +133,17 @@ export class SettingsPage extends React.Component {
           <div className="col-xs-6 text-left">Made with <span className="heart">❤</span> in Brighton.</div>
           <div className="col-xs-6 text-right">Gitify - Version: {appVersion}</div>
         </div>
-      </div>
+      </Modal>
     );
   }
 };
 
-SettingsPage.contextTypes = {
+SettingsModal.contextTypes = {
   router: React.PropTypes.object.isRequired
+};
+
+SettingsModal.propTypes = {
+  isOpen: React.PropTypes.bool.isRequired
 };
 
 function mapStateToProps(state) {
@@ -116,5 +155,6 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   updateSetting,
   fetchNotifications,
-  logout
-})(SettingsPage);
+  logout,
+  toggleSettingsModal
+})(SettingsModal);

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 const ipcRenderer = window.require('electron').ipcRenderer;
 const shell = window.require('electron').shell;
 
-import { fetchNotifications, logout } from '../actions';
+import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
 import Constants from '../utils/constants';
 
 export class Sidebar extends React.Component {
@@ -26,10 +26,6 @@ export class Sidebar extends React.Component {
     if (isLoggedIn) {
       this.props.fetchNotifications();
     }
-  }
-
-  goToSettings() {
-    this.context.router.push('/settings');
   }
 
   appQuit() {
@@ -65,7 +61,7 @@ export class Sidebar extends React.Component {
               <i
                 title="Settings"
                 className="nav-link fa fa-cog"
-                onClick={() => this.goToSettings()} />
+                onClick={() => this.props.toggleSettingsModal()} />
             </li>
           </ul>
         )}
@@ -82,11 +78,6 @@ export class Sidebar extends React.Component {
   }
 };
 
-Sidebar.contextTypes = {
-  location: React.PropTypes.object,
-  router: React.PropTypes.object.isRequired
-};
-
 function mapStateToProps(state) {
   return {
     hasStarred: state.settings.get('hasStarred'),
@@ -95,4 +86,4 @@ function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps, { fetchNotifications, logout })(Sidebar);
+export default connect(mapStateToProps, { fetchNotifications, logout, toggleSettingsModal })(Sidebar);

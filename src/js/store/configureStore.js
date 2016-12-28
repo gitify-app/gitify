@@ -15,7 +15,7 @@ export default function configureStore(initialState) {
   const engine = filter(
     createEngine(constants.STORAGE_KEY),
     ['settings', ['auth', 'token']],
-    [['settings', 'hasStarred']]
+    [['settings', 'hasStarred'], ['settings', 'showSettingsModal']]
   );
 
   const storageMiddleware = storage.createMiddleware(engine, [], [UPDATE_SETTING, LOGIN.SUCCESS, LOGOUT]);
