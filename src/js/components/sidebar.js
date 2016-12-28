@@ -9,13 +9,16 @@ import Constants from '../utils/constants';
 
 export class Sidebar extends React.Component {
   componentDidMount() {
-    var self = this;
-    var iFrequency = 60000;
-    var myInterval = 0;
-    if (myInterval > 0) { clearInterval(myInterval); }
-    setInterval( function () {
+    const self = this;
+    const iFrequency = 60000;
+
+    this.requestInterval = setInterval(() => {
       self.refreshNotifications();
-    }, iFrequency );
+    }, iFrequency);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.requestInterval);
   }
 
   refreshNotifications() {
@@ -29,10 +32,6 @@ export class Sidebar extends React.Component {
     this.context.router.push('/settings');
   }
 
-  goBack() {
-    this.context.router.push('/notifications');
-  }
-
   appQuit() {
     ipcRenderer.send('app-quit');
   }
@@ -43,33 +42,6 @@ export class Sidebar extends React.Component {
 
   render() {
     const isLoggedIn = this.props.token !== null;
-    var refreshIcon, settingsIcon, countLabel;
-
-    if (isLoggedIn) {
-      refreshIcon = (
-        <li className="nav-item">
-          <i title="Refresh" className={'nav-link fa fa-refresh'} onClick={() => this.refreshNotifications()} />
-        </li>
-      );
-      settingsIcon = (
-        <li className="nav-item">
-          <i title="Settings" className="nav-link fa fa-cog" onClick={() => this.goToSettings()} />
-        </li>
-      );
-      if (!this.props.notifications.isEmpty()) {
-        countLabel = (
-          <span className="tag tag-success">{this.props.notifications.size}</span>
-        );
-      }
-    }
-
-    if (this.props.location.pathname === '/settings') {
-      settingsIcon = (
-        <li className="nav-item">
-          <i title="Settings" className="nav-link fa fa-cog" onClick={() => this.goBack()} />
-        </li>
-      );
-    }
 
     return (
       <div className="sidebar-wrapper bg-inverse">
@@ -77,20 +49,37 @@ export class Sidebar extends React.Component {
           className="img-fluid logo"
           src="images/gitify-logo-outline-light.png"
           onClick={this.openBrowser} />
-        {countLabel}
 
-        <ul className="nav navbar-nav pull-xs-right">
-          {refreshIcon}
-          {settingsIcon}
-        </ul>
+        {isLoggedIn && (
+          <ul className="nav nav-inline">
+            {!this.props.notifications.isEmpty() && (
+              <li className="nav-item">
+                <span className="tag tag-success">{this.props.notifications.size}</span>
+              </li>
+            )}
+
+            <li className="nav-item text-white">
+              <i
+                title="Refresh"
+                className="nav-link fa fa-refresh"
+                onClick={() => this.refreshNotifications()} />
+            </li>
+
+            <li className="nav-item text-white">
+              <i
+                title="Settings"
+                className="nav-link fa fa-cog"
+                onClick={() => this.goToSettings()} />
+            </li>
+          </ul>
+        )}
 
         <div className="footer">
-
-          {!this.props.hasStarred ? (
+          {!this.props.hasStarred && (
             <button className="btn btn-sm btn-outline-secondary btn-star" onClick={this.openBrowser}>
               <i className="fa fa-github" /> Star
             </button>
-          ) : null}
+          )}
         </div>
       </div>
     );
