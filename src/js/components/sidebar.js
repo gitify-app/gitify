@@ -50,14 +50,10 @@ export class Sidebar extends React.Component {
           src="images/gitify-logo-outline-light.png"
           onClick={this.openBrowser} />
 
+        <div className="tag tag-count text-success text-uppercase">{this.props.notifications.size} Unread</div>
+
         {isLoggedIn && (
           <ul className="nav nav-inline">
-            {!this.props.notifications.isEmpty() && (
-              <li className="nav-item">
-                <span className="tag tag-success">{this.props.notifications.size}</span>
-              </li>
-            )}
-
             <li className="nav-item text-white">
               <i
                 title="Refresh"

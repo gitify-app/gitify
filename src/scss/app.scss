@@ -221,6 +221,16 @@ input {
     max-width: ($sidebar-width / 2) + 20;
   }
 
+  .tag-count {
+    display: block;
+    margin: 0 0 1em;
+    text-align: center;
+  }
+
+  .nav {
+    text-align: center;
+  }
+
   .footer {
     position: absolute;
     bottom: 1rem;
