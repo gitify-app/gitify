@@ -72,7 +72,7 @@ export class Sidebar extends React.Component {
 
         <div className="footer">
           {!this.props.hasStarred && (
-            <button className="btn btn-sm btn-outline-secondary btn-star" onClick={this.openBrowser}>
+            <button className="btn btn-block btn-sm btn-outline-secondary btn-star" onClick={this.openBrowser}>
               <i className="fa fa-github" /> Star
             </button>
           )}

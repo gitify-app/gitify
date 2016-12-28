@@ -217,6 +217,7 @@ input {
   overflow-y: auto;
 
   .logo {
+    display: block;
     margin: .75rem auto;
     max-width: ($sidebar-width / 2) + 20;
   }
@@ -233,7 +234,9 @@ input {
 
   .footer {
     position: absolute;
+    right: .75rem;
     bottom: 1rem;
+    left: .75rem;
 
     .btn-star {
 
@@ -455,13 +458,19 @@ input {
   }
 
   .subject {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 15px;
-
     &:hover {
       cursor: pointer;
+    }
+
+    h6 {
+      margin-bottom: .25em;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .details {
+      font-size: $font-size-xs;
     }
   }
 
