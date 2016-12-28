@@ -1,6 +1,7 @@
 /* @group Imports */
 
-@import "../../node_modules/react-toggle/style.css";
+// @import "../../node_modules/react-toggle/style.css";
+@import "../../node_modules/icheck/skins/all.css";
 
 /* @end Imports */
 
@@ -271,24 +272,29 @@ input {
 /* @group Settings */
 
 .settings {
+  padding: 2.25rem 1.5rem;
+  color: $white;
+
   .modal-title {
     margin-bottom: 1.35rem;
 
     .btn-close {
       margin-top: 5px;
-      color: $headings-color;
+      // color: $headings-color;
       font-size: $font-size-h3;
     }
   }
 
-  .setting {
-    margin: 10px 5px;
-    font-size: .95rem;
-    font-weight: 300;
+  .icheckbox_polaris+span, .iradio_polaris+span {
+    padding-left: 18px;
+  }
 
-    .col-xs-4 {
-      text-align: right;
-    }
+  .setting {
+    margin: .25rem 0;
+  }
+
+  .btn-logout {
+    margin-top: 1rem;
   }
 }
 
