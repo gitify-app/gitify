@@ -129,6 +129,28 @@ input {
 /* @end Misc */
 
 
+/* @group React Modal */
+
+.ReactModalPortal > div {
+  opacity: 0;
+}
+
+.ReactModalPortal .ReactModal__Overlay {
+  transition: opacity 200ms ease-in-out;
+  // background: rgba(0, 0, 0, 0.15);
+
+  &--after-open {
+    opacity: 1;
+  }
+
+  &--before-close {
+    opacity: 0;
+  }
+}
+
+/* @end React Modal */
+
+
 /* @group Animations */
 
 .notification-leave {
@@ -255,26 +277,7 @@ input {
     .btn-close {
       margin-top: 5px;
       color: $headings-color;
-    }
-  }
-
-  .nav {
-    display: flex;
-    justify-content: center;
-    margin: -5px -20px 20px;
-
-    background-color: $gray-light;
-    padding: 5px 0;
-
-    .nav-link {
-      color: $gray-dark;
-      font-size: 90%;
-
-      &:active,
-      &:hover {
-        cursor: pointer;
-        color: $white;
-      }
+      font-size: $font-size-h3;
     }
   }
 
@@ -285,16 +288,6 @@ input {
 
     .col-xs-4 {
       text-align: right;
-    }
-  }
-
-  .footer {
-    margin: 10px 5px;
-    padding-top: 5px;
-    font-size: 12px;
-
-    .heart {
-      color: $brand-danger;
     }
   }
 }

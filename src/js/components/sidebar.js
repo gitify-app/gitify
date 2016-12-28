@@ -22,8 +22,7 @@ export class Sidebar extends React.Component {
   }
 
   refreshNotifications() {
-    const isLoggedIn = this.props.token !== null;
-    if (isLoggedIn) {
+    if (this.props.isLoggedIn) {
       this.props.fetchNotifications();
     }
   }
@@ -37,7 +36,7 @@ export class Sidebar extends React.Component {
   }
 
   render() {
-    const isLoggedIn = this.props.token !== null;
+    const { hasStarred, isLoggedIn, notifications } = this.props;
 
     return (
       <div className="sidebar-wrapper bg-inverse">
@@ -46,7 +45,9 @@ export class Sidebar extends React.Component {
           src="images/gitify-logo-outline-light.png"
           onClick={this.openBrowser} />
 
-        <div className="tag tag-count text-success text-uppercase">{this.props.notifications.size} Unread</div>
+        <div className="tag tag-count text-success text-uppercase">
+          {notifications.isEmpty() ? 'All Read' : `${notifications.size} Unread`}
+        </div>
 
         {isLoggedIn && (
           <ul className="nav nav-inline">
@@ -67,7 +68,7 @@ export class Sidebar extends React.Component {
         )}
 
         <div className="footer">
-          {!this.props.hasStarred && (
+          {!hasStarred && (
             <button className="btn btn-block btn-sm btn-outline-secondary btn-star" onClick={this.openBrowser}>
               <i className="fa fa-github" /> Star
             </button>
@@ -82,7 +83,7 @@ function mapStateToProps(state) {
   return {
     hasStarred: state.settings.get('hasStarred'),
     notifications: state.notifications.get('response'),
-    token: state.auth.get('token')
+    isLoggedIn: state.auth.get('token') !== null
   };
 };
 

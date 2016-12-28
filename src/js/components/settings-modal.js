@@ -22,7 +22,6 @@ const modalStyles = {
     background                 : '#fff',
     overflow                   : 'auto',
     WebkitOverflowScrolling    : 'touch',
-    borderRadius               : '4px',
     outline                    : 'none',
     padding                    : '20px'
   }
@@ -35,18 +34,24 @@ export class SettingsModal extends React.Component {
     }
   }
 
+  onEscape({ keyCode }) {
+    if (keyCode === 27) {
+      this.props.toggleSettingsModal();
+    }
+  }
+
+  componentDidMount() {
+    document.addEventListener('keydown', (event) => this.onEscape(event));
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', (event) => this.onEscape(event));
+  }
+
   logout() {
     this.props.logout();
     this.context.router.replace('/login');
     ipcRenderer.send('update-icon', 'IconPlain');
-  }
-
-  checkForUpdates() {
-    ipcRenderer.send('check-update');
-  }
-
-  appQuit() {
-    ipcRenderer.send('app-quit');
   }
 
   render() {
@@ -61,28 +66,10 @@ export class SettingsModal extends React.Component {
         contentLabel="Settings Modal">
         <h3 className="modal-title">
           Settings
-          <i
-            className="fa fa-times btn-close pull-right"
+          <span
+            className="octicon octicon-x btn-close pull-right"
             onClick={() => this.props.toggleSettingsModal()} />
         </h3>
-
-        <ul className="nav nav-pills">
-          <li className="nav-item">
-            <a className="nav-link" onClick={this.checkForUpdates}>
-              <i className="fa fa-cloud-download" /> Update
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" onClick={this.logout.bind(this)}>
-              <i className="fa fa-sign-out" /> Logout
-            </a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" onClick={this.appQuit}>
-              <i className="fa fa-power-off" /> Quit Gitify
-            </a>
-          </li>
-        </ul>
 
         <div className="row setting">
           <div className="col-xs-8">Show only participating</div>
@@ -129,10 +116,10 @@ export class SettingsModal extends React.Component {
           </div>
         </div>
 
-        <div className="row footer">
-          <div className="col-xs-6 text-left">Made with <span className="heart">❤</span> in Brighton.</div>
-          <div className="col-xs-6 text-right">Gitify - Version: {appVersion}</div>
-        </div>
+
+        <button className="btn btn-block btn-outline-danger" onClick={() => this.logout()}>
+          <span className="octicon octicon-sign-out" /> Logout
+        </button>
       </Modal>
     );
   }

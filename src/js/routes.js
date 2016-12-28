@@ -4,7 +4,6 @@ import { Route, IndexRoute } from 'react-router';
 import App from './containers/app';
 import LoginPage from './components/login';
 import NotificationsPage from './components/notifications';
-import SettingsPage from './components/settings';
 
 export class NotFound extends React.Component {
   render() {
@@ -27,7 +26,6 @@ export default (store) => {
       <IndexRoute component={NotificationsPage} onEnter={requireAuth(store)} />
       <Route path="/notifications" component={NotificationsPage} />
       <Route path="/login" component={LoginPage} />
-      <Route path="/settings" component={SettingsPage} />
       <Route path="*" component={NotFound} />
     </Route>
   );
