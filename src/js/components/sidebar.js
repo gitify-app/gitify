@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const ipcRenderer = window.require('electron').ipcRenderer;
 const shell = window.require('electron').shell;
 
 import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
@@ -25,10 +24,6 @@ export class Sidebar extends React.Component {
     if (this.props.isLoggedIn) {
       this.props.fetchNotifications();
     }
-  }
-
-  appQuit() {
-    ipcRenderer.send('app-quit');
   }
 
   openBrowser() {

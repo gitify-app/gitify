@@ -20,6 +20,10 @@ export function setBadge(notificationsLength) {
   ipcRenderer.send('set-badge', notificationsLength);
 };
 
+export function reOpenWindow() {
+  ipcRenderer.send('reopen-window');
+};
+
 export function restoreSetting(setting, value) {
   ipcRenderer.send(setting, value);
 };
