@@ -9,6 +9,7 @@ const initialState = Map({
   openAtStartup: false,
   showSettingsModal: false,
   hasStarred: false,
+  showAppIcon: 'tray',
 });
 
 export default function reducer(state = initialState, action) {

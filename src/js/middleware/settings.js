@@ -11,6 +11,8 @@ export default store => next => action => {
         } else {
           ipcRenderer.send('startup-disable');
         }
+      } else if (action.setting === 'showAppIcon') {
+        ipcRenderer.send('show-app-icon', action.value);
       }
   }
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
-import { Checkbox } from 'react-icheck';
+import { Checkbox, RadioGroup, Radio } from 'react-icheck';
 
 const ipcRenderer = window.require('electron').ipcRenderer;
 
@@ -9,7 +9,7 @@ import { fetchNotifications, updateSetting, logout, toggleSettingsModal } from '
 
 const modalStyles = {
   overlay : {
-    zIndex            : 9999
+    zIndex                     : 9999
   },
   content : {
     position                   : 'absolute',
@@ -106,6 +106,25 @@ export class SettingsModal extends React.Component {
             onChange={(evt) => this.props.updateSetting('openAtStartup', evt.target.checked)} />
         </div>
 
+      <RadioGroup
+        name="showAppIcon"
+        value={settings.get('showAppIcon')}
+        onChange={(evt) => this.props.updateSetting('showAppIcon', evt.target.value)}>
+        <Radio
+          value="both"
+          radioClass="iradio_polaris"
+          label="Both Icons" />
+
+        <Radio
+          value="tray"
+          radioClass="iradio_polaris"
+          label="Tray Icon" />
+
+        <Radio
+          value="dock"
+          radioClass="iradio_polaris"
+          label="Dock Icon" />
+      </RadioGroup>
 
       <button className="btn btn-block btn-outline-danger btn-logout" onClick={() => this.logout()}>
         <span className="octicon octicon-sign-out" /> Logout

@@ -12,6 +12,7 @@ const isLinux = (process.platform === 'linux');
 const isWindows = (process.platform === 'win32');
 
 let appWindow;
+let appIcon = null;
 let isQuitting = false;
 
 const autoStart = new AutoLaunch({
@@ -21,25 +22,28 @@ const autoStart = new AutoLaunch({
 });
 
 app.on('ready', function() {
-  let appIcon = new Tray(iconIdle);
+  function createAppIcon() {
+    let trayIcon = new Tray(iconIdle);
 
-  const trayMenu = Menu.buildFromTemplate([
-    {
-      label: 'Show Gitify',
-      click () { appWindow.show(); }
-    },
-    {
-      type: 'separator'
-    },
-    {
-      label: 'Quit',
-      accelerator: isDarwin ? 'Command+Q' : 'Alt+F4',
-      role: 'quit'
-    }
-  ]);
+    const trayMenu = Menu.buildFromTemplate([
+      {
+        label: 'Show Gitify',
+        click () { appWindow.show(); }
+      },
+      {
+        type: 'separator'
+      },
+      {
+        label: 'Quit',
+        accelerator: isDarwin ? 'Command+Q' : 'Alt+F4',
+        role: 'quit'
+      }
+    ]);
 
-  appIcon.setToolTip('GitHub Notifications on your menu bar.');
-  appIcon.setContextMenu(trayMenu);
+    trayIcon.setToolTip('GitHub Notifications on your menu bar.');
+    trayIcon.setContextMenu(trayMenu);
+    return trayIcon;
+  }
 
   function confirmAutoUpdate(updater) {
     dialog.showMessageBox({
@@ -127,6 +131,7 @@ app.on('ready', function() {
     checkAutoUpdate(false);
   }
 
+  appIcon = createAppIcon();
   initWindow();
 
   ipcMain.on('reopen-window', () => appWindow.show() );
@@ -135,14 +140,41 @@ app.on('ready', function() {
   ipcMain.on('check-update', () => checkAutoUpdate(true) );
   ipcMain.on('set-badge', (event, count) => app.setBadgeCount(count));
   ipcMain.on('app-quit', () => app.quit() );
+
   ipcMain.on('update-icon', (event, arg) => {
-    if (arg === 'TrayActive') {
-      appIcon.setImage(iconActive);
-    } else {
-      appIcon.setImage(iconIdle);
+    if (!appIcon.isDestroyed()) {
+      if (arg === 'TrayActive') {
+        appIcon.setImage(iconActive);
+      } else {
+        appIcon.setImage(iconIdle);
+      }
     }
   });
 
+  ipcMain.on('show-app-icon', (event, arg) => {
+    switch (arg) {
+      case 'both':
+        app.dock.show();
+        if (appIcon.isDestroyed()) {
+          appIcon = createAppIcon();
+        }
+        break;
+
+      case 'tray':
+        app.dock.hide();
+        if (appIcon.isDestroyed()) {
+          appIcon = createAppIcon();
+        }
+        break;
+
+      case 'dock':
+        app.dock.show();
+        if (!appIcon.isDestroyed()) {
+          appIcon.destroy();
+        }
+        break;
+    }
+  });
 });
 
 app.on('activate', () => appWindow.show() );
