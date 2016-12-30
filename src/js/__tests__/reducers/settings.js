@@ -10,7 +10,9 @@ describe('reducers/settings.js', () => {
     showNotifications: true,
     markOnClick: false,
     openAtStartup: false,
-    hasStarred: false
+    showSettingsModal: false,
+    hasStarred: false,
+    showAppIcon: 'both'
   });
 
   it('should return the initial state', () => {

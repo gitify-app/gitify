@@ -17,7 +17,7 @@ describe('routes.js', () => {
 
     expect(routes).to.be.ok;
     expect(routes.props.path).to.equal('/');
-    expect(routes.props.children.length).to.equal(5);
+    expect(routes.props.children.length).to.equal(4);
 
   });
 
@@ -28,7 +28,7 @@ describe('routes.js', () => {
 
     expect(routes).to.be.ok;
     expect(routes.props.path).to.equal('/');
-    expect(routes.props.children.length).to.equal(5);
+    expect(routes.props.children.length).to.equal(4);
 
   });
 
