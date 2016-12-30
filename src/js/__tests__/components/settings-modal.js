@@ -107,8 +107,12 @@ describe('components/settings-modal.js', function () {
         playSound: true,
         showNotifications: true,
         markOnClick: false,
-        openAtStartup: false
-      })
+        openAtStartup: false,
+        showSettingsModal: false,
+        hasStarred: false,
+        showAppIcon: 'both',
+      }),
+      toggleSettingsModal: sinon.spy()
     };
 
     const { wrapper, context } = setup(props);
@@ -120,10 +124,12 @@ describe('components/settings-modal.js', function () {
     expect(props.logout).to.have.been.calledOnce;
 
     expect(ipcRenderer.send).to.have.been.calledOnce;
-    expect(ipcRenderer.send).to.have.been.calledWith('update-icon', 'IconPlain');
+    expect(ipcRenderer.send).to.have.been.calledWith('update-icon');
 
     expect(context.router.replace).to.have.been.calledOnce;
     expect(context.router.replace).to.have.been.calledWith('/login');
+
+    expect(props.toggleSettingsModal).to.have.been.calledOnce;
 
     context.router.replace.reset();
 
