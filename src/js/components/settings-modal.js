@@ -3,9 +3,8 @@ import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import { Checkbox, RadioGroup, Radio } from 'react-icheck';
 
-const ipcRenderer = window.require('electron').ipcRenderer;
-
 import { fetchNotifications, updateSetting, logout, toggleSettingsModal } from '../actions';
+import { updateTrayIcon } from '../utils/comms';
 
 export class SettingsModal extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -31,7 +30,8 @@ export class SettingsModal extends React.Component {
   logout() {
     this.props.logout();
     this.context.router.replace('/login');
-    ipcRenderer.send('update-icon', 'IconPlain');
+    updateTrayIcon();
+    this.props.toggleSettingsModal();
   }
 
   render() {

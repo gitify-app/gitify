@@ -45,9 +45,11 @@ export class Sidebar extends React.Component {
           src="images/gitify-logo-outline-light.png"
           onClick={this.openBrowser} />
 
-        <div className="tag tag-count text-success text-uppercase">
-          {notifications.isEmpty() ? 'All Read' : `${notifications.size} Unread`}
-        </div>
+        {isLoggedIn && (
+          <div className="tag tag-count text-success text-uppercase">
+            {notifications.isEmpty() ? 'All Read' : `${notifications.size} Unread`}
+          </div>
+        )}
 
         {isLoggedIn && (
           <ul className="nav nav-inline">

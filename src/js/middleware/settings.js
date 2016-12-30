@@ -1,18 +1,14 @@
-const ipcRenderer = window.require('electron').ipcRenderer;
 import { UPDATE_SETTING } from '../actions';
+import { restoreSetting, setAutoLaunch } from '../utils/comms';
 
 export default store => next => action => {
 
   switch (action.type) {
     case UPDATE_SETTING:
       if (action.setting === 'openAtStartup') {
-        if (action.value) {
-          ipcRenderer.send('startup-enable');
-        } else {
-          ipcRenderer.send('startup-disable');
-        }
+        setAutoLaunch(action.value);
       } else if (action.setting === 'showAppIcon') {
-        ipcRenderer.send('show-app-icon', action.value);
+        restoreSetting('show-app-icon', action.value);
       }
   }
 

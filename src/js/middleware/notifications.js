@@ -1,7 +1,7 @@
 import _ from 'underscore';
 import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION } from '../actions';
 import NativeNotifications from '../utils/notifications';
-import Helpers from '../utils/helpers';
+import { setBadge, updateTrayIcon } from '../utils/comms';
 
 export default store => next => action => {
   const settings = store.getState().settings;
@@ -15,15 +15,15 @@ export default store => next => action => {
         return !_.contains(previousNotifications, obj.id);
       });
 
-      Helpers.updateTrayIcon(action.payload.length);
-      Helpers.setBadge(action.payload.length);
+      updateTrayIcon(action.payload.length);
+      setBadge(action.payload.length);
       NativeNotifications.setup(newNotifications, settings);
       break;
 
     case MARK_NOTIFICATION.SUCCESS:
       var previousNotifications = notificationsState.response.map(obj => obj.id);
-      Helpers.updateTrayIcon(previousNotifications.length - 1);
-      Helpers.setBadge(previousNotifications.length - 1);
+      updateTrayIcon(previousNotifications.length - 1);
+      setBadge(previousNotifications.length - 1);
       break;
 
     case MARK_REPO_NOTIFICATION.SUCCESS:
@@ -32,8 +32,8 @@ export default store => next => action => {
         obj.repository.full_name === action.meta.repoSlug
       ));
 
-      Helpers.updateTrayIcon(newNotifications.length);
-      Helpers.setBadge(newNotifications.length);
+      updateTrayIcon(newNotifications.length);
+      setBadge(newNotifications.length);
       break;
   }
 
