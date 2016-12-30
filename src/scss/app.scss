@@ -132,8 +132,14 @@ input {
 
 /* @group React Modal */
 
+// sass-lint:disable class-name-format force-element-nesting
+
 .ReactModalPortal > div {
   opacity: 0;
+}
+
+.ReactModal__Overlay {
+  z-index: 9999;
 }
 
 .ReactModalPortal .ReactModal__Overlay {
@@ -148,6 +154,8 @@ input {
     opacity: 0;
   }
 }
+
+// sass-lint:enable class-name-format force-element-nesting
 
 /* @end React Modal */
 
@@ -271,8 +279,15 @@ input {
 
 /* @group Settings */
 
-.settings {
+.settings-modal {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  outline: none;
   padding: 2.25rem 1.5rem;
+  overflow: auto;
   color: $white;
 
   .modal-title {
@@ -280,17 +295,21 @@ input {
 
     .btn-close {
       margin-top: 5px;
-      // color: $headings-color;
       font-size: $font-size-h3;
     }
   }
 
-  .icheckbox_polaris+span, .iradio_polaris+span {
-    padding-left: 18px;
-  }
-
   .setting {
     margin: .25rem 0;
+  }
+
+  .setting-checkbox + span,
+  .setting-radio + span {
+    padding-left: 1rem;
+  }
+
+  .setting-radio + span {
+    margin-right: 1rem;
   }
 
   .btn-logout {
@@ -304,10 +323,6 @@ input {
 /* @group Page / Login  */
 
 .login {
-  // position: absolute;
-  // // top: $navbar-height;
-  // top: 50px;
-  // left: 0;
   padding-top: 20px;
   width: 100%;
   height: 100%;
