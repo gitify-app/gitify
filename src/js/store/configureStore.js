@@ -6,6 +6,7 @@ import createEngine from 'redux-storage-engine-localstorage';
 import filter from 'redux-storage-decorator-filter';
 
 import { checkHasStarred, fetchNotifications, UPDATE_SETTING, LOGIN, LOGOUT } from '../actions';
+import { restoreSettings } from '../utils/settings';
 import constants from '../utils/constants';
 import notifications from '../middleware/notifications';
 import settings from '../middleware/settings';
@@ -45,9 +46,12 @@ export default function configureStore(initialState) {
     .then(function (newState) {
       // Check if the user is logged in
       const isLoggedIn = store.getState().auth.get('token') !== null;
+      const userSettings = store.getState().settings;
+
       if (isLoggedIn) {
         store.dispatch(checkHasStarred());
         store.dispatch(fetchNotifications());
+        restoreSettings(userSettings);
       }
     });
 
