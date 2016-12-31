@@ -6,7 +6,6 @@ import * as actions from '../../actions';
 import * as comms from '../../utils/comms';
 import notificationsMiddleware from '../../middleware/notifications';
 import NativeNotifications from '../../utils/notifications';
-import Helpers from '../../utils/helpers';
 
 const newNotification = [
   {
