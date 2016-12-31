@@ -1,6 +1,4 @@
 import { Map, fromJS } from 'immutable';
-import { expect } from 'chai';
-import sinon from 'sinon';
 
 import * as actions from '../../actions';
 import * as comms from '../../utils/comms';
@@ -63,51 +61,41 @@ const dispatchWithStoreOf = (storeData, action) => {
 };
 
 describe('middleware/notifications.js', () => {
-
-  beforeEach(function() {
-
+  beforeEach(() => {
+    spyOn(NativeNotifications, 'setup').and.stub();
+    spyOn(comms, 'updateTrayIcon').and.stub();
+    spyOn(comms, 'setBadge').and.stub();
   });
 
-  it('should raise notifications (native & sound)', () => {
-
-    sinon.spy(NativeNotifications, 'setup');
-
+  it('should raise notifications (native & sound, update tray icon, set badge)', () => {
     const action = {
       type: actions.NOTIFICATIONS.SUCCESS,
       payload: newNotification
     };
 
-    expect(dispatchWithStoreOf({}, action)).to.eql(action);
-    expect(NativeNotifications.setup).to.have.been.calledOnce;
-    expect(NativeNotifications.setup).to.have.been.calledWith(
+    expect(dispatchWithStoreOf({}, action)).toEqual(action);
+
+    expect(NativeNotifications.setup).toHaveBeenCalledTimes(1);
+    expect(NativeNotifications.setup).toHaveBeenCalledWith(
       newNotification, Map({ playSound: false, showNotifications: false })
     );
-
-    NativeNotifications.setup.restore();
-
   });
 
-  it('should mark a notification and call the update tray icon helper', () => {
-
-    sinon.stub(comms, 'updateTrayIcon');
-
+  it('should mark a notification and call the update tray icon helper and set the badge', () => {
     const action = {
       type: actions.MARK_NOTIFICATION.SUCCESS,
     };
 
-    expect(dispatchWithStoreOf({}, action)).to.eql(action);
+    expect(dispatchWithStoreOf({}, action)).toEqual(action);
 
-    expect(comms.updateTrayIcon).to.have.been.calledOnce;
-    expect(comms.updateTrayIcon).to.have.been.calledWith(2);
+    expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
+    expect(comms.updateTrayIcon).toHaveBeenCalledWith(2);
 
-    comms.updateTrayIcon.restore();
-
+    expect(comms.setBadge).toHaveBeenCalledTimes(1);
+    expect(comms.setBadge).toHaveBeenCalledWith(2);
   });
 
   it('should mark a repo\'s notification and call the update tray icon helper', () => {
-
-    sinon.stub(comms, 'updateTrayIcon');
-
     const action = {
       type: actions.MARK_REPO_NOTIFICATION.SUCCESS,
       meta: {
@@ -115,12 +103,8 @@ describe('middleware/notifications.js', () => {
       }
     };
 
-    expect(dispatchWithStoreOf({}, action)).to.eql(action);
-    expect(comms.updateTrayIcon).to.have.been.calledOnce;
-    expect(comms.updateTrayIcon).to.have.been.calledWith(1);
-
-    comms.updateTrayIcon.restore();
-
+    expect(dispatchWithStoreOf({}, action)).toEqual(action);
+    expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
+    expect(comms.updateTrayIcon).toHaveBeenCalledWith(1);
   });
-
 });

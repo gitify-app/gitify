@@ -1,29 +1,10 @@
-import { expect } from 'chai';
 import { Map } from 'immutable';
-import sinon from 'sinon';
 import NotificationsUtils from '../../utils/notifications';
 import Helpers from '../../utils/helpers';
-
-const ipcRenderer = window.require('electron').ipcRenderer;
-const shell = window.require('electron').shell;
-
+import * as comms from '../../utils/comms';
 
 describe('utils/notifications.js', () => {
-
-  beforeEach(function() {
-    ipcRenderer.send.reset();
-    shell.openExternal.reset();
-    sinon.spy(NotificationsUtils, 'raiseNativeNotification');
-    sinon.spy(NotificationsUtils, 'raiseSoundNotification');
-  });
-
-  afterEach(function () {
-    NotificationsUtils.raiseNativeNotification.restore();
-    NotificationsUtils.raiseSoundNotification.restore();
-  });
-
   it('should raise a notification', () => {
-
     const settings = Map({
       playSound: true,
       showNotifications: true
@@ -41,14 +22,16 @@ describe('utils/notifications.js', () => {
       }
     ];
 
-    NotificationsUtils.setup(notifications, settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
-    expect(NotificationsUtils.raiseSoundNotification).to.have.been.calledOnce;
+    spyOn(NotificationsUtils, 'raiseNativeNotification');
+    spyOn(NotificationsUtils, 'raiseSoundNotification');
 
+    NotificationsUtils.setup(notifications, settings);
+
+    expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
+    expect(NotificationsUtils.raiseSoundNotification).toHaveBeenCalledTimes(1);
   });
 
   it('should not raise a notification (because of settings)', () => {
-
     const settings = Map({
       playSound: false,
       showNotifications: false
@@ -75,14 +58,16 @@ describe('utils/notifications.js', () => {
       }
     ];
 
-    NotificationsUtils.setup(notifications, settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.not.have.been.calledOnce;
-    expect(NotificationsUtils.raiseSoundNotification).to.not.have.been.calledOnce;
+    spyOn(NotificationsUtils, 'raiseNativeNotification');
+    spyOn(NotificationsUtils, 'raiseSoundNotification');
 
+    NotificationsUtils.setup(notifications, settings);
+
+    expect(NotificationsUtils.raiseNativeNotification).not.toHaveBeenCalled();
+    expect(NotificationsUtils.raiseSoundNotification).not.toHaveBeenCalled();
   });
 
   it('should not raise a notification (because of 0(zero) notifications)', () => {
-
     const settings = {
       playSound: true,
       showNotifications: true
@@ -90,14 +75,16 @@ describe('utils/notifications.js', () => {
 
     const notifications = [];
 
-    NotificationsUtils.setup(notifications, settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.not.have.been.calledOnce;
-    expect(NotificationsUtils.raiseSoundNotification).to.not.have.been.calledOnce;
+    spyOn(NotificationsUtils, 'raiseNativeNotification');
+    spyOn(NotificationsUtils, 'raiseSoundNotification');
 
+    NotificationsUtils.setup(notifications, settings);
+
+    expect(NotificationsUtils.raiseNativeNotification).not.toHaveBeenCalled();
+    expect(NotificationsUtils.raiseSoundNotification).not.toHaveBeenCalled();
   });
 
   it('should raise a single native notification (with different icons)', () => {
-
     const settings = Map({
       playSound: false,
       showNotifications: true
@@ -113,11 +100,15 @@ describe('utils/notifications.js', () => {
       }
     };
 
-    NotificationsUtils.setup([notification], settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
-    expect(NotificationsUtils.raiseSoundNotification).to.not.have.been.calledOnce;
+    spyOn(NotificationsUtils, 'raiseNativeNotification');
+    spyOn(NotificationsUtils, 'raiseSoundNotification');
 
-    NotificationsUtils.raiseNativeNotification.reset();
+    NotificationsUtils.setup([notification], settings);
+
+    expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
+    expect(NotificationsUtils.raiseSoundNotification).not.toHaveBeenCalled();
+
+    NotificationsUtils.raiseNativeNotification.calls.reset();
 
     // PullRequest
     NotificationsUtils.setup([{
@@ -127,8 +118,8 @@ describe('utils/notifications.js', () => {
         type: 'PullRequest'
       }
     }], settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
-    NotificationsUtils.raiseNativeNotification.reset();
+    expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
+    NotificationsUtils.raiseNativeNotification.calls.reset();
 
     // Commit
     NotificationsUtils.setup([{
@@ -138,8 +129,8 @@ describe('utils/notifications.js', () => {
         type: 'Commit'
       }
     }], settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
-    NotificationsUtils.raiseNativeNotification.reset();
+    expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
+    NotificationsUtils.raiseNativeNotification.calls.reset();
 
     // Commit
     NotificationsUtils.setup([{
@@ -149,8 +140,8 @@ describe('utils/notifications.js', () => {
         type: 'Release'
       }
     }], settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
-    NotificationsUtils.raiseNativeNotification.reset();
+    expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
+    NotificationsUtils.raiseNativeNotification.calls.reset();
 
     // AnotherType
     NotificationsUtils.setup([{
@@ -160,13 +151,11 @@ describe('utils/notifications.js', () => {
         type: 'AnotherType'
       }
     }], settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
-    NotificationsUtils.raiseNativeNotification.reset();
-
+    expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
+    NotificationsUtils.raiseNativeNotification.calls.reset();
   });
 
   it('should click on a native notification (with 1 notification)', () => {
-
     const notification = {
       subject: {
         title: 'Hello. This is a notification',
@@ -178,22 +167,17 @@ describe('utils/notifications.js', () => {
       }
     };
 
-    // Restore functionality so we can test further
-    NotificationsUtils.raiseNativeNotification.restore();
+    spyOn(comms, 'openExternalLink');
 
     const nativeNotification = NotificationsUtils.raiseNativeNotification([notification]);
     nativeNotification.onclick();
 
     const newUrl = Helpers.generateGitHubUrl(notification.subject.url);
-    expect(shell.openExternal).to.have.been.calledOnce;
-    expect(shell.openExternal).to.have.been.calledWith(newUrl);
-
-    // Put the spy back
-    sinon.spy(NotificationsUtils, 'raiseNativeNotification');
+    expect(comms.openExternalLink).toHaveBeenCalledTimes(1);
+    expect(comms.openExternalLink).toHaveBeenCalledWith(newUrl);
   });
 
   it('should click on a native notification (with more than 1 notification)', () => {
-
     const notifications = [
       {
         subject: {
@@ -217,16 +201,11 @@ describe('utils/notifications.js', () => {
       },
     ];
 
-    // Restore functionality so we can test further
-    NotificationsUtils.raiseNativeNotification.restore();
+    spyOn(comms, 'reOpenWindow');
 
     const nativeNotification = NotificationsUtils.raiseNativeNotification(notifications);
     nativeNotification.onclick();
 
-    expect(ipcRenderer.send).to.have.been.calledOnce;
-    expect(ipcRenderer.send).to.have.been.calledWith('reopen-window');
-
-    // Put the spy back
-    sinon.spy(NotificationsUtils, 'raiseNativeNotification');
+    expect(comms.reOpenWindow).toHaveBeenCalledTimes(1);
   });
 });

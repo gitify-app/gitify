@@ -1,4 +1,8 @@
-const ipcRenderer = window.require('electron').ipcRenderer;
+const { ipcRenderer, shell } = require('electron');
+
+export function openExternalLink(url) {
+  shell.openExternal(url);
+};
 
 export function setAutoLaunch(value) {
   if (value) {

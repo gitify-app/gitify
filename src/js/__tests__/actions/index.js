@@ -1,6 +1,6 @@
-import { expect } from 'chai';
-import { Map, List } from 'immutable';
 import nock from 'nock';
+import axios from 'axios';
+import { Map, List } from 'immutable';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
@@ -11,6 +11,10 @@ const middlewares = [ thunk ];
 const createMockStore = configureMockStore(middlewares);
 
 describe('actions/index.js', () => {
+  beforeEach(() => {
+    axios.defaults.adapter = require('axios/lib/adapters/http');
+  });
+
   afterEach(() => {
     nock.cleanAll();
   });
@@ -19,9 +23,7 @@ describe('actions/index.js', () => {
     const code = 'THISISACODE';
 
     nock('https://github.com/')
-      .post('/login/oauth/access_token', {
-
-      })
+      .post('/login/oauth/access_token', {})
       .reply(200, {
         body: { access_token: 'THISISATOKEN' }
       });
@@ -33,11 +35,9 @@ describe('actions/index.js', () => {
 
     const store = createMockStore({ response: [] }, expectedActions);
 
-    return store.dispatch(actions.loginUser(code))
-      .then(() => { // return of async actions
-        expect(store.getActions()).to.eql(expectedActions);
-      });
-
+    return store.dispatch(actions.loginUser(code)).then(() => { // return of async actions
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
   it('should login a user with failure', () => {
@@ -59,21 +59,17 @@ describe('actions/index.js', () => {
 
     const store = createMockStore({ response: [] }, expectedActions);
 
-    return store.dispatch(actions.loginUser(code))
-      .then(() => { // return of async actions
-        expect(store.getActions()).to.eql(expectedActions);
-      });
-
+    return store.dispatch(actions.loginUser(code)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
   it('should logout a user', () => {
-
     const expectedAction = {
       type: actions.LOGOUT
     };
 
-    expect(actions.logout()).to.eql(expectedAction);
-
+    expect(actions.logout()).toEqual(expectedAction);
   });
 
   it('should fetch notifications with success', () => {
@@ -103,11 +99,9 @@ describe('actions/index.js', () => {
       notifications: Map({response: List()})
     }, expectedActions);
 
-    return store.dispatch(actions.fetchNotifications())
-      .then(() => { // return of async actions
-        expect(store.getActions()).to.eql(expectedActions);
-      });
-
+    return store.dispatch(actions.fetchNotifications()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
   it('should fetch notifications with failure', () => {
@@ -130,11 +124,9 @@ describe('actions/index.js', () => {
       notifications: Map({response: List()})
     }, expectedActions);
 
-    return store.dispatch(actions.fetchNotifications())
-      .then(() => { // return of async actions
-        expect(store.getActions()).to.eql(expectedActions);
-      });
-
+    return store.dispatch(actions.fetchNotifications()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
   it('should mark a notification as read with success', () => {
@@ -157,11 +149,9 @@ describe('actions/index.js', () => {
       notifications: Map({response: List()})
     }, expectedActions);
 
-    return store.dispatch(actions.markNotification(id))
-      .then(() => { // return of async actions
-        expect(store.getActions()).to.eql(expectedActions);
-      });
-
+    return store.dispatch(actions.markNotification(id)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
   it('should mark a notification as read with failure', () => {
@@ -184,16 +174,13 @@ describe('actions/index.js', () => {
       notifications: Map({response: List()})
     }, expectedActions);
 
-    return store.dispatch(actions.markNotification(id))
-      .then(() => { // return of async actions
-        expect(store.getActions()).to.eql(expectedActions);
-      });
-
+    return store.dispatch(actions.markNotification(id)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
   it('should mark a repository\'s notifications as read with success', () => {
-
-    const repoSlug = 'ekonstantinidis/gitify';
+    const repoSlug = 'manosim/gitify';
     const message = 'Success.';
 
     nock('https://api.github.com/')
@@ -212,16 +199,13 @@ describe('actions/index.js', () => {
       notifications: Map({response: List()})
     }, expectedActions);
 
-    return store.dispatch(actions.markRepoNotifications(repoSlug))
-      .then(() => { // return of async actions
-        expect(store.getActions()).to.eql(expectedActions);
-      });
-
+    return store.dispatch(actions.markRepoNotifications(repoSlug)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
   it('should mark a repository\'s notifications as read with failure', () => {
-
-    const repoSlug = 'ekonstantinidis/gitify';
+    const repoSlug = 'manosim/gitify';
     const message = 'Oops! Something went wrong.';
 
     nock('https://api.github.com/')
@@ -240,11 +224,9 @@ describe('actions/index.js', () => {
       notifications: Map({response: List()})
     }, expectedActions);
 
-    return store.dispatch(actions.markRepoNotifications(repoSlug))
-      .then(() => { // return of async actions
-        expect(store.getActions()).to.eql(expectedActions);
-      });
-
+    return store.dispatch(actions.markRepoNotifications(repoSlug)).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
   it('should check if the user has starred the repository (has)', () => {
@@ -262,11 +244,9 @@ describe('actions/index.js', () => {
       notifications: Map({response: List()})
     }, expectedActions);
 
-    return store.dispatch(actions.checkHasStarred())
-      .then(() => { // return of async actions
-        expect(store.getActions()).to.eql(expectedActions);
-      });
-
+    return store.dispatch(actions.checkHasStarred()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
   it('should check if the user has starred the repository (has not)', () => {
@@ -284,15 +264,12 @@ describe('actions/index.js', () => {
       notifications: Map({response: List()})
     }, expectedActions);
 
-    return store.dispatch(actions.checkHasStarred())
-      .then(() => { // return of async actions
-        expect(store.getActions()).to.eql(expectedActions);
-      });
-
+    return store.dispatch(actions.checkHasStarred()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
   });
 
   it('should search the notifications with a query', () => {
-
     const query = 'hello';
 
     const expectedAction = {
@@ -300,22 +277,18 @@ describe('actions/index.js', () => {
       query
     };
 
-    expect(actions.searchNotifications(query)).to.eql(expectedAction);
-
+    expect(actions.searchNotifications(query)).toEqual(expectedAction);
   });
 
   it('should clear the search query', () => {
-
     const expectedAction = {
       type: actions.CLEAR_SEARCH
     };
 
-    expect(actions.clearSearch()).to.eql(expectedAction);
-
+    expect(actions.clearSearch()).toEqual(expectedAction);
   });
 
   it('should update a setting for a user', () => {
-
     const setting = 'participating';
     const value = true;
 
@@ -325,7 +298,6 @@ describe('actions/index.js', () => {
       value
     };
 
-    expect(actions.updateSetting(setting, value)).to.eql(expectedAction);
-
+    expect(actions.updateSetting(setting, value)).toEqual(expectedAction);
   });
 });
