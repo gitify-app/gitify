@@ -1,6 +1,6 @@
-const ipcRenderer = window.require('electron').ipcRenderer;
 const shell = window.require('electron').shell;
 
+import { reOpenWindow } from '../utils/comms';
 import Helpers from '../utils/helpers';
 
 export default {
@@ -53,7 +53,7 @@ export default {
         var url = Helpers.generateGitHubUrl(notifications[0].subject.url);
         shell.openExternal(url);
       } else {
-        ipcRenderer.send('reopen-window');
+        reOpenWindow();
       }
     };
 

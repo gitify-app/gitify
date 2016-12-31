@@ -2,6 +2,7 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { fromJS } from 'immutable';
 import { expect } from 'chai';
 import { mount } from 'enzyme';
+import { List } from 'immutable';
 import sinon from 'sinon';
 
 const ipcRenderer = window.require('electron').ipcRenderer;
@@ -47,7 +48,7 @@ describe('components/Sidebar.js', () => {
     const props = {
       isFetching: false,
       notifications: notifications,
-      token: 'IMLOGGEDIN',
+      isLoggedIn: true,
     };
 
     sinon.spy(Sidebar.prototype, 'componentDidMount');
@@ -57,7 +58,6 @@ describe('components/Sidebar.js', () => {
     expect(wrapper).to.exist;
     expect(Sidebar.prototype.componentDidMount).to.have.been.calledOnce;
     expect(wrapper.find('.fa-refresh').length).to.equal(1);
-    expect(wrapper.find('.fa-refresh').first().hasClass('fa-spin')).to.be.false;
     expect(wrapper.find('.fa-cog').length).to.equal(1);
     expect(wrapper.find('.tag-count').text()).to.equal(`${notifications.size} Unread`);
 
@@ -71,7 +71,7 @@ describe('components/Sidebar.js', () => {
       isFetching: false,
       notifications: notifications,
       fetchNotifications: sinon.spy(),
-      token: 'IMLOGGEDIN',
+      isLoggedIn: 'true',
     };
 
     const { wrapper } = setup(props);
@@ -87,8 +87,8 @@ describe('components/Sidebar.js', () => {
 
     const props = {
       isFetching: false,
-      notifications: [],
-      token: null,
+      notifications: List(),
+      isLoggedIn: false,
     };
 
     sinon.spy(Sidebar.prototype, 'componentDidMount');
@@ -110,7 +110,7 @@ describe('components/Sidebar.js', () => {
     const props = {
       isFetching: false,
       notifications: notifications,
-      token: 'IMLOGGEDIN',
+      isLoggedIn: true,
     };
 
     sinon.spy(Sidebar.prototype, 'componentDidMount');
@@ -120,7 +120,6 @@ describe('components/Sidebar.js', () => {
     expect(wrapper).to.exist;
     expect(Sidebar.prototype.componentDidMount).to.have.been.calledOnce;
     expect(wrapper.find('.fa-refresh').length).to.equal(1);
-    expect(wrapper.find('.fa-refresh').first().hasClass('fa-spin')).to.be.false;
     expect(wrapper.find('.fa-cog').length).to.equal(1);
     expect(wrapper.find('.tag-count').text()).to.equal(`${notifications.size} Unread`);
 
@@ -132,8 +131,8 @@ describe('components/Sidebar.js', () => {
 
     const props = {
       isFetching: false,
-      notifications: [],
-      token: null,
+      notifications: List(),
+      isLoggedIn: false
     };
 
     const { wrapper } = setup(props);
@@ -147,30 +146,27 @@ describe('components/Sidebar.js', () => {
 
   });
 
-  it('should go to settings from home', () => {
+  it('should toggle the settings modal', () => {
 
     const props = {
-      toggleSearch: sinon.spy(),
       isFetching: false,
       notifications: notifications,
-      token: 'IMLOGGEDIN',
-      showSearch: true,
+      isLoggedIn: 'true',
+      toggleSettingsModal: sinon.spy(),
     };
 
-    const { wrapper, context } = setup(props);
+    const { wrapper } = setup(props);
 
     expect(wrapper).to.exist;
     expect(wrapper.find('.fa-cog').length).to.equal(1);
 
     wrapper.find('.fa-cog').simulate('click');
 
-    expect(context.router.push).to.have.been.calledOnce;
-    expect(context.router.push).to.have.been.calledWith('/settings');
+    expect(props.toggleSettingsModal).to.have.been.calledOnce;
 
-    context.router.push.reset();
+    props.toggleSettingsModal.reset();
 
   });
-
 
   it('should refresh the notifications', () => {
 
@@ -178,7 +174,7 @@ describe('components/Sidebar.js', () => {
       fetchNotifications: sinon.spy(),
       isFetching: false,
       notifications: notifications,
-      token: 'IMLOGGEDIN',
+      isLoggedIn: 'true',
     };
 
     const { wrapper } = setup(props);
@@ -190,7 +186,6 @@ describe('components/Sidebar.js', () => {
     expect(props.fetchNotifications).to.have.been.calledOnce;
 
   });
-
 
   it('open the gitify repo in browser', () => {
 
@@ -208,5 +203,4 @@ describe('components/Sidebar.js', () => {
     shell.openExternal.reset();
 
   });
-
 });

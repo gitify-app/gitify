@@ -1,10 +1,11 @@
 import { Map, fromJS } from 'immutable';
 import { expect } from 'chai';
 import sinon from 'sinon';
+
 import * as actions from '../../actions';
+import * as comms from '../../utils/comms';
 import notificationsMiddleware from '../../middleware/notifications';
 import NativeNotifications from '../../utils/notifications';
-import Helpers from '../../utils/helpers';
 
 const newNotification = [
   {
@@ -39,7 +40,6 @@ const notificationsList = fromJS([
     }
   }
 ]);
-
 
 const createFakeStore = fakeData => ({
   getState() {
@@ -89,23 +89,24 @@ describe('middleware/notifications.js', () => {
 
   it('should mark a notification and call the update tray icon helper', () => {
 
-    sinon.spy(Helpers, 'updateTrayIcon');
+    sinon.stub(comms, 'updateTrayIcon');
 
     const action = {
       type: actions.MARK_NOTIFICATION.SUCCESS,
     };
 
     expect(dispatchWithStoreOf({}, action)).to.eql(action);
-    expect(Helpers.updateTrayIcon).to.have.been.calledOnce;
-    expect(Helpers.updateTrayIcon).to.have.been.calledWith(2);
 
-    Helpers.updateTrayIcon.restore();
+    expect(comms.updateTrayIcon).to.have.been.calledOnce;
+    expect(comms.updateTrayIcon).to.have.been.calledWith(2);
+
+    comms.updateTrayIcon.restore();
 
   });
 
   it('should mark a repo\'s notification and call the update tray icon helper', () => {
 
-    sinon.spy(Helpers, 'updateTrayIcon');
+    sinon.stub(comms, 'updateTrayIcon');
 
     const action = {
       type: actions.MARK_REPO_NOTIFICATION.SUCCESS,
@@ -115,10 +116,10 @@ describe('middleware/notifications.js', () => {
     };
 
     expect(dispatchWithStoreOf({}, action)).to.eql(action);
-    expect(Helpers.updateTrayIcon).to.have.been.calledOnce;
-    expect(Helpers.updateTrayIcon).to.have.been.calledWith(1);
+    expect(comms.updateTrayIcon).to.have.been.calledOnce;
+    expect(comms.updateTrayIcon).to.have.been.calledWith(1);
 
-    Helpers.updateTrayIcon.restore();
+    comms.updateTrayIcon.restore();
 
   });
 

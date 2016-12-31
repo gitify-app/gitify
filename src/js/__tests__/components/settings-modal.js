@@ -3,8 +3,9 @@ import { Map } from 'immutable';
 import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import Toggle from 'react-toggle';
-import { SettingsPage } from '../../components/settings';
+import { Checkbox, RadioGroup, Radio } from 'react-icheck';
+
+import { SettingsModal } from '../../components/settings-modal';
 const ipcRenderer = window.require('electron').ipcRenderer;
 
 const options = {
@@ -20,7 +21,7 @@ const options = {
 };
 
 function setup(props) {
-  const wrapper = shallow(<SettingsPage {...props} />, options);
+  const wrapper = shallow(<SettingsModal {...props} />, options);
 
   return {
     context: options.context,
@@ -29,7 +30,7 @@ function setup(props) {
   };
 };
 
-describe('components/settings.js', function () {
+describe('components/settings-modal.js', function () {
 
   beforeEach(function() {
     ipcRenderer.send.reset();
@@ -38,6 +39,7 @@ describe('components/settings.js', function () {
   it('should render itself & its children', function () {
 
     const props = {
+      isOpen: true,
       updateSetting: sinon.spy(),
       fetchNotifications: sinon.spy(),
       logout: sinon.spy(),
@@ -51,17 +53,18 @@ describe('components/settings.js', function () {
     };
 
     const { wrapper } = setup(props);
-
     expect(wrapper).to.exist;
-    expect(wrapper.find(Toggle).length).to.equal(5);
-    expect(wrapper.find('.fa-sign-out').length).to.equal(1);
-    expect(wrapper.find('.footer').find('.text-right').text()).to.contain('Gitify - Version');
+    expect(wrapper.find(Checkbox).length).to.equal(5);
+    expect(wrapper.find(RadioGroup).length).to.equal(1);
+    expect(wrapper.find(Radio).length).to.equal(3);
+    expect(wrapper.find('.octicon-sign-out').length).to.equal(1);
 
   });
 
   it('should update a setting', function () {
 
     const props = {
+      isOpen: true,
       updateSetting: sinon.spy(),
       fetchNotifications: sinon.spy(),
       logout: sinon.spy(),
@@ -77,8 +80,8 @@ describe('components/settings.js', function () {
     const { wrapper } = setup(props);
     expect(wrapper).to.exist;
 
-    // Note: First Toggle is "participating"
-    wrapper.find(Toggle).first().props().onChange({target: {checked: true}});
+    // Note: First Check is "participating"
+    wrapper.find(Checkbox).first().props().onChange({target: {checked: true}});
     expect(props.updateSetting).to.have.been.calledOnce;
 
     wrapper.setProps({
@@ -92,59 +95,10 @@ describe('components/settings.js', function () {
 
   });
 
-  it('should check for updates ', function () {
-
-    const props = {
-      updateSetting: sinon.spy(),
-      fetchNotifications: sinon.spy(),
-      logout: sinon.spy(),
-      settings: Map({
-        participating: false,
-        playSound: true,
-        showNotifications: true,
-        markOnClick: false,
-        openAtStartup: false
-      })
-    };
-
-    const { wrapper } = setup(props);
-
-    expect(wrapper).to.exist;
-
-    wrapper.find('.fa-cloud-download').parent().simulate('click');
-    expect(ipcRenderer.send).to.have.been.calledOnce;
-    expect(ipcRenderer.send).to.have.been.calledWith('check-update');
-
-  });
-
-  it('should quit the app', function () {
-
-    const props = {
-      updateSetting: sinon.spy(),
-      fetchNotifications: sinon.spy(),
-      logout: sinon.spy(),
-      settings: Map({
-        participating: false,
-        playSound: true,
-        showNotifications: true,
-        markOnClick: false,
-        openAtStartup: false
-      })
-    };
-
-    const { wrapper } = setup(props);
-
-    expect(wrapper).to.exist;
-
-    wrapper.find('.fa-power-off').parent().simulate('click');
-    expect(ipcRenderer.send).to.have.been.calledOnce;
-    expect(ipcRenderer.send).to.have.been.calledWith('app-quit');
-
-  });
-
   it('should press the logout', function () {
 
     const props = {
+      isOpen: true,
       updateSetting: sinon.spy(),
       fetchNotifications: sinon.spy(),
       logout: sinon.spy(),
@@ -153,23 +107,29 @@ describe('components/settings.js', function () {
         playSound: true,
         showNotifications: true,
         markOnClick: false,
-        openAtStartup: false
-      })
+        openAtStartup: false,
+        showSettingsModal: false,
+        hasStarred: false,
+        showAppIcon: 'both',
+      }),
+      toggleSettingsModal: sinon.spy()
     };
 
     const { wrapper, context } = setup(props);
 
     expect(wrapper).to.exist;
 
-    wrapper.find('.fa-sign-out').parent().simulate('click');
+    wrapper.find('.octicon-sign-out').parent().simulate('click');
 
     expect(props.logout).to.have.been.calledOnce;
 
     expect(ipcRenderer.send).to.have.been.calledOnce;
-    expect(ipcRenderer.send).to.have.been.calledWith('update-icon', 'IconPlain');
+    expect(ipcRenderer.send).to.have.been.calledWith('update-icon');
 
     expect(context.router.replace).to.have.been.calledOnce;
     expect(context.router.replace).to.have.been.calledWith('/login');
+
+    expect(props.toggleSettingsModal).to.have.been.calledOnce;
 
     context.router.replace.reset();
 

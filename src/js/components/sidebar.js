@@ -1,10 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-const ipcRenderer = window.require('electron').ipcRenderer;
 const shell = window.require('electron').shell;
 
-import { fetchNotifications, logout } from '../actions';
+import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
 import Constants from '../utils/constants';
 
 export class Sidebar extends React.Component {
@@ -22,18 +21,9 @@ export class Sidebar extends React.Component {
   }
 
   refreshNotifications() {
-    const isLoggedIn = this.props.token !== null;
-    if (isLoggedIn) {
+    if (this.props.isLoggedIn) {
       this.props.fetchNotifications();
     }
-  }
-
-  goToSettings() {
-    this.context.router.push('/settings');
-  }
-
-  appQuit() {
-    ipcRenderer.send('app-quit');
   }
 
   openBrowser() {
@@ -41,7 +31,7 @@ export class Sidebar extends React.Component {
   }
 
   render() {
-    const isLoggedIn = this.props.token !== null;
+    const { hasStarred, isLoggedIn, notifications } = this.props;
 
     return (
       <div className="sidebar-wrapper bg-inverse">
@@ -50,7 +40,11 @@ export class Sidebar extends React.Component {
           src="images/gitify-logo-outline-light.png"
           onClick={this.openBrowser} />
 
-        <div className="tag tag-count text-success text-uppercase">{this.props.notifications.size} Unread</div>
+        {isLoggedIn && (
+          <div className="tag tag-count text-success text-uppercase">
+            {notifications.isEmpty() ? 'All Read' : `${notifications.size} Unread`}
+          </div>
+        )}
 
         {isLoggedIn && (
           <ul className="nav nav-inline">
@@ -65,13 +59,13 @@ export class Sidebar extends React.Component {
               <i
                 title="Settings"
                 className="nav-link fa fa-cog"
-                onClick={() => this.goToSettings()} />
+                onClick={() => this.props.toggleSettingsModal()} />
             </li>
           </ul>
         )}
 
         <div className="footer">
-          {!this.props.hasStarred && (
+          {!hasStarred && (
             <button className="btn btn-block btn-sm btn-outline-secondary btn-star" onClick={this.openBrowser}>
               <i className="fa fa-github" /> Star
             </button>
@@ -82,17 +76,12 @@ export class Sidebar extends React.Component {
   }
 };
 
-Sidebar.contextTypes = {
-  location: React.PropTypes.object,
-  router: React.PropTypes.object.isRequired
-};
-
 function mapStateToProps(state) {
   return {
     hasStarred: state.settings.get('hasStarred'),
     notifications: state.notifications.get('response'),
-    token: state.auth.get('token')
+    isLoggedIn: state.auth.get('token') !== null
   };
 };
 
-export default connect(mapStateToProps, { fetchNotifications, logout })(Sidebar);
+export default connect(mapStateToProps, { fetchNotifications, logout, toggleSettingsModal })(Sidebar);

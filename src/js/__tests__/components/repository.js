@@ -4,7 +4,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import { Repository } from '../../components/repository';
-// const ipcRenderer = window.require('electron').ipcRenderer;
+
 const shell = window.require('electron').shell;
 
 function setup(props) {
