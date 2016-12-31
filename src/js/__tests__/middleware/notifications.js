@@ -41,7 +41,6 @@ const notificationsList = fromJS([
   }
 ]);
 
-
 const createFakeStore = fakeData => ({
   getState() {
     return {
@@ -90,7 +89,7 @@ describe('middleware/notifications.js', () => {
 
   it('should mark a notification and call the update tray icon helper', () => {
 
-    sinon.spy(comms, 'updateTrayIcon');
+    sinon.stub(comms, 'updateTrayIcon');
 
     const action = {
       type: actions.MARK_NOTIFICATION.SUCCESS,
@@ -107,7 +106,7 @@ describe('middleware/notifications.js', () => {
 
   it('should mark a repo\'s notification and call the update tray icon helper', () => {
 
-    sinon.spy(comms, 'updateTrayIcon');
+    sinon.stub(comms, 'updateTrayIcon');
 
     const action = {
       type: actions.MARK_REPO_NOTIFICATION.SUCCESS,
