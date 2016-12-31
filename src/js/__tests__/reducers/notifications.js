@@ -1,5 +1,4 @@
 import { Map, List, fromJS } from 'immutable';
-import { expect } from 'chai';
 
 import reducer from '../../reducers/notifications';
 import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION } from '../../actions';
@@ -30,7 +29,7 @@ describe('reducers/notifications.js', () => {
 
   it('should return the initial state', () => {
 
-    expect(reducer(undefined, {})).to.eql(initialState);
+    expect(reducer(undefined, {})).toEqual(initialState);
 
   });
 
@@ -40,7 +39,7 @@ describe('reducers/notifications.js', () => {
       type: NOTIFICATIONS.REQUEST
     };
 
-    expect(reducer(undefined, action)).to.eql(
+    expect(reducer(undefined, action)).toEqual(
       initialState
         .set('isFetching', true)
         .set('failed', false)
@@ -50,7 +49,7 @@ describe('reducers/notifications.js', () => {
 
   it('should handle NOTIFICATIONS.SUCCESS', () => {
 
-    expect(reducer(undefined, {})).to.eql(initialState);
+    expect(reducer(undefined, {})).toEqual(initialState);
 
     const action = {
       type: NOTIFICATIONS.SUCCESS,
@@ -62,7 +61,7 @@ describe('reducers/notifications.js', () => {
         .set('isFetching', true)
         .set('failed', false);
 
-    expect(reducer(currentState, action)).to.eql(
+    expect(reducer(currentState, action)).toEqual(
       initialState
         .set('isFetching', false)
         .set('response', notifications)
@@ -82,14 +81,14 @@ describe('reducers/notifications.js', () => {
         .set('isFetching', true)
         .set('failed', false);
 
-    expect(reducer(currentState, {})).to.eql(currentState);
+    expect(reducer(currentState, {})).toEqual(currentState);
 
     const action = {
       type: NOTIFICATIONS.FAILURE,
       payload: response
     };
 
-    expect(reducer(currentState, action)).to.eql(
+    expect(reducer(currentState, action)).toEqual(
       initialState
         .set('isFetching', false)
         .set('failed', true)
@@ -102,7 +101,7 @@ describe('reducers/notifications.js', () => {
 
     const currentState = initialState.set('response', notifications);
 
-    expect(reducer(currentState, {}).get('response').size).to.equal(2);
+    expect(reducer(currentState, {}).get('response').size).toBe(2);
 
     const action = {
       type: MARK_NOTIFICATION.SUCCESS,
@@ -111,7 +110,7 @@ describe('reducers/notifications.js', () => {
       }
     };
 
-    expect(reducer(currentState, action).get('response').size).to.equal(1);
+    expect(reducer(currentState, action).get('response').size).toBe(1);
 
   });
 
@@ -119,7 +118,7 @@ describe('reducers/notifications.js', () => {
 
     const currentState = initialState.set('response', notifications);
 
-    expect(reducer(currentState, {}).get('response').size).to.equal(2);
+    expect(reducer(currentState, {}).get('response').size).toBe(2);
 
     const action = {
       type: MARK_REPO_NOTIFICATION.SUCCESS,
@@ -128,7 +127,7 @@ describe('reducers/notifications.js', () => {
       }
     };
 
-    expect(reducer(currentState, action).get('response').size).to.equal(0);
+    expect(reducer(currentState, action).get('response').size).toBe(0);
 
   });
 });

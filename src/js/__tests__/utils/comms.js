@@ -1,24 +1,23 @@
-import { expect } from 'chai';
 import { updateTrayIcon } from '../../utils/comms';
-const ipcRenderer = window.require('electron').ipcRenderer;
+const { ipcRenderer } = require('electron');
 
 
 describe('utils/comms.js', () => {
   beforeEach(function() {
-    ipcRenderer.send.reset();
+    ipcRenderer.send.mockReset();
   });
 
   it('should send mark the icons as active', () => {
     const notificationsLength = 3;
     updateTrayIcon(notificationsLength);
-    expect(ipcRenderer.send).to.have.been.calledOnce;
-    expect(ipcRenderer.send).to.have.been.calledWith('update-icon', 'TrayActive');
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon', 'TrayActive');
   });
 
   it('should send mark the icons as idle', () => {
     const notificationsLength = 0;
     updateTrayIcon(notificationsLength);
-    expect(ipcRenderer.send).to.have.been.calledOnce;
-    expect(ipcRenderer.send).to.have.been.calledWith('update-icon');
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
   });
 });

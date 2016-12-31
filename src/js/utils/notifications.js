@@ -3,13 +3,6 @@ import Helpers from '../utils/helpers';
 
 export default {
   setup(notifications, settings) {
-    console.log('-----');
-    console.log('asdsaa');
-    console.log('asdsaa');
-    console.log('asdsaa');
-    console.log('asdsaa');
-    console.log('asdsaa');
-    console.log('-----');
     // If there are no new notifications just stop there
     if (!notifications.length) { return; }
 

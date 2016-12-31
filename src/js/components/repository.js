@@ -1,7 +1,8 @@
+const { shell } = require('electron');
+
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
-const shell = window.require('electron').shell;
 
 import { markRepoNotifications } from '../actions';
 import SingleNotification from './notification';

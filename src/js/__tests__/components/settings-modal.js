@@ -1,12 +1,11 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { Map } from 'immutable';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import { Checkbox, RadioGroup, Radio } from 'react-icheck';
 
+const { ipcRenderer } = require('electron');
+
 import { SettingsModal } from '../../components/settings-modal';
-const ipcRenderer = window.require('electron').ipcRenderer;
 
 const options = {
   context: {
@@ -14,8 +13,8 @@ const options = {
       pathname: ''
     },
     router: {
-      push: sinon.spy(),
-      replace: sinon.spy()
+      push: jest.fn(),
+      replace: jest.fn()
     }
   }
 };
@@ -33,16 +32,16 @@ function setup(props) {
 describe('components/settings-modal.js', function () {
 
   beforeEach(function() {
-    ipcRenderer.send.reset();
+    ipcRenderer.send.mockReset();
   });
 
   it('should render itself & its children', function () {
 
     const props = {
       isOpen: true,
-      updateSetting: sinon.spy(),
-      fetchNotifications: sinon.spy(),
-      logout: sinon.spy(),
+      updateSetting: jest.fn(),
+      fetchNotifications: jest.fn(),
+      logout: jest.fn(),
       settings: Map({
         participating: false,
         playSound: true,
@@ -53,11 +52,11 @@ describe('components/settings-modal.js', function () {
     };
 
     const { wrapper } = setup(props);
-    expect(wrapper).to.exist;
-    expect(wrapper.find(Checkbox).length).to.equal(5);
-    expect(wrapper.find(RadioGroup).length).to.equal(1);
-    expect(wrapper.find(Radio).length).to.equal(3);
-    expect(wrapper.find('.octicon-sign-out').length).to.equal(1);
+    expect(wrapper).toBeDefined();
+    expect(wrapper.find(Checkbox).length).toBe(5);
+    expect(wrapper.find(RadioGroup).length).toBe(1);
+    expect(wrapper.find(Radio).length).toBe(3);
+    expect(wrapper.find('.octicon-sign-out').length).toBe(1);
 
   });
 
@@ -65,9 +64,9 @@ describe('components/settings-modal.js', function () {
 
     const props = {
       isOpen: true,
-      updateSetting: sinon.spy(),
-      fetchNotifications: sinon.spy(),
-      logout: sinon.spy(),
+      updateSetting: jest.fn(),
+      fetchNotifications: jest.fn(),
+      logout: jest.fn(),
       settings: Map({
         participating: false,
         playSound: true,
@@ -78,11 +77,11 @@ describe('components/settings-modal.js', function () {
     };
 
     const { wrapper } = setup(props);
-    expect(wrapper).to.exist;
+    expect(wrapper).toBeDefined();
 
     // Note: First Check is "participating"
     wrapper.find(Checkbox).first().props().onChange({target: {checked: true}});
-    expect(props.updateSetting).to.have.been.calledOnce;
+    expect(props.updateSetting).toHaveBeenCalledTimes(1);
 
     wrapper.setProps({
       ...props,
@@ -91,7 +90,7 @@ describe('components/settings-modal.js', function () {
         participating: true
       })
     });
-    expect(props.fetchNotifications).to.have.been.calledOnce;
+    expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
 
   });
 
@@ -99,9 +98,9 @@ describe('components/settings-modal.js', function () {
 
     const props = {
       isOpen: true,
-      updateSetting: sinon.spy(),
-      fetchNotifications: sinon.spy(),
-      logout: sinon.spy(),
+      updateSetting: jest.fn(),
+      fetchNotifications: jest.fn(),
+      logout: jest.fn(),
       settings: Map({
         participating: false,
         playSound: true,
@@ -112,27 +111,24 @@ describe('components/settings-modal.js', function () {
         hasStarred: false,
         showAppIcon: 'both',
       }),
-      toggleSettingsModal: sinon.spy()
+      toggleSettingsModal: jest.fn()
     };
 
     const { wrapper, context } = setup(props);
 
-    expect(wrapper).to.exist;
+    expect(wrapper).toBeDefined();
 
     wrapper.find('.octicon-sign-out').parent().simulate('click');
 
-    expect(props.logout).to.have.been.calledOnce;
+    expect(props.logout).toHaveBeenCalledTimes(1);
 
-    expect(ipcRenderer.send).to.have.been.calledOnce;
-    expect(ipcRenderer.send).to.have.been.calledWith('update-icon');
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
 
-    expect(context.router.replace).to.have.been.calledOnce;
-    expect(context.router.replace).to.have.been.calledWith('/login');
+    expect(context.router.replace).toHaveBeenCalledTimes(1);
+    expect(context.router.replace).toHaveBeenCalledWith('/login');
 
-    expect(props.toggleSettingsModal).to.have.been.calledOnce;
-
-    context.router.replace.reset();
-
+    expect(props.toggleSettingsModal).toHaveBeenCalledTimes(1);
   });
 
 });

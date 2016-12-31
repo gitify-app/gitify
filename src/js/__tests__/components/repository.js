@@ -1,11 +1,9 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { fromJS } from 'immutable';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
 import { Repository } from '../../components/repository';
 
-const shell = window.require('electron').shell;
+const { shell } = require('electron');
 
 function setup(props) {
   const wrapper = shallow(<Repository {...props} />);
@@ -33,7 +31,7 @@ describe('components/repository.js', function () {
   }]);
 
   beforeEach(function() {
-    shell.openExternal.reset();
+    shell.openExternal.mockReset();
   });
 
   afterEach(function() {
@@ -49,10 +47,10 @@ describe('components/repository.js', function () {
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
-    expect(wrapper.find('.octicon-check').length).to.equal(1);
-    expect(wrapper.find('.name').text()).to.contain('gitify');
-    expect(wrapper.find('.name').text()).to.contain('manosim');
+    expect(wrapper).toBeDefined();
+    expect(wrapper.find('.octicon-check').length).toBe(1);
+    expect(wrapper.find('.name').text()).toContain('gitify');
+    expect(wrapper.find('.name').text()).toContain('manosim');
 
   });
 
@@ -65,16 +63,16 @@ describe('components/repository.js', function () {
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
-    expect(wrapper.find('.octicon-check').length).to.equal(1);
+    expect(wrapper).toBeDefined();
+    expect(wrapper.find('.octicon-check').length).toBe(1);
 
     wrapper.find('.name span').simulate('click');
 
-    expect(wrapper.find('.name').text()).to.contain('gitify');
-    expect(wrapper.find('.name').text()).to.contain('manosim');
+    expect(wrapper.find('.name').text()).toContain('gitify');
+    expect(wrapper.find('.name').text()).toContain('manosim');
 
-    expect(shell.openExternal).to.have.been.calledOnce;
-    expect(shell.openExternal).to.have.been.calledWith('http://github.com/manosim/gitify/issues/123');
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(shell.openExternal).toHaveBeenCalledWith('http://github.com/manosim/gitify/issues/123');
 
   });
 
@@ -83,16 +81,16 @@ describe('components/repository.js', function () {
     const props = {
       repo: repository,
       repoName: 'manosim/gitify',
-      markRepoNotifications: sinon.spy()
+      markRepoNotifications: jest.fn()
     };
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
-    expect(wrapper.find('.octicon-check').length).to.equal(1);
+    expect(wrapper).toBeDefined();
+    expect(wrapper.find('.octicon-check').length).toBe(1);
 
     wrapper.find('.octicon-check').simulate('click');
-    expect(props.markRepoNotifications).to.have.been.calledWith('manosim/gitify');
+    expect(props.markRepoNotifications).toHaveBeenCalledWith('manosim/gitify');
 
   });
 

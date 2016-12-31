@@ -1,7 +1,7 @@
-import { expect } from 'chai';
+const { ipcRenderer } = require('electron');
+
 import * as actions from '../../actions';
 import settingsMiddleware from '../../middleware/settings';
-const ipcRenderer = window.require('electron').ipcRenderer;
 
 const createFakeStore = fakeData => ({
   getState() {
@@ -24,38 +24,33 @@ const dispatchWithStoreOf = (storeData, action) => {
 };
 
 describe('middleware/settings.js', () => {
-
   beforeEach(function() {
-    ipcRenderer.send.reset();
+    ipcRenderer.send.mockReset();
   });
 
   it('should mark auto-launch setting to true (enable)', () => {
-
     const action = {
       type: actions.UPDATE_SETTING,
       setting: 'openAtStartup',
       value: true
     };
 
-    expect(dispatchWithStoreOf({}, action)).to.eql(action);
+    expect(dispatchWithStoreOf({}, action)).toEqual(action);
 
-    expect(ipcRenderer.send).to.have.been.calledOnce;
-    expect(ipcRenderer.send).to.have.been.calledWith('startup-enable');
-
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('startup-enable');
   });
 
   it('should mark auto-launch setting to false (disable)', () => {
-
     const action = {
       type: actions.UPDATE_SETTING,
       setting: 'openAtStartup',
       value: false
     };
 
-    expect(dispatchWithStoreOf({}, action)).to.eql(action);
+    expect(dispatchWithStoreOf({}, action)).toEqual(action);
 
-    expect(ipcRenderer.send).to.have.been.calledOnce;
-    expect(ipcRenderer.send).to.have.been.calledWith('startup-disable');
-
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('startup-disable');
   });
 });
