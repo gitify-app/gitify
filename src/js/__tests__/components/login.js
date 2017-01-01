@@ -1,19 +1,17 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
+
 import { LoginPage } from '../../components/login';
 
-const BrowserWindow = window.require('electron').remote.BrowserWindow;
-const ipcRenderer = window.require('electron').ipcRenderer;
-const shell = window.require('electron').shell;
+const { shell, ipcRenderer, remote } = require('electron');
+const BrowserWindow = remote.BrowserWindow;
 
 function setup(props) {
   const options = {
     context: {
       router: {
-        push: sinon.spy(),
-        replace: sinon.spy()
+        push: jest.fn(),
+        replace: jest.fn()
       }
     }
   };
@@ -28,15 +26,13 @@ function setup(props) {
 };
 
 describe('components/login.js', function () {
-
   beforeEach(function() {
-    BrowserWindow().loadURL.reset();
-    ipcRenderer.send.reset();
-    shell.openExternal.reset();
+    BrowserWindow().loadURL.mockReset();
+    ipcRenderer.send.mockReset();
+    shell.openExternal.mockReset();
   });
 
   it('should render itself & its children', function () {
-
     const props = {
       isLoggedIn: false,
       token: null,
@@ -47,18 +43,14 @@ describe('components/login.js', function () {
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
-    expect(wrapper.find('.desc').text()).to.contain('in your menu bar.');
-
+    expect(wrapper).toBeDefined();
+    expect(wrapper.find('.desc').text()).toContain('in your menu bar.');
   });
 
   it('should open the login window and get a code successfully (will-navigate)', function () {
-
-    // BrowserWindow.webContents.on.restore();
-    // sinon.spy(BrowserWindow.webContents, 'on');
     const code = '123123123';
 
-    const eventStub = sinon.stub(BrowserWindow().webContents, 'on', function (event, callback) {
+    spyOn(BrowserWindow().webContents, 'on').and.callFake((event, callback) => {
       if (event === 'will-navigate') {
         callback('will-navigate', `http://www.github.com/?code=${code}`);
       }
@@ -68,7 +60,7 @@ describe('components/login.js', function () {
       'authorize?client_id=3fef4433a29c6ad8f22c&scope=user:email,notifications';
 
     const props = {
-      loginUser: sinon.spy(),
+      loginUser: jest.fn(),
       token: null,
       response: {},
       failed: false,
@@ -77,24 +69,20 @@ describe('components/login.js', function () {
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
+    expect(wrapper).toBeDefined();
 
     wrapper.find('.btn').simulate('click');
 
-    expect(BrowserWindow().loadURL).to.have.been.calledOnce;
-    expect(BrowserWindow().loadURL).to.have.been.calledWith(expectedUrl);
-    expect(props.loginUser).to.have.been.calledOnce;
-    expect(props.loginUser).to.have.been.calledWith(code);
-
-    eventStub.restore();
-
+    expect(BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
+    expect(BrowserWindow().loadURL).toHaveBeenCalledWith(expectedUrl);
+    expect(props.loginUser).toHaveBeenCalledTimes(1);
+    expect(props.loginUser).toHaveBeenCalledWith(code);
   });
 
   it('should open the login window and get a code successfully (did-get-redirect-request)', function () {
-
     const code = '123123123';
 
-    const eventStub = sinon.stub(BrowserWindow().webContents, 'on', function (event, callback) {
+    spyOn(BrowserWindow().webContents, 'on').and.callFake((event, callback) => {
       if (event === 'did-get-redirect-request') {
         callback('did-get-redirect-request', null, `http://www.github.com/?code=${code}`);
       }
@@ -104,7 +92,7 @@ describe('components/login.js', function () {
       'authorize?client_id=3fef4433a29c6ad8f22c&scope=user:email,notifications';
 
     const props = {
-      loginUser: sinon.spy(),
+      loginUser: jest.fn(),
       token: null,
       response: {},
       failed: false,
@@ -113,24 +101,20 @@ describe('components/login.js', function () {
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
+    expect(wrapper).toBeDefined();
 
     wrapper.find('.btn').simulate('click');
 
-    expect(BrowserWindow().loadURL).to.have.been.calledOnce;
-    expect(BrowserWindow().loadURL).to.have.been.calledWith(expectedUrl);
-    expect(props.loginUser).to.have.been.calledOnce;
-    expect(props.loginUser).to.have.been.calledWith(code);
-
-    eventStub.restore();
-
+    expect(BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
+    expect(BrowserWindow().loadURL).toHaveBeenCalledWith(expectedUrl);
+    expect(props.loginUser).toHaveBeenCalledTimes(1);
+    expect(props.loginUser).toHaveBeenCalledWith(code);
   });
 
   it('should open the login window and get an error', function () {
-
     const error = 'Oops! Something went wrong.';
 
-    const eventStub = sinon.stub(BrowserWindow().webContents, 'on', function (event, callback) {
+    spyOn(BrowserWindow().webContents, 'on').and.callFake((event, callback) => {
       if (event === 'did-get-redirect-request') {
         callback('did-get-redirect-request', null, `http://www.github.com/?error=${error}`);
       }
@@ -140,7 +124,7 @@ describe('components/login.js', function () {
       'authorize?client_id=3fef4433a29c6ad8f22c&scope=user:email,notifications';
 
     const props = {
-      loginUser: sinon.spy(),
+      loginUser: jest.fn(),
       token: null,
       response: {},
       failed: false,
@@ -149,32 +133,29 @@ describe('components/login.js', function () {
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
+    expect(wrapper).toBeDefined();
 
     wrapper.find('.btn').simulate('click');
 
-    expect(BrowserWindow().loadURL).to.have.been.calledOnce;
-    expect(BrowserWindow().loadURL).to.have.been.calledWith(expectedUrl);
-    expect(props.loginUser).to.not.have.been.calledOnce;
-    expect(alert).to.have.been.calledOnce;
-    expect(alert).to.have.been.calledWith(
+    expect(BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
+    expect(BrowserWindow().loadURL).toHaveBeenCalledWith(expectedUrl);
+    expect(props.loginUser).not.toHaveBeenCalled();
+
+    expect(alert).toHaveBeenCalledTimes(1);
+    expect(alert).toHaveBeenCalledWith(
       'Oops! Something went wrong and we couldn\'t log you in using Github. Please try again.'
     );
-
-    eventStub.restore();
-
   });
 
   it('should close the browser window before logging in', function () {
-
-    const eventStub = sinon.stub(BrowserWindow(), 'on', function (event, callback) {
+    spyOn(BrowserWindow(), 'on').and.callFake((event, callback) => {
       if (event === 'close') {
         callback();
       }
     });
 
     const props = {
-      loginUser: sinon.spy(),
+      loginUser: jest.fn(),
       token: null,
       response: {},
       failed: false,
@@ -183,19 +164,15 @@ describe('components/login.js', function () {
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
+    expect(wrapper).toBeDefined();
 
     wrapper.find('.btn').simulate('click');
 
-    expect(BrowserWindow().loadURL).to.have.been.calledOnce;
-    expect(props.loginUser).to.not.have.been.calledOnce;
-
-    eventStub.restore();
-
+    expect(BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
+    expect(props.loginUser).not.toHaveBeenCalled();
   });
 
   it('should redirect to notifications once logged in', function () {
-
     const props = {
       token: null,
       response: {},
@@ -205,25 +182,22 @@ describe('components/login.js', function () {
 
     const { wrapper, context } = setup(props);
 
-    expect(wrapper).to.exist;
+    expect(wrapper).toBeDefined();
 
     wrapper.setProps({
       token: 'HELLO'
     });
-    expect(ipcRenderer.send).to.have.been.calledOnce;
-    expect(ipcRenderer.send).to.have.been.calledWith('reopen-window');
-    expect(context.router.push).to.have.been.calledOnce;
-    expect(context.router.push).to.have.been.calledWith('/notifications');
-
-    context.router.push.reset();
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
+    expect(context.router.push).toHaveBeenCalledTimes(1);
+    expect(context.router.push).toHaveBeenCalledWith('/notifications');
   });
 
   it('should request the github token if the oauth code is received', function () {
-
     const code = 'thisisacode';
 
     const props = {
-      loginUser: sinon.spy(),
+      loginUser: jest.fn(),
       token: null,
       response: {},
       failed: false,
@@ -232,14 +206,10 @@ describe('components/login.js', function () {
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
+    expect(wrapper).toBeDefined();
 
     wrapper.instance().requestGithubToken(code);
-    expect(props.loginUser).to.have.been.calledOnce;
-    expect(props.loginUser).to.have.been.calledWith(code);
-
-    props.loginUser.reset();
-
+    expect(props.loginUser).toHaveBeenCalledTimes(1);
+    expect(props.loginUser).toHaveBeenCalledWith(code);
   });
-
 });

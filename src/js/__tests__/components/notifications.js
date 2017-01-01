@@ -1,7 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { List, fromJS } from 'immutable';
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
 
 import { NotificationsPage } from '../../components/notifications';
@@ -55,10 +54,10 @@ describe('components/notifications.js', function () {
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
-    expect(wrapper.find(ReactCSSTransitionGroup).children().length).to.equal(2);
-    expect(wrapper.find('.errored').length).to.equal(0);
-    expect(wrapper.find('.all-read').length).to.equal(0);
+    expect(wrapper).toBeDefined();
+    expect(wrapper.find(ReactCSSTransitionGroup).children().length).toBe(2);
+    expect(wrapper.find('.errored').length).toBe(0);
+    expect(wrapper.find('.all-read').length).toBe(0);
 
   });
 
@@ -73,11 +72,11 @@ describe('components/notifications.js', function () {
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
-    expect(wrapper.find(ReactCSSTransitionGroup).length).to.equal(0);
-    expect(wrapper.find('.loading-container').length).to.equal(0);
-    expect(wrapper.find('.all-read').length).to.equal(0);
-    expect(wrapper.find(Oops).length).to.equal(1);
+    expect(wrapper).toBeDefined();
+    expect(wrapper.find(ReactCSSTransitionGroup).length).toBe(0);
+    expect(wrapper.find('.loading-container').length).toBe(0);
+    expect(wrapper.find('.all-read').length).toBe(0);
+    expect(wrapper.find(Oops).length).toBe(1);
 
   });
 
@@ -92,13 +91,13 @@ describe('components/notifications.js', function () {
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
-    expect(wrapper.find(ReactCSSTransitionGroup).length).to.equal(0);
-    expect(wrapper.find('.loading-container').length).to.equal(0);
-    expect(wrapper.find('.all-read').length).to.equal(0);
-    expect(wrapper.find('.errored').length).to.equal(0);
+    expect(wrapper).toBeDefined();
+    expect(wrapper.find(ReactCSSTransitionGroup).length).toBe(0);
+    expect(wrapper.find('.loading-container').length).toBe(0);
+    expect(wrapper.find('.all-read').length).toBe(0);
+    expect(wrapper.find('.errored').length).toBe(0);
 
-    expect(wrapper.find(AllRead).length).to.equal(1);
+    expect(wrapper.find(AllRead).length).toBe(1);
 
   });
 

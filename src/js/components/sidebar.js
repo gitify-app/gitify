@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
-const shell = window.require('electron').shell;
+import { shell } from 'electron';
 
 import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
 import Constants from '../utils/constants';

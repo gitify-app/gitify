@@ -1,4 +1,4 @@
-const shell = window.require('electron').shell;
+const { shell } = require('electron');
 
 import React from 'react';
 import { connect } from 'react-redux';

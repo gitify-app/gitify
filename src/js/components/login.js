@@ -1,7 +1,5 @@
-var electron = window.require('electron');
-var ipcRenderer = window.require('electron').ipcRenderer;
-var remote = electron.remote;
-var BrowserWindow = remote.BrowserWindow;
+const { ipcRenderer, remote } = require('electron');
+const BrowserWindow = remote.BrowserWindow;
 
 import React from 'react';
 import { connect } from 'react-redux';

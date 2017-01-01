@@ -12,6 +12,8 @@ import notifications from '../middleware/notifications';
 import settings from '../middleware/settings';
 import rootReducer from '../reducers';
 
+const isDev = process.mainModule.filename.indexOf('app.asar') === -1;
+
 export default function configureStore(initialState) {
   const engine = filter(
     createEngine(constants.STORAGE_KEY),
@@ -28,7 +30,7 @@ export default function configureStore(initialState) {
     storageMiddleware
   ];
 
-  if (process.env.NODE_ENV !== 'production') {
+  if (isDev) {
     const createLogger = require('redux-logger');
     const logger = createLogger();
     middlewares.push(logger);

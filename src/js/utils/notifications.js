@@ -1,6 +1,4 @@
-const shell = window.require('electron').shell;
-
-import { reOpenWindow } from '../utils/comms';
+import { reOpenWindow, openExternalLink } from '../utils/comms';
 import Helpers from '../utils/helpers';
 
 export default {
@@ -51,7 +49,7 @@ export default {
     nativeNotification.onclick = function () {
       if (newCount === 1) {
         var url = Helpers.generateGitHubUrl(notifications[0].subject.url);
-        shell.openExternal(url);
+        openExternalLink(url);
       } else {
         reOpenWindow();
       }

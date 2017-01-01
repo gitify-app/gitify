@@ -1,12 +1,9 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { fromJS } from 'immutable';
-import { expect } from 'chai';
 import { mount } from 'enzyme';
 import { List } from 'immutable';
-import sinon from 'sinon';
 
-const ipcRenderer = window.require('electron').ipcRenderer;
-const shell = window.require('electron').shell;
+const { shell, ipcRenderer } = require('electron');
 
 import { Sidebar } from '../../components/sidebar';
 
@@ -14,8 +11,8 @@ function setup(props) {
   const options = {
     context: {
       router: {
-        push: sinon.spy(),
-        replace: sinon.spy()
+        push: jest.fn(),
+        replace: jest.fn()
       }
     }
   };
@@ -31,17 +28,17 @@ function setup(props) {
 
 describe('components/Sidebar.js', () => {
 
+  let clock;
   const notifications = fromJS([{ id: 1 }, { id: 2 }]);
 
-  beforeEach(function() {
-    this.clock = sinon.useFakeTimers();
-
-    ipcRenderer.send.reset();
-    shell.openExternal.reset();
+  beforeEach(() => {
+    clock = jest.useFakeTimers();
+    ipcRenderer.send.mockReset();
+    shell.openExternal.mockReset();
   });
 
-  afterEach(function() {
-    this.clock = sinon.restore();
+  afterEach(() => {
+    clock.clearAllTimers();
   });
 
   it('should render itself & its children (logged in)', () => {
@@ -51,84 +48,70 @@ describe('components/Sidebar.js', () => {
       isLoggedIn: true,
     };
 
-    sinon.spy(Sidebar.prototype, 'componentDidMount');
+    spyOn(Sidebar.prototype, 'componentDidMount').and.callThrough();
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
-    expect(Sidebar.prototype.componentDidMount).to.have.been.calledOnce;
-    expect(wrapper.find('.fa-refresh').length).to.equal(1);
-    expect(wrapper.find('.fa-cog').length).to.equal(1);
-    expect(wrapper.find('.tag-count').text()).to.equal(`${notifications.size} Unread`);
-
-    Sidebar.prototype.componentDidMount.restore();
-
+    expect(wrapper).toBeDefined();
+    expect(Sidebar.prototype.componentDidMount).toHaveBeenCalledTimes(1);
+    expect(wrapper.find('.fa-refresh').length).toBe(1);
+    expect(wrapper.find('.fa-cog').length).toBe(1);
+    expect(wrapper.find('.tag-count').text()).toBe(`${notifications.size} Unread`);
   });
 
   it('should load notifications after 60000ms', function () {
-
     const props = {
       isFetching: false,
       notifications: notifications,
-      fetchNotifications: sinon.spy(),
+      fetchNotifications: jest.fn(),
       isLoggedIn: 'true',
     };
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
+    expect(wrapper).toBeDefined();
 
-    this.clock.tick(60000);
-    expect(props.fetchNotifications).to.have.been.calledOnce;
-
+    clock.runTimersToTime(60000);
+    expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
   });
 
   it('should render itself & its children (logged out)', function () {
-
     const props = {
       isFetching: false,
       notifications: List(),
       isLoggedIn: false,
     };
 
-    sinon.spy(Sidebar.prototype, 'componentDidMount');
+    spyOn(Sidebar.prototype, 'componentDidMount').and.callThrough();
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
-    expect(Sidebar.prototype.componentDidMount).to.have.been.calledOnce;
-    expect(wrapper.find('.fa-refresh').length).to.equal(0);
-    expect(wrapper.find('.fa-cog').length).to.equal(0);
-    expect(wrapper.find('.tag-success').length).to.equal(0);
-
-    Sidebar.prototype.componentDidMount.restore();
-
+    expect(wrapper).toBeDefined();
+    expect(Sidebar.prototype.componentDidMount).toHaveBeenCalledTimes(1);
+    expect(wrapper.find('.fa-refresh').length).toBe(0);
+    expect(wrapper.find('.fa-cog').length).toBe(0);
+    expect(wrapper.find('.tag-success').length).toBe(0);
   });
 
   it('should render itself & its children (logged in/settings page)', () => {
-
     const props = {
       isFetching: false,
       notifications: notifications,
       isLoggedIn: true,
     };
 
-    sinon.spy(Sidebar.prototype, 'componentDidMount');
+    spyOn(Sidebar.prototype, 'componentDidMount').and.callThrough();
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
-    expect(Sidebar.prototype.componentDidMount).to.have.been.calledOnce;
-    expect(wrapper.find('.fa-refresh').length).to.equal(1);
-    expect(wrapper.find('.fa-cog').length).to.equal(1);
-    expect(wrapper.find('.tag-count').text()).to.equal(`${notifications.size} Unread`);
-
-    Sidebar.prototype.componentDidMount.restore();
-
+    expect(wrapper).toBeDefined();
+    expect(Sidebar.prototype.componentDidMount).toHaveBeenCalledTimes(1);
+    expect(wrapper.find('.fa-refresh').length).toBe(1);
+    expect(wrapper.find('.fa-cog').length).toBe(1);
+    expect(wrapper.find('.tag-count').text()).toBe(`${notifications.size} Unread`);
   });
 
   it('should open the gitify repo in browser', () => {
-
     const props = {
       isFetching: false,
       notifications: List(),
@@ -137,41 +120,35 @@ describe('components/Sidebar.js', () => {
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
+    expect(wrapper).toBeDefined();
 
     wrapper.find('.logo').simulate('click');
 
-    expect(shell.openExternal).to.have.been.calledOnce;
-    expect(shell.openExternal).to.have.been.calledWith('http://www.github.com/manosim/gitify');
-
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(shell.openExternal).toHaveBeenCalledWith('http://www.github.com/manosim/gitify');
   });
 
   it('should toggle the settings modal', () => {
-
     const props = {
       isFetching: false,
       notifications: notifications,
       isLoggedIn: 'true',
-      toggleSettingsModal: sinon.spy(),
+      toggleSettingsModal: jest.fn(),
     };
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
-    expect(wrapper.find('.fa-cog').length).to.equal(1);
+    expect(wrapper).toBeDefined();
+    expect(wrapper.find('.fa-cog').length).toBe(1);
 
     wrapper.find('.fa-cog').simulate('click');
 
-    expect(props.toggleSettingsModal).to.have.been.calledOnce;
-
-    props.toggleSettingsModal.reset();
-
+    expect(props.toggleSettingsModal).toHaveBeenCalledTimes(1);
   });
 
   it('should refresh the notifications', () => {
-
     const props = {
-      fetchNotifications: sinon.spy(),
+      fetchNotifications: jest.fn(),
       isFetching: false,
       notifications: notifications,
       isLoggedIn: 'true',
@@ -179,16 +156,14 @@ describe('components/Sidebar.js', () => {
 
     const { wrapper } = setup(props);
 
-    expect(wrapper).to.exist;
-    expect(wrapper.find('.fa-refresh').length).to.equal(1);
+    expect(wrapper).toBeDefined();
+    expect(wrapper.find('.fa-refresh').length).toBe(1);
 
     wrapper.find('.fa-refresh').simulate('click');
-    expect(props.fetchNotifications).to.have.been.calledOnce;
-
+    expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
   });
 
   it('open the gitify repo in browser', () => {
-
     const props = {
       hasStarred: false,
       notifications: notifications,
@@ -196,11 +171,9 @@ describe('components/Sidebar.js', () => {
 
     const { wrapper } = setup(props);
 
-    expect(wrapper.find('.btn-star').length).to.equal(1);
+    expect(wrapper.find('.btn-star').length).toBe(1);
 
     wrapper.find('.btn-star').simulate('click');
-    expect(shell.openExternal).to.have.been.calledOnce;
-    shell.openExternal.reset();
-
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
   });
 });

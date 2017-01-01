@@ -1,19 +1,8 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { expect } from 'chai';
 import { shallow, mount } from 'enzyme';
-import sinon from 'sinon';
 import NProgress from 'nprogress';
 
 import Loading from '../../components/loading';
-
-function setupMount(props = {}) {
-  const wrapper = mount(<Loading {...props} />);
-
-  return {
-    props: props,
-    wrapper: wrapper,
-  };
-};
 
 function setupShallow() {
   const props = {};
@@ -26,92 +15,74 @@ function setupShallow() {
 };
 
 describe('components/loading.js', function () {
-
   beforeEach(() => {
-    NProgress.start = sinon.spy();
-    NProgress.done = sinon.spy();
-    NProgress.remove = sinon.spy();
+    NProgress.start = jest.fn();
+    NProgress.done = jest.fn();
+    NProgress.remove = jest.fn();
   });
 
   afterEach(() => {
-    NProgress.start.reset();
-    NProgress.done.reset();
-    NProgress.remove.reset();
+    NProgress.start.mockReset();
+    NProgress.done.mockReset();
+    NProgress.remove.mockReset();
   });
 
   it('should render itself & its children', function () {
-
     const { wrapper } = setupShallow();
 
-    expect(wrapper).to.exist;
-    expect(wrapper.children().length).to.equal(0);
-
+    expect(wrapper).toBeDefined();
+    expect(wrapper.children().length).toBe(0);
   });
 
   it('should mount itself without any children', function () {
-
-    sinon.spy(Loading.prototype, 'componentDidMount');
+    spyOn(Loading.prototype, 'componentDidMount').and.callThrough();
 
     const isLoading = true;
     const props = { isLoading };
-    const { wrapper } = setupMount(props);
+    const wrapper = mount(<Loading {...props} />);
 
-    expect(wrapper).to.exist;
-    expect(wrapper.children().length).to.equal(0);
+    expect(wrapper).toBeDefined();
+    expect(wrapper.children().length).toEqual(0);
 
-    expect(NProgress.start.callCount).to.equal(1);
-
-    expect(Loading.prototype.componentDidMount.callCount).to.equal(1);
-
-    Loading.prototype.componentDidMount.restore();
-
+    expect(NProgress.start).toHaveBeenCalledTimes(1);
+    expect(Loading.prototype.componentDidMount).toHaveBeenCalledTimes(1);
   });
 
   it('should receive props', function () {
-
-    sinon.spy(Loading.prototype, 'componentDidMount');
+    spyOn(Loading.prototype, 'componentDidMount').and.callThrough();;
 
     const isLoading = true;
     const props = { isLoading };
-    const { wrapper } = setupMount(props);
+    const wrapper = mount(<Loading {...props} />);
 
-    expect(wrapper).to.exist;
-    expect(wrapper.children().length).to.equal(0);
-    expect(NProgress.start.callCount).to.equal(1);
+    expect(wrapper).toBeDefined();
+    expect(wrapper.children().length).toEqual(0);
+    expect(NProgress.start).toHaveBeenCalledTimes(1);
 
     wrapper.setProps({
       ...props,
       isLoading: false
     });
-    expect(NProgress.done.callCount).to.equal(1);
+    expect(NProgress.done).toHaveBeenCalledTimes(1);
 
     wrapper.setProps({
       ...props,
       isLoading: true
     });
-    expect(NProgress.start.callCount).to.equal(2);
-
-    Loading.prototype.componentDidMount.restore();
-
+    expect(NProgress.start).toHaveBeenCalledTimes(2);
   });
 
-
   it('should unmount the component', function () {
-
-    sinon.spy(Loading.prototype, 'componentWillUnmount');
+    spyOn(Loading.prototype, 'componentWillUnmount').and.callThrough();;
 
     const isLoading = true;
     const props = { isLoading };
-    const { wrapper } = setupMount(props);
+    const wrapper = mount(<Loading {...props} />);
 
-    expect(wrapper).to.exist;
-    expect(wrapper.children().length).to.equal(0);
+    expect(wrapper).toBeDefined();
+    expect(wrapper.children().length).toEqual(0);
 
     wrapper.unmount();
-    expect(NProgress.remove.callCount).to.equal(1);
-
-    Loading.prototype.componentWillUnmount.restore();
-
+    expect(NProgress.remove).toHaveBeenCalledTimes(1);
   });
-
 });
