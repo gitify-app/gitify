@@ -28,10 +28,10 @@ Gitify currently only supports OS X.
 
 ### Prerequisites
 
+ - Node 6+
  - [Electron](http://electron.atom.io/)
  - [React](https://facebook.github.io/react/)
- - [Webpack](https://webpack.github.io/)
- - [NPM](https://www.npmjs.com/)
+ - [Gulp](https://www.gulpjs.com)
 
 
 ### Installation
