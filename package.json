@@ -4,7 +4,7 @@
   "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
-    "build-js": "browserify -t babelify --ignore-missing --no-builtins --no-commondir --insert-global-vars=\"global\" --no-browser-field --exclude electron src/js/app.js | uglifyjs > dist/js/app.js",
+    "build-js": "mkdir -p dist/js/ && browserify -t babelify --ignore-missing --no-builtins --no-commondir --insert-global-vars=\"global\" --no-browser-field --exclude electron src/js/app.js | uglifyjs > dist/js/app.js",
     "build": "npm run build-js && gulp build",
     "watch-js": "watchify -t babelify --ignore-missing --no-builtins --no-commondir --insert-global-vars=\"global\" --no-browser-field --exclude electron src/js/app.js -o dist/js/app.js -v",
     "watch": "gulp build && npm run watch-js & gulp watch",
