@@ -1,9 +1,10 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { shallow } from 'enzyme';
+import { Map } from 'immutable';
 import { App, mapStateToProps } from '../../containers/app';
 
-describe('containers/app.js', function () {
-  it('should render itself & its children', function () {
+describe('containers/app.js', () => {
+  it('should render itself & its children', () => {
     const props = {
       location: '/home'
     };
@@ -12,17 +13,17 @@ describe('containers/app.js', function () {
     expect(wrapper).toBeDefined();
   });
 
-  it('test the mapStateToProps function', () => {
+  it('test the mapStateToProps', () => {
     const state = {
-      isFetching: false,
-      showSettingsModal: true
+      notifications: Map({
+        isFetching: false,
+      }),
+      settings: Map({
+        showSettingsModal: true
+      }),
     };
 
-    const ownProps = {
-      showId: 1234
-    };
-
-    const props = mapStateToProps(state, ownProps);
+    const props = mapStateToProps(state);
 
     expect(props.isFetching).toBeFalsy();
     expect(props.showSettingsModal).toBeTruthy();
