@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 
 const { shell } = require('electron');
 
-import { SingleNotification } from '../../components/notification';
+import { SingleNotification, mapStateToProps } from '../../components/notification';
 
 function setup(props) {
   const wrapper = shallow(<SingleNotification {...props} />);
@@ -15,7 +15,7 @@ function setup(props) {
   };
 };
 
-describe('components/notification.js', function () {
+describe('components/notification.js', () => {
   const notification = Map({
     id: 1,
     subject: Map({
@@ -29,7 +29,19 @@ describe('components/notification.js', function () {
     shell.openExternal.mockReset();
   });
 
-  it('should render itself & its children', function () {
+  it('should test the mapStateToProps method', () => {
+    const state = {
+      settings: Map({
+        markOnClick: true,
+      }),
+    };
+
+    const mappedProps = mapStateToProps(state);
+
+    expect(mappedProps.markOnClick).toBeTruthy();
+  });
+
+  it('should render itself & its children', () => {
     const props = {
       markNotification: jest.fn(),
       markOnClick: false,
@@ -69,7 +81,7 @@ describe('components/notification.js', function () {
 
   });
 
-  it('should open a notification in the browser', function () {
+  it('should open a notification in the browser', () => {
     const props = {
       markNotification: jest.fn(),
       markOnClick: false,
@@ -83,7 +95,7 @@ describe('components/notification.js', function () {
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
   });
 
-  it('should mark a notification as read', function () {
+  it('should mark a notification as read', () => {
     const props = {
       markNotification: jest.fn(),
       markOnClick: false,
@@ -97,7 +109,7 @@ describe('components/notification.js', function () {
     expect(props.markNotification).toHaveBeenCalledTimes(1);
   });
 
-  it('should open a notification in browser & mark it as read', function () {
+  it('should open a notification in browser & mark it as read', () => {
     const props = {
       markNotification: jest.fn(),
       markOnClick: true,
@@ -111,5 +123,4 @@ describe('components/notification.js', function () {
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(props.markNotification).toHaveBeenCalledTimes(1);
   });
-
 });

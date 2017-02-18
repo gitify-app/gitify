@@ -1,11 +1,11 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { fromJS } from 'immutable';
+import { fromJS, Map } from 'immutable';
 import { mount } from 'enzyme';
 import { List } from 'immutable';
 
 const { shell, ipcRenderer } = require('electron');
 
-import { Sidebar } from '../../components/sidebar';
+import { Sidebar, mapStateToProps } from '../../components/sidebar';
 
 function setup(props) {
   const options = {
@@ -35,10 +35,31 @@ describe('components/Sidebar.js', () => {
     clock = jest.useFakeTimers();
     ipcRenderer.send.mockReset();
     shell.openExternal.mockReset();
+    window.clearInterval.mockReset();
   });
 
   afterEach(() => {
     clock.clearAllTimers();
+  });
+
+  it('should test the mapStateToProps method', () => {
+    const state = {
+      auth: Map({
+        token: '12345',
+      }),
+      notifications: Map({
+        response: List(),
+      }),
+      settings: Map({
+        hasStarred: true
+      }),
+    };
+
+    const mappedProps = mapStateToProps(state);
+
+    expect(mappedProps.isLoggedIn).toBeTruthy();
+    expect(mappedProps.notifications.size).toEqual(0);
+    expect(mappedProps.hasStarred).toBeTruthy();
   });
 
   it('should render itself & its children (logged in)', () => {
@@ -57,6 +78,23 @@ describe('components/Sidebar.js', () => {
     expect(wrapper.find('.fa-refresh').length).toBe(1);
     expect(wrapper.find('.fa-cog').length).toBe(1);
     expect(wrapper.find('.tag-count').text()).toBe(`${notifications.size} Unread`);
+  });
+
+  it('should clear the interval when unmounting', () => {
+    const props = {
+      isFetching: false,
+      notifications: notifications,
+      isLoggedIn: true,
+    };
+
+    spyOn(Sidebar.prototype, 'componentDidMount').and.callThrough();
+
+    const { wrapper } = setup(props);
+    expect(wrapper).toBeDefined();
+    expect(Sidebar.prototype.componentDidMount).toHaveBeenCalledTimes(1);
+
+    wrapper.unmount();
+    expect(window.clearInterval).toHaveBeenCalledTimes(1);
   });
 
   it('should load notifications after 60000ms', function () {

@@ -1,7 +1,8 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { shallow } from 'enzyme';
+import { Map } from 'immutable';
 
-import { LoginPage } from '../../components/login';
+import { LoginPage, mapStateToProps } from '../../components/login';
 
 const { shell, ipcRenderer, remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
@@ -25,14 +26,30 @@ function setup(props) {
   };
 };
 
-describe('components/login.js', function () {
+describe('components/login.js', () => {
   beforeEach(function() {
     BrowserWindow().loadURL.mockReset();
     ipcRenderer.send.mockReset();
     shell.openExternal.mockReset();
   });
 
-  it('should render itself & its children', function () {
+  it('should test the mapStateToProps method', () => {
+    const state = {
+      auth: Map({
+        token: '123456',
+        failed: false,
+        isFetching: false,
+      }),
+    };
+
+    const mappedProps = mapStateToProps(state);
+
+    expect(mappedProps.isLoggedIn).toBeTruthy();
+    expect(mappedProps.failed).toBeFalsy();
+    expect(mappedProps.isFetching).toBeFalsy();
+  });
+
+  it('should render itself & its children', () => {
     const props = {
       isLoggedIn: false,
       token: null,
@@ -47,7 +64,7 @@ describe('components/login.js', function () {
     expect(wrapper.find('.desc').text()).toContain('in your menu bar.');
   });
 
-  it('should open the login window and get a code successfully (will-navigate)', function () {
+  it('should open the login window and get a code successfully (will-navigate)', () => {
     const code = '123123123';
 
     spyOn(BrowserWindow().webContents, 'on').and.callFake((event, callback) => {
@@ -79,7 +96,7 @@ describe('components/login.js', function () {
     expect(props.loginUser).toHaveBeenCalledWith(code);
   });
 
-  it('should open the login window and get a code successfully (did-get-redirect-request)', function () {
+  it('should open the login window and get a code successfully (did-get-redirect-request)', () => {
     const code = '123123123';
 
     spyOn(BrowserWindow().webContents, 'on').and.callFake((event, callback) => {
@@ -111,7 +128,7 @@ describe('components/login.js', function () {
     expect(props.loginUser).toHaveBeenCalledWith(code);
   });
 
-  it('should open the login window and get an error', function () {
+  it('should open the login window and get an error', () => {
     const error = 'Oops! Something went wrong.';
 
     spyOn(BrowserWindow().webContents, 'on').and.callFake((event, callback) => {
@@ -147,7 +164,7 @@ describe('components/login.js', function () {
     );
   });
 
-  it('should close the browser window before logging in', function () {
+  it('should close the browser window before logging in', () => {
     spyOn(BrowserWindow(), 'on').and.callFake((event, callback) => {
       if (event === 'close') {
         callback();
@@ -172,9 +189,9 @@ describe('components/login.js', function () {
     expect(props.loginUser).not.toHaveBeenCalled();
   });
 
-  it('should redirect to notifications once logged in', function () {
+  it('should redirect to notifications once logged in', () => {
     const props = {
-      token: null,
+      isLoggedIn: false,
       response: {},
       failed: false,
       isFetching: false
@@ -185,15 +202,16 @@ describe('components/login.js', function () {
     expect(wrapper).toBeDefined();
 
     wrapper.setProps({
-      token: 'HELLO'
+      isLoggedIn: true
     });
+
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
     expect(context.router.push).toHaveBeenCalledTimes(1);
     expect(context.router.push).toHaveBeenCalledWith('/notifications');
   });
 
-  it('should request the github token if the oauth code is received', function () {
+  it('should request the github token if the oauth code is received', () => {
     const code = 'thisisacode';
 
     const props = {

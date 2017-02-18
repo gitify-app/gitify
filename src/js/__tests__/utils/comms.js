@@ -1,4 +1,11 @@
-import { updateTrayIcon, setBadge, reOpenWindow, openExternalLink } from '../../utils/comms';
+import {
+  updateTrayIcon,
+  setBadge,
+  reOpenWindow,
+  openExternalLink,
+  setAutoLaunch,
+} from '../../utils/comms';
+
 const { ipcRenderer, shell } = require('electron');
 
 
@@ -37,5 +44,17 @@ describe('utils/comms.js', () => {
     openExternalLink('http://www.gitify.io/');
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith('http://www.gitify.io/');
+  });
+
+  it('should setAutoLaunch (true)', () => {
+    setAutoLaunch(true);
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('startup-enable');
+  });
+
+  it('should setAutoLaunch (false)', () => {
+    setAutoLaunch(false);
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('startup-disable');
   });
 });
