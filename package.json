@@ -51,7 +51,7 @@
   "jest": {
     "coverageThreshold": {
       "global": {
-        "lines": 92
+        "lines": 95
       }
     }
   },
