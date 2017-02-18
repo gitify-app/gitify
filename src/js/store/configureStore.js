@@ -1,4 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
+import { Map } from 'immutable';
 import thunkMiddleware from 'redux-thunk';
 
 import * as storage from 'redux-storage';
@@ -47,8 +48,8 @@ export default function configureStore(initialState) {
   load(store)
     .then(function (newState) {
       // Check if the user is logged in
-      const isLoggedIn = store.getState().auth.get('token') !== null;
-      const userSettings = store.getState().settings;
+      const isLoggedIn = newState.auth.token !== null;
+      const userSettings = Map(newState.settings);
 
       if (isLoggedIn) {
         restoreSettings(userSettings);
