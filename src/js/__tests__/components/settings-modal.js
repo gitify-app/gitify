@@ -29,26 +29,30 @@ function setup(props) {
   };
 };
 
-describe('components/settings-modal.js', function () {
+describe('components/settings-modal.js', () => {
+  const props = {
+    isOpen: true,
+    updateSetting: jest.fn(),
+    fetchNotifications: jest.fn(),
+    logout: jest.fn(),
+    toggleSettingsModal: jest.fn(),
+    settings: Map({
+      participating: false,
+      playSound: true,
+      showNotifications: true,
+      markOnClick: false,
+      openAtStartup: false,
+      showSettingsModal: false,
+      hasStarred: false,
+      showAppIcon: 'both',
+    })
+  };
 
   beforeEach(function() {
     ipcRenderer.send.mockReset();
+    props.updateSetting.mockReset();
   });
 
-  it('should render itself & its children', function () {
-
-    const props = {
-      isOpen: true,
-      updateSetting: jest.fn(),
-      fetchNotifications: jest.fn(),
-      logout: jest.fn(),
-      settings: Map({
-        participating: false,
-        playSound: true,
-        showNotifications: true,
-        markOnClick: false,
-        openAtStartup: false
-      })
     };
 
     const { wrapper } = setup(props);
@@ -57,62 +61,21 @@ describe('components/settings-modal.js', function () {
     expect(wrapper.find(RadioGroup).length).toBe(1);
     expect(wrapper.find(Radio).length).toBe(3);
     expect(wrapper.find('.octicon-sign-out').length).toBe(1);
-
   });
 
   it('should update a setting', function () {
 
-    const props = {
-      isOpen: true,
-      updateSetting: jest.fn(),
-      fetchNotifications: jest.fn(),
-      logout: jest.fn(),
-      settings: Map({
-        participating: false,
-        playSound: true,
-        showNotifications: true,
-        markOnClick: false,
-        openAtStartup: false
-      })
-    };
-
-    const { wrapper } = setup(props);
     expect(wrapper).toBeDefined();
 
-    // Note: First Check is "participating"
-    wrapper.find(Checkbox).first().props().onChange({target: {checked: true}});
-    expect(props.updateSetting).toHaveBeenCalledTimes(1);
+
 
     wrapper.setProps({
       ...props,
-      settings: Map({
-        ...props.settings,
-        participating: true
-      })
     });
     expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
 
   });
 
-  it('should press the logout', function () {
-
-    const props = {
-      isOpen: true,
-      updateSetting: jest.fn(),
-      fetchNotifications: jest.fn(),
-      logout: jest.fn(),
-      settings: Map({
-        participating: false,
-        playSound: true,
-        showNotifications: true,
-        markOnClick: false,
-        openAtStartup: false,
-        showSettingsModal: false,
-        hasStarred: false,
-        showAppIcon: 'both',
-      }),
-      toggleSettingsModal: jest.fn()
-    };
 
     const { wrapper, context } = setup(props);
 

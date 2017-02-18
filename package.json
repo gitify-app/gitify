@@ -48,6 +48,13 @@
     "url": "https://github.com/manosim/gitify/issues"
   },
   "homepage": "http://www.gitify.io/",
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "lines": 92
+      }
+    }
+  },
   "dependencies": {
     "auto-launch": "=5.0.1",
     "axios": "=0.15.3",
@@ -95,6 +102,7 @@
     "gulp-sass": "=3.0.0",
     "jest": "=18.1.0",
     "nock": "=9.0.2",
+    "react-test-renderer": "=15.4.2",
     "redux-logger": "=2.8.1",
     "redux-mock-store": "=1.2.1",
     "sass-lint": "=1.10.2 -v",

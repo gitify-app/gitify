@@ -300,4 +300,12 @@ describe('actions/index.js', () => {
 
     expect(actions.updateSetting(setting, value)).toEqual(expectedAction);
   });
+
+  it('should handle TOGGLE_SETTINGS_MODAL', () => {
+    const expectedAction = {
+      type: actions.TOGGLE_SETTINGS_MODAL,
+    };
+
+    expect(actions.toggleSettingsModal()).toEqual(expectedAction);
+  });
 });
