@@ -95,8 +95,11 @@ if (process.platform === 'darwin') {
         type: 'separator'
       },
       {
-        role: 'services',
-        submenu: []
+        label: 'Preferences',
+        accelerator: process.platform === 'darwin' ? 'Command+,' : 'Ctrl+,',
+        click (item, focusedWindow) {
+          if (focusedWindow) focusedWindow.webContents.send('toggle-settings');
+        }
       },
       {
         type: 'separator'
