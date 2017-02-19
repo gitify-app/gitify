@@ -66,6 +66,29 @@ describe('components/settings-modal.js', () => {
     expect(mappedProps.settings.hello).toEqual('world');
   });
 
+  it('should close the modal on press of the escape key ', () => {
+    spyOn(document, 'addEventListener').and.callFake((name, clb) => {
+      if (name === 'keydown') {
+        clb({keyCode: 27});
+      }
+    });
+
+    spyOn(document, 'removeEventListener').and.callFake((name, clb) => {
+      if (name === 'keydown') {
+        clb({keyCode: 27});
+      }
+    });
+
+    const { wrapper } = setup(props);
+    expect(wrapper).toBeDefined();
+
+    wrapper.instance().componentDidMount();
+    expect(props.toggleSettingsModal).toHaveBeenCalledTimes(1);
+
+    wrapper.instance().componentWillUnmount();
+    expect(document.removeEventListener).toHaveBeenCalledTimes(1);
+  });
+
   it('should render itself & its children', () => {
     const { wrapper } = setup(props);
     expect(wrapper).toBeDefined();

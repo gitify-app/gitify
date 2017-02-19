@@ -33,7 +33,7 @@ export default function configureStore(initialState) {
 
   if (isDev) {
     const createLogger = require('redux-logger');
-    const logger = createLogger();
+    const logger = createLogger({collapsed: true});
     middlewares.push(logger);
   }
 
