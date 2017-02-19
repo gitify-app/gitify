@@ -130,11 +130,7 @@ describe('components/settings-modal.js', () => {
   it('should close the modal pressing the icon', () => {
     const { wrapper } = setup(props);
     expect(wrapper).toBeDefined();
-
-    wrapper
-      .findWhere(node => node.props().testID === 'closeIcon')
-      .simulate('click');
-
+    wrapper.find('.btn-close').simulate('click');
     expect(props.toggleSettingsModal).toHaveBeenCalledTimes(1);
   });
 
@@ -143,7 +139,7 @@ describe('components/settings-modal.js', () => {
     expect(wrapper).toBeDefined();
 
     wrapper
-      .findWhere(node => node.props().testID === 'showOnlyParticipating')
+      .findWhere(node => node.props().label === 'Show only participating')
       .simulate('change', {target: {checked: true}});
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
@@ -154,7 +150,7 @@ describe('components/settings-modal.js', () => {
     expect(wrapper).toBeDefined();
 
     wrapper
-      .findWhere(node => node.props().testID === 'playSound')
+      .findWhere(node => node.props().label === 'Play sound')
       .simulate('change', {target: {checked: true}});
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
@@ -165,7 +161,7 @@ describe('components/settings-modal.js', () => {
     expect(wrapper).toBeDefined();
 
     wrapper
-      .findWhere(node => node.props().testID === 'showNotifications')
+      .findWhere(node => node.props().label === 'Show notifications')
       .simulate('change', {target: {checked: true}});
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
@@ -176,7 +172,7 @@ describe('components/settings-modal.js', () => {
     expect(wrapper).toBeDefined();
 
     wrapper
-      .findWhere(node => node.props().testID === 'onClickMarkAsRead')
+      .findWhere(node => node.props().label === 'On Click, Mark as Read')
       .simulate('change', {target: {checked: true}});
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
@@ -187,7 +183,7 @@ describe('components/settings-modal.js', () => {
     expect(wrapper).toBeDefined();
 
     wrapper
-      .findWhere(node => node.props().testID === 'openAtStartup')
+      .findWhere(node => node.props().label === 'Open at startup')
       .simulate('change', {target: {checked: true}});
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
@@ -197,9 +193,7 @@ describe('components/settings-modal.js', () => {
     const { wrapper } = setup(props);
     expect(wrapper).toBeDefined();
 
-    wrapper
-      .findWhere(node => node.props().testID === 'showAppIcon')
-      .simulate('change', {target: {value: 'both'}});
+    wrapper.find('RadioGroup').simulate('change', {target: {value: 'both'}});
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
     expect(props.updateSetting).toHaveBeenCalledWith('showAppIcon', 'both');
