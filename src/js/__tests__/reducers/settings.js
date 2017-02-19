@@ -1,7 +1,7 @@
 import { Map } from 'immutable';
 
 import reducer from '../../reducers/settings';
-import { UPDATE_SETTING, HAS_STARRED } from '../../actions';
+import { UPDATE_SETTING, HAS_STARRED, TOGGLE_SETTINGS_MODAL } from '../../actions';
 
 describe('reducers/settings.js', () => {
   const initialState = Map({
@@ -62,6 +62,17 @@ describe('reducers/settings.js', () => {
     expect(reducer(undefined, actionParticipating)).toEqual(
       initialState
         .set('hasStarred', false)
+    );
+  });
+
+  it('should handle TOGGLE_SETTINGS_MODAL', () => {
+    const action = {
+      type: TOGGLE_SETTINGS_MODAL
+    };
+
+    expect(reducer(undefined, action)).toEqual(
+      initialState
+        .set('showSettingsModal', true)
     );
   });
 });

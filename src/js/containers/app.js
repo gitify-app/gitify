@@ -22,7 +22,7 @@ export class App extends React.Component {
   };
 };
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
     isFetching: state.notifications.get('isFetching'),
     showSettingsModal: state.settings.get('showSettingsModal')

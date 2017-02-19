@@ -75,7 +75,7 @@ export class Sidebar extends React.Component {
   }
 };
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
     hasStarred: state.settings.get('hasStarred'),
     notifications: state.notifications.get('response'),

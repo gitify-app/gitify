@@ -48,6 +48,13 @@
     "url": "https://github.com/manosim/gitify/issues"
   },
   "homepage": "http://www.gitify.io/",
+  "jest": {
+    "coverageThreshold": {
+      "global": {
+        "lines": 95
+      }
+    }
+  },
   "dependencies": {
     "auto-launch": "=5.0.1",
     "axios": "=0.15.3",
@@ -60,11 +67,11 @@
     "moment": "=2.17.1",
     "nprogress": "=0.2.0",
     "octicons": "=4.4.0",
-    "react": "=15.4.1",
-    "react-addons-css-transition-group": "=15.4.1",
-    "react-addons-shallow-compare": "=15.4.1",
-    "react-addons-test-utils": "=15.4.1",
-    "react-dom": "=15.4.1",
+    "react": "=15.4.2",
+    "react-addons-css-transition-group": "=15.4.2",
+    "react-addons-shallow-compare": "=15.4.2",
+    "react-addons-test-utils": "=15.4.2",
+    "react-dom": "=15.4.2",
     "react-emojione": "=2.0.0",
     "react-icheck": "=0.3.6",
     "react-modal": "=1.6.4",
@@ -75,27 +82,28 @@
     "redux-storage-decorator-filter": "=1.1.8",
     "redux-storage-engine-localstorage": "=1.1.4",
     "redux-storage-merger-immutablejs": "=1.0.5",
-    "redux-thunk": "=2.1.0",
+    "redux-thunk": "=2.2.0",
     "underscore": "=1.8.3"
   },
   "devDependencies": {
     "babel-eslint": "=7.1.1",
     "babel-jest": "=18.0.0",
-    "babel-preset-es2015": "=6.18.0",
-    "babel-preset-react": "=6.16.0",
-    "babel-preset-stage-0": "=6.16.0",
+    "babel-preset-es2015": "=6.22.0",
+    "babel-preset-react": "=6.23.0",
+    "babel-preset-stage-0": "=6.22.0",
     "babelify": "=7.3.0",
     "browserify": "=13.1.1",
     "electron": "=1.4.13",
     "electron-packager": "=8.4.0",
     "enzyme": "=2.7.0",
-    "eslint": "=3.12.2",
-    "eslint-plugin-react": "=6.8.0",
+    "eslint": "=3.15.0",
+    "eslint-plugin-react": "=6.10.0",
     "gulp": "=3.9.1",
     "gulp-sass": "=3.0.0",
     "jest": "=18.1.0",
     "nock": "=9.0.2",
-    "redux-logger": "=2.7.4",
+    "react-test-renderer": "=15.4.2",
+    "redux-logger": "=2.8.1",
     "redux-mock-store": "=1.2.1",
     "sass-lint": "=1.10.2 -v",
     "uglify-js": "=2.7.5",

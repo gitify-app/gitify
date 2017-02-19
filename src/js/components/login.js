@@ -9,8 +9,7 @@ import Constants from '../utils/constants';
 
 export class LoginPage extends React.Component {
   componentWillReceiveProps(nextProps) {
-    const isLoggedIn = nextProps.token !== null;
-    if (isLoggedIn) {
+    if (nextProps.isLoggedIn) {
       ipcRenderer.send('reopen-window');
       this.context.router.push('/notifications');
     }
@@ -90,9 +89,9 @@ LoginPage.contextTypes = {
   router: React.PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
-    token: state.auth.get('token'),
+    isLoggedIn: state.auth.get('token') !== null,
     failed: state.auth.get('failed'),
     isFetching: state.auth.get('isFetching')
   };

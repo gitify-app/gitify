@@ -1,13 +1,28 @@
 import { reOpenWindow, openExternalLink } from '../utils/comms';
 import Helpers from '../utils/helpers';
 
+export function getNotificationIcon(type) {
+  switch (type) {
+    case 'Issue':
+      return 'images/notifications/issue.png';
+    case 'Commit':
+      return 'images/notifications/commit.png';
+    case 'PullRequest':
+      return 'images/notifications/pull-request.png';
+    case 'Release':
+      return 'images/notifications/release.png';
+    default:
+      return 'images/notifications/gitify.png';
+  }
+}
+
 export default {
   setup(notifications, settings) {
     // If there are no new notifications just stop there
     if (!notifications.length) { return; }
 
     if (settings.get('playSound')) {
-      this.raiseSoundNotification(notifications);
+      this.raiseSoundNotification();
     }
 
     if (settings.get('showNotifications')) {
@@ -20,29 +35,9 @@ export default {
     const title = (newCount === 1 ? 'Gitify - ' + notifications[0].repository.full_name : 'Gitify');
     const body = (newCount === 1 ? notifications[0].subject.title : 'You\'ve got ' + newCount + ' notifications.');
 
-    var icon;
-    if (newCount === 1) {
-      switch (notifications[0].subject.type) {
-        case 'Issue':
-          icon = 'images/notifications/issue.png';
-          break;
-        case 'Commit':
-          icon = 'images/notifications/commit.png';
-          break;
-        case 'PullRequest':
-          icon = 'images/notifications/pull-request.png';
-          break;
-        case 'Release':
-          icon = 'images/notifications/release.png';
-          break;
-        default:
-          icon = 'images/notifications/gitify.png';
-      }
-    }
-
     const nativeNotification = new Notification(title, {
       body: body,
-      icon: icon || false,
+      icon: newCount === 1 ? getNotificationIcon(notifications[0].subject.type) : false,
       silent: true
     });
 
@@ -58,7 +53,7 @@ export default {
     return nativeNotification;
   },
 
-  raiseSoundNotification(notifications) {
+  raiseSoundNotification() {
     const audio = new Audio('sounds/digi.wav');
     audio.play();
   }

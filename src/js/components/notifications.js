@@ -39,7 +39,7 @@ export class NotificationsPage extends React.Component {
   }
 };
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
     failed: state.notifications.get('failed'),
     notifications: state.notifications.get('response')

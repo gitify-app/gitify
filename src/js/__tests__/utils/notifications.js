@@ -1,5 +1,5 @@
 import { Map } from 'immutable';
-import NotificationsUtils from '../../utils/notifications';
+import NotificationsUtils, { getNotificationIcon } from '../../utils/notifications';
 import Helpers from '../../utils/helpers';
 import * as comms from '../../utils/comms';
 
@@ -207,5 +207,19 @@ describe('utils/notifications.js', () => {
     nativeNotification.onclick();
 
     expect(comms.reOpenWindow).toHaveBeenCalledTimes(1);
+  });
+
+  it('should use different notification icons', () => {
+    expect(getNotificationIcon('Issue')).toEqual('images/notifications/issue.png');
+    expect(getNotificationIcon('Commit')).toEqual('images/notifications/commit.png');
+    expect(getNotificationIcon('PullRequest')).toEqual('images/notifications/pull-request.png');
+    expect(getNotificationIcon('Release')).toEqual('images/notifications/release.png');
+    expect(getNotificationIcon('WHATEVER')).toEqual('images/notifications/gitify.png');
+  });
+
+  it('should play a sound', () => {
+    spyOn(window.Audio.prototype, 'play');
+    NotificationsUtils.raiseSoundNotification();
+    expect(window.Audio.prototype.play).toHaveBeenCalledTimes(1);
   });
 });

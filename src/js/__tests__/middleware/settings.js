@@ -28,7 +28,7 @@ describe('middleware/settings.js', () => {
     ipcRenderer.send.mockReset();
   });
 
-  it('should mark auto-launch setting to true (enable)', () => {
+  it('should toggle the openAtStartup setting', () => {
     const action = {
       type: actions.UPDATE_SETTING,
       setting: 'openAtStartup',
@@ -41,16 +41,16 @@ describe('middleware/settings.js', () => {
     expect(ipcRenderer.send).toHaveBeenCalledWith('startup-enable');
   });
 
-  it('should mark auto-launch setting to false (disable)', () => {
+  it('should toggle showAppIcon', () => {
     const action = {
       type: actions.UPDATE_SETTING,
-      setting: 'openAtStartup',
-      value: false
+      setting: 'showAppIcon',
+      value: 'both'
     };
 
     expect(dispatchWithStoreOf({}, action)).toEqual(action);
 
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('startup-disable');
+    expect(ipcRenderer.send).toHaveBeenCalledWith('show-app-icon', 'both');
   });
 });

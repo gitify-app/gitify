@@ -69,9 +69,9 @@ export class SingleNotification extends React.Component {
   }
 };
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
-    markOnClick: state.settings.markOnClick
+    markOnClick: state.settings.get('markOnClick'),
   };
 };
 

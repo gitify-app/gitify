@@ -6,6 +6,14 @@ window.Notification = function (title, options) {
   };
 };
 
+window.Audio = class Audio {
+  constructor(path) {
+    this.path = path;
+  }
+
+  play() {}
+};
+
 window.localStorage = {
   store: {},
   getItem: function (key) { return this.store[key]; },
