@@ -40,7 +40,8 @@ module.exports = {
     BrowserWindow: () => browserWindow
   },
   ipcRenderer: {
-    send: jest.fn()
+    send: jest.fn(),
+    on: jest.fn(),
   },
   shell: {
     openExternal: jest.fn()
