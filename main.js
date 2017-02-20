@@ -102,7 +102,7 @@ app.on('ready', function() {
 
   function initWindow () {
     var defaults = {
-      width: 800,
+      width: 500,
       height: 600,
       minHeight: 300,
       minWidth: 500,
