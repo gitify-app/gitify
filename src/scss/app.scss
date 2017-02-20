@@ -242,12 +242,15 @@ input {
   width: $sidebar-width;
   height: 100%;
   overflow-y: auto;
+
   -webkit-app-region: drag;
 
   .logo {
     display: block;
     margin: .75rem auto;
     max-width: ($sidebar-width / 2) + 20;
+    -webkit-app-region: no-drag;
+    -webkit-user-drag: none;
   }
 
   .tag-count {
@@ -258,6 +261,10 @@ input {
 
   .nav {
     text-align: center;
+
+    .nav-item {
+      -webkit-app-region: no-drag;
+    }
   }
 
   .footer {
@@ -267,6 +274,7 @@ input {
     left: .75rem;
 
     .btn-star {
+      -webkit-app-region: no-drag;
 
       &:hover {
         background-color: $gray-darker;
