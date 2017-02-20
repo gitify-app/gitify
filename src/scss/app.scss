@@ -242,6 +242,7 @@ input {
   width: $sidebar-width;
   height: 100%;
   overflow-y: auto;
+  -webkit-app-region: drag;
 
   .logo {
     display: block;
