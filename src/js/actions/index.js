@@ -2,6 +2,10 @@ import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 
 import Constants from '../utils/constants';
 
+function constructGithubUrl(settings) {
+  return `https://${settings.isEnterprise ? '' : 'api.'}${settings.baseUrl}${settings.isEnterprise ? '/api/v3/' : '/'}`;
+}
+
 export function makeAsyncActionSet(actionName) {
   return {
     REQUEST: actionName + '_REQUEST',
@@ -15,12 +19,12 @@ export function makeAsyncActionSet(actionName) {
 export const LOGIN = makeAsyncActionSet('LOGIN');
 export function loginUser(code) {
   return (dispatch, getState) => {
-
-    const url = 'https://github.com/login/oauth/access_token';
+    const { settings } = getState();
+    const url = `https://${settings.baseUrl}/login/oauth/access_token`;
     const method = 'POST';
     const data = {
-      'client_id': Constants.CLIENT_ID,
-      'client_secret': Constants.CLIENT_SECRET,
+      'client_id': settings.clientId,
+      'client_secret': settings.clientSecret,
       'code': code
     };
 
@@ -49,8 +53,10 @@ export const NOTIFICATIONS = makeAsyncActionSet('NOTIFICATIONS');
 export function fetchNotifications() {
   return (dispatch, getState) => {
 
-    const participating = getState().settings.get('participating');
-    const url = `https://api.github.com/notifications?participating=${participating}`;
+    const participating = getState().settings.participating;
+    const { settings } = getState();
+    // Construct the api!
+    const url = `${constructGithubUrl(settings)}notifications?participating=${participating}`;
     const method = 'GET';
     const token = getState().auth.get('token');
 
@@ -73,8 +79,9 @@ export function fetchNotifications() {
 export const MARK_NOTIFICATION = makeAsyncActionSet('MARK_NOTIFICATION');
 export function markNotification(id) {
   return (dispatch, getState) => {
-
-    const url = `https://api.github.com/notifications/threads/${id}`;
+    const { settings } = getState();
+    // Construct the api!
+    const url = `${constructGithubUrl(settings)}notifications/threads/${id}`;
     const method = 'PATCH';
     const token = getState().auth.get('token');
 
@@ -97,7 +104,9 @@ export const MARK_REPO_NOTIFICATION = makeAsyncActionSet('MARK_REPO_NOTIFICATION
 export function markRepoNotifications(repoSlug) {
   return (dispatch, getState) => {
 
-    const url = `https://api.github.com/repos/${repoSlug}/notifications`;
+    const { settings } = getState();
+    // Construct the api!
+    const url = `${constructGithubUrl(settings)}repos/${repoSlug}/notifications`;
     const method = 'PUT';
     const token = getState().auth.get('token');
 
@@ -119,8 +128,9 @@ export function markRepoNotifications(repoSlug) {
 export const HAS_STARRED = makeAsyncActionSet('HAS_STARRED');
 export function checkHasStarred() {
   return (dispatch, getState) => {
-
-    const url = `https://api.github.com/user/starred/${Constants.REPO_SLUG}`;
+    const { settings } = getState();
+    // Construct the api!
+    const url = `${constructGithubUrl(settings)}user/starred/${Constants.REPO_SLUG}`;
     const method = 'GET';
     const token = getState().auth.get('token');
 

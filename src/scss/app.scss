@@ -101,6 +101,16 @@ body {
 }
 
 .btn {
+  @include border-radius(0);
+  border: 0;
+
+  @include button-variant($white, $gray, $btn-primary-border);
+  padding: .55rem 1.25rem;
+
+  .fa {
+    margin-right: 10px;
+  }
+
   &:focus {
     outline: none;
   }
@@ -109,6 +119,10 @@ body {
 .right,
 .text-right {
   text-align: right;
+}
+
+.text-center {
+  text-align: center;
 }
 
 input {
@@ -351,9 +365,8 @@ input {
     font-size: 20px;
   }
 
-  .btn {
-    @include button-variant($white, $gray, $btn-primary-border);
-    padding: .55rem 1.25rem;
+  .login-btn {
+    padding: 5px 0;
   }
 }
 
