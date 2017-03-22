@@ -37,16 +37,18 @@ export class LoginPage extends React.Component {
             <img className="img-responsive logo" src="images/gitify-logo-outline-dark.png" />
             <div className="desc">GitHub Notifications<br />in your menu bar.</div>
             <div className="row">
-              <div className="col-xs-6 login-btn">
-                <button className="btn btn-md" onClick={helpers.authGithub.bind(this, this.props.settings, this.props.loginUser)}>
-                  <i className="fa fa-github" />GitHub
-                </button>
-              </div>
-              <div className="col-xs-6 login-btn">
-                <button className="btn btn-md" onClick={this.routeToEnterpriseLogin}>
-                  <i className="fa fa-github" />Enterprise
-                </button>
-              </div>
+              <button
+                className="btn btn-lg btn-block"
+                onClick={helpers.authGithub.bind(this, this.props.settings, this.props.loginUser)}
+              >
+                <i className="fa fa-github" /> Log in to GitHub
+              </button>
+              <button
+                  className="btn btn-lg btn-block"
+                  onClick={this.routeToEnterpriseLogin}
+              >
+                <i className="fa fa-github" /> Enterprise
+              </button>
             </div>
           </div>
         </div>
