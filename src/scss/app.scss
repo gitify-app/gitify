@@ -101,19 +101,6 @@ body {
 }
 
 .btn {
-<<<<<<< Updated upstream
-=======
-  @include border-radius(0);
-  border: 0;
-
-  @include button-variant($white, $gray, $btn-primary-border);
-  // padding: .55rem 1.25rem;
-
-  .fa {
-    margin-right: 10px;
-  }
-
->>>>>>> Stashed changes
   &:focus {
     outline: none;
   }

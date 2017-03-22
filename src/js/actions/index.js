@@ -3,7 +3,8 @@ import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 import Constants from '../utils/constants';
 
 function constructGithubUrl(settings) {
-  return `https://${settings.get('isEnterprise') ? '' : 'api.'}${settings.get('baseUrl')}${settings.get('isEnterprise') ? '/api/v3/' : '/'}`;
+  return `https://${settings.get('isEnterprise') ? '' : 'api.'}
+  ${settings.get('baseUrl')}${settings.get('isEnterprise') ? '/api/v3/' : '/'}`;
 }
 
 export function makeAsyncActionSet(actionName) {
