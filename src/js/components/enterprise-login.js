@@ -13,6 +13,7 @@ class EnterpriseLogin extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const isLoggedIn = nextProps.token !== null;
+    debugger;
     if (isLoggedIn) {
       ipcRenderer.send('reopen-window');
       this.context.router.push('/notifications');
@@ -92,7 +93,7 @@ class EnterpriseLogin extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    token: state.auth.token,
+    token: state.auth.get('token'),
     settings: state.settings
   };
 };

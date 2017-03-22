@@ -1,5 +1,4 @@
-const { ipcRenderer, remote } = require('electron');
-const BrowserWindow = remote.BrowserWindow;
+const { ipcRenderer } = require('electron');
 
 import React from 'react';
 import { connect } from 'react-redux';

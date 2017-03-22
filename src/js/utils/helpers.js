@@ -1,5 +1,4 @@
 var electron = window.require('electron');
-const ipcRenderer = window.require('electron').ipcRenderer;
 var remote = electron.remote;
 var BrowserWindow = remote.BrowserWindow;
 
