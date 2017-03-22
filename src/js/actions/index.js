@@ -3,8 +3,8 @@ import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 import Constants from '../utils/constants';
 
 function constructGithubUrl(settings) {
-  return `https://${settings.get('isEnterprise') ? '' : 'api.'}
-  ${settings.get('baseUrl')}${settings.get('isEnterprise') ? '/api/v3/' : '/'}`;
+  return `https://${settings.get('isEnterprise') ? '' : 'api.'}` +
+  `${settings.get('baseUrl')}${settings.get('isEnterprise') ? '/api/v3/' : '/'}`;
 }
 
 export function makeAsyncActionSet(actionName) {
@@ -53,11 +53,9 @@ export function logout() {
 export const NOTIFICATIONS = makeAsyncActionSet('NOTIFICATIONS');
 export function fetchNotifications() {
   return (dispatch, getState) => {
-
-    const participating = getState().settings.participating;
     const { settings } = getState();
     // Construct the api!
-    const url = `${constructGithubUrl(settings)}notifications?participating=${participating}`;
+    const url = `${constructGithubUrl(settings)}notifications?participating=${settings.get('participating')}`;
     const method = 'GET';
     const token = getState().auth.get('token');
 
