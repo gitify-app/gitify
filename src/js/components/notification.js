@@ -72,7 +72,7 @@ export class SingleNotification extends React.Component {
 export function mapStateToProps(state) {
   return {
     markOnClick: state.settings.get('markOnClick'),
-    isEnterprise: state.settings.isEnterprise
+    isEnterprise: state.settings.get('isEnterprise')
   };
 };
 

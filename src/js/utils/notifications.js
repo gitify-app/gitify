@@ -26,7 +26,7 @@ export default {
     }
 
     if (settings.get('showNotifications')) {
-      this.raiseNativeNotification(settings.isEnterprise, notifications);
+      this.raiseNativeNotification(settings.get('isEnterprise'), notifications);
     }
   },
 

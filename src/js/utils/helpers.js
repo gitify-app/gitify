@@ -33,8 +33,8 @@ export default {
         nodeIntegration: false
       }
     });
-    var githubUrl = `https://${settings.baseUrl}/login/oauth/authorize?`;
-    var authUrl = githubUrl + 'client_id=' + settings.clientId + '&scope=' + Constants.SCOPE;
+    var githubUrl = `https://${settings.get('baseUrl')}/login/oauth/authorize?`;
+    var authUrl = githubUrl + 'client_id=' + settings.get('clientId') + '&scope=' + Constants.SCOPE;
     authWindow.loadURL(authUrl);
 
     function handleCallback (url) {
