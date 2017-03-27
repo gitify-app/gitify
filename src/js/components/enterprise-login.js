@@ -1,4 +1,4 @@
-var ipcRenderer = window.require('electron').ipcRenderer;
+var ipcRenderer = require('electron').ipcRenderer;
 
 import React from 'react';
 import helpers from '../utils/helpers';

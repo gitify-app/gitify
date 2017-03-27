@@ -37,13 +37,13 @@ export class LoginPage extends React.Component {
             <div className="desc">GitHub Notifications<br />in your menu bar.</div>
             <div className="row">
               <button
-                className="btn btn-lg btn-block"
+                className="btn btn-lg btn-block github"
                 onClick={helpers.authGithub.bind(this, this.props.settings, this.props.loginUser)}
               >
                 <i className="fa fa-github" /> Log in to GitHub
               </button>
               <button
-                  className="btn btn-lg btn-block"
+                  className="btn btn-lg btn-block enterprise"
                   onClick={this.routeToEnterpriseLogin}
               >
                 <i className="fa fa-github" /> Enterprise

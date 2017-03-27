@@ -88,7 +88,7 @@ describe('components/login.js', () => {
 
     expect(wrapper).toBeDefined();
 
-    wrapper.find('.btn').simulate('click');
+    wrapper.find('.github').simulate('click');
 
     expect(BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
     expect(BrowserWindow().loadURL).toHaveBeenCalledWith(expectedUrl);
@@ -120,7 +120,7 @@ describe('components/login.js', () => {
 
     expect(wrapper).toBeDefined();
 
-    wrapper.find('.btn').simulate('click');
+    wrapper.find('.github').simulate('click');
 
     expect(BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
     expect(BrowserWindow().loadURL).toHaveBeenCalledWith(expectedUrl);
@@ -152,7 +152,7 @@ describe('components/login.js', () => {
 
     expect(wrapper).toBeDefined();
 
-    wrapper.find('.btn').simulate('click');
+    wrapper.find('.github').simulate('click');
 
     expect(BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
     expect(BrowserWindow().loadURL).toHaveBeenCalledWith(expectedUrl);
@@ -183,7 +183,7 @@ describe('components/login.js', () => {
 
     expect(wrapper).toBeDefined();
 
-    wrapper.find('.btn').simulate('click');
+    wrapper.find('.github').simulate('click');
 
     expect(BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
     expect(props.loginUser).not.toHaveBeenCalled();
@@ -209,25 +209,5 @@ describe('components/login.js', () => {
     expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
     expect(context.router.push).toHaveBeenCalledTimes(1);
     expect(context.router.push).toHaveBeenCalledWith('/notifications');
-  });
-
-  it('should request the github token if the oauth code is received', () => {
-    const code = 'thisisacode';
-
-    const props = {
-      loginUser: jest.fn(),
-      token: null,
-      response: {},
-      failed: false,
-      isFetching: false
-    };
-
-    const { wrapper } = setup(props);
-
-    expect(wrapper).toBeDefined();
-
-    wrapper.instance().requestGithubToken(code);
-    expect(props.loginUser).toHaveBeenCalledTimes(1);
-    expect(props.loginUser).toHaveBeenCalledWith(code);
   });
 });

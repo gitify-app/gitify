@@ -172,7 +172,7 @@ describe('utils/notifications.js', () => {
     const nativeNotification = NotificationsUtils.raiseNativeNotification([notification]);
     nativeNotification.onclick();
 
-    const newUrl = Helpers.generateGitHubUrl(notification.subject.url);
+    const newUrl = Helpers.generateGitHubUrl(false, notification.subject.url);
     expect(comms.openExternalLink).toHaveBeenCalledTimes(1);
     expect(comms.openExternalLink).toHaveBeenCalledWith(newUrl);
   });
