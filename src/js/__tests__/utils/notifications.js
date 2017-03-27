@@ -169,7 +169,7 @@ describe('utils/notifications.js', () => {
 
     spyOn(comms, 'openExternalLink');
 
-    const nativeNotification = NotificationsUtils.raiseNativeNotification([notification]);
+    const nativeNotification = NotificationsUtils.raiseNativeNotification(false, [notification]);
     nativeNotification.onclick();
 
     const newUrl = Helpers.generateGitHubUrl(false, notification.subject.url);
@@ -203,7 +203,7 @@ describe('utils/notifications.js', () => {
 
     spyOn(comms, 'reOpenWindow');
 
-    const nativeNotification = NotificationsUtils.raiseNativeNotification(notifications);
+    const nativeNotification = NotificationsUtils.raiseNativeNotification(false, notifications);
     nativeNotification.onclick();
 
     expect(comms.reOpenWindow).toHaveBeenCalledTimes(1);

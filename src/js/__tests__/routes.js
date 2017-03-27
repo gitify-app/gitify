@@ -15,7 +15,7 @@ describe('routes.js', () => {
 
     expect(routes).toBeDefined();
     expect(routes.props.path).toBe('/');
-    expect(routes.props.children.length).toBe(4);
+    expect(routes.props.children.length).toBe(5);
   });
 
   it('should return the routes (logged out)', () => {
@@ -24,7 +24,7 @@ describe('routes.js', () => {
 
     expect(routes).toBeDefined();
     expect(routes.props.path).toBe('/');
-    expect(routes.props.children.length).toBe(4);
+    expect(routes.props.children.length).toBe(5);
   });
 
   it('should render the NotFound component', () => {

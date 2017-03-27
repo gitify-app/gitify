@@ -39,6 +39,11 @@ describe('components/login.js', () => {
         token: '123456',
         failed: false,
         isFetching: false,
+        settings: Map({
+          baseUrl: 'github.com',
+          clientId: '3fef4433a29c6ad8f22c',
+          clientSecret: '9670de733096c15322183ff17ed0fc8704050379'
+        }),
       }),
     };
 
@@ -55,7 +60,12 @@ describe('components/login.js', () => {
       token: null,
       response: {},
       failed: false,
-      isFetching: false
+      isFetching: false,
+      settings: Map({
+        baseUrl: 'github.com',
+        clientId: '3fef4433a29c6ad8f22c',
+        clientSecret: '9670de733096c15322183ff17ed0fc8704050379'
+      }),
     };
 
     const { wrapper } = setup(props);
@@ -81,7 +91,12 @@ describe('components/login.js', () => {
       token: null,
       response: {},
       failed: false,
-      isFetching: false
+      isFetching: false,
+      settings: Map({
+        baseUrl: 'github.com',
+        clientId: '3fef4433a29c6ad8f22c',
+        clientSecret: '9670de733096c15322183ff17ed0fc8704050379'
+      }),
     };
 
     const { wrapper } = setup(props);
@@ -113,7 +128,12 @@ describe('components/login.js', () => {
       token: null,
       response: {},
       failed: false,
-      isFetching: false
+      isFetching: false,
+      settings: Map({
+        baseUrl: 'github.com',
+        clientId: '3fef4433a29c6ad8f22c',
+        clientSecret: '9670de733096c15322183ff17ed0fc8704050379'
+      }),
     };
 
     const { wrapper } = setup(props);
@@ -145,7 +165,12 @@ describe('components/login.js', () => {
       token: null,
       response: {},
       failed: false,
-      isFetching: false
+      isFetching: false,
+      settings: Map({
+        baseUrl: 'github.com',
+        clientId: '3fef4433a29c6ad8f22c',
+        clientSecret: '9670de733096c15322183ff17ed0fc8704050379'
+      }),
     };
 
     const { wrapper } = setup(props);
@@ -176,7 +201,12 @@ describe('components/login.js', () => {
       token: null,
       response: {},
       failed: false,
-      isFetching: false
+      isFetching: false,
+      settings: Map({
+        baseUrl: 'github.com',
+        clientId: '3fef4433a29c6ad8f22c',
+        clientSecret: '9670de733096c15322183ff17ed0fc8704050379'
+      }),
     };
 
     const { wrapper } = setup(props);
@@ -194,7 +224,12 @@ describe('components/login.js', () => {
       isLoggedIn: false,
       response: {},
       failed: false,
-      isFetching: false
+      isFetching: false,
+      settings: Map({
+        baseUrl: 'github.com',
+        clientId: '3fef4433a29c6ad8f22c',
+        clientSecret: '9670de733096c15322183ff17ed0fc8704050379'
+      }),
     };
 
     const { wrapper, context } = setup(props);
