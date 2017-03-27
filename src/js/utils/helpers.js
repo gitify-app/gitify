@@ -1,4 +1,4 @@
-var electron = window.require('electron');
+var electron = require('electron');
 var remote = electron.remote;
 var BrowserWindow = remote.BrowserWindow;
 
@@ -22,7 +22,7 @@ export default {
     return newUrl;
   },
 
-  authGithub (settings, loginUser) {
+  authGithub(settings, loginUser) {
     //Build the OAuth consent page URL
     var authWindow = new BrowserWindow({
       width: 800,
