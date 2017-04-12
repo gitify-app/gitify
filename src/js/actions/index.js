@@ -3,8 +3,8 @@ import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 import Constants from '../utils/constants';
 
 function constructGithubUrl(settings) {
-  return `https://${settings.get('isEnterprise') ? '' : 'api.'}` +
-  `${settings.get('baseUrl')}${settings.get('isEnterprise') ? '/api/v3/' : '/'}`;
+  // FIXME!
+  return `https://api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}/`;
 }
 
 export function makeAsyncActionSet(actionName) {
@@ -20,7 +20,7 @@ export function makeAsyncActionSet(actionName) {
 export const LOGIN = makeAsyncActionSet('LOGIN');
 export function loginUser(authOptions, code) {
   return (dispatch, getState) => {
-    const url = `https://${authOptions.baseUrl}/login/oauth/access_token`;
+    const url = `https://${authOptions.hostname}/login/oauth/access_token`;
     const method = 'POST';
     const data = {
       'client_id': authOptions.clientId,

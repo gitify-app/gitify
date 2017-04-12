@@ -34,7 +34,7 @@ export function authGithub(authOptions = Constants.DEFAULT_AUTH_OPTIONS, loginUs
     }
   });
 
-  const githubUrl = `https://${authOptions.baseUrl}/login/oauth/authorize?`;
+  const githubUrl = `https://${authOptions.hostname}/login/oauth/authorize?`;
   const authUrl = githubUrl + 'client_id=' + authOptions.clientId + '&scope=' + Constants.AUTH_SCOPE;
 
   authWindow.loadURL(authUrl);
