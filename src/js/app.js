@@ -48,7 +48,7 @@ ReactDOM.render(
     <Router>
 
       <div className="wrapper">
-        <Loading isLoading={store.getState().notifications.get('isFetching')} />
+        <Loading />
         <SettingsModal />
         <Sidebar />
 
