@@ -16,7 +16,7 @@ export class SettingsModal extends React.Component {
   }
 
   onEscape({ keyCode }) {
-    if (keyCode === 27) {
+    if (keyCode === 27 && this.props.settings.get('showSettingsModal')) {
       this.props.toggleSettingsModal();
     }
   }
@@ -36,9 +36,9 @@ export class SettingsModal extends React.Component {
   }
 
   render() {
-    const { settings, isOpen } = this.props;
+    const { settings, isLoggedIn } = this.props;
 
-    if (!this.props.isLoggedIn) {
+    if (!isLoggedIn) {
       return (
         <Redirect to="/login" />
       );
@@ -47,7 +47,7 @@ export class SettingsModal extends React.Component {
     return (
       <Modal
         className="settings-modal bg-inverse"
-        isOpen={isOpen}
+        isOpen={settings.get('showSettingsModal')}
         contentLabel="Settings Modal">
         <h3 className="modal-title">
           Settings
@@ -128,14 +128,10 @@ SettingsModal.contextTypes = {
   router: PropTypes.object.isRequired
 };
 
-SettingsModal.propTypes = {
-  isOpen: PropTypes.bool.isRequired
-};
-
 export function mapStateToProps(state) {
   return {
     isLoggedIn: state.auth.get('token') !== null,
-    settings: state.settings
+    settings: state.settings,
   };
 };
 

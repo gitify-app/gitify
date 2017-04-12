@@ -48,8 +48,8 @@ ReactDOM.render(
     <Router>
 
       <div className="wrapper">
-
         <Loading isLoading={store.getState().notifications.get('isFetching')} />
+        <SettingsModal />
         <Sidebar />
 
         <Switch>
@@ -57,8 +57,6 @@ ReactDOM.render(
           <Route path="/login" component={LoginPage} />
           <Route component={NotFound}/>
         </Switch>
-
-        <SettingsModal isOpen={store.getState().settings.get('showSettingsModal')} />
       </div>
 
     </Router>
