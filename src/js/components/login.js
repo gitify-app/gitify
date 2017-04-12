@@ -12,7 +12,7 @@ export class LoginPage extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
       ipcRenderer.send('reopen-window');
-      this.context.router.push('/notifications');
+      // this.context.router.push('/notifications');
     }
   }
 
