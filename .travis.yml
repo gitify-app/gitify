@@ -14,7 +14,7 @@ before_script:
   - npm run build
 
 script:
-  - npm test
+  - npm test -- --runInBand
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
