@@ -33,7 +33,14 @@ describe('actions/index.js', () => {
       { type: actions.LOGIN.SUCCESS, payload: { body: { access_token: 'THISISATOKEN' } } }
     ];
 
-    const store = createMockStore({ response: [] }, expectedActions);
+    const store = createMockStore({
+      settings: Map({
+        participating: false,
+        isEnterprise: false,
+        baseUrl: 'github.com'
+      }),
+      response: []
+    }, expectedActions);
 
     return store.dispatch(actions.loginUser(code)).then(() => { // return of async actions
       expect(store.getActions()).toEqual(expectedActions);
@@ -57,7 +64,14 @@ describe('actions/index.js', () => {
       { type: actions.LOGIN.FAILURE, payload: { body: { message } } }
     ];
 
-    const store = createMockStore({ response: [] }, expectedActions);
+    const store = createMockStore({
+      response: [],
+      settings: Map({
+        participating: false,
+        isEnterprise: false,
+        baseUrl: 'github.com'
+      })
+    }, expectedActions);
 
     return store.dispatch(actions.loginUser(code)).then(() => {
       expect(store.getActions()).toEqual(expectedActions);
@@ -95,7 +109,11 @@ describe('actions/index.js', () => {
 
     const store = createMockStore({
       auth: Map({ token: 'THISISATOKEN' }),
-      settings: Map({ participating: false }),
+      settings: Map({
+        participating: false,
+        isEnterprise: false,
+        baseUrl: 'github.com'
+      }),
       notifications: Map({response: List()})
     }, expectedActions);
 
@@ -120,7 +138,11 @@ describe('actions/index.js', () => {
 
     const store = createMockStore({
       auth: Map({ token: null }),
-      settings: Map({ participating: false }),
+      settings: Map({
+        participating: false,
+        isEnterprise: false,
+        baseUrl: 'github.com'
+      }),
       notifications: Map({response: List()})
     }, expectedActions);
 
@@ -146,6 +168,11 @@ describe('actions/index.js', () => {
 
     const store = createMockStore({
       auth: Map({ token: 'IAMATOKEN' }),
+      settings: Map({
+        participating: false,
+        isEnterprise: false,
+        baseUrl: 'github.com'
+      }),
       notifications: Map({response: List()})
     }, expectedActions);
 
@@ -171,6 +198,11 @@ describe('actions/index.js', () => {
 
     const store = createMockStore({
       auth: Map({ token: null }),
+      settings: Map({
+        participating: false,
+        isEnterprise: false,
+        baseUrl: 'github.com'
+      }),
       notifications: Map({response: List()})
     }, expectedActions);
 
@@ -196,6 +228,11 @@ describe('actions/index.js', () => {
 
     const store = createMockStore({
       auth: Map({ token: 'IAMATOKEN' }),
+      settings: Map({
+        participating: false,
+        isEnterprise: false,
+        baseUrl: 'github.com'
+      }),
       notifications: Map({response: List()})
     }, expectedActions);
 
@@ -221,6 +258,11 @@ describe('actions/index.js', () => {
 
     const store = createMockStore({
       auth: Map({ token: null }),
+      settings: Map({
+        participating: false,
+        isEnterprise: false,
+        baseUrl: 'github.com'
+      }),
       notifications: Map({response: List()})
     }, expectedActions);
 
@@ -241,6 +283,11 @@ describe('actions/index.js', () => {
 
     const store = createMockStore({
       auth: Map({ token: 'IAMATOKEN' }),
+      settings: Map({
+        participating: false,
+        isEnterprise: false,
+        baseUrl: 'github.com'
+      }),
       notifications: Map({response: List()})
     }, expectedActions);
 
@@ -261,6 +308,11 @@ describe('actions/index.js', () => {
 
     const store = createMockStore({
       auth: Map({ token: 'IAMATOKEN' }),
+      settings: Map({
+        participating: false,
+        isEnterprise: false,
+        baseUrl: 'github.com'
+      }),
       notifications: Map({response: List()})
     }, expectedActions);
 

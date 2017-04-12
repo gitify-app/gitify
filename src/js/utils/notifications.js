@@ -26,11 +26,11 @@ export default {
     }
 
     if (settings.get('showNotifications')) {
-      this.raiseNativeNotification(notifications);
+      this.raiseNativeNotification(settings.get('isEnterprise'), notifications);
     }
   },
 
-  raiseNativeNotification(notifications) {
+  raiseNativeNotification(isEnterprise, notifications) {
     const newCount = notifications.length;
     const title = (newCount === 1 ? 'Gitify - ' + notifications[0].repository.full_name : 'Gitify');
     const body = (newCount === 1 ? notifications[0].subject.title : 'You\'ve got ' + newCount + ' notifications.');
@@ -43,7 +43,7 @@ export default {
 
     nativeNotification.onclick = function () {
       if (newCount === 1) {
-        var url = Helpers.generateGitHubUrl(notifications[0].subject.url);
+        var url = Helpers.generateGitHubUrl(isEnterprise, notifications[0].subject.url);
         openExternalLink(url);
       } else {
         reOpenWindow();

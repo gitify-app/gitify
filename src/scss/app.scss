@@ -111,6 +111,10 @@ body {
   text-align: right;
 }
 
+.text-center {
+  text-align: center;
+}
+
 input {
   outline: none;
 }
@@ -349,6 +353,10 @@ input {
     line-height: 22px;
     color: $gray-dark;
     font-size: 20px;
+  }
+
+  .login-btn {
+    padding: 5px 0;
   }
 
   .btn {

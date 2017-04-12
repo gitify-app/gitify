@@ -18,7 +18,7 @@ export class SingleNotification extends React.Component {
   }
 
   openBrowser() {
-    var url = Helpers.generateGitHubUrl(this.props.notification.getIn(['subject', 'url']));
+    var url = Helpers.generateGitHubUrl(this.props.isEnterprise, this.props.notification.getIn(['subject', 'url']));
     shell.openExternal(url);
   }
 
@@ -72,6 +72,7 @@ export class SingleNotification extends React.Component {
 export function mapStateToProps(state) {
   return {
     markOnClick: state.settings.get('markOnClick'),
+    isEnterprise: state.settings.get('isEnterprise')
   };
 };
 

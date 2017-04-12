@@ -1,14 +1,23 @@
-const { ipcRenderer, remote } = require('electron');
-const BrowserWindow = remote.BrowserWindow;
+const { ipcRenderer } = require('electron');
 
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import helpers from '../utils/helpers';
 
-import { loginUser } from '../actions';
-import Constants from '../utils/constants';
+import { updateSetting, loginUser } from '../actions';
 
 export class LoginPage extends React.Component {
+
+  componentDidMount() {
+    // TODO: Find a way to batch this....
+    // Reset settings to default github info
+    this.props.updateSetting('isEnterprise', false);
+    this.props.updateSetting('baseUrl', 'github.com');
+    this.props.updateSetting('clientId', '3fef4433a29c6ad8f22c');
+    this.props.updateSetting('clientSecret', '9670de733096c15322183ff17ed0fc8704050379');
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
       ipcRenderer.send('reopen-window');
@@ -16,57 +25,8 @@ export class LoginPage extends React.Component {
     }
   }
 
-  authGithub () {
-    var self = this;
-
-    //Build the OAuth consent page URL
-    var authWindow = new BrowserWindow({
-      width: 800,
-      height: 600,
-      show: true,
-      webPreferences: {
-        nodeIntegration: false
-      }
-    });
-    var githubUrl = 'https://github.com/login/oauth/authorize?';
-    var authUrl = githubUrl + 'client_id=' + Constants.CLIENT_ID + '&scope=' + Constants.SCOPE;
-    authWindow.loadURL(authUrl);
-
-    function handleCallback (url) {
-      var raw_code = /code=([^&]*)/.exec(url) || null;
-      var code = (raw_code && raw_code.length > 1) ? raw_code[1] : null;
-      var error = /\?error=(.+)$/.exec(url);
-
-      if (code || error) {
-        // Close the browser if code found or error
-        authWindow.destroy();
-      }
-
-      // If there is a code, proceed to get token from github
-      if (code) {
-        self.requestGithubToken(code);
-      } else if (error) {
-        alert('Oops! Something went wrong and we couldn\'t ' +
-          'log you in using Github. Please try again.');
-      }
-    }
-
-    // If "Done" button is pressed, hide "Loading"
-    authWindow.on('close', function () {
-      authWindow.destroy();
-    });
-
-    authWindow.webContents.on('will-navigate', function (event, url) {
-      handleCallback(url);
-    });
-
-    authWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
-      handleCallback(newUrl);
-    });
-  }
-
-  requestGithubToken(code) {
-    this.props.loginUser(code);
+  routeToEnterpriseLogin = () => {
+    this.context.router.push('/enterpriselogin');
   }
 
   render() {
@@ -76,9 +36,20 @@ export class LoginPage extends React.Component {
           <div className="offset-xs-2 col-xs-8">
             <img className="img-responsive logo" src="images/gitify-logo-outline-dark.png" />
             <div className="desc">GitHub Notifications<br />in your menu bar.</div>
-            <button className="btn btn-lg btn-block" onClick={this.authGithub.bind(this)}>
-              <i className="fa fa-github" />Log in to GitHub
-            </button>
+            <div className="row">
+              <button
+                className="btn btn-lg btn-block github"
+                onClick={helpers.authGithub.bind(this, this.props.settings, this.props.loginUser)}
+              >
+                <i className="fa fa-github" /> Log in to GitHub
+              </button>
+              <button
+                  className="btn btn-lg btn-block enterprise"
+                  onClick={this.routeToEnterpriseLogin}
+              >
+                <i className="fa fa-github" /> Enterprise
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -94,8 +65,9 @@ export function mapStateToProps(state) {
   return {
     isLoggedIn: state.auth.get('token') !== null,
     failed: state.auth.get('failed'),
-    isFetching: state.auth.get('isFetching')
+    isFetching: state.auth.get('isFetching'),
+    settings: state.settings
   };
 };
 
-export default connect(mapStateToProps, { loginUser })(LoginPage);
+export default connect(mapStateToProps, { updateSetting, loginUser })(LoginPage);
