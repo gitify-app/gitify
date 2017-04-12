@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import Modal from 'react-modal';
 import { Checkbox, RadioGroup, Radio } from 'react-icheck';
 
@@ -30,13 +31,18 @@ export class SettingsModal extends React.Component {
 
   logout() {
     this.props.logout();
-    this.context.router.replace('/login');
     updateTrayIcon();
     this.props.toggleSettingsModal();
   }
 
   render() {
     const { settings, isOpen } = this.props;
+
+    if (!this.props.isLoggedIn) {
+      return (
+        <Redirect to="/login" />
+      );
+    }
 
     return (
       <Modal
@@ -128,6 +134,7 @@ SettingsModal.propTypes = {
 
 export function mapStateToProps(state) {
   return {
+    isLoggedIn: state.auth.get('token') !== null,
     settings: state.settings
   };
 };

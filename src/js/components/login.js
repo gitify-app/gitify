@@ -4,6 +4,7 @@ const BrowserWindow = remote.BrowserWindow;
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import { loginUser } from '../actions';
 import Constants from '../utils/constants';
@@ -12,7 +13,6 @@ export class LoginPage extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
       ipcRenderer.send('reopen-window');
-      // this.context.router.push('/notifications');
     }
   }
 
@@ -70,6 +70,12 @@ export class LoginPage extends React.Component {
   }
 
   render() {
+    if (this.props.isLoggedIn) {
+      return (
+        <Redirect to="/" />
+      );
+    }
+
     return (
       <div className="container-fluid main-container login">
         <div className="row">
