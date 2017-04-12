@@ -3,7 +3,7 @@ const { ipcRenderer } = require('electron');
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import helpers from '../utils/helpers';
+import { authGithub } from '../utils/helpers';
 
 import { updateSetting, loginUser } from '../actions';
 
@@ -40,7 +40,7 @@ export class LoginPage extends React.Component {
             <div className="row">
               <button
                 className="btn btn-lg btn-block github"
-                onClick={helpers.authGithub.bind(this, this.props.settings, this.props.loginUser)}
+                onClick={() => authGithub(undefined, this.props.loginUser)}
               >
                 <i className="fa fa-github" /> Log in to GitHub
               </button>

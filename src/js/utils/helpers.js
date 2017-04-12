@@ -21,51 +21,54 @@ export default {
 
     return newUrl;
   },
+};
 
-  authGithub(settings, loginUser) {
-    //Build the OAuth consent page URL
-    var authWindow = new BrowserWindow({
-      width: 800,
-      height: 600,
-      show: true,
-      webPreferences: {
-        nodeIntegration: false
-      }
-    });
-    var githubUrl = `https://${settings.get('baseUrl')}/login/oauth/authorize?`;
-    var authUrl = githubUrl + 'client_id=' + settings.get('clientId') + '&scope=' + Constants.SCOPE;
-    authWindow.loadURL(authUrl);
+export function authGithub(authOptions = Constants.DEFAULT_AUTH_OPTIONS, loginUser) {
+  // Build the OAuth consent page URL
+  const authWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    show: true,
+    webPreferences: {
+      nodeIntegration: false
+    }
+  });
 
-    function handleCallback (url) {
-      var raw_code = /code=([^&]*)/.exec(url) || null;
-      var code = (raw_code && raw_code.length > 1) ? raw_code[1] : null;
-      var error = /\?error=(.+)$/.exec(url);
+  const githubUrl = `https://${authOptions.baseUrl}/login/oauth/authorize?`;
+  const authUrl = githubUrl + 'client_id=' + authOptions.clientId + '&scope=' + Constants.AUTH_SCOPE;
 
-      if (code || error) {
-        // Close the browser if code found or error
-        authWindow.destroy();
-      }
+  authWindow.loadURL(authUrl);
 
-      // If there is a code, proceed to get token from github
-      if (code) {
-        loginUser(code);
-      } else if (error) {
-        alert('Oops! Something went wrong and we couldn\'t ' +
-          'log you in using Github. Please try again.');
-      }
+  function handleCallback (url) {
+    const raw_code = /code=([^&]*)/.exec(url) || null;
+    const code = (raw_code && raw_code.length > 1) ? raw_code[1] : null;
+    const error = /\?error=(.+)$/.exec(url);
+
+    if (code || error) {
+      // Close the browser if code found or error
+      authWindow.destroy();
     }
 
-    // If "Done" button is pressed, hide "Loading"
-    authWindow.on('close', function () {
-      authWindow.destroy();
-    });
-
-    authWindow.webContents.on('will-navigate', function (event, url) {
-      handleCallback(url);
-    });
-
-    authWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
-      handleCallback(newUrl);
-    });
+    // If there is a code, proceed to get token from github
+    if (code) {
+      loginUser(authOptions, code);
+    } else if (error) {
+      alert('Oops! Something went wrong and we couldn\'t ' +
+        'log you in using Github. Please try again.');
+    }
   }
-};
+
+  // If "Done" button is pressed, hide "Loading"
+  authWindow.on('close', function () {
+    authWindow.destroy();
+  });
+
+  authWindow.webContents.on('will-navigate', function (event, url) {
+    handleCallback(url);
+  });
+
+  authWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
+    handleCallback(newUrl);
+  });
+}
+

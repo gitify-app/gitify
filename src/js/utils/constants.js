@@ -1,5 +1,12 @@
-const constants = {
-  SCOPE: ['user:email', 'notifications'],
+export default {
+  // GitHub OAuth
+  AUTH_SCOPE: ['user:email', 'notifications'],
+
+  DEFAULT_AUTH_OPTIONS: {
+    baseUrl: 'github.com',
+    clientId: '3fef4433a29c6ad8f22c',
+    clientSecret: '9670de733096c15322183ff17ed0fc8704050379',
+  },
 
   REPO_SLUG: 'manosim/gitify',
 
@@ -36,5 +43,3 @@ const constants = {
     ':cry:'
   ]
 };
-
-export default constants;

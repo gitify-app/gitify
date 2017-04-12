@@ -18,14 +18,13 @@ export function makeAsyncActionSet(actionName) {
 // Authentication
 
 export const LOGIN = makeAsyncActionSet('LOGIN');
-export function loginUser(code) {
+export function loginUser(authOptions, code) {
   return (dispatch, getState) => {
-    const { settings } = getState();
-    const url = `https://${settings.get('baseUrl')}/login/oauth/access_token`;
+    const url = `https://${authOptions.baseUrl}/login/oauth/access_token`;
     const method = 'POST';
     const data = {
-      'client_id': settings.get('clientId'),
-      'client_secret': settings.get('clientSecret'),
+      'client_id': authOptions.clientId,
+      'client_secret': authOptions.clientSecret,
       'code': code
     };
 
