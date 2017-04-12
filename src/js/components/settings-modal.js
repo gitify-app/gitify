@@ -31,8 +31,8 @@ export class SettingsModal extends React.Component {
 
   logout() {
     this.props.logout();
-    updateTrayIcon();
     this.props.toggleSettingsModal();
+    updateTrayIcon();
   }
 
   render() {
@@ -122,10 +122,6 @@ export class SettingsModal extends React.Component {
     </Modal>
     );
   }
-};
-
-SettingsModal.contextTypes = {
-  router: PropTypes.object.isRequired
 };
 
 export function mapStateToProps(state) {

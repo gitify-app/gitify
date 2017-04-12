@@ -92,10 +92,6 @@ export class LoginPage extends React.Component {
   }
 };
 
-LoginPage.contextTypes = {
-  router: PropTypes.object.isRequired
-};
-
 export function mapStateToProps(state) {
   return {
     isLoggedIn: state.auth.get('token') !== null,
