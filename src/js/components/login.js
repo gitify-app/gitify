@@ -2,7 +2,6 @@ const { ipcRenderer, remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 
