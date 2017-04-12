@@ -30,7 +30,7 @@ export function loginUser(code) {
     };
 
     dispatch({type: LOGIN.REQUEST});
-    debugger;
+
     return apiRequest(url, method, data)
       .then(function (response) {
         dispatch({type: LOGIN.SUCCESS, payload: response.data});
@@ -38,7 +38,6 @@ export function loginUser(code) {
       .catch(function (error) {
         dispatch({type: LOGIN.FAILURE, payload: error.response.data});
       });
-
   };
 };
 

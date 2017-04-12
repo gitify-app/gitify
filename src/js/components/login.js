@@ -14,8 +14,8 @@ export class LoginPage extends React.Component {
     // Reset settings to default github info
     this.props.updateSetting('isEnterprise', false);
     this.props.updateSetting('baseUrl', 'github.com');
-    this.props.updateSetting('clientId', '3fef4433a29c6ad8f22c');
-    this.props.updateSetting('clientSecret', '9670de733096c15322183ff17ed0fc8704050379');
+    this.props.updateSetting('clientId', '');
+    this.props.updateSetting('clientSecret', '');
   }
 
   componentWillReceiveProps(nextProps) {
