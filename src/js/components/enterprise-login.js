@@ -1,6 +1,7 @@
-var ipcRenderer = require('electron').ipcRenderer;
+const ipcRenderer = require('electron').ipcRenderer;
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import helpers from '../utils/helpers';
 import { connect } from 'react-redux';
 import { updateSetting, loginUser } from '../actions';
@@ -13,7 +14,7 @@ class EnterpriseLogin extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const isLoggedIn = nextProps.token !== null;
-    debugger;
+
     if (isLoggedIn) {
       ipcRenderer.send('reopen-window');
       this.context.router.push('/notifications');
@@ -33,20 +34,15 @@ class EnterpriseLogin extends React.Component {
     helpers.authGithub(this.props.settings, this.props.loginUser);
   }
 
-  routeToLogin = () => {
-    this.context.router.push('/login');
-  }
-
   render() {
     return (
       <div className="container-fluid main-container settings">
-        <ul className="nav nav-pills">
-          <li className="nav-item">
-            <a className="nav-link" onClick={this.routeToLogin}>
-              <i className="fa fa-arrow-left" /> Back to login page
-            </a>
-          </li>
-        </ul>
+        <Link
+          to="/login"
+          className="btn btn-lg btn-block enterprise"
+          replace>
+          <i className="fa fa-angle-left" /> Back
+        </Link>
 
         <div className="row setting">
           <div className="col-xs-4">Base Url</div>

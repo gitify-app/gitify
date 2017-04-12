@@ -1,7 +1,7 @@
 const { ipcRenderer } = require('electron');
 
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import helpers from '../utils/helpers';
 
@@ -24,10 +24,6 @@ export class LoginPage extends React.Component {
     }
   }
 
-  routeToEnterpriseLogin() {
-    this.context.router.push('/enterpriselogin');
-  }
-
   render() {
     if (this.props.isLoggedIn) {
       return (
@@ -48,12 +44,12 @@ export class LoginPage extends React.Component {
               >
                 <i className="fa fa-github" /> Log in to GitHub
               </button>
-              <button
-                  className="btn btn-lg btn-block enterprise"
-                  onClick={this.routeToEnterpriseLogin}
-              >
+
+              <Link
+                to="/enterpriselogin"
+                className="btn btn-lg btn-block enterprise">
                 <i className="fa fa-github" /> Enterprise
-              </button>
+              </Link>
             </div>
           </div>
         </div>
