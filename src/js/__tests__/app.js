@@ -4,7 +4,6 @@ import { ipcRenderer } from 'electron';
 
 import * as actions from '../actions';
 
-jest.mock('../routes');
 jest.mock('../store/configureStore', () => {
   return () => ({
     getState: () => {
