@@ -7,25 +7,6 @@ import { LoginPage, mapStateToProps } from '../../components/login';
 const { shell, ipcRenderer, remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 
-function setup(props) {
-  const options = {
-    context: {
-      router: {
-        push: jest.fn(),
-        replace: jest.fn()
-      }
-    }
-  };
-
-  const wrapper = shallow(<LoginPage {...props} />, options);
-
-  return {
-    context: options.context,
-    props: props,
-    wrapper: wrapper,
-  };
-};
-
 describe('components/login.js', () => {
   beforeEach(function() {
     BrowserWindow().loadURL.mockReset();
@@ -68,7 +49,7 @@ describe('components/login.js', () => {
       }),
     };
 
-    const { wrapper } = setup(props);
+    const wrapper = shallow(<LoginPage {...props} />);
 
     expect(wrapper).toBeDefined();
     expect(wrapper.find('.desc').text()).toContain('in your menu bar.');
@@ -99,7 +80,7 @@ describe('components/login.js', () => {
       }),
     };
 
-    const { wrapper } = setup(props);
+    const wrapper = shallow(<LoginPage {...props} />);
 
     expect(wrapper).toBeDefined();
 
@@ -136,7 +117,7 @@ describe('components/login.js', () => {
       }),
     };
 
-    const { wrapper } = setup(props);
+    const wrapper = shallow(<LoginPage {...props} />);
 
     expect(wrapper).toBeDefined();
 
@@ -173,7 +154,7 @@ describe('components/login.js', () => {
       }),
     };
 
-    const { wrapper } = setup(props);
+    const wrapper = shallow(<LoginPage {...props} />);
 
     expect(wrapper).toBeDefined();
 
@@ -209,7 +190,7 @@ describe('components/login.js', () => {
       }),
     };
 
-    const { wrapper } = setup(props);
+    const wrapper = shallow(<LoginPage {...props} />);
 
     expect(wrapper).toBeDefined();
 
@@ -232,7 +213,7 @@ describe('components/login.js', () => {
       }),
     };
 
-    const { wrapper, context } = setup(props);
+    const wrapper = shallow(<LoginPage {...props} />);
 
     expect(wrapper).toBeDefined();
 
@@ -242,7 +223,27 @@ describe('components/login.js', () => {
 
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
-    expect(context.router.push).toHaveBeenCalledTimes(1);
-    expect(context.router.push).toHaveBeenCalledWith('/notifications');
+
+    expect(wrapper.props().to).toEqual('/');
+  });
+
+  it('should request the github token if the oauth code is received', () => {
+    const code = 'thisisacode';
+
+    const props = {
+      loginUser: jest.fn(),
+      token: null,
+      response: {},
+      failed: false,
+      isFetching: false
+    };
+
+    const wrapper = shallow(<LoginPage {...props} />);
+
+    expect(wrapper).toBeDefined();
+
+    wrapper.instance().requestGithubToken(code);
+    expect(props.loginUser).toHaveBeenCalledTimes(1);
+    expect(props.loginUser).toHaveBeenCalledWith(code);
   });
 });

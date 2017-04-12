@@ -1,7 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import NProgress from 'nprogress';
 
-export default class Loading extends React.PureComponent {
+export class Loading extends React.PureComponent {
   componentDidMount() {
     NProgress.configure({
       showSpinner: false
@@ -28,3 +29,12 @@ export default class Loading extends React.PureComponent {
     return null;
   };
 };
+
+
+export function mapStateToProps(state) {
+  return {
+    isLoading: state.notifications.get('isFetching')
+  };
+};
+
+export default connect(mapStateToProps, null)(Loading);

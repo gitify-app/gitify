@@ -1,20 +1,15 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { shallow, mount } from 'enzyme';
+import { Map } from 'immutable';
 import NProgress from 'nprogress';
 
-import Loading from '../../components/loading';
-
-function setupShallow() {
-  const props = {};
-  const wrapper = shallow(<Loading {...props} />);
-
-  return {
-    props: props,
-    wrapper: wrapper,
-  };
-};
+import { Loading, mapStateToProps } from '../../components/loading';
 
 describe('components/loading.js', function () {
+  const props = {
+
+  };
+
   beforeEach(() => {
     NProgress.start = jest.fn();
     NProgress.done = jest.fn();
@@ -27,8 +22,20 @@ describe('components/loading.js', function () {
     NProgress.remove.mockReset();
   });
 
+  it('should test the mapStateToProps method', () => {
+    const state = {
+      notifications: Map({
+        isFetching: false,
+      }),
+    };
+
+    const mappedProps = mapStateToProps(state);
+
+    expect(mappedProps.isLoading).toBeFalsy();
+  });
+
   it('should render itself & its children', function () {
-    const { wrapper } = setupShallow();
+    const wrapper = shallow(<Loading {...props} />);
 
     expect(wrapper).toBeDefined();
     expect(wrapper.children().length).toBe(0);
@@ -38,8 +45,8 @@ describe('components/loading.js', function () {
     spyOn(Loading.prototype, 'componentDidMount').and.callThrough();
 
     const isLoading = true;
-    const props = { isLoading };
-    const wrapper = mount(<Loading {...props} />);
+    const caseProps = { isLoading };
+    const wrapper = mount(<Loading {...caseProps} />);
 
     expect(wrapper).toBeDefined();
     expect(wrapper.children().length).toEqual(0);
@@ -52,8 +59,8 @@ describe('components/loading.js', function () {
     spyOn(Loading.prototype, 'componentDidMount').and.callThrough();;
 
     const isLoading = true;
-    const props = { isLoading };
-    const wrapper = mount(<Loading {...props} />);
+    const caseProps = { isLoading };
+    const wrapper = mount(<Loading {...caseProps} />);
 
     expect(wrapper).toBeDefined();
     expect(wrapper.children().length).toEqual(0);
@@ -76,8 +83,8 @@ describe('components/loading.js', function () {
     spyOn(Loading.prototype, 'componentWillUnmount').and.callThrough();;
 
     const isLoading = true;
-    const props = { isLoading };
-    const wrapper = mount(<Loading {...props} />);
+    const caseProps = { isLoading };
+    const wrapper = mount(<Loading {...caseProps} />);
 
     expect(wrapper).toBeDefined();
     expect(wrapper.children().length).toEqual(0);

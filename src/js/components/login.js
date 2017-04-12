@@ -1,6 +1,7 @@
 const { ipcRenderer } = require('electron');
 
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import helpers from '../utils/helpers';
 
@@ -20,15 +21,20 @@ export class LoginPage extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
       ipcRenderer.send('reopen-window');
-      this.context.router.push('/notifications');
     }
   }
 
-  routeToEnterpriseLogin = () => {
+  routeToEnterpriseLogin() {
     this.context.router.push('/enterpriselogin');
   }
 
   render() {
+    if (this.props.isLoggedIn) {
+      return (
+        <Redirect to="/" />
+      );
+    }
+
     return (
       <div className="container-fluid main-container login">
         <div className="row">
@@ -54,10 +60,6 @@ export class LoginPage extends React.Component {
       </div>
     );
   }
-};
-
-LoginPage.contextTypes = {
-  router: React.PropTypes.object.isRequired
 };
 
 export function mapStateToProps(state) {

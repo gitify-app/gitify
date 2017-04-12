@@ -1,4 +1,4 @@
-module.exports = function createLogger () {
+export function createLogger () {
   return ({ getState }) => (next) => (action) => {
     return next(action);
   };
