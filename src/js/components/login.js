@@ -2,6 +2,7 @@ const { ipcRenderer, remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { loginUser } from '../actions';
@@ -86,7 +87,7 @@ export class LoginPage extends React.Component {
 };
 
 LoginPage.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: PropTypes.object.isRequired
 };
 
 export function mapStateToProps(state) {

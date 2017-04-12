@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Modal from 'react-modal';
 import { Checkbox, RadioGroup, Radio } from 'react-icheck';
@@ -118,11 +119,11 @@ export class SettingsModal extends React.Component {
 };
 
 SettingsModal.contextTypes = {
-  router: React.PropTypes.object.isRequired
+  router: PropTypes.object.isRequired
 };
 
 SettingsModal.propTypes = {
-  isOpen: React.PropTypes.bool.isRequired
+  isOpen: PropTypes.bool.isRequired
 };
 
 export function mapStateToProps(state) {
