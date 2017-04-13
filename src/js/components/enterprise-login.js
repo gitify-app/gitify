@@ -8,12 +8,40 @@ import { connect } from 'react-redux';
 import { loginUser } from '../actions';
 import { authGithub } from '../utils/helpers';
 
+const validate = values => {
+  const errors = {};
+  if (!values.hostname) {
+    errors.hostname = 'Required';
+  } else if (!/^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(values.hostname)) {
+    errors.hostname = 'Invalid host name.';
+  }
+
+  if (!values.clientId) { // 10
+    errors.clientId = 'Required';
+  } else if (!/^[A-Z0-9]{10}$/i.test(values.clientId)) {
+    errors.clientId = 'Invalid client id.';
+  }
+
+  if (!values.clientSecret) { // 40
+    errors.clientSecret = 'Required';
+  } else if (!/^[A-Z0-9]{40}$/i.test(values.clientSecret)) {
+    errors.clientSecret = 'Invalid client secret.';
+  }
+
+  return errors;
+};
+
 const renderField = ({ input, label, placeholder, meta: { touched, error, warning } }) => (
-  <div className="form-group">
+  <div className={touched && error ? 'form-group has-danger' : 'form-group'}>
     <label htmlFor={input.name}>{label}</label>
     <div>
-      <input {...input} className="form-control" placeholder={placeholder} type="text" />
-      {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+      <input
+        {...input}
+        className="form-control"
+        placeholder={placeholder}
+        type="text" />
+
+      {touched && error && <div className="form-control-feedback">{error}</div>}
     </div>
   </div>
 );
@@ -81,7 +109,8 @@ export default connect(mapStateToProps, null)(reduxForm({
   form: 'loginEnterprise',
   initialValues: {
     hostname: 'github.example.com',
-    clientId: '123123123',
-    clientSecret: 'ABC123ABC123',
+    clientId: '1231231231',
+    clientSecret: 'ABC123ABCDABC123ABCDABC123ABCDABC123ABCD',
   },
+  validate,
 })(EnterpriseLogin));
