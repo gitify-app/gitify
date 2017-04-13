@@ -8,16 +8,6 @@ import { authGithub } from '../utils/helpers';
 import { updateSetting, loginUser } from '../actions';
 
 export class LoginPage extends React.Component {
-
-  componentDidMount() {
-    // TODO: Find a way to batch this....
-    // Reset settings to default github info
-    this.props.updateSetting('isEnterprise', false);
-    this.props.updateSetting('baseUrl', 'github.com');
-    this.props.updateSetting('clientId', '');
-    this.props.updateSetting('clientSecret', '');
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
       ipcRenderer.send('reopen-window');
