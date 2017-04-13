@@ -74,10 +74,10 @@
     "react-dom": "=15.5.4",
     "react-emojione": "=2.0.0",
     "react-icheck": "=0.3.7",
-    "react-modal": "=1.7.3",
+    "react-modal": "=1.7.6",
     "react-redux": "=5.0.4",
-    "react-router": "=4.1.0",
-    "react-router-dom": "=4.1.0",
+    "react-router": "=4.1.1",
+    "react-router-dom": "=4.1.1",
     "redux": "=3.6.0",
     "redux-storage": "=4.1.2",
     "redux-storage-decorator-filter": "=1.1.8",
@@ -87,7 +87,7 @@
     "underscore": "=1.8.3"
   },
   "devDependencies": {
-    "babel-eslint": "=7.2.1",
+    "babel-eslint": "=7.2.2",
     "babel-jest": "=19.0.0",
     "babel-preset-es2015": "=6.24.1",
     "babel-preset-react": "=6.24.1",
