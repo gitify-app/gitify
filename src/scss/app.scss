@@ -1,6 +1,5 @@
 /* @group Imports */
 
-// @import "../../node_modules/react-toggle/style.css";
 @import "../../node_modules/icheck/skins/all.css";
 
 /* @end Imports */
@@ -8,17 +7,12 @@
 
 /* @group Colors */
 
-$theme-black: #262626;
-$theme-green: #5EBA7D;
-
 $white: #FFF;
 $gray: #55595C;
 $gray-dark: #373A3C;
 
 $light-gray: darken($white, 10%);
 $gray-darker: darken($gray, 5%);
-
-$error-color: #DB423C;
 
 /* @end Colors */
 
@@ -38,16 +32,20 @@ $octicons-font-path: "../fonts/";
 
 $sidebar-width: 100px;
 
-$brand-success: $theme-green;
+$brand-primary: #555B6E;
+$brand-success: #69B578;
+$brand-info: #8BA9C6;
+$brand-warning: #FCAA67;
+$brand-danger: #B7524F;
 
 $font-family-base:
--apple-system, BlinkMacSystemFont,
-"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-"Helvetica Neue", sans-serif;
+  -apple-system, BlinkMacSystemFont,
+  "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+  "Helvetica Neue", sans-serif;
 
 $alert-padding: 8px;
 $alert-border-radius: 0;
-$alert-danger-bg: $error-color;
+$alert-danger-bg: $brand-danger;
 $alert-danger-text: $white;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
@@ -81,7 +79,7 @@ $alert-danger-text: $white;
 
     &:hover {
       cursor: pointer;
-      color: $theme-green;
+      color: $brand-success;
     }
   }
 }
@@ -123,7 +121,7 @@ input {
 
 .react-toggle--checked {
   .react-toggle-track {
-    background-color: $theme-green;
+    background-color: $brand-success;
   }
 }
 
@@ -233,6 +231,7 @@ input {
 }
 
 .sidebar-wrapper {
+  background-color: $brand-primary;
   position: fixed;
   left: $sidebar-width;
   transition: all .5s ease;
@@ -289,6 +288,7 @@ input {
 /* @group Settings */
 
 .settings-modal {
+  background-color: $brand-primary;
   position: absolute;
   top: 0;
   right: 0;

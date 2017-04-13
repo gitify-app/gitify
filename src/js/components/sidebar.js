@@ -33,7 +33,7 @@ export class Sidebar extends React.Component {
     const { hasStarred, isLoggedIn, notifications } = this.props;
 
     return (
-      <div className="sidebar-wrapper bg-inverse">
+      <div className="sidebar-wrapper">
         <img
           className="img-fluid logo"
           src="images/gitify-logo-outline-light.png"

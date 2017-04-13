@@ -45,7 +45,7 @@ export class SettingsModal extends React.Component {
 
     return (
       <Modal
-        className="settings-modal bg-inverse"
+        className="settings-modal"
         isOpen={settings.get('showSettingsModal')}
         contentLabel="Settings Modal">
         <h3 className="modal-title">
