@@ -1,6 +1,7 @@
-var electron = require('electron');
-var remote = electron.remote;
-var BrowserWindow = remote.BrowserWindow;
+const electron = require('electron');
+const remote = electron.remote;
+const BrowserWindow = remote.BrowserWindow;
+const dialog = remote.dialog;
 
 import Constants from './constants';
 
@@ -61,6 +62,18 @@ export function authGithub(authOptions = Constants.DEFAULT_AUTH_OPTIONS, loginUs
   // If "Done" button is pressed, hide "Loading"
   authWindow.on('close', function () {
     authWindow.destroy();
+  });
+
+
+  authWindow.webContents.on('did-fail-load', function (event, errorCode, errorDescription, validatedURL) {
+    if (validatedURL.includes(authOptions.hostname)) {
+      authWindow.destroy();
+
+      dialog.showErrorBox(
+        'Invalid Hostname',
+        `Could not load https://${authOptions.hostname}/.`
+      );
+    }
   });
 
   authWindow.webContents.on('will-navigate', function (event, url) {
