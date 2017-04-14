@@ -45,7 +45,8 @@ export class SettingsModal extends React.Component {
 
     return (
       <Modal
-        className="settings-modal"
+        className="settings-modal Modal__Bootstrap"
+        closeTimeoutMS={300}
         isOpen={settings.get('showSettingsModal')}
         contentLabel="Settings Modal">
         <h3 className="modal-title">

@@ -130,29 +130,54 @@ input {
 
 /* @group React Modal */
 
-// sass-lint:disable class-name-format force-element-nesting
+$modal-animation-duration: 300ms;
+$modal-scale-min: .35;
 
-.ReactModalPortal > div {
-  opacity: 0;
-}
+// sass-lint:disable class-name-format force-element-nesting
 
 .ReactModal__Overlay {
   z-index: 9999;
+
+  -webkit-perspective: 150;
+  perspective: 150;
+  opacity: 0;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-.ReactModalPortal .ReactModal__Overlay {
-  transition: opacity 200ms ease-in-out;
-  // background: rgba(0, 0, 0, 0.15);
-
-  &--after-open {
-    opacity: 1;
-  }
-
-  &--before-close {
-    opacity: 0;
-  }
+.ReactModal__Overlay--after-open {
+  opacity: 1;
+  transition: opacity $modal-animation-duration ease-out;
 }
 
+.ReactModal__Content {
+  background-color: $brand-primary;
+
+  -webkit-transform: scale($modal-scale-min) rotateX(-30deg);
+  transform: scale($modal-scale-min) rotateX(-30deg);
+}
+
+.ReactModal__Content--after-open {
+  -webkit-transform: scale(1) rotateX(0deg);
+  transform: scale(1) rotateX(0deg);
+  transition: all $modal-animation-duration ease-in;
+}
+
+.ReactModal__Overlay--before-close {
+  opacity: 0;
+}
+
+.ReactModal__Content--before-close {
+  -webkit-transform: scale($modal-scale-min) rotateX(30deg);
+  transform: scale($modal-scale-min) rotateX(30deg);
+  transition: all $modal-animation-duration ease-in;
+}
+
+.ReactModal__Content.modal-dialog {
+  border: none;
+  background-color: transparent;
+}
 // sass-lint:enable class-name-format force-element-nesting
 
 /* @end React Modal */
@@ -288,7 +313,6 @@ input {
 /* @group Settings */
 
 .settings-modal {
-  background-color: $brand-primary;
   position: absolute;
   top: 0;
   right: 0;
@@ -298,6 +322,7 @@ input {
   padding: 2.25rem 1.5rem;
   overflow: auto;
   color: $white;
+  margin: 0;
 
   .modal-title {
     margin-bottom: 1.35rem;
