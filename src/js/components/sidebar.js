@@ -36,7 +36,7 @@ export class Sidebar extends React.Component {
       <div className="sidebar-wrapper">
         <img
           className="img-fluid logo"
-          src="images/gitify-logo-outline-light.png"
+          src="images/logo-white.png"
           onClick={this.openBrowser} />
 
         {isLoggedIn && (

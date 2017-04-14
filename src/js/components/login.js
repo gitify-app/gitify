@@ -79,7 +79,7 @@ export class LoginPage extends React.Component {
       <div className="container-fluid main-container login">
         <div className="row">
           <div className="offset-xs-2 col-xs-8">
-            <img className="img-responsive logo" src="images/gitify-logo-outline-dark.png" />
+            <img className="img-responsive logo" src="images/logo-dark.png" />
             <div className="desc">GitHub Notifications<br />in your menu bar.</div>
             <button className="btn btn-lg btn-block" onClick={this.authGithub.bind(this)}>
               <i className="fa fa-github" />Log in to GitHub
