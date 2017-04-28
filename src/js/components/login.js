@@ -5,8 +5,6 @@ import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { authGithub } from '../utils/helpers';
 
-import { updateSetting, loginUser } from '../actions';
-
 export class LoginPage extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
@@ -30,7 +28,7 @@ export class LoginPage extends React.Component {
             <div className="row">
               <button
                 className="btn btn-lg btn-block github"
-                onClick={() => authGithub(undefined, this.props.loginUser)}
+                onClick={() => authGithub(undefined, this.props.dispatch)}
               >
                 <i className="fa fa-github" /> Log in to GitHub
               </button>
@@ -57,4 +55,4 @@ export function mapStateToProps(state) {
   };
 };
 
-export default connect(mapStateToProps, { updateSetting, loginUser })(LoginPage);
+export default connect(mapStateToProps)(LoginPage);

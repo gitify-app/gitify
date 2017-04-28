@@ -19,8 +19,11 @@ export function makeAsyncActionSet(actionName) {
 
 export const LOGIN = makeAsyncActionSet('LOGIN');
 export function loginUser(authOptions, code) {
+  const { hostname } = authOptions;
+  const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+
   return (dispatch, getState) => {
-    const url = `https://${authOptions.hostname}/login/oauth/access_token`;
+    const url = `https://${hostname}/login/oauth/access_token`;
     const method = 'POST';
     const data = {
       'client_id': authOptions.clientId,
@@ -32,7 +35,7 @@ export function loginUser(authOptions, code) {
 
     return apiRequest(url, method, data)
       .then(function (response) {
-        dispatch({type: LOGIN.SUCCESS, payload: response.data});
+        dispatch({type: LOGIN.SUCCESS, payload: response.data, isEnterprise, hostname });
       })
       .catch(function (error) {
         dispatch({type: LOGIN.FAILURE, payload: error.response.data});

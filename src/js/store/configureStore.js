@@ -18,7 +18,7 @@ const isDev = process.mainModule.filename.indexOf('app.asar') === -1;
 export default function configureStore(initialState) {
   const engine = filter(
     createEngine(constants.STORAGE_KEY),
-    ['settings', ['auth', 'token']],
+    ['settings', ['auth', 'token'], ['auth', 'enterpriseAccounts']],
     [['settings', 'hasStarred'], ['settings', 'showSettingsModal']]
   );
 

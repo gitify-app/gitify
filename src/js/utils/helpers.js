@@ -4,6 +4,7 @@ const BrowserWindow = remote.BrowserWindow;
 const dialog = remote.dialog;
 
 import Constants from './constants';
+import { loginUser } from '../actions';
 
 export default {
   generateGitHubUrl(isEnterprise, url) {
@@ -24,14 +25,14 @@ export default {
   },
 };
 
-export function authGithub(authOptions = Constants.DEFAULT_AUTH_OPTIONS, loginUser) {
+export function authGithub(authOptions = Constants.DEFAULT_AUTH_OPTIONS, dispatch) {
   // Build the OAuth consent page URL
   const authWindow = new BrowserWindow({
     width: 800,
     height: 600,
     show: true,
     webPreferences: {
-      nodeIntegration: false
+      devTools: true,
     }
   });
 
@@ -52,7 +53,7 @@ export function authGithub(authOptions = Constants.DEFAULT_AUTH_OPTIONS, loginUs
 
     // If there is a code, proceed to get token from github
     if (code) {
-      loginUser(authOptions, code);
+      dispatch(loginUser(authOptions, code));
     } else if (error) {
       alert('Oops! Something went wrong and we couldn\'t ' +
         'log you in using Github. Please try again.');
@@ -63,7 +64,6 @@ export function authGithub(authOptions = Constants.DEFAULT_AUTH_OPTIONS, loginUs
   authWindow.on('close', function () {
     authWindow.destroy();
   });
-
 
   authWindow.webContents.on('did-fail-load', function (event, errorCode, errorDescription, validatedURL) {
     if (validatedURL.includes(authOptions.hostname)) {

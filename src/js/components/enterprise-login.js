@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 
-import { loginUser } from '../actions';
 import { authGithub } from '../utils/helpers';
 
 const validate = values => {
@@ -16,9 +15,9 @@ const validate = values => {
     errors.hostname = 'Invalid host name.';
   }
 
-  if (!values.clientId) { // 10
+  if (!values.clientId) { // 20
     errors.clientId = 'Required';
-  } else if (!/^[A-Z0-9]{10}$/i.test(values.clientId)) {
+  } else if (!/^[A-Z0-9]{20}$/i.test(values.clientId)) {
     errors.clientId = 'Invalid client id.';
   }
 
@@ -48,15 +47,14 @@ const renderField = ({ input, label, placeholder, meta: { touched, error, warnin
 
 export class EnterpriseLogin extends React.Component {
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isLoggedIn) {
+    if (nextProps.enterpriseAccounts.size > this.props.enterpriseAccounts.size) {
       ipcRenderer.send('reopen-window');
-      // FIXME! <Redirect /> from react-router
-      this.context.router.push('/notifications');
+      this.props.history.goBack();
     }
   }
 
   handleSubmit(data, dispatch) {
-    authGithub(data, dispatch(loginUser));
+    authGithub(data, dispatch);
   }
 
   render() {
@@ -100,7 +98,7 @@ export class EnterpriseLogin extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    isLoggedIn: state.auth.get('token') !== null,
+    enterpriseAccounts: state.auth.get('enterpriseAccounts'),
     settings: state.settings
   };
 };
