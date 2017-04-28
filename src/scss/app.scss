@@ -257,17 +257,21 @@ input {
     -webkit-user-drag: none;
   }
 
-  .tag-count {
+  .badge-count {
     display: block;
     margin: 0 0 1em;
     text-align: center;
   }
 
   .nav {
-    text-align: center;
+    justify-content: center;
 
     .nav-item {
       -webkit-app-region: no-drag;
+
+      .nav-link {
+        padding: .5em .5em;
+      }
     }
   }
 
