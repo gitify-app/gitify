@@ -58,7 +58,7 @@
   "dependencies": {
     "auto-launch": "=5.0.1",
     "axios": "=0.16.1",
-    "bootstrap": "=4.0.0-alpha.5",
+    "bootstrap": "=4.0.0-alpha.6",
     "electron-gh-releases": "=2.0.4",
     "font-awesome": "=4.7.0",
     "icheck": "=1.0.2",
