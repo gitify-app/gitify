@@ -48,12 +48,12 @@ export default function configureStore(initialState) {
   load(store)
     .then(function (newState) {
       // Check if the user is logged in
-      const isLoggedIn = newState.auth.token !== null;
+      const isEitherLoggedIn = newState.auth.token !== null || newState.auth.enterpriseAccounts.length > 0;
       const userSettings = Map(newState.settings);
 
-      if (isLoggedIn) {
-        restoreSettings(userSettings);
-        store.dispatch(checkHasStarred());
+      restoreSettings(userSettings);
+      store.dispatch(checkHasStarred());
+      if (isEitherLoggedIn) {
         store.dispatch(fetchNotifications());
       }
     });

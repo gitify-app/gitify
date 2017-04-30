@@ -1,3 +1,5 @@
+import { parse } from 'url';
+import axios from 'axios';
 import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 
 import Constants from '../utils/constants';
@@ -54,22 +56,48 @@ export function logout() {
 export const NOTIFICATIONS = makeAsyncActionSet('NOTIFICATIONS');
 export function fetchNotifications() {
   return (dispatch, getState) => {
-    const { settings } = getState();
-    // Construct the api!
-    const url = `${constructGithubUrl(settings)}notifications?participating=${settings.get('participating')}`;
+
     const method = 'GET';
-    const token = getState().auth.get('token');
+    const { settings } = getState();
+    const isGitHubLoggedIn = getState().auth.get('token') !== null;
+    const endpointSuffix = `notifications?participating=${settings.get('participating')}`;
+
+    function getGitHubNotifications() {
+      if (!isGitHubLoggedIn) {
+        return;
+      }
+
+      const url = `https://api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}/${endpointSuffix}`;
+      const token = getState().auth.get('token');
+      return apiRequestAuth(url, method, token);
+    }
+
+    function getEnterpriseNotifications() {
+      const enterpriseAccounts = getState().auth.get('enterpriseAccounts');
+      return enterpriseAccounts.map((account) => {
+        const hostname = account.get('hostname');
+        const token = account.get('token');
+        const url = `https://${hostname}/api/v3/${endpointSuffix}`;
+        return apiRequestAuth(url, method, token);
+      }).toArray();
+    }
 
     dispatch({type: NOTIFICATIONS.REQUEST});
 
-    return apiRequestAuth(url, method, token)
-      .then(function (response) {
-        dispatch({type: NOTIFICATIONS.SUCCESS, payload: response.data});
-      })
+    return axios.all([getGitHubNotifications(), getEnterpriseNotifications()])
+      .then(axios.spread((gitHubNotifications, enterpriseNotifications) => {
+        dispatch({type: NOTIFICATIONS.SUCCESS, payload: gitHubNotifications.data});
+
+        return enterpriseNotifications.map(entAccNotifications => {
+          entAccNotifications.then(res => {
+            const { hostname } = parse(res.config.url);
+            dispatch({type: NOTIFICATIONS.SUCCESS, payload: res.data, hostname});
+          });
+        });
+      }))
       .catch(function (error) {
         dispatch({type: NOTIFICATIONS.FAILURE, payload: error.response.data});
       });
-
   };
 };
 

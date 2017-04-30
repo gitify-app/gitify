@@ -27,7 +27,7 @@ export class Sidebar extends React.Component {
   }
 
   openBrowser() {
-    shell.openExternal(`http://www.github.com/${Constants.REPO_SLUG}`);
+    shell.openExternal(`https://www.github.com/${Constants.REPO_SLUG}`);
   }
 
   _renderEnterpriseAccounts() {
@@ -80,7 +80,7 @@ export class Sidebar extends React.Component {
         {this._renderEnterpriseAccounts()}
 
         <div className="footer">
-          <Link to="/enterpriselogin" className="btn btn-block">Add</Link>
+          {!isEitherLoggedIn && (<Link to="/enterpriselogin" className="btn btn-block">Add</Link>)}
 
           {!hasStarred && (
             <button className="btn btn-block btn-sm btn-outline-secondary btn-star" onClick={this.openBrowser}>
