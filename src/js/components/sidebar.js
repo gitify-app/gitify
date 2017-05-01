@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { List } from 'immutable';
+import { List, Map } from 'immutable';
 import { shell } from 'electron';
 
 import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
@@ -40,22 +40,24 @@ export class Sidebar extends React.Component {
 
   _renderGitHubAccount() {
     const defaultHostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
-    const accNot = this.props.notifications.find(obj => obj.get('hostname') === defaultHostname);
-    const notificationsCount = accNot ? accNot.get('notifications', List()).size : 0;
+    const notificationsCount = this.props.notifications
+      .find(obj => obj.get('hostname') === defaultHostname, null, Map())
+      .get('notifications', List()).size;
 
     return (
       <div className="badge badge-primary text-uppercase" title={defaultHostname}>
-        {defaultHostname.split('.')[0]} {notificationsCount}
+        GitHub {notificationsCount}
       </div>
     );
   }
 
   _renderEnterpriseAccounts() {
     return this.props.enterpriseAccounts.map((account, idx) => {
-      const accNot = this.props.notifications.find(obj => obj.get('hostname') === account.get('hostname'));
       const splittedHostname = account.get('hostname').split('.');
       const accountDomain = splittedHostname[splittedHostname.length - 2];
-      const notificationsCount = accNot ? accNot.get('notifications', List()).size : 0;
+      const notificationsCount = this.props.notifications
+        .find(obj => obj.get('hostname') === account.get('hostname'), null, Map())
+        .get('notifications', List()).size;
 
       return (
         <div className="badge badge-primary text-uppercase" key={idx} title={account.get('hostname')}>
