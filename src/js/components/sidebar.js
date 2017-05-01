@@ -79,13 +79,13 @@ export class Sidebar extends React.Component {
           onClick={this.openBrowser} />
 
         {isEitherLoggedIn && (
-          <div className="badge badge-count text-success text-uppercase">
+          <div className="badge badge-count text-success my-1">
             {notifications.isEmpty() ? 'All Read' : `${notificationsCount} Unread`}
           </div>
         )}
 
         {isEitherLoggedIn && (
-          <ul className="nav nav-inline">
+          <ul className="nav nav-inline mb-1">
             <li className="nav-item text-white">
               <i
                 title="Refresh"
