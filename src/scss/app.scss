@@ -376,7 +376,7 @@ input {
 
 .account {
   background-color: $gray;
-  font-size .9rem;
+  font-size: .9rem;
   text-align: right;
   color: $white;
 
@@ -391,40 +391,24 @@ input {
 /* @group Component / Repository  */
 
 .repository {
-  margin: 0;
   background-color: $gray-lighter;
-  padding: 5px 20px;
 
-  .col-xs-2,
-  .col-xs-10 {
-    padding: 0;
-  }
-
-  .col-xs-1 {
-    padding: 5px 0;
-  }
-
-  .name {
-    padding: 5px;
+  .info {
     font-size: 16px;
     font-weight: 600;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 
     .avatar {
       @include border-radius(50%);
-      margin-right: 1rem;
-      width: 23px;
-      height: 23px;
+      max-width: 25px;
     }
   }
 
-  .check-wrapper {
-    text-align: right;
-
-    .octicon {
-      @include check-octicon;
-      margin-right: 10px;
-      font-size: 22px;
-    }
+  .octicon {
+    @include check-octicon;
+    font-size: 22px;
   }
 }
 
@@ -500,12 +484,6 @@ input {
 .notification {
   margin: 0;
   border-bottom: 1px solid $gray-lighter;
-  padding: 2px 20px;
-
-  .col-xs-1,
-  .col-xs-10 {
-    padding: 5px 0;
-  }
 
   .check-wrapper {
     text-align: right;
@@ -530,7 +508,6 @@ input {
 
   .octicon {
     @include check-octicon;
-    margin-right: 10px;
     font-size: 20px;
   }
 

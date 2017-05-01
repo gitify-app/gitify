@@ -23,17 +23,16 @@ export class Repository extends React.Component {
 
     return (
       <div>
-        <div className="row repository">
-          <div className="col-11 name">
-            <img className="avatar" src={avatarUrl} />
+        <div className="repository d-flex px-3 py-2 justify-content-between">
+          <div className="info pr-3">
+            <img className="avatar img-fluid mr-2" src={avatarUrl} />
             <span onClick={() => this.openBrowser()}>{this.props.repoName}</span>
           </div>
-          <div className="col-1 check-wrapper">
+
             <span
               title="Mark Repository as Read"
               className="octicon octicon-check"
               onClick={() => this.markRepoAsRead()} />
-          </div>
         </div>
 
         <ReactCSSTransitionGroup

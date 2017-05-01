@@ -52,7 +52,7 @@ export class SingleNotification extends React.Component {
     }
 
     return (
-      <div className="row notification">
+      <div className="row notification no-gutters px-3 py-2">
         <div className="col-1"><span title={typeIconTooltip} className={typeIconClass} /></div>
         <div className="col-10 subject" onClick={() => this.pressTitle()}>
           <h6>{this.props.notification.getIn(['subject', 'title'])}</h6>
