@@ -3,7 +3,8 @@ const { ipcRenderer } = require('electron');
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { authGithub } from '../utils/helpers';
+
+import { authGithub, isUserEitherLoggedIn } from '../utils/helpers';
 
 export class LoginPage extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -42,7 +43,7 @@ export class LoginPage extends React.Component {
 
 export function mapStateToProps(state) {
   return {
-    isEitherLoggedIn: state.auth.get('token') !== null || state.auth.get('enterpriseAccounts').size > 0,
+    isEitherLoggedIn: isUserEitherLoggedIn(state.auth),
   };
 };
 

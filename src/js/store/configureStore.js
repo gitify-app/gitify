@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { Map } from 'immutable';
+import { Iterable, Map } from 'immutable';
 import thunkMiddleware from 'redux-thunk';
 
 import * as storage from 'redux-storage';
@@ -33,7 +33,22 @@ export default function configureStore(initialState) {
 
   if (isDev) {
     const { createLogger } = require('redux-logger');
-    const logger = createLogger({collapsed: true});
+    const logger = createLogger({
+      collapsed: true,
+      stateTransformer: (state) => {
+        let newState = {};
+
+        for (var i of Object.keys(state)) {
+          if (Iterable.isIterable(state[i])) {
+            newState[i] = state[i].toJS();
+          } else {
+            newState[i] = state[i];
+          }
+        };
+
+        return newState;
+      }
+    });
     middlewares.push(logger);
   }
 
@@ -46,9 +61,9 @@ export default function configureStore(initialState) {
   // Load settings from localStorage
   const load = storage.createLoader(engine);
   load(store)
-    .then(function (newState) {
+    .then(newState => {
       // Check if the user is logged in
-      const isEitherLoggedIn = newState.auth.token !== null || newState.auth.enterpriseAccounts.length > 0;
+      const isEitherLoggedIn = newState.auth && (newState.auth.token !== null || newState.auth.enterpriseAccounts.length > 0);
       const userSettings = Map(newState.settings);
 
       restoreSettings(userSettings);

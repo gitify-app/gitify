@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { shell } from 'electron';
 
 import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
+import { isUserEitherLoggedIn } from '../utils/helpers';
 import Constants from '../utils/constants';
 
 export class Sidebar extends React.Component {
@@ -80,7 +81,7 @@ export class Sidebar extends React.Component {
         {this._renderEnterpriseAccounts()}
 
         <div className="footer">
-          {!isEitherLoggedIn && (<Link to="/enterpriselogin" className="btn btn-block">Add</Link>)}
+          {!!isEitherLoggedIn && <Link to="/enterpriselogin" className="btn btn-block">Add</Link>}
 
           {!hasStarred && (
             <button className="btn btn-block btn-sm btn-outline-secondary btn-star" onClick={this.openBrowser}>
@@ -98,7 +99,7 @@ export function mapStateToProps(state) {
     hasStarred: state.settings.get('hasStarred'),
     notifications: state.notifications.get('response'),
     isGitHubLoggedIn: state.auth.get('token') !== null,
-    isEitherLoggedIn: state.auth.get('token') !== null || state.auth.get('enterpriseAccounts').size > 0,
+    isEitherLoggedIn: isUserEitherLoggedIn(state.auth),
     enterpriseAccounts: state.auth.get('enterpriseAccounts'),
   };
 };

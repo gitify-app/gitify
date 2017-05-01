@@ -8,6 +8,7 @@ import { loginUser } from '../actions';
 
 export default {
   generateGitHubUrl(isEnterprise, url) {
+    // FIXME!
     let newUrl = isEnterprise
       ? url.replace('github.intuit.com/api/v3/repos', 'github.intuit.com')
       : url.replace('api.github.com/repos', 'www.github.com');
@@ -83,5 +84,9 @@ export function authGithub(authOptions = Constants.DEFAULT_AUTH_OPTIONS, dispatc
   authWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
     handleCallback(newUrl);
   });
+}
+
+export function isUserEitherLoggedIn (auth) {
+  return auth.get('token') !== null || auth.get('enterpriseAccounts').size > 0;
 }
 
