@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Map, List } from 'immutable';
 import { shell } from 'electron';
 
 import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
@@ -31,21 +32,36 @@ export class Sidebar extends React.Component {
     shell.openExternal(`https://www.github.com/${Constants.REPO_SLUG}`);
   }
 
-  _renderEnterpriseAccounts() {
-    const getDomain = (account) => {
-      const splittedHostname = account.get('hostname').split('.');
-      return splittedHostname[splittedHostname.length - 2];
-    };
+  _renderGitHubAccount() {
+    const defaultHostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
+    const accNot = this.props.notifications.find(obj => obj.get('hostname') === defaultHostname);
+    const notificationsCount = accNot ? accNot.get('notifications', List()).size : 0;
 
-    return this.props.enterpriseAccounts.map((account, idx) => (
-      <div className="badge badge-primary text-uppercase" key={idx} title={account.get('hostname')}>
-        {getDomain(account)}
+    return (
+      <div className="badge badge-primary text-uppercase" title={defaultHostname}>
+        {defaultHostname.split('.')[0]} {notificationsCount}
       </div>
-    ));
+    );
+  }
+
+  _renderEnterpriseAccounts() {
+    return this.props.enterpriseAccounts.map((account, idx) => {
+      const accNot = this.props.notifications.find(obj => obj.get('hostname') === account.get('hostname'));
+      const splittedHostname = account.get('hostname').split('.');
+      const accountDomain = splittedHostname[splittedHostname.length - 2];
+      const notificationsCount = accNot ? accNot.get('notifications', List()).size : 0;
+
+      return (
+        <div className="badge badge-primary text-uppercase" key={idx} title={account.get('hostname')}>
+          {accountDomain} {notificationsCount}
+        </div>
+      );
+    });
   }
 
   render() {
     const { hasStarred, isEitherLoggedIn, isGitHubLoggedIn, notifications } = this.props;
+    const notificationsCount = notifications.reduce((memo, acc) => memo + acc.get('notifications').size, 0);
 
     return (
       <div className="sidebar-wrapper bg-inverse">
@@ -56,7 +72,7 @@ export class Sidebar extends React.Component {
 
         {isEitherLoggedIn && (
           <div className="badge badge-count text-success text-uppercase">
-            {notifications.isEmpty() ? 'All Read' : `${notifications.size} Unread`}
+            {notifications.isEmpty() ? 'All Read' : `${notificationsCount} Unread`}
           </div>
         )}
 
@@ -78,6 +94,7 @@ export class Sidebar extends React.Component {
           </ul>
         )}
 
+        {isGitHubLoggedIn && this._renderGitHubAccount()}
         {this._renderEnterpriseAccounts()}
 
         <div className="footer">

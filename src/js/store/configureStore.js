@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { Iterable, Map } from 'immutable';
+import { fromJS, Iterable, Map } from 'immutable';
 import thunkMiddleware from 'redux-thunk';
 
 import * as storage from 'redux-storage';
@@ -8,6 +8,7 @@ import filter from 'redux-storage-decorator-filter';
 
 import { checkHasStarred, fetchNotifications, UPDATE_SETTING, LOGIN, LOGOUT } from '../actions';
 import { restoreSettings } from '../utils/comms';
+import { isUserEitherLoggedIn } from '../utils/helpers';
 import constants from '../utils/constants';
 import notifications from '../middleware/notifications';
 import settings from '../middleware/settings';
@@ -63,12 +64,13 @@ export default function configureStore(initialState) {
   load(store)
     .then(newState => {
       // Check if the user is logged in
-      const isEitherLoggedIn = newState.auth && (newState.auth.token !== null || newState.auth.enterpriseAccounts.length > 0);
+      // const isEitherLoggedIn = newState.auth && (newState.auth.token !== null || newState.auth.enterpriseAccounts.length > 0);
+      const isEitherLoggedIn = isUserEitherLoggedIn(fromJS(newState.auth || {}));
       const userSettings = Map(newState.settings);
 
       restoreSettings(userSettings);
-      store.dispatch(checkHasStarred());
       if (isEitherLoggedIn) {
+        store.dispatch(checkHasStarred());
         store.dispatch(fetchNotifications());
       }
     });

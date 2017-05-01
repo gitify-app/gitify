@@ -1,5 +1,5 @@
 import { Map, List, fromJS } from 'immutable';
-import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION } from '../actions';
+import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION, LOGOUT } from '../actions';
 
 const initialState = Map({
   response: List(),
@@ -57,6 +57,8 @@ export default function reducer(state = initialState, action) {
       return state
         .set('response', state.get('response')
           .filterNot((obj) => obj.getIn(['repository', 'full_name']) === action.meta.repoSlug));
+    case LOGOUT:
+      return initialState;
     default:
       return state;
   }

@@ -87,7 +87,13 @@ export function fetchNotifications() {
 
     return axios.all([getGitHubNotifications(), getEnterpriseNotifications()])
       .then(axios.spread((gitHubNotifications, enterpriseNotifications) => {
-        dispatch({type: NOTIFICATIONS.SUCCESS, payload: fromJS(gitHubNotifications.data), hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname});
+        if (isGitHubLoggedIn) {
+          dispatch({
+            type: NOTIFICATIONS.SUCCESS,
+            payload: fromJS(gitHubNotifications.data),
+            hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname
+          });
+        }
 
         return enterpriseNotifications.map(entAccNotifications => {
           entAccNotifications.then(res => {
