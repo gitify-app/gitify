@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { Map, List } from 'immutable';
+import { List } from 'immutable';
 import { shell } from 'electron';
 
 import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
@@ -20,6 +20,12 @@ export class Sidebar extends React.Component {
 
   componentWillUnmount() {
     clearInterval(this.requestInterval);
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.connectedAccounts > this.props.connectedAccounts) {
+      this.props.fetchNotifications();
+    }
   }
 
   refreshNotifications() {
@@ -112,12 +118,17 @@ export class Sidebar extends React.Component {
 };
 
 export function mapStateToProps(state) {
+  const enterpriseAccounts = state.auth.get('enterpriseAccounts');
+  const isGitHubLoggedIn = state.auth.get('token') !== null;
+  const connectedAccounts = enterpriseAccounts.reduce((memo, acc) => memo + 1, isGitHubLoggedIn ? 1 : 0);
+
   return {
-    hasStarred: state.settings.get('hasStarred'),
-    notifications: state.notifications.get('response'),
-    isGitHubLoggedIn: state.auth.get('token') !== null,
+    isGitHubLoggedIn,
     isEitherLoggedIn: isUserEitherLoggedIn(state.auth),
-    enterpriseAccounts: state.auth.get('enterpriseAccounts'),
+    notifications: state.notifications.get('response'),
+    enterpriseAccounts,
+    connectedAccounts,
+    hasStarred: state.settings.get('hasStarred'),
   };
 };
 
