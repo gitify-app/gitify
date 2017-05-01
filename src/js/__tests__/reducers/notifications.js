@@ -1,5 +1,6 @@
 import { Map, List, fromJS } from 'immutable';
 
+import Constants from '../../utils/Constants';
 import reducer from '../../reducers/notifications';
 import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION } from '../../actions';
 
@@ -47,26 +48,33 @@ describe('reducers/notifications.js', () => {
 
   });
 
-  it('should handle NOTIFICATIONS.SUCCESS', () => {
+  it('should handle NOTIFICATIONS.SUCCESS (github.com - empty list)', () => {
 
     expect(reducer(undefined, {})).toEqual(initialState);
 
     const action = {
       type: NOTIFICATIONS.SUCCESS,
-      payload: notifications
+      payload: notifications,
+      hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname
     };
 
-    const currentState =
-      initialState
-        .set('isFetching', true)
-        .set('failed', false);
+    expect(reducer(undefined, action)).toMatchSnapshot();
+  });
 
-    expect(reducer(currentState, action)).toEqual(
-      initialState
-        .set('isFetching', false)
-        .set('response', notifications)
-    );
+  it('should handle NOTIFICATIONS.SUCCESS (github.com - not empty list)', () => {
 
+    expect(reducer(undefined, {})).toEqual(initialState);
+
+    const action = {
+      type: NOTIFICATIONS.SUCCESS,
+      payload: notifications,
+      hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname
+    };
+
+    // Add some notifications for github.com
+    const caseState = reducer(undefined, action);
+
+    expect(reducer(caseState, action)).toMatchSnapshot();
   });
 
   it('should handle NOTIFICATIONS.FAILURE', () => {

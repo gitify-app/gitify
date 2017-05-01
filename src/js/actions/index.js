@@ -1,5 +1,6 @@
-import { parse } from 'url';
 import axios from 'axios';
+import { parse } from 'url';
+import { fromJS } from 'immutable';
 import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 
 import Constants from '../utils/constants';
@@ -86,12 +87,12 @@ export function fetchNotifications() {
 
     return axios.all([getGitHubNotifications(), getEnterpriseNotifications()])
       .then(axios.spread((gitHubNotifications, enterpriseNotifications) => {
-        dispatch({type: NOTIFICATIONS.SUCCESS, payload: gitHubNotifications.data});
+        dispatch({type: NOTIFICATIONS.SUCCESS, payload: fromJS(gitHubNotifications.data), hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname});
 
         return enterpriseNotifications.map(entAccNotifications => {
           entAccNotifications.then(res => {
             const { hostname } = parse(res.config.url);
-            dispatch({type: NOTIFICATIONS.SUCCESS, payload: res.data, hostname});
+            dispatch({type: NOTIFICATIONS.SUCCESS, payload: fromJS(res.data), hostname});
           });
         });
       }))

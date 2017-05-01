@@ -53,15 +53,15 @@ export class SingleNotification extends React.Component {
 
     return (
       <div className="row notification">
-        <div className="col-xs-1"><span title={typeIconTooltip} className={typeIconClass} /></div>
-        <div className="col-xs-10 subject" onClick={() => this.pressTitle()}>
+        <div className="col-1"><span title={typeIconTooltip} className={typeIconClass} /></div>
+        <div className="col-10 subject" onClick={() => this.pressTitle()}>
           <h6>{this.props.notification.getIn(['subject', 'title'])}</h6>
 
           <div className="details">
             <span className="text-capitalize">{reason}</span> - Updated {timeSinceUpdated}
           </div>
         </div>
-        <div className="col-xs-1 check-wrapper">
+        <div className="col-1 check-wrapper">
           <span title="Mark as Read" className="octicon octicon-check" onClick={() => this.markAsRead()} />
         </div>
       </div>

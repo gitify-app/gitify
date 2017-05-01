@@ -11,12 +11,12 @@ export default store => next => action => {
 
     case NOTIFICATIONS.SUCCESS:
       var previousNotifications = notificationsState.response.map(obj => obj.id);
-      var newNotifications = _.filter(action.payload, function (obj) {
+      var newNotifications = _.filter(action.payload.toJS(), function (obj) {
         return !_.contains(previousNotifications, obj.id);
       });
 
-      updateTrayIcon(action.payload.length);
-      setBadge(action.payload.length);
+      updateTrayIcon(action.payload.size);
+      setBadge(action.payload.size);
       NativeNotifications.setup(newNotifications, settings);
       break;
 

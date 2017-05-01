@@ -372,6 +372,22 @@ input {
 /* @end Page / Login  */
 
 
+/* @group Notifications Route / Account  */
+
+.account {
+  background-color: $gray;
+  font-size .9rem;
+  text-align: right;
+  color: $white;
+
+  .octicon {
+    font-size: 1.1rem;
+  }
+}
+
+/* @end Notifications Route / Account  */
+
+
 /* @group Component / Repository  */
 
 .repository {

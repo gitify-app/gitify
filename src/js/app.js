@@ -10,7 +10,7 @@ import configureStore from './store/configureStore';
 import Sidebar from './components/sidebar';
 import Loading from './components/loading';
 import LoginPage from './components/login';
-import NotificationsPage from './components/notifications';
+import NotificationsRoute from './routes/notifications';
 import EnterpriseLoginPage from './components/enterprise-login';
 import SettingsModal from './components/settings-modal';
 
@@ -55,7 +55,7 @@ ReactDOM.render(
         <Sidebar />
 
         <Switch>
-          <PrivateRoute path="/" exact component={NotificationsPage} />
+          <PrivateRoute path="/" exact component={NotificationsRoute} />
           <Route path="/login" component={LoginPage} />
           <Route path="/enterpriselogin" component={EnterpriseLoginPage} />
           <Route component={NotFound}/>

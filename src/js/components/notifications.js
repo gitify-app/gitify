@@ -1,49 +1,30 @@
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { connect } from 'react-redux';
 
-import AllRead from './all-read';
-import Oops from './oops';
 import Repository from './repository';
 
-export class NotificationsPage extends React.Component {
+export default class RepoNotifications extends React.Component {
   render() {
-    const wrapperClass = 'container-fluid main-container notifications';
-    const notificationsEmpty = this.props.notifications.isEmpty();
+    const { hostname, notifications } = this.props;
 
-    if (this.props.failed) {
-      return <Oops />;
-    }
-
-    if (notificationsEmpty) {
-      return <AllRead />;
-    };
-
-    const groupedNotifications = this.props.notifications.groupBy((object) => (
+    const groupedNotifications = notifications.groupBy((object) => (
       object.getIn(['repository', 'full_name']))
     );
 
     return (
-      <div className={wrapperClass + (notificationsEmpty ? ' all-read' : '')}>
-        <ReactCSSTransitionGroup
-          transitionName="repository"
-          transitionEnter={false}
-          transitionLeaveTimeout={325}>
-          {groupedNotifications.valueSeq().map((obj, key) => {
-            const repoSlug = obj.first().getIn(['repository', 'full_name']);
-            return <Repository repo={obj} repoName={repoSlug} key={repoSlug} />;
-          })}
-        </ReactCSSTransitionGroup>
-      </div>
+      <ReactCSSTransitionGroup
+        transitionName="repository"
+        transitionEnter={false}
+        transitionLeaveTimeout={325}>
+        <div className="account p-2">
+          {hostname} <span className="octicon octicon-chevron-down ml-2" />
+        </div>
+
+        {groupedNotifications.valueSeq().map((obj, key) => {
+          const repoSlug = obj.first().getIn(['repository', 'full_name']);
+          return <Repository repo={obj} repoName={repoSlug} key={repoSlug} />;
+        })}
+      </ReactCSSTransitionGroup>
     );
   }
 };
-
-export function mapStateToProps(state) {
-  return {
-    failed: state.notifications.get('failed'),
-    notifications: state.notifications.get('response')
-  };
-};
-
-export default connect(mapStateToProps, null)(NotificationsPage);

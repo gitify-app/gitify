@@ -24,11 +24,11 @@ export class Repository extends React.Component {
     return (
       <div>
         <div className="row repository">
-          <div className="col-xs-11 name">
+          <div className="col-11 name">
             <img className="avatar" src={avatarUrl} />
             <span onClick={() => this.openBrowser()}>{this.props.repoName}</span>
           </div>
-          <div className="col-xs-1 check-wrapper">
+          <div className="col-1 check-wrapper">
             <span
               title="Mark Repository as Read"
               className="octicon octicon-check"
