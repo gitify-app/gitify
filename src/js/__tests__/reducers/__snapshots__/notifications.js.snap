@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reducers/notifications.js should handle NOTIFICATIONS.SUCCESS (github.com - empty list) 1`] = `
+Object {
+  "failed": false,
+  "isFetching": false,
+  "response": Array [
+    Object {
+      "hostname": "github.com",
+      "notifications": Array [
+        Object {
+          "id": 1,
+          "repository": Object {
+            "full_name": "manosim/gitify",
+          },
+          "text": "New Release",
+        },
+        Object {
+          "id": 2,
+          "repository": Object {
+            "full_name": "manosim/gitify",
+          },
+          "text": "It's Great",
+        },
+      ],
+    },
+  ],
+}
+`;
+
+exports[`reducers/notifications.js should handle NOTIFICATIONS.SUCCESS (github.com - not empty list) 1`] = `
+Object {
+  "failed": false,
+  "isFetching": false,
+  "response": Array [
+    Object {
+      "hostname": "github.com",
+      "notifications": Array [
+        Object {
+          "id": 1,
+          "repository": Object {
+            "full_name": "manosim/gitify",
+          },
+          "text": "New Release",
+        },
+        Object {
+          "id": 2,
+          "repository": Object {
+            "full_name": "manosim/gitify",
+          },
+          "text": "It's Great",
+        },
+      ],
+    },
+  ],
+}
+`;
