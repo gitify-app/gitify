@@ -1,4 +1,4 @@
-import { Map, List, fromJS } from 'immutable';
+import { Map, List } from 'immutable';
 import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION, LOGOUT } from '../actions';
 
 const initialState = Map({
@@ -29,25 +29,6 @@ export default function reducer(state = initialState, action) {
       return state
         .set('isFetching', false)
         .set('response', action.payload);
-
-      // const accountIndex = state.get('response')
-      //   .findIndex(obj => obj.get('hostname') === action.hostname);
-
-      // if (accountIndex === -1) {
-      //   return state
-      //     .set('isFetching', false)
-      //     .update('response', res => res.push(Map({
-      //       hostname: action.hostname,
-      //       notifications: fromJS(action.payload)
-      //     })));
-      // }
-
-      // return state
-      //   .set('isFetching', false)
-      //   .setIn(['response', accountIndex], Map({
-      //     hostname: action.hostname,
-      //     notifications: fromJS(action.payload),
-      //   }));
     case NOTIFICATIONS.FAILURE:
       return state
         .set('isFetching', false)

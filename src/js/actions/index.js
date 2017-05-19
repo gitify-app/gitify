@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { parse } from 'url';
-import { fromJS, List, Map } from 'immutable';
+import { fromJS, Map } from 'immutable';
 import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 
 import Constants from '../utils/constants';
