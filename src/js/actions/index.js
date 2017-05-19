@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { parse } from 'url';
-import { fromJS } from 'immutable';
+import { fromJS, List, Map } from 'immutable';
 import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 
 import Constants from '../utils/constants';
@@ -85,26 +85,31 @@ export function fetchNotifications() {
 
     dispatch({type: NOTIFICATIONS.REQUEST});
 
-    return axios.all([getGitHubNotifications(), getEnterpriseNotifications()])
-      .then(axios.spread((gitHubNotifications, enterpriseNotifications) => {
-        if (isGitHubLoggedIn) {
-          dispatch({
-            type: NOTIFICATIONS.SUCCESS,
-            payload: fromJS(gitHubNotifications.data),
-            hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname
-          });
-        }
+    return axios.all([getGitHubNotifications(), ...getEnterpriseNotifications()])
+      .then(axios.spread((gitHubNotifications, ...entAccNotifications) => {
 
-        return enterpriseNotifications.map(entAccNotifications => {
-          entAccNotifications.then(res => {
-            const { hostname } = parse(res.config.url);
-            dispatch({type: NOTIFICATIONS.SUCCESS, payload: fromJS(res.data), hostname});
+        const notifications = fromJS(entAccNotifications.map((accNotifications) => {
+          const { hostname } = parse(accNotifications.config.url);
+
+          return Map({
+            hostname,
+            payload: fromJS(accNotifications.data),
           });
+        }));
+
+        const allNotifications = isGitHubLoggedIn ? notifications.push(
+          Map({
+            hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+            payload: fromJS(gitHubNotifications.data),
+          })
+        ) : notifications;
+
+        dispatch({
+          type: NOTIFICATIONS.SUCCESS,
+          notifications: allNotifications
         });
       }))
-      .catch(function (error) {
-        dispatch({type: NOTIFICATIONS.FAILURE, payload: error.response.data});
-      });
+      .catch((error) => dispatch({type: NOTIFICATIONS.FAILURE, payload: error.response.data}));
   };
 };
 
