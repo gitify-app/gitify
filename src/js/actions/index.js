@@ -93,20 +93,20 @@ export function fetchNotifications() {
 
           return Map({
             hostname,
-            payload: fromJS(accNotifications.data),
+            notifications: fromJS(accNotifications.data),
           });
         }));
 
         const allNotifications = isGitHubLoggedIn ? notifications.push(
           Map({
             hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-            payload: fromJS(gitHubNotifications.data),
+            notifications: fromJS(gitHubNotifications.data),
           })
         ) : notifications;
 
         dispatch({
           type: NOTIFICATIONS.SUCCESS,
-          notifications: allNotifications
+          payload: allNotifications
         });
       }))
       .catch((error) => dispatch({type: NOTIFICATIONS.FAILURE, payload: error.response.data}));

@@ -26,24 +26,28 @@ export default function reducer(state = initialState, action) {
         .set('isFetching', true)
         .set('failed', false);
     case NOTIFICATIONS.SUCCESS:
-      const accountIndex = state.get('response')
-        .findIndex(obj => obj.get('hostname') === action.hostname);
-
-      if (accountIndex === -1) {
-        return state
-          .set('isFetching', false)
-          .update('response', res => res.push(Map({
-            hostname: action.hostname,
-            notifications: fromJS(action.payload)
-          })));
-      }
-
       return state
         .set('isFetching', false)
-        .setIn(['response', accountIndex], Map({
-          hostname: action.hostname,
-          notifications: fromJS(action.payload),
-        }));
+        .set('response', action.payload);
+
+      // const accountIndex = state.get('response')
+      //   .findIndex(obj => obj.get('hostname') === action.hostname);
+
+      // if (accountIndex === -1) {
+      //   return state
+      //     .set('isFetching', false)
+      //     .update('response', res => res.push(Map({
+      //       hostname: action.hostname,
+      //       notifications: fromJS(action.payload)
+      //     })));
+      // }
+
+      // return state
+      //   .set('isFetching', false)
+      //   .setIn(['response', accountIndex], Map({
+      //     hostname: action.hostname,
+      //     notifications: fromJS(action.payload),
+      //   }));
     case NOTIFICATIONS.FAILURE:
       return state
         .set('isFetching', false)
