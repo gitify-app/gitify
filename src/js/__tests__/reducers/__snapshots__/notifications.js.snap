@@ -1,26 +1,106 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`reducers/notifications.js should handle NOTIFICATIONS.SUCCESS (github.com - empty list) 1`] = `
+exports[`reducers/notifications.js should handle LOGOUT 1`] = `
+Object {
+  "failed": false,
+  "isFetching": false,
+  "response": Array [],
+}
+`;
+
+exports[`reducers/notifications.js should handle MARK_NOTIFICATION.SUCCESS - enterprise 1`] = `
 Object {
   "failed": false,
   "isFetching": false,
   "response": Array [
     Object {
-      "hostname": "github.com",
+      "hostname": "github.gitify.io",
       "notifications": Array [
         Object {
-          "id": 1,
+          "id": "4",
+          "last_read_at": null,
+          "reason": "subscribed",
           "repository": Object {
-            "full_name": "manosim/gitify",
+            "description": null,
+            "fork": false,
+            "full_name": "myorg/notifications-test",
+            "html_url": "https://github.gitify.io/myorg/notifications-test",
+            "id": 1,
+            "name": "notifications-test",
+            "owner": Object {
+              "avatar_url": "https://github.gitify.io/avatars/u/4?",
+              "events_url": "https://github.gitify.io/api/v3/users/myorg/events{/privacy}",
+              "followers_url": "https://github.gitify.io/api/v3/users/myorg/followers",
+              "following_url": "https://github.gitify.io/api/v3/users/myorg/following{/other_user}",
+              "gists_url": "https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}",
+              "gravatar_id": "",
+              "html_url": "https://github.gitify.io/myorg",
+              "id": 4,
+              "login": "myorg",
+              "organizations_url": "https://github.gitify.io/api/v3/users/myorg/orgs",
+              "received_events_url": "https://github.gitify.io/api/v3/users/myorg/received_events",
+              "repos_url": "https://github.gitify.io/api/v3/users/myorg/repos",
+              "site_admin": false,
+              "starred_url": "https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}",
+              "subscriptions_url": "https://github.gitify.io/api/v3/users/myorg/subscriptions",
+              "type": "Organization",
+              "url": "https://github.gitify.io/api/v3/users/myorg",
+            },
+            "private": true,
           },
-          "text": "New Release",
+          "subject": Object {
+            "latest_comment_url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1",
+            "title": "Release 0.0.1",
+            "type": "Release",
+            "url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1",
+          },
+          "subscription_url": "https://github.gitify.io/api/v3/notifications/threads/4/subscription",
+          "unread": true,
+          "updated_at": "2017-05-20T13:02:48Z",
+          "url": "https://github.gitify.io/api/v3/notifications/threads/4",
         },
         Object {
-          "id": 2,
+          "id": "3",
+          "last_read_at": "2017-05-20T14:20:55Z",
+          "reason": "subscribed",
           "repository": Object {
-            "full_name": "manosim/gitify",
+            "description": null,
+            "fork": false,
+            "full_name": "myorg/notifications-test",
+            "html_url": "https://github.gitify.io/myorg/notifications-test",
+            "id": 1,
+            "name": "notifications-test",
+            "owner": Object {
+              "avatar_url": "https://github.gitify.io/avatars/u/4?",
+              "events_url": "https://github.gitify.io/api/v3/users/myorg/events{/privacy}",
+              "followers_url": "https://github.gitify.io/api/v3/users/myorg/followers",
+              "following_url": "https://github.gitify.io/api/v3/users/myorg/following{/other_user}",
+              "gists_url": "https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}",
+              "gravatar_id": "",
+              "html_url": "https://github.gitify.io/myorg",
+              "id": 4,
+              "login": "myorg",
+              "organizations_url": "https://github.gitify.io/api/v3/users/myorg/orgs",
+              "received_events_url": "https://github.gitify.io/api/v3/users/myorg/received_events",
+              "repos_url": "https://github.gitify.io/api/v3/users/myorg/repos",
+              "site_admin": false,
+              "starred_url": "https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}",
+              "subscriptions_url": "https://github.gitify.io/api/v3/users/myorg/subscriptions",
+              "type": "Organization",
+              "url": "https://github.gitify.io/api/v3/users/myorg",
+            },
+            "private": true,
           },
-          "text": "It's Great",
+          "subject": Object {
+            "latest_comment_url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21",
+            "title": "Bump Version",
+            "type": "PullRequest",
+            "url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/pulls/3",
+          },
+          "subscription_url": "https://github.gitify.io/api/v3/notifications/threads/3/subscription",
+          "unread": true,
+          "updated_at": "2017-05-20T15:52:20Z",
+          "url": "https://github.gitify.io/api/v3/notifications/threads/3",
         },
       ],
     },
@@ -28,7 +108,7 @@ Object {
 }
 `;
 
-exports[`reducers/notifications.js should handle NOTIFICATIONS.SUCCESS (github.com - not empty list) 1`] = `
+exports[`reducers/notifications.js should handle MARK_NOTIFICATION.SUCCESS - github.com 1`] = `
 Object {
   "failed": false,
   "isFetching": false,
@@ -37,21 +117,246 @@ Object {
       "hostname": "github.com",
       "notifications": Array [
         Object {
-          "id": 1,
+          "id": "138661096",
+          "last_read_at": "2017-05-20T17:06:51Z",
+          "reason": "subscribed",
           "repository": Object {
-            "full_name": "manosim/gitify",
+            "description": null,
+            "fork": false,
+            "full_name": "manosim/notifications-test",
+            "html_url": "https://github.com/manosim/notifications-test",
+            "id": 57216596,
+            "name": "notifications-test",
+            "owner": Object {
+              "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
+              "events_url": "https://api.github.com/users/manosim/events{/privacy}",
+              "followers_url": "https://api.github.com/users/manosim/followers",
+              "following_url": "https://api.github.com/users/manosim/following{/other_user}",
+              "gists_url": "https://api.github.com/users/manosim/gists{/gist_id}",
+              "gravatar_id": "",
+              "html_url": "https://github.com/manosim",
+              "id": 6333409,
+              "login": "manosim",
+              "organizations_url": "https://api.github.com/users/manosim/orgs",
+              "received_events_url": "https://api.github.com/users/manosim/received_events",
+              "repos_url": "https://api.github.com/users/manosim/repos",
+              "site_admin": false,
+              "starred_url": "https://api.github.com/users/manosim/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/manosim/subscriptions",
+              "type": "User",
+              "url": "https://api.github.com/users/manosim",
+            },
+            "private": true,
           },
-          "text": "New Release",
+          "subject": Object {
+            "latest_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments/302888448",
+            "title": "I am a robot and this is a test!",
+            "type": "Issue",
+            "url": "https://api.github.com/repos/manosim/notifications-test/issues/1",
+          },
+          "subscription_url": "https://api.github.com/notifications/threads/138661096/subscription",
+          "unread": true,
+          "updated_at": "2017-05-20T17:51:57Z",
+          "url": "https://api.github.com/notifications/threads/138661096",
         },
         Object {
-          "id": 2,
+          "id": "148827438",
+          "last_read_at": "2017-05-20T16:59:03Z",
+          "reason": "author",
           "repository": Object {
-            "full_name": "manosim/gitify",
+            "description": null,
+            "fork": false,
+            "full_name": "manosim/notifications-test",
+            "html_url": "https://github.com/manosim/notifications-test",
+            "id": 57216596,
+            "name": "notifications-test",
+            "owner": Object {
+              "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
+              "events_url": "https://api.github.com/users/manosim/events{/privacy}",
+              "followers_url": "https://api.github.com/users/manosim/followers",
+              "following_url": "https://api.github.com/users/manosim/following{/other_user}",
+              "gists_url": "https://api.github.com/users/manosim/gists{/gist_id}",
+              "gravatar_id": "",
+              "html_url": "https://github.com/manosim",
+              "id": 6333409,
+              "login": "manosim",
+              "organizations_url": "https://api.github.com/users/manosim/orgs",
+              "received_events_url": "https://api.github.com/users/manosim/received_events",
+              "repos_url": "https://api.github.com/users/manosim/repos",
+              "site_admin": false,
+              "starred_url": "https://api.github.com/users/manosim/starred{/owner}{/repo}",
+              "subscriptions_url": "https://api.github.com/users/manosim/subscriptions",
+              "type": "User",
+              "url": "https://api.github.com/users/manosim",
+            },
+            "private": true,
           },
-          "text": "It's Great",
+          "subject": Object {
+            "latest_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments/302885965",
+            "title": "Improve the UI",
+            "type": "Issue",
+            "url": "https://api.github.com/repos/manosim/notifications-test/issues/4",
+          },
+          "subscription_url": "https://api.github.com/notifications/threads/148827438/subscription",
+          "unread": true,
+          "updated_at": "2017-05-20T17:06:34Z",
+          "url": "https://api.github.com/notifications/threads/148827438",
         },
       ],
     },
   ],
+}
+`;
+
+exports[`reducers/notifications.js should handle MARK_REPO_NOTIFICATION.SUCCESS - enterprise 1`] = `
+Object {
+  "failed": false,
+  "isFetching": false,
+  "response": Array [
+    Object {
+      "hostname": "github.gitify.io",
+      "notifications": Array [],
+    },
+  ],
+}
+`;
+
+exports[`reducers/notifications.js should handle MARK_REPO_NOTIFICATION.SUCCESS - github.com 1`] = `
+Object {
+  "failed": false,
+  "isFetching": false,
+  "response": Array [
+    Object {
+      "hostname": "github.gitify.io",
+      "notifications": Array [],
+    },
+  ],
+}
+`;
+
+exports[`reducers/notifications.js should handle NOTIFICATIONS.FAILURE 1`] = `
+Object {
+  "failed": true,
+  "isFetching": false,
+  "response": Array [],
+}
+`;
+
+exports[`reducers/notifications.js should handle NOTIFICATIONS.REQUEST 1`] = `
+Object {
+  "failed": false,
+  "isFetching": true,
+  "response": Array [],
+}
+`;
+
+exports[`reducers/notifications.js should handle NOTIFICATIONS.SUCCESS 1`] = `
+Object {
+  "failed": false,
+  "isFetching": false,
+  "response": Array [],
+}
+`;
+
+exports[`reducers/notifications.js should handle NOTIFICATIONS.SUCCESS 2`] = `
+Object {
+  "failed": false,
+  "isFetching": false,
+  "response": Array [
+    Object {
+      "id": "138661096",
+      "last_read_at": "2017-05-20T17:06:51Z",
+      "reason": "subscribed",
+      "repository": Object {
+        "description": null,
+        "fork": false,
+        "full_name": "manosim/notifications-test",
+        "html_url": "https://github.com/manosim/notifications-test",
+        "id": 57216596,
+        "name": "notifications-test",
+        "owner": Object {
+          "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
+          "events_url": "https://api.github.com/users/manosim/events{/privacy}",
+          "followers_url": "https://api.github.com/users/manosim/followers",
+          "following_url": "https://api.github.com/users/manosim/following{/other_user}",
+          "gists_url": "https://api.github.com/users/manosim/gists{/gist_id}",
+          "gravatar_id": "",
+          "html_url": "https://github.com/manosim",
+          "id": 6333409,
+          "login": "manosim",
+          "organizations_url": "https://api.github.com/users/manosim/orgs",
+          "received_events_url": "https://api.github.com/users/manosim/received_events",
+          "repos_url": "https://api.github.com/users/manosim/repos",
+          "site_admin": false,
+          "starred_url": "https://api.github.com/users/manosim/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/manosim/subscriptions",
+          "type": "User",
+          "url": "https://api.github.com/users/manosim",
+        },
+        "private": true,
+      },
+      "subject": Object {
+        "latest_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments/302888448",
+        "title": "I am a robot and this is a test!",
+        "type": "Issue",
+        "url": "https://api.github.com/repos/manosim/notifications-test/issues/1",
+      },
+      "subscription_url": "https://api.github.com/notifications/threads/138661096/subscription",
+      "unread": true,
+      "updated_at": "2017-05-20T17:51:57Z",
+      "url": "https://api.github.com/notifications/threads/138661096",
+    },
+    Object {
+      "id": "148827438",
+      "last_read_at": "2017-05-20T16:59:03Z",
+      "reason": "author",
+      "repository": Object {
+        "description": null,
+        "fork": false,
+        "full_name": "manosim/notifications-test",
+        "html_url": "https://github.com/manosim/notifications-test",
+        "id": 57216596,
+        "name": "notifications-test",
+        "owner": Object {
+          "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
+          "events_url": "https://api.github.com/users/manosim/events{/privacy}",
+          "followers_url": "https://api.github.com/users/manosim/followers",
+          "following_url": "https://api.github.com/users/manosim/following{/other_user}",
+          "gists_url": "https://api.github.com/users/manosim/gists{/gist_id}",
+          "gravatar_id": "",
+          "html_url": "https://github.com/manosim",
+          "id": 6333409,
+          "login": "manosim",
+          "organizations_url": "https://api.github.com/users/manosim/orgs",
+          "received_events_url": "https://api.github.com/users/manosim/received_events",
+          "repos_url": "https://api.github.com/users/manosim/repos",
+          "site_admin": false,
+          "starred_url": "https://api.github.com/users/manosim/starred{/owner}{/repo}",
+          "subscriptions_url": "https://api.github.com/users/manosim/subscriptions",
+          "type": "User",
+          "url": "https://api.github.com/users/manosim",
+        },
+        "private": true,
+      },
+      "subject": Object {
+        "latest_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments/302885965",
+        "title": "Improve the UI",
+        "type": "Issue",
+        "url": "https://api.github.com/repos/manosim/notifications-test/issues/4",
+      },
+      "subscription_url": "https://api.github.com/notifications/threads/148827438/subscription",
+      "unread": true,
+      "updated_at": "2017-05-20T17:06:34Z",
+      "url": "https://api.github.com/notifications/threads/148827438",
+    },
+  ],
+}
+`;
+
+exports[`reducers/notifications.js should return the initial state 1`] = `
+Object {
+  "failed": false,
+  "isFetching": false,
+  "response": Array [],
 }
 `;

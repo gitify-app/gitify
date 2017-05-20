@@ -7,7 +7,7 @@ export const mockedEnterpriseAccounts = fromJS([
   },
 ]);
 
-export const mockedGithubNotification = fromJS([
+export const mockedGithubNotifications = fromJS([
   {
     'id': '138661096',
     'unread': true,
@@ -187,4 +187,15 @@ export const mockedEnterpriseNotifications = fromJS([
     'url': 'https://github.gitify.io/api/v3/notifications/threads/3',
     'subscription_url': 'https://github.gitify.io/api/v3/notifications/threads/3/subscription'
   }
+]);
+
+export const mockedNotificationsRecuderData = fromJS([
+  {
+    hostname: 'github.com',
+    notifications: mockedGithubNotifications,
+  },
+  {
+    hostname: 'github.gitify.io',
+    notifications: mockedEnterpriseNotifications,
+  },
 ]);

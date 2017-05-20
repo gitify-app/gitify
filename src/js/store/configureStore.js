@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { Iterable, Map } from 'immutable';
+import { Map } from 'immutable';
 import thunkMiddleware from 'redux-thunk';
 
 import * as storage from 'redux-storage';
@@ -33,22 +33,7 @@ export default function configureStore(initialState) {
 
   if (isDev) {
     const { createLogger } = require('redux-logger');
-    const logger = createLogger({
-      collapsed: true,
-      stateTransformer: (state) => {
-        let newState = {};
-
-        for (var i of Object.keys(state)) {
-          if (Iterable.isIterable(state[i])) {
-            newState[i] = state[i].toJS();
-          } else {
-            newState[i] = state[i];
-          }
-        };
-
-        return newState;
-      }
-    });
+    const logger = createLogger({collapsed: true});
     middlewares.push(logger);
   }
 
