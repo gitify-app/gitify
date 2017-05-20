@@ -43,9 +43,13 @@ export default function reducer(state = initialState, action) {
         return notifications.filterNot(items => items.get('id') === action.meta.id);
       });
     case MARK_REPO_NOTIFICATION.SUCCESS:
-      return state
-        .set('response', state.get('response')
-          .filterNot((obj) => obj.getIn(['repository', 'full_name']) === action.meta.repoSlug));
+      const accNotificationsRepoIndex = state
+        .get('response')
+        .findIndex(obj => obj.get('hostname') === action.meta.hostname);
+
+      return state.updateIn(['response', accNotificationsRepoIndex, 'notifications'], notifications => {
+        return notifications.filterNot(items => items.getIn(['repository', 'full_name']) === action.meta.repoSlug);
+      });
     case LOGOUT:
       return initialState;
     default:
