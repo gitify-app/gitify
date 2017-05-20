@@ -1,4 +1,5 @@
 import _ from 'underscore';
+import { List, Map } from 'immutable';
 import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION } from '../actions';
 import NativeNotifications from '../utils/notifications';
 import { setBadge, updateTrayIcon } from '../utils/comms';
@@ -10,14 +11,30 @@ export default store => next => action => {
   switch (action.type) {
 
     case NOTIFICATIONS.SUCCESS:
-      var previousNotifications = notificationsState.response.map(obj => obj.id);
-      var newNotifications = _.filter(action.payload.toJS(), function (obj) {
-        return !_.contains(previousNotifications, obj.id);
+      const notificationsAccounts = store.getState().notifications.get('response');
+
+      const previousNotifications = notificationsAccounts.map((accNotifications) => {
+        return accNotifications.update('notifications', notifications => notifications.map(obj => obj.get('id')));
       });
 
-      updateTrayIcon(action.payload.size);
-      setBadge(action.payload.size);
-      NativeNotifications.setup(newNotifications, settings);
+      const newNotifications = action.payload.map((accNotifications) => {
+        const prevAccNotifications = previousNotifications
+          .find(obj => obj.get('hostname') === accNotifications.get('hostname'), null, Map())
+          .get('notifications', List());
+
+        return accNotifications.get('notifications').filter((obj) => {
+          return !prevAccNotifications.contains(obj.get('id'));
+        });
+      });
+
+      console.log('--- NEW ---');
+      console.log(newNotifications.toJS());
+      console.log('--- NEW ---');
+
+      const newNotificationsCount = newNotifications.reduce((memo, acc) => memo + acc.size, 0);
+
+      updateTrayIcon(newNotificationsCount);
+      setBadge(newNotificationsCount);
       break;
 
     case MARK_NOTIFICATION.SUCCESS:
