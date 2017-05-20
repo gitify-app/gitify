@@ -35,6 +35,7 @@ export default store => next => action => {
 
       updateTrayIcon(newNotificationsCount);
       setBadge(newNotificationsCount);
+      NativeNotifications.setup(newNotifications, newNotificationsCount, settings);
       break;
 
     case MARK_NOTIFICATION.SUCCESS:

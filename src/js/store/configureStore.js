@@ -71,7 +71,6 @@ export default function configureStore(initialState) {
       restoreSettings(userSettings);
       if (isEitherLoggedIn) {
         store.dispatch(checkHasStarred());
-        store.dispatch(fetchNotifications());
       }
     });
 

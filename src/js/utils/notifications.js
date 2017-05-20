@@ -17,33 +17,39 @@ export function getNotificationIcon(type) {
 }
 
 export default {
-  setup(notifications, settings) {
+  setup(notifications, notificationsCount, settings) {
     // If there are no new notifications just stop there
-    if (!notifications.length) { return; }
+    if (!notificationsCount) { return; }
 
     if (settings.get('playSound')) {
       this.raiseSoundNotification();
     }
 
     if (settings.get('showNotifications')) {
-      this.raiseNativeNotification(settings.get('isEnterprise'), notifications);
+      this.raiseNativeNotification(notifications, notificationsCount);
     }
   },
 
-  raiseNativeNotification(isEnterprise, notifications) {
-    const newCount = notifications.length;
-    const title = (newCount === 1 ? 'Gitify - ' + notifications[0].repository.full_name : 'Gitify');
-    const body = (newCount === 1 ? notifications[0].subject.title : 'You\'ve got ' + newCount + ' notifications.');
+  raiseNativeNotification(notifications, count) {
+    let title, body, icon, notificationUrl;
 
-    const nativeNotification = new Notification(title, {
-      body: body,
-      icon: newCount === 1 ? getNotificationIcon(notifications[0].subject.type) : false,
-      silent: true
-    });
+    if (count === 1) {
+      const notification = notifications.find(obj => !obj.isEmpty()).first();
+      title = `Gitify - ${notification.getIn(['repository', 'full_name'])}`;
+      body = notification.getIn(['subject', 'title']);
+      icon = getNotificationIcon(notification.getIn(['subject', 'type']));
+      notificationUrl = notification.getIn(['subject', 'url']);
+    } else {
+      title = 'Gitify';
+      body = `You've got ${count} notifications.`;
+      icon = false;
+    }
+
+    const nativeNotification = new Notification(title, {body, icon, silent: true});
 
     nativeNotification.onclick = function () {
-      if (newCount === 1) {
-        var url = Helpers.generateGitHubUrl(isEnterprise, notifications[0].subject.url);
+      if (count === 1) {
+        var url = Helpers.generateGitHubUrl(isEnterprise, notificationUrl);
         openExternalLink(url);
       } else {
         reOpenWindow();
