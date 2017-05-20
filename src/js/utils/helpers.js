@@ -1,3 +1,4 @@
+import { parse } from 'url';
 const electron = require('electron');
 const remote = electron.remote;
 const BrowserWindow = remote.BrowserWindow;
@@ -6,24 +7,24 @@ const dialog = remote.dialog;
 import Constants from './constants';
 import { loginUser } from '../actions';
 
-export default {
-  generateGitHubUrl(isEnterprise, url) {
-    // FIXME!
-    let newUrl = isEnterprise
-      ? url.replace('github.intuit.com/api/v3/repos', 'github.intuit.com')
-      : url.replace('api.github.com/repos', 'www.github.com');
+export function generateGitHubWebUrl(url) {
+  const { hostname } = parse(url);
+  const isEnterprise = hostname !== `api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}`;
 
-    if (newUrl.indexOf('/pulls/') !== -1) {
-      newUrl = newUrl.replace('/pulls/', '/pull/');
-    }
+  let newUrl = isEnterprise
+    ? url.replace(`${hostname}/api/v3/repos`, hostname)
+    : url.replace('api.github.com/repos', 'www.github.com');
 
-    if (newUrl.indexOf('/releases/') !== -1) {
-      newUrl = newUrl.replace('/repos', '');
-      newUrl = newUrl.substr(0, newUrl.lastIndexOf('/'));
-    }
+  if (newUrl.indexOf('/pulls/') !== -1) {
+    newUrl = newUrl.replace('/pulls/', '/pull/');
+  }
 
-    return newUrl;
-  },
+  if (newUrl.indexOf('/releases/') !== -1) {
+    newUrl = newUrl.replace('/repos', '');
+    newUrl = newUrl.substr(0, newUrl.lastIndexOf('/'));
+  }
+
+  return newUrl;
 };
 
 export function authGithub(authOptions = Constants.DEFAULT_AUTH_OPTIONS, dispatch) {

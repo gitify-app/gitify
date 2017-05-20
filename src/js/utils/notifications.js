@@ -1,5 +1,5 @@
 import { reOpenWindow, openExternalLink } from '../utils/comms';
-import Helpers from '../utils/helpers';
+import { generateGitHubWebUrl } from '../utils/helpers';
 
 export function getNotificationIcon(type) {
   switch (type) {
@@ -49,7 +49,7 @@ export default {
 
     nativeNotification.onclick = function () {
       if (count === 1) {
-        var url = Helpers.generateGitHubUrl(isEnterprise, notificationUrl);
+        const url = generateGitHubWebUrl(notificationUrl);
         openExternalLink(url);
       } else {
         reOpenWindow();
