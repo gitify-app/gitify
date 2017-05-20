@@ -1,12 +1,11 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { Map } from 'immutable';
 import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
 
 const { ipcRenderer } = require('electron');
 
 import { SettingsModal, mapStateToProps } from '../../components/settings-modal';
-
-import renderer from 'react-test-renderer';
 
 describe('components/settings-modal.js', () => {
   const props = {

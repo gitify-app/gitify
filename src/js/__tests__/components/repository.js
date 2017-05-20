@@ -1,97 +1,59 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { fromJS } from 'immutable';
 import { shallow } from 'enzyme';
-import { Repository } from '../../components/repository';
+import renderer from 'react-test-renderer';
+
+import { mockedGithubNotifications } from '../../__mocks__/mockedData';
+import { RepositoryNotifications } from '../../components/repository';
 
 const { shell } = require('electron');
 
-function setup(props) {
-  const wrapper = shallow(<Repository {...props} />);
-
-  return {
-    props: props,
-    wrapper: wrapper,
-  };
-};
+jest.mock('../../components/notification');
 
 describe('components/repository.js', function () {
+  const props = {
+    hostname: 'github.com',
+    repo: mockedGithubNotifications,
+    repoName: 'manosim/gitify',
+    markRepoNotifications: jest.fn()
+  };
 
-  const repository = fromJS([{
-    id: '123',
-    repository: {
-      full_name: 'manosim/gitify',
-      html_url: 'http://github.com/manosim/gitify/issues/123',
-      name: 'gitify',
-      owner: {
-        avatar_url: 'http://manos.avatar/img.png',
-        login: 'manosim',
-        full_name: 'Emmanouil Konstantinidis'
-      }
-    }
-  }]);
-
-  beforeEach(function() {
+  beforeEach(() => {
     shell.openExternal.mockReset();
   });
 
-  afterEach(function() {
-
+  it('should render itself & its children', function () {
+    const tree = renderer.create(
+      <RepositoryNotifications {...props} />
+    );
+    expect(tree).toMatchSnapshot();
   });
 
   it('should render itself & its children (logged in)', function () {
-
-    const props = {
-      repo: repository,
-      repoName: 'manosim/gitify'
-    };
-
-    const { wrapper } = setup(props);
-
-    expect(wrapper).toBeDefined();
-    expect(wrapper.find('.octicon-check').length).toBe(1);
-    expect(wrapper.find('.name').text()).toContain('gitify');
-    expect(wrapper.find('.name').text()).toContain('manosim');
-
-  });
-
-  it('should render itself & its children (logged in)', function () {
-
-    const props = {
-      repo: repository,
-      repoName: 'manosim/gitify'
-    };
-
-    const { wrapper } = setup(props);
+    const wrapper = shallow(
+      <RepositoryNotifications {...props} />
+    );
 
     expect(wrapper).toBeDefined();
     expect(wrapper.find('.octicon-check').length).toBe(1);
 
-    wrapper.find('.name span').simulate('click');
+    wrapper.find('.info span').simulate('click');
 
-    expect(wrapper.find('.name').text()).toContain('gitify');
-    expect(wrapper.find('.name').text()).toContain('manosim');
+    expect(wrapper.find('.info span').text()).toContain('gitify');
+    expect(wrapper.find('.info span').text()).toContain('manosim');
 
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(shell.openExternal).toHaveBeenCalledWith('http://github.com/manosim/gitify/issues/123');
-
+    expect(shell.openExternal).toHaveBeenCalledWith('https://github.com/manosim/notifications-test');
   });
 
   it('should mark a repo as read', function () {
-
-    const props = {
-      repo: repository,
-      repoName: 'manosim/gitify',
-      markRepoNotifications: jest.fn()
-    };
-
-    const { wrapper } = setup(props);
+    const wrapper = shallow(
+      <RepositoryNotifications {...props} />
+    );
 
     expect(wrapper).toBeDefined();
     expect(wrapper.find('.octicon-check').length).toBe(1);
 
     wrapper.find('.octicon-check').simulate('click');
-    expect(props.markRepoNotifications).toHaveBeenCalledWith('manosim/gitify');
-
+    expect(props.markRepoNotifications).toHaveBeenCalledWith('manosim/notifications-test', 'github.com');
   });
-
 });

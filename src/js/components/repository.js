@@ -11,6 +11,9 @@ import SingleNotification from './notification';
 export class RepositoryNotifications extends React.Component {
   static propTypes = {
     hostname: PropTypes.string.isRequired,
+    repo: PropTypes.any.isRequired,
+    repoName: PropTypes.string.isRequired,
+    markRepoNotifications: PropTypes.func.isRequired,
   }
 
   openBrowser() {
