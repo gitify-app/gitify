@@ -269,7 +269,7 @@ input {
       -webkit-app-region: no-drag;
 
       .nav-link {
-        padding: .5em .5em;
+        padding: .5em;
       }
     }
   }
@@ -375,9 +375,9 @@ input {
 
 .account {
   background-color: $gray;
-  font-size: .9rem;
   text-align: right;
   color: $white;
+  font-size: .9rem;
 
   .octicon {
     font-size: 1.1rem;
@@ -393,11 +393,11 @@ input {
   background-color: $gray-lighter;
 
   .info {
-    font-size: 16px;
-    font-weight: 600;
+    overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    overflow: hidden;
+    font-size: 16px;
+    font-weight: 600;
 
     .avatar {
       @include border-radius(50%);
