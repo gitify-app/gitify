@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 // import AllRead from '../components/all-read';
 // import Oops from '../components/oops';
-import RepoNotifications from '../components/notifications';
+import AccountNotifications from '../components/notifications';
 
 export class NotificationsRoute extends React.Component {
   render() {
@@ -29,7 +29,7 @@ export class NotificationsRoute extends React.Component {
           transitionLeaveTimeout={325}>
           {accountNotifications.map((obj, key) => {
             return (
-              <RepoNotifications
+              <AccountNotifications
                 key={key}
                 hostname={obj.get('hostname')}
                 notifications={obj.get('notifications')} />

@@ -7,6 +7,17 @@ const dialog = remote.dialog;
 import Constants from './constants';
 import { loginUser } from '../actions';
 
+export function getEnterpriseAccountToken(hostname, accounts) {
+  return accounts
+    .find(obj => obj.get('hostname') === hostname)
+    .get('token');
+}
+
+export function generateGitHubAPIUrl(hostname) {
+  const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+  return isEnterprise ? `https://${hostname}/api/v3/` : `https://api.${hostname}/`;
+}
+
 export function generateGitHubWebUrl(url) {
   const { hostname } = parse(url);
   const isEnterprise = hostname !== `api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}`;

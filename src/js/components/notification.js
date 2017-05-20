@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 
 import { markNotification } from '../actions';
-import Helpers from '../utils/helpers';
+import { generateGitHubWebUrl } from '../utils/helpers';
 
 
 export class SingleNotification extends React.Component {
@@ -18,12 +18,13 @@ export class SingleNotification extends React.Component {
   }
 
   openBrowser() {
-    var url = Helpers.generateGitHubUrl(this.props.isEnterprise, this.props.notification.getIn(['subject', 'url']));
+    const url = generateGitHubWebUrl(this.props.notification.getIn(['subject', 'url']));
     shell.openExternal(url);
   }
 
   markAsRead() {
-    this.props.markNotification(this.props.notification.get('id'));
+    const { hostname, notification } = this.props;
+    this.props.markNotification(notification.get('id'), hostname);
   }
 
   render() {

@@ -1,14 +1,10 @@
 import axios from 'axios';
 import { parse } from 'url';
 import { fromJS, Map } from 'immutable';
+
 import { apiRequest, apiRequestAuth } from '../utils/api-requests';
-
+import { getEnterpriseAccountToken, generateGitHubAPIUrl } from '../utils/helpers';
 import Constants from '../utils/constants';
-
-function constructGithubUrl(settings) {
-  // FIXME!
-  return `https://api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}/`;
-}
 
 export function makeAsyncActionSet(actionName) {
   return {
@@ -117,13 +113,14 @@ export function fetchNotifications() {
 // Single Notification
 
 export const MARK_NOTIFICATION = makeAsyncActionSet('MARK_NOTIFICATION');
-export function markNotification(id) {
+export function markNotification(id, hostname) {
   return (dispatch, getState) => {
-    const { settings } = getState();
-    // Construct the api!
-    const url = `${constructGithubUrl(settings)}notifications/threads/${id}`;
+    const url = `${generateGitHubAPIUrl(hostname)}notifications/threads/${id}`;
     const method = 'PATCH';
-    const token = getState().auth.get('token');
+
+    const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+    const entAccounts = getState().auth.get('enterpriseAccounts');
+    const token = isEnterprise ? getEnterpriseAccountToken(hostname, entAccounts) : getState().auth.get('token');
 
     dispatch({type: MARK_NOTIFICATION.REQUEST});
 
@@ -141,20 +138,21 @@ export function markNotification(id) {
 // Repo's Notification
 
 export const MARK_REPO_NOTIFICATION = makeAsyncActionSet('MARK_REPO_NOTIFICATION');
-export function markRepoNotifications(repoSlug) {
+export function markRepoNotifications(repoSlug, hostname) {
   return (dispatch, getState) => {
 
-    const { settings } = getState();
-    // Construct the api!
-    const url = `${constructGithubUrl(settings)}repos/${repoSlug}/notifications`;
+    const url = `${generateGitHubAPIUrl(hostname)}repos/${repoSlug}/notifications`;
     const method = 'PUT';
-    const token = getState().auth.get('token');
+
+    const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+    const entAccounts = getState().auth.get('enterpriseAccounts');
+    const token = isEnterprise ? getEnterpriseAccountToken(hostname, entAccounts) : getState().auth.get('token');
 
     dispatch({type: MARK_REPO_NOTIFICATION.REQUEST});
 
     return apiRequestAuth(url, method, token, {})
       .then(function (response) {
-        dispatch({type: MARK_REPO_NOTIFICATION.SUCCESS, payload: response.data, meta: { repoSlug }});
+        dispatch({type: MARK_REPO_NOTIFICATION.SUCCESS, payload: response.data, meta: { hostname, repoSlug }});
       })
       .catch(function (error) {
         dispatch({type: MARK_REPO_NOTIFICATION.FAILURE, payload: error.response.data});
@@ -168,9 +166,7 @@ export function markRepoNotifications(repoSlug) {
 export const HAS_STARRED = makeAsyncActionSet('HAS_STARRED');
 export function checkHasStarred() {
   return (dispatch, getState) => {
-    const { settings } = getState();
-    // Construct the api!
-    const url = `${constructGithubUrl(settings)}user/starred/${Constants.REPO_SLUG}`;
+    const url = `https://${Constants.DEFAULT_AUTH_OPTIONS.hostname}/user/starred/${Constants.REPO_SLUG}`;
     const method = 'GET';
     const token = getState().auth.get('token');
 

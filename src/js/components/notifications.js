@@ -1,9 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
-import Repository from './repository';
+import RepositoryNotifications from './repository';
 
-export default class RepoNotifications extends React.Component {
+export default class AccountNotifications extends React.Component {
+  static propTypes = {
+    hostname: PropTypes.string.isRequired,
+    notifications: PropTypes.any.isRequired,
+  }
+
   render() {
     const { hostname, notifications } = this.props;
 
@@ -20,9 +26,15 @@ export default class RepoNotifications extends React.Component {
           {hostname} <span className="octicon octicon-chevron-down ml-2" />
         </div>
 
-        {groupedNotifications.valueSeq().map((obj, key) => {
+        {groupedNotifications.valueSeq().map(obj => {
           const repoSlug = obj.first().getIn(['repository', 'full_name']);
-          return <Repository repo={obj} repoName={repoSlug} key={repoSlug} />;
+          return (
+            <RepositoryNotifications
+              hostname={hostname}
+              repo={obj}
+              repoName={repoSlug}
+              key={repoSlug} />
+          );
         })}
       </ReactCSSTransitionGroup>
     );

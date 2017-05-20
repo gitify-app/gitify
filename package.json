@@ -67,6 +67,7 @@
     "moment": "=2.18.1",
     "nprogress": "=0.2.0",
     "octicons": "=4.4.0",
+    "prop-types": "=15.5.10",
     "react": "=15.5.4",
     "react-addons-css-transition-group": "=15.5.2",
     "react-addons-shallow-compare": "=15.5.2",

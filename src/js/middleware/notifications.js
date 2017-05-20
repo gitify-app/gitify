@@ -7,11 +7,11 @@ import { setBadge, updateTrayIcon } from '../utils/comms';
 export default store => next => action => {
   const settings = store.getState().settings;
   const notificationsState = store.getState().notifications.toJS();
+  const notificationsAccounts = store.getState().notifications.get('response');
 
   switch (action.type) {
 
     case NOTIFICATIONS.SUCCESS:
-      const notificationsAccounts = store.getState().notifications.get('response');
 
       const previousNotifications = notificationsAccounts.map((accNotifications) => {
         return accNotifications.update('notifications', notifications => notifications.map(obj => obj.get('id')));
@@ -27,10 +27,6 @@ export default store => next => action => {
         });
       });
 
-      console.log('--- NEW ---');
-      console.log(newNotifications.toJS());
-      console.log('--- NEW ---');
-
       const newNotificationsCount = newNotifications.reduce((memo, acc) => memo + acc.size, 0);
 
       updateTrayIcon(newNotificationsCount);
@@ -39,19 +35,23 @@ export default store => next => action => {
       break;
 
     case MARK_NOTIFICATION.SUCCESS:
-      var previousNotifications = notificationsState.response.map(obj => obj.id);
-      updateTrayIcon(previousNotifications.length - 1);
-      setBadge(previousNotifications.length - 1);
+      const prevNotificationsCount = notificationsAccounts
+        .reduce((memo, acc) => memo + acc.get('notifications').size, 0);
+
+      updateTrayIcon(prevNotificationsCount - 1);
+      setBadge(prevNotificationsCount - 1);
       break;
 
     case MARK_REPO_NOTIFICATION.SUCCESS:
-      var previousNotifications = notificationsState.response;
-      var newNotifications = _.reject(previousNotifications, (obj) => (
-        obj.repository.full_name === action.meta.repoSlug
-      ));
 
-      updateTrayIcon(newNotifications.length);
-      setBadge(newNotifications.length);
+
+      // var previousNotifications = notificationsState.response;
+      // var newNotifications = _.reject(previousNotifications, (obj) => (
+      //   obj.repository.full_name === action.meta.repoSlug
+      // ));
+
+      // updateTrayIcon(newNotifications.length);
+      // setBadge(newNotifications.length);
       break;
   }
 

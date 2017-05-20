@@ -1,25 +1,32 @@
 const { shell } = require('electron');
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 
 import { markRepoNotifications } from '../actions';
 import SingleNotification from './notification';
 
-export class Repository extends React.Component {
+export class RepositoryNotifications extends React.Component {
+  static propTypes = {
+    hostname: PropTypes.string.isRequired,
+  }
+
   openBrowser() {
-    var url = this.props.repo.first().getIn(['repository', 'html_url']);
+    const url = this.props.repo.first().getIn(['repository', 'html_url']);
     shell.openExternal(url);
   }
 
   markRepoAsRead() {
-    const repoSlug = this.props.repo.first().getIn(['repository', 'full_name']);
-    this.props.markRepoNotifications(repoSlug);
+    const { hostname, repo } = this.props;
+    const repoSlug = repo.first().getIn(['repository', 'full_name']);
+    this.props.markRepoNotifications(repoSlug, hostname);
   }
 
   render() {
-    const avatarUrl = this.props.repo.first().getIn(['repository', 'owner', 'avatar_url']);
+    const { hostname, repo } = this.props;
+    const avatarUrl = repo.first().getIn(['repository', 'owner', 'avatar_url']);
 
     return (
       <div>
@@ -29,19 +36,22 @@ export class Repository extends React.Component {
             <span onClick={() => this.openBrowser()}>{this.props.repoName}</span>
           </div>
 
-            <span
-              title="Mark Repository as Read"
-              className="octicon octicon-check"
-              onClick={() => this.markRepoAsRead()} />
+          <span
+            title="Mark Repository as Read"
+            className="octicon octicon-check"
+            onClick={() => this.markRepoAsRead()} />
         </div>
 
         <ReactCSSTransitionGroup
           transitionName="notification"
           transitionEnter={false}
           transitionLeaveTimeout={325}>
-          {this.props.repo.map(function (obj, key) {
-            return <SingleNotification notification={obj} key={obj.get('id')} />;
-          })}
+          {repo.map(obj => (
+            <SingleNotification
+              key={obj.get('id')}
+              hostname={hostname}
+              notification={obj} />
+          ))}
         </ReactCSSTransitionGroup>
 
       </div>
@@ -49,4 +59,4 @@ export class Repository extends React.Component {
   }
 };
 
-export default connect(null, { markRepoNotifications })(Repository);
+export default connect(null, { markRepoNotifications })(RepositoryNotifications);
