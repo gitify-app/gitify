@@ -35,9 +35,13 @@ export default function reducer(state = initialState, action) {
         .set('failed', true)
         .set('response', List());
     case MARK_NOTIFICATION.SUCCESS:
-      return state
-        .set('response', state.get('response')
-          .filterNot((obj) => obj.get('id') === action.meta.id));
+      const accNotificationsIndex = state
+        .get('response')
+        .findIndex(obj => obj.get('hostname') === action.meta.hostname);
+
+      return state.updateIn(['response', accNotificationsIndex, 'notifications'], notifications => {
+        return notifications.filterNot(items => items.get('id') === action.meta.id);
+      });
     case MARK_REPO_NOTIFICATION.SUCCESS:
       return state
         .set('response', state.get('response')

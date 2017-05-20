@@ -126,7 +126,7 @@ export function markNotification(id, hostname) {
 
     return apiRequestAuth(url, method, token, {})
       .then(function (response) {
-        dispatch({type: MARK_NOTIFICATION.SUCCESS, payload: response.data, meta: { id }});
+        dispatch({type: MARK_NOTIFICATION.SUCCESS, payload: response.data, meta: { id, hostname }});
       })
       .catch(function (error) {
         dispatch({type: MARK_NOTIFICATION.FAILURE, payload: error.response.data});
