@@ -1,4 +1,3 @@
-import _ from 'underscore';
 import { List, Map } from 'immutable';
 import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION } from '../actions';
 import NativeNotifications from '../utils/notifications';
@@ -6,13 +5,11 @@ import { setBadge, updateTrayIcon } from '../utils/comms';
 
 export default store => next => action => {
   const settings = store.getState().settings;
-  const notificationsState = store.getState().notifications.toJS();
   const notificationsAccounts = store.getState().notifications.get('response');
 
   switch (action.type) {
 
     case NOTIFICATIONS.SUCCESS:
-
       const previousNotifications = notificationsAccounts.map((accNotifications) => {
         return accNotifications.update('notifications', notifications => notifications.map(obj => obj.get('id')));
       });
@@ -43,15 +40,20 @@ export default store => next => action => {
       break;
 
     case MARK_REPO_NOTIFICATION.SUCCESS:
+      const updatedNotificationsCount = notificationsAccounts
+        .map((accNotifications) => {
+          if (accNotifications.get('hostname') !== action.meta.hostname) {
+            return accNotifications;
+          }
 
+          return accNotifications.update('notifications', notifications => {
+            return notifications.filterNot(obj => obj.getIn(['repository', 'full_name']) === action.meta.repoSlug);
+          });
+        })
+        .reduce((memo, acc) => memo + acc.get('notifications').size, 0);
 
-      // var previousNotifications = notificationsState.response;
-      // var newNotifications = _.reject(previousNotifications, (obj) => (
-      //   obj.repository.full_name === action.meta.repoSlug
-      // ));
-
-      // updateTrayIcon(newNotifications.length);
-      // setBadge(newNotifications.length);
+      updateTrayIcon(updatedNotificationsCount);
+      setBadge(updatedNotificationsCount);
       break;
   }
 
