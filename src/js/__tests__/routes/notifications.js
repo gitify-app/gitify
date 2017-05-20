@@ -2,7 +2,7 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import { Map } from 'immutable';
 import renderer from 'react-test-renderer';
 
-import { NotificationsRoute, mapStateToProps } from '../../Routes/Notifications';
+import { NotificationsRoute, mapStateToProps } from '../../routes/notifications';
 import { mockedNotificationsRecuderData } from '../../__mocks__/mockedData';
 
 jest.mock('../../components/notifications');
