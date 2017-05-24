@@ -1,49 +1,19 @@
-import { Map, fromJS } from 'immutable';
+import { List, Map } from 'immutable';
 
 import * as actions from '../../actions';
 import * as comms from '../../utils/comms';
+import { mockedGithubNotifications, mockedNotificationsRecuderData } from '../../__mocks__/mockedData';
 import notificationsMiddleware from '../../middleware/notifications';
 import NativeNotifications from '../../utils/notifications';
 
-const newNotification = [
-  {
-    id: 987654,
-    repo: {
-      id: 13,
-      full_name: 'manosim/gitify'
-    }
-  }
-];
+const mockedNotifications = mockedNotificationsRecuderData
+  .deleteIn([0, 'notifications', 0]);
 
-const notificationsList = fromJS([
-  {
-    id: 123,
-    repository: {
-      id: 111111,
-      full_name: 'manosim/gitify'
-    }
-  },
-  {
-    id: 456,
-    repository: {
-      id: 111111,
-      full_name: 'manosim/gitify'
-    }
-  },
-  {
-    id: 789,
-    repository: {
-      id: 222222,
-      full_name: 'facebook/react'
-    }
-  }
-]);
-
-const createFakeStore = fakeData => ({
+const createFakeStore = (fakeData) => ({
   getState() {
     return {
       notifications: Map({
-        response: notificationsList
+        response: mockedNotifications
       }),
       settings: Map({
         playSound: false,
@@ -70,14 +40,21 @@ describe('middleware/notifications.js', () => {
   it('should raise notifications (native & sound, update tray icon, set badge)', () => {
     const action = {
       type: actions.NOTIFICATIONS.SUCCESS,
-      payload: newNotification
+      payload: mockedNotificationsRecuderData
     };
 
     expect(dispatchWithStoreOf({}, action)).toEqual(action);
 
+    const newNotifications = List.of(
+      List.of(mockedGithubNotifications.first()),
+      List()
+    );
+
     expect(NativeNotifications.setup).toHaveBeenCalledTimes(1);
-    expect(NativeNotifications.setup).toHaveBeenCalledWith(
-      newNotification, Map({ playSound: false, showNotifications: false })
+    expect(NativeNotifications.setup.calls.first().args[0]).toEqual(newNotifications);
+    expect(NativeNotifications.setup.calls.first().args[1]).toEqual(1);
+    expect(NativeNotifications.setup.calls.first().args[2]).toEqual(
+      Map({ playSound: false, showNotifications: false })
     );
   });
 
@@ -105,6 +82,6 @@ describe('middleware/notifications.js', () => {
 
     expect(dispatchWithStoreOf({}, action)).toEqual(action);
     expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
-    expect(comms.updateTrayIcon).toHaveBeenCalledWith(1);
+    expect(comms.updateTrayIcon).toHaveBeenCalledWith(3);
   });
 });
