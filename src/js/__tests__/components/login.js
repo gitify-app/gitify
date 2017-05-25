@@ -1,17 +1,25 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 import { Map } from 'immutable';
+import { MemoryRouter } from 'react-router';
 
+// import {authGithub} from '../../utils/Helpers';
+import * as Helpers from '../../utils/Helpers';
 import { LoginPage, mapStateToProps } from '../../components/login';
+import { mockedEnterpriseAccounts } from '../../__mocks__/mockedData';
 
-const { shell, ipcRenderer, remote } = require('electron');
+const { ipcRenderer, remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 
 describe('components/login.js', () => {
+  const props = {
+    dispatch: jest.fn()
+  };
+
   beforeEach(function() {
     BrowserWindow().loadURL.mockReset();
     ipcRenderer.send.mockReset();
-    shell.openExternal.mockReset();
   });
 
   it('should test the mapStateToProps method', () => {
@@ -20,43 +28,36 @@ describe('components/login.js', () => {
         token: '123456',
         failed: false,
         isFetching: false,
-        settings: Map({
-          baseUrl: 'github.com',
-          clientId: '3fef4433a29c6ad8f22c',
-          clientSecret: '9670de733096c15322183ff17ed0fc8704050379'
-        }),
+        enterpriseAccounts: mockedEnterpriseAccounts
       }),
     };
 
     const mappedProps = mapStateToProps(state);
 
-    expect(mappedProps.isLoggedIn).toBeTruthy();
-    expect(mappedProps.failed).toBeFalsy();
-    expect(mappedProps.isFetching).toBeFalsy();
+    expect(mappedProps.isEitherLoggedIn).toBeTruthy();
   });
 
   it('should render itself & its children', () => {
     const props = {
-      isLoggedIn: false,
-      token: null,
-      response: {},
-      failed: false,
-      isFetching: false,
-      settings: Map({
-        baseUrl: 'github.com',
-        clientId: '3fef4433a29c6ad8f22c',
-        clientSecret: '9670de733096c15322183ff17ed0fc8704050379'
-      }),
+      isEitherLoggedIn: false,
     };
 
-    const wrapper = shallow(<LoginPage {...props} />);
+    const tree = renderer.create(
+      <MemoryRouter>
+        <LoginPage {...props} />
+      </MemoryRouter>
+    );
 
-    expect(wrapper).toBeDefined();
-    expect(wrapper.find('.desc').text()).toContain('in your menu bar.');
+    expect(tree).toMatchSnapshot();
   });
 
   it('should open the login window and get a code successfully (will-navigate)', () => {
     const code = '123123123';
+
+    // console.log(Helpers);
+    // spyOn(authGithub).and.callFake(() => {});
+    // authGithub = jest.fn();
+    spyOn(Helpers, 'authGithub');
 
     spyOn(BrowserWindow().webContents, 'on').and.callFake((event, callback) => {
       if (event === 'will-navigate') {
@@ -67,29 +68,24 @@ describe('components/login.js', () => {
     const expectedUrl = 'https://github.com/login/oauth/' +
       'authorize?client_id=3fef4433a29c6ad8f22c&scope=user:email,notifications';
 
-    const props = {
-      loginUser: jest.fn(),
-      token: null,
-      response: {},
-      failed: false,
-      isFetching: false,
-      settings: Map({
-        baseUrl: 'github.com',
-        clientId: '3fef4433a29c6ad8f22c',
-        clientSecret: '9670de733096c15322183ff17ed0fc8704050379'
-      }),
+    const caseProps = {
+      ...props,
+      isEitherLoggedIn: false,
     };
 
-    const wrapper = shallow(<LoginPage {...props} />);
+    const wrapper = shallow(<LoginPage {...caseProps} />);
 
     expect(wrapper).toBeDefined();
 
-    wrapper.find('.github').simulate('click');
+    wrapper.find('button').simulate('click');
 
-    expect(BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
-    expect(BrowserWindow().loadURL).toHaveBeenCalledWith(expectedUrl);
-    expect(props.loginUser).toHaveBeenCalledTimes(1);
-    expect(props.loginUser).toHaveBeenCalledWith(code);
+    // console.log(Helpers.authGithub.toString());
+
+    expect(Helpers.authGithub).toHaveBeenCalledTimes(1);
+    // expect(BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
+    // expect(BrowserWindow().loadURL).toHaveBeenCalledWith(expectedUrl);
+    // expect(props.dispatch).toHaveBeenCalledTimes(1);
+    // expect(props.dispatch.calls).toHaveBeenCalledWith(code);
   });
 
   it('should open the login window and get a code successfully (did-get-redirect-request)', () => {
@@ -104,20 +100,11 @@ describe('components/login.js', () => {
     const expectedUrl = 'https://github.com/login/oauth/' +
       'authorize?client_id=3fef4433a29c6ad8f22c&scope=user:email,notifications';
 
-    const props = {
-      loginUser: jest.fn(),
-      token: null,
-      response: {},
-      failed: false,
-      isFetching: false,
-      settings: Map({
-        baseUrl: 'github.com',
-        clientId: '3fef4433a29c6ad8f22c',
-        clientSecret: '9670de733096c15322183ff17ed0fc8704050379'
-      }),
+    const caseProps = {
+      isEitherLoggedIn: false,
     };
 
-    const wrapper = shallow(<LoginPage {...props} />);
+    const wrapper = shallow(<LoginPage {...caseProps} />);
 
     expect(wrapper).toBeDefined();
 
