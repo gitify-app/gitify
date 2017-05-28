@@ -9,8 +9,8 @@ import filter from 'redux-storage-decorator-filter';
 import { checkHasStarred, UPDATE_SETTING, LOGIN, LOGOUT } from '../actions';
 import { restoreSettings } from '../utils/comms';
 import constants from '../utils/constants';
-import notifications from '../middleware/notifications';
-import settings from '../middleware/settings';
+import notificationsMiddlware from '../middleware/notifications';
+import settingsMiddleware from '../middleware/settings';
 import rootReducer from '../reducers';
 
 const isDev = process.mainModule.filename.indexOf('app.asar') === -1;
@@ -26,8 +26,8 @@ export default function configureStore(initialState) {
 
   const middlewares = [
     thunkMiddleware,
-    notifications,
-    settings,
+    notificationsMiddlware,
+    settingsMiddleware,
     storageMiddleware
   ];
 
@@ -47,8 +47,9 @@ export default function configureStore(initialState) {
   const load = storage.createLoader(engine);
   load(store)
     .then(newState => {
-      const isGitHubLoggedIn = !!newState.auth.token;
-      const userSettings = Map(newState.settings);
+      const { auth = {}, settings = {} } = newState;
+      const isGitHubLoggedIn = !!auth.token;
+      const userSettings = Map(settings);
 
       restoreSettings(userSettings);
       if (isGitHubLoggedIn) {
