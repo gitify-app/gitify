@@ -27,7 +27,7 @@ export class NotFound extends React.Component {
   }
 };
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
+export const PrivateRoute = ({ component: Component, ...rest }) => {
   const authReducer = store.getState().auth;
   const isAuthenticated = authReducer.get('token') !== null || authReducer.get('enterpriseAccounts').size > 0;
 
