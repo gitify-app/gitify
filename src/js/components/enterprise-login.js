@@ -59,14 +59,14 @@ export class EnterpriseLogin extends React.Component {
 
   render() {
     return (
-      <div className="container-fluid main-container settings">
-        <Link
-          to="/login"
-          className="btn btn-lg btn-block enterprise"
-          replace
-        >
-          <i className="fa fa-angle-left" /> Back
-        </Link>
+      <div className="container-fluid main-container login">
+        <div className="d-flex flex-row-reverse">
+          <Link to="/login" className="btn btn-close" replace>
+            <i className="fa fa-close" />
+          </Link>
+        </div>
+
+        <div className="desc">Login to GitHub Enterprise.</div>
 
         <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
           <Field
@@ -87,7 +87,7 @@ export class EnterpriseLogin extends React.Component {
             label="Client Secret"
             placeholder="ABC123DEF456" />
 
-          <button className="btn btn-md" type="submit">
+          <button className="btn btn-md btn-login mt-2" type="submit">
             <i className="fa fa-github" /> Login to GitHub Enterprise
           </button>
         </form>
@@ -104,10 +104,11 @@ export function mapStateToProps(state) {
 
 export default connect(mapStateToProps, null)(reduxForm({
   form: 'loginEnterprise',
-  initialValues: {
-    hostname: 'github.example.com',
-    clientId: '1231231231',
-    clientSecret: 'ABC123ABCDABC123ABCDABC123ABCDABC123ABCD',
-  },
+  // Use for development
+  // initialValues: {
+  //   hostname: 'github.example.com',
+  //   clientId: '1231231231',
+  //   clientSecret: 'ABC123ABCDABC123ABCDABC123ABCDABC123ABCD',
+  // },
   validate,
 })(EnterpriseLogin));

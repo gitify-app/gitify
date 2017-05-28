@@ -25,16 +25,16 @@ export class LoginPage extends React.Component {
         <img className="img-responsive logo" src="images/gitify-logo-outline-dark.png" />
         <div className="desc">GitHub Notifications<br />in your menu bar.</div>
         <button
-          className="btn btn-lg btn-block github"
+          className="btn btn-block btn-login"
           onClick={() => authGithub(undefined, this.props.dispatch)}
         >
-          <i className="fa fa-github" /> Log in to GitHub
+          <i className="fa fa-github mr-2" /> Login to GitHub
         </button>
 
         <Link
           to="/enterpriselogin"
-          className="btn btn-lg btn-block enterprise">
-          <i className="fa fa-github" /> Enterprise
+          className="btn btn-block btn-login mt-3">
+          <i className="fa fa-github mr-2" /> Login to GitHub Enterprise
         </Link>
       </div>
     );

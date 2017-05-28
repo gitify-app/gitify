@@ -45,8 +45,9 @@ export class Sidebar extends React.Component {
       .get('notifications', List()).size;
 
     return (
-      <div className="badge badge-primary text-uppercase" title={defaultHostname}>
-        GitHub {notificationsCount}
+      <div className="badge-account" title={defaultHostname}>
+        <div className="mr-auto name">GitHub</div>
+        <div>{notificationsCount === 0 ? <span className="octicon octicon-check" /> : notificationsCount}</div>
       </div>
     );
   }
@@ -60,8 +61,13 @@ export class Sidebar extends React.Component {
         .get('notifications', List()).size;
 
       return (
-        <div className="badge badge-primary text-uppercase" key={idx} title={account.get('hostname')}>
-          {accountDomain} {notificationsCount}
+        <div
+          key={idx}
+          title={account.get('hostname')}
+          className="badge-account"
+          >
+          <div className="mr-auto name">{accountDomain}</div>
+          <div>{notificationsCount === 0 ? <span className="octicon octicon-check" /> : notificationsCount}</div>
         </div>
       );
     });
@@ -85,7 +91,7 @@ export class Sidebar extends React.Component {
         )}
 
         {isEitherLoggedIn && (
-          <ul className="nav nav-inline mb-1">
+          <ul className="nav nav-inline mb-2">
             <li className="nav-item text-white">
               <i
                 title="Refresh"
@@ -106,7 +112,11 @@ export class Sidebar extends React.Component {
         {this._renderEnterpriseAccounts()}
 
         <div className="footer">
-          {!!isEitherLoggedIn && <Link to="/enterpriselogin" className="btn btn-block">Add</Link>}
+          {!!isEitherLoggedIn &&
+            <Link
+              to="/enterpriselogin"
+              className="btn btn-block btn-sm btn-outline-secondary btn-add">Add <br />Enterprise</Link>
+          }
 
           {!hasStarred && (
             <button className="btn btn-block btn-sm btn-outline-secondary btn-star" onClick={this.openBrowser}>

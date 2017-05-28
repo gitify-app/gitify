@@ -2,18 +2,26 @@
 
 exports[`components/enterprise-login.js renders correctly 1`] = `
 <div
-  className="container-fluid main-container settings"
+  className="container-fluid main-container login"
 >
-  <a
-    className="btn btn-lg btn-block enterprise"
-    href="/login"
-    onClick={[Function]}
+  <div
+    className="d-flex flex-row-reverse"
   >
-    <i
-      className="fa fa-angle-left"
-    />
-     Back
-  </a>
+    <a
+      className="btn btn-close"
+      href="/login"
+      onClick={[Function]}
+    >
+      <i
+        className="fa fa-close"
+      />
+    </a>
+  </div>
+  <div
+    className="desc"
+  >
+    Login to GitHub Enterprise.
+  </div>
   <form
     onSubmit={[Function]}
   >
@@ -87,7 +95,7 @@ exports[`components/enterprise-login.js renders correctly 1`] = `
       </div>
     </div>
     <button
-      className="btn btn-md"
+      className="btn btn-md btn-login mt-2"
       type="submit"
     >
       <i

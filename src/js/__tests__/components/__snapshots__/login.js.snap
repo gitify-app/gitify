@@ -16,23 +16,23 @@ exports[`components/login.js should render itself & its children 1`] = `
     in your menu bar.
   </div>
   <button
-    className="btn btn-lg btn-block github"
+    className="btn btn-block btn-login"
     onClick={[Function]}
   >
     <i
-      className="fa fa-github"
+      className="fa fa-github mr-2"
     />
-     Log in to GitHub
+     Login to GitHub
   </button>
   <a
-    className="btn btn-lg btn-block enterprise"
+    className="btn btn-block btn-login mt-3"
     href="/enterpriselogin"
     onClick={[Function]}
   >
     <i
-      className="fa fa-github"
+      className="fa fa-github mr-2"
     />
-     Enterprise
+     Login to GitHub Enterprise
   </a>
 </div>
 `;

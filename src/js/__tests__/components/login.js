@@ -107,7 +107,7 @@ describe('components/login.js', () => {
 
     expect(wrapper).toBeDefined();
 
-    wrapper.find('.github').simulate('click');
+    wrapper.find('button').simulate('click');
 
     expect(BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
     expect(BrowserWindow().loadURL).toHaveBeenCalledWith(expectedUrl);
@@ -140,7 +140,7 @@ describe('components/login.js', () => {
 
     expect(wrapper).toBeDefined();
 
-    wrapper.find('.github').simulate('click');
+    wrapper.find('button').simulate('click');
 
     expect(BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
     expect(BrowserWindow().loadURL).toHaveBeenCalledWith(expectedUrl);
@@ -168,7 +168,7 @@ describe('components/login.js', () => {
 
     expect(wrapper).toBeDefined();
 
-    wrapper.find('.github').simulate('click');
+    wrapper.find('button').simulate('click');
 
     expect(BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
     expect(props.dispatch).not.toHaveBeenCalled();
