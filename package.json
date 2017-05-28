@@ -85,8 +85,7 @@
     "redux-storage-decorator-filter": "=1.1.8",
     "redux-storage-engine-localstorage": "=1.1.4",
     "redux-storage-merger-immutablejs": "=1.0.5",
-    "redux-thunk": "=2.2.0",
-    "underscore": "=1.8.3"
+    "redux-thunk": "=2.2.0"
   },
   "devDependencies": {
     "babel-eslint": "=7.2.3",

@@ -1,4 +1,3 @@
-import _ from 'underscore';
 import React from 'react';
 import {emojify} from 'react-emojione';
 
@@ -6,7 +5,10 @@ import constants from '../utils/constants';
 
 export default class Oops extends React.PureComponent {
   render() {
-    const emoji = _.sample(constants.ERROR_EMOJIS);
+    const emoji = constants.ERROR_EMOJIS[
+      Math.floor(Math.random() * constants.ERROR_EMOJIS.length)
+    ];
+
 
     return (
       <div className="container-fluid main-container notifications errored">
