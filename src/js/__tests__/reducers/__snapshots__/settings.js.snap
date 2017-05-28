@@ -1,79 +1,79 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`reducers/settings.js should handle HAS_STARRED.SUCCESS 1`] = `
-Object {
-  "hasStarred": true,
-  "markOnClick": false,
-  "openAtStartup": false,
-  "participating": false,
-  "playSound": true,
-  "showAppIcon": "both",
-  "showNotifications": true,
-  "showSettingsModal": false,
+Immutable.Map {
+  participating: false,
+  playSound: true,
+  showNotifications: true,
+  markOnClick: false,
+  openAtStartup: false,
+  showSettingsModal: false,
+  hasStarred: true,
+  showAppIcon: "both",
 }
 `;
 
 exports[`reducers/settings.js should handle HAS_STARRED.SUCCESS 2`] = `
-Object {
-  "hasStarred": false,
-  "markOnClick": false,
-  "openAtStartup": false,
-  "participating": false,
-  "playSound": true,
-  "showAppIcon": "both",
-  "showNotifications": true,
-  "showSettingsModal": false,
+Immutable.Map {
+  participating: false,
+  playSound: true,
+  showNotifications: true,
+  markOnClick: false,
+  openAtStartup: false,
+  showSettingsModal: false,
+  hasStarred: false,
+  showAppIcon: "both",
 }
 `;
 
 exports[`reducers/settings.js should handle TOGGLE_SETTINGS_MODAL 1`] = `
-Object {
-  "hasStarred": false,
-  "markOnClick": false,
-  "openAtStartup": false,
-  "participating": false,
-  "playSound": true,
-  "showAppIcon": "both",
-  "showNotifications": true,
-  "showSettingsModal": true,
+Immutable.Map {
+  participating: false,
+  playSound: true,
+  showNotifications: true,
+  markOnClick: false,
+  openAtStartup: false,
+  showSettingsModal: true,
+  hasStarred: false,
+  showAppIcon: "both",
 }
 `;
 
 exports[`reducers/settings.js should handle UPDATE_SETTING 1`] = `
-Object {
-  "hasStarred": false,
-  "markOnClick": false,
-  "openAtStartup": false,
-  "participating": true,
-  "playSound": true,
-  "showAppIcon": "both",
-  "showNotifications": true,
-  "showSettingsModal": false,
+Immutable.Map {
+  participating: true,
+  playSound: true,
+  showNotifications: true,
+  markOnClick: false,
+  openAtStartup: false,
+  showSettingsModal: false,
+  hasStarred: false,
+  showAppIcon: "both",
 }
 `;
 
 exports[`reducers/settings.js should handle UPDATE_SETTING 2`] = `
-Object {
-  "hasStarred": false,
-  "markOnClick": false,
-  "openAtStartup": true,
-  "participating": false,
-  "playSound": true,
-  "showAppIcon": "both",
-  "showNotifications": true,
-  "showSettingsModal": false,
+Immutable.Map {
+  participating: false,
+  playSound: true,
+  showNotifications: true,
+  markOnClick: false,
+  openAtStartup: true,
+  showSettingsModal: false,
+  hasStarred: false,
+  showAppIcon: "both",
 }
 `;
 
 exports[`reducers/settings.js should return the initial state 1`] = `
-Object {
-  "hasStarred": false,
-  "markOnClick": false,
-  "openAtStartup": false,
-  "participating": false,
-  "playSound": true,
-  "showAppIcon": "both",
-  "showNotifications": true,
-  "showSettingsModal": false,
+Immutable.Map {
+  participating: false,
+  playSound: true,
+  showNotifications: true,
+  markOnClick: false,
+  openAtStartup: false,
+  showSettingsModal: false,
+  hasStarred: false,
+  showAppIcon: "both",
 }
 `;
