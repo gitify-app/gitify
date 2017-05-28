@@ -1,7 +1,7 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { MemoryRouter } from 'react-router-dom';
 import { fromJS, Map } from 'immutable';
-import { mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { List } from 'immutable';
 
 const { shell, ipcRenderer } = require('electron');
@@ -63,16 +63,9 @@ describe('components/Sidebar.js', () => {
   });
 
   it('should render itself & its children (logged in)', () => {
-    spyOn(Sidebar.prototype, 'componentDidMount').and.callThrough();
-
-    const wrapper = mount(
-      <MemoryRouter>
-        <Sidebar {...props} />
-      </MemoryRouter>
-    );
+    const wrapper = shallow(<Sidebar {...props} />);
 
     expect(wrapper).toBeDefined();
-    expect(Sidebar.prototype.componentDidMount).toHaveBeenCalledTimes(1);
     expect(wrapper.find('.fa-refresh').length).toBe(1);
     expect(wrapper.find('.fa-cog').length).toBe(1);
     expect(wrapper.find('.badge-primary').first().text()).toBe(`GitHub ${notifications.size}`);
@@ -96,19 +89,32 @@ describe('components/Sidebar.js', () => {
   });
 
   it('should load notifications after 60000ms', function () {
-    const wrapper = mount(
-      <MemoryRouter>
-        <Sidebar {...props} />
-      </MemoryRouter>
-    );
+    const wrapper = shallow(<Sidebar {...props} />);
 
     expect(wrapper).toBeDefined();
 
+    wrapper.instance().componentDidMount();
     clock.runTimersToTime(60000);
     expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
   });
 
   it('should render itself & its children (logged out)', function () {
+    const caseProps = {
+      ...props,
+      notifications: List(),
+      isGitHubLoggedIn: false,
+      isEitherLoggedIn: false,
+    };
+
+    const wrapper = shallow(<Sidebar {...caseProps} />);
+
+    expect(wrapper).toBeDefined();
+    expect(wrapper.find('.fa-refresh').length).toBe(0);
+    expect(wrapper.find('.fa-cog').length).toBe(0);
+    expect(wrapper.find('.tag-success').length).toBe(0);
+  });
+
+  it('should mount itself & its children (logged out)', function () {
     const caseProps = {
       ...props,
       notifications: List(),
@@ -131,12 +137,22 @@ describe('components/Sidebar.js', () => {
     expect(wrapper.find('.tag-success').length).toBe(0);
   });
 
+  it('should fetch the notifications if another account logs in', () => {
+    const wrapper = shallow(<Sidebar {...props} />);
+
+    expect(wrapper).toBeDefined();
+    expect(props.fetchNotifications).toHaveBeenCalledTimes(0);
+
+    wrapper.setProps({
+      ...props,
+      connectedAccounts: props.connectedAccounts + 1,
+    });
+
+    expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
+  });
+
   it('should open the gitify repo in browser', () => {
-    const wrapper = mount(
-      <MemoryRouter>
-        <Sidebar {...props} />
-      </MemoryRouter>
-    );
+    const wrapper = shallow(<Sidebar {...props} />);
 
     expect(wrapper).toBeDefined();
 
@@ -147,11 +163,7 @@ describe('components/Sidebar.js', () => {
   });
 
   it('should toggle the settings modal', () => {
-    const wrapper = mount(
-      <MemoryRouter>
-        <Sidebar {...props} />
-      </MemoryRouter>
-    );
+    const wrapper = shallow(<Sidebar {...props} />);
 
     expect(wrapper).toBeDefined();
     expect(wrapper.find('.fa-cog').length).toBe(1);
@@ -162,11 +174,7 @@ describe('components/Sidebar.js', () => {
   });
 
   it('should refresh the notifications', () => {
-    const wrapper = mount(
-      <MemoryRouter>
-        <Sidebar {...props} />
-      </MemoryRouter>
-    );
+    const wrapper = shallow(<Sidebar {...props} />);
 
     expect(wrapper).toBeDefined();
     expect(wrapper.find('.fa-refresh').length).toBe(1);
@@ -176,11 +184,7 @@ describe('components/Sidebar.js', () => {
   });
 
   it('open the gitify repo in browser', () => {
-    const wrapper = mount(
-      <MemoryRouter>
-        <Sidebar {...props} />
-      </MemoryRouter>
-    );
+    const wrapper = shallow(<Sidebar {...props} />);
 
     expect(wrapper.find('.btn-star').length).toBe(1);
 
