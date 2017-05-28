@@ -35,9 +35,14 @@ const browserWindow = {
   destroy: jest.fn()
 };
 
+const dialog = {
+  showErrorBox: jest.fn(),
+};
+
 module.exports = {
   remote: {
-    BrowserWindow: () => browserWindow
+    BrowserWindow: () => browserWindow,
+    dialog: dialog,
   },
   ipcRenderer: {
     send: jest.fn(),

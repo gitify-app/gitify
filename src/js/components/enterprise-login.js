@@ -7,12 +7,12 @@ import { connect } from 'react-redux';
 
 import { authGithub } from '../utils/helpers';
 
-const validate = values => {
+export const validate = values => {
   const errors = {};
   if (!values.hostname) {
     errors.hostname = 'Required';
   } else if (!/^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(values.hostname)) {
-    errors.hostname = 'Invalid host name.';
+    errors.hostname = 'Invalid hostname.';
   }
 
   if (!values.clientId) { // 20
@@ -96,10 +96,9 @@ export class EnterpriseLogin extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
     enterpriseAccounts: state.auth.get('enterpriseAccounts'),
-    settings: state.settings
   };
 };
 

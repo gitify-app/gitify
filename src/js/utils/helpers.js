@@ -101,4 +101,3 @@ export function authGithub(authOptions = Constants.DEFAULT_AUTH_OPTIONS, dispatc
 export function isUserEitherLoggedIn (auth) {
   return auth.get('token') !== null || auth.get('enterpriseAccounts').size > 0;
 }
-
