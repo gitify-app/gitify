@@ -1,8 +1,12 @@
-let constants = {
+export default {
   // GitHub OAuth
-  CLIENT_ID: '3fef4433a29c6ad8f22c',
-  CLIENT_SECRET: '9670de733096c15322183ff17ed0fc8704050379',
-  SCOPE: ['user:email', 'notifications'],
+  AUTH_SCOPE: ['user:email', 'notifications'],
+
+  DEFAULT_AUTH_OPTIONS: {
+    hostname: 'github.com',
+    clientId: '3fef4433a29c6ad8f22c',
+    clientSecret: '9670de733096c15322183ff17ed0fc8704050379',
+  },
 
   REPO_SLUG: 'manosim/gitify',
 
@@ -39,5 +43,3 @@ let constants = {
     ':cry:'
   ]
 };
-
-export default constants;

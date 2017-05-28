@@ -10,7 +10,8 @@ import configureStore from './store/configureStore';
 import Sidebar from './components/sidebar';
 import Loading from './components/loading';
 import LoginPage from './components/login';
-import NotificationsPage from './components/notifications';
+import NotificationsRoute from './routes/notifications';
+import EnterpriseLoginPage from './components/enterprise-login';
 import SettingsModal from './components/settings-modal';
 
 // Store
@@ -26,8 +27,9 @@ export class NotFound extends React.Component {
   }
 };
 
-const PrivateRoute = ({ component: Component, ...rest }) => {
-  const isAuthenticated = store.getState().auth.get('token') !== null;
+export const PrivateRoute = ({ component: Component, ...rest }) => {
+  const authReducer = store.getState().auth;
+  const isAuthenticated = authReducer.get('token') !== null || authReducer.get('enterpriseAccounts').size > 0;
 
   return (
     <Route {...rest} render={props => (
@@ -53,8 +55,9 @@ ReactDOM.render(
         <Sidebar />
 
         <Switch>
-          <PrivateRoute path="/" exact component={NotificationsPage} />
+          <PrivateRoute path="/" exact component={NotificationsRoute} />
           <Route path="/login" component={LoginPage} />
+          <Route path="/enterpriselogin" component={EnterpriseLoginPage} />
           <Route component={NotFound}/>
         </Switch>
       </div>

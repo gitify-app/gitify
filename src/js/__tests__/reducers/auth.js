@@ -4,15 +4,8 @@ import { LOGIN, LOGOUT } from '../../actions';
 import reducer from '../../reducers/auth';
 
 describe('reducers/auth.js', () => {
-  const initialState = Map({
-    response: Map(),
-    token: null,
-    isFetching: false,
-    failed: false
-  });
-
   it('should return the initial state', () => {
-    expect(reducer(undefined, {})).toEqual(initialState);
+    expect(reducer(undefined, {})).toMatchSnapshot();
   });
 
   it('should handle LOGIN.REQUEST', () => {
@@ -20,16 +13,10 @@ describe('reducers/auth.js', () => {
       type: LOGIN.REQUEST
     };
 
-    expect(reducer(undefined, action)).toEqual(
-      initialState
-        .set('isFetching', true)
-        .set('failed', false)
-        .set('response', Map())
-        .set('token', null)
-    );
+    expect(reducer(undefined, action)).toMatchSnapshot();
   });
 
-  it('should handle LOGIN.SUCCESS', () => {
+  it('should handle LOGIN.SUCCESS - github.com', () => {
     const fakeState = Map({
       response: Map(),
       token: null,
@@ -46,15 +33,22 @@ describe('reducers/auth.js', () => {
       }
     };
 
-    expect(reducer(fakeState, action)).toEqual(
-      initialState
-        .set('isFetching', false)
-        .set('token', action.payload.access_token)
-    );
-
+    expect(reducer(undefined, action)).toMatchSnapshot();
     expect(reducer(fakeState, action).get('token')).toBe('123HELLOWORLDTOKEN');
   });
 
+  it('should handle LOGIN.SUCCESS - enterprise', () => {
+    const action = {
+      type: LOGIN.SUCCESS,
+      isEnterprise: true,
+      hostname: 'github.gitify.io',
+      payload: {
+        access_token: '123HELLOWORLDTOKEN'
+      }
+    };
+
+    expect(reducer(undefined, action)).toMatchSnapshot();
+  });
   it('should handle LOGIN.FAILURE', () => {
     const fakeState = Map({
       response: Map(),
@@ -70,13 +64,7 @@ describe('reducers/auth.js', () => {
       payload: {msg: 'Failed to login.'}
     };
 
-    expect(reducer(fakeState, action)).toEqual(
-      initialState
-        .set('isFetching', false)
-        .set('failed', true)
-        .set('response', Map(action.payload))
-    );
-
+    expect(reducer(fakeState, action)).toMatchSnapshot();
     expect(reducer(fakeState, action).get('token')).toBeNull();
   });
 
@@ -94,12 +82,7 @@ describe('reducers/auth.js', () => {
       type: LOGOUT
     };
 
-    expect(reducer(fakeState, action)).toEqual(
-      initialState
-        .set('token', null)
-        .set('response', null)
-    );
-
+    expect(reducer(fakeState, action)).toMatchSnapshot();
     expect(reducer(fakeState, action).get('token')).toBeNull();
   });
 });
