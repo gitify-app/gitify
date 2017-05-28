@@ -1,6 +1,6 @@
 import { Map } from 'immutable';
 
-import Constants from '../../utils/Constants';
+import Constants from '../../utils/constants';
 import reducer from '../../reducers/notifications';
 import { LOGOUT, NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION } from '../../actions';
 import { mockedGithubNotifications, mockedEnterpriseNotifications } from '../../__mocks__/mockedData';
