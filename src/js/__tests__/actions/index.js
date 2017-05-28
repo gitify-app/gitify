@@ -220,6 +220,75 @@ describe('actions/index.js', () => {
     });
   });
 
+  it('should fetch notifications with success - enterprise only', () => {
+    const notifications = [
+      { id: 1, title: 'This is a notification.' },
+      { id: 2, title: 'This is another one.' },
+    ];
+
+    nock('https://github.gitify.io/api/v3/')
+      .get('/notifications?participating=false')
+      .reply(200, notifications);
+
+    const expectedPayload = fromJS([
+      {
+        'hostname': 'github.gitify.io',
+        'notifications': [
+          { id: 1, title: 'This is a notification.' },
+          { id: 2, title: 'This is another one.' },
+        ]
+      },
+    ]);
+
+    const expectedActions = [
+      { type: actions.NOTIFICATIONS.REQUEST },
+      { type: actions.NOTIFICATIONS.SUCCESS, payload: expectedPayload }
+    ];
+
+    const store = createMockStore({
+      auth: Map({
+        token: null,
+        enterpriseAccounts: mockedEnterpriseAccounts
+      }),
+      settings: Map({
+        participating: false,
+      }),
+      notifications: Map({response: List()})
+    }, expectedActions);
+
+    return store.dispatch(actions.fetchNotifications()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
+  it('should fetch notifications with failure - enterprise only', () => {
+    const message = 'Oops! Something went wrong.';
+
+    nock('https://github.gitify.io/api/v3/')
+      .get('/notifications?participating=false')
+      .reply(400, { message });
+
+    const expectedActions = [
+      { type: actions.NOTIFICATIONS.REQUEST },
+      { type: actions.NOTIFICATIONS.FAILURE, payload: { message } }
+    ];
+
+    const store = createMockStore({
+      auth: Map({
+        token: null,
+        enterpriseAccounts: mockedEnterpriseAccounts
+      }),
+      settings: Map({
+        participating: false,
+      }),
+      notifications: Map({response: List()})
+    }, expectedActions);
+
+    return store.dispatch(actions.fetchNotifications()).then(() => {
+      expect(store.getActions()).toEqual(expectedActions);
+    });
+  });
+
   it('should fetch notifications with success - github.com only', () => {
     const notifications = [
       { id: 1, title: 'This is a notification.' },
