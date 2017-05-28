@@ -1,362 +1,369 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`reducers/notifications.js should handle LOGOUT 1`] = `
-Object {
-  "failed": false,
-  "isFetching": false,
-  "response": Array [],
+Immutable.Map {
+  response: Immutable.List [
+  ],
+  isFetching: false,
+  failed: false,
 }
 `;
 
 exports[`reducers/notifications.js should handle MARK_NOTIFICATION.SUCCESS - enterprise 1`] = `
-Object {
-  "failed": false,
-  "isFetching": false,
-  "response": Array [
-    Object {
-      "hostname": "github.gitify.io",
-      "notifications": Array [
-        Object {
-          "id": "4",
-          "last_read_at": null,
-          "reason": "subscribed",
-          "repository": Object {
-            "description": null,
-            "fork": false,
-            "full_name": "myorg/notifications-test",
-            "html_url": "https://github.gitify.io/myorg/notifications-test",
-            "id": 1,
-            "name": "notifications-test",
-            "owner": Object {
-              "avatar_url": "https://github.gitify.io/avatars/u/4?",
-              "events_url": "https://github.gitify.io/api/v3/users/myorg/events{/privacy}",
-              "followers_url": "https://github.gitify.io/api/v3/users/myorg/followers",
-              "following_url": "https://github.gitify.io/api/v3/users/myorg/following{/other_user}",
-              "gists_url": "https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}",
-              "gravatar_id": "",
-              "html_url": "https://github.gitify.io/myorg",
-              "id": 4,
-              "login": "myorg",
-              "organizations_url": "https://github.gitify.io/api/v3/users/myorg/orgs",
-              "received_events_url": "https://github.gitify.io/api/v3/users/myorg/received_events",
-              "repos_url": "https://github.gitify.io/api/v3/users/myorg/repos",
-              "site_admin": false,
-              "starred_url": "https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}",
-              "subscriptions_url": "https://github.gitify.io/api/v3/users/myorg/subscriptions",
-              "type": "Organization",
-              "url": "https://github.gitify.io/api/v3/users/myorg",
+Immutable.Map {
+  response: Immutable.List [
+    Immutable.Map {
+      hostname: "github.gitify.io",
+      notifications: Immutable.List [
+        Immutable.Map {
+          reason: "subscribed",
+          repository: Immutable.Map {
+            id: 1,
+            name: "notifications-test",
+            full_name: "myorg/notifications-test",
+            owner: Immutable.Map {
+              gists_url: "https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}",
+              following_url: "https://github.gitify.io/api/v3/users/myorg/following{/other_user}",
+              followers_url: "https://github.gitify.io/api/v3/users/myorg/followers",
+              subscriptions_url: "https://github.gitify.io/api/v3/users/myorg/subscriptions",
+              received_events_url: "https://github.gitify.io/api/v3/users/myorg/received_events",
+              events_url: "https://github.gitify.io/api/v3/users/myorg/events{/privacy}",
+              avatar_url: "https://github.gitify.io/avatars/u/4?",
+              login: "myorg",
+              url: "https://github.gitify.io/api/v3/users/myorg",
+              starred_url: "https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}",
+              organizations_url: "https://github.gitify.io/api/v3/users/myorg/orgs",
+              repos_url: "https://github.gitify.io/api/v3/users/myorg/repos",
+              gravatar_id: "",
+              site_admin: false,
+              type: "Organization",
+              id: 4,
+              html_url: "https://github.gitify.io/myorg",
             },
-            "private": true,
+            private: true,
+            html_url: "https://github.gitify.io/myorg/notifications-test",
+            description: null,
+            fork: false,
           },
-          "subject": Object {
-            "latest_comment_url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1",
-            "title": "Release 0.0.1",
-            "type": "Release",
-            "url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1",
+          subject: Immutable.Map {
+            title: "Release 0.0.1",
+            url: "https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1",
+            latest_comment_url: "https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1",
+            type: "Release",
           },
-          "subscription_url": "https://github.gitify.io/api/v3/notifications/threads/4/subscription",
-          "unread": true,
-          "updated_at": "2017-05-20T13:02:48Z",
-          "url": "https://github.gitify.io/api/v3/notifications/threads/4",
+          subscription_url: "https://github.gitify.io/api/v3/notifications/threads/4/subscription",
+          url: "https://github.gitify.io/api/v3/notifications/threads/4",
+          unread: true,
+          last_read_at: null,
+          updated_at: "2017-05-20T13:02:48Z",
+          id: "4",
         },
-        Object {
-          "id": "3",
-          "last_read_at": "2017-05-20T14:20:55Z",
-          "reason": "subscribed",
-          "repository": Object {
-            "description": null,
-            "fork": false,
-            "full_name": "myorg/notifications-test",
-            "html_url": "https://github.gitify.io/myorg/notifications-test",
-            "id": 1,
-            "name": "notifications-test",
-            "owner": Object {
-              "avatar_url": "https://github.gitify.io/avatars/u/4?",
-              "events_url": "https://github.gitify.io/api/v3/users/myorg/events{/privacy}",
-              "followers_url": "https://github.gitify.io/api/v3/users/myorg/followers",
-              "following_url": "https://github.gitify.io/api/v3/users/myorg/following{/other_user}",
-              "gists_url": "https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}",
-              "gravatar_id": "",
-              "html_url": "https://github.gitify.io/myorg",
-              "id": 4,
-              "login": "myorg",
-              "organizations_url": "https://github.gitify.io/api/v3/users/myorg/orgs",
-              "received_events_url": "https://github.gitify.io/api/v3/users/myorg/received_events",
-              "repos_url": "https://github.gitify.io/api/v3/users/myorg/repos",
-              "site_admin": false,
-              "starred_url": "https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}",
-              "subscriptions_url": "https://github.gitify.io/api/v3/users/myorg/subscriptions",
-              "type": "Organization",
-              "url": "https://github.gitify.io/api/v3/users/myorg",
+        Immutable.Map {
+          reason: "subscribed",
+          repository: Immutable.Map {
+            id: 1,
+            name: "notifications-test",
+            full_name: "myorg/notifications-test",
+            owner: Immutable.Map {
+              gists_url: "https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}",
+              following_url: "https://github.gitify.io/api/v3/users/myorg/following{/other_user}",
+              followers_url: "https://github.gitify.io/api/v3/users/myorg/followers",
+              subscriptions_url: "https://github.gitify.io/api/v3/users/myorg/subscriptions",
+              received_events_url: "https://github.gitify.io/api/v3/users/myorg/received_events",
+              events_url: "https://github.gitify.io/api/v3/users/myorg/events{/privacy}",
+              avatar_url: "https://github.gitify.io/avatars/u/4?",
+              login: "myorg",
+              url: "https://github.gitify.io/api/v3/users/myorg",
+              starred_url: "https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}",
+              organizations_url: "https://github.gitify.io/api/v3/users/myorg/orgs",
+              repos_url: "https://github.gitify.io/api/v3/users/myorg/repos",
+              gravatar_id: "",
+              site_admin: false,
+              type: "Organization",
+              id: 4,
+              html_url: "https://github.gitify.io/myorg",
             },
-            "private": true,
+            private: true,
+            html_url: "https://github.gitify.io/myorg/notifications-test",
+            description: null,
+            fork: false,
           },
-          "subject": Object {
-            "latest_comment_url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21",
-            "title": "Bump Version",
-            "type": "PullRequest",
-            "url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/pulls/3",
+          subject: Immutable.Map {
+            title: "Bump Version",
+            url: "https://github.gitify.io/api/v3/repos/myorg/notifications-test/pulls/3",
+            latest_comment_url: "https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21",
+            type: "PullRequest",
           },
-          "subscription_url": "https://github.gitify.io/api/v3/notifications/threads/3/subscription",
-          "unread": true,
-          "updated_at": "2017-05-20T15:52:20Z",
-          "url": "https://github.gitify.io/api/v3/notifications/threads/3",
+          subscription_url: "https://github.gitify.io/api/v3/notifications/threads/3/subscription",
+          url: "https://github.gitify.io/api/v3/notifications/threads/3",
+          unread: true,
+          last_read_at: "2017-05-20T14:20:55Z",
+          updated_at: "2017-05-20T15:52:20Z",
+          id: "3",
         },
       ],
     },
   ],
+  isFetching: false,
+  failed: false,
 }
 `;
 
 exports[`reducers/notifications.js should handle MARK_NOTIFICATION.SUCCESS - github.com 1`] = `
-Object {
-  "failed": false,
-  "isFetching": false,
-  "response": Array [
-    Object {
-      "hostname": "github.com",
-      "notifications": Array [
-        Object {
-          "id": "138661096",
-          "last_read_at": "2017-05-20T17:06:51Z",
-          "reason": "subscribed",
-          "repository": Object {
-            "description": null,
-            "fork": false,
-            "full_name": "manosim/notifications-test",
-            "html_url": "https://github.com/manosim/notifications-test",
-            "id": 57216596,
-            "name": "notifications-test",
-            "owner": Object {
-              "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
-              "events_url": "https://api.github.com/users/manosim/events{/privacy}",
-              "followers_url": "https://api.github.com/users/manosim/followers",
-              "following_url": "https://api.github.com/users/manosim/following{/other_user}",
-              "gists_url": "https://api.github.com/users/manosim/gists{/gist_id}",
-              "gravatar_id": "",
-              "html_url": "https://github.com/manosim",
-              "id": 6333409,
-              "login": "manosim",
-              "organizations_url": "https://api.github.com/users/manosim/orgs",
-              "received_events_url": "https://api.github.com/users/manosim/received_events",
-              "repos_url": "https://api.github.com/users/manosim/repos",
-              "site_admin": false,
-              "starred_url": "https://api.github.com/users/manosim/starred{/owner}{/repo}",
-              "subscriptions_url": "https://api.github.com/users/manosim/subscriptions",
-              "type": "User",
-              "url": "https://api.github.com/users/manosim",
+Immutable.Map {
+  response: Immutable.List [
+    Immutable.Map {
+      hostname: "github.com",
+      notifications: Immutable.List [
+        Immutable.Map {
+          reason: "subscribed",
+          repository: Immutable.Map {
+            id: 57216596,
+            name: "notifications-test",
+            full_name: "manosim/notifications-test",
+            owner: Immutable.Map {
+              gists_url: "https://api.github.com/users/manosim/gists{/gist_id}",
+              following_url: "https://api.github.com/users/manosim/following{/other_user}",
+              followers_url: "https://api.github.com/users/manosim/followers",
+              subscriptions_url: "https://api.github.com/users/manosim/subscriptions",
+              received_events_url: "https://api.github.com/users/manosim/received_events",
+              events_url: "https://api.github.com/users/manosim/events{/privacy}",
+              avatar_url: "https://avatars0.githubusercontent.com/u/6333409?v=3",
+              login: "manosim",
+              url: "https://api.github.com/users/manosim",
+              starred_url: "https://api.github.com/users/manosim/starred{/owner}{/repo}",
+              organizations_url: "https://api.github.com/users/manosim/orgs",
+              repos_url: "https://api.github.com/users/manosim/repos",
+              gravatar_id: "",
+              site_admin: false,
+              type: "User",
+              id: 6333409,
+              html_url: "https://github.com/manosim",
             },
-            "private": true,
+            private: true,
+            html_url: "https://github.com/manosim/notifications-test",
+            description: null,
+            fork: false,
           },
-          "subject": Object {
-            "latest_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments/302888448",
-            "title": "I am a robot and this is a test!",
-            "type": "Issue",
-            "url": "https://api.github.com/repos/manosim/notifications-test/issues/1",
+          subject: Immutable.Map {
+            title: "I am a robot and this is a test!",
+            url: "https://api.github.com/repos/manosim/notifications-test/issues/1",
+            latest_comment_url: "https://api.github.com/repos/manosim/notifications-test/issues/comments/302888448",
+            type: "Issue",
           },
-          "subscription_url": "https://api.github.com/notifications/threads/138661096/subscription",
-          "unread": true,
-          "updated_at": "2017-05-20T17:51:57Z",
-          "url": "https://api.github.com/notifications/threads/138661096",
+          subscription_url: "https://api.github.com/notifications/threads/138661096/subscription",
+          url: "https://api.github.com/notifications/threads/138661096",
+          unread: true,
+          last_read_at: "2017-05-20T17:06:51Z",
+          updated_at: "2017-05-20T17:51:57Z",
+          id: "138661096",
         },
-        Object {
-          "id": "148827438",
-          "last_read_at": "2017-05-20T16:59:03Z",
-          "reason": "author",
-          "repository": Object {
-            "description": null,
-            "fork": false,
-            "full_name": "manosim/notifications-test",
-            "html_url": "https://github.com/manosim/notifications-test",
-            "id": 57216596,
-            "name": "notifications-test",
-            "owner": Object {
-              "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
-              "events_url": "https://api.github.com/users/manosim/events{/privacy}",
-              "followers_url": "https://api.github.com/users/manosim/followers",
-              "following_url": "https://api.github.com/users/manosim/following{/other_user}",
-              "gists_url": "https://api.github.com/users/manosim/gists{/gist_id}",
-              "gravatar_id": "",
-              "html_url": "https://github.com/manosim",
-              "id": 6333409,
-              "login": "manosim",
-              "organizations_url": "https://api.github.com/users/manosim/orgs",
-              "received_events_url": "https://api.github.com/users/manosim/received_events",
-              "repos_url": "https://api.github.com/users/manosim/repos",
-              "site_admin": false,
-              "starred_url": "https://api.github.com/users/manosim/starred{/owner}{/repo}",
-              "subscriptions_url": "https://api.github.com/users/manosim/subscriptions",
-              "type": "User",
-              "url": "https://api.github.com/users/manosim",
+        Immutable.Map {
+          reason: "author",
+          repository: Immutable.Map {
+            id: 57216596,
+            name: "notifications-test",
+            full_name: "manosim/notifications-test",
+            owner: Immutable.Map {
+              gists_url: "https://api.github.com/users/manosim/gists{/gist_id}",
+              following_url: "https://api.github.com/users/manosim/following{/other_user}",
+              followers_url: "https://api.github.com/users/manosim/followers",
+              subscriptions_url: "https://api.github.com/users/manosim/subscriptions",
+              received_events_url: "https://api.github.com/users/manosim/received_events",
+              events_url: "https://api.github.com/users/manosim/events{/privacy}",
+              avatar_url: "https://avatars0.githubusercontent.com/u/6333409?v=3",
+              login: "manosim",
+              url: "https://api.github.com/users/manosim",
+              starred_url: "https://api.github.com/users/manosim/starred{/owner}{/repo}",
+              organizations_url: "https://api.github.com/users/manosim/orgs",
+              repos_url: "https://api.github.com/users/manosim/repos",
+              gravatar_id: "",
+              site_admin: false,
+              type: "User",
+              id: 6333409,
+              html_url: "https://github.com/manosim",
             },
-            "private": true,
+            private: true,
+            html_url: "https://github.com/manosim/notifications-test",
+            description: null,
+            fork: false,
           },
-          "subject": Object {
-            "latest_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments/302885965",
-            "title": "Improve the UI",
-            "type": "Issue",
-            "url": "https://api.github.com/repos/manosim/notifications-test/issues/4",
+          subject: Immutable.Map {
+            title: "Improve the UI",
+            url: "https://api.github.com/repos/manosim/notifications-test/issues/4",
+            latest_comment_url: "https://api.github.com/repos/manosim/notifications-test/issues/comments/302885965",
+            type: "Issue",
           },
-          "subscription_url": "https://api.github.com/notifications/threads/148827438/subscription",
-          "unread": true,
-          "updated_at": "2017-05-20T17:06:34Z",
-          "url": "https://api.github.com/notifications/threads/148827438",
+          subscription_url: "https://api.github.com/notifications/threads/148827438/subscription",
+          url: "https://api.github.com/notifications/threads/148827438",
+          unread: true,
+          last_read_at: "2017-05-20T16:59:03Z",
+          updated_at: "2017-05-20T17:06:34Z",
+          id: "148827438",
         },
       ],
     },
   ],
+  isFetching: false,
+  failed: false,
 }
 `;
 
 exports[`reducers/notifications.js should handle MARK_REPO_NOTIFICATION.SUCCESS - enterprise 1`] = `
-Object {
-  "failed": false,
-  "isFetching": false,
-  "response": Array [
-    Object {
-      "hostname": "github.gitify.io",
-      "notifications": Array [],
+Immutable.Map {
+  response: Immutable.List [
+    Immutable.Map {
+      hostname: "github.gitify.io",
+      notifications: Immutable.List [
+      ],
     },
   ],
+  isFetching: false,
+  failed: false,
 }
 `;
 
 exports[`reducers/notifications.js should handle MARK_REPO_NOTIFICATION.SUCCESS - github.com 1`] = `
-Object {
-  "failed": false,
-  "isFetching": false,
-  "response": Array [
-    Object {
-      "hostname": "github.gitify.io",
-      "notifications": Array [],
+Immutable.Map {
+  response: Immutable.List [
+    Immutable.Map {
+      hostname: "github.gitify.io",
+      notifications: Immutable.List [
+      ],
     },
   ],
+  isFetching: false,
+  failed: false,
 }
 `;
 
 exports[`reducers/notifications.js should handle NOTIFICATIONS.FAILURE 1`] = `
-Object {
-  "failed": true,
-  "isFetching": false,
-  "response": Array [],
+Immutable.Map {
+  response: Immutable.List [
+  ],
+  isFetching: false,
+  failed: true,
 }
 `;
 
 exports[`reducers/notifications.js should handle NOTIFICATIONS.REQUEST 1`] = `
-Object {
-  "failed": false,
-  "isFetching": true,
-  "response": Array [],
+Immutable.Map {
+  response: Immutable.List [
+  ],
+  isFetching: true,
+  failed: false,
 }
 `;
 
 exports[`reducers/notifications.js should handle NOTIFICATIONS.SUCCESS 1`] = `
-Object {
-  "failed": false,
-  "isFetching": false,
-  "response": Array [],
+Immutable.Map {
+  response: Immutable.List [
+  ],
+  isFetching: false,
+  failed: false,
 }
 `;
 
 exports[`reducers/notifications.js should handle NOTIFICATIONS.SUCCESS 2`] = `
-Object {
-  "failed": false,
-  "isFetching": false,
-  "response": Array [
-    Object {
-      "id": "138661096",
-      "last_read_at": "2017-05-20T17:06:51Z",
-      "reason": "subscribed",
-      "repository": Object {
-        "description": null,
-        "fork": false,
-        "full_name": "manosim/notifications-test",
-        "html_url": "https://github.com/manosim/notifications-test",
-        "id": 57216596,
-        "name": "notifications-test",
-        "owner": Object {
-          "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
-          "events_url": "https://api.github.com/users/manosim/events{/privacy}",
-          "followers_url": "https://api.github.com/users/manosim/followers",
-          "following_url": "https://api.github.com/users/manosim/following{/other_user}",
-          "gists_url": "https://api.github.com/users/manosim/gists{/gist_id}",
-          "gravatar_id": "",
-          "html_url": "https://github.com/manosim",
-          "id": 6333409,
-          "login": "manosim",
-          "organizations_url": "https://api.github.com/users/manosim/orgs",
-          "received_events_url": "https://api.github.com/users/manosim/received_events",
-          "repos_url": "https://api.github.com/users/manosim/repos",
-          "site_admin": false,
-          "starred_url": "https://api.github.com/users/manosim/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/manosim/subscriptions",
-          "type": "User",
-          "url": "https://api.github.com/users/manosim",
+Immutable.Map {
+  response: Immutable.List [
+    Immutable.Map {
+      reason: "subscribed",
+      repository: Immutable.Map {
+        id: 57216596,
+        name: "notifications-test",
+        full_name: "manosim/notifications-test",
+        owner: Immutable.Map {
+          gists_url: "https://api.github.com/users/manosim/gists{/gist_id}",
+          following_url: "https://api.github.com/users/manosim/following{/other_user}",
+          followers_url: "https://api.github.com/users/manosim/followers",
+          subscriptions_url: "https://api.github.com/users/manosim/subscriptions",
+          received_events_url: "https://api.github.com/users/manosim/received_events",
+          events_url: "https://api.github.com/users/manosim/events{/privacy}",
+          avatar_url: "https://avatars0.githubusercontent.com/u/6333409?v=3",
+          login: "manosim",
+          url: "https://api.github.com/users/manosim",
+          starred_url: "https://api.github.com/users/manosim/starred{/owner}{/repo}",
+          organizations_url: "https://api.github.com/users/manosim/orgs",
+          repos_url: "https://api.github.com/users/manosim/repos",
+          gravatar_id: "",
+          site_admin: false,
+          type: "User",
+          id: 6333409,
+          html_url: "https://github.com/manosim",
         },
-        "private": true,
+        private: true,
+        html_url: "https://github.com/manosim/notifications-test",
+        description: null,
+        fork: false,
       },
-      "subject": Object {
-        "latest_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments/302888448",
-        "title": "I am a robot and this is a test!",
-        "type": "Issue",
-        "url": "https://api.github.com/repos/manosim/notifications-test/issues/1",
+      subject: Immutable.Map {
+        title: "I am a robot and this is a test!",
+        url: "https://api.github.com/repos/manosim/notifications-test/issues/1",
+        latest_comment_url: "https://api.github.com/repos/manosim/notifications-test/issues/comments/302888448",
+        type: "Issue",
       },
-      "subscription_url": "https://api.github.com/notifications/threads/138661096/subscription",
-      "unread": true,
-      "updated_at": "2017-05-20T17:51:57Z",
-      "url": "https://api.github.com/notifications/threads/138661096",
+      subscription_url: "https://api.github.com/notifications/threads/138661096/subscription",
+      url: "https://api.github.com/notifications/threads/138661096",
+      unread: true,
+      last_read_at: "2017-05-20T17:06:51Z",
+      updated_at: "2017-05-20T17:51:57Z",
+      id: "138661096",
     },
-    Object {
-      "id": "148827438",
-      "last_read_at": "2017-05-20T16:59:03Z",
-      "reason": "author",
-      "repository": Object {
-        "description": null,
-        "fork": false,
-        "full_name": "manosim/notifications-test",
-        "html_url": "https://github.com/manosim/notifications-test",
-        "id": 57216596,
-        "name": "notifications-test",
-        "owner": Object {
-          "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
-          "events_url": "https://api.github.com/users/manosim/events{/privacy}",
-          "followers_url": "https://api.github.com/users/manosim/followers",
-          "following_url": "https://api.github.com/users/manosim/following{/other_user}",
-          "gists_url": "https://api.github.com/users/manosim/gists{/gist_id}",
-          "gravatar_id": "",
-          "html_url": "https://github.com/manosim",
-          "id": 6333409,
-          "login": "manosim",
-          "organizations_url": "https://api.github.com/users/manosim/orgs",
-          "received_events_url": "https://api.github.com/users/manosim/received_events",
-          "repos_url": "https://api.github.com/users/manosim/repos",
-          "site_admin": false,
-          "starred_url": "https://api.github.com/users/manosim/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/manosim/subscriptions",
-          "type": "User",
-          "url": "https://api.github.com/users/manosim",
+    Immutable.Map {
+      reason: "author",
+      repository: Immutable.Map {
+        id: 57216596,
+        name: "notifications-test",
+        full_name: "manosim/notifications-test",
+        owner: Immutable.Map {
+          gists_url: "https://api.github.com/users/manosim/gists{/gist_id}",
+          following_url: "https://api.github.com/users/manosim/following{/other_user}",
+          followers_url: "https://api.github.com/users/manosim/followers",
+          subscriptions_url: "https://api.github.com/users/manosim/subscriptions",
+          received_events_url: "https://api.github.com/users/manosim/received_events",
+          events_url: "https://api.github.com/users/manosim/events{/privacy}",
+          avatar_url: "https://avatars0.githubusercontent.com/u/6333409?v=3",
+          login: "manosim",
+          url: "https://api.github.com/users/manosim",
+          starred_url: "https://api.github.com/users/manosim/starred{/owner}{/repo}",
+          organizations_url: "https://api.github.com/users/manosim/orgs",
+          repos_url: "https://api.github.com/users/manosim/repos",
+          gravatar_id: "",
+          site_admin: false,
+          type: "User",
+          id: 6333409,
+          html_url: "https://github.com/manosim",
         },
-        "private": true,
+        private: true,
+        html_url: "https://github.com/manosim/notifications-test",
+        description: null,
+        fork: false,
       },
-      "subject": Object {
-        "latest_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments/302885965",
-        "title": "Improve the UI",
-        "type": "Issue",
-        "url": "https://api.github.com/repos/manosim/notifications-test/issues/4",
+      subject: Immutable.Map {
+        title: "Improve the UI",
+        url: "https://api.github.com/repos/manosim/notifications-test/issues/4",
+        latest_comment_url: "https://api.github.com/repos/manosim/notifications-test/issues/comments/302885965",
+        type: "Issue",
       },
-      "subscription_url": "https://api.github.com/notifications/threads/148827438/subscription",
-      "unread": true,
-      "updated_at": "2017-05-20T17:06:34Z",
-      "url": "https://api.github.com/notifications/threads/148827438",
+      subscription_url: "https://api.github.com/notifications/threads/148827438/subscription",
+      url: "https://api.github.com/notifications/threads/148827438",
+      unread: true,
+      last_read_at: "2017-05-20T16:59:03Z",
+      updated_at: "2017-05-20T17:06:34Z",
+      id: "148827438",
     },
   ],
+  isFetching: false,
+  failed: false,
 }
 `;
 
 exports[`reducers/notifications.js should return the initial state 1`] = `
-Object {
-  "failed": false,
-  "isFetching": false,
-  "response": Array [],
+Immutable.Map {
+  response: Immutable.List [
+  ],
+  isFetching: false,
+  failed: false,
 }
 `;
