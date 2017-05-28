@@ -1,20 +1,19 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { Map } from 'immutable';
+import { List, Map } from 'immutable';
 import { shallow } from 'enzyme';
+import renderer from 'react-test-renderer';
 
 const { ipcRenderer } = require('electron');
 
 import { SettingsModal, mapStateToProps } from '../../components/settings-modal';
 
-import renderer from 'react-test-renderer';
-
 describe('components/settings-modal.js', () => {
   const props = {
     updateSetting: jest.fn(),
     fetchNotifications: jest.fn(),
-    logout: jest.fn(),
     toggleSettingsModal: jest.fn(),
-    isLoggedIn: true,
+    logout: jest.fn(),
+    isEitherLoggedIn: true,
     settings: Map({
       participating: false,
       playSound: true,
@@ -37,6 +36,7 @@ describe('components/settings-modal.js', () => {
     const state = {
       auth: Map({
         token: 123456,
+        enterpriseAccounts: List(),
       }),
       settings: Map({
         participating: false,
@@ -46,7 +46,7 @@ describe('components/settings-modal.js', () => {
 
     const mappedProps = mapStateToProps(state);
 
-    expect(mappedProps.isLoggedIn).toBeTruthy();
+    expect(mappedProps.isEitherLoggedIn).toBeTruthy();
     expect(mappedProps.settings.get('participating')).toBeFalsy();
     expect(mappedProps.settings.get('showSettingsModal')).toBeTruthy();
   });
@@ -96,7 +96,7 @@ describe('components/settings-modal.js', () => {
   it('should redirect if logged out', () => {
     const caseProps = {
       ...props,
-      isLoggedIn: false
+      isEitherLoggedIn: false
     };
 
     const wrapper = shallow(<SettingsModal {...caseProps} />);

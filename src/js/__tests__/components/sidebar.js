@@ -1,34 +1,29 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
+import { MemoryRouter } from 'react-router-dom';
 import { fromJS, Map } from 'immutable';
-import { mount } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import { List } from 'immutable';
 
 const { shell, ipcRenderer } = require('electron');
 
 import { Sidebar, mapStateToProps } from '../../components/sidebar';
-
-function setup(props) {
-  const options = {
-    context: {
-      router: {
-        push: jest.fn(),
-        replace: jest.fn()
-      }
-    }
-  };
-
-  const wrapper = mount(<Sidebar {...props} />, options);
-
-  return {
-    context: options.context,
-    props: props,
-    wrapper: wrapper,
-  };
-};
+import { mockedEnterpriseAccounts, mockedNotificationsRecuderData } from '../../__mocks__/mockedData';
 
 describe('components/Sidebar.js', () => {
 
   let clock;
+  const props = {
+    isFetching: false,
+    isGitHubLoggedIn: true,
+    isEitherLoggedIn: true,
+    connectedAccounts: 2,
+    enterpriseAccounts: mockedEnterpriseAccounts,
+    notifications: mockedNotificationsRecuderData,
+    hasStarred: false,
+    fetchNotifications: jest.fn(),
+    toggleSettingsModal: jest.fn(),
+  };
+
   const notifications = fromJS([{ id: 1 }, { id: 2 }]);
 
   beforeEach(() => {
@@ -36,6 +31,9 @@ describe('components/Sidebar.js', () => {
     ipcRenderer.send.mockReset();
     shell.openExternal.mockReset();
     window.clearInterval.mockReset();
+
+    props.fetchNotifications.mockReset();
+    props.toggleSettingsModal.mockReset();
   });
 
   afterEach(() => {
@@ -46,6 +44,7 @@ describe('components/Sidebar.js', () => {
     const state = {
       auth: Map({
         token: '12345',
+        enterpriseAccounts: mockedEnterpriseAccounts
       }),
       notifications: Map({
         response: List(),
@@ -57,39 +56,34 @@ describe('components/Sidebar.js', () => {
 
     const mappedProps = mapStateToProps(state);
 
-    expect(mappedProps.isLoggedIn).toBeTruthy();
-    expect(mappedProps.notifications.size).toEqual(0);
+    expect(mappedProps.isGitHubLoggedIn).toBeTruthy();
+    expect(mappedProps.isEitherLoggedIn).toBeTruthy();
+    expect(mappedProps.notifications).toBeDefined();
     expect(mappedProps.hasStarred).toBeTruthy();
   });
 
   it('should render itself & its children (logged in)', () => {
-    const props = {
-      isFetching: false,
-      notifications: notifications,
-      isLoggedIn: true,
-    };
-
-    spyOn(Sidebar.prototype, 'componentDidMount').and.callThrough();
-
-    const { wrapper } = setup(props);
+    const wrapper = shallow(<Sidebar {...props} />);
 
     expect(wrapper).toBeDefined();
-    expect(Sidebar.prototype.componentDidMount).toHaveBeenCalledTimes(1);
     expect(wrapper.find('.fa-refresh').length).toBe(1);
     expect(wrapper.find('.fa-cog').length).toBe(1);
-    expect(wrapper.find('.tag-count').text()).toBe(`${notifications.size} Unread`);
+
+    expect(wrapper.find('.badge-account').first().children().first().text()).toBe('GitHub');
+    expect(wrapper.find('.badge-account').first().children().last().text()).toBe(`${notifications.size}`);
+    expect(wrapper.find('.badge-account').last().children().first().text()).toBe('gitify');
+    expect(wrapper.find('.badge-account').last().children().last().text()).toBe(`${notifications.size}`);
   });
 
   it('should clear the interval when unmounting', () => {
-    const props = {
-      isFetching: false,
-      notifications: notifications,
-      isLoggedIn: true,
-    };
-
     spyOn(Sidebar.prototype, 'componentDidMount').and.callThrough();
 
-    const { wrapper } = setup(props);
+    const wrapper = mount(
+      <MemoryRouter>
+        <Sidebar {...props} />
+      </MemoryRouter>
+    );
+
     expect(wrapper).toBeDefined();
     expect(Sidebar.prototype.componentDidMount).toHaveBeenCalledTimes(1);
 
@@ -98,31 +92,46 @@ describe('components/Sidebar.js', () => {
   });
 
   it('should load notifications after 60000ms', function () {
-    const props = {
-      isFetching: false,
-      notifications: notifications,
-      fetchNotifications: jest.fn(),
-      isLoggedIn: 'true',
-    };
-
-    const { wrapper } = setup(props);
+    const wrapper = shallow(<Sidebar {...props} />);
 
     expect(wrapper).toBeDefined();
 
+    wrapper.instance().componentDidMount();
     clock.runTimersToTime(60000);
     expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
   });
 
   it('should render itself & its children (logged out)', function () {
-    const props = {
-      isFetching: false,
+    const caseProps = {
+      ...props,
       notifications: List(),
-      isLoggedIn: false,
+      isGitHubLoggedIn: false,
+      isEitherLoggedIn: false,
+    };
+
+    const wrapper = shallow(<Sidebar {...caseProps} />);
+
+    expect(wrapper).toBeDefined();
+    expect(wrapper.find('.fa-refresh').length).toBe(0);
+    expect(wrapper.find('.fa-cog').length).toBe(0);
+    expect(wrapper.find('.tag-success').length).toBe(0);
+  });
+
+  it('should mount itself & its children (logged out)', function () {
+    const caseProps = {
+      ...props,
+      notifications: List(),
+      isGitHubLoggedIn: false,
+      isEitherLoggedIn: false,
     };
 
     spyOn(Sidebar.prototype, 'componentDidMount').and.callThrough();
 
-    const { wrapper } = setup(props);
+    const wrapper = mount(
+      <MemoryRouter>
+        <Sidebar {...caseProps} />
+      </MemoryRouter>
+    );
 
     expect(wrapper).toBeDefined();
     expect(Sidebar.prototype.componentDidMount).toHaveBeenCalledTimes(1);
@@ -131,50 +140,33 @@ describe('components/Sidebar.js', () => {
     expect(wrapper.find('.tag-success').length).toBe(0);
   });
 
-  it('should render itself & its children (logged in/settings page)', () => {
-    const props = {
-      isFetching: false,
-      notifications: notifications,
-      isLoggedIn: true,
-    };
-
-    spyOn(Sidebar.prototype, 'componentDidMount').and.callThrough();
-
-    const { wrapper } = setup(props);
+  it('should fetch the notifications if another account logs in', () => {
+    const wrapper = shallow(<Sidebar {...props} />);
 
     expect(wrapper).toBeDefined();
-    expect(Sidebar.prototype.componentDidMount).toHaveBeenCalledTimes(1);
-    expect(wrapper.find('.fa-refresh').length).toBe(1);
-    expect(wrapper.find('.fa-cog').length).toBe(1);
-    expect(wrapper.find('.tag-count').text()).toBe(`${notifications.size} Unread`);
+    expect(props.fetchNotifications).toHaveBeenCalledTimes(0);
+
+    wrapper.setProps({
+      ...props,
+      connectedAccounts: props.connectedAccounts + 1,
+    });
+
+    expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
   });
 
   it('should open the gitify repo in browser', () => {
-    const props = {
-      isFetching: false,
-      notifications: List(),
-      isLoggedIn: false
-    };
-
-    const { wrapper } = setup(props);
+    const wrapper = shallow(<Sidebar {...props} />);
 
     expect(wrapper).toBeDefined();
 
     wrapper.find('.logo').simulate('click');
 
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(shell.openExternal).toHaveBeenCalledWith('http://www.github.com/manosim/gitify');
+    expect(shell.openExternal).toHaveBeenCalledWith('https://www.github.com/manosim/gitify');
   });
 
   it('should toggle the settings modal', () => {
-    const props = {
-      isFetching: false,
-      notifications: notifications,
-      isLoggedIn: 'true',
-      toggleSettingsModal: jest.fn(),
-    };
-
-    const { wrapper } = setup(props);
+    const wrapper = shallow(<Sidebar {...props} />);
 
     expect(wrapper).toBeDefined();
     expect(wrapper.find('.fa-cog').length).toBe(1);
@@ -185,14 +177,7 @@ describe('components/Sidebar.js', () => {
   });
 
   it('should refresh the notifications', () => {
-    const props = {
-      fetchNotifications: jest.fn(),
-      isFetching: false,
-      notifications: notifications,
-      isLoggedIn: 'true',
-    };
-
-    const { wrapper } = setup(props);
+    const wrapper = shallow(<Sidebar {...props} />);
 
     expect(wrapper).toBeDefined();
     expect(wrapper.find('.fa-refresh').length).toBe(1);
@@ -202,12 +187,7 @@ describe('components/Sidebar.js', () => {
   });
 
   it('open the gitify repo in browser', () => {
-    const props = {
-      hasStarred: false,
-      notifications: notifications,
-    };
-
-    const { wrapper } = setup(props);
+    const wrapper = shallow(<Sidebar {...props} />);
 
     expect(wrapper.find('.btn-star').length).toBe(1);
 

@@ -1,20 +1,15 @@
 language: node_js
 
 node_js:
-  - '5'
+  - '6.10.3'
 
 cache:
+  yarn: true
   directories:
-    - node_modules
-
-install:
-  - npm install
-
-before_script:
-  - npm run build
+    - "node_modules"
 
 script:
-  - npm test -- --runInBand
+  - yarn test -- --runInBand
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)

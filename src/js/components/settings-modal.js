@@ -6,6 +6,7 @@ import { Checkbox, RadioGroup, Radio } from 'react-icheck';
 
 import { fetchNotifications, updateSetting, logout, toggleSettingsModal } from '../actions';
 import { updateTrayIcon } from '../utils/comms';
+import { isUserEitherLoggedIn } from '../utils/helpers';
 
 export class SettingsModal extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -35,9 +36,9 @@ export class SettingsModal extends React.Component {
   }
 
   render() {
-    const { settings, isLoggedIn } = this.props;
+    const { settings, isEitherLoggedIn } = this.props;
 
-    if (!isLoggedIn) {
+    if (!isEitherLoggedIn) {
       return (
         <Redirect to="/login" />
       );
@@ -126,7 +127,7 @@ export class SettingsModal extends React.Component {
 
 export function mapStateToProps(state) {
   return {
-    isLoggedIn: state.auth.get('token') !== null,
+    isEitherLoggedIn: isUserEitherLoggedIn(state.auth),
     settings: state.settings,
   };
 };

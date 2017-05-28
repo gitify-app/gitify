@@ -39,9 +39,9 @@ $brand-warning: #FCAA67;
 $brand-danger: #B7524F;
 
 $font-family-base:
-  -apple-system, BlinkMacSystemFont,
-  "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-  "Helvetica Neue", sans-serif;
+-apple-system, BlinkMacSystemFont,
+"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+"Helvetica Neue", sans-serif;
 
 $alert-padding: 8px;
 $alert-border-radius: 0;
@@ -107,6 +107,10 @@ body {
 .right,
 .text-right {
   text-align: right;
+}
+
+.text-center {
+  text-align: center;
 }
 
 input {
@@ -277,17 +281,44 @@ $modal-scale-min: .35;
     -webkit-user-drag: none;
   }
 
-  .tag-count {
-    display: block;
-    margin: 0 0 1em;
+  .badge-count {
     text-align: center;
+    text-transform: uppercase;
   }
 
   .nav {
-    text-align: center;
+    justify-content: center;
 
     .nav-item {
       -webkit-app-region: no-drag;
+
+      .nav-link {
+        padding: .5em;
+      }
+    }
+  }
+
+  .badge-account {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+
+    margin: .75rem -.75rem;
+    background-color: $gray-darker;
+    padding: .5rem;
+    text-transform: uppercase;
+    line-height: 1;
+    color: $light-gray;
+    font-size: 75%;
+    font-weight: bold;
+
+    .name {
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .octicon {
+      font-size: 12px;
     }
   }
 
@@ -297,6 +328,11 @@ $modal-scale-min: .35;
     bottom: 1rem;
     left: .75rem;
 
+    .btn-add {
+      font-size: 75%;
+    }
+
+    .btn-add,
     .btn-star {
       -webkit-app-region: no-drag;
 
@@ -360,7 +396,6 @@ $modal-scale-min: .35;
   padding-top: 5rem;
   width: 100%;
   height: 100%;
-  color: $white;
 
   .logo {
     display: block;
@@ -369,15 +404,22 @@ $modal-scale-min: .35;
   }
 
   .desc {
-    margin-bottom: 25px;
+    margin: 1rem 0 2rem;
     text-align: center;
     line-height: 22px;
     color: $gray-dark;
     font-size: 20px;
   }
 
-  .btn {
-    @include button-variant($white, $gray, $btn-primary-border);
+  .btn-close {
+    margin-bottom: 1rem;
+    padding: 0;
+    color: $gray-dark;
+    font-size: 2rem;
+  }
+
+  .btn-login {
+    @include button-variant($white, $gray, $gray);
     padding: .55rem 1.25rem;
 
     .fa {
@@ -389,43 +431,43 @@ $modal-scale-min: .35;
 /* @end Page / Login  */
 
 
+/* @group Notifications Route / Account  */
+
+.account {
+  background-color: $gray;
+  text-align: right;
+  color: $white;
+  font-size: .9rem;
+
+  .octicon {
+    font-size: 1.1rem;
+  }
+}
+
+/* @end Notifications Route / Account  */
+
+
 /* @group Component / Repository  */
 
 .repository {
-  margin: 0;
   background-color: $gray-lighter;
-  padding: 5px 20px;
 
-  .col-xs-2,
-  .col-xs-10 {
-    padding: 0;
-  }
-
-  .col-xs-1 {
-    padding: 5px 0;
-  }
-
-  .name {
-    padding: 5px;
+  .info {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
     font-size: 16px;
     font-weight: 600;
 
     .avatar {
       @include border-radius(50%);
-      margin-right: 1rem;
-      width: 23px;
-      height: 23px;
+      max-width: 25px;
     }
   }
 
-  .check-wrapper {
-    text-align: right;
-
-    .octicon {
-      @include check-octicon;
-      margin-right: 10px;
-      font-size: 22px;
-    }
+  .octicon {
+    @include check-octicon;
+    font-size: 22px;
   }
 }
 
@@ -501,12 +543,6 @@ $modal-scale-min: .35;
 .notification {
   margin: 0;
   border-bottom: 1px solid $gray-lighter;
-  padding: 2px 20px;
-
-  .col-xs-1,
-  .col-xs-10 {
-    padding: 5px 0;
-  }
 
   .check-wrapper {
     text-align: right;
@@ -531,7 +567,6 @@ $modal-scale-min: .35;
 
   .octicon {
     @include check-octicon;
-    margin-right: 10px;
     font-size: 20px;
   }
 
