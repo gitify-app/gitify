@@ -7,6 +7,8 @@ export const mockedEnterpriseAccounts = fromJS([
   },
 ]);
 
+// 2 Notifications
+// Repository : 'manosim/notifications-tests'
 export const mockedGithubNotifications = fromJS([
   {
     'id': '138661096',
@@ -98,6 +100,9 @@ export const mockedGithubNotifications = fromJS([
   }
 ]);
 
+
+// 2 Notifications
+// Repository : 'myorg/notifications-test'
 export const mockedEnterpriseNotifications = fromJS([
   {
     'id': '4',

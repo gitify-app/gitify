@@ -6,6 +6,8 @@ import { mockedGithubNotifications, mockedNotificationsRecuderData } from '../..
 import notificationsMiddleware from '../../middleware/notifications';
 import NativeNotifications from '../../utils/notifications';
 
+// Keep 3 notifications
+// Ps. To receive 4 on actions.NOTIFICATIONS.SUCCESS,
 const mockedNotifications = mockedNotificationsRecuderData
   .deleteIn([0, 'notifications', 0]);
 
@@ -13,7 +15,7 @@ const createFakeStore = (fakeData) => ({
   getState() {
     return {
       notifications: Map({
-        response: mockedNotifications
+        response: mockedNotifications,
       }),
       settings: Map({
         playSound: false,
@@ -76,12 +78,15 @@ describe('middleware/notifications.js', () => {
     const action = {
       type: actions.MARK_REPO_NOTIFICATION.SUCCESS,
       meta: {
-        repoSlug: 'manosim/gitify'
+        repoSlug: 'manosim/notifications-test',
+        hostname: 'github.com',
       }
     };
 
     expect(dispatchWithStoreOf({}, action)).toEqual(action);
     expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
-    expect(comms.updateTrayIcon).toHaveBeenCalledWith(3);
+    expect(comms.updateTrayIcon).toHaveBeenCalledWith(2);
+    expect(comms.setBadge).toHaveBeenCalledTimes(1);
+    expect(comms.setBadge).toHaveBeenCalledWith(2);
   });
 });
