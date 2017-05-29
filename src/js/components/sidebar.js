@@ -6,6 +6,7 @@ import { shell } from 'electron';
 
 import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
 import { isUserEitherLoggedIn } from '../utils/helpers';
+import Logo from './logo';
 import Constants from '../utils/constants';
 
 export class Sidebar extends React.Component {
@@ -79,10 +80,7 @@ export class Sidebar extends React.Component {
 
     return (
       <div className="sidebar-wrapper">
-        <img
-          className="img-fluid logo"
-          src="images/logo-white.png"
-          onClick={this.openBrowser} />
+        <Logo onClick={this.openBrowser} />
 
         {isEitherLoggedIn && (
           <div className="badge badge-count text-success my-1">
