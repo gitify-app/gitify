@@ -1,6 +1,5 @@
 /* @group Imports */
 
-// @import "../../node_modules/react-toggle/style.css";
 @import "../../node_modules/icheck/skins/all.css";
 
 /* @end Imports */
@@ -8,17 +7,17 @@
 
 /* @group Colors */
 
-$theme-black: #262626;
-$theme-green: #5EBA7D;
+$brand-purple: #555B6E;
+$brand-purple-dark: darken($brand-purple, 10%);
 
 $white: #FFF;
 $gray: #55595C;
 $gray-dark: #373A3C;
 
-$light-gray: darken($white, 10%);
+$gray-light: darken($white, 10%);
 $gray-darker: darken($gray, 5%);
 
-$error-color: #DB423C;
+$modal-overlay-bg: rgba(0, 0, 0, .25);
 
 /* @end Colors */
 
@@ -38,7 +37,11 @@ $octicons-font-path: "../fonts/";
 
 $sidebar-width: 100px;
 
-$brand-success: $theme-green;
+$brand-primary: #555B6E;
+$brand-success: #69B578;
+$brand-info: #8BA9C6;
+$brand-warning: #FCAA67;
+$brand-danger: #B7524F;
 
 $font-family-base:
 -apple-system, BlinkMacSystemFont,
@@ -47,7 +50,7 @@ $font-family-base:
 
 $alert-padding: 8px;
 $alert-border-radius: 0;
-$alert-danger-bg: $error-color;
+$alert-danger-bg: $brand-danger;
 $alert-danger-text: $white;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
@@ -81,7 +84,7 @@ $alert-danger-text: $white;
 
     &:hover {
       cursor: pointer;
-      color: $theme-green;
+      color: $brand-success;
     }
   }
 }
@@ -127,7 +130,7 @@ input {
 
 .react-toggle--checked {
   .react-toggle-track {
-    background-color: $theme-green;
+    background-color: $brand-success;
   }
 }
 
@@ -136,27 +139,40 @@ input {
 
 /* @group React Modal */
 
+$modal-animation-duration: 250ms;
+$modal-scale-min: .35;
+
 // sass-lint:disable class-name-format force-element-nesting
 
-.ReactModalPortal > div {
-  opacity: 0;
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: $modal-overlay-bg;
 }
 
-.ReactModal__Overlay {
-  z-index: 9999;
+.ReactModal__Overlay--after-open {
+  transition: opacity $modal-animation-duration ease-out;
+  opacity: 1;
 }
 
-.ReactModalPortal .ReactModal__Overlay {
-  transition: opacity 200ms ease-in-out;
-  // background: rgba(0, 0, 0, 0.15);
+.ReactModal__Content {
+  transform: scale(.5) rotateX(-30deg);
+  -webkit-transform: scale(.5) rotateX(-30deg);
+}
 
-  &--after-open {
-    opacity: 1;
-  }
+.ReactModal__Content--after-open {
+  transform: scale(1) rotateX(0deg);
+  transition: all $modal-animation-duration ease-in;
+  -webkit-transform: scale(1) rotateX(0deg);
+}
 
-  &--before-close {
-    opacity: 0;
-  }
+.ReactModal__Content--before-close {
+  transform: scale($modal-scale-min) rotateX(30deg);
+  transition: all $modal-animation-duration ease-in;
+  -webkit-transform: scale($modal-scale-min) rotateX(30deg);
 }
 
 // sass-lint:enable class-name-format force-element-nesting
@@ -207,7 +223,7 @@ input {
     top: 0;
     left: $sidebar-width;
     z-index: 1031;
-    background: $brand-inverse;
+    background: $gray-light;
 
     width: 100%;
     height: 2px;
@@ -232,16 +248,14 @@ input {
 /* @group Sidebar */
 
 .wrapper {
-  transition: all .5s ease;
   padding-left: $sidebar-width;
 }
 
 .sidebar-wrapper {
   position: fixed;
   left: $sidebar-width;
-  transition: all .5s ease;
-  z-index: 1000;
   margin-left: -$sidebar-width;
+  background-color: $brand-purple;
   padding: 2rem .75rem;
   width: $sidebar-width;
   height: 100%;
@@ -252,7 +266,7 @@ input {
   .logo {
     display: block;
     margin: .75rem auto;
-    max-width: ($sidebar-width / 2) + 20;
+    max-width: $sidebar-width / 2;
     -webkit-app-region: no-drag;
     -webkit-user-drag: none;
   }
@@ -277,16 +291,20 @@ input {
   .badge-account {
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
 
-    margin: .75rem -.75rem;
-    background-color: $gray-darker;
+    margin: 0 -.75rem;
+    border-bottom: 1px solid darken($brand-purple-dark, 10%);
     padding: .5rem;
     text-transform: uppercase;
     line-height: 1;
-    color: $light-gray;
+    color: darken($brand-purple-dark, 10%);
     font-size: 75%;
     font-weight: bold;
+
+    &.last {
+      border-bottom: 0;
+    }
 
     .name {
       overflow: hidden;
@@ -319,29 +337,18 @@ input {
   }
 }
 
+
 /* @end Sidebar */
 
 
 /* @group Settings */
 
 .settings-modal {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  outline: none;
-  padding: 2.25rem 1.5rem;
-  overflow: auto;
-  color: $white;
+  margin: 3rem 2rem 2rem;
 
-  .modal-title {
-    margin-bottom: 1.35rem;
-
-    .btn-close {
-      margin-top: 5px;
-      font-size: $font-size-h3;
-    }
+  .modal-content {
+    border: 0;
+    border-radius: 0;
   }
 
   .setting {
@@ -396,6 +403,10 @@ input {
   .btn-login {
     @include button-variant($white, $gray, $gray);
     padding: .55rem 1.25rem;
+
+    .fa {
+      margin-right: .5rem;
+    }
   }
 }
 
@@ -405,7 +416,8 @@ input {
 /* @group Notifications Route / Account  */
 
 .account {
-  background-color: $gray;
+  margin-bottom: .5px;
+  background-color: $brand-purple-dark;
   text-align: right;
   color: $white;
   font-size: .9rem;

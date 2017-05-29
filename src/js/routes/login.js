@@ -5,6 +5,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { authGithub, isUserEitherLoggedIn } from '../utils/helpers';
+import LogoDark from '../components/logos/dark';
 
 export class LoginPage extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -22,7 +23,8 @@ export class LoginPage extends React.Component {
 
     return (
       <div className="container-fluid main-container login">
-        <img className="img-responsive logo" src="images/gitify-logo-outline-dark.png" />
+        <LogoDark className="mt-5" />
+
         <div className="desc">GitHub Notifications<br />in your menu bar.</div>
         <button
           className="btn btn-block btn-login"

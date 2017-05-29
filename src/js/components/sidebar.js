@@ -6,6 +6,7 @@ import { shell } from 'electron';
 
 import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
 import { isUserEitherLoggedIn } from '../utils/helpers';
+import LogoWhite from './logos/white';
 import Constants from '../utils/constants';
 
 export class Sidebar extends React.Component {
@@ -39,13 +40,14 @@ export class Sidebar extends React.Component {
   }
 
   _renderGitHubAccount() {
+    const { enterpriseAccounts, notifications } = this.props;
     const defaultHostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
-    const notificationsCount = this.props.notifications
+    const notificationsCount = notifications
       .find(obj => obj.get('hostname') === defaultHostname, null, Map())
       .get('notifications', List()).size;
 
     return (
-      <div className="badge-account" title={defaultHostname}>
+      <div className={`badge-account ${enterpriseAccounts.isEmpty() && 'last'}`} title={defaultHostname}>
         <div className="mr-auto name">GitHub</div>
         <div>{notificationsCount === 0 ? <span className="octicon octicon-check" /> : notificationsCount}</div>
       </div>
@@ -53,6 +55,8 @@ export class Sidebar extends React.Component {
   }
 
   _renderEnterpriseAccounts() {
+    const { enterpriseAccounts } = this.props;
+
     return this.props.enterpriseAccounts.map((account, idx) => {
       const splittedHostname = account.get('hostname').split('.');
       const accountDomain = splittedHostname[splittedHostname.length - 2];
@@ -64,7 +68,7 @@ export class Sidebar extends React.Component {
         <div
           key={idx}
           title={account.get('hostname')}
-          className="badge-account"
+          className={`badge-account${(enterpriseAccounts.size === idx + 1) ? ' last' : ''}`}
           >
           <div className="mr-auto name">{accountDomain}</div>
           <div>{notificationsCount === 0 ? <span className="octicon octicon-check" /> : notificationsCount}</div>
@@ -78,11 +82,8 @@ export class Sidebar extends React.Component {
     const notificationsCount = notifications.reduce((memo, acc) => memo + acc.get('notifications').size, 0);
 
     return (
-      <div className="sidebar-wrapper bg-inverse">
-        <img
-          className="img-fluid logo"
-          src="images/gitify-logo-outline-light.png"
-          onClick={this.openBrowser} />
+      <div className="sidebar-wrapper">
+        <LogoWhite onClick={this.openBrowser} />
 
         {isEitherLoggedIn && (
           <div className="badge badge-count text-success my-1">
@@ -108,7 +109,7 @@ export class Sidebar extends React.Component {
           </ul>
         )}
 
-        {isGitHubLoggedIn && this._renderGitHubAccount()}
+        {isGitHubLoggedIn && !this.props.enterpriseAccounts.isEmpty() && this._renderGitHubAccount()}
         {this._renderEnterpriseAccounts()}
 
         <div className="footer">

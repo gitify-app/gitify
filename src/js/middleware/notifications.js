@@ -24,10 +24,13 @@ export default store => next => action => {
         });
       });
 
-      const newNotificationsCount = newNotifications.reduce((memo, acc) => memo + acc.size, 0);
+      const newNotificationsCount = newNotifications
+        .reduce((memo, acc) => memo + acc.size, 0);
+      const allNotificationsCount = action.payload
+        .reduce((memo, acc) => memo + acc.get('notifications', List()).size, 0);
 
-      updateTrayIcon(newNotificationsCount);
-      setBadge(newNotificationsCount);
+      updateTrayIcon(allNotificationsCount);
+      setBadge(allNotificationsCount);
       NativeNotifications.setup(newNotifications, newNotificationsCount, settings);
       break;
 

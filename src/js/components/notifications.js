@@ -23,7 +23,8 @@ export default class AccountNotifications extends React.Component {
         transitionEnter={false}
         transitionLeaveTimeout={325}>
         <div className="account p-2">
-          {hostname} <span className="octicon octicon-chevron-down ml-2" />
+          {hostname}
+          <span className={`octicon octicon-chevron-${notifications.isEmpty() ? 'left' : 'down'} ml-2`} />
         </div>
 
         {groupedNotifications.valueSeq().map(obj => {

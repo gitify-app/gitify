@@ -26,7 +26,6 @@ export class NotificationsRoute extends React.Component {
           transitionEnter={false}
           transitionLeaveTimeout={325}>
           {accountNotifications.map((obj, key) => (
-            !obj.get('notifications').isEmpty() &&
             <AccountNotifications
               key={key}
               hostname={obj.get('hostname')}

@@ -9,6 +9,8 @@ const { shell, ipcRenderer } = require('electron');
 import { Sidebar, mapStateToProps } from '../../components/sidebar';
 import { mockedEnterpriseAccounts, mockedNotificationsRecuderData } from '../../__mocks__/mockedData';
 
+jest.mock('../../components/logos/white');
+
 describe('components/Sidebar.js', () => {
 
   let clock;
@@ -152,17 +154,6 @@ describe('components/Sidebar.js', () => {
     });
 
     expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
-  });
-
-  it('should open the gitify repo in browser', () => {
-    const wrapper = shallow(<Sidebar {...props} />);
-
-    expect(wrapper).toBeDefined();
-
-    wrapper.find('.logo').simulate('click');
-
-    expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(shell.openExternal).toHaveBeenCalledWith('https://www.github.com/manosim/gitify');
   });
 
   it('should toggle the settings modal', () => {

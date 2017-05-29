@@ -132,7 +132,7 @@ describe('components/settings-modal.js', () => {
   it('should close the modal pressing the icon', () => {
     const wrapper = shallow(<SettingsModal {...props} />);
     expect(wrapper).toBeDefined();
-    wrapper.find('.btn-close').simulate('click');
+    wrapper.find('.close').simulate('click');
     expect(props.toggleSettingsModal).toHaveBeenCalledTimes(1);
   });
 

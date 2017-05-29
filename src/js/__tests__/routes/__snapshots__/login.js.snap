@@ -4,10 +4,6 @@ exports[`components/login.js should render itself & its children 1`] = `
 <div
   className="container-fluid main-container login"
 >
-  <img
-    className="img-responsive logo"
-    src="images/gitify-logo-outline-dark.png"
-  />
   <div
     className="desc"
   >
