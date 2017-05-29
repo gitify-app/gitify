@@ -109,7 +109,7 @@ export class Sidebar extends React.Component {
           </ul>
         )}
 
-        {isGitHubLoggedIn && this._renderGitHubAccount()}
+        {isGitHubLoggedIn && !this.props.enterpriseAccounts.isEmpty() && this._renderGitHubAccount()}
         {this._renderEnterpriseAccounts()}
 
         <div className="footer">

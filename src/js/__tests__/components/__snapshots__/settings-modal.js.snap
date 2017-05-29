@@ -149,13 +149,7 @@ exports[`components/settings-modal.js should render itself & its children (open 
         <span
           className="octicon octicon-sign-out"
         />
-         Logout
-      </button>
-      <button
-        className="btn btn-secondary"
-        onClick={[Function]}
-      >
-        Close
+         Logout from all accounts
       </button>
     </div>
   </div>
