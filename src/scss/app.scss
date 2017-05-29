@@ -265,7 +265,6 @@ $modal-scale-min: .35;
 .sidebar-wrapper {
   position: fixed;
   left: $sidebar-width;
-  transition: all .5s ease;
   z-index: 1000;
   margin-left: -$sidebar-width;
   background-color: $brand-purple;
@@ -304,16 +303,20 @@ $modal-scale-min: .35;
   .badge-account {
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
 
-    margin: .75rem -.75rem;
-    background-color: $brand-purple-dark;
+    margin: 0 -.75rem;
+    border-bottom: 1px solid darken($brand-purple-dark, 10%);
     padding: .5rem;
     text-transform: uppercase;
     line-height: 1;
-    color: $white;
+    color: darken($brand-purple-dark, 10%);
     font-size: 75%;
     font-weight: bold;
+
+    &.last {
+      border-bottom: 0;
+    }
 
     .name {
       overflow: hidden;
@@ -345,6 +348,7 @@ $modal-scale-min: .35;
     }
   }
 }
+
 
 /* @end Sidebar */
 

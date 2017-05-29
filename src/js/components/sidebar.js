@@ -40,13 +40,14 @@ export class Sidebar extends React.Component {
   }
 
   _renderGitHubAccount() {
+    const { enterpriseAccounts, notifications } = this.props;
     const defaultHostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
-    const notificationsCount = this.props.notifications
+    const notificationsCount = notifications
       .find(obj => obj.get('hostname') === defaultHostname, null, Map())
       .get('notifications', List()).size;
 
     return (
-      <div className="badge-account" title={defaultHostname}>
+      <div className={`badge-account ${enterpriseAccounts.isEmpty() && 'last'}`} title={defaultHostname}>
         <div className="mr-auto name">GitHub</div>
         <div>{notificationsCount === 0 ? <span className="octicon octicon-check" /> : notificationsCount}</div>
       </div>
@@ -54,6 +55,8 @@ export class Sidebar extends React.Component {
   }
 
   _renderEnterpriseAccounts() {
+    const { enterpriseAccounts } = this.props;
+
     return this.props.enterpriseAccounts.map((account, idx) => {
       const splittedHostname = account.get('hostname').split('.');
       const accountDomain = splittedHostname[splittedHostname.length - 2];
@@ -65,7 +68,7 @@ export class Sidebar extends React.Component {
         <div
           key={idx}
           title={account.get('hostname')}
-          className="badge-account"
+          className={`badge-account${(enterpriseAccounts.size === idx + 1) && ' last'}`}
           >
           <div className="mr-auto name">{accountDomain}</div>
           <div>{notificationsCount === 0 ? <span className="octicon octicon-check" /> : notificationsCount}</div>
