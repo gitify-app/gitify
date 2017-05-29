@@ -17,7 +17,7 @@ $gray-dark: #373A3C;
 $gray-light: darken($white, 10%);
 $gray-darker: darken($gray, 5%);
 
-$modal-overlay-bg: rgba(0, 0, 0, .5);
+$modal-overlay-bg: rgba(0, 0, 0, .25);
 
 /* @end Colors */
 
@@ -139,19 +139,18 @@ input {
 
 /* @group React Modal */
 
-$modal-animation-duration: 300ms;
+$modal-animation-duration: 250ms;
 $modal-scale-min: .35;
 
 // sass-lint:disable class-name-format force-element-nesting
 
-.ReactModal__Overlay {
-  opacity: 0;
-  z-index: 9999;
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   background-color: $modal-overlay-bg;
-  -webkit-perspective: 150;
-  perspective: 150;
-  overflow-x: hidden;
-  overflow-y: auto;
 }
 
 .ReactModal__Overlay--after-open {
@@ -160,9 +159,8 @@ $modal-scale-min: .35;
 }
 
 .ReactModal__Content {
-  transform: scale($modal-scale-min) rotateX(-30deg);
-  background-color: $brand-purple;
-  -webkit-transform: scale($modal-scale-min) rotateX(-30deg);
+  transform: scale(.5) rotateX(-30deg);
+  -webkit-transform: scale(.5) rotateX(-30deg);
 }
 
 .ReactModal__Content--after-open {
@@ -171,20 +169,12 @@ $modal-scale-min: .35;
   -webkit-transform: scale(1) rotateX(0deg);
 }
 
-.ReactModal__Overlay--before-close {
-  opacity: 0;
-}
-
 .ReactModal__Content--before-close {
   transform: scale($modal-scale-min) rotateX(30deg);
   transition: all $modal-animation-duration ease-in;
   -webkit-transform: scale($modal-scale-min) rotateX(30deg);
 }
 
-.ReactModal__Content.modal-dialog {
-  border: 0;
-  background-color: transparent;
-}
 // sass-lint:enable class-name-format force-element-nesting
 
 /* @end React Modal */
@@ -258,14 +248,12 @@ $modal-scale-min: .35;
 /* @group Sidebar */
 
 .wrapper {
-  transition: all .5s ease;
   padding-left: $sidebar-width;
 }
 
 .sidebar-wrapper {
   position: fixed;
   left: $sidebar-width;
-  z-index: 1000;
   margin-left: -$sidebar-width;
   background-color: $brand-purple;
   padding: 2rem .75rem;
@@ -356,24 +344,11 @@ $modal-scale-min: .35;
 /* @group Settings */
 
 .settings-modal {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: 0;
-  outline: none;
-  padding: 2.25rem 1.5rem;
-  overflow: auto;
-  color: $white;
+  margin: 3rem 2rem 2rem;
 
-  .modal-title {
-    margin-bottom: 1.35rem;
-
-    .btn-close {
-      margin-top: 5px;
-      font-size: $font-size-h3;
-    }
+  .modal-content {
+    border: 0;
+    border-radius: 0;
   }
 
   .setting {

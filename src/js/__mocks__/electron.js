@@ -43,6 +43,9 @@ module.exports = {
   remote: {
     BrowserWindow: () => browserWindow,
     dialog: dialog,
+    app: {
+      getVersion: () => '0.0.1'
+    }
   },
   ipcRenderer: {
     send: jest.fn(),
