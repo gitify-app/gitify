@@ -9,7 +9,7 @@ const { shell, ipcRenderer } = require('electron');
 import { Sidebar, mapStateToProps } from '../../components/sidebar';
 import { mockedEnterpriseAccounts, mockedNotificationsRecuderData } from '../../__mocks__/mockedData';
 
-jest.mock('../../components/logo');
+jest.mock('../../components/logos/white');
 
 describe('components/Sidebar.js', () => {
 

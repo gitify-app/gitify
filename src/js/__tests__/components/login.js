@@ -11,7 +11,7 @@ const BrowserWindow = remote.BrowserWindow;
 
 import { LoginPage, mapStateToProps } from '../../components/login';
 
-jest.mock('../../components/logo');
+jest.mock('../../components/logos/dark');
 
 describe('components/login.js', () => {
   const props = {

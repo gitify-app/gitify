@@ -5,7 +5,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { authGithub, isUserEitherLoggedIn } from '../utils/helpers';
-import Logo from './logo';
+import LogoDark from './logos/dark';
 
 export class LoginPage extends React.Component {
   componentWillReceiveProps(nextProps) {
@@ -23,7 +23,7 @@ export class LoginPage extends React.Component {
 
     return (
       <div className="container-fluid main-container login">
-        <Logo isDark />
+        <LogoDark />
 
         <div className="desc">GitHub Notifications<br />in your menu bar.</div>
         <button

@@ -2,20 +2,12 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 
-import Logo from '../../components/logo';
+import LogoWhite from '../../../components/logos/white';
 
-describe('components/logo.js', () => {
-  it('renders correctly - white logo', () => {
+describe('components/logos/white.js', () => {
+  it('renders correctly', () => {
     const tree = renderer.create(
-      <Logo />
-    );
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('renders correctly - dark logo', () => {
-    const tree = renderer.create(
-      <Logo isDark />
+      <LogoWhite />
     );
 
     expect(tree).toMatchSnapshot();
@@ -23,7 +15,7 @@ describe('components/logo.js', () => {
 
   it('should click on the logo', () => {
     const onClick = jest.fn();
-    const wrapper = shallow(<Logo onClick={onClick} />);
+    const wrapper = shallow(<LogoWhite onClick={onClick} />);
 
     expect(wrapper).toBeDefined();
 
