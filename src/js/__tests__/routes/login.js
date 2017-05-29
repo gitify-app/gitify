@@ -9,7 +9,7 @@ import { mockedEnterpriseAccounts } from '../../__mocks__/mockedData';
 const { ipcRenderer, remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 
-import { LoginPage, mapStateToProps } from '../../components/login';
+import { LoginPage, mapStateToProps } from '../../routes/login';
 
 jest.mock('../../components/logos/dark');
 

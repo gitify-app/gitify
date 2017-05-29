@@ -9,9 +9,9 @@ import { toggleSettingsModal } from './actions';
 import configureStore from './store/configureStore';
 import Sidebar from './components/sidebar';
 import Loading from './components/loading';
-import LoginPage from './components/login';
+import LoginPage from './routes/login';
 import NotificationsRoute from './routes/notifications';
-import EnterpriseLoginPage from './components/enterprise-login';
+import EnterpriseLoginPage from './routes/enterprise-login';
 import SettingsModal from './components/settings-modal';
 
 // Store

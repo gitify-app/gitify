@@ -5,7 +5,7 @@ import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { authGithub, isUserEitherLoggedIn } from '../utils/helpers';
-import LogoDark from './logos/dark';
+import LogoDark from '../components/logos/dark';
 
 export class LoginPage extends React.Component {
   componentWillReceiveProps(nextProps) {

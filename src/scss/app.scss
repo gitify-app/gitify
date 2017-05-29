@@ -7,11 +7,14 @@
 
 /* @group Colors */
 
+$brand-purple: #555B6E;
+$brand-purple-dark: darken($brand-purple, 10%);
+
 $white: #FFF;
 $gray: #55595C;
 $gray-dark: #373A3C;
 
-$light-gray: darken($white, 10%);
+$gray-light: darken($white, 10%);
 $gray-darker: darken($gray, 5%);
 
 $modal-overlay-bg: rgba(0, 0, 0, .5);
@@ -158,7 +161,7 @@ $modal-scale-min: .35;
 
 .ReactModal__Content {
   transform: scale($modal-scale-min) rotateX(-30deg);
-  background-color: $brand-primary;
+  background-color: $brand-purple;
   -webkit-transform: scale($modal-scale-min) rotateX(-30deg);
 }
 
@@ -230,7 +233,7 @@ $modal-scale-min: .35;
     top: 0;
     left: $sidebar-width;
     z-index: 1031;
-    background: $brand-primary;
+    background: $gray-light;
 
     width: 100%;
     height: 2px;
@@ -265,7 +268,7 @@ $modal-scale-min: .35;
   transition: all .5s ease;
   z-index: 1000;
   margin-left: -$sidebar-width;
-  background-color: $brand-primary;
+  background-color: $brand-purple;
   padding: 2rem .75rem;
   width: $sidebar-width;
   height: 100%;
@@ -304,11 +307,11 @@ $modal-scale-min: .35;
     justify-content: end;
 
     margin: .75rem -.75rem;
-    background-color: $gray-darker;
+    background-color: $brand-purple-dark;
     padding: .5rem;
     text-transform: uppercase;
     line-height: 1;
-    color: $light-gray;
+    color: $white;
     font-size: 75%;
     font-weight: bold;
 
@@ -393,7 +396,7 @@ $modal-scale-min: .35;
 /* @group Page / Login  */
 
 .login {
-  padding-top: 5rem;
+  padding-top: 20px;
   width: 100%;
   height: 100%;
 
@@ -434,7 +437,8 @@ $modal-scale-min: .35;
 /* @group Notifications Route / Account  */
 
 .account {
-  background-color: $gray;
+  margin-bottom: .5px;
+  background-color: $brand-purple-dark;
   text-align: right;
   color: $white;
   font-size: .9rem;

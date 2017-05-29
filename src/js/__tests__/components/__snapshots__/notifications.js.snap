@@ -1,14 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/notifications.js should render itself & its children 1`] = `
+exports[`components/notifications.js should render itself (github.com with notifications) 1`] = `
 <span>
   <div
     className="account p-2"
   >
     github.com
-     
     <span
       className="octicon octicon-chevron-down ml-2"
+    />
+  </div>
+</span>
+`;
+
+exports[`components/notifications.js should render itself (github.com without notifications) 1`] = `
+<span>
+  <div
+    className="account p-2"
+  >
+    github.com
+    <span
+      className="octicon octicon-chevron-left ml-2"
     />
   </div>
 </span>

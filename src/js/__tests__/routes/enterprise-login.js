@@ -13,7 +13,7 @@ const { ipcRenderer, remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 const dialog = remote.dialog;
 
-import { EnterpriseLogin, mapStateToProps, validate } from '../../components/enterprise-login';
+import { EnterpriseLogin, mapStateToProps, validate } from '../../routes/enterprise-login';
 
 describe('components/enterprise-login.js', () => {
   const mockedEnterpriseAccountFormData = {
