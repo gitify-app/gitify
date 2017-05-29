@@ -68,7 +68,7 @@ export class Sidebar extends React.Component {
         <div
           key={idx}
           title={account.get('hostname')}
-          className={`badge-account${(enterpriseAccounts.size === idx + 1) && ' last'}`}
+          className={`badge-account${(enterpriseAccounts.size === idx + 1) ? ' last' : ''}`}
           >
           <div className="mr-auto name">{accountDomain}</div>
           <div>{notificationsCount === 0 ? <span className="octicon octicon-check" /> : notificationsCount}</div>

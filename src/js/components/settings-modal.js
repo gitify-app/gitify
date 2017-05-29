@@ -130,11 +130,7 @@ export class SettingsModal extends React.Component {
 
           <div className="modal-footer">
             <button className="btn btn-outline-danger" onClick={() => this.logout()}>
-              <span className="octicon octicon-sign-out" /> Logout
-            </button>
-
-            <button className="btn btn-secondary" onClick={() => this.props.toggleSettingsModal()}>
-              Close
+              <span className="octicon octicon-sign-out" /> Logout from all accounts
             </button>
           </div>
         </div>

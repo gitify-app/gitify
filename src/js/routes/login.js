@@ -23,7 +23,7 @@ export class LoginPage extends React.Component {
 
     return (
       <div className="container-fluid main-container login">
-        <LogoDark />
+        <LogoDark className="mt-5" />
 
         <div className="desc">GitHub Notifications<br />in your menu bar.</div>
         <button
