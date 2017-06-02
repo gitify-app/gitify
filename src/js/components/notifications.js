@@ -1,84 +1,43 @@
-import _ from 'underscore';
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
-import { connect } from 'react-redux';
 
+import RepositoryNotifications from './repository';
 
-const shell = window.require('electron').shell;
-
-import AllRead from './all-read';
-import Oops from './oops';
-import Repository from './repository';
-
-export class NotificationsPage extends React.Component {
-  areIn(repoFullName, searchTerm) {
-    return repoFullName.toLowerCase().indexOf(searchTerm.toLowerCase()) >= 0;
-  }
-
-  matchesSearchTerm(obj) {
-    var searchTerm = this.props.searchQuery.replace(/^\s+/, '').replace(/\s+$/, '');
-    var searchTerms = searchTerm.split(/\s+/);
-    return _.all(searchTerms, this.areIn.bind(null, obj.repository.full_name));
-  }
-
-  openBrowser() {
-    shell.openExternal('http://www.github.com/manosim/gitify');
+export default class AccountNotifications extends React.Component {
+  static propTypes = {
+    hostname: PropTypes.string.isRequired,
+    notifications: PropTypes.any.isRequired,
   }
 
   render() {
-    const wrapperClass = 'container-fluid main-container notifications';
-    const notificationsEmpty = _.isEmpty(this.props.notifications);
+    const { hostname, notifications } = this.props;
 
-    if (this.props.failed) {
-      return <Oops />;
-    }
-
-    if (notificationsEmpty && !this.props.searchQuery) {
-      return <AllRead />;
-    };
-
-    const notifications = this.props.searchQuery ?
-      _.filter(this.props.notifications, this.matchesSearchTerm.bind(this)) : this.props.notifications;
-    var groupedNotifications = _.groupBy(notifications, (object) => object.repository.full_name);
-
-    if (_.isEmpty(groupedNotifications) && this.props.searchQuery) {
-      return (
-        <div className={wrapperClass + ' all-read'}>
-          <h3>No Search Results.</h3>
-          <h4>No Organisations or Repositories match your search term.</h4>
-        </div>
-      );
-    };
+    const groupedNotifications = notifications.groupBy((object) => (
+      object.getIn(['repository', 'full_name']))
+    );
 
     return (
-      <div className={wrapperClass + (notificationsEmpty ? ' all-read' : '')}>
-        <ReactCSSTransitionGroup
-          transitionName="repository"
-          transitionEnter={false}
-          transitionLeaveTimeout={325}>
-          {_.map(groupedNotifications, (obj, key) => {
-            const repoFullName = obj[0].repository.full_name;
-            return <Repository repo={obj} repoName={repoFullName} key={key} />;
-          })}
-        </ReactCSSTransitionGroup>
+      <ReactCSSTransitionGroup
+        transitionName="repository"
+        transitionEnter={false}
+        transitionLeaveTimeout={325}>
+        <div className="account p-2">
+          {hostname}
+          <span className={`octicon octicon-chevron-${notifications.isEmpty() ? 'left' : 'down'} ml-2`} />
+        </div>
 
-        {!_.isEmpty(groupedNotifications) && !this.props.hasStarred ? (
-          <div className="fork" onClick={this.openBrowser}>
-            <i className="fa fa-github" /> Star Gitify on GitHub
-          </div>
-        ) : null}
-      </div>
+        {groupedNotifications.valueSeq().map(obj => {
+          const repoSlug = obj.first().getIn(['repository', 'full_name']);
+          return (
+            <RepositoryNotifications
+              hostname={hostname}
+              repo={obj}
+              repoName={repoSlug}
+              key={repoSlug} />
+          );
+        })}
+      </ReactCSSTransitionGroup>
     );
   }
 };
-
-function mapStateToProps(state) {
-  return {
-    hasStarred: state.settings.hasStarred,
-    failed: state.notifications.failed,
-    notifications: state.notifications.response,
-    searchQuery: state.searchFilter.query
-  };
-};
-
-export default connect(mapStateToProps, null)(NotificationsPage);

@@ -16,7 +16,7 @@ rules:
       exclude:
         - src
         - transform
-  no-ids: 2
+  no-ids: 0
   no-important: 2
   no-transition-all: 0
   no-vendor-prefixes: 0

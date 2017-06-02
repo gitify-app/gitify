@@ -1,231 +1,139 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
-import NotificationsUtils from '../../utils/notifications';
-import Helpers from '../../utils/helpers';
+import { List, Map } from 'immutable';
 
-const ipcRenderer = window.require('electron').ipcRenderer;
-const shell = window.require('electron').shell;
-
+import * as comms from '../../utils/comms';
+import { mockedGithubNotifications } from '../../__mocks__/mockedData';
+import NotificationsUtils, { getNotificationIcon } from '../../utils/notifications';
+import { generateGitHubWebUrl } from '../../utils/helpers';
 
 describe('utils/notifications.js', () => {
-
-  beforeEach(function() {
-    ipcRenderer.send.reset();
-    shell.openExternal.reset();
-    sinon.spy(NotificationsUtils, 'raiseNativeNotification');
-    sinon.spy(NotificationsUtils, 'raiseSoundNotification');
-  });
-
-  afterEach(function () {
-    NotificationsUtils.raiseNativeNotification.restore();
-    NotificationsUtils.raiseSoundNotification.restore();
-  });
-
-  it('should raise a notification', () => {
-
-    const settings = {
+  it('should raise a notification (settings - on)', () => {
+    const settings = Map({
       playSound: true,
       showNotifications: true
-    };
+    });
 
-    const notifications = [
-      {
-        subject: {
-          title: 'Hello. This is a notification',
-          type: 'Issue'
-        },
-        repository: {
-          full_name: 'ekonstantinidis/gitify'
-        }
-      }
-    ];
+    spyOn(NotificationsUtils, 'raiseNativeNotification');
+    spyOn(NotificationsUtils, 'raiseSoundNotification');
 
-    NotificationsUtils.setup(notifications, settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
-    expect(NotificationsUtils.raiseSoundNotification).to.have.been.calledOnce;
+    NotificationsUtils.setup(mockedGithubNotifications, mockedGithubNotifications.size, settings);
 
+    expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
+    expect(NotificationsUtils.raiseSoundNotification).toHaveBeenCalledTimes(1);
   });
 
-  it('should not raise a notification (because of settings)', () => {
-
-    const settings = {
+  it('should not raise a notification (settings - off)', () => {
+    const settings = Map({
       playSound: false,
       showNotifications: false
-    };
+    });
 
-    const notifications = [
-      {
-        subject: {
-          title: 'Hello. This is a notification',
-          type: 'Issue'
-        },
-        repository: {
-          full_name: 'ekonstantinidis/gitify'
-        }
-      },
-      {
-        subject: {
-          title: 'Hello. This is another notification',
-          type: 'PullRequest'
-        },
-        repository: {
-          full_name: 'ekonstantinidis/django-rest-framework-docs'
-        }
-      }
-    ];
+    spyOn(NotificationsUtils, 'raiseNativeNotification');
+    spyOn(NotificationsUtils, 'raiseSoundNotification');
 
-    NotificationsUtils.setup(notifications, settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.not.have.been.calledOnce;
-    expect(NotificationsUtils.raiseSoundNotification).to.not.have.been.calledOnce;
+    NotificationsUtils.setup(mockedGithubNotifications, mockedGithubNotifications.size, settings);
 
+    expect(NotificationsUtils.raiseNativeNotification).not.toHaveBeenCalled();
+    expect(NotificationsUtils.raiseSoundNotification).not.toHaveBeenCalled();
   });
 
   it('should not raise a notification (because of 0(zero) notifications)', () => {
-
     const settings = {
       playSound: true,
       showNotifications: true
     };
 
-    const notifications = [];
+    spyOn(NotificationsUtils, 'raiseNativeNotification');
+    spyOn(NotificationsUtils, 'raiseSoundNotification');
 
-    NotificationsUtils.setup(notifications, settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.not.have.been.calledOnce;
-    expect(NotificationsUtils.raiseSoundNotification).to.not.have.been.calledOnce;
+    NotificationsUtils.setup(List(), 0, settings);
 
+    expect(NotificationsUtils.raiseNativeNotification).not.toHaveBeenCalled();
+    expect(NotificationsUtils.raiseSoundNotification).not.toHaveBeenCalled();
   });
 
   it('should raise a single native notification (with different icons)', () => {
-
-    const settings = {
+    const settings = Map({
       playSound: false,
       showNotifications: true
-    };
+    });
 
-    const notification = {
-      subject: {
-        title: 'Hello. This is a notification',
-        type: 'Issue'
-      },
-      repository: {
-        full_name: 'ekonstantinidis/gitify'
-      }
-    };
+    const mockedNotification = mockedGithubNotifications.first();
 
-    NotificationsUtils.setup([notification], settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
-    expect(NotificationsUtils.raiseSoundNotification).to.not.have.been.calledOnce;
+    spyOn(NotificationsUtils, 'raiseNativeNotification');
+    spyOn(NotificationsUtils, 'raiseSoundNotification');
 
-    NotificationsUtils.raiseNativeNotification.reset();
+    NotificationsUtils.setup(List.of(mockedNotification), 1, settings);
+
+    expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
+    expect(NotificationsUtils.raiseSoundNotification).not.toHaveBeenCalled();
+
+    NotificationsUtils.raiseNativeNotification.calls.reset();
 
     // PullRequest
-    NotificationsUtils.setup([{
-      ...notification,
-      subject: {
-        ...notification.subject,
-        type: 'PullRequest'
-      }
-    }], settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
-    NotificationsUtils.raiseNativeNotification.reset();
+    NotificationsUtils.setup(List.of(mockedNotification
+      .setIn(['subject', 'type'], 'PullRequest')
+    ), 1, settings);
+    expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
+    NotificationsUtils.raiseNativeNotification.calls.reset();
 
     // Commit
-    NotificationsUtils.setup([{
-      ...notification,
-      subject: {
-        ...notification.subject,
-        type: 'Commit'
-      }
-    }], settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
-    NotificationsUtils.raiseNativeNotification.reset();
+    NotificationsUtils.setup(List.of(mockedNotification
+      .setIn(['subject', 'type'], 'Commit')
+    ), 1, settings);
+    expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
+    NotificationsUtils.raiseNativeNotification.calls.reset();
 
     // Commit
-    NotificationsUtils.setup([{
-      ...notification,
-      subject: {
-        ...notification.subject,
-        type: 'Release'
-      }
-    }], settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
-    NotificationsUtils.raiseNativeNotification.reset();
+    NotificationsUtils.setup(List.of(mockedNotification
+      .setIn(['subject', 'type'], 'Release')
+    ), 1, settings);
+    expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
+    NotificationsUtils.raiseNativeNotification.calls.reset();
 
     // AnotherType
-    NotificationsUtils.setup([{
-      ...notification,
-      subject: {
-        ...notification.subject,
-        type: 'AnotherType'
-      }
-    }], settings);
-    expect(NotificationsUtils.raiseNativeNotification).to.have.been.calledOnce;
-    NotificationsUtils.raiseNativeNotification.reset();
-
+    NotificationsUtils.setup(List.of(mockedNotification
+      .setIn(['subject', 'type'], 'AnotherType')
+    ), 1, settings);
+    expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
+    NotificationsUtils.raiseNativeNotification.calls.reset();
   });
 
   it('should click on a native notification (with 1 notification)', () => {
+    spyOn(comms, 'openExternalLink');
 
-    const notification = {
-      subject: {
-        title: 'Hello. This is a notification',
-        type: 'Issue',
-        url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3'
-      },
-      repository: {
-        full_name: 'ekonstantinidis/gitify'
-      }
-    };
+    const mockedNotifications = List.of(List.of(mockedGithubNotifications.first()));
 
-    // Restore functionality so we can test further
-    NotificationsUtils.raiseNativeNotification.restore();
-
-    const nativeNotification = NotificationsUtils.raiseNativeNotification([notification]);
+    const nativeNotification = NotificationsUtils.raiseNativeNotification(mockedNotifications, 1);
     nativeNotification.onclick();
 
-    const newUrl = Helpers.generateGitHubUrl(notification.subject.url);
-    expect(shell.openExternal).to.have.been.calledOnce;
-    expect(shell.openExternal).to.have.been.calledWith(newUrl);
-
-    // Put the spy back
-    sinon.spy(NotificationsUtils, 'raiseNativeNotification');
+    const newUrl = generateGitHubWebUrl(mockedGithubNotifications.getIn([0, 'subject', 'url']));
+    expect(comms.openExternalLink).toHaveBeenCalledTimes(1);
+    expect(comms.openExternalLink).toHaveBeenCalledWith(newUrl);
   });
 
   it('should click on a native notification (with more than 1 notification)', () => {
+    spyOn(comms, 'reOpenWindow');
 
-    const notifications = [
-      {
-        subject: {
-          title: 'Hello. This is a notification',
-          type: 'Issue',
-          url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3'
-        },
-        repository: {
-          full_name: 'ekonstantinidis/gitify'
-        }
-      },
-      {
-        subject: {
-          title: 'Hello. This is another notification',
-          type: 'Issue',
-          url: 'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3'
-        },
-        repository: {
-          full_name: 'ekonstantinidis/gitify'
-        }
-      },
-    ];
+    const mockedNotifications = List.of(mockedGithubNotifications);
+    const count = mockedGithubNotifications.size;
 
-    // Restore functionality so we can test further
-    NotificationsUtils.raiseNativeNotification.restore();
-
-    const nativeNotification = NotificationsUtils.raiseNativeNotification(notifications);
+    const nativeNotification = NotificationsUtils.raiseNativeNotification(mockedNotifications, count);
     nativeNotification.onclick();
 
-    expect(ipcRenderer.send).to.have.been.calledOnce;
-    expect(ipcRenderer.send).to.have.been.calledWith('reopen-window');
+    expect(comms.reOpenWindow).toHaveBeenCalledTimes(1);
+  });
 
-    // Put the spy back
-    sinon.spy(NotificationsUtils, 'raiseNativeNotification');
+  it('should use different notification icons', () => {
+    expect(getNotificationIcon('Issue')).toEqual('images/notifications/issue.png');
+    expect(getNotificationIcon('Commit')).toEqual('images/notifications/commit.png');
+    expect(getNotificationIcon('PullRequest')).toEqual('images/notifications/pull-request.png');
+    expect(getNotificationIcon('Release')).toEqual('images/notifications/release.png');
+    expect(getNotificationIcon('WHATEVER')).toEqual('images/notifications/gitify.png');
+  });
+
+  it('should play a sound', () => {
+    spyOn(window.Audio.prototype, 'play');
+    NotificationsUtils.raiseSoundNotification();
+    expect(window.Audio.prototype.play).toHaveBeenCalledTimes(1);
   });
 });

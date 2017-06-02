@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/login.js should render itself & its children 1`] = `
+<div
+  className="container-fluid main-container login"
+>
+  <div
+    className="desc"
+  >
+    GitHub Notifications
+    <br />
+    in your menu bar.
+  </div>
+  <button
+    className="btn btn-block btn-login"
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-github mr-2"
+    />
+     Login to GitHub
+  </button>
+  <a
+    className="btn btn-block btn-login mt-3"
+    href="/enterpriselogin"
+    onClick={[Function]}
+  >
+    <i
+      className="fa fa-github mr-2"
+    />
+     Login to GitHub Enterprise
+  </a>
+</div>
+`;

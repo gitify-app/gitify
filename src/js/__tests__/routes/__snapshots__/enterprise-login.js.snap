@@ -1,0 +1,108 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/enterprise-login.js renders correctly 1`] = `
+<div
+  className="container-fluid main-container login"
+>
+  <div
+    className="d-flex flex-row-reverse"
+  >
+    <a
+      className="btn btn-close"
+      href="/login"
+      onClick={[Function]}
+    >
+      <i
+        className="fa fa-close"
+      />
+    </a>
+  </div>
+  <div
+    className="desc"
+  >
+    Login to GitHub Enterprise.
+  </div>
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="hostname"
+      >
+        Host Name
+      </label>
+      <div>
+        <input
+          className="form-control"
+          name="hostname"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          onFocus={[Function]}
+          placeholder="github.company.com"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="clientId"
+      >
+        Client ID
+      </label>
+      <div>
+        <input
+          className="form-control"
+          name="clientId"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          onFocus={[Function]}
+          placeholder="123456789"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="clientSecret"
+      >
+        Client Secret
+      </label>
+      <div>
+        <input
+          className="form-control"
+          name="clientSecret"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onDragStart={[Function]}
+          onDrop={[Function]}
+          onFocus={[Function]}
+          placeholder="ABC123DEF456"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <button
+      className="btn btn-md btn-login mt-2"
+      type="submit"
+    >
+      <i
+        className="fa fa-github"
+      />
+       Login to GitHub Enterprise
+    </button>
+  </form>
+</div>
+`;

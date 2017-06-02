@@ -1,44 +1,57 @@
-import _ from 'underscore';
+import { Map, List } from 'immutable';
+import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION, LOGOUT } from '../actions';
 
-import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION } from '../actions';
-
-const initialState = {
-  response: [],
+const initialState = Map({
+  response: List(),
   isFetching: false,
   failed: false
-};
+});
+
+// Response Structure
+// response: List([
+//   Map({
+//     hostname: 'github.com',
+//     notifications: List([1, 2, 3])
+//   }),
+//   Map({
+//     hostname: 'git-enterprise.hexwebs.com',
+//     notifications: List([1, 2, 3])
+//   }),
+// ]);
 
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case NOTIFICATIONS.REQUEST:
-      return {
-        ...state,
-        isFetching: true,
-        failed: false
-      };
+      return state
+        .set('isFetching', true)
+        .set('failed', false);
     case NOTIFICATIONS.SUCCESS:
-      return {
-        ...state,
-        isFetching: false,
-        response: action.payload
-      };
+      return state
+        .set('isFetching', false)
+        .set('response', action.payload);
     case NOTIFICATIONS.FAILURE:
-      return {
-        ...state,
-        failed: true,
-        isFetching: false,
-        response: []
-      };
+      return state
+        .set('isFetching', false)
+        .set('failed', true)
+        .set('response', List());
     case MARK_NOTIFICATION.SUCCESS:
-      return {
-        ...state,
-        response: _.without(state.response, _.findWhere(state.response, {id: action.meta.id}))
-      };
+      const accNotificationsIndex = state
+        .get('response')
+        .findIndex(obj => obj.get('hostname') === action.meta.hostname);
+
+      return state.updateIn(['response', accNotificationsIndex, 'notifications'], notifications => {
+        return notifications.filterNot(items => items.get('id') === action.meta.id);
+      });
     case MARK_REPO_NOTIFICATION.SUCCESS:
-      return {
-        ...state,
-        response: _.reject(state.response, (obj) => obj.repository.full_name === action.meta.repoFullName)
-      };
+      const accNotificationsRepoIndex = state
+        .get('response')
+        .findIndex(obj => obj.get('hostname') === action.meta.hostname);
+
+      return state.updateIn(['response', accNotificationsRepoIndex, 'notifications'], notifications => {
+        return notifications.filterNot(items => items.getIn(['repository', 'full_name']) === action.meta.repoSlug);
+      });
+    case LOGOUT:
+      return initialState;
     default:
       return state;
   }

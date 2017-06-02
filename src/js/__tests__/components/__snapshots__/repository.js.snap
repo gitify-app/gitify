@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/repository.js should render itself & its children 1`] = `
+<div>
+  <div
+    className="repository d-flex px-3 py-2 justify-content-between"
+  >
+    <div
+      className="info pr-3"
+    >
+      <img
+        className="avatar img-fluid mr-2"
+        src="https://avatars0.githubusercontent.com/u/6333409?v=3"
+      />
+      <span
+        onClick={[Function]}
+      >
+        manosim/gitify
+      </span>
+    </div>
+    <span
+      className="octicon octicon-check"
+      onClick={[Function]}
+      title="Mark Repository as Read"
+    />
+  </div>
+  <span />
+</div>
+`;

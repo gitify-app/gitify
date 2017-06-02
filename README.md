@@ -5,15 +5,6 @@
 ![Gitify](images/press.png)
 
 
-### Version 1.0.0 is now out!
-
-> Gitify finally reaches version **1.0.0**. The app has been rewritten from scratch using React v15, Redux, Bootstrap 4 and more. This allows me to prepare the surface for more features (GitHub Enterprise etc). Unfortunately, due to a change in the auto-update package API, you will have **to download the update manually**. This is now fixed and you won't have to download any updates manually again. Finally the user settings will be reset with the new version. Hope you like it and feel free to give me some feedback!
-
-> Cheers,
-
-> Manos
-
-
 ### Download
 You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/manosim/gitify/releases) page.
 
@@ -28,10 +19,10 @@ Gitify currently only supports OS X.
 
 ### Prerequisites
 
+ - Node 6+
  - [Electron](http://electron.atom.io/)
  - [React](https://facebook.github.io/react/)
- - [Webpack](https://webpack.github.io/)
- - [NPM](https://www.npmjs.com/)
+ - [Gulp](https://www.gulpjs.com)
 
 
 ### Installation
@@ -64,16 +55,13 @@ To publish a new version, you also need to codesign the app running `npm run cod
 
 
 ### Tests
-There are 2 linters for `js` & `scss` and unit tests with `mocha`.
-
-    // Run all tests
-    npm run test
+There are 2 linters for `js` & `scss` and unit tests with `jest`.
 
     // Run only unit tests
-    npm run mocha
+    npm run jest
 
-    // Run unit tests with coverage
-    npm run coverage
+    // Run linter & unit tests with coverage
+    npm run test
 
 ### FAQ
 

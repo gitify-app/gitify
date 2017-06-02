@@ -1,97 +1,59 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { expect } from 'chai';
 import { shallow } from 'enzyme';
-import sinon from 'sinon';
-import { Repository } from '../../components/repository';
-// const ipcRenderer = window.require('electron').ipcRenderer;
-const shell = window.require('electron').shell;
+import renderer from 'react-test-renderer';
 
-function setup(props) {
-  const wrapper = shallow(<Repository {...props} />);
+import { mockedGithubNotifications } from '../../__mocks__/mockedData';
+import { RepositoryNotifications } from '../../components/repository';
 
-  return {
-    props: props,
-    wrapper: wrapper,
-  };
-};
+const { shell } = require('electron');
+
+jest.mock('../../components/notification');
 
 describe('components/repository.js', function () {
+  const props = {
+    hostname: 'github.com',
+    repo: mockedGithubNotifications,
+    repoName: 'manosim/gitify',
+    markRepoNotifications: jest.fn()
+  };
 
-  const repository = [{
-    repository: {
-      full_name: 'ekonstantinidis/gitify',
-      html_url: 'http://github.com/ekonstantinidis/gitify/issues/123',
-      name: 'gitify',
-      owner: {
-        avatar_url: 'http://manos.avatar/img.png',
-        login: 'ekonstantinidis',
-        full_name: 'Emmanouil Konstantinidis'
-      }
-    }
-  }];
-
-  beforeEach(function() {
-    shell.openExternal.reset();
+  beforeEach(() => {
+    shell.openExternal.mockReset();
   });
 
-  afterEach(function() {
-
+  it('should render itself & its children', function () {
+    const tree = renderer.create(
+      <RepositoryNotifications {...props} />
+    );
+    expect(tree).toMatchSnapshot();
   });
 
   it('should render itself & its children (logged in)', function () {
+    const wrapper = shallow(
+      <RepositoryNotifications {...props} />
+    );
 
-    const props = {
-      repo: repository,
-      repoName: 'ekonstantinidis/gitify'
-    };
+    expect(wrapper).toBeDefined();
+    expect(wrapper.find('.octicon-check').length).toBe(1);
 
-    const { wrapper } = setup(props);
+    wrapper.find('.info span').simulate('click');
 
-    expect(wrapper).to.exist;
-    expect(wrapper.find('.octicon-check').length).to.equal(1);
-    expect(wrapper.find('.name').text()).to.contain('gitify');
-    expect(wrapper.find('.name').text()).to.contain('ekonstantinidis');
+    expect(wrapper.find('.info span').text()).toContain('gitify');
+    expect(wrapper.find('.info span').text()).toContain('manosim');
 
-  });
-
-  it('should render itself & its children (logged in)', function () {
-
-    const props = {
-      repo: repository,
-      repoName: 'ekonstantinidis/gitify'
-    };
-
-    const { wrapper } = setup(props);
-
-    expect(wrapper).to.exist;
-    expect(wrapper.find('.octicon-check').length).to.equal(1);
-
-    wrapper.find('.name').simulate('click');
-
-    expect(wrapper.find('.name').text()).to.contain('gitify');
-    expect(wrapper.find('.name').text()).to.contain('ekonstantinidis');
-
-    expect(shell.openExternal).to.have.been.calledOnce;
-    expect(shell.openExternal).to.have.been.calledWith('http://github.com/ekonstantinidis/gitify/issues/123');
-
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(shell.openExternal).toHaveBeenCalledWith('https://github.com/manosim/notifications-test');
   });
 
   it('should mark a repo as read', function () {
+    const wrapper = shallow(
+      <RepositoryNotifications {...props} />
+    );
 
-    const props = {
-      repo: repository,
-      repoName: 'ekonstantinidis/gitify',
-      markRepoNotifications: sinon.spy()
-    };
-
-    const { wrapper } = setup(props);
-
-    expect(wrapper).to.exist;
-    expect(wrapper.find('.octicon-check').length).to.equal(1);
+    expect(wrapper).toBeDefined();
+    expect(wrapper.find('.octicon-check').length).toBe(1);
 
     wrapper.find('.octicon-check').simulate('click');
-    expect(props.markRepoNotifications).to.have.been.calledWith('ekonstantinidis', 'gitify', 'ekonstantinidis/gitify');
-
+    expect(props.markRepoNotifications).toHaveBeenCalledWith('manosim/notifications-test', 'github.com');
   });
-
 });

@@ -1,18 +1,14 @@
-import _ from 'underscore';
 import React from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import {emojify} from 'react-emojione';
 
 import constants from '../utils/constants';
 
-export default class Oops extends React.Component {
-  constructor(props) {
-    super(props);
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
-
+export default class Oops extends React.PureComponent {
   render() {
-    const emoji = _.sample(constants.ERROR_EMOJIS);
+    const emoji = constants.ERROR_EMOJIS[
+      Math.floor(Math.random() * constants.ERROR_EMOJIS.length)
+    ];
+
 
     return (
       <div className="container-fluid main-container notifications errored">

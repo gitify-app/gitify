@@ -1,19 +1,14 @@
-import _ from 'underscore';
 import React from 'react';
-import PureRenderMixin from 'react-addons-pure-render-mixin';
 import malarkey from 'malarkey';
 import {emojify} from 'react-emojione';
 
 import constants from '../utils/constants';
 
-export default class AllRead extends React.Component {
-  constructor(props) {
-    super(props);
-    this.shouldComponentUpdate = PureRenderMixin.shouldComponentUpdate.bind(this);
-  }
-
+export default class AllRead extends React.PureComponent {
   componentDidMount() {
-    const message = _.sample(constants.ALLREAD_MESSAGES);
+    const message = constants.ALLREAD_MESSAGES[
+      Math.floor(Math.random() * constants.ALLREAD_MESSAGES.length)
+    ];
 
     const elem = document.querySelector('.typed');
     const opts = {
@@ -26,7 +21,9 @@ export default class AllRead extends React.Component {
   }
 
   render() {
-    const emoji = _.sample(constants.ALLREAD_EMOJIS);
+    const emoji = constants.ALLREAD_EMOJIS[
+      Math.floor(Math.random() * constants.ALLREAD_EMOJIS.length)
+    ];
 
     return (
       <div className="container-fluid main-container notifications all-read">

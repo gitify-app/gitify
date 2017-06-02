@@ -1,14 +1,14 @@
-const shell = window.require('electron').shell;
+const { shell } = require('electron');
 
 import React from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 
 import { markNotification } from '../actions';
-import Helpers from '../utils/helpers';
+import { generateGitHubWebUrl } from '../utils/helpers';
 
 
 export class SingleNotification extends React.Component {
-
   pressTitle() {
     this.openBrowser();
 
@@ -18,27 +18,33 @@ export class SingleNotification extends React.Component {
   }
 
   openBrowser() {
-    var url = Helpers.generateGitHubUrl(this.props.notification.subject.url);
+    const url = generateGitHubWebUrl(this.props.notification.getIn(['subject', 'url']));
     shell.openExternal(url);
   }
 
   markAsRead() {
-    this.props.markNotification(this.props.notification.id);
+    const { hostname, notification } = this.props;
+    this.props.markNotification(notification.get('id'), hostname);
   }
 
   render() {
-    var typeIconClass, typeIconTooltip;
+    let typeIconClass, typeIconTooltip;
 
-    if (this.props.notification.subject.type === 'Issue') {
+    const updated = moment(this.props.notification.get('updated_at'));
+    const timeSinceUpdated = updated.fromNow();
+    const reason = this.props.notification.get('reason');
+    const type = this.props.notification.getIn(['subject', 'type']);
+
+    if (type === 'Issue') {
       typeIconClass = 'octicon octicon-issue-opened';
       typeIconTooltip = 'Issue';
-    } else if (this.props.notification.subject.type === 'PullRequest') {
+    } else if (type === 'PullRequest') {
       typeIconClass = 'octicon octicon-git-pull-request';
       typeIconTooltip = 'Pull Request';
-    } else if (this.props.notification.subject.type === 'Commit') {
+    } else if (type === 'Commit') {
       typeIconClass = 'octicon octicon-git-commit';
       typeIconTooltip = 'Commit';
-    } else if (this.props.notification.subject.type === 'Release') {
+    } else if (type === 'Release') {
       typeIconClass = 'octicon octicon-tag';
       typeIconTooltip = 'Release';
     } else {
@@ -47,22 +53,27 @@ export class SingleNotification extends React.Component {
     }
 
     return (
-      <div className="row notification">
-        <div className="col-xs-1"><span title={typeIconTooltip} className={typeIconClass} /></div>
-        <div className="col-xs-10 subject" onClick={this.pressTitle.bind(this)}>
-          {this.props.notification.subject.title}
+      <div className="row notification no-gutters px-3 py-2">
+        <div className="col-1"><span title={typeIconTooltip} className={typeIconClass} /></div>
+        <div className="col-10 subject" onClick={() => this.pressTitle()}>
+          <h6>{this.props.notification.getIn(['subject', 'title'])}</h6>
+
+          <div className="details">
+            <span className="text-capitalize">{reason}</span> - Updated {timeSinceUpdated}
+          </div>
         </div>
-        <div className="col-xs-1 check-wrapper">
-          <span title="Mark as Read" className="octicon octicon-check" onClick={this.markAsRead.bind(this)} />
+        <div className="col-1 check-wrapper">
+          <span title="Mark as Read" className="octicon octicon-check" onClick={() => this.markAsRead()} />
         </div>
       </div>
     );
   }
 };
 
-function mapStateToProps(state) {
+export function mapStateToProps(state) {
   return {
-    markOnClick: state.settings.markOnClick
+    markOnClick: state.settings.get('markOnClick'),
+    isEnterprise: state.settings.get('isEnterprise')
   };
 };
 

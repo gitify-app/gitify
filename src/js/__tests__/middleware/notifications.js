@@ -1,51 +1,26 @@
-import { expect } from 'chai';
-import sinon from 'sinon';
+import { List, Map } from 'immutable';
+
 import * as actions from '../../actions';
+import * as comms from '../../utils/comms';
+import { mockedGithubNotifications, mockedNotificationsRecuderData } from '../../__mocks__/mockedData';
 import notificationsMiddleware from '../../middleware/notifications';
 import NativeNotifications from '../../utils/notifications';
-import Helpers from '../../utils/helpers';
 
-const newNotification = [
-  {
-    id: 987654,
-    repo: {
-      id: 13
-    }
-  }
-];
+// Keep 3 notifications
+// Ps. To receive 4 on actions.NOTIFICATIONS.SUCCESS,
+const mockedNotifications = mockedNotificationsRecuderData
+  .deleteIn([0, 'notifications', 0]);
 
-const notificationsList = [
-  {
-    id: 123,
-    repository: {
-      id: 111111
-    }
-  },
-  {
-    id: 456,
-    repository: {
-      id: 111111
-    }
-  },
-  {
-    id: 789,
-    repository: {
-      id: 222222
-    }
-  }
-];
-
-
-const createFakeStore = fakeData => ({
+const createFakeStore = (fakeData) => ({
   getState() {
     return {
-      notifications: {
-        response: notificationsList
-      },
-      settings: {
+      notifications: Map({
+        response: mockedNotifications,
+      }),
+      settings: Map({
         playSound: false,
         showNotifications: false
-      }
+      })
     };
   }
 });
@@ -58,63 +33,60 @@ const dispatchWithStoreOf = (storeData, action) => {
 };
 
 describe('middleware/notifications.js', () => {
-
-  beforeEach(function() {
-
+  beforeEach(() => {
+    spyOn(NativeNotifications, 'setup').and.stub();
+    spyOn(comms, 'updateTrayIcon').and.stub();
+    spyOn(comms, 'setBadge').and.stub();
   });
 
-  it('should raise notifications (native & sound)', () => {
-
-    sinon.spy(NativeNotifications, 'setup');
-
+  it('should raise notifications (native & sound, update tray icon, set badge)', () => {
     const action = {
       type: actions.NOTIFICATIONS.SUCCESS,
-      payload: newNotification
+      payload: mockedNotificationsRecuderData
     };
 
-    expect(dispatchWithStoreOf({}, action)).to.eql(action);
-    expect(NativeNotifications.setup).to.have.been.calledOnce;
-    expect(NativeNotifications.setup).to.have.been.calledWith(
-      newNotification, { playSound: false, showNotifications: false }
+    expect(dispatchWithStoreOf({}, action)).toEqual(action);
+
+    const newNotifications = List.of(
+      List.of(mockedGithubNotifications.first()),
+      List()
     );
 
-    NativeNotifications.setup.restore();
-
+    expect(NativeNotifications.setup).toHaveBeenCalledTimes(1);
+    expect(NativeNotifications.setup.calls.first().args[0]).toEqual(newNotifications);
+    expect(NativeNotifications.setup.calls.first().args[1]).toEqual(1);
+    expect(NativeNotifications.setup.calls.first().args[2]).toEqual(
+      Map({ playSound: false, showNotifications: false })
+    );
   });
 
-  it('should mark a notification and call the update tray icon helper', () => {
-
-    sinon.spy(Helpers, 'updateTrayIcon');
-
+  it('should mark a notification and call the update tray icon helper and set the badge', () => {
     const action = {
       type: actions.MARK_NOTIFICATION.SUCCESS,
     };
 
-    expect(dispatchWithStoreOf({}, action)).to.eql(action);
-    expect(Helpers.updateTrayIcon).to.have.been.calledOnce;
-    expect(Helpers.updateTrayIcon).to.have.been.calledWith(2);
+    expect(dispatchWithStoreOf({}, action)).toEqual(action);
 
-    Helpers.updateTrayIcon.restore();
+    expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
+    expect(comms.updateTrayIcon).toHaveBeenCalledWith(2);
 
+    expect(comms.setBadge).toHaveBeenCalledTimes(1);
+    expect(comms.setBadge).toHaveBeenCalledWith(2);
   });
 
   it('should mark a repo\'s notification and call the update tray icon helper', () => {
-
-    sinon.spy(Helpers, 'updateTrayIcon');
-
     const action = {
       type: actions.MARK_REPO_NOTIFICATION.SUCCESS,
       meta: {
-        repoId: 111111
+        repoSlug: 'manosim/notifications-test',
+        hostname: 'github.com',
       }
     };
 
-    expect(dispatchWithStoreOf({}, action)).to.eql(action);
-    expect(Helpers.updateTrayIcon).to.have.been.calledOnce;
-    expect(Helpers.updateTrayIcon).to.have.been.calledWith(1);
-
-    Helpers.updateTrayIcon.restore();
-
+    expect(dispatchWithStoreOf({}, action)).toEqual(action);
+    expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
+    expect(comms.updateTrayIcon).toHaveBeenCalledWith(2);
+    expect(comms.setBadge).toHaveBeenCalledTimes(1);
+    expect(comms.setBadge).toHaveBeenCalledWith(2);
   });
-
 });

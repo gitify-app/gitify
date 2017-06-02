@@ -1,24 +1,68 @@
 import React from 'react'; // eslint-disable-line
 import ReactDOM from 'react-dom';
+import { Redirect, HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { Router, hashHistory } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
 
+const { ipcRenderer } = require('electron');
+
+import { toggleSettingsModal } from './actions';
 import configureStore from './store/configureStore';
-import getRoutes from './routes';
+import Sidebar from './components/sidebar';
+import Loading from './components/loading';
+import LoginPage from './routes/login';
+import NotificationsRoute from './routes/notifications';
+import EnterpriseLoginPage from './routes/enterprise-login';
+import SettingsModal from './components/settings-modal';
 
 // Store
 const store = configureStore();
 
-// Create an enhanced history that syncs navigation events with the store
-const history = syncHistoryWithStore(hashHistory, store);
+ipcRenderer.on('toggle-settings', (event) => {
+  store.dispatch(toggleSettingsModal());
+});
+
+export class NotFound extends React.Component {
+  render() {
+    return <h2>Not found</h2>;
+  }
+};
+
+export const PrivateRoute = ({ component: Component, ...rest }) => {
+  const authReducer = store.getState().auth;
+  const isAuthenticated = authReducer.get('token') !== null || authReducer.get('enterpriseAccounts').size > 0;
+
+  return (
+    <Route {...rest} render={props => (
+      isAuthenticated ? (
+        <Component {...props}/>
+      ) : (
+        <Redirect to={{
+          pathname: '/login',
+          state: { from: props.location }
+        }}/>
+      )
+    )}/>
+  );
+};
 
 ReactDOM.render(
   <Provider store={store}>
-    { /* Tell the Router to use our enhanced history */ }
-      <Router history={history}>
-        {getRoutes(store)}
-      </Router>
+    <Router>
+
+      <div className="wrapper">
+        <Loading />
+        <SettingsModal />
+        <Sidebar />
+
+        <Switch>
+          <PrivateRoute path="/" exact component={NotificationsRoute} />
+          <Route path="/login" component={LoginPage} />
+          <Route path="/enterpriselogin" component={EnterpriseLoginPage} />
+          <Route component={NotFound}/>
+        </Switch>
+      </div>
+
+    </Router>
   </Provider>,
   document.getElementById('gitify')
 );
