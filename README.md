@@ -17,6 +17,13 @@ brew cask install gitify
 Gitify currently only supports OS X.
 
 
+Gitify can also be installed using [homebrew cask](https://github.com/phinze/homebrew-cask).
+
+```
+brew cask install gitify
+```
+
+
 ### Prerequisites
 
  - Node 6+
