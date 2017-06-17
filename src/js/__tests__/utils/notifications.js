@@ -9,13 +9,17 @@ describe('utils/notifications.js', () => {
   it('should raise a notification (settings - on)', () => {
     const settings = Map({
       playSound: true,
-      showNotifications: true
+      showNotifications: true,
     });
 
     spyOn(NotificationsUtils, 'raiseNativeNotification');
     spyOn(NotificationsUtils, 'raiseSoundNotification');
 
-    NotificationsUtils.setup(mockedGithubNotifications, mockedGithubNotifications.size, settings);
+    NotificationsUtils.setup(
+      mockedGithubNotifications,
+      mockedGithubNotifications.size,
+      settings
+    );
 
     expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
     expect(NotificationsUtils.raiseSoundNotification).toHaveBeenCalledTimes(1);
@@ -24,13 +28,17 @@ describe('utils/notifications.js', () => {
   it('should not raise a notification (settings - off)', () => {
     const settings = Map({
       playSound: false,
-      showNotifications: false
+      showNotifications: false,
     });
 
     spyOn(NotificationsUtils, 'raiseNativeNotification');
     spyOn(NotificationsUtils, 'raiseSoundNotification');
 
-    NotificationsUtils.setup(mockedGithubNotifications, mockedGithubNotifications.size, settings);
+    NotificationsUtils.setup(
+      mockedGithubNotifications,
+      mockedGithubNotifications.size,
+      settings
+    );
 
     expect(NotificationsUtils.raiseNativeNotification).not.toHaveBeenCalled();
     expect(NotificationsUtils.raiseSoundNotification).not.toHaveBeenCalled();
@@ -39,7 +47,7 @@ describe('utils/notifications.js', () => {
   it('should not raise a notification (because of 0(zero) notifications)', () => {
     const settings = {
       playSound: true,
-      showNotifications: true
+      showNotifications: true,
     };
 
     spyOn(NotificationsUtils, 'raiseNativeNotification');
@@ -54,7 +62,7 @@ describe('utils/notifications.js', () => {
   it('should raise a single native notification (with different icons)', () => {
     const settings = Map({
       playSound: false,
-      showNotifications: true
+      showNotifications: true,
     });
 
     const mockedNotification = mockedGithubNotifications.first();
@@ -70,30 +78,38 @@ describe('utils/notifications.js', () => {
     NotificationsUtils.raiseNativeNotification.calls.reset();
 
     // PullRequest
-    NotificationsUtils.setup(List.of(mockedNotification
-      .setIn(['subject', 'type'], 'PullRequest')
-    ), 1, settings);
+    NotificationsUtils.setup(
+      List.of(mockedNotification.setIn(['subject', 'type'], 'PullRequest')),
+      1,
+      settings
+    );
     expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
     NotificationsUtils.raiseNativeNotification.calls.reset();
 
     // Commit
-    NotificationsUtils.setup(List.of(mockedNotification
-      .setIn(['subject', 'type'], 'Commit')
-    ), 1, settings);
+    NotificationsUtils.setup(
+      List.of(mockedNotification.setIn(['subject', 'type'], 'Commit')),
+      1,
+      settings
+    );
     expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
     NotificationsUtils.raiseNativeNotification.calls.reset();
 
     // Commit
-    NotificationsUtils.setup(List.of(mockedNotification
-      .setIn(['subject', 'type'], 'Release')
-    ), 1, settings);
+    NotificationsUtils.setup(
+      List.of(mockedNotification.setIn(['subject', 'type'], 'Release')),
+      1,
+      settings
+    );
     expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
     NotificationsUtils.raiseNativeNotification.calls.reset();
 
     // AnotherType
-    NotificationsUtils.setup(List.of(mockedNotification
-      .setIn(['subject', 'type'], 'AnotherType')
-    ), 1, settings);
+    NotificationsUtils.setup(
+      List.of(mockedNotification.setIn(['subject', 'type'], 'AnotherType')),
+      1,
+      settings
+    );
     expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
     NotificationsUtils.raiseNativeNotification.calls.reset();
   });
@@ -101,12 +117,19 @@ describe('utils/notifications.js', () => {
   it('should click on a native notification (with 1 notification)', () => {
     spyOn(comms, 'openExternalLink');
 
-    const mockedNotifications = List.of(List.of(mockedGithubNotifications.first()));
+    const mockedNotifications = List.of(
+      List.of(mockedGithubNotifications.first())
+    );
 
-    const nativeNotification = NotificationsUtils.raiseNativeNotification(mockedNotifications, 1);
+    const nativeNotification = NotificationsUtils.raiseNativeNotification(
+      mockedNotifications,
+      1
+    );
     nativeNotification.onclick();
 
-    const newUrl = generateGitHubWebUrl(mockedGithubNotifications.getIn([0, 'subject', 'url']));
+    const newUrl = generateGitHubWebUrl(
+      mockedGithubNotifications.getIn([0, 'subject', 'url'])
+    );
     expect(comms.openExternalLink).toHaveBeenCalledTimes(1);
     expect(comms.openExternalLink).toHaveBeenCalledWith(newUrl);
   });
@@ -117,18 +140,31 @@ describe('utils/notifications.js', () => {
     const mockedNotifications = List.of(mockedGithubNotifications);
     const count = mockedGithubNotifications.size;
 
-    const nativeNotification = NotificationsUtils.raiseNativeNotification(mockedNotifications, count);
+    const nativeNotification = NotificationsUtils.raiseNativeNotification(
+      mockedNotifications,
+      count
+    );
     nativeNotification.onclick();
 
     expect(comms.reOpenWindow).toHaveBeenCalledTimes(1);
   });
 
   it('should use different notification icons', () => {
-    expect(getNotificationIcon('Issue')).toEqual('images/notifications/issue.png');
-    expect(getNotificationIcon('Commit')).toEqual('images/notifications/commit.png');
-    expect(getNotificationIcon('PullRequest')).toEqual('images/notifications/pull-request.png');
-    expect(getNotificationIcon('Release')).toEqual('images/notifications/release.png');
-    expect(getNotificationIcon('WHATEVER')).toEqual('images/notifications/gitify.png');
+    expect(getNotificationIcon('Issue')).toEqual(
+      'images/notifications/issue.png'
+    );
+    expect(getNotificationIcon('Commit')).toEqual(
+      'images/notifications/commit.png'
+    );
+    expect(getNotificationIcon('PullRequest')).toEqual(
+      'images/notifications/pull-request.png'
+    );
+    expect(getNotificationIcon('Release')).toEqual(
+      'images/notifications/release.png'
+    );
+    expect(getNotificationIcon('WHATEVER')).toEqual(
+      'images/notifications/gitify.png'
+    );
   });
 
   it('should play a sound', () => {

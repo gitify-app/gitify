@@ -8,23 +8,28 @@ export default class AccountNotifications extends React.Component {
   static propTypes = {
     hostname: PropTypes.string.isRequired,
     notifications: PropTypes.any.isRequired,
-  }
+  };
 
   render() {
     const { hostname, notifications } = this.props;
 
-    const groupedNotifications = notifications.groupBy((object) => (
-      object.getIn(['repository', 'full_name']))
+    const groupedNotifications = notifications.groupBy(object =>
+      object.getIn(['repository', 'full_name'])
     );
 
     return (
       <ReactCSSTransitionGroup
         transitionName="repository"
         transitionEnter={false}
-        transitionLeaveTimeout={325}>
+        transitionLeaveTimeout={325}
+      >
         <div className="account p-2">
           {hostname}
-          <span className={`octicon octicon-chevron-${notifications.isEmpty() ? 'left' : 'down'} ml-2`} />
+          <span
+            className={`octicon octicon-chevron-${notifications.isEmpty()
+              ? 'left'
+              : 'down'} ml-2`}
+          />
         </div>
 
         {groupedNotifications.valueSeq().map(obj => {
@@ -34,10 +39,11 @@ export default class AccountNotifications extends React.Component {
               hostname={hostname}
               repo={obj}
               repoName={repoSlug}
-              key={repoSlug} />
+              key={repoSlug}
+            />
           );
         })}
       </ReactCSSTransitionGroup>
     );
   }
-};
+}

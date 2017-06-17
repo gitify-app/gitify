@@ -1,4 +1,5 @@
 const { ipcRenderer } = require('electron');
+import PropTypes from 'prop-types';
 
 import React from 'react';
 import { Redirect, Link } from 'react-router-dom';
@@ -8,6 +9,11 @@ import { authGithub, isUserEitherLoggedIn } from '../utils/helpers';
 import LogoDark from '../components/logos/dark';
 
 export class LoginPage extends React.Component {
+  static propTypes = {
+    isEitherLoggedIn: PropTypes.bool.isRequired,
+    dispatch: PropTypes.func.isRequired,
+  };
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.isEitherLoggedIn) {
       ipcRenderer.send('reopen-window');
@@ -16,9 +22,7 @@ export class LoginPage extends React.Component {
 
   render() {
     if (this.props.isEitherLoggedIn) {
-      return (
-        <Redirect to="/" />
-      );
+      return <Redirect to="/" />;
     }
 
     return (
@@ -33,20 +37,18 @@ export class LoginPage extends React.Component {
           <i className="fa fa-github mr-2" /> Login to GitHub
         </button>
 
-        <Link
-          to="/enterpriselogin"
-          className="btn btn-block btn-login mt-3">
+        <Link to="/enterpriselogin" className="btn btn-block btn-login mt-3">
           <i className="fa fa-github mr-2" /> Login to GitHub Enterprise
         </Link>
       </div>
     );
   }
-};
+}
 
 export function mapStateToProps(state) {
   return {
     isEitherLoggedIn: isUserEitherLoggedIn(state.auth),
   };
-};
+}
 
 export default connect(mapStateToProps)(LoginPage);

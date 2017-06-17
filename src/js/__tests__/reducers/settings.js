@@ -1,5 +1,9 @@
 import reducer from '../../reducers/settings';
-import { UPDATE_SETTING, HAS_STARRED, TOGGLE_SETTINGS_MODAL } from '../../actions';
+import {
+  UPDATE_SETTING,
+  HAS_STARRED,
+  TOGGLE_SETTINGS_MODAL,
+} from '../../actions';
 
 describe('reducers/settings.js', () => {
   it('should return the initial state', () => {
@@ -10,7 +14,7 @@ describe('reducers/settings.js', () => {
     const actionParticipating = {
       type: UPDATE_SETTING,
       setting: 'participating',
-      value: true
+      value: true,
     };
 
     expect(reducer(undefined, actionParticipating)).toMatchSnapshot();
@@ -18,7 +22,7 @@ describe('reducers/settings.js', () => {
     const actionOpenAtStartUp = {
       type: UPDATE_SETTING,
       setting: 'openAtStartup',
-      value: true
+      value: true,
     };
 
     expect(reducer(undefined, actionOpenAtStartUp)).toMatchSnapshot();
@@ -26,7 +30,7 @@ describe('reducers/settings.js', () => {
 
   it('should handle HAS_STARRED.SUCCESS', () => {
     const action = {
-      type: HAS_STARRED.SUCCESS
+      type: HAS_STARRED.SUCCESS,
     };
 
     expect(reducer(undefined, action)).toMatchSnapshot();
@@ -34,7 +38,7 @@ describe('reducers/settings.js', () => {
 
   it('should handle HAS_STARRED.SUCCESS', () => {
     const action = {
-      type: HAS_STARRED.FAILURE
+      type: HAS_STARRED.FAILURE,
     };
 
     expect(reducer(undefined, action)).toMatchSnapshot();
@@ -42,7 +46,7 @@ describe('reducers/settings.js', () => {
 
   it('should handle TOGGLE_SETTINGS_MODAL', () => {
     const action = {
-      type: TOGGLE_SETTINGS_MODAL
+      type: TOGGLE_SETTINGS_MODAL,
     };
 
     expect(reducer(undefined, action)).toMatchSnapshot();

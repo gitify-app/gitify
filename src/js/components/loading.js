@@ -1,20 +1,21 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import NProgress from 'nprogress';
 
 export class Loading extends React.PureComponent {
+  static propTypes = {
+    isLoading: PropTypes.bool.isRequired,
+  };
+
   componentDidMount() {
     NProgress.configure({
-      showSpinner: false
+      showSpinner: false,
     });
 
     if (this.props.isLoading) {
       NProgress.start();
     }
-  }
-
-  componentWillUnmount() {
-    NProgress.remove();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -25,16 +26,19 @@ export class Loading extends React.PureComponent {
     }
   }
 
+  componentWillUnmount() {
+    NProgress.remove();
+  }
+
   render() {
     return null;
-  };
-};
-
+  }
+}
 
 export function mapStateToProps(state) {
   return {
-    isLoading: state.notifications.get('isFetching')
+    isLoading: state.notifications.get('isFetching'),
   };
-};
+}
 
 export default connect(mapStateToProps, null)(Loading);

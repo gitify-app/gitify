@@ -1,8 +1,8 @@
-window.Notification = function (title, options) {
+window.Notification = function(title) {
   this.title = title;
 
   return {
-    onclick: jest.fn()
+    onclick: jest.fn(),
   };
 };
 
@@ -16,11 +16,13 @@ window.Audio = class Audio {
 
 window.localStorage = {
   store: {},
-  getItem: function (key) { return this.store[key]; },
-  setItem: function (key, item) {
+  getItem: function(key) {
+    return this.store[key];
+  },
+  setItem: function(key, item) {
     this.store[key] = item;
   },
-  removeItem: jest.fn()
+  removeItem: jest.fn(),
 };
 
 window.alert = jest.fn();
@@ -32,7 +34,7 @@ const browserWindow = {
   },
   on: () => {},
   close: jest.fn(),
-  destroy: jest.fn()
+  destroy: jest.fn(),
 };
 
 const dialog = {
@@ -44,14 +46,14 @@ module.exports = {
     BrowserWindow: () => browserWindow,
     dialog: dialog,
     app: {
-      getVersion: () => '0.0.1'
-    }
+      getVersion: () => '0.0.1',
+    },
   },
   ipcRenderer: {
     send: jest.fn(),
     on: jest.fn(),
   },
   shell: {
-    openExternal: jest.fn()
+    openExternal: jest.fn(),
   },
 };

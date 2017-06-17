@@ -1,10 +1,15 @@
 import { Map, List } from 'immutable';
-import { NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION, LOGOUT } from '../actions';
+import {
+  NOTIFICATIONS,
+  MARK_NOTIFICATION,
+  MARK_REPO_NOTIFICATION,
+  LOGOUT,
+} from '../actions';
 
 const initialState = Map({
   response: List(),
   isFetching: false,
-  failed: false
+  failed: false,
 });
 
 // Response Structure
@@ -22,13 +27,9 @@ const initialState = Map({
 export default function reducer(state = initialState, action) {
   switch (action.type) {
     case NOTIFICATIONS.REQUEST:
-      return state
-        .set('isFetching', true)
-        .set('failed', false);
+      return state.set('isFetching', true).set('failed', false);
     case NOTIFICATIONS.SUCCESS:
-      return state
-        .set('isFetching', false)
-        .set('response', action.payload);
+      return state.set('isFetching', false).set('response', action.payload);
     case NOTIFICATIONS.FAILURE:
       return state
         .set('isFetching', false)
@@ -39,20 +40,31 @@ export default function reducer(state = initialState, action) {
         .get('response')
         .findIndex(obj => obj.get('hostname') === action.meta.hostname);
 
-      return state.updateIn(['response', accNotificationsIndex, 'notifications'], notifications => {
-        return notifications.filterNot(items => items.get('id') === action.meta.id);
-      });
+      return state.updateIn(
+        ['response', accNotificationsIndex, 'notifications'],
+        notifications => {
+          return notifications.filterNot(
+            items => items.get('id') === action.meta.id
+          );
+        }
+      );
     case MARK_REPO_NOTIFICATION.SUCCESS:
       const accNotificationsRepoIndex = state
         .get('response')
         .findIndex(obj => obj.get('hostname') === action.meta.hostname);
 
-      return state.updateIn(['response', accNotificationsRepoIndex, 'notifications'], notifications => {
-        return notifications.filterNot(items => items.getIn(['repository', 'full_name']) === action.meta.repoSlug);
-      });
+      return state.updateIn(
+        ['response', accNotificationsRepoIndex, 'notifications'],
+        notifications => {
+          return notifications.filterNot(
+            items =>
+              items.getIn(['repository', 'full_name']) === action.meta.repoSlug
+          );
+        }
+      );
     case LOGOUT:
       return initialState;
     default:
       return state;
   }
-};
+}

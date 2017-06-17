@@ -6,9 +6,7 @@ import LogoWhite from '../../../components/logos/white';
 
 describe('components/logos/white.js', () => {
   it('renders correctly', () => {
-    const tree = renderer.create(
-      <LogoWhite />
-    );
+    const tree = renderer.create(<LogoWhite />);
 
     expect(tree).toMatchSnapshot();
   });

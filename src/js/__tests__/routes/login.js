@@ -150,7 +150,7 @@ describe('components/login.js', () => {
 
     expect(alert).toHaveBeenCalledTimes(1);
     expect(alert).toHaveBeenCalledWith(
-      'Oops! Something went wrong and we couldn\'t log you in using Github. Please try again.'
+      "Oops! Something went wrong and we couldn't log you in using Github. Please try again."
     );
   });
 

@@ -8,19 +8,20 @@ import Constants from './constants';
 import { loginUser } from '../actions';
 
 export function getEnterpriseAccountToken(hostname, accounts) {
-  return accounts
-    .find(obj => obj.get('hostname') === hostname)
-    .get('token');
+  return accounts.find(obj => obj.get('hostname') === hostname).get('token');
 }
 
 export function generateGitHubAPIUrl(hostname) {
   const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
-  return isEnterprise ? `https://${hostname}/api/v3/` : `https://api.${hostname}/`;
+  return isEnterprise
+    ? `https://${hostname}/api/v3/`
+    : `https://api.${hostname}/`;
 }
 
 export function generateGitHubWebUrl(url) {
   const { hostname } = parse(url);
-  const isEnterprise = hostname !== `api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}`;
+  const isEnterprise =
+    hostname !== `api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}`;
 
   let newUrl = isEnterprise
     ? url.replace(`${hostname}/api/v3/repos`, hostname)
@@ -36,9 +37,12 @@ export function generateGitHubWebUrl(url) {
   }
 
   return newUrl;
-};
+}
 
-export function authGithub(authOptions = Constants.DEFAULT_AUTH_OPTIONS, dispatch) {
+export function authGithub(
+  authOptions = Constants.DEFAULT_AUTH_OPTIONS,
+  dispatch
+) {
   // Build the OAuth consent page URL
   const authWindow = new BrowserWindow({
     width: 800,
@@ -46,17 +50,22 @@ export function authGithub(authOptions = Constants.DEFAULT_AUTH_OPTIONS, dispatc
     show: true,
     webPreferences: {
       devTools: true,
-    }
+    },
   });
 
   const githubUrl = `https://${authOptions.hostname}/login/oauth/authorize?`;
-  const authUrl = githubUrl + 'client_id=' + authOptions.clientId + '&scope=' + Constants.AUTH_SCOPE;
+  const authUrl =
+    githubUrl +
+    'client_id=' +
+    authOptions.clientId +
+    '&scope=' +
+    Constants.AUTH_SCOPE;
 
   authWindow.loadURL(authUrl);
 
-  function handleCallback (url) {
+  function handleCallback(url) {
     const raw_code = /code=([^&]*)/.exec(url) || null;
-    const code = (raw_code && raw_code.length > 1) ? raw_code[1] : null;
+    const code = raw_code && raw_code.length > 1 ? raw_code[1] : null;
     const error = /\?error=(.+)$/.exec(url);
 
     if (code || error) {
@@ -68,17 +77,24 @@ export function authGithub(authOptions = Constants.DEFAULT_AUTH_OPTIONS, dispatc
     if (code) {
       dispatch(loginUser(authOptions, code));
     } else if (error) {
-      alert('Oops! Something went wrong and we couldn\'t ' +
-        'log you in using Github. Please try again.');
+      alert(
+        "Oops! Something went wrong and we couldn't " +
+          'log you in using Github. Please try again.'
+      );
     }
   }
 
   // If "Done" button is pressed, hide "Loading"
-  authWindow.on('close', function () {
+  authWindow.on('close', function() {
     authWindow.destroy();
   });
 
-  authWindow.webContents.on('did-fail-load', function (event, errorCode, errorDescription, validatedURL) {
+  authWindow.webContents.on('did-fail-load', function(
+    event,
+    errorCode,
+    errorDescription,
+    validatedURL
+  ) {
     if (validatedURL.includes(authOptions.hostname)) {
       authWindow.destroy();
 
@@ -89,15 +105,19 @@ export function authGithub(authOptions = Constants.DEFAULT_AUTH_OPTIONS, dispatc
     }
   });
 
-  authWindow.webContents.on('will-navigate', function (event, url) {
+  authWindow.webContents.on('will-navigate', function(event, url) {
     handleCallback(url);
   });
 
-  authWindow.webContents.on('did-get-redirect-request', function (event, oldUrl, newUrl) {
+  authWindow.webContents.on('did-get-redirect-request', function(
+    event,
+    oldUrl,
+    newUrl
+  ) {
     handleCallback(newUrl);
   });
 }
 
-export function isUserEitherLoggedIn (auth) {
+export function isUserEitherLoggedIn(auth) {
   return auth.get('token') !== null || auth.get('enterpriseAccounts').size > 0;
 }

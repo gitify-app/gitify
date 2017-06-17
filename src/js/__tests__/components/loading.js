@@ -5,11 +5,7 @@ import NProgress from 'nprogress';
 
 import { Loading, mapStateToProps } from '../../components/loading';
 
-describe('components/loading.js', function () {
-  const props = {
-
-  };
-
+describe('components/loading.js', function() {
   beforeEach(() => {
     NProgress.start = jest.fn();
     NProgress.done = jest.fn();
@@ -34,14 +30,16 @@ describe('components/loading.js', function () {
     expect(mappedProps.isLoading).toBeFalsy();
   });
 
-  it('should render itself & its children', function () {
-    const wrapper = shallow(<Loading {...props} />);
+  it('should render itself & its children', function() {
+    const isLoading = false;
+    const caseProps = { isLoading };
+    const wrapper = shallow(<Loading {...caseProps} />);
 
     expect(wrapper).toBeDefined();
     expect(wrapper.children().length).toBe(0);
   });
 
-  it('should mount itself without any children', function () {
+  it('should mount itself without any children', function() {
     spyOn(Loading.prototype, 'componentDidMount').and.callThrough();
 
     const isLoading = true;
@@ -55,8 +53,8 @@ describe('components/loading.js', function () {
     expect(Loading.prototype.componentDidMount).toHaveBeenCalledTimes(1);
   });
 
-  it('should receive props', function () {
-    spyOn(Loading.prototype, 'componentDidMount').and.callThrough();;
+  it('should receive props', function() {
+    spyOn(Loading.prototype, 'componentDidMount').and.callThrough();
 
     const isLoading = true;
     const caseProps = { isLoading };
@@ -67,24 +65,22 @@ describe('components/loading.js', function () {
     expect(NProgress.start).toHaveBeenCalledTimes(1);
 
     wrapper.setProps({
-      ...props,
-      isLoading: false
+      isLoading: false,
     });
     expect(NProgress.done).toHaveBeenCalledTimes(1);
 
     wrapper.setProps({
-      ...props,
-      isLoading: true
+      isLoading: true,
     });
     expect(NProgress.start).toHaveBeenCalledTimes(2);
   });
 
-  it('should unmount the component', function () {
-    spyOn(Loading.prototype, 'componentWillUnmount').and.callThrough();;
+  it('should unmount the component', function() {
+    spyOn(Loading.prototype, 'componentWillUnmount').and.callThrough();
 
     const isLoading = true;
-    const caseProps = { isLoading };
-    const wrapper = mount(<Loading {...caseProps} />);
+    const props = { isLoading };
+    const wrapper = mount(<Loading {...props} />);
 
     expect(wrapper).toBeDefined();
     expect(wrapper.children().length).toEqual(0);

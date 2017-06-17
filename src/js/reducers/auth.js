@@ -20,8 +20,13 @@ export default function reducer(state = initialState, action) {
       if (action.isEnterprise) {
         return state
           .set('isFetching', false)
-          .update('enterpriseAccounts',
-            (accounts) => accounts.push(Map({hostname: action.hostname, token: action.payload.access_token}))
+          .update('enterpriseAccounts', accounts =>
+            accounts.push(
+              Map({
+                hostname: action.hostname,
+                token: action.payload.access_token,
+              })
+            )
           );
       }
 
@@ -41,4 +46,4 @@ export default function reducer(state = initialState, action) {
     default:
       return state;
   }
-};
+}

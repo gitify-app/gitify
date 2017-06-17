@@ -14,7 +14,7 @@ export class RepositoryNotifications extends React.Component {
     repo: PropTypes.any.isRequired,
     repoName: PropTypes.string.isRequired,
     markRepoNotifications: PropTypes.func.isRequired,
-  }
+  };
 
   openBrowser() {
     const url = this.props.repo.first().getIn(['repository', 'html_url']);
@@ -36,30 +36,37 @@ export class RepositoryNotifications extends React.Component {
         <div className="repository d-flex px-3 py-2 justify-content-between">
           <div className="info pr-3">
             <img className="avatar img-fluid mr-2" src={avatarUrl} />
-            <span onClick={() => this.openBrowser()}>{this.props.repoName}</span>
+            <span onClick={() => this.openBrowser()}>
+              {this.props.repoName}
+            </span>
           </div>
 
           <span
             title="Mark Repository as Read"
             className="octicon octicon-check"
-            onClick={() => this.markRepoAsRead()} />
+            onClick={() => this.markRepoAsRead()}
+          />
         </div>
 
         <ReactCSSTransitionGroup
           transitionName="notification"
           transitionEnter={false}
-          transitionLeaveTimeout={325}>
-          {repo.map(obj => (
+          transitionLeaveTimeout={325}
+        >
+          {repo.map(obj =>
             <SingleNotification
               key={obj.get('id')}
               hostname={hostname}
-              notification={obj} />
-          ))}
+              notification={obj}
+            />
+          )}
         </ReactCSSTransitionGroup>
 
       </div>
     );
   }
-};
+}
 
-export default connect(null, { markRepoNotifications })(RepositoryNotifications);
+export default connect(null, { markRepoNotifications })(
+  RepositoryNotifications
+);

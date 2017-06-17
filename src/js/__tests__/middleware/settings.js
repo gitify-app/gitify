@@ -3,22 +3,24 @@ const { ipcRenderer } = require('electron');
 import * as actions from '../../actions';
 import settingsMiddleware from '../../middleware/settings';
 
-const createFakeStore = fakeData => ({
+const createFakeStore = () => ({
   getState() {
     return {
       notifications: {},
       settings: {
         openAtStartup: false,
         playSound: false,
-        showNotifications: false
-      }
+        showNotifications: false,
+      },
     };
-  }
+  },
 });
 
 const dispatchWithStoreOf = (storeData, action) => {
   let dispatched = null;
-  const dispatch = settingsMiddleware(createFakeStore(storeData))(actionAttempt => dispatched = actionAttempt);
+  const dispatch = settingsMiddleware(createFakeStore(storeData))(
+    actionAttempt => (dispatched = actionAttempt)
+  );
   dispatch(action);
   return dispatched;
 };
@@ -32,7 +34,7 @@ describe('middleware/settings.js', () => {
     const action = {
       type: actions.UPDATE_SETTING,
       setting: 'openAtStartup',
-      value: true
+      value: true,
     };
 
     expect(dispatchWithStoreOf({}, action)).toEqual(action);
@@ -45,7 +47,7 @@ describe('middleware/settings.js', () => {
     const action = {
       type: actions.UPDATE_SETTING,
       setting: 'showAppIcon',
-      value: 'both'
+      value: 'both',
     };
 
     expect(dispatchWithStoreOf({}, action)).toEqual(action);

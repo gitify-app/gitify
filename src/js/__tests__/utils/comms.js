@@ -8,7 +8,6 @@ import {
 
 const { ipcRenderer, shell } = require('electron');
 
-
 describe('utils/comms.js', () => {
   beforeEach(function() {
     ipcRenderer.send.mockReset();

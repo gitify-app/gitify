@@ -19,7 +19,9 @@ export function getNotificationIcon(type) {
 export default {
   setup(notifications, notificationsCount, settings) {
     // If there are no new notifications just stop there
-    if (!notificationsCount) { return; }
+    if (!notificationsCount) {
+      return;
+    }
 
     if (settings.get('playSound')) {
       this.raiseSoundNotification();
@@ -45,9 +47,13 @@ export default {
       icon = false;
     }
 
-    const nativeNotification = new Notification(title, {body, icon, silent: true});
+    const nativeNotification = new Notification(title, {
+      body,
+      icon,
+      silent: true,
+    });
 
-    nativeNotification.onclick = function () {
+    nativeNotification.onclick = function() {
       if (count === 1) {
         const url = generateGitHubWebUrl(notificationUrl);
         openExternalLink(url);
@@ -62,5 +68,5 @@ export default {
   raiseSoundNotification() {
     const audio = new Audio('sounds/digi.wav');
     audio.play();
-  }
+  },
 };

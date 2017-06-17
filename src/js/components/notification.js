@@ -1,14 +1,21 @@
 const { shell } = require('electron');
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
 import { markNotification } from '../actions';
 import { generateGitHubWebUrl } from '../utils/helpers';
 
-
 export class SingleNotification extends React.Component {
+  static propTypes = {
+    hostname: PropTypes.string.isRequired,
+    notification: PropTypes.object.isRequired,
+    markOnClick: PropTypes.bool,
+    markNotification: PropTypes.func.isRequired,
+  };
+
   pressTitle() {
     this.openBrowser();
 
@@ -18,7 +25,9 @@ export class SingleNotification extends React.Component {
   }
 
   openBrowser() {
-    const url = generateGitHubWebUrl(this.props.notification.getIn(['subject', 'url']));
+    const url = generateGitHubWebUrl(
+      this.props.notification.getIn(['subject', 'url'])
+    );
     shell.openExternal(url);
   }
 
@@ -54,27 +63,36 @@ export class SingleNotification extends React.Component {
 
     return (
       <div className="row notification no-gutters px-3 py-2">
-        <div className="col-1"><span title={typeIconTooltip} className={typeIconClass} /></div>
+        <div className="col-1">
+          <span title={typeIconTooltip} className={typeIconClass} />
+        </div>
         <div className="col-10 subject" onClick={() => this.pressTitle()}>
           <h6>{this.props.notification.getIn(['subject', 'title'])}</h6>
 
           <div className="details">
-            <span className="text-capitalize">{reason}</span> - Updated {timeSinceUpdated}
+            <span className="text-capitalize">{reason}</span> - Updated{' '}
+            {timeSinceUpdated}
           </div>
         </div>
         <div className="col-1 check-wrapper">
-          <span title="Mark as Read" className="octicon octicon-check" onClick={() => this.markAsRead()} />
+          <span
+            title="Mark as Read"
+            className="octicon octicon-check"
+            onClick={() => this.markAsRead()}
+          />
         </div>
       </div>
     );
   }
-};
+}
 
 export function mapStateToProps(state) {
   return {
     markOnClick: state.settings.get('markOnClick'),
-    isEnterprise: state.settings.get('isEnterprise')
+    isEnterprise: state.settings.get('isEnterprise'),
   };
-};
+}
 
-export default connect(mapStateToProps, { markNotification })(SingleNotification);
+export default connect(mapStateToProps, { markNotification })(
+  SingleNotification
+);
