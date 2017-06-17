@@ -22,18 +22,22 @@ export default function configureStore(initialState) {
     [['settings', 'hasStarred'], ['settings', 'showSettingsModal']]
   );
 
-  const storageMiddleware = storage.createMiddleware(engine, [], [UPDATE_SETTING, LOGIN.SUCCESS, LOGOUT]);
+  const storageMiddleware = storage.createMiddleware(
+    engine,
+    [],
+    [UPDATE_SETTING, LOGIN.SUCCESS, LOGOUT]
+  );
 
   const middlewares = [
     thunkMiddleware,
     notificationsMiddlware,
     settingsMiddleware,
-    storageMiddleware
+    storageMiddleware,
   ];
 
   if (isDev) {
     const { createLogger } = require('redux-logger');
-    const logger = createLogger({collapsed: true});
+    const logger = createLogger({ collapsed: true });
     middlewares.push(logger);
   }
 
@@ -45,17 +49,16 @@ export default function configureStore(initialState) {
 
   // Load settings from localStorage
   const load = storage.createLoader(engine);
-  load(store)
-    .then(newState => {
-      const { auth = {}, settings = {} } = newState;
-      const isGitHubLoggedIn = !!auth.token;
-      const userSettings = Map(settings);
+  load(store).then(newState => {
+    const { auth = {}, settings = {} } = newState;
+    const isGitHubLoggedIn = !!auth.token;
+    const userSettings = Map(settings);
 
-      restoreSettings(userSettings);
-      if (isGitHubLoggedIn) {
-        store.dispatch(checkHasStarred());
-      }
-    });
+    restoreSettings(userSettings);
+    if (isGitHubLoggedIn) {
+      store.dispatch(checkHasStarred());
+    }
+  });
 
   return store;
 }

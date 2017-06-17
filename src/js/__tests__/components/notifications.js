@@ -14,9 +14,7 @@ describe('components/notifications.js', () => {
       notifications: mockedGithubNotifications,
     };
 
-    const tree = renderer.create(
-      <AccountNotifications {...props} />
-    );
+    const tree = renderer.create(<AccountNotifications {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
@@ -26,9 +24,7 @@ describe('components/notifications.js', () => {
       notifications: List(),
     };
 
-    const tree = renderer.create(
-      <AccountNotifications {...props} />
-    );
+    const tree = renderer.create(<AccountNotifications {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });

@@ -14,9 +14,16 @@
   ],
   "plugins": [
     "import",
+    "prettier"
   ],
   "rules": {
     import/no-unresolved: 2,
     "react/jsx-indent-props": 0,
+    "prettier/prettier": ["error", {
+      "singleQuote": true,
+      "trailingComma": "es5",
+      "bracketSpacing": true,
+    }],
+    quotes: ["error", "single", { "avoidEscape": true }]
   }
 }

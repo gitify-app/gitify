@@ -6,12 +6,14 @@ import { shallow, mount } from 'enzyme';
 const { shell, ipcRenderer } = require('electron');
 
 import { Sidebar, mapStateToProps } from '../../components/sidebar';
-import { mockedEnterpriseAccounts, mockedNotificationsRecuderData } from '../../__mocks__/mockedData';
+import {
+  mockedEnterpriseAccounts,
+  mockedNotificationsRecuderData,
+} from '../../__mocks__/mockedData';
 
 jest.mock('../../components/logos/white');
 
 describe('components/Sidebar.js', () => {
-
   let clock;
   const props = {
     isFetching: false,
@@ -45,13 +47,13 @@ describe('components/Sidebar.js', () => {
     const state = {
       auth: Map({
         token: '12345',
-        enterpriseAccounts: mockedEnterpriseAccounts
+        enterpriseAccounts: mockedEnterpriseAccounts,
       }),
       notifications: Map({
         response: List(),
       }),
       settings: Map({
-        hasStarred: true
+        hasStarred: true,
       }),
     };
 
@@ -70,10 +72,18 @@ describe('components/Sidebar.js', () => {
     expect(wrapper.find('.fa-refresh').length).toBe(1);
     expect(wrapper.find('.fa-cog').length).toBe(1);
 
-    expect(wrapper.find('.badge-account').first().children().first().text()).toBe('GitHub');
-    expect(wrapper.find('.badge-account').first().children().last().text()).toBe(`${notifications.size}`);
-    expect(wrapper.find('.badge-account').last().children().first().text()).toBe('gitify');
-    expect(wrapper.find('.badge-account').last().children().last().text()).toBe(`${notifications.size}`);
+    expect(
+      wrapper.find('.badge-account').first().children().first().text()
+    ).toBe('GitHub');
+    expect(
+      wrapper.find('.badge-account').first().children().last().text()
+    ).toBe(`${notifications.size}`);
+    expect(
+      wrapper.find('.badge-account').last().children().first().text()
+    ).toBe('gitify');
+    expect(wrapper.find('.badge-account').last().children().last().text()).toBe(
+      `${notifications.size}`
+    );
   });
 
   it('should clear the interval when unmounting', () => {
@@ -92,7 +102,7 @@ describe('components/Sidebar.js', () => {
     expect(window.clearInterval).toHaveBeenCalledTimes(1);
   });
 
-  it('should load notifications after 60000ms', function () {
+  it('should load notifications after 60000ms', function() {
     const wrapper = shallow(<Sidebar {...props} />);
 
     expect(wrapper).toBeDefined();
@@ -102,7 +112,7 @@ describe('components/Sidebar.js', () => {
     expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
   });
 
-  it('should render itself & its children (logged out)', function () {
+  it('should render itself & its children (logged out)', function() {
     const caseProps = {
       ...props,
       notifications: List(),
@@ -118,7 +128,7 @@ describe('components/Sidebar.js', () => {
     expect(wrapper.find('.tag-success').length).toBe(0);
   });
 
-  it('should mount itself & its children (logged out)', function () {
+  it('should mount itself & its children (logged out)', function() {
     const caseProps = {
       ...props,
       notifications: List(),

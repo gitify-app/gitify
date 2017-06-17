@@ -1,6 +1,11 @@
 import React from 'react'; // eslint-disable-line
 import ReactDOM from 'react-dom';
-import { Redirect, HashRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  Redirect,
+  HashRouter as Router,
+  Route,
+  Switch,
+} from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 const { ipcRenderer } = require('electron');
@@ -30,24 +35,23 @@ export class NotFound extends React.Component {
 /* eslint-disable react/prop-types */
 export const PrivateRoute = ({ component: Component, ...rest }) => {
   const authReducer = store.getState().auth;
-  const isAuthenticated = authReducer.get('token') !== null || authReducer.get('enterpriseAccounts').size > 0;
+  const isAuthenticated =
+    authReducer.get('token') !== null ||
+    authReducer.get('enterpriseAccounts').size > 0;
 
   return (
     <Route
-{...rest} render={props => (
-      isAuthenticated ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-to={{ pathname: '/login', state: { from: props.location }}}
-        />
-      )
-    )}
+      {...rest}
+      render={props =>
+        isAuthenticated
+          ? <Component {...props} />
+          : <Redirect
+              to={{ pathname: '/login', state: { from: props.location } }}
+            />}
     />
   );
 };
 /* eslint-enable react/prop-types */
-
 
 ReactDOM.render(
   <Provider store={store}>

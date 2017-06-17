@@ -1,10 +1,8 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import configureStore from '../../store/configureStore';
 
-
-describe('store/configureStore.js', function () {
-
-  it('should load the store', function () {
+describe('store/configureStore.js', function() {
+  it('should load the store', function() {
     const store = configureStore();
 
     expect(store.dispatch).toBeDefined();
@@ -12,5 +10,4 @@ describe('store/configureStore.js', function () {
     expect(store.getState).toBeDefined();
     expect(store.replaceReducer).toBeDefined();
   });
-
 });

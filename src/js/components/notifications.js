@@ -8,13 +8,13 @@ export default class AccountNotifications extends React.Component {
   static propTypes = {
     hostname: PropTypes.string.isRequired,
     notifications: PropTypes.any.isRequired,
-  }
+  };
 
   render() {
     const { hostname, notifications } = this.props;
 
-    const groupedNotifications = notifications.groupBy((object) => (
-      object.getIn(['repository', 'full_name']))
+    const groupedNotifications = notifications.groupBy(object =>
+      object.getIn(['repository', 'full_name'])
     );
 
     return (
@@ -25,7 +25,11 @@ export default class AccountNotifications extends React.Component {
       >
         <div className="account p-2">
           {hostname}
-          <span className={`octicon octicon-chevron-${notifications.isEmpty() ? 'left' : 'down'} ml-2`} />
+          <span
+            className={`octicon octicon-chevron-${notifications.isEmpty()
+              ? 'left'
+              : 'down'} ml-2`}
+          />
         </div>
 
         {groupedNotifications.valueSeq().map(obj => {

@@ -16,7 +16,7 @@ export default {
   // Awesome all read messages
   ALLREAD_MESSAGES: [
     'Wow! You did it.',
-    'That\'s amazing!',
+    "That's amazing!",
     'Yes! All read.',
     'All gone! Nice work!',
     'Yay! Good news.',
@@ -32,7 +32,7 @@ export default {
     ':clap:',
     ':circus_tent:',
     ':spaghetti:',
-    ':ok_hand:'
+    ':ok_hand:',
   ],
 
   ERROR_EMOJIS: [
@@ -40,6 +40,6 @@ export default {
     ':disappointed:',
     ':triumph:',
     ':scream:',
-    ':cry:'
-  ]
+    ':cry:',
+  ],
 };

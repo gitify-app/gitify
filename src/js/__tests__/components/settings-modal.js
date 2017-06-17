@@ -5,7 +5,10 @@ import renderer from 'react-test-renderer';
 
 const { ipcRenderer } = require('electron');
 
-import { SettingsModal, mapStateToProps } from '../../components/settings-modal';
+import {
+  SettingsModal,
+  mapStateToProps,
+} from '../../components/settings-modal';
 
 describe('components/settings-modal.js', () => {
   const props = {
@@ -23,7 +26,7 @@ describe('components/settings-modal.js', () => {
       showSettingsModal: true,
       hasStarred: false,
       showAppIcon: 'both',
-    })
+    }),
   };
 
   beforeEach(function() {
@@ -54,13 +57,13 @@ describe('components/settings-modal.js', () => {
   it('should close the modal on press of the escape key ', () => {
     spyOn(document, 'addEventListener').and.callFake((name, clb) => {
       if (name === 'keydown') {
-        clb({keyCode: 27});
+        clb({ keyCode: 27 });
       }
     });
 
     spyOn(document, 'removeEventListener').and.callFake((name, clb) => {
       if (name === 'keydown') {
-        clb({keyCode: 27});
+        clb({ keyCode: 27 });
       }
     });
 
@@ -75,28 +78,24 @@ describe('components/settings-modal.js', () => {
   });
 
   it('should render itself & its children (open modal)', () => {
-    const tree = renderer.create(
-      <SettingsModal {...props} />
-    );
+    const tree = renderer.create(<SettingsModal {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('should render itself & its children (closed modal)', () => {
     const caseProps = {
       ...props,
-      settings: props.settings.set('showSettingsModal', false)
+      settings: props.settings.set('showSettingsModal', false),
     };
 
-    const tree = renderer.create(
-      <SettingsModal {...caseProps} />
-    );
+    const tree = renderer.create(<SettingsModal {...caseProps} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('should redirect if logged out', () => {
     const caseProps = {
       ...props,
-      isEitherLoggedIn: false
+      isEitherLoggedIn: false,
     };
 
     const wrapper = shallow(<SettingsModal {...caseProps} />);
@@ -118,13 +117,16 @@ describe('components/settings-modal.js', () => {
     expect(props.toggleSettingsModal).toHaveBeenCalledTimes(1);
   });
 
-  it('should call the componentWillReceiveProps method', function () {
+  it('should call the componentWillReceiveProps method', function() {
     const wrapper = shallow(<SettingsModal {...props} />);
     expect(wrapper).toBeDefined();
 
     wrapper.setProps({
       ...props,
-      settings: props.settings.set('participating', !props.settings.get('participating'))
+      settings: props.settings.set(
+        'participating',
+        !props.settings.get('participating')
+      ),
     });
     expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
   });
@@ -142,7 +144,7 @@ describe('components/settings-modal.js', () => {
 
     wrapper
       .findWhere(node => node.props().label === 'Show only participating')
-      .simulate('change', {target: {checked: true}});
+      .simulate('change', { target: { checked: true } });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
   });
@@ -153,7 +155,7 @@ describe('components/settings-modal.js', () => {
 
     wrapper
       .findWhere(node => node.props().label === 'Play sound')
-      .simulate('change', {target: {checked: true}});
+      .simulate('change', { target: { checked: true } });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
   });
@@ -164,7 +166,7 @@ describe('components/settings-modal.js', () => {
 
     wrapper
       .findWhere(node => node.props().label === 'Show notifications')
-      .simulate('change', {target: {checked: true}});
+      .simulate('change', { target: { checked: true } });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
   });
@@ -175,7 +177,7 @@ describe('components/settings-modal.js', () => {
 
     wrapper
       .findWhere(node => node.props().label === 'On Click, Mark as Read')
-      .simulate('change', {target: {checked: true}});
+      .simulate('change', { target: { checked: true } });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
   });
@@ -186,7 +188,7 @@ describe('components/settings-modal.js', () => {
 
     wrapper
       .findWhere(node => node.props().label === 'Open at startup')
-      .simulate('change', {target: {checked: true}});
+      .simulate('change', { target: { checked: true } });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
   });
@@ -195,7 +197,9 @@ describe('components/settings-modal.js', () => {
     const wrapper = shallow(<SettingsModal {...props} />);
     expect(wrapper).toBeDefined();
 
-    wrapper.find('RadioGroup').simulate('change', {target: {value: 'both'}});
+    wrapper
+      .find('RadioGroup')
+      .simulate('change', { target: { value: 'both' } });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
     expect(props.updateSetting).toHaveBeenCalledWith('showAppIcon', 'both');

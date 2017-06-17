@@ -2,14 +2,20 @@ import { List, Map } from 'immutable';
 
 import * as actions from '../../actions';
 import * as comms from '../../utils/comms';
-import { mockedGithubNotifications, mockedNotificationsRecuderData } from '../../__mocks__/mockedData';
+import {
+  mockedGithubNotifications,
+  mockedNotificationsRecuderData,
+} from '../../__mocks__/mockedData';
 import notificationsMiddleware from '../../middleware/notifications';
 import NativeNotifications from '../../utils/notifications';
 
 // Keep 3 notifications
 // Ps. To receive 4 on actions.NOTIFICATIONS.SUCCESS,
-const mockedNotifications = mockedNotificationsRecuderData
-  .deleteIn([0, 'notifications', 0]);
+const mockedNotifications = mockedNotificationsRecuderData.deleteIn([
+  0,
+  'notifications',
+  0,
+]);
 
 const createFakeStore = () => ({
   getState() {
@@ -19,15 +25,17 @@ const createFakeStore = () => ({
       }),
       settings: Map({
         playSound: false,
-        showNotifications: false
-      })
+        showNotifications: false,
+      }),
     };
-  }
+  },
 });
 
 const dispatchWithStoreOf = (storeData, action) => {
   let dispatched = null;
-  const dispatch = notificationsMiddleware(createFakeStore(storeData))(actionAttempt => dispatched = actionAttempt);
+  const dispatch = notificationsMiddleware(createFakeStore(storeData))(
+    actionAttempt => (dispatched = actionAttempt)
+  );
   dispatch(action);
   return dispatched;
 };
@@ -42,7 +50,7 @@ describe('middleware/notifications.js', () => {
   it('should raise notifications (native & sound, update tray icon, set badge)', () => {
     const action = {
       type: actions.NOTIFICATIONS.SUCCESS,
-      payload: mockedNotificationsRecuderData
+      payload: mockedNotificationsRecuderData,
     };
 
     expect(dispatchWithStoreOf({}, action)).toEqual(action);
@@ -53,7 +61,9 @@ describe('middleware/notifications.js', () => {
     );
 
     expect(NativeNotifications.setup).toHaveBeenCalledTimes(1);
-    expect(NativeNotifications.setup.calls.first().args[0]).toEqual(newNotifications);
+    expect(NativeNotifications.setup.calls.first().args[0]).toEqual(
+      newNotifications
+    );
     expect(NativeNotifications.setup.calls.first().args[1]).toEqual(1);
     expect(NativeNotifications.setup.calls.first().args[2]).toEqual(
       Map({ playSound: false, showNotifications: false })
@@ -74,13 +84,13 @@ describe('middleware/notifications.js', () => {
     expect(comms.setBadge).toHaveBeenCalledWith(2);
   });
 
-  it('should mark a repo\'s notification and call the update tray icon helper', () => {
+  it("should mark a repo's notification and call the update tray icon helper", () => {
     const action = {
       type: actions.MARK_REPO_NOTIFICATION.SUCCESS,
       meta: {
         repoSlug: 'manosim/notifications-test',
         hostname: 'github.com',
-      }
+      },
     };
 
     expect(dispatchWithStoreOf({}, action)).toEqual(action);

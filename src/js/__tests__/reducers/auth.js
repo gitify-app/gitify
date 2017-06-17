@@ -10,7 +10,7 @@ describe('reducers/auth.js', () => {
 
   it('should handle LOGIN.REQUEST', () => {
     const action = {
-      type: LOGIN.REQUEST
+      type: LOGIN.REQUEST,
     };
 
     expect(reducer(undefined, action)).toMatchSnapshot();
@@ -21,7 +21,7 @@ describe('reducers/auth.js', () => {
       response: Map(),
       token: null,
       isFetching: true,
-      failed: false
+      failed: false,
     });
 
     expect(reducer(fakeState, {}).get('token')).toBeNull();
@@ -29,8 +29,8 @@ describe('reducers/auth.js', () => {
     const action = {
       type: LOGIN.SUCCESS,
       payload: {
-        access_token: '123HELLOWORLDTOKEN'
-      }
+        access_token: '123HELLOWORLDTOKEN',
+      },
     };
 
     expect(reducer(undefined, action)).toMatchSnapshot();
@@ -43,8 +43,8 @@ describe('reducers/auth.js', () => {
       isEnterprise: true,
       hostname: 'github.gitify.io',
       payload: {
-        access_token: '123HELLOWORLDTOKEN'
-      }
+        access_token: '123HELLOWORLDTOKEN',
+      },
     };
 
     expect(reducer(undefined, action)).toMatchSnapshot();
@@ -54,14 +54,14 @@ describe('reducers/auth.js', () => {
       response: Map(),
       token: null,
       isFetching: true,
-      failed: false
+      failed: false,
     });
 
     expect(reducer(fakeState, {}).get('token')).toBeNull();
 
     const action = {
       type: LOGIN.FAILURE,
-      payload: {msg: 'Failed to login.'}
+      payload: { msg: 'Failed to login.' },
     };
 
     expect(reducer(fakeState, action)).toMatchSnapshot();
@@ -73,13 +73,13 @@ describe('reducers/auth.js', () => {
       response: Map(),
       token: 'LOGGEDINTOKEN',
       isFetching: false,
-      failed: false
+      failed: false,
     });
 
     expect(reducer(fakeState, {}).get('token')).not.toBeNull();
 
     const action = {
-      type: LOGOUT
+      type: LOGOUT,
     };
 
     expect(reducer(fakeState, action)).toMatchSnapshot();

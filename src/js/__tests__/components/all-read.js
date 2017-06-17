@@ -3,8 +3,8 @@ import { mount } from 'enzyme';
 
 import AllRead from '../../components/all-read';
 
-describe('components/all-read.js', function () {
-  it('should render itself & its children', function () {
+describe('components/all-read.js', function() {
+  it('should render itself & its children', function() {
     spyOn(AllRead.prototype, 'componentDidMount').and.callThrough();
 
     const wrapper = mount(<AllRead />);

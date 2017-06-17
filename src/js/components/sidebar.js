@@ -20,7 +20,7 @@ export class Sidebar extends React.Component {
     hasStarred: PropTypes.bool.isRequired,
     isEitherLoggedIn: PropTypes.bool.isRequired,
     isGitHubLoggedIn: PropTypes.bool.isRequired,
-  }
+  };
 
   componentDidMount() {
     const self = this;
@@ -59,9 +59,16 @@ export class Sidebar extends React.Component {
       .get('notifications', List()).size;
 
     return (
-      <div className={`badge-account ${enterpriseAccounts.isEmpty() && 'last'}`} title={defaultHostname}>
+      <div
+        className={`badge-account ${enterpriseAccounts.isEmpty() && 'last'}`}
+        title={defaultHostname}
+      >
         <div className="mr-auto name">GitHub</div>
-        <div>{notificationsCount === 0 ? <span className="octicon octicon-check" /> : notificationsCount}</div>
+        <div>
+          {notificationsCount === 0
+            ? <span className="octicon octicon-check" />
+            : notificationsCount}
+        </div>
       </div>
     );
   }
@@ -73,37 +80,56 @@ export class Sidebar extends React.Component {
       const splittedHostname = account.get('hostname').split('.');
       const accountDomain = splittedHostname[splittedHostname.length - 2];
       const notificationsCount = this.props.notifications
-        .find(obj => obj.get('hostname') === account.get('hostname'), null, Map())
+        .find(
+          obj => obj.get('hostname') === account.get('hostname'),
+          null,
+          Map()
+        )
         .get('notifications', List()).size;
 
       return (
         <div
           key={idx}
           title={account.get('hostname')}
-          className={`badge-account${(enterpriseAccounts.size === idx + 1) ? ' last' : ''}`}
+          className={`badge-account${enterpriseAccounts.size === idx + 1
+            ? ' last'
+            : ''}`}
         >
           <div className="mr-auto name">{accountDomain}</div>
-          <div>{notificationsCount === 0 ? <span className="octicon octicon-check" /> : notificationsCount}</div>
+          <div>
+            {notificationsCount === 0
+              ? <span className="octicon octicon-check" />
+              : notificationsCount}
+          </div>
         </div>
       );
     });
   }
 
   render() {
-    const { hasStarred, isEitherLoggedIn, isGitHubLoggedIn, notifications } = this.props;
-    const notificationsCount = notifications.reduce((memo, acc) => memo + acc.get('notifications').size, 0);
+    const {
+      hasStarred,
+      isEitherLoggedIn,
+      isGitHubLoggedIn,
+      notifications,
+    } = this.props;
+    const notificationsCount = notifications.reduce(
+      (memo, acc) => memo + acc.get('notifications').size,
+      0
+    );
 
     return (
       <div className="sidebar-wrapper">
         <LogoWhite onClick={this.onOpenBrowser} />
 
-        {isEitherLoggedIn && (
+        {isEitherLoggedIn &&
           <div className="badge badge-count text-success my-1">
-            {notifications.isEmpty() ? 'All Read' : `${notificationsCount} Unread`}
-          </div>
-        )}
+            {notifications.isEmpty()
+              ? 'All Read'
+              : `${notificationsCount} Unread`}
+          </div>}
 
-        {isEitherLoggedIn && (
+        {isEitherLoggedIn &&
           <ul className="nav nav-inline mb-2">
             <li className="nav-item text-white">
               <i
@@ -120,10 +146,11 @@ export class Sidebar extends React.Component {
                 onClick={() => this.props.toggleSettingsModal()}
               />
             </li>
-          </ul>
-        )}
+          </ul>}
 
-        {isGitHubLoggedIn && !this.props.enterpriseAccounts.isEmpty() && this._renderGitHubAccount()}
+        {isGitHubLoggedIn &&
+          !this.props.enterpriseAccounts.isEmpty() &&
+          this._renderGitHubAccount()}
         {this._renderEnterpriseAccounts()}
 
         <div className="footer">
@@ -131,14 +158,17 @@ export class Sidebar extends React.Component {
             <Link
               to="/enterpriselogin"
               className="btn btn-block btn-sm btn-outline-secondary btn-add"
-            >Add <br />Enterprise</Link>
-          }
+            >
+              Add <br />Enterprise
+            </Link>}
 
-          {!hasStarred && (
-            <button className="btn btn-block btn-sm btn-outline-secondary btn-star" onClick={this.onOpenBrowser}>
+          {!hasStarred &&
+            <button
+              className="btn btn-block btn-sm btn-outline-secondary btn-star"
+              onClick={this.onOpenBrowser}
+            >
               <i className="fa fa-github" /> Star
-            </button>
-          )}
+            </button>}
         </div>
       </div>
     );
@@ -148,7 +178,10 @@ export class Sidebar extends React.Component {
 export function mapStateToProps(state) {
   const enterpriseAccounts = state.auth.get('enterpriseAccounts');
   const isGitHubLoggedIn = state.auth.get('token') !== null;
-  const connectedAccounts = enterpriseAccounts.reduce((memo) => memo + 1, isGitHubLoggedIn ? 1 : 0);
+  const connectedAccounts = enterpriseAccounts.reduce(
+    memo => memo + 1,
+    isGitHubLoggedIn ? 1 : 0
+  );
 
   return {
     isGitHubLoggedIn,
@@ -160,4 +193,8 @@ export function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchNotifications, logout, toggleSettingsModal })(Sidebar);
+export default connect(mapStateToProps, {
+  fetchNotifications,
+  logout,
+  toggleSettingsModal,
+})(Sidebar);

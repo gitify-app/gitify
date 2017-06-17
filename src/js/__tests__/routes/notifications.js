@@ -3,7 +3,10 @@ import { List, Map } from 'immutable';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 
-import { NotificationsRoute, mapStateToProps } from '../../routes/notifications';
+import {
+  NotificationsRoute,
+  mapStateToProps,
+} from '../../routes/notifications';
 import { mockedNotificationsRecuderData } from '../../__mocks__/mockedData';
 
 jest.mock('../../components/notifications');
@@ -26,14 +29,14 @@ describe('routes/notification.js', () => {
     const mappedProps = mapStateToProps(state);
 
     expect(mappedProps.failed).toBeFalsy();
-    expect(mappedProps.accountNotifications).toEqual(mockedNotificationsRecuderData);
+    expect(mappedProps.accountNotifications).toEqual(
+      mockedNotificationsRecuderData
+    );
     expect(mappedProps.hasNotifications).toBeTruthy();
   });
 
   it('should render itself & its children (with notifications)', () => {
-    const tree = renderer.create(
-      <NotificationsRoute {...props} />
-    );
+    const tree = renderer.create(<NotificationsRoute {...props} />);
 
     expect(tree).toMatchSnapshot();
   });
@@ -45,9 +48,7 @@ describe('routes/notification.js', () => {
       accountNotifications: List(),
     };
 
-    const wrapper = shallow(
-      <NotificationsRoute {...caseProps} />
-    );
+    const wrapper = shallow(<NotificationsRoute {...caseProps} />);
 
     expect(wrapper).toBeDefined();
     expect(wrapper.find('AllRead')).toHaveLength(1);
@@ -59,9 +60,7 @@ describe('routes/notification.js', () => {
       failed: true,
     };
 
-    const wrapper = shallow(
-      <NotificationsRoute {...caseProps} />
-    );
+    const wrapper = shallow(<NotificationsRoute {...caseProps} />);
 
     expect(wrapper).toBeDefined();
     expect(wrapper.find('Oops')).toHaveLength(1);

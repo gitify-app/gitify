@@ -7,9 +7,9 @@ const appMenuTemplate = require('./electron/app-menu-template');
 const iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 const iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
-const isDarwin = (process.platform === 'darwin');
-const isLinux = (process.platform === 'linux');
-const isWindows = (process.platform === 'win32');
+const isDarwin = process.platform === 'darwin';
+const isLinux = process.platform === 'linux';
+const isWindows = process.platform === 'win32';
 
 let appWindow;
 let appIcon = null;
@@ -18,7 +18,7 @@ let isQuitting = false;
 const autoStart = new AutoLaunch({
   name: 'Gitify',
   path: process.execPath.match(/.*?\.app/)[0],
-  isHidden: true
+  isHidden: true,
 });
 
 app.on('ready', function() {
@@ -28,16 +28,18 @@ app.on('ready', function() {
     const trayMenu = Menu.buildFromTemplate([
       {
         label: 'Show Gitify',
-        click () { appWindow.show(); }
+        click() {
+          appWindow.show();
+        },
       },
       {
-        type: 'separator'
+        type: 'separator',
       },
       {
         label: 'Quit',
         accelerator: isDarwin ? 'Command+Q' : 'Alt+F4',
-        role: 'quit'
-      }
+        role: 'quit',
+      },
     ]);
 
     trayIcon.setToolTip('GitHub Notifications on your menu bar.');
@@ -46,28 +48,33 @@ app.on('ready', function() {
   }
 
   function confirmAutoUpdate(updater) {
-    dialog.showMessageBox({
-      type: 'question',
-      buttons: ['Update & Restart', 'Cancel'],
-      title: 'Update Available',
-      cancelId: 99,
-      message: 'There is an update available. Would you like to update Gitify now?'
-    }, (response) => {
-      console.log('Exit: ' + response); // eslint-disable-line no-console
+    dialog.showMessageBox(
+      {
+        type: 'question',
+        buttons: ['Update & Restart', 'Cancel'],
+        title: 'Update Available',
+        cancelId: 99,
+        message:
+          'There is an update available. Would you like to update Gitify now?',
+      },
+      response => {
+        console.log('Exit: ' + response); // eslint-disable-line no-console
 
-      if (response === 0) {
-        updater.install();
+        if (response === 0) {
+          updater.install();
+        }
       }
-    } );
+    );
   }
 
   function checkAutoUpdate(showAlert) {
-
-    if (isWindows || isLinux) { return; }
+    if (isWindows || isLinux) {
+      return;
+    }
 
     let autoUpdateOptions = {
       repo: 'manosim/gitify',
-      currentVersion: app.getVersion()
+      currentVersion: app.getVersion(),
     };
 
     const updater = new GhReleases(autoUpdateOptions);
@@ -92,7 +99,7 @@ app.on('ready', function() {
             type: 'info',
             buttons: ['Close'],
             title: 'No update available',
-            message: 'You are currently running the latest version of Gitify.'
+            message: 'You are currently running the latest version of Gitify.',
           });
         }
       }
@@ -103,7 +110,7 @@ app.on('ready', function() {
     });
   }
 
-  function initWindow () {
+  function initWindow() {
     let defaults = {
       width: 500,
       height: 600,
@@ -114,15 +121,15 @@ app.on('ready', function() {
       fullscreenable: false,
       titleBarStyle: 'hidden-inset',
       webPreferences: {
-        overlayScrollbars: true
-      }
+        overlayScrollbars: true,
+      },
     };
 
     appWindow = new BrowserWindow(defaults);
     appWindow.loadURL('file://' + __dirname + '/index.html');
     appWindow.show();
 
-    appWindow.on('close', function (event) {
+    appWindow.on('close', function(event) {
       if (!isQuitting) {
         event.preventDefault();
         appWindow.hide();
@@ -137,12 +144,12 @@ app.on('ready', function() {
   appIcon = createAppIcon();
   initWindow();
 
-  ipcMain.on('reopen-window', () => appWindow.show() );
-  ipcMain.on('startup-enable', () => autoStart.enable() );
-  ipcMain.on('startup-disable', () => autoStart.disable() );
-  ipcMain.on('check-update', () => checkAutoUpdate(true) );
+  ipcMain.on('reopen-window', () => appWindow.show());
+  ipcMain.on('startup-enable', () => autoStart.enable());
+  ipcMain.on('startup-disable', () => autoStart.disable());
+  ipcMain.on('check-update', () => checkAutoUpdate(true));
   ipcMain.on('set-badge', (event, count) => app.setBadgeCount(count));
-  ipcMain.on('app-quit', () => app.quit() );
+  ipcMain.on('app-quit', () => app.quit());
 
   ipcMain.on('update-icon', (event, arg) => {
     if (!appIcon.isDestroyed()) {
@@ -180,7 +187,7 @@ app.on('ready', function() {
   });
 });
 
-app.on('activate', () => appWindow.show() );
+app.on('activate', () => appWindow.show());
 
 app.on('window-all-closed', () => {
   if (!isDarwin) {

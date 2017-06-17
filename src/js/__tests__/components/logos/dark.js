@@ -6,9 +6,7 @@ import LogoDark from '../../../components/logos/dark';
 
 describe('components/logos/dark.js', () => {
   it('renders correctly', () => {
-    const tree = renderer.create(
-      <LogoDark />
-    );
+    const tree = renderer.create(<LogoDark />);
 
     expect(tree).toMatchSnapshot();
   });

@@ -12,17 +12,23 @@ export const validate = values => {
   const errors = {};
   if (!values.hostname) {
     errors.hostname = 'Required';
-  } else if (!/^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(values.hostname)) {
+  } else if (
+    !/^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
+      values.hostname
+    )
+  ) {
     errors.hostname = 'Invalid hostname.';
   }
 
-  if (!values.clientId) { // 20
+  if (!values.clientId) {
+    // 20
     errors.clientId = 'Required';
   } else if (!/^[A-Z0-9]{20}$/i.test(values.clientId)) {
     errors.clientId = 'Invalid client id.';
   }
 
-  if (!values.clientSecret) { // 40
+  if (!values.clientSecret) {
+    // 40
     errors.clientSecret = 'Required';
   } else if (!/^[A-Z0-9]{40}$/i.test(values.clientSecret)) {
     errors.clientSecret = 'Invalid client secret.';
@@ -31,7 +37,9 @@ export const validate = values => {
   return errors;
 };
 
-const renderField = ({ input, label, placeholder, meta: { touched, error } }) => ( // eslint-disable-line react/prop-types
+const renderField = (
+  { input, label, placeholder, meta: { touched, error } } // eslint-disable-line react/prop-types
+) =>
   <div className={touched && error ? 'form-group has-danger' : 'form-group'}>
     <label htmlFor={input.name}>{label}</label>
     <div>
@@ -44,18 +52,19 @@ const renderField = ({ input, label, placeholder, meta: { touched, error } }) =>
 
       {touched && error && <div className="form-control-feedback">{error}</div>}
     </div>
-  </div>
-);
+  </div>;
 
 export class EnterpriseLogin extends React.Component {
   static propTypes = {
     history: PropTypes.object.isRequired,
     enterpriseAccounts: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-  }
+  };
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.enterpriseAccounts.size > this.props.enterpriseAccounts.size) {
+    if (
+      nextProps.enterpriseAccounts.size > this.props.enterpriseAccounts.size
+    ) {
       ipcRenderer.send('reopen-window');
       this.props.history.goBack();
     }
@@ -113,13 +122,15 @@ export function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(reduxForm({
-  form: 'loginEnterprise',
-  // Use for development
-  // initialValues: {
-  //   hostname: 'github.example.com',
-  //   clientId: '1231231231',
-  //   clientSecret: 'ABC123ABCDABC123ABCDABC123ABCDABC123ABCD',
-  // },
-  validate,
-})(EnterpriseLogin));
+export default connect(mapStateToProps, null)(
+  reduxForm({
+    form: 'loginEnterprise',
+    // Use for development
+    // initialValues: {
+    //   hostname: 'github.example.com',
+    //   clientId: '1231231231',
+    //   clientSecret: 'ABC123ABCDABC123ABCDABC123ABCDABC123ABCD',
+    // },
+    validate,
+  })(EnterpriseLogin)
+);

@@ -13,7 +13,11 @@ const { ipcRenderer, remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 const dialog = remote.dialog;
 
-import { EnterpriseLogin, mapStateToProps, validate } from '../../routes/enterprise-login';
+import {
+  EnterpriseLogin,
+  mapStateToProps,
+  validate,
+} from '../../routes/enterprise-login';
 
 describe('routes/enterprise-login.js', () => {
   const mockedEnterpriseAccountFormData = {
@@ -25,10 +29,10 @@ describe('routes/enterprise-login.js', () => {
   const props = {
     enterpriseAccounts: List(),
     dispatch: jest.fn(),
-    handleSubmit: (cb) => cb,
+    handleSubmit: cb => cb,
     history: {
-      goBack: jest.fn()
-    }
+      goBack: jest.fn(),
+    },
   };
 
   beforeEach(function() {
@@ -53,7 +57,7 @@ describe('routes/enterprise-login.js', () => {
     const Decorated = reduxForm({ form: 'loginEnterprise' })(EnterpriseLogin);
 
     const tree = renderer.create(
-      <Provider store={createStore( () => {} )} >
+      <Provider store={createStore(() => {})}>
         <MemoryRouter>
           <Decorated {...props} />
         </MemoryRouter>
@@ -72,7 +76,7 @@ describe('routes/enterprise-login.js', () => {
     };
 
     values = {
-      ...emptyValues
+      ...emptyValues,
     };
     expect(validate(values).hostname).toBe('Required');
     expect(validate(values).clientId).toBe('Required');
@@ -124,7 +128,9 @@ describe('routes/enterprise-login.js', () => {
 
     expect(wrapper).toBeDefined();
 
-    wrapper.find('form').simulate('submit', mockedEnterpriseAccountFormData, props.dispatch);
+    wrapper
+      .find('form')
+      .simulate('submit', mockedEnterpriseAccountFormData, props.dispatch);
 
     expect(BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
     expect(BrowserWindow().loadURL).toHaveBeenCalledWith(expectedUrl);
@@ -153,10 +159,14 @@ describe('routes/enterprise-login.js', () => {
 
     expect(wrapper).toBeDefined();
 
-    wrapper.find('form').simulate('submit', {
-      ...mockedEnterpriseAccountFormData,
-      hostname: 'github.invalid.com',
-    }, props.dispatch);
+    wrapper.find('form').simulate(
+      'submit',
+      {
+        ...mockedEnterpriseAccountFormData,
+        hostname: 'github.invalid.com',
+      },
+      props.dispatch
+    );
 
     expect(BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
     expect(props.dispatch).not.toHaveBeenCalled();

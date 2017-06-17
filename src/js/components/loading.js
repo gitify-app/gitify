@@ -6,11 +6,11 @@ import NProgress from 'nprogress';
 export class Loading extends React.PureComponent {
   static propTypes = {
     isLoading: PropTypes.bool.isRequired,
-  }
+  };
 
   componentDidMount() {
     NProgress.configure({
-      showSpinner: false
+      showSpinner: false,
     });
 
     if (this.props.isLoading) {
@@ -35,10 +35,9 @@ export class Loading extends React.PureComponent {
   }
 }
 
-
 export function mapStateToProps(state) {
   return {
-    isLoading: state.notifications.get('isFetching')
+    isLoading: state.notifications.get('isFetching'),
   };
 }
 

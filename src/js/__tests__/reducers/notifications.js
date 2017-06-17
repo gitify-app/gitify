@@ -2,8 +2,16 @@ import { Map } from 'immutable';
 
 import Constants from '../../utils/constants';
 import reducer from '../../reducers/notifications';
-import { LOGOUT, NOTIFICATIONS, MARK_NOTIFICATION, MARK_REPO_NOTIFICATION } from '../../actions';
-import { mockedGithubNotifications, mockedEnterpriseNotifications } from '../../__mocks__/mockedData';
+import {
+  LOGOUT,
+  NOTIFICATIONS,
+  MARK_NOTIFICATION,
+  MARK_REPO_NOTIFICATION,
+} from '../../actions';
+import {
+  mockedGithubNotifications,
+  mockedEnterpriseNotifications,
+} from '../../__mocks__/mockedData';
 
 describe('reducers/notifications.js', () => {
   it('should return the initial state', () => {
@@ -12,7 +20,7 @@ describe('reducers/notifications.js', () => {
 
   it('should handle NOTIFICATIONS.REQUEST', () => {
     const action = {
-      type: NOTIFICATIONS.REQUEST
+      type: NOTIFICATIONS.REQUEST,
     };
 
     expect(reducer(undefined, action)).toMatchSnapshot();
@@ -24,7 +32,7 @@ describe('reducers/notifications.js', () => {
     const action = {
       type: NOTIFICATIONS.SUCCESS,
       payload: mockedGithubNotifications,
-      hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname
+      hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
     };
 
     expect(reducer(undefined, action)).toMatchSnapshot();
@@ -44,14 +52,16 @@ describe('reducers/notifications.js', () => {
 
     const action = {
       type: MARK_NOTIFICATION.SUCCESS,
-      meta: { id, hostname }
+      meta: { id, hostname },
     };
 
-    const currentState = reducer(undefined, {})
-      .setIn(['response', 0], Map({
+    const currentState = reducer(undefined, {}).setIn(
+      ['response', 0],
+      Map({
         hostname,
-        notifications: mockedGithubNotifications
-      }));
+        notifications: mockedGithubNotifications,
+      })
+    );
 
     expect(reducer(currentState, action)).toMatchSnapshot();
   });
@@ -62,14 +72,16 @@ describe('reducers/notifications.js', () => {
 
     const action = {
       type: MARK_NOTIFICATION.SUCCESS,
-      meta: { id, hostname }
+      meta: { id, hostname },
     };
 
-    const currentState = reducer(undefined, {})
-      .setIn(['response', 0], Map({
+    const currentState = reducer(undefined, {}).setIn(
+      ['response', 0],
+      Map({
         hostname,
-        notifications: mockedEnterpriseNotifications
-      }));
+        notifications: mockedEnterpriseNotifications,
+      })
+    );
 
     expect(reducer(currentState, action)).toMatchSnapshot();
   });
@@ -78,15 +90,17 @@ describe('reducers/notifications.js', () => {
     const repoSlug = 'manosim/notifications-test';
     const hostname = 'github.gitify.io';
 
-    const currentState = reducer(undefined, {})
-      .setIn(['response', 0], Map({
+    const currentState = reducer(undefined, {}).setIn(
+      ['response', 0],
+      Map({
         hostname,
-        notifications: mockedGithubNotifications
-      }));
+        notifications: mockedGithubNotifications,
+      })
+    );
 
     const action = {
       type: MARK_REPO_NOTIFICATION.SUCCESS,
-      meta: { hostname, repoSlug }
+      meta: { hostname, repoSlug },
     };
 
     expect(reducer(currentState, action)).toMatchSnapshot();
@@ -96,26 +110,30 @@ describe('reducers/notifications.js', () => {
     const repoSlug = 'myorg/notifications-test';
     const hostname = 'github.gitify.io';
 
-    const currentState = reducer(undefined, {})
-      .setIn(['response', 0], Map({
+    const currentState = reducer(undefined, {}).setIn(
+      ['response', 0],
+      Map({
         hostname,
-        notifications: mockedEnterpriseNotifications
-      }));
+        notifications: mockedEnterpriseNotifications,
+      })
+    );
 
     const action = {
       type: MARK_REPO_NOTIFICATION.SUCCESS,
-      meta: { hostname, repoSlug }
+      meta: { hostname, repoSlug },
     };
 
     expect(reducer(currentState, action)).toMatchSnapshot();
   });
 
   it('should handle LOGOUT', () => {
-    const currentState = reducer(undefined, {})
-      .setIn(['response', 0], Map({
+    const currentState = reducer(undefined, {}).setIn(
+      ['response', 0],
+      Map({
         hostname: 'github.gitify.io',
-        notifications: mockedEnterpriseNotifications
-      }));
+        notifications: mockedEnterpriseNotifications,
+      })
+    );
 
     const action = {
       type: LOGOUT,
