@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/enterprise-login.js renders correctly 1`] = `
+exports[`routes/enterprise-login.js renders correctly 1`] = `
 <div
   className="container-fluid main-container login"
 >

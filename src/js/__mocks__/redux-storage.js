@@ -1,12 +1,12 @@
 import { Map } from 'immutable';
 
-export function createMiddleware(engine, actionBlacklist = [], actionWhitelist = []) {
-  return ({ dispatch, getState }) => {
+export function createMiddleware() {
+  return () => {
     return (next) => (action) => {
       return next(action);
     };
   };
-};
+}
 
 export function createLoader() {
   const state = {
@@ -20,4 +20,4 @@ export function createLoader() {
 
 export function reducer (clb) {
   return (state, action) => clb(state, action);
-};
+}

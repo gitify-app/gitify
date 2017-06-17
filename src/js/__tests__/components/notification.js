@@ -13,7 +13,7 @@ function setup(props) {
     props: props,
     wrapper: wrapper,
   };
-};
+}
 
 describe('components/notification.js', () => {
   const notification = Map({
@@ -45,7 +45,8 @@ describe('components/notification.js', () => {
     const props = {
       markNotification: jest.fn(),
       markOnClick: false,
-      notification: notification
+      notification: notification,
+      hostname: 'github.com',
     };
 
     const { wrapper } = setup(props);
@@ -85,7 +86,8 @@ describe('components/notification.js', () => {
     const props = {
       markNotification: jest.fn(),
       markOnClick: false,
-      notification: notification
+      notification: notification,
+      hostname: 'github.com',
     };
 
     const { wrapper } = setup(props);
@@ -99,7 +101,8 @@ describe('components/notification.js', () => {
     const props = {
       markNotification: jest.fn(),
       markOnClick: false,
-      notification: notification
+      notification: notification,
+      hostname: 'github.com',
     };
 
     const { wrapper } = setup(props);
@@ -113,7 +116,8 @@ describe('components/notification.js', () => {
     const props = {
       markNotification: jest.fn(),
       markOnClick: true,
-      notification: notification
+      notification: notification,
+      hostname: 'github.com',
     };
 
     const { wrapper } = setup(props);

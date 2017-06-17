@@ -42,24 +42,27 @@ export class RepositoryNotifications extends React.Component {
           <span
             title="Mark Repository as Read"
             className="octicon octicon-check"
-            onClick={() => this.markRepoAsRead()} />
+            onClick={() => this.markRepoAsRead()}
+          />
         </div>
 
         <ReactCSSTransitionGroup
           transitionName="notification"
           transitionEnter={false}
-          transitionLeaveTimeout={325}>
+          transitionLeaveTimeout={325}
+        >
           {repo.map(obj => (
             <SingleNotification
               key={obj.get('id')}
               hostname={hostname}
-              notification={obj} />
+              notification={obj}
+            />
           ))}
         </ReactCSSTransitionGroup>
 
       </div>
     );
   }
-};
+}
 
 export default connect(null, { markRepoNotifications })(RepositoryNotifications);

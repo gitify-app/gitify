@@ -1,6 +1,7 @@
 const ipcRenderer = require('electron').ipcRenderer;
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
@@ -30,7 +31,7 @@ export const validate = values => {
   return errors;
 };
 
-const renderField = ({ input, label, placeholder, meta: { touched, error, warning } }) => (
+const renderField = ({ input, label, placeholder, meta: { touched, error } }) => ( // eslint-disable-line react/prop-types
   <div className={touched && error ? 'form-group has-danger' : 'form-group'}>
     <label htmlFor={input.name}>{label}</label>
     <div>
@@ -38,7 +39,8 @@ const renderField = ({ input, label, placeholder, meta: { touched, error, warnin
         {...input}
         className="form-control"
         placeholder={placeholder}
-        type="text" />
+        type="text"
+      />
 
       {touched && error && <div className="form-control-feedback">{error}</div>}
     </div>
@@ -46,6 +48,12 @@ const renderField = ({ input, label, placeholder, meta: { touched, error, warnin
 );
 
 export class EnterpriseLogin extends React.Component {
+  static propTypes = {
+    history: PropTypes.object.isRequired,
+    enterpriseAccounts: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+  }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.enterpriseAccounts.size > this.props.enterpriseAccounts.size) {
       ipcRenderer.send('reopen-window');
@@ -73,19 +81,22 @@ export class EnterpriseLogin extends React.Component {
             name="hostname"
             component={renderField}
             label="Host Name"
-            placeholder="github.company.com" />
+            placeholder="github.company.com"
+          />
 
           <Field
             name="clientId"
             component={renderField}
             label="Client ID"
-            placeholder="123456789" />
+            placeholder="123456789"
+          />
 
           <Field
             name="clientSecret"
             component={renderField}
             label="Client Secret"
-            placeholder="ABC123DEF456" />
+            placeholder="ABC123DEF456"
+          />
 
           <button className="btn btn-md btn-login mt-2" type="submit">
             <i className="fa fa-github" /> Login to GitHub Enterprise
@@ -100,7 +111,7 @@ export function mapStateToProps(state) {
   return {
     enterpriseAccounts: state.auth.get('enterpriseAccounts'),
   };
-};
+}
 
 export default connect(mapStateToProps, null)(reduxForm({
   form: 'loginEnterprise',

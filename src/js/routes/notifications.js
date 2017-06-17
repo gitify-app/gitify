@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
 
@@ -7,6 +8,12 @@ import Oops from '../components/oops';
 import AccountNotifications from '../components/notifications';
 
 export class NotificationsRoute extends React.Component {
+  static propTypes = {
+    hasNotifications: PropTypes.bool.isRequired,
+    accountNotifications: PropTypes.object.isRequired,
+    failed: PropTypes.bool.isRequired,
+  }
+
   render() {
     const { accountNotifications, hasNotifications } = this.props;
     const wrapperClass = 'container-fluid main-container notifications';
@@ -17,25 +24,27 @@ export class NotificationsRoute extends React.Component {
 
     if (!hasNotifications) {
       return <AllRead />;
-    };
+    }
 
     return (
       <div className={wrapperClass + (!hasNotifications ? ' all-read' : '')}>
         <ReactCSSTransitionGroup
           transitionName="repository"
           transitionEnter={false}
-          transitionLeaveTimeout={325}>
+          transitionLeaveTimeout={325}
+        >
           {accountNotifications.map((obj, key) => (
             <AccountNotifications
               key={key}
               hostname={obj.get('hostname')}
-              notifications={obj.get('notifications')} />
+              notifications={obj.get('notifications')}
+            />
           ))}
         </ReactCSSTransitionGroup>
       </div>
     );
   }
-};
+}
 
 export function mapStateToProps(state) {
   const hasNotifications = state.notifications.get('response')
@@ -46,6 +55,6 @@ export function mapStateToProps(state) {
     accountNotifications: state.notifications.get('response'),
     hasNotifications
   };
-};
+}
 
 export default connect(mapStateToProps, null)(NotificationsRoute);

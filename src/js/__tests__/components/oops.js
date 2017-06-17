@@ -10,7 +10,7 @@ function setup() {
     props: props,
     wrapper: wrapper,
   };
-};
+}
 
 describe('components/oops.js', function () {
 

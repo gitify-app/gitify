@@ -36,7 +36,7 @@ export function generateGitHubWebUrl(url) {
   }
 
   return newUrl;
-};
+}
 
 export function authGithub(authOptions = Constants.DEFAULT_AUTH_OPTIONS, dispatch) {
   // Build the OAuth consent page URL

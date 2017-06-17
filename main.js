@@ -52,8 +52,9 @@ app.on('ready', function() {
       title: 'Update Available',
       cancelId: 99,
       message: 'There is an update available. Would you like to update Gitify now?'
-    }, function (response) {
-      console.log('Exit: ' + response);
+    }, (response) => {
+      console.log('Exit: ' + response); // eslint-disable-line no-console
+
       if (response === 0) {
         updater.install();
       }
@@ -72,11 +73,13 @@ app.on('ready', function() {
     const updater = new GhReleases(autoUpdateOptions);
 
     updater.on('error', (event, message) => {
+      /* eslint-disable no-console */
       console.log('ERRORED.');
       console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
+      /* eslint-enable no-console */
     });
 
-    updater.on('update-downloaded', (info) => {
+    updater.on('update-downloaded', () => {
       // Restart the app(ask) and install the update
       confirmAutoUpdate(updater);
     });
@@ -101,7 +104,7 @@ app.on('ready', function() {
   }
 
   function initWindow () {
-    var defaults = {
+    let defaults = {
       width: 500,
       height: 600,
       minHeight: 300,
@@ -185,6 +188,6 @@ app.on('window-all-closed', () => {
   }
 });
 
-app.on('before-quit', (event) => {
+app.on('before-quit', () => {
   isQuitting = true;
 });

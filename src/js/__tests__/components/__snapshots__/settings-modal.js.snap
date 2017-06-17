@@ -107,7 +107,6 @@ exports[`components/settings-modal.js should render itself & its children (open 
           </strong>
           <input
             checked={undefined}
-            onChange={[Function]}
             type="radio"
             value="both"
           />
@@ -118,7 +117,6 @@ exports[`components/settings-modal.js should render itself & its children (open 
           </strong>
           <input
             checked={undefined}
-            onChange={[Function]}
             type="radio"
             value="tray"
           />
@@ -129,7 +127,6 @@ exports[`components/settings-modal.js should render itself & its children (open 
           </strong>
           <input
             checked={undefined}
-            onChange={[Function]}
             type="radio"
             value="dock"
           />

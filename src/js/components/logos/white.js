@@ -36,5 +36,5 @@ export default class LogoWhite extends React.PureComponent {
       </svg>
     );
     /* eslint-enable */
-  };
-};
+  }
+}

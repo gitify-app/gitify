@@ -1,6 +1,7 @@
 const { shell } = require('electron');
 
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
 
@@ -9,6 +10,13 @@ import { generateGitHubWebUrl } from '../utils/helpers';
 
 
 export class SingleNotification extends React.Component {
+  static propTypes = {
+    hostname: PropTypes.string.isRequired,
+    notification: PropTypes.object.isRequired,
+    markOnClick: PropTypes.bool,
+    markNotification: PropTypes.func.isRequired,
+  }
+
   pressTitle() {
     this.openBrowser();
 
@@ -68,13 +76,13 @@ export class SingleNotification extends React.Component {
       </div>
     );
   }
-};
+}
 
 export function mapStateToProps(state) {
   return {
     markOnClick: state.settings.get('markOnClick'),
     isEnterprise: state.settings.get('isEnterprise')
   };
-};
+}
 
 export default connect(mapStateToProps, { markNotification })(SingleNotification);

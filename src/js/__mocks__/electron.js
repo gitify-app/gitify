@@ -1,4 +1,4 @@
-window.Notification = function (title, options) {
+window.Notification = function (title) {
   this.title = title;
 
   return {

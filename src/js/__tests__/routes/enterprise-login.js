@@ -15,7 +15,7 @@ const dialog = remote.dialog;
 
 import { EnterpriseLogin, mapStateToProps, validate } from '../../routes/enterprise-login';
 
-describe('components/enterprise-login.js', () => {
+describe('routes/enterprise-login.js', () => {
   const mockedEnterpriseAccountFormData = {
     hostname: 'github.gitify.io',
     clientId: '1234567890',
@@ -55,7 +55,7 @@ describe('components/enterprise-login.js', () => {
     const tree = renderer.create(
       <Provider store={createStore( () => {} )} >
         <MemoryRouter>
-          <Decorated />
+          <Decorated {...props} />
         </MemoryRouter>
       </Provider>
     );

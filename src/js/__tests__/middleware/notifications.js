@@ -11,7 +11,7 @@ import NativeNotifications from '../../utils/notifications';
 const mockedNotifications = mockedNotificationsRecuderData
   .deleteIn([0, 'notifications', 0]);
 
-const createFakeStore = (fakeData) => ({
+const createFakeStore = () => ({
   getState() {
     return {
       notifications: Map({

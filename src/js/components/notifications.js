@@ -21,7 +21,8 @@ export default class AccountNotifications extends React.Component {
       <ReactCSSTransitionGroup
         transitionName="repository"
         transitionEnter={false}
-        transitionLeaveTimeout={325}>
+        transitionLeaveTimeout={325}
+      >
         <div className="account p-2">
           {hostname}
           <span className={`octicon octicon-chevron-${notifications.isEmpty() ? 'left' : 'down'} ml-2`} />
@@ -34,10 +35,11 @@ export default class AccountNotifications extends React.Component {
               hostname={hostname}
               repo={obj}
               repoName={repoSlug}
-              key={repoSlug} />
+              key={repoSlug}
+            />
           );
         })}
       </ReactCSSTransitionGroup>
     );
   }
-};
+}

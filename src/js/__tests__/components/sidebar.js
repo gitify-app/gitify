@@ -1,8 +1,7 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { MemoryRouter } from 'react-router-dom';
-import { fromJS, Map } from 'immutable';
+import { fromJS, List, Map } from 'immutable';
 import { shallow, mount } from 'enzyme';
-import { List } from 'immutable';
 
 const { shell, ipcRenderer } = require('electron');
 

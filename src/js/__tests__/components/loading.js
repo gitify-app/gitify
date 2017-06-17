@@ -6,10 +6,6 @@ import NProgress from 'nprogress';
 import { Loading, mapStateToProps } from '../../components/loading';
 
 describe('components/loading.js', function () {
-  const props = {
-
-  };
-
   beforeEach(() => {
     NProgress.start = jest.fn();
     NProgress.done = jest.fn();
@@ -35,7 +31,9 @@ describe('components/loading.js', function () {
   });
 
   it('should render itself & its children', function () {
-    const wrapper = shallow(<Loading {...props} />);
+    const isLoading = false;
+    const caseProps = { isLoading };
+    const wrapper = shallow(<Loading {...caseProps} />);
 
     expect(wrapper).toBeDefined();
     expect(wrapper.children().length).toBe(0);
@@ -56,7 +54,7 @@ describe('components/loading.js', function () {
   });
 
   it('should receive props', function () {
-    spyOn(Loading.prototype, 'componentDidMount').and.callThrough();;
+    spyOn(Loading.prototype, 'componentDidMount').and.callThrough();
 
     const isLoading = true;
     const caseProps = { isLoading };
@@ -67,24 +65,22 @@ describe('components/loading.js', function () {
     expect(NProgress.start).toHaveBeenCalledTimes(1);
 
     wrapper.setProps({
-      ...props,
       isLoading: false
     });
     expect(NProgress.done).toHaveBeenCalledTimes(1);
 
     wrapper.setProps({
-      ...props,
       isLoading: true
     });
     expect(NProgress.start).toHaveBeenCalledTimes(2);
   });
 
   it('should unmount the component', function () {
-    spyOn(Loading.prototype, 'componentWillUnmount').and.callThrough();;
+    spyOn(Loading.prototype, 'componentWillUnmount').and.callThrough();
 
     const isLoading = true;
-    const caseProps = { isLoading };
-    const wrapper = mount(<Loading {...caseProps} />);
+    const props = { isLoading };
+    const wrapper = mount(<Loading {...props} />);
 
     expect(wrapper).toBeDefined();
     expect(wrapper.children().length).toEqual(0);

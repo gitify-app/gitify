@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { List, Map } from 'immutable';
@@ -10,6 +11,17 @@ import LogoWhite from './logos/white';
 import Constants from '../utils/constants';
 
 export class Sidebar extends React.Component {
+  static propTypes = {
+    fetchNotifications: PropTypes.func.isRequired,
+    connectedAccounts: PropTypes.number.isRequired,
+    enterpriseAccounts: PropTypes.object.isRequired,
+    notifications: PropTypes.object.isRequired,
+    toggleSettingsModal: PropTypes.func.isRequired,
+    hasStarred: PropTypes.bool.isRequired,
+    isEitherLoggedIn: PropTypes.bool.isRequired,
+    isGitHubLoggedIn: PropTypes.bool.isRequired,
+  }
+
   componentDidMount() {
     const self = this;
     const iFrequency = 60000;
@@ -19,14 +31,14 @@ export class Sidebar extends React.Component {
     }, iFrequency);
   }
 
-  componentWillUnmount() {
-    clearInterval(this.requestInterval);
-  }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.connectedAccounts > this.props.connectedAccounts) {
       this.props.fetchNotifications();
     }
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.requestInterval);
   }
 
   refreshNotifications() {
@@ -35,7 +47,7 @@ export class Sidebar extends React.Component {
     }
   }
 
-  openBrowser() {
+  onOpenBrowser() {
     shell.openExternal(`https://www.github.com/${Constants.REPO_SLUG}`);
   }
 
@@ -69,7 +81,7 @@ export class Sidebar extends React.Component {
           key={idx}
           title={account.get('hostname')}
           className={`badge-account${(enterpriseAccounts.size === idx + 1) ? ' last' : ''}`}
-          >
+        >
           <div className="mr-auto name">{accountDomain}</div>
           <div>{notificationsCount === 0 ? <span className="octicon octicon-check" /> : notificationsCount}</div>
         </div>
@@ -83,7 +95,7 @@ export class Sidebar extends React.Component {
 
     return (
       <div className="sidebar-wrapper">
-        <LogoWhite onClick={this.openBrowser} />
+        <LogoWhite onClick={this.onOpenBrowser} />
 
         {isEitherLoggedIn && (
           <div className="badge badge-count text-success my-1">
@@ -97,14 +109,16 @@ export class Sidebar extends React.Component {
               <i
                 title="Refresh"
                 className="nav-link fa fa-refresh"
-                onClick={() => this.refreshNotifications()} />
+                onClick={() => this.refreshNotifications()}
+              />
             </li>
 
             <li className="nav-item text-white">
               <i
                 title="Settings"
                 className="nav-link fa fa-cog"
-                onClick={() => this.props.toggleSettingsModal()} />
+                onClick={() => this.props.toggleSettingsModal()}
+              />
             </li>
           </ul>
         )}
@@ -116,11 +130,12 @@ export class Sidebar extends React.Component {
           {!!isEitherLoggedIn &&
             <Link
               to="/enterpriselogin"
-              className="btn btn-block btn-sm btn-outline-secondary btn-add">Add <br />Enterprise</Link>
+              className="btn btn-block btn-sm btn-outline-secondary btn-add"
+            >Add <br />Enterprise</Link>
           }
 
           {!hasStarred && (
-            <button className="btn btn-block btn-sm btn-outline-secondary btn-star" onClick={this.openBrowser}>
+            <button className="btn btn-block btn-sm btn-outline-secondary btn-star" onClick={this.onOpenBrowser}>
               <i className="fa fa-github" /> Star
             </button>
           )}
@@ -128,12 +143,12 @@ export class Sidebar extends React.Component {
       </div>
     );
   }
-};
+}
 
 export function mapStateToProps(state) {
   const enterpriseAccounts = state.auth.get('enterpriseAccounts');
   const isGitHubLoggedIn = state.auth.get('token') !== null;
-  const connectedAccounts = enterpriseAccounts.reduce((memo, acc) => memo + 1, isGitHubLoggedIn ? 1 : 0);
+  const connectedAccounts = enterpriseAccounts.reduce((memo) => memo + 1, isGitHubLoggedIn ? 1 : 0);
 
   return {
     isGitHubLoggedIn,
@@ -143,6 +158,6 @@ export function mapStateToProps(state) {
     connectedAccounts,
     hasStarred: state.settings.get('hasStarred'),
   };
-};
+}
 
 export default connect(mapStateToProps, { fetchNotifications, logout, toggleSettingsModal })(Sidebar);

@@ -21,7 +21,7 @@ export function loginUser(authOptions, code) {
   const { hostname } = authOptions;
   const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
 
-  return (dispatch, getState) => {
+  return (dispatch) => {
     const url = `https://${hostname}/login/oauth/access_token`;
     const method = 'POST';
     const data = {
@@ -40,12 +40,12 @@ export function loginUser(authOptions, code) {
         dispatch({type: LOGIN.FAILURE, payload: error.response.data});
       });
   };
-};
+}
 
 export const LOGOUT = 'LOGOUT';
 export function logout() {
   return { type: LOGOUT };
-};
+}
 
 
 // Notifications
@@ -107,7 +107,7 @@ export function fetchNotifications() {
       }))
       .catch((error) => dispatch({type: NOTIFICATIONS.FAILURE, payload: error.response.data}));
   };
-};
+}
 
 
 // Single Notification
@@ -132,7 +132,7 @@ export function markNotification(id, hostname) {
         dispatch({type: MARK_NOTIFICATION.FAILURE, payload: error.response.data});
       });
   };
-};
+}
 
 
 // Repo's Notification
@@ -158,7 +158,7 @@ export function markRepoNotifications(repoSlug, hostname) {
         dispatch({type: MARK_REPO_NOTIFICATION.FAILURE, payload: error.response.data});
       });
   };
-};
+}
 
 
 // Starred
@@ -181,7 +181,7 @@ export function checkHasStarred() {
       });
 
   };
-};
+}
 
 
 // Search
@@ -193,13 +193,13 @@ export function searchNotifications(query) {
     type: SEARCH_NOTIFICATIONS,
     query: query
   };
-};
+}
 
 export function clearSearch() {
   return {
     type: CLEAR_SEARCH
   };
-};
+}
 
 
 // Settings
@@ -211,7 +211,7 @@ export function updateSetting(setting, value) {
     setting: setting,
     value: value
   };
-};
+}
 
 
 export const TOGGLE_SETTINGS_MODAL = 'TOGGLE_SETTINGS_MODAL';
@@ -219,4 +219,4 @@ export function toggleSettingsModal() {
   return {
     type: TOGGLE_SETTINGS_MODAL
   };
-};
+}

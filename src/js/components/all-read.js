@@ -37,4 +37,4 @@ export default class AllRead extends React.PureComponent {
       </div>
     );
   }
-};
+}
