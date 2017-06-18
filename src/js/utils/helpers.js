@@ -49,7 +49,7 @@ export function authGithub(
     height: 600,
     show: true,
     webPreferences: {
-      devTools: true,
+      nodeIntegration: false,
     },
   });
 
