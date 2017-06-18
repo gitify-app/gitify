@@ -1,8 +1,8 @@
-# Gitify [![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url] [![slack][slack-image]][slack-url]
+# Gitify [![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url]
 
 > If you are looking for the mobile version - [manosim/gitify-mobile](https://github.com/manosim/gitify-mobile/).
 
-![Gitify](images/press.png)
+![Gitify](images/press.jpg)
 
 
 ### Download
@@ -22,7 +22,7 @@ Gitify currently only supports OS X.
  - Node 6+
  - [Electron](http://electron.atom.io/)
  - [React](https://facebook.github.io/react/)
- - [Gulp](https://www.gulpjs.com)
+ - [Redux](http://redux.js.org/)
 
 
 ### Installation
@@ -94,5 +94,3 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 [travis-url]: https://travis-ci.org/manosim/gitify
 [codecov-image]: https://codecov.io/gh/manosim/gitify/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/manosim/gitify
-[slack-image]: https://img.shields.io/badge/slack-atomio/gitify-e01563.svg
-[slack-url]: https://atomio.slack.com/
