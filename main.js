@@ -13,18 +13,15 @@ const isLinux = process.platform === 'linux';
 const isWindows = process.platform === 'win32';
 
 let appWindow;
-let autoStart;
 let appIcon = null;
 let isQuitting = false;
 
-if (!isLinux) {
-  // The auto-start module does not support Linux
-  autoStart = new AutoLaunch({
-    name: 'Gitify',
-    path: process.execPath.match(/.*?\.app/)[0],
-    isHidden: true,
-  });
-}
+// The auto-start module does not support Linux
+const autoStart = new AutoLaunch({
+  name: 'Gitify',
+  path: process.execPath.match(/.*?\.app/)[0],
+  isHidden: true,
+});
 
 app.on('ready', function() {
   function createAppIcon() {
