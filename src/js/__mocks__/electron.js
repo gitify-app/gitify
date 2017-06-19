@@ -34,6 +34,7 @@ const browserWindow = {
   },
   on: () => {},
   close: jest.fn(),
+  hide: jest.fn(),
   destroy: jest.fn(),
 };
 
@@ -48,6 +49,7 @@ module.exports = {
     app: {
       getVersion: () => '0.0.1',
     },
+    getCurrentWindow: jest.fn(() => browserWindow),
   },
   ipcRenderer: {
     send: jest.fn(),
