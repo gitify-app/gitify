@@ -1,117 +1,88 @@
-import { expect } from 'chai';
+import { Map } from 'immutable';
+
+import { LOGIN, LOGOUT } from '../../actions';
 import reducer from '../../reducers/auth';
-import {
-  LOGIN_REQUEST, LOGIN_SUCCESS, LOGIN_FAILURE, LOGOUT
-} from '../../actions';
 
 describe('reducers/auth.js', () => {
-  const initialState = {
-    response: {},
-    token: null,
-    isFetching: false,
-    failed: false
-  };
-
   it('should return the initial state', () => {
-
-    expect(reducer(undefined, {})).to.eql(initialState);
-
+    expect(reducer(undefined, {})).toMatchSnapshot();
   });
 
-  it('should handle LOGIN_REQUEST', () => {
-
+  it('should handle LOGIN.REQUEST', () => {
     const action = {
-      type: LOGIN_REQUEST
+      type: LOGIN.REQUEST,
     };
 
-    expect(reducer(undefined, action)).to.eql({
-      ...initialState,
+    expect(reducer(undefined, action)).toMatchSnapshot();
+  });
+
+  it('should handle LOGIN.SUCCESS - github.com', () => {
+    const fakeState = Map({
+      response: Map(),
+      token: null,
       isFetching: true,
       failed: false,
-      response: {},
-      token: null
     });
 
-  });
-
-  it('should handle LOGIN_SUCCESS', () => {
-
-    const fakeState = {
-      isFetching: true,
-      failed: false,
-      response: {},
-      token: null
-    };
-
-    expect(reducer(fakeState, {}).token).to.be.null;
+    expect(reducer(fakeState, {}).get('token')).toBeNull();
 
     const action = {
-      type: LOGIN_SUCCESS,
+      type: LOGIN.SUCCESS,
       payload: {
-        access_token: '123HELLOWORLDTOKEN'
-      }
+        access_token: '123HELLOWORLDTOKEN',
+      },
     };
 
-    expect(reducer(fakeState, action)).to.eql({
-      ...initialState,
-      isFetching: false,
-      token: action.payload.access_token
-    });
-
-    expect(reducer(fakeState, action).token).to.not.be.null;
-
+    expect(reducer(undefined, action)).toMatchSnapshot();
+    expect(reducer(fakeState, action).get('token')).toBe('123HELLOWORLDTOKEN');
   });
 
-  it('should handle LOGIN_FAILURE', () => {
+  it('should handle LOGIN.SUCCESS - enterprise', () => {
+    const action = {
+      type: LOGIN.SUCCESS,
+      isEnterprise: true,
+      hostname: 'github.gitify.io',
+      payload: {
+        access_token: '123HELLOWORLDTOKEN',
+      },
+    };
 
-    const fakeState = {
+    expect(reducer(undefined, action)).toMatchSnapshot();
+  });
+  it('should handle LOGIN.FAILURE', () => {
+    const fakeState = Map({
+      response: Map(),
+      token: null,
       isFetching: true,
       failed: false,
-      response: {},
-      token: null
-    };
-
-    expect(reducer(fakeState, {}).token).to.be.null;
-
-    const action = {
-      type: LOGIN_FAILURE,
-      payload: 'Failed to login.'
-    };
-
-    expect(reducer(fakeState, action)).to.eql({
-      ...initialState,
-      isFetching: false,
-      failed: true,
-      response: action.payload
     });
 
-    expect(reducer(fakeState, action).token).to.be.null;
+    expect(reducer(fakeState, {}).get('token')).toBeNull();
 
+    const action = {
+      type: LOGIN.FAILURE,
+      payload: { msg: 'Failed to login.' },
+    };
+
+    expect(reducer(fakeState, action)).toMatchSnapshot();
+    expect(reducer(fakeState, action).get('token')).toBeNull();
   });
 
   it('should handle LOGOUT', () => {
-
-    const fakeState = {
+    const fakeState = Map({
+      response: Map(),
+      token: 'LOGGEDINTOKEN',
       isFetching: false,
       failed: false,
-      response: {},
-      token: 'LOGGEDINTOKEN'
-    };
-
-    expect(reducer(fakeState, {}).token).to.not.be.null;
-
-    const action = {
-      type: LOGOUT
-    };
-
-    expect(reducer(fakeState, action)).to.eql({
-      ...initialState,
-      token: null,
-      response: null
     });
 
-    expect(reducer(fakeState, action).token).to.be.null;
+    expect(reducer(fakeState, {}).get('token')).not.toBeNull();
 
+    const action = {
+      type: LOGOUT,
+    };
+
+    expect(reducer(fakeState, action)).toMatchSnapshot();
+    expect(reducer(fakeState, action).get('token')).toBeNull();
   });
-
 });

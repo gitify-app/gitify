@@ -1,59 +1,77 @@
-const ipcRenderer = window.require('electron').ipcRenderer;
+const { remote } = require('electron');
+
+import { reOpenWindow, openExternalLink } from '../utils/comms';
+import { generateGitHubWebUrl } from '../utils/helpers';
+
+export function getNotificationIcon(type) {
+  switch (type) {
+    case 'Issue':
+      return 'images/notifications/issue.png';
+    case 'Commit':
+      return 'images/notifications/commit.png';
+    case 'PullRequest':
+      return 'images/notifications/pull-request.png';
+    case 'Release':
+      return 'images/notifications/release.png';
+    default:
+      return 'images/notifications/gitify.png';
+  }
+}
 
 export default {
-  setup(notifications, settings) {
+  setup(notifications, notificationsCount, settings) {
     // If there are no new notifications just stop there
-    if (!notifications.length) { return; }
-
-    if (settings.playSound) {
-      this.raiseSoundNotification(notifications);
+    if (!notificationsCount) {
+      return;
     }
 
-    if (settings.showNotifications) {
-      this.raiseNativeNotification(notifications);
+    if (settings.get('playSound')) {
+      this.raiseSoundNotification();
+    }
+
+    if (settings.get('showNotifications')) {
+      this.raiseNativeNotification(notifications, notificationsCount);
     }
   },
 
-  raiseNativeNotification(notifications) {
-    const newCount = notifications.length;
-    const title = (newCount === 1 ? 'Gitify - ' + notifications[0].repository.full_name : 'Gitify');
-    const body = (newCount === 1 ? notifications[0].subject.title : 'You\'ve got ' + newCount + ' notifications.');
+  raiseNativeNotification(notifications, count) {
+    let title, body, icon, notificationUrl;
 
-    var icon;
-    if (newCount === 1) {
-      switch (notifications[0].subject.type) {
-        case 'Issue':
-          icon = 'images/notifications/issue.png';
-          break;
-        case 'Commit':
-          icon = 'images/notifications/commit.png';
-          break;
-        case 'PullRequest':
-          icon = 'images/notifications/pull-request.png';
-          break;
-        case 'Release':
-          icon = 'images/notifications/release.png';
-          break;
-        default:
-          icon = 'images/notifications/gitify.png';
-      }
+    if (count === 1) {
+      const notification = notifications.find(obj => !obj.isEmpty()).first();
+      title = `Gitify - ${notification.getIn(['repository', 'full_name'])}`;
+      body = notification.getIn(['subject', 'title']);
+      icon = getNotificationIcon(notification.getIn(['subject', 'type']));
+      notificationUrl = notification.getIn(['subject', 'url']);
+    } else {
+      title = 'Gitify';
+      body = `You've got ${count} notifications.`;
+      icon = false;
     }
 
     const nativeNotification = new Notification(title, {
-      body: body,
-      icon: icon || false,
-      silent: true
+      body,
+      icon,
+      silent: true,
     });
 
-    nativeNotification.onclick = function () {
-      ipcRenderer.send('reopen-window');
+    nativeNotification.onclick = function() {
+      if (count === 1) {
+        const appWindow = remote.getCurrentWindow();
+        const url = generateGitHubWebUrl(notificationUrl);
+
+        appWindow.hide();
+        openExternalLink(url);
+      } else {
+        reOpenWindow();
+      }
     };
 
     return nativeNotification;
   },
 
-  raiseSoundNotification(notifications) {
+  raiseSoundNotification() {
     const audio = new Audio('sounds/digi.wav');
     audio.play();
-  }
+  },
 };

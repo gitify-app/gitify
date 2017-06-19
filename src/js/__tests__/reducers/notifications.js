@@ -1,144 +1,144 @@
-import { expect } from 'chai';
+import { Map } from 'immutable';
+
+import Constants from '../../utils/constants';
 import reducer from '../../reducers/notifications';
 import {
-  NOTIFICATIONS_REQUEST, NOTIFICATIONS_SUCCESS, NOTIFICATIONS_FAILURE,
-  MARK_NOTIFICATION_SUCCESS, MARK_REPO_NOTIFICATION_SUCCESS
+  LOGOUT,
+  NOTIFICATIONS,
+  MARK_NOTIFICATION,
+  MARK_REPO_NOTIFICATION,
 } from '../../actions';
+import {
+  mockedGithubNotifications,
+  mockedEnterpriseNotifications,
+} from '../../__mocks__/mockedData';
 
 describe('reducers/notifications.js', () => {
-  const initialState = {
-    response: [],
-    isFetching: false,
-    failed: false
-  };
-
-  const notifications = [
-    {
-      id: 1,
-      repository: {
-        full_name: 'ekonstantinidis/gitify'
-      },
-      text: 'New Release'
-    },
-    {
-      id: 2,
-      repository: {
-        full_name: 'ekonstantinidis/gitify'
-      },
-      text: 'It\'s Great'
-    }
-  ];
-
   it('should return the initial state', () => {
-
-    expect(reducer(undefined, {})).to.eql(initialState);
-
+    expect(reducer(undefined, {})).toMatchSnapshot();
   });
 
-  it('should handle NOTIFICATIONS_REQUEST', () => {
-
+  it('should handle NOTIFICATIONS.REQUEST', () => {
     const action = {
-      type: NOTIFICATIONS_REQUEST,
-      query: 'hello'
+      type: NOTIFICATIONS.REQUEST,
     };
 
-    expect(reducer(undefined, action)).to.eql({
-      ...initialState,
-      isFetching: true,
-      failed: false
-    });
-
+    expect(reducer(undefined, action)).toMatchSnapshot();
   });
 
-  it('should handle NOTIFICATIONS_SUCCESS', () => {
-
-    expect(reducer(undefined, {})).to.eql(initialState);
+  it('should handle NOTIFICATIONS.SUCCESS', () => {
+    expect(reducer(undefined, {})).toMatchSnapshot();
 
     const action = {
-      type: NOTIFICATIONS_SUCCESS,
-      payload: notifications
+      type: NOTIFICATIONS.SUCCESS,
+      payload: mockedGithubNotifications,
+      hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
     };
 
-    const currentState = {
-      ...initialState,
-      isFetching: true,
-      failed: false
-    };
-
-    expect(reducer(currentState, action)).to.eql({
-      ...initialState,
-      isFetching: false,
-      response: notifications
-    });
-
+    expect(reducer(undefined, action)).toMatchSnapshot();
   });
 
-  it('should handle NOTIFICATIONS_FAILURE', () => {
-
-    const response = {
-      error: 404,
-      message: 'Oops! Something went wrong.'
-    };
-
-    const currentState = {
-      ...initialState,
-      isFetching: true,
-      failed: false
-    };
-
-    expect(reducer(currentState, {})).to.eql(currentState);
-
+  it('should handle NOTIFICATIONS.FAILURE', () => {
     const action = {
-      type: NOTIFICATIONS_FAILURE,
-      payload: response
+      type: NOTIFICATIONS.FAILURE,
     };
 
-    expect(reducer(currentState, action)).to.eql({
-      ...initialState,
-      isFetching: false,
-      failed: true,
-      response: response
-    });
-
+    expect(reducer(undefined, action)).toMatchSnapshot();
   });
 
-  it('should handle MARK_NOTIFICATION_SUCCESS', () => {
-
-    const currentState = {
-      ...initialState,
-      response: notifications
-    };
-
-    expect(reducer(currentState, {}).response.length).to.equal(2);
+  it('should handle MARK_NOTIFICATION.SUCCESS - github.com', () => {
+    const id = 1;
+    const hostname = 'github.com';
 
     const action = {
-      type: MARK_NOTIFICATION_SUCCESS,
-      meta: {
-        id: 1
-      }
+      type: MARK_NOTIFICATION.SUCCESS,
+      meta: { id, hostname },
     };
 
-    expect(reducer(currentState, action).response.length).to.equal(1);
+    const currentState = reducer(undefined, {}).setIn(
+      ['response', 0],
+      Map({
+        hostname,
+        notifications: mockedGithubNotifications,
+      })
+    );
 
+    expect(reducer(currentState, action)).toMatchSnapshot();
   });
 
-  it('should handle MARK_REPO_NOTIFICATION_SUCCESS', () => {
-
-    const currentState = {
-      ...initialState,
-      response: notifications
-    };
-
-    expect(reducer(currentState, {}).response.length).to.equal(2);
+  it('should handle MARK_NOTIFICATION.SUCCESS - enterprise', () => {
+    const id = 1;
+    const hostname = 'github.gitify.io';
 
     const action = {
-      type: MARK_REPO_NOTIFICATION_SUCCESS,
-      meta: {
-        repoFullName: 'ekonstantinidis/gitify'
-      }
+      type: MARK_NOTIFICATION.SUCCESS,
+      meta: { id, hostname },
     };
 
-    expect(reducer(currentState, action).response.length).to.equal(0);
+    const currentState = reducer(undefined, {}).setIn(
+      ['response', 0],
+      Map({
+        hostname,
+        notifications: mockedEnterpriseNotifications,
+      })
+    );
 
+    expect(reducer(currentState, action)).toMatchSnapshot();
+  });
+
+  it('should handle MARK_REPO_NOTIFICATION.SUCCESS - github.com', () => {
+    const repoSlug = 'manosim/notifications-test';
+    const hostname = 'github.gitify.io';
+
+    const currentState = reducer(undefined, {}).setIn(
+      ['response', 0],
+      Map({
+        hostname,
+        notifications: mockedGithubNotifications,
+      })
+    );
+
+    const action = {
+      type: MARK_REPO_NOTIFICATION.SUCCESS,
+      meta: { hostname, repoSlug },
+    };
+
+    expect(reducer(currentState, action)).toMatchSnapshot();
+  });
+
+  it('should handle MARK_REPO_NOTIFICATION.SUCCESS - enterprise', () => {
+    const repoSlug = 'myorg/notifications-test';
+    const hostname = 'github.gitify.io';
+
+    const currentState = reducer(undefined, {}).setIn(
+      ['response', 0],
+      Map({
+        hostname,
+        notifications: mockedEnterpriseNotifications,
+      })
+    );
+
+    const action = {
+      type: MARK_REPO_NOTIFICATION.SUCCESS,
+      meta: { hostname, repoSlug },
+    };
+
+    expect(reducer(currentState, action)).toMatchSnapshot();
+  });
+
+  it('should handle LOGOUT', () => {
+    const currentState = reducer(undefined, {}).setIn(
+      ['response', 0],
+      Map({
+        hostname: 'github.gitify.io',
+        notifications: mockedEnterpriseNotifications,
+      })
+    );
+
+    const action = {
+      type: LOGOUT,
+    };
+
+    expect(reducer(currentState, action)).toMatchSnapshot();
   });
 });

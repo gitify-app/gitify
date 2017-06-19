@@ -1,0 +1,154 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/settings-modal.js should render itself & its children (closed modal) 1`] = `null`;
+
+exports[`components/settings-modal.js should render itself & its children (open modal) 1`] = `
+<div>
+  <div
+    className="modal-content"
+  >
+    <div
+      className="modal-header"
+    >
+      <h5
+        className="modal-title"
+      >
+        Settings
+      </h5>
+      <button
+        aria-label="Close"
+        className="close"
+        onClick={[Function]}
+      >
+        <span
+          aria-hidden="true"
+        >
+          ×
+        </span>
+      </button>
+    </div>
+    <div
+      className="modal-body"
+    >
+      <div
+        className="row setting"
+      >
+        <div>
+          <strong>
+            Show only participating
+          </strong>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+        </div>
+      </div>
+      <div
+        className="row setting"
+      >
+        <div>
+          <strong>
+            Play sound
+          </strong>
+          <input
+            checked={true}
+            onChange={[Function]}
+            type="checkbox"
+          />
+        </div>
+      </div>
+      <div
+        className="row setting"
+      >
+        <div>
+          <strong>
+            Show notifications
+          </strong>
+          <input
+            checked={true}
+            onChange={[Function]}
+            type="checkbox"
+          />
+        </div>
+      </div>
+      <div
+        className="row setting"
+      >
+        <div>
+          <strong>
+            On Click, Mark as Read
+          </strong>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+        </div>
+      </div>
+      <div
+        className="row setting"
+      >
+        <div>
+          <strong>
+            Open at startup
+          </strong>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+        </div>
+      </div>
+      <div>
+        <div>
+          <strong>
+            Both Icons
+          </strong>
+          <input
+            checked={undefined}
+            type="radio"
+            value="both"
+          />
+        </div>
+        <div>
+          <strong>
+            Tray Icon
+          </strong>
+          <input
+            checked={undefined}
+            type="radio"
+            value="tray"
+          />
+        </div>
+        <div>
+          <strong>
+            Dock Icon
+          </strong>
+          <input
+            checked={undefined}
+            type="radio"
+            value="dock"
+          />
+        </div>
+      </div>
+      <hr />
+      Version: 
+      0.0.1
+    </div>
+    <div
+      className="modal-footer"
+    >
+      <button
+        className="btn btn-outline-danger"
+        onClick={[Function]}
+      >
+        <span
+          className="octicon octicon-sign-out"
+        />
+         Logout from all accounts
+      </button>
+    </div>
+  </div>
+</div>
+`;

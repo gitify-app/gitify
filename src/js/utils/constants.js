@@ -1,8 +1,14 @@
-let constants = {
+export default {
   // GitHub OAuth
-  CLIENT_ID: '3fef4433a29c6ad8f22c',
-  CLIENT_SECRET: '9670de733096c15322183ff17ed0fc8704050379',
-  SCOPE: ['user:email', 'notifications'],
+  AUTH_SCOPE: ['user:email', 'notifications'],
+
+  DEFAULT_AUTH_OPTIONS: {
+    hostname: 'github.com',
+    clientId: '3fef4433a29c6ad8f22c',
+    clientSecret: '9670de733096c15322183ff17ed0fc8704050379',
+  },
+
+  REPO_SLUG: 'manosim/gitify',
 
   // Storage
   STORAGE_KEY: 'gitify-storage',
@@ -10,7 +16,7 @@ let constants = {
   // Awesome all read messages
   ALLREAD_MESSAGES: [
     'Wow! You did it.',
-    'That\'s amazing!',
+    "That's amazing!",
     'Yes! All read.',
     'All gone! Nice work!',
     'Yay! Good news.',
@@ -26,7 +32,7 @@ let constants = {
     ':clap:',
     ':circus_tent:',
     ':spaghetti:',
-    ':ok_hand:'
+    ':ok_hand:',
   ],
 
   ERROR_EMOJIS: [
@@ -34,8 +40,6 @@ let constants = {
     ':disappointed:',
     ':triumph:',
     ':scream:',
-    ':cry:'
-  ]
+    ':cry:',
+  ],
 };
-
-export default constants;

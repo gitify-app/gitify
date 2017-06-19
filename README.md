@@ -1,18 +1,12 @@
-# Gitify
-[![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url] [![slack][slack-image]][slack-url]
+# Gitify [![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url] [![downloads][downloads-image]][downloads-url]
 
-![Gitify](images/press.png)
+> If you are looking for the mobile version - [manosim/gitify-mobile](https://github.com/manosim/gitify-mobile/).
 
-
-### Version 1.0.0 - Coming Soon!
-
-Found a couple of bugs that need to be fixed before the release of version 1.0.0 so will have to postpone the release. Will publish 1.0.0 as soon as these bugs are fixed.
-
-~~Gitify finally reaches version **1.0.0**. The app has been rewritten from scratch using React v15, Redux, Bootstrap 4 and more. This allows me to prepare the surface for more features (for GitHub Enterprise etc). Unfortunately, due to a change in the auto-update package API, you will have **to download the update manually**. This is now fixed and you won't have to download any updates manually again.~~
+![Gitify](images/press.jpg)
 
 
 ### Download
-You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/ekonstantinidis/gitify/releases) page.
+You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/manosim/gitify/releases) page.
 
 You can also install Gitify via [Homebrew Cask](http://caskroom.io/)
 
@@ -25,10 +19,10 @@ Gitify currently only supports OS X.
 
 ### Prerequisites
 
+ - Node 6+
  - [Electron](http://electron.atom.io/)
  - [React](https://facebook.github.io/react/)
- - [Webpack](https://webpack.github.io/)
- - [NPM](https://www.npmjs.com/)
+ - [Redux](http://redux.js.org/)
 
 
 ### Installation
@@ -61,16 +55,25 @@ To publish a new version, you also need to codesign the app running `npm run cod
 
 
 ### Tests
-There are 2 linters for `js` & `scss` and unit tests with `mocha`.
-
-    // Run all tests
-    npm run test
+There are 2 linters for `js` & `scss` and unit tests with `jest`.
 
     // Run only unit tests
-    npm run mocha
+    npm run jest
 
-    // Run unit tests with coverage
-    npm run coverage
+    // Run linter & unit tests with coverage
+    npm run test
+
+### FAQ
+
+#### My notifications aren't showing?
+
+Some organisations require applications to request access before allowing access to any data (including notifications) about their repositories.
+
+To check if Gitify is approved by your organisation you can go to https://github.com/settings/applications, then click on **Gitify** and scroll to _Organization access_.
+
+#### Something looks wrong - How can I debug?
+
+Since version `1.1.0` you can now debug Gitify by pressing `alt+cmd+I`. This will open the devtools and then you can see any logs, network requests etc.
 
 
 ### Contributing
@@ -87,9 +90,9 @@ There are 2 linters for `js` & `scss` and unit tests with `mocha`.
 Gitify is licensed under the MIT Open Source license. For more information, see the LICENSE file in this repository.
 
 
-[travis-image]: https://travis-ci.org/ekonstantinidis/gitify.svg?branch=master
-[travis-url]: https://travis-ci.org/ekonstantinidis/gitify
-[codecov-image]: https://codecov.io/gh/ekonstantinidis/gitify/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/ekonstantinidis/gitify
-[slack-image]: https://img.shields.io/badge/slack-atomio/gitify-e01563.svg
-[slack-url]: https://atomio.slack.com/
+[travis-image]: https://travis-ci.org/manosim/gitify.svg?branch=master
+[travis-url]: https://travis-ci.org/manosim/gitify
+[codecov-image]: https://codecov.io/gh/manosim/gitify/branch/master/graph/badge.svg
+[codecov-url]: https://codecov.io/gh/manosim/gitify
+[downloads-image]: https://img.shields.io/github/downloads/manosim/gitify/total.svg
+[downloads-url]: http://www.gitify.io

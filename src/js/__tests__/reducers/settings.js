@@ -1,45 +1,54 @@
-import { expect } from 'chai';
 import reducer from '../../reducers/settings';
-import { UPDATE_SETTING } from '../../actions';
+import {
+  UPDATE_SETTING,
+  HAS_STARRED,
+  TOGGLE_SETTINGS_MODAL,
+} from '../../actions';
 
 describe('reducers/settings.js', () => {
-  const initialState = {
-    participating: false,
-    playSound: true,
-    showNotifications: true,
-    markOnClick: false,
-    openAtStartup: false
-  };
-
   it('should return the initial state', () => {
-
-    expect(reducer(undefined, {})).to.eql(initialState);
-
+    expect(reducer(undefined, {})).toMatchSnapshot();
   });
 
   it('should handle UPDATE_SETTING', () => {
-
     const actionParticipating = {
       type: UPDATE_SETTING,
       setting: 'participating',
-      value: true
+      value: true,
     };
 
-    expect(reducer(undefined, actionParticipating)).to.eql({
-      ...initialState,
-      participating: true
-    });
+    expect(reducer(undefined, actionParticipating)).toMatchSnapshot();
 
     const actionOpenAtStartUp = {
       type: UPDATE_SETTING,
       setting: 'openAtStartup',
-      value: true
+      value: true,
     };
 
-    expect(reducer(undefined, actionOpenAtStartUp)).to.eql({
-      ...initialState,
-      openAtStartup: true
-    });
+    expect(reducer(undefined, actionOpenAtStartUp)).toMatchSnapshot();
+  });
 
+  it('should handle HAS_STARRED.SUCCESS', () => {
+    const action = {
+      type: HAS_STARRED.SUCCESS,
+    };
+
+    expect(reducer(undefined, action)).toMatchSnapshot();
+  });
+
+  it('should handle HAS_STARRED.SUCCESS', () => {
+    const action = {
+      type: HAS_STARRED.FAILURE,
+    };
+
+    expect(reducer(undefined, action)).toMatchSnapshot();
+  });
+
+  it('should handle TOGGLE_SETTINGS_MODAL', () => {
+    const action = {
+      type: TOGGLE_SETTINGS_MODAL,
+    };
+
+    expect(reducer(undefined, action)).toMatchSnapshot();
   });
 });

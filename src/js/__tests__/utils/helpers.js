@@ -1,29 +1,57 @@
-import { expect } from 'chai';
-import Helpers from '../../utils/helpers';
-const ipcRenderer = window.require('electron').ipcRenderer;
-
+import { generateGitHubWebUrl } from '../../utils/helpers';
 
 describe('utils/helpers.js', () => {
-
-  beforeEach(function() {
-    ipcRenderer.send.reset();
+  it('should generate the GitHub url - non enterprise - (issue)', () => {
+    const apiUrl =
+      'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3';
+    const newUrl = generateGitHubWebUrl(apiUrl);
+    expect(newUrl).toBe(
+      'https://www.github.com/ekonstantinidis/notifications-test/issues/3'
+    );
   });
 
-  it('should send mark the icons as active', () => {
-
-    const notifications = [1, 2, 3];
-    Helpers.updateTrayIcon(notifications);
-    expect(ipcRenderer.send).to.have.been.calledOnce;
-    expect(ipcRenderer.send).to.have.been.calledWith('update-icon', 'TrayActive');
-
+  it('should generate the GitHub url - non enterprise - (pull request)', () => {
+    const apiUrl =
+      'https://api.github.com/repos/ekonstantinidis/notifications-test/pulls/123';
+    const newUrl = generateGitHubWebUrl(apiUrl);
+    expect(newUrl).toBe(
+      'https://www.github.com/ekonstantinidis/notifications-test/pull/123'
+    );
   });
 
-  it('should send mark the icons as idle', () => {
+  it('should generate the GitHub url - non enterprise - (release)', () => {
+    const apiUrl =
+      'https://api.github.com/repos/myorg/notifications-test/releases/3988077';
+    const newUrl = generateGitHubWebUrl(apiUrl);
+    expect(newUrl).toBe(
+      'https://www.github.com/myorg/notifications-test/releases'
+    );
+  });
 
-    const notifications = [];
-    Helpers.updateTrayIcon(notifications);
-    expect(ipcRenderer.send).to.have.been.calledOnce;
-    expect(ipcRenderer.send).to.have.been.calledWith('update-icon', 'TrayIdle');
+  it('should generate the GitHub url - enterprise - (issue)', () => {
+    const apiUrl =
+      'https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/123';
+    const newUrl = generateGitHubWebUrl(apiUrl);
+    expect(newUrl).toBe(
+      'https://github.gitify.io/myorg/notifications-test/issues/123'
+    );
+  });
 
+  it('should generate the GitHub url - enterprise - (pull request)', () => {
+    const apiUrl =
+      'https://github.gitify.io/api/v3/repos/myorg/notifications-test/pulls/3';
+    const newUrl = generateGitHubWebUrl(apiUrl);
+    expect(newUrl).toBe(
+      'https://github.gitify.io/myorg/notifications-test/pull/3'
+    );
+  });
+
+  it('should generate the GitHub url - enterprise - (release)', () => {
+    const apiUrl =
+      'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1';
+    const newUrl = generateGitHubWebUrl(apiUrl);
+    expect(newUrl).toBe(
+      'https://github.gitify.io/myorg/notifications-test/releases'
+    );
   });
 });
