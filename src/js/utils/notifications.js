@@ -1,3 +1,5 @@
+const { remote } = require('electron');
+
 import { reOpenWindow, openExternalLink } from '../utils/comms';
 import { generateGitHubWebUrl } from '../utils/helpers';
 
@@ -55,7 +57,10 @@ export default {
 
     nativeNotification.onclick = function() {
       if (count === 1) {
+        const appWindow = remote.getCurrentWindow();
         const url = generateGitHubWebUrl(notificationUrl);
+
+        appWindow.hide();
         openExternalLink(url);
       } else {
         reOpenWindow();
