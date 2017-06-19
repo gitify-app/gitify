@@ -43,7 +43,15 @@ app.on('ready', function() {
     ]);
 
     trayIcon.setToolTip('GitHub Notifications on your menu bar.');
-    trayIcon.setContextMenu(trayMenu);
+
+    if (isLinux) {
+      trayIcon.setContextMenu(trayMenu);
+    } else {
+      trayIcon.on('click', () => {
+        appWindow.isFocused() ? appWindow.hide() : appWindow.show();
+      });
+    }
+
     return trayIcon;
   }
 
