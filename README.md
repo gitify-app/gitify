@@ -1,4 +1,4 @@
-# Gitify [![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url]
+# Gitify [![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url] [![downloads][downloads-image]][downloads-url]
 
 > If you are looking for the mobile version - [manosim/gitify-mobile](https://github.com/manosim/gitify-mobile/).
 
@@ -94,3 +94,5 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 [travis-url]: https://travis-ci.org/manosim/gitify
 [codecov-image]: https://codecov.io/gh/manosim/gitify/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/manosim/gitify
+[downloads-image]: https://img.shields.io/github/downloads/manosim/gitify/total.svg
+[downloads-url]: http://www.gitify.io
