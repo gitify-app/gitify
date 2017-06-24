@@ -51,7 +51,7 @@
   "bugs": {
     "url": "https://github.com/manosim/gitify/issues"
   },
-  "homepage": "http://www.gitify.io/",
+  "homepage": "http://gitify.io/",
   "jest": {
     "coverageThreshold": {
       "global": {

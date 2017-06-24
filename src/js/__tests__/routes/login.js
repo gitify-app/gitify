@@ -59,7 +59,7 @@ describe('components/login.js', () => {
 
     spyOn(BrowserWindow().webContents, 'on').and.callFake((event, callback) => {
       if (event === 'will-navigate') {
-        callback('will-navigate', `http://www.github.com/?code=${code}`);
+        callback('will-navigate', `https://github.com/?code=${code}`);
       }
     });
 
@@ -91,7 +91,7 @@ describe('components/login.js', () => {
         callback(
           'did-get-redirect-request',
           null,
-          `http://www.github.com/?code=${code}`
+          `https://github.com/?code=${code}`
         );
       }
     });
@@ -124,7 +124,7 @@ describe('components/login.js', () => {
         callback(
           'did-get-redirect-request',
           null,
-          `http://www.github.com/?error=${error}`
+          `https://github.com/?error=${error}`
         );
       }
     });

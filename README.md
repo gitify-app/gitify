@@ -6,7 +6,7 @@
 
 
 ### Download
-You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/manosim/gitify/releases) page.
+You can download Gitify for **free** from either the website [gitify.io](http://gitify.io/) or from the GitHub repository [releases](https://github.com/manosim/gitify/releases) page.
 
 You can also install Gitify via [Homebrew Cask](http://caskroom.io/)
 
@@ -14,13 +14,13 @@ You can also install Gitify via [Homebrew Cask](http://caskroom.io/)
 brew cask install gitify
 ```
 
-Gitify currently only supports OS X.
+Gitify currently only supports macOS.
 
 
 ### Prerequisites
 
  - Node 6+
- - [Electron](http://electron.atom.io/)
+ - [Electron](https://electron.atom.io/)
  - [React](https://facebook.github.io/react/)
  - [Redux](http://redux.js.org/)
 
@@ -51,7 +51,7 @@ To prepare the app for distribution run:
 
     npm run package
 
-To publish a new version, you also need to codesign the app running `npm run codesign`. Currently supports only OS X.
+To publish a new version, you also need to codesign the app running `npm run codesign`. Currently supports only macOS.
 
 
 ### Tests
@@ -95,4 +95,4 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 [codecov-image]: https://codecov.io/gh/manosim/gitify/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/manosim/gitify
 [downloads-image]: https://img.shields.io/github/downloads/manosim/gitify/total.svg
-[downloads-url]: http://www.gitify.io
+[downloads-url]: http://gitify.io/

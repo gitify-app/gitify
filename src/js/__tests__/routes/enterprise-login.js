@@ -116,7 +116,7 @@ describe('routes/enterprise-login.js', () => {
 
     spyOn(BrowserWindow().webContents, 'on').and.callFake((event, callback) => {
       if (event === 'will-navigate') {
-        callback('will-navigate', `http://www.github.com/?code=${code}`);
+        callback('will-navigate', `https://github.com/?code=${code}`);
       }
     });
 

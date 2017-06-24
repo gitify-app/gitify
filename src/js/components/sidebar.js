@@ -48,7 +48,7 @@ export class Sidebar extends React.Component {
   }
 
   onOpenBrowser() {
-    shell.openExternal(`https://www.github.com/${Constants.REPO_SLUG}`);
+    shell.openExternal(`https://github.com/${Constants.REPO_SLUG}`);
   }
 
   _renderGitHubAccount() {

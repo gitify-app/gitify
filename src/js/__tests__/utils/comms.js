@@ -40,9 +40,9 @@ describe('utils/comms.js', () => {
   });
 
   it('should open an external link', () => {
-    openExternalLink('http://www.gitify.io/');
+    openExternalLink('http://gitify.io/');
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(shell.openExternal).toHaveBeenCalledWith('http://www.gitify.io/');
+    expect(shell.openExternal).toHaveBeenCalledWith('http://gitify.io/');
   });
 
   it('should setAutoLaunch (true)', () => {

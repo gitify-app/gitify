@@ -78,7 +78,7 @@ const appMenuTemplate = [
       },
       {
         label: 'Visit Website',
-        click () { shell.openExternal('http://www.gitify.io'); }
+        click () { shell.openExternal('http://gitify.io/'); }
       }
     ]
   }

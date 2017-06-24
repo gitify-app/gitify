@@ -25,7 +25,7 @@ export function generateGitHubWebUrl(url) {
 
   let newUrl = isEnterprise
     ? url.replace(`${hostname}/api/v3/repos`, hostname)
-    : url.replace('api.github.com/repos', 'www.github.com');
+    : url.replace('api.github.com/repos', 'github.com');
 
   if (newUrl.indexOf('/pulls/') !== -1) {
     newUrl = newUrl.replace('/pulls/', '/pull/');
