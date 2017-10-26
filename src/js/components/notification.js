@@ -13,6 +13,7 @@ export class SingleNotification extends React.Component {
     hostname: PropTypes.string.isRequired,
     notification: PropTypes.object.isRequired,
     markOnClick: PropTypes.bool,
+    closeOnClick: PropTypes.bool,
     markNotification: PropTypes.func.isRequired,
   };
 
@@ -21,6 +22,10 @@ export class SingleNotification extends React.Component {
 
     if (this.props.markOnClick) {
       this.markAsRead();
+    }
+
+    if (this.props.closeOnClick) {
+      window.close();
     }
   }
 
@@ -89,6 +94,7 @@ export class SingleNotification extends React.Component {
 export function mapStateToProps(state) {
   return {
     markOnClick: state.settings.get('markOnClick'),
+    closeOnClick: state.settings.get('closeOnClick'),
     isEnterprise: state.settings.get('isEnterprise'),
   };
 }

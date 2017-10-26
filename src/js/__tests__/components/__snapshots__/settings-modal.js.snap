@@ -91,6 +91,20 @@ exports[`components/settings-modal.js should render itself & its children (open 
       >
         <div>
           <strong>
+            On Click, Close Window
+          </strong>
+          <input
+            checked={false}
+            onChange={[Function]}
+            type="checkbox"
+          />
+        </div>
+      </div>
+      <div
+        className="row setting"
+      >
+        <div>
+          <strong>
             Open at startup
           </strong>
           <input

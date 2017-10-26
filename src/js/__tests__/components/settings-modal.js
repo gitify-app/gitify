@@ -22,6 +22,7 @@ describe('components/settings-modal.js', () => {
       playSound: true,
       showNotifications: true,
       markOnClick: false,
+      closeOnClick: false,
       openAtStartup: false,
       showSettingsModal: true,
       hasStarred: false,

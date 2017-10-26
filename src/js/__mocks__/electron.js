@@ -27,6 +27,8 @@ window.localStorage = {
 
 window.alert = jest.fn();
 
+window.close = jest.fn();
+
 const browserWindow = {
   loadURL: jest.fn(),
   webContents: {

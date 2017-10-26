@@ -129,6 +129,16 @@ export class SettingsModal extends React.Component {
 
             <div className="row setting">
               <Checkbox
+                label="On Click, Close Window"
+                checkboxClass="icheckbox_square-green setting-checkbox"
+                defaultChecked={settings.get('closeOnClick')}
+                onChange={evt =>
+                  this.props.updateSetting('closeOnClick', evt.target.checked)}
+              />
+            </div>
+
+            <div className="row setting">
+              <Checkbox
                 label="Open at startup"
                 checkboxClass="icheckbox_square-green setting-checkbox"
                 defaultChecked={settings.get('openAtStartup')}

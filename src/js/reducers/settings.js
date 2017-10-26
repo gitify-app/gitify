@@ -6,6 +6,7 @@ const initialState = Map({
   playSound: true,
   showNotifications: true,
   markOnClick: false,
+  closeOnClick: false,
   openAtStartup: false,
   showSettingsModal: false,
   hasStarred: false,

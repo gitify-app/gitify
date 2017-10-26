@@ -36,12 +36,14 @@ describe('components/notification.js', () => {
     const state = {
       settings: Map({
         markOnClick: true,
+        closeOnClick: true,
       }),
     };
 
     const mappedProps = mapStateToProps(state);
 
     expect(mappedProps.markOnClick).toBeTruthy();
+    expect(mappedProps.closeOnClick).toBeTruthy();
   });
 
   it('should render itself & its children', () => {
@@ -140,5 +142,22 @@ describe('components/notification.js', () => {
     wrapper.find('.subject').simulate('click');
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(props.markNotification).toHaveBeenCalledTimes(1);
+    expect(window.close).toHaveBeenCalledTimes(0);
+  });
+
+  it('should open a notification in browser & close the window', () => {
+    const props = {
+      markNotification: jest.fn(),
+      closeOnClick: true,
+      notification: notification,
+      hostname: 'github.com',
+    };
+
+    const { wrapper } = setup(props);
+
+    expect(wrapper).toBeDefined();
+    wrapper.find('.subject').simulate('click');
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(window.close).toHaveBeenCalledTimes(1);
   });
 });

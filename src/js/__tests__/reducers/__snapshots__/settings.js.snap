@@ -2,78 +2,84 @@
 
 exports[`reducers/settings.js should handle HAS_STARRED.SUCCESS 1`] = `
 Immutable.Map {
+  openAtStartup: false,
+  hasStarred: true,
+  showNotifications: true,
+  showSettingsModal: false,
+  closeOnClick: false,
   participating: false,
   playSound: true,
-  showNotifications: true,
   markOnClick: false,
-  openAtStartup: false,
-  showSettingsModal: false,
-  hasStarred: true,
   showAppIcon: "both",
 }
 `;
 
 exports[`reducers/settings.js should handle HAS_STARRED.SUCCESS 2`] = `
 Immutable.Map {
+  openAtStartup: false,
+  hasStarred: false,
+  showNotifications: true,
+  showSettingsModal: false,
+  closeOnClick: false,
   participating: false,
   playSound: true,
-  showNotifications: true,
   markOnClick: false,
-  openAtStartup: false,
-  showSettingsModal: false,
-  hasStarred: false,
   showAppIcon: "both",
 }
 `;
 
 exports[`reducers/settings.js should handle TOGGLE_SETTINGS_MODAL 1`] = `
 Immutable.Map {
+  openAtStartup: false,
+  hasStarred: false,
+  showNotifications: true,
+  showSettingsModal: true,
+  closeOnClick: false,
   participating: false,
   playSound: true,
-  showNotifications: true,
   markOnClick: false,
-  openAtStartup: false,
-  showSettingsModal: true,
-  hasStarred: false,
   showAppIcon: "both",
 }
 `;
 
 exports[`reducers/settings.js should handle UPDATE_SETTING 1`] = `
 Immutable.Map {
+  openAtStartup: false,
+  hasStarred: false,
+  showNotifications: true,
+  showSettingsModal: false,
+  closeOnClick: false,
   participating: true,
   playSound: true,
-  showNotifications: true,
   markOnClick: false,
-  openAtStartup: false,
-  showSettingsModal: false,
-  hasStarred: false,
   showAppIcon: "both",
 }
 `;
 
 exports[`reducers/settings.js should handle UPDATE_SETTING 2`] = `
 Immutable.Map {
+  openAtStartup: true,
+  hasStarred: false,
+  showNotifications: true,
+  showSettingsModal: false,
+  closeOnClick: false,
   participating: false,
   playSound: true,
-  showNotifications: true,
   markOnClick: false,
-  openAtStartup: true,
-  showSettingsModal: false,
-  hasStarred: false,
   showAppIcon: "both",
 }
 `;
 
 exports[`reducers/settings.js should return the initial state 1`] = `
 Immutable.Map {
+  openAtStartup: false,
+  hasStarred: false,
+  showNotifications: true,
+  showSettingsModal: false,
+  closeOnClick: false,
   participating: false,
   playSound: true,
-  showNotifications: true,
   markOnClick: false,
-  openAtStartup: false,
-  showSettingsModal: false,
-  hasStarred: false,
   showAppIcon: "both",
 }
 `;
