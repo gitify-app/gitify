@@ -126,7 +126,7 @@ app.on('ready', function() {
       minWidth: 500,
       show: false,
       center: true,
-      fullscreenable: false,
+      fullscreenable: true,
       titleBarStyle: 'hidden-inset',
       webPreferences: {
         overlayScrollbars: true,
