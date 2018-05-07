@@ -24,7 +24,8 @@ export class Sidebar extends React.Component {
 
   componentDidMount() {
     const self = this;
-    const iFrequency = 60000;
+    // default fetching notification freq is 60 s = 1m
+    const iFrequency = 300000;
 
     this.requestInterval = setInterval(() => {
       self.refreshNotifications();
@@ -43,6 +44,7 @@ export class Sidebar extends React.Component {
 
   refreshNotifications() {
     if (this.props.isEitherLoggedIn) {
+      // fetch notification from GH or GHE
       this.props.fetchNotifications();
     }
   }

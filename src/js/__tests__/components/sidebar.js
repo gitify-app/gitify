@@ -102,13 +102,13 @@ describe('components/Sidebar.js', () => {
     expect(window.clearInterval).toHaveBeenCalledTimes(1);
   });
 
-  it('should load notifications after 60000ms', function() {
+  it('should load notifications after 300000ms', function() {
     const wrapper = shallow(<Sidebar {...props} />);
 
     expect(wrapper).toBeDefined();
 
     wrapper.instance().componentDidMount();
-    clock.runTimersToTime(60000);
+    clock.runTimersToTime(300000);
     expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
   });
 

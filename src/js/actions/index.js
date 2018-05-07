@@ -78,6 +78,7 @@ export function fetchNotifications() {
       return apiRequestAuth(url, method, token);
     }
 
+    // for fetching ghe notifications
     function getEnterpriseNotifications() {
       const enterpriseAccounts = getState().auth.get('enterpriseAccounts');
       return enterpriseAccounts
