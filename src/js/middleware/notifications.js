@@ -3,6 +3,7 @@ import {
   NOTIFICATIONS,
   MARK_NOTIFICATION,
   MARK_REPO_NOTIFICATION,
+  MARK_ACCOUNT_NOTIFICATION,
 } from '../actions';
 import NativeNotifications from '../utils/notifications';
 import { setBadge, updateTrayIcon } from '../utils/comms';
@@ -63,7 +64,7 @@ export default store => next => action => {
       setBadge(prevNotificationsCount - 1);
       break;
 
-    case MARK_REPO_NOTIFICATION.SUCCESS:
+    case MARK_REPO_NOTIFICATION.SUCCESS: {
       const updatedNotificationsCount = notificationsAccounts
         .map(accNotifications => {
           if (accNotifications.get('hostname') !== action.meta.hostname) {
@@ -82,6 +83,24 @@ export default store => next => action => {
       updateTrayIcon(updatedNotificationsCount);
       setBadge(updatedNotificationsCount);
       break;
+    }
+
+    case MARK_ACCOUNT_NOTIFICATION.SUCCESS: {
+      const updatedNotificationsCount = notificationsAccounts.reduce(
+        (memo, accNotifications) => {
+          if (accNotifications.get('hostname') !== action.meta.hostname) {
+            return memo + accNotifications.get('notifications').size;
+          }
+
+          return memo;
+        },
+        0
+      );
+
+      updateTrayIcon(updatedNotificationsCount);
+      setBadge(updatedNotificationsCount);
+      break;
+    }
   }
 
   return next(action);

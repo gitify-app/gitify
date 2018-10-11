@@ -9,6 +9,34 @@ Immutable.Map {
 }
 `;
 
+exports[`reducers/notifications.js should handle MARK_ACCOUNT_NOTIFICATION.SUCCESS - enterprise 1`] = `
+Immutable.Map {
+  response: Immutable.List [
+    Immutable.Map {
+      hostname: "github.gitify.io",
+      notifications: Immutable.List [
+      ],
+    },
+  ],
+  isFetching: false,
+  failed: false,
+}
+`;
+
+exports[`reducers/notifications.js should handle MARK_ACCOUNT_NOTIFICATION.SUCCESS - github.com 1`] = `
+Immutable.Map {
+  response: Immutable.List [
+    Immutable.Map {
+      hostname: "github.gitify.io",
+      notifications: Immutable.List [
+      ],
+    },
+  ],
+  isFetching: false,
+  failed: false,
+}
+`;
+
 exports[`reducers/notifications.js should handle MARK_NOTIFICATION.SUCCESS - enterprise 1`] = `
 Immutable.Map {
   response: Immutable.List [

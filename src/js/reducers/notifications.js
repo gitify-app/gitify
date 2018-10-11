@@ -3,6 +3,7 @@ import {
   NOTIFICATIONS,
   MARK_NOTIFICATION,
   MARK_REPO_NOTIFICATION,
+  MARK_ACCOUNT_NOTIFICATION,
   LOGOUT,
 } from '../actions';
 
@@ -61,6 +62,15 @@ export default function reducer(state = initialState, action) {
               items.getIn(['repository', 'full_name']) === action.meta.repoSlug
           );
         }
+      );
+    case MARK_ACCOUNT_NOTIFICATION.SUCCESS:
+      const accNotificationsAccountIndex = state
+        .get('response')
+        .findIndex(obj => obj.get('hostname') === action.meta.hostname);
+
+      return state.updateIn(
+        ['response', accNotificationsAccountIndex, 'notifications'],
+        notifications => notifications.clear()
       );
     case LOGOUT:
       return initialState;

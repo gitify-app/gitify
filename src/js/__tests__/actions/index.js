@@ -634,6 +634,131 @@ describe('actions/index.js', () => {
       });
   });
 
+  it("should mark an account's notifications as read with success - github.com", () => {
+    const hostname = 'github.com';
+    const message = 'Success.';
+
+    nock('https://api.github.com/')
+      .put('/notifications')
+      .reply(200, { message });
+
+    const expectedActions = [
+      { type: actions.MARK_ACCOUNT_NOTIFICATION.REQUEST },
+      {
+        type: actions.MARK_ACCOUNT_NOTIFICATION.SUCCESS,
+        payload: { message },
+        meta: { hostname },
+      },
+    ];
+
+    const store = createMockStore(
+      {
+        auth: Map({ token: 'IAMATOKEN' }),
+      },
+      expectedActions
+    );
+
+    return store
+      .dispatch(actions.markAccountNotifications(hostname))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  it("should mark an account's notifications as read with failure - github.com", () => {
+    const hostname = 'github.com';
+    const message = 'Oops! Something went wrong.';
+
+    nock('https://api.github.com/')
+      .put('/notifications')
+      .reply(400, { message });
+
+    const expectedActions = [
+      { type: actions.MARK_ACCOUNT_NOTIFICATION.REQUEST },
+      { type: actions.MARK_ACCOUNT_NOTIFICATION.FAILURE, payload: { message } },
+    ];
+
+    const store = createMockStore(
+      {
+        auth: Map({
+          token: 'THISISATOKEN',
+          enterpriseAccounts: mockedEnterpriseAccounts,
+        }),
+      },
+      expectedActions
+    );
+
+    return store
+      .dispatch(actions.markAccountNotifications(hostname))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  it("should mark an account's notifications as read with success - enterprise", () => {
+    const hostname = 'github.gitify.io';
+    const message = 'Success.';
+
+    nock('https://github.gitify.io/api/v3/')
+      .put('/notifications')
+      .reply(200, { message });
+
+    const expectedActions = [
+      { type: actions.MARK_ACCOUNT_NOTIFICATION.REQUEST },
+      {
+        type: actions.MARK_ACCOUNT_NOTIFICATION.SUCCESS,
+        payload: { message },
+        meta: { hostname },
+      },
+    ];
+
+    const store = createMockStore(
+      {
+        auth: Map({
+          token: 'THISISATOKEN',
+          enterpriseAccounts: mockedEnterpriseAccounts,
+        }),
+      },
+      expectedActions
+    );
+
+    return store
+      .dispatch(actions.markAccountNotifications(hostname))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  it("should mark an account's notifications as read with failure - enterprise", () => {
+    const hostname = 'github.gitify.io';
+    const message = 'Oops! Something went wrong.';
+
+    nock('https://github.gitify.io/api/v3/')
+      .put('/notifications')
+      .reply(400, { message });
+
+    const expectedActions = [
+      { type: actions.MARK_ACCOUNT_NOTIFICATION.REQUEST },
+      { type: actions.MARK_ACCOUNT_NOTIFICATION.FAILURE, payload: { message } },
+    ];
+
+    const store = createMockStore(
+      {
+        auth: Map({
+          token: 'THISISATOKEN',
+          enterpriseAccounts: mockedEnterpriseAccounts,
+        }),
+      },
+      expectedActions
+    );
+
+    return store
+      .dispatch(actions.markAccountNotifications(hostname))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
   it('should check if the user has starred the repository (has)', () => {
     nock('https://api.github.com/')
       .get(`/user/starred/${Constants.REPO_SLUG}`)

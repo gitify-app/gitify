@@ -7,6 +7,7 @@ import {
   NOTIFICATIONS,
   MARK_NOTIFICATION,
   MARK_REPO_NOTIFICATION,
+  MARK_ACCOUNT_NOTIFICATION,
 } from '../../actions';
 import {
   mockedGithubNotifications,
@@ -121,6 +122,44 @@ describe('reducers/notifications.js', () => {
     const action = {
       type: MARK_REPO_NOTIFICATION.SUCCESS,
       meta: { hostname, repoSlug },
+    };
+
+    expect(reducer(currentState, action)).toMatchSnapshot();
+  });
+
+  it('should handle MARK_ACCOUNT_NOTIFICATION.SUCCESS - github.com', () => {
+    const hostname = 'github.gitify.io';
+
+    const currentState = reducer(undefined, {}).setIn(
+      ['response', 0],
+      Map({
+        hostname,
+        notifications: mockedEnterpriseNotifications,
+      })
+    );
+
+    const action = {
+      type: MARK_ACCOUNT_NOTIFICATION.SUCCESS,
+      meta: { hostname },
+    };
+
+    expect(reducer(currentState, action)).toMatchSnapshot();
+  });
+
+  it('should handle MARK_ACCOUNT_NOTIFICATION.SUCCESS - enterprise', () => {
+    const hostname = 'github.gitify.io';
+
+    const currentState = reducer(undefined, {}).setIn(
+      ['response', 0],
+      Map({
+        hostname,
+        notifications: mockedEnterpriseNotifications,
+      })
+    );
+
+    const action = {
+      type: MARK_ACCOUNT_NOTIFICATION.SUCCESS,
+      meta: { hostname },
     };
 
     expect(reducer(currentState, action)).toMatchSnapshot();

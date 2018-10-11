@@ -198,6 +198,41 @@ export function markRepoNotifications(repoSlug, hostname) {
   };
 }
 
+// Account's Notification
+
+export const MARK_ACCOUNT_NOTIFICATION = makeAsyncActionSet(
+  'MARK_ACCOUNT_NOTIFICATION'
+);
+export function markAccountNotifications(hostname) {
+  return (dispatch, getState) => {
+    const url = `${generateGitHubAPIUrl(hostname)}notifications`;
+    const method = 'PUT';
+
+    const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+    const entAccounts = getState().auth.get('enterpriseAccounts');
+    const token = isEnterprise
+      ? getEnterpriseAccountToken(hostname, entAccounts)
+      : getState().auth.get('token');
+
+    dispatch({ type: MARK_ACCOUNT_NOTIFICATION.REQUEST });
+
+    return apiRequestAuth(url, method, token, {})
+      .then(function(response) {
+        dispatch({
+          type: MARK_ACCOUNT_NOTIFICATION.SUCCESS,
+          payload: response.data,
+          meta: { hostname },
+        });
+      })
+      .catch(function(error) {
+        dispatch({
+          type: MARK_ACCOUNT_NOTIFICATION.FAILURE,
+          payload: error.response.data,
+        });
+      });
+  };
+}
+
 // Starred
 
 export const HAS_STARRED = makeAsyncActionSet('HAS_STARRED');

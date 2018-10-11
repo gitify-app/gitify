@@ -99,4 +99,19 @@ describe('middleware/notifications.js', () => {
     expect(comms.setBadge).toHaveBeenCalledTimes(1);
     expect(comms.setBadge).toHaveBeenCalledWith(2);
   });
+
+  it("should mark an account's notification and call the update tray icon helper", () => {
+    const action = {
+      type: actions.MARK_ACCOUNT_NOTIFICATION.SUCCESS,
+      meta: {
+        hostname: 'github.com',
+      },
+    };
+
+    expect(dispatchWithStoreOf({}, action)).toEqual(action);
+    expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
+    expect(comms.updateTrayIcon).toHaveBeenCalledWith(2);
+    expect(comms.setBadge).toHaveBeenCalledTimes(1);
+    expect(comms.setBadge).toHaveBeenCalledWith(2);
+  });
 });
