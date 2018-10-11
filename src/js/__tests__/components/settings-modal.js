@@ -138,7 +138,7 @@ describe('components/settings-modal.js', () => {
     expect(props.toggleSettingsModal).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle the showOnlyParticipating checbox', () => {
+  it('should toggle the showOnlyParticipating checkbox', () => {
     const wrapper = shallow(<SettingsModal {...props} />);
     expect(wrapper).toBeDefined();
 
@@ -149,7 +149,7 @@ describe('components/settings-modal.js', () => {
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle the playSound checbox', () => {
+  it('should toggle the playSound checkbox', () => {
     const wrapper = shallow(<SettingsModal {...props} />);
     expect(wrapper).toBeDefined();
 
@@ -160,7 +160,7 @@ describe('components/settings-modal.js', () => {
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle the showNotifications checbox', () => {
+  it('should toggle the showNotifications checkbox', () => {
     const wrapper = shallow(<SettingsModal {...props} />);
     expect(wrapper).toBeDefined();
 
@@ -171,7 +171,7 @@ describe('components/settings-modal.js', () => {
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle the onClickMarkAsRead checbox', () => {
+  it('should toggle the onClickMarkAsRead checkbox', () => {
     const wrapper = shallow(<SettingsModal {...props} />);
     expect(wrapper).toBeDefined();
 
@@ -182,7 +182,7 @@ describe('components/settings-modal.js', () => {
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle the openAtStartup checbox', () => {
+  it('should toggle the openAtStartup checkbox', () => {
     const wrapper = shallow(<SettingsModal {...props} />);
     expect(wrapper).toBeDefined();
 
