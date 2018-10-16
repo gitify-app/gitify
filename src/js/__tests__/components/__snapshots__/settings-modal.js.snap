@@ -106,7 +106,6 @@ exports[`components/settings-modal.js should render itself & its children (open 
             Both Icons
           </strong>
           <input
-            checked={undefined}
             type="radio"
             value="both"
           />
@@ -116,7 +115,6 @@ exports[`components/settings-modal.js should render itself & its children (open 
             Tray Icon
           </strong>
           <input
-            checked={undefined}
             type="radio"
             value="tray"
           />
@@ -126,7 +124,6 @@ exports[`components/settings-modal.js should render itself & its children (open 
             Dock Icon
           </strong>
           <input
-            checked={undefined}
             type="radio"
             value="dock"
           />
