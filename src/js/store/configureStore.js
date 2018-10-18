@@ -13,7 +13,8 @@ import notificationsMiddlware from '../middleware/notifications';
 import settingsMiddleware from '../middleware/settings';
 import rootReducer from '../reducers';
 
-const isDev = process.mainModule.filename.indexOf('app.asar') === -1;
+const isDev =
+  (process.mainModule || require.main).filename.indexOf('app.asar') === -1;
 
 export default function configureStore(initialState) {
   const engine = filter(
