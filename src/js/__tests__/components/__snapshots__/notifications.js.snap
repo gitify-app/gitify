@@ -7,7 +7,9 @@ exports[`components/notifications.js should render itself (github.com with notif
   >
     github.com
     <span
-      className="octicon octicon-chevron-down ml-2"
+      className="octicon octicon-check ml-2"
+      onClick={[Function]}
+      title="Mark All as Read"
     />
   </div>
 </span>

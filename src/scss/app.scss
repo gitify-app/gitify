@@ -516,6 +516,11 @@ $modal-scale-min: .35;
       }
     }
   }
+
+  .octicon {
+    @include check-octicon;
+    font-size: 20px;
+  }
 }
 
 /* @end Component / Notifications  */
