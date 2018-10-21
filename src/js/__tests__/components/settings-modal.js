@@ -70,7 +70,6 @@ describe('components/settings-modal.js', () => {
     const wrapper = shallow(<SettingsModal {...props} />);
     expect(wrapper).toBeDefined();
 
-    wrapper.instance().componentDidMount();
     expect(props.toggleSettingsModal).toHaveBeenCalledTimes(1);
 
     wrapper.instance().componentWillUnmount();

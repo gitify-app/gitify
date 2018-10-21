@@ -53,6 +53,7 @@
   },
   "homepage": "http://www.gitify.io/",
   "jest": {
+    "setupTestFrameworkScriptFile": "<rootDir>src/js/setup-tests.js",
     "coverageThreshold": {
       "global": {
         "lines": 95
@@ -101,7 +102,8 @@
     "browserify": "=14.4.0",
     "electron": "=1.6.10",
     "electron-packager": "=8.7.0",
-    "enzyme": "=2.8.2",
+    "enzyme": "=3.7.0",
+    "enzyme-adapter-react-15": "^1.1.1",
     "eslint": "=3.19.0",
     "eslint-config-dabapps": "github:dabapps/eslint-config-dabapps#v3.1.1",
     "eslint-plugin-import": "=2.3.0",

@@ -107,7 +107,6 @@ describe('components/Sidebar.js', () => {
 
     expect(wrapper).toBeDefined();
 
-    wrapper.instance().componentDidMount();
     clock.runTimersToTime(60000);
     expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
   });
