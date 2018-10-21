@@ -30,11 +30,9 @@ describe('actions/index.js', () => {
     const authOptions = Constants.DEFAULT_AUTH_OPTIONS;
     const code = 'THISISACODE';
 
-    nock('https://github.com/')
-      .post('/login/oauth/access_token', {})
-      .reply(200, {
-        access_token: 'THISISATOKEN',
-      });
+    nock('https://github.com/').post('/login/oauth/access_token').reply(200, {
+      access_token: 'THISISATOKEN',
+    });
 
     const expectedActions = [
       { type: actions.LOGIN.REQUEST },
@@ -60,7 +58,7 @@ describe('actions/index.js', () => {
     const message = 'Oops! Something went wrong.';
 
     nock('https://github.com/')
-      .post('/login/oauth/access_token', {})
+      .post('/login/oauth/access_token')
       .reply(400, { message });
 
     const expectedActions = [
@@ -83,7 +81,7 @@ describe('actions/index.js', () => {
     const code = 'THISISACODE';
 
     nock('https://github.gitify.io/')
-      .post('/login/oauth/access_token', {})
+      .post('/login/oauth/access_token')
       .reply(200, {
         access_token: 'THISISATOKEN',
       });
@@ -112,7 +110,7 @@ describe('actions/index.js', () => {
     const message = 'Oops! Something went wrong.';
 
     nock('https://github.gitify.io/')
-      .post('/login/oauth/access_token', {})
+      .post('/login/oauth/access_token')
       .reply(400, { message });
 
     const expectedActions = [
