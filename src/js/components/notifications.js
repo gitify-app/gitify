@@ -4,6 +4,11 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 import RepositoryNotifications from './repository';
 
+const getRepoSlug = obj => obj.first().getIn(['repository', 'full_name']);
+
+const notificationSorter = (a, b) =>
+  getRepoSlug(a).localeCompare(getRepoSlug(b));
+
 export default class AccountNotifications extends React.Component {
   static propTypes = {
     hostname: PropTypes.string.isRequired,
@@ -16,6 +21,10 @@ export default class AccountNotifications extends React.Component {
     const groupedNotifications = notifications.groupBy(object =>
       object.getIn(['repository', 'full_name'])
     );
+
+    const sortedGroupedNotifications = groupedNotifications
+      .valueSeq()
+      .sort(notificationSorter);
 
     return (
       <ReactCSSTransitionGroup
@@ -32,8 +41,8 @@ export default class AccountNotifications extends React.Component {
           />
         </div>
 
-        {groupedNotifications.valueSeq().map(obj => {
-          const repoSlug = obj.first().getIn(['repository', 'full_name']);
+        {sortedGroupedNotifications.map(obj => {
+          const repoSlug = getRepoSlug(obj);
           return (
             <RepositoryNotifications
               hostname={hostname}
