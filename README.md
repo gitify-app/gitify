@@ -1,4 +1,13 @@
-# Gitify [![travis][travis-image]][travis-url] [![codecov][codecov-image]][codecov-url] [![downloads][downloads-image]][downloads-url]
+> :warning: This project is a fork of the original [original-gitify](https://github.com/manosim/gitify).
+> It has been created as an effort to maintain a community effort
+> around Gitify.
+>
+> Depending on what you're looking for, you may or may not be at the right place.
+> In case of doubt, feel free to open an issue here to start a discussion.
+>
+> See https://github.com/manosim/gitify/issues/349#issuecomment-458251210 for details on the fork.
+
+# Gitify [![travis][travis-image]][travis-url]
 
 > If you are looking for the mobile version - [manosim/gitify-mobile](https://github.com/manosim/gitify-mobile/).
 
@@ -6,9 +15,8 @@
 
 
 ### Download
-You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/manosim/gitify/releases) page.
 
-You can also install Gitify via [Homebrew Cask](http://caskroom.io/)
+You can also install (the original) Gitify via [Homebrew Cask](http://caskroom.io/)
 
 ```shell
 brew cask install gitify
@@ -31,6 +39,7 @@ Gitify currently only supports OS X.
 
 
 ### Development
+
 First you will need to set the testing `CLIENT_ID` and `CLIENT_SECRET` in `src/js/utils/constants.js` file. You can use the development app credentials (use at your own discretion):
 
     Client Id: 3fef4433a29c6ad8f22c
@@ -47,6 +56,7 @@ To run the actual **electron app**:
 
 
 ### Distribution
+
 To prepare the app for distribution run:
 
     npm run package
@@ -55,6 +65,7 @@ To publish a new version, you also need to codesign the app running `npm run cod
 
 
 ### Tests
+
 There are 2 linters for `js` & `scss` and unit tests with `jest`.
 
     // Run only unit tests
@@ -87,12 +98,9 @@ Since version `1.1.0` you can now debug Gitify by pressing `alt+cmd+I`. This wil
 
 
 ### License
+
 Gitify is licensed under the MIT Open Source license. For more information, see the LICENSE file in this repository.
 
 
-[travis-image]: https://travis-ci.org/manosim/gitify.svg?branch=master
-[travis-url]: https://travis-ci.org/manosim/gitify
-[codecov-image]: https://codecov.io/gh/manosim/gitify/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/manosim/gitify
-[downloads-image]: https://img.shields.io/github/downloads/manosim/gitify/total.svg
-[downloads-url]: http://www.gitify.io
+[travis-image]: https://travis-ci.org/Two15/gitify.svg?branch=master
+[travis-url]: https://travis-ci.org/Two15/gitify
