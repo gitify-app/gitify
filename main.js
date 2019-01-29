@@ -81,7 +81,7 @@ app.on('ready', function() {
     }
 
     let autoUpdateOptions = {
-      repo: 'manosim/gitify',
+      repo: 'Two15/gitify',
       currentVersion: app.getVersion(),
     };
 
