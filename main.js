@@ -127,7 +127,7 @@ app.on('ready', function() {
       show: false,
       center: true,
       fullscreenable: false,
-      titleBarStyle: 'hidden-inset',
+      titleBarStyle: 'hiddenInset',
       webPreferences: {
         overlayScrollbars: true,
       },
