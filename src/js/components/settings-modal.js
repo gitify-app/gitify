@@ -87,7 +87,7 @@ export class SettingsModal extends React.Component {
           <div className="modal-body">
             <div className="row setting">
               <Checkbox
-                className="setting-checkbox"
+                className="setting-participating"
                 checked={settings.get('participating')}
                 onChange={evt =>
                   this.props.updateSetting('participating', evt.target.checked)}
@@ -98,7 +98,7 @@ export class SettingsModal extends React.Component {
 
             <div className="row setting">
               <Checkbox
-                className="setting-checkbox"
+                className="setting-play-sound"
                 checked={settings.get('playSound')}
                 onChange={evt =>
                   this.props.updateSetting('playSound', evt.target.checked)}
@@ -109,7 +109,7 @@ export class SettingsModal extends React.Component {
 
             <div className="row setting">
               <Checkbox
-                className="setting-checkbox"
+                className="setting-notifications"
                 checked={settings.get('showNotifications')}
                 onChange={evt =>
                   this.props.updateSetting(
@@ -123,7 +123,7 @@ export class SettingsModal extends React.Component {
 
             <div className="row setting">
               <Checkbox
-                className="setting-checkbox"
+                className="setting-mark-as-read"
                 checked={settings.get('markOnClick')}
                 onChange={evt =>
                   this.props.updateSetting('markOnClick', evt.target.checked)}
@@ -134,7 +134,7 @@ export class SettingsModal extends React.Component {
 
             <div className="row setting">
               <Checkbox
-                className="setting-checkbox"
+                className="setting-open-at-startup"
                 checked={settings.get('openAtStartup')}
                 onChange={evt =>
                   this.props.updateSetting('openAtStartup', evt.target.checked)}

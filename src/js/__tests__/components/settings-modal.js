@@ -143,7 +143,7 @@ describe('components/settings-modal.js', () => {
     expect(wrapper).toBeDefined();
 
     wrapper
-      .findWhere(node => node.props().label === 'Show only participating')
+      .find('.setting-participating')
       .simulate('change', { target: { checked: true } });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
@@ -154,7 +154,7 @@ describe('components/settings-modal.js', () => {
     expect(wrapper).toBeDefined();
 
     wrapper
-      .findWhere(node => node.props().label === 'Play sound')
+      .find('.setting-play-sound')
       .simulate('change', { target: { checked: true } });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
@@ -165,7 +165,7 @@ describe('components/settings-modal.js', () => {
     expect(wrapper).toBeDefined();
 
     wrapper
-      .findWhere(node => node.props().label === 'Show notifications')
+      .find('.setting-notifications')
       .simulate('change', { target: { checked: true } });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
@@ -176,7 +176,7 @@ describe('components/settings-modal.js', () => {
     expect(wrapper).toBeDefined();
 
     wrapper
-      .findWhere(node => node.props().label === 'On Click, Mark as Read')
+      .find('.setting-mark-as-read')
       .simulate('change', { target: { checked: true } });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
@@ -187,7 +187,7 @@ describe('components/settings-modal.js', () => {
     expect(wrapper).toBeDefined();
 
     wrapper
-      .findWhere(node => node.props().label === 'Open at startup')
+      .find('.setting-open-at-startup')
       .simulate('change', { target: { checked: true } });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);

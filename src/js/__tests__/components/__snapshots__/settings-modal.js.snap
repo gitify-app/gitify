@@ -33,104 +33,302 @@ exports[`components/settings-modal.js should render itself & its children (open 
       <div
         className="row setting"
       >
-        <div>
-          <strong>
+        <label
+          className="setting-participating ant-checkbox-wrapper"
+          onMouseEnter={undefined}
+          onMouseLeave={undefined}
+          style={undefined}
+        >
+          <span
+            className="ant-checkbox"
+            style={Object {}}
+          >
+            <input
+              autoFocus={undefined}
+              checked={false}
+              className="ant-checkbox-input"
+              disabled={undefined}
+              id={undefined}
+              name={undefined}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={undefined}
+              onFocus={[Function]}
+              readOnly={undefined}
+              tabIndex={undefined}
+              type="checkbox"
+              value={undefined}
+            />
+            <span
+              className="ant-checkbox-inner"
+            />
+          </span>
+          <span>
             Show only participating
-          </strong>
-          <input
-            checked={false}
-            onChange={[Function]}
-            type="checkbox"
-          />
-        </div>
+          </span>
+        </label>
       </div>
       <div
         className="row setting"
       >
-        <div>
-          <strong>
+        <label
+          className="setting-play-sound ant-checkbox-wrapper ant-checkbox-wrapper-checked"
+          onMouseEnter={undefined}
+          onMouseLeave={undefined}
+          style={undefined}
+        >
+          <span
+            className="ant-checkbox ant-checkbox-checked"
+            style={Object {}}
+          >
+            <input
+              autoFocus={undefined}
+              checked={true}
+              className="ant-checkbox-input"
+              disabled={undefined}
+              id={undefined}
+              name={undefined}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={undefined}
+              onFocus={[Function]}
+              readOnly={undefined}
+              tabIndex={undefined}
+              type="checkbox"
+              value={undefined}
+            />
+            <span
+              className="ant-checkbox-inner"
+            />
+          </span>
+          <span>
             Play sound
-          </strong>
-          <input
-            checked={true}
-            onChange={[Function]}
-            type="checkbox"
-          />
-        </div>
+          </span>
+        </label>
       </div>
       <div
         className="row setting"
       >
-        <div>
-          <strong>
+        <label
+          className="setting-notifications ant-checkbox-wrapper ant-checkbox-wrapper-checked"
+          onMouseEnter={undefined}
+          onMouseLeave={undefined}
+          style={undefined}
+        >
+          <span
+            className="ant-checkbox ant-checkbox-checked"
+            style={Object {}}
+          >
+            <input
+              autoFocus={undefined}
+              checked={true}
+              className="ant-checkbox-input"
+              disabled={undefined}
+              id={undefined}
+              name={undefined}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={undefined}
+              onFocus={[Function]}
+              readOnly={undefined}
+              tabIndex={undefined}
+              type="checkbox"
+              value={undefined}
+            />
+            <span
+              className="ant-checkbox-inner"
+            />
+          </span>
+          <span>
             Show notifications
-          </strong>
-          <input
-            checked={true}
-            onChange={[Function]}
-            type="checkbox"
-          />
-        </div>
+          </span>
+        </label>
       </div>
       <div
         className="row setting"
       >
-        <div>
-          <strong>
+        <label
+          className="setting-mark-as-read ant-checkbox-wrapper"
+          onMouseEnter={undefined}
+          onMouseLeave={undefined}
+          style={undefined}
+        >
+          <span
+            className="ant-checkbox"
+            style={Object {}}
+          >
+            <input
+              autoFocus={undefined}
+              checked={false}
+              className="ant-checkbox-input"
+              disabled={undefined}
+              id={undefined}
+              name={undefined}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={undefined}
+              onFocus={[Function]}
+              readOnly={undefined}
+              tabIndex={undefined}
+              type="checkbox"
+              value={undefined}
+            />
+            <span
+              className="ant-checkbox-inner"
+            />
+          </span>
+          <span>
             On Click, Mark as Read
-          </strong>
-          <input
-            checked={false}
-            onChange={[Function]}
-            type="checkbox"
-          />
-        </div>
+          </span>
+        </label>
       </div>
       <div
         className="row setting"
       >
-        <div>
-          <strong>
+        <label
+          className="setting-open-at-startup ant-checkbox-wrapper"
+          onMouseEnter={undefined}
+          onMouseLeave={undefined}
+          style={undefined}
+        >
+          <span
+            className="ant-checkbox"
+            style={Object {}}
+          >
+            <input
+              autoFocus={undefined}
+              checked={false}
+              className="ant-checkbox-input"
+              disabled={undefined}
+              id={undefined}
+              name={undefined}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={undefined}
+              onFocus={[Function]}
+              readOnly={undefined}
+              tabIndex={undefined}
+              type="checkbox"
+              value={undefined}
+            />
+            <span
+              className="ant-checkbox-inner"
+            />
+          </span>
+          <span>
             Open at startup
-          </strong>
-          <input
-            checked={false}
-            onChange={[Function]}
-            type="checkbox"
-          />
-        </div>
+          </span>
+        </label>
       </div>
-      <div>
-        <div>
-          <strong>
+      <div
+        className="ant-radio-group ant-radio-group-outline"
+        id={undefined}
+        onMouseEnter={undefined}
+        onMouseLeave={undefined}
+        style={undefined}
+      >
+        <label
+          className="setting-radio ant-radio-wrapper ant-radio-wrapper-checked"
+          onMouseEnter={undefined}
+          onMouseLeave={undefined}
+          style={undefined}
+        >
+          <span
+            className="ant-radio ant-radio-checked"
+            style={Object {}}
+          >
+            <input
+              autoFocus={undefined}
+              checked={true}
+              className="ant-radio-input"
+              disabled={false}
+              id={undefined}
+              name={undefined}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={undefined}
+              onFocus={[Function]}
+              readOnly={undefined}
+              tabIndex={undefined}
+              type="radio"
+              value="both"
+            />
+            <span
+              className="ant-radio-inner"
+            />
+          </span>
+          <span>
             Both Icons
-          </strong>
-          <input
-            checked={undefined}
-            type="radio"
-            value="both"
-          />
-        </div>
-        <div>
-          <strong>
+          </span>
+        </label>
+        <label
+          className="setting-radio ant-radio-wrapper"
+          onMouseEnter={undefined}
+          onMouseLeave={undefined}
+          style={undefined}
+        >
+          <span
+            className="ant-radio"
+            style={Object {}}
+          >
+            <input
+              autoFocus={undefined}
+              checked={false}
+              className="ant-radio-input"
+              disabled={false}
+              id={undefined}
+              name={undefined}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={undefined}
+              onFocus={[Function]}
+              readOnly={undefined}
+              tabIndex={undefined}
+              type="radio"
+              value="tray"
+            />
+            <span
+              className="ant-radio-inner"
+            />
+          </span>
+          <span>
             Tray Icon
-          </strong>
-          <input
-            checked={undefined}
-            type="radio"
-            value="tray"
-          />
-        </div>
-        <div>
-          <strong>
+          </span>
+        </label>
+        <label
+          className="setting-radio ant-radio-wrapper"
+          onMouseEnter={undefined}
+          onMouseLeave={undefined}
+          style={undefined}
+        >
+          <span
+            className="ant-radio"
+            style={Object {}}
+          >
+            <input
+              autoFocus={undefined}
+              checked={false}
+              className="ant-radio-input"
+              disabled={false}
+              id={undefined}
+              name={undefined}
+              onBlur={[Function]}
+              onChange={[Function]}
+              onClick={undefined}
+              onFocus={[Function]}
+              readOnly={undefined}
+              tabIndex={undefined}
+              type="radio"
+              value="dock"
+            />
+            <span
+              className="ant-radio-inner"
+            />
+          </span>
+          <span>
             Dock Icon
-          </strong>
-          <input
-            checked={undefined}
-            type="radio"
-            value="dock"
-          />
-        </div>
+          </span>
+        </label>
       </div>
       <hr />
       Version: 
