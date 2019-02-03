@@ -129,6 +129,7 @@ app.on('ready', function() {
       fullscreenable: false,
       titleBarStyle: 'hiddenInset',
       webPreferences: {
+        nodeIntegration: true,
         overlayScrollbars: true,
       },
     };
