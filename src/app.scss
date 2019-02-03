@@ -1,6 +1,6 @@
 /* @group Imports */
 
-@import "../../node_modules/icheck/skins/all.css";
+@import "~icheck/skins/all.css";
 
 /* @end Imports */
 
@@ -25,10 +25,10 @@ $modal-overlay-bg: rgba(0, 0, 0, .25);
 /* @group Fonts Overrides */
 
 $fa-font-path: "../fonts";
-@import "node_modules/font-awesome/scss/font-awesome.scss";
+@import "~font-awesome/scss/font-awesome.scss";
 
 $octicons-font-path: "../fonts/";
-@import "node_modules/octicons/build/font/_octicons.scss";
+@import "~octicons/build/font/_octicons.scss";
 
 /* @end Fonts Overrides */
 
@@ -53,7 +53,7 @@ $alert-border-radius: 0;
 $alert-danger-bg: $brand-danger;
 $alert-danger-text: $white;
 
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import "~/bootstrap/scss/bootstrap.scss";
 
 /* @end Bootstrap Overrides */
 

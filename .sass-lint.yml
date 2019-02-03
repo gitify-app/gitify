@@ -1,6 +1,6 @@
 # File Options
 files:
-  include: 'src/scss/*.scss'
+  include: 'src/*.scss'
 
 # Rule Configuration
 rules:

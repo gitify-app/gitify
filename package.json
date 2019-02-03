@@ -6,10 +6,10 @@
   "scripts": {
     "copy-fonts": "mkdir -p dist/fonts && cp -r node_modules/font-awesome/fonts dist/ && cp -r node_modules/octicons/build/font/* dist/fonts",
     "build-js": "mkdir -p dist/js && browserify -t babelify --ignore-missing --no-builtins --no-commondir --insert-global-vars=\"global\" --no-browser-field --exclude electron src/js/app.js | uglifyjs > dist/js/app.js",
-    "build-scss": "mkdir -p dist/css && node-sass --output-style compressed src/scss/app.scss dist/css/app.css",
+    "build-scss": "mkdir -p dist/css && node-sass --importer ./lib/sass_importer.js --output-style compressed src/app.scss dist/css/app.css",
     "build": "npm run copy-fonts && npm run build-js && npm run build-scss",
     "watch-js": "watchify -t babelify --ignore-missing --no-builtins --no-commondir --insert-global-vars=\"global\" --no-browser-field --exclude electron src/js/app.js -o dist/js/app.js -v",
-    "watch-scss": "node-sass -w src/scss/app.scss dist/css/app.css",
+    "watch-scss": "node-sass --importer ./lib/sass_importer.js -w src/app.scss dist/css/app.css",
     "watch": "npm run build && npm run watch-js & npm run watch-scss",
     "package": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --electron-version=1.6.10 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
     "codesign": "bash scripts/codesign.bash",
