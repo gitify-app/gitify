@@ -3,8 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Modal from 'react-modal';
-import { Checkbox, RadioGroup, Radio } from 'react-icheck';
+import { Checkbox, Radio } from 'antd';
 
+const RadioGroup = Radio.Group;
 const { remote } = require('electron');
 
 import {
@@ -86,80 +87,78 @@ export class SettingsModal extends React.Component {
           <div className="modal-body">
             <div className="row setting">
               <Checkbox
-                label="Show only participating"
-                checkboxClass="icheckbox_square-green setting-checkbox"
-                defaultChecked={settings.get('participating')}
+                className="setting-checkbox"
+                checked={settings.get('participating')}
                 onChange={evt =>
                   this.props.updateSetting('participating', evt.target.checked)}
-              />
+              >
+                Show only participating
+              </Checkbox>
             </div>
 
             <div className="row setting">
               <Checkbox
-                label="Play sound"
-                checkboxClass="icheckbox_square-green setting-checkbox"
-                defaultChecked={settings.get('playSound')}
+                className="setting-checkbox"
+                checked={settings.get('playSound')}
                 onChange={evt =>
                   this.props.updateSetting('playSound', evt.target.checked)}
-              />
+              >
+                Play sound
+              </Checkbox>
             </div>
 
             <div className="row setting">
               <Checkbox
-                label="Show notifications"
-                checkboxClass="icheckbox_square-green setting-checkbox"
-                defaultChecked={settings.get('showNotifications')}
+                className="setting-checkbox"
+                checked={settings.get('showNotifications')}
                 onChange={evt =>
                   this.props.updateSetting(
                     'showNotifications',
                     evt.target.checked
                   )}
-              />
+              >
+                Show notifications
+              </Checkbox>
             </div>
 
             <div className="row setting">
               <Checkbox
-                label="On Click, Mark as Read"
-                checkboxClass="icheckbox_square-green setting-checkbox"
-                defaultChecked={settings.get('markOnClick')}
+                className="setting-checkbox"
+                checked={settings.get('markOnClick')}
                 onChange={evt =>
                   this.props.updateSetting('markOnClick', evt.target.checked)}
-              />
+              >
+                On Click, Mark as Read
+              </Checkbox>
             </div>
 
             <div className="row setting">
               <Checkbox
-                label="Open at startup"
-                checkboxClass="icheckbox_square-green setting-checkbox"
-                defaultChecked={settings.get('openAtStartup')}
+                className="setting-checkbox"
+                checked={settings.get('openAtStartup')}
                 onChange={evt =>
                   this.props.updateSetting('openAtStartup', evt.target.checked)}
-              />
+              >
+                Open at startup
+              </Checkbox>
             </div>
 
             <RadioGroup
-              name="showAppIcon"
               value={settings.get('showAppIcon')}
               onChange={evt =>
                 this.props.updateSetting('showAppIcon', evt.target.value)}
             >
-              <Radio
-                value="both"
-                radioClass="iradio_square-green setting-radio"
-                label="Both Icons"
-              />
+              <Radio value="both" className="setting-radio">
+                Both Icons
+              </Radio>
 
-              <Radio
-                value="tray"
-                radioClass="iradio_square-green setting-radio"
-                label="Tray Icon"
-              />
+              <Radio value="tray" className="setting-radio">
+                Tray Icon
+              </Radio>
 
-              <Radio
-                value="dock"
-                radioClass="iradio_square-green setting-radio"
-                label="Dock Icon"
-              />
+              <Radio value="dock" className="setting-radio">
+                Dock Icon
+              </Radio>
             </RadioGroup>
 
             <hr />
