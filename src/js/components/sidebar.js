@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { List, Map } from 'immutable';
 import { shell } from 'electron';
+import Octicon, { markGithub, gear, sync, check } from 'octicons-react';
 
 import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
 import { isUserEitherLoggedIn } from '../utils/helpers';
@@ -66,7 +67,7 @@ export class Sidebar extends React.Component {
         <div className="mr-auto name">GitHub</div>
         <div>
           {notificationsCount === 0
-            ? <span className="octicon octicon-check" />
+            ? <Octicon icon={check} />
             : notificationsCount}
         </div>
       </div>
@@ -98,7 +99,7 @@ export class Sidebar extends React.Component {
           <div className="mr-auto name">{accountDomain}</div>
           <div>
             {notificationsCount === 0
-              ? <span className="octicon octicon-check" />
+              ? <Octicon icon={check} />
               : notificationsCount}
           </div>
         </div>
@@ -133,18 +134,22 @@ export class Sidebar extends React.Component {
           <ul className="nav nav-inline mb-2">
             <li className="nav-item text-white">
               <i
+                className="nav-link blah"
                 title="Refresh"
-                className="nav-link fa fa-refresh"
                 onClick={() => this.refreshNotifications()}
-              />
+              >
+                <Octicon icon={sync} />
+              </i>
             </li>
 
             <li className="nav-item text-white">
               <i
+                className="nav-link"
                 title="Settings"
-                className="nav-link fa fa-cog"
                 onClick={() => this.props.toggleSettingsModal()}
-              />
+              >
+                <Octicon icon={gear} />
+              </i>
             </li>
           </ul>}
 
@@ -167,7 +172,7 @@ export class Sidebar extends React.Component {
               className="btn btn-block btn-sm btn-outline-secondary btn-star"
               onClick={this.onOpenBrowser}
             >
-              <i className="fa fa-github" /> Star
+              <Octicon icon={markGithub} /> Star
             </button>}
         </div>
       </div>

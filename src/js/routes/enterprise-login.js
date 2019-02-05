@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
+import Octicon, { markGithub, x } from 'octicons-react';
 
 import { authGithub } from '../utils/helpers';
 
@@ -79,7 +80,7 @@ export class EnterpriseLogin extends React.Component {
       <div className="container-fluid main-container login">
         <div className="d-flex flex-row-reverse">
           <Link to="/login" className="btn btn-close" replace>
-            <i className="fa fa-close" />
+            <Octicon icon={x} />
           </Link>
         </div>
 
@@ -108,7 +109,7 @@ export class EnterpriseLogin extends React.Component {
           />
 
           <button className="btn btn-md btn-login mt-2" type="submit">
-            <i className="fa fa-github" /> Login to GitHub Enterprise
+            <Octicon icon={markGithub} /> Login to GitHub Enterprise
           </button>
         </form>
       </div>

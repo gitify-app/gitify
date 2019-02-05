@@ -107,7 +107,7 @@ describe('components/settings-modal.js', () => {
     const wrapper = shallow(<SettingsModal {...props} />);
     expect(wrapper).toBeDefined();
 
-    wrapper.find('.octicon-sign-out').parent().simulate('click');
+    wrapper.find('.btn-logout').simulate('click');
 
     expect(props.logout).toHaveBeenCalledTimes(1);
 

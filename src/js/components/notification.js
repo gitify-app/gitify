@@ -4,6 +4,14 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import Octicon, {
+  check,
+  issueOpened,
+  gitPullRequest,
+  gitCommit,
+  tag,
+  question,
+} from 'octicons-react';
 
 import { markNotification } from '../actions';
 import { generateGitHubWebUrl } from '../utils/helpers';
@@ -45,26 +53,26 @@ export class SingleNotification extends React.Component {
     const type = this.props.notification.getIn(['subject', 'type']);
 
     if (type === 'Issue') {
-      typeIconClass = 'octicon octicon-issue-opened';
+      typeIconClass = issueOpened;
       typeIconTooltip = 'Issue';
     } else if (type === 'PullRequest') {
-      typeIconClass = 'octicon octicon-git-pull-request';
+      typeIconClass = gitPullRequest;
       typeIconTooltip = 'Pull Request';
     } else if (type === 'Commit') {
-      typeIconClass = 'octicon octicon-git-commit';
+      typeIconClass = gitCommit;
       typeIconTooltip = 'Commit';
     } else if (type === 'Release') {
-      typeIconClass = 'octicon octicon-tag';
+      typeIconClass = tag;
       typeIconTooltip = 'Release';
     } else {
-      typeIconClass = 'octicon octicon-question';
-      typeIconTooltip = '';
+      typeIconClass = question;
+      typeIconTooltip = 'unknown';
     }
 
     return (
       <div className="row notification no-gutters px-3 py-2">
-        <div className="col-1">
-          <span title={typeIconTooltip} className={typeIconClass} />
+        <div className="col-1" title={typeIconTooltip}>
+          <Octicon icon={typeIconClass} scale={1.2} />
         </div>
         <div className="col-10 subject" onClick={() => this.pressTitle()}>
           <h6>{this.props.notification.getIn(['subject', 'title'])}</h6>
@@ -77,9 +85,11 @@ export class SingleNotification extends React.Component {
         <div className="col-1 check-wrapper">
           <span
             title="Mark as Read"
-            className="octicon octicon-check"
+            className="icon-check"
             onClick={() => this.markAsRead()}
-          />
+          >
+            <Octicon icon={check} />
+          </span>
         </div>
       </div>
     );

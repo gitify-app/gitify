@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import Modal from 'react-modal';
 import { Checkbox, Radio } from 'antd';
+import Octicon, { signOut } from 'octicons-react';
 
 const RadioGroup = Radio.Group;
 const { remote } = require('electron');
@@ -168,10 +169,10 @@ export class SettingsModal extends React.Component {
 
           <div className="modal-footer">
             <button
-              className="btn btn-outline-danger"
+              className="btn btn-logout btn-outline-danger"
               onClick={() => this.logout()}
             >
-              <span className="octicon octicon-sign-out" /> Logout from all
+              <Octicon icon={signOut} /> Logout from all
               accounts
             </button>
           </div>

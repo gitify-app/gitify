@@ -2659,10 +2659,6 @@ follow-redirects@^1.2.3:
   dependencies:
     debug "^2.4.5"
 
-font-awesome@=4.7.0:
-  version "4.7.0"
-  resolved "https://registry.yarnpkg.com/font-awesome/-/font-awesome-4.7.0.tgz#8fa8cf0411a1a31afd07b06d2902bb9fc815a133"
-
 for-in@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -4467,9 +4463,17 @@ object.values@^1.0.3:
     function-bind "^1.1.0"
     has "^1.0.1"
 
-octicons@=4.4.0:
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/octicons/-/octicons-4.4.0.tgz#aca3bd32f5dc1d907a8d0de744f78e0c54e19446"
+octicons-modular@^0.17.10:
+  version "0.17.10"
+  resolved "https://registry.yarnpkg.com/octicons-modular/-/octicons-modular-0.17.10.tgz#f7f69e3cd5eec9922b9e13b2eae8e8ee661e1f7a"
+  integrity sha512-T9md8RIP1ahk6pQ3+uVxeRxFKXX8aYH4mzC1S35ZLDNm8StbLCZM6AkCJOXgXXxdID1Ir+Bixw7xZryoEr4Huw==
+
+octicons-react@^0.17.10:
+  version "0.17.10"
+  resolved "https://registry.yarnpkg.com/octicons-react/-/octicons-react-0.17.10.tgz#1887de98b6fda5684461d45f9985f07f6be6dc19"
+  integrity sha512-yEWlJSvhS97bSC5xCOmjTS9IfYFvCerzmfOI5b7E2sznzQ7lOZp79YU1RLvBiwCjWTnZkq64WOYA5egAEaKPaA==
+  dependencies:
+    octicons-modular "^0.17.10"
 
 omit.js@^1.0.0:
   version "1.0.0"

@@ -66,11 +66,15 @@ describe('components/Sidebar.js', () => {
   });
 
   it('should render itself & its children (logged in)', () => {
-    const wrapper = shallow(<Sidebar {...props} />);
+    const wrapper = mount(
+      <MemoryRouter>
+        <Sidebar {...props} />
+      </MemoryRouter>
+    );
 
     expect(wrapper).toBeDefined();
-    expect(wrapper.find('.fa-refresh').length).toBe(1);
-    expect(wrapper.find('.fa-cog').length).toBe(1);
+    expect(wrapper.find('.octicon.octicon-sync').length).toBe(1);
+    expect(wrapper.find('.octicon.octicon-gear').length).toBe(1);
 
     expect(
       wrapper.find('.badge-account').first().children().first().text()
@@ -120,11 +124,15 @@ describe('components/Sidebar.js', () => {
       isEitherLoggedIn: false,
     };
 
-    const wrapper = shallow(<Sidebar {...caseProps} />);
+    const wrapper = mount(
+      <MemoryRouter>
+        <Sidebar {...caseProps} />
+      </MemoryRouter>
+    );
 
     expect(wrapper).toBeDefined();
-    expect(wrapper.find('.fa-refresh').length).toBe(0);
-    expect(wrapper.find('.fa-cog').length).toBe(0);
+    expect(wrapper.find('.octicon.octicon-sync').length).toBe(0);
+    expect(wrapper.find('.octicon.octicon-gear').length).toBe(0);
     expect(wrapper.find('.tag-success').length).toBe(0);
   });
 
@@ -146,8 +154,8 @@ describe('components/Sidebar.js', () => {
 
     expect(wrapper).toBeDefined();
     expect(Sidebar.prototype.componentDidMount).toHaveBeenCalledTimes(1);
-    expect(wrapper.find('.fa-refresh').length).toBe(0);
-    expect(wrapper.find('.fa-cog').length).toBe(0);
+    expect(wrapper.find('.octicon.octicon-sync').length).toBe(0);
+    expect(wrapper.find('.octicon.octicon-gear').length).toBe(0);
     expect(wrapper.find('.tag-success').length).toBe(0);
   });
 
@@ -166,23 +174,31 @@ describe('components/Sidebar.js', () => {
   });
 
   it('should toggle the settings modal', () => {
-    const wrapper = shallow(<Sidebar {...props} />);
+    const wrapper = mount(
+      <MemoryRouter>
+        <Sidebar {...props} />
+      </MemoryRouter>
+    );
 
     expect(wrapper).toBeDefined();
-    expect(wrapper.find('.fa-cog').length).toBe(1);
+    expect(wrapper.find('.octicon.octicon-gear').length).toBe(1);
 
-    wrapper.find('.fa-cog').simulate('click');
+    wrapper.find('.octicon.octicon-gear').simulate('click');
 
     expect(props.toggleSettingsModal).toHaveBeenCalledTimes(1);
   });
 
   it('should refresh the notifications', () => {
-    const wrapper = shallow(<Sidebar {...props} />);
+    const wrapper = mount(
+      <MemoryRouter>
+        <Sidebar {...props} />
+      </MemoryRouter>
+    );
 
     expect(wrapper).toBeDefined();
-    expect(wrapper.find('.fa-refresh').length).toBe(1);
+    expect(wrapper.find('.octicon.octicon-sync').length).toBe(1);
 
-    wrapper.find('.fa-refresh').simulate('click');
+    wrapper.find('.octicon.octicon-sync').simulate('click');
     expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
   });
 

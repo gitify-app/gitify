@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import Octicon, { chevronLeft, chevronDown } from 'octicons-react';
 
 import RepositoryNotifications from './repository';
 
@@ -25,10 +26,9 @@ export default class AccountNotifications extends React.Component {
       >
         <div className="account p-2">
           {hostname}
-          <span
-            className={`octicon octicon-chevron-${notifications.isEmpty()
-              ? 'left'
-              : 'down'} ml-2`}
+          <Octicon
+            className="ml-2"
+            icon={notifications.isEmpty() ? chevronLeft : chevronDown}
           />
         </div>
 

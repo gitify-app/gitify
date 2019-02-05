@@ -58,42 +58,34 @@ describe('components/notification.js', () => {
     expect(wrapper.find('h6').text()).toBe(
       notification.getIn(['subject', 'title'])
     );
-    expect(wrapper.find('.octicon').first().props().className).toContain(
-      'octicon-issue-opened'
-    );
+    expect(wrapper.find('.col-1').first().props().title).toContain('Issue');
 
     wrapper.setProps({
       ...props,
       notification: notification.setIn(['subject', 'type'], 'PullRequest'),
     });
 
-    expect(wrapper.find('.octicon').first().props().className).toContain(
-      'octicon-git-pull-request'
+    expect(wrapper.find('.col-1').first().props().title).toContain(
+      'Pull Request'
     );
 
     wrapper.setProps({
       ...props,
       notification: notification.setIn(['subject', 'type'], 'Commit'),
     });
-    expect(wrapper.find('.octicon').first().props().className).toContain(
-      'octicon-git-commit'
-    );
+    expect(wrapper.find('.col-1').first().props().title).toContain('Commit');
 
     wrapper.setProps({
       ...props,
       notification: notification.setIn(['subject', 'type'], 'Release'),
     });
-    expect(wrapper.find('.octicon').first().props().className).toContain(
-      'octicon-tag'
-    );
+    expect(wrapper.find('.col-1').first().props().title).toContain('Release');
 
     wrapper.setProps({
       ...props,
       notification: notification.setIn(['subject', 'type'], 'AnotherType'),
     });
-    expect(wrapper.find('.octicon').first().props().className).toContain(
-      'octicon-question'
-    );
+    expect(wrapper.find('.col-1').first().props().title).toContain('unknown');
   });
 
   it('should open a notification in the browser', () => {
@@ -122,7 +114,7 @@ describe('components/notification.js', () => {
     const { wrapper } = setup(props);
 
     expect(wrapper).toBeDefined();
-    wrapper.find('.octicon-check').simulate('click');
+    wrapper.find('.icon-check').simulate('click');
     expect(props.markNotification).toHaveBeenCalledTimes(1);
   });
 

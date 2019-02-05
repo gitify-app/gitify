@@ -21,18 +21,6 @@ $modal-overlay-bg: rgba(0, 0, 0, .25);
 
 /* @end Colors */
 
-
-/* @group Fonts Overrides */
-
-$fa-font-path: "../fonts";
-@import "~font-awesome/scss/font-awesome.scss";
-
-$octicons-font-path: "../fonts/";
-@import "~octicons/build/font/_octicons.scss";
-
-/* @end Fonts Overrides */
-
-
 /* @group Bootstrap Overrides */
 
 $sidebar-width: 100px;
@@ -299,7 +287,6 @@ $modal-scale-min: .35;
     text-transform: uppercase;
     line-height: 1;
     color: darken($brand-purple-dark, 10%);
-    font-size: 75%;
     font-weight: bold;
 
     &.last {
@@ -356,15 +343,12 @@ $modal-scale-min: .35;
   }
 
   .setting-radio + span {
+    margin-right: 1rem;
     padding-left: 1rem;
   }
 
-  .setting-radio + span {
-    margin-right: 1rem;
-  }
-
-  .btn-logout {
-    margin-top: 1rem;
+  .btn-logout > svg {
+    height: 1.25em;
   }
 }
 
@@ -422,6 +406,7 @@ $modal-scale-min: .35;
   font-size: .9rem;
 
   .octicon {
+    vertical-align: middle;
     font-size: 1.1rem;
   }
 }
@@ -549,6 +534,7 @@ $modal-scale-min: .35;
 
   .octicon {
     @include check-octicon;
+    vertical-align: baseline;
     font-size: 20px;
   }
 

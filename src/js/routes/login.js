@@ -7,6 +7,7 @@ import { connect } from 'react-redux';
 
 import { authGithub, isUserEitherLoggedIn } from '../utils/helpers';
 import LogoDark from '../components/logos/dark';
+import Octicon, { markGithub } from 'octicons-react';
 
 export class LoginPage extends React.Component {
   static propTypes = {
@@ -34,11 +35,11 @@ export class LoginPage extends React.Component {
           className="btn btn-block btn-login"
           onClick={() => authGithub(undefined, this.props.dispatch)}
         >
-          <i className="fa fa-github mr-2" /> Login to GitHub
+          <Octicon icon={markGithub} /> Login to GitHub
         </button>
 
         <Link to="/enterpriselogin" className="btn btn-block btn-login mt-3">
-          <i className="fa fa-github mr-2" /> Login to GitHub Enterprise
+          <Octicon icon={markGithub} /> Login to GitHub Enterprise
         </Link>
       </div>
     );

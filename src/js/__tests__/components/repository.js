@@ -1,5 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
+import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 
 import { mockedGithubNotifications } from '../../__mocks__/mockedData';
@@ -27,7 +28,11 @@ describe('components/repository.js', function() {
   });
 
   it('should render itself & its children (logged in)', function() {
-    const wrapper = shallow(<RepositoryNotifications {...props} />);
+    const wrapper = mount(
+      <MemoryRouter>
+        <RepositoryNotifications {...props} />
+      </MemoryRouter>
+    );
 
     expect(wrapper).toBeDefined();
     expect(wrapper.find('.octicon-check').length).toBe(1);
@@ -44,7 +49,11 @@ describe('components/repository.js', function() {
   });
 
   it('should mark a repo as read', function() {
-    const wrapper = shallow(<RepositoryNotifications {...props} />);
+    const wrapper = mount(
+      <MemoryRouter>
+        <RepositoryNotifications {...props} />
+      </MemoryRouter>
+    );
 
     expect(wrapper).toBeDefined();
     expect(wrapper.find('.octicon-check').length).toBe(1);

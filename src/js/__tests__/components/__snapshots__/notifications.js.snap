@@ -6,9 +6,19 @@ exports[`components/notifications.js should render itself (github.com with notif
     className="account p-2"
   >
     github.com
-    <span
+    <svg
+      aria-hidden="true"
       className="octicon octicon-chevron-down ml-2"
-    />
+      height="16"
+      version="1.1"
+      viewBox="0 0 10 16"
+      width="10"
+    >
+      <path
+        d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6l-5 5z"
+        fill-rule="evenodd"
+      />
+    </svg>
   </div>
 </span>
 `;
@@ -19,9 +29,19 @@ exports[`components/notifications.js should render itself (github.com without no
     className="account p-2"
   >
     github.com
-    <span
+    <svg
+      aria-hidden="true"
       className="octicon octicon-chevron-left ml-2"
-    />
+      height="16"
+      version="1.1"
+      viewBox="0 0 8 16"
+      width="8"
+    >
+      <path
+        d="M5.5 3L7 4.5 3.25 8 7 11.5 5.5 13l-5-5 5-5z"
+        fill-rule="evenodd"
+      />
+    </svg>
   </div>
 </span>
 `;

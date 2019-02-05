@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import { connect } from 'react-redux';
+import Octicon, { check } from 'octicons-react';
 
 import { markRepoNotifications } from '../actions';
 import SingleNotification from './notification';
@@ -43,9 +44,10 @@ export class RepositoryNotifications extends React.Component {
 
           <span
             title="Mark Repository as Read"
-            className="octicon octicon-check"
             onClick={() => this.markRepoAsRead()}
-          />
+          >
+            <Octicon icon={check} />
+          </span>
         </div>
 
         <ReactCSSTransitionGroup
