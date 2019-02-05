@@ -4,10 +4,7 @@ import { shallow } from 'enzyme';
 
 const { shell } = require('electron');
 
-import {
-  SingleNotification,
-  mapStateToProps,
-} from '../../components/notification';
+import { SingleNotification, mapStateToProps } from './notification';
 
 function setup(props) {
   const wrapper = shallow(<SingleNotification {...props} />);

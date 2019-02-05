@@ -4,7 +4,7 @@ import {
   reOpenWindow,
   openExternalLink,
   setAutoLaunch,
-} from '../../utils/comms';
+} from './comms';
 
 const { ipcRenderer, shell } = require('electron');
 

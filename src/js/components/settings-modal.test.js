@@ -5,10 +5,7 @@ import renderer from 'react-test-renderer';
 
 const { ipcRenderer } = require('electron');
 
-import {
-  SettingsModal,
-  mapStateToProps,
-} from '../../components/settings-modal';
+import { SettingsModal, mapStateToProps } from './settings-modal';
 
 describe('components/settings-modal.js', () => {
   const props = {

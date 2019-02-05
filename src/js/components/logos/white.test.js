@@ -2,7 +2,7 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 
-import LogoWhite from '../../../components/logos/white';
+import LogoWhite from './white';
 
 describe('components/logos/white.js', () => {
   it('renders correctly', () => {

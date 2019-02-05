@@ -7,17 +7,13 @@ import { shallow } from 'enzyme';
 import { List, Map } from 'immutable';
 import { reduxForm } from 'redux-form';
 
-import { mockedEnterpriseAccounts } from '../../__mocks__/mockedData';
+import { mockedEnterpriseAccounts } from './../__mocks__/mockedData';
 
 const { ipcRenderer, remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 const dialog = remote.dialog;
 
-import {
-  EnterpriseLogin,
-  mapStateToProps,
-  validate,
-} from '../../routes/enterprise-login';
+import { EnterpriseLogin, mapStateToProps, validate } from './enterprise-login';
 
 describe('routes/enterprise-login.js', () => {
   const mockedEnterpriseAccountFormData = {

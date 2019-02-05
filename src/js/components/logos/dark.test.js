@@ -2,7 +2,7 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 
-import LogoDark from '../../../components/logos/dark';
+import LogoDark from './dark';
 
 describe('components/logos/dark.js', () => {
   it('renders correctly', () => {

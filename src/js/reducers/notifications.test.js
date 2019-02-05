@@ -1,17 +1,17 @@
 import { Map } from 'immutable';
 
-import Constants from '../../utils/constants';
-import reducer from '../../reducers/notifications';
+import Constants from './../utils/constants';
+import reducer from './/notifications';
 import {
   LOGOUT,
   NOTIFICATIONS,
   MARK_NOTIFICATION,
   MARK_REPO_NOTIFICATION,
-} from '../../actions';
+} from './../actions';
 import {
   mockedGithubNotifications,
   mockedEnterpriseNotifications,
-} from '../../__mocks__/mockedData';
+} from './../__mocks__/mockedData';
 
 describe('reducers/notifications.js', () => {
   it('should return the initial state', () => {

@@ -4,9 +4,9 @@ import { fromJS, Map, List } from 'immutable';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import * as actions from '../../actions';
-import Constants from '../../utils/constants';
-import { mockedEnterpriseAccounts } from '../../__mocks__/mockedData';
+import * as actions from './index';
+import Constants from '../utils/constants';
+import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
 
 const middlewares = [thunk];
 const createMockStore = configureMockStore(middlewares);

@@ -3,7 +3,7 @@ import { shallow, mount } from 'enzyme';
 import { Map } from 'immutable';
 import NProgress from 'nprogress';
 
-import { Loading, mapStateToProps } from '../../components/loading';
+import { Loading, mapStateToProps } from './loading';
 
 describe('components/loading.js', function() {
   beforeEach(() => {

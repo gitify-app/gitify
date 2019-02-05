@@ -5,8 +5,8 @@ import { List, Map } from 'immutable';
 import { ipcRenderer } from 'electron';
 import { MemoryRouter as Router } from 'react-router';
 
-import * as actions from '../actions';
-import * as configureStore from '../store/configureStore';
+import * as actions from './actions';
+import * as configureStore from './store/configureStore';
 
 describe('app.js', function() {
   it('should render the things', function() {
@@ -28,7 +28,7 @@ describe('app.js', function() {
     }));
 
     ReactDOM.render = jest.fn();
-    require('../app');
+    require('./App');
 
     expect(ReactDOM.render).toHaveBeenCalledTimes(1);
     expect(actions.toggleSettingsModal).toHaveBeenCalledTimes(1);
@@ -49,7 +49,7 @@ describe('app.js', function() {
     }));
 
     ReactDOM.render = jest.fn();
-    const { PrivateRoute } = require('../app');
+    const { PrivateRoute } = require('./App');
 
     const tree = renderer.create(
       <Router>
@@ -77,7 +77,7 @@ describe('app.js', function() {
     }));
 
     ReactDOM.render = jest.fn();
-    const { PrivateRoute } = require('../app');
+    const { PrivateRoute } = require('./App');
 
     const tree = renderer.create(
       <Router>
@@ -91,7 +91,7 @@ describe('app.js', function() {
   });
 
   it('should render the Not Found component', function() {
-    const { NotFound } = require('../app');
+    const { NotFound } = require('./App');
 
     const tree = renderer.create(<NotFound />);
 

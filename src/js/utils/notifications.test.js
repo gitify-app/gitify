@@ -1,9 +1,9 @@
 import { List, Map } from 'immutable';
 
-import * as comms from '../../utils/comms';
-import { mockedGithubNotifications } from '../../__mocks__/mockedData';
-import NotificationsUtils, { getNotificationIcon } from '../../utils/notifications';
-import { generateGitHubWebUrl } from '../../utils/helpers';
+import * as comms from './comms';
+import { mockedGithubNotifications } from './../__mocks__/mockedData';
+import NotificationsUtils, { getNotificationIcon } from './notifications';
+import { generateGitHubWebUrl } from './helpers';
 
 describe('utils/notifications.js', () => {
   it('should raise a notification (settings - on)', () => {

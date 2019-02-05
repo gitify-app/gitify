@@ -1,9 +1,9 @@
-import reducer from '../../reducers/settings';
+import reducer from './settings';
 import {
   UPDATE_SETTING,
   HAS_STARRED,
   TOGGLE_SETTINGS_MODAL,
-} from '../../actions';
+} from './../actions';
 
 describe('reducers/settings.js', () => {
   it('should return the initial state', () => {

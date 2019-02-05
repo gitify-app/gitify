@@ -1,13 +1,13 @@
 import { List, Map } from 'immutable';
 
-import * as actions from '../../actions';
-import * as comms from '../../utils/comms';
+import * as actions from '../actions';
+import * as comms from '../utils/comms';
 import {
   mockedGithubNotifications,
   mockedNotificationsRecuderData,
-} from '../../__mocks__/mockedData';
-import notificationsMiddleware from '../../middleware/notifications';
-import NativeNotifications from '../../utils/notifications';
+} from '../__mocks__/mockedData';
+import notificationsMiddleware from '../middleware/notifications';
+import NativeNotifications from '../utils/notifications';
 
 // Keep 3 notifications
 // Ps. To receive 4 on actions.NOTIFICATIONS.SUCCESS,

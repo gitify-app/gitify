@@ -4,14 +4,14 @@ import { shallow } from 'enzyme';
 import { Map } from 'immutable';
 import { MemoryRouter } from 'react-router';
 
-import { mockedEnterpriseAccounts } from '../../__mocks__/mockedData';
+import { mockedEnterpriseAccounts } from './../__mocks__/mockedData';
 
 const { ipcRenderer, remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 
-import { LoginPage, mapStateToProps } from '../../routes/login';
+import { LoginPage, mapStateToProps } from './login';
 
-jest.mock('../../components/logos/dark');
+jest.mock('../components/logos/dark');
 
 describe('components/login.js', () => {
   const props = {

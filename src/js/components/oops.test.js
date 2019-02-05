@@ -1,6 +1,6 @@
 import React from 'react'; // eslint-disable-line no-unused-vars
 import { shallow } from 'enzyme';
-import Oops from '../../components/oops';
+import Oops from './oops';
 
 function setup() {
   const props = {};

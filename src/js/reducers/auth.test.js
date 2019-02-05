@@ -1,7 +1,7 @@
 import { Map } from 'immutable';
 
-import { LOGIN, LOGOUT } from '../../actions';
-import reducer from '../../reducers/auth';
+import { LOGIN, LOGOUT } from './../actions';
+import reducer from './auth';
 
 describe('reducers/auth.js', () => {
   it('should return the initial state', () => {

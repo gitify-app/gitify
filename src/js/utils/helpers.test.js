@@ -1,4 +1,4 @@
-import { generateGitHubWebUrl } from '../../utils/helpers';
+import { generateGitHubWebUrl } from './helpers';
 
 describe('utils/helpers.js', () => {
   it('should generate the GitHub url - non enterprise - (issue)', () => {

@@ -3,13 +3,10 @@ import { List, Map } from 'immutable';
 import renderer from 'react-test-renderer';
 import { shallow } from 'enzyme';
 
-import {
-  NotificationsRoute,
-  mapStateToProps,
-} from '../../routes/notifications';
-import { mockedNotificationsRecuderData } from '../../__mocks__/mockedData';
+import { NotificationsRoute, mapStateToProps } from './notifications';
+import { mockedNotificationsRecuderData } from './../__mocks__/mockedData';
 
-jest.mock('../../components/notifications');
+jest.mock('../components/notifications');
 
 describe('routes/notification.js', () => {
   const props = {

@@ -5,13 +5,13 @@ import { shallow, mount } from 'enzyme';
 
 const { shell, ipcRenderer } = require('electron');
 
-import { Sidebar, mapStateToProps } from '../../components/sidebar';
+import { Sidebar, mapStateToProps } from './sidebar';
 import {
   mockedEnterpriseAccounts,
   mockedNotificationsRecuderData,
-} from '../../__mocks__/mockedData';
+} from './../__mocks__/mockedData';
 
-jest.mock('../../components/logos/white');
+jest.mock('./logos/white');
 
 describe('components/Sidebar.js', () => {
   let clock;

@@ -1,7 +1,7 @@
 const { ipcRenderer } = require('electron');
 
-import * as actions from '../../actions';
-import settingsMiddleware from '../../middleware/settings';
+import * as actions from '../actions';
+import settingsMiddleware from './settings';
 
 const createFakeStore = () => ({
   getState() {

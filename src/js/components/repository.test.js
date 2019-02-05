@@ -3,12 +3,12 @@ import { mount } from 'enzyme';
 import { MemoryRouter } from 'react-router-dom';
 import renderer from 'react-test-renderer';
 
-import { mockedGithubNotifications } from '../../__mocks__/mockedData';
-import { RepositoryNotifications } from '../../components/repository';
+import { mockedGithubNotifications } from './../__mocks__/mockedData';
+import { RepositoryNotifications } from './repository';
 
 const { shell } = require('electron');
 
-jest.mock('../../components/notification');
+jest.mock('./notification');
 
 describe('components/repository.js', function() {
   const props = {
