@@ -5,21 +5,19 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="dist/css/app.css" rel="stylesheet">
+    <link href="dist/app.css" rel="stylesheet">
   </head>
 
   <body>
-      <div id="gitify"></div>
+    <div id="root"></div>
+    <script src="dist/app.js"></script>
+    <script>
+      // Disable zoom
+      document.addEventListener('mousewheel', function(e) {
+        if (e.ctrlKey) {
+          e.preventDefault();
+        }
+      });
+    </script>
   </body>
-
-  <script src="dist/js/app.js"></script>
-
-  <script>
-    // Disable zoom
-    document.addEventListener('mousewheel', function(e) {
-      if (e.ctrlKey) {
-        e.preventDefault();
-      }
-    });
-  </script>
 </html>

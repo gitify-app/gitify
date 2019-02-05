@@ -72,5 +72,5 @@ ReactDOM.render(
 
     </Router>
   </Provider>,
-  document.getElementById('gitify')
+  document.getElementById('root')
 );
