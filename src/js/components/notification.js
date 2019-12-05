@@ -4,6 +4,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import Octicon, { Check } from '@primer/octicons-react'
+
 
 import { markNotification } from '../actions';
 import { generateGitHubWebUrl } from '../utils/helpers';
@@ -75,11 +77,7 @@ export class SingleNotification extends React.Component {
           </div>
         </div>
         <div className="col-1 check-wrapper">
-          <span
-            title="Mark as Read"
-            className="octicon octicon-check"
-            onClick={() => this.markAsRead()}
-          />
+          <button className="btn btn-link py-0 octicon octicon-check" title="Mark as Read" onClick={() => this.markAsRead()}><Octicon icon={Check} /></button>
         </div>
       </div>
     );

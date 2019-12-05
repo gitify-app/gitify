@@ -2,8 +2,9 @@ const { shell } = require('electron');
 
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
+import Octicon, { Check } from '@primer/octicons-react'
 
 import { markRepoNotifications } from '../actions';
 import SingleNotification from './notification';
@@ -41,14 +42,10 @@ export class RepositoryNotifications extends React.Component {
             </span>
           </div>
 
-          <span
-            title="Mark Repository as Read"
-            className="octicon octicon-check"
-            onClick={() => this.markRepoAsRead()}
-          />
+          <button className="btn btn-link py-0 octicon octicon-check" title="Mark Repository as Read" onClick={() => this.markRepoAsRead()}><Octicon icon={Check} /></button>
         </div>
 
-        <ReactCSSTransitionGroup
+        <CSSTransitionGroup
           transitionName="notification"
           transitionEnter={false}
           transitionLeaveTimeout={325}
@@ -60,7 +57,7 @@ export class RepositoryNotifications extends React.Component {
               notification={obj}
             />
           )}
-        </ReactCSSTransitionGroup>
+        </CSSTransitionGroup>
 
       </div>
     );

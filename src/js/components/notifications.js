@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 import RepositoryNotifications from './repository';
 
@@ -18,7 +18,7 @@ export default class AccountNotifications extends React.Component {
     );
 
     return (
-      <ReactCSSTransitionGroup
+      <CSSTransitionGroup
         transitionName="repository"
         transitionEnter={false}
         transitionLeaveTimeout={325}
@@ -43,7 +43,7 @@ export default class AccountNotifications extends React.Component {
             />
           );
         })}
-      </ReactCSSTransitionGroup>
+      </CSSTransitionGroup>
     );
   }
 }

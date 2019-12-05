@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 
 import AllRead from '../components/all-read';
@@ -28,7 +28,7 @@ export class NotificationsRoute extends React.Component {
 
     return (
       <div className={wrapperClass + (!hasNotifications ? ' all-read' : '')}>
-        <ReactCSSTransitionGroup
+        <CSSTransitionGroup
           transitionName="repository"
           transitionEnter={false}
           transitionLeaveTimeout={325}
@@ -40,7 +40,7 @@ export class NotificationsRoute extends React.Component {
               notifications={obj.get('notifications')}
             />
           )}
-        </ReactCSSTransitionGroup>
+        </CSSTransitionGroup>
       </div>
     );
   }
