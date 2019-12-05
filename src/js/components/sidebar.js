@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { List, Map } from 'immutable';
 import { shell } from 'electron';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCog, faSyncAlt } from '@fortawesome/free-solid-svg-icons'
+import { faGithub } from '@fortawesome/free-brands-svg-icons'
 
 import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
 import { isUserEitherLoggedIn } from '../utils/helpers';
@@ -132,19 +135,11 @@ export class Sidebar extends React.Component {
         {isEitherLoggedIn &&
           <ul className="nav nav-inline mb-2">
             <li className="nav-item text-white">
-              <i
-                title="Refresh"
-                className="nav-link fa fa-refresh"
-                onClick={() => this.refreshNotifications()}
-              />
+              <FontAwesomeIcon className="mx-1" icon={faSyncAlt} onClick={() => this.refreshNotifications()} title="Refresh" fixedWidth />
             </li>
 
             <li className="nav-item text-white">
-              <i
-                title="Settings"
-                className="nav-link fa fa-cog"
-                onClick={() => this.props.toggleSettingsModal()}
-              />
+              <FontAwesomeIcon className="mx-1" icon={faCog} onClick={() => this.props.toggleSettingsModal()} title="Settings" fixedWidth />
             </li>
           </ul>}
 
@@ -167,7 +162,7 @@ export class Sidebar extends React.Component {
               className="btn btn-block btn-sm btn-outline-secondary btn-star"
               onClick={this.onOpenBrowser}
             >
-              <i className="fa fa-github" /> Star
+              <FontAwesomeIcon icon={faGithub} title="GitHub" /> Star
             </button>}
         </div>
       </div>
