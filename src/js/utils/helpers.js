@@ -48,9 +48,6 @@ export function authGithub(
     width: 800,
     height: 600,
     show: true,
-    webPreferences: {
-      nodeIntegration: false,
-    },
   });
 
   const githubUrl = `https://${authOptions.hostname}/login/oauth/authorize`;
@@ -80,16 +77,16 @@ export function authGithub(
   }
 
   // If "Done" button is pressed, hide "Loading"
-  authWindow.on('close', function () {
+  authWindow.on('close', () => {
     authWindow.destroy();
   });
 
-  authWindow.webContents.on('did-fail-load', function (
+  authWindow.webContents.on('did-fail-load', (
     event,
     errorCode,
     errorDescription,
     validatedURL
-  ) {
+  ) => {
     if (validatedURL.includes(authOptions.hostname)) {
       authWindow.destroy();
 
@@ -100,7 +97,7 @@ export function authGithub(
     }
   });
 
-  authWindow.webContents.on('will-redirect', function (event, url) {
+  authWindow.webContents.on('will-redirect', (event, url) => {
     event.preventDefault();
     handleCallback(url);
   });
