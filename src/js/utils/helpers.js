@@ -53,13 +53,8 @@ export function authGithub(
     },
   });
 
-  const githubUrl = `https://${authOptions.hostname}/login/oauth/authorize?`;
-  const authUrl =
-    githubUrl +
-    'client_id=' +
-    authOptions.clientId +
-    '&scope=' +
-    Constants.AUTH_SCOPE;
+  const githubUrl = `https://${authOptions.hostname}/login/oauth/authorize`;
+  const authUrl = `${githubUrl}?client_id=${authOptions.clientId}&scope=${Constants.AUTH_SCOPE}`;
 
   authWindow.loadURL(authUrl);
 
@@ -79,17 +74,17 @@ export function authGithub(
     } else if (error) {
       alert(
         "Oops! Something went wrong and we couldn't " +
-          'log you in using Github. Please try again.'
+        'log you in using Github. Please try again.'
       );
     }
   }
 
   // If "Done" button is pressed, hide "Loading"
-  authWindow.on('close', function() {
+  authWindow.on('close', function () {
     authWindow.destroy();
   });
 
-  authWindow.webContents.on('did-fail-load', function(
+  authWindow.webContents.on('did-fail-load', function (
     event,
     errorCode,
     errorDescription,
@@ -105,11 +100,12 @@ export function authGithub(
     }
   });
 
-  authWindow.webContents.on('will-navigate', function(event, url) {
+  authWindow.webContents.on('will-redirect', function (event, url) {
+    event.preventDefault();
     handleCallback(url);
   });
 
-  authWindow.webContents.on('did-get-redirect-request', function(
+  authWindow.webContents.on('did-get-redirect-request', function (
     event,
     oldUrl,
     newUrl
