@@ -1,4 +1,5 @@
 import { Map, List } from 'immutable';
+
 import { LOGIN, LOGOUT } from '../actions';
 
 const initialState = Map({

@@ -33,13 +33,13 @@ export class NotificationsRoute extends React.Component {
           transitionEnter={false}
           transitionLeaveTimeout={325}
         >
-          {accountNotifications.map((obj, key) =>
+          {accountNotifications.map((obj, key) => (
             <AccountNotifications
               key={key}
               hostname={obj.get('hostname')}
               notifications={obj.get('notifications')}
             />
-          )}
+          ))}
         </CSSTransitionGroup>
       </div>
     );

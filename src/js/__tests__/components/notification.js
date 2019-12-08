@@ -58,42 +58,57 @@ describe('components/notification.js', () => {
     expect(wrapper.find('h6').text()).toBe(
       notification.getIn(['subject', 'title'])
     );
-    expect(wrapper.find('.octicon').first().props().className).toContain(
-      'octicon-issue-opened'
-    );
+    expect(
+      wrapper
+        .find('.octicon')
+        .first()
+        .props().className
+    ).toContain('octicon-issue-opened');
 
     wrapper.setProps({
       ...props,
       notification: notification.setIn(['subject', 'type'], 'PullRequest'),
     });
 
-    expect(wrapper.find('.octicon').first().props().className).toContain(
-      'octicon-git-pull-request'
-    );
+    expect(
+      wrapper
+        .find('.octicon')
+        .first()
+        .props().className
+    ).toContain('octicon-git-pull-request');
 
     wrapper.setProps({
       ...props,
       notification: notification.setIn(['subject', 'type'], 'Commit'),
     });
-    expect(wrapper.find('.octicon').first().props().className).toContain(
-      'octicon-git-commit'
-    );
+    expect(
+      wrapper
+        .find('.octicon')
+        .first()
+        .props().className
+    ).toContain('octicon-git-commit');
 
     wrapper.setProps({
       ...props,
       notification: notification.setIn(['subject', 'type'], 'Release'),
     });
-    expect(wrapper.find('.octicon').first().props().className).toContain(
-      'octicon-tag'
-    );
+    expect(
+      wrapper
+        .find('.octicon')
+        .first()
+        .props().className
+    ).toContain('octicon-tag');
 
     wrapper.setProps({
       ...props,
       notification: notification.setIn(['subject', 'type'], 'AnotherType'),
     });
-    expect(wrapper.find('.octicon').first().props().className).toContain(
-      'octicon-question'
-    );
+    expect(
+      wrapper
+        .find('.octicon')
+        .first()
+        .props().className
+    ).toContain('octicon-question');
   });
 
   it('should open a notification in the browser', () => {

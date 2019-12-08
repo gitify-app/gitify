@@ -1,4 +1,4 @@
-import "../scss/app.scss"
+import '../scss/app.scss';
 
 import React from 'react'; // eslint-disable-line
 import ReactDOM from 'react-dom';
@@ -45,11 +45,14 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={props =>
-        isAuthenticated
-          ? <Component {...props} />
-          : <Redirect
-              to={{ pathname: '/login', state: { from: props.location } }}
-            />}
+        isAuthenticated ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{ pathname: '/login', state: { from: props.location } }}
+          />
+        )
+      }
     />
   );
 };
@@ -58,7 +61,6 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-
       <div className="wrapper">
         <Loading />
         <SettingsModal />
@@ -71,7 +73,6 @@ ReactDOM.render(
           <Route component={NotFound} />
         </Switch>
       </div>
-
     </Router>
   </Provider>,
   document.getElementById('gitify')

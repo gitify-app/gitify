@@ -26,9 +26,9 @@ export default class AccountNotifications extends React.Component {
         <div className="account p-2">
           {hostname}
           <span
-            className={`octicon octicon-chevron-${notifications.isEmpty()
-              ? 'left'
-              : 'down'} ml-2`}
+            className={`octicon octicon-chevron-${
+              notifications.isEmpty() ? 'left' : 'down'
+            } ml-2`}
           />
         </div>
 

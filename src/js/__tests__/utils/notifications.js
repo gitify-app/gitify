@@ -2,7 +2,9 @@ import { List, Map } from 'immutable';
 
 import * as comms from '../../utils/comms';
 import { mockedGithubNotifications } from '../../__mocks__/mockedData';
-import NotificationsUtils, { getNotificationIcon } from '../../utils/notifications';
+import NotificationsUtils, {
+  getNotificationIcon,
+} from '../../utils/notifications';
 import { generateGitHubWebUrl } from '../../utils/helpers';
 
 describe('utils/notifications.js', () => {

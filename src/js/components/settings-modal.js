@@ -71,7 +71,6 @@ export class SettingsModal extends React.Component {
         contentLabel="Settings Modal"
       >
         <div className="modal-content">
-
           <div className="modal-header">
             <h5 className="modal-title">Settings</h5>
             <button
@@ -90,20 +89,20 @@ export class SettingsModal extends React.Component {
                 checkboxClass="icheckbox_square-green setting-checkbox"
                 defaultChecked={settings.get('participating')}
                 onChange={evt =>
-                  this.props.updateSetting('participating', evt.target.checked)}
+                  this.props.updateSetting('participating', evt.target.checked)
+                }
               />
             </div>
-
             <div className="row setting">
               <Checkbox
                 label="Play sound"
                 checkboxClass="icheckbox_square-green setting-checkbox"
                 defaultChecked={settings.get('playSound')}
                 onChange={evt =>
-                  this.props.updateSetting('playSound', evt.target.checked)}
+                  this.props.updateSetting('playSound', evt.target.checked)
+                }
               />
             </div>
-
             <div className="row setting">
               <Checkbox
                 label="Show notifications"
@@ -113,35 +112,36 @@ export class SettingsModal extends React.Component {
                   this.props.updateSetting(
                     'showNotifications',
                     evt.target.checked
-                  )}
+                  )
+                }
               />
             </div>
-
             <div className="row setting">
               <Checkbox
                 label="On Click, Mark as Read"
                 checkboxClass="icheckbox_square-green setting-checkbox"
                 defaultChecked={settings.get('markOnClick')}
                 onChange={evt =>
-                  this.props.updateSetting('markOnClick', evt.target.checked)}
+                  this.props.updateSetting('markOnClick', evt.target.checked)
+                }
               />
             </div>
-
             <div className="row setting">
               <Checkbox
                 label="Open at startup"
                 checkboxClass="icheckbox_square-green setting-checkbox"
                 defaultChecked={settings.get('openAtStartup')}
                 onChange={evt =>
-                  this.props.updateSetting('openAtStartup', evt.target.checked)}
+                  this.props.updateSetting('openAtStartup', evt.target.checked)
+                }
               />
             </div>
-
             <RadioGroup
               name="showAppIcon"
               value={settings.get('showAppIcon')}
               onChange={evt =>
-                this.props.updateSetting('showAppIcon', evt.target.value)}
+                this.props.updateSetting('showAppIcon', evt.target.value)
+              }
             >
               <Radio
                 value="both"
@@ -161,9 +161,7 @@ export class SettingsModal extends React.Component {
                 label="Dock Icon"
               />
             </RadioGroup>
-
             <hr />
-
             Version: {remote.app.getVersion()}
           </div>
 

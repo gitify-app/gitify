@@ -72,8 +72,7 @@ export function fetchNotifications() {
         return;
       }
 
-      const url = `https://api.${Constants.DEFAULT_AUTH_OPTIONS
-        .hostname}/${endpointSuffix}`;
+      const url = `https://api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}/${endpointSuffix}`;
       const token = getState().auth.get('token');
       return apiRequestAuth(url, method, token);
     }
@@ -203,8 +202,7 @@ export function markRepoNotifications(repoSlug, hostname) {
 export const HAS_STARRED = makeAsyncActionSet('HAS_STARRED');
 export function checkHasStarred() {
   return (dispatch, getState) => {
-    const url = `https://api.${Constants.DEFAULT_AUTH_OPTIONS
-      .hostname}/user/starred/${Constants.REPO_SLUG}`;
+    const url = `https://api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}/user/starred/${Constants.REPO_SLUG}`;
     const method = 'GET';
     const token = getState().auth.get('token');
 

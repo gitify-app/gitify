@@ -11,9 +11,10 @@
     "dist": "npm run build && npm run package && npm run codesign",
     "lint-js": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
     "lint-sass": "sass-lint -c .sass-lint.yml -v -q",
-    "prettier": "prettier --single-quote --trailing-comma es5 --write 'src/js/**/*.js'",
+    "prettier-check": "prettier --check 'src/**/*.{js,ts,tsx}'",
+    "prettier": "prettier --single-quote --trailing-comma es5 --write 'src/**/*.{js,ts,tsx}'",
     "jest": "jest",
-    "test": "npm run lint-js && npm run lint-sass && npm run jest -- --coverage",
+    "test": "yarn prettier-check && npm run lint-js && npm run lint-sass && npm run jest -- --coverage",
     "start": "electron . –enable-logging"
   },
   "repository": {
@@ -93,7 +94,7 @@
     "sass-loader": "^8.0.0",
     "style-loader": "^1.0.1",
     "ts-loader": "^6.2.1",
-    "typescript": "^3.7.2"
+    "typescript": "^3.7.3"
   },
   "devDependencies": {
     "babel-jest": "=20.0.3",
@@ -102,7 +103,7 @@
     "enzyme": "=2.8.2",
     "jest": "=20.0.4",
     "nock": "=9.0.13",
-    "prettier": "=1.4.4",
+    "prettier": "=1.19.1",
     "react-test-renderer": "=16.12.0",
     "redux-logger": "=3.0.6",
     "redux-mock-store": "=1.2.3",

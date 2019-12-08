@@ -4,7 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
-import Octicon, { Check } from '@primer/octicons-react'
+import Octicon, { Check } from '@primer/octicons-react';
 
 import { markRepoNotifications } from '../actions';
 import SingleNotification from './notification';
@@ -42,7 +42,13 @@ export class RepositoryNotifications extends React.Component {
             </span>
           </div>
 
-          <button className="btn btn-link py-0 octicon octicon-check" title="Mark Repository as Read" onClick={() => this.markRepoAsRead()}><Octicon icon={Check} /></button>
+          <button
+            className="btn btn-link py-0 octicon octicon-check"
+            title="Mark Repository as Read"
+            onClick={() => this.markRepoAsRead()}
+          >
+            <Octicon icon={Check} />
+          </button>
         </div>
 
         <CSSTransitionGroup
@@ -50,15 +56,14 @@ export class RepositoryNotifications extends React.Component {
           transitionEnter={false}
           transitionLeaveTimeout={325}
         >
-          {repo.map(obj =>
+          {repo.map(obj => (
             <SingleNotification
               key={obj.get('id')}
               hostname={hostname}
               notification={obj}
             />
-          )}
+          ))}
         </CSSTransitionGroup>
-
       </div>
     );
   }

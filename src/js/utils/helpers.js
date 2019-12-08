@@ -71,7 +71,7 @@ export function authGithub(
     } else if (error) {
       alert(
         "Oops! Something went wrong and we couldn't " +
-        'log you in using Github. Please try again.'
+          'log you in using Github. Please try again.'
       );
     }
   }
@@ -81,28 +81,26 @@ export function authGithub(
     authWindow.destroy();
   });
 
-  authWindow.webContents.on('did-fail-load', (
-    event,
-    errorCode,
-    errorDescription,
-    validatedURL
-  ) => {
-    if (validatedURL.includes(authOptions.hostname)) {
-      authWindow.destroy();
+  authWindow.webContents.on(
+    'did-fail-load',
+    (event, errorCode, errorDescription, validatedURL) => {
+      if (validatedURL.includes(authOptions.hostname)) {
+        authWindow.destroy();
 
-      dialog.showErrorBox(
-        'Invalid Hostname',
-        `Could not load https://${authOptions.hostname}/.`
-      );
+        dialog.showErrorBox(
+          'Invalid Hostname',
+          `Could not load https://${authOptions.hostname}/.`
+        );
+      }
     }
-  });
+  );
 
   authWindow.webContents.on('will-redirect', (event, url) => {
     event.preventDefault();
     handleCallback(url);
   });
 
-  authWindow.webContents.on('did-get-redirect-request', function (
+  authWindow.webContents.on('did-get-redirect-request', function(
     event,
     oldUrl,
     newUrl

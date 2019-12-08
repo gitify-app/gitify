@@ -18,7 +18,9 @@ export default class AllRead extends React.PureComponent {
       postfix: '',
     };
 
-    malarkey(elem, opts).type(message).pause();
+    malarkey(elem, opts)
+      .type(message)
+      .pause();
   }
 
   render() {
