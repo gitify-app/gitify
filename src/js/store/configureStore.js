@@ -13,13 +13,19 @@ import notificationsMiddlware from '../middleware/notifications';
 import settingsMiddleware from '../middleware/settings';
 import rootReducer from '../reducers';
 
-const isDev = process.mainModule.filename.indexOf('app.asar') === -1;
+const isDev =
+  process.mainModule &&
+  process.mainModule.filename &&
+  process.mainModule.filename.indexOf('app.asar') === -1;
 
 export default function configureStore(initialState) {
   const engine = filter(
     createEngine(constants.STORAGE_KEY),
     ['settings', ['auth', 'token'], ['auth', 'enterpriseAccounts']],
-    [['settings', 'hasStarred'], ['settings', 'showSettingsModal']]
+    [
+      ['settings', 'hasStarred'],
+      ['settings', 'showSettingsModal'],
+    ]
   );
 
   const storageMiddleware = storage.createMiddleware(

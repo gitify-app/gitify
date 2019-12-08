@@ -73,17 +73,37 @@ describe('components/Sidebar.js', () => {
     expect(wrapper.find('.fa-cog').length).toBe(1);
 
     expect(
-      wrapper.find('.badge-account').first().children().first().text()
+      wrapper
+        .find('.badge-account')
+        .first()
+        .children()
+        .first()
+        .text()
     ).toBe('GitHub');
     expect(
-      wrapper.find('.badge-account').first().children().last().text()
+      wrapper
+        .find('.badge-account')
+        .first()
+        .children()
+        .last()
+        .text()
     ).toBe(`${notifications.size}`);
     expect(
-      wrapper.find('.badge-account').last().children().first().text()
+      wrapper
+        .find('.badge-account')
+        .last()
+        .children()
+        .first()
+        .text()
     ).toBe('gitify');
-    expect(wrapper.find('.badge-account').last().children().last().text()).toBe(
-      `${notifications.size}`
-    );
+    expect(
+      wrapper
+        .find('.badge-account')
+        .last()
+        .children()
+        .last()
+        .text()
+    ).toBe(`${notifications.size}`);
   });
 
   it('should clear the interval when unmounting', () => {

@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import { authGithub } from '../utils/helpers';
 
@@ -39,7 +42,7 @@ export const validate = values => {
 
 const renderField = (
   { input, label, placeholder, meta: { touched, error } } // eslint-disable-line react/prop-types
-) =>
+) => (
   <div className={touched && error ? 'form-group has-danger' : 'form-group'}>
     <label htmlFor={input.name}>{label}</label>
     <div>
@@ -52,7 +55,8 @@ const renderField = (
 
       {touched && error && <div className="form-control-feedback">{error}</div>}
     </div>
-  </div>;
+  </div>
+);
 
 export class EnterpriseLogin extends React.Component {
   static propTypes = {
@@ -79,7 +83,7 @@ export class EnterpriseLogin extends React.Component {
       <div className="container-fluid main-container login">
         <div className="d-flex flex-row-reverse">
           <Link to="/login" className="btn btn-close" replace>
-            <i className="fa fa-close" />
+            <FontAwesomeIcon icon={faTimes} title="Close" />
           </Link>
         </div>
 
@@ -108,7 +112,8 @@ export class EnterpriseLogin extends React.Component {
           />
 
           <button className="btn btn-md btn-login mt-2" type="submit">
-            <i className="fa fa-github" /> Login to GitHub Enterprise
+            <FontAwesomeIcon icon={faGithub} title="GitHub" /> Login to GitHub
+            Enterprise
           </button>
         </form>
       </div>
@@ -122,7 +127,10 @@ export function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null)(
+export default connect(
+  mapStateToProps,
+  null
+)(
   reduxForm({
     form: 'loginEnterprise',
     // Use for development

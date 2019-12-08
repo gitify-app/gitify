@@ -1,62 +1,41 @@
-/* @group Imports */
-
-@import "../../node_modules/icheck/skins/all.css";
-
-/* @end Imports */
-
-
 /* @group Colors */
 
-$brand-purple: #555B6E;
+$brand-purple: #555b6e;
 $brand-purple-dark: darken($brand-purple, 10%);
 
-$white: #FFF;
-$gray: #55595C;
-$gray-dark: #373A3C;
+$white: #fff;
+$gray: #55595c;
+$gray-dark: #373a3c;
 
 $gray-light: darken($white, 10%);
 $gray-darker: darken($gray, 5%);
 
-$modal-overlay-bg: rgba(0, 0, 0, .25);
+$modal-overlay-bg: rgba(0, 0, 0, 0.25);
 
 /* @end Colors */
-
-
-/* @group Fonts Overrides */
-
-$fa-font-path: "../fonts";
-@import "node_modules/font-awesome/scss/font-awesome.scss";
-
-$octicons-font-path: "../fonts/";
-@import "node_modules/octicons/build/font/_octicons.scss";
-
-/* @end Fonts Overrides */
-
 
 /* @group Bootstrap Overrides */
 
 $sidebar-width: 100px;
 
-$brand-primary: #555B6E;
-$brand-success: #69B578;
-$brand-info: #8BA9C6;
-$brand-warning: #FCAA67;
-$brand-danger: #B7524F;
+$brand-primary: #555b6e;
+$brand-success: #69b578;
+$brand-info: #8ba9c6;
+$brand-warning: #fcaa67;
+$brand-danger: #b7524f;
 
-$font-family-base:
--apple-system, BlinkMacSystemFont,
-"Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
-"Helvetica Neue", sans-serif;
+$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+  'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
 
 $alert-padding: 8px;
 $alert-border-radius: 0;
 $alert-danger-bg: $brand-danger;
 $alert-danger-text: $white;
 
-@import "../../node_modules/bootstrap/scss/bootstrap.scss";
+@import '../../node_modules/bootstrap/scss/bootstrap.scss';
 
 /* @end Bootstrap Overrides */
-
 
 /* @group Mixins */
 
@@ -73,13 +52,13 @@ $alert-danger-text: $white;
 }
 
 // opacity
-@mixin opacity($opacity: .5) {
+@mixin opacity($opacity: 0.5) {
   opacity: $opacity;
 }
 
 @mixin check-octicon {
   &.octicon-check {
-    transition: all .4s;
+    transition: all 0.4s;
     color: $gray-light;
 
     &:hover {
@@ -90,7 +69,6 @@ $alert-danger-text: $white;
 }
 
 /* @end Mixins */
-
 
 /* @group Misc */
 
@@ -136,11 +114,10 @@ input {
 
 /* @end Misc */
 
-
 /* @group React Modal */
 
 $modal-animation-duration: 250ms;
-$modal-scale-min: .35;
+$modal-scale-min: 0.35;
 
 // sass-lint:disable class-name-format force-element-nesting
 
@@ -159,8 +136,8 @@ $modal-scale-min: .35;
 }
 
 .ReactModal__Content {
-  transform: scale(.5) rotateX(-30deg);
-  -webkit-transform: scale(.5) rotateX(-30deg);
+  transform: scale(0.5) rotateX(-30deg);
+  -webkit-transform: scale(0.5) rotateX(-30deg);
 }
 
 .ReactModal__Content--after-open {
@@ -179,7 +156,6 @@ $modal-scale-min: .35;
 
 /* @end React Modal */
 
-
 /* @group Animations */
 
 .notification-leave {
@@ -188,7 +164,7 @@ $modal-scale-min: .35;
   opacity: 1;
   transition-property: transform, opacity;
   transition-duration: 400ms;
-  transition-timing-function: cubic-bezier(.175, .665, .32, 1), linear;
+  transition-timing-function: cubic-bezier(0.175, 0.665, 0.32, 1), linear;
 
   &.notification-leave-active {
     transform: translate(350px, 0);
@@ -203,10 +179,10 @@ $modal-scale-min: .35;
   opacity: 1;
   transition-property: transform, opacity;
   transition-duration: 400ms;
-  transition-timing-function: cubic-bezier(.175, .665, .32, 1), linear;
+  transition-timing-function: cubic-bezier(0.175, 0.665, 0.32, 1), linear;
 
   &.repository-leave-active {
-    transform: scale(.01);
+    transform: scale(0.01);
     opacity: 0;
   }
 }
@@ -244,7 +220,6 @@ $modal-scale-min: .35;
 
 /* @end Loading */
 
-
 /* @group Sidebar */
 
 .wrapper {
@@ -256,7 +231,7 @@ $modal-scale-min: .35;
   left: $sidebar-width;
   margin-left: -$sidebar-width;
   background-color: $brand-purple;
-  padding: 2rem .75rem;
+  padding: 2rem 0.75rem;
   width: $sidebar-width;
   height: 100%;
   overflow-y: auto;
@@ -265,7 +240,7 @@ $modal-scale-min: .35;
 
   .logo {
     display: block;
-    margin: .75rem auto;
+    margin: 0.75rem auto;
     max-width: $sidebar-width / 2;
     -webkit-app-region: no-drag;
     -webkit-user-drag: none;
@@ -283,7 +258,7 @@ $modal-scale-min: .35;
       -webkit-app-region: no-drag;
 
       .nav-link {
-        padding: .5em;
+        padding: 0.5em;
       }
     }
   }
@@ -293,9 +268,9 @@ $modal-scale-min: .35;
     flex-direction: row;
     justify-content: flex-end;
 
-    margin: 0 -.75rem;
+    margin: 0 -0.75rem;
     border-bottom: 1px solid darken($brand-purple-dark, 10%);
-    padding: .5rem;
+    padding: 0.5rem;
     text-transform: uppercase;
     line-height: 1;
     color: darken($brand-purple-dark, 10%);
@@ -318,9 +293,9 @@ $modal-scale-min: .35;
 
   .footer {
     position: absolute;
-    right: .75rem;
+    right: 0.75rem;
     bottom: 1rem;
-    left: .75rem;
+    left: 0.75rem;
 
     .btn-add {
       font-size: 75%;
@@ -337,9 +312,7 @@ $modal-scale-min: .35;
   }
 }
 
-
 /* @end Sidebar */
-
 
 /* @group Settings */
 
@@ -352,7 +325,7 @@ $modal-scale-min: .35;
   }
 
   .setting {
-    margin: .25rem 0;
+    margin: 0.25rem 0;
   }
 
   .setting-checkbox + span,
@@ -370,7 +343,6 @@ $modal-scale-min: .35;
 }
 
 /* @end Settings */
-
 
 /* @group Page / Login  */
 
@@ -402,25 +374,24 @@ $modal-scale-min: .35;
 
   .btn-login {
     @include button-variant($white, $gray, $gray);
-    padding: .55rem 1.25rem;
+    padding: 0.55rem 1.25rem;
 
     .fa {
-      margin-right: .5rem;
+      margin-right: 0.5rem;
     }
   }
 }
 
 /* @end Page / Login  */
 
-
 /* @group Notifications Route / Account  */
 
 .account {
-  margin-bottom: .5px;
+  margin-bottom: 0.5px;
   background-color: $brand-purple-dark;
   text-align: right;
   color: $white;
-  font-size: .9rem;
+  font-size: 0.9rem;
 
   .octicon {
     font-size: 1.1rem;
@@ -428,7 +399,6 @@ $modal-scale-min: .35;
 }
 
 /* @end Notifications Route / Account  */
-
 
 /* @group Component / Repository  */
 
@@ -455,7 +425,6 @@ $modal-scale-min: .35;
 }
 
 /* @end Component / Repository  */
-
 
 /* @group Component / Notifications  */
 
@@ -493,25 +462,43 @@ $modal-scale-min: .35;
       line-height: 40px;
 
       .cursor {
-        animation: blink .9s infinite;
+        animation: blink 0.9s infinite;
         opacity: 1;
         padding-left: 5px;
         color: $gray;
 
         @keyframes blink {
-          0% { opacity: 1; }
-          50% { opacity: 0; }
-          100% { opacity: 1; }
+          0% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
         }
         @-webkit-keyframes blink {
-          0% { opacity: 1; }
-          50% { opacity: 0; }
-          100% { opacity: 1; }
+          0% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
         }
         @-moz-keyframes blink {
-          0% { opacity: 1; }
-          50% { opacity: 0; }
-          100% { opacity: 1; }
+          0% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0;
+          }
+          100% {
+            opacity: 1;
+          }
         }
       }
     }
@@ -519,7 +506,6 @@ $modal-scale-min: .35;
 }
 
 /* @end Component / Notifications  */
-
 
 /* @group Component / Notification  */
 
@@ -537,7 +523,7 @@ $modal-scale-min: .35;
     }
 
     h6 {
-      margin-bottom: .25em;
+      margin-bottom: 0.25em;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
@@ -559,7 +545,6 @@ $modal-scale-min: .35;
 }
 
 /* @end Component / Notification  */
-
 
 /* @group Network Status */
 

@@ -21,7 +21,7 @@ const autoStart = new AutoLaunch({
   isHidden: true,
 });
 
-app.on('ready', function() {
+app.on('ready', function () {
   function createAppIcon() {
     let trayIcon = new Tray(iconIdle);
 
@@ -127,17 +127,18 @@ app.on('ready', function() {
       show: false,
       center: true,
       fullscreenable: false,
-      titleBarStyle: 'hidden-inset',
+      titleBarStyle: 'hiddenInset',
       webPreferences: {
         overlayScrollbars: true,
+        nodeIntegration: true
       },
     };
 
     appWindow = new BrowserWindow(defaults);
-    appWindow.loadURL('file://' + __dirname + '/index.html');
+    appWindow.loadURL(`file://${__dirname}/index.html`);
     appWindow.show();
 
-    appWindow.on('close', function(event) {
+    appWindow.on('close', function (event) {
       if (!isQuitting) {
         event.preventDefault();
         appWindow.hide();
@@ -156,7 +157,9 @@ app.on('ready', function() {
   ipcMain.on('startup-enable', () => autoStart.enable());
   ipcMain.on('startup-disable', () => autoStart.disable());
   ipcMain.on('check-update', () => checkAutoUpdate(true));
-  ipcMain.on('set-badge', (event, count) => app.setBadgeCount(count));
+  ipcMain.on('set-badge', (_, count) => {
+    app.badgeCount = count
+  });
   ipcMain.on('app-quit', () => app.quit());
 
   ipcMain.on('update-icon', (event, arg) => {

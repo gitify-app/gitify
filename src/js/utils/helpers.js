@@ -48,18 +48,10 @@ export function authGithub(
     width: 800,
     height: 600,
     show: true,
-    webPreferences: {
-      nodeIntegration: false,
-    },
   });
 
-  const githubUrl = `https://${authOptions.hostname}/login/oauth/authorize?`;
-  const authUrl =
-    githubUrl +
-    'client_id=' +
-    authOptions.clientId +
-    '&scope=' +
-    Constants.AUTH_SCOPE;
+  const githubUrl = `https://${authOptions.hostname}/login/oauth/authorize`;
+  const authUrl = `${githubUrl}?client_id=${authOptions.clientId}&scope=${Constants.AUTH_SCOPE}`;
 
   authWindow.loadURL(authUrl);
 
@@ -85,27 +77,26 @@ export function authGithub(
   }
 
   // If "Done" button is pressed, hide "Loading"
-  authWindow.on('close', function() {
+  authWindow.on('close', () => {
     authWindow.destroy();
   });
 
-  authWindow.webContents.on('did-fail-load', function(
-    event,
-    errorCode,
-    errorDescription,
-    validatedURL
-  ) {
-    if (validatedURL.includes(authOptions.hostname)) {
-      authWindow.destroy();
+  authWindow.webContents.on(
+    'did-fail-load',
+    (event, errorCode, errorDescription, validatedURL) => {
+      if (validatedURL.includes(authOptions.hostname)) {
+        authWindow.destroy();
 
-      dialog.showErrorBox(
-        'Invalid Hostname',
-        `Could not load https://${authOptions.hostname}/.`
-      );
+        dialog.showErrorBox(
+          'Invalid Hostname',
+          `Could not load https://${authOptions.hostname}/.`
+        );
+      }
     }
-  });
+  );
 
-  authWindow.webContents.on('will-navigate', function(event, url) {
+  authWindow.webContents.on('will-redirect', (event, url) => {
+    event.preventDefault();
     handleCallback(url);
   });
 

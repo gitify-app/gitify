@@ -4,6 +4,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { List, Map } from 'immutable';
 import { shell } from 'electron';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCog, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
 import { isUserEitherLoggedIn } from '../utils/helpers';
@@ -65,9 +68,11 @@ export class Sidebar extends React.Component {
       >
         <div className="mr-auto name">GitHub</div>
         <div>
-          {notificationsCount === 0
-            ? <span className="octicon octicon-check" />
-            : notificationsCount}
+          {notificationsCount === 0 ? (
+            <span className="octicon octicon-check" />
+          ) : (
+            notificationsCount
+          )}
         </div>
       </div>
     );
@@ -91,15 +96,17 @@ export class Sidebar extends React.Component {
         <div
           key={idx}
           title={account.get('hostname')}
-          className={`badge-account${enterpriseAccounts.size === idx + 1
-            ? ' last'
-            : ''}`}
+          className={`badge-account${
+            enterpriseAccounts.size === idx + 1 ? ' last' : ''
+          }`}
         >
           <div className="mr-auto name">{accountDomain}</div>
           <div>
-            {notificationsCount === 0
-              ? <span className="octicon octicon-check" />
-              : notificationsCount}
+            {notificationsCount === 0 ? (
+              <span className="octicon octicon-check" />
+            ) : (
+              notificationsCount
+            )}
           </div>
         </div>
       );
@@ -122,31 +129,37 @@ export class Sidebar extends React.Component {
       <div className="sidebar-wrapper">
         <LogoWhite onClick={this.onOpenBrowser} />
 
-        {isEitherLoggedIn &&
+        {isEitherLoggedIn && (
           <div className="badge badge-count text-success my-1">
             {notifications.isEmpty()
               ? 'All Read'
               : `${notificationsCount} Unread`}
-          </div>}
+          </div>
+        )}
 
-        {isEitherLoggedIn &&
+        {isEitherLoggedIn && (
           <ul className="nav nav-inline mb-2">
             <li className="nav-item text-white">
-              <i
-                title="Refresh"
-                className="nav-link fa fa-refresh"
+              <FontAwesomeIcon
+                className="mx-1"
+                icon={faSyncAlt}
                 onClick={() => this.refreshNotifications()}
+                title="Refresh"
+                fixedWidth
               />
             </li>
 
             <li className="nav-item text-white">
-              <i
-                title="Settings"
-                className="nav-link fa fa-cog"
+              <FontAwesomeIcon
+                className="mx-1"
+                icon={faCog}
                 onClick={() => this.props.toggleSettingsModal()}
+                title="Settings"
+                fixedWidth
               />
             </li>
-          </ul>}
+          </ul>
+        )}
 
         {isGitHubLoggedIn &&
           !this.props.enterpriseAccounts.isEmpty() &&
@@ -154,21 +167,24 @@ export class Sidebar extends React.Component {
         {this._renderEnterpriseAccounts()}
 
         <div className="footer">
-          {!!isEitherLoggedIn &&
+          {!!isEitherLoggedIn && (
             <Link
               to="/enterpriselogin"
               className="btn btn-block btn-sm btn-outline-secondary btn-add"
             >
-              Add <br />Enterprise
-            </Link>}
+              Add <br />
+              Enterprise
+            </Link>
+          )}
 
-          {!hasStarred &&
+          {!hasStarred && (
             <button
               className="btn btn-block btn-sm btn-outline-secondary btn-star"
               onClick={this.onOpenBrowser}
             >
-              <i className="fa fa-github" /> Star
-            </button>}
+              <FontAwesomeIcon icon={faGithub} title="GitHub" /> Star
+            </button>
+          )}
         </div>
       </div>
     );

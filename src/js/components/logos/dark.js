@@ -10,16 +10,15 @@ export default class LogoWhite extends React.PureComponent {
     /* eslint-disable */
     return (
       <svg
-        className={`logo${this.props.className
-          ? ' ' + this.props.className
-          : ''}`}
+        className={`logo${
+          this.props.className ? ' ' + this.props.className : ''
+        }`}
         onClick={() => this.props.onClick && this.props.onClick()}
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
         viewBox="0 0 180.31 182.52"
       >
         <defs>
-
           <linearGradient
             id="linear-dark-gradient"
             x1="300.53"
@@ -47,7 +46,6 @@ export default class LogoWhite extends React.PureComponent {
             y2="174.1"
             xlinkHref="#linear-dark-gradient"
           />
-
         </defs>
 
         <path

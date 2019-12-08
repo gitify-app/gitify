@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import { CSSTransitionGroup } from 'react-transition-group';
 
 import RepositoryNotifications from './repository';
 
@@ -18,7 +18,7 @@ export default class AccountNotifications extends React.Component {
     );
 
     return (
-      <ReactCSSTransitionGroup
+      <CSSTransitionGroup
         transitionName="repository"
         transitionEnter={false}
         transitionLeaveTimeout={325}
@@ -26,9 +26,9 @@ export default class AccountNotifications extends React.Component {
         <div className="account p-2">
           {hostname}
           <span
-            className={`octicon octicon-chevron-${notifications.isEmpty()
-              ? 'left'
-              : 'down'} ml-2`}
+            className={`octicon octicon-chevron-${
+              notifications.isEmpty() ? 'left' : 'down'
+            } ml-2`}
           />
         </div>
 
@@ -43,7 +43,7 @@ export default class AccountNotifications extends React.Component {
             />
           );
         })}
-      </ReactCSSTransitionGroup>
+      </CSSTransitionGroup>
     );
   }
 }
