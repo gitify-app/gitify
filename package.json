@@ -8,13 +8,12 @@
     "watch": "webpack --config webpack.config.js --watch",
     "package": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --electron-version=1.6.10 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
     "codesign": "bash scripts/codesign.bash",
-    "dist": "npm run build && npm run package && npm run codesign",
+    "dist": "yarn build && yarn package && yarn codesign",
     "lint-js": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
-    "lint-sass": "sass-lint -c .sass-lint.yml -v -q",
     "prettier-check": "prettier --check 'src/**/*.{js,ts,tsx}'",
     "prettier": "prettier --single-quote --trailing-comma es5 --write 'src/**/*.{js,ts,tsx}'",
     "jest": "jest",
-    "test": "yarn prettier-check && npm run lint-js && npm run lint-sass && npm run jest -- --coverage",
+    "test": "yarn prettier-check && yarn lint-js && yarn jest -- --coverage",
     "start": "electron . –enable-logging"
   },
   "repository": {
