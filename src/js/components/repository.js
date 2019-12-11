@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import Octicon, { Check } from '@primer/octicons-react';
 
 import { markRepoNotifications } from '../actions';
-import SingleNotification from './notification';
+import NotificationItem from './notification';
 
 export class RepositoryNotifications extends React.Component {
   static propTypes = {
@@ -57,10 +57,10 @@ export class RepositoryNotifications extends React.Component {
           transitionLeaveTimeout={325}
         >
           {repo.map(obj => (
-            <SingleNotification
+            <NotificationItem
               key={obj.get('id')}
               hostname={hostname}
-              notification={obj}
+              notification={obj.toJS()}
             />
           ))}
         </CSSTransitionGroup>
