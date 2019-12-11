@@ -76,7 +76,7 @@
     "react-addons-shallow-compare": "=15.5.2",
     "react-addons-test-utils": "=15.5.1",
     "react-dom": "=16.12.0",
-    "react-emojione": "=2.0.0",
+    "react-emojione": "=5.0.1",
     "react-icheck": "=0.3.8",
     "react-modal": "=3.11.1",
     "react-redux": "=5.0.5",

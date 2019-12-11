@@ -13,9 +13,9 @@ import Octicon, {
   Question,
 } from '@primer/octicons-react';
 
-import { Notification } from '../../types/github';
-import { markNotification } from '../actions';
 import { generateGitHubWebUrl } from '../utils/helpers';
+import { markNotification } from '../actions';
+import { Notification } from '../../types/github';
 
 interface IProps {
   hostname: string;

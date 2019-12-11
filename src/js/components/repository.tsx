@@ -1,36 +1,36 @@
 const { shell } = require('electron');
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { CSSTransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 import Octicon, { Check } from '@primer/octicons-react';
 
 import { markRepoNotifications } from '../actions';
+import { Notification } from '../../types/github';
 import NotificationItem from './notification';
 
-export class RepositoryNotifications extends React.Component {
-  static propTypes = {
-    hostname: PropTypes.string.isRequired,
-    repo: PropTypes.any.isRequired,
-    repoName: PropTypes.string.isRequired,
-    markRepoNotifications: PropTypes.func.isRequired,
-  };
+interface IProps {
+  hostname: string;
+  repo: [Notification];
+  repoName: string;
+  markRepoNotifications: (repoSlug: string, hostname: string) => void;
+}
 
+export class RepositoryNotifications extends React.Component<IProps> {
   openBrowser() {
-    const url = this.props.repo.first().getIn(['repository', 'html_url']);
+    const url = this.props.repo[0].repository.html_url;
     shell.openExternal(url);
   }
 
   markRepoAsRead() {
     const { hostname, repo } = this.props;
-    const repoSlug = repo.first().getIn(['repository', 'full_name']);
+    const repoSlug = repo[0].repository.full_name;
     this.props.markRepoNotifications(repoSlug, hostname);
   }
 
   render() {
     const { hostname, repo } = this.props;
-    const avatarUrl = repo.first().getIn(['repository', 'owner', 'avatar_url']);
+    const avatarUrl = repo[0].repository.owner.avatar_url;
 
     return (
       <div>
@@ -58,9 +58,9 @@ export class RepositoryNotifications extends React.Component {
         >
           {repo.map(obj => (
             <NotificationItem
-              key={obj.get('id')}
+              key={obj.id}
               hostname={hostname}
-              notification={obj.toJS()}
+              notification={obj}
             />
           ))}
         </CSSTransitionGroup>

@@ -5295,9 +5295,10 @@ react-dom@=16.12.0:
     prop-types "^15.6.2"
     scheduler "^0.18.0"
 
-react-emojione@=2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/react-emojione/-/react-emojione-2.0.0.tgz#7a29026430425946f32a2d380d4c6621fb07d2f1"
+react-emojione@=5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/react-emojione/-/react-emojione-5.0.1.tgz#faa4ccdad4bf24e2f5a1a96d9b44c2e902d2bc79"
+  integrity sha512-sjI6k8uQ14rWENYoAb+2BFQGLBt/cpLDJJNhnZvdFJytAJijhv+JmbmyyrfQPdyID0Cs4N8XFqnek0xq6POwGA==
 
 react-icheck@=0.3.8:
   version "0.3.8"
