@@ -34,10 +34,18 @@ export class Sidebar extends React.Component {
     }, iFrequency);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.connectedAccounts > this.props.connectedAccounts) {
-      this.props.fetchNotifications();
+  state = {
+    connectedAccounts: [],
+  };
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.connectedAccounts > state.connectedAccounts) {
+      props.fetchNotifications();
     }
+
+    return {
+      connectedAccounts: props.connectedAccounts,
+    };
   }
 
   componentWillUnmount() {
