@@ -1,4 +1,5 @@
-import { UPDATE_SETTING, HAS_STARRED, TOGGLE_SETTINGS_MODAL } from '../actions';
+import { UPDATE_SETTING, HAS_STARRED } from '../actions';
+import { TOGGLE_SETTINGS_MODAL } from '../../types/actions';
 import { Map } from 'immutable';
 
 const initialState = Map({

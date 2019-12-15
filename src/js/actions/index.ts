@@ -8,6 +8,10 @@ import {
   generateGitHubAPIUrl,
 } from '../utils/helpers';
 import Constants from '../utils/constants';
+import {
+  ToggleSettingsModalAction,
+  TOGGLE_SETTINGS_MODAL,
+} from '../../types/actions';
 
 export function makeAsyncActionSet(actionName) {
   return {
@@ -246,8 +250,7 @@ export function updateSetting(setting, value) {
   };
 }
 
-export const TOGGLE_SETTINGS_MODAL = 'TOGGLE_SETTINGS_MODAL';
-export function toggleSettingsModal() {
+export function toggleSettingsModal(): ToggleSettingsModalAction {
   return {
     type: TOGGLE_SETTINGS_MODAL,
   };

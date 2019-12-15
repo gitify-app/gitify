@@ -8,7 +8,8 @@
     "noImplicitAny": false,
     "jsx": "react",
     "allowJs": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "typeRoots": ["./src/types"]
   },
   "exclude": ["node_modules"],
   "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"]
