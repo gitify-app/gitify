@@ -1,7 +1,6 @@
 const ipcRenderer = require('electron').ipcRenderer;
 
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
@@ -11,8 +10,20 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import { authGithub } from '../utils/helpers';
 
-export const validate = values => {
-  const errors = {};
+interface IValues {
+  hostname?: string;
+  clientId?: string;
+  clientSecret?: string;
+}
+
+interface IFormErrors {
+  hostname?: string;
+  clientId?: string;
+  clientSecret?: string;
+}
+
+export const validate = (values: IValues): IFormErrors => {
+  const errors: IFormErrors = {};
   if (!values.hostname) {
     errors.hostname = 'Required';
   } else if (
@@ -61,20 +72,30 @@ const renderField = ({
   </div>
 );
 
-export class EnterpriseLogin extends React.Component {
-  static propTypes = {
-    history: PropTypes.object.isRequired,
-    enterpriseAccounts: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
+interface IProps {
+  history: any;
+  enterpriseAccountsCount: number;
+  handleSubmit: (data: any) => any;
+}
+
+interface IState {
+  enterpriseAccountsCount: number;
+}
+
+export class EnterpriseLogin extends React.Component<IProps, IState> {
+  state = {
+    enterpriseAccountsCount: 0,
   };
 
-  componentWillReceiveProps(nextProps) {
-    if (
-      nextProps.enterpriseAccounts.size > this.props.enterpriseAccounts.size
-    ) {
+  static getDerivedStateFromProps(props: IProps, state) {
+    if (props.enterpriseAccountsCount > state.enterpriseAccountsCount) {
       ipcRenderer.send('reopen-window');
-      this.props.history.goBack();
+      props.history.goBack();
     }
+
+    return {
+      enterpriseAccountsCount: props.enterpriseAccountsCount,
+    };
   }
 
   handleSubmit(data, dispatch) {
@@ -126,7 +147,7 @@ export class EnterpriseLogin extends React.Component {
 
 export function mapStateToProps(state) {
   return {
-    enterpriseAccounts: state.auth.get('enterpriseAccounts'),
+    enterpriseAccountsCount: state.auth.get('enterpriseAccounts').size,
   };
 }
 

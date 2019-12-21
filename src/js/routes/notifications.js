@@ -4,7 +4,7 @@ import { CSSTransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 
 import AllRead from '../components/all-read';
-import Oops from '../components/oops';
+import { Oops } from '../components/oops';
 import AccountNotifications from '../components/notifications';
 
 export class NotificationsRoute extends React.Component {

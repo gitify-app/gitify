@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
-import NProgress from 'nprogress';
+import * as NProgress from 'nprogress';
 
 interface IProps {
   isLoading: boolean;
@@ -13,10 +13,6 @@ export class Loading extends React.PureComponent<IProps> {
     NProgress.configure({
       showSpinner: false,
     });
-
-    if (this.props.isLoading) {
-      NProgress.start();
-    }
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -26,7 +22,7 @@ export class Loading extends React.PureComponent<IProps> {
       NProgress.done();
     }
 
-    return null;
+    return {};
   }
 
   componentWillUnmount() {

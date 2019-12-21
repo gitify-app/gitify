@@ -4,13 +4,13 @@ import {
   reOpenWindow,
   openExternalLink,
   setAutoLaunch,
-} from '../../utils/comms';
+} from './comms';
 
 const { ipcRenderer, shell } = require('electron');
 
-describe('utils/comms.js', () => {
+describe('utils/comms.ts', () => {
   beforeEach(function() {
-    ipcRenderer.send.mockReset();
+    spyOn(ipcRenderer, 'send');
   });
 
   it('should send mark the icons as active', () => {

@@ -31,7 +31,7 @@ export class Sidebar extends React.Component<IProps> {
 
   componentDidMount() {
     const self = this;
-    const iFrequency = 5000;
+    const iFrequency = 60000;
 
     this.requestInterval = setInterval(() => {
       self.refreshNotifications();

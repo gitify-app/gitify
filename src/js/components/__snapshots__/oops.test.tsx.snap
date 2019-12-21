@@ -1,0 +1,37 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/oops.js should render itself & its children 1`] = `
+<div
+  className="container-fluid main-container notifications errored"
+>
+  <h2>
+    Oops something went wrong.
+  </h2>
+  <h4>
+    Couldn't get your notifications.
+  </h4>
+  <h1
+    className="emoji"
+  >
+    😔
+  </h1>
+</div>
+`;
+
+exports[`components/oops.tsx should render itself & its children 1`] = `
+<div
+  className="container-fluid main-container notifications errored"
+>
+  <h2>
+    Oops something went wrong.
+  </h2>
+  <h4>
+    Couldn't get your notifications.
+  </h4>
+  <h1
+    className="emoji"
+  >
+    😔
+  </h1>
+</div>
+`;

@@ -8,7 +8,7 @@
     "noImplicitAny": false,
     "jsx": "react",
     "allowJs": true,
-    "typeRoots": ["./src/types"]
+    "typeRoots": ["./src/types", "node_modules/@types"]
   },
   "exclude": ["node_modules"],
   "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"]
