@@ -1,4 +1,4 @@
-import React from 'react'; // eslint-disable-line
+import React from 'react';
 import ReactDOM from 'react-dom';
 import renderer from 'react-test-renderer';
 import { List, Map } from 'immutable';

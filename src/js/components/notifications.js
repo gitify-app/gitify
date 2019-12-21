@@ -37,7 +37,7 @@ export default class AccountNotifications extends React.Component {
           return (
             <RepositoryNotifications
               hostname={hostname}
-              repo={obj}
+              repo={obj.toJS()}
               repoName={repoSlug}
               key={repoSlug}
             />

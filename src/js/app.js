@@ -1,6 +1,6 @@
 import '../scss/app.scss';
 
-import React from 'react'; // eslint-disable-line
+import React from 'react';
 import ReactDOM from 'react-dom';
 import {
   Redirect,
@@ -34,7 +34,6 @@ export class NotFound extends React.Component {
   }
 }
 
-/* eslint-disable react/prop-types */
 export const PrivateRoute = ({ component: Component, ...rest }) => {
   const authReducer = store.getState().auth;
   const isAuthenticated =
@@ -56,7 +55,6 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
     />
   );
 };
-/* eslint-enable react/prop-types */
 
 ReactDOM.render(
   <Provider store={store}>

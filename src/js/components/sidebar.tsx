@@ -1,5 +1,4 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { List, Map } from 'immutable';
@@ -10,34 +9,47 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
 import { isUserEitherLoggedIn } from '../utils/helpers';
-import LogoWhite from './logos/white';
+import { LogoWhite } from './logos/white';
 import Constants from '../utils/constants';
+import { ToggleSettingsModalAction } from '../../types/actions';
 
-export class Sidebar extends React.Component {
-  static propTypes = {
-    fetchNotifications: PropTypes.func.isRequired,
-    connectedAccounts: PropTypes.number.isRequired,
-    enterpriseAccounts: PropTypes.object.isRequired,
-    notifications: PropTypes.object.isRequired,
-    toggleSettingsModal: PropTypes.func.isRequired,
-    hasStarred: PropTypes.bool.isRequired,
-    isEitherLoggedIn: PropTypes.bool.isRequired,
-    isGitHubLoggedIn: PropTypes.bool.isRequired,
-  };
+interface IProps {
+  fetchNotifications: () => void;
+  connectedAccounts: number;
+
+  enterpriseAccounts: any; // PropTypes.object.isRequired;
+  notifications: any; // PropTypes.object.isRequired;
+
+  toggleSettingsModal: () => ToggleSettingsModalAction;
+  hasStarred: boolean;
+  isEitherLoggedIn: boolean;
+  isGitHubLoggedIn: boolean;
+}
+
+export class Sidebar extends React.Component<IProps> {
+  requestInterval: NodeJS.Timer;
 
   componentDidMount() {
     const self = this;
-    const iFrequency = 60000;
+    const iFrequency = 5000;
 
     this.requestInterval = setInterval(() => {
       self.refreshNotifications();
     }, iFrequency);
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.connectedAccounts > this.props.connectedAccounts) {
-      this.props.fetchNotifications();
+  state = {
+    connectedAccounts: [],
+  };
+
+  static getDerivedStateFromProps(props, state) {
+    if (props.connectedAccounts > state.connectedAccounts) {
+      props.fetchNotifications();
     }
+
+    return {
+      connectedAccounts: props.connectedAccounts,
+    };
   }
 
   componentWillUnmount() {

@@ -1,4 +1,4 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { fromJS, List, Map } from 'immutable';
 import { shallow, mount } from 'enzyme';

@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import { authGithub, isUserEitherLoggedIn } from '../utils/helpers';
-import LogoDark from '../components/logos/dark';
+import { LogoDark } from '../components/logos/dark';
 
 export class LoginPage extends React.Component {
   static propTypes = {

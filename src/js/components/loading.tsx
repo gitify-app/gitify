@@ -1,12 +1,13 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import NProgress from 'nprogress';
 
-export class Loading extends React.PureComponent {
-  static propTypes = {
-    isLoading: PropTypes.bool.isRequired,
-  };
+interface IProps {
+  isLoading: boolean;
+}
+
+export class Loading extends React.PureComponent<IProps> {
+  state = {};
 
   componentDidMount() {
     NProgress.configure({
@@ -18,12 +19,14 @@ export class Loading extends React.PureComponent {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.isLoading) {
+  static getDerivedStateFromProps(props, state) {
+    if (props.isLoading) {
       NProgress.start();
     } else {
       NProgress.done();
     }
+
+    return null;
   }
 
   componentWillUnmount() {

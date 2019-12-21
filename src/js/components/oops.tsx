@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { emojify } from 'react-emojione';
 
 import constants from '../utils/constants';

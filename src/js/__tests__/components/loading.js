@@ -1,4 +1,4 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { Map } from 'immutable';
 import NProgress from 'nprogress';
