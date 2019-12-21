@@ -1,4 +1,4 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 import { List, Map } from 'immutable';
 import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';

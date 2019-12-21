@@ -21,7 +21,7 @@ const autoStart = new AutoLaunch({
   isHidden: true,
 });
 
-app.on('ready', function () {
+app.on('ready', function() {
   function createAppIcon() {
     let trayIcon = new Tray(iconIdle);
 
@@ -66,7 +66,7 @@ app.on('ready', function () {
           'There is an update available. Would you like to update Gitify now?',
       },
       response => {
-        console.log('Exit: ' + response); // eslint-disable-line no-console
+        console.log('Exit: ' + response);
 
         if (response === 0) {
           updater.install();
@@ -88,10 +88,8 @@ app.on('ready', function () {
     const updater = new GhReleases(autoUpdateOptions);
 
     updater.on('error', (event, message) => {
-      /* eslint-disable no-console */
       console.log('ERRORED.');
       console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
-      /* eslint-enable no-console */
     });
 
     updater.on('update-downloaded', () => {
@@ -130,7 +128,7 @@ app.on('ready', function () {
       titleBarStyle: 'hiddenInset',
       webPreferences: {
         overlayScrollbars: true,
-        nodeIntegration: true
+        nodeIntegration: true,
       },
     };
 
@@ -138,7 +136,7 @@ app.on('ready', function () {
     appWindow.loadURL(`file://${__dirname}/index.html`);
     appWindow.show();
 
-    appWindow.on('close', function (event) {
+    appWindow.on('close', function(event) {
       if (!isQuitting) {
         event.preventDefault();
         appWindow.hide();
@@ -158,7 +156,7 @@ app.on('ready', function () {
   ipcMain.on('startup-disable', () => autoStart.disable());
   ipcMain.on('check-update', () => checkAutoUpdate(true));
   ipcMain.on('set-badge', (_, count) => {
-    app.badgeCount = count
+    app.badgeCount = count;
   });
   ipcMain.on('app-quit', () => app.quit());
 

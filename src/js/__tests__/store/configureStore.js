@@ -1,4 +1,4 @@
-import React from 'react'; // eslint-disable-line no-unused-vars
+import React from 'react';
 import configureStore from '../../store/configureStore';
 
 describe('store/configureStore.js', function() {

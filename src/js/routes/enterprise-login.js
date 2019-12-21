@@ -40,9 +40,12 @@ export const validate = values => {
   return errors;
 };
 
-const renderField = (
-  { input, label, placeholder, meta: { touched, error } } // eslint-disable-line react/prop-types
-) => (
+const renderField = ({
+  input,
+  label,
+  placeholder,
+  meta: { touched, error },
+}) => (
   <div className={touched && error ? 'form-group has-danger' : 'form-group'}>
     <label htmlFor={input.name}>{label}</label>
     <div>
