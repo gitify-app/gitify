@@ -8,7 +8,6 @@
     "noImplicitAny": false,
     "jsx": "react",
     "allowJs": true,
-    "allowSyntheticDefaultImports": true,
     "typeRoots": ["./src/types"]
   },
   "exclude": ["node_modules"],

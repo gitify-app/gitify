@@ -9,11 +9,10 @@
     "package": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --electron-version=1.6.10 --asar=true --icon=images/app-icon.icns --prune --ignore='src' --ignore='coverage'",
     "codesign": "bash scripts/codesign.bash",
     "dist": "yarn build && yarn package && yarn codesign",
-    "lint-js": "eslint 'src/js/' 'src/js/app.js' 'main.js'",
     "prettier-check": "prettier --check 'src/**/*.{js,ts,tsx}'",
     "prettier": "prettier --single-quote --trailing-comma es5 --write 'src/**/*.{js,ts,tsx}'",
     "jest": "jest",
-    "test": "yarn prettier-check && yarn lint-js && yarn jest -- --coverage",
+    "test": "yarn prettier-check && yarn jest -- --coverage",
     "start": "electron . –enable-logging"
   },
   "repository": {

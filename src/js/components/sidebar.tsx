@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { List, Map } from 'immutable';
@@ -9,7 +9,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
 import { isUserEitherLoggedIn } from '../utils/helpers';
-import LogoWhite from './logos/white';
+import { LogoWhite } from './logos/white';
 import Constants from '../utils/constants';
 import { ToggleSettingsModalAction } from '../../types/actions';
 
