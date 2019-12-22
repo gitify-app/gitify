@@ -1,12 +1,13 @@
-import nock from 'nock';
 import axios from 'axios';
+import * as nock from 'nock';
 import { fromJS, Map, List } from 'immutable';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
-import * as actions from '../../actions';
-import Constants from '../../utils/constants';
-import { mockedEnterpriseAccounts } from '../../__mocks__/mockedData';
+import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
+import { TOGGLE_SETTINGS_MODAL } from '../../types/actions';
+import * as actions from './';
+import Constants from '../utils/constants';
 
 const middlewares = [thunk];
 const createMockStore = configureMockStore(middlewares);
@@ -31,7 +32,7 @@ describe('actions/index.js', () => {
     const code = 'THISISACODE';
 
     nock('https://github.com/')
-      .post('/login/oauth/access_token', {})
+      .post('/login/oauth/access_token')
       .reply(200, {
         access_token: 'THISISATOKEN',
       });
@@ -60,7 +61,7 @@ describe('actions/index.js', () => {
     const message = 'Oops! Something went wrong.';
 
     nock('https://github.com/')
-      .post('/login/oauth/access_token', {})
+      .post('/login/oauth/access_token')
       .reply(400, { message });
 
     const expectedActions = [
@@ -83,7 +84,7 @@ describe('actions/index.js', () => {
     const code = 'THISISACODE';
 
     nock('https://github.gitify.io/')
-      .post('/login/oauth/access_token', {})
+      .post('/login/oauth/access_token')
       .reply(200, {
         access_token: 'THISISATOKEN',
       });
@@ -112,7 +113,7 @@ describe('actions/index.js', () => {
     const message = 'Oops! Something went wrong.';
 
     nock('https://github.gitify.io/')
-      .post('/login/oauth/access_token', {})
+      .post('/login/oauth/access_token')
       .reply(400, { message });
 
     const expectedActions = [
@@ -724,7 +725,7 @@ describe('actions/index.js', () => {
 
   it('should handle TOGGLE_SETTINGS_MODAL', () => {
     const expectedAction = {
-      type: actions.TOGGLE_SETTINGS_MODAL,
+      type: TOGGLE_SETTINGS_MODAL,
     };
 
     expect(actions.toggleSettingsModal()).toEqual(expectedAction);

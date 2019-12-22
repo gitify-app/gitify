@@ -89,12 +89,4 @@ describe('app.js', function() {
 
     configureStore.default = configureStoreDefault;
   });
-
-  it('should render the Not Found component', function() {
-    const { NotFound } = require('../app');
-
-    const tree = renderer.create(<NotFound />);
-
-    expect(tree).toMatchSnapshot();
-  });
 });

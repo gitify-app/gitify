@@ -29,12 +29,6 @@ ipcRenderer.on('toggle-settings', () => {
   store.dispatch(toggleSettingsModal());
 });
 
-export class NotFound extends React.Component {
-  render() {
-    return <h2>Not found</h2>;
-  }
-}
-
 export const PrivateRoute = ({ component: Component, ...rest }) => {
   const authReducer = store.getState().auth;
   const isAuthenticated =
@@ -84,7 +78,6 @@ ReactDOM.render(
             <PrivateRoute path="/" exact component={NotificationsRoute} />
             <Route path="/login" component={LoginPage} />
             <Route path="/enterpriselogin" component={EnterpriseLoginPage} />
-            <Route component={NotFound} />
           </Switch>
         </div>
       </Router>

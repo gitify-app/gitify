@@ -1,9 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/logos/dark.js renders correctly 1`] = `
+exports[`components/logos/dark.tsx renders correctly 1`] = `
 <svg
   className="logo"
   onClick={[Function]}
+  role="logo"
   viewBox="0 0 180.31 182.52"
   xmlns="http://www.w3.org/2000/svg"
   xmlnsXlink="http://www.w3.org/1999/xlink"

@@ -6,17 +6,7 @@ exports[`components/all-read.tsx should render itself & its children 1`] = `
 >
   <h2
     className="sc-bdVaJa dilyOK"
-  >
-    <div
-      className="Typist "
-    >
-      <span
-        className="Cursor Cursor--blinking"
-      >
-        |
-      </span>
-    </div>
-  </h2>
+  />
   <h4>
     No new notifications.
   </h4>
