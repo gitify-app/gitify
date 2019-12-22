@@ -9,6 +9,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { ThemeProvider } from 'styled-components';
 
 const { ipcRenderer } = require('electron');
 
@@ -56,22 +57,38 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
   );
 };
 
+const theme = {
+  primary: '#555B6E',
+  success: '#69B578',
+  info: '#8BA9C6',
+  warning: '#FCAA67',
+  danger: '#B7524F',
+
+  grayLighter: '#f9fafa',
+  grayLight: '#eceeef',
+
+  purple: '#555b6e',
+  purpleDark: '#3f4351',
+};
+
 ReactDOM.render(
   <Provider store={store}>
-    <Router>
-      <div className="wrapper">
-        <Loading />
-        <SettingsModal />
-        <Sidebar />
+    <ThemeProvider theme={theme}>
+      <Router>
+        <div className="wrapper">
+          <Loading />
+          <SettingsModal />
+          <Sidebar />
 
-        <Switch>
-          <PrivateRoute path="/" exact component={NotificationsRoute} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/enterpriselogin" component={EnterpriseLoginPage} />
-          <Route component={NotFound} />
-        </Switch>
-      </div>
-    </Router>
+          <Switch>
+            <PrivateRoute path="/" exact component={NotificationsRoute} />
+            <Route path="/login" component={LoginPage} />
+            <Route path="/enterpriselogin" component={EnterpriseLoginPage} />
+            <Route component={NotFound} />
+          </Switch>
+        </div>
+      </Router>
+    </ThemeProvider>
   </Provider>,
   document.getElementById('gitify')
 );

@@ -156,39 +156,6 @@ $modal-scale-min: 0.35;
 
 /* @end React Modal */
 
-/* @group Animations */
-
-.notification-leave {
-  transform: translate(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  opacity: 1;
-  transition-property: transform, opacity;
-  transition-duration: 400ms;
-  transition-timing-function: cubic-bezier(0.175, 0.665, 0.32, 1), linear;
-
-  &.notification-leave-active {
-    transform: translate(350px, 0);
-    transform: translate3d(350px, 0, 0);
-    opacity: 0;
-  }
-}
-
-.repository-leave {
-  transform: translate(0, 0, 0);
-  transform: translate3d(0, 0, 0);
-  opacity: 1;
-  transition-property: transform, opacity;
-  transition-duration: 400ms;
-  transition-timing-function: cubic-bezier(0.175, 0.665, 0.32, 1), linear;
-
-  &.repository-leave-active {
-    transform: scale(0.01);
-    opacity: 0;
-  }
-}
-
-/* @end Animations */
-
 /* @group Loading */
 
 #nprogress {
@@ -384,48 +351,6 @@ $modal-scale-min: 0.35;
 
 /* @end Page / Login  */
 
-/* @group Notifications Route / Account  */
-
-.account {
-  margin-bottom: 0.5px;
-  background-color: $brand-purple-dark;
-  text-align: right;
-  color: $white;
-  font-size: 0.9rem;
-
-  .octicon {
-    font-size: 1.1rem;
-  }
-}
-
-/* @end Notifications Route / Account  */
-
-/* @group Component / Repository  */
-
-.repository {
-  background-color: $gray-lighter;
-
-  .info {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 16px;
-    font-weight: 600;
-
-    .avatar {
-      @include border-radius(50%);
-      max-width: 25px;
-    }
-  }
-
-  .octicon {
-    @include check-octicon;
-    font-size: 22px;
-  }
-}
-
-/* @end Component / Repository  */
-
 /* @group Component / Notifications  */
 
 .notifications {
@@ -453,126 +378,7 @@ $modal-scale-min: 0.35;
       text-align: center;
       font-size: 55px;
     }
-
-    .typed-text {
-      margin-top: 10px;
-      margin-bottom: 0;
-      padding: 10px 5px;
-      text-align: center;
-      line-height: 40px;
-
-      .cursor {
-        animation: blink 0.9s infinite;
-        opacity: 1;
-        padding-left: 5px;
-        color: $gray;
-
-        @keyframes blink {
-          0% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0;
-          }
-          100% {
-            opacity: 1;
-          }
-        }
-        @-webkit-keyframes blink {
-          0% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0;
-          }
-          100% {
-            opacity: 1;
-          }
-        }
-        @-moz-keyframes blink {
-          0% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0;
-          }
-          100% {
-            opacity: 1;
-          }
-        }
-      }
-    }
   }
 }
 
 /* @end Component / Notifications  */
-
-/* @group Component / Notification  */
-
-.notification {
-  margin: 0;
-  border-bottom: 1px solid $gray-lighter;
-
-  .check-wrapper {
-    text-align: right;
-  }
-
-  .subject {
-    &:hover {
-      cursor: pointer;
-    }
-
-    h6 {
-      margin-bottom: 0.25em;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .details {
-      font-size: $font-size-xs;
-    }
-  }
-
-  .octicon {
-    @include check-octicon;
-    font-size: 20px;
-  }
-
-  &:hover {
-    background-color: $gray-lightest;
-  }
-}
-
-/* @end Component / Notification  */
-
-/* @group Network Status */
-
-.network-status {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: $gray-lighter;
-  padding: 3rem 2rem;
-  overflow: auto;
-
-  .logo {
-    margin: 0 auto 20px;
-    max-width: 115px;
-  }
-
-  h4 {
-    margin-bottom: 1.5rem;
-    text-align: center;
-  }
-
-  .emoji {
-    margin: 20px 0;
-    text-align: center;
-    font-size: 55px;
-  }
-}
-
-/* @end Network Status */

@@ -1,9 +1,24 @@
+export type Reason =
+  | 'assign'
+  | 'author'
+  | 'comment'
+  | 'invitation'
+  | 'manual'
+  | 'mention'
+  | 'review_requested'
+  | 'security_alert'
+  | 'state_change'
+  | 'subscribed'
+  | 'team_mention';
+
+export type SubjectType = 'Issue' | 'PullRequest' | 'Commit' | 'Release';
+
 export interface Notification {
   id: string;
   unread: boolean;
-  reason: string;
-  updated_at: Date;
-  last_read_at: null;
+  reason: Reason;
+  updated_at: string;
+  last_read_at: string | null;
   subject: Subject;
   repository: Repository;
   url: string;
@@ -84,5 +99,5 @@ export interface Subject {
   title: string;
   url: string;
   latest_comment_url: string;
-  type: string;
+  type: SubjectType;
 }

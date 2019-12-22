@@ -1,6 +1,5 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
-import { shallow, mount } from 'enzyme';
 import { Map } from 'immutable';
 import * as NProgress from 'nprogress';
 

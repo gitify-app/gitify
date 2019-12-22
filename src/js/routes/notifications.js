@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CSSTransitionGroup } from 'react-transition-group';
 import { connect } from 'react-redux';
 
-import AllRead from '../components/all-read';
+import { AccountNotifications } from '../components/account-notifications';
+import { AllRead } from '../components/all-read';
 import { Oops } from '../components/oops';
-import AccountNotifications from '../components/notifications';
 
 export class NotificationsRoute extends React.Component {
   static propTypes = {
@@ -28,19 +27,13 @@ export class NotificationsRoute extends React.Component {
 
     return (
       <div className={wrapperClass + (!hasNotifications ? ' all-read' : '')}>
-        <CSSTransitionGroup
-          transitionName="repository"
-          transitionEnter={false}
-          transitionLeaveTimeout={325}
-        >
-          {accountNotifications.map((obj, key) => (
-            <AccountNotifications
-              key={key}
-              hostname={obj.get('hostname')}
-              notifications={obj.get('notifications')}
-            />
-          ))}
-        </CSSTransitionGroup>
+        {accountNotifications.map((obj, key) => (
+          <AccountNotifications
+            key={key}
+            hostname={obj.get('hostname')}
+            notifications={obj.get('notifications').toJS()}
+          />
+        ))}
       </div>
     );
   }

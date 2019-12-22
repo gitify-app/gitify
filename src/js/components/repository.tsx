@@ -1,7 +1,7 @@
 const { shell } = require('electron');
 
 import * as React from 'react';
-import { CSSTransitionGroup } from 'react-transition-group';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Octicon, { Check } from '@primer/octicons-react';
 
@@ -9,65 +9,91 @@ import { markRepoNotifications } from '../actions';
 import { Notification } from '../../types/github';
 import NotificationItem from './notification';
 
+const Wrapper = styled.div`
+  display: flex;
+  background-color: ${props => props.theme.grayLight};
+  padding: 0.5rem 0.5rem;
+`;
+
+const TitleBar = styled.div`
+  flex: 1;
+  padding: 0 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 600;
+`;
+
+const Avatar = styled.img`
+  border-radius: 50%;
+  margin-right: 0.5rem;
+  width: 25px;
+`;
+
+const IconWrapper = styled.div`
+  width: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Button = styled.button`
+  background: none;
+  border: none;
+
+  .octicon:hover {
+    color: ${props => props.theme.success};
+    cursor: pointer;
+  }
+`;
+
 interface IProps {
   hostname: string;
-  repo: [Notification];
+  repo: Notification[];
   repoName: string;
   markRepoNotifications: (repoSlug: string, hostname: string) => void;
 }
 
-export class RepositoryNotifications extends React.Component<IProps> {
-  openBrowser() {
-    const url = this.props.repo[0].repository.html_url;
+export const RepositoryNotifications = (props: IProps) => {
+  const openBrowser = () => {
+    const url = props.repo[0].repository.html_url;
     shell.openExternal(url);
-  }
+  };
 
-  markRepoAsRead() {
-    const { hostname, repo } = this.props;
+  const markRepoAsRead = () => {
+    const { hostname, repo } = props;
     const repoSlug = repo[0].repository.full_name;
-    this.props.markRepoNotifications(repoSlug, hostname);
-  }
+    props.markRepoNotifications(repoSlug, hostname);
+  };
 
-  render() {
-    const { hostname, repo } = this.props;
-    const avatarUrl = repo[0].repository.owner.avatar_url;
+  const { hostname, repo } = props;
+  const avatarUrl = repo[0].repository.owner.avatar_url;
 
-    return (
-      <div>
-        <div className="repository d-flex px-3 py-2 justify-content-between">
-          <div className="info pr-3">
-            <img className="avatar img-fluid mr-2" src={avatarUrl} />
-            <span onClick={() => this.openBrowser()}>
-              {this.props.repoName}
-            </span>
-          </div>
+  return (
+    <>
+      <Wrapper>
+        <TitleBar>
+          <Avatar src={avatarUrl} />
+          <span onClick={openBrowser}>{props.repoName}</span>
+        </TitleBar>
 
-          <button
-            className="btn btn-link py-0 octicon octicon-check"
-            title="Mark Repository as Read"
-            onClick={() => this.markRepoAsRead()}
-          >
-            <Octicon icon={Check} />
-          </button>
-        </div>
-
-        <CSSTransitionGroup
-          transitionName="notification"
-          transitionEnter={false}
-          transitionLeaveTimeout={325}
-        >
-          {repo.map(obj => (
-            <NotificationItem
-              key={obj.id}
-              hostname={hostname}
-              notification={obj}
+        <IconWrapper>
+          <Button onClick={markRepoAsRead}>
+            <Octicon
+              icon={Check}
+              size={20}
+              ariaLabel="Mark Repository as Read"
             />
-          ))}
-        </CSSTransitionGroup>
-      </div>
-    );
-  }
-}
+          </Button>
+        </IconWrapper>
+      </Wrapper>
+
+      {repo.map(obj => (
+        <NotificationItem key={obj.id} hostname={hostname} notification={obj} />
+      ))}
+    </>
+  );
+};
 
 export default connect(null, { markRepoNotifications })(
   RepositoryNotifications
