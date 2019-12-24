@@ -50,7 +50,7 @@ jobs:
           command: yarn prettier-check
       - run:
           name: Run Jest
-          command: yarn test --coverage
+          command: yarn test --coverage --runInBand
 
   build-ts:
     executor: node

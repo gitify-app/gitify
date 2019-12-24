@@ -1,5 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`app.js should test the PrivateRoute component (authenticated) 1`] = `null`;
-
-exports[`app.js should test the PrivateRoute component (non authenticated) 1`] = `null`;

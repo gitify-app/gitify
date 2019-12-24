@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`routes/enterprise-login.js renders correctly 1`] = `
+<div
+  className="container-fluid main-container login"
+>
+  <div
+    className="d-flex flex-row-reverse"
+  >
+    <a
+      className="btn btn-close"
+      href="/login"
+      onClick={[Function]}
+    >
+      <div
+        title="Close"
+      >
+        FAIcon
+        Close
+      </div>
+    </a>
+  </div>
+  <div
+    className="desc"
+  >
+    Login to GitHub Enterprise.
+  </div>
+  <form
+    onSubmit={[Function]}
+  >
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="hostname"
+      >
+        Hostname
+      </label>
+      <div>
+        <input
+          className="form-control"
+          id="hostname"
+          name="hostname"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="github.company.com"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="clientId"
+      >
+        Client ID
+      </label>
+      <div>
+        <input
+          className="form-control"
+          id="clientId"
+          name="clientId"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="123456789"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <div
+      className="form-group"
+    >
+      <label
+        htmlFor="clientSecret"
+      >
+        Client Secret
+      </label>
+      <div>
+        <input
+          className="form-control"
+          id="clientSecret"
+          name="clientSecret"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="ABC123DEF456"
+          type="text"
+          value=""
+        />
+      </div>
+    </div>
+    <button
+      className="btn btn-md btn-login mt-2"
+      disabled={true}
+      type="submit"
+    >
+      <div
+        title="GitHub"
+      >
+        FAIcon
+        GitHub
+      </div>
+       Login to GitHub Enterprise
+    </button>
+  </form>
+</div>
+`;

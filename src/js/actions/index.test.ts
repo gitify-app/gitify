@@ -5,9 +5,9 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
 import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
-import { TOGGLE_SETTINGS_MODAL } from '../../types/actions';
 import * as actions from './';
 import Constants from '../utils/constants';
+import { LOGOUT } from '../../types/actions';
 
 const middlewares = [thunk];
 const createMockStore = configureMockStore(middlewares);
@@ -133,7 +133,7 @@ describe('actions/index.js', () => {
 
   it('should logout a user', () => {
     const expectedAction = {
-      type: actions.LOGOUT,
+      type: LOGOUT,
     };
 
     expect(actions.logout()).toEqual(expectedAction);
@@ -721,13 +721,5 @@ describe('actions/index.js', () => {
     };
 
     expect(actions.updateSetting(setting, value)).toEqual(expectedAction);
-  });
-
-  it('should handle TOGGLE_SETTINGS_MODAL', () => {
-    const expectedAction = {
-      type: TOGGLE_SETTINGS_MODAL,
-    };
-
-    expect(actions.toggleSettingsModal()).toEqual(expectedAction);
   });
 });

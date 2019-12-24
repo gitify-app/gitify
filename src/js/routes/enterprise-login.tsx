@@ -2,13 +2,14 @@ const ipcRenderer = require('electron').ipcRenderer;
 
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { reduxForm, Field } from 'redux-form';
+import { Form, FormRenderProps } from 'react-final-form';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import { authGithub } from '../utils/helpers';
+import { FieldInput } from '../components/fields/input';
 
 interface IValues {
   hostname?: string;
@@ -51,31 +52,9 @@ export const validate = (values: IValues): IFormErrors => {
   return errors;
 };
 
-const renderField = ({
-  input,
-  label,
-  placeholder,
-  meta: { touched, error },
-}) => (
-  <div className={touched && error ? 'form-group has-danger' : 'form-group'}>
-    <label htmlFor={input.name}>{label}</label>
-    <div>
-      <input
-        {...input}
-        className="form-control"
-        placeholder={placeholder}
-        type="text"
-      />
-
-      {touched && error && <div className="form-control-feedback">{error}</div>}
-    </div>
-  </div>
-);
-
 interface IProps {
   history: any;
   enterpriseAccountsCount: number;
-  handleSubmit: (data: any) => any;
 }
 
 interface IState {
@@ -98,6 +77,37 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
     };
   }
 
+  renderForm = (formProps: FormRenderProps) => {
+    const { handleSubmit, submitting, pristine } = formProps;
+
+    return (
+      <form onSubmit={handleSubmit}>
+        <FieldInput
+          name="hostname"
+          label="Hostname"
+          placeholder="github.company.com"
+        />
+
+        <FieldInput name="clientId" label="Client ID" placeholder="123456789" />
+
+        <FieldInput
+          name="clientSecret"
+          label="Client Secret"
+          placeholder="ABC123DEF456"
+        />
+
+        <button
+          className="btn btn-md btn-login mt-2"
+          disabled={submitting || pristine}
+          type="submit"
+        >
+          <FontAwesomeIcon icon={faGithub} title="GitHub" /> Login to GitHub
+          Enterprise
+        </button>
+      </form>
+    );
+  };
+
   handleSubmit(data, dispatch) {
     authGithub(data, dispatch);
   }
@@ -113,33 +123,18 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
 
         <div className="desc">Login to GitHub Enterprise.</div>
 
-        <form onSubmit={this.props.handleSubmit(this.handleSubmit)}>
-          <Field
-            name="hostname"
-            component={renderField}
-            label="Host Name"
-            placeholder="github.company.com"
-          />
-
-          <Field
-            name="clientId"
-            component={renderField}
-            label="Client ID"
-            placeholder="123456789"
-          />
-
-          <Field
-            name="clientSecret"
-            component={renderField}
-            label="Client Secret"
-            placeholder="ABC123DEF456"
-          />
-
-          <button className="btn btn-md btn-login mt-2" type="submit">
-            <FontAwesomeIcon icon={faGithub} title="GitHub" /> Login to GitHub
-            Enterprise
-          </button>
-        </form>
+        <Form
+          initialValues={{
+            hostname: '',
+            clientId: '',
+            clientSecret: '',
+          }}
+          // @ts-ignore
+          onSubmit={data => this.handleSubmit(data, this.props.dispatch)}
+          validate={validate}
+        >
+          {this.renderForm}
+        </Form>
       </div>
     );
   }
@@ -151,18 +146,4 @@ export function mapStateToProps(state) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  null
-)(
-  reduxForm({
-    form: 'loginEnterprise',
-    // Use for development
-    // initialValues: {
-    //   hostname: 'github.example.com',
-    //   clientId: '1231231231',
-    //   clientSecret: 'ABC123ABCDABC123ABCDABC123ABCDABC123ABCD',
-    // },
-    validate,
-  })(EnterpriseLogin)
-);
+export default connect(mapStateToProps, null)(EnterpriseLogin);

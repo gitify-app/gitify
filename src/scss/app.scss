@@ -10,8 +10,6 @@ $gray-dark: #373a3c;
 $gray-light: darken($white, 10%);
 $gray-darker: darken($gray, 5%);
 
-$modal-overlay-bg: rgba(0, 0, 0, 0.25);
-
 /* @end Colors */
 
 /* @group Bootstrap Overrides */
@@ -112,49 +110,31 @@ input {
   }
 }
 
+.custom-checkbox-large {
+  padding-left: 2rem;
+
+  .custom-control-label {
+    &:before {
+      top: 0;
+      left: -2rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+
+    &:after {
+      top: 0rem;
+      left: -2rem;
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+
+  small {
+    line-height: 1rem;
+  }
+}
+
 /* @end Misc */
-
-/* @group React Modal */
-
-$modal-animation-duration: 250ms;
-$modal-scale-min: 0.35;
-
-// sass-lint:disable class-name-format force-element-nesting
-
-.modal-overlay {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: $modal-overlay-bg;
-}
-
-.ReactModal__Overlay--after-open {
-  transition: opacity $modal-animation-duration ease-out;
-  opacity: 1;
-}
-
-.ReactModal__Content {
-  transform: scale(0.5) rotateX(-30deg);
-  -webkit-transform: scale(0.5) rotateX(-30deg);
-}
-
-.ReactModal__Content--after-open {
-  transform: scale(1) rotateX(0deg);
-  transition: all $modal-animation-duration ease-in;
-  -webkit-transform: scale(1) rotateX(0deg);
-}
-
-.ReactModal__Content--before-close {
-  transform: scale($modal-scale-min) rotateX(30deg);
-  transition: all $modal-animation-duration ease-in;
-  -webkit-transform: scale($modal-scale-min) rotateX(30deg);
-}
-
-// sass-lint:enable class-name-format force-element-nesting
-
-/* @end React Modal */
 
 /* @group Loading */
 
@@ -179,7 +159,7 @@ $modal-scale-min: 0.35;
     right: 0;
     transform: rotate(3deg) translate(0, -4px);
     opacity: 1;
-    box-shadow: 0 0 10px $brand-inverse, 0 0 5px $brand-inverse;
+    box-shadow: 0 0 10px $light, 0 0 5px $light;
     width: 100px;
     height: 100%;
   }
@@ -280,36 +260,6 @@ $modal-scale-min: 0.35;
 }
 
 /* @end Sidebar */
-
-/* @group Settings */
-
-.settings-modal {
-  margin: 3rem 2rem 2rem;
-
-  .modal-content {
-    border: 0;
-    border-radius: 0;
-  }
-
-  .setting {
-    margin: 0.25rem 0;
-  }
-
-  .setting-checkbox + span,
-  .setting-radio + span {
-    padding-left: 1rem;
-  }
-
-  .setting-radio + span {
-    margin-right: 1rem;
-  }
-
-  .btn-logout {
-    margin-top: 1rem;
-  }
-}
-
-/* @end Settings */
 
 /* @group Page / Login  */
 

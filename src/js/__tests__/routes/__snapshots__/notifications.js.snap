@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`routes/notification.js should render itself & its children (with notifications) 1`] = `
-<div
-  className="container-fluid main-container notifications"
->
-  <span />
-</div>
-`;

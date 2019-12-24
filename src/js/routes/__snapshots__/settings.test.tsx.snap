@@ -1,0 +1,211 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`routes/settings.tsx should render itself & its children 1`] = `
+<div
+  className="p-4"
+>
+  <div>
+    <h5>
+      Settings
+    </h5>
+    <button
+      aria-label="Close Settings"
+      className="close"
+      onClick={[Function]}
+    >
+      <span
+        aria-hidden="true"
+      >
+        ×
+      </span>
+    </button>
+  </div>
+  <div
+    className="form-group"
+  >
+    <div
+      className="custom-control custom-checkbox custom-checkbox-large"
+    >
+      <input
+        checked={false}
+        className="custom-control-input"
+        id="showOnlyParticipating"
+        name="showOnlyParticipating"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        className="custom-control-label"
+        htmlFor="showOnlyParticipating"
+      >
+        Show only participating
+      </label>
+    </div>
+  </div>
+  <div
+    className="form-group"
+  >
+    <div
+      className="custom-control custom-checkbox custom-checkbox-large"
+    >
+      <input
+        checked={true}
+        className="custom-control-input"
+        id="playSound"
+        name="playSound"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        className="custom-control-label"
+        htmlFor="playSound"
+      >
+        Play sound
+      </label>
+    </div>
+  </div>
+  <div
+    className="form-group"
+  >
+    <div
+      className="custom-control custom-checkbox custom-checkbox-large"
+    >
+      <input
+        checked={true}
+        className="custom-control-input"
+        id="showNotifications"
+        name="showNotifications"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        className="custom-control-label"
+        htmlFor="showNotifications"
+      >
+        Show notifications
+      </label>
+    </div>
+  </div>
+  <div
+    className="form-group"
+  >
+    <div
+      className="custom-control custom-checkbox custom-checkbox-large"
+    >
+      <input
+        checked={false}
+        className="custom-control-input"
+        id="onClickMarkAsRead"
+        name="onClickMarkAsRead"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        className="custom-control-label"
+        htmlFor="onClickMarkAsRead"
+      >
+        On Click, Mark as Read
+      </label>
+    </div>
+  </div>
+  <div
+    className="form-group"
+  >
+    <div
+      className="custom-control custom-checkbox custom-checkbox-large"
+    >
+      <input
+        checked={false}
+        className="custom-control-input"
+        id="openAtStartUp"
+        name="openAtStartUp"
+        onChange={[Function]}
+        type="checkbox"
+      />
+      <label
+        className="custom-control-label"
+        htmlFor="openAtStartUp"
+      >
+        Open at startup
+      </label>
+    </div>
+  </div>
+  <div>
+    <form>
+      <div
+        className="custom-control custom-radio custom-control-inline"
+      >
+        <input
+          checked={true}
+          className="custom-control-input"
+          id="showAppIcon-both"
+          name="showAppIcon"
+          onChange={[Function]}
+          type="radio"
+          value="both"
+        />
+        <label
+          className="custom-control-label"
+          htmlFor="showAppIcon-both"
+        >
+          Both Icons
+        </label>
+      </div>
+      <div
+        className="custom-control custom-radio custom-control-inline"
+      >
+        <input
+          checked={false}
+          className="custom-control-input"
+          id="showAppIcon-tray"
+          name="showAppIcon"
+          onChange={[Function]}
+          type="radio"
+          value="tray"
+        />
+        <label
+          className="custom-control-label"
+          htmlFor="showAppIcon-tray"
+        >
+          Tray Icon
+        </label>
+      </div>
+      <div
+        className="custom-control custom-radio custom-control-inline"
+      >
+        <input
+          checked={false}
+          className="custom-control-input"
+          id="showAppIcon-dock"
+          name="showAppIcon"
+          onChange={[Function]}
+          type="radio"
+          value="dock"
+        />
+        <label
+          className="custom-control-label"
+          htmlFor="showAppIcon-dock"
+        >
+          Dock Icon
+        </label>
+      </div>
+    </form>
+  </div>
+  <hr />
+  Version: 
+  0.0.1
+  <hr />
+  <div>
+    <button
+      aria-label="Logout"
+      className="btn btn-outline-danger"
+      onClick={[Function]}
+    >
+      <span
+        className="octicon octicon-sign-out"
+      />
+       Logout from all accounts
+    </button>
+  </div>
+</div>
+`;

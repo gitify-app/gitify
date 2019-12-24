@@ -7,11 +7,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
-import { fetchNotifications, logout, toggleSettingsModal } from '../actions';
+import { fetchNotifications, logout } from '../actions';
 import { isUserEitherLoggedIn } from '../utils/helpers';
 import { LogoWhite } from './logos/white';
 import Constants from '../utils/constants';
-import { ToggleSettingsModalAction } from '../../types/actions';
 
 interface IProps {
   fetchNotifications: () => void;
@@ -20,14 +19,13 @@ interface IProps {
   enterpriseAccounts: any; // PropTypes.object.isRequired;
   notifications: any; // PropTypes.object.isRequired;
 
-  toggleSettingsModal: () => ToggleSettingsModalAction;
   hasStarred: boolean;
   isEitherLoggedIn: boolean;
   isGitHubLoggedIn: boolean;
 }
 
 export class Sidebar extends React.Component<IProps> {
-  requestInterval: NodeJS.Timer;
+  requestInterval: any;
 
   componentDidMount() {
     const self = this;
@@ -162,13 +160,14 @@ export class Sidebar extends React.Component<IProps> {
             </li>
 
             <li className="nav-item text-white">
-              <FontAwesomeIcon
-                className="mx-1"
-                icon={faCog}
-                onClick={() => this.props.toggleSettingsModal()}
-                title="Settings"
-                fixedWidth
-              />
+              <Link to="/settings">
+                <FontAwesomeIcon
+                  className="mx-1"
+                  icon={faCog}
+                  title="Settings"
+                  fixedWidth
+                />
+              </Link>
             </li>
           </ul>
         )}
@@ -224,5 +223,4 @@ export function mapStateToProps(state) {
 export default connect(mapStateToProps, {
   fetchNotifications,
   logout,
-  toggleSettingsModal,
 })(Sidebar);

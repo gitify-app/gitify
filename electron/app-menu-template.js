@@ -5,21 +5,21 @@ const appMenuTemplate = [
     label: 'Edit',
     submenu: [
       {
-        role: 'cut'
+        role: 'cut',
       },
       {
-        role: 'copy'
+        role: 'copy',
       },
       {
-        role: 'paste'
+        role: 'paste',
       },
       {
-        role: 'delete'
+        role: 'delete',
       },
       {
-        role: 'selectall'
-      }
-    ]
+        role: 'selectall',
+      },
+    ],
   },
   {
     label: 'View',
@@ -27,61 +27,66 @@ const appMenuTemplate = [
       {
         label: 'Reload',
         accelerator: 'CmdOrCtrl+R',
-        click (item, focusedWindow) {
+        click(item, focusedWindow) {
           if (focusedWindow) focusedWindow.reload();
-        }
+        },
       },
       {
         label: 'Toggle Developer Tools',
-        accelerator: process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
-        click (item, focusedWindow) {
+        accelerator:
+          process.platform === 'darwin' ? 'Alt+Command+I' : 'Ctrl+Shift+I',
+        click(item, focusedWindow) {
           if (focusedWindow) focusedWindow.webContents.toggleDevTools();
-        }
+        },
       },
       {
-        type: 'separator'
+        type: 'separator',
       },
       {
-        role: 'resetzoom'
+        role: 'resetzoom',
       },
       {
-        role: 'zoomin'
+        role: 'zoomin',
       },
       {
-        role: 'zoomout'
+        role: 'zoomout',
       },
       {
-        type: 'separator'
+        type: 'separator',
       },
       {
-        role: 'togglefullscreen'
-      }
-    ]
+        role: 'togglefullscreen',
+      },
+    ],
   },
   {
     role: 'window',
     submenu: [
       {
-        role: 'minimize'
+        role: 'minimize',
       },
       {
-        role: 'close'
-      }
-    ]
+        role: 'close',
+      },
+    ],
   },
   {
     role: 'help',
     submenu: [
       {
         label: 'GitHub Repository',
-        click () { shell.openExternal('https://github.com/manosim/gitify'); }
+        click() {
+          shell.openExternal('https://github.com/manosim/gitify');
+        },
       },
       {
         label: 'Visit Website',
-        click () { shell.openExternal('http://www.gitify.io'); }
-      }
-    ]
-  }
+        click() {
+          shell.openExternal('http://www.gitify.io');
+        },
+      },
+    ],
+  },
 ];
 
 if (process.platform === 'darwin') {
@@ -89,37 +94,27 @@ if (process.platform === 'darwin') {
     label: 'Gitify',
     submenu: [
       {
-        role: 'about'
+        role: 'about',
       },
       {
-        type: 'separator'
+        type: 'separator',
       },
       {
-        label: 'Preferences',
-        accelerator: process.platform === 'darwin' ? 'Command+,' : 'Ctrl+,',
-        click (item, focusedWindow) {
-          if (focusedWindow) focusedWindow.webContents.send('toggle-settings');
-        }
+        role: 'hide',
       },
       {
-        type: 'separator'
+        role: 'hideothers',
       },
       {
-        role: 'hide'
+        role: 'unhide',
       },
       {
-        role: 'hideothers'
+        type: 'separator',
       },
       {
-        role: 'unhide'
+        role: 'quit',
       },
-      {
-        type: 'separator'
-      },
-      {
-        role: 'quit'
-      }
-    ]
+    ],
   });
 
   // Window menu.
@@ -127,24 +122,24 @@ if (process.platform === 'darwin') {
     {
       label: 'Close',
       accelerator: 'CmdOrCtrl+W',
-      role: 'close'
+      role: 'close',
     },
     {
       label: 'Minimize',
       accelerator: 'CmdOrCtrl+M',
-      role: 'minimize'
+      role: 'minimize',
     },
     {
       label: 'Zoom',
-      role: 'zoom'
+      role: 'zoom',
     },
     {
-      type: 'separator'
+      type: 'separator',
     },
     {
       label: 'Bring All to Front',
-      role: 'front'
-    }
+      role: 'front',
+    },
   ];
 }
 

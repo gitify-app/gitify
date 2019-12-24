@@ -3,8 +3,8 @@ import {
   NOTIFICATIONS,
   MARK_NOTIFICATION,
   MARK_REPO_NOTIFICATION,
-  LOGOUT,
 } from '../actions';
+import { LOGOUT } from '../../types/actions';
 
 const initialState = Map({
   response: List(),

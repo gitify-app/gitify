@@ -8,10 +8,7 @@ import {
   generateGitHubAPIUrl,
 } from '../utils/helpers';
 import Constants from '../utils/constants';
-import {
-  ToggleSettingsModalAction,
-  TOGGLE_SETTINGS_MODAL,
-} from '../../types/actions';
+import { LogoutAction, LOGOUT } from '../../types/actions';
 
 export function makeAsyncActionSet(actionName) {
   return {
@@ -54,8 +51,7 @@ export function loginUser(authOptions, code) {
   };
 }
 
-export const LOGOUT = 'LOGOUT';
-export function logout() {
+export function logout(): LogoutAction {
   return { type: LOGOUT };
 }
 
@@ -247,11 +243,5 @@ export function updateSetting(setting, value) {
     type: UPDATE_SETTING,
     setting: setting,
     value: value,
-  };
-}
-
-export function toggleSettingsModal(): ToggleSettingsModalAction {
-  return {
-    type: TOGGLE_SETTINGS_MODAL,
   };
 }

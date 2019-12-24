@@ -1,6 +1,7 @@
 import { Map, List } from 'immutable';
 
-import { LOGIN, LOGOUT } from '../actions';
+import { LOGIN } from '../actions';
+import { LOGOUT } from '../../types/actions';
 
 const initialState = Map({
   response: Map(),

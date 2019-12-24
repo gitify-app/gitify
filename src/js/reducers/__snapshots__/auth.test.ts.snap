@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reducers/auth.ts should handle LOGIN.FAILURE 1`] = `
+Immutable.Map {
+  "response": Immutable.Map {
+    "msg": "Failed to login.",
+  },
+  "token": null,
+  "isFetching": false,
+  "failed": true,
+}
+`;
+
+exports[`reducers/auth.ts should handle LOGIN.REQUEST 1`] = `
+Immutable.Map {
+  "response": Immutable.Map {},
+  "token": null,
+  "isFetching": true,
+  "failed": false,
+  "enterpriseAccounts": Immutable.List [],
+}
+`;
+
+exports[`reducers/auth.ts should handle LOGIN.SUCCESS - enterprise 1`] = `
+Immutable.Map {
+  "response": Immutable.Map {},
+  "token": null,
+  "isFetching": false,
+  "failed": false,
+  "enterpriseAccounts": Immutable.List [
+    Immutable.Map {
+      "hostname": "github.gitify.io",
+      "token": "123HELLOWORLDTOKEN",
+    },
+  ],
+}
+`;
+
+exports[`reducers/auth.ts should handle LOGIN.SUCCESS - github.com 1`] = `
+Immutable.Map {
+  "response": Immutable.Map {},
+  "token": "123HELLOWORLDTOKEN",
+  "isFetching": false,
+  "failed": false,
+  "enterpriseAccounts": Immutable.List [],
+}
+`;
+
+exports[`reducers/auth.ts should handle LOGOUT 1`] = `
+Immutable.Map {
+  "response": null,
+  "token": null,
+  "isFetching": false,
+  "failed": false,
+  "enterpriseAccounts": Immutable.List [],
+}
+`;
+
+exports[`reducers/auth.ts should return the initial state 1`] = `
+Immutable.Map {
+  "response": Immutable.Map {},
+  "token": null,
+  "isFetching": false,
+  "failed": false,
+  "enterpriseAccounts": Immutable.List [],
+}
+`;
