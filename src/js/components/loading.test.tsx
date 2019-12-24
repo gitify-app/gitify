@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
-import { Map } from 'immutable';
 import * as NProgress from 'nprogress';
 
+import { AppState } from '../../types/reducers';
 import { Loading, mapStateToProps } from './loading';
 
 jest.mock('nprogress', () => {
@@ -24,10 +24,10 @@ describe('components/loading.js', function() {
 
   it('should test the mapStateToProps method', () => {
     const state = {
-      notifications: Map({
+      notifications: {
         isFetching: false,
-      }),
-    };
+      },
+    } as AppState;
 
     const mappedProps = mapStateToProps(state);
 

@@ -1,7 +1,6 @@
 const { remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 const dialog = remote.dialog;
-import { Map, List } from 'immutable';
 
 import {
   authGithub,
@@ -9,6 +8,7 @@ import {
   generateGitHubAPIUrl,
   isUserEitherLoggedIn,
 } from './helpers';
+import { AuthState, EnterpriseAccount } from '../../types/reducers';
 
 describe('utils/helpers.ts', () => {
   it('should generate the GitHub url - non enterprise - (issue)', () => {
@@ -76,19 +76,19 @@ describe('utils/helpers.ts', () => {
   });
 
   it('should test isUserEitherLoggedIn - with github', () => {
-    const auth = Map({
+    const auth = {
       token: '123-456',
-      enterpriseAccounts: List(),
-    });
+      enterpriseAccounts: [],
+    } as AuthState;
     const result = isUserEitherLoggedIn(auth);
     expect(result).toBeTruthy();
   });
 
   it('should test isUserEitherLoggedIn - with enterprise', () => {
-    const auth = Map({
+    const auth = {
       token: null,
-      enterpriseAccounts: List(['test']),
-    });
+      enterpriseAccounts: [{} as EnterpriseAccount],
+    } as AuthState;
     const result = isUserEitherLoggedIn(auth);
     expect(result).toBeTruthy();
   });

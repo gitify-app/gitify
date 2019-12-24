@@ -1,3 +1,5 @@
+import { SettingsState } from '../../types/reducers';
+
 const { ipcRenderer, shell } = require('electron');
 
 export function openExternalLink(url) {
@@ -32,7 +34,6 @@ export function restoreSetting(setting, value) {
   ipcRenderer.send(setting, value);
 }
 
-export function restoreSettings(settings) {
-  const showAppIcon = settings.get('showAppIcon');
-  restoreSetting('show-app-icon', showAppIcon);
+export function restoreSettings(settings: SettingsState) {
+  restoreSetting('show-app-icon', settings.showAppIcon);
 }

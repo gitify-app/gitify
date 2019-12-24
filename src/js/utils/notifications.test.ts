@@ -1,26 +1,27 @@
-import { List, Map } from 'immutable';
+import * as _ from 'lodash';
 
-import * as comms from './comms';
+import { generateGitHubWebUrl } from '../utils/helpers';
 import { mockedGithubNotifications } from '../__mocks__/mockedData';
+import { SettingsState } from '../../types/reducers';
+import { SubjectType } from '../../types/github';
+import * as comms from './comms';
 import NotificationsUtils, {
   getNotificationIcon,
 } from '../utils/notifications';
-import { generateGitHubWebUrl } from '../utils/helpers';
-import { SubjectType } from '../../types/github';
 
 describe('utils/notifications.ts', () => {
   it('should raise a notification (settings - on)', () => {
-    const settings = Map({
+    const settings = {
       playSound: true,
       showNotifications: true,
-    });
+    } as SettingsState;
 
     spyOn(NotificationsUtils, 'raiseNativeNotification');
     spyOn(NotificationsUtils, 'raiseSoundNotification');
 
     NotificationsUtils.setup(
       mockedGithubNotifications,
-      mockedGithubNotifications.size,
+      mockedGithubNotifications.length,
       settings
     );
 
@@ -29,17 +30,17 @@ describe('utils/notifications.ts', () => {
   });
 
   it('should not raise a notification (settings - off)', () => {
-    const settings = Map({
+    const settings = {
       playSound: false,
       showNotifications: false,
-    });
+    } as SettingsState;
 
     spyOn(NotificationsUtils, 'raiseNativeNotification');
     spyOn(NotificationsUtils, 'raiseSoundNotification');
 
     NotificationsUtils.setup(
       mockedGithubNotifications,
-      mockedGithubNotifications.size,
+      mockedGithubNotifications.length,
       settings
     );
 
@@ -51,29 +52,29 @@ describe('utils/notifications.ts', () => {
     const settings = {
       playSound: true,
       showNotifications: true,
-    };
+    } as SettingsState;
 
     spyOn(NotificationsUtils, 'raiseNativeNotification');
     spyOn(NotificationsUtils, 'raiseSoundNotification');
 
-    NotificationsUtils.setup(List(), 0, settings);
+    NotificationsUtils.setup([], 0, settings);
 
     expect(NotificationsUtils.raiseNativeNotification).not.toHaveBeenCalled();
     expect(NotificationsUtils.raiseSoundNotification).not.toHaveBeenCalled();
   });
 
   it('should raise a single native notification (with different icons)', () => {
-    const settings = Map({
+    const settings = {
       playSound: false,
       showNotifications: true,
-    });
+    } as SettingsState;
 
-    const mockedNotification = mockedGithubNotifications.first();
+    const mockedNotification = mockedGithubNotifications[0];
 
     spyOn(NotificationsUtils, 'raiseNativeNotification');
     spyOn(NotificationsUtils, 'raiseSoundNotification');
 
-    NotificationsUtils.setup(List.of(mockedNotification), 1, settings);
+    NotificationsUtils.setup([mockedNotification], 1, settings);
 
     expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
     expect(NotificationsUtils.raiseSoundNotification).not.toHaveBeenCalled();
@@ -83,40 +84,11 @@ describe('utils/notifications.ts', () => {
 
     // PullRequest
     NotificationsUtils.setup(
-      List.of(mockedNotification.setIn(['subject', 'type'], 'PullRequest')),
-      1,
-      settings
-    );
-    expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
-
-    // @ts-ignore
-    NotificationsUtils.raiseNativeNotification.calls.reset();
-
-    // Commit
-    NotificationsUtils.setup(
-      List.of(mockedNotification.setIn(['subject', 'type'], 'Commit')),
-      1,
-      settings
-    );
-    expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
-
-    // @ts-ignore
-    NotificationsUtils.raiseNativeNotification.calls.reset();
-
-    // Commit
-    NotificationsUtils.setup(
-      List.of(mockedNotification.setIn(['subject', 'type'], 'Release')),
-      1,
-      settings
-    );
-    expect(NotificationsUtils.raiseNativeNotification).toHaveBeenCalledTimes(1);
-
-    // @ts-ignore
-    NotificationsUtils.raiseNativeNotification.calls.reset();
-
-    // AnotherType
-    NotificationsUtils.setup(
-      List.of(mockedNotification.setIn(['subject', 'type'], 'AnotherType')),
+      _.updateWith(
+        [mockedNotification],
+        `[0][subject][type]`,
+        () => 'PullRequest'
+      ),
       1,
       settings
     );
@@ -126,9 +98,7 @@ describe('utils/notifications.ts', () => {
   it('should click on a native notification (with 1 notification)', () => {
     spyOn(comms, 'openExternalLink');
 
-    const mockedNotifications = List.of(
-      List.of(mockedGithubNotifications.first())
-    );
+    const mockedNotifications = [[mockedGithubNotifications[0]]];
 
     const nativeNotification: Notification = NotificationsUtils.raiseNativeNotification(
       mockedNotifications,
@@ -137,7 +107,7 @@ describe('utils/notifications.ts', () => {
     nativeNotification.onclick(null);
 
     const newUrl = generateGitHubWebUrl(
-      mockedGithubNotifications.getIn([0, 'subject', 'url'])
+      mockedGithubNotifications[0].subject.url
     );
     expect(comms.openExternalLink).toHaveBeenCalledTimes(1);
     expect(comms.openExternalLink).toHaveBeenCalledWith(newUrl);
@@ -146,8 +116,8 @@ describe('utils/notifications.ts', () => {
   it('should click on a native notification (with more than 1 notification)', () => {
     spyOn(comms, 'reOpenWindow');
 
-    const mockedNotifications = List.of(mockedGithubNotifications);
-    const count = mockedGithubNotifications.size;
+    const mockedNotifications = [mockedGithubNotifications];
+    const count = mockedGithubNotifications.length;
 
     const nativeNotification = NotificationsUtils.raiseNativeNotification(
       mockedNotifications,

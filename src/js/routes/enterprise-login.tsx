@@ -10,6 +10,7 @@ import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
 import { authGithub } from '../utils/helpers';
 import { FieldInput } from '../components/fields/input';
+import { AppState } from '../../types/reducers';
 
 interface IValues {
   hostname?: string;
@@ -140,9 +141,9 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
   }
 }
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state: AppState) {
   return {
-    enterpriseAccountsCount: state.auth.get('enterpriseAccounts').size,
+    enterpriseAccountsCount: state.auth.enterpriseAccounts.length,
   };
 }
 

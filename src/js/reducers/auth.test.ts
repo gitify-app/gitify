@@ -1,8 +1,7 @@
-import { Map, List } from 'immutable';
-
+import { AuthState } from '../../types/reducers';
 import { LOGIN } from '../actions';
-import reducer from './auth';
 import { LOGOUT } from '../../types/actions';
+import reducer from './auth';
 
 describe('reducers/auth.ts', () => {
   it('should return the initial state', () => {
@@ -18,14 +17,14 @@ describe('reducers/auth.ts', () => {
   });
 
   it('should handle LOGIN.SUCCESS - github.com', () => {
-    const fakeState = Map({
-      response: Map(),
+    const fakeState = {
+      response: {},
       token: null,
       isFetching: true,
       failed: false,
-    });
+    } as AuthState;
 
-    expect(reducer(fakeState, {}).get('token')).toBeNull();
+    expect(reducer(fakeState, {}).token).toBeNull();
 
     const action = {
       type: LOGIN.SUCCESS,
@@ -35,7 +34,7 @@ describe('reducers/auth.ts', () => {
     };
 
     expect(reducer(undefined, action)).toMatchSnapshot();
-    expect(reducer(fakeState, action).get('token')).toBe('123HELLOWORLDTOKEN');
+    expect(reducer(fakeState, action).token).toBe('123HELLOWORLDTOKEN');
   });
 
   it('should handle LOGIN.SUCCESS - enterprise', () => {
@@ -52,14 +51,14 @@ describe('reducers/auth.ts', () => {
   });
 
   it('should handle LOGIN.FAILURE', () => {
-    const fakeState = Map({
-      response: Map(),
+    const fakeState = {
+      response: {},
       token: null,
       isFetching: true,
       failed: false,
-    });
+    } as AuthState;
 
-    expect(reducer(fakeState, {}).get('token')).toBeNull();
+    expect(reducer(fakeState, {}).token).toBeNull();
 
     const action = {
       type: LOGIN.FAILURE,
@@ -67,25 +66,25 @@ describe('reducers/auth.ts', () => {
     };
 
     expect(reducer(fakeState, action)).toMatchSnapshot();
-    expect(reducer(fakeState, action).get('token')).toBeNull();
+    expect(reducer(fakeState, action).token).toBeNull();
   });
 
   it('should handle LOGOUT', () => {
-    const fakeState = Map({
-      response: Map(),
+    const fakeState = {
+      response: {},
       token: 'LOGGEDINTOKEN',
       isFetching: false,
       failed: false,
-      enterpriseAccounts: List(),
-    }) as any;
+      enterpriseAccounts: [],
+    } as AuthState;
 
-    expect(reducer(fakeState, {}).get('token')).not.toBeNull();
+    expect(reducer(fakeState, {}).token).not.toBeNull();
 
     const action = {
       type: LOGOUT,
     };
 
     expect(reducer(fakeState, action)).toMatchSnapshot();
-    expect(reducer(fakeState, action).get('token')).toBeNull();
+    expect(reducer(fakeState, action).token).toBeNull();
   });
 });

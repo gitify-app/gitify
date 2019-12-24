@@ -2,11 +2,11 @@ import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
 import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { Map } from 'immutable';
 
 const { ipcRenderer } = require('electron');
 
 import { SettingsRoute, mapStateToProps } from './settings';
+import { SettingsState, AppState } from '../../types/reducers';
 
 describe('routes/settings.tsx', () => {
   const props = {
@@ -16,7 +16,7 @@ describe('routes/settings.tsx', () => {
     history: {
       goBack: jest.fn(),
     },
-    settings: Map({
+    settings: {
       participating: false,
       playSound: true,
       showNotifications: true,
@@ -24,7 +24,7 @@ describe('routes/settings.tsx', () => {
       openAtStartup: false,
       hasStarred: false,
       showAppIcon: 'both',
-    }),
+    },
   };
 
   beforeEach(function() {
@@ -36,14 +36,14 @@ describe('routes/settings.tsx', () => {
 
   it('should test the mapStateToProps method', () => {
     const state = {
-      settings: Map({
+      settings: {
         participating: false,
-      }),
-    };
+      } as SettingsState,
+    } as AppState;
 
     const mappedProps = mapStateToProps(state);
 
-    expect(mappedProps.settings.get('participating')).toBeFalsy();
+    expect(mappedProps.settings.participating).toBeFalsy();
   });
 
   it('should render itself & its children', () => {
@@ -72,10 +72,10 @@ describe('routes/settings.tsx', () => {
 
     expect(props.fetchNotifications).toHaveBeenCalledTimes(0);
 
-    const updatedSettings = props.settings.set(
-      'participating',
-      !props.settings.get('participating')
-    );
+    const updatedSettings = {
+      ...props.settings,
+      participating: !props.settings.participating,
+    };
 
     rerender(<SettingsRoute {...props} settings={updatedSettings} />);
 

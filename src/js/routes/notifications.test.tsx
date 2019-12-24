@@ -1,9 +1,9 @@
 import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
-import { List, Map } from 'immutable';
 
-import { NotificationsRoute, mapStateToProps } from './notifications';
+import { AppState, NotificationsState } from '../../types/reducers';
 import { mockedNotificationsRecuderData } from '../__mocks__/mockedData';
+import { NotificationsRoute, mapStateToProps } from './notifications';
 
 jest.mock('../components/account-notifications', () => ({
   AccountNotifications: 'AccountNotifications',
@@ -21,16 +21,17 @@ describe('routes/notifications.ts', () => {
   const props = {
     failed: false,
     accountNotifications: mockedNotificationsRecuderData,
+    notificationsCount: 4,
     hasNotifications: true,
   };
 
   it('should test the mapStateToProps method', () => {
     const state = {
-      notifications: Map({
+      notifications: {
         response: mockedNotificationsRecuderData,
         failed: false,
-      }),
-    };
+      } as NotificationsState,
+    } as AppState;
 
     const mappedProps = mapStateToProps(state);
 
@@ -39,6 +40,7 @@ describe('routes/notifications.ts', () => {
       mockedNotificationsRecuderData
     );
     expect(mappedProps.hasNotifications).toBeTruthy();
+    expect(mappedProps.notificationsCount).toBe(4);
   });
 
   it('should render itself & its children (with notifications)', () => {
@@ -51,7 +53,7 @@ describe('routes/notifications.ts', () => {
     const caseProps = {
       ...props,
       hasNotifications: false,
-      accountNotifications: List(),
+      accountNotifications: [],
     };
 
     const tree = TestRenderer.create(<NotificationsRoute {...caseProps} />);

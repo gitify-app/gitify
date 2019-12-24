@@ -32,7 +32,7 @@ describe('reducers/settings.ts', () => {
     expect(reducer(undefined, action)).toMatchSnapshot();
   });
 
-  it('should handle HAS_STARRED.SUCCESS', () => {
+  it('should handle HAS_STARRED.FAILURE', () => {
     const action = {
       type: HAS_STARRED.FAILURE,
     };

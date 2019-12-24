@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { parse } from 'url';
-import { fromJS, Map } from 'immutable';
 
 import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 import {
@@ -9,6 +8,7 @@ import {
 } from '../utils/helpers';
 import Constants from '../utils/constants';
 import { LogoutAction, LOGOUT } from '../../types/actions';
+import { SettingsState, AppState } from '../../types/reducers';
 
 export function makeAsyncActionSet(actionName) {
   return {
@@ -59,13 +59,11 @@ export function logout(): LogoutAction {
 
 export const NOTIFICATIONS = makeAsyncActionSet('NOTIFICATIONS');
 export function fetchNotifications() {
-  return (dispatch, getState) => {
+  return (dispatch, getState: () => AppState) => {
     const method = 'GET';
-    const { settings } = getState();
-    const isGitHubLoggedIn = getState().auth.get('token') !== null;
-    const endpointSuffix = `notifications?participating=${settings.get(
-      'participating'
-    )}`;
+    const { settings }: { settings: SettingsState } = getState();
+    const isGitHubLoggedIn = getState().auth.token !== null;
+    const endpointSuffix = `notifications?participating=${settings.participating}`;
 
     function getGitHubNotifications() {
       if (!isGitHubLoggedIn) {
@@ -73,20 +71,18 @@ export function fetchNotifications() {
       }
 
       const url = `https://api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}/${endpointSuffix}`;
-      const token = getState().auth.get('token');
+      const token = getState().auth.token;
       return apiRequestAuth(url, method, token);
     }
 
     function getEnterpriseNotifications() {
-      const enterpriseAccounts = getState().auth.get('enterpriseAccounts');
-      return enterpriseAccounts
-        .map(account => {
-          const hostname = account.get('hostname');
-          const token = account.get('token');
-          const url = `https://${hostname}/api/v3/${endpointSuffix}`;
-          return apiRequestAuth(url, method, token);
-        })
-        .toArray();
+      const enterpriseAccounts = getState().auth.enterpriseAccounts;
+      return enterpriseAccounts.map(account => {
+        const hostname = account.hostname;
+        const token = account.token;
+        const url = `https://${hostname}/api/v3/${endpointSuffix}`;
+        return apiRequestAuth(url, method, token);
+      });
     }
 
     dispatch({ type: NOTIFICATIONS.REQUEST });
@@ -95,25 +91,26 @@ export function fetchNotifications() {
       .all([getGitHubNotifications(), ...getEnterpriseNotifications()])
       .then(
         axios.spread((gitHubNotifications, ...entAccNotifications) => {
-          const notifications = fromJS(
-            entAccNotifications.map(accNotifications => {
-              const { hostname } = parse(accNotifications.config.url);
+          const notifications = entAccNotifications.map(
+            accountNotifications => {
+              const { hostname } = parse(accountNotifications.config.url);
 
-              return Map({
+              return {
                 hostname,
-                notifications: fromJS(accNotifications.data),
-              });
-            })
+                notifications: accountNotifications.data,
+              };
+            }
           );
 
           const allNotifications = isGitHubLoggedIn
-            ? notifications.push(
-                Map({
+            ? [
+                ...notifications,
+                {
                   hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-                  notifications: fromJS(gitHubNotifications.data),
-                })
-              )
-            : notifications;
+                  notifications: gitHubNotifications.data,
+                },
+              ]
+            : [...notifications];
 
           dispatch({
             type: NOTIFICATIONS.SUCCESS,
@@ -131,15 +128,15 @@ export function fetchNotifications() {
 
 export const MARK_NOTIFICATION = makeAsyncActionSet('MARK_NOTIFICATION');
 export function markNotification(id, hostname) {
-  return (dispatch, getState) => {
+  return (dispatch, getState: () => AppState) => {
     const url = `${generateGitHubAPIUrl(hostname)}notifications/threads/${id}`;
     const method = 'PATCH';
 
     const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
-    const entAccounts = getState().auth.get('enterpriseAccounts');
+    const entAccounts = getState().auth.enterpriseAccounts;
     const token = isEnterprise
       ? getEnterpriseAccountToken(hostname, entAccounts)
-      : getState().auth.get('token');
+      : getState().auth.token;
 
     dispatch({ type: MARK_NOTIFICATION.REQUEST });
 
@@ -147,7 +144,6 @@ export function markNotification(id, hostname) {
       .then(function(response) {
         dispatch({
           type: MARK_NOTIFICATION.SUCCESS,
-          payload: response.data,
           meta: { id, hostname },
         });
       })
@@ -166,17 +162,17 @@ export const MARK_REPO_NOTIFICATION = makeAsyncActionSet(
   'MARK_REPO_NOTIFICATION'
 );
 export function markRepoNotifications(repoSlug, hostname) {
-  return (dispatch, getState) => {
+  return (dispatch, getState: () => AppState) => {
     const url = `${generateGitHubAPIUrl(
       hostname
     )}repos/${repoSlug}/notifications`;
     const method = 'PUT';
 
     const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
-    const entAccounts = getState().auth.get('enterpriseAccounts');
+    const entAccounts = getState().auth.enterpriseAccounts;
     const token = isEnterprise
       ? getEnterpriseAccountToken(hostname, entAccounts)
-      : getState().auth.get('token');
+      : getState().auth.token;
 
     dispatch({ type: MARK_REPO_NOTIFICATION.REQUEST });
 
@@ -201,10 +197,10 @@ export function markRepoNotifications(repoSlug, hostname) {
 
 export const HAS_STARRED = makeAsyncActionSet('HAS_STARRED');
 export function checkHasStarred() {
-  return (dispatch, getState) => {
+  return (dispatch, getState: () => AppState) => {
     const url = `https://api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}/user/starred/${Constants.REPO_SLUG}`;
     const method = 'GET';
-    const token = getState().auth.get('token');
+    const token = getState().auth.token;
 
     dispatch({ type: HAS_STARRED.REQUEST });
 

@@ -1,61 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`reducers/settings.ts should handle HAS_STARRED.SUCCESS 1`] = `
-Immutable.Map {
-  "participating": false,
-  "playSound": true,
-  "showNotifications": true,
+exports[`reducers/settings.ts should handle HAS_STARRED.FAILURE 1`] = `
+Object {
+  "hasStarred": false,
   "markOnClick": false,
   "openAtStartup": false,
-  "hasStarred": true,
+  "participating": false,
+  "playSound": true,
   "showAppIcon": "both",
+  "showNotifications": true,
 }
 `;
 
-exports[`reducers/settings.ts should handle HAS_STARRED.SUCCESS 2`] = `
-Immutable.Map {
-  "participating": false,
-  "playSound": true,
-  "showNotifications": true,
+exports[`reducers/settings.ts should handle HAS_STARRED.SUCCESS 1`] = `
+Object {
+  "hasStarred": true,
   "markOnClick": false,
   "openAtStartup": false,
-  "hasStarred": false,
+  "participating": false,
+  "playSound": true,
   "showAppIcon": "both",
+  "showNotifications": true,
 }
 `;
 
 exports[`reducers/settings.ts should handle UPDATE_SETTING 1`] = `
-Immutable.Map {
-  "participating": true,
-  "playSound": true,
-  "showNotifications": true,
+Object {
+  "hasStarred": false,
   "markOnClick": false,
   "openAtStartup": false,
-  "hasStarred": false,
+  "participating": true,
+  "playSound": true,
   "showAppIcon": "both",
+  "showNotifications": true,
 }
 `;
 
 exports[`reducers/settings.ts should handle UPDATE_SETTING 2`] = `
-Immutable.Map {
-  "participating": false,
-  "playSound": true,
-  "showNotifications": true,
+Object {
+  "hasStarred": false,
   "markOnClick": false,
   "openAtStartup": true,
-  "hasStarred": false,
+  "participating": false,
+  "playSound": true,
   "showAppIcon": "both",
+  "showNotifications": true,
 }
 `;
 
 exports[`reducers/settings.ts should return the initial state 1`] = `
-Immutable.Map {
-  "participating": false,
-  "playSound": true,
-  "showNotifications": true,
+Object {
+  "hasStarred": false,
   "markOnClick": false,
   "openAtStartup": false,
-  "hasStarred": false,
+  "participating": false,
+  "playSound": true,
   "showAppIcon": "both",
+  "showNotifications": true,
 }
 `;

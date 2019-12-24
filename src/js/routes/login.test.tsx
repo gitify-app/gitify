@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
-import { Map } from 'immutable';
 import { MemoryRouter } from 'react-router';
 import { render, fireEvent } from '@testing-library/react';
 
@@ -9,6 +8,7 @@ import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
 const { ipcRenderer, remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 
+import { AppState } from '../../types/reducers';
 import { LoginPage, mapStateToProps } from './login';
 import * as helpers from '../utils/helpers';
 
@@ -37,13 +37,13 @@ describe('components/login.js', () => {
 
   it('should test the mapStateToProps method', () => {
     const state = {
-      auth: Map({
+      auth: {
         token: '123456',
         failed: false,
         isFetching: false,
         enterpriseAccounts: mockedEnterpriseAccounts,
-      }),
-    };
+      },
+    } as AppState;
 
     const mappedProps = mapStateToProps(state);
 

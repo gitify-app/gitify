@@ -12,7 +12,7 @@ jest.mock('./notification');
 describe('components/repository.tsx', function() {
   const props = {
     hostname: 'github.com',
-    repo: mockedGithubNotifications.toJS(),
+    repo: mockedGithubNotifications,
     repoName: 'manosim/gitify',
     markRepoNotifications: jest.fn(),
   };

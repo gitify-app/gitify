@@ -10,7 +10,7 @@ describe('components/account-notifications.tsx', () => {
   it('should render itself (github.com with notifications)', () => {
     const props = {
       hostname: 'github.com',
-      notifications: mockedGithubNotifications.toJS(),
+      notifications: mockedGithubNotifications,
     };
 
     const tree = TestRendener.create(<AccountNotifications {...props} />);

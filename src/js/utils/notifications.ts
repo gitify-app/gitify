@@ -3,6 +3,7 @@ const { remote } = require('electron');
 import { generateGitHubWebUrl } from '../utils/helpers';
 import { reOpenWindow, openExternalLink } from '../utils/comms';
 import { SubjectType } from '../../types/github';
+import { SettingsState } from '../../types/reducers';
 
 export function getNotificationIcon(type: SubjectType) {
   switch (type) {
@@ -20,17 +21,17 @@ export function getNotificationIcon(type: SubjectType) {
 }
 
 export default {
-  setup(notifications, notificationsCount, settings) {
+  setup(notifications, notificationsCount, settings: SettingsState) {
     // If there are no new notifications just stop there
     if (!notificationsCount) {
       return;
     }
 
-    if (settings.get('playSound')) {
+    if (settings.playSound) {
       this.raiseSoundNotification();
     }
 
-    if (settings.get('showNotifications')) {
+    if (settings.showNotifications) {
       this.raiseNativeNotification(notifications, notificationsCount);
     }
   },
@@ -39,11 +40,11 @@ export default {
     let title, body, icon, notificationUrl;
 
     if (count === 1) {
-      const notification = notifications.find(obj => !obj.isEmpty()).first();
-      title = `Gitify - ${notification.getIn(['repository', 'full_name'])}`;
-      body = notification.getIn(['subject', 'title']);
-      icon = getNotificationIcon(notification.getIn(['subject', 'type']));
-      notificationUrl = notification.getIn(['subject', 'url']);
+      const notification = notifications.find(obj => obj.length > 0)[0];
+      title = `Gitify - ${notification.repository.full_name}`;
+      body = notification.subject.title;
+      icon = getNotificationIcon(notification.subject.type);
+      notificationUrl = notification.subject.url;
     } else {
       title = 'Gitify';
       body = `You've got ${count} notifications.`;

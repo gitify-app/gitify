@@ -1,12 +1,12 @@
 import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
-import { Map } from 'immutable';
 import { fireEvent, render } from '@testing-library/react';
 
 const { shell } = require('electron');
 
-import { NotificationItem, mapStateToProps } from './notification';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
+import { NotificationItem, mapStateToProps } from './notification';
+import { SettingsState, AppState } from '../../types/reducers';
 
 describe('components/notification.js', () => {
   const notification = mockedSingleNotification;
@@ -17,10 +17,10 @@ describe('components/notification.js', () => {
 
   it('should test the mapStateToProps method', () => {
     const state = {
-      settings: Map({
+      settings: {
         markOnClick: true,
-      }),
-    };
+      } as SettingsState,
+    } as AppState;
 
     const mappedProps = mapStateToProps(state);
 

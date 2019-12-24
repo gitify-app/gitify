@@ -49,10 +49,10 @@ export const AccountNotifications = (props: IProps) => {
 
         return (
           <RepositoryNotifications
+            key={repoSlug}
             hostname={hostname}
             repo={repoNotifications}
             repoName={repoSlug}
-            key={repoSlug}
           />
         );
       })}

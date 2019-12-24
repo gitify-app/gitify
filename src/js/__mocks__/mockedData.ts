@@ -1,13 +1,12 @@
-import { fromJS } from 'immutable';
+import { Notification, Repository } from '../../types/github';
+import { EnterpriseAccount } from '../../types/reducers';
 
-import { Notification } from '../../types/github';
-
-export const mockedEnterpriseAccounts = fromJS([
+export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
   {
     hostname: 'github.gitify.io',
     token: '1234568790',
   },
-]);
+];
 
 // prettier-ignore
 export const mockedSingleNotification: Notification = {
@@ -95,7 +94,7 @@ export const mockedSingleNotification: Notification = {
 
 // 2 Notifications
 // Repository : 'manosim/notifications-tests'
-export const mockedGithubNotifications = fromJS([
+export const mockedGithubNotifications = [
   mockedSingleNotification,
   {
     id: '148827438',
@@ -145,12 +144,13 @@ export const mockedGithubNotifications = fromJS([
     url: 'https://api.github.com/notifications/threads/148827438',
     subscription_url:
       'https://api.github.com/notifications/threads/148827438/subscription',
-  },
-]);
+  } as Notification,
+];
 
 // 2 Notifications
 // Repository : 'myorg/notifications-test'
-export const mockedEnterpriseNotifications = fromJS([
+// prettier-ignore
+export const mockedEnterpriseNotifications = [
   {
     id: '4',
     unread: true,
@@ -159,10 +159,8 @@ export const mockedEnterpriseNotifications = fromJS([
     last_read_at: null,
     subject: {
       title: 'Release 0.0.1',
-      url:
-        'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1',
-      latest_comment_url:
-        'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1',
+      url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1',
+      latest_comment_url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1',
       type: 'Release',
     },
     repository: {
@@ -177,20 +175,14 @@ export const mockedEnterpriseNotifications = fromJS([
         url: 'https://github.gitify.io/api/v3/users/myorg',
         html_url: 'https://github.gitify.io/myorg',
         followers_url: 'https://github.gitify.io/api/v3/users/myorg/followers',
-        following_url:
-          'https://github.gitify.io/api/v3/users/myorg/following{/other_user}',
-        gists_url:
-          'https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}',
-        starred_url:
-          'https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}',
-        subscriptions_url:
-          'https://github.gitify.io/api/v3/users/myorg/subscriptions',
+        following_url: 'https://github.gitify.io/api/v3/users/myorg/following{/other_user}',
+        gists_url: 'https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}',
+        starred_url: 'https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}',
+        subscriptions_url: 'https://github.gitify.io/api/v3/users/myorg/subscriptions',
         organizations_url: 'https://github.gitify.io/api/v3/users/myorg/orgs',
         repos_url: 'https://github.gitify.io/api/v3/users/myorg/repos',
-        events_url:
-          'https://github.gitify.io/api/v3/users/myorg/events{/privacy}',
-        received_events_url:
-          'https://github.gitify.io/api/v3/users/myorg/received_events',
+        events_url: 'https://github.gitify.io/api/v3/users/myorg/events{/privacy}',
+        received_events_url: 'https://github.gitify.io/api/v3/users/myorg/received_events',
         type: 'Organization',
         site_admin: false,
       },
@@ -199,11 +191,11 @@ export const mockedEnterpriseNotifications = fromJS([
       description: null,
       fork: false,
       // Removed the rest of the properties
-    },
+    } as Repository,
     url: 'https://github.gitify.io/api/v3/notifications/threads/4',
     subscription_url:
       'https://github.gitify.io/api/v3/notifications/threads/4/subscription',
-  },
+  } as Notification,
   {
     id: '3',
     unread: true,
@@ -256,10 +248,10 @@ export const mockedEnterpriseNotifications = fromJS([
     url: 'https://github.gitify.io/api/v3/notifications/threads/3',
     subscription_url:
       'https://github.gitify.io/api/v3/notifications/threads/3/subscription',
-  },
-]);
+  } as Notification,
+];
 
-export const mockedNotificationsRecuderData = fromJS([
+export const mockedNotificationsRecuderData = [
   {
     hostname: 'github.com',
     notifications: mockedGithubNotifications,
@@ -268,4 +260,4 @@ export const mockedNotificationsRecuderData = fromJS([
     hostname: 'github.gitify.io',
     notifications: mockedEnterpriseNotifications,
   },
-]);
+];

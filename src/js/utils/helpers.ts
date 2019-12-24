@@ -5,9 +5,10 @@ const dialog = remote.dialog;
 
 import Constants from './constants';
 import { loginUser } from '../actions';
+import { AuthState } from '../../types/reducers';
 
 export function getEnterpriseAccountToken(hostname, accounts) {
-  return accounts.find(obj => obj.get('hostname') === hostname).get('token');
+  return accounts.find(obj => obj.hostname === hostname).token;
 }
 
 export function generateGitHubAPIUrl(hostname) {
@@ -99,6 +100,6 @@ export function authGithub(
   });
 }
 
-export function isUserEitherLoggedIn(auth) {
-  return auth.get('token') !== null || auth.get('enterpriseAccounts').size > 0;
+export function isUserEitherLoggedIn(auth: AuthState) {
+  return auth.token !== null || auth.enterpriseAccounts.length > 0;
 }

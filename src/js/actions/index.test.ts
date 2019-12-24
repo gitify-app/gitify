@@ -1,13 +1,12 @@
 import axios from 'axios';
 import * as nock from 'nock';
-import { fromJS, Map, List } from 'immutable';
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 
+import { LOGOUT } from '../../types/actions';
 import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
 import * as actions from './';
 import Constants from '../utils/constants';
-import { LOGOUT } from '../../types/actions';
 
 const middlewares = [thunk];
 const createMockStore = configureMockStore(middlewares);
@@ -153,7 +152,7 @@ describe('actions/index.js', () => {
       .get('/notifications?participating=false')
       .reply(200, notifications);
 
-    const expectedPayload = fromJS([
+    const expectedPayload = [
       {
         hostname: 'github.gitify.io',
         notifications: [
@@ -168,7 +167,7 @@ describe('actions/index.js', () => {
           { id: 2, title: 'This is another one.' },
         ],
       },
-    ]);
+    ];
 
     const expectedActions = [
       { type: actions.NOTIFICATIONS.REQUEST },
@@ -177,14 +176,14 @@ describe('actions/index.js', () => {
 
     const store = createMockStore(
       {
-        auth: Map({
+        auth: {
           token: 'THISISATOKEN',
           enterpriseAccounts: mockedEnterpriseAccounts,
-        }),
-        settings: Map({
+        },
+        settings: {
           participating: false,
-        }),
-        notifications: Map({ response: List() }),
+        },
+        notifications: { response: [] },
       },
       expectedActions
     );
@@ -212,14 +211,14 @@ describe('actions/index.js', () => {
 
     const store = createMockStore(
       {
-        auth: Map({
+        auth: {
           token: 'THISISATOKEN',
           enterpriseAccounts: mockedEnterpriseAccounts,
-        }),
-        settings: Map({
+        },
+        settings: {
           participating: false,
-        }),
-        notifications: Map({ response: List() }),
+        },
+        notifications: { response: [] },
       },
       expectedActions
     );
@@ -239,7 +238,7 @@ describe('actions/index.js', () => {
       .get('/notifications?participating=false')
       .reply(200, notifications);
 
-    const expectedPayload = fromJS([
+    const expectedPayload = [
       {
         hostname: 'github.gitify.io',
         notifications: [
@@ -247,7 +246,7 @@ describe('actions/index.js', () => {
           { id: 2, title: 'This is another one.' },
         ],
       },
-    ]);
+    ];
 
     const expectedActions = [
       { type: actions.NOTIFICATIONS.REQUEST },
@@ -256,14 +255,14 @@ describe('actions/index.js', () => {
 
     const store = createMockStore(
       {
-        auth: Map({
+        auth: {
           token: null,
           enterpriseAccounts: mockedEnterpriseAccounts,
-        }),
-        settings: Map({
+        },
+        settings: {
           participating: false,
-        }),
-        notifications: Map({ response: List() }),
+        },
+        notifications: { response: [] },
       },
       expectedActions
     );
@@ -287,14 +286,14 @@ describe('actions/index.js', () => {
 
     const store = createMockStore(
       {
-        auth: Map({
+        auth: {
           token: null,
           enterpriseAccounts: mockedEnterpriseAccounts,
-        }),
-        settings: Map({
+        },
+        settings: {
           participating: false,
-        }),
-        notifications: Map({ response: List() }),
+        },
+        notifications: { response: [] },
       },
       expectedActions
     );
@@ -314,12 +313,12 @@ describe('actions/index.js', () => {
       .get('/notifications?participating=false')
       .reply(200, notifications);
 
-    const expectedPayload = fromJS([
+    const expectedPayload = [
       {
         hostname: 'github.com',
         notifications: notifications,
       },
-    ]);
+    ];
 
     const expectedActions = [
       { type: actions.NOTIFICATIONS.REQUEST },
@@ -328,14 +327,14 @@ describe('actions/index.js', () => {
 
     const store = createMockStore(
       {
-        auth: Map({
+        auth: {
           token: 'THISISATOKEN',
-          enterpriseAccounts: List(),
-        }),
-        settings: Map({
+          enterpriseAccounts: [],
+        },
+        settings: {
           participating: false,
-        }),
-        notifications: Map({ response: List() }),
+        },
+        notifications: { response: [] },
       },
       expectedActions
     );
@@ -359,14 +358,14 @@ describe('actions/index.js', () => {
 
     const store = createMockStore(
       {
-        auth: Map({
+        auth: {
           token: 'THISISATOKEN',
-          enterpriseAccounts: List(),
-        }),
-        settings: Map({
+          enterpriseAccounts: [],
+        },
+        settings: {
           participating: false,
-        }),
-        notifications: Map({ response: List() }),
+        },
+        notifications: { response: [] },
       },
       expectedActions
     );
@@ -379,28 +378,26 @@ describe('actions/index.js', () => {
   it('should mark a notification as read with success - github.com', () => {
     const id = 123;
     const hostname = 'github.com';
-    const message = 'Success.';
 
     nock('https://api.github.com/')
       .patch(`/notifications/threads/${id}`)
-      .reply(200, { message });
+      .reply(200);
 
     const expectedActions = [
       { type: actions.MARK_NOTIFICATION.REQUEST },
       {
         type: actions.MARK_NOTIFICATION.SUCCESS,
-        payload: { message },
         meta: { id, hostname },
       },
     ];
 
     const store = createMockStore(
       {
-        auth: Map({
+        auth: {
           token: 'THISISATOKEN',
           enterpriseAccounts: mockedEnterpriseAccounts,
-        }),
-        notifications: Map({ response: List() }),
+        },
+        notifications: { response: [] },
       },
       expectedActions
     );
@@ -426,14 +423,14 @@ describe('actions/index.js', () => {
 
     const store = createMockStore(
       {
-        auth: Map({
+        auth: {
           token: 'THISISATOKEN',
           enterpriseAccounts: mockedEnterpriseAccounts,
-        }),
-        settings: Map({
+        },
+        settings: {
           participating: false,
-        }),
-        notifications: Map({ response: List() }),
+        },
+        notifications: { response: [] },
       },
       expectedActions
     );
@@ -446,28 +443,26 @@ describe('actions/index.js', () => {
   it('should mark a notification as read with success - enterprise', () => {
     const id = 123;
     const hostname = 'github.gitify.io';
-    const message = 'Success.';
 
     nock('https://github.gitify.io/api/v3/')
       .patch(`/notifications/threads/${id}`)
-      .reply(200, { message });
+      .reply(200, {});
 
     const expectedActions = [
       { type: actions.MARK_NOTIFICATION.REQUEST },
       {
         type: actions.MARK_NOTIFICATION.SUCCESS,
-        payload: { message },
         meta: { id, hostname },
       },
     ];
 
     const store = createMockStore(
       {
-        auth: Map({
+        auth: {
           token: 'THISISATOKEN',
           enterpriseAccounts: mockedEnterpriseAccounts,
-        }),
-        notifications: Map({ response: List() }),
+        },
+        notifications: { response: [] },
       },
       expectedActions
     );
@@ -493,10 +488,10 @@ describe('actions/index.js', () => {
 
     const store = createMockStore(
       {
-        auth: Map({
+        auth: {
           token: 'THISISATOKEN',
           enterpriseAccounts: mockedEnterpriseAccounts,
-        }),
+        },
       },
       expectedActions
     );
@@ -526,7 +521,7 @@ describe('actions/index.js', () => {
 
     const store = createMockStore(
       {
-        auth: Map({ token: 'IAMATOKEN' }),
+        auth: { token: 'IAMATOKEN' },
       },
       expectedActions
     );
@@ -554,10 +549,10 @@ describe('actions/index.js', () => {
 
     const store = createMockStore(
       {
-        auth: Map({
+        auth: {
           token: 'THISISATOKEN',
           enterpriseAccounts: mockedEnterpriseAccounts,
-        }),
+        },
       },
       expectedActions
     );
@@ -589,10 +584,10 @@ describe('actions/index.js', () => {
 
     const store = createMockStore(
       {
-        auth: Map({
+        auth: {
           token: 'THISISATOKEN',
           enterpriseAccounts: mockedEnterpriseAccounts,
-        }),
+        },
       },
       expectedActions
     );
@@ -620,10 +615,10 @@ describe('actions/index.js', () => {
 
     const store = createMockStore(
       {
-        auth: Map({
+        auth: {
           token: 'THISISATOKEN',
           enterpriseAccounts: mockedEnterpriseAccounts,
-        }),
+        },
       },
       expectedActions
     );
@@ -647,13 +642,13 @@ describe('actions/index.js', () => {
 
     const store = createMockStore(
       {
-        auth: Map({ token: 'IAMATOKEN' }),
-        settings: Map({
+        auth: { token: 'IAMATOKEN' },
+        settings: {
           participating: false,
           isEnterprise: false,
           baseUrl: 'github.com',
-        }),
-        notifications: Map({ response: List() }),
+        },
+        notifications: { response: [] },
       },
       expectedActions
     );
@@ -675,13 +670,13 @@ describe('actions/index.js', () => {
 
     const store = createMockStore(
       {
-        auth: Map({ token: 'IAMATOKEN' }),
-        settings: Map({
+        auth: { token: 'IAMATOKEN' },
+        settings: {
           participating: false,
           isEnterprise: false,
           baseUrl: 'github.com',
-        }),
-        notifications: Map({ response: List() }),
+        },
+        notifications: { response: [] },
       },
       expectedActions
     );

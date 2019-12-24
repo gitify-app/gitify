@@ -1,5 +1,4 @@
 import { createStore, applyMiddleware } from 'redux';
-import { Map } from 'immutable';
 import thunkMiddleware from 'redux-thunk';
 
 import * as storage from 'redux-storage';
@@ -14,10 +13,7 @@ import notificationsMiddlware from '../middleware/notifications';
 import rootReducer from '../reducers';
 import settingsMiddleware from '../middleware/settings';
 
-const isDev =
-  process.mainModule &&
-  process.mainModule.filename &&
-  process.mainModule.filename.indexOf('app.asar') === -1;
+const isDev = false;
 
 export default function configureStore() {
   const engine = filter(
@@ -56,9 +52,9 @@ export default function configureStore() {
   load(store).then(newState => {
     const { auth = {}, settings = {} } = newState;
     const isGitHubLoggedIn = !!auth.token;
-    const userSettings = Map(settings);
 
-    restoreSettings(userSettings);
+    restoreSettings(settings);
+
     if (isGitHubLoggedIn) {
       // @ts-ignore
       store.dispatch(checkHasStarred());

@@ -1,5 +1,3 @@
-import { Map } from 'immutable';
-
 export function createMiddleware() {
   return () => {
     return next => action => {
@@ -10,9 +8,9 @@ export function createMiddleware() {
 
 export function createLoader() {
   const state = {
-    auth: Map({
+    auth: {
       token: 'LOGGED_IN_TOKEN',
-    }),
+    },
   };
 
   return () => new Promise(resolve => resolve(state));

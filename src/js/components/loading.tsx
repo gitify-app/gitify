@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { connect } from 'react-redux';
 import * as NProgress from 'nprogress';
+import { AppState } from '../../types/reducers';
+import { connect } from 'react-redux';
 
 interface IProps {
   isLoading: boolean;
@@ -34,9 +35,9 @@ export class Loading extends React.PureComponent<IProps> {
   }
 }
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state: AppState) {
   return {
-    isLoading: state.notifications.get('isFetching'),
+    isLoading: state.notifications.isFetching,
   };
 }
 

@@ -5,6 +5,7 @@ const { remote } = require('electron');
 
 import { fetchNotifications, updateSetting, logout } from '../actions';
 import { updateTrayIcon } from '../utils/comms';
+import { AppState, SettingsState } from '../../types/reducers';
 
 interface IFieldCheckbox {
   name: string;
@@ -64,7 +65,7 @@ const FieldRadio = (props: IFieldRadio) => {
 interface IProps {
   fetchNotifications: () => any;
   logout: () => any;
-  settings: any;
+  settings: SettingsState;
   updateSetting: any;
   history: any;
 }
@@ -74,17 +75,17 @@ export class SettingsRoute extends React.Component<IProps> {
     super(props);
 
     this.state = {
-      participating: props.settings.get('participating'),
+      participating: props.settings.participating,
     };
   }
 
   static getDerivedStateFromProps(props, state) {
-    if (props.settings.get('participating') !== state.participating) {
+    if (props.settings.participating !== state.participating) {
       props.fetchNotifications();
     }
 
     return {
-      participating: props.settings.get('participating'),
+      participating: props.settings.participating,
     };
   }
 
@@ -112,7 +113,7 @@ export class SettingsRoute extends React.Component<IProps> {
         <FieldCheckbox
           name="showOnlyParticipating"
           label="Show only participating"
-          checked={settings.get('participating')}
+          checked={settings.participating}
           onChange={evt =>
             this.props.updateSetting('participating', evt.target.checked)
           }
@@ -120,7 +121,7 @@ export class SettingsRoute extends React.Component<IProps> {
         <FieldCheckbox
           name="playSound"
           label="Play sound"
-          checked={settings.get('playSound')}
+          checked={settings.playSound}
           onChange={evt =>
             this.props.updateSetting('playSound', evt.target.checked)
           }
@@ -128,7 +129,7 @@ export class SettingsRoute extends React.Component<IProps> {
         <FieldCheckbox
           name="showNotifications"
           label="Show notifications"
-          checked={settings.get('showNotifications')}
+          checked={settings.showNotifications}
           onChange={evt =>
             this.props.updateSetting('showNotifications', evt.target.checked)
           }
@@ -136,7 +137,7 @@ export class SettingsRoute extends React.Component<IProps> {
         <FieldCheckbox
           name="onClickMarkAsRead"
           label="On Click, Mark as Read"
-          checked={settings.get('markOnClick')}
+          checked={settings.markOnClick}
           onChange={evt =>
             this.props.updateSetting('markOnClick', evt.target.checked)
           }
@@ -144,7 +145,7 @@ export class SettingsRoute extends React.Component<IProps> {
         <FieldCheckbox
           name="openAtStartUp"
           label="Open at startup"
-          checked={settings.get('openAtStartup')}
+          checked={settings.openAtStartup}
           onChange={evt =>
             this.props.updateSetting('openAtStartup', evt.target.checked)
           }
@@ -154,21 +155,21 @@ export class SettingsRoute extends React.Component<IProps> {
             <FieldRadio
               name="showAppIcon"
               value="both"
-              checked={settings.get('showAppIcon') === 'both'}
+              checked={settings.showAppIcon === 'both'}
               label="Both Icons"
               onChange={this.props.updateSetting}
             />
             <FieldRadio
               name="showAppIcon"
               value="tray"
-              checked={settings.get('showAppIcon') === 'tray'}
+              checked={settings.showAppIcon === 'tray'}
               label="Tray Icon"
               onChange={this.props.updateSetting}
             />
             <FieldRadio
               name="showAppIcon"
               value="dock"
-              checked={settings.get('showAppIcon') === 'dock'}
+              checked={settings.showAppIcon === 'dock'}
               label="Dock Icon"
               onChange={this.props.updateSetting}
             />
@@ -192,7 +193,7 @@ export class SettingsRoute extends React.Component<IProps> {
   }
 }
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state: AppState) {
   return {
     settings: state.settings,
   };

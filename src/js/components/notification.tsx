@@ -6,10 +6,11 @@ import { formatDistanceToNow, parseISO } from 'date-fns';
 import Octicon, { Check, getIconByName } from '@primer/octicons-react';
 import styled from 'styled-components';
 
+import { AppState } from '../../types/reducers';
+import { formatReason, getNotificationTypeIcon } from '../utils/github-api';
 import { generateGitHubWebUrl } from '../utils/helpers';
 import { markNotification } from '../actions';
 import { Notification } from '../../types/github';
-import { formatReason, getNotificationTypeIcon } from '../utils/github-api';
 
 const Wrapper = styled.div`
   display: flex;
@@ -120,9 +121,9 @@ export class NotificationItem extends React.Component<IProps, {}> {
   }
 }
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state: AppState) {
   return {
-    markOnClick: state.settings.get('markOnClick'),
+    markOnClick: state.settings.markOnClick,
   };
 }
 

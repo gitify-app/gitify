@@ -4,7 +4,6 @@ import { fireEvent, render } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import { Map } from 'immutable';
 
 import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
 
@@ -13,6 +12,7 @@ const BrowserWindow = remote.BrowserWindow;
 const dialog = remote.dialog;
 
 import { EnterpriseLogin, mapStateToProps, validate } from './enterprise-login';
+import { AppState } from '../../types/reducers';
 
 jest.mock('@fortawesome/react-fontawesome', () => ({
   FontAwesomeIcon: props => {
@@ -50,15 +50,15 @@ describe('routes/enterprise-login.js', () => {
 
   it('should test the mapStateToProps method', () => {
     const state = {
-      auth: Map({
+      auth: {
         enterpriseAccounts: mockedEnterpriseAccounts,
-      }),
-    };
+      },
+    } as AppState;
 
     const mappedProps = mapStateToProps(state);
 
     expect(mappedProps.enterpriseAccountsCount).toBe(
-      mockedEnterpriseAccounts.size
+      mockedEnterpriseAccounts.length
     );
   });
 

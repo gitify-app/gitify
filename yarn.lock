@@ -3199,10 +3199,6 @@ ignore-walk@^3.0.1:
   dependencies:
     minimatch "^3.0.4"
 
-immutable@=3.8.1, immutable@^3.7.6:
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
-
 import-local@2.0.0, import-local@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/import-local/-/import-local-2.0.0.tgz#55070be38a5993cf18ef6db7e961f5bee5c5a09d"
@@ -4211,10 +4207,6 @@ locate-path@^3.0.0:
 lodash.get@^4.0.0, lodash.get@^4.1.2:
   version "4.4.2"
   resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
-
-lodash.isarray@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/lodash.isarray/-/lodash.isarray-4.0.0.tgz#2aca496b28c4ca6d726715313590c02e6ea34403"
 
 lodash.isfunction@^3.0.7, lodash.isfunction@^3.0.8:
   version "3.0.8"
@@ -5865,16 +5857,6 @@ redux-storage-decorator-filter@=1.1.8:
 redux-storage-engine-localstorage@=1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/redux-storage-engine-localstorage/-/redux-storage-engine-localstorage-1.1.4.tgz#2849278d78970f0c3f5f3d4727caa3c30783ed49"
-
-redux-storage-merger-immutablejs@=1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/redux-storage-merger-immutablejs/-/redux-storage-merger-immutablejs-1.0.5.tgz#7d189357daa1a9485c5e9114c2228f5561ca39e3"
-  dependencies:
-    immutable "^3.7.6"
-    lodash.isarray "^4.0.0"
-    lodash.isfunction "^3.0.8"
-    lodash.isobject "^3.0.2"
-    lodash.merge "^4.3.1"
 
 redux-storage-merger-simple@^1.0.2:
   version "1.0.5"

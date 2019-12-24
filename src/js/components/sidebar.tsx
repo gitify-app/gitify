@@ -1,12 +1,16 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { List, Map } from 'immutable';
 import { shell } from 'electron';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
+import {
+  AppState,
+  EnterpriseAccount,
+  AccountNotifications,
+} from '../../types/reducers';
 import { fetchNotifications, logout } from '../actions';
 import { isUserEitherLoggedIn } from '../utils/helpers';
 import { LogoWhite } from './logos/white';
@@ -16,8 +20,9 @@ interface IProps {
   fetchNotifications: () => void;
   connectedAccounts: number;
 
-  enterpriseAccounts: any; // PropTypes.object.isRequired;
-  notifications: any; // PropTypes.object.isRequired;
+  enterpriseAccounts: EnterpriseAccount[];
+  notifications: AccountNotifications[];
+  notificationsCount: number;
 
   hasStarred: boolean;
   isEitherLoggedIn: boolean;
@@ -67,13 +72,13 @@ export class Sidebar extends React.Component<IProps> {
   _renderGitHubAccount() {
     const { enterpriseAccounts, notifications } = this.props;
     const defaultHostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
-    const notificationsCount = notifications
-      .find(obj => obj.get('hostname') === defaultHostname, null, Map())
-      .get('notifications', List()).size;
+    const notificationsCount = notifications.find(
+      obj => obj.hostname === defaultHostname
+    ).notifications.length;
 
     return (
       <div
-        className={`badge-account ${enterpriseAccounts.isEmpty() && 'last'}`}
+        className={`badge-account ${enterpriseAccounts.length === 0 && 'last'}`}
         title={defaultHostname}
       >
         <div className="mr-auto name">GitHub</div>
@@ -89,25 +94,21 @@ export class Sidebar extends React.Component<IProps> {
   }
 
   _renderEnterpriseAccounts() {
-    const { enterpriseAccounts } = this.props;
+    const { enterpriseAccounts, notifications } = this.props;
 
-    return this.props.enterpriseAccounts.map((account, idx) => {
-      const splittedHostname = account.get('hostname').split('.');
+    return enterpriseAccounts.map((account, idx) => {
+      const splittedHostname = account.hostname.split('.');
       const accountDomain = splittedHostname[splittedHostname.length - 2];
-      const notificationsCount = this.props.notifications
-        .find(
-          obj => obj.get('hostname') === account.get('hostname'),
-          null,
-          Map()
-        )
-        .get('notifications', List()).size;
+      const notificationsCount = notifications.find(
+        obj => obj.hostname === account.hostname
+      ).notifications.length;
 
       return (
         <div
           key={idx}
-          title={account.get('hostname')}
+          title={account.hostname}
           className={`badge-account${
-            enterpriseAccounts.size === idx + 1 ? ' last' : ''
+            enterpriseAccounts.length === idx + 1 ? ' last' : ''
           }`}
         >
           <div className="mr-auto name">{accountDomain}</div>
@@ -129,11 +130,8 @@ export class Sidebar extends React.Component<IProps> {
       isEitherLoggedIn,
       isGitHubLoggedIn,
       notifications,
+      notificationsCount,
     } = this.props;
-    const notificationsCount = notifications.reduce(
-      (memo, acc) => memo + acc.get('notifications').size,
-      0
-    );
 
     return (
       <div className="sidebar-wrapper">
@@ -141,7 +139,7 @@ export class Sidebar extends React.Component<IProps> {
 
         {isEitherLoggedIn && (
           <div className="badge badge-count text-success my-1">
-            {notifications.isEmpty()
+            {notifications.length === 0
               ? 'All Read'
               : `${notificationsCount} Unread`}
           </div>
@@ -173,7 +171,7 @@ export class Sidebar extends React.Component<IProps> {
         )}
 
         {isGitHubLoggedIn &&
-          !this.props.enterpriseAccounts.isEmpty() &&
+          this.props.enterpriseAccounts.length !== 0 &&
           this._renderGitHubAccount()}
         {this._renderEnterpriseAccounts()}
 
@@ -202,21 +200,26 @@ export class Sidebar extends React.Component<IProps> {
   }
 }
 
-export function mapStateToProps(state) {
-  const enterpriseAccounts = state.auth.get('enterpriseAccounts');
-  const isGitHubLoggedIn = state.auth.get('token') !== null;
-  const connectedAccounts = enterpriseAccounts.reduce(
-    memo => memo + 1,
-    isGitHubLoggedIn ? 1 : 0
+export function mapStateToProps(state: AppState) {
+  const enterpriseAccounts = state.auth.enterpriseAccounts;
+  const isGitHubLoggedIn = state.auth.token !== null;
+  const connectedAccounts = isGitHubLoggedIn
+    ? enterpriseAccounts.length + 1
+    : enterpriseAccounts.length;
+
+  const notificationsCount = state.notifications.response.reduce(
+    (memo, account) => memo + account.notifications.length,
+    0
   );
 
   return {
     isGitHubLoggedIn,
     isEitherLoggedIn: isUserEitherLoggedIn(state.auth),
-    notifications: state.notifications.get('response'),
+    notifications: state.notifications.response,
+    notificationsCount,
     enterpriseAccounts,
     connectedAccounts,
-    hasStarred: state.settings.get('hasStarred'),
+    hasStarred: state.settings.hasStarred,
   };
 }
 

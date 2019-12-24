@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 
+import { AppState } from '../../types/reducers';
 import { authGithub, isUserEitherLoggedIn } from '../utils/helpers';
 import { LogoDark } from '../components/logos/dark';
 
@@ -63,7 +64,7 @@ export class LoginPage extends React.Component<IProps> {
   }
 }
 
-export function mapStateToProps(state) {
+export function mapStateToProps(state: AppState) {
   return {
     isEitherLoggedIn: isUserEitherLoggedIn(state.auth),
   };

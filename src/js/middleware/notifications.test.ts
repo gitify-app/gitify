@@ -1,5 +1,3 @@
-import { List, Map } from 'immutable';
-
 import * as actions from '../actions';
 import * as comms from '../utils/comms';
 import {
@@ -11,22 +9,29 @@ import NativeNotifications from '../utils/notifications';
 
 // Keep 3 notifications
 // Ps. To receive 4 on actions.NOTIFICATIONS.SUCCESS,
-const mockedNotifications = mockedNotificationsRecuderData.deleteIn([
-  0,
-  'notifications',
-  0,
-]);
+const mockedNotifications = mockedNotificationsRecuderData.map(
+  (account, accountIndex) => {
+    if (accountIndex === 0) {
+      return {
+        ...account,
+        notifications: account.notifications.filter((_, index) => index !== 0),
+      };
+    }
+
+    return account;
+  }
+);
 
 const createFakeStore = () => ({
   getState() {
     return {
-      notifications: Map({
+      notifications: {
         response: mockedNotifications,
-      }),
-      settings: Map({
+      },
+      settings: {
         playSound: false,
         showNotifications: false,
-      }),
+      },
     };
   },
 });
@@ -55,16 +60,13 @@ describe('middleware/notifications.js', () => {
 
     expect(dispatchWithStoreOf({}, action)).toEqual(action);
 
-    const newNotifications = List.of(
-      List.of(mockedGithubNotifications.first()),
-      List()
-    );
+    const newNotifications = [[mockedGithubNotifications[0]], []];
 
     expect(NativeNotifications.setup).toHaveBeenCalledTimes(1);
     expect(NativeNotifications.setup).toHaveBeenCalledWith(
       newNotifications,
       1,
-      Map({ playSound: false, showNotifications: false })
+      { playSound: false, showNotifications: false }
     );
   });
 

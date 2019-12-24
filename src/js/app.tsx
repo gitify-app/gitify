@@ -24,8 +24,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
   // @ts-ignore
   const authReducer = store.getState().auth;
   const isAuthenticated =
-    authReducer.get('token') !== null ||
-    authReducer.get('enterpriseAccounts').size > 0;
+    authReducer.token !== null || authReducer.enterpriseAccounts.length > 0;
 
   return (
     <Route

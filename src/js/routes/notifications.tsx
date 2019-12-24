@@ -1,13 +1,15 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 
-import { AccountNotifications } from '../components/account-notifications';
+import { AccountNotifications as Account } from '../components/account-notifications';
 import { AllRead } from '../components/all-read';
+import { AppState, AccountNotifications } from '../../types/reducers';
 import { Oops } from '../components/oops';
 
 interface IProps {
   hasNotifications: boolean;
-  accountNotifications: any;
+  accountNotifications: AccountNotifications[];
+  notificationsCount: number;
   failed: boolean;
 }
 
@@ -25,27 +27,28 @@ export const NotificationsRoute = (props: IProps) => {
 
   return (
     <div className={wrapperClass + (!hasNotifications ? ' all-read' : '')}>
-      {accountNotifications.map((obj, key) => (
-        <AccountNotifications
-          key={key}
-          hostname={obj.get('hostname')}
-          notifications={obj.get('notifications').toJS()}
+      {accountNotifications.map(account => (
+        <Account
+          key={account.hostname}
+          hostname={account.hostname}
+          notifications={account.notifications}
         />
       ))}
     </div>
   );
 };
 
-export function mapStateToProps(state) {
-  const hasNotifications =
-    state.notifications
-      .get('response')
-      .reduce((memo, acc) => memo + acc.get('notifications').size, 0) > 0;
+export function mapStateToProps(state: AppState) {
+  const notificationsCount = state.notifications.response.reduce(
+    (memo, acc) => memo + acc.notifications.length,
+    0
+  );
 
   return {
-    failed: state.notifications.get('failed'),
-    accountNotifications: state.notifications.get('response'),
-    hasNotifications,
+    failed: state.notifications.failed,
+    accountNotifications: state.notifications.response,
+    notificationsCount,
+    hasNotifications: notificationsCount > 0,
   };
 }
 

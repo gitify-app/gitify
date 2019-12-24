@@ -2,7 +2,6 @@ import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
 import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import { List, Map } from 'immutable';
 
 const { shell, ipcRenderer } = require('electron');
 
@@ -11,6 +10,7 @@ import {
   mockedEnterpriseAccounts,
   mockedNotificationsRecuderData,
 } from '../__mocks__/mockedData';
+import { AuthState, AppState, SettingsState } from '../../types/reducers';
 
 jest.mock('@fortawesome/react-fontawesome', () => ({
   FontAwesomeIcon: props => {
@@ -33,6 +33,7 @@ describe('components/Sidebar.tsx', () => {
     connectedAccounts: 2,
     enterpriseAccounts: mockedEnterpriseAccounts,
     notifications: mockedNotificationsRecuderData,
+    notificationsCount: 4,
     hasStarred: false,
     fetchNotifications: jest.fn(),
   };
@@ -53,17 +54,17 @@ describe('components/Sidebar.tsx', () => {
 
   it('should test the mapStateToProps method', () => {
     const state = {
-      auth: Map({
+      auth: {
         token: '12345',
         enterpriseAccounts: mockedEnterpriseAccounts,
-      }),
-      notifications: Map({
-        response: List(),
-      }),
-      settings: Map({
+      } as AuthState,
+      notifications: {
+        response: [],
+      },
+      settings: {
         hasStarred: true,
-      }),
-    };
+      } as SettingsState,
+    } as AppState;
 
     const mappedProps = mapStateToProps(state);
 
@@ -85,7 +86,8 @@ describe('components/Sidebar.tsx', () => {
   it('should render itself & its children (logged out)', function() {
     const caseProps = {
       ...props,
-      notifications: List(),
+      notifications: [],
+      enterpriseAccounts: [],
       isGitHubLoggedIn: false,
       isEitherLoggedIn: false,
     };

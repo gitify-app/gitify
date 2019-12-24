@@ -240,21 +240,6 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
     />
   </svg>
   <div
-    className="badge-account last"
-    title="github.gitify.io"
-  >
-    <div
-      className="mr-auto name"
-    >
-      gitify
-    </div>
-    <div>
-      <span
-        className="octicon octicon-check"
-      />
-    </div>
-  </div>
-  <div
     className="footer"
   >
     <button

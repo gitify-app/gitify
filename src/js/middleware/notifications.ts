@@ -1,4 +1,4 @@
-import { List, Map } from 'immutable';
+import * as _ from 'lodash';
 import {
   NOTIFICATIONS,
   MARK_NOTIFICATION,
@@ -6,41 +6,44 @@ import {
 } from '../actions';
 import NativeNotifications from '../utils/notifications';
 import { setBadge, updateTrayIcon } from '../utils/comms';
+import { AccountNotifications } from '../../types/reducers';
 
 export default store => next => action => {
   const settings = store.getState().settings;
-  const notificationsAccounts = store.getState().notifications.get('response');
+  const accountNotifications: AccountNotifications[] = store.getState()
+    .notifications.response;
 
   switch (action.type) {
     case NOTIFICATIONS.SUCCESS:
-      const previousNotifications = notificationsAccounts.map(
-        accNotifications => {
-          return accNotifications.update('notifications', notifications =>
-            notifications.map(obj => obj.get('id'))
-          );
-        }
-      );
+      const previousNotifications = accountNotifications.map(account => {
+        return {
+          hostname: account.hostname,
+          notifications: account.notifications.map(
+            notification => notification.id
+          ),
+        };
+      });
 
-      const newNotifications = action.payload.map(accNotifications => {
-        const prevAccNotifications = previousNotifications
-          .find(
-            obj => obj.get('hostname') === accNotifications.get('hostname'),
-            null,
-            Map()
-          )
-          .get('notifications', List());
+      const newNotifications = action.payload.map(AccountNotifications => {
+        const accountPreviousNotifications =
+          previousNotifications.length > 0
+            ? previousNotifications.find(
+                obj => obj.hostname === AccountNotifications.hostname
+              ).notifications
+            : [];
 
-        return accNotifications.get('notifications').filter(obj => {
-          return !prevAccNotifications.contains(obj.get('id'));
+        return AccountNotifications.notifications.filter(obj => {
+          return !accountPreviousNotifications.includes(obj.id);
         });
       });
 
       const newNotificationsCount = newNotifications.reduce(
-        (memo, acc) => memo + acc.size,
+        (memo, acc) => memo + acc.length,
         0
       );
+
       const allNotificationsCount = action.payload.reduce(
-        (memo, acc) => memo + acc.get('notifications', List()).size,
+        (memo, acc) => memo + acc.notifications.length,
         0
       );
 
@@ -54,8 +57,8 @@ export default store => next => action => {
       break;
 
     case MARK_NOTIFICATION.SUCCESS:
-      const prevNotificationsCount = notificationsAccounts.reduce(
-        (memo, acc) => memo + acc.get('notifications').size,
+      const prevNotificationsCount = accountNotifications.reduce(
+        (memo, acc) => memo + acc.notifications.length,
         0
       );
 
@@ -64,20 +67,23 @@ export default store => next => action => {
       break;
 
     case MARK_REPO_NOTIFICATION.SUCCESS:
-      const updatedNotificationsCount = notificationsAccounts
+      const updatedNotificationsCount = accountNotifications
         .map(accNotifications => {
-          if (accNotifications.get('hostname') !== action.meta.hostname) {
+          if (accNotifications.hostname !== action.meta.hostname) {
             return accNotifications;
           }
 
-          return accNotifications.update('notifications', notifications => {
-            return notifications.filterNot(
-              obj =>
-                obj.getIn(['repository', 'full_name']) === action.meta.repoSlug
-            );
-          });
+          return _.updateWith(
+            accNotifications,
+            '[notifications]',
+            notifications => {
+              return notifications.filter(
+                obj => obj.repository.full_name !== action.meta.repoSlug
+              );
+            }
+          );
         })
-        .reduce((memo, acc) => memo + acc.get('notifications').size, 0);
+        .reduce((memo, acc) => memo + acc.notifications.length, 0);
 
       updateTrayIcon(updatedNotificationsCount);
       setBadge(updatedNotificationsCount);
