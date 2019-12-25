@@ -30,7 +30,7 @@ const Title = styled.h3`
   text-align: center;
 `;
 
-const LoginButton = styled.button`
+export const LoginButton = styled.button`
   font-size: 1rem;
   font-weight: 300;
   border-radius: 5px;

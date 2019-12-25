@@ -200,7 +200,6 @@ export class SettingsRoute extends React.Component<IProps> {
         <Footer>
           <small>Version: {remote.app.getVersion()}</small>
           <ButtonLogout aria-label="Logout" onClick={() => this.logout()}>
-            <span className="octicon octicon-sign-out" />{' '}
             {hasMultipleAccounts ? 'Logout from all accounts' : 'Logout'}
           </ButtonLogout>
         </Footer>

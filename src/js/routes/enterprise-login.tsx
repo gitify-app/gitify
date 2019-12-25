@@ -1,16 +1,44 @@
 const ipcRenderer = require('electron').ipcRenderer;
 
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import { Form, FormRenderProps } from 'react-final-form';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import styled from 'styled-components';
 
+import { AppState } from '../../types/reducers';
 import { authGithub } from '../utils/helpers';
 import { FieldInput } from '../components/fields/input';
-import { AppState } from '../../types/reducers';
+import { LoginButton } from './login';
+
+const Wrapper = styled.div`
+  padding: 2rem;
+`;
+
+const Header = styled.div`
+  margin: 0 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Title = styled.h3`
+  margin: 0;
+  font-weight: 500;
+`;
+
+const ButtonClose = styled.button`
+  border: 0;
+  padding: 0.25rem;
+  font-size: 2rem;
+  font-weight: 500;
+
+  &:hover {
+    cursor: pointer;
+    color: ${props => props.theme.primary};
+  }
+`;
 
 interface IValues {
   hostname?: string;
@@ -55,6 +83,7 @@ export const validate = (values: IValues): IFormErrors => {
 
 interface IProps {
   history: any;
+  dispatch: any;
   enterpriseAccountsCount: number;
 }
 
@@ -97,14 +126,10 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
           placeholder="ABC123DEF456"
         />
 
-        <button
-          className="btn btn-md btn-login mt-2"
-          disabled={submitting || pristine}
-          type="submit"
-        >
-          <FontAwesomeIcon icon={faGithub} title="GitHub" /> Login to GitHub
-          Enterprise
-        </button>
+        <LoginButton disabled={submitting || pristine} type="submit">
+          <FontAwesomeIcon icon={faGithub} title="GitHub" />
+          <span>Login to GitHub Enterprise</span>
+        </LoginButton>
       </form>
     );
   };
@@ -115,14 +140,17 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <div className="container-fluid main-container login">
-        <div className="d-flex flex-row-reverse">
-          <Link to="/login" className="btn btn-close" replace>
-            <FontAwesomeIcon icon={faTimes} title="Close" />
-          </Link>
-        </div>
+      <Wrapper>
+        <Header>
+          <Title>Login to GitHub Enterprise</Title>
 
-        <div className="desc">Login to GitHub Enterprise.</div>
+          <ButtonClose
+            aria-label="Go Back"
+            onClick={() => this.props.history.goBack()}
+          >
+            &times;
+          </ButtonClose>
+        </Header>
 
         <Form
           initialValues={{
@@ -130,13 +158,12 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
             clientId: '',
             clientSecret: '',
           }}
-          // @ts-ignore
           onSubmit={data => this.handleSubmit(data, this.props.dispatch)}
           validate={validate}
         >
           {this.renderForm}
         </Form>
-      </div>
+      </Wrapper>
     );
   }
 }
