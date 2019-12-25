@@ -130,7 +130,7 @@ describe('routes/enterprise-login.js', () => {
   });
 
   it('should render the form with errors', () => {
-    const { getByLabelText, getByRole, getByText } = render(
+    const { getByLabelText, getByTitle, getByText } = render(
       <Provider store={createStore(() => {})}>
         <MemoryRouter>
           <EnterpriseLogin {...props} />
@@ -148,7 +148,7 @@ describe('routes/enterprise-login.js', () => {
       target: { value: 'abc' },
     });
 
-    fireEvent.submit(getByRole('button'));
+    fireEvent.submit(getByTitle('GitHub'));
 
     expect(getByText('Invalid hostname.')).toBeTruthy();
     expect(getByText('Invalid client id.')).toBeTruthy();
@@ -171,7 +171,7 @@ describe('routes/enterprise-login.js', () => {
 
     const expectedUrl = `https://${hostname}/login/oauth/authorize?client_id=${clientId}&scope=user:email,notifications`;
 
-    const { debug, getByLabelText, getByRole } = render(
+    const { getByLabelText, getByTitle } = render(
       <Provider store={createStore(() => {})}>
         <MemoryRouter>
           <EnterpriseLogin {...props} />
@@ -189,7 +189,7 @@ describe('routes/enterprise-login.js', () => {
       target: { value: 'ABC123ABCDABC123ABCDABC123ABCDABC123ABCD' },
     });
 
-    fireEvent.submit(getByRole('button'));
+    fireEvent.submit(getByTitle('GitHub'));
 
     expect(new BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
     expect(new BrowserWindow().loadURL).toHaveBeenCalledWith(expectedUrl);
