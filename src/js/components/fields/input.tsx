@@ -25,6 +25,7 @@ const Input = styled.input`
   border-radius: 0.25rem;
   transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
   outline: none;
+  box-sizing: border-box;
 `;
 
 const ErrorMessage = styled.div`
