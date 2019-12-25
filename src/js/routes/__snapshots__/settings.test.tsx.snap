@@ -351,10 +351,6 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
       className="sc-iwsKbI ksXhsy"
       onClick={[Function]}
     >
-      <span
-        className="octicon octicon-sign-out"
-      />
-       
       Logout
     </button>
   </div>
