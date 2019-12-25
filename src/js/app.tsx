@@ -6,11 +6,15 @@ import {
   Switch,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { ThemeProvider } from 'styled-components';
+import styled, {
+  ThemeProvider,
+  createGlobalStyle,
+  DefaultTheme,
+} from 'styled-components';
 
 import configureStore from './store/configureStore';
 import Loading from './components/loading';
-import Sidebar from './components/sidebar';
+import Sidebar, { SIDEBAR_WIDTH } from './components/sidebar';
 
 import EnterpriseLoginRoute from './routes/enterprise-login';
 import LoginRoute from './routes/login';
@@ -42,7 +46,9 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
   );
 };
 
-const theme = {
+const theme: DefaultTheme = {
+  borderRadius: '3px',
+
   primary: '#555B6E',
   success: '#69B578',
   info: '#8BA9C6',
@@ -56,12 +62,53 @@ const theme = {
   purpleDark: '#3f4351',
 };
 
+const GlobalStyle = createGlobalStyle`
+  html,
+  body {
+    -webkit-user-select: none;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+      'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    margin: 0;
+    cursor: default;
+  }
+
+  button {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  #nprogress {
+    pointer-events: none;
+  
+    .bar {
+      position: fixed;
+      top: 0;
+      left: ${SIDEBAR_WIDTH};
+      z-index: 1031;
+      background: ${props => props.theme.grayLighter};
+  
+      width: 100%;
+      height: 2px;
+    }
+  }
+`;
+
+const Wrapper = styled.div`
+  padding-left: ${SIDEBAR_WIDTH};
+`;
+
 export const App = () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <Router>
-          <div className="wrapper">
+          <GlobalStyle />
+          <Wrapper>
             <Loading />
             <Sidebar />
 
@@ -71,7 +118,7 @@ export const App = () => {
               <Route path="/login" component={LoginRoute} />
               <Route path="/enterpriselogin" component={EnterpriseLoginRoute} />
             </Switch>
-          </div>
+          </Wrapper>
         </Router>
       </ThemeProvider>
     </Provider>

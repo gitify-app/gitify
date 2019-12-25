@@ -1,10 +1,12 @@
 import * as React from 'react';
+import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import { shell } from 'electron';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCog, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import styled from 'styled-components';
 
 import {
   AppState,
@@ -15,6 +17,89 @@ import { fetchNotifications, logout } from '../actions';
 import { isUserEitherLoggedIn } from '../utils/helpers';
 import { LogoWhite } from './logos/white';
 import Constants from '../utils/constants';
+
+export const SIDEBAR_WIDTH = '100px';
+
+const Wrapper = styled.div`
+  position: fixed;
+  left: ${SIDEBAR_WIDTH};
+  margin-left: -${SIDEBAR_WIDTH};
+  background-color: ${props => props.theme.purple};
+  width: ${SIDEBAR_WIDTH};
+  height: 100%;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
+  -webkit-app-region: drag;
+
+  .logo {
+    width: 3rem;
+    margin: 0.75rem auto;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+`;
+
+const Main = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0.75rem;
+`;
+
+const Status = styled.div`
+  margin: 0.25rem;
+  padding: 0.25rem 0.4rem;
+  color: ${props => props.theme.success};
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  text-transform: uppercase;
+`;
+
+const MainButtons = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 0.25rem 0;
+
+  .sidebar-icon {
+    margin: 0 0.25rem;
+    color: ${props => props.theme.grayLight};
+
+    &:hover {
+      color: ${props => props.theme.grayLighter};
+      cursor: pointer;
+    }
+  }
+`;
+
+const Footer = styled.div`
+  padding: 2rem 0.75rem;
+`;
+
+const FooterButton = styled.button`
+  display: block;
+  background-color: ${props => props.theme.purpleDark};
+  border-radius: 0.25rem;
+  border: 1px solid ${props => props.theme.purpleDark};
+  width: 100%;
+
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  color: white;
+
+  &:hover {
+    background-color: ${props => props.theme.purple};
+  }
+`;
 
 interface IProps {
   fetchNotifications: () => void;
@@ -27,6 +112,9 @@ interface IProps {
   hasStarred: boolean;
   isEitherLoggedIn: boolean;
   isGitHubLoggedIn: boolean;
+
+  history: any;
+  location: any;
 }
 
 export class Sidebar extends React.Component<IProps> {
@@ -134,68 +222,68 @@ export class Sidebar extends React.Component<IProps> {
     } = this.props;
 
     return (
-      <div className="sidebar-wrapper">
-        <LogoWhite onClick={this.onOpenBrowser} />
+      <Wrapper>
+        <Main>
+          <LogoWhite onClick={this.onOpenBrowser} />
 
-        {isEitherLoggedIn && (
-          <div className="badge badge-count text-success my-1">
-            {notifications.length === 0
-              ? 'All Read'
-              : `${notificationsCount} Unread`}
-          </div>
-        )}
+          {isEitherLoggedIn && (
+            <Status>
+              {notifications.length === 0
+                ? 'All Read'
+                : `${notificationsCount} Unread`}
+            </Status>
+          )}
 
-        {isEitherLoggedIn && (
-          <ul className="nav nav-inline mb-2">
-            <li className="nav-item text-white">
+          {isEitherLoggedIn && (
+            <MainButtons>
               <FontAwesomeIcon
-                className="mx-1"
+                className="sidebar-icon"
                 icon={faSyncAlt}
                 onClick={() => this.refreshNotifications()}
                 title="Refresh"
                 fixedWidth
               />
-            </li>
 
-            <li className="nav-item text-white">
-              <Link to="/settings">
-                <FontAwesomeIcon
-                  className="mx-1"
-                  icon={faCog}
-                  title="Settings"
-                  fixedWidth
-                />
+              <Link
+                to={
+                  this.props.location.pathname === '/settings'
+                    ? '/'
+                    : '/settings'
+                }
+                replace={this.props.location.pathname === '/settings'}
+                className="sidebar-icon"
+              >
+                <FontAwesomeIcon icon={faCog} title="Settings" fixedWidth />
               </Link>
-            </li>
-          </ul>
-        )}
+            </MainButtons>
+          )}
 
-        {isGitHubLoggedIn &&
-          this.props.enterpriseAccounts.length !== 0 &&
-          this._renderGitHubAccount()}
-        {this._renderEnterpriseAccounts()}
+          {isGitHubLoggedIn &&
+            this.props.enterpriseAccounts.length !== 0 &&
+            this._renderGitHubAccount()}
+          {this._renderEnterpriseAccounts()}
+        </Main>
 
-        <div className="footer">
+        <Footer>
           {!!isEitherLoggedIn && (
-            <Link
-              to="/enterpriselogin"
-              className="btn btn-block btn-sm btn-outline-secondary btn-add"
+            <FooterButton
+              onClick={() => this.props.history.push('/enterpriselogin')}
+              aria-label="Login with GitHub Enterprise"
             >
-              Add <br />
-              Enterprise
-            </Link>
+              Add Enterprise
+            </FooterButton>
           )}
 
           {!hasStarred && (
-            <button
-              className="btn btn-block btn-sm btn-outline-secondary btn-star"
+            <FooterButton
               onClick={this.onOpenBrowser}
+              aria-label="Star on GitHub"
             >
               <FontAwesomeIcon icon={faGithub} title="GitHub" /> Star
-            </button>
+            </FooterButton>
           )}
-        </div>
-      </div>
+        </Footer>
+      </Wrapper>
     );
   }
 }
@@ -223,7 +311,10 @@ export function mapStateToProps(state: AppState) {
   };
 }
 
-export default connect(mapStateToProps, {
-  fetchNotifications,
-  logout,
-})(Sidebar);
+export default compose(
+  withRouter,
+  connect(mapStateToProps, {
+    fetchNotifications,
+    logout,
+  })
+)(Sidebar);

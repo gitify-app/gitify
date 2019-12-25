@@ -36,7 +36,7 @@ exports[`components/notification.js should render itself & its children 1`] = `
     role="main"
   >
     <h6
-      className="sc-htpNat iwtKWy"
+      className="sc-htpNat VDmcF"
     >
       I am a robot and this is a test!
     </h6>

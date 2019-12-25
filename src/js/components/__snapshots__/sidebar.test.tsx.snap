@@ -2,89 +2,89 @@
 
 exports[`components/Sidebar.tsx should render itself & its children (logged in) 1`] = `
 <div
-  className="sidebar-wrapper"
+  className="sc-bdVaJa VpBUF"
 >
-  <svg
-    className="logo"
-    onClick={[Function]}
-    role="logo"
-    viewBox="0 0 180.31 182.52"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
-  >
-    <defs>
-      <linearGradient
-        gradientUnits="userSpaceOnUse"
-        id="linear-white-gradient"
-        x1="300.53"
-        x2="130.22"
-        y1="294.89"
-        y2="240.53"
-      >
-        <stop
-          offset="0"
-          stopColor="#CCCCCC"
-        />
-        <stop
-          offset="1"
-          stopColor="#FFFFFF"
-        />
-      </linearGradient>
-      <linearGradient
-        id="linear-white-gradient-2"
-        x1="315.88"
-        x2="216.87"
-        xlinkHref="#linear-white-gradient"
-        y1="246.16"
-        y2="214.57"
-      />
-      <linearGradient
-        id="linear-white-gradient-3"
-        x1="264.39"
-        x2="147.04"
-        xlinkHref="#linear-white-gradient"
-        y1="211.56"
-        y2="174.1"
-      />
-    </defs>
-    <path
-      d="M178.67,226.51a47.7,47.7,0,0,0,89.93,21.91h46.56a91.61,91.61,0,0,1-88.82,69.35c-50.45,0-91.49-40.94-91.49-91.26C145,186.6,171,205,178.67,226.51Z"
-      style={
-        Object {
-          "fill": "url(#linear-white-gradient)",
-        }
-      }
-      transform="translate(-134.85 -135.25)"
-    />
-    <path
-      d="M214.16,226.51a21.91,21.91,0,0,1,21.91-21.91h38.57a12.08,12.08,0,0,1,8.3,4l32.21,39.86H236.07A21.91,21.91,0,0,1,214.16,226.51Z"
-      style={
-        Object {
-          "fill": "url(#linear-white-gradient-2)",
-        }
-      }
-      transform="translate(-134.85 -135.25)"
-    />
-    <path
-      d="M258.74,179.07H226.34a47.61,47.61,0,0,0-47.66,47.44c-11.27,24.3-30.12,41.63-43.83,0,0-50.32,41-91.26,91.49-91.26h32.41a21.91,21.91,0,0,1,0,43.83Z"
-      style={
-        Object {
-          "fill": "url(#linear-white-gradient-3)",
-        }
-      }
-      transform="translate(-134.85 -135.25)"
-    />
-  </svg>
   <div
-    className="badge badge-count text-success my-1"
+    className="sc-bwzfXH hudJrY"
   >
-    4 Unread
-  </div>
-  <ul
-    className="nav nav-inline mb-2"
-  >
-    <li
-      className="nav-item text-white"
+    <svg
+      className="logo"
+      onClick={[Function]}
+      role="logo"
+      viewBox="0 0 180.31 182.52"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
+      <defs>
+        <linearGradient
+          gradientUnits="userSpaceOnUse"
+          id="linear-white-gradient"
+          x1="300.53"
+          x2="130.22"
+          y1="294.89"
+          y2="240.53"
+        >
+          <stop
+            offset="0"
+            stopColor="#CCCCCC"
+          />
+          <stop
+            offset="1"
+            stopColor="#FFFFFF"
+          />
+        </linearGradient>
+        <linearGradient
+          id="linear-white-gradient-2"
+          x1="315.88"
+          x2="216.87"
+          xlinkHref="#linear-white-gradient"
+          y1="246.16"
+          y2="214.57"
+        />
+        <linearGradient
+          id="linear-white-gradient-3"
+          x1="264.39"
+          x2="147.04"
+          xlinkHref="#linear-white-gradient"
+          y1="211.56"
+          y2="174.1"
+        />
+      </defs>
+      <path
+        d="M178.67,226.51a47.7,47.7,0,0,0,89.93,21.91h46.56a91.61,91.61,0,0,1-88.82,69.35c-50.45,0-91.49-40.94-91.49-91.26C145,186.6,171,205,178.67,226.51Z"
+        style={
+          Object {
+            "fill": "url(#linear-white-gradient)",
+          }
+        }
+        transform="translate(-134.85 -135.25)"
+      />
+      <path
+        d="M214.16,226.51a21.91,21.91,0,0,1,21.91-21.91h38.57a12.08,12.08,0,0,1,8.3,4l32.21,39.86H236.07A21.91,21.91,0,0,1,214.16,226.51Z"
+        style={
+          Object {
+            "fill": "url(#linear-white-gradient-2)",
+          }
+        }
+        transform="translate(-134.85 -135.25)"
+      />
+      <path
+        d="M258.74,179.07H226.34a47.61,47.61,0,0,0-47.66,47.44c-11.27,24.3-30.12,41.63-43.83,0,0-50.32,41-91.26,91.49-91.26h32.41a21.91,21.91,0,0,1,0,43.83Z"
+        style={
+          Object {
+            "fill": "url(#linear-white-gradient-3)",
+          }
+        }
+        transform="translate(-134.85 -135.25)"
+      />
+    </svg>
+    <div
+      className="sc-htpNat cKBiPV"
+    >
+      4 Unread
+    </div>
+    <div
+      className="sc-bxivhb ihvPlf"
     >
       <div
         onClick={[Function]}
@@ -93,11 +93,8 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         FAIcon
         Refresh
       </div>
-    </li>
-    <li
-      className="nav-item text-white"
-    >
       <a
+        className="sidebar-icon"
         href="/settings"
         onClick={[Function]}
       >
@@ -108,48 +105,47 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
           Settings
         </div>
       </a>
-    </li>
-  </ul>
-  <div
-    className="badge-account false"
-    title="github.com"
-  >
-    <div
-      className="mr-auto name"
-    >
-      GitHub
     </div>
-    <div>
-      2
+    <div
+      className="badge-account false"
+      title="github.com"
+    >
+      <div
+        className="mr-auto name"
+      >
+        GitHub
+      </div>
+      <div>
+        2
+      </div>
+    </div>
+    <div
+      className="badge-account last"
+      title="github.gitify.io"
+    >
+      <div
+        className="mr-auto name"
+      >
+        gitify
+      </div>
+      <div>
+        2
+      </div>
     </div>
   </div>
   <div
-    className="badge-account last"
-    title="github.gitify.io"
+    className="sc-ifAKCX cxlCsk"
   >
-    <div
-      className="mr-auto name"
-    >
-      gitify
-    </div>
-    <div>
-      2
-    </div>
-  </div>
-  <div
-    className="footer"
-  >
-    <a
-      className="btn btn-block btn-sm btn-outline-secondary btn-add"
-      href="/enterpriselogin"
+    <button
+      aria-label="Login with GitHub Enterprise"
+      className="sc-EHOje AaVkq"
       onClick={[Function]}
     >
-      Add 
-      <br />
-      Enterprise
-    </a>
+      Add Enterprise
+    </button>
     <button
-      className="btn btn-block btn-sm btn-outline-secondary btn-star"
+      aria-label="Star on GitHub"
+      className="sc-EHOje AaVkq"
       onClick={[Function]}
     >
       <div
@@ -166,84 +162,89 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
 
 exports[`components/Sidebar.tsx should render itself & its children (logged out) 1`] = `
 <div
-  className="sidebar-wrapper"
+  className="sc-bdVaJa VpBUF"
 >
-  <svg
-    className="logo"
-    onClick={[Function]}
-    role="logo"
-    viewBox="0 0 180.31 182.52"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
-  >
-    <defs>
-      <linearGradient
-        gradientUnits="userSpaceOnUse"
-        id="linear-white-gradient"
-        x1="300.53"
-        x2="130.22"
-        y1="294.89"
-        y2="240.53"
-      >
-        <stop
-          offset="0"
-          stopColor="#CCCCCC"
-        />
-        <stop
-          offset="1"
-          stopColor="#FFFFFF"
-        />
-      </linearGradient>
-      <linearGradient
-        id="linear-white-gradient-2"
-        x1="315.88"
-        x2="216.87"
-        xlinkHref="#linear-white-gradient"
-        y1="246.16"
-        y2="214.57"
-      />
-      <linearGradient
-        id="linear-white-gradient-3"
-        x1="264.39"
-        x2="147.04"
-        xlinkHref="#linear-white-gradient"
-        y1="211.56"
-        y2="174.1"
-      />
-    </defs>
-    <path
-      d="M178.67,226.51a47.7,47.7,0,0,0,89.93,21.91h46.56a91.61,91.61,0,0,1-88.82,69.35c-50.45,0-91.49-40.94-91.49-91.26C145,186.6,171,205,178.67,226.51Z"
-      style={
-        Object {
-          "fill": "url(#linear-white-gradient)",
-        }
-      }
-      transform="translate(-134.85 -135.25)"
-    />
-    <path
-      d="M214.16,226.51a21.91,21.91,0,0,1,21.91-21.91h38.57a12.08,12.08,0,0,1,8.3,4l32.21,39.86H236.07A21.91,21.91,0,0,1,214.16,226.51Z"
-      style={
-        Object {
-          "fill": "url(#linear-white-gradient-2)",
-        }
-      }
-      transform="translate(-134.85 -135.25)"
-    />
-    <path
-      d="M258.74,179.07H226.34a47.61,47.61,0,0,0-47.66,47.44c-11.27,24.3-30.12,41.63-43.83,0,0-50.32,41-91.26,91.49-91.26h32.41a21.91,21.91,0,0,1,0,43.83Z"
-      style={
-        Object {
-          "fill": "url(#linear-white-gradient-3)",
-        }
-      }
-      transform="translate(-134.85 -135.25)"
-    />
-  </svg>
   <div
-    className="footer"
+    className="sc-bwzfXH hudJrY"
+  >
+    <svg
+      className="logo"
+      onClick={[Function]}
+      role="logo"
+      viewBox="0 0 180.31 182.52"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
+      <defs>
+        <linearGradient
+          gradientUnits="userSpaceOnUse"
+          id="linear-white-gradient"
+          x1="300.53"
+          x2="130.22"
+          y1="294.89"
+          y2="240.53"
+        >
+          <stop
+            offset="0"
+            stopColor="#CCCCCC"
+          />
+          <stop
+            offset="1"
+            stopColor="#FFFFFF"
+          />
+        </linearGradient>
+        <linearGradient
+          id="linear-white-gradient-2"
+          x1="315.88"
+          x2="216.87"
+          xlinkHref="#linear-white-gradient"
+          y1="246.16"
+          y2="214.57"
+        />
+        <linearGradient
+          id="linear-white-gradient-3"
+          x1="264.39"
+          x2="147.04"
+          xlinkHref="#linear-white-gradient"
+          y1="211.56"
+          y2="174.1"
+        />
+      </defs>
+      <path
+        d="M178.67,226.51a47.7,47.7,0,0,0,89.93,21.91h46.56a91.61,91.61,0,0,1-88.82,69.35c-50.45,0-91.49-40.94-91.49-91.26C145,186.6,171,205,178.67,226.51Z"
+        style={
+          Object {
+            "fill": "url(#linear-white-gradient)",
+          }
+        }
+        transform="translate(-134.85 -135.25)"
+      />
+      <path
+        d="M214.16,226.51a21.91,21.91,0,0,1,21.91-21.91h38.57a12.08,12.08,0,0,1,8.3,4l32.21,39.86H236.07A21.91,21.91,0,0,1,214.16,226.51Z"
+        style={
+          Object {
+            "fill": "url(#linear-white-gradient-2)",
+          }
+        }
+        transform="translate(-134.85 -135.25)"
+      />
+      <path
+        d="M258.74,179.07H226.34a47.61,47.61,0,0,0-47.66,47.44c-11.27,24.3-30.12,41.63-43.83,0,0-50.32,41-91.26,91.49-91.26h32.41a21.91,21.91,0,0,1,0,43.83Z"
+        style={
+          Object {
+            "fill": "url(#linear-white-gradient-3)",
+          }
+        }
+        transform="translate(-134.85 -135.25)"
+      />
+    </svg>
+  </div>
+  <div
+    className="sc-ifAKCX cxlCsk"
   >
     <button
-      className="btn btn-block btn-sm btn-outline-secondary btn-star"
+      aria-label="Star on GitHub"
+      className="sc-EHOje AaVkq"
       onClick={[Function]}
     >
       <div

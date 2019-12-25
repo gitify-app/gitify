@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, getByLabelText } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 const { shell, ipcRenderer } = require('electron');
@@ -36,6 +36,13 @@ describe('components/Sidebar.tsx', () => {
     notificationsCount: 4,
     hasStarred: false,
     fetchNotifications: jest.fn(),
+    history: {
+      goBack: jest.fn(),
+      push: jest.fn(),
+    },
+    location: {
+      pathname: '/',
+    },
   };
 
   beforeEach(() => {
@@ -46,6 +53,7 @@ describe('components/Sidebar.tsx', () => {
     spyOn(window, 'clearInterval');
 
     props.fetchNotifications.mockReset();
+    props.history.push.mockReset();
   });
 
   afterEach(() => {
@@ -156,13 +164,23 @@ describe('components/Sidebar.tsx', () => {
     expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
   });
 
-  it('open the gitify repo in browser', async () => {
-    const { getByRole } = render(
+  it('should go to the enterprise login route', () => {
+    const { debug, getByLabelText } = render(
       <MemoryRouter>
         <Sidebar {...props} />
       </MemoryRouter>
     );
-    fireEvent.click(getByRole('button'));
+    fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
+    expect(props.history.push).toHaveBeenCalledTimes(1);
+  });
+
+  it('open the gitify repo in browser', () => {
+    const { debug, getByLabelText } = render(
+      <MemoryRouter>
+        <Sidebar {...props} />
+      </MemoryRouter>
+    );
+    fireEvent.click(getByLabelText('Star on GitHub'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
   });
 });

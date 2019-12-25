@@ -30,11 +30,13 @@ const Main = styled.div`
 `;
 
 const Title = styled.h6`
+  margin-top: 0;
   margin-bottom: 0.25rem;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   font-size: 0.9rem;
+  font-weight: 400;
   line-height: 1rem;
 `;
 

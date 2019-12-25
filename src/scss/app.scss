@@ -22,10 +22,6 @@ $brand-info: #8ba9c6;
 $brand-warning: #fcaa67;
 $brand-danger: #b7524f;
 
-$font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
-  'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
-
 $alert-padding: 8px;
 $alert-border-radius: 0;
 $alert-danger-bg: $brand-danger;
@@ -35,80 +31,7 @@ $alert-danger-text: $white;
 
 /* @end Bootstrap Overrides */
 
-/* @group Mixins */
-
-// Border Radius (Same Corners)
-@mixin border-radius($radius: 5px) {
-  border-radius: $radius;
-  background-clip: padding-box;
-}
-
-@mixin truncate-text {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-// opacity
-@mixin opacity($opacity: 0.5) {
-  opacity: $opacity;
-}
-
-@mixin check-octicon {
-  &.octicon-check {
-    transition: all 0.4s;
-    color: $gray-light;
-
-    &:hover {
-      cursor: pointer;
-      color: $brand-success;
-    }
-  }
-}
-
-/* @end Mixins */
-
 /* @group Misc */
-
-html,
-body {
-  -webkit-user-select: none;
-}
-
-body {
-  cursor: default;
-}
-
-.btn {
-  &:focus {
-    outline: none;
-  }
-}
-
-.right,
-.text-right {
-  text-align: right;
-}
-
-.text-center {
-  text-align: center;
-}
-
-input {
-  outline: none;
-}
-
-.alert {
-  margin-bottom: 0;
-  border: 0;
-  text-align: center;
-}
-
-.react-toggle--checked {
-  .react-toggle-track {
-    background-color: $brand-success;
-  }
-}
 
 .custom-checkbox-large {
   padding-left: 2rem;
@@ -138,128 +61,7 @@ input {
 
 /* @group Loading */
 
-#nprogress {
-  pointer-events: none;
-
-  .bar {
-    position: fixed;
-    top: 0;
-    left: $sidebar-width;
-    z-index: 1031;
-    background: $gray-light;
-
-    width: 100%;
-    height: 2px;
-  }
-
-  /* Fancy blur effect */
-  .peg {
-    display: block;
-    position: absolute;
-    right: 0;
-    transform: rotate(3deg) translate(0, -4px);
-    opacity: 1;
-    box-shadow: 0 0 10px $light, 0 0 5px $light;
-    width: 100px;
-    height: 100%;
-  }
-}
-
 /* @end Loading */
-
-/* @group Sidebar */
-
-.wrapper {
-  padding-left: $sidebar-width;
-}
-
-.sidebar-wrapper {
-  position: fixed;
-  left: $sidebar-width;
-  margin-left: -$sidebar-width;
-  background-color: $brand-purple;
-  padding: 2rem 0.75rem;
-  width: $sidebar-width;
-  height: 100%;
-  overflow-y: auto;
-
-  -webkit-app-region: drag;
-
-  .logo {
-    display: block;
-    margin: 0.75rem auto;
-    max-width: $sidebar-width / 2;
-    -webkit-app-region: no-drag;
-    -webkit-user-drag: none;
-  }
-
-  .badge-count {
-    text-align: center;
-    text-transform: uppercase;
-  }
-
-  .nav {
-    justify-content: center;
-
-    .nav-item {
-      -webkit-app-region: no-drag;
-
-      .nav-link {
-        padding: 0.5em;
-      }
-    }
-  }
-
-  .badge-account {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-
-    margin: 0 -0.75rem;
-    border-bottom: 1px solid darken($brand-purple-dark, 10%);
-    padding: 0.5rem;
-    text-transform: uppercase;
-    line-height: 1;
-    color: darken($brand-purple-dark, 10%);
-    font-size: 75%;
-    font-weight: bold;
-
-    &.last {
-      border-bottom: 0;
-    }
-
-    .name {
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .octicon {
-      font-size: 12px;
-    }
-  }
-
-  .footer {
-    position: absolute;
-    right: 0.75rem;
-    bottom: 1rem;
-    left: 0.75rem;
-
-    .btn-add {
-      font-size: 75%;
-    }
-
-    .btn-add,
-    .btn-star {
-      -webkit-app-region: no-drag;
-
-      &:hover {
-        background-color: $gray-darker;
-      }
-    }
-  }
-}
-
-/* @end Sidebar */
 
 /* @group Page / Login  */
 

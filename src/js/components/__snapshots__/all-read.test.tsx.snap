@@ -2,18 +2,20 @@
 
 exports[`components/all-read.tsx should render itself & its children 1`] = `
 <div
-  className="container-fluid main-container notifications all-read"
+  className="sc-bdVaJa jZnlmR"
 >
-  <h2
-    className="sc-bdVaJa dilyOK"
-  />
-  <h4>
-    No new notifications.
-  </h4>
-  <h1
-    className="emoji"
+  <div
+    className="sc-bwzfXH flHJOa"
   >
     😉
-  </h1>
+  </div>
+  <h2
+    className="sc-htpNat XhagL"
+  />
+  <h4
+    className="sc-bxivhb ijKRfN"
+  >
+    No new notifications.
+  </h4>
 </div>
 `;

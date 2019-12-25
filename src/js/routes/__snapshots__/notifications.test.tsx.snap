@@ -5,9 +5,7 @@ exports[`routes/notifications.ts should render itself & its children (all read n
 exports[`routes/notifications.ts should render itself & its children (error page - oops) 1`] = `<Oops />`;
 
 exports[`routes/notifications.ts should render itself & its children (with notifications) 1`] = `
-<div
-  className="container-fluid main-container notifications"
->
+<div>
   <AccountNotifications
     hostname="github.com"
     notifications={

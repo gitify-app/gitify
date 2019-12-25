@@ -2,13 +2,13 @@
 
 exports[`components/repository.tsx should render itself & its children 1`] = `
 <div
-  className="sc-bdVaJa fUqlBi"
+  className="sc-bdVaJa bVlPBf"
 >
   <div
-    className="sc-bwzfXH cJfycK"
+    className="sc-bwzfXH gkcRsd"
   >
     <img
-      className="sc-htpNat fxBjim"
+      className="sc-htpNat tFenb"
       src="https://avatars0.githubusercontent.com/u/6333409?v=3"
     />
     <span

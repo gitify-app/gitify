@@ -12,22 +12,26 @@ import NotificationItem from './notification';
 const Wrapper = styled.div`
   display: flex;
   background-color: ${props => props.theme.grayLight};
-  padding: 0.5rem 0.5rem;
+  padding: 0.4rem 0.5rem;
 `;
 
 const TitleBar = styled.div`
   flex: 1;
   padding: 0 0.5rem;
+  margin-top: 0;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-weight: 600;
+  font-size: 0.95rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
 `;
 
 const Avatar = styled.img`
   border-radius: 50%;
-  margin-right: 0.5rem;
-  width: 25px;
+  margin-right: 0.75rem;
+  width: 20px;
 `;
 
 const IconWrapper = styled.div`

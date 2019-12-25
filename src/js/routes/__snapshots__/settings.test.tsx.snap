@@ -2,133 +2,293 @@
 
 exports[`routes/settings.tsx should render itself & its children 1`] = `
 <div
-  className="p-4"
+  className="sc-EHOje ioDKxg"
 >
-  <div>
-    <h5>
+  <div
+    className="sc-bZQynM bpRiJA"
+  >
+    <h3
+      className="sc-htoDjs kJdRRu"
+    >
       Settings
-    </h5>
+    </h3>
     <button
       aria-label="Close Settings"
-      className="close"
+      className="sc-dnqmqq gfscgR"
       onClick={[Function]}
     >
-      <span
-        aria-hidden="true"
-      >
-        ×
-      </span>
+      ×
     </button>
   </div>
   <div
-    className="form-group"
+    className="sc-bdVaJa jfPzWn"
   >
-    <div
-      className="custom-control custom-checkbox custom-checkbox-large"
-    >
-      <input
-        checked={false}
-        className="custom-control-input"
-        id="showOnlyParticipating"
-        name="showOnlyParticipating"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <label
-        className="custom-control-label"
-        htmlFor="showOnlyParticipating"
+    <label>
+      <div
+        className="sc-bwzfXH fnAEVU"
+      >
+        <input
+          checked={false}
+          className="sc-bxivhb hZSXJG"
+          label="Show only participating"
+          name="showOnlyParticipating"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <div
+          className="sc-ifAKCX kfOBSV"
+        >
+          <svg
+            className="sc-htpNat iPrSGo"
+            viewBox="0 0 24 24"
+          >
+            <g
+              fill="none"
+              fillRule="evenodd"
+              stroke="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1"
+            >
+              <g
+                stroke="#FFFFFF"
+                strokeWidth="3"
+                transform="translate(6.000000, 7.000000)"
+              >
+                <polyline
+                  points="13 0 4.0625 9 0 4.90909091"
+                />
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <span
+        style={
+          Object {
+            "marginLeft": "1rem",
+          }
+        }
       >
         Show only participating
-      </label>
-    </div>
+      </span>
+    </label>
   </div>
   <div
-    className="form-group"
+    className="sc-bdVaJa jfPzWn"
   >
-    <div
-      className="custom-control custom-checkbox custom-checkbox-large"
-    >
-      <input
-        checked={true}
-        className="custom-control-input"
-        id="playSound"
-        name="playSound"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <label
-        className="custom-control-label"
-        htmlFor="playSound"
+    <label>
+      <div
+        className="sc-bwzfXH fnAEVU"
+      >
+        <input
+          checked={true}
+          className="sc-bxivhb hZSXJG"
+          label="Play sound"
+          name="playSound"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <div
+          className="sc-ifAKCX RDSID"
+        >
+          <svg
+            className="sc-htpNat iPrSGo"
+            viewBox="0 0 24 24"
+          >
+            <g
+              fill="none"
+              fillRule="evenodd"
+              stroke="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1"
+            >
+              <g
+                stroke="#FFFFFF"
+                strokeWidth="3"
+                transform="translate(6.000000, 7.000000)"
+              >
+                <polyline
+                  points="13 0 4.0625 9 0 4.90909091"
+                />
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <span
+        style={
+          Object {
+            "marginLeft": "1rem",
+          }
+        }
       >
         Play sound
-      </label>
-    </div>
+      </span>
+    </label>
   </div>
   <div
-    className="form-group"
+    className="sc-bdVaJa jfPzWn"
   >
-    <div
-      className="custom-control custom-checkbox custom-checkbox-large"
-    >
-      <input
-        checked={true}
-        className="custom-control-input"
-        id="showNotifications"
-        name="showNotifications"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <label
-        className="custom-control-label"
-        htmlFor="showNotifications"
+    <label>
+      <div
+        className="sc-bwzfXH fnAEVU"
+      >
+        <input
+          checked={true}
+          className="sc-bxivhb hZSXJG"
+          label="Show notifications"
+          name="showNotifications"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <div
+          className="sc-ifAKCX RDSID"
+        >
+          <svg
+            className="sc-htpNat iPrSGo"
+            viewBox="0 0 24 24"
+          >
+            <g
+              fill="none"
+              fillRule="evenodd"
+              stroke="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1"
+            >
+              <g
+                stroke="#FFFFFF"
+                strokeWidth="3"
+                transform="translate(6.000000, 7.000000)"
+              >
+                <polyline
+                  points="13 0 4.0625 9 0 4.90909091"
+                />
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <span
+        style={
+          Object {
+            "marginLeft": "1rem",
+          }
+        }
       >
         Show notifications
-      </label>
-    </div>
+      </span>
+    </label>
   </div>
   <div
-    className="form-group"
+    className="sc-bdVaJa jfPzWn"
   >
-    <div
-      className="custom-control custom-checkbox custom-checkbox-large"
-    >
-      <input
-        checked={false}
-        className="custom-control-input"
-        id="onClickMarkAsRead"
-        name="onClickMarkAsRead"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <label
-        className="custom-control-label"
-        htmlFor="onClickMarkAsRead"
+    <label>
+      <div
+        className="sc-bwzfXH fnAEVU"
+      >
+        <input
+          checked={false}
+          className="sc-bxivhb hZSXJG"
+          label="On Click, Mark as Read"
+          name="onClickMarkAsRead"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <div
+          className="sc-ifAKCX kfOBSV"
+        >
+          <svg
+            className="sc-htpNat iPrSGo"
+            viewBox="0 0 24 24"
+          >
+            <g
+              fill="none"
+              fillRule="evenodd"
+              stroke="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1"
+            >
+              <g
+                stroke="#FFFFFF"
+                strokeWidth="3"
+                transform="translate(6.000000, 7.000000)"
+              >
+                <polyline
+                  points="13 0 4.0625 9 0 4.90909091"
+                />
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <span
+        style={
+          Object {
+            "marginLeft": "1rem",
+          }
+        }
       >
         On Click, Mark as Read
-      </label>
-    </div>
+      </span>
+    </label>
   </div>
   <div
-    className="form-group"
+    className="sc-bdVaJa jfPzWn"
   >
-    <div
-      className="custom-control custom-checkbox custom-checkbox-large"
-    >
-      <input
-        checked={false}
-        className="custom-control-input"
-        id="openAtStartUp"
-        name="openAtStartUp"
-        onChange={[Function]}
-        type="checkbox"
-      />
-      <label
-        className="custom-control-label"
-        htmlFor="openAtStartUp"
+    <label>
+      <div
+        className="sc-bwzfXH fnAEVU"
+      >
+        <input
+          checked={false}
+          className="sc-bxivhb hZSXJG"
+          label="Open at startup"
+          name="openAtStartUp"
+          onChange={[Function]}
+          type="checkbox"
+        />
+        <div
+          className="sc-ifAKCX kfOBSV"
+        >
+          <svg
+            className="sc-htpNat iPrSGo"
+            viewBox="0 0 24 24"
+          >
+            <g
+              fill="none"
+              fillRule="evenodd"
+              stroke="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="1"
+            >
+              <g
+                stroke="#FFFFFF"
+                strokeWidth="3"
+                transform="translate(6.000000, 7.000000)"
+              >
+                <polyline
+                  points="13 0 4.0625 9 0 4.90909091"
+                />
+              </g>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <span
+        style={
+          Object {
+            "marginLeft": "1rem",
+          }
+        }
       >
         Open at startup
-      </label>
-    </div>
+      </span>
+    </label>
   </div>
   <div>
     <form>
@@ -191,14 +351,16 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
       </div>
     </form>
   </div>
-  <hr />
-  Version: 
-  0.0.1
-  <hr />
-  <div>
+  <div
+    className="sc-gzVnrw JZDMk"
+  >
+    <small>
+      Version: 
+      0.0.1
+    </small>
     <button
       aria-label="Logout"
-      className="btn btn-outline-danger"
+      className="sc-iwsKbI ksXhsy btn btn-outline-danger"
       onClick={[Function]}
     >
       <span

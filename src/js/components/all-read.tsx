@@ -5,12 +5,28 @@ import { emojify } from 'react-emojione';
 
 import constants from '../utils/constants';
 
+const Wrapper = styled.div`
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Emoji = styled.div`
+  margin-top: 2rem;
+  font-size: 4rem;
+  font-weight: 400;
+`;
+
 const Title = styled.h2`
-  margin-top: 10px;
-  margin-bottom: 0;
+  margin: 0.5rem 0 0;
   padding: 10px 5px;
-  text-align: center;
+  font-weight: 600;
   line-height: 40px;
+`;
+
+const Desc = styled.h4`
+  font-weight: 400;
 `;
 
 export const AllRead = () => {
@@ -25,13 +41,14 @@ export const AllRead = () => {
     ];
 
   return (
-    <div className="container-fluid main-container notifications all-read">
+    <Wrapper>
+      <Emoji>{emojify(emoji, { output: 'unicode' })}</Emoji>
+
       <Title>
         <Typist>{message}</Typist>
       </Title>
 
-      <h4>No new notifications.</h4>
-      <h1 className="emoji">{emojify(emoji, { output: 'unicode' })}</h1>
-    </div>
+      <Desc>No new notifications.</Desc>
+    </Wrapper>
   );
 };

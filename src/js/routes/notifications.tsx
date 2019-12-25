@@ -15,7 +15,6 @@ interface IProps {
 
 export const NotificationsRoute = (props: IProps) => {
   const { accountNotifications, hasNotifications } = props;
-  const wrapperClass = 'container-fluid main-container notifications';
 
   if (props.failed) {
     return <Oops />;
@@ -26,7 +25,7 @@ export const NotificationsRoute = (props: IProps) => {
   }
 
   return (
-    <div className={wrapperClass + (!hasNotifications ? ' all-read' : '')}>
+    <div>
       {accountNotifications.map(account => (
         <Account
           key={account.hostname}

@@ -1,7 +1,32 @@
 import * as React from 'react';
 import { emojify } from 'react-emojione';
+import styled from 'styled-components';
 
 import constants from '../utils/constants';
+
+const Wrapper = styled.div`
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Emoji = styled.div`
+  margin-top: 2rem;
+  font-size: 4rem;
+  font-weight: 400;
+`;
+
+const Title = styled.h2`
+  margin: 0.5rem 0 0;
+  padding: 10px 5px;
+  font-weight: 600;
+  line-height: 40px;
+`;
+
+const Desc = styled.h4`
+  font-weight: 400;
+`;
 
 export const Oops = () => {
   const emoji =
@@ -10,10 +35,10 @@ export const Oops = () => {
     ];
 
   return (
-    <div className="container-fluid main-container notifications errored">
-      <h2>Oops something went wrong.</h2>
-      <h4>Couldn&apos;t get your notifications.</h4>
-      <h1 className="emoji">{emojify(emoji, { output: 'unicode' })}</h1>
-    </div>
+    <Wrapper>
+      <Emoji>{emojify(emoji, { output: 'unicode' })}</Emoji>
+      <Title>Something went wrong.</Title>
+      <Desc>Couldn&apos;t get your notifications.</Desc>
+    </Wrapper>
   );
 };

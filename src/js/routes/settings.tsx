@@ -1,37 +1,13 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 const { remote } = require('electron');
 
-import { fetchNotifications, updateSetting, logout } from '../actions';
-import { updateTrayIcon } from '../utils/comms';
 import { AppState, SettingsState } from '../../types/reducers';
-
-interface IFieldCheckbox {
-  name: string;
-  label: string;
-  checked: boolean;
-  onChange: any;
-}
-const FieldCheckbox = (props: IFieldCheckbox) => {
-  return (
-    <div className="form-group">
-      <div className="custom-control custom-checkbox custom-checkbox-large">
-        <input
-          type="checkbox"
-          id={props.name}
-          name={props.name}
-          className="custom-control-input"
-          checked={props.checked}
-          onChange={props.onChange}
-        />
-        <label className="custom-control-label" htmlFor={props.name}>
-          {props.label}
-        </label>
-      </div>
-    </div>
-  );
-};
+import { fetchNotifications, updateSetting, logout } from '../actions';
+import { FieldCheckbox } from '../components/ui/checkbox';
+import { updateTrayIcon } from '../utils/comms';
 
 interface IFieldRadio {
   name: string;
@@ -61,6 +37,56 @@ const FieldRadio = (props: IFieldRadio) => {
     </div>
   );
 };
+
+const Wrapper = styled.div`
+  padding: 2rem;
+`;
+
+const Header = styled.div`
+  margin: 0 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Footer = styled.div`
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+`;
+
+const Title = styled.h3`
+  margin: 0;
+  font-weight: 500;
+`;
+
+const ButtonClose = styled.button`
+  border: 0;
+  padding: 0.25rem;
+  font-size: 2rem;
+  font-weight: 500;
+
+  &:hover {
+    cursor: pointer;
+    color: ${props => props.theme.primary};
+  }
+`;
+
+const ButtonLogout = styled.button`
+  border: 0;
+  padding: 0.25rem 0.5rem;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 500;
+  border: 1px solid ${props => props.theme.danger};
+  border-radius: ${props => props.theme.borderRadius};
+
+  &:hover {
+    background-color: ${props => props.theme.danger};
+    color: white;
+  }
+`;
 
 interface IProps {
   fetchNotifications: () => any;
@@ -99,17 +125,17 @@ export class SettingsRoute extends React.Component<IProps> {
     const { settings } = this.props;
 
     return (
-      <div className="p-4">
-        <div>
-          <h5>Settings</h5>
-          <button
-            className="close"
+      <Wrapper>
+        <Header>
+          <Title>Settings</Title>
+
+          <ButtonClose
             aria-label="Close Settings"
             onClick={() => this.props.history.goBack()}
           >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
+            &times;
+          </ButtonClose>
+        </Header>
         <FieldCheckbox
           name="showOnlyParticipating"
           label="Show only participating"
@@ -175,20 +201,19 @@ export class SettingsRoute extends React.Component<IProps> {
             />
           </form>
         </div>
-        <hr />
-        Version: {remote.app.getVersion()}
-        <hr />
-        <div>
-          <button
+
+        <Footer>
+          <small>Version: {remote.app.getVersion()}</small>
+          <ButtonLogout
             aria-label="Logout"
             className="btn btn-outline-danger"
             onClick={() => this.logout()}
           >
             <span className="octicon octicon-sign-out" /> Logout from all
             accounts
-          </button>
-        </div>
-      </div>
+          </ButtonLogout>
+        </Footer>
+      </Wrapper>
     );
   }
 }
