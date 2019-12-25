@@ -57,6 +57,8 @@ const theme: DefaultTheme = {
 
   grayLighter: '#f9fafa',
   grayLight: '#eceeef',
+  grayDarker: '#3d3f41',
+  grayDark: '#55595C',
 
   purple: '#555b6e',
   purpleDark: '#3f4351',

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
 import { MemoryRouter } from 'react-router';
-import { render, fireEvent } from '@testing-library/react';
+import { render, fireEvent, getByLabelText } from '@testing-library/react';
 
 import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
 
@@ -23,9 +23,14 @@ jest.mock('@fortawesome/react-fontawesome', () => ({
   },
 }));
 
-describe('components/login.js', () => {
+describe('routes/login.tsx', () => {
   const props = {
     dispatch: jest.fn(),
+    isEitherLoggedIn: false,
+    history: {
+      goBack: jest.fn(),
+      push: jest.fn(),
+    },
   };
 
   beforeEach(function() {
@@ -33,6 +38,7 @@ describe('components/login.js', () => {
     new BrowserWindow().loadURL.mockReset();
     spyOn(ipcRenderer, 'send');
     props.dispatch.mockReset();
+    props.history.push.mockReset();
   });
 
   it('should test the mapStateToProps method', () => {
@@ -53,7 +59,6 @@ describe('components/login.js', () => {
   it('should render itself & its children', () => {
     const caseProps = {
       ...props,
-      isEitherLoggedIn: false,
     };
 
     const tree = TestRenderer.create(
@@ -68,7 +73,6 @@ describe('components/login.js', () => {
   it('should redirect to notifications once logged in', () => {
     const caseProps = {
       ...props,
-      isEitherLoggedIn: false,
     };
 
     const { rerender } = render(
@@ -91,17 +95,29 @@ describe('components/login.js', () => {
     spyOn(helpers, 'authGithub');
     const caseProps = {
       ...props,
-      isEitherLoggedIn: false,
     };
 
-    const { getByRole } = render(
+    const { getByLabelText } = render(
       <MemoryRouter>
         <LoginPage {...caseProps} />
       </MemoryRouter>
     );
 
-    fireEvent.click(getByRole('button'));
+    fireEvent.click(getByLabelText('Login with GitHub'));
 
     expect(helpers.authGithub).toHaveBeenCalledTimes(1);
+  });
+
+  it('should navigate to login with github enterprise', () => {
+    const { getByLabelText } = render(
+      <MemoryRouter>
+        <LoginPage {...props} />
+      </MemoryRouter>
+    );
+
+    fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
+
+    expect(props.history.push).toHaveBeenCalledTimes(1);
+    expect(props.history.push).toHaveBeenCalledWith('/enterpriselogin');
   });
 });

@@ -18,22 +18,16 @@ interface IFieldRadio {
 }
 const FieldRadio = (props: IFieldRadio) => {
   return (
-    <div className="custom-control custom-radio custom-control-inline">
+    <div>
       <input
         type="radio"
         id={`${props.name}-${props.value}`}
         name={props.name}
-        className="custom-control-input"
         value={props.value}
         checked={props.checked}
         onChange={evt => props.onChange(props.name, evt.target.value)}
       />
-      <label
-        className="custom-control-label"
-        htmlFor={`${props.name}-${props.value}`}
-      >
-        {props.label}
-      </label>
+      <label htmlFor={`${props.name}-${props.value}`}>{props.label}</label>
     </div>
   );
 };
@@ -89,6 +83,7 @@ const ButtonLogout = styled.button`
 `;
 
 interface IProps {
+  hasMultipleAccounts: boolean;
   fetchNotifications: () => any;
   logout: () => any;
   settings: SettingsState;
@@ -122,7 +117,7 @@ export class SettingsRoute extends React.Component<IProps> {
   }
 
   render() {
-    const { settings } = this.props;
+    const { hasMultipleAccounts, settings } = this.props;
 
     return (
       <Wrapper>
@@ -204,13 +199,9 @@ export class SettingsRoute extends React.Component<IProps> {
 
         <Footer>
           <small>Version: {remote.app.getVersion()}</small>
-          <ButtonLogout
-            aria-label="Logout"
-            className="btn btn-outline-danger"
-            onClick={() => this.logout()}
-          >
-            <span className="octicon octicon-sign-out" /> Logout from all
-            accounts
+          <ButtonLogout aria-label="Logout" onClick={() => this.logout()}>
+            <span className="octicon octicon-sign-out" />{' '}
+            {hasMultipleAccounts ? 'Logout from all accounts' : 'Logout'}
           </ButtonLogout>
         </Footer>
       </Wrapper>
@@ -219,8 +210,15 @@ export class SettingsRoute extends React.Component<IProps> {
 }
 
 export function mapStateToProps(state: AppState) {
+  const enterpriseAccounts = state.auth.enterpriseAccounts;
+  const isGitHubLoggedIn = state.auth.token !== null;
+  const hasMultipleAccounts = isGitHubLoggedIn
+    ? enterpriseAccounts.length > 0
+    : enterpriseAccounts.length > 1;
+
   return {
     settings: state.settings,
+    hasMultipleAccounts,
   };
 }
 

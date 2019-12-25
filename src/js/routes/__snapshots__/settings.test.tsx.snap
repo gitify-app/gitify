@@ -292,12 +292,9 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
   </div>
   <div>
     <form>
-      <div
-        className="custom-control custom-radio custom-control-inline"
-      >
+      <div>
         <input
           checked={true}
-          className="custom-control-input"
           id="showAppIcon-both"
           name="showAppIcon"
           onChange={[Function]}
@@ -305,18 +302,14 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
           value="both"
         />
         <label
-          className="custom-control-label"
           htmlFor="showAppIcon-both"
         >
           Both Icons
         </label>
       </div>
-      <div
-        className="custom-control custom-radio custom-control-inline"
-      >
+      <div>
         <input
           checked={false}
-          className="custom-control-input"
           id="showAppIcon-tray"
           name="showAppIcon"
           onChange={[Function]}
@@ -324,18 +317,14 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
           value="tray"
         />
         <label
-          className="custom-control-label"
           htmlFor="showAppIcon-tray"
         >
           Tray Icon
         </label>
       </div>
-      <div
-        className="custom-control custom-radio custom-control-inline"
-      >
+      <div>
         <input
           checked={false}
-          className="custom-control-input"
           id="showAppIcon-dock"
           name="showAppIcon"
           onChange={[Function]}
@@ -343,7 +332,6 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
           value="dock"
         />
         <label
-          className="custom-control-label"
           htmlFor="showAppIcon-dock"
         >
           Dock Icon
@@ -360,13 +348,14 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
     </small>
     <button
       aria-label="Logout"
-      className="sc-iwsKbI ksXhsy btn btn-outline-danger"
+      className="sc-iwsKbI ksXhsy"
       onClick={[Function]}
     >
       <span
         className="octicon octicon-sign-out"
       />
-       Logout from all accounts
+       
+      Logout
     </button>
   </div>
 </div>

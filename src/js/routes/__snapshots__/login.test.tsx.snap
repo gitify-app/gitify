@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/login.js should render itself & its children 1`] = `
+exports[`routes/login.tsx should render itself & its children 1`] = `
 <div
-  className="container-fluid main-container login"
+  className="sc-bdVaJa jZnlmR"
 >
   <svg
-    className="logo mt-5"
+    className="logo sc-bwzfXH egQfNh"
     onClick={[Function]}
     role="logo"
     viewBox="0 0 180.31 182.52"
@@ -75,15 +75,16 @@ exports[`components/login.js should render itself & its children 1`] = `
       transform="translate(-134.85 -135.25)"
     />
   </svg>
-  <div
-    className="desc"
+  <h3
+    className="sc-htpNat iuKvGU"
   >
-    GitHub Notifications
+    GitHub Notifications 
     <br />
-    in your menu bar.
-  </div>
+     in your menu bar.
+  </h3>
   <button
-    className="btn btn-block btn-login"
+    aria-label="Login with GitHub"
+    className="sc-bxivhb lgDNln"
     onClick={[Function]}
   >
     <div
@@ -92,12 +93,13 @@ exports[`components/login.js should render itself & its children 1`] = `
       FAIcon
       GitHub
     </div>
-     
-    Login to GitHub
+    <span>
+      Login to GitHub
+    </span>
   </button>
-  <a
-    className="btn btn-block btn-login mt-3"
-    href="/enterpriselogin"
+  <button
+    aria-label="Login with GitHub Enterprise"
+    className="sc-bxivhb lgDNln"
     onClick={[Function]}
   >
     <div
@@ -106,8 +108,9 @@ exports[`components/login.js should render itself & its children 1`] = `
       FAIcon
       GitHub
     </div>
-     
-    Login to GitHub Enterprise
-  </a>
+    <span>
+      Login to GitHub Enterprise
+    </span>
+  </button>
 </div>
 `;

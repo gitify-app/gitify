@@ -6,12 +6,18 @@ import { MemoryRouter } from 'react-router-dom';
 const { ipcRenderer } = require('electron');
 
 import { SettingsRoute, mapStateToProps } from './settings';
-import { SettingsState, AppState } from '../../types/reducers';
+import {
+  SettingsState,
+  AppState,
+  AuthState,
+  EnterpriseAccount,
+} from '../../types/reducers';
 
 describe('routes/settings.tsx', () => {
   const props = {
     updateSetting: jest.fn(),
     fetchNotifications: jest.fn(),
+    hasMultipleAccounts: false,
     logout: jest.fn(),
     history: {
       goBack: jest.fn(),
@@ -36,6 +42,10 @@ describe('routes/settings.tsx', () => {
 
   it('should test the mapStateToProps method', () => {
     const state = {
+      auth: {
+        token: '123-456',
+        enterpriseAccounts: [{} as EnterpriseAccount],
+      } as AuthState,
       settings: {
         participating: false,
       } as SettingsState,
@@ -43,6 +53,7 @@ describe('routes/settings.tsx', () => {
 
     const mappedProps = mapStateToProps(state);
 
+    expect(mappedProps.hasMultipleAccounts).toBeTruthy();
     expect(mappedProps.settings.participating).toBeFalsy();
   });
 

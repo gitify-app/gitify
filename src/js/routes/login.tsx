@@ -5,14 +5,60 @@ import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import styled from 'styled-components';
 
 import { AppState } from '../../types/reducers';
 import { authGithub, isUserEitherLoggedIn } from '../utils/helpers';
 import { LogoDark } from '../components/logos/dark';
 
+const Wrapper = styled.div`
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Logo = styled(LogoDark)`
+  max-width: 105px;
+  margin-top: 3rem;
+`;
+
+const Title = styled.h3`
+  margin: 1rem 0;
+  padding: 10px 5px;
+  font-weight: 400;
+  text-align: center;
+`;
+
+const LoginButton = styled.button`
+  font-size: 1rem;
+  font-weight: 300;
+  border-radius: 5px;
+  border: 1px solid ${props => props.theme.primary};
+
+  padding: 0.5rem 1rem;
+  margin: 0.5rem 0;
+  min-width: 16rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: ${props => props.theme.grayDark};
+  color: white;
+
+  &:hover {
+    background-color: ${props => props.theme.grayDarker};
+  }
+
+  span {
+    margin-left: 0.5rem;
+  }
+`;
+
 interface IProps {
   isEitherLoggedIn: boolean;
   dispatch: any;
+  history: any;
 }
 
 export class LoginPage extends React.Component<IProps> {
@@ -39,27 +85,29 @@ export class LoginPage extends React.Component<IProps> {
     }
 
     return (
-      <div className="container-fluid main-container login">
-        <LogoDark className="mt-5" />
+      <Wrapper>
+        <Logo />
 
-        <div className="desc">
-          GitHub Notifications
-          <br />
-          in your menu bar.
-        </div>
-        <button
-          className="btn btn-block btn-login"
+        <Title>
+          GitHub Notifications <br /> in your menu bar.
+        </Title>
+
+        <LoginButton
           onClick={() => authGithub(undefined, this.props.dispatch)}
+          aria-label="Login with GitHub"
         >
-          <FontAwesomeIcon className="mr-2" icon={faGithub} title="GitHub" />{' '}
-          Login to GitHub
-        </button>
+          <FontAwesomeIcon icon={faGithub} title="GitHub" />
+          <span>Login to GitHub</span>
+        </LoginButton>
 
-        <Link to="/enterpriselogin" className="btn btn-block btn-login mt-3">
-          <FontAwesomeIcon className="mr-2" icon={faGithub} title="GitHub" />{' '}
-          Login to GitHub Enterprise
-        </Link>
-      </div>
+        <LoginButton
+          onClick={() => this.props.history.push('/enterpriselogin')}
+          aria-label="Login with GitHub Enterprise"
+        >
+          <FontAwesomeIcon icon={faGithub} title="GitHub" />
+          <span>Login to GitHub Enterprise</span>
+        </LoginButton>
+      </Wrapper>
     );
   }
 }
