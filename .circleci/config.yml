@@ -66,6 +66,12 @@ jobs:
       - run:
           name: 'Package'
           command: yarn package
+      - run:
+          name: 'Zip the package'
+          command: |
+            cd Gitify-darwin-x64
+            zip -r gitify-osx.zip Gitify.app
+            cd -
       - store_artifacts:
           path: ./Gitify-darwin-x64
           destination: Gitify-darwin-x64
