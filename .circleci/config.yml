@@ -79,6 +79,6 @@ workflows:
       - run-unit-tests:
           requires:
             - setup
-      - build-ts:
+      - build-bundle:
           requires:
             - setup
