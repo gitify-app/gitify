@@ -55,7 +55,7 @@ jobs:
           path: ./coverage
           destination: coverage
 
-  build-ts:
+  build-bundle:
     executor: node
     steps:
       - attach_workspace:
@@ -63,6 +63,12 @@ jobs:
       - run:
           name: 'Build TS'
           command: yarn build
+      - run:
+          name: 'Package'
+          command: yarn package
+      - store_artifacts:
+          path: ./Gitify-darwin-x64
+          destination: Gitify-darwin-x64
 
 workflows:
   version: 2.1
