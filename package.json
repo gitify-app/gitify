@@ -56,12 +56,8 @@
     }
   },
   "dependencies": {
-    "@fortawesome/fontawesome-svg-core": "^1.2.25",
-    "@fortawesome/free-brands-svg-icons": "^5.11.2",
-    "@fortawesome/free-solid-svg-icons": "^5.11.2",
-    "@fortawesome/react-fontawesome": "^0.1.7",
     "@primer/octicons-react": "^9.3.1",
-    "auto-launch": "=5.0.1",
+    "auto-launch": "=5.0.5",
     "axios": "=0.19.0",
     "date-fns": "^2.8.1",
     "electron": "=7.1.7",
@@ -87,7 +83,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^9.4.0",
-    "@types/jest": "^24.0.24",
+    "@types/jest": "^24.0.25",
     "@types/lodash": "^4.14.149",
     "@types/node": "^12.12.21",
     "@types/react": "^16.9.17",

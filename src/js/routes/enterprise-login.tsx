@@ -3,8 +3,7 @@ const ipcRenderer = require('electron').ipcRenderer;
 import * as React from 'react';
 import { Form, FormRenderProps } from 'react-final-form';
 import { connect } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import Octicon, { MarkGithub } from '@primer/octicons-react';
 import styled from 'styled-components';
 
 import { AppState } from '../../types/reducers';
@@ -126,8 +125,12 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
           placeholder="ABC123DEF456"
         />
 
-        <LoginButton disabled={submitting || pristine} type="submit">
-          <FontAwesomeIcon icon={faGithub} title="GitHub" />
+        <LoginButton
+          disabled={submitting || pristine}
+          type="submit"
+          title="Login Button"
+        >
+          <Octicon icon={MarkGithub} size={16} />
           <span>Login to GitHub Enterprise</span>
         </LoginButton>
       </form>

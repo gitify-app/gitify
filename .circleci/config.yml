@@ -51,6 +51,9 @@ jobs:
       - run:
           name: Run Jest
           command: yarn test --coverage --runInBand
+      - store_artifacts:
+          path: ./coverage
+          destination: coverage
 
   build-ts:
     executor: node
