@@ -14,24 +14,7 @@ const dialog = remote.dialog;
 import { EnterpriseLogin, mapStateToProps, validate } from './enterprise-login';
 import { AppState } from '../../types/reducers';
 
-jest.mock('@fortawesome/react-fontawesome', () => ({
-  FontAwesomeIcon: props => {
-    const mockProps = {
-      onClick: props.onClick,
-      title: props.title,
-    };
-
-    return <div {...mockProps}>FAIcon{props.title}</div>;
-  },
-}));
-
 describe('routes/enterprise-login.js', () => {
-  const mockedEnterpriseAccountFormData = {
-    hostname: 'github.gitify.io',
-    clientId: '1234567890',
-    clientSecret: '1234567890987654321012345678900987654321',
-  };
-
   const props = {
     enterpriseAccountsCount: 0,
     dispatch: jest.fn(),
@@ -148,7 +131,7 @@ describe('routes/enterprise-login.js', () => {
       target: { value: 'abc' },
     });
 
-    fireEvent.submit(getByTitle('GitHub'));
+    fireEvent.submit(getByTitle('Login Button'));
 
     expect(getByText('Invalid hostname.')).toBeTruthy();
     expect(getByText('Invalid client id.')).toBeTruthy();
@@ -189,7 +172,7 @@ describe('routes/enterprise-login.js', () => {
       target: { value: 'ABC123ABCDABC123ABCDABC123ABCDABC123ABCD' },
     });
 
-    fireEvent.submit(getByTitle('GitHub'));
+    fireEvent.submit(getByTitle('Login Button'));
 
     expect(new BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
     expect(new BrowserWindow().loadURL).toHaveBeenCalledWith(expectedUrl);

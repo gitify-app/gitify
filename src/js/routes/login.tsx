@@ -1,10 +1,9 @@
 const { ipcRenderer } = require('electron');
 
 import * as React from 'react';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import Octicon, { MarkGithub } from '@primer/octicons-react';
 import styled from 'styled-components';
 
 import { AppState } from '../../types/reducers';
@@ -96,7 +95,7 @@ export class LoginPage extends React.Component<IProps> {
           onClick={() => authGithub(undefined, this.props.dispatch)}
           aria-label="Login with GitHub"
         >
-          <FontAwesomeIcon icon={faGithub} title="GitHub" />
+          <Octicon icon={MarkGithub} size={16} />
           <span>Login to GitHub</span>
         </LoginButton>
 
@@ -104,7 +103,7 @@ export class LoginPage extends React.Component<IProps> {
           onClick={() => this.props.history.push('/enterpriselogin')}
           aria-label="Login with GitHub Enterprise"
         >
-          <FontAwesomeIcon icon={faGithub} title="GitHub" />
+          <Octicon icon={MarkGithub} size={16} />
           <span>Login to GitHub Enterprise</span>
         </LoginButton>
       </Wrapper>

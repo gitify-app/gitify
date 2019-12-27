@@ -3,9 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
 import { shell } from 'electron';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCog, faSyncAlt } from '@fortawesome/free-solid-svg-icons';
-import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import Octicon, { Gear, Sync, MarkGithub } from '@primer/octicons-react';
 import styled from 'styled-components';
 
 import {
@@ -66,17 +64,19 @@ const Status = styled.div`
 const MainButtons = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
   margin: 0.25rem 0;
 
-  .sidebar-icon {
-    margin: 0 0.25rem;
-    color: ${props => props.theme.grayLight};
+  align-self: stretch;
+  justify-content: space-evenly;
+`;
 
-    &:hover {
-      color: ${props => props.theme.grayLighter};
-      cursor: pointer;
-    }
+const SidebarIcon = styled(Octicon)`
+  margin: 0 0.25rem;
+  color: ${props => props.theme.grayLight};
+
+  &:hover {
+    color: ${props => props.theme.grayLighter};
+    cursor: pointer;
   }
 `;
 
@@ -85,7 +85,10 @@ const Footer = styled.div`
 `;
 
 const FooterButton = styled.button`
-  display: block;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
   background-color: ${props => props.theme.purpleDark};
   border-radius: 0.25rem;
   border: 1px solid ${props => props.theme.purpleDark};
@@ -236,13 +239,9 @@ export class Sidebar extends React.Component<IProps> {
 
           {isEitherLoggedIn && (
             <MainButtons>
-              <FontAwesomeIcon
-                className="sidebar-icon"
-                icon={faSyncAlt}
-                onClick={() => this.refreshNotifications()}
-                title="Refresh"
-                fixedWidth
-              />
+              <div title="Refresh" onClick={() => this.refreshNotifications()}>
+                <SidebarIcon icon={Sync} size={18} />
+              </div>
 
               <Link
                 to={
@@ -251,9 +250,8 @@ export class Sidebar extends React.Component<IProps> {
                     : '/settings'
                 }
                 replace={this.props.location.pathname === '/settings'}
-                className="sidebar-icon"
               >
-                <FontAwesomeIcon icon={faCog} title="Settings" fixedWidth />
+                <SidebarIcon icon={Gear} size={18} />
               </Link>
             </MainButtons>
           )}
@@ -279,7 +277,7 @@ export class Sidebar extends React.Component<IProps> {
               onClick={this.onOpenBrowser}
               aria-label="Star on GitHub"
             >
-              <FontAwesomeIcon icon={faGithub} title="GitHub" /> Star
+              <Octicon icon={MarkGithub} size={12} /> Star
             </FooterButton>
           )}
         </Footer>

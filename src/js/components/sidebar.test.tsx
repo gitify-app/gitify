@@ -12,17 +12,6 @@ import {
 } from '../__mocks__/mockedData';
 import { AuthState, AppState, SettingsState } from '../../types/reducers';
 
-jest.mock('@fortawesome/react-fontawesome', () => ({
-  FontAwesomeIcon: props => {
-    const mockProps = {
-      onClick: props.onClick,
-      title: props.title,
-    };
-
-    return <div {...mockProps}>FAIcon{props.title}</div>;
-  },
-}));
-
 describe('components/Sidebar.tsx', () => {
   let clock;
 

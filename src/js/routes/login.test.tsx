@@ -12,17 +12,6 @@ import { AppState } from '../../types/reducers';
 import { LoginPage, mapStateToProps } from './login';
 import * as helpers from '../utils/helpers';
 
-jest.mock('@fortawesome/react-fontawesome', () => ({
-  FontAwesomeIcon: props => {
-    const mockProps = {
-      onClick: props.onClick,
-      title: props.title,
-    };
-
-    return <div {...mockProps}>FAIcon{props.title}</div>;
-  },
-}));
-
 describe('routes/login.tsx', () => {
   const props = {
     dispatch: jest.fn(),
