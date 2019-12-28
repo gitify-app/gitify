@@ -35,5 +35,5 @@ export function restoreSetting(setting, value) {
 }
 
 export function restoreSettings(settings: SettingsState) {
-  restoreSetting('show-app-icon', settings.appPosition);
+  restoreSetting('set-app-position', settings.appPosition);
 }

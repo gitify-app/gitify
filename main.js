@@ -1,7 +1,8 @@
 const { app, dialog, ipcMain, BrowserWindow, Menu, Tray } = require('electron');
 const path = require('path');
-const GhReleases = require('electron-gh-releases');
 const AutoLaunch = require('auto-launch');
+const GhReleases = require('electron-gh-releases');
+const Positioner = require('electron-positioner');
 
 const appMenuTemplate = require('./electron/app-menu-template');
 const iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
@@ -12,7 +13,6 @@ const isLinux = process.platform === 'linux';
 const isWindows = process.platform === 'win32';
 
 let appWindow;
-let appIcon = null;
 let isQuitting = false;
 
 const autoStart = new AutoLaunch({
@@ -21,9 +21,13 @@ const autoStart = new AutoLaunch({
   isHidden: true,
 });
 
-app.on('ready', function() {
+app.on('ready', () => {
+  let appIcon = null;
+  let positioner;
+
   function createAppIcon() {
-    let trayIcon = new Tray(iconIdle);
+    const trayIcon = new Tray(iconIdle);
+    trayIcon.setIgnoreDoubleClickEvents(true);
 
     const trayMenu = Menu.buildFromTemplate([
       {
@@ -123,7 +127,6 @@ app.on('ready', function() {
       minHeight: 300,
       minWidth: 500,
       show: false,
-      center: true,
       fullscreenable: false,
       titleBarStyle: 'hiddenInset',
       webPreferences: {
@@ -133,6 +136,7 @@ app.on('ready', function() {
     };
 
     appWindow = new BrowserWindow(defaults);
+    positioner = new Positioner(appWindow);
     appWindow.loadURL(`file://${__dirname}/index.html`);
     appWindow.show();
 
@@ -146,6 +150,26 @@ app.on('ready', function() {
     const menu = Menu.buildFromTemplate(appMenuTemplate);
     Menu.setApplicationMenu(menu);
     checkAutoUpdate(false);
+  }
+
+  function setPositionTray() {
+    console.log('Setting position to Tray.');
+
+    app.dock.hide();
+    if (appIcon.isDestroyed()) {
+      appIcon = createAppIcon();
+    }
+    positioner.move('trayCenter', appIcon.getBounds());
+  }
+
+  function setPositionWindow() {
+    console.log('Setting position to Window.');
+
+    app.dock.show();
+    appWindow.center();
+    if (!appIcon.isDestroyed()) {
+      appIcon.destroy();
+    }
   }
 
   appIcon = createAppIcon();
@@ -170,28 +194,11 @@ app.on('ready', function() {
     }
   });
 
-  ipcMain.on('show-app-icon', (event, arg) => {
-    switch (arg) {
-      case 'both':
-        app.dock.show();
-        if (appIcon.isDestroyed()) {
-          appIcon = createAppIcon();
-        }
-        break;
-
-      case 'tray':
-        app.dock.hide();
-        if (appIcon.isDestroyed()) {
-          appIcon = createAppIcon();
-        }
-        break;
-
-      case 'dock':
-        app.dock.show();
-        if (!appIcon.isDestroyed()) {
-          appIcon.destroy();
-        }
-        break;
+  ipcMain.on('set-app-position', (event, arg) => {
+    if (arg === 'window') {
+      return setPositionWindow();
+    } else if (arg === 'tray') {
+      return setPositionTray();
     }
   });
 });

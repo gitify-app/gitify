@@ -40,6 +40,6 @@ describe('middleware/settings.js', () => {
     expect(dispatchWithStoreOf({}, action)).toEqual(action);
 
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('show-app-icon', 'window');
+    expect(ipcRenderer.send).toHaveBeenCalledWith('set-app-position', 'window');
   });
 });

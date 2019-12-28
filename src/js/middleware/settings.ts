@@ -7,7 +7,7 @@ export default () => next => action => {
       if (action.setting === 'openAtStartup') {
         setAutoLaunch(action.value);
       } else if (action.setting === 'appPosition') {
-        restoreSetting('show-app-icon', action.value);
+        restoreSetting('set-app-position', action.value);
       }
   }
 
