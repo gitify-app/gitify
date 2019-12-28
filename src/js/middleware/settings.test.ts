@@ -30,16 +30,16 @@ describe('middleware/settings.js', () => {
     expect(ipcRenderer.send).toHaveBeenCalledWith('startup-enable');
   });
 
-  it('should toggle showAppIcon', () => {
+  it('should toggle appPosition', () => {
     const action = {
       type: actions.UPDATE_SETTING,
-      setting: 'showAppIcon',
-      value: 'both',
+      setting: 'appPosition',
+      value: 'window',
     };
 
     expect(dispatchWithStoreOf({}, action)).toEqual(action);
 
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('show-app-icon', 'both');
+    expect(ipcRenderer.send).toHaveBeenCalledWith('show-app-icon', 'window');
   });
 });

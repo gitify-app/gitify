@@ -29,8 +29,8 @@ describe('routes/settings.tsx', () => {
       markOnClick: false,
       openAtStartup: false,
       hasStarred: false,
-      showAppIcon: 'both',
-    },
+      appPosition: 'window',
+    } as SettingsState,
   };
 
   beforeEach(function() {
@@ -149,23 +149,32 @@ describe('routes/settings.tsx', () => {
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle the showAppIcon radiogroup', () => {
-    const { getByLabelText } = render(<SettingsRoute {...props} />);
+  it('should toggle the appPosition radiogroup', () => {
+    const { getByLabelText, rerender } = render(<SettingsRoute {...props} />);
 
-    fireEvent.click(getByLabelText('Tray Icon'), {
+    props.updateSetting.mockReset();
+
+    fireEvent.click(getByLabelText('Tray'), {
       target: { value: 'tray' },
     });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
-    expect(props.updateSetting).toHaveBeenCalledWith('showAppIcon', 'tray');
+    expect(props.updateSetting).toHaveBeenCalledWith('appPosition', 'tray');
+
+    const newSettings: SettingsState = {
+      ...props.settings,
+      appPosition: 'tray',
+    };
+
+    rerender(<SettingsRoute {...props} settings={newSettings} />);
 
     props.updateSetting.mockReset();
 
-    fireEvent.click(getByLabelText('Dock Icon'), {
-      target: { value: 'dock' },
+    fireEvent.click(getByLabelText('Window'), {
+      target: { value: 'window' },
     });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
-    expect(props.updateSetting).toHaveBeenCalledWith('showAppIcon', 'dock');
+    expect(props.updateSetting).toHaveBeenCalledWith('appPosition', 'window');
   });
 });

@@ -294,47 +294,32 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
     <form>
       <div>
         <input
-          checked={true}
-          id="showAppIcon-both"
-          name="showAppIcon"
-          onChange={[Function]}
-          type="radio"
-          value="both"
-        />
-        <label
-          htmlFor="showAppIcon-both"
-        >
-          Both Icons
-        </label>
-      </div>
-      <div>
-        <input
           checked={false}
-          id="showAppIcon-tray"
-          name="showAppIcon"
+          id="appPosition-tray"
+          name="appPosition"
           onChange={[Function]}
           type="radio"
           value="tray"
         />
         <label
-          htmlFor="showAppIcon-tray"
+          htmlFor="appPosition-tray"
         >
-          Tray Icon
+          Tray
         </label>
       </div>
       <div>
         <input
-          checked={false}
-          id="showAppIcon-dock"
-          name="showAppIcon"
+          checked={true}
+          id="appPosition-window"
+          name="appPosition"
           onChange={[Function]}
           type="radio"
-          value="dock"
+          value="window"
         />
         <label
-          htmlFor="showAppIcon-dock"
+          htmlFor="appPosition-window"
         >
-          Dock Icon
+          Window
         </label>
       </div>
     </form>

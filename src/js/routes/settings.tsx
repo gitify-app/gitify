@@ -174,24 +174,17 @@ export class SettingsRoute extends React.Component<IProps> {
         <div>
           <form>
             <FieldRadio
-              name="showAppIcon"
-              value="both"
-              checked={settings.showAppIcon === 'both'}
-              label="Both Icons"
-              onChange={this.props.updateSetting}
-            />
-            <FieldRadio
-              name="showAppIcon"
+              name="appPosition"
               value="tray"
-              checked={settings.showAppIcon === 'tray'}
-              label="Tray Icon"
+              checked={settings.appPosition === 'tray'}
+              label="Tray"
               onChange={this.props.updateSetting}
             />
             <FieldRadio
-              name="showAppIcon"
-              value="dock"
-              checked={settings.showAppIcon === 'dock'}
-              label="Dock Icon"
+              name="appPosition"
+              value="window"
+              checked={settings.appPosition === 'window'}
+              label="Window"
               onChange={this.props.updateSetting}
             />
           </form>
