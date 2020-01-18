@@ -2,7 +2,7 @@
 
 exports[`components/Sidebar.tsx should render itself & its children (logged in) 1`] = `
 <div
-  className="sc-bdVaJa VpBUF"
+  className="sc-bdVaJa eIsRkG"
 >
   <div
     className="sc-bwzfXH hudJrY"
@@ -210,7 +210,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
 
 exports[`components/Sidebar.tsx should render itself & its children (logged out) 1`] = `
 <div
-  className="sc-bdVaJa VpBUF"
+  className="sc-bdVaJa eIsRkG"
 >
   <div
     className="sc-bwzfXH hudJrY"

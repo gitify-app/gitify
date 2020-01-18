@@ -297,13 +297,22 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
       Version: 
       0.0.1
     </small>
-    <button
-      aria-label="Logout"
-      className="sc-iwsKbI ksXhsy"
-      onClick={[Function]}
-    >
-      Logout
-    </button>
+    <div>
+      <button
+        aria-label="Logout"
+        className="sc-iwsKbI irWrKB"
+        onClick={[Function]}
+      >
+        Logout
+      </button>
+      <button
+        aria-label="Quit"
+        className="sc-iwsKbI irWrKB"
+        onClick={[Function]}
+      >
+        Quit
+      </button>
+    </div>
   </div>
 </div>
 `;

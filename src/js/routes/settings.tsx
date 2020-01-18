@@ -18,21 +18,6 @@ interface IFieldRadio {
   checked: boolean;
   onChange: any;
 }
-const FieldRadio = (props: IFieldRadio) => {
-  return (
-    <div>
-      <input
-        type="radio"
-        id={`${props.name}-${props.value}`}
-        name={props.name}
-        value={props.value}
-        checked={props.checked}
-        onChange={evt => props.onChange(props.name, evt.target.value)}
-      />
-      <label htmlFor={`${props.name}-${props.value}`}>{props.label}</label>
-    </div>
-  );
-};
 
 const Wrapper = styled.div`
   padding: 2rem;
