@@ -29,17 +29,4 @@ describe('middleware/settings.js', () => {
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('startup-enable');
   });
-
-  it('should toggle appPosition', () => {
-    const action = {
-      type: actions.UPDATE_SETTING,
-      setting: 'appPosition',
-      value: 'window',
-    };
-
-    expect(dispatchWithStoreOf({}, action)).toEqual(action);
-
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('set-app-position', 'window');
-  });
 });

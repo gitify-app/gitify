@@ -6,8 +6,6 @@ export default () => next => action => {
     case UPDATE_SETTING:
       if (action.setting === 'openAtStartup') {
         setAutoLaunch(action.value);
-      } else if (action.setting === 'appPosition') {
-        restoreSetting('set-app-position', action.value);
       }
   }
 

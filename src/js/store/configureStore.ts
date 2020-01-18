@@ -7,7 +7,6 @@ import filter from 'redux-storage-decorator-filter';
 
 import { checkHasStarred, UPDATE_SETTING, LOGIN } from '../actions';
 import { LOGOUT } from '../../types/actions';
-import { restoreSettings } from '../utils/comms';
 import constants from '../utils/constants';
 import notificationsMiddlware from '../middleware/notifications';
 import rootReducer from '../reducers';
@@ -52,8 +51,6 @@ export default function configureStore() {
   load(store).then(newState => {
     const { auth = {}, settings = {} } = newState;
     const isGitHubLoggedIn = !!auth.token;
-
-    restoreSettings(settings);
 
     if (isGitHubLoggedIn) {
       // @ts-ignore

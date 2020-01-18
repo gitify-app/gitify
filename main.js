@@ -4,7 +4,6 @@ const AutoLaunch = require('auto-launch');
 const GhReleases = require('electron-gh-releases');
 const Positioner = require('electron-positioner');
 
-const appMenuTemplate = require('./electron/app-menu-template');
 const iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
 const iconActive = path.join(__dirname, 'images', 'tray-active.png');
 
@@ -71,7 +70,7 @@ app.on('ready', () => {
       },
       response => {
         console.log('Exit: ' + response);
-
+        app.dock.hide();
         if (response === 0) {
           updater.install();
         }
@@ -112,6 +111,7 @@ app.on('ready', () => {
             message: 'You are currently running the latest version of Gitify.',
           });
         }
+        app.dock.hide();
       }
 
       if (!err && status) {
@@ -123,12 +123,12 @@ app.on('ready', () => {
   function initWindow() {
     let defaults = {
       width: 500,
-      height: 600,
-      minHeight: 300,
+      height: 400,
       minWidth: 500,
+      minHeight: 400,
       show: false,
       fullscreenable: false,
-      titleBarStyle: 'hiddenInset',
+      frame: false,
       webPreferences: {
         overlayScrollbars: true,
         nodeIntegration: true,
@@ -138,42 +138,33 @@ app.on('ready', () => {
     appWindow = new BrowserWindow(defaults);
     positioner = new Positioner(appWindow);
     appWindow.loadURL(`file://${__dirname}/index.html`);
-    appWindow.show();
 
-    appWindow.on('close', function(event) {
+    appWindow.once('ready-to-show', () => {
+      appWindow.show();
+    });
+
+    appWindow.on('blur', hideWindow);
+
+    appWindow.on('close', event => {
       if (!isQuitting) {
         event.preventDefault();
-        appWindow.hide();
+        hideWindow();
       }
     });
 
-    const menu = Menu.buildFromTemplate(appMenuTemplate);
-    Menu.setApplicationMenu(menu);
+    function hideWindow() {
+      if (!appWindow) {
+        return;
+      }
+      appWindow.hide();
+    }
+
     checkAutoUpdate(false);
-  }
-
-  function setPositionTray() {
-    console.log('Setting position to Tray.');
-
-    app.dock.hide();
-    if (appIcon.isDestroyed()) {
-      appIcon = createAppIcon();
-    }
-    positioner.move('trayCenter', appIcon.getBounds());
-  }
-
-  function setPositionWindow() {
-    console.log('Setting position to Window.');
-
-    app.dock.show();
-    appWindow.center();
-    if (!appIcon.isDestroyed()) {
-      appIcon.destroy();
-    }
   }
 
   appIcon = createAppIcon();
   initWindow();
+  positioner.move('trayCenter', appIcon.getBounds());
 
   ipcMain.on('reopen-window', () => appWindow.show());
   ipcMain.on('startup-enable', () => autoStart.enable());
@@ -191,14 +182,6 @@ app.on('ready', () => {
       } else {
         appIcon.setImage(iconIdle);
       }
-    }
-  });
-
-  ipcMain.on('set-app-position', (event, arg) => {
-    if (arg === 'window') {
-      return setPositionWindow();
-    } else if (arg === 'tray') {
-      return setPositionTray();
     }
   });
 });

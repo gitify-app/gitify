@@ -29,7 +29,6 @@ describe('routes/settings.tsx', () => {
       markOnClick: false,
       openAtStartup: false,
       hasStarred: false,
-      appPosition: 'window',
     } as SettingsState,
   };
 
@@ -147,34 +146,5 @@ describe('routes/settings.tsx', () => {
     });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
-  });
-
-  it('should toggle the appPosition radiogroup', () => {
-    const { getByLabelText, rerender } = render(<SettingsRoute {...props} />);
-
-    props.updateSetting.mockReset();
-
-    fireEvent.click(getByLabelText('Tray'), {
-      target: { value: 'tray' },
-    });
-
-    expect(props.updateSetting).toHaveBeenCalledTimes(1);
-    expect(props.updateSetting).toHaveBeenCalledWith('appPosition', 'tray');
-
-    const newSettings: SettingsState = {
-      ...props.settings,
-      appPosition: 'tray',
-    };
-
-    rerender(<SettingsRoute {...props} settings={newSettings} />);
-
-    props.updateSetting.mockReset();
-
-    fireEvent.click(getByLabelText('Window'), {
-      target: { value: 'window' },
-    });
-
-    expect(props.updateSetting).toHaveBeenCalledTimes(1);
-    expect(props.updateSetting).toHaveBeenCalledWith('appPosition', 'window');
   });
 });

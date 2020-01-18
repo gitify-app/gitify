@@ -290,40 +290,6 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
       </span>
     </label>
   </div>
-  <div>
-    <form>
-      <div>
-        <input
-          checked={false}
-          id="appPosition-tray"
-          name="appPosition"
-          onChange={[Function]}
-          type="radio"
-          value="tray"
-        />
-        <label
-          htmlFor="appPosition-tray"
-        >
-          Tray
-        </label>
-      </div>
-      <div>
-        <input
-          checked={true}
-          id="appPosition-window"
-          name="appPosition"
-          onChange={[Function]}
-          type="radio"
-          value="window"
-        />
-        <label
-          htmlFor="appPosition-window"
-        >
-          Window
-        </label>
-      </div>
-    </form>
-  </div>
   <div
     className="sc-gzVnrw JZDMk"
   >

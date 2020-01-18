@@ -1,3 +1,5 @@
+const { ipcRenderer } = require('electron');
+
 import * as React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -67,9 +69,10 @@ const ButtonClose = styled.button`
   }
 `;
 
-const ButtonLogout = styled.button`
+const ButtonFooter = styled.button`
   border: 0;
   padding: 0.25rem 0.5rem;
+  margin: 0.25rem 0.5rem;
   text-transform: uppercase;
   font-size: 0.8rem;
   font-weight: 500;
@@ -79,6 +82,10 @@ const ButtonLogout = styled.button`
   &:hover {
     background-color: ${props => props.theme.danger};
     color: white;
+  }
+
+  &:last-child {
+    margin-right: 0;
   }
 `;
 
@@ -114,6 +121,10 @@ export class SettingsRoute extends React.Component<IProps> {
     this.props.logout();
     this.props.history.goBack();
     updateTrayIcon();
+  }
+
+  quitApp() {
+    ipcRenderer.send('app-quit');
   }
 
   render() {
@@ -171,30 +182,19 @@ export class SettingsRoute extends React.Component<IProps> {
             this.props.updateSetting('openAtStartup', evt.target.checked)
           }
         />
-        <div>
-          <form>
-            <FieldRadio
-              name="appPosition"
-              value="tray"
-              checked={settings.appPosition === 'tray'}
-              label="Tray"
-              onChange={this.props.updateSetting}
-            />
-            <FieldRadio
-              name="appPosition"
-              value="window"
-              checked={settings.appPosition === 'window'}
-              label="Window"
-              onChange={this.props.updateSetting}
-            />
-          </form>
-        </div>
 
         <Footer>
           <small>Version: {remote.app.getVersion()}</small>
-          <ButtonLogout aria-label="Logout" onClick={() => this.logout()}>
-            {hasMultipleAccounts ? 'Logout from all accounts' : 'Logout'}
-          </ButtonLogout>
+
+          <div>
+            <ButtonFooter aria-label="Logout" onClick={this.logout.bind(this)}>
+              {hasMultipleAccounts ? 'Logout from all accounts' : 'Logout'}
+            </ButtonFooter>
+
+            <ButtonFooter aria-label="Quit" onClick={this.quitApp}>
+              Quit
+            </ButtonFooter>
+          </div>
         </Footer>
       </Wrapper>
     );

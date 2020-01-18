@@ -29,8 +29,6 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
 
-  -webkit-app-region: drag;
-
   .logo {
     width: 3rem;
     margin: 0.75rem auto;

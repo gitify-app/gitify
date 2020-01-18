@@ -2,7 +2,6 @@
 
 exports[`reducers/settings.ts should handle HAS_STARRED.FAILURE 1`] = `
 Object {
-  "appPosition": "tray",
   "hasStarred": false,
   "markOnClick": false,
   "openAtStartup": false,
@@ -14,7 +13,6 @@ Object {
 
 exports[`reducers/settings.ts should handle HAS_STARRED.SUCCESS 1`] = `
 Object {
-  "appPosition": "tray",
   "hasStarred": true,
   "markOnClick": false,
   "openAtStartup": false,
@@ -26,7 +24,6 @@ Object {
 
 exports[`reducers/settings.ts should handle UPDATE_SETTING 1`] = `
 Object {
-  "appPosition": "tray",
   "hasStarred": false,
   "markOnClick": false,
   "openAtStartup": false,
@@ -38,7 +35,6 @@ Object {
 
 exports[`reducers/settings.ts should handle UPDATE_SETTING 2`] = `
 Object {
-  "appPosition": "tray",
   "hasStarred": false,
   "markOnClick": false,
   "openAtStartup": true,
@@ -50,7 +46,6 @@ Object {
 
 exports[`reducers/settings.ts should return the initial state 1`] = `
 Object {
-  "appPosition": "tray",
   "hasStarred": false,
   "markOnClick": false,
   "openAtStartup": false,

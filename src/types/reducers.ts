@@ -30,8 +30,6 @@ export interface NotificationsState {
   failed: boolean;
 }
 
-export type AppPosition = 'window' | 'tray';
-
 export interface SettingsState {
   participating: boolean;
   playSound: boolean;
@@ -39,5 +37,4 @@ export interface SettingsState {
   markOnClick: boolean;
   openAtStartup: boolean;
   hasStarred: boolean;
-  appPosition: AppPosition;
 }

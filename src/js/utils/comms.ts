@@ -33,7 +33,3 @@ export function reOpenWindow() {
 export function restoreSetting(setting, value) {
   ipcRenderer.send(setting, value);
 }
-
-export function restoreSettings(settings: SettingsState) {
-  restoreSetting('set-app-position', settings.appPosition);
-}
