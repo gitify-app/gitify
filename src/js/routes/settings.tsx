@@ -187,7 +187,7 @@ export class SettingsRoute extends React.Component<IProps> {
               {hasMultipleAccounts ? 'Logout from all accounts' : 'Logout'}
             </ButtonFooter>
 
-            <ButtonFooter aria-label="Quit" onClick={this.quitApp}>
+            <ButtonFooter aria-label="Quit Gitify" onClick={this.quitApp}>
               Quit
             </ButtonFooter>
           </div>

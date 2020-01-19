@@ -6,11 +6,7 @@ import { shell } from 'electron';
 import Octicon, { Gear, Sync, MarkGithub } from '@primer/octicons-react';
 import styled from 'styled-components';
 
-import {
-  AppState,
-  EnterpriseAccount,
-  AccountNotifications,
-} from '../../types/reducers';
+import { AppState } from '../../types/reducers';
 import { fetchNotifications, logout } from '../actions';
 import { isUserEitherLoggedIn } from '../utils/helpers';
 import { LogoWhite } from './logos/white';
@@ -89,14 +85,10 @@ const FooterButton = styled.button`
 
 interface IProps {
   fetchNotifications: () => void;
+
   connectedAccounts: number;
-
-  enterpriseAccounts: EnterpriseAccount[];
-  notifications: AccountNotifications[];
   notificationsCount: number;
-
   isEitherLoggedIn: boolean;
-  isGitHubLoggedIn: boolean;
 
   history: any;
   location: any;
@@ -149,67 +141,8 @@ export class Sidebar extends React.Component<IProps> {
     return this.props.history.push('/settings');
   }
 
-  _renderGitHubAccount() {
-    const { enterpriseAccounts, notifications } = this.props;
-    const defaultHostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
-    const notificationsCount = notifications.find(
-      obj => obj.hostname === defaultHostname
-    ).notifications.length;
-
-    return (
-      <div
-        className={`badge-account ${enterpriseAccounts.length === 0 && 'last'}`}
-        title={defaultHostname}
-      >
-        <div className="mr-auto name">GitHub</div>
-        <div>
-          {notificationsCount === 0 ? (
-            <span className="octicon octicon-check" />
-          ) : (
-            notificationsCount
-          )}
-        </div>
-      </div>
-    );
-  }
-
-  _renderEnterpriseAccounts() {
-    const { enterpriseAccounts, notifications } = this.props;
-
-    return enterpriseAccounts.map((account, idx) => {
-      const splittedHostname = account.hostname.split('.');
-      const accountDomain = splittedHostname[splittedHostname.length - 2];
-      const notificationsCount = notifications.find(
-        obj => obj.hostname === account.hostname
-      ).notifications.length;
-
-      return (
-        <div
-          key={idx}
-          title={account.hostname}
-          className={`badge-account${
-            enterpriseAccounts.length === idx + 1 ? ' last' : ''
-          }`}
-        >
-          <div className="mr-auto name">{accountDomain}</div>
-          <div>
-            {notificationsCount === 0 ? (
-              <span className="octicon octicon-check" />
-            ) : (
-              notificationsCount
-            )}
-          </div>
-        </div>
-      );
-    });
-  }
-
   render() {
-    const {
-      isEitherLoggedIn,
-      isGitHubLoggedIn,
-      notificationsCount,
-    } = this.props;
+    const { isEitherLoggedIn, notificationsCount } = this.props;
 
     const status = notificationsCount === 0 ? '✔' : `${notificationsCount}`;
 
@@ -219,11 +152,6 @@ export class Sidebar extends React.Component<IProps> {
           <LogoWhite onClick={this.onOpenBrowser} />
 
           {isEitherLoggedIn && <Status>{status}</Status>}
-
-          {isGitHubLoggedIn &&
-            this.props.enterpriseAccounts.length !== 0 &&
-            this._renderGitHubAccount()}
-          {this._renderEnterpriseAccounts()}
         </Main>
 
         <Footer>
@@ -266,11 +194,8 @@ export function mapStateToProps(state: AppState) {
   );
 
   return {
-    isGitHubLoggedIn,
     isEitherLoggedIn: isUserEitherLoggedIn(state.auth),
-    notifications: state.notifications.response,
     notificationsCount,
-    enterpriseAccounts,
     connectedAccounts,
   };
 }

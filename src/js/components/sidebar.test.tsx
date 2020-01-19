@@ -20,14 +20,11 @@ describe('components/Sidebar.tsx', () => {
     isGitHubLoggedIn: true,
     isEitherLoggedIn: true,
     connectedAccounts: 2,
-    enterpriseAccounts: mockedEnterpriseAccounts,
-    notifications: mockedNotificationsRecuderData,
     notificationsCount: 4,
-    hasStarred: false,
     fetchNotifications: jest.fn(),
     history: {
-      goBack: jest.fn(),
-      push: jest.fn(),
+      goBack: () => {},
+      push: () => {},
     },
     location: {
       pathname: '/',
@@ -42,7 +39,6 @@ describe('components/Sidebar.tsx', () => {
     spyOn(window, 'clearInterval');
 
     props.fetchNotifications.mockReset();
-    props.history.push.mockReset();
   });
 
   afterEach(() => {
@@ -62,9 +58,7 @@ describe('components/Sidebar.tsx', () => {
 
     const mappedProps = mapStateToProps(state);
 
-    expect(mappedProps.isGitHubLoggedIn).toBeTruthy();
     expect(mappedProps.isEitherLoggedIn).toBeTruthy();
-    expect(mappedProps.notifications).toBeDefined();
   });
 
   it('should render itself & its children (logged in)', () => {
@@ -139,33 +133,23 @@ describe('components/Sidebar.tsx', () => {
   });
 
   it('should refresh the notifications', () => {
-    const { getByTitle } = render(
+    const { getByLabelText } = render(
       <MemoryRouter>
         <Sidebar {...props} />
       </MemoryRouter>
     );
     props.fetchNotifications.mockReset();
-    fireEvent.click(getByTitle('Refresh'));
+    fireEvent.click(getByLabelText('Refresh Notifications'));
     expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
   });
 
-  it('should go to the enterprise login route', () => {
-    const { debug, getByLabelText } = render(
-      <MemoryRouter>
-        <Sidebar {...props} />
-      </MemoryRouter>
-    );
-    fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
-    expect(props.history.push).toHaveBeenCalledTimes(1);
-  });
-
   it('open the gitify repo in browser', () => {
-    const { debug, getByLabelText } = render(
+    const { getByLabelText } = render(
       <MemoryRouter>
         <Sidebar {...props} />
       </MemoryRouter>
     );
-    fireEvent.click(getByLabelText('Star on GitHub'));
+    fireEvent.click(getByLabelText('View project on GitHub'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
   });
 });
