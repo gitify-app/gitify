@@ -36,5 +36,4 @@ export interface SettingsState {
   showNotifications: boolean;
   markOnClick: boolean;
   openAtStartup: boolean;
-  hasStarred: boolean;
 }

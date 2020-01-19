@@ -110,7 +110,6 @@ interface IProps {
   notifications: AccountNotifications[];
   notificationsCount: number;
 
-  hasStarred: boolean;
   isEitherLoggedIn: boolean;
   isGitHubLoggedIn: boolean;
 
@@ -303,7 +302,6 @@ export function mapStateToProps(state: AppState) {
     notificationsCount,
     enterpriseAccounts,
     connectedAccounts,
-    hasStarred: state.settings.hasStarred,
   };
 }
 

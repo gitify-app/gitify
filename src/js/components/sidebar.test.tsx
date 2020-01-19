@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
-import { render, fireEvent, getByLabelText } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 const { shell, ipcRenderer } = require('electron');
@@ -58,9 +58,6 @@ describe('components/Sidebar.tsx', () => {
       notifications: {
         response: [],
       },
-      settings: {
-        hasStarred: true,
-      } as SettingsState,
     } as AppState;
 
     const mappedProps = mapStateToProps(state);
@@ -68,7 +65,6 @@ describe('components/Sidebar.tsx', () => {
     expect(mappedProps.isGitHubLoggedIn).toBeTruthy();
     expect(mappedProps.isEitherLoggedIn).toBeTruthy();
     expect(mappedProps.notifications).toBeDefined();
-    expect(mappedProps.hasStarred).toBeTruthy();
   });
 
   it('should render itself & its children (logged in)', () => {

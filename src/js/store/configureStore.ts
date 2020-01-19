@@ -5,7 +5,7 @@ import * as storage from 'redux-storage';
 import createEngine from 'redux-storage-engine-localstorage';
 import filter from 'redux-storage-decorator-filter';
 
-import { checkHasStarred, UPDATE_SETTING, LOGIN } from '../actions';
+import { UPDATE_SETTING, LOGIN } from '../actions';
 import { LOGOUT } from '../../types/actions';
 import constants from '../utils/constants';
 import notificationsMiddlware from '../middleware/notifications';
@@ -15,11 +15,11 @@ import settingsMiddleware from '../middleware/settings';
 const isDev = false;
 
 export default function configureStore() {
-  const engine = filter(
-    createEngine(constants.STORAGE_KEY),
-    ['settings', ['auth', 'token'], ['auth', 'enterpriseAccounts']],
-    [['settings', 'hasStarred']]
-  );
+  const engine = filter(createEngine(constants.STORAGE_KEY), [
+    'settings',
+    ['auth', 'token'],
+    ['auth', 'enterpriseAccounts'],
+  ]);
 
   const storageMiddleware = storage.createMiddleware(
     engine,
@@ -38,6 +38,7 @@ export default function configureStore() {
     const { createLogger } = require('redux-logger');
     const logger = createLogger({ collapsed: true });
     middlewares.push(logger);
+    console.log('adss');
   }
 
   let store = createStore(
@@ -48,15 +49,7 @@ export default function configureStore() {
 
   // Load settings from localStorage
   const load = storage.createLoader(engine);
-  load(store).then(newState => {
-    const { auth = {}, settings = {} } = newState;
-    const isGitHubLoggedIn = !!auth.token;
-
-    if (isGitHubLoggedIn) {
-      // @ts-ignore
-      store.dispatch(checkHasStarred());
-    }
-  });
+  load(store);
 
   return store;
 }

@@ -28,7 +28,6 @@ describe('routes/settings.tsx', () => {
       showNotifications: true,
       markOnClick: false,
       openAtStartup: false,
-      hasStarred: false,
     } as SettingsState,
   };
 

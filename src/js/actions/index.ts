@@ -193,27 +193,6 @@ export function markRepoNotifications(repoSlug, hostname) {
   };
 }
 
-// Starred
-
-export const HAS_STARRED = makeAsyncActionSet('HAS_STARRED');
-export function checkHasStarred() {
-  return (dispatch, getState: () => AppState) => {
-    const url = `https://api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}/user/starred/${Constants.REPO_SLUG}`;
-    const method = 'GET';
-    const token = getState().auth.token;
-
-    dispatch({ type: HAS_STARRED.REQUEST });
-
-    return apiRequestAuth(url, method, token)
-      .then(function(response) {
-        dispatch({ type: HAS_STARRED.SUCCESS, payload: response.data });
-      })
-      .catch(function(error) {
-        dispatch({ type: HAS_STARRED.FAILURE, payload: error.response.data });
-      });
-  };
-}
-
 // Search
 
 export const SEARCH_NOTIFICATIONS = 'SEARCH_NOTIFICATIONS';
