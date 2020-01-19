@@ -5,7 +5,7 @@ import {
   MARK_REPO_NOTIFICATION,
 } from '../actions';
 import NativeNotifications from '../utils/notifications';
-import { setBadge, updateTrayIcon } from '../utils/comms';
+import { updateTrayIcon } from '../utils/comms';
 import { AccountNotifications } from '../../types/reducers';
 
 export default store => next => action => {

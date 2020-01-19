@@ -1,6 +1,5 @@
 import {
   updateTrayIcon,
-  setBadge,
   reOpenWindow,
   openExternalLink,
   setAutoLaunch,
