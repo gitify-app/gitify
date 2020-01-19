@@ -162,6 +162,7 @@ app.on('ready', () => {
     checkAutoUpdate(false);
   }
 
+  app.dock.hide();
   appTrayIcon = createAppIcon();
   initWindow();
   positioner.move('trayCenter', appTrayIcon.getBounds());
