@@ -11,7 +11,7 @@ const isDarwin = process.platform === 'darwin';
 const isLinux = process.platform === 'linux';
 const isWindows = process.platform === 'win32';
 
-let appWindow;
+let appBrowserWindow;
 let isQuitting = false;
 
 const autoStart = new AutoLaunch({
@@ -21,7 +21,7 @@ const autoStart = new AutoLaunch({
 });
 
 app.on('ready', () => {
-  let appIcon = null;
+  let appTrayIcon = null;
   let positioner;
 
   function createAppIcon() {
@@ -32,7 +32,7 @@ app.on('ready', () => {
       {
         label: 'Show Gitify',
         click() {
-          appWindow.show();
+          appBrowserWindow.show();
         },
       },
       {
@@ -51,7 +51,9 @@ app.on('ready', () => {
       trayIcon.setContextMenu(trayMenu);
     } else {
       trayIcon.on('click', () => {
-        appWindow.isFocused() ? appWindow.hide() : appWindow.show();
+        appBrowserWindow.isFocused()
+          ? appBrowserWindow.hide()
+          : appBrowserWindow.show();
       });
     }
 
@@ -70,7 +72,6 @@ app.on('ready', () => {
       },
       response => {
         console.log('Exit: ' + response);
-        app.dock.hide();
         if (response === 0) {
           updater.install();
         }
@@ -111,7 +112,6 @@ app.on('ready', () => {
             message: 'You are currently running the latest version of Gitify.',
           });
         }
-        app.dock.hide();
       }
 
       if (!err && status) {
@@ -135,17 +135,17 @@ app.on('ready', () => {
       },
     };
 
-    appWindow = new BrowserWindow(defaults);
-    positioner = new Positioner(appWindow);
-    appWindow.loadURL(`file://${__dirname}/index.html`);
+    appBrowserWindow = new BrowserWindow(defaults);
+    positioner = new Positioner(appBrowserWindow);
+    appBrowserWindow.loadURL(`file://${__dirname}/index.html`);
 
-    appWindow.once('ready-to-show', () => {
-      appWindow.show();
+    appBrowserWindow.once('ready-to-show', () => {
+      appBrowserWindow.show();
     });
 
-    appWindow.on('blur', hideWindow);
+    appBrowserWindow.on('blur', hideWindow);
 
-    appWindow.on('close', event => {
+    appBrowserWindow.on('close', event => {
       if (!isQuitting) {
         event.preventDefault();
         hideWindow();
@@ -153,40 +153,37 @@ app.on('ready', () => {
     });
 
     function hideWindow() {
-      if (!appWindow) {
+      if (!appBrowserWindow) {
         return;
       }
-      appWindow.hide();
+      appBrowserWindow.hide();
     }
 
     checkAutoUpdate(false);
   }
 
-  appIcon = createAppIcon();
+  appTrayIcon = createAppIcon();
   initWindow();
-  positioner.move('trayCenter', appIcon.getBounds());
+  positioner.move('trayCenter', appTrayIcon.getBounds());
 
-  ipcMain.on('reopen-window', () => appWindow.show());
+  ipcMain.on('reopen-window', () => appBrowserWindow.show());
   ipcMain.on('startup-enable', () => autoStart.enable());
   ipcMain.on('startup-disable', () => autoStart.disable());
   ipcMain.on('check-update', () => checkAutoUpdate(true));
-  ipcMain.on('set-badge', (_, count) => {
-    app.badgeCount = count;
-  });
   ipcMain.on('app-quit', () => app.quit());
 
   ipcMain.on('update-icon', (event, arg) => {
-    if (!appIcon.isDestroyed()) {
+    if (!appTrayIcon.isDestroyed()) {
       if (arg === 'TrayActive') {
-        appIcon.setImage(iconActive);
+        appTrayIcon.setImage(iconActive);
       } else {
-        appIcon.setImage(iconIdle);
+        appTrayIcon.setImage(iconIdle);
       }
     }
   });
 });
 
-app.on('activate', () => appWindow.show());
+app.on('activate', () => appBrowserWindow.show());
 
 app.on('window-all-closed', () => {
   if (!isDarwin) {

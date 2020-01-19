@@ -22,10 +22,6 @@ export function updateTrayIcon(notificationsLength = 0) {
   }
 }
 
-export function setBadge(notificationsLength) {
-  ipcRenderer.send('set-badge', notificationsLength);
-}
-
 export function reOpenWindow() {
   ipcRenderer.send('reopen-window');
 }

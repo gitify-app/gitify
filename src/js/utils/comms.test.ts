@@ -27,12 +27,6 @@ describe('utils/comms.ts', () => {
     expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
   });
 
-  it('should set the badge count', () => {
-    setBadge(3);
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('set-badge', 3);
-  });
-
   it('should reopen the window', () => {
     reOpenWindow();
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
