@@ -630,62 +630,6 @@ describe('actions/index.js', () => {
       });
   });
 
-  it('should check if the user has starred the repository (has)', () => {
-    nock('https://api.github.com/')
-      .get(`/user/starred/${Constants.REPO_SLUG}`)
-      .reply(200);
-
-    const expectedActions = [
-      { type: actions.HAS_STARRED.REQUEST },
-      { type: actions.HAS_STARRED.SUCCESS, payload: '' },
-    ];
-
-    const store = createMockStore(
-      {
-        auth: { token: 'IAMATOKEN' },
-        settings: {
-          participating: false,
-          isEnterprise: false,
-          baseUrl: 'github.com',
-        },
-        notifications: { response: [] },
-      },
-      expectedActions
-    );
-
-    return store.dispatch(actions.checkHasStarred()).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-  });
-
-  it('should check if the user has starred the repository (has not)', () => {
-    nock('https://api.github.com/')
-      .get(`/user/starred/${Constants.REPO_SLUG}`)
-      .reply(404);
-
-    const expectedActions = [
-      { type: actions.HAS_STARRED.REQUEST },
-      { type: actions.HAS_STARRED.FAILURE, payload: '' },
-    ];
-
-    const store = createMockStore(
-      {
-        auth: { token: 'IAMATOKEN' },
-        settings: {
-          participating: false,
-          isEnterprise: false,
-          baseUrl: 'github.com',
-        },
-        notifications: { response: [] },
-      },
-      expectedActions
-    );
-
-    return store.dispatch(actions.checkHasStarred()).then(() => {
-      expect(store.getActions()).toEqual(expectedActions);
-    });
-  });
-
   it('should search the notifications with a query', () => {
     const query = 'hello';
 

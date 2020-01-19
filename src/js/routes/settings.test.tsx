@@ -20,7 +20,9 @@ describe('routes/settings.tsx', () => {
     hasMultipleAccounts: false,
     logout: jest.fn(),
     history: {
+      push: jest.fn(),
       goBack: jest.fn(),
+      replace: jest.fn(),
     },
     settings: {
       participating: false,
@@ -28,7 +30,6 @@ describe('routes/settings.tsx', () => {
       showNotifications: true,
       markOnClick: false,
       openAtStartup: false,
-      hasStarred: false,
     } as SettingsState,
   };
 
@@ -37,6 +38,8 @@ describe('routes/settings.tsx', () => {
 
     props.updateSetting.mockReset();
     props.history.goBack.mockReset();
+    props.history.push.mockReset();
+    props.history.replace.mockReset();
   });
 
   it('should test the mapStateToProps method', () => {
@@ -146,5 +149,25 @@ describe('routes/settings.tsx', () => {
     });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
+  });
+
+  it('should go to the enterprise login route', () => {
+    const { getByLabelText } = render(
+      <MemoryRouter>
+        <SettingsRoute {...props} />
+      </MemoryRouter>
+    );
+    fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
+    expect(props.history.replace).toHaveBeenCalledWith('/enterpriselogin');
+  });
+
+  it('should quit the app', () => {
+    const { getByLabelText } = render(
+      <MemoryRouter>
+        <SettingsRoute {...props} />
+      </MemoryRouter>
+    );
+    fireEvent.click(getByLabelText('Quit Gitify'));
+    expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
   });
 });

@@ -1,5 +1,5 @@
 import reducer from './settings';
-import { UPDATE_SETTING, HAS_STARRED } from '../actions';
+import { UPDATE_SETTING } from '../actions';
 
 describe('reducers/settings.ts', () => {
   it('should return the initial state', () => {
@@ -22,21 +22,5 @@ describe('reducers/settings.ts', () => {
     };
 
     expect(reducer(undefined, actionOpenAtStartUp)).toMatchSnapshot();
-  });
-
-  it('should handle HAS_STARRED.SUCCESS', () => {
-    const action = {
-      type: HAS_STARRED.SUCCESS,
-    };
-
-    expect(reducer(undefined, action)).toMatchSnapshot();
-  });
-
-  it('should handle HAS_STARRED.FAILURE', () => {
-    const action = {
-      type: HAS_STARRED.FAILURE,
-    };
-
-    expect(reducer(undefined, action)).toMatchSnapshot();
   });
 });

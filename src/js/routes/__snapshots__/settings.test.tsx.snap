@@ -299,6 +299,13 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
     </small>
     <div>
       <button
+        aria-label="Login with GitHub Enterprise"
+        className="sc-iwsKbI irWrKB"
+        onClick={[Function]}
+      >
+        Add Enterprise
+      </button>
+      <button
         aria-label="Logout"
         className="sc-iwsKbI irWrKB"
         onClick={[Function]}
@@ -306,7 +313,7 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
         Logout
       </button>
       <button
-        aria-label="Quit"
+        aria-label="Quit Gitify"
         className="sc-iwsKbI irWrKB"
         onClick={[Function]}
       >
