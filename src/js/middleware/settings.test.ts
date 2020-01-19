@@ -29,17 +29,4 @@ describe('middleware/settings.js', () => {
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('startup-enable');
   });
-
-  it('should toggle showAppIcon', () => {
-    const action = {
-      type: actions.UPDATE_SETTING,
-      setting: 'showAppIcon',
-      value: 'both',
-    };
-
-    expect(dispatchWithStoreOf({}, action)).toEqual(action);
-
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('show-app-icon', 'both');
-  });
 });

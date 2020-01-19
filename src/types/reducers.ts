@@ -37,5 +37,4 @@ export interface SettingsState {
   markOnClick: boolean;
   openAtStartup: boolean;
   hasStarred: boolean;
-  showAppIcon: string;
 }

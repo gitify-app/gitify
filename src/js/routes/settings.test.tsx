@@ -29,8 +29,7 @@ describe('routes/settings.tsx', () => {
       markOnClick: false,
       openAtStartup: false,
       hasStarred: false,
-      showAppIcon: 'both',
-    },
+    } as SettingsState,
   };
 
   beforeEach(function() {
@@ -147,25 +146,5 @@ describe('routes/settings.tsx', () => {
     });
 
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
-  });
-
-  it('should toggle the showAppIcon radiogroup', () => {
-    const { getByLabelText } = render(<SettingsRoute {...props} />);
-
-    fireEvent.click(getByLabelText('Tray Icon'), {
-      target: { value: 'tray' },
-    });
-
-    expect(props.updateSetting).toHaveBeenCalledTimes(1);
-    expect(props.updateSetting).toHaveBeenCalledWith('showAppIcon', 'tray');
-
-    props.updateSetting.mockReset();
-
-    fireEvent.click(getByLabelText('Dock Icon'), {
-      target: { value: 'dock' },
-    });
-
-    expect(props.updateSetting).toHaveBeenCalledTimes(1);
-    expect(props.updateSetting).toHaveBeenCalledWith('showAppIcon', 'dock');
   });
 });

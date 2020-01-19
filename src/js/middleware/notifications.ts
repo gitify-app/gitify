@@ -5,7 +5,7 @@ import {
   MARK_REPO_NOTIFICATION,
 } from '../actions';
 import NativeNotifications from '../utils/notifications';
-import { setBadge, updateTrayIcon } from '../utils/comms';
+import { updateTrayIcon } from '../utils/comms';
 import { AccountNotifications } from '../../types/reducers';
 
 export default store => next => action => {
@@ -48,7 +48,6 @@ export default store => next => action => {
       );
 
       updateTrayIcon(allNotificationsCount);
-      setBadge(allNotificationsCount);
       NativeNotifications.setup(
         newNotifications,
         newNotificationsCount,
@@ -63,7 +62,6 @@ export default store => next => action => {
       );
 
       updateTrayIcon(prevNotificationsCount - 1);
-      setBadge(prevNotificationsCount - 1);
       break;
 
     case MARK_REPO_NOTIFICATION.SUCCESS:
@@ -86,7 +84,6 @@ export default store => next => action => {
         .reduce((memo, acc) => memo + acc.notifications.length, 0);
 
       updateTrayIcon(updatedNotificationsCount);
-      setBadge(updatedNotificationsCount);
       break;
   }
 

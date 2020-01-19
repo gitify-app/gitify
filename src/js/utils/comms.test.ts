@@ -1,6 +1,5 @@
 import {
   updateTrayIcon,
-  setBadge,
   reOpenWindow,
   openExternalLink,
   setAutoLaunch,
@@ -25,12 +24,6 @@ describe('utils/comms.ts', () => {
     updateTrayIcon(notificationsLength);
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
-  });
-
-  it('should set the badge count', () => {
-    setBadge(3);
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('set-badge', 3);
   });
 
   it('should reopen the window', () => {

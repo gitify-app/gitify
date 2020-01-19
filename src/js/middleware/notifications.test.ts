@@ -49,7 +49,6 @@ describe('middleware/notifications.js', () => {
   beforeEach(() => {
     spyOn(NativeNotifications, 'setup').and.stub();
     spyOn(comms, 'updateTrayIcon').and.stub();
-    spyOn(comms, 'setBadge').and.stub();
   });
 
   it('should raise notifications (native & sound, update tray icon, set badge)', () => {
@@ -70,7 +69,7 @@ describe('middleware/notifications.js', () => {
     );
   });
 
-  it('should mark a notification and call the update tray icon helper and set the badge', () => {
+  it('should mark a notification and call the update tray icon helper', () => {
     const action = {
       type: actions.MARK_NOTIFICATION.SUCCESS,
     };
@@ -79,9 +78,6 @@ describe('middleware/notifications.js', () => {
 
     expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
     expect(comms.updateTrayIcon).toHaveBeenCalledWith(2);
-
-    expect(comms.setBadge).toHaveBeenCalledTimes(1);
-    expect(comms.setBadge).toHaveBeenCalledWith(2);
   });
 
   it("should mark a repo's notification and call the update tray icon helper", () => {
@@ -96,7 +92,5 @@ describe('middleware/notifications.js', () => {
     expect(dispatchWithStoreOf({}, action)).toEqual(action);
     expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
     expect(comms.updateTrayIcon).toHaveBeenCalledWith(2);
-    expect(comms.setBadge).toHaveBeenCalledTimes(1);
-    expect(comms.setBadge).toHaveBeenCalledWith(2);
   });
 });

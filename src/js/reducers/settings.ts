@@ -8,7 +8,6 @@ const initialState: SettingsState = {
   markOnClick: false,
   openAtStartup: false,
   hasStarred: false,
-  showAppIcon: 'both',
 };
 
 export default function reducer(state = initialState, action): SettingsState {

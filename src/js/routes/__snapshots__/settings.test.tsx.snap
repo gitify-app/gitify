@@ -290,55 +290,6 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
       </span>
     </label>
   </div>
-  <div>
-    <form>
-      <div>
-        <input
-          checked={true}
-          id="showAppIcon-both"
-          name="showAppIcon"
-          onChange={[Function]}
-          type="radio"
-          value="both"
-        />
-        <label
-          htmlFor="showAppIcon-both"
-        >
-          Both Icons
-        </label>
-      </div>
-      <div>
-        <input
-          checked={false}
-          id="showAppIcon-tray"
-          name="showAppIcon"
-          onChange={[Function]}
-          type="radio"
-          value="tray"
-        />
-        <label
-          htmlFor="showAppIcon-tray"
-        >
-          Tray Icon
-        </label>
-      </div>
-      <div>
-        <input
-          checked={false}
-          id="showAppIcon-dock"
-          name="showAppIcon"
-          onChange={[Function]}
-          type="radio"
-          value="dock"
-        />
-        <label
-          htmlFor="showAppIcon-dock"
-        >
-          Dock Icon
-        </label>
-      </div>
-    </form>
-  </div>
   <div
     className="sc-gzVnrw JZDMk"
   >
@@ -346,13 +297,22 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
       Version: 
       0.0.1
     </small>
-    <button
-      aria-label="Logout"
-      className="sc-iwsKbI ksXhsy"
-      onClick={[Function]}
-    >
-      Logout
-    </button>
+    <div>
+      <button
+        aria-label="Logout"
+        className="sc-iwsKbI irWrKB"
+        onClick={[Function]}
+      >
+        Logout
+      </button>
+      <button
+        aria-label="Quit"
+        className="sc-iwsKbI irWrKB"
+        onClick={[Function]}
+      >
+        Quit
+      </button>
+    </div>
   </div>
 </div>
 `;

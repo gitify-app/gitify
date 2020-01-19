@@ -7,7 +7,6 @@ Object {
   "openAtStartup": false,
   "participating": false,
   "playSound": true,
-  "showAppIcon": "both",
   "showNotifications": true,
 }
 `;
@@ -19,7 +18,6 @@ Object {
   "openAtStartup": false,
   "participating": false,
   "playSound": true,
-  "showAppIcon": "both",
   "showNotifications": true,
 }
 `;
@@ -31,7 +29,6 @@ Object {
   "openAtStartup": false,
   "participating": true,
   "playSound": true,
-  "showAppIcon": "both",
   "showNotifications": true,
 }
 `;
@@ -43,7 +40,6 @@ Object {
   "openAtStartup": true,
   "participating": false,
   "playSound": true,
-  "showAppIcon": "both",
   "showNotifications": true,
 }
 `;
@@ -55,7 +51,6 @@ Object {
   "openAtStartup": false,
   "participating": false,
   "playSound": true,
-  "showAppIcon": "both",
   "showNotifications": true,
 }
 `;
