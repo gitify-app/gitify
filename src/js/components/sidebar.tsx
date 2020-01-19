@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { compose } from 'redux';
 import { connect } from 'react-redux';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { shell } from 'electron';
 import Octicon, { Gear, Sync, MarkGithub } from '@primer/octicons-react';
 import styled from 'styled-components';
@@ -16,7 +16,7 @@ import { isUserEitherLoggedIn } from '../utils/helpers';
 import { LogoWhite } from './logos/white';
 import Constants from '../utils/constants';
 
-export const SIDEBAR_WIDTH = '100px';
+export const SIDEBAR_WIDTH = '50px';
 
 const Wrapper = styled.div`
   position: fixed;
@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   flex-direction: column;
 
   .logo {
-    width: 3rem;
+    width: 1.25rem;
     margin: 0.75rem auto;
 
     &:hover {
@@ -44,7 +44,7 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 0.75rem;
+  padding: 1rem 0;
 `;
 
 const Status = styled.div`
@@ -59,27 +59,8 @@ const Status = styled.div`
   text-transform: uppercase;
 `;
 
-const MainButtons = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin: 0.25rem 0;
-
-  align-self: stretch;
-  justify-content: space-evenly;
-`;
-
-const SidebarIcon = styled(Octicon)`
-  margin: 0 0.25rem;
-  color: ${props => props.theme.grayLight};
-
-  &:hover {
-    color: ${props => props.theme.grayLighter};
-    cursor: pointer;
-  }
-`;
-
 const Footer = styled.div`
-  padding: 2rem 0.75rem;
+  padding: 1rem 0.75rem;
 `;
 
 const FooterButton = styled.button`
@@ -94,11 +75,15 @@ const FooterButton = styled.button`
 
   font-size: 0.8rem;
   margin-top: 0.5rem;
-  padding: 0.25rem 0.5rem;
+  padding: 0.25rem 0;
   color: white;
 
   &:hover {
     background-color: ${props => props.theme.purple};
+  }
+
+  &:focus {
+    outline: 0;
   }
 `;
 
@@ -155,6 +140,13 @@ export class Sidebar extends React.Component<IProps> {
 
   onOpenBrowser() {
     shell.openExternal(`https://www.github.com/${Constants.REPO_SLUG}`);
+  }
+
+  goToSettings() {
+    if (this.props.location.pathname === '/settings') {
+      return this.props.history.goBack();
+    }
+    return this.props.history.push('/settings');
   }
 
   _renderGitHubAccount() {
@@ -214,44 +206,19 @@ export class Sidebar extends React.Component<IProps> {
 
   render() {
     const {
-      hasStarred,
       isEitherLoggedIn,
       isGitHubLoggedIn,
-      notifications,
       notificationsCount,
     } = this.props;
+
+    const status = notificationsCount === 0 ? '✔' : `${notificationsCount}`;
 
     return (
       <Wrapper>
         <Main>
           <LogoWhite onClick={this.onOpenBrowser} />
 
-          {isEitherLoggedIn && (
-            <Status>
-              {notifications.length === 0
-                ? 'All Read'
-                : `${notificationsCount} Unread`}
-            </Status>
-          )}
-
-          {isEitherLoggedIn && (
-            <MainButtons>
-              <div title="Refresh" onClick={() => this.refreshNotifications()}>
-                <SidebarIcon icon={Sync} size={18} />
-              </div>
-
-              <Link
-                to={
-                  this.props.location.pathname === '/settings'
-                    ? '/'
-                    : '/settings'
-                }
-                replace={this.props.location.pathname === '/settings'}
-              >
-                <SidebarIcon icon={Gear} size={18} />
-              </Link>
-            </MainButtons>
-          )}
+          {isEitherLoggedIn && <Status>{status}</Status>}
 
           {isGitHubLoggedIn &&
             this.props.enterpriseAccounts.length !== 0 &&
@@ -260,23 +227,26 @@ export class Sidebar extends React.Component<IProps> {
         </Main>
 
         <Footer>
-          {!!isEitherLoggedIn && (
-            <FooterButton
-              onClick={() => this.props.history.push('/enterpriselogin')}
-              aria-label="Login with GitHub Enterprise"
-            >
-              Add Enterprise
-            </FooterButton>
-          )}
+          <FooterButton
+            onClick={this.refreshNotifications.bind(this)}
+            aria-label="Refresh Notifications"
+          >
+            <Octicon icon={Sync} size={14} />
+          </FooterButton>
 
-          {!hasStarred && (
-            <FooterButton
-              onClick={this.onOpenBrowser}
-              aria-label="Star on GitHub"
-            >
-              <Octicon icon={MarkGithub} size={12} /> Star
-            </FooterButton>
-          )}
+          <FooterButton
+            onClick={this.goToSettings.bind(this)}
+            aria-label="Settings"
+          >
+            <Octicon icon={Gear} size={14} />
+          </FooterButton>
+
+          <FooterButton
+            onClick={this.onOpenBrowser}
+            aria-label="View project on GitHub"
+          >
+            <Octicon icon={MarkGithub} size={14} />
+          </FooterButton>
         </Footer>
       </Wrapper>
     );

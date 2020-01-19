@@ -112,6 +112,10 @@ export class SettingsRoute extends React.Component<IProps> {
     ipcRenderer.send('app-quit');
   }
 
+  goToEnterprise() {
+    return this.props.history.replace('/enterpriselogin');
+  }
+
   render() {
     const { hasMultipleAccounts, settings } = this.props;
 
@@ -172,6 +176,13 @@ export class SettingsRoute extends React.Component<IProps> {
           <small>Version: {remote.app.getVersion()}</small>
 
           <div>
+            <ButtonFooter
+              aria-label="Login with GitHub Enterprise"
+              onClick={this.goToEnterprise.bind(this)}
+            >
+              Add Enterprise
+            </ButtonFooter>
+
             <ButtonFooter aria-label="Logout" onClick={this.logout.bind(this)}>
               {hasMultipleAccounts ? 'Logout from all accounts' : 'Logout'}
             </ButtonFooter>
