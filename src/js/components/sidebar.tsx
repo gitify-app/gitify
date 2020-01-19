@@ -3,7 +3,7 @@ import { compose } from 'redux';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { shell } from 'electron';
-import Octicon, { Gear, Sync, MarkGithub } from '@primer/octicons-react';
+import Octicon, { Bell, Gear, Sync, MarkGithub } from '@primer/octicons-react';
 import styled from 'styled-components';
 
 import { AppState } from '../../types/reducers';
@@ -44,8 +44,13 @@ const Main = styled.div`
 `;
 
 const Status = styled.div`
-  margin: 0.25rem;
-  padding: 0.25rem 0.4rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-self: stretch;
+  align-items: center;
+  margin: 0.25rem 0;
+  padding: 0.25rem 0.55rem;
   color: ${props => props.theme.success};
   font-size: 75%;
   font-weight: 700;
@@ -142,16 +147,19 @@ export class Sidebar extends React.Component<IProps> {
   }
 
   render() {
-    const { isEitherLoggedIn, notificationsCount } = this.props;
-
-    const status = notificationsCount === 0 ? '✔' : `${notificationsCount}`;
+    const { notificationsCount } = this.props;
 
     return (
       <Wrapper>
         <Main>
           <LogoWhite onClick={this.onOpenBrowser} />
 
-          {isEitherLoggedIn && <Status>{status}</Status>}
+          {notificationsCount > 0 && (
+            <Status>
+              <Octicon icon={Bell} size={14} />
+              {notificationsCount}
+            </Status>
+          )}
         </Main>
 
         <Footer>
