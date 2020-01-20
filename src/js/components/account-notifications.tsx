@@ -11,7 +11,7 @@ const Account = styled.div`
   justify-content: flex-end;
   align-items: center;
   padding: 0.5rem 1rem;
-  background-color: ${props => props.theme.purpleDark};
+  background-color: ${props => props.theme.primaryDark};
   color: white;
   font-size: 0.9rem;
 

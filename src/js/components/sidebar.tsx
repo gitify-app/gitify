@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   position: fixed;
   left: ${SIDEBAR_WIDTH};
   margin-left: -${SIDEBAR_WIDTH};
-  background-color: ${props => props.theme.purple};
+  background-color: ${props => props.theme.primary};
   width: ${SIDEBAR_WIDTH};
   height: 100%;
   overflow-y: auto;
@@ -79,7 +79,7 @@ const FooterButton = styled.button`
   color: white;
 
   &:hover {
-    color: ${props => props.theme.purpleDark};
+    color: ${props => props.theme.primaryDark};
   }
 
   &:focus {

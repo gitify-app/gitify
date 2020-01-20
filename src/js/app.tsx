@@ -49,7 +49,7 @@ export const PrivateRoute = ({ component: Component, ...rest }) => {
 const theme: DefaultTheme = {
   borderRadius: '3px',
 
-  primary: '#555B6E',
+  primary: '#203354',
   success: '#2CC966',
   info: '#8BA9C6',
   warning: '#FCAA67',
@@ -60,8 +60,7 @@ const theme: DefaultTheme = {
   grayDarker: '#3d3f41',
   grayDark: '#55595C',
 
-  purple: '#555b6e',
-  purpleDark: '#3f4351',
+  primaryDark: '#071A3B',
 };
 
 const GlobalStyle = createGlobalStyle`
@@ -92,7 +91,7 @@ const GlobalStyle = createGlobalStyle`
       top: 0;
       left: ${SIDEBAR_WIDTH};
       z-index: 1031;
-      background: ${props => props.theme.purpleDark};
+      background: ${props => props.theme.primaryDark};
   
       width: 100%;
       height: 2px;
