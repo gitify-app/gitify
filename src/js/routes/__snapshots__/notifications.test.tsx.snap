@@ -137,6 +137,7 @@ exports[`routes/notifications.ts should render itself & its children (with notif
         },
       ]
     }
+    showAccountHostname={true}
   />
   <AccountNotifications
     hostname="github.gitify.io"
@@ -230,6 +231,7 @@ exports[`routes/notifications.ts should render itself & its children (with notif
         },
       ]
     }
+    showAccountHostname={true}
   />
 </div>
 `;
