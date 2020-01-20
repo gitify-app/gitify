@@ -50,7 +50,7 @@ const theme: DefaultTheme = {
   borderRadius: '3px',
 
   primary: '#555B6E',
-  success: '#69B578',
+  success: '#2CC966',
   info: '#8BA9C6',
   warning: '#FCAA67',
   danger: '#B7524F',
