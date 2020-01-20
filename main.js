@@ -55,6 +55,22 @@ menubarApp.on('ready', () => {
     }
   });
 
+  menubarApp.window.webContents.on('devtools-opened', () => {
+    menubarApp.window.setSize(800, 600);
+    menubarApp.window.center();
+    menubarApp.window.resizable = true;
+  });
+
+  menubarApp.window.webContents.on('devtools-closed', () => {
+    const trayBounds = menubarApp.tray.getBounds();
+    menubarApp.window.setSize(
+      browserWindowOpts.width,
+      browserWindowOpts.height
+    );
+    menubarApp.positioner.move('trayCenter', trayBounds);
+    menubarApp.window.resizable = false;
+  });
+
   function checkAutoUpdate() {
     if (isWindows || isLinux) {
       return;
