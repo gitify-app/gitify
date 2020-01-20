@@ -2,7 +2,7 @@
 
 exports[`components/repository.tsx should render itself & its children 1`] = `
 <div
-  className="sc-bdVaJa jTjBsU"
+  className="sc-bdVaJa dofWkW"
 >
   <div
     className="sc-bwzfXH gkcRsd"

@@ -18,8 +18,8 @@ const Wrapper = styled.div`
 `;
 
 const Logo = styled(LogoDark)`
-  max-width: 105px;
-  margin-top: 3rem;
+  max-width: 5rem;
+  margin-top: 1rem;
 `;
 
 const Title = styled.h3`

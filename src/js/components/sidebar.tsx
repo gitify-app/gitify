@@ -46,7 +46,7 @@ const Main = styled.div`
 const Status = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   align-self: stretch;
   align-items: center;
   margin: 0.25rem 0;
@@ -155,7 +155,7 @@ export class Sidebar extends React.Component<IProps> {
 
           {notificationsCount > 0 && (
             <Status>
-              <Octicon icon={Bell} size={14} />
+              <Octicon icon={Bell} size={12} />
               {notificationsCount}
             </Status>
           )}
