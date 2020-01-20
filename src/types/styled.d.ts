@@ -18,7 +18,6 @@ declare module 'styled-components' {
     grayDarker: string;
     grayDark: string;
 
-    purple: string;
-    purpleDark: string;
+    primaryDark: string;
   }
 }

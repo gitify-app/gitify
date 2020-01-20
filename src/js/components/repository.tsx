@@ -12,7 +12,7 @@ import NotificationItem from './notification';
 const Wrapper = styled.div`
   display: flex;
   background-color: ${props => props.theme.grayLight};
-  padding: 0.4rem 0.5rem;
+  padding: 0.55rem 0.5rem;
 `;
 
 const TitleBar = styled.div`

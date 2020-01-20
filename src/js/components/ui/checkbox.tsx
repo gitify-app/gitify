@@ -37,7 +37,7 @@ const StyledCheckbox = styled.div`
   height: 24px;
   background: ${props =>
     // @ts-ignore
-    props.isChecked ? props.theme.purpleDark : props.theme.purple}
+    props.isChecked ? props.theme.primaryDark : props.theme.primary}
   border-radius: 3px;
   transition: all 150ms;
 

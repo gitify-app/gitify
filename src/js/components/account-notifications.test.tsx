@@ -11,6 +11,7 @@ describe('components/account-notifications.tsx', () => {
     const props = {
       hostname: 'github.com',
       notifications: mockedGithubNotifications,
+      showAccountHostname: true,
     };
 
     const tree = TestRendener.create(<AccountNotifications {...props} />);
@@ -21,6 +22,7 @@ describe('components/account-notifications.tsx', () => {
     const props = {
       hostname: 'github.com',
       notifications: [],
+      showAccountHostname: true,
     };
 
     const tree = TestRendener.create(<AccountNotifications {...props} />);

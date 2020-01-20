@@ -73,7 +73,8 @@ export default {
   },
 
   raiseSoundNotification() {
-    const audio = new Audio('sounds/digi.wav');
+    const audio = new Audio('sounds/clearly.mp3');
+    audio.volume = 0.05;
     audio.play();
   },
 };

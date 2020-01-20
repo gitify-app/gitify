@@ -22,6 +22,7 @@ describe('routes/notifications.ts', () => {
     failed: false,
     accountNotifications: mockedNotificationsRecuderData,
     notificationsCount: 4,
+    hasMultipleAccounts: true,
     hasNotifications: true,
   };
 
