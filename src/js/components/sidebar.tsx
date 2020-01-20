@@ -78,12 +78,12 @@ const FooterButton = styled.button`
   padding: 0.35rem 0;
   color: white;
 
-  &:hover {
-    color: ${props => props.theme.primaryDark};
-  }
-
   &:focus {
     outline: 0;
+  }
+
+  .octicon:hover {
+    color: ${props => props.theme.info};
   }
 `;
 

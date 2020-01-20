@@ -110,7 +110,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
   >
     <button
       aria-label="Refresh Notifications"
-      className="sc-ifAKCX MyUZN"
+      className="sc-ifAKCX nrRVs"
       onClick={[Function]}
     >
       <svg
@@ -137,7 +137,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
     </button>
     <button
       aria-label="Settings"
-      className="sc-ifAKCX MyUZN"
+      className="sc-ifAKCX nrRVs"
       onClick={[Function]}
     >
       <svg
@@ -164,7 +164,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
     </button>
     <button
       aria-label="View project on GitHub"
-      className="sc-ifAKCX MyUZN"
+      className="sc-ifAKCX nrRVs"
       onClick={[Function]}
     >
       <svg
@@ -303,7 +303,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
   >
     <button
       aria-label="Refresh Notifications"
-      className="sc-ifAKCX MyUZN"
+      className="sc-ifAKCX nrRVs"
       onClick={[Function]}
     >
       <svg
@@ -330,7 +330,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
     </button>
     <button
       aria-label="Settings"
-      className="sc-ifAKCX MyUZN"
+      className="sc-ifAKCX nrRVs"
       onClick={[Function]}
     >
       <svg
@@ -357,7 +357,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
     </button>
     <button
       aria-label="View project on GitHub"
-      className="sc-ifAKCX MyUZN"
+      className="sc-ifAKCX nrRVs"
       onClick={[Function]}
     >
       <svg
