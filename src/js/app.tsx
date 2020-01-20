@@ -92,7 +92,7 @@ const GlobalStyle = createGlobalStyle`
       top: 0;
       left: ${SIDEBAR_WIDTH};
       z-index: 1031;
-      background: ${props => props.theme.grayLighter};
+      background: ${props => props.theme.purpleDark};
   
       width: 100%;
       height: 2px;
