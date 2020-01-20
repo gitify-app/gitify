@@ -101,7 +101,7 @@ describe('routes/settings.tsx', () => {
     expect(props.history.goBack).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle the showOnlyParticipating checbox', () => {
+  it('should toggle the showOnlyParticipating checkbox', () => {
     const { getByLabelText } = render(<SettingsRoute {...props} />);
 
     fireEvent.click(getByLabelText('Show only participating'), {
@@ -111,7 +111,7 @@ describe('routes/settings.tsx', () => {
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle the playSound checbox', () => {
+  it('should toggle the playSound checkbox', () => {
     const { getByLabelText } = render(<SettingsRoute {...props} />);
 
     fireEvent.click(getByLabelText('Play sound'), {
@@ -121,7 +121,7 @@ describe('routes/settings.tsx', () => {
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle the showNotifications checbox', () => {
+  it('should toggle the showNotifications checkbox', () => {
     const { getByLabelText } = render(<SettingsRoute {...props} />);
 
     fireEvent.click(getByLabelText('Show notifications'), {
@@ -131,7 +131,7 @@ describe('routes/settings.tsx', () => {
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle the onClickMarkAsRead checbox', () => {
+  it('should toggle the onClickMarkAsRead checkbox', () => {
     const { getByLabelText } = render(<SettingsRoute {...props} />);
 
     fireEvent.click(getByLabelText('On Click, Mark as Read'), {
@@ -141,7 +141,7 @@ describe('routes/settings.tsx', () => {
     expect(props.updateSetting).toHaveBeenCalledTimes(1);
   });
 
-  it('should toggle the openAtStartup checbox', () => {
+  it('should toggle the openAtStartup checkbox', () => {
     const { getByLabelText } = render(<SettingsRoute {...props} />);
 
     fireEvent.click(getByLabelText('Open at startup'), {
