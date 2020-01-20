@@ -1,8 +1,0 @@
-verbose: false
-instrumentation:
-    root: 'src/js/'
-    extensions:
-        - .js
-    default-excludes: true
-    excludes: ['**/__tests__/**']
-    include-all-sources: true

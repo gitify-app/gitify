@@ -47,7 +47,7 @@ export default {
       notificationUrl = notification.subject.url;
     } else {
       title = 'Gitify';
-      body = `You've got ${count} notifications.`;
+      body = `You have got ${count} notifications.`;
       icon = false;
     }
 
