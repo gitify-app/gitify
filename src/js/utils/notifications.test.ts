@@ -3,11 +3,8 @@ import * as _ from 'lodash';
 import { generateGitHubWebUrl } from '../utils/helpers';
 import { mockedGithubNotifications } from '../__mocks__/mockedData';
 import { SettingsState } from '../../types/reducers';
-import { SubjectType } from '../../types/github';
 import * as comms from './comms';
-import NotificationsUtils, {
-  getNotificationIcon,
-} from '../utils/notifications';
+import NotificationsUtils from '../utils/notifications';
 
 describe('utils/notifications.ts', () => {
   it('should raise a notification (settings - on)', () => {
@@ -126,24 +123,6 @@ describe('utils/notifications.ts', () => {
     nativeNotification.onclick(null);
 
     expect(comms.reOpenWindow).toHaveBeenCalledTimes(1);
-  });
-
-  it('should use different notification icons', () => {
-    expect(getNotificationIcon('Issue')).toEqual(
-      'images/notifications/issue.png'
-    );
-    expect(getNotificationIcon('Commit')).toEqual(
-      'images/notifications/commit.png'
-    );
-    expect(getNotificationIcon('PullRequest')).toEqual(
-      'images/notifications/pull-request.png'
-    );
-    expect(getNotificationIcon('Release')).toEqual(
-      'images/notifications/release.png'
-    );
-    expect(getNotificationIcon('WHATEVER' as SubjectType)).toEqual(
-      'images/notifications/gitify.png'
-    );
   });
 
   it('should play a sound', () => {

@@ -5,21 +5,6 @@ import { reOpenWindow, openExternalLink } from '../utils/comms';
 import { SubjectType } from '../../types/github';
 import { SettingsState } from '../../types/reducers';
 
-export function getNotificationIcon(type: SubjectType) {
-  switch (type) {
-    case 'Issue':
-      return 'images/notifications/issue.png';
-    case 'Commit':
-      return 'images/notifications/commit.png';
-    case 'PullRequest':
-      return 'images/notifications/pull-request.png';
-    case 'Release':
-      return 'images/notifications/release.png';
-    default:
-      return 'images/notifications/gitify.png';
-  }
-}
-
 export default {
   setup(notifications, notificationsCount, settings: SettingsState) {
     // If there are no new notifications just stop there
@@ -43,17 +28,14 @@ export default {
       const notification = notifications.find(obj => obj.length > 0)[0];
       title = `Gitify - ${notification.repository.full_name}`;
       body = notification.subject.title;
-      icon = getNotificationIcon(notification.subject.type);
       notificationUrl = notification.subject.url;
     } else {
       title = 'Gitify';
       body = `You have got ${count} notifications.`;
-      icon = false;
     }
 
     const nativeNotification = new Notification(title, {
       body,
-      icon,
       silent: true,
     });
 
