@@ -11,15 +11,17 @@ import { authGithub } from '../utils/helpers';
 import { FieldInput } from '../components/fields/input';
 import { LoginButton } from './login';
 
-const Wrapper = styled.div`
-  padding: 2rem;
-`;
-
 const Header = styled.div`
-  margin: 0 0 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 0 0 1rem;
+  padding: 1rem 2rem 0;
+`;
+
+const Main = styled.div`
+  flex: 1;
+  padding: 0 2rem;
 `;
 
 const Title = styled.h3`
@@ -143,7 +145,7 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <Wrapper>
+      <div>
         <Header>
           <Title>Login to GitHub Enterprise</Title>
 
@@ -155,18 +157,20 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
           </ButtonClose>
         </Header>
 
-        <Form
-          initialValues={{
-            hostname: '',
-            clientId: '',
-            clientSecret: '',
-          }}
-          onSubmit={data => this.handleSubmit(data, this.props.dispatch)}
-          validate={validate}
-        >
-          {this.renderForm}
-        </Form>
-      </Wrapper>
+        <Main>
+          <Form
+            initialValues={{
+              hostname: '',
+              clientId: '',
+              clientSecret: '',
+            }}
+            onSubmit={data => this.handleSubmit(data, this.props.dispatch)}
+            validate={validate}
+          >
+            {this.renderForm}
+          </Form>
+        </Main>
+      </div>
     );
   }
 }
