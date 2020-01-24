@@ -8,18 +8,18 @@ import styled from 'styled-components';
 
 import { AppState } from '../../types/reducers';
 import { authGithub, isUserEitherLoggedIn } from '../utils/helpers';
-import { LogoDark } from '../components/logos/dark';
+import { Logo } from '../components/ui/logo';
 
 const Wrapper = styled.div`
   padding: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-`;
 
-const Logo = styled(LogoDark)`
-  max-width: 5rem;
-  margin-top: 1rem;
+  .logo {
+    max-width: 5rem;
+    margin-top: 1rem;
+  }
 `;
 
 const Title = styled.h3`
@@ -30,8 +30,7 @@ const Title = styled.h3`
 `;
 
 export const LoginButton = styled.button`
-  font-size: 1rem;
-  font-weight: 300;
+  font-size: 0.85rem;
   border-radius: 5px;
   border: 1px solid ${props => props.theme.primary};
 
@@ -85,7 +84,7 @@ export class LoginPage extends React.Component<IProps> {
 
     return (
       <Wrapper>
-        <Logo />
+        <Logo isDark />
 
         <Title>
           GitHub Notifications <br /> in your menu bar.
@@ -95,7 +94,6 @@ export class LoginPage extends React.Component<IProps> {
           onClick={() => authGithub(undefined, this.props.dispatch)}
           aria-label="Login with GitHub"
         >
-          <Octicon icon={MarkGithub} size={16} />
           <span>Login to GitHub</span>
         </LoginButton>
 
@@ -103,7 +101,6 @@ export class LoginPage extends React.Component<IProps> {
           onClick={() => this.props.history.push('/enterpriselogin')}
           aria-label="Login with GitHub Enterprise"
         >
-          <Octicon icon={MarkGithub} size={16} />
           <span>Login to GitHub Enterprise</span>
         </LoginButton>
       </Wrapper>

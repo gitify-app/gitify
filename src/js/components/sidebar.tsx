@@ -9,7 +9,7 @@ import styled from 'styled-components';
 import { AppState } from '../../types/reducers';
 import { fetchNotifications, logout } from '../actions';
 import { isUserEitherLoggedIn } from '../utils/helpers';
-import { LogoWhite } from './logos/white';
+import { Logo } from './ui/logo';
 import Constants from '../utils/constants';
 
 export const SIDEBAR_WIDTH = '50px';
@@ -146,12 +146,12 @@ export class Sidebar extends React.Component<IProps> {
   }
 
   render() {
-    const { notificationsCount } = this.props;
+    const { isEitherLoggedIn, notificationsCount } = this.props;
 
     return (
       <Wrapper>
         <Main>
-          <LogoWhite onClick={this.onOpenBrowser} />
+          <Logo onClick={this.onOpenBrowser} />
 
           {notificationsCount > 0 && (
             <Status>

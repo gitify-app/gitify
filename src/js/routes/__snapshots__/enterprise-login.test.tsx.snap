@@ -2,19 +2,19 @@
 
 exports[`routes/enterprise-login.js renders correctly 1`] = `
 <div
-  className="sc-htoDjs ddZehC"
+  className="sc-gzVnrw kNSQNr"
 >
   <div
-    className="sc-dnqmqq beAaSt"
+    className="sc-htoDjs fExkNC"
   >
     <h3
-      className="sc-iwsKbI cFqXrH"
+      className="sc-dnqmqq jJLwtP"
     >
       Login to GitHub Enterprise
     </h3>
     <button
       aria-label="Go Back"
-      className="sc-gZMcBi ecMPTh"
+      className="sc-iwsKbI SeFqk"
       onClick={[Function]}
     >
       ×
@@ -87,7 +87,7 @@ exports[`routes/enterprise-login.js renders correctly 1`] = `
       />
     </div>
     <button
-      className="sc-gzVnrw dSexuG"
+      className="sc-bZQynM bGhBCR"
       disabled={true}
       title="Login Button"
       type="submit"
