@@ -162,19 +162,23 @@ export class Sidebar extends React.Component<IProps> {
         </Main>
 
         <Footer>
-          <FooterButton
-            onClick={this.refreshNotifications.bind(this)}
-            aria-label="Refresh Notifications"
-          >
-            <Octicon icon={Sync} size={16} />
-          </FooterButton>
+          {isEitherLoggedIn && (
+            <>
+              <FooterButton
+                onClick={this.refreshNotifications.bind(this)}
+                aria-label="Refresh Notifications"
+              >
+                <Octicon icon={Sync} size={16} />
+              </FooterButton>
 
-          <FooterButton
-            onClick={this.goToSettings.bind(this)}
-            aria-label="Settings"
-          >
-            <Octicon icon={Gear} size={16} />
-          </FooterButton>
+              <FooterButton
+                onClick={this.goToSettings.bind(this)}
+                aria-label="Settings"
+              >
+                <Octicon icon={Gear} size={16} />
+              </FooterButton>
+            </>
+          )}
 
           <FooterButton
             onClick={this.onOpenBrowser}
