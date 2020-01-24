@@ -11,30 +11,33 @@ import { fetchNotifications, updateSetting, logout } from '../actions';
 import { FieldCheckbox } from '../components/ui/checkbox';
 import { updateTrayIcon } from '../utils/comms';
 
-interface IFieldRadio {
-  name: string;
-  label: string;
-  value: string;
-  checked: boolean;
-  onChange: any;
-}
-
 const Wrapper = styled.div`
-  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 `;
 
 const Header = styled.div`
-  margin: 0 0 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: 0 0 1rem;
+  padding: 1rem 2rem 0;
+`;
+
+const Main = styled.div`
+  flex: 1;
+  padding: 0 2rem;
 `;
 
 const Footer = styled.div`
-  margin: 1rem 0;
+  margin: 1rem 0 0;
+  padding: 0.5rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: ${props => props.theme.grayLight};
+  font-size: 0.85rem;
 `;
 
 const Title = styled.h3`
@@ -58,14 +61,14 @@ const ButtonFooter = styled.button`
   border: 0;
   padding: 0.25rem 0.5rem;
   margin: 0.25rem 0.5rem;
-  text-transform: uppercase;
-  font-size: 0.8rem;
-  font-weight: 500;
-  border: 1px solid ${props => props.theme.danger};
+  font-size: 0.75rem;
+  background-color: ${props => props.theme.primary};
+  border: 0x solid ${props => props.theme.danger};
   border-radius: ${props => props.theme.borderRadius};
+  color: white;
 
   &:hover {
-    background-color: ${props => props.theme.danger};
+    background-color: ${props => props.theme.primaryDark};
     color: white;
   }
 
@@ -131,49 +134,51 @@ export class SettingsRoute extends React.Component<IProps> {
             &times;
           </ButtonClose>
         </Header>
-        <FieldCheckbox
-          name="showOnlyParticipating"
-          label="Show only participating"
-          checked={settings.participating}
-          onChange={evt =>
-            this.props.updateSetting('participating', evt.target.checked)
-          }
-        />
-        <FieldCheckbox
-          name="playSound"
-          label="Play sound"
-          checked={settings.playSound}
-          onChange={evt =>
-            this.props.updateSetting('playSound', evt.target.checked)
-          }
-        />
-        <FieldCheckbox
-          name="showNotifications"
-          label="Show notifications"
-          checked={settings.showNotifications}
-          onChange={evt =>
-            this.props.updateSetting('showNotifications', evt.target.checked)
-          }
-        />
-        <FieldCheckbox
-          name="onClickMarkAsRead"
-          label="On Click, Mark as Read"
-          checked={settings.markOnClick}
-          onChange={evt =>
-            this.props.updateSetting('markOnClick', evt.target.checked)
-          }
-        />
-        <FieldCheckbox
-          name="openAtStartUp"
-          label="Open at startup"
-          checked={settings.openAtStartup}
-          onChange={evt =>
-            this.props.updateSetting('openAtStartup', evt.target.checked)
-          }
-        />
+        <Main>
+          <FieldCheckbox
+            name="showOnlyParticipating"
+            label="Show only participating"
+            checked={settings.participating}
+            onChange={evt =>
+              this.props.updateSetting('participating', evt.target.checked)
+            }
+          />
+          <FieldCheckbox
+            name="playSound"
+            label="Play sound"
+            checked={settings.playSound}
+            onChange={evt =>
+              this.props.updateSetting('playSound', evt.target.checked)
+            }
+          />
+          <FieldCheckbox
+            name="showNotifications"
+            label="Show notifications"
+            checked={settings.showNotifications}
+            onChange={evt =>
+              this.props.updateSetting('showNotifications', evt.target.checked)
+            }
+          />
+          <FieldCheckbox
+            name="onClickMarkAsRead"
+            label="On Click, Mark as Read"
+            checked={settings.markOnClick}
+            onChange={evt =>
+              this.props.updateSetting('markOnClick', evt.target.checked)
+            }
+          />
+          <FieldCheckbox
+            name="openAtStartUp"
+            label="Open at startup"
+            checked={settings.openAtStartup}
+            onChange={evt =>
+              this.props.updateSetting('openAtStartup', evt.target.checked)
+            }
+          />
+        </Main>
 
         <Footer>
-          <small>Version: {remote.app.getVersion()}</small>
+          <small>Gitify v{remote.app.getVersion()}</small>
 
           <div>
             <ButtonFooter

@@ -66,6 +66,7 @@ const theme: DefaultTheme = {
 const GlobalStyle = createGlobalStyle`
   html,
   body {
+    height: 100%;
     -webkit-user-select: none;
   }
 
@@ -75,6 +76,10 @@ const GlobalStyle = createGlobalStyle`
       sans-serif;
     margin: 0;
     cursor: default;
+  }
+
+  #gitify {
+    height: 100%;
   }
 
   button {
@@ -100,6 +105,7 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Wrapper = styled.div`
+  height: 100%;
   padding-left: ${SIDEBAR_WIDTH};
 `;
 

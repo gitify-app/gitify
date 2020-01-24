@@ -6,25 +6,20 @@ import { MemoryRouter } from 'react-router-dom';
 const { shell, ipcRenderer } = require('electron');
 
 import { Sidebar, mapStateToProps } from './sidebar';
-import {
-  mockedEnterpriseAccounts,
-  mockedNotificationsRecuderData,
-} from '../__mocks__/mockedData';
-import { AuthState, AppState, SettingsState } from '../../types/reducers';
+import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
+import { AuthState, AppState } from '../../types/reducers';
 
 describe('components/Sidebar.tsx', () => {
   let clock;
 
   const props = {
-    isFetching: false,
-    isGitHubLoggedIn: true,
     isEitherLoggedIn: true,
     connectedAccounts: 2,
     notificationsCount: 4,
     fetchNotifications: jest.fn(),
     history: {
-      goBack: () => {},
-      push: () => {},
+      goBack: jest.fn(),
+      push: jest.fn(),
     },
     location: {
       pathname: '/',
@@ -39,6 +34,8 @@ describe('components/Sidebar.tsx', () => {
     spyOn(window, 'clearInterval');
 
     props.fetchNotifications.mockReset();
+    props.history.goBack.mockReset();
+    props.history.push.mockReset();
   });
 
   afterEach(() => {
@@ -141,6 +138,32 @@ describe('components/Sidebar.tsx', () => {
     props.fetchNotifications.mockReset();
     fireEvent.click(getByLabelText('Refresh Notifications'));
     expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
+  });
+
+  it('go to the settings route', () => {
+    const { getByLabelText } = render(
+      <MemoryRouter>
+        <Sidebar {...props} />
+      </MemoryRouter>
+    );
+    fireEvent.click(getByLabelText('Settings'));
+    expect(props.history.push).toHaveBeenCalledTimes(1);
+  });
+
+  it('go to back to home from the settings route', () => {
+    const caseProps = {
+      ...props,
+      location: {
+        pathname: '/settings',
+      },
+    };
+    const { getByLabelText } = render(
+      <MemoryRouter>
+        <Sidebar {...caseProps} />
+      </MemoryRouter>
+    );
+    fireEvent.click(getByLabelText('Settings'));
+    expect(props.history.goBack).toHaveBeenCalledTimes(1);
   });
 
   it('open the gitify repo in browser', () => {
