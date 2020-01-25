@@ -4,6 +4,7 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import Octicon, { Check } from '@primer/octicons-react';
+import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { markRepoNotifications } from '../actions';
 import { Notification } from '../../types/github';
@@ -53,25 +54,25 @@ const Button = styled.button`
 
 interface IProps {
   hostname: string;
-  repo: Notification[];
+  repoNotifications: Notification[];
   repoName: string;
   markRepoNotifications: (repoSlug: string, hostname: string) => void;
 }
 
-export const RepositoryNotifications = (props: IProps) => {
+export const RepositoryNotifications: React.FC<IProps> = props => {
   const openBrowser = () => {
-    const url = props.repo[0].repository.html_url;
+    const url = props.repoNotifications[0].repository.html_url;
     shell.openExternal(url);
   };
 
   const markRepoAsRead = () => {
-    const { hostname, repo } = props;
-    const repoSlug = repo[0].repository.full_name;
+    const { hostname, repoNotifications } = props;
+    const repoSlug = repoNotifications[0].repository.full_name;
     props.markRepoNotifications(repoSlug, hostname);
   };
 
-  const { hostname, repo } = props;
-  const avatarUrl = repo[0].repository.owner.avatar_url;
+  const { hostname, repoNotifications } = props;
+  const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
 
   return (
     <>
@@ -92,9 +93,17 @@ export const RepositoryNotifications = (props: IProps) => {
         </IconWrapper>
       </Wrapper>
 
-      {repo.map(obj => (
-        <NotificationItem key={obj.id} hostname={hostname} notification={obj} />
-      ))}
+      <TransitionGroup>
+        {repoNotifications.map(obj => (
+          <CSSTransition key={obj.id} timeout={250} classNames="notification">
+            <NotificationItem
+              key={obj.id}
+              hostname={hostname}
+              notification={obj}
+            />
+          </CSSTransition>
+        ))}
+      </TransitionGroup>
     </>
   );
 };

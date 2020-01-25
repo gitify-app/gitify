@@ -102,6 +102,18 @@ const GlobalStyle = createGlobalStyle`
       height: 2px;
     }
   }
+
+  .notification-exit {
+    transform: translate3d(0px, 0, 0);
+    opacity: 1;
+    transition-duration: 250ms;
+    transition-timing-function: cubic-bezier(0.175, 0.665, 0.32, 1), linear;
+  
+    &.notification-exit-active {
+      transform: translate3d(350px, 0, 0);
+      opacity: 0;
+    }
+  }
 `;
 
 const Wrapper = styled.div`

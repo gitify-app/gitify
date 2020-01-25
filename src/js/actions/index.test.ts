@@ -630,25 +630,6 @@ describe('actions/index.js', () => {
       });
   });
 
-  it('should search the notifications with a query', () => {
-    const query = 'hello';
-
-    const expectedAction = {
-      type: actions.SEARCH_NOTIFICATIONS,
-      query,
-    };
-
-    expect(actions.searchNotifications(query)).toEqual(expectedAction);
-  });
-
-  it('should clear the search query', () => {
-    const expectedAction = {
-      type: actions.CLEAR_SEARCH,
-    };
-
-    expect(actions.clearSearch()).toEqual(expectedAction);
-  });
-
   it('should update a setting for a user', () => {
     const setting = 'participating';
     const value = true;

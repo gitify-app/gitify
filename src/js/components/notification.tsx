@@ -69,59 +69,57 @@ interface IProps {
   markNotification: (id: string, hostname: string) => void;
 }
 
-export class NotificationItem extends React.Component<IProps, {}> {
-  pressTitle() {
-    this.openBrowser();
+export const NotificationItem: React.FC<IProps> = props => {
+  const pressTitle = () => {
+    openBrowser();
 
-    if (this.props.markOnClick) {
-      this.markAsRead();
+    if (props.markOnClick) {
+      markAsRead();
     }
-  }
+  };
 
-  openBrowser() {
-    const url = generateGitHubWebUrl(this.props.notification.subject.url);
+  const openBrowser = () => {
+    const url = generateGitHubWebUrl(props.notification.subject.url);
     shell.openExternal(url);
-  }
+  };
 
-  markAsRead() {
-    const { hostname, notification } = this.props;
-    this.props.markNotification(notification.id, hostname);
-  }
+  const markAsRead = () => {
+    const { hostname, notification } = props;
+    props.markNotification(notification.id, hostname);
+  };
 
-  render() {
-    const { notification } = this.props;
-    const reason = formatReason(notification.reason);
-    const typeIcon = getNotificationTypeIcon(notification.subject.type);
-    const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
-      addSuffix: true,
-    });
+  const { notification } = props;
+  const reason = formatReason(notification.reason);
+  const typeIcon = getNotificationTypeIcon(notification.subject.type);
+  const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
+    addSuffix: true,
+  });
 
-    return (
-      <Wrapper>
-        <IconWrapper>
-          <Octicon
-            icon={getIconByName(typeIcon)}
-            size={20}
-            ariaLabel={notification.subject.type}
-          />
-        </IconWrapper>
-        <Main onClick={() => this.pressTitle()} role="main">
-          <Title>{notification.subject.title}</Title>
+  return (
+    <Wrapper>
+      <IconWrapper>
+        <Octicon
+          icon={getIconByName(typeIcon)}
+          size={20}
+          ariaLabel={notification.subject.type}
+        />
+      </IconWrapper>
+      <Main onClick={() => pressTitle()} role="main">
+        <Title>{notification.subject.title}</Title>
 
-          <Details>
-            <span title={reason.description}>{reason.type}</span> - Updated{' '}
-            {updatedAt}
-          </Details>
-        </Main>
-        <IconWrapper>
-          <Button onClick={() => this.markAsRead()}>
-            <Octicon icon={Check} size={20} ariaLabel="Mark as Read" />
-          </Button>
-        </IconWrapper>
-      </Wrapper>
-    );
-  }
-}
+        <Details>
+          <span title={reason.description}>{reason.type}</span> - Updated{' '}
+          {updatedAt}
+        </Details>
+      </Main>
+      <IconWrapper>
+        <Button onClick={() => markAsRead()}>
+          <Octicon icon={Check} size={20} ariaLabel="Mark as Read" />
+        </Button>
+      </IconWrapper>
+    </Wrapper>
+  );
+};
 
 export function mapStateToProps(state: AppState) {
   return {
