@@ -6,9 +6,9 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack --config webpack.common.js --watch",
-    "package": "electron-packager . Gitify --overwrite --platform=darwin --arch=x64 --electron-version=7.1.7 --asar --icon=images/app-icon.icns --ignore='src' --ignore='coverage'",
-    "codesign": "bash scripts/codesign.bash",
-    "dist": "yarn build && yarn package && yarn codesign",
+    "pack": "electron-builder --dir",
+    "make:macos": "electron-builder --mac",
+    "dist": "yarn build && yarn make:macos",
     "prettier-check": "prettier --check 'src/**/*.{js,ts,tsx}'",
     "prettier": "prettier --single-quote --trailing-comma es5 --write 'src/**/*.{js,ts,tsx}'",
     "jest": "jest",
@@ -55,6 +55,20 @@
       }
     }
   },
+  "build": {
+    "appId": "com.electron.gitify",
+    "productName": "Gitify",
+    "files": ["index.html", "LICENSE", "main.js", "build/**/*", "images/*"],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "target": "dmg",
+      "icon": "images/app-icon.icns",
+      "identity": "Emmanouil Konstantinidis (3YP8SXP3BF)"
+    },
+    "dmg": {
+      "icon": "images/app-icon.icns"
+    }
+  },
   "dependencies": {
     "@primer/octicons-react": "^9.3.1",
     "auto-launch": "=5.0.5",
@@ -92,6 +106,7 @@
     "@types/react-transition-group": "^4.2.3",
     "@types/styled-components": "^4.4.1",
     "electron": "=7.1.9",
+    "electron-builder": "^22.3.2",
     "electron-packager": "=14.1.1",
     "jest": "^24.9.0",
     "nock": "=11.7.0",
