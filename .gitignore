@@ -77,4 +77,4 @@ tmp/
 temp/
 
 dist/
-Gitify-darwin-x64/
+build/
