@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "module": "es6",
+    "moduleResolution": "node",
+    "target": "es5",
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "jsx": "react",
+    "allowJs": true,
+    "typeRoots": ["./src/types", "node_modules/@types"]
+  },
+  "exclude": ["node_modules"],
+  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"]
+}

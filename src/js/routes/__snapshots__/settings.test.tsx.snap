@@ -1,0 +1,329 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`routes/settings.tsx should render itself & its children 1`] = `
+<div
+  className="sc-EHOje bIfgFX"
+>
+  <div
+    className="sc-bZQynM fISyMH"
+  >
+    <h3
+      className="sc-dnqmqq jJLwtP"
+    >
+      Settings
+    </h3>
+    <button
+      aria-label="Close Settings"
+      className="sc-iwsKbI SeFqk"
+      onClick={[Function]}
+    >
+      ×
+    </button>
+  </div>
+  <div
+    className="sc-gzVnrw kukodc"
+  >
+    <div
+      className="sc-bdVaJa jfPzWn"
+    >
+      <label>
+        <div
+          className="sc-bwzfXH fnAEVU"
+        >
+          <input
+            checked={false}
+            className="sc-bxivhb hZSXJG"
+            label="Show only participating"
+            name="showOnlyParticipating"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            className="sc-ifAKCX kfOBSV"
+          >
+            <svg
+              className="sc-htpNat iPrSGo"
+              viewBox="0 0 24 24"
+            >
+              <g
+                fill="none"
+                fillRule="evenodd"
+                stroke="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1"
+              >
+                <g
+                  stroke="#FFFFFF"
+                  strokeWidth="3"
+                  transform="translate(6.000000, 7.000000)"
+                >
+                  <polyline
+                    points="13 0 4.0625 9 0 4.90909091"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <span
+          style={
+            Object {
+              "marginLeft": "1rem",
+            }
+          }
+        >
+          Show only participating
+        </span>
+      </label>
+    </div>
+    <div
+      className="sc-bdVaJa jfPzWn"
+    >
+      <label>
+        <div
+          className="sc-bwzfXH fnAEVU"
+        >
+          <input
+            checked={true}
+            className="sc-bxivhb hZSXJG"
+            label="Play sound"
+            name="playSound"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            className="sc-ifAKCX RDSID"
+          >
+            <svg
+              className="sc-htpNat iPrSGo"
+              viewBox="0 0 24 24"
+            >
+              <g
+                fill="none"
+                fillRule="evenodd"
+                stroke="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1"
+              >
+                <g
+                  stroke="#FFFFFF"
+                  strokeWidth="3"
+                  transform="translate(6.000000, 7.000000)"
+                >
+                  <polyline
+                    points="13 0 4.0625 9 0 4.90909091"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <span
+          style={
+            Object {
+              "marginLeft": "1rem",
+            }
+          }
+        >
+          Play sound
+        </span>
+      </label>
+    </div>
+    <div
+      className="sc-bdVaJa jfPzWn"
+    >
+      <label>
+        <div
+          className="sc-bwzfXH fnAEVU"
+        >
+          <input
+            checked={true}
+            className="sc-bxivhb hZSXJG"
+            label="Show notifications"
+            name="showNotifications"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            className="sc-ifAKCX RDSID"
+          >
+            <svg
+              className="sc-htpNat iPrSGo"
+              viewBox="0 0 24 24"
+            >
+              <g
+                fill="none"
+                fillRule="evenodd"
+                stroke="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1"
+              >
+                <g
+                  stroke="#FFFFFF"
+                  strokeWidth="3"
+                  transform="translate(6.000000, 7.000000)"
+                >
+                  <polyline
+                    points="13 0 4.0625 9 0 4.90909091"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <span
+          style={
+            Object {
+              "marginLeft": "1rem",
+            }
+          }
+        >
+          Show notifications
+        </span>
+      </label>
+    </div>
+    <div
+      className="sc-bdVaJa jfPzWn"
+    >
+      <label>
+        <div
+          className="sc-bwzfXH fnAEVU"
+        >
+          <input
+            checked={false}
+            className="sc-bxivhb hZSXJG"
+            label="On Click, Mark as Read"
+            name="onClickMarkAsRead"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            className="sc-ifAKCX kfOBSV"
+          >
+            <svg
+              className="sc-htpNat iPrSGo"
+              viewBox="0 0 24 24"
+            >
+              <g
+                fill="none"
+                fillRule="evenodd"
+                stroke="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1"
+              >
+                <g
+                  stroke="#FFFFFF"
+                  strokeWidth="3"
+                  transform="translate(6.000000, 7.000000)"
+                >
+                  <polyline
+                    points="13 0 4.0625 9 0 4.90909091"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <span
+          style={
+            Object {
+              "marginLeft": "1rem",
+            }
+          }
+        >
+          On Click, Mark as Read
+        </span>
+      </label>
+    </div>
+    <div
+      className="sc-bdVaJa jfPzWn"
+    >
+      <label>
+        <div
+          className="sc-bwzfXH fnAEVU"
+        >
+          <input
+            checked={false}
+            className="sc-bxivhb hZSXJG"
+            label="Open at startup"
+            name="openAtStartUp"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            className="sc-ifAKCX kfOBSV"
+          >
+            <svg
+              className="sc-htpNat iPrSGo"
+              viewBox="0 0 24 24"
+            >
+              <g
+                fill="none"
+                fillRule="evenodd"
+                stroke="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1"
+              >
+                <g
+                  stroke="#FFFFFF"
+                  strokeWidth="3"
+                  transform="translate(6.000000, 7.000000)"
+                >
+                  <polyline
+                    points="13 0 4.0625 9 0 4.90909091"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <span
+          style={
+            Object {
+              "marginLeft": "1rem",
+            }
+          }
+        >
+          Open at startup
+        </span>
+      </label>
+    </div>
+  </div>
+  <div
+    className="sc-htoDjs bsVypt"
+  >
+    <small>
+      Gitify v
+      0.0.1
+    </small>
+    <div>
+      <button
+        aria-label="Login with GitHub Enterprise"
+        className="sc-gZMcBi loTXCJ"
+        onClick={[Function]}
+      >
+        Add Enterprise
+      </button>
+      <button
+        aria-label="Logout"
+        className="sc-gZMcBi loTXCJ"
+        onClick={[Function]}
+      >
+        Logout
+      </button>
+      <button
+        aria-label="Quit Gitify"
+        className="sc-gZMcBi loTXCJ"
+        onClick={[Function]}
+      >
+        Quit
+      </button>
+    </div>
+  </div>
+</div>
+`;

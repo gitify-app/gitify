@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/all-read.tsx should render itself & its children 1`] = `
+<div
+  className="sc-bdVaJa jZnlmR"
+>
+  <div
+    className="sc-bwzfXH flHJOa"
+  >
+    😉
+  </div>
+  <h2
+    className="sc-htpNat XhagL"
+  />
+  <h4
+    className="sc-bxivhb ijKRfN"
+  >
+    No new notifications.
+  </h4>
+</div>
+`;

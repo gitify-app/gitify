@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/account-notifications.tsx should render itself (github.com with notifications) 1`] = `
+<div
+  className="sc-bdVaJa dCCnan"
+>
+  github.com
+  <svg
+    aria-hidden="true"
+    className="octicon"
+    height={20}
+    role="img"
+    style={
+      Object {
+        "display": "inline-block",
+        "fill": "currentColor",
+        "userSelect": "none",
+        "verticalAlign": "text-bottom",
+      }
+    }
+    viewBox="0 0 10 16"
+    width={12.5}
+  >
+    <path
+      d="M5 11L0 6l1.5-1.5L5 8.25 8.5 4.5 10 6l-5 5z"
+      fillRule="evenodd"
+    />
+  </svg>
+</div>
+`;
+
+exports[`components/account-notifications.tsx should render itself (github.com without notifications) 1`] = `
+<div
+  className="sc-bdVaJa dCCnan"
+>
+  github.com
+  <svg
+    aria-hidden="true"
+    className="octicon"
+    height={20}
+    role="img"
+    style={
+      Object {
+        "display": "inline-block",
+        "fill": "currentColor",
+        "userSelect": "none",
+        "verticalAlign": "text-bottom",
+      }
+    }
+    viewBox="0 0 8 16"
+    width={10}
+  >
+    <path
+      d="M5.5 3L7 4.5 3.25 8 7 11.5 5.5 13l-5-5 5-5z"
+      fillRule="evenodd"
+    />
+  </svg>
+</div>
+`;

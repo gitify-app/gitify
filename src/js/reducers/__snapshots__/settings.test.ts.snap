@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reducers/settings.ts should handle UPDATE_SETTING 1`] = `
+Object {
+  "markOnClick": false,
+  "openAtStartup": false,
+  "participating": true,
+  "playSound": true,
+  "showNotifications": true,
+}
+`;
+
+exports[`reducers/settings.ts should handle UPDATE_SETTING 2`] = `
+Object {
+  "markOnClick": false,
+  "openAtStartup": true,
+  "participating": false,
+  "playSound": true,
+  "showNotifications": true,
+}
+`;
+
+exports[`reducers/settings.ts should return the initial state 1`] = `
+Object {
+  "markOnClick": false,
+  "openAtStartup": false,
+  "participating": false,
+  "playSound": true,
+  "showNotifications": true,
+}
+`;

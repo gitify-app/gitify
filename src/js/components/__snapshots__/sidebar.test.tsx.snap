@@ -1,0 +1,279 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Sidebar.tsx should render itself & its children (logged in) 1`] = `
+<div
+  className="sc-bdVaJa bJzENG"
+>
+  <div
+    className="sc-bwzfXH jRnrHk"
+  >
+    <svg
+      className="logo"
+      onClick={[Function]}
+      role="logo"
+      viewBox="0 0 500 500"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
+      <defs>
+        <linearGradient
+          id="linearGradient-light"
+          x1="90.8779989%"
+          x2="-1.30249747%"
+          y1="80.0676288%"
+          y2="32.7108237%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#CCCCCC"
+          />
+          <stop
+            offset="100%"
+            stopColor="#FFFFFF"
+          />
+        </linearGradient>
+      </defs>
+      <g
+        fill="none"
+        fillRule="evenodd"
+        stroke="none"
+        strokeWidth="1"
+      >
+        <g
+          fill="url(#linearGradient-light)"
+          fillRule="nonzero"
+          id="Logo"
+          transform="translate(6.000000, 6.000000)"
+        >
+          <path
+            d="M330.391053,10.2526316 C361.413773,10.2526316 386.562656,35.4015165 386.562656,66.4242368 C386.562656,97.4469571 361.413773,122.595841 330.391053,122.595842 L330.365421,122.570211 L247.319105,122.570211 C180.042515,122.499128 125.399186,176.890222 125.159,244.166421 L125.133789,244.219632 L125.154247,245.84774 C126.219609,301.255958 164.473457,349.116728 218.453292,362.268048 C272.940509,375.542983 329.466993,350.045988 355.583747,300.428701 L272.258632,300.427737 C257.346614,300.427737 243.046846,294.496977 232.512078,283.942976 C221.97731,273.388975 216.072618,259.078414 216.099748,244.166421 C216.099748,213.150778 241.242989,188.007632 272.258632,188.007632 L371.119632,188.007632 C379.28704,188.480415 386.935401,192.166372 392.393842,198.260263 L474.869789,300.324632 L474.978789,300.325211 L474.952789,300.426632 L474.953158,300.427737 L474.951789,300.427632 L474.173714,303.448935 C446.939817,406.220475 353.906452,478.028529 247.319105,478.080211 C118.007789,478.080211 12.8157895,373.144526 12.8157895,244.166421 C12.8157895,115.188316 117.905263,10.2526316 247.319105,10.2526316 L330.391053,10.2526316 Z"
+          />
+        </g>
+      </g>
+    </svg>
+    <div
+      className="sc-htpNat eTZewv"
+    >
+      <svg
+        aria-hidden="true"
+        className="octicon"
+        height={12}
+        role="img"
+        style={
+          Object {
+            "display": "inline-block",
+            "fill": "currentColor",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 14 16"
+        width={10.5}
+      >
+        <path
+          d="M14 12v1H0v-1l.73-.58c.77-.77.81-2.55 1.19-4.42C2.69 3.23 6 2 6 2c0-.55.45-1 1-1s1 .45 1 1c0 0 3.39 1.23 4.16 5 .38 1.88.42 3.66 1.19 4.42l.66.58H14zm-7 4c1.11 0 2-.89 2-2H5c0 1.11.89 2 2 2z"
+          fillRule="evenodd"
+        />
+      </svg>
+      4
+    </div>
+  </div>
+  <div
+    className="sc-bxivhb jvFxMg"
+  >
+    <button
+      aria-label="Refresh Notifications"
+      className="sc-ifAKCX nrRVs"
+      onClick={[Function]}
+    >
+      <svg
+        aria-hidden="true"
+        className="octicon"
+        height={16}
+        role="img"
+        style={
+          Object {
+            "display": "inline-block",
+            "fill": "currentColor",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 12 16"
+        width={12}
+      >
+        <path
+          d="M10.24 7.4a4.15 4.15 0 01-1.2 3.6 4.346 4.346 0 01-5.41.54L4.8 10.4.5 9.8l.6 4.2 1.31-1.26c2.36 1.74 5.7 1.57 7.84-.54a5.876 5.876 0 001.74-4.46l-1.75-.34zM2.96 5a4.346 4.346 0 015.41-.54L7.2 5.6l4.3.6-.6-4.2-1.31 1.26c-2.36-1.74-5.7-1.57-7.85.54C.5 5.03-.06 6.65.01 8.26l1.75.35A4.17 4.17 0 012.96 5z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </button>
+    <button
+      aria-label="Settings"
+      className="sc-ifAKCX nrRVs"
+      onClick={[Function]}
+    >
+      <svg
+        aria-hidden="true"
+        className="octicon"
+        height={16}
+        role="img"
+        style={
+          Object {
+            "display": "inline-block",
+            "fill": "currentColor",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 14 16"
+        width={14}
+      >
+        <path
+          d="M14 8.77v-1.6l-1.94-.64-.45-1.09.88-1.84-1.13-1.13-1.81.91-1.09-.45-.69-1.92h-1.6l-.63 1.94-1.11.45-1.84-.88-1.13 1.13.91 1.81-.45 1.09L0 7.23v1.59l1.94.64.45 1.09-.88 1.84 1.13 1.13 1.81-.91 1.09.45.69 1.92h1.59l.63-1.94 1.11-.45 1.84.88 1.13-1.13-.92-1.81.47-1.09L14 8.75v.02zM7 11c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </button>
+    <button
+      aria-label="View project on GitHub"
+      className="sc-ifAKCX nrRVs"
+      onClick={[Function]}
+    >
+      <svg
+        aria-hidden="true"
+        className="octicon"
+        height={14}
+        role="img"
+        style={
+          Object {
+            "display": "inline-block",
+            "fill": "currentColor",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 16 16"
+        width={14}
+      >
+        <path
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`components/Sidebar.tsx should render itself & its children (logged out) 1`] = `
+<div
+  className="sc-bdVaJa bJzENG"
+>
+  <div
+    className="sc-bwzfXH jRnrHk"
+  >
+    <svg
+      className="logo"
+      onClick={[Function]}
+      role="logo"
+      viewBox="0 0 500 500"
+      xmlns="http://www.w3.org/2000/svg"
+      xmlnsXlink="http://www.w3.org/1999/xlink"
+    >
+      <defs>
+        <linearGradient
+          id="linearGradient-light"
+          x1="90.8779989%"
+          x2="-1.30249747%"
+          y1="80.0676288%"
+          y2="32.7108237%"
+        >
+          <stop
+            offset="0%"
+            stopColor="#CCCCCC"
+          />
+          <stop
+            offset="100%"
+            stopColor="#FFFFFF"
+          />
+        </linearGradient>
+      </defs>
+      <g
+        fill="none"
+        fillRule="evenodd"
+        stroke="none"
+        strokeWidth="1"
+      >
+        <g
+          fill="url(#linearGradient-light)"
+          fillRule="nonzero"
+          id="Logo"
+          transform="translate(6.000000, 6.000000)"
+        >
+          <path
+            d="M330.391053,10.2526316 C361.413773,10.2526316 386.562656,35.4015165 386.562656,66.4242368 C386.562656,97.4469571 361.413773,122.595841 330.391053,122.595842 L330.365421,122.570211 L247.319105,122.570211 C180.042515,122.499128 125.399186,176.890222 125.159,244.166421 L125.133789,244.219632 L125.154247,245.84774 C126.219609,301.255958 164.473457,349.116728 218.453292,362.268048 C272.940509,375.542983 329.466993,350.045988 355.583747,300.428701 L272.258632,300.427737 C257.346614,300.427737 243.046846,294.496977 232.512078,283.942976 C221.97731,273.388975 216.072618,259.078414 216.099748,244.166421 C216.099748,213.150778 241.242989,188.007632 272.258632,188.007632 L371.119632,188.007632 C379.28704,188.480415 386.935401,192.166372 392.393842,198.260263 L474.869789,300.324632 L474.978789,300.325211 L474.952789,300.426632 L474.953158,300.427737 L474.951789,300.427632 L474.173714,303.448935 C446.939817,406.220475 353.906452,478.028529 247.319105,478.080211 C118.007789,478.080211 12.8157895,373.144526 12.8157895,244.166421 C12.8157895,115.188316 117.905263,10.2526316 247.319105,10.2526316 L330.391053,10.2526316 Z"
+          />
+        </g>
+      </g>
+    </svg>
+    <div
+      className="sc-htpNat eTZewv"
+    >
+      <svg
+        aria-hidden="true"
+        className="octicon"
+        height={12}
+        role="img"
+        style={
+          Object {
+            "display": "inline-block",
+            "fill": "currentColor",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 14 16"
+        width={10.5}
+      >
+        <path
+          d="M14 12v1H0v-1l.73-.58c.77-.77.81-2.55 1.19-4.42C2.69 3.23 6 2 6 2c0-.55.45-1 1-1s1 .45 1 1c0 0 3.39 1.23 4.16 5 .38 1.88.42 3.66 1.19 4.42l.66.58H14zm-7 4c1.11 0 2-.89 2-2H5c0 1.11.89 2 2 2z"
+          fillRule="evenodd"
+        />
+      </svg>
+      4
+    </div>
+  </div>
+  <div
+    className="sc-bxivhb jvFxMg"
+  >
+    <button
+      aria-label="View project on GitHub"
+      className="sc-ifAKCX nrRVs"
+      onClick={[Function]}
+    >
+      <svg
+        aria-hidden="true"
+        className="octicon"
+        height={14}
+        role="img"
+        style={
+          Object {
+            "display": "inline-block",
+            "fill": "currentColor",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 16 16"
+        width={14}
+      >
+        <path
+          d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"
+          fillRule="evenodd"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;

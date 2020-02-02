@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/repository.tsx should render itself & its children 1`] = `
+Array [
+  <div
+    className="sc-bdVaJa dofWkW"
+  >
+    <div
+      className="sc-bwzfXH gkcRsd"
+    >
+      <img
+        className="sc-htpNat tFenb"
+        src="https://avatars0.githubusercontent.com/u/6333409?v=3"
+      />
+      <span
+        onClick={[Function]}
+      >
+        manosim/gitify
+      </span>
+    </div>
+    <div
+      className="sc-bxivhb BLpai"
+    >
+      <button
+        className="sc-ifAKCX eEESsB"
+        onClick={[Function]}
+      >
+        <svg
+          aria-hidden="false"
+          aria-label="Mark Repository as Read"
+          className="octicon"
+          height={20}
+          role="img"
+          style={
+            Object {
+              "display": "inline-block",
+              "fill": "currentColor",
+              "userSelect": "none",
+              "verticalAlign": "text-bottom",
+            }
+          }
+          viewBox="0 0 12 16"
+          width={15}
+        >
+          <path
+            d="M12 5l-8 8-4-4 1.5-1.5L4 10l6.5-6.5L12 5z"
+            fillRule="evenodd"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>,
+  <div />,
+]
+`;

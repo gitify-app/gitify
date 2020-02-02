@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`./utils/github-api.ts should format the notification reason 1`] = `
+Object {
+  "description": "You were assigned to the issue.",
+  "type": "Assign",
+}
+`;
+
+exports[`./utils/github-api.ts should format the notification reason 2`] = `
+Object {
+  "description": "You created the thread.",
+  "type": "Author",
+}
+`;
+
+exports[`./utils/github-api.ts should format the notification reason 3`] = `
+Object {
+  "description": "You commented on the thread.",
+  "type": "Comment",
+}
+`;
+
+exports[`./utils/github-api.ts should format the notification reason 4`] = `
+Object {
+  "description": "You accepted an invitation to contribute to the repository.",
+  "type": "Invitation",
+}
+`;
+
+exports[`./utils/github-api.ts should format the notification reason 5`] = `
+Object {
+  "description": "You subscribed to the thread (via an issue or pull request).",
+  "type": "Manual",
+}
+`;
+
+exports[`./utils/github-api.ts should format the notification reason 6`] = `
+Object {
+  "description": "You were specifically @mentioned in the content.",
+  "type": "Mention",
+}
+`;
+
+exports[`./utils/github-api.ts should format the notification reason 7`] = `
+Object {
+  "description": "You, or a team you're a member of, were requested to review a pull request.",
+  "type": "Review Requested",
+}
+`;
+
+exports[`./utils/github-api.ts should format the notification reason 8`] = `
+Object {
+  "description": "GitHub discovered a security vulnerability in your repository.",
+  "type": "Security Alert",
+}
+`;
+
+exports[`./utils/github-api.ts should format the notification reason 9`] = `
+Object {
+  "description": "You changed the thread state (for example, closing an issue or merging a pull request).",
+  "type": "State Change",
+}
+`;
+
+exports[`./utils/github-api.ts should format the notification reason 10`] = `
+Object {
+  "description": "You're watching the repository.",
+  "type": "Subscribed",
+}
+`;
+
+exports[`./utils/github-api.ts should format the notification reason 11`] = `
+Object {
+  "description": "You were on a team that was mentioned.",
+  "type": "Team Mention",
+}
+`;
+
+exports[`./utils/github-api.ts should format the notification reason 12`] = `
+Object {
+  "description": "The reason for this notification is not supported by the app.",
+  "type": "Unknown",
+}
+`;

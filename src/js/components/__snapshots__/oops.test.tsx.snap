@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/oops.tsx should render itself & its children 1`] = `
+<div
+  className="sc-bdVaJa jZnlmR"
+>
+  <div
+    className="sc-bwzfXH flHJOa"
+  >
+    😔
+  </div>
+  <h2
+    className="sc-htpNat XhagL"
+  >
+    Something went wrong.
+  </h2>
+  <h4
+    className="sc-bxivhb ijKRfN"
+  >
+    Couldn't get your notifications.
+  </h4>
+</div>
+`;

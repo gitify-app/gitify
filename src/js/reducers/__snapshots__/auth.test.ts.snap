@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`reducers/auth.ts should handle LOGIN.FAILURE 1`] = `
+Object {
+  "failed": true,
+  "isFetching": false,
+  "response": Object {
+    "msg": "Failed to login.",
+  },
+  "token": null,
+}
+`;
+
+exports[`reducers/auth.ts should handle LOGIN.REQUEST 1`] = `
+Object {
+  "enterpriseAccounts": Array [],
+  "failed": false,
+  "isFetching": true,
+  "response": Object {},
+  "token": null,
+}
+`;
+
+exports[`reducers/auth.ts should handle LOGIN.SUCCESS - enterprise 1`] = `
+Object {
+  "enterpriseAccounts": Array [
+    Object {
+      "hostname": "github.gitify.io",
+      "token": "123HELLOWORLDTOKEN",
+    },
+  ],
+  "failed": false,
+  "isFetching": false,
+  "response": Object {},
+  "token": null,
+}
+`;
+
+exports[`reducers/auth.ts should handle LOGIN.SUCCESS - github.com 1`] = `
+Object {
+  "enterpriseAccounts": Array [],
+  "failed": false,
+  "isFetching": false,
+  "response": Object {},
+  "token": "123HELLOWORLDTOKEN",
+}
+`;
+
+exports[`reducers/auth.ts should handle LOGOUT 1`] = `
+Object {
+  "enterpriseAccounts": Array [],
+  "failed": false,
+  "isFetching": false,
+  "response": null,
+  "token": null,
+}
+`;
+
+exports[`reducers/auth.ts should return the initial state 1`] = `
+Object {
+  "enterpriseAccounts": Array [],
+  "failed": false,
+  "isFetching": false,
+  "response": Object {},
+  "token": null,
+}
+`;
