@@ -1,8 +1,8 @@
-# Gitify [![circleci][circleci-image]][circleci-url] [![codecov][codecov-image]][codecov-url] [![downloads][downloads-image]][downloads-url]
+# Gitify [![github][github-image]][github-url] [![codecov][codecov-image]][codecov-url] [![downloads][downloads-image]][downloads-url]
 
 > The mobile app has been depreacated in favor of the official GitHub mobile app the is coming out [soon](https://github.com/mobile).
 
-![Gitify](images/press.jpg)
+![Gitify](assets/images/press.jpg)
 
 ### Download
 
@@ -86,8 +86,8 @@ Since version `1.1.0` you can now debug Gitify by pressing `alt+cmd+I`. This wil
 
 Gitify is licensed under the MIT Open Source license. For more information, see the LICENSE file in this repository.
 
-[circleci-image]: https://circleci.com/gh/manosim/gitify.svg?style=svg
-[circleci-url]: https://circleci.com/gh/manosim/gitify
+[github-image]: https://github.com/manosim/gitify/workflows/CI/badge.svg
+[github-url]: https://circleci.com/gh/manosim/gitify
 [codecov-image]: https://codecov.io/gh/manosim/gitify/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/manosim/gitify
 [downloads-image]: https://img.shields.io/github/downloads/manosim/gitify/total.svg

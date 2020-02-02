@@ -3,7 +3,7 @@
     "module": "es6",
     "moduleResolution": "node",
     "target": "es5",
-    "outDir": "./dist/",
+    "outDir": "./build/",
     "sourceMap": true,
     "noImplicitAny": false,
     "jsx": "react",

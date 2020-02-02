@@ -20,8 +20,7 @@ const Icon = styled.svg`
 // Source: https://polished.js.org/docs/#hidevisually
 const HiddenCheckbox = styled.input.attrs({ type: 'checkbox' })`
   border: 0;
-  clip: rect(0 0 0 0);
-  clippath: inset(50%);
+  clip-path: inset(50%);
   height: 1px;
   margin: -1px;
   overflow: hidden;
@@ -37,7 +36,7 @@ const StyledCheckbox = styled.div`
   height: 24px;
   background: ${props =>
     // @ts-ignore
-    props.isChecked ? props.theme.primaryDark : props.theme.primary}
+    props.isChecked ? props.theme.primaryDark : props.theme.primary};
   border-radius: 3px;
   transition: all 150ms;
 
@@ -47,7 +46,7 @@ const StyledCheckbox = styled.div`
 
   ${Icon} {
     // @ts-ignore
-    visibility: ${props => (props.isChecked ? 'visible' : 'hidden')}
+    visibility: ${props => (props.isChecked ? 'visible' : 'hidden')};
   }
 `;
 

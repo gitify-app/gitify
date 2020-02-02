@@ -2,7 +2,7 @@
 
 exports[`routes/login.tsx should render itself & its children 1`] = `
 <div
-  className="sc-bdVaJa dkcnjv"
+  className="sc-AykKC bbjmpG"
 >
   <svg
     className="logo"
@@ -49,7 +49,7 @@ exports[`routes/login.tsx should render itself & its children 1`] = `
     </g>
   </svg>
   <h3
-    className="sc-bwzfXH cOImIv"
+    className="sc-AykKD ghxDqX"
   >
     GitHub Notifications 
     <br />
@@ -57,7 +57,7 @@ exports[`routes/login.tsx should render itself & its children 1`] = `
   </h3>
   <button
     aria-label="Login with GitHub"
-    className="sc-htpNat fOyazi"
+    className="sc-AykKE cOyJHY"
     onClick={[Function]}
   >
     <span>
@@ -66,7 +66,7 @@ exports[`routes/login.tsx should render itself & its children 1`] = `
   </button>
   <button
     aria-label="Login with GitHub Enterprise"
-    className="sc-htpNat fOyazi"
+    className="sc-AykKE cOyJHY"
     onClick={[Function]}
   >
     <span>
