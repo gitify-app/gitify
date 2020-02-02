@@ -3,9 +3,8 @@ name: CI
 on: [push]
 
 jobs:
-  run-unit-tests:
-
-    runs-on: macos-10.15
+  setup:
+    runs-on: ubuntu-18.04
 
     steps:
     - uses: actions/checkout@v2
@@ -24,11 +23,31 @@ jobs:
     - name: Install Dependencies
       run: yarn install
 
-    - name: Build
-      run: yarn build
+  run-unit-tests:
+    runs-on: macos-10.15
+    needs: setup
+
+    steps:
+    - uses: actions/checkout@v2
 
     - name: Run Prettier (Check)
       run: yarn prettier-check
 
     - name: Run Jest
       run: yarn test --coverage --runInBand
+
+  build-macos:
+    runs-on: macos-10.15
+    needs: setup
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Build
+      run: yarn build
+
+    - name: Pack (electron-builder)
+      run: yarn pack && y make:macos
+
+    - name: Make macOS (electron-builder)
+      run: y make:macos
