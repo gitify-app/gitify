@@ -71,5 +71,4 @@ jobs:
 
     - uses: actions/upload-artifact@v1
       with:
-        name: Gitify-dist
-        path: dist
+        path: dist/Gitify*.zip
