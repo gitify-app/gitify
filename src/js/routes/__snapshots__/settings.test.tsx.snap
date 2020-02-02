@@ -32,14 +32,14 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
         >
           <input
             checked={false}
-            className="sc-AykKF JLUcA"
+            className="sc-AykKF eBGpvv"
             label="Show only participating"
             name="showOnlyParticipating"
             onChange={[Function]}
             type="checkbox"
           />
           <div
-            className="sc-AykKG eKMIud"
+            className="sc-AykKG kivYff"
           >
             <svg
               className="sc-AykKE iYrbLa"
@@ -86,14 +86,14 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
         >
           <input
             checked={true}
-            className="sc-AykKF JLUcA"
+            className="sc-AykKF eBGpvv"
             label="Play sound"
             name="playSound"
             onChange={[Function]}
             type="checkbox"
           />
           <div
-            className="sc-AykKG fcMxQD"
+            className="sc-AykKG bvKQsJ"
           >
             <svg
               className="sc-AykKE iYrbLa"
@@ -140,14 +140,14 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
         >
           <input
             checked={true}
-            className="sc-AykKF JLUcA"
+            className="sc-AykKF eBGpvv"
             label="Show notifications"
             name="showNotifications"
             onChange={[Function]}
             type="checkbox"
           />
           <div
-            className="sc-AykKG fcMxQD"
+            className="sc-AykKG bvKQsJ"
           >
             <svg
               className="sc-AykKE iYrbLa"
@@ -194,14 +194,14 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
         >
           <input
             checked={false}
-            className="sc-AykKF JLUcA"
+            className="sc-AykKF eBGpvv"
             label="On Click, Mark as Read"
             name="onClickMarkAsRead"
             onChange={[Function]}
             type="checkbox"
           />
           <div
-            className="sc-AykKG eKMIud"
+            className="sc-AykKG kivYff"
           >
             <svg
               className="sc-AykKE iYrbLa"
@@ -248,14 +248,14 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
         >
           <input
             checked={false}
-            className="sc-AykKF JLUcA"
+            className="sc-AykKF eBGpvv"
             label="Open at startup"
             name="openAtStartUp"
             onChange={[Function]}
             type="checkbox"
           />
           <div
-            className="sc-AykKG eKMIud"
+            className="sc-AykKG kivYff"
           >
             <svg
               className="sc-AykKE iYrbLa"
