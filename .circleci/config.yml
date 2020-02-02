@@ -56,7 +56,8 @@ jobs:
           destination: coverage
 
   build-bundle:
-    executor: node
+    macos:
+      xcode: 11.3.1	
     steps:
       - attach_workspace:
           at: ./
