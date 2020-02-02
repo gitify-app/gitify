@@ -61,7 +61,6 @@
     "files": ["index.html", "LICENSE", "main.js", "build/**/*", "images/*"],
     "mac": {
       "category": "public.app-category.developer-tools",
-      "target": "dmg",
       "icon": "images/app-icon.icns",
       "identity": "Emmanouil Konstantinidis (3YP8SXP3BF)"
     },
@@ -107,7 +106,6 @@
     "@types/styled-components": "^4.4.1",
     "electron": "=7.1.9",
     "electron-builder": "^22.3.2",
-    "electron-packager": "=14.1.1",
     "jest": "^24.9.0",
     "nock": "=11.7.0",
     "prettier": "=1.19.1",
