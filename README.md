@@ -21,6 +21,7 @@ Gitify currently only supports OS X.
 - Node 10+
 - Yarn
 - [Electron](https://electronjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
 - [React](https://reactjs.org/)
 - [Redux](http://redux.js.org/)
 
@@ -47,9 +48,9 @@ To run the actual **electron app**:
 
 To prepare the app for distribution run:
 
-    yarn run package
-
-To publish a new version, you also need to codesign the app running `yarn run codesign`. Currently supports only OS X.
+    yarn run build
+    yarn run pack
+    yarn run make:macos
 
 ### Tests
 
@@ -87,7 +88,7 @@ Since version `1.1.0` you can now debug Gitify by pressing `alt+cmd+I`. This wil
 Gitify is licensed under the MIT Open Source license. For more information, see the LICENSE file in this repository.
 
 [github-image]: https://github.com/manosim/gitify/workflows/CI/badge.svg
-[github-url]: https://circleci.com/gh/manosim/gitify
+[github-url]: https://github.com/manosim/gitify/actions
 [codecov-image]: https://codecov.io/gh/manosim/gitify/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/manosim/gitify
 [downloads-image]: https://img.shields.io/github/downloads/manosim/gitify/total.svg
