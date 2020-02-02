@@ -69,7 +69,10 @@ jobs:
         CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
       run: yarn make:macos
 
+    - name: Clean up builds
+      run: rm -rfv dist/mac dist/Gitify-*.dmg*
+
     - uses: actions/upload-artifact@v1
       with:
-        path: dist/Gitify*.zip
-        name: gitify-macos.zip
+        name: Gitify-dist
+        path: dist
