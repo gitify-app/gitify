@@ -80,8 +80,8 @@ workflows:
           requires:
             - setup
       - build-bundle:
-          filters:
-            branches:
-              only: master
+          # filters:
+          #   branches:
+          #     only: master
           requires:
             - run-unit-tests
