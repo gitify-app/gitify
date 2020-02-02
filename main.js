@@ -4,8 +4,8 @@ const path = require('path');
 const AutoLaunch = require('auto-launch');
 const GhReleases = require('electron-gh-releases');
 
-const iconIdle = path.join(__dirname, 'images', 'tray-idleTemplate.png');
-const iconActive = path.join(__dirname, 'images', 'tray-active.png');
+const iconIdle = path.join(__dirname, 'assets', 'images', 'tray-idleTemplate.png');
+const iconActive = path.join(__dirname, 'assets', 'images', 'tray-active.png');
 
 const isDarwin = process.platform === 'darwin';
 const isLinux = process.platform === 'linux';

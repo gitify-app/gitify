@@ -57,14 +57,20 @@
   "build": {
     "appId": "com.electron.gitify",
     "productName": "Gitify",
-    "files": ["index.html", "LICENSE", "main.js", "build/**/*", "images/*"],
+    "files": [
+      "build/**/*",
+      "assets/**/*",
+      "index.html",
+      "LICENSE",
+      "main.js"
+    ],
     "mac": {
       "category": "public.app-category.developer-tools",
-      "icon": "images/app-icon.icns",
+      "icon": "assets/images/app-icon.icns",
       "identity": "Emmanouil Konstantinidis (3YP8SXP3BF)"
     },
     "dmg": {
-      "icon": "images/app-icon.icns"
+      "icon": "assets/images/app-icon.icns"
     }
   },
   "dependencies": {

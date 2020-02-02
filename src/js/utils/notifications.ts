@@ -55,7 +55,7 @@ export default {
   },
 
   raiseSoundNotification() {
-    const audio = new Audio('sounds/clearly.mp3');
+    const audio = new Audio('assets/sounds/clearly.mp3');
     audio.volume = 0.2;
     audio.play();
   },

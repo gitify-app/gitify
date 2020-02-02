@@ -2,7 +2,7 @@
 
 > The mobile app has been depreacated in favor of the official GitHub mobile app the is coming out [soon](https://github.com/mobile).
 
-![Gitify](images/press.jpg)
+![Gitify](assets/images/press.jpg)
 
 ### Download
 
