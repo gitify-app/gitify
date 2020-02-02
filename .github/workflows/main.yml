@@ -64,7 +64,7 @@ jobs:
       run: yarn pack
 
     - name: Make macOS (electron-builder)
+      env:
+        CSC_LINK: ${{ secrets.mac_certs }}
+        CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
       run: yarn make:macos
-      with:
-        mac_certs: ${{ secrets.mac_certs }}
-        mac_certs_password: ${{ secrets.mac_certs_password }}
