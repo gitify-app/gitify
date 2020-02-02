@@ -2,47 +2,47 @@
 
 exports[`routes/settings.tsx should render itself & its children 1`] = `
 <div
-  className="sc-EHOje bIfgFX"
+  className="sc-AykKH karVkp"
 >
   <div
-    className="sc-bZQynM fISyMH"
+    className="sc-AykKI ksqaL"
   >
     <h3
-      className="sc-dnqmqq jJLwtP"
+      className="sc-fzXfLO kHdgsr"
     >
       Settings
     </h3>
     <button
       aria-label="Close Settings"
-      className="sc-iwsKbI SeFqk"
+      className="sc-fzXfLP efZclQ"
       onClick={[Function]}
     >
       ×
     </button>
   </div>
   <div
-    className="sc-gzVnrw kukodc"
+    className="sc-AykKJ bQOjSO"
   >
     <div
-      className="sc-bdVaJa jfPzWn"
+      className="sc-AykKC bImuSS"
     >
       <label>
         <div
-          className="sc-bwzfXH fnAEVU"
+          className="sc-AykKD huaaPF"
         >
           <input
             checked={false}
-            className="sc-bxivhb hZSXJG"
+            className="sc-AykKF JLUcA"
             label="Show only participating"
             name="showOnlyParticipating"
             onChange={[Function]}
             type="checkbox"
           />
           <div
-            className="sc-ifAKCX kfOBSV"
+            className="sc-AykKG eKMIud"
           >
             <svg
-              className="sc-htpNat iPrSGo"
+              className="sc-AykKE iYrbLa"
               viewBox="0 0 24 24"
             >
               <g
@@ -78,25 +78,25 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
       </label>
     </div>
     <div
-      className="sc-bdVaJa jfPzWn"
+      className="sc-AykKC bImuSS"
     >
       <label>
         <div
-          className="sc-bwzfXH fnAEVU"
+          className="sc-AykKD huaaPF"
         >
           <input
             checked={true}
-            className="sc-bxivhb hZSXJG"
+            className="sc-AykKF JLUcA"
             label="Play sound"
             name="playSound"
             onChange={[Function]}
             type="checkbox"
           />
           <div
-            className="sc-ifAKCX RDSID"
+            className="sc-AykKG fcMxQD"
           >
             <svg
-              className="sc-htpNat iPrSGo"
+              className="sc-AykKE iYrbLa"
               viewBox="0 0 24 24"
             >
               <g
@@ -132,25 +132,25 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
       </label>
     </div>
     <div
-      className="sc-bdVaJa jfPzWn"
+      className="sc-AykKC bImuSS"
     >
       <label>
         <div
-          className="sc-bwzfXH fnAEVU"
+          className="sc-AykKD huaaPF"
         >
           <input
             checked={true}
-            className="sc-bxivhb hZSXJG"
+            className="sc-AykKF JLUcA"
             label="Show notifications"
             name="showNotifications"
             onChange={[Function]}
             type="checkbox"
           />
           <div
-            className="sc-ifAKCX RDSID"
+            className="sc-AykKG fcMxQD"
           >
             <svg
-              className="sc-htpNat iPrSGo"
+              className="sc-AykKE iYrbLa"
               viewBox="0 0 24 24"
             >
               <g
@@ -186,25 +186,25 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
       </label>
     </div>
     <div
-      className="sc-bdVaJa jfPzWn"
+      className="sc-AykKC bImuSS"
     >
       <label>
         <div
-          className="sc-bwzfXH fnAEVU"
+          className="sc-AykKD huaaPF"
         >
           <input
             checked={false}
-            className="sc-bxivhb hZSXJG"
+            className="sc-AykKF JLUcA"
             label="On Click, Mark as Read"
             name="onClickMarkAsRead"
             onChange={[Function]}
             type="checkbox"
           />
           <div
-            className="sc-ifAKCX kfOBSV"
+            className="sc-AykKG eKMIud"
           >
             <svg
-              className="sc-htpNat iPrSGo"
+              className="sc-AykKE iYrbLa"
               viewBox="0 0 24 24"
             >
               <g
@@ -240,25 +240,25 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
       </label>
     </div>
     <div
-      className="sc-bdVaJa jfPzWn"
+      className="sc-AykKC bImuSS"
     >
       <label>
         <div
-          className="sc-bwzfXH fnAEVU"
+          className="sc-AykKD huaaPF"
         >
           <input
             checked={false}
-            className="sc-bxivhb hZSXJG"
+            className="sc-AykKF JLUcA"
             label="Open at startup"
             name="openAtStartUp"
             onChange={[Function]}
             type="checkbox"
           />
           <div
-            className="sc-ifAKCX kfOBSV"
+            className="sc-AykKG eKMIud"
           >
             <svg
-              className="sc-htpNat iPrSGo"
+              className="sc-AykKE iYrbLa"
               viewBox="0 0 24 24"
             >
               <g
@@ -295,7 +295,7 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
     </div>
   </div>
   <div
-    className="sc-htoDjs bsVypt"
+    className="sc-AykKK jqyTUm"
   >
     <small>
       Gitify v
@@ -304,21 +304,21 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
     <div>
       <button
         aria-label="Login with GitHub Enterprise"
-        className="sc-gZMcBi loTXCJ"
+        className="sc-fzXfLQ kHbxkz"
         onClick={[Function]}
       >
         Add Enterprise
       </button>
       <button
         aria-label="Logout"
-        className="sc-gZMcBi loTXCJ"
+        className="sc-fzXfLQ kHbxkz"
         onClick={[Function]}
       >
         Logout
       </button>
       <button
         aria-label="Quit Gitify"
-        className="sc-gZMcBi loTXCJ"
+        className="sc-fzXfLQ kHbxkz"
         onClick={[Function]}
       >
         Quit

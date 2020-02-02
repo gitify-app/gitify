@@ -3,38 +3,38 @@
 exports[`routes/enterprise-login.js renders correctly 1`] = `
 <div>
   <div
-    className="sc-gzVnrw eelwNP"
+    className="sc-AykKJ dpQeKw"
   >
     <h3
-      className="sc-dnqmqq jJLwtP"
+      className="sc-fzXfLO kHdgsr"
     >
       Login to GitHub Enterprise
     </h3>
     <button
       aria-label="Go Back"
-      className="sc-iwsKbI SeFqk"
+      className="sc-fzXfLP efZclQ"
       onClick={[Function]}
     >
       ×
     </button>
   </div>
   <div
-    className="sc-htoDjs oUFKQ"
+    className="sc-AykKK jDEljL"
   >
     <form
       onSubmit={[Function]}
     >
       <div
-        className="sc-bdVaJa iJGcvD"
+        className="sc-AykKC kzMuDw"
       >
         <label
-          className="sc-bwzfXH cLhogj"
+          className="sc-AykKD dXwyWP"
           htmlFor="hostname"
         >
           Hostname
         </label>
         <input
-          className="sc-htpNat kFErTq"
+          className="sc-AykKE hKjuFy"
           id="hostname"
           name="hostname"
           onBlur={[Function]}
@@ -46,16 +46,16 @@ exports[`routes/enterprise-login.js renders correctly 1`] = `
         />
       </div>
       <div
-        className="sc-bdVaJa iJGcvD"
+        className="sc-AykKC kzMuDw"
       >
         <label
-          className="sc-bwzfXH cLhogj"
+          className="sc-AykKD dXwyWP"
           htmlFor="clientId"
         >
           Client ID
         </label>
         <input
-          className="sc-htpNat kFErTq"
+          className="sc-AykKE hKjuFy"
           id="clientId"
           name="clientId"
           onBlur={[Function]}
@@ -67,16 +67,16 @@ exports[`routes/enterprise-login.js renders correctly 1`] = `
         />
       </div>
       <div
-        className="sc-bdVaJa iJGcvD"
+        className="sc-AykKC kzMuDw"
       >
         <label
-          className="sc-bwzfXH cLhogj"
+          className="sc-AykKD dXwyWP"
           htmlFor="clientSecret"
         >
           Client Secret
         </label>
         <input
-          className="sc-htpNat kFErTq"
+          className="sc-AykKE hKjuFy"
           id="clientSecret"
           name="clientSecret"
           onBlur={[Function]}
@@ -88,7 +88,7 @@ exports[`routes/enterprise-login.js renders correctly 1`] = `
         />
       </div>
       <button
-        className="sc-bZQynM bGhBCR"
+        className="sc-AykKI dHvhDg"
         disabled={true}
         title="Login Button"
         type="submit"

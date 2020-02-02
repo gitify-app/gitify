@@ -2,10 +2,10 @@
 
 exports[`components/notification.js should render itself & its children 1`] = `
 <div
-  className="sc-bdVaJa ctpORT"
+  className="sc-AykKC geylAL"
 >
   <div
-    className="sc-ifAKCX ePGmxi"
+    className="sc-AykKG nSNMR"
   >
     <svg
       aria-hidden="false"
@@ -31,17 +31,17 @@ exports[`components/notification.js should render itself & its children 1`] = `
     </svg>
   </div>
   <div
-    className="sc-bwzfXH jcDBsP"
+    className="sc-AykKD dWNlSI"
     onClick={[Function]}
     role="main"
   >
     <h6
-      className="sc-htpNat VDmcF"
+      className="sc-AykKE fsnEEy"
     >
       I am a robot and this is a test!
     </h6>
     <div
-      className="sc-bxivhb blvFzN"
+      className="sc-AykKF drOcmQ"
     >
       <span
         title="You're watching the repository."
@@ -54,10 +54,10 @@ exports[`components/notification.js should render itself & its children 1`] = `
     </div>
   </div>
   <div
-    className="sc-ifAKCX ePGmxi"
+    className="sc-AykKG nSNMR"
   >
     <button
-      className="sc-EHOje dAXcTp"
+      className="sc-AykKH iotryN"
       onClick={[Function]}
     >
       <svg

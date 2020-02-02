@@ -2,20 +2,20 @@
 
 exports[`components/oops.tsx should render itself & its children 1`] = `
 <div
-  className="sc-bdVaJa jZnlmR"
+  className="sc-AykKC iqXGQ"
 >
   <div
-    className="sc-bwzfXH flHJOa"
+    className="sc-AykKD dxnFup"
   >
     😔
   </div>
   <h2
-    className="sc-htpNat XhagL"
+    className="sc-AykKE kxNnyc"
   >
     Something went wrong.
   </h2>
   <h4
-    className="sc-bxivhb ijKRfN"
+    className="sc-AykKF hXdduO"
   >
     Couldn't get your notifications.
   </h4>

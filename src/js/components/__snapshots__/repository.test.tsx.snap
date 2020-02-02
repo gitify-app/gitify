@@ -3,13 +3,13 @@
 exports[`components/repository.tsx should render itself & its children 1`] = `
 Array [
   <div
-    className="sc-bdVaJa dofWkW"
+    className="sc-AykKC hVOLrn"
   >
     <div
-      className="sc-bwzfXH gkcRsd"
+      className="sc-AykKD fSDtMT"
     >
       <img
-        className="sc-htpNat tFenb"
+        className="sc-AykKE cWuXBx"
         src="https://avatars0.githubusercontent.com/u/6333409?v=3"
       />
       <span
@@ -19,10 +19,10 @@ Array [
       </span>
     </div>
     <div
-      className="sc-bxivhb BLpai"
+      className="sc-AykKF dCtLYA"
     >
       <button
-        className="sc-ifAKCX eEESsB"
+        className="sc-AykKG fLcycU"
         onClick={[Function]}
       >
         <svg
