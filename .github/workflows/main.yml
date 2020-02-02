@@ -72,3 +72,4 @@ jobs:
     - uses: actions/upload-artifact@v1
       with:
         path: dist/Gitify*.zip
+        name: dist/gitify-macos.zip
