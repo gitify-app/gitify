@@ -68,3 +68,8 @@ jobs:
         CSC_LINK: ${{ secrets.mac_certs }}
         CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
       run: yarn make:macos
+
+    - uses: actions/upload-artifact@v1
+      with:
+        name: Gitify-dist
+        path: dist
