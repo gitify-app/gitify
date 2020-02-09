@@ -8,7 +8,7 @@
 
 You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/manosim/gitify/releases) page.
 
-You can also install Gitify via [Homebrew Cask](http://caskroom.io/)
+You can also install Gitify via [Homebrew Cask](http://brew.sh/)
 
 ```shell
 brew cask install gitify
