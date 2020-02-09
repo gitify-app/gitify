@@ -35,7 +35,7 @@ const menubarApp = menubar({
 menubarApp.on('ready', () => {
   menubarApp.tray.setIgnoreDoubleClickEvents(true);
 
-  autoUpdater.checkForUpdatesAndNotify()
+  autoUpdater.checkForUpdatesAndNotify();
 
   ipcMain.on('reopen-window', () => menubarApp.showWindow());
   ipcMain.on('startup-enable', () => autoStart.enable());
