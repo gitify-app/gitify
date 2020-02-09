@@ -1,15 +1,11 @@
-const { dialog, ipcMain } = require('electron');
+const { ipcMain } = require('electron');
 const { menubar } = require('menubar');
+const { autoUpdater } = require("electron-updater")
 const path = require('path');
 const AutoLaunch = require('auto-launch');
-const GhReleases = require('electron-gh-releases');
 
 const iconIdle = path.join(__dirname, 'assets', 'images', 'tray-idleTemplate.png');
 const iconActive = path.join(__dirname, 'assets', 'images', 'tray-active.png');
-
-const isDarwin = process.platform === 'darwin';
-const isLinux = process.platform === 'linux';
-const isWindows = process.platform === 'win32';
 
 const autoStart = new AutoLaunch({
   name: 'Gitify',
@@ -39,7 +35,7 @@ const menubarApp = menubar({
 menubarApp.on('ready', () => {
   menubarApp.tray.setIgnoreDoubleClickEvents(true);
 
-  checkAutoUpdate();
+  autoUpdater.checkForUpdatesAndNotify();
 
   ipcMain.on('reopen-window', () => menubarApp.showWindow());
   ipcMain.on('startup-enable', () => autoStart.enable());
@@ -70,54 +66,4 @@ menubarApp.on('ready', () => {
     menubarApp.positioner.move('trayCenter', trayBounds);
     menubarApp.window.resizable = false;
   });
-
-  function checkAutoUpdate() {
-    if (isWindows || isLinux) {
-      return;
-    }
-
-    let autoUpdateOptions = {
-      repo: 'manosim/gitify',
-      currentVersion: menubarApp.app.getVersion(),
-    };
-
-    const updater = new GhReleases(autoUpdateOptions);
-
-    updater.on('error', (event, message) => {
-      console.log('ERRORED.');
-      console.log('Event: ' + JSON.stringify(event) + '. MESSAGE: ' + message);
-    });
-
-    updater.on('update-downloaded', () => {
-      // Restart the app(ask) and install the update
-      confirmAutoUpdate(updater);
-    });
-
-    // Check for updates
-    updater.check((err, status) => {
-      if (!err && status) {
-        updater.download();
-      }
-    });
-  }
-
-  function confirmAutoUpdate(updater) {
-    dialog.showMessageBox(
-      {
-        type: 'question',
-        buttons: ['Update & Restart', 'Cancel'],
-        title: 'Update Available',
-        cancelId: 99,
-        message:
-          'There is an update available. Would you like to update Gitify now?',
-      },
-      response => {
-        console.log('Exit: ' + response);
-        menubarApp.app.dock.hide();
-        if (response === 0) {
-          updater.install();
-        }
-      }
-    );
-  }
 });

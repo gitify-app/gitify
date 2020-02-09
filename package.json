@@ -29,7 +29,10 @@
     "app",
     "tray"
   ],
-  "author": "Emmanouil Konstantinidis",
+  "author": {
+    "name": "Emmanouil Konstantinidis",
+    "email": "hello@manos.im"
+  },
   "contributors": [
     {
       "name": "Emmanouil Konstantinidis",
@@ -67,7 +70,8 @@
     "mac": {
       "category": "public.app-category.developer-tools",
       "icon": "assets/images/app-icon.icns",
-      "identity": "Emmanouil Konstantinidis (3YP8SXP3BF)"
+      "identity": "Emmanouil Konstantinidis (3YP8SXP3BF)",
+      "publish": ["github"]
     },
     "dmg": {
       "icon": "assets/images/app-icon.icns"
@@ -78,7 +82,7 @@
     "auto-launch": "=5.0.5",
     "axios": "=0.19.2",
     "date-fns": "^2.9.0",
-    "electron-gh-releases": "=2.0.4",
+    "electron-updater": "^4.2.0",
     "final-form": "^4.18.7",
     "lodash": "^4.17.15",
     "menubar": "^7.2.0",
