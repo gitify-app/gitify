@@ -6,7 +6,7 @@
 
 ### Download
 
-You can download Gitify for **free** from either the website [www.gitify.io](http://www.gitify.io/) or from the GitHub repository [releases](https://github.com/manosim/gitify/releases) page.
+You can download Gitify for **free** from either the website [www.gitify.io](https://www.gitify.io/) or from the GitHub repository [releases](https://github.com/manosim/gitify/releases) page.
 
 You can also install Gitify via [Homebrew Cask](http://brew.sh/)
 
@@ -14,12 +14,12 @@ You can also install Gitify via [Homebrew Cask](http://brew.sh/)
 brew cask install gitify
 ```
 
-Gitify currently only supports OS X.
+Gitify currently only supports mac OS.
 
 ### Prerequisites
 
 - Node 10+
-- Yarn
+- [Yarn](https://yarnpkg.com/)
 - [Electron](https://electronjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [React](https://reactjs.org/)
@@ -92,4 +92,4 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 [codecov-image]: https://codecov.io/gh/manosim/gitify/branch/master/graph/badge.svg
 [codecov-url]: https://codecov.io/gh/manosim/gitify
 [downloads-image]: https://img.shields.io/github/downloads/manosim/gitify/total.svg
-[downloads-url]: http://www.gitify.io
+[downloads-url]: https://www.gitify.io
