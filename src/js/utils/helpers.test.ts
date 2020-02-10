@@ -105,6 +105,10 @@ describe('utils/helpers.ts', () => {
 
     authGithub(undefined, dispatch);
 
+    expect(
+      new BrowserWindow().webContents.session.clearStorageData
+    ).toHaveBeenCalledTimes(1);
+
     expect(new BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
     expect(new BrowserWindow().loadURL).toHaveBeenCalledWith(
       'https://github.com/login/oauth/authorize?client_id=3fef4433a29c6ad8f22c&scope=user:email,notifications'
@@ -126,6 +130,10 @@ describe('utils/helpers.ts', () => {
         }
       }
     );
+
+    expect(
+      new BrowserWindow().webContents.session.clearStorageData
+    ).toHaveBeenCalledTimes(1);
 
     // @ts-ignore
     new BrowserWindow().loadURL.mockReset();
