@@ -3,7 +3,6 @@ const { ipcRenderer } = require('electron');
 import * as React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import Octicon, { MarkGithub } from '@primer/octicons-react';
 import styled from 'styled-components';
 
 import { AppState } from '../../types/reducers';

@@ -135,7 +135,7 @@ export class Sidebar extends React.Component<IProps> {
   }
 
   onOpenBrowser() {
-    shell.openExternal(`https://www.github.com/${Constants.REPO_SLUG}`);
+    shell.openExternal(`https://github.com/${Constants.REPO_SLUG}`);
   }
 
   goToSettings() {

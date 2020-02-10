@@ -16,7 +16,7 @@ describe('utils/helpers.ts', () => {
       'https://api.github.com/repos/ekonstantinidis/notifications-test/issues/3';
     const newUrl = generateGitHubWebUrl(apiUrl);
     expect(newUrl).toBe(
-      'https://www.github.com/ekonstantinidis/notifications-test/issues/3'
+      'https://github.com/ekonstantinidis/notifications-test/issues/3'
     );
   });
 
@@ -25,7 +25,7 @@ describe('utils/helpers.ts', () => {
       'https://api.github.com/repos/ekonstantinidis/notifications-test/pulls/123';
     const newUrl = generateGitHubWebUrl(apiUrl);
     expect(newUrl).toBe(
-      'https://www.github.com/ekonstantinidis/notifications-test/pull/123'
+      'https://github.com/ekonstantinidis/notifications-test/pull/123'
     );
   });
 
@@ -33,9 +33,7 @@ describe('utils/helpers.ts', () => {
     const apiUrl =
       'https://api.github.com/repos/myorg/notifications-test/releases/3988077';
     const newUrl = generateGitHubWebUrl(apiUrl);
-    expect(newUrl).toBe(
-      'https://www.github.com/myorg/notifications-test/releases'
-    );
+    expect(newUrl).toBe('https://github.com/myorg/notifications-test/releases');
   });
 
   it('should generate the GitHub url - enterprise - (issue)', () => {
@@ -100,7 +98,7 @@ describe('utils/helpers.ts', () => {
       (event, callback) => {
         if (event === 'will-redirect') {
           const event = new Event('will-redirect');
-          callback(event, 'http://www.github.com/?code=123-456');
+          callback(event, 'http://github.com/?code=123-456');
         }
       }
     );
@@ -156,7 +154,7 @@ describe('utils/helpers.ts', () => {
       (event, callback) => {
         if (event === 'did-fail-load') {
           const event = new Event('did-fail-load');
-          callback(event, 500, null, 'http://www.github.com/?code=123-456');
+          callback(event, 500, null, 'http://github.com/?code=123-456');
         }
       }
     );
