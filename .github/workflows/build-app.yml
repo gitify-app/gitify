@@ -1,10 +1,10 @@
-name: CI
+name: Build App
 
 on: [push, pull_request]
 
 jobs:
   setup:
-    runs-on: ubuntu-18.04
+    runs-on: macos-10.15
 
     steps:
       - uses: actions/checkout@v2
@@ -12,6 +12,9 @@ jobs:
       - name: Get yarn cache
         id: yarn-cache
         run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - name: Install Dependencies
+        run: yarn install
 
       - uses: actions/cache@v1
         with:
@@ -19,29 +22,6 @@ jobs:
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
-
-      - name: Install Dependencies
-        run: yarn install
-
-  run-unit-tests:
-    runs-on: ubuntu-18.04
-    needs: setup
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Install Dependencies
-        run: yarn install
-
-      - name: Run Prettier (Check)
-        run: yarn prettier-check
-
-      - name: Run Jest
-        run: yarn test --coverage --runInBand
 
   build-macos:
     runs-on: macos-10.15
