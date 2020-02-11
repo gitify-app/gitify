@@ -2,10 +2,10 @@
 
 exports[`components/Sidebar.tsx should render itself & its children (logged in) 1`] = `
 <div
-  className="sc-AykKC hlbwQR"
+  className="sc-AxjAm hvGyhy"
 >
   <div
-    className="sc-AykKD jNLHCP"
+    className="sc-AxirZ gZzKjG"
   >
     <svg
       className="logo"
@@ -52,7 +52,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
       </g>
     </svg>
     <div
-      className="sc-AykKE dFyZIk"
+      className="sc-AxiKw cRGLZg"
     >
       <svg
         aria-hidden="true"
@@ -79,11 +79,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
     </div>
   </div>
   <div
-    className="sc-AykKF gzCmSs"
+    className="sc-AxhCb iiUgpz"
   >
     <button
       aria-label="Refresh Notifications"
-      className="sc-AykKG exvrYi"
+      className="sc-AxhUy dubEsv"
       onClick={[Function]}
     >
       <svg
@@ -110,7 +110,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
     </button>
     <button
       aria-label="Settings"
-      className="sc-AykKG exvrYi"
+      className="sc-AxhUy dubEsv"
       onClick={[Function]}
     >
       <svg
@@ -137,7 +137,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
     </button>
     <button
       aria-label="View project on GitHub"
-      className="sc-AykKG exvrYi"
+      className="sc-AxhUy dubEsv"
       onClick={[Function]}
     >
       <svg
@@ -168,10 +168,10 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
 
 exports[`components/Sidebar.tsx should render itself & its children (logged out) 1`] = `
 <div
-  className="sc-AykKC hlbwQR"
+  className="sc-AxjAm hvGyhy"
 >
   <div
-    className="sc-AykKD jNLHCP"
+    className="sc-AxirZ gZzKjG"
   >
     <svg
       className="logo"
@@ -218,7 +218,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
       </g>
     </svg>
     <div
-      className="sc-AykKE dFyZIk"
+      className="sc-AxiKw cRGLZg"
     >
       <svg
         aria-hidden="true"
@@ -245,11 +245,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
     </div>
   </div>
   <div
-    className="sc-AykKF gzCmSs"
+    className="sc-AxhCb iiUgpz"
   >
     <button
       aria-label="View project on GitHub"
-      className="sc-AykKG exvrYi"
+      className="sc-AxhUy dubEsv"
       onClick={[Function]}
     >
       <svg

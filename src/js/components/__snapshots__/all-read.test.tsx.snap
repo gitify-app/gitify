@@ -2,18 +2,18 @@
 
 exports[`components/all-read.tsx should render itself & its children 1`] = `
 <div
-  className="sc-AykKC iqXGQ"
+  className="sc-AxjAm bVUrJb"
 >
   <div
-    className="sc-AykKD dxnFup"
+    className="sc-AxirZ joxCwg"
   >
     😉
   </div>
   <h2
-    className="sc-AykKE kxNnyc"
+    className="sc-AxiKw dlazZW"
   />
   <h4
-    className="sc-AykKF hXdduO"
+    className="sc-AxhCb jUqlrV"
   >
     No new notifications.
   </h4>
