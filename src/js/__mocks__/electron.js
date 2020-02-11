@@ -31,6 +31,9 @@ const browserWindow = {
   loadURL: jest.fn(),
   webContents: {
     on: () => {},
+    session: {
+      clearStorageData: jest.fn(),
+    },
   },
   on: () => {},
   close: jest.fn(),

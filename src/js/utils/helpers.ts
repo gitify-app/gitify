@@ -53,6 +53,9 @@ export function authGithub(
   const githubUrl = `https://${authOptions.hostname}/login/oauth/authorize`;
   const authUrl = `${githubUrl}?client_id=${authOptions.clientId}&scope=${Constants.AUTH_SCOPE}`;
 
+  const session = authWindow.webContents.session;
+  session.clearStorageData();
+
   authWindow.loadURL(authUrl);
 
   function handleCallback(url) {
