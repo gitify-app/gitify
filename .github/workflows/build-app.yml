@@ -36,7 +36,7 @@ jobs:
         run: yarn make:macos
 
       - name: Clean up builds
-        run: rm -rfv dist/mac dist/Gitify-*.dmg*
+        run: rm -rfv dist/mac
 
       - uses: actions/upload-artifact@v1
         with:
