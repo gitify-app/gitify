@@ -58,6 +58,8 @@ export function getNotificationTypeIcon(type: SubjectType): string {
       return 'git-commit';
     case 'Release':
       return 'tag';
+    case 'RepositoryVulnerabilityAlert':
+      return 'alert';
     default:
       return 'question';
   }
