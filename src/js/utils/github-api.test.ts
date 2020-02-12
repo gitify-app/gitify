@@ -22,6 +22,9 @@ describe('./utils/github-api.ts', () => {
     expect(getNotificationTypeIcon('PullRequest')).toBe('git-pull-request');
     expect(getNotificationTypeIcon('Commit')).toBe('git-commit');
     expect(getNotificationTypeIcon('Release')).toBe('tag');
+    expect(getNotificationTypeIcon('RepositoryVulnerabilityAlert')).toBe(
+      'alert'
+    );
     expect(getNotificationTypeIcon('Unknown' as SubjectType)).toBe('question');
   });
 });
