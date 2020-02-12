@@ -3,7 +3,7 @@ name: Run Tests
 on: [push, pull_request]
 
 jobs:
-  setup:
+  run-unit-tests:
     runs-on: ubuntu-18.04
 
     steps:
@@ -22,13 +22,6 @@ jobs:
 
       - name: Install Dependencies
         run: yarn install
-
-  run-unit-tests:
-    runs-on: ubuntu-18.04
-    needs: setup
-
-    steps:
-      - uses: actions/checkout@v2
 
       - name: Run Prettier (Check)
         run: yarn prettier-check
