@@ -11,7 +11,12 @@ export type Reason =
   | 'subscribed'
   | 'team_mention';
 
-export type SubjectType = 'Issue' | 'PullRequest' | 'Commit' | 'Release';
+export type SubjectType =
+  | 'Issue'
+  | 'PullRequest'
+  | 'Commit'
+  | 'Release'
+  | 'RepositoryVulnerabilityAlert';
 
 export interface Notification {
   id: string;
