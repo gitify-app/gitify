@@ -1,10 +1,10 @@
-name: CI
+name: Build App
 
 on: [push, pull_request]
 
 jobs:
-  setup:
-    runs-on: ubuntu-18.04
+  build-macos:
+    runs-on: macos-10.15
 
     steps:
       - uses: actions/checkout@v2
@@ -23,40 +23,6 @@ jobs:
       - name: Install Dependencies
         run: yarn install
 
-  run-unit-tests:
-    runs-on: ubuntu-18.04
-    needs: setup
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Install Dependencies
-        run: yarn install
-
-      - name: Run Prettier (Check)
-        run: yarn prettier-check
-
-      - name: Run Jest
-        run: yarn test --coverage --runInBand
-
-  build-macos:
-    runs-on: macos-10.15
-    needs: setup
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Get yarn cache
-        id: yarn-cache
-        run: echo "::set-output name=dir::$(yarn cache dir)"
-
-      - name: Install Dependencies
-        run: yarn install
-
       - name: Build
         run: yarn build
 
@@ -70,7 +36,7 @@ jobs:
         run: yarn make:macos
 
       - name: Clean up builds
-        run: rm -rfv dist/mac dist/Gitify-*.dmg*
+        run: rm -rfv dist/mac
 
       - uses: actions/upload-artifact@v1
         with:
