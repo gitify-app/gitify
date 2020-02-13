@@ -36,4 +36,5 @@ jobs:
         env:
           CSC_LINK: ${{ secrets.mac_certs }}
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
-        run: yarn electron-builder --mac --publish
+          GH_TOKEN: ${{ secrets.gh_token }}
+        run: yarn electron-builder --publish onTagOrDraft
