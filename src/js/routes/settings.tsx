@@ -175,6 +175,14 @@ export class SettingsRoute extends React.Component<IProps> {
               this.props.updateSetting('openAtStartup', evt.target.checked)
             }
           />
+          <FieldCheckbox
+            name="showDockIcon"
+            label="Show dock icon"
+            checked={settings.showDockIcon}
+            onChange={evt =>
+              this.props.updateSetting('showDockIcon', evt.target.checked)
+            }
+          />
         </Main>
 
         <Footer>

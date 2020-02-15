@@ -36,4 +36,5 @@ export interface SettingsState {
   showNotifications: boolean;
   markOnClick: boolean;
   openAtStartup: boolean;
+  showDockIcon: boolean;
 }

@@ -7,6 +7,7 @@ const initialState: SettingsState = {
   showNotifications: true,
   markOnClick: false,
   openAtStartup: false,
+  showDockIcon: false,
 };
 
 export default function reducer(state = initialState, action): SettingsState {
