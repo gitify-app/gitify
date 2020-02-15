@@ -6,6 +6,8 @@ export default () => next => action => {
     case UPDATE_SETTING:
       if (action.setting === 'openAtStartup') {
         setAutoLaunch(action.value);
+      } else if (action.setting === 'showDockIcon') {
+        restoreSetting('show-dock-icon', action.value);
       }
   }
 

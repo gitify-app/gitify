@@ -50,6 +50,9 @@ menubarApp.on('ready', () => {
       }
     }
   });
+  ipcMain.on('show-dock-icon', (_, visible) => {
+    console.log('Show dock icon:', visible);
+  });
 
   menubarApp.window.webContents.on('devtools-opened', () => {
     menubarApp.window.setSize(800, 600);
