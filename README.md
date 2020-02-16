@@ -55,7 +55,7 @@ The release process is automated. Follow the steps below.
 
 ### Tests
 
-There are 2 checks - one for prettier and one for the unit testslinters for `js` and unit tests with `jest`.
+There are 2 checks - one for prettier and one for the unit tests with `jest`.
 
     // Run prettier to check
     yarn run prettier-check
