@@ -27,6 +27,9 @@ jobs:
         run: yarn install
 
       - name: Build
+        env:
+          OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
+          OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
         run: yarn build
 
       - name: Pack (electron-builder)
