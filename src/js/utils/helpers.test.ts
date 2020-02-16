@@ -111,7 +111,7 @@ describe('utils/helpers.ts', () => {
 
     expect(new BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
     expect(new BrowserWindow().loadURL).toHaveBeenCalledWith(
-      'https://github.com/login/oauth/authorize?client_id=3fef4433a29c6ad8f22c&scope=user:email,notifications'
+      'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=user:email,notifications'
     );
 
     expect(new BrowserWindow().destroy).toHaveBeenCalledTimes(1);
@@ -171,7 +171,7 @@ describe('utils/helpers.ts', () => {
 
     expect(new BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
     expect(new BrowserWindow().loadURL).toHaveBeenCalledWith(
-      'https://github.com/login/oauth/authorize?client_id=3fef4433a29c6ad8f22c&scope=user:email,notifications'
+      'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=user:email,notifications'
     );
 
     expect(new BrowserWindow().destroy).toHaveBeenCalledTimes(1);
