@@ -49,10 +49,9 @@ The release process is automated. Follow the steps below.
 
     1. Create a [new **draft** release](https://github.com/manosim/gitify/releases/new). Set the tag version to something with the format of `v1.2.3`. Save as a **draft**.
     2. Once everything is merged to `master`, create a branch that starts with `releases/vX.X.X` (ie. `releases/v1.2.3`).
-    3. In the same branch, bump the version of the app in the `package.json` file and open a PR.
-    4. GitHub Actions will build all branches named `releases/vX.X.X` and if there is a draft release with the same number(`package.json`), it will build, sign and upload the assets to that GitHub release.
-    5. Merge your release branch into `master`.
-    6. Publish the draft release once you've added notes to it and all assets are there.
+    3. In the same branch, **bump the version** of the app in the `package.json` file and open a PR. GitHub Actions will build, sign and upload the release assets for each commit to that branch as long as a branch is named like `releases/vX.X.X` and there is a draft release with the same version number(`package.json`).
+    4. Merge your release branch into `master`.
+    5. Publish the draft release once you've added notes to it and all assets are there.
 
 ### Tests
 
