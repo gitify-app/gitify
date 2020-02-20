@@ -33,7 +33,7 @@ jobs:
         env:
           CSC_LINK: ${{ secrets.mac_certs }}
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
-        run: yarn make:macos
+        run: yarn make:macos -c.mac.identity=null
 
       - name: Clean up builds
         run: rm -rfv dist/mac
