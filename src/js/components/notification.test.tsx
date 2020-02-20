@@ -28,6 +28,8 @@ describe('components/notification.js', () => {
   });
 
   it('should render itself & its children', async () => {
+    (global as any).Date.now = jest.fn(() => new Date('2014'));
+
     const props = {
       markNotification: jest.fn(),
       markOnClick: false,
