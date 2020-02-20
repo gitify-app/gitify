@@ -1,6 +1,6 @@
 # Gitify [![github][github-image]][github-url] [![codecov][codecov-image]][codecov-url] [![downloads][downloads-image]][downloads-url]
 
-> The mobile app has been deprecated in favor of the official GitHub mobile app the is coming out [soon](https://github.com/mobile).
+> The mobile app has been deprecated in favor of the official GitHub mobile app that is coming out [soon](https://github.com/mobile).
 
 ![Gitify](assets/images/press.png)
 
