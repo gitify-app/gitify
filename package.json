@@ -1,6 +1,6 @@
 {
   "name": "gitify",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
@@ -50,6 +50,9 @@
   "homepage": "https://www.gitify.io/",
   "jest": {
     "preset": "ts-jest/presets/js-with-ts",
+    "setupFiles": [
+      "<rootDir>/src/js/__helpers__/setupEnvVars.js"
+    ],
     "testEnvironment": "jsdom",
     "coverageThreshold": {
       "global": {

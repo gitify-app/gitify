@@ -31,12 +31,11 @@ Gitify currently only supports mac OS.
 
 ### Development
 
-First you will need to set the testing `CLIENT_ID` and `CLIENT_SECRET` in `src/js/utils/constants.js` file. You can use the development app credentials (use at your own discretion):
+Optional: If you want you use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion).
 
-    Client Id: 3fef4433a29c6ad8f22c
-    Client Secret Key: 9670de733096c15322183ff17ed0fc8704050379
+    OAUTH_CLIENT_ID="123" OAUTH_CLIENT_SECRET="456789" yarn build
 
-To watch for changes in the `src` directory:
+To watch for changes(`webpack`) in the `src` directory:
 
     yarn run watch
 
@@ -44,23 +43,28 @@ To run the actual **electron app**:
 
     yarn start
 
-### Distribution
+### Releases
 
-To prepare the app for distribution run:
+The release process is automated. Follow the steps below.
 
-    yarn run build
-    yarn run pack
-    yarn run make:macos
+    1. Create a [new **draft** release](https://github.com/manosim/gitify/releases/new). Set the tag version to something with the format of `v1.2.3`. Save as a **draft**.
+    2. Once everything is merged to `master`, create a branch that starts with `release/vX.X.X` (ie. `release/v1.2.3`).
+    3. In the same branch, **bump the version** of the app in the `package.json` file and open a PR. GitHub Actions will build, sign and upload the release assets for each commit to that branch as long as a branch is named like `release/vX.X.X` and there is a draft release with the same version number(`package.json`).
+    4. Merge your release branch into `master`.
+    5. Publish the draft release once you've added notes to it and all assets are there.
 
 ### Tests
 
-There are 2 linters for `js` & `scss` and unit tests with `jest`.
+There are 2 checks - one for prettier and one for the unit tests with `jest`.
 
-    // Run only unit tests
-    yarn run jest
+    // Run prettier to check
+    yarn run prettier-check
 
     // Run linter & unit tests with coverage
     yarn run test
+
+    // Run jest directly - allows to pass arguments like `--watch`
+    yarn run jest
 
 ### FAQ
 

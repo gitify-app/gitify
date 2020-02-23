@@ -4,8 +4,8 @@ export default {
 
   DEFAULT_AUTH_OPTIONS: {
     hostname: 'github.com',
-    clientId: '3fef4433a29c6ad8f22c',
-    clientSecret: '9670de733096c15322183ff17ed0fc8704050379',
+    clientId: process.env.OAUTH_CLIENT_ID,
+    clientSecret: process.env.OAUTH_CLIENT_SECRET,
   },
 
   REPO_SLUG: 'manosim/gitify',
