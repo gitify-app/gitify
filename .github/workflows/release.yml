@@ -3,7 +3,7 @@ name: Release App
 on:
   push:
     branches:
-      - 'releases/v**'
+      - 'release/v**'
 
 jobs:
   release-macos:
