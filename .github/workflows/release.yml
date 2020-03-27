@@ -37,7 +37,10 @@ jobs:
 
       - name: Publish macOS (electron-builder)
         env:
+          APPLEID_USERNAME: ${{ secrets.appleid_username }}
+          APPLEID_PASSWORD: ${{ secrets.appleid_password }}
           CSC_LINK: ${{ secrets.mac_certs }}
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
           GH_TOKEN: ${{ secrets.gh_token }}
+          NOTARIZE: true
         run: yarn electron-builder --publish onTagOrDraft
