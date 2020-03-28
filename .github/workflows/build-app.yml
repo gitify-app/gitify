@@ -26,9 +26,6 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Pack (electron-builder)
-        run: yarn pack
-
       - name: Make macOS (electron-builder)
         env:
           CSC_LINK: ${{ secrets.mac_certs }}

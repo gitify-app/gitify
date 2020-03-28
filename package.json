@@ -6,7 +6,6 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack --config webpack.common.js --watch",
-    "pack": "electron-builder --dir",
     "make:macos": "electron-builder --mac",
     "prettier-check": "prettier --check 'src/**/*.{js,ts,tsx}'",
     "prettier": "prettier --single-quote --trailing-comma es5 --write 'src/**/*.{js,ts,tsx}'",
@@ -74,13 +73,19 @@
       "category": "public.app-category.developer-tools",
       "icon": "assets/images/app-icon.icns",
       "identity": "Emmanouil Konstantinidis (3YP8SXP3BF)",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "./entitlements/entitlements.mac.plist",
+      "entitlementsInherit": "./entitlements/entitlements.mac.plist",
       "publish": [
         "github"
       ]
     },
     "dmg": {
-      "icon": "assets/images/app-icon.icns"
-    }
+      "icon": "assets/images/app-icon.icns",
+      "sign": false
+    },
+    "afterSign": "scripts/notarize.js"
   },
   "dependencies": {
     "@primer/octicons-react": "^9.6.0",
@@ -121,6 +126,7 @@
     "@types/styled-components": "^5.0.1",
     "electron": "^8.2.0",
     "electron-builder": "^22.4.1",
+    "electron-notarize": "^0.2.1",
     "jest": "^25.2.3",
     "nock": "^12.0.3",
     "prettier": "=2.0.2",
