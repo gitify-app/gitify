@@ -8,7 +8,7 @@ import {
 const { ipcRenderer, shell } = require('electron');
 
 describe('utils/comms.ts', () => {
-  beforeEach(function() {
+  beforeEach(function () {
     spyOn(ipcRenderer, 'send');
   });
 

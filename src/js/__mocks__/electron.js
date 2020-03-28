@@ -1,4 +1,4 @@
-window.Notification = function(title) {
+window.Notification = function (title) {
   this.title = title;
 
   return {
@@ -16,10 +16,10 @@ window.Audio = class Audio {
 
 window.localStorage = {
   store: {},
-  getItem: function(key) {
+  getItem: function (key) {
     return this.store[key];
   },
-  setItem: function(key, item) {
+  setItem: function (key, item) {
     this.store[key] = item;
   },
   removeItem: jest.fn(),

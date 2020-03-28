@@ -8,7 +8,7 @@ import { loginUser } from '../actions';
 import { AuthState } from '../../types/reducers';
 
 export function getEnterpriseAccountToken(hostname, accounts) {
-  return accounts.find(obj => obj.hostname === hostname).token;
+  return accounts.find((obj) => obj.hostname === hostname).token;
 }
 
 export function generateGitHubAPIUrl(hostname) {

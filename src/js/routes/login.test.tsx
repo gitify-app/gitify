@@ -22,7 +22,7 @@ describe('routes/login.tsx', () => {
     },
   };
 
-  beforeEach(function() {
+  beforeEach(function () {
     // @ts-ignore
     new BrowserWindow().loadURL.mockReset();
     spyOn(ipcRenderer, 'send');

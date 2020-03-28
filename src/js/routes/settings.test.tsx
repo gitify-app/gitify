@@ -33,7 +33,7 @@ describe('routes/settings.tsx', () => {
     } as SettingsState,
   };
 
-  beforeEach(function() {
+  beforeEach(function () {
     spyOn(ipcRenderer, 'send');
 
     props.updateSetting.mockReset();
@@ -80,7 +80,7 @@ describe('routes/settings.tsx', () => {
     expect(props.history.goBack).toHaveBeenCalledTimes(1);
   });
 
-  it('should call the componentWillReceiveProps method', function() {
+  it('should call the componentWillReceiveProps method', function () {
     const { rerender } = render(<SettingsRoute {...props} />);
 
     expect(props.fetchNotifications).toHaveBeenCalledTimes(0);

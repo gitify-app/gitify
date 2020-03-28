@@ -31,7 +31,7 @@ const Title = styled.h3`
 export const LoginButton = styled.button`
   font-size: 0.85rem;
   border-radius: 5px;
-  border: 1px solid ${props => props.theme.primary};
+  border: 1px solid ${(props) => props.theme.primary};
 
   padding: 0.5rem 1rem;
   margin: 0.5rem 0;
@@ -40,11 +40,11 @@ export const LoginButton = styled.button`
   justify-content: center;
   align-items: center;
 
-  background-color: ${props => props.theme.grayDark};
+  background-color: ${(props) => props.theme.grayDark};
   color: white;
 
   &:hover {
-    background-color: ${props => props.theme.grayDarker};
+    background-color: ${(props) => props.theme.grayDarker};
   }
 
   span {

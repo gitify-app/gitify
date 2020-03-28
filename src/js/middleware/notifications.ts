@@ -8,31 +8,31 @@ import NativeNotifications from '../utils/notifications';
 import { updateTrayIcon } from '../utils/comms';
 import { AccountNotifications } from '../../types/reducers';
 
-export default store => next => action => {
+export default (store) => (next) => (action) => {
   const settings = store.getState().settings;
   const accountNotifications: AccountNotifications[] = store.getState()
     .notifications.response;
 
   switch (action.type) {
     case NOTIFICATIONS.SUCCESS:
-      const previousNotifications = accountNotifications.map(account => {
+      const previousNotifications = accountNotifications.map((account) => {
         return {
           hostname: account.hostname,
           notifications: account.notifications.map(
-            notification => notification.id
+            (notification) => notification.id
           ),
         };
       });
 
-      const newNotifications = action.payload.map(AccountNotifications => {
+      const newNotifications = action.payload.map((AccountNotifications) => {
         const accountPreviousNotifications =
           previousNotifications.length > 0
             ? previousNotifications.find(
-                obj => obj.hostname === AccountNotifications.hostname
+                (obj) => obj.hostname === AccountNotifications.hostname
               ).notifications
             : [];
 
-        return AccountNotifications.notifications.filter(obj => {
+        return AccountNotifications.notifications.filter((obj) => {
           return !accountPreviousNotifications.includes(obj.id);
         });
       });
@@ -66,7 +66,7 @@ export default store => next => action => {
 
     case MARK_REPO_NOTIFICATION.SUCCESS:
       const updatedNotificationsCount = accountNotifications
-        .map(accNotifications => {
+        .map((accNotifications) => {
           if (accNotifications.hostname !== action.meta.hostname) {
             return accNotifications;
           }
@@ -74,9 +74,9 @@ export default store => next => action => {
           return _.updateWith(
             accNotifications,
             '[notifications]',
-            notifications => {
+            (notifications) => {
               return notifications.filter(
-                obj => obj.repository.full_name !== action.meta.repoSlug
+                (obj) => obj.repository.full_name !== action.meta.repoSlug
               );
             }
           );

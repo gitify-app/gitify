@@ -6,14 +6,14 @@ import settingsMiddleware from './settings';
 const dispatchWithStoreOf = (_, action) => {
   let dispatched = null;
   const dispatch = settingsMiddleware()(
-    actionAttempt => (dispatched = actionAttempt)
+    (actionAttempt) => (dispatched = actionAttempt)
   );
   dispatch(action);
   return dispatched;
 };
 
 describe('middleware/settings.js', () => {
-  beforeEach(function() {
+  beforeEach(function () {
     spyOn(ipcRenderer, 'send');
   });
 
