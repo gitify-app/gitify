@@ -67,7 +67,7 @@ describe('components/Sidebar.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself & its children (logged out)', function() {
+  it('should render itself & its children (logged out)', function () {
     const caseProps = {
       ...props,
       notifications: [],
@@ -97,7 +97,7 @@ describe('components/Sidebar.tsx', () => {
     expect(window.clearInterval).toHaveBeenCalledTimes(1);
   });
 
-  it('should load notifications after 60000ms', function() {
+  it('should load notifications after 60000ms', function () {
     const {} = render(
       <MemoryRouter>
         <Sidebar {...props} />

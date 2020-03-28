@@ -6,8 +6,8 @@ import { AllRead } from './all-read';
 
 jest.mock('react-typist');
 
-describe('components/all-read.tsx', function() {
-  it('should render itself & its children', function() {
+describe('components/all-read.tsx', function () {
+  it('should render itself & its children', function () {
     spyOn(Constants, 'ALLREAD_EMOJIS');
     spyOn(Constants, 'ALLREAD_MESSAGES');
 

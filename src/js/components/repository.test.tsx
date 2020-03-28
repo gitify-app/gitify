@@ -9,7 +9,7 @@ const { shell } = require('electron');
 
 jest.mock('./notification');
 
-describe('components/repository.tsx', function() {
+describe('components/repository.tsx', function () {
   const props = {
     hostname: 'github.com',
     repoName: 'manosim/gitify',
@@ -21,12 +21,12 @@ describe('components/repository.tsx', function() {
     spyOn(shell, 'openExternal');
   });
 
-  it('should render itself & its children', function() {
+  it('should render itself & its children', function () {
     const tree = TestRenderer.create(<RepositoryNotifications {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
-  it('should open the browser when clicking on the repo name', function() {
+  it('should open the browser when clicking on the repo name', function () {
     const { getByText } = render(<RepositoryNotifications {...props} />);
 
     fireEvent.click(getByText(props.repoName));
@@ -37,7 +37,7 @@ describe('components/repository.tsx', function() {
     );
   });
 
-  it('should mark a repo as read', function() {
+  it('should mark a repo as read', function () {
     const { getByRole, debug } = render(<RepositoryNotifications {...props} />);
 
     fireEvent.click(getByRole('button'));

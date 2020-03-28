@@ -1,6 +1,6 @@
 export function createMiddleware() {
   return () => {
-    return next => action => {
+    return (next) => (action) => {
       return next(action);
     };
   };
@@ -13,7 +13,7 @@ export function createLoader() {
     },
   };
 
-  return () => new Promise(resolve => resolve(state));
+  return () => new Promise((resolve) => resolve(state));
 }
 
 export function reducer(clb) {

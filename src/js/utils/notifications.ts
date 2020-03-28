@@ -25,7 +25,7 @@ export default {
     let title, body, icon, notificationUrl;
 
     if (count === 1) {
-      const notification = notifications.find(obj => obj.length > 0)[0];
+      const notification = notifications.find((obj) => obj.length > 0)[0];
       title = `Gitify - ${notification.repository.full_name}`;
       body = notification.subject.title;
       notificationUrl = notification.subject.url;
@@ -39,7 +39,7 @@ export default {
       silent: true,
     });
 
-    nativeNotification.onclick = function() {
+    nativeNotification.onclick = function () {
       if (count === 1) {
         const appWindow = remote.getCurrentWindow();
         const url = generateGitHubWebUrl(notificationUrl);
