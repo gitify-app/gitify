@@ -32,9 +32,6 @@ jobs:
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
         run: yarn build
 
-      - name: Pack (electron-builder)
-        run: yarn pack
-
       - name: Publish macOS (electron-builder)
         env:
           APPLEID_USERNAME: ${{ secrets.appleid_username }}
