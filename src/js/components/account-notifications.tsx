@@ -11,7 +11,7 @@ const Account = styled.div`
   justify-content: flex-end;
   align-items: center;
   padding: 0.5rem 1rem;
-  background-color: ${props => props.theme.primaryDark};
+  background-color: ${(props) => props.theme.primaryDark};
   color: white;
   font-size: 0.9rem;
 
@@ -30,7 +30,7 @@ export const AccountNotifications = (props: IProps) => {
   const { hostname, showAccountHostname, notifications } = props;
 
   const groupedNotifications = _(notifications)
-    .groupBy(obj => obj.repository.full_name)
+    .groupBy((obj) => obj.repository.full_name)
     .sortBy((_, key) => key)
     .value();
 
@@ -47,7 +47,7 @@ export const AccountNotifications = (props: IProps) => {
         </Account>
       )}
 
-      {Object.values(groupedNotifications).map(repoNotifications => {
+      {Object.values(groupedNotifications).map((repoNotifications) => {
         const repoSlug = repoNotifications[0].repository.full_name;
 
         return (

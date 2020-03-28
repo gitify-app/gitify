@@ -18,13 +18,13 @@ describe('routes/enterprise-login.js', () => {
   const props = {
     enterpriseAccountsCount: 0,
     dispatch: jest.fn(),
-    handleSubmit: cb => cb,
+    handleSubmit: (cb) => cb,
     history: {
       goBack: jest.fn(),
     },
   };
 
-  beforeEach(function() {
+  beforeEach(function () {
     // @ts-ignore
     new BrowserWindow().loadURL.mockReset();
     spyOn(ipcRenderer, 'send');

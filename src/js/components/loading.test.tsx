@@ -14,7 +14,7 @@ jest.mock('nprogress', () => {
   };
 });
 
-describe('components/loading.js', function() {
+describe('components/loading.js', function () {
   beforeEach(() => {
     NProgress.configure.mockReset();
     NProgress.start.mockReset();
@@ -34,7 +34,7 @@ describe('components/loading.js', function() {
     expect(mappedProps.isLoading).toBeFalsy();
   });
 
-  it('should check that NProgress is getting called in getDerivedStateFromProps (loading)', function() {
+  it('should check that NProgress is getting called in getDerivedStateFromProps (loading)', function () {
     const { container } = render(<Loading isLoading={true} />);
 
     expect(container.innerHTML).toBe('');
@@ -42,7 +42,7 @@ describe('components/loading.js', function() {
     expect(NProgress.start).toHaveBeenCalledTimes(1);
   });
 
-  it('should check that NProgress is getting called in getDerivedStateFromProps (not loading)', function() {
+  it('should check that NProgress is getting called in getDerivedStateFromProps (not loading)', function () {
     const { container } = render(<Loading isLoading={false} />);
 
     expect(container.innerHTML).toBe('');
@@ -50,7 +50,7 @@ describe('components/loading.js', function() {
     expect(NProgress.done).toHaveBeenCalledTimes(1);
   });
 
-  it('should remove NProgress on unmount', function() {
+  it('should remove NProgress on unmount', function () {
     const { unmount } = render(<Loading isLoading={false} />);
     expect(NProgress.remove).toHaveBeenCalledTimes(0);
     unmount();

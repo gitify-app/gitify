@@ -16,10 +16,10 @@ const Wrapper = styled.div`
   display: flex;
   margin: 0;
   padding: 0.5rem 0.5rem;
-  border-bottom: 1px solid ${props => props.theme.grayLight};
+  border-bottom: 1px solid ${(props) => props.theme.grayLight};
 
   &:hover {
-    background-color: ${props => props.theme.grayLighter};
+    background-color: ${(props) => props.theme.grayLighter};
   }
 `;
 
@@ -57,7 +57,7 @@ const Button = styled.button`
   border: none;
 
   .octicon:hover {
-    color: ${props => props.theme.success};
+    color: ${(props) => props.theme.success};
     cursor: pointer;
   }
 `;
@@ -69,7 +69,7 @@ interface IProps {
   markNotification: (id: string, hostname: string) => void;
 }
 
-export const NotificationItem: React.FC<IProps> = props => {
+export const NotificationItem: React.FC<IProps> = (props) => {
   const pressTitle = () => {
     openBrowser();
 

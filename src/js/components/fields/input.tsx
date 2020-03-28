@@ -31,7 +31,7 @@ const Input = styled.input`
 const ErrorMessage = styled.div`
   margin-top: 0.5rem;
   font-size: 90%;
-  color: ${props => props.theme.danger};
+  color: ${(props) => props.theme.danger};
 `;
 
 export interface IProps {

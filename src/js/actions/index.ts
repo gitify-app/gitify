@@ -25,7 +25,7 @@ export function loginUser(authOptions, code) {
   const { hostname } = authOptions;
   const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
 
-  return dispatch => {
+  return (dispatch) => {
     const url = `https://${hostname}/login/oauth/access_token`;
     const method = 'POST';
     const data = {
@@ -37,7 +37,7 @@ export function loginUser(authOptions, code) {
     dispatch({ type: LOGIN.REQUEST });
 
     return apiRequest(url, method, data)
-      .then(function(response) {
+      .then(function (response) {
         dispatch({
           type: LOGIN.SUCCESS,
           payload: response.data,
@@ -45,7 +45,7 @@ export function loginUser(authOptions, code) {
           hostname,
         });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         dispatch({ type: LOGIN.FAILURE, payload: error.response.data });
       });
   };
@@ -77,7 +77,7 @@ export function fetchNotifications() {
 
     function getEnterpriseNotifications() {
       const enterpriseAccounts = getState().auth.enterpriseAccounts;
-      return enterpriseAccounts.map(account => {
+      return enterpriseAccounts.map((account) => {
         const hostname = account.hostname;
         const token = account.token;
         const url = `https://${hostname}/api/v3/${endpointSuffix}`;
@@ -92,7 +92,7 @@ export function fetchNotifications() {
       .then(
         axios.spread((gitHubNotifications, ...entAccNotifications) => {
           const notifications = entAccNotifications.map(
-            accountNotifications => {
+            (accountNotifications) => {
               const { hostname } = parse(accountNotifications.config.url);
 
               return {
@@ -118,7 +118,7 @@ export function fetchNotifications() {
           });
         })
       )
-      .catch(error =>
+      .catch((error) =>
         dispatch({ type: NOTIFICATIONS.FAILURE, payload: error.response.data })
       );
   };
@@ -141,13 +141,13 @@ export function markNotification(id, hostname) {
     dispatch({ type: MARK_NOTIFICATION.REQUEST });
 
     return apiRequestAuth(url, method, token, {})
-      .then(function(response) {
+      .then(function (response) {
         dispatch({
           type: MARK_NOTIFICATION.SUCCESS,
           meta: { id, hostname },
         });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         dispatch({
           type: MARK_NOTIFICATION.FAILURE,
           payload: error.response.data,
@@ -177,14 +177,14 @@ export function markRepoNotifications(repoSlug, hostname) {
     dispatch({ type: MARK_REPO_NOTIFICATION.REQUEST });
 
     return apiRequestAuth(url, method, token, {})
-      .then(function(response) {
+      .then(function (response) {
         dispatch({
           type: MARK_REPO_NOTIFICATION.SUCCESS,
           payload: response.data,
           meta: { hostname, repoSlug },
         });
       })
-      .catch(function(error) {
+      .catch(function (error) {
         dispatch({
           type: MARK_REPO_NOTIFICATION.FAILURE,
           payload: error.response.data,

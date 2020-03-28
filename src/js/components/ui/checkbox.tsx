@@ -34,19 +34,19 @@ const StyledCheckbox = styled.div`
   display: inline-block;
   width: 24px;
   height: 24px;
-  background: ${props =>
+  background: ${(props) =>
     // @ts-ignore
     props.isChecked ? props.theme.primaryDark : props.theme.primary};
   border-radius: 3px;
   transition: all 150ms;
 
   ${HiddenCheckbox}:focus + & {
-    box-shadow: 0 0 0 3px ${props => props.theme.info};
+    box-shadow: 0 0 0 3px ${(props) => props.theme.info};
   }
 
   ${Icon} {
     // @ts-ignore
-    visibility: ${props => (props.isChecked ? 'visible' : 'hidden')};
+    visibility: ${(props) => (props.isChecked ? 'visible' : 'hidden')};
   }
 `;
 

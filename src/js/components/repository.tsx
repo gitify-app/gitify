@@ -12,7 +12,7 @@ import NotificationItem from './notification';
 
 const Wrapper = styled.div`
   display: flex;
-  background-color: ${props => props.theme.grayLight};
+  background-color: ${(props) => props.theme.grayLight};
   padding: 0.55rem 0.5rem;
 `;
 
@@ -47,7 +47,7 @@ const Button = styled.button`
   border: none;
 
   .octicon:hover {
-    color: ${props => props.theme.success};
+    color: ${(props) => props.theme.success};
     cursor: pointer;
   }
 `;
@@ -59,7 +59,7 @@ interface IProps {
   markRepoNotifications: (repoSlug: string, hostname: string) => void;
 }
 
-export const RepositoryNotifications: React.FC<IProps> = props => {
+export const RepositoryNotifications: React.FC<IProps> = (props) => {
   const openBrowser = () => {
     const url = props.repoNotifications[0].repository.html_url;
     shell.openExternal(url);
@@ -94,7 +94,7 @@ export const RepositoryNotifications: React.FC<IProps> = props => {
       </Wrapper>
 
       <TransitionGroup>
-        {repoNotifications.map(obj => (
+        {repoNotifications.map((obj) => (
           <CSSTransition key={obj.id} timeout={250} classNames="notification">
             <NotificationItem
               key={obj.id}

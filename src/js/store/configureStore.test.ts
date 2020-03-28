@@ -1,7 +1,7 @@
 import configureStore from './configureStore';
 
-describe('store/configureStore.js', function() {
-  it('should load the store', function() {
+describe('store/configureStore.js', function () {
+  it('should load the store', function () {
     const store = configureStore();
 
     expect(store.dispatch).toBeDefined();

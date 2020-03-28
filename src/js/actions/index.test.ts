@@ -30,11 +30,9 @@ describe('actions/index.js', () => {
     const authOptions = Constants.DEFAULT_AUTH_OPTIONS;
     const code = 'THISISACODE';
 
-    nock('https://github.com/')
-      .post('/login/oauth/access_token')
-      .reply(200, {
-        access_token: 'THISISATOKEN',
-      });
+    nock('https://github.com/').post('/login/oauth/access_token').reply(200, {
+      access_token: 'THISISATOKEN',
+    });
 
     const expectedActions = [
       { type: actions.LOGIN.REQUEST },
