@@ -40,7 +40,7 @@ jobs:
           name: Gitify-dist
           path: dist
 
-  build-win-windows:
+  build-windows:
     runs-on: ubuntu-18.04
 
     steps:
