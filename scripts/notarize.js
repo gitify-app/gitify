@@ -10,9 +10,13 @@ const notarizeApp = async (context) => {
   const shouldNotarize = process.env.NOTARIZE === 'true';
 
   if (!shouldNotarize || !isMacOS) {
-    console.log('Either should not notarize or not building for macOS.');
+    console.log(
+      '  • notarizing      either should not notarize or not building for macOS'
+    );
     return;
   }
+
+  console.log('  • notarizing      started');
 
   return await notarize({
     appBundleId,
