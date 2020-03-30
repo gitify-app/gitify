@@ -67,7 +67,7 @@ jobs:
         run: yarn make:win
 
       - name: Clean up builds
-        run: rm -rfv dist/win-unpacked
+        run: Remove-Item dist/win-unpacked -Recurse
 
       - uses: actions/upload-artifact@v1
         with:
