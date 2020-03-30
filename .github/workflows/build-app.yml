@@ -64,7 +64,6 @@ jobs:
         run: yarn build
 
       - name: Make Windows (electron-builder)
-        env:
         run: yarn make:win
 
       - name: Clean up builds
