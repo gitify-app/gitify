@@ -41,7 +41,7 @@ jobs:
           path: dist
 
   build-windows:
-    runs-on: ubuntu-18.04
+    runs-on: windows-2019
 
     steps:
       - uses: actions/checkout@v2
@@ -67,7 +67,7 @@ jobs:
         run: yarn make:win
 
       - name: Clean up builds
-        run: rm -rfv dist/mac
+        run: rm -rfv dist/win-unpacked
 
       - uses: actions/upload-artifact@v1
         with:

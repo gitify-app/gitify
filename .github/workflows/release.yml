@@ -43,7 +43,7 @@ jobs:
         run: yarn make:mac --publish onTagOrDraft
 
   release-windows:
-    runs-on: ubuntu-18.04
+    runs-on: windows-2019
 
     steps:
       - uses: actions/checkout@v2
