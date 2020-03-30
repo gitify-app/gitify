@@ -37,7 +37,7 @@ jobs:
 
       - uses: actions/upload-artifact@v1
         with:
-          name: Gitify-dist
+          name: Gitify-dist-mac
           path: dist
 
   build-windows:
@@ -71,5 +71,5 @@ jobs:
 
       - uses: actions/upload-artifact@v1
         with:
-          name: Gitify-dist
+          name: Gitify-dist-win
           path: dist
