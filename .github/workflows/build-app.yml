@@ -64,6 +64,9 @@ jobs:
         run: yarn build
 
       - name: Make Windows (electron-builder)
+        env:
+          CSC_LINK: ${{ secrets.mac_certs }}
+          CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
         run: yarn make:win
 
       - name: Clean up builds

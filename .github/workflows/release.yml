@@ -70,5 +70,7 @@ jobs:
 
       - name: Publish Windows (electron-builder)
         env:
+          CSC_LINK: ${{ secrets.mac_certs }}
+          CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
           GH_TOKEN: ${{ secrets.gh_token }}
         run: yarn make:win --publish onTagOrDraft
