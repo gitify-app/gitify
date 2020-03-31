@@ -97,7 +97,6 @@
   },
   "dependencies": {
     "@primer/octicons-react": "^9.6.0",
-    "auto-launch": "=5.0.5",
     "axios": "=0.19.2",
     "date-fns": "^2.11.1",
     "electron-updater": "^4.2.5",

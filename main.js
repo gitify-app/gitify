@@ -2,19 +2,10 @@ const { ipcMain } = require('electron');
 const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
 const path = require('path');
-const AutoLaunch = require('auto-launch');
 
 const iconIdle = path.join(__dirname, 'assets', 'images', 'tray-idleTemplate.png');
 const iconActive = path.join(__dirname, 'assets', 'images', 'tray-active.png');
 const isDarwin = process.platform === 'darwin';
-
-const autoStart =
-  isDarwin &&
-  new AutoLaunch({
-    name: 'Gitify',
-    path: process.execPath.match(/.*?\.app/)[0],
-    isHidden: true,
-  });
 
 const browserWindowOpts = {
   width: 500,
@@ -41,8 +32,6 @@ menubarApp.on('ready', () => {
   autoUpdater.checkForUpdatesAndNotify();
 
   ipcMain.on('reopen-window', () => menubarApp.showWindow());
-  ipcMain.on('startup-enable', () => autoStart && autoStart.enable());
-  ipcMain.on('startup-disable', () => autoStart && autoStart.disable());
   ipcMain.on('app-quit', () => menubarApp.app.quit());
   ipcMain.on('update-icon', (_, arg) => {
     if (!menubarApp.tray.isDestroyed()) {

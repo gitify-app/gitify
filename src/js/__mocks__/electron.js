@@ -51,6 +51,8 @@ module.exports = {
     dialog: dialog,
     app: {
       getVersion: () => '0.0.1',
+      getLoginItemSettings: jest.fn(),
+      setLoginItemSettings: () => {},
     },
     getCurrentWindow: jest.fn(() => browserWindow),
   },
