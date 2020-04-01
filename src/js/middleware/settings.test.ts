@@ -1,4 +1,4 @@
-const { ipcRenderer } = require('electron');
+const { remote } = require('electron');
 
 import * as actions from '../actions';
 import settingsMiddleware from './settings';
@@ -13,11 +13,9 @@ const dispatchWithStoreOf = (_, action) => {
 };
 
 describe('middleware/settings.js', () => {
-  beforeEach(function () {
-    spyOn(ipcRenderer, 'send');
-  });
-
   it('should toggle the openAtStartup setting', () => {
+    spyOn(remote.app, 'setLoginItemSettings');
+
     const action = {
       type: actions.UPDATE_SETTING,
       setting: 'openAtStartup',
@@ -26,7 +24,6 @@ describe('middleware/settings.js', () => {
 
     expect(dispatchWithStoreOf({}, action)).toEqual(action);
 
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('startup-enable');
+    expect(remote.app.setLoginItemSettings).toHaveBeenCalledTimes(1);
   });
 });
