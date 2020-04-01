@@ -73,7 +73,7 @@ jobs:
           GH_TOKEN: ${{ secrets.gh_token }}
         run: yarn make:win --publish onTagOrDraft
 
-  release-linuxs:
+  release-linux:
     runs-on: ubuntu-18.04
 
     steps:
