@@ -101,7 +101,7 @@ jobs:
         run: yarn make:linux
 
       - name: Clean up builds
-        run: Remove-Item dist/linux-unpacked -Recurse # FIXME!
+        run: rm -rfv dist/linux-unpacked
 
       - uses: actions/upload-artifact@v1
         with:
