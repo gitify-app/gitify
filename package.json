@@ -6,8 +6,9 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack --config webpack.common.js --watch",
-    "make:win": "electron-builder --win",
+    "make:linux": "electron-builder --linux",
     "make:macos": "electron-builder --mac",
+    "make:win": "electron-builder --win",
     "prettier-check": "prettier --check 'src/**/*.{js,ts,tsx}'",
     "prettier": "prettier --single-quote --trailing-comma es5 --write 'src/**/*.{js,ts,tsx}'",
     "jest": "jest",

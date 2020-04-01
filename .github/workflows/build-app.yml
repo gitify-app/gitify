@@ -73,3 +73,37 @@ jobs:
         with:
           name: Gitify-dist-win
           path: dist
+
+  build-linux:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Make Linux (electron-builder)
+        run: yarn make:linux
+
+      - name: Clean up builds
+        run: Remove-Item dist/linux-unpacked -Recurse # FIXME!
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Gitify-dist-linux
+          path: dist
