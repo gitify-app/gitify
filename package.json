@@ -94,6 +94,11 @@
     "nsis": {
       "oneClick": false
     },
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "category": "Development",
+      "maintainer": "Emmanouil Konstantinidis"
+    },
     "afterSign": "scripts/notarize.js"
   },
   "dependencies": {
