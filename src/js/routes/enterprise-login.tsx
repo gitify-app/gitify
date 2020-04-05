@@ -37,7 +37,7 @@ const ButtonClose = styled.button`
 
   &:hover {
     cursor: pointer;
-    color: ${props => props.theme.primary};
+    color: ${(props) => props.theme.primary};
   }
 `;
 
@@ -164,7 +164,7 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
               clientId: '',
               clientSecret: '',
             }}
-            onSubmit={data => this.handleSubmit(data, this.props.dispatch)}
+            onSubmit={(data) => this.handleSubmit(data, this.props.dispatch)}
             validate={validate}
           >
             {this.renderForm}

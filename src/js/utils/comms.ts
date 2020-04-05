@@ -1,17 +1,16 @@
-import { SettingsState } from '../../types/reducers';
+const { ipcRenderer, remote, shell } = require('electron');
 
-const { ipcRenderer, shell } = require('electron');
+import { SettingsState } from '../../types/reducers';
 
 export function openExternalLink(url) {
   shell.openExternal(url);
 }
 
 export function setAutoLaunch(value) {
-  if (value) {
-    ipcRenderer.send('startup-enable');
-  } else {
-    ipcRenderer.send('startup-disable');
-  }
+  remote.app.setLoginItemSettings({
+    openAtLogin: value,
+    openAsHidden: value,
+  });
 }
 
 export function updateTrayIcon(notificationsLength = 0) {

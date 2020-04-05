@@ -150,7 +150,7 @@ describe('reducers/notifications.ts', () => {
         {
           hostname,
           notifications: mockedEnterpriseNotifications.filter(
-            item => item.id !== id
+            (item) => item.id !== id
           ),
         },
       ],
@@ -207,7 +207,7 @@ describe('reducers/notifications.ts', () => {
         {
           hostname,
           notifications: mockedGithubNotifications.filter(
-            item => item.repository.full_name !== repoSlug
+            (item) => item.repository.full_name !== repoSlug
           ),
         },
       ],

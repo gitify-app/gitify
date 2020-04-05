@@ -27,7 +27,7 @@ export default function reducer(
       return { ...state, isFetching: false, failed: true, response: [] };
     case MARK_NOTIFICATION.SUCCESS:
       const accountIndex = state.response.findIndex(
-        obj => obj.hostname === action.meta.hostname
+        (obj) => obj.hostname === action.meta.hostname
       );
 
       return _.updateWith(
@@ -35,21 +35,21 @@ export default function reducer(
         `[response][${accountIndex}][notifications]`,
         (accNotifications: Notification[]) => {
           return accNotifications.filter(
-            notification => notification.id !== action.meta.id
+            (notification) => notification.id !== action.meta.id
           );
         }
       );
     case MARK_REPO_NOTIFICATION.SUCCESS:
       const accNotificationsRepoIndex = state.response.findIndex(
-        obj => obj.hostname === action.meta.hostname
+        (obj) => obj.hostname === action.meta.hostname
       );
 
       return _.updateWith(
         { ...state },
         `[response][${accNotificationsRepoIndex}][notifications]`,
-        accNotifications => {
+        (accNotifications) => {
           return accNotifications.filter(
-            notification =>
+            (notification) =>
               notification.repository.full_name !== action.meta.repoSlug
           );
         }

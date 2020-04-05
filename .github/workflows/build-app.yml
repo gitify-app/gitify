@@ -26,19 +26,84 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Pack (electron-builder)
-        run: yarn pack
-
       - name: Make macOS (electron-builder)
         env:
           CSC_LINK: ${{ secrets.mac_certs }}
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
-        run: yarn make:macos
+        run: yarn make:macos --publish=never -c.mac.identity=null
 
       - name: Clean up builds
         run: rm -rfv dist/mac
 
       - uses: actions/upload-artifact@v1
         with:
-          name: Gitify-dist
+          name: Gitify-dist-mac
+          path: dist
+
+  build-windows:
+    runs-on: windows-2019
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Make Windows (electron-builder)
+        run: yarn make:win --publish=never
+
+      - name: Clean up builds
+        run: Remove-Item dist/win-unpacked -Recurse
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Gitify-dist-win
+          path: dist
+
+  build-linux:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Get yarn cache
+        id: yarn-cache
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+
+      - name: Install Dependencies
+        run: yarn install
+
+      - name: Build
+        run: yarn build
+
+      - name: Make Linux (electron-builder)
+        run: yarn make:linux --publish=never
+
+      - name: Clean up builds
+        run: rm -rfv dist/linux-unpacked
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Gitify-dist-linux
           path: dist

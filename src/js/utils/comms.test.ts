@@ -5,10 +5,10 @@ import {
   setAutoLaunch,
 } from './comms';
 
-const { ipcRenderer, shell } = require('electron');
+const { ipcRenderer, remote, shell } = require('electron');
 
 describe('utils/comms.ts', () => {
-  beforeEach(function() {
+  beforeEach(function () {
     spyOn(ipcRenderer, 'send');
   });
 
@@ -39,14 +39,24 @@ describe('utils/comms.ts', () => {
   });
 
   it('should setAutoLaunch (true)', () => {
+    spyOn(remote.app, 'setLoginItemSettings');
+
     setAutoLaunch(true);
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('startup-enable');
+    expect(remote.app.setLoginItemSettings).toHaveBeenCalledTimes(1);
+    expect(remote.app.setLoginItemSettings).toHaveBeenCalledWith({
+      openAtLogin: true,
+      openAsHidden: true,
+    });
   });
 
   it('should setAutoLaunch (false)', () => {
+    spyOn(remote.app, 'setLoginItemSettings');
+
     setAutoLaunch(false);
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('startup-disable');
+    expect(remote.app.setLoginItemSettings).toHaveBeenCalledTimes(1);
+    expect(remote.app.setLoginItemSettings).toHaveBeenCalledWith({
+      openAtLogin: false,
+      openAsHidden: false,
+    });
   });
 });

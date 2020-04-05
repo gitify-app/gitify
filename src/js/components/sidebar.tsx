@@ -18,7 +18,7 @@ const Wrapper = styled.div`
   position: fixed;
   left: ${SIDEBAR_WIDTH};
   margin-left: -${SIDEBAR_WIDTH};
-  background-color: ${props => props.theme.primary};
+  background-color: ${(props) => props.theme.primary};
   width: ${SIDEBAR_WIDTH};
   height: 100%;
   overflow-y: auto;
@@ -51,7 +51,7 @@ const Status = styled.div`
   align-items: center;
   margin: 0.25rem 0;
   padding: 0.25rem 0.55rem;
-  color: ${props => props.theme.success};
+  color: ${(props) => props.theme.success};
   font-size: 75%;
   font-weight: 700;
   line-height: 1;
@@ -83,7 +83,7 @@ const FooterButton = styled.button`
   }
 
   .octicon:hover {
-    color: ${props => props.theme.info};
+    color: ${(props) => props.theme.info};
   }
 `;
 

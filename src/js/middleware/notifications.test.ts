@@ -39,7 +39,7 @@ const createFakeStore = () => ({
 const dispatchWithStoreOf = (_, action) => {
   let dispatched = null;
   const dispatch = notificationsMiddleware(createFakeStore())(
-    actionAttempt => (dispatched = actionAttempt)
+    (actionAttempt) => (dispatched = actionAttempt)
   );
   dispatch(action);
   return dispatched;

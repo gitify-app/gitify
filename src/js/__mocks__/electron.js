@@ -1,4 +1,4 @@
-window.Notification = function(title) {
+window.Notification = function (title) {
   this.title = title;
 
   return {
@@ -16,10 +16,10 @@ window.Audio = class Audio {
 
 window.localStorage = {
   store: {},
-  getItem: function(key) {
+  getItem: function (key) {
     return this.store[key];
   },
-  setItem: function(key, item) {
+  setItem: function (key, item) {
     this.store[key] = item;
   },
   removeItem: jest.fn(),
@@ -49,8 +49,13 @@ module.exports = {
   remote: {
     BrowserWindow: () => browserWindow,
     dialog: dialog,
+    process: {
+      platform: 'darwin',
+    },
     app: {
       getVersion: () => '0.0.1',
+      getLoginItemSettings: jest.fn(),
+      setLoginItemSettings: () => {},
     },
     getCurrentWindow: jest.fn(() => browserWindow),
   },

@@ -27,7 +27,7 @@ export const NotificationsRoute = (props: IProps) => {
 
   return (
     <div>
-      {accountNotifications.map(account => (
+      {accountNotifications.map((account) => (
         <Account
           key={account.hostname}
           hostname={account.hostname}

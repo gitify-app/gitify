@@ -1,15 +1,15 @@
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, remote } = require('electron');
 
 import * as React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-const { remote } = require('electron');
-
 import { AppState, SettingsState } from '../../types/reducers';
 import { fetchNotifications, updateSetting, logout } from '../actions';
 import { FieldCheckbox } from '../components/ui/checkbox';
 import { updateTrayIcon } from '../utils/comms';
+
+const isLinux = remote.process.platform === 'linux';
 
 const Wrapper = styled.div`
   display: flex;
@@ -36,7 +36,7 @@ const Footer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: ${props => props.theme.grayLight};
+  background-color: ${(props) => props.theme.grayLight};
   font-size: 0.85rem;
 `;
 
@@ -53,7 +53,7 @@ const ButtonClose = styled.button`
 
   &:hover {
     cursor: pointer;
-    color: ${props => props.theme.primary};
+    color: ${(props) => props.theme.primary};
   }
 `;
 
@@ -62,13 +62,13 @@ const ButtonFooter = styled.button`
   padding: 0.25rem 0.5rem;
   margin: 0.25rem 0.5rem;
   font-size: 0.75rem;
-  background-color: ${props => props.theme.primary};
-  border: 0x solid ${props => props.theme.danger};
-  border-radius: ${props => props.theme.borderRadius};
+  background-color: ${(props) => props.theme.primary};
+  border: 0x solid ${(props) => props.theme.danger};
+  border-radius: ${(props) => props.theme.borderRadius};
   color: white;
 
   &:hover {
-    background-color: ${props => props.theme.primaryDark};
+    background-color: ${(props) => props.theme.primaryDark};
     color: white;
   }
 
@@ -139,7 +139,7 @@ export class SettingsRoute extends React.Component<IProps> {
             name="showOnlyParticipating"
             label="Show only participating"
             checked={settings.participating}
-            onChange={evt =>
+            onChange={(evt) =>
               this.props.updateSetting('participating', evt.target.checked)
             }
           />
@@ -147,7 +147,7 @@ export class SettingsRoute extends React.Component<IProps> {
             name="playSound"
             label="Play sound"
             checked={settings.playSound}
-            onChange={evt =>
+            onChange={(evt) =>
               this.props.updateSetting('playSound', evt.target.checked)
             }
           />
@@ -155,7 +155,7 @@ export class SettingsRoute extends React.Component<IProps> {
             name="showNotifications"
             label="Show notifications"
             checked={settings.showNotifications}
-            onChange={evt =>
+            onChange={(evt) =>
               this.props.updateSetting('showNotifications', evt.target.checked)
             }
           />
@@ -163,18 +163,20 @@ export class SettingsRoute extends React.Component<IProps> {
             name="onClickMarkAsRead"
             label="On Click, Mark as Read"
             checked={settings.markOnClick}
-            onChange={evt =>
+            onChange={(evt) =>
               this.props.updateSetting('markOnClick', evt.target.checked)
             }
           />
-          <FieldCheckbox
-            name="openAtStartUp"
-            label="Open at startup"
-            checked={settings.openAtStartup}
-            onChange={evt =>
-              this.props.updateSetting('openAtStartup', evt.target.checked)
-            }
-          />
+          {!isLinux && (
+            <FieldCheckbox
+              name="openAtStartUp"
+              label="Open at startup"
+              checked={settings.openAtStartup}
+              onChange={(evt) =>
+                this.props.updateSetting('openAtStartup', evt.target.checked)
+              }
+            />
+          )}
           <FieldCheckbox
             name="showDockIcon"
             label="Show dock icon"
