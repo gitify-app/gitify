@@ -95,7 +95,10 @@
       "oneClick": false
     },
     "linux": {
-      "target": ["AppImage", "deb"],
+      "target": [
+        "AppImage",
+        "deb"
+      ],
       "category": "Development",
       "maintainer": "Emmanouil Konstantinidis"
     },

@@ -30,6 +30,7 @@ jobs:
         env:
           CSC_LINK: ${{ secrets.mac_certs }}
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
+          DEBUG: electron-builder
         run: yarn make:macos -c.mac.identity=null
 
       - name: Clean up builds
@@ -64,6 +65,8 @@ jobs:
         run: yarn build
 
       - name: Make Windows (electron-builder)
+        env:
+          DEBUG: electron-builder
         run: yarn make:win
 
       - name: Clean up builds
@@ -98,6 +101,8 @@ jobs:
         run: yarn build
 
       - name: Make Linux (electron-builder)
+        env:
+          DEBUG: electron-builder
         run: yarn make:linux
 
       - name: Clean up builds
