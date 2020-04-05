@@ -6,8 +6,9 @@
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack --config webpack.common.js --watch",
-    "make:win": "electron-builder --win",
+    "make:linux": "electron-builder --linux",
     "make:macos": "electron-builder --mac",
+    "make:win": "electron-builder --win",
     "prettier-check": "prettier --check 'src/**/*.{js,ts,tsx}'",
     "prettier": "prettier --single-quote --trailing-comma es5 --write 'src/**/*.{js,ts,tsx}'",
     "jest": "jest",
@@ -93,6 +94,14 @@
     "nsis": {
       "oneClick": false
     },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "category": "Development",
+      "maintainer": "Emmanouil Konstantinidis"
+    },
     "afterSign": "scripts/notarize.js"
   },
   "dependencies": {
@@ -100,14 +109,14 @@
     "axios": "=0.19.2",
     "date-fns": "^2.11.1",
     "electron-updater": "^4.2.5",
-    "final-form": "^4.18.7",
+    "final-form": "^4.19.1",
     "lodash": "^4.17.15",
     "menubar": "^8.0.1",
     "nprogress": "=0.2.0",
     "react": "=16.13.1",
     "react-dom": "=16.13.1",
     "react-emojione": "=5.0.1",
-    "react-final-form": "^6.3.5",
+    "react-final-form": "^6.4.0",
     "react-is": "^16.13.1",
     "react-redux": "=7.2.0",
     "react-router-dom": "^5.1.2",
@@ -123,24 +132,24 @@
     "typescript": "^3.8.3"
   },
   "devDependencies": {
-    "@testing-library/react": "^10.0.1",
-    "@types/jest": "^25.1.4",
+    "@testing-library/react": "^10.0.2",
+    "@types/jest": "^25.2.1",
     "@types/lodash": "^4.14.149",
-    "@types/node": "^13.9.5",
-    "@types/react": "^16.9.26",
+    "@types/node": "^13.11.0",
+    "@types/react": "^16.9.32",
     "@types/react-redux": "^7.1.7",
     "@types/react-transition-group": "^4.2.4",
     "@types/styled-components": "^5.0.1",
     "electron": "^8.2.0",
     "electron-builder": "^22.4.1",
-    "electron-notarize": "^0.2.1",
-    "jest": "^25.2.3",
+    "electron-notarize": "^0.3.0",
+    "jest": "^25.2.7",
     "nock": "^12.0.3",
     "prettier": "=2.0.2",
     "react-test-renderer": "=16.13.1",
     "redux-logger": "=3.0.6",
     "redux-mock-store": "=1.5.4",
-    "ts-jest": "^25.2.1",
+    "ts-jest": "^25.3.1",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
     "webpack-merge": "^4.2.2"

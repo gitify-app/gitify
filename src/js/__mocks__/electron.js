@@ -49,6 +49,9 @@ module.exports = {
   remote: {
     BrowserWindow: () => browserWindow,
     dialog: dialog,
+    process: {
+      platform: 'darwin',
+    },
     app: {
       getVersion: () => '0.0.1',
       getLoginItemSettings: jest.fn(),

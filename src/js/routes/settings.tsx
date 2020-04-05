@@ -1,15 +1,15 @@
-const { ipcRenderer } = require('electron');
+const { ipcRenderer, remote } = require('electron');
 
 import * as React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-const { remote } = require('electron');
-
 import { AppState, SettingsState } from '../../types/reducers';
 import { fetchNotifications, updateSetting, logout } from '../actions';
 import { FieldCheckbox } from '../components/ui/checkbox';
 import { updateTrayIcon } from '../utils/comms';
+
+const isLinux = remote.process.platform === 'linux';
 
 const Wrapper = styled.div`
   display: flex;
@@ -167,14 +167,16 @@ export class SettingsRoute extends React.Component<IProps> {
               this.props.updateSetting('markOnClick', evt.target.checked)
             }
           />
-          <FieldCheckbox
-            name="openAtStartUp"
-            label="Open at startup"
-            checked={settings.openAtStartup}
-            onChange={(evt) =>
-              this.props.updateSetting('openAtStartup', evt.target.checked)
-            }
-          />
+          {!isLinux && (
+            <FieldCheckbox
+              name="openAtStartUp"
+              label="Open at startup"
+              checked={settings.openAtStartup}
+              onChange={(evt) =>
+                this.props.updateSetting('openAtStartup', evt.target.checked)
+              }
+            />
+          )}
         </Main>
 
         <Footer>
