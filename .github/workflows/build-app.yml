@@ -98,7 +98,6 @@ jobs:
         run: yarn build
 
       - name: Make Linux (electron-builder)
-        env:
         run: yarn make:linux --publish=never
 
       - name: Clean up builds
