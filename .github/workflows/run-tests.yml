@@ -29,7 +29,4 @@ jobs:
       - name: Run Jest
         run: yarn test --coverage --runInBand
 
-      - name: Send coverage to codecov.io
-        run: |
-          yarn global add codecov
-          codecov
+      - uses: codecov/codecov-action@v1
