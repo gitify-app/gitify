@@ -1,20 +1,18 @@
 # Gitify [![github][github-image]][github-url] [![codecov][codecov-image]][codecov-url] [![downloads][downloads-image]][downloads-url]
 
-> The mobile app has been deprecated in favor of the official GitHub mobile app that is coming out [soon](https://github.com/mobile).
+> GitHub Notifications on your menu bar. Available on macOS, Windows and Linux. Gitify Mobile has been deprecated in favor of the official [GitHub mobile app](https://github.com/mobile).
 
 ![Gitify](assets/images/press.png)
 
 ### Download
 
-You can download Gitify for **free** from either the website [www.gitify.io](https://www.gitify.io/) or from the GitHub repository [releases](https://github.com/manosim/gitify/releases) page.
-
-You can also install Gitify via [Homebrew Cask](http://brew.sh/)
+You can download Gitify for **free** from the website [www.gitify.io](https://www.gitify.io/) or install it via [Homebrew Cask](http://brew.sh/)
 
 ```shell
 brew cask install gitify
 ```
 
-Gitify currently only supports mac OS.
+Gitify supports macOS, Windows and Linux.
 
 ### Prerequisites
 
