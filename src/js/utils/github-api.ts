@@ -13,6 +13,7 @@ const DESCRIPTIONS = {
     STATE_CHANGE: 'You changed the thread state (for example, closing an issue or merging a pull request).',
     SUBSCRIBED: "You're watching the repository.",
     TEAM_MENTION: 'You were on a team that was mentioned.',
+    CI_ACTIVITY: 'A GitHub Actions workflow run was triggered for your repository',
     UNKNOWN: 'The reason for this notification is not supported by the app.',
 };
 
@@ -43,6 +44,8 @@ export function formatReason(
       return { type: 'Subscribed', description: DESCRIPTIONS['SUBSCRIBED'] };
     case 'team_mention':
       return { type: 'Team Mention', description: DESCRIPTIONS['TEAM_MENTION'] };
+    case 'ci_activity':
+      return { type: 'Workflow Run', description: DESCRIPTIONS['WORKFLOW_RUN'] };
     default:
       return { type: 'Unknown', description: DESCRIPTIONS['UNKNOWN'] };
   }
@@ -60,6 +63,8 @@ export function getNotificationTypeIcon(type: SubjectType): string {
       return 'tag';
     case 'RepositoryVulnerabilityAlert':
       return 'alert';
+    case 'CheckSuite':
+      return 'sync';
     default:
       return 'question';
   }

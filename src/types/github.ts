@@ -9,13 +9,15 @@ export type Reason =
   | 'security_alert'
   | 'state_change'
   | 'subscribed'
-  | 'team_mention';
+  | 'team_mention'
+  | 'ci_activity';
 
 export type SubjectType =
   | 'Issue'
   | 'PullRequest'
   | 'Commit'
   | 'Release'
+  | 'CheckSuite'
   | 'RepositoryVulnerabilityAlert';
 
 export interface Notification {
@@ -102,7 +104,7 @@ export interface Owner {
 
 export interface Subject {
   title: string;
-  url: string;
-  latest_comment_url: string;
+  url?: string;
+  latest_comment_url?: string;
   type: SubjectType;
 }
