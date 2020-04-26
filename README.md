@@ -1,12 +1,12 @@
 # Gitify [![github][github-image]][github-url] [![codecov][codecov-image]][codecov-url] [![downloads][downloads-image]][downloads-url]
 
-> GitHub Notifications on your menu bar. Available on macOS, Windows and Linux. Gitify Mobile has been deprecated in favor of the official [GitHub mobile app](https://github.com/mobile).
+> GitHub Notifications on your menu bar. Available on macOS, Windows and Linux. Gitify Mobile has been deprecated in favour of the official [GitHub mobile app](https://github.com/mobile).
 
 ![Gitify](assets/images/press.png)
 
 ### Download
 
-You can download Gitify for **free** from the website [www.gitify.io](https://www.gitify.io/) or install it via [Homebrew Cask](http://brew.sh/)
+You can download Gitify for **free** from the website [www.gitify.io](https://www.gitify.io/) or install it via [Homebrew Cask](http://brew.sh/).
 
 ```shell
 brew cask install gitify
@@ -29,7 +29,7 @@ Gitify supports macOS, Windows and Linux.
 
 ### Development
 
-Optional: If you want you use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion).
+Optional: If you prefer to use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion).
 
     OAUTH_CLIENT_ID="123" OAUTH_CLIENT_SECRET="456789" yarn build
 
@@ -74,7 +74,7 @@ To check if Gitify is approved by your organisation you can go to https://github
 
 #### Something looks wrong - How can I debug?
 
-Since version `1.1.0` you can now debug Gitify by pressing `alt+cmd+I`. This will open the devtools and then you can see any logs, network requests etc.
+You can debug Gitify by pressing <kbd>alt</kbd> + <kbd>command</kbd> + <kbd>I</kbd>. This will open the dev tools and then you can see any logs, network requests etc.
 
 ### Contributing
 
