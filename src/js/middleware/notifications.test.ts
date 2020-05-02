@@ -93,4 +93,17 @@ describe('middleware/notifications.js', () => {
     expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
     expect(comms.updateTrayIcon).toHaveBeenCalledWith(2);
   });
+
+  it('should handle no notifications without error', () => {
+    const action = {
+      type: actions.NOTIFICATIONS.SUCCESS,
+      payload: mockedNotificationsReducerData.map((host) => ({
+        ...host,
+        notifications: [],
+      })),
+    };
+    expect(dispatchWithStoreOf({}, action)).toEqual(action);
+    expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
+    expect(comms.updateTrayIcon).toHaveBeenCalledWith(0);
+  });
 });
