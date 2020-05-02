@@ -42,7 +42,7 @@ describe('routes/settings.tsx', () => {
     props.history.replace.mockReset();
   });
 
-  it('should test the mapStateToProps method', () => {
+  describe('mapStateToProps', () => {
     const state = {
       auth: {
         token: '123-456',
@@ -52,11 +52,24 @@ describe('routes/settings.tsx', () => {
         participating: false,
       } as SettingsState,
     } as AppState;
+    it('should test the method', () => {
+      const mappedProps = mapStateToProps(state);
 
-    const mappedProps = mapStateToProps(state);
+      expect(mappedProps.hasMultipleAccounts).toBeTruthy();
+      expect(mappedProps.settings.participating).toBeFalsy();
+    });
 
-    expect(mappedProps.hasMultipleAccounts).toBeTruthy();
-    expect(mappedProps.settings.participating).toBeFalsy();
+    it('should recognize when only one account logged in', () => {
+      const mappedProps = mapStateToProps({
+        ...state,
+        auth: {
+          ...state.auth,
+          token: null,
+        },
+      });
+
+      expect(mappedProps.hasMultipleAccounts).toBeFalsy();
+    });
   });
 
   it('should render itself & its children', () => {
