@@ -12,8 +12,6 @@ import notificationsMiddlware from '../middleware/notifications';
 import rootReducer from '../reducers';
 import settingsMiddleware from '../middleware/settings';
 
-const isDev = false;
-
 export default function configureStore() {
   const engine = filter(createEngine(constants.STORAGE_KEY), [
     'settings',
@@ -33,14 +31,6 @@ export default function configureStore() {
     settingsMiddleware,
     storageMiddleware,
   ];
-
-  /* istanbul ignore next */
-  if (isDev) {
-    const { createLogger } = require('redux-logger');
-    const logger = createLogger({ collapsed: true });
-    middlewares.push(logger);
-    console.log('adss');
-  }
 
   let store = createStore(
     rootReducer,
