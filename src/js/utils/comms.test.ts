@@ -3,6 +3,7 @@ import {
   reOpenWindow,
   openExternalLink,
   setAutoLaunch,
+  restoreSetting,
 } from './comms';
 
 const { ipcRenderer, remote, shell } = require('electron');
@@ -30,6 +31,12 @@ describe('utils/comms.ts', () => {
     reOpenWindow();
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
+  });
+
+  it('should restore a setting', () => {
+    restoreSetting('foo', 'bar');
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('foo', 'bar');
   });
 
   it('should open an external link', () => {
