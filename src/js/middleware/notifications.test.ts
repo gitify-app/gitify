@@ -117,4 +117,22 @@ describe('middleware/notifications.js', () => {
     expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
     expect(comms.updateTrayIcon).toHaveBeenCalledWith(0);
   });
+
+  it('should show 0 notifications if no accounts logged in', () => {
+    const action = {
+      type: actions.NOTIFICATIONS.SUCCESS,
+      payload: mockedNotificationsReducerData,
+    };
+    dispatchWithStoreOf(
+      {
+        ...DEFAULT_STORE,
+        notifications: {
+          response: [],
+        },
+      },
+      action
+    );
+    expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
+    expect(comms.updateTrayIcon).toHaveBeenCalledWith(4);
+  });
 });
