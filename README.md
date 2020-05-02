@@ -91,7 +91,7 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 
 [github-image]: https://github.com/manosim/gitify/workflows/CI/badge.svg
 [github-url]: https://github.com/manosim/gitify/actions
-[coveralls-image]: https://coveralls.io/repos/github/manosim/gitify/badge.svg?branch=chore/setup-coveralls
+[coveralls-image]: https://coveralls.io/repos/github/manosim/gitify/badge.svg?branch=master
 [coveralls-url]: https://coveralls.io/github/manosim/gitify?branch=master
 [downloads-image]: https://img.shields.io/github/downloads/manosim/gitify/total.svg
 [downloads-url]: https://www.gitify.io/
