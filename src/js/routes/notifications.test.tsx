@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
 
 import { AppState, NotificationsState } from '../../types/reducers';
-import { mockedNotificationsRecuderData } from '../__mocks__/mockedData';
+import { mockedNotificationsReducerData } from '../__mocks__/mockedData';
 import { NotificationsRoute, mapStateToProps } from './notifications';
 
 jest.mock('../components/account-notifications', () => ({
@@ -20,7 +20,7 @@ jest.mock('../components/oops', () => ({
 describe('routes/notifications.ts', () => {
   const props = {
     failed: false,
-    accountNotifications: mockedNotificationsRecuderData,
+    accountNotifications: mockedNotificationsReducerData,
     notificationsCount: 4,
     hasMultipleAccounts: true,
     hasNotifications: true,
@@ -29,7 +29,7 @@ describe('routes/notifications.ts', () => {
   it('should test the mapStateToProps method', () => {
     const state = {
       notifications: {
-        response: mockedNotificationsRecuderData,
+        response: mockedNotificationsReducerData,
         failed: false,
       } as NotificationsState,
     } as AppState;
@@ -38,7 +38,7 @@ describe('routes/notifications.ts', () => {
 
     expect(mappedProps.failed).toBeFalsy();
     expect(mappedProps.accountNotifications).toEqual(
-      mockedNotificationsRecuderData
+      mockedNotificationsReducerData
     );
     expect(mappedProps.hasNotifications).toBeTruthy();
     expect(mappedProps.notificationsCount).toBe(4);

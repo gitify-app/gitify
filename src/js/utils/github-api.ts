@@ -45,7 +45,7 @@ export function formatReason(
     case 'team_mention':
       return { type: 'Team Mention', description: DESCRIPTIONS['TEAM_MENTION'] };
     case 'ci_activity':
-      return { type: 'Workflow Run', description: DESCRIPTIONS['WORKFLOW_RUN'] };
+      return { type: 'Workflow Run', description: DESCRIPTIONS['CI_ACTIVITY'] };
     default:
       return { type: 'Unknown', description: DESCRIPTIONS['UNKNOWN'] };
   }

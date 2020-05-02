@@ -42,20 +42,39 @@ describe('components/Sidebar.tsx', () => {
     clock.clearAllTimers();
   });
 
-  it('should test the mapStateToProps method', () => {
+  describe('mapStateToProps', () => {
     const state = {
       auth: {
         token: '12345',
         enterpriseAccounts: mockedEnterpriseAccounts,
       } as AuthState,
       notifications: {
-        response: [],
+        response: [{ hostname: 'Dolores', notifications: [{}, {}] }],
       },
     } as AppState;
 
-    const mappedProps = mapStateToProps(state);
+    it('should accept a provided token', () => {
+      const mappedProps = mapStateToProps(state);
+      expect(mappedProps.isEitherLoggedIn).toBeTruthy();
+      expect(mappedProps.connectedAccounts).toBe(2);
+    });
 
-    expect(mappedProps.isEitherLoggedIn).toBeTruthy();
+    it('should count notification lengths', () => {
+      const mappedProps = mapStateToProps(state);
+      expect(mappedProps.notificationsCount).toBe(2);
+    });
+
+    it('should accept a null token', () => {
+      const mappedProps = mapStateToProps({
+        ...state,
+        auth: {
+          ...state.auth,
+          token: null,
+        },
+      });
+      expect(mappedProps.isEitherLoggedIn).toBeTruthy();
+      expect(mappedProps.connectedAccounts).toBe(1);
+    });
   });
 
   it('should render itself & its children (logged in)', () => {

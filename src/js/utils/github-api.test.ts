@@ -14,6 +14,7 @@ describe('./utils/github-api.ts', () => {
     expect(formatReason('state_change')).toMatchSnapshot();
     expect(formatReason('subscribed')).toMatchSnapshot();
     expect(formatReason('team_mention')).toMatchSnapshot();
+    expect(formatReason('ci_activity')).toMatchSnapshot();
     expect(formatReason('something_else_unknown' as Reason)).toMatchSnapshot();
   });
 
@@ -25,6 +26,7 @@ describe('./utils/github-api.ts', () => {
     expect(getNotificationTypeIcon('RepositoryVulnerabilityAlert')).toBe(
       'alert'
     );
+    expect(getNotificationTypeIcon('CheckSuite')).toBe('sync');
     expect(getNotificationTypeIcon('Unknown' as SubjectType)).toBe('question');
   });
 });

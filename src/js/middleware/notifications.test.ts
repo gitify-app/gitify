@@ -2,14 +2,14 @@ import * as actions from '../actions';
 import * as comms from '../utils/comms';
 import {
   mockedGithubNotifications,
-  mockedNotificationsRecuderData,
+  mockedNotificationsReducerData,
 } from '../__mocks__/mockedData';
 import notificationsMiddleware from './notifications';
 import NativeNotifications from '../utils/notifications';
 
 // Keep 3 notifications
 // Ps. To receive 4 on actions.NOTIFICATIONS.SUCCESS,
-const mockedNotifications = mockedNotificationsRecuderData.map(
+const mockedNotifications = mockedNotificationsReducerData.map(
   (account, accountIndex) => {
     if (accountIndex === 0) {
       return {
@@ -22,25 +22,27 @@ const mockedNotifications = mockedNotificationsRecuderData.map(
   }
 );
 
-const createFakeStore = () => ({
+const DEFAULT_STORE = {
+  notifications: {
+    response: mockedNotifications,
+  },
+  settings: {
+    playSound: false,
+    showNotifications: false,
+  },
+};
+
+const createFakeStore = (storeData) => ({
   getState() {
-    return {
-      notifications: {
-        response: mockedNotifications,
-      },
-      settings: {
-        playSound: false,
-        showNotifications: false,
-      },
-    };
+    return storeData;
   },
 });
 
-const dispatchWithStoreOf = (_, action) => {
+const dispatchWithStoreOf = (storeData, action) => {
   let dispatched = null;
-  const dispatch = notificationsMiddleware(createFakeStore())(
-    (actionAttempt) => (dispatched = actionAttempt)
-  );
+  const dispatch = notificationsMiddleware(
+    createFakeStore({ ...DEFAULT_STORE, ...storeData })
+  )((actionAttempt) => (dispatched = actionAttempt));
   dispatch(action);
   return dispatched;
 };
@@ -54,7 +56,7 @@ describe('middleware/notifications.js', () => {
   it('should raise notifications (native & sound, update tray icon, set badge)', () => {
     const action = {
       type: actions.NOTIFICATIONS.SUCCESS,
-      payload: mockedNotificationsRecuderData,
+      payload: mockedNotificationsReducerData,
     };
 
     expect(dispatchWithStoreOf({}, action)).toEqual(action);
@@ -92,5 +94,45 @@ describe('middleware/notifications.js', () => {
     expect(dispatchWithStoreOf({}, action)).toEqual(action);
     expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
     expect(comms.updateTrayIcon).toHaveBeenCalledWith(2);
+  });
+
+  it('should update tray icon with no notifications', () => {
+    const noNewNotifications = mockedNotificationsReducerData.map((host) => ({
+      ...host,
+      notifications: [],
+    }));
+    const action = {
+      type: actions.NOTIFICATIONS.SUCCESS,
+      payload: noNewNotifications,
+    };
+    dispatchWithStoreOf(
+      {
+        ...DEFAULT_STORE,
+        notifications: {
+          response: noNewNotifications,
+        },
+      },
+      action
+    );
+    expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
+    expect(comms.updateTrayIcon).toHaveBeenCalledWith(0);
+  });
+
+  it('should show 0 notifications if no accounts logged in', () => {
+    const action = {
+      type: actions.NOTIFICATIONS.SUCCESS,
+      payload: mockedNotificationsReducerData,
+    };
+    dispatchWithStoreOf(
+      {
+        ...DEFAULT_STORE,
+        notifications: {
+          response: [],
+        },
+      },
+      action
+    );
+    expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
+    expect(comms.updateTrayIcon).toHaveBeenCalledWith(4);
   });
 });
