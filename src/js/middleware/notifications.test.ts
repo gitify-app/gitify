@@ -2,14 +2,14 @@ import * as actions from '../actions';
 import * as comms from '../utils/comms';
 import {
   mockedGithubNotifications,
-  mockedNotificationsRecuderData,
+  mockedNotificationsReducerData,
 } from '../__mocks__/mockedData';
 import notificationsMiddleware from './notifications';
 import NativeNotifications from '../utils/notifications';
 
 // Keep 3 notifications
 // Ps. To receive 4 on actions.NOTIFICATIONS.SUCCESS,
-const mockedNotifications = mockedNotificationsRecuderData.map(
+const mockedNotifications = mockedNotificationsReducerData.map(
   (account, accountIndex) => {
     if (accountIndex === 0) {
       return {
@@ -54,7 +54,7 @@ describe('middleware/notifications.js', () => {
   it('should raise notifications (native & sound, update tray icon, set badge)', () => {
     const action = {
       type: actions.NOTIFICATIONS.SUCCESS,
-      payload: mockedNotificationsRecuderData,
+      payload: mockedNotificationsReducerData,
     };
 
     expect(dispatchWithStoreOf({}, action)).toEqual(action);

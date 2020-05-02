@@ -251,7 +251,7 @@ export const mockedEnterpriseNotifications = [
   } as Notification,
 ];
 
-export const mockedNotificationsRecuderData = [
+export const mockedNotificationsReducerData = [
   {
     hostname: 'github.com',
     notifications: mockedGithubNotifications,
