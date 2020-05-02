@@ -22,25 +22,27 @@ const mockedNotifications = mockedNotificationsReducerData.map(
   }
 );
 
-const createFakeStore = () => ({
+const DEFAULT_STORE = {
+  notifications: {
+    response: mockedNotifications,
+  },
+  settings: {
+    playSound: false,
+    showNotifications: false,
+  },
+};
+
+const createFakeStore = (storeData) => ({
   getState() {
-    return {
-      notifications: {
-        response: mockedNotifications,
-      },
-      settings: {
-        playSound: false,
-        showNotifications: false,
-      },
-    };
+    return storeData;
   },
 });
 
-const dispatchWithStoreOf = (_, action) => {
+const dispatchWithStoreOf = (storeData, action) => {
   let dispatched = null;
-  const dispatch = notificationsMiddleware(createFakeStore())(
-    (actionAttempt) => (dispatched = actionAttempt)
-  );
+  const dispatch = notificationsMiddleware(
+    createFakeStore({ ...DEFAULT_STORE, ...storeData })
+  )((actionAttempt) => (dispatched = actionAttempt));
   dispatch(action);
   return dispatched;
 };
@@ -94,15 +96,24 @@ describe('middleware/notifications.js', () => {
     expect(comms.updateTrayIcon).toHaveBeenCalledWith(2);
   });
 
-  it('should handle no notifications without error', () => {
+  it('should update tray icon with no notifications', () => {
+    const noNewNotifications = mockedNotificationsReducerData.map((host) => ({
+      ...host,
+      notifications: [],
+    }));
     const action = {
       type: actions.NOTIFICATIONS.SUCCESS,
-      payload: mockedNotificationsReducerData.map((host) => ({
-        ...host,
-        notifications: [],
-      })),
+      payload: noNewNotifications,
     };
-    expect(dispatchWithStoreOf({}, action)).toEqual(action);
+    dispatchWithStoreOf(
+      {
+        ...DEFAULT_STORE,
+        notifications: {
+          response: noNewNotifications,
+        },
+      },
+      action
+    );
     expect(comms.updateTrayIcon).toHaveBeenCalledTimes(1);
     expect(comms.updateTrayIcon).toHaveBeenCalledWith(0);
   });
