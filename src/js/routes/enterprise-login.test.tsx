@@ -29,6 +29,7 @@ describe('routes/enterprise-login.js', () => {
     new BrowserWindow().loadURL.mockReset();
     spyOn(ipcRenderer, 'send');
     props.dispatch.mockReset();
+    props.history.goBack = jest.fn();
   });
 
   it('should test the mapStateToProps method', () => {
@@ -55,6 +56,19 @@ describe('routes/enterprise-login.js', () => {
     );
 
     expect(tree).toMatchSnapshot();
+  });
+
+  it('let us go back', () => {
+    props.history.goBack = jest.fn();
+    const { getByLabelText } = render(
+      <Provider store={createStore(() => {})}>
+        <MemoryRouter>
+          <EnterpriseLogin {...props} />
+        </MemoryRouter>
+      </Provider>
+    );
+    fireEvent.click(getByLabelText('Go Back'));
+    expect(props.history.goBack).toHaveBeenCalledTimes(1);
   });
 
   it('should validate the form values', () => {
