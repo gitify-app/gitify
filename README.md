@@ -1,4 +1,4 @@
-# Gitify [![github][github-image]][github-url] [![codecov][codecov-image]][codecov-url] [![downloads][downloads-image]][downloads-url]
+# Gitify [![github][github-image]][github-url] [![coveralls][coveralls-image]][coveralls-url] [![downloads][downloads-image]][downloads-url]
 
 > GitHub Notifications on your menu bar. Available on macOS, Windows and Linux. Gitify Mobile has been deprecated in favour of the official [GitHub mobile app](https://github.com/mobile).
 
@@ -91,7 +91,7 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 
 [github-image]: https://github.com/manosim/gitify/workflows/CI/badge.svg
 [github-url]: https://github.com/manosim/gitify/actions
-[codecov-image]: https://codecov.io/gh/manosim/gitify/branch/master/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/manosim/gitify
+[coveralls-image]: https://coveralls.io/repos/github/manosim/gitify/badge.svg?branch=chore/setup-coveralls
+[coveralls-url]: https://coveralls.io/github/manosim/gitify?branch=master
 [downloads-image]: https://img.shields.io/github/downloads/manosim/gitify/total.svg
-[downloads-url]: https://www.gitify.io
+[downloads-url]: https://www.gitify.io/
