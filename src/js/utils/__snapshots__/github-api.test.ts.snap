@@ -79,6 +79,13 @@ Object {
 
 exports[`./utils/github-api.ts should format the notification reason 12`] = `
 Object {
+  "description": undefined,
+  "type": "Workflow Run",
+}
+`;
+
+exports[`./utils/github-api.ts should format the notification reason 13`] = `
+Object {
   "description": "The reason for this notification is not supported by the app.",
   "type": "Unknown",
 }
