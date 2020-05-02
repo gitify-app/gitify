@@ -79,7 +79,7 @@ Object {
 
 exports[`./utils/github-api.ts should format the notification reason 12`] = `
 Object {
-  "description": undefined,
+  "description": "A GitHub Actions workflow run was triggered for your repository",
   "type": "Workflow Run",
 }
 `;
