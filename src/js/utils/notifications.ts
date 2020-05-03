@@ -2,11 +2,15 @@ const { remote } = require('electron');
 
 import { generateGitHubWebUrl } from '../utils/helpers';
 import { reOpenWindow, openExternalLink } from '../utils/comms';
-import { SubjectType } from '../../types/github';
+import { Notification } from '../../types/github';
 import { SettingsState } from '../../types/reducers';
 
 export default {
-  setup(notifications, notificationsCount, settings: SettingsState) {
+  setup(
+    notifications: Notification[],
+    notificationsCount,
+    settings: SettingsState
+  ) {
     // If there are no new notifications just stop there
     if (!notificationsCount) {
       return;
@@ -21,11 +25,15 @@ export default {
     }
   },
 
-  raiseNativeNotification(notifications, count) {
-    let title, body, icon, notificationUrl;
+  raiseNativeNotification(notifications, count: number) {
+    let title: string;
+    let body: string;
+    let notificationUrl: string | null;
 
     if (count === 1) {
-      const notification = notifications.find((obj) => obj.length > 0)[0];
+      const notification: Notification = notifications.find(
+        (obj) => obj.length > 0
+      )[0];
       title = `Gitify - ${notification.repository.full_name}`;
       body = notification.subject.title;
       notificationUrl = notification.subject.url;
@@ -42,10 +50,13 @@ export default {
     nativeNotification.onclick = function () {
       if (count === 1) {
         const appWindow = remote.getCurrentWindow();
-        const url = generateGitHubWebUrl(notificationUrl);
-
         appWindow.hide();
-        openExternalLink(url);
+
+        // Some Notification types from GitHub are missing urls in their subjects.
+        if (notificationUrl) {
+          const url = generateGitHubWebUrl(notificationUrl);
+          openExternalLink(url);
+        }
       } else {
         reOpenWindow();
       }
