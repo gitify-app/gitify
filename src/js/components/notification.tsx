@@ -116,7 +116,7 @@ export const NotificationItem: React.FC<IProps> = (props) => {
         </Details>
       </Main>
       <IconWrapper>
-        <Button onClick={() => markAsRead()}>
+        <Button title="Mark as Read" onClick={() => markAsRead()}>
           <Octicon icon={Check} size={20} ariaLabel="Mark as Read" />
         </Button>
       </IconWrapper>

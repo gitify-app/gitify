@@ -59,6 +59,7 @@ exports[`components/notification.js should render itself & its children 1`] = `
     <button
       className="sc-AxgMl beGRRX"
       onClick={[Function]}
+      title="Mark as Read"
     >
       <svg
         aria-hidden="false"
