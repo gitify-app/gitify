@@ -156,6 +156,40 @@ export function markNotification(id, hostname) {
   };
 }
 
+export const UNSUBSCRIBE_NOTIFICATION = makeAsyncActionSet(
+  'UNSUBSCRIBE_NOTIFICATION'
+);
+export function unsubscribeNotification(id, hostname) {
+  return (dispatch, getState: () => AppState) => {
+    const url = `${generateGitHubAPIUrl(
+      hostname
+    )}notifications/threads/${id}/subscription`;
+    const method = 'DELETE';
+
+    const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+    const entAccounts = getState().auth.enterpriseAccounts;
+    const token = isEnterprise
+      ? getEnterpriseAccountToken(hostname, entAccounts)
+      : getState().auth.token;
+
+    dispatch({ type: UNSUBSCRIBE_NOTIFICATION.REQUEST });
+
+    return apiRequestAuth(url, method, token, {})
+      .then(function (response) {
+        dispatch({
+          type: UNSUBSCRIBE_NOTIFICATION.SUCCESS,
+          meta: { id, hostname },
+        });
+      })
+      .catch(function (error) {
+        dispatch({
+          type: UNSUBSCRIBE_NOTIFICATION.FAILURE,
+          payload: error.response.data,
+        });
+      });
+  };
+}
+
 // Repo's Notification
 
 export const MARK_REPO_NOTIFICATION = makeAsyncActionSet(

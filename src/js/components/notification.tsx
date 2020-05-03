@@ -3,7 +3,7 @@ const { shell } = require('electron');
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import Octicon, { Check, getIconByName } from '@primer/octicons-react';
+import Octicon, { Check, Mute, getIconByName } from '@primer/octicons-react';
 import styled from 'styled-components';
 
 import { AppState } from '../../types/reducers';
@@ -67,6 +67,7 @@ interface IProps {
   notification: Notification;
   markOnClick: boolean;
   markNotification: (id: string, hostname: string) => void;
+  unsubscribeNotification?: (id: string, hostname: string) => void;
 }
 
 export const NotificationItem: React.FC<IProps> = (props) => {
@@ -89,6 +90,11 @@ export const NotificationItem: React.FC<IProps> = (props) => {
   const markAsRead = () => {
     const { hostname, notification } = props;
     props.markNotification(notification.id, hostname);
+  };
+
+  const unsubscribe = () => {
+    const { hostname, notification } = props;
+    props.unsubscribeNotification(notification.id, hostname);
   };
 
   const { notification } = props;
@@ -115,6 +121,11 @@ export const NotificationItem: React.FC<IProps> = (props) => {
           {updatedAt}
         </Details>
       </Main>
+      <IconWrapper>
+        <Button title="Unsubscribe" onClick={() => unsubscribe()}>
+          <Octicon icon={Mute} size={20} ariaLabel="Unsubscribe" />
+        </Button>
+      </IconWrapper>
       <IconWrapper>
         <Button title="Mark as Read" onClick={() => markAsRead()}>
           <Octicon icon={Check} size={20} ariaLabel="Mark as Read" />
