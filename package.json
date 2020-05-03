@@ -13,7 +13,7 @@
     "prettier": "prettier --single-quote --trailing-comma es5 --write 'src/**/*.{js,ts,tsx}'",
     "jest": "jest",
     "test": "yarn jest",
-    "start": "electron . –enable-logging"
+    "start": "electron . -–enable-logging"
   },
   "repository": {
     "type": "git",

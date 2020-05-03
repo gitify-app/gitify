@@ -7,7 +7,7 @@ import Constants from './constants';
 import { loginUser } from '../actions';
 import { AuthState } from '../../types/reducers';
 
-export function getEnterpriseAccountToken(hostname, accounts) {
+export function getEnterpriseAccountToken(hostname, accounts): string {
   return accounts.find((obj) => obj.hostname === hostname).token;
 }
 
@@ -18,12 +18,12 @@ export function generateGitHubAPIUrl(hostname) {
     : `https://api.${hostname}/`;
 }
 
-export function generateGitHubWebUrl(url) {
+export function generateGitHubWebUrl(url: string) {
   const { hostname } = parse(url);
   const isEnterprise =
     hostname !== `api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}`;
 
-  let newUrl = isEnterprise
+  let newUrl: string = isEnterprise
     ? url.replace(`${hostname}/api/v3/repos`, hostname)
     : url.replace('api.github.com/repos', 'github.com');
 

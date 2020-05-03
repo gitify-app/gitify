@@ -79,8 +79,11 @@ export const NotificationItem: React.FC<IProps> = (props) => {
   };
 
   const openBrowser = () => {
-    const url = generateGitHubWebUrl(props.notification.subject.url);
-    shell.openExternal(url);
+    // Some Notification types from GitHub are missing urls in their subjects.
+    if (props.notification.subject.url) {
+      const url = generateGitHubWebUrl(props.notification.subject.url);
+      shell.openExternal(url);
+    }
   };
 
   const markAsRead = () => {
