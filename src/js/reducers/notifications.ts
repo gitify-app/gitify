@@ -3,6 +3,7 @@ import {
   NOTIFICATIONS,
   MARK_NOTIFICATION,
   MARK_REPO_NOTIFICATION,
+  UNSUBSCRIBE_NOTIFICATION,
 } from '../actions';
 import { LOGOUT } from '../../types/actions';
 import { Notification } from '../../types/github';
@@ -26,6 +27,7 @@ export default function reducer(
     case NOTIFICATIONS.FAILURE:
       return { ...state, isFetching: false, failed: true, response: [] };
     case MARK_NOTIFICATION.SUCCESS:
+    case UNSUBSCRIBE_NOTIFICATION.SUCCESS:
       const accountIndex = state.response.findIndex(
         (obj) => obj.hostname === action.meta.hostname
       );

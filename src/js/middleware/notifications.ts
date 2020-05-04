@@ -3,6 +3,7 @@ import {
   NOTIFICATIONS,
   MARK_NOTIFICATION,
   MARK_REPO_NOTIFICATION,
+  UNSUBSCRIBE_NOTIFICATION,
 } from '../actions';
 import NativeNotifications from '../utils/notifications';
 import { updateTrayIcon } from '../utils/comms';
@@ -56,6 +57,7 @@ export default (store) => (next) => (action) => {
       break;
 
     case MARK_NOTIFICATION.SUCCESS:
+    case UNSUBSCRIBE_NOTIFICATION.SUCCESS:
       const prevNotificationsCount = accountNotifications.reduce(
         (memo, acc) => memo + acc.notifications.length,
         0
