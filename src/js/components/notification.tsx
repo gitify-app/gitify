@@ -119,13 +119,11 @@ export const NotificationItem: React.FC<IProps> = (props) => {
         <Details>
           <span title={reason.description}>{reason.type}</span> - Updated{' '}
           {updatedAt}
+          <Button title="Unsubscribe" onClick={() => unsubscribe()}>
+            <Octicon icon={Mute} size={13} ariaLabel="Unsubscribe" />
+          </Button>
         </Details>
       </Main>
-      <IconWrapper>
-        <Button title="Unsubscribe" onClick={() => unsubscribe()}>
-          <Octicon icon={Mute} size={20} ariaLabel="Unsubscribe" />
-        </Button>
-      </IconWrapper>
       <IconWrapper>
         <Button title="Mark as Read" onClick={() => markAsRead()}>
           <Octicon icon={Check} size={20} ariaLabel="Mark as Read" />
