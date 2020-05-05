@@ -32,6 +32,7 @@ describe('components/notification.js', () => {
 
     const props = {
       markNotification: jest.fn(),
+      unsubscribeNotification: jest.fn(),
       markOnClick: false,
       notification: notification,
       hostname: 'github.com',
@@ -44,6 +45,7 @@ describe('components/notification.js', () => {
   it('should open a notification in the browser', () => {
     const props = {
       markNotification: jest.fn(),
+      unsubscribeNotification: jest.fn(),
       markOnClick: false,
       notification: notification,
       hostname: 'github.com',
@@ -54,22 +56,10 @@ describe('components/notification.js', () => {
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
   });
 
-  it('should mark a notification as read', () => {
-    const props = {
-      markNotification: jest.fn(),
-      markOnClick: false,
-      notification: notification,
-      hostname: 'github.com',
-    };
-
-    const { getByRole } = render(<NotificationItem {...props} />);
-    fireEvent.click(getByRole('button'));
-    expect(props.markNotification).toHaveBeenCalledTimes(1);
-  });
-
   it('should open a notification in browser & mark it as read', () => {
     const props = {
       markNotification: jest.fn(),
+      unsubscribeNotification: jest.fn(),
       markOnClick: true,
       notification: notification,
       hostname: 'github.com',
@@ -79,5 +69,33 @@ describe('components/notification.js', () => {
     fireEvent.click(getByRole('main'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(props.markNotification).toHaveBeenCalledTimes(1);
+  });
+
+  it('should mark a notification as read', () => {
+    const props = {
+      markNotification: jest.fn(),
+      unsubscribeNotification: jest.fn(),
+      markOnClick: false,
+      notification: notification,
+      hostname: 'github.com',
+    };
+
+    const { getByLabelText } = render(<NotificationItem {...props} />);
+    fireEvent.click(getByLabelText('Mark as Read'));
+    expect(props.markNotification).toHaveBeenCalledTimes(1);
+  });
+
+  it('should unsubscribe from a notification thread', () => {
+    const props = {
+      markNotification: jest.fn(),
+      unsubscribeNotification: jest.fn(),
+      markOnClick: false,
+      notification: notification,
+      hostname: 'github.com',
+    };
+
+    const { getByLabelText } = render(<NotificationItem {...props} />);
+    fireEvent.click(getByLabelText('Unsubscribe'));
+    expect(props.unsubscribeNotification).toHaveBeenCalledTimes(1);
   });
 });

@@ -18,6 +18,14 @@ export function makeAsyncActionSet(actionName) {
   };
 }
 
+enum Methods {
+  GET = 'GET',
+  POST = 'POST',
+  PUT = 'PUT',
+  PATCH = 'PATCH',
+  DELETE = 'DELETE',
+}
+
 // Authentication
 
 export const LOGIN = makeAsyncActionSet('LOGIN');
@@ -27,7 +35,6 @@ export function loginUser(authOptions, code) {
 
   return (dispatch) => {
     const url = `https://${hostname}/login/oauth/access_token`;
-    const method = 'POST';
     const data = {
       client_id: authOptions.clientId,
       client_secret: authOptions.clientSecret,
@@ -36,7 +43,7 @@ export function loginUser(authOptions, code) {
 
     dispatch({ type: LOGIN.REQUEST });
 
-    return apiRequest(url, method, data)
+    return apiRequest(url, Methods.POST, data)
       .then(function (response) {
         dispatch({
           type: LOGIN.SUCCESS,
@@ -60,7 +67,6 @@ export function logout(): LogoutAction {
 export const NOTIFICATIONS = makeAsyncActionSet('NOTIFICATIONS');
 export function fetchNotifications() {
   return (dispatch, getState: () => AppState) => {
-    const method = 'GET';
     const { settings }: { settings: SettingsState } = getState();
     const isGitHubLoggedIn = getState().auth.token !== null;
     const endpointSuffix = `notifications?participating=${settings.participating}`;
@@ -72,7 +78,7 @@ export function fetchNotifications() {
 
       const url = `https://api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}/${endpointSuffix}`;
       const token = getState().auth.token;
-      return apiRequestAuth(url, method, token);
+      return apiRequestAuth(url, Methods.GET, token);
     }
 
     function getEnterpriseNotifications() {
@@ -81,7 +87,7 @@ export function fetchNotifications() {
         const hostname = account.hostname;
         const token = account.token;
         const url = `https://${hostname}/api/v3/${endpointSuffix}`;
-        return apiRequestAuth(url, method, token);
+        return apiRequestAuth(url, Methods.GET, token);
       });
     }
 
@@ -130,7 +136,6 @@ export const MARK_NOTIFICATION = makeAsyncActionSet('MARK_NOTIFICATION');
 export function markNotification(id, hostname) {
   return (dispatch, getState: () => AppState) => {
     const url = `${generateGitHubAPIUrl(hostname)}notifications/threads/${id}`;
-    const method = 'PATCH';
 
     const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
     const entAccounts = getState().auth.enterpriseAccounts;
@@ -140,7 +145,7 @@ export function markNotification(id, hostname) {
 
     dispatch({ type: MARK_NOTIFICATION.REQUEST });
 
-    return apiRequestAuth(url, method, token, {})
+    return apiRequestAuth(url, Methods.PATCH, token, {})
       .then(function (response) {
         dispatch({
           type: MARK_NOTIFICATION.SUCCESS,
@@ -150,6 +155,48 @@ export function markNotification(id, hostname) {
       .catch(function (error) {
         dispatch({
           type: MARK_NOTIFICATION.FAILURE,
+          payload: error.response.data,
+        });
+      });
+  };
+}
+
+export const UNSUBSCRIBE_NOTIFICATION = makeAsyncActionSet(
+  'UNSUBSCRIBE_NOTIFICATION'
+);
+export function unsubscribeNotification(id, hostname) {
+  return (dispatch, getState: () => AppState) => {
+    const markReadURL = `${generateGitHubAPIUrl(
+      hostname
+    )}notifications/threads/${id}`;
+    const unsubscribeURL = `${generateGitHubAPIUrl(
+      hostname
+    )}notifications/threads/${id}/subscription`;
+
+    const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+    const entAccounts = getState().auth.enterpriseAccounts;
+    const token = isEnterprise
+      ? getEnterpriseAccountToken(hostname, entAccounts)
+      : getState().auth.token;
+
+    dispatch({ type: UNSUBSCRIBE_NOTIFICATION.REQUEST });
+
+    return apiRequestAuth(unsubscribeURL, Methods.DELETE, token, {})
+      .then((response) => {
+        // The GitHub notifications API doesn't automatically mark things as read
+        // like it does in the UI, so after unsubscribing we also need to hit the
+        // endpoint to mark it as read.
+        return apiRequestAuth(markReadURL, Methods.PATCH, token, {});
+      })
+      .then((response) => {
+        dispatch({
+          type: UNSUBSCRIBE_NOTIFICATION.SUCCESS,
+          meta: { id, hostname },
+        });
+      })
+      .catch((error) => {
+        dispatch({
+          type: UNSUBSCRIBE_NOTIFICATION.FAILURE,
           payload: error.response.data,
         });
       });
@@ -166,7 +213,6 @@ export function markRepoNotifications(repoSlug, hostname) {
     const url = `${generateGitHubAPIUrl(
       hostname
     )}repos/${repoSlug}/notifications`;
-    const method = 'PUT';
 
     const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
     const entAccounts = getState().auth.enterpriseAccounts;
@@ -176,7 +222,7 @@ export function markRepoNotifications(repoSlug, hostname) {
 
     dispatch({ type: MARK_REPO_NOTIFICATION.REQUEST });
 
-    return apiRequestAuth(url, method, token, {})
+    return apiRequestAuth(url, Methods.PUT, token, {})
       .then(function (response) {
         dispatch({
           type: MARK_REPO_NOTIFICATION.SUCCESS,

@@ -373,6 +373,81 @@ describe('actions/index.js', () => {
     });
   });
 
+  it('should unsubscribe from a notification thread with success - github.com', () => {
+    const id = 123;
+    const hostname = 'github.com';
+
+    // The unsubscribe endpoint call.
+    nock('https://api.github.com/')
+      .delete(`/notifications/threads/${id}/subscription`)
+      .reply(204);
+
+    // The mark read endpoint call.
+    nock('https://api.github.com/')
+      .patch(`/notifications/threads/${id}`)
+      .reply(200);
+
+    const expectedActions = [
+      { type: actions.UNSUBSCRIBE_NOTIFICATION.REQUEST },
+      {
+        type: actions.UNSUBSCRIBE_NOTIFICATION.SUCCESS,
+        meta: { id, hostname },
+      },
+    ];
+
+    const store = createMockStore(
+      {
+        auth: {
+          token: 'THISISATOKEN',
+          enterpriseAccounts: mockedEnterpriseAccounts,
+        },
+        notifications: { response: [] },
+      },
+      expectedActions
+    );
+
+    return store
+      .dispatch(actions.unsubscribeNotification(id, hostname))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
+  it('should unsubscribe from a notification thread with failure - github.com', () => {
+    const id = 123;
+    const hostname = 'github.com';
+    const message = 'Oops! Something went wrong.';
+
+    nock('https://api.github.com/')
+      .delete(`/notifications/threads/${id}/subscription`)
+      .reply(400, { message });
+
+    const expectedActions = [
+      { type: actions.UNSUBSCRIBE_NOTIFICATION.REQUEST },
+      { type: actions.UNSUBSCRIBE_NOTIFICATION.FAILURE, payload: { message } },
+    ];
+
+    const store = createMockStore(
+      {
+        auth: {
+          token: 'THISISATOKEN',
+          enterpriseAccounts: mockedEnterpriseAccounts,
+        },
+        settings: {
+          participating: false,
+        },
+        notifications: { response: [] },
+      },
+      expectedActions
+    );
+
+    return store
+      .dispatch(actions.unsubscribeNotification(id, hostname))
+      .then(() => {
+        expect(store.getActions()).toEqual(expectedActions);
+      });
+  });
+
   it('should mark a notification as read with success - github.com', () => {
     const id = 123;
     const hostname = 'github.com';

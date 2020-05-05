@@ -3,13 +3,13 @@ const { shell } = require('electron');
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import Octicon, { Check, getIconByName } from '@primer/octicons-react';
+import Octicon, { Check, Mute, getIconByName } from '@primer/octicons-react';
 import styled from 'styled-components';
 
 import { AppState } from '../../types/reducers';
 import { formatReason, getNotificationTypeIcon } from '../utils/github-api';
 import { generateGitHubWebUrl } from '../utils/helpers';
-import { markNotification } from '../actions';
+import { markNotification, unsubscribeNotification } from '../actions';
 import { Notification } from '../../types/github';
 
 const Wrapper = styled.div`
@@ -52,7 +52,7 @@ const IconWrapper = styled.div`
   align-items: center;
 `;
 
-const Button = styled.button`
+const PrimaryButton = styled.button`
   background: none;
   border: none;
 
@@ -62,11 +62,23 @@ const Button = styled.button`
   }
 `;
 
+const SecondaryButton = styled.button`
+  background: none;
+  border: none;
+  float: right;
+
+  .octicon:hover {
+    color: ${(props) => props.theme.danger};
+    cursor: pointer;
+  }
+`;
+
 interface IProps {
   hostname: string;
   notification: Notification;
   markOnClick: boolean;
   markNotification: (id: string, hostname: string) => void;
+  unsubscribeNotification?: (id: string, hostname: string) => void;
 }
 
 export const NotificationItem: React.FC<IProps> = (props) => {
@@ -91,6 +103,14 @@ export const NotificationItem: React.FC<IProps> = (props) => {
     props.markNotification(notification.id, hostname);
   };
 
+  const unsubscribe = (event: React.MouseEvent<HTMLElement>) => {
+    // Don't trigger onClick of parent element.
+    event.stopPropagation();
+
+    const { hostname, notification } = props;
+    props.unsubscribeNotification(notification.id, hostname);
+  };
+
   const { notification } = props;
   const reason = formatReason(notification.reason);
   const typeIcon = getNotificationTypeIcon(notification.subject.type);
@@ -113,12 +133,15 @@ export const NotificationItem: React.FC<IProps> = (props) => {
         <Details>
           <span title={reason.description}>{reason.type}</span> - Updated{' '}
           {updatedAt}
+          <SecondaryButton title="Unsubscribe" onClick={(e) => unsubscribe(e)}>
+            <Octicon icon={Mute} size={13} ariaLabel="Unsubscribe" />
+          </SecondaryButton>
         </Details>
       </Main>
       <IconWrapper>
-        <Button title="Mark as Read" onClick={() => markAsRead()}>
+        <PrimaryButton title="Mark as Read" onClick={() => markAsRead()}>
           <Octicon icon={Check} size={20} ariaLabel="Mark as Read" />
-        </Button>
+        </PrimaryButton>
       </IconWrapper>
     </Wrapper>
   );
@@ -130,4 +153,7 @@ export function mapStateToProps(state: AppState) {
   };
 }
 
-export default connect(mapStateToProps, { markNotification })(NotificationItem);
+export default connect(mapStateToProps, {
+  markNotification,
+  unsubscribeNotification,
+})(NotificationItem);
