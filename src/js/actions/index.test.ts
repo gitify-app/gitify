@@ -379,7 +379,7 @@ describe('actions/index.js', () => {
 
     // The unsubscribe endpoint call.
     nock('https://api.github.com/')
-      .delete(`/notifications/threads/${id}/subscription`)
+      .put(`/notifications/threads/${id}/subscription`)
       .reply(204);
 
     // The mark read endpoint call.
@@ -419,7 +419,7 @@ describe('actions/index.js', () => {
     const message = 'Oops! Something went wrong.';
 
     nock('https://api.github.com/')
-      .delete(`/notifications/threads/${id}/subscription`)
+      .put(`/notifications/threads/${id}/subscription`)
       .reply(400, { message });
 
     const expectedActions = [

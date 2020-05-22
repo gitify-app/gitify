@@ -181,7 +181,7 @@ export function unsubscribeNotification(id, hostname) {
 
     dispatch({ type: UNSUBSCRIBE_NOTIFICATION.REQUEST });
 
-    return apiRequestAuth(unsubscribeURL, Methods.DELETE, token, {})
+    return apiRequestAuth(unsubscribeURL, Methods.PUT, token, { ignore: true })
       .then((response) => {
         // The GitHub notifications API doesn't automatically mark things as read
         // like it does in the UI, so after unsubscribing we also need to hit the
