@@ -69,7 +69,8 @@
       "assets/**/*",
       "index.html",
       "LICENSE",
-      "main.js"
+      "main.js",
+      "first-run.js"
     ],
     "mac": {
       "category": "public.app-category.developer-tools",
