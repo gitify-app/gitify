@@ -77,6 +77,16 @@ const ButtonFooter = styled.button`
   }
 `;
 
+const InputField = styled.input`
+  width: 100%;
+  padding: 0.75em 1.25em;
+  margin: 0.5em 0;
+  display: inline-block;
+  border: 0.05em solid #ccc;
+  border-radius: 0.25em;
+  box-sizing: border-box;
+`;
+
 interface IProps {
   hasMultipleAccounts: boolean;
   fetchNotifications: () => any;
@@ -167,6 +177,29 @@ export class SettingsRoute extends React.Component<IProps> {
               this.props.updateSetting('markOnClick', evt.target.checked)
             }
           />
+          <FieldCheckbox
+            name="usePAT"
+            label="Use PAT token instead of oauth"
+            checked={settings.usePAT}
+            onChange={(evt) =>
+                this.props.updateSetting('usePAT', evt.target.checked)
+            }
+          />
+          <div style={{"display": (settings.usePAT ? "block" : "none")}}>
+             <div>
+                 <label htmlFor="patTokenId">Enter personal access token</label>
+             </div>
+             <InputField
+                id="patTokenId"
+                name="patToken"
+                type="password"
+                value={settings.patToken}
+                onChange={(evt) =>
+                    this.props.updateSetting('patToken', evt.target.value)
+                }
+                className="form-control"
+              />
+          </div>
           {!isLinux && (
             <FieldCheckbox
               name="openAtStartUp"

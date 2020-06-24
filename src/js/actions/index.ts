@@ -77,7 +77,7 @@ export function fetchNotifications() {
       }
 
       const url = `https://api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}/${endpointSuffix}`;
-      const token = getState().auth.token;
+      const token = settings.usePAT ? settings.patToken : getState().auth.token;
       return apiRequestAuth(url, Methods.GET, token);
     }
 
@@ -85,7 +85,7 @@ export function fetchNotifications() {
       const enterpriseAccounts = getState().auth.enterpriseAccounts;
       return enterpriseAccounts.map((account) => {
         const hostname = account.hostname;
-        const token = account.token;
+        const token = settings.usePAT ? settings.patToken : account.token;
         const url = `https://${hostname}/api/v3/${endpointSuffix}`;
         return apiRequestAuth(url, Methods.GET, token);
       });
@@ -137,11 +137,12 @@ export function markNotification(id, hostname) {
   return (dispatch, getState: () => AppState) => {
     const url = `${generateGitHubAPIUrl(hostname)}notifications/threads/${id}`;
 
+    const {settings}: { settings: SettingsState } = getState();
     const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
     const entAccounts = getState().auth.enterpriseAccounts;
-    const token = isEnterprise
+    const token = settings.usePAT ? settings.patToken : (isEnterprise
       ? getEnterpriseAccountToken(hostname, entAccounts)
-      : getState().auth.token;
+      : getState().auth.token);
 
     dispatch({ type: MARK_NOTIFICATION.REQUEST });
 
@@ -173,11 +174,12 @@ export function unsubscribeNotification(id, hostname) {
       hostname
     )}notifications/threads/${id}/subscription`;
 
+    const {settings}: { settings: SettingsState } = getState();
     const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
     const entAccounts = getState().auth.enterpriseAccounts;
-    const token = isEnterprise
+    const token = settings.usePAT ? settings.patToken : (isEnterprise
       ? getEnterpriseAccountToken(hostname, entAccounts)
-      : getState().auth.token;
+      : getState().auth.token);
 
     dispatch({ type: UNSUBSCRIBE_NOTIFICATION.REQUEST });
 
@@ -214,11 +216,12 @@ export function markRepoNotifications(repoSlug, hostname) {
       hostname
     )}repos/${repoSlug}/notifications`;
 
+    const {settings}: { settings: SettingsState } = getState();
     const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
     const entAccounts = getState().auth.enterpriseAccounts;
-    const token = isEnterprise
+    const token = settings.usePAT ? settings.patToken : (isEnterprise
       ? getEnterpriseAccountToken(hostname, entAccounts)
-      : getState().auth.token;
+      : getState().auth.token);
 
     dispatch({ type: MARK_REPO_NOTIFICATION.REQUEST });
 

@@ -36,4 +36,6 @@ export interface SettingsState {
   showNotifications: boolean;
   markOnClick: boolean;
   openAtStartup: boolean;
+  usePAT: boolean;
+  patToken: string;
 }
