@@ -546,7 +546,7 @@ describe('actions/index.js', () => {
         },
         notifications: { response: [] },
         settings: {
-          usePAT: false
+          usePAT: false,
         },
       },
       expectedActions
@@ -578,7 +578,7 @@ describe('actions/index.js', () => {
           enterpriseAccounts: mockedEnterpriseAccounts,
         },
         settings: {
-          usePAT: false
+          usePAT: false,
         },
       },
       expectedActions
@@ -611,7 +611,7 @@ describe('actions/index.js', () => {
       {
         auth: { token: 'IAMATOKEN' },
         settings: {
-          usePAT: false
+          usePAT: false,
         },
       },
       expectedActions
@@ -645,7 +645,7 @@ describe('actions/index.js', () => {
           enterpriseAccounts: mockedEnterpriseAccounts,
         },
         settings: {
-          usePAT: false
+          usePAT: false,
         },
       },
       expectedActions
@@ -683,7 +683,7 @@ describe('actions/index.js', () => {
           enterpriseAccounts: mockedEnterpriseAccounts,
         },
         settings: {
-          usePAT: false
+          usePAT: false,
         },
       },
       expectedActions
@@ -717,7 +717,7 @@ describe('actions/index.js', () => {
           enterpriseAccounts: mockedEnterpriseAccounts,
         },
         settings: {
-          usePAT: false
+          usePAT: false,
         },
       },
       expectedActions
