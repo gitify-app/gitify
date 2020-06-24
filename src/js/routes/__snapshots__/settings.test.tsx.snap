@@ -12,13 +12,13 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
     >
       Settings
     </h3>
-    <button
+    <a
       aria-label="Close Settings"
       className="sc-fzoLsD cUlvxj"
       onClick={[Function]}
     >
       ×
-    </button>
+    </a>
   </div>
   <div
     className="sc-Axmtr fLAtpJ"
@@ -39,7 +39,7 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
             type="checkbox"
           />
           <div
-            className="sc-AxhUy VqymF"
+            className="sc-AxhUy juIZhB"
           >
             <svg
               className="sc-AxiKw bCXYxk"
@@ -93,7 +93,7 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
             type="checkbox"
           />
           <div
-            className="sc-AxhUy fPqOA-d"
+            className="sc-AxhUy gbfYbF"
           >
             <svg
               className="sc-AxiKw bCXYxk"
@@ -147,7 +147,7 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
             type="checkbox"
           />
           <div
-            className="sc-AxhUy fPqOA-d"
+            className="sc-AxhUy gbfYbF"
           >
             <svg
               className="sc-AxiKw bCXYxk"
@@ -201,7 +201,7 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
             type="checkbox"
           />
           <div
-            className="sc-AxhUy VqymF"
+            className="sc-AxhUy juIZhB"
           >
             <svg
               className="sc-AxiKw bCXYxk"
@@ -255,7 +255,7 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
             type="checkbox"
           />
           <div
-            className="sc-AxhUy VqymF"
+            className="sc-AxhUy juIZhB"
           >
             <svg
               className="sc-AxiKw bCXYxk"
