@@ -45,7 +45,7 @@ const Title = styled.h3`
   font-weight: 500;
 `;
 
-const ButtonClose = styled.button`
+const ButtonClose = styled.a`
   border: 0;
   padding: 0.25rem;
   font-size: 2rem;

@@ -69,7 +69,8 @@
       "assets/**/*",
       "index.html",
       "LICENSE",
-      "main.js"
+      "main.js",
+      "first-run.js"
     ],
     "mac": {
       "category": "public.app-category.developer-tools",
@@ -111,7 +112,7 @@
     "electron-updater": "^4.2.5",
     "final-form": "^4.19.1",
     "lodash": "^4.17.15",
-    "menubar": "^8.0.1",
+    "menubar": "^9.0.1",
     "nprogress": "=0.2.0",
     "react": "=16.13.1",
     "react-dom": "=16.13.1",
@@ -140,7 +141,7 @@
     "@types/react-redux": "^7.1.7",
     "@types/react-transition-group": "^4.2.4",
     "@types/styled-components": "^5.0.1",
-    "electron": "^8.2.0",
+    "electron": "^9.0.0",
     "electron-builder": "^22.4.1",
     "electron-notarize": "^0.3.0",
     "jest": "^25.2.7",

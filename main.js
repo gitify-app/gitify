@@ -1,11 +1,11 @@
-const { ipcMain } = require('electron');
+const { ipcMain, app } = require('electron');
 const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
+const { onFirstRunMaybe } = require('./first-run');
 const path = require('path');
 
 const iconIdle = path.join(__dirname, 'assets', 'images', 'tray-idleTemplate.png');
 const iconActive = path.join(__dirname, 'assets', 'images', 'tray-active.png');
-const isDarwin = process.platform === 'darwin';
 
 const browserWindowOpts = {
   width: 500,
@@ -18,6 +18,10 @@ const browserWindowOpts = {
     nodeIntegration: true,
   },
 };
+
+app.on('ready', async () => {
+  await onFirstRunMaybe();
+})
 
 const menubarApp = menubar({
   icon: iconIdle,
