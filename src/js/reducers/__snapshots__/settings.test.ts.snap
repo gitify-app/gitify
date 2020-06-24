@@ -5,8 +5,10 @@ Object {
   "markOnClick": false,
   "openAtStartup": false,
   "participating": true,
+  "patToken": "",
   "playSound": true,
   "showNotifications": true,
+  "usePAT": false,
 }
 `;
 
@@ -15,8 +17,10 @@ Object {
   "markOnClick": false,
   "openAtStartup": true,
   "participating": false,
+  "patToken": "",
   "playSound": true,
   "showNotifications": true,
+  "usePAT": false,
 }
 `;
 
@@ -25,7 +29,9 @@ Object {
   "markOnClick": false,
   "openAtStartup": false,
   "participating": false,
+  "patToken": "",
   "playSound": true,
   "showNotifications": true,
+  "usePAT": false,
 }
 `;

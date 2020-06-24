@@ -402,6 +402,9 @@ describe('actions/index.js', () => {
           enterpriseAccounts: mockedEnterpriseAccounts,
         },
         notifications: { response: [] },
+        settings: {
+          usePAT: false,
+        },
       },
       expectedActions
     );
@@ -433,10 +436,11 @@ describe('actions/index.js', () => {
           token: 'THISISATOKEN',
           enterpriseAccounts: mockedEnterpriseAccounts,
         },
+        notifications: { response: [] },
         settings: {
+          usePAT: false,
           participating: false,
         },
-        notifications: { response: [] },
       },
       expectedActions
     );
@@ -470,6 +474,10 @@ describe('actions/index.js', () => {
           token: 'THISISATOKEN',
           enterpriseAccounts: mockedEnterpriseAccounts,
         },
+        settings: {
+          usePAT: false,
+          participating: false,
+        },
         notifications: { response: [] },
       },
       expectedActions
@@ -501,6 +509,7 @@ describe('actions/index.js', () => {
           enterpriseAccounts: mockedEnterpriseAccounts,
         },
         settings: {
+          usePAT: false,
           participating: false,
         },
         notifications: { response: [] },
@@ -536,6 +545,9 @@ describe('actions/index.js', () => {
           enterpriseAccounts: mockedEnterpriseAccounts,
         },
         notifications: { response: [] },
+        settings: {
+          usePAT: false
+        },
       },
       expectedActions
     );
@@ -564,6 +576,9 @@ describe('actions/index.js', () => {
         auth: {
           token: 'THISISATOKEN',
           enterpriseAccounts: mockedEnterpriseAccounts,
+        },
+        settings: {
+          usePAT: false
         },
       },
       expectedActions
@@ -595,6 +610,9 @@ describe('actions/index.js', () => {
     const store = createMockStore(
       {
         auth: { token: 'IAMATOKEN' },
+        settings: {
+          usePAT: false
+        },
       },
       expectedActions
     );
@@ -625,6 +643,9 @@ describe('actions/index.js', () => {
         auth: {
           token: 'THISISATOKEN',
           enterpriseAccounts: mockedEnterpriseAccounts,
+        },
+        settings: {
+          usePAT: false
         },
       },
       expectedActions
@@ -661,6 +682,9 @@ describe('actions/index.js', () => {
           token: 'THISISATOKEN',
           enterpriseAccounts: mockedEnterpriseAccounts,
         },
+        settings: {
+          usePAT: false
+        },
       },
       expectedActions
     );
@@ -691,6 +715,9 @@ describe('actions/index.js', () => {
         auth: {
           token: 'THISISATOKEN',
           enterpriseAccounts: mockedEnterpriseAccounts,
+        },
+        settings: {
+          usePAT: false
         },
       },
       expectedActions

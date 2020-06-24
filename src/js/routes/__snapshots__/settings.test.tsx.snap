@@ -247,6 +247,81 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
           className="sc-AxirZ gtlEvo"
         >
           <input
+            className="sc-AxhCb bORWEo"
+            label="Use PAT token instead of oauth"
+            name="usePAT"
+            onChange={[Function]}
+            type="checkbox"
+          />
+          <div
+            className="sc-AxhUy juIZhB"
+          >
+            <svg
+              className="sc-AxiKw bCXYxk"
+              viewBox="0 0 24 24"
+            >
+              <g
+                fill="none"
+                fillRule="evenodd"
+                stroke="none"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1"
+              >
+                <g
+                  stroke="#FFFFFF"
+                  strokeWidth="3"
+                  transform="translate(6.000000, 7.000000)"
+                >
+                  <polyline
+                    points="13 0 4.0625 9 0 4.90909091"
+                  />
+                </g>
+              </g>
+            </svg>
+          </div>
+        </div>
+        <span
+          style={
+            Object {
+              "marginLeft": "1rem",
+            }
+          }
+        >
+          Use PAT token instead of oauth
+        </span>
+      </label>
+    </div>
+    <div
+      style={
+        Object {
+          "display": "none",
+        }
+      }
+    >
+      <div>
+        <label
+          htmlFor="patTokenId"
+        >
+          Enter personal access token
+        </label>
+      </div>
+      <input
+        className="sc-fzplWN dtTksJ form-control"
+        id="patTokenId"
+        name="patToken"
+        onChange={[Function]}
+        type="password"
+      />
+    </div>
+    <div
+      className="sc-AxjAm dnDkHN"
+    >
+      <label>
+        <div
+          className="sc-AxirZ gtlEvo"
+        >
+          <input
             checked={false}
             className="sc-AxhCb bORWEo"
             label="Open at startup"
