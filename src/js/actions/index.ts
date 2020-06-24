@@ -137,12 +137,14 @@ export function markNotification(id, hostname) {
   return (dispatch, getState: () => AppState) => {
     const url = `${generateGitHubAPIUrl(hostname)}notifications/threads/${id}`;
 
-    const {settings}: { settings: SettingsState } = getState();
+    const { settings }: { settings: SettingsState } = getState();
     const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
     const entAccounts = getState().auth.enterpriseAccounts;
-    const token = settings.usePAT ? settings.patToken : (isEnterprise
+    const token = settings.usePAT
+      ? settings.patToken
+      : isEnterprise
       ? getEnterpriseAccountToken(hostname, entAccounts)
-      : getState().auth.token);
+      : getState().auth.token;
 
     dispatch({ type: MARK_NOTIFICATION.REQUEST });
 
@@ -174,12 +176,14 @@ export function unsubscribeNotification(id, hostname) {
       hostname
     )}notifications/threads/${id}/subscription`;
 
-    const {settings}: { settings: SettingsState } = getState();
+    const { settings }: { settings: SettingsState } = getState();
     const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
     const entAccounts = getState().auth.enterpriseAccounts;
-    const token = settings.usePAT ? settings.patToken : (isEnterprise
+    const token = settings.usePAT
+      ? settings.patToken
+      : isEnterprise
       ? getEnterpriseAccountToken(hostname, entAccounts)
-      : getState().auth.token);
+      : getState().auth.token;
 
     dispatch({ type: UNSUBSCRIBE_NOTIFICATION.REQUEST });
 
@@ -216,12 +220,14 @@ export function markRepoNotifications(repoSlug, hostname) {
       hostname
     )}repos/${repoSlug}/notifications`;
 
-    const {settings}: { settings: SettingsState } = getState();
+    const { settings }: { settings: SettingsState } = getState();
     const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
     const entAccounts = getState().auth.enterpriseAccounts;
-    const token = settings.usePAT ? settings.patToken : (isEnterprise
+    const token = settings.usePAT
+      ? settings.patToken
+      : isEnterprise
       ? getEnterpriseAccountToken(hostname, entAccounts)
-      : getState().auth.token);
+      : getState().auth.token;
 
     dispatch({ type: MARK_REPO_NOTIFICATION.REQUEST });
 

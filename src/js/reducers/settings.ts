@@ -8,7 +8,7 @@ const initialState: SettingsState = {
   markOnClick: false,
   openAtStartup: false,
   usePAT: false,
-  patToken: "",
+  patToken: '',
 };
 
 export default function reducer(state = initialState, action): SettingsState {
