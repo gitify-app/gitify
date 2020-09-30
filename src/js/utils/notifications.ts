@@ -39,7 +39,7 @@ export default {
       notificationUrl = notification.subject.url;
     } else {
       title = 'Gitify';
-      body = `You have got ${count} notifications.`;
+      body = `You have ${count} notifications.`;
     }
 
     const nativeNotification = new Notification(title, {
