@@ -13,11 +13,12 @@ export type Reason =
   | 'ci_activity';
 
 export type SubjectType =
+  | 'CheckSuite'
+  | 'Commit'
+  | 'Discussion'
   | 'Issue'
   | 'PullRequest'
-  | 'Commit'
   | 'Release'
-  | 'CheckSuite'
   | 'RepositoryVulnerabilityAlert';
 
 export interface Notification {

@@ -53,18 +53,20 @@ export function formatReason(
 
 export function getNotificationTypeIcon(type: SubjectType): string {
   switch (type) {
+    case 'CheckSuite':
+      return 'sync';
+    case 'Commit':
+      return 'git-commit';
+    case 'Discussion':
+      return 'comment-discussion';
     case 'Issue':
       return 'issue-opened';
     case 'PullRequest':
       return 'git-pull-request';
-    case 'Commit':
-      return 'git-commit';
     case 'Release':
       return 'tag';
     case 'RepositoryVulnerabilityAlert':
       return 'alert';
-    case 'CheckSuite':
-      return 'sync';
     default:
       return 'question';
   }
