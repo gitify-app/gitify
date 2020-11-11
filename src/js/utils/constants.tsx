@@ -32,7 +32,6 @@ export default {
     ':clap:',
     ':circus_tent:',
     ':spaghetti:',
-    ':ok_hand:',
   ],
 
   ERROR_EMOJIS: [
