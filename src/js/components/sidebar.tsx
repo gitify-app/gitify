@@ -217,4 +217,4 @@ export default compose(
     fetchNotifications,
     logout,
   })
-)(Sidebar);
+)(Sidebar) as any;
