@@ -3,7 +3,7 @@ const { shell } = require('electron');
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import Octicon, { Check, Mute, getIconByName } from '@primer/octicons-react';
+import { CheckIcon, MuteIcon } from '@primer/octicons-react';
 import styled from 'styled-components';
 
 import { AppState } from '../../types/reducers';
@@ -113,7 +113,7 @@ export const NotificationItem: React.FC<IProps> = (props) => {
 
   const { notification } = props;
   const reason = formatReason(notification.reason);
-  const typeIcon = getNotificationTypeIcon(notification.subject.type);
+  const NotificationIcon = getNotificationTypeIcon(notification.subject.type);
   const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
     addSuffix: true,
   });
@@ -121,11 +121,7 @@ export const NotificationItem: React.FC<IProps> = (props) => {
   return (
     <Wrapper>
       <IconWrapper>
-        <Octicon
-          icon={getIconByName(typeIcon)}
-          size={20}
-          ariaLabel={notification.subject.type}
-        />
+        <NotificationIcon size={20} aria-label={notification.subject.type} />
       </IconWrapper>
       <Main onClick={() => pressTitle()} role="main">
         <Title>{notification.subject.title}</Title>
@@ -134,13 +130,13 @@ export const NotificationItem: React.FC<IProps> = (props) => {
           <span title={reason.description}>{reason.type}</span> - Updated{' '}
           {updatedAt}
           <SecondaryButton title="Unsubscribe" onClick={(e) => unsubscribe(e)}>
-            <Octicon icon={Mute} size={13} ariaLabel="Unsubscribe" />
+            <MuteIcon size={13} aria-label="Unsubscribe" />
           </SecondaryButton>
         </Details>
       </Main>
       <IconWrapper>
         <PrimaryButton title="Mark as Read" onClick={() => markAsRead()}>
-          <Octicon icon={Check} size={20} ariaLabel="Mark as Read" />
+          <CheckIcon size={20} aria-label="Mark as Read" />
         </PrimaryButton>
       </IconWrapper>
     </Wrapper>

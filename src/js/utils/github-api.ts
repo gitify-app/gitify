@@ -1,4 +1,5 @@
 import { Reason, SubjectType } from '../../types/github';
+import * as Octicons from '@primer/octicons-react';
 
 // prettier-ignore
 const DESCRIPTIONS = {
@@ -51,23 +52,25 @@ export function formatReason(
   }
 }
 
-export function getNotificationTypeIcon(type: SubjectType): string {
+export function getNotificationTypeIcon(
+  type: SubjectType
+): React.FC<Octicons.OcticonProps> {
   switch (type) {
     case 'CheckSuite':
-      return 'sync';
+      return Octicons.SyncIcon;
     case 'Commit':
-      return 'git-commit';
+      return Octicons.GitCommitIcon;
     case 'Discussion':
-      return 'comment-discussion';
+      return Octicons.CommentDiscussionIcon;
     case 'Issue':
-      return 'issue-opened';
+      return Octicons.IssueOpenedIcon;
     case 'PullRequest':
-      return 'git-pull-request';
+      return Octicons.GitPullRequestIcon;
     case 'Release':
-      return 'tag';
+      return Octicons.TagIcon;
     case 'RepositoryVulnerabilityAlert':
-      return 'alert';
+      return Octicons.AlertIcon;
     default:
-      return 'question';
+      return Octicons.QuestionIcon;
   }
 }

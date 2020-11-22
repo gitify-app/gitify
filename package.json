@@ -106,7 +106,7 @@
     "afterSign": "scripts/notarize.js"
   },
   "dependencies": {
-    "@primer/octicons-react": "^9.6.0",
+    "@primer/octicons-react": "^11.1.0",
     "axios": "=0.21.0",
     "date-fns": "^2.16.1",
     "electron-updater": "^4.3.5",

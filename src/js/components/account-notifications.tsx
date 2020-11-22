@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as _ from 'lodash';
 import styled from 'styled-components';
-import Octicon, { ChevronDown, ChevronLeft } from '@primer/octicons-react';
+import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
 
 import { Notification } from '../../types/github';
 import RepositoryNotifications from './repository';
@@ -34,16 +34,15 @@ export const AccountNotifications = (props: IProps) => {
     .sortBy((_, key) => key)
     .value();
 
+  const Chevron = notifications.length > 0 ? ChevronDownIcon : ChevronLeftIcon;
+
   return (
     <>
       {showAccountHostname && (
         <Account>
           {hostname}
 
-          <Octicon
-            icon={notifications.length > 0 ? ChevronDown : ChevronLeft}
-            size={20}
-          />
+          <Chevron size={20} />
         </Account>
       )}
 
