@@ -19,15 +19,21 @@ describe('./utils/github-api.ts', () => {
   });
 
   it('should get the notification type icon', () => {
-    expect(getNotificationTypeIcon('CheckSuite')).toBe('sync');
-    expect(getNotificationTypeIcon('Commit')).toBe('git-commit');
-    expect(getNotificationTypeIcon('Discussion')).toBe('comment-discussion');
-    expect(getNotificationTypeIcon('Issue')).toBe('issue-opened');
-    expect(getNotificationTypeIcon('PullRequest')).toBe('git-pull-request');
-    expect(getNotificationTypeIcon('Release')).toBe('tag');
-    expect(getNotificationTypeIcon('RepositoryVulnerabilityAlert')).toBe(
-      'alert'
+    expect(getNotificationTypeIcon('CheckSuite').name).toBe('SyncIcon');
+    expect(getNotificationTypeIcon('Commit').name).toBe('GitCommitIcon');
+    expect(getNotificationTypeIcon('Discussion').name).toBe(
+      'CommentDiscussionIcon'
     );
-    expect(getNotificationTypeIcon('Unknown' as SubjectType)).toBe('question');
+    expect(getNotificationTypeIcon('Issue').name).toBe('IssueOpenedIcon');
+    expect(getNotificationTypeIcon('PullRequest').name).toBe(
+      'GitPullRequestIcon'
+    );
+    expect(getNotificationTypeIcon('Release').name).toBe('TagIcon');
+    expect(getNotificationTypeIcon('RepositoryVulnerabilityAlert').name).toBe(
+      'AlertIcon'
+    );
+    expect(getNotificationTypeIcon('Unknown' as SubjectType).name).toBe(
+      'QuestionIcon'
+    );
   });
 });

@@ -56,7 +56,7 @@ The release process is automated. Follow the steps below.
 There are 2 checks - one for prettier and one for the unit tests with `jest`.
 
     // Run prettier to check
-    yarn run prettier-check
+    yarn run prettier:check
 
     // Run linter & unit tests with coverage
     yarn run test

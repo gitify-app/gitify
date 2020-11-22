@@ -3,7 +3,7 @@ const { shell } = require('electron');
 import * as React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import Octicon, { Check } from '@primer/octicons-react';
+import { CheckIcon } from '@primer/octicons-react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { markRepoNotifications } from '../actions';
@@ -84,11 +84,7 @@ export const RepositoryNotifications: React.FC<IProps> = (props) => {
 
         <IconWrapper>
           <Button onClick={markRepoAsRead}>
-            <Octicon
-              icon={Check}
-              size={20}
-              ariaLabel="Mark Repository as Read"
-            />
+            <CheckIcon size={20} aria-label="Mark Repository as Read" />
           </Button>
         </IconWrapper>
       </Wrapper>

@@ -24,7 +24,7 @@ jobs:
         run: yarn install
 
       - name: Run Prettier (Check)
-        run: yarn prettier-check
+        run: yarn prettier:check
 
       - name: Run Jest
         run: yarn test --coverage --runInBand
