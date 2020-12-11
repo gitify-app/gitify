@@ -17,6 +17,7 @@ const browserWindowOpts = {
     enableRemoteModule: true,
     overlayScrollbars: true,
     nodeIntegration: true,
+    contextIsolation: false,
   },
 };
 
@@ -63,4 +64,8 @@ menubarApp.on('ready', () => {
     menubarApp.positioner.move('trayCenter', trayBounds);
     menubarApp.window.resizable = false;
   });
+});
+
+menubarApp.on('after-create-window', () => {
+  app.dock.hide();
 });
