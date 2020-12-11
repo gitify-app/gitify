@@ -26,6 +26,13 @@ const browserWindowOpts = {
   },
 };
 
+const delayedHideAppIcon = () =>
+  // Setting a timeout because the showDockIcon is not currently working
+  // See more at https://github.com/maxogden/menubar/issues/306
+  setTimeout(() => {
+    app.dock.hide();
+  }, 1500);
+
 app.on('ready', async () => {
   await onFirstRunMaybe();
 });
@@ -38,6 +45,8 @@ const menubarApp = menubar({
 });
 
 menubarApp.on('ready', () => {
+  delayedHideAppIcon();
+
   menubarApp.tray.setIgnoreDoubleClickEvents(true);
 
   autoUpdater.checkForUpdatesAndNotify();
@@ -69,8 +78,4 @@ menubarApp.on('ready', () => {
     menubarApp.positioner.move('trayCenter', trayBounds);
     menubarApp.window.resizable = false;
   });
-});
-
-menubarApp.on('after-create-window', () => {
-  app.dock.hide();
 });
