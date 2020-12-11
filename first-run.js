@@ -50,5 +50,4 @@ function isFirstRun() {
   return true;
 }
 
-module.exports = { onFirstRunMaybe }
-
+module.exports = { onFirstRunMaybe };

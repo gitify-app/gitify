@@ -4,7 +4,12 @@ const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('path');
 
-const iconIdle = path.join(__dirname, 'assets', 'images', 'tray-idleTemplate.png');
+const iconIdle = path.join(
+  __dirname,
+  'assets',
+  'images',
+  'tray-idleTemplate.png'
+);
 const iconActive = path.join(__dirname, 'assets', 'images', 'tray-active.png');
 
 const browserWindowOpts = {
@@ -23,7 +28,7 @@ const browserWindowOpts = {
 
 app.on('ready', async () => {
   await onFirstRunMaybe();
-})
+});
 
 const menubarApp = menubar({
   icon: iconIdle,
