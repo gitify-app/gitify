@@ -4,7 +4,12 @@ const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('path');
 
-const iconIdle = path.join(__dirname, 'assets', 'images', 'tray-idleTemplate.png');
+const iconIdle = path.join(
+  __dirname,
+  'assets',
+  'images',
+  'tray-idleTemplate.png'
+);
 const iconActive = path.join(__dirname, 'assets', 'images', 'tray-active.png');
 
 const browserWindowOpts = {
@@ -17,12 +22,20 @@ const browserWindowOpts = {
     enableRemoteModule: true,
     overlayScrollbars: true,
     nodeIntegration: true,
+    contextIsolation: false,
   },
 };
 
+const delayedHideAppIcon = () =>
+  // Setting a timeout because the showDockIcon is not currently working
+  // See more at https://github.com/maxogden/menubar/issues/306
+  setTimeout(() => {
+    app.dock.hide();
+  }, 1500);
+
 app.on('ready', async () => {
   await onFirstRunMaybe();
-})
+});
 
 const menubarApp = menubar({
   icon: iconIdle,
@@ -32,6 +45,8 @@ const menubarApp = menubar({
 });
 
 menubarApp.on('ready', () => {
+  delayedHideAppIcon();
+
   menubarApp.tray.setIgnoreDoubleClickEvents(true);
 
   autoUpdater.checkForUpdatesAndNotify();
