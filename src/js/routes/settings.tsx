@@ -7,6 +7,9 @@ import { ArrowLeftIcon } from '@primer/octicons-react';
 import { AppState, SettingsState } from '../../types/reducers';
 import { fetchNotifications, updateSetting, logout } from '../actions';
 import { FieldCheckbox } from '../components/ui/checkbox';
+import { IconAddAccount } from '../../icons/AddAccount';
+import { IconLogOut } from '../../icons/Logout';
+import { IconQuit } from '../../icons/Quit';
 import { updateTrayIcon } from '../utils/comms';
 
 const isLinux = remote.process.platform === 'linux';
@@ -54,10 +57,10 @@ export class SettingsRoute extends React.Component<IProps> {
   }
 
   render() {
-    const { hasMultipleAccounts, settings } = this.props;
+    const { settings } = this.props;
 
     const footerButtonClass =
-      'bg-gray-400 hover:bg-gray-500 hover:text-white rounded py-1 px-2 my-1 mx-2 text-sm focus:outline-none';
+      'hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none';
 
     return (
       <div className="flex flex-1 flex-col">
@@ -129,7 +132,7 @@ export class SettingsRoute extends React.Component<IProps> {
               aria-label="Login with GitHub Enterprise"
               onClick={this.goToEnterprise.bind(this)}
             >
-              Add Enterprise
+              <IconAddAccount className="w-5 h-5" />
             </button>
 
             <button
@@ -137,7 +140,7 @@ export class SettingsRoute extends React.Component<IProps> {
               aria-label="Logout"
               onClick={this.logout.bind(this)}
             >
-              {hasMultipleAccounts ? 'Logout from all accounts' : 'Logout'}
+              <IconLogOut className="w-5 h-5" />
             </button>
 
             <button
@@ -145,7 +148,7 @@ export class SettingsRoute extends React.Component<IProps> {
               aria-label="Quit Gitify"
               onClick={this.quitApp}
             >
-              Quit
+              <IconQuit className="w-5 h-5" />
             </button>
           </div>
         </div>
