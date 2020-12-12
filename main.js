@@ -26,6 +26,16 @@ const browserWindowOpts = {
   },
 };
 
+const delayedHideAppIcon = () => {
+  if (app.dock && app.dock.hide) {
+    // Setting a timeout because the showDockIcon is not currently working
+    // See more at https://github.com/maxogden/menubar/issues/306
+    setTimeout(() => {
+      app.dock.hide();
+    }, 1500);
+  }
+};
+
 app.on('ready', async () => {
   await onFirstRunMaybe();
 });
@@ -38,9 +48,7 @@ const menubarApp = menubar({
 });
 
 menubarApp.on('ready', () => {
-  if (app.dock && app.dock.hide) {
-    app.dock.hide();
-  }
+  delayedHideAppIcon();
 
   menubarApp.tray.setIgnoreDoubleClickEvents(true);
 
