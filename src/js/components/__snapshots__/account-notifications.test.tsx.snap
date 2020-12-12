@@ -2,7 +2,7 @@
 
 exports[`components/account-notifications.tsx should render itself (github.com with notifications) 1`] = `
 <div
-  className="sc-AxjAm hCwqHM"
+  className="flex flex-1 items-center justify-between py-2 px-4 bg-gray-300 text-sm"
 >
   github.com
   <svg
@@ -31,7 +31,7 @@ exports[`components/account-notifications.tsx should render itself (github.com w
 
 exports[`components/account-notifications.tsx should render itself (github.com without notifications) 1`] = `
 <div
-  className="sc-AxjAm hCwqHM"
+  className="flex flex-1 items-center justify-between py-2 px-4 bg-gray-300 text-sm"
 >
   github.com
   <svg

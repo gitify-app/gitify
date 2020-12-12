@@ -3,7 +3,7 @@ import * as NProgress from 'nprogress';
 import { AppState } from '../../types/reducers';
 import { connect } from 'react-redux';
 
-const Loading = ({ isLoading }: { isLoading: boolean }) => {
+export const Loading = ({ isLoading }: { isLoading: boolean }) => {
   React.useEffect(() => {
     NProgress.configure({
       showSpinner: false,

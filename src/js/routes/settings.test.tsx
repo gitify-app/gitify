@@ -110,7 +110,7 @@ describe('routes/settings.tsx', () => {
 
   it('should go back by pressing the icon', () => {
     const { getByLabelText } = render(<SettingsRoute {...props} />);
-    fireEvent.click(getByLabelText('Close Settings'));
+    fireEvent.click(getByLabelText('Go Back'));
     expect(props.history.goBack).toHaveBeenCalledTimes(1);
   });
 

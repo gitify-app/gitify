@@ -2,7 +2,7 @@
 
 exports[`components/ui/logo.tsx renders correctly (light) 1`] = `
 <svg
-  className="logo"
+  className=""
   onClick={[Function]}
   role="logo"
   viewBox="0 0 500 500"
@@ -49,7 +49,7 @@ exports[`components/ui/logo.tsx renders correctly (light) 1`] = `
 
 exports[`components/ui/logo.tsx renders correctly(dark) 1`] = `
 <svg
-  className="logo"
+  className=""
   onClick={[Function]}
   role="logo"
   viewBox="0 0 500 500"

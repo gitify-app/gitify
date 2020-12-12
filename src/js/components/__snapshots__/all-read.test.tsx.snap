@@ -2,20 +2,18 @@
 
 exports[`components/all-read.tsx should render itself & its children 1`] = `
 <div
-  className="sc-AxjAm bVUrJb"
+  className="flex flex-1 flex-col justify-center items-center p-4"
 >
-  <div
-    className="sc-AxirZ joxCwg"
+  <h1
+    className="text-5xl mb-5"
   >
     😉
-  </div>
+  </h1>
   <h2
-    className="sc-AxiKw dlazZW"
+    className="font-semibold text-xl mb-2 text-semibold"
   />
-  <h4
-    className="sc-AxhCb jUqlrV"
-  >
+  <div>
     No new notifications.
-  </h4>
+  </div>
 </div>
 `;
