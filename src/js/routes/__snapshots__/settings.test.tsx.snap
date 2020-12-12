@@ -151,24 +151,96 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
     <div>
       <button
         aria-label="Login with GitHub Enterprise"
-        className="bg-gray-400 hover:bg-gray-500 hover:text-white rounded py-1 px-2 my-1 mx-2 text-sm focus:outline-none"
+        className="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
         onClick={[Function]}
       >
-        Add Enterprise
+        <svg
+          aria-hidden="true"
+          aria-labelledby="iconAddAccountId"
+          className="w-5 h-5"
+          role="img"
+          viewBox="0 0 640 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title
+            id="iconAddAccountId"
+          >
+            Add Account
+          </title>
+          <g>
+            <path
+              d="M640 224v32a16 16 0 01-16 16h-64v64a16 16 0 01-16 16h-32a16 16 0 01-16-16v-64h-64a16 16 0 01-16-16v-32a16 16 0 0116-16h64v-64a16 16 0 0116-16h32a16 16 0 0116 16v64h64a16 16 0 0116 16z"
+              fill="currentColor"
+              opacity={0.4}
+            />
+            <path
+              d="M224 256A128 128 0 1096 128a128 128 0 00128 128zm89.6 32h-16.7a174.08 174.08 0 01-145.8 0h-16.7A134.43 134.43 0 000 422.4V464a48 48 0 0048 48h352a48 48 0 0048-48v-41.6A134.43 134.43 0 00313.6 288z"
+              fill="currentColor"
+            />
+          </g>
+        </svg>
       </button>
       <button
         aria-label="Logout"
-        className="bg-gray-400 hover:bg-gray-500 hover:text-white rounded py-1 px-2 my-1 mx-2 text-sm focus:outline-none"
+        className="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
         onClick={[Function]}
       >
-        Logout
+        <svg
+          aria-hidden="true"
+          aria-labelledby="iconLogoutId"
+          className="w-5 h-5"
+          role="img"
+          viewBox="0 0 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title
+            id="iconLogoutId"
+          >
+            Logout from all accounts
+          </title>
+          <g>
+            <path
+              d="M180 448H96a96 96 0 01-96-96V160a96 96 0 0196-96h84a12 12 0 0112 12v40a12 12 0 01-12 12H96a32 32 0 00-32 32v192a32 32 0 0032 32h84a12 12 0 0112 12v40a12 12 0 01-12 12z"
+              fill="currentColor"
+              opacity={0.4}
+            />
+            <path
+              d="M353 88.3l151.9 150.6a24 24 0 010 34.1l-152 150.8a24.08 24.08 0 01-33.9-.1l-21.9-21.9a24.07 24.07 0 01.8-34.7l77.6-71.1H184a23.94 23.94 0 01-24-24v-32a23.94 23.94 0 0124-24h191.5l-77.6-71.1a24 24 0 01-.7-34.6l21.9-21.9a24 24 0 0133.9-.1z"
+              fill="currentColor"
+            />
+          </g>
+        </svg>
       </button>
       <button
         aria-label="Quit Gitify"
-        className="bg-gray-400 hover:bg-gray-500 hover:text-white rounded py-1 px-2 my-1 mx-2 text-sm focus:outline-none mr-0"
+        className="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none mr-0"
         onClick={[Function]}
       >
-        Quit
+        <svg
+          aria-hidden="true"
+          aria-labelledby="iconQuitId"
+          className="w-5 h-5"
+          role="img"
+          viewBox="0 0 512 512"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title
+            id="iconQuitId"
+          >
+            Quit Application
+          </title>
+          <g>
+            <path
+              d="M272 0a23.94 23.94 0 0124 24v240a23.94 23.94 0 01-24 24h-32a23.94 23.94 0 01-24-24V24a23.94 23.94 0 0124-24z"
+              fill="currentColor"
+              opacity={0.4}
+            />
+            <path
+              d="M504 256c0 136.8-110.8 247.7-247.5 248C120 504.3 8.2 393 8 256.4A248 248 0 01111.8 54.2a24.07 24.07 0 0135 7.7L162.6 90a24 24 0 01-6.6 31 168 168 0 00100 303c91.6 0 168.6-74.2 168-169.1a168.07 168.07 0 00-68.1-134 23.86 23.86 0 01-6.5-30.9l15.8-28.1a24 24 0 0134.8-7.8A247.51 247.51 0 01504 256z"
+              fill="currentColor"
+            />
+          </g>
+        </svg>
       </button>
     </div>
   </div>

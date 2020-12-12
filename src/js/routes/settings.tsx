@@ -57,10 +57,10 @@ export class SettingsRoute extends React.Component<IProps> {
   }
 
   render() {
-    const { hasMultipleAccounts, settings } = this.props;
+    const { settings } = this.props;
 
     const footerButtonClass =
-      'hover:bg-gray-500 hover:text-white rounded py-1 px-2 my-1 mx-2 text-sm focus:outline-none';
+      'hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none';
 
     return (
       <div className="flex flex-1 flex-col">

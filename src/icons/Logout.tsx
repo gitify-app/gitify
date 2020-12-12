@@ -10,7 +10,7 @@ export const IconLogOut = ({ className = '' }: { className?: string }) => {
       role="img"
       aria-labelledby="iconLogoutId"
     >
-      <title id="iconLogoutId">Logout</title>
+      <title id="iconLogoutId">Logout from all accounts</title>
       <g>
         <path
           fill="currentColor"
