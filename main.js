@@ -26,12 +26,15 @@ const browserWindowOpts = {
   },
 };
 
-const delayedHideAppIcon = () =>
-  // Setting a timeout because the showDockIcon is not currently working
-  // See more at https://github.com/maxogden/menubar/issues/306
-  setTimeout(() => {
-    app.dock.hide();
-  }, 1500);
+const delayedHideAppIcon = () => {
+  if (app.dock && app.dock.hide) {
+    // Setting a timeout because the showDockIcon is not currently working
+    // See more at https://github.com/maxogden/menubar/issues/306
+    setTimeout(() => {
+      app.dock.hide();
+    }, 1500);
+  }
+};
 
 app.on('ready', async () => {
   await onFirstRunMaybe();
