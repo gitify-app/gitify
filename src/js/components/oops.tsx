@@ -4,10 +4,13 @@ import { emojify } from 'react-emojione';
 import constants from '../utils/constants';
 
 export const Oops = () => {
-  const emoji =
-    constants.ERROR_EMOJIS[
-      Math.floor(Math.random() * constants.ERROR_EMOJIS.length)
-    ];
+  const emoji = React.useMemo(
+    () =>
+      constants.ERROR_EMOJIS[
+        Math.floor(Math.random() * constants.ERROR_EMOJIS.length)
+      ],
+    []
+  );
 
   return (
     <div className="flex flex-1 flex-col justify-center items-center p-4">

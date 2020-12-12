@@ -5,15 +5,21 @@ import { emojify } from 'react-emojione';
 import constants from '../utils/constants';
 
 export const AllRead = () => {
-  const message =
-    constants.ALLREAD_MESSAGES[
-      Math.floor(Math.random() * constants.ALLREAD_MESSAGES.length)
-    ];
+  const message = React.useMemo(
+    () =>
+      constants.ALLREAD_MESSAGES[
+        Math.floor(Math.random() * constants.ALLREAD_MESSAGES.length)
+      ],
+    []
+  );
 
-  const emoji =
-    constants.ALLREAD_EMOJIS[
-      Math.floor(Math.random() * constants.ALLREAD_EMOJIS.length)
-    ];
+  const emoji = React.useMemo(
+    () =>
+      constants.ALLREAD_EMOJIS[
+        Math.floor(Math.random() * constants.ALLREAD_EMOJIS.length)
+      ],
+    []
+  );
 
   return (
     <div className="flex flex-1 flex-col justify-center items-center p-4">
