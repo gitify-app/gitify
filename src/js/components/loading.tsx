@@ -3,37 +3,27 @@ import * as NProgress from 'nprogress';
 import { AppState } from '../../types/reducers';
 import { connect } from 'react-redux';
 
-interface IProps {
-  isLoading: boolean;
-}
-
-export class Loading extends React.PureComponent<IProps> {
-  state = {};
-
-  componentDidMount() {
+const Loading = ({ isLoading }: { isLoading: boolean }) => {
+  React.useEffect(() => {
     NProgress.configure({
       showSpinner: false,
     });
-  }
 
-  static getDerivedStateFromProps(props, state) {
-    if (props.isLoading) {
+    return () => {
+      NProgress.remove();
+    };
+  }, []);
+
+  React.useEffect(() => {
+    if (isLoading) {
       NProgress.start();
     } else {
       NProgress.done();
     }
+  }, [isLoading]);
 
-    return {};
-  }
-
-  componentWillUnmount() {
-    NProgress.remove();
-  }
-
-  render() {
-    return null;
-  }
-}
+  return null;
+};
 
 export function mapStateToProps(state: AppState) {
   return {
