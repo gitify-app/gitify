@@ -3,54 +3,10 @@ const { ipcRenderer } = require('electron');
 import * as React from 'react';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 
 import { AppState } from '../../types/reducers';
 import { authGithub, isUserEitherLoggedIn } from '../utils/helpers';
 import { Logo } from '../components/ui/logo';
-
-const Wrapper = styled.div`
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  .logo {
-    max-width: 5rem;
-    margin-top: 1rem;
-  }
-`;
-
-const Title = styled.h3`
-  margin: 1rem 0;
-  padding: 10px 5px;
-  font-weight: 400;
-  text-align: center;
-`;
-
-export const LoginButton = styled.button`
-  font-size: 0.85rem;
-  border-radius: 5px;
-  border: 1px solid ${(props) => props.theme.primary};
-
-  padding: 0.5rem 1rem;
-  margin: 0.5rem 0;
-  min-width: 16rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  background-color: ${(props) => props.theme.grayDark};
-  color: white;
-
-  &:hover {
-    background-color: ${(props) => props.theme.grayDarker};
-  }
-
-  span {
-    margin-left: 0.5rem;
-  }
-`;
 
 interface IProps {
   isEitherLoggedIn: boolean;
@@ -81,28 +37,33 @@ export class LoginPage extends React.Component<IProps> {
       return <Redirect to="/" />;
     }
 
+    const loginButtonClass =
+      'w-48 py-2 my-2 bg-gray-300 font-semibold rounded text-xs text-center hover:bg-gray-500 hover:text-white focus:outline-none';
+
     return (
-      <Wrapper>
-        <Logo isDark />
+      <div className="flex flex-1 flex-col justify-center items-center p-4">
+        <Logo className="w-16 h-16" isDark />
 
-        <Title>
+        <div className="my-4 px-2.5 py-1.5 font-semibold text-center">
           GitHub Notifications <br /> in your menu bar.
-        </Title>
+        </div>
 
-        <LoginButton
+        <button
+          className={loginButtonClass}
           onClick={() => authGithub(undefined, this.props.dispatch)}
           aria-label="Login with GitHub"
         >
           <span>Login to GitHub</span>
-        </LoginButton>
+        </button>
 
-        <LoginButton
+        <button
+          className={loginButtonClass}
           onClick={() => this.props.history.push('/enterpriselogin')}
           aria-label="Login with GitHub Enterprise"
         >
           <span>Login to GitHub Enterprise</span>
-        </LoginButton>
-      </Wrapper>
+        </button>
+      </div>
     );
   }
 }

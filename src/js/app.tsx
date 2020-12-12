@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import styled, {
+import {
   ThemeProvider,
   createGlobalStyle,
   DefaultTheme,
@@ -14,7 +14,7 @@ import styled, {
 
 import configureStore from './store/configureStore';
 import Loading from './components/loading';
-import Sidebar, { SIDEBAR_WIDTH } from './components/sidebar';
+import Sidebar from './components/sidebar';
 
 import EnterpriseLoginRoute from './routes/enterprise-login';
 import LoginRoute from './routes/login';
@@ -94,7 +94,7 @@ const GlobalStyle = createGlobalStyle`
     .bar {
       position: fixed;
       top: 0;
-      left: ${SIDEBAR_WIDTH};
+      left: 50px;
       z-index: 1031;
       background: ${(props) => props.theme.primary};
   
@@ -116,18 +116,13 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const Wrapper = styled.div`
-  height: 100%;
-  padding-left: ${SIDEBAR_WIDTH};
-`;
-
 export const App = () => {
   return (
     <Provider store={store}>
       <ThemeProvider theme={theme}>
         <Router>
           <GlobalStyle />
-          <Wrapper>
+          <div className="flex flex-col pl-14 h-full">
             <Loading />
             <Sidebar />
 
@@ -137,7 +132,7 @@ export const App = () => {
               <Route path="/login" component={LoginRoute} />
               <Route path="/enterpriselogin" component={EnterpriseLoginRoute} />
             </Switch>
-          </Wrapper>
+          </div>
         </Router>
       </ThemeProvider>
     </Provider>

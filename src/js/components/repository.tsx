@@ -1,7 +1,6 @@
 const { shell } = require('electron');
 
 import * as React from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { CheckIcon } from '@primer/octicons-react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -9,48 +8,6 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { markRepoNotifications } from '../actions';
 import { Notification } from '../../types/github';
 import NotificationItem from './notification';
-
-const Wrapper = styled.div`
-  display: flex;
-  background-color: ${(props) => props.theme.grayLight};
-  padding: 0.55rem 0.5rem;
-`;
-
-const TitleBar = styled.div`
-  flex: 1;
-  padding: 0 0.5rem;
-  margin-top: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  font-size: 0.95rem;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-`;
-
-const Avatar = styled.img`
-  border-radius: 50%;
-  margin-right: 0.75rem;
-  width: 20px;
-`;
-
-const IconWrapper = styled.div`
-  width: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const Button = styled.button`
-  background: none;
-  border: none;
-
-  .octicon:hover {
-    color: ${(props) => props.theme.success};
-    cursor: pointer;
-  }
-`;
 
 interface IProps {
   hostname: string;
@@ -76,18 +33,22 @@ export const RepositoryNotifications: React.FC<IProps> = (props) => {
 
   return (
     <>
-      <Wrapper>
-        <TitleBar>
-          <Avatar src={avatarUrl} />
+      <div className="flex flex-1 p-2 bg-gray-100">
+        <div className="flex flex-1 p-0.5 items-center mt-0 text-base font-medium overflow-hidden overflow-ellipsis whitespace-nowrap">
+          <img className="rounded w-5 h-5 ml-1 mr-3" src={avatarUrl} />
           <span onClick={openBrowser}>{props.repoName}</span>
-        </TitleBar>
+        </div>
 
-        <IconWrapper>
-          <Button onClick={markRepoAsRead}>
-            <CheckIcon size={20} aria-label="Mark Repository as Read" />
-          </Button>
-        </IconWrapper>
-      </Wrapper>
+        <div className="flex w-8 justify-center items-center">
+          <button className="focus:outline-none" onClick={markRepoAsRead}>
+            <CheckIcon
+              className="hover:text-green-500"
+              size={20}
+              aria-label="Mark Repository as Read"
+            />
+          </button>
+        </div>
+      </div>
 
       <TransitionGroup>
         {repoNotifications.map((obj) => (
