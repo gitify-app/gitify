@@ -3,43 +3,11 @@ const ipcRenderer = require('electron').ipcRenderer;
 import * as React from 'react';
 import { Form, FormRenderProps } from 'react-final-form';
 import { connect } from 'react-redux';
-import { MarkGithubIcon } from '@primer/octicons-react';
-import styled from 'styled-components';
+import { ArrowLeftIcon } from '@primer/octicons-react';
 
 import { AppState } from '../../types/reducers';
 import { authGithub } from '../utils/helpers';
 import { FieldInput } from '../components/fields/input';
-import { LoginButton } from './login';
-
-const Header = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 0 1rem;
-  padding: 1rem 2rem 0;
-`;
-
-const Main = styled.div`
-  flex: 1;
-  padding: 0 2rem;
-`;
-
-const Title = styled.h3`
-  margin: 0;
-  font-weight: 500;
-`;
-
-const ButtonClose = styled.button`
-  border: 0;
-  padding: 0.25rem;
-  font-size: 2rem;
-  font-weight: 500;
-
-  &:hover {
-    cursor: pointer;
-    color: ${(props) => props.theme.primary};
-  }
-`;
 
 interface IValues {
   hostname?: string;
@@ -127,14 +95,14 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
           placeholder="ABC123DEF456"
         />
 
-        <LoginButton
+        <button
+          className="float-right px-4 py-2 mt-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white focus:outline-none"
           disabled={submitting || pristine}
           type="submit"
           title="Login Button"
         >
-          <MarkGithubIcon size={16} />
-          <span>Login to GitHub Enterprise</span>
-        </LoginButton>
+          <span>Login</span>
+        </button>
       </form>
     );
   };
@@ -146,18 +114,21 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
   render() {
     return (
       <div>
-        <Header>
-          <Title>Login to GitHub Enterprise</Title>
-
-          <ButtonClose
+        <div className="flex justify-between items-center mt-4 py-2 mx-8">
+          <button
+            className="focus:outline-none"
             aria-label="Go Back"
             onClick={() => this.props.history.goBack()}
           >
-            &times;
-          </ButtonClose>
-        </Header>
+            <ArrowLeftIcon size={20} className="hover:text-gray-400" />
+          </button>
 
-        <Main>
+          <h3 className="text-lg font-semibold">
+            Login with GitHub Enterprise
+          </h3>
+        </div>
+
+        <div className="flex-1 px-8">
           <Form
             initialValues={{
               hostname: '',
@@ -169,7 +140,7 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
           >
             {this.renderForm}
           </Form>
-        </Main>
+        </div>
       </div>
     );
   }

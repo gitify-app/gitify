@@ -2,10 +2,10 @@
 
 exports[`components/notification.js should render itself & its children 1`] = `
 <div
-  className="sc-AxjAm esvKhw"
+  className="flex space-x-2 p-2 bg-white hover:bg-gray-100 border-b border-gray-100"
 >
   <div
-    className="sc-AxhUy cNkvzS"
+    className="flex justify-center items-center w-8"
   >
     <svg
       aria-hidden="false"
@@ -17,7 +17,7 @@ exports[`components/notification.js should render itself & its children 1`] = `
         }
       }
       fill="currentColor"
-      height={20}
+      height={18}
       role="img"
       style={
         Object {
@@ -27,21 +27,21 @@ exports[`components/notification.js should render itself & its children 1`] = `
         }
       }
       viewBox="0 0 16 16"
-      width={20}
+      width={18}
     />
   </div>
   <div
-    className="sc-AxirZ ibrlFv"
+    className="flex-1 overflow-hidden"
     onClick={[Function]}
     role="main"
   >
-    <h6
-      className="sc-AxiKw fXbfXY"
+    <div
+      className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden"
     >
       I am a robot and this is a test!
-    </h6>
+    </div>
     <div
-      className="sc-AxhCb fqclhB"
+      className="text-xs text-capitalize"
     >
       <span
         title="You're watching the repository."
@@ -52,14 +52,14 @@ exports[`components/notification.js should render itself & its children 1`] = `
        
       in over 3 years
       <button
-        className="sc-AxheI hMkKFy"
+        className="border-0 bg-none float-right"
         onClick={[Function]}
         title="Unsubscribe"
       >
         <svg
           aria-hidden="false"
           aria-label="Unsubscribe"
-          className="octicon"
+          className="hover:text-red-500"
           dangerouslySetInnerHTML={
             Object {
               "__html": "<path fill-rule=\\"evenodd\\" d=\\"M8 2.75a.75.75 0 00-1.238-.57L3.472 5H1.75A1.75 1.75 0 000 6.75v2.5C0 10.216.784 11 1.75 11h1.723l3.289 2.82A.75.75 0 008 13.25V2.75zM4.238 6.32L6.5 4.38v7.24L4.238 9.68a.75.75 0 00-.488-.18h-2a.25.25 0 01-.25-.25v-2.5a.25.25 0 01.25-.25h2a.75.75 0 00.488-.18zm7.042-1.1a.75.75 0 10-1.06 1.06L11.94 8l-1.72 1.72a.75.75 0 101.06 1.06L13 9.06l1.72 1.72a.75.75 0 101.06-1.06L14.06 8l1.72-1.72a.75.75 0 00-1.06-1.06L13 6.94l-1.72-1.72z\\"></path>",
@@ -82,17 +82,17 @@ exports[`components/notification.js should render itself & its children 1`] = `
     </div>
   </div>
   <div
-    className="sc-AxhUy cNkvzS"
+    className="flex justify-center items-center w-8"
   >
     <button
-      className="sc-AxgMl beGRRX"
+      className="focus:outline-none"
       onClick={[Function]}
       title="Mark as Read"
     >
       <svg
         aria-hidden="false"
         aria-label="Mark as Read"
-        className="octicon"
+        className="hover:text-green-500"
         dangerouslySetInnerHTML={
           Object {
             "__html": "<path fill-rule=\\"evenodd\\" d=\\"M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z\\"></path>",

@@ -1,24 +1,9 @@
 import * as React from 'react';
 import * as _ from 'lodash';
-import styled from 'styled-components';
 import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
 
 import { Notification } from '../../types/github';
 import RepositoryNotifications from './repository';
-
-const Account = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 0.5rem 1rem;
-  background-color: ${(props) => props.theme.primaryDark};
-  color: white;
-  font-size: 0.9rem;
-
-  .octicon {
-    margin-left: 1rem;
-  }
-`;
 
 interface IProps {
   hostname: string;
@@ -39,11 +24,11 @@ export const AccountNotifications = (props: IProps) => {
   return (
     <>
       {showAccountHostname && (
-        <Account>
+        <div className="flex flex-1 items-center justify-between py-2 px-4 bg-gray-300 text-sm">
           {hostname}
 
           <Chevron size={20} />
-        </Account>
+        </div>
       )}
 
       {Object.values(groupedNotifications).map((repoNotifications) => {

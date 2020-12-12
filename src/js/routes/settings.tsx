@@ -2,7 +2,7 @@ const { ipcRenderer, remote } = require('electron');
 
 import * as React from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import { ArrowLeftIcon } from '@primer/octicons-react';
 
 import { AppState, SettingsState } from '../../types/reducers';
 import { fetchNotifications, updateSetting, logout } from '../actions';
@@ -10,72 +10,6 @@ import { FieldCheckbox } from '../components/ui/checkbox';
 import { updateTrayIcon } from '../utils/comms';
 
 const isLinux = remote.process.platform === 'linux';
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-`;
-
-const Header = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 0 1rem;
-  padding: 1rem 2rem 0;
-`;
-
-const Main = styled.div`
-  flex: 1;
-  padding: 0 2rem;
-`;
-
-const Footer = styled.div`
-  margin: 1rem 0 0;
-  padding: 0.5rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: ${(props) => props.theme.grayLight};
-  font-size: 0.85rem;
-`;
-
-const Title = styled.h3`
-  margin: 0;
-  font-weight: 500;
-`;
-
-const ButtonClose = styled.a`
-  border: 0;
-  padding: 0.25rem;
-  font-size: 2rem;
-  font-weight: 500;
-
-  &:hover {
-    cursor: pointer;
-    color: ${(props) => props.theme.primary};
-  }
-`;
-
-const ButtonFooter = styled.button`
-  border: 0;
-  padding: 0.25rem 0.5rem;
-  margin: 0.25rem 0.5rem;
-  font-size: 0.75rem;
-  background-color: ${(props) => props.theme.primary};
-  border: 0x solid ${(props) => props.theme.danger};
-  border-radius: ${(props) => props.theme.borderRadius};
-  color: white;
-
-  &:hover {
-    background-color: ${(props) => props.theme.primaryDark};
-    color: white;
-  }
-
-  &:last-child {
-    margin-right: 0;
-  }
-`;
 
 interface IProps {
   hasMultipleAccounts: boolean;
@@ -122,19 +56,24 @@ export class SettingsRoute extends React.Component<IProps> {
   render() {
     const { hasMultipleAccounts, settings } = this.props;
 
-    return (
-      <Wrapper>
-        <Header>
-          <Title>Settings</Title>
+    const footerButtonClass =
+      'bg-gray-400 hover:bg-gray-500 hover:text-white rounded py-1 px-2 my-1 mx-2 text-sm focus:outline-none';
 
-          <ButtonClose
-            aria-label="Close Settings"
+    return (
+      <div className="flex flex-1 flex-col">
+        <div className="flex justify-between items-center mt-4 py-2 mx-8">
+          <button
+            className="focus:outline-none"
+            aria-label="Go Back"
             onClick={() => this.props.history.goBack()}
           >
-            &times;
-          </ButtonClose>
-        </Header>
-        <Main>
+            <ArrowLeftIcon size={20} className="hover:text-gray-400" />
+          </button>
+
+          <h3 className="text-lg font-semibold">Settings</h3>
+        </div>
+
+        <div className="flex-1 px-8">
           <FieldCheckbox
             name="showOnlyParticipating"
             label="Show only participating"
@@ -177,29 +116,40 @@ export class SettingsRoute extends React.Component<IProps> {
               }
             />
           )}
-        </Main>
+        </div>
 
-        <Footer>
-          <small>Gitify v{remote.app.getVersion()}</small>
+        <div className="flex justify-between items-center bg-gray-300 py-4 px-8">
+          <small className="font-semibold">
+            Gitify v{remote.app.getVersion()}
+          </small>
 
           <div>
-            <ButtonFooter
+            <button
+              className={footerButtonClass}
               aria-label="Login with GitHub Enterprise"
               onClick={this.goToEnterprise.bind(this)}
             >
               Add Enterprise
-            </ButtonFooter>
+            </button>
 
-            <ButtonFooter aria-label="Logout" onClick={this.logout.bind(this)}>
+            <button
+              className={footerButtonClass}
+              aria-label="Logout"
+              onClick={this.logout.bind(this)}
+            >
               {hasMultipleAccounts ? 'Logout from all accounts' : 'Logout'}
-            </ButtonFooter>
+            </button>
 
-            <ButtonFooter aria-label="Quit Gitify" onClick={this.quitApp}>
+            <button
+              className={`${footerButtonClass} mr-0`}
+              aria-label="Quit Gitify"
+              onClick={this.quitApp}
+            >
               Quit
-            </ButtonFooter>
+            </button>
           </div>
-        </Footer>
-      </Wrapper>
+        </div>
+      </div>
     );
   }
 }

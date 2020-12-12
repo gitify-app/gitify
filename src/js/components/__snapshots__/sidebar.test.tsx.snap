@@ -2,13 +2,13 @@
 
 exports[`components/Sidebar.tsx should render itself & its children (logged in) 1`] = `
 <div
-  className="sc-AxjAm hvGyhy"
+  className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-primary overflow-y-auto	"
 >
   <div
-    className="sc-AxirZ gZzKjG"
+    className="flex flex-col flex-1 items-center py-4"
   >
     <svg
-      className="logo"
+      className="w-5 my-3 mx-auto cursor-pointer"
       onClick={[Function]}
       role="logo"
       viewBox="0 0 500 500"
@@ -52,7 +52,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
       </g>
     </svg>
     <div
-      className="sc-AxiKw cRGLZg"
+      className="flex justify-around	self-stretch items-center my-1 py-1 px-2 text-green-500 text-xs font-extrabold"
     >
       <svg
         aria-hidden="true"
@@ -79,11 +79,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
     </div>
   </div>
   <div
-    className="sc-AxhCb iiUgpz"
+    className="py-4 px-3"
   >
-    <button
+    <div
       aria-label="Refresh Notifications"
-      className="sc-AxhUy dubEsv"
+      className="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none"
       onClick={[Function]}
     >
       <svg
@@ -107,10 +107,10 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         viewBox="0 0 16 16"
         width={16}
       />
-    </button>
-    <button
+    </div>
+    <div
       aria-label="Settings"
-      className="sc-AxhUy dubEsv"
+      className="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none"
       onClick={[Function]}
     >
       <svg
@@ -134,10 +134,10 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         viewBox="0 0 16 16"
         width={16}
       />
-    </button>
-    <button
+    </div>
+    <div
       aria-label="View project on GitHub"
-      className="sc-AxhUy dubEsv"
+      className="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none"
       onClick={[Function]}
     >
       <svg
@@ -161,20 +161,20 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         viewBox="0 0 16 16"
         width={14}
       />
-    </button>
+    </div>
   </div>
 </div>
 `;
 
 exports[`components/Sidebar.tsx should render itself & its children (logged out) 1`] = `
 <div
-  className="sc-AxjAm hvGyhy"
+  className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-primary overflow-y-auto	"
 >
   <div
-    className="sc-AxirZ gZzKjG"
+    className="flex flex-col flex-1 items-center py-4"
   >
     <svg
-      className="logo"
+      className="w-5 my-3 mx-auto cursor-pointer"
       onClick={[Function]}
       role="logo"
       viewBox="0 0 500 500"
@@ -218,7 +218,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
       </g>
     </svg>
     <div
-      className="sc-AxiKw cRGLZg"
+      className="flex justify-around	self-stretch items-center my-1 py-1 px-2 text-green-500 text-xs font-extrabold"
     >
       <svg
         aria-hidden="true"
@@ -245,11 +245,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
     </div>
   </div>
   <div
-    className="sc-AxhCb iiUgpz"
+    className="py-4 px-3"
   >
-    <button
+    <div
       aria-label="View project on GitHub"
-      className="sc-AxhUy dubEsv"
+      className="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none"
       onClick={[Function]}
     >
       <svg
@@ -273,7 +273,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
         viewBox="0 0 16 16"
         width={14}
       />
-    </button>
+    </div>
   </div>
 </div>
 `;

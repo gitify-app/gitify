@@ -4,88 +4,12 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import { shell } from 'electron';
 import * as Octicons from '@primer/octicons-react';
-import styled from 'styled-components';
 
 import { AppState } from '../../types/reducers';
 import { fetchNotifications, logout } from '../actions';
 import { isUserEitherLoggedIn } from '../utils/helpers';
 import { Logo } from './ui/logo';
 import Constants from '../utils/constants';
-
-export const SIDEBAR_WIDTH = '50px';
-
-const Wrapper = styled.div`
-  position: fixed;
-  left: ${SIDEBAR_WIDTH};
-  margin-left: -${SIDEBAR_WIDTH};
-  background-color: ${(props) => props.theme.primary};
-  width: ${SIDEBAR_WIDTH};
-  height: 100%;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-
-  .logo {
-    width: 1.25rem;
-    margin: 0.75rem auto;
-
-    &:hover {
-      cursor: pointer;
-    }
-  }
-`;
-
-const Main = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem 0;
-`;
-
-const Status = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  align-self: stretch;
-  align-items: center;
-  margin: 0.25rem 0;
-  padding: 0.25rem 0.55rem;
-  color: ${(props) => props.theme.success};
-  font-size: 75%;
-  font-weight: 700;
-  line-height: 1;
-  text-align: center;
-  white-space: nowrap;
-  text-transform: uppercase;
-`;
-
-const Footer = styled.div`
-  padding: 1rem 0.75rem;
-`;
-
-const FooterButton = styled.button`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-
-  background-color: transparent;
-  border: 0;
-  width: 100%;
-
-  font-size: 0.8rem;
-  margin-top: 0.25rem;
-  padding: 0.35rem 0;
-  color: white;
-
-  &:focus {
-    outline: 0;
-  }
-
-  .octicon:hover {
-    color: ${(props) => props.theme.info};
-  }
-`;
 
 interface IProps {
   fetchNotifications: () => void;
@@ -148,46 +72,55 @@ export class Sidebar extends React.Component<IProps> {
   render() {
     const { isEitherLoggedIn, notificationsCount } = this.props;
 
+    const footerButtonClasses =
+      'flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none';
+
     return (
-      <Wrapper>
-        <Main>
-          <Logo onClick={this.onOpenBrowser} />
+      <div className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-primary overflow-y-auto	">
+        <div className="flex flex-col flex-1 items-center py-4">
+          <Logo
+            className="w-5 my-3 mx-auto cursor-pointer"
+            onClick={this.onOpenBrowser}
+          />
 
           {notificationsCount > 0 && (
-            <Status>
+            <div className="flex justify-around	self-stretch items-center my-1 py-1 px-2 text-green-500 text-xs font-extrabold">
               <Octicons.BellIcon size={12} />
               {notificationsCount}
-            </Status>
+            </div>
           )}
-        </Main>
+        </div>
 
-        <Footer>
+        <div className="py-4 px-3">
           {isEitherLoggedIn && (
             <>
-              <FooterButton
+              <div
+                className={footerButtonClasses}
                 onClick={this.refreshNotifications.bind(this)}
                 aria-label="Refresh Notifications"
               >
                 <Octicons.SyncIcon size={16} />
-              </FooterButton>
+              </div>
 
-              <FooterButton
+              <div
+                className={footerButtonClasses}
                 onClick={this.goToSettings.bind(this)}
                 aria-label="Settings"
               >
                 <Octicons.GearIcon size={16} />
-              </FooterButton>
+              </div>
             </>
           )}
 
-          <FooterButton
+          <div
+            className={footerButtonClasses}
             onClick={this.onOpenBrowser}
             aria-label="View project on GitHub"
           >
             <Octicons.MarkGithubIcon size={14} />
-          </FooterButton>
-        </Footer>
-      </Wrapper>
+          </div>
+        </div>
+      </div>
     );
   }
 }

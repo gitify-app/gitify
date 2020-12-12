@@ -3,6 +3,7 @@ import * as React from 'react';
 interface IProps {
   isDark?: boolean;
   onClick?: () => void;
+  className?: string;
 }
 
 const LIGHT_GRADIENT_START = '#CCCCCC';
@@ -11,9 +12,9 @@ const LIGHT_GRADIENT_END = '#FFFFFF';
 const DARK_GRADIENT_START = '#22283B';
 const DARK_GRADIENT_END = '#555B6E';
 
-export const Logo = ({ isDark, onClick }: IProps) => (
+export const Logo = ({ isDark, onClick, className = '' }: IProps) => (
   <svg
-    className="logo"
+    className={className}
     onClick={() => onClick && onClick()}
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"

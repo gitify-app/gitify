@@ -3,38 +3,58 @@
 exports[`routes/enterprise-login.js renders correctly 1`] = `
 <div>
   <div
-    className="sc-Axmtr ebMSwT"
+    className="flex justify-between items-center mt-4 py-2 mx-8"
   >
-    <h3
-      className="sc-fzozJi jqfsXz"
-    >
-      Login to GitHub Enterprise
-    </h3>
     <button
       aria-label="Go Back"
-      className="sc-fzoLsD cUlvxj"
+      className="focus:outline-none"
       onClick={[Function]}
     >
-      ×
+      <svg
+        aria-hidden="true"
+        className="hover:text-gray-400"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<path fill-rule=\\"evenodd\\" d=\\"M7.78 12.53a.75.75 0 01-1.06 0L2.47 8.28a.75.75 0 010-1.06l4.25-4.25a.75.75 0 011.06 1.06L4.81 7h7.44a.75.75 0 010 1.5H4.81l2.97 2.97a.75.75 0 010 1.06z\\"></path>",
+          }
+        }
+        fill="currentColor"
+        height={20}
+        role="img"
+        style={
+          Object {
+            "display": "inline-block",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 16 16"
+        width={20}
+      />
     </button>
+    <h3
+      className="text-lg font-semibold"
+    >
+      Login with GitHub Enterprise
+    </h3>
   </div>
   <div
-    className="sc-AxmLO hfTlrw"
+    className="flex-1 px-8"
   >
     <form
       onSubmit={[Function]}
     >
       <div
-        className="sc-AxjAm euTnqr"
+        className="mt-2"
       >
         <label
-          className="sc-AxirZ iDECDC"
+          className="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
           htmlFor="hostname"
         >
           Hostname
         </label>
         <input
-          className="sc-AxiKw gyFGja"
+          className="appearance-none block w-full bg-gray-100 text-grey-darker border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200"
           id="hostname"
           name="hostname"
           onBlur={[Function]}
@@ -46,16 +66,16 @@ exports[`routes/enterprise-login.js renders correctly 1`] = `
         />
       </div>
       <div
-        className="sc-AxjAm euTnqr"
+        className="mt-2"
       >
         <label
-          className="sc-AxirZ iDECDC"
+          className="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
           htmlFor="clientId"
         >
           Client ID
         </label>
         <input
-          className="sc-AxiKw gyFGja"
+          className="appearance-none block w-full bg-gray-100 text-grey-darker border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200"
           id="clientId"
           name="clientId"
           onBlur={[Function]}
@@ -67,16 +87,16 @@ exports[`routes/enterprise-login.js renders correctly 1`] = `
         />
       </div>
       <div
-        className="sc-AxjAm euTnqr"
+        className="mt-2"
       >
         <label
-          className="sc-AxirZ iDECDC"
+          className="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
           htmlFor="clientSecret"
         >
           Client Secret
         </label>
         <input
-          className="sc-AxiKw gyFGja"
+          className="appearance-none block w-full bg-gray-100 text-grey-darker border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200"
           id="clientSecret"
           name="clientSecret"
           onBlur={[Function]}
@@ -88,34 +108,13 @@ exports[`routes/enterprise-login.js renders correctly 1`] = `
         />
       </div>
       <button
-        className="sc-AxheI dRrlwj"
+        className="float-right px-4 py-2 mt-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white focus:outline-none"
         disabled={true}
         title="Login Button"
         type="submit"
       >
-        <svg
-          aria-hidden="true"
-          className="octicon"
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": "<path fill-rule=\\"evenodd\\" d=\\"M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z\\"></path>",
-            }
-          }
-          fill="currentColor"
-          height={16}
-          role="img"
-          style={
-            Object {
-              "display": "inline-block",
-              "userSelect": "none",
-              "verticalAlign": "text-bottom",
-            }
-          }
-          viewBox="0 0 16 16"
-          width={16}
-        />
         <span>
-          Login to GitHub Enterprise
+          Login
         </span>
       </button>
     </form>

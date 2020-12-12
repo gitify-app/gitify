@@ -4,74 +4,12 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { CheckIcon, MuteIcon } from '@primer/octicons-react';
-import styled from 'styled-components';
 
 import { AppState } from '../../types/reducers';
 import { formatReason, getNotificationTypeIcon } from '../utils/github-api';
 import { generateGitHubWebUrl } from '../utils/helpers';
 import { markNotification, unsubscribeNotification } from '../actions';
 import { Notification } from '../../types/github';
-
-const Wrapper = styled.div`
-  display: flex;
-  margin: 0;
-  padding: 0.5rem 0.5rem;
-  border-bottom: 1px solid ${(props) => props.theme.grayLight};
-
-  &:hover {
-    background-color: ${(props) => props.theme.grayLighter};
-  }
-`;
-
-const Main = styled.div`
-  flex: 1;
-  padding: 0 0.5rem;
-  overflow: hidden;
-`;
-
-const Title = styled.h6`
-  margin-top: 0;
-  margin-bottom: 0.25rem;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  font-size: 0.9rem;
-  font-weight: 400;
-  line-height: 1rem;
-`;
-
-const Details = styled.div`
-  font-size: 0.75rem;
-  text-transform: text-capitalize;
-`;
-
-const IconWrapper = styled.div`
-  width: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-const PrimaryButton = styled.button`
-  background: none;
-  border: none;
-
-  .octicon:hover {
-    color: ${(props) => props.theme.success};
-    cursor: pointer;
-  }
-`;
-
-const SecondaryButton = styled.button`
-  background: none;
-  border: none;
-  float: right;
-
-  .octicon:hover {
-    color: ${(props) => props.theme.danger};
-    cursor: pointer;
-  }
-`;
 
 interface IProps {
   hostname: string;
@@ -119,27 +57,51 @@ export const NotificationItem: React.FC<IProps> = (props) => {
   });
 
   return (
-    <Wrapper>
-      <IconWrapper>
-        <NotificationIcon size={20} aria-label={notification.subject.type} />
-      </IconWrapper>
-      <Main onClick={() => pressTitle()} role="main">
-        <Title>{notification.subject.title}</Title>
+    <div className="flex space-x-2 p-2 bg-white hover:bg-gray-100 border-b border-gray-100">
+      <div className="flex justify-center items-center w-8">
+        <NotificationIcon size={18} aria-label={notification.subject.type} />
+      </div>
 
-        <Details>
+      <div
+        className="flex-1 overflow-hidden"
+        onClick={() => pressTitle()}
+        role="main"
+      >
+        <div className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
+          {notification.subject.title}
+        </div>
+
+        <div className="text-xs text-capitalize">
           <span title={reason.description}>{reason.type}</span> - Updated{' '}
           {updatedAt}
-          <SecondaryButton title="Unsubscribe" onClick={(e) => unsubscribe(e)}>
-            <MuteIcon size={13} aria-label="Unsubscribe" />
-          </SecondaryButton>
-        </Details>
-      </Main>
-      <IconWrapper>
-        <PrimaryButton title="Mark as Read" onClick={() => markAsRead()}>
-          <CheckIcon size={20} aria-label="Mark as Read" />
-        </PrimaryButton>
-      </IconWrapper>
-    </Wrapper>
+          <button
+            className="border-0 bg-none float-right"
+            title="Unsubscribe"
+            onClick={(e) => unsubscribe(e)}
+          >
+            <MuteIcon
+              className="hover:text-red-500"
+              size={13}
+              aria-label="Unsubscribe"
+            />
+          </button>
+        </div>
+      </div>
+
+      <div className="flex justify-center items-center w-8">
+        <button
+          className="focus:outline-none"
+          title="Mark as Read"
+          onClick={() => markAsRead()}
+        >
+          <CheckIcon
+            className="hover:text-green-500"
+            size={20}
+            aria-label="Mark as Read"
+          />
+        </button>
+      </div>
+    </div>
   );
 };
 

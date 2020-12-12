@@ -3,13 +3,13 @@
 exports[`components/repository.tsx should render itself & its children 1`] = `
 Array [
   <div
-    className="sc-AxjAm jxuASs"
+    className="flex flex-1 p-2 bg-gray-100"
   >
     <div
-      className="sc-AxirZ jclJC"
+      className="flex flex-1 p-0.5 items-center mt-0 text-base font-medium overflow-hidden overflow-ellipsis whitespace-nowrap"
     >
       <img
-        className="sc-AxiKw cUAnsn"
+        className="rounded w-5 h-5 ml-1 mr-3"
         src="https://avatars0.githubusercontent.com/u/6333409?v=3"
       />
       <span
@@ -19,16 +19,16 @@ Array [
       </span>
     </div>
     <div
-      className="sc-AxhCb hLzOhr"
+      className="flex w-8 justify-center items-center"
     >
       <button
-        className="sc-AxhUy hwudQN"
+        className="focus:outline-none"
         onClick={[Function]}
       >
         <svg
           aria-hidden="false"
           aria-label="Mark Repository as Read"
-          className="octicon"
+          className="hover:text-green-500"
           dangerouslySetInnerHTML={
             Object {
               "__html": "<path fill-rule=\\"evenodd\\" d=\\"M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z\\"></path>",
