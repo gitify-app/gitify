@@ -144,7 +144,7 @@
     "@types/react-transition-group": "^4.2.4",
     "@types/styled-components": "^5.0.1",
     "css-loader": "^5.0.1",
-    "electron": "^11.0.2",
+    "electron": "^11.1.0",
     "electron-builder": "^22.9.1",
     "electron-notarize": "^1.0.0",
     "jest": "^26.6.3",
