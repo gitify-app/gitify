@@ -1,3 +1,4 @@
+import { Appearance } from '../types';
 import { Notification } from './github';
 
 export interface EnterpriseAccount {
@@ -36,4 +37,5 @@ export interface SettingsState {
   showNotifications: boolean;
   markOnClick: boolean;
   openAtStartup: boolean;
+  appearance: Appearance;
 }

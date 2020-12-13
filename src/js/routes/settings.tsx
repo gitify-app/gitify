@@ -4,9 +4,11 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { ArrowLeftIcon } from '@primer/octicons-react';
 
+import { Appearance } from '../../types';
 import { AppState, SettingsState } from '../../types/reducers';
 import { fetchNotifications, updateSetting, logout } from '../actions';
 import { FieldCheckbox } from '../components/ui/checkbox';
+import { FieldRadioGroup } from '../components/fields/radiogroup';
 import { IconAddAccount } from '../../icons/AddAccount';
 import { IconLogOut } from '../../icons/Logout';
 import { IconQuit } from '../../icons/Quit';
@@ -77,6 +79,20 @@ export class SettingsRoute extends React.Component<IProps> {
         </div>
 
         <div className="flex-1 px-8">
+          <FieldRadioGroup
+            name="appearance"
+            label="Appearance"
+            value={this.props.settings.appearance}
+            options={[
+              { label: 'System', value: Appearance.SYSTEM },
+              { label: 'Light', value: Appearance.LIGHT },
+              { label: 'Dark', value: Appearance.DARK },
+            ]}
+            onChange={(evt) => {
+              this.props.updateSetting('appearance', evt.target.value);
+            }}
+          />
+
           <FieldCheckbox
             name="showOnlyParticipating"
             label="Show only participating"
