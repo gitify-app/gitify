@@ -43,100 +43,205 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
   <div
     className="flex-1 px-8"
   >
-    <div
-      className="mt-1 mb-2"
+    <fieldset
+      className="mb-1"
+      id="appearance"
     >
-      <label
-        className="inline-flex items-center mt-2"
+      <div>
+        <legend
+          className="mb-1 text-base font-medium dark:text-white"
+        >
+          Appearance
+        </legend>
+      </div>
+      <div
+        aria-labelledby="appearance"
+        className="flex items-center space-x-4 py-2"
+        role="group"
+      >
+        <div
+          className="flex items-center mt-1"
+        >
+          <input
+            checked={false}
+            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+            id="appearance_system"
+            name="appearance"
+            onChange={[Function]}
+            type="radio"
+            value="SYSTEM"
+          />
+          <label
+            className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+            htmlFor="appearance_system"
+          >
+            System
+          </label>
+        </div>
+        <div
+          className="flex items-center mt-1"
+        >
+          <input
+            checked={false}
+            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+            id="appearance_light"
+            name="appearance"
+            onChange={[Function]}
+            type="radio"
+            value="LIGHT"
+          />
+          <label
+            className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+            htmlFor="appearance_light"
+          >
+            Light
+          </label>
+        </div>
+        <div
+          className="flex items-center mt-1"
+        >
+          <input
+            checked={false}
+            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+            id="appearance_dark"
+            name="appearance"
+            onChange={[Function]}
+            type="radio"
+            value="DARK"
+          />
+          <label
+            className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+            htmlFor="appearance_dark"
+          >
+            Dark
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    <div
+      className="flex items-start mt-1 mb-3"
+    >
+      <div
+        className="flex items-center h-5"
       >
         <input
           checked={false}
-          className="h-5 w-5"
+          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+          id="showOnlyParticipating"
           onChange={[Function]}
           type="checkbox"
         />
-        <span
-          className="ml-4 text-gray-700 dark:text-white"
+      </div>
+      <div
+        className="ml-3 text-sm"
+      >
+        <label
+          className="font-medium text-gray-700 dark:text-gray-200"
+          htmlFor="showOnlyParticipating"
         >
           Show only participating
-        </span>
-      </label>
+        </label>
+      </div>
     </div>
     <div
-      className="mt-1 mb-2"
+      className="flex items-start mt-1 mb-3"
     >
-      <label
-        className="inline-flex items-center mt-2"
+      <div
+        className="flex items-center h-5"
       >
         <input
           checked={true}
-          className="h-5 w-5"
+          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+          id="playSound"
           onChange={[Function]}
           type="checkbox"
         />
-        <span
-          className="ml-4 text-gray-700 dark:text-white"
+      </div>
+      <div
+        className="ml-3 text-sm"
+      >
+        <label
+          className="font-medium text-gray-700 dark:text-gray-200"
+          htmlFor="playSound"
         >
           Play sound
-        </span>
-      </label>
+        </label>
+      </div>
     </div>
     <div
-      className="mt-1 mb-2"
+      className="flex items-start mt-1 mb-3"
     >
-      <label
-        className="inline-flex items-center mt-2"
+      <div
+        className="flex items-center h-5"
       >
         <input
           checked={true}
-          className="h-5 w-5"
+          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+          id="showNotifications"
           onChange={[Function]}
           type="checkbox"
         />
-        <span
-          className="ml-4 text-gray-700 dark:text-white"
+      </div>
+      <div
+        className="ml-3 text-sm"
+      >
+        <label
+          className="font-medium text-gray-700 dark:text-gray-200"
+          htmlFor="showNotifications"
         >
           Show notifications
-        </span>
-      </label>
+        </label>
+      </div>
     </div>
     <div
-      className="mt-1 mb-2"
+      className="flex items-start mt-1 mb-3"
     >
-      <label
-        className="inline-flex items-center mt-2"
+      <div
+        className="flex items-center h-5"
       >
         <input
           checked={false}
-          className="h-5 w-5"
+          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+          id="onClickMarkAsRead"
           onChange={[Function]}
           type="checkbox"
         />
-        <span
-          className="ml-4 text-gray-700 dark:text-white"
+      </div>
+      <div
+        className="ml-3 text-sm"
+      >
+        <label
+          className="font-medium text-gray-700 dark:text-gray-200"
+          htmlFor="onClickMarkAsRead"
         >
           On Click, Mark as Read
-        </span>
-      </label>
+        </label>
+      </div>
     </div>
     <div
-      className="mt-1 mb-2"
+      className="flex items-start mt-1 mb-3"
     >
-      <label
-        className="inline-flex items-center mt-2"
+      <div
+        className="flex items-center h-5"
       >
         <input
           checked={false}
-          className="h-5 w-5"
+          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+          id="openAtStartUp"
           onChange={[Function]}
           type="checkbox"
         />
-        <span
-          className="ml-4 text-gray-700 dark:text-white"
+      </div>
+      <div
+        className="ml-3 text-sm"
+      >
+        <label
+          className="font-medium text-gray-700 dark:text-gray-200"
+          htmlFor="openAtStartUp"
         >
           Open at startup
-        </span>
-      </label>
+        </label>
+      </div>
     </div>
   </div>
   <div

@@ -1,5 +1,6 @@
 import { UPDATE_SETTING } from '../actions';
 import { SettingsState } from '../../types/reducers';
+import { Appearance } from '../../types';
 
 const initialState: SettingsState = {
   participating: false,
@@ -7,6 +8,7 @@ const initialState: SettingsState = {
   showNotifications: true,
   markOnClick: false,
   openAtStartup: false,
+  appearance: Appearance.SYSTEM,
 };
 
 export default function reducer(state = initialState, action): SettingsState {
