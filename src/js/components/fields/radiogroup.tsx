@@ -17,7 +17,7 @@ export const FieldRadioGroup = ({
   value: string;
 }) => {
   return (
-    <fieldset id={name}>
+    <fieldset id={name} className="mb-1">
       <div>
         <legend className="mb-1 text-base font-medium dark:text-white">
           {label}
@@ -46,7 +46,7 @@ export const FieldRadioGroup = ({
                 checked={item.value === value}
               />
               <label
-                htmlFor={`${name}_${item.value.toLowerCase}`}
+                htmlFor={`${name}_${item.value.toLowerCase()}`}
                 className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
               >
                 {item.label}
