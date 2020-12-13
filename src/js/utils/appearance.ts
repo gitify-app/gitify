@@ -1,6 +1,6 @@
 import { Appearance } from '../../types';
 
-export const setAppearance = (mode: Appearance) => {
+export const setAppearance = (mode?: Appearance) => {
   const htmlClassList = document.querySelector('html').classList;
   const setLightMode = () => htmlClassList.remove('dark');
   const setDarkMode = () => htmlClassList.add('dark');

@@ -11,6 +11,7 @@ import constants from '../utils/constants';
 import notificationsMiddlware from '../middleware/notifications';
 import rootReducer from '../reducers';
 import settingsMiddleware from '../middleware/settings';
+import { setAppearance } from '../utils/appearance';
 
 export default function configureStore() {
   const engine = filter(createEngine(constants.STORAGE_KEY), [
@@ -40,7 +41,10 @@ export default function configureStore() {
 
   // Load settings from localStorage
   const load = storage.createLoader(engine);
-  load(store);
+  load(store).then((state) => {
+    const { appearance } = state.settings;
+    setAppearance(appearance);
+  });
 
   return store;
 }
