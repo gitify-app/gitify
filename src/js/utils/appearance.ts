@@ -1,10 +1,12 @@
 import { Appearance } from '../../types';
 
-export const setAppearance = (mode?: Appearance) => {
-  const htmlClassList = document.querySelector('html').classList;
-  const setLightMode = () => htmlClassList.remove('dark');
-  const setDarkMode = () => htmlClassList.add('dark');
+export const setLightMode = () =>
+  document.querySelector('html').classList.remove('dark');
 
+export const setDarkMode = () =>
+  document.querySelector('html').classList.add('dark');
+
+export const setAppearance = (mode?: Appearance) => {
   switch (mode) {
     case Appearance.LIGHT:
       setLightMode();

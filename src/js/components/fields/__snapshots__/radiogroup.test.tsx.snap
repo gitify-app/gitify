@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/fields/radiogroup.tsx should render  1`] = `
+<fieldset
+  className="mb-1"
+  id="appearance"
+>
+  <div>
+    <legend
+      className="mb-1 text-base font-medium dark:text-white"
+    >
+      Appearance
+    </legend>
+    <p
+      className="text-sm text-gray-500"
+    >
+      This is some helper text
+    </p>
+  </div>
+  <div
+    aria-labelledby="appearance"
+    className="flex items-center space-x-4 py-2"
+    role="group"
+  >
+    <div
+      className="flex items-center mt-1"
+    >
+      <input
+        checked={false}
+        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+        id="appearance_one"
+        name="appearance"
+        onChange={[MockFunction]}
+        type="radio"
+        value="one"
+      />
+      <label
+        className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+        htmlFor="appearance_one"
+      >
+        Value 1
+      </label>
+    </div>
+    <div
+      className="flex items-center mt-1"
+    >
+      <input
+        checked={true}
+        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+        id="appearance_two"
+        name="appearance"
+        onChange={[MockFunction]}
+        type="radio"
+        value="two"
+      />
+      <label
+        className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+        htmlFor="appearance_two"
+      >
+        Value 2
+      </label>
+    </div>
+  </div>
+</fieldset>
+`;
