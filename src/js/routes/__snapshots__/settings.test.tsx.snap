@@ -2,7 +2,7 @@
 
 exports[`routes/settings.tsx should render itself & its children 1`] = `
 <div
-  className="flex flex-1 flex-col"
+  className="flex flex-1 flex-col dark:bg-gray-dark dark:text-white"
 >
   <div
     className="flex justify-between items-center mt-4 py-2 mx-8"
@@ -51,12 +51,12 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
       >
         <input
           checked={false}
-          className="form-checkbox h-5 w-5 text-red-600"
+          className="h-5 w-5"
           onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="ml-2 text-gray-700"
+          className="ml-4 text-gray-700 dark:text-white"
         >
           Show only participating
         </span>
@@ -70,12 +70,12 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
       >
         <input
           checked={true}
-          className="form-checkbox h-5 w-5 text-red-600"
+          className="h-5 w-5"
           onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="ml-2 text-gray-700"
+          className="ml-4 text-gray-700 dark:text-white"
         >
           Play sound
         </span>
@@ -89,12 +89,12 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
       >
         <input
           checked={true}
-          className="form-checkbox h-5 w-5 text-red-600"
+          className="h-5 w-5"
           onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="ml-2 text-gray-700"
+          className="ml-4 text-gray-700 dark:text-white"
         >
           Show notifications
         </span>
@@ -108,12 +108,12 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
       >
         <input
           checked={false}
-          className="form-checkbox h-5 w-5 text-red-600"
+          className="h-5 w-5"
           onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="ml-2 text-gray-700"
+          className="ml-4 text-gray-700 dark:text-white"
         >
           On Click, Mark as Read
         </span>
@@ -127,12 +127,12 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
       >
         <input
           checked={false}
-          className="form-checkbox h-5 w-5 text-red-600"
+          className="h-5 w-5"
           onChange={[Function]}
           type="checkbox"
         />
         <span
-          className="ml-2 text-gray-700"
+          className="ml-4 text-gray-700 dark:text-white"
         >
           Open at startup
         </span>
@@ -140,7 +140,7 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
     </div>
   </div>
   <div
-    className="flex justify-between items-center bg-gray-300 py-4 px-8"
+    className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-4 px-8"
   >
     <small
       className="font-semibold"

@@ -1,9 +1,15 @@
 module.exports = {
   purge: ['./src/**/*.js', './src/**/*.ts', './src/**/*.tsx'],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: 'media',
   theme: {
     extend: {
       colors: {
+        gray: {
+          sidebar: '#24292e',
+          dark: '#161b22',
+          darker: '#090E15',
+          darkest: '#000209',
+        },
         primary: '#203354',
         success: '#2CC966',
         info: '#8BA9C6',

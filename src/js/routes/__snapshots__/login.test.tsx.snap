@@ -2,7 +2,7 @@
 
 exports[`routes/login.tsx should render itself & its children 1`] = `
 <div
-  className="flex flex-1 flex-col justify-center items-center p-4"
+  className="flex flex-1 flex-col justify-center items-center p-4 bg-white dark:bg-gray-dark dark:text-white"
 >
   <svg
     className="w-16 h-16"
@@ -53,11 +53,11 @@ exports[`routes/login.tsx should render itself & its children 1`] = `
   >
     GitHub Notifications 
     <br />
-     in your menu bar.
+     on your menu bar.
   </div>
   <button
     aria-label="Login with GitHub"
-    className="w-48 py-2 my-2 bg-gray-300 font-semibold rounded text-xs text-center hover:bg-gray-500 hover:text-white focus:outline-none"
+    className="w-48 py-2 my-2 bg-gray-300 font-semibold rounded text-xs text-center dark:text-black hover:bg-gray-500 hover:text-white focus:outline-none"
     onClick={[Function]}
   >
     <span>
@@ -66,7 +66,7 @@ exports[`routes/login.tsx should render itself & its children 1`] = `
   </button>
   <button
     aria-label="Login with GitHub Enterprise"
-    className="w-48 py-2 my-2 bg-gray-300 font-semibold rounded text-xs text-center hover:bg-gray-500 hover:text-white focus:outline-none"
+    className="w-48 py-2 my-2 bg-gray-300 font-semibold rounded text-xs text-center dark:text-black hover:bg-gray-500 hover:text-white focus:outline-none"
     onClick={[Function]}
   >
     <span>

@@ -2,7 +2,7 @@
 
 exports[`components/oops.tsx should render itself & its children 1`] = `
 <div
-  className="flex flex-1 flex-col justify-center items-center p-4"
+  className="flex flex-1 flex-col justify-center items-center p-4 bg-white dark:bg-gray-dark text-black dark:text-white"
 >
   <h1
     className="text-5xl mb-5"

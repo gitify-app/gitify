@@ -2,7 +2,7 @@
 
 exports[`components/Sidebar.tsx should render itself & its children (logged in) 1`] = `
 <div
-  className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-primary overflow-y-auto	"
+  className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto	"
 >
   <div
     className="flex flex-col flex-1 items-center py-4"
@@ -81,7 +81,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
   <div
     className="py-4 px-3"
   >
-    <div
+    <button
       aria-label="Refresh Notifications"
       className="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none"
       onClick={[Function]}
@@ -107,8 +107,8 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         viewBox="0 0 16 16"
         width={16}
       />
-    </div>
-    <div
+    </button>
+    <button
       aria-label="Settings"
       className="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none"
       onClick={[Function]}
@@ -134,7 +134,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         viewBox="0 0 16 16"
         width={16}
       />
-    </div>
+    </button>
     <div
       aria-label="View project on GitHub"
       className="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none"
@@ -168,7 +168,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
 
 exports[`components/Sidebar.tsx should render itself & its children (logged out) 1`] = `
 <div
-  className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-primary overflow-y-auto	"
+  className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto	"
 >
   <div
     className="flex flex-col flex-1 items-center py-4"

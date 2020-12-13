@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`routes/enterprise-login.js renders correctly 1`] = `
-<div>
+<div
+  className="flex-1 bg-white dark:bg-gray-dark dark:text-white"
+>
   <div
     className="flex justify-between items-center mt-4 py-2 mx-8"
   >
@@ -54,7 +56,7 @@ exports[`routes/enterprise-login.js renders correctly 1`] = `
           Hostname
         </label>
         <input
-          className="appearance-none block w-full bg-gray-100 text-grey-darker border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200"
+          className="appearance-none block w-full bg-gray-100 border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
           id="hostname"
           name="hostname"
           onBlur={[Function]}
@@ -75,7 +77,7 @@ exports[`routes/enterprise-login.js renders correctly 1`] = `
           Client ID
         </label>
         <input
-          className="appearance-none block w-full bg-gray-100 text-grey-darker border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200"
+          className="appearance-none block w-full bg-gray-100 border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
           id="clientId"
           name="clientId"
           onBlur={[Function]}
@@ -96,7 +98,7 @@ exports[`routes/enterprise-login.js renders correctly 1`] = `
           Client Secret
         </label>
         <input
-          className="appearance-none block w-full bg-gray-100 text-grey-darker border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200"
+          className="appearance-none block w-full bg-gray-100 border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
           id="clientSecret"
           name="clientSecret"
           onBlur={[Function]}
@@ -108,7 +110,7 @@ exports[`routes/enterprise-login.js renders correctly 1`] = `
         />
       </div>
       <button
-        className="float-right px-4 py-2 mt-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white focus:outline-none"
+        className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
         disabled={true}
         title="Login Button"
         type="submit"

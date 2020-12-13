@@ -76,7 +76,7 @@ export class Sidebar extends React.Component<IProps> {
       'flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none';
 
     return (
-      <div className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-primary overflow-y-auto	">
+      <div className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto	">
         <div className="flex flex-col flex-1 items-center py-4">
           <Logo
             className="w-5 my-3 mx-auto cursor-pointer"
@@ -94,21 +94,21 @@ export class Sidebar extends React.Component<IProps> {
         <div className="py-4 px-3">
           {isEitherLoggedIn && (
             <>
-              <div
+              <button
                 className={footerButtonClasses}
                 onClick={this.refreshNotifications.bind(this)}
                 aria-label="Refresh Notifications"
               >
                 <Octicons.SyncIcon size={16} />
-              </div>
+              </button>
 
-              <div
+              <button
                 className={footerButtonClasses}
                 onClick={this.goToSettings.bind(this)}
                 aria-label="Settings"
               >
                 <Octicons.GearIcon size={16} />
-              </div>
+              </button>
             </>
           )}
 
