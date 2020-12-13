@@ -96,7 +96,7 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
         />
 
         <button
-          className="float-right px-4 py-2 mt-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white focus:outline-none"
+          className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
           disabled={submitting || pristine}
           type="submit"
           title="Login Button"
@@ -113,7 +113,7 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <div>
+      <div className="flex-1 bg-white dark:bg-gray-dark dark:text-white">
         <div className="flex justify-between items-center mt-4 py-2 mx-8">
           <button
             className="focus:outline-none"

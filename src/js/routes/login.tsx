@@ -38,14 +38,14 @@ export class LoginPage extends React.Component<IProps> {
     }
 
     const loginButtonClass =
-      'w-48 py-2 my-2 bg-gray-300 font-semibold rounded text-xs text-center hover:bg-gray-500 hover:text-white focus:outline-none';
+      'w-48 py-2 my-2 bg-gray-300 font-semibold rounded text-xs text-center dark:text-black hover:bg-gray-500 hover:text-white focus:outline-none';
 
     return (
-      <div className="flex flex-1 flex-col justify-center items-center p-4">
+      <div className="flex flex-1 flex-col justify-center items-center p-4 bg-white dark:bg-gray-dark dark:text-white">
         <Logo className="w-16 h-16" isDark />
 
         <div className="my-4 px-2.5 py-1.5 font-semibold text-center">
-          GitHub Notifications <br /> in your menu bar.
+          GitHub Notifications <br /> on your menu bar.
         </div>
 
         <button

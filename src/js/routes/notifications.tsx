@@ -26,7 +26,7 @@ export const NotificationsRoute = (props: IProps) => {
   }
 
   return (
-    <>
+    <div className="flex flex-col flex-1 bg-white dark:bg-gray-dark">
       {accountNotifications.map((account) => (
         <Account
           key={account.hostname}
@@ -35,7 +35,7 @@ export const NotificationsRoute = (props: IProps) => {
           showAccountHostname={hasMultipleAccounts}
         />
       ))}
-    </>
+    </div>
   );
 };
 

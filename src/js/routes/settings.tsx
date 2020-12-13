@@ -63,7 +63,7 @@ export class SettingsRoute extends React.Component<IProps> {
       'hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none';
 
     return (
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col dark:bg-gray-dark dark:text-white">
         <div className="flex justify-between items-center mt-4 py-2 mx-8">
           <button
             className="focus:outline-none"
@@ -121,7 +121,7 @@ export class SettingsRoute extends React.Component<IProps> {
           )}
         </div>
 
-        <div className="flex justify-between items-center bg-gray-300 py-4 px-8">
+        <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-4 px-8">
           <small className="font-semibold">
             Gitify v{remote.app.getVersion()}
           </small>

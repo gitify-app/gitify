@@ -57,7 +57,7 @@ export const NotificationItem: React.FC<IProps> = (props) => {
   });
 
   return (
-    <div className="flex space-x-2 p-2 bg-white hover:bg-gray-100 border-b border-gray-100">
+    <div className="flex space-x-2 p-2 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker">
       <div className="flex justify-center items-center w-8">
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
