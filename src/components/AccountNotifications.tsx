@@ -1,5 +1,5 @@
 import React from 'react';
-import * as _ from 'lodash';
+import _ from 'lodash';
 import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
 
 import { Notification } from '../typesGithub';

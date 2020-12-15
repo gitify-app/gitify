@@ -1,11 +1,11 @@
-import React, { useContext } from 'react';
-import * as NProgress from 'nprogress';
+import React, { useContext, useEffect } from 'react';
+import NProgress from 'nprogress';
 import { NotificationsContext } from '../context/Notifications';
 
 export const Loading = () => {
   const { isFetching } = useContext(NotificationsContext);
 
-  React.useEffect(() => {
+  useEffect(() => {
     NProgress.configure({
       showSpinner: false,
     });
@@ -15,7 +15,7 @@ export const Loading = () => {
     };
   }, []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (isFetching) {
       NProgress.start();
     } else {

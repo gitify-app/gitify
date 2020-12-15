@@ -1,8 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import { render } from '@testing-library/react';
-import * as NProgress from 'nprogress';
+import NProgress from 'nprogress';
 
 import { Loading } from './loading';
+import { NotificationsContext } from '../context/Notifications';
 
 jest.mock('nprogress', () => {
   return {
@@ -13,7 +14,7 @@ jest.mock('nprogress', () => {
   };
 });
 
-describe('components/loading.js', function () {
+describe('components/Loading.js', () => {
   beforeEach(() => {
     NProgress.configure.mockReset();
     NProgress.start.mockReset();
@@ -21,24 +22,36 @@ describe('components/loading.js', function () {
     NProgress.remove.mockReset();
   });
 
-  it('should check that NProgress is getting called in getDerivedStateFromProps (loading)', function () {
-    const { container } = render(<Loading isLoading={true} />);
+  it('should check that NProgress is getting called in when isFetching changes (loading)', () => {
+    const { container } = render(
+      <NotificationsContext.Provider value={{ isFetching: true }}>
+        <Loading />
+      </NotificationsContext.Provider>
+    );
 
     expect(container.innerHTML).toBe('');
     expect(NProgress.configure).toHaveBeenCalledTimes(1);
     expect(NProgress.start).toHaveBeenCalledTimes(1);
   });
 
-  it('should check that NProgress is getting called in getDerivedStateFromProps (not loading)', function () {
-    const { container } = render(<Loading isLoading={false} />);
+  it('should check that NProgress is getting called in when isFetching changes (not loading)', () => {
+    const { container } = render(
+      <NotificationsContext.Provider value={{ isFetching: false }}>
+        <Loading />
+      </NotificationsContext.Provider>
+    );
 
     expect(container.innerHTML).toBe('');
     expect(NProgress.configure).toHaveBeenCalledTimes(1);
     expect(NProgress.done).toHaveBeenCalledTimes(1);
   });
 
-  it('should remove NProgress on unmount', function () {
-    const { unmount } = render(<Loading isLoading={false} />);
+  it('should remove NProgress on unmount', () => {
+    const { unmount } = render(
+      <NotificationsContext.Provider value={{ isFetching: true }}>
+        <Loading />
+      </NotificationsContext.Provider>
+    );
     expect(NProgress.remove).toHaveBeenCalledTimes(0);
     unmount();
     expect(NProgress.remove).toHaveBeenCalledTimes(1);

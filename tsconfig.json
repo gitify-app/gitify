@@ -9,6 +9,7 @@
     "jsx": "react",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "typeRoots": ["./src/types", "node_modules/@types"]
   },
   "exclude": ["node_modules"],
