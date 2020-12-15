@@ -2,13 +2,13 @@ const { remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 const dialog = remote.dialog;
 
+import { AuthState, EnterpriseAccount } from '../../types';
 import {
   authGithub,
   generateGitHubWebUrl,
   generateGitHubAPIUrl,
   isUserEitherLoggedIn,
 } from './helpers';
-import { AuthState, EnterpriseAccount } from '../../types/reducers';
 
 describe('utils/helpers.ts', () => {
   it('should generate the GitHub url - non enterprise - (issue)', () => {

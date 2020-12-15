@@ -5,7 +5,7 @@ const dialog = remote.dialog;
 
 import Constants from './constants';
 import { loginUser } from '../actions';
-import { AuthState } from '../../types/reducers';
+import { AuthState } from '../../types';
 
 export function getEnterpriseAccountToken(hostname, accounts): string {
   return accounts.find((obj) => obj.hostname === hostname).token;

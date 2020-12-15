@@ -5,9 +5,10 @@ import { MemoryRouter } from 'react-router-dom';
 
 const { shell, ipcRenderer } = require('electron');
 
-import { Sidebar, mapStateToProps } from './sidebar';
-import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
-import { AuthState, AppState } from '../../types/reducers';
+import { AuthState } from '../types';
+import { mapStateToProps } from '../js/components/loading';
+import { mockedEnterpriseAccounts } from '../js/__mocks__/mockedData';
+import { Sidebar } from './sidebar';
 
 describe('components/Sidebar.tsx', () => {
   let clock;
@@ -40,41 +41,6 @@ describe('components/Sidebar.tsx', () => {
 
   afterEach(() => {
     clock.clearAllTimers();
-  });
-
-  describe('mapStateToProps', () => {
-    const state = {
-      auth: {
-        token: '12345',
-        enterpriseAccounts: mockedEnterpriseAccounts,
-      } as AuthState,
-      notifications: {
-        response: [{ hostname: 'Dolores', notifications: [{}, {}] }],
-      },
-    } as AppState;
-
-    it('should accept a provided token', () => {
-      const mappedProps = mapStateToProps(state);
-      expect(mappedProps.isEitherLoggedIn).toBeTruthy();
-      expect(mappedProps.connectedAccounts).toBe(2);
-    });
-
-    it('should count notification lengths', () => {
-      const mappedProps = mapStateToProps(state);
-      expect(mappedProps.notificationsCount).toBe(2);
-    });
-
-    it('should accept a null token', () => {
-      const mappedProps = mapStateToProps({
-        ...state,
-        auth: {
-          ...state.auth,
-          token: null,
-        },
-      });
-      expect(mappedProps.isEitherLoggedIn).toBeTruthy();
-      expect(mappedProps.connectedAccounts).toBe(1);
-    });
   });
 
   it('should render itself & its children (logged in)', () => {

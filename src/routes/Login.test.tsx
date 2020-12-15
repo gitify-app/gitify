@@ -1,16 +1,14 @@
+// @ts-nocheck
 import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
 import { MemoryRouter } from 'react-router';
-import { render, fireEvent, getByLabelText } from '@testing-library/react';
-
-import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
+import { render, fireEvent } from '@testing-library/react';
 
 const { ipcRenderer, remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 
-import { AppState } from '../../types/reducers';
-import { LoginPage, mapStateToProps } from './login';
-import * as helpers from '../utils/helpers';
+import { LoginRoute } from './login';
+import * as helpers from '../js/utils/helpers';
 
 describe('routes/login.tsx', () => {
   const props = {
@@ -30,21 +28,6 @@ describe('routes/login.tsx', () => {
     props.history.push.mockReset();
   });
 
-  it('should test the mapStateToProps method', () => {
-    const state = {
-      auth: {
-        token: '123456',
-        failed: false,
-        isFetching: false,
-        enterpriseAccounts: mockedEnterpriseAccounts,
-      },
-    } as AppState;
-
-    const mappedProps = mapStateToProps(state);
-
-    expect(mappedProps.isEitherLoggedIn).toBeTruthy();
-  });
-
   it('should render itself & its children', () => {
     const caseProps = {
       ...props,
@@ -52,7 +35,7 @@ describe('routes/login.tsx', () => {
 
     const tree = TestRenderer.create(
       <MemoryRouter>
-        <LoginPage {...caseProps} />
+        <LoginRoute {...caseProps} />
       </MemoryRouter>
     );
 
@@ -66,13 +49,13 @@ describe('routes/login.tsx', () => {
 
     const { rerender } = render(
       <MemoryRouter>
-        <LoginPage {...caseProps} />
+        <LoginRoute {...caseProps} />
       </MemoryRouter>
     );
 
     rerender(
       <MemoryRouter>
-        <LoginPage {...caseProps} isEitherLoggedIn={true} />
+        <LoginRoute {...caseProps} isEitherLoggedIn={true} />
       </MemoryRouter>
     );
 
@@ -88,7 +71,7 @@ describe('routes/login.tsx', () => {
 
     const { getByLabelText } = render(
       <MemoryRouter>
-        <LoginPage {...caseProps} />
+        <LoginRoute {...caseProps} />
       </MemoryRouter>
     );
 
@@ -100,7 +83,7 @@ describe('routes/login.tsx', () => {
   it('should navigate to login with github enterprise', () => {
     const { getByLabelText } = render(
       <MemoryRouter>
-        <LoginPage {...props} />
+        <LoginRoute {...props} />
       </MemoryRouter>
     );
 

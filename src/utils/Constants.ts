@@ -1,4 +1,4 @@
-export default {
+export const Constants = {
   // GitHub OAuth
   AUTH_SCOPE: ['user:email', 'notifications'],
 
@@ -42,3 +42,5 @@ export default {
     ':cry:',
   ],
 };
+
+export default Constants;

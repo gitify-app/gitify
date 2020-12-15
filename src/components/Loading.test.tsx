@@ -2,8 +2,7 @@ import * as React from 'react';
 import { render } from '@testing-library/react';
 import * as NProgress from 'nprogress';
 
-import { AppState } from '../../types/reducers';
-import { Loading, mapStateToProps } from './loading';
+import { Loading } from './loading';
 
 jest.mock('nprogress', () => {
   return {
@@ -20,18 +19,6 @@ describe('components/loading.js', function () {
     NProgress.start.mockReset();
     NProgress.done.mockReset();
     NProgress.remove.mockReset();
-  });
-
-  it('should test the mapStateToProps method', () => {
-    const state = {
-      notifications: {
-        isFetching: false,
-      },
-    } as AppState;
-
-    const mappedProps = mapStateToProps(state);
-
-    expect(mappedProps.isLoading).toBeFalsy();
   });
 
   it('should check that NProgress is getting called in getDerivedStateFromProps (loading)', function () {

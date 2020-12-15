@@ -1,5 +1,5 @@
+import { EnterpriseAccount } from '../../types';
 import { Notification, Repository } from '../../types/github';
-import { EnterpriseAccount } from '../../types/reducers';
 
 export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
   {

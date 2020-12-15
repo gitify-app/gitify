@@ -5,15 +5,10 @@ import { MemoryRouter } from 'react-router-dom';
 
 const { ipcRenderer } = require('electron');
 
-import { SettingsRoute, mapStateToProps } from './settings';
-import {
-  SettingsState,
-  AppState,
-  AuthState,
-  EnterpriseAccount,
-} from '../../types/reducers';
+import { SettingsRoute } from './Settings';
+import { SettingsState } from '../types';
 
-describe('routes/settings.tsx', () => {
+describe('routes/Settings.tsx', () => {
   const props = {
     updateSetting: jest.fn(),
     fetchNotifications: jest.fn(),
@@ -40,36 +35,6 @@ describe('routes/settings.tsx', () => {
     props.history.goBack.mockReset();
     props.history.push.mockReset();
     props.history.replace.mockReset();
-  });
-
-  describe('mapStateToProps', () => {
-    const state = {
-      auth: {
-        token: '123-456',
-        enterpriseAccounts: [{} as EnterpriseAccount],
-      } as AuthState,
-      settings: {
-        participating: false,
-      } as SettingsState,
-    } as AppState;
-    it('should test the method', () => {
-      const mappedProps = mapStateToProps(state);
-
-      expect(mappedProps.hasMultipleAccounts).toBeTruthy();
-      expect(mappedProps.settings.participating).toBeFalsy();
-    });
-
-    it('should recognize when only one account logged in', () => {
-      const mappedProps = mapStateToProps({
-        ...state,
-        auth: {
-          ...state.auth,
-          token: null,
-        },
-      });
-
-      expect(mappedProps.hasMultipleAccounts).toBeFalsy();
-    });
   });
 
   it('should render itself & its children', () => {

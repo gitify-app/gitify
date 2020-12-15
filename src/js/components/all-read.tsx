@@ -2,21 +2,21 @@ import * as React from 'react';
 import Typist from 'react-typist';
 import { emojify } from 'react-emojione';
 
-import constants from '../utils/constants';
+import { Constants } from '../../utils/Constants';
 
 export const AllRead = () => {
   const message = React.useMemo(
     () =>
-      constants.ALLREAD_MESSAGES[
-        Math.floor(Math.random() * constants.ALLREAD_MESSAGES.length)
+      Constants.ALLREAD_MESSAGES[
+        Math.floor(Math.random() * Constants.ALLREAD_MESSAGES.length)
       ],
     []
   );
 
   const emoji = React.useMemo(
     () =>
-      constants.ALLREAD_EMOJIS[
-        Math.floor(Math.random() * constants.ALLREAD_EMOJIS.length)
+      Constants.ALLREAD_EMOJIS[
+        Math.floor(Math.random() * Constants.ALLREAD_EMOJIS.length)
       ],
     []
   );

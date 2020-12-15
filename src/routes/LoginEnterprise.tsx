@@ -1,13 +1,12 @@
+// @ts-nocheck
 const ipcRenderer = require('electron').ipcRenderer;
 
-import * as React from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import { Form, FormRenderProps } from 'react-final-form';
-import { connect } from 'react-redux';
 import { ArrowLeftIcon } from '@primer/octicons-react';
 
-import { AppState } from '../../types/reducers';
-import { authGithub } from '../utils/helpers';
-import { FieldInput } from '../components/fields/input';
+import { AppContext } from '../context/App';
+import { FieldInput } from '../js/components/fields/input';
 
 interface IValues {
   hostname?: string;
@@ -56,27 +55,18 @@ interface IProps {
   enterpriseAccountsCount: number;
 }
 
-interface IState {
-  enterpriseAccountsCount: number;
-}
+export const LoginEnterpriseRoute: React.FC<IProps> = () => {
+  const {
+    accounts: { enterpriseAccounts },
+    login,
+  } = useContext(AppContext);
 
-export class EnterpriseLogin extends React.Component<IProps, IState> {
-  state = {
-    enterpriseAccountsCount: 0,
-  };
+  const enterpriseAccountsCount = useMemo(() => {
+    ipcRenderer.send('reopen-window');
+    props.history.goBack();
+  }, [enterpriseAccounts]);
 
-  static getDerivedStateFromProps(props: IProps, state) {
-    if (props.enterpriseAccountsCount > state.enterpriseAccountsCount) {
-      ipcRenderer.send('reopen-window');
-      props.history.goBack();
-    }
-
-    return {
-      enterpriseAccountsCount: props.enterpriseAccountsCount,
-    };
-  }
-
-  renderForm = (formProps: FormRenderProps) => {
+  const renderForm = (formProps: FormRenderProps) => {
     const { handleSubmit, submitting, pristine } = formProps;
 
     return (
@@ -107,49 +97,39 @@ export class EnterpriseLogin extends React.Component<IProps, IState> {
     );
   };
 
-  handleSubmit(data, dispatch) {
-    authGithub(data, dispatch);
-  }
+  const loginEnterprise = useCallback(async (data) => {
+    const thing = await authGitHub(data);
+    console.log('RESULT ENTERPRISE:', thing);
+    return thing;
+  }, []);
 
-  render() {
-    return (
-      <div className="flex-1 bg-white dark:bg-gray-dark dark:text-white">
-        <div className="flex justify-between items-center mt-4 py-2 mx-8">
-          <button
-            className="focus:outline-none"
-            aria-label="Go Back"
-            onClick={() => this.props.history.goBack()}
-          >
-            <ArrowLeftIcon size={20} className="hover:text-gray-400" />
-          </button>
+  return (
+    <div className="flex-1 bg-white dark:bg-gray-dark dark:text-white">
+      <div className="flex justify-between items-center mt-4 py-2 mx-8">
+        <button
+          className="focus:outline-none"
+          aria-label="Go Back"
+          onClick={() => props.history.goBack()}
+        >
+          <ArrowLeftIcon size={20} className="hover:text-gray-400" />
+        </button>
 
-          <h3 className="text-lg font-semibold">
-            Login with GitHub Enterprise
-          </h3>
-        </div>
-
-        <div className="flex-1 px-8">
-          <Form
-            initialValues={{
-              hostname: '',
-              clientId: '',
-              clientSecret: '',
-            }}
-            onSubmit={(data) => this.handleSubmit(data, this.props.dispatch)}
-            validate={validate}
-          >
-            {this.renderForm}
-          </Form>
-        </div>
+        <h3 className="text-lg font-semibold">Login with GitHub Enterprise</h3>
       </div>
-    );
-  }
-}
 
-export function mapStateToProps(state: AppState) {
-  return {
-    enterpriseAccountsCount: state.auth.enterpriseAccounts.length,
-  };
-}
-
-export default connect(mapStateToProps, null)(EnterpriseLogin);
+      <div className="flex-1 px-8">
+        <Form
+          initialValues={{
+            hostname: '',
+            clientId: '',
+            clientSecret: '',
+          }}
+          onSubmit={loginEnterprise}
+          validate={validate}
+        >
+          {renderForm}
+        </Form>
+      </div>
+    </div>
+  );
+};

@@ -3,7 +3,7 @@ const { remote } = require('electron');
 import { generateGitHubWebUrl } from '../utils/helpers';
 import { reOpenWindow, openExternalLink } from '../utils/comms';
 import { Notification } from '../../types/github';
-import { SettingsState } from '../../types/reducers';
+import { SettingsState } from '../../types';
 
 export default {
   setup(

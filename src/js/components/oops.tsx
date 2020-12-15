@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { emojify } from 'react-emojione';
 
-import constants from '../utils/constants';
+import { Constants } from '../../utils/Constants';
 
 export const Oops = () => {
   const emoji = React.useMemo(
     () =>
-      constants.ERROR_EMOJIS[
-        Math.floor(Math.random() * constants.ERROR_EMOJIS.length)
+      Constants.ERROR_EMOJIS[
+        Math.floor(Math.random() * Constants.ERROR_EMOJIS.length)
       ],
     []
   );

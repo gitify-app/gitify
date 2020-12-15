@@ -1,7 +1,5 @@
 const { ipcRenderer, remote, shell } = require('electron');
 
-import { SettingsState } from '../../types/reducers';
-
 export function openExternalLink(url) {
   shell.openExternal(url);
 }

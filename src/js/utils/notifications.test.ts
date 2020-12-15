@@ -2,9 +2,9 @@ import * as _ from 'lodash';
 
 import { generateGitHubWebUrl } from '../utils/helpers';
 import { mockedGithubNotifications } from '../__mocks__/mockedData';
-import { SettingsState } from '../../types/reducers';
 import * as comms from './comms';
 import NotificationsUtils from '../utils/notifications';
+import { SettingsState } from '../../types';
 
 describe('utils/notifications.ts', () => {
   it('should raise a notification (settings - on)', () => {
