@@ -1,3 +1,5 @@
+import { Notification } from './typesGithub';
+
 export interface AuthState {
   token?: string;
   enterpriseAccounts: EnterpriseAccount[];

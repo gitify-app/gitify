@@ -5,7 +5,7 @@ import * as Octicons from '@primer/octicons-react';
 import { useHistory } from 'react-router-dom';
 
 import { AppContext } from '../context/App';
-import { Constants } from '../utils/Constants';
+import { Constants } from '../utils/constants';
 import { Logo } from '../js/components/ui/logo';
 import { NotificationsContext } from '../context/Notifications';
 

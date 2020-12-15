@@ -5,7 +5,7 @@ import { AppState, NotificationsState } from '../../types/reducers';
 import { mockedNotificationsReducerData } from '../__mocks__/mockedData';
 import { NotificationsRoute, mapStateToProps } from './notifications';
 
-jest.mock('../components/account-notifications', () => ({
+jest.mock('../../components/AccountNotifications', () => ({
   AccountNotifications: 'AccountNotifications',
 }));
 

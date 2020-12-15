@@ -2,8 +2,8 @@ import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
 import { render, fireEvent } from '@testing-library/react';
 
-import { mockedGithubNotifications } from '../__mocks__/mockedData';
-import { RepositoryNotifications } from './repository';
+import { mockedGithubNotifications } from '../js/__mocks__/mockedData';
+import { RepositoryNotifications } from './Repository';
 
 const { shell } = require('electron');
 

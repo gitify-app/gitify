@@ -1,4 +1,4 @@
-import { Reason, SubjectType } from '../../types/github';
+import { Reason, SubjectType } from '../../typesGithub';
 import * as Octicons from '@primer/octicons-react';
 
 // prettier-ignore

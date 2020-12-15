@@ -4,27 +4,14 @@ import { fireEvent, render } from '@testing-library/react';
 
 const { shell } = require('electron');
 
-import { mockedSingleNotification } from '../__mocks__/mockedData';
-import { NotificationItem, mapStateToProps } from './notification';
-import { SettingsState, AppState } from '../../types/reducers';
+import { mockedSingleNotification } from '../js/__mocks__/mockedData';
+import { NotificationItem } from './notification';
 
 describe('components/notification.js', () => {
   const notification = mockedSingleNotification;
 
   beforeEach(() => {
     spyOn(shell, 'openExternal');
-  });
-
-  it('should test the mapStateToProps method', () => {
-    const state = {
-      settings: {
-        markOnClick: true,
-      } as SettingsState,
-    } as AppState;
-
-    const mappedProps = mapStateToProps(state);
-
-    expect(mappedProps.markOnClick).toBeTruthy();
   });
 
   it('should render itself & its children', async () => {

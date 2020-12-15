@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/account-notifications.tsx should render itself (github.com with notifications) 1`] = `
+exports[`components/AccountNotifications.tsx should render itself (github.com with notifications) 1`] = `
 <div
   className="flex flex-1 items-center justify-between py-2 px-4 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm"
 >
@@ -29,7 +29,7 @@ exports[`components/account-notifications.tsx should render itself (github.com w
 </div>
 `;
 
-exports[`components/account-notifications.tsx should render itself (github.com without notifications) 1`] = `
+exports[`components/AccountNotifications.tsx should render itself (github.com without notifications) 1`] = `
 <div
   className="flex flex-1 items-center justify-between py-2 px-4 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm"
 >

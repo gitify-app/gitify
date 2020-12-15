@@ -1,9 +1,9 @@
-import * as React from 'react';
+import React from 'react';
 import * as _ from 'lodash';
 import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
 
-import { Notification } from '../../types/github';
-import RepositoryNotifications from './repository';
+import { Notification } from '../typesGithub';
+import { RepositoryNotifications } from './Repository';
 
 interface IProps {
   hostname: string;

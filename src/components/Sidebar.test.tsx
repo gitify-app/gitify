@@ -6,7 +6,6 @@ import { MemoryRouter } from 'react-router-dom';
 const { shell, ipcRenderer } = require('electron');
 
 import { AuthState } from '../types';
-import { mapStateToProps } from '../js/components/loading';
 import { mockedEnterpriseAccounts } from '../js/__mocks__/mockedData';
 import { Sidebar } from './sidebar';
 

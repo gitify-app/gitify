@@ -1,22 +1,24 @@
 const { shell } = require('electron');
 
-import * as React from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback } from 'react';
 import { CheckIcon } from '@primer/octicons-react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
-import { markRepoNotifications } from '../actions';
-import { Notification } from '../../types/github';
-import NotificationItem from './notification';
+import { Notification } from '../typesGithub';
+import { NotificationItem } from './notification';
 
 interface IProps {
   hostname: string;
   repoNotifications: Notification[];
   repoName: string;
-  markRepoNotifications: (repoSlug: string, hostname: string) => void;
 }
 
 export const RepositoryNotifications: React.FC<IProps> = (props) => {
+  const markRepoNotifications = useCallback(
+    async (repoSlug: string, hostname: string) => {},
+    []
+  );
+
   const openBrowser = () => {
     const url = props.repoNotifications[0].repository.html_url;
     shell.openExternal(url);
@@ -25,7 +27,7 @@ export const RepositoryNotifications: React.FC<IProps> = (props) => {
   const markRepoAsRead = () => {
     const { hostname, repoNotifications } = props;
     const repoSlug = repoNotifications[0].repository.full_name;
-    props.markRepoNotifications(repoSlug, hostname);
+    markRepoNotifications(repoSlug, hostname);
   };
 
   const { hostname, repoNotifications } = props;
@@ -64,7 +66,3 @@ export const RepositoryNotifications: React.FC<IProps> = (props) => {
     </>
   );
 };
-
-export default connect(null, { markRepoNotifications })(
-  RepositoryNotifications
-);

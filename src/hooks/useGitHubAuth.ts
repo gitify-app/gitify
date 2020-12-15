@@ -1,9 +1,9 @@
 const { remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 
-import { apiRequest } from '../js/utils/api-requests';
+import { apiRequest } from '../utils/api-requests';
 import { AuthResponse, AuthTokenResponse } from '../types';
-import { Constants } from '../utils/Constants';
+import { Constants } from '../utils/constants';
 
 export const useGitHubAuth = (authOptions = Constants.DEFAULT_AUTH_OPTIONS) => {
   const { hostname } = authOptions;

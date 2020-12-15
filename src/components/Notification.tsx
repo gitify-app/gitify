@@ -1,29 +1,35 @@
 const { shell } = require('electron');
 
-import * as React from 'react';
-import { connect } from 'react-redux';
+import React, { useCallback, useContext } from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { CheckIcon, MuteIcon } from '@primer/octicons-react';
 
-import { AppState } from '../../types/reducers';
-import { formatReason, getNotificationTypeIcon } from '../utils/github-api';
-import { generateGitHubWebUrl } from '../utils/helpers';
-import { markNotification, unsubscribeNotification } from '../actions';
-import { Notification } from '../../types/github';
+import { formatReason, getNotificationTypeIcon } from '../js/utils/github-api';
+import { generateGitHubWebUrl } from '../js/utils/helpers';
+import { Notification } from '../typesGithub';
+import { AppContext } from '../context/App';
 
 interface IProps {
   hostname: string;
   notification: Notification;
-  markOnClick: boolean;
-  markNotification: (id: string, hostname: string) => void;
-  unsubscribeNotification?: (id: string, hostname: string) => void;
 }
 
 export const NotificationItem: React.FC<IProps> = (props) => {
+  const { settings } = useContext(AppContext);
+
+  const markNotification = useCallback(
+    async (id: string, hostname: string) => {},
+    []
+  );
+  const unsubscribeNotification = useCallback(
+    async (id: string, hostname: string) => {},
+    []
+  );
+
   const pressTitle = () => {
     openBrowser();
 
-    if (props.markOnClick) {
+    if (settings.markOnClick) {
       markAsRead();
     }
   };
@@ -38,7 +44,7 @@ export const NotificationItem: React.FC<IProps> = (props) => {
 
   const markAsRead = () => {
     const { hostname, notification } = props;
-    props.markNotification(notification.id, hostname);
+    markNotification(notification.id, hostname);
   };
 
   const unsubscribe = (event: React.MouseEvent<HTMLElement>) => {
@@ -46,7 +52,7 @@ export const NotificationItem: React.FC<IProps> = (props) => {
     event.stopPropagation();
 
     const { hostname, notification } = props;
-    props.unsubscribeNotification(notification.id, hostname);
+    unsubscribeNotification(notification.id, hostname);
   };
 
   const { notification } = props;
@@ -104,14 +110,3 @@ export const NotificationItem: React.FC<IProps> = (props) => {
     </div>
   );
 };
-
-export function mapStateToProps(state: AppState) {
-  return {
-    markOnClick: state.settings.markOnClick,
-  };
-}
-
-export default connect(mapStateToProps, {
-  markNotification,
-  unsubscribeNotification,
-})(NotificationItem);
