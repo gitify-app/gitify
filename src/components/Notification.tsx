@@ -5,7 +5,7 @@ import { formatDistanceToNow, parseISO } from 'date-fns';
 import { CheckIcon, MuteIcon } from '@primer/octicons-react';
 
 import { formatReason, getNotificationTypeIcon } from '../js/utils/github-api';
-import { generateGitHubWebUrl } from '../js/utils/helpers';
+import { generateGitHubWebUrl } from '../utils/helpers';
 import { Notification } from '../typesGithub';
 import { AppContext } from '../context/App';
 

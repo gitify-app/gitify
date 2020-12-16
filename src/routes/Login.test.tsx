@@ -8,7 +8,7 @@ const { ipcRenderer, remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 
 import { LoginRoute } from './login';
-import * as helpers from '../js/utils/helpers';
+import * as helpers from '../utils/helpers';
 
 describe('routes/login.tsx', () => {
   const props = {

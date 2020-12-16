@@ -1,9 +1,10 @@
+// @ts-nocheck
 import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
 
 import { AppState, NotificationsState } from '../../types/reducers';
-import { mockedNotificationsReducerData } from '../__mocks__/mockedData';
-import { NotificationsRoute, mapStateToProps } from './notifications';
+import { mockedNotificationsReducerData } from '../js/__mocks__/mockedData';
+import { NotificationsRoute, mapStateToProps } from './Notifications';
 
 jest.mock('../../components/AccountNotifications', () => ({
   AccountNotifications: 'AccountNotifications',

@@ -2,7 +2,7 @@ import * as React from 'react';
 import Typist from 'react-typist';
 import { emojify } from 'react-emojione';
 
-import { Constants } from '../../utils/constants';
+import { Constants } from '../utils/constants';
 
 export const AllRead = () => {
   const message = React.useMemo(

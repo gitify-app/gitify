@@ -1,8 +1,8 @@
 import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
-import { Constants } from '../../utils/constants';
+import { Constants } from '../utils/constants';
 
-import { AllRead } from './all-read';
+import { AllRead } from './AllRead';
 
 jest.mock('react-typist');
 
