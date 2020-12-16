@@ -11,7 +11,7 @@ import { Loading } from '../components/Loading';
 import { LoginEnterpriseRoute } from '../routes/LoginEnterprise';
 import { LoginRoute } from '../routes/Login';
 import { NotificationsProvider } from '../context/Notifications';
-import { NotificationsRoute } from './routes/notifications';
+import { NotificationsRoute } from '../routes/Notifications';
 import { SettingsRoute } from '../routes/Settings';
 import { Sidebar } from '../components/Sidebar';
 

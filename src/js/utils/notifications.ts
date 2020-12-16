@@ -1,6 +1,6 @@
 const { remote } = require('electron');
 
-import { generateGitHubWebUrl } from '../utils/helpers';
+import { generateGitHubWebUrl } from '../../utils/helpers';
 import { reOpenWindow, openExternalLink } from '../utils/comms';
 import { Notification } from '../../typesGithub';
 

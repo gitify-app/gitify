@@ -49,7 +49,7 @@ export const Sidebar: React.FC = () => {
       return history.goBack();
     }
     return history.push('/settings');
-  }, []);
+  }, [location]);
 
   const notificationsCount = useMemo(() => {
     return notifications.reduce(

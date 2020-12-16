@@ -83,7 +83,7 @@ export const NotificationsProvider = ({
       .catch((error) => {
         setIsFetching(false);
       });
-  }, [accounts]);
+  }, [accounts, settings]);
 
   return (
     <NotificationsContext.Provider

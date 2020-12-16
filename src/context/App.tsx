@@ -5,9 +5,12 @@ import React, {
   useEffect,
   useMemo,
 } from 'react';
-import { useGitHubAuth } from '../hooks/useGitHubAuth';
 
 import { Appearance, AuthState, SettingsState } from '../types';
+import { clearState, loadState, saveState } from '../utils/storage';
+import { setAppearance } from '../utils/appearance';
+import { setAutoLaunch } from '../js/utils/comms';
+import { useGitHubAuth } from '../hooks/useGitHubAuth';
 
 const defaultAccounts: AuthState = {
   token: null,
@@ -40,9 +43,21 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
   const { authGitHub, getToken } = useGitHubAuth();
 
-  const updateSetting = useCallback((name: keyof SettingsState, value: any) => {
-    setSettings({ ...settings, [name]: value });
-  }, []);
+  const updateSetting = useCallback(
+    (name: keyof SettingsState, value: boolean | Appearance) => {
+      if (name === 'openAtStartup') {
+        setAutoLaunch(value as boolean);
+      }
+
+      if (name === 'appearance') {
+        setAppearance(value as Appearance);
+      }
+
+      setSettings({ ...settings, [name]: value });
+      saveState(accounts, settings);
+    },
+    [accounts, settings]
+  );
 
   const isLoggedIn = useMemo(() => {
     return !!accounts.token || accounts.enterpriseAccounts.length > 0;
@@ -52,22 +67,28 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     const authCode = await authGitHub();
     const { token } = await getToken(authCode.code);
     setAccounts({ ...accounts, token });
-  }, []);
+    saveState({ ...accounts, token }, settings);
+  }, [accounts]);
 
   const logout = useCallback(() => {
     setAccounts(defaultAccounts);
+    clearState();
+  }, []);
+
+  const restoreSettings = useCallback(() => {
+    const existing = loadState();
+
+    if (existing.accounts) {
+      setAccounts({ ...defaultAccounts, ...existing.accounts });
+    }
+
+    if (existing.settings) {
+      setSettings({ ...defaultSettings, ...existing.settings });
+    }
   }, []);
 
   useEffect(() => {
-    if (!accounts.token && !accounts.enterpriseAccounts) {
-      // Empty local storage
-    } else {
-      // Save accounts to local storage
-    }
-  }, [accounts]);
-
-  useEffect(() => {
-    // Reload settings
+    restoreSettings();
   }, []);
 
   return (

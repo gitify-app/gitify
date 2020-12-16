@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import { generateGitHubWebUrl } from '../utils/helpers';
+import { generateGitHubWebUrl } from '../../utils/helpers';
 import { mockedGithubNotifications } from '../__mocks__/mockedData';
 import * as comms from './comms';
 import NotificationsUtils from '../utils/notifications';

@@ -4,7 +4,7 @@ export function openExternalLink(url) {
   shell.openExternal(url);
 }
 
-export function setAutoLaunch(value) {
+export function setAutoLaunch(value: boolean) {
   remote.app.setLoginItemSettings({
     openAtLogin: value,
     openAsHidden: value,

@@ -1,4 +1,4 @@
-import { Appearance } from '../../types';
+import { Appearance } from '../types';
 
 export const setLightMode = () =>
   document.querySelector('html').classList.remove('dark');

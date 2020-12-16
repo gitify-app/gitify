@@ -1,4 +1,4 @@
-import { Appearance } from '../../types';
+import { Appearance } from '../types';
 import { setAppearance } from './appearance';
 
 import * as appearanceHelpers from './appearance';
