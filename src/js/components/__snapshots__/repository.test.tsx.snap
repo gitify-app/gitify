@@ -3,7 +3,7 @@
 exports[`components/repository.tsx should render itself & its children 1`] = `
 Array [
   <div
-    className="flex flex-1 p-2 bg-gray-100 dark:bg-gray-darker dark:text-white"
+    className="flex flex-initial p-2 bg-gray-100 dark:bg-gray-darker dark:text-white"
   >
     <div
       className="flex flex-1 p-0.5 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap"
