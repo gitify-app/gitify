@@ -8,7 +8,7 @@ import { AppContext } from '../context/App';
 import { IconAddAccount } from '../icons/AddAccount';
 import { IconLogOut } from '../icons/Logout';
 import { IconQuit } from '../icons/Quit';
-import { FieldRadioGroup } from '../js/components/fields/radiogroup';
+import { FieldRadioGroup } from '../components/fields/RadioGroup';
 import { FieldCheckbox } from '../js/components/ui/checkbox';
 import { updateTrayIcon } from '../utils/comms';
 import { Appearance } from '../types';

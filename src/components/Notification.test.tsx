@@ -4,7 +4,7 @@ import { fireEvent, render } from '@testing-library/react';
 
 const { shell } = require('electron');
 
-import { mockedSingleNotification } from '../js/__mocks__/mockedData';
+import { mockedSingleNotification } from '../__mocks__/mockedData';
 import { NotificationItem } from './notification';
 
 describe('components/notification.js', () => {

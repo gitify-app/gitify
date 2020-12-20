@@ -6,7 +6,7 @@ import { MemoryRouter } from 'react-router-dom';
 const { shell, ipcRenderer } = require('electron');
 
 import { AuthState } from '../types';
-import { mockedEnterpriseAccounts } from '../js/__mocks__/mockedData';
+import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
 import { Sidebar } from './sidebar';
 
 describe('components/Sidebar.tsx', () => {

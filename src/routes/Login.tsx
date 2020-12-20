@@ -4,7 +4,7 @@ import React, { useCallback, useContext, useEffect } from 'react';
 import { RouteComponentProps, useHistory } from 'react-router-dom';
 
 import { AppContext } from '../context/App';
-import { Logo } from '../js/components/ui/logo';
+import { Logo } from '../components/Logo';
 
 export const LoginRoute: React.FC<RouteComponentProps> = (props) => {
   const history = useHistory();

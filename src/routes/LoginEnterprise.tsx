@@ -6,7 +6,7 @@ import { Form, FormRenderProps } from 'react-final-form';
 import { ArrowLeftIcon } from '@primer/octicons-react';
 
 import { AppContext } from '../context/App';
-import { FieldInput } from '../js/components/fields/input';
+import { FieldInput } from '../components/fields/FieldInput';
 
 interface IValues {
   hostname?: string;

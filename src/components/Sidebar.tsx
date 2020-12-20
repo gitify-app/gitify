@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 
 import { AppContext } from '../context/App';
 import { Constants } from '../utils/constants';
-import { Logo } from '../js/components/ui/logo';
+import { Logo } from '../js/components/ui/ALogo';
 import { NotificationsContext } from '../context/Notifications';
 
 export const Sidebar: React.FC = () => {

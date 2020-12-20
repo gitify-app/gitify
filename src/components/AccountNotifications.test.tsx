@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as TestRendener from 'react-test-renderer';
 
 import { AccountNotifications } from './AccountNotifications';
-import { mockedGithubNotifications } from '../js/__mocks__/mockedData';
+import { mockedGithubNotifications } from '../__mocks__/mockedData';
 
 jest.mock('./repository');
 

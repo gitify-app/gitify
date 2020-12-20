@@ -5,7 +5,7 @@ import {
   mockedAccountNotifications,
   mockedGithubNotifications,
   mockedSingleAccountNotifications,
-} from '../js/__mocks__/mockedData';
+} from '../__mocks__/mockedData';
 import * as comms from './comms';
 import * as notificationsHelpers from './notifications';
 import { SettingsState } from '../types';
