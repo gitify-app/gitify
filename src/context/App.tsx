@@ -47,14 +47,14 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     restoreSettings();
   }, []);
 
+  useEffect(() => {
+    setAppearance(settings.appearance as Appearance);
+  }, [settings.appearance]);
+
   const updateSetting = useCallback(
     (name: keyof SettingsState, value: boolean | Appearance) => {
       if (name === 'openAtStartup') {
         setAutoLaunch(value as boolean);
-      }
-
-      if (name === 'appearance') {
-        setAppearance(value as Appearance);
       }
 
       const newSettings = { ...settings, [name]: value };
