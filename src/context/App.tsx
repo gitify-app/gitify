@@ -57,8 +57,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         setAppearance(value as Appearance);
       }
 
-      setSettings({ ...settings, [name]: value });
-      saveState(accounts, settings);
+      const newSettings = { ...settings, [name]: value };
+      setSettings(newSettings);
+      saveState(accounts, newSettings);
     },
     [accounts, settings]
   );

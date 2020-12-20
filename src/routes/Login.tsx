@@ -21,7 +21,7 @@ export const LoginRoute: React.FC<RouteComponentProps> = (props) => {
     try {
       await login();
     } catch (err) {
-      console.log('ERR:', err);
+      // Skip
     }
   }, []);
 
