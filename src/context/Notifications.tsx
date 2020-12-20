@@ -16,7 +16,10 @@ import {
   getEnterpriseAccountToken,
 } from '../utils/helpers';
 import { removeNotification } from '../utils/remove-notification';
-import { triggerNativeNotifications } from '../utils/notifications';
+import {
+  setTrayIconColor,
+  triggerNativeNotifications,
+} from '../utils/notifications';
 import { useInterval } from '../hooks/useInterval';
 import Constants from '../utils/constants';
 
@@ -25,6 +28,7 @@ interface NotificationsContextState {
   fetchNotifications: () => Promise<void>;
   markNotification: (id: string, hostname: string) => Promise<void>;
   unsubscribeNotification: (id: string, hostname: string) => Promise<void>;
+  markRepoNotifications: (repoSlug: string, hostname: string) => Promise<void>;
   isFetching: boolean;
   requestFailed: boolean;
 }
@@ -125,6 +129,7 @@ export const NotificationsProvider = ({
         );
 
         setNotifications(updatedNotifications);
+        setTrayIconColor(updatedNotifications);
       } catch (err) {
         // Skip
       }
@@ -156,6 +161,36 @@ export const NotificationsProvider = ({
     [accounts, notifications]
   );
 
+  const markRepoNotifications = useCallback(
+    async (repoSlug, hostname) => {
+      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const token = isEnterprise
+        ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
+        : accounts.token;
+
+      try {
+        await apiRequestAuth(
+          `${generateGitHubAPIUrl(hostname)}repos/${repoSlug}/notifications`,
+          'PUT',
+          token,
+          {}
+        );
+
+        const updatedNotifications = removeNotification(
+          repoSlug,
+          notifications,
+          hostname
+        );
+
+        setNotifications(updatedNotifications);
+        setTrayIconColor(updatedNotifications);
+      } catch (err) {
+        // Skip
+      }
+    },
+    [accounts, notifications]
+  );
+
   useInterval(() => {
     fetchNotifications();
   }, 60000);
@@ -177,6 +212,7 @@ export const NotificationsProvider = ({
         fetchNotifications,
         markNotification,
         unsubscribeNotification,
+        markRepoNotifications,
       }}
     >
       {children}

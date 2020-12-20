@@ -1,11 +1,12 @@
 const { shell } = require('electron');
 
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { CheckIcon } from '@primer/octicons-react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { Notification } from '../typesGithub';
 import { NotificationItem } from './notification';
+import { NotificationsContext } from '../context/Notifications';
 
 interface IProps {
   hostname: string;
@@ -13,24 +14,23 @@ interface IProps {
   repoName: string;
 }
 
-export const RepositoryNotifications: React.FC<IProps> = (props) => {
-  const markRepoNotifications = useCallback(
-    async (repoSlug: string, hostname: string) => {},
-    []
-  );
+export const RepositoryNotifications: React.FC<IProps> = ({
+  repoName,
+  repoNotifications,
+  hostname,
+}) => {
+  const { markRepoNotifications } = useContext(NotificationsContext);
 
-  const openBrowser = () => {
-    const url = props.repoNotifications[0].repository.html_url;
+  const openBrowser = useCallback(() => {
+    const url = repoNotifications[0].repository.html_url;
     shell.openExternal(url);
-  };
+  }, [repoNotifications]);
 
-  const markRepoAsRead = () => {
-    const { hostname, repoNotifications } = props;
+  const markRepoAsRead = useCallback(() => {
     const repoSlug = repoNotifications[0].repository.full_name;
     markRepoNotifications(repoSlug, hostname);
-  };
+  }, [repoNotifications, hostname]);
 
-  const { hostname, repoNotifications } = props;
   const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
 
   return (
@@ -38,7 +38,7 @@ export const RepositoryNotifications: React.FC<IProps> = (props) => {
       <div className="flex p-2 bg-gray-100 dark:bg-gray-darker dark:text-white">
         <div className="flex flex-1 p-0.5 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap">
           <img className="rounded w-5 h-5 ml-1 mr-3" src={avatarUrl} />
-          <span onClick={openBrowser}>{props.repoName}</span>
+          <span onClick={openBrowser}>{repoName}</span>
         </div>
 
         <div className="flex w-8 justify-center items-center">
