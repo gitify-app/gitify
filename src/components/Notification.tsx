@@ -1,6 +1,6 @@
 const { shell } = require('electron');
 
-import React, { useCallback, useContext } from 'react';
+import React, { useContext } from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { CheckIcon, MuteIcon } from '@primer/octicons-react';
 
@@ -20,11 +20,8 @@ export const NotificationItem: React.FC<IProps> = ({
   hostname,
 }) => {
   const { settings } = useContext(AppContext);
-  const { markNotification } = useContext(NotificationsContext);
-
-  const unsubscribeNotification = useCallback(
-    async (id: string, hostname: string) => {},
-    []
+  const { markNotification, unsubscribeNotification } = useContext(
+    NotificationsContext
   );
 
   const pressTitle = () => {
@@ -77,7 +74,7 @@ export const NotificationItem: React.FC<IProps> = ({
           <button
             className="border-0 bg-none float-right"
             title="Unsubscribe"
-            onClick={(e) => unsubscribe(e)}
+            onClick={unsubscribe}
           >
             <MuteIcon
               className="hover:text-red-500"

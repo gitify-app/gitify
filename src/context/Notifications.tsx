@@ -24,6 +24,7 @@ interface NotificationsContextState {
   notifications: AccountNotifications[];
   fetchNotifications: () => Promise<void>;
   markNotification: (id: string, hostname: string) => Promise<void>;
+  unsubscribeNotification: (id: string, hostname: string) => Promise<void>;
   isFetching: boolean;
   requestFailed: boolean;
 }
@@ -131,6 +132,30 @@ export const NotificationsProvider = ({
     [accounts, notifications]
   );
 
+  const unsubscribeNotification = useCallback(
+    async (id, hostname) => {
+      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const token = isEnterprise
+        ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
+        : accounts.token;
+
+      try {
+        await apiRequestAuth(
+          `${generateGitHubAPIUrl(
+            hostname
+          )}notifications/threads/${id}/subscription`,
+          'PUT',
+          token,
+          { ignore: true }
+        );
+        await markNotification(id, hostname);
+      } catch (err) {
+        // Skip
+      }
+    },
+    [accounts, notifications]
+  );
+
   useInterval(() => {
     fetchNotifications();
   }, 60000);
@@ -151,6 +176,7 @@ export const NotificationsProvider = ({
         notifications,
         fetchNotifications,
         markNotification,
+        unsubscribeNotification,
       }}
     >
       {children}
