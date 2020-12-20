@@ -6,11 +6,11 @@
     "outDir": "./build/",
     "sourceMap": true,
     "noImplicitAny": false,
+    "noUnusedLocals": true,
     "jsx": "react",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "esModuleInterop": true,
-    "typeRoots": ["./src/types", "node_modules/@types"]
+    "esModuleInterop": true
   },
   "exclude": ["node_modules"],
   "include": [

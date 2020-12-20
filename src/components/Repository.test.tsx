@@ -38,7 +38,7 @@ describe('components/repository.tsx', function () {
   });
 
   it('should mark a repo as read', function () {
-    const { getByRole, debug } = render(<RepositoryNotifications {...props} />);
+    const { getByRole } = render(<RepositoryNotifications {...props} />);
 
     fireEvent.click(getByRole('button'));
 

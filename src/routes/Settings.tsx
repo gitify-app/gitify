@@ -1,29 +1,23 @@
 const { ipcRenderer, remote } = require('electron');
 
-import React, { useCallback, useContext, useEffect } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import { ArrowLeftIcon } from '@primer/octicons-react';
 
 import { AppContext } from '../context/App';
-import { NotificationsContext } from '../context/Notifications';
 import { IconAddAccount } from '../icons/AddAccount';
 import { IconLogOut } from '../icons/Logout';
 import { IconQuit } from '../icons/Quit';
 import { FieldRadioGroup } from '../js/components/fields/radiogroup';
 import { FieldCheckbox } from '../js/components/ui/checkbox';
-import { updateTrayIcon } from '../js/utils/comms';
+import { updateTrayIcon } from '../utils/comms';
 import { Appearance } from '../types';
 
 const isLinux = remote.process.platform === 'linux';
 
 export const SettingsRoute: React.FC = () => {
   const { settings, updateSetting, logout } = useContext(AppContext);
-  const { fetchNotifications } = useContext(NotificationsContext);
   const history = useHistory();
-
-  useEffect(() => {
-    fetchNotifications();
-  }, [settings.participating]);
 
   const logoutUser = useCallback(() => {
     logout();

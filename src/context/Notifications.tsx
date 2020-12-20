@@ -1,4 +1,10 @@
-import React, { useState, createContext, useCallback, useContext } from 'react';
+import React, {
+  useState,
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+} from 'react';
 import axios from 'axios';
 import { parse } from 'url';
 
@@ -6,6 +12,7 @@ import { AccountNotifications } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
 import { AppContext } from './App';
 import Constants from '../utils/constants';
+import { triggerNativeNotifications } from '../utils/notifications';
 import { useInterval } from '../hooks/useInterval';
 
 interface NotificationsContextState {
@@ -78,6 +85,7 @@ export const NotificationsProvider = ({
               ]
             : [...enterpriseNotifications];
 
+          triggerNativeNotifications(notifications, data, settings);
           setNotifications(data);
           setIsFetching(false);
         })

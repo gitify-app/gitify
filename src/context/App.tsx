@@ -9,7 +9,7 @@ import React, {
 import { Appearance, AuthState, SettingsState } from '../types';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setAppearance } from '../utils/appearance';
-import { setAutoLaunch } from '../js/utils/comms';
+import { setAutoLaunch } from '../utils/comms';
 import { useGitHubAuth } from '../hooks/useGitHubAuth';
 
 const defaultAccounts: AuthState = {
@@ -17,7 +17,7 @@ const defaultAccounts: AuthState = {
   enterpriseAccounts: [],
 };
 
-const defaultSettings: SettingsState = {
+export const defaultSettings: SettingsState = {
   participating: false,
   playSound: true,
   showNotifications: true,
@@ -42,6 +42,10 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [accounts, setAccounts] = useState<AuthState>(defaultAccounts);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
   const { authGitHub, getToken } = useGitHubAuth();
+
+  useEffect(() => {
+    restoreSettings();
+  }, []);
 
   const updateSetting = useCallback(
     (name: keyof SettingsState, value: boolean | Appearance) => {
@@ -85,10 +89,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     if (existing.settings) {
       setSettings({ ...defaultSettings, ...existing.settings });
     }
-  }, []);
-
-  useEffect(() => {
-    restoreSettings();
   }, []);
 
   return (

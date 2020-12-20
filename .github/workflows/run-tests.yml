@@ -26,6 +26,9 @@ jobs:
       - name: Run Prettier (Check)
         run: yarn prettier:check
 
+      - name: Run Typechecking
+        run: yarn tsc --noEmit
+
       - name: Run Jest
         run: yarn test --coverage --runInBand
 

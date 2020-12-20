@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useMemo } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 import { shell } from 'electron';
 import { useLocation } from 'react-router-dom';
 import * as Octicons from '@primer/octicons-react';

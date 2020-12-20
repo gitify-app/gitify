@@ -1,4 +1,4 @@
-import { EnterpriseAccount } from '../../types';
+import { AccountNotifications, EnterpriseAccount } from '../../types';
 import { Notification, Repository } from '../../typesGithub';
 
 export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
@@ -251,7 +251,7 @@ export const mockedEnterpriseNotifications = [
   } as Notification,
 ];
 
-export const mockedNotificationsReducerData = [
+export const mockedAccountNotifications: AccountNotifications[] = [
   {
     hostname: 'github.com',
     notifications: mockedGithubNotifications,
@@ -259,5 +259,12 @@ export const mockedNotificationsReducerData = [
   {
     hostname: 'github.gitify.io',
     notifications: mockedEnterpriseNotifications,
+  },
+];
+
+export const mockedSingleAccountNotifications: AccountNotifications[] = [
+  {
+    hostname: 'github.com',
+    notifications: [mockedSingleNotification],
   },
 ];
