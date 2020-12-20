@@ -52,7 +52,7 @@
   "jest": {
     "preset": "ts-jest/presets/js-with-ts",
     "setupFiles": [
-      "<rootDir>/src/js/__helpers__/setupEnvVars.js"
+      "<rootDir>/src/__helpers__/setupEnvVars.js"
     ],
     "testEnvironment": "jsdom",
     "coverageThreshold": {

@@ -5,13 +5,13 @@ import { useHistory } from 'react-router-dom';
 import { ArrowLeftIcon } from '@primer/octicons-react';
 
 import { AppContext } from '../context/App';
+import { Appearance } from '../types';
+import { FieldCheckbox } from '../components/fields/Checkbox';
+import { FieldRadioGroup } from '../components/fields/RadioGroup';
 import { IconAddAccount } from '../icons/AddAccount';
 import { IconLogOut } from '../icons/Logout';
 import { IconQuit } from '../icons/Quit';
-import { FieldRadioGroup } from '../components/fields/RadioGroup';
-import { FieldCheckbox } from '../js/components/ui/checkbox';
 import { updateTrayIcon } from '../utils/comms';
-import { Appearance } from '../types';
 
 const isLinux = remote.process.platform === 'linux';
 

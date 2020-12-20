@@ -4,23 +4,24 @@ import React, { useCallback, useContext } from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { CheckIcon, MuteIcon } from '@primer/octicons-react';
 
-import { formatReason, getNotificationTypeIcon } from '../js/utils/github-api';
+import { formatReason, getNotificationTypeIcon } from '../utils/github-api';
 import { generateGitHubWebUrl } from '../utils/helpers';
 import { Notification } from '../typesGithub';
 import { AppContext } from '../context/App';
+import { NotificationsContext } from '../context/Notifications';
 
 interface IProps {
   hostname: string;
   notification: Notification;
 }
 
-export const NotificationItem: React.FC<IProps> = (props) => {
+export const NotificationItem: React.FC<IProps> = ({
+  notification,
+  hostname,
+}) => {
   const { settings } = useContext(AppContext);
+  const { markNotification } = useContext(NotificationsContext);
 
-  const markNotification = useCallback(
-    async (id: string, hostname: string) => {},
-    []
-  );
   const unsubscribeNotification = useCallback(
     async (id: string, hostname: string) => {},
     []
@@ -30,32 +31,25 @@ export const NotificationItem: React.FC<IProps> = (props) => {
     openBrowser();
 
     if (settings.markOnClick) {
-      markAsRead();
+      markNotification(notification.id, hostname);
     }
   };
 
   const openBrowser = () => {
     // Some Notification types from GitHub are missing urls in their subjects.
-    if (props.notification.subject.url) {
-      const url = generateGitHubWebUrl(props.notification.subject.url);
+    if (notification.subject.url) {
+      const url = generateGitHubWebUrl(notification.subject.url);
       shell.openExternal(url);
     }
-  };
-
-  const markAsRead = () => {
-    const { hostname, notification } = props;
-    markNotification(notification.id, hostname);
   };
 
   const unsubscribe = (event: React.MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.
     event.stopPropagation();
 
-    const { hostname, notification } = props;
     unsubscribeNotification(notification.id, hostname);
   };
 
-  const { notification } = props;
   const reason = formatReason(notification.reason);
   const NotificationIcon = getNotificationTypeIcon(notification.subject.type);
   const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
@@ -98,7 +92,7 @@ export const NotificationItem: React.FC<IProps> = (props) => {
         <button
           className="focus:outline-none"
           title="Mark as Read"
-          onClick={() => markAsRead()}
+          onClick={() => markNotification(notification.id, hostname)}
         >
           <CheckIcon
             className="hover:text-green-500"

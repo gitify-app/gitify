@@ -11,13 +11,19 @@ import { parse } from 'url';
 import { AccountNotifications } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
 import { AppContext } from './App';
-import Constants from '../utils/constants';
+import {
+  generateGitHubAPIUrl,
+  getEnterpriseAccountToken,
+} from '../utils/helpers';
+import { removeNotification } from '../utils/remove-notification';
 import { triggerNativeNotifications } from '../utils/notifications';
 import { useInterval } from '../hooks/useInterval';
+import Constants from '../utils/constants';
 
 interface NotificationsContextState {
   notifications: AccountNotifications[];
   fetchNotifications: () => Promise<void>;
+  markNotification: (id: string, hostname: string) => Promise<void>;
   isFetching: boolean;
   requestFailed: boolean;
 }
@@ -90,11 +96,40 @@ export const NotificationsProvider = ({
           setIsFetching(false);
         })
       )
-      .catch((error) => {
+      .catch(() => {
         setIsFetching(false);
         setRequestFailed(true);
       });
   }, [accounts, notifications, settings]);
+
+  const markNotification = useCallback(
+    async (id, hostname) => {
+      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const token = isEnterprise
+        ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
+        : accounts.token;
+
+      try {
+        await apiRequestAuth(
+          `${generateGitHubAPIUrl(hostname)}notifications/threads/${id}`,
+          'PATCH',
+          token,
+          {}
+        );
+
+        const updatedNotifications = removeNotification(
+          id,
+          notifications,
+          hostname
+        );
+
+        setNotifications(updatedNotifications);
+      } catch (err) {
+        // Skip
+      }
+    },
+    [accounts, notifications]
+  );
 
   useInterval(() => {
     fetchNotifications();
@@ -115,6 +150,7 @@ export const NotificationsProvider = ({
         requestFailed,
         notifications,
         fetchNotifications,
+        markNotification,
       }}
     >
       {children}
