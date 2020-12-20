@@ -6,7 +6,7 @@ import { Notification } from '../../typesGithub';
 
 import { SettingsState } from '../../types';
 
-export default {
+export const NativeNotifications = {
   setup(
     notifications: Notification[],
     notificationsCount,

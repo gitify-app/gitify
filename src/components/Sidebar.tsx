@@ -13,32 +13,10 @@ export const Sidebar: React.FC = () => {
   const history = useHistory();
   const location = useLocation();
 
-  const { accounts, isLoggedIn } = useContext(AppContext);
+  const { isLoggedIn } = useContext(AppContext);
   const { notifications, fetchNotifications } = useContext(
     NotificationsContext
   );
-
-  useEffect(() => {
-    const iFrequency = 60000;
-
-    const requestInterval = setInterval(() => {
-      refreshNotifications();
-    }, iFrequency);
-
-    return () => {
-      clearInterval(requestInterval);
-    };
-  }, []);
-
-  useEffect(() => {
-    fetchNotifications();
-  }, [accounts]);
-
-  const refreshNotifications = useCallback(() => {
-    if (isLoggedIn) {
-      fetchNotifications();
-    }
-  }, [isLoggedIn]);
 
   const onOpenBrowser = useCallback(() => {
     shell.openExternal(`https://github.com/${Constants.REPO_SLUG}`);
@@ -82,7 +60,7 @@ export const Sidebar: React.FC = () => {
           <>
             <button
               className={footerButtonClasses}
-              onClick={refreshNotifications}
+              onClick={fetchNotifications}
               aria-label="Refresh Notifications"
             >
               <Octicons.SyncIcon size={16} />

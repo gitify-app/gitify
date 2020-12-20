@@ -6,6 +6,7 @@ import { AccountNotifications } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
 import { AppContext } from './App';
 import Constants from '../utils/constants';
+import { useInterval } from '../hooks/useInterval';
 
 interface NotificationsContextState {
   notifications: AccountNotifications[];
@@ -52,6 +53,7 @@ export const NotificationsProvider = ({
     }
 
     setIsFetching(true);
+    setRequestFailed(false);
 
     return axios
       .all([getGitHubNotifications(), ...getEnterpriseNotifications()])
@@ -82,8 +84,21 @@ export const NotificationsProvider = ({
       )
       .catch((error) => {
         setIsFetching(false);
+        setRequestFailed(true);
       });
-  }, [accounts, settings]);
+  }, [accounts, notifications, settings]);
+
+  useInterval(() => {
+    fetchNotifications();
+  }, 60000);
+
+  useEffect(() => {
+    fetchNotifications();
+  }, [settings.participating]);
+
+  useEffect(() => {
+    fetchNotifications();
+  }, [accounts.token, accounts.enterpriseAccounts.length]);
 
   return (
     <NotificationsContext.Provider

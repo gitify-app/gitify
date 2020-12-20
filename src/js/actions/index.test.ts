@@ -6,7 +6,6 @@ import thunk from 'redux-thunk';
 import { LOGOUT } from '../../types/actions';
 import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
 import * as actions from './';
-import Constants from '../utils/constants';
 
 const middlewares = [thunk];
 const createMockStore = configureMockStore(middlewares);
@@ -701,18 +700,5 @@ describe('actions/index.js', () => {
       .then(() => {
         expect(store.getActions()).toEqual(expectedActions);
       });
-  });
-
-  it('should update a setting for a user', () => {
-    const setting = 'participating';
-    const value = true;
-
-    const expectedAction = {
-      type: actions.UPDATE_SETTING,
-      setting,
-      value,
-    };
-
-    expect(actions.updateSetting(setting, value)).toEqual(expectedAction);
   });
 });
