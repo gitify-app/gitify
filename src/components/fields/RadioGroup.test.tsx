@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as TestRendener from 'react-test-renderer';
 import { fireEvent, render } from '@testing-library/react';
 
-import { FieldRadioGroup } from './radiogroup';
+import { FieldRadioGroup } from './RadioGroup';
 
 describe('components/fields/radiogroup.tsx', () => {
   const props = {

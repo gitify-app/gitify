@@ -6,14 +6,14 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import { AppContext, AppProvider } from '../context/App';
-import { Loading } from '../components/Loading';
-import { LoginEnterpriseRoute } from '../routes/LoginEnterprise';
-import { LoginRoute } from '../routes/Login';
-import { NotificationsProvider } from '../context/Notifications';
-import { NotificationsRoute } from '../routes/Notifications';
-import { SettingsRoute } from '../routes/Settings';
-import { Sidebar } from '../components/Sidebar';
+import { AppContext, AppProvider } from './context/App';
+import { Loading } from './components/Loading';
+import { LoginEnterpriseRoute } from './routes/LoginEnterprise';
+import { LoginRoute } from './routes/Login';
+import { NotificationsProvider } from './context/Notifications';
+import { NotificationsRoute } from './routes/Notifications';
+import { SettingsRoute } from './routes/Settings';
+import { Sidebar } from './components/Sidebar';
 
 export const PrivateRoute = ({ component: Component, ...rest }) => {
   const { isLoggedIn } = useContext(AppContext);

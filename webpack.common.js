@@ -3,7 +3,7 @@ const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
-  entry: './src/js/index.tsx',
+  entry: './src/index.tsx',
   devtool: 'inline-source-map',
   target: 'electron-renderer',
   module: {

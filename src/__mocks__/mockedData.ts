@@ -1,5 +1,5 @@
-import { AccountNotifications, EnterpriseAccount } from '../../types';
-import { Notification, Repository } from '../../typesGithub';
+import { AccountNotifications, EnterpriseAccount } from '../types';
+import { Notification, Repository } from '../typesGithub';
 
 export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
   {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { RadioGroupItem } from '../../../types';
+import { RadioGroupItem } from '../../types';
 
 export const FieldRadioGroup = ({
   label,
