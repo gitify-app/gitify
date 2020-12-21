@@ -5,7 +5,7 @@ import { CheckIcon } from '@primer/octicons-react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { Notification } from '../typesGithub';
-import { NotificationItem } from './notification';
+import { NotificationItem } from './Notification';
 import { NotificationsContext } from '../context/Notifications';
 
 interface IProps {

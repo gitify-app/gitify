@@ -7,7 +7,7 @@ import { createMemoryHistory } from 'history';
 
 const { shell, ipcRenderer } = require('electron');
 
-import { Sidebar } from './sidebar';
+import { Sidebar } from './Sidebar';
 import { mockSettings } from '../__mocks__/mock-state';
 import { AppContext } from '../context/App';
 import { NotificationsContext } from '../context/Notifications';

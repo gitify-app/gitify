@@ -2,7 +2,7 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import NProgress from 'nprogress';
 
-import { Loading } from './loading';
+import { Loading } from './Loading';
 import { NotificationsContext } from '../context/Notifications';
 
 jest.mock('nprogress', () => {

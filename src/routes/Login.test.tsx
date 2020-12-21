@@ -8,7 +8,7 @@ import { render, fireEvent } from '@testing-library/react';
 const { ipcRenderer } = require('electron');
 
 import { AppContext } from '../context/App';
-import { LoginRoute } from './login';
+import { LoginRoute } from './Login';
 
 describe('routes/Login.tsx', () => {
   const history = createMemoryHistory();

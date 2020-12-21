@@ -6,7 +6,7 @@ const { shell } = require('electron');
 
 import { AppContext } from '../context/App';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
-import { NotificationItem } from './notification';
+import { NotificationItem } from './Notification';
 import { NotificationsContext } from '../context/Notifications';
 import { mockSettings } from '../__mocks__/mock-state';
 
