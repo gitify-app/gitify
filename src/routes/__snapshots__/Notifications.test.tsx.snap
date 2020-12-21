@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`routes/notifications.ts should render itself & its children (all read notifications) 1`] = `<AllRead />`;
+exports[`routes/Notifications.ts should render itself & its children (all read notifications) 1`] = `<AllRead />`;
 
-exports[`routes/notifications.ts should render itself & its children (error page - oops) 1`] = `<Oops />`;
+exports[`routes/Notifications.ts should render itself & its children (error page - oops) 1`] = `<Oops />`;
 
-exports[`routes/notifications.ts should render itself & its children (with notifications) 1`] = `
+exports[`routes/Notifications.ts should render itself & its children (with notifications) 1`] = `
 <div
   className="flex flex-col flex-1 bg-white dark:bg-gray-dark"
 >

@@ -1,75 +1,52 @@
-// @ts-nocheck
-import * as React from 'react';
-import * as TestRenderer from 'react-test-renderer';
+import React from 'react';
+import TestRenderer from 'react-test-renderer';
 
-import { AppState, NotificationsState } from '../../types/reducers';
-import { mockedNotificationsReducerData } from '../__mocks__/mockedData';
-import { NotificationsRoute, mapStateToProps } from './Notifications';
+import { NotificationsContext } from '../context/Notifications';
+import { mockedAccountNotifications } from '../__mocks__/mockedData';
+import { NotificationsRoute } from './Notifications';
 
-jest.mock('../../components/AccountNotifications', () => ({
+jest.mock('../components/AccountNotifications', () => ({
   AccountNotifications: 'AccountNotifications',
 }));
 
-jest.mock('../components/all-read', () => ({
+jest.mock('../components/AllRead', () => ({
   AllRead: 'AllRead',
 }));
 
-jest.mock('../components/oops', () => ({
+jest.mock('../components/Oops', () => ({
   Oops: 'Oops',
 }));
 
-describe('routes/notifications.ts', () => {
-  const props = {
-    failed: false,
-    accountNotifications: mockedNotificationsReducerData,
-    notificationsCount: 4,
-    hasMultipleAccounts: true,
-    hasNotifications: true,
-  };
-
-  it('should test the mapStateToProps method', () => {
-    const state = {
-      notifications: {
-        response: mockedNotificationsReducerData,
-        failed: false,
-      } as NotificationsState,
-    } as AppState;
-
-    const mappedProps = mapStateToProps(state);
-
-    expect(mappedProps.failed).toBeFalsy();
-    expect(mappedProps.accountNotifications).toEqual(
-      mockedNotificationsReducerData
-    );
-    expect(mappedProps.hasNotifications).toBeTruthy();
-    expect(mappedProps.notificationsCount).toBe(4);
-  });
-
+describe('routes/Notifications.ts', () => {
   it('should render itself & its children (with notifications)', () => {
-    const tree = TestRenderer.create(<NotificationsRoute {...props} />);
+    const tree = TestRenderer.create(
+      <NotificationsContext.Provider
+        value={{ notifications: mockedAccountNotifications }}
+      >
+        <NotificationsRoute />
+      </NotificationsContext.Provider>
+    );
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should render itself & its children (all read notifications)', () => {
-    const caseProps = {
-      ...props,
-      hasNotifications: false,
-      accountNotifications: [],
-    };
-
-    const tree = TestRenderer.create(<NotificationsRoute {...caseProps} />);
-
+    const tree = TestRenderer.create(
+      <NotificationsContext.Provider value={{ notifications: [] }}>
+        <NotificationsRoute />
+      </NotificationsContext.Provider>
+    );
     expect(tree).toMatchSnapshot();
   });
 
   it('should render itself & its children (error page - oops)', () => {
-    const caseProps = {
-      ...props,
-      failed: true,
-    };
-
-    const tree = TestRenderer.create(<NotificationsRoute {...caseProps} />);
+    const tree = TestRenderer.create(
+      <NotificationsContext.Provider
+        value={{ notifications: [], requestFailed: true }}
+      >
+        <NotificationsRoute />
+      </NotificationsContext.Provider>
+    );
 
     expect(tree).toMatchSnapshot();
   });

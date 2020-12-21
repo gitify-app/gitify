@@ -1,10 +1,12 @@
-import * as React from 'react';
-import * as TestRendener from 'react-test-renderer';
+import React from 'react';
+import TestRendener from 'react-test-renderer';
 
 import { AccountNotifications } from './AccountNotifications';
 import { mockedGithubNotifications } from '../__mocks__/mockedData';
 
-jest.mock('./repository');
+jest.mock('./Repository', () => ({
+  RepositoryNotifications: () => <div>Repository</div>,
+}));
 
 describe('components/AccountNotifications.tsx', () => {
   it('should render itself (github.com with notifications)', () => {

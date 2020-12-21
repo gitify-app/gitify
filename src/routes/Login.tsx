@@ -1,12 +1,12 @@
 const { ipcRenderer } = require('electron');
 
 import React, { useCallback, useContext, useEffect } from 'react';
-import { RouteComponentProps, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { AppContext } from '../context/App';
 import { Logo } from '../components/Logo';
 
-export const LoginRoute: React.FC<RouteComponentProps> = (props) => {
+export const LoginRoute: React.FC = () => {
   const history = useHistory();
   const { isLoggedIn, login } = useContext(AppContext);
 
@@ -46,7 +46,7 @@ export const LoginRoute: React.FC<RouteComponentProps> = (props) => {
 
       <button
         className={loginButtonClass}
-        onClick={() => props.history.push('/enterpriselogin')}
+        onClick={() => history.push('/enterpriselogin')}
         aria-label="Login with GitHub Enterprise"
       >
         <span>Login to GitHub Enterprise</span>

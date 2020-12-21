@@ -1,41 +1,30 @@
-// @ts-nocheck
-import * as React from 'react';
-import * as TestRenderer from 'react-test-renderer';
-import { MemoryRouter } from 'react-router';
+import React from 'react';
+import TestRenderer from 'react-test-renderer';
+import { Router } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 import { render, fireEvent } from '@testing-library/react';
 
-const { ipcRenderer, remote } = require('electron');
-const BrowserWindow = remote.BrowserWindow;
+const { ipcRenderer } = require('electron');
 
+import { AppContext } from '../context/App';
 import { LoginRoute } from './login';
-import * as helpers from '../utils/helpers';
 
-describe('routes/login.tsx', () => {
-  const props = {
-    dispatch: jest.fn(),
-    isEitherLoggedIn: false,
-    history: {
-      goBack: jest.fn(),
-      push: jest.fn(),
-    },
-  };
+describe('routes/Login.tsx', () => {
+  const history = createMemoryHistory();
+  const pushMock = jest.spyOn(history, 'push');
+  const replaceMock = jest.spyOn(history, 'replace');
 
   beforeEach(function () {
-    // @ts-ignore
-    new BrowserWindow().loadURL.mockReset();
+    pushMock.mockReset();
+
     spyOn(ipcRenderer, 'send');
-    props.dispatch.mockReset();
-    props.history.push.mockReset();
   });
 
   it('should render itself & its children', () => {
-    const caseProps = {
-      ...props,
-    };
-
     const tree = TestRenderer.create(
       <MemoryRouter>
-        <LoginRoute {...caseProps} />
+        <LoginRoute />
       </MemoryRouter>
     );
 
@@ -43,53 +32,37 @@ describe('routes/login.tsx', () => {
   });
 
   it('should redirect to notifications once logged in', () => {
-    const caseProps = {
-      ...props,
-    };
-
     const { rerender } = render(
-      <MemoryRouter>
-        <LoginRoute {...caseProps} />
-      </MemoryRouter>
+      <AppContext.Provider value={{ isLoggedIn: false }}>
+        <Router history={history}>
+          <LoginRoute />
+        </Router>
+      </AppContext.Provider>
     );
 
     rerender(
-      <MemoryRouter>
-        <LoginRoute {...caseProps} isEitherLoggedIn={true} />
-      </MemoryRouter>
+      <AppContext.Provider value={{ isLoggedIn: true }}>
+        <Router history={history}>
+          <LoginRoute />
+        </Router>
+      </AppContext.Provider>
     );
 
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
-  });
-
-  it('should call the authGitHub helper when pressing the login button', () => {
-    spyOn(helpers, 'authGithub');
-    const caseProps = {
-      ...props,
-    };
-
-    const { getByLabelText } = render(
-      <MemoryRouter>
-        <LoginRoute {...caseProps} />
-      </MemoryRouter>
-    );
-
-    fireEvent.click(getByLabelText('Login with GitHub'));
-
-    expect(helpers.authGithub).toHaveBeenCalledTimes(1);
+    expect(replaceMock).toHaveBeenCalledTimes(1);
   });
 
   it('should navigate to login with github enterprise', () => {
     const { getByLabelText } = render(
-      <MemoryRouter>
-        <LoginRoute {...props} />
-      </MemoryRouter>
+      <Router history={history}>
+        <LoginRoute />
+      </Router>
     );
 
     fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
 
-    expect(props.history.push).toHaveBeenCalledTimes(1);
-    expect(props.history.push).toHaveBeenCalledWith('/enterpriselogin');
+    expect(pushMock).toHaveBeenCalledTimes(1);
+    expect(pushMock).toHaveBeenCalledWith('/enterpriselogin');
   });
 });

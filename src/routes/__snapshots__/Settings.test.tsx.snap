@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`routes/settings.tsx should render itself & its children 1`] = `
+exports[`routes/Settings.tsx should render itself & its children 1`] = `
 <div
   className="flex flex-1 flex-col dark:bg-gray-dark dark:text-white"
 >
@@ -63,7 +63,7 @@ exports[`routes/settings.tsx should render itself & its children 1`] = `
           className="flex items-center mt-1"
         >
           <input
-            checked={false}
+            checked={true}
             className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
             id="appearance_system"
             name="appearance"

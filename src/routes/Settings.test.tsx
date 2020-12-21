@@ -1,149 +1,171 @@
-import * as React from 'react';
-import * as TestRenderer from 'react-test-renderer';
+import React from 'react';
+import TestRenderer from 'react-test-renderer';
 import { render, fireEvent } from '@testing-library/react';
+import { Router } from 'react-router';
 import { MemoryRouter } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 
 const { ipcRenderer } = require('electron');
 
 import { SettingsRoute } from './Settings';
-import { SettingsState } from '../types';
+import { AppContext } from '../context/App';
+import { mockSettings } from '../__mocks__/mock-state';
 
 describe('routes/Settings.tsx', () => {
-  const props = {
-    updateSetting: jest.fn(),
-    fetchNotifications: jest.fn(),
-    hasMultipleAccounts: false,
-    logout: jest.fn(),
-    history: {
-      push: jest.fn(),
-      goBack: jest.fn(),
-      replace: jest.fn(),
-    },
-    settings: {
-      participating: false,
-      playSound: true,
-      showNotifications: true,
-      markOnClick: false,
-      openAtStartup: false,
-    } as SettingsState,
-  };
+  const history = createMemoryHistory();
+  const goBackMock = jest.spyOn(history, 'goBack');
+  const replaceMock = jest.spyOn(history, 'replace');
+  const updateSetting = jest.fn();
 
-  beforeEach(function () {
-    spyOn(ipcRenderer, 'send');
-
-    props.updateSetting.mockReset();
-    props.history.goBack.mockReset();
-    props.history.push.mockReset();
-    props.history.replace.mockReset();
+  beforeEach(() => {
+    goBackMock.mockReset();
+    updateSetting.mockReset();
   });
 
   it('should render itself & its children', () => {
     const tree = TestRenderer.create(
-      <MemoryRouter>
-        <SettingsRoute {...props} />
-      </MemoryRouter>
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <MemoryRouter>
+          <SettingsRoute />
+        </MemoryRouter>
+      </AppContext.Provider>
     );
     expect(tree).toMatchSnapshot();
   });
 
   it('should press the logout', () => {
-    const { getByLabelText } = render(<SettingsRoute {...props} />);
+    const logoutMock = jest.fn();
+
+    const { getByLabelText } = render(
+      <AppContext.Provider
+        value={{ settings: mockSettings, logout: logoutMock }}
+      >
+        <Router history={history}>
+          <SettingsRoute />
+        </Router>
+      </AppContext.Provider>
+    );
 
     fireEvent.click(getByLabelText('Logout'));
 
-    expect(props.logout).toHaveBeenCalledTimes(1);
+    expect(logoutMock).toHaveBeenCalledTimes(1);
 
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
-    expect(props.history.goBack).toHaveBeenCalledTimes(1);
-  });
-
-  it('should call the componentWillReceiveProps method', function () {
-    const { rerender } = render(<SettingsRoute {...props} />);
-
-    expect(props.fetchNotifications).toHaveBeenCalledTimes(0);
-
-    const updatedSettings = {
-      ...props.settings,
-      participating: !props.settings.participating,
-    };
-
-    rerender(<SettingsRoute {...props} settings={updatedSettings} />);
-
-    expect(props.fetchNotifications).toHaveBeenCalledTimes(1);
+    expect(goBackMock).toHaveBeenCalledTimes(1);
   });
 
   it('should go back by pressing the icon', () => {
-    const { getByLabelText } = render(<SettingsRoute {...props} />);
+    const { getByLabelText } = render(
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <Router history={history}>
+          <SettingsRoute />
+        </Router>
+      </AppContext.Provider>
+    );
     fireEvent.click(getByLabelText('Go Back'));
-    expect(props.history.goBack).toHaveBeenCalledTimes(1);
+    expect(goBackMock).toHaveBeenCalledTimes(1);
   });
 
   it('should toggle the showOnlyParticipating checkbox', () => {
-    const { getByLabelText } = render(<SettingsRoute {...props} />);
+    const { getByLabelText } = render(
+      <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+        <MemoryRouter>
+          <SettingsRoute />
+        </MemoryRouter>
+      </AppContext.Provider>
+    );
 
     fireEvent.click(getByLabelText('Show only participating'), {
       target: { checked: true },
     });
 
-    expect(props.updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledTimes(1);
   });
 
   it('should toggle the playSound checkbox', () => {
-    const { getByLabelText } = render(<SettingsRoute {...props} />);
+    const { getByLabelText } = render(
+      <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+        <MemoryRouter>
+          <SettingsRoute />
+        </MemoryRouter>
+      </AppContext.Provider>
+    );
 
     fireEvent.click(getByLabelText('Play sound'), {
       target: { checked: true },
     });
 
-    expect(props.updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledTimes(1);
   });
 
   it('should toggle the showNotifications checkbox', () => {
-    const { getByLabelText } = render(<SettingsRoute {...props} />);
+    const { getByLabelText } = render(
+      <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+        <MemoryRouter>
+          <SettingsRoute />
+        </MemoryRouter>
+      </AppContext.Provider>
+    );
 
     fireEvent.click(getByLabelText('Show notifications'), {
       target: { checked: true },
     });
 
-    expect(props.updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledTimes(1);
   });
 
   it('should toggle the onClickMarkAsRead checkbox', () => {
-    const { getByLabelText } = render(<SettingsRoute {...props} />);
+    const { getByLabelText } = render(
+      <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+        <MemoryRouter>
+          <SettingsRoute />
+        </MemoryRouter>
+      </AppContext.Provider>
+    );
 
     fireEvent.click(getByLabelText('On Click, Mark as Read'), {
       target: { checked: true },
     });
 
-    expect(props.updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledTimes(1);
   });
 
   it('should toggle the openAtStartup checkbox', () => {
-    const { getByLabelText } = render(<SettingsRoute {...props} />);
+    const { getByLabelText } = render(
+      <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+        <MemoryRouter>
+          <SettingsRoute />
+        </MemoryRouter>
+      </AppContext.Provider>
+    );
 
     fireEvent.click(getByLabelText('Open at startup'), {
       target: { checked: true },
     });
 
-    expect(props.updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledTimes(1);
   });
 
   it('should go to the enterprise login route', () => {
     const { getByLabelText } = render(
-      <MemoryRouter>
-        <SettingsRoute {...props} />
-      </MemoryRouter>
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <Router history={history}>
+          <SettingsRoute />
+        </Router>
+      </AppContext.Provider>
     );
     fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
-    expect(props.history.replace).toHaveBeenCalledWith('/enterpriselogin');
+    expect(replaceMock).toHaveBeenCalledWith('/enterpriselogin');
   });
 
   it('should quit the app', () => {
     const { getByLabelText } = render(
-      <MemoryRouter>
-        <SettingsRoute {...props} />
-      </MemoryRouter>
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <MemoryRouter>
+          <SettingsRoute />
+        </MemoryRouter>
+      </AppContext.Provider>
     );
     fireEvent.click(getByLabelText('Quit Gitify'));
     expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');

@@ -1,33 +1,47 @@
-import * as React from 'react';
-import * as TestRenderer from 'react-test-renderer';
+import React from 'react';
+import TestRenderer from 'react-test-renderer';
 import { render, fireEvent } from '@testing-library/react';
 
 import { mockedGithubNotifications } from '../__mocks__/mockedData';
 import { RepositoryNotifications } from './Repository';
+import { NotificationsContext } from '../context/Notifications';
 
 const { shell } = require('electron');
 
-jest.mock('./notification');
+jest.mock('./Notification', () => ({
+  NotificationItem: () => <div>NotificationItem</div>,
+}));
 
-describe('components/repository.tsx', function () {
+describe('components/Repository.tsx', () => {
+  const markRepoNotifications = jest.fn();
+
   const props = {
     hostname: 'github.com',
     repoName: 'manosim/gitify',
     repoNotifications: mockedGithubNotifications,
-    markRepoNotifications: jest.fn(),
   };
 
   beforeEach(() => {
+    markRepoNotifications.mockReset();
+
     spyOn(shell, 'openExternal');
   });
 
-  it('should render itself & its children', function () {
-    const tree = TestRenderer.create(<RepositoryNotifications {...props} />);
+  it('should render itself & its children', () => {
+    const tree = TestRenderer.create(
+      <NotificationsContext.Provider value={{}}>
+        <RepositoryNotifications {...props} />
+      </NotificationsContext.Provider>
+    );
     expect(tree).toMatchSnapshot();
   });
 
-  it('should open the browser when clicking on the repo name', function () {
-    const { getByText } = render(<RepositoryNotifications {...props} />);
+  it('should open the browser when clicking on the repo name', () => {
+    const { getByText } = render(
+      <NotificationsContext.Provider value={{}}>
+        <RepositoryNotifications {...props} />
+      </NotificationsContext.Provider>
+    );
 
     fireEvent.click(getByText(props.repoName));
 
@@ -38,11 +52,15 @@ describe('components/repository.tsx', function () {
   });
 
   it('should mark a repo as read', function () {
-    const { getByRole } = render(<RepositoryNotifications {...props} />);
+    const { getByRole } = render(
+      <NotificationsContext.Provider value={{ markRepoNotifications }}>
+        <RepositoryNotifications {...props} />
+      </NotificationsContext.Provider>
+    );
 
     fireEvent.click(getByRole('button'));
 
-    expect(props.markRepoNotifications).toHaveBeenCalledWith(
+    expect(markRepoNotifications).toHaveBeenCalledWith(
       'manosim/notifications-test',
       'github.com'
     );
