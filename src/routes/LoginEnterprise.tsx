@@ -1,12 +1,13 @@
-// @ts-nocheck
 const ipcRenderer = require('electron').ipcRenderer;
 
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 import { Form, FormRenderProps } from 'react-final-form';
 import { ArrowLeftIcon } from '@primer/octicons-react';
+import { useHistory } from 'react-router-dom';
 
 import { AppContext } from '../context/App';
 import { FieldInput } from '../components/fields/FieldInput';
+import { AuthOptions } from '../types';
 
 interface IValues {
   hostname?: string;
@@ -49,21 +50,18 @@ export const validate = (values: IValues): IFormErrors => {
   return errors;
 };
 
-interface IProps {
-  history: any;
-  dispatch: any;
-  enterpriseAccountsCount: number;
-}
-
-export const LoginEnterpriseRoute: React.FC<IProps> = () => {
+export const LoginEnterpriseRoute: React.FC = () => {
   const {
     accounts: { enterpriseAccounts },
-    login,
+    loginEnterprise,
   } = useContext(AppContext);
+  const history = useHistory();
 
-  const enterpriseAccountsCount = useMemo(() => {
-    ipcRenderer.send('reopen-window');
-    props.history.goBack();
+  useEffect(() => {
+    if (enterpriseAccounts.length) {
+      ipcRenderer.send('reopen-window');
+      history.goBack();
+    }
   }, [enterpriseAccounts]);
 
   const renderForm = (formProps: FormRenderProps) => {
@@ -97,10 +95,12 @@ export const LoginEnterpriseRoute: React.FC<IProps> = () => {
     );
   };
 
-  const loginEnterprise = useCallback(async (data) => {
-    const thing = await authGitHub(data);
-    console.log('RESULT ENTERPRISE:', thing);
-    return thing;
+  const login = useCallback(async (data: IValues) => {
+    try {
+      await loginEnterprise(data as AuthOptions);
+    } catch (err) {
+      // Skip
+    }
   }, []);
 
   return (
@@ -109,7 +109,7 @@ export const LoginEnterpriseRoute: React.FC<IProps> = () => {
         <button
           className="focus:outline-none"
           aria-label="Go Back"
-          onClick={() => props.history.goBack()}
+          onClick={() => history.goBack()}
         >
           <ArrowLeftIcon size={20} className="hover:text-gray-400" />
         </button>
@@ -124,7 +124,7 @@ export const LoginEnterpriseRoute: React.FC<IProps> = () => {
             clientId: '',
             clientSecret: '',
           }}
-          onSubmit={loginEnterprise}
+          onSubmit={login}
           validate={validate}
         >
           {renderForm}

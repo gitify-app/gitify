@@ -35,9 +35,15 @@ export interface AccountNotifications {
   notifications: Notification[];
 }
 
-export interface AuthResponse {
+export interface AuthOptions {
   hostname: string;
-  code: string;
+  clientId: string;
+  clientSecret: string;
+}
+
+export interface AuthResponse {
+  authCode: string;
+  authOptions: AuthOptions;
 }
 export interface AuthTokenResponse {
   hostname: string;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`routes/enterprise-login.js renders correctly 1`] = `
+exports[`routes/LoginEnterprise.js renders correctly 1`] = `
 <div
   className="flex-1 bg-white dark:bg-gray-dark dark:text-white"
 >

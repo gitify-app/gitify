@@ -4,12 +4,13 @@ import { fireEvent, render } from '@testing-library/react';
 
 const { shell } = require('electron');
 
+import { AppContext } from '../context/App';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
 import { NotificationItem } from './notification';
+import { NotificationsContext } from '../context/Notifications';
+import { mockSettings } from '../__mocks__/mock-state';
 
-describe('components/notification.js', () => {
-  const notification = mockedSingleNotification;
-
+describe('components/Notification.js', () => {
   beforeEach(() => {
     spyOn(shell, 'openExternal');
   });
@@ -18,10 +19,7 @@ describe('components/notification.js', () => {
     (global as any).Date.now = jest.fn(() => new Date('2014'));
 
     const props = {
-      markNotification: jest.fn(),
-      unsubscribeNotification: jest.fn(),
-      markOnClick: false,
-      notification: notification,
+      notification: mockedSingleNotification,
       hostname: 'github.com',
     };
 
@@ -30,59 +28,88 @@ describe('components/notification.js', () => {
   });
 
   it('should open a notification in the browser', () => {
+    const markNotification = jest.fn();
+
     const props = {
-      markNotification: jest.fn(),
-      unsubscribeNotification: jest.fn(),
-      markOnClick: false,
-      notification: notification,
+      notification: mockedSingleNotification,
       hostname: 'github.com',
     };
 
-    const { getByRole } = render(<NotificationItem {...props} />);
+    const { getByRole } = render(
+      <AppContext.Provider
+        value={{ settings: { ...mockSettings, markOnClick: true } }}
+      >
+        <NotificationsContext.Provider value={{ markNotification }}>
+          <NotificationItem {...props} />
+        </NotificationsContext.Provider>
+      </AppContext.Provider>
+    );
+
     fireEvent.click(getByRole('main'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
   });
 
   it('should open a notification in browser & mark it as read', () => {
+    const markNotification = jest.fn();
+
     const props = {
-      markNotification: jest.fn(),
-      unsubscribeNotification: jest.fn(),
-      markOnClick: true,
-      notification: notification,
+      notification: mockedSingleNotification,
       hostname: 'github.com',
     };
 
-    const { getByRole } = render(<NotificationItem {...props} />);
+    const { getByRole } = render(
+      <AppContext.Provider
+        value={{ settings: { ...mockSettings, markOnClick: true } }}
+      >
+        <NotificationsContext.Provider value={{ markNotification }}>
+          <NotificationItem {...props} />
+        </NotificationsContext.Provider>
+      </AppContext.Provider>
+    );
+
     fireEvent.click(getByRole('main'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(props.markNotification).toHaveBeenCalledTimes(1);
+    expect(markNotification).toHaveBeenCalledTimes(1);
   });
 
   it('should mark a notification as read', () => {
+    const markNotification = jest.fn();
+
     const props = {
-      markNotification: jest.fn(),
-      unsubscribeNotification: jest.fn(),
-      markOnClick: false,
-      notification: notification,
+      notification: mockedSingleNotification,
       hostname: 'github.com',
     };
 
-    const { getByLabelText } = render(<NotificationItem {...props} />);
-    fireEvent.click(getByLabelText('Mark as Read'));
-    expect(props.markNotification).toHaveBeenCalledTimes(1);
+    const { getByTitle } = render(
+      <AppContext.Provider
+        value={{ settings: { ...mockSettings, markOnClick: false } }}
+      >
+        <NotificationsContext.Provider value={{ markNotification }}>
+          <NotificationItem {...props} />
+        </NotificationsContext.Provider>
+      </AppContext.Provider>
+    );
+
+    fireEvent.click(getByTitle('Mark as Read'));
+    expect(markNotification).toHaveBeenCalledTimes(1);
   });
 
   it('should unsubscribe from a notification thread', () => {
+    const unsubscribeNotification = jest.fn();
+
     const props = {
-      markNotification: jest.fn(),
-      unsubscribeNotification: jest.fn(),
-      markOnClick: false,
-      notification: notification,
+      notification: mockedSingleNotification,
       hostname: 'github.com',
     };
 
-    const { getByLabelText } = render(<NotificationItem {...props} />);
+    const { getByLabelText } = render(
+      <AppContext.Provider value={{}}>
+        <NotificationsContext.Provider value={{ unsubscribeNotification }}>
+          <NotificationItem {...props} />
+        </NotificationsContext.Provider>
+      </AppContext.Provider>
+    );
     fireEvent.click(getByLabelText('Unsubscribe'));
-    expect(props.unsubscribeNotification).toHaveBeenCalledTimes(1);
+    expect(unsubscribeNotification).toHaveBeenCalledTimes(1);
   });
 });

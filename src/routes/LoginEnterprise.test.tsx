@@ -1,75 +1,56 @@
-// @ts-nocheck
 import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
 import { fireEvent, render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import { Router } from 'react-router';
+import { MemoryRouter } from 'react-router-dom';
+import { createMemoryHistory } from 'history';
 
+const { ipcRenderer } = require('electron');
+
+import { AppContext } from '../context/App';
+import { AuthState } from '../types';
+import { LoginEnterpriseRoute, validate } from './LoginEnterprise';
 import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
 
-const { ipcRenderer, remote } = require('electron');
-const BrowserWindow = remote.BrowserWindow;
-const dialog = remote.dialog;
+describe('routes/LoginEnterprise.js', () => {
+  const history = createMemoryHistory();
+  const goBackMock = jest.spyOn(history, 'goBack');
 
-import { EnterpriseLogin, mapStateToProps, validate } from './enterprise-login';
-import { AppState } from '../../types/reducers';
-
-describe('routes/enterprise-login.js', () => {
-  const props = {
-    enterpriseAccountsCount: 0,
-    dispatch: jest.fn(),
-    handleSubmit: (cb) => cb,
-    history: {
-      goBack: jest.fn(),
-    },
+  const mockAccounts: AuthState = {
+    enterpriseAccounts: [],
   };
 
   beforeEach(function () {
-    // @ts-ignore
-    new BrowserWindow().loadURL.mockReset();
+    goBackMock.mockReset();
+
     spyOn(ipcRenderer, 'send');
-    props.dispatch.mockReset();
-    props.history.goBack = jest.fn();
-  });
-
-  it('should test the mapStateToProps method', () => {
-    const state = {
-      auth: {
-        enterpriseAccounts: mockedEnterpriseAccounts,
-      },
-    } as AppState;
-
-    const mappedProps = mapStateToProps(state);
-
-    expect(mappedProps.enterpriseAccountsCount).toBe(
-      mockedEnterpriseAccounts.length
-    );
   });
 
   it('renders correctly', () => {
     const tree = TestRenderer.create(
-      <Provider store={createStore(() => {})}>
+      <AppContext.Provider value={{ accounts: mockAccounts }}>
         <MemoryRouter>
-          <EnterpriseLogin {...props} />
+          <LoginEnterpriseRoute />
         </MemoryRouter>
-      </Provider>
+      </AppContext.Provider>
     );
 
     expect(tree).toMatchSnapshot();
   });
 
   it('let us go back', () => {
-    props.history.goBack = jest.fn();
+    const goBackMock = jest.spyOn(history, 'goBack');
+
     const { getByLabelText } = render(
-      <Provider store={createStore(() => {})}>
-        <MemoryRouter>
-          <EnterpriseLogin {...props} />
-        </MemoryRouter>
-      </Provider>
+      <AppContext.Provider value={{ accounts: mockAccounts }}>
+        <Router history={history}>
+          <LoginEnterpriseRoute />
+        </Router>
+      </AppContext.Provider>
     );
+
     fireEvent.click(getByLabelText('Go Back'));
-    expect(props.history.goBack).toHaveBeenCalledTimes(1);
+    expect(goBackMock).toHaveBeenCalledTimes(1);
   });
 
   it('should validate the form values', () => {
@@ -99,41 +80,40 @@ describe('routes/enterprise-login.js', () => {
   });
 
   it('should receive a logged-in enterprise account', () => {
-    const caseProps = {
-      ...props,
-    };
-
     const { rerender } = render(
-      <Provider store={createStore(() => {})}>
-        <MemoryRouter>
-          <EnterpriseLogin {...caseProps} />
-        </MemoryRouter>
-      </Provider>
+      <AppContext.Provider value={{ accounts: mockAccounts }}>
+        <Router history={history}>
+          <LoginEnterpriseRoute />
+        </Router>
+      </AppContext.Provider>
     );
 
     rerender(
-      <Provider store={createStore(() => {})}>
-        <MemoryRouter>
-          <EnterpriseLogin
-            {...caseProps}
-            enterpriseAccountsCount={props.enterpriseAccountsCount + 1}
-          />
-        </MemoryRouter>
-      </Provider>
+      <AppContext.Provider
+        value={{
+          accounts: {
+            enterpriseAccounts: mockedEnterpriseAccounts,
+          },
+        }}
+      >
+        <Router history={history}>
+          <LoginEnterpriseRoute />
+        </Router>
+      </AppContext.Provider>
     );
 
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
-    expect(props.history.goBack).toHaveBeenCalledTimes(1);
+    expect(goBackMock).toHaveBeenCalledTimes(1);
   });
 
   it('should render the form with errors', () => {
     const { getByLabelText, getByTitle, getByText } = render(
-      <Provider store={createStore(() => {})}>
+      <AppContext.Provider value={{ accounts: mockAccounts }}>
         <MemoryRouter>
-          <EnterpriseLogin {...props} />
+          <LoginEnterpriseRoute />
         </MemoryRouter>
-      </Provider>
+      </AppContext.Provider>
     );
 
     fireEvent.change(getByLabelText('Hostname'), {
@@ -151,46 +131,5 @@ describe('routes/enterprise-login.js', () => {
     expect(getByText('Invalid hostname.')).toBeTruthy();
     expect(getByText('Invalid client id.')).toBeTruthy();
     expect(getByText('Invalid client secret.')).toBeTruthy();
-  });
-
-  it('should open the login window and get a code successfully (will-redirect)', () => {
-    const code = '123123123';
-    const hostname = 'github.gitify.io';
-    const clientId = '12312312312312312312';
-
-    spyOn(new BrowserWindow().webContents, 'on').and.callFake(
-      (event, callback) => {
-        if (event === 'will-redirect') {
-          const event = new Event('will-redirect');
-          callback(event, `https://${hostname}/?code=${code}`);
-        }
-      }
-    );
-
-    const expectedUrl = `https://${hostname}/login/oauth/authorize?client_id=${clientId}&scope=user:email,notifications`;
-
-    const { getByLabelText, getByTitle } = render(
-      <Provider store={createStore(() => {})}>
-        <MemoryRouter>
-          <EnterpriseLogin {...props} />
-        </MemoryRouter>
-      </Provider>
-    );
-
-    fireEvent.change(getByLabelText('Hostname'), {
-      target: { value: hostname },
-    });
-    fireEvent.change(getByLabelText('Client ID'), {
-      target: { value: clientId },
-    });
-    fireEvent.change(getByLabelText('Client Secret'), {
-      target: { value: 'ABC123ABCDABC123ABCDABC123ABCDABC123ABCD' },
-    });
-
-    fireEvent.submit(getByTitle('Login Button'));
-
-    expect(new BrowserWindow().loadURL).toHaveBeenCalledTimes(1);
-    expect(new BrowserWindow().loadURL).toHaveBeenCalledWith(expectedUrl);
-    expect(props.dispatch).toHaveBeenCalledTimes(1);
   });
 });

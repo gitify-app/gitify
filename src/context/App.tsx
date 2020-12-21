@@ -6,7 +6,7 @@ import React, {
   useMemo,
 } from 'react';
 
-import { Appearance, AuthState, SettingsState } from '../types';
+import { Appearance, AuthOptions, AuthState, SettingsState } from '../types';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setAppearance } from '../utils/appearance';
 import { setAutoLaunch } from '../utils/comms';
@@ -30,6 +30,7 @@ interface AppContextState {
   accounts: AuthState;
   isLoggedIn: boolean;
   login: () => void;
+  loginEnterprise: (data: AuthOptions) => void;
   logout: () => void;
 
   settings: SettingsState;
@@ -69,11 +70,21 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }, [accounts]);
 
   const login = useCallback(async () => {
-    const authCode = await authGitHub();
-    const { token } = await getToken(authCode.code);
+    const { authCode } = await authGitHub();
+    const { token } = await getToken(authCode);
     setAccounts({ ...accounts, token });
     saveState({ ...accounts, token }, settings);
   }, [accounts]);
+
+  const loginEnterprise = useCallback(
+    async (data: AuthOptions) => {
+      const { authOptions, authCode } = await authGitHub(data);
+      const { token } = await getToken(authCode, authOptions);
+      setAccounts({ ...accounts, token });
+      saveState({ ...accounts, token }, settings);
+    },
+    [accounts]
+  );
 
   const logout = useCallback(() => {
     setAccounts(defaultAccounts);
@@ -98,6 +109,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         accounts,
         isLoggedIn,
         login,
+        loginEnterprise,
         logout,
 
         settings,

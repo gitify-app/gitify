@@ -5,10 +5,10 @@ import { apiRequest } from '../utils/api-requests';
 import { AuthResponse, AuthTokenResponse } from '../types';
 import { Constants } from '../utils/constants';
 
-export const useGitHubAuth = (authOptions = Constants.DEFAULT_AUTH_OPTIONS) => {
-  const { hostname } = authOptions;
-
-  const authGitHub = (): Promise<AuthResponse> => {
+export const useGitHubAuth = () => {
+  const authGitHub = (
+    authOptions = Constants.DEFAULT_AUTH_OPTIONS
+  ): Promise<AuthResponse> => {
     return new Promise((resolve, reject) => {
       // Build the OAuth consent page URL
       const authWindow = new BrowserWindow({
@@ -17,7 +17,7 @@ export const useGitHubAuth = (authOptions = Constants.DEFAULT_AUTH_OPTIONS) => {
         show: true,
       });
 
-      const githubUrl = `https://${hostname}/login/oauth/authorize`;
+      const githubUrl = `https://${authOptions.hostname}/login/oauth/authorize`;
       const authUrl = `${githubUrl}?client_id=${authOptions.clientId}&scope=${Constants.AUTH_SCOPE}`;
 
       const session = authWindow.webContents.session;
@@ -27,15 +27,15 @@ export const useGitHubAuth = (authOptions = Constants.DEFAULT_AUTH_OPTIONS) => {
 
       const handleCallback = (url: string) => {
         const raw_code = /code=([^&]*)/.exec(url) || null;
-        const code = raw_code && raw_code.length > 1 ? raw_code[1] : null;
+        const authCode = raw_code && raw_code.length > 1 ? raw_code[1] : null;
         const error = /\?error=(.+)$/.exec(url);
-        if (code || error) {
+        if (authCode || error) {
           // Close the browser if code found or error
           authWindow.destroy();
         }
         // If there is a code, proceed to get token from github
-        if (code) {
-          resolve({ hostname, code });
+        if (authCode) {
+          resolve({ authCode, authOptions });
         } else if (error) {
           reject(
             "Oops! Something went wrong and we couldn't " +
@@ -52,9 +52,11 @@ export const useGitHubAuth = (authOptions = Constants.DEFAULT_AUTH_OPTIONS) => {
       authWindow.webContents.on(
         'did-fail-load',
         (event, errorCode, errorDescription, validatedURL) => {
-          if (validatedURL.includes(hostname)) {
+          if (validatedURL.includes(authOptions.hostname)) {
             authWindow.destroy();
-            reject(`Invalid Hostname. Could not load https://${hostname}/.`);
+            reject(
+              `Invalid Hostname. Could not load https://${authOptions.hostname}/.`
+            );
           }
         }
       );
@@ -67,19 +69,19 @@ export const useGitHubAuth = (authOptions = Constants.DEFAULT_AUTH_OPTIONS) => {
   };
 
   const getToken = async (
-    code: string,
+    authCode: string,
     authOptions = Constants.DEFAULT_AUTH_OPTIONS
   ): Promise<AuthTokenResponse> => {
     const url = `https://${authOptions.hostname}/login/oauth/access_token`;
     const data = {
       client_id: authOptions.clientId,
       client_secret: authOptions.clientSecret,
-      code: code,
+      code: authCode,
     };
 
     const response = await apiRequest(url, 'POST', data);
     return {
-      hostname,
+      hostname: authOptions.hostname,
       token: response.data.access_token,
     };
   };

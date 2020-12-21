@@ -1,6 +1,5 @@
 import React, { useCallback, useContext, useMemo } from 'react';
 import { shell } from 'electron';
-import { useLocation } from 'react-router-dom';
 import * as Octicons from '@primer/octicons-react';
 import { useHistory } from 'react-router-dom';
 
@@ -11,7 +10,6 @@ import { NotificationsContext } from '../context/Notifications';
 
 export const Sidebar: React.FC = () => {
   const history = useHistory();
-  const location = useLocation();
 
   const { isLoggedIn } = useContext(AppContext);
   const { notifications, fetchNotifications } = useContext(
@@ -21,13 +19,6 @@ export const Sidebar: React.FC = () => {
   const onOpenBrowser = useCallback(() => {
     shell.openExternal(`https://github.com/${Constants.REPO_SLUG}`);
   }, []);
-
-  const goToSettings = useCallback(() => {
-    if (location.pathname === '/settings') {
-      return history.goBack();
-    }
-    return history.push('/settings');
-  }, [location]);
 
   const notificationsCount = useMemo(() => {
     return notifications.reduce(
@@ -68,7 +59,7 @@ export const Sidebar: React.FC = () => {
 
             <button
               className={footerButtonClasses}
-              onClick={goToSettings}
+              onClick={() => history.push('/settings')}
               aria-label="Settings"
             >
               <Octicons.GearIcon size={16} />

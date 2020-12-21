@@ -1,6 +1,6 @@
 const { shell } = require('electron');
 
-import React, { useContext } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { CheckIcon, MuteIcon } from '@primer/octicons-react';
 
@@ -24,21 +24,21 @@ export const NotificationItem: React.FC<IProps> = ({
     NotificationsContext
   );
 
-  const pressTitle = () => {
+  const pressTitle = useCallback(() => {
     openBrowser();
 
     if (settings.markOnClick) {
       markNotification(notification.id, hostname);
     }
-  };
+  }, [settings]);
 
-  const openBrowser = () => {
+  const openBrowser = useCallback(() => {
     // Some Notification types from GitHub are missing urls in their subjects.
     if (notification.subject.url) {
       const url = generateGitHubWebUrl(notification.subject.url);
       shell.openExternal(url);
     }
-  };
+  }, [notification]);
 
   const unsubscribe = (event: React.MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.
