@@ -10,7 +10,6 @@ const { shell, ipcRenderer } = require('electron');
 import { Sidebar } from './Sidebar';
 import { mockSettings } from '../__mocks__/mock-state';
 import { AppContext } from '../context/App';
-import { NotificationsContext } from '../context/Notifications';
 import { mockedAccountNotifications } from '../__mocks__/mockedData';
 
 describe('components/Sidebar.tsx', () => {
@@ -27,14 +26,15 @@ describe('components/Sidebar.tsx', () => {
 
   it('should render itself & its children (logged in)', () => {
     const tree = TestRenderer.create(
-      <AppContext.Provider value={{ settings: { ...mockSettings } }}>
-        <NotificationsContext.Provider
-          value={{ notifications: mockedAccountNotifications }}
-        >
-          <MemoryRouter>
-            <Sidebar />
-          </MemoryRouter>
-        </NotificationsContext.Provider>
+      <AppContext.Provider
+        value={{
+          settings: { ...mockSettings },
+          notifications: mockedAccountNotifications,
+        }}
+      >
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
       </AppContext.Provider>
     );
     expect(tree).toMatchSnapshot();
@@ -42,14 +42,12 @@ describe('components/Sidebar.tsx', () => {
 
   it('should render itself & its children (logged out)', () => {
     const tree = TestRenderer.create(
-      <AppContext.Provider value={{ isLoggedIn: false }}>
-        <NotificationsContext.Provider
-          value={{ notifications: mockedAccountNotifications }}
-        >
-          <MemoryRouter>
-            <Sidebar />
-          </MemoryRouter>
-        </NotificationsContext.Provider>
+      <AppContext.Provider
+        value={{ isLoggedIn: false, notifications: mockedAccountNotifications }}
+      >
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
       </AppContext.Provider>
     );
     expect(tree).toMatchSnapshot();
@@ -57,14 +55,12 @@ describe('components/Sidebar.tsx', () => {
 
   it('should refresh the notifications', () => {
     const { getByLabelText } = render(
-      <AppContext.Provider value={{ isLoggedIn: true }}>
-        <NotificationsContext.Provider
-          value={{ notifications: [], fetchNotifications }}
-        >
-          <MemoryRouter>
-            <Sidebar />
-          </MemoryRouter>
-        </NotificationsContext.Provider>
+      <AppContext.Provider
+        value={{ isLoggedIn: true, notifications: [], fetchNotifications }}
+      >
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
       </AppContext.Provider>
     );
     fetchNotifications.mockReset();
@@ -76,12 +72,10 @@ describe('components/Sidebar.tsx', () => {
     const pushMock = jest.spyOn(history, 'push');
 
     const { getByLabelText } = render(
-      <AppContext.Provider value={{ isLoggedIn: true }}>
-        <NotificationsContext.Provider value={{ notifications: [] }}>
-          <Router history={history}>
-            <Sidebar />
-          </Router>
-        </NotificationsContext.Provider>
+      <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
+        <Router history={history}>
+          <Sidebar />
+        </Router>
       </AppContext.Provider>
     );
     fireEvent.click(getByLabelText('Settings'));
@@ -90,12 +84,10 @@ describe('components/Sidebar.tsx', () => {
 
   it('open the gitify repo in browser', () => {
     const { getByLabelText } = render(
-      <AppContext.Provider value={{ isLoggedIn: true }}>
-        <NotificationsContext.Provider value={{ notifications: [] }}>
-          <MemoryRouter>
-            <Sidebar />
-          </MemoryRouter>
-        </NotificationsContext.Provider>
+      <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
       </AppContext.Provider>
     );
     fireEvent.click(getByLabelText('View project on GitHub'));

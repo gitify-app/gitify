@@ -1,9 +1,10 @@
 import { useContext, useEffect } from 'react';
 import NProgress from 'nprogress';
-import { NotificationsContext } from '../context/Notifications';
+
+import { AppContext } from '../context/App';
 
 export const Loading = () => {
-  const { isFetching } = useContext(NotificationsContext);
+  const { isFetching } = useContext(AppContext);
 
   useEffect(() => {
     NProgress.configure({

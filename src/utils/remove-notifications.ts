@@ -1,6 +1,7 @@
 import updateWith from 'lodash/updateWith';
 
 import { AccountNotifications } from '../types';
+import { Notification } from '../typesGithub';
 
 export const removeNotifications = (
   repoSlug: string,
@@ -14,7 +15,7 @@ export const removeNotifications = (
   return updateWith(
     [...notifications],
     `[${accountIndex}][notifications]`,
-    (accNotifications) => {
+    (accNotifications: Notification[] = []) => {
       return accNotifications.filter(
         (notification) => notification.repository.full_name !== repoSlug
       );

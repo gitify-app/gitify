@@ -2,8 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import NProgress from 'nprogress';
 
+import { AppContext } from '../context/App';
 import { Loading } from './Loading';
-import { NotificationsContext } from '../context/Notifications';
 
 jest.mock('nprogress', () => {
   return {
@@ -24,9 +24,9 @@ describe('components/Loading.js', () => {
 
   it('should check that NProgress is getting called in when isFetching changes (loading)', () => {
     const { container } = render(
-      <NotificationsContext.Provider value={{ isFetching: true }}>
+      <AppContext.Provider value={{ isFetching: true }}>
         <Loading />
-      </NotificationsContext.Provider>
+      </AppContext.Provider>
     );
 
     expect(container.innerHTML).toBe('');
@@ -36,9 +36,9 @@ describe('components/Loading.js', () => {
 
   it('should check that NProgress is getting called in when isFetching changes (not loading)', () => {
     const { container } = render(
-      <NotificationsContext.Provider value={{ isFetching: false }}>
+      <AppContext.Provider value={{ isFetching: false }}>
         <Loading />
-      </NotificationsContext.Provider>
+      </AppContext.Provider>
     );
 
     expect(container.innerHTML).toBe('');
@@ -48,9 +48,9 @@ describe('components/Loading.js', () => {
 
   it('should remove NProgress on unmount', () => {
     const { unmount } = render(
-      <NotificationsContext.Provider value={{ isFetching: true }}>
+      <AppContext.Provider value={{ isFetching: true }}>
         <Loading />
-      </NotificationsContext.Provider>
+      </AppContext.Provider>
     );
     expect(NProgress.remove).toHaveBeenCalledTimes(0);
     unmount();

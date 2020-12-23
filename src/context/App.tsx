@@ -6,11 +6,19 @@ import React, {
   useMemo,
 } from 'react';
 
-import { Appearance, AuthOptions, AuthState, SettingsState } from '../types';
+import {
+  AccountNotifications,
+  Appearance,
+  AuthOptions,
+  AuthState,
+  SettingsState,
+} from '../types';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setAppearance } from '../utils/appearance';
 import { setAutoLaunch } from '../utils/comms';
 import { useGitHubAuth } from '../hooks/useGitHubAuth';
+import { useInterval } from '../hooks/useInterval';
+import { useNotifications } from '../hooks/useNotifications';
 
 const defaultAccounts: AuthState = {
   token: null,
@@ -33,6 +41,14 @@ interface AppContextState {
   loginEnterprise: (data: AuthOptions) => void;
   logout: () => void;
 
+  notifications: AccountNotifications[];
+  isFetching: boolean;
+  requestFailed: boolean;
+  fetchNotifications: () => Promise<void>;
+  markNotification: (id: string, hostname: string) => Promise<void>;
+  unsubscribeNotification: (id: string, hostname: string) => Promise<void>;
+  markRepoNotifications: (id: string, hostname: string) => Promise<void>;
+
   settings: SettingsState;
   updateSetting: (name: keyof SettingsState, value: any) => void;
 }
@@ -43,6 +59,15 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [accounts, setAccounts] = useState<AuthState>(defaultAccounts);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
   const { authGitHub, getToken } = useGitHubAuth();
+  const {
+    fetchNotifications,
+    notifications,
+    requestFailed,
+    isFetching,
+    markNotification,
+    unsubscribeNotification,
+    markRepoNotifications,
+  } = useNotifications();
 
   useEffect(() => {
     restoreSettings();
@@ -51,6 +76,18 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     setAppearance(settings.appearance as Appearance);
   }, [settings.appearance]);
+
+  useEffect(() => {
+    fetchNotifications(accounts, settings);
+  }, [settings.participating]);
+
+  useEffect(() => {
+    fetchNotifications(accounts, settings);
+  }, [accounts.token, accounts.enterpriseAccounts.length]);
+
+  useInterval(() => {
+    fetchNotifications(accounts, settings);
+  }, 60000);
 
   const updateSetting = useCallback(
     (name: keyof SettingsState, value: boolean | Appearance) => {
@@ -103,6 +140,29 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, []);
 
+  const fetchNotificationsWithAccounts = useCallback(
+    async () => fetchNotifications(accounts, settings),
+    [accounts, settings]
+  );
+
+  const markNotificationWithAccounts = useCallback(
+    async (id: string, hostname: string) =>
+      markNotification(accounts, id, hostname),
+    [accounts]
+  );
+
+  const unsubscribeNotificationWithAccounts = useCallback(
+    async (id: string, hostname: string) =>
+      unsubscribeNotification(accounts, id, hostname),
+    [accounts]
+  );
+
+  const markRepoNotificationsWithAccounts = useCallback(
+    async (repoSlug: string, hostname: string) =>
+      markRepoNotifications(accounts, repoSlug, hostname),
+    [accounts]
+  );
+
   return (
     <AppContext.Provider
       value={{
@@ -111,6 +171,14 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         login,
         loginEnterprise,
         logout,
+
+        notifications,
+        isFetching,
+        requestFailed,
+        fetchNotifications: fetchNotificationsWithAccounts,
+        markNotification: markNotificationWithAccounts,
+        unsubscribeNotification: unsubscribeNotificationWithAccounts,
+        markRepoNotifications: markRepoNotificationsWithAccounts,
 
         settings,
         updateSetting,

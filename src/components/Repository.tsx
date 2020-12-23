@@ -4,9 +4,9 @@ import React, { useCallback, useContext } from 'react';
 import { CheckIcon } from '@primer/octicons-react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
+import { AppContext } from '../context/App';
 import { Notification } from '../typesGithub';
 import { NotificationItem } from './Notification';
-import { NotificationsContext } from '../context/Notifications';
 
 interface IProps {
   hostname: string;
@@ -19,7 +19,7 @@ export const RepositoryNotifications: React.FC<IProps> = ({
   repoNotifications,
   hostname,
 }) => {
-  const { markRepoNotifications } = useContext(NotificationsContext);
+  const { markRepoNotifications } = useContext(AppContext);
 
   const openBrowser = useCallback(() => {
     const url = repoNotifications[0].repository.html_url;

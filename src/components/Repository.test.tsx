@@ -2,9 +2,9 @@ import React from 'react';
 import TestRenderer from 'react-test-renderer';
 import { render, fireEvent } from '@testing-library/react';
 
+import { AppContext } from '../context/App';
 import { mockedGithubNotifications } from '../__mocks__/mockedData';
 import { RepositoryNotifications } from './Repository';
-import { NotificationsContext } from '../context/Notifications';
 
 const { shell } = require('electron');
 
@@ -29,18 +29,18 @@ describe('components/Repository.tsx', () => {
 
   it('should render itself & its children', () => {
     const tree = TestRenderer.create(
-      <NotificationsContext.Provider value={{}}>
+      <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
-      </NotificationsContext.Provider>
+      </AppContext.Provider>
     );
     expect(tree).toMatchSnapshot();
   });
 
   it('should open the browser when clicking on the repo name', () => {
     const { getByText } = render(
-      <NotificationsContext.Provider value={{}}>
+      <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
-      </NotificationsContext.Provider>
+      </AppContext.Provider>
     );
 
     fireEvent.click(getByText(props.repoName));
@@ -53,9 +53,9 @@ describe('components/Repository.tsx', () => {
 
   it('should mark a repo as read', function () {
     const { getByRole } = render(
-      <NotificationsContext.Provider value={{ markRepoNotifications }}>
+      <AppContext.Provider value={{ markRepoNotifications }}>
         <RepositoryNotifications {...props} />
-      </NotificationsContext.Provider>
+      </AppContext.Provider>
     );
 
     fireEvent.click(getByRole('button'));

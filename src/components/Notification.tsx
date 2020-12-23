@@ -8,7 +8,6 @@ import { formatReason, getNotificationTypeIcon } from '../utils/github-api';
 import { generateGitHubWebUrl } from '../utils/helpers';
 import { Notification } from '../typesGithub';
 import { AppContext } from '../context/App';
-import { NotificationsContext } from '../context/Notifications';
 
 interface IProps {
   hostname: string;
@@ -20,9 +19,7 @@ export const NotificationItem: React.FC<IProps> = ({
   hostname,
 }) => {
   const { settings } = useContext(AppContext);
-  const { markNotification, unsubscribeNotification } = useContext(
-    NotificationsContext
-  );
+  const { markNotification, unsubscribeNotification } = useContext(AppContext);
 
   const pressTitle = useCallback(() => {
     openBrowser();

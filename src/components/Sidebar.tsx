@@ -6,15 +6,12 @@ import { useHistory } from 'react-router-dom';
 import { AppContext } from '../context/App';
 import { Constants } from '../utils/constants';
 import { Logo } from '../components/Logo';
-import { NotificationsContext } from '../context/Notifications';
 
 export const Sidebar: React.FC = () => {
   const history = useHistory();
 
   const { isLoggedIn } = useContext(AppContext);
-  const { notifications, fetchNotifications } = useContext(
-    NotificationsContext
-  );
+  const { notifications, fetchNotifications } = useContext(AppContext);
 
   const onOpenBrowser = useCallback(() => {
     shell.openExternal(`https://github.com/${Constants.REPO_SLUG}`);

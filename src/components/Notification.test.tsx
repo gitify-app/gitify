@@ -7,7 +7,6 @@ const { shell } = require('electron');
 import { AppContext } from '../context/App';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
 import { NotificationItem } from './Notification';
-import { NotificationsContext } from '../context/Notifications';
 import { mockSettings } from '../__mocks__/mock-state';
 
 describe('components/Notification.js', () => {
@@ -37,11 +36,12 @@ describe('components/Notification.js', () => {
 
     const { getByRole } = render(
       <AppContext.Provider
-        value={{ settings: { ...mockSettings, markOnClick: true } }}
+        value={{
+          settings: { ...mockSettings, markOnClick: true },
+          markNotification,
+        }}
       >
-        <NotificationsContext.Provider value={{ markNotification }}>
-          <NotificationItem {...props} />
-        </NotificationsContext.Provider>
+        <NotificationItem {...props} />
       </AppContext.Provider>
     );
 
@@ -59,11 +59,12 @@ describe('components/Notification.js', () => {
 
     const { getByRole } = render(
       <AppContext.Provider
-        value={{ settings: { ...mockSettings, markOnClick: true } }}
+        value={{
+          settings: { ...mockSettings, markOnClick: true },
+          markNotification,
+        }}
       >
-        <NotificationsContext.Provider value={{ markNotification }}>
-          <NotificationItem {...props} />
-        </NotificationsContext.Provider>
+        <NotificationItem {...props} />
       </AppContext.Provider>
     );
 
@@ -84,9 +85,9 @@ describe('components/Notification.js', () => {
       <AppContext.Provider
         value={{ settings: { ...mockSettings, markOnClick: false } }}
       >
-        <NotificationsContext.Provider value={{ markNotification }}>
+        <AppContext.Provider value={{ markNotification }}>
           <NotificationItem {...props} />
-        </NotificationsContext.Provider>
+        </AppContext.Provider>
       </AppContext.Provider>
     );
 
@@ -104,9 +105,9 @@ describe('components/Notification.js', () => {
 
     const { getByLabelText } = render(
       <AppContext.Provider value={{}}>
-        <NotificationsContext.Provider value={{ unsubscribeNotification }}>
+        <AppContext.Provider value={{ unsubscribeNotification }}>
           <NotificationItem {...props} />
-        </NotificationsContext.Provider>
+        </AppContext.Provider>
       </AppContext.Provider>
     );
     fireEvent.click(getByLabelText('Unsubscribe'));
