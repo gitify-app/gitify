@@ -15,7 +15,7 @@ export const removeNotification = (
   return updateWith(
     [...notifications],
     `[${accountIndex}][notifications]`,
-    (accNotifications: Notification[] = []) => {
+    (accNotifications: Notification[]) => {
       return accNotifications.filter((notification) => notification.id !== id);
     }
   );

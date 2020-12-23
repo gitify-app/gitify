@@ -142,25 +142,25 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchNotificationsWithAccounts = useCallback(
     async () => fetchNotifications(accounts, settings),
-    [accounts, settings]
+    [accounts, settings, notifications]
   );
 
   const markNotificationWithAccounts = useCallback(
     async (id: string, hostname: string) =>
       markNotification(accounts, id, hostname),
-    [accounts]
+    [accounts, notifications]
   );
 
   const unsubscribeNotificationWithAccounts = useCallback(
     async (id: string, hostname: string) =>
       unsubscribeNotification(accounts, id, hostname),
-    [accounts]
+    [accounts, notifications]
   );
 
   const markRepoNotificationsWithAccounts = useCallback(
     async (repoSlug: string, hostname: string) =>
       markRepoNotifications(accounts, repoSlug, hostname),
-    [accounts]
+    [accounts, notifications]
   );
 
   return (
