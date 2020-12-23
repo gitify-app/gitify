@@ -30,6 +30,6 @@ jobs:
         run: yarn tsc --noEmit
 
       - name: Run Jest
-        run: yarn test --coverage --runInBand
+        run: yarn test --coverage --runInBand --verbose
 
       - uses: codecov/codecov-action@v1
