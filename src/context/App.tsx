@@ -13,10 +13,10 @@ import {
   AuthState,
   SettingsState,
 } from '../types';
+import { authGitHub, getToken } from '../utils/auth';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setAppearance } from '../utils/appearance';
 import { setAutoLaunch } from '../utils/comms';
-import { useGitHubAuth } from '../hooks/useGitHubAuth';
 import { useInterval } from '../hooks/useInterval';
 import { useNotifications } from '../hooks/useNotifications';
 
@@ -58,7 +58,6 @@ export const AppContext = createContext<Partial<AppContextState>>({});
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [accounts, setAccounts] = useState<AuthState>(defaultAccounts);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
-  const { authGitHub, getToken } = useGitHubAuth();
   const {
     fetchNotifications,
     notifications,
