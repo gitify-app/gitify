@@ -6,10 +6,18 @@
     "outDir": "./build/",
     "sourceMap": true,
     "noImplicitAny": false,
+    "noUnusedLocals": true,
     "jsx": "react",
     "allowJs": true,
-    "typeRoots": ["./src/types", "node_modules/@types"]
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   },
   "exclude": ["node_modules"],
-  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx", "first-run.js", "main.js"]
+  "include": [
+    "src/**/*.js",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "first-run.js",
+    "main.js"
+  ]
 }

@@ -1,6 +1,6 @@
 name: Run Tests
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   run-unit-tests:
@@ -26,7 +26,10 @@ jobs:
       - name: Run Prettier (Check)
         run: yarn prettier:check
 
+      - name: Run Typechecking
+        run: yarn tsc --noEmit
+
       - name: Run Jest
-        run: yarn test --coverage --runInBand
+        run: yarn test --coverage --runInBand --verbose
 
       - uses: codecov/codecov-action@v1

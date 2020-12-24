@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/Notification.js should render itself & its children 1`] = `
+<div
+  className="flex space-x-2 p-2 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker"
+>
+  <div
+    className="flex justify-center items-center w-8"
+  >
+    <svg
+      aria-hidden="false"
+      aria-label="Issue"
+      className="octicon"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": "<path fill-rule=\\"evenodd\\" d=\\"M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM0 8a8 8 0 1116 0A8 8 0 010 8zm9 3a1 1 0 11-2 0 1 1 0 012 0zm-.25-6.25a.75.75 0 00-1.5 0v3.5a.75.75 0 001.5 0v-3.5z\\"></path>",
+        }
+      }
+      fill="currentColor"
+      height={18}
+      role="img"
+      style={
+        Object {
+          "display": "inline-block",
+          "userSelect": "none",
+          "verticalAlign": "text-bottom",
+        }
+      }
+      viewBox="0 0 16 16"
+      width={18}
+    />
+  </div>
+  <div
+    className="flex-1 overflow-hidden"
+    onClick={[Function]}
+    role="main"
+  >
+    <div
+      className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden"
+    >
+      I am a robot and this is a test!
+    </div>
+    <div
+      className="text-xs text-capitalize"
+    >
+      <span
+        title="You're watching the repository."
+      >
+        Subscribed
+      </span>
+       - Updated
+       
+      in over 3 years
+      <button
+        className="border-0 bg-none float-right"
+        onClick={[Function]}
+        title="Unsubscribe"
+      >
+        <svg
+          aria-hidden="false"
+          aria-label="Unsubscribe"
+          className="hover:text-red-500"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": "<path fill-rule=\\"evenodd\\" d=\\"M8 2.75a.75.75 0 00-1.238-.57L3.472 5H1.75A1.75 1.75 0 000 6.75v2.5C0 10.216.784 11 1.75 11h1.723l3.289 2.82A.75.75 0 008 13.25V2.75zM4.238 6.32L6.5 4.38v7.24L4.238 9.68a.75.75 0 00-.488-.18h-2a.25.25 0 01-.25-.25v-2.5a.25.25 0 01.25-.25h2a.75.75 0 00.488-.18zm7.042-1.1a.75.75 0 10-1.06 1.06L11.94 8l-1.72 1.72a.75.75 0 101.06 1.06L13 9.06l1.72 1.72a.75.75 0 101.06-1.06L14.06 8l1.72-1.72a.75.75 0 00-1.06-1.06L13 6.94l-1.72-1.72z\\"></path>",
+            }
+          }
+          fill="currentColor"
+          height={13}
+          role="img"
+          style={
+            Object {
+              "display": "inline-block",
+              "userSelect": "none",
+              "verticalAlign": "text-bottom",
+            }
+          }
+          viewBox="0 0 16 16"
+          width={13}
+        />
+      </button>
+    </div>
+  </div>
+  <div
+    className="flex justify-center items-center w-8"
+  >
+    <button
+      className="focus:outline-none"
+      onClick={[Function]}
+      title="Mark as Read"
+    >
+      <svg
+        aria-hidden="false"
+        aria-label="Mark as Read"
+        className="hover:text-green-500"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "<path fill-rule=\\"evenodd\\" d=\\"M13.78 4.22a.75.75 0 010 1.06l-7.25 7.25a.75.75 0 01-1.06 0L2.22 9.28a.75.75 0 011.06-1.06L6 10.94l6.72-6.72a.75.75 0 011.06 0z\\"></path>",
+          }
+        }
+        fill="currentColor"
+        height={20}
+        role="img"
+        style={
+          Object {
+            "display": "inline-block",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 16 16"
+        width={20}
+      />
+    </button>
+  </div>
+</div>
+`;
