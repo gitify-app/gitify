@@ -1,6 +1,6 @@
 name: Build App
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   build-macos:
