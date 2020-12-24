@@ -234,37 +234,4 @@ describe('context/App.tsx', () => {
       }
     );
   });
-
-  it('should check isLoggedIn', async () => {
-    const TestComponent = () => {
-      const { updateSetting } = useContext(AppContext);
-
-      return (
-        <button onClick={() => updateSetting('openAtStartup', true)}>
-          Test Case
-        </button>
-      );
-    };
-
-    const { getByText } = customRender(<TestComponent />);
-
-    act(() => {
-      fireEvent.click(getByText('Test Case'));
-    });
-
-    expect(setAutoLaunchMock).toHaveBeenCalled();
-    expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
-    expect(saveStateMock).toHaveBeenCalled();
-    expect(saveStateMock).toHaveBeenCalledWith(
-      { enterpriseAccounts: [], token: null },
-      {
-        appearance: 'SYSTEM',
-        markOnClick: false,
-        openAtStartup: true,
-        participating: false,
-        playSound: true,
-        showNotifications: true,
-      }
-    );
-  });
 });
