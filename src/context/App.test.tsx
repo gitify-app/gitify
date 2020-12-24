@@ -1,0 +1,270 @@
+import React, { useContext } from 'react';
+import { act, fireEvent, render, waitFor } from '@testing-library/react';
+
+import { AppContext, AppProvider } from './App';
+import { AuthState, SettingsState } from '../types';
+import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
+import { useNotifications } from '../hooks/useNotifications';
+import * as comms from '../utils/comms';
+import * as storage from '../utils/storage';
+
+jest.mock('../hooks/useNotifications');
+
+const customRender = (
+  ui,
+  accounts: AuthState = mockAccounts,
+  settings: SettingsState = mockSettings
+) => {
+  return render(
+    <AppContext.Provider value={{ accounts, settings }}>
+      <AppProvider>{ui}</AppProvider>
+    </AppContext.Provider>
+  );
+};
+
+describe('context/App.tsx', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
+  describe('api methods', () => {
+    const updateSettingMock = jest.fn();
+
+    const fetchNotificationsMock = jest.fn();
+    const markNotificationMock = jest.fn();
+    const unsubscribeNotificationMock = jest.fn();
+    const markRepoNotificationsMock = jest.fn();
+
+    (useNotifications as jest.Mock).mockReturnValue({
+      fetchNotifications: fetchNotificationsMock,
+      markNotification: markNotificationMock,
+      unsubscribeNotification: unsubscribeNotificationMock,
+      markRepoNotifications: markRepoNotificationsMock,
+    });
+
+    beforeEach(() => {
+      updateSettingMock.mockReset();
+      fetchNotificationsMock.mockReset();
+      markNotificationMock.mockReset();
+      unsubscribeNotificationMock.mockReset();
+      markRepoNotificationsMock.mockReset();
+    });
+
+    it('fetch notifications every minute', async () => {
+      customRender(null);
+
+      waitFor(() => expect(fetchNotificationsMock).toHaveBeenCalledTimes(2));
+
+      fetchNotificationsMock.mockReset();
+
+      act(() => jest.advanceTimersByTime(60000));
+      expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
+
+      act(() => jest.advanceTimersByTime(60000));
+      expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
+
+      act(() => jest.advanceTimersByTime(60000));
+      expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
+    });
+
+    it('should call fetchNotifications', async () => {
+      const TestComponent = () => {
+        const { fetchNotifications } = useContext(AppContext);
+
+        return <button onClick={fetchNotifications}>Test Case</button>;
+      };
+
+      const { getByText } = customRender(<TestComponent />);
+
+      fetchNotificationsMock.mockReset();
+
+      fireEvent.click(getByText('Test Case'));
+
+      expect(fetchNotificationsMock).toHaveBeenCalled();
+      expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
+    });
+
+    it('should call markNotification', async () => {
+      const TestComponent = () => {
+        const { markNotification } = useContext(AppContext);
+
+        return (
+          <button onClick={() => markNotification('123-456', 'github.com')}>
+            Test Case
+          </button>
+        );
+      };
+
+      const { getByText } = customRender(<TestComponent />);
+
+      markNotificationMock.mockReset();
+
+      fireEvent.click(getByText('Test Case'));
+
+      expect(markNotificationMock).toHaveBeenCalledTimes(1);
+      expect(markNotificationMock).toHaveBeenCalledWith(
+        { enterpriseAccounts: [], token: null },
+        '123-456',
+        'github.com'
+      );
+    });
+
+    it('should call unsubscribeNotification', async () => {
+      const TestComponent = () => {
+        const { unsubscribeNotification } = useContext(AppContext);
+
+        return (
+          <button
+            onClick={() => unsubscribeNotification('123-456', 'github.com')}
+          >
+            Test Case
+          </button>
+        );
+      };
+
+      const { getByText } = customRender(<TestComponent />);
+
+      unsubscribeNotificationMock.mockReset();
+
+      fireEvent.click(getByText('Test Case'));
+
+      expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
+      expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
+        { enterpriseAccounts: [], token: null },
+        '123-456',
+        'github.com'
+      );
+    });
+
+    it('should call markRepoNotifications', async () => {
+      const TestComponent = () => {
+        const { markRepoNotifications } = useContext(AppContext);
+
+        return (
+          <button
+            onClick={() =>
+              markRepoNotifications('manosim/gitify', 'github.com')
+            }
+          >
+            Test Case
+          </button>
+        );
+      };
+
+      const { getByText } = customRender(<TestComponent />);
+
+      markRepoNotificationsMock.mockReset();
+
+      fireEvent.click(getByText('Test Case'));
+
+      expect(markRepoNotificationsMock).toHaveBeenCalledTimes(1);
+      expect(markRepoNotificationsMock).toHaveBeenCalledWith(
+        { enterpriseAccounts: [], token: null },
+        'manosim/gitify',
+        'github.com'
+      );
+    });
+  });
+
+  it('should call updateSetting', async () => {
+    const saveStateMock = jest.spyOn(storage, 'saveState');
+
+    const TestComponent = () => {
+      const { updateSetting } = useContext(AppContext);
+
+      return (
+        <button onClick={() => updateSetting('participating', true)}>
+          Test Case
+        </button>
+      );
+    };
+
+    const { getByText } = customRender(<TestComponent />);
+
+    act(() => {
+      fireEvent.click(getByText('Test Case'));
+    });
+
+    expect(saveStateMock).toHaveBeenCalled();
+    expect(saveStateMock).toHaveBeenCalledWith(
+      { enterpriseAccounts: [], token: null },
+      {
+        appearance: 'SYSTEM',
+        markOnClick: false,
+        openAtStartup: false,
+        participating: true,
+        playSound: true,
+        showNotifications: true,
+      }
+    );
+  });
+
+  it('should call updateSetting and set auto launch(openAtStartup)', async () => {
+    const setAutoLaunchMock = jest.spyOn(comms, 'setAutoLaunch');
+    const saveStateMock = jest.spyOn(storage, 'saveState');
+
+    const TestComponent = () => {
+      const { updateSetting } = useContext(AppContext);
+
+      return (
+        <button onClick={() => updateSetting('openAtStartup', true)}>
+          Test Case
+        </button>
+      );
+    };
+
+    const { getByText } = customRender(<TestComponent />);
+
+    act(() => {
+      fireEvent.click(getByText('Test Case'));
+    });
+
+    expect(setAutoLaunchMock).toHaveBeenCalled();
+    expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
+    expect(saveStateMock).toHaveBeenCalled();
+    expect(saveStateMock).toHaveBeenCalledWith(
+      { enterpriseAccounts: [], token: null },
+      {
+        appearance: 'SYSTEM',
+        markOnClick: false,
+        openAtStartup: true,
+        participating: false,
+        playSound: true,
+        showNotifications: true,
+      }
+    );
+  });
+
+  it('should check isLoggedIn', async () => {
+    const TestComponent = () => {
+      const { updateSetting } = useContext(AppContext);
+
+      return (
+        <button onClick={() => updateSetting('openAtStartup', true)}>
+          Test Case
+        </button>
+      );
+    };
+
+    const { getByText } = customRender(<TestComponent />);
+
+    act(() => {
+      fireEvent.click(getByText('Test Case'));
+    });
+
+    expect(setAutoLaunchMock).toHaveBeenCalled();
+    expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
+    expect(saveStateMock).toHaveBeenCalled();
+    expect(saveStateMock).toHaveBeenCalledWith(
+      { enterpriseAccounts: [], token: null },
+      {
+        appearance: 'SYSTEM',
+        markOnClick: false,
+        openAtStartup: true,
+        participating: false,
+        playSound: true,
+        showNotifications: true,
+      }
+    );
+  });
+});
