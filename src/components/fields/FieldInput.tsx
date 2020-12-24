@@ -32,7 +32,7 @@ export class FieldInput extends React.PureComponent<IProps> {
 
             <input
               type="text"
-              className="appearance-none block w-full bg-gray-100 border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
+              className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
               id={input.name}
               placeholder={placeholder}
               {...input}
