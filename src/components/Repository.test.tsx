@@ -8,8 +8,8 @@ import { RepositoryNotifications } from './Repository';
 
 const { shell } = require('electron');
 
-jest.mock('./Notification', () => ({
-  NotificationItem: () => <div>NotificationItem</div>,
+jest.mock('./NotificationRow', () => ({
+  NotificationRow: () => <div>NotificationRow</div>,
 }));
 
 describe('components/Repository.tsx', () => {

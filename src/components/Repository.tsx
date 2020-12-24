@@ -6,7 +6,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { AppContext } from '../context/App';
 import { Notification } from '../typesGithub';
-import { NotificationItem } from './Notification';
+import { NotificationRow } from './NotificationRow';
 
 interface IProps {
   hostname: string;
@@ -55,7 +55,7 @@ export const RepositoryNotifications: React.FC<IProps> = ({
       <TransitionGroup>
         {repoNotifications.map((obj) => (
           <CSSTransition key={obj.id} timeout={250} classNames="notification">
-            <NotificationItem
+            <NotificationRow
               key={obj.id}
               hostname={hostname}
               notification={obj}

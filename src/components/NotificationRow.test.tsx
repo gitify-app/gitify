@@ -6,7 +6,7 @@ const { shell } = require('electron');
 
 import { AppContext } from '../context/App';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
-import { NotificationItem } from './Notification';
+import { NotificationRow } from './NotificationRow';
 import { mockSettings } from '../__mocks__/mock-state';
 
 describe('components/Notification.js', () => {
@@ -22,7 +22,7 @@ describe('components/Notification.js', () => {
       hostname: 'github.com',
     };
 
-    const tree = TestRenderer.create(<NotificationItem {...props} />);
+    const tree = TestRenderer.create(<NotificationRow {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
@@ -41,7 +41,7 @@ describe('components/Notification.js', () => {
           markNotification,
         }}
       >
-        <NotificationItem {...props} />
+        <NotificationRow {...props} />
       </AppContext.Provider>
     );
 
@@ -64,7 +64,7 @@ describe('components/Notification.js', () => {
           markNotification,
         }}
       >
-        <NotificationItem {...props} />
+        <NotificationRow {...props} />
       </AppContext.Provider>
     );
 
@@ -86,7 +86,7 @@ describe('components/Notification.js', () => {
         value={{ settings: { ...mockSettings, markOnClick: false } }}
       >
         <AppContext.Provider value={{ markNotification }}>
-          <NotificationItem {...props} />
+          <NotificationRow {...props} />
         </AppContext.Provider>
       </AppContext.Provider>
     );
@@ -106,7 +106,7 @@ describe('components/Notification.js', () => {
     const { getByLabelText } = render(
       <AppContext.Provider value={{}}>
         <AppContext.Provider value={{ unsubscribeNotification }}>
-          <NotificationItem {...props} />
+          <NotificationRow {...props} />
         </AppContext.Provider>
       </AppContext.Provider>
     );

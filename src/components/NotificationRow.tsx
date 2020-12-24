@@ -14,7 +14,7 @@ interface IProps {
   notification: Notification;
 }
 
-export const NotificationItem: React.FC<IProps> = ({
+export const NotificationRow: React.FC<IProps> = ({
   notification,
   hostname,
 }) => {

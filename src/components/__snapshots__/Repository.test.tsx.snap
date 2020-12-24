@@ -52,10 +52,10 @@ Array [
   </div>,
   <div>
     <div>
-      NotificationItem
+      NotificationRow
     </div>
     <div>
-      NotificationItem
+      NotificationRow
     </div>
   </div>,
 ]
