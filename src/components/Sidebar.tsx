@@ -1,11 +1,14 @@
 import React, { useCallback, useContext, useMemo } from 'react';
-import { shell } from 'electron';
+import { shell, ipcRenderer } from 'electron';
 import * as Octicons from '@primer/octicons-react';
 import { useHistory } from 'react-router-dom';
 
 import { AppContext } from '../context/App';
 import { Constants } from '../utils/constants';
+import { IconCog } from '../icons/Cog';
+import { IconRefresh } from '../icons/Refresh';
 import { Logo } from '../components/Logo';
+import { IconQuit } from '../icons/Quit';
 
 export const Sidebar: React.FC = () => {
   const history = useHistory();
@@ -15,6 +18,10 @@ export const Sidebar: React.FC = () => {
 
   const onOpenBrowser = useCallback(() => {
     shell.openExternal(`https://github.com/${Constants.REPO_SLUG}`);
+  }, []);
+
+  const quitApp = useCallback(() => {
+    ipcRenderer.send('app-quit');
   }, []);
 
   const notificationsCount = useMemo(() => {
@@ -51,7 +58,7 @@ export const Sidebar: React.FC = () => {
               onClick={fetchNotifications}
               aria-label="Refresh Notifications"
             >
-              <Octicons.SyncIcon size={16} />
+              <IconRefresh className="w-3.5 h-3.5" />
             </button>
 
             <button
@@ -59,9 +66,19 @@ export const Sidebar: React.FC = () => {
               onClick={() => history.push('/settings')}
               aria-label="Settings"
             >
-              <Octicons.GearIcon size={16} />
+              <IconCog className="w-4 h-4" />
             </button>
           </>
+        )}
+
+        {!isLoggedIn && (
+          <button
+            className={footerButtonClasses}
+            onClick={quitApp}
+            aria-label="Quit App"
+          >
+            <IconQuit className="w-3.5 h-3.5" />
+          </button>
         )}
 
         <div
@@ -69,7 +86,7 @@ export const Sidebar: React.FC = () => {
           onClick={onOpenBrowser}
           aria-label="View project on GitHub"
         >
-          <Octicons.MarkGithubIcon size={14} />
+          <Octicons.MarkGithubIcon size={15} />
         </div>
       </div>
     </div>
