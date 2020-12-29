@@ -115,9 +115,7 @@ exports[`routes/LoginEnterprise.js renders correctly 1`] = `
         title="Login Button"
         type="submit"
       >
-        <span>
-          Login
-        </span>
+        Login
       </button>
     </form>
   </div>

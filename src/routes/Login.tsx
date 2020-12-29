@@ -41,15 +41,16 @@ export const LoginRoute: React.FC = () => {
         onClick={loginUser}
         aria-label="Login with GitHub"
       >
-        <span>Login to GitHub</span>
+        Login to GitHub
       </button>
 
       <button
         className={loginButtonClass}
-        onClick={() => history.push('/enterpriselogin')}
+        onClick={() => history.push('/login-enterprise')}
         aria-label="Login with GitHub Enterprise"
       >
-        <span>Login to GitHub Enterprise</span>
+        Login to GitHub Enterprise
+      </button>
       </button>
     </div>
   );

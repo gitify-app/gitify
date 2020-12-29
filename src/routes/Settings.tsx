@@ -30,7 +30,7 @@ export const SettingsRoute: React.FC = () => {
   }, []);
 
   const goToEnterprise = useCallback(() => {
-    return history.replace('/enterpriselogin');
+    return history.replace('/login-enterprise');
   }, []);
 
   const footerButtonClass =

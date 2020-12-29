@@ -156,7 +156,7 @@ describe('routes/Settings.tsx', () => {
       </AppContext.Provider>
     );
     fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
-    expect(replaceMock).toHaveBeenCalledWith('/enterpriselogin');
+    expect(replaceMock).toHaveBeenCalledWith('/login-enterprise');
   });
 
   it('should quit the app', () => {

@@ -45,7 +45,7 @@ export const App = () => {
             <PrivateRoute path="/" exact component={NotificationsRoute} />
             <PrivateRoute path="/settings" exact component={SettingsRoute} />
             <Route path="/login" component={LoginRoute} />
-            <Route path="/enterpriselogin" component={LoginEnterpriseRoute} />
+            <Route path="/login-enterprise" component={LoginEnterpriseRoute} />
           </Switch>
         </div>
       </Router>
