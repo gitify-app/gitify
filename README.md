@@ -14,14 +14,14 @@ brew install --cask gitify
 
 Gitify supports macOS, Windows and Linux.
 
-### Prerequisites
+### Prerequisites & Libraries
 
-- Node 10+
+- Node 12+
 - [Yarn](https://yarnpkg.com/)
 - [Electron](https://electronjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [React](https://reactjs.org/)
-- [Redux](http://redux.js.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
 
 ### Installation
 
@@ -37,7 +37,7 @@ To watch for changes(`webpack`) in the `src` directory:
 
     yarn run watch
 
-To run the actual **electron app**:
+To run the **electron app**:
 
     yarn start
 

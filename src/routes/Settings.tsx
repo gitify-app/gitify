@@ -1,6 +1,5 @@
-const { ipcRenderer, remote } = require('electron');
-
 import React, { useCallback, useContext } from 'react';
+import { ipcRenderer, remote } from 'electron';
 import { useHistory } from 'react-router-dom';
 import { ArrowLeftIcon } from '@primer/octicons-react';
 
