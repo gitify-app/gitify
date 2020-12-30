@@ -2,6 +2,7 @@ import React, { useCallback, useContext, useState } from 'react';
 import { Form, FormRenderProps } from 'react-final-form';
 import { ArrowLeftIcon } from '@primer/octicons-react';
 import { useHistory } from 'react-router-dom';
+import { shell } from 'electron';
 
 import { AppContext } from '../context/App';
 import { AuthTokenOptions } from '../types';
@@ -44,12 +45,32 @@ export const LoginWithToken: React.FC = () => {
   const history = useHistory();
   const [isValidToken, setIsValidToken] = useState<boolean>(true);
 
+  const openLink = useCallback((url: string) => {
+    shell.openExternal(url);
+  }, []);
+
   const renderForm = (formProps: FormRenderProps) => {
     const { handleSubmit, submitting, pristine, values } = formProps;
 
     return (
       <form onSubmit={handleSubmit}>
-        <FieldInput name="token" label="Token" placeholder="123456789" />
+        <FieldInput
+          name="token"
+          label="Token"
+          placeholder="The 40 characters token generated on GitHub"
+          helpText={
+            <>
+              To generate a token, go to GitHub,{' '}
+              <a
+                className="underline focus:text-blue-500 cursor-pointer"
+                onClick={() => openLink('https://github.com/settings/tokens')}
+              >
+                personal access tokens
+              </a>{' '}
+              and create one with the <strong>notifications</strong> scope.
+            </>
+          }
+        />
 
         <FieldInput
           name="hostname"
