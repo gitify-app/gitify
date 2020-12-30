@@ -41,6 +41,11 @@ export interface AuthOptions {
   clientSecret: string;
 }
 
+export interface AuthTokenOptions {
+  hostname: string;
+  token: string;
+}
+
 export interface AuthResponse {
   authCode: string;
   authOptions: AuthOptions;

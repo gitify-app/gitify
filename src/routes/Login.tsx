@@ -51,6 +51,13 @@ export const LoginRoute: React.FC = () => {
       >
         Login to GitHub Enterprise
       </button>
+
+      <button
+        className="bg-none hover:text-gray-800 dark:text-gray-100 dark:hover:text-gray-300 mt-4 focus:outline-none"
+        onClick={() => history.push('/login-token')}
+        aria-label="Login with Personal Token"
+      >
+        <small>or login with a personal token</small>
       </button>
     </div>
   );

@@ -5,6 +5,7 @@ const BrowserWindow = remote.BrowserWindow;
 
 import * as auth from './auth';
 import * as apiRequests from './api-requests';
+import { AuthState } from '../types';
 
 describe('utils/auth.tsx', () => {
   describe('authGitHub', () => {
@@ -95,6 +96,34 @@ describe('utils/auth.tsx', () => {
       const call = async () => await auth.getToken(authCode);
 
       await expect(call).rejects.toEqual({ data: { message } });
+    });
+  });
+
+  describe('addAccount', () => {
+    const accounts: AuthState = {
+      token: null,
+      enterpriseAccounts: [],
+    };
+
+    it('should add a github.com accont', async () => {
+      const result = await auth.addAccount(accounts, '123-456', 'github.com');
+
+      expect(result).toEqual({ ...accounts, token: '123-456' });
+    });
+
+    it('should add an enterprise accont', async () => {
+      const result = await auth.addAccount(
+        accounts,
+        '123-456',
+        'github.gitify.io'
+      );
+
+      expect(result).toEqual({
+        ...accounts,
+        enterpriseAccounts: [
+          { hostname: 'github.gitify.io', token: '123-456' },
+        ],
+      });
     });
   });
 });

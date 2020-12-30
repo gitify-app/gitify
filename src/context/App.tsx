@@ -11,9 +11,11 @@ import {
   Appearance,
   AuthOptions,
   AuthState,
+  AuthTokenOptions,
   SettingsState,
 } from '../types';
-import { authGitHub, getToken } from '../utils/auth';
+import { apiRequestAuth } from '../utils/api-requests';
+import { addAccount, authGitHub, getToken } from '../utils/auth';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setAppearance } from '../utils/appearance';
 import { setAutoLaunch } from '../utils/comms';
@@ -39,6 +41,7 @@ interface AppContextState {
   isLoggedIn: boolean;
   login: () => void;
   loginEnterprise: (data: AuthOptions) => void;
+  validateToken: (data: AuthTokenOptions) => void;
   logout: () => void;
 
   notifications: AccountNotifications[];
@@ -110,16 +113,31 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     const { token } = await getToken(authCode);
     setAccounts({ ...accounts, token });
     saveState({ ...accounts, token }, settings);
-  }, [accounts]);
+  }, [accounts, settings]);
 
   const loginEnterprise = useCallback(
     async (data: AuthOptions) => {
       const { authOptions, authCode } = await authGitHub(data);
-      const { token } = await getToken(authCode, authOptions);
-      setAccounts({ ...accounts, token });
-      saveState({ ...accounts, token }, settings);
+      const { token, hostname } = await getToken(authCode, authOptions);
+      const updatedAccounts = addAccount(accounts, token, hostname);
+      setAccounts(updatedAccounts);
+      saveState(updatedAccounts, settings);
     },
-    [accounts]
+    [accounts, settings]
+  );
+
+  const validateToken = useCallback(
+    async ({ token, hostname }: AuthTokenOptions) => {
+      await apiRequestAuth(
+        `https://api.${hostname}/notifications`,
+        'HEAD',
+        token
+      );
+      const updatedAccounts = addAccount(accounts, token, hostname);
+      setAccounts(updatedAccounts);
+      saveState(updatedAccounts, settings);
+    },
+    [accounts, settings]
   );
 
   const logout = useCallback(() => {
@@ -169,6 +187,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         isLoggedIn,
         login,
         loginEnterprise,
+        validateToken,
         logout,
 
         notifications,
