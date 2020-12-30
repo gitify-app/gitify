@@ -62,7 +62,7 @@ export const LoginWithToken: React.FC = () => {
             <>
               To generate a token, go to GitHub,{' '}
               <a
-                className="underline focus:text-blue-500 cursor-pointer"
+                className="underline hover:text-gray-500 dark:hover:text-gray-300  cursor-pointer"
                 onClick={() => openLink('https://github.com/settings/tokens')}
               >
                 personal access tokens
@@ -76,11 +76,12 @@ export const LoginWithToken: React.FC = () => {
           name="hostname"
           label="Hostname"
           placeholder="github.company.com"
+          helpText="Defaults to github.com. Change only if you are using GitHub for Enterprise."
         />
 
         {!isValidToken && (
           <div className="mt-4 text-red-500 text-sm font-medium">
-            This token could get validated with {values.hostname}
+            This token could not get validated with {values.hostname}.
           </div>
         )}
 

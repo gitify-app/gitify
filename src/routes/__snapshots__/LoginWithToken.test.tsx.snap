@@ -56,7 +56,7 @@ exports[`routes/LoginWithToken.js renders correctly 1`] = `
           Token
         </label>
         <input
-          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
+          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
           id="token"
           name="token"
           onBlur={[Function]}
@@ -68,12 +68,12 @@ exports[`routes/LoginWithToken.js renders correctly 1`] = `
           value=""
         />
         <div
-          className="mt-3 text-blue-400 text-xs"
+          className="mt-3 text-gray-700 dark:text-gray-200 text-xs"
         >
           To generate a token, go to GitHub,
            
           <a
-            className="underline focus:text-blue-500 cursor-pointer"
+            className="underline hover:text-gray-500 dark:hover:text-gray-300  cursor-pointer"
             onClick={[Function]}
           >
             personal access tokens
@@ -96,7 +96,7 @@ exports[`routes/LoginWithToken.js renders correctly 1`] = `
           Hostname
         </label>
         <input
-          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
+          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
           id="hostname"
           name="hostname"
           onBlur={[Function]}
@@ -107,6 +107,11 @@ exports[`routes/LoginWithToken.js renders correctly 1`] = `
           type="text"
           value="github.com"
         />
+        <div
+          className="mt-3 text-gray-700 dark:text-gray-200 text-xs"
+        >
+          Defaults to github.com. Change only if you are using GitHub for Enterprise.
+        </div>
       </div>
       <button
         className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
