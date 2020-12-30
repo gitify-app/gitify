@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`routes/LoginEnterprise.js renders correctly 1`] = `
+exports[`routes/LoginWithToken.js renders correctly 1`] = `
 <div
   className="flex-1 bg-white dark:bg-gray-dark dark:text-white"
 >
@@ -37,7 +37,7 @@ exports[`routes/LoginEnterprise.js renders correctly 1`] = `
     <h3
       className="text-lg font-semibold"
     >
-      Login with GitHub Enterprise
+      Login with an access token
     </h3>
   </div>
   <div
@@ -46,6 +46,46 @@ exports[`routes/LoginEnterprise.js renders correctly 1`] = `
     <form
       onSubmit={[Function]}
     >
+      <div
+        className="mt-2"
+      >
+        <label
+          className="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
+          htmlFor="token"
+        >
+          Token
+        </label>
+        <input
+          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
+          id="token"
+          name="token"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="The 40 characters token generated on GitHub"
+          required={false}
+          type="text"
+          value=""
+        />
+        <div
+          className="mt-3 text-blue-400 text-xs"
+        >
+          To generate a token, go to GitHub,
+           
+          <a
+            className="underline focus:text-blue-500 cursor-pointer"
+            onClick={[Function]}
+          >
+            personal access tokens
+          </a>
+           
+          and create one with the 
+          <strong>
+            notifications
+          </strong>
+           scope.
+        </div>
+      </div>
       <div
         className="mt-2"
       >
@@ -65,60 +105,16 @@ exports[`routes/LoginEnterprise.js renders correctly 1`] = `
           placeholder="github.company.com"
           required={false}
           type="text"
-          value=""
-        />
-      </div>
-      <div
-        className="mt-2"
-      >
-        <label
-          className="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
-          htmlFor="clientId"
-        >
-          Client ID
-        </label>
-        <input
-          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
-          id="clientId"
-          name="clientId"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
-          placeholder="123456789"
-          required={false}
-          type="text"
-          value=""
-        />
-      </div>
-      <div
-        className="mt-2"
-      >
-        <label
-          className="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
-          htmlFor="clientSecret"
-        >
-          Client Secret
-        </label>
-        <input
-          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-2 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
-          id="clientSecret"
-          name="clientSecret"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
-          placeholder="ABC123DEF456"
-          required={false}
-          type="text"
-          value=""
+          value="github.com"
         />
       </div>
       <button
         className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
         disabled={true}
-        title="Login Button"
+        title="Submit Button"
         type="submit"
       >
-        Login
+        Submit
       </button>
     </form>
   </div>
