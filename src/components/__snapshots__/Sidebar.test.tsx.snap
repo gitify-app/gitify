@@ -52,7 +52,9 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
       </g>
     </svg>
     <div
-      className="flex justify-around	self-stretch items-center my-1 py-1 px-2 text-green-500 text-xs font-extrabold"
+      aria-label="4 Unread Notifications"
+      className="flex justify-around self-stretch items-center my-1 py-1 px-2 text-green-500 text-xs font-extrabold cursor-pointer"
+      onClick={[Function]}
     >
       <svg
         aria-hidden="true"
@@ -195,7 +197,9 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
       </g>
     </svg>
     <div
-      className="flex justify-around	self-stretch items-center my-1 py-1 px-2 text-green-500 text-xs font-extrabold"
+      aria-label="4 Unread Notifications"
+      className="flex justify-around self-stretch items-center my-1 py-1 px-2 text-green-500 text-xs font-extrabold cursor-pointer"
+      onClick={[Function]}
     >
       <svg
         aria-hidden="true"
