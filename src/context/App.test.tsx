@@ -5,6 +5,7 @@ import { AppContext, AppProvider } from './App';
 import { AuthState, SettingsState } from '../types';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { useNotifications } from '../hooks/useNotifications';
+import * as apiRequests from '../utils/api-requests';
 import * as comms from '../utils/comms';
 import * as storage from '../utils/storage';
 
@@ -29,6 +30,7 @@ describe('context/App.tsx', () => {
 
   describe('api methods', () => {
     const updateSettingMock = jest.fn();
+    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
 
     const fetchNotificationsMock = jest.fn();
     const markNotificationMock = jest.fn();
@@ -164,6 +166,57 @@ describe('context/App.tsx', () => {
         'github.com'
       );
     });
+
+    it('should call validateToken', async () => {
+      apiRequestAuthMock.mockResolvedValueOnce(null);
+
+      const TestComponent = () => {
+        const { validateToken } = useContext(AppContext);
+
+        return (
+          <button
+            onClick={() =>
+              validateToken({ hostname: 'github.com', token: '123-456' })
+            }
+          >
+            Test Case
+          </button>
+        );
+      };
+
+      const { getByText } = customRender(<TestComponent />);
+
+      fireEvent.click(getByText('Test Case'));
+
+      await waitFor(() =>
+        expect(fetchNotificationsMock).toHaveBeenCalledTimes(2)
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
+      expect(apiRequestAuthMock).toHaveBeenCalledWith(
+        'https://api.github.com/notifications',
+        'HEAD',
+        '123-456'
+      );
+    });
+  });
+
+  it('should call logout', async () => {
+    const clearStateMock = jest.spyOn(storage, 'clearState');
+
+    const TestComponent = () => {
+      const { logout } = useContext(AppContext);
+
+      return <button onClick={logout}>Test Case</button>;
+    };
+
+    const { getByText } = customRender(<TestComponent />);
+
+    act(() => {
+      fireEvent.click(getByText('Test Case'));
+    });
+
+    expect(clearStateMock).toHaveBeenCalledTimes(1);
   });
 
   it('should call updateSetting', async () => {

@@ -63,6 +63,6 @@ describe('routes/Login.tsx', () => {
     fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
 
     expect(pushMock).toHaveBeenCalledTimes(1);
-    expect(pushMock).toHaveBeenCalledWith('/enterpriselogin');
+    expect(pushMock).toHaveBeenCalledWith('/login-enterprise');
   });
 });

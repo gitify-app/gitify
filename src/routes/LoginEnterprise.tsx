@@ -89,7 +89,7 @@ export const LoginEnterpriseRoute: React.FC = () => {
           type="submit"
           title="Login Button"
         >
-          <span>Login</span>
+          Login
         </button>
       </form>
     );

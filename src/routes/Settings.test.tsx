@@ -81,6 +81,7 @@ describe('routes/Settings.tsx', () => {
     });
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('participating', false);
   });
 
   it('should toggle the playSound checkbox', () => {
@@ -97,6 +98,7 @@ describe('routes/Settings.tsx', () => {
     });
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('playSound', false);
   });
 
   it('should toggle the showNotifications checkbox', () => {
@@ -113,6 +115,7 @@ describe('routes/Settings.tsx', () => {
     });
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('showNotifications', false);
   });
 
   it('should toggle the onClickMarkAsRead checkbox', () => {
@@ -129,6 +132,7 @@ describe('routes/Settings.tsx', () => {
     });
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('markOnClick', false);
   });
 
   it('should toggle the openAtStartup checkbox', () => {
@@ -145,6 +149,22 @@ describe('routes/Settings.tsx', () => {
     });
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('openAtStartup', false);
+  });
+
+  it('should change the appearance radio group', () => {
+    const { getByLabelText } = render(
+      <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+        <MemoryRouter>
+          <SettingsRoute />
+        </MemoryRouter>
+      </AppContext.Provider>
+    );
+
+    fireEvent.click(getByLabelText('Light'));
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('appearance', 'LIGHT');
   });
 
   it('should go to the enterprise login route', () => {
@@ -156,7 +176,7 @@ describe('routes/Settings.tsx', () => {
       </AppContext.Provider>
     );
     fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
-    expect(replaceMock).toHaveBeenCalledWith('/enterpriselogin');
+    expect(replaceMock).toHaveBeenCalledWith('/login-enterprise');
   });
 
   it('should quit the app', () => {
