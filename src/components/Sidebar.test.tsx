@@ -82,7 +82,27 @@ describe('components/Sidebar.tsx', () => {
     expect(pushMock).toHaveBeenCalledTimes(1);
   });
 
-  it('open the gitify repo in browser', () => {
+  it('opens github in the notifications page', () => {
+    const { getByLabelText } = render(
+      <AppContext.Provider
+        value={{
+          isLoggedIn: true,
+          notifications: mockedAccountNotifications,
+        }}
+      >
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
+      </AppContext.Provider>
+    );
+    fireEvent.click(getByLabelText('4 Unread Notifications'));
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(shell.openExternal).toHaveBeenCalledWith(
+      'https://github.com/notifications'
+    );
+  });
+
+  it('opens the gitify repo in browser', () => {
     const { getByLabelText } = render(
       <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
         <MemoryRouter>
@@ -92,5 +112,8 @@ describe('components/Sidebar.tsx', () => {
     );
     fireEvent.click(getByLabelText('View project on GitHub'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(shell.openExternal).toHaveBeenCalledWith(
+      'https://github.com/manosim/gitify'
+    );
   });
 });

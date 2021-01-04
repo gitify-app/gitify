@@ -20,6 +20,10 @@ export const Sidebar: React.FC = () => {
     shell.openExternal(`https://github.com/${Constants.REPO_SLUG}`);
   }, []);
 
+  const onOpenGitHubNotifications = useCallback(() => {
+    shell.openExternal(`https://github.com/notifications`);
+  }, []);
+
   const quitApp = useCallback(() => {
     ipcRenderer.send('app-quit');
   }, []);
@@ -43,7 +47,11 @@ export const Sidebar: React.FC = () => {
         />
 
         {notificationsCount > 0 && (
-          <div className="flex justify-around	self-stretch items-center my-1 py-1 px-2 text-green-500 text-xs font-extrabold">
+          <div
+            className="flex justify-around self-stretch items-center my-1 py-1 px-2 text-green-500 text-xs font-extrabold cursor-pointer"
+            onClick={onOpenGitHubNotifications}
+            aria-label={`${notificationsCount} Unread Notifications`}
+          >
             <Octicons.BellIcon size={12} />
             {notificationsCount}
           </div>
