@@ -40,6 +40,24 @@ jobs:
           name: Gitify-dist-mac
           path: dist
 
+      - name: Clean up dist
+        run: rm -rfv dist
+
+      - name: Make macOS ARM64 (electron-builder)
+        env:
+          CSC_LINK: ${{ secrets.mac_certs }}
+          CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
+        run: yarn make:macos_arm --publish=never -c.mac.identity=null
+      
+      - name: Clean up builds
+        run: rm -rfv dist/mac-arm64
+
+      - uses: actions/upload-artifact@v1
+        with:
+          name: Gitify-dist-mac-arm64
+          path: dist
+      
+
   build-windows:
     runs-on: windows-2019
 
