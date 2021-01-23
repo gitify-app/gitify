@@ -26,37 +26,25 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Make macOS (electron-builder)
+      - name: Make macOS x64 (electron-builder)
         env:
           CSC_LINK: ${{ secrets.mac_certs }}
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
-        run: yarn make:macos --publish=never -c.mac.identity=null
+        run: yarn make:macos:x64 --publish=never -c.mac.identity=null
+
+      - name: Make macOS arm64 (electron-builder)
+        env:
+          CSC_LINK: ${{ secrets.mac_certs }}
+          CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
+        run: yarn make:macos:arm64 --publish=never -c.mac.identity=null
 
       - name: Clean up builds
-        run: rm -rfv dist/mac
+        run: rm -rfv dist/mac dist/mac-arm64
 
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         with:
           name: Gitify-dist-mac
-          path: dist
-
-      - name: Clean up dist
-        run: rm -rfv dist
-
-      - name: Make macOS ARM64 (electron-builder)
-        env:
-          CSC_LINK: ${{ secrets.mac_certs }}
-          CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
-        run: yarn make:macos_arm --publish=never -c.mac.identity=null
-      
-      - name: Clean up builds
-        run: rm -rfv dist/mac-arm64
-
-      - uses: actions/upload-artifact@v1
-        with:
-          name: Gitify-dist-mac-arm64
-          path: dist
-      
+          path: dist/
 
   build-windows:
     runs-on: windows-2019
