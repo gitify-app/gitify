@@ -26,17 +26,11 @@ jobs:
       - name: Build
         run: yarn build
 
-      - name: Make macOS x64 (electron-builder)
+      - name: Make macOS (electron-builder)
         env:
           CSC_LINK: ${{ secrets.mac_certs }}
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
-        run: yarn make:macos:x64 --publish=never -c.mac.identity=null
-
-      - name: Make macOS arm64 (electron-builder)
-        env:
-          CSC_LINK: ${{ secrets.mac_certs }}
-          CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
-        run: yarn make:macos:arm64 --publish=never -c.mac.identity=null
+        run: yarn make:macos --publish=never -c.mac.identity=null
 
       - name: Clean up builds
         run: rm -rfv dist/mac dist/mac-arm64
