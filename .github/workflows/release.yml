@@ -40,9 +40,7 @@ jobs:
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
           GH_TOKEN: ${{ secrets.gh_token }}
           NOTARIZE: true
-        run: |
-          yarn make:macos:x64 --publish onTagOrDraft
-          yarn make:macos:arm64 --publish onTagOrDraft
+        run: yarn make:macos --publish onTagOrDraft
 
   release-windows:
     runs-on: windows-2019
