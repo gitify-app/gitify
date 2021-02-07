@@ -33,12 +33,12 @@ jobs:
         run: yarn make:macos --publish=never -c.mac.identity=null
 
       - name: Clean up builds
-        run: rm -rfv dist/mac
+        run: rm -rfv dist/mac dist/mac-arm64
 
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v2
         with:
           name: Gitify-dist-mac
-          path: dist
+          path: dist/
 
   build-windows:
     runs-on: windows-2019
