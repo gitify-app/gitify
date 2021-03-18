@@ -38,11 +38,13 @@ export const NotificationRow: React.FC<IProps> = ({
 
     // TODO remove this future-legacy code when Github have pushed a fix (see #424)
     if (
-      notification.subject.url === null
-      && notification.subject.type === 'Discussion'
-      && notification.repository.url
+      notification.subject.url === null &&
+      notification.subject.type === 'Discussion' &&
+      notification.repository.url
     ) {
-      const url = generateGitHubWebUrl(`${notification.repository.url}/discussions`);
+      const url = generateGitHubWebUrl(
+        `${notification.repository.url}/discussions`
+      );
       shell.openExternal(url);
     }
   }, [notification]);
