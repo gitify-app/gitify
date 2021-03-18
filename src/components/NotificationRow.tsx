@@ -35,6 +35,16 @@ export const NotificationRow: React.FC<IProps> = ({
       const url = generateGitHubWebUrl(notification.subject.url);
       shell.openExternal(url);
     }
+
+    // TODO remove this future-legacy code when Github have pushed a fix (see #424)
+    if (
+      notification.subject.url === null
+      && notification.subject.type === 'Discussion'
+      && notification.repository.url
+    ) {
+      const url = generateGitHubWebUrl(`${notification.repository.url}/discussions`);
+      shell.openExternal(url);
+    }
   }, [notification]);
 
   const unsubscribe = (event: React.MouseEvent<HTMLElement>) => {
