@@ -23,7 +23,7 @@ export const validate = (values: IValues): IFormErrors => {
   const errors: IFormErrors = {};
   if (!values.token) {
     errors.token = 'Required';
-  } else if (!/^[A-Z0-9]{40}$/i.test(values.token)) {
+  } else if (!/^[A-Z0-9_]{40}$/i.test(values.token)) {
     errors.token = 'Invalid token.';
   }
 
