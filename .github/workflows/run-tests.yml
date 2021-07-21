@@ -4,9 +4,7 @@ on: [push, pull_request]
 
 jobs:
   run-unit-tests:
-    runs-on:
-      - ubuntu-18.04
-      - ubuntu-latest
+    runs-on: ubuntu-18.04
 
     steps:
       - uses: actions/checkout@v2
