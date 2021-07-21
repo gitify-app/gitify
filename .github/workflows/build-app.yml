@@ -75,7 +75,7 @@ jobs:
           path: dist
 
   build-linux:
-    runs-on: ubuntu-18.04
+    runs-on: [ubuntu-18.04, ubuntu-latest, debian-latest]
 
     steps:
       - uses: actions/checkout@v2
