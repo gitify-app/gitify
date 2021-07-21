@@ -105,6 +105,9 @@
       "category": "Development",
       "maintainer": "Emmanouil Konstantinidis"
     },
+    "deb": {
+      "depends": ["gconf2", "gconf-service", "libnotify4", "libayatana-appindicator1", "libxtst6", "libnss3"]
+    },
     "afterSign": "scripts/notarize.js"
   },
   "dependencies": {
