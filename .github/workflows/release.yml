@@ -74,7 +74,7 @@ jobs:
         run: yarn make:win --publish onTagOrDraft
 
   release-linux:
-    runs-on: ubunt-18.04
+    runs-on: ubuntu-18.04
 
     steps:
       - uses: actions/checkout@v2
