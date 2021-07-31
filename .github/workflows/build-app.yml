@@ -33,7 +33,7 @@ jobs:
         run: yarn make:macos --publish=never -c.mac.identity=null
 
       - name: Clean up builds
-        run: rm -rfv dist/mac dist/mac-arm64
+        run: rm -rfv dist/mac-universal
 
       - uses: actions/upload-artifact@v2
         with:
