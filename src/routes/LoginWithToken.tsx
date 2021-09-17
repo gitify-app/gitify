@@ -81,7 +81,7 @@ export const LoginWithToken: React.FC = () => {
 
         {!isValidToken && (
           <div className="mt-4 text-red-500 text-sm font-medium">
-            This token could not get validated with {values.hostname}.
+            This token could not be validated with {values.hostname}.
           </div>
         )}
 

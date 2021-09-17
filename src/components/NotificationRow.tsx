@@ -18,7 +18,7 @@ export const NotificationRow: React.FC<IProps> = ({
   notification,
   hostname,
 }) => {
-  const { settings } = useContext(AppContext);
+  const { settings, accounts } = useContext(AppContext);
   const { markNotification, unsubscribeNotification } = useContext(AppContext);
 
   const pressTitle = useCallback(() => {
@@ -32,7 +32,11 @@ export const NotificationRow: React.FC<IProps> = ({
   const openBrowser = useCallback(() => {
     // Some Notification types from GitHub are missing urls in their subjects.
     if (notification.subject.url) {
-      const url = generateGitHubWebUrl(notification.subject.url);
+      const url = generateGitHubWebUrl(
+        notification.subject.url,
+        notification.id,
+        accounts.user.id
+      );
       shell.openExternal(url);
     }
   }, [notification]);

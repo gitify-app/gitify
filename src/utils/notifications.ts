@@ -2,7 +2,7 @@ const { remote } = require('electron');
 
 import { generateGitHubWebUrl } from './helpers';
 import { reOpenWindow, openExternalLink, updateTrayIcon } from './comms';
-import { Notification } from '../typesGithub';
+import { Notification, User } from '../typesGithub';
 
 import { AccountNotifications, SettingsState } from '../types';
 
@@ -18,7 +18,8 @@ export const setTrayIconColor = (notifications: AccountNotifications[]) => {
 export const triggerNativeNotifications = (
   previousNotifications: AccountNotifications[],
   newNotifications: AccountNotifications[],
-  settings: SettingsState
+  settings: SettingsState,
+  user: User
 ) => {
   const diffNotifications = newNotifications
     .map((account) => {
@@ -54,11 +55,14 @@ export const triggerNativeNotifications = (
   }
 
   if (settings.showNotifications) {
-    raiseNativeNotification(diffNotifications);
+    raiseNativeNotification(diffNotifications, user.id);
   }
 };
 
-export const raiseNativeNotification = (notifications: Notification[]) => {
+export const raiseNativeNotification = (
+  notifications: Notification[],
+  userId: number
+) => {
   let title: string;
   let body: string;
   let notificationUrl: string | null;
@@ -85,7 +89,8 @@ export const raiseNativeNotification = (notifications: Notification[]) => {
 
       // Some Notification types from GitHub are missing urls in their subjects.
       if (notificationUrl) {
-        const url = generateGitHubWebUrl(notificationUrl);
+        const { subject, id } = notifications[0];
+        const url = generateGitHubWebUrl(subject.url, id, userId);
         openExternalLink(url);
       }
     } else {

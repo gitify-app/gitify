@@ -33,6 +33,12 @@ export interface Notification {
   subscription_url: string;
 }
 
+export interface User {
+  login: string;
+  name: string;
+  id: number;
+}
+
 export interface Repository {
   id: number;
   node_id: string;

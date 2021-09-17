@@ -105,7 +105,7 @@ describe('context/App.tsx', () => {
 
       expect(markNotificationMock).toHaveBeenCalledTimes(1);
       expect(markNotificationMock).toHaveBeenCalledWith(
-        { enterpriseAccounts: [], token: null },
+        { enterpriseAccounts: [], token: null, user: null },
         '123-456',
         'github.com'
       );
@@ -132,7 +132,7 @@ describe('context/App.tsx', () => {
 
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
       expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
-        { enterpriseAccounts: [], token: null },
+        { enterpriseAccounts: [], token: null, user: null },
         '123-456',
         'github.com'
       );
@@ -161,7 +161,7 @@ describe('context/App.tsx', () => {
 
       expect(markRepoNotificationsMock).toHaveBeenCalledTimes(1);
       expect(markRepoNotificationsMock).toHaveBeenCalledWith(
-        { enterpriseAccounts: [], token: null },
+        { enterpriseAccounts: [], token: null, user: null },
         'manosim/gitify',
         'github.com'
       );
@@ -192,10 +192,15 @@ describe('context/App.tsx', () => {
         expect(fetchNotificationsMock).toHaveBeenCalledTimes(2)
       );
 
-      expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(2);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         'https://api.github.com/notifications',
         'HEAD',
+        '123-456'
+      );
+      expect(apiRequestAuthMock).toHaveBeenCalledWith(
+        'https://api.github.com/user',
+        'GET',
         '123-456'
       );
     });
@@ -240,7 +245,7 @@ describe('context/App.tsx', () => {
 
     expect(saveStateMock).toHaveBeenCalled();
     expect(saveStateMock).toHaveBeenCalledWith(
-      { enterpriseAccounts: [], token: null },
+      { enterpriseAccounts: [], token: null, user: null },
       {
         appearance: 'SYSTEM',
         markOnClick: false,
@@ -276,7 +281,7 @@ describe('context/App.tsx', () => {
     expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
     expect(saveStateMock).toHaveBeenCalled();
     expect(saveStateMock).toHaveBeenCalledWith(
-      { enterpriseAccounts: [], token: null },
+      { enterpriseAccounts: [], token: null, user: null },
       {
         appearance: 'SYSTEM',
         markOnClick: false,

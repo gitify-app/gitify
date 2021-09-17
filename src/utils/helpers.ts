@@ -17,7 +17,21 @@ export function generateGitHubAPIUrl(hostname) {
     : `https://api.${hostname}/`;
 }
 
-export function generateGitHubWebUrl(url: string) {
+export function generateNotificationReferrerId(
+  notificationId: string,
+  userId: number
+) {
+  const buffer = Buffer.from(
+    `018:NotificationThread${notificationId}:${userId}`
+  );
+  return `notification_referrer_id=${buffer.toString('base64')}`;
+}
+
+export function generateGitHubWebUrl(
+  url: string,
+  notificationId: string,
+  userId: number
+) {
   const { hostname } = parse(url);
   const isEnterprise =
     hostname !== `api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}`;
@@ -35,5 +49,10 @@ export function generateGitHubWebUrl(url: string) {
     newUrl = newUrl.substr(0, newUrl.lastIndexOf('/'));
   }
 
-  return newUrl;
+  const notificationReferrerId = generateNotificationReferrerId(
+    notificationId,
+    userId
+  );
+
+  return `${newUrl}?${notificationReferrerId}`;
 }
