@@ -1,6 +1,6 @@
 export const Constants = {
   // GitHub OAuth
-  AUTH_SCOPE: ['user:email', 'notifications'],
+  AUTH_SCOPE: ['read:user', 'notifications'],
 
   DEFAULT_AUTH_OPTIONS: {
     hostname: 'github.com',

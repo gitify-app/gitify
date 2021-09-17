@@ -96,7 +96,12 @@ export const useNotifications = (): NotificationsState => {
                 ]
               : [...enterpriseNotifications];
 
-            triggerNativeNotifications(notifications, data, settings);
+            triggerNativeNotifications(
+              notifications,
+              data,
+              settings,
+              accounts.user
+            );
             setNotifications(data);
             setIsFetching(false);
           })

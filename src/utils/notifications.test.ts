@@ -5,6 +5,7 @@ import {
   mockedAccountNotifications,
   mockedGithubNotifications,
   mockedSingleAccountNotifications,
+  mockedUser,
 } from '../__mocks__/mockedData';
 import * as comms from './comms';
 import * as notificationsHelpers from './notifications';
@@ -25,7 +26,8 @@ describe('utils/notifications.ts', () => {
     notificationsHelpers.triggerNativeNotifications(
       [],
       mockedAccountNotifications,
-      settings
+      settings,
+      mockedUser
     );
 
     expect(notificationsHelpers.raiseNativeNotification).toHaveBeenCalledTimes(
@@ -49,7 +51,8 @@ describe('utils/notifications.ts', () => {
     notificationsHelpers.triggerNativeNotifications(
       [],
       mockedAccountNotifications,
-      settings
+      settings,
+      mockedUser
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -69,7 +72,8 @@ describe('utils/notifications.ts', () => {
     notificationsHelpers.triggerNativeNotifications(
       mockedSingleAccountNotifications,
       mockedSingleAccountNotifications,
-      settings
+      settings,
+      mockedUser
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -86,7 +90,12 @@ describe('utils/notifications.ts', () => {
     spyOn(notificationsHelpers, 'raiseNativeNotification');
     spyOn(notificationsHelpers, 'raiseSoundNotification');
 
-    notificationsHelpers.triggerNativeNotifications([], [], settings);
+    notificationsHelpers.triggerNativeNotifications(
+      [],
+      [],
+      settings,
+      mockedUser
+    );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
     expect(notificationsHelpers.raiseSoundNotification).not.toHaveBeenCalled();
@@ -96,12 +105,16 @@ describe('utils/notifications.ts', () => {
     spyOn(comms, 'openExternalLink');
 
     const nativeNotification: Notification = notificationsHelpers.raiseNativeNotification(
-      [mockedGithubNotifications[0]]
+      [mockedGithubNotifications[0]],
+      mockedUser.id
     );
     nativeNotification.onclick(null);
 
+    const notif = mockedGithubNotifications[0];
     const newUrl = generateGitHubWebUrl(
-      mockedGithubNotifications[0].subject.url
+      notif.subject.url,
+      notif.id,
+      mockedUser.id
     );
     expect(comms.openExternalLink).toHaveBeenCalledTimes(1);
     expect(comms.openExternalLink).toHaveBeenCalledWith(newUrl);
@@ -111,7 +124,8 @@ describe('utils/notifications.ts', () => {
     spyOn(comms, 'reOpenWindow');
 
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
-      mockedGithubNotifications
+      mockedGithubNotifications,
+      mockedUser.id
     );
     nativeNotification.onclick(null);
 
