@@ -1,4 +1,4 @@
-const { ipcMain, app } = require('electron');
+const { ipcMain, app, nativeTheme } = require('electron');
 const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
@@ -53,6 +53,14 @@ menubarApp.on('ready', () => {
   menubarApp.tray.setIgnoreDoubleClickEvents(true);
 
   autoUpdater.checkForUpdatesAndNotify();
+
+  nativeTheme.on('updated', () => {
+    if (nativeTheme.shouldUseDarkColors) {
+      menubarApp.window.webContents.send('update-native-theme', 'DARK');
+    } else {
+      menubarApp.window.webContents.send('update-native-theme', 'LIGHT');
+    }
+  });
 
   ipcMain.on('reopen-window', () => menubarApp.showWindow());
   ipcMain.on('app-quit', () => menubarApp.app.quit());
