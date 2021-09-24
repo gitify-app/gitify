@@ -11,12 +11,19 @@ import { IconAddAccount } from '../icons/AddAccount';
 import { IconLogOut } from '../icons/Logout';
 import { IconQuit } from '../icons/Quit';
 import { updateTrayIcon } from '../utils/comms';
+import { setAppearance } from '../utils/appearance';
 
 const isLinux = remote.process.platform === 'linux';
 
 export const SettingsRoute: React.FC = () => {
   const { settings, updateSetting, logout } = useContext(AppContext);
   const history = useHistory();
+
+  ipcRenderer.on('update-native-theme', (_, updatedAppearance: Appearance) => {
+    if (settings.appearance === Appearance.SYSTEM) {
+      setAppearance(updatedAppearance);
+    }
+  });
 
   const logoutUser = useCallback(() => {
     logout();
