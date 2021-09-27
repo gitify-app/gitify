@@ -158,7 +158,7 @@ export const useNotifications = (): NotificationsState => {
           )}notifications/threads/${id}/subscription`,
           'PUT',
           token,
-          { ignore: true }
+          { ignored: true }
         );
         await markNotification(accounts, id, hostname);
       } catch (err) {
