@@ -35,7 +35,7 @@ export const NotificationRow: React.FC<IProps> = ({
       const url = generateGitHubWebUrl(
         notification.subject.url,
         notification.id,
-        accounts.user.id
+        accounts.user?.id
       );
       shell.openExternal(url);
     }

@@ -55,13 +55,13 @@ export const triggerNativeNotifications = (
   }
 
   if (settings.showNotifications) {
-    raiseNativeNotification(diffNotifications, user.id);
+    raiseNativeNotification(diffNotifications, user?.id);
   }
 };
 
 export const raiseNativeNotification = (
   notifications: Notification[],
-  userId: number
+  userId?: number
 ) => {
   let title: string;
   let body: string;

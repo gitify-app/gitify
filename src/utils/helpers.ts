@@ -1,4 +1,3 @@
-import { parse } from 'url';
 import { EnterpriseAccount } from '../types';
 
 import { Constants } from './constants';
@@ -30,9 +29,9 @@ export function generateNotificationReferrerId(
 export function generateGitHubWebUrl(
   url: string,
   notificationId: string,
-  userId: number
+  userId?: number
 ) {
-  const { hostname } = parse(url);
+  const { hostname } = new URL(url);
   const isEnterprise =
     hostname !== `api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}`;
 
@@ -49,10 +48,14 @@ export function generateGitHubWebUrl(
     newUrl = newUrl.substr(0, newUrl.lastIndexOf('/'));
   }
 
-  const notificationReferrerId = generateNotificationReferrerId(
-    notificationId,
-    userId
-  );
+  if (userId) {
+    const notificationReferrerId = generateNotificationReferrerId(
+      notificationId,
+      userId
+    );
 
-  return `${newUrl}?${notificationReferrerId}`;
+    return `${newUrl}?${notificationReferrerId}`;
+  }
+
+  return newUrl;
 }
