@@ -4,12 +4,9 @@ import { Constants } from '../utils/constants';
 
 import { AllRead } from './AllRead';
 
-jest.mock('react-typist');
-
 describe('components/all-read.tsx', function () {
   it('should render itself & its children', function () {
     spyOn(Constants, 'ALLREAD_EMOJIS');
-    spyOn(Constants, 'ALLREAD_MESSAGES');
 
     const tree = TestRenderer.create(<AllRead />);
 
