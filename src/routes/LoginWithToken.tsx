@@ -67,7 +67,11 @@ export const LoginWithToken: React.FC = () => {
               >
                 personal access tokens
               </a>{' '}
-              and create one with the <strong>notifications</strong> scope.
+              and create one with the{' '}
+              <span className="underline font-extrabold text-yellow-500">
+                {Constants.AUTH_SCOPE.join(', ')}{' '}
+              </span>
+              scopes.
             </>
           }
         />
