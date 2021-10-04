@@ -13,15 +13,6 @@ export const Constants = {
   // Storage
   STORAGE_KEY: 'gitify-storage',
 
-  // Awesome all read messages
-  ALLREAD_MESSAGES: [
-    'Wow! You did it.',
-    "That's amazing!",
-    'Yes! All read.',
-    'All gone! Nice work!',
-    'Yay! Good news.',
-  ],
-
   ALLREAD_EMOJIS: [
     ':wink:',
     ':tada:',

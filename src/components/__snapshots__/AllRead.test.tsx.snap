@@ -11,9 +11,8 @@ exports[`components/all-read.tsx should render itself & its children 1`] = `
   </h1>
   <h2
     className="font-semibold text-xl mb-2 text-semibold"
-  />
-  <div>
+  >
     No new notifications.
-  </div>
+  </h2>
 </div>
 `;
