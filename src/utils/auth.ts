@@ -1,9 +1,10 @@
 const { remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 
-import { apiRequest } from '../utils/api-requests';
+import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 import { AuthResponse, AuthState, AuthTokenResponse } from '../types';
 import { Constants } from '../utils/constants';
+import { User } from '../typesGithub';
 
 export const authGitHub = (
   authOptions = Constants.DEFAULT_AUTH_OPTIONS
@@ -67,6 +68,20 @@ export const authGitHub = (
   });
 };
 
+export const getUserData = async (token: string): Promise<User> => {
+  const response = await apiRequestAuth(
+    `https://api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}/user`,
+    'GET',
+    token
+  );
+
+  return {
+    id: response.data.id,
+    login: response.data.login,
+    name: response.data.name,
+  };
+};
+
 export const getToken = async (
   authCode: string,
   authOptions = Constants.DEFAULT_AUTH_OPTIONS
@@ -85,11 +100,17 @@ export const getToken = async (
   };
 };
 
-export const addAccount = (accounts: AuthState, token, hostname): AuthState => {
+export const addAccount = (
+  accounts: AuthState,
+  token,
+  hostname,
+  user?: User
+): AuthState => {
   if (hostname === Constants.DEFAULT_AUTH_OPTIONS.hostname) {
     return {
       ...accounts,
       token,
+      user: user ?? null,
     };
   }
 

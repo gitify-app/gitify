@@ -15,16 +15,18 @@ import {
   SettingsState,
 } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
-import { addAccount, authGitHub, getToken } from '../utils/auth';
+import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setAppearance } from '../utils/appearance';
 import { setAutoLaunch } from '../utils/comms';
 import { useInterval } from '../hooks/useInterval';
 import { useNotifications } from '../hooks/useNotifications';
+import Constants from '../utils/constants';
 
 const defaultAccounts: AuthState = {
   token: null,
   enterpriseAccounts: [],
+  user: null,
 };
 
 export const defaultSettings: SettingsState = {
@@ -111,8 +113,11 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const login = useCallback(async () => {
     const { authCode } = await authGitHub();
     const { token } = await getToken(authCode);
-    setAccounts({ ...accounts, token });
-    saveState({ ...accounts, token }, settings);
+    const user = await getUserData(token);
+    const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
+    const updatedAccounts = addAccount(accounts, token, hostname, user);
+    setAccounts(updatedAccounts);
+    saveState(updatedAccounts, settings);
   }, [accounts, settings]);
 
   const loginEnterprise = useCallback(
@@ -133,7 +138,8 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         'HEAD',
         token
       );
-      const updatedAccounts = addAccount(accounts, token, hostname);
+      const user = await getUserData(token);
+      const updatedAccounts = addAccount(accounts, token, hostname, user);
       setAccounts(updatedAccounts);
       saveState(updatedAccounts, settings);
     },

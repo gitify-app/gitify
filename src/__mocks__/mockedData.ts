@@ -1,5 +1,5 @@
 import { AccountNotifications, EnterpriseAccount } from '../types';
-import { Notification, Repository } from '../typesGithub';
+import { Notification, Repository, User } from '../typesGithub';
 
 export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
   {
@@ -7,6 +7,12 @@ export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
     token: '1234568790',
   },
 ];
+
+export const mockedUser: User = {
+  login: 'octocat',
+  name: 'Mona Lisa Octocat',
+  id: 123456789,
+};
 
 // prettier-ignore
 export const mockedSingleNotification: Notification = {

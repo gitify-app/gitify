@@ -18,6 +18,7 @@ describe('routes/LoginEnterprise.js', () => {
 
   const mockAccounts: AuthState = {
     enterpriseAccounts: [],
+    user: null,
   };
 
   beforeEach(function () {
@@ -93,6 +94,7 @@ describe('routes/LoginEnterprise.js', () => {
         value={{
           accounts: {
             enterpriseAccounts: mockedEnterpriseAccounts,
+            user: null,
           },
         }}
       >

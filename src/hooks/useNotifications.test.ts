@@ -5,6 +5,7 @@ import { act, renderHook } from '@testing-library/react-hooks';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { useNotifications } from './useNotifications';
 import { AuthState } from '../types';
+import { mockedUser } from '../__mocks__/mockedData';
 
 describe('hooks/useNotifications.ts', () => {
   beforeEach(() => {
@@ -135,6 +136,7 @@ describe('hooks/useNotifications.ts', () => {
         const accounts: AuthState = {
           ...mockAccounts,
           enterpriseAccounts: [],
+          user: mockedUser,
         };
 
         const notifications = [

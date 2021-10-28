@@ -35,7 +35,7 @@ describe('utils/auth.tsx', () => {
 
       expect(loadURLMock).toHaveBeenCalledTimes(1);
       expect(loadURLMock).toHaveBeenCalledWith(
-        'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=user:email,notifications'
+        'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read:user,notifications'
       );
 
       expect(new BrowserWindow().destroy).toHaveBeenCalledTimes(1);
@@ -103,6 +103,7 @@ describe('utils/auth.tsx', () => {
     const accounts: AuthState = {
       token: null,
       enterpriseAccounts: [],
+      user: null,
     };
 
     it('should add a github.com accont', async () => {
