@@ -68,7 +68,10 @@ export const authGitHub = (
   });
 };
 
-export const getUserData = async (token: string, hostname: string): Promise<User> => {
+export const getUserData = async (
+  token: string,
+  hostname: string
+): Promise<User> => {
   const response = await apiRequestAuth(
     `https://api.${hostname}/user`,
     'GET',
