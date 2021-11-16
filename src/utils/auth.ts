@@ -65,6 +65,11 @@ export const authGitHub = (
       event.preventDefault();
       handleCallback(url);
     });
+
+    authWindow.webContents.on('will-navigate', (event, url) => {
+      event.preventDefault();
+      handleCallback(url);
+    });
   });
 };
 
