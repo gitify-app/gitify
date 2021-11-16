@@ -113,8 +113,8 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const login = useCallback(async () => {
     const { authCode } = await authGitHub();
     const { token } = await getToken(authCode);
-    const user = await getUserData(token);
     const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
+    const user = await getUserData(token, hostname);
     const updatedAccounts = addAccount(accounts, token, hostname, user);
     setAccounts(updatedAccounts);
     saveState(updatedAccounts, settings);
@@ -138,7 +138,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         'HEAD',
         token
       );
-      const user = await getUserData(token);
+      const user = await getUserData(token, hostname);
       const updatedAccounts = addAccount(accounts, token, hostname, user);
       setAccounts(updatedAccounts);
       saveState(updatedAccounts, settings);
