@@ -38,16 +38,12 @@ export const NotificationRow: React.FC<IProps> = ({
         accounts.user?.id
       );
       shell.openExternal(url);
-    }
-
-    // TODO remove this future-legacy code when Github have pushed a fix (see #424)
-    if (
-      notification.subject.url === null &&
-      notification.subject.type === 'Discussion' &&
-      notification.repository.url
-    ) {
+    // For discussions, we can at least send users to the main discussions page.
+    } else if (notification.subject.type === 'Discussion') {
       const url = generateGitHubWebUrl(
-        `${notification.repository.url}/discussions`
+        `${notification.repository.url}/discussions`,
+        notification.id,
+        accounts.user?.id
       );
       shell.openExternal(url);
     }
