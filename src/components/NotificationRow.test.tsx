@@ -7,7 +7,7 @@ const { shell } = require('electron');
 import { AppContext } from '../context/App';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
 import { NotificationRow } from './NotificationRow';
-import { mockSettings } from '../__mocks__/mock-state';
+import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 
 describe('components/Notification.js', () => {
   beforeEach(() => {
@@ -39,6 +39,7 @@ describe('components/Notification.js', () => {
         value={{
           settings: { ...mockSettings, markOnClick: true },
           markNotification,
+          accounts: mockAccounts,
         }}
       >
         <NotificationRow {...props} />
@@ -62,6 +63,7 @@ describe('components/Notification.js', () => {
         value={{
           settings: { ...mockSettings, markOnClick: true },
           markNotification,
+          accounts: mockAccounts,
         }}
       >
         <NotificationRow {...props} />
@@ -83,7 +85,10 @@ describe('components/Notification.js', () => {
 
     const { getByTitle } = render(
       <AppContext.Provider
-        value={{ settings: { ...mockSettings, markOnClick: false } }}
+        value={{
+          settings: { ...mockSettings, markOnClick: false },
+          accounts: mockAccounts,
+        }}
       >
         <AppContext.Provider value={{ markNotification }}>
           <NotificationRow {...props} />

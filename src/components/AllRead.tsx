@@ -1,18 +1,9 @@
 import * as React from 'react';
-import Typist from 'react-typist';
 import { emojify } from 'react-emojione';
 
 import { Constants } from '../utils/constants';
 
 export const AllRead = () => {
-  const message = React.useMemo(
-    () =>
-      Constants.ALLREAD_MESSAGES[
-        Math.floor(Math.random() * Constants.ALLREAD_MESSAGES.length)
-      ],
-    []
-  );
-
   const emoji = React.useMemo(
     () =>
       Constants.ALLREAD_EMOJIS[
@@ -26,10 +17,8 @@ export const AllRead = () => {
       <h1 className="text-5xl mb-5">{emojify(emoji, { output: 'unicode' })}</h1>
 
       <h2 className="font-semibold text-xl mb-2 text-semibold">
-        <Typist>{message}</Typist>
+        No new notifications.
       </h2>
-
-      <div>No new notifications.</div>
     </div>
   );
 };

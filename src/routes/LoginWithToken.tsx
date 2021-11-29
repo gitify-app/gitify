@@ -23,7 +23,7 @@ export const validate = (values: IValues): IFormErrors => {
   const errors: IFormErrors = {};
   if (!values.token) {
     errors.token = 'Required';
-  } else if (!/^[A-Z0-9]{40}$/i.test(values.token)) {
+  } else if (!/^[A-Z0-9_]{40}$/i.test(values.token)) {
     errors.token = 'Invalid token.';
   }
 
@@ -67,7 +67,11 @@ export const LoginWithToken: React.FC = () => {
               >
                 personal access tokens
               </a>{' '}
-              and create one with the <strong>notifications</strong> scope.
+              and create one with the{' '}
+              <span className="underline font-extrabold text-yellow-500">
+                {Constants.AUTH_SCOPE.join(', ')}{' '}
+              </span>
+              scopes.
             </>
           }
         />
@@ -81,7 +85,7 @@ export const LoginWithToken: React.FC = () => {
 
         {!isValidToken && (
           <div className="mt-4 text-red-500 text-sm font-medium">
-            This token could not get validated with {values.hostname}.
+            This token could not be validated with {values.hostname}.
           </div>
         )}
 

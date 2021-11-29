@@ -79,11 +79,15 @@ exports[`routes/LoginWithToken.js renders correctly 1`] = `
             personal access tokens
           </a>
            
-          and create one with the 
-          <strong>
-            notifications
-          </strong>
-           scope.
+          and create one with the
+           
+          <span
+            className="underline font-extrabold text-yellow-500"
+          >
+            read:user, notifications
+             
+          </span>
+          scopes.
         </div>
       </div>
       <div
