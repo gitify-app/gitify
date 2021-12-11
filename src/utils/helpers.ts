@@ -1,4 +1,3 @@
-import { parse } from 'url';
 import { EnterpriseAccount } from '../types';
 
 import { Constants } from './constants';
@@ -17,8 +16,22 @@ export function generateGitHubAPIUrl(hostname) {
     : `https://api.${hostname}/`;
 }
 
-export function generateGitHubWebUrl(url: string) {
-  const { hostname } = parse(url);
+export function generateNotificationReferrerId(
+  notificationId: string,
+  userId: number
+) {
+  const buffer = Buffer.from(
+    `018:NotificationThread${notificationId}:${userId}`
+  );
+  return `notification_referrer_id=${buffer.toString('base64')}`;
+}
+
+export function generateGitHubWebUrl(
+  url: string,
+  notificationId: string,
+  userId?: number
+) {
+  const { hostname } = new URL(url);
   const isEnterprise =
     hostname !== `api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}`;
 
@@ -33,6 +46,15 @@ export function generateGitHubWebUrl(url: string) {
   if (newUrl.indexOf('/releases/') !== -1) {
     newUrl = newUrl.replace('/repos', '');
     newUrl = newUrl.substr(0, newUrl.lastIndexOf('/'));
+  }
+
+  if (userId) {
+    const notificationReferrerId = generateNotificationReferrerId(
+      notificationId,
+      userId
+    );
+
+    return `${newUrl}?${notificationReferrerId}`;
   }
 
   return newUrl;
