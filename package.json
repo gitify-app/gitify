@@ -51,9 +51,7 @@
   "homepage": "https://www.gitify.io/",
   "jest": {
     "preset": "ts-jest/presets/js-with-ts",
-    "setupFiles": [
-      "<rootDir>/src/__helpers__/setupEnvVars.js"
-    ],
+    "setupFiles": ["<rootDir>/src/__helpers__/setupEnvVars.js"],
     "testEnvironment": "jsdom",
     "coverageThreshold": {
       "global": {
@@ -80,9 +78,7 @@
       "gatekeeperAssess": false,
       "entitlements": "./entitlements/entitlements.mac.plist",
       "entitlementsInherit": "./entitlements/entitlements.mac.plist",
-      "publish": [
-        "github"
-      ]
+      "publish": ["github"]
     },
     "dmg": {
       "icon": "assets/images/app-icon.icns",
@@ -96,12 +92,23 @@
       "oneClick": false
     },
     "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ],
+      "target": ["AppImage", "deb"],
       "category": "Development",
       "maintainer": "Emmanouil Konstantinidis"
+    },
+    "deb": {
+      "depends": [
+        "libgtk-3-0",
+        "libnotify4",
+        "libnss3",
+        "libxss1",
+        "libxtst6",
+        "xdg-utils",
+        "libatspi2.0-0",
+        "libuuid1",
+        "libayatana-appindicator3-1",
+        "libsecret-1"
+      ]
     },
     "afterSign": "scripts/notarize.js"
   },
