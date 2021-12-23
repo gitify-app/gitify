@@ -78,3 +78,6 @@ temp/
 
 dist/
 build/
+
+# Jetbrains IDEs
+.idea/

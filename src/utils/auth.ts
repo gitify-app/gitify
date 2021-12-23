@@ -1,3 +1,5 @@
+import { generateGitHubAPIUrl } from "./helpers";
+
 const { remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 
@@ -78,7 +80,7 @@ export const getUserData = async (
   hostname: string
 ): Promise<User> => {
   const response = await apiRequestAuth(
-    `https://api.${hostname}/user`,
+    `${generateGitHubAPIUrl(hostname)}user`,
     'GET',
     token
   );

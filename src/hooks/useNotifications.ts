@@ -57,16 +57,14 @@ export const useNotifications = (): NotificationsState => {
         if (!isGitHubLoggedIn) {
           return;
         }
-        const url = `https://api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}/${endpointSuffix}`;
+        const url = `${generateGitHubAPIUrl(Constants.DEFAULT_AUTH_OPTIONS.hostname)}${endpointSuffix}`;
         return apiRequestAuth(url, 'GET', accounts.token);
       }
 
       function getEnterpriseNotifications() {
         return accounts.enterpriseAccounts.map((account) => {
-          const hostname = account.hostname;
-          const token = account.token;
-          const url = `https://${hostname}/api/v3/${endpointSuffix}`;
-          return apiRequestAuth(url, 'GET', token);
+          const url = `${generateGitHubAPIUrl(account.hostname)}${endpointSuffix}`;
+          return apiRequestAuth(url, 'GET', account.token);
         });
       }
 
