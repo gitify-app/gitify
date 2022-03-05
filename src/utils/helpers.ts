@@ -66,7 +66,7 @@ const addHours = (date: string, hours: number) =>
   new Date(new Date(date).getTime() + hours * 36e5).toISOString();
 
 const queryString = (repo: string, title: string, lastUpdated: string) =>
-  `${title} in:title repo:${repo} -updated:<${addHours(lastUpdated, -2)}`;
+  `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
 
 export async function getDiscussionUrl(
   notification: Notification,
@@ -89,7 +89,7 @@ export async function getDiscussionUrl(
               }
           }
       }
-    }`,
+    }`
   });
   let edges = response?.data?.data?.search?.edges?.filter(
       edge => edge.node.title === notification.subject.title
