@@ -1,4 +1,4 @@
-const { remote, shell } = require('electron');
+const { remote } = require('electron');
 
 import { generateGitHubWebUrl, getDiscussionUrl } from './helpers';
 import { reOpenWindow, openExternalLink, updateTrayIcon } from './comms';
@@ -93,9 +93,9 @@ export const raiseNativeNotification = (
       if (notificationUrl) {
         const url = generateGitHubWebUrl(subject.url, id, accounts.user?.id);
         openExternalLink(url);
-      } else if (notifications[0].subject.type === 'Discussion') {
+      } else if (subject.type === 'Discussion') {
         getDiscussionUrl(notifications[0], accounts.token).then(url =>
-          shell.openExternal(
+          openExternalLink(
             generateGitHubWebUrl(
               url || `${repository.url}/discussions`,
               id,

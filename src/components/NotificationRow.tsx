@@ -1,4 +1,4 @@
-const { shell } = require('electron');
+import { openExternalLink } from '../utils/comms';
 
 import React, { useCallback, useContext } from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
@@ -18,8 +18,12 @@ export const NotificationRow: React.FC<IProps> = ({
   notification,
   hostname,
 }) => {
-  const { settings, accounts } = useContext(AppContext);
-  const { markNotification, unsubscribeNotification } = useContext(AppContext);
+  const {
+    settings,
+    accounts,
+    markNotification,
+    unsubscribeNotification,
+  } = useContext(AppContext);
 
   const pressTitle = useCallback(() => {
     openBrowser();
@@ -37,10 +41,10 @@ export const NotificationRow: React.FC<IProps> = ({
         notification.id,
         accounts.user?.id
       );
-      shell.openExternal(url);
+      openExternalLink(url);
     } else if (notification.subject.type === 'Discussion') {
       getDiscussionUrl(notification, accounts.token).then(url =>
-        shell.openExternal(
+        openExternalLink(
           generateGitHubWebUrl(
             url || `${notification.repository.url}/discussions`,
             notification.id,
