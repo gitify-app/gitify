@@ -1,10 +1,10 @@
-const { remote } = require('electron');
+const { remote, shell } = require('electron');
 
-import { generateGitHubWebUrl } from './helpers';
+import { generateGitHubWebUrl, getDiscussionUrl } from './helpers';
 import { reOpenWindow, openExternalLink, updateTrayIcon } from './comms';
-import { Notification, User } from '../typesGithub';
+import { Notification } from '../typesGithub';
 
-import { AccountNotifications, SettingsState } from '../types';
+import { AccountNotifications, SettingsState, AuthState } from '../types';
 
 export const setTrayIconColor = (notifications: AccountNotifications[]) => {
   const allNotificationsCount = notifications.reduce(
@@ -19,7 +19,7 @@ export const triggerNativeNotifications = (
   previousNotifications: AccountNotifications[],
   newNotifications: AccountNotifications[],
   settings: SettingsState,
-  user: User
+  accounts: AuthState
 ) => {
   const diffNotifications = newNotifications
     .map((account) => {
@@ -55,13 +55,13 @@ export const triggerNativeNotifications = (
   }
 
   if (settings.showNotifications) {
-    raiseNativeNotification(diffNotifications, user?.id);
+    raiseNativeNotification(diffNotifications, accounts);
   }
 };
 
 export const raiseNativeNotification = (
   notifications: Notification[],
-  userId?: number
+  accounts: AuthState
 ) => {
   let title: string;
   let body: string;
@@ -87,11 +87,22 @@ export const raiseNativeNotification = (
       const appWindow = remote.getCurrentWindow();
       appWindow.hide();
 
+      const { subject, id, repository } = notifications[0];
+
       // Some Notification types from GitHub are missing urls in their subjects.
       if (notificationUrl) {
-        const { subject, id } = notifications[0];
-        const url = generateGitHubWebUrl(subject.url, id, userId);
+        const url = generateGitHubWebUrl(subject.url, id, accounts.user?.id);
         openExternalLink(url);
+      } else if (notifications[0].subject.type === 'Discussion') {
+        getDiscussionUrl(notifications[0], accounts.token).then(url =>
+          shell.openExternal(
+            generateGitHubWebUrl(
+              url || `${repository.url}/discussions`,
+              id,
+              accounts.user?.id
+            )
+          )
+        );
       }
     } else {
       reOpenWindow();

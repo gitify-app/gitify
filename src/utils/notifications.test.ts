@@ -7,6 +7,7 @@ import {
   mockedSingleAccountNotifications,
   mockedUser,
 } from '../__mocks__/mockedData';
+import { mockAccounts } from '../__mocks__/mock-state';
 import * as comms from './comms';
 import * as notificationsHelpers from './notifications';
 import { SettingsState } from '../types';
@@ -27,7 +28,7 @@ describe('utils/notifications.ts', () => {
       [],
       mockedAccountNotifications,
       settings,
-      mockedUser
+      mockAccounts
     );
 
     expect(notificationsHelpers.raiseNativeNotification).toHaveBeenCalledTimes(
@@ -52,7 +53,7 @@ describe('utils/notifications.ts', () => {
       [],
       mockedAccountNotifications,
       settings,
-      mockedUser
+      mockAccounts
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -73,7 +74,7 @@ describe('utils/notifications.ts', () => {
       mockedSingleAccountNotifications,
       mockedSingleAccountNotifications,
       settings,
-      mockedUser
+      mockAccounts
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -94,7 +95,7 @@ describe('utils/notifications.ts', () => {
       [],
       [],
       settings,
-      mockedUser
+      mockAccounts
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -106,7 +107,7 @@ describe('utils/notifications.ts', () => {
 
     const nativeNotification: Notification = notificationsHelpers.raiseNativeNotification(
       [mockedGithubNotifications[0]],
-      mockedUser.id
+      mockAccounts
     );
     nativeNotification.onclick(null);
 
@@ -125,7 +126,7 @@ describe('utils/notifications.ts', () => {
 
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
       mockedGithubNotifications,
-      mockedUser.id
+      mockAccounts
     );
     nativeNotification.onclick(null);
 
