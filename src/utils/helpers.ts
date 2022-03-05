@@ -1,4 +1,6 @@
 import { EnterpriseAccount } from '../types';
+import { Notification } from '../typesGithub';
+import { apiRequestAuth } from '../utils/api-requests';
 
 import { Constants } from './constants';
 
@@ -58,4 +60,43 @@ export function generateGitHubWebUrl(
   }
 
   return newUrl;
+}
+
+const addHours = (date: string, hours: number) =>
+  new Date(new Date(date).getTime() + hours * 36e5).toISOString();
+
+const queryString = (repo: string, title: string, lastUpdated: string) =>
+  `${title} in:title repo:${repo} -updated:<${addHours(lastUpdated, -2)}`;
+
+export async function getDiscussionUrl(
+  notification: Notification,
+  token: string
+): Promise<string> {
+  const response = await apiRequestAuth(`https://api.github.com/graphql`, 'POST', token, {
+    query: `{
+      search(query:"${queryString(
+        notification.repository.full_name,
+        notification.subject.title,
+        notification.updated_at
+      )}", type: DISCUSSION, first: 10) {
+          edges {
+              node {
+                  ... on Discussion {
+                      viewerSubscription
+                      title
+                      url
+                  }
+              }
+          }
+      }
+    }`,
+  });
+  let edges = response?.data?.data?.search?.edges?.filter(
+      edge => edge.node.title === notification.subject.title
+  ) || [];
+  if (edges.length > 1)
+    edges = edges.filter(
+      edge => edge.node.viewerSubscription === 'SUBSCRIBED'
+    );
+  return edges[0]?.node.url;
 }

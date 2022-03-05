@@ -5,7 +5,7 @@ import { formatDistanceToNow, parseISO } from 'date-fns';
 import { CheckIcon, MuteIcon } from '@primer/octicons-react';
 
 import { formatReason, getNotificationTypeIcon } from '../utils/github-api';
-import { generateGitHubWebUrl } from '../utils/helpers';
+import { generateGitHubWebUrl, getDiscussionUrl } from '../utils/helpers';
 import { Notification } from '../typesGithub';
 import { AppContext } from '../context/App';
 
@@ -38,6 +38,16 @@ export const NotificationRow: React.FC<IProps> = ({
         accounts.user?.id
       );
       shell.openExternal(url);
+    } else if (notification.subject.type === 'Discussion') {
+      getDiscussionUrl(notification, accounts.token).then(url =>
+        shell.openExternal(
+          generateGitHubWebUrl(
+            url || `${notification.repository.url}/discussions`,
+            notification.id,
+            accounts.user?.id
+          )
+        )
+      );
     }
   }, [notification]);
 
