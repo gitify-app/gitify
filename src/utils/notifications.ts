@@ -76,7 +76,7 @@ export const raiseNativeNotification = (
 
   if (notifications.length === 1) {
     const notification = notifications[0];
-    title = `Gitify - ${notification.repository.full_name}`;
+    title = notification.repository.full_name;
     body = notification.subject.title;
   } else {
     title = 'Gitify';
