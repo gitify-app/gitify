@@ -1,7 +1,7 @@
 import { AxiosPromise, AxiosResponse } from 'axios';
 
-const { remote } = require('electron');
-const BrowserWindow = remote.BrowserWindow;
+import { remote } from 'electron';
+const browserWindow = new remote.BrowserWindow
 
 import * as auth from './auth';
 import * as apiRequests from './api-requests';
@@ -9,14 +9,14 @@ import { AuthState } from '../types';
 
 describe('utils/auth.tsx', () => {
   describe('authGitHub', () => {
-    const loadURLMock = jest.spyOn(new BrowserWindow(), 'loadURL');
+    const loadURLMock = jest.spyOn(browserWindow, 'loadURL');
 
     beforeEach(() => {
       loadURLMock.mockReset();
     });
 
     it('should call authGithub - success', async () => {
-      spyOn(new BrowserWindow().webContents, 'on').and.callFake(
+      spyOn(browserWindow.webContents, 'on').and.callFake(
         (event, callback) => {
           if (event === 'will-redirect') {
             const event = new Event('will-redirect');
@@ -30,19 +30,19 @@ describe('utils/auth.tsx', () => {
       expect(res.authCode).toBe('123-456');
 
       expect(
-        new BrowserWindow().webContents.session.clearStorageData
+        browserWindow.webContents.session.clearStorageData
       ).toHaveBeenCalledTimes(1);
 
       expect(loadURLMock).toHaveBeenCalledTimes(1);
       expect(loadURLMock).toHaveBeenCalledWith(
-        'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read:user,notifications'
+        'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read:user,notifications,repo'
       );
 
-      expect(new BrowserWindow().destroy).toHaveBeenCalledTimes(1);
+      expect(browserWindow.destroy).toHaveBeenCalledTimes(1);
     });
 
     it('should call authGithub - failure', async () => {
-      spyOn(new BrowserWindow().webContents, 'on').and.callFake(
+      spyOn(browserWindow.webContents, 'on').and.callFake(
         (event, callback) => {
           if (event === 'will-redirect') {
             const event = new Event('will-redirect');

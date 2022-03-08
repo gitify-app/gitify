@@ -1,7 +1,7 @@
-import { EnterpriseAccount } from '../types';
-import { Notification } from '../typesGithub';
+import { EnterpriseAccount, AuthState } from '../types';
+import { Notification, GraphQLSearch, DiscussionCommentEdge } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
-
+import { openExternalLink } from '../utils/comms';
 import { Constants } from './constants';
 
 export function getEnterpriseAccountToken(
@@ -31,7 +31,8 @@ export function generateNotificationReferrerId(
 export function generateGitHubWebUrl(
   url: string,
   notificationId: string,
-  userId?: number
+  userId?: number,
+  comment: string = ''
 ) {
   const { hostname } = new URL(url);
   const isEnterprise =
@@ -56,10 +57,10 @@ export function generateGitHubWebUrl(
       userId
     );
 
-    return `${newUrl}?${notificationReferrerId}`;
+    return `${newUrl}?${notificationReferrerId}${comment}`;
   }
 
-  return newUrl;
+  return newUrl + comment;
 }
 
 const addHours = (date: string, hours: number) =>
@@ -68,11 +69,11 @@ const addHours = (date: string, hours: number) =>
 const queryString = (repo: string, title: string, lastUpdated: string) =>
   `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
 
-export async function getDiscussionUrl(
+async function getDiscussionUrl(
   notification: Notification,
   token: string
-): Promise<string> {
-  const response = await apiRequestAuth(`https://api.github.com/graphql`, 'POST', token, {
+): Promise<{ url: string, latestCommentId: string|number}> {
+  const response: GraphQLSearch = await apiRequestAuth(`https://api.github.com/graphql`, 'POST', token, {
     query: `{
       search(query:"${queryString(
         notification.repository.full_name,
@@ -85,6 +86,22 @@ export async function getDiscussionUrl(
                       viewerSubscription
                       title
                       url
+                      comments(last: 100) {
+                        edges {
+                          node {
+                            databaseId
+                            createdAt
+                            replies(last: 1) {
+                              edges {
+                                node {
+                                  databaseId
+                                  createdAt
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
                   }
               }
           }
@@ -98,5 +115,49 @@ export async function getDiscussionUrl(
     edges = edges.filter(
       edge => edge.node.viewerSubscription === 'SUBSCRIBED'
     );
-  return edges[0]?.node.url;
+    
+  let comments = edges[0]?.node.comments.edges
+
+  let latestCommentId: string|number;
+  if (comments?.length) {
+    latestCommentId = getLatestDiscussionCommentId(comments);
+  }
+
+  return {
+    url: edges[0]?.node.url,
+    latestCommentId
+  }
+}
+
+export const getLatestDiscussionCommentId = (comments: DiscussionCommentEdge[]) => comments
+      .flatMap(comment => comment.node.replies.edges)
+      .concat([comments.at(-1)])
+      .reduce((a, b) => a.node.createdAt > b.node.createdAt ? a : b)
+      ?.node.databaseId;
+
+export const getCommentId = (url: string) => /comments\/(?<id>\d+)/g.exec(url)?.groups?.id;
+
+export async function openInBrowser(notification: Notification, accounts: AuthState) {
+  if (notification.subject.url) {
+    const latestCommentId = getCommentId(notification.subject.latest_comment_url);
+    openExternalLink(
+      generateGitHubWebUrl(
+        notification.subject.url,
+        notification.id,
+        accounts.user?.id,
+        latestCommentId ? '#issuecomment-' + latestCommentId : undefined
+      )
+    );
+  } else if (notification.subject.type === 'Discussion') {
+    getDiscussionUrl(notification, accounts.token).then(({ url, latestCommentId }) =>
+      openExternalLink(
+        generateGitHubWebUrl(
+          url || `${notification.repository.url}/discussions`,
+          notification.id,
+          accounts.user?.id,
+          latestCommentId ? '#discussioncomment-' + latestCommentId : undefined
+        )
+      )
+    );
+  }
 }

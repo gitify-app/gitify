@@ -1,11 +1,9 @@
-import { openExternalLink } from '../utils/comms';
-
 import React, { useCallback, useContext } from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { CheckIcon, MuteIcon } from '@primer/octicons-react';
 
 import { formatReason, getNotificationTypeIcon } from '../utils/github-api';
-import { generateGitHubWebUrl, getDiscussionUrl } from '../utils/helpers';
+import { openInBrowser } from '../utils/helpers';
 import { Notification } from '../typesGithub';
 import { AppContext } from '../context/App';
 
@@ -33,27 +31,7 @@ export const NotificationRow: React.FC<IProps> = ({
     }
   }, [settings]);
 
-  const openBrowser = useCallback(() => {
-    // Some Notification types from GitHub are missing urls in their subjects.
-    if (notification.subject.url) {
-      const url = generateGitHubWebUrl(
-        notification.subject.url,
-        notification.id,
-        accounts.user?.id
-      );
-      openExternalLink(url);
-    } else if (notification.subject.type === 'Discussion') {
-      getDiscussionUrl(notification, accounts.token).then(url =>
-        openExternalLink(
-          generateGitHubWebUrl(
-            url || `${notification.repository.url}/discussions`,
-            notification.id,
-            accounts.user?.id
-          )
-        )
-      );
-    }
-  }, [notification]);
+  const openBrowser = useCallback(() => openInBrowser(notification, accounts), [notification]);
 
   const unsubscribe = (event: React.MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.

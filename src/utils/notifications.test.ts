@@ -1,6 +1,6 @@
 import * as _ from 'lodash';
 
-import { generateGitHubWebUrl } from './helpers';
+import { generateGitHubWebUrl, getCommentId } from './helpers';
 import {
   mockedAccountNotifications,
   mockedGithubNotifications,
@@ -115,7 +115,8 @@ describe('utils/notifications.ts', () => {
     const newUrl = generateGitHubWebUrl(
       notif.subject.url,
       notif.id,
-      mockedUser.id
+      mockedUser.id,
+      '#issuecomment-' + getCommentId(notif.subject.latest_comment_url)
     );
     expect(comms.openExternalLink).toHaveBeenCalledTimes(1);
     expect(comms.openExternalLink).toHaveBeenCalledWith(newUrl);

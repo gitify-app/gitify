@@ -1,7 +1,7 @@
 const { remote } = require('electron');
 
-import { generateGitHubWebUrl, getDiscussionUrl } from './helpers';
-import { reOpenWindow, openExternalLink, updateTrayIcon } from './comms';
+import { openInBrowser } from '../utils/helpers';
+import { reOpenWindow, updateTrayIcon } from './comms';
 import { Notification } from '../typesGithub';
 
 import { AccountNotifications, SettingsState, AuthState } from '../types';
@@ -65,13 +65,11 @@ export const raiseNativeNotification = (
 ) => {
   let title: string;
   let body: string;
-  let notificationUrl: string | null;
 
   if (notifications.length === 1) {
     const notification = notifications[0];
     title = `Gitify - ${notification.repository.full_name}`;
     body = notification.subject.title;
-    notificationUrl = notification.subject.url;
   } else {
     title = 'Gitify';
     body = `You have ${notifications.length} notifications.`;
@@ -84,26 +82,8 @@ export const raiseNativeNotification = (
 
   nativeNotification.onclick = function () {
     if (notifications.length === 1) {
-      const appWindow = remote.getCurrentWindow();
-      appWindow.hide();
-
-      const { subject, id, repository } = notifications[0];
-
-      // Some Notification types from GitHub are missing urls in their subjects.
-      if (notificationUrl) {
-        const url = generateGitHubWebUrl(subject.url, id, accounts.user?.id);
-        openExternalLink(url);
-      } else if (subject.type === 'Discussion') {
-        getDiscussionUrl(notifications[0], accounts.token).then(url =>
-          openExternalLink(
-            generateGitHubWebUrl(
-              url || `${repository.url}/discussions`,
-              id,
-              accounts.user?.id
-            )
-          )
-        );
-      }
+      remote.getCurrentWindow().hide();
+      openInBrowser(notifications[0], accounts);
     } else {
       reOpenWindow();
     }
