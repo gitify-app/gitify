@@ -1,5 +1,6 @@
 import React, { useCallback, useContext } from 'react';
-import { ipcRenderer, remote } from 'electron';
+import { ipcRenderer } from 'electron';
+import { process, app } from '@electron/remote';
 import { useHistory } from 'react-router-dom';
 import { ArrowLeftIcon } from '@primer/octicons-react';
 
@@ -13,7 +14,7 @@ import { IconQuit } from '../icons/Quit';
 import { updateTrayIcon } from '../utils/comms';
 import { setAppearance } from '../utils/appearance';
 
-const isLinux = remote.process.platform === 'linux';
+const isLinux = process.platform === 'linux';
 
 export const SettingsRoute: React.FC = () => {
   const { settings, updateSetting, logout } = useContext(AppContext);
@@ -111,7 +112,7 @@ export const SettingsRoute: React.FC = () => {
 
       <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-4 px-8">
         <small className="font-semibold">
-          Gitify v{remote.app.getVersion()}
+          Gitify v{app.getVersion()}
         </small>
 
         <div>

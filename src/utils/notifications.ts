@@ -1,4 +1,4 @@
-const { remote } = require('electron');
+import { getCurrentWindow } from '@electron/remote';
 
 import { openInBrowser } from '../utils/helpers';
 import { reOpenWindow, updateTrayIcon } from './comms';
@@ -90,7 +90,7 @@ export const raiseNativeNotification = (
 
   nativeNotification.onclick = function () {
     if (notifications.length === 1) {
-      remote.getCurrentWindow().hide();
+      getCurrentWindow().hide();
       openInBrowser(notifications[0], accounts);
       if (settings.markOnClick) {
         markNotification?.(accounts, notifications[0].id, hostname);

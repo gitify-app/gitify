@@ -6,7 +6,9 @@ import {
   restoreSetting,
 } from './comms';
 
-const { ipcRenderer, remote, shell } = require('electron');
+const { ipcRenderer, shell } = require('electron');
+import { app } from '@electron/remote';
+
 
 describe('utils/comms.ts', () => {
   beforeEach(function () {
@@ -46,22 +48,22 @@ describe('utils/comms.ts', () => {
   });
 
   it('should setAutoLaunch (true)', () => {
-    spyOn(remote.app, 'setLoginItemSettings');
+    spyOn(app, 'setLoginItemSettings');
 
     setAutoLaunch(true);
-    expect(remote.app.setLoginItemSettings).toHaveBeenCalledTimes(1);
-    expect(remote.app.setLoginItemSettings).toHaveBeenCalledWith({
+    expect(app.setLoginItemSettings).toHaveBeenCalledTimes(1);
+    expect(app.setLoginItemSettings).toHaveBeenCalledWith({
       openAtLogin: true,
       openAsHidden: true,
     });
   });
 
   it('should setAutoLaunch (false)', () => {
-    spyOn(remote.app, 'setLoginItemSettings');
+    spyOn(app, 'setLoginItemSettings');
 
     setAutoLaunch(false);
-    expect(remote.app.setLoginItemSettings).toHaveBeenCalledTimes(1);
-    expect(remote.app.setLoginItemSettings).toHaveBeenCalledWith({
+    expect(app.setLoginItemSettings).toHaveBeenCalledTimes(1);
+    expect(app.setLoginItemSettings).toHaveBeenCalledWith({
       openAtLogin: false,
       openAsHidden: false,
     });

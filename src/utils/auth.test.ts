@@ -1,7 +1,7 @@
 import { AxiosPromise, AxiosResponse } from 'axios';
 
-import { remote } from 'electron';
-const browserWindow = new remote.BrowserWindow
+import { BrowserWindow } from '@electron/remote';
+const browserWindow = new BrowserWindow
 
 import * as auth from './auth';
 import * as apiRequests from './api-requests';
