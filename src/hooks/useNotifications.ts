@@ -100,7 +100,8 @@ export const useNotifications = (): NotificationsState => {
               notifications,
               data,
               settings,
-              accounts
+              accounts,
+              markNotification
             );
             setNotifications(data);
             setIsFetching(false);

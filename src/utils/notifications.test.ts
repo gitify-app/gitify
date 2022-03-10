@@ -107,6 +107,7 @@ describe('utils/notifications.ts', () => {
 
     const nativeNotification: Notification = notificationsHelpers.raiseNativeNotification(
       [mockedGithubNotifications[0]],
+      defaultSettings,
       mockAccounts
     );
     nativeNotification.onclick(null);
@@ -127,6 +128,7 @@ describe('utils/notifications.ts', () => {
 
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
       mockedGithubNotifications,
+      defaultSettings,
       mockAccounts
     );
     nativeNotification.onclick(null);

@@ -6,6 +6,8 @@ import { Notification } from '../typesGithub';
 
 import { AccountNotifications, SettingsState, AuthState } from '../types';
 
+let markNotification: (accounts: AuthState, id: string, hostname: string) => Promise<void>;
+
 export const setTrayIconColor = (notifications: AccountNotifications[]) => {
   const allNotificationsCount = notifications.reduce(
     (memo, acc) => memo + acc.notifications.length,
@@ -19,16 +21,19 @@ export const triggerNativeNotifications = (
   previousNotifications: AccountNotifications[],
   newNotifications: AccountNotifications[],
   settings: SettingsState,
-  accounts: AuthState
+  accounts: AuthState,
+  markNotification_?: (accounts: AuthState, id: string, hostname: string) => Promise<void>
 ) => {
-  const diffNotifications = newNotifications
+  markNotification ??= markNotification_;
+
+  const diff = newNotifications
     .map((account) => {
       const accountPreviousNotifications = previousNotifications.find(
         (item) => item.hostname === account.hostname
       );
 
       if (!accountPreviousNotifications) {
-        return account.notifications;
+        return { hostname: account.hostname, notifications: account.notifications };
       }
 
       const accountPreviousNotificationsIds = accountPreviousNotifications.notifications.map(
@@ -39,9 +44,10 @@ export const triggerNativeNotifications = (
         return !accountPreviousNotificationsIds.includes(`${item.id}`);
       });
 
-      return accountNewNotifications;
+      return { hostname: account.hostname, notifications: accountNewNotifications };
     })
-    .reduce((acc, val) => acc.concat(val), []);
+
+  const diffNotifications = diff.flatMap(o => o.notifications)
 
   setTrayIconColor(newNotifications);
 
@@ -55,13 +61,15 @@ export const triggerNativeNotifications = (
   }
 
   if (settings.showNotifications) {
-    raiseNativeNotification(diffNotifications, accounts);
+    raiseNativeNotification(diffNotifications, settings, accounts, diff[0].hostname);
   }
 };
 
 export const raiseNativeNotification = (
   notifications: Notification[],
-  accounts: AuthState
+  settings: SettingsState,
+  accounts: AuthState,
+  hostname?: string
 ) => {
   let title: string;
   let body: string;
@@ -84,6 +92,9 @@ export const raiseNativeNotification = (
     if (notifications.length === 1) {
       remote.getCurrentWindow().hide();
       openInBrowser(notifications[0], accounts);
+      if (settings.markOnClick) {
+        markNotification?.(accounts, notifications[0].id, hostname);
+      }
     } else {
       reOpenWindow();
     }
