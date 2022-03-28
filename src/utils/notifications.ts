@@ -69,7 +69,7 @@ export const raiseNativeNotification = (
 
   if (notifications.length === 1) {
     const notification = notifications[0];
-    title = notification.repository.full_name;
+    title = `${process.platform !== 'win32' ? 'Gitify - ' : ''}${notification.repository.full_name}`;
     body = notification.subject.title;
     notificationUrl = notification.subject.url;
   } else {
