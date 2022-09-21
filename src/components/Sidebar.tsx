@@ -91,8 +91,8 @@ export const Sidebar: React.FC = () => {
 
         <div
           className={footerButtonClasses}
-          onClick={onOpenBrowser}
-          aria-label="View project on GitHub"
+          onClick={onOpenGitHubNotifications}
+          aria-label="Open notifications page on GitHub"
         >
           <Octicons.MarkGithubIcon size={15} />
         </div>
