@@ -63,7 +63,10 @@ export const Sidebar: React.FC = () => {
           <>
             <button
               className={footerButtonClasses}
-              onClick={fetchNotifications}
+              onClick={() => {
+                history.replace('/');
+                fetchNotifications;
+              }}
               aria-label="Refresh Notifications"
             >
               <IconRefresh className="w-3.5 h-3.5" />
@@ -71,7 +74,13 @@ export const Sidebar: React.FC = () => {
 
             <button
               className={footerButtonClasses}
-              onClick={() => history.push('/settings')}
+              onClick={() => {
+                if (window.location.hash.includes('settings')) {
+                  history.replace('/');
+                } else {
+                  history.push('/settings');
+                }
+              }}
               aria-label="Settings"
             >
               <IconCog className="w-4 h-4" />
