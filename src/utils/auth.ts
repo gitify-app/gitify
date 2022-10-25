@@ -13,7 +13,7 @@ export const authGitHub = (
     // Build the OAuth consent page URL
     const authWindow = new BrowserWindow({
       width: 548,
-      height: 780,
+      height: 736,
       show: true,
     });
 
