@@ -3,6 +3,7 @@ import { parse } from 'url';
 import { useCallback, useState } from 'react';
 
 import { AccountNotifications, AuthState, SettingsState } from '../types';
+import { Notification } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import {
   getEnterpriseAccountToken,
@@ -41,7 +42,7 @@ interface NotificationsState {
   requestFailed: boolean;
 }
 
-export const useNotifications = (): NotificationsState => {
+export const useNotifications = (colors: boolean): NotificationsState => {
   const [isFetching, setIsFetching] = useState(false);
   const [requestFailed, setRequestFailed] = useState(false);
   const [notifications, setNotifications] = useState<AccountNotifications[]>(
@@ -96,14 +97,70 @@ export const useNotifications = (): NotificationsState => {
                 ]
               : [...enterpriseNotifications];
 
-            triggerNativeNotifications(
-              notifications,
-              data,
-              settings,
-              accounts.user
-            );
-            setNotifications(data);
-            setIsFetching(false);
+            if (!colors) {
+              setNotifications(data);
+              triggerNativeNotifications(
+                notifications,
+                data,
+                settings,
+                accounts.user
+              );
+              setIsFetching(false);
+              return;
+            }
+            axios
+              .all(
+                data.map(async (accountNotifications) => {
+                  return {
+                    hostname: accountNotifications.hostname,
+                    notifications: await axios.all<Notification>(
+                      accountNotifications.notifications.map(
+                        async (notification: Notification) => {
+                          if (
+                            notification.subject.type !== 'PullRequest' &&
+                            notification.subject.type !== 'Issue'
+                          ) {
+                            return notification;
+                          }
+
+                          const cardinalData = (
+                            await apiRequestAuth(
+                              notification.subject.url,
+                              'GET',
+                              accounts.token
+                            )
+                          ).data;
+
+                          const state =
+                            cardinalData.state === 'closed'
+                              ? cardinalData.state_reason ||
+                                (cardinalData.merged && 'merged') ||
+                                'closed'
+                              : (cardinalData.draft && 'draft') || 'open';
+
+                          return {
+                            ...notification,
+                            subject: {
+                              ...notification.subject,
+                              state,
+                            },
+                          };
+                        }
+                      )
+                    ),
+                  };
+                })
+              )
+              .then((parsedNotifications) => {
+                setNotifications(parsedNotifications);
+                triggerNativeNotifications(
+                  notifications,
+                  parsedNotifications,
+                  settings,
+                  accounts.user
+                );
+                setIsFetching(false);
+              });
           })
         )
         .catch(() => {
