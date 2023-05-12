@@ -1,4 +1,4 @@
-import { Reason, SubjectType } from '../typesGithub';
+import { Reason, StateType, SubjectType } from '../typesGithub';
 import * as Octicons from '@primer/octicons-react';
 
 // prettier-ignore
@@ -72,5 +72,26 @@ export function getNotificationTypeIcon(
       return Octicons.AlertIcon;
     default:
       return Octicons.QuestionIcon;
+  }
+}
+
+export function getNotificationTypeIconColor(state: StateType): string {
+  switch (state) {
+    case 'closed':
+      return 'text-red-500';
+    case 'open':
+      return 'text-green-500';
+    case 'merged':
+      return 'text-purple-500';
+    case 'reopened':
+      return 'text-green-500';
+    case 'not_planned':
+      return 'text-gray-300';
+    case 'completed':
+      return 'text-purple-500';
+    case 'draft':
+      return 'text-gray-600';
+    default:
+      return 'text-gray-300';
   }
 }
