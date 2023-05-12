@@ -36,6 +36,7 @@ export const defaultSettings: SettingsState = {
   markOnClick: false,
   openAtStartup: false,
   appearance: Appearance.SYSTEM,
+  colors: true,
 };
 
 interface AppContextState {
@@ -71,7 +72,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     markNotification,
     unsubscribeNotification,
     markRepoNotifications,
-  } = useNotifications();
+  } = useNotifications(settings.colors);
 
   useEffect(() => {
     restoreSettings();
@@ -160,6 +161,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
     if (existing.settings) {
       setSettings({ ...defaultSettings, ...existing.settings });
+      return existing.settings;
     }
   }, []);
 

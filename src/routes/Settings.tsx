@@ -72,6 +72,12 @@ export const SettingsRoute: React.FC = () => {
         />
 
         <FieldCheckbox
+          name="colors"
+          label="Use colors to indicate state"
+          checked={settings.colors}
+          onChange={(evt) => updateSetting('colors', evt.target.checked)}
+        />
+        <FieldCheckbox
           name="showOnlyParticipating"
           label="Show only participating"
           checked={settings.participating}
