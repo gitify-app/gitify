@@ -11,8 +11,7 @@
     "make:win": "electron-builder --win",
     "prettier:check": "prettier --check 'src/**/*.{js,ts,tsx}'",
     "prettier:apply": "prettier --write 'src/**/*.{js,ts,tsx}'",
-    "jest": "jest",
-    "test": "pnpm jest",
+    "test": "jest",
     "start": "electron . --enable-logging"
   },
   "repository": {
