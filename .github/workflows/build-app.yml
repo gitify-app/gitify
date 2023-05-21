@@ -39,13 +39,13 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
       - name: Make macOS (electron-builder)
         env:
           CSC_LINK: ${{ secrets.mac_certs }}
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
-        run: yarn make:macos --publish=never -c.mac.identity=null
+        run: pnpm make:macos --publish=never -c.mac.identity=null
 
       - name: Clean up builds
         run: rm -rfv dist/mac-universal
@@ -91,10 +91,10 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
       - name: Make Windows (electron-builder)
-        run: yarn make:win --publish=never
+        run: pnpm make:win --publish=never
 
       - name: Clean up builds
         run: Remove-Item dist/win-unpacked -Recurse
@@ -138,10 +138,10 @@ jobs:
         run: pnpm install
 
       - name: Build
-        run: yarn build
+        run: pnpm build
 
       - name: Make Linux (electron-builder)
-        run: yarn make:linux --publish=never
+        run: pnpm make:linux --publish=never
 
       - name: Clean up builds
         run: rm -rfv dist/linux-unpacked

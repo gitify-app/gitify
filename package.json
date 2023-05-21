@@ -12,8 +12,8 @@
     "prettier:check": "prettier --check 'src/**/*.{js,ts,tsx}'",
     "prettier:apply": "prettier --write 'src/**/*.{js,ts,tsx}'",
     "jest": "jest",
-    "test": "yarn jest",
-    "start": "electron . -–enable-logging"
+    "test": "pnpm jest",
+    "start": "electron . --enable-logging"
   },
   "repository": {
     "type": "git",

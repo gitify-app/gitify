@@ -39,12 +39,12 @@ jobs:
         run: pnpm install
 
       - name: Run Prettier (Check)
-        run: yarn prettier:check
+        run: pnpm prettier:check
 
       - name: Run Typechecking
-        run: yarn tsc --noEmit
+        run: pnpm tsc --noEmit
 
       - name: Run Jest
-        run: yarn test --coverage --runInBand --verbose
+        run: pnpm test --coverage --runInBand --verbose
 
       - uses: codecov/codecov-action@v3

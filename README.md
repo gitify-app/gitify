@@ -16,8 +16,8 @@ Gitify supports macOS, Windows and Linux.
 
 ### Prerequisites & Libraries
 
-- Node 12+
-- [Yarn](https://yarnpkg.com/)
+- Node 18+
+- [PNPM](https://pnpm.io/)
 - [Electron](https://electronjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [React](https://reactjs.org/)
@@ -25,21 +25,21 @@ Gitify supports macOS, Windows and Linux.
 
 ### Installation
 
-    yarn install
+    pnpm install
 
 ### Development
 
 Optional: If you prefer to use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion).
 
-    OAUTH_CLIENT_ID="123" OAUTH_CLIENT_SECRET="456789" yarn build
+    OAUTH_CLIENT_ID="123" OAUTH_CLIENT_SECRET="456789" pnpm build
 
 To watch for changes(`webpack`) in the `src` directory:
 
-    yarn run watch
+    pnpm run watch
 
 To run the **electron app**:
 
-    yarn start
+    pnpm start
 
 ### Releases
 
@@ -56,13 +56,13 @@ The release process is automated. Follow the steps below.
 There are 2 checks - one for prettier and one for the unit tests with `jest`.
 
     // Run prettier to check
-    yarn run prettier:check
+    pnpm run prettier:check
 
     // Run linter & unit tests with coverage
-    yarn run test
+    pnpm run test
 
     // Run jest directly - allows to pass arguments like `--watch`
-    yarn run jest
+    pnpm run jest
 
 ### FAQ
 

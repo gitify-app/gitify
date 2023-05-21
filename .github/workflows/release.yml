@@ -43,7 +43,7 @@ jobs:
         env:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
-        run: yarn build
+        run: pnpm build
 
       - name: Publish macOS (electron-builder)
         env:
@@ -53,7 +53,7 @@ jobs:
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
           GH_TOKEN: ${{ secrets.gh_token }}
           NOTARIZE: true
-        run: yarn make:macos --publish onTagOrDraft
+        run: pnpm make:macos --publish onTagOrDraft
 
   release-windows:
     runs-on: windows-latest
@@ -92,12 +92,12 @@ jobs:
         env:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
-        run: yarn build
+        run: pnpm build
 
       - name: Publish Windows (electron-builder)
         env:
           GH_TOKEN: ${{ secrets.gh_token }}
-        run: yarn make:win --publish onTagOrDraft
+        run: pnpm make:win --publish onTagOrDraft
 
   release-linux:
     runs-on: ubuntu-latest
@@ -138,9 +138,9 @@ jobs:
         env:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
-        run: yarn build
+        run: pnpm build
 
       - name: Publish Linuxs (electron-builder)
         env:
           GH_TOKEN: ${{ secrets.gh_token }}
-        run: yarn make:linux --publish onTagOrDraft
+        run: pnpm make:linux --publish onTagOrDraft
