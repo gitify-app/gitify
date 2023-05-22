@@ -18,9 +18,10 @@ const DESCRIPTIONS = {
     UNKNOWN: 'The reason for this notification is not supported by the app.',
 };
 
-export function formatReason(
-  reason: Reason
-): { type: string; description: string } {
+export function formatReason(reason: Reason): {
+  type: string;
+  description: string;
+} {
   // prettier-ignore
   switch (reason) {
     case 'assign':
