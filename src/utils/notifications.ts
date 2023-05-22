@@ -31,9 +31,8 @@ export const triggerNativeNotifications = (
         return account.notifications;
       }
 
-      const accountPreviousNotificationsIds = accountPreviousNotifications.notifications.map(
-        (item) => item.id
-      );
+      const accountPreviousNotificationsIds =
+        accountPreviousNotifications.notifications.map((item) => item.id);
 
       const accountNewNotifications = account.notifications.filter((item) => {
         return !accountPreviousNotificationsIds.includes(`${item.id}`);
@@ -69,7 +68,9 @@ export const raiseNativeNotification = (
 
   if (notifications.length === 1) {
     const notification = notifications[0];
-    title = `Gitify - ${notification.repository.full_name}`;
+    title = `${process.platform !== 'win32' ? 'Gitify - ' : ''}${
+      notification.repository.full_name
+    }`;
     body = notification.subject.title;
     notificationUrl = notification.subject.url;
   } else {
