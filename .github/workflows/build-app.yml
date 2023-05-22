@@ -50,7 +50,7 @@ jobs:
       - name: Clean up builds
         run: rm -rfv dist/mac-universal
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v3
         with:
           name: Gitify-dist-mac
           path: dist/
@@ -99,7 +99,7 @@ jobs:
       - name: Clean up builds
         run: Remove-Item dist/win-unpacked -Recurse
 
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v3
         with:
           name: Gitify-dist-win
           path: dist
@@ -148,7 +148,7 @@ jobs:
       - name: Clean up builds
         run: rm -rfv dist/linux-unpacked
 
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v3
         with:
           name: Gitify-dist-linux
           path: dist
