@@ -4,6 +4,8 @@ const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('path');
 
+app.setAppUserModelId('com.electron.gitify');
+
 const iconIdle = path.join(
   __dirname,
   'assets',
