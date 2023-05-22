@@ -35,7 +35,7 @@ Optional: If you prefer to use your own OAuth credentials, you can do so by pass
 
 To watch for changes(`webpack`) in the `src` directory:
 
-    pnpm run watch
+    pnpm watch
 
 To run the **electron app**:
 
@@ -54,15 +54,17 @@ The release process is automated. Follow the steps below.
 ### Tests
 
 There are 2 checks - one for prettier and one for the unit tests with `jest`.
-
+```
     // Run prettier to check
-    pnpm run prettier:check
+    pnpm prettier:check
 
     // Run linter & unit tests with coverage
-    pnpm run test
+    pnpm test
 
-    // Run jest directly - allows to pass arguments like `--watch`
-    pnpm run jest
+    // If you want to pass arguments to jest (or other `pnpm` commands) 
+    // like `--watch`, you can prepend `--` to the command
+    pnpm test -- --watch
+```
 
 ### FAQ
 
