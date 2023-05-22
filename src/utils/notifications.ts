@@ -31,9 +31,8 @@ export const triggerNativeNotifications = (
         return account.notifications;
       }
 
-      const accountPreviousNotificationsIds = accountPreviousNotifications.notifications.map(
-        (item) => item.id
-      );
+      const accountPreviousNotificationsIds =
+        accountPreviousNotifications.notifications.map((item) => item.id);
 
       const accountNewNotifications = account.notifications.filter((item) => {
         return !accountPreviousNotificationsIds.includes(`${item.id}`);

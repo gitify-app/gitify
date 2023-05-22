@@ -8,17 +8,19 @@ import { Oops } from '../components/Oops';
 export const NotificationsRoute: React.FC = (props) => {
   const { notifications, requestFailed } = useContext(AppContext);
 
-  const hasMultipleAccounts = useMemo(() => notifications.length > 1, [
-    notifications,
-  ]);
+  const hasMultipleAccounts = useMemo(
+    () => notifications.length > 1,
+    [notifications]
+  );
   const notificationsCount = useMemo(
     () =>
       notifications.reduce((memo, acc) => memo + acc.notifications.length, 0),
     [notifications]
   );
-  const hasNotifications = useMemo(() => notificationsCount > 0, [
-    notificationsCount,
-  ]);
+  const hasNotifications = useMemo(
+    () => notificationsCount > 0,
+    [notificationsCount]
+  );
 
   if (requestFailed) {
     return <Oops />;
