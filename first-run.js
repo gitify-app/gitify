@@ -1,6 +1,6 @@
 const { app, dialog } = require('electron');
 
-const fs = require('fs-extra');
+const fs = require('fs');
 const path = require('path');
 
 async function onFirstRunMaybe() {
