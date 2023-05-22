@@ -1,6 +1,13 @@
 name: Build App
 
-on: [push]
+on:
+  push:
+    branches:
+      - main
+      - 'release/v**'
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build-macos:
