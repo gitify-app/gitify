@@ -1,4 +1,4 @@
-# Gitify [![github][github-image]][github-url] [![codecov][codecov-image]][codecov-url] [![downloads][downloads-image]][downloads-url]
+# Gitify [![github][github-image]][github-url] [![coveralls][coveralls-image]][coveralls-url] [![downloads][downloads-image]][downloads-url]
 
 > GitHub Notifications on your menu bar. Available on macOS, Windows and Linux. Gitify Mobile has been deprecated in favour of the official [GitHub mobile app](https://github.com/mobile).
 
@@ -16,8 +16,8 @@ Gitify supports macOS, Windows and Linux.
 
 ### Prerequisites & Libraries
 
-- Node 12+
-- [Yarn](https://yarnpkg.com/)
+- Node 18+
+- [PNPM](https://pnpm.io/)
 - [Electron](https://electronjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [React](https://reactjs.org/)
@@ -25,21 +25,21 @@ Gitify supports macOS, Windows and Linux.
 
 ### Installation
 
-    yarn install
+    pnpm install
 
 ### Development
 
 Optional: If you prefer to use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion).
 
-    OAUTH_CLIENT_ID="123" OAUTH_CLIENT_SECRET="456789" yarn build
+    OAUTH_CLIENT_ID="123" OAUTH_CLIENT_SECRET="456789" pnpm build
 
 To watch for changes(`webpack`) in the `src` directory:
 
-    yarn run watch
+    pnpm watch
 
 To run the **electron app**:
 
-    yarn start
+    pnpm start
 
 ### Releases
 
@@ -54,15 +54,17 @@ The release process is automated. Follow the steps below.
 ### Tests
 
 There are 2 checks - one for prettier and one for the unit tests with `jest`.
-
+```
     // Run prettier to check
-    yarn run prettier:check
+    pnpm prettier:check
 
     // Run linter & unit tests with coverage
-    yarn run test
+    pnpm test
 
-    // Run jest directly - allows to pass arguments like `--watch`
-    yarn run jest
+    // If you want to pass arguments to jest (or other `pnpm` commands) 
+    // like `--watch`, you can prepend `--` to the command
+    pnpm test -- --watch
+```
 
 ### FAQ
 
@@ -89,9 +91,9 @@ You can debug Gitify by pressing <kbd>alt</kbd> + <kbd>command</kbd> + <kbd>I</k
 
 Gitify is licensed under the MIT Open Source license. For more information, see the LICENSE file in this repository.
 
-[github-image]: https://github.com/manosim/gitify/workflows/CI/badge.svg
-[github-url]: https://github.com/manosim/gitify/actions
-[codecov-image]: https://codecov.io/gh/manosim/gitify/branch/main/graph/badge.svg
-[codecov-url]: https://codecov.io/gh/manosim/gitify
-[downloads-image]: https://img.shields.io/github/downloads/manosim/gitify/total.svg
+[github-image]: https://github.com/gitify-app/gitify/actions/workflows/build-app.yml/badge.svg
+[github-url]: https://github.com/gitify-app/gitify/actions
+[coveralls-image]: https://coveralls.io/repos/github/gitify-app/gitify/badge.svg
+[coveralls-url]: https://coveralls.io/github/gitify-app/gitify
+[downloads-image]: https://img.shields.io/github/downloads/gitify-app/gitify/total.svg
 [downloads-url]: https://www.gitify.io
