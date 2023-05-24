@@ -46,4 +46,5 @@ jobs:
       - name: Run Jest
         run: pnpm test -- --coverage --runInBand --verbose
 
-      - uses: codecov/codecov-action@v3
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
