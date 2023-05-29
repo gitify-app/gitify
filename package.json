@@ -107,7 +107,7 @@
   "dependencies": {
     "@primer/octicons-react": "^11.2.0",
     "autoprefixer": "^10.1.0",
-    "axios": "=0.21.2",
+    "axios": "=0.27.2",
     "date-fns": "^2.16.1",
     "electron-updater": "^4.3.9",
     "final-form": "^4.20.1",
