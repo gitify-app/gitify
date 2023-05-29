@@ -8,8 +8,8 @@ dependencies:
     specifier: ^10.1.0
     version: 10.1.0(postcss@8.4.23)
   axios:
-    specifier: '=0.21.1'
-    version: 0.21.1
+    specifier: '=0.21.2'
+    version: 0.21.2
   date-fns:
     specifier: ^2.16.1
     version: 2.16.1
@@ -1499,8 +1499,8 @@ packages:
     resolution: {integrity: sha512-NmWvPnx0F1SfrQbYwOi7OeaNGokp9XhzNioJ/CSBs8Qa4vxug81mhJEAVZwxXuBmYB5KDRfMq/F3RR0BIU7sWg==}
     dev: true
 
-  /axios@0.21.1:
-    resolution: {integrity: sha512-dKQiRHxGD9PPRIUNIWvZhPTPpl1rf/OxTYKsqKUDjBwYylTvV7SjSHJb9ratfyzM6wCdLCOYLzs73qpg5c4iGA==}
+  /axios@0.21.2:
+    resolution: {integrity: sha512-87otirqUw3e8CzHTMO+/9kh/FSgXt/eVDvipijwDtEuwbkySWZ9SBm6VEubmJ/kLKEoLQV/POhxXFb66bfekfg==}
     dependencies:
       follow-redirects: 1.15.2
     transitivePeerDependencies:
