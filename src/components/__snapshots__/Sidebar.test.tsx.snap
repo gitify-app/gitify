@@ -9,6 +9,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
   >
     <svg
       className="w-5 my-3 mx-auto cursor-pointer"
+      data-testid="gitify-logo"
       onClick={[Function]}
       role="logo"
       viewBox="0 0 500 500"
@@ -127,6 +128,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
   >
     <svg
       className="w-5 my-3 mx-auto cursor-pointer"
+      data-testid="gitify-logo"
       onClick={[Function]}
       role="logo"
       viewBox="0 0 500 500"

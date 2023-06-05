@@ -43,6 +43,7 @@ export const Sidebar: React.FC = () => {
       <div className="flex flex-col flex-1 items-center py-4">
         <Logo
           className="w-5 my-3 mx-auto cursor-pointer"
+          data-testid="gitify-logo"
           onClick={onOpenBrowser}
         />
 
