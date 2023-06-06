@@ -12,7 +12,7 @@ const LIGHT_GRADIENT_END = '#FFFFFF';
 const DARK_GRADIENT_START = '#22283B';
 const DARK_GRADIENT_END = '#555B6E';
 
-export const Logo = ({ isDark, onClick, className = '' }: IProps) => (
+export const Logo = ({ isDark, onClick, className = '', ...props }: IProps) => (
   <svg
     className={className}
     onClick={() => onClick && onClick()}
@@ -20,6 +20,7 @@ export const Logo = ({ isDark, onClick, className = '' }: IProps) => (
     xmlnsXlink="http://www.w3.org/1999/xlink"
     viewBox="0 0 500 500"
     role="logo"
+    {...props}
   >
     <defs>
       <linearGradient

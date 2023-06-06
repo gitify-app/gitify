@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
 import * as React from 'react';
 import { Router } from 'react-router';
@@ -99,6 +99,34 @@ describe('components/Sidebar.tsx', () => {
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(
       'https://github.com/notifications'
+    );
+  });
+
+  it('should quit the app', () => {
+    const { getByLabelText } = render(
+      <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
+      </AppContext.Provider>
+    );
+    fireEvent.click(getByLabelText('Quit App'));
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
+  });
+
+  it('should open the gitify repository', () => {
+    render(
+      <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
+      </AppContext.Provider>
+    );
+    fireEvent.click(screen.getByTestId('gitify-logo'));
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(shell.openExternal).toHaveBeenCalledWith(
+      'https://github.com/gitify-app/gitify'
     );
   });
 
