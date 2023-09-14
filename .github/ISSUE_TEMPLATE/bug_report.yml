@@ -1,0 +1,48 @@
+name: 🐛 Bug Report
+description: Report errors or unexpected behavior
+labels: [bug, needs triage]
+body:
+  - type: checkboxes
+    attributes:
+      label: 🔍 Is there already an issue for your problem?
+      description: |
+        Thanks for taking the time to fill out this bug report 🤗
+        Make sure there aren't any open/closed issues for this topic 😃
+      options:
+        - label: I have checked older issues, open and closed
+          required: true
+
+  - type: textarea
+    attributes:
+      label: 📝 Description
+      description: List steps to reproduce the error and details on what happens and what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps-to-reproduce
+    attributes:
+      label: 🪜 Steps To Reproduce
+      description: Steps to reproduce the behavior.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: ℹ System Info
+      description: Please provide system details such as OS and project version.
+      render: Markdown
+    validations:
+      required: true
+
+  - type: textarea
+    attributes:
+      label: 📸 Screenshots
+      description: Place any screenshots of the issue here if needed
+    validations:
+      required: false

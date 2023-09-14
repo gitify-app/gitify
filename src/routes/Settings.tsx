@@ -93,7 +93,7 @@ export const SettingsRoute: React.FC = () => {
         />
         <FieldCheckbox
           name="onClickMarkAsRead"
-          label="On Click, Mark as Read"
+          label="Mark as read on click"
           checked={settings.markOnClick}
           onChange={(evt) => updateSetting('markOnClick', evt.target.checked)}
         />
