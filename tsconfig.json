@@ -2,7 +2,7 @@
   "compilerOptions": {
     "module": "es6",
     "moduleResolution": "node",
-    "target": "es5",
+    "target": "es2022",
     "outDir": "./build/",
     "sourceMap": true,
     "noImplicitAny": false,

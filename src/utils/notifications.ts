@@ -1,10 +1,10 @@
 const { remote } = require('electron');
 
-import { generateGitHubWebUrl } from './helpers';
-import { reOpenWindow, openExternalLink, updateTrayIcon } from './comms';
-import { Notification, User } from '../typesGithub';
+import { openInBrowser } from '../utils/helpers';
+import { reOpenWindow, updateTrayIcon } from './comms';
+import { Notification } from '../typesGithub';
 
-import { AccountNotifications, SettingsState } from '../types';
+import { AccountNotifications, SettingsState, AuthState } from '../types';
 
 export const setTrayIconColor = (notifications: AccountNotifications[]) => {
   const allNotificationsCount = notifications.reduce(
@@ -19,7 +19,7 @@ export const triggerNativeNotifications = (
   previousNotifications: AccountNotifications[],
   newNotifications: AccountNotifications[],
   settings: SettingsState,
-  user: User
+  accounts: AuthState
 ) => {
   const diffNotifications = newNotifications
     .map((account) => {
@@ -54,17 +54,16 @@ export const triggerNativeNotifications = (
   }
 
   if (settings.showNotifications) {
-    raiseNativeNotification(diffNotifications, user?.id);
+    raiseNativeNotification(diffNotifications, accounts);
   }
 };
 
 export const raiseNativeNotification = (
   notifications: Notification[],
-  userId?: number
+  accounts: AuthState
 ) => {
   let title: string;
   let body: string;
-  let notificationUrl: string | null;
 
   if (notifications.length === 1) {
     const notification = notifications[0];
@@ -72,7 +71,6 @@ export const raiseNativeNotification = (
       notification.repository.full_name
     }`;
     body = notification.subject.title;
-    notificationUrl = notification.subject.url;
   } else {
     title = 'Gitify';
     body = `You have ${notifications.length} notifications.`;
@@ -85,15 +83,8 @@ export const raiseNativeNotification = (
 
   nativeNotification.onclick = function () {
     if (notifications.length === 1) {
-      const appWindow = remote.getCurrentWindow();
-      appWindow.hide();
-
-      // Some Notification types from GitHub are missing urls in their subjects.
-      if (notificationUrl) {
-        const { subject, id } = notifications[0];
-        const url = generateGitHubWebUrl(subject.url, id, userId);
-        openExternalLink(url);
-      }
+      remote.getCurrentWindow().hide();
+      openInBrowser(notifications[0], accounts);
     } else {
       reOpenWindow();
     }

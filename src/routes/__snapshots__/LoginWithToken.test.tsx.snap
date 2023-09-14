@@ -84,7 +84,7 @@ exports[`routes/LoginWithToken.js renders correctly 1`] = `
           <span
             className="underline font-extrabold text-yellow-500"
           >
-            read:user, notifications
+            read:user, notifications, repo
              
           </span>
           scopes.
