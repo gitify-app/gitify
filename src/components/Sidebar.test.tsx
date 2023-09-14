@@ -1,16 +1,16 @@
+import { fireEvent, render, screen } from '@testing-library/react';
+import { createMemoryHistory } from 'history';
 import * as React from 'react';
-import * as TestRenderer from 'react-test-renderer';
-import { fireEvent, render } from '@testing-library/react';
 import { Router } from 'react-router';
 import { MemoryRouter } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
+import * as TestRenderer from 'react-test-renderer';
 
 const { shell, ipcRenderer } = require('electron');
 
-import { Sidebar } from './Sidebar';
 import { mockSettings } from '../__mocks__/mock-state';
-import { AppContext } from '../context/App';
 import { mockedAccountNotifications } from '../__mocks__/mockedData';
+import { AppContext } from '../context/App';
+import { Sidebar } from './Sidebar';
 
 describe('components/Sidebar.tsx', () => {
   const fetchNotifications = jest.fn();
@@ -102,18 +102,69 @@ describe('components/Sidebar.tsx', () => {
     );
   });
 
-  it('opens the gitify repo in browser', () => {
+  it('should quit the app', () => {
     const { getByLabelText } = render(
-      <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
+      <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
       </AppContext.Provider>
     );
-    fireEvent.click(getByLabelText('View project on GitHub'));
+    fireEvent.click(getByLabelText('Quit App'));
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
+  });
+
+  it('should open the gitify repository', () => {
+    render(
+      <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
+      </AppContext.Provider>
+    );
+    fireEvent.click(screen.getByTestId('gitify-logo'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(
-      'https://github.com/manosim/gitify'
+      'https://github.com/gitify-app/gitify'
     );
+  });
+
+  describe('should render the notifications icon', () => {
+    it('when there are 0 notifications', () => {
+      const { getByLabelText } = render(
+        <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>
+      );
+
+      const notificationsIcon = getByLabelText('0 Unread Notifications');
+      expect(notificationsIcon.className).toContain('text-white');
+      expect(notificationsIcon.childNodes.length).toBe(1);
+      expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
+    });
+
+    it('when there are more than 0 notifications', () => {
+      const { getByLabelText } = render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: mockedAccountNotifications,
+          }}
+        >
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>
+      );
+
+      const notificationsIcon = getByLabelText('4 Unread Notifications');
+      expect(notificationsIcon.className).toContain('text-green-500');
+      expect(notificationsIcon.childNodes.length).toBe(2);
+      expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
+      expect(notificationsIcon.childNodes[1].nodeValue).toBe('4');
+    });
   });
 });

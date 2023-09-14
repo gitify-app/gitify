@@ -69,6 +69,8 @@ export function getNotificationTypeIcon(
       return Octicons.GitPullRequestIcon;
     case 'Release':
       return Octicons.TagIcon;
+    case 'RepositoryInvitation':
+      return Octicons.MailIcon;
     case 'RepositoryVulnerabilityAlert':
       return Octicons.AlertIcon;
     default:

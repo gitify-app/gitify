@@ -1,14 +1,14 @@
-import React, { useCallback, useContext, useMemo } from 'react';
-import { shell, ipcRenderer } from 'electron';
 import * as Octicons from '@primer/octicons-react';
+import { ipcRenderer, shell } from 'electron';
+import React, { useCallback, useContext, useMemo } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import { AppContext } from '../context/App';
-import { Constants } from '../utils/constants';
-import { IconCog } from '../icons/Cog';
-import { IconRefresh } from '../icons/Refresh';
 import { Logo } from '../components/Logo';
+import { AppContext } from '../context/App';
+import { IconCog } from '../icons/Cog';
 import { IconQuit } from '../icons/Quit';
+import { IconRefresh } from '../icons/Refresh';
+import { Constants } from '../utils/constants';
 
 export const Sidebar: React.FC = () => {
   const history = useHistory();
@@ -43,19 +43,20 @@ export const Sidebar: React.FC = () => {
       <div className="flex flex-col flex-1 items-center py-4">
         <Logo
           className="w-5 my-3 mx-auto cursor-pointer"
+          data-testid="gitify-logo"
           onClick={onOpenBrowser}
         />
 
-        {notificationsCount > 0 && (
-          <div
-            className="flex justify-around self-stretch items-center my-1 py-1 px-2 text-green-500 text-xs font-extrabold cursor-pointer"
-            onClick={onOpenGitHubNotifications}
-            aria-label={`${notificationsCount} Unread Notifications`}
-          >
-            <Octicons.BellIcon size={12} />
-            {notificationsCount}
-          </div>
-        )}
+        <div
+          className={`flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer ${
+            notificationsCount > 0 ? 'text-green-500' : 'text-white'
+          }`}
+          onClick={onOpenGitHubNotifications}
+          aria-label={`${notificationsCount} Unread Notifications`}
+        >
+          <Octicons.BellIcon size={12} />
+          {notificationsCount > 0 && notificationsCount}
+        </div>
       </div>
 
       <div className="py-4 px-3">
@@ -88,14 +89,6 @@ export const Sidebar: React.FC = () => {
             <IconQuit className="w-3.5 h-3.5" />
           </button>
         )}
-
-        <div
-          className={footerButtonClasses}
-          onClick={onOpenBrowser}
-          aria-label="View project on GitHub"
-        >
-          <Octicons.MarkGithubIcon size={15} />
-        </div>
       </div>
     </div>
   );

@@ -1,3 +1,5 @@
+import { generateGitHubAPIUrl } from "./helpers";
+
 const { remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
 
@@ -12,8 +14,8 @@ export const authGitHub = (
   return new Promise((resolve, reject) => {
     // Build the OAuth consent page URL
     const authWindow = new BrowserWindow({
-      width: 800,
-      height: 600,
+      width: 548,
+      height: 736,
       show: true,
     });
 
@@ -78,7 +80,7 @@ export const getUserData = async (
   hostname: string
 ): Promise<User> => {
   const response = await apiRequestAuth(
-    `https://api.${hostname}/user`,
+    `${generateGitHubAPIUrl(hostname)}user`,
     'GET',
     token
   );
