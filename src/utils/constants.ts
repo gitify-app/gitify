@@ -8,7 +8,7 @@ export const Constants = {
     clientSecret: process.env.OAUTH_CLIENT_SECRET,
   },
 
-  REPO_SLUG: 'manosim/gitify',
+  REPO_SLUG: 'gitify-app/gitify',
 
   // Storage
   STORAGE_KEY: 'gitify-storage',

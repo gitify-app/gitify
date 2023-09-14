@@ -19,6 +19,7 @@ export type SubjectType =
   | 'Issue'
   | 'PullRequest'
   | 'Release'
+  | 'RepositoryInvitation'
   | 'RepositoryVulnerabilityAlert';
 
 export type IssueStateType =
