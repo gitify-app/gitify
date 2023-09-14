@@ -1,0 +1,31 @@
+name: PR Title Validator
+
+on:
+  pull_request:
+    types: [opened, edited, synchronize, reopened]
+
+jobs:
+  pr-lint:
+    name: Validate PR name
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate PR title
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const title = context.payload.pull_request.title;
+            const regex = /^(?<type>build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|deps)(?<scope>\(\w+\)?((?=:\s)|(?=!:\s)))?(?<breaking>!)?(?<subject>:\s.*)?/gm;
+            const match = regex.exec(title);
+
+            if (!match) {
+              core.setFailed('Invalid PR title');
+            }
+            if (!match.groups.type && !match.groups.subject) {
+              core.setFailed('Missing type and subject in PR title');
+            }
+            if (!match.groups.type) {
+              core.setFailed('Missing type in PR title');
+            }
+            if (!match.groups.subject) {
+              core.setFailed('Missing subject in PR title');
+            }

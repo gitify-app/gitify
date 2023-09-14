@@ -105,10 +105,11 @@ describe('utils/notifications.ts', () => {
   it('should click on a native notification (with 1 notification)', () => {
     spyOn(comms, 'openExternalLink');
 
-    const nativeNotification: Notification = notificationsHelpers.raiseNativeNotification(
-      [mockedGithubNotifications[0]],
-      mockAccounts
-    );
+    const nativeNotification: Notification =
+      notificationsHelpers.raiseNativeNotification(
+        [mockedGithubNotifications[0]],
+        mockAccounts
+      );
     nativeNotification.onclick(null);
 
     const notif = mockedGithubNotifications[0];
