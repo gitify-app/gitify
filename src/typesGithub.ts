@@ -30,6 +30,7 @@ export type IssueStateType =
   | 'not_planned';
 export type PullRequestStateType = 'closed' | 'open' | 'merged' | 'draft';
 export type StateType = IssueStateType | PullRequestStateType;
+export type ViewerSubscription = 'IGNORED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
 
 export interface Notification {
   id: string;
@@ -125,4 +126,42 @@ export interface Subject {
   state: StateType;
   latest_comment_url?: string;
   type: SubjectType;
+}
+
+export interface GraphQLSearch {
+  data: {
+    data: {
+      search: {
+        edges: DiscussionEdge[];
+      };
+    };
+  };
+}
+
+export interface DiscussionEdge {
+  node: {
+    viewerSubscription: ViewerSubscription;
+    title: string;
+    url: string;
+    comments: {
+      edges: DiscussionCommentEdge[];
+    };
+  };
+}
+
+export interface DiscussionCommentEdge {
+  node: {
+    databaseId: string | number;
+    createdAt: string;
+    replies: {
+      edges: DiscussionSubcommentEdge[];
+    };
+  };
+}
+
+export interface DiscussionSubcommentEdge {
+  node: {
+    databaseId: string | number;
+    createdAt: string;
+  };
 }

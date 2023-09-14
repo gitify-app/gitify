@@ -1,5 +1,3 @@
-const { shell } = require('electron');
-
 import React, { useCallback, useContext } from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { CheckIcon, MuteIcon } from '@primer/octicons-react';
@@ -10,6 +8,7 @@ import {
   getNotificationTypeIconColor,
 } from '../utils/github-api';
 import { generateGitHubWebUrl } from '../utils/helpers';
+import { openInBrowser } from '../utils/helpers';
 import { Notification } from '../typesGithub';
 import { AppContext } from '../context/App';
 
@@ -22,8 +21,8 @@ export const NotificationRow: React.FC<IProps> = ({
   notification,
   hostname,
 }) => {
-  const { settings, accounts } = useContext(AppContext);
-  const { markNotification, unsubscribeNotification } = useContext(AppContext);
+  const { settings, accounts, markNotification, unsubscribeNotification } =
+    useContext(AppContext);
 
   const pressTitle = useCallback(() => {
     openBrowser();
@@ -33,17 +32,10 @@ export const NotificationRow: React.FC<IProps> = ({
     }
   }, [settings]);
 
-  const openBrowser = useCallback(() => {
-    // Some Notification types from GitHub are missing urls in their subjects.
-    if (notification.subject.url) {
-      const url = generateGitHubWebUrl(
-        notification.subject.url,
-        notification.id,
-        accounts.user?.id
-      );
-      shell.openExternal(url);
-    }
-  }, [notification]);
+  const openBrowser = useCallback(
+    () => openInBrowser(notification, accounts),
+    [notification]
+  );
 
   const unsubscribe = (event: React.MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.

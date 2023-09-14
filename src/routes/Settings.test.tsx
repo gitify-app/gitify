@@ -127,7 +127,7 @@ describe('routes/Settings.tsx', () => {
       </AppContext.Provider>
     );
 
-    fireEvent.click(getByLabelText('On Click, Mark as Read'), {
+    fireEvent.click(getByLabelText('Mark as read on click'), {
       target: { checked: true },
     });
 

@@ -1,7 +1,7 @@
 import * as Octicons from '@primer/octicons-react';
 import { ipcRenderer, shell } from 'electron';
 import React, { useCallback, useContext, useMemo } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
@@ -12,6 +12,7 @@ import { Constants } from '../utils/constants';
 
 export const Sidebar: React.FC = () => {
   const history = useHistory();
+  const location = useLocation();
 
   const { isLoggedIn } = useContext(AppContext);
   const { notifications, fetchNotifications } = useContext(AppContext);
@@ -64,7 +65,10 @@ export const Sidebar: React.FC = () => {
           <>
             <button
               className={footerButtonClasses}
-              onClick={fetchNotifications}
+              onClick={() => {
+                history.replace('/');
+                fetchNotifications();
+              }}
               aria-label="Refresh Notifications"
             >
               <IconRefresh className="w-3.5 h-3.5" />
@@ -72,7 +76,13 @@ export const Sidebar: React.FC = () => {
 
             <button
               className={footerButtonClasses}
-              onClick={() => history.push('/settings')}
+              onClick={() => {
+                if (location.pathname.startsWith('/settings')) {
+                  history.replace('/');
+                } else {
+                  history.push('/settings');
+                }
+              }}
               aria-label="Settings"
             >
               <IconCog className="w-4 h-4" />
