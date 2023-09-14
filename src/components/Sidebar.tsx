@@ -12,6 +12,7 @@ import { Constants } from '../utils/constants';
 
 export const Sidebar: React.FC = () => {
   const history = useHistory();
+  const location = useLocation();
 
   const { isLoggedIn } = useContext(AppContext);
   const { notifications, fetchNotifications } = useContext(AppContext);
@@ -66,7 +67,7 @@ export const Sidebar: React.FC = () => {
               className={footerButtonClasses}
               onClick={() => {
                 history.replace('/');
-                fetchNotifications;
+                fetchNotifications();
               }}
               aria-label="Refresh Notifications"
             >
@@ -76,7 +77,6 @@ export const Sidebar: React.FC = () => {
             <button
               className={footerButtonClasses}
               onClick={() => {
-                const location = useLocation();
                 if (location.pathname.startsWith('/settings')) {
                   history.replace('/');
                 } else {
