@@ -22,10 +22,7 @@ export type SubjectType =
   | 'RepositoryInvitation'
   | 'RepositoryVulnerabilityAlert';
 
-export type ViewerSubscription =
-  | 'IGNORED'
-  | 'SUBSCRIBED'
-  | 'UNSUBSCRIBED'
+export type ViewerSubscription = 'IGNORED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
 
 export interface Notification {
   id: string;
@@ -126,10 +123,10 @@ export interface GraphQLSearch {
   data: {
     data: {
       search: {
-        edges: DiscussionEdge[]
-      }
-    }
-  }
+        edges: DiscussionEdge[];
+      };
+    };
+  };
 }
 
 export interface DiscussionEdge {
@@ -138,24 +135,24 @@ export interface DiscussionEdge {
     title: string;
     url: string;
     comments: {
-      edges: DiscussionCommentEdge[]
-    }
-  }
+      edges: DiscussionCommentEdge[];
+    };
+  };
 }
 
 export interface DiscussionCommentEdge {
   node: {
-    databaseId: string|number;
+    databaseId: string | number;
     createdAt: string;
     replies: {
-      edges: DiscussionSubcommentEdge[]
-    }
-  }
+      edges: DiscussionSubcommentEdge[];
+    };
+  };
 }
 
 export interface DiscussionSubcommentEdge {
   node: {
-    databaseId: string|number;
+    databaseId: string | number;
     createdAt: string;
-  }
+  };
 }

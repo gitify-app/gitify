@@ -16,12 +16,8 @@ export const NotificationRow: React.FC<IProps> = ({
   notification,
   hostname,
 }) => {
-  const {
-    settings,
-    accounts,
-    markNotification,
-    unsubscribeNotification,
-  } = useContext(AppContext);
+  const { settings, accounts, markNotification, unsubscribeNotification } =
+    useContext(AppContext);
 
   const pressTitle = useCallback(() => {
     openBrowser();
@@ -31,7 +27,10 @@ export const NotificationRow: React.FC<IProps> = ({
     }
   }, [settings]);
 
-  const openBrowser = useCallback(() => openInBrowser(notification, accounts), [notification]);
+  const openBrowser = useCallback(
+    () => openInBrowser(notification, accounts),
+    [notification]
+  );
 
   const unsubscribe = (event: React.MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.

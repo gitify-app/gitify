@@ -1,7 +1,7 @@
 import { AxiosPromise, AxiosResponse } from 'axios';
 
 import { remote } from 'electron';
-const browserWindow = new remote.BrowserWindow
+const browserWindow = new remote.BrowserWindow();
 
 import * as auth from './auth';
 import * as apiRequests from './api-requests';
@@ -16,14 +16,12 @@ describe('utils/auth.tsx', () => {
     });
 
     it('should call authGithub - success', async () => {
-      spyOn(browserWindow.webContents, 'on').and.callFake(
-        (event, callback) => {
-          if (event === 'will-redirect') {
-            const event = new Event('will-redirect');
-            callback(event, 'http://github.com/?code=123-456');
-          }
+      spyOn(browserWindow.webContents, 'on').and.callFake((event, callback) => {
+        if (event === 'will-redirect') {
+          const event = new Event('will-redirect');
+          callback(event, 'http://github.com/?code=123-456');
         }
-      );
+      });
 
       const res = await auth.authGitHub();
 
@@ -42,14 +40,12 @@ describe('utils/auth.tsx', () => {
     });
 
     it('should call authGithub - failure', async () => {
-      spyOn(browserWindow.webContents, 'on').and.callFake(
-        (event, callback) => {
-          if (event === 'will-redirect') {
-            const event = new Event('will-redirect');
-            callback(event, 'http://www.github.com/?error=Oops');
-          }
+      spyOn(browserWindow.webContents, 'on').and.callFake((event, callback) => {
+        if (event === 'will-redirect') {
+          const event = new Event('will-redirect');
+          callback(event, 'http://www.github.com/?error=Oops');
         }
-      );
+      });
 
       await expect(async () => await auth.authGitHub()).rejects.toEqual(
         "Oops! Something went wrong and we couldn't log you in using Github. Please try again."

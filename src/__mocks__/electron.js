@@ -31,7 +31,7 @@ let instance;
 
 class BrowserWindow {
   constructor() {
-    if(!instance){
+    if (!instance) {
       instance = this;
     }
     return instance;
@@ -43,11 +43,11 @@ class BrowserWindow {
       clearStorageData: jest.fn(),
     },
   };
-  on(){};
+  on() {}
   close = jest.fn();
   hide = jest.fn();
   destroy = jest.fn();
-};
+}
 
 const dialog = {
   showErrorBox: jest.fn(),
@@ -65,7 +65,7 @@ module.exports = {
       getLoginItemSettings: jest.fn(),
       setLoginItemSettings: () => {},
     },
-    getCurrentWindow: jest.fn(() => instance || new BrowserWindow),
+    getCurrentWindow: jest.fn(() => instance || new BrowserWindow()),
   },
   ipcRenderer: {
     send: jest.fn(),
