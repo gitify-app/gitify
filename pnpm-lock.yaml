@@ -49,7 +49,7 @@ dependencies:
     version: 5.0.1(react-dom@16.14.0)(react@16.14.0)
   react-final-form:
     specifier: ^6.4.0
-    version: 6.4.0(final-form@4.20.1)(react@16.14.0)(typescript@4.1.3)
+    version: 6.4.0(final-form@4.20.1)(react@16.14.0)(typescript@4.6.2)
   react-router:
     specifier: ^5.3.4
     version: 5.3.4(react@16.14.0)
@@ -64,10 +64,10 @@ dependencies:
     version: 2.0.2(autoprefixer@10.1.0)(postcss@8.4.23)
   ts-loader:
     specifier: ^9.4.2
-    version: 9.4.2(typescript@4.1.3)(webpack@5.83.1)
+    version: 9.4.2(typescript@4.6.2)(webpack@5.83.1)
   typescript:
-    specifier: ^4.1.3
-    version: 4.1.3
+    specifier: ^4.6.2
+    version: 4.6.2
 
 devDependencies:
   '@testing-library/react':
@@ -129,7 +129,7 @@ devDependencies:
     version: 3.3.3(webpack@5.83.1)
   ts-jest:
     specifier: ^26.4.4
-    version: 26.4.4(jest@26.6.3)(typescript@4.1.3)
+    version: 26.4.4(jest@26.6.3)(typescript@4.6.2)
   webpack:
     specifier: ^5.83.1
     version: 5.83.1(webpack-cli@5.1.1)
@@ -4969,7 +4969,7 @@ packages:
       react-dom: 16.14.0(react@16.14.0)
     dev: false
 
-  /react-final-form@6.4.0(final-form@4.20.1)(react@16.14.0)(typescript@4.1.3):
+  /react-final-form@6.4.0(final-form@4.20.1)(react@16.14.0)(typescript@4.6.2):
     resolution: {integrity: sha512-M7J7f0pnoj0o8sBq3iG6jsWJEh08pNUyl2D4wBC9SJvCNkGdol2UdyjMiEFYD3rz9LIFzQqFSG0kbRBCadqzhA==}
     peerDependencies:
       final-form: ^4.19.0
@@ -4978,7 +4978,7 @@ packages:
       '@babel/runtime': 7.21.5
       final-form: 4.20.1
       react: 16.14.0
-      ts-essentials: 6.0.7(typescript@4.1.3)
+      ts-essentials: 6.0.7(typescript@4.6.2)
     transitivePeerDependencies:
       - typescript
     dev: false
@@ -5879,15 +5879,15 @@ packages:
       utf8-byte-length: 1.0.4
     dev: true
 
-  /ts-essentials@6.0.7(typescript@4.1.3):
+  /ts-essentials@6.0.7(typescript@4.6.2):
     resolution: {integrity: sha512-2E4HIIj4tQJlIHuATRHayv0EfMGK3ris/GRk1E3CFnsZzeNV+hUmelbaTZHLtXaZppM5oLhHRtO04gINC4Jusw==}
     peerDependencies:
       typescript: '>=3.7.0'
     dependencies:
-      typescript: 4.1.3
+      typescript: 4.6.2
     dev: false
 
-  /ts-jest@26.4.4(jest@26.6.3)(typescript@4.1.3):
+  /ts-jest@26.4.4(jest@26.6.3)(typescript@4.6.2):
     resolution: {integrity: sha512-3lFWKbLxJm34QxyVNNCgXX1u4o/RV0myvA2y2Bxm46iGIjKlaY0own9gIckbjZJPn+WaJEnfPPJ20HHGpoq4yg==}
     engines: {node: '>= 10'}
     hasBin: true
@@ -5906,11 +5906,11 @@ packages:
       make-error: 1.3.6
       mkdirp: 1.0.4
       semver: 7.5.1
-      typescript: 4.1.3
+      typescript: 4.6.2
       yargs-parser: 20.2.9
     dev: true
 
-  /ts-loader@9.4.2(typescript@4.1.3)(webpack@5.83.1):
+  /ts-loader@9.4.2(typescript@4.6.2)(webpack@5.83.1):
     resolution: {integrity: sha512-OmlC4WVmFv5I0PpaxYb+qGeGOdm5giHU7HwDDUjw59emP2UYMHy9fFSDcYgSNoH8sXcj4hGCSEhlDZ9ULeDraA==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -5921,7 +5921,7 @@ packages:
       enhanced-resolve: 5.14.0
       micromatch: 4.0.5
       semver: 7.5.1
-      typescript: 4.1.3
+      typescript: 4.6.2
       webpack: 5.83.1(webpack-cli@5.1.1)
     dev: false
 
@@ -5981,8 +5981,8 @@ packages:
   /typedarray@0.0.6:
     resolution: {integrity: sha512-/aCDEGatGvZ2BIk+HmLf4ifCJFwvKFNb9/JeZPMulfgFracn9QFcAf5GO8B/mweUjSoblS5In0cWhqpfs/5PQA==}
 
-  /typescript@4.1.3:
-    resolution: {integrity: sha512-B3ZIOf1IKeH2ixgHhj6la6xdwR9QrLC5d1VKeCSY4tvkqhF2eqd9O7txNlS0PO3GrBAFIdr3L1ndNwteUbZLYg==}
+  /typescript@4.6.2:
+    resolution: {integrity: sha512-HM/hFigTBHZhLXshn9sN37H085+hQGeJHJ/X7LpBWLID/fbc2acUMfU+lGD98X81sKP+pFa9f0DZmCwB9GnbAg==}
     engines: {node: '>=4.2.0'}
     hasBin: true
 
