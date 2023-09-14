@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useMemo } from 'react';
 import { shell, ipcRenderer } from 'electron';
 import * as Octicons from '@primer/octicons-react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 
 import { AppContext } from '../context/App';
 import { Constants } from '../utils/constants';
@@ -75,7 +75,8 @@ export const Sidebar: React.FC = () => {
             <button
               className={footerButtonClasses}
               onClick={() => {
-                if (window.location.hash.includes('settings')) {
+                const location = useLocation();
+                if (location.pathname.startsWith('/settings')) {
                   history.replace('/');
                 } else {
                   history.push('/settings');
