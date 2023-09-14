@@ -214,7 +214,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           className="font-medium text-gray-700 dark:text-gray-200"
           htmlFor="onClickMarkAsRead"
         >
-          On Click, Mark as Read
+          Mark as read on click
         </label>
       </div>
     </div>

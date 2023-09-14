@@ -1,4 +1,4 @@
-import { generateGitHubAPIUrl } from "./helpers";
+import { generateGitHubAPIUrl } from './helpers';
 
 const { remote } = require('electron');
 const BrowserWindow = remote.BrowserWindow;
