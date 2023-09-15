@@ -2,7 +2,11 @@ import React, { useCallback, useContext } from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import { CheckIcon, MuteIcon } from '@primer/octicons-react';
 
-import { formatReason, getNotificationTypeIcon } from '../utils/github-api';
+import {
+  formatReason,
+  getNotificationTypeIcon,
+  getNotificationTypeIconColor,
+} from '../utils/github-api';
 import { openInBrowser } from '../utils/helpers';
 import { Notification } from '../typesGithub';
 import { AppContext } from '../context/App';
@@ -41,13 +45,17 @@ export const NotificationRow: React.FC<IProps> = ({
 
   const reason = formatReason(notification.reason);
   const NotificationIcon = getNotificationTypeIcon(notification.subject.type);
+  const iconColor = getNotificationTypeIconColor(notification.subject.state);
+  const realIconColor = settings
+    ? (settings.colors && iconColor) || ''
+    : iconColor;
   const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
     addSuffix: true,
   });
 
   return (
     <div className="flex space-x-2 p-2 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker">
-      <div className="flex justify-center items-center w-8">
+      <div className={`flex justify-center items-center w-8 ${realIconColor}`}>
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
 

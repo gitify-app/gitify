@@ -85,6 +85,7 @@ exports[`routes/Notifications.ts should render itself & its children (with notif
           },
           "subject": Object {
             "latest_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments/302888448",
+            "state": "open",
             "title": "I am a robot and this is a test!",
             "type": "Issue",
             "url": "https://api.github.com/repos/manosim/notifications-test/issues/1",

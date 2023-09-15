@@ -22,6 +22,14 @@ export type SubjectType =
   | 'RepositoryInvitation'
   | 'RepositoryVulnerabilityAlert';
 
+export type IssueStateType =
+  | 'closed'
+  | 'open'
+  | 'completed'
+  | 'reopened'
+  | 'not_planned';
+export type PullRequestStateType = 'closed' | 'open' | 'merged' | 'draft';
+export type StateType = IssueStateType | PullRequestStateType;
 export type ViewerSubscription = 'IGNORED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
 
 export interface Notification {
@@ -115,6 +123,7 @@ export interface Owner {
 export interface Subject {
   title: string;
   url?: string;
+  state: StateType;
   latest_comment_url?: string;
   type: SubjectType;
 }

@@ -29,7 +29,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(200, notifications);
 
         const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -59,7 +59,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(400, { message });
 
         const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -92,7 +92,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(200, notifications);
 
         const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -118,7 +118,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(400, { message: 'Oops! Something went wrong.' });
 
         const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -149,7 +149,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(200, notifications);
 
         const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -173,7 +173,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(400, { message: 'Oops! Something went wrong.' });
 
         const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -183,6 +183,95 @@ describe('hooks/useNotifications.ts', () => {
         await waitForNextUpdate();
 
         expect(result.current.requestFailed).toBe(true);
+      });
+    });
+
+    describe('with colors', () => {
+      it('should fetch notifications with success - with colors', async () => {
+        const accounts: AuthState = {
+          ...mockAccounts,
+          enterpriseAccounts: [],
+          user: mockedUser,
+        };
+
+        const notifications = [
+          {
+            id: 1,
+            title: 'This is a notification.',
+            subject: { type: 'Issue', url: 'https://api.github.com/1' },
+          },
+          {
+            id: 2,
+            title: 'A merged PR.',
+            subject: { type: 'PullRequest', url: 'https://api.github.com/2' },
+          },
+          {
+            id: 3,
+            title: 'A closed PR.',
+            subject: { type: 'PullRequest', url: 'https://api.github.com/3' },
+          },
+          {
+            id: 4,
+            title: 'A draft PR.',
+            subject: { type: 'PullRequest', url: 'https://api.github.com/4' },
+          },
+          {
+            id: 5,
+            title: 'A draft PR.',
+            subject: { type: 'PullRequest', url: 'https://api.github.com/5' },
+          },
+        ];
+
+        nock('https://api.github.com')
+          .get('/notifications?participating=false')
+          .reply(200, notifications);
+
+        nock('https://api.github.com').get('/1').reply(200, { state: 'open' });
+        nock('https://api.github.com')
+          .get('/2')
+          .reply(200, { state: 'closed', merged: true });
+        nock('https://api.github.com')
+          .get('/3')
+          .reply(200, { state: 'closed', merged: false });
+        nock('https://api.github.com')
+          .get('/4')
+          .reply(200, { state: 'open', draft: false });
+        nock('https://api.github.com')
+          .get('/5')
+          .reply(200, { state: 'open', draft: true });
+
+        const { result, waitForNextUpdate } = renderHook(() =>
+          useNotifications(true)
+        );
+
+        act(() => {
+          result.current.fetchNotifications(accounts, {
+            ...mockSettings,
+            colors: true,
+          });
+        });
+
+        expect(result.current.isFetching).toBe(true);
+
+        await waitForNextUpdate();
+
+        expect(result.current.notifications[0].hostname).toBe('github.com');
+        expect(result.current.notifications[0].notifications.length).toBe(5);
+        expect(
+          result.current.notifications[0].notifications[0].subject.state
+        ).toBe('open');
+        expect(
+          result.current.notifications[0].notifications[1].subject.state
+        ).toBe('merged');
+        expect(
+          result.current.notifications[0].notifications[2].subject.state
+        ).toBe('closed');
+        expect(
+          result.current.notifications[0].notifications[3].subject.state
+        ).toBe('open');
+        expect(
+          result.current.notifications[0].notifications[4].subject.state
+        ).toBe('draft');
       });
     });
   });
@@ -200,7 +289,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(200);
 
         const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -218,7 +307,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(400);
 
         const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -241,7 +330,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(200);
 
         const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -259,7 +348,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(400);
 
         const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -292,7 +381,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(200);
 
         const { result, waitForValueToChange } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -318,7 +407,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(400);
 
         const { result, waitForValueToChange } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -349,7 +438,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(200);
 
         const { result, waitForValueToChange } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -375,7 +464,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(400);
 
         const { result, waitForValueToChange } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -404,7 +493,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(200);
 
         const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -422,7 +511,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(400);
 
         const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -445,7 +534,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(200);
 
         const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {
@@ -463,7 +552,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(400);
 
         const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications()
+          useNotifications(false)
         );
 
         act(() => {

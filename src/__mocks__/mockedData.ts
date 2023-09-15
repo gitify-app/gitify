@@ -26,6 +26,7 @@ export const mockedSingleNotification: Notification = {
     url: 'https://api.github.com/repos/manosim/notifications-test/issues/1',
     latest_comment_url: 'https://api.github.com/repos/manosim/notifications-test/issues/comments/302888448',
     type: 'Issue',
+    state: 'open',
   },
   repository: {
     id: 57216596,
