@@ -27,8 +27,8 @@ dependencies:
     specifier: ^4.17.20
     version: 4.17.20
   menubar:
-    specifier: ^9.0.5
-    version: 9.0.5(electron@13.1.7)
+    specifier: ^9.3.0
+    version: 9.3.0(electron@13.1.7)
   nprogress:
     specifier: '=0.2.0'
     version: 0.2.0
@@ -4362,10 +4362,10 @@ packages:
       escape-string-regexp: 4.0.0
     optional: true
 
-  /menubar@9.0.5(electron@13.1.7):
-    resolution: {integrity: sha512-IjVtGom5Agq5hMR6GchxBUiq9qo//gu0pTzMzhoHtrsBRI2jqGxUJM27FirXlVv/CleUzZqkr+FIwajAUi+mFw==}
+  /menubar@9.3.0(electron@13.1.7):
+    resolution: {integrity: sha512-TC7R5YR+OKVfFIyGiZ+HkKmY0hMLhOseX6wN0DxWzzF1CNhZ2Tm3hMB6erc35jzBmrsMDghRm89dtSeY0VjmjQ==}
     peerDependencies:
-      electron: ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0
+      electron: ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0
     dependencies:
       electron: 13.1.7
       electron-positioner: 4.1.0
