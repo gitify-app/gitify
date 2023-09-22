@@ -65,8 +65,8 @@ devDependencies:
     specifier: ^11.2.2
     version: 11.2.2(react-dom@16.14.0)(react@16.14.0)
   '@testing-library/react-hooks':
-    specifier: ^3.7.0
-    version: 3.7.0(react-test-renderer@16.14.0)(react@16.14.0)
+    specifier: ^8.0.0
+    version: 8.0.0(@types/react@16.9.32)(react-dom@16.14.0)(react-test-renderer@16.14.0)(react@16.14.0)
   '@types/jest':
     specifier: ^26.0.19
     version: 26.0.19
@@ -861,15 +861,27 @@ packages:
       pretty-format: 26.6.2
     dev: true
 
-  /@testing-library/react-hooks@3.7.0(react-test-renderer@16.14.0)(react@16.14.0):
-    resolution: {integrity: sha512-TwfbY6BWtWIHitjT05sbllyLIProcysC0dF0q1bbDa7OHLC6A6rJOYJwZ13hzfz3O4RtOuInmprBozJRyyo7/g==}
+  /@testing-library/react-hooks@8.0.0(@types/react@16.9.32)(react-dom@16.14.0)(react-test-renderer@16.14.0)(react@16.14.0):
+    resolution: {integrity: sha512-uZqcgtcUUtw7Z9N32W13qQhVAD+Xki2hxbTR461MKax8T6Jr8nsUvZB+vcBTkzY2nFvsUet434CsgF0ncW2yFw==}
+    engines: {node: '>=12'}
     peerDependencies:
-      react: '>=16.9.0'
-      react-test-renderer: '>=16.9.0'
+      '@types/react': ^16.9.0 || ^17.0.0
+      react: ^16.9.0 || ^17.0.0
+      react-dom: ^16.9.0 || ^17.0.0
+      react-test-renderer: ^16.9.0 || ^17.0.0
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
+      react-dom:
+        optional: true
+      react-test-renderer:
+        optional: true
     dependencies:
       '@babel/runtime': 7.21.5
-      '@types/testing-library__react-hooks': 3.4.1
+      '@types/react': 16.9.32
       react: 16.14.0
+      react-dom: 16.14.0(react@16.14.0)
+      react-error-boundary: 3.1.4(react@16.14.0)
       react-test-renderer: 16.14.0(react@16.14.0)
     dev: true
 
@@ -1065,12 +1077,6 @@ packages:
       '@types/react': 16.9.32
     dev: true
 
-  /@types/react-test-renderer@18.0.0:
-    resolution: {integrity: sha512-C7/5FBJ3g3sqUahguGi03O79b8afNeSD6T8/GU50oQrJCU0bVCCGQHaGKUbg2Ce8VQEEqTw8/HiS6lXHHdgkdQ==}
-    dependencies:
-      '@types/react': 16.9.32
-    dev: true
-
   /@types/react-transition-group@4.4.0:
     resolution: {integrity: sha512-/QfLHGpu+2fQOqQaXh8MG9q03bFENooTb/it4jr5kKaZlDQfWvjqWZg48AwzPVMBHlRuTRAY7hRHCEOXz5kV6w==}
     dependencies:
@@ -1095,12 +1101,6 @@ packages:
 
   /@types/stack-utils@2.0.1:
     resolution: {integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw==}
-    dev: true
-
-  /@types/testing-library__react-hooks@3.4.1:
-    resolution: {integrity: sha512-G4JdzEcq61fUyV6wVW9ebHWEiLK2iQvaBuCHHn9eMSbZzVh4Z4wHnUGIvQOYCCYeu5DnUtFyNYuAAgbSaO/43Q==}
-    dependencies:
-      '@types/react-test-renderer': 18.0.0
     dev: true
 
   /@types/verror@1.10.6:
@@ -5082,6 +5082,16 @@ packages:
       react: 16.14.0
       react-dom: 16.14.0(react@16.14.0)
     dev: false
+
+  /react-error-boundary@3.1.4(react@16.14.0):
+    resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==}
+    engines: {node: '>=10', npm: '>=6'}
+    peerDependencies:
+      react: '>=16.13.1'
+    dependencies:
+      '@babel/runtime': 7.21.5
+      react: 16.14.0
+    dev: true
 
   /react-final-form@6.4.0(final-form@4.20.1)(react@16.14.0)(typescript@4.6.2):
     resolution: {integrity: sha512-M7J7f0pnoj0o8sBq3iG6jsWJEh08pNUyl2D4wBC9SJvCNkGdol2UdyjMiEFYD3rz9LIFzQqFSG0kbRBCadqzhA==}
