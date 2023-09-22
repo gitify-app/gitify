@@ -1,4 +1,4 @@
-import * as Octicons from '@primer/octicons-react';
+import { BellIcon } from '@primer/octicons-react';
 import { ipcRenderer, shell } from 'electron';
 import React, { useCallback, useContext, useMemo } from 'react';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -55,7 +55,7 @@ export const Sidebar: React.FC = () => {
           onClick={onOpenGitHubNotifications}
           aria-label={`${notificationsCount} Unread Notifications`}
         >
-          <Octicons.BellIcon size={12} />
+          <BellIcon size={12} />
           {notificationsCount > 0 && notificationsCount}
         </div>
       </div>

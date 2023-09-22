@@ -1,5 +1,5 @@
+import { AlertIcon, CommentDiscussionIcon, GitCommitIcon, GitPullRequestIcon, IssueOpenedIcon, MailIcon, OcticonProps, QuestionIcon, SyncIcon, TagIcon } from '@primer/octicons-react';
 import { Reason, StateType, SubjectType } from '../typesGithub';
-import * as Octicons from '@primer/octicons-react';
 
 // prettier-ignore
 const DESCRIPTIONS = {
@@ -55,26 +55,26 @@ export function formatReason(reason: Reason): {
 
 export function getNotificationTypeIcon(
   type: SubjectType
-): React.FC<Octicons.OcticonProps> {
+): React.FC<OcticonProps> {
   switch (type) {
     case 'CheckSuite':
-      return Octicons.SyncIcon;
+      return SyncIcon;
     case 'Commit':
-      return Octicons.GitCommitIcon;
+      return GitCommitIcon;
     case 'Discussion':
-      return Octicons.CommentDiscussionIcon;
+      return CommentDiscussionIcon;
     case 'Issue':
-      return Octicons.IssueOpenedIcon;
+      return IssueOpenedIcon;
     case 'PullRequest':
-      return Octicons.GitPullRequestIcon;
+      return GitPullRequestIcon;
     case 'Release':
-      return Octicons.TagIcon;
+      return TagIcon;
     case 'RepositoryInvitation':
-      return Octicons.MailIcon;
+      return MailIcon;
     case 'RepositoryVulnerabilityAlert':
-      return Octicons.AlertIcon;
+      return AlertIcon;
     default:
-      return Octicons.QuestionIcon;
+      return QuestionIcon;
   }
 }
 
