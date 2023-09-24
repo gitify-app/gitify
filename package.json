@@ -111,7 +111,7 @@
     "electron-updater": "^4.3.9",
     "final-form": "^4.20.1",
     "history": "^4.10.1",
-    "lodash": "^4.17.20",
+    "lodash": "^4.17.21",
     "menubar": "^9.3.0",
     "nprogress": "=0.2.0",
     "react": "=16.14.0",
