@@ -24,14 +24,16 @@ describe('./utils/github-api.ts', () => {
     expect(getNotificationTypeIcon('Discussion').displayName).toBe(
       'CommentDiscussionIcon'
     );
-    expect(getNotificationTypeIcon('Issue').displayName).toBe('IssueOpenedIcon');
+    expect(getNotificationTypeIcon('Issue').displayName).toBe(
+      'IssueOpenedIcon'
+    );
     expect(getNotificationTypeIcon('PullRequest').displayName).toBe(
       'GitPullRequestIcon'
     );
     expect(getNotificationTypeIcon('Release').displayName).toBe('TagIcon');
-    expect(getNotificationTypeIcon('RepositoryVulnerabilityAlert').displayName).toBe(
-      'AlertIcon'
-    );
+    expect(
+      getNotificationTypeIcon('RepositoryVulnerabilityAlert').displayName
+    ).toBe('AlertIcon');
     expect(getNotificationTypeIcon('Unknown' as SubjectType).displayName).toBe(
       'QuestionIcon'
     );

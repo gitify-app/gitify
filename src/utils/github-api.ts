@@ -1,4 +1,15 @@
-import { AlertIcon, CommentDiscussionIcon, GitCommitIcon, GitPullRequestIcon, IssueOpenedIcon, MailIcon, OcticonProps, QuestionIcon, SyncIcon, TagIcon } from '@primer/octicons-react';
+import {
+  AlertIcon,
+  CommentDiscussionIcon,
+  GitCommitIcon,
+  GitPullRequestIcon,
+  IssueOpenedIcon,
+  MailIcon,
+  OcticonProps,
+  QuestionIcon,
+  SyncIcon,
+  TagIcon,
+} from '@primer/octicons-react';
 import { Reason, StateType, SubjectType } from '../typesGithub';
 
 // prettier-ignore
