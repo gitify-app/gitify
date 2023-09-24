@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@primer/octicons-react':
-    specifier: ^11.2.0
-    version: 11.2.0(react@16.14.0)
+    specifier: ^19.8.0
+    version: 19.8.0(react@16.14.0)
   axios:
     specifier: '=0.27.2'
     version: 0.27.2
@@ -816,11 +816,11 @@ packages:
       fastq: 1.15.0
     dev: true
 
-  /@primer/octicons-react@11.2.0(react@16.14.0):
-    resolution: {integrity: sha512-pi3DT5fUtATw2atMRQ7xCUUbdauA/hYTKfM2ijf3rtipeyQ7Ou3ij/JLhnc9Ke110ljHJh69j/PiINbbKAYegQ==}
+  /@primer/octicons-react@19.8.0(react@16.14.0):
+    resolution: {integrity: sha512-2Z+D7xTloFTLQVRUEbg0pQpe6aTL9RR+8RqBhjkrF+BFuVdM1ENOyjywaGEO7DIkPU5Zxlv0gxSlD85LQxL+sw==}
     engines: {node: '>=8'}
     peerDependencies:
-      react: '>=15'
+      react: '>=16.3'
     dependencies:
       react: 16.14.0
     dev: false
