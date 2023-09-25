@@ -26,7 +26,7 @@ describe('components/Loading.js', () => {
     const { container } = render(
       <AppContext.Provider value={{ isFetching: true }}>
         <Loading />
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     expect(container.innerHTML).toBe('');
@@ -38,7 +38,7 @@ describe('components/Loading.js', () => {
     const { container } = render(
       <AppContext.Provider value={{ isFetching: false }}>
         <Loading />
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     expect(container.innerHTML).toBe('');
@@ -50,7 +50,7 @@ describe('components/Loading.js', () => {
     const { unmount } = render(
       <AppContext.Provider value={{ isFetching: true }}>
         <Loading />
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
     expect(NProgress.remove).toHaveBeenCalledTimes(0);
     unmount();

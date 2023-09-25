@@ -29,7 +29,7 @@ describe('routes/LoginWithToken.js', () => {
       tree = TestRenderer.create(
         <MemoryRouter>
           <LoginWithToken />
-        </MemoryRouter>
+        </MemoryRouter>,
       );
     });
 
@@ -42,7 +42,7 @@ describe('routes/LoginWithToken.js', () => {
     const { getByLabelText } = render(
       <Router history={history}>
         <LoginWithToken />
-      </Router>
+      </Router>,
     );
 
     fireEvent.click(getByLabelText('Go Back'));
@@ -77,7 +77,7 @@ describe('routes/LoginWithToken.js', () => {
         <Router history={history}>
           <LoginWithToken />
         </Router>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.click(getByText('personal access tokens'));
@@ -93,7 +93,7 @@ describe('routes/LoginWithToken.js', () => {
         <Router history={history}>
           <LoginWithToken />
         </Router>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.change(getByLabelText('Token'), {
@@ -119,7 +119,7 @@ describe('routes/LoginWithToken.js', () => {
         <Router history={history}>
           <LoginWithToken />
         </Router>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     act(() => {
@@ -142,7 +142,7 @@ describe('routes/LoginWithToken.js', () => {
     const { getByLabelText, getByTitle, getByText } = render(
       <MemoryRouter>
         <LoginWithToken />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     fireEvent.change(getByLabelText('Hostname'), {

@@ -28,7 +28,7 @@ describe('routes/Settings.tsx', () => {
         <MemoryRouter>
           <SettingsRoute />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -43,7 +43,7 @@ describe('routes/Settings.tsx', () => {
         <Router history={history}>
           <SettingsRoute />
         </Router>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.click(getByLabelText('Logout'));
@@ -61,7 +61,7 @@ describe('routes/Settings.tsx', () => {
         <Router history={history}>
           <SettingsRoute />
         </Router>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
     fireEvent.click(getByLabelText('Go Back'));
     expect(goBackMock).toHaveBeenCalledTimes(1);
@@ -73,7 +73,7 @@ describe('routes/Settings.tsx', () => {
         <MemoryRouter>
           <SettingsRoute />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.click(getByLabelText('Show only participating'), {
@@ -90,7 +90,7 @@ describe('routes/Settings.tsx', () => {
         <MemoryRouter>
           <SettingsRoute />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.click(getByLabelText('Play sound'), {
@@ -107,7 +107,7 @@ describe('routes/Settings.tsx', () => {
         <MemoryRouter>
           <SettingsRoute />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.click(getByLabelText('Show notifications'), {
@@ -124,7 +124,7 @@ describe('routes/Settings.tsx', () => {
         <MemoryRouter>
           <SettingsRoute />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.click(getByLabelText('Mark as read on click'), {
@@ -141,7 +141,7 @@ describe('routes/Settings.tsx', () => {
         <MemoryRouter>
           <SettingsRoute />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.click(getByLabelText('Open at startup'), {
@@ -158,7 +158,7 @@ describe('routes/Settings.tsx', () => {
         <MemoryRouter>
           <SettingsRoute />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.click(getByLabelText('Light'));
@@ -173,7 +173,7 @@ describe('routes/Settings.tsx', () => {
         <Router history={history}>
           <SettingsRoute />
         </Router>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
     fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
     expect(replaceMock).toHaveBeenCalledWith('/login-enterprise');
@@ -185,7 +185,7 @@ describe('routes/Settings.tsx', () => {
         <MemoryRouter>
           <SettingsRoute />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
     fireEvent.click(getByLabelText('Quit Gitify'));
     expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');

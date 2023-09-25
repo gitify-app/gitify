@@ -3,7 +3,7 @@ import axios, { AxiosPromise, Method } from 'axios';
 export function apiRequest(
   url: string,
   method: Method,
-  data = {}
+  data = {},
 ): AxiosPromise {
   axios.defaults.headers.common['Accept'] = 'application/json';
   axios.defaults.headers.common['Content-Type'] = 'application/json';
@@ -15,7 +15,7 @@ export function apiRequestAuth(
   url: string,
   method: Method,
   token: string,
-  data = {}
+  data = {},
 ): AxiosPromise {
   axios.defaults.headers.common['Accept'] = 'application/json';
   axios.defaults.headers.common['Authorization'] = `token ${token}`;

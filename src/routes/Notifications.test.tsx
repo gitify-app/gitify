@@ -24,7 +24,7 @@ describe('routes/Notifications.ts', () => {
         value={{ notifications: mockedAccountNotifications }}
       >
         <NotificationsRoute />
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     expect(tree).toMatchSnapshot();
@@ -34,7 +34,7 @@ describe('routes/Notifications.ts', () => {
     const tree = TestRenderer.create(
       <AppContext.Provider value={{ notifications: [] }}>
         <NotificationsRoute />
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -43,7 +43,7 @@ describe('routes/Notifications.ts', () => {
     const tree = TestRenderer.create(
       <AppContext.Provider value={{ notifications: [], requestFailed: true }}>
         <NotificationsRoute />
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     expect(tree).toMatchSnapshot();

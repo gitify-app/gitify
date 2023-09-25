@@ -35,7 +35,7 @@ describe('components/Sidebar.tsx', () => {
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -48,7 +48,7 @@ describe('components/Sidebar.tsx', () => {
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -61,7 +61,7 @@ describe('components/Sidebar.tsx', () => {
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
     fetchNotifications.mockReset();
     fireEvent.click(getByLabelText('Refresh Notifications'));
@@ -76,7 +76,7 @@ describe('components/Sidebar.tsx', () => {
         <Router history={history}>
           <Sidebar />
         </Router>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
     fireEvent.click(getByLabelText('Settings'));
     expect(pushMock).toHaveBeenCalledTimes(1);
@@ -93,12 +93,12 @@ describe('components/Sidebar.tsx', () => {
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
     fireEvent.click(getByLabelText('4 Unread Notifications'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(
-      'https://github.com/notifications'
+      'https://github.com/notifications',
     );
   });
 
@@ -108,7 +108,7 @@ describe('components/Sidebar.tsx', () => {
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
     fireEvent.click(getByLabelText('Quit App'));
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
@@ -121,12 +121,12 @@ describe('components/Sidebar.tsx', () => {
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
     fireEvent.click(screen.getByTestId('gitify-logo'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(
-      'https://github.com/gitify-app/gitify'
+      'https://github.com/gitify-app/gitify',
     );
   });
 
@@ -137,7 +137,7 @@ describe('components/Sidebar.tsx', () => {
           <MemoryRouter>
             <Sidebar />
           </MemoryRouter>
-        </AppContext.Provider>
+        </AppContext.Provider>,
       );
 
       const notificationsIcon = getByLabelText('0 Unread Notifications');
@@ -157,7 +157,7 @@ describe('components/Sidebar.tsx', () => {
           <MemoryRouter>
             <Sidebar />
           </MemoryRouter>
-        </AppContext.Provider>
+        </AppContext.Provider>,
       );
 
       const notificationsIcon = getByLabelText('4 Unread Notifications');

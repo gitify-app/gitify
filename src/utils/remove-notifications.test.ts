@@ -15,7 +15,7 @@ describe('utils/remove-notification.ts', () => {
     const result = removeNotifications(
       repoSlug,
       mockedSingleAccountNotifications,
-      hostname
+      hostname,
     );
 
     expect(result[0].notifications.length).toBe(0);
@@ -28,7 +28,7 @@ describe('utils/remove-notification.ts', () => {
     const result = removeNotifications(
       repoSlug,
       mockedAccountNotifications,
-      hostname
+      hostname,
     );
 
     expect(result[0].notifications.length).toBe(0);

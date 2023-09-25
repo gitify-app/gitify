@@ -14,12 +14,12 @@ jest.mock('../hooks/useNotifications');
 const customRender = (
   ui,
   accounts: AuthState = mockAccounts,
-  settings: SettingsState = mockSettings
+  settings: SettingsState = mockSettings,
 ) => {
   return render(
     <AppContext.Provider value={{ accounts, settings }}>
       <AppProvider>{ui}</AppProvider>
-    </AppContext.Provider>
+    </AppContext.Provider>,
   );
 };
 
@@ -107,7 +107,7 @@ describe('context/App.tsx', () => {
       expect(markNotificationMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
         '123-456',
-        'github.com'
+        'github.com',
       );
     });
 
@@ -134,7 +134,7 @@ describe('context/App.tsx', () => {
       expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
         '123-456',
-        'github.com'
+        'github.com',
       );
     });
 
@@ -163,7 +163,7 @@ describe('context/App.tsx', () => {
       expect(markRepoNotificationsMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
         'manosim/gitify',
-        'github.com'
+        'github.com',
       );
     });
 
@@ -189,19 +189,19 @@ describe('context/App.tsx', () => {
       fireEvent.click(getByText('Test Case'));
 
       await waitFor(() =>
-        expect(fetchNotificationsMock).toHaveBeenCalledTimes(2)
+        expect(fetchNotificationsMock).toHaveBeenCalledTimes(2),
       );
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(2);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         'https://api.github.com/notifications',
         'HEAD',
-        '123-456'
+        '123-456',
       );
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         'https://api.github.com/user',
         'GET',
-        '123-456'
+        '123-456',
       );
     });
   });
@@ -254,7 +254,7 @@ describe('context/App.tsx', () => {
         playSound: true,
         showNotifications: true,
         colors: true,
-      }
+      },
     );
   });
 
@@ -291,7 +291,7 @@ describe('context/App.tsx', () => {
         playSound: true,
         showNotifications: true,
         colors: true,
-      }
+      },
     );
   });
 });

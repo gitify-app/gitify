@@ -9,7 +9,7 @@ export const AllRead = () => {
       Constants.ALLREAD_EMOJIS[
         Math.floor(Math.random() * Constants.ALLREAD_EMOJIS.length)
       ],
-    []
+    [],
   );
 
   return (

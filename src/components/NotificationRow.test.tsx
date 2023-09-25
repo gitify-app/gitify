@@ -43,7 +43,7 @@ describe('components/Notification.js', () => {
         }}
       >
         <NotificationRow {...props} />
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.click(getByRole('main'));
@@ -67,7 +67,7 @@ describe('components/Notification.js', () => {
         }}
       >
         <NotificationRow {...props} />
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.click(getByRole('main'));
@@ -93,7 +93,7 @@ describe('components/Notification.js', () => {
         <AppContext.Provider value={{ markNotification }}>
           <NotificationRow {...props} />
         </AppContext.Provider>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.click(getByTitle('Mark as Read'));
@@ -113,7 +113,7 @@ describe('components/Notification.js', () => {
         <AppContext.Provider value={{ unsubscribeNotification }}>
           <NotificationRow {...props} />
         </AppContext.Provider>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
     fireEvent.click(getByLabelText('Unsubscribe'));
     expect(unsubscribeNotification).toHaveBeenCalledTimes(1);

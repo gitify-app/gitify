@@ -28,14 +28,14 @@ describe('utils/notifications.ts', () => {
       [],
       mockedAccountNotifications,
       settings,
-      mockAccounts
+      mockAccounts,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).toHaveBeenCalledTimes(
-      1
+      1,
     );
     expect(notificationsHelpers.raiseSoundNotification).toHaveBeenCalledTimes(
-      1
+      1,
     );
   });
 
@@ -53,7 +53,7 @@ describe('utils/notifications.ts', () => {
       [],
       mockedAccountNotifications,
       settings,
-      mockAccounts
+      mockAccounts,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -74,7 +74,7 @@ describe('utils/notifications.ts', () => {
       mockedSingleAccountNotifications,
       mockedSingleAccountNotifications,
       settings,
-      mockAccounts
+      mockAccounts,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -95,7 +95,7 @@ describe('utils/notifications.ts', () => {
       [],
       [],
       settings,
-      mockAccounts
+      mockAccounts,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -108,7 +108,7 @@ describe('utils/notifications.ts', () => {
     const nativeNotification: Notification =
       notificationsHelpers.raiseNativeNotification(
         [mockedGithubNotifications[0]],
-        mockAccounts
+        mockAccounts,
       );
     nativeNotification.onclick(null);
 
@@ -117,7 +117,7 @@ describe('utils/notifications.ts', () => {
       notif.subject.url,
       notif.id,
       mockedUser.id,
-      '#issuecomment-' + getCommentId(notif.subject.latest_comment_url)
+      '#issuecomment-' + getCommentId(notif.subject.latest_comment_url),
     );
     expect(comms.openExternalLink).toHaveBeenCalledTimes(1);
     expect(comms.openExternalLink).toHaveBeenCalledWith(newUrl);
@@ -128,7 +128,7 @@ describe('utils/notifications.ts', () => {
 
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
       mockedGithubNotifications,
-      mockAccounts
+      mockAccounts,
     );
     nativeNotification.onclick(null);
 

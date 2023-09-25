@@ -25,7 +25,7 @@ describe('routes/Login.tsx', () => {
     const tree = TestRenderer.create(
       <MemoryRouter>
         <LoginRoute />
-      </MemoryRouter>
+      </MemoryRouter>,
     );
 
     expect(tree).toMatchSnapshot();
@@ -37,7 +37,7 @@ describe('routes/Login.tsx', () => {
         <Router history={history}>
           <LoginRoute />
         </Router>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     rerender(
@@ -45,7 +45,7 @@ describe('routes/Login.tsx', () => {
         <Router history={history}>
           <LoginRoute />
         </Router>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
@@ -57,7 +57,7 @@ describe('routes/Login.tsx', () => {
     const { getByLabelText } = render(
       <Router history={history}>
         <LoginRoute />
-      </Router>
+      </Router>,
     );
 
     fireEvent.click(getByLabelText('Login with GitHub Enterprise'));

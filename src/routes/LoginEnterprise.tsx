@@ -27,7 +27,7 @@ export const validate = (values: IValues): IFormErrors => {
     errors.hostname = 'Required';
   } else if (
     !/^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
-      values.hostname
+      values.hostname,
     )
   ) {
     errors.hostname = 'Invalid hostname.';

@@ -16,7 +16,7 @@ describe('utils/remove-notification.ts', () => {
     const result = removeNotification(
       notificationId,
       mockedSingleAccountNotifications,
-      hostname
+      hostname,
     );
 
     expect(result[0].notifications.length).toBe(0);
