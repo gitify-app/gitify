@@ -9,7 +9,7 @@ import { Constants } from '../utils/constants';
 import { User } from '../typesGithub';
 
 export const authGitHub = (
-  authOptions = Constants.DEFAULT_AUTH_OPTIONS
+  authOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthResponse> => {
   return new Promise((resolve, reject) => {
     // Build the OAuth consent page URL
@@ -41,7 +41,7 @@ export const authGitHub = (
       } else if (error) {
         reject(
           "Oops! Something went wrong and we couldn't " +
-            'log you in using Github. Please try again.'
+            'log you in using Github. Please try again.',
         );
       }
     };
@@ -57,10 +57,10 @@ export const authGitHub = (
         if (validatedURL.includes(authOptions.hostname)) {
           authWindow.destroy();
           reject(
-            `Invalid Hostname. Could not load https://${authOptions.hostname}/.`
+            `Invalid Hostname. Could not load https://${authOptions.hostname}/.`,
           );
         }
-      }
+      },
     );
 
     authWindow.webContents.on('will-redirect', (event, url) => {
@@ -77,12 +77,12 @@ export const authGitHub = (
 
 export const getUserData = async (
   token: string,
-  hostname: string
+  hostname: string,
 ): Promise<User> => {
   const response = await apiRequestAuth(
     `${generateGitHubAPIUrl(hostname)}user`,
     'GET',
-    token
+    token,
   );
 
   return {
@@ -94,7 +94,7 @@ export const getUserData = async (
 
 export const getToken = async (
   authCode: string,
-  authOptions = Constants.DEFAULT_AUTH_OPTIONS
+  authOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthTokenResponse> => {
   const url = `https://${authOptions.hostname}/login/oauth/access_token`;
   const data = {
@@ -114,7 +114,7 @@ export const addAccount = (
   accounts: AuthState,
   token,
   hostname,
-  user?: User
+  user?: User,
 ): AuthState => {
   if (hostname === Constants.DEFAULT_AUTH_OPTIONS.hostname) {
     return {

@@ -33,7 +33,7 @@ export const NotificationRow: React.FC<IProps> = ({
 
   const openBrowser = useCallback(
     () => openInBrowser(notification, accounts),
-    [notification]
+    [notification],
   );
 
   const unsubscribe = (event: React.MouseEvent<HTMLElement>) => {

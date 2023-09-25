@@ -31,7 +31,7 @@ describe('components/Repository.tsx', () => {
     const tree = TestRenderer.create(
       <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
     expect(tree).toMatchSnapshot();
   });
@@ -40,14 +40,14 @@ describe('components/Repository.tsx', () => {
     const { getByText } = render(
       <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.click(getByText(props.repoName));
 
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(
-      'https://github.com/manosim/notifications-test'
+      'https://github.com/manosim/notifications-test',
     );
   });
 
@@ -55,14 +55,14 @@ describe('components/Repository.tsx', () => {
     const { getByRole } = render(
       <AppContext.Provider value={{ markRepoNotifications }}>
         <RepositoryNotifications {...props} />
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.click(getByRole('button'));
 
     expect(markRepoNotifications).toHaveBeenCalledWith(
       'manosim/notifications-test',
-      'github.com'
+      'github.com',
     );
   });
 });

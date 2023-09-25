@@ -91,4 +91,11 @@ menubarApp.on('ready', () => {
     menubarApp.positioner.move('trayCenter', trayBounds);
     menubarApp.window.resizable = false;
   });
+
+  menubarApp.window.webContents.on('before-input-event', (event, input) => {
+    if (input.key === 'Escape') {
+      menubarApp.window.hide();
+      event.preventDefault();
+    }
+  });
 });

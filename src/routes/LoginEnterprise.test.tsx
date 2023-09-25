@@ -33,7 +33,7 @@ describe('routes/LoginEnterprise.js', () => {
         <MemoryRouter>
           <LoginEnterpriseRoute />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     expect(tree).toMatchSnapshot();
@@ -47,7 +47,7 @@ describe('routes/LoginEnterprise.js', () => {
         <Router history={history}>
           <LoginEnterpriseRoute />
         </Router>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.click(getByLabelText('Go Back'));
@@ -86,7 +86,7 @@ describe('routes/LoginEnterprise.js', () => {
         <Router history={history}>
           <LoginEnterpriseRoute />
         </Router>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     rerender(
@@ -101,7 +101,7 @@ describe('routes/LoginEnterprise.js', () => {
         <Router history={history}>
           <LoginEnterpriseRoute />
         </Router>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
@@ -115,7 +115,7 @@ describe('routes/LoginEnterprise.js', () => {
         <MemoryRouter>
           <LoginEnterpriseRoute />
         </MemoryRouter>
-      </AppContext.Provider>
+      </AppContext.Provider>,
     );
 
     fireEvent.change(getByLabelText('Hostname'), {

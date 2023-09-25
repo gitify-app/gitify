@@ -21,22 +21,22 @@ interface NotificationsState {
   notifications: AccountNotifications[];
   fetchNotifications: (
     accounts: AuthState,
-    settings: SettingsState
+    settings: SettingsState,
   ) => Promise<void>;
   markNotification: (
     accounts: AuthState,
     id: string,
-    hostname: string
+    hostname: string,
   ) => Promise<void>;
   unsubscribeNotification: (
     accounts: AuthState,
     id: string,
-    hostname: string
+    hostname: string,
   ) => Promise<void>;
   markRepoNotifications: (
     accounts: AuthState,
     repoSlug: string,
-    hostname: string
+    hostname: string,
   ) => Promise<void>;
   isFetching: boolean;
   requestFailed: boolean;
@@ -46,7 +46,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   const [isFetching, setIsFetching] = useState(false);
   const [requestFailed, setRequestFailed] = useState(false);
   const [notifications, setNotifications] = useState<AccountNotifications[]>(
-    []
+    [],
   );
 
   const fetchNotifications = useCallback(
@@ -59,7 +59,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           return;
         }
         const url = `${generateGitHubAPIUrl(
-          Constants.DEFAULT_AUTH_OPTIONS.hostname
+          Constants.DEFAULT_AUTH_OPTIONS.hostname,
         )}${endpointSuffix}`;
         return apiRequestAuth(url, 'GET', accounts.token);
       }
@@ -67,7 +67,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
       function getEnterpriseNotifications() {
         return accounts.enterpriseAccounts.map((account) => {
           const url = `${generateGitHubAPIUrl(
-            account.hostname
+            account.hostname,
           )}${endpointSuffix}`;
           return apiRequestAuth(url, 'GET', account.token);
         });
@@ -87,7 +87,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                   hostname,
                   notifications: accountNotifications.data,
                 };
-              }
+              },
             );
             const data = isGitHubLoggedIn
               ? [
@@ -105,7 +105,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                 notifications,
                 data,
                 settings,
-                accounts
+                accounts,
               );
               setIsFetching(false);
               return;
@@ -129,7 +129,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                             await apiRequestAuth(
                               notification.subject.url,
                               'GET',
-                              accounts.token
+                              accounts.token,
                             )
                           ).data;
 
@@ -147,11 +147,11 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                               state,
                             },
                           };
-                        }
-                      )
+                        },
+                      ),
                     ),
                   };
-                })
+                }),
               )
               .then((parsedNotifications) => {
                 setNotifications(parsedNotifications);
@@ -159,18 +159,18 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                   notifications,
                   parsedNotifications,
                   settings,
-                  accounts
+                  accounts,
                 );
                 setIsFetching(false);
               });
-          })
+          }),
         )
         .catch(() => {
           setIsFetching(false);
           setRequestFailed(true);
         });
     },
-    [notifications]
+    [notifications],
   );
 
   const markNotification = useCallback(
@@ -187,13 +187,13 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           `${generateGitHubAPIUrl(hostname)}notifications/threads/${id}`,
           'PATCH',
           token,
-          {}
+          {},
         );
 
         const updatedNotifications = removeNotification(
           id,
           notifications,
-          hostname
+          hostname,
         );
 
         setNotifications(updatedNotifications);
@@ -203,7 +203,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
         setIsFetching(false);
       }
     },
-    [notifications]
+    [notifications],
   );
 
   const unsubscribeNotification = useCallback(
@@ -218,18 +218,18 @@ export const useNotifications = (colors: boolean): NotificationsState => {
       try {
         await apiRequestAuth(
           `${generateGitHubAPIUrl(
-            hostname
+            hostname,
           )}notifications/threads/${id}/subscription`,
           'PUT',
           token,
-          { ignored: true }
+          { ignored: true },
         );
         await markNotification(accounts, id, hostname);
       } catch (err) {
         setIsFetching(false);
       }
     },
-    [notifications]
+    [notifications],
   );
 
   const markRepoNotifications = useCallback(
@@ -246,13 +246,13 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           `${generateGitHubAPIUrl(hostname)}repos/${repoSlug}/notifications`,
           'PUT',
           token,
-          {}
+          {},
         );
 
         const updatedNotifications = removeNotifications(
           repoSlug,
           notifications,
-          hostname
+          hostname,
         );
 
         setNotifications(updatedNotifications);
@@ -262,7 +262,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
         setIsFetching(false);
       }
     },
-    [notifications]
+    [notifications],
   );
 
   return {
