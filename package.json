@@ -135,7 +135,7 @@
     "@types/react-transition-group": "^4.4.0",
     "autoprefixer": "^10.4.16",
     "coveralls": "^3.1.1",
-    "css-loader": "^6.0.0",
+    "css-loader": "^6.8.1",
     "electron": "^13.1.7",
     "electron-builder": "^23.6.0",
     "electron-notarize": "^1.0.1",
