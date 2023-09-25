@@ -32,7 +32,7 @@ export const Sidebar: React.FC = () => {
   const notificationsCount = useMemo(() => {
     return notifications.reduce(
       (memo, account) => memo + account.notifications.length,
-      0
+      0,
     );
   }, [notifications]);
 

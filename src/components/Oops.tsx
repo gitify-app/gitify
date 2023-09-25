@@ -9,7 +9,7 @@ export const Oops = () => {
       Constants.ERROR_EMOJIS[
         Math.floor(Math.random() * Constants.ERROR_EMOJIS.length)
       ],
-    []
+    [],
   );
 
   return (

@@ -31,7 +31,7 @@ export const validate = (values: IValues): IFormErrors => {
     errors.hostname = 'Required';
   } else if (
     !/^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
-      values.hostname
+      values.hostname,
     )
   ) {
     errors.hostname = 'Invalid hostname.';
@@ -65,7 +65,7 @@ export const LoginWithToken: React.FC = () => {
                 className="underline hover:text-gray-500 dark:hover:text-gray-300  cursor-pointer"
                 onClick={() =>
                   openLink(
-                    'https://github.com/settings/tokens/new?scopes=notifications,read:user&description=gitify_token'
+                    'https://github.com/settings/tokens/new?scopes=notifications,read:user&description=gitify_token',
                   )
                 }
               >

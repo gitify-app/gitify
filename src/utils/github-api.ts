@@ -65,7 +65,7 @@ export function formatReason(reason: Reason): {
 }
 
 export function getNotificationTypeIcon(
-  type: SubjectType
+  type: SubjectType,
 ): React.FC<OcticonProps> {
   switch (type) {
     case 'CheckSuite':

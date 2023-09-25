@@ -6,10 +6,10 @@ import { Notification } from '../typesGithub';
 export const removeNotification = (
   id: string,
   notifications: AccountNotifications[],
-  hostname: string
+  hostname: string,
 ): AccountNotifications[] => {
   const accountIndex = notifications.findIndex(
-    (accountNotifications) => accountNotifications.hostname === hostname
+    (accountNotifications) => accountNotifications.hostname === hostname,
   );
 
   return updateWith(
@@ -17,6 +17,6 @@ export const removeNotification = (
     `[${accountIndex}][notifications]`,
     (accNotifications: Notification[] = []) => {
       return accNotifications.filter((notification) => notification.id !== id);
-    }
+    },
   );
 };

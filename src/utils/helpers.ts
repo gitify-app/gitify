@@ -10,7 +10,7 @@ import { Constants } from './constants';
 
 export function getEnterpriseAccountToken(
   hostname: string,
-  accounts: EnterpriseAccount[]
+  accounts: EnterpriseAccount[],
 ): string {
   return accounts.find((obj) => obj.hostname === hostname).token;
 }
@@ -24,10 +24,10 @@ export function generateGitHubAPIUrl(hostname) {
 
 export function generateNotificationReferrerId(
   notificationId: string,
-  userId: number
+  userId: number,
 ) {
   const buffer = Buffer.from(
-    `018:NotificationThread${notificationId}:${userId}`
+    `018:NotificationThread${notificationId}:${userId}`,
   );
   return `notification_referrer_id=${buffer.toString('base64')}`;
 }
@@ -36,7 +36,7 @@ export function generateGitHubWebUrl(
   url: string,
   notificationId: string,
   userId?: number,
-  comment: string = ''
+  comment: string = '',
 ) {
   const { hostname } = new URL(url);
   const isEnterprise =
@@ -58,7 +58,7 @@ export function generateGitHubWebUrl(
   if (userId) {
     const notificationReferrerId = generateNotificationReferrerId(
       notificationId,
-      userId
+      userId,
     );
 
     return `${newUrl}?${notificationReferrerId}${comment}`;
@@ -75,7 +75,7 @@ const queryString = (repo: string, title: string, lastUpdated: string) =>
 
 async function getDiscussionUrl(
   notification: Notification,
-  token: string
+  token: string,
 ): Promise<{ url: string; latestCommentId: string | number }> {
   const response: GraphQLSearch = await apiRequestAuth(
     `https://api.github.com/graphql`,
@@ -86,7 +86,7 @@ async function getDiscussionUrl(
       search(query:"${queryString(
         notification.repository.full_name,
         notification.subject.title,
-        notification.updated_at
+        notification.updated_at,
       )}", type: DISCUSSION, first: 10) {
           edges {
               node {
@@ -115,15 +115,15 @@ async function getDiscussionUrl(
           }
       }
     }`,
-    }
+    },
   );
   let edges =
     response?.data?.data?.search?.edges?.filter(
-      (edge) => edge.node.title === notification.subject.title
+      (edge) => edge.node.title === notification.subject.title,
     ) || [];
   if (edges.length > 1)
     edges = edges.filter(
-      (edge) => edge.node.viewerSubscription === 'SUBSCRIBED'
+      (edge) => edge.node.viewerSubscription === 'SUBSCRIBED',
     );
 
   let comments = edges[0]?.node.comments.edges;
@@ -140,7 +140,7 @@ async function getDiscussionUrl(
 }
 
 export const getLatestDiscussionCommentId = (
-  comments: DiscussionCommentEdge[]
+  comments: DiscussionCommentEdge[],
 ) =>
   comments
     .flatMap((comment) => comment.node.replies.edges)
@@ -153,19 +153,19 @@ export const getCommentId = (url: string) =>
 
 export async function openInBrowser(
   notification: Notification,
-  accounts: AuthState
+  accounts: AuthState,
 ) {
   if (notification.subject.url) {
     const latestCommentId = getCommentId(
-      notification.subject.latest_comment_url
+      notification.subject.latest_comment_url,
     );
     openExternalLink(
       generateGitHubWebUrl(
         notification.subject.url,
         notification.id,
         accounts.user?.id,
-        latestCommentId ? '#issuecomment-' + latestCommentId : undefined
-      )
+        latestCommentId ? '#issuecomment-' + latestCommentId : undefined,
+      ),
     );
   } else if (notification.subject.type === 'Discussion') {
     getDiscussionUrl(notification, accounts.token).then(
@@ -177,9 +177,9 @@ export async function openInBrowser(
             accounts.user?.id,
             latestCommentId
               ? '#discussioncomment-' + latestCommentId
-              : undefined
-          )
-        )
+              : undefined,
+          ),
+        ),
     );
   }
 }

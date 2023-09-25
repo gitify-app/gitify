@@ -28,12 +28,12 @@ describe('utils/auth.tsx', () => {
       expect(res.authCode).toBe('123-456');
 
       expect(
-        browserWindow.webContents.session.clearStorageData
+        browserWindow.webContents.session.clearStorageData,
       ).toHaveBeenCalledTimes(1);
 
       expect(loadURLMock).toHaveBeenCalledTimes(1);
       expect(loadURLMock).toHaveBeenCalledWith(
-        'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read:user,notifications,repo'
+        'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read:user,notifications,repo',
       );
 
       expect(browserWindow.destroy).toHaveBeenCalledTimes(1);
@@ -48,7 +48,7 @@ describe('utils/auth.tsx', () => {
       });
 
       await expect(async () => await auth.authGitHub()).rejects.toEqual(
-        "Oops! Something went wrong and we couldn't log you in using Github. Please try again."
+        "Oops! Something went wrong and we couldn't log you in using Github. Please try again.",
       );
       expect(loadURLMock).toHaveBeenCalledTimes(1);
     });
@@ -60,7 +60,7 @@ describe('utils/auth.tsx', () => {
 
     it('should get a token - success', async () => {
       const requestPromise = new Promise((resolve) =>
-        resolve({ data: { access_token: 'this-is-a-token' } } as AxiosResponse)
+        resolve({ data: { access_token: 'this-is-a-token' } } as AxiosResponse),
       ) as AxiosPromise;
 
       apiRequestMock.mockResolvedValueOnce(requestPromise);
@@ -74,7 +74,7 @@ describe('utils/auth.tsx', () => {
           client_id: 'FAKE_CLIENT_ID_123',
           client_secret: 'FAKE_CLIENT_SECRET_123',
           code: '123-456',
-        }
+        },
       );
       expect(res.token).toBe('this-is-a-token');
       expect(res.hostname).toBe('github.com');
@@ -84,7 +84,7 @@ describe('utils/auth.tsx', () => {
       const message = 'Something went wrong.';
 
       const requestPromise = new Promise((_, reject) =>
-        reject({ data: { message } } as AxiosResponse)
+        reject({ data: { message } } as AxiosResponse),
       ) as AxiosPromise;
 
       apiRequestMock.mockResolvedValueOnce(requestPromise);
@@ -112,7 +112,7 @@ describe('utils/auth.tsx', () => {
       const result = await auth.addAccount(
         accounts,
         '123-456',
-        'github.gitify.io'
+        'github.gitify.io',
       );
 
       expect(result).toEqual({

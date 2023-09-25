@@ -12,7 +12,7 @@ export const loadState = (): {
 
 export const saveState = (
   accounts: AuthState,
-  settings: SettingsState
+  settings: SettingsState,
 ): void => {
   const settingsString = JSON.stringify({ auth: accounts, settings });
   localStorage.setItem(Constants.STORAGE_KEY, settingsString);

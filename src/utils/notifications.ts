@@ -9,7 +9,7 @@ import { AccountNotifications, SettingsState, AuthState } from '../types';
 export const setTrayIconColor = (notifications: AccountNotifications[]) => {
   const allNotificationsCount = notifications.reduce(
     (memo, acc) => memo + acc.notifications.length,
-    0
+    0,
   );
 
   updateTrayIcon(allNotificationsCount);
@@ -19,12 +19,12 @@ export const triggerNativeNotifications = (
   previousNotifications: AccountNotifications[],
   newNotifications: AccountNotifications[],
   settings: SettingsState,
-  accounts: AuthState
+  accounts: AuthState,
 ) => {
   const diffNotifications = newNotifications
     .map((account) => {
       const accountPreviousNotifications = previousNotifications.find(
-        (item) => item.hostname === account.hostname
+        (item) => item.hostname === account.hostname,
       );
 
       if (!accountPreviousNotifications) {
@@ -60,7 +60,7 @@ export const triggerNativeNotifications = (
 
 export const raiseNativeNotification = (
   notifications: Notification[],
-  accounts: AuthState
+  accounts: AuthState,
 ) => {
   let title: string;
   let body: string;

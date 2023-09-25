@@ -105,7 +105,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
       setSettings(newSettings);
       saveState(accounts, newSettings);
     },
-    [accounts, settings]
+    [accounts, settings],
   );
 
   const isLoggedIn = useMemo(() => {
@@ -130,7 +130,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
       setAccounts(updatedAccounts);
       saveState(updatedAccounts, settings);
     },
-    [accounts, settings]
+    [accounts, settings],
   );
 
   const validateToken = useCallback(
@@ -138,14 +138,14 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
       await apiRequestAuth(
         `${generateGitHubAPIUrl(hostname)}notifications`,
         'HEAD',
-        token
+        token,
       );
       const user = await getUserData(token, hostname);
       const updatedAccounts = addAccount(accounts, token, hostname, user);
       setAccounts(updatedAccounts);
       saveState(updatedAccounts, settings);
     },
-    [accounts, settings]
+    [accounts, settings],
   );
 
   const logout = useCallback(() => {
@@ -168,25 +168,25 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchNotificationsWithAccounts = useCallback(
     async () => await fetchNotifications(accounts, settings),
-    [accounts, settings, notifications]
+    [accounts, settings, notifications],
   );
 
   const markNotificationWithAccounts = useCallback(
     async (id: string, hostname: string) =>
       await markNotification(accounts, id, hostname),
-    [accounts, notifications]
+    [accounts, notifications],
   );
 
   const unsubscribeNotificationWithAccounts = useCallback(
     async (id: string, hostname: string) =>
       await unsubscribeNotification(accounts, id, hostname),
-    [accounts, notifications]
+    [accounts, notifications],
   );
 
   const markRepoNotificationsWithAccounts = useCallback(
     async (repoSlug: string, hostname: string) =>
       await markRepoNotifications(accounts, repoSlug, hostname),
-    [accounts, notifications]
+    [accounts, notifications],
   );
 
   return (
