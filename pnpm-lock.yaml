@@ -113,8 +113,8 @@ devDependencies:
     specifier: ^8.4.30
     version: 8.4.30
   postcss-loader:
-    specifier: ^4.1.0
-    version: 4.1.0(postcss@8.4.30)(webpack@5.83.1)
+    specifier: ^7.0.0
+    version: 7.0.0(postcss@8.4.30)(webpack@5.83.1)
   prettier:
     specifier: ^3.0.3
     version: 3.0.3
@@ -1637,10 +1637,6 @@ packages:
       tweetnacl: 0.14.5
     dev: true
 
-  /big.js@5.2.2:
-    resolution: {integrity: sha512-vyL2OymJxmarO8gxMr0mhChsO9QGwhynfuu4+MHTAW6czfq9humCB7rKpUjDd9YUiDPU4mzpyupFSvOClAwbmQ==}
-    dev: true
-
   /binary-extensions@2.2.0:
     resolution: {integrity: sha512-jDctJ/IVQbZoJykoeHbhXpOlNBqGNcwXJKJog42E5HDPUwQTSdjCHdihjj0DlnheQ7blbT6dHOafNAiS8ooQKA==}
     engines: {node: '>=8'}
@@ -2499,11 +2495,6 @@ packages:
   /emoji-regex@8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
     requiresBuild: true
-    dev: true
-
-  /emojis-list@3.0.0:
-    resolution: {integrity: sha512-/kyM18EfinwXZbno9FyUGeFh87KC8HRQBQGildHZbEuRyWFOmv1U10o9BBp8XVZDVNNuQKyIGIu5ZYAAXJ0V2Q==}
-    engines: {node: '>= 4'}
     dev: true
 
   /encodeurl@1.0.2:
@@ -4227,15 +4218,6 @@ packages:
     resolution: {integrity: sha512-3R/1M+yS3j5ou80Me59j7F9IMs4PXs3VqRrm0TU3AbKPxlmpoY1TNscJV/oGJXo8qCatFGTfDbY6W6ipGOYXfg==}
     engines: {node: '>=6.11.5'}
 
-  /loader-utils@2.0.4:
-    resolution: {integrity: sha512-xXqpXoINfFhgua9xiqD8fPFHgkoq1mmmpE92WlDbm9rNRd/EbRb+Gqf908T2DMfuHjjJlksiK2RbHVOdD/MqSw==}
-    engines: {node: '>=8.9.0'}
-    dependencies:
-      big.js: 5.2.2
-      emojis-list: 3.0.0
-      json5: 2.2.3
-    dev: true
-
   /locate-path@5.0.0:
     resolution: {integrity: sha512-t7hw9pI+WvuwNJXwk5zVHpyhIqzg2qTlklJOf0mVxGSbe3Fp2VieZcduNYjaLDoy6p9uGpQEGWG87WpMKlNq8g==}
     engines: {node: '>=8'}
@@ -4855,18 +4837,16 @@ packages:
       yaml: 2.3.2
     dev: true
 
-  /postcss-loader@4.1.0(postcss@8.4.30)(webpack@5.83.1):
-    resolution: {integrity: sha512-vbCkP70F3Q9PIk6d47aBwjqAMI4LfkXCoyxj+7NPNuVIwfTGdzv2KVQes59/RuxMniIgsYQCFSY42P3+ykJfaw==}
-    engines: {node: '>= 10.13.0'}
+  /postcss-loader@7.0.0(postcss@8.4.30)(webpack@5.83.1):
+    resolution: {integrity: sha512-IDyttebFzTSY6DI24KuHUcBjbAev1i+RyICoPEWcAstZsj03r533uMXtDn506l6/wlsRYiS5XBdx7TpccCsyUg==}
+    engines: {node: '>= 14.15.0'}
     peerDependencies:
       postcss: ^7.0.0 || ^8.0.1
-      webpack: ^4.0.0 || ^5.0.0
+      webpack: ^5.0.0
     dependencies:
       cosmiconfig: 7.1.0
       klona: 2.0.6
-      loader-utils: 2.0.4
       postcss: 8.4.30
-      schema-utils: 3.1.2
       semver: 7.5.1
       webpack: 5.83.1(webpack-cli@5.1.1)
     dev: true
