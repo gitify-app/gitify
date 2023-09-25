@@ -65,7 +65,7 @@ export const LoginWithToken: React.FC = () => {
                 className="underline hover:text-gray-500 dark:hover:text-gray-300  cursor-pointer"
                 onClick={() =>
                   openLink(
-                    'https://github.com/settings/tokens/new?scopes=notifications,read:user&description=gitify_token'
+                    'https://github.com/settings/tokens/new?scopes=notifications,read:user,repo&description=gitify_token'
                   )
                 }
               >
