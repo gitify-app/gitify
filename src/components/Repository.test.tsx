@@ -24,7 +24,7 @@ describe('components/Repository.tsx', () => {
   beforeEach(() => {
     markRepoNotifications.mockReset();
 
-    spyOn(shell, 'openExternal');
+    jest.spyOn(shell, 'openExternal');
   });
 
   it('should render itself & its children', () => {

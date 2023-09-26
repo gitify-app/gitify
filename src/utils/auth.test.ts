@@ -16,7 +16,12 @@ describe('utils/auth.tsx', () => {
     });
 
     it('should call authGithub - success', async () => {
-      spyOn(browserWindow.webContents, 'on').and.callFake((event, callback) => {
+      // Casting to jest.Mock avoids Typescript errors, where the spy is expected to match all the original
+      // function's typing. I might fix all that if the return type of this was actually used, or if I was
+      // writing this test for a new feature. Since I'm just upgrading Jest, jest.Mock is a nice escape hatch
+      (
+        jest.spyOn(browserWindow.webContents, 'on') as jest.Mock
+      ).mockImplementation((event, callback): void => {
         if (event === 'will-redirect') {
           const event = new Event('will-redirect');
           callback(event, 'http://github.com/?code=123-456');
@@ -40,7 +45,9 @@ describe('utils/auth.tsx', () => {
     });
 
     it('should call authGithub - failure', async () => {
-      spyOn(browserWindow.webContents, 'on').and.callFake((event, callback) => {
+      (
+        jest.spyOn(browserWindow.webContents, 'on') as jest.Mock
+      ).mockImplementation((event, callback): void => {
         if (event === 'will-redirect') {
           const event = new Event('will-redirect');
           callback(event, 'http://www.github.com/?error=Oops');

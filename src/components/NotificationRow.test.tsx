@@ -11,7 +11,11 @@ import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 
 describe('components/Notification.js', () => {
   beforeEach(() => {
-    spyOn(shell, 'openExternal');
+    jest.spyOn(shell, 'openExternal');
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('should render itself & its children', async () => {

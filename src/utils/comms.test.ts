@@ -10,7 +10,11 @@ const { ipcRenderer, remote, shell } = require('electron');
 
 describe('utils/comms.ts', () => {
   beforeEach(function () {
-    spyOn(ipcRenderer, 'send');
+    jest.spyOn(ipcRenderer, 'send');
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('should send mark the icons as active', () => {
@@ -46,7 +50,7 @@ describe('utils/comms.ts', () => {
   });
 
   it('should setAutoLaunch (true)', () => {
-    spyOn(remote.app, 'setLoginItemSettings');
+    jest.spyOn(remote.app, 'setLoginItemSettings');
 
     setAutoLaunch(true);
     expect(remote.app.setLoginItemSettings).toHaveBeenCalledTimes(1);
@@ -57,7 +61,7 @@ describe('utils/comms.ts', () => {
   });
 
   it('should setAutoLaunch (false)', () => {
-    spyOn(remote.app, 'setLoginItemSettings');
+    jest.spyOn(remote.app, 'setLoginItemSettings');
 
     setAutoLaunch(false);
     expect(remote.app.setLoginItemSettings).toHaveBeenCalledTimes(1);
