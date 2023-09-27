@@ -19,9 +19,13 @@ describe('components/Sidebar.tsx', () => {
   beforeEach(() => {
     fetchNotifications.mockReset();
 
-    spyOn(ipcRenderer, 'send');
-    spyOn(shell, 'openExternal');
-    spyOn(window, 'clearInterval');
+    jest.spyOn(ipcRenderer, 'send');
+    jest.spyOn(shell, 'openExternal');
+    jest.spyOn(window, 'clearInterval');
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('should render itself & its children (logged in)', () => {

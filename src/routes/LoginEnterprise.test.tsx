@@ -24,7 +24,7 @@ describe('routes/LoginEnterprise.js', () => {
   beforeEach(function () {
     goBackMock.mockReset();
 
-    spyOn(ipcRenderer, 'send');
+    jest.spyOn(ipcRenderer, 'send');
   });
 
   it('renders correctly', () => {

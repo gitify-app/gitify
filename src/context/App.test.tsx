@@ -25,11 +25,15 @@ const customRender = (
 
 describe('context/App.tsx', () => {
   beforeEach(() => {
-    jest.useFakeTimers();
+    // FIXME: Couldn't get the timers working in modern mode, deferring
+    jest.useFakeTimers('legacy');
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   describe('api methods', () => {
-    const updateSettingMock = jest.fn();
     const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
 
     const fetchNotificationsMock = jest.fn();
@@ -37,25 +41,21 @@ describe('context/App.tsx', () => {
     const unsubscribeNotificationMock = jest.fn();
     const markRepoNotificationsMock = jest.fn();
 
-    (useNotifications as jest.Mock).mockReturnValue({
-      fetchNotifications: fetchNotificationsMock,
-      markNotification: markNotificationMock,
-      unsubscribeNotification: unsubscribeNotificationMock,
-      markRepoNotifications: markRepoNotificationsMock,
-    });
-
     beforeEach(() => {
-      updateSettingMock.mockReset();
-      fetchNotificationsMock.mockReset();
-      markNotificationMock.mockReset();
-      unsubscribeNotificationMock.mockReset();
-      markRepoNotificationsMock.mockReset();
+      (useNotifications as jest.Mock).mockReturnValue({
+        fetchNotifications: fetchNotificationsMock,
+        markNotification: markNotificationMock,
+        unsubscribeNotification: unsubscribeNotificationMock,
+        markRepoNotifications: markRepoNotificationsMock,
+      });
     });
 
     it('fetch notifications every minute', async () => {
       customRender(null);
 
-      waitFor(() => expect(fetchNotificationsMock).toHaveBeenCalledTimes(2));
+      await waitFor(() =>
+        expect(fetchNotificationsMock).toHaveBeenCalledTimes(2),
+      );
 
       fetchNotificationsMock.mockReset();
 
@@ -82,7 +82,6 @@ describe('context/App.tsx', () => {
 
       fireEvent.click(getByText('Test Case'));
 
-      expect(fetchNotificationsMock).toHaveBeenCalled();
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
     });
 
@@ -225,7 +224,9 @@ describe('context/App.tsx', () => {
   });
 
   it('should call updateSetting', async () => {
-    const saveStateMock = jest.spyOn(storage, 'saveState');
+    const saveStateMock = jest
+      .spyOn(storage, 'saveState')
+      .mockImplementation(jest.fn());
 
     const TestComponent = () => {
       const { updateSetting } = useContext(AppContext);
@@ -243,7 +244,6 @@ describe('context/App.tsx', () => {
       fireEvent.click(getByText('Test Case'));
     });
 
-    expect(saveStateMock).toHaveBeenCalled();
     expect(saveStateMock).toHaveBeenCalledWith(
       { enterpriseAccounts: [], token: null, user: null },
       {
@@ -260,7 +260,9 @@ describe('context/App.tsx', () => {
 
   it('should call updateSetting and set auto launch(openAtStartup)', async () => {
     const setAutoLaunchMock = jest.spyOn(comms, 'setAutoLaunch');
-    const saveStateMock = jest.spyOn(storage, 'saveState');
+    const saveStateMock = jest
+      .spyOn(storage, 'saveState')
+      .mockImplementation(jest.fn());
 
     const TestComponent = () => {
       const { updateSetting } = useContext(AppContext);
@@ -278,9 +280,8 @@ describe('context/App.tsx', () => {
       fireEvent.click(getByText('Test Case'));
     });
 
-    expect(setAutoLaunchMock).toHaveBeenCalled();
     expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
-    expect(saveStateMock).toHaveBeenCalled();
+
     expect(saveStateMock).toHaveBeenCalledWith(
       { enterpriseAccounts: [], token: null, user: null },
       {

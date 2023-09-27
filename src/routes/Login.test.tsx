@@ -18,7 +18,7 @@ describe('routes/Login.tsx', () => {
   beforeEach(function () {
     pushMock.mockReset();
 
-    spyOn(ipcRenderer, 'send');
+    jest.spyOn(ipcRenderer, 'send');
   });
 
   it('should render itself & its children', () => {

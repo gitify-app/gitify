@@ -14,6 +14,10 @@ import { SettingsState } from '../types';
 import { defaultSettings } from '../context/App';
 
 describe('utils/notifications.ts', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should raise a notification (settings - on)', () => {
     const settings: SettingsState = {
       ...defaultSettings,
@@ -46,8 +50,8 @@ describe('utils/notifications.ts', () => {
       showNotifications: false,
     };
 
-    spyOn(notificationsHelpers, 'raiseNativeNotification');
-    spyOn(notificationsHelpers, 'raiseSoundNotification');
+    jest.spyOn(notificationsHelpers, 'raiseNativeNotification');
+    jest.spyOn(notificationsHelpers, 'raiseSoundNotification');
 
     notificationsHelpers.triggerNativeNotifications(
       [],
@@ -67,8 +71,8 @@ describe('utils/notifications.ts', () => {
       showNotifications: true,
     };
 
-    spyOn(notificationsHelpers, 'raiseNativeNotification');
-    spyOn(notificationsHelpers, 'raiseSoundNotification');
+    jest.spyOn(notificationsHelpers, 'raiseNativeNotification');
+    jest.spyOn(notificationsHelpers, 'raiseSoundNotification');
 
     notificationsHelpers.triggerNativeNotifications(
       mockedSingleAccountNotifications,
@@ -88,8 +92,8 @@ describe('utils/notifications.ts', () => {
       showNotifications: true,
     };
 
-    spyOn(notificationsHelpers, 'raiseNativeNotification');
-    spyOn(notificationsHelpers, 'raiseSoundNotification');
+    jest.spyOn(notificationsHelpers, 'raiseNativeNotification');
+    jest.spyOn(notificationsHelpers, 'raiseSoundNotification');
 
     notificationsHelpers.triggerNativeNotifications(
       [],
@@ -103,7 +107,7 @@ describe('utils/notifications.ts', () => {
   });
 
   it('should click on a native notification (with 1 notification)', () => {
-    spyOn(comms, 'openExternalLink');
+    jest.spyOn(comms, 'openExternalLink');
 
     const nativeNotification: Notification =
       notificationsHelpers.raiseNativeNotification(
@@ -124,7 +128,7 @@ describe('utils/notifications.ts', () => {
   });
 
   it('should click on a native notification (with more than 1 notification)', () => {
-    spyOn(comms, 'reOpenWindow');
+    jest.spyOn(comms, 'reOpenWindow');
 
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
       mockedGithubNotifications,
@@ -136,7 +140,7 @@ describe('utils/notifications.ts', () => {
   });
 
   it('should play a sound', () => {
-    spyOn(window.Audio.prototype, 'play');
+    jest.spyOn(window.Audio.prototype, 'play');
     notificationsHelpers.raiseSoundNotification();
     expect(window.Audio.prototype.play).toHaveBeenCalledTimes(1);
   });
