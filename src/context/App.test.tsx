@@ -25,11 +25,11 @@ const customRender = (
 
 describe('context/App.tsx', () => {
   beforeEach(() => {
-    // FIXME: Couldn't get the timers working in modern mode, deferring
-    jest.useFakeTimers('legacy');
+    jest.useFakeTimers();
   });
 
   afterEach(() => {
+    jest.clearAllTimers();
     jest.clearAllMocks();
   });
 
@@ -53,19 +53,31 @@ describe('context/App.tsx', () => {
     it('fetch notifications every minute', async () => {
       customRender(null);
 
+      // Wait for the useEffects, for settings.participating and accounts, to run.
+      // Those aren't what we're testing
       await waitFor(() =>
         expect(fetchNotificationsMock).toHaveBeenCalledTimes(2),
       );
 
       fetchNotificationsMock.mockReset();
 
-      act(() => jest.advanceTimersByTime(60000));
+      // Typescript doesn't like the return type of advanceTimersByTime, hence the return
+      act(() => {
+        jest.advanceTimersByTime(60000);
+        return undefined;
+      });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
 
-      act(() => jest.advanceTimersByTime(60000));
+      act(() => {
+        jest.advanceTimersByTime(60000);
+        return undefined;
+      });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
 
-      act(() => jest.advanceTimersByTime(60000));
+      act(() => {
+        jest.advanceTimersByTime(60000);
+        return undefined;
+      });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
     });
 
