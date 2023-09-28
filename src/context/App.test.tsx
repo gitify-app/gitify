@@ -61,22 +61,21 @@ describe('context/App.tsx', () => {
 
       fetchNotificationsMock.mockReset();
 
-      // Typescript doesn't like the return type of advanceTimersByTime, hence the return
       act(() => {
         jest.advanceTimersByTime(60000);
-        return undefined;
+        return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
 
       act(() => {
         jest.advanceTimersByTime(60000);
-        return undefined;
+        return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
 
       act(() => {
         jest.advanceTimersByTime(60000);
-        return undefined;
+        return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
     });
