@@ -107,8 +107,8 @@ devDependencies:
     specifier: ^27
     version: 27.5.1
   jest-environment-jsdom:
-    specifier: 27.0.0
-    version: 27.0.0
+    specifier: 27.5.1
+    version: 27.5.1
   nock:
     specifier: ^13.0.5
     version: 13.0.5
@@ -3515,24 +3515,6 @@ packages:
       jest-get-type: 27.5.1
       jest-util: 27.5.1
       pretty-format: 27.5.1
-    dev: true
-
-  /jest-environment-jsdom@27.0.0:
-    resolution: {integrity: sha512-TjkjbYELkYC4IiIOlwKreZv2K8KuKh8n+lM3CUFvxrJrVlybDlYGhtV8fTVQiWwXVij4SipyMnQDI+KxNdd7Cw==}
-    engines: {node: ^10.13.0 || ^12.13.0 || ^14.15.0 || >=15.0.0}
-    dependencies:
-      '@jest/environment': 27.5.1
-      '@jest/fake-timers': 27.5.1
-      '@jest/types': 27.5.1
-      '@types/node': 18.18.0
-      jest-mock: 27.5.1
-      jest-util: 27.5.1
-      jsdom: 16.7.0
-    transitivePeerDependencies:
-      - bufferutil
-      - canvas
-      - supports-color
-      - utf-8-validate
     dev: true
 
   /jest-environment-jsdom@27.5.1:

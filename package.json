@@ -142,7 +142,7 @@
     "electron-builder": "^24.6.4",
     "electron-notarize": "^1.0.1",
     "jest": "^27",
-    "jest-environment-jsdom": "27.0.0",
+    "jest-environment-jsdom": "27.5.1",
     "nock": "^13.0.5",
     "postcss": "^8.4.30",
     "postcss-loader": "^7.3.3",
