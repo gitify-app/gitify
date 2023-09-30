@@ -6,141 +6,141 @@ settings:
 
 dependencies:
   '@primer/octicons-react':
-    specifier: ^19.8.0
+    specifier: 19.8.0
     version: 19.8.0(react@18.2.0)
   axios:
-    specifier: ^0.27.2
+    specifier: 0.27.2
     version: 0.27.2
   date-fns:
-    specifier: ^2.16.1
+    specifier: 2.16.1
     version: 2.16.1
   electron-updater:
-    specifier: ^4.3.9
+    specifier: 4.3.9
     version: 4.3.9
   final-form:
-    specifier: ^4.20.1
+    specifier: 4.20.1
     version: 4.20.1
   history:
-    specifier: ^4.10.1
+    specifier: 4.10.1
     version: 4.10.1
   lodash:
-    specifier: ^4.17.21
+    specifier: 4.17.21
     version: 4.17.21
   menubar:
-    specifier: ^9.3.0
+    specifier: 9.3.0
     version: 9.3.0(electron@13.1.7)
   nprogress:
-    specifier: ^0.2.0
+    specifier: 0.2.0
     version: 0.2.0
   react:
-    specifier: ^18.2.0
+    specifier: 18.2.0
     version: 18.2.0
   react-dom:
-    specifier: ^18.2.0
+    specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
   react-emojione:
-    specifier: ^5.0.1
+    specifier: 5.0.1
     version: 5.0.1(react-dom@18.2.0)(react@18.2.0)
   react-final-form:
-    specifier: ^6.4.0
+    specifier: 6.4.0
     version: 6.4.0(final-form@4.20.1)(react@18.2.0)(typescript@4.9.5)
   react-router:
-    specifier: ^5.3.4
+    specifier: 5.3.4
     version: 5.3.4(react@18.2.0)
   react-router-dom:
-    specifier: ^5.3.4
+    specifier: 5.3.4
     version: 5.3.4(react@18.2.0)
   react-transition-group:
-    specifier: ^4.4.1
+    specifier: 4.4.1
     version: 4.4.1(react-dom@18.2.0)(react@18.2.0)
   ts-loader:
-    specifier: ^9.4.2
+    specifier: 9.4.2
     version: 9.4.2(typescript@4.9.5)(webpack@5.83.1)
   typescript:
-    specifier: ^4.9.5
+    specifier: 4.9.5
     version: 4.9.5
 
 devDependencies:
   '@testing-library/react':
-    specifier: ^14.0.0
+    specifier: 14.0.0
     version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
   '@testing-library/react-hooks':
-    specifier: ^8.0.0
+    specifier: 8.0.0
     version: 8.0.0(@types/react@18.2.23)(react-dom@18.2.0)(react-test-renderer@18.2.0)(react@18.2.0)
   '@types/jest':
-    specifier: ^28
+    specifier: 28.1.8
     version: 28.1.8
   '@types/lodash':
-    specifier: ^4.14.165
+    specifier: 4.14.165
     version: 4.14.165
   '@types/node':
-    specifier: ^18.18.0
+    specifier: 18.18.0
     version: 18.18.0
   '@types/react':
     specifier: ^18.2.22
     version: 18.2.23
   '@types/react-router-dom':
-    specifier: ^5.3.3
+    specifier: 5.3.3
     version: 5.3.3
   '@types/react-transition-group':
-    specifier: ^4.4.7
+    specifier: 4.4.7
     version: 4.4.7
   autoprefixer:
-    specifier: ^10.4.16
+    specifier: 10.4.16
     version: 10.4.16(postcss@8.4.30)
   coveralls:
-    specifier: ^3.1.1
+    specifier: 3.1.1
     version: 3.1.1
   css-loader:
-    specifier: ^6.8.1
+    specifier: 6.8.1
     version: 6.8.1(webpack@5.83.1)
   electron:
     specifier: ^13.1.7
     version: 13.1.7
   electron-builder:
-    specifier: ^24.6.4
+    specifier: 24.6.4
     version: 24.6.4
   electron-notarize:
-    specifier: ^1.0.1
+    specifier: 1.0.1
     version: 1.0.1
   jest:
-    specifier: ^28
+    specifier: 28.1.3
     version: 28.1.3(@types/node@18.18.0)
   jest-environment-jsdom:
-    specifier: ^28
+    specifier: 28.1.3
     version: 28.1.3
   nock:
-    specifier: ^13.0.5
+    specifier: 13.0.5
     version: 13.0.5
   postcss:
-    specifier: ^8.4.30
+    specifier: 8.4.30
     version: 8.4.30
   postcss-loader:
-    specifier: ^7.3.3
+    specifier: 7.3.3
     version: 7.3.3(postcss@8.4.30)(typescript@4.9.5)(webpack@5.83.1)
   prettier:
-    specifier: ^3.0.3
+    specifier: 3.0.3
     version: 3.0.3
   react-test-renderer:
-    specifier: ^18.2.0
+    specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
   style-loader:
-    specifier: ^3.3.3
+    specifier: 3.3.3
     version: 3.3.3(webpack@5.83.1)
   tailwindcss:
-    specifier: ^3.3.3
+    specifier: 3.3.3
     version: 3.3.3
   ts-jest:
-    specifier: ^28
+    specifier: 28.0.8
     version: 28.0.8(@babel/core@7.21.8)(jest@28.1.3)(typescript@4.9.5)
   webpack:
-    specifier: ^5.83.1
+    specifier: 5.83.1
     version: 5.83.1(webpack-cli@5.1.1)
   webpack-cli:
-    specifier: ^5.1.1
+    specifier: 5.1.1
     version: 5.1.1(webpack@5.83.1)
   webpack-merge:
-    specifier: ^5.8.0
+    specifier: 5.8.0
     version: 5.8.0
 
 packages:
@@ -1692,17 +1692,6 @@ packages:
       electron-to-chromium: 1.4.527
       node-releases: 2.0.13
       update-browserslist-db: 1.0.13(browserslist@4.21.11)
-    dev: true
-
-  /browserslist@4.21.5:
-    resolution: {integrity: sha512-tUkiguQGW7S3IhB7N+c2MV/HZPSCPAAiYBZXLsBhFB/PCy6ZKKsZrmBayHV9fdGV/ARIfJ14NkxKzRDjvp7L6w==}
-    engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
-    hasBin: true
-    dependencies:
-      caniuse-lite: 1.0.30001488
-      electron-to-chromium: 1.4.402
-      node-releases: 2.0.11
-      update-browserslist-db: 1.0.11(browserslist@4.21.5)
 
   /bs-logger@0.2.6:
     resolution: {integrity: sha512-pd8DCoxmbgc7hyPKOvxtqNcjYoOsABPQdcCUjGp3d42VR2CX1ORhk2A87oqqu5R1kk+76nsxZupkmyd+MVtCog==}
@@ -1819,12 +1808,8 @@ packages:
     engines: {node: '>=10'}
     dev: true
 
-  /caniuse-lite@1.0.30001488:
-    resolution: {integrity: sha512-NORIQuuL4xGpIy6iCCQGN4iFjlBXtfKWIenlUuyZJumLRIindLb7wXM+GO8erEhb7vXfcnf4BAg2PrSDN5TNLQ==}
-
   /caniuse-lite@1.0.30001538:
     resolution: {integrity: sha512-HWJnhnID+0YMtGlzcp3T9drmBJUVDchPJ08tpUGFLs9CYlwWPH2uLgpHn8fND5pCgXVtnGS3H4QR9XLMHVNkHw==}
-    dev: true
 
   /caseless@0.12.0:
     resolution: {integrity: sha512-4tYFyifaFfGacoiObjJegolkwSU4xQNGbVgUiNYVUxbQ2x2lUsFvY4hVgVzGiIe6WLOPqycWXA40l+PWsxthUw==}
@@ -2075,7 +2060,7 @@ packages:
       postcss-modules-scope: 3.0.0(postcss@8.4.30)
       postcss-modules-values: 4.0.0(postcss@8.4.30)
       postcss-value-parser: 4.2.0
-      semver: 7.5.1
+      semver: 7.5.4
       webpack: 5.83.1(webpack-cli@5.1.1)
     dev: true
 
@@ -2346,6 +2331,7 @@ packages:
   /electron-notarize@1.0.1:
     resolution: {integrity: sha512-5B0ToIuuqb+Uzq3Kvs7BReUh52WRELmy8dHWusQwXgksYm2RgzsFFGNhv9eAmzuzXNW4xPgUbdCmYrcVGSlXIg==}
     engines: {node: '>= 10.0.0'}
+    deprecated: Please use @electron/notarize moving forward.  There is no API change, just a package name change
     dependencies:
       debug: 4.3.4
       fs-extra: 9.1.0
@@ -2371,12 +2357,8 @@ packages:
       - supports-color
     dev: true
 
-  /electron-to-chromium@1.4.402:
-    resolution: {integrity: sha512-gWYvJSkohOiBE6ecVYXkrDgNaUjo47QEKK0kQzmWyhkH+yoYiG44bwuicTGNSIQRG3WDMsWVZJLRnJnLNkbWvA==}
-
   /electron-to-chromium@1.4.527:
     resolution: {integrity: sha512-EafxEiEDzk2aLrdbtVczylHflHdHkNrpGNHIgDyA63sUQLQVS2ayj2hPw3RsVB42qkwURH+T2OxV7kGPUuYszA==}
-    dev: true
 
   /electron-updater@4.3.9:
     resolution: {integrity: sha512-LCNfedSwZfS4Hza+pDyPR05LqHtGorCStaBgVpRnfKxOlZcvpYEX0AbMeH5XUtbtGRoH2V8osbbf2qKPNb7AsA==}
@@ -2388,7 +2370,7 @@ packages:
       lazy-val: 1.0.5
       lodash.escaperegexp: 4.1.2
       lodash.isequal: 4.5.0
-      semver: 7.5.1
+      semver: 7.5.4
     transitivePeerDependencies:
       - supports-color
     dev: false
@@ -4212,12 +4194,8 @@ packages:
     resolution: {integrity: sha512-O5lz91xSOeoXP6DulyHfllpq+Eg00MWitZIbtPfoSEvqIHdl5gfcY6hYzDWnj0qD5tz52PI08u9qUvSVeUBeHw==}
     dev: true
 
-  /node-releases@2.0.11:
-    resolution: {integrity: sha512-+M0PwXeU80kRohZ3aT4J/OnR+l9/KD2nVLNNoRgFtnf+umQVFdGBAO2N8+nCnEi0xlh/Wk3zOGC+vNNx+uM79Q==}
-
   /node-releases@2.0.13:
     resolution: {integrity: sha512-uYr7J37ae/ORWdZeQ1xxMJe3NtdmqMC/JZK+geofDrkLUApKRHPd18/TxtBOJ4A0/+uUIliorNrfYV6s1b02eQ==}
-    dev: true
 
   /normalize-path@3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
@@ -5013,13 +4991,6 @@ packages:
     resolution: {integrity: sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==}
     hasBin: true
 
-  /semver@7.5.1:
-    resolution: {integrity: sha512-Wvss5ivl8TMRZXXESstBA4uR5iXgEN/VC5/sOcuXdVLzcdkz4HWetIoRfG5gb5X+ij/G9rw9YoGn3QoQ8OCSpw==}
-    engines: {node: '>=10'}
-    hasBin: true
-    dependencies:
-      lru-cache: 6.0.0
-
   /semver@7.5.4:
     resolution: {integrity: sha512-1bCSESV6Pv+i21Hvpxp3Dx+pSD8lIPt8uVjRrxAUt/nbswYc+tK6Y2btiULjd4+fnq15PX+nqQDC7Oft7WkwcA==}
     engines: {node: '>=10'}
@@ -5531,7 +5502,7 @@ packages:
       chalk: 4.1.2
       enhanced-resolve: 5.14.0
       micromatch: 4.0.5
-      semver: 7.5.1
+      semver: 7.5.4
       typescript: 4.9.5
       webpack: 5.83.1(webpack-cli@5.1.1)
     dev: false
@@ -5596,16 +5567,6 @@ packages:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}
     engines: {node: '>= 10.0.0'}
 
-  /update-browserslist-db@1.0.11(browserslist@4.21.5):
-    resolution: {integrity: sha512-dCwEFf0/oT85M1fHBg4F0jtLwJrutGoHSQXCh7u4o2t1drG+c0a9Flnqww6XUKSfQMPpJBRjU8d4RXB09qtvaA==}
-    hasBin: true
-    peerDependencies:
-      browserslist: '>= 4.21.0'
-    dependencies:
-      browserslist: 4.21.5
-      escalade: 3.1.1
-      picocolors: 1.0.0
-
   /update-browserslist-db@1.0.13(browserslist@4.21.11):
     resolution: {integrity: sha512-xebP81SNcPuNpPP3uzeW1NYXxI3rxyJzF3pD6sH4jE7o/IX+WtSpwnVU+qIsDPyk0d3hmFQ7mjqc6AtV604hbg==}
     hasBin: true
@@ -5615,7 +5576,6 @@ packages:
       browserslist: 4.21.11
       escalade: 3.1.1
       picocolors: 1.0.0
-    dev: true
 
   /uri-js@4.4.1:
     resolution: {integrity: sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==}
@@ -5773,7 +5733,7 @@ packages:
       '@webassemblyjs/wasm-parser': 1.11.6
       acorn: 8.8.2
       acorn-import-assertions: 1.9.0(acorn@8.8.2)
-      browserslist: 4.21.5
+      browserslist: 4.21.11
       chrome-trace-event: 1.0.3
       enhanced-resolve: 5.14.0
       es-module-lexer: 1.2.1
