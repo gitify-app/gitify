@@ -150,7 +150,7 @@
     "tailwindcss": "3.3.3",
     "ts-jest": "28.0.8",
     "webpack": "5.83.1",
-    "webpack-cli": "5.1.1",
+    "webpack-cli": "5.1.4",
     "webpack-merge": "5.8.0"
   },
   "packageManager": "pnpm@8.7.6"
