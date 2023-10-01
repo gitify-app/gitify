@@ -77,7 +77,7 @@ devDependencies:
     specifier: 18.18.0
     version: 18.18.0
   '@types/react':
-    specifier: ^18.2.22
+    specifier: 18.2.23
     version: 18.2.23
   '@types/react-router-dom':
     specifier: 5.3.3
