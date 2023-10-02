@@ -11,12 +11,12 @@ exports[`routes/Notifications.ts should render itself & its children (with notif
   <AccountNotifications
     hostname="github.com"
     notifications={
-      Array [
-        Object {
+      [
+        {
           "id": "138661096",
           "last_read_at": "2017-05-20T17:06:51Z",
           "reason": "subscribed",
-          "repository": Object {
+          "repository": {
             "archive_url": "https://api.github.com/repos/manosim/notifications-test/{archive_format}{/ref}",
             "assignees_url": "https://api.github.com/repos/manosim/notifications-test/assignees{/user}",
             "blobs_url": "https://api.github.com/repos/manosim/notifications-test/git/blobs{/sha}",
@@ -51,7 +51,7 @@ exports[`routes/Notifications.ts should render itself & its children (with notif
             "name": "notifications-test",
             "node_id": "MDEwOlJlcG9zaXRvcnkzNjAyOTcwNg==",
             "notifications_url": "https://api.github.com/repos/manosim/notifications-test/notifications{?since,all,participating}",
-            "owner": Object {
+            "owner": {
               "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
               "events_url": "https://api.github.com/users/manosim/events{/privacy}",
               "followers_url": "https://api.github.com/users/manosim/followers",
@@ -83,7 +83,7 @@ exports[`routes/Notifications.ts should render itself & its children (with notif
             "trees_url": "https://api.github.com/repos/manosim/notifications-test/git/trees{/sha}",
             "url": "https://api.github.com/manosim/notifications-test",
           },
-          "subject": Object {
+          "subject": {
             "latest_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments/302888448",
             "state": "open",
             "title": "I am a robot and this is a test!",
@@ -95,18 +95,18 @@ exports[`routes/Notifications.ts should render itself & its children (with notif
           "updated_at": "2017-05-20T17:51:57Z",
           "url": "https://api.github.com/notifications/threads/138661096",
         },
-        Object {
+        {
           "id": "148827438",
           "last_read_at": "2017-05-20T16:59:03Z",
           "reason": "author",
-          "repository": Object {
+          "repository": {
             "description": null,
             "fork": false,
             "full_name": "manosim/notifications-test",
             "html_url": "https://github.com/manosim/notifications-test",
             "id": 57216596,
             "name": "notifications-test",
-            "owner": Object {
+            "owner": {
               "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
               "events_url": "https://api.github.com/users/manosim/events{/privacy}",
               "followers_url": "https://api.github.com/users/manosim/followers",
@@ -127,7 +127,7 @@ exports[`routes/Notifications.ts should render itself & its children (with notif
             },
             "private": true,
           },
-          "subject": Object {
+          "subject": {
             "latest_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments/302885965",
             "title": "Improve the UI",
             "type": "Issue",
@@ -145,19 +145,19 @@ exports[`routes/Notifications.ts should render itself & its children (with notif
   <AccountNotifications
     hostname="github.gitify.io"
     notifications={
-      Array [
-        Object {
+      [
+        {
           "id": "4",
           "last_read_at": null,
           "reason": "subscribed",
-          "repository": Object {
+          "repository": {
             "description": null,
             "fork": false,
             "full_name": "myorg/notifications-test",
             "html_url": "https://github.gitify.io/myorg/notifications-test",
             "id": 1,
             "name": "notifications-test",
-            "owner": Object {
+            "owner": {
               "avatar_url": "https://github.gitify.io/avatars/u/4?",
               "events_url": "https://github.gitify.io/api/v3/users/myorg/events{/privacy}",
               "followers_url": "https://github.gitify.io/api/v3/users/myorg/followers",
@@ -178,7 +178,7 @@ exports[`routes/Notifications.ts should render itself & its children (with notif
             },
             "private": true,
           },
-          "subject": Object {
+          "subject": {
             "latest_comment_url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1",
             "title": "Release 0.0.1",
             "type": "Release",
@@ -189,18 +189,18 @@ exports[`routes/Notifications.ts should render itself & its children (with notif
           "updated_at": "2017-05-20T13:02:48Z",
           "url": "https://github.gitify.io/api/v3/notifications/threads/4",
         },
-        Object {
+        {
           "id": "3",
           "last_read_at": "2017-05-20T14:20:55Z",
           "reason": "subscribed",
-          "repository": Object {
+          "repository": {
             "description": null,
             "fork": false,
             "full_name": "myorg/notifications-test",
             "html_url": "https://github.gitify.io/myorg/notifications-test",
             "id": 1,
             "name": "notifications-test",
-            "owner": Object {
+            "owner": {
               "avatar_url": "https://github.gitify.io/avatars/u/4?",
               "events_url": "https://github.gitify.io/api/v3/users/myorg/events{/privacy}",
               "followers_url": "https://github.gitify.io/api/v3/users/myorg/followers",
@@ -221,7 +221,7 @@ exports[`routes/Notifications.ts should render itself & its children (with notif
             },
             "private": true,
           },
-          "subject": Object {
+          "subject": {
             "latest_comment_url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21",
             "title": "Bump Version",
             "type": "PullRequest",

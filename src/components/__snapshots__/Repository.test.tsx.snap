@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`components/Repository.tsx should render itself & its children 1`] = `
-Array [
+[
   <div
     className="flex p-2 bg-gray-100 dark:bg-gray-darker dark:text-white"
   >
@@ -34,7 +34,7 @@ Array [
           height={20}
           role="img"
           style={
-            Object {
+            {
               "display": "inline-block",
               "overflow": "visible",
               "userSelect": "none",
