@@ -16,7 +16,7 @@ exports[`components/Notification.js should render itself & its children 1`] = `
       height={18}
       role="img"
       style={
-        Object {
+        {
           "display": "inline-block",
           "overflow": "visible",
           "userSelect": "none",
@@ -69,7 +69,7 @@ exports[`components/Notification.js should render itself & its children 1`] = `
           height={13}
           role="img"
           style={
-            Object {
+            {
               "display": "inline-block",
               "overflow": "visible",
               "userSelect": "none",
@@ -103,7 +103,7 @@ exports[`components/Notification.js should render itself & its children 1`] = `
         height={20}
         role="img"
         style={
-          Object {
+          {
             "display": "inline-block",
             "overflow": "visible",
             "userSelect": "none",

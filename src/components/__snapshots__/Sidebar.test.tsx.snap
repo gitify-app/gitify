@@ -65,7 +65,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         height={12}
         role="img"
         style={
-          Object {
+          {
             "display": "inline-block",
             "overflow": "visible",
             "userSelect": "none",
@@ -185,7 +185,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
         height={12}
         role="img"
         style={
-          Object {
+          {
             "display": "inline-block",
             "overflow": "visible",
             "userSelect": "none",

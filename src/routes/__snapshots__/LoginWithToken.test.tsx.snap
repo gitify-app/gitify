@@ -20,7 +20,7 @@ exports[`routes/LoginWithToken.js renders correctly 1`] = `
         height={20}
         role="img"
         style={
-          Object {
+          {
             "display": "inline-block",
             "overflow": "visible",
             "userSelect": "none",
