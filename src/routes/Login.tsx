@@ -1,19 +1,19 @@
 const { ipcRenderer } = require('electron');
 
 import React, { useCallback, useContext, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { AppContext } from '../context/App';
 import { Logo } from '../components/Logo';
 
 export const LoginRoute: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { isLoggedIn, login } = useContext(AppContext);
 
   useEffect(() => {
     if (isLoggedIn) {
       ipcRenderer.send('reopen-window');
-      history.replace('/');
+      navigate('/', { replace: true });
     }
   }, [isLoggedIn]);
 
@@ -46,7 +46,7 @@ export const LoginRoute: React.FC = () => {
 
       <button
         className={loginButtonClass}
-        onClick={() => history.push('/login-enterprise')}
+        onClick={() => navigate('/login-enterprise')}
         aria-label="Login with GitHub Enterprise"
       >
         Login to GitHub Enterprise
@@ -54,7 +54,7 @@ export const LoginRoute: React.FC = () => {
 
       <button
         className="bg-none hover:text-gray-800 dark:text-gray-100 dark:hover:text-gray-300 mt-4 focus:outline-none"
-        onClick={() => history.push('/login-token')}
+        onClick={() => navigate('/login-token')}
         aria-label="Login with Personal Token"
       >
         <small>or login with a personal token</small>

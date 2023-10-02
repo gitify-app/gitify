@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 import { ipcRenderer, remote } from 'electron';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon } from '@primer/octicons-react';
 
 import { AppContext } from '../context/App';
@@ -17,7 +17,7 @@ const isLinux = remote.process.platform === 'linux';
 
 export const SettingsRoute: React.FC = () => {
   const { settings, updateSetting, logout } = useContext(AppContext);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   ipcRenderer.on('update-native-theme', (_, updatedAppearance: Appearance) => {
     if (settings.appearance === Appearance.SYSTEM) {
@@ -27,7 +27,7 @@ export const SettingsRoute: React.FC = () => {
 
   const logoutUser = useCallback(() => {
     logout();
-    history.goBack();
+    navigate(-1);
     updateTrayIcon();
   }, []);
 
@@ -36,7 +36,7 @@ export const SettingsRoute: React.FC = () => {
   }, []);
 
   const goToEnterprise = useCallback(() => {
-    return history.replace('/login-enterprise');
+    return navigate('/login-enterprise');
   }, []);
 
   const footerButtonClass =
@@ -48,7 +48,7 @@ export const SettingsRoute: React.FC = () => {
         <button
           className="focus:outline-none"
           aria-label="Go Back"
-          onClick={() => history.goBack()}
+          onClick={() => navigate(-1)}
         >
           <ArrowLeftIcon size={20} className="hover:text-gray-400" />
         </button>
