@@ -9,7 +9,7 @@ import { mockedUser } from '../__mocks__/mockedData';
 
 describe('hooks/useNotifications.ts', () => {
   beforeEach(() => {
-    axios.defaults.adapter = require('axios/lib/adapters/http');
+    axios.defaults.adapter = 'http';
   });
 
   describe('fetchNotifications', () => {
