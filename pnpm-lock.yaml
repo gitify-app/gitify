@@ -101,8 +101,8 @@ devDependencies:
     specifier: 24.6.4
     version: 24.6.4
   electron-notarize:
-    specifier: 1.0.1
-    version: 1.0.1
+    specifier: 1.2.2
+    version: 1.2.2
   jest:
     specifier: 29.7.0
     version: 29.7.0(@types/node@18.18.0)
@@ -2333,8 +2333,8 @@ packages:
       - supports-color
     dev: true
 
-  /electron-notarize@1.0.1:
-    resolution: {integrity: sha512-5B0ToIuuqb+Uzq3Kvs7BReUh52WRELmy8dHWusQwXgksYm2RgzsFFGNhv9eAmzuzXNW4xPgUbdCmYrcVGSlXIg==}
+  /electron-notarize@1.2.2:
+    resolution: {integrity: sha512-ZStVWYcWI7g87/PgjPJSIIhwQXOaw4/XeXU+pWqMMktSLHaGMLHdyPPN7Cmao7+Cr7fYufA16npdtMndYciHNw==}
     engines: {node: '>= 10.0.0'}
     deprecated: Please use @electron/notarize moving forward.  There is no API change, just a package name change
     dependencies:
