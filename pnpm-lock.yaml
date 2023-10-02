@@ -42,8 +42,8 @@ dependencies:
     specifier: 5.0.1
     version: 5.0.1(react-dom@18.2.0)(react@18.2.0)
   react-final-form:
-    specifier: 6.4.0
-    version: 6.4.0(final-form@4.20.10)(react@18.2.0)(typescript@5.2.2)
+    specifier: 6.5.9
+    version: 6.5.9(final-form@4.20.10)(react@18.2.0)
   react-router:
     specifier: 5.3.4
     version: 5.3.4(react@18.2.0)
@@ -4715,18 +4715,15 @@ packages:
       react: 18.2.0
     dev: true
 
-  /react-final-form@6.4.0(final-form@4.20.10)(react@18.2.0)(typescript@5.2.2):
-    resolution: {integrity: sha512-M7J7f0pnoj0o8sBq3iG6jsWJEh08pNUyl2D4wBC9SJvCNkGdol2UdyjMiEFYD3rz9LIFzQqFSG0kbRBCadqzhA==}
+  /react-final-form@6.5.9(final-form@4.20.10)(react@18.2.0):
+    resolution: {integrity: sha512-x3XYvozolECp3nIjly+4QqxdjSSWfcnpGEL5K8OBT6xmGrq5kBqbA6+/tOqoom9NwqIPPbxPNsOViFlbKgowbA==}
     peerDependencies:
-      final-form: ^4.19.0
-      react: ^16.8.0
+      final-form: ^4.20.4
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       '@babel/runtime': 7.21.5
       final-form: 4.20.10
       react: 18.2.0
-      ts-essentials: 6.0.7(typescript@5.2.2)
-    transitivePeerDependencies:
-      - typescript
     dev: false
 
   /react-is@16.13.1:
@@ -5467,14 +5464,6 @@ packages:
     dependencies:
       utf8-byte-length: 1.0.4
     dev: true
-
-  /ts-essentials@6.0.7(typescript@5.2.2):
-    resolution: {integrity: sha512-2E4HIIj4tQJlIHuATRHayv0EfMGK3ris/GRk1E3CFnsZzeNV+hUmelbaTZHLtXaZppM5oLhHRtO04gINC4Jusw==}
-    peerDependencies:
-      typescript: '>=3.7.0'
-    dependencies:
-      typescript: 5.2.2
-    dev: false
 
   /ts-interface-checker@0.1.13:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
