@@ -54,8 +54,8 @@ dependencies:
     specifier: 4.4.5
     version: 4.4.5(react-dom@18.2.0)(react@18.2.0)
   ts-loader:
-    specifier: 9.4.2
-    version: 9.4.2(typescript@5.2.2)(webpack@5.83.1)
+    specifier: 9.4.4
+    version: 9.4.4(typescript@5.2.2)(webpack@5.83.1)
   typescript:
     specifier: 5.2.2
     version: 5.2.2
@@ -5503,8 +5503,8 @@ packages:
       yargs-parser: 21.1.1
     dev: true
 
-  /ts-loader@9.4.2(typescript@5.2.2)(webpack@5.83.1):
-    resolution: {integrity: sha512-OmlC4WVmFv5I0PpaxYb+qGeGOdm5giHU7HwDDUjw59emP2UYMHy9fFSDcYgSNoH8sXcj4hGCSEhlDZ9ULeDraA==}
+  /ts-loader@9.4.4(typescript@5.2.2)(webpack@5.83.1):
+    resolution: {integrity: sha512-MLukxDHBl8OJ5Dk3y69IsKVFRA/6MwzEqBgh+OXMPB/OD01KQuWPFd1WAQP8a5PeSCAxfnkhiuWqfmFJzJQt9w==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
       typescript: '*'
