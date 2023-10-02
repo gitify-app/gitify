@@ -4,6 +4,7 @@ import {
   HashRouter as Router,
   Route,
   Switch,
+  useLocation,
 } from 'react-router-dom';
 
 import { AppContext, AppProvider } from './context/App';
@@ -15,24 +16,16 @@ import { NotificationsRoute } from './routes/Notifications';
 import { SettingsRoute } from './routes/Settings';
 import { Sidebar } from './components/Sidebar';
 
-export const PrivateRoute = ({ component: Component, ...rest }) => {
+function RequireAuth({ children }) {
   const { isLoggedIn } = useContext(AppContext);
+  const location = useLocation();
 
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        isLoggedIn ? (
-          <Component {...props} />
-        ) : (
-          <Redirect
-            to={{ pathname: '/login', state: { from: props.location } }}
-          />
-        )
-      }
-    />
+  return isLoggedIn ? (
+    children
+  ) : (
+    <Redirect to={{ pathname: '/login', state: { from: location } }} />
   );
-};
+}
 
 export const App = () => {
   return (
@@ -43,11 +36,28 @@ export const App = () => {
           <Sidebar />
 
           <Switch>
-            <PrivateRoute path="/" exact component={NotificationsRoute} />
-            <PrivateRoute path="/settings" exact component={SettingsRoute} />
-            <Route path="/login" component={LoginRoute} />
-            <Route path="/login-enterprise" component={LoginEnterpriseRoute} />
-            <Route path="/login-token" component={LoginWithToken} />
+            <Route path="/" exact>
+              <RequireAuth>
+                <NotificationsRoute />
+              </RequireAuth>
+            </Route>
+            <Route path="/settings" exact>
+              <RequireAuth>
+                <SettingsRoute />
+              </RequireAuth>
+            </Route>
+            <Route path="/login">
+              <LoginRoute />
+            </Route>
+            <Route path="/login">
+              <LoginRoute />
+            </Route>
+            <Route path="/login-enterprise">
+              <LoginEnterpriseRoute />
+            </Route>
+            <Route path="/login-token">
+              <LoginWithToken />
+            </Route>
           </Switch>
         </div>
       </Router>
