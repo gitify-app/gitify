@@ -121,7 +121,7 @@
     "react-router": "5.3.4",
     "react-router-dom": "5.3.4",
     "react-transition-group": "4.4.5",
-    "ts-loader": "9.4.2",
+    "ts-loader": "9.4.4",
     "typescript": "5.2.2"
   },
   "devDependencies": {
