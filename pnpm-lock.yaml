@@ -18,8 +18,8 @@ dependencies:
     specifier: 6.1.4
     version: 6.1.4
   final-form:
-    specifier: 4.20.1
-    version: 4.20.1
+    specifier: 4.20.10
+    version: 4.20.10
   history:
     specifier: 4.10.1
     version: 4.10.1
@@ -43,7 +43,7 @@ dependencies:
     version: 5.0.1(react-dom@18.2.0)(react@18.2.0)
   react-final-form:
     specifier: 6.4.0
-    version: 6.4.0(final-form@4.20.1)(react@18.2.0)(typescript@4.9.5)
+    version: 6.4.0(final-form@4.20.10)(react@18.2.0)(typescript@4.9.5)
   react-router:
     specifier: 5.3.4
     version: 5.3.4(react@18.2.0)
@@ -2646,8 +2646,9 @@ packages:
     dependencies:
       to-regex-range: 5.0.1
 
-  /final-form@4.20.1:
-    resolution: {integrity: sha512-IIsOK3JRxJrN72OBj7vFWZxtGt3xc1bYwJVPchjVWmDol9DlzMSAOPB+vwe75TUYsw1JaH0fTQnIgwSQZQ9Acg==}
+  /final-form@4.20.10:
+    resolution: {integrity: sha512-TL48Pi1oNHeMOHrKv1bCJUrWZDcD3DIG6AGYVNOnyZPr7Bd/pStN0pL+lfzF5BNoj/FclaoiaLenk4XUIFVYng==}
+    engines: {node: '>=8'}
     dependencies:
       '@babel/runtime': 7.21.5
     dev: false
@@ -4714,14 +4715,14 @@ packages:
       react: 18.2.0
     dev: true
 
-  /react-final-form@6.4.0(final-form@4.20.1)(react@18.2.0)(typescript@4.9.5):
+  /react-final-form@6.4.0(final-form@4.20.10)(react@18.2.0)(typescript@4.9.5):
     resolution: {integrity: sha512-M7J7f0pnoj0o8sBq3iG6jsWJEh08pNUyl2D4wBC9SJvCNkGdol2UdyjMiEFYD3rz9LIFzQqFSG0kbRBCadqzhA==}
     peerDependencies:
       final-form: ^4.19.0
       react: ^16.8.0
     dependencies:
       '@babel/runtime': 7.21.5
-      final-form: 4.20.1
+      final-form: 4.20.10
       react: 18.2.0
       ts-essentials: 6.0.7(typescript@4.9.5)
     transitivePeerDependencies:
