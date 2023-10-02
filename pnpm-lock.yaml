@@ -140,8 +140,8 @@ devDependencies:
     specifier: 5.1.4
     version: 5.1.4(webpack@5.88.2)
   webpack-merge:
-    specifier: 5.8.0
-    version: 5.8.0
+    specifier: 5.9.0
+    version: 5.9.0
 
 packages:
 
@@ -5722,10 +5722,10 @@ packages:
       interpret: 3.1.1
       rechoir: 0.8.0
       webpack: 5.88.2(webpack-cli@5.1.4)
-      webpack-merge: 5.8.0
+      webpack-merge: 5.9.0
 
-  /webpack-merge@5.8.0:
-    resolution: {integrity: sha512-/SaI7xY0831XwP6kzuwhKWVKDP9t1QY1h65lAFLbZqMPIuYcD9QAW4u9STIbU9kaJbPBB/geU/gLr1wDjOhQ+Q==}
+  /webpack-merge@5.9.0:
+    resolution: {integrity: sha512-6NbRQw4+Sy50vYNTw7EyOn41OZItPiXB8GNv3INSoe3PSFaHJEz3SHTrYVaRm2LilNGnFUzh0FAwqPEmU/CwDg==}
     engines: {node: '>=10.0.0'}
     dependencies:
       clone-deep: 4.0.1
