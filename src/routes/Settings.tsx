@@ -36,7 +36,7 @@ export const SettingsRoute: React.FC = () => {
   }, []);
 
   const goToEnterprise = useCallback(() => {
-    return navigate('/login-enterprise');
+    return navigate('/login-enterprise', { replace: true });
   }, []);
 
   const footerButtonClass =

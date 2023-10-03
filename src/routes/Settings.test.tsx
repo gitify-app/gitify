@@ -180,7 +180,9 @@ describe('routes/Settings.tsx', () => {
       </AppContext.Provider>,
     );
     fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-enterprise');
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-enterprise', {
+      replace: true,
+    });
   });
 
   it('should quit the app', () => {
