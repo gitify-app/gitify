@@ -42,7 +42,7 @@ function isFirstRun() {
       return false;
     }
 
-    fs.outputFileSync(configPath, '');
+    fs.writeFileSync(configPath, '');
   } catch (error) {
     console.warn(`First run: Unable to write firstRun file`, error);
   }
