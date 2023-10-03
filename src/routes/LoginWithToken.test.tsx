@@ -9,9 +9,14 @@ import { shell } from 'electron';
 import { AppContext } from '../context/App';
 import { LoginWithToken, validate } from './LoginWithToken';
 
+const mockNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,
+}));
+
 describe('routes/LoginWithToken.js', () => {
   const history = createMemoryHistory();
-  const goBackMock = jest.spyOn(history, 'goBack');
   const openExternalMock = jest.spyOn(shell, 'openExternal');
 
   const mockValidateToken = jest.fn();
@@ -19,7 +24,7 @@ describe('routes/LoginWithToken.js', () => {
   beforeEach(function () {
     mockValidateToken.mockReset();
     openExternalMock.mockReset();
-    goBackMock.mockReset();
+    mockNavigate.mockReset();
   });
 
   it('renders correctly', () => {
@@ -37,16 +42,14 @@ describe('routes/LoginWithToken.js', () => {
   });
 
   it('let us go back', () => {
-    const goBackMock = jest.spyOn(history, 'goBack');
-
     const { getByLabelText } = render(
-      <Router history={history}>
+      <Router location={history.location} navigator={history}>
         <LoginWithToken />
       </Router>,
     );
 
     fireEvent.click(getByLabelText('Go Back'));
-    expect(goBackMock).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
   it('should validate the form values', () => {
@@ -74,7 +77,7 @@ describe('routes/LoginWithToken.js', () => {
   it("should click on the 'personal access tokens' link and open the browser", async () => {
     const { getByText } = render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
-        <Router history={history}>
+        <Router location={history.location} navigator={history}>
           <LoginWithToken />
         </Router>
       </AppContext.Provider>,
@@ -90,7 +93,7 @@ describe('routes/LoginWithToken.js', () => {
 
     const { getByLabelText, getByTitle } = render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
-        <Router history={history}>
+        <Router location={history.location} navigator={history}>
           <LoginWithToken />
         </Router>
       </AppContext.Provider>,
@@ -108,7 +111,7 @@ describe('routes/LoginWithToken.js', () => {
     await waitFor(() => expect(mockValidateToken).toHaveBeenCalledTimes(1));
 
     expect(mockValidateToken).toHaveBeenCalledTimes(1);
-    expect(goBackMock).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
   it('should login using a token - failure', async () => {
@@ -116,7 +119,7 @@ describe('routes/LoginWithToken.js', () => {
 
     const { getByLabelText, getByTitle } = render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
-        <Router history={history}>
+        <Router location={history.location} navigator={history}>
           <LoginWithToken />
         </Router>
       </AppContext.Provider>,
@@ -135,7 +138,7 @@ describe('routes/LoginWithToken.js', () => {
     await waitFor(() => expect(mockValidateToken).toHaveBeenCalledTimes(1));
 
     expect(mockValidateToken).toHaveBeenCalledTimes(1);
-    expect(goBackMock).not.toHaveBeenCalled();
+    expect(mockNavigate).toHaveBeenCalledTimes(0);
   });
 
   it('should render the form with errors', () => {

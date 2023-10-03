@@ -11,14 +11,18 @@ import { SettingsRoute } from './Settings';
 import { AppContext } from '../context/App';
 import { mockSettings } from '../__mocks__/mock-state';
 
+const mockNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,
+}));
+
 describe('routes/Settings.tsx', () => {
   const history = createMemoryHistory();
-  const goBackMock = jest.spyOn(history, 'goBack');
-  const replaceMock = jest.spyOn(history, 'replace');
   const updateSetting = jest.fn();
 
   beforeEach(() => {
-    goBackMock.mockReset();
+    mockNavigate.mockReset();
     updateSetting.mockReset();
   });
 
@@ -40,7 +44,7 @@ describe('routes/Settings.tsx', () => {
       <AppContext.Provider
         value={{ settings: mockSettings, logout: logoutMock }}
       >
-        <Router history={history}>
+        <Router location={history.location} navigator={history}>
           <SettingsRoute />
         </Router>
       </AppContext.Provider>,
@@ -52,19 +56,19 @@ describe('routes/Settings.tsx', () => {
 
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
-    expect(goBackMock).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
   it('should go back by pressing the icon', () => {
     const { getByLabelText } = render(
       <AppContext.Provider value={{ settings: mockSettings }}>
-        <Router history={history}>
+        <Router location={history.location} navigator={history}>
           <SettingsRoute />
         </Router>
       </AppContext.Provider>,
     );
     fireEvent.click(getByLabelText('Go Back'));
-    expect(goBackMock).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
   it('should toggle the showOnlyParticipating checkbox', () => {
@@ -170,13 +174,13 @@ describe('routes/Settings.tsx', () => {
   it('should go to the enterprise login route', () => {
     const { getByLabelText } = render(
       <AppContext.Provider value={{ settings: mockSettings }}>
-        <Router history={history}>
+        <Router location={history.location} navigator={history}>
           <SettingsRoute />
         </Router>
       </AppContext.Provider>,
     );
     fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
-    expect(replaceMock).toHaveBeenCalledWith('/login-enterprise');
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-enterprise');
   });
 
   it('should quit the app', () => {

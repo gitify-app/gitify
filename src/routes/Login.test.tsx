@@ -10,14 +10,17 @@ const { ipcRenderer } = require('electron');
 import { AppContext } from '../context/App';
 import { LoginRoute } from './Login';
 
+const mockNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,
+}));
+
 describe('routes/Login.tsx', () => {
   const history = createMemoryHistory();
-  const pushMock = jest.spyOn(history, 'push');
-  const replaceMock = jest.spyOn(history, 'replace');
 
-  beforeEach(function () {
-    pushMock.mockReset();
-
+  beforeEach(() => {
+    mockNavigate.mockReset();
     jest.spyOn(ipcRenderer, 'send');
   });
 
@@ -34,7 +37,7 @@ describe('routes/Login.tsx', () => {
   it('should redirect to notifications once logged in', () => {
     const { rerender } = render(
       <AppContext.Provider value={{ isLoggedIn: false }}>
-        <Router history={history}>
+        <Router location={history.location} navigator={history}>
           <LoginRoute />
         </Router>
       </AppContext.Provider>,
@@ -42,7 +45,7 @@ describe('routes/Login.tsx', () => {
 
     rerender(
       <AppContext.Provider value={{ isLoggedIn: true }}>
-        <Router history={history}>
+        <Router location={history.location} navigator={history}>
           <LoginRoute />
         </Router>
       </AppContext.Provider>,
@@ -50,19 +53,18 @@ describe('routes/Login.tsx', () => {
 
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
-    expect(replaceMock).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
   });
 
   it('should navigate to login with github enterprise', () => {
     const { getByLabelText } = render(
-      <Router history={history}>
+      <Router location={history.location} navigator={history}>
         <LoginRoute />
       </Router>,
     );
 
     fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
 
-    expect(pushMock).toHaveBeenCalledTimes(1);
-    expect(pushMock).toHaveBeenCalledWith('/login-enterprise');
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-enterprise');
   });
 });

@@ -12,9 +12,14 @@ import { AuthState } from '../types';
 import { LoginEnterpriseRoute, validate } from './LoginEnterprise';
 import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
 
+const mockNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,
+}));
+
 describe('routes/LoginEnterprise.js', () => {
   const history = createMemoryHistory();
-  const goBackMock = jest.spyOn(history, 'goBack');
 
   const mockAccounts: AuthState = {
     enterpriseAccounts: [],
@@ -22,7 +27,7 @@ describe('routes/LoginEnterprise.js', () => {
   };
 
   beforeEach(function () {
-    goBackMock.mockReset();
+    mockNavigate.mockReset();
 
     jest.spyOn(ipcRenderer, 'send');
   });
@@ -40,18 +45,16 @@ describe('routes/LoginEnterprise.js', () => {
   });
 
   it('let us go back', () => {
-    const goBackMock = jest.spyOn(history, 'goBack');
-
     const { getByLabelText } = render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
-        <Router history={history}>
+        <Router location={history.location} navigator={history}>
           <LoginEnterpriseRoute />
         </Router>
       </AppContext.Provider>,
     );
 
     fireEvent.click(getByLabelText('Go Back'));
-    expect(goBackMock).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
   it('should validate the form values', () => {
@@ -83,7 +86,7 @@ describe('routes/LoginEnterprise.js', () => {
   it('should receive a logged-in enterprise account', () => {
     const { rerender } = render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
-        <Router history={history}>
+        <Router location={history.location} navigator={history}>
           <LoginEnterpriseRoute />
         </Router>
       </AppContext.Provider>,
@@ -98,7 +101,7 @@ describe('routes/LoginEnterprise.js', () => {
           },
         }}
       >
-        <Router history={history}>
+        <Router location={history.location} navigator={history}>
           <LoginEnterpriseRoute />
         </Router>
       </AppContext.Provider>,
@@ -106,7 +109,7 @@ describe('routes/LoginEnterprise.js', () => {
 
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
-    expect(goBackMock).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
   it('should render the form with errors', () => {
