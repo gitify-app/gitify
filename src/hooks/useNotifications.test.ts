@@ -9,6 +9,8 @@ import { mockedUser } from '../__mocks__/mockedData';
 
 describe('hooks/useNotifications.ts', () => {
   beforeEach(() => {
+    // axios will default to using the XHR adapter which can't be intercepted
+    // by nock. So, configure axios to use the node adapter.
     axios.defaults.adapter = 'http';
   });
 

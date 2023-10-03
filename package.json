@@ -48,18 +48,6 @@
     "url": "https://github.com/manosim/gitify/issues"
   },
   "homepage": "https://www.gitify.io/",
-  "jest": {
-    "preset": "ts-jest/presets/js-with-ts",
-    "setupFiles": [
-      "<rootDir>/src/__helpers__/setupEnvVars.js"
-    ],
-    "testEnvironment": "jsdom",
-    "coverageThreshold": {
-      "global": {
-        "lines": 90
-      }
-    }
-  },
   "build": {
     "appId": "com.electron.gitify",
     "productName": "Gitify",
