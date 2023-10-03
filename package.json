@@ -118,8 +118,8 @@
     "react-dom": "18.2.0",
     "react-emojione": "5.0.1",
     "react-final-form": "6.5.9",
-    "react-router": "5.3.4",
-    "react-router-dom": "5.3.4",
+    "react-router": "6.16.0",
+    "react-router-dom": "6.16.0",
     "react-transition-group": "4.4.5",
     "ts-loader": "9.4.4",
     "typescript": "5.2.2"

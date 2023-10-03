@@ -1,7 +1,7 @@
 import { BellIcon } from '@primer/octicons-react';
 import { ipcRenderer, shell } from 'electron';
 import React, { useCallback, useContext, useMemo } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
@@ -11,7 +11,7 @@ import { IconRefresh } from '../icons/Refresh';
 import { Constants } from '../utils/constants';
 
 export const Sidebar: React.FC = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const location = useLocation();
 
   const { isLoggedIn } = useContext(AppContext);
@@ -66,7 +66,7 @@ export const Sidebar: React.FC = () => {
             <button
               className={footerButtonClasses}
               onClick={() => {
-                history.replace('/');
+                navigate('/', { replace: true });
                 fetchNotifications();
               }}
               aria-label="Refresh Notifications"
@@ -78,9 +78,9 @@ export const Sidebar: React.FC = () => {
               className={footerButtonClasses}
               onClick={() => {
                 if (location.pathname.startsWith('/settings')) {
-                  history.replace('/');
+                  navigate('/', { replace: true });
                 } else {
-                  history.push('/settings');
+                  navigate('/settings');
                 }
               }}
               aria-label="Settings"

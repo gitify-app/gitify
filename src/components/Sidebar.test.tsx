@@ -12,6 +12,12 @@ import { mockedAccountNotifications } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
 import { Sidebar } from './Sidebar';
 
+const mockNavigate = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockNavigate,
+}));
+
 describe('components/Sidebar.tsx', () => {
   const fetchNotifications = jest.fn();
   const history = createMemoryHistory();
@@ -73,17 +79,15 @@ describe('components/Sidebar.tsx', () => {
   });
 
   it('go to the settings route', () => {
-    const pushMock = jest.spyOn(history, 'push');
-
     const { getByLabelText } = render(
       <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
-        <Router history={history}>
+        <Router location={history.location} navigator={history}>
           <Sidebar />
         </Router>
       </AppContext.Provider>,
     );
     fireEvent.click(getByLabelText('Settings'));
-    expect(pushMock).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/settings');
   });
 
   it('opens github in the notifications page', () => {

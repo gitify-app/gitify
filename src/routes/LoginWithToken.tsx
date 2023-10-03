@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { Form, FormRenderProps } from 'react-final-form';
 import { ArrowLeftIcon } from '@primer/octicons-react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { shell } from 'electron';
 
 import { AppContext } from '../context/App';
@@ -42,7 +42,7 @@ export const validate = (values: IValues): IFormErrors => {
 
 export const LoginWithToken: React.FC = () => {
   const { validateToken } = useContext(AppContext);
-  const history = useHistory();
+  const navigate = useNavigate();
   const [isValidToken, setIsValidToken] = useState<boolean>(true);
 
   const openLink = useCallback((url: string) => {
@@ -109,7 +109,7 @@ export const LoginWithToken: React.FC = () => {
     setIsValidToken(true);
     try {
       await validateToken(data as AuthTokenOptions);
-      history.goBack();
+      navigate(-1);
     } catch (err) {
       setIsValidToken(false);
     }
@@ -121,7 +121,7 @@ export const LoginWithToken: React.FC = () => {
         <button
           className="focus:outline-none"
           aria-label="Go Back"
-          onClick={() => history.goBack()}
+          onClick={() => navigate(-1)}
         >
           <ArrowLeftIcon size={20} className="hover:text-gray-400" />
         </button>

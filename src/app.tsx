@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 import {
-  Redirect,
+  Navigate,
   HashRouter as Router,
   Route,
-  Switch,
+  Routes,
   useLocation,
 } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ function RequireAuth({ children }) {
   return isLoggedIn ? (
     children
   ) : (
-    <Redirect to={{ pathname: '/login', state: { from: location } }} />
+    <Navigate to="/login" replace state={{ from: location }} />
   );
 }
 
@@ -34,31 +34,30 @@ export const App = () => {
         <div className="flex flex-col pl-14 h-full">
           <Loading />
           <Sidebar />
-
-          <Switch>
-            <Route path="/" exact>
-              <RequireAuth>
-                <NotificationsRoute />
-              </RequireAuth>
-            </Route>
-            <Route path="/settings" exact>
-              <RequireAuth>
-                <SettingsRoute />
-              </RequireAuth>
-            </Route>
-            <Route path="/login">
-              <LoginRoute />
-            </Route>
-            <Route path="/login">
-              <LoginRoute />
-            </Route>
-            <Route path="/login-enterprise">
-              <LoginEnterpriseRoute />
-            </Route>
-            <Route path="/login-token">
-              <LoginWithToken />
-            </Route>
-          </Switch>
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <RequireAuth>
+                  <NotificationsRoute />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/settings"
+              element={
+                <RequireAuth>
+                  <SettingsRoute />
+                </RequireAuth>
+              }
+            />
+            <Route path="/login" element={<LoginRoute />} />
+            <Route
+              path="/login-enterprise"
+              element={<LoginEnterpriseRoute />}
+            />
+            <Route path="/login-token" element={<LoginWithToken />} />
+          </Routes>
         </div>
       </Router>
     </AppProvider>

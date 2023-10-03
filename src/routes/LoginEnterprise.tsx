@@ -3,7 +3,7 @@ const ipcRenderer = require('electron').ipcRenderer;
 import React, { useCallback, useContext, useEffect } from 'react';
 import { Form, FormRenderProps } from 'react-final-form';
 import { ArrowLeftIcon } from '@primer/octicons-react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { AppContext } from '../context/App';
 import { FieldInput } from '../components/fields/FieldInput';
@@ -55,12 +55,12 @@ export const LoginEnterpriseRoute: React.FC = () => {
     accounts: { enterpriseAccounts },
     loginEnterprise,
   } = useContext(AppContext);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (enterpriseAccounts.length) {
       ipcRenderer.send('reopen-window');
-      history.goBack();
+      navigate(-1);
     }
   }, [enterpriseAccounts]);
 
@@ -109,7 +109,7 @@ export const LoginEnterpriseRoute: React.FC = () => {
         <button
           className="focus:outline-none"
           aria-label="Go Back"
-          onClick={() => history.goBack()}
+          onClick={() => navigate(-1)}
         >
           <ArrowLeftIcon size={20} className="hover:text-gray-400" />
         </button>
