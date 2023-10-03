@@ -1,0 +1,16 @@
+on:
+  push:
+    tags: 'v*'
+
+jobs:
+  homebrew:
+    name: Bump Homebrew Cask
+    runs-on: ubuntu-latest
+    steps:
+      - uses: macauley/action-homebrew-bump-cask@v1
+        with:
+          token: ${{ secrets.GH_TOKEN }}
+          org: gitify-app
+          tap: homebrew/homebrew-cask
+          cask: gitify
+          force: false
