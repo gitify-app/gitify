@@ -52,7 +52,6 @@ export const App = () => {
               }
             />
             <Route path="/login" element={<LoginRoute />} />
-            <Route path="/login" element={<LoginRoute />} />
             <Route
               path="/login-enterprise"
               element={<LoginEnterpriseRoute />}
