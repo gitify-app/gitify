@@ -6,7 +6,9 @@ import {
   restoreSetting,
 } from './comms';
 
-const { ipcRenderer, remote, shell } = require('electron');
+const { ipcRenderer, shell } = require('electron');
+
+const remote = require('@electron/remote');
 
 describe('utils/comms.ts', () => {
   beforeEach(function () {

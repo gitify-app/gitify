@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@electron/remote':
+    specifier: ^2.0.11
+    version: 2.0.11(electron@13.1.7)
   '@primer/octicons-react':
     specifier: 19.8.0
     version: 19.8.0(react@18.2.0)
@@ -565,6 +568,14 @@ packages:
     transitivePeerDependencies:
       - supports-color
     dev: true
+
+  /@electron/remote@2.0.11(electron@13.1.7):
+    resolution: {integrity: sha512-PYEs7W3GrQNuhgiMHjFEvL5MbAL6C7m1AwSAHGqC+xc33IdP7rcGtJSdTP2eg1ssyB3oI00KwTsiSlsQbAoXpA==}
+    peerDependencies:
+      electron: '>= 13.0.0'
+    dependencies:
+      electron: 13.1.7
+    dev: false
 
   /@electron/universal@1.4.1:
     resolution: {integrity: sha512-lE/U3UNw1YHuowNbTmKNs9UlS3En3cPgwM5MI+agIgr/B1hSze9NdOP0qn7boZaI9Lph8IDv3/24g9IxnJP7aQ==}

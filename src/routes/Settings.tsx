@@ -1,5 +1,6 @@
 import React, { useCallback, useContext } from 'react';
-import { ipcRenderer, remote } from 'electron';
+import { ipcRenderer } from 'electron';
+import remote from '@electron/remote';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon } from '@primer/octicons-react';
 

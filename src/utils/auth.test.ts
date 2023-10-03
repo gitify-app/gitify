@@ -1,6 +1,6 @@
 import { AxiosPromise, AxiosResponse } from 'axios';
 
-import { remote } from 'electron';
+import remote from '@electron/remote';
 const browserWindow = new remote.BrowserWindow();
 
 import * as auth from './auth';

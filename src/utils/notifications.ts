@@ -1,4 +1,4 @@
-const { remote } = require('electron');
+const remote = require('@electron/remote');
 
 import { openInBrowser } from '../utils/helpers';
 import { reOpenWindow, updateTrayIcon } from './comms';
