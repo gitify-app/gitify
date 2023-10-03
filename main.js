@@ -77,8 +77,12 @@ menubarApp.on('ready', () => {
       }
     }
   });
-  ipcMain.on('get-platform', (event) => {
-    event.returnValue = process.platform;
+  ipcMain.handle('get-platform', async () => {
+    return process.platform;
+  });
+
+  ipcMain.handle('get-app-version', async () => {
+    return app.getVersion();
   });
 
   menubarApp.window.webContents.on('devtools-opened', () => {

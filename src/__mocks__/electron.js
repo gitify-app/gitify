@@ -31,7 +31,17 @@ module.exports = {
   ipcRenderer: {
     send: jest.fn(),
     on: jest.fn(),
-    sendSync: () => 'darwin',
+    sendSync: jest.fn(),
+    invoke: jest.fn((channel, ...args) => {
+      switch (channel) {
+        case 'get-platform':
+          return Promise.resolve('darwin');
+        case 'get-app-version':
+          return Promise.resolve('0.0.1');
+        default:
+          return Promise.reject(new Error(`Unknown channel: ${channel}`));
+      }
+    }),
   },
   shell: {
     openExternal: jest.fn(),

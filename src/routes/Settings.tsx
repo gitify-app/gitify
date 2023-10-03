@@ -1,6 +1,5 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useState, useEffect } from 'react';
 import { ipcRenderer } from 'electron';
-import remote from '@electron/remote';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon } from '@primer/octicons-react';
 
@@ -14,12 +13,22 @@ import { IconQuit } from '../icons/Quit';
 import { updateTrayIcon } from '../utils/comms';
 import { setAppearance } from '../utils/appearance';
 
-const platform = ipcRenderer.sendSync('get-platform');
-const isLinux = platform === 'linux';
-
 export const SettingsRoute: React.FC = () => {
   const { settings, updateSetting, logout } = useContext(AppContext);
   const navigate = useNavigate();
+
+  const [isLinux, setIsLinux] = useState<boolean>(false);
+  const [appVersion, setAppVersion] = useState<string | null>(null);
+
+  useEffect(() => {
+    ipcRenderer.invoke('get-platform').then((result: string) => {
+      setIsLinux(result === 'linux');
+    });
+
+    ipcRenderer.invoke('get-app-version').then((result: string) => {
+      setAppVersion(result);
+    });
+  }, []);
 
   ipcRenderer.on('update-native-theme', (_, updatedAppearance: Appearance) => {
     if (settings.appearance === Appearance.SYSTEM) {
@@ -118,9 +127,7 @@ export const SettingsRoute: React.FC = () => {
       </div>
 
       <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-4 px-8">
-        <small className="font-semibold">
-          Gitify v{remote.app.getVersion()}
-        </small>
+        <small className="font-semibold">Gitify v{appVersion}</small>
 
         <div>
           <button

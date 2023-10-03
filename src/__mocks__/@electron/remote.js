@@ -31,7 +31,6 @@ module.exports = {
     platform: 'darwin',
   },
   app: {
-    getVersion: () => '0.0.1',
     getLoginItemSettings: jest.fn(),
     setLoginItemSettings: () => {},
   },
