@@ -77,6 +77,9 @@ menubarApp.on('ready', () => {
       }
     }
   });
+  ipcMain.on('get-platform', (event) => {
+    event.returnValue = process.platform;
+  });
 
   menubarApp.window.webContents.on('devtools-opened', () => {
     menubarApp.window.setSize(800, 600);

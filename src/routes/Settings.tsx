@@ -14,7 +14,8 @@ import { IconQuit } from '../icons/Quit';
 import { updateTrayIcon } from '../utils/comms';
 import { setAppearance } from '../utils/appearance';
 
-const isLinux = remote.process.platform === 'linux';
+const platform = ipcRenderer.sendSync('get-platform');
+const isLinux = platform === 'linux';
 
 export const SettingsRoute: React.FC = () => {
   const { settings, updateSetting, logout } = useContext(AppContext);
