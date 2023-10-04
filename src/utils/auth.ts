@@ -1,5 +1,4 @@
-import { BrowserWindow } from '@electron/remote';
-
+import { shell } from 'electron';
 import { generateGitHubAPIUrl } from './helpers';
 import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 import { AuthResponse, AuthState, AuthTokenResponse } from '../types';
@@ -9,68 +8,29 @@ import { User } from '../typesGithub';
 export const authGitHub = (
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthResponse> => {
-  return new Promise((resolve, reject) => {
-    // Build the OAuth consent page URL
-    const authWindow = new BrowserWindow({
-      width: 548,
-      height: 736,
-      show: true,
-    });
+  const callbackUrl = encodeURIComponent("gitify://oauth-callback")
 
-    const githubUrl = `https://${authOptions.hostname}/login/oauth/authorize`;
-    const authUrl = `${githubUrl}?client_id=${authOptions.clientId}&scope=${Constants.AUTH_SCOPE}`;
+  const githubUrl = `https://${authOptions.hostname}/login/oauth/authorize`;
+  const authUrl = `${githubUrl}?client_id=${authOptions.clientId}&scope=${Constants.AUTH_SCOPE}&redirect_uri=${callbackUrl}`;
 
-    const session = authWindow.webContents.session;
-    session.clearStorageData();
+  shell.openExternal(authUrl);
+};
 
-    authWindow.loadURL(authUrl);
+export const handleAuthCallback = (url: string) => {
+  const raw_code = /code=([^&]*)/.exec(url) || null;
+  const authCode = raw_code && raw_code.length > 1 ? raw_code[1] : null;
+  const error = /\?error=(.+)$/.exec(url);
 
-    const handleCallback = (url: string) => {
-      const raw_code = /code=([^&]*)/.exec(url) || null;
-      const authCode = raw_code && raw_code.length > 1 ? raw_code[1] : null;
-      const error = /\?error=(.+)$/.exec(url);
-      if (authCode || error) {
-        // Close the browser if code found or error
-        authWindow.destroy();
-      }
-      // If there is a code, proceed to get token from github
-      if (authCode) {
-        resolve({ authCode, authOptions });
-      } else if (error) {
-        reject(
-          "Oops! Something went wrong and we couldn't " +
-            'log you in using Github. Please try again.',
-        );
-      }
-    };
-
-    // If "Done" button is pressed, hide "Loading"
-    authWindow.on('close', () => {
-      authWindow.destroy();
-    });
-
-    authWindow.webContents.on(
-      'did-fail-load',
-      (event, errorCode, errorDescription, validatedURL) => {
-        if (validatedURL.includes(authOptions.hostname)) {
-          authWindow.destroy();
-          reject(
-            `Invalid Hostname. Could not load https://${authOptions.hostname}/.`,
-          );
-        }
-      },
-    );
-
-    authWindow.webContents.on('will-redirect', (event, url) => {
-      event.preventDefault();
-      handleCallback(url);
-    });
-
-    authWindow.webContents.on('will-navigate', (event, url) => {
-      event.preventDefault();
-      handleCallback(url);
-    });
-  });
+  // If there is a code, proceed to get token from github
+  if (authCode) {
+    const { token } = await getToken(authCode);
+  } else if (error) {
+    // TODO: Error handling
+    // reject(
+    //   "Oops! Something went wrong and we couldn't " +
+    //   'log you in using Github. Please try again.',
+    // );
+  }
 };
 
 export const getUserData = async (
@@ -90,7 +50,7 @@ export const getUserData = async (
   };
 };
 
-export const getToken = async (
+const getToken = async (
   authCode: string,
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthTokenResponse> => {
