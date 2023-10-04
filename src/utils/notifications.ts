@@ -1,7 +1,6 @@
-const remote = require('@electron/remote');
-
+import { ipcRenderer } from 'electron';
 import { openInBrowser } from '../utils/helpers';
-import { reOpenWindow, updateTrayIcon } from './comms';
+import { updateTrayIcon } from './comms';
 import { Notification } from '../typesGithub';
 
 import { AccountNotifications, SettingsState, AuthState } from '../types';
@@ -67,9 +66,8 @@ export const raiseNativeNotification = (
 
   if (notifications.length === 1) {
     const notification = notifications[0];
-    title = `${process.platform !== 'win32' ? 'Gitify - ' : ''}${
-      notification.repository.full_name
-    }`;
+    title = `${process.platform !== 'win32' ? 'Gitify - ' : ''}${notification.repository.full_name
+      }`;
     body = notification.subject.title;
   } else {
     title = 'Gitify';
@@ -81,12 +79,12 @@ export const raiseNativeNotification = (
     silent: true,
   });
 
-  nativeNotification.onclick = function () {
+  nativeNotification.onclick = function() {
     if (notifications.length === 1) {
       remote.getCurrentWindow().hide();
       openInBrowser(notifications[0], accounts);
     } else {
-      reOpenWindow();
+      ipcRenderer.send('reopen-window');
     }
   };
 

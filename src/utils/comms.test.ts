@@ -1,6 +1,5 @@
 import {
   updateTrayIcon,
-  reOpenWindow,
   openExternalLink,
   setAutoLaunch,
   restoreSetting,
@@ -11,7 +10,7 @@ const { ipcRenderer, shell } = require('electron');
 const remote = require('@electron/remote');
 
 describe('utils/comms.ts', () => {
-  beforeEach(function () {
+  beforeEach(function() {
     jest.spyOn(ipcRenderer, 'send');
   });
 
@@ -31,12 +30,6 @@ describe('utils/comms.ts', () => {
     updateTrayIcon(notificationsLength);
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
-  });
-
-  it('should reopen the window', () => {
-    reOpenWindow();
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
   });
 
   it('should restore a setting', () => {
