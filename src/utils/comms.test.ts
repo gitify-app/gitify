@@ -8,7 +8,7 @@ import {
 } from './comms';
 
 describe('utils/comms.ts', () => {
-  beforeEach(function () {
+  beforeEach(function() {
     jest.spyOn(ipcRenderer, 'send');
   });
 
@@ -43,24 +43,20 @@ describe('utils/comms.ts', () => {
   });
 
   it('should setAutoLaunch (true)', () => {
-    jest.spyOn(remote.app, 'setLoginItemSettings');
-
     setAutoLaunch(true);
-    expect(remote.app.setLoginItemSettings).toHaveBeenCalledTimes(1);
-    expect(remote.app.setLoginItemSettings).toHaveBeenCalledWith({
+
+    expect(ipcRenderer.send).toHaveBeenCalledWith('set-login-item-settings', {
       openAtLogin: true,
       openAsHidden: true,
     });
   });
 
   it('should setAutoLaunch (false)', () => {
-    jest.spyOn(remote.app, 'setLoginItemSettings');
-
     setAutoLaunch(false);
-    expect(remote.app.setLoginItemSettings).toHaveBeenCalledTimes(1);
-    expect(remote.app.setLoginItemSettings).toHaveBeenCalledWith({
-      openAtLogin: false,
+
+    expect(ipcRenderer.send).toHaveBeenCalledWith('set-login-item-settings', {
       openAsHidden: false,
+      openAtLogin: false,
     });
   });
 });
