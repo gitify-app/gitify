@@ -109,7 +109,7 @@
     "react-router": "6.16.0",
     "react-router-dom": "6.16.0",
     "react-transition-group": "4.4.5",
-    "ts-loader": "9.4.4",
+    "ts-loader": "9.5.0",
     "typescript": "5.2.2"
   },
   "devDependencies": {
