@@ -10,7 +10,7 @@ const { ipcRenderer, shell } = require('electron');
 const remote = require('@electron/remote');
 
 describe('utils/comms.ts', () => {
-  beforeEach(function() {
+  beforeEach(function () {
     jest.spyOn(ipcRenderer, 'send');
   });
 
