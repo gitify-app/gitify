@@ -4,6 +4,8 @@ const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('path');
 
+require('@electron/remote/main').initialize()
+
 app.setAppUserModelId('com.electron.gitify');
 
 const iconIdle = path.join(
@@ -74,6 +76,13 @@ menubarApp.on('ready', () => {
         menubarApp.tray.setImage(iconIdle);
       }
     }
+  });
+  ipcMain.handle('get-platform', async () => {
+    return process.platform;
+  });
+
+  ipcMain.handle('get-app-version', async () => {
+    return app.getVersion();
   });
 
   menubarApp.window.webContents.on('devtools-opened', () => {

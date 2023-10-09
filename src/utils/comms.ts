@@ -1,4 +1,5 @@
-const { ipcRenderer, remote, shell } = require('electron');
+const { ipcRenderer, shell } = require('electron');
+const remote = require('@electron/remote');
 
 export function openExternalLink(url: string): void {
   shell.openExternal(url);
