@@ -1,7 +1,8 @@
+import { ipcRenderer } from 'electron';
 const remote = require('@electron/remote');
 
 import { openInBrowser } from '../utils/helpers';
-import { reOpenWindow, updateTrayIcon } from './comms';
+import { updateTrayIcon } from './comms';
 import { Notification } from '../typesGithub';
 
 import { AccountNotifications, SettingsState, AuthState } from '../types';
@@ -86,7 +87,7 @@ export const raiseNativeNotification = (
       remote.getCurrentWindow().hide();
       openInBrowser(notifications[0], accounts);
     } else {
-      reOpenWindow();
+      ipcRenderer.send('reopen-window');
     }
   };
 

@@ -20,10 +20,6 @@ export function updateTrayIcon(notificationsLength = 0): void {
   }
 }
 
-export function reOpenWindow(): void {
-  ipcRenderer.send('reopen-window');
-}
-
 export function restoreSetting(setting, value): void {
   ipcRenderer.send(setting, value);
 }

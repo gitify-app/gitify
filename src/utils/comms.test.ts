@@ -1,6 +1,5 @@
 import {
   updateTrayIcon,
-  reOpenWindow,
   openExternalLink,
   setAutoLaunch,
   restoreSetting,
@@ -31,12 +30,6 @@ describe('utils/comms.ts', () => {
     updateTrayIcon(notificationsLength);
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
-  });
-
-  it('should reopen the window', () => {
-    reOpenWindow();
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
   });
 
   it('should restore a setting', () => {
