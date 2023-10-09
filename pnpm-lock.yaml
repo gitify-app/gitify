@@ -6,7 +6,7 @@ settings:
 
 dependencies:
   '@electron/remote':
-    specifier: ^2.0.11
+    specifier: 2.0.11
     version: 2.0.11(electron@13.1.7)
   '@primer/octicons-react':
     specifier: 19.8.0
