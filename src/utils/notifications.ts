@@ -1,4 +1,6 @@
 import { ipcRenderer } from 'electron';
+const remote = require('@electron/remote');
+
 import { openInBrowser } from '../utils/helpers';
 import { updateTrayIcon } from './comms';
 import { Notification } from '../typesGithub';
