@@ -1,7 +1,6 @@
+import { BrowserWindow } from '@electron/remote';
+
 import { generateGitHubAPIUrl } from './helpers';
-
-const { BrowserWindow } = require('@electron/remote');
-
 import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 import { AuthResponse, AuthState, AuthTokenResponse } from '../types';
 import { Constants } from '../utils/constants';

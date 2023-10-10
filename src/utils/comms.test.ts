@@ -1,13 +1,11 @@
+import { ipcRenderer, shell } from 'electron';
+import remote from '@electron/remote';
 import {
   updateTrayIcon,
   openExternalLink,
   setAutoLaunch,
   restoreSetting,
 } from './comms';
-
-const { ipcRenderer, shell } = require('electron');
-
-const remote = require('@electron/remote');
 
 describe('utils/comms.ts', () => {
   beforeEach(function () {

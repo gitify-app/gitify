@@ -1,5 +1,5 @@
-const { ipcRenderer, shell } = require('electron');
-const remote = require('@electron/remote');
+import { ipcRenderer, shell } from 'electron';
+import remote from '@electron/remote';
 
 export function openExternalLink(url: string): void {
   shell.openExternal(url);
