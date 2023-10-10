@@ -73,7 +73,7 @@ export const SettingsRoute: React.FC = () => {
 
         <FieldCheckbox
           name="colors"
-          label="Show PR state using color (requires re-auth)"
+          label="Use GitHub-like state colors (requires re-auth)"
           checked={settings.colors}
           onChange={(evt) => updateSetting('colors', evt.target.checked)}
         />

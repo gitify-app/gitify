@@ -264,7 +264,7 @@ describe('context/App.tsx', () => {
         participating: true,
         playSound: true,
         showNotifications: true,
-        colors: true,
+        colors: false,
       },
     );
   });
@@ -302,7 +302,7 @@ describe('context/App.tsx', () => {
         participating: false,
         playSound: true,
         showNotifications: true,
-        colors: true,
+        colors: false,
       },
     );
   });

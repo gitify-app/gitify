@@ -140,7 +140,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           className="font-medium text-gray-700 dark:text-gray-200"
           htmlFor="colors"
         >
-          Use colors to indicate state
+          Use GitHub-like state colors (requires re-auth)
         </label>
       </div>
     </div>
