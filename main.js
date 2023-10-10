@@ -67,6 +67,7 @@ menubarApp.on('ready', () => {
   });
 
   ipcMain.on('reopen-window', () => menubarApp.showWindow());
+  ipcMain.on('hide-window', () => menubarApp.hideWindow());
   ipcMain.on('app-quit', () => menubarApp.app.quit());
   ipcMain.on('update-icon', (_, arg) => {
     if (!menubarApp.tray.isDestroyed()) {
