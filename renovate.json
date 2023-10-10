@@ -3,5 +3,6 @@
   "extends": ["config:base"],
   "labels": ["dependency"],
   "prConcurrentLimit": 5,
-  "rangeStrategy": "pin"
+  "rangeStrategy": "pin",
+  "schedule": ["monthly"]
 }
