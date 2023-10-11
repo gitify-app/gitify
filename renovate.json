@@ -1,7 +1,8 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:base"],
+  "extends": ["config:recommended"],
   "labels": ["dependency"],
   "prConcurrentLimit": 5,
-  "rangeStrategy": "pin"
+  "rangeStrategy": "pin",
+  "schedule": ["monthly"]
 }
