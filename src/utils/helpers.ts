@@ -52,7 +52,7 @@ export function generateGitHubWebUrl(
 
   if (newUrl.indexOf('/releases/') !== -1) {
     newUrl = newUrl.replace('/repos', '');
-    newUrl = newUrl.substr(0, newUrl.lastIndexOf('/'));
+    newUrl = newUrl.substring(0, newUrl.lastIndexOf('/'));
   }
 
   if (userId) {
