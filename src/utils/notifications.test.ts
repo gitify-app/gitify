@@ -1,4 +1,3 @@
-import * as _ from 'lodash';
 import { ipcRenderer } from 'electron';
 
 import { generateGitHubWebUrl, getCommentId } from './helpers';

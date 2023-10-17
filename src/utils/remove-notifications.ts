@@ -1,7 +1,4 @@
-import updateWith from 'lodash/updateWith';
-
 import { AccountNotifications } from '../types';
-import { Notification } from '../typesGithub';
 
 export const removeNotifications = (
   repoSlug: string,
@@ -12,13 +9,16 @@ export const removeNotifications = (
     (accountNotifications) => accountNotifications.hostname === hostname,
   );
 
-  return updateWith(
-    [...notifications],
-    `[${accountIndex}][notifications]`,
-    (accNotifications: Notification[] = []) => {
-      return accNotifications.filter(
+  if (accountIndex !== -1) {
+    const updatedNotifications = [...notifications];
+    updatedNotifications[accountIndex] = {
+      ...updatedNotifications[accountIndex],
+      notifications: updatedNotifications[accountIndex].notifications.filter(
         (notification) => notification.repository.full_name !== repoSlug,
-      );
-    },
-  );
+      ),
+    };
+    return updatedNotifications;
+  }
+
+  return notifications;
 };
