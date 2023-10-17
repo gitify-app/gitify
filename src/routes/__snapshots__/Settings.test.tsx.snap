@@ -128,6 +128,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         <input
           checked={false}
           className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+          disabled={true}
           id="colors"
           onChange={[Function]}
           type="checkbox"
@@ -139,8 +140,13 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         <label
           className="font-medium text-gray-700 dark:text-gray-200"
           htmlFor="colors"
+          style={
+            {
+              "textDecoration": "line-through",
+            }
+          }
         >
-          Use colors to indicate state
+          Use GitHub-like state colors (requires re-auth)
         </label>
       </div>
     </div>
@@ -164,6 +170,11 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         <label
           className="font-medium text-gray-700 dark:text-gray-200"
           htmlFor="showOnlyParticipating"
+          style={
+            {
+              "textDecoration": undefined,
+            }
+          }
         >
           Show only participating
         </label>
@@ -189,6 +200,11 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         <label
           className="font-medium text-gray-700 dark:text-gray-200"
           htmlFor="playSound"
+          style={
+            {
+              "textDecoration": undefined,
+            }
+          }
         >
           Play sound
         </label>
@@ -214,6 +230,11 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         <label
           className="font-medium text-gray-700 dark:text-gray-200"
           htmlFor="showNotifications"
+          style={
+            {
+              "textDecoration": undefined,
+            }
+          }
         >
           Show notifications
         </label>
@@ -239,6 +260,11 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         <label
           className="font-medium text-gray-700 dark:text-gray-200"
           htmlFor="onClickMarkAsRead"
+          style={
+            {
+              "textDecoration": undefined,
+            }
+          }
         >
           Mark as read on click
         </label>
@@ -264,6 +290,11 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         <label
           className="font-medium text-gray-700 dark:text-gray-200"
           htmlFor="openAtStartUp"
+          style={
+            {
+              "textDecoration": undefined,
+            }
+          }
         >
           Open at startup
         </label>
