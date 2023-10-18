@@ -38,9 +38,6 @@ dependencies:
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
-  react-emojione:
-    specifier: 5.0.1
-    version: 5.0.1(react-dom@18.2.0)(react@18.2.0)
   react-final-form:
     specifier: 6.5.9
     version: 6.5.9(final-form@4.20.10)(react@18.2.0)
@@ -70,9 +67,6 @@ devDependencies:
   '@types/jest':
     specifier: 29.5.5
     version: 29.5.5
-  '@types/lodash':
-    specifier: 4.14.199
-    version: 4.14.199
   '@types/node':
     specifier: 18.18.0
     version: 18.18.0
@@ -4694,16 +4688,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
-
-  /react-emojione@5.0.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-sjI6k8uQ14rWENYoAb+2BFQGLBt/cpLDJJNhnZvdFJytAJijhv+JmbmyyrfQPdyID0Cs4N8XFqnek0xq6POwGA==}
-    peerDependencies:
-      react: ^16
-      react-dom: ^16
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
 
   /react-error-boundary@3.1.4(react@18.2.0):
     resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==}
