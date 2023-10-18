@@ -1,5 +1,4 @@
 import { ipcRenderer, shell } from 'electron';
-import remote from '@electron/remote';
 import {
   updateTrayIcon,
   openExternalLink,
@@ -8,7 +7,7 @@ import {
 } from './comms';
 
 describe('utils/comms.ts', () => {
-  beforeEach(function() {
+  beforeEach(function () {
     jest.spyOn(ipcRenderer, 'send');
   });
 
