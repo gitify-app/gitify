@@ -8,7 +8,7 @@ import { User } from '../typesGithub';
 export const authGitHub = (
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthResponse> => {
-  const callbackUrl = encodeURIComponent("gitify://oauth-callback")
+  const callbackUrl = encodeURIComponent('gitify://oauth-callback');
 
   const githubUrl = `https://${authOptions.hostname}/login/oauth/authorize`;
   const authUrl = `${githubUrl}?client_id=${authOptions.clientId}&scope=${Constants.AUTH_SCOPE}&redirect_uri=${callbackUrl}`;

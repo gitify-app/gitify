@@ -7,7 +7,7 @@ import {
 } from './comms';
 
 describe('utils/comms.ts', () => {
-  beforeEach(function() {
+  beforeEach(function () {
     jest.spyOn(ipcRenderer, 'send');
   });
 
