@@ -1,5 +1,4 @@
 import { ipcRenderer, shell } from 'electron';
-import remote from '@electron/remote';
 import {
   updateTrayIcon,
   openExternalLink,

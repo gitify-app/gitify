@@ -26,9 +26,6 @@ dependencies:
   history:
     specifier: 4.10.1
     version: 4.10.1
-  lodash:
-    specifier: 4.17.21
-    version: 4.17.21
   menubar:
     specifier: 9.3.0
     version: 9.3.0(electron@13.1.7)
@@ -41,9 +38,6 @@ dependencies:
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
-  react-emojione:
-    specifier: 5.0.1
-    version: 5.0.1(react-dom@18.2.0)(react@18.2.0)
   react-final-form:
     specifier: 6.5.9
     version: 6.5.9(final-form@4.20.10)(react@18.2.0)
@@ -73,9 +67,6 @@ devDependencies:
   '@types/jest':
     specifier: 29.5.5
     version: 29.5.5
-  '@types/lodash':
-    specifier: 4.14.199
-    version: 4.14.199
   '@types/node':
     specifier: 18.18.0
     version: 18.18.0
@@ -106,6 +97,9 @@ devDependencies:
   electron-notarize:
     specifier: 1.2.2
     version: 1.2.2
+  husky:
+    specifier: ^8.0.0
+    version: 8.0.3
   jest:
     specifier: 29.7.0
     version: 29.7.0(@types/node@18.18.0)
@@ -1101,10 +1095,6 @@ packages:
     resolution: {integrity: sha512-BQ5aZNSCpj7D6K2ksrRCTmKRLEpnPvWDiLPfoGyhZ++8YtiK9d/3DBKPJgry359X/P1PfruyYwvnvwFjuEiEIg==}
     dependencies:
       '@types/node': 18.18.0
-
-  /@types/lodash@4.14.199:
-    resolution: {integrity: sha512-Vrjz5N5Ia4SEzWWgIVwnHNEnb1UE1XMkvY5DGXrAeOGE9imk0hgTHh5GyDjLDJi9OTCn9oo9dXH1uToK1VRfrg==}
-    dev: true
 
   /@types/ms@0.7.31:
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
@@ -3045,6 +3035,12 @@ packages:
     engines: {node: '>=10.17.0'}
     dev: true
 
+  /husky@8.0.3:
+    resolution: {integrity: sha512-+dQSyqPh4x1hlO1swXBiNb2HzTDN1I2IGLQx1GrBuiqFJfoMrnZWwVmatvSiO+Iz8fBUnf+lekwNo4c2LlXItg==}
+    engines: {node: '>=14'}
+    hasBin: true
+    dev: true
+
   /iconv-corefoundation@1.1.7:
     resolution: {integrity: sha512-T10qvkw0zz4wnm560lOEg0PovVqUXuOFhhHAkixw8/sycy7TJt7v/RrkEKEQnAw2viPSJu6iAkErxnzR0g8PpQ==}
     engines: {node: ^8.11.2 || >=10}
@@ -4701,16 +4697,6 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
-
-  /react-emojione@5.0.1(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-sjI6k8uQ14rWENYoAb+2BFQGLBt/cpLDJJNhnZvdFJytAJijhv+JmbmyyrfQPdyID0Cs4N8XFqnek0xq6POwGA==}
-    peerDependencies:
-      react: ^16
-      react-dom: ^16
-    dependencies:
-      react: 18.2.0
-      react-dom: 18.2.0(react@18.2.0)
-    dev: false
 
   /react-error-boundary@3.1.4(react@18.2.0):
     resolution: {integrity: sha512-uM9uPzZJTF6wRQORmSrvOIgt4lJ9MC1sNgEOj2XGsDTRE4kmpWxg7ENK9EWNKJRMAOY9z0MuF4yIfl6gp4sotA==}

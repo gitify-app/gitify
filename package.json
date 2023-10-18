@@ -12,7 +12,8 @@
     "prettier:check": "prettier --check 'src/**/*.{js,ts,tsx}'",
     "prettier:apply": "prettier --write 'src/**/*.{js,ts,tsx}'",
     "test": "jest",
-    "start": "electron . --enable-logging"
+    "start": "electron . --enable-logging",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -104,12 +105,10 @@
     "electron-updater": "6.1.4",
     "final-form": "4.20.10",
     "history": "4.10.1",
-    "lodash": "4.17.21",
     "menubar": "9.3.0",
     "nprogress": "0.2.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-emojione": "5.0.1",
     "react-final-form": "6.5.9",
     "react-router": "6.16.0",
     "react-router-dom": "6.16.0",
@@ -121,7 +120,6 @@
     "@testing-library/react": "14.0.0",
     "@testing-library/react-hooks": "8.0.1",
     "@types/jest": "29.5.5",
-    "@types/lodash": "4.14.199",
     "@types/node": "18.18.0",
     "@types/react": "18.2.28",
     "@types/react-router-dom": "5.3.3",
@@ -144,7 +142,8 @@
     "ts-jest": "29.1.1",
     "webpack": "5.88.2",
     "webpack-cli": "5.1.4",
-    "webpack-merge": "5.9.0"
+    "webpack-merge": "5.9.0",
+    "husky": "^8.0.0"
   },
   "packageManager": "pnpm@8.9.0"
 }
