@@ -12,7 +12,8 @@
     "prettier:check": "prettier --check 'src/**/*.{js,ts,tsx}'",
     "prettier:apply": "prettier --write 'src/**/*.{js,ts,tsx}'",
     "test": "jest",
-    "start": "electron . --enable-logging"
+    "start": "electron . --enable-logging",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
@@ -140,7 +141,8 @@
     "ts-jest": "29.1.1",
     "webpack": "5.88.2",
     "webpack-cli": "5.1.4",
-    "webpack-merge": "5.9.0"
+    "webpack-merge": "5.9.0",
+    "husky": "^8.0.0"
   },
   "packageManager": "pnpm@8.9.0"
 }
