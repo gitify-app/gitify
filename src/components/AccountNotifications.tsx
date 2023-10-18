@@ -17,16 +17,12 @@ export const AccountNotifications = (props: IProps) => {
     notifications.reduce(
       (acc: { [key: string]: Notification[] }, notification) => {
         const key = notification.repository.full_name;
-        if (!acc[key]) {
-          acc[key] = [];
-        }
+        if (!acc[key]) acc[key] = [];
         acc[key].push(notification);
         return acc;
       },
       {},
     ),
-  ).sort((a, b) =>
-    a[0].repository.full_name.localeCompare(b[0].repository.full_name),
   );
 
   const Chevron = notifications.length > 0 ? ChevronDownIcon : ChevronLeftIcon;
