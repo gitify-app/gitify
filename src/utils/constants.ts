@@ -13,25 +13,9 @@ export const Constants = {
   // Storage
   STORAGE_KEY: 'gitify-storage',
 
-  ALLREAD_EMOJIS: [
-    ':wink:',
-    ':tada:',
-    ':tiger:',
-    ':see_no_evil:',
-    ':balloon:',
-    ':confetti_ball:',
-    ':clap:',
-    ':circus_tent:',
-    ':spaghetti:',
-  ],
+  ALLREAD_EMOJIS: ['😉', '🎉', '🐯', '🙈', '🎈', '🎊', '👏', '🎪', '🍝'],
 
-  ERROR_EMOJIS: [
-    ':pensive:',
-    ':disappointed:',
-    ':triumph:',
-    ':scream:',
-    ':cry:',
-  ],
+  ERROR_EMOJIS: ['🤔', '😞', '😤', '😱', '😭'],
 };
 
 export default Constants;
