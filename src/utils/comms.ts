@@ -1,12 +1,11 @@
 import { ipcRenderer, shell } from 'electron';
-import remote from '@electron/remote';
 
 export function openExternalLink(url: string): void {
   shell.openExternal(url);
 }
 
 export function setAutoLaunch(value: boolean): void {
-  remote.app.setLoginItemSettings({
+  ipcRenderer.send('set-login-item-settings', {
     openAtLogin: value,
     openAsHidden: value,
   });
