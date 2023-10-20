@@ -1,11 +1,11 @@
-const { ipcRenderer, remote, shell } = require('electron');
+import { ipcRenderer, shell } from 'electron';
 
 export function openExternalLink(url: string): void {
   shell.openExternal(url);
 }
 
 export function setAutoLaunch(value: boolean): void {
-  remote.app.setLoginItemSettings({
+  ipcRenderer.send('set-login-item-settings', {
     openAtLogin: value,
     openAsHidden: value,
   });
@@ -17,10 +17,6 @@ export function updateTrayIcon(notificationsLength = 0): void {
   } else {
     ipcRenderer.send('update-icon');
   }
-}
-
-export function reOpenWindow(): void {
-  ipcRenderer.send('reopen-window');
 }
 
 export function restoreSetting(setting, value): void {

@@ -4,6 +4,8 @@ const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('path');
 
+require('@electron/remote/main').initialize()
+
 app.setAppUserModelId('com.electron.gitify');
 
 const iconIdle = path.join(
@@ -64,7 +66,16 @@ menubarApp.on('ready', () => {
     }
   });
 
+  ipcMain.handle('get-platform', async () => {
+    return process.platform;
+  });
+  ipcMain.handle('get-app-version', async () => {
+    return app.getVersion();
+  });
+
   ipcMain.on('reopen-window', () => menubarApp.showWindow());
+  ipcMain.on('hide-window', () => menubarApp.hideWindow());
+
   ipcMain.on('app-quit', () => menubarApp.app.quit());
   ipcMain.on('update-icon', (_, arg) => {
     if (!menubarApp.tray.isDestroyed()) {
@@ -74,6 +85,9 @@ menubarApp.on('ready', () => {
         menubarApp.tray.setImage(iconIdle);
       }
     }
+  });
+  ipcMain.on('set-login-item-settings', (event, settings) => {
+    app.setLoginItemSettings(settings);
   });
 
   menubarApp.window.webContents.on('devtools-opened', () => {

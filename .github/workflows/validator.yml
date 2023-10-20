@@ -1,4 +1,4 @@
-name: PR Title Validator
+name: Validators
 
 on:
   pull_request:
@@ -29,3 +29,24 @@ jobs:
             if (!match.groups.subject) {
               core.setFailed('Missing subject in PR title');
             }
+
+  renovate:
+    name: Validate Renovate config
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: .nvmrc
+
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          run_install: false
+
+      - run: pnpm install --global renovate
+
+      - name: Validate Renovate config
+        run: renovate-config-validator

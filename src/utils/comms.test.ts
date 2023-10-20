@@ -1,12 +1,10 @@
+import { ipcRenderer, shell } from 'electron';
 import {
   updateTrayIcon,
-  reOpenWindow,
   openExternalLink,
   setAutoLaunch,
   restoreSetting,
 } from './comms';
-
-const { ipcRenderer, remote, shell } = require('electron');
 
 describe('utils/comms.ts', () => {
   beforeEach(function () {
@@ -31,12 +29,6 @@ describe('utils/comms.ts', () => {
     expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
   });
 
-  it('should reopen the window', () => {
-    reOpenWindow();
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
-  });
-
   it('should restore a setting', () => {
     restoreSetting('foo', 'bar');
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
@@ -50,24 +42,20 @@ describe('utils/comms.ts', () => {
   });
 
   it('should setAutoLaunch (true)', () => {
-    jest.spyOn(remote.app, 'setLoginItemSettings');
-
     setAutoLaunch(true);
-    expect(remote.app.setLoginItemSettings).toHaveBeenCalledTimes(1);
-    expect(remote.app.setLoginItemSettings).toHaveBeenCalledWith({
+
+    expect(ipcRenderer.send).toHaveBeenCalledWith('set-login-item-settings', {
       openAtLogin: true,
       openAsHidden: true,
     });
   });
 
   it('should setAutoLaunch (false)', () => {
-    jest.spyOn(remote.app, 'setLoginItemSettings');
-
     setAutoLaunch(false);
-    expect(remote.app.setLoginItemSettings).toHaveBeenCalledTimes(1);
-    expect(remote.app.setLoginItemSettings).toHaveBeenCalledWith({
-      openAtLogin: false,
+
+    expect(ipcRenderer.send).toHaveBeenCalledWith('set-login-item-settings', {
       openAsHidden: false,
+      openAtLogin: false,
     });
   });
 });

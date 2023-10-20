@@ -1,5 +1,5 @@
 import React from 'react';
-import TestRenderer from 'react-test-renderer';
+import TestRenderer, { act } from 'react-test-renderer';
 import { render, fireEvent } from '@testing-library/react';
 import { Router } from 'react-router';
 import { MemoryRouter } from 'react-router-dom';
@@ -26,29 +26,38 @@ describe('routes/Settings.tsx', () => {
     updateSetting.mockReset();
   });
 
-  it('should render itself & its children', () => {
-    const tree = TestRenderer.create(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <MemoryRouter>
-          <SettingsRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+  it('should render itself & its children', async () => {
+    let tree: TestRenderer;
+
+    await act(async () => {
+      tree = TestRenderer.create(
+        <AppContext.Provider value={{ settings: mockSettings }}>
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+    });
     expect(tree).toMatchSnapshot();
   });
 
-  it('should press the logout', () => {
+  it('should press the logout', async () => {
     const logoutMock = jest.fn();
+    let getByLabelText;
 
-    const { getByLabelText } = render(
-      <AppContext.Provider
-        value={{ settings: mockSettings, logout: logoutMock }}
-      >
-        <Router location={history.location} navigator={history}>
-          <SettingsRoute />
-        </Router>
-      </AppContext.Provider>,
-    );
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider
+          value={{ settings: mockSettings, logout: logoutMock }}
+        >
+          <Router location={history.location} navigator={history}>
+            <SettingsRoute />
+          </Router>
+        </AppContext.Provider>,
+      );
+
+      getByLabelText = getByLabelTextLocal;
+    });
 
     fireEvent.click(getByLabelText('Logout'));
 
@@ -59,26 +68,37 @@ describe('routes/Settings.tsx', () => {
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
-  it('should go back by pressing the icon', () => {
-    const { getByLabelText } = render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <Router location={history.location} navigator={history}>
-          <SettingsRoute />
-        </Router>
-      </AppContext.Provider>,
-    );
+  it('should go back by pressing the icon', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider value={{ settings: mockSettings }}>
+          <Router location={history.location} navigator={history}>
+            <SettingsRoute />
+          </Router>
+        </AppContext.Provider>,
+      );
+
+      getByLabelText = getByLabelTextLocal;
+    });
     fireEvent.click(getByLabelText('Go Back'));
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
-  it('should toggle the showOnlyParticipating checkbox', () => {
-    const { getByLabelText } = render(
-      <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
-        <MemoryRouter>
-          <SettingsRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+  it('should toggle the showOnlyParticipating checkbox', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
 
     fireEvent.click(getByLabelText('Show only participating'), {
       target: { checked: true },
@@ -88,14 +108,19 @@ describe('routes/Settings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('participating', false);
   });
 
-  it('should toggle the playSound checkbox', () => {
-    const { getByLabelText } = render(
-      <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
-        <MemoryRouter>
-          <SettingsRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+  it('should toggle the playSound checkbox', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
 
     fireEvent.click(getByLabelText('Play sound'), {
       target: { checked: true },
@@ -105,14 +130,19 @@ describe('routes/Settings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('playSound', false);
   });
 
-  it('should toggle the showNotifications checkbox', () => {
-    const { getByLabelText } = render(
-      <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
-        <MemoryRouter>
-          <SettingsRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+  it('should toggle the showNotifications checkbox', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
 
     fireEvent.click(getByLabelText('Show notifications'), {
       target: { checked: true },
@@ -122,14 +152,19 @@ describe('routes/Settings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('showNotifications', false);
   });
 
-  it('should toggle the onClickMarkAsRead checkbox', () => {
-    const { getByLabelText } = render(
-      <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
-        <MemoryRouter>
-          <SettingsRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+  it('should toggle the onClickMarkAsRead checkbox', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
 
     fireEvent.click(getByLabelText('Mark as read on click'), {
       target: { checked: true },
@@ -139,14 +174,19 @@ describe('routes/Settings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('markOnClick', false);
   });
 
-  it('should toggle the openAtStartup checkbox', () => {
-    const { getByLabelText } = render(
-      <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
-        <MemoryRouter>
-          <SettingsRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+  it('should toggle the openAtStartup checkbox', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
 
     fireEvent.click(getByLabelText('Open at startup'), {
       target: { checked: true },
@@ -156,14 +196,19 @@ describe('routes/Settings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('openAtStartup', false);
   });
 
-  it('should change the appearance radio group', () => {
-    const { getByLabelText } = render(
-      <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
-        <MemoryRouter>
-          <SettingsRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+  it('should change the appearance radio group', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
 
     fireEvent.click(getByLabelText('Light'));
 
@@ -171,28 +216,40 @@ describe('routes/Settings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('appearance', 'LIGHT');
   });
 
-  it('should go to the enterprise login route', () => {
-    const { getByLabelText } = render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <Router location={history.location} navigator={history}>
-          <SettingsRoute />
-        </Router>
-      </AppContext.Provider>,
-    );
+  it('should go to the enterprise login route', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider value={{ settings: mockSettings }}>
+          <Router location={history.location} navigator={history}>
+            <SettingsRoute />
+          </Router>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
+
     fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-enterprise', {
       replace: true,
     });
   });
 
-  it('should quit the app', () => {
-    const { getByLabelText } = render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <MemoryRouter>
-          <SettingsRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+  it('should quit the app', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider value={{ settings: mockSettings }}>
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
+
     fireEvent.click(getByLabelText('Quit Gitify'));
     expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
   });

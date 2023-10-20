@@ -1,4 +1,4 @@
-import * as _ from 'lodash';
+import { ipcRenderer } from 'electron';
 
 import { generateGitHubWebUrl, getCommentId } from './helpers';
 import {
@@ -128,15 +128,13 @@ describe('utils/notifications.ts', () => {
   });
 
   it('should click on a native notification (with more than 1 notification)', () => {
-    jest.spyOn(comms, 'reOpenWindow');
-
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
       mockedGithubNotifications,
       mockAccounts,
     );
     nativeNotification.onclick(null);
 
-    expect(comms.reOpenWindow).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
   });
 
   it('should play a sound', () => {
