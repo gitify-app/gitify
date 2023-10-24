@@ -1,9 +1,7 @@
 import React from 'react';
 import TestRenderer, { act } from 'react-test-renderer';
 import { render, fireEvent } from '@testing-library/react';
-import { Router } from 'react-router';
 import { MemoryRouter } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 
 const { ipcRenderer } = require('electron');
 
@@ -18,7 +16,6 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/Settings.tsx', () => {
-  const history = createMemoryHistory();
   const updateSetting = jest.fn();
 
   beforeEach(() => {
@@ -50,9 +47,9 @@ describe('routes/Settings.tsx', () => {
         <AppContext.Provider
           value={{ settings: mockSettings, logout: logoutMock }}
         >
-          <Router location={history.location} navigator={history}>
+          <MemoryRouter>
             <SettingsRoute />
-          </Router>
+          </MemoryRouter>
         </AppContext.Provider>,
       );
 
@@ -74,9 +71,9 @@ describe('routes/Settings.tsx', () => {
     await act(async () => {
       const { getByLabelText: getByLabelTextLocal } = render(
         <AppContext.Provider value={{ settings: mockSettings }}>
-          <Router location={history.location} navigator={history}>
+          <MemoryRouter>
             <SettingsRoute />
-          </Router>
+          </MemoryRouter>
         </AppContext.Provider>,
       );
 
@@ -222,9 +219,9 @@ describe('routes/Settings.tsx', () => {
     await act(async () => {
       const { getByLabelText: getByLabelTextLocal } = render(
         <AppContext.Provider value={{ settings: mockSettings }}>
-          <Router location={history.location} navigator={history}>
+          <MemoryRouter>
             <SettingsRoute />
-          </Router>
+          </MemoryRouter>
         </AppContext.Provider>,
       );
       getByLabelText = getByLabelTextLocal;

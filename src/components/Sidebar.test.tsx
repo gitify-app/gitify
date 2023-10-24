@@ -1,7 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { createMemoryHistory } from 'history';
 import * as React from 'react';
-import { Router } from 'react-router';
 import { MemoryRouter } from 'react-router-dom';
 import * as TestRenderer from 'react-test-renderer';
 
@@ -20,7 +18,6 @@ jest.mock('react-router-dom', () => ({
 
 describe('components/Sidebar.tsx', () => {
   const fetchNotifications = jest.fn();
-  const history = createMemoryHistory();
 
   beforeEach(() => {
     fetchNotifications.mockReset();
@@ -81,9 +78,9 @@ describe('components/Sidebar.tsx', () => {
   it('go to the settings route', () => {
     const { getByLabelText } = render(
       <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
-        <Router location={history.location} navigator={history}>
+        <MemoryRouter>
           <Sidebar />
-        </Router>
+        </MemoryRouter>
       </AppContext.Provider>,
     );
     fireEvent.click(getByLabelText('Settings'));
