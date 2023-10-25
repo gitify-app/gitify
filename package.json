@@ -116,8 +116,10 @@
     "@testing-library/react-hooks": "8.0.1",
     "@types/jest": "29.5.5",
     "@types/node": "18.18.0",
+    "@types/nprogress": "^0.2.2",
     "@types/react": "18.2.28",
     "@types/react-router-dom": "5.3.3",
+    "@types/react-test-renderer": "^18.0.5",
     "@types/react-transition-group": "4.4.7",
     "autoprefixer": "10.4.16",
     "coveralls": "3.1.1",
@@ -125,6 +127,7 @@
     "electron": "^13.1.7",
     "electron-builder": "24.6.4",
     "electron-notarize": "1.2.2",
+    "husky": "^8.0.0",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "nock": "13.3.4",
@@ -137,8 +140,7 @@
     "ts-jest": "29.1.1",
     "webpack": "5.88.2",
     "webpack-cli": "5.1.4",
-    "webpack-merge": "5.9.0",
-    "husky": "^8.0.0"
+    "webpack-merge": "5.9.0"
   },
   "packageManager": "pnpm@8.9.0",
   "lint-staged": {

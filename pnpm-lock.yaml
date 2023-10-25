@@ -67,12 +67,18 @@ devDependencies:
   '@types/node':
     specifier: 18.18.0
     version: 18.18.0
+  '@types/nprogress':
+    specifier: ^0.2.2
+    version: 0.2.2
   '@types/react':
     specifier: 18.2.28
     version: 18.2.28
   '@types/react-router-dom':
     specifier: 5.3.3
     version: 5.3.3
+  '@types/react-test-renderer':
+    specifier: ^18.0.5
+    version: 18.0.5
   '@types/react-transition-group':
     specifier: 4.4.7
     version: 4.4.7
@@ -1103,6 +1109,10 @@ packages:
   /@types/node@18.18.0:
     resolution: {integrity: sha512-3xA4X31gHT1F1l38ATDIL9GpRLdwVhnEFC8Uikv5ZLlXATwrCYyPq7ZWHxzxc3J/30SUiwiYT+bQe0/XvKlWbw==}
 
+  /@types/nprogress@0.2.2:
+    resolution: {integrity: sha512-2wLrSJXLztGmr7wXwM0hA/wuIOY9DznVdd+ZFofHOiXcj9JnVt+2ZeLRJ7v5ZVlmheSkUOSg3Q3O4Ce7yji79A==}
+    dev: true
+
   /@types/plist@3.0.2:
     resolution: {integrity: sha512-ULqvZNGMv0zRFvqn8/4LSPtnmN4MfhlPNtJCTpKuIIxGVGZ2rYWzFXrvEBoh9CVyqSE7D6YFRJ1hydLHI6kbWw==}
     requiresBuild: true
@@ -1134,6 +1144,12 @@ packages:
     resolution: {integrity: sha512-jGjmu/ZqS7FjSH6owMcD5qpq19+1RS9DeVRqfl1FeBMxTDQAGwlMWOcs52NDoXaNKyG3d1cYQFMs9rCrb88o9Q==}
     dependencies:
       '@types/history': 4.7.11
+      '@types/react': 18.2.28
+    dev: true
+
+  /@types/react-test-renderer@18.0.5:
+    resolution: {integrity: sha512-PsnmF4Hpi61PTRX+dTxkjgDdtZ09kFFgPXczoF+yBfOVxn7xBLPvKP1BUrSasYHmerj33rhoJuvpIMsJuyRqHw==}
+    dependencies:
       '@types/react': 18.2.28
     dev: true
 
