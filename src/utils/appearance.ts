@@ -1,10 +1,10 @@
 import { Appearance } from '../types';
 
 export const setLightMode = () =>
-  document.querySelector('html').classList.remove('dark');
+  document.getElementsByTagName('html')[0].classList.remove('dark');
 
 export const setDarkMode = () =>
-  document.querySelector('html').classList.add('dark');
+  document.getElementsByTagName('html')[0].classList.add('dark');
 
 export const setAppearance = (mode?: Appearance) => {
   switch (mode) {

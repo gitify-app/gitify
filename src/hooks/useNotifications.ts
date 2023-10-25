@@ -50,7 +50,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const fetchNotifications = useCallback(
-    async (accounts: AuthState, settings) => {
+    async (accounts: AuthState, settings: SettingsState) => {
       const isGitHubLoggedIn = accounts.token !== null;
       const endpointSuffix = `notifications?participating=${settings.participating}`;
 
@@ -80,21 +80,25 @@ export const useNotifications = (colors: boolean): NotificationsState => {
         .all([getGitHubNotifications(), ...getEnterpriseNotifications()])
         .then(
           axios.spread((gitHubNotifications, ...entAccNotifications) => {
-            const enterpriseNotifications = entAccNotifications.map(
-              (accountNotifications) => {
-                const { hostname } = parse(accountNotifications.config.url);
+            const enterpriseNotifications = entAccNotifications
+              .filter(
+                (accountNotifications) => accountNotifications !== undefined,
+              )
+              .map((accountNotifications) => {
+                const { hostname } = parse(
+                  accountNotifications?.config.url ?? '',
+                );
                 return {
-                  hostname,
-                  notifications: accountNotifications.data,
+                  hostname: hostname ?? '',
+                  notifications: accountNotifications?.data ?? [],
                 };
-              },
-            );
+              });
             const data = isGitHubLoggedIn
               ? [
                   ...enterpriseNotifications,
                   {
                     hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-                    notifications: gitHubNotifications.data,
+                    notifications: gitHubNotifications?.data ?? [],
                   },
                 ]
               : [...enterpriseNotifications];
@@ -136,7 +140,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
 
                           const cardinalData = (
                             await apiRequestAuth(
-                              notification.subject.url,
+                              notification.subject.url!,
                               'GET',
                               token,
                             )
@@ -183,7 +187,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const markNotification = useCallback(
-    async (accounts, id, hostname) => {
+    async (accounts: AuthState, id: string, hostname: string) => {
       setIsFetching(true);
 
       const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
@@ -216,7 +220,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const unsubscribeNotification = useCallback(
-    async (accounts, id, hostname) => {
+    async (accounts: AuthState, id: string, hostname: string) => {
       setIsFetching(true);
 
       const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
@@ -242,7 +246,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const markRepoNotifications = useCallback(
-    async (accounts, repoSlug, hostname) => {
+    async (accounts: AuthState, repoSlug: string, hostname: string) => {
       setIsFetching(true);
 
       const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;

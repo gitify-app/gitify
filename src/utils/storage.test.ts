@@ -10,8 +10,8 @@ describe('utils/storage.ts', () => {
       }),
     );
     const result = loadState();
-    expect(result.accounts.token).toBe('123-456');
-    expect(result.settings.appearance).toBe('DARK');
+    expect(result.accounts?.token).toBe('123-456');
+    expect(result.settings?.appearance).toBe('DARK');
   });
 
   it('should load the state from localstorage - empty', () => {

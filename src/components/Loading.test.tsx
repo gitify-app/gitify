@@ -14,12 +14,12 @@ jest.mock('nprogress', () => {
   };
 });
 
-describe('components/Loading.js', () => {
+describe('components/Loading', () => {
   beforeEach(() => {
-    NProgress.configure.mockReset();
-    NProgress.start.mockReset();
-    NProgress.done.mockReset();
-    NProgress.remove.mockReset();
+    (NProgress.configure as jest.Mock).mockReset();
+    (NProgress.start as jest.Mock).mockReset();
+    (NProgress.done as jest.Mock).mockReset();
+    (NProgress.remove as jest.Mock).mockReset();
   });
 
   it('should check that NProgress is getting called in when isFetching changes (loading)', () => {

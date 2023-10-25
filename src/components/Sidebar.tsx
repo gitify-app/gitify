@@ -30,9 +30,11 @@ export const Sidebar: React.FC = () => {
   }, []);
 
   const notificationsCount = useMemo(() => {
-    return notifications.reduce(
-      (memo, account) => memo + account.notifications.length,
-      0,
+    return (
+      notifications?.reduce(
+        (memo, account) => memo + account.notifications.length,
+        0,
+      ) ?? 0
     );
   }, [notifications]);
 
@@ -67,7 +69,7 @@ export const Sidebar: React.FC = () => {
               className={footerButtonClasses}
               onClick={() => {
                 navigate('/', { replace: true });
-                fetchNotifications();
+                fetchNotifications!();
               }}
               aria-label="Refresh Notifications"
             >

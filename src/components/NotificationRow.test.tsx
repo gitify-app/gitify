@@ -1,5 +1,5 @@
-import * as React from 'react';
-import * as TestRenderer from 'react-test-renderer';
+import React from 'react';
+import TestRenderer from 'react-test-renderer';
 import { fireEvent, render } from '@testing-library/react';
 
 const { shell } = require('electron');
@@ -9,7 +9,7 @@ import { mockedSingleNotification } from '../__mocks__/mockedData';
 import { NotificationRow } from './NotificationRow';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 
-describe('components/Notification.js', () => {
+describe('components/Notification', () => {
   beforeEach(() => {
     jest.spyOn(shell, 'openExternal');
   });

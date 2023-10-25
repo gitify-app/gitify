@@ -110,8 +110,8 @@ export const getToken = async (
 
 export const addAccount = (
   accounts: AuthState,
-  token,
-  hostname,
+  token: string,
+  hostname: string,
   user?: User,
 ): AuthState => {
   if (hostname === Constants.DEFAULT_AUTH_OPTIONS.hostname) {

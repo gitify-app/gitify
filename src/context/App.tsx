@@ -25,7 +25,7 @@ import Constants from '../utils/constants';
 import { generateGitHubAPIUrl } from '../utils/helpers';
 
 const defaultAccounts: AuthState = {
-  token: null,
+  token: '',
   enterpriseAccounts: [],
   user: null,
 };

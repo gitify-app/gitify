@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import * as React from 'react';
-import { MemoryRouter } from 'react-router-dom';
-import * as TestRenderer from 'react-test-renderer';
+import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import TestRenderer from 'react-test-renderer';
 
 const { shell, ipcRenderer } = require('electron');
 
@@ -39,9 +39,9 @@ describe('components/Sidebar.tsx', () => {
           notifications: mockedAccountNotifications,
         }}
       >
-        <MemoryRouter>
+        <BrowserRouter>
           <Sidebar />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
     expect(tree).toMatchSnapshot();
@@ -52,9 +52,9 @@ describe('components/Sidebar.tsx', () => {
       <AppContext.Provider
         value={{ isLoggedIn: false, notifications: mockedAccountNotifications }}
       >
-        <MemoryRouter>
+        <BrowserRouter>
           <Sidebar />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
     expect(tree).toMatchSnapshot();
@@ -65,9 +65,9 @@ describe('components/Sidebar.tsx', () => {
       <AppContext.Provider
         value={{ isLoggedIn: true, notifications: [], fetchNotifications }}
       >
-        <MemoryRouter>
+        <BrowserRouter>
           <Sidebar />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
     fetchNotifications.mockReset();
@@ -78,9 +78,9 @@ describe('components/Sidebar.tsx', () => {
   it('go to the settings route', () => {
     const { getByLabelText } = render(
       <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
-        <MemoryRouter>
+        <BrowserRouter>
           <Sidebar />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
     fireEvent.click(getByLabelText('Settings'));
@@ -95,9 +95,9 @@ describe('components/Sidebar.tsx', () => {
           notifications: mockedAccountNotifications,
         }}
       >
-        <MemoryRouter>
+        <BrowserRouter>
           <Sidebar />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
     fireEvent.click(getByLabelText('4 Unread Notifications'));
@@ -110,9 +110,9 @@ describe('components/Sidebar.tsx', () => {
   it('should quit the app', () => {
     const { getByLabelText } = render(
       <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
-        <MemoryRouter>
+        <BrowserRouter>
           <Sidebar />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
     fireEvent.click(getByLabelText('Quit App'));
@@ -123,9 +123,9 @@ describe('components/Sidebar.tsx', () => {
   it('should open the gitify repository', () => {
     render(
       <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
-        <MemoryRouter>
+        <BrowserRouter>
           <Sidebar />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
     fireEvent.click(screen.getByTestId('gitify-logo'));
@@ -139,9 +139,9 @@ describe('components/Sidebar.tsx', () => {
     it('when there are 0 notifications', () => {
       const { getByLabelText } = render(
         <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
-          <MemoryRouter>
+          <BrowserRouter>
             <Sidebar />
-          </MemoryRouter>
+          </BrowserRouter>
         </AppContext.Provider>,
       );
 
@@ -159,9 +159,9 @@ describe('components/Sidebar.tsx', () => {
             notifications: mockedAccountNotifications,
           }}
         >
-          <MemoryRouter>
+          <BrowserRouter>
             <Sidebar />
-          </MemoryRouter>
+          </BrowserRouter>
         </AppContext.Provider>,
       );
 

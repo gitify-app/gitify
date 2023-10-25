@@ -8,11 +8,12 @@ import { useNotifications } from '../hooks/useNotifications';
 import * as apiRequests from '../utils/api-requests';
 import * as comms from '../utils/comms';
 import * as storage from '../utils/storage';
+import { AxiosResponse } from 'axios';
 
 jest.mock('../hooks/useNotifications');
 
 const customRender = (
-  ui,
+  ui: React.JSX.Element | null,
   accounts: AuthState = mockAccounts,
   settings: SettingsState = mockSettings,
 ) => {
@@ -178,7 +179,7 @@ describe('context/App.tsx', () => {
     });
 
     it('should call validateToken', async () => {
-      apiRequestAuthMock.mockResolvedValueOnce(null);
+      apiRequestAuthMock.mockResolvedValueOnce({} as AxiosResponse);
 
       const TestComponent = () => {
         const { validateToken } = useContext(AppContext);

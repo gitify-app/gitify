@@ -29,12 +29,6 @@ describe('utils/comms.ts', () => {
     expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
   });
 
-  it('should restore a setting', () => {
-    restoreSetting('foo', 'bar');
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('foo', 'bar');
-  });
-
   it('should open an external link', () => {
     openExternalLink('http://www.gitify.io/');
     expect(shell.openExternal).toHaveBeenCalledTimes(1);

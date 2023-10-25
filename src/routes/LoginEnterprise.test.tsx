@@ -1,7 +1,7 @@
-import * as React from 'react';
-import * as TestRenderer from 'react-test-renderer';
+import React from 'react';
+import TestRenderer from 'react-test-renderer';
 import { fireEvent, render } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 
 const { ipcRenderer } = require('electron');
 
@@ -16,7 +16,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
-describe('routes/LoginEnterprise.js', () => {
+describe('routes/LoginEnterprise', () => {
   const mockAccounts: AuthState = {
     enterpriseAccounts: [],
     user: null,
@@ -31,9 +31,9 @@ describe('routes/LoginEnterprise.js', () => {
   it('renders correctly', () => {
     const tree = TestRenderer.create(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
-        <MemoryRouter>
+        <BrowserRouter>
           <LoginEnterpriseRoute />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
 
@@ -43,9 +43,9 @@ describe('routes/LoginEnterprise.js', () => {
   it('let us go back', () => {
     const { getByLabelText } = render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
-        <MemoryRouter>
+        <BrowserRouter>
           <LoginEnterpriseRoute />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
 
@@ -56,9 +56,9 @@ describe('routes/LoginEnterprise.js', () => {
   it('should validate the form values', () => {
     let values;
     const emptyValues = {
-      hostname: null,
-      clientId: null,
-      clientSecret: null,
+      hostname: '',
+      clientId: '',
+      clientSecret: '',
     };
 
     values = {
@@ -82,9 +82,9 @@ describe('routes/LoginEnterprise.js', () => {
   it('should receive a logged-in enterprise account', () => {
     const { rerender } = render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
-        <MemoryRouter>
+        <BrowserRouter>
           <LoginEnterpriseRoute />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
 
@@ -97,9 +97,9 @@ describe('routes/LoginEnterprise.js', () => {
           },
         }}
       >
-        <MemoryRouter>
+        <BrowserRouter>
           <LoginEnterpriseRoute />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
 
@@ -111,9 +111,9 @@ describe('routes/LoginEnterprise.js', () => {
   it('should render the form with errors', () => {
     const { getByLabelText, getByTitle, getByText } = render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
-        <MemoryRouter>
+        <BrowserRouter>
           <LoginEnterpriseRoute />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
 

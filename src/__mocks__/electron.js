@@ -14,7 +14,7 @@ window.Audio = class Audio {
   play() {}
 };
 
-window.localStorage = {
+Object.defineProperty(window, 'localStorage', {
   store: {},
   getItem: function (key) {
     return this.store[key];
@@ -23,7 +23,8 @@ window.localStorage = {
     this.store[key] = item;
   },
   removeItem: jest.fn(),
-};
+  configurable: true,
+});
 
 window.alert = jest.fn();
 

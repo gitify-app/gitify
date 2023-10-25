@@ -18,7 +18,3 @@ export function updateTrayIcon(notificationsLength = 0): void {
     ipcRenderer.send('update-icon');
   }
 }
-
-export function restoreSetting(setting, value): void {
-  ipcRenderer.send(setting, value);
-}

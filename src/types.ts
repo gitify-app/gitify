@@ -1,7 +1,7 @@
 import { Notification, User } from './typesGithub';
 
 export interface AuthState {
-  token?: string;
+  token: string;
   enterpriseAccounts: EnterpriseAccount[];
   user: User | null;
 }

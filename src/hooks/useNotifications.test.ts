@@ -81,7 +81,7 @@ describe('hooks/useNotifications.ts', () => {
       it('should fetch notifications with success - enterprise only', async () => {
         const accounts: AuthState = {
           ...mockAccounts,
-          token: null,
+          token: '',
         };
 
         const notifications = [
@@ -112,7 +112,7 @@ describe('hooks/useNotifications.ts', () => {
       it('should fetch notifications with failure - enterprise only', async () => {
         const accounts: AuthState = {
           ...mockAccounts,
-          token: null,
+          token: '',
         };
 
         nock('https://github.gitify.io/api/v3/')
@@ -323,7 +323,7 @@ describe('hooks/useNotifications.ts', () => {
     });
 
     describe('enterprise', () => {
-      const accounts = { ...mockAccounts, token: null };
+      const accounts = { ...mockAccounts, token: '' };
       const hostname = 'github.gitify.io';
 
       it('should mark a notification as read with success - enterprise', async () => {
@@ -425,7 +425,7 @@ describe('hooks/useNotifications.ts', () => {
     });
 
     describe('enterprise', () => {
-      const accounts = { ...mockAccounts, token: null };
+      const accounts = { ...mockAccounts, token: '' };
       const hostname = 'github.gitify.io';
 
       it('should unsubscribe from a notification with success - enterprise', async () => {
@@ -527,7 +527,7 @@ describe('hooks/useNotifications.ts', () => {
     });
 
     describe('enterprise', () => {
-      const accounts = { ...mockAccounts, token: null };
+      const accounts = { ...mockAccounts, token: '' };
       const hostname = 'github.gitify.io';
 
       it("should mark a repository's notifications as read with success - enterprise", async () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
-import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { render, fireEvent } from '@testing-library/react';
 
 const { ipcRenderer } = require('electron');
@@ -22,9 +22,9 @@ describe('routes/Login.tsx', () => {
 
   it('should render itself & its children', () => {
     const tree = TestRenderer.create(
-      <MemoryRouter>
+      <BrowserRouter>
         <LoginRoute />
-      </MemoryRouter>,
+      </BrowserRouter>,
     );
 
     expect(tree).toMatchSnapshot();
@@ -33,17 +33,17 @@ describe('routes/Login.tsx', () => {
   it('should redirect to notifications once logged in', () => {
     const { rerender } = render(
       <AppContext.Provider value={{ isLoggedIn: false }}>
-        <MemoryRouter>
+        <BrowserRouter>
           <LoginRoute />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
 
     rerender(
       <AppContext.Provider value={{ isLoggedIn: true }}>
-        <MemoryRouter>
+        <BrowserRouter>
           <LoginRoute />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
 
@@ -54,9 +54,9 @@ describe('routes/Login.tsx', () => {
 
   it('should navigate to login with github enterprise', () => {
     const { getByLabelText } = render(
-      <MemoryRouter>
+      <BrowserRouter>
         <LoginRoute />
-      </MemoryRouter>,
+      </BrowserRouter>,
     );
 
     fireEvent.click(getByLabelText('Login with GitHub Enterprise'));

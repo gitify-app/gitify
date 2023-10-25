@@ -12,10 +12,11 @@ export function getEnterpriseAccountToken(
   hostname: string,
   accounts: EnterpriseAccount[],
 ): string {
-  return accounts.find((obj) => obj.hostname === hostname).token;
+  const account = accounts.find((obj) => obj.hostname === hostname);
+  return account ? account.token : '';
 }
 
-export function generateGitHubAPIUrl(hostname) {
+export function generateGitHubAPIUrl(hostname: string) {
   const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
   return isEnterprise
     ? `https://${hostname}/api/v3/`
@@ -128,10 +129,9 @@ async function getDiscussionUrl(
 
   let comments = edges[0]?.node.comments.edges;
 
-  let latestCommentId: string | number;
-  if (comments?.length) {
-    latestCommentId = getLatestDiscussionCommentId(comments);
-  }
+  const latestCommentId = comments?.length
+    ? getLatestDiscussionCommentId(comments)
+    : '';
 
   return {
     url: edges[0]?.node.url,
@@ -143,8 +143,7 @@ export const getLatestDiscussionCommentId = (
   comments: DiscussionCommentEdge[],
 ) =>
   comments
-    .flatMap((comment) => comment.node.replies.edges)
-    .concat([comments.at(-1)])
+    .flatMap((comment) => [...comment.node.replies.edges, comment])
     .reduce((a, b) => (a.node.createdAt > b.node.createdAt ? a : b))?.node
     .databaseId;
 
@@ -157,7 +156,7 @@ export async function openInBrowser(
 ) {
   if (notification.subject.url) {
     const latestCommentId = getCommentId(
-      notification.subject.latest_comment_url,
+      notification.subject.latest_comment_url || '',
     );
     openExternalLink(
       generateGitHubWebUrl(

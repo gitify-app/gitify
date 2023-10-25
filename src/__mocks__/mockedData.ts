@@ -151,7 +151,7 @@ export const mockedGithubNotifications = [
     url: 'https://api.github.com/notifications/threads/148827438',
     subscription_url:
       'https://api.github.com/notifications/threads/148827438/subscription',
-  } as Notification,
+  } as unknown as Notification,
 ];
 
 // 2 Notifications
@@ -198,7 +198,7 @@ export const mockedEnterpriseNotifications = [
       description: null,
       fork: false,
       // Removed the rest of the properties
-    } as Repository,
+    } as unknown as Repository,
     url: 'https://github.gitify.io/api/v3/notifications/threads/4',
     subscription_url:
       'https://github.gitify.io/api/v3/notifications/threads/4/subscription',
@@ -211,10 +211,8 @@ export const mockedEnterpriseNotifications = [
     last_read_at: '2017-05-20T14:20:55Z',
     subject: {
       title: 'Bump Version',
-      url:
-        'https://github.gitify.io/api/v3/repos/myorg/notifications-test/pulls/3',
-      latest_comment_url:
-        'https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21',
+      url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/pulls/3',
+      latest_comment_url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21',
       type: 'PullRequest',
     },
     repository: {
@@ -229,20 +227,14 @@ export const mockedEnterpriseNotifications = [
         url: 'https://github.gitify.io/api/v3/users/myorg',
         html_url: 'https://github.gitify.io/myorg',
         followers_url: 'https://github.gitify.io/api/v3/users/myorg/followers',
-        following_url:
-          'https://github.gitify.io/api/v3/users/myorg/following{/other_user}',
-        gists_url:
-          'https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}',
-        starred_url:
-          'https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}',
-        subscriptions_url:
-          'https://github.gitify.io/api/v3/users/myorg/subscriptions',
+        following_url: 'https://github.gitify.io/api/v3/users/myorg/following{/other_user}',
+        gists_url: 'https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}',
+        starred_url: 'https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}',
+        subscriptions_url: 'https://github.gitify.io/api/v3/users/myorg/subscriptions',
         organizations_url: 'https://github.gitify.io/api/v3/users/myorg/orgs',
         repos_url: 'https://github.gitify.io/api/v3/users/myorg/repos',
-        events_url:
-          'https://github.gitify.io/api/v3/users/myorg/events{/privacy}',
-        received_events_url:
-          'https://github.gitify.io/api/v3/users/myorg/received_events',
+        events_url: 'https://github.gitify.io/api/v3/users/myorg/events{/privacy}',
+        received_events_url: 'https://github.gitify.io/api/v3/users/myorg/received_events',
         type: 'Organization',
         site_admin: false,
       },
@@ -253,9 +245,8 @@ export const mockedEnterpriseNotifications = [
       // Removed the rest of the properties
     },
     url: 'https://github.gitify.io/api/v3/notifications/threads/3',
-    subscription_url:
-      'https://github.gitify.io/api/v3/notifications/threads/3/subscription',
-  } as Notification,
+    subscription_url: 'https://github.gitify.io/api/v3/notifications/threads/3/subscription',
+  } as unknown as Notification,
 ];
 
 export const mockedAccountNotifications: AccountNotifications[] = [

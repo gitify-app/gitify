@@ -1,7 +1,7 @@
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { shell } from 'electron';
 
 import { AppContext } from '../context/App';
@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
-describe('routes/LoginWithToken.js', () => {
+describe('routes/LoginWithToken', () => {
   const openExternalMock = jest.spyOn(shell, 'openExternal');
 
   const mockValidateToken = jest.fn();
@@ -29,9 +29,9 @@ describe('routes/LoginWithToken.js', () => {
 
     TestRenderer.act(() => {
       tree = TestRenderer.create(
-        <MemoryRouter>
+        <BrowserRouter>
           <LoginWithToken />
-        </MemoryRouter>,
+        </BrowserRouter>,
       );
     });
 
@@ -40,9 +40,9 @@ describe('routes/LoginWithToken.js', () => {
 
   it('let us go back', () => {
     const { getByLabelText } = render(
-      <MemoryRouter>
+      <BrowserRouter>
         <LoginWithToken />
-      </MemoryRouter>,
+      </BrowserRouter>,
     );
 
     fireEvent.click(getByLabelText('Go Back'));
@@ -74,9 +74,9 @@ describe('routes/LoginWithToken.js', () => {
   it("should click on the 'personal access tokens' link and open the browser", async () => {
     const { getByText } = render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
-        <MemoryRouter>
+        <BrowserRouter>
           <LoginWithToken />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
 
@@ -90,9 +90,9 @@ describe('routes/LoginWithToken.js', () => {
 
     const { getByLabelText, getByTitle } = render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
-        <MemoryRouter>
+        <BrowserRouter>
           <LoginWithToken />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
 
@@ -116,9 +116,9 @@ describe('routes/LoginWithToken.js', () => {
 
     const { getByLabelText, getByTitle } = render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
-        <MemoryRouter>
+        <BrowserRouter>
           <LoginWithToken />
-        </MemoryRouter>
+        </BrowserRouter>
       </AppContext.Provider>,
     );
 
@@ -140,9 +140,9 @@ describe('routes/LoginWithToken.js', () => {
 
   it('should render the form with errors', () => {
     const { getByLabelText, getByTitle, getByText } = render(
-      <MemoryRouter>
+      <BrowserRouter>
         <LoginWithToken />
-      </MemoryRouter>,
+      </BrowserRouter>,
     );
 
     fireEvent.change(getByLabelText('Hostname'), {

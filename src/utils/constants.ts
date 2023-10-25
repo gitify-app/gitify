@@ -4,8 +4,8 @@ export const Constants = {
 
   DEFAULT_AUTH_OPTIONS: {
     hostname: 'github.com',
-    clientId: process.env.OAUTH_CLIENT_ID,
-    clientSecret: process.env.OAUTH_CLIENT_SECRET,
+    clientId: process.env.OAUTH_CLIENT_ID || '',
+    clientSecret: process.env.OAUTH_CLIENT_SECRET || '',
   },
 
   REPO_SLUG: 'gitify-app/gitify',

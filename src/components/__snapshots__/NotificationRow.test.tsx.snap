@@ -1,5 +1,127 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`components/Notification should render itself & its children 1`] = `
+<div
+  className="flex space-x-2 p-2 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker"
+>
+  <div
+    className="flex justify-center items-center w-8 text-green-500"
+  >
+    <svg
+      aria-hidden="false"
+      aria-label="Issue"
+      className="octicon octicon-issue-opened"
+      fill="currentColor"
+      focusable="false"
+      height={18}
+      role="img"
+      style={
+        {
+          "display": "inline-block",
+          "overflow": "visible",
+          "userSelect": "none",
+          "verticalAlign": "text-bottom",
+        }
+      }
+      viewBox="0 0 16 16"
+      width={18}
+    >
+      <path
+        d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+      />
+      <path
+        d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+      />
+    </svg>
+  </div>
+  <div
+    className="flex-1 overflow-hidden"
+    onClick={[Function]}
+    role="main"
+  >
+    <div
+      className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden"
+    >
+      I am a robot and this is a test!
+    </div>
+    <div
+      className="text-xs text-capitalize"
+    >
+      <span
+        title="You're watching the repository."
+      >
+        Subscribed
+      </span>
+       - Updated
+       
+      in over 3 years
+      <button
+        className="border-0 bg-none float-right"
+        onClick={[Function]}
+        title="Unsubscribe"
+      >
+        <svg
+          aria-hidden="false"
+          aria-label="Unsubscribe"
+          className="hover:text-red-500"
+          fill="currentColor"
+          focusable="false"
+          height={13}
+          role="img"
+          style={
+            {
+              "display": "inline-block",
+              "overflow": "visible",
+              "userSelect": "none",
+              "verticalAlign": "text-bottom",
+            }
+          }
+          viewBox="0 0 16 16"
+          width={13}
+        >
+          <path
+            d="M8 2.75v10.5a.751.751 0 0 1-1.238.57L3.473 11H1.75A1.75 1.75 0 0 1 0 9.25v-2.5C0 5.784.784 5 1.75 5h1.722l3.29-2.82A.75.75 0 0 1 8 2.75Zm3.28 2.47L13 6.94l1.72-1.72a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L14.06 8l1.72 1.72a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L13 9.06l-1.72 1.72a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L11.94 8l-1.72-1.72a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215Zm-7.042 1.1a.752.752 0 0 1-.488.18h-2a.25.25 0 0 0-.25.25v2.5c0 .138.112.25.25.25h2c.179 0 .352.064.488.18L6.5 11.62V4.38Z"
+          />
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div
+    className="flex justify-center items-center w-8"
+  >
+    <button
+      className="focus:outline-none"
+      onClick={[Function]}
+      title="Mark as Read"
+    >
+      <svg
+        aria-hidden="false"
+        aria-label="Mark as Read"
+        className="hover:text-green-500"
+        fill="currentColor"
+        focusable="false"
+        height={20}
+        role="img"
+        style={
+          {
+            "display": "inline-block",
+            "overflow": "visible",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 16 16"
+        width={20}
+      >
+        <path
+          d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;
+
 exports[`components/Notification.js should render itself & its children 1`] = `
 <div
   className="flex space-x-2 p-2 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker"
