@@ -5,13 +5,14 @@
     "target": "es2022",
     "outDir": "./build/",
     "sourceMap": true,
-    "noImplicitAny": false,
+    "noImplicitAny": true,
     "noUnusedLocals": true,
     "jsx": "react",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "types": ["jest"]
+    "types": ["jest"],
+    "strict": true
   },
   "exclude": ["node_modules"],
   "include": [
