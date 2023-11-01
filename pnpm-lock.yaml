@@ -95,7 +95,7 @@ devDependencies:
     specifier: 1.2.2
     version: 1.2.2
   husky:
-    specifier: ^8.0.0
+    specifier: 8.0.3
     version: 8.0.3
   jest:
     specifier: 29.7.0
