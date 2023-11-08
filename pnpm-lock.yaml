@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@electron/remote':
-    specifier: 2.0.11
-    version: 2.0.11(electron@13.1.7)
+    specifier: 2.1.0
+    version: 2.1.0(electron@13.1.7)
   '@primer/octicons-react':
     specifier: 19.8.0
     version: 19.8.0(react@18.2.0)
@@ -560,8 +560,8 @@ packages:
       - supports-color
     dev: true
 
-  /@electron/remote@2.0.11(electron@13.1.7):
-    resolution: {integrity: sha512-PYEs7W3GrQNuhgiMHjFEvL5MbAL6C7m1AwSAHGqC+xc33IdP7rcGtJSdTP2eg1ssyB3oI00KwTsiSlsQbAoXpA==}
+  /@electron/remote@2.1.0(electron@13.1.7):
+    resolution: {integrity: sha512-38jzz2beoYTo0DNS+aoaGyLS/fHeNTAc1Aom6HlYsxKnvVWjcg4xriC7J2IUkYSEDHGKX/D7jUst+mH4dHR6QA==}
     peerDependencies:
       electron: '>= 13.0.0'
     dependencies:
