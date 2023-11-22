@@ -100,11 +100,10 @@
   "dependencies": {
     "@electron/remote": "2.0.11",
     "@primer/octicons-react": "19.8.0",
-    "axios": "1.5.1",
+    "axios": "1.6.0",
     "date-fns": "2.30.0",
     "electron-updater": "6.1.4",
     "final-form": "4.20.10",
-    "history": "4.10.1",
     "menubar": "9.3.0",
     "nprogress": "0.2.0",
     "react": "18.2.0",
@@ -119,7 +118,7 @@
   "devDependencies": {
     "@testing-library/react": "14.0.0",
     "@testing-library/react-hooks": "8.0.1",
-    "@types/jest": "29.5.5",
+    "@types/jest": "29.5.7",
     "@types/node": "18.18.0",
     "@types/react": "18.2.28",
     "@types/react-router-dom": "5.3.3",
@@ -143,7 +142,10 @@
     "webpack": "5.88.2",
     "webpack-cli": "5.1.4",
     "webpack-merge": "5.9.0",
-    "husky": "^8.0.0"
+    "husky": "8.0.3"
   },
-  "packageManager": "pnpm@8.9.0"
+  "packageManager": "pnpm@8.9.0",
+  "lint-staged": {
+    "*.{md,js,ts,tsx}": "prettier --write"
+  }
 }

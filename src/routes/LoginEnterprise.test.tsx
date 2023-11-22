@@ -1,9 +1,7 @@
 import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
 import { fireEvent, render } from '@testing-library/react';
-import { Router } from 'react-router';
 import { MemoryRouter } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 
 const { ipcRenderer } = require('electron');
 
@@ -19,8 +17,6 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/LoginEnterprise.js', () => {
-  const history = createMemoryHistory();
-
   const mockAccounts: AuthState = {
     enterpriseAccounts: [],
     user: null,
@@ -47,9 +43,9 @@ describe('routes/LoginEnterprise.js', () => {
   it('let us go back', () => {
     const { getByLabelText } = render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
-        <Router location={history.location} navigator={history}>
+        <MemoryRouter>
           <LoginEnterpriseRoute />
-        </Router>
+        </MemoryRouter>
       </AppContext.Provider>,
     );
 
@@ -86,9 +82,9 @@ describe('routes/LoginEnterprise.js', () => {
   it('should receive a logged-in enterprise account', () => {
     const { rerender } = render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
-        <Router location={history.location} navigator={history}>
+        <MemoryRouter>
           <LoginEnterpriseRoute />
-        </Router>
+        </MemoryRouter>
       </AppContext.Provider>,
     );
 
@@ -101,9 +97,9 @@ describe('routes/LoginEnterprise.js', () => {
           },
         }}
       >
-        <Router location={history.location} navigator={history}>
+        <MemoryRouter>
           <LoginEnterpriseRoute />
-        </Router>
+        </MemoryRouter>
       </AppContext.Provider>,
     );
 

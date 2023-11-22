@@ -1,8 +1,6 @@
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
-import { Router } from 'react-router';
 import { MemoryRouter } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 import { render, fireEvent } from '@testing-library/react';
 
 const { ipcRenderer } = require('electron');
@@ -17,8 +15,6 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/Login.tsx', () => {
-  const history = createMemoryHistory();
-
   beforeEach(() => {
     mockNavigate.mockReset();
     jest.spyOn(ipcRenderer, 'send');
@@ -37,17 +33,17 @@ describe('routes/Login.tsx', () => {
   it('should redirect to notifications once logged in', () => {
     const { rerender } = render(
       <AppContext.Provider value={{ isLoggedIn: false }}>
-        <Router location={history.location} navigator={history}>
+        <MemoryRouter>
           <LoginRoute />
-        </Router>
+        </MemoryRouter>
       </AppContext.Provider>,
     );
 
     rerender(
       <AppContext.Provider value={{ isLoggedIn: true }}>
-        <Router location={history.location} navigator={history}>
+        <MemoryRouter>
           <LoginRoute />
-        </Router>
+        </MemoryRouter>
       </AppContext.Provider>,
     );
 
@@ -58,9 +54,9 @@ describe('routes/Login.tsx', () => {
 
   it('should navigate to login with github enterprise', () => {
     const { getByLabelText } = render(
-      <Router location={history.location} navigator={history}>
+      <MemoryRouter>
         <LoginRoute />
-      </Router>,
+      </MemoryRouter>,
     );
 
     fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
