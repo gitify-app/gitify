@@ -3,14 +3,10 @@ on:
     tags: 'v*'
 
 jobs:
-  homebrew:
-    name: Bump Homebrew Cask
+  pr-to-homebrew:
     runs-on: macos-latest
     steps:
-      - uses: macauley/action-homebrew-bump-cask@v1
-        with:
-          token: ${{ secrets.GH_TOKEN }}
-          org: gitify-app
-          tap: homebrew/homebrew-cask
-          cask: gitify
-          force: false
+      - uses: Homebrew/actions/setup-homebrew@master
+      - run: brew bump-cask-pr gitify --version=${{ github.ref }} --message="Bump gitify to ${{ github.ref }}" --dry-run
+        env:
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GH_TOKEN }}
