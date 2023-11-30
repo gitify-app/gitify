@@ -5,7 +5,7 @@ on:
 jobs:
   homebrew:
     name: Bump Homebrew Cask
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     steps:
       - uses: macauley/action-homebrew-bump-cask@v1
         with:
