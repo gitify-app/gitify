@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: Homebrew/actions/setup-homebrew@master
       - id: version
-        run: echo ::set-output name=version::$(echo ${{ github.ref }} | cut -d'/' -f3)
+        run: echo ::set-output name=version::$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')
       - run: brew bump-cask-pr gitify --version=${{ steps.version.outputs.version }} --message="Bump gitify to ${{ steps.version.outputs.version }}" --dry-run
         env:
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GH_TOKEN }}
