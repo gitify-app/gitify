@@ -116,7 +116,7 @@
     "@testing-library/react-hooks": "8.0.1",
     "@types/jest": "29.5.7",
     "@types/node": "18.18.0",
-    "@types/react": "18.2.28",
+    "@types/react": "18.2.42",
     "@types/react-router-dom": "5.3.3",
     "@types/react-transition-group": "4.4.7",
     "autoprefixer": "10.4.16",
