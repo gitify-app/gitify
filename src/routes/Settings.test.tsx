@@ -343,7 +343,7 @@ describe('routes/Settings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('colors', true);
   });
 
-  it('should not be able to enable colors', async () => {
+  it('should not be able to enable colors due to missing scope', async () => {
     jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
       headers: {
         'x-oauth-scopes': 'read:user, notifications',

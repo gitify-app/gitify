@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`routes/Settings.tsx should not be able to enable colors 1`] = `
+exports[`routes/Settings.tsx should not be able to enable colors due to missing scope 1`] = `
 <div
   class="flex items-start mt-1 mb-3"
 >
