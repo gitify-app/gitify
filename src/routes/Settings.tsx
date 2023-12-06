@@ -1,20 +1,26 @@
-import React, { useCallback, useContext, useState, useEffect } from 'react';
-import { ipcRenderer } from 'electron';
-import { useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon } from '@primer/octicons-react';
+import { ipcRenderer } from 'electron';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { AppContext } from '../context/App';
-import { Appearance } from '../types';
 import { FieldCheckbox } from '../components/fields/Checkbox';
 import { FieldRadioGroup } from '../components/fields/RadioGroup';
+import { AppContext } from '../context/App';
 import { IconAddAccount } from '../icons/AddAccount';
 import { IconLogOut } from '../icons/Logout';
 import { IconQuit } from '../icons/Quit';
-import { updateTrayIcon } from '../utils/comms';
-import { setAppearance } from '../utils/appearance';
+import { Appearance } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
-import { generateGitHubAPIUrl } from '../utils/helpers';
+import { setAppearance } from '../utils/appearance';
+import { updateTrayIcon } from '../utils/comms';
 import Constants from '../utils/constants';
+import { generateGitHubAPIUrl } from '../utils/helpers';
 
 export const SettingsRoute: React.FC = () => {
   const { accounts, settings, updateSetting, logout } = useContext(AppContext);
@@ -32,7 +38,9 @@ export const SettingsRoute: React.FC = () => {
     ipcRenderer.invoke('get-app-version').then((result: string) => {
       setAppVersion(result);
     });
+  }, []);
 
+  useMemo(() => {
     (async () => {
       const response = await apiRequestAuth(
         `${generateGitHubAPIUrl(Constants.DEFAULT_AUTH_OPTIONS.hostname)}`,
@@ -40,20 +48,12 @@ export const SettingsRoute: React.FC = () => {
         accounts.token,
       );
 
-      console.log(JSON.stringify(response.headers));
-      const missingScopes = Constants.AUTH_SCOPE.filter((scope) => {
-        return !response.headers['x-oauth-scopes'].includes(scope);
-      });
-      if (missingScopes.length > 0) {
-        new Notification('Gitify - Permissions', {
-          body:
-            'You need to grant all the permissions to use this app. Missing scopes: ' +
-            missingScopes.join(', ') +
-            '.',
-        });
-      } else setColorScope(true);
+      console.info("Token's scopes:", response.headers['x-oauth-scopes']);
+
+      if (response.headers['x-oauth-scopes'].includes('repo'))
+        setColorScope(true);
     })();
-  }, []);
+  }, [accounts.token]);
 
   ipcRenderer.on('update-native-theme', (_, updatedAppearance: Appearance) => {
     if (settings.appearance === Appearance.SYSTEM) {
@@ -110,7 +110,7 @@ export const SettingsRoute: React.FC = () => {
         <FieldCheckbox
           name="colors"
           label={`Use GitHub-like state colors${
-            !colorScope ? ' (requires re-auth)' : ''
+            !colorScope ? ' (requires repo scope)' : ''
           }`}
           checked={colorScope && settings.colors}
           onChange={(evt) => updateSetting('colors', evt.target.checked)}

@@ -1,27 +1,33 @@
+import { fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import TestRenderer, { act } from 'react-test-renderer';
-import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import TestRenderer, { act } from 'react-test-renderer';
 
 const { ipcRenderer } = require('electron');
 
-import { SettingsRoute } from './Settings';
-import { AppContext } from '../context/App';
+import { AxiosResponse } from 'axios';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
+import { AppContext } from '../context/App';
+import * as apiRequests from '../utils/api-requests';
 import Constants from '../utils/constants';
+import { SettingsRoute } from './Settings';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
+jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
+  headers: {
+    'x-oauth-scopes': Constants.AUTH_SCOPE.join(', '),
+  },
+} as unknown as AxiosResponse);
 
 describe('routes/Settings.tsx', () => {
   const updateSetting = jest.fn();
 
   beforeEach(() => {
-    mockNavigate.mockReset();
-    updateSetting.mockReset();
+    jest.clearAllMocks();
   });
 
   it('should render itself & its children', async () => {
@@ -77,7 +83,12 @@ describe('routes/Settings.tsx', () => {
 
     await act(async () => {
       const { getByLabelText: getByLabelTextLocal } = render(
-        <AppContext.Provider value={{ settings: mockSettings, accounts: mockAccounts }}>
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+          }}
+        >
           <MemoryRouter>
             <SettingsRoute />
           </MemoryRouter>
@@ -261,7 +272,12 @@ describe('routes/Settings.tsx', () => {
 
     await act(async () => {
       const { getByLabelText: getByLabelTextLocal } = render(
-        <AppContext.Provider value={{ settings: mockSettings, accounts: mockAccounts }}>
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+          }}
+        >
           <MemoryRouter>
             <SettingsRoute />
           </MemoryRouter>
@@ -298,27 +314,19 @@ describe('routes/Settings.tsx', () => {
 
   it('should be able to enable colors', async () => {
     let getByLabelText;
-    jest.mock('../utils/api-requests', () => ({
-      ...jest.requireActual('../utils/api-requests'),
-      apiRequestAuth: jest.fn().mockResolvedValue({
-        headers: {
-          'x-oauth-scopes': Constants.AUTH_SCOPE.join(', '),
-          'access-control-allow-headers': 'Authorization',
-          'access-control-allow-origin': '*',
-          'access-control-expose-headers': 'X-OAuth-Scopes',
-          'cache-control': 'private, max-age=60, s-maxage=60',
-          'content-encoding': 'gzip',
-          'content-security-policy': "default-src 'none'",
-          'content-type': 'application/json; charset=utf-8',
-          server: 'GitHub.com',
-          'strict-transport-security':
-            'max-age=31536000; includeSubdomains; preload',
-          vary: 'Accept, Authorization, Cookie, X-GitHub-OTP, Accept-Encoding, Accept, X-Requested-With',
-        },
-      }),
-    }));
+    let findByLabelText;
+
+    jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
+      headers: {
+        'x-oauth-scopes': Constants.AUTH_SCOPE.join(', '),
+      },
+    } as unknown as AxiosResponse);
+
     await act(async () => {
-      const { getByLabelText: getByLabelTextLocal } = render(
+      const {
+        getByLabelText: getByLabelTextLocal,
+        findByLabelText: findByLabelTextLocal,
+      } = render(
         <AppContext.Provider
           value={{
             settings: mockSettings,
@@ -332,19 +340,12 @@ describe('routes/Settings.tsx', () => {
         </AppContext.Provider>,
       );
       getByLabelText = getByLabelTextLocal;
+      findByLabelText = findByLabelTextLocal;
     });
 
-    // await act(async () => {
-    //   expect(getByLabelText('Use GitHub-like state colors')).toBeDefined();
-    // });
+    await findByLabelText('Use GitHub-like state colors');
 
-    // await act(async () => {
-    await act(
-      () =>
-        // waitFor(() =>
-        fireEvent.click(getByLabelText('Use GitHub-like state colors')),
-      // ),
-    );
+    fireEvent.click(getByLabelText('Use GitHub-like state colors'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('colors', true);
@@ -352,14 +353,12 @@ describe('routes/Settings.tsx', () => {
 
   it('should not be able to disable colors', async () => {
     let queryByLabelText;
-    jest.mock('../utils/helpers', () => ({
-      ...jest.requireActual('../utils/helpers'),
-      apiRequestAuth: jest.fn().mockResolvedValue({
-        headers: {
-          'x-oauth-scopes': 'repo, notifications',
-        },
-      }),
-    }));
+
+    jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
+      headers: {
+        'x-oauth-scopes': 'read:user, notifications',
+      },
+    } as unknown as AxiosResponse);
 
     await act(async () => {
       const { queryByLabelText: queryByLabelLocal } = render(
@@ -376,10 +375,6 @@ describe('routes/Settings.tsx', () => {
       );
       queryByLabelText = queryByLabelLocal;
     });
-
-    console.log(
-      queryByLabelText('Use GitHub-like state colors (requires re-auth)'),
-    );
 
     expect(
       queryByLabelText('Use GitHub-like state colors (requires re-auth)'),

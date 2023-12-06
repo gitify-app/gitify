@@ -128,7 +128,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         <input
           checked={false}
           className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          disabled={true}
+          disabled={false}
           id="colors"
           onChange={[Function]}
           type="checkbox"
@@ -142,11 +142,11 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           htmlFor="colors"
           style={
             {
-              "textDecoration": "line-through",
+              "textDecoration": false,
             }
           }
         >
-          Use GitHub-like state colors (requires re-auth)
+          Use GitHub-like state colors
         </label>
       </div>
     </div>
