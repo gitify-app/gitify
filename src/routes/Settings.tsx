@@ -48,8 +48,6 @@ export const SettingsRoute: React.FC = () => {
         accounts.token,
       );
 
-      console.info("Token's scopes:", response.headers['x-oauth-scopes']);
-
       if (response.headers['x-oauth-scopes'].includes('repo'))
         setColorScope(true);
     })();
