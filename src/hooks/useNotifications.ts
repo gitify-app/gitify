@@ -124,12 +124,21 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                           ) {
                             return notification;
                           }
+                          const isEnterprise =
+                            accountNotifications.hostname !==
+                            Constants.DEFAULT_AUTH_OPTIONS.hostname;
+                          const token = isEnterprise
+                            ? getEnterpriseAccountToken(
+                                accountNotifications.hostname,
+                                accounts.enterpriseAccounts,
+                              )
+                            : accounts.token;
 
                           const cardinalData = (
                             await apiRequestAuth(
                               notification.subject.url,
                               'GET',
-                              accounts.token,
+                              token,
                             )
                           ).data;
 

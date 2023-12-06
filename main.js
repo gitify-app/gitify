@@ -66,8 +66,16 @@ menubarApp.on('ready', () => {
     }
   });
 
+  ipcMain.handle('get-platform', async () => {
+    return process.platform;
+  });
+  ipcMain.handle('get-app-version', async () => {
+    return app.getVersion();
+  });
+
   ipcMain.on('reopen-window', () => menubarApp.showWindow());
   ipcMain.on('hide-window', () => menubarApp.hideWindow());
+
   ipcMain.on('app-quit', () => menubarApp.app.quit());
   ipcMain.on('update-icon', (_, arg) => {
     if (!menubarApp.tray.isDestroyed()) {
@@ -78,12 +86,8 @@ menubarApp.on('ready', () => {
       }
     }
   });
-  ipcMain.handle('get-platform', async () => {
-    return process.platform;
-  });
-
-  ipcMain.handle('get-app-version', async () => {
-    return app.getVersion();
+  ipcMain.on('set-login-item-settings', (event, settings) => {
+    app.setLoginItemSettings(settings);
   });
 
   menubarApp.window.webContents.on('devtools-opened', () => {

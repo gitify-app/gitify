@@ -1,9 +1,7 @@
 import React from 'react';
 import TestRenderer from 'react-test-renderer';
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
-import { Router } from 'react-router';
 import { MemoryRouter } from 'react-router-dom';
-import { createMemoryHistory } from 'history';
 import { shell } from 'electron';
 
 import { AppContext } from '../context/App';
@@ -16,7 +14,6 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/LoginWithToken.js', () => {
-  const history = createMemoryHistory();
   const openExternalMock = jest.spyOn(shell, 'openExternal');
 
   const mockValidateToken = jest.fn();
@@ -43,9 +40,9 @@ describe('routes/LoginWithToken.js', () => {
 
   it('let us go back', () => {
     const { getByLabelText } = render(
-      <Router location={history.location} navigator={history}>
+      <MemoryRouter>
         <LoginWithToken />
-      </Router>,
+      </MemoryRouter>,
     );
 
     fireEvent.click(getByLabelText('Go Back'));
@@ -77,9 +74,9 @@ describe('routes/LoginWithToken.js', () => {
   it("should click on the 'personal access tokens' link and open the browser", async () => {
     const { getByText } = render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
-        <Router location={history.location} navigator={history}>
+        <MemoryRouter>
           <LoginWithToken />
-        </Router>
+        </MemoryRouter>
       </AppContext.Provider>,
     );
 
@@ -93,9 +90,9 @@ describe('routes/LoginWithToken.js', () => {
 
     const { getByLabelText, getByTitle } = render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
-        <Router location={history.location} navigator={history}>
+        <MemoryRouter>
           <LoginWithToken />
-        </Router>
+        </MemoryRouter>
       </AppContext.Provider>,
     );
 
@@ -119,9 +116,9 @@ describe('routes/LoginWithToken.js', () => {
 
     const { getByLabelText, getByTitle } = render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
-        <Router location={history.location} navigator={history}>
+        <MemoryRouter>
           <LoginWithToken />
-        </Router>
+        </MemoryRouter>
       </AppContext.Provider>,
     );
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import _ from 'lodash';
 import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
 
 import { Notification } from '../typesGithub';
@@ -14,10 +13,17 @@ interface IProps {
 export const AccountNotifications = (props: IProps) => {
   const { hostname, showAccountHostname, notifications } = props;
 
-  const groupedNotifications = _(notifications)
-    .groupBy((obj) => obj.repository.full_name)
-    .sortBy((_, key) => key)
-    .value();
+  const groupedNotifications = Object.values(
+    notifications.reduce(
+      (acc: { [key: string]: Notification[] }, notification) => {
+        const key = notification.repository.full_name;
+        if (!acc[key]) acc[key] = [];
+        acc[key].push(notification);
+        return acc;
+      },
+      {},
+    ),
+  );
 
   const Chevron = notifications.length > 0 ? ChevronDownIcon : ChevronLeftIcon;
 
