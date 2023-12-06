@@ -1,4 +1,4 @@
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import TestRenderer, { act } from 'react-test-renderer';
@@ -313,9 +313,6 @@ describe('routes/Settings.tsx', () => {
   });
 
   it('should be able to enable colors', async () => {
-    let getByLabelText;
-    let findByLabelText;
-
     jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
       headers: {
         'x-oauth-scopes': Constants.AUTH_SCOPE.join(', '),
@@ -323,10 +320,7 @@ describe('routes/Settings.tsx', () => {
     } as unknown as AxiosResponse);
 
     await act(async () => {
-      const {
-        getByLabelText: getByLabelTextLocal,
-        findByLabelText: findByLabelTextLocal,
-      } = render(
+      render(
         <AppContext.Provider
           value={{
             settings: mockSettings,
@@ -339,21 +333,17 @@ describe('routes/Settings.tsx', () => {
           </MemoryRouter>
         </AppContext.Provider>,
       );
-      getByLabelText = getByLabelTextLocal;
-      findByLabelText = findByLabelTextLocal;
     });
 
-    await findByLabelText('Use GitHub-like state colors');
+    await screen.findByLabelText('Use GitHub-like state colors');
 
-    fireEvent.click(getByLabelText('Use GitHub-like state colors'));
+    fireEvent.click(screen.getByLabelText('Use GitHub-like state colors'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('colors', true);
   });
 
-  it('should not be able to disable colors', async () => {
-    let queryByLabelText;
-
+  it('should not be able to enable colors', async () => {
     jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
       headers: {
         'x-oauth-scopes': 'read:user, notifications',
@@ -361,11 +351,12 @@ describe('routes/Settings.tsx', () => {
     } as unknown as AxiosResponse);
 
     await act(async () => {
-      const { queryByLabelText: queryByLabelLocal } = render(
+      render(
         <AppContext.Provider
           value={{
             settings: mockSettings,
             accounts: mockAccounts,
+            updateSetting,
           }}
         >
           <MemoryRouter>
@@ -373,11 +364,32 @@ describe('routes/Settings.tsx', () => {
           </MemoryRouter>
         </AppContext.Provider>,
       );
-      queryByLabelText = queryByLabelLocal;
     });
 
     expect(
-      queryByLabelText('Use GitHub-like state colors (requires re-auth)'),
-    ).toBeDefined();
+      screen
+        .getByLabelText('Use GitHub-like state colors (requires repo scope)')
+        .closest('input'),
+    ).toHaveProperty('disabled', true);
+
+    // click the checkbox
+    fireEvent.click(
+      screen.getByLabelText(
+        'Use GitHub-like state colors (requires repo scope)',
+      ),
+    );
+
+    // check if the checkbox is still unchecked
+    expect(
+      screen.getByLabelText(
+        'Use GitHub-like state colors (requires repo scope)',
+      ),
+    ).not.toBe('checked');
+
+    expect(
+      screen.getByLabelText(
+        'Use GitHub-like state colors (requires repo scope)',
+      ).parentNode.parentNode,
+    ).toMatchSnapshot();
   });
 });

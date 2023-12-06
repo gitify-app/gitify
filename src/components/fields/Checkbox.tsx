@@ -27,7 +27,9 @@ export const FieldCheckbox = (props: IFieldCheckbox) => {
         <label
           htmlFor={props.name}
           className="font-medium text-gray-700 dark:text-gray-200"
-          style={{ textDecoration: props.disabled && 'line-through' }}
+          style={
+            props.disabled ? { textDecoration: 'line-through' } : undefined
+          }
         >
           {props.label}
         </label>
