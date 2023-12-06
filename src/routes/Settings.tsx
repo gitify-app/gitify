@@ -113,7 +113,9 @@ export const SettingsRoute: React.FC = () => {
             !colorScope ? ' (requires repo scope)' : ''
           }`}
           checked={colorScope && settings.colors}
-          onChange={(evt) => updateSetting('colors', evt.target.checked)}
+          onChange={(evt) =>
+            colorScope && updateSetting('colors', evt.target.checked)
+          }
           disabled={!colorScope}
         />
         <FieldCheckbox

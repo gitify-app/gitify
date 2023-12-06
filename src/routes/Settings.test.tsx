@@ -380,6 +380,7 @@ describe('routes/Settings.tsx', () => {
     );
 
     // check if the checkbox is still unchecked
+    expect(updateSetting).not.toHaveBeenCalled();
     expect(
       screen.getByLabelText(
         'Use GitHub-like state colors (requires repo scope)',
