@@ -6,6 +6,7 @@ interface IFieldCheckbox {
   checked: boolean;
   onChange: any;
   placeholder?: string;
+  disabled?: boolean;
 }
 
 export const FieldCheckbox = (props: IFieldCheckbox) => {
@@ -18,6 +19,7 @@ export const FieldCheckbox = (props: IFieldCheckbox) => {
           className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
           checked={props.checked}
           onChange={props.onChange}
+          disabled={props.disabled}
         />
       </div>
 
@@ -25,6 +27,9 @@ export const FieldCheckbox = (props: IFieldCheckbox) => {
         <label
           htmlFor={props.name}
           className="font-medium text-gray-700 dark:text-gray-200"
+          style={
+            props.disabled ? { textDecoration: 'line-through' } : undefined
+          }
         >
           {props.label}
         </label>

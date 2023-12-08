@@ -1,11 +1,13 @@
 import React, {
-  useState,
   createContext,
   useCallback,
   useEffect,
   useMemo,
+  useState,
 } from 'react';
 
+import { useInterval } from '../hooks/useInterval';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   AccountNotifications,
   Appearance,
@@ -15,14 +17,12 @@ import {
   SettingsState,
 } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
-import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
-import { clearState, loadState, saveState } from '../utils/storage';
 import { setAppearance } from '../utils/appearance';
+import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
 import { setAutoLaunch } from '../utils/comms';
-import { useInterval } from '../hooks/useInterval';
-import { useNotifications } from '../hooks/useNotifications';
 import Constants from '../utils/constants';
 import { generateGitHubAPIUrl } from '../utils/helpers';
+import { clearState, loadState, saveState } from '../utils/storage';
 
 const defaultAccounts: AuthState = {
   token: null,
@@ -37,7 +37,7 @@ export const defaultSettings: SettingsState = {
   markOnClick: false,
   openAtStartup: false,
   appearance: Appearance.SYSTEM,
-  colors: true,
+  colors: false,
 };
 
 interface AppContextState {
