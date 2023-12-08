@@ -1,11 +1,11 @@
+import { act, renderHook, waitFor } from '@testing-library/react';
 import axios from 'axios';
 import nock from 'nock';
-import { act, renderHook } from '@testing-library/react-hooks';
 
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
-import { useNotifications } from './useNotifications';
-import { AuthState } from '../types';
 import { mockedUser } from '../__mocks__/mockedData';
+import { AuthState } from '../types';
+import { useNotifications } from './useNotifications';
 
 describe('hooks/useNotifications.ts', () => {
   beforeEach(() => {
@@ -30,9 +30,7 @@ describe('hooks/useNotifications.ts', () => {
           .get('/notifications?participating=false')
           .reply(200, notifications);
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.fetchNotifications(mockAccounts, mockSettings);
@@ -40,9 +38,10 @@ describe('hooks/useNotifications.ts', () => {
 
         expect(result.current.isFetching).toBe(true);
 
-        await waitForNextUpdate();
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
 
-        expect(result.current.isFetching).toBe(false);
         expect(result.current.notifications[0].hostname).toBe(
           'github.gitify.io',
         );
@@ -60,9 +59,7 @@ describe('hooks/useNotifications.ts', () => {
           .get('/notifications?participating=false')
           .reply(400, { message });
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.fetchNotifications(mockAccounts, mockSettings);
@@ -70,9 +67,10 @@ describe('hooks/useNotifications.ts', () => {
 
         expect(result.current.isFetching).toBe(true);
 
-        await waitForNextUpdate();
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
 
-        expect(result.current.isFetching).toBe(false);
         expect(result.current.requestFailed).toBe(true);
       });
     });
@@ -93,19 +91,18 @@ describe('hooks/useNotifications.ts', () => {
           .get('/notifications?participating=false')
           .reply(200, notifications);
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.fetchNotifications(accounts, mockSettings);
         });
 
-        await waitForNextUpdate();
+        await waitFor(() => {
+          expect(result.current.notifications[0].hostname).toBe(
+            'github.gitify.io',
+          );
+        });
 
-        expect(result.current.notifications[0].hostname).toBe(
-          'github.gitify.io',
-        );
         expect(result.current.notifications[0].notifications.length).toBe(2);
       });
 
@@ -119,17 +116,15 @@ describe('hooks/useNotifications.ts', () => {
           .get('/notifications?participating=false')
           .reply(400, { message: 'Oops! Something went wrong.' });
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.fetchNotifications(accounts, mockSettings);
         });
 
-        await waitForNextUpdate();
-
-        expect(result.current.requestFailed).toBe(true);
+        await waitFor(() => {
+          expect(result.current.requestFailed).toBe(true);
+        });
       });
     });
 
@@ -150,17 +145,16 @@ describe('hooks/useNotifications.ts', () => {
           .get('/notifications?participating=false')
           .reply(200, notifications);
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.fetchNotifications(accounts, mockSettings);
         });
 
-        await waitForNextUpdate();
+        await waitFor(() => {
+          expect(result.current.notifications[0].hostname).toBe('github.com');
+        });
 
-        expect(result.current.notifications[0].hostname).toBe('github.com');
         expect(result.current.notifications[0].notifications.length).toBe(2);
       });
 
@@ -174,17 +168,15 @@ describe('hooks/useNotifications.ts', () => {
           .get('/notifications?participating=false')
           .reply(400, { message: 'Oops! Something went wrong.' });
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.fetchNotifications(accounts, mockSettings);
         });
 
-        await waitForNextUpdate();
-
-        expect(result.current.requestFailed).toBe(true);
+        await waitFor(() => {
+          expect(result.current.requestFailed).toBe(true);
+        });
       });
     });
 
@@ -242,9 +234,7 @@ describe('hooks/useNotifications.ts', () => {
           .get('/5')
           .reply(200, { state: 'open', draft: true });
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications(true),
-        );
+        const { result } = renderHook(() => useNotifications(true));
 
         act(() => {
           result.current.fetchNotifications(accounts, {
@@ -255,9 +245,10 @@ describe('hooks/useNotifications.ts', () => {
 
         expect(result.current.isFetching).toBe(true);
 
-        await waitForNextUpdate();
+        await waitFor(() => {
+          expect(result.current.notifications[0].hostname).toBe('github.com');
+        });
 
-        expect(result.current.notifications[0].hostname).toBe('github.com');
         expect(result.current.notifications[0].notifications.length).toBe(5);
         expect(
           result.current.notifications[0].notifications[0].subject.state,
@@ -290,15 +281,15 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(200);
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.markNotification(accounts, id, hostname);
         });
 
-        await waitForNextUpdate();
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
 
         expect(result.current.notifications.length).toBe(0);
       });
@@ -308,15 +299,15 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(400);
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.markNotification(accounts, id, hostname);
         });
 
-        await waitForNextUpdate();
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
 
         expect(result.current.notifications.length).toBe(0);
       });
@@ -331,15 +322,15 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(200);
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.markNotification(accounts, id, hostname);
         });
 
-        await waitForNextUpdate();
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
 
         expect(result.current.notifications.length).toBe(0);
       });
@@ -349,15 +340,15 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(400);
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.markNotification(accounts, id, hostname);
         });
 
-        await waitForNextUpdate();
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
 
         expect(result.current.notifications.length).toBe(0);
       });
@@ -382,16 +373,14 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(200);
 
-        const { result, waitForValueToChange } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.unsubscribeNotification(accounts, id, hostname);
         });
 
-        await waitForValueToChange(() => {
-          return result.current.isFetching;
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -408,16 +397,14 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(400);
 
-        const { result, waitForValueToChange } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.unsubscribeNotification(accounts, id, hostname);
         });
 
-        await waitForValueToChange(() => {
-          return result.current.isFetching;
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -439,16 +426,14 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(200);
 
-        const { result, waitForValueToChange } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.unsubscribeNotification(accounts, id, hostname);
         });
 
-        await waitForValueToChange(() => {
-          return result.current.isFetching;
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -465,16 +450,14 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(400);
 
-        const { result, waitForValueToChange } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.unsubscribeNotification(accounts, id, hostname);
         });
 
-        await waitForValueToChange(() => {
-          return result.current.isFetching;
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -494,15 +477,15 @@ describe('hooks/useNotifications.ts', () => {
           .put(`/repos/${repoSlug}/notifications`)
           .reply(200);
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.markRepoNotifications(accounts, repoSlug, hostname);
         });
 
-        await waitForNextUpdate();
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
 
         expect(result.current.notifications.length).toBe(0);
       });
@@ -512,15 +495,15 @@ describe('hooks/useNotifications.ts', () => {
           .put(`/repos/${repoSlug}/notifications`)
           .reply(400);
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.markRepoNotifications(accounts, repoSlug, hostname);
         });
 
-        await waitForNextUpdate();
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
 
         expect(result.current.notifications.length).toBe(0);
       });
@@ -535,15 +518,15 @@ describe('hooks/useNotifications.ts', () => {
           .put(`/repos/${repoSlug}/notifications`)
           .reply(200);
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.markRepoNotifications(accounts, repoSlug, hostname);
         });
 
-        await waitForNextUpdate();
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
 
         expect(result.current.notifications.length).toBe(0);
       });
@@ -553,15 +536,15 @@ describe('hooks/useNotifications.ts', () => {
           .put(`/repos/${repoSlug}/notifications`)
           .reply(400);
 
-        const { result, waitForNextUpdate } = renderHook(() =>
-          useNotifications(false),
-        );
+        const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
           result.current.markRepoNotifications(accounts, repoSlug, hostname);
         });
 
-        await waitForNextUpdate();
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
 
         expect(result.current.notifications.length).toBe(0);
       });
