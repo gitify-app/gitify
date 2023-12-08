@@ -1,4 +1,4 @@
-const { notarize } = require('electron-notarize');
+const { notarize } = require('@electron/notarize');
 
 const packageJson = require('../package.json');
 const appBundleId = packageJson.build.appId;
@@ -11,7 +11,7 @@ const notarizeApp = async (context) => {
 
   if (!shouldNotarize || !isMacOS) {
     console.log(
-      '  • notarizing      either should not notarize or not building for macOS'
+      '  • notarizing      either should not notarize or not building for macOS',
     );
     return;
   }
