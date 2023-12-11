@@ -77,7 +77,10 @@ export const SettingsRoute: React.FC = () => {
     'hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none';
 
   return (
-    <div className="flex flex-1 flex-col dark:bg-gray-dark dark:text-white">
+    <div
+      className="flex flex-1 flex-col dark:bg-gray-dark dark:text-white"
+      data-testid="settings"
+    >
       <div className="flex justify-between items-center mt-4 py-2 mx-8">
         <button
           className="focus:outline-none"

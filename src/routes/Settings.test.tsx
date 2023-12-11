@@ -1,7 +1,6 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import TestRenderer, { act } from 'react-test-renderer';
 
 const { ipcRenderer } = require('electron');
 
@@ -31,10 +30,8 @@ describe('routes/Settings.tsx', () => {
   });
 
   it('should render itself & its children', async () => {
-    let tree: TestRenderer;
-
     await act(async () => {
-      tree = TestRenderer.create(
+      render(
         <AppContext.Provider
           value={{ settings: mockSettings, accounts: mockAccounts }}
         >
@@ -44,7 +41,7 @@ describe('routes/Settings.tsx', () => {
         </AppContext.Provider>,
       );
     });
-    expect(tree).toMatchSnapshot();
+    expect(screen.getByTestId('settings')).toMatchSnapshot();
   });
 
   it('should press the logout', async () => {
