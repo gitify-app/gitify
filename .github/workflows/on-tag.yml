@@ -1,4 +1,4 @@
-name: Homebrew
+name: On Tag
 
 on:
   push:
@@ -6,6 +6,7 @@ on:
 
 jobs:
   pr-to-homebrew:
+    name: Homebrew
     runs-on: macos-latest
     steps:
       - uses: Homebrew/actions/setup-homebrew@master
