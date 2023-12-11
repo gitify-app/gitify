@@ -2,16 +2,53 @@ name: On Tag
 
 on:
   push:
-    tags: 'v*'
+    # tags: 'v*'
 
 jobs:
-  pr-to-homebrew:
-    name: Homebrew
-    runs-on: macos-latest
+  # pr-to-homebrew:
+  #   name: Homebrew
+  #   runs-on: macos-latest
+  #   steps:
+  #     - uses: Homebrew/actions/setup-homebrew@master
+  #     - id: version
+  #       run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
+  #     - run: brew bump-cask-pr gitify --version=${{ steps.version.outputs.version }} --message="Bump gitify to ${{ steps.version.outputs.version }}"
+  #       env:
+  #         HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GH_TOKEN }}
+
+  update-website:
+    name: Website
+    runs-on: ubuntu-latest
     steps:
-      - uses: Homebrew/actions/setup-homebrew@master
+      - uses: actions/checkout@v4
+        with:
+          repository: gitify-app/website
       - id: version
         run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
-      - run: brew bump-cask-pr gitify --version=${{ steps.version.outputs.version }} --message="Bump gitify to ${{ steps.version.outputs.version }}"
-        env:
-          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GH_TOKEN }}
+      - name: setup git config
+        run: |
+          git config user.name "Gitify Version Bot"
+          git config user.email "<>"
+      - run: git checkout -b "bump/${{ steps.version.outputs.version }}"
+      - run: pnpm version ${{ steps.version.outputs.version }}
+      - run: git push origin "bump/${{ steps.version.outputs.version }}"
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            github.repos.createPullRequest({
+              owner: 'gitify-app',
+              repo: 'website',
+              title: `deps: bump gitify version to ${{ steps.version.outputs.version }}`,
+              head: `bump/${{ steps.version.outputs.version }}`,
+              base: 'main',
+              body: `Bump gitify version to ${{ steps.version.outputs.version }}`,
+              draft: false,
+              maintainer_can_modify: true,
+            })
+
+            github.issues.addAssignees({
+              owner: 'gitify-app',
+              repo: 'website',
+              issue_number: context.payload.pull_request.number,
+              assignees: ['afonsojramos'],
+            })
