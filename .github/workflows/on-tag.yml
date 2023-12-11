@@ -1,0 +1,44 @@
+name: On Tag
+
+on:
+  push:
+    tags: 'v*'
+
+jobs:
+  pr-to-homebrew:
+    name: Homebrew
+    runs-on: macos-latest
+    steps:
+      - uses: Homebrew/actions/setup-homebrew@master
+      - id: version
+        run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
+      - run: brew bump-cask-pr gitify --version=${{ steps.version.outputs.version }} --message="Bump gitify to ${{ steps.version.outputs.version }}"
+        env:
+          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GH_TOKEN }}
+
+  update-website:
+    name: Website
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: gitify-app/website
+          token: ${{ secrets.GH_TOKEN }}
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - id: version
+        run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
+      - name: setup git config
+        run: |
+          git config user.name "Gitify Version Bot"
+          git config user.email "<>"
+      - run: git checkout -b "bump/${{ steps.version.outputs.version }}"
+      - run: pnpm version ${{ steps.version.outputs.version }}
+      - run: git push origin "bump/${{ steps.version.outputs.version }}"
+      - uses: actions/github-script@v6
+        with:
+          script: |
+            core.notice('Create PR by going to: https://github.com/gitify-app/website/compare/bump/${{ steps.version.outputs.version }}')
