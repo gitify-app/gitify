@@ -1,6 +1,6 @@
 name: Run Tests
 
-on: 
+on:
   push:
     branches:
       - main
@@ -12,43 +12,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version-file: .nvmrc
-
       - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
+      - uses: actions/setup-node@v4
         with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Run Prettier (Check)
-        run: pnpm prettier:check
-
-      - name: Run Typechecking
-        run: pnpm tsc --noEmit
-
-      - name: Run Jest
-        run: pnpm test -- --coverage --runInBand --verbose
-
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm prettier:check
+      - run: pnpm tsc --noEmit
+      - run: pnpm test -- --coverage --runInBand --verbose
       - name: Coveralls
         uses: coverallsapp/github-action@v2
