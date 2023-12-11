@@ -23,6 +23,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: gitify-app/website
+      - uses: pnpm/action-setup@v2
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
       - id: version
         run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
       - name: setup git config
