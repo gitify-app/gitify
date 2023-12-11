@@ -1,24 +1,34 @@
-import React, { useCallback, useContext, useState, useEffect } from 'react';
-import { ipcRenderer } from 'electron';
-import { useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon } from '@primer/octicons-react';
+import { ipcRenderer } from 'electron';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { AppContext } from '../context/App';
-import { Appearance } from '../types';
 import { FieldCheckbox } from '../components/fields/Checkbox';
 import { FieldRadioGroup } from '../components/fields/RadioGroup';
+import { AppContext } from '../context/App';
 import { IconAddAccount } from '../icons/AddAccount';
 import { IconLogOut } from '../icons/Logout';
 import { IconQuit } from '../icons/Quit';
-import { updateTrayIcon } from '../utils/comms';
+import { Appearance } from '../types';
+import { apiRequestAuth } from '../utils/api-requests';
 import { setAppearance } from '../utils/appearance';
+import { updateTrayIcon } from '../utils/comms';
+import Constants from '../utils/constants';
+import { generateGitHubAPIUrl } from '../utils/helpers';
 
 export const SettingsRoute: React.FC = () => {
-  const { settings, updateSetting, logout } = useContext(AppContext);
+  const { accounts, settings, updateSetting, logout } = useContext(AppContext);
   const navigate = useNavigate();
 
   const [isLinux, setIsLinux] = useState<boolean>(false);
   const [appVersion, setAppVersion] = useState<string | null>(null);
+  const [colorScope, setColorScope] = useState<boolean>(false);
 
   useEffect(() => {
     ipcRenderer.invoke('get-platform').then((result: string) => {
@@ -29,6 +39,19 @@ export const SettingsRoute: React.FC = () => {
       setAppVersion(result);
     });
   }, []);
+
+  useMemo(() => {
+    (async () => {
+      const response = await apiRequestAuth(
+        `${generateGitHubAPIUrl(Constants.DEFAULT_AUTH_OPTIONS.hostname)}`,
+        'GET',
+        accounts.token,
+      );
+
+      if (response.headers['x-oauth-scopes'].includes('repo'))
+        setColorScope(true);
+    })();
+  }, [accounts.token]);
 
   ipcRenderer.on('update-native-theme', (_, updatedAppearance: Appearance) => {
     if (settings.appearance === Appearance.SYSTEM) {
@@ -54,7 +77,10 @@ export const SettingsRoute: React.FC = () => {
     'hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none';
 
   return (
-    <div className="flex flex-1 flex-col dark:bg-gray-dark dark:text-white">
+    <div
+      className="flex flex-1 flex-col dark:bg-gray-dark dark:text-white"
+      data-testid="settings"
+    >
       <div className="flex justify-between items-center mt-4 py-2 mx-8">
         <button
           className="focus:outline-none"
@@ -84,9 +110,14 @@ export const SettingsRoute: React.FC = () => {
 
         <FieldCheckbox
           name="colors"
-          label="Use colors to indicate state"
-          checked={settings.colors}
-          onChange={(evt) => updateSetting('colors', evt.target.checked)}
+          label={`Use GitHub-like state colors${
+            !colorScope ? ' (requires repo scope)' : ''
+          }`}
+          checked={colorScope && settings.colors}
+          onChange={(evt) =>
+            colorScope && updateSetting('colors', evt.target.checked)
+          }
+          disabled={!colorScope}
         />
         <FieldCheckbox
           name="showOnlyParticipating"

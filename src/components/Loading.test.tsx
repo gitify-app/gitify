@@ -1,25 +1,20 @@
-import React from 'react';
 import { render } from '@testing-library/react';
 import NProgress from 'nprogress';
+import React from 'react';
 
 import { AppContext } from '../context/App';
 import { Loading } from './Loading';
 
-jest.mock('nprogress', () => {
-  return {
-    configure: jest.fn(),
-    start: jest.fn(),
-    done: jest.fn(),
-    remove: jest.fn(),
-  };
-});
+jest.mock('nprogress', () => ({
+  configure: jest.fn(),
+  start: jest.fn(),
+  done: jest.fn(),
+  remove: jest.fn(),
+}));
 
 describe('components/Loading.js', () => {
   beforeEach(() => {
-    NProgress.configure.mockReset();
-    NProgress.start.mockReset();
-    NProgress.done.mockReset();
-    NProgress.remove.mockReset();
+    jest.clearAllMocks();
   });
 
   it('should check that NProgress is getting called in when isFetching changes (loading)', () => {

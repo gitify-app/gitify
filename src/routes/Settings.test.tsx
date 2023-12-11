@@ -1,41 +1,47 @@
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
-import TestRenderer, { act } from 'react-test-renderer';
-import { render, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
 const { ipcRenderer } = require('electron');
 
-import { SettingsRoute } from './Settings';
+import { AxiosResponse } from 'axios';
+import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { AppContext } from '../context/App';
-import { mockSettings } from '../__mocks__/mock-state';
+import * as apiRequests from '../utils/api-requests';
+import Constants from '../utils/constants';
+import { SettingsRoute } from './Settings';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
+jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
+  headers: {
+    'x-oauth-scopes': Constants.AUTH_SCOPE.join(', '),
+  },
+} as unknown as AxiosResponse);
 
 describe('routes/Settings.tsx', () => {
   const updateSetting = jest.fn();
 
   beforeEach(() => {
-    mockNavigate.mockReset();
-    updateSetting.mockReset();
+    jest.clearAllMocks();
   });
 
   it('should render itself & its children', async () => {
-    let tree: TestRenderer;
-
     await act(async () => {
-      tree = TestRenderer.create(
-        <AppContext.Provider value={{ settings: mockSettings }}>
+      render(
+        <AppContext.Provider
+          value={{ settings: mockSettings, accounts: mockAccounts }}
+        >
           <MemoryRouter>
             <SettingsRoute />
           </MemoryRouter>
         </AppContext.Provider>,
       );
     });
-    expect(tree).toMatchSnapshot();
+    expect(screen.getByTestId('settings')).toMatchSnapshot();
   });
 
   it('should press the logout', async () => {
@@ -45,7 +51,11 @@ describe('routes/Settings.tsx', () => {
     await act(async () => {
       const { getByLabelText: getByLabelTextLocal } = render(
         <AppContext.Provider
-          value={{ settings: mockSettings, logout: logoutMock }}
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            logout: logoutMock,
+          }}
         >
           <MemoryRouter>
             <SettingsRoute />
@@ -70,7 +80,12 @@ describe('routes/Settings.tsx', () => {
 
     await act(async () => {
       const { getByLabelText: getByLabelTextLocal } = render(
-        <AppContext.Provider value={{ settings: mockSettings }}>
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+          }}
+        >
           <MemoryRouter>
             <SettingsRoute />
           </MemoryRouter>
@@ -88,7 +103,13 @@ describe('routes/Settings.tsx', () => {
 
     await act(async () => {
       const { getByLabelText: getByLabelTextLocal } = render(
-        <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
           <MemoryRouter>
             <SettingsRoute />
           </MemoryRouter>
@@ -110,7 +131,13 @@ describe('routes/Settings.tsx', () => {
 
     await act(async () => {
       const { getByLabelText: getByLabelTextLocal } = render(
-        <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
           <MemoryRouter>
             <SettingsRoute />
           </MemoryRouter>
@@ -132,7 +159,13 @@ describe('routes/Settings.tsx', () => {
 
     await act(async () => {
       const { getByLabelText: getByLabelTextLocal } = render(
-        <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
           <MemoryRouter>
             <SettingsRoute />
           </MemoryRouter>
@@ -154,7 +187,13 @@ describe('routes/Settings.tsx', () => {
 
     await act(async () => {
       const { getByLabelText: getByLabelTextLocal } = render(
-        <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
           <MemoryRouter>
             <SettingsRoute />
           </MemoryRouter>
@@ -176,7 +215,13 @@ describe('routes/Settings.tsx', () => {
 
     await act(async () => {
       const { getByLabelText: getByLabelTextLocal } = render(
-        <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
           <MemoryRouter>
             <SettingsRoute />
           </MemoryRouter>
@@ -198,7 +243,13 @@ describe('routes/Settings.tsx', () => {
 
     await act(async () => {
       const { getByLabelText: getByLabelTextLocal } = render(
-        <AppContext.Provider value={{ settings: mockSettings, updateSetting }}>
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
           <MemoryRouter>
             <SettingsRoute />
           </MemoryRouter>
@@ -218,7 +269,12 @@ describe('routes/Settings.tsx', () => {
 
     await act(async () => {
       const { getByLabelText: getByLabelTextLocal } = render(
-        <AppContext.Provider value={{ settings: mockSettings }}>
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+          }}
+        >
           <MemoryRouter>
             <SettingsRoute />
           </MemoryRouter>
@@ -238,7 +294,9 @@ describe('routes/Settings.tsx', () => {
 
     await act(async () => {
       const { getByLabelText: getByLabelTextLocal } = render(
-        <AppContext.Provider value={{ settings: mockSettings }}>
+        <AppContext.Provider
+          value={{ settings: mockSettings, accounts: mockAccounts }}
+        >
           <MemoryRouter>
             <SettingsRoute />
           </MemoryRouter>
@@ -249,5 +307,87 @@ describe('routes/Settings.tsx', () => {
 
     fireEvent.click(getByLabelText('Quit Gitify'));
     expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
+  });
+
+  it('should be able to enable colors', async () => {
+    jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
+      headers: {
+        'x-oauth-scopes': Constants.AUTH_SCOPE.join(', '),
+      },
+    } as unknown as AxiosResponse);
+
+    await act(async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+    });
+
+    await screen.findByLabelText('Use GitHub-like state colors');
+
+    fireEvent.click(screen.getByLabelText('Use GitHub-like state colors'));
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('colors', true);
+  });
+
+  it('should not be able to enable colors due to missing scope', async () => {
+    jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
+      headers: {
+        'x-oauth-scopes': 'read:user, notifications',
+      },
+    } as unknown as AxiosResponse);
+
+    await act(async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+    });
+
+    expect(
+      screen
+        .getByLabelText('Use GitHub-like state colors (requires repo scope)')
+        .closest('input'),
+    ).toHaveProperty('disabled', true);
+
+    // click the checkbox
+    fireEvent.click(
+      screen.getByLabelText(
+        'Use GitHub-like state colors (requires repo scope)',
+      ),
+    );
+
+    // check if the checkbox is still unchecked
+    expect(updateSetting).not.toHaveBeenCalled();
+    expect(
+      screen.getByLabelText(
+        'Use GitHub-like state colors (requires repo scope)',
+      ),
+    ).not.toBe('checked');
+
+    expect(
+      screen.getByLabelText(
+        'Use GitHub-like state colors (requires repo scope)',
+      ).parentNode.parentNode,
+    ).toMatchSnapshot();
   });
 });
