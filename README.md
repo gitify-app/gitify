@@ -14,15 +14,6 @@ brew install --cask gitify
 
 Gitify supports macOS, Windows and Linux.
 
-### Prerequisites & Libraries
-
-- Node 18+
-- [PNPM](https://pnpm.io/)
-- [Electron](https://electronjs.org/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [React](https://reactjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-
 ### Installation
 
     pnpm install
@@ -54,6 +45,7 @@ The release process is automated. Follow the steps below.
 ### Tests
 
 There are 2 checks - one for prettier and one for the unit tests with `jest`.
+
 ```
     // Run prettier to check
     pnpm prettier:check
@@ -61,7 +53,7 @@ There are 2 checks - one for prettier and one for the unit tests with `jest`.
     // Run linter & unit tests with coverage
     pnpm test
 
-    // If you want to pass arguments to jest (or other `pnpm` commands) 
+    // If you want to pass arguments to jest (or other `pnpm` commands)
     // like `--watch`, you can prepend `--` to the command
     pnpm test -- --watch
 ```
