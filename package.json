@@ -116,8 +116,10 @@
     "@testing-library/react": "14.0.0",
     "@types/jest": "29.5.10",
     "@types/node": "18.18.0",
+    "@types/nprogress": "^0.2.3",
     "@types/react": "18.2.42",
     "@types/react-router-dom": "5.3.3",
+    "@types/react-test-renderer": "^18.0.7",
     "@types/react-transition-group": "4.4.7",
     "autoprefixer": "10.4.16",
     "css-loader": "6.8.1",
@@ -138,7 +140,7 @@
     "webpack-cli": "5.1.4",
     "webpack-merge": "5.9.0"
   },
-  "packageManager": "pnpm@8.9.0",
+  "packageManager": "pnpm@8.11.0",
   "lint-staged": {
     "*.{md,js,ts,tsx}": "prettier --write"
   }

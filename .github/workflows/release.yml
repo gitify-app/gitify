@@ -7,46 +7,22 @@ on:
 
 jobs:
   release-macos:
+    name: Publish macOS (electron-builder)
     runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version-file: .nvmrc
-
       - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
+      - uses: actions/setup-node@v4
         with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm build
         env:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
-        run: pnpm build
-
-      - name: Publish macOS (electron-builder)
+      - run: pnpm make:macos --publish onTagOrDraft
         env:
           APPLEID_USERNAME: ${{ secrets.appleid_username }}
           APPLEID_PASSWORD: ${{ secrets.appleid_password }}
@@ -54,94 +30,43 @@ jobs:
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
           GH_TOKEN: ${{ secrets.gh_token }}
           NOTARIZE: true
-        run: pnpm make:macos --publish onTagOrDraft
 
   release-windows:
+    name: Publish Windows (electron-builder)
     runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version-file: .nvmrc
-
       - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
+      - uses: actions/setup-node@v4
         with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm build
         env:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
-        run: pnpm build
-
-      - name: Publish Windows (electron-builder)
+      - run: pnpm make:win --publish onTagOrDraft
         env:
           GH_TOKEN: ${{ secrets.gh_token }}
-        run: pnpm make:win --publish onTagOrDraft
 
   release-linux:
+    name: Publish Linux (electron-builder)
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
-
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version-file: .nvmrc
-
       - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
+      - uses: actions/setup-node@v4
         with:
-          run_install: false
-
-      - name: Get pnpm store directory
-        id: pnpm-cache
-        shell: bash
-        run: |
-          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v3
-        name: Setup pnpm cache
-        with:
-          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-store-
-
-      - name: Install dependencies
-        run: pnpm install
-
-      - name: Build
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm build
         env:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
-        run: pnpm build
-
-      - name: Publish Linuxs (electron-builder)
+      - run: pnpm make:linux --publish onTagOrDraft
         env:
           GH_TOKEN: ${{ secrets.gh_token }}
-        run: pnpm make:linux --publish onTagOrDraft
