@@ -23,13 +23,15 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: gitify-app/website
+          token: ${{ secrets.GH_TOKEN }}
       - uses: pnpm/action-setup@v2
       - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
       - id: version
-        run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
+        run: echo "version=$(echo "4.5.2")" >> $GITHUB_OUTPUT
+        # run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
       - name: setup git config
         run: |
           git config user.name "Gitify Version Bot"
@@ -40,20 +42,12 @@ jobs:
       - uses: actions/github-script@v6
         with:
           script: |
-            github.repos.createPullRequest({
+            github.rest.pulls.create({
               owner: 'gitify-app',
               repo: 'website',
               title: `deps: bump gitify version to ${{ steps.version.outputs.version }}`,
               head: `bump/${{ steps.version.outputs.version }}`,
               base: 'main',
               body: `Bump gitify version to ${{ steps.version.outputs.version }}`,
-              draft: false,
               maintainer_can_modify: true,
-            })
-
-            github.issues.addAssignees({
-              owner: 'gitify-app',
-              repo: 'website',
-              issue_number: context.payload.pull_request.number,
-              assignees: ['afonsojramos'],
             })
