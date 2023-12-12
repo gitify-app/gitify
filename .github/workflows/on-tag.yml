@@ -28,13 +28,12 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
-          cache: 'pnpm'
       - id: version
         run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
       - name: setup git config
         run: |
-          git config user.name "Gitify Version Bot"
-          git config user.email "<>"
+          git config user.name github-actions
+          git config user.email github-actions@github.com
       - run: git checkout -b "bump/${{ steps.version.outputs.version }}"
       - run: pnpm version ${{ steps.version.outputs.version }}
       - run: git push origin "bump/${{ steps.version.outputs.version }}"
