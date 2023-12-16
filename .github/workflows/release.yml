@@ -26,6 +26,7 @@ jobs:
         env:
           APPLEID_USERNAME: ${{ secrets.appleid_username }}
           APPLEID_PASSWORD: ${{ secrets.appleid_password }}
+          APPLEID_TEAM_ID: ${{ secrets.appleid_teamid }}
           CSC_LINK: ${{ secrets.mac_certs }}
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
           GH_TOKEN: ${{ secrets.gh_token }}
