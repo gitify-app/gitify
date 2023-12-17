@@ -24,7 +24,6 @@ const notarizeApp = async (context) => {
     appleId: process.env.APPLEID_USERNAME,
     appleIdPassword: process.env.APPLEID_PASSWORD,
     teamId: process.env.APPLEID_TEAM_ID,
-    
     tool: 'notarytool',
   });
 };
