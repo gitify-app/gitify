@@ -23,6 +23,7 @@ const notarizeApp = async (context) => {
     appPath: `${appOutDir}/${appName}.app`,
     appleId: process.env.APPLEID_USERNAME,
     appleIdPassword: process.env.APPLEID_PASSWORD,
+    teamId: process.env.APPLEID_TEAM_ID,
     tool: 'notarytool',
   });
 };
