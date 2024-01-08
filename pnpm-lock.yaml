@@ -68,7 +68,7 @@ devDependencies:
     specifier: 20.10.6
     version: 20.10.6
   '@types/nprogress':
-    specifier: ^0.2.3
+    specifier: 0.2.3
     version: 0.2.3
   '@types/react':
     specifier: 18.2.46
@@ -77,7 +77,7 @@ devDependencies:
     specifier: 5.3.3
     version: 5.3.3
   '@types/react-test-renderer':
-    specifier: ^18.0.7
+    specifier: 18.0.7
     version: 18.0.7
   '@types/react-transition-group':
     specifier: 4.4.10
@@ -89,7 +89,7 @@ devDependencies:
     specifier: 6.8.1
     version: 6.8.1(webpack@5.89.0)
   electron:
-    specifier: ^22.3.27
+    specifier: 22.3.27
     version: 22.3.27
   electron-builder:
     specifier: 24.9.4
@@ -2680,15 +2680,6 @@ packages:
     engines: {node: 6.* || 8.* || >= 10.*}
     dev: true
 
-  /get-intrinsic@1.2.1:
-    resolution: {integrity: sha512-2DcsyfABl+gVHEfCOaTrWgyt+tb6MSEGmKq+kI5HwLbIYgjgmMcV8KQ41uaKz1xxUcn9tJtgFbQUEVcEbd0FYw==}
-    requiresBuild: true
-    dependencies:
-      function-bind: 1.1.2
-      has: 1.0.3
-      has-proto: 1.0.1
-      has-symbols: 1.0.3
-
   /get-intrinsic@1.2.2:
     resolution: {integrity: sha512-0gSo4ml/0j98Y3lngkFEot/zhiCeWsbYIlZ+uZOVgzLyLaUw7wxUL+nCTP0XJvJg1AXulJRI3UJi8GsbDuxdGA==}
     requiresBuild: true
@@ -2782,7 +2773,7 @@ packages:
   /gopd@1.0.1:
     resolution: {integrity: sha512-d65bNlIadxvpb/A2abVdlqKqV563juRnZ1Wtk6s1sIR8uNsXR70xqIzVqxVf1eTqDunwT2MkczEeaezCKTZhwA==}
     dependencies:
-      get-intrinsic: 1.2.1
+      get-intrinsic: 1.2.2
 
   /got@11.8.6:
     resolution: {integrity: sha512-6tfZ91bOr7bOXnK7PRDCGBLa1H4U080YHNaAQ2KsMGlLEzRbk44nsZF2E1IeRc3vtJHPVbKCYgdFbaGO2ljd8g==}
