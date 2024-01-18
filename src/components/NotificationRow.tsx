@@ -20,8 +20,13 @@ export const NotificationRow: React.FC<IProps> = ({
   notification,
   hostname,
 }) => {
-  const { settings, accounts, markNotification, unsubscribeNotification } =
-    useContext(AppContext);
+  const {
+    settings,
+    accounts,
+    markNotification,
+    markNotificationDone,
+    unsubscribeNotification,
+  } = useContext(AppContext);
 
   const pressTitle = useCallback(() => {
     openBrowser();
@@ -85,7 +90,7 @@ export const NotificationRow: React.FC<IProps> = ({
         </div>
       </div>
 
-      <div className="flex justify-center items-center w-8">
+      <div className="flex justify-center items-center gap-2">
         <button
           className="focus:outline-none"
           title="Mark as Read"
@@ -95,6 +100,18 @@ export const NotificationRow: React.FC<IProps> = ({
             className="hover:text-green-500"
             size={20}
             aria-label="Mark as Read"
+          />
+        </button>
+
+        <button
+          className="focus:outline-none"
+          title="Mark as Done"
+          onClick={() => markNotificationDone(notification.id, hostname)}
+        >
+          <CheckIcon
+            className="hover:text-green-500"
+            size={16}
+            aria-label="Mark as Done"
           />
         </button>
       </div>

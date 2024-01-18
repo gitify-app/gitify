@@ -28,6 +28,11 @@ interface NotificationsState {
     id: string,
     hostname: string,
   ) => Promise<void>;
+  markNotificationDone: (
+    accounts: AuthState,
+    id: string,
+    hostname: string,
+  ) => Promise<void>;
   unsubscribeNotification: (
     accounts: AuthState,
     id: string,
@@ -215,6 +220,39 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     [notifications],
   );
 
+  const markNotificationDone = useCallback(
+    async (accounts, id, hostname) => {
+      setIsFetching(true);
+
+      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const token = isEnterprise
+        ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
+        : accounts.token;
+
+      try {
+        await apiRequestAuth(
+          `${generateGitHubAPIUrl(hostname)}notifications/threads/${id}`,
+          'DELETE',
+          token,
+          {},
+        );
+
+        const updatedNotifications = removeNotification(
+          id,
+          notifications,
+          hostname,
+        );
+
+        setNotifications(updatedNotifications);
+        setTrayIconColor(updatedNotifications);
+        setIsFetching(false);
+      } catch (err) {
+        setIsFetching(false);
+      }
+    },
+    [notifications],
+  );
+
   const unsubscribeNotification = useCallback(
     async (accounts, id, hostname) => {
       setIsFetching(true);
@@ -281,6 +319,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
 
     fetchNotifications,
     markNotification,
+    markNotificationDone,
     unsubscribeNotification,
     markRepoNotifications,
   };

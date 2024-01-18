@@ -53,6 +53,7 @@ interface AppContextState {
   requestFailed: boolean;
   fetchNotifications: () => Promise<void>;
   markNotification: (id: string, hostname: string) => Promise<void>;
+  markNotificationDone: (id: string, hostname: string) => Promise<void>;
   unsubscribeNotification: (id: string, hostname: string) => Promise<void>;
   markRepoNotifications: (id: string, hostname: string) => Promise<void>;
 
@@ -71,6 +72,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     requestFailed,
     isFetching,
     markNotification,
+    markNotificationDone,
     unsubscribeNotification,
     markRepoNotifications,
   } = useNotifications(settings.colors);
@@ -177,6 +179,12 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     [accounts, notifications],
   );
 
+  const markNotificationDoneWithAccounts = useCallback(
+    async (id: string, hostname: string) =>
+      await markNotificationDone(accounts, id, hostname),
+    [accounts, notifications],
+  );
+
   const unsubscribeNotificationWithAccounts = useCallback(
     async (id: string, hostname: string) =>
       await unsubscribeNotification(accounts, id, hostname),
@@ -204,6 +212,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         requestFailed,
         fetchNotifications: fetchNotificationsWithAccounts,
         markNotification: markNotificationWithAccounts,
+        markNotificationDone: markNotificationDoneWithAccounts,
         unsubscribeNotification: unsubscribeNotificationWithAccounts,
         markRepoNotifications: markRepoNotificationsWithAccounts,
 
