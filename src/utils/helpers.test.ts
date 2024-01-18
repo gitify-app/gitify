@@ -59,7 +59,7 @@ describe('utils/helpers.ts', () => {
     it('should generate the GitHub url - non enterprise - (release)', () =>
       testGenerateUrl(
         `${URL.normal.api}/releases/3988077`,
-        `${URL.normal.default}/releases?${notificationReferrerId}`,
+        `${URL.normal.default}/releases/3988077?${notificationReferrerId}`,
       ));
 
     it('should generate the GitHub url - non enterprise - (discussion)', () =>
@@ -83,7 +83,7 @@ describe('utils/helpers.ts', () => {
     it('should generate the GitHub url - enterprise - (release)', () =>
       testGenerateUrl(
         `${URL.enterprise.api}/releases/1`,
-        `${URL.enterprise.default}/releases?${notificationReferrerId}`,
+        `${URL.enterprise.default}/releases/1?${notificationReferrerId}`,
       ));
 
     it('should generate the GitHub url - enterprise - (discussion)', () =>
