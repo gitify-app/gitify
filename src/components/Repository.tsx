@@ -1,7 +1,7 @@
 const { shell } = require('electron');
 
 import React, { useCallback, useContext } from 'react';
-import { CheckIcon } from '@primer/octicons-react';
+import { ReadIcon } from '@primer/octicons-react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { AppContext } from '../context/App';
@@ -43,9 +43,9 @@ export const RepositoryNotifications: React.FC<IProps> = ({
 
         <div className="flex w-8 justify-center items-center">
           <button className="focus:outline-none" onClick={markRepoAsRead}>
-            <CheckIcon
+            <ReadIcon
               className="hover:text-green-500"
-              size={20}
+              size={16}
               aria-label="Mark Repository as Read"
             />
           </button>

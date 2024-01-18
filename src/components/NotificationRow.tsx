@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import { CheckIcon, MuteIcon } from '@primer/octicons-react';
+import { CheckIcon, MuteIcon, ReadIcon } from '@primer/octicons-react';
 
 import {
   formatReason,
@@ -96,9 +96,9 @@ export const NotificationRow: React.FC<IProps> = ({
           title="Mark as Read"
           onClick={() => markNotification(notification.id, hostname)}
         >
-          <CheckIcon
+          <ReadIcon
             className="hover:text-green-500"
-            size={20}
+            size={14}
             aria-label="Mark as Read"
           />
         </button>
