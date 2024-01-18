@@ -104,6 +104,31 @@ describe('components/Notification.js', () => {
     expect(markNotification).toHaveBeenCalledTimes(1);
   });
 
+  it('should mark a notification as done', () => {
+    const markNotificationDone = jest.fn();
+
+    const props = {
+      notification: mockedSingleNotification,
+      hostname: 'github.com',
+    };
+
+    const { getByTitle } = render(
+      <AppContext.Provider
+        value={{
+          settings: { ...mockSettings, markOnClick: false },
+          accounts: mockAccounts,
+        }}
+      >
+        <AppContext.Provider value={{ markNotificationDone }}>
+          <NotificationRow {...props} />
+        </AppContext.Provider>
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(getByTitle('Mark as Done'));
+    expect(markNotificationDone).toHaveBeenCalledTimes(1);
+  });
+
   it('should unsubscribe from a notification thread', () => {
     const unsubscribeNotification = jest.fn();
 
