@@ -41,7 +41,7 @@ describe('components/Notification.js', () => {
     const { getByRole } = render(
       <AppContext.Provider
         value={{
-          settings: { ...mockSettings },
+          settings: mockSettings,
           markNotification,
           accounts: mockAccounts,
         }}
@@ -65,7 +65,7 @@ describe('components/Notification.js', () => {
     const { getByTitle } = render(
       <AppContext.Provider
         value={{
-          settings: { ...mockSettings },
+          settings: mockSettings,
           accounts: mockAccounts,
         }}
       >

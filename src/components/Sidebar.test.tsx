@@ -35,7 +35,7 @@ describe('components/Sidebar.tsx', () => {
     const tree = TestRenderer.create(
       <AppContext.Provider
         value={{
-          settings: { ...mockSettings },
+          settings: mockSettings,
           notifications: mockedAccountNotifications,
         }}
       >
