@@ -15,8 +15,8 @@ dependencies:
     specifier: 1.6.5
     version: 1.6.5
   date-fns:
-    specifier: 2.30.0
-    version: 2.30.0
+    specifier: 3.2.0
+    version: 3.2.0
   electron-updater:
     specifier: 6.1.7
     version: 6.1.7
@@ -2082,11 +2082,8 @@ packages:
       whatwg-url: 11.0.0
     dev: true
 
-  /date-fns@2.30.0:
-    resolution: {integrity: sha512-fnULvOpxnC5/Vg3NCiWelDsLiUc9bRwAPs/+LfTLNvetFCtCTN+yQz15C/fs4AwX1R9K5GLtLfn8QW+dWisaAw==}
-    engines: {node: '>=0.11'}
-    dependencies:
-      '@babel/runtime': 7.21.5
+  /date-fns@3.2.0:
+    resolution: {integrity: sha512-E4KWKavANzeuusPi0jUjpuI22SURAznGkx7eZV+4i6x2A+IZxAMcajgkvuDAU1bg40+xuhW1zRdVIIM/4khuIg==}
     dev: false
 
   /debug@4.3.4:
