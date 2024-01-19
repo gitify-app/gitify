@@ -54,56 +54,6 @@ describe('components/Notification.js', () => {
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
   });
 
-  it('should open a notification in browser & mark it as read', () => {
-    const markNotification = jest.fn();
-
-    const props = {
-      notification: mockedSingleNotification,
-      hostname: 'github.com',
-    };
-
-    const { getByRole } = render(
-      <AppContext.Provider
-        value={{
-          settings: { ...mockSettings, markOnClick: true },
-          markNotification,
-          accounts: mockAccounts,
-        }}
-      >
-        <NotificationRow {...props} />
-      </AppContext.Provider>,
-    );
-
-    fireEvent.click(getByRole('main'));
-    expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(markNotification).toHaveBeenCalledTimes(1);
-  });
-
-  it('should mark a notification as read', () => {
-    const markNotification = jest.fn();
-
-    const props = {
-      notification: mockedSingleNotification,
-      hostname: 'github.com',
-    };
-
-    const { getByTitle } = render(
-      <AppContext.Provider
-        value={{
-          settings: { ...mockSettings, markOnClick: false },
-          accounts: mockAccounts,
-        }}
-      >
-        <AppContext.Provider value={{ markNotification }}>
-          <NotificationRow {...props} />
-        </AppContext.Provider>
-      </AppContext.Provider>,
-    );
-
-    fireEvent.click(getByTitle('Mark as Read'));
-    expect(markNotification).toHaveBeenCalledTimes(1);
-  });
-
   it('should unsubscribe from a notification thread', () => {
     const unsubscribeNotification = jest.fn();
 

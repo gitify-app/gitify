@@ -238,29 +238,6 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
       >
         <input
           class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          id="onClickMarkAsRead"
-          type="checkbox"
-        />
-      </div>
-      <div
-        class="ml-3 text-sm"
-      >
-        <label
-          class="font-medium text-gray-700 dark:text-gray-200"
-          for="onClickMarkAsRead"
-        >
-          Mark as read on click
-        </label>
-      </div>
-    </div>
-    <div
-      class="flex items-start mt-1 mb-3"
-    >
-      <div
-        class="flex items-center h-5"
-      >
-        <input
-          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
           id="openAtStartUp"
           type="checkbox"
         />
