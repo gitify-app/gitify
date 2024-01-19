@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import { MuteIcon } from '@primer/octicons-react';
+import { CheckIcon, MuteIcon } from '@primer/octicons-react';
 
 import {
   formatReason,
@@ -25,10 +25,6 @@ export const NotificationRow: React.FC<IProps> = ({
 
   const pressTitle = useCallback(() => {
     openBrowser();
-
-    if (settings.markOnClick) {
-      markNotification(notification.id, hostname);
-    }
   }, [settings]);
 
   const openBrowser = useCallback(
@@ -83,6 +79,20 @@ export const NotificationRow: React.FC<IProps> = ({
             />
           </button>
         </div>
+      </div>
+
+      <div className="flex justify-center items-center w-8">
+        <button
+          className="focus:outline-none"
+          title="Mark as Read"
+          onClick={() => markNotification(notification.id, hostname)}
+        >
+          <CheckIcon
+            className="hover:text-green-500"
+            size={20}
+            aria-label="Mark as Read"
+          />
+        </button>
       </div>
     </div>
   );
