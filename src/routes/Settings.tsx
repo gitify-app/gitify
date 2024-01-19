@@ -139,12 +139,6 @@ export const SettingsRoute: React.FC = () => {
             updateSetting('showNotifications', evt.target.checked)
           }
         />
-        <FieldCheckbox
-          name="onClickMarkAsRead"
-          label="Mark as read on click"
-          checked={settings.markOnClick}
-          onChange={(evt) => updateSetting('markOnClick', evt.target.checked)}
-        />
         {!isLinux && (
           <FieldCheckbox
             name="openAtStartUp"

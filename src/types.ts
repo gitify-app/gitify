@@ -10,7 +10,6 @@ export interface SettingsState {
   participating: boolean;
   playSound: boolean;
   showNotifications: boolean;
-  markOnClick: boolean;
   openAtStartup: boolean;
   appearance: Appearance;
   colors: boolean;
