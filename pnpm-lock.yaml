@@ -92,8 +92,8 @@ devDependencies:
     specifier: 22.3.27
     version: 22.3.27
   electron-builder:
-    specifier: 24.9.4
-    version: 24.9.4
+    specifier: 24.11.0
+    version: 24.11.0
   husky:
     specifier: 8.0.3
     version: 8.0.3
@@ -1428,8 +1428,8 @@ packages:
     resolution: {integrity: sha512-xwdG0FJPQMe0M0UA4Tz0zEB8rBJTRA5a476ZawAqiBkMv16GRK5xpXThOjMaEOFnZ6zabejjG4J3da0SXG63KA==}
     dev: true
 
-  /app-builder-lib@24.9.4:
-    resolution: {integrity: sha512-V52ikQoqkWbuL6k9tWHJgJpQiD0407XgjkNnGeAux+rKygXgOSRn0vmK2FdzMd4wtdKHhhTIcIA0JrIdqcthAg==}
+  /app-builder-lib@24.11.0:
+    resolution: {integrity: sha512-7l1ns6QxpXxSJNvToxT291w9VR4X1YRLwTXWqyzVU+Gt3gb15cp3h7aFYk2s0krlH5wL+gS7luj7dW4Qiyr+MA==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@develar/schema-utils': 2.6.5
@@ -2207,10 +2207,10 @@ packages:
     resolution: {integrity: sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==}
     dev: true
 
-  /dmg-builder@24.9.4:
-    resolution: {integrity: sha512-fifxbQeOMkPgRrKqjkRdRYHt8ssWJh3J4DkYsA163nOMt/waUs5AgPsS4d1sX4dTPRD7Jfo4vb4wmmHjhgs8nA==}
+  /dmg-builder@24.11.0:
+    resolution: {integrity: sha512-GKu7X1aAbTFJCYcxKpO81ArZJTzfY0HE9cNPL3pUa5exue6ZIQ5Nifv0fAVvmxLx+5QRXGYIDcpKcX6/Zq+zuQ==}
     dependencies:
-      app-builder-lib: 24.9.4
+      app-builder-lib: 24.11.0
       builder-util: 24.9.4
       builder-util-runtime: 9.2.3
       fs-extra: 10.1.0
@@ -2275,16 +2275,16 @@ packages:
       jake: 10.8.6
     dev: true
 
-  /electron-builder@24.9.4:
-    resolution: {integrity: sha512-jN07OQixVt0wxvRZB4lKAsDUwPIyChhwf3CEExhCDnrIYWciw92yhIHbZkNwebuNcLxScVzH5xsCUVNrYY/LZg==}
+  /electron-builder@24.11.0:
+    resolution: {integrity: sha512-I612CjPb+P1TtQ2ATdQxSBN5ih0mxA1uMRYvx1HLqUmvaKkZ3IUF2wLWcJxY2F6EcGF33Jg9THm2QHWASfxeqg==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
-      app-builder-lib: 24.9.4
+      app-builder-lib: 24.11.0
       builder-util: 24.9.4
       builder-util-runtime: 9.2.3
       chalk: 4.1.2
-      dmg-builder: 24.9.4
+      dmg-builder: 24.11.0
       fs-extra: 10.1.0
       is-ci: 3.0.1
       lazy-val: 1.0.5
