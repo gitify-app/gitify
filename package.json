@@ -115,7 +115,7 @@
     "@electron/notarize": "1.2.4",
     "@testing-library/react": "14.1.2",
     "@types/jest": "29.5.11",
-    "@types/node": "20.10.6",
+    "@types/node": "20.11.5",
     "@types/nprogress": "0.2.3",
     "@types/react": "18.2.48",
     "@types/react-router-dom": "5.3.3",
