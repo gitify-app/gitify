@@ -286,7 +286,6 @@ describe('context/App.tsx', () => {
       { enterpriseAccounts: [], token: null, user: null },
       {
         appearance: 'SYSTEM',
-        markOnClick: false,
         openAtStartup: false,
         participating: true,
         playSound: true,
@@ -324,7 +323,6 @@ describe('context/App.tsx', () => {
       { enterpriseAccounts: [], token: null, user: null },
       {
         appearance: 'SYSTEM',
-        markOnClick: false,
         openAtStartup: true,
         participating: false,
         playSound: true,

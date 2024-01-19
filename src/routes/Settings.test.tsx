@@ -182,34 +182,6 @@ describe('routes/Settings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('showNotifications', false);
   });
 
-  it('should toggle the onClickMarkAsRead checkbox', async () => {
-    let getByLabelText;
-
-    await act(async () => {
-      const { getByLabelText: getByLabelTextLocal } = render(
-        <AppContext.Provider
-          value={{
-            settings: mockSettings,
-            accounts: mockAccounts,
-            updateSetting,
-          }}
-        >
-          <MemoryRouter>
-            <SettingsRoute />
-          </MemoryRouter>
-        </AppContext.Provider>,
-      );
-      getByLabelText = getByLabelTextLocal;
-    });
-
-    fireEvent.click(getByLabelText('Mark as read on click'), {
-      target: { checked: true },
-    });
-
-    expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('markOnClick', false);
-  });
-
   it('should toggle the openAtStartup checkbox', async () => {
     let getByLabelText;
 

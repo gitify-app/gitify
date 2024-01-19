@@ -50,11 +50,6 @@ export function generateGitHubWebUrl(
     newUrl = newUrl.replace('/pulls/', '/pull/');
   }
 
-  if (newUrl.indexOf('/releases/') !== -1) {
-    newUrl = newUrl.replace('/repos', '');
-    newUrl = newUrl.substring(0, newUrl.lastIndexOf('/'));
-  }
-
   if (userId) {
     const notificationReferrerId = generateNotificationReferrerId(
       notificationId,
@@ -72,6 +67,14 @@ const addHours = (date: string, hours: number) =>
 
 const queryString = (repo: string, title: string, lastUpdated: string) =>
   `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
+
+async function getReleaseTagWebUrl(notification: Notification, token: string) {
+  const response = await apiRequestAuth(notification.subject.url, 'GET', token);
+
+  return {
+    url: response.data.html_url,
+  };
+}
 
 async function getDiscussionUrl(
   notification: Notification,
@@ -155,16 +158,15 @@ export async function openInBrowser(
   notification: Notification,
   accounts: AuthState,
 ) {
-  if (notification.subject.url) {
-    const latestCommentId = getCommentId(
-      notification.subject.latest_comment_url,
-    );
-    openExternalLink(
-      generateGitHubWebUrl(
-        notification.subject.url,
-        notification.id,
-        accounts.user?.id,
-        latestCommentId ? '#issuecomment-' + latestCommentId : undefined,
+  if (notification.subject.type === 'Release') {
+    getReleaseTagWebUrl(notification, accounts.token).then(({ url }) =>
+      openExternalLink(
+        generateGitHubWebUrl(
+          url,
+          notification.id,
+          accounts.user?.id,
+          undefined,
+        ),
       ),
     );
   } else if (notification.subject.type === 'Discussion') {
@@ -180,6 +182,18 @@ export async function openInBrowser(
               : undefined,
           ),
         ),
+    );
+  } else if (notification.subject.url) {
+    const latestCommentId = getCommentId(
+      notification.subject.latest_comment_url,
+    );
+    openExternalLink(
+      generateGitHubWebUrl(
+        notification.subject.url,
+        notification.id,
+        accounts.user?.id,
+        latestCommentId ? '#issuecomment-' + latestCommentId : undefined,
+      ),
     );
   }
 }
