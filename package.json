@@ -128,7 +128,7 @@
     "husky": "8.0.3",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
-    "nock": "13.4.0",
+    "nock": "13.5.0",
     "postcss": "8.4.33",
     "postcss-loader": "7.3.4",
     "prettier": "3.2.4",
