@@ -4,7 +4,7 @@ const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('path');
 
-require('@electron/remote/main').initialize()
+require('@electron/remote/main').initialize();
 
 app.setAppUserModelId('com.electron.gitify');
 
@@ -12,7 +12,7 @@ const iconIdle = path.join(
   __dirname,
   'assets',
   'images',
-  'tray-idleTemplate.png'
+  'tray-idleTemplate.png',
 );
 const iconActive = path.join(__dirname, 'assets', 'images', 'tray-active.png');
 
@@ -100,7 +100,7 @@ menubarApp.on('ready', () => {
     const trayBounds = menubarApp.tray.getBounds();
     menubarApp.window.setSize(
       browserWindowOpts.width,
-      browserWindowOpts.height
+      browserWindowOpts.height,
     );
     menubarApp.positioner.move('trayCenter', trayBounds);
     menubarApp.window.resizable = false;
