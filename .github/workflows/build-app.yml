@@ -33,6 +33,7 @@ jobs:
         with:
           name: Gitify-dist-mac
           path: dist/
+          overwrite: true
 
   build-windows:
     name: Build Windows (electron-builder)
@@ -54,6 +55,7 @@ jobs:
         with:
           name: Gitify-dist-win
           path: dist
+          overwrite: true
 
   build-linux:
     name: Build Linux (electron-builder)
@@ -75,3 +77,4 @@ jobs:
         with:
           name: Gitify-dist-linux
           path: dist
+          overwrite: true
