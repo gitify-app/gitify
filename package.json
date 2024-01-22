@@ -112,7 +112,7 @@
     "typescript": "5.3.3"
   },
   "devDependencies": {
-    "@electron/notarize": "1.2.4",
+    "@electron/notarize": "2.2.0",
     "@testing-library/react": "14.1.2",
     "@types/jest": "29.5.11",
     "@types/node": "20.11.5",
