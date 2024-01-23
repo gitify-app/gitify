@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@electron/remote':
     specifier: 2.1.1
-    version: 2.1.1(electron@22.3.27)
+    version: 2.1.1(electron@27.2.4)
   '@primer/octicons-react':
     specifier: 19.8.0
     version: 19.8.0(react@18.2.0)
@@ -25,7 +25,7 @@ dependencies:
     version: 4.20.10
   menubar:
     specifier: 9.4.0
-    version: 9.4.0(electron@22.3.27)
+    version: 9.4.0(electron@27.2.4)
   nprogress:
     specifier: 0.2.0
     version: 0.2.0
@@ -89,8 +89,8 @@ devDependencies:
     specifier: 6.9.1
     version: 6.9.1(webpack@5.89.0)
   electron:
-    specifier: 22.3.27
-    version: 22.3.27
+    specifier: 27.2.4
+    version: 27.2.4
   electron-builder:
     specifier: 24.11.0
     version: 24.11.0
@@ -570,12 +570,12 @@ packages:
       - supports-color
     dev: true
 
-  /@electron/remote@2.1.1(electron@22.3.27):
+  /@electron/remote@2.1.1(electron@27.2.4):
     resolution: {integrity: sha512-Lfxul2yBxL+FBVaKszNAkuUqSIDbUQ1I7BC394iRXyqA2XGz7im2bAxroNIM51jhySSPKUaOLHaFLxfV6pC9VQ==}
     peerDependencies:
       electron: '>= 13.0.0'
     dependencies:
-      electron: 22.3.27
+      electron: 27.2.4
     dev: false
 
   /@electron/universal@1.4.1:
@@ -1094,8 +1094,10 @@ packages:
     resolution: {integrity: sha512-iiUgKzV9AuaEkZqkOLDIvlQiL6ltuZd9tGcW3gwpnX8JbuiuhFlEGmmFXEXkN50Cvq7Os88IY2v0dkDqXYWVgA==}
     dev: true
 
-  /@types/node@16.18.68:
-    resolution: {integrity: sha512-sG3hPIQwJLoewrN7cr0dwEy+yF5nD4D/4FxtQpFciRD/xwUzgD+G05uxZHv5mhfXo4F9Jkp13jjn0CC2q325sg==}
+  /@types/node@18.19.8:
+    resolution: {integrity: sha512-g1pZtPhsvGVTwmeVoexWZLTQaOvXwoSq//pTL0DHeNzUDrFnir4fgETdhjhIxjVnN+hKOuh98+E1eMLnUXstFg==}
+    dependencies:
+      undici-types: 5.26.5
 
   /@types/node@20.11.5:
     resolution: {integrity: sha512-g557vgQjUUfN76MZAN/dt1z3dzcUsimuysco0KeluHgrPdJXkP/XdAURgyO2W9fZWHRtRBiVKzKn8vyOAwlG+w==}
@@ -2333,14 +2335,14 @@ packages:
       - supports-color
     dev: false
 
-  /electron@22.3.27:
-    resolution: {integrity: sha512-7Rht21vHqj4ZFRnKuZdFqZFsvMBCmDqmjetiMqPtF+TmTBiGne1mnstVXOA/SRGhN2Qy5gY5bznJKpiqogjM8A==}
+  /electron@27.2.4:
+    resolution: {integrity: sha512-oxzd4Aba5N1NrAEubGgRLaYJqA9atmq8Kn61pH7Jc87IXlWaw/G9/Fy6pxZFlGovhZiyjj5WeD7FBWev4ZErmQ==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
     requiresBuild: true
     dependencies:
       '@electron/get': 2.0.3
-      '@types/node': 16.18.68
+      '@types/node': 18.19.8
       extract-zip: 2.0.1
     transitivePeerDependencies:
       - supports-color
@@ -3915,12 +3917,12 @@ packages:
       escape-string-regexp: 4.0.0
     optional: true
 
-  /menubar@9.4.0(electron@22.3.27):
+  /menubar@9.4.0(electron@27.2.4):
     resolution: {integrity: sha512-Zn2si5UXiWbdBZwFSsCyQ8xfaBKkeFYceNvjWATyMUreqv6gDMUvDkvZY/ZFf89DCfo9F0SrvygDOdpZuwoWgw==}
     peerDependencies:
       electron: ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0 ||  ^23.0.0 || ^24.0.0 || ^25.0.0 || ^26.0.0 || ^27.0.0
     dependencies:
-      electron: 22.3.27
+      electron: 27.2.4
       electron-positioner: 4.1.0
     dev: false
 
