@@ -90,7 +90,7 @@ describe('components/Notification.js', () => {
     const { getByTitle } = render(
       <AppContext.Provider
         value={{
-          settings: { ...mockSettings, markOnClick: false },
+          settings: { ...mockSettings },
           accounts: mockAccounts,
         }}
       >
