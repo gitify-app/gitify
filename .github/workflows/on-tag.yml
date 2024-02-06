@@ -7,7 +7,7 @@ on:
 jobs:
   pr-to-homebrew:
     name: Homebrew
-    runs-on: macos-latest
+    runs-on: macos-14
     steps:
       - uses: Homebrew/actions/setup-homebrew@master
       - id: version

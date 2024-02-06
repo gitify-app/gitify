@@ -8,7 +8,7 @@ on:
 jobs:
   release-macos:
     name: Publish macOS (electron-builder)
-    runs-on: macos-latest
+    runs-on: macos-14
 
     steps:
       - uses: actions/checkout@v4
