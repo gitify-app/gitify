@@ -37,6 +37,7 @@ export const defaultSettings: SettingsState = {
   openAtStartup: false,
   appearance: Appearance.SYSTEM,
   colors: false,
+  markAsDoneOnOpen: false,
 };
 
 interface AppContextState {

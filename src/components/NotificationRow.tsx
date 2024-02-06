@@ -30,6 +30,10 @@ export const NotificationRow: React.FC<IProps> = ({
 
   const pressTitle = useCallback(() => {
     openBrowser();
+
+    if (settings.markAsDoneOnOpen) {
+      markNotificationDone(notification.id, hostname);
+    }
   }, [settings]);
 
   const openBrowser = useCallback(

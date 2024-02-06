@@ -291,6 +291,7 @@ describe('context/App.tsx', () => {
         playSound: true,
         showNotifications: true,
         colors: false,
+        markAsDoneOnOpen: false,
       },
     );
   });
@@ -328,6 +329,7 @@ describe('context/App.tsx', () => {
         playSound: true,
         showNotifications: true,
         colors: false,
+        markAsDoneOnOpen: false,
       },
     );
   });
