@@ -55,40 +55,40 @@ exports[`components/Notification.js should render itself & its children 1`] = `
        - Updated
        
       in over 3 years
-      <button
-        className="border-0 bg-none float-right"
-        onClick={[Function]}
-        title="Unsubscribe"
-      >
-        <svg
-          aria-hidden="false"
-          aria-label="Unsubscribe"
-          className="hover:text-red-500"
-          fill="currentColor"
-          focusable="false"
-          height={13}
-          role="img"
-          style={
-            {
-              "display": "inline-block",
-              "overflow": "visible",
-              "userSelect": "none",
-              "verticalAlign": "text-bottom",
-            }
-          }
-          viewBox="0 0 16 16"
-          width={13}
-        >
-          <path
-            d="M8 2.75v10.5a.751.751 0 0 1-1.238.57L3.473 11H1.75A1.75 1.75 0 0 1 0 9.25v-2.5C0 5.784.784 5 1.75 5h1.722l3.29-2.82A.75.75 0 0 1 8 2.75Zm3.28 2.47L13 6.94l1.72-1.72a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L14.06 8l1.72 1.72a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L13 9.06l-1.72 1.72a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L11.94 8l-1.72-1.72a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215Zm-7.042 1.1a.752.752 0 0 1-.488.18h-2a.25.25 0 0 0-.25.25v2.5c0 .138.112.25.25.25h2c.179 0 .352.064.488.18L6.5 11.62V4.38Z"
-          />
-        </svg>
-      </button>
     </div>
   </div>
   <div
     className="flex justify-center items-center gap-2"
   >
+    <button
+      className="focus:outline-none"
+      onClick={[Function]}
+      title="Mark as Done"
+    >
+      <svg
+        aria-hidden="false"
+        aria-label="Mark as Done"
+        className="hover:text-green-500"
+        fill="currentColor"
+        focusable="false"
+        height={16}
+        role="img"
+        style={
+          {
+            "display": "inline-block",
+            "overflow": "visible",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 16 16"
+        width={16}
+      >
+        <path
+          d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+        />
+      </svg>
+    </button>
     <button
       className="focus:outline-none"
       onClick={[Function]}
@@ -119,17 +119,17 @@ exports[`components/Notification.js should render itself & its children 1`] = `
       </svg>
     </button>
     <button
-      className="focus:outline-none"
+      className="border-0 bg-none float-right"
       onClick={[Function]}
-      title="Mark as Done"
+      title="Unsubscribe"
     >
       <svg
         aria-hidden="false"
-        aria-label="Mark as Done"
-        className="hover:text-green-500"
+        aria-label="Unsubscribe"
+        className="hover:text-red-500"
         fill="currentColor"
         focusable="false"
-        height={16}
+        height={14}
         role="img"
         style={
           {
@@ -140,10 +140,10 @@ exports[`components/Notification.js should render itself & its children 1`] = `
           }
         }
         viewBox="0 0 16 16"
-        width={16}
+        width={14}
       >
         <path
-          d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+          d="m4.182 4.31.016.011 10.104 7.316.013.01 1.375.996a.75.75 0 1 1-.88 1.214L13.626 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947V5.305L.31 3.357a.75.75 0 1 1 .88-1.214Zm7.373 7.19L4.5 6.391v1.556c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01c0 .005.002.009.005.012l.006.004.007.001ZM8 1.5c-.997 0-1.895.416-2.534 1.086A.75.75 0 1 1 4.38 1.55 5 5 0 0 1 13 5v2.373a.75.75 0 0 1-1.5 0V5A3.5 3.5 0 0 0 8 1.5ZM8 16a2 2 0 0 1-1.985-1.75c-.017-.137.097-.25.235-.25h3.5c.138 0 .252.113.235.25A2 2 0 0 1 8 16Z"
         />
       </svg>
     </button>
