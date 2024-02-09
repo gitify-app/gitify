@@ -2,8 +2,14 @@ import {
   AlertIcon,
   CommentDiscussionIcon,
   GitCommitIcon,
+  GitMergeIcon,
+  GitPullRequestClosedIcon,
+  GitPullRequestDraftIcon,
   GitPullRequestIcon,
+  IssueClosedIcon,
+  IssueDraftIcon,
   IssueOpenedIcon,
+  IssueReopenedIcon,
   MailIcon,
   OcticonProps,
   QuestionIcon,
@@ -66,6 +72,7 @@ export function formatReason(reason: Reason): {
 
 export function getNotificationTypeIcon(
   type: SubjectType,
+  state?: StateType,
 ): React.FC<OcticonProps> {
   switch (type) {
     case 'CheckSuite':
@@ -75,9 +82,27 @@ export function getNotificationTypeIcon(
     case 'Discussion':
       return CommentDiscussionIcon;
     case 'Issue':
-      return IssueOpenedIcon;
+      switch (state) {
+        case 'draft':
+          return IssueDraftIcon;
+        case 'closed':
+          return IssueClosedIcon;
+        case 'reopened':
+          return IssueReopenedIcon;
+        default:
+          return IssueOpenedIcon;
+      }
     case 'PullRequest':
-      return GitPullRequestIcon;
+      switch (state) {
+        case 'draft':
+          return GitPullRequestDraftIcon;
+        case 'closed':
+          return GitPullRequestClosedIcon;
+        case 'merged':
+          return GitMergeIcon;
+        default:
+          return GitPullRequestIcon;
+      }
     case 'Release':
       return TagIcon;
     case 'RepositoryInvitation':

@@ -27,8 +27,26 @@ describe('./utils/github-api.ts', () => {
     expect(getNotificationTypeIcon('Issue').displayName).toBe(
       'IssueOpenedIcon',
     );
+    expect(getNotificationTypeIcon('Issue', 'draft').displayName).toBe(
+      'IssueDraftIcon',
+    );
+    expect(getNotificationTypeIcon('Issue', 'closed').displayName).toBe(
+      'IssueClosedIcon',
+    );
+    expect(getNotificationTypeIcon('Issue', 'reopened').displayName).toBe(
+      'IssueReopenedIcon',
+    );
     expect(getNotificationTypeIcon('PullRequest').displayName).toBe(
       'GitPullRequestIcon',
+    );
+    expect(getNotificationTypeIcon('PullRequest', 'draft').displayName).toBe(
+      'GitPullRequestDraftIcon',
+    );
+    expect(getNotificationTypeIcon('PullRequest', 'closed').displayName).toBe(
+      'GitPullRequestClosedIcon',
+    );
+    expect(getNotificationTypeIcon('PullRequest', 'merged').displayName).toBe(
+      'GitMergeIcon',
     );
     expect(getNotificationTypeIcon('Release').displayName).toBe('TagIcon');
     expect(
