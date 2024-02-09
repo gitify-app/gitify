@@ -33,6 +33,9 @@ describe('./utils/github-api.ts', () => {
     expect(getNotificationTypeIcon('Issue', 'closed').displayName).toBe(
       'IssueClosedIcon',
     );
+    expect(getNotificationTypeIcon('Issue', 'completed').displayName).toBe(
+      'IssueClosedIcon',
+    );
     expect(getNotificationTypeIcon('Issue', 'reopened').displayName).toBe(
       'IssueReopenedIcon',
     );

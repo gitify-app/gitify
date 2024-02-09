@@ -86,6 +86,7 @@ export function getNotificationTypeIcon(
         case 'draft':
           return IssueDraftIcon;
         case 'closed':
+        case 'completed':
           return IssueClosedIcon;
         case 'reopened':
           return IssueReopenedIcon;
