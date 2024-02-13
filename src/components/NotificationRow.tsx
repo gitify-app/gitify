@@ -49,7 +49,10 @@ export const NotificationRow: React.FC<IProps> = ({
   };
 
   const reason = formatReason(notification.reason);
-  const NotificationIcon = getNotificationTypeIcon(notification.subject.type);
+  const NotificationIcon = getNotificationTypeIcon(
+    notification.subject.type,
+    notification.subject.state,
+  );
   const iconColor = getNotificationTypeIconColor(notification.subject.state);
   const realIconColor = settings
     ? (settings.colors && iconColor) || ''
