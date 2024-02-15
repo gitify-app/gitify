@@ -56,8 +56,8 @@ dependencies:
 
 devDependencies:
   '@electron/notarize':
-    specifier: 2.2.1
-    version: 2.2.1
+    specifier: 2.3.0
+    version: 2.3.0
   '@testing-library/react':
     specifier: 14.2.1
     version: 14.2.1(react-dom@18.2.0)(react@18.2.0)
@@ -535,6 +535,17 @@ packages:
 
   /@electron/notarize@2.2.1:
     resolution: {integrity: sha512-aL+bFMIkpR0cmmj5Zgy0LMKEpgy43/hw5zadEArgmAMWWlKc5buwFvFT9G/o/YJkvXAJm5q3iuTuLaiaXW39sg==}
+    engines: {node: '>= 10.0.0'}
+    dependencies:
+      debug: 4.3.4
+      fs-extra: 9.1.0
+      promise-retry: 2.0.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  /@electron/notarize@2.3.0:
+    resolution: {integrity: sha512-EiTBU0BwE7HZZjAG1fFWQaiQpCuPrVGn7jPss1kUjD6eTTdXXd29RiZqEqkgN7xqt/Pgn4g3I7Saqovanrfj3w==}
     engines: {node: '>= 10.0.0'}
     dependencies:
       debug: 4.3.4
