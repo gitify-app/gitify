@@ -209,7 +209,7 @@ async function getWorkflowRunUrl(notification: Notification) {
   let url = `${notification.repository.html_url}/actions`;
 
   if (workflowStatusQuery) {
-    url += `?${workflowStatusQuery}`;
+    url += `?query=${workflowStatusQuery}`;
 
     return url;
   }
