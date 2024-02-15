@@ -11,5 +11,6 @@
   "schedule": [
     "monthly"
   ],
-  "separateMultipleMajor": true
+  "separateMultipleMajor": true,
+  "osvVulnerabilityAlerts": true
 }
