@@ -130,7 +130,7 @@
     "jest-environment-jsdom": "29.7.0",
     "nock": "13.5.1",
     "postcss": "8.4.35",
-    "postcss-loader": "8.0.0",
+    "postcss-loader": "8.1.0",
     "prettier": "3.2.5",
     "react-test-renderer": "18.2.0",
     "style-loader": "3.3.4",
