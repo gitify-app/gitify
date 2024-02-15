@@ -140,7 +140,7 @@
     "webpack-cli": "5.1.4",
     "webpack-merge": "5.10.0"
   },
-  "packageManager": "pnpm@8.14.2",
+  "packageManager": "pnpm@8.15.3",
   "lint-staged": {
     "*.{md,js,ts,tsx}": "prettier --write"
   }
