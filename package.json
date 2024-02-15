@@ -13,7 +13,7 @@
     "prettier:apply": "prettier --write 'src/**/*.{js,ts,tsx}'",
     "test": "jest",
     "start": "electron . --enable-logging",
-    "prepare": "husky install"
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
