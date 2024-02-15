@@ -182,6 +182,18 @@ export async function openInBrowser(
           ),
         ),
     );
+  } else if (notification.subject.type === 'CheckSuite') {
+    const workflowName = notification.subject.title
+      .split('workflow run')[0]
+      .trim();
+
+    openExternalLink(
+      generateGitHubWebUrl(
+        `${notification.repository.html_url}/actions?workflow=${workflowName}`,
+        notification.id,
+        accounts.user?.id,
+      ),
+    );
   } else if (notification.subject.url) {
     const latestCommentId = getCommentId(
       notification.subject.latest_comment_url,
@@ -192,18 +204,6 @@ export async function openInBrowser(
         notification.id,
         accounts.user?.id,
         latestCommentId ? '#issuecomment-' + latestCommentId : undefined,
-      ),
-    );
-  } else if (notification.reason === 'ci_activity') {
-    const workflowName = notification.subject.title
-      .split('workflow run')[0]
-      .trim();
-
-    openExternalLink(
-      generateGitHubWebUrl(
-        `${notification.repository.html_url}/actions?workflow=${workflowName}`,
-        notification.id,
-        accounts.user?.id,
       ),
     );
   } else {
