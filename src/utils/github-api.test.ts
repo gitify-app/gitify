@@ -31,6 +31,9 @@ describe('./utils/github-api.ts', () => {
       'GitPullRequestIcon',
     );
     expect(getNotificationTypeIcon('Release').displayName).toBe('TagIcon');
+    expect(getNotificationTypeIcon('RepositoryInvitation').displayName).toBe(
+      'MailIcon',
+    );
     expect(
       getNotificationTypeIcon('RepositoryVulnerabilityAlert').displayName,
     ).toBe('AlertIcon');
