@@ -161,38 +161,51 @@ export function inferWorkflowBranchFromTitle(
   return null;
 }
 
-async function getCheckSuiteUrl(notification: Notification) {
-  let titleParts = notification.subject.title.split('workflow run');
-  const workflowName = titleParts[0].trim().replaceAll(' ', '+');
+export function getCheckSuiteUrl(notification: Notification) {
+  let url = `${notification.repository.html_url}/actions`;
+  let filters = [];
 
-  titleParts = titleParts[1].split('for');
-  const workflowBranch = titleParts[1].replace('branch', '').trim();
+  const regexPattern =
+    /^(?<workflowName>.*?) workflow run (?<workflowStatus>.*?) for (?<branchName>.*?) branch$/;
+  const matches = regexPattern.exec(notification.subject.title);
 
-  const workflowStatus = getWorkflowTypeFromTitle(notification.subject.title);
+  if (matches) {
+    const { groups } = matches;
 
-  let url = `${notification.repository.html_url}/actions?query=workflow:"${workflowName}"`;
+    if (groups.workflowName) {
+      filters.push(`workflow:"${groups.workflowName.replaceAll(' ', '+')}"`);
+    }
 
-  if (workflowStatus) {
-    url += `+is:${workflowStatus}`;
+    if (groups.workflowStatus) {
+      const workflowStatus = getWorkflowTypeFromTitle(
+        notification.subject.title,
+      );
+
+      filters.push(`is:${workflowStatus}`);
+    }
+
+    if (groups.branchName) {
+      filters.push(`branch:${groups.branchName}`);
+    }
   }
 
-  if (workflowBranch) {
-    url += `+branch:${workflowBranch}`;
+  if (filters.length === 3) {
+    url += `?query=${filters.join('+')}`;
   }
 
   return url;
 }
 
-async function getWorkflowRunUrl(notification: Notification) {
+export function getWorkflowRunUrl(notification: Notification) {
   const workflowStatus = getWorkflowTypeFromTitle(notification.subject.title);
 
   let url = `${notification.repository.html_url}/actions`;
 
   if (workflowStatus) {
-    url += `?query=${workflowStatus}`;
-
-    return url;
+    url += `?query=is:${workflowStatus}`;
   }
+
+  return url;
 }
 
 export const getLatestDiscussionCommentId = (
@@ -232,16 +245,16 @@ export async function openInBrowser(
         ),
     );
   } else if (notification.subject.type === 'CheckSuite') {
-    getCheckSuiteUrl(notification).then((url) =>
-      openExternalLink(
-        generateGitHubWebUrl(url, notification.id, accounts.user?.id),
-      ),
+    const url = getCheckSuiteUrl(notification);
+
+    openExternalLink(
+      generateGitHubWebUrl(url, notification.id, accounts.user?.id),
     );
   } else if (notification.subject.type === 'WorkflowRun') {
-    getWorkflowRunUrl(notification).then((url) =>
-      openExternalLink(
-        generateGitHubWebUrl(url, notification.id, accounts.user?.id),
-      ),
+    const url = getWorkflowRunUrl(notification);
+
+    openExternalLink(
+      generateGitHubWebUrl(url, notification.id, accounts.user?.id),
     );
   } else if (notification.subject.url) {
     const latestCommentId = getCommentId(

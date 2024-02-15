@@ -5,6 +5,8 @@ import {
   getCommentId,
   getLatestDiscussionCommentId,
   inferWorkflowBranchFromTitle,
+  getCheckSuiteUrl,
+  getWorkflowRunUrl,
 } from './helpers';
 import {
   mockedSingleNotification,
@@ -140,7 +142,7 @@ describe('utils/helpers.ts', () => {
   describe('inferWorkflowBranchFromTitle', () => {
     let notification;
 
-    beforeAll(() => {
+    beforeEach(() => {
       notification = mockedSingleNotification;
     });
 
@@ -154,6 +156,60 @@ describe('utils/helpers.ts', () => {
       notification.subject.title =
         'Demo workflow run does not have branch name';
       expect(inferWorkflowBranchFromTitle(notification)).toBeNull();
+    });
+  });
+
+  describe('getCheckSuiteUrl', () => {
+    let notification;
+
+    beforeEach(() => {
+      notification = mockedSingleNotification;
+    });
+
+    it('should generate a Github Action (CheckSuite) url', () => {
+      notification.subject.title = 'Demo workflow run';
+
+      const result = getCheckSuiteUrl(notification);
+      expect(result).toBe(
+        'https://github.com/manosim/notifications-test/actions',
+      );
+    });
+
+    it('should generate a Github Action (CheckSuite) url with filters', () => {
+      notification.subject.title =
+        'Demo workflow run succeeded for main branch';
+
+      const result = getCheckSuiteUrl(notification);
+      expect(result).toBe(
+        'https://github.com/manosim/notifications-test/actions?query=workflow:"Demo"+is:success+branch:main',
+      );
+    });
+  });
+
+  describe('getWorkflowRunUrl', () => {
+    let notification;
+
+    beforeEach(() => {
+      notification = mockedSingleNotification;
+    });
+
+    it('should generate a Github Action (WorkflowRun) url', () => {
+      notification.subject.title = 'some title';
+
+      const result = getWorkflowRunUrl(notification);
+      expect(result).toBe(
+        'https://github.com/manosim/notifications-test/actions',
+      );
+    });
+
+    it('should generate a Github Action (WorkflowRun) url for deployment review', () => {
+      notification.subject.title =
+        'userA requested your review to deploy to an environment';
+
+      const result = getWorkflowRunUrl(notification);
+      expect(result).toBe(
+        'https://github.com/manosim/notifications-test/actions?query=is:waiting',
+      );
     });
   });
 });
