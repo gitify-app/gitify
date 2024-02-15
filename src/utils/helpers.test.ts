@@ -175,7 +175,17 @@ describe('utils/helpers.ts', () => {
       );
     });
 
-    it('should generate a Github Action (CheckSuite) url with filters', () => {
+    it('should generate a Github Action (CheckSuite) url with workflow and branch filters', () => {
+      notification.subject.title =
+        'Demo workflow run unhandled for main branch';
+
+      const result = getCheckSuiteUrl(notification);
+      expect(result).toBe(
+        'https://github.com/manosim/notifications-test/actions?query=workflow:"Demo"+branch:main',
+      );
+    });
+
+    it('should generate a Github Action (CheckSuite) url with all filters', () => {
       notification.subject.title =
         'Demo workflow run succeeded for main branch';
 

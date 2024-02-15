@@ -181,7 +181,9 @@ export function getCheckSuiteUrl(notification: Notification) {
         notification.subject.title,
       );
 
-      filters.push(`is:${workflowStatus}`);
+      if (workflowStatus) {
+        filters.push(`is:${workflowStatus}`);
+      }
     }
 
     if (groups.branchName) {
@@ -189,7 +191,7 @@ export function getCheckSuiteUrl(notification: Notification) {
     }
   }
 
-  if (filters.length === 3) {
+  if (filters.length > 0) {
     url += `?query=${filters.join('+')}`;
   }
 
