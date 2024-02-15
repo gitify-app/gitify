@@ -147,26 +147,6 @@ async function getDiscussionUrl(
   };
 }
 
-export function inferWorkflowStatusFilterFromTitle(
-  notification: Notification,
-): string {
-  const title = notification.subject.title;
-
-  // TODO - the following additional statuses are to be implemented #767
-  // queued, in progress, neutral, action required, timed out, skipped, stale
-  if (title.includes('succeeded')) {
-    return 'is:success';
-  } else if (title.includes('failed')) {
-    return 'is:failure';
-  } else if (title.includes('cancelled')) {
-    return 'is:cancelled';
-  } else if (title.includes('requested your review')) {
-    return 'is:waiting';
-  }
-
-  return null;
-}
-
 export function inferWorkflowBranchFromTitle(
   notification: Notification,
 ): string {
@@ -204,12 +184,12 @@ async function getCheckSuiteUrl(notification: Notification) {
 }
 
 async function getWorkflowRunUrl(notification: Notification) {
-  const workflowStatusQuery = inferWorkflowStatusFilterFromTitle(notification);
+  const workflowStatus = getWorkflowTypeFromTitle(notification.subject.title);
 
   let url = `${notification.repository.html_url}/actions`;
 
-  if (workflowStatusQuery) {
-    url += `?query=${workflowStatusQuery}`;
+  if (workflowStatus) {
+    url += `?query=${workflowStatus}`;
 
     return url;
   }
