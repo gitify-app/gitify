@@ -7,15 +7,18 @@ import {
   MailIcon,
   OcticonProps,
   QuestionIcon,
+  RocketIcon,
   SyncIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import { Reason, StateType, SubjectType } from '../typesGithub';
+import { Reason, StateType, SubjectType, WorkflowType } from '../typesGithub';
 
 // prettier-ignore
 const DESCRIPTIONS = {
+    APPROVAL_REQUESTED: 'You were requested to review and approve a deployment workflow.',
     ASSIGN: 'You were assigned to the issue.',
     AUTHOR: 'You created the thread.',
+    CI_ACTIVITY: 'A GitHub Actions workflow run was triggered for your repository',
     COMMENT: 'You commented on the thread.',
     INVITATION: 'You accepted an invitation to contribute to the repository.',
     MANUAL: 'You subscribed to the thread (via an issue or pull request).',
@@ -25,7 +28,6 @@ const DESCRIPTIONS = {
     STATE_CHANGE: 'You changed the thread state (for example, closing an issue or merging a pull request).',
     SUBSCRIBED: "You're watching the repository.",
     TEAM_MENTION: 'You were on a team that was mentioned.',
-    CI_ACTIVITY: 'A GitHub Actions workflow run was triggered for your repository',
     UNKNOWN: 'The reason for this notification is not supported by the app.',
 };
 
@@ -35,10 +37,14 @@ export function formatReason(reason: Reason): {
 } {
   // prettier-ignore
   switch (reason) {
+    case 'approval_requested':
+      return { type: 'Approval Requested', description: DESCRIPTIONS['APPROVAL_REQUESTED'] };
     case 'assign':
       return { type: 'Assign', description: DESCRIPTIONS['ASSIGN'] };
     case 'author':
       return { type: 'Author', description: DESCRIPTIONS['AUTHOR'] };
+    case 'ci_activity':
+      return { type: 'Workflow Run', description: DESCRIPTIONS['CI_ACTIVITY'] };
     case 'comment':
       return { type: 'Comment', description: DESCRIPTIONS['COMMENT'] };
     case 'invitation':
@@ -57,8 +63,6 @@ export function formatReason(reason: Reason): {
       return { type: 'Subscribed', description: DESCRIPTIONS['SUBSCRIBED'] };
     case 'team_mention':
       return { type: 'Team Mention', description: DESCRIPTIONS['TEAM_MENTION'] };
-    case 'ci_activity':
-      return { type: 'Workflow Run', description: DESCRIPTIONS['CI_ACTIVITY'] };
     default:
       return { type: 'Unknown', description: DESCRIPTIONS['UNKNOWN'] };
   }
@@ -84,27 +88,43 @@ export function getNotificationTypeIcon(
       return MailIcon;
     case 'RepositoryVulnerabilityAlert':
       return AlertIcon;
+    case 'WorkflowRun':
+      return RocketIcon;
     default:
       return QuestionIcon;
   }
+}
+
+export function getWorkflowTypeFromTitle(title: string): WorkflowType | null {
+  if (title.includes('succeeded')) {
+    return 'success';
+  } else if (title.includes('failed')) {
+    return 'failure';
+  } else if (title.includes('cancelled')) {
+    return 'cancelled';
+  } else if (title.includes('requested your review')) {
+    return 'waiting';
+  }
+
+  return null;
 }
 
 export function getNotificationTypeIconColor(state: StateType): string {
   switch (state) {
     case 'closed':
       return 'text-red-500';
-    case 'open':
-      return 'text-green-500';
-    case 'merged':
-      return 'text-purple-500';
-    case 'reopened':
-      return 'text-green-500';
-    case 'not_planned':
-      return 'text-gray-300';
     case 'completed':
       return 'text-purple-500';
     case 'draft':
       return 'text-gray-600';
+    case 'merged':
+      return 'text-purple-500';
+    case 'not_planned':
+      return 'text-gray-300';
+    case 'open':
+      return 'text-green-500';
+    case 'reopened':
+      return 'text-green-500';
     default:
       return 'text-gray-300';
   }

@@ -7,6 +7,7 @@ import {
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
 import { Constants } from './constants';
+import { getWorkflowTypeFromTitle } from './github-api';
 
 export function getEnterpriseAccountToken(
   hostname: string,
@@ -63,7 +64,7 @@ export function generateGitHubWebUrl(
     newURL.search = params.toString();
   }
 
-  return encodeURI(newURL.href + comment);
+  return newURL.href + comment;
 }
 
 const addHours = (date: string, hours: number) =>
@@ -146,6 +147,74 @@ async function getDiscussionUrl(
   };
 }
 
+export function inferWorkflowStatusFilterFromTitle(
+  notification: Notification,
+): string {
+  const title = notification.subject.title;
+
+  // TODO - the following additional statuses are to be implemented #767
+  // queued, in progress, neutral, action required, timed out, skipped, stale
+  if (title.includes('succeeded')) {
+    return 'is:success';
+  } else if (title.includes('failed')) {
+    return 'is:failure';
+  } else if (title.includes('cancelled')) {
+    return 'is:cancelled';
+  } else if (title.includes('requested your review')) {
+    return 'is:waiting';
+  }
+
+  return null;
+}
+
+export function inferWorkflowBranchFromTitle(
+  notification: Notification,
+): string {
+  const title = notification.subject.title;
+
+  const titleParts = title.split('for');
+
+  if (titleParts[1]) {
+    return titleParts[1].replace('branch', '').trim();
+  }
+
+  return null;
+}
+
+async function getCheckSuiteUrl(notification: Notification) {
+  let titleParts = notification.subject.title.split('workflow run');
+  const workflowName = titleParts[0].trim().replaceAll(' ', '+');
+
+  titleParts = titleParts[1].split('for');
+  const workflowBranch = titleParts[1].replace('branch', '').trim();
+
+  const workflowStatus = getWorkflowTypeFromTitle(notification.subject.title);
+
+  let url = `${notification.repository.html_url}/actions?workflow:"${workflowName}"`;
+
+  if (workflowStatus) {
+    url += `+is:${workflowStatus}`;
+  }
+
+  if (workflowBranch) {
+    url += `+branch:${workflowBranch}`;
+  }
+
+  return url;
+}
+
+async function getWorkflowRunUrl(notification: Notification) {
+  const workflowStatusQuery = inferWorkflowStatusFilterFromTitle(notification);
+
+  let url = `${notification.repository.html_url}/actions`;
+
+  if (workflowStatusQuery) {
+    url += `?${workflowStatusQuery}`;
+
+    return url;
+  }
+}
+
 export const getLatestDiscussionCommentId = (
   comments: DiscussionCommentEdge[],
 ) =>
@@ -183,15 +252,15 @@ export async function openInBrowser(
         ),
     );
   } else if (notification.subject.type === 'CheckSuite') {
-    const workflowName = notification.subject.title
-      .split('workflow run')[0]
-      .trim();
-
-    openExternalLink(
-      generateGitHubWebUrl(
-        `${notification.repository.html_url}/actions?workflow=${workflowName}`,
-        notification.id,
-        accounts.user?.id,
+    getCheckSuiteUrl(notification).then((url) =>
+      openExternalLink(
+        generateGitHubWebUrl(url, notification.id, accounts.user?.id),
+      ),
+    );
+  } else if (notification.subject.type === 'WorkflowRun') {
+    getWorkflowRunUrl(notification).then((url) =>
+      openExternalLink(
+        generateGitHubWebUrl(url, notification.id, accounts.user?.id),
       ),
     );
   } else if (notification.subject.url) {

@@ -4,6 +4,7 @@ import {
   generateNotificationReferrerId,
   getCommentId,
   getLatestDiscussionCommentId,
+  inferWorkflowBranchFromTitle,
 } from './helpers';
 import {
   mockedSingleNotification,
@@ -37,8 +38,7 @@ describe('utils/helpers.ts', () => {
 
   describe('generateGitHubWebUrl', () => {
     let notificationReferrerId =
-      'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%253D';
-    beforeAll(() => {});
+      'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
 
     it('should generate the GitHub url - non enterprise - (issue)', () =>
       testGenerateUrl(
@@ -134,6 +134,26 @@ describe('utils/helpers.ts', () => {
     it('should generate a GitHub API url - enterprise', () => {
       const result = generateGitHubAPIUrl('github.manos.im');
       expect(result).toBe('https://github.manos.im/api/v3/');
+    });
+  });
+
+  describe('inferWorkflowBranchFromTitle', () => {
+    let notification;
+
+    beforeAll(() => {
+      notification = mockedSingleNotification;
+    });
+
+    it('should infer branch name from the title', () => {
+      notification.subject.title =
+        'Demo workflow run succeeded for main branch';
+      expect(inferWorkflowBranchFromTitle(notification)).toBe('main');
+    });
+
+    it('should return null for known branch name', () => {
+      notification.subject.title =
+        'Demo workflow run does not have branch name';
+      expect(inferWorkflowBranchFromTitle(notification)).toBeNull();
     });
   });
 });

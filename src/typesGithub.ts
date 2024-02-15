@@ -1,6 +1,8 @@
 export type Reason =
+  | 'approval_requested'
   | 'assign'
   | 'author'
+  | 'ci_activity'
   | 'comment'
   | 'invitation'
   | 'manual'
@@ -9,8 +11,7 @@ export type Reason =
   | 'security_alert'
   | 'state_change'
   | 'subscribed'
-  | 'team_mention'
-  | 'ci_activity';
+  | 'team_mention';
 
 export type SubjectType =
   | 'CheckSuite'
@@ -20,7 +21,8 @@ export type SubjectType =
   | 'PullRequest'
   | 'Release'
   | 'RepositoryInvitation'
-  | 'RepositoryVulnerabilityAlert';
+  | 'RepositoryVulnerabilityAlert'
+  | 'WorkflowRun';
 
 export type IssueStateType =
   | 'closed'
@@ -28,9 +30,16 @@ export type IssueStateType =
   | 'completed'
   | 'reopened'
   | 'not_planned';
+
 export type PullRequestStateType = 'closed' | 'open' | 'merged' | 'draft';
+
 export type StateType = IssueStateType | PullRequestStateType;
+
 export type ViewerSubscription = 'IGNORED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
+
+// TODO - the following additional statuses are to be implemented #767
+// queued, in progress, neutral, action required, timed out, skipped, stale
+export type WorkflowType = 'success' | 'failure' | 'cancelled' | 'waiting';
 
 export interface Notification {
   id: string;

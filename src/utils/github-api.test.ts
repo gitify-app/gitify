@@ -1,4 +1,8 @@
-import { formatReason, getNotificationTypeIcon } from './github-api';
+import {
+  formatReason,
+  getNotificationTypeIcon,
+  getWorkflowTypeFromTitle,
+} from './github-api';
 import { Reason, SubjectType } from '../typesGithub';
 
 describe('./utils/github-api.ts', () => {
@@ -34,8 +38,47 @@ describe('./utils/github-api.ts', () => {
     expect(
       getNotificationTypeIcon('RepositoryVulnerabilityAlert').displayName,
     ).toBe('AlertIcon');
+    expect(getNotificationTypeIcon('WorkflowRun').displayName).toBe(
+      'RocketIcon',
+    );
     expect(getNotificationTypeIcon('Unknown' as SubjectType).displayName).toBe(
       'QuestionIcon',
     );
+  });
+
+  describe('should get the workflow status type from title', () => {
+    it('should infer failed workflow status from the title', () => {
+      expect(
+        getWorkflowTypeFromTitle('Demo workflow run failed for main branch'),
+      ).toBe('failure');
+    });
+
+    it('should infer success workflow status from the title', () => {
+      expect(
+        getWorkflowTypeFromTitle('Demo workflow run succeeded for main branch'),
+      ).toBe('success');
+    });
+
+    it('should infer cancelled workflow status from the title', () => {
+      expect(
+        getWorkflowTypeFromTitle('Demo workflow run cancelled for main branch'),
+      ).toBe('cancelled');
+    });
+
+    it('should infer approval waiting status from the title', () => {
+      expect(
+        getWorkflowTypeFromTitle(
+          'user requested your review to deploy to an environment',
+        ),
+      ).toBe('waiting');
+    });
+
+    it('should return null for known workflow status', () => {
+      expect(
+        getWorkflowTypeFromTitle(
+          'Demo workflow run has not status for main branch',
+        ),
+      ).toBeNull();
+    });
   });
 });
