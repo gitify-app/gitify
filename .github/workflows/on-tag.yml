@@ -7,7 +7,7 @@ on:
 jobs:
   pr-to-homebrew:
     name: Homebrew
-    runs-on: macos-latest
+    runs-on: macos-14
     steps:
       - uses: Homebrew/actions/setup-homebrew@master
       - id: version
@@ -37,7 +37,7 @@ jobs:
       - run: git checkout -b "bump/${{ steps.version.outputs.version }}"
       - run: pnpm version ${{ steps.version.outputs.version }}
       - run: git push origin "bump/${{ steps.version.outputs.version }}"
-      - uses: actions/github-script@v6
+      - uses: actions/github-script@v7
         with:
           script: |
             core.notice('Create PR by going to: https://github.com/gitify-app/website/compare/bump/${{ steps.version.outputs.version }}')

@@ -41,7 +41,7 @@ describe('components/Notification.js', () => {
     const { getByRole } = render(
       <AppContext.Provider
         value={{
-          settings: mockSettings,
+          settings: { ...mockSettings, markAsDoneOnOpen: false },
           markNotification,
           accounts: mockAccounts,
         }}
@@ -52,6 +52,31 @@ describe('components/Notification.js', () => {
 
     fireEvent.click(getByRole('main'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
+  });
+
+  it('should open a notification in browser & mark it as done', () => {
+    const markNotificationDone = jest.fn();
+
+    const props = {
+      notification: mockedSingleNotification,
+      hostname: 'github.com',
+    };
+
+    const { getByRole } = render(
+      <AppContext.Provider
+        value={{
+          settings: { ...mockSettings, markAsDoneOnOpen: true },
+          markNotificationDone,
+          accounts: mockAccounts,
+        }}
+      >
+        <NotificationRow {...props} />
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(getByRole('main'));
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(markNotificationDone).toHaveBeenCalledTimes(1);
   });
 
   it('should mark a notification as read', () => {
@@ -65,7 +90,7 @@ describe('components/Notification.js', () => {
     const { getByTitle } = render(
       <AppContext.Provider
         value={{
-          settings: mockSettings,
+          settings: { ...mockSettings, markAsDoneOnOpen: false },
           accounts: mockAccounts,
         }}
       >
@@ -77,6 +102,31 @@ describe('components/Notification.js', () => {
 
     fireEvent.click(getByTitle('Mark as Read'));
     expect(markNotification).toHaveBeenCalledTimes(1);
+  });
+
+  it('should mark a notification as done', () => {
+    const markNotificationDone = jest.fn();
+
+    const props = {
+      notification: mockedSingleNotification,
+      hostname: 'github.com',
+    };
+
+    const { getByTitle } = render(
+      <AppContext.Provider
+        value={{
+          settings: { ...mockSettings },
+          accounts: mockAccounts,
+        }}
+      >
+        <AppContext.Provider value={{ markNotificationDone }}>
+          <NotificationRow {...props} />
+        </AppContext.Provider>
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(getByTitle('Mark as Done'));
+    expect(markNotificationDone).toHaveBeenCalledTimes(1);
   });
 
   it('should unsubscribe from a notification thread', () => {
