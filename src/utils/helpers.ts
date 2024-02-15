@@ -190,7 +190,7 @@ async function getCheckSuiteUrl(notification: Notification) {
 
   const workflowStatus = getWorkflowTypeFromTitle(notification.subject.title);
 
-  let url = `${notification.repository.html_url}/actions?workflow:"${workflowName}"`;
+  let url = `${notification.repository.html_url}/actions?query=workflow:"${workflowName}"`;
 
   if (workflowStatus) {
     url += `+is:${workflowStatus}`;
