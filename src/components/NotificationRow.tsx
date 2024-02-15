@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import { CheckIcon, MuteIcon } from '@primer/octicons-react';
+import { CheckIcon, BellSlashIcon, ReadIcon } from '@primer/octicons-react';
 
 import {
   formatReason,
@@ -20,11 +20,20 @@ export const NotificationRow: React.FC<IProps> = ({
   notification,
   hostname,
 }) => {
-  const { settings, accounts, markNotification, unsubscribeNotification } =
-    useContext(AppContext);
+  const {
+    settings,
+    accounts,
+    markNotification,
+    markNotificationDone,
+    unsubscribeNotification,
+  } = useContext(AppContext);
 
   const pressTitle = useCallback(() => {
     openBrowser();
+
+    if (settings.markAsDoneOnOpen) {
+      markNotificationDone(notification.id, hostname);
+    }
   }, [settings]);
 
   const openBrowser = useCallback(
@@ -40,7 +49,10 @@ export const NotificationRow: React.FC<IProps> = ({
   };
 
   const reason = formatReason(notification.reason);
-  const NotificationIcon = getNotificationTypeIcon(notification.subject.type);
+  const NotificationIcon = getNotificationTypeIcon(
+    notification.subject.type,
+    notification.subject.state,
+  );
   const iconColor = getNotificationTypeIconColor(notification.subject.state);
   const realIconColor = settings
     ? (settings.colors && iconColor) || ''
@@ -67,30 +79,43 @@ export const NotificationRow: React.FC<IProps> = ({
         <div className="text-xs text-capitalize">
           <span title={reason.description}>{reason.type}</span> - Updated{' '}
           {updatedAt}
-          <button
-            className="border-0 bg-none float-right"
-            title="Unsubscribe"
-            onClick={unsubscribe}
-          >
-            <MuteIcon
-              className="hover:text-red-500"
-              size={13}
-              aria-label="Unsubscribe"
-            />
-          </button>
         </div>
       </div>
 
-      <div className="flex justify-center items-center w-8">
+      <div className="flex justify-center items-center gap-2">
+        <button
+          className="focus:outline-none"
+          title="Mark as Done"
+          onClick={() => markNotificationDone(notification.id, hostname)}
+        >
+          <CheckIcon
+            className="hover:text-green-500"
+            size={16}
+            aria-label="Mark as Done"
+          />
+        </button>
+
         <button
           className="focus:outline-none"
           title="Mark as Read"
           onClick={() => markNotification(notification.id, hostname)}
         >
-          <CheckIcon
+          <ReadIcon
             className="hover:text-green-500"
-            size={20}
+            size={14}
             aria-label="Mark as Read"
+          />
+        </button>
+
+        <button
+          className="border-0 bg-none float-right"
+          title="Unsubscribe"
+          onClick={unsubscribe}
+        >
+          <BellSlashIcon
+            className="hover:text-red-500"
+            size={14}
+            aria-label="Unsubscribe"
           />
         </button>
       </div>
