@@ -86,8 +86,8 @@ devDependencies:
     specifier: 10.4.17
     version: 10.4.17(postcss@8.4.35)
   css-loader:
-    specifier: 6.9.1
-    version: 6.9.1(webpack@5.90.1)
+    specifier: 6.10.0
+    version: 6.10.0(webpack@5.90.1)
   electron:
     specifier: 22.3.27
     version: 22.3.27
@@ -2015,11 +2015,17 @@ packages:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  /css-loader@6.9.1(webpack@5.90.1):
-    resolution: {integrity: sha512-OzABOh0+26JKFdMzlK6PY1u5Zx8+Ck7CVRlcGNZoY9qwJjdfu2VWFuprTIpPW+Av5TZTVViYWcFQaEEQURLknQ==}
+  /css-loader@6.10.0(webpack@5.90.1):
+    resolution: {integrity: sha512-LTSA/jWbwdMlk+rhmElbDR2vbtQoTBPr7fkJE+mxrHj+7ru0hUmHafDRzWIjIHTwpitWVaqY2/UWGRca3yUgRw==}
     engines: {node: '>= 12.13.0'}
     peerDependencies:
+      '@rspack/core': 0.x || 1.x
       webpack: ^5.0.0
+    peerDependenciesMeta:
+      '@rspack/core':
+        optional: true
+      webpack:
+        optional: true
     dependencies:
       icss-utils: 5.1.0(postcss@8.4.35)
       postcss: 8.4.35
