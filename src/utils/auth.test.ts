@@ -109,13 +109,13 @@ describe('utils/auth.tsx', () => {
       user: null,
     };
 
-    it('should add a github.com accont', async () => {
+    it('should add a github.com account', async () => {
       const result = await auth.addAccount(accounts, '123-456', 'github.com');
 
       expect(result).toEqual({ ...accounts, token: '123-456' });
     });
 
-    it('should add an enterprise accont', async () => {
+    it('should add an enterprise account', async () => {
       const result = await auth.addAccount(
         accounts,
         '123-456',

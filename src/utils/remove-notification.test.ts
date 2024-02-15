@@ -8,7 +8,7 @@ describe('utils/remove-notification.ts', () => {
   const notificationId = mockedSingleNotification.id;
   const hostname = mockedSingleAccountNotifications[0].hostname;
 
-  it('should remove a notifiction if it exists', () => {
+  it('should remove a notification if it exists', () => {
     expect(mockedSingleAccountNotifications[0].notifications.length).toBe(1);
 
     const result = removeNotification(
