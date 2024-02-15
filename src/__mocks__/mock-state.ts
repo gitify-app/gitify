@@ -19,4 +19,5 @@ export const mockSettings: SettingsState = {
   openAtStartup: false,
   appearance: Appearance.SYSTEM,
   colors: false,
+  markAsDoneOnOpen: false,
 };

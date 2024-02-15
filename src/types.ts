@@ -13,6 +13,7 @@ export interface SettingsState {
   openAtStartup: boolean;
   appearance: Appearance;
   colors: boolean;
+  markAsDoneOnOpen: boolean;
 }
 
 export enum Appearance {
