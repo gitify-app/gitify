@@ -29,7 +29,7 @@ export function generateNotificationReferrerId(
   const buffer = Buffer.from(
     `018:NotificationThread${notificationId}:${userId}`,
   );
-  return `notification_referrer_id=${buffer.toString('base64')}`;
+  return buffer.toString('base64');
 }
 
 export function generateGitHubWebUrl(
@@ -38,17 +38,20 @@ export function generateGitHubWebUrl(
   userId?: number,
   comment: string = '',
 ) {
-  const { hostname } = new URL(url);
+  const newURL = new URL(url);
+  const hostname = newURL.hostname;
+  let params = new URLSearchParams(newURL.search);
+
   const isEnterprise =
     hostname !== `api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}`;
 
-  let newUrl: string = isEnterprise
-    ? url.replace(`${hostname}/api/v3/repos`, hostname)
-    : url.replace('api.github.com/repos', 'github.com');
-
-  if (newUrl.indexOf('/pulls/') !== -1) {
-    newUrl = newUrl.replace('/pulls/', '/pull/');
+  if (isEnterprise) {
+    newURL.href = newURL.href.replace(`${hostname}/api/v3/repos`, hostname);
+  } else {
+    newURL.href = newURL.href.replace('api.github.com/repos', 'github.com');
   }
+
+  newURL.href = newURL.href.replace('/pulls/', '/pull/');
 
   if (userId) {
     const notificationReferrerId = generateNotificationReferrerId(
@@ -56,10 +59,11 @@ export function generateGitHubWebUrl(
       userId,
     );
 
-    return `${newUrl}?${notificationReferrerId}${comment}`;
+    params.append('notification_referrer_id', notificationReferrerId);
+    newURL.search = params.toString();
   }
 
-  return newUrl + comment;
+  return encodeURI(newURL.href + comment);
 }
 
 const addHours = (date: string, hours: number) =>
@@ -161,12 +165,7 @@ export async function openInBrowser(
   if (notification.subject.type === 'Release') {
     getReleaseTagWebUrl(notification, accounts.token).then(({ url }) =>
       openExternalLink(
-        generateGitHubWebUrl(
-          url,
-          notification.id,
-          accounts.user?.id,
-          undefined,
-        ),
+        generateGitHubWebUrl(url, notification.id, accounts.user?.id),
       ),
     );
   } else if (notification.subject.type === 'Discussion') {
@@ -193,6 +192,26 @@ export async function openInBrowser(
         notification.id,
         accounts.user?.id,
         latestCommentId ? '#issuecomment-' + latestCommentId : undefined,
+      ),
+    );
+  } else if (notification.reason === 'ci_activity') {
+    const workflowName = notification.subject.title
+      .split('workflow run')[0]
+      .trim();
+
+    openExternalLink(
+      generateGitHubWebUrl(
+        `${notification.repository.html_url}/actions?workflow=${workflowName}`,
+        notification.id,
+        accounts.user?.id,
+      ),
+    );
+  } else {
+    openExternalLink(
+      generateGitHubWebUrl(
+        notification.repository.html_url,
+        notification.id,
+        accounts.user?.id,
       ),
     );
   }

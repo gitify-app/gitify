@@ -30,19 +30,15 @@ describe('utils/helpers.ts', () => {
         mockedUser.id,
       );
       expect(referrerId).toBe(
-        'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=',
+        'MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=',
       );
     });
   });
 
   describe('generateGitHubWebUrl', () => {
-    let notificationReferrerId;
-    beforeAll(() => {
-      notificationReferrerId = generateNotificationReferrerId(
-        mockedSingleNotification.id,
-        mockedUser.id,
-      );
-    });
+    let notificationReferrerId =
+      'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%253D';
+    beforeAll(() => {});
 
     it('should generate the GitHub url - non enterprise - (issue)', () =>
       testGenerateUrl(
@@ -108,6 +104,12 @@ describe('utils/helpers.ts', () => {
           getLatestDiscussionCommentId(
             mockedGraphQLResponse.data.data.search.edges[0].node.comments.edges,
           ),
+      ));
+
+    it('should generate the GitHub workflow url with encoded workflow name', () =>
+      testGenerateUrl(
+        `${URL.normal.api}/actions?workflow=Some Workflow`,
+        `${URL.normal.default}/actions?workflow=Some+Workflow&${notificationReferrerId}`,
       ));
 
     function testGenerateUrl(apiUrl, ExpectedResult, comment?) {
