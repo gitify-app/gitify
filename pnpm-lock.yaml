@@ -92,8 +92,8 @@ devDependencies:
     specifier: 22.3.27
     version: 22.3.27
   electron-builder:
-    specifier: 24.11.0
-    version: 24.11.0
+    specifier: 24.13.0
+    version: 24.13.0
   husky:
     specifier: 8.0.3
     version: 8.0.3
@@ -533,17 +533,6 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
-  /@electron/notarize@2.1.0:
-    resolution: {integrity: sha512-Q02xem1D0sg4v437xHgmBLxI2iz/fc0D4K7fiVWHa/AnW8o7D751xyKNXgziA6HrTOme9ul1JfWN5ark8WH1xA==}
-    engines: {node: '>= 10.0.0'}
-    dependencies:
-      debug: 4.3.4
-      fs-extra: 9.1.0
-      promise-retry: 2.0.1
-    transitivePeerDependencies:
-      - supports-color
-    dev: true
-
   /@electron/notarize@2.2.1:
     resolution: {integrity: sha512-aL+bFMIkpR0cmmj5Zgy0LMKEpgy43/hw5zadEArgmAMWWlKc5buwFvFT9G/o/YJkvXAJm5q3iuTuLaiaXW39sg==}
     engines: {node: '>= 10.0.0'}
@@ -578,8 +567,8 @@ packages:
       electron: 22.3.27
     dev: false
 
-  /@electron/universal@1.4.1:
-    resolution: {integrity: sha512-lE/U3UNw1YHuowNbTmKNs9UlS3En3cPgwM5MI+agIgr/B1hSze9NdOP0qn7boZaI9Lph8IDv3/24g9IxnJP7aQ==}
+  /@electron/universal@1.5.1:
+    resolution: {integrity: sha512-kbgXxyEauPJiQQUNG2VgUeyfQNFk6hBF11ISN2PNI6agUgPl55pv4eQmaqHzTAzchBvqZ2tQuRVaPStGf0mxGw==}
     engines: {node: '>=8.6'}
     dependencies:
       '@electron/asar': 3.2.5
@@ -1437,14 +1426,14 @@ packages:
     resolution: {integrity: sha512-xwdG0FJPQMe0M0UA4Tz0zEB8rBJTRA5a476ZawAqiBkMv16GRK5xpXThOjMaEOFnZ6zabejjG4J3da0SXG63KA==}
     dev: true
 
-  /app-builder-lib@24.11.0:
-    resolution: {integrity: sha512-7l1ns6QxpXxSJNvToxT291w9VR4X1YRLwTXWqyzVU+Gt3gb15cp3h7aFYk2s0krlH5wL+gS7luj7dW4Qiyr+MA==}
+  /app-builder-lib@24.13.0:
+    resolution: {integrity: sha512-55RwtABQBCb6AIoCG9A//NpJBEZjRryfgOGZZRYhDmhTV+WnFIlxKjkQLfT/DrGQZIrEyBoie1oEHo68PZh3gg==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@develar/schema-utils': 2.6.5
-      '@electron/notarize': 2.1.0
+      '@electron/notarize': 2.2.1
       '@electron/osx-sign': 1.0.5
-      '@electron/universal': 1.4.1
+      '@electron/universal': 1.5.1
       '@malept/flatpak-bundler': 0.4.0
       '@types/fs-extra': 9.0.13
       async-exit-hook: 2.0.1
@@ -1454,7 +1443,7 @@ packages:
       chromium-pickle-js: 0.2.0
       debug: 4.3.4
       ejs: 3.1.9
-      electron-publish: 24.9.4
+      electron-publish: 24.13.0
       form-data: 4.0.0
       fs-extra: 10.1.0
       hosted-git-info: 4.1.0
@@ -2198,10 +2187,10 @@ packages:
     resolution: {integrity: sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==}
     dev: true
 
-  /dmg-builder@24.11.0:
-    resolution: {integrity: sha512-GKu7X1aAbTFJCYcxKpO81ArZJTzfY0HE9cNPL3pUa5exue6ZIQ5Nifv0fAVvmxLx+5QRXGYIDcpKcX6/Zq+zuQ==}
+  /dmg-builder@24.13.0:
+    resolution: {integrity: sha512-i8yp8of0OW43XZO2jYhODetRMdD+SvofAC+V5/WG/fPj1U1icqSxVxXjD+XYmnYjRdRC3GPmLxETC7g/Twr6hA==}
     dependencies:
-      app-builder-lib: 24.11.0
+      app-builder-lib: 24.13.0
       builder-util: 24.9.4
       builder-util-runtime: 9.2.3
       fs-extra: 10.1.0
@@ -2266,16 +2255,16 @@ packages:
       jake: 10.8.6
     dev: true
 
-  /electron-builder@24.11.0:
-    resolution: {integrity: sha512-I612CjPb+P1TtQ2ATdQxSBN5ih0mxA1uMRYvx1HLqUmvaKkZ3IUF2wLWcJxY2F6EcGF33Jg9THm2QHWASfxeqg==}
+  /electron-builder@24.13.0:
+    resolution: {integrity: sha512-wbmdwBSYMsJHeqiU+PEATHEoy0orHSJtt28PtXL6+YNa5Lo0lOpkBxT+Jfs33LjpvheNLhc/68dETJOTDM8gOg==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
-      app-builder-lib: 24.11.0
+      app-builder-lib: 24.13.0
       builder-util: 24.9.4
       builder-util-runtime: 9.2.3
       chalk: 4.1.2
-      dmg-builder: 24.11.0
+      dmg-builder: 24.13.0
       fs-extra: 10.1.0
       is-ci: 3.0.1
       lazy-val: 1.0.5
@@ -2290,8 +2279,8 @@ packages:
     resolution: {integrity: sha512-726DfbI9ZNoCg+Fcu6XLuTKTnzf+6nFqv7h+K/V6Ug7IbaPMI7s9S8URnGtWFCy5N5PL4HSzRFF2mXuinftDdg==}
     dev: false
 
-  /electron-publish@24.9.4:
-    resolution: {integrity: sha512-FghbeVMfxHneHjsG2xUSC0NMZYWOOWhBxfZKPTbibcJ0CjPH0Ph8yb5CUO62nqywXfA5u1Otq6K8eOdOixxmNg==}
+  /electron-publish@24.13.0:
+    resolution: {integrity: sha512-+FP67OG2bml6DBRj/bjlpJv1SRnksxS6NWgPOzrNQBtq2MFIBlQN1gTM9JwaXKckyvxrtTcgtYYG7at/S2aMCw==}
     dependencies:
       '@types/fs-extra': 9.0.13
       builder-util: 24.9.4
