@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@electron/remote':
     specifier: 2.1.2
-    version: 2.1.2(electron@22.3.27)
+    version: 2.1.2(electron@23.3.13)
   '@primer/octicons-react':
     specifier: 19.8.0
     version: 19.8.0(react@18.2.0)
@@ -25,7 +25,7 @@ dependencies:
     version: 4.20.10
   menubar:
     specifier: 9.4.0
-    version: 9.4.0(electron@22.3.27)
+    version: 9.4.0(electron@23.3.13)
   nprogress:
     specifier: 0.2.0
     version: 0.2.0
@@ -89,8 +89,8 @@ devDependencies:
     specifier: 6.10.0
     version: 6.10.0(webpack@5.90.2)
   electron:
-    specifier: 22.3.27
-    version: 22.3.27
+    specifier: 23.3.13
+    version: 23.3.13
   electron-builder:
     specifier: 24.13.0
     version: 24.13.0
@@ -559,12 +559,12 @@ packages:
       - supports-color
     dev: true
 
-  /@electron/remote@2.1.2(electron@22.3.27):
+  /@electron/remote@2.1.2(electron@23.3.13):
     resolution: {integrity: sha512-EPwNx+nhdrTBxyCqXt/pftoQg/ybtWDW3DUWHafejvnB1ZGGfMpv6e15D8KeempocjXe78T7WreyGGb3mlZxdA==}
     peerDependencies:
       electron: '>= 13.0.0'
     dependencies:
-      electron: 22.3.27
+      electron: 23.3.13
     dev: false
 
   /@electron/universal@1.5.1:
@@ -1898,6 +1898,7 @@ packages:
   /color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
     engines: {node: '>=7.0.0'}
+    requiresBuild: true
     dependencies:
       color-name: 1.1.4
 
@@ -1907,6 +1908,7 @@ packages:
 
   /color-name@1.1.4:
     resolution: {integrity: sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==}
+    requiresBuild: true
 
   /colorette@2.0.20:
     resolution: {integrity: sha512-IfEDxwoWIjkeXL1eXcDiow4UbKjhLdq6/EuSVR9GMN7KVH3r9gQ83e73hsz1Nd1T3ijd5xv1wcWRYO+D6kCI2w==}
@@ -2317,8 +2319,8 @@ packages:
       - supports-color
     dev: false
 
-  /electron@22.3.27:
-    resolution: {integrity: sha512-7Rht21vHqj4ZFRnKuZdFqZFsvMBCmDqmjetiMqPtF+TmTBiGne1mnstVXOA/SRGhN2Qy5gY5bznJKpiqogjM8A==}
+  /electron@23.3.13:
+    resolution: {integrity: sha512-BaXtHEb+KYKLouUXlUVDa/lj9pj4F5kiE0kwFdJV84Y2EU7euIDgPthfKtchhr5MVHmjtavRMIV/zAwEiSQ9rQ==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
     requiresBuild: true
@@ -3899,12 +3901,12 @@ packages:
       escape-string-regexp: 4.0.0
     optional: true
 
-  /menubar@9.4.0(electron@22.3.27):
+  /menubar@9.4.0(electron@23.3.13):
     resolution: {integrity: sha512-Zn2si5UXiWbdBZwFSsCyQ8xfaBKkeFYceNvjWATyMUreqv6gDMUvDkvZY/ZFf89DCfo9F0SrvygDOdpZuwoWgw==}
     peerDependencies:
       electron: ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0 ||  ^23.0.0 || ^24.0.0 || ^25.0.0 || ^26.0.0 || ^27.0.0
     dependencies:
-      electron: 22.3.27
+      electron: 23.3.13
       electron-positioner: 4.1.0
     dev: false
 
