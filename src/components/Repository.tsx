@@ -35,19 +35,19 @@ export const RepositoryNotifications: React.FC<IProps> = ({
 
   return (
     <>
-      <div className="flex p-2 bg-gray-100 dark:bg-gray-darker dark:text-white">
-        <div className="flex flex-1 p-0.5 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap">
-          <img className="rounded w-5 h-5 ml-1 mr-3" src={avatarUrl} />
+      <div className="flex py-2 px-3 bg-gray-100 dark:bg-gray-darker dark:text-white">
+        <div className="flex flex-1 space-x-3 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap">
+          <img className="rounded w-5 h-5" src={avatarUrl} />
           <span onClick={openBrowser}>{repoName}</span>
         </div>
 
-        <div className="flex w-8 justify-center items-center">
-          <button className="focus:outline-none" onClick={markRepoAsRead}>
-            <ReadIcon
-              className="hover:text-green-500"
-              size={16}
-              aria-label="Mark Repository as Read"
-            />
+        <div className="flex justify-center items-center">
+          <button
+            className="focus:outline-none h-full hover:text-green-500"
+            title="Mark Repository as Read"
+            onClick={markRepoAsRead}
+          >
+            <ReadIcon size={14} aria-label="Mark Repository as Read" />
           </button>
         </div>
       </div>
