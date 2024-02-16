@@ -23,7 +23,7 @@ import { Reason, StateType, SubjectType, WorkflowType } from '../typesGithub';
 const DESCRIPTIONS = {
   ASSIGN: 'You were assigned to the issue.',
   AUTHOR: 'You created the thread.',
-  CI_ACTIVITY: 'A GitHub Actions workflow run was triggered for your repository',
+  CI_ACTIVITY: 'A GitHub workflow run that you triggered was completed.',
   COMMENT: 'You commented on the thread.',
   DEPLOYMENT_REVIEW: 'You were requested to review and approve a deployment.',
   INVITATION: 'You accepted an invitation to contribute to the repository.',

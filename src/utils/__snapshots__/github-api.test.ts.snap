@@ -23,7 +23,7 @@ exports[`./utils/github-api.ts should format the notification reason 3`] = `
 
 exports[`./utils/github-api.ts should format the notification reason 4`] = `
 {
-  "description": "A GitHub Actions workflow run was triggered for your repository",
+  "description": "A GitHub workflow run that you triggered was completed.",
   "type": "Workflow Run",
 }
 `;
