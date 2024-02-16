@@ -1,7 +1,9 @@
 import { ipcRenderer, shell } from 'electron';
 
 export function openExternalLink(url: string): void {
-  shell.openExternal(url);
+  if (!url.toLowerCase().startsWith('file:///')) {
+    shell.openExternal(url);
+  }
 }
 
 export function setAutoLaunch(value: boolean): void {
