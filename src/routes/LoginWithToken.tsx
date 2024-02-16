@@ -2,12 +2,12 @@ import React, { useCallback, useContext, useState } from 'react';
 import { Form, FormRenderProps } from 'react-final-form';
 import { ArrowLeftIcon } from '@primer/octicons-react';
 import { useNavigate } from 'react-router-dom';
-import { shell } from 'electron';
 
 import { AppContext } from '../context/App';
 import { AuthTokenOptions } from '../types';
 import { Constants } from '../utils/constants';
 import { FieldInput } from '../components/fields/FieldInput';
+import { openExternalLink } from '../utils/comms';
 
 interface IValues {
   token?: string;
@@ -46,7 +46,7 @@ export const LoginWithToken: React.FC = () => {
   const [isValidToken, setIsValidToken] = useState<boolean>(true);
 
   const openLink = useCallback((url: string) => {
-    shell.openExternal(url);
+    openExternalLink(url);
   }, []);
 
   const renderForm = (formProps: FormRenderProps) => {

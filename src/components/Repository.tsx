@@ -1,5 +1,3 @@
-const { shell } = require('electron');
-
 import React, { useCallback, useContext } from 'react';
 import { ReadIcon } from '@primer/octicons-react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
@@ -7,6 +5,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AppContext } from '../context/App';
 import { Notification } from '../typesGithub';
 import { NotificationRow } from './NotificationRow';
+import { openExternalLink } from '../utils/comms';
 
 interface IProps {
   hostname: string;
@@ -23,7 +22,7 @@ export const RepositoryNotifications: React.FC<IProps> = ({
 
   const openBrowser = useCallback(() => {
     const url = repoNotifications[0].repository.html_url;
-    shell.openExternal(url);
+    openExternalLink(url);
   }, [repoNotifications]);
 
   const markRepoAsRead = useCallback(() => {
