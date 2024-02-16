@@ -2,8 +2,8 @@
 
 exports[`./utils/github-api.ts should format the notification reason 1`] = `
 {
-  "description": "You were requested to review and approve a deployment workflow.",
-  "type": "Approval Requested",
+  "description": "You were requested to review and approve a deployment.",
+  "type": "Deployment Review",
 }
 `;
 

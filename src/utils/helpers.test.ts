@@ -4,9 +4,9 @@ import {
   generateNotificationReferrerId,
   getCommentId,
   getLatestDiscussionCommentId,
-  inferWorkflowBranchFromTitle,
-  getCheckSuiteUrl,
-  getWorkflowRunUrl,
+  inferWorkflowRunBranchFromTitle,
+  getWorkflowRunsUrl,
+  getDeploymentReviewUrl,
 } from './helpers';
 import {
   mockedSingleNotification,
@@ -149,13 +149,13 @@ describe('utils/helpers.ts', () => {
     it('should infer branch name from the title', () => {
       notification.subject.title =
         'Demo workflow run succeeded for main branch';
-      expect(inferWorkflowBranchFromTitle(notification)).toBe('main');
+      expect(inferWorkflowRunBranchFromTitle(notification)).toBe('main');
     });
 
     it('should return null for known branch name', () => {
       notification.subject.title =
         'Demo workflow run does not have branch name';
-      expect(inferWorkflowBranchFromTitle(notification)).toBeNull();
+      expect(inferWorkflowRunBranchFromTitle(notification)).toBeNull();
     });
   });
 
@@ -169,7 +169,7 @@ describe('utils/helpers.ts', () => {
     it('should generate a Github Action (CheckSuite) url', () => {
       notification.subject.title = 'Demo workflow run';
 
-      const result = getCheckSuiteUrl(notification);
+      const result = getWorkflowRunsUrl(notification);
       expect(result).toBe(
         'https://github.com/manosim/notifications-test/actions',
       );
@@ -179,7 +179,7 @@ describe('utils/helpers.ts', () => {
       notification.subject.title =
         'Demo workflow run unhandled for main branch';
 
-      const result = getCheckSuiteUrl(notification);
+      const result = getWorkflowRunsUrl(notification);
       expect(result).toBe(
         'https://github.com/manosim/notifications-test/actions?query=workflow:"Demo"+branch:main',
       );
@@ -189,7 +189,7 @@ describe('utils/helpers.ts', () => {
       notification.subject.title =
         'Demo workflow run succeeded for main branch';
 
-      const result = getCheckSuiteUrl(notification);
+      const result = getWorkflowRunsUrl(notification);
       expect(result).toBe(
         'https://github.com/manosim/notifications-test/actions?query=workflow:"Demo"+is:success+branch:main',
       );
@@ -206,7 +206,7 @@ describe('utils/helpers.ts', () => {
     it('should generate a Github Action (WorkflowRun) url', () => {
       notification.subject.title = 'some title';
 
-      const result = getWorkflowRunUrl(notification);
+      const result = getDeploymentReviewUrl(notification);
       expect(result).toBe(
         'https://github.com/manosim/notifications-test/actions',
       );
@@ -216,7 +216,7 @@ describe('utils/helpers.ts', () => {
       notification.subject.title =
         'userA requested your review to deploy to an environment';
 
-      const result = getWorkflowRunUrl(notification);
+      const result = getDeploymentReviewUrl(notification);
       expect(result).toBe(
         'https://github.com/manosim/notifications-test/actions?query=is:waiting',
       );

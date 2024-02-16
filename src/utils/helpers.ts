@@ -147,7 +147,7 @@ async function getDiscussionUrl(
   };
 }
 
-export function inferWorkflowBranchFromTitle(
+export function inferWorkflowRunBranchFromTitle(
   notification: Notification,
 ): string {
   const title = notification.subject.title;
@@ -161,7 +161,7 @@ export function inferWorkflowBranchFromTitle(
   return null;
 }
 
-export function getCheckSuiteUrl(notification: Notification) {
+export function getWorkflowRunsUrl(notification: Notification) {
   let url = `${notification.repository.html_url}/actions`;
   let filters = [];
 
@@ -198,7 +198,7 @@ export function getCheckSuiteUrl(notification: Notification) {
   return url;
 }
 
-export function getWorkflowRunUrl(notification: Notification) {
+export function getDeploymentReviewUrl(notification: Notification) {
   const workflowStatus = getWorkflowTypeFromTitle(notification.subject.title);
 
   let url = `${notification.repository.html_url}/actions`;
@@ -226,6 +226,7 @@ export async function openInBrowser(
   notification: Notification,
   accounts: AuthState,
 ) {
+  console.log('ADAM : ' + notification.subject.type);
   if (notification.subject.type === 'Release') {
     getReleaseTagWebUrl(notification, accounts.token).then(({ url }) =>
       openExternalLink(
@@ -247,13 +248,13 @@ export async function openInBrowser(
         ),
     );
   } else if (notification.subject.type === 'CheckSuite') {
-    const url = getCheckSuiteUrl(notification);
+    const url = getWorkflowRunsUrl(notification);
 
     openExternalLink(
       generateGitHubWebUrl(url, notification.id, accounts.user?.id),
     );
   } else if (notification.subject.type === 'WorkflowRun') {
-    const url = getWorkflowRunUrl(notification);
+    const url = getDeploymentReviewUrl(notification);
 
     openExternalLink(
       generateGitHubWebUrl(url, notification.id, accounts.user?.id),

@@ -21,20 +21,20 @@ import { Reason, StateType, SubjectType, WorkflowType } from '../typesGithub';
 
 // prettier-ignore
 const DESCRIPTIONS = {
-    APPROVAL_REQUESTED: 'You were requested to review and approve a deployment workflow.',
-    ASSIGN: 'You were assigned to the issue.',
-    AUTHOR: 'You created the thread.',
-    CI_ACTIVITY: 'A GitHub Actions workflow run was triggered for your repository',
-    COMMENT: 'You commented on the thread.',
-    INVITATION: 'You accepted an invitation to contribute to the repository.',
-    MANUAL: 'You subscribed to the thread (via an issue or pull request).',
-    MENTION: 'You were specifically @mentioned in the content.',
-    REVIEW_REQUESTED: "You, or a team you're a member of, were requested to review a pull request.",
-    SECURITY_ALERT: 'GitHub discovered a security vulnerability in your repository.',
-    STATE_CHANGE: 'You changed the thread state (for example, closing an issue or merging a pull request).',
-    SUBSCRIBED: "You're watching the repository.",
-    TEAM_MENTION: 'You were on a team that was mentioned.',
-    UNKNOWN: 'The reason for this notification is not supported by the app.',
+  ASSIGN: 'You were assigned to the issue.',
+  AUTHOR: 'You created the thread.',
+  CI_ACTIVITY: 'A GitHub Actions workflow run was triggered for your repository',
+  COMMENT: 'You commented on the thread.',
+  DEPLOYMENT_REVIEW: 'You were requested to review and approve a deployment.',
+  INVITATION: 'You accepted an invitation to contribute to the repository.',
+  MANUAL: 'You subscribed to the thread (via an issue or pull request).',
+  MENTION: 'You were specifically @mentioned in the content.',
+  REVIEW_REQUESTED: "You, or a team you're a member of, were requested to review a pull request.",
+  SECURITY_ALERT: 'GitHub discovered a security vulnerability in your repository.',
+  STATE_CHANGE: 'You changed the thread state (for example, closing an issue or merging a pull request).',
+  SUBSCRIBED: "You're watching the repository.",
+  TEAM_MENTION: 'You were on a team that was mentioned.',
+  UNKNOWN: 'The reason for this notification is not supported by the app.',
 };
 
 export function formatReason(reason: Reason): {
@@ -44,7 +44,7 @@ export function formatReason(reason: Reason): {
   // prettier-ignore
   switch (reason) {
     case 'approval_requested':
-      return { type: 'Approval Requested', description: DESCRIPTIONS['APPROVAL_REQUESTED'] };
+      return { type: 'Deployment Review', description: DESCRIPTIONS['DEPLOYMENT_REVIEW'] };
     case 'assign':
       return { type: 'Assign', description: DESCRIPTIONS['ASSIGN'] };
     case 'author':
