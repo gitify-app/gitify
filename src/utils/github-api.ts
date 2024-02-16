@@ -21,11 +21,11 @@ import { Reason, StateType, SubjectType, WorkflowType } from '../typesGithub';
 
 // prettier-ignore
 const DESCRIPTIONS = {
+  APPROVAL_REQUESTED: 'You were requested to review and approve a deployment.',
   ASSIGN: 'You were assigned to the issue.',
   AUTHOR: 'You created the thread.',
   CI_ACTIVITY: 'A GitHub workflow run that you triggered was completed.',
   COMMENT: 'You commented on the thread.',
-  DEPLOYMENT_REVIEW: 'You were requested to review and approve a deployment.',
   INVITATION: 'You accepted an invitation to contribute to the repository.',
   MANUAL: 'You subscribed to the thread (via an issue or pull request).',
   MENTION: 'You were specifically @mentioned in the content.',
@@ -44,7 +44,7 @@ export function formatReason(reason: Reason): {
   // prettier-ignore
   switch (reason) {
     case 'approval_requested':
-      return { type: 'Deployment Review', description: DESCRIPTIONS['DEPLOYMENT_REVIEW'] };
+      return { type: 'Deployment Review', description: DESCRIPTIONS['APPROVAL_REQUESTED'] };
     case 'assign':
       return { type: 'Assign', description: DESCRIPTIONS['ASSIGN'] };
     case 'author':
