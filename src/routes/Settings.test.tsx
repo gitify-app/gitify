@@ -182,6 +182,37 @@ describe('routes/Settings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('showNotifications', false);
   });
 
+  it('should toggle the showNotificationsCountInTray checkbox', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
+
+    fireEvent.click(getByLabelText('Show notifications count in tray'), {
+      target: { checked: false },
+    });
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith(
+      'showNotificationsCountInTray',
+      true,
+    );
+  });
+
   it('should toggle the markAsDoneOnOpen checkbox', async () => {
     let getByLabelText;
 
