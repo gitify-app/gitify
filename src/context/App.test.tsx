@@ -103,7 +103,11 @@ describe('context/App.tsx', () => {
         const { markNotification } = useContext(AppContext);
 
         return (
-          <button onClick={() => markNotification('123-456', 'github.com')}>
+          <button
+            onClick={() =>
+              markNotification('123-456', 'github.com', mockSettings)
+            }
+          >
             Test Case
           </button>
         );
@@ -120,6 +124,7 @@ describe('context/App.tsx', () => {
         { enterpriseAccounts: [], token: null, user: null },
         '123-456',
         'github.com',
+        mockSettings,
       );
     });
 
@@ -128,7 +133,11 @@ describe('context/App.tsx', () => {
         const { markNotificationDone } = useContext(AppContext);
 
         return (
-          <button onClick={() => markNotificationDone('123-456', 'github.com')}>
+          <button
+            onClick={() =>
+              markNotificationDone('123-456', 'github.com', mockSettings)
+            }
+          >
             Test Case
           </button>
         );
@@ -145,6 +154,7 @@ describe('context/App.tsx', () => {
         { enterpriseAccounts: [], token: null, user: null },
         '123-456',
         'github.com',
+        mockSettings,
       );
     });
 
@@ -172,6 +182,7 @@ describe('context/App.tsx', () => {
         { enterpriseAccounts: [], token: null, user: null },
         '123-456',
         'github.com',
+        mockSettings,
       );
     });
 
@@ -201,6 +212,7 @@ describe('context/App.tsx', () => {
         { enterpriseAccounts: [], token: null, user: null },
         'manosim/gitify',
         'github.com',
+        mockSettings,
       );
     });
 

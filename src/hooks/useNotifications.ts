@@ -10,12 +10,10 @@ import {
   generateGitHubAPIUrl,
 } from '../utils/helpers';
 import { removeNotification } from '../utils/remove-notification';
-import {
-  triggerNativeNotifications,
-  setTrayIconColor,
-} from '../utils/notifications';
+import { triggerNativeNotifications } from '../utils/notifications';
 import Constants from '../utils/constants';
 import { removeNotifications } from '../utils/remove-notifications';
+import { updateTrayIcon } from '../utils/comms';
 
 interface NotificationsState {
   notifications: AccountNotifications[];
@@ -27,21 +25,25 @@ interface NotificationsState {
     accounts: AuthState,
     id: string,
     hostname: string,
+    settings: SettingsState,
   ) => Promise<void>;
   markNotificationDone: (
     accounts: AuthState,
     id: string,
     hostname: string,
+    settings: SettingsState,
   ) => Promise<void>;
   unsubscribeNotification: (
     accounts: AuthState,
     id: string,
     hostname: string,
+    settings: SettingsState,
   ) => Promise<void>;
   markRepoNotifications: (
     accounts: AuthState,
     repoSlug: string,
     hostname: string,
+    settings: SettingsState,
   ) => Promise<void>;
   isFetching: boolean;
   requestFailed: boolean;
@@ -188,7 +190,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const markNotification = useCallback(
-    async (accounts, id, hostname) => {
+    async (accounts, id, hostname, settings) => {
       setIsFetching(true);
 
       const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
@@ -210,8 +212,16 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           hostname,
         );
 
+        const updatedNotificationsCount = updatedNotifications.reduce(
+          (memo, acc) => memo + acc.notifications.length,
+          0,
+        );
+
         setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
+        updateTrayIcon({
+          notificationsCount: updatedNotificationsCount,
+          showNotificationsCountInTray: settings.showNotificationsCountInTray,
+        });
         setIsFetching(false);
       } catch (err) {
         setIsFetching(false);
@@ -221,7 +231,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const markNotificationDone = useCallback(
-    async (accounts, id, hostname) => {
+    async (accounts, id, hostname, settings) => {
       setIsFetching(true);
 
       const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
@@ -243,8 +253,16 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           hostname,
         );
 
+        const updatedNotificationsCount = updatedNotifications.reduce(
+          (memo, acc) => memo + acc.notifications.length,
+          0,
+        );
+
         setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
+        updateTrayIcon({
+          notificationsCount: updatedNotificationsCount,
+          showNotificationsCountInTray: settings.showNotificationsCountInTray,
+        });
         setIsFetching(false);
       } catch (err) {
         setIsFetching(false);
@@ -254,7 +272,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const unsubscribeNotification = useCallback(
-    async (accounts, id, hostname) => {
+    async (accounts, id, hostname, settings) => {
       setIsFetching(true);
 
       const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
@@ -271,7 +289,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           token,
           { ignored: true },
         );
-        await markNotification(accounts, id, hostname);
+        await markNotification(accounts, id, hostname, settings);
       } catch (err) {
         setIsFetching(false);
       }
@@ -280,7 +298,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const markRepoNotifications = useCallback(
-    async (accounts, repoSlug, hostname) => {
+    async (accounts, repoSlug, hostname, settings) => {
       setIsFetching(true);
 
       const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
@@ -302,8 +320,16 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           hostname,
         );
 
+        const updatedNotificationsCount = updatedNotifications.reduce(
+          (memo, acc) => memo + acc.notifications.length,
+          0,
+        );
+
         setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
+        updateTrayIcon({
+          notificationsCount: updatedNotificationsCount,
+          showNotificationsCountInTray: settings.showNotificationsCountInTray,
+        });
         setIsFetching(false);
       } catch (err) {
         setIsFetching(false);

@@ -71,7 +71,10 @@ describe('routes/Settings.tsx', () => {
     expect(logoutMock).toHaveBeenCalledTimes(1);
 
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
+    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon', {
+      notificationsCount: undefined,
+      showNotificationsCountInTray: undefined,
+    });
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 

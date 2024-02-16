@@ -154,6 +154,15 @@ export const SettingsRoute: React.FC = () => {
           checked={settings.showNotificationsCountInTray}
           onChange={(evt) => {
             updateSetting('showNotificationsCountInTray', evt.target.checked);
+
+            const notificationsCount = notifications?.reduce(
+              (memo, acc) => memo + acc.notifications.length,
+              0,
+            );
+            updateTrayIcon({
+              notificationsCount,
+              showNotificationsCountInTray: evt.target.checked,
+            });
           }}
         />
         {!isLinux && (

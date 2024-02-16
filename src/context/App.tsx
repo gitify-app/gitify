@@ -53,8 +53,16 @@ interface AppContextState {
   isFetching: boolean;
   requestFailed: boolean;
   fetchNotifications: () => Promise<void>;
-  markNotification: (id: string, hostname: string) => Promise<void>;
-  markNotificationDone: (id: string, hostname: string) => Promise<void>;
+  markNotification: (
+    id: string,
+    hostname: string,
+    settings: SettingsState,
+  ) => Promise<void>;
+  markNotificationDone: (
+    id: string,
+    hostname: string,
+    settings: SettingsState,
+  ) => Promise<void>;
   unsubscribeNotification: (id: string, hostname: string) => Promise<void>;
   markRepoNotifications: (id: string, hostname: string) => Promise<void>;
 
@@ -176,25 +184,25 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
   const markNotificationWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await markNotification(accounts, id, hostname),
+      await markNotification(accounts, id, hostname, settings),
     [accounts, notifications],
   );
 
   const markNotificationDoneWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await markNotificationDone(accounts, id, hostname),
+      await markNotificationDone(accounts, id, hostname, settings),
     [accounts, notifications],
   );
 
   const unsubscribeNotificationWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await unsubscribeNotification(accounts, id, hostname),
+      await unsubscribeNotification(accounts, id, hostname, settings),
     [accounts, notifications],
   );
 
   const markRepoNotificationsWithAccounts = useCallback(
     async (repoSlug: string, hostname: string) =>
-      await markRepoNotifications(accounts, repoSlug, hostname),
+      await markRepoNotifications(accounts, repoSlug, hostname, settings),
     [accounts, notifications],
   );
 
