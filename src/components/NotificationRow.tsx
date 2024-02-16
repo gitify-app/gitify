@@ -62,8 +62,8 @@ export const NotificationRow: React.FC<IProps> = ({
   });
 
   return (
-    <div className="flex space-x-2 p-2 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker">
-      <div className={`flex justify-center items-center w-8 ${realIconColor}`}>
+    <div className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker">
+      <div className={`flex justify-center items-center w-5 ${realIconColor}`}>
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
 
@@ -84,39 +84,27 @@ export const NotificationRow: React.FC<IProps> = ({
 
       <div className="flex justify-center items-center gap-2">
         <button
-          className="focus:outline-none"
+          className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Done"
           onClick={() => markNotificationDone(notification.id, hostname)}
         >
-          <CheckIcon
-            className="hover:text-green-500"
-            size={16}
-            aria-label="Mark as Done"
-          />
+          <CheckIcon size={16} aria-label="Mark as Done" />
         </button>
 
         <button
-          className="focus:outline-none"
-          title="Mark as Read"
-          onClick={() => markNotification(notification.id, hostname)}
-        >
-          <ReadIcon
-            className="hover:text-green-500"
-            size={14}
-            aria-label="Mark as Read"
-          />
-        </button>
-
-        <button
-          className="border-0 bg-none float-right"
+          className="focus:outline-none h-full hover:text-red-500"
           title="Unsubscribe"
           onClick={unsubscribe}
         >
-          <BellSlashIcon
-            className="hover:text-red-500"
-            size={14}
-            aria-label="Unsubscribe"
-          />
+          <BellSlashIcon size={14} aria-label="Unsubscribe" />
+        </button>
+
+        <button
+          className="focus:outline-none h-full hover:text-green-500"
+          title="Mark as Read"
+          onClick={() => markNotification(notification.id, hostname)}
+        >
+          <ReadIcon size={14} aria-label="Mark as Read" />
         </button>
       </div>
     </div>
