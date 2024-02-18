@@ -1,3 +1,4 @@
+import { writeFileSync } from 'fs';
 import { EnterpriseAccount, AuthState } from '../types';
 import {
   Notification,
@@ -53,7 +54,7 @@ const addHours = (date: string, hours: number) =>
 const queryString = (repo: string, title: string, lastUpdated: string) =>
   `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
 
-async function getHtmlUrl(url: string, token: string) {
+export async function getHtmlUrl(url: string, token: string) {
   const response = await apiRequestAuth(url, 'GET', token);
 
   return response.data.html_url;
@@ -138,7 +139,7 @@ export const getLatestDiscussionCommentId = (
     .reduce((a, b) => (a.node.createdAt > b.node.createdAt ? a : b))?.node
     .databaseId;
 
-export async function openInBrowser(
+export async function generateGitHubWebUrl(
   notification: Notification,
   accounts: AuthState,
 ) {
@@ -156,6 +157,15 @@ export async function openInBrowser(
   }
 
   url = addNotificationReferrerIdToUrl(url, notification.id, accounts.user?.id);
+
+  return url;
+}
+
+export async function openInBrowser(
+  notification: Notification,
+  accounts: AuthState,
+) {
+  const url = await generateGitHubWebUrl(notification, accounts);
 
   openExternalLink(url);
 }
