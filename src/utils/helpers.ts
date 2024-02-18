@@ -1,4 +1,3 @@
-import { writeFileSync } from 'fs';
 import { EnterpriseAccount, AuthState } from '../types';
 import {
   Notification,
