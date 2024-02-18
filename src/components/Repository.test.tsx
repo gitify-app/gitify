@@ -52,13 +52,13 @@ describe('components/Repository.tsx', () => {
   });
 
   it('should mark a repo as read', function () {
-    const { getByRole } = render(
+    const { getByTitle } = render(
       <AppContext.Provider value={{ markRepoNotifications }}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByRole('button'));
+    fireEvent.click(getByTitle('Mark Repository as Read'));
 
     expect(markRepoNotifications).toHaveBeenCalledWith(
       'manosim/notifications-test',
