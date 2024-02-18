@@ -22,44 +22,29 @@ export function generateGitHubAPIUrl(hostname) {
     : `https://api.${hostname}/`;
 }
 
+export function addNotificationReferrerIdToUrl(
+  url: string,
+  notificationId: string,
+  userId: number,
+): string {
+  const parsedUrl = new URL(url);
+
+  parsedUrl.searchParams.set(
+    'notification_referrer_id',
+    generateNotificationReferrerId(notificationId, userId),
+  );
+
+  return parsedUrl.href;
+}
+
 export function generateNotificationReferrerId(
   notificationId: string,
   userId: number,
-) {
+): string {
   const buffer = Buffer.from(
     `018:NotificationThread${notificationId}:${userId}`,
   );
-  return `notification_referrer_id=${buffer.toString('base64')}`;
-}
-
-export function generateGitHubWebUrl(
-  url: string,
-  notificationId: string,
-  userId?: number,
-  comment: string = '',
-) {
-  const { hostname } = new URL(url);
-  const isEnterprise =
-    hostname !== `api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}`;
-
-  let newUrl: string = isEnterprise
-    ? url.replace(`${hostname}/api/v3/repos`, hostname)
-    : url.replace('api.github.com/repos', 'github.com');
-
-  if (newUrl.indexOf('/pulls/') !== -1) {
-    newUrl = newUrl.replace('/pulls/', '/pull/');
-  }
-
-  if (userId) {
-    const notificationReferrerId = generateNotificationReferrerId(
-      notificationId,
-      userId,
-    );
-
-    return `${newUrl}?${notificationReferrerId}${comment}`;
-  }
-
-  return newUrl + comment;
+  return buffer.toString('base64');
 }
 
 const addHours = (date: string, hours: number) =>
@@ -68,18 +53,18 @@ const addHours = (date: string, hours: number) =>
 const queryString = (repo: string, title: string, lastUpdated: string) =>
   `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
 
-async function getReleaseTagWebUrl(notification: Notification, token: string) {
-  const response = await apiRequestAuth(notification.subject.url, 'GET', token);
+async function getHtmlUrl(url: string, token: string) {
+  const response = await apiRequestAuth(url, 'GET', token);
 
-  return {
-    url: response.data.html_url,
-  };
+  return response.data.html_url;
 }
 
 async function getDiscussionUrl(
   notification: Notification,
   token: string,
-): Promise<{ url: string; latestCommentId: string | number }> {
+): Promise<string> {
+  let url = `${notification.repository.url}/discussions`;
+
   const response: GraphQLSearch = await apiRequestAuth(
     `https://api.github.com/graphql`,
     'POST',
@@ -129,17 +114,19 @@ async function getDiscussionUrl(
       (edge) => edge.node.viewerSubscription === 'SUBSCRIBED',
     );
 
-  let comments = edges[0]?.node.comments.edges;
+  if (edges[0]) {
+    url = edges[0].node.url;
 
-  let latestCommentId: string | number;
-  if (comments?.length) {
-    latestCommentId = getLatestDiscussionCommentId(comments);
+    let comments = edges[0]?.node.comments.edges;
+
+    let latestCommentId: string | number;
+    if (comments?.length) {
+      latestCommentId = getLatestDiscussionCommentId(comments);
+      url += `#discussioncomment-${latestCommentId}`;
+    }
   }
 
-  return {
-    url: edges[0]?.node.url,
-    latestCommentId,
-  };
+  return url;
 }
 
 export const getLatestDiscussionCommentId = (
@@ -151,49 +138,24 @@ export const getLatestDiscussionCommentId = (
     .reduce((a, b) => (a.node.createdAt > b.node.createdAt ? a : b))?.node
     .databaseId;
 
-export const getCommentId = (url: string) =>
-  /comments\/(?<id>\d+)/g.exec(url)?.groups?.id;
-
 export async function openInBrowser(
   notification: Notification,
   accounts: AuthState,
 ) {
-  if (notification.subject.type === 'Release') {
-    getReleaseTagWebUrl(notification, accounts.token).then(({ url }) =>
-      openExternalLink(
-        generateGitHubWebUrl(
-          url,
-          notification.id,
-          accounts.user?.id,
-          undefined,
-        ),
-      ),
-    );
-  } else if (notification.subject.type === 'Discussion') {
-    getDiscussionUrl(notification, accounts.token).then(
-      ({ url, latestCommentId }) =>
-        openExternalLink(
-          generateGitHubWebUrl(
-            url || `${notification.repository.url}/discussions`,
-            notification.id,
-            accounts.user?.id,
-            latestCommentId
-              ? '#discussioncomment-' + latestCommentId
-              : undefined,
-          ),
-        ),
+  let url = notification.repository.html_url;
+
+  if (notification.subject.latest_comment_url) {
+    url = await getHtmlUrl(
+      notification.subject.latest_comment_url,
+      accounts.token,
     );
   } else if (notification.subject.url) {
-    const latestCommentId = getCommentId(
-      notification.subject.latest_comment_url,
-    );
-    openExternalLink(
-      generateGitHubWebUrl(
-        notification.subject.url,
-        notification.id,
-        accounts.user?.id,
-        latestCommentId ? '#issuecomment-' + latestCommentId : undefined,
-      ),
-    );
+    url = await getHtmlUrl(notification.subject.url, accounts.token);
+  } else if (notification.subject.type === 'Discussion') {
+    url = await getDiscussionUrl(notification, accounts.token);
   }
+
+  url = addNotificationReferrerIdToUrl(url, notification.id, accounts.user?.id);
+
+  openExternalLink(url);
 }
