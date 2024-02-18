@@ -13,6 +13,7 @@ jest.mock('./NotificationRow', () => ({
 }));
 
 describe('components/Repository.tsx', () => {
+  const unsubscribeRepository = jest.fn();
   const markRepoNotifications = jest.fn();
 
   const props = {
@@ -48,6 +49,21 @@ describe('components/Repository.tsx', () => {
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(
       'https://github.com/manosim/notifications-test',
+    );
+  });
+
+  it('should unsubscribe from the repository', () => {
+    const { getByTitle } = render(
+      <AppContext.Provider value={{ unsubscribeRepository }}>
+        <RepositoryNotifications {...props} />
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(getByTitle('Unsubscribe'));
+
+    expect(unsubscribeRepository).toHaveBeenCalledWith(
+      'manosim/notifications-test',
+      'github.com',
     );
   });
 
