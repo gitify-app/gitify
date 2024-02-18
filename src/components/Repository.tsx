@@ -1,5 +1,5 @@
 import React, { useCallback, useContext } from 'react';
-import { ReadIcon } from '@primer/octicons-react';
+import { BellSlashIcon, ReadIcon } from '@primer/octicons-react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { AppContext } from '../context/App';
@@ -18,7 +18,8 @@ export const RepositoryNotifications: React.FC<IProps> = ({
   repoNotifications,
   hostname,
 }) => {
-  const { markRepoNotifications } = useContext(AppContext);
+  const { markRepoNotifications, unsubscribeRepository } =
+    useContext(AppContext);
 
   const openBrowser = useCallback(() => {
     const url = repoNotifications[0].repository.html_url;
@@ -28,6 +29,11 @@ export const RepositoryNotifications: React.FC<IProps> = ({
   const markRepoAsRead = useCallback(() => {
     const repoSlug = repoNotifications[0].repository.full_name;
     markRepoNotifications(repoSlug, hostname);
+  }, [repoNotifications, hostname]);
+
+  const unsubscribe = useCallback(() => {
+    const repoSlug = repoNotifications[0].repository.full_name;
+    unsubscribeRepository(repoSlug, hostname);
   }, [repoNotifications, hostname]);
 
   const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
@@ -40,7 +46,15 @@ export const RepositoryNotifications: React.FC<IProps> = ({
           <span onClick={openBrowser}>{repoName}</span>
         </div>
 
-        <div className="flex justify-center items-center">
+        <div className="flex justify-center items-center gap-2">
+          <button
+            className="focus:outline-none h-full hover:text-red-500"
+            title="Unsubscribe"
+            onClick={unsubscribe}
+          >
+            <BellSlashIcon size={14} aria-label="Unsubscribe" />
+          </button>
+
           <button
             className="focus:outline-none h-full hover:text-green-500"
             title="Mark Repository as Read"

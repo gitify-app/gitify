@@ -38,6 +38,11 @@ interface NotificationsState {
     id: string,
     hostname: string,
   ) => Promise<void>;
+  unsubscribeRepository: (
+    accounts: AuthState,
+    repoSlug: string,
+    hostname: string,
+  ) => Promise<void>;
   markRepoNotifications: (
     accounts: AuthState,
     repoSlug: string,
@@ -279,6 +284,30 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     [notifications],
   );
 
+  const unsubscribeRepository = useCallback(
+    async (accounts, repoSlug, hostname) => {
+      setIsFetching(true);
+
+      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const token = isEnterprise
+        ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
+        : accounts.token;
+
+      try {
+        await apiRequestAuth(
+          `${generateGitHubAPIUrl(hostname)}repos/${repoSlug}/subscription`,
+          'PUT',
+          token,
+          { ignored: true },
+        );
+        await markRepoNotifications(accounts, repoSlug, hostname);
+      } catch (err) {
+        setIsFetching(false);
+      }
+    },
+    [notifications],
+  );
+
   const markRepoNotifications = useCallback(
     async (accounts, repoSlug, hostname) => {
       setIsFetching(true);
@@ -321,6 +350,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     markNotification,
     markNotificationDone,
     unsubscribeNotification,
+    unsubscribeRepository,
     markRepoNotifications,
   };
 };
