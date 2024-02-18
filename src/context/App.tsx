@@ -36,7 +36,7 @@ export const defaultSettings: SettingsState = {
   showNotifications: true,
   openAtStartup: false,
   appearance: Appearance.SYSTEM,
-  colors: false,
+  colors: null,
   markAsDoneOnOpen: false,
 };
 
