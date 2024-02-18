@@ -2,13 +2,13 @@ import {
   generateGitHubWebUrl,
   generateGitHubAPIUrl,
   generateNotificationReferrerId,
-  getCommentId,
   getLatestDiscussionCommentId,
 } from './helpers';
 import {
   mockedSingleNotification,
   mockedUser,
   mockedGraphQLResponse,
+  mockedAuthState,
 } from '../__mocks__/mockedData';
 
 const URL = {
@@ -30,7 +30,7 @@ describe('utils/helpers.ts', () => {
         mockedUser.id,
       );
       expect(referrerId).toBe(
-        'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=',
+        'MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=',
       );
     });
   });
@@ -96,8 +96,8 @@ describe('utils/helpers.ts', () => {
       testGenerateUrl(
         `${URL.normal.api}/issues/5`,
         `${URL.normal.default}/issues/5?${notificationReferrerId}#issuecomment-1059824632`,
-        '#issuecomment-' +
-          getCommentId(`${URL.normal.api}/issues/comments/1059824632`),
+        // '#issuecomment-' +
+        //   getCommentId(`${URL.normal.api}/issues/comments/1059824632`),
       ));
 
     it('should generate the GitHub discussion url with correct commentId', () =>
@@ -111,15 +111,11 @@ describe('utils/helpers.ts', () => {
       ));
 
     function testGenerateUrl(apiUrl, ExpectedResult, comment?) {
-      const notif = { ...mockedSingleNotification, subject: { url: apiUrl } };
-      expect(
-        generateGitHubWebUrl(
-          notif.subject.url,
-          notif.id,
-          mockedUser.id,
-          comment,
-        ),
-      ).toBe(ExpectedResult);
+      const notif = {
+        ...mockedSingleNotification,
+        subject: { ...mockedSingleNotification.subject, url: apiUrl },
+      };
+      expect(generateGitHubWebUrl(notif, mockedAuthState)).toBe(ExpectedResult);
     }
   });
 
