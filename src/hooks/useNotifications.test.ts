@@ -551,6 +551,117 @@ describe('hooks/useNotifications.ts', () => {
     });
   });
 
+  describe('unsubscribeRepository', () => {
+    const repoSlug = 'manosim/notifications-test';
+    const id = 'notification-123';
+
+    describe('github.com', () => {
+      const accounts = { ...mockAccounts, enterpriseAccounts: [] };
+      const hostname = 'github.com';
+
+      it('should unsubscribe from a repository with success - github.com', async () => {
+        // The unsubscribe endpoint call.
+        nock('https://api.github.com/')
+          .put(`/repos/${repoSlug}/subscription`)
+          .reply(200);
+
+        // The mark read endpoint call.
+        nock('https://api.github.com/')
+          .patch(`/notifications/threads/${id}`)
+          .reply(200);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.unsubscribeRepository(accounts, id, hostname);
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+
+      it('should unsubscribe from a repository with failure - github.com', async () => {
+        // The unsubscribe endpoint call.
+        nock('https://api.github.com/')
+          .put(`/repos/${repoSlug}/subscription`)
+          .reply(400);
+
+        // The mark read endpoint call.
+        nock('https://api.github.com/')
+          .patch(`/notifications/threads/${id}`)
+          .reply(400);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.unsubscribeRepository(accounts, id, hostname);
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+    });
+
+    describe('enterprise', () => {
+      const accounts = { ...mockAccounts, token: null };
+      const hostname = 'github.gitify.io';
+
+      it('should unsubscribe from a notification with success - enterprise', async () => {
+        // The unsubscribe endpoint call.
+        nock('https://github.gitify.io/')
+          .put(`/repos/${repoSlug}/subscription`)
+          .reply(200);
+
+        // The mark read endpoint call.
+        nock('https://github.gitify.io/')
+          .patch(`/notifications/threads/${id}`)
+          .reply(200);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.unsubscribeRepository(accounts, repoSlug, hostname);
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+
+      it('should unsubscribe from a notification with failure - enterprise', async () => {
+        // The unsubscribe endpoint call.
+        nock('https://github.gitify.io/')
+          .put(`/repos/${repoSlug}/subscription`)
+          .reply(400);
+
+        // The mark read endpoint call.
+        nock('https://github.gitify.io/')
+          .patch(`/notifications/threads/${id}`)
+          .reply(400);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.unsubscribeRepository(accounts, repoSlug, hostname);
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+    });
+  });
+
   describe('markRepoNotifications', () => {
     const repoSlug = 'manosim/gitify';
 
