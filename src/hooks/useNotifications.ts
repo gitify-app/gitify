@@ -105,7 +105,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                 ]
               : [...enterpriseNotifications];
 
-            if (!colors) {
+            if (colors === false) {
               setNotifications(data);
               triggerNativeNotifications(
                 notifications,

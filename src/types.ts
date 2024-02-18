@@ -12,7 +12,7 @@ export interface SettingsState {
   showNotifications: boolean;
   openAtStartup: boolean;
   appearance: Appearance;
-  colors: boolean;
+  colors: boolean | null;
   markAsDoneOnOpen: boolean;
 }
 
