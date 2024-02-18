@@ -56,6 +56,7 @@ interface AppContextState {
   markNotificationDone: (id: string, hostname: string) => Promise<void>;
   unsubscribeNotification: (id: string, hostname: string) => Promise<void>;
   markRepoNotifications: (id: string, hostname: string) => Promise<void>;
+  markRepoNotificationsDone: (id: string, hostname: string) => Promise<void>;
 
   settings: SettingsState;
   updateSetting: (name: keyof SettingsState, value: any) => void;
@@ -75,6 +76,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     markNotificationDone,
     unsubscribeNotification,
     markRepoNotifications,
+    markRepoNotificationsDone,
   } = useNotifications(settings.colors);
 
   useEffect(() => {
@@ -197,6 +199,12 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     [accounts, notifications],
   );
 
+  const markRepoNotificationsDoneWithAccounts = useCallback(
+    async (repoSlug: string, hostname: string) =>
+      await markRepoNotificationsDone(accounts, repoSlug, hostname),
+    [accounts, notifications],
+  );
+
   return (
     <AppContext.Provider
       value={{
@@ -215,6 +223,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         markNotificationDone: markNotificationDoneWithAccounts,
         unsubscribeNotification: unsubscribeNotificationWithAccounts,
         markRepoNotifications: markRepoNotificationsWithAccounts,
+        markRepoNotificationsDone: markRepoNotificationsDoneWithAccounts,
 
         settings,
         updateSetting,
