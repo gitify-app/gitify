@@ -51,6 +51,7 @@ interface AppContextState {
   notifications: AccountNotifications[];
   isFetching: boolean;
   requestFailed: boolean;
+  removeNotificationFromState: (id: string, hostname: string) => void;
   fetchNotifications: () => Promise<void>;
   markNotification: (id: string, hostname: string) => Promise<void>;
   markNotificationDone: (id: string, hostname: string) => Promise<void>;
@@ -71,6 +72,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     notifications,
     requestFailed,
     isFetching,
+    removeNotificationFromState,
     markNotification,
     markNotificationDone,
     unsubscribeNotification,
@@ -210,6 +212,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         notifications,
         isFetching,
         requestFailed,
+        removeNotificationFromState,
         fetchNotifications: fetchNotificationsWithAccounts,
         markNotification: markNotificationWithAccounts,
         markNotificationDone: markNotificationDoneWithAccounts,

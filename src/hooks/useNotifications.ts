@@ -19,6 +19,7 @@ import { removeNotifications } from '../utils/remove-notifications';
 
 interface NotificationsState {
   notifications: AccountNotifications[];
+  removeNotificationFromState: (id: string, hostname: string) => void;
   fetchNotifications: (
     accounts: AuthState,
     settings: SettingsState,
@@ -312,11 +313,26 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     [notifications],
   );
 
+  const removeNotificationFromState = useCallback(
+    (id, hostname) => {
+      const updatedNotifications = removeNotification(
+        id,
+        notifications,
+        hostname,
+      );
+
+      setNotifications(updatedNotifications);
+      setTrayIconColor(updatedNotifications);
+    },
+    [notifications],
+  );
+
   return {
     isFetching,
     requestFailed,
     notifications,
 
+    removeNotificationFromState,
     fetchNotifications,
     markNotification,
     markNotificationDone,
