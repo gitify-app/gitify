@@ -8,6 +8,7 @@ import { apiRequestAuth } from '../utils/api-requests';
 import {
   getEnterpriseAccountToken,
   generateGitHubAPIUrl,
+  isEnterpriseHost,
 } from '../utils/helpers';
 import { removeNotification } from '../utils/remove-notification';
 import {
@@ -129,9 +130,9 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                           ) {
                             return notification;
                           }
-                          const isEnterprise =
-                            accountNotifications.hostname !==
-                            Constants.DEFAULT_AUTH_OPTIONS.hostname;
+                          const isEnterprise = isEnterpriseHost(
+                            accountNotifications.hostname,
+                          );
                           const token = isEnterprise
                             ? getEnterpriseAccountToken(
                                 accountNotifications.hostname,
@@ -191,7 +192,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     async (accounts, id, hostname) => {
       setIsFetching(true);
 
-      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
         ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
         : accounts.token;
@@ -224,7 +225,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     async (accounts, id, hostname) => {
       setIsFetching(true);
 
-      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
         ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
         : accounts.token;
@@ -257,7 +258,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     async (accounts, id, hostname) => {
       setIsFetching(true);
 
-      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
         ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
         : accounts.token;
@@ -283,7 +284,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     async (accounts, repoSlug, hostname) => {
       setIsFetching(true);
 
-      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
         ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
         : accounts.token;

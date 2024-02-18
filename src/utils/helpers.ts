@@ -15,8 +15,15 @@ export function getEnterpriseAccountToken(
   return accounts.find((obj) => obj.hostname === hostname).token;
 }
 
+export function isEnterpriseHost(hostname: string): boolean {
+  return (
+    hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname &&
+    hostname !== `api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}`
+  );
+}
+
 export function generateGitHubAPIUrl(hostname) {
-  const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+  const isEnterprise = isEnterpriseHost(hostname);
   return isEnterprise
     ? `https://${hostname}/api/v3/`
     : `https://api.${hostname}/`;
@@ -39,8 +46,7 @@ export function generateGitHubWebUrl(
   comment: string = '',
 ) {
   const { hostname } = new URL(url);
-  const isEnterprise =
-    hostname !== `api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}`;
+  const isEnterprise = isEnterpriseHost(hostname);
 
   let newUrl: string = isEnterprise
     ? url.replace(`${hostname}/api/v3/repos`, hostname)
