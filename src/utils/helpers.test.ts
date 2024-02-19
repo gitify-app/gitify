@@ -26,8 +26,8 @@ const URL = {
 describe('utils/helpers.ts', () => {
   describe('isEnterpriseHost', () => {
     it('should return true for enterprise host', () => {
-      expect(isEnterpriseHost('enterprise.com')).toBe(true);
-      expect(isEnterpriseHost('api.enterprise.com')).toBe(true);
+      expect(isEnterpriseHost('github.manos.im')).toBe(true);
+      expect(isEnterpriseHost('api.github.manos.im')).toBe(true);
     });
 
     it('should return false for non-enterprise host', () => {
