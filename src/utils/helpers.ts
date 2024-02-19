@@ -16,10 +16,7 @@ export function getEnterpriseAccountToken(
 }
 
 export function isEnterpriseHost(hostname: string): boolean {
-  return (
-    hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname &&
-    hostname !== `api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}`
-  );
+  return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
 }
 
 export function generateGitHubAPIUrl(hostname) {
