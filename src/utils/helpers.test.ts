@@ -3,6 +3,7 @@ import {
   generateGitHubAPIUrl,
   generateNotificationReferrerId,
   getLatestDiscussionCommentId,
+  isEnterpriseHost,
 } from './helpers';
 import {
   mockedSingleNotification,
@@ -23,6 +24,18 @@ const URL = {
 };
 
 describe('utils/helpers.ts', () => {
+  describe('isEnterpriseHost', () => {
+    it('should return true for enterprise host', () => {
+      expect(isEnterpriseHost('github.manos.im')).toBe(true);
+      expect(isEnterpriseHost('api.github.manos.im')).toBe(true);
+    });
+
+    it('should return false for non-enterprise host', () => {
+      expect(isEnterpriseHost('github.com')).toBe(false);
+      expect(isEnterpriseHost('api.github.com')).toBe(false);
+    });
+  });
+
   describe('generateNotificationReferrerId', () => {
     it('should generate the notification_referrer_id', () => {
       const referrerId = generateNotificationReferrerId(

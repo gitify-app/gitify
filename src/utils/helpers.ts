@@ -15,8 +15,12 @@ export function getEnterpriseAccountToken(
   return accounts.find((obj) => obj.hostname === hostname).token;
 }
 
+export function isEnterpriseHost(hostname: string): boolean {
+  return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
+}
+
 export function generateGitHubAPIUrl(hostname) {
-  const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+  const isEnterprise = isEnterpriseHost(hostname);
   return isEnterprise
     ? `https://${hostname}/api/v3/`
     : `https://api.${hostname}/`;

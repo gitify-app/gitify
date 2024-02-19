@@ -31,7 +31,7 @@ describe('components/Notification.js', () => {
   });
 
   it('should open a notification in the browser', () => {
-    const markNotification = jest.fn();
+    const removeNotificationFromState = jest.fn();
 
     const props = {
       notification: mockedSingleNotification,
@@ -42,7 +42,7 @@ describe('components/Notification.js', () => {
       <AppContext.Provider
         value={{
           settings: { ...mockSettings, markAsDoneOnOpen: false },
-          markNotification,
+          removeNotificationFromState,
           accounts: mockAccounts,
         }}
       >
@@ -52,6 +52,7 @@ describe('components/Notification.js', () => {
 
     fireEvent.click(getByRole('main'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
   });
 
   it('should open a notification in browser & mark it as done', () => {

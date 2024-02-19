@@ -1,4 +1,8 @@
-import { formatReason, getNotificationTypeIcon } from './github-api';
+import {
+  formatReason,
+  getNotificationTypeIcon,
+  getNotificationTypeIconColor,
+} from './github-api';
 import { Reason, SubjectType } from '../typesGithub';
 
 describe('./utils/github-api.ts', () => {
@@ -61,5 +65,16 @@ describe('./utils/github-api.ts', () => {
     expect(getNotificationTypeIcon('Unknown' as SubjectType).displayName).toBe(
       'QuestionIcon',
     );
+  });
+
+  it('should format the notification color', () => {
+    expect(getNotificationTypeIconColor('closed')).toMatchSnapshot();
+    expect(getNotificationTypeIconColor('completed')).toMatchSnapshot();
+    expect(getNotificationTypeIconColor('draft')).toMatchSnapshot();
+    expect(getNotificationTypeIconColor('merged')).toMatchSnapshot();
+    expect(getNotificationTypeIconColor('not_planned')).toMatchSnapshot();
+    expect(getNotificationTypeIconColor('open')).toMatchSnapshot();
+    expect(getNotificationTypeIconColor('reopened')).toMatchSnapshot();
+    expect(formatReason('something_else_unknown' as Reason)).toMatchSnapshot();
   });
 });

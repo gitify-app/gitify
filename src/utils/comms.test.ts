@@ -41,6 +41,11 @@ describe('utils/comms.ts', () => {
     expect(shell.openExternal).toHaveBeenCalledWith('http://www.gitify.io/');
   });
 
+  it('should ignore opening external local links file:///', () => {
+    openExternalLink('file:///Applications/SomeApp.app');
+    expect(shell.openExternal).toHaveBeenCalledTimes(0);
+  });
+
   it('should setAutoLaunch (true)', () => {
     setAutoLaunch(true);
 

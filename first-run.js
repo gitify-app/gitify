@@ -42,6 +42,11 @@ function isFirstRun() {
       return false;
     }
 
+    const firstRunFolder = path.dirname(configPath);
+    if (!fs.existsSync(firstRunFolder)) {
+      fs.mkdirSync(firstRunFolder);
+    }
+
     fs.writeFileSync(configPath, '');
   } catch (error) {
     console.warn(`First run: Unable to write firstRun file`, error);

@@ -28,8 +28,11 @@ export type IssueStateType =
   | 'completed'
   | 'reopened'
   | 'not_planned';
+
 export type PullRequestStateType = 'closed' | 'open' | 'merged' | 'draft';
+
 export type StateType = IssueStateType | PullRequestStateType;
+
 export type ViewerSubscription = 'IGNORED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
 
 export interface Notification {
