@@ -333,13 +333,15 @@ export const useNotifications = (colors: boolean): NotificationsState => {
             (notification) => notification.repository.full_name === repoSlug,
           );
 
-          for (const notification of notificationsToRemove) {
-            await markNotificationDone(
-              accounts,
-              notification.id,
-              notifications[accountIndex].hostname,
-            );
-          }
+          await Promise.all(
+            notificationsToRemove.map((notification) =>
+              markNotificationDone(
+                accounts,
+                notification.id,
+                notifications[accountIndex].hostname,
+              ),
+            ),
+          );
         }
 
         const updatedNotifications = removeNotifications(
