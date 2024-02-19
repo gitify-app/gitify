@@ -1,10 +1,9 @@
+const { handleAuthCallback } = require('src/utils/auth')
 const { ipcMain, app, nativeTheme } = require('electron');
 const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('path');
-
-require('@electron/remote/main').initialize()
 
 app.setAppUserModelId('com.electron.gitify');
 
@@ -23,7 +22,6 @@ const browserWindowOpts = {
   minHeight: 400,
   resizable: false,
   webPreferences: {
-    enableRemoteModule: true,
     overlayScrollbars: true,
     nodeIntegration: true,
     contextIsolation: false,
@@ -88,6 +86,11 @@ menubarApp.on('ready', () => {
   });
   ipcMain.on('set-login-item-settings', (event, settings) => {
     app.setLoginItemSettings(settings);
+  });
+
+  app.on('open-url', function(event, url) {
+    event.preventDefault();
+    handleAuthCallback(url);
   });
 
   menubarApp.window.webContents.on('devtools-opened', () => {
