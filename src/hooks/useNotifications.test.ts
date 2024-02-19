@@ -672,4 +672,107 @@ describe('hooks/useNotifications.ts', () => {
       });
     });
   });
+
+  describe('markRepoNotificationsDone', () => {
+    const repoSlug = 'manosim/gitify';
+    const id = 'notification-123';
+
+    describe('github.com', () => {
+      const accounts = { ...mockAccounts, enterpriseAccounts: [] };
+      const hostname = 'github.com';
+
+      it("should mark a repository's notifications as done with success - github.com", async () => {
+        nock('https://api.github.com/')
+          .delete(`/notifications/threads/${id}`)
+          .reply(200);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.markRepoNotificationsDone(
+            accounts,
+            repoSlug,
+            hostname,
+          );
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+
+      it("should mark a repository's notifications as done with failure - github.com", async () => {
+        nock('https://api.github.com/')
+          .delete(`/notifications/threads/${id}`)
+          .reply(400);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.markRepoNotificationsDone(
+            accounts,
+            repoSlug,
+            hostname,
+          );
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+    });
+
+    describe('enterprise', () => {
+      const accounts = { ...mockAccounts, token: null };
+      const hostname = 'github.gitify.io';
+
+      it("should mark a repository's notifications as done with success - enterprise", async () => {
+        nock('https://api.github.com/')
+          .delete(`/notifications/threads/${id}`)
+          .reply(200);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.markRepoNotificationsDone(
+            accounts,
+            repoSlug,
+            hostname,
+          );
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+
+      it("should mark a repository's notifications as done with failure - enterprise", async () => {
+        nock('https://api.github.com/')
+          .delete(`/notifications/threads/${id}`)
+          .reply(400);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.markRepoNotificationsDone(
+            accounts,
+            repoSlug,
+            hostname,
+          );
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+    });
+  });
 });

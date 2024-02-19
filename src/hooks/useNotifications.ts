@@ -45,6 +45,11 @@ interface NotificationsState {
     repoSlug: string,
     hostname: string,
   ) => Promise<void>;
+  markRepoNotificationsDone: (
+    accounts: AuthState,
+    repoSlug: string,
+    hostname: string,
+  ) => Promise<void>;
   isFetching: boolean;
   requestFailed: boolean;
 }
@@ -314,6 +319,49 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     [notifications],
   );
 
+  const markRepoNotificationsDone = useCallback(
+    async (accounts, repoSlug, hostname) => {
+      setIsFetching(true);
+
+      try {
+        const accountIndex = notifications.findIndex(
+          (accountNotifications) => accountNotifications.hostname === hostname,
+        );
+
+        if (accountIndex !== -1) {
+          const notificationsToRemove = notifications[
+            accountIndex
+          ].notifications.filter(
+            (notification) => notification.repository.full_name === repoSlug,
+          );
+
+          await Promise.all(
+            notificationsToRemove.map((notification) =>
+              markNotificationDone(
+                accounts,
+                notification.id,
+                notifications[accountIndex].hostname,
+              ),
+            ),
+          );
+        }
+
+        const updatedNotifications = removeNotifications(
+          repoSlug,
+          notifications,
+          hostname,
+        );
+
+        setNotifications(updatedNotifications);
+        setTrayIconColor(updatedNotifications);
+        setIsFetching(false);
+      } catch (err) {
+        setIsFetching(false);
+      }
+    },
+    [notifications],
+  );
+
   const removeNotificationFromState = useCallback(
     (id, hostname) => {
       const updatedNotifications = removeNotification(
@@ -339,5 +387,6 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     markNotificationDone,
     unsubscribeNotification,
     markRepoNotifications,
+    markRepoNotificationsDone,
   };
 };
