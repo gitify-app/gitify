@@ -8,6 +8,7 @@ import { apiRequestAuth } from '../utils/api-requests';
 import {
   getEnterpriseAccountToken,
   generateGitHubAPIUrl,
+  isEnterpriseHost,
 } from '../utils/helpers';
 import { removeNotification } from '../utils/remove-notification';
 import {
@@ -19,6 +20,7 @@ import { removeNotifications } from '../utils/remove-notifications';
 
 interface NotificationsState {
   notifications: AccountNotifications[];
+  removeNotificationFromState: (id: string, hostname: string) => void;
   fetchNotifications: (
     accounts: AuthState,
     settings: SettingsState,
@@ -109,7 +111,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                 ]
               : [...enterpriseNotifications];
 
-            if (!colors) {
+            if (colors === false) {
               setNotifications(data);
               triggerNativeNotifications(
                 notifications,
@@ -134,9 +136,9 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                           ) {
                             return notification;
                           }
-                          const isEnterprise =
-                            accountNotifications.hostname !==
-                            Constants.DEFAULT_AUTH_OPTIONS.hostname;
+                          const isEnterprise = isEnterpriseHost(
+                            accountNotifications.hostname,
+                          );
                           const token = isEnterprise
                             ? getEnterpriseAccountToken(
                                 accountNotifications.hostname,
@@ -196,7 +198,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     async (accounts, id, hostname) => {
       setIsFetching(true);
 
-      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
         ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
         : accounts.token;
@@ -229,7 +231,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     async (accounts, id, hostname) => {
       setIsFetching(true);
 
-      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
         ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
         : accounts.token;
@@ -262,7 +264,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     async (accounts, id, hostname) => {
       setIsFetching(true);
 
-      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
         ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
         : accounts.token;
@@ -288,7 +290,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     async (accounts, repoSlug, hostname) => {
       setIsFetching(true);
 
-      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
         ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
         : accounts.token;
@@ -360,11 +362,26 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     [notifications],
   );
 
+  const removeNotificationFromState = useCallback(
+    (id, hostname) => {
+      const updatedNotifications = removeNotification(
+        id,
+        notifications,
+        hostname,
+      );
+
+      setNotifications(updatedNotifications);
+      setTrayIconColor(updatedNotifications);
+    },
+    [notifications],
+  );
+
   return {
     isFetching,
     requestFailed,
     notifications,
 
+    removeNotificationFromState,
     fetchNotifications,
     markNotification,
     markNotificationDone,

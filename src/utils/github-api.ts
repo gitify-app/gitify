@@ -119,18 +119,18 @@ export function getNotificationTypeIconColor(state: StateType): string {
   switch (state) {
     case 'closed':
       return 'text-red-500';
-    case 'open':
-      return 'text-green-500';
-    case 'merged':
-      return 'text-purple-500';
-    case 'reopened':
-      return 'text-green-500';
-    case 'not_planned':
-      return 'text-gray-300';
     case 'completed':
       return 'text-purple-500';
     case 'draft':
       return 'text-gray-600';
+    case 'merged':
+      return 'text-purple-500';
+    case 'not_planned':
+      return 'text-gray-300';
+    case 'open':
+      return 'text-green-500';
+    case 'reopened':
+      return 'text-green-500';
     default:
       return 'text-gray-300';
   }
