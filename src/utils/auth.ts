@@ -1,6 +1,6 @@
 import { BrowserWindow } from '@electron/remote';
 
-import { generateGitHubAPIUrl } from './helpers';
+import { generateGitHubAPIUrl, isEnterpriseHost } from './helpers';
 import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 import { AuthResponse, AuthState, AuthTokenResponse } from '../types';
 import { Constants } from '../utils/constants';
@@ -114,7 +114,7 @@ export const addAccount = (
   hostname,
   user?: User,
 ): AuthState => {
-  if (hostname === Constants.DEFAULT_AUTH_OPTIONS.hostname) {
+  if (!isEnterpriseHost(hostname)) {
     return {
       ...accounts,
       token,
