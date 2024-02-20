@@ -102,7 +102,7 @@
     "@primer/octicons-react": "19.8.0",
     "axios": "1.6.7",
     "date-fns": "3.3.1",
-    "electron-updater": "6.1.7",
+    "electron-updater": "6.1.8",
     "final-form": "4.20.10",
     "menubar": "9.4.0",
     "nprogress": "0.2.0",
