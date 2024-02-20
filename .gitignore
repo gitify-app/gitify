@@ -74,3 +74,5 @@ temp/
 dist/
 build/
 .vscode/settings.json
+.yarn
+out

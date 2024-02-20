@@ -1,8 +1,8 @@
-import { EnterpriseAccount, AuthState } from '../types';
+import { AuthState, EnterpriseAccount } from '../types';
 import {
-  Notification,
-  GraphQLSearch,
   DiscussionCommentEdge,
+  GraphQLSearch,
+  Notification,
 } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
@@ -129,7 +129,7 @@ async function getDiscussionUrl(
       (edge) => edge.node.viewerSubscription === 'SUBSCRIBED',
     );
 
-  let comments = edges[0]?.node.comments.edges;
+  const comments = edges[0]?.node.comments.edges;
 
   let latestCommentId: string | number;
   if (comments?.length) {

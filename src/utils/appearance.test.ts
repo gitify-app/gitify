@@ -10,9 +10,9 @@ describe('utils/appearance.tsx', () => {
   });
 
   beforeEach(() => {
-    // @ts-ignore
+    // @ts-expect-error mockReset
     appearanceHelpers.setLightMode.mockReset();
-    // @ts-ignore
+    // @ts-expect-error mockReset
     appearanceHelpers.setDarkMode.mockReset();
   });
 
@@ -34,9 +34,9 @@ describe('utils/appearance.tsx', () => {
   it("should use the system's mode - dark", () => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: jest.fn().mockImplementation((query) => ({
+      value: jest.fn().mockReturnValue({
         matches: true,
-      })),
+      }),
     });
     setAppearance();
     expect(appearanceHelpers.setDarkMode).toHaveBeenCalledTimes(1);

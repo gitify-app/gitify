@@ -1,24 +1,22 @@
 {
   "compilerOptions": {
-    "module": "es6",
+    "module": "commonjs",
     "moduleResolution": "node",
-    "target": "es2022",
-    "outDir": "./build/",
+    "target": "ESNext",
+    "outDir": "build",
     "sourceMap": true,
+    // TODO: enable noImplicitAny
     "noImplicitAny": false,
     "noUnusedLocals": true,
     "jsx": "react",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "types": ["jest"]
+    "types": ["jest"],
+    // "skipLibCheck": true,
+    "baseUrl": ".",
+    "resolveJsonModule": true,
   },
   "exclude": ["node_modules"],
-  "include": [
-    "src/**/*.js",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "first-run.js",
-    "main.js"
-  ]
+  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"],
 }
