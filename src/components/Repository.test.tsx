@@ -14,6 +14,7 @@ jest.mock('./NotificationRow', () => ({
 
 describe('components/Repository.tsx', () => {
   const markRepoNotifications = jest.fn();
+  const markRepoNotificationsDone = jest.fn();
 
   const props = {
     hostname: 'github.com',
@@ -52,15 +53,30 @@ describe('components/Repository.tsx', () => {
   });
 
   it('should mark a repo as read', function () {
-    const { getByRole } = render(
+    const { getByTitle } = render(
       <AppContext.Provider value={{ markRepoNotifications }}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByRole('button'));
+    fireEvent.click(getByTitle('Mark Repository as Read'));
 
     expect(markRepoNotifications).toHaveBeenCalledWith(
+      'manosim/notifications-test',
+      'github.com',
+    );
+  });
+
+  it('should mark a repo as done', function () {
+    const { getByTitle } = render(
+      <AppContext.Provider value={{ markRepoNotificationsDone }}>
+        <RepositoryNotifications {...props} />
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(getByTitle('Mark Repository as Done'));
+
+    expect(markRepoNotificationsDone).toHaveBeenCalledWith(
       'manosim/notifications-test',
       'github.com',
     );
