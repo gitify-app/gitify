@@ -65,13 +65,22 @@ export function generateGitHubWebUrl(
   return newUrl + comment;
 }
 
-const addHours = (date: string, hours: number) =>
-  new Date(new Date(date).getTime() + hours * 36e5).toISOString();
+export function addHours(date: string, hours: number): string {
+  return new Date(new Date(date).getTime() + hours * 36e5).toISOString();
+}
 
-const queryString = (repo: string, title: string, lastUpdated: string) =>
-  `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
+export function formatSearchQueryString(
+  repo: string,
+  title: string,
+  lastUpdated: string,
+): string {
+  return `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
+}
 
-async function getReleaseTagWebUrl(notification: Notification, token: string) {
+export async function getReleaseTagWebUrl(
+  notification: Notification,
+  token: string,
+) {
   const response = await apiRequestAuth(notification.subject.url, 'GET', token);
 
   return {
@@ -89,7 +98,7 @@ async function getDiscussionUrl(
     token,
     {
       query: `{
-      search(query:"${queryString(
+      search(query:"${formatSearchQueryString(
         notification.repository.full_name,
         notification.subject.title,
         notification.updated_at,
