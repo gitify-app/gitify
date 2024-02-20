@@ -14,12 +14,7 @@ exports[`./utils/github-api.ts should format the notification color 6`] = `"text
 
 exports[`./utils/github-api.ts should format the notification color 7`] = `"text-green-500"`;
 
-exports[`./utils/github-api.ts should format the notification color 8`] = `
-{
-  "description": "The reason for this notification is not supported by the app.",
-  "type": "Unknown",
-}
-`;
+exports[`./utils/github-api.ts should format the notification color 8`] = `"text-gray-300"`;
 
 exports[`./utils/github-api.ts should format the notification reason 1`] = `
 {

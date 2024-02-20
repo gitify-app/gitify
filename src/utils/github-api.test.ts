@@ -3,7 +3,7 @@ import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
 } from './github-api';
-import { Reason, SubjectType } from '../typesGithub';
+import { Reason, StateType, SubjectType } from '../typesGithub';
 
 describe('./utils/github-api.ts', () => {
   it('should format the notification reason', () => {
@@ -75,6 +75,8 @@ describe('./utils/github-api.ts', () => {
     expect(getNotificationTypeIconColor('not_planned')).toMatchSnapshot();
     expect(getNotificationTypeIconColor('open')).toMatchSnapshot();
     expect(getNotificationTypeIconColor('reopened')).toMatchSnapshot();
-    expect(formatReason('something_else_unknown' as Reason)).toMatchSnapshot();
+    expect(
+      getNotificationTypeIconColor('something_else_unknown' as StateType),
+    ).toMatchSnapshot();
   });
 });
