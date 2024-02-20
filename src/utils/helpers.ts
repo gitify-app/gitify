@@ -155,8 +155,13 @@ export async function generateGitHubWebUrl(
     );
   } else if (notification.subject.url) {
     url = await getHtmlUrl(notification.subject.url, accounts.token);
-  } else if (notification.subject.type === 'Discussion') {
-    url = await getDiscussionUrl(notification, accounts.token);
+  }
+
+  // Perform any specific notification type handling (only required for a few special notification scenarios)
+  switch (notification.subject.type) {
+    case 'Discussion':
+      url = await getDiscussionUrl(notification, accounts.token);
+      break;
   }
 
   url = addNotificationReferrerIdToUrl(url, notification.id, accounts.user?.id);
