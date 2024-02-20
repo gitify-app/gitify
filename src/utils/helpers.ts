@@ -146,7 +146,7 @@ export async function generateGitHubWebUrl(
   notification: Notification,
   accounts: AuthState,
 ) {
-  let url = notification.repository.html_url;
+  let url;
 
   if (notification.subject.latest_comment_url) {
     url = await getHtmlUrl(
@@ -155,13 +155,16 @@ export async function generateGitHubWebUrl(
     );
   } else if (notification.subject.url) {
     url = await getHtmlUrl(notification.subject.url, accounts.token);
-  }
-
-  // Perform any specific notification type handling (only required for a few special notification scenarios)
-  switch (notification.subject.type) {
-    case 'Discussion':
-      url = await getDiscussionUrl(notification, accounts.token);
-      break;
+  } else {
+    // Perform any specific notification type handling (only required for a few special notification scenarios)
+    switch (notification.subject.type) {
+      case 'Discussion':
+        url = await getDiscussionUrl(notification, accounts.token);
+        break;
+      default:
+        url = notification.repository.html_url;
+        break;
+    }
   }
 
   url = addNotificationReferrerIdToUrl(url, notification.id, accounts.user?.id);
