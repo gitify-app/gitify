@@ -1,4 +1,4 @@
-import { AccountNotifications, AuthState, EnterpriseAccount } from '../types';
+import { AccountNotifications, EnterpriseAccount } from '../types';
 import { Notification, Repository, User, GraphQLSearch } from '../typesGithub';
 
 export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
@@ -12,12 +12,6 @@ export const mockedUser: User = {
   login: 'octocat',
   name: 'Mona Lisa Octocat',
   id: 123456789,
-};
-
-export const mockedAuthState: AuthState = {
-  token: '1234568790',
-  enterpriseAccounts: mockedEnterpriseAccounts,
-  user: mockedUser,
 };
 
 // prettier-ignore
