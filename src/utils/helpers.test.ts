@@ -11,8 +11,8 @@ import {
   mockedSingleNotification,
   mockedUser,
   mockedGraphQLResponse,
-  mockedAuthState,
 } from '../__mocks__/mockedData';
+import { mockAccounts } from '../__mocks__/mock-state';
 
 const URL = {
   normal: {
@@ -130,7 +130,7 @@ describe('utils/helpers.ts', () => {
         ...mockedSingleNotification,
         subject: { ...mockedSingleNotification.subject, url: apiUrl },
       };
-      expect(generateGitHubWebUrl(notif, mockedAuthState)).toBe(ExpectedResult);
+      expect(generateGitHubWebUrl(notif, mockAccounts)).toBe(ExpectedResult);
     }
   });
 
