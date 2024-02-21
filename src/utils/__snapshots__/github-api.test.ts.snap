@@ -32,75 +32,82 @@ exports[`./utils/github-api.ts should format the notification reason 2`] = `
 
 exports[`./utils/github-api.ts should format the notification reason 3`] = `
 {
+  "description": "A GitHub Actions workflow run was triggered for your repository",
+  "type": "Workflow Run",
+}
+`;
+
+exports[`./utils/github-api.ts should format the notification reason 4`] = `
+{
   "description": "You commented on the thread.",
   "type": "Comment",
 }
 `;
 
-exports[`./utils/github-api.ts should format the notification reason 4`] = `
+exports[`./utils/github-api.ts should format the notification reason 5`] = `
 {
   "description": "You accepted an invitation to contribute to the repository.",
   "type": "Invitation",
 }
 `;
 
-exports[`./utils/github-api.ts should format the notification reason 5`] = `
+exports[`./utils/github-api.ts should format the notification reason 6`] = `
 {
   "description": "You subscribed to the thread (via an issue or pull request).",
   "type": "Manual",
 }
 `;
 
-exports[`./utils/github-api.ts should format the notification reason 6`] = `
+exports[`./utils/github-api.ts should format the notification reason 7`] = `
+{
+  "description": "Organization members have requested to enable a feature such as Draft Pull Requests or CoPilot.",
+  "type": "Member Feature Requested",
+}
+`;
+
+exports[`./utils/github-api.ts should format the notification reason 8`] = `
 {
   "description": "You were specifically @mentioned in the content.",
   "type": "Mention",
 }
 `;
 
-exports[`./utils/github-api.ts should format the notification reason 7`] = `
+exports[`./utils/github-api.ts should format the notification reason 9`] = `
 {
   "description": "You, or a team you're a member of, were requested to review a pull request.",
   "type": "Review Requested",
 }
 `;
 
-exports[`./utils/github-api.ts should format the notification reason 8`] = `
+exports[`./utils/github-api.ts should format the notification reason 10`] = `
 {
   "description": "GitHub discovered a security vulnerability in your repository.",
   "type": "Security Alert",
 }
 `;
 
-exports[`./utils/github-api.ts should format the notification reason 9`] = `
+exports[`./utils/github-api.ts should format the notification reason 11`] = `
 {
   "description": "You changed the thread state (for example, closing an issue or merging a pull request).",
   "type": "State Change",
 }
 `;
 
-exports[`./utils/github-api.ts should format the notification reason 10`] = `
+exports[`./utils/github-api.ts should format the notification reason 12`] = `
 {
   "description": "You're watching the repository.",
   "type": "Subscribed",
 }
 `;
 
-exports[`./utils/github-api.ts should format the notification reason 11`] = `
+exports[`./utils/github-api.ts should format the notification reason 13`] = `
 {
   "description": "You were on a team that was mentioned.",
   "type": "Team Mention",
 }
 `;
 
-exports[`./utils/github-api.ts should format the notification reason 12`] = `
-{
-  "description": "A GitHub Actions workflow run was triggered for your repository",
-  "type": "Workflow Run",
-}
-`;
-
-exports[`./utils/github-api.ts should format the notification reason 13`] = `
+exports[`./utils/github-api.ts should format the notification reason 14`] = `
 {
   "description": "The reason for this notification is not supported by the app.",
   "type": "Unknown",
