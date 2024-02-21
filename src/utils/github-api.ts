@@ -27,6 +27,7 @@ const DESCRIPTIONS = {
     MANUAL: 'You subscribed to the thread (via an issue or pull request).',
     MENTION: 'You were specifically @mentioned in the content.',
     REVIEW_REQUESTED: "You, or a team you're a member of, were requested to review a pull request.",
+    SECURITY_ADVISORY_CREDIT: "You were credited for contributing to a security advisory.",
     SECURITY_ALERT: 'GitHub discovered a security vulnerability in your repository.',
     STATE_CHANGE: 'You changed the thread state (for example, closing an issue or merging a pull request).',
     SUBSCRIBED: "You're watching the repository.",
@@ -55,6 +56,8 @@ export function formatReason(reason: Reason): {
       return { type: 'Mention', description: DESCRIPTIONS['MENTION'] };
     case 'review_requested':
       return { type: 'Review Requested', description: DESCRIPTIONS['REVIEW_REQUESTED'] };
+    case 'security_advisory_credit':
+      return { type: 'Security Advisory Credit', description: DESCRIPTIONS['SECURITY_ADVISORY_CREDIT'] };
     case 'security_alert':
       return { type: 'Security Alert', description: DESCRIPTIONS['SECURITY_ALERT'] };
     case 'state_change':
