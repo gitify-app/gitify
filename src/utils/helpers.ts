@@ -51,11 +51,17 @@ export function generateNotificationReferrerId(
   return buffer.toString('base64');
 }
 
-const addHours = (date: string, hours: number) =>
-  new Date(new Date(date).getTime() + hours * 36e5).toISOString();
+export function addHours(date: string, hours: number): string {
+  return new Date(new Date(date).getTime() + hours * 36e5).toISOString();
+}
 
-const queryString = (repo: string, title: string, lastUpdated: string) =>
-  `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
+export function formatSearchQueryString(
+  repo: string,
+  title: string,
+  lastUpdated: string,
+): string {
+  return `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
+}
 
 export async function getHtmlUrl(url: string, token: string) {
   const response = await apiRequestAuth(url, 'GET', token);
@@ -75,7 +81,7 @@ async function getDiscussionUrl(
     token,
     {
       query: `{
-      search(query:"${queryString(
+      search(query:"${formatSearchQueryString(
         notification.repository.full_name,
         notification.subject.title,
         notification.updated_at,
