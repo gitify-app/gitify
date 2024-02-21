@@ -126,7 +126,7 @@ export interface Owner {
 export interface Subject {
   title: string;
   url?: string;
-  state: StateType;
+  state?: StateType;
   latest_comment_url?: string;
   type: SubjectType;
 }
