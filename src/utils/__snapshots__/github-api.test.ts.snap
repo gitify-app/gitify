@@ -106,3 +106,10 @@ exports[`./utils/github-api.ts should format the notification reason 13`] = `
   "type": "Unknown",
 }
 `;
+
+exports[`./utils/github-api.ts should format the notification reason 14`] = `
+{
+  "description": "The reason for this notification is not supported by the app.",
+  "type": "Unknown",
+}
+`;
