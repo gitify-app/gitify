@@ -6,10 +6,13 @@ import {
   formatSearchQueryString,
   addNotificationReferrerIdToUrl,
   getHtmlUrl,
+  generateGitHubWebUrl,
 } from './helpers';
 import { mockedSingleNotification, mockedUser } from '../__mocks__/mockedData';
 import * as apiRequests from './api-requests';
 import { AxiosPromise, AxiosResponse } from 'axios';
+import { mockAccounts } from '../__mocks__/mock-state';
+import { SubjectType } from '../typesGithub';
 
 describe('utils/helpers.ts', () => {
   describe('isEnterpriseHost', () => {
@@ -113,7 +116,15 @@ describe('utils/helpers.ts', () => {
   });
 
   describe('getHtmlUrl', () => {
-    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+    let apiRequestAuthMock;
+
+    beforeEach(() => {
+      apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
 
     it('should return the HTML URL', async () => {
       const requestPromise = new Promise((resolve) =>
@@ -131,6 +142,125 @@ describe('utils/helpers.ts', () => {
         '123',
       );
       expect(result).toBe('https://github.com/gitify-app/gitify/issues/785');
+    });
+  });
+
+  describe('generateGitHubWebUrl', () => {
+    const mockedHtmlUrl = 'https://github.com/gitify-app/gitify/issues/785';
+    const mockedNotificationReferrer =
+      '?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
+    let apiRequestAuthMock;
+
+    beforeEach(() => {
+      apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+      const requestPromise = new Promise((resolve) =>
+        resolve({
+          data: {
+            html_url: mockedHtmlUrl,
+          },
+        } as AxiosResponse),
+      ) as AxiosPromise;
+
+      apiRequestAuthMock.mockResolvedValue(requestPromise);
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('get html url from subject.latest_comment_url response when not null', async () => {
+      const subject = {
+        title: 'generate github web url unit tests',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+        latest_comment_url:
+          'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448',
+        type: 'Issue' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
+      expect(apiRequestAuthMock).toHaveBeenCalledWith(
+        subject.latest_comment_url,
+        'GET',
+        mockAccounts.token,
+      );
+      expect(result).toBe(`${mockedHtmlUrl}${mockedNotificationReferrer}`);
+    });
+
+    it('get html url from subject.url response when non null and missing latest_comment_url', async () => {
+      const subject = {
+        title: 'generate github web url unit tests',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+        latest_comment_url: null,
+        type: 'Issue' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
+      expect(apiRequestAuthMock).toHaveBeenCalledWith(
+        subject.url,
+        'GET',
+        mockAccounts.token,
+      );
+      expect(result).toBe(`${mockedHtmlUrl}${mockedNotificationReferrer}`);
+    });
+
+    it('fetch Discussions if both subject urls are null and subject type is Discussion', async () => {
+      const subject = {
+        title: 'generate github web url unit tests',
+        url: null,
+        latest_comment_url: null,
+        type: 'Discussion' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
+      expect(result).toBe(
+        `${mockedSingleNotification.repository.html_url}/discussions${mockedNotificationReferrer}`,
+      );
+    });
+
+    it('defaults to repository url', async () => {
+      const subject = {
+        title: 'generate github web url unit tests',
+        url: null,
+        latest_comment_url: null,
+        type: 'Issue' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+      expect(result).toBe(
+        `${mockedSingleNotification.repository.html_url}${mockedNotificationReferrer}`,
+      );
     });
   });
 });

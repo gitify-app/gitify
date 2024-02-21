@@ -73,7 +73,7 @@ async function getDiscussionUrl(
   notification: Notification,
   token: string,
 ): Promise<string> {
-  let url = `${notification.repository.url}/discussions`;
+  let url = `${notification.repository.html_url}/discussions`;
 
   const response: GraphQLSearch = await apiRequestAuth(
     `https://api.github.com/graphql`,
@@ -151,7 +151,7 @@ export const getLatestDiscussionCommentId = (
 export async function generateGitHubWebUrl(
   notification: Notification,
   accounts: AuthState,
-) {
+): Promise<string> {
   let url;
 
   if (notification.subject.latest_comment_url) {
