@@ -4,7 +4,7 @@ const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('path');
 
-require('@electron/remote/main').initialize()
+require('@electron/remote/main').initialize();
 
 app.setAppUserModelId('com.electron.gitify');
 
@@ -12,7 +12,7 @@ const iconIdle = path.join(
   __dirname,
   'assets',
   'images',
-  'tray-idleTemplate.png'
+  'tray-idleTemplate.png',
 );
 const iconActive = path.join(__dirname, 'assets', 'images', 'tray-active.png');
 
@@ -30,16 +30,6 @@ const browserWindowOpts = {
   },
 };
 
-const delayedHideAppIcon = () => {
-  if (app.dock && app.dock.hide) {
-    // Setting a timeout because the showDockIcon is not currently working
-    // See more at https://github.com/maxogden/menubar/issues/306
-    setTimeout(() => {
-      app.dock.hide();
-    }, 1500);
-  }
-};
-
 app.on('ready', async () => {
   await onFirstRunMaybe();
 });
@@ -49,11 +39,10 @@ const menubarApp = menubar({
   index: `file://${__dirname}/index.html`,
   browserWindow: browserWindowOpts,
   preloadWindow: true,
+  showDockIcon: false,
 });
 
 menubarApp.on('ready', () => {
-  delayedHideAppIcon();
-
   menubarApp.tray.setIgnoreDoubleClickEvents(true);
 
   autoUpdater.checkForUpdatesAndNotify();
@@ -100,7 +89,7 @@ menubarApp.on('ready', () => {
     const trayBounds = menubarApp.tray.getBounds();
     menubarApp.window.setSize(
       browserWindowOpts.width,
-      browserWindowOpts.height
+      browserWindowOpts.height,
     );
     menubarApp.positioner.move('trayCenter', trayBounds);
     menubarApp.window.resizable = false;
