@@ -37,6 +37,21 @@ export type StateType = IssueStateType | PullRequestStateType;
 
 export type ViewerSubscription = 'IGNORED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
 
+export type CheckSuiteStatus =
+  | 'action_required'
+  | 'cancelled'
+  | 'completed'
+  | 'failure'
+  | 'in_progress'
+  | 'pending'
+  | 'queued'
+  | 'requested'
+  | 'skipped'
+  | 'stale'
+  | 'success'
+  | 'timed_out'
+  | 'waiting';
+
 export interface Notification {
   id: string;
   unread: boolean;

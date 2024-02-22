@@ -3,9 +3,9 @@ import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
 } from './github-api';
-import { Reason, StateType, SubjectType } from '../typesGithub';
+import { Reason, StateType, Subject, SubjectType } from '../typesGithub';
 
-describe('./utils/github-api.ts', () => {
+describe('formatReason', () => {
   it('should format the notification reason', () => {
     expect(formatReason('assign')).toMatchSnapshot();
     expect(formatReason('author')).toMatchSnapshot();
@@ -23,62 +23,211 @@ describe('./utils/github-api.ts', () => {
     expect(formatReason('team_mention')).toMatchSnapshot();
     expect(formatReason('something_else_unknown' as Reason)).toMatchSnapshot();
   });
+});
 
+describe('getNotificationTypeIcon', () => {
   it('should get the notification type icon', () => {
-    expect(getNotificationTypeIcon('CheckSuite').displayName).toBe('SyncIcon');
-    expect(getNotificationTypeIcon('Commit').displayName).toBe('GitCommitIcon');
-    expect(getNotificationTypeIcon('Discussion').displayName).toBe(
-      'CommentDiscussionIcon',
-    );
-    expect(getNotificationTypeIcon('Issue').displayName).toBe(
-      'IssueOpenedIcon',
-    );
-    expect(getNotificationTypeIcon('Issue', 'draft').displayName).toBe(
-      'IssueDraftIcon',
-    );
-    expect(getNotificationTypeIcon('Issue', 'closed').displayName).toBe(
-      'IssueClosedIcon',
-    );
-    expect(getNotificationTypeIcon('Issue', 'completed').displayName).toBe(
-      'IssueClosedIcon',
-    );
-    expect(getNotificationTypeIcon('Issue', 'reopened').displayName).toBe(
-      'IssueReopenedIcon',
-    );
-    expect(getNotificationTypeIcon('PullRequest').displayName).toBe(
-      'GitPullRequestIcon',
-    );
-    expect(getNotificationTypeIcon('PullRequest', 'draft').displayName).toBe(
-      'GitPullRequestDraftIcon',
-    );
-    expect(getNotificationTypeIcon('PullRequest', 'closed').displayName).toBe(
-      'GitPullRequestClosedIcon',
-    );
-    expect(getNotificationTypeIcon('PullRequest', 'merged').displayName).toBe(
-      'GitMergeIcon',
-    );
-    expect(getNotificationTypeIcon('Release').displayName).toBe('TagIcon');
-    expect(getNotificationTypeIcon('RepositoryInvitation').displayName).toBe(
-      'MailIcon',
-    );
     expect(
-      getNotificationTypeIcon('RepositoryVulnerabilityAlert').displayName,
+      getNotificationTypeIcon(createSubjectMock({ type: 'CheckSuite' }))
+        .displayName,
+    ).toBe('SyncIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
+          type: 'CheckSuite',
+          title: 'Workflow failed for main branch',
+        }),
+      ).displayName,
+    ).toBe('XIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
+          type: 'CheckSuite',
+          title: 'Workflow succeeded for main branch',
+        }),
+      ).displayName,
+    ).toBe('CheckIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
+          type: 'CheckSuite',
+          title: 'Workflow cancelled for main branch',
+        }),
+      ).displayName,
+    ).toBe('StopIcon');
+    expect(
+      getNotificationTypeIcon(createSubjectMock({ type: 'Commit' }))
+        .displayName,
+    ).toBe('GitCommitIcon');
+    expect(
+      getNotificationTypeIcon(createSubjectMock({ type: 'Discussion' }))
+        .displayName,
+    ).toBe('CommentDiscussionIcon');
+    expect(
+      getNotificationTypeIcon(createSubjectMock({ type: 'Issue' })).displayName,
+    ).toBe('IssueOpenedIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({ type: 'Issue', state: 'draft' }),
+      ).displayName,
+    ).toBe('IssueDraftIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
+          type: 'Issue',
+          state: 'closed',
+        }),
+      ).displayName,
+    ).toBe('IssueClosedIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
+          type: 'Issue',
+          state: 'completed',
+        }),
+      ).displayName,
+    ).toBe('IssueClosedIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
+          type: 'Issue',
+          state: 'reopened',
+        }),
+      ).displayName,
+    ).toBe('IssueReopenedIcon');
+    expect(
+      getNotificationTypeIcon(createSubjectMock({ type: 'PullRequest' }))
+        .displayName,
+    ).toBe('GitPullRequestIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
+          type: 'PullRequest',
+          state: 'draft',
+        }),
+      ).displayName,
+    ).toBe('GitPullRequestDraftIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
+          type: 'PullRequest',
+          state: 'closed',
+        }),
+      ).displayName,
+    ).toBe('GitPullRequestClosedIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
+          type: 'PullRequest',
+          state: 'merged',
+        }),
+      ).displayName,
+    ).toBe('GitMergeIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
+          type: 'Release',
+        }),
+      ).displayName,
+    ).toBe('TagIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
+          type: 'RepositoryInvitation',
+        }),
+      ).displayName,
+    ).toBe('MailIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
+          type: 'RepositoryVulnerabilityAlert',
+        }),
+      ).displayName,
     ).toBe('AlertIcon');
-    expect(getNotificationTypeIcon('Unknown' as SubjectType).displayName).toBe(
+    expect(getNotificationTypeIcon(createSubjectMock({})).displayName).toBe(
       'QuestionIcon',
     );
   });
+});
 
-  it('should format the notification color', () => {
-    expect(getNotificationTypeIconColor('closed')).toMatchSnapshot();
-    expect(getNotificationTypeIconColor('completed')).toMatchSnapshot();
-    expect(getNotificationTypeIconColor('draft')).toMatchSnapshot();
-    expect(getNotificationTypeIconColor('merged')).toMatchSnapshot();
-    expect(getNotificationTypeIconColor('not_planned')).toMatchSnapshot();
-    expect(getNotificationTypeIconColor('open')).toMatchSnapshot();
-    expect(getNotificationTypeIconColor('reopened')).toMatchSnapshot();
+describe('getNotificationTypeIconColor', () => {
+  it('should format the notification color for check suite', () => {
     expect(
-      getNotificationTypeIconColor('something_else_unknown' as StateType),
+      getNotificationTypeIconColor(
+        createSubjectMock({
+          type: 'CheckSuite',
+          title: 'Workflow failed for main branch',
+        }),
+      ),
+    ).toMatchSnapshot();
+    expect(
+      getNotificationTypeIconColor(
+        createSubjectMock({
+          type: 'CheckSuite',
+          title: 'Workflow succeeded for main branch',
+        }),
+      ),
+    ).toMatchSnapshot();
+    expect(
+      getNotificationTypeIconColor(
+        createSubjectMock({
+          type: 'CheckSuite',
+          title: 'Workflow cancelled for main branch',
+        }),
+      ),
+    ).toMatchSnapshot();
+    expect(
+      getNotificationTypeIconColor(
+        createSubjectMock({
+          type: 'CheckSuite',
+          title: 'unknown state',
+        }),
+      ),
+    ).toMatchSnapshot();
+  });
+
+  it('should format the notification color for state', () => {
+    expect(
+      getNotificationTypeIconColor(createSubjectMock({ state: 'closed' })),
+    ).toMatchSnapshot();
+    expect(
+      getNotificationTypeIconColor(createSubjectMock({ state: 'completed' })),
+    ).toMatchSnapshot();
+    expect(
+      getNotificationTypeIconColor(createSubjectMock({ state: 'draft' })),
+    ).toMatchSnapshot();
+    expect(
+      getNotificationTypeIconColor(createSubjectMock({ state: 'merged' })),
+    ).toMatchSnapshot();
+    expect(
+      getNotificationTypeIconColor(createSubjectMock({ state: 'not_planned' })),
+    ).toMatchSnapshot();
+    expect(
+      getNotificationTypeIconColor(createSubjectMock({ state: 'open' })),
+    ).toMatchSnapshot();
+    expect(
+      getNotificationTypeIconColor(createSubjectMock({ state: 'reopened' })),
+    ).toMatchSnapshot();
+    expect(
+      getNotificationTypeIconColor(
+        createSubjectMock({
+          state: 'something_else_unknown' as StateType,
+        }),
+      ),
     ).toMatchSnapshot();
   });
 });
+
+function createSubjectMock(mocks: {
+  title?: string;
+  type?: SubjectType;
+  state?: StateType;
+}): Subject {
+  return {
+    title: mocks.title ?? 'Mock Subject',
+    type: mocks.type ?? ('Unknown' as SubjectType),
+    state: mocks.state ?? ('Unknown' as StateType),
+    url: null,
+    latest_comment_url: null,
+  };
+}
