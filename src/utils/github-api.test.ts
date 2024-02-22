@@ -16,6 +16,7 @@ describe('./utils/github-api.ts', () => {
     expect(formatReason('member_feature_requested')).toMatchSnapshot();
     expect(formatReason('mention')).toMatchSnapshot();
     expect(formatReason('review_requested')).toMatchSnapshot();
+    expect(formatReason('security_advisory_credit')).toMatchSnapshot();
     expect(formatReason('security_alert')).toMatchSnapshot();
     expect(formatReason('state_change')).toMatchSnapshot();
     expect(formatReason('subscribed')).toMatchSnapshot();

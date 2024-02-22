@@ -8,6 +8,7 @@ export type Reason =
   | 'member_feature_requested'
   | 'mention'
   | 'review_requested'
+  | 'security_advisory_credit'
   | 'security_alert'
   | 'state_change'
   | 'subscribed'
