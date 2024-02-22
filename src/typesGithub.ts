@@ -1,16 +1,17 @@
 export type Reason =
   | 'assign'
   | 'author'
+  | 'ci_activity'
   | 'comment'
   | 'invitation'
   | 'manual'
+  | 'member_feature_requested'
   | 'mention'
   | 'review_requested'
   | 'security_alert'
   | 'state_change'
   | 'subscribed'
-  | 'team_mention'
-  | 'ci_activity';
+  | 'team_mention';
 
 export type SubjectType =
   | 'CheckSuite'
