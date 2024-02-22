@@ -63,7 +63,7 @@ export function formatSearchQueryString(
   return `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
 }
 
-export async function getHtmlUrl(url: string, token: string) {
+export async function getHtmlUrl(url: string, token: string): Promise<string> {
   const response = await apiRequestAuth(url, 'GET', token);
 
   return response.data.html_url;
@@ -152,7 +152,7 @@ export async function generateGitHubWebUrl(
   notification: Notification,
   accounts: AuthState,
 ): Promise<string> {
-  let url;
+  let url: string;
 
   if (notification.subject.latest_comment_url) {
     url = await getHtmlUrl(
