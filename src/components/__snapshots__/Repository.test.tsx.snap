@@ -19,8 +19,40 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
       </span>
     </div>
     <div
-      className="flex justify-center items-center"
+      className="flex justify-center items-center gap-2"
     >
+      <button
+        className="focus:outline-none h-full hover:text-green-500"
+        onClick={[Function]}
+        title="Mark Repository as Done"
+      >
+        <svg
+          aria-hidden="false"
+          aria-label="Mark Repository as Done"
+          className="octicon octicon-check"
+          fill="currentColor"
+          focusable="false"
+          height={16}
+          role="img"
+          style={
+            {
+              "display": "inline-block",
+              "overflow": "visible",
+              "userSelect": "none",
+              "verticalAlign": "text-bottom",
+            }
+          }
+          viewBox="0 0 16 16"
+          width={16}
+        >
+          <path
+            d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+          />
+        </svg>
+      </button>
+      <div
+        className="w-[14px]"
+      />
       <button
         className="focus:outline-none h-full hover:text-green-500"
         onClick={[Function]}

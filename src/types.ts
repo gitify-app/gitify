@@ -13,7 +13,7 @@ export interface SettingsState {
   showNotificationsCountInTray: boolean;
   openAtStartup: boolean;
   appearance: Appearance;
-  colors: boolean;
+  colors: boolean | null;
   markAsDoneOnOpen: boolean;
 }
 

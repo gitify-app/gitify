@@ -15,8 +15,12 @@ export function getEnterpriseAccountToken(
   return accounts.find((obj) => obj.hostname === hostname).token;
 }
 
+export function isEnterpriseHost(hostname: string): boolean {
+  return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
+}
+
 export function generateGitHubAPIUrl(hostname) {
-  const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+  const isEnterprise = isEnterpriseHost(hostname);
   return isEnterprise
     ? `https://${hostname}/api/v3/`
     : `https://api.${hostname}/`;
@@ -39,8 +43,7 @@ export function generateGitHubWebUrl(
   comment: string = '',
 ) {
   const { hostname } = new URL(url);
-  const isEnterprise =
-    hostname !== `api.${Constants.DEFAULT_AUTH_OPTIONS.hostname}`;
+  const isEnterprise = isEnterpriseHost(hostname);
 
   let newUrl: string = isEnterprise
     ? url.replace(`${hostname}/api/v3/repos`, hostname)
@@ -62,13 +65,22 @@ export function generateGitHubWebUrl(
   return newUrl + comment;
 }
 
-const addHours = (date: string, hours: number) =>
-  new Date(new Date(date).getTime() + hours * 36e5).toISOString();
+export function addHours(date: string, hours: number): string {
+  return new Date(new Date(date).getTime() + hours * 36e5).toISOString();
+}
 
-const queryString = (repo: string, title: string, lastUpdated: string) =>
-  `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
+export function formatSearchQueryString(
+  repo: string,
+  title: string,
+  lastUpdated: string,
+): string {
+  return `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
+}
 
-async function getReleaseTagWebUrl(notification: Notification, token: string) {
+export async function getReleaseTagWebUrl(
+  notification: Notification,
+  token: string,
+) {
   const response = await apiRequestAuth(notification.subject.url, 'GET', token);
 
   return {
@@ -86,7 +98,7 @@ async function getDiscussionUrl(
     token,
     {
       query: `{
-      search(query:"${queryString(
+      search(query:"${formatSearchQueryString(
         notification.repository.full_name,
         notification.subject.title,
         notification.updated_at,

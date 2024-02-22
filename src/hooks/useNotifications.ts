@@ -8,6 +8,7 @@ import { apiRequestAuth } from '../utils/api-requests';
 import {
   getEnterpriseAccountToken,
   generateGitHubAPIUrl,
+  isEnterpriseHost,
 } from '../utils/helpers';
 import { removeNotification } from '../utils/remove-notification';
 import { triggerNativeNotifications } from '../utils/notifications';
@@ -17,6 +18,7 @@ import { updateTrayIcon } from '../utils/comms';
 
 interface NotificationsState {
   notifications: AccountNotifications[];
+  removeNotificationFromState: (id: string, hostname: string) => void;
   fetchNotifications: (
     accounts: AuthState,
     settings: SettingsState,
@@ -44,6 +46,11 @@ interface NotificationsState {
     repoSlug: string,
     hostname: string,
     settings: SettingsState,
+  ) => Promise<void>;
+  markRepoNotificationsDone: (
+    accounts: AuthState,
+    repoSlug: string,
+    hostname: string,
   ) => Promise<void>;
   isFetching: boolean;
   requestFailed: boolean;
@@ -106,7 +113,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                 ]
               : [...enterpriseNotifications];
 
-            if (!colors) {
+            if (colors === false) {
               setNotifications(data);
               triggerNativeNotifications(
                 notifications,
@@ -131,9 +138,9 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                           ) {
                             return notification;
                           }
-                          const isEnterprise =
-                            accountNotifications.hostname !==
-                            Constants.DEFAULT_AUTH_OPTIONS.hostname;
+                          const isEnterprise = isEnterpriseHost(
+                            accountNotifications.hostname,
+                          );
                           const token = isEnterprise
                             ? getEnterpriseAccountToken(
                                 accountNotifications.hostname,
@@ -193,7 +200,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     async (accounts, id, hostname, settings) => {
       setIsFetching(true);
 
-      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
         ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
         : accounts.token;
@@ -234,7 +241,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     async (accounts, id, hostname, settings) => {
       setIsFetching(true);
 
-      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
         ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
         : accounts.token;
@@ -275,7 +282,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     async (accounts, id, hostname, settings) => {
       setIsFetching(true);
 
-      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
         ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
         : accounts.token;
@@ -301,7 +308,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     async (accounts, repoSlug, hostname, settings) => {
       setIsFetching(true);
 
-      const isEnterprise = hostname !== Constants.DEFAULT_AUTH_OPTIONS.hostname;
+      const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
         ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
         : accounts.token;
@@ -338,15 +345,74 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     [notifications],
   );
 
+  const markRepoNotificationsDone = useCallback(
+    async (accounts, repoSlug, hostname) => {
+      setIsFetching(true);
+
+      try {
+        const accountIndex = notifications.findIndex(
+          (accountNotifications) => accountNotifications.hostname === hostname,
+        );
+
+        if (accountIndex !== -1) {
+          const notificationsToRemove = notifications[
+            accountIndex
+          ].notifications.filter(
+            (notification) => notification.repository.full_name === repoSlug,
+          );
+
+          await Promise.all(
+            notificationsToRemove.map((notification) =>
+              markNotificationDone(
+                accounts,
+                notification.id,
+                notifications[accountIndex].hostname,
+              ),
+            ),
+          );
+        }
+
+        const updatedNotifications = removeNotifications(
+          repoSlug,
+          notifications,
+          hostname,
+        );
+
+        setNotifications(updatedNotifications);
+        setTrayIconColor(updatedNotifications);
+        setIsFetching(false);
+      } catch (err) {
+        setIsFetching(false);
+      }
+    },
+    [notifications],
+  );
+
+  const removeNotificationFromState = useCallback(
+    (id, hostname) => {
+      const updatedNotifications = removeNotification(
+        id,
+        notifications,
+        hostname,
+      );
+
+      setNotifications(updatedNotifications);
+      setTrayIconColor(updatedNotifications);
+    },
+    [notifications],
+  );
+
   return {
     isFetching,
     requestFailed,
     notifications,
 
+    removeNotificationFromState,
     fetchNotifications,
     markNotification,
     markNotificationDone,
     unsubscribeNotification,
     markRepoNotifications,
+    markRepoNotificationsDone,
   };
 };
