@@ -18,7 +18,11 @@ import { updateTrayIcon } from '../utils/comms';
 
 interface NotificationsState {
   notifications: AccountNotifications[];
-  removeNotificationFromState: (id: string, hostname: string) => void;
+  removeNotificationFromState: (
+    id: string,
+    hostname: string,
+    settings: SettingsState,
+  ) => void;
   fetchNotifications: (
     accounts: AuthState,
     settings: SettingsState,
@@ -51,6 +55,7 @@ interface NotificationsState {
     accounts: AuthState,
     repoSlug: string,
     hostname: string,
+    settings: SettingsState,
   ) => Promise<void>;
   isFetching: boolean;
   requestFailed: boolean;
@@ -327,16 +332,17 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           hostname,
         );
 
+        setNotifications(updatedNotifications);
+
         const updatedNotificationsCount = updatedNotifications.reduce(
           (memo, acc) => memo + acc.notifications.length,
           0,
         );
-
-        setNotifications(updatedNotifications);
         updateTrayIcon({
           notificationsCount: updatedNotificationsCount,
           showNotificationsCountInTray: settings.showNotificationsCountInTray,
         });
+
         setIsFetching(false);
       } catch (err) {
         setIsFetching(false);
@@ -346,7 +352,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const markRepoNotificationsDone = useCallback(
-    async (accounts, repoSlug, hostname) => {
+    async (accounts, repoSlug, hostname, settings) => {
       setIsFetching(true);
 
       try {
@@ -367,6 +373,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                 accounts,
                 notification.id,
                 notifications[accountIndex].hostname,
+                settings,
               ),
             ),
           );
@@ -379,7 +386,16 @@ export const useNotifications = (colors: boolean): NotificationsState => {
         );
 
         setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
+
+        const updatedNotificationsCount = updatedNotifications.reduce(
+          (memo, acc) => memo + acc.notifications.length,
+          0,
+        );
+        updateTrayIcon({
+          notificationsCount: updatedNotificationsCount,
+          showNotificationsCountInTray: settings.showNotificationsCountInTray,
+        });
+
         setIsFetching(false);
       } catch (err) {
         setIsFetching(false);
@@ -389,7 +405,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const removeNotificationFromState = useCallback(
-    (id, hostname) => {
+    (id, hostname, settings) => {
       const updatedNotifications = removeNotification(
         id,
         notifications,
@@ -397,7 +413,15 @@ export const useNotifications = (colors: boolean): NotificationsState => {
       );
 
       setNotifications(updatedNotifications);
-      setTrayIconColor(updatedNotifications);
+
+      const updatedNotificationsCount = updatedNotifications.reduce(
+        (memo, acc) => memo + acc.notifications.length,
+        0,
+      );
+      updateTrayIcon({
+        notificationsCount: updatedNotificationsCount,
+        showNotificationsCountInTray: settings.showNotificationsCountInTray,
+      });
     },
     [notifications],
   );

@@ -298,6 +298,7 @@ describe('hooks/useNotifications.ts', () => {
         result.current.removeNotificationFromState(
           result.current.notifications[0].notifications[0].id,
           result.current.notifications[0].hostname,
+          mockSettings,
         );
       });
 
@@ -753,6 +754,7 @@ describe('hooks/useNotifications.ts', () => {
             accounts,
             repoSlug,
             hostname,
+            mockSettings,
           );
         });
 
@@ -775,6 +777,7 @@ describe('hooks/useNotifications.ts', () => {
             accounts,
             repoSlug,
             hostname,
+            mockSettings,
           );
         });
 
@@ -802,6 +805,7 @@ describe('hooks/useNotifications.ts', () => {
             accounts,
             repoSlug,
             hostname,
+            mockSettings,
           );
         });
 
@@ -824,6 +828,7 @@ describe('hooks/useNotifications.ts', () => {
             accounts,
             repoSlug,
             hostname,
+            mockSettings,
           );
         });
 

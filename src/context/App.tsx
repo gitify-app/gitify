@@ -52,7 +52,11 @@ interface AppContextState {
   notifications: AccountNotifications[];
   isFetching: boolean;
   requestFailed: boolean;
-  removeNotificationFromState: (id: string, hostname: string) => void;
+  removeNotificationFromState: (
+    id: string,
+    hostname: string,
+    settings: SettingsState,
+  ) => void;
   fetchNotifications: () => Promise<void>;
   markNotification: (
     id: string,
@@ -212,7 +216,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
   const markRepoNotificationsDoneWithAccounts = useCallback(
     async (repoSlug: string, hostname: string) =>
-      await markRepoNotificationsDone(accounts, repoSlug, hostname),
+      await markRepoNotificationsDone(accounts, repoSlug, hostname, settings),
     [accounts, notifications],
   );
 

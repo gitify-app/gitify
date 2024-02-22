@@ -36,7 +36,7 @@ export const NotificationRow: React.FC<IProps> = ({
       markNotificationDone(notification.id, hostname, settings);
     } else {
       // no need to mark as read, github does it by default when opening it
-      removeNotificationFromState(notification.id, hostname);
+      removeNotificationFromState(notification.id, hostname, settings);
     }
   }, [settings]);
 

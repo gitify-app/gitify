@@ -19,6 +19,6 @@ export const mockSettings: SettingsState = {
   showNotificationsCountInTray: false,
   openAtStartup: false,
   appearance: Appearance.SYSTEM,
-  colors: false,
+  colors: null,
   markAsDoneOnOpen: false,
 };
