@@ -25,6 +25,7 @@ const DESCRIPTIONS = {
     COMMENT: 'You commented on the thread.',
     INVITATION: 'You accepted an invitation to contribute to the repository.',
     MANUAL: 'You subscribed to the thread (via an issue or pull request).',
+    MEMBER_FEATURE_REQUESTED: 'Organization members have requested to enable a feature such as Draft Pull Requests or CoPilot.',
     MENTION: 'You were specifically @mentioned in the content.',
     REVIEW_REQUESTED: "You, or a team you're a member of, were requested to review a pull request.",
     SECURITY_ALERT: 'GitHub discovered a security vulnerability in your repository.',
@@ -51,6 +52,8 @@ export function formatReason(reason: Reason): {
       return { type: 'Invitation', description: DESCRIPTIONS['INVITATION'] };
     case 'manual':
       return { type: 'Manual', description: DESCRIPTIONS['MANUAL'] };
+    case 'member_feature_requested':
+      return { type: 'Member Feature Requested', description: DESCRIPTIONS['MEMBER_FEATURE_REQUESTED'] };
     case 'mention':
       return { type: 'Mention', description: DESCRIPTIONS['MENTION'] };
     case 'review_requested':
