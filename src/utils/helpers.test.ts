@@ -152,7 +152,7 @@ describe('utils/helpers.ts', () => {
   describe('generateGitHubWebUrl', () => {
     const mockedHtmlUrl = 'https://github.com/gitify-app/gitify/issues/785';
     const mockedNotificationReferrer =
-      '?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
+      'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
     const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
 
     afterEach(() => {
@@ -192,7 +192,7 @@ describe('utils/helpers.ts', () => {
         'GET',
         mockAccounts.token,
       );
-      expect(result).toBe(`${mockedHtmlUrl}${mockedNotificationReferrer}`);
+      expect(result).toBe(`${mockedHtmlUrl}?${mockedNotificationReferrer}`);
     });
 
     it('Subject Url: when no latest comment url available, fetch subject html url', async () => {
@@ -227,7 +227,7 @@ describe('utils/helpers.ts', () => {
         'GET',
         mockAccounts.token,
       );
-      expect(result).toBe(`${mockedHtmlUrl}${mockedNotificationReferrer}`);
+      expect(result).toBe(`${mockedHtmlUrl}?${mockedNotificationReferrer}`);
     });
 
     it('Discussions: when no subject urls and no discussions found via query, default to linking to repository discussions', async () => {
@@ -256,7 +256,7 @@ describe('utils/helpers.ts', () => {
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(result).toBe(
-        `${mockedSingleNotification.repository.html_url}/discussions${mockedNotificationReferrer}`,
+        `${mockedSingleNotification.repository.html_url}/discussions?${mockedNotificationReferrer}`,
       );
     });
 
@@ -267,8 +267,6 @@ describe('utils/helpers.ts', () => {
         latest_comment_url: null,
         type: 'Discussion' as SubjectType,
       };
-
-      // const latestDiscussionCommentId = 12345;
 
       const requestPromise = new Promise((resolve) =>
         resolve(mockedGraphQLResponse as AxiosResponse),
@@ -286,7 +284,29 @@ describe('utils/helpers.ts', () => {
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(result).toBe(
-        'https://github.com/manosim/notifications-test/discussions/612?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D#discussioncomment-2300902',
+        `https://github.com/manosim/notifications-test/discussions/612?${mockedNotificationReferrer}#discussioncomment-2300902`,
+      );
+    });
+
+    it('Repository Invitation url', async () => {
+      const subject = {
+        title: 'Invitation to join manosim/notifications-test from unit-tests',
+        url: null,
+        latest_comment_url: null,
+        type: 'RepositoryInvitation' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+      expect(result).toBe(
+        `https://github.com/manosim/notifications-test/invitations?${mockedNotificationReferrer}`,
       );
     });
 
@@ -308,7 +328,7 @@ describe('utils/helpers.ts', () => {
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
       expect(result).toBe(
-        `${mockedSingleNotification.repository.html_url}${mockedNotificationReferrer}`,
+        `${mockedSingleNotification.repository.html_url}?${mockedNotificationReferrer}`,
       );
     });
   });
