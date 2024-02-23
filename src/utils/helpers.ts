@@ -167,6 +167,9 @@ export async function generateGitHubWebUrl(
       case 'Discussion':
         url = await getDiscussionUrl(notification, accounts.token);
         break;
+      case 'RepositoryInvitation':
+        url = `${notification.repository.html_url}/invitations`;
+        break;
       default:
         url = notification.repository.html_url;
         break;
