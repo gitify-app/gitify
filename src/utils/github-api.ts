@@ -1,5 +1,6 @@
 import {
   AlertIcon,
+  CheckIcon,
   CommentDiscussionIcon,
   GitCommitIcon,
   GitMergeIcon,
@@ -13,10 +14,13 @@ import {
   MailIcon,
   OcticonProps,
   QuestionIcon,
+  SkipIcon,
+  StopIcon,
   SyncIcon,
   TagIcon,
+  XIcon,
 } from '@primer/octicons-react';
-import { Reason, StateType, SubjectType } from '../typesGithub';
+import { CheckSuiteStatus, Reason, Subject } from '../typesGithub';
 
 // prettier-ignore
 const DESCRIPTIONS = {
@@ -77,18 +81,30 @@ export function formatReason(reason: Reason): {
 }
 
 export function getNotificationTypeIcon(
-  type: SubjectType,
-  state?: StateType,
+  subject: Subject,
 ): React.FC<OcticonProps> {
-  switch (type) {
+  switch (subject.type) {
     case 'CheckSuite':
-      return SyncIcon;
+      const checkSuiteState = inferCheckSuiteStatus(subject.title);
+
+      switch (checkSuiteState) {
+        case 'cancelled':
+          return StopIcon;
+        case 'failure':
+          return XIcon;
+        case 'skipped':
+          return SkipIcon;
+        case 'success':
+          return CheckIcon;
+        default:
+          return SyncIcon;
+      }
     case 'Commit':
       return GitCommitIcon;
     case 'Discussion':
       return CommentDiscussionIcon;
     case 'Issue':
-      switch (state) {
+      switch (subject.state) {
         case 'draft':
           return IssueDraftIcon;
         case 'closed':
@@ -100,7 +116,7 @@ export function getNotificationTypeIcon(
           return IssueOpenedIcon;
       }
     case 'PullRequest':
-      switch (state) {
+      switch (subject.state) {
         case 'draft':
           return GitPullRequestDraftIcon;
         case 'closed':
@@ -121,8 +137,25 @@ export function getNotificationTypeIcon(
   }
 }
 
-export function getNotificationTypeIconColor(state: StateType): string {
-  switch (state) {
+export function getNotificationTypeIconColor(subject: Subject): string {
+  if (subject.type === 'CheckSuite') {
+    const checkSuiteState = inferCheckSuiteStatus(subject.title);
+
+    switch (checkSuiteState) {
+      case 'cancelled':
+        return 'text-gray-500';
+      case 'failure':
+        return 'text-red-500';
+      case 'skipped':
+        return 'text-gray-500';
+      case 'success':
+        return 'text-green-500';
+      default:
+        return 'text-gray-300';
+    }
+  }
+
+  switch (subject.state) {
     case 'closed':
       return 'text-red-500';
     case 'completed':
@@ -140,4 +173,28 @@ export function getNotificationTypeIconColor(state: StateType): string {
     default:
       return 'text-gray-300';
   }
+}
+
+export function inferCheckSuiteStatus(title: string): CheckSuiteStatus {
+  if (title) {
+    const lowerTitle = title.toLowerCase();
+
+    if (lowerTitle.includes('cancelled for')) {
+      return 'cancelled';
+    }
+
+    if (lowerTitle.includes('failed for')) {
+      return 'failure';
+    }
+
+    if (lowerTitle.includes('skipped for')) {
+      return 'skipped';
+    }
+
+    if (lowerTitle.includes('succeeded for')) {
+      return 'success';
+    }
+  }
+
+  return null;
 }
