@@ -152,6 +152,13 @@ describe('getNotificationTypeIcon', () => {
         }),
       ).displayName,
     ).toBe('AlertIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
+          type: 'WorkflowRun',
+        }),
+      ).displayName,
+    ).toBe('RocketIcon');
     expect(getNotificationTypeIcon(createSubjectMock({})).displayName).toBe(
       'QuestionIcon',
     );
