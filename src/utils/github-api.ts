@@ -14,6 +14,7 @@ import {
   MailIcon,
   OcticonProps,
   QuestionIcon,
+  SkipIcon,
   StopIcon,
   SyncIcon,
   TagIcon,
@@ -91,6 +92,8 @@ export function getNotificationTypeIcon(
           return StopIcon;
         case 'failure':
           return XIcon;
+        case 'skipped':
+          return SkipIcon;
         case 'success':
           return CheckIcon;
         default:
@@ -140,9 +143,11 @@ export function getNotificationTypeIconColor(subject: Subject): string {
 
     switch (checkSuiteState) {
       case 'cancelled':
-        return 'text-gray-300';
+        return 'text-gray-500';
       case 'failure':
         return 'text-red-500';
+      case 'skipped':
+        return 'text-gray-500';
       case 'success':
         return 'text-green-500';
       default:
@@ -171,13 +176,25 @@ export function getNotificationTypeIconColor(subject: Subject): string {
 }
 
 export function inferCheckSuiteStatus(title: string): CheckSuiteStatus {
-  if (!title) return null;
+  if (title) {
+    const lowerTitle = title.toLowerCase();
 
-  const lowerTitle = title.toLowerCase();
+    if (lowerTitle.includes('cancelled for')) {
+      return 'cancelled';
+    }
 
-  if (lowerTitle.includes('cancelled for')) return 'cancelled';
-  if (lowerTitle.includes('failed for')) return 'failure';
-  if (lowerTitle.includes('succeeded for')) return 'success';
+    if (lowerTitle.includes('failed for')) {
+      return 'failure';
+    }
+
+    if (lowerTitle.includes('skipped for')) {
+      return 'skipped';
+    }
+
+    if (lowerTitle.includes('succeeded for')) {
+      return 'success';
+    }
+  }
 
   return null;
 }

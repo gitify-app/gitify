@@ -105,13 +105,15 @@ exports[`formatReason should format the notification reason 15`] = `
 }
 `;
 
-exports[`getNotificationTypeIconColor should format the notification color for check suite 1`] = `"text-red-500"`;
+exports[`getNotificationTypeIconColor should format the notification color for check suite 1`] = `"text-gray-500"`;
 
-exports[`getNotificationTypeIconColor should format the notification color for check suite 2`] = `"text-green-500"`;
+exports[`getNotificationTypeIconColor should format the notification color for check suite 2`] = `"text-red-500"`;
 
-exports[`getNotificationTypeIconColor should format the notification color for check suite 3`] = `"text-gray-300"`;
+exports[`getNotificationTypeIconColor should format the notification color for check suite 3`] = `"text-gray-500"`;
 
-exports[`getNotificationTypeIconColor should format the notification color for check suite 4`] = `"text-gray-300"`;
+exports[`getNotificationTypeIconColor should format the notification color for check suite 4`] = `"text-green-500"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for check suite 5`] = `"text-gray-300"`;
 
 exports[`getNotificationTypeIconColor should format the notification color for state 1`] = `"text-red-500"`;
 
