@@ -23,7 +23,8 @@ export type SubjectType =
   | 'PullRequest'
   | 'Release'
   | 'RepositoryInvitation'
-  | 'RepositoryVulnerabilityAlert';
+  | 'RepositoryVulnerabilityAlert'
+  | 'WorkflowRun';
 
 export type IssueStateType =
   | 'closed'

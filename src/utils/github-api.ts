@@ -14,6 +14,7 @@ import {
   MailIcon,
   OcticonProps,
   QuestionIcon,
+  RocketIcon,
   SkipIcon,
   StopIcon,
   SyncIcon,
@@ -135,6 +136,8 @@ export function getNotificationTypeIcon(
       return MailIcon;
     case 'RepositoryVulnerabilityAlert':
       return AlertIcon;
+    case 'WorkflowRun':
+      return RocketIcon;
     default:
       return QuestionIcon;
   }
