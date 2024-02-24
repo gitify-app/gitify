@@ -230,6 +230,94 @@ describe('utils/helpers.ts', () => {
       expect(result).toBe(`${mockedHtmlUrl}?${mockedNotificationReferrer}`);
     });
 
+    it('Check Suite: successful workflow', async () => {
+      const subject = {
+        title: 'Demo workflow run succeeded for main branch',
+        url: null,
+        latest_comment_url: null,
+        type: 'CheckSuite' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+      expect(result).toBe(
+        `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Asuccess+branch%3Amain&${mockedNotificationReferrer}`,
+      );
+    });
+
+    it('Check Suite: failed workflow', async () => {
+      const subject = {
+        title: 'Demo workflow run failed for main branch',
+        url: null,
+        latest_comment_url: null,
+        type: 'CheckSuite' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+      expect(result).toBe(
+        `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockedNotificationReferrer}`,
+      );
+    });
+
+    it('Check Suite: failed workflow multiple attempts', async () => {
+      const subject = {
+        title: 'Demo workflow run, Attempt #3 failed for main branch',
+        url: null,
+        latest_comment_url: null,
+        type: 'CheckSuite' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+      expect(result).toBe(
+        `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockedNotificationReferrer}`,
+      );
+    });
+
+    it('Check Suite: skipped workflow', async () => {
+      const subject = {
+        title: 'Demo workflow run skipped for main branch',
+        url: null,
+        latest_comment_url: null,
+        type: 'CheckSuite' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+      expect(result).toBe(
+        `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Askipped+branch%3Amain&${mockedNotificationReferrer}`,
+      );
+    });
+
     it('Discussions: when no subject urls and no discussions found via query, default to linking to repository discussions', async () => {
       const subject = {
         title: 'generate github web url unit tests',
@@ -307,6 +395,28 @@ describe('utils/helpers.ts', () => {
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
       expect(result).toBe(
         `https://github.com/manosim/notifications-test/invitations?${mockedNotificationReferrer}`,
+      );
+    });
+
+    it('Workflow Run: approval requested', async () => {
+      const subject = {
+        title: 'some-user requested your review to deploy to an environment',
+        url: null,
+        latest_comment_url: null,
+        type: 'WorkflowRun' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+      expect(result).toBe(
+        `https://github.com/manosim/notifications-test/actions?query=is%3Awaiting&${mockedNotificationReferrer}`,
       );
     });
 
