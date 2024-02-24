@@ -3,10 +3,12 @@ import {
   Notification,
   GraphQLSearch,
   DiscussionCommentEdge,
+  SubjectType,
 } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
 import { Constants } from './constants';
+import { inferCheckSuiteStatus } from './github-api';
 
 export function getEnterpriseAccountToken(
   hostname: string,
@@ -148,6 +150,53 @@ export const getLatestDiscussionCommentId = (
     .reduce((a, b) => (a.node.createdAt > b.node.createdAt ? a : b))?.node
     .databaseId;
 
+export function getCheckSuiteUrl(notification: Notification) {
+  let url = `${notification.repository.html_url}/actions`;
+  let filters = [];
+
+  const regexPattern =
+    /^(?<workflowName>.*?) workflow run(, Attempt #(?<attemptNumber>\d+))? (?<workflowStatus>.*?) for (?<branchName>.*?) branch$/;
+  const matches = regexPattern.exec(notification.subject.title);
+
+  if (matches) {
+    const { groups } = matches;
+
+    if (groups.workflowName) {
+      filters.push(`workflow:"${groups.workflowName.replaceAll(' ', '+')}"`);
+    }
+
+    if (groups.workflowStatus) {
+      const workflowStatus = inferCheckSuiteStatus(notification.subject.title);
+
+      if (workflowStatus) {
+        filters.push(`is:${workflowStatus}`);
+      }
+    }
+
+    if (groups.branchName) {
+      filters.push(`branch:${groups.branchName}`);
+    }
+  }
+
+  if (filters.length > 0) {
+    url += `?query=${filters.join('+')}`;
+  }
+
+  return url;
+}
+
+export function getWorkflowRunUrl(notification: Notification) {
+  const workflowStatus = inferCheckSuiteStatus(notification.subject.title);
+
+  let url = `${notification.repository.html_url}/actions`;
+
+  if (workflowStatus) {
+    url += `?query=is:${workflowStatus}`;
+  }
+
+  return url;
+}
+
 export async function generateGitHubWebUrl(
   notification: Notification,
   accounts: AuthState,
@@ -164,11 +213,17 @@ export async function generateGitHubWebUrl(
   } else {
     // Perform any specific notification type handling (only required for a few special notification scenarios)
     switch (notification.subject.type) {
+      case 'CheckSuite':
+        url = getCheckSuiteUrl(notification);
+        break;
       case 'Discussion':
         url = await getDiscussionUrl(notification, accounts.token);
         break;
       case 'RepositoryInvitation':
         url = `${notification.repository.html_url}/invitations`;
+        break;
+      case 'WorkflowRun' as SubjectType: //TODO - remove this cast
+        url = getWorkflowRunUrl(notification);
         break;
       default:
         url = notification.repository.html_url;

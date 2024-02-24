@@ -194,6 +194,10 @@ export function inferCheckSuiteStatus(title: string): CheckSuiteStatus {
     if (lowerTitle.includes('succeeded for')) {
       return 'success';
     }
+
+    if (lowerTitle.includes('review to deploy to')) {
+      return 'waiting';
+    }
   }
 
   return null;
