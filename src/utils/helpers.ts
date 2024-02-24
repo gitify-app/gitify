@@ -3,7 +3,6 @@ import {
   Notification,
   GraphQLSearch,
   DiscussionCommentEdge,
-  SubjectType,
 } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
@@ -222,7 +221,7 @@ export async function generateGitHubWebUrl(
       case 'RepositoryInvitation':
         url = `${notification.repository.html_url}/invitations`;
         break;
-      case 'WorkflowRun' as SubjectType: //TODO - remove this cast
+      case 'WorkflowRun':
         url = getWorkflowRunUrl(notification);
         break;
       default:
