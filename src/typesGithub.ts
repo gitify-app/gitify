@@ -1,4 +1,5 @@
 export type Reason =
+  | 'approval_requested'
   | 'assign'
   | 'author'
   | 'ci_activity'
