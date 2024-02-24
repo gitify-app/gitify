@@ -14,6 +14,7 @@ import {
   MailIcon,
   OcticonProps,
   QuestionIcon,
+  RocketIcon,
   SkipIcon,
   StopIcon,
   SyncIcon,
@@ -24,6 +25,7 @@ import { CheckSuiteStatus, Reason, Subject } from '../typesGithub';
 
 // prettier-ignore
 const DESCRIPTIONS = {
+    APPROVAL_REQUESTED: 'You were requested to review and approve a deployment.',
     ASSIGN: 'You were assigned to the issue.',
     AUTHOR: 'You created the thread.',
     COMMENT: 'You commented on the thread.',
@@ -32,7 +34,7 @@ const DESCRIPTIONS = {
     MEMBER_FEATURE_REQUESTED: 'Organization members have requested to enable a feature such as Draft Pull Requests or CoPilot.',
     MENTION: 'You were specifically @mentioned in the content.',
     REVIEW_REQUESTED: "You, or a team you're a member of, were requested to review a pull request.",
-    SECURITY_ADVISORY_CREDIT: "You were credited for contributing to a security advisory.",
+    SECURITY_ADVISORY_CREDIT: 'You were credited for contributing to a security advisory.',
     SECURITY_ALERT: 'GitHub discovered a security vulnerability in your repository.',
     STATE_CHANGE: 'You changed the thread state (for example, closing an issue or merging a pull request).',
     SUBSCRIBED: "You're watching the repository.",
@@ -47,6 +49,8 @@ export function formatReason(reason: Reason): {
 } {
   // prettier-ignore
   switch (reason) {
+    case 'approval_requested':
+      return { type: 'Approval Requested', description: DESCRIPTIONS['APPROVAL_REQUESTED'] };
     case 'assign':
       return { type: 'Assign', description: DESCRIPTIONS['ASSIGN'] };
     case 'author':
@@ -132,6 +136,8 @@ export function getNotificationTypeIcon(
       return MailIcon;
     case 'RepositoryVulnerabilityAlert':
       return AlertIcon;
+    case 'WorkflowRun':
+      return RocketIcon;
     default:
       return QuestionIcon;
   }

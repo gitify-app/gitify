@@ -1,4 +1,5 @@
 export type Reason =
+  | 'approval_requested'
   | 'assign'
   | 'author'
   | 'ci_activity'
@@ -22,7 +23,8 @@ export type SubjectType =
   | 'PullRequest'
   | 'Release'
   | 'RepositoryInvitation'
-  | 'RepositoryVulnerabilityAlert';
+  | 'RepositoryVulnerabilityAlert'
+  | 'WorkflowRun';
 
 export type IssueStateType =
   | 'closed'

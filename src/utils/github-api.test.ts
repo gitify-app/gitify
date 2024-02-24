@@ -7,6 +7,7 @@ import { Reason, StateType, Subject, SubjectType } from '../typesGithub';
 
 describe('formatReason', () => {
   it('should format the notification reason', () => {
+    expect(formatReason('approval_requested')).toMatchSnapshot();
     expect(formatReason('assign')).toMatchSnapshot();
     expect(formatReason('author')).toMatchSnapshot();
     expect(formatReason('ci_activity')).toMatchSnapshot();
@@ -152,6 +153,13 @@ describe('getNotificationTypeIcon', () => {
         }),
       ).displayName,
     ).toBe('AlertIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
+          type: 'WorkflowRun',
+        }),
+      ).displayName,
+    ).toBe('RocketIcon');
     expect(getNotificationTypeIcon(createSubjectMock({})).displayName).toBe(
       'QuestionIcon',
     );
