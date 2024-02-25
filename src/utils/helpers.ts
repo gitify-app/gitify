@@ -1,13 +1,18 @@
-import { EnterpriseAccount, AuthState } from '../types';
+import {
+  EnterpriseAccount,
+  AuthState,
+  CheckSuiteParts,
+  WorkflowRunParts,
+} from '../types';
 import {
   Notification,
   GraphQLSearch,
   DiscussionCommentEdge,
+  CheckSuiteStatus,
 } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
 import { Constants } from './constants';
-import { inferCheckSuiteStatus } from './github-api';
 
 export function getEnterpriseAccountToken(
   hostname: string,
@@ -149,32 +154,94 @@ export const getLatestDiscussionCommentId = (
     .reduce((a, b) => (a.node.createdAt > b.node.createdAt ? a : b))?.node
     .databaseId;
 
-export function getCheckSuiteUrl(notification: Notification) {
-  let url = `${notification.repository.html_url}/actions`;
-  let filters = [];
-
+export function parseCheckSuiteTitle(title: string): CheckSuiteParts | null {
   const regexPattern =
-    /^(?<workflowName>.*?) workflow run(, Attempt #(?<attemptNumber>\d+))? (?<workflowStatus>.*?) for (?<branchName>.*?) branch$/;
-  const matches = regexPattern.exec(notification.subject.title);
+    /^(?<workflowName>.*?) workflow run(, Attempt #(?<attemptNumber>\d+))? (?<statusDisplayName>.*?) for (?<branchName>.*?) branch$/;
+
+  const matches = regexPattern.exec(title);
 
   if (matches) {
     const { groups } = matches;
 
-    if (groups.workflowName) {
-      filters.push(`workflow:"${groups.workflowName.replaceAll(' ', '+')}"`);
-    }
+    return {
+      workflowName: groups.workflowName,
+      attemptNumber: groups.attemptNumber
+        ? parseInt(groups.attemptNumber)
+        : undefined,
+      statusCode: getCheckSuiteStatus(groups.statusDisplayName),
+      statusDisplayName: groups.statusDisplayName,
+      branchName: groups.branchName,
+    };
+  }
 
-    if (groups.workflowStatus) {
-      const workflowStatus = inferCheckSuiteStatus(notification.subject.title);
+  return null;
+}
 
-      if (workflowStatus) {
-        filters.push(`is:${workflowStatus}`);
-      }
-    }
+export function parseWorkflowRunTitle(title: string): WorkflowRunParts | null {
+  const regexPattern =
+    /^(?<user>.*?) requested your (?<statusDisplayName>.*?) to deploy to an environment$/;
 
-    if (groups.branchName) {
-      filters.push(`branch:${groups.branchName}`);
-    }
+  const matches = regexPattern.exec(title);
+
+  if (matches) {
+    const { groups } = matches;
+
+    return {
+      user: groups.user,
+      statusCode: getWorkflowRunStatus(groups.statusDisplayName),
+      statusDisplayName: groups.statusDisplayName,
+    };
+  }
+
+  return null;
+}
+
+export function getCheckSuiteStatus(
+  statusDisplayName: string,
+): CheckSuiteStatus {
+  switch (statusDisplayName) {
+    case 'cancelled':
+      return 'cancelled';
+    case 'failed':
+      return 'failure';
+    case 'skipped':
+      return 'skipped';
+    case 'succeeded':
+      return 'success';
+    default:
+      return null;
+  }
+}
+
+export function getWorkflowRunStatus(
+  statusDisplayName: string,
+): CheckSuiteStatus {
+  switch (statusDisplayName) {
+    case 'review':
+      return 'waiting';
+    default:
+      return null;
+  }
+}
+
+export function getCheckSuiteUrl(notification: Notification) {
+  let url = `${notification.repository.html_url}/actions`;
+  let filters = [];
+
+  const checkSuiteParts = parseCheckSuiteTitle(notification.subject.title);
+
+  if (checkSuiteParts?.workflowName) {
+    filters.push(
+      `workflow:"${checkSuiteParts.workflowName.replaceAll(' ', '+')}"`,
+    );
+  }
+
+  if (checkSuiteParts?.statusCode) {
+    filters.push(`is:${checkSuiteParts.statusCode}`);
+  }
+
+  if (checkSuiteParts?.branchName) {
+    filters.push(`branch:${checkSuiteParts.branchName}`);
   }
 
   if (filters.length > 0) {
@@ -185,12 +252,12 @@ export function getCheckSuiteUrl(notification: Notification) {
 }
 
 export function getWorkflowRunUrl(notification: Notification) {
-  const workflowStatus = inferCheckSuiteStatus(notification.subject.title);
-
   let url = `${notification.repository.html_url}/actions`;
 
-  if (workflowStatus) {
-    url += `?query=is:${workflowStatus}`;
+  const workflowRunParts = parseWorkflowRunTitle(notification.subject.title);
+
+  if (workflowRunParts?.statusCode) {
+    url += `?query=is:${workflowRunParts.statusCode}`;
   }
 
   return url;

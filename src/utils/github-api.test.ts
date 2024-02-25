@@ -36,7 +36,7 @@ describe('getNotificationTypeIcon', () => {
       getNotificationTypeIcon(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow cancelled for main branch',
+          title: 'Demonstration workflow run cancelled for main branch',
         }),
       ).displayName,
     ).toBe('StopIcon');
@@ -44,7 +44,7 @@ describe('getNotificationTypeIcon', () => {
       getNotificationTypeIcon(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow failed for main branch',
+          title: 'Demonstration workflow run failed for main branch',
         }),
       ).displayName,
     ).toBe('XIcon');
@@ -52,7 +52,7 @@ describe('getNotificationTypeIcon', () => {
       getNotificationTypeIcon(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow skipped for main branch',
+          title: 'Demonstration workflow run skipped for main branch',
         }),
       ).displayName,
     ).toBe('SkipIcon');
@@ -60,7 +60,7 @@ describe('getNotificationTypeIcon', () => {
       getNotificationTypeIcon(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow succeeded for main branch',
+          title: 'Demonstration workflow run succeeded for main branch',
         }),
       ).displayName,
     ).toBe('CheckIcon');
@@ -172,7 +172,7 @@ describe('getNotificationTypeIconColor', () => {
       getNotificationTypeIconColor(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow cancelled for main branch',
+          title: 'Demonstration workflow run cancelled for main branch',
         }),
       ),
     ).toMatchSnapshot();
@@ -180,7 +180,7 @@ describe('getNotificationTypeIconColor', () => {
       getNotificationTypeIconColor(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow failed for main branch',
+          title: 'Demonstration workflow run failed for main branch',
         }),
       ),
     ).toMatchSnapshot();
@@ -189,7 +189,7 @@ describe('getNotificationTypeIconColor', () => {
       getNotificationTypeIconColor(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow skipped for main branch',
+          title: 'Demonstration workflow run skipped for main branch',
         }),
       ),
     ).toMatchSnapshot();
@@ -197,7 +197,7 @@ describe('getNotificationTypeIconColor', () => {
       getNotificationTypeIconColor(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow succeeded for main branch',
+          title: 'Demonstration workflow run succeeded for main branch',
         }),
       ),
     ).toMatchSnapshot();

@@ -1,4 +1,4 @@
-import { Notification, User } from './typesGithub';
+import { CheckSuiteStatus, Notification, User } from './typesGithub';
 
 export interface AuthState {
   token?: string;
@@ -55,4 +55,18 @@ export interface AuthResponse {
 export interface AuthTokenResponse {
   hostname: string;
   token: string;
+}
+
+export interface CheckSuiteParts {
+  workflowName: string;
+  attemptNumber?: number;
+  statusDisplayName: string;
+  statusCode: CheckSuiteStatus | null;
+  branchName: string;
+}
+
+export interface WorkflowRunParts {
+  user: string;
+  statusCode: CheckSuiteStatus | null;
+  statusDisplayName: string;
 }

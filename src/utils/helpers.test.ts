@@ -318,6 +318,50 @@ describe('utils/helpers.ts', () => {
       );
     });
 
+    it('Check Suite: unhandled workflow scenario', async () => {
+      const subject = {
+        title: 'unhandled workflow scenario',
+        url: null,
+        latest_comment_url: null,
+        type: 'CheckSuite' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+      expect(result).toBe(
+        `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+      );
+    });
+
+    it('Check Suite: unhandled status scenario', async () => {
+      const subject = {
+        title: 'Demo workflow run unhandled-status for main branch',
+        url: null,
+        latest_comment_url: null,
+        type: 'CheckSuite' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+      expect(result).toBe(
+        `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+branch%3Amain&${mockedNotificationReferrer}`,
+      );
+    });
+
     it('Discussions: when no subject urls and no discussions found via query, default to linking to repository discussions', async () => {
       const subject = {
         title: 'generate github web url unit tests',
@@ -417,6 +461,51 @@ describe('utils/helpers.ts', () => {
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
       expect(result).toBe(
         `https://github.com/manosim/notifications-test/actions?query=is%3Awaiting&${mockedNotificationReferrer}`,
+      );
+    });
+
+    it('Workflow Run: unhandled status/action scenario', async () => {
+      const subject = {
+        title:
+          'some-user requested your unhandled-action to deploy to an environment',
+        url: null,
+        latest_comment_url: null,
+        type: 'WorkflowRun' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+      expect(result).toBe(
+        `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+      );
+    });
+
+    it('Workflow Run: unhandled workflow scenario', async () => {
+      const subject = {
+        title: 'some unhandled scenario',
+        url: null,
+        latest_comment_url: null,
+        type: 'WorkflowRun' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+      expect(result).toBe(
+        `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
       );
     });
 

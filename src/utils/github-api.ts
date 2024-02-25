@@ -21,7 +21,8 @@ import {
   TagIcon,
   XIcon,
 } from '@primer/octicons-react';
-import { CheckSuiteStatus, Reason, Subject } from '../typesGithub';
+import { Reason, Subject } from '../typesGithub';
+import { parseCheckSuiteTitle } from './helpers';
 
 // prettier-ignore
 const DESCRIPTIONS = {
@@ -89,9 +90,8 @@ export function getNotificationTypeIcon(
 ): React.FC<OcticonProps> {
   switch (subject.type) {
     case 'CheckSuite':
-      const checkSuiteState = inferCheckSuiteStatus(subject.title);
-
-      switch (checkSuiteState) {
+      const checkSuiteParts = parseCheckSuiteTitle(subject.title);
+      switch (checkSuiteParts?.statusCode) {
         case 'cancelled':
           return StopIcon;
         case 'failure':
@@ -145,9 +145,8 @@ export function getNotificationTypeIcon(
 
 export function getNotificationTypeIconColor(subject: Subject): string {
   if (subject.type === 'CheckSuite') {
-    const checkSuiteState = inferCheckSuiteStatus(subject.title);
-
-    switch (checkSuiteState) {
+    const checkSuiteParts = parseCheckSuiteTitle(subject.title);
+    switch (checkSuiteParts?.statusCode) {
       case 'cancelled':
         return 'text-gray-500';
       case 'failure':
@@ -179,32 +178,4 @@ export function getNotificationTypeIconColor(subject: Subject): string {
     default:
       return 'text-gray-300';
   }
-}
-
-export function inferCheckSuiteStatus(title: string): CheckSuiteStatus {
-  if (title) {
-    const lowerTitle = title.toLowerCase();
-
-    if (lowerTitle.includes('cancelled for')) {
-      return 'cancelled';
-    }
-
-    if (lowerTitle.includes('failed for')) {
-      return 'failure';
-    }
-
-    if (lowerTitle.includes('skipped for')) {
-      return 'skipped';
-    }
-
-    if (lowerTitle.includes('succeeded for')) {
-      return 'success';
-    }
-
-    if (lowerTitle.includes('review to deploy to')) {
-      return 'waiting';
-    }
-  }
-
-  return null;
 }
