@@ -114,6 +114,8 @@ export function getNotificationTypeIcon(
         case 'closed':
         case 'completed':
           return IssueClosedIcon;
+        case 'not_planned':
+          return SkipIcon;
         case 'reopened':
           return IssueReopenedIcon;
         default:

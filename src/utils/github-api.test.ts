@@ -100,6 +100,14 @@ describe('getNotificationTypeIcon', () => {
       getNotificationTypeIcon(
         createSubjectMock({
           type: 'Issue',
+          state: 'not_planned',
+        }),
+      ).displayName,
+    ).toBe('SkipIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
+          type: 'Issue',
           state: 'reopened',
         }),
       ).displayName,
