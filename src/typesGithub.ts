@@ -28,12 +28,12 @@ export type SubjectType =
 
 export type IssueStateType =
   | 'closed'
-  | 'open'
   | 'completed'
-  | 'reopened'
-  | 'not_planned';
+  | 'not_planned'
+  | 'open'
+  | 'reopened';
 
-export type PullRequestStateType = 'closed' | 'open' | 'merged' | 'draft';
+export type PullRequestStateType = 'closed' | 'draft' | 'merged' | 'open';
 
 export type StateType = IssueStateType | PullRequestStateType;
 
