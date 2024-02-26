@@ -25,22 +25,22 @@ import { CheckSuiteStatus, Reason, Subject } from '../typesGithub';
 
 // prettier-ignore
 const DESCRIPTIONS = {
-    APPROVAL_REQUESTED: 'You were requested to review and approve a deployment.',
-    ASSIGN: 'You were assigned to the issue.',
-    AUTHOR: 'You created the thread.',
-    COMMENT: 'You commented on the thread.',
-    INVITATION: 'You accepted an invitation to contribute to the repository.',
-    MANUAL: 'You subscribed to the thread (via an issue or pull request).',
-    MEMBER_FEATURE_REQUESTED: 'Organization members have requested to enable a feature such as Draft Pull Requests or CoPilot.',
-    MENTION: 'You were specifically @mentioned in the content.',
-    REVIEW_REQUESTED: "You, or a team you're a member of, were requested to review a pull request.",
-    SECURITY_ADVISORY_CREDIT: 'You were credited for contributing to a security advisory.',
-    SECURITY_ALERT: 'GitHub discovered a security vulnerability in your repository.',
-    STATE_CHANGE: 'You changed the thread state (for example, closing an issue or merging a pull request).',
-    SUBSCRIBED: "You're watching the repository.",
-    TEAM_MENTION: 'You were on a team that was mentioned.',
-    CI_ACTIVITY: 'A GitHub Actions workflow run was triggered for your repository',
-    UNKNOWN: 'The reason for this notification is not supported by the app.',
+  APPROVAL_REQUESTED: 'You were requested to review and approve a deployment.',
+  ASSIGN: 'You were assigned to the issue.',
+  AUTHOR: 'You created the thread.',
+  CI_ACTIVITY: 'A GitHub Actions workflow run was triggered for your repository',
+  COMMENT: 'You commented on the thread.',
+  INVITATION: 'You accepted an invitation to contribute to the repository.',
+  MANUAL: 'You subscribed to the thread (via an issue or pull request).',
+  MEMBER_FEATURE_REQUESTED: 'Organization members have requested to enable a feature such as Draft Pull Requests or CoPilot.',
+  MENTION: 'You were specifically @mentioned in the content.',
+  REVIEW_REQUESTED: "You, or a team you're a member of, were requested to review a pull request.",
+  SECURITY_ADVISORY_CREDIT: 'You were credited for contributing to a security advisory.',
+  SECURITY_ALERT: 'GitHub discovered a security vulnerability in your repository.',
+  STATE_CHANGE: 'You changed the thread state (for example, closing an issue or merging a pull request).',
+  SUBSCRIBED: "You're watching the repository.",
+  TEAM_MENTION: 'You were on a team that was mentioned.',
+  UNKNOWN: 'The reason for this notification is not supported by the app.',
 };
 
 export function formatReason(reason: Reason): {
@@ -55,6 +55,8 @@ export function formatReason(reason: Reason): {
       return { type: 'Assign', description: DESCRIPTIONS['ASSIGN'] };
     case 'author':
       return { type: 'Author', description: DESCRIPTIONS['AUTHOR'] };
+    case 'ci_activity':
+      return { type: 'Workflow Run', description: DESCRIPTIONS['CI_ACTIVITY'] };
     case 'comment':
       return { type: 'Comment', description: DESCRIPTIONS['COMMENT'] };
     case 'invitation':
@@ -77,8 +79,6 @@ export function formatReason(reason: Reason): {
       return { type: 'Subscribed', description: DESCRIPTIONS['SUBSCRIBED'] };
     case 'team_mention':
       return { type: 'Team Mention', description: DESCRIPTIONS['TEAM_MENTION'] };
-    case 'ci_activity':
-      return { type: 'Workflow Run', description: DESCRIPTIONS['CI_ACTIVITY'] };
     default:
       return { type: 'Unknown', description: DESCRIPTIONS['UNKNOWN'] };
   }
