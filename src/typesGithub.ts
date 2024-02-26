@@ -18,10 +18,10 @@ export type Reason =
 // Note: OPEN is not an official discussion state type in the GitHub API
 export type DiscussionStateType =
   | 'DUPLICATE'
-  | 'REOPENED'
-  | 'RESOLVED'
   | 'OPEN'
-  | 'OUTDATED';
+  | 'OUTDATED'
+  | 'REOPENED'
+  | 'RESOLVED';
 
 export type SubjectType =
   | 'CheckSuite'
