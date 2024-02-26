@@ -182,6 +182,8 @@ export async function getDiscussionState(
   if (edges[0]) {
     return edges[0].node.stateReason ?? 'OPEN';
   }
+
+  return 'OPEN';
 }
 
 export const getLatestDiscussionCommentId = (

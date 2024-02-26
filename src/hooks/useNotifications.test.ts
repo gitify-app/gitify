@@ -345,6 +345,17 @@ describe('hooks/useNotifications.ts', () => {
               type: 'Discussion',
             },
           },
+          {
+            id: 6,
+            updated_at: '2024-02-26T00:00:00Z',
+            repository: {
+              full_name: 'some/repo',
+            },
+            subject: {
+              title: 'This is a default discussion',
+              type: 'Discussion',
+            },
+          },
         ];
 
         nock('https://api.github.com')
@@ -376,6 +387,14 @@ describe('hooks/useNotifications.ts', () => {
                     node: {
                       title: 'This is an open discussion',
                       stateReason: null,
+                      viewerSubscription: 'SUBSCRIBED',
+                    },
+                  },
+                  {
+                    node: {
+                      title: 'This is an open discussion',
+                      stateReason: null,
+                      viewerSubscription: 'IGNORED',
                     },
                   },
                 ],
@@ -426,6 +445,20 @@ describe('hooks/useNotifications.ts', () => {
                 ],
               },
             },
+          })
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                edges: [
+                  {
+                    node: {
+                      title: 'unknown search result',
+                    },
+                  },
+                ],
+              },
+            },
           });
 
         const { result } = renderHook(() => useNotifications(true));
@@ -443,7 +476,7 @@ describe('hooks/useNotifications.ts', () => {
           expect(result.current.notifications[0].hostname).toBe('github.com');
         });
 
-        expect(result.current.notifications[0].notifications.length).toBe(5);
+        expect(result.current.notifications[0].notifications.length).toBe(6);
         expect(
           result.current.notifications[0].notifications[0].subject.state,
         ).toBe('DUPLICATE');
@@ -459,6 +492,9 @@ describe('hooks/useNotifications.ts', () => {
         expect(
           result.current.notifications[0].notifications[4].subject.state,
         ).toBe('RESOLVED');
+        expect(
+          result.current.notifications[0].notifications[5].subject.state,
+        ).toBe('OPEN');
       });
     });
   });
