@@ -2,6 +2,9 @@ import {
   AlertIcon,
   CheckIcon,
   CommentDiscussionIcon,
+  DiscussionClosedIcon,
+  DiscussionDuplicateIcon,
+  DiscussionOutdatedIcon,
   GitCommitIcon,
   GitMergeIcon,
   GitPullRequestClosedIcon,
@@ -106,7 +109,16 @@ export function getNotificationTypeIcon(
     case 'Commit':
       return GitCommitIcon;
     case 'Discussion':
-      return CommentDiscussionIcon;
+      switch (subject.state) {
+        case 'DUPLICATE':
+          return DiscussionDuplicateIcon;
+        case 'OUTDATED':
+          return DiscussionOutdatedIcon;
+        case 'RESOLVED':
+          return DiscussionClosedIcon;
+        default:
+          return CommentDiscussionIcon;
+      }
     case 'Issue':
       switch (subject.state) {
         case 'draft':
@@ -165,6 +177,8 @@ export function getNotificationTypeIconColor(subject: Subject): string {
     case 'closed':
       return 'text-red-500';
     case 'completed':
+    case 'merged':
+    case 'RESOLVED':
       return 'text-purple-500';
     case 'draft':
       return 'text-gray-600';

@@ -286,6 +286,7 @@ export const mockedGraphQLResponse: GraphQLSearch = {
               viewerSubscription: 'SUBSCRIBED',
               title: '1.16.0',
               url: 'https://github.com/manosim/notifications-test/discussions/612',
+              stateReason: null,
               comments: {
                 edges: [
                   {
@@ -388,6 +389,7 @@ export const mockedGraphQLResponse: GraphQLSearch = {
               viewerSubscription: 'IGNORED',
               title: '1.16.0',
               url: 'https://github.com/manosim/notifications-test/discussions/612',
+              stateReason: 'RESOLVED',
               comments: {
                 edges: [
                   {

@@ -15,6 +15,13 @@ export type Reason =
   | 'subscribed'
   | 'team_mention';
 
+export type DiscussionStateType =
+  | 'DUPLICATE'
+  | 'REOPENED'
+  | 'RESOLVED'
+  | 'OPEN'
+  | 'OUTDATED';
+
 export type SubjectType =
   | 'CheckSuite'
   | 'Commit'
@@ -35,7 +42,10 @@ export type IssueStateType =
 
 export type PullRequestStateType = 'closed' | 'open' | 'merged' | 'draft';
 
-export type StateType = IssueStateType | PullRequestStateType;
+export type StateType =
+  | DiscussionStateType
+  | IssueStateType
+  | PullRequestStateType;
 
 export type ViewerSubscription = 'IGNORED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
 
@@ -145,7 +155,7 @@ export interface Owner {
 export interface Subject {
   title: string;
   url: string | null;
-  state?: StateType;
+  state?: StateType; // This is not in the GitHub API, but we add it to the type to make it easier to work with
   latest_comment_url: string | null;
   type: SubjectType;
 }
@@ -165,6 +175,7 @@ export interface DiscussionEdge {
     viewerSubscription: ViewerSubscription;
     title: string;
     url: string;
+    stateReason: DiscussionStateType;
     comments: {
       edges: DiscussionCommentEdge[];
     };
