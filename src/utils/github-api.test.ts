@@ -249,6 +249,9 @@ describe('getNotificationTypeIconColor', () => {
       getNotificationTypeIconColor(createSubjectMock({ state: 'reopened' })),
     ).toMatchSnapshot();
     expect(
+      getNotificationTypeIconColor(createSubjectMock({ state: 'RESOLVED' })),
+    ).toMatchSnapshot();
+    expect(
       getNotificationTypeIconColor(
         createSubjectMock({
           state: 'something_else_unknown' as StateType,

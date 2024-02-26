@@ -136,4 +136,6 @@ exports[`getNotificationTypeIconColor should format the notification color for s
 
 exports[`getNotificationTypeIconColor should format the notification color for state 7`] = `"text-green-500"`;
 
-exports[`getNotificationTypeIconColor should format the notification color for state 8`] = `"text-gray-300"`;
+exports[`getNotificationTypeIconColor should format the notification color for state 8`] = `"text-purple-500"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for state 9`] = `"text-gray-300"`;

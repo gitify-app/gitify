@@ -177,8 +177,6 @@ export function getNotificationTypeIconColor(subject: Subject): string {
     case 'closed':
       return 'text-red-500';
     case 'completed':
-    case 'merged':
-    case 'RESOLVED':
       return 'text-purple-500';
     case 'draft':
       return 'text-gray-600';
@@ -190,6 +188,8 @@ export function getNotificationTypeIconColor(subject: Subject): string {
       return 'text-green-500';
     case 'reopened':
       return 'text-green-500';
+    case 'RESOLVED':
+      return 'text-purple-500';
     default:
       return 'text-gray-300';
   }
