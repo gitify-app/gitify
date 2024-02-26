@@ -73,6 +73,21 @@ describe('getNotificationTypeIcon', () => {
         .displayName,
     ).toBe('CommentDiscussionIcon');
     expect(
+      getNotificationTypeIcon(
+        createSubjectMock({ type: 'Discussion', state: 'DUPLICATE' }),
+      ).displayName,
+    ).toBe('DiscussionDuplicateIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({ type: 'Discussion', state: 'OUTDATED' }),
+      ).displayName,
+    ).toBe('DiscussionOutdatedIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({ type: 'Discussion', state: 'RESOLVED' }),
+      ).displayName,
+    ).toBe('DiscussionClosedIcon');
+    expect(
       getNotificationTypeIcon(createSubjectMock({ type: 'Issue' })).displayName,
     ).toBe('IssueOpenedIcon');
     expect(

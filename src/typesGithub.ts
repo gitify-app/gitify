@@ -15,6 +15,7 @@ export type Reason =
   | 'subscribed'
   | 'team_mention';
 
+// Note: OPEN is not an official discussion state type in the GitHub API
 export type DiscussionStateType =
   | 'DUPLICATE'
   | 'REOPENED'
