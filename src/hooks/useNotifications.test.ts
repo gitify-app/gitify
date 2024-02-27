@@ -3,7 +3,10 @@ import axios from 'axios';
 import nock from 'nock';
 
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
-import { mockedDiscussionNotifications, mockedUser } from '../__mocks__/mockedData';
+import {
+  mockedDiscussionNotifications,
+  mockedUser,
+} from '../__mocks__/mockedData';
 import { AuthState } from '../types';
 import { useNotifications } from './useNotifications';
 
