@@ -174,6 +174,8 @@ export function getNotificationTypeIconColor(subject: Subject): string {
   }
 
   switch (subject.state) {
+    case 'ANSWERED':
+      return 'text-green-500';
     case 'closed':
       return 'text-red-500';
     case 'completed':

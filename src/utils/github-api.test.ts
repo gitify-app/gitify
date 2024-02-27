@@ -228,6 +228,9 @@ describe('getNotificationTypeIconColor', () => {
 
   it('should format the notification color for state', () => {
     expect(
+      getNotificationTypeIconColor(createSubjectMock({ state: 'ANSWERED' })),
+    ).toMatchSnapshot();
+    expect(
       getNotificationTypeIconColor(createSubjectMock({ state: 'closed' })),
     ).toMatchSnapshot();
     expect(

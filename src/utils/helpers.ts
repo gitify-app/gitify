@@ -4,6 +4,8 @@ import {
   GraphQLSearch,
   DiscussionCommentEdge,
   DiscussionStateType,
+  DiscussionStateSearchResultEdge,
+  DiscussionSearchResultEdge,
 } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
@@ -76,11 +78,8 @@ async function getDiscussionUrl(
 ): Promise<string> {
   let url = `${notification.repository.html_url}/discussions`;
 
-  const response: GraphQLSearch = await apiRequestAuth(
-    `https://api.github.com/graphql`,
-    'POST',
-    token,
-    {
+  const response: GraphQLSearch<DiscussionSearchResultEdge> =
+    await apiRequestAuth(`https://api.github.com/graphql`, 'POST', token, {
       query: `{
       search(query:"${formatSearchQueryString(
         notification.repository.full_name,
@@ -115,8 +114,7 @@ async function getDiscussionUrl(
           }
       }
     }`,
-    },
-  );
+    });
   let edges =
     response?.data?.data?.search?.edges?.filter(
       (edge) => edge.node.title === notification.subject.title,
@@ -145,11 +143,8 @@ export async function getDiscussionState(
   notification: Notification,
   token: string,
 ): Promise<DiscussionStateType> {
-  const response: GraphQLSearch = await apiRequestAuth(
-    `https://api.github.com/graphql`,
-    'POST',
-    token,
-    {
+  const response: GraphQLSearch<DiscussionStateSearchResultEdge> =
+    await apiRequestAuth(`https://api.github.com/graphql`, 'POST', token, {
       query: `{
         search(query:"${formatSearchQueryString(
           notification.repository.full_name,
@@ -161,15 +156,14 @@ export async function getDiscussionState(
               ... on Discussion {
                 viewerSubscription
                 title
-                url
                 stateReason  
+                isAnswered
               }
             }
           }
         }
       }`,
-    },
-  );
+    });
   let edges =
     response?.data?.data?.search?.edges?.filter(
       (edge) => edge.node.title === notification.subject.title,
@@ -180,7 +174,13 @@ export async function getDiscussionState(
     );
 
   if (edges[0]) {
-    return edges[0].node.stateReason ?? 'OPEN';
+    if (edges[0].node.isAnswered) {
+      return 'ANSWERED';
+    }
+
+    if (edges[0].node.stateReason) {
+      return edges[0].node.stateReason;
+    }
   }
 
   return 'OPEN';

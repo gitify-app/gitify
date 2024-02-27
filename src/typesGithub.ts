@@ -15,8 +15,9 @@ export type Reason =
   | 'subscribed'
   | 'team_mention';
 
-// Note: OPEN is not an official discussion state type in the GitHub API
+// Note: ANSWERED and OPEN are not an official discussion state type in the GitHub API
 export type DiscussionStateType =
+  | 'ANSWERED'
   | 'DUPLICATE'
   | 'OPEN'
   | 'OUTDATED'
@@ -161,22 +162,30 @@ export interface Subject {
   type: SubjectType;
 }
 
-export interface GraphQLSearch {
+export interface GraphQLSearch<T> {
   data: {
     data: {
       search: {
-        edges: DiscussionEdge[];
+        edges: T[];
       };
     };
   };
 }
 
-export interface DiscussionEdge {
+export interface DiscussionStateSearchResultEdge {
+  node: {
+    viewerSubscription: ViewerSubscription;
+    title: string;
+    stateReason: DiscussionStateType;
+    isAnswered: boolean;
+  };
+}
+
+export interface DiscussionSearchResultEdge {
   node: {
     viewerSubscription: ViewerSubscription;
     title: string;
     url: string;
-    stateReason: DiscussionStateType;
     comments: {
       edges: DiscussionCommentEdge[];
     };
