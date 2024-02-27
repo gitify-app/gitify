@@ -3,7 +3,7 @@ import axios from 'axios';
 import nock from 'nock';
 
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
-import { mockedUser } from '../__mocks__/mockedData';
+import { mockedDiscussionNotifications, mockedUser } from '../__mocks__/mockedData';
 import { AuthState } from '../types';
 import { useNotifications } from './useNotifications';
 
@@ -289,89 +289,9 @@ describe('hooks/useNotifications.ts', () => {
           user: mockedUser,
         };
 
-        const notifications = [
-          {
-            id: 1,
-            updated_at: '2024-02-26T00:00:00Z',
-            repository: {
-              full_name: 'some/repo',
-            },
-            subject: {
-              title: 'This is an answered discussion',
-              type: 'Discussion',
-            },
-          },
-          {
-            id: 2,
-            updated_at: '2024-02-26T00:00:00Z',
-            repository: {
-              full_name: 'some/repo',
-            },
-            subject: {
-              title: 'This is a duplicate discussion',
-              type: 'Discussion',
-            },
-          },
-          {
-            id: 3,
-            updated_at: '2024-02-26T00:00:00Z',
-            repository: {
-              full_name: 'some/repo',
-            },
-            subject: {
-              title: 'This is an open discussion',
-              type: 'Discussion',
-            },
-          },
-          {
-            id: 4,
-            updated_at: '2024-02-26T00:00:00Z',
-            repository: {
-              full_name: 'some/repo',
-            },
-            subject: {
-              title: 'This is nm outdated discussion',
-              type: 'Discussion',
-            },
-          },
-          {
-            id: 5,
-            updated_at: '2024-02-26T00:00:00Z',
-            repository: {
-              full_name: 'some/repo',
-            },
-            subject: {
-              title: 'This is a reopened discussion',
-              type: 'Discussion',
-            },
-          },
-          {
-            id: 6,
-            updated_at: '2024-02-26T00:00:00Z',
-            repository: {
-              full_name: 'some/repo',
-            },
-            subject: {
-              title: 'This is a resolved discussion',
-              type: 'Discussion',
-            },
-          },
-          {
-            id: 7,
-            updated_at: '2024-02-26T00:00:00Z',
-            repository: {
-              full_name: 'some/repo',
-            },
-            subject: {
-              title: 'This is a default discussion',
-              type: 'Discussion',
-            },
-          },
-        ];
-
         nock('https://api.github.com')
           .get('/notifications?participating=false')
-          .reply(200, notifications);
+          .reply(200, mockedDiscussionNotifications);
 
         nock('https://api.github.com')
           .post('/graphql')
