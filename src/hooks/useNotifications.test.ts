@@ -297,7 +297,7 @@ describe('hooks/useNotifications.ts', () => {
               full_name: 'some/repo',
             },
             subject: {
-              title: 'This is a duplicate discussion',
+              title: 'This is an answered discussion',
               type: 'Discussion',
             },
           },
@@ -308,7 +308,7 @@ describe('hooks/useNotifications.ts', () => {
               full_name: 'some/repo',
             },
             subject: {
-              title: 'This is an open discussion',
+              title: 'This is a duplicate discussion',
               type: 'Discussion',
             },
           },
@@ -319,7 +319,7 @@ describe('hooks/useNotifications.ts', () => {
               full_name: 'some/repo',
             },
             subject: {
-              title: 'This is nm outdated discussion',
+              title: 'This is an open discussion',
               type: 'Discussion',
             },
           },
@@ -330,7 +330,7 @@ describe('hooks/useNotifications.ts', () => {
               full_name: 'some/repo',
             },
             subject: {
-              title: 'This is a reopened discussion',
+              title: 'This is nm outdated discussion',
               type: 'Discussion',
             },
           },
@@ -341,12 +341,23 @@ describe('hooks/useNotifications.ts', () => {
               full_name: 'some/repo',
             },
             subject: {
-              title: 'This is a resolved discussion',
+              title: 'This is a reopened discussion',
               type: 'Discussion',
             },
           },
           {
             id: 6,
+            updated_at: '2024-02-26T00:00:00Z',
+            repository: {
+              full_name: 'some/repo',
+            },
+            subject: {
+              title: 'This is a resolved discussion',
+              type: 'Discussion',
+            },
+          },
+          {
+            id: 7,
             updated_at: '2024-02-26T00:00:00Z',
             repository: {
               full_name: 'some/repo',
@@ -370,8 +381,27 @@ describe('hooks/useNotifications.ts', () => {
                 edges: [
                   {
                     node: {
+                      title: 'This is an answered discussion',
+                      viewerSubscription: 'SUBSCRIBED',
+                      stateReason: null,
+                      isAnswered: true,
+                    },
+                  },
+                ],
+              },
+            },
+          })
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                edges: [
+                  {
+                    node: {
                       title: 'This is a duplicate discussion',
+                      viewerSubscription: 'SUBSCRIBED',
                       stateReason: 'DUPLICATE',
+                      isAnswered: false,
                     },
                   },
                 ],
@@ -386,15 +416,17 @@ describe('hooks/useNotifications.ts', () => {
                   {
                     node: {
                       title: 'This is an open discussion',
-                      stateReason: null,
                       viewerSubscription: 'SUBSCRIBED',
+                      stateReason: null,
+                      isAnswered: false,
                     },
                   },
                   {
                     node: {
                       title: 'This is an open discussion',
-                      stateReason: null,
                       viewerSubscription: 'IGNORED',
+                      stateReason: null,
+                      isAnswered: false,
                     },
                   },
                 ],
@@ -409,7 +441,9 @@ describe('hooks/useNotifications.ts', () => {
                   {
                     node: {
                       title: 'This is nm outdated discussion',
+                      viewerSubscription: 'SUBSCRIBED',
                       stateReason: 'OUTDATED',
+                      isAnswered: false,
                     },
                   },
                 ],
@@ -424,7 +458,9 @@ describe('hooks/useNotifications.ts', () => {
                   {
                     node: {
                       title: 'This is a reopened discussion',
+                      viewerSubscription: 'SUBSCRIBED',
                       stateReason: 'REOPENED',
+                      isAnswered: false,
                     },
                   },
                 ],
@@ -439,7 +475,9 @@ describe('hooks/useNotifications.ts', () => {
                   {
                     node: {
                       title: 'This is a resolved discussion',
+                      viewerSubscription: 'SUBSCRIBED',
                       stateReason: 'RESOLVED',
+                      isAnswered: false,
                     },
                   },
                 ],
@@ -454,6 +492,9 @@ describe('hooks/useNotifications.ts', () => {
                   {
                     node: {
                       title: 'unknown search result',
+                      viewerSubscription: 'SUBSCRIBED',
+                      stateReason: null,
+                      isAnswered: false,
                     },
                   },
                 ],
@@ -476,25 +517,26 @@ describe('hooks/useNotifications.ts', () => {
           expect(result.current.notifications[0].hostname).toBe('github.com');
         });
 
-        expect(result.current.notifications[0].notifications.length).toBe(6);
-        expect(
-          result.current.notifications[0].notifications[0].subject.state,
-        ).toBe('DUPLICATE');
-        expect(
-          result.current.notifications[0].notifications[1].subject.state,
-        ).toBe('OPEN');
-        expect(
-          result.current.notifications[0].notifications[2].subject.state,
-        ).toBe('OUTDATED');
-        expect(
-          result.current.notifications[0].notifications[3].subject.state,
-        ).toBe('REOPENED');
-        expect(
-          result.current.notifications[0].notifications[4].subject.state,
-        ).toBe('RESOLVED');
-        expect(
-          result.current.notifications[0].notifications[5].subject.state,
-        ).toBe('OPEN');
+        const resultNotifications = result.current.notifications[0];
+
+        expect(resultNotifications.notifications.length).toBe(7);
+        expect(resultNotifications.notifications[0].subject.state).toBe(
+          'ANSWERED',
+        );
+        expect(resultNotifications.notifications[1].subject.state).toBe(
+          'DUPLICATE',
+        );
+        expect(resultNotifications.notifications[2].subject.state).toBe('OPEN');
+        expect(resultNotifications.notifications[3].subject.state).toBe(
+          'OUTDATED',
+        );
+        expect(resultNotifications.notifications[4].subject.state).toBe(
+          'REOPENED',
+        );
+        expect(resultNotifications.notifications[5].subject.state).toBe(
+          'RESOLVED',
+        );
+        expect(resultNotifications.notifications[6].subject.state).toBe('OPEN');
       });
     });
   });
