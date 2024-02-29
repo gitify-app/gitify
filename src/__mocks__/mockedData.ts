@@ -1,5 +1,11 @@
 import { AccountNotifications, EnterpriseAccount } from '../types';
-import { Notification, Repository, User, GraphQLSearch } from '../typesGithub';
+import {
+  Notification,
+  Repository,
+  User,
+  GraphQLSearch,
+  DiscussionSearchResultEdge,
+} from '../typesGithub';
 
 export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
   {
@@ -276,217 +282,298 @@ export const mockedSingleAccountNotifications: AccountNotifications[] = [
   },
 ];
 
-export const mockedGraphQLResponse: GraphQLSearch = {
-  data: {
+export const mockedGraphQLResponse: GraphQLSearch<DiscussionSearchResultEdge> =
+  {
     data: {
-      search: {
-        edges: [
-          {
-            node: {
-              viewerSubscription: 'SUBSCRIBED',
-              title: '1.16.0',
-              url: 'https://github.com/manosim/notifications-test/discussions/612',
-              comments: {
-                edges: [
-                  {
-                    node: {
-                      databaseId: 2215656,
-                      createdAt: '2022-02-20T18:33:39Z',
-                      replies: {
-                        edges: [],
+      data: {
+        search: {
+          edges: [
+            {
+              node: {
+                viewerSubscription: 'SUBSCRIBED',
+                title: '1.16.0',
+                url: 'https://github.com/manosim/notifications-test/discussions/612',
+                comments: {
+                  edges: [
+                    {
+                      node: {
+                        databaseId: 2215656,
+                        createdAt: '2022-02-20T18:33:39Z',
+                        replies: {
+                          edges: [],
+                        },
                       },
                     },
-                  },
-                  {
-                    node: {
-                      databaseId: 2217789,
-                      createdAt: '2022-02-21T03:30:42Z',
-                      replies: {
-                        edges: [],
+                    {
+                      node: {
+                        databaseId: 2217789,
+                        createdAt: '2022-02-21T03:30:42Z',
+                        replies: {
+                          edges: [],
+                        },
                       },
                     },
-                  },
-                  {
-                    node: {
-                      databaseId: 2223243,
-                      createdAt: '2022-02-21T18:26:27Z',
-                      replies: {
-                        edges: [
-                          {
-                            node: {
-                              databaseId: 2232922,
-                              createdAt: '2022-02-23T00:57:58Z',
+                    {
+                      node: {
+                        databaseId: 2223243,
+                        createdAt: '2022-02-21T18:26:27Z',
+                        replies: {
+                          edges: [
+                            {
+                              node: {
+                                databaseId: 2232922,
+                                createdAt: '2022-02-23T00:57:58Z',
+                              },
                             },
-                          },
-                        ],
+                          ],
+                        },
                       },
                     },
-                  },
-                  {
-                    node: {
-                      databaseId: 2232921,
-                      createdAt: '2022-02-23T00:57:49Z',
-                      replies: {
-                        edges: [],
+                    {
+                      node: {
+                        databaseId: 2232921,
+                        createdAt: '2022-02-23T00:57:49Z',
+                        replies: {
+                          edges: [],
+                        },
                       },
                     },
-                  },
-                  {
-                    node: {
-                      databaseId: 2258799,
-                      createdAt: '2022-02-27T01:22:20Z',
-                      replies: {
-                        edges: [
-                          {
-                            node: {
-                              databaseId: 2300902,
-                              createdAt: '2022-03-05T17:43:52Z',
+                    {
+                      node: {
+                        databaseId: 2258799,
+                        createdAt: '2022-02-27T01:22:20Z',
+                        replies: {
+                          edges: [
+                            {
+                              node: {
+                                databaseId: 2300902,
+                                createdAt: '2022-03-05T17:43:52Z',
+                              },
                             },
-                          },
-                        ],
+                          ],
+                        },
                       },
                     },
-                  },
-                  {
-                    node: {
-                      databaseId: 2297637,
-                      createdAt: '2022-03-04T20:39:44Z',
-                      replies: {
-                        edges: [
-                          {
-                            node: {
-                              databaseId: 2300893,
-                              createdAt: '2022-03-05T17:41:04Z',
+                    {
+                      node: {
+                        databaseId: 2297637,
+                        createdAt: '2022-03-04T20:39:44Z',
+                        replies: {
+                          edges: [
+                            {
+                              node: {
+                                databaseId: 2300893,
+                                createdAt: '2022-03-05T17:41:04Z',
+                              },
                             },
-                          },
-                        ],
+                          ],
+                        },
                       },
                     },
-                  },
-                  {
-                    node: {
-                      databaseId: 2299763,
-                      createdAt: '2022-03-05T11:05:42Z',
-                      replies: {
-                        edges: [
-                          {
-                            node: {
-                              databaseId: 2300895,
-                              createdAt: '2022-03-05T17:41:44Z',
+                    {
+                      node: {
+                        databaseId: 2299763,
+                        createdAt: '2022-03-05T11:05:42Z',
+                        replies: {
+                          edges: [
+                            {
+                              node: {
+                                databaseId: 2300895,
+                                createdAt: '2022-03-05T17:41:44Z',
+                              },
                             },
-                          },
-                        ],
+                          ],
+                        },
                       },
                     },
-                  },
-                ],
+                  ],
+                },
               },
             },
-          },
-          {
-            node: {
-              viewerSubscription: 'IGNORED',
-              title: '1.16.0',
-              url: 'https://github.com/manosim/notifications-test/discussions/612',
-              comments: {
-                edges: [
-                  {
-                    node: {
-                      databaseId: 2215656,
-                      createdAt: '2022-02-20T18:33:39Z',
-                      replies: {
-                        edges: [],
+            {
+              node: {
+                viewerSubscription: 'IGNORED',
+                title: '1.16.0',
+                url: 'https://github.com/manosim/notifications-test/discussions/612',
+                comments: {
+                  edges: [
+                    {
+                      node: {
+                        databaseId: 2215656,
+                        createdAt: '2022-02-20T18:33:39Z',
+                        replies: {
+                          edges: [],
+                        },
                       },
                     },
-                  },
-                  {
-                    node: {
-                      databaseId: 2217789,
-                      createdAt: '2022-02-21T03:30:42Z',
-                      replies: {
-                        edges: [],
+                    {
+                      node: {
+                        databaseId: 2217789,
+                        createdAt: '2022-02-21T03:30:42Z',
+                        replies: {
+                          edges: [],
+                        },
                       },
                     },
-                  },
-                  {
-                    node: {
-                      databaseId: 2223243,
-                      createdAt: '2022-02-21T18:26:27Z',
-                      replies: {
-                        edges: [
-                          {
-                            node: {
-                              databaseId: 2232922,
-                              createdAt: '2022-02-23T00:57:58Z',
+                    {
+                      node: {
+                        databaseId: 2223243,
+                        createdAt: '2022-02-21T18:26:27Z',
+                        replies: {
+                          edges: [
+                            {
+                              node: {
+                                databaseId: 2232922,
+                                createdAt: '2022-02-23T00:57:58Z',
+                              },
                             },
-                          },
-                        ],
+                          ],
+                        },
                       },
                     },
-                  },
-                  {
-                    node: {
-                      databaseId: 2232921,
-                      createdAt: '2022-02-23T00:57:49Z',
-                      replies: {
-                        edges: [],
+                    {
+                      node: {
+                        databaseId: 2232921,
+                        createdAt: '2022-02-23T00:57:49Z',
+                        replies: {
+                          edges: [],
+                        },
                       },
                     },
-                  },
-                  {
-                    node: {
-                      databaseId: 2258799,
-                      createdAt: '2022-02-27T01:22:20Z',
-                      replies: {
-                        edges: [
-                          {
-                            node: {
-                              databaseId: 2300902,
-                              createdAt: '2022-03-05T17:43:52Z',
+                    {
+                      node: {
+                        databaseId: 2258799,
+                        createdAt: '2022-02-27T01:22:20Z',
+                        replies: {
+                          edges: [
+                            {
+                              node: {
+                                databaseId: 2300902,
+                                createdAt: '2022-03-05T17:43:52Z',
+                              },
                             },
-                          },
-                        ],
+                          ],
+                        },
                       },
                     },
-                  },
-                  {
-                    node: {
-                      databaseId: 2297637,
-                      createdAt: '2022-03-04T20:39:44Z',
-                      replies: {
-                        edges: [
-                          {
-                            node: {
-                              databaseId: 2300893,
-                              createdAt: '2022-03-05T17:41:04Z',
+                    {
+                      node: {
+                        databaseId: 2297637,
+                        createdAt: '2022-03-04T20:39:44Z',
+                        replies: {
+                          edges: [
+                            {
+                              node: {
+                                databaseId: 2300893,
+                                createdAt: '2022-03-05T17:41:04Z',
+                              },
                             },
-                          },
-                        ],
+                          ],
+                        },
                       },
                     },
-                  },
-                  {
-                    node: {
-                      databaseId: 2299763,
-                      createdAt: '2022-03-05T11:05:42Z',
-                      replies: {
-                        edges: [
-                          {
-                            node: {
-                              databaseId: 2300895,
-                              createdAt: '2022-03-05T17:41:44Z',
+                    {
+                      node: {
+                        databaseId: 2299763,
+                        createdAt: '2022-03-05T11:05:42Z',
+                        replies: {
+                          edges: [
+                            {
+                              node: {
+                                databaseId: 2300895,
+                                createdAt: '2022-03-05T17:41:44Z',
+                              },
                             },
-                          },
-                        ],
+                          ],
+                        },
                       },
                     },
-                  },
-                ],
+                  ],
+                },
               },
             },
-          },
-        ],
+          ],
+        },
       },
     },
+  };
+
+export const mockedDiscussionNotifications = [
+  {
+    id: 1,
+    updated_at: '2024-02-26T00:00:00Z',
+    repository: {
+      full_name: 'some/repo',
+    },
+    subject: {
+      title: 'This is an answered discussion',
+      type: 'Discussion',
+    },
   },
-};
+  {
+    id: 2,
+    updated_at: '2024-02-26T00:00:00Z',
+    repository: {
+      full_name: 'some/repo',
+    },
+    subject: {
+      title: 'This is a duplicate discussion',
+      type: 'Discussion',
+    },
+  },
+  {
+    id: 3,
+    updated_at: '2024-02-26T00:00:00Z',
+    repository: {
+      full_name: 'some/repo',
+    },
+    subject: {
+      title: 'This is an open discussion',
+      type: 'Discussion',
+    },
+  },
+  {
+    id: 4,
+    updated_at: '2024-02-26T00:00:00Z',
+    repository: {
+      full_name: 'some/repo',
+    },
+    subject: {
+      title: 'This is nm outdated discussion',
+      type: 'Discussion',
+    },
+  },
+  {
+    id: 5,
+    updated_at: '2024-02-26T00:00:00Z',
+    repository: {
+      full_name: 'some/repo',
+    },
+    subject: {
+      title: 'This is a reopened discussion',
+      type: 'Discussion',
+    },
+  },
+  {
+    id: 6,
+    updated_at: '2024-02-26T00:00:00Z',
+    repository: {
+      full_name: 'some/repo',
+    },
+    subject: {
+      title: 'This is a resolved discussion',
+      type: 'Discussion',
+    },
+  },
+  {
+    id: 7,
+    updated_at: '2024-02-26T00:00:00Z',
+    repository: {
+      full_name: 'some/repo',
+    },
+    subject: {
+      title: 'This is a default discussion',
+      type: 'Discussion',
+    },
+  },
+];

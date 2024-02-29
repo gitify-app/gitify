@@ -9,6 +9,7 @@ import {
   getEnterpriseAccountToken,
   generateGitHubAPIUrl,
   isEnterpriseHost,
+  getDiscussionState,
 } from '../utils/helpers';
 import { removeNotification } from '../utils/remove-notification';
 import {
@@ -130,12 +131,6 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                     notifications: await axios.all<Notification>(
                       accountNotifications.notifications.map(
                         async (notification: Notification) => {
-                          if (
-                            notification.subject.type !== 'PullRequest' &&
-                            notification.subject.type !== 'Issue'
-                          ) {
-                            return notification;
-                          }
                           const isEnterprise = isEnterpriseHost(
                             accountNotifications.hostname,
                           );
@@ -146,28 +141,47 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                               )
                             : accounts.token;
 
-                          const cardinalData = (
-                            await apiRequestAuth(
-                              notification.subject.url,
-                              'GET',
-                              token,
-                            )
-                          ).data;
+                          switch (notification.subject.type) {
+                            case 'Discussion':
+                              const discussionState = await getDiscussionState(
+                                notification,
+                                token,
+                              );
 
-                          const state =
-                            cardinalData.state === 'closed'
-                              ? cardinalData.state_reason ||
-                                (cardinalData.merged && 'merged') ||
-                                'closed'
-                              : (cardinalData.draft && 'draft') || 'open';
+                              return {
+                                ...notification,
+                                subject: {
+                                  ...notification.subject,
+                                  state: discussionState,
+                                },
+                              };
+                            case 'Issue':
+                            case 'PullRequest':
+                              const cardinalData = (
+                                await apiRequestAuth(
+                                  notification.subject.url,
+                                  'GET',
+                                  token,
+                                )
+                              ).data;
 
-                          return {
-                            ...notification,
-                            subject: {
-                              ...notification.subject,
-                              state,
-                            },
-                          };
+                              const state =
+                                cardinalData.state === 'closed'
+                                  ? cardinalData.state_reason ||
+                                    (cardinalData.merged && 'merged') ||
+                                    'closed'
+                                  : (cardinalData.draft && 'draft') || 'open';
+
+                              return {
+                                ...notification,
+                                subject: {
+                                  ...notification.subject,
+                                  state,
+                                },
+                              };
+                            default:
+                              return notification;
+                          }
                         },
                       ),
                     ),

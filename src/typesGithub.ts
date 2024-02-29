@@ -15,6 +15,15 @@ export type Reason =
   | 'subscribed'
   | 'team_mention';
 
+// Note: ANSWERED and OPEN are not an official discussion state type in the GitHub API
+export type DiscussionStateType =
+  | 'ANSWERED'
+  | 'DUPLICATE'
+  | 'OPEN'
+  | 'OUTDATED'
+  | 'REOPENED'
+  | 'RESOLVED';
+
 export type SubjectType =
   | 'CheckSuite'
   | 'Commit'
@@ -37,6 +46,7 @@ export type IssueStateReasonType = 'completed' | 'not_planned' | 'reopened';
 export type PullRequestStateType = 'closed' | 'draft' | 'merged' | 'open';
 
 export type StateType =
+  | DiscussionStateType
   | IssueStateType
   | IssueStateReasonType
   | PullRequestStateType;
@@ -149,22 +159,31 @@ export interface Owner {
 export interface Subject {
   title: string;
   url: string | null;
-  state?: StateType;
+  state?: StateType; // This is not in the GitHub API, but we add it to the type to make it easier to work with
   latest_comment_url: string | null;
   type: SubjectType;
 }
 
-export interface GraphQLSearch {
+export interface GraphQLSearch<T> {
   data: {
     data: {
       search: {
-        edges: DiscussionEdge[];
+        edges: T[];
       };
     };
   };
 }
 
-export interface DiscussionEdge {
+export interface DiscussionStateSearchResultEdge {
+  node: {
+    viewerSubscription: ViewerSubscription;
+    title: string;
+    stateReason: DiscussionStateType;
+    isAnswered: boolean;
+  };
+}
+
+export interface DiscussionSearchResultEdge {
   node: {
     viewerSubscription: ViewerSubscription;
     title: string;
