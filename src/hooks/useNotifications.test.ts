@@ -3,7 +3,10 @@ import axios from 'axios';
 import nock from 'nock';
 
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
-import { mockedUser } from '../__mocks__/mockedData';
+import {
+  mockedDiscussionNotifications,
+  mockedUser,
+} from '../__mocks__/mockedData';
 import { AuthState } from '../types';
 import { useNotifications } from './useNotifications';
 
@@ -191,28 +194,43 @@ describe('hooks/useNotifications.ts', () => {
         const notifications = [
           {
             id: 1,
-            title: 'This is a notification.',
-            subject: { type: 'Issue', url: 'https://api.github.com/1' },
+            subject: {
+              title: 'This is a notification.',
+              type: 'Issue',
+              url: 'https://api.github.com/1',
+            },
           },
           {
             id: 2,
-            title: 'A merged PR.',
-            subject: { type: 'PullRequest', url: 'https://api.github.com/2' },
+            subject: {
+              title: 'A merged PR.',
+              type: 'PullRequest',
+              url: 'https://api.github.com/2',
+            },
           },
           {
             id: 3,
-            title: 'A closed PR.',
-            subject: { type: 'PullRequest', url: 'https://api.github.com/3' },
+            subject: {
+              title: 'A closed PR.',
+              type: 'PullRequest',
+              url: 'https://api.github.com/3',
+            },
           },
           {
             id: 4,
-            title: 'A draft PR.',
-            subject: { type: 'PullRequest', url: 'https://api.github.com/4' },
+            subject: {
+              title: 'A draft PR.',
+              type: 'PullRequest',
+              url: 'https://api.github.com/4',
+            },
           },
           {
             id: 5,
-            title: 'A draft PR.',
-            subject: { type: 'PullRequest', url: 'https://api.github.com/5' },
+            subject: {
+              title: 'A draft PR.',
+              type: 'PullRequest',
+              url: 'https://api.github.com/5',
+            },
           },
         ];
 
@@ -265,6 +283,183 @@ describe('hooks/useNotifications.ts', () => {
         expect(
           result.current.notifications[0].notifications[4].subject.state,
         ).toBe('draft');
+      });
+
+      it('should fetch discussion notifications with success - with colors', async () => {
+        const accounts: AuthState = {
+          ...mockAccounts,
+          enterpriseAccounts: [],
+          user: mockedUser,
+        };
+
+        nock('https://api.github.com')
+          .get('/notifications?participating=false')
+          .reply(200, mockedDiscussionNotifications);
+
+        nock('https://api.github.com')
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                edges: [
+                  {
+                    node: {
+                      title: 'This is an answered discussion',
+                      viewerSubscription: 'SUBSCRIBED',
+                      stateReason: null,
+                      isAnswered: true,
+                    },
+                  },
+                ],
+              },
+            },
+          })
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                edges: [
+                  {
+                    node: {
+                      title: 'This is a duplicate discussion',
+                      viewerSubscription: 'SUBSCRIBED',
+                      stateReason: 'DUPLICATE',
+                      isAnswered: false,
+                    },
+                  },
+                ],
+              },
+            },
+          })
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                edges: [
+                  {
+                    node: {
+                      title: 'This is an open discussion',
+                      viewerSubscription: 'SUBSCRIBED',
+                      stateReason: null,
+                      isAnswered: false,
+                    },
+                  },
+                  {
+                    node: {
+                      title: 'This is an open discussion',
+                      viewerSubscription: 'IGNORED',
+                      stateReason: null,
+                      isAnswered: false,
+                    },
+                  },
+                ],
+              },
+            },
+          })
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                edges: [
+                  {
+                    node: {
+                      title: 'This is nm outdated discussion',
+                      viewerSubscription: 'SUBSCRIBED',
+                      stateReason: 'OUTDATED',
+                      isAnswered: false,
+                    },
+                  },
+                ],
+              },
+            },
+          })
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                edges: [
+                  {
+                    node: {
+                      title: 'This is a reopened discussion',
+                      viewerSubscription: 'SUBSCRIBED',
+                      stateReason: 'REOPENED',
+                      isAnswered: false,
+                    },
+                  },
+                ],
+              },
+            },
+          })
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                edges: [
+                  {
+                    node: {
+                      title: 'This is a resolved discussion',
+                      viewerSubscription: 'SUBSCRIBED',
+                      stateReason: 'RESOLVED',
+                      isAnswered: false,
+                    },
+                  },
+                ],
+              },
+            },
+          })
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                edges: [
+                  {
+                    node: {
+                      title: 'unknown search result',
+                      viewerSubscription: 'SUBSCRIBED',
+                      stateReason: null,
+                      isAnswered: false,
+                    },
+                  },
+                ],
+              },
+            },
+          });
+
+        const { result } = renderHook(() => useNotifications(true));
+
+        act(() => {
+          result.current.fetchNotifications(accounts, {
+            ...mockSettings,
+            colors: true,
+          });
+        });
+
+        expect(result.current.isFetching).toBe(true);
+
+        await waitFor(() => {
+          expect(result.current.notifications[0].hostname).toBe('github.com');
+        });
+
+        const resultNotifications = result.current.notifications[0];
+
+        expect(resultNotifications.notifications.length).toBe(7);
+        expect(resultNotifications.notifications[0].subject.state).toBe(
+          'ANSWERED',
+        );
+        expect(resultNotifications.notifications[1].subject.state).toBe(
+          'DUPLICATE',
+        );
+        expect(resultNotifications.notifications[2].subject.state).toBe('OPEN');
+        expect(resultNotifications.notifications[3].subject.state).toBe(
+          'OUTDATED',
+        );
+        expect(resultNotifications.notifications[4].subject.state).toBe(
+          'REOPENED',
+        );
+        expect(resultNotifications.notifications[5].subject.state).toBe(
+          'RESOLVED',
+        );
+        expect(resultNotifications.notifications[6].subject.state).toBe('OPEN');
       });
     });
   });

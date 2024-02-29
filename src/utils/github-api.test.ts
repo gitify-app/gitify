@@ -73,6 +73,21 @@ describe('getNotificationTypeIcon', () => {
         .displayName,
     ).toBe('CommentDiscussionIcon');
     expect(
+      getNotificationTypeIcon(
+        createSubjectMock({ type: 'Discussion', state: 'DUPLICATE' }),
+      ).displayName,
+    ).toBe('DiscussionDuplicateIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({ type: 'Discussion', state: 'OUTDATED' }),
+      ).displayName,
+    ).toBe('DiscussionOutdatedIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({ type: 'Discussion', state: 'RESOLVED' }),
+      ).displayName,
+    ).toBe('DiscussionClosedIcon');
+    expect(
       getNotificationTypeIcon(createSubjectMock({ type: 'Issue' })).displayName,
     ).toBe('IssueOpenedIcon');
     expect(
@@ -221,6 +236,9 @@ describe('getNotificationTypeIconColor', () => {
 
   it('should format the notification color for state', () => {
     expect(
+      getNotificationTypeIconColor(createSubjectMock({ state: 'ANSWERED' })),
+    ).toMatchSnapshot();
+    expect(
       getNotificationTypeIconColor(createSubjectMock({ state: 'closed' })),
     ).toMatchSnapshot();
     expect(
@@ -240,6 +258,9 @@ describe('getNotificationTypeIconColor', () => {
     ).toMatchSnapshot();
     expect(
       getNotificationTypeIconColor(createSubjectMock({ state: 'reopened' })),
+    ).toMatchSnapshot();
+    expect(
+      getNotificationTypeIconColor(createSubjectMock({ state: 'RESOLVED' })),
     ).toMatchSnapshot();
     expect(
       getNotificationTypeIconColor(
