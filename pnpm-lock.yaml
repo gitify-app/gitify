@@ -110,8 +110,8 @@ devDependencies:
     specifier: 8.4.35
     version: 8.4.35
   postcss-loader:
-    specifier: 8.1.0
-    version: 8.1.0(postcss@8.4.35)(typescript@5.3.3)(webpack@5.90.3)
+    specifier: 8.1.1
+    version: 8.1.1(postcss@8.4.35)(typescript@5.3.3)(webpack@5.90.3)
   prettier:
     specifier: 3.2.5
     version: 3.2.5
@@ -4425,8 +4425,8 @@ packages:
       yaml: 2.3.2
     dev: true
 
-  /postcss-loader@8.1.0(postcss@8.4.35)(typescript@5.3.3)(webpack@5.90.3):
-    resolution: {integrity: sha512-AbperNcX3rlob7Ay7A/HQcrofug1caABBkopoFeOQMspZBqcqj6giYn1Bwey/0uiOPAcR+NQD0I2HC7rXzk91w==}
+  /postcss-loader@8.1.1(postcss@8.4.35)(typescript@5.3.3)(webpack@5.90.3):
+    resolution: {integrity: sha512-0IeqyAsG6tYiDRCYKQJLAmgQr47DX6N7sFSWvQxt6AcupX8DIdmykuk/o/tx0Lze3ErGHJEp5OSRxrelC6+NdQ==}
     engines: {node: '>= 18.12.0'}
     peerDependencies:
       '@rspack/core': 0.x || 1.x
