@@ -26,7 +26,7 @@ export async function getNotificationState(
   }
 }
 
-async function getDiscussionState(
+export async function getDiscussionState(
   notification: Notification,
   token: string,
 ): Promise<DiscussionStateType> {
@@ -51,14 +51,17 @@ async function getDiscussionState(
           }
         }`,
     });
+
   let edges =
     response?.data?.data?.search?.edges?.filter(
       (edge) => edge.node.title === notification.subject.title,
     ) || [];
-  if (edges.length > 1)
+
+  if (edges.length > 1) {
     edges = edges.filter(
       (edge) => edge.node.viewerSubscription === 'SUBSCRIBED',
     );
+  }
 
   if (edges[0]) {
     if (edges[0].node.isAnswered) {
@@ -73,7 +76,7 @@ async function getDiscussionState(
   return 'OPEN';
 }
 
-async function getIssueState(
+export async function getIssueState(
   notification: Notification,
   token: string,
 ): Promise<IssueStateType> {
@@ -83,7 +86,7 @@ async function getIssueState(
   return issue.state_reason ?? issue.state;
 }
 
-async function getPullRequestState(
+export async function getPullRequestState(
   notification: Notification,
   token: string,
 ): Promise<PullRequestStateType> {
