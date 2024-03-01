@@ -4,6 +4,7 @@ import nock from 'nock';
 import { mockAccounts } from '../__mocks__/mock-state';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
 import {
+  getCheckSuiteState,
   getDiscussionState,
   getIssueState,
   getPullRequestState,
@@ -13,6 +14,78 @@ describe('utils/state.ts', () => {
     // axios will default to using the XHR adapter which can't be intercepted
     // by nock. So, configure axios to use the node adapter.
     axios.defaults.adapter = 'http';
+  });
+
+  describe('getCheckSuiteState', () => {
+    it('cancelled check suite state', async () => {
+      const mockNotification = {
+        ...mockedSingleNotification,
+        subject: {
+          ...mockedSingleNotification.subject,
+          title: 'Demo workflow run cancelled for main branch',
+        },
+      };
+
+      const result = getCheckSuiteState(mockNotification);
+
+      expect(result).toBe('cancelled');
+    });
+
+    it('failed check suite state', async () => {
+      const mockNotification = {
+        ...mockedSingleNotification,
+        subject: {
+          ...mockedSingleNotification.subject,
+          title: 'Demo workflow run failed for main branch',
+        },
+      };
+
+      const result = getCheckSuiteState(mockNotification);
+
+      expect(result).toBe('failure');
+    });
+
+    it('skipped check suite state', async () => {
+      const mockNotification = {
+        ...mockedSingleNotification,
+        subject: {
+          ...mockedSingleNotification.subject,
+          title: 'Demo workflow run skipped for main branch',
+        },
+      };
+
+      const result = getCheckSuiteState(mockNotification);
+
+      expect(result).toBe('skipped');
+    });
+
+    it('successful check suite state', async () => {
+      const mockNotification = {
+        ...mockedSingleNotification,
+        subject: {
+          ...mockedSingleNotification.subject,
+          title: 'Demo workflow run succeeded for main branch',
+        },
+      };
+
+      const result = getCheckSuiteState(mockNotification);
+
+      expect(result).toBe('success');
+    });
+
+    it('unknown check suite state', async () => {
+      const mockNotification = {
+        ...mockedSingleNotification,
+        subject: {
+          ...mockedSingleNotification.subject,
+          title: 'Demo workflow run for main branch',
+        },
+      };
+
+      const result = getCheckSuiteState(mockNotification);
+
+      expect(result).toBeNull();
+    });
   });
 
   describe('getDiscussionState', () => {

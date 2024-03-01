@@ -24,7 +24,7 @@ import {
   TagIcon,
   XIcon,
 } from '@primer/octicons-react';
-import { CheckSuiteStatus, Reason, Subject } from '../typesGithub';
+import { Reason, Subject } from '../typesGithub';
 
 // prettier-ignore
 const DESCRIPTIONS = {
@@ -92,9 +92,7 @@ export function getNotificationTypeIcon(
 ): React.FC<OcticonProps> {
   switch (subject.type) {
     case 'CheckSuite':
-      const checkSuiteState = inferCheckSuiteStatus(subject.title);
-
-      switch (checkSuiteState) {
+      switch (subject.state) {
         case 'cancelled':
           return StopIcon;
         case 'failure':
@@ -158,32 +156,19 @@ export function getNotificationTypeIcon(
 }
 
 export function getNotificationTypeIconColor(subject: Subject): string {
-  if (subject.type === 'CheckSuite') {
-    const checkSuiteState = inferCheckSuiteStatus(subject.title);
-
-    switch (checkSuiteState) {
-      case 'cancelled':
-        return 'text-gray-500';
-      case 'failure':
-        return 'text-red-500';
-      case 'skipped':
-        return 'text-gray-500';
-      case 'success':
-        return 'text-green-500';
-      default:
-        return 'text-gray-300';
-    }
-  }
-
   switch (subject.state) {
     case 'ANSWERED':
       return 'text-green-500';
+    case 'cancelled':
+      return 'text-gray-500';
     case 'closed':
       return 'text-red-500';
     case 'completed':
       return 'text-purple-500';
     case 'draft':
       return 'text-gray-600';
+    case 'failure':
+      return 'text-red-500';
     case 'merged':
       return 'text-purple-500';
     case 'not_planned':
@@ -194,31 +179,11 @@ export function getNotificationTypeIconColor(subject: Subject): string {
       return 'text-green-500';
     case 'RESOLVED':
       return 'text-purple-500';
+    case 'skipped':
+      return 'text-gray-500';
+    case 'success':
+      return 'text-green-500';
     default:
       return 'text-gray-300';
   }
-}
-
-export function inferCheckSuiteStatus(title: string): CheckSuiteStatus {
-  if (title) {
-    const lowerTitle = title.toLowerCase();
-
-    if (lowerTitle.includes('cancelled for')) {
-      return 'cancelled';
-    }
-
-    if (lowerTitle.includes('failed for')) {
-      return 'failure';
-    }
-
-    if (lowerTitle.includes('skipped for')) {
-      return 'skipped';
-    }
-
-    if (lowerTitle.includes('succeeded for')) {
-      return 'success';
-    }
-  }
-
-  return null;
 }
