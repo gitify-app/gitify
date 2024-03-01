@@ -35,18 +35,20 @@ export type SubjectType =
   | 'RepositoryVulnerabilityAlert'
   | 'WorkflowRun';
 
-export type IssueStateType =
-  | 'closed'
-  | 'completed'
-  | 'not_planned'
-  | 'open'
-  | 'reopened';
+export type IssueStateType = 'closed' | 'open';
 
+export type IssueStateReasonType = 'completed' | 'not_planned' | 'reopened';
+
+/**
+ * Note: draft and merged are not official states in the GitHub API.
+ * These are derived from the pull request's `merged` and `draft` properties.
+ */
 export type PullRequestStateType = 'closed' | 'draft' | 'merged' | 'open';
 
 export type StateType =
   | DiscussionStateType
   | IssueStateType
+  | IssueStateReasonType
   | PullRequestStateType;
 
 export type ViewerSubscription = 'IGNORED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
