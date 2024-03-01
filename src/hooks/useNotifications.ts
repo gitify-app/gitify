@@ -9,7 +9,6 @@ import {
   getEnterpriseAccountToken,
   generateGitHubAPIUrl,
   isEnterpriseHost,
-  getDiscussionState,
 } from '../utils/helpers';
 import { removeNotification } from '../utils/remove-notification';
 import {
@@ -18,6 +17,7 @@ import {
 } from '../utils/notifications';
 import Constants from '../utils/constants';
 import { removeNotifications } from '../utils/remove-notifications';
+import { getNotificationState } from '../utils/state';
 
 interface NotificationsState {
   notifications: AccountNotifications[];
@@ -141,47 +141,18 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                               )
                             : accounts.token;
 
-                          switch (notification.subject.type) {
-                            case 'Discussion':
-                              const discussionState = await getDiscussionState(
-                                notification,
-                                token,
-                              );
+                          const notificationState = await getNotificationState(
+                            notification,
+                            token,
+                          );
 
-                              return {
-                                ...notification,
-                                subject: {
-                                  ...notification.subject,
-                                  state: discussionState,
-                                },
-                              };
-                            case 'Issue':
-                            case 'PullRequest':
-                              const cardinalData = (
-                                await apiRequestAuth(
-                                  notification.subject.url,
-                                  'GET',
-                                  token,
-                                )
-                              ).data;
-
-                              const state =
-                                cardinalData.state === 'closed'
-                                  ? cardinalData.state_reason ||
-                                    (cardinalData.merged && 'merged') ||
-                                    'closed'
-                                  : (cardinalData.draft && 'draft') || 'open';
-
-                              return {
-                                ...notification,
-                                subject: {
-                                  ...notification.subject,
-                                  state,
-                                },
-                              };
-                            default:
-                              return notification;
-                          }
+                          return {
+                            ...notification,
+                            subject: {
+                              ...notification.subject,
+                              state: notificationState,
+                            },
+                          };
                         },
                       ),
                     ),
