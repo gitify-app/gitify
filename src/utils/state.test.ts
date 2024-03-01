@@ -8,7 +8,6 @@ import {
   getIssueState,
   getPullRequestState,
 } from './state';
-
 describe('utils/state.ts', () => {
   beforeEach(() => {
     // axios will default to using the XHR adapter which can't be intercepted
