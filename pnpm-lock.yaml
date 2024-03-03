@@ -7,7 +7,7 @@ settings:
 dependencies:
   '@electron/remote':
     specifier: 2.1.2
-    version: 2.1.2(electron@26.6.10)
+    version: 2.1.2(electron@28.2.5)
   '@primer/octicons-react':
     specifier: 19.8.0
     version: 19.8.0(react@18.2.0)
@@ -25,7 +25,7 @@ dependencies:
     version: 4.20.10
   menubar:
     specifier: 9.4.0
-    version: 9.4.0(electron@26.6.10)
+    version: 9.4.0(electron@28.2.5)
   nprogress:
     specifier: 0.2.0
     version: 0.2.0
@@ -89,8 +89,8 @@ devDependencies:
     specifier: 6.10.0
     version: 6.10.0(webpack@5.90.3)
   electron:
-    specifier: 26.6.10
-    version: 26.6.10
+    specifier: 28.2.5
+    version: 28.2.5
   electron-builder:
     specifier: 24.13.3
     version: 24.13.3(electron-builder-squirrel-windows@24.13.3)
@@ -570,12 +570,12 @@ packages:
       - supports-color
     dev: true
 
-  /@electron/remote@2.1.2(electron@26.6.10):
+  /@electron/remote@2.1.2(electron@28.2.5):
     resolution: {integrity: sha512-EPwNx+nhdrTBxyCqXt/pftoQg/ybtWDW3DUWHafejvnB1ZGGfMpv6e15D8KeempocjXe78T7WreyGGb3mlZxdA==}
     peerDependencies:
       electron: '>= 13.0.0'
     dependencies:
-      electron: 26.6.10
+      electron: 28.2.5
     dev: false
 
   /@electron/universal@1.5.1:
@@ -2437,8 +2437,8 @@ packages:
       - supports-color
     dev: false
 
-  /electron@26.6.10:
-    resolution: {integrity: sha512-pV2SD0RXzAiNRb/2yZrsVmVkBOMrf+DVsPulIgRjlL0+My9BL5spFuhHVMQO9yHl9tFpWtuRpQv0ofM/i9P8xg==}
+  /electron@28.2.5:
+    resolution: {integrity: sha512-qlvQkDNVAzN647NpiJJw7GYJqE0NwK4+1evkhrQ0Xv6Qgab1EtN50G4oDr4/x/+O5pGUG2P5d3isXu+37O3RDw==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
     requiresBuild: true
@@ -4053,12 +4053,12 @@ packages:
       escape-string-regexp: 4.0.0
     optional: true
 
-  /menubar@9.4.0(electron@26.6.10):
+  /menubar@9.4.0(electron@28.2.5):
     resolution: {integrity: sha512-Zn2si5UXiWbdBZwFSsCyQ8xfaBKkeFYceNvjWATyMUreqv6gDMUvDkvZY/ZFf89DCfo9F0SrvygDOdpZuwoWgw==}
     peerDependencies:
       electron: ^9.0.0 || ^10.0.0 || ^11.0.0 || ^12.0.0 || ^13.0.0 || ^14.0.0 || ^15.0.0 || ^16.0.0 || ^17.0.0 || ^18.0.0 || ^19.0.0 || ^20.0.0 || ^21.0.0 || ^22.0.0 ||  ^23.0.0 || ^24.0.0 || ^25.0.0 || ^26.0.0 || ^27.0.0
     dependencies:
-      electron: 26.6.10
+      electron: 28.2.5
       electron-positioner: 4.1.0
     dev: false
 
