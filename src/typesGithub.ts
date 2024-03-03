@@ -212,7 +212,7 @@ export interface DiscussionSubcommentEdge {
   };
 }
 
-export interface CheckSuiteParts {
+export interface CheckSuiteAttributes {
   workflowName: string;
   attemptNumber?: number;
   statusDisplayName: string;

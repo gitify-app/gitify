@@ -1,6 +1,6 @@
 import { formatSearchQueryString } from './helpers';
 import {
-  CheckSuiteParts,
+  CheckSuiteAttributes,
   CheckSuiteStatus,
   DiscussionStateSearchResultEdge,
   DiscussionStateType,
@@ -36,7 +36,7 @@ export async function getNotificationState(
  */
 export function getCheckSuiteAttributes(
   notification: Notification,
-): CheckSuiteParts | null {
+): CheckSuiteAttributes | null {
   const regexPattern =
     /^(?<workflowName>.*?) workflow run(, Attempt #(?<attemptNumber>\d+))? (?<statusDisplayName>.*?) for (?<branchName>.*?) branch$/;
 
