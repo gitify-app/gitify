@@ -192,8 +192,8 @@ describe('hooks/useNotifications.ts', () => {
           {
             id: 1,
             subject: {
-              title: 'This is a Discussion.',
-              type: 'Discussion',
+              title: 'This is a check suite workflow.',
+              type: 'CheckSuite',
               url: 'https://api.github.com/1',
             },
             repository: {
@@ -204,25 +204,37 @@ describe('hooks/useNotifications.ts', () => {
           {
             id: 2,
             subject: {
-              title: 'This is an Issue.',
-              type: 'Issue',
+              title: 'This is a Discussion.',
+              type: 'Discussion',
               url: 'https://api.github.com/2',
             },
+            repository: {
+              full_name: 'some/repo',
+            },
+            updated_at: '2024-02-26T00:00:00Z',
           },
           {
             id: 3,
             subject: {
-              title: 'This is a Pull Request.',
-              type: 'PullRequest',
+              title: 'This is an Issue.',
+              type: 'Issue',
               url: 'https://api.github.com/3',
             },
           },
           {
             id: 4,
             subject: {
+              title: 'This is a Pull Request.',
+              type: 'PullRequest',
+              url: 'https://api.github.com/4',
+            },
+          },
+          {
+            id: 5,
+            subject: {
               title: 'This is an invitation.',
               type: 'RepositoryInvitation',
-              url: 'https://api.github.com/4',
+              url: 'https://api.github.com/5',
             },
           },
         ];
@@ -250,17 +262,14 @@ describe('hooks/useNotifications.ts', () => {
             },
           });
         nock('https://api.github.com')
-          .get('/2')
+          .get('/3')
           .reply(200, { state: 'closed', merged: true });
         nock('https://api.github.com')
-          .get('/3')
+          .get('/4')
           .reply(200, { state: 'closed', merged: false });
         nock('https://api.github.com')
-          .get('/4')
-          .reply(200, { state: 'open', draft: false });
-        nock('https://api.github.com')
           .get('/5')
-          .reply(200, { state: 'open', draft: true });
+          .reply(200, { state: 'open', draft: false });
 
         const { result } = renderHook(() => useNotifications(true));
 
@@ -277,7 +286,7 @@ describe('hooks/useNotifications.ts', () => {
           expect(result.current.notifications[0].hostname).toBe('github.com');
         });
 
-        expect(result.current.notifications[0].notifications.length).toBe(4);
+        expect(result.current.notifications[0].notifications.length).toBe(5);
       });
     });
   });

@@ -29,14 +29,15 @@ describe('formatReason', () => {
 describe('getNotificationTypeIcon', () => {
   it('should get the notification type icon', () => {
     expect(
-      getNotificationTypeIcon(createSubjectMock({ type: 'CheckSuite' }))
-        .displayName,
+      getNotificationTypeIcon(
+        createSubjectMock({ type: 'CheckSuite', state: null }),
+      ).displayName,
     ).toBe('SyncIcon');
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow cancelled for main branch',
+          state: 'cancelled',
         }),
       ).displayName,
     ).toBe('StopIcon');
@@ -44,7 +45,7 @@ describe('getNotificationTypeIcon', () => {
       getNotificationTypeIcon(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow failed for main branch',
+          state: 'failure',
         }),
       ).displayName,
     ).toBe('XIcon');
@@ -52,7 +53,7 @@ describe('getNotificationTypeIcon', () => {
       getNotificationTypeIcon(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow skipped for main branch',
+          state: 'skipped',
         }),
       ).displayName,
     ).toBe('SkipIcon');
@@ -60,7 +61,7 @@ describe('getNotificationTypeIcon', () => {
       getNotificationTypeIcon(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow succeeded for main branch',
+          state: 'success',
         }),
       ).displayName,
     ).toBe('CheckIcon');
@@ -195,7 +196,7 @@ describe('getNotificationTypeIconColor', () => {
       getNotificationTypeIconColor(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow cancelled for main branch',
+          state: 'cancelled',
         }),
       ),
     ).toMatchSnapshot();
@@ -203,7 +204,7 @@ describe('getNotificationTypeIconColor', () => {
       getNotificationTypeIconColor(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow failed for main branch',
+          state: 'failure',
         }),
       ),
     ).toMatchSnapshot();
@@ -212,7 +213,7 @@ describe('getNotificationTypeIconColor', () => {
       getNotificationTypeIconColor(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow skipped for main branch',
+          state: 'skipped',
         }),
       ),
     ).toMatchSnapshot();
@@ -220,7 +221,7 @@ describe('getNotificationTypeIconColor', () => {
       getNotificationTypeIconColor(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'Workflow succeeded for main branch',
+          state: 'success',
         }),
       ),
     ).toMatchSnapshot();
@@ -228,7 +229,7 @@ describe('getNotificationTypeIconColor', () => {
       getNotificationTypeIconColor(
         createSubjectMock({
           type: 'CheckSuite',
-          title: 'unknown state',
+          state: null,
         }),
       ),
     ).toMatchSnapshot();

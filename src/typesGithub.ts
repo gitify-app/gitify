@@ -46,6 +46,7 @@ export type IssueStateReasonType = 'completed' | 'not_planned' | 'reopened';
 export type PullRequestStateType = 'closed' | 'draft' | 'merged' | 'open';
 
 export type StateType =
+  | CheckSuiteStatus
   | DiscussionStateType
   | IssueStateType
   | IssueStateReasonType

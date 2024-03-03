@@ -1,5 +1,6 @@
 import { formatSearchQueryString } from './helpers';
 import {
+  CheckSuiteStatus,
   DiscussionStateSearchResultEdge,
   DiscussionStateType,
   GraphQLSearch,
@@ -15,6 +16,8 @@ export async function getNotificationState(
   token: string,
 ): Promise<StateType> {
   switch (notification.subject.type) {
+    case 'CheckSuite':
+      return getCheckSuiteState(notification);
     case 'Discussion':
       return await getDiscussionState(notification, token);
     case 'Issue':
@@ -24,6 +27,34 @@ export async function getNotificationState(
     default:
       return null;
   }
+}
+
+/**
+ * Ideally we would be using a GitHub API to fetch the CheckSuite / WorkflowRun state,
+ * but there isn't an obvious/clean way to do this currently.
+ */
+export function getCheckSuiteState(
+  notification: Notification,
+): CheckSuiteStatus | null {
+  const lowerTitle = notification.subject.title.toLowerCase();
+
+  if (lowerTitle.includes('cancelled for')) {
+    return 'cancelled';
+  }
+
+  if (lowerTitle.includes('failed for')) {
+    return 'failure';
+  }
+
+  if (lowerTitle.includes('skipped for')) {
+    return 'skipped';
+  }
+
+  if (lowerTitle.includes('succeeded for')) {
+    return 'success';
+  }
+
+  return null;
 }
 
 export async function getDiscussionState(
