@@ -20,6 +20,7 @@ describe('components/Repository.tsx', () => {
     hostname: 'github.com',
     repoName: 'manosim/gitify',
     repoNotifications: mockedGithubNotifications,
+    groupType: 'repository',
   };
 
   beforeEach(() => {

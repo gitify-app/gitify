@@ -11,12 +11,14 @@ interface IProps {
   hostname: string;
   repoNotifications: Notification[];
   repoName: string;
+  groupType: string;
 }
 
 export const RepositoryNotifications: React.FC<IProps> = ({
   repoName,
   repoNotifications,
   hostname,
+  groupType,
 }) => {
   const { markRepoNotifications, markRepoNotificationsDone } =
     useContext(AppContext);
@@ -40,32 +42,34 @@ export const RepositoryNotifications: React.FC<IProps> = ({
 
   return (
     <>
-      <div className="flex py-2 px-3 bg-gray-100 dark:bg-gray-darker dark:text-white">
-        <div className="flex flex-1 space-x-3 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap">
-          <img className="rounded w-5 h-5" src={avatarUrl} />
-          <span onClick={openBrowser}>{repoName}</span>
+      {groupType === 'repository' && (
+        <div className="flex py-2 px-3 bg-gray-100 dark:bg-gray-darker dark:text-white">
+          <div className="flex flex-1 space-x-3 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap">
+            <img className="rounded w-5 h-5" src={avatarUrl} />
+            <span onClick={openBrowser}>{repoName}</span>
+          </div>
+
+          <div className="flex justify-center items-center gap-2">
+            <button
+              className="focus:outline-none h-full hover:text-green-500"
+              title="Mark Repository as Done"
+              onClick={markRepoAsDone}
+            >
+              <CheckIcon size={16} aria-label="Mark Repository as Done" />
+            </button>
+
+            <div className="w-[14px]" />
+
+            <button
+              className="focus:outline-none h-full hover:text-green-500"
+              title="Mark Repository as Read"
+              onClick={markRepoAsRead}
+            >
+              <ReadIcon size={14} aria-label="Mark Repository as Read" />
+            </button>
+          </div>
         </div>
-
-        <div className="flex justify-center items-center gap-2">
-          <button
-            className="focus:outline-none h-full hover:text-green-500"
-            title="Mark Repository as Done"
-            onClick={markRepoAsDone}
-          >
-            <CheckIcon size={16} aria-label="Mark Repository as Done" />
-          </button>
-
-          <div className="w-[14px]" />
-
-          <button
-            className="focus:outline-none h-full hover:text-green-500"
-            title="Mark Repository as Read"
-            onClick={markRepoAsRead}
-          >
-            <ReadIcon size={14} aria-label="Mark Repository as Read" />
-          </button>
-        </div>
-      </div>
+      )}
 
       <TransitionGroup>
         {repoNotifications.map((obj) => (
@@ -74,6 +78,7 @@ export const RepositoryNotifications: React.FC<IProps> = ({
               key={obj.id}
               hostname={hostname}
               notification={obj}
+              groupType={groupType}
             />
           </CSSTransition>
         ))}

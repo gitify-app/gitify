@@ -14,11 +14,13 @@ import { AppContext } from '../context/App';
 interface IProps {
   hostname: string;
   notification: Notification;
+  groupType: string;
 }
 
 export const NotificationRow: React.FC<IProps> = ({
   notification,
   hostname,
+  groupType,
 }) => {
   const {
     settings,
@@ -73,6 +75,11 @@ export const NotificationRow: React.FC<IProps> = ({
         onClick={() => pressTitle()}
         role="main"
       >
+        {groupType === 'date' && (
+          <div className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
+            {notification.repository.full_name}
+          </div>
+        )}
         <div className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
           {notification.subject.title}
         </div>
