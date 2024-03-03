@@ -30,11 +30,15 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
     </svg>
   </div>,
   <label
-    className="flex items-center"
+    className="flex items-center text-sm font-light p-2"
   >
-    Group by:
+    <span
+      className="text-gray-200 mr-2 font-semibold"
+    >
+      Group by:
+    </span>
     <select
-      className="ml-2 border border-gray-300 rounded p-2"
+      className="border border-gray-300 font-semibold rounded p-2 focus:outline-none focus:border-blue-400 dark:bg-[#090e15] dark:text-white"
       onChange={[Function]}
       value="repository"
     >
@@ -86,11 +90,15 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
     </svg>
   </div>,
   <label
-    className="flex items-center"
+    className="flex items-center text-sm font-light p-2"
   >
-    Group by:
+    <span
+      className="text-gray-200 mr-2 font-semibold"
+    >
+      Group by:
+    </span>
     <select
-      className="ml-2 border border-gray-300 rounded p-2"
+      className="border border-gray-300 font-semibold rounded p-2 focus:outline-none focus:border-blue-400 dark:bg-[#090e15] dark:text-white"
       onChange={[Function]}
       value="repository"
     >

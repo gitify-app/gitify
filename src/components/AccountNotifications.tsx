@@ -45,14 +45,14 @@ export const AccountNotifications = (props: IProps) => {
         </div>
       )}
 
-      <label className="flex items-center">
-        Group by:
+      <label className="flex items-center text-sm font-light p-2">
+        <span className="text-gray-200 mr-2 font-semibold">Group by:</span>
         <select
           value={groupType}
           onChange={(e) =>
             handleGroupTypeChange(e.target.value as 'repository' | 'date')
           }
-          className="ml-2 border border-gray-300 rounded p-2"
+          className="border border-gray-300 font-semibold rounded p-2 focus:outline-none focus:border-blue-400 dark:bg-[#090e15] dark:text-white"
         >
           <option value="repository">Repository</option>
           <option value="date">Date</option>
