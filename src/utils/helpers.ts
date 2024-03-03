@@ -8,6 +8,7 @@ import {
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
 import { Constants } from './constants';
+import { getCheckSuiteAttributes } from './state';
 
 export function getEnterpriseAccountToken(
   hostname: string,
@@ -68,6 +69,33 @@ export async function getHtmlUrl(url: string, token: string): Promise<string> {
   const response = await apiRequestAuth(url, 'GET', token);
 
   return response.data.html_url;
+}
+
+export function getCheckSuiteUrl(notification: Notification) {
+  let url = `${notification.repository.html_url}/actions`;
+  let filters = [];
+
+  const checkSuiteAttributes = getCheckSuiteAttributes(notification);
+
+  if (checkSuiteAttributes?.workflowName) {
+    filters.push(
+      `workflow:"${checkSuiteAttributes.workflowName.replaceAll(' ', '+')}"`,
+    );
+  }
+
+  if (checkSuiteAttributes?.status) {
+    filters.push(`is:${checkSuiteAttributes.status}`);
+  }
+
+  if (checkSuiteAttributes?.branchName) {
+    filters.push(`branch:${checkSuiteAttributes.branchName}`);
+  }
+
+  if (filters.length > 0) {
+    url += `?query=${filters.join('+')}`;
+  }
+
+  return url;
 }
 
 async function getDiscussionUrl(
@@ -161,6 +189,9 @@ export async function generateGitHubWebUrl(
   } else {
     // Perform any specific notification type handling (only required for a few special notification scenarios)
     switch (notification.subject.type) {
+      case 'CheckSuite':
+        url = getCheckSuiteUrl(notification);
+        break;
       case 'Discussion':
         url = await getDiscussionUrl(notification, accounts.token);
         break;
