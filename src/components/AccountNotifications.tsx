@@ -46,7 +46,7 @@ export const AccountNotifications = (props: IProps) => {
       )}
 
       <label className="flex items-center text-sm font-light p-2">
-        <span className="text-gray-200 mr-2 font-semibold">Group by:</span>
+        <span className="dark:text-gray-200 mr-2 font-semibold">Group by:</span>
         <select
           value={groupType}
           onChange={(e) =>
