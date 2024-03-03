@@ -211,3 +211,11 @@ export interface DiscussionSubcommentEdge {
     createdAt: string;
   };
 }
+
+export interface CheckSuiteAttributes {
+  workflowName: string;
+  attemptNumber?: number;
+  statusDisplayName: string;
+  status: CheckSuiteStatus | null;
+  branchName: string;
+}
