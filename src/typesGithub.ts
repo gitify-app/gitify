@@ -219,3 +219,9 @@ export interface CheckSuiteAttributes {
   status: CheckSuiteStatus | null;
   branchName: string;
 }
+
+export interface WorkflowRunAttributes {
+  user: string;
+  statusDisplayName: string;
+  status: CheckSuiteStatus | null;
+}

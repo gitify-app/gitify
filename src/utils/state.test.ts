@@ -8,6 +8,7 @@ import {
   getDiscussionState,
   getIssueState,
   getPullRequestState,
+  getWorkflowRunAttributes,
 } from './state';
 describe('utils/state.ts', () => {
   beforeEach(() => {
@@ -516,6 +517,53 @@ describe('utils/state.ts', () => {
       );
 
       expect(result).toBe('open');
+    });
+  });
+
+  describe('getWorkflowRunState', () => {
+    it('deploy review workflow run state', async () => {
+      const mockNotification = {
+        ...mockedSingleNotification,
+        subject: {
+          ...mockedSingleNotification.subject,
+          title: 'some-user requested your review to deploy to an environment',
+        },
+      };
+
+      const result = getWorkflowRunAttributes(mockNotification);
+
+      expect(result.user).toBe('some-user');
+      expect(result.status).toBe('waiting');
+    });
+
+    it('unknown workflow run state', async () => {
+      const mockNotification = {
+        ...mockedSingleNotification,
+        subject: {
+          ...mockedSingleNotification.subject,
+          title:
+            'some-user requested your unknown-state to deploy to an environment',
+        },
+      };
+
+      const result = getWorkflowRunAttributes(mockNotification);
+
+      expect(result.user).toBe('some-user');
+      expect(result.status).toBeNull();
+    });
+
+    it('unhandled workflow run title', async () => {
+      const mockNotification = {
+        ...mockedSingleNotification,
+        subject: {
+          ...mockedSingleNotification.subject,
+          title: 'unhandled workflow run structure',
+        },
+      };
+
+      const result = getWorkflowRunAttributes(mockNotification);
+
+      expect(result).toBeNull();
     });
   });
 });

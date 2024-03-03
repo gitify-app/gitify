@@ -237,6 +237,14 @@ describe('hooks/useNotifications.ts', () => {
               url: 'https://api.github.com/5',
             },
           },
+          {
+            id: 6,
+            subject: {
+              title: 'This is a workflow run.',
+              type: 'WorkflowRun',
+              url: 'https://api.github.com/6',
+            },
+          },
         ];
 
         nock('https://api.github.com')
@@ -286,7 +294,7 @@ describe('hooks/useNotifications.ts', () => {
           expect(result.current.notifications[0].hostname).toBe('github.com');
         });
 
-        expect(result.current.notifications[0].notifications.length).toBe(5);
+        expect(result.current.notifications[0].notifications.length).toBe(6);
       });
     });
   });
