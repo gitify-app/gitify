@@ -18,7 +18,7 @@ export async function getNotificationState(
 ): Promise<StateType> {
   switch (notification.subject.type) {
     case 'CheckSuite':
-      return parseCheckSuiteTitle(notification)?.status;
+      return getCheckSuiteAttributes(notification)?.status;
     case 'Discussion':
       return await getDiscussionState(notification, token);
     case 'Issue':
@@ -34,7 +34,7 @@ export async function getNotificationState(
  * Ideally we would be using a GitHub API to fetch the CheckSuite / WorkflowRun state,
  * but there isn't an obvious/clean way to do this currently.
  */
-export function parseCheckSuiteTitle(
+export function getCheckSuiteAttributes(
   notification: Notification,
 ): CheckSuiteParts | null {
   const regexPattern =

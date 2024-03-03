@@ -4,7 +4,7 @@ import nock from 'nock';
 import { mockAccounts } from '../__mocks__/mock-state';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
 import {
-  parseCheckSuiteTitle,
+  getCheckSuiteAttributes,
   getDiscussionState,
   getIssueState,
   getPullRequestState,
@@ -26,7 +26,7 @@ describe('utils/state.ts', () => {
         },
       };
 
-      const result = parseCheckSuiteTitle(mockNotification);
+      const result = getCheckSuiteAttributes(mockNotification);
 
       expect(result.workflowName).toBe('Demo');
       expect(result.attemptNumber).toBeNull();
@@ -43,7 +43,7 @@ describe('utils/state.ts', () => {
         },
       };
 
-      const result = parseCheckSuiteTitle(mockNotification);
+      const result = getCheckSuiteAttributes(mockNotification);
 
       expect(result.workflowName).toBe('Demo');
       expect(result.attemptNumber).toBeNull();
@@ -60,7 +60,7 @@ describe('utils/state.ts', () => {
         },
       };
 
-      const result = parseCheckSuiteTitle(mockNotification);
+      const result = getCheckSuiteAttributes(mockNotification);
 
       expect(result.workflowName).toBe('Demo');
       expect(result.attemptNumber).toBe(3);
@@ -77,7 +77,7 @@ describe('utils/state.ts', () => {
         },
       };
 
-      const result = parseCheckSuiteTitle(mockNotification);
+      const result = getCheckSuiteAttributes(mockNotification);
 
       expect(result.workflowName).toBe('Demo');
       expect(result.attemptNumber).toBeNull();
@@ -94,7 +94,7 @@ describe('utils/state.ts', () => {
         },
       };
 
-      const result = parseCheckSuiteTitle(mockNotification);
+      const result = getCheckSuiteAttributes(mockNotification);
 
       expect(result.workflowName).toBe('Demo');
       expect(result.attemptNumber).toBeNull();
@@ -111,7 +111,7 @@ describe('utils/state.ts', () => {
         },
       };
 
-      const result = parseCheckSuiteTitle(mockNotification);
+      const result = getCheckSuiteAttributes(mockNotification);
 
       expect(result.workflowName).toBe('Demo');
       expect(result.attemptNumber).toBeNull();
@@ -128,7 +128,7 @@ describe('utils/state.ts', () => {
         },
       };
 
-      const result = parseCheckSuiteTitle(mockNotification);
+      const result = getCheckSuiteAttributes(mockNotification);
 
       expect(result).toBeNull();
     });
