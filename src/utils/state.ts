@@ -1,5 +1,6 @@
 import { formatSearchQueryString } from './helpers';
 import {
+  CheckSuiteParts,
   CheckSuiteStatus,
   DiscussionStateSearchResultEdge,
   DiscussionStateType,
@@ -17,7 +18,7 @@ export async function getNotificationState(
 ): Promise<StateType> {
   switch (notification.subject.type) {
     case 'CheckSuite':
-      return getCheckSuiteState(notification);
+      return parseCheckSuiteTitle(notification)?.status;
     case 'Discussion':
       return await getDiscussionState(notification, token);
     case 'Issue':
@@ -33,28 +34,46 @@ export async function getNotificationState(
  * Ideally we would be using a GitHub API to fetch the CheckSuite / WorkflowRun state,
  * but there isn't an obvious/clean way to do this currently.
  */
-export function getCheckSuiteState(
+export function parseCheckSuiteTitle(
   notification: Notification,
-): CheckSuiteStatus | null {
-  const lowerTitle = notification.subject.title.toLowerCase();
+): CheckSuiteParts | null {
+  const regexPattern =
+    /^(?<workflowName>.*?) workflow run(, Attempt #(?<attemptNumber>\d+))? (?<statusDisplayName>.*?) for (?<branchName>.*?) branch$/;
 
-  if (lowerTitle.includes('cancelled for')) {
-    return 'cancelled';
-  }
+  const matches = regexPattern.exec(notification.subject.title);
 
-  if (lowerTitle.includes('failed for')) {
-    return 'failure';
-  }
+  if (matches) {
+    const { groups } = matches;
 
-  if (lowerTitle.includes('skipped for')) {
-    return 'skipped';
-  }
-
-  if (lowerTitle.includes('succeeded for')) {
-    return 'success';
+    return {
+      workflowName: groups.workflowName,
+      attemptNumber: groups.attemptNumber
+        ? parseInt(groups.attemptNumber)
+        : null,
+      status: getCheckSuiteStatus(groups.statusDisplayName),
+      statusDisplayName: groups.statusDisplayName,
+      branchName: groups.branchName,
+    };
   }
 
   return null;
+}
+
+export function getCheckSuiteStatus(
+  statusDisplayName: string,
+): CheckSuiteStatus {
+  switch (statusDisplayName) {
+    case 'cancelled':
+      return 'cancelled';
+    case 'failed':
+      return 'failure';
+    case 'skipped':
+      return 'skipped';
+    case 'succeeded':
+      return 'success';
+    default:
+      return null;
+  }
 }
 
 export async function getDiscussionState(

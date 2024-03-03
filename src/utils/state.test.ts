@@ -4,7 +4,7 @@ import nock from 'nock';
 import { mockAccounts } from '../__mocks__/mock-state';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
 import {
-  getCheckSuiteState,
+  parseCheckSuiteTitle,
   getDiscussionState,
   getIssueState,
   getPullRequestState,
@@ -26,9 +26,12 @@ describe('utils/state.ts', () => {
         },
       };
 
-      const result = getCheckSuiteState(mockNotification);
+      const result = parseCheckSuiteTitle(mockNotification);
 
-      expect(result).toBe('cancelled');
+      expect(result.workflowName).toBe('Demo');
+      expect(result.attemptNumber).toBeNull();
+      expect(result.status).toBe('cancelled');
+      expect(result.branchName).toBe('main');
     });
 
     it('failed check suite state', async () => {
@@ -40,9 +43,29 @@ describe('utils/state.ts', () => {
         },
       };
 
-      const result = getCheckSuiteState(mockNotification);
+      const result = parseCheckSuiteTitle(mockNotification);
 
-      expect(result).toBe('failure');
+      expect(result.workflowName).toBe('Demo');
+      expect(result.attemptNumber).toBeNull();
+      expect(result.status).toBe('failure');
+      expect(result.branchName).toBe('main');
+    });
+
+    it('multiple attempts failed check suite state', async () => {
+      const mockNotification = {
+        ...mockedSingleNotification,
+        subject: {
+          ...mockedSingleNotification.subject,
+          title: 'Demo workflow run, Attempt #3 failed for main branch',
+        },
+      };
+
+      const result = parseCheckSuiteTitle(mockNotification);
+
+      expect(result.workflowName).toBe('Demo');
+      expect(result.attemptNumber).toBe(3);
+      expect(result.status).toBe('failure');
+      expect(result.branchName).toBe('main');
     });
 
     it('skipped check suite state', async () => {
@@ -54,9 +77,12 @@ describe('utils/state.ts', () => {
         },
       };
 
-      const result = getCheckSuiteState(mockNotification);
+      const result = parseCheckSuiteTitle(mockNotification);
 
-      expect(result).toBe('skipped');
+      expect(result.workflowName).toBe('Demo');
+      expect(result.attemptNumber).toBeNull();
+      expect(result.status).toBe('skipped');
+      expect(result.branchName).toBe('main');
     });
 
     it('successful check suite state', async () => {
@@ -68,9 +94,12 @@ describe('utils/state.ts', () => {
         },
       };
 
-      const result = getCheckSuiteState(mockNotification);
+      const result = parseCheckSuiteTitle(mockNotification);
 
-      expect(result).toBe('success');
+      expect(result.workflowName).toBe('Demo');
+      expect(result.attemptNumber).toBeNull();
+      expect(result.status).toBe('success');
+      expect(result.branchName).toBe('main');
     });
 
     it('unknown check suite state', async () => {
@@ -78,11 +107,28 @@ describe('utils/state.ts', () => {
         ...mockedSingleNotification,
         subject: {
           ...mockedSingleNotification.subject,
-          title: 'Demo workflow run for main branch',
+          title: 'Demo workflow run unknown-status for main branch',
         },
       };
 
-      const result = getCheckSuiteState(mockNotification);
+      const result = parseCheckSuiteTitle(mockNotification);
+
+      expect(result.workflowName).toBe('Demo');
+      expect(result.attemptNumber).toBeNull();
+      expect(result.status).toBeNull();
+      expect(result.branchName).toBe('main');
+    });
+
+    it('unhandled check suite title', async () => {
+      const mockNotification = {
+        ...mockedSingleNotification,
+        subject: {
+          ...mockedSingleNotification.subject,
+          title: 'A title that is not in the structure we expect',
+        },
+      };
+
+      const result = parseCheckSuiteTitle(mockNotification);
 
       expect(result).toBeNull();
     });
