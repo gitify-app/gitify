@@ -9,6 +9,7 @@ import {
   Notification,
   PullRequestStateType,
   StateType,
+  WorkflowRunAttributes,
 } from '../typesGithub';
 import { apiRequestAuth } from './api-requests';
 
@@ -25,6 +26,8 @@ export async function getNotificationState(
       return await getIssueState(notification, token);
     case 'PullRequest':
       return await getPullRequestState(notification, token);
+    case 'WorkflowRun':
+      return getWorkflowRunAttributes(notification)?.status;
     default:
       return null;
   }
@@ -59,9 +62,7 @@ export function getCheckSuiteAttributes(
   return null;
 }
 
-export function getCheckSuiteStatus(
-  statusDisplayName: string,
-): CheckSuiteStatus {
+function getCheckSuiteStatus(statusDisplayName: string): CheckSuiteStatus {
   switch (statusDisplayName) {
     case 'cancelled':
       return 'cancelled';
@@ -150,4 +151,38 @@ export async function getPullRequestState(
   }
 
   return pr.state;
+}
+
+/**
+ * Ideally we would be using a GitHub API to fetch the CheckSuite / WorkflowRun state,
+ * but there isn't an obvious/clean way to do this currently.
+ */
+export function getWorkflowRunAttributes(
+  notification: Notification,
+): WorkflowRunAttributes | null {
+  const regexPattern =
+    /^(?<user>.*?) requested your (?<statusDisplayName>.*?) to deploy to an environment$/;
+
+  const matches = regexPattern.exec(notification.subject.title);
+
+  if (matches) {
+    const { groups } = matches;
+
+    return {
+      user: groups.user,
+      status: getWorkflowRunStatus(groups.statusDisplayName),
+      statusDisplayName: groups.statusDisplayName,
+    };
+  }
+
+  return null;
+}
+
+function getWorkflowRunStatus(statusDisplayName: string): CheckSuiteStatus {
+  switch (statusDisplayName) {
+    case 'review':
+      return 'waiting';
+    default:
+      return null;
+  }
 }
