@@ -11,16 +11,14 @@ interface IProps {
   hostname: string;
   repoNotifications: Notification[];
   repoName: string;
-  groupType: string;
 }
 
 export const RepositoryNotifications: React.FC<IProps> = ({
   repoName,
   repoNotifications,
   hostname,
-  groupType,
 }) => {
-  const { markRepoNotifications, markRepoNotificationsDone } =
+  const { markRepoNotifications, markRepoNotificationsDone, groupBy } =
     useContext(AppContext);
 
   const openBrowser = useCallback(() => {
@@ -42,7 +40,7 @@ export const RepositoryNotifications: React.FC<IProps> = ({
 
   return (
     <>
-      {groupType === 'repository' && (
+      {groupBy?.groupType === 'repository' && (
         <div className="flex py-2 px-3 bg-gray-100 dark:bg-gray-darker dark:text-white">
           <div className="flex flex-1 space-x-3 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap">
             <img className="rounded w-5 h-5" src={avatarUrl} />
@@ -78,7 +76,6 @@ export const RepositoryNotifications: React.FC<IProps> = ({
               key={obj.id}
               hostname={hostname}
               notification={obj}
-              groupType={groupType}
             />
           </CSSTransition>
         ))}

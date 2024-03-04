@@ -24,7 +24,6 @@ describe('components/Notification.js', () => {
     const props = {
       notification: mockedSingleNotification,
       hostname: 'github.com',
-      groupType: 'repository',
     };
 
     const tree = TestRenderer.create(<NotificationRow {...props} />);
@@ -37,7 +36,6 @@ describe('components/Notification.js', () => {
     const props = {
       notification: mockedSingleNotification,
       hostname: 'github.com',
-      groupType: 'repository',
     };
 
     const { getByRole } = render(
@@ -63,7 +61,6 @@ describe('components/Notification.js', () => {
     const props = {
       notification: mockedSingleNotification,
       hostname: 'github.com',
-      groupType: 'repository',
     };
 
     const { getByRole } = render(
@@ -89,7 +86,6 @@ describe('components/Notification.js', () => {
     const props = {
       notification: mockedSingleNotification,
       hostname: 'github.com',
-      groupType: 'repository',
     };
 
     const { getByTitle } = render(
@@ -115,7 +111,6 @@ describe('components/Notification.js', () => {
     const props = {
       notification: mockedSingleNotification,
       hostname: 'github.com',
-      groupType: 'repository',
     };
 
     const { getByTitle } = render(
@@ -141,7 +136,6 @@ describe('components/Notification.js', () => {
     const props = {
       notification: mockedSingleNotification,
       hostname: 'github.com',
-      groupType: 'repository',
     };
 
     const { getByLabelText } = render(

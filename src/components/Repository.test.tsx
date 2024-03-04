@@ -20,7 +20,6 @@ describe('components/Repository.tsx', () => {
     hostname: 'github.com',
     repoName: 'manosim/gitify',
     repoNotifications: mockedGithubNotifications,
-    groupType: 'repository',
   };
 
   beforeEach(() => {
@@ -31,7 +30,14 @@ describe('components/Repository.tsx', () => {
 
   it('should render itself & its children', () => {
     const tree = TestRenderer.create(
-      <AppContext.Provider value={{}}>
+      <AppContext.Provider
+        value={{
+          groupBy: {
+            groupType: 'repository',
+            setGroupType: () => 'repository',
+          },
+        }}
+      >
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
@@ -40,7 +46,14 @@ describe('components/Repository.tsx', () => {
 
   it('should open the browser when clicking on the repo name', () => {
     const { getByText } = render(
-      <AppContext.Provider value={{}}>
+      <AppContext.Provider
+        value={{
+          groupBy: {
+            groupType: 'repository',
+            setGroupType: () => 'repository',
+          },
+        }}
+      >
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
@@ -55,7 +68,15 @@ describe('components/Repository.tsx', () => {
 
   it('should mark a repo as read', function () {
     const { getByTitle } = render(
-      <AppContext.Provider value={{ markRepoNotifications }}>
+      <AppContext.Provider
+        value={{
+          markRepoNotifications,
+          groupBy: {
+            groupType: 'repository',
+            setGroupType: () => 'repository',
+          },
+        }}
+      >
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
@@ -70,7 +91,15 @@ describe('components/Repository.tsx', () => {
 
   it('should mark a repo as done', function () {
     const { getByTitle } = render(
-      <AppContext.Provider value={{ markRepoNotificationsDone }}>
+      <AppContext.Provider
+        value={{
+          markRepoNotificationsDone,
+          groupBy: {
+            groupType: 'repository',
+            setGroupType: () => 'repository',
+          },
+        }}
+      >
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );

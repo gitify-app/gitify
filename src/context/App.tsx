@@ -61,6 +61,11 @@ interface AppContextState {
 
   settings: SettingsState;
   updateSetting: (name: keyof SettingsState, value: any) => void;
+
+  groupBy: {
+    groupType: 'repository' | 'date';
+    setGroupType: (type: 'repository' | 'date') => void;
+  };
 }
 
 export const AppContext = createContext<Partial<AppContextState>>({});
@@ -80,6 +85,10 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     markRepoNotifications,
     markRepoNotificationsDone,
   } = useNotifications(settings.colors);
+
+  const [groupType, setGroupType] = useState<'repository' | 'date'>(
+    'repository',
+  );
 
   useEffect(() => {
     restoreSettings();
@@ -207,6 +216,11 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     [accounts, notifications],
   );
 
+  const groupByContextValue = useMemo(
+    () => ({ groupType, setGroupType }),
+    [groupType],
+  );
+
   return (
     <AppContext.Provider
       value={{
@@ -230,6 +244,8 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
         settings,
         updateSetting,
+
+        groupBy: groupByContextValue,
       }}
     >
       {children}

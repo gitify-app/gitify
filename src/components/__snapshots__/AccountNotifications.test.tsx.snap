@@ -29,31 +29,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
       />
     </svg>
   </div>,
-  <label
-    className="flex items-center text-sm font-light p-2"
-  >
-    <span
-      className="dark:text-gray-200 mr-2 font-semibold"
-    >
-      Group by:
-    </span>
-    <select
-      className="border border-gray-300 font-semibold rounded p-2 focus:outline-none focus:border-blue-400 dark:bg-[#090e15] dark:text-white"
-      onChange={[Function]}
-      value="repository"
-    >
-      <option
-        value="repository"
-      >
-        Repository
-      </option>
-      <option
-        value="date"
-      >
-        Date
-      </option>
-    </select>
-  </label>,
   <div>
     Repository
   </div>,
@@ -61,58 +36,31 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
 `;
 
 exports[`components/AccountNotifications.tsx should render itself (github.com without notifications) 1`] = `
-[
-  <div
-    className="flex flex-1 items-center justify-between py-2 px-4 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm"
-  >
-    github.com
-    <svg
-      aria-hidden="true"
-      className="octicon octicon-chevron-left"
-      fill="currentColor"
-      focusable="false"
-      height={20}
-      role="img"
-      style={
-        {
-          "display": "inline-block",
-          "overflow": "visible",
-          "userSelect": "none",
-          "verticalAlign": "text-bottom",
-        }
+<div
+  className="flex flex-1 items-center justify-between py-2 px-4 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm"
+>
+  github.com
+  <svg
+    aria-hidden="true"
+    className="octicon octicon-chevron-left"
+    fill="currentColor"
+    focusable="false"
+    height={20}
+    role="img"
+    style={
+      {
+        "display": "inline-block",
+        "overflow": "visible",
+        "userSelect": "none",
+        "verticalAlign": "text-bottom",
       }
-      viewBox="0 0 16 16"
-      width={20}
-    >
-      <path
-        d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"
-      />
-    </svg>
-  </div>,
-  <label
-    className="flex items-center text-sm font-light p-2"
+    }
+    viewBox="0 0 16 16"
+    width={20}
   >
-    <span
-      className="dark:text-gray-200 mr-2 font-semibold"
-    >
-      Group by:
-    </span>
-    <select
-      className="border border-gray-300 font-semibold rounded p-2 focus:outline-none focus:border-blue-400 dark:bg-[#090e15] dark:text-white"
-      onChange={[Function]}
-      value="repository"
-    >
-      <option
-        value="repository"
-      >
-        Repository
-      </option>
-      <option
-        value="date"
-      >
-        Date
-      </option>
-    </select>
-  </label>,
-]
+    <path
+      d="M9.78 12.78a.75.75 0 0 1-1.06 0L4.47 8.53a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L6.06 8l3.72 3.72a.75.75 0 0 1 0 1.06Z"
+    />
+  </svg>
+</div>
 `;
