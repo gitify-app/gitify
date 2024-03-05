@@ -25,6 +25,8 @@ import {
   XIcon,
 } from '@primer/octicons-react';
 import { Reason, Subject } from '../typesGithub';
+import { Appearance } from '../types';
+import { getAppearance } from './appearance';
 
 // prettier-ignore
 const DESCRIPTIONS = {
@@ -162,8 +164,6 @@ export function getNotificationTypeIconColor(subject: Subject): string {
     case 'ANSWERED':
     case 'success':
       return 'text-green-500';
-    case 'cancelled':
-      return 'text-gray-500';
     case 'closed':
     case 'failure':
       return 'text-red-500';
@@ -172,6 +172,10 @@ export function getNotificationTypeIconColor(subject: Subject): string {
     case 'merged':
       return 'text-purple-500';
     default:
-      return 'text-gray-400';
+      const appearance = getAppearance();
+      if (appearance == Appearance.DARK) {
+        return 'text-gray-300';
+      }
+      return 'text-gray-500';
   }
 }
