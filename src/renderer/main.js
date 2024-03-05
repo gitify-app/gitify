@@ -1,10 +1,11 @@
-const { ipcMain, app, nativeTheme } = require('electron');
-const { menubar } = require('menubar');
+const { initialize } = require('@electron/remote/main');
+const { app, ipcMain, nativeTheme } = require('electron');
 const { autoUpdater } = require('electron-updater');
-const { onFirstRunMaybe } = require('./src/config/first-run').default;
+const { menubar } = require('menubar');
 const path = require('path');
+const { onFirstRunMaybe } = require('./first-run.js');
 
-require('@electron/remote/main').initialize();
+initialize();
 
 app.setAppUserModelId('com.electron.gitify');
 
@@ -46,7 +47,7 @@ app.on('ready', async () => {
 
 const menubarApp = menubar({
   icon: iconIdle,
-  index: `file://${__dirname}/index.html`,
+  index: `file://${__dirname}/config/index.html`,
   browserWindow: browserWindowOpts,
   preloadWindow: true,
 });

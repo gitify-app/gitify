@@ -2,7 +2,7 @@
   "name": "gitify",
   "version": "4.7.0",
   "description": "GitHub Notifications on your menu bar.",
-  "main": ".vite/build/main.js",
+  "main": "src/renderer/main.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "watch": "webpack --config webpack.common.js --watch",
@@ -19,7 +19,8 @@
     "make": "electron-forge make",
     "forge:import": "electron-forge import",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx ."
+    "lint": "eslint --ext .ts,.tsx .",
+    "lint-staged": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -126,6 +127,7 @@
     "@electron-forge/maker-squirrel": "^7.2.0",
     "@electron-forge/maker-zip": "^7.2.0",
     "@electron-forge/plugin-auto-unpack-natives": "^7.2.0",
+    "@electron-forge/plugin-webpack": "^7.3.0",
     "@electron/notarize": "2.2.0",
     "@testing-library/react": "14.1.2",
     "@types/electron-squirrel-startup": "^1",
@@ -147,6 +149,7 @@
     "husky": "8.0.3",
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
+    "lint-staged": "^15.2.2",
     "nock": "13.5.0",
     "postcss": "8.4.33",
     "postcss-loader": "8.0.0",
@@ -162,5 +165,5 @@
   "lint-staged": {
     "*.{md,js,ts,tsx}": "prettier --write"
   },
-  "packageManager": "yarn@4.0.2"
+  "packageManager": "yarn@4.1.1"
 }

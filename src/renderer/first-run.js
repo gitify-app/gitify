@@ -1,6 +1,6 @@
-import { app, dialog } from 'electron';
-import { existsSync, writeFileSync } from 'fs';
-import { join } from 'path';
+const { app, dialog } = require('electron');
+const { existsSync, writeFileSync } = require('fs');
+const { join } = require('path');
 
 export async function onFirstRunMaybe() {
   if (isFirstRun()) {
