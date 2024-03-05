@@ -50,7 +50,7 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/manosim/gitify/issues"
+    "url": "https://github.com/gitify-app/gitify/issues"
   },
   "homepage": "https://www.gitify.io/",
   "build": {
