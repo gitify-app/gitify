@@ -2,7 +2,7 @@
   "name": "gitify",
   "version": "4.7.0",
   "description": "GitHub Notifications on your menu bar.",
-  "main": "src/renderer/main.js",
+  "main": "./.webpack/main",
   "scripts": {
     "dev": "electron-forge start",
     "forge:import": "electron-forge import",

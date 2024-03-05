@@ -6,6 +6,8 @@ import { MakerZIP } from '@electron-forge/maker-zip';
 import { AutoUnpackNativesPlugin } from '@electron-forge/plugin-auto-unpack-natives';
 import { WebpackPlugin } from '@electron-forge/plugin-webpack';
 import type { ForgeConfig } from '@electron-forge/shared-types';
+import { mainConfig } from './webpack.main';
+import { rendererConfig } from './webpack.renderer';
 
 const Config: ForgeConfig = {
   packagerConfig: {
@@ -38,14 +40,14 @@ const Config: ForgeConfig = {
   plugins: [
     new AutoUnpackNativesPlugin({}),
     new WebpackPlugin({
-      mainConfig: 'webpack.common.js',
+      mainConfig: mainConfig,
       renderer: {
-        config: './webpack.prod.js',
+        config: rendererConfig,
         entryPoints: [
           {
             name: 'Gitify',
             html: './src/renderer/index.html',
-            js: './src/renderer/index.js',
+            js: './src/renderer/renderer.js',
           },
         ],
       },

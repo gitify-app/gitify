@@ -1,6 +1,6 @@
 const { app, dialog } = require('electron');
-const { existsSync, writeFileSync, mkdirSync } = require('fs');
-const { join, dirname } = require('path');
+const path = require('path');
+const fs = require('fs');
 
 async function onFirstRunMaybe() {
   if (isFirstRun()) {
@@ -29,7 +29,7 @@ async function promptMoveToApplicationsFolder() {
 
 const getConfigPath = () => {
   const userDataPath = app.getPath('userData');
-  return join(userDataPath, 'FirstRun', 'gitify-first-run');
+  return path.join(userDataPath, 'FirstRun', 'gitify-first-run');
 };
 
 // Whether or not the app is being run for the first time.
@@ -37,16 +37,16 @@ function isFirstRun() {
   const configPath = getConfigPath();
 
   try {
-    if (existsSync(configPath)) {
+    if (fs.existsSync(configPath)) {
       return false;
     }
 
-    const firstRunFolder = dirname(configPath);
-    if (!existsSync(firstRunFolder)) {
-      mkdirSync(firstRunFolder);
+    const firstRunFolder = path.dirname(configPath);
+    if (!fs.existsSync(firstRunFolder)) {
+      fs.mkdirSync(firstRunFolder);
     }
 
-    writeFileSync(configPath, '');
+    fs.writeFileSync(configPath, '');
   } catch (error) {
     console.warn(`First run: Unable to write firstRun file`, error);
   }
