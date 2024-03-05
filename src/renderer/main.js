@@ -2,19 +2,14 @@ const { ipcMain, app, nativeTheme } = require('electron');
 const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
-const path = require('path');
 
 require('@electron/remote/main').initialize();
 
 app.setAppUserModelId('com.electron.gitify');
 
-const iconIdle = path.join(
-  __dirname,
-  'assets',
-  'images',
-  'tray-idleTemplate.png',
-);
-const iconActive = path.join(__dirname, 'assets', 'images', 'tray-active.png');
+const iconIdle = __dirname + '/../../assets/images/tray-idle.png';
+
+const iconActive = __dirname + '/../../assets/images/tray-active.png';
 
 const browserWindowOpts = {
   width: 500,
