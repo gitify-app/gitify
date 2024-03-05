@@ -10,6 +10,12 @@ import type { ForgeConfig } from '@electron-forge/shared-types';
 const Config: ForgeConfig = {
   packagerConfig: {
     asar: true,
+    osxSign: {},
+    osxNotarize: {
+      appleId: process.env.APPLEID_USERNAME!,
+      appleIdPassword: process.env.APPLE_PASSWORD!,
+      teamId: process.env.APPLE_TEAM_ID!,
+    },
   },
   rebuildConfig: {},
   makers: [
