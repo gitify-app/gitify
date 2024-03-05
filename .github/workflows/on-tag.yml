@@ -7,7 +7,7 @@ on:
 jobs:
   pr-to-homebrew:
     name: Homebrew
-    runs-on: macos-latest
+    runs-on: macos-14
     steps:
       - uses: Homebrew/actions/setup-homebrew@master
       - id: version
@@ -24,7 +24,7 @@ jobs:
         with:
           repository: gitify-app/website
           token: ${{ secrets.GH_TOKEN }}
-      - uses: pnpm/action-setup@v2
+      - uses: pnpm/action-setup@v3
       - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'

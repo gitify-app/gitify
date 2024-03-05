@@ -38,6 +38,7 @@ describe('context/App.tsx', () => {
 
     const fetchNotificationsMock = jest.fn();
     const markNotificationMock = jest.fn();
+    const markNotificationDoneMock = jest.fn();
     const unsubscribeNotificationMock = jest.fn();
     const markRepoNotificationsMock = jest.fn();
 
@@ -45,6 +46,7 @@ describe('context/App.tsx', () => {
       (useNotifications as jest.Mock).mockReturnValue({
         fetchNotifications: fetchNotificationsMock,
         markNotification: markNotificationMock,
+        markNotificationDone: markNotificationDoneMock,
         unsubscribeNotification: unsubscribeNotificationMock,
         markRepoNotifications: markRepoNotificationsMock,
       });
@@ -115,6 +117,31 @@ describe('context/App.tsx', () => {
 
       expect(markNotificationMock).toHaveBeenCalledTimes(1);
       expect(markNotificationMock).toHaveBeenCalledWith(
+        { enterpriseAccounts: [], token: null, user: null },
+        '123-456',
+        'github.com',
+      );
+    });
+
+    it('should call markNotificationDone', async () => {
+      const TestComponent = () => {
+        const { markNotificationDone } = useContext(AppContext);
+
+        return (
+          <button onClick={() => markNotificationDone('123-456', 'github.com')}>
+            Test Case
+          </button>
+        );
+      };
+
+      const { getByText } = customRender(<TestComponent />);
+
+      markNotificationDoneMock.mockReset();
+
+      fireEvent.click(getByText('Test Case'));
+
+      expect(markNotificationDoneMock).toHaveBeenCalledTimes(1);
+      expect(markNotificationDoneMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
         '123-456',
         'github.com',
@@ -263,7 +290,8 @@ describe('context/App.tsx', () => {
         participating: true,
         playSound: true,
         showNotifications: true,
-        colors: false,
+        colors: null,
+        markAsDoneOnOpen: false,
       },
     );
   });
@@ -300,7 +328,8 @@ describe('context/App.tsx', () => {
         participating: false,
         playSound: true,
         showNotifications: true,
-        colors: false,
+        colors: null,
+        markAsDoneOnOpen: false,
       },
     );
   });

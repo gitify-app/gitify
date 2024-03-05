@@ -1,17 +1,15 @@
 import { ipcRenderer } from 'electron';
 
-import { generateGitHubWebUrl, getCommentId } from './helpers';
 import {
   mockedAccountNotifications,
   mockedGithubNotifications,
   mockedSingleAccountNotifications,
-  mockedUser,
 } from '../__mocks__/mockedData';
 import { mockAccounts } from '../__mocks__/mock-state';
-import * as comms from './comms';
 import * as notificationsHelpers from './notifications';
 import { SettingsState } from '../types';
 import { defaultSettings } from '../context/App';
+import * as helpers from './helpers';
 
 describe('utils/notifications.ts', () => {
   afterEach(() => {
@@ -107,7 +105,7 @@ describe('utils/notifications.ts', () => {
   });
 
   it('should click on a native notification (with 1 notification)', () => {
-    jest.spyOn(comms, 'openExternalLink');
+    jest.spyOn(helpers, 'openInBrowser');
 
     const nativeNotification: Notification =
       notificationsHelpers.raiseNativeNotification(
@@ -116,15 +114,12 @@ describe('utils/notifications.ts', () => {
       );
     nativeNotification.onclick(null);
 
-    const notif = mockedGithubNotifications[0];
-    const newUrl = generateGitHubWebUrl(
-      notif.subject.url,
-      notif.id,
-      mockedUser.id,
-      '#issuecomment-' + getCommentId(notif.subject.latest_comment_url),
+    expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
+    expect(helpers.openInBrowser).toHaveBeenLastCalledWith(
+      mockedGithubNotifications[0],
+      mockAccounts,
     );
-    expect(comms.openExternalLink).toHaveBeenCalledTimes(1);
-    expect(comms.openExternalLink).toHaveBeenCalledWith(newUrl);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('hide-window');
   });
 
   it('should click on a native notification (with more than 1 notification)', () => {

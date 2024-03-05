@@ -191,28 +191,59 @@ describe('hooks/useNotifications.ts', () => {
         const notifications = [
           {
             id: 1,
-            title: 'This is a notification.',
-            subject: { type: 'Issue', url: 'https://api.github.com/1' },
+            subject: {
+              title: 'This is a check suite workflow.',
+              type: 'CheckSuite',
+              url: 'https://api.github.com/1',
+            },
+            repository: {
+              full_name: 'some/repo',
+            },
+            updated_at: '2024-02-26T00:00:00Z',
           },
           {
             id: 2,
-            title: 'A merged PR.',
-            subject: { type: 'PullRequest', url: 'https://api.github.com/2' },
+            subject: {
+              title: 'This is a Discussion.',
+              type: 'Discussion',
+              url: 'https://api.github.com/2',
+            },
+            repository: {
+              full_name: 'some/repo',
+            },
+            updated_at: '2024-02-26T00:00:00Z',
           },
           {
             id: 3,
-            title: 'A closed PR.',
-            subject: { type: 'PullRequest', url: 'https://api.github.com/3' },
+            subject: {
+              title: 'This is an Issue.',
+              type: 'Issue',
+              url: 'https://api.github.com/3',
+            },
           },
           {
             id: 4,
-            title: 'A draft PR.',
-            subject: { type: 'PullRequest', url: 'https://api.github.com/4' },
+            subject: {
+              title: 'This is a Pull Request.',
+              type: 'PullRequest',
+              url: 'https://api.github.com/4',
+            },
           },
           {
             id: 5,
-            title: 'A draft PR.',
-            subject: { type: 'PullRequest', url: 'https://api.github.com/5' },
+            subject: {
+              title: 'This is an invitation.',
+              type: 'RepositoryInvitation',
+              url: 'https://api.github.com/5',
+            },
+          },
+          {
+            id: 6,
+            subject: {
+              title: 'This is a workflow run.',
+              type: 'WorkflowRun',
+              url: 'https://api.github.com/6',
+            },
           },
         ];
 
@@ -220,19 +251,33 @@ describe('hooks/useNotifications.ts', () => {
           .get('/notifications?participating=false')
           .reply(200, notifications);
 
-        nock('https://api.github.com').get('/1').reply(200, { state: 'open' });
         nock('https://api.github.com')
-          .get('/2')
-          .reply(200, { state: 'closed', merged: true });
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                edges: [
+                  {
+                    node: {
+                      title: 'This is an answered discussion',
+                      viewerSubscription: 'SUBSCRIBED',
+                      stateReason: null,
+                      isAnswered: true,
+                    },
+                  },
+                ],
+              },
+            },
+          });
         nock('https://api.github.com')
           .get('/3')
-          .reply(200, { state: 'closed', merged: false });
+          .reply(200, { state: 'closed', merged: true });
         nock('https://api.github.com')
           .get('/4')
-          .reply(200, { state: 'open', draft: false });
+          .reply(200, { state: 'closed', merged: false });
         nock('https://api.github.com')
           .get('/5')
-          .reply(200, { state: 'open', draft: true });
+          .reply(200, { state: 'open', draft: false });
 
         const { result } = renderHook(() => useNotifications(true));
 
@@ -249,23 +294,44 @@ describe('hooks/useNotifications.ts', () => {
           expect(result.current.notifications[0].hostname).toBe('github.com');
         });
 
-        expect(result.current.notifications[0].notifications.length).toBe(5);
-        expect(
-          result.current.notifications[0].notifications[0].subject.state,
-        ).toBe('open');
-        expect(
-          result.current.notifications[0].notifications[1].subject.state,
-        ).toBe('merged');
-        expect(
-          result.current.notifications[0].notifications[2].subject.state,
-        ).toBe('closed');
-        expect(
-          result.current.notifications[0].notifications[3].subject.state,
-        ).toBe('open');
-        expect(
-          result.current.notifications[0].notifications[4].subject.state,
-        ).toBe('draft');
+        expect(result.current.notifications[0].notifications.length).toBe(6);
       });
+    });
+  });
+
+  describe('removeNotificationFromState', () => {
+    it('should remove a notification from state', async () => {
+      const notifications = [
+        { id: 1, title: 'This is a notification.' },
+        { id: 2, title: 'This is another one.' },
+      ];
+
+      nock('https://api.github.com')
+        .get('/notifications?participating=false')
+        .reply(200, notifications);
+
+      nock('https://github.gitify.io/api/v3')
+        .get('/notifications?participating=false')
+        .reply(200, notifications);
+
+      const { result } = renderHook(() => useNotifications(false));
+
+      act(() => {
+        result.current.fetchNotifications(mockAccounts, mockSettings);
+      });
+
+      await waitFor(() => {
+        expect(result.current.isFetching).toBe(false);
+      });
+
+      act(() => {
+        result.current.removeNotificationFromState(
+          result.current.notifications[0].notifications[0].id,
+          result.current.notifications[0].hostname,
+        );
+      });
+
+      expect(result.current.notifications[0].notifications.length).toBe(1);
     });
   });
 
@@ -344,6 +410,92 @@ describe('hooks/useNotifications.ts', () => {
 
         act(() => {
           result.current.markNotification(accounts, id, hostname);
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+    });
+  });
+
+  describe('markNotificationDone', () => {
+    const id = 'notification-123';
+
+    describe('github.com', () => {
+      const accounts = { ...mockAccounts, enterpriseAccounts: [] };
+      const hostname = 'github.com';
+
+      it('should mark a notification as done with success - github.com', async () => {
+        nock('https://api.github.com/')
+          .delete(`/notifications/threads/${id}`)
+          .reply(200);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.markNotificationDone(accounts, id, hostname);
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+
+      it('should mark a notification as done with failure - github.com', async () => {
+        nock('https://api.github.com/')
+          .delete(`/notifications/threads/${id}`)
+          .reply(400);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.markNotificationDone(accounts, id, hostname);
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+    });
+
+    describe('enterprise', () => {
+      const accounts = { ...mockAccounts, token: null };
+      const hostname = 'github.gitify.io';
+
+      it('should mark a notification as done with success - enterprise', async () => {
+        nock('https://github.gitify.io/')
+          .delete(`/notifications/threads/${id}`)
+          .reply(200);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.markNotificationDone(accounts, id, hostname);
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+
+      it('should mark a notification as done with failure - enterprise', async () => {
+        nock('https://github.gitify.io/')
+          .delete(`/notifications/threads/${id}`)
+          .reply(400);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.markNotificationDone(accounts, id, hostname);
         });
 
         await waitFor(() => {
@@ -540,6 +692,109 @@ describe('hooks/useNotifications.ts', () => {
 
         act(() => {
           result.current.markRepoNotifications(accounts, repoSlug, hostname);
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+    });
+  });
+
+  describe('markRepoNotificationsDone', () => {
+    const repoSlug = 'manosim/gitify';
+    const id = 'notification-123';
+
+    describe('github.com', () => {
+      const accounts = { ...mockAccounts, enterpriseAccounts: [] };
+      const hostname = 'github.com';
+
+      it("should mark a repository's notifications as done with success - github.com", async () => {
+        nock('https://api.github.com/')
+          .delete(`/notifications/threads/${id}`)
+          .reply(200);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.markRepoNotificationsDone(
+            accounts,
+            repoSlug,
+            hostname,
+          );
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+
+      it("should mark a repository's notifications as done with failure - github.com", async () => {
+        nock('https://api.github.com/')
+          .delete(`/notifications/threads/${id}`)
+          .reply(400);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.markRepoNotificationsDone(
+            accounts,
+            repoSlug,
+            hostname,
+          );
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+    });
+
+    describe('enterprise', () => {
+      const accounts = { ...mockAccounts, token: null };
+      const hostname = 'github.gitify.io';
+
+      it("should mark a repository's notifications as done with success - enterprise", async () => {
+        nock('https://api.github.com/')
+          .delete(`/notifications/threads/${id}`)
+          .reply(200);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.markRepoNotificationsDone(
+            accounts,
+            repoSlug,
+            hostname,
+          );
+        });
+
+        await waitFor(() => {
+          expect(result.current.isFetching).toBe(false);
+        });
+
+        expect(result.current.notifications.length).toBe(0);
+      });
+
+      it("should mark a repository's notifications as done with failure - enterprise", async () => {
+        nock('https://api.github.com/')
+          .delete(`/notifications/threads/${id}`)
+          .reply(400);
+
+        const { result } = renderHook(() => useNotifications(false));
+
+        act(() => {
+          result.current.markRepoNotificationsDone(
+            accounts,
+            repoSlug,
+            hostname,
+          );
         });
 
         await waitFor(() => {

@@ -1,92 +1,143 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`./utils/github-api.ts should format the notification reason 1`] = `
+exports[`formatReason should format the notification reason 1`] = `
+{
+  "description": "You were requested to review and approve a deployment.",
+  "type": "Approval Requested",
+}
+`;
+
+exports[`formatReason should format the notification reason 2`] = `
 {
   "description": "You were assigned to the issue.",
   "type": "Assign",
 }
 `;
 
-exports[`./utils/github-api.ts should format the notification reason 2`] = `
+exports[`formatReason should format the notification reason 3`] = `
 {
   "description": "You created the thread.",
   "type": "Author",
 }
 `;
 
-exports[`./utils/github-api.ts should format the notification reason 3`] = `
-{
-  "description": "You commented on the thread.",
-  "type": "Comment",
-}
-`;
-
-exports[`./utils/github-api.ts should format the notification reason 4`] = `
-{
-  "description": "You accepted an invitation to contribute to the repository.",
-  "type": "Invitation",
-}
-`;
-
-exports[`./utils/github-api.ts should format the notification reason 5`] = `
-{
-  "description": "You subscribed to the thread (via an issue or pull request).",
-  "type": "Manual",
-}
-`;
-
-exports[`./utils/github-api.ts should format the notification reason 6`] = `
-{
-  "description": "You were specifically @mentioned in the content.",
-  "type": "Mention",
-}
-`;
-
-exports[`./utils/github-api.ts should format the notification reason 7`] = `
-{
-  "description": "You, or a team you're a member of, were requested to review a pull request.",
-  "type": "Review Requested",
-}
-`;
-
-exports[`./utils/github-api.ts should format the notification reason 8`] = `
-{
-  "description": "GitHub discovered a security vulnerability in your repository.",
-  "type": "Security Alert",
-}
-`;
-
-exports[`./utils/github-api.ts should format the notification reason 9`] = `
-{
-  "description": "You changed the thread state (for example, closing an issue or merging a pull request).",
-  "type": "State Change",
-}
-`;
-
-exports[`./utils/github-api.ts should format the notification reason 10`] = `
-{
-  "description": "You're watching the repository.",
-  "type": "Subscribed",
-}
-`;
-
-exports[`./utils/github-api.ts should format the notification reason 11`] = `
-{
-  "description": "You were on a team that was mentioned.",
-  "type": "Team Mention",
-}
-`;
-
-exports[`./utils/github-api.ts should format the notification reason 12`] = `
+exports[`formatReason should format the notification reason 4`] = `
 {
   "description": "A GitHub Actions workflow run was triggered for your repository",
   "type": "Workflow Run",
 }
 `;
 
-exports[`./utils/github-api.ts should format the notification reason 13`] = `
+exports[`formatReason should format the notification reason 5`] = `
+{
+  "description": "You commented on the thread.",
+  "type": "Comment",
+}
+`;
+
+exports[`formatReason should format the notification reason 6`] = `
+{
+  "description": "You accepted an invitation to contribute to the repository.",
+  "type": "Invitation",
+}
+`;
+
+exports[`formatReason should format the notification reason 7`] = `
+{
+  "description": "You subscribed to the thread (via an issue or pull request).",
+  "type": "Manual",
+}
+`;
+
+exports[`formatReason should format the notification reason 8`] = `
+{
+  "description": "Organization members have requested to enable a feature such as Draft Pull Requests or CoPilot.",
+  "type": "Member Feature Requested",
+}
+`;
+
+exports[`formatReason should format the notification reason 9`] = `
+{
+  "description": "You were specifically @mentioned in the content.",
+  "type": "Mention",
+}
+`;
+
+exports[`formatReason should format the notification reason 10`] = `
+{
+  "description": "You, or a team you're a member of, were requested to review a pull request.",
+  "type": "Review Requested",
+}
+`;
+
+exports[`formatReason should format the notification reason 11`] = `
+{
+  "description": "You were credited for contributing to a security advisory.",
+  "type": "Security Advisory Credit",
+}
+`;
+
+exports[`formatReason should format the notification reason 12`] = `
+{
+  "description": "GitHub discovered a security vulnerability in your repository.",
+  "type": "Security Alert",
+}
+`;
+
+exports[`formatReason should format the notification reason 13`] = `
+{
+  "description": "You changed the thread state (for example, closing an issue or merging a pull request).",
+  "type": "State Change",
+}
+`;
+
+exports[`formatReason should format the notification reason 14`] = `
+{
+  "description": "You're watching the repository.",
+  "type": "Subscribed",
+}
+`;
+
+exports[`formatReason should format the notification reason 15`] = `
+{
+  "description": "You were on a team that was mentioned.",
+  "type": "Team Mention",
+}
+`;
+
+exports[`formatReason should format the notification reason 16`] = `
 {
   "description": "The reason for this notification is not supported by the app.",
   "type": "Unknown",
 }
 `;
+
+exports[`getNotificationTypeIconColor should format the notification color for check suite 1`] = `"text-gray-500"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for check suite 2`] = `"text-red-500"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for check suite 3`] = `"text-gray-500"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for check suite 4`] = `"text-green-500"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for check suite 5`] = `"text-gray-300"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for state 1`] = `"text-green-500"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for state 2`] = `"text-red-500"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for state 3`] = `"text-purple-500"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for state 4`] = `"text-gray-600"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for state 5`] = `"text-purple-500"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for state 6`] = `"text-gray-300"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for state 7`] = `"text-green-500"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for state 8`] = `"text-green-500"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for state 9`] = `"text-purple-500"`;
+
+exports[`getNotificationTypeIconColor should format the notification color for state 10`] = `"text-gray-300"`;

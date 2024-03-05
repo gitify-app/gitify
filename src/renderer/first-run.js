@@ -1,6 +1,6 @@
 const { app, dialog } = require('electron');
-const { existsSync, writeFileSync } = require('fs');
-const { join } = require('path');
+const { existsSync, writeFileSync, mkdirSync } = require('fs');
+const { join, dirname } = require('path');
 
 async function onFirstRunMaybe() {
   if (isFirstRun()) {
@@ -39,6 +39,11 @@ function isFirstRun() {
   try {
     if (existsSync(configPath)) {
       return false;
+    }
+
+    const firstRunFolder = dirname(configPath);
+    if (!existsSync(firstRunFolder)) {
+      mkdirSync(firstRunFolder);
     }
 
     writeFileSync(configPath, '');

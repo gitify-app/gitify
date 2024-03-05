@@ -1,16 +1,28 @@
 export type Reason =
+  | 'approval_requested'
   | 'assign'
   | 'author'
+  | 'ci_activity'
   | 'comment'
   | 'invitation'
   | 'manual'
+  | 'member_feature_requested'
   | 'mention'
   | 'review_requested'
+  | 'security_advisory_credit'
   | 'security_alert'
   | 'state_change'
   | 'subscribed'
-  | 'team_mention'
-  | 'ci_activity';
+  | 'team_mention';
+
+// Note: ANSWERED and OPEN are not an official discussion state type in the GitHub API
+export type DiscussionStateType =
+  | 'ANSWERED'
+  | 'DUPLICATE'
+  | 'OPEN'
+  | 'OUTDATED'
+  | 'REOPENED'
+  | 'RESOLVED';
 
 export type SubjectType =
   | 'CheckSuite'
@@ -20,17 +32,42 @@ export type SubjectType =
   | 'PullRequest'
   | 'Release'
   | 'RepositoryInvitation'
-  | 'RepositoryVulnerabilityAlert';
+  | 'RepositoryVulnerabilityAlert'
+  | 'WorkflowRun';
 
-export type IssueStateType =
-  | 'closed'
-  | 'open'
-  | 'completed'
-  | 'reopened'
-  | 'not_planned';
-export type PullRequestStateType = 'closed' | 'open' | 'merged' | 'draft';
-export type StateType = IssueStateType | PullRequestStateType;
+export type IssueStateType = 'closed' | 'open';
+
+export type IssueStateReasonType = 'completed' | 'not_planned' | 'reopened';
+
+/**
+ * Note: draft and merged are not official states in the GitHub API.
+ * These are derived from the pull request's `merged` and `draft` properties.
+ */
+export type PullRequestStateType = 'closed' | 'draft' | 'merged' | 'open';
+
+export type StateType =
+  | CheckSuiteStatus
+  | DiscussionStateType
+  | IssueStateType
+  | IssueStateReasonType
+  | PullRequestStateType;
+
 export type ViewerSubscription = 'IGNORED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
+
+export type CheckSuiteStatus =
+  | 'action_required'
+  | 'cancelled'
+  | 'completed'
+  | 'failure'
+  | 'in_progress'
+  | 'pending'
+  | 'queued'
+  | 'requested'
+  | 'skipped'
+  | 'stale'
+  | 'success'
+  | 'timed_out'
+  | 'waiting';
 
 export interface Notification {
   id: string;
@@ -122,23 +159,32 @@ export interface Owner {
 
 export interface Subject {
   title: string;
-  url?: string;
-  state: StateType;
-  latest_comment_url?: string;
+  url: string | null;
+  state?: StateType; // This is not in the GitHub API, but we add it to the type to make it easier to work with
+  latest_comment_url: string | null;
   type: SubjectType;
 }
 
-export interface GraphQLSearch {
+export interface GraphQLSearch<T> {
   data: {
     data: {
       search: {
-        edges: DiscussionEdge[];
+        edges: T[];
       };
     };
   };
 }
 
-export interface DiscussionEdge {
+export interface DiscussionStateSearchResultEdge {
+  node: {
+    viewerSubscription: ViewerSubscription;
+    title: string;
+    stateReason: DiscussionStateType;
+    isAnswered: boolean;
+  };
+}
+
+export interface DiscussionSearchResultEdge {
   node: {
     viewerSubscription: ViewerSubscription;
     title: string;
@@ -164,4 +210,18 @@ export interface DiscussionSubcommentEdge {
     databaseId: string | number;
     createdAt: string;
   };
+}
+
+export interface CheckSuiteAttributes {
+  workflowName: string;
+  attemptNumber?: number;
+  statusDisplayName: string;
+  status: CheckSuiteStatus | null;
+  branchName: string;
+}
+
+export interface WorkflowRunAttributes {
+  user: string;
+  statusDisplayName: string;
+  status: CheckSuiteStatus | null;
 }

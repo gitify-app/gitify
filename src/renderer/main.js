@@ -7,8 +7,7 @@ require('@electron/remote/main').initialize();
 
 app.setAppUserModelId('com.electron.gitify');
 
-const iconIdle = __dirname + '/../../assets/images/tray-idle.png';
-
+const iconIdle = __dirname + '/../../assets/images/tray-idleTemplate.png';
 const iconActive = __dirname + '/../../assets/images/tray-active.png';
 
 const browserWindowOpts = {

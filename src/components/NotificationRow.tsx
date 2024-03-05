@@ -1,6 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import { CheckIcon, MuteIcon } from '@primer/octicons-react';
+import { CheckIcon, BellSlashIcon, ReadIcon } from '@primer/octicons-react';
 
 import {
   formatReason,
@@ -20,11 +20,24 @@ export const NotificationRow: React.FC<IProps> = ({
   notification,
   hostname,
 }) => {
-  const { settings, accounts, markNotification, unsubscribeNotification } =
-    useContext(AppContext);
+  const {
+    settings,
+    accounts,
+    removeNotificationFromState,
+    markNotification,
+    markNotificationDone,
+    unsubscribeNotification,
+  } = useContext(AppContext);
 
   const pressTitle = useCallback(() => {
     openBrowser();
+
+    if (settings.markAsDoneOnOpen) {
+      markNotificationDone(notification.id, hostname);
+    } else {
+      // no need to mark as read, github does it by default when opening it
+      removeNotificationFromState(notification.id, hostname);
+    }
   }, [settings]);
 
   const openBrowser = useCallback(
@@ -40,8 +53,8 @@ export const NotificationRow: React.FC<IProps> = ({
   };
 
   const reason = formatReason(notification.reason);
-  const NotificationIcon = getNotificationTypeIcon(notification.subject.type);
-  const iconColor = getNotificationTypeIconColor(notification.subject.state);
+  const NotificationIcon = getNotificationTypeIcon(notification.subject);
+  const iconColor = getNotificationTypeIconColor(notification.subject);
   const realIconColor = settings
     ? (settings.colors && iconColor) || ''
     : iconColor;
@@ -50,8 +63,8 @@ export const NotificationRow: React.FC<IProps> = ({
   });
 
   return (
-    <div className="flex space-x-2 p-2 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker">
-      <div className={`flex justify-center items-center w-8 ${realIconColor}`}>
+    <div className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker">
+      <div className={`flex justify-center items-center w-5 ${realIconColor}`}>
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
 
@@ -67,31 +80,32 @@ export const NotificationRow: React.FC<IProps> = ({
         <div className="text-xs text-capitalize">
           <span title={reason.description}>{reason.type}</span> - Updated{' '}
           {updatedAt}
-          <button
-            className="border-0 bg-none float-right"
-            title="Unsubscribe"
-            onClick={unsubscribe}
-          >
-            <MuteIcon
-              className="hover:text-red-500"
-              size={13}
-              aria-label="Unsubscribe"
-            />
-          </button>
         </div>
       </div>
 
-      <div className="flex justify-center items-center w-8">
+      <div className="flex justify-center items-center gap-2">
         <button
-          className="focus:outline-none"
+          className="focus:outline-none h-full hover:text-green-500"
+          title="Mark as Done"
+          onClick={() => markNotificationDone(notification.id, hostname)}
+        >
+          <CheckIcon size={16} aria-label="Mark as Done" />
+        </button>
+
+        <button
+          className="focus:outline-none h-full hover:text-red-500"
+          title="Unsubscribe"
+          onClick={unsubscribe}
+        >
+          <BellSlashIcon size={14} aria-label="Unsubscribe" />
+        </button>
+
+        <button
+          className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Read"
           onClick={() => markNotification(notification.id, hostname)}
         >
-          <CheckIcon
-            className="hover:text-green-500"
-            size={20}
-            aria-label="Mark as Read"
-          />
+          <ReadIcon size={14} aria-label="Mark as Read" />
         </button>
       </div>
     </div>

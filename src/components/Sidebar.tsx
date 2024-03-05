@@ -1,5 +1,5 @@
 import { BellIcon } from '@primer/octicons-react';
-import { ipcRenderer, shell } from 'electron';
+import { ipcRenderer } from 'electron';
 import React, { useCallback, useContext, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -9,6 +9,7 @@ import { IconCog } from '../icons/Cog';
 import { IconQuit } from '../icons/Quit';
 import { IconRefresh } from '../icons/Refresh';
 import { Constants } from '../utils/constants';
+import { openExternalLink } from '../utils/comms';
 
 export const Sidebar: React.FC = () => {
   const navigate = useNavigate();
@@ -18,11 +19,11 @@ export const Sidebar: React.FC = () => {
   const { notifications, fetchNotifications } = useContext(AppContext);
 
   const onOpenBrowser = useCallback(() => {
-    shell.openExternal(`https://github.com/${Constants.REPO_SLUG}`);
+    openExternalLink(`https://github.com/${Constants.REPO_SLUG}`);
   }, []);
 
   const onOpenGitHubNotifications = useCallback(() => {
-    shell.openExternal(`https://github.com/notifications`);
+    openExternalLink(`https://github.com/notifications`);
   }, []);
 
   const quitApp = useCallback(() => {
