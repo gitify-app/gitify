@@ -55,50 +55,6 @@
     "url": "https://github.com/manosim/gitify/issues"
   },
   "homepage": "https://www.gitify.io/",
-  "build": {
-    "appId": "com.electron.gitify",
-    "productName": "Gitify",
-    "files": [
-      "build/**/*",
-      "assets/**/*",
-      "index.html",
-      "LICENSE",
-      "main.js",
-      "first-run.js"
-    ],
-    "mac": {
-      "category": "public.app-category.developer-tools",
-      "icon": "assets/images/app-icon.icns",
-      "identity": "Emmanouil Konstantinidis (3YP8SXP3BF)",
-      "hardenedRuntime": true,
-      "gatekeeperAssess": false,
-      "entitlements": "./entitlements/entitlements.mac.plist",
-      "entitlementsInherit": "./entitlements/entitlements.mac.plist",
-      "publish": [
-        "github"
-      ]
-    },
-    "dmg": {
-      "icon": "assets/images/app-icon.icns",
-      "sign": false
-    },
-    "win": {
-      "target": "nsis",
-      "icon": "assets/images/app-icon.ico"
-    },
-    "nsis": {
-      "oneClick": false
-    },
-    "linux": {
-      "target": [
-        "AppImage",
-        "deb"
-      ],
-      "category": "Development",
-      "maintainer": "Emmanouil Konstantinidis"
-    },
-    "afterSign": "scripts/notarize.js"
-  },
   "dependencies": {
     "@electron-forge/plugin-vite": "^7.2.0",
     "@electron/remote": "2.1.2",

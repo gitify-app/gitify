@@ -10,12 +10,23 @@ import type { ForgeConfig } from '@electron-forge/shared-types';
 const Config: ForgeConfig = {
   packagerConfig: {
     asar: true,
-    osxSign: {},
+    osxSign: {
+      identity: 'Emmanouil Konstantinidis (3YP8SXP3BF)',
+      optionsForFile: () => ({
+        hardenedRuntime: true,
+        'gatekeeper-assess': false,
+        entitlements: './entitlements/entitlements.mac.plist',
+        'entitlements-inherit': './entitlements/entitlements.mac.plist',
+        'signature-flags': 'library',
+      }),
+    },
     osxNotarize: {
       appleId: process.env.APPLEID_USERNAME!,
       appleIdPassword: process.env.APPLE_PASSWORD!,
       teamId: process.env.APPLE_TEAM_ID!,
     },
+    appCategoryType: 'public.app-category.developer-tools',
+    icon: 'assets/images/app-icon',
   },
   rebuildConfig: {},
   makers: [
