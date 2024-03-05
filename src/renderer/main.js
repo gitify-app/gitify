@@ -1,11 +1,10 @@
-const { initialize } = require('@electron/remote/main');
-const { app, ipcMain, nativeTheme } = require('electron');
-const { autoUpdater } = require('electron-updater');
+const { ipcMain, app, nativeTheme } = require('electron');
 const { menubar } = require('menubar');
+const { autoUpdater } = require('electron-updater');
+const { onFirstRunMaybe } = require('./first-run');
 const path = require('path');
-const { onFirstRunMaybe } = require('./first-run.js');
 
-initialize();
+require('@electron/remote/main').initialize();
 
 app.setAppUserModelId('com.electron.gitify');
 
@@ -31,30 +30,19 @@ const browserWindowOpts = {
   },
 };
 
-const delayedHideAppIcon = () => {
-  if (app.dock && app.dock.hide) {
-    // Setting a timeout because the showDockIcon is not currently working
-    // See more at https://github.com/maxogden/menubar/issues/306
-    setTimeout(() => {
-      app.dock.hide();
-    }, 1500);
-  }
-};
-
 app.on('ready', async () => {
   await onFirstRunMaybe();
 });
 
 const menubarApp = menubar({
   icon: iconIdle,
-  index: `file://${__dirname}/config/index.html`,
+  index: `file://${__dirname}/index.html`,
   browserWindow: browserWindowOpts,
   preloadWindow: true,
+  showDockIcon: false,
 });
 
 menubarApp.on('ready', () => {
-  delayedHideAppIcon();
-
   menubarApp.tray.setIgnoreDoubleClickEvents(true);
 
   autoUpdater.checkForUpdatesAndNotify();
