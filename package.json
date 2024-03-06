@@ -16,6 +16,9 @@
     "start": "electron . --enable-logging",
     "prepare": "husky"
   },
+  "engines": {
+    "node": ">=20"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/gitify-app/gitify.git"
