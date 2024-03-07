@@ -1,10 +1,8 @@
-import { formatSearchQueryString } from './helpers';
+import { fetchDiscussion } from './helpers';
 import {
   CheckSuiteAttributes,
   CheckSuiteStatus,
-  DiscussionStateSearchResultNode,
   DiscussionStateType,
-  GraphQLSearch,
   IssueStateType,
   Notification,
   PullRequestStateType,
@@ -81,39 +79,9 @@ export async function getDiscussionState(
   notification: Notification,
   token: string,
 ): Promise<DiscussionStateType> {
-  const response: GraphQLSearch<DiscussionStateSearchResultNode> =
-    await apiRequestAuth(`https://api.github.com/graphql`, 'POST', token, {
-      query: `{
-        search(query:"${formatSearchQueryString(
-          notification.repository.full_name,
-          notification.subject.title,
-          notification.updated_at,
-        )}", type: DISCUSSION, first: 10) {
-          nodes {
-            ... on Discussion {
-              viewerSubscription
-              title
-              stateReason  
-              isAnswered
-            }
-          }
-        }
-      }`,
-    });
+  const discussion = await fetchDiscussion(notification, token, false);
 
-  let discussions =
-    response?.data?.data?.search?.nodes?.filter(
-      (discussion) => discussion.title === notification.subject.title,
-    ) || [];
-
-  if (discussions.length > 1) {
-    discussions = discussions.filter(
-      (discussion) => discussion.viewerSubscription === 'SUBSCRIBED',
-    );
-  }
-
-  if (discussions[0]) {
-    const discussion = discussions[0];
+  if (discussion) {
     if (discussion.isAnswered) {
       return 'ANSWERED';
     }

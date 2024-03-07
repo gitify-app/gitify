@@ -76,27 +76,53 @@ async function getDiscussionUrl(
 ): Promise<string> {
   let url = `${notification.repository.html_url}/discussions`;
 
+  const discussion = await fetchDiscussion(notification, token, true);
+
+  if (discussion) {
+    url = discussion.url;
+
+    let comments = discussion.comments.nodes;
+
+    let latestCommentId: string | number;
+    if (comments?.length) {
+      latestCommentId = getLatestDiscussionCommentId(comments);
+      url += `#discussioncomment-${latestCommentId}`;
+    }
+  }
+
+  return url;
+}
+
+export async function fetchDiscussion(
+  notification: Notification,
+  token: string,
+  includeComments: boolean,
+): Promise<DiscussionSearchResultNode> {
   const response: GraphQLSearch<DiscussionSearchResultNode> =
     await apiRequestAuth(`https://api.github.com/graphql`, 'POST', token, {
-      query: `{
-        search(query:"${formatSearchQueryString(
-          notification.repository.full_name,
-          notification.subject.title,
-          notification.updated_at,
-        )}", type: DISCUSSION, first: 10) {
-          nodes {
-            ... on Discussion {
-              viewerSubscription
-              title
-              url
-              comments(last: 100) {
-                nodes {
-                  databaseId
-                  createdAt
-                  replies(last: 1) {
-                    nodes {
-                      databaseId
-                      createdAt
+      query: `query fetchDiscussions(
+          $queryStatement: String!,
+          $type: SearchType!,
+          $firstDiscussions: Int,
+          $lastComments: Int,
+          $includeComments: Boolean,
+          $lastReplies: Int
+        ) {
+          search(query:$queryStatement, type: $type, first: $firstDiscussions) {
+            nodes {
+              ... on Discussion {
+                viewerSubscription
+                title
+                url
+                comments(last: $lastComments) @include(if: $includeComments){
+                  nodes {
+                    databaseId
+                    createdAt
+                    replies(last: $firstReplies) {
+                      nodes {
+                        databaseId
+                        createdAt
+                      }
                     }
                   }
                 }
@@ -104,7 +130,19 @@ async function getDiscussionUrl(
             }
           }
         }
-      }`,
+      `,
+      variables: {
+        queryStatement: formatSearchQueryString(
+          notification.repository.full_name,
+          notification.subject.title,
+          notification.updated_at,
+        ),
+        type: 'DISCUSSION',
+        firstDiscussions: 10,
+        lastComments: 100,
+        firstReplies: 1,
+        includeComments: includeComments,
+      },
     });
 
   let discussions =
@@ -118,19 +156,10 @@ async function getDiscussionUrl(
     );
 
   if (discussions[0]) {
-    const discussion = discussions[0];
-    url = discussion.url;
-
-    let comments = discussion.comments.nodes;
-
-    let latestCommentId: string | number;
-    if (comments?.length) {
-      latestCommentId = getLatestDiscussionCommentId(comments);
-      url += `#discussioncomment-${latestCommentId}`;
-    }
+    return discussions[0];
   }
 
-  return url;
+  return null;
 }
 
 export const getLatestDiscussionCommentId = (

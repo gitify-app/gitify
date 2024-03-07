@@ -291,6 +291,8 @@ export const mockedGraphQLResponse: GraphQLSearch<DiscussionSearchResultNode> =
             {
               viewerSubscription: 'SUBSCRIBED',
               title: '1.16.0',
+              isAnswered: false,
+              stateReason: null,
               url: 'https://github.com/manosim/notifications-test/discussions/612',
               comments: {
                 nodes: [
@@ -369,6 +371,8 @@ export const mockedGraphQLResponse: GraphQLSearch<DiscussionSearchResultNode> =
             {
               viewerSubscription: 'IGNORED',
               title: '1.16.0',
+              isAnswered: false,
+              stateReason: null,
               url: 'https://github.com/manosim/notifications-test/discussions/612',
               comments: {
                 nodes: [
