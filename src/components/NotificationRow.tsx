@@ -61,9 +61,10 @@ export const NotificationRow: React.FC<IProps> = ({
   const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
     addSuffix: true,
   });
-  const notificationTitle = formatForDisplay(
-    `${notification.subject.state ?? ''} ${notification.subject.type}`,
-  );
+  const notificationTitle = formatForDisplay([
+    notification.subject.state,
+    notification.subject.type,
+  ]);
 
   return (
     <div className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker">

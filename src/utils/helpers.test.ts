@@ -562,11 +562,16 @@ describe('utils/helpers.ts', () => {
 
     it('formatForDisplay', () => {
       expect(formatForDisplay(null)).toBe('');
-      expect(formatForDisplay('open PullRequest')).toBe('Open Pull Request');
-      expect(formatForDisplay('OUTDATED Discussion')).toBe(
+      expect(formatForDisplay([])).toBe('');
+      expect(formatForDisplay(['open', 'PullRequest'])).toBe(
+        'Open Pull Request',
+      );
+      expect(formatForDisplay(['OUTDATED', 'Discussion'])).toBe(
         'Outdated Discussion',
       );
-      expect(formatForDisplay('not_planned Issue')).toBe('Not Planned Issue');
+      expect(formatForDisplay(['not_planned', 'Issue'])).toBe(
+        'Not Planned Issue',
+      );
     });
   });
 });
