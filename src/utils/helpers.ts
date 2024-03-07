@@ -129,6 +129,7 @@ async function getDiscussionUrl(
     let comments = discussion.comments.nodes;
 
     let latestCommentId: string | number;
+
     if (comments?.length) {
       latestCommentId = getLatestDiscussionCommentId(comments);
       url += `#discussioncomment-${latestCommentId}`;
@@ -146,18 +147,20 @@ export async function fetchDiscussion(
   const response: GraphQLSearch<DiscussionSearchResultNode> =
     await apiRequestAuth(`https://api.github.com/graphql`, 'POST', token, {
       query: `query fetchDiscussions(
+          $includeComments: Boolean!,
           $queryStatement: String!,
           $type: SearchType!,
           $firstDiscussions: Int,
           $lastComments: Int,
-          $includeComments: Boolean,
-          $lastReplies: Int
+          $firstReplies: Int
         ) {
           search(query:$queryStatement, type: $type, first: $firstDiscussions) {
             nodes {
               ... on Discussion {
                 viewerSubscription
                 title
+                stateReason
+                isAnswered
                 url
                 comments(last: $lastComments) @include(if: $includeComments){
                   nodes {
@@ -207,13 +210,14 @@ export async function fetchDiscussion(
   return null;
 }
 
-export const getLatestDiscussionCommentId = (
+export function getLatestDiscussionCommentId(
   comments: DiscussionCommentNode[],
-) =>
-  comments
+) {
+  return comments
     .flatMap((comment) => comment.replies.nodes)
     .concat([comments.at(-1)])
     .reduce((a, b) => (a.createdAt > b.createdAt ? a : b))?.databaseId;
+}
 
 export async function generateGitHubWebUrl(
   notification: Notification,
