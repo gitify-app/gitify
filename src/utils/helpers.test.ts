@@ -7,6 +7,7 @@ import {
   addNotificationReferrerIdToUrl,
   getHtmlUrl,
   generateGitHubWebUrl,
+  formatForDisplay,
 } from './helpers';
 import {
   mockedGraphQLResponse,
@@ -557,6 +558,15 @@ describe('utils/helpers.ts', () => {
       expect(result).toBe(
         `${mockedSingleNotification.repository.html_url}?${mockedNotificationReferrer}`,
       );
+    });
+
+    it('formatForDisplay', () => {
+      expect(formatForDisplay(null)).toBe('');
+      expect(formatForDisplay('open PullRequest')).toBe('Open Pull Request');
+      expect(formatForDisplay('OUTDATED Discussion')).toBe(
+        'Outdated Discussion',
+      );
+      expect(formatForDisplay('not_planned Issue')).toBe('Not Planned Issue');
     });
   });
 });

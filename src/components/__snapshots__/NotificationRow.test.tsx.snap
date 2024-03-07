@@ -6,6 +6,7 @@ exports[`components/Notification.js should render itself & its children 1`] = `
 >
   <div
     className="flex justify-center items-center w-5 text-green-500"
+    title="Open Issue"
   >
     <svg
       aria-hidden="false"
