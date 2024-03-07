@@ -175,16 +175,11 @@ export interface GraphQLSearch<T> {
   };
 }
 
-export interface DiscussionStateSearchResultNode {
+export interface DiscussionSearchResultNode {
   viewerSubscription: ViewerSubscription;
   title: string;
   stateReason: DiscussionStateType;
   isAnswered: boolean;
-}
-
-export interface DiscussionSearchResultNode {
-  viewerSubscription: ViewerSubscription;
-  title: string;
   url: string;
   comments: {
     nodes: DiscussionCommentNode[];
