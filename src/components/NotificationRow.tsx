@@ -62,7 +62,7 @@ export const NotificationRow: React.FC<IProps> = ({
     addSuffix: true,
   });
   const notificationTitle = formatForDisplay(
-    `${notification.subject.state ?? ''} ${notification.subject.type ?? ''}`,
+    `${notification.subject.state ?? ''} ${notification.subject.type}`,
   );
 
   return (
