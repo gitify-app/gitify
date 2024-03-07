@@ -150,14 +150,12 @@ describe('utils/state.ts', () => {
         .reply(200, {
           data: {
             search: {
-              edges: [
+              nodes: [
                 {
-                  node: {
-                    title: 'This is an answered discussion',
-                    viewerSubscription: 'SUBSCRIBED',
-                    stateReason: null,
-                    isAnswered: true,
-                  },
+                  title: 'This is an answered discussion',
+                  viewerSubscription: 'SUBSCRIBED',
+                  stateReason: null,
+                  isAnswered: true,
                 },
               ],
             },
@@ -186,14 +184,12 @@ describe('utils/state.ts', () => {
         .reply(200, {
           data: {
             search: {
-              edges: [
+              nodes: [
                 {
-                  node: {
-                    title: 'This is a duplicate discussion',
-                    viewerSubscription: 'SUBSCRIBED',
-                    stateReason: 'DUPLICATE',
-                    isAnswered: false,
-                  },
+                  title: 'This is a duplicate discussion',
+                  viewerSubscription: 'SUBSCRIBED',
+                  stateReason: 'DUPLICATE',
+                  isAnswered: false,
                 },
               ],
             },
@@ -222,14 +218,12 @@ describe('utils/state.ts', () => {
         .reply(200, {
           data: {
             search: {
-              edges: [
+              nodes: [
                 {
-                  node: {
-                    title: 'This is an open discussion',
-                    viewerSubscription: 'SUBSCRIBED',
-                    stateReason: null,
-                    isAnswered: false,
-                  },
+                  title: 'This is an open discussion',
+                  viewerSubscription: 'SUBSCRIBED',
+                  stateReason: null,
+                  isAnswered: false,
                 },
               ],
             },
@@ -258,14 +252,12 @@ describe('utils/state.ts', () => {
         .reply(200, {
           data: {
             search: {
-              edges: [
+              nodes: [
                 {
-                  node: {
-                    title: 'This is an outdated discussion',
-                    viewerSubscription: 'SUBSCRIBED',
-                    stateReason: 'OUTDATED',
-                    isAnswered: false,
-                  },
+                  title: 'This is an outdated discussion',
+                  viewerSubscription: 'SUBSCRIBED',
+                  stateReason: 'OUTDATED',
+                  isAnswered: false,
                 },
               ],
             },
@@ -294,14 +286,12 @@ describe('utils/state.ts', () => {
         .reply(200, {
           data: {
             search: {
-              edges: [
+              nodes: [
                 {
-                  node: {
-                    title: 'This is a reopened discussion',
-                    viewerSubscription: 'SUBSCRIBED',
-                    stateReason: 'REOPENED',
-                    isAnswered: false,
-                  },
+                  title: 'This is a reopened discussion',
+                  viewerSubscription: 'SUBSCRIBED',
+                  stateReason: 'REOPENED',
+                  isAnswered: false,
                 },
               ],
             },
@@ -330,14 +320,12 @@ describe('utils/state.ts', () => {
         .reply(200, {
           data: {
             search: {
-              edges: [
+              nodes: [
                 {
-                  node: {
-                    title: 'This is a resolved discussion',
-                    viewerSubscription: 'SUBSCRIBED',
-                    stateReason: 'RESOLVED',
-                    isAnswered: false,
-                  },
+                  title: 'This is a resolved discussion',
+                  viewerSubscription: 'SUBSCRIBED',
+                  stateReason: 'RESOLVED',
+                  isAnswered: false,
                 },
               ],
             },
@@ -366,22 +354,18 @@ describe('utils/state.ts', () => {
         .reply(200, {
           data: {
             search: {
-              edges: [
+              nodes: [
                 {
-                  node: {
-                    title: 'This is a discussion',
-                    viewerSubscription: 'SUBSCRIBED',
-                    stateReason: null,
-                    isAnswered: false,
-                  },
+                  title: 'This is a discussion',
+                  viewerSubscription: 'SUBSCRIBED',
+                  stateReason: null,
+                  isAnswered: false,
                 },
                 {
-                  node: {
-                    title: 'This is a discussion',
-                    viewerSubscription: 'IGNORED',
-                    stateReason: null,
-                    isAnswered: true,
-                  },
+                  title: 'This is a discussion',
+                  viewerSubscription: 'IGNORED',
+                  stateReason: null,
+                  isAnswered: true,
                 },
               ],
             },

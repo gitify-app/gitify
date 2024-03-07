@@ -169,47 +169,39 @@ export interface GraphQLSearch<T> {
   data: {
     data: {
       search: {
-        edges: T[];
+        nodes: T[];
       };
     };
   };
 }
 
-export interface DiscussionStateSearchResultEdge {
-  node: {
-    viewerSubscription: ViewerSubscription;
-    title: string;
-    stateReason: DiscussionStateType;
-    isAnswered: boolean;
+export interface DiscussionStateSearchResultNode {
+  viewerSubscription: ViewerSubscription;
+  title: string;
+  stateReason: DiscussionStateType;
+  isAnswered: boolean;
+}
+
+export interface DiscussionSearchResultNode {
+  viewerSubscription: ViewerSubscription;
+  title: string;
+  url: string;
+  comments: {
+    nodes: DiscussionCommentNode[];
   };
 }
 
-export interface DiscussionSearchResultEdge {
-  node: {
-    viewerSubscription: ViewerSubscription;
-    title: string;
-    url: string;
-    comments: {
-      edges: DiscussionCommentEdge[];
-    };
+export interface DiscussionCommentNode {
+  databaseId: string | number;
+  createdAt: string;
+  replies: {
+    nodes: DiscussionSubcommentNode[];
   };
 }
 
-export interface DiscussionCommentEdge {
-  node: {
-    databaseId: string | number;
-    createdAt: string;
-    replies: {
-      edges: DiscussionSubcommentEdge[];
-    };
-  };
-}
-
-export interface DiscussionSubcommentEdge {
-  node: {
-    databaseId: string | number;
-    createdAt: string;
-  };
+export interface DiscussionSubcommentNode {
+  databaseId: string | number;
+  createdAt: string;
 }
 
 export interface CheckSuiteAttributes {
