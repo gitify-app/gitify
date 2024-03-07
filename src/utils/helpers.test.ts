@@ -310,6 +310,75 @@ describe('utils/helpers.ts', () => {
       );
     });
 
+    describe('Workflow Run URLs', () => {
+      it('approval requested', async () => {
+        const subject = {
+          title: 'some-user requested your review to deploy to an environment',
+          url: null,
+          latest_comment_url: null,
+          type: 'WorkflowRun' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/actions?query=is%3Awaiting&${mockedNotificationReferrer}`,
+        );
+      });
+
+      it('unhandled status/action scenario', async () => {
+        const subject = {
+          title:
+            'some-user requested your unhandled-action to deploy to an environment',
+          url: null,
+          latest_comment_url: null,
+          type: 'WorkflowRun' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+        );
+      });
+
+      it('unhandled workflow scenario', async () => {
+        const subject = {
+          title: 'some unhandled scenario',
+          url: null,
+          latest_comment_url: null,
+          type: 'WorkflowRun' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+        );
+      });
+    });
+
     it('defaults to repository url', async () => {
       const subject = {
         title: 'generate github web url unit tests',

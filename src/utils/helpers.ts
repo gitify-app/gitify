@@ -8,6 +8,7 @@ import {
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
 import { Constants } from './constants';
+import { getWorkflowRunAttributes } from './state';
 
 export function getEnterpriseAccountToken(
   hostname: string,
@@ -68,6 +69,23 @@ export async function getHtmlUrl(url: string, token: string): Promise<string> {
   const response = await apiRequestAuth(url, 'GET', token);
 
   return response.data.html_url;
+}
+
+export function getWorkflowRunUrl(notification: Notification) {
+  let url = `${notification.repository.html_url}/actions`;
+  let filters = [];
+
+  const workflowRunAttributes = getWorkflowRunAttributes(notification);
+
+  if (workflowRunAttributes?.status) {
+    filters.push(`is:${workflowRunAttributes.status}`);
+  }
+
+  if (filters.length > 0) {
+    url += `?query=${filters.join('+')}`;
+  }
+
+  return url;
 }
 
 async function getDiscussionUrl(
@@ -166,6 +184,9 @@ export async function generateGitHubWebUrl(
         break;
       case 'RepositoryInvitation':
         url = `${notification.repository.html_url}/invitations`;
+        break;
+      case 'WorkflowRun':
+        url = getWorkflowRunUrl(notification);
         break;
       default:
         url = notification.repository.html_url;
