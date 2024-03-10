@@ -69,7 +69,7 @@ export function formatSearchQueryString(
 }
 
 export async function getHtmlUrl(url: string, token: string): Promise<string> {
-  const response: PullRequest | Issue | IssueComments = (
+  const response: Issue | IssueComments | PullRequest = (
     await apiRequestAuth(url, 'GET', token)
   ).data;
 
