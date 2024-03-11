@@ -45,7 +45,7 @@ const Config: ForgeConfig = {
         config: rendererConfig,
         entryPoints: [
           {
-            name: 'Gitify',
+            name: 'main_window',
             html: './src/renderer/index.html',
             js: './src/renderer/renderer.js',
           },

@@ -17,6 +17,8 @@ const browserWindowOpts = {
   minHeight: 400,
   resizable: false,
   webPreferences: {
+    // eslint-disable-next-line no-undef
+    preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
     enableRemoteModule: true,
     overlayScrollbars: true,
     nodeIntegration: true,
@@ -28,9 +30,14 @@ app.on('ready', async () => {
   await onFirstRunMaybe();
 });
 
+// eslint-disable-next-line no-undef
+const test = MAIN_WINDOW_WEBPACK_ENTRY;
+console.log('test', test);
+
 const menubarApp = menubar({
   icon: iconIdle,
-  index: `file://${__dirname}/index.html`,
+  // eslint-disable-next-line no-undef
+  index: MAIN_WINDOW_WEBPACK_ENTRY,
   browserWindow: browserWindowOpts,
   preloadWindow: true,
   showDockIcon: false,
