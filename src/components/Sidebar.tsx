@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
-import { IconCog } from '../icons/Cog';
+import { GearIcon } from '@primer/octicons-react';
 import { IconQuit } from '../icons/Quit';
 import { IconRefresh } from '../icons/Refresh';
 import { Constants } from '../utils/constants';
@@ -86,7 +86,7 @@ export const Sidebar: React.FC = () => {
               }}
               aria-label="Settings"
             >
-              <IconCog className="w-4 h-4" />
+              <GearIcon size={18} />
             </button>
           </>
         )}
