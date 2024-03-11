@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import { FieldCheckbox } from '../components/fields/Checkbox';
 import { FieldRadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
-import { IconAddAccount } from '../icons/AddAccount';
+import { PersonAddIcon } from '@primer/octicons-react';
 import { IconLogOut } from '../icons/Logout';
 import { IconQuit } from '../icons/Quit';
 import { Appearance } from '../types';
@@ -168,7 +168,7 @@ export const SettingsRoute: React.FC = () => {
             aria-label="Login with GitHub Enterprise"
             onClick={goToEnterprise}
           >
-            <IconAddAccount className="w-5 h-5" />
+            <PersonAddIcon size={24} />
           </button>
 
           <button
