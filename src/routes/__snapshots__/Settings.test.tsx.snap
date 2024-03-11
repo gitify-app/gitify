@@ -323,28 +323,18 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
       >
         <svg
           aria-hidden="true"
-          aria-labelledby="iconLogoutId"
-          class="w-5 h-5"
+          class="octicon octicon-sign-out"
+          fill="currentColor"
+          focusable="false"
+          height="24"
           role="img"
-          viewBox="0 0 512 512"
-          xmlns="http://www.w3.org/2000/svg"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          viewBox="0 0 24 24"
+          width="24"
         >
-          <title
-            id="iconLogoutId"
-          >
-            Logout from all accounts
-          </title>
-          <g>
-            <path
-              d="M180 448H96a96 96 0 01-96-96V160a96 96 0 0196-96h84a12 12 0 0112 12v40a12 12 0 01-12 12H96a32 32 0 00-32 32v192a32 32 0 0032 32h84a12 12 0 0112 12v40a12 12 0 01-12 12z"
-              fill="currentColor"
-              opacity="0.4"
-            />
-            <path
-              d="M353 88.3l151.9 150.6a24 24 0 010 34.1l-152 150.8a24.08 24.08 0 01-33.9-.1l-21.9-21.9a24.07 24.07 0 01.8-34.7l77.6-71.1H184a23.94 23.94 0 01-24-24v-32a23.94 23.94 0 0124-24h191.5l-77.6-71.1a24 24 0 01-.7-34.6l21.9-21.9a24 24 0 0133.9-.1z"
-              fill="currentColor"
-            />
-          </g>
+          <path
+            d="M3 3.25c0-.966.784-1.75 1.75-1.75h5.5a.75.75 0 0 1 0 1.5h-5.5a.25.25 0 0 0-.25.25v17.5c0 .138.112.25.25.25h5.5a.75.75 0 0 1 0 1.5h-5.5A1.75 1.75 0 0 1 3 20.75Zm16.006 9.5H10.75a.75.75 0 0 1 0-1.5h8.256l-3.3-3.484a.75.75 0 0 1 1.088-1.032l4.5 4.75a.75.75 0 0 1 0 1.032l-4.5 4.75a.75.75 0 0 1-1.088-1.032Z"
+          />
         </svg>
       </button>
       <button
