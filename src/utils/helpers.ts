@@ -2,12 +2,16 @@ import { EnterpriseAccount, AuthState } from '../types';
 import {
   Notification,
   GraphQLSearch,
-  DiscussionCommentEdge,
-  DiscussionSearchResultEdge,
+  DiscussionCommentNode,
+  DiscussionSearchResultNode,
+  PullRequest,
+  Issue,
+  IssueComments,
 } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
 import { Constants } from './constants';
+import { getWorkflowRunAttributes, getCheckSuiteAttributes } from './state';
 
 export function getEnterpriseAccountToken(
   hostname: string,
@@ -65,9 +69,55 @@ export function formatSearchQueryString(
 }
 
 export async function getHtmlUrl(url: string, token: string): Promise<string> {
-  const response = await apiRequestAuth(url, 'GET', token);
+  const response: Issue | IssueComments | PullRequest = (
+    await apiRequestAuth(url, 'GET', token)
+  ).data;
 
-  return response.data.html_url;
+  return response.html_url;
+}
+
+export function getCheckSuiteUrl(notification: Notification) {
+  let url = `${notification.repository.html_url}/actions`;
+  let filters = [];
+
+  const checkSuiteAttributes = getCheckSuiteAttributes(notification);
+
+  if (checkSuiteAttributes?.workflowName) {
+    filters.push(
+      `workflow:"${checkSuiteAttributes.workflowName.replaceAll(' ', '+')}"`,
+    );
+  }
+
+  if (checkSuiteAttributes?.status) {
+    filters.push(`is:${checkSuiteAttributes.status}`);
+  }
+
+  if (checkSuiteAttributes?.branchName) {
+    filters.push(`branch:${checkSuiteAttributes.branchName}`);
+  }
+
+  if (filters.length > 0) {
+    url += `?query=${filters.join('+')}`;
+  }
+
+  return url;
+}
+
+export function getWorkflowRunUrl(notification: Notification) {
+  let url = `${notification.repository.html_url}/actions`;
+  let filters = [];
+
+  const workflowRunAttributes = getWorkflowRunAttributes(notification);
+
+  if (workflowRunAttributes?.status) {
+    filters.push(`is:${workflowRunAttributes.status}`);
+  }
+
+  if (filters.length > 0) {
+    url += `?query=${filters.join('+')}`;
+  }
+
+  return url;
 }
 
 async function getDiscussionUrl(
@@ -76,55 +126,52 @@ async function getDiscussionUrl(
 ): Promise<string> {
   let url = `${notification.repository.html_url}/discussions`;
 
-  const response: GraphQLSearch<DiscussionSearchResultEdge> =
+  const response: GraphQLSearch<DiscussionSearchResultNode> =
     await apiRequestAuth(`https://api.github.com/graphql`, 'POST', token, {
       query: `{
-      search(query:"${formatSearchQueryString(
-        notification.repository.full_name,
-        notification.subject.title,
-        notification.updated_at,
-      )}", type: DISCUSSION, first: 10) {
-          edges {
-              node {
-                  ... on Discussion {
-                      viewerSubscription
-                      title
-                      url
-                      comments(last: 100) {
-                        edges {
-                          node {
-                            databaseId
-                            createdAt
-                            replies(last: 1) {
-                              edges {
-                                node {
-                                  databaseId
-                                  createdAt
-                                }
-                              }
-                            }
-                          }
-                        }
-                      }
+        search(query:"${formatSearchQueryString(
+          notification.repository.full_name,
+          notification.subject.title,
+          notification.updated_at,
+        )}", type: DISCUSSION, first: 10) {
+          nodes {
+            ... on Discussion {
+              viewerSubscription
+              title
+              url
+              comments(last: 100) {
+                nodes {
+                  databaseId
+                  createdAt
+                  replies(last: 1) {
+                    nodes {
+                      databaseId
+                      createdAt
+                    }
                   }
+                }
               }
+            }
           }
-      }
-    }`,
+        }
+      }`,
     });
-  let edges =
-    response?.data?.data?.search?.edges?.filter(
-      (edge) => edge.node.title === notification.subject.title,
+
+  let discussions =
+    response?.data?.data?.search?.nodes?.filter(
+      (discussion) => discussion.title === notification.subject.title,
     ) || [];
-  if (edges.length > 1)
-    edges = edges.filter(
-      (edge) => edge.node.viewerSubscription === 'SUBSCRIBED',
+
+  if (discussions.length > 1)
+    discussions = discussions.filter(
+      (discussion) => discussion.viewerSubscription === 'SUBSCRIBED',
     );
 
-  if (edges[0]) {
-    url = edges[0].node.url;
+  if (discussions[0]) {
+    const discussion = discussions[0];
+    url = discussion.url;
 
-    let comments = edges[0]?.node.comments.edges;
+    let comments = discussion.comments.nodes;
 
     let latestCommentId: string | number;
     if (comments?.length) {
@@ -137,13 +184,12 @@ async function getDiscussionUrl(
 }
 
 export const getLatestDiscussionCommentId = (
-  comments: DiscussionCommentEdge[],
+  comments: DiscussionCommentNode[],
 ) =>
   comments
-    .flatMap((comment) => comment.node.replies.edges)
+    .flatMap((comment) => comment.replies.nodes)
     .concat([comments.at(-1)])
-    .reduce((a, b) => (a.node.createdAt > b.node.createdAt ? a : b))?.node
-    .databaseId;
+    .reduce((a, b) => (a.createdAt > b.createdAt ? a : b))?.databaseId;
 
 export async function generateGitHubWebUrl(
   notification: Notification,
@@ -161,11 +207,17 @@ export async function generateGitHubWebUrl(
   } else {
     // Perform any specific notification type handling (only required for a few special notification scenarios)
     switch (notification.subject.type) {
+      case 'CheckSuite':
+        url = getCheckSuiteUrl(notification);
+        break;
       case 'Discussion':
         url = await getDiscussionUrl(notification, accounts.token);
         break;
       case 'RepositoryInvitation':
         url = `${notification.repository.html_url}/invitations`;
+        break;
+      case 'WorkflowRun':
+        url = getWorkflowRunUrl(notification);
         break;
       default:
         url = notification.repository.html_url;

@@ -1,5 +1,13 @@
 import { Appearance } from '../types';
 
+export function getAppearance(): Appearance {
+  if (document.querySelector('html').classList.contains('dark')) {
+    return Appearance.DARK;
+  }
+
+  return Appearance.LIGHT;
+}
+
 export const setLightMode = () =>
   document.querySelector('html').classList.remove('dark');
 

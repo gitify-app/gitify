@@ -165,51 +165,116 @@ export interface Subject {
   type: SubjectType;
 }
 
+export interface PullRequest {
+  url: string;
+  id: number;
+  node_id: string;
+  html_url: string;
+  diff_url: string;
+  patch_url: string;
+  issue_url: string;
+  number: number;
+  state: PullRequestStateType;
+  locked: boolean;
+  title: string;
+  user: User;
+  body: string;
+  created_at: string;
+  updated_at: string;
+  closed_at: string | null;
+  merged_at: string | null;
+  merge_commit_sha: string | null;
+  draft: boolean;
+  commits_url: string;
+  review_comments_url: string;
+  review_comment_url: string;
+  comments_url: string;
+  statuses_url: string;
+  author_association: string;
+  merged: boolean;
+  mergeable: boolean;
+  rebaseable: boolean;
+  comments: number;
+  review_comments: number;
+  maintainer_can_modify: boolean;
+  commits: number;
+  additions: number;
+  deletions: number;
+  changed_files: number;
+}
+
+export interface Issue {
+  url: string;
+  repository_url: string;
+  labels_url: string;
+  comments_url: string;
+  events_url: string;
+  html_url: string;
+  id: number;
+  node_id: string;
+  number: number;
+  title: string;
+  user: User;
+  state: IssueStateType;
+  locked: boolean;
+  comments: number;
+  created_at: string;
+  updated_at: string;
+  closed_at: string | null;
+  author_association: string;
+  body: string;
+  state_reason: IssueStateReasonType | null;
+}
+
+export interface IssueComments {
+  url: string;
+  html_url: string;
+  issue_url: string;
+  id: number;
+  node_id: string;
+  user: User;
+  created_at: string;
+  updated_at: string;
+  body: string;
+}
+
 export interface GraphQLSearch<T> {
   data: {
     data: {
       search: {
-        edges: T[];
+        nodes: T[];
       };
     };
   };
 }
 
-export interface DiscussionStateSearchResultEdge {
-  node: {
-    viewerSubscription: ViewerSubscription;
-    title: string;
-    stateReason: DiscussionStateType;
-    isAnswered: boolean;
+export interface DiscussionStateSearchResultNode {
+  viewerSubscription: ViewerSubscription;
+  title: string;
+  stateReason: DiscussionStateType;
+  isAnswered: boolean;
+}
+
+export interface DiscussionSearchResultNode {
+  viewerSubscription: ViewerSubscription;
+  title: string;
+  url: string;
+  comments: {
+    nodes: DiscussionCommentNode[];
   };
 }
 
-export interface DiscussionSearchResultEdge {
-  node: {
-    viewerSubscription: ViewerSubscription;
-    title: string;
-    url: string;
-    comments: {
-      edges: DiscussionCommentEdge[];
-    };
+export interface DiscussionCommentNode {
+  databaseId: string | number;
+  createdAt: string;
+  replies: {
+    nodes: DiscussionSubcommentNode[];
   };
 }
 
-export interface DiscussionCommentEdge {
-  node: {
-    databaseId: string | number;
-    createdAt: string;
-    replies: {
-      edges: DiscussionSubcommentEdge[];
-    };
-  };
-}
-
-export interface DiscussionSubcommentEdge {
-  node: {
-    databaseId: string | number;
-    createdAt: string;
-  };
+export interface DiscussionSubcommentNode {
+  databaseId: string | number;
+  createdAt: string;
 }
 
 export interface CheckSuiteAttributes {
