@@ -1,4 +1,4 @@
-import { BellIcon } from '@primer/octicons-react';
+import { BellIcon, SyncIcon } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
 import React, { useCallback, useContext, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -7,7 +7,6 @@ import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
 import { IconCog } from '../icons/Cog';
 import { IconQuit } from '../icons/Quit';
-import { IconRefresh } from '../icons/Refresh';
 import { Constants } from '../utils/constants';
 import { openExternalLink } from '../utils/comms';
 
@@ -72,7 +71,7 @@ export const Sidebar: React.FC = () => {
               }}
               aria-label="Refresh Notifications"
             >
-              <IconRefresh className="w-3.5 h-3.5" />
+              <SyncIcon size={18} />
             </button>
 
             <button

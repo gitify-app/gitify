@@ -20,7 +20,6 @@ import {
   RocketIcon,
   SkipIcon,
   StopIcon,
-  SyncIcon,
   TagIcon,
   XIcon,
 } from '@primer/octicons-react';
@@ -104,7 +103,7 @@ export function getNotificationTypeIcon(
         case 'success':
           return CheckIcon;
         default:
-          return SyncIcon;
+          return RocketIcon;
       }
     case 'Commit':
       return GitCommitIcon;
