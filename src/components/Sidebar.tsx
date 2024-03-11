@@ -64,13 +64,16 @@ export const Sidebar: React.FC = () => {
 
         <div className="flex items-center">
           <div
-            className="flex items-center cursor-pointer text-white"
+            className={`flex items-center cursor-pointer text-white ${dropdownOpen ? 'z-20' : ''}`}
             onClick={() => setDropdownOpen(!dropdownOpen)}
           >
             <FilterIcon size={12} />
           </div>
           {dropdownOpen && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center">
+            <div
+              className="fixed inset-0 z-10 flex items-center justify-center"
+              onClick={() => setDropdownOpen(false)}
+            >
               <div className="absolute top-28 left-0 w-28 border border-gray-300 rounded shadow-md ">
                 <button
                   onClick={() => {

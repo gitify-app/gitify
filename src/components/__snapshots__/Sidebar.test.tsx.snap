@@ -85,7 +85,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
       className="flex items-center"
     >
       <div
-        className="flex items-center cursor-pointer text-white"
+        className="flex items-center cursor-pointer text-white "
         onClick={[Function]}
       >
         <svg
@@ -236,7 +236,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
       className="flex items-center"
     >
       <div
-        className="flex items-center cursor-pointer text-white"
+        className="flex items-center cursor-pointer text-white "
         onClick={[Function]}
       >
         <svg
