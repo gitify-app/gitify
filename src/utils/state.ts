@@ -5,8 +5,11 @@ import {
   DiscussionStateSearchResultNode,
   DiscussionStateType,
   GraphQLSearch,
+  Issue,
+  IssueStateReasonType,
   IssueStateType,
   Notification,
+  PullRequest,
   PullRequestStateType,
   StateType,
   WorkflowRunAttributes,
@@ -129,9 +132,10 @@ export async function getDiscussionState(
 export async function getIssueState(
   notification: Notification,
   token: string,
-): Promise<IssueStateType> {
-  const issue = (await apiRequestAuth(notification.subject.url, 'GET', token))
-    .data;
+): Promise<IssueStateType | IssueStateReasonType> {
+  const issue: Issue = (
+    await apiRequestAuth(notification.subject.url, 'GET', token)
+  ).data;
 
   return issue.state_reason ?? issue.state;
 }
@@ -140,8 +144,9 @@ export async function getPullRequestState(
   notification: Notification,
   token: string,
 ): Promise<PullRequestStateType> {
-  const pr = (await apiRequestAuth(notification.subject.url, 'GET', token))
-    .data;
+  const pr: PullRequest = (
+    await apiRequestAuth(notification.subject.url, 'GET', token)
+  ).data;
 
   if (pr.merged) {
     return 'merged';

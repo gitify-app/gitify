@@ -4,6 +4,9 @@ import {
   GraphQLSearch,
   DiscussionCommentNode,
   DiscussionSearchResultNode,
+  PullRequest,
+  Issue,
+  IssueComments,
 } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
@@ -66,9 +69,11 @@ export function formatSearchQueryString(
 }
 
 export async function getHtmlUrl(url: string, token: string): Promise<string> {
-  const response = await apiRequestAuth(url, 'GET', token);
+  const response: Issue | IssueComments | PullRequest = (
+    await apiRequestAuth(url, 'GET', token)
+  ).data;
 
-  return response.data.html_url;
+  return response.html_url;
 }
 
 export function getCheckSuiteUrl(notification: Notification) {
