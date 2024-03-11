@@ -1,11 +1,10 @@
-import { BellIcon } from '@primer/octicons-react';
+import { BellIcon, GearIcon } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
 import React, { useCallback, useContext, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
-import { GearIcon } from '@primer/octicons-react';
 import { IconQuit } from '../icons/Quit';
 import { IconRefresh } from '../icons/Refresh';
 import { Constants } from '../utils/constants';
