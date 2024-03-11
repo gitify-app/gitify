@@ -85,7 +85,7 @@ export const Sidebar: React.FC = () => {
               }}
               aria-label="Settings"
             >
-              <GearIcon size={18} />
+              <GearIcon size={16} />
             </button>
           </>
         )}
