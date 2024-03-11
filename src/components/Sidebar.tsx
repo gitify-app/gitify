@@ -71,7 +71,7 @@ export const Sidebar: React.FC = () => {
               }}
               aria-label="Refresh Notifications"
             >
-              <SyncIcon size={18} />
+              <SyncIcon size={16} />
             </button>
 
             <button
