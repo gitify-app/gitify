@@ -4,6 +4,9 @@ import {
   GraphQLSearch,
   DiscussionCommentNode,
   DiscussionSearchResultNode,
+  PullRequest,
+  Issue,
+  IssueComments,
 } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
@@ -66,9 +69,11 @@ export function formatSearchQueryString(
 }
 
 export async function getHtmlUrl(url: string, token: string): Promise<string> {
-  const response = await apiRequestAuth(url, 'GET', token);
+  const response: Issue | IssueComments | PullRequest = (
+    await apiRequestAuth(url, 'GET', token)
+  ).data;
 
-  return response.data.html_url;
+  return response.html_url;
 }
 
 export function getCheckSuiteUrl(notification: Notification) {
@@ -256,6 +261,21 @@ export async function generateGitHubWebUrl(
   url = addNotificationReferrerIdToUrl(url, notification.id, accounts.user?.id);
 
   return url;
+}
+
+export function formatForDisplay(text: string[]) {
+  if (!text) {
+    return '';
+  }
+
+  return text
+    .join(' ')
+    .replace(/([a-z])([A-Z])/g, '$1 $2') // Add space between lowercase character followed by an uppercase character
+    .replace(/_/g, ' ') // Replace underscores with spaces
+    .replace(/\w+/g, (word) => {
+      // Convert to proper case (capitalize first letter of each word)
+      return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+    });
 }
 
 export async function openInBrowser(
