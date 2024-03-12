@@ -7,7 +7,7 @@ import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
 } from '../utils/github-api';
-import { openInBrowser } from '../utils/helpers';
+import { formatForDisplay, openInBrowser } from '../utils/helpers';
 import { Notification } from '../typesGithub';
 import { AppContext } from '../context/App';
 
@@ -62,10 +62,17 @@ export const NotificationRow: React.FC<IProps> = ({
   const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
     addSuffix: true,
   });
+  const notificationTitle = formatForDisplay([
+    notification.subject.state,
+    notification.subject.type,
+  ]);
 
   return (
-    <div className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker">
-      <div className={`flex justify-center items-center w-5 ${realIconColor}`}>
+    <div className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group">
+      <div
+        className={`flex justify-center items-center w-5 ${realIconColor}`}
+        title={notificationTitle}
+      >
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
 
@@ -89,7 +96,7 @@ export const NotificationRow: React.FC<IProps> = ({
         </div>
       </div>
 
-      <div className="flex justify-center items-center gap-2">
+      <div className="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity">
         <button
           className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Done"
