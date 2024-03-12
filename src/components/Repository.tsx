@@ -40,13 +40,13 @@ export const RepositoryNotifications: React.FC<IProps> = ({
 
   return (
     <>
-      <div className="flex py-2 px-3 bg-gray-100 dark:bg-gray-darker dark:text-white">
+      <div className="flex py-2 px-3 bg-gray-100 dark:bg-gray-darker dark:text-white group">
         <div className="flex flex-1 space-x-3 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap">
           <img className="rounded w-5 h-5" src={avatarUrl} />
           <span onClick={openBrowser}>{repoName}</span>
         </div>
 
-        <div className="flex justify-center items-center gap-2">
+        <div className="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity">
           <button
             className="focus:outline-none h-full hover:text-green-500"
             title="Mark Repository as Done"
