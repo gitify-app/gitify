@@ -256,14 +256,12 @@ describe('hooks/useNotifications.ts', () => {
           .reply(200, {
             data: {
               search: {
-                edges: [
+                nodes: [
                   {
-                    node: {
-                      title: 'This is an answered discussion',
-                      viewerSubscription: 'SUBSCRIBED',
-                      stateReason: null,
-                      isAnswered: true,
-                    },
+                    title: 'This is an answered discussion',
+                    viewerSubscription: 'SUBSCRIBED',
+                    stateReason: null,
+                    isAnswered: true,
                   },
                 ],
               },

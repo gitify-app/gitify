@@ -148,7 +148,7 @@ export async function fetchDiscussion(
   notification: Notification,
   token: string,
   includeComments: boolean,
-): Promise<DiscussionSearchResultNode> {
+): Promise<DiscussionSearchResultNode | null> {
   const response: GraphQLSearch<DiscussionSearchResultNode> =
     await apiRequestAuth(`https://api.github.com/graphql`, 'POST', token, {
       query: `query fetchDiscussions(
@@ -199,7 +199,7 @@ export async function fetchDiscussion(
     });
 
   let discussions =
-    response?.data?.data?.search?.nodes?.filter(
+    response?.data?.data.search.nodes.filter(
       (discussion) => discussion.title === notification.subject.title,
     ) || [];
 
@@ -208,11 +208,7 @@ export async function fetchDiscussion(
       (discussion) => discussion.viewerSubscription === 'SUBSCRIBED',
     );
 
-  if (discussions[0]) {
-    return discussions[0];
-  }
-
-  return null;
+  return discussions[0];
 }
 
 export function getLatestDiscussionCommentId(
