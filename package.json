@@ -122,9 +122,9 @@
     "@electron/notarize": "2.3.0",
     "@testing-library/react": "14.2.1",
     "@types/jest": "29.5.12",
-    "@types/node": "20.11.25",
+    "@types/node": "20.11.26",
     "@types/nprogress": "0.2.3",
-    "@types/react": "18.2.64",
+    "@types/react": "18.2.65",
     "@types/react-router-dom": "5.3.3",
     "@types/react-test-renderer": "18.0.7",
     "@types/react-transition-group": "4.4.10",
@@ -151,5 +151,10 @@
   "packageManager": "pnpm@8.15.4",
   "lint-staged": {
     "*.{md,js,ts,tsx}": "prettier --write"
+  },
+  "pnpm": {
+    "overrides": {
+      "@babel/traverse@<7.23.2": ">=7.23.2"
+    }
   }
 }
