@@ -1,4 +1,4 @@
-import { BellIcon, FilterIcon } from '@primer/octicons-react';
+import { BellIcon, CheckIcon, FilterIcon } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -74,14 +74,17 @@ export const Sidebar: React.FC = () => {
               className="fixed inset-0 z-10 flex items-center justify-center"
               onClick={() => setDropdownOpen(false)}
             >
-              <div className="absolute top-28 left-0 w-28 border border-gray-300 rounded shadow-md ">
+              <div className="absolute top-28 left-0 w-28 border border-gray-300 rounded shadow-md bg-[#161b22]">
                 <button
                   onClick={() => {
                     groupBy.setGroupType('repository');
                     setDropdownOpen(false);
                   }}
-                  className="w-full px-4 py-2 bg-[#161b22] text-white dark:hover:bg-gray-darker rounded text-sm"
+                  className="w-full px-2 py-2 bg-[#161b22] text-white dark:hover:bg-gray-darker rounded text-sm flex justify-center items-center"
                 >
+                  {groupBy?.groupType === 'repository' && (
+                    <CheckIcon className="text-white w-4 mr-2" />
+                  )}
                   Repository
                 </button>
                 <button
@@ -89,8 +92,11 @@ export const Sidebar: React.FC = () => {
                     groupBy.setGroupType('date');
                     setDropdownOpen(false);
                   }}
-                  className="w-full px-4 py-2 bg-[#161b22] text-white dark:hover:bg-gray-darker rounded text-sm"
+                  className="w-full px-2 py-2 bg-[#161b22] text-white dark:hover:bg-gray-darker rounded text-sm flex justify-center items-center"
                 >
+                  {groupBy?.groupType === 'date' && (
+                    <CheckIcon className="text-white w-4 mr-2" />
+                  )}
                   Date
                 </button>
               </div>

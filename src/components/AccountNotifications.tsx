@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
 
 import { Notification } from '../typesGithub';
 import { RepositoryNotifications } from './Repository';
+import { AppContext } from '../context/App';
 
 interface IProps {
   hostname: string;
@@ -12,6 +13,18 @@ interface IProps {
 
 export const AccountNotifications = (props: IProps) => {
   const { hostname, showAccountHostname, notifications } = props;
+
+  const { groupBy } = useContext(AppContext);
+
+  const sortByDate = (notifications: Notification[][]): Notification[][] => {
+    // Create a copy of the notifications array before sorting
+    const sortedNotifications = [...notifications];
+    return sortedNotifications.sort((a, b) => {
+      const dateA = new Date(a[0].updated_at).getTime();
+      const dateB = new Date(b[0].updated_at).getTime();
+      return dateB - dateA;
+    });
+  };
 
   const groupedNotifications = Object.values(
     notifications.reduce(
@@ -25,6 +38,22 @@ export const AccountNotifications = (props: IProps) => {
     ),
   );
 
+  const [sortedNotifications, setSortedNotifications] =
+    useState<Notification[][]>(groupedNotifications);
+
+  // Function to sort notifications based on the selected grouping type
+  const sortNotifications = () => {
+    const newSortedNotifications =
+      groupBy?.groupType === 'date'
+        ? sortByDate(groupedNotifications)
+        : groupedNotifications;
+    setSortedNotifications(newSortedNotifications);
+  };
+
+  useEffect(() => {
+    sortNotifications();
+  }, [groupBy?.groupType]); // Run the effect when groupBy.groupType changes
+
   const Chevron = notifications.length > 0 ? ChevronDownIcon : ChevronLeftIcon;
 
   return (
@@ -37,7 +66,7 @@ export const AccountNotifications = (props: IProps) => {
         </div>
       )}
 
-      {Object.values(groupedNotifications).map((repoNotifications) => {
+      {sortedNotifications.map((repoNotifications) => {
         const repoSlug = repoNotifications[0].repository.full_name;
         return (
           <RepositoryNotifications
