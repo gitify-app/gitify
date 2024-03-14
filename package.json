@@ -151,5 +151,10 @@
   "packageManager": "pnpm@8.15.4",
   "lint-staged": {
     "*.{md,js,ts,tsx}": "prettier --write"
+  },
+  "pnpm": {
+    "overrides": {
+      "@babel/traverse@<7.23.2": ">=7.23.2"
+    }
   }
 }
