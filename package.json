@@ -104,7 +104,7 @@
   "dependencies": {
     "@electron/remote": "2.1.2",
     "@primer/octicons-react": "19.8.0",
-    "axios": "1.6.7",
+    "axios": "1.6.8",
     "date-fns": "3.5.0",
     "electron-updater": "6.1.8",
     "final-form": "4.20.10",
