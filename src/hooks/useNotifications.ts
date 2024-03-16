@@ -65,7 +65,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings) => {
       const isGitHubLoggedIn = accounts.token !== null;
-      const endpointSuffix = `notifications?participating=${settings.participating}`;
+      const endpointSuffix = `notifications?all=${settings.allNotifications}&participating=${settings.participating}`;
 
       function getGitHubNotifications() {
         if (!isGitHubLoggedIn) {

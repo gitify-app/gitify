@@ -1,4 +1,4 @@
-import { BellIcon } from '@primer/octicons-react';
+import { BellIcon, ReadIcon, UnreadIcon } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
 import React, { useCallback, useContext, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -15,7 +15,7 @@ export const Sidebar: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { isLoggedIn } = useContext(AppContext);
+  const { isLoggedIn, settings, updateSetting } = useContext(AppContext);
   const { notifications, fetchNotifications } = useContext(AppContext);
 
   const onOpenBrowser = useCallback(() => {
@@ -58,6 +58,30 @@ export const Sidebar: React.FC = () => {
         >
           <BellIcon size={12} />
           {notificationsCount > 0 && notificationsCount}
+        </div>
+
+        <div className="flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer">
+          <div
+            className={`${settings.allNotifications ? 'text-white' : 'text-green-500'}`}
+            title="Show Unread Notifications"
+            onClick={() => {
+              updateSetting('allNotifications', false);
+              navigate('/', { replace: true });
+            }}
+          >
+            <UnreadIcon size={12} />
+          </div>
+          <div>&nbsp;&nbsp;</div>
+          <div
+            className={`${settings.allNotifications ? 'text-green-500' : 'text-white'}`}
+            title="Show All Notifications"
+            onClick={() => {
+              updateSetting('allNotifications', true);
+              navigate('/', { replace: true });
+            }}
+          >
+            <ReadIcon size={12} />
+          </div>
         </div>
       </div>
 

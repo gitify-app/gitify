@@ -31,6 +31,7 @@ const defaultAccounts: AuthState = {
 };
 
 export const defaultSettings: SettingsState = {
+  allNotifications: false,
   participating: false,
   playSound: true,
   showNotifications: true,
@@ -54,6 +55,7 @@ interface AppContextState {
   removeNotificationFromState: (id: string, hostname: string) => void;
   fetchNotifications: () => Promise<void>;
   markNotification: (id: string, hostname: string) => Promise<void>;
+  markUnreadNotification: (id: string, hostname: string) => Promise<void>;
   markNotificationDone: (id: string, hostname: string) => Promise<void>;
   unsubscribeNotification: (id: string, hostname: string) => Promise<void>;
   markRepoNotifications: (id: string, hostname: string) => Promise<void>;
@@ -75,6 +77,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     isFetching,
     removeNotificationFromState,
     markNotification,
+    markUnreadNotification,
     markNotificationDone,
     unsubscribeNotification,
     markRepoNotifications,
@@ -91,7 +94,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     fetchNotifications(accounts, settings);
-  }, [settings.participating]);
+  }, [settings.participating, settings.allNotifications]);
 
   useEffect(() => {
     fetchNotifications(accounts, settings);
@@ -183,6 +186,12 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     [accounts, notifications],
   );
 
+  const markUnreadNotificationWithAccounts = useCallback(
+    async (id: string, hostname: string) =>
+      await markUnreadNotification(accounts, id, hostname),
+    [accounts, notifications],
+  );
+
   const markNotificationDoneWithAccounts = useCallback(
     async (id: string, hostname: string) =>
       await markNotificationDone(accounts, id, hostname),
@@ -223,6 +232,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         removeNotificationFromState,
         fetchNotifications: fetchNotificationsWithAccounts,
         markNotification: markNotificationWithAccounts,
+        markUnreadNotification: markUnreadNotificationWithAccounts,
         markNotificationDone: markNotificationDoneWithAccounts,
         unsubscribeNotification: unsubscribeNotificationWithAccounts,
         markRepoNotifications: markRepoNotificationsWithAccounts,
