@@ -81,15 +81,6 @@ export const NotificationRow: React.FC<IProps> = ({
         title={notificationTitle}
       >
         <NotificationIcon size={18} aria-label={notification.subject.type} />
-        {notification.unread ? (
-          <DotFillIcon
-            className="focus:outline-none h-full text-blue-500"
-            size={14}
-            aria-label="Unread"
-          />
-        ) : (
-          <div className="w-[14px]" />
-        )}
       </div>
 
       <div
