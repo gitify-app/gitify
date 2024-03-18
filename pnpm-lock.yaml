@@ -18,8 +18,8 @@ dependencies:
     specifier: 1.6.8
     version: 1.6.8
   date-fns:
-    specifier: 3.5.0
-    version: 3.5.0
+    specifier: 3.6.0
+    version: 3.6.0
   electron-updater:
     specifier: 6.1.8
     version: 6.1.8
@@ -2295,8 +2295,8 @@ packages:
       whatwg-url: 11.0.0
     dev: true
 
-  /date-fns@3.5.0:
-    resolution: {integrity: sha512-a+DwyXn7NOfdJireCzAA0B9p7jIXEu/Q9JKCyMYvH6+0vPUNbQceA0neXrdfJ/xzl3mhOh5vibQQ3936Tssm6A==}
+  /date-fns@3.6.0:
+    resolution: {integrity: sha512-fRHTG8g/Gif+kSh50gaGEdToemgfj74aRX3swtiouboip5JDLAyDE9F11nHMIcvOaXeOC6D7SpNhi7uFyB7Uww==}
     dev: false
 
   /debug@4.3.4:
