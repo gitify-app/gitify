@@ -1,6 +1,6 @@
-import { BellIcon } from '@primer/octicons-react';
+import { BellIcon, CheckIcon, FilterIcon } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Logo } from '../components/Logo';
@@ -16,7 +16,9 @@ export const Sidebar: React.FC = () => {
   const location = useLocation();
 
   const { isLoggedIn } = useContext(AppContext);
-  const { notifications, fetchNotifications } = useContext(AppContext);
+  const { notifications, fetchNotifications, groupBy } = useContext(AppContext);
+
+  const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
 
   const onOpenBrowser = useCallback(() => {
     openExternalLink(`https://github.com/${Constants.REPO_SLUG}`);
@@ -61,6 +63,48 @@ export const Sidebar: React.FC = () => {
         >
           <BellIcon size={12} />
           {notificationsCount > 0 && notificationsCount}
+        </div>
+
+        <div className="flex items-center">
+          <div
+            className={`flex items-center cursor-pointer text-white ${dropdownOpen ? 'z-20' : ''}`}
+            onClick={() => setDropdownOpen(!dropdownOpen)}
+          >
+            <FilterIcon size={12} />
+          </div>
+          {dropdownOpen && (
+            <div
+              className="fixed inset-0 z-10 flex items-center justify-center"
+              onClick={() => setDropdownOpen(false)}
+            >
+              <div className="absolute top-28 left-0 w-28 border border-gray-300 rounded shadow-md bg-[#161b22]">
+                <button
+                  onClick={() => {
+                    groupBy.setGroupType('repository');
+                    setDropdownOpen(false);
+                  }}
+                  className="w-full px-2 py-2 bg-[#161b22] text-white dark:hover:bg-gray-darker rounded text-sm flex justify-center items-center"
+                >
+                  {groupBy?.groupType === 'repository' && (
+                    <CheckIcon className="text-white w-4 mr-2" />
+                  )}
+                  Repository
+                </button>
+                <button
+                  onClick={() => {
+                    groupBy.setGroupType('date');
+                    setDropdownOpen(false);
+                  }}
+                  className="w-full px-2 py-2 bg-[#161b22] text-white dark:hover:bg-gray-darker rounded text-sm flex justify-center items-center"
+                >
+                  {groupBy?.groupType === 'date' && (
+                    <CheckIcon className="text-white w-4 mr-2" />
+                  )}
+                  Date
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 

@@ -27,6 +27,7 @@ export const NotificationRow: React.FC<IProps> = ({
     markNotification,
     markNotificationDone,
     unsubscribeNotification,
+    groupBy,
   } = useContext(AppContext);
 
   const pressTitle = useCallback(() => {
@@ -80,6 +81,11 @@ export const NotificationRow: React.FC<IProps> = ({
         onClick={() => pressTitle()}
         role="main"
       >
+        {groupBy?.groupType === 'date' && (
+          <div className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
+            {notification.repository.full_name}
+          </div>
+        )}
         <div className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
           {notification.subject.title}
         </div>
