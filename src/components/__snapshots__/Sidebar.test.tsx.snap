@@ -52,13 +52,14 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         </g>
       </g>
     </svg>
-    <div
-      aria-label="4 Unread Notifications"
+    <button
       className="flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer text-green-500"
       onClick={[Function]}
+      title="4 Unread Notifications"
     >
       <svg
-        aria-hidden="true"
+        aria-hidden="false"
+        aria-label="4 Unread Notifications"
         className="octicon octicon-bell"
         fill="currentColor"
         focusable="false"
@@ -80,7 +81,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         />
       </svg>
       4
-    </div>
+    </button>
   </div>
   <div
     className="py-4 px-3"
@@ -172,13 +173,14 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
         </g>
       </g>
     </svg>
-    <div
-      aria-label="4 Unread Notifications"
+    <button
       className="flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer text-green-500"
       onClick={[Function]}
+      title="4 Unread Notifications"
     >
       <svg
-        aria-hidden="true"
+        aria-hidden="false"
+        aria-label="4 Unread Notifications"
         className="octicon octicon-bell"
         fill="currentColor"
         focusable="false"
@@ -200,7 +202,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
         />
       </svg>
       4
-    </div>
+    </button>
   </div>
   <div
     className="py-4 px-3"
