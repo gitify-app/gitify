@@ -126,54 +126,15 @@ async function getDiscussionUrl(
 ): Promise<string> {
   let url = `${notification.repository.html_url}/discussions`;
 
-  const response: GraphQLSearch<DiscussionSearchResultNode> =
-    await apiRequestAuth(`https://api.github.com/graphql`, 'POST', token, {
-      query: `{
-        search(query:"${formatSearchQueryString(
-          notification.repository.full_name,
-          notification.subject.title,
-          notification.updated_at,
-        )}", type: DISCUSSION, first: 10) {
-          nodes {
-            ... on Discussion {
-              viewerSubscription
-              title
-              url
-              comments(last: 100) {
-                nodes {
-                  databaseId
-                  createdAt
-                  replies(last: 1) {
-                    nodes {
-                      databaseId
-                      createdAt
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }`,
-    });
+  const discussion = await fetchDiscussion(notification, token, true);
 
-  let discussions =
-    response?.data?.data?.search?.nodes?.filter(
-      (discussion) => discussion.title === notification.subject.title,
-    ) || [];
-
-  if (discussions.length > 1)
-    discussions = discussions.filter(
-      (discussion) => discussion.viewerSubscription === 'SUBSCRIBED',
-    );
-
-  if (discussions[0]) {
-    const discussion = discussions[0];
+  if (discussion) {
     url = discussion.url;
 
     let comments = discussion.comments.nodes;
 
     let latestCommentId: string | number;
+
     if (comments?.length) {
       latestCommentId = getLatestDiscussionCommentId(comments);
       url += `#discussioncomment-${latestCommentId}`;
@@ -183,13 +144,81 @@ async function getDiscussionUrl(
   return url;
 }
 
-export const getLatestDiscussionCommentId = (
+export async function fetchDiscussion(
+  notification: Notification,
+  token: string,
+  includeComments: boolean,
+): Promise<DiscussionSearchResultNode | null> {
+  const response: GraphQLSearch<DiscussionSearchResultNode> =
+    await apiRequestAuth(`https://api.github.com/graphql`, 'POST', token, {
+      query: `query fetchDiscussions(
+          $includeComments: Boolean!,
+          $queryStatement: String!,
+          $type: SearchType!,
+          $firstDiscussions: Int,
+          $lastComments: Int,
+          $firstReplies: Int
+        ) {
+          search(query:$queryStatement, type: $type, first: $firstDiscussions) {
+            nodes {
+              ... on Discussion {
+                viewerSubscription
+                title
+                stateReason
+                isAnswered
+                url
+                comments(last: $lastComments) @include(if: $includeComments){
+                  nodes {
+                    databaseId
+                    createdAt
+                    replies(last: $firstReplies) {
+                      nodes {
+                        databaseId
+                        createdAt
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      `,
+      variables: {
+        queryStatement: formatSearchQueryString(
+          notification.repository.full_name,
+          notification.subject.title,
+          notification.updated_at,
+        ),
+        type: 'DISCUSSION',
+        firstDiscussions: 10,
+        lastComments: 100,
+        firstReplies: 1,
+        includeComments: includeComments,
+      },
+    });
+
+  let discussions =
+    response?.data?.data.search.nodes.filter(
+      (discussion) => discussion.title === notification.subject.title,
+    ) || [];
+
+  if (discussions.length > 1)
+    discussions = discussions.filter(
+      (discussion) => discussion.viewerSubscription === 'SUBSCRIBED',
+    );
+
+  return discussions[0];
+}
+
+export function getLatestDiscussionCommentId(
   comments: DiscussionCommentNode[],
-) =>
-  comments
+) {
+  return comments
     .flatMap((comment) => comment.replies.nodes)
     .concat([comments.at(-1)])
     .reduce((a, b) => (a.createdAt > b.createdAt ? a : b))?.databaseId;
+}
 
 export async function generateGitHubWebUrl(
   notification: Notification,
