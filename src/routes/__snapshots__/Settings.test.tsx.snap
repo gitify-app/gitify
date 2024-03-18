@@ -37,11 +37,12 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
     class="flex justify-between items-center mt-4 py-2 mx-8"
   >
     <button
-      aria-label="Go Back"
       class="focus:outline-none"
+      title="Go Back"
     >
       <svg
-        aria-hidden="true"
+        aria-hidden="false"
+        aria-label="Go Back"
         class="hover:text-gray-400"
         fill="currentColor"
         focusable="false"
@@ -288,8 +289,8 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
     </small>
     <div>
       <button
-        aria-label="Login with GitHub Enterprise"
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
+        title="Login with GitHub Enterprise"
       >
         <svg
           aria-hidden="true"
@@ -318,8 +319,8 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </svg>
       </button>
       <button
-        aria-label="Logout"
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
+        title="Logout"
       >
         <svg
           aria-hidden="true"
@@ -348,8 +349,8 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </svg>
       </button>
       <button
-        aria-label="Quit Gitify"
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none mr-0"
+        title="Quit Gitify"
       >
         <svg
           aria-hidden="true"

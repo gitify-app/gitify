@@ -43,11 +43,14 @@ export const Sidebar: React.FC = () => {
   return (
     <div className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto	">
       <div className="flex flex-col flex-1 items-center py-4">
-        <Logo
+        <button
           className="w-5 my-3 mx-auto cursor-pointer"
-          data-testid="gitify-logo"
+          title="Open Gitify on GitHub"
           onClick={onOpenBrowser}
-        />
+          data-testid="gitify-logo"
+        >
+          <Logo aria-label="Open Gitify" />
+        </button>
 
         <button
           className={`flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer ${
@@ -69,17 +72,21 @@ export const Sidebar: React.FC = () => {
           <>
             <button
               className={footerButtonClasses}
+              title="Refresh Notifications"
               onClick={() => {
                 navigate('/', { replace: true });
                 fetchNotifications();
               }}
-              aria-label="Refresh Notifications"
             >
-              <IconRefresh className="w-3.5 h-3.5" />
+              <IconRefresh
+                className="w-3.5 h-3.5"
+                aria-label="Refresh Notifications"
+              />
             </button>
 
             <button
               className={footerButtonClasses}
+              title="Settings"
               onClick={() => {
                 if (location.pathname.startsWith('/settings')) {
                   navigate('/', { replace: true });
@@ -87,9 +94,8 @@ export const Sidebar: React.FC = () => {
                   navigate('/settings');
                 }
               }}
-              aria-label="Settings"
             >
-              <IconCog className="w-4 h-4" />
+              <IconCog className="w-4 h-4" aria-label="Settings" />
             </button>
           </>
         )}
@@ -97,8 +103,9 @@ export const Sidebar: React.FC = () => {
         {!isLoggedIn && (
           <button
             className={footerButtonClasses}
+            title="Quit Gitify"
+            aria-label="Quit Gitify"
             onClick={quitApp}
-            aria-label="Quit App"
           >
             <IconQuit className="w-3.5 h-3.5" />
           </button>

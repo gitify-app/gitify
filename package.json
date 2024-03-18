@@ -104,8 +104,8 @@
   "dependencies": {
     "@electron/remote": "2.1.2",
     "@primer/octicons-react": "19.8.0",
-    "axios": "1.6.7",
-    "date-fns": "3.4.0",
+    "axios": "1.6.8",
+    "date-fns": "3.6.0",
     "electron-updater": "6.1.8",
     "final-form": "4.20.10",
     "menubar": "9.4.0",
@@ -122,7 +122,7 @@
     "@electron/notarize": "2.3.0",
     "@testing-library/react": "14.2.1",
     "@types/jest": "29.5.12",
-    "@types/node": "20.11.27",
+    "@types/node": "20.11.28",
     "@types/nprogress": "0.2.3",
     "@types/react": "18.2.66",
     "@types/react-router-dom": "5.3.3",
@@ -136,7 +136,7 @@
     "jest": "29.7.0",
     "jest-environment-jsdom": "29.7.0",
     "nock": "13.5.4",
-    "postcss": "8.4.35",
+    "postcss": "8.4.36",
     "postcss-loader": "8.1.1",
     "prettier": "3.2.5",
     "react-test-renderer": "18.2.0",
@@ -148,7 +148,7 @@
     "webpack-cli": "5.1.4",
     "webpack-merge": "5.10.0"
   },
-  "packageManager": "pnpm@8.15.4",
+  "packageManager": "pnpm@8.15.5",
   "lint-staged": {
     "*.{md,js,ts,tsx}": "prettier --write"
   },

@@ -85,9 +85,9 @@ export const LoginEnterpriseRoute: React.FC = () => {
 
         <button
           className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
+          title="Login Button"
           disabled={submitting || pristine}
           type="submit"
-          title="Login Button"
         >
           Login
         </button>
@@ -108,10 +108,14 @@ export const LoginEnterpriseRoute: React.FC = () => {
       <div className="flex justify-between items-center mt-4 py-2 mx-8">
         <button
           className="focus:outline-none"
-          aria-label="Go Back"
+          title="Go Back"
           onClick={() => navigate(-1)}
         >
-          <ArrowLeftIcon size={20} className="hover:text-gray-400" />
+          <ArrowLeftIcon
+            size={20}
+            className="hover:text-gray-400"
+            aria-label="Go Back"
+          />
         </button>
 
         <h3 className="text-lg font-semibold">Login with GitHub Enterprise</h3>
