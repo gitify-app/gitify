@@ -398,7 +398,7 @@ describe('utils/helpers.ts', () => {
 
         const requestPromise = new Promise((resolve) =>
           resolve({
-            data: {},
+            data: { data: { search: { nodes: [] } } },
           } as AxiosResponse),
         ) as AxiosPromise;
 
