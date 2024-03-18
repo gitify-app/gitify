@@ -93,9 +93,10 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
     className="py-4 px-3"
   >
     <button
-      aria-label="Quit App"
+      aria-label="Quit Gitify"
       className="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none"
       onClick={[Function]}
+      title="Quit Gitify"
     >
       <svg
         aria-hidden="true"
@@ -220,9 +221,10 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
     className="py-4 px-3"
   >
     <button
-      aria-label="Quit App"
+      aria-label="Quit Gitify"
       className="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none"
       onClick={[Function]}
+      title="Quit Gitify"
     >
       <svg
         aria-hidden="true"

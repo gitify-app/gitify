@@ -61,7 +61,7 @@ describe('components/Sidebar.tsx', () => {
   });
 
   it('should refresh the notifications', () => {
-    const { getByLabelText } = render(
+    const { getByTitle } = render(
       <AppContext.Provider
         value={{ isLoggedIn: true, notifications: [], fetchNotifications }}
       >
@@ -71,19 +71,19 @@ describe('components/Sidebar.tsx', () => {
       </AppContext.Provider>,
     );
     fetchNotifications.mockReset();
-    fireEvent.click(getByLabelText('Refresh Notifications'));
+    fireEvent.click(getByTitle('Refresh Notifications'));
     expect(fetchNotifications).toHaveBeenCalledTimes(1);
   });
 
   it('go to the settings route', () => {
-    const { getByLabelText } = render(
+    const { getByTitle } = render(
       <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
       </AppContext.Provider>,
     );
-    fireEvent.click(getByLabelText('Settings'));
+    fireEvent.click(getByTitle('Settings'));
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/settings');
   });
 
@@ -108,14 +108,14 @@ describe('components/Sidebar.tsx', () => {
   });
 
   it('should quit the app', () => {
-    const { getByLabelText } = render(
+    const { getByTitle } = render(
       <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
       </AppContext.Provider>,
     );
-    fireEvent.click(getByLabelText('Quit App'));
+    fireEvent.click(getByTitle('Quit Gitify'));
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
   });

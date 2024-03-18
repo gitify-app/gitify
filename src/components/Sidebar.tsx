@@ -69,17 +69,21 @@ export const Sidebar: React.FC = () => {
           <>
             <button
               className={footerButtonClasses}
+              title="Refresh Notifications"
               onClick={() => {
                 navigate('/', { replace: true });
                 fetchNotifications();
               }}
-              aria-label="Refresh Notifications"
             >
-              <IconRefresh className="w-3.5 h-3.5" />
+              <IconRefresh
+                className="w-3.5 h-3.5"
+                aria-label="Refresh Notifications"
+              />
             </button>
 
             <button
               className={footerButtonClasses}
+              title="Settings"
               onClick={() => {
                 if (location.pathname.startsWith('/settings')) {
                   navigate('/', { replace: true });
@@ -87,9 +91,8 @@ export const Sidebar: React.FC = () => {
                   navigate('/settings');
                 }
               }}
-              aria-label="Settings"
             >
-              <IconCog className="w-4 h-4" />
+              <IconCog className="w-4 h-4" aria-label="Settings" />
             </button>
           </>
         )}
@@ -97,8 +100,9 @@ export const Sidebar: React.FC = () => {
         {!isLoggedIn && (
           <button
             className={footerButtonClasses}
+            title="Quit Gitify"
+            aria-label="Quit Gitify"
             onClick={quitApp}
-            aria-label="Quit App"
           >
             <IconQuit className="w-3.5 h-3.5" />
           </button>
