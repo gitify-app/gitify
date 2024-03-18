@@ -8,12 +8,13 @@ exports[`routes/LoginWithToken.js renders correctly 1`] = `
     className="flex justify-between items-center mt-4 py-2 mx-8"
   >
     <button
-      aria-label="Go Back"
       className="focus:outline-none"
       onClick={[Function]}
+      title="Go Back"
     >
       <svg
-        aria-hidden="true"
+        aria-hidden="false"
+        aria-label="Go Back"
         className="hover:text-gray-400"
         fill="currentColor"
         focusable="false"
