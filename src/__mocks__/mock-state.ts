@@ -8,6 +8,7 @@ export const mockAccounts: AuthState = {
 };
 
 export const mockSettings: SettingsState = {
+  allNotifications: false,
   participating: false,
   playSound: true,
   showNotifications: true,

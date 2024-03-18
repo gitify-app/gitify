@@ -7,6 +7,7 @@ export interface AuthState {
 }
 
 export interface SettingsState {
+  allNotifications: boolean;
   participating: boolean;
   playSound: boolean;
   showNotifications: boolean;

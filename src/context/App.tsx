@@ -31,6 +31,7 @@ const defaultAccounts: AuthState = {
 };
 
 export const defaultSettings: SettingsState = {
+  allNotifications: false,
   participating: false,
   playSound: true,
   showNotifications: true,
@@ -91,7 +92,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     fetchNotifications(accounts, settings);
-  }, [settings.participating]);
+  }, [settings.participating, settings.allNotifications]);
 
   useEffect(() => {
     fetchNotifications(accounts, settings);

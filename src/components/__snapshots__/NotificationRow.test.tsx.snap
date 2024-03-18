@@ -2,10 +2,11 @@
 
 exports[`components/Notification.js should render itself & its children 1`] = `
 <div
-  className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+  className="flex space-x-3 py-2 px-3 bg-white border-b border-gray-100 dark:border-gray-darker group dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker
+          "
 >
   <div
-    className="flex justify-center items-center w-5 text-green-500"
+    className="flex flex-col justify-center items-center w-5 text-green-500"
     title="Open Issue"
   >
     <svg
@@ -32,6 +33,29 @@ exports[`components/Notification.js should render itself & its children 1`] = `
       />
       <path
         d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+      />
+    </svg>
+    <svg
+      aria-hidden="false"
+      aria-label="Unread"
+      className="focus:outline-none h-full text-blue-500"
+      fill="currentColor"
+      focusable="false"
+      height={14}
+      role="img"
+      style={
+        {
+          "display": "inline-block",
+          "overflow": "visible",
+          "userSelect": "none",
+          "verticalAlign": "text-bottom",
+        }
+      }
+      viewBox="0 0 16 16"
+      width={14}
+    >
+      <path
+        d="M8 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"
       />
     </svg>
   </div>
