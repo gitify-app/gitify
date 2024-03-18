@@ -137,7 +137,7 @@ describe('components/Sidebar.tsx', () => {
 
   describe('should render the notifications icon', () => {
     it('when there are 0 notifications', () => {
-      const { getByLabelText } = render(
+      const { getByTitle } = render(
         <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
           <MemoryRouter>
             <Sidebar />
@@ -145,14 +145,14 @@ describe('components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
 
-      const notificationsIcon = getByLabelText('0 Unread Notifications');
+      const notificationsIcon = getByTitle('0 Unread Notifications');
       expect(notificationsIcon.className).toContain('text-white');
       expect(notificationsIcon.childNodes.length).toBe(1);
       expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
     });
 
     it('when there are more than 0 notifications', () => {
-      const { getByLabelText } = render(
+      const { getByTitle } = render(
         <AppContext.Provider
           value={{
             isLoggedIn: true,
@@ -165,7 +165,7 @@ describe('components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
 
-      const notificationsIcon = getByLabelText('4 Unread Notifications');
+      const notificationsIcon = getByTitle('4 Unread Notifications');
       expect(notificationsIcon.className).toContain('text-green-500');
       expect(notificationsIcon.childNodes.length).toBe(2);
       expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
