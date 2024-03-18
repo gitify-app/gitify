@@ -3,32 +3,30 @@ import {
   CheckSuiteAttributes,
   CheckSuiteStatus,
   DiscussionStateType,
+  GitifySubject,
   Issue,
-  IssueStateReasonType,
-  IssueStateType,
   Notification,
   PullRequest,
   PullRequestStateType,
-  StateType,
   WorkflowRunAttributes,
 } from '../typesGithub';
 import { apiRequestAuth } from './api-requests';
 
-export async function getNotificationState(
+export async function getGitifySubjectDetails(
   notification: Notification,
   token: string,
-): Promise<StateType> {
+): Promise<GitifySubject> {
   switch (notification.subject.type) {
     case 'CheckSuite':
-      return getCheckSuiteAttributes(notification)?.status;
+      return getGitifySubjectForCheckSuite(notification);
     case 'Discussion':
-      return await getDiscussionState(notification, token);
+      return await getGitifySubjectForDiscussion(notification, token);
     case 'Issue':
-      return await getIssueState(notification, token);
+      return await getGitifySubjectForIssue(notification, token);
     case 'PullRequest':
-      return await getPullRequestState(notification, token);
+      return await getGitifySubjectForPullRequest(notification, token);
     case 'WorkflowRun':
-      return getWorkflowRunAttributes(notification)?.status;
+      return getGitifySubjectForWorkflowRun(notification);
     default:
       return null;
   }
@@ -78,51 +76,99 @@ function getCheckSuiteStatus(statusDisplayName: string): CheckSuiteStatus {
   }
 }
 
-export async function getDiscussionState(
+export function getGitifySubjectForCheckSuite(
+  notification: Notification,
+): GitifySubject {
+  return {
+    state: getCheckSuiteAttributes(notification)?.status,
+    user: null,
+  };
+}
+
+export async function getGitifySubjectForDiscussion(
   notification: Notification,
   token: string,
-): Promise<DiscussionStateType> {
-  const discussion = await fetchDiscussion(notification, token, false);
+): Promise<GitifySubject> {
+  const discussion = await fetchDiscussion(notification, token);
+  let discussionState: DiscussionStateType = 'OPEN';
 
   if (discussion) {
     if (discussion.isAnswered) {
-      return 'ANSWERED';
+      discussionState = 'ANSWERED';
     }
 
     if (discussion.stateReason) {
-      return discussion.stateReason;
+      discussionState = discussion.stateReason;
     }
   }
 
-  return 'OPEN';
+  let discussionUser = null;
+  console.log(discussion);
+  const firstComment = discussion?.comments?.nodes[0];
+  if (firstComment) {
+    const firstReply = firstComment?.replies?.nodes[0];
+
+    discussionUser = firstReply
+      ? firstReply.author.login
+      : firstComment.author.login;
+  }
+
+  return {
+    state: discussionState,
+    user: discussionUser,
+  };
 }
 
-export async function getIssueState(
+export async function getGitifySubjectForIssue(
   notification: Notification,
   token: string,
-): Promise<IssueStateType | IssueStateReasonType> {
+): Promise<GitifySubject> {
   const issue: Issue = (
     await apiRequestAuth(notification.subject.url, 'GET', token)
   ).data;
 
-  return issue.state_reason ?? issue.state;
+  const issueComment: Issue = (
+    await apiRequestAuth(notification.subject.latest_comment_url, 'GET', token)
+  ).data;
+
+  return {
+    state: issue.state_reason ?? issue.state,
+    user: issueComment.user.login,
+  };
 }
 
-export async function getPullRequestState(
+export async function getGitifySubjectForPullRequest(
   notification: Notification,
   token: string,
-): Promise<PullRequestStateType> {
+): Promise<GitifySubject> {
   const pr: PullRequest = (
     await apiRequestAuth(notification.subject.url, 'GET', token)
   ).data;
 
+  const prComment: PullRequest = (
+    await apiRequestAuth(notification.subject.latest_comment_url, 'GET', token)
+  ).data;
+
+  let prState: PullRequestStateType = pr.state;
   if (pr.merged) {
-    return 'merged';
+    prState = 'merged';
   } else if (pr.draft) {
-    return 'draft';
+    prState = 'draft';
   }
 
-  return pr.state;
+  return {
+    state: prState,
+    user: prComment.user.login,
+  };
+}
+
+export function getGitifySubjectForWorkflowRun(
+  notification: Notification,
+): GitifySubject {
+  return {
+    state: getWorkflowRunAttributes(notification)?.status,
+    user: null,
+  };
 }
 
 /**

@@ -61,6 +61,9 @@ export const NotificationRow: React.FC<IProps> = ({
   const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
     addSuffix: true,
   });
+  const updatedBy = notification.subject.user
+    ? ` by ${notification.subject.user}`
+    : '';
   const notificationTitle = formatForDisplay([
     notification.subject.state,
     notification.subject.type,
@@ -87,6 +90,7 @@ export const NotificationRow: React.FC<IProps> = ({
         <div className="text-xs text-capitalize">
           <span title={reason.description}>{reason.type}</span> - Updated{' '}
           {updatedAt}
+          {updatedBy}
         </div>
       </div>
 

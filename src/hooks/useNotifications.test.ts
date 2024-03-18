@@ -219,6 +219,7 @@ describe('hooks/useNotifications.ts', () => {
               title: 'This is an Issue.',
               type: 'Issue',
               url: 'https://api.github.com/3',
+              latest_comment_url: 'https://api.github.com/3/comments',
             },
           },
           {
@@ -227,6 +228,7 @@ describe('hooks/useNotifications.ts', () => {
               title: 'This is a Pull Request.',
               type: 'PullRequest',
               url: 'https://api.github.com/4',
+              latest_comment_url: 'https://api.github.com/4/comments',
             },
           },
           {
@@ -262,6 +264,9 @@ describe('hooks/useNotifications.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: null,
                     isAnswered: true,
+                    comments: {
+                      nodes: [], // TODO - this should be replaced with data
+                    },
                   },
                 ],
               },
@@ -271,8 +276,14 @@ describe('hooks/useNotifications.ts', () => {
           .get('/3')
           .reply(200, { state: 'closed', merged: true });
         nock('https://api.github.com')
+          .get('/3/comments')
+          .reply(200, { user: { login: 'some-user' } });
+        nock('https://api.github.com')
           .get('/4')
           .reply(200, { state: 'closed', merged: false });
+        nock('https://api.github.com')
+          .get('/4/comments')
+          .reply(200, { user: { login: 'some-user' } });
         nock('https://api.github.com')
           .get('/5')
           .reply(200, { state: 'open', draft: false });

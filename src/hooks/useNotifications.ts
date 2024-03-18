@@ -17,7 +17,7 @@ import {
 } from '../utils/notifications';
 import Constants from '../utils/constants';
 import { removeNotifications } from '../utils/remove-notifications';
-import { getNotificationState } from '../utils/state';
+import { getGitifySubjectDetails } from '../utils/subject';
 
 interface NotificationsState {
   notifications: AccountNotifications[];
@@ -141,16 +141,14 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                               )
                             : accounts.token;
 
-                          const notificationState = await getNotificationState(
-                            notification,
-                            token,
-                          );
+                          const additionalSubjectDetails =
+                            await getGitifySubjectDetails(notification, token);
 
                           return {
                             ...notification,
                             subject: {
                               ...notification.subject,
-                              state: notificationState,
+                              ...additionalSubjectDetails,
                             },
                           };
                         },

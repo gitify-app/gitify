@@ -5,11 +5,11 @@ import { mockAccounts } from '../__mocks__/mock-state';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
 import {
   getCheckSuiteAttributes,
-  getDiscussionState,
-  getIssueState,
-  getPullRequestState,
+  getGitifySubjectForDiscussion,
+  getGitifySubjectForIssue,
+  getGitifySubjectForPullRequest,
   getWorkflowRunAttributes,
-} from './state';
+} from './subject';
 describe('utils/state.ts', () => {
   beforeEach(() => {
     // axios will default to using the XHR adapter which can't be intercepted
@@ -156,18 +156,22 @@ describe('utils/state.ts', () => {
                   viewerSubscription: 'SUBSCRIBED',
                   stateReason: null,
                   isAnswered: true,
+                  comments: {
+                    nodes: [], //TODO - Update this to have real data
+                  },
                 },
               ],
             },
           },
         });
 
-      const result = await getDiscussionState(
+      const result = await getGitifySubjectForDiscussion(
         mockNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('ANSWERED');
+      expect(result.state).toBe('ANSWERED');
+      expect(result.user).toBe(null);
     });
 
     it('duplicate discussion state', async () => {
@@ -190,18 +194,22 @@ describe('utils/state.ts', () => {
                   viewerSubscription: 'SUBSCRIBED',
                   stateReason: 'DUPLICATE',
                   isAnswered: false,
+                  comments: {
+                    nodes: [], //TODO - Update this to have real data
+                  },
                 },
               ],
             },
           },
         });
 
-      const result = await getDiscussionState(
+      const result = await getGitifySubjectForDiscussion(
         mockNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('DUPLICATE');
+      expect(result.state).toBe('DUPLICATE');
+      expect(result.user).toBe(null);
     });
 
     it('open discussion state', async () => {
@@ -224,18 +232,22 @@ describe('utils/state.ts', () => {
                   viewerSubscription: 'SUBSCRIBED',
                   stateReason: null,
                   isAnswered: false,
+                  comments: {
+                    nodes: [], //TODO - Update this to have real data
+                  },
                 },
               ],
             },
           },
         });
 
-      const result = await getDiscussionState(
+      const result = await getGitifySubjectForDiscussion(
         mockNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('OPEN');
+      expect(result.state).toBe('OPEN');
+      expect(result.user).toBe(null);
     });
 
     it('outdated discussion state', async () => {
@@ -258,18 +270,22 @@ describe('utils/state.ts', () => {
                   viewerSubscription: 'SUBSCRIBED',
                   stateReason: 'OUTDATED',
                   isAnswered: false,
+                  comments: {
+                    nodes: [], //TODO - Update this to have real data
+                  },
                 },
               ],
             },
           },
         });
 
-      const result = await getDiscussionState(
+      const result = await getGitifySubjectForDiscussion(
         mockNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('OUTDATED');
+      expect(result.state).toBe('OUTDATED');
+      expect(result.user).toBe(null);
     });
 
     it('reopened discussion state', async () => {
@@ -292,18 +308,22 @@ describe('utils/state.ts', () => {
                   viewerSubscription: 'SUBSCRIBED',
                   stateReason: 'REOPENED',
                   isAnswered: false,
+                  comments: {
+                    nodes: [], //TODO - Update this to have real data
+                  },
                 },
               ],
             },
           },
         });
 
-      const result = await getDiscussionState(
+      const result = await getGitifySubjectForDiscussion(
         mockNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('REOPENED');
+      expect(result.state).toBe('REOPENED');
+      expect(result.user).toBe(null);
     });
 
     it('resolved discussion state', async () => {
@@ -326,18 +346,22 @@ describe('utils/state.ts', () => {
                   viewerSubscription: 'SUBSCRIBED',
                   stateReason: 'RESOLVED',
                   isAnswered: false,
+                  comments: {
+                    nodes: [], //TODO - Update this to have real data
+                  },
                 },
               ],
             },
           },
         });
 
-      const result = await getDiscussionState(
+      const result = await getGitifySubjectForDiscussion(
         mockNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('RESOLVED');
+      expect(result.state).toBe('RESOLVED');
+      expect(result.user).toBe(null);
     });
 
     it('filtered response by subscribed', async () => {
@@ -360,24 +384,31 @@ describe('utils/state.ts', () => {
                   viewerSubscription: 'SUBSCRIBED',
                   stateReason: null,
                   isAnswered: false,
+                  comments: {
+                    nodes: [], //TODO - Update this to have real data
+                  },
                 },
                 {
                   title: 'This is a discussion',
                   viewerSubscription: 'IGNORED',
                   stateReason: null,
                   isAnswered: true,
+                  comments: {
+                    nodes: [], //TODO - Update this to have real data
+                  },
                 },
               ],
             },
           },
         });
 
-      const result = await getDiscussionState(
+      const result = await getGitifySubjectForDiscussion(
         mockNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('OPEN');
+      expect(result.state).toBe('OPEN');
+      expect(result.user).toBe(null);
     });
 
     it('handles unknown or missing results', async () => {});
@@ -389,12 +420,17 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/1')
         .reply(200, { state: 'open' });
 
-      const result = await getIssueState(
+      nock('https://api.github.com')
+        .get('/repos/manosim/notifications-test/issues/comments/302888448')
+        .reply(200, { user: { login: 'some-user' } });
+
+      const result = await getGitifySubjectForIssue(
         mockedSingleNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('open');
+      expect(result.state).toBe('open');
+      expect(result.user).toBe('some-user');
     });
 
     it('closed issue state', async () => {
@@ -402,12 +438,17 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/1')
         .reply(200, { state: 'closed' });
 
-      const result = await getIssueState(
+      nock('https://api.github.com')
+        .get('/repos/manosim/notifications-test/issues/comments/302888448')
+        .reply(200, { user: { login: 'some-user' } });
+
+      const result = await getGitifySubjectForIssue(
         mockedSingleNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('closed');
+      expect(result.state).toBe('closed');
+      expect(result.user).toBe('some-user');
     });
 
     it('completed issue state', async () => {
@@ -415,12 +456,17 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/1')
         .reply(200, { state: 'closed', state_reason: 'completed' });
 
-      const result = await getIssueState(
+      nock('https://api.github.com')
+        .get('/repos/manosim/notifications-test/issues/comments/302888448')
+        .reply(200, { user: { login: 'some-user' } });
+
+      const result = await getGitifySubjectForIssue(
         mockedSingleNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('completed');
+      expect(result.state).toBe('completed');
+      expect(result.user).toBe('some-user');
     });
 
     it('not_planned issue state', async () => {
@@ -428,12 +474,17 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/1')
         .reply(200, { state: 'open', state_reason: 'not_planned' });
 
-      const result = await getIssueState(
+      nock('https://api.github.com')
+        .get('/repos/manosim/notifications-test/issues/comments/302888448')
+        .reply(200, { user: { login: 'some-user' } });
+
+      const result = await getGitifySubjectForIssue(
         mockedSingleNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('not_planned');
+      expect(result.state).toBe('not_planned');
+      expect(result.user).toBe('some-user');
     });
 
     it('reopened issue state', async () => {
@@ -441,12 +492,17 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/1')
         .reply(200, { state: 'open', state_reason: 'reopened' });
 
-      const result = await getIssueState(
+      nock('https://api.github.com')
+        .get('/repos/manosim/notifications-test/issues/comments/302888448')
+        .reply(200, { user: { login: 'some-user' } });
+
+      const result = await getGitifySubjectForIssue(
         mockedSingleNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('reopened');
+      expect(result.state).toBe('reopened');
+      expect(result.user).toBe('some-user');
     });
   });
 
@@ -456,12 +512,17 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/1')
         .reply(200, { state: 'closed', draft: false, merged: false });
 
-      const result = await getPullRequestState(
+      nock('https://api.github.com')
+        .get('/repos/manosim/notifications-test/issues/comments/302888448')
+        .reply(200, { user: { login: 'some-user' } });
+
+      const result = await getGitifySubjectForPullRequest(
         mockedSingleNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('closed');
+      expect(result.state).toBe('closed');
+      expect(result.user).toBe('some-user');
     });
 
     it('draft pull request state', async () => {
@@ -469,12 +530,17 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/1')
         .reply(200, { state: 'open', draft: true, merged: false });
 
-      const result = await getPullRequestState(
+      nock('https://api.github.com')
+        .get('/repos/manosim/notifications-test/issues/comments/302888448')
+        .reply(200, { user: { login: 'some-user' } });
+
+      const result = await getGitifySubjectForPullRequest(
         mockedSingleNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('draft');
+      expect(result.state).toBe('draft');
+      expect(result.user).toBe('some-user');
     });
 
     it('merged pull request state', async () => {
@@ -482,12 +548,17 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/1')
         .reply(200, { state: 'open', draft: false, merged: true });
 
-      const result = await getPullRequestState(
+      nock('https://api.github.com')
+        .get('/repos/manosim/notifications-test/issues/comments/302888448')
+        .reply(200, { user: { login: 'some-user' } });
+
+      const result = await getGitifySubjectForPullRequest(
         mockedSingleNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('merged');
+      expect(result.state).toBe('merged');
+      expect(result.user).toBe('some-user');
     });
 
     it('open pull request state', async () => {
@@ -495,12 +566,17 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/1')
         .reply(200, { state: 'open', draft: false, merged: false });
 
-      const result = await getPullRequestState(
+      nock('https://api.github.com')
+        .get('/repos/manosim/notifications-test/issues/comments/302888448')
+        .reply(200, { user: { login: 'some-user' } });
+
+      const result = await getGitifySubjectForPullRequest(
         mockedSingleNotification,
         mockAccounts.token,
       );
 
-      expect(result).toBe('open');
+      expect(result.state).toBe('open');
+      expect(result.user).toBe('some-user');
     });
   });
 
@@ -516,8 +592,8 @@ describe('utils/state.ts', () => {
 
       const result = getWorkflowRunAttributes(mockNotification);
 
-      expect(result.user).toBe('some-user');
       expect(result.status).toBe('waiting');
+      expect(result.user).toBe('some-user');
     });
 
     it('unknown workflow run state', async () => {
@@ -532,8 +608,8 @@ describe('utils/state.ts', () => {
 
       const result = getWorkflowRunAttributes(mockNotification);
 
-      expect(result.user).toBe('some-user');
       expect(result.status).toBeNull();
+      expect(result.user).toBe('some-user');
     });
 
     it('unhandled workflow run title', async () => {

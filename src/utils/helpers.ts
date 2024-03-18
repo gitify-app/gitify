@@ -11,7 +11,7 @@ import {
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
 import { Constants } from './constants';
-import { getWorkflowRunAttributes, getCheckSuiteAttributes } from './state';
+import { getWorkflowRunAttributes, getCheckSuiteAttributes } from './subject';
 
 export function getEnterpriseAccountToken(
   hostname: string,
@@ -126,7 +126,7 @@ async function getDiscussionUrl(
 ): Promise<string> {
   let url = `${notification.repository.html_url}/discussions`;
 
-  const discussion = await fetchDiscussion(notification, token, true);
+  const discussion = await fetchDiscussion(notification, token);
 
   if (discussion) {
     url = discussion.url;
@@ -147,12 +147,10 @@ async function getDiscussionUrl(
 export async function fetchDiscussion(
   notification: Notification,
   token: string,
-  includeComments: boolean,
 ): Promise<DiscussionSearchResultNode | null> {
   const response: GraphQLSearch<DiscussionSearchResultNode> =
     await apiRequestAuth(`https://api.github.com/graphql`, 'POST', token, {
       query: `query fetchDiscussions(
-          $includeComments: Boolean!,
           $queryStatement: String!,
           $type: SearchType!,
           $firstDiscussions: Int,
@@ -167,14 +165,20 @@ export async function fetchDiscussion(
                 stateReason
                 isAnswered
                 url
-                comments(last: $lastComments) @include(if: $includeComments){
+                comments(last: $lastComments){
                   nodes {
                     databaseId
                     createdAt
+                    author {
+                      login
+                    }
                     replies(last: $firstReplies) {
                       nodes {
                         databaseId
                         createdAt
+                        author {
+                          login
+                        }
                       }
                     }
                   }
@@ -194,7 +198,6 @@ export async function fetchDiscussion(
         firstDiscussions: 10,
         lastComments: 100,
         firstReplies: 1,
-        includeComments: includeComments,
       },
     });
 
