@@ -135,7 +135,7 @@ describe('utils/state.ts', () => {
     });
   });
 
-  describe('getDiscussionState', () => {
+  describe('getGitifySubjectForDiscussion', () => {
     it('answered discussion state', async () => {
       const mockNotification = {
         ...mockedSingleNotification,
@@ -414,7 +414,7 @@ describe('utils/state.ts', () => {
     it('handles unknown or missing results', async () => {});
   });
 
-  describe('getIssueState', () => {
+  describe('getGitifySubjectForIssue', () => {
     it('open issue state', async () => {
       nock('https://api.github.com')
         .get('/repos/manosim/notifications-test/issues/1')
@@ -506,7 +506,7 @@ describe('utils/state.ts', () => {
     });
   });
 
-  describe('getPullRequestState', () => {
+  describe('getGitifySubjectForPullRequest', () => {
     it('closed pull request state', async () => {
       nock('https://api.github.com')
         .get('/repos/manosim/notifications-test/issues/1')

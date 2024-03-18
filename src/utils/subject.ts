@@ -1,10 +1,11 @@
-import { fetchDiscussion } from './helpers';
+import { fetchDiscussion, getLatestDiscussionComment } from './helpers';
 import {
   CheckSuiteAttributes,
   CheckSuiteStatus,
   DiscussionStateType,
   GitifySubject,
   Issue,
+  IssueComments,
   Notification,
   PullRequest,
   PullRequestStateType,
@@ -102,15 +103,11 @@ export async function getGitifySubjectForDiscussion(
     }
   }
 
+  let comments = discussion.comments.nodes;
   let discussionUser = null;
-  console.log(discussion);
-  const firstComment = discussion?.comments?.nodes[0];
-  if (firstComment) {
-    const firstReply = firstComment?.replies?.nodes[0];
 
-    discussionUser = firstReply
-      ? firstReply.author.login
-      : firstComment.author.login;
+  if (comments?.length) {
+    discussionUser = getLatestDiscussionComment(comments)?.author.login;
   }
 
   return {
@@ -127,13 +124,22 @@ export async function getGitifySubjectForIssue(
     await apiRequestAuth(notification.subject.url, 'GET', token)
   ).data;
 
-  const issueComment: Issue = (
-    await apiRequestAuth(notification.subject.latest_comment_url, 'GET', token)
-  ).data;
+  let issueCommentUser = null;
+  if (notification.subject.latest_comment_url) {
+    const issueComment: IssueComments = (
+      await apiRequestAuth(
+        notification.subject.latest_comment_url,
+        'GET',
+        token,
+      )
+    ).data;
+
+    issueCommentUser = issueComment.user.login;
+  }
 
   return {
     state: issue.state_reason ?? issue.state,
-    user: issueComment.user.login,
+    user: issueCommentUser,
   };
 }
 
@@ -145,9 +151,18 @@ export async function getGitifySubjectForPullRequest(
     await apiRequestAuth(notification.subject.url, 'GET', token)
   ).data;
 
-  const prComment: PullRequest = (
-    await apiRequestAuth(notification.subject.latest_comment_url, 'GET', token)
-  ).data;
+  let prCommentUser = null;
+  if (notification.subject.latest_comment_url) {
+    const prComment: IssueComments = (
+      await apiRequestAuth(
+        notification.subject.latest_comment_url,
+        'GET',
+        token,
+      )
+    ).data;
+
+    prCommentUser = prComment.user.login;
+  }
 
   let prState: PullRequestStateType = pr.state;
   if (pr.merged) {
@@ -158,7 +173,7 @@ export async function getGitifySubjectForPullRequest(
 
   return {
     state: prState,
-    user: prComment.user.login,
+    user: prCommentUser,
   };
 }
 

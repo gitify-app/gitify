@@ -64,6 +64,7 @@ export const NotificationRow: React.FC<IProps> = ({
   const updatedBy = notification.subject.user
     ? ` by ${notification.subject.user}`
     : '';
+  const updatedLabel = `Updated ${updatedAt}${updatedBy}`;
   const notificationTitle = formatForDisplay([
     notification.subject.state,
     notification.subject.type,
@@ -83,14 +84,16 @@ export const NotificationRow: React.FC<IProps> = ({
         onClick={() => pressTitle()}
         role="main"
       >
-        <div className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
+        <div
+          className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden"
+          title={notification.subject.title}
+        >
           {notification.subject.title}
         </div>
 
-        <div className="text-xs text-capitalize">
-          <span title={reason.description}>{reason.type}</span> - Updated{' '}
-          {updatedAt}
-          {updatedBy}
+        <div className="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden">
+          <span title={reason.description}>{reason.type}</span> -{' '}
+          <span title={updatedLabel}>{updatedLabel}</span>
         </div>
       </div>
 

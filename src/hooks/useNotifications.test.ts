@@ -260,18 +260,31 @@ describe('hooks/useNotifications.ts', () => {
               search: {
                 nodes: [
                   {
-                    title: 'This is an answered discussion',
+                    title: 'This is a Discussion.',
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: null,
                     isAnswered: true,
+                    url: 'https://github.com/manosim/notifications-test/discussions/612',
                     comments: {
-                      nodes: [], // TODO - this should be replaced with data
+                      nodes: [
+                        {
+                          databaseId: 2297637,
+                          createdAt: '2022-03-04T20:39:44Z',
+                          author: {
+                            login: 'comment-user',
+                          },
+                          replies: {
+                            nodes: [],
+                          },
+                        },
+                      ],
                     },
                   },
                 ],
               },
             },
           });
+
         nock('https://api.github.com')
           .get('/3')
           .reply(200, { state: 'closed', merged: true });

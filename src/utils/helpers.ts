@@ -7,6 +7,7 @@ import {
   PullRequest,
   Issue,
   IssueComments,
+  DiscussionSubcommentNode,
 } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
@@ -136,7 +137,7 @@ async function getDiscussionUrl(
     let latestCommentId: string | number;
 
     if (comments?.length) {
-      latestCommentId = getLatestDiscussionCommentId(comments);
+      latestCommentId = getLatestDiscussionComment(comments)?.databaseId;
       url += `#discussioncomment-${latestCommentId}`;
     }
   }
@@ -214,13 +215,13 @@ export async function fetchDiscussion(
   return discussions[0];
 }
 
-export function getLatestDiscussionCommentId(
+export function getLatestDiscussionComment(
   comments: DiscussionCommentNode[],
-) {
+): DiscussionSubcommentNode | null {
   return comments
     .flatMap((comment) => comment.replies.nodes)
     .concat([comments.at(-1)])
-    .reduce((a, b) => (a.createdAt > b.createdAt ? a : b))?.databaseId;
+    .reduce((a, b) => (a.createdAt > b.createdAt ? a : b));
 }
 
 export async function generateGitHubWebUrl(
