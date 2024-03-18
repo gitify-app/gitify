@@ -84,10 +84,7 @@ export const NotificationRow: React.FC<IProps> = ({
         onClick={() => pressTitle()}
         role="main"
       >
-        <div
-          className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden"
-          title={notification.subject.title}
-        >
+        <div className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
           {notification.subject.title}
         </div>
 
