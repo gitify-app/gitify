@@ -54,16 +54,19 @@ export const Sidebar: React.FC = () => {
           <Logo aria-label="Open Gitify" />
         </button>
 
-        <div
+        <button
           className={`flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer ${
             notificationsCount > 0 ? 'text-green-500' : 'text-white'
           }`}
           onClick={onOpenGitHubNotifications}
-          aria-label={`${notificationsCount} Unread Notifications`}
+          title={`${notificationsCount} Unread Notifications`}
         >
-          <BellIcon size={12} />
+          <BellIcon
+            size={12}
+            aria-label={`${notificationsCount} Unread Notifications`}
+          />
           {notificationsCount > 0 && notificationsCount}
-        </div>
+        </button>
       </div>
 
       <div className="py-4 px-3">

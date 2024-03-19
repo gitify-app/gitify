@@ -219,6 +219,7 @@ describe('hooks/useNotifications.ts', () => {
               title: 'This is an Issue.',
               type: 'Issue',
               url: 'https://api.github.com/3',
+              latest_comment_url: 'https://api.github.com/3/comments',
             },
           },
           {
@@ -227,6 +228,7 @@ describe('hooks/useNotifications.ts', () => {
               title: 'This is a Pull Request.',
               type: 'PullRequest',
               url: 'https://api.github.com/4',
+              latest_comment_url: 'https://api.github.com/4/comments',
             },
           },
           {
@@ -256,25 +258,45 @@ describe('hooks/useNotifications.ts', () => {
           .reply(200, {
             data: {
               search: {
-                edges: [
+                nodes: [
                   {
-                    node: {
-                      title: 'This is an answered discussion',
-                      viewerSubscription: 'SUBSCRIBED',
-                      stateReason: null,
-                      isAnswered: true,
+                    title: 'This is a Discussion.',
+                    viewerSubscription: 'SUBSCRIBED',
+                    stateReason: null,
+                    isAnswered: true,
+                    url: 'https://github.com/manosim/notifications-test/discussions/612',
+                    comments: {
+                      nodes: [
+                        {
+                          databaseId: 2297637,
+                          createdAt: '2022-03-04T20:39:44Z',
+                          author: {
+                            login: 'comment-user',
+                          },
+                          replies: {
+                            nodes: [],
+                          },
+                        },
+                      ],
                     },
                   },
                 ],
               },
             },
           });
+
         nock('https://api.github.com')
           .get('/3')
           .reply(200, { state: 'closed', merged: true });
         nock('https://api.github.com')
+          .get('/3/comments')
+          .reply(200, { user: { login: 'some-user' } });
+        nock('https://api.github.com')
           .get('/4')
           .reply(200, { state: 'closed', merged: false });
+        nock('https://api.github.com')
+          .get('/4/comments')
+          .reply(200, { user: { login: 'some-user' } });
         nock('https://api.github.com')
           .get('/5')
           .reply(200, { state: 'open', draft: false });
