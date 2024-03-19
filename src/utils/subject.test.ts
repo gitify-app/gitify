@@ -9,7 +9,7 @@ import {
   getWorkflowRunAttributes,
 } from './subject';
 import { SubjectType } from '../typesGithub';
-describe('utils/state.ts', () => {
+describe('utils/subject.ts', () => {
   beforeEach(() => {
     // axios will default to using the XHR adapter which can't be intercepted
     // by nock. So, configure axios to use the node adapter.

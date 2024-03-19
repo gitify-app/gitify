@@ -4,7 +4,7 @@ import { fireEvent, render } from '@testing-library/react';
 
 import { Logo } from './Logo';
 
-describe('components/ui/logo.tsx', () => {
+describe('components/Logo.tsx', () => {
   it('renders correctly (light)', () => {
     const tree = TestRenderer.create(<Logo />);
 

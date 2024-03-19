@@ -5,8 +5,8 @@ import {
 } from './github-api';
 import { Reason, StateType, Subject, SubjectType } from '../typesGithub';
 
-describe('formatReason', () => {
-  it('should format the notification reason', () => {
+describe('utils/github-api.ts', () => {
+  it('formatReason - should format the notification reason', () => {
     expect(formatReason('approval_requested')).toMatchSnapshot();
     expect(formatReason('assign')).toMatchSnapshot();
     expect(formatReason('author')).toMatchSnapshot();
@@ -24,10 +24,8 @@ describe('formatReason', () => {
     expect(formatReason('team_mention')).toMatchSnapshot();
     expect(formatReason('something_else_unknown' as Reason)).toMatchSnapshot();
   });
-});
 
-describe('getNotificationTypeIcon', () => {
-  it('should get the notification type icon', () => {
+  describe('getNotificationTypeIcon - should get the notification type icon', () => {
     expect(
       getNotificationTypeIcon(
         createSubjectMock({ type: 'CheckSuite', state: null }),
@@ -188,88 +186,90 @@ describe('getNotificationTypeIcon', () => {
       'QuestionIcon',
     );
   });
-});
 
-describe('getNotificationTypeIconColor', () => {
-  it('should format the notification color for check suite', () => {
-    expect(
-      getNotificationTypeIconColor(
-        createSubjectMock({
-          type: 'CheckSuite',
-          state: 'cancelled',
-        }),
-      ),
-    ).toMatchSnapshot();
-    expect(
-      getNotificationTypeIconColor(
-        createSubjectMock({
-          type: 'CheckSuite',
-          state: 'failure',
-        }),
-      ),
-    ).toMatchSnapshot();
+  describe('getNotificationTypeIconColor', () => {
+    it('should format the notification color for check suite', () => {
+      expect(
+        getNotificationTypeIconColor(
+          createSubjectMock({
+            type: 'CheckSuite',
+            state: 'cancelled',
+          }),
+        ),
+      ).toMatchSnapshot();
+      expect(
+        getNotificationTypeIconColor(
+          createSubjectMock({
+            type: 'CheckSuite',
+            state: 'failure',
+          }),
+        ),
+      ).toMatchSnapshot();
 
-    expect(
-      getNotificationTypeIconColor(
-        createSubjectMock({
-          type: 'CheckSuite',
-          state: 'skipped',
-        }),
-      ),
-    ).toMatchSnapshot();
-    expect(
-      getNotificationTypeIconColor(
-        createSubjectMock({
-          type: 'CheckSuite',
-          state: 'success',
-        }),
-      ),
-    ).toMatchSnapshot();
-    expect(
-      getNotificationTypeIconColor(
-        createSubjectMock({
-          type: 'CheckSuite',
-          state: null,
-        }),
-      ),
-    ).toMatchSnapshot();
-  });
+      expect(
+        getNotificationTypeIconColor(
+          createSubjectMock({
+            type: 'CheckSuite',
+            state: 'skipped',
+          }),
+        ),
+      ).toMatchSnapshot();
+      expect(
+        getNotificationTypeIconColor(
+          createSubjectMock({
+            type: 'CheckSuite',
+            state: 'success',
+          }),
+        ),
+      ).toMatchSnapshot();
+      expect(
+        getNotificationTypeIconColor(
+          createSubjectMock({
+            type: 'CheckSuite',
+            state: null,
+          }),
+        ),
+      ).toMatchSnapshot();
+    });
 
-  it('should format the notification color for state', () => {
-    expect(
-      getNotificationTypeIconColor(createSubjectMock({ state: 'ANSWERED' })),
-    ).toMatchSnapshot();
-    expect(
-      getNotificationTypeIconColor(createSubjectMock({ state: 'closed' })),
-    ).toMatchSnapshot();
-    expect(
-      getNotificationTypeIconColor(createSubjectMock({ state: 'completed' })),
-    ).toMatchSnapshot();
-    expect(
-      getNotificationTypeIconColor(createSubjectMock({ state: 'draft' })),
-    ).toMatchSnapshot();
-    expect(
-      getNotificationTypeIconColor(createSubjectMock({ state: 'merged' })),
-    ).toMatchSnapshot();
-    expect(
-      getNotificationTypeIconColor(createSubjectMock({ state: 'not_planned' })),
-    ).toMatchSnapshot();
-    expect(
-      getNotificationTypeIconColor(createSubjectMock({ state: 'open' })),
-    ).toMatchSnapshot();
-    expect(
-      getNotificationTypeIconColor(createSubjectMock({ state: 'reopened' })),
-    ).toMatchSnapshot();
-    expect(
-      getNotificationTypeIconColor(createSubjectMock({ state: 'RESOLVED' })),
-    ).toMatchSnapshot();
-    expect(
-      getNotificationTypeIconColor(
-        createSubjectMock({
-          state: 'something_else_unknown' as StateType,
-        }),
-      ),
-    ).toMatchSnapshot();
+    it('should format the notification color for state', () => {
+      expect(
+        getNotificationTypeIconColor(createSubjectMock({ state: 'ANSWERED' })),
+      ).toMatchSnapshot();
+      expect(
+        getNotificationTypeIconColor(createSubjectMock({ state: 'closed' })),
+      ).toMatchSnapshot();
+      expect(
+        getNotificationTypeIconColor(createSubjectMock({ state: 'completed' })),
+      ).toMatchSnapshot();
+      expect(
+        getNotificationTypeIconColor(createSubjectMock({ state: 'draft' })),
+      ).toMatchSnapshot();
+      expect(
+        getNotificationTypeIconColor(createSubjectMock({ state: 'merged' })),
+      ).toMatchSnapshot();
+      expect(
+        getNotificationTypeIconColor(
+          createSubjectMock({ state: 'not_planned' }),
+        ),
+      ).toMatchSnapshot();
+      expect(
+        getNotificationTypeIconColor(createSubjectMock({ state: 'open' })),
+      ).toMatchSnapshot();
+      expect(
+        getNotificationTypeIconColor(createSubjectMock({ state: 'reopened' })),
+      ).toMatchSnapshot();
+      expect(
+        getNotificationTypeIconColor(createSubjectMock({ state: 'RESOLVED' })),
+      ).toMatchSnapshot();
+      expect(
+        getNotificationTypeIconColor(
+          createSubjectMock({
+            state: 'something_else_unknown' as StateType,
+          }),
+        ),
+      ).toMatchSnapshot();
+    });
   });
 });
 
