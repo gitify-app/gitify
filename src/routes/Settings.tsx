@@ -1,4 +1,9 @@
-import { ArrowLeftIcon } from '@primer/octicons-react';
+import {
+  ArrowLeftIcon,
+  PersonAddIcon,
+  SignOutIcon,
+  XCircleIcon,
+} from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
 import React, {
   useCallback,
@@ -12,9 +17,6 @@ import { useNavigate } from 'react-router-dom';
 import { FieldCheckbox } from '../components/fields/Checkbox';
 import { FieldRadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
-import { IconAddAccount } from '../icons/AddAccount';
-import { IconLogOut } from '../icons/Logout';
-import { IconQuit } from '../icons/Quit';
 import { Appearance } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
 import { setAppearance } from '../utils/appearance';
@@ -172,8 +174,8 @@ export const SettingsRoute: React.FC = () => {
             title="Login with GitHub Enterprise"
             onClick={goToEnterprise}
           >
-            <IconAddAccount
-              className="w-5 h-5"
+            <PersonAddIcon
+              size={20}
               aria-label="Login with GitHub Enterprise"
             />
           </button>
@@ -183,7 +185,7 @@ export const SettingsRoute: React.FC = () => {
             title="Logout"
             onClick={logoutUser}
           >
-            <IconLogOut className="w-5 h-5" aria-label="Logout" />
+            <SignOutIcon size={18} aria-label="Logout" />
           </button>
 
           <button
@@ -191,7 +193,7 @@ export const SettingsRoute: React.FC = () => {
             title="Quit Gitify"
             onClick={quitApp}
           >
-            <IconQuit className="w-5 h-5" aria-label="Quit Gitify" />
+            <XCircleIcon size={18} aria-label="Quit Gitify" />
           </button>
         </div>
       </div>

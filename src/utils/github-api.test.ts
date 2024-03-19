@@ -32,7 +32,7 @@ describe('getNotificationTypeIcon', () => {
       getNotificationTypeIcon(
         createSubjectMock({ type: 'CheckSuite', state: null }),
       ).displayName,
-    ).toBe('SyncIcon');
+    ).toBe('RocketIcon');
     expect(
       getNotificationTypeIcon(
         createSubjectMock({

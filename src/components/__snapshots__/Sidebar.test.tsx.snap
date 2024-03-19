@@ -99,29 +99,27 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
       title="Quit Gitify"
     >
       <svg
-        aria-hidden="true"
-        aria-labelledby="iconQuitId"
-        className="w-3.5 h-3.5"
+        aria-hidden="false"
+        aria-label="Quit Gitify"
+        className="octicon octicon-x-circle"
+        fill="currentColor"
+        focusable="false"
+        height={16}
         role="img"
-        viewBox="0 0 512 512"
-        xmlns="http://www.w3.org/2000/svg"
+        style={
+          {
+            "display": "inline-block",
+            "overflow": "visible",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 16 16"
+        width={16}
       >
-        <title
-          id="iconQuitId"
-        >
-          Quit Application
-        </title>
-        <g>
-          <path
-            d="M272 0a23.94 23.94 0 0124 24v240a23.94 23.94 0 01-24 24h-32a23.94 23.94 0 01-24-24V24a23.94 23.94 0 0124-24z"
-            fill="currentColor"
-            opacity={0.4}
-          />
-          <path
-            d="M504 256c0 136.8-110.8 247.7-247.5 248C120 504.3 8.2 393 8 256.4A248 248 0 01111.8 54.2a24.07 24.07 0 0135 7.7L162.6 90a24 24 0 01-6.6 31 168 168 0 00100 303c91.6 0 168.6-74.2 168-169.1a168.07 168.07 0 00-68.1-134 23.86 23.86 0 01-6.5-30.9l15.8-28.1a24 24 0 0134.8-7.8A247.51 247.51 0 01504 256z"
-            fill="currentColor"
-          />
-        </g>
+        <path
+          d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"
+        />
       </svg>
     </button>
   </div>
@@ -227,29 +225,27 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
       title="Quit Gitify"
     >
       <svg
-        aria-hidden="true"
-        aria-labelledby="iconQuitId"
-        className="w-3.5 h-3.5"
+        aria-hidden="false"
+        aria-label="Quit Gitify"
+        className="octicon octicon-x-circle"
+        fill="currentColor"
+        focusable="false"
+        height={16}
         role="img"
-        viewBox="0 0 512 512"
-        xmlns="http://www.w3.org/2000/svg"
+        style={
+          {
+            "display": "inline-block",
+            "overflow": "visible",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 16 16"
+        width={16}
       >
-        <title
-          id="iconQuitId"
-        >
-          Quit Application
-        </title>
-        <g>
-          <path
-            d="M272 0a23.94 23.94 0 0124 24v240a23.94 23.94 0 01-24 24h-32a23.94 23.94 0 01-24-24V24a23.94 23.94 0 0124-24z"
-            fill="currentColor"
-            opacity={0.4}
-          />
-          <path
-            d="M504 256c0 136.8-110.8 247.7-247.5 248C120 504.3 8.2 393 8 256.4A248 248 0 01111.8 54.2a24.07 24.07 0 0135 7.7L162.6 90a24 24 0 01-6.6 31 168 168 0 00100 303c91.6 0 168.6-74.2 168-169.1a168.07 168.07 0 00-68.1-134 23.86 23.86 0 01-6.5-30.9l15.8-28.1a24 24 0 0134.8-7.8A247.51 247.51 0 01504 256z"
-            fill="currentColor"
-          />
-        </g>
+        <path
+          d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"
+        />
       </svg>
     </button>
   </div>
