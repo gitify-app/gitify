@@ -104,16 +104,12 @@ async function getGitifySubjectForDiscussion(
     }
   }
 
-  let comments = discussion.comments.nodes;
-  let discussionUser = null;
-
-  if (comments?.length) {
-    discussionUser = getLatestDiscussionComment(comments)?.author.login;
-  }
+  const discussionUser = getLatestDiscussionComment(discussion.comments.nodes)
+    ?.author.login;
 
   return {
     state: discussionState,
-    user: discussionUser,
+    user: discussionUser ?? null,
   };
 }
 
@@ -129,7 +125,7 @@ async function getGitifySubjectForIssue(
 
   return {
     state: issue.state_reason ?? issue.state,
-    user: issueCommentUser.login,
+    user: issueCommentUser?.login ?? null,
   };
 }
 
@@ -141,8 +137,6 @@ async function getGitifySubjectForPullRequest(
     await apiRequestAuth(notification.subject.url, 'GET', token)
   ).data;
 
-  const prCommentUser = await getLatestCommentUser(notification, token);
-
   let prState: PullRequestStateType = pr.state;
   if (pr.merged) {
     prState = 'merged';
@@ -150,9 +144,11 @@ async function getGitifySubjectForPullRequest(
     prState = 'draft';
   }
 
+  const prCommentUser = await getLatestCommentUser(notification, token);
+
   return {
     state: prState,
-    user: prCommentUser.login,
+    user: prCommentUser?.login ?? null,
   };
 }
 
@@ -202,10 +198,14 @@ function getWorkflowRunStatus(statusDisplayName: string): CheckSuiteStatus {
 async function getLatestCommentUser(
   notification: Notification,
   token: string,
-): Promise<User> {
+): Promise<User | null> {
+  if (!notification.subject.latest_comment_url) {
+    return null;
+  }
+
   const response: IssueComments = (
     await apiRequestAuth(notification.subject.latest_comment_url, 'GET', token)
-  ).data;
+  )?.data;
 
-  return response.user;
+  return response?.user;
 }

@@ -136,8 +136,9 @@ async function getDiscussionUrl(
 
     let latestCommentId: string | number;
 
-    if (comments?.length) {
-      latestCommentId = getLatestDiscussionComment(comments)?.databaseId;
+    latestCommentId = getLatestDiscussionComment(comments)?.databaseId;
+
+    if (latestCommentId) {
       url += `#discussioncomment-${latestCommentId}`;
     }
   }
@@ -218,9 +219,13 @@ export async function fetchDiscussion(
 export function getLatestDiscussionComment(
   comments: DiscussionCommentNode[],
 ): DiscussionSubcommentNode | null {
+  if (!comments || comments.length == 0) {
+    return null;
+  }
+
   return comments
     .flatMap((comment) => comment.replies.nodes)
-    .concat([comments.at(-1)])
+    .concat([comments[comments.length - 1]])
     .reduce((a, b) => (a.createdAt > b.createdAt ? a : b));
 }
 
