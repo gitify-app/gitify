@@ -157,12 +157,19 @@ export interface Owner {
   site_admin: boolean;
 }
 
-export interface Subject {
+export type Subject = GitHubSubject & GitifySubject;
+
+interface GitHubSubject {
   title: string;
   url: string | null;
-  state?: StateType; // This is not in the GitHub API, but we add it to the type to make it easier to work with
   latest_comment_url: string | null;
   type: SubjectType;
+}
+
+// This is not in the GitHub API, but we add it to the type to make it easier to work with
+export interface GitifySubject {
+  state?: StateType;
+  user?: string;
 }
 
 export interface PullRequest {
@@ -262,6 +269,7 @@ export interface DiscussionSearchResultNode {
 export interface DiscussionCommentNode {
   databaseId: string | number;
   createdAt: string;
+  author: { login: string };
   replies: {
     nodes: DiscussionSubcommentNode[];
   };
@@ -270,6 +278,7 @@ export interface DiscussionCommentNode {
 export interface DiscussionSubcommentNode {
   databaseId: string | number;
   createdAt: string;
+  author: { login: string };
 }
 
 export interface CheckSuiteAttributes {

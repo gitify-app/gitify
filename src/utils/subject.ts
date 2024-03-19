@@ -1,34 +1,33 @@
-import { fetchDiscussion } from './helpers';
+import { fetchDiscussion, getLatestDiscussionComment } from './helpers';
 import {
   CheckSuiteAttributes,
   CheckSuiteStatus,
   DiscussionStateType,
+  GitifySubject,
   Issue,
-  IssueStateReasonType,
-  IssueStateType,
+  IssueComments,
   Notification,
   PullRequest,
   PullRequestStateType,
-  StateType,
   WorkflowRunAttributes,
 } from '../typesGithub';
 import { apiRequestAuth } from './api-requests';
 
-export async function getNotificationState(
+export async function getGitifySubjectDetails(
   notification: Notification,
   token: string,
-): Promise<StateType> {
+): Promise<GitifySubject> {
   switch (notification.subject.type) {
     case 'CheckSuite':
-      return getCheckSuiteAttributes(notification)?.status;
+      return getGitifySubjectForCheckSuite(notification);
     case 'Discussion':
-      return await getDiscussionState(notification, token);
+      return await getGitifySubjectForDiscussion(notification, token);
     case 'Issue':
-      return await getIssueState(notification, token);
+      return await getGitifySubjectForIssue(notification, token);
     case 'PullRequest':
-      return await getPullRequestState(notification, token);
+      return await getGitifySubjectForPullRequest(notification, token);
     case 'WorkflowRun':
-      return getWorkflowRunAttributes(notification)?.status;
+      return getGitifySubjectForWorkflowRun(notification);
     default:
       return null;
   }
@@ -78,51 +77,113 @@ function getCheckSuiteStatus(statusDisplayName: string): CheckSuiteStatus {
   }
 }
 
-export async function getDiscussionState(
+export function getGitifySubjectForCheckSuite(
+  notification: Notification,
+): GitifySubject {
+  return {
+    state: getCheckSuiteAttributes(notification)?.status,
+    user: null,
+  };
+}
+
+export async function getGitifySubjectForDiscussion(
   notification: Notification,
   token: string,
-): Promise<DiscussionStateType> {
-  const discussion = await fetchDiscussion(notification, token, false);
+): Promise<GitifySubject> {
+  const discussion = await fetchDiscussion(notification, token);
+  let discussionState: DiscussionStateType = 'OPEN';
 
   if (discussion) {
     if (discussion.isAnswered) {
-      return 'ANSWERED';
+      discussionState = 'ANSWERED';
     }
 
     if (discussion.stateReason) {
-      return discussion.stateReason;
+      discussionState = discussion.stateReason;
     }
   }
 
-  return 'OPEN';
+  let comments = discussion.comments.nodes;
+  let discussionUser = null;
+
+  if (comments?.length) {
+    discussionUser = getLatestDiscussionComment(comments)?.author.login;
+  }
+
+  return {
+    state: discussionState,
+    user: discussionUser,
+  };
 }
 
-export async function getIssueState(
+export async function getGitifySubjectForIssue(
   notification: Notification,
   token: string,
-): Promise<IssueStateType | IssueStateReasonType> {
+): Promise<GitifySubject> {
   const issue: Issue = (
     await apiRequestAuth(notification.subject.url, 'GET', token)
   ).data;
 
-  return issue.state_reason ?? issue.state;
+  let issueCommentUser = null;
+  if (notification.subject.latest_comment_url) {
+    const issueComment: IssueComments = (
+      await apiRequestAuth(
+        notification.subject.latest_comment_url,
+        'GET',
+        token,
+      )
+    ).data;
+
+    issueCommentUser = issueComment.user.login;
+  }
+
+  return {
+    state: issue.state_reason ?? issue.state,
+    user: issueCommentUser,
+  };
 }
 
-export async function getPullRequestState(
+export async function getGitifySubjectForPullRequest(
   notification: Notification,
   token: string,
-): Promise<PullRequestStateType> {
+): Promise<GitifySubject> {
   const pr: PullRequest = (
     await apiRequestAuth(notification.subject.url, 'GET', token)
   ).data;
 
-  if (pr.merged) {
-    return 'merged';
-  } else if (pr.draft) {
-    return 'draft';
+  let prCommentUser = null;
+  if (notification.subject.latest_comment_url) {
+    const prComment: IssueComments = (
+      await apiRequestAuth(
+        notification.subject.latest_comment_url,
+        'GET',
+        token,
+      )
+    ).data;
+
+    prCommentUser = prComment.user.login;
   }
 
-  return pr.state;
+  let prState: PullRequestStateType = pr.state;
+  if (pr.merged) {
+    prState = 'merged';
+  } else if (pr.draft) {
+    prState = 'draft';
+  }
+
+  return {
+    state: prState,
+    user: prCommentUser,
+  };
+}
+
+export function getGitifySubjectForWorkflowRun(
+  notification: Notification,
+): GitifySubject {
+  return {
+    state: getWorkflowRunAttributes(notification)?.status,
+    user: null,
+  };
 }
 
 /**
