@@ -42,6 +42,7 @@ exports[`components/Notification.js should render itself & its children 1`] = `
   >
     <div
       className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden"
+      title="I am a robot and this is a test!"
     >
       I am a robot and this is a test!
     </div>
