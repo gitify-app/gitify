@@ -164,6 +164,7 @@ async function getGitifySubjectForRelease(
   token: string,
 ): Promise<GitifySubject> {
   const releaseCommentUser = await getLatestCommentUser(notification, token);
+
   return {
     state: null,
     user: releaseCommentUser.login,
