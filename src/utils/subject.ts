@@ -9,6 +9,8 @@ import {
   Notification,
   PullRequest,
   PullRequestStateType,
+  ReleaseComments,
+  User,
   WorkflowRunAttributes,
 } from '../typesGithub';
 import { apiRequestAuth } from './api-requests';
@@ -26,6 +28,8 @@ export async function getGitifySubjectDetails(
       return await getGitifySubjectForIssue(notification, token);
     case 'PullRequest':
       return await getGitifySubjectForPullRequest(notification, token);
+    case 'Release':
+      return await getGitifySubjectForRelease(notification, token);
     case 'WorkflowRun':
       return getGitifySubjectForWorkflowRun(notification);
     default:
@@ -77,7 +81,7 @@ function getCheckSuiteStatus(statusDisplayName: string): CheckSuiteStatus {
   }
 }
 
-export function getGitifySubjectForCheckSuite(
+function getGitifySubjectForCheckSuite(
   notification: Notification,
 ): GitifySubject {
   return {
@@ -86,7 +90,7 @@ export function getGitifySubjectForCheckSuite(
   };
 }
 
-export async function getGitifySubjectForDiscussion(
+async function getGitifySubjectForDiscussion(
   notification: Notification,
   token: string,
 ): Promise<GitifySubject> {
@@ -116,7 +120,7 @@ export async function getGitifySubjectForDiscussion(
   };
 }
 
-export async function getGitifySubjectForIssue(
+async function getGitifySubjectForIssue(
   notification: Notification,
   token: string,
 ): Promise<GitifySubject> {
@@ -124,26 +128,15 @@ export async function getGitifySubjectForIssue(
     await apiRequestAuth(notification.subject.url, 'GET', token)
   ).data;
 
-  let issueCommentUser = null;
-  if (notification.subject.latest_comment_url) {
-    const issueComment: IssueComments = (
-      await apiRequestAuth(
-        notification.subject.latest_comment_url,
-        'GET',
-        token,
-      )
-    ).data;
-
-    issueCommentUser = issueComment.user.login;
-  }
+  const issueCommentUser = await getLatestCommentUser(notification, token);
 
   return {
     state: issue.state_reason ?? issue.state,
-    user: issueCommentUser,
+    user: issueCommentUser.login,
   };
 }
 
-export async function getGitifySubjectForPullRequest(
+async function getGitifySubjectForPullRequest(
   notification: Notification,
   token: string,
 ): Promise<GitifySubject> {
@@ -151,18 +144,7 @@ export async function getGitifySubjectForPullRequest(
     await apiRequestAuth(notification.subject.url, 'GET', token)
   ).data;
 
-  let prCommentUser = null;
-  if (notification.subject.latest_comment_url) {
-    const prComment: IssueComments = (
-      await apiRequestAuth(
-        notification.subject.latest_comment_url,
-        'GET',
-        token,
-      )
-    ).data;
-
-    prCommentUser = prComment.user.login;
-  }
+  const prCommentUser = await getLatestCommentUser(notification, token);
 
   let prState: PullRequestStateType = pr.state;
   if (pr.merged) {
@@ -173,11 +155,23 @@ export async function getGitifySubjectForPullRequest(
 
   return {
     state: prState,
-    user: prCommentUser,
+    user: prCommentUser.login,
   };
 }
 
-export function getGitifySubjectForWorkflowRun(
+async function getGitifySubjectForRelease(
+  notification: Notification,
+  token: string,
+): Promise<GitifySubject> {
+  const releaseCommentUser = await getLatestCommentUser(notification, token);
+
+  return {
+    state: null,
+    user: releaseCommentUser.login,
+  };
+}
+
+function getGitifySubjectForWorkflowRun(
   notification: Notification,
 ): GitifySubject {
   return {
@@ -218,4 +212,17 @@ function getWorkflowRunStatus(statusDisplayName: string): CheckSuiteStatus {
     default:
       return null;
   }
+}
+
+async function getLatestCommentUser(
+  notification: Notification,
+  token: string,
+): Promise<User> {
+  const response: IssueComments | ReleaseComments = (
+    await apiRequestAuth(notification.subject.latest_comment_url, 'GET', token)
+  ).data;
+
+  return (
+    (response as IssueComments).user ?? (response as ReleaseComments).author
+  );
 }

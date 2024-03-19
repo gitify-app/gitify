@@ -5,11 +5,10 @@ import { mockAccounts } from '../__mocks__/mock-state';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
 import {
   getCheckSuiteAttributes,
-  getGitifySubjectForDiscussion,
-  getGitifySubjectForIssue,
-  getGitifySubjectForPullRequest,
+  getGitifySubjectDetails,
   getWorkflowRunAttributes,
 } from './subject';
+import { SubjectType } from '../typesGithub';
 describe('utils/state.ts', () => {
   beforeEach(() => {
     // axios will default to using the XHR adapter which can't be intercepted
@@ -142,6 +141,7 @@ describe('utils/state.ts', () => {
         subject: {
           ...mockedSingleNotification.subject,
           title: 'This is an answered discussion',
+          type: 'Discussion' as SubjectType,
         },
       };
 
@@ -165,7 +165,7 @@ describe('utils/state.ts', () => {
           },
         });
 
-      const result = await getGitifySubjectForDiscussion(
+      const result = await getGitifySubjectDetails(
         mockNotification,
         mockAccounts.token,
       );
@@ -180,6 +180,7 @@ describe('utils/state.ts', () => {
         subject: {
           ...mockedSingleNotification.subject,
           title: 'This is a duplicate discussion',
+          type: 'Discussion' as SubjectType,
         },
       };
 
@@ -203,7 +204,7 @@ describe('utils/state.ts', () => {
           },
         });
 
-      const result = await getGitifySubjectForDiscussion(
+      const result = await getGitifySubjectDetails(
         mockNotification,
         mockAccounts.token,
       );
@@ -218,6 +219,7 @@ describe('utils/state.ts', () => {
         subject: {
           ...mockedSingleNotification.subject,
           title: 'This is an open discussion',
+          type: 'Discussion' as SubjectType,
         },
       };
 
@@ -241,7 +243,7 @@ describe('utils/state.ts', () => {
           },
         });
 
-      const result = await getGitifySubjectForDiscussion(
+      const result = await getGitifySubjectDetails(
         mockNotification,
         mockAccounts.token,
       );
@@ -256,6 +258,7 @@ describe('utils/state.ts', () => {
         subject: {
           ...mockedSingleNotification.subject,
           title: 'This is an outdated discussion',
+          type: 'Discussion' as SubjectType,
         },
       };
 
@@ -279,7 +282,7 @@ describe('utils/state.ts', () => {
           },
         });
 
-      const result = await getGitifySubjectForDiscussion(
+      const result = await getGitifySubjectDetails(
         mockNotification,
         mockAccounts.token,
       );
@@ -294,6 +297,7 @@ describe('utils/state.ts', () => {
         subject: {
           ...mockedSingleNotification.subject,
           title: 'This is a reopened discussion',
+          type: 'Discussion' as SubjectType,
         },
       };
 
@@ -317,7 +321,7 @@ describe('utils/state.ts', () => {
           },
         });
 
-      const result = await getGitifySubjectForDiscussion(
+      const result = await getGitifySubjectDetails(
         mockNotification,
         mockAccounts.token,
       );
@@ -332,6 +336,7 @@ describe('utils/state.ts', () => {
         subject: {
           ...mockedSingleNotification.subject,
           title: 'This is a resolved discussion',
+          type: 'Discussion' as SubjectType,
         },
       };
 
@@ -355,7 +360,7 @@ describe('utils/state.ts', () => {
           },
         });
 
-      const result = await getGitifySubjectForDiscussion(
+      const result = await getGitifySubjectDetails(
         mockNotification,
         mockAccounts.token,
       );
@@ -370,6 +375,7 @@ describe('utils/state.ts', () => {
         subject: {
           ...mockedSingleNotification.subject,
           title: 'This is a discussion',
+          type: 'Discussion' as SubjectType,
         },
       };
 
@@ -402,7 +408,7 @@ describe('utils/state.ts', () => {
           },
         });
 
-      const result = await getGitifySubjectForDiscussion(
+      const result = await getGitifySubjectDetails(
         mockNotification,
         mockAccounts.token,
       );
@@ -410,8 +416,6 @@ describe('utils/state.ts', () => {
       expect(result.state).toBe('OPEN');
       expect(result.user).toBe(null);
     });
-
-    it('handles unknown or missing results', async () => {});
   });
 
   describe('getGitifySubjectForIssue', () => {
@@ -424,7 +428,7 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/comments/302888448')
         .reply(200, { user: { login: 'some-user' } });
 
-      const result = await getGitifySubjectForIssue(
+      const result = await getGitifySubjectDetails(
         mockedSingleNotification,
         mockAccounts.token,
       );
@@ -442,7 +446,7 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/comments/302888448')
         .reply(200, { user: { login: 'some-user' } });
 
-      const result = await getGitifySubjectForIssue(
+      const result = await getGitifySubjectDetails(
         mockedSingleNotification,
         mockAccounts.token,
       );
@@ -460,7 +464,7 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/comments/302888448')
         .reply(200, { user: { login: 'some-user' } });
 
-      const result = await getGitifySubjectForIssue(
+      const result = await getGitifySubjectDetails(
         mockedSingleNotification,
         mockAccounts.token,
       );
@@ -478,7 +482,7 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/comments/302888448')
         .reply(200, { user: { login: 'some-user' } });
 
-      const result = await getGitifySubjectForIssue(
+      const result = await getGitifySubjectDetails(
         mockedSingleNotification,
         mockAccounts.token,
       );
@@ -496,7 +500,7 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/comments/302888448')
         .reply(200, { user: { login: 'some-user' } });
 
-      const result = await getGitifySubjectForIssue(
+      const result = await getGitifySubjectDetails(
         mockedSingleNotification,
         mockAccounts.token,
       );
@@ -507,6 +511,14 @@ describe('utils/state.ts', () => {
   });
 
   describe('getGitifySubjectForPullRequest', () => {
+    const mockNotification = {
+      ...mockedSingleNotification,
+      subject: {
+        ...mockedSingleNotification.subject,
+        type: 'PullRequest' as SubjectType,
+      },
+    };
+
     it('closed pull request state', async () => {
       nock('https://api.github.com')
         .get('/repos/manosim/notifications-test/issues/1')
@@ -516,8 +528,8 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/comments/302888448')
         .reply(200, { user: { login: 'some-user' } });
 
-      const result = await getGitifySubjectForPullRequest(
-        mockedSingleNotification,
+      const result = await getGitifySubjectDetails(
+        mockNotification,
         mockAccounts.token,
       );
 
@@ -534,8 +546,8 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/comments/302888448')
         .reply(200, { user: { login: 'some-user' } });
 
-      const result = await getGitifySubjectForPullRequest(
-        mockedSingleNotification,
+      const result = await getGitifySubjectDetails(
+        mockNotification,
         mockAccounts.token,
       );
 
@@ -552,8 +564,8 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/comments/302888448')
         .reply(200, { user: { login: 'some-user' } });
 
-      const result = await getGitifySubjectForPullRequest(
-        mockedSingleNotification,
+      const result = await getGitifySubjectDetails(
+        mockNotification,
         mockAccounts.token,
       );
 
@@ -570,12 +582,38 @@ describe('utils/state.ts', () => {
         .get('/repos/manosim/notifications-test/issues/comments/302888448')
         .reply(200, { user: { login: 'some-user' } });
 
-      const result = await getGitifySubjectForPullRequest(
-        mockedSingleNotification,
+      const result = await getGitifySubjectDetails(
+        mockNotification,
         mockAccounts.token,
       );
 
       expect(result.state).toBe('open');
+      expect(result.user).toBe('some-user');
+    });
+  });
+
+  describe('getGitifySubjectForRelease', () => {
+    it('release notification', async () => {
+      const mockNotification = {
+        ...mockedSingleNotification,
+        subject: {
+          ...mockedSingleNotification.subject,
+          type: 'Release' as SubjectType,
+          url: 'https://api.github.com/repos/manosim/notifications-test/releases/1',
+          latest_comment_url:
+            'https://api.github.com/repos/manosim/notifications-test/releases/1',
+        },
+      };
+
+      nock('https://api.github.com')
+        .get('/repos/manosim/notifications-test/releases/1')
+        .reply(200, { author: { login: 'some-user' } });
+
+      const result = await getGitifySubjectDetails(
+        mockNotification,
+        mockAccounts.token,
+      );
+
       expect(result.user).toBe('some-user');
     });
   });
