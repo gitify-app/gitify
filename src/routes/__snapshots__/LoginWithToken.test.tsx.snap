@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`routes/LoginWithToken.js renders correctly 1`] = `
+exports[`routes/LoginWithToken.tsx renders correctly 1`] = `
 <div
   className="flex-1 bg-white dark:bg-gray-dark dark:text-white"
 >

@@ -9,6 +9,7 @@ import {
   Notification,
   PullRequest,
   PullRequestStateType,
+  ReleaseComments,
   User,
   WorkflowRunAttributes,
 } from '../typesGithub';
@@ -27,6 +28,8 @@ export async function getGitifySubjectDetails(
       return await getGitifySubjectForIssue(notification, token);
     case 'PullRequest':
       return await getGitifySubjectForPullRequest(notification, token);
+    case 'Release':
+      return await getGitifySubjectForRelease(notification, token);
     case 'WorkflowRun':
       return getGitifySubjectForWorkflowRun(notification);
     default:
@@ -152,6 +155,18 @@ async function getGitifySubjectForPullRequest(
   };
 }
 
+async function getGitifySubjectForRelease(
+  notification: Notification,
+  token: string,
+): Promise<GitifySubject> {
+  const releaseCommentUser = await getLatestCommentUser(notification, token);
+
+  return {
+    state: null,
+    user: releaseCommentUser.login,
+  };
+}
+
 function getGitifySubjectForWorkflowRun(
   notification: Notification,
 ): GitifySubject {
@@ -203,9 +218,11 @@ async function getLatestCommentUser(
     return null;
   }
 
-  const response: IssueComments = (
+  const response: IssueComments | ReleaseComments = (
     await apiRequestAuth(notification.subject.latest_comment_url, 'GET', token)
   )?.data;
 
-  return response?.user;
+  return (
+    (response as IssueComments)?.user ?? (response as ReleaseComments).author
+  );
 }

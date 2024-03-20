@@ -9,7 +9,7 @@ import { mockedSingleNotification } from '../__mocks__/mockedData';
 import { NotificationRow } from './NotificationRow';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 
-describe('components/Notification.js', () => {
+describe('components/NotificationRow.tsx', () => {
   beforeEach(() => {
     jest.spyOn(helpers, 'openInBrowser');
   });

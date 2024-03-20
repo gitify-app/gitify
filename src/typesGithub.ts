@@ -245,6 +245,22 @@ export interface IssueComments {
   body: string;
 }
 
+export interface ReleaseComments {
+  url: string;
+  assets_url: string;
+  html_url: string;
+  id: number;
+  author: User;
+  node_id: string;
+  tag_name: string;
+  name: string;
+  draft: boolean;
+  prerelease: boolean;
+  created_at: string;
+  published_at: string;
+  body: string;
+}
+
 export interface GraphQLSearch<T> {
   data: {
     data: {

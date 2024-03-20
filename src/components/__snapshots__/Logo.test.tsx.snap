@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/ui/logo.tsx renders correctly (light) 1`] = `
+exports[`components/Logo.tsx renders correctly (light) 1`] = `
 <svg
   className=""
   onClick={[Function]}
@@ -47,7 +47,7 @@ exports[`components/ui/logo.tsx renders correctly (light) 1`] = `
 </svg>
 `;
 
-exports[`components/ui/logo.tsx renders correctly(dark) 1`] = `
+exports[`components/Logo.tsx renders correctly(dark) 1`] = `
 <svg
   className=""
   onClick={[Function]}

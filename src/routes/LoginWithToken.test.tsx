@@ -13,7 +13,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
-describe('routes/LoginWithToken.js', () => {
+describe('routes/LoginWithToken.tsx', () => {
   const openExternalMock = jest.spyOn(shell, 'openExternal');
 
   const mockValidateToken = jest.fn();

@@ -9,7 +9,7 @@ import {
   getWorkflowRunAttributes,
 } from './subject';
 import { SubjectType } from '../typesGithub';
-describe('utils/state.ts', () => {
+describe('utils/subject.ts', () => {
   beforeEach(() => {
     // axios will default to using the XHR adapter which can't be intercepted
     // by nock. So, configure axios to use the node adapter.
@@ -631,6 +631,32 @@ describe('utils/state.ts', () => {
         expect(result.state).toBe('open');
         expect(result.user).toBeNull();
       });
+    });
+  });
+
+  describe('getGitifySubjectForRelease', () => {
+    it('release notification', async () => {
+      const mockNotification = {
+        ...mockedSingleNotification,
+        subject: {
+          ...mockedSingleNotification.subject,
+          type: 'Release' as SubjectType,
+          url: 'https://api.github.com/repos/manosim/notifications-test/releases/1',
+          latest_comment_url:
+            'https://api.github.com/repos/manosim/notifications-test/releases/1',
+        },
+      };
+
+      nock('https://api.github.com')
+        .get('/repos/manosim/notifications-test/releases/1')
+        .reply(200, { author: { login: 'some-user' } });
+
+      const result = await getGitifySubjectDetails(
+        mockNotification,
+        mockAccounts.token,
+      );
+
+      expect(result.user).toBe('some-user');
     });
   });
 

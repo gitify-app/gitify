@@ -12,7 +12,7 @@ jest.mock('nprogress', () => ({
   remove: jest.fn(),
 }));
 
-describe('components/Loading.js', () => {
+describe('components/Loading.tsx', () => {
   beforeEach(() => {
     jest.clearAllMocks();
   });
