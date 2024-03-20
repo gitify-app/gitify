@@ -27,7 +27,6 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
         title="Mark Repository as Done"
       >
         <svg
-          aria-hidden="false"
           aria-label="Mark Repository as Done"
           className="octicon octicon-check"
           fill="currentColor"
@@ -59,7 +58,6 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
         title="Mark Repository as Read"
       >
         <svg
-          aria-hidden="false"
           aria-label="Mark Repository as Read"
           className="octicon octicon-read"
           fill="currentColor"

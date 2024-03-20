@@ -9,7 +9,6 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
     title="Open Issue"
   >
     <svg
-      aria-hidden="false"
       aria-label="Issue"
       className="octicon octicon-issue-opened"
       fill="currentColor"
@@ -72,7 +71,6 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       title="Mark as Done"
     >
       <svg
-        aria-hidden="false"
         aria-label="Mark as Done"
         className="octicon octicon-check"
         fill="currentColor"
@@ -101,7 +99,6 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       title="Unsubscribe"
     >
       <svg
-        aria-hidden="false"
         aria-label="Unsubscribe"
         className="octicon octicon-bell-slash"
         fill="currentColor"
@@ -130,7 +127,6 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       title="Mark as Read"
     >
       <svg
-        aria-hidden="false"
         aria-label="Mark as Read"
         className="octicon octicon-read"
         fill="currentColor"
