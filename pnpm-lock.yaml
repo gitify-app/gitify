@@ -12,8 +12,8 @@ dependencies:
     specifier: 2.1.2
     version: 2.1.2(electron@29.1.4)
   '@primer/octicons-react':
-    specifier: 19.8.0
-    version: 19.8.0(react@18.2.0)
+    specifier: 19.9.0
+    version: 19.9.0(react@18.2.0)
   axios:
     specifier: 1.6.8
     version: 1.6.8
@@ -1002,8 +1002,8 @@ packages:
     dev: true
     optional: true
 
-  /@primer/octicons-react@19.8.0(react@18.2.0):
-    resolution: {integrity: sha512-2Z+D7xTloFTLQVRUEbg0pQpe6aTL9RR+8RqBhjkrF+BFuVdM1ENOyjywaGEO7DIkPU5Zxlv0gxSlD85LQxL+sw==}
+  /@primer/octicons-react@19.9.0(react@18.2.0):
+    resolution: {integrity: sha512-Uk4XrHyfylyfzZN9d8VFjF8FpfYHEyT4sabw+9+oP+GWAJHhPvNPTz6gXvUzJZmoblAvgcTrDslIPjz8zMh76w==}
     engines: {node: '>=8'}
     peerDependencies:
       react: '>=16.3'
