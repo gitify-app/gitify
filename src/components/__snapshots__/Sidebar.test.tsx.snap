@@ -99,7 +99,6 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
       title="Quit Gitify"
     >
       <svg
-        aria-hidden="false"
         aria-label="Quit Gitify"
         className="octicon octicon-x-circle"
         fill="currentColor"
@@ -225,7 +224,6 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
       title="Quit Gitify"
     >
       <svg
-        aria-hidden="false"
         aria-label="Quit Gitify"
         className="octicon octicon-x-circle"
         fill="currentColor"
