@@ -592,6 +592,32 @@ describe('utils/subject.ts', () => {
     });
   });
 
+  describe('getGitifySubjectForRelease', () => {
+    it('release notification', async () => {
+      const mockNotification = {
+        ...mockedSingleNotification,
+        subject: {
+          ...mockedSingleNotification.subject,
+          type: 'Release' as SubjectType,
+          url: 'https://api.github.com/repos/manosim/notifications-test/releases/1',
+          latest_comment_url:
+            'https://api.github.com/repos/manosim/notifications-test/releases/1',
+        },
+      };
+
+      nock('https://api.github.com')
+        .get('/repos/manosim/notifications-test/releases/1')
+        .reply(200, { author: { login: 'some-user' } });
+
+      const result = await getGitifySubjectDetails(
+        mockNotification,
+        mockAccounts.token,
+      );
+
+      expect(result.user).toBe('some-user');
+    });
+  });
+
   describe('getWorkflowRunState', () => {
     it('deploy review workflow run state', async () => {
       const mockNotification = {
