@@ -30,7 +30,7 @@ describe('utils/github-api.ts', () => {
       getNotificationTypeIcon(
         createSubjectMock({ type: 'CheckSuite', state: null }),
       ).displayName,
-    ).toBe('SyncIcon');
+    ).toBe('RocketIcon');
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
