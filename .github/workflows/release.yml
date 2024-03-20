@@ -32,6 +32,11 @@ jobs:
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
           GH_TOKEN: ${{ secrets.gh_token }}
           NOTARIZE: true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Gitify-release-mac
+          path: dist/
+          overwrite: true
 
   release-windows:
     name: Publish Windows (electron-builder)
@@ -52,6 +57,11 @@ jobs:
       - run: pnpm make:win --publish onTagOrDraft
         env:
           GH_TOKEN: ${{ secrets.gh_token }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Gitify-release-win
+          path: dist/
+          overwrite: true
 
   release-linux:
     name: Publish Linux (electron-builder)
@@ -72,3 +82,8 @@ jobs:
       - run: pnpm make:linux --publish onTagOrDraft
         env:
           GH_TOKEN: ${{ secrets.gh_token }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Gitify-release-linux
+          path: dist/
+          overwrite: true
