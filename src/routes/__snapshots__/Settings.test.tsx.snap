@@ -41,7 +41,6 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
       title="Go Back"
     >
       <svg
-        aria-hidden="false"
         aria-label="Go Back"
         class="hover:text-gray-400"
         fill="currentColor"

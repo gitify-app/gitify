@@ -13,7 +13,6 @@ exports[`routes/LoginWithToken.js renders correctly 1`] = `
       title="Go Back"
     >
       <svg
-        aria-hidden="false"
         aria-label="Go Back"
         className="hover:text-gray-400"
         fill="currentColor"
