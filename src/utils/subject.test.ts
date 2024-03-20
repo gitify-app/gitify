@@ -134,461 +134,503 @@ describe('utils/subject.ts', () => {
     });
   });
 
-  describe('getGitifySubjectForDiscussion', () => {
-    it('answered discussion state', async () => {
+  describe('getGitifySubjectDetails', () => {
+    describe('Discussions', () => {
+      it('answered discussion state', async () => {
+        const mockNotification = {
+          ...mockedSingleNotification,
+          subject: {
+            ...mockedSingleNotification.subject,
+            title: 'This is an answered discussion',
+            type: 'Discussion' as SubjectType,
+          },
+        };
+
+        nock('https://api.github.com')
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                nodes: [
+                  {
+                    title: 'This is an answered discussion',
+                    viewerSubscription: 'SUBSCRIBED',
+                    stateReason: null,
+                    isAnswered: true,
+                    comments: {
+                      nodes: [], //TODO - Update this to have real data
+                    },
+                  },
+                ],
+              },
+            },
+          });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('ANSWERED');
+        expect(result.user).toBe(null);
+      });
+
+      it('duplicate discussion state', async () => {
+        const mockNotification = {
+          ...mockedSingleNotification,
+          subject: {
+            ...mockedSingleNotification.subject,
+            title: 'This is a duplicate discussion',
+            type: 'Discussion' as SubjectType,
+          },
+        };
+
+        nock('https://api.github.com')
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                nodes: [
+                  {
+                    title: 'This is a duplicate discussion',
+                    viewerSubscription: 'SUBSCRIBED',
+                    stateReason: 'DUPLICATE',
+                    isAnswered: false,
+                    comments: {
+                      nodes: [], //TODO - Update this to have real data
+                    },
+                  },
+                ],
+              },
+            },
+          });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('DUPLICATE');
+        expect(result.user).toBe(null);
+      });
+
+      it('open discussion state', async () => {
+        const mockNotification = {
+          ...mockedSingleNotification,
+          subject: {
+            ...mockedSingleNotification.subject,
+            title: 'This is an open discussion',
+            type: 'Discussion' as SubjectType,
+          },
+        };
+
+        nock('https://api.github.com')
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                nodes: [
+                  {
+                    title: 'This is an open discussion',
+                    viewerSubscription: 'SUBSCRIBED',
+                    stateReason: null,
+                    isAnswered: false,
+                    comments: {
+                      nodes: [], //TODO - Update this to have real data
+                    },
+                  },
+                ],
+              },
+            },
+          });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('OPEN');
+        expect(result.user).toBe(null);
+      });
+
+      it('outdated discussion state', async () => {
+        const mockNotification = {
+          ...mockedSingleNotification,
+          subject: {
+            ...mockedSingleNotification.subject,
+            title: 'This is an outdated discussion',
+            type: 'Discussion' as SubjectType,
+          },
+        };
+
+        nock('https://api.github.com')
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                nodes: [
+                  {
+                    title: 'This is an outdated discussion',
+                    viewerSubscription: 'SUBSCRIBED',
+                    stateReason: 'OUTDATED',
+                    isAnswered: false,
+                    comments: {
+                      nodes: [], //TODO - Update this to have real data
+                    },
+                  },
+                ],
+              },
+            },
+          });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('OUTDATED');
+        expect(result.user).toBe(null);
+      });
+
+      it('reopened discussion state', async () => {
+        const mockNotification = {
+          ...mockedSingleNotification,
+          subject: {
+            ...mockedSingleNotification.subject,
+            title: 'This is a reopened discussion',
+            type: 'Discussion' as SubjectType,
+          },
+        };
+
+        nock('https://api.github.com')
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                nodes: [
+                  {
+                    title: 'This is a reopened discussion',
+                    viewerSubscription: 'SUBSCRIBED',
+                    stateReason: 'REOPENED',
+                    isAnswered: false,
+                    comments: {
+                      nodes: [], //TODO - Update this to have real data
+                    },
+                  },
+                ],
+              },
+            },
+          });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('REOPENED');
+        expect(result.user).toBe(null);
+      });
+
+      it('resolved discussion state', async () => {
+        const mockNotification = {
+          ...mockedSingleNotification,
+          subject: {
+            ...mockedSingleNotification.subject,
+            title: 'This is a resolved discussion',
+            type: 'Discussion' as SubjectType,
+          },
+        };
+
+        nock('https://api.github.com')
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                nodes: [
+                  {
+                    title: 'This is a resolved discussion',
+                    viewerSubscription: 'SUBSCRIBED',
+                    stateReason: 'RESOLVED',
+                    isAnswered: false,
+                    comments: {
+                      nodes: [], //TODO - Update this to have real data
+                    },
+                  },
+                ],
+              },
+            },
+          });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('RESOLVED');
+        expect(result.user).toBe(null);
+      });
+
+      it('filtered response by subscribed', async () => {
+        const mockNotification = {
+          ...mockedSingleNotification,
+          subject: {
+            ...mockedSingleNotification.subject,
+            title: 'This is a discussion',
+            type: 'Discussion' as SubjectType,
+          },
+        };
+
+        nock('https://api.github.com')
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                nodes: [
+                  {
+                    title: 'This is a discussion',
+                    viewerSubscription: 'SUBSCRIBED',
+                    stateReason: null,
+                    isAnswered: false,
+                    comments: {
+                      nodes: [], //TODO - Update this to have real data
+                    },
+                  },
+                  {
+                    title: 'This is a discussion',
+                    viewerSubscription: 'IGNORED',
+                    stateReason: null,
+                    isAnswered: true,
+                    comments: {
+                      nodes: [], //TODO - Update this to have real data
+                    },
+                  },
+                ],
+              },
+            },
+          });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('OPEN');
+        expect(result.user).toBe(null);
+      });
+    });
+
+    describe('Issues', () => {
+      it('open issue state', async () => {
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/1')
+          .reply(200, { state: 'open' });
+
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/comments/302888448')
+          .reply(200, { user: { login: 'some-user' } });
+
+        const result = await getGitifySubjectDetails(
+          mockedSingleNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('open');
+        expect(result.user).toBe('some-user');
+      });
+
+      it('closed issue state', async () => {
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/1')
+          .reply(200, { state: 'closed' });
+
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/comments/302888448')
+          .reply(200, { user: { login: 'some-user' } });
+
+        const result = await getGitifySubjectDetails(
+          mockedSingleNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('closed');
+        expect(result.user).toBe('some-user');
+      });
+
+      it('completed issue state', async () => {
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/1')
+          .reply(200, { state: 'closed', state_reason: 'completed' });
+
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/comments/302888448')
+          .reply(200, { user: { login: 'some-user' } });
+
+        const result = await getGitifySubjectDetails(
+          mockedSingleNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('completed');
+        expect(result.user).toBe('some-user');
+      });
+
+      it('not_planned issue state', async () => {
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/1')
+          .reply(200, { state: 'open', state_reason: 'not_planned' });
+
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/comments/302888448')
+          .reply(200, { user: { login: 'some-user' } });
+
+        const result = await getGitifySubjectDetails(
+          mockedSingleNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('not_planned');
+        expect(result.user).toBe('some-user');
+      });
+
+      it('reopened issue state', async () => {
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/1')
+          .reply(200, { state: 'open', state_reason: 'reopened' });
+
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/comments/302888448')
+          .reply(200, { user: { login: 'some-user' } });
+
+        const result = await getGitifySubjectDetails(
+          mockedSingleNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('reopened');
+        expect(result.user).toBe('some-user');
+      });
+
+      it('handle issues without latest_comment_url', async () => {
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/1')
+          .reply(200, { state: 'open', draft: false, merged: false });
+
+        const result = await getGitifySubjectDetails(
+          {
+            ...mockedSingleNotification,
+            subject: {
+              ...mockedSingleNotification.subject,
+              latest_comment_url: null,
+            },
+          },
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('open');
+        expect(result.user).toBeNull();
+      });
+    });
+
+    describe('Pull Requests', () => {
       const mockNotification = {
         ...mockedSingleNotification,
         subject: {
           ...mockedSingleNotification.subject,
-          title: 'This is an answered discussion',
-          type: 'Discussion' as SubjectType,
+          type: 'PullRequest' as SubjectType,
         },
       };
 
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            search: {
-              nodes: [
-                {
-                  title: 'This is an answered discussion',
-                  viewerSubscription: 'SUBSCRIBED',
-                  stateReason: null,
-                  isAnswered: true,
-                  comments: {
-                    nodes: [], //TODO - Update this to have real data
-                  },
-                },
-              ],
+      it('closed pull request state', async () => {
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/1')
+          .reply(200, { state: 'closed', draft: false, merged: false });
+
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/comments/302888448')
+          .reply(200, { user: { login: 'some-user' } });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('closed');
+        expect(result.user).toBe('some-user');
+      });
+
+      it('draft pull request state', async () => {
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/1')
+          .reply(200, { state: 'open', draft: true, merged: false });
+
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/comments/302888448')
+          .reply(200, { user: { login: 'some-user' } });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('draft');
+        expect(result.user).toBe('some-user');
+      });
+
+      it('merged pull request state', async () => {
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/1')
+          .reply(200, { state: 'open', draft: false, merged: true });
+
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/comments/302888448')
+          .reply(200, { user: { login: 'some-user' } });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('merged');
+        expect(result.user).toBe('some-user');
+      });
+
+      it('open pull request state', async () => {
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/1')
+          .reply(200, { state: 'open', draft: false, merged: false });
+
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/comments/302888448')
+          .reply(200, { user: { login: 'some-user' } });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBe('open');
+        expect(result.user).toBe('some-user');
+      });
+
+      it('handle pull request without latest_comment_url', async () => {
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/issues/1')
+          .reply(200, { state: 'open', draft: false, merged: false });
+
+        const result = await getGitifySubjectDetails(
+          {
+            ...mockNotification,
+            subject: {
+              ...mockNotification.subject,
+              latest_comment_url: null,
             },
           },
-        });
+          mockAccounts.token,
+        );
 
-      const result = await getGitifySubjectDetails(
-        mockNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('ANSWERED');
-      expect(result.user).toBe(null);
-    });
-
-    it('duplicate discussion state', async () => {
-      const mockNotification = {
-        ...mockedSingleNotification,
-        subject: {
-          ...mockedSingleNotification.subject,
-          title: 'This is a duplicate discussion',
-          type: 'Discussion' as SubjectType,
-        },
-      };
-
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            search: {
-              nodes: [
-                {
-                  title: 'This is a duplicate discussion',
-                  viewerSubscription: 'SUBSCRIBED',
-                  stateReason: 'DUPLICATE',
-                  isAnswered: false,
-                  comments: {
-                    nodes: [], //TODO - Update this to have real data
-                  },
-                },
-              ],
-            },
-          },
-        });
-
-      const result = await getGitifySubjectDetails(
-        mockNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('DUPLICATE');
-      expect(result.user).toBe(null);
-    });
-
-    it('open discussion state', async () => {
-      const mockNotification = {
-        ...mockedSingleNotification,
-        subject: {
-          ...mockedSingleNotification.subject,
-          title: 'This is an open discussion',
-          type: 'Discussion' as SubjectType,
-        },
-      };
-
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            search: {
-              nodes: [
-                {
-                  title: 'This is an open discussion',
-                  viewerSubscription: 'SUBSCRIBED',
-                  stateReason: null,
-                  isAnswered: false,
-                  comments: {
-                    nodes: [], //TODO - Update this to have real data
-                  },
-                },
-              ],
-            },
-          },
-        });
-
-      const result = await getGitifySubjectDetails(
-        mockNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('OPEN');
-      expect(result.user).toBe(null);
-    });
-
-    it('outdated discussion state', async () => {
-      const mockNotification = {
-        ...mockedSingleNotification,
-        subject: {
-          ...mockedSingleNotification.subject,
-          title: 'This is an outdated discussion',
-          type: 'Discussion' as SubjectType,
-        },
-      };
-
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            search: {
-              nodes: [
-                {
-                  title: 'This is an outdated discussion',
-                  viewerSubscription: 'SUBSCRIBED',
-                  stateReason: 'OUTDATED',
-                  isAnswered: false,
-                  comments: {
-                    nodes: [], //TODO - Update this to have real data
-                  },
-                },
-              ],
-            },
-          },
-        });
-
-      const result = await getGitifySubjectDetails(
-        mockNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('OUTDATED');
-      expect(result.user).toBe(null);
-    });
-
-    it('reopened discussion state', async () => {
-      const mockNotification = {
-        ...mockedSingleNotification,
-        subject: {
-          ...mockedSingleNotification.subject,
-          title: 'This is a reopened discussion',
-          type: 'Discussion' as SubjectType,
-        },
-      };
-
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            search: {
-              nodes: [
-                {
-                  title: 'This is a reopened discussion',
-                  viewerSubscription: 'SUBSCRIBED',
-                  stateReason: 'REOPENED',
-                  isAnswered: false,
-                  comments: {
-                    nodes: [], //TODO - Update this to have real data
-                  },
-                },
-              ],
-            },
-          },
-        });
-
-      const result = await getGitifySubjectDetails(
-        mockNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('REOPENED');
-      expect(result.user).toBe(null);
-    });
-
-    it('resolved discussion state', async () => {
-      const mockNotification = {
-        ...mockedSingleNotification,
-        subject: {
-          ...mockedSingleNotification.subject,
-          title: 'This is a resolved discussion',
-          type: 'Discussion' as SubjectType,
-        },
-      };
-
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            search: {
-              nodes: [
-                {
-                  title: 'This is a resolved discussion',
-                  viewerSubscription: 'SUBSCRIBED',
-                  stateReason: 'RESOLVED',
-                  isAnswered: false,
-                  comments: {
-                    nodes: [], //TODO - Update this to have real data
-                  },
-                },
-              ],
-            },
-          },
-        });
-
-      const result = await getGitifySubjectDetails(
-        mockNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('RESOLVED');
-      expect(result.user).toBe(null);
-    });
-
-    it('filtered response by subscribed', async () => {
-      const mockNotification = {
-        ...mockedSingleNotification,
-        subject: {
-          ...mockedSingleNotification.subject,
-          title: 'This is a discussion',
-          type: 'Discussion' as SubjectType,
-        },
-      };
-
-      nock('https://api.github.com')
-        .post('/graphql')
-        .reply(200, {
-          data: {
-            search: {
-              nodes: [
-                {
-                  title: 'This is a discussion',
-                  viewerSubscription: 'SUBSCRIBED',
-                  stateReason: null,
-                  isAnswered: false,
-                  comments: {
-                    nodes: [], //TODO - Update this to have real data
-                  },
-                },
-                {
-                  title: 'This is a discussion',
-                  viewerSubscription: 'IGNORED',
-                  stateReason: null,
-                  isAnswered: true,
-                  comments: {
-                    nodes: [], //TODO - Update this to have real data
-                  },
-                },
-              ],
-            },
-          },
-        });
-
-      const result = await getGitifySubjectDetails(
-        mockNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('OPEN');
-      expect(result.user).toBe(null);
-    });
-  });
-
-  describe('getGitifySubjectForIssue', () => {
-    it('open issue state', async () => {
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/1')
-        .reply(200, { state: 'open' });
-
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/comments/302888448')
-        .reply(200, { user: { login: 'some-user' } });
-
-      const result = await getGitifySubjectDetails(
-        mockedSingleNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('open');
-      expect(result.user).toBe('some-user');
-    });
-
-    it('closed issue state', async () => {
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/1')
-        .reply(200, { state: 'closed' });
-
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/comments/302888448')
-        .reply(200, { user: { login: 'some-user' } });
-
-      const result = await getGitifySubjectDetails(
-        mockedSingleNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('closed');
-      expect(result.user).toBe('some-user');
-    });
-
-    it('completed issue state', async () => {
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/1')
-        .reply(200, { state: 'closed', state_reason: 'completed' });
-
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/comments/302888448')
-        .reply(200, { user: { login: 'some-user' } });
-
-      const result = await getGitifySubjectDetails(
-        mockedSingleNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('completed');
-      expect(result.user).toBe('some-user');
-    });
-
-    it('not_planned issue state', async () => {
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/1')
-        .reply(200, { state: 'open', state_reason: 'not_planned' });
-
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/comments/302888448')
-        .reply(200, { user: { login: 'some-user' } });
-
-      const result = await getGitifySubjectDetails(
-        mockedSingleNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('not_planned');
-      expect(result.user).toBe('some-user');
-    });
-
-    it('reopened issue state', async () => {
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/1')
-        .reply(200, { state: 'open', state_reason: 'reopened' });
-
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/comments/302888448')
-        .reply(200, { user: { login: 'some-user' } });
-
-      const result = await getGitifySubjectDetails(
-        mockedSingleNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('reopened');
-      expect(result.user).toBe('some-user');
-    });
-  });
-
-  describe('getGitifySubjectForPullRequest', () => {
-    const mockNotification = {
-      ...mockedSingleNotification,
-      subject: {
-        ...mockedSingleNotification.subject,
-        type: 'PullRequest' as SubjectType,
-      },
-    };
-
-    it('closed pull request state', async () => {
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/1')
-        .reply(200, { state: 'closed', draft: false, merged: false });
-
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/comments/302888448')
-        .reply(200, { user: { login: 'some-user' } });
-
-      const result = await getGitifySubjectDetails(
-        mockNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('closed');
-      expect(result.user).toBe('some-user');
-    });
-
-    it('draft pull request state', async () => {
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/1')
-        .reply(200, { state: 'open', draft: true, merged: false });
-
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/comments/302888448')
-        .reply(200, { user: { login: 'some-user' } });
-
-      const result = await getGitifySubjectDetails(
-        mockNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('draft');
-      expect(result.user).toBe('some-user');
-    });
-
-    it('merged pull request state', async () => {
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/1')
-        .reply(200, { state: 'open', draft: false, merged: true });
-
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/comments/302888448')
-        .reply(200, { user: { login: 'some-user' } });
-
-      const result = await getGitifySubjectDetails(
-        mockNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('merged');
-      expect(result.user).toBe('some-user');
-    });
-
-    it('open pull request state', async () => {
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/1')
-        .reply(200, { state: 'open', draft: false, merged: false });
-
-      nock('https://api.github.com')
-        .get('/repos/manosim/notifications-test/issues/comments/302888448')
-        .reply(200, { user: { login: 'some-user' } });
-
-      const result = await getGitifySubjectDetails(
-        mockNotification,
-        mockAccounts.token,
-      );
-
-      expect(result.state).toBe('open');
-      expect(result.user).toBe('some-user');
+        expect(result.state).toBe('open');
+        expect(result.user).toBeNull();
+      });
     });
   });
 

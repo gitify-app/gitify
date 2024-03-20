@@ -445,6 +445,34 @@ describe('utils/helpers.ts', () => {
           `https://github.com/manosim/notifications-test/discussions/612?${mockedNotificationReferrer}#discussioncomment-2300902`,
         );
       });
+
+      it('default to base discussions url when graphql query fails', async () => {
+        const subject = {
+          title: '1.16.0',
+          url: null,
+          latest_comment_url: null,
+          type: 'Discussion' as SubjectType,
+        };
+
+        const requestPromise = new Promise((resolve) =>
+          resolve(null as AxiosResponse),
+        ) as AxiosPromise;
+
+        apiRequestAuthMock.mockResolvedValue(requestPromise);
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/discussions?${mockedNotificationReferrer}`,
+        );
+      });
     });
 
     it('Repository Invitation url', async () => {
