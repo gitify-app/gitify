@@ -42,6 +42,7 @@ The release process is automated. Follow the steps below.
 4. Attach each of the [release artifacts](https://github.com/gitify-app/gitify/actions/workflows/release.yml) to the draft release notes 
 5. Merge your release branch into `main`.
 6. Publish the draft release once you've added notes to it and all assets are there.
+7. Raise and merge a pull request in [gitify-app/website](https://github.com/gitify-app/website) using the automatically created branch (ie: `bump/v1.2.3`)
 
 ### Tests
 
