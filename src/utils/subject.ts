@@ -198,7 +198,7 @@ function getWorkflowRunStatus(statusDisplayName: string): CheckSuiteStatus {
 async function getLatestCommentUser(
   notification: Notification,
   token: string,
-): Promise<User | null> {
+): Promise<User> | null {
   if (!notification.subject.latest_comment_url) {
     return null;
   }

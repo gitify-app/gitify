@@ -11,13 +11,6 @@ describe('utils/api-requests.ts', () => {
     jest.resetAllMocks();
   });
 
-  it('handles null parameters', async () => {
-    const response = await apiRequest(null, null, null);
-
-    expect(axios).toHaveBeenCalledTimes(0);
-    expect(response).toBe;
-  });
-
   it('should make a request with the correct parameters', async () => {
     const data = { key: 'value' };
 
@@ -51,13 +44,6 @@ describe('apiRequestAuth', () => {
 
   afterEach(() => {
     jest.resetAllMocks();
-  });
-
-  it('handles null parameters', async () => {
-    const response = await apiRequestAuth(null, null, null, null);
-
-    expect(axios).toHaveBeenCalledTimes(0);
-    expect(response).toBe;
   });
 
   it('should make an authenticated request with the correct parameters', async () => {
