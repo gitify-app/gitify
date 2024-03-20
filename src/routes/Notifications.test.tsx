@@ -17,7 +17,7 @@ jest.mock('../components/Oops', () => ({
   Oops: 'Oops',
 }));
 
-describe('routes/Notifications.ts', () => {
+describe('routes/Notifications.tsx', () => {
   it('should render itself & its children (with notifications)', () => {
     const tree = TestRenderer.create(
       <AppContext.Provider

@@ -16,7 +16,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
-describe('routes/LoginEnterprise.js', () => {
+describe('routes/LoginEnterprise.tsx', () => {
   const mockAccounts: AuthState = {
     enterpriseAccounts: [],
     user: null,

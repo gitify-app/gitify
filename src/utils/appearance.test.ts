@@ -3,7 +3,7 @@ import { setAppearance } from './appearance';
 
 import * as appearanceHelpers from './appearance';
 
-describe('utils/appearance.tsx', () => {
+describe('utils/appearance.ts', () => {
   beforeAll(() => {
     jest.spyOn(appearanceHelpers, 'setLightMode');
     jest.spyOn(appearanceHelpers, 'setDarkMode');
