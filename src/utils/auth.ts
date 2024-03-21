@@ -4,7 +4,7 @@ import { generateGitHubAPIUrl, isEnterpriseHost } from './helpers';
 import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 import { AuthResponse, AuthState, AuthTokenResponse } from '../types';
 import { Constants } from '../utils/constants';
-import { User } from '../typesGithub';
+import { UserDetails } from '../typesGithub';
 
 export const authGitHub = (
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
@@ -76,18 +76,12 @@ export const authGitHub = (
 export const getUserData = async (
   token: string,
   hostname: string,
-): Promise<User> => {
-  const response = await apiRequestAuth(
-    `${generateGitHubAPIUrl(hostname)}user`,
-    'GET',
-    token,
-  );
+): Promise<UserDetails> => {
+  const response = (
+    await apiRequestAuth(`${generateGitHubAPIUrl(hostname)}user`, 'GET', token)
+  ).data;
 
-  return {
-    id: response.data.id,
-    login: response.data.login,
-    name: response.data.name,
-  };
+  return response;
 };
 
 export const getToken = async (
@@ -112,7 +106,7 @@ export const addAccount = (
   accounts: AuthState,
   token,
   hostname,
-  user?: User,
+  user?: UserDetails,
 ): AuthState => {
   if (!isEnterpriseHost(hostname)) {
     return {

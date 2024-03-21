@@ -10,8 +10,8 @@ import {
   PullRequest,
   PullRequestStateType,
   ReleaseComments,
-  User,
   WorkflowRunAttributes,
+  SubjectUser,
 } from '../typesGithub';
 import { apiRequestAuth } from './api-requests';
 
@@ -107,12 +107,21 @@ async function getGitifySubjectForDiscussion(
     }
   }
 
-  const discussionUser = getLatestDiscussionComment(discussion.comments.nodes)
-    ?.author.login;
+  const latestDiscussionComment = getLatestDiscussionComment(
+    discussion.comments.nodes,
+  );
+
+  let discussionUser = null;
+  if (latestDiscussionComment) {
+    discussionUser = {
+      login: latestDiscussionComment.user.login,
+      avatar_url: latestDiscussionComment.user.avatar_url,
+    };
+  }
 
   return {
     state: discussionState,
-    user: discussionUser ?? null,
+    user: discussionUser,
   };
 }
 
@@ -128,7 +137,10 @@ async function getGitifySubjectForIssue(
 
   return {
     state: issue.state_reason ?? issue.state,
-    user: issueCommentUser?.login ?? null,
+    user: {
+      login: issueCommentUser?.login ?? issue.user.login,
+      avatar_url: issueCommentUser?.avatar_url ?? issue.user.avatar_url,
+    },
   };
 }
 
@@ -151,7 +163,10 @@ async function getGitifySubjectForPullRequest(
 
   return {
     state: prState,
-    user: prCommentUser?.login ?? null,
+    user: {
+      login: prCommentUser?.login ?? pr.user.login,
+      avatar_url: prCommentUser?.avatar_url ?? pr.user.avatar_url,
+    },
   };
 }
 
@@ -163,7 +178,10 @@ async function getGitifySubjectForRelease(
 
   return {
     state: null,
-    user: releaseCommentUser.login,
+    user: {
+      login: releaseCommentUser.login,
+      avatar_url: releaseCommentUser.avatar_url,
+    },
   };
 }
 
@@ -213,7 +231,7 @@ function getWorkflowRunStatus(statusDisplayName: string): CheckSuiteStatus {
 async function getLatestCommentUser(
   notification: Notification,
   token: string,
-): Promise<User> | null {
+): Promise<SubjectUser> | null {
   if (!notification.subject.latest_comment_url) {
     return null;
   }
@@ -222,7 +240,11 @@ async function getLatestCommentUser(
     await apiRequestAuth(notification.subject.latest_comment_url, 'GET', token)
   )?.data;
 
-  return (
-    (response as IssueComments)?.user ?? (response as ReleaseComments).author
-  );
+  const user =
+    (response as IssueComments)?.user ?? (response as ReleaseComments).author;
+
+  return {
+    login: user.login,
+    avatar_url: user.avatar_url,
+  };
 }

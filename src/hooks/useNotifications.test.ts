@@ -3,7 +3,11 @@ import axios from 'axios';
 import nock from 'nock';
 
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
-import { mockedUser } from '../__mocks__/mockedData';
+import {
+  mockedCommenterUser,
+  mockedNotificationUser,
+  mockedUser,
+} from '../__mocks__/mockedData';
 import { AuthState } from '../types';
 import { useNotifications } from './useNotifications';
 
@@ -194,19 +198,15 @@ describe('hooks/useNotifications.ts', () => {
             subject: {
               title: 'This is a check suite workflow.',
               type: 'CheckSuite',
-              url: 'https://api.github.com/1',
+              url: null,
             },
-            repository: {
-              full_name: 'some/repo',
-            },
-            updated_at: '2024-02-26T00:00:00Z',
           },
           {
             id: 2,
             subject: {
               title: 'This is a Discussion.',
               type: 'Discussion',
-              url: 'https://api.github.com/2',
+              url: null,
             },
             repository: {
               full_name: 'some/repo',
@@ -236,7 +236,7 @@ describe('hooks/useNotifications.ts', () => {
             subject: {
               title: 'This is an invitation.',
               type: 'RepositoryInvitation',
-              url: 'https://api.github.com/5',
+              url: null,
             },
           },
           {
@@ -244,7 +244,7 @@ describe('hooks/useNotifications.ts', () => {
             subject: {
               title: 'This is a workflow run.',
               type: 'WorkflowRun',
-              url: 'https://api.github.com/6',
+              url: null,
             },
           },
         ];
@@ -270,8 +270,10 @@ describe('hooks/useNotifications.ts', () => {
                         {
                           databaseId: 2297637,
                           createdAt: '2022-03-04T20:39:44Z',
-                          author: {
+                          user: {
                             login: 'comment-user',
+                            avatar_url:
+                              'https://avatars.githubusercontent.com/u/1?v=4',
                           },
                           replies: {
                             nodes: [],
@@ -285,21 +287,22 @@ describe('hooks/useNotifications.ts', () => {
             },
           });
 
-        nock('https://api.github.com')
-          .get('/3')
-          .reply(200, { state: 'closed', merged: true });
+        nock('https://api.github.com').get('/3').reply(200, {
+          state: 'closed',
+          merged: true,
+          user: mockedNotificationUser,
+        });
         nock('https://api.github.com')
           .get('/3/comments')
-          .reply(200, { user: { login: 'some-user' } });
-        nock('https://api.github.com')
-          .get('/4')
-          .reply(200, { state: 'closed', merged: false });
+          .reply(200, { user: mockedCommenterUser });
+        nock('https://api.github.com').get('/4').reply(200, {
+          state: 'closed',
+          merged: false,
+          user: mockedNotificationUser,
+        });
         nock('https://api.github.com')
           .get('/4/comments')
-          .reply(200, { user: { login: 'some-user' } });
-        nock('https://api.github.com')
-          .get('/5')
-          .reply(200, { state: 'open', draft: false });
+          .reply(200, { user: mockedCommenterUser });
 
         const { result } = renderHook(() => useNotifications(true));
 
