@@ -107,20 +107,21 @@ async function getGitifySubjectForDiscussion(
     }
   }
 
-  const latestDiscussionUser = getLatestDiscussionComment(
+  const latestDiscussionComment = getLatestDiscussionComment(
     discussion.comments.nodes,
-  )?.user;
+  );
+
   let discussionUser = null;
-  if (latestDiscussionUser) {
+  if (latestDiscussionComment) {
     discussionUser = {
-      login: latestDiscussionUser.login,
-      avatar_url: latestDiscussionUser.avatar_url,
+      login: latestDiscussionComment.user.login,
+      avatar_url: latestDiscussionComment.user.avatar_url,
     };
   }
 
   return {
     state: discussionState,
-    user: discussionUser ?? null,
+    user: discussionUser,
   };
 }
 
