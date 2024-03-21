@@ -274,9 +274,9 @@ describe('hooks/useNotifications.ts', () => {
                         {
                           databaseId: 2297637,
                           createdAt: '2022-03-04T20:39:44Z',
-                          author: {
+                          user: {
                             login: 'comment-user',
-                            avatarUrl:
+                            avatar_url:
                               'https://avatars.githubusercontent.com/u/1?v=4',
                           },
                           replies: {
@@ -299,23 +299,19 @@ describe('hooks/useNotifications.ts', () => {
         nock('https://api.github.com')
           .get('/3/comments')
           .reply(200, { user: mockedCommenterUser });
-        nock('https://api.github.com')
-          .get('/4')
-          .reply(200, {
-            state: 'closed',
-            merged: false,
-            user: mockedNotificationUser,
-          });
+        nock('https://api.github.com').get('/4').reply(200, {
+          state: 'closed',
+          merged: false,
+          user: mockedNotificationUser,
+        });
         nock('https://api.github.com')
           .get('/4/comments')
           .reply(200, { user: mockedCommenterUser });
-        nock('https://api.github.com')
-          .get('/5')
-          .reply(200, {
-            state: 'open',
-            draft: false,
-            user: mockedNotificationUser,
-          });
+        nock('https://api.github.com').get('/5').reply(200, {
+          state: 'open',
+          draft: false,
+          user: mockedNotificationUser,
+        });
 
         const { result } = renderHook(() => useNotifications(true));
 
