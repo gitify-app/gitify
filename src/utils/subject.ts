@@ -10,8 +10,8 @@ import {
   PullRequest,
   PullRequestStateType,
   ReleaseComments,
-  SubjectUser,
   WorkflowRunAttributes,
+  SubjectUser,
 } from '../typesGithub';
 import { apiRequestAuth } from './api-requests';
 
@@ -133,17 +133,13 @@ async function getGitifySubjectForIssue(
   ).data;
 
   const issueCommentUser = await getLatestCommentUser(notification, token);
-  let issueUser = null;
-  if (issueCommentUser) {
-    issueUser = {
-      login: issueCommentUser.login,
-      avatar_url: issueCommentUser.avatar_url,
-    };
-  }
 
   return {
     state: issue.state_reason ?? issue.state,
-    user: issueUser,
+    user: {
+      login: issueCommentUser?.login ?? issue.user.login,
+      avatar_url: issueCommentUser?.avatar_url ?? issue.user.avatar_url,
+    },
   };
 }
 
@@ -163,17 +159,13 @@ async function getGitifySubjectForPullRequest(
   }
 
   const prCommentUser = await getLatestCommentUser(notification, token);
-  let prUser = null;
-  if (prCommentUser) {
-    prUser = {
-      login: prCommentUser.login,
-      avatar_url: prCommentUser.avatar_url,
-    };
-  }
 
   return {
     state: prState,
-    user: prUser,
+    user: {
+      login: prCommentUser?.login ?? pr.user.login,
+      avatar_url: prCommentUser?.avatar_url ?? pr.user.avatar_url,
+    },
   };
 }
 
@@ -239,13 +231,12 @@ async function getLatestCommentUser(
   notification: Notification,
   token: string,
 ): Promise<SubjectUser> | null {
-  let url = notification.subject.latest_comment_url ?? notification.subject.url;
-  if (!url) {
+  if (!notification.subject.latest_comment_url) {
     return null;
   }
 
   const response: IssueComments | ReleaseComments = (
-    await apiRequestAuth(url, 'GET', token)
+    await apiRequestAuth(notification.subject.latest_comment_url, 'GET', token)
   )?.data;
 
   const user =

@@ -1,9 +1,9 @@
-import { Notification, User } from './typesGithub';
+import { Notification, UserDetails } from './typesGithub';
 
 export interface AuthState {
   token?: string;
   enterpriseAccounts: EnterpriseAccount[];
-  user: User | null;
+  user: UserDetails | null;
 }
 
 export interface SettingsState {
