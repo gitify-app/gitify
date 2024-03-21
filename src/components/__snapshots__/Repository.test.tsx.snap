@@ -27,7 +27,6 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
         title="Mark Repository as Done"
       >
         <svg
-          aria-hidden="false"
           aria-label="Mark Repository as Done"
           className="octicon octicon-check"
           fill="currentColor"
@@ -59,7 +58,6 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
         title="Mark Repository as Read"
       >
         <svg
-          aria-hidden="false"
           aria-label="Mark Repository as Read"
           className="octicon octicon-read"
           fill="currentColor"
@@ -109,7 +107,6 @@ exports[`components/Repository.tsx should use default repository icon when avata
         fill="currentColor"
         focusable="false"
         height={18}
-        role="img"
         style={
           {
             "display": "inline-block",
@@ -140,7 +137,6 @@ exports[`components/Repository.tsx should use default repository icon when avata
         title="Mark Repository as Done"
       >
         <svg
-          aria-hidden="false"
           aria-label="Mark Repository as Done"
           className="octicon octicon-check"
           fill="currentColor"
@@ -172,7 +168,6 @@ exports[`components/Repository.tsx should use default repository icon when avata
         title="Mark Repository as Read"
       >
         <svg
-          aria-hidden="false"
           aria-label="Mark Repository as Read"
           className="octicon octicon-read"
           fill="currentColor"
