@@ -41,6 +41,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
       title="Go Back"
     >
       <svg
+        aria-hidden="false"
         aria-label="Go Back"
         class="hover:text-gray-400"
         fill="currentColor"
@@ -292,6 +293,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         title="Login with GitHub Enterprise"
       >
         <svg
+          aria-hidden="false"
           aria-label="Login with GitHub Enterprise"
           class="octicon octicon-person-add"
           fill="currentColor"
@@ -312,6 +314,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         title="Logout"
       >
         <svg
+          aria-hidden="false"
           aria-label="Logout"
           class="octicon octicon-sign-out"
           fill="currentColor"
@@ -332,6 +335,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         title="Quit Gitify"
       >
         <svg
+          aria-hidden="false"
           aria-label="Quit Gitify"
           class="octicon octicon-x-circle"
           fill="currentColor"

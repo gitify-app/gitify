@@ -65,6 +65,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
       title="4 Unread Notifications"
     >
       <svg
+        aria-hidden="false"
         aria-label="4 Unread Notifications"
         className="octicon octicon-bell"
         fill="currentColor"
@@ -99,6 +100,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
       title="Quit Gitify"
     >
       <svg
+        aria-hidden="false"
         aria-label="Quit Gitify"
         className="octicon octicon-x-circle"
         fill="currentColor"
@@ -190,6 +192,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
       title="4 Unread Notifications"
     >
       <svg
+        aria-hidden="false"
         aria-label="4 Unread Notifications"
         className="octicon octicon-bell"
         fill="currentColor"
@@ -224,6 +227,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
       title="Quit Gitify"
     >
       <svg
+        aria-hidden="false"
         aria-label="Quit Gitify"
         className="octicon octicon-x-circle"
         fill="currentColor"
