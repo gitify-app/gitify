@@ -8,7 +8,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
     className="flex flex-col flex-1 items-center py-4"
   >
     <button
-      className="w-5 my-3 mx-auto cursor-pointer"
+      className="w-5 my-3 mx-auto cursor-pointer outline-none"
       data-testid="gitify-logo"
       onClick={[Function]}
       title="Open Gitify on GitHub"
@@ -133,7 +133,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
     className="flex flex-col flex-1 items-center py-4"
   >
     <button
-      className="w-5 my-3 mx-auto cursor-pointer"
+      className="w-5 my-3 mx-auto cursor-pointer outline-none"
       data-testid="gitify-logo"
       onClick={[Function]}
       title="Open Gitify on GitHub"
