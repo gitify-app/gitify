@@ -46,7 +46,7 @@ export const Sidebar: React.FC = () => {
     <div className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto	">
       <div className="flex flex-col flex-1 items-center py-4">
         <button
-          className="w-5 my-3 mx-auto cursor-pointer"
+          className="w-5 my-3 mx-auto cursor-pointer outline-none"
           title="Open Gitify on GitHub"
           onClick={onOpenBrowser}
           data-testid="gitify-logo"
