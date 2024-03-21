@@ -61,10 +61,13 @@ export const NotificationRow: React.FC<IProps> = ({
   const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
     addSuffix: true,
   });
-  const updatedBy = notification.subject.user
-    ? ` by ${notification.subject.user}`
-    : '';
-  const updatedLabel = `Updated ${updatedAt}${updatedBy}`;
+  const updatedAtLabel = notification.subject.user
+    ? `updated ${updatedAt}`
+    : `Updated ${updatedAt}`;
+
+  const updatedLabel = notification.subject.user
+    ? `${notification.subject.user.login} ${updatedAtLabel}`
+    : updatedAtLabel;
   const notificationTitle = formatForDisplay([
     notification.subject.state,
     notification.subject.type,
@@ -92,8 +95,22 @@ export const NotificationRow: React.FC<IProps> = ({
         </div>
 
         <div className="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden">
-          <span title={reason.description}>{reason.type}</span> -{' '}
-          <span title={updatedLabel}>{updatedLabel}</span>
+          <span className="flex items-center">
+            <span className="mr-1" title={reason.description}>
+              {reason.type}
+            </span>
+            -
+            <span title={updatedLabel} className="flex ml-1">
+              {notification.subject.user && (
+                <img
+                  className="rounded-full w-4 h-4 mr-1"
+                  src={notification.subject.user.avatar_url}
+                  title={notification.subject.user.login}
+                />
+              )}
+              {updatedAtLabel}
+            </span>
+          </span>
         </div>
       </div>
 

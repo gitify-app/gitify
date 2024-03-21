@@ -87,6 +87,29 @@ export interface User {
   id: number;
 }
 
+export interface UserDetails {
+  login: string;
+  id: number;
+  node_id: string;
+  avatar_url: string;
+  gravatar_url: string;
+  url: string;
+  html_url: string;
+  followers_url: string;
+  following_url: string;
+  gists_url: string;
+  starred_url: string;
+  subscriptions_url: string;
+  organizations_url: string;
+  repos_url: string;
+  events_url: string;
+  received_events_url: string;
+  type: UserType;
+  site_admin: boolean;
+}
+
+export type UserType = 'User' | 'Bot';
+
 export interface Repository {
   id: number;
   node_id: string;
@@ -169,7 +192,12 @@ interface GitHubSubject {
 // This is not in the GitHub API, but we add it to the type to make it easier to work with
 export interface GitifySubject {
   state?: StateType;
-  user?: string;
+  user?: SubjectUser;
+}
+
+export interface SubjectUser {
+  login: string;
+  avatar_url: string;
 }
 
 export interface PullRequest {
@@ -239,7 +267,7 @@ export interface IssueComments {
   issue_url: string;
   id: number;
   node_id: string;
-  user: User;
+  user: UserDetails;
   created_at: string;
   updated_at: string;
   body: string;
@@ -250,7 +278,7 @@ export interface ReleaseComments {
   assets_url: string;
   html_url: string;
   id: number;
-  author: User;
+  author: UserDetails;
   node_id: string;
   tag_name: string;
   name: string;
@@ -282,19 +310,21 @@ export interface DiscussionSearchResultNode {
   };
 }
 
+// Note: We use a GraphQL field aliases to make user details more consistent with Issue, PullRequest and Release
 export interface DiscussionCommentNode {
   databaseId: string | number;
   createdAt: string;
-  author: { login: string };
+  user: SubjectUser;
   replies: {
     nodes: DiscussionSubcommentNode[];
   };
 }
 
+// Note: We use a GraphQL field aliases to make user details more consistent with Issue, PullRequest and Release
 export interface DiscussionSubcommentNode {
   databaseId: string | number;
   createdAt: string;
-  author: { login: string };
+  user: SubjectUser;
 }
 
 export interface CheckSuiteAttributes {

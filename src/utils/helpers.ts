@@ -171,15 +171,17 @@ export async function fetchDiscussion(
                   nodes {
                     databaseId
                     createdAt
-                    author {
+                    user: author {
                       login
+                      avatar_url: avatarUrl
                     }
                     replies(last: $firstReplies) {
                       nodes {
                         databaseId
                         createdAt
-                        author {
+                        user: author {
                           login
+                          avatar_url: avatarUrl
                         }
                       }
                     }
