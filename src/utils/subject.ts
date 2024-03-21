@@ -128,7 +128,7 @@ async function getGitifySubjectForIssue(
 
   return {
     state: issue.state_reason ?? issue.state,
-    user: issueCommentUser?.login ?? null,
+    user: issueCommentUser?.login ?? issue.user.login,
   };
 }
 
@@ -151,7 +151,7 @@ async function getGitifySubjectForPullRequest(
 
   return {
     state: prState,
-    user: prCommentUser?.login ?? null,
+    user: prCommentUser?.login ?? pr.user.login,
   };
 }
 
