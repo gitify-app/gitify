@@ -81,4 +81,15 @@ describe('components/Repository.tsx', () => {
       'github.com',
     );
   });
+
+  it('should use default repository icon when avatar is not available', () => {
+    props.repoNotifications[0].repository.owner.avatar_url = '';
+
+    const tree = TestRenderer.create(
+      <AppContext.Provider value={{}}>
+        <RepositoryNotifications {...props} />
+      </AppContext.Provider>,
+    );
+    expect(tree).toMatchSnapshot();
+  });
 });
