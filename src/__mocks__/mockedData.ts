@@ -5,6 +5,7 @@ import {
   UserDetails,
   GraphQLSearch,
   DiscussionSearchResultNode,
+  User,
 } from '../typesGithub';
 
 export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
@@ -59,6 +60,49 @@ export const mockedUser: UserDetails = {
     collaborators: 0,
     private_repos: 10000,
   },
+};
+
+export const mockedNotificationUser: User = {
+  login: 'octocat',
+  id: 123456789,
+  node_id: 'MDQ6VXNlcjE=',
+  avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+  gravatar_url: '',
+  url: 'https://api.github.com/users/octocat',
+  html_url: 'https://github.com/octocat',
+  followers_url: 'https://api.github.com/users/octocat/followers',
+  following_url: 'https://api.github.com/users/octocat/following{/other_user}',
+  gists_url: 'https://api.github.com/users/octocat/gists{/gist_id}',
+  starred_url: 'https://api.github.com/users/octocat/starred{/owner}{/repo}',
+  subscriptions_url: 'https://api.github.com/users/octocat/subscriptions',
+  organizations_url: 'https://api.github.com/users/octocat/orgs',
+  repos_url: 'https://api.github.com/users/octocat/repos',
+  events_url: 'https://api.github.com/users/octocat/events{/privacy}',
+  received_events_url: 'https://api.github.com/users/octocat/received_events',
+  type: 'User',
+  site_admin: false,
+};
+
+export const mockedCommenterUser: User = {
+  login: 'dummyuser',
+  id: 987654321,
+  node_id: 'MDQ6VXNlcjI=',
+  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+  gravatar_url: '',
+  url: 'https://api.github.com/users/dummyuser',
+  html_url: 'https://github.com/dummyuser',
+  followers_url: 'https://api.github.com/users/dummyuser/followers',
+  following_url:
+    'https://api.github.com/users/dummyuser/following{/other_user}',
+  gists_url: 'https://api.github.com/users/dummyuser/gists{/gist_id}',
+  starred_url: 'https://api.github.com/users/dummyuser/starred{/owner}{/repo}',
+  subscriptions_url: 'https://api.github.com/users/dummyuser/subscriptions',
+  organizations_url: 'https://api.github.com/users/dummyuser/orgs',
+  repos_url: 'https://api.github.com/users/dummyuser/repos',
+  events_url: 'https://api.github.com/users/dummyuser/events{/privacy}',
+  received_events_url: 'https://api.github.com/users/dummyuser/received_events',
+  type: 'User',
+  site_admin: false,
 };
 
 // prettier-ignore

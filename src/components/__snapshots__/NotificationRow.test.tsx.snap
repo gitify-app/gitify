@@ -49,16 +49,21 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       className="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
     >
       <span
-        title="You're watching the repository."
+        className="flex items-center"
       >
-        Subscribed
-      </span>
-       -
-       
-      <span
-        title="Updated in over 3 years"
-      >
-        Updated in over 3 years
+        <span
+          className="mr-1"
+          title="You're watching the repository."
+        >
+          Subscribed
+        </span>
+        -
+        <span
+          className="flex ml-1"
+          title="Updated in over 3 years"
+        >
+          Updated in over 3 years
+        </span>
       </span>
     </div>
   </div>
