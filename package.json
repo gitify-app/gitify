@@ -10,8 +10,8 @@
     "make:linux": "electron-builder --linux",
     "make:macos": "electron-builder --mac --universal",
     "make:win": "electron-builder --win",
-    "prettier:check": "prettier --check 'src/**/*.{js,ts,tsx}'",
-    "prettier:apply": "prettier --write 'src/**/*.{js,ts,tsx}'",
+    "prettier:check": "prettier --check '*.{html,js,json,md,ts,tsx}'",
+    "prettier:apply": "prettier --write '*.{html,js,json,md,ts,tsx}'",
     "test": "jest",
     "start": "electron . --enable-logging",
     "prepare": "husky"
@@ -150,7 +150,7 @@
   },
   "packageManager": "pnpm@8.15.5",
   "lint-staged": {
-    "*.{md,js,ts,tsx}": "prettier --write"
+    "*.{html,js,json,md,ts,tsx}": "prettier --write"
   },
   "pnpm": {
     "overrides": {
