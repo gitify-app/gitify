@@ -20,7 +20,7 @@ import { AppContext } from '../context/App';
 import { Appearance } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
 import { setAppearance } from '../utils/appearance';
-import { updateTrayIcon } from '../utils/comms';
+import { openExternalLink, updateTrayIcon } from '../utils/comms';
 import Constants from '../utils/constants';
 import { generateGitHubAPIUrl } from '../utils/helpers';
 
@@ -31,6 +31,12 @@ export const SettingsRoute: React.FC = () => {
   const [isLinux, setIsLinux] = useState<boolean>(false);
   const [appVersion, setAppVersion] = useState<string | null>(null);
   const [colorScope, setColorScope] = useState<boolean>(false);
+
+  const openGitHubReleaseNotes = useCallback((version) => {
+    openExternalLink(
+      `https://github.com/${Constants.REPO_SLUG}/releases/tag/v${version}`,
+    );
+  }, []);
 
   useEffect(() => {
     ipcRenderer.invoke('get-platform').then((result: string) => {
@@ -166,8 +172,13 @@ export const SettingsRoute: React.FC = () => {
       </div>
 
       <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-4 px-8">
-        <small className="font-semibold">Gitify v{appVersion}</small>
-
+        <small
+          className="font-semibold cursor-pointer"
+          title="View release notes"
+          onClick={() => openGitHubReleaseNotes(appVersion)}
+        >
+          Gitify v{appVersion}
+        </small>
         <div>
           <button
             className={footerButtonClass}
