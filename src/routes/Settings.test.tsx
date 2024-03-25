@@ -10,6 +10,7 @@ import { AppContext } from '../context/App';
 import * as apiRequests from '../utils/api-requests';
 import Constants from '../utils/constants';
 import { SettingsRoute } from './Settings';
+import { shell } from 'electron';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -389,5 +390,31 @@ describe('routes/Settings.tsx', () => {
         'Use GitHub-like state colors (requires repo scope)',
       ).parentNode.parentNode,
     ).toMatchSnapshot();
+  });
+
+  it('should open release notes', async () => {
+    let getByTitle;
+
+    await act(async () => {
+      const { getByTitle: getByTitleLocal } = render(
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByTitle = getByTitleLocal;
+    });
+
+    fireEvent.click(getByTitle('View release notes'));
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(shell.openExternal).toHaveBeenCalledWith(
+      'https://github.com/gitify-app/gitify/releases/tag/v0.0.1',
+    );
   });
 });
