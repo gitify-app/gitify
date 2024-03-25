@@ -149,8 +149,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                             : accounts.token;
 
                           const additionalSubjectDetails =
-                            await 
-                          (notification, token);
+                            await getGitifySubjectDetails(notification, token);
 
                           return {
                             ...notification,
