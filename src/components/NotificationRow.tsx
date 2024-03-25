@@ -62,7 +62,7 @@ export const NotificationRow: React.FC<IProps> = ({
     addSuffix: true,
   });
   const updatedBy = notification.subject.user
-    ? ` by ${notification.subject.user}`
+    ? ` by ${notification.subject.user.login}`
     : '';
   const updatedLabel = `Updated ${updatedAt}${updatedBy}`;
   const notificationTitle = formatForDisplay([

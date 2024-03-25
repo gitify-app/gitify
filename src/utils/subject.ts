@@ -107,8 +107,13 @@ async function getGitifySubjectForDiscussion(
     }
   }
 
-  const discussionUser = getLatestDiscussionComment(discussion.comments.nodes)
-    ?.author.login;
+  const latestDiscussionComment = getLatestDiscussionComment(
+    discussion.comments.nodes,
+  );
+  let discussionUser = null;
+  if (latestDiscussionComment) {
+    discussionUser = latestDiscussionComment.author;
+  }
 
   return {
     state: discussionState,
@@ -128,7 +133,9 @@ async function getGitifySubjectForIssue(
 
   return {
     state: issue.state_reason ?? issue.state,
-    user: issueCommentUser?.login ?? issue.user.login,
+    user: {
+      login: issueCommentUser?.login ?? issue.user.login,
+    },
   };
 }
 
@@ -151,7 +158,9 @@ async function getGitifySubjectForPullRequest(
 
   return {
     state: prState,
-    user: prCommentUser?.login ?? pr.user.login,
+    user: {
+      login: prCommentUser?.login ?? pr.user.login,
+    },
   };
 }
 
@@ -163,7 +172,9 @@ async function getGitifySubjectForRelease(
 
   return {
     state: null,
-    user: releaseCommentUser.login,
+    user: {
+      login: releaseCommentUser.login,
+    },
   };
 }
 
