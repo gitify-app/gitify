@@ -131,11 +131,9 @@ export interface User {
   repos_url: string;
   events_url: string;
   received_events_url: string;
-  type: UserType;
+  type: string;
   site_admin: boolean;
 }
-
-export type UserType = 'User' | 'Bot';
 
 export interface SubjectUser {
   login: string;
