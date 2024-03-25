@@ -1,8 +1,7 @@
-import { AccountNotifications, EnterpriseAccount } from '../types';
+import { AccountNotifications, EnterpriseAccount, GitifyUser } from '../types';
 import {
   Notification,
   Repository,
-  User,
   GraphQLSearch,
   DiscussionSearchResultNode,
 } from '../typesGithub';
@@ -14,7 +13,7 @@ export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
   },
 ];
 
-export const mockedUser: User = {
+export const mockedUser: GitifyUser = {
   login: 'octocat',
   name: 'Mona Lisa Octocat',
   id: 123456789,

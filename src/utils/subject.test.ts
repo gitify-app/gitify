@@ -435,7 +435,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('open');
-        expect(result.user).toBe('some-commenter');
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('closed issue state', async () => {
@@ -453,7 +453,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('closed');
-        expect(result.user).toBe('some-commenter');
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('completed issue state', async () => {
@@ -475,7 +475,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('completed');
-        expect(result.user).toBe('some-commenter');
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('not_planned issue state', async () => {
@@ -497,7 +497,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('not_planned');
-        expect(result.user).toBe('some-commenter');
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('reopened issue state', async () => {
@@ -519,7 +519,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('reopened');
-        expect(result.user).toBe('some-commenter');
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('handle issues without latest_comment_url', async () => {
@@ -544,7 +544,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('open');
-        expect(result.user).toBe('some-user');
+        expect(result.user).toEqual({ login: 'some-user' });
       });
     });
 
@@ -577,7 +577,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('closed');
-        expect(result.user).toBe('some-commenter');
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('draft pull request state', async () => {
@@ -600,7 +600,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('draft');
-        expect(result.user).toBe('some-commenter');
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('merged pull request state', async () => {
@@ -623,7 +623,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('merged');
-        expect(result.user).toBe('some-commenter');
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('open pull request state', async () => {
@@ -646,7 +646,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('open');
-        expect(result.user).toBe('some-commenter');
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('handle pull request without latest_comment_url', async () => {
@@ -671,7 +671,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('open');
-        expect(result.user).toBe('some-user');
+        expect(result.user).toEqual({ login: 'some-user' });
       });
     });
   });
@@ -698,7 +698,7 @@ describe('utils/subject.ts', () => {
         mockAccounts.token,
       );
 
-      expect(result.user).toBe('some-user');
+      expect(result.user).toEqual({ login: 'some-user' });
     });
   });
 

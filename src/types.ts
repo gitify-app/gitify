@@ -1,9 +1,9 @@
-import { Notification, User } from './typesGithub';
+import { Notification } from './typesGithub';
 
 export interface AuthState {
   token?: string;
   enterpriseAccounts: EnterpriseAccount[];
-  user: User | null;
+  user: GitifyUser | null;
 }
 
 export interface SettingsState {
@@ -55,4 +55,10 @@ export interface AuthResponse {
 export interface AuthTokenResponse {
   hostname: string;
   token: string;
+}
+
+export interface GitifyUser {
+  login: string;
+  name: string;
+  id: number;
 }
