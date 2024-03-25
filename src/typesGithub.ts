@@ -81,6 +81,8 @@ export interface Notification {
   subscription_url: string;
 }
 
+export type UserDetails = User & UserProfile;
+
 export interface UserProfile {
   name: string;
   company: string;

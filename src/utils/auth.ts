@@ -9,6 +9,7 @@ import {
   GitifyUser,
 } from '../types';
 import { Constants } from '../utils/constants';
+import { UserDetails } from '../typesGithub';
 
 export const authGitHub = (
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
@@ -81,16 +82,14 @@ export const getUserData = async (
   token: string,
   hostname: string,
 ): Promise<GitifyUser> => {
-  const response = await apiRequestAuth(
-    `${generateGitHubAPIUrl(hostname)}user`,
-    'GET',
-    token,
-  );
+  const response: UserDetails = (
+    await apiRequestAuth(`${generateGitHubAPIUrl(hostname)}user`, 'GET', token)
+  ).data;
 
   return {
-    id: response.data.id,
-    login: response.data.login,
-    name: response.data.name,
+    id: response.id,
+    login: response.login,
+    name: response.name,
   };
 };
 
