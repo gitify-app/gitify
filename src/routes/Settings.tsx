@@ -1,4 +1,9 @@
-import { ArrowLeftIcon } from '@primer/octicons-react';
+import {
+  ArrowLeftIcon,
+  PersonAddIcon,
+  SignOutIcon,
+  XCircleIcon,
+} from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
 import React, {
   useCallback,
@@ -12,9 +17,6 @@ import { useNavigate } from 'react-router-dom';
 import { FieldCheckbox } from '../components/fields/Checkbox';
 import { FieldRadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
-import { IconAddAccount } from '../icons/AddAccount';
-import { IconLogOut } from '../icons/Logout';
-import { IconQuit } from '../icons/Quit';
 import { Appearance } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
 import { setAppearance } from '../utils/appearance';
@@ -85,10 +87,14 @@ export const SettingsRoute: React.FC = () => {
       <div className="flex justify-between items-center mt-4 py-2 mx-8">
         <button
           className="focus:outline-none"
-          aria-label="Go Back"
+          title="Go Back"
           onClick={() => navigate(-1)}
         >
-          <ArrowLeftIcon size={20} className="hover:text-gray-400" />
+          <ArrowLeftIcon
+            size={20}
+            className="hover:text-gray-400"
+            aria-label="Go Back"
+          />
         </button>
 
         <h3 className="text-lg font-semibold">Settings</h3>
@@ -183,26 +189,29 @@ export const SettingsRoute: React.FC = () => {
         <div>
           <button
             className={footerButtonClass}
-            aria-label="Login with GitHub Enterprise"
+            title="Login with GitHub Enterprise"
             onClick={goToEnterprise}
           >
-            <IconAddAccount className="w-5 h-5" />
+            <PersonAddIcon
+              size={20}
+              aria-label="Login with GitHub Enterprise"
+            />
           </button>
 
           <button
             className={footerButtonClass}
-            aria-label="Logout"
+            title="Logout"
             onClick={logoutUser}
           >
-            <IconLogOut className="w-5 h-5" />
+            <SignOutIcon size={18} aria-label="Logout" />
           </button>
 
           <button
             className={`${footerButtonClass} mr-0`}
-            aria-label="Quit Gitify"
+            title="Quit Gitify"
             onClick={quitApp}
           >
-            <IconQuit className="w-5 h-5" />
+            <XCircleIcon size={18} aria-label="Quit Gitify" />
           </button>
         </div>
       </div>

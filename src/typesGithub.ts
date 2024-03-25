@@ -1,16 +1,28 @@
 export type Reason =
+  | 'approval_requested'
   | 'assign'
   | 'author'
+  | 'ci_activity'
   | 'comment'
   | 'invitation'
   | 'manual'
+  | 'member_feature_requested'
   | 'mention'
   | 'review_requested'
+  | 'security_advisory_credit'
   | 'security_alert'
   | 'state_change'
   | 'subscribed'
-  | 'team_mention'
-  | 'ci_activity';
+  | 'team_mention';
+
+// Note: ANSWERED and OPEN are not an official discussion state type in the GitHub API
+export type DiscussionStateType =
+  | 'ANSWERED'
+  | 'DUPLICATE'
+  | 'OPEN'
+  | 'OUTDATED'
+  | 'REOPENED'
+  | 'RESOLVED';
 
 export type SubjectType =
   | 'CheckSuite'
@@ -20,20 +32,42 @@ export type SubjectType =
   | 'PullRequest'
   | 'Release'
   | 'RepositoryInvitation'
-  | 'RepositoryVulnerabilityAlert';
+  | 'RepositoryVulnerabilityAlert'
+  | 'WorkflowRun';
 
-export type IssueStateType =
-  | 'closed'
-  | 'open'
-  | 'completed'
-  | 'reopened'
-  | 'not_planned';
+export type IssueStateType = 'closed' | 'open';
 
-export type PullRequestStateType = 'closed' | 'open' | 'merged' | 'draft';
+export type IssueStateReasonType = 'completed' | 'not_planned' | 'reopened';
 
-export type StateType = IssueStateType | PullRequestStateType;
+/**
+ * Note: draft and merged are not official states in the GitHub API.
+ * These are derived from the pull request's `merged` and `draft` properties.
+ */
+export type PullRequestStateType = 'closed' | 'draft' | 'merged' | 'open';
+
+export type StateType =
+  | CheckSuiteStatus
+  | DiscussionStateType
+  | IssueStateType
+  | IssueStateReasonType
+  | PullRequestStateType;
 
 export type ViewerSubscription = 'IGNORED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
+
+export type CheckSuiteStatus =
+  | 'action_required'
+  | 'cancelled'
+  | 'completed'
+  | 'failure'
+  | 'in_progress'
+  | 'pending'
+  | 'queued'
+  | 'requested'
+  | 'skipped'
+  | 'stale'
+  | 'success'
+  | 'timed_out'
+  | 'waiting';
 
 export interface Notification {
   id: string;
@@ -123,48 +157,156 @@ export interface Owner {
   site_admin: boolean;
 }
 
-export interface Subject {
+export type Subject = GitHubSubject & GitifySubject;
+
+interface GitHubSubject {
   title: string;
-  url?: string;
-  state: StateType;
-  latest_comment_url?: string;
+  url: string | null;
+  latest_comment_url: string | null;
   type: SubjectType;
 }
 
-export interface GraphQLSearch {
+// This is not in the GitHub API, but we add it to the type to make it easier to work with
+export interface GitifySubject {
+  state?: StateType;
+  user?: string;
+}
+
+export interface PullRequest {
+  url: string;
+  id: number;
+  node_id: string;
+  html_url: string;
+  diff_url: string;
+  patch_url: string;
+  issue_url: string;
+  number: number;
+  state: PullRequestStateType;
+  locked: boolean;
+  title: string;
+  user: User;
+  body: string;
+  created_at: string;
+  updated_at: string;
+  closed_at: string | null;
+  merged_at: string | null;
+  merge_commit_sha: string | null;
+  draft: boolean;
+  commits_url: string;
+  review_comments_url: string;
+  review_comment_url: string;
+  comments_url: string;
+  statuses_url: string;
+  author_association: string;
+  merged: boolean;
+  mergeable: boolean;
+  rebaseable: boolean;
+  comments: number;
+  review_comments: number;
+  maintainer_can_modify: boolean;
+  commits: number;
+  additions: number;
+  deletions: number;
+  changed_files: number;
+}
+
+export interface Issue {
+  url: string;
+  repository_url: string;
+  labels_url: string;
+  comments_url: string;
+  events_url: string;
+  html_url: string;
+  id: number;
+  node_id: string;
+  number: number;
+  title: string;
+  user: User;
+  state: IssueStateType;
+  locked: boolean;
+  comments: number;
+  created_at: string;
+  updated_at: string;
+  closed_at: string | null;
+  author_association: string;
+  body: string;
+  state_reason: IssueStateReasonType | null;
+}
+
+export interface IssueComments {
+  url: string;
+  html_url: string;
+  issue_url: string;
+  id: number;
+  node_id: string;
+  user: User;
+  created_at: string;
+  updated_at: string;
+  body: string;
+}
+
+export interface ReleaseComments {
+  url: string;
+  assets_url: string;
+  html_url: string;
+  id: number;
+  author: User;
+  node_id: string;
+  tag_name: string;
+  name: string;
+  draft: boolean;
+  prerelease: boolean;
+  created_at: string;
+  published_at: string;
+  body: string;
+}
+
+export interface GraphQLSearch<T> {
   data: {
     data: {
       search: {
-        edges: DiscussionEdge[];
+        nodes: T[];
       };
     };
   };
 }
 
-export interface DiscussionEdge {
-  node: {
-    viewerSubscription: ViewerSubscription;
-    title: string;
-    url: string;
-    comments: {
-      edges: DiscussionCommentEdge[];
-    };
+export interface DiscussionSearchResultNode {
+  viewerSubscription: ViewerSubscription;
+  title: string;
+  stateReason: DiscussionStateType;
+  isAnswered: boolean;
+  url: string;
+  comments: {
+    nodes: DiscussionCommentNode[];
   };
 }
 
-export interface DiscussionCommentEdge {
-  node: {
-    databaseId: string | number;
-    createdAt: string;
-    replies: {
-      edges: DiscussionSubcommentEdge[];
-    };
+export interface DiscussionCommentNode {
+  databaseId: string | number;
+  createdAt: string;
+  author: { login: string };
+  replies: {
+    nodes: DiscussionSubcommentNode[];
   };
 }
 
-export interface DiscussionSubcommentEdge {
-  node: {
-    databaseId: string | number;
-    createdAt: string;
-  };
+export interface DiscussionSubcommentNode {
+  databaseId: string | number;
+  createdAt: string;
+  author: { login: string };
+}
+
+export interface CheckSuiteAttributes {
+  workflowName: string;
+  attemptNumber?: number;
+  statusDisplayName: string;
+  status: CheckSuiteStatus | null;
+  branchName: string;
+}
+
+export interface WorkflowRunAttributes {
+  user: string;
+  statusDisplayName: string;
+  status: CheckSuiteStatus | null;
 }

@@ -5,7 +5,7 @@ import { mockMathRandom } from './test-utils';
 
 import { AllRead } from './AllRead';
 
-describe('components/all-read.tsx', function () {
+describe('components/AllRead.tsx', function () {
   // The read emoji randomly rotates, but then the snapshots would never match
   // Have to make it consistent so the emojis are always the same
   mockMathRandom(0.1);

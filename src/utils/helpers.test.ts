@@ -1,29 +1,23 @@
 import {
-  generateGitHubWebUrl,
   generateGitHubAPIUrl,
   generateNotificationReferrerId,
-  getCommentId,
-  getLatestDiscussionCommentId,
   isEnterpriseHost,
   addHours,
   formatSearchQueryString,
+  addNotificationReferrerIdToUrl,
+  getHtmlUrl,
+  generateGitHubWebUrl,
+  formatForDisplay,
 } from './helpers';
 import {
+  mockedGraphQLResponse,
   mockedSingleNotification,
   mockedUser,
-  mockedGraphQLResponse,
 } from '../__mocks__/mockedData';
-
-const URL = {
-  normal: {
-    api: 'https://api.github.com/repos/myuser/notifications-test',
-    default: 'https://github.com/myuser/notifications-test',
-  },
-  enterprise: {
-    api: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test',
-    default: 'https://github.gitify.io/myorg/notifications-test',
-  },
-};
+import * as apiRequests from './api-requests';
+import { AxiosPromise, AxiosResponse } from 'axios';
+import { mockAccounts } from '../__mocks__/mock-state';
+import { SubjectType } from '../typesGithub';
 
 describe('utils/helpers.ts', () => {
   describe('isEnterpriseHost', () => {
@@ -38,6 +32,43 @@ describe('utils/helpers.ts', () => {
     });
   });
 
+  describe('addNotificationReferrerIdToUrl', () => {
+    it('should add notification_referrer_id to the URL', () => {
+      // Mock data
+      const url = 'https://github.com/some/repo';
+      const notificationId = '123';
+      const userId = 456;
+
+      const result = addNotificationReferrerIdToUrl(
+        url,
+        notificationId,
+        userId,
+      );
+
+      expect(result).toEqual(
+        'https://github.com/some/repo?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEyMzo0NTY%3D',
+      );
+    });
+
+    it('should add notification_referrer_id to the URL, preserving anchor tags', () => {
+      // Mock data
+      const url =
+        'https://github.com/some/repo/pull/123#issuecomment-1951055051';
+      const notificationId = '123';
+      const userId = 456;
+
+      const result = addNotificationReferrerIdToUrl(
+        url,
+        notificationId,
+        userId,
+      );
+
+      expect(result).toEqual(
+        'https://github.com/some/repo/pull/123?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEyMzo0NTY%3D#issuecomment-1951055051',
+      );
+    });
+  });
+
   describe('generateNotificationReferrerId', () => {
     it('should generate the notification_referrer_id', () => {
       const referrerId = generateNotificationReferrerId(
@@ -45,97 +76,9 @@ describe('utils/helpers.ts', () => {
         mockedUser.id,
       );
       expect(referrerId).toBe(
-        'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=',
+        'MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=',
       );
     });
-  });
-
-  describe('generateGitHubWebUrl', () => {
-    let notificationReferrerId;
-    beforeAll(() => {
-      notificationReferrerId = generateNotificationReferrerId(
-        mockedSingleNotification.id,
-        mockedUser.id,
-      );
-    });
-
-    it('should generate the GitHub url - non enterprise - (issue)', () =>
-      testGenerateUrl(
-        `${URL.normal.api}/issues/3`,
-        `${URL.normal.default}/issues/3?${notificationReferrerId}`,
-      ));
-
-    it('should generate the GitHub url - non enterprise - (pull request)', () =>
-      testGenerateUrl(
-        `${URL.normal.api}/pulls/123`,
-        `${URL.normal.default}/pull/123?${notificationReferrerId}`,
-      ));
-
-    it('should generate the GitHub url - non enterprise - (release)', () =>
-      testGenerateUrl(
-        `${URL.normal.api}/releases/3988077`,
-        `${URL.normal.default}/releases/3988077?${notificationReferrerId}`,
-      ));
-
-    it('should generate the GitHub url - non enterprise - (discussion)', () =>
-      testGenerateUrl(
-        `${URL.normal.api}/discussions/630`,
-        `${URL.normal.default}/discussions/630?${notificationReferrerId}`,
-      ));
-
-    it('should generate the GitHub url - enterprise - (issue)', () =>
-      testGenerateUrl(
-        `${URL.enterprise.api}/issues/123`,
-        `${URL.enterprise.default}/issues/123?${notificationReferrerId}`,
-      ));
-
-    it('should generate the GitHub url - enterprise - (pull request)', () =>
-      testGenerateUrl(
-        `${URL.enterprise.api}/pulls/3`,
-        `${URL.enterprise.default}/pull/3?${notificationReferrerId}`,
-      ));
-
-    it('should generate the GitHub url - enterprise - (release)', () =>
-      testGenerateUrl(
-        `${URL.enterprise.api}/releases/1`,
-        `${URL.enterprise.default}/releases/1?${notificationReferrerId}`,
-      ));
-
-    it('should generate the GitHub url - enterprise - (discussion)', () =>
-      testGenerateUrl(
-        `${URL.enterprise.api}/discussions/343`,
-        `${URL.enterprise.default}/discussions/343?${notificationReferrerId}`,
-      ));
-
-    it('should generate the GitHub issue url with correct commentId', () =>
-      testGenerateUrl(
-        `${URL.normal.api}/issues/5`,
-        `${URL.normal.default}/issues/5?${notificationReferrerId}#issuecomment-1059824632`,
-        '#issuecomment-' +
-          getCommentId(`${URL.normal.api}/issues/comments/1059824632`),
-      ));
-
-    it('should generate the GitHub discussion url with correct commentId', () =>
-      testGenerateUrl(
-        `${URL.normal.api}/discussions/75`,
-        `${URL.normal.default}/discussions/75?${notificationReferrerId}#discussioncomment-2300902`,
-        '#discussioncomment-' +
-          getLatestDiscussionCommentId(
-            mockedGraphQLResponse.data.data.search.edges[0].node.comments.edges,
-          ),
-      ));
-
-    function testGenerateUrl(apiUrl, ExpectedResult, comment?) {
-      const notif = { ...mockedSingleNotification, subject: { url: apiUrl } };
-      expect(
-        generateGitHubWebUrl(
-          notif.subject.url,
-          notif.id,
-          mockedUser.id,
-          comment,
-        ),
-      ).toBe(ExpectedResult);
-    }
   });
 
   describe('generateGitHubAPIUrl', () => {
@@ -173,6 +116,489 @@ describe('utils/helpers.ts', () => {
 
       expect(result).toBe(
         `exampleTitle in:title repo:exampleRepo updated:>2024-02-20T10:00:00.000Z`,
+      );
+    });
+  });
+
+  describe('getHtmlUrl', () => {
+    let apiRequestAuthMock;
+
+    beforeEach(() => {
+      apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+    });
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('should return the HTML URL', async () => {
+      const requestPromise = new Promise((resolve) =>
+        resolve({
+          data: {
+            html_url: 'https://github.com/gitify-app/gitify/issues/785',
+          },
+        } as AxiosResponse),
+      ) as AxiosPromise;
+
+      apiRequestAuthMock.mockResolvedValue(requestPromise);
+
+      const result = await getHtmlUrl(
+        'https://api.github.com/repos/gitify-app/gitify/issues/785',
+        '123',
+      );
+      expect(result).toBe('https://github.com/gitify-app/gitify/issues/785');
+    });
+  });
+
+  describe('generateGitHubWebUrl', () => {
+    const mockedHtmlUrl = 'https://github.com/gitify-app/gitify/issues/785';
+    const mockedNotificationReferrer =
+      'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
+    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
+    it('Subject Latest Comment Url: when not null, fetch latest comment html url', async () => {
+      const subject = {
+        title: 'generate github web url unit tests',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+        latest_comment_url:
+          'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448',
+        type: 'Issue' as SubjectType,
+      };
+
+      const requestPromise = new Promise((resolve) =>
+        resolve({
+          data: {
+            html_url: mockedHtmlUrl,
+          },
+        } as AxiosResponse),
+      ) as AxiosPromise;
+
+      apiRequestAuthMock.mockResolvedValue(requestPromise);
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
+      expect(apiRequestAuthMock).toHaveBeenCalledWith(
+        subject.latest_comment_url,
+        'GET',
+        mockAccounts.token,
+      );
+      expect(result).toBe(`${mockedHtmlUrl}?${mockedNotificationReferrer}`);
+    });
+
+    it('Subject Url: when no latest comment url available, fetch subject html url', async () => {
+      const subject = {
+        title: 'generate github web url unit tests',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+        latest_comment_url: null,
+        type: 'Issue' as SubjectType,
+      };
+
+      const requestPromise = new Promise((resolve) =>
+        resolve({
+          data: {
+            html_url: mockedHtmlUrl,
+          },
+        } as AxiosResponse),
+      ) as AxiosPromise;
+
+      apiRequestAuthMock.mockResolvedValue(requestPromise);
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
+      expect(apiRequestAuthMock).toHaveBeenCalledWith(
+        subject.url,
+        'GET',
+        mockAccounts.token,
+      );
+      expect(result).toBe(`${mockedHtmlUrl}?${mockedNotificationReferrer}`);
+    });
+
+    describe('Check Suite URLs', () => {
+      it('successful workflow', async () => {
+        const subject = {
+          title: 'Demo workflow run succeeded for main branch',
+          url: null,
+          latest_comment_url: null,
+          type: 'CheckSuite' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Asuccess+branch%3Amain&${mockedNotificationReferrer}`,
+        );
+      });
+
+      it('failed workflow', async () => {
+        const subject = {
+          title: 'Demo workflow run failed for main branch',
+          url: null,
+          latest_comment_url: null,
+          type: 'CheckSuite' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockedNotificationReferrer}`,
+        );
+      });
+
+      it('failed workflow multiple attempts', async () => {
+        const subject = {
+          title: 'Demo workflow run, Attempt #3 failed for main branch',
+          url: null,
+          latest_comment_url: null,
+          type: 'CheckSuite' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockedNotificationReferrer}`,
+        );
+      });
+
+      it('skipped workflow', async () => {
+        const subject = {
+          title: 'Demo workflow run skipped for main branch',
+          url: null,
+          latest_comment_url: null,
+          type: 'CheckSuite' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Askipped+branch%3Amain&${mockedNotificationReferrer}`,
+        );
+      });
+
+      it('unhandled workflow scenario', async () => {
+        const subject = {
+          title: 'unhandled workflow scenario',
+          url: null,
+          latest_comment_url: null,
+          type: 'CheckSuite' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+        );
+      });
+
+      it('unhandled status scenario', async () => {
+        const subject = {
+          title: 'Demo workflow run unhandled-status for main branch',
+          url: null,
+          latest_comment_url: null,
+          type: 'CheckSuite' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+branch%3Amain&${mockedNotificationReferrer}`,
+        );
+      });
+
+      it('unhandled check suite scenario', async () => {
+        const subject = {
+          title: 'Unhandled scenario',
+          url: null,
+          latest_comment_url: null,
+          type: 'CheckSuite' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+        );
+      });
+    });
+
+    describe('Discussions URLs', () => {
+      it('when no subject urls and no discussions found via query, default to linking to repository discussions', async () => {
+        const subject = {
+          title: 'generate github web url unit tests',
+          url: null,
+          latest_comment_url: null,
+          type: 'Discussion' as SubjectType,
+        };
+
+        const requestPromise = new Promise((resolve) =>
+          resolve({
+            data: { data: { search: { nodes: [] } } },
+          } as AxiosResponse),
+        ) as AxiosPromise;
+
+        apiRequestAuthMock.mockResolvedValue(requestPromise);
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
+        expect(result).toBe(
+          `${mockedSingleNotification.repository.html_url}/discussions?${mockedNotificationReferrer}`,
+        );
+      });
+
+      it('when no subject urls and no discussions found via query, default to linking to repository discussions', async () => {
+        const subject = {
+          title: '1.16.0',
+          url: null,
+          latest_comment_url: null,
+          type: 'Discussion' as SubjectType,
+        };
+
+        const requestPromise = new Promise((resolve) =>
+          resolve(mockedGraphQLResponse as AxiosResponse),
+        ) as AxiosPromise;
+
+        apiRequestAuthMock.mockResolvedValue(requestPromise);
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/discussions/612?${mockedNotificationReferrer}#discussioncomment-2300902`,
+        );
+      });
+
+      it('default to base discussions url when graphql query fails', async () => {
+        const subject = {
+          title: '1.16.0',
+          url: null,
+          latest_comment_url: null,
+          type: 'Discussion' as SubjectType,
+        };
+
+        const requestPromise = new Promise((resolve) =>
+          resolve(null as AxiosResponse),
+        ) as AxiosPromise;
+
+        apiRequestAuthMock.mockResolvedValue(requestPromise);
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/discussions?${mockedNotificationReferrer}`,
+        );
+      });
+    });
+
+    it('Repository Invitation url', async () => {
+      const subject = {
+        title: 'Invitation to join manosim/notifications-test from unit-tests',
+        url: null,
+        latest_comment_url: null,
+        type: 'RepositoryInvitation' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+      expect(result).toBe(
+        `https://github.com/manosim/notifications-test/invitations?${mockedNotificationReferrer}`,
+      );
+    });
+
+    describe('Workflow Run URLs', () => {
+      it('approval requested', async () => {
+        const subject = {
+          title: 'some-user requested your review to deploy to an environment',
+          url: null,
+          latest_comment_url: null,
+          type: 'WorkflowRun' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/actions?query=is%3Awaiting&${mockedNotificationReferrer}`,
+        );
+      });
+
+      it('unhandled status/action scenario', async () => {
+        const subject = {
+          title:
+            'some-user requested your unhandled-action to deploy to an environment',
+          url: null,
+          latest_comment_url: null,
+          type: 'WorkflowRun' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+        );
+      });
+
+      it('unhandled workflow scenario', async () => {
+        const subject = {
+          title: 'some unhandled scenario',
+          url: null,
+          latest_comment_url: null,
+          type: 'WorkflowRun' as SubjectType,
+        };
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+        );
+      });
+    });
+
+    it('defaults to repository url', async () => {
+      const subject = {
+        title: 'generate github web url unit tests',
+        url: null,
+        latest_comment_url: null,
+        type: 'Issue' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl(
+        {
+          ...mockedSingleNotification,
+          subject: subject,
+        },
+        mockAccounts,
+      );
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+      expect(result).toBe(
+        `${mockedSingleNotification.repository.html_url}?${mockedNotificationReferrer}`,
+      );
+    });
+
+    it('formatForDisplay', () => {
+      expect(formatForDisplay(null)).toBe('');
+      expect(formatForDisplay([])).toBe('');
+      expect(formatForDisplay(['open', 'PullRequest'])).toBe(
+        'Open Pull Request',
+      );
+      expect(formatForDisplay(['OUTDATED', 'Discussion'])).toBe(
+        'Outdated Discussion',
+      );
+      expect(formatForDisplay(['not_planned', 'Issue'])).toBe(
+        'Not Planned Issue',
       );
     });
   });

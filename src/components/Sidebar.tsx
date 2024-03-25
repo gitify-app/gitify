@@ -1,13 +1,15 @@
-import { BellIcon } from '@primer/octicons-react';
+import {
+  BellIcon,
+  GearIcon,
+  SyncIcon,
+  XCircleIcon,
+} from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
 import React, { useCallback, useContext, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
-import { IconCog } from '../icons/Cog';
-import { IconQuit } from '../icons/Quit';
-import { IconRefresh } from '../icons/Refresh';
 import { Constants } from '../utils/constants';
 import { openExternalLink } from '../utils/comms';
 
@@ -43,22 +45,28 @@ export const Sidebar: React.FC = () => {
   return (
     <div className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto	">
       <div className="flex flex-col flex-1 items-center py-4">
-        <Logo
-          className="w-5 my-3 mx-auto cursor-pointer"
-          data-testid="gitify-logo"
+        <button
+          className="w-5 my-3 mx-auto cursor-pointer outline-none"
+          title="Open Gitify on GitHub"
           onClick={onOpenBrowser}
-        />
+          data-testid="gitify-logo"
+        >
+          <Logo aria-label="Open Gitify" />
+        </button>
 
-        <div
+        <button
           className={`flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer ${
             notificationsCount > 0 ? 'text-green-500' : 'text-white'
           }`}
           onClick={onOpenGitHubNotifications}
-          aria-label={`${notificationsCount} Unread Notifications`}
+          title={`${notificationsCount} Unread Notifications`}
         >
-          <BellIcon size={12} />
+          <BellIcon
+            size={12}
+            aria-label={`${notificationsCount} Unread Notifications`}
+          />
           {notificationsCount > 0 && notificationsCount}
-        </div>
+        </button>
       </div>
 
       <div className="py-4 px-3">
@@ -66,17 +74,18 @@ export const Sidebar: React.FC = () => {
           <>
             <button
               className={footerButtonClasses}
+              title="Refresh Notifications"
               onClick={() => {
                 navigate('/', { replace: true });
                 fetchNotifications();
               }}
-              aria-label="Refresh Notifications"
             >
-              <IconRefresh className="w-3.5 h-3.5" />
+              <SyncIcon size={16} aria-label="Refresh Notifications" />
             </button>
 
             <button
               className={footerButtonClasses}
+              title="Settings"
               onClick={() => {
                 if (location.pathname.startsWith('/settings')) {
                   navigate('/', { replace: true });
@@ -84,9 +93,8 @@ export const Sidebar: React.FC = () => {
                   navigate('/settings');
                 }
               }}
-              aria-label="Settings"
             >
-              <IconCog className="w-4 h-4" />
+              <GearIcon size={16} aria-label="Settings" />
             </button>
           </>
         )}
@@ -94,10 +102,11 @@ export const Sidebar: React.FC = () => {
         {!isLoggedIn && (
           <button
             className={footerButtonClasses}
+            title="Quit Gitify"
+            aria-label="Quit Gitify"
             onClick={quitApp}
-            aria-label="Quit App"
           >
-            <IconQuit className="w-3.5 h-3.5" />
+            <XCircleIcon size={16} aria-label="Quit Gitify" />
           </button>
         )}
       </div>

@@ -5,7 +5,7 @@ import { mockMathRandom } from './test-utils';
 
 import { Oops } from './Oops';
 
-describe('components/oops.tsx', function () {
+describe('components/Oops.tsx', function () {
   // The error emoji randomly rotates, but then the snapshots would never match
   // Have to make it consistent so the emojis are always the same
   mockMathRandom(0.1);

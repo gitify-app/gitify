@@ -46,10 +46,10 @@ describe('routes/Settings.tsx', () => {
 
   it('should press the logout', async () => {
     const logoutMock = jest.fn();
-    let getByLabelText;
+    let getByTitle;
 
     await act(async () => {
-      const { getByLabelText: getByLabelTextLocal } = render(
+      const { getByTitle: getByLabelTextLocal } = render(
         <AppContext.Provider
           value={{
             settings: mockSettings,
@@ -63,10 +63,10 @@ describe('routes/Settings.tsx', () => {
         </AppContext.Provider>,
       );
 
-      getByLabelText = getByLabelTextLocal;
+      getByTitle = getByLabelTextLocal;
     });
 
-    fireEvent.click(getByLabelText('Logout'));
+    fireEvent.click(getByTitle('Logout'));
 
     expect(logoutMock).toHaveBeenCalledTimes(1);
 
@@ -299,10 +299,10 @@ describe('routes/Settings.tsx', () => {
   });
 
   it('should go to the enterprise login route', async () => {
-    let getByLabelText;
+    let getByTitle;
 
     await act(async () => {
-      const { getByLabelText: getByLabelTextLocal } = render(
+      const { getByTitle: getByTitleLocal } = render(
         <AppContext.Provider
           value={{
             settings: mockSettings,
@@ -314,20 +314,20 @@ describe('routes/Settings.tsx', () => {
           </MemoryRouter>
         </AppContext.Provider>,
       );
-      getByLabelText = getByLabelTextLocal;
+      getByTitle = getByTitleLocal;
     });
 
-    fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
+    fireEvent.click(getByTitle('Login with GitHub Enterprise'));
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-enterprise', {
       replace: true,
     });
   });
 
   it('should quit the app', async () => {
-    let getByLabelText;
+    let getByTitle;
 
     await act(async () => {
-      const { getByLabelText: getByLabelTextLocal } = render(
+      const { getByTitle: getByTitleLocal } = render(
         <AppContext.Provider
           value={{ settings: mockSettings, accounts: mockAccounts }}
         >
@@ -336,10 +336,10 @@ describe('routes/Settings.tsx', () => {
           </MemoryRouter>
         </AppContext.Provider>,
       );
-      getByLabelText = getByLabelTextLocal;
+      getByTitle = getByTitleLocal;
     });
 
-    fireEvent.click(getByLabelText('Quit Gitify'));
+    fireEvent.click(getByTitle('Quit Gitify'));
     expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
   });
 

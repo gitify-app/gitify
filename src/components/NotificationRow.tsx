@@ -7,7 +7,7 @@ import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
 } from '../utils/github-api';
-import { openInBrowser } from '../utils/helpers';
+import { formatForDisplay, openInBrowser } from '../utils/helpers';
 import { Notification } from '../typesGithub';
 import { AppContext } from '../context/App';
 
@@ -53,21 +53,29 @@ export const NotificationRow: React.FC<IProps> = ({
   };
 
   const reason = formatReason(notification.reason);
-  const NotificationIcon = getNotificationTypeIcon(
-    notification.subject.type,
-    notification.subject.state,
-  );
-  const iconColor = getNotificationTypeIconColor(notification.subject.state);
+  const NotificationIcon = getNotificationTypeIcon(notification.subject);
+  const iconColor = getNotificationTypeIconColor(notification.subject);
   const realIconColor = settings
     ? (settings.colors && iconColor) || ''
     : iconColor;
   const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
     addSuffix: true,
   });
+  const updatedBy = notification.subject.user
+    ? ` by ${notification.subject.user}`
+    : '';
+  const updatedLabel = `Updated ${updatedAt}${updatedBy}`;
+  const notificationTitle = formatForDisplay([
+    notification.subject.state,
+    notification.subject.type,
+  ]);
 
   return (
-    <div className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker">
-      <div className={`flex justify-center items-center w-5 ${realIconColor}`}>
+    <div className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group">
+      <div
+        className={`flex justify-center items-center w-5 ${realIconColor}`}
+        title={notificationTitle}
+      >
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
 
@@ -76,17 +84,20 @@ export const NotificationRow: React.FC<IProps> = ({
         onClick={() => pressTitle()}
         role="main"
       >
-        <div className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
+        <div
+          className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden"
+          title={notification.subject.title}
+        >
           {notification.subject.title}
         </div>
 
-        <div className="text-xs text-capitalize">
-          <span title={reason.description}>{reason.type}</span> - Updated{' '}
-          {updatedAt}
+        <div className="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden">
+          <span title={reason.description}>{reason.type}</span> -{' '}
+          <span title={updatedLabel}>{updatedLabel}</span>
         </div>
       </div>
 
-      <div className="flex justify-center items-center gap-2">
+      <div className="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity">
         <button
           className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Done"

@@ -14,7 +14,7 @@ jobs:
         with:
           script: |
             const title = context.payload.pull_request.title;
-            const regex = /^(?<type>build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|deps)(?<scope>\(\w+\)?((?=:\s)|(?=!:\s)))?(?<breaking>!)?(?<subject>:\s.*)?/gm;
+            const regex = /^(?<type>build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test|deps)(?<scope>\([\w\-\/]+\)?((?=:\s)|(?=!:\s)))?(?<breaking>!)?(?<subject>:\s.*)?/gm;
             const match = regex.exec(title);
 
             if (!match) {

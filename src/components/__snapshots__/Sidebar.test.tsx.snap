@@ -7,58 +7,65 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
   <div
     className="flex flex-col flex-1 items-center py-4"
   >
-    <svg
-      className="w-5 my-3 mx-auto cursor-pointer"
+    <button
+      className="w-5 my-3 mx-auto cursor-pointer outline-none"
       data-testid="gitify-logo"
       onClick={[Function]}
-      role="logo"
-      viewBox="0 0 500 500"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-    >
-      <defs>
-        <linearGradient
-          id="linearGradient-light"
-          x1="90.8779989%"
-          x2="-1.30249747%"
-          y1="80.0676288%"
-          y2="32.7108237%"
-        >
-          <stop
-            offset="0%"
-            stopColor="#CCCCCC"
-          />
-          <stop
-            offset="100%"
-            stopColor="#FFFFFF"
-          />
-        </linearGradient>
-      </defs>
-      <g
-        fill="none"
-        fillRule="evenodd"
-        stroke="none"
-        strokeWidth="1"
-      >
-        <g
-          fill="url(#linearGradient-light)"
-          fillRule="nonzero"
-          id="Logo"
-          transform="translate(6.000000, 6.000000)"
-        >
-          <path
-            d="M330.391053,10.2526316 C361.413773,10.2526316 386.562656,35.4015165 386.562656,66.4242368 C386.562656,97.4469571 361.413773,122.595841 330.391053,122.595842 L330.365421,122.570211 L247.319105,122.570211 C180.042515,122.499128 125.399186,176.890222 125.159,244.166421 L125.133789,244.219632 L125.154247,245.84774 C126.219609,301.255958 164.473457,349.116728 218.453292,362.268048 C272.940509,375.542983 329.466993,350.045988 355.583747,300.428701 L272.258632,300.427737 C257.346614,300.427737 243.046846,294.496977 232.512078,283.942976 C221.97731,273.388975 216.072618,259.078414 216.099748,244.166421 C216.099748,213.150778 241.242989,188.007632 272.258632,188.007632 L371.119632,188.007632 C379.28704,188.480415 386.935401,192.166372 392.393842,198.260263 L474.869789,300.324632 L474.978789,300.325211 L474.952789,300.426632 L474.953158,300.427737 L474.951789,300.427632 L474.173714,303.448935 C446.939817,406.220475 353.906452,478.028529 247.319105,478.080211 C118.007789,478.080211 12.8157895,373.144526 12.8157895,244.166421 C12.8157895,115.188316 117.905263,10.2526316 247.319105,10.2526316 L330.391053,10.2526316 Z"
-          />
-        </g>
-      </g>
-    </svg>
-    <div
-      aria-label="4 Unread Notifications"
-      className="flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer text-green-500"
-      onClick={[Function]}
+      title="Open Gitify on GitHub"
     >
       <svg
-        aria-hidden="true"
+        aria-label="Open Gitify"
+        className=""
+        onClick={[Function]}
+        role="logo"
+        viewBox="0 0 500 500"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+      >
+        <defs>
+          <linearGradient
+            id="linearGradient-light"
+            x1="90.8779989%"
+            x2="-1.30249747%"
+            y1="80.0676288%"
+            y2="32.7108237%"
+          >
+            <stop
+              offset="0%"
+              stopColor="#CCCCCC"
+            />
+            <stop
+              offset="100%"
+              stopColor="#FFFFFF"
+            />
+          </linearGradient>
+        </defs>
+        <g
+          fill="none"
+          fillRule="evenodd"
+          stroke="none"
+          strokeWidth="1"
+        >
+          <g
+            fill="url(#linearGradient-light)"
+            fillRule="nonzero"
+            id="Logo"
+            transform="translate(6.000000, 6.000000)"
+          >
+            <path
+              d="M330.391053,10.2526316 C361.413773,10.2526316 386.562656,35.4015165 386.562656,66.4242368 C386.562656,97.4469571 361.413773,122.595841 330.391053,122.595842 L330.365421,122.570211 L247.319105,122.570211 C180.042515,122.499128 125.399186,176.890222 125.159,244.166421 L125.133789,244.219632 L125.154247,245.84774 C126.219609,301.255958 164.473457,349.116728 218.453292,362.268048 C272.940509,375.542983 329.466993,350.045988 355.583747,300.428701 L272.258632,300.427737 C257.346614,300.427737 243.046846,294.496977 232.512078,283.942976 C221.97731,273.388975 216.072618,259.078414 216.099748,244.166421 C216.099748,213.150778 241.242989,188.007632 272.258632,188.007632 L371.119632,188.007632 C379.28704,188.480415 386.935401,192.166372 392.393842,198.260263 L474.869789,300.324632 L474.978789,300.325211 L474.952789,300.426632 L474.953158,300.427737 L474.951789,300.427632 L474.173714,303.448935 C446.939817,406.220475 353.906452,478.028529 247.319105,478.080211 C118.007789,478.080211 12.8157895,373.144526 12.8157895,244.166421 C12.8157895,115.188316 117.905263,10.2526316 247.319105,10.2526316 L330.391053,10.2526316 Z"
+            />
+          </g>
+        </g>
+      </svg>
+    </button>
+    <button
+      className="flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer text-green-500"
+      onClick={[Function]}
+      title="4 Unread Notifications"
+    >
+      <svg
+        aria-label="4 Unread Notifications"
         className="octicon octicon-bell"
         fill="currentColor"
         focusable="false"
@@ -80,40 +87,38 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         />
       </svg>
       4
-    </div>
+    </button>
   </div>
   <div
     className="py-4 px-3"
   >
     <button
-      aria-label="Quit App"
+      aria-label="Quit Gitify"
       className="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none"
       onClick={[Function]}
+      title="Quit Gitify"
     >
       <svg
-        aria-hidden="true"
-        aria-labelledby="iconQuitId"
-        className="w-3.5 h-3.5"
+        aria-label="Quit Gitify"
+        className="octicon octicon-x-circle"
+        fill="currentColor"
+        focusable="false"
+        height={16}
         role="img"
-        viewBox="0 0 512 512"
-        xmlns="http://www.w3.org/2000/svg"
+        style={
+          {
+            "display": "inline-block",
+            "overflow": "visible",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 16 16"
+        width={16}
       >
-        <title
-          id="iconQuitId"
-        >
-          Quit Application
-        </title>
-        <g>
-          <path
-            d="M272 0a23.94 23.94 0 0124 24v240a23.94 23.94 0 01-24 24h-32a23.94 23.94 0 01-24-24V24a23.94 23.94 0 0124-24z"
-            fill="currentColor"
-            opacity={0.4}
-          />
-          <path
-            d="M504 256c0 136.8-110.8 247.7-247.5 248C120 504.3 8.2 393 8 256.4A248 248 0 01111.8 54.2a24.07 24.07 0 0135 7.7L162.6 90a24 24 0 01-6.6 31 168 168 0 00100 303c91.6 0 168.6-74.2 168-169.1a168.07 168.07 0 00-68.1-134 23.86 23.86 0 01-6.5-30.9l15.8-28.1a24 24 0 0134.8-7.8A247.51 247.51 0 01504 256z"
-            fill="currentColor"
-          />
-        </g>
+        <path
+          d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"
+        />
       </svg>
     </button>
   </div>
@@ -127,58 +132,65 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
   <div
     className="flex flex-col flex-1 items-center py-4"
   >
-    <svg
-      className="w-5 my-3 mx-auto cursor-pointer"
+    <button
+      className="w-5 my-3 mx-auto cursor-pointer outline-none"
       data-testid="gitify-logo"
       onClick={[Function]}
-      role="logo"
-      viewBox="0 0 500 500"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlnsXlink="http://www.w3.org/1999/xlink"
-    >
-      <defs>
-        <linearGradient
-          id="linearGradient-light"
-          x1="90.8779989%"
-          x2="-1.30249747%"
-          y1="80.0676288%"
-          y2="32.7108237%"
-        >
-          <stop
-            offset="0%"
-            stopColor="#CCCCCC"
-          />
-          <stop
-            offset="100%"
-            stopColor="#FFFFFF"
-          />
-        </linearGradient>
-      </defs>
-      <g
-        fill="none"
-        fillRule="evenodd"
-        stroke="none"
-        strokeWidth="1"
-      >
-        <g
-          fill="url(#linearGradient-light)"
-          fillRule="nonzero"
-          id="Logo"
-          transform="translate(6.000000, 6.000000)"
-        >
-          <path
-            d="M330.391053,10.2526316 C361.413773,10.2526316 386.562656,35.4015165 386.562656,66.4242368 C386.562656,97.4469571 361.413773,122.595841 330.391053,122.595842 L330.365421,122.570211 L247.319105,122.570211 C180.042515,122.499128 125.399186,176.890222 125.159,244.166421 L125.133789,244.219632 L125.154247,245.84774 C126.219609,301.255958 164.473457,349.116728 218.453292,362.268048 C272.940509,375.542983 329.466993,350.045988 355.583747,300.428701 L272.258632,300.427737 C257.346614,300.427737 243.046846,294.496977 232.512078,283.942976 C221.97731,273.388975 216.072618,259.078414 216.099748,244.166421 C216.099748,213.150778 241.242989,188.007632 272.258632,188.007632 L371.119632,188.007632 C379.28704,188.480415 386.935401,192.166372 392.393842,198.260263 L474.869789,300.324632 L474.978789,300.325211 L474.952789,300.426632 L474.953158,300.427737 L474.951789,300.427632 L474.173714,303.448935 C446.939817,406.220475 353.906452,478.028529 247.319105,478.080211 C118.007789,478.080211 12.8157895,373.144526 12.8157895,244.166421 C12.8157895,115.188316 117.905263,10.2526316 247.319105,10.2526316 L330.391053,10.2526316 Z"
-          />
-        </g>
-      </g>
-    </svg>
-    <div
-      aria-label="4 Unread Notifications"
-      className="flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer text-green-500"
-      onClick={[Function]}
+      title="Open Gitify on GitHub"
     >
       <svg
-        aria-hidden="true"
+        aria-label="Open Gitify"
+        className=""
+        onClick={[Function]}
+        role="logo"
+        viewBox="0 0 500 500"
+        xmlns="http://www.w3.org/2000/svg"
+        xmlnsXlink="http://www.w3.org/1999/xlink"
+      >
+        <defs>
+          <linearGradient
+            id="linearGradient-light"
+            x1="90.8779989%"
+            x2="-1.30249747%"
+            y1="80.0676288%"
+            y2="32.7108237%"
+          >
+            <stop
+              offset="0%"
+              stopColor="#CCCCCC"
+            />
+            <stop
+              offset="100%"
+              stopColor="#FFFFFF"
+            />
+          </linearGradient>
+        </defs>
+        <g
+          fill="none"
+          fillRule="evenodd"
+          stroke="none"
+          strokeWidth="1"
+        >
+          <g
+            fill="url(#linearGradient-light)"
+            fillRule="nonzero"
+            id="Logo"
+            transform="translate(6.000000, 6.000000)"
+          >
+            <path
+              d="M330.391053,10.2526316 C361.413773,10.2526316 386.562656,35.4015165 386.562656,66.4242368 C386.562656,97.4469571 361.413773,122.595841 330.391053,122.595842 L330.365421,122.570211 L247.319105,122.570211 C180.042515,122.499128 125.399186,176.890222 125.159,244.166421 L125.133789,244.219632 L125.154247,245.84774 C126.219609,301.255958 164.473457,349.116728 218.453292,362.268048 C272.940509,375.542983 329.466993,350.045988 355.583747,300.428701 L272.258632,300.427737 C257.346614,300.427737 243.046846,294.496977 232.512078,283.942976 C221.97731,273.388975 216.072618,259.078414 216.099748,244.166421 C216.099748,213.150778 241.242989,188.007632 272.258632,188.007632 L371.119632,188.007632 C379.28704,188.480415 386.935401,192.166372 392.393842,198.260263 L474.869789,300.324632 L474.978789,300.325211 L474.952789,300.426632 L474.953158,300.427737 L474.951789,300.427632 L474.173714,303.448935 C446.939817,406.220475 353.906452,478.028529 247.319105,478.080211 C118.007789,478.080211 12.8157895,373.144526 12.8157895,244.166421 C12.8157895,115.188316 117.905263,10.2526316 247.319105,10.2526316 L330.391053,10.2526316 Z"
+            />
+          </g>
+        </g>
+      </svg>
+    </button>
+    <button
+      className="flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer text-green-500"
+      onClick={[Function]}
+      title="4 Unread Notifications"
+    >
+      <svg
+        aria-label="4 Unread Notifications"
         className="octicon octicon-bell"
         fill="currentColor"
         focusable="false"
@@ -200,40 +212,38 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
         />
       </svg>
       4
-    </div>
+    </button>
   </div>
   <div
     className="py-4 px-3"
   >
     <button
-      aria-label="Quit App"
+      aria-label="Quit Gitify"
       className="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none"
       onClick={[Function]}
+      title="Quit Gitify"
     >
       <svg
-        aria-hidden="true"
-        aria-labelledby="iconQuitId"
-        className="w-3.5 h-3.5"
+        aria-label="Quit Gitify"
+        className="octicon octicon-x-circle"
+        fill="currentColor"
+        focusable="false"
+        height={16}
         role="img"
-        viewBox="0 0 512 512"
-        xmlns="http://www.w3.org/2000/svg"
+        style={
+          {
+            "display": "inline-block",
+            "overflow": "visible",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 16 16"
+        width={16}
       >
-        <title
-          id="iconQuitId"
-        >
-          Quit Application
-        </title>
-        <g>
-          <path
-            d="M272 0a23.94 23.94 0 0124 24v240a23.94 23.94 0 01-24 24h-32a23.94 23.94 0 01-24-24V24a23.94 23.94 0 0124-24z"
-            fill="currentColor"
-            opacity={0.4}
-          />
-          <path
-            d="M504 256c0 136.8-110.8 247.7-247.5 248C120 504.3 8.2 393 8 256.4A248 248 0 01111.8 54.2a24.07 24.07 0 0135 7.7L162.6 90a24 24 0 01-6.6 31 168 168 0 00100 303c91.6 0 168.6-74.2 168-169.1a168.07 168.07 0 00-68.1-134 23.86 23.86 0 01-6.5-30.9l15.8-28.1a24 24 0 0134.8-7.8A247.51 247.51 0 01504 256z"
-            fill="currentColor"
-          />
-        </g>
+        <path
+          d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"
+        />
       </svg>
     </button>
   </div>

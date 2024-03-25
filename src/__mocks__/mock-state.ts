@@ -1,14 +1,9 @@
 import { Appearance, AuthState, SettingsState } from '../types';
-import { mockedUser } from './mockedData';
+import { mockedUser, mockedEnterpriseAccounts } from './mockedData';
 
 export const mockAccounts: AuthState = {
   token: 'token-123-456',
-  enterpriseAccounts: [
-    {
-      token: 'token-gitify-123-456',
-      hostname: 'github.gitify.io',
-    },
-  ],
+  enterpriseAccounts: mockedEnterpriseAccounts,
   user: mockedUser,
 };
 

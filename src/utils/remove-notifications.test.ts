@@ -5,7 +5,7 @@ import {
 } from '../__mocks__/mockedData';
 import { removeNotifications } from './remove-notifications';
 
-describe('utils/remove-notification.ts', () => {
+describe('utils/remove-notifications.ts', () => {
   const repoSlug = mockedSingleNotification.repository.full_name;
   const hostname = mockedSingleAccountNotifications[0].hostname;
 

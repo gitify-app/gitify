@@ -1,16 +1,16 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
-  "labels": [
-    "dependency"
-  ],
+  "extends": ["config:recommended"],
+  "labels": ["dependency"],
   "prConcurrentLimit": 5,
   "rangeStrategy": "pin",
-  "schedule": [
-    "monthly"
-  ],
+  "schedule": ["monthly"],
   "separateMultipleMajor": true,
-  "osvVulnerabilityAlerts": true
+  "osvVulnerabilityAlerts": true,
+  "packageRules": [
+    {
+      "matchDepTypes": ["engines"],
+      "rangeStrategy": "auto"
+    }
+  ]
 }

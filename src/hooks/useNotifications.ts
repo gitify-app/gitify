@@ -15,6 +15,7 @@ import { triggerNativeNotifications } from '../utils/notifications';
 import Constants from '../utils/constants';
 import { removeNotifications } from '../utils/remove-notifications';
 import { updateTrayIcon } from '../utils/comms';
+import { getGitifySubjectDetails } from '../utils/subject';
 
 interface NotificationsState {
   notifications: AccountNotifications[];
@@ -137,12 +138,6 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                     notifications: await axios.all<Notification>(
                       accountNotifications.notifications.map(
                         async (notification: Notification) => {
-                          if (
-                            notification.subject.type !== 'PullRequest' &&
-                            notification.subject.type !== 'Issue'
-                          ) {
-                            return notification;
-                          }
                           const isEnterprise = isEnterpriseHost(
                             accountNotifications.hostname,
                           );
@@ -153,26 +148,15 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                               )
                             : accounts.token;
 
-                          const cardinalData = (
-                            await apiRequestAuth(
-                              notification.subject.url,
-                              'GET',
-                              token,
-                            )
-                          ).data;
-
-                          const state =
-                            cardinalData.state === 'closed'
-                              ? cardinalData.state_reason ||
-                                (cardinalData.merged && 'merged') ||
-                                'closed'
-                              : (cardinalData.draft && 'draft') || 'open';
+                          const additionalSubjectDetails =
+                            await 
+                          (notification, token);
 
                           return {
                             ...notification,
                             subject: {
                               ...notification.subject,
-                              state,
+                              ...additionalSubjectDetails,
                             },
                           };
                         },

@@ -191,28 +191,61 @@ describe('hooks/useNotifications.ts', () => {
         const notifications = [
           {
             id: 1,
-            title: 'This is a notification.',
-            subject: { type: 'Issue', url: 'https://api.github.com/1' },
+            subject: {
+              title: 'This is a check suite workflow.',
+              type: 'CheckSuite',
+              url: 'https://api.github.com/1',
+            },
+            repository: {
+              full_name: 'some/repo',
+            },
+            updated_at: '2024-02-26T00:00:00Z',
           },
           {
             id: 2,
-            title: 'A merged PR.',
-            subject: { type: 'PullRequest', url: 'https://api.github.com/2' },
+            subject: {
+              title: 'This is a Discussion.',
+              type: 'Discussion',
+              url: 'https://api.github.com/2',
+            },
+            repository: {
+              full_name: 'some/repo',
+            },
+            updated_at: '2024-02-26T00:00:00Z',
           },
           {
             id: 3,
-            title: 'A closed PR.',
-            subject: { type: 'PullRequest', url: 'https://api.github.com/3' },
+            subject: {
+              title: 'This is an Issue.',
+              type: 'Issue',
+              url: 'https://api.github.com/3',
+              latest_comment_url: 'https://api.github.com/3/comments',
+            },
           },
           {
             id: 4,
-            title: 'A draft PR.',
-            subject: { type: 'PullRequest', url: 'https://api.github.com/4' },
+            subject: {
+              title: 'This is a Pull Request.',
+              type: 'PullRequest',
+              url: 'https://api.github.com/4',
+              latest_comment_url: 'https://api.github.com/4/comments',
+            },
           },
           {
             id: 5,
-            title: 'A draft PR.',
-            subject: { type: 'PullRequest', url: 'https://api.github.com/5' },
+            subject: {
+              title: 'This is an invitation.',
+              type: 'RepositoryInvitation',
+              url: 'https://api.github.com/5',
+            },
+          },
+          {
+            id: 6,
+            subject: {
+              title: 'This is a workflow run.',
+              type: 'WorkflowRun',
+              url: 'https://api.github.com/6',
+            },
           },
         ];
 
@@ -220,19 +253,53 @@ describe('hooks/useNotifications.ts', () => {
           .get('/notifications?participating=false')
           .reply(200, notifications);
 
-        nock('https://api.github.com').get('/1').reply(200, { state: 'open' });
         nock('https://api.github.com')
-          .get('/2')
-          .reply(200, { state: 'closed', merged: true });
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                nodes: [
+                  {
+                    title: 'This is a Discussion.',
+                    viewerSubscription: 'SUBSCRIBED',
+                    stateReason: null,
+                    isAnswered: true,
+                    url: 'https://github.com/manosim/notifications-test/discussions/612',
+                    comments: {
+                      nodes: [
+                        {
+                          databaseId: 2297637,
+                          createdAt: '2022-03-04T20:39:44Z',
+                          author: {
+                            login: 'comment-user',
+                          },
+                          replies: {
+                            nodes: [],
+                          },
+                        },
+                      ],
+                    },
+                  },
+                ],
+              },
+            },
+          });
+
         nock('https://api.github.com')
           .get('/3')
-          .reply(200, { state: 'closed', merged: false });
+          .reply(200, { state: 'closed', merged: true });
+        nock('https://api.github.com')
+          .get('/3/comments')
+          .reply(200, { user: { login: 'some-user' } });
         nock('https://api.github.com')
           .get('/4')
-          .reply(200, { state: 'open', draft: false });
+          .reply(200, { state: 'closed', merged: false });
+        nock('https://api.github.com')
+          .get('/4/comments')
+          .reply(200, { user: { login: 'some-user' } });
         nock('https://api.github.com')
           .get('/5')
-          .reply(200, { state: 'open', draft: true });
+          .reply(200, { state: 'open', draft: false });
 
         const { result } = renderHook(() => useNotifications(true));
 
@@ -249,22 +316,7 @@ describe('hooks/useNotifications.ts', () => {
           expect(result.current.notifications[0].hostname).toBe('github.com');
         });
 
-        expect(result.current.notifications[0].notifications.length).toBe(5);
-        expect(
-          result.current.notifications[0].notifications[0].subject.state,
-        ).toBe('open');
-        expect(
-          result.current.notifications[0].notifications[1].subject.state,
-        ).toBe('merged');
-        expect(
-          result.current.notifications[0].notifications[2].subject.state,
-        ).toBe('closed');
-        expect(
-          result.current.notifications[0].notifications[3].subject.state,
-        ).toBe('open');
-        expect(
-          result.current.notifications[0].notifications[4].subject.state,
-        ).toBe('draft');
+        expect(result.current.notifications[0].notifications.length).toBe(6);
       });
     });
   });
