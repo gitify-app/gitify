@@ -281,7 +281,8 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
     class="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-4 px-8"
   >
     <small
-      class="font-semibold"
+      class="font-semibold cursor-pointer"
+      title="View release notes"
     >
       Gitify v
       0.0.1
