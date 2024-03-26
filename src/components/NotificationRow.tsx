@@ -33,10 +33,10 @@ export const NotificationRow: React.FC<IProps> = ({
     openBrowser();
 
     if (settings.markAsDoneOnOpen) {
-      markNotificationDone(notification.id, hostname);
+      markNotificationDone(notification.id, hostname, settings);
     } else {
       // no need to mark as read, github does it by default when opening it
-      removeNotificationFromState(notification.id, hostname);
+      removeNotificationFromState(notification.id, hostname, settings);
     }
   }, [settings]);
 
@@ -101,7 +101,9 @@ export const NotificationRow: React.FC<IProps> = ({
         <button
           className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Done"
-          onClick={() => markNotificationDone(notification.id, hostname)}
+          onClick={() =>
+            markNotificationDone(notification.id, hostname, settings)
+          }
         >
           <CheckIcon size={16} aria-label="Mark as Done" />
         </button>
@@ -117,7 +119,7 @@ export const NotificationRow: React.FC<IProps> = ({
         <button
           className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Read"
-          onClick={() => markNotification(notification.id, hostname)}
+          onClick={() => markNotification(notification.id, hostname, settings)}
         >
           <ReadIcon size={14} aria-label="Mark as Read" />
         </button>

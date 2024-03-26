@@ -350,6 +350,7 @@ describe('hooks/useNotifications.ts', () => {
         result.current.removeNotificationFromState(
           result.current.notifications[0].notifications[0].id,
           result.current.notifications[0].hostname,
+          mockSettings,
         );
       });
 
@@ -372,7 +373,7 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markNotification(accounts, id, hostname);
+          result.current.markNotification(accounts, id, hostname, mockSettings);
         });
 
         await waitFor(() => {
@@ -390,7 +391,7 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markNotification(accounts, id, hostname);
+          result.current.markNotification(accounts, id, hostname, mockSettings);
         });
 
         await waitFor(() => {
@@ -413,7 +414,7 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markNotification(accounts, id, hostname);
+          result.current.markNotification(accounts, id, hostname, mockSettings);
         });
 
         await waitFor(() => {
@@ -431,7 +432,7 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markNotification(accounts, id, hostname);
+          result.current.markNotification(accounts, id, hostname, mockSettings);
         });
 
         await waitFor(() => {
@@ -458,7 +459,12 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markNotificationDone(accounts, id, hostname);
+          result.current.markNotificationDone(
+            accounts,
+            id,
+            hostname,
+            mockSettings,
+          );
         });
 
         await waitFor(() => {
@@ -476,7 +482,12 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markNotificationDone(accounts, id, hostname);
+          result.current.markNotificationDone(
+            accounts,
+            id,
+            hostname,
+            mockSettings,
+          );
         });
 
         await waitFor(() => {
@@ -499,7 +510,12 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markNotificationDone(accounts, id, hostname);
+          result.current.markNotificationDone(
+            accounts,
+            id,
+            hostname,
+            mockSettings,
+          );
         });
 
         await waitFor(() => {
@@ -517,7 +533,12 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markNotificationDone(accounts, id, hostname);
+          result.current.markNotificationDone(
+            accounts,
+            id,
+            hostname,
+            mockSettings,
+          );
         });
 
         await waitFor(() => {
@@ -550,7 +571,12 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.unsubscribeNotification(accounts, id, hostname);
+          result.current.unsubscribeNotification(
+            accounts,
+            id,
+            hostname,
+            mockSettings,
+          );
         });
 
         await waitFor(() => {
@@ -574,7 +600,12 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.unsubscribeNotification(accounts, id, hostname);
+          result.current.unsubscribeNotification(
+            accounts,
+            id,
+            hostname,
+            mockSettings,
+          );
         });
 
         await waitFor(() => {
@@ -603,7 +634,12 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.unsubscribeNotification(accounts, id, hostname);
+          result.current.unsubscribeNotification(
+            accounts,
+            id,
+            hostname,
+            mockSettings,
+          );
         });
 
         await waitFor(() => {
@@ -627,7 +663,12 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.unsubscribeNotification(accounts, id, hostname);
+          result.current.unsubscribeNotification(
+            accounts,
+            id,
+            hostname,
+            mockSettings,
+          );
         });
 
         await waitFor(() => {
@@ -654,7 +695,12 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markRepoNotifications(accounts, repoSlug, hostname);
+          result.current.markRepoNotifications(
+            accounts,
+            repoSlug,
+            hostname,
+            mockSettings,
+          );
         });
 
         await waitFor(() => {
@@ -672,7 +718,12 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markRepoNotifications(accounts, repoSlug, hostname);
+          result.current.markRepoNotifications(
+            accounts,
+            repoSlug,
+            hostname,
+            mockSettings,
+          );
         });
 
         await waitFor(() => {
@@ -695,7 +746,12 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markRepoNotifications(accounts, repoSlug, hostname);
+          result.current.markRepoNotifications(
+            accounts,
+            repoSlug,
+            hostname,
+            mockSettings,
+          );
         });
 
         await waitFor(() => {
@@ -713,7 +769,12 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markRepoNotifications(accounts, repoSlug, hostname);
+          result.current.markRepoNotifications(
+            accounts,
+            repoSlug,
+            hostname,
+            mockSettings,
+          );
         });
 
         await waitFor(() => {
@@ -745,6 +806,7 @@ describe('hooks/useNotifications.ts', () => {
             accounts,
             repoSlug,
             hostname,
+            mockSettings,
           );
         });
 
@@ -767,6 +829,7 @@ describe('hooks/useNotifications.ts', () => {
             accounts,
             repoSlug,
             hostname,
+            mockSettings,
           );
         });
 
@@ -794,6 +857,7 @@ describe('hooks/useNotifications.ts', () => {
             accounts,
             repoSlug,
             hostname,
+            mockSettings,
           );
         });
 
@@ -816,6 +880,7 @@ describe('hooks/useNotifications.ts', () => {
             accounts,
             repoSlug,
             hostname,
+            mockSettings,
           );
         });
 

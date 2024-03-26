@@ -5,15 +5,6 @@ import { Notification } from '../typesGithub';
 
 import { AccountNotifications, SettingsState, AuthState } from '../types';
 
-export const setTrayIconColor = (notifications: AccountNotifications[]) => {
-  const allNotificationsCount = notifications.reduce(
-    (memo, acc) => memo + acc.notifications.length,
-    0,
-  );
-
-  updateTrayIcon(allNotificationsCount);
-};
-
 export const triggerNativeNotifications = (
   previousNotifications: AccountNotifications[],
   newNotifications: AccountNotifications[],
@@ -41,7 +32,15 @@ export const triggerNativeNotifications = (
     })
     .reduce((acc, val) => acc.concat(val), []);
 
-  setTrayIconColor(newNotifications);
+  const newNotificationsCount = newNotifications.reduce(
+    (memo, acc) => memo + acc.notifications.length,
+    0,
+  );
+
+  updateTrayIcon({
+    notificationsCount: newNotificationsCount,
+    showNotificationsCountInTray: settings.showNotificationsCountInTray,
+  });
 
   // If there are no new notifications just stop there
   if (!diffNotifications.length) {

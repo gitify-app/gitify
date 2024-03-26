@@ -72,7 +72,10 @@ describe('routes/Settings.tsx', () => {
     expect(logoutMock).toHaveBeenCalledTimes(1);
 
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
+    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon', {
+      notificationsCount: undefined,
+      showNotificationsCountInTray: undefined,
+    });
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
@@ -181,6 +184,37 @@ describe('routes/Settings.tsx', () => {
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('showNotifications', false);
+  });
+
+  it('should toggle the showNotificationsCountInTray checkbox', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
+
+    fireEvent.click(getByLabelText('Show notifications count in tray'), {
+      target: { checked: false },
+    });
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith(
+      'showNotificationsCountInTray',
+      true,
+    );
   });
 
   it('should toggle the markAsDoneOnOpen checkbox', async () => {

@@ -25,7 +25,8 @@ import Constants from '../utils/constants';
 import { generateGitHubAPIUrl } from '../utils/helpers';
 
 export const SettingsRoute: React.FC = () => {
-  const { accounts, settings, updateSetting, logout } = useContext(AppContext);
+  const { accounts, settings, updateSetting, logout, notifications } =
+    useContext(AppContext);
   const navigate = useNavigate();
 
   const [isLinux, setIsLinux] = useState<boolean>(false);
@@ -70,7 +71,7 @@ export const SettingsRoute: React.FC = () => {
   const logoutUser = useCallback(() => {
     logout();
     navigate(-1);
-    updateTrayIcon();
+    updateTrayIcon({});
   }, []);
 
   const quitApp = useCallback(() => {
@@ -158,6 +159,23 @@ export const SettingsRoute: React.FC = () => {
           onChange={(evt) =>
             updateSetting('markAsDoneOnOpen', evt.target.checked)
           }
+        />
+        <FieldCheckbox
+          name="showNotificationsCountInTray"
+          label="Show notifications count in tray"
+          checked={settings.showNotificationsCountInTray}
+          onChange={(evt) => {
+            updateSetting('showNotificationsCountInTray', evt.target.checked);
+
+            const notificationsCount = notifications?.reduce(
+              (memo, acc) => memo + acc.notifications.length,
+              0,
+            );
+            updateTrayIcon({
+              notificationsCount,
+              showNotificationsCountInTray: evt.target.checked,
+            });
+          }}
         />
         {!isLinux && (
           <FieldCheckbox

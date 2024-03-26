@@ -66,15 +66,33 @@ menubarApp.on('ready', () => {
   ipcMain.on('hide-window', () => menubarApp.hideWindow());
 
   ipcMain.on('app-quit', () => menubarApp.app.quit());
-  ipcMain.on('update-icon', (_, arg) => {
-    if (!menubarApp.tray.isDestroyed()) {
-      if (arg === 'TrayActive') {
-        menubarApp.tray.setImage(iconActive);
-      } else {
-        menubarApp.tray.setImage(iconIdle);
+
+  ipcMain.on(
+    'update-icon',
+    (_, { notificationsCount, showNotificationsCountInTray }) => {
+      if (!menubarApp.tray.isDestroyed()) {
+        // only update tray icon if a notificationsCount has been provided
+        if (notificationsCount !== undefined) {
+          if (notificationsCount === 0) {
+            menubarApp.tray.setImage(iconIdle);
+          } else {
+            menubarApp.tray.setImage(iconActive);
+            if (showNotificationsCountInTray) {
+              menubarApp.tray.setTitle(String(notificationsCount || ''));
+            }
+          }
+        }
+
+        // change the title without changing the icon (when toggling the setting for eg)
+        if (showNotificationsCountInTray) {
+          menubarApp.tray.setTitle(String(notificationsCount || ''));
+        } else if (showNotificationsCountInTray === false) {
+          menubarApp.tray.setTitle('');
+        }
       }
-    }
-  });
+    },
+  );
+
   ipcMain.on('set-login-item-settings', (event, settings) => {
     app.setLoginItemSettings(settings);
   });

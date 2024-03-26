@@ -15,18 +15,44 @@ describe('utils/comms.ts', () => {
     jest.clearAllMocks();
   });
 
-  it('should send mark the icons as active', () => {
-    const notificationsLength = 3;
-    updateTrayIcon(notificationsLength);
+  it('should send mark the icon as active', () => {
+    const notificationsCount = 3;
+    updateTrayIcon({ notificationsCount });
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon', 'TrayActive');
+    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon', {
+      notificationsCount: 3,
+    });
   });
 
-  it('should send mark the icons as idle', () => {
-    const notificationsLength = 0;
-    updateTrayIcon(notificationsLength);
+  it('should send mark the icon as idle', () => {
+    const notificationsCount = 0;
+    updateTrayIcon({ notificationsCount });
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
+    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon', {
+      notificationsCount: 0,
+      showNotificationsCountInTray: undefined,
+    });
+  });
+
+  it('should send showNotificationsCountInTray true (with notifications)', () => {
+    const notificationsCount = 2;
+    const showNotificationsCountInTray = true;
+    updateTrayIcon({ notificationsCount, showNotificationsCountInTray });
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon', {
+      notificationsCount,
+      showNotificationsCountInTray,
+    });
+  });
+
+  it('should send showNotificationsCountInTray true (without notifications)', () => {
+    const showNotificationsCountInTray = true;
+    updateTrayIcon({ showNotificationsCountInTray });
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon', {
+      notificationsCount: undefined,
+      showNotificationsCountInTray,
+    });
   });
 
   it('should restore a setting', () => {

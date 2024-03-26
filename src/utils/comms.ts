@@ -13,12 +13,17 @@ export function setAutoLaunch(value: boolean): void {
   });
 }
 
-export function updateTrayIcon(notificationsLength = 0): void {
-  if (notificationsLength > 0) {
-    ipcRenderer.send('update-icon', 'TrayActive');
-  } else {
-    ipcRenderer.send('update-icon');
-  }
+export function updateTrayIcon({
+  notificationsCount,
+  showNotificationsCountInTray,
+}: {
+  notificationsCount?: number;
+  showNotificationsCountInTray?: boolean;
+}): void {
+  ipcRenderer.send('update-icon', {
+    notificationsCount,
+    showNotificationsCountInTray,
+  });
 }
 
 export function restoreSetting(setting, value): void {
