@@ -10,6 +10,7 @@ import {
 import { formatForDisplay, openInBrowser } from '../utils/helpers';
 import { Notification } from '../typesGithub';
 import { AppContext } from '../context/App';
+import { openExternalLink } from '../utils/comms';
 
 interface IProps {
   hostname: string;
@@ -93,7 +94,17 @@ export const NotificationRow: React.FC<IProps> = ({
 
         <div className="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden">
           <span title={reason.description}>{reason.type}</span> -{' '}
-          <span title={updatedLabel}>{updatedLabel}</span>
+          <span title={updatedLabel}>
+            Updated {updatedAt}
+            <span
+              className="cursor-pointer"
+              onClick={() =>
+                openExternalLink(notification.subject.user.html_url)
+              }
+            >
+              {updatedBy}
+            </span>
+          </span>
         </div>
       </div>
 

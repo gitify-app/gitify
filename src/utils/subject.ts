@@ -10,6 +10,7 @@ import {
   PullRequest,
   PullRequestStateType,
   ReleaseComments,
+  SubjectUser,
   User,
   WorkflowRunAttributes,
 } from '../typesGithub';
@@ -110,14 +111,17 @@ async function getGitifySubjectForDiscussion(
   const latestDiscussionComment = getLatestDiscussionComment(
     discussion.comments.nodes,
   );
-  let discussionUser = null;
+  let discussionUser: SubjectUser = null;
   if (latestDiscussionComment) {
-    discussionUser = latestDiscussionComment.author;
+    discussionUser = {
+      login: latestDiscussionComment.author.login,
+      html_url: latestDiscussionComment.author.url,
+    };
   }
 
   return {
     state: discussionState,
-    user: discussionUser ?? null,
+    user: discussionUser,
   };
 }
 
@@ -135,6 +139,7 @@ async function getGitifySubjectForIssue(
     state: issue.state_reason ?? issue.state,
     user: {
       login: issueCommentUser?.login ?? issue.user.login,
+      html_url: issueCommentUser?.html_url ?? issue.user.html_url,
     },
   };
 }
@@ -160,6 +165,7 @@ async function getGitifySubjectForPullRequest(
     state: prState,
     user: {
       login: prCommentUser?.login ?? pr.user.login,
+      html_url: prCommentUser?.html_url ?? pr.user.html_url,
     },
   };
 }
@@ -174,6 +180,7 @@ async function getGitifySubjectForRelease(
     state: null,
     user: {
       login: releaseCommentUser.login,
+      html_url: releaseCommentUser.html_url,
     },
   };
 }
