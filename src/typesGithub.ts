@@ -327,30 +327,24 @@ export interface GraphQLSearch<T> {
   };
 }
 
-export interface DiscussionSearchResultNode {
+export interface Discussion {
   viewerSubscription: ViewerSubscription;
   title: string;
   stateReason: DiscussionStateType;
   isAnswered: boolean;
   url: string;
   comments: {
-    nodes: DiscussionCommentNode[];
+    nodes: DiscussionComment[];
   };
 }
 
-export interface DiscussionCommentNode {
+export interface DiscussionComment {
   databaseId: string | number;
   createdAt: string;
   author: DiscussionAuthor;
-  replies: {
-    nodes: DiscussionSubcommentNode[];
+  replies?: {
+    nodes: DiscussionComment[];
   };
-}
-
-export interface DiscussionSubcommentNode {
-  databaseId: string | number;
-  createdAt: string;
-  author: DiscussionAuthor;
 }
 
 export interface CheckSuiteAttributes {
