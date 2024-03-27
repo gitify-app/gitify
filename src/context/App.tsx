@@ -92,7 +92,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     fetchNotifications(accounts, settings);
-  }, [settings.participating]);
+  }, [settings.participating, settings.showBots]);
 
   useEffect(() => {
     fetchNotifications(accounts, settings);
