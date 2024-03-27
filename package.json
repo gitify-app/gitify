@@ -1,6 +1,6 @@
 {
   "name": "gitify",
-  "version": "5.0.0",
+  "version": "5.0.1",
   "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
@@ -130,7 +130,7 @@
     "@types/react-transition-group": "4.4.10",
     "autoprefixer": "10.4.19",
     "css-loader": "6.10.0",
-    "electron": "19.1.9",
+    "electron": "20.3.12",
     "electron-builder": "24.13.3",
     "husky": "9.0.11",
     "jest": "29.7.0",
