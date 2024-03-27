@@ -160,6 +160,7 @@ export async function fetchDiscussion(
           createdAt
           author {
             login
+            type
           }
         }
       

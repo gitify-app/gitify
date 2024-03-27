@@ -299,6 +299,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   createdAt: '2022-02-20T18:33:39Z',
                   author: {
                     login: 'comment-user',
+                    type: 'User',
                   },
                   replies: {
                     nodes: [],
@@ -309,6 +310,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   createdAt: '2022-02-21T03:30:42Z',
                   author: {
                     login: 'comment-user',
+                    type: 'User',
                   },
                   replies: {
                     nodes: [],
@@ -319,6 +321,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   createdAt: '2022-02-21T18:26:27Z',
                   author: {
                     login: 'comment-user',
+                    type: 'User',
                   },
                   replies: {
                     nodes: [
@@ -327,6 +330,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         createdAt: '2022-02-23T00:57:58Z',
                         author: {
                           login: 'reply-user',
+                          type: 'User',
                         },
                       },
                     ],
@@ -337,6 +341,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   createdAt: '2022-02-23T00:57:49Z',
                   author: {
                     login: 'comment-user',
+                    type: 'User',
                   },
                   replies: {
                     nodes: [],
@@ -347,6 +352,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   createdAt: '2022-02-27T01:22:20Z',
                   author: {
                     login: 'comment-user',
+                    type: 'User',
                   },
                   replies: {
                     nodes: [
@@ -355,6 +361,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         createdAt: '2022-03-05T17:43:52Z',
                         author: {
                           login: 'reply-user',
+                          type: 'User',
                         },
                       },
                     ],
@@ -365,6 +372,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   createdAt: '2022-03-04T20:39:44Z',
                   author: {
                     login: 'comment-user',
+                    type: 'User',
                   },
                   replies: {
                     nodes: [
@@ -373,6 +381,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         createdAt: '2022-03-05T17:41:04Z',
                         author: {
                           login: 'reply-user',
+                          type: 'User',
                         },
                       },
                     ],
@@ -383,6 +392,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   createdAt: '2022-03-05T11:05:42Z',
                   author: {
                     login: 'comment-user',
+                    type: 'User',
                   },
                   replies: {
                     nodes: [
@@ -391,6 +401,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         createdAt: '2022-03-05T17:41:44Z',
                         author: {
                           login: 'reply-user',
+                          type: 'User',
                         },
                       },
                     ],
@@ -412,6 +423,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   createdAt: '2022-02-20T18:33:39Z',
                   author: {
                     login: 'comment-user',
+                    type: 'User',
                   },
                   replies: {
                     nodes: [],
@@ -422,6 +434,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   createdAt: '2022-02-21T03:30:42Z',
                   author: {
                     login: 'comment-user',
+                    type: 'User',
                   },
                   replies: {
                     nodes: [],
@@ -432,6 +445,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   createdAt: '2022-02-21T18:26:27Z',
                   author: {
                     login: 'comment-user',
+                    type: 'User',
                   },
                   replies: {
                     nodes: [
@@ -440,6 +454,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         createdAt: '2022-02-23T00:57:58Z',
                         author: {
                           login: 'reply-user',
+                          type: 'User',
                         },
                       },
                     ],
@@ -450,6 +465,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   createdAt: '2022-02-23T00:57:49Z',
                   author: {
                     login: 'comment-user',
+                    type: 'User',
                   },
                   replies: {
                     nodes: [],
@@ -460,6 +476,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   createdAt: '2022-02-27T01:22:20Z',
                   author: {
                     login: 'comment-user',
+                    type: 'User',
                   },
                   replies: {
                     nodes: [
@@ -468,6 +485,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         createdAt: '2022-03-05T17:43:52Z',
                         author: {
                           login: 'reply-user',
+                          type: 'User',
                         },
                       },
                     ],
@@ -478,6 +496,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   createdAt: '2022-03-04T20:39:44Z',
                   author: {
                     login: 'comment-user',
+                    type: 'User',
                   },
                   replies: {
                     nodes: [
@@ -486,6 +505,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         createdAt: '2022-03-05T17:41:04Z',
                         author: {
                           login: 'reply-user',
+                          type: 'User',
                         },
                       },
                     ],
@@ -496,6 +516,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   createdAt: '2022-03-05T11:05:42Z',
                   author: {
                     login: 'comment-user',
+                    type: 'User',
                   },
                   replies: {
                     nodes: [
@@ -504,6 +525,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         createdAt: '2022-03-05T17:41:44Z',
                         author: {
                           login: 'reply-user',
+                          type: 'User',
                         },
                       },
                     ],

@@ -34,6 +34,7 @@ export const defaultSettings: SettingsState = {
   participating: false,
   playSound: true,
   showNotifications: true,
+  showBots: true,
   openAtStartup: false,
   appearance: Appearance.SYSTEM,
   colors: null,
@@ -91,7 +92,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
   useEffect(() => {
     fetchNotifications(accounts, settings);
-  }, [settings.participating]);
+  }, [settings.participating, settings.showBots]);
 
   useEffect(() => {
     fetchNotifications(accounts, settings);
