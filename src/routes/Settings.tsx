@@ -137,12 +137,7 @@ export const SettingsRoute: React.FC = () => {
           checked={settings.participating}
           onChange={(evt) => updateSetting('participating', evt.target.checked)}
         />
-        <FieldCheckbox
-          name="playSound"
-          label="Play sound"
-          checked={settings.playSound}
-          onChange={(evt) => updateSetting('playSound', evt.target.checked)}
-        />
+
         <FieldCheckbox
           name="showNotifications"
           label="Show notifications"
@@ -164,6 +159,12 @@ export const SettingsRoute: React.FC = () => {
           onChange={(evt) =>
             updateSetting('markAsDoneOnOpen', evt.target.checked)
           }
+        />
+        <FieldCheckbox
+          name="playSound"
+          label="Play sound"
+          checked={settings.playSound}
+          onChange={(evt) => updateSetting('playSound', evt.target.checked)}
         />
         {!isLinux && (
           <FieldCheckbox
