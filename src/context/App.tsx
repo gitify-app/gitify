@@ -34,6 +34,7 @@ export const defaultSettings: SettingsState = {
   participating: false,
   playSound: true,
   showNotifications: true,
+  showBots: true,
   openAtStartup: false,
   appearance: Appearance.SYSTEM,
   colors: null,

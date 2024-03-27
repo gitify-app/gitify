@@ -152,6 +152,12 @@ export const SettingsRoute: React.FC = () => {
           }
         />
         <FieldCheckbox
+          name="showBots"
+          label="Show notifications from Bot accounts"
+          checked={settings.showBots}
+          onChange={(evt) => updateSetting('showBots', evt.target.checked)}
+        />
+        <FieldCheckbox
           name="markAsDoneOnOpen"
           label="Mark as done on open"
           checked={settings.markAsDoneOnOpen}
