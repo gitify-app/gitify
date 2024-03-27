@@ -194,7 +194,8 @@ describe('hooks/useNotifications.ts', () => {
             subject: {
               title: 'This is a check suite workflow.',
               type: 'CheckSuite',
-              url: 'https://api.github.com/1',
+              url: null,
+              latest_comment_url: null,
             },
             repository: {
               full_name: 'some/repo',
@@ -206,7 +207,8 @@ describe('hooks/useNotifications.ts', () => {
             subject: {
               title: 'This is a Discussion.',
               type: 'Discussion',
-              url: 'https://api.github.com/2',
+              url: null,
+              latest_comment_url: null,
             },
             repository: {
               full_name: 'some/repo',
@@ -236,7 +238,8 @@ describe('hooks/useNotifications.ts', () => {
             subject: {
               title: 'This is an invitation.',
               type: 'RepositoryInvitation',
-              url: 'https://api.github.com/5',
+              url: null,
+              latest_comment_url: null,
             },
           },
           {
@@ -244,7 +247,8 @@ describe('hooks/useNotifications.ts', () => {
             subject: {
               title: 'This is a workflow run.',
               type: 'WorkflowRun',
-              url: 'https://api.github.com/6',
+              url: null,
+              latest_comment_url: null,
             },
           },
         ];
