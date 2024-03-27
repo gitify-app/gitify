@@ -83,8 +83,8 @@ export const NotificationRow: React.FC<IProps> = ({
       <div className="flex-1 overflow-hidden">
         <div
           className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
-          onClick={() => pressTitle()}
           role="main"
+          onClick={() => pressTitle()}
           title={notification.subject.title}
         >
           {notification.subject.title}
@@ -100,6 +100,7 @@ export const NotificationRow: React.FC<IProps> = ({
                 by{' '}
                 <span
                   className="cursor-pointer"
+                  title="View User Profile"
                   onClick={() =>
                     openExternalLink(notification.subject.user.html_url)
                   }
