@@ -127,6 +127,34 @@ describe('routes/Settings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('participating', false);
   });
 
+  it('should toggle the showBots checkbox', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
+
+    fireEvent.click(getByLabelText('Show notifications from Bot accounts'), {
+      target: { checked: true },
+    });
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('showBots', false);
+  });
+
   it('should toggle the playSound checkbox', async () => {
     let getByLabelText;
 
