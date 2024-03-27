@@ -223,6 +223,9 @@ describe('hooks/useNotifications.ts', () => {
               url: 'https://api.github.com/3',
               latest_comment_url: 'https://api.github.com/3/comments',
             },
+            repository: {
+              full_name: 'some/repo',
+            },
           },
           {
             id: 4,
@@ -231,6 +234,9 @@ describe('hooks/useNotifications.ts', () => {
               type: 'PullRequest',
               url: 'https://api.github.com/4',
               latest_comment_url: 'https://api.github.com/4/comments',
+            },
+            repository: {
+              full_name: 'some/repo',
             },
           },
           {
@@ -241,6 +247,9 @@ describe('hooks/useNotifications.ts', () => {
               url: null,
               latest_comment_url: null,
             },
+            repository: {
+              full_name: 'some/repo',
+            },
           },
           {
             id: 6,
@@ -249,6 +258,9 @@ describe('hooks/useNotifications.ts', () => {
               type: 'WorkflowRun',
               url: null,
               latest_comment_url: null,
+            },
+            repository: {
+              full_name: 'some/repo',
             },
           },
         ];
