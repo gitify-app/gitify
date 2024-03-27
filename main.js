@@ -25,12 +25,12 @@ const browserWindowOpts = {
   webPreferences: {
     enableRemoteModule: true,
     overlayScrollbars: true,
-    contextIsolation: true,
-    nodeIntegration: false,
+    nodeIntegration: true,
+    contextIsolation: false,
   },
 };
 
-app.whenReady().then(async () => {
+app.on('ready', async () => {
   await onFirstRunMaybe();
 });
 
