@@ -89,7 +89,7 @@ export const SettingsRoute: React.FC = () => {
       className="flex flex-1 flex-col dark:bg-gray-dark dark:text-white"
       data-testid="settings"
     >
-      <div className="flex justify-between items-center mt-4 py-2 mx-8">
+      <div className="flex justify-between items-center mt-2 py-2 mx-8">
         <button
           className="focus:outline-none"
           title="Go Back"
@@ -147,6 +147,12 @@ export const SettingsRoute: React.FC = () => {
           }
         />
         <FieldCheckbox
+          name="showBots"
+          label="Show notifications from Bot accounts"
+          checked={settings.showBots}
+          onChange={(evt) => updateSetting('showBots', evt.target.checked)}
+        />
+        <FieldCheckbox
           name="markAsDoneOnOpen"
           label="Mark as done on open"
           checked={settings.markAsDoneOnOpen}
@@ -172,7 +178,7 @@ export const SettingsRoute: React.FC = () => {
         )}
       </div>
 
-      <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-4 px-8">
+      <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8">
         <small
           className="font-semibold cursor-pointer"
           title="View release notes"

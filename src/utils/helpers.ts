@@ -160,6 +160,12 @@ export async function fetchDiscussion(
           createdAt
           author {
             login
+            url
+          }
+          bot: author {
+            ... on Bot {
+              login
+            }
           }
         }
       

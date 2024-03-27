@@ -13,6 +13,7 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
         src="https://avatars0.githubusercontent.com/u/6333409?v=3"
       />
       <span
+        className="cursor-pointer"
         onClick={[Function]}
       >
         manosim/gitify
@@ -123,6 +124,7 @@ exports[`components/Repository.tsx should use default repository icon when avata
         />
       </svg>
       <span
+        className="cursor-pointer"
         onClick={[Function]}
       >
         manosim/gitify
