@@ -35,7 +35,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
     </svg>
   </div>
   <div
-    className="flex-1 overflow-hidden"
+    className="flex-1 overflow-hidden cursor-pointer"
     onClick={[Function]}
     role="main"
   >
