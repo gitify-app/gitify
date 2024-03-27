@@ -161,6 +161,7 @@ export async function fetchDiscussion(
           author {
             login
             url
+            type
           }
         }
       

@@ -223,6 +223,9 @@ describe('hooks/useNotifications.ts', () => {
               url: 'https://api.github.com/3',
               latest_comment_url: 'https://api.github.com/3/comments',
             },
+            repository: {
+              full_name: 'some/repo',
+            },
           },
           {
             id: 4,
@@ -231,6 +234,9 @@ describe('hooks/useNotifications.ts', () => {
               type: 'PullRequest',
               url: 'https://api.github.com/4',
               latest_comment_url: 'https://api.github.com/4/comments',
+            },
+            repository: {
+              full_name: 'some/repo',
             },
           },
           {
@@ -241,6 +247,9 @@ describe('hooks/useNotifications.ts', () => {
               url: null,
               latest_comment_url: null,
             },
+            repository: {
+              full_name: 'some/repo',
+            },
           },
           {
             id: 6,
@@ -249,6 +258,9 @@ describe('hooks/useNotifications.ts', () => {
               type: 'WorkflowRun',
               url: null,
               latest_comment_url: null,
+            },
+            repository: {
+              full_name: 'some/repo',
             },
           },
         ];
@@ -297,6 +309,7 @@ describe('hooks/useNotifications.ts', () => {
             user: {
               login: 'some-user',
               html_url: 'https://github.com/some-user',
+              type: 'User',
             },
           });
         nock('https://api.github.com')
@@ -305,6 +318,7 @@ describe('hooks/useNotifications.ts', () => {
             user: {
               login: 'some-commenter',
               html_url: 'https://github.com/some-commenter',
+              type: 'User',
             },
           });
         nock('https://api.github.com')
@@ -315,6 +329,7 @@ describe('hooks/useNotifications.ts', () => {
             user: {
               login: 'some-user',
               html_url: 'https://github.com/some-user',
+              type: 'User',
             },
           });
         nock('https://api.github.com')
@@ -323,6 +338,7 @@ describe('hooks/useNotifications.ts', () => {
             user: {
               login: 'some-commenter',
               html_url: 'https://github.com/some-commenter',
+              type: 'User',
             },
           });
 
@@ -342,6 +358,84 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         expect(result.current.notifications[0].notifications.length).toBe(6);
+      });
+    });
+
+    describe('showBots', () => {
+      it('should hide bot notifications when set to false', async () => {
+        const accounts: AuthState = {
+          ...mockAccounts,
+          enterpriseAccounts: [],
+          user: mockedUser,
+        };
+
+        const notifications = [
+          {
+            id: 1,
+            subject: {
+              title: 'This is an Issue.',
+              type: 'Issue',
+              url: 'https://api.github.com/1',
+              latest_comment_url: null,
+            },
+            repository: {
+              full_name: 'some/repo',
+            },
+          },
+          {
+            id: 2,
+            subject: {
+              title: 'This is a Pull Request.',
+              type: 'PullRequest',
+              url: 'https://api.github.com/2',
+              latest_comment_url: null,
+            },
+            repository: {
+              full_name: 'some/repo',
+            },
+          },
+        ];
+
+        nock('https://api.github.com')
+          .get('/notifications?participating=false')
+          .reply(200, notifications);
+        nock('https://api.github.com')
+          .get('/1')
+          .reply(200, {
+            state: 'closed',
+            merged: true,
+            user: {
+              login: 'some-user',
+              type: 'User',
+            },
+          });
+        nock('https://api.github.com')
+          .get('/2')
+          .reply(200, {
+            state: 'closed',
+            merged: false,
+            user: {
+              login: 'some-bot',
+              type: 'Bot',
+            },
+          });
+
+        const { result } = renderHook(() => useNotifications(true));
+
+        act(() => {
+          result.current.fetchNotifications(accounts, {
+            ...mockSettings,
+            showBots: false,
+          });
+        });
+
+        expect(result.current.isFetching).toBe(true);
+
+        await waitFor(() => {
+          expect(result.current.notifications[0].hostname).toBe('github.com');
+        });
+
+        expect(result.current.notifications[0].notifications.length).toBe(1);
       });
     });
   });

@@ -138,11 +138,13 @@ export interface User {
 export interface SubjectUser {
   login: string;
   html_url: string;
+  type: string;
 }
 
 export interface DiscussionAuthor {
   login: string;
   url: string;
+  type: string;
 }
 
 export interface Repository {
