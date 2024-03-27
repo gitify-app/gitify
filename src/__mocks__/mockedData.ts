@@ -300,8 +300,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   author: {
                     login: 'comment-user',
                     url: 'https://github.com/comment-user',
-                    type: 'User',
                   },
+                  bot: {},
                   replies: {
                     nodes: [],
                   },
@@ -312,8 +312,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   author: {
                     login: 'comment-user',
                     url: 'https://github.com/comment-user',
-                    type: 'User',
                   },
+                  bot: {},
                   replies: {
                     nodes: [],
                   },
@@ -324,8 +324,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   author: {
                     login: 'comment-user',
                     url: 'https://github.com/comment-user',
-                    type: 'User',
                   },
+                  bot: {},
                   replies: {
                     nodes: [
                       {
@@ -334,8 +334,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         author: {
                           login: 'reply-user',
                           url: 'https://github.com/reply-user',
-                          type: 'User',
                         },
+                        bot: {},
                       },
                     ],
                   },
@@ -346,8 +346,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   author: {
                     login: 'comment-user',
                     url: 'https://github.com/comment-user',
-                    type: 'User',
                   },
+                  bot: {},
                   replies: {
                     nodes: [],
                   },
@@ -358,8 +358,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   author: {
                     login: 'comment-user',
                     url: 'https://github.com/comment-user',
-                    type: 'User',
                   },
+                  bot: {},
                   replies: {
                     nodes: [
                       {
@@ -368,8 +368,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         author: {
                           login: 'reply-user',
                           url: 'https://github.com/reply-user',
-                          type: 'User',
                         },
+                        bot: {},
                       },
                     ],
                   },
@@ -380,8 +380,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   author: {
                     login: 'comment-user',
                     url: 'https://github.com/comment-user',
-                    type: 'User',
                   },
+                  bot: {},
                   replies: {
                     nodes: [
                       {
@@ -390,8 +390,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         author: {
                           login: 'reply-user',
                           url: 'https://github.com/reply-user',
-                          type: 'User',
                         },
+                        bot: {},
                       },
                     ],
                   },
@@ -402,8 +402,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   author: {
                     login: 'comment-user',
                     url: 'https://github.com/comment-user',
-                    type: 'User',
                   },
+                  bot: {},
                   replies: {
                     nodes: [
                       {
@@ -412,8 +412,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         author: {
                           login: 'reply-user',
                           url: 'https://github.com/reply-user',
-                          type: 'User',
                         },
+                        bot: {},
                       },
                     ],
                   },
@@ -435,8 +435,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   author: {
                     login: 'comment-user',
                     url: 'https://github.com/comment-user',
-                    type: 'User',
                   },
+                  bot: {},
                   replies: {
                     nodes: [],
                   },
@@ -447,8 +447,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   author: {
                     login: 'comment-user',
                     url: 'https://github.com/comment-user',
-                    type: 'User',
                   },
+                  bot: {},
                   replies: {
                     nodes: [],
                   },
@@ -459,8 +459,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   author: {
                     login: 'comment-user',
                     url: 'https://github.com/comment-user',
-                    type: 'User',
                   },
+                  bot: {},
                   replies: {
                     nodes: [
                       {
@@ -469,8 +469,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         author: {
                           login: 'reply-user',
                           url: 'https://github.com/reply-user',
-                          type: 'User',
                         },
+                        bot: {},
                       },
                     ],
                   },
@@ -481,8 +481,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   author: {
                     login: 'comment-user',
                     url: 'https://github.com/comment-user',
-                    type: 'User',
                   },
+                  bot: {},
                   replies: {
                     nodes: [],
                   },
@@ -493,8 +493,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   author: {
                     login: 'comment-user',
                     url: 'https://github.com/comment-user',
-                    type: 'User',
                   },
+                  bot: {},
                   replies: {
                     nodes: [
                       {
@@ -503,8 +503,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         author: {
                           login: 'reply-user',
                           url: 'https://github.com/reply-user',
-                          type: 'User',
                         },
+                        bot: {},
                       },
                     ],
                   },
@@ -515,8 +515,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   author: {
                     login: 'comment-user',
                     url: 'https://github.com/comment-user',
-                    type: 'User',
                   },
+                  bot: {},
                   replies: {
                     nodes: [
                       {
@@ -525,8 +525,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         author: {
                           login: 'reply-user',
                           url: 'https://github.com/reply-user',
-                          type: 'User',
                         },
+                        bot: {},
                       },
                     ],
                   },
@@ -537,8 +537,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                   author: {
                     login: 'comment-user',
                     url: 'https://github.com/comment-user',
-                    type: 'User',
                   },
+                  bot: {},
                   replies: {
                     nodes: [
                       {
@@ -547,8 +547,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
                         author: {
                           login: 'reply-user',
                           url: 'https://github.com/reply-user',
-                          type: 'User',
                         },
+                        bot: {},
                       },
                     ],
                   },

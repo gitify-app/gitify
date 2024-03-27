@@ -144,7 +144,6 @@ export interface SubjectUser {
 export interface DiscussionAuthor {
   login: string;
   url: string;
-  type: string;
 }
 
 export interface Repository {
@@ -346,6 +345,9 @@ export interface DiscussionComment {
   databaseId: string | number;
   createdAt: string;
   author: DiscussionAuthor;
+  bot: {
+    login?: string;
+  };
   replies?: {
     nodes: DiscussionComment[];
   };

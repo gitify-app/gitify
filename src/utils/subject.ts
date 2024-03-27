@@ -116,7 +116,7 @@ async function getGitifySubjectForDiscussion(
     discussionUser = {
       login: latestDiscussionComment.author.login,
       html_url: latestDiscussionComment.author.url,
-      type: latestDiscussionComment.author.type,
+      type: latestDiscussionComment.bot?.login ? 'Bot' : 'User',
     };
   }
 

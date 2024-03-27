@@ -161,7 +161,11 @@ export async function fetchDiscussion(
           author {
             login
             url
-            type
+          }
+          bot: author {
+            ... on Bot {
+              login
+            }
           }
         }
       
