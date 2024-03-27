@@ -287,19 +287,50 @@ describe('hooks/useNotifications.ts', () => {
 
         nock('https://api.github.com')
           .get('/3')
-          .reply(200, { state: 'closed', merged: true });
+          .reply(200, {
+            state: 'closed',
+            merged: true,
+            user: {
+              login: 'some-user',
+              html_url: 'https://github.com/some-user',
+            },
+          });
         nock('https://api.github.com')
           .get('/3/comments')
-          .reply(200, { user: { login: 'some-user' } });
+          .reply(200, {
+            user: {
+              login: 'some-commenter',
+              html_url: 'https://github.com/some-commenter',
+            },
+          });
         nock('https://api.github.com')
           .get('/4')
-          .reply(200, { state: 'closed', merged: false });
+          .reply(200, {
+            state: 'closed',
+            merged: false,
+            user: {
+              login: 'some-user',
+              html_url: 'https://github.com/some-user',
+            },
+          });
         nock('https://api.github.com')
           .get('/4/comments')
-          .reply(200, { user: { login: 'some-user' } });
+          .reply(200, {
+            user: {
+              login: 'some-commenter',
+              html_url: 'https://github.com/some-commenter',
+            },
+          });
         nock('https://api.github.com')
           .get('/5')
-          .reply(200, { state: 'open', draft: false });
+          .reply(200, {
+            state: 'open',
+            draft: false,
+            user: {
+              login: 'some-commenter',
+              html_url: 'https://github.com/some-commenter',
+            },
+          });
 
         const { result } = renderHook(() => useNotifications(true));
 

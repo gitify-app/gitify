@@ -80,13 +80,11 @@ export const NotificationRow: React.FC<IProps> = ({
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
 
-      <div
-        className="flex-1 overflow-hidden"
-        onClick={() => pressTitle()}
-        role="main"
-      >
+      <div className="flex-1 overflow-hidden">
         <div
-          className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden"
+          className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          onClick={() => pressTitle()}
+          role="main"
           title={notification.subject.title}
         >
           {notification.subject.title}
@@ -96,14 +94,20 @@ export const NotificationRow: React.FC<IProps> = ({
           <span title={reason.description}>{reason.type}</span> -{' '}
           <span title={updatedLabel}>
             Updated {updatedAt}
-            <span
-              className="cursor-pointer"
-              onClick={() =>
-                openExternalLink(notification.subject.user.html_url)
-              }
-            >
-              {updatedBy}
-            </span>
+            {notification.subject.user && (
+              <>
+                {' '}
+                by{' '}
+                <span
+                  className="cursor-pointer"
+                  onClick={() =>
+                    openExternalLink(notification.subject.user.html_url)
+                  }
+                >
+                  {notification.subject.user.login}
+                </span>
+              </>
+            )}
           </span>
         </div>
       </div>
