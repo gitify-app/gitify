@@ -34,7 +34,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
   data-testid="settings"
 >
   <div
-    class="flex justify-between items-center mt-4 py-2 mx-8"
+    class="flex justify-between items-center mt-2 py-2 mx-8"
   >
     <button
       class="focus:outline-none"
@@ -278,7 +278,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
     </div>
   </div>
   <div
-    class="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-4 px-8"
+    class="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8"
   >
     <small
       class="font-semibold cursor-pointer"
