@@ -321,16 +321,6 @@ describe('hooks/useNotifications.ts', () => {
               html_url: 'https://github.com/some-commenter',
             },
           });
-        nock('https://api.github.com')
-          .get('/5')
-          .reply(200, {
-            state: 'open',
-            draft: false,
-            user: {
-              login: 'some-commenter',
-              html_url: 'https://github.com/some-commenter',
-            },
-          });
 
         const { result } = renderHook(() => useNotifications(true));
 
