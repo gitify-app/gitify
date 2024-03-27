@@ -80,7 +80,7 @@ export const NotificationRow: React.FC<IProps> = ({
       </div>
 
       <div
-        className="flex-1 overflow-hidden"
+        className="flex-1 overflow-hidden cursor-pointer"
         onClick={() => pressTitle()}
         role="main"
       >
