@@ -115,13 +115,14 @@ async function getGitifySubjectForDiscussion(
   if (latestDiscussionComment) {
     discussionUser = {
       login: latestDiscussionComment.author.login,
+      html_url: latestDiscussionComment.author.url,
       type: latestDiscussionComment.author.type,
     };
   }
 
   return {
     state: discussionState,
-    user: discussionUser ?? null,
+    user: discussionUser,
   };
 }
 
@@ -139,6 +140,7 @@ async function getGitifySubjectForIssue(
     state: issue.state_reason ?? issue.state,
     user: {
       login: issueCommentUser?.login ?? issue.user.login,
+      html_url: issueCommentUser?.html_url ?? issue.user.html_url,
       type: issueCommentUser?.type ?? issue.user.type,
     },
   };
@@ -165,6 +167,7 @@ async function getGitifySubjectForPullRequest(
     state: prState,
     user: {
       login: prCommentUser?.login ?? pr.user.login,
+      html_url: prCommentUser?.html_url ?? pr.user.html_url,
       type: prCommentUser?.type ?? pr.user.type,
     },
   };
@@ -180,6 +183,7 @@ async function getGitifySubjectForRelease(
     state: null,
     user: {
       login: releaseCommentUser.login,
+      html_url: releaseCommentUser.html_url,
       type: releaseCommentUser.type,
     },
   };

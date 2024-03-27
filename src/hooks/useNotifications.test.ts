@@ -308,12 +308,19 @@ describe('hooks/useNotifications.ts', () => {
             merged: true,
             user: {
               login: 'some-user',
+              html_url: 'https://github.com/some-user',
               type: 'User',
             },
           });
         nock('https://api.github.com')
           .get('/3/comments')
-          .reply(200, { user: { login: 'some-commenter', type: 'User' } });
+          .reply(200, {
+            user: {
+              login: 'some-commenter',
+              html_url: 'https://github.com/some-commenter',
+              type: 'User',
+            },
+          });
         nock('https://api.github.com')
           .get('/4')
           .reply(200, {
@@ -321,12 +328,19 @@ describe('hooks/useNotifications.ts', () => {
             merged: false,
             user: {
               login: 'some-user',
+              html_url: 'https://github.com/some-user',
               type: 'User',
             },
           });
         nock('https://api.github.com')
           .get('/4/comments')
-          .reply(200, { user: { login: 'some-commenter', type: 'User' } });
+          .reply(200, {
+            user: {
+              login: 'some-commenter',
+              html_url: 'https://github.com/some-commenter',
+              type: 'User',
+            },
+          });
 
         const { result } = renderHook(() => useNotifications(true));
 
