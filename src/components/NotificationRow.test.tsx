@@ -138,14 +138,14 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const { getByLabelText } = render(
+    const { getByTitle } = render(
       <AppContext.Provider value={{}}>
         <AppContext.Provider value={{ unsubscribeNotification }}>
           <NotificationRow {...props} />
         </AppContext.Provider>
       </AppContext.Provider>,
     );
-    fireEvent.click(getByLabelText('Unsubscribe'));
+    fireEvent.click(getByTitle('Unsubscribe'));
     expect(unsubscribeNotification).toHaveBeenCalledTimes(1);
   });
 });
