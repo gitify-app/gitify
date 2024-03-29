@@ -47,7 +47,9 @@ export const RepositoryNotifications: React.FC<IProps> = ({
           ) : (
             <MarkGithubIcon size={18} />
           )}
-          <span onClick={openBrowser}>{repoName}</span>
+          <span className="cursor-pointer" onClick={openBrowser}>
+            {repoName}
+          </span>
         </div>
 
         <div className="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity">

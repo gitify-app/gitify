@@ -2,12 +2,11 @@ import { EnterpriseAccount, AuthState } from '../types';
 import {
   Notification,
   GraphQLSearch,
-  DiscussionCommentNode,
-  DiscussionSearchResultNode,
+  Discussion,
   PullRequest,
   Issue,
   IssueComments,
-  DiscussionSubcommentNode,
+  DiscussionComment,
 } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
@@ -149,10 +148,28 @@ async function getDiscussionUrl(
 export async function fetchDiscussion(
   notification: Notification,
   token: string,
-): Promise<DiscussionSearchResultNode | null> {
-  const response: GraphQLSearch<DiscussionSearchResultNode> =
-    await apiRequestAuth(`https://api.github.com/graphql`, 'POST', token, {
-      query: `query fetchDiscussions(
+): Promise<Discussion | null> {
+  const response: GraphQLSearch<Discussion> = await apiRequestAuth(
+    `https://api.github.com/graphql`,
+    'POST',
+    token,
+    {
+      query: `
+        fragment CommentFields on DiscussionComment {
+          databaseId
+          createdAt
+          author {
+            login
+            url
+          }
+          bot: author {
+            ... on Bot {
+              login
+            }
+          }
+        }
+      
+        query fetchDiscussions(
           $queryStatement: String!,
           $type: SearchType!,
           $firstDiscussions: Int,
@@ -169,18 +186,10 @@ export async function fetchDiscussion(
                 url
                 comments(last: $lastComments){
                   nodes {
-                    databaseId
-                    createdAt
-                    author {
-                      login
-                    }
+                    ...CommentFields
                     replies(last: $firstReplies) {
                       nodes {
-                        databaseId
-                        createdAt
-                        author {
-                          login
-                        }
+                        ...CommentFields
                       }
                     }
                   }
@@ -201,7 +210,8 @@ export async function fetchDiscussion(
         lastComments: 100,
         firstReplies: 1,
       },
-    });
+    },
+  );
 
   let discussions =
     response?.data?.data.search.nodes.filter(
@@ -217,8 +227,8 @@ export async function fetchDiscussion(
 }
 
 export function getLatestDiscussionComment(
-  comments: DiscussionCommentNode[],
-): DiscussionSubcommentNode | null {
+  comments: DiscussionComment[],
+): DiscussionComment | null {
   if (!comments || comments.length == 0) {
     return null;
   }

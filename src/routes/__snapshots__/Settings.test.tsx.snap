@@ -34,7 +34,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
   data-testid="settings"
 >
   <div
-    class="flex justify-between items-center mt-4 py-2 mx-8"
+    class="flex justify-between items-center mt-2 py-2 mx-8"
   >
     <button
       class="focus:outline-none"
@@ -191,30 +191,6 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         <input
           checked=""
           class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          id="playSound"
-          type="checkbox"
-        />
-      </div>
-      <div
-        class="ml-3 text-sm"
-      >
-        <label
-          class="font-medium text-gray-700 dark:text-gray-200"
-          for="playSound"
-        >
-          Play sound
-        </label>
-      </div>
-    </div>
-    <div
-      class="flex items-start mt-1 mb-3"
-    >
-      <div
-        class="flex items-center h-5"
-      >
-        <input
-          checked=""
-          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
           id="showNotifications"
           type="checkbox"
         />
@@ -227,6 +203,30 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           for="showNotifications"
         >
           Show notifications
+        </label>
+      </div>
+    </div>
+    <div
+      class="flex items-start mt-1 mb-3"
+    >
+      <div
+        class="flex items-center h-5"
+      >
+        <input
+          checked=""
+          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+          id="showBots"
+          type="checkbox"
+        />
+      </div>
+      <div
+        class="ml-3 text-sm"
+      >
+        <label
+          class="font-medium text-gray-700 dark:text-gray-200"
+          for="showBots"
+        >
+          Show notifications from Bot accounts
         </label>
       </div>
     </div>
@@ -250,6 +250,30 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           for="markAsDoneOnOpen"
         >
           Mark as done on open
+        </label>
+      </div>
+    </div>
+    <div
+      class="flex items-start mt-1 mb-3"
+    >
+      <div
+        class="flex items-center h-5"
+      >
+        <input
+          checked=""
+          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+          id="playSound"
+          type="checkbox"
+        />
+      </div>
+      <div
+        class="ml-3 text-sm"
+      >
+        <label
+          class="font-medium text-gray-700 dark:text-gray-200"
+          for="playSound"
+        >
+          Play sound
         </label>
       </div>
     </div>
@@ -301,10 +325,11 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
     </div>
   </div>
   <div
-    class="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-4 px-8"
+    class="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8"
   >
     <small
-      class="font-semibold"
+      class="font-semibold cursor-pointer"
+      title="View release notes"
     >
       Gitify v
       0.0.1

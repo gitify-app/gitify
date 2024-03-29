@@ -70,7 +70,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const fetchNotifications = useCallback(
-    async (accounts: AuthState, settings) => {
+    async (accounts: AuthState, settings: SettingsState) => {
       const isGitHubLoggedIn = accounts.token !== null;
       const endpointSuffix = `notifications?participating=${settings.participating}`;
 
@@ -135,32 +135,48 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                 data.map(async (accountNotifications) => {
                   return {
                     hostname: accountNotifications.hostname,
-                    notifications: await axios.all<Notification>(
-                      accountNotifications.notifications.map(
-                        async (notification: Notification) => {
-                          const isEnterprise = isEnterpriseHost(
-                            accountNotifications.hostname,
-                          );
-                          const token = isEnterprise
-                            ? getEnterpriseAccountToken(
-                                accountNotifications.hostname,
-                                accounts.enterpriseAccounts,
-                              )
-                            : accounts.token;
+                    notifications: await axios
+                      .all<Notification>(
+                        accountNotifications.notifications.map(
+                          async (notification: Notification) => {
+                            const isEnterprise = isEnterpriseHost(
+                              accountNotifications.hostname,
+                            );
+                            const token = isEnterprise
+                              ? getEnterpriseAccountToken(
+                                  accountNotifications.hostname,
+                                  accounts.enterpriseAccounts,
+                                )
+                              : accounts.token;
 
-                          const additionalSubjectDetails =
-                            await getGitifySubjectDetails(notification, token);
+                            const additionalSubjectDetails =
+                              await getGitifySubjectDetails(
+                                notification,
+                                token,
+                              );
 
-                          return {
-                            ...notification,
-                            subject: {
-                              ...notification.subject,
-                              ...additionalSubjectDetails,
-                            },
-                          };
-                        },
-                      ),
-                    ),
+                            return {
+                              ...notification,
+                              subject: {
+                                ...notification.subject,
+                                ...additionalSubjectDetails,
+                              },
+                            };
+                          },
+                        ),
+                      )
+                      .then((notifications) => {
+                        return notifications.filter((notification) => {
+                          if (
+                            !settings.showBots &&
+                            notification.subject?.user.type === 'Bot'
+                          ) {
+                            return false;
+                          }
+
+                          return true;
+                        });
+                      }),
                   };
                 }),
               )

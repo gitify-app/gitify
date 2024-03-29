@@ -12,6 +12,7 @@ export const mockSettings: SettingsState = {
   playSound: true,
   showNotifications: true,
   showNotificationsCountInTray: false,
+  showBots: true,
   openAtStartup: false,
   appearance: Appearance.SYSTEM,
   colors: null,

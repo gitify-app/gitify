@@ -10,6 +10,7 @@ import { AppContext } from '../context/App';
 import * as apiRequests from '../utils/api-requests';
 import Constants from '../utils/constants';
 import { SettingsRoute } from './Settings';
+import { shell } from 'electron';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -127,6 +128,34 @@ describe('routes/Settings.tsx', () => {
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('participating', false);
+  });
+
+  it('should toggle the showBots checkbox', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
+
+    fireEvent.click(getByLabelText('Show notifications from Bot accounts'), {
+      target: { checked: true },
+    });
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('showBots', false);
   });
 
   it('should toggle the playSound checkbox', async () => {
@@ -423,5 +452,31 @@ describe('routes/Settings.tsx', () => {
         'Use GitHub-like state colors (requires repo scope)',
       ).parentNode.parentNode,
     ).toMatchSnapshot();
+  });
+
+  it('should open release notes', async () => {
+    let getByTitle;
+
+    await act(async () => {
+      const { getByTitle: getByTitleLocal } = render(
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByTitle = getByTitleLocal;
+    });
+
+    fireEvent.click(getByTitle('View release notes'));
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(shell.openExternal).toHaveBeenCalledWith(
+      'https://github.com/gitify-app/gitify/releases/tag/v0.0.1',
+    );
   });
 });
