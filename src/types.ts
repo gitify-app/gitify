@@ -11,6 +11,7 @@ export interface SettingsState {
   playSound: boolean;
   showNotifications: boolean;
   showBots: boolean;
+  showNotificationsCountInTray: boolean;
   openAtStartup: boolean;
   appearance: Appearance;
   colors: boolean | null;

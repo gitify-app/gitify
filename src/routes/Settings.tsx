@@ -20,7 +20,11 @@ import { AppContext } from '../context/App';
 import { Appearance } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
 import { setAppearance } from '../utils/appearance';
-import { openExternalLink, updateTrayIcon } from '../utils/comms';
+import {
+  openExternalLink,
+  updateTrayIcon,
+  updateTrayTitle,
+} from '../utils/comms';
 import Constants from '../utils/constants';
 import { generateGitHubAPIUrl } from '../utils/helpers';
 
@@ -71,6 +75,7 @@ export const SettingsRoute: React.FC = () => {
     logout();
     navigate(-1);
     updateTrayIcon();
+    updateTrayTitle();
   }, []);
 
   const quitApp = useCallback(() => {
@@ -151,6 +156,14 @@ export const SettingsRoute: React.FC = () => {
           label="Show notifications from Bot accounts"
           checked={settings.showBots}
           onChange={(evt) => updateSetting('showBots', evt.target.checked)}
+        />
+        <FieldCheckbox
+          name="showNotificationsCountInTray"
+          label="Show notifications count in tray"
+          checked={settings.showNotificationsCountInTray}
+          onChange={(evt) =>
+            updateSetting('showNotificationsCountInTray', evt.target.checked)
+          }
         />
         <FieldCheckbox
           name="markAsDoneOnOpen"
