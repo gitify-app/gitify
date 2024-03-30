@@ -1,6 +1,6 @@
 name: 🐛 Bug Report
 description: Report errors or unexpected behavior
-labels: [bug, needs triage]
+labels: [bug]
 body:
   - type: checkboxes
     attributes:
