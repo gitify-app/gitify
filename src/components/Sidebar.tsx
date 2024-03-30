@@ -5,9 +5,10 @@ import {
   XCircleIcon,
 } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+import { getNotificationCount } from '../utils/notifications';
 import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
 import { Constants } from '../utils/constants';
@@ -32,12 +33,7 @@ export const Sidebar: React.FC = () => {
     ipcRenderer.send('app-quit');
   }, []);
 
-  const notificationsCount = useMemo(() => {
-    return notifications.reduce(
-      (memo, account) => memo + account.notifications.length,
-      0,
-    );
-  }, [notifications]);
+  const notificationsCount = getNotificationCount(notifications);
 
   const footerButtonClasses =
     'flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none';
