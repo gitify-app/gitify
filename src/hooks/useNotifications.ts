@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { parse } from 'url';
 import { useCallback, useState } from 'react';
 
 import { AccountNotifications, AuthState, SettingsState } from '../types';
@@ -95,7 +94,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           axios.spread((gitHubNotifications, ...entAccNotifications) => {
             const enterpriseNotifications = entAccNotifications.map(
               (accountNotifications) => {
-                const { hostname } = parse(accountNotifications.config.url);
+                const { hostname } = new URL(accountNotifications.config.url);
                 return {
                   hostname,
                   notifications: accountNotifications.data,
