@@ -8,6 +8,7 @@ import { ipcRenderer } from 'electron';
 import React, { useCallback, useContext, useMemo } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+import { getNotificationCount } from '../utils/notifications';
 import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
 import { Constants } from '../utils/constants';
@@ -33,10 +34,7 @@ export const Sidebar: React.FC = () => {
   }, []);
 
   const notificationsCount = useMemo(() => {
-    return notifications.reduce(
-      (memo, account) => memo + account.notifications.length,
-      0,
-    );
+    return getNotificationCount(notifications);
   }, [notifications]);
 
   const footerButtonClasses =
