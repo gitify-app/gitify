@@ -13,7 +13,9 @@ export const NotificationsRoute: React.FC = (props) => {
     () => notifications.length > 1,
     [notifications],
   );
-  const notificationsCount = getNotificationCount(notifications);
+  const notificationsCount = useMemo(() => {
+    return getNotificationCount(notifications);
+  }, [notifications]);
 
   const hasNotifications = useMemo(
     () => notificationsCount > 0,
