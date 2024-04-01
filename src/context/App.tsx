@@ -104,7 +104,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     const count = getNotificationCount(notifications);
 
     if (settings.showNotificationsCountInTray && count > 0) {
-      updateTrayTitle(String(count));
+      updateTrayTitle(count.toString());
     } else {
       updateTrayTitle();
     }

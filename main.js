@@ -75,9 +75,9 @@ menubarApp.on('ready', () => {
       }
     }
   });
-  ipcMain.on('update-title', (_, arg) => {
+  ipcMain.on('update-title', (_, title) => {
     if (!menubarApp.tray.isDestroyed()) {
-      menubarApp.tray.setTitle(String(arg));
+      menubarApp.tray.setTitle(title);
     }
   });
   ipcMain.on('set-login-item-settings', (event, settings) => {
