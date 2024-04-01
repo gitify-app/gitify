@@ -12,12 +12,10 @@ export const setTrayIconColor = (notifications: AccountNotifications[]) => {
 };
 
 export function getNotificationCount(notifications: AccountNotifications[]) {
-  const allNotificationsCount = notifications.reduce(
+  return notifications.reduce(
     (memo, acc) => memo + acc.notifications.length,
     0,
   );
-
-  return allNotificationsCount;
 }
 
 export const triggerNativeNotifications = (
