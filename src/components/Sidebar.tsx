@@ -37,7 +37,7 @@ export const Sidebar: React.FC = () => {
     return getNotificationCount(notifications);
   }, [notifications]);
 
-  const footerButtonClasses =
+  const sidebarButtonClasses =
     'flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none';
 
   return (
@@ -71,7 +71,7 @@ export const Sidebar: React.FC = () => {
         {isLoggedIn && (
           <>
             <button
-              className={footerButtonClasses}
+              className={sidebarButtonClasses}
               title="Refresh Notifications"
               onClick={() => {
                 navigate('/', { replace: true });
@@ -82,7 +82,7 @@ export const Sidebar: React.FC = () => {
             </button>
 
             <button
-              className={footerButtonClasses}
+              className={sidebarButtonClasses}
               title="Settings"
               onClick={() => {
                 if (location.pathname.startsWith('/settings')) {
@@ -99,7 +99,7 @@ export const Sidebar: React.FC = () => {
 
         {!isLoggedIn && (
           <button
-            className={footerButtonClasses}
+            className={sidebarButtonClasses}
             title="Quit Gitify"
             aria-label="Quit Gitify"
             onClick={quitApp}
