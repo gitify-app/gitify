@@ -4,6 +4,7 @@ import { AccountNotifications } from '../components/AccountNotifications';
 import { AllRead } from '../components/AllRead';
 import { AppContext } from '../context/App';
 import { Oops } from '../components/Oops';
+import { getNotificationCount } from '../utils/notifications';
 
 export const NotificationsRoute: React.FC = (props) => {
   const { notifications, requestFailed } = useContext(AppContext);
@@ -12,11 +13,10 @@ export const NotificationsRoute: React.FC = (props) => {
     () => notifications.length > 1,
     [notifications],
   );
-  const notificationsCount = useMemo(
-    () =>
-      notifications.reduce((memo, acc) => memo + acc.notifications.length, 0),
-    [notifications],
-  );
+  const notificationsCount = useMemo(() => {
+    return getNotificationCount(notifications);
+  }, [notifications]);
+
   const hasNotifications = useMemo(
     () => notificationsCount > 0,
     [notificationsCount],
