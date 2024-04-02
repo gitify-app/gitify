@@ -6,15 +6,25 @@ export interface AuthState {
   user: GitifyUser | null;
 }
 
-export interface SettingsState {
-  participating: boolean;
-  playSound: boolean;
-  showNotifications: boolean;
-  showBots: boolean;
-  openAtStartup: boolean;
+export type SettingsState = AppearanceSettingsState &
+  NotificationSettingsState &
+  SystemSettingsState;
+
+interface AppearanceSettingsState {
   appearance: Appearance;
   colors: boolean | null;
+}
+
+interface NotificationSettingsState {
+  participating: boolean;
+  showNotifications: boolean;
+  showBots: boolean;
   markAsDoneOnOpen: boolean;
+}
+
+interface SystemSettingsState {
+  playSound: boolean;
+  openAtStartup: boolean;
 }
 
 export enum Appearance {
