@@ -38,7 +38,7 @@ exports[`routes/LoginWithToken.tsx renders correctly 1`] = `
     <h3
       className="text-lg font-semibold"
     >
-      Login with an access token
+      Login with personal access token
     </h3>
   </div>
   <div
@@ -80,7 +80,7 @@ exports[`routes/LoginWithToken.tsx renders correctly 1`] = `
             personal access tokens
           </a>
            
-          and create one with the
+          and create one with the three scopes
            
           <span
             className="underline font-extrabold text-yellow-500"
@@ -88,7 +88,7 @@ exports[`routes/LoginWithToken.tsx renders correctly 1`] = `
             read:user, notifications, repo
              
           </span>
-          scopes.
+          .
         </div>
       </div>
       <div
