@@ -71,11 +71,11 @@ export const LoginWithToken: React.FC = () => {
               >
                 personal access tokens
               </a>{' '}
-              and create one with the{' '}
+              and create one with the three scopes{' '}
               <span className="underline font-extrabold text-yellow-500">
                 {Constants.AUTH_SCOPE.join(', ')}{' '}
               </span>
-              scopes.
+              .
             </>
           }
         />
@@ -130,7 +130,9 @@ export const LoginWithToken: React.FC = () => {
           />
         </button>
 
-        <h3 className="text-lg font-semibold">Login with an access token</h3>
+        <h3 className="text-lg font-semibold">
+          Login with personal access token
+        </h3>
       </div>
 
       <div className="flex-1 px-8">
