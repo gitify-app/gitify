@@ -153,15 +153,6 @@ export const SettingsRoute: React.FC = () => {
               updateSetting('participating', evt.target.checked)
             }
           />
-
-          <FieldCheckbox
-            name="showNotifications"
-            label="Show notifications"
-            checked={settings.showNotifications}
-            onChange={(evt) =>
-              updateSetting('showNotifications', evt.target.checked)
-            }
-          />
           <FieldCheckbox
             name="showBots"
             label="Show notifications from Bot accounts"
@@ -188,6 +179,14 @@ export const SettingsRoute: React.FC = () => {
             checked={settings.showNotificationsCountInTray}
             onChange={(evt) =>
               updateSetting('showNotificationsCountInTray', evt.target.checked)
+            }
+          />
+          <FieldCheckbox
+            name="showNotifications"
+            label="Show system notifications"
+            checked={settings.showNotifications}
+            onChange={(evt) =>
+              updateSetting('showNotifications', evt.target.checked)
             }
           />
           <FieldCheckbox
