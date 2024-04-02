@@ -201,11 +201,6 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           >
             Show only participating
           </label>
-          <div
-            class="italic text-gray-500 dark:text-gray-300"
-          >
-            Only show notifications you are participating in
-          </div>
         </div>
       </div>
       <div
