@@ -285,12 +285,13 @@ describe('context/App.tsx', () => {
     expect(saveStateMock).toHaveBeenCalledWith(
       { enterpriseAccounts: [], token: null, user: null },
       {
-        appearance: 'SYSTEM',
-        openAtStartup: false,
         participating: true,
         playSound: true,
         showNotifications: true,
         showBots: true,
+        showNotificationsCountInTray: false,
+        openAtStartup: false,
+        appearance: 'SYSTEM',
         colors: null,
         markAsDoneOnOpen: false,
       },
@@ -324,12 +325,13 @@ describe('context/App.tsx', () => {
     expect(saveStateMock).toHaveBeenCalledWith(
       { enterpriseAccounts: [], token: null, user: null },
       {
-        appearance: 'SYSTEM',
-        openAtStartup: true,
         participating: false,
         playSound: true,
         showNotifications: true,
         showBots: true,
+        showNotificationsCountInTray: false,
+        openAtStartup: true,
+        appearance: 'SYSTEM',
         colors: null,
         markAsDoneOnOpen: false,
       },
