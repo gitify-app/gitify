@@ -86,7 +86,7 @@ export const SettingsRoute: React.FC = () => {
 
   return (
     <div
-      className="flex flex-1 flex-col dark:bg-gray-dark dark:text-white"
+      className="flex flex-1 flex-col h-screen dark:bg-gray-dark dark:text-white"
       data-testid="settings"
     >
       <div className="flex justify-between items-center mt-2 py-2 mx-8">
@@ -105,77 +105,90 @@ export const SettingsRoute: React.FC = () => {
         <h3 className="text-lg font-semibold">Settings</h3>
       </div>
 
-      <div className="flex-1 px-8">
-        <FieldRadioGroup
-          name="appearance"
-          label="Appearance"
-          value={settings.appearance}
-          options={[
-            { label: 'System', value: Appearance.SYSTEM },
-            { label: 'Light', value: Appearance.LIGHT },
-            { label: 'Dark', value: Appearance.DARK },
-          ]}
-          onChange={(evt) => {
-            updateSetting('appearance', evt.target.value);
-          }}
-        />
-
-        <FieldCheckbox
-          name="colors"
-          label={`Use GitHub-like state colors${
-            !colorScope ? ' (requires repo scope)' : ''
-          }`}
-          checked={colorScope && settings.colors}
-          onChange={(evt) =>
-            colorScope && updateSetting('colors', evt.target.checked)
-          }
-          disabled={!colorScope}
-        />
-        <FieldCheckbox
-          name="showOnlyParticipating"
-          label="Show only participating"
-          checked={settings.participating}
-          onChange={(evt) => updateSetting('participating', evt.target.checked)}
-        />
-
-        <FieldCheckbox
-          name="showNotifications"
-          label="Show notifications"
-          checked={settings.showNotifications}
-          onChange={(evt) =>
-            updateSetting('showNotifications', evt.target.checked)
-          }
-        />
-        <FieldCheckbox
-          name="showBots"
-          label="Show notifications from Bot accounts"
-          checked={settings.showBots}
-          onChange={(evt) => updateSetting('showBots', evt.target.checked)}
-        />
-        <FieldCheckbox
-          name="markAsDoneOnOpen"
-          label="Mark as done on open"
-          checked={settings.markAsDoneOnOpen}
-          onChange={(evt) =>
-            updateSetting('markAsDoneOnOpen', evt.target.checked)
-          }
-        />
-        <FieldCheckbox
-          name="playSound"
-          label="Play sound"
-          checked={settings.playSound}
-          onChange={(evt) => updateSetting('playSound', evt.target.checked)}
-        />
-        {!isLinux && (
+      <div className="flex-grow overflow-x-auto px-8">
+        <fieldset className="mb-3">
+          <legend id="appearance">Appearance</legend>
+          <FieldRadioGroup
+            name="theme"
+            label="Theme"
+            value={settings.appearance}
+            options={[
+              { label: 'System', value: Appearance.SYSTEM },
+              { label: 'Light', value: Appearance.LIGHT },
+              { label: 'Dark', value: Appearance.DARK },
+            ]}
+            onChange={(evt) => {
+              updateSetting('appearance', evt.target.value);
+            }}
+          />
           <FieldCheckbox
-            name="openAtStartUp"
-            label="Open at startup"
-            checked={settings.openAtStartup}
+            name="colors"
+            label={`Use GitHub-like state colors${
+              !colorScope ? ' (requires repo scope)' : ''
+            }`}
+            checked={colorScope && settings.colors}
             onChange={(evt) =>
-              updateSetting('openAtStartup', evt.target.checked)
+              colorScope && updateSetting('colors', evt.target.checked)
+            }
+            disabled={!colorScope}
+          />
+        </fieldset>
+
+        <fieldset className="mb-3">
+          <legend id="notifications">Notifications</legend>
+          <FieldCheckbox
+            name="showOnlyParticipating"
+            label="Show only participating"
+            placeholder="Only show notifications you are participating in"
+            checked={settings.participating}
+            onChange={(evt) =>
+              updateSetting('participating', evt.target.checked)
             }
           />
-        )}
+
+          <FieldCheckbox
+            name="showNotifications"
+            label="Show notifications"
+            checked={settings.showNotifications}
+            onChange={(evt) =>
+              updateSetting('showNotifications', evt.target.checked)
+            }
+          />
+          <FieldCheckbox
+            name="showBots"
+            label="Show notifications from Bot accounts"
+            checked={settings.showBots}
+            onChange={(evt) => updateSetting('showBots', evt.target.checked)}
+          />
+          <FieldCheckbox
+            name="markAsDoneOnOpen"
+            label="Mark as done on open"
+            checked={settings.markAsDoneOnOpen}
+            onChange={(evt) =>
+              updateSetting('markAsDoneOnOpen', evt.target.checked)
+            }
+          />
+        </fieldset>
+
+        <fieldset className="mb-3">
+          <legend id="system">System</legend>
+          <FieldCheckbox
+            name="playSound"
+            label="Play sound"
+            checked={settings.playSound}
+            onChange={(evt) => updateSetting('playSound', evt.target.checked)}
+          />
+          {!isLinux && (
+            <FieldCheckbox
+              name="openAtStartUp"
+              label="Open at startup"
+              checked={settings.openAtStartup}
+              onChange={(evt) =>
+                updateSetting('openAtStartup', evt.target.checked)
+              }
+            />
+          )}
+        </fieldset>
       </div>
 
       <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8">
