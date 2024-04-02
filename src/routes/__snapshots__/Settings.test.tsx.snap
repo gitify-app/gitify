@@ -212,30 +212,6 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           <input
             checked=""
             class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-            id="showNotifications"
-            type="checkbox"
-          />
-        </div>
-        <div
-          class="ml-3 text-sm"
-        >
-          <label
-            class="font-medium text-gray-700 dark:text-gray-200"
-            for="showNotifications"
-          >
-            Show notifications
-          </label>
-        </div>
-      </div>
-      <div
-        class="flex items-start mt-1 mb-3"
-      >
-        <div
-          class="flex items-center h-5"
-        >
-          <input
-            checked=""
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
             id="showBots"
             type="checkbox"
           />
@@ -284,6 +260,30 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
       >
         System
       </legend>
+      <div
+        class="flex items-start mt-1 mb-3"
+      >
+        <div
+          class="flex items-center h-5"
+        >
+          <input
+            checked=""
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="showNotifications"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
+        >
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="showNotifications"
+          >
+            Show system notifications
+          </label>
+        </div>
+      </div>
       <div
         class="flex items-start mt-1 mb-3"
       >
