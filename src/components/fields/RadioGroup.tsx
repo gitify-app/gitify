@@ -18,10 +18,10 @@ export const FieldRadioGroup = ({
 }) => {
   return (
     <div className="flex items-start mt-1 mb-3">
-      <div className="mr-3 text-sm">
+      <div className="mr-3 text-sm py-1">
         <label
           htmlFor={name}
-          className="font-medium text-gray-700 dark:text-gray-200"
+          className="font-medium text-gray-700 dark:text-gray-200 "
         >
           {label}
         </label>
@@ -34,14 +34,14 @@ export const FieldRadioGroup = ({
       </div>
 
       <div
-        className="flex items-center space-x-4 py-2"
+        className="flex items-center space-x-4"
         role="group"
         aria-labelledby={name}
       >
         {options.map((item) => {
           return (
             <div
-              className="flex items-center mt-1"
+              className="flex mt-1"
               key={`radio_item_${item.value.toLowerCase()}`}
             >
               <input

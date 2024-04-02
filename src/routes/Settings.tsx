@@ -17,9 +17,9 @@ import { useNavigate } from 'react-router-dom';
 import { FieldCheckbox } from '../components/fields/Checkbox';
 import { FieldRadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
-import { Appearance } from '../types';
+import { Theme } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
-import { setAppearance } from '../utils/appearance';
+import { setTheme } from '../utils/theme';
 import { openExternalLink, updateTrayIcon } from '../utils/comms';
 import Constants from '../utils/constants';
 import { generateGitHubAPIUrl } from '../utils/helpers';
@@ -61,9 +61,9 @@ export const SettingsRoute: React.FC = () => {
     })();
   }, [accounts.token]);
 
-  ipcRenderer.on('update-native-theme', (_, updatedAppearance: Appearance) => {
-    if (settings.appearance === Appearance.SYSTEM) {
-      setAppearance(updatedAppearance);
+  ipcRenderer.on('update-native-theme', (_, updatedTheme: Theme) => {
+    if (settings.theme === Theme.SYSTEM) {
+      setTheme(updatedTheme);
     }
   });
 
@@ -107,18 +107,20 @@ export const SettingsRoute: React.FC = () => {
 
       <div className="flex-grow overflow-x-auto px-8">
         <fieldset className="mb-3">
-          <legend id="appearance">Appearance</legend>
+          <legend id="appearance" className="font-semibold mt-2 mb-1">
+            Appearance
+          </legend>
           <FieldRadioGroup
             name="theme"
-            label="Theme"
-            value={settings.appearance}
+            label="Theme:"
+            value={settings.theme}
             options={[
-              { label: 'System', value: Appearance.SYSTEM },
-              { label: 'Light', value: Appearance.LIGHT },
-              { label: 'Dark', value: Appearance.DARK },
+              { label: 'System', value: Theme.SYSTEM },
+              { label: 'Light', value: Theme.LIGHT },
+              { label: 'Dark', value: Theme.DARK },
             ]}
             onChange={(evt) => {
-              updateSetting('appearance', evt.target.value);
+              updateSetting('theme', evt.target.value);
             }}
           />
           <FieldCheckbox
@@ -135,7 +137,9 @@ export const SettingsRoute: React.FC = () => {
         </fieldset>
 
         <fieldset className="mb-3">
-          <legend id="notifications">Notifications</legend>
+          <legend id="notifications" className="font-semibold  mt-2 mb-1">
+            Notifications
+          </legend>
           <FieldCheckbox
             name="showOnlyParticipating"
             label="Show only participating"
@@ -171,7 +175,9 @@ export const SettingsRoute: React.FC = () => {
         </fieldset>
 
         <fieldset className="mb-3">
-          <legend id="system">System</legend>
+          <legend id="system" className="font-semibold  mt-2 mb-1">
+            System
+          </legend>
           <FieldCheckbox
             name="playSound"
             label="Play sound"

@@ -11,7 +11,7 @@ export type SettingsState = AppearanceSettingsState &
   SystemSettingsState;
 
 interface AppearanceSettingsState {
-  appearance: Appearance;
+  theme: Theme;
   colors: boolean | null;
 }
 
@@ -27,7 +27,7 @@ interface SystemSettingsState {
   openAtStartup: boolean;
 }
 
-export enum Appearance {
+export enum Theme {
   SYSTEM = 'SYSTEM',
   LIGHT = 'LIGHT',
   DARK = 'DARK',

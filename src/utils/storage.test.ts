@@ -6,12 +6,12 @@ describe('utils/storage.ts', () => {
     jest.spyOn(localStorage.__proto__, 'getItem').mockReturnValueOnce(
       JSON.stringify({
         auth: { token: '123-456' },
-        settings: { appearance: 'DARK' },
+        settings: { theme: 'DARK' },
       }),
     );
     const result = loadState();
     expect(result.accounts.token).toBe('123-456');
-    expect(result.settings.appearance).toBe('DARK');
+    expect(result.settings.theme).toBe('DARK');
   });
 
   it('should load the state from localstorage - empty', () => {
