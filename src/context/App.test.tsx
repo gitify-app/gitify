@@ -285,7 +285,7 @@ describe('context/App.tsx', () => {
     expect(saveStateMock).toHaveBeenCalledWith(
       { enterpriseAccounts: [], token: null, user: null },
       {
-        appearance: 'SYSTEM',
+        theme: 'SYSTEM',
         openAtStartup: false,
         participating: true,
         playSound: true,
@@ -324,7 +324,7 @@ describe('context/App.tsx', () => {
     expect(saveStateMock).toHaveBeenCalledWith(
       { enterpriseAccounts: [], token: null, user: null },
       {
-        appearance: 'SYSTEM',
+        theme: 'SYSTEM',
         openAtStartup: true,
         participating: false,
         playSound: true,
