@@ -8,6 +8,7 @@ import { useNotifications } from '../hooks/useNotifications';
 import * as apiRequests from '../utils/api-requests';
 import * as comms from '../utils/comms';
 import * as storage from '../utils/storage';
+import * as notifications from '../utils/notifications';
 
 jest.mock('../hooks/useNotifications');
 
@@ -35,6 +36,11 @@ describe('context/App.tsx', () => {
 
   describe('api methods', () => {
     const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+    const getNotificationCountMock = jest.spyOn(
+      notifications,
+      'getNotificationCount',
+    );
+    getNotificationCountMock.mockReturnValue(1);
 
     const fetchNotificationsMock = jest.fn();
     const markNotificationMock = jest.fn();
