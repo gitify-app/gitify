@@ -79,6 +79,7 @@ export interface Notification {
   repository: Repository;
   url: string;
   subscription_url: string;
+  hostname: string; // This is not in the GitHub API, but we add it to the type to make it easier to work with
 }
 
 export type UserDetails = User & UserProfile;
