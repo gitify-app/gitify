@@ -8,6 +8,7 @@ import { useNotifications } from '../hooks/useNotifications';
 import * as apiRequests from '../utils/api-requests';
 import * as comms from '../utils/comms';
 import * as storage from '../utils/storage';
+import * as notifications from '../utils/notifications';
 
 jest.mock('../hooks/useNotifications');
 
@@ -35,6 +36,11 @@ describe('context/App.tsx', () => {
 
   describe('api methods', () => {
     const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+    const getNotificationCountMock = jest.spyOn(
+      notifications,
+      'getNotificationCount',
+    );
+    getNotificationCountMock.mockReturnValue(1);
 
     const fetchNotificationsMock = jest.fn();
     const markNotificationMock = jest.fn();
@@ -285,12 +291,13 @@ describe('context/App.tsx', () => {
     expect(saveStateMock).toHaveBeenCalledWith(
       { enterpriseAccounts: [], token: null, user: null },
       {
-        theme: 'SYSTEM',
-        openAtStartup: false,
         participating: true,
         playSound: true,
         showNotifications: true,
         showBots: true,
+        showNotificationsCountInTray: false,
+        openAtStartup: false,
+        theme: 'SYSTEM',
         colors: null,
         markAsDoneOnOpen: false,
       },
@@ -324,12 +331,13 @@ describe('context/App.tsx', () => {
     expect(saveStateMock).toHaveBeenCalledWith(
       { enterpriseAccounts: [], token: null, user: null },
       {
-        theme: 'SYSTEM',
-        openAtStartup: true,
         participating: false,
         playSound: true,
         showNotifications: true,
         showBots: true,
+        showNotificationsCountInTray: false,
+        openAtStartup: true,
+        theme: 'SYSTEM',
         colors: null,
         markAsDoneOnOpen: false,
       },

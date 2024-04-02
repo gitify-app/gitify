@@ -25,6 +25,7 @@ interface NotificationSettingsState {
 interface SystemSettingsState {
   playSound: boolean;
   openAtStartup: boolean;
+  showNotificationsCountInTray: boolean;
 }
 
 export enum Theme {

@@ -19,10 +19,11 @@ import {
 import { apiRequestAuth } from '../utils/api-requests';
 import { setTheme } from '../utils/theme';
 import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
-import { setAutoLaunch } from '../utils/comms';
+import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
 import Constants from '../utils/constants';
 import { generateGitHubAPIUrl } from '../utils/helpers';
 import { clearState, loadState, saveState } from '../utils/storage';
+import { getNotificationCount } from '../utils/notifications';
 
 const defaultAccounts: AuthState = {
   token: null,
@@ -35,6 +36,7 @@ export const defaultSettings: SettingsState = {
   playSound: true,
   showNotifications: true,
   showBots: true,
+  showNotificationsCountInTray: false,
   openAtStartup: false,
   theme: Theme.SYSTEM,
   colors: null,
@@ -97,6 +99,16 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   useEffect(() => {
     fetchNotifications(accounts, settings);
   }, [accounts.token, accounts.enterpriseAccounts.length]);
+
+  useEffect(() => {
+    const count = getNotificationCount(notifications);
+
+    if (settings.showNotificationsCountInTray && count > 0) {
+      updateTrayTitle(count.toString());
+    } else {
+      updateTrayTitle();
+    }
+  }, [settings.showNotificationsCountInTray, notifications]);
 
   useInterval(() => {
     fetchNotifications(accounts, settings);

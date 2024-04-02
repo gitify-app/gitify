@@ -20,7 +20,11 @@ import { AppContext } from '../context/App';
 import { Theme } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
 import { setTheme } from '../utils/theme';
-import { openExternalLink, updateTrayIcon } from '../utils/comms';
+import {
+  openExternalLink,
+  updateTrayIcon,
+  updateTrayTitle,
+} from '../utils/comms';
 import Constants from '../utils/constants';
 import { generateGitHubAPIUrl } from '../utils/helpers';
 
@@ -71,6 +75,7 @@ export const SettingsRoute: React.FC = () => {
     logout();
     navigate(-1);
     updateTrayIcon();
+    updateTrayTitle();
   }, []);
 
   const quitApp = useCallback(() => {
@@ -168,6 +173,14 @@ export const SettingsRoute: React.FC = () => {
           <legend id="system" className="font-semibold  mt-2 mb-1">
             System
           </legend>
+          <FieldCheckbox
+            name="showNotificationsCountInTray"
+            label="Show notifications count in tray"
+            checked={settings.showNotificationsCountInTray}
+            onChange={(evt) =>
+              updateSetting('showNotificationsCountInTray', evt.target.checked)
+            }
+          />
           <FieldCheckbox
             name="showNotifications"
             label="Show system notifications"
