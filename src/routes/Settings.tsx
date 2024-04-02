@@ -143,7 +143,6 @@ export const SettingsRoute: React.FC = () => {
           <FieldCheckbox
             name="showOnlyParticipating"
             label="Show only participating"
-            placeholder="Only show notifications you are participating in"
             checked={settings.participating}
             onChange={(evt) =>
               updateSetting('participating', evt.target.checked)
