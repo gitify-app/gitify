@@ -17,12 +17,20 @@ export const FieldRadioGroup = ({
   value: string;
 }) => {
   return (
-    <fieldset id={name} className="mb-1">
-      <div>
-        <legend className="mb-1 text-base font-medium dark:text-white">
+    <div className="flex items-start mt-1 mb-3">
+      <div className="mr-3 text-sm">
+        <label
+          htmlFor={name}
+          className="font-medium text-gray-700 dark:text-gray-200"
+        >
           {label}
-        </legend>
-        {placeholder && <p className="text-sm text-gray-500">{placeholder}</p>}
+        </label>
+
+        {placeholder && (
+          <div className="italic text-gray-500 dark:text-gray-300">
+            {placeholder}
+          </div>
+        )}
       </div>
 
       <div
@@ -55,6 +63,6 @@ export const FieldRadioGroup = ({
           );
         })}
       </div>
-    </fieldset>
+    </div>
   );
 };
