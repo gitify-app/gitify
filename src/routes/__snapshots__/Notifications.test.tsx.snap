@@ -13,6 +13,7 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
     notifications={
       [
         {
+          "hostname": "github.com",
           "id": "138661096",
           "last_read_at": "2017-05-20T17:06:51Z",
           "reason": "subscribed",
