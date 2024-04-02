@@ -148,15 +148,6 @@ export const SettingsRoute: React.FC = () => {
               updateSetting('participating', evt.target.checked)
             }
           />
-
-          <FieldCheckbox
-            name="showNotifications"
-            label="Show notifications"
-            checked={settings.showNotifications}
-            onChange={(evt) =>
-              updateSetting('showNotifications', evt.target.checked)
-            }
-          />
           <FieldCheckbox
             name="showBots"
             label="Show notifications from Bot accounts"
@@ -177,6 +168,14 @@ export const SettingsRoute: React.FC = () => {
           <legend id="system" className="font-semibold  mt-2 mb-1">
             System
           </legend>
+          <FieldCheckbox
+            name="showNotifications"
+            label="Show system notifications"
+            checked={settings.showNotifications}
+            onChange={(evt) =>
+              updateSetting('showNotifications', evt.target.checked)
+            }
+          />
           <FieldCheckbox
             name="playSound"
             label="Play sound"

@@ -203,7 +203,7 @@ describe('routes/Settings.tsx', () => {
       getByLabelText = getByLabelTextLocal;
     });
 
-    fireEvent.click(getByLabelText('Show notifications'), {
+    fireEvent.click(getByLabelText('Show system notifications'), {
       target: { checked: true },
     });
 
