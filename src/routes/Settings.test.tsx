@@ -299,7 +299,7 @@ describe('routes/Settings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('openAtStartup', false);
   });
 
-  it('should change the appearance radio group', async () => {
+  it('should change the theme radio group', async () => {
     let getByLabelText;
 
     await act(async () => {
@@ -322,7 +322,7 @@ describe('routes/Settings.tsx', () => {
     fireEvent.click(getByLabelText('Light'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('appearance', 'LIGHT');
+    expect(updateSetting).toHaveBeenCalledWith('theme', 'LIGHT');
   });
 
   it('should go to the enterprise login route', async () => {

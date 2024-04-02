@@ -8,6 +8,7 @@ import {
   getEnterpriseAccountToken,
   generateGitHubAPIUrl,
   isEnterpriseHost,
+  getTokenForHost,
 } from '../utils/helpers';
 import { removeNotification } from '../utils/remove-notification';
 import {
@@ -97,7 +98,14 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                 const { hostname } = new URL(accountNotifications.config.url);
                 return {
                   hostname,
-                  notifications: accountNotifications.data,
+                  notifications: accountNotifications.data.map(
+                    (notification) => {
+                      return {
+                        ...notification,
+                        hostname: hostname,
+                      };
+                    },
+                  ),
                 };
               },
             );
@@ -106,7 +114,14 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                   ...enterpriseNotifications,
                   {
                     hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-                    notifications: gitHubNotifications.data,
+                    notifications: gitHubNotifications.data.map(
+                      (notification) => {
+                        return {
+                          ...notification,
+                          hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+                        };
+                      },
+                    ),
                   },
                 ]
               : [...enterpriseNotifications];
@@ -131,15 +146,10 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                       .all<Notification>(
                         accountNotifications.notifications.map(
                           async (notification: Notification) => {
-                            const isEnterprise = isEnterpriseHost(
-                              accountNotifications.hostname,
+                            const token = getTokenForHost(
+                              notification.hostname,
+                              accounts,
                             );
-                            const token = isEnterprise
-                              ? getEnterpriseAccountToken(
-                                  accountNotifications.hostname,
-                                  accounts.enterpriseAccounts,
-                                )
-                              : accounts.token;
 
                             const additionalSubjectDetails =
                               await getGitifySubjectDetails(

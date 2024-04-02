@@ -1,4 +1,4 @@
-import { Appearance, AuthState, SettingsState } from '../types';
+import { Theme, AuthState, SettingsState } from '../types';
 import { mockedUser, mockedEnterpriseAccounts } from './mockedData';
 
 export const mockAccounts: AuthState = {
@@ -14,7 +14,7 @@ export const mockSettings: SettingsState = {
   showBots: true,
   showNotificationsCountInTray: false,
   openAtStartup: false,
-  appearance: Appearance.SYSTEM,
+  theme: Theme.SYSTEM,
   colors: false,
   markAsDoneOnOpen: false,
 };

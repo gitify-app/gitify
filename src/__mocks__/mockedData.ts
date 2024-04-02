@@ -5,6 +5,7 @@ import {
   GraphQLSearch,
   Discussion,
 } from '../typesGithub';
+import Constants from '../utils/constants';
 
 export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
   {
@@ -21,6 +22,7 @@ export const mockedUser: GitifyUser = {
 
 // prettier-ignore
 export const mockedSingleNotification: Notification = {
+  hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
   id: '138661096',
   unread: true,
   reason: 'subscribed',

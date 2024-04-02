@@ -13,6 +13,15 @@ import { openExternalLink } from '../utils/comms';
 import { Constants } from './constants';
 import { getWorkflowRunAttributes, getCheckSuiteAttributes } from './subject';
 
+export function getTokenForHost(hostname: string, accounts: AuthState): string {
+  const isEnterprise = isEnterpriseHost(hostname);
+  const token = isEnterprise
+    ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
+    : accounts.token;
+
+  return token;
+}
+
 export function getEnterpriseAccountToken(
   hostname: string,
   accounts: EnterpriseAccount[],
@@ -244,14 +253,12 @@ export async function generateGitHubWebUrl(
   accounts: AuthState,
 ): Promise<string> {
   let url: string;
+  const token = getTokenForHost(notification.hostname, accounts);
 
   if (notification.subject.latest_comment_url) {
-    url = await getHtmlUrl(
-      notification.subject.latest_comment_url,
-      accounts.token,
-    );
+    url = await getHtmlUrl(notification.subject.latest_comment_url, token);
   } else if (notification.subject.url) {
-    url = await getHtmlUrl(notification.subject.url, accounts.token);
+    url = await getHtmlUrl(notification.subject.url, token);
   } else {
     // Perform any specific notification type handling (only required for a few special notification scenarios)
     switch (notification.subject.type) {
@@ -259,7 +266,7 @@ export async function generateGitHubWebUrl(
         url = getCheckSuiteUrl(notification);
         break;
       case 'Discussion':
-        url = await getDiscussionUrl(notification, accounts.token);
+        url = await getDiscussionUrl(notification, token);
         break;
       case 'RepositoryInvitation':
         url = `${notification.repository.html_url}/invitations`;
