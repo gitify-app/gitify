@@ -101,15 +101,18 @@ export const NotificationRow: React.FC<IProps> = ({
             -
             <span title={updatedLabel} className="flex ml-1">
               {notification.subject.user && (
-                <img
-                  className="rounded-full w-4 h-4 mr-1"
-                  src={notification.subject.user.avatar_url}
-                  title={notification.subject.user.login}
-                  aria-label="View User Profile"
+                <span
+                  title="View User Profile"
                   onClick={() =>
                     openExternalLink(notification.subject.user.html_url)
                   }
-                />
+                >
+                  <img
+                    className="rounded-full w-4 h-4 mr-1 cursor-pointer"
+                    src={notification.subject.user.avatar_url}
+                    title={notification.subject.user.login}
+                  />
+                </span>
               )}
               {updatedAtLabel}
             </span>

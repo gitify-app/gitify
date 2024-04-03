@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
-import { act, fireEvent, render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
 import * as helpers from '../utils/helpers';
 
@@ -165,7 +165,7 @@ describe('components/NotificationRow.tsx', () => {
     expect(unsubscribeNotification).toHaveBeenCalledTimes(1);
   });
 
-  it('should open notification user profile', async () => {
+  it('should open notification user profile', () => {
     const props = {
       notification: {
         ...mockedSingleNotification,
@@ -182,23 +182,21 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    let getByLabelText;
+    const { getByTitle } = render(
+      <AppContext.Provider
+        value={{
+          settings: { ...mockSettings },
+          accounts: mockAccounts,
+        }}
+      >
+        <NotificationRow {...props} />
+      </AppContext.Provider>,
+    );
 
-    await act(async () => {
-      const { getByLabelText: getByLabelTextLocal } = render(
-        <AppContext.Provider
-          value={{
-            settings: { ...mockSettings },
-            accounts: mockAccounts,
-          }}
-        >
-          <NotificationRow {...props} />
-        </AppContext.Provider>,
-      );
-      getByLabelText = getByLabelTextLocal;
-    });
-
-    fireEvent.click(getByLabelText('View User Profile'));
+    fireEvent.click(getByTitle('View User Profile'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(shell.openExternal).toHaveBeenCalledWith(
+      props.notification.subject.user.html_url,
+    );
   });
 });

@@ -62,13 +62,16 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           className="flex ml-1"
           title="manosim updated over 6 years ago"
         >
-          <img
-            aria-label="View User Profile"
-            className="rounded-full w-4 h-4 mr-1"
+          <span
             onClick={[Function]}
-            src="https://avatars0.githubusercontent.com/u/6333409?v=3"
-            title="manosim"
-          />
+            title="View User Profile"
+          >
+            <img
+              className="rounded-full w-4 h-4 mr-1 cursor-pointer"
+              src="https://avatars0.githubusercontent.com/u/6333409?v=3"
+              title="manosim"
+            />
+          </span>
           updated over 6 years ago
         </span>
       </span>
