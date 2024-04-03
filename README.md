@@ -83,7 +83,7 @@ You can debug Gitify by pressing <kbd>alt</kbd> + <kbd>command</kbd> + <kbd>I</k
 
 ### License
 
-Gitify is licensed under the MIT Open Source license. For more information, see the LICENSE file in this repository.
+Gitify is licensed under the MIT Open Source license. For more information, see [LICENSE](LICENSE).
 
 [github-image]: https://github.com/gitify-app/gitify/actions/workflows/build-app.yml/badge.svg
 [github-url]: https://github.com/gitify-app/gitify/actions
