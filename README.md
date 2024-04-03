@@ -1,4 +1,4 @@
-# Gitify [![github][build-workflow-image]][github-actions] [![coveralls][coveralls-image]][coveralls-url] [![downloads][downloads-image]][website]
+# Gitify [![github][build-workflow-image]][github-actions] [![github][release-workflow-image]][github-actions] [![coveralls][coveralls-image]][coveralls-url] [![downloads][downloads-image]][website]
 
 > GitHub Notifications on your menu bar. Available on macOS, Windows and Linux.
 
@@ -89,6 +89,7 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 [github-website]: https://github.com/gitify-app/website
 [new-release]: https://github.com/gitify-app/gitify/releases/new
 [build-workflow-image]: https://github.com/gitify-app/gitify/actions/workflows/build-app.yml/badge.svg
+[release-workflow-image]: https://github.com/gitify-app/gitify/actions/workflows/release.yml/badge.svg
 [github-actions]: https://github.com/gitify-app/gitify/actions
 [coveralls-image]: https://coveralls.io/repos/github/gitify-app/gitify/badge.svg
 [coveralls-url]: https://coveralls.io/github/gitify-app/gitify
