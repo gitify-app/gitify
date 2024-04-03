@@ -1,4 +1,4 @@
-# Gitify [![Build Workflow][build-workflow-image]][github-actions] [![Release Workflow][release-workflow-image]][github-actions] [![Coveralls][coveralls-image]][coveralls] [![Contributors][contributors-image]][github] [![Downloads - Total][downloads-total-image]][website] [![Downloads - Latest Release][downloads-latest-image]][website] [![OSS License][license-badge]][license]
+# Gitify [![Build Workflow][build-workflow-badge]][github-actions] [![Release Workflow][release-workflow-badge]][github-actions] [![Coveralls][coveralls-badge]][coveralls] [![Contributors][contributors-badge]][github] [![Downloads - Total][downloads-total-badge]][website] [![Downloads - Latest Release][downloads-latest-badge]][website] [![OSS License][license-badge]][license]
 
 > GitHub Notifications on your menu bar. Available on macOS, Windows and Linux.
 
@@ -85,11 +85,11 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 [github-actions]: https://github.com/gitify-app/gitify/actions
 [brew]: http://brew.sh/
 [coveralls]: https://coveralls.io/github/gitify-app/gitify
-[coveralls-image]: https://coveralls.io/repos/github/gitify-app/gitify/badge.svg
-[build-workflow-image]: https://github.com/gitify-app/gitify/actions/workflows/build-app.yml/badge.svg
-[release-workflow-image]: https://github.com/gitify-app/gitify/actions/workflows/release.yml/badge.svg
-[downloads-total-image]: https://img.shields.io/github/downloads/gitify-app/gitify/total?label=downloads@all
-[downloads-latest-image]: https://img.shields.io/github/downloads/gitify-app/gitify/latest/total
-[contributors-image]: https://img.shields.io/github/contributors/gitify-app/gitify
+[coveralls-badge]: https://coveralls.io/repos/github/gitify-app/gitify/badge.svg
+[build-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/build-app.yml/badge.svg
+[release-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/release.yml/badge.svg
+[downloads-total-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/total?label=downloads@all
+[downloads-latest-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/latest/total
+[contributors-badge]: https://img.shields.io/github/contributors/gitify-app/gitify
 [license]: LICENSE
 [license-badge]: https://img.shields.io/github/license/gitify-app/gitify
