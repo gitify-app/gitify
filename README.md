@@ -1,12 +1,12 @@
-# Gitify [![github][github-image]][github-url] [![coveralls][coveralls-image]][coveralls-url] [![downloads][downloads-image]][downloads-url]
+# Gitify [![github][build-workflow-image]][github-actions] [![github][release-workflow-image]][github-actions] [![coveralls][coveralls-image]][coveralls-url] [![downloads][downloads-image]][website]
 
-> GitHub Notifications on your menu bar. Available on macOS, Windows and Linux. Gitify Mobile has been deprecated in favour of the official [GitHub mobile app](https://github.com/mobile).
+> GitHub Notifications on your menu bar. Available on macOS, Windows and Linux.
 
 ![Gitify](assets/images/press.png)
 
 ### Download
 
-You can download Gitify for **free** from the website [www.gitify.io](https://www.gitify.io/) or install it via [Homebrew Cask](http://brew.sh/).
+You can download Gitify for **free** from the website [www.gitify.io][website] or install it via [Homebrew Cask][brew].
 
 ```shell
 brew install --cask gitify
@@ -37,12 +37,12 @@ To run the **electron app**:
 The release process is automated. Follow the steps below.
 
 1. Verify that all features you want targeted in the release have been merged to `main`.
-2. Create a [new **draft** release](https://github.com/gitify-app/gitify/releases/new). Set the tag version to something with the format of `v1.2.3`. Save as a **draft** before moving to the next step
+2. Create a [new **draft** release][new-release]. Set the tag version to something with the format of `v1.2.3`. Save as a **draft** before moving to the next step
 3. Create a branch that starts with `release/vX.X.X` (ie. `release/v1.2.3`).
 4. In the same branch, **bump the version** of the app by running `pnpm version <new-version-number`. Commit these changes and open a PR. A GitHub Actions workflow will build, sign and upload the release assets for each commit to that branch as long as a branch is named like `release/vX.X.X` and there is a draft release with the same version number(`package.json`).
 5. Merge your release branch into `main`.
 6. Publish the release once you've finalized the release notes and confirmed all assets are there.
-7. Raise and merge a pull request in [gitify-app/website](https://github.com/gitify-app/website) using the automatically created branch (ie: `bump/v1.2.3`)
+7. Raise and merge a pull request in [gitify-app/website][github-website] using the automatically created branch (ie: `bump/v1.2.3`)
 
 ### Tests
 
@@ -75,12 +75,16 @@ Please visit our [Gitify FAQs][faqs] for all commonly asked questions.
 
 ### License
 
-Gitify is licensed under the MIT Open Source license. For more information, see the LICENSE file in this repository.
+Gitify is licensed under the MIT Open Source license. For more information, see [LICENSE](LICENSE).
 
-[github-image]: https://github.com/gitify-app/gitify/actions/workflows/build-app.yml/badge.svg
-[github-url]: https://github.com/gitify-app/gitify/actions
+[website]: https://www.gitify.io
+[github-website]: https://github.com/gitify-app/website
+[new-release]: https://github.com/gitify-app/gitify/releases/new
+[build-workflow-image]: https://github.com/gitify-app/gitify/actions/workflows/build-app.yml/badge.svg
+[release-workflow-image]: https://github.com/gitify-app/gitify/actions/workflows/release.yml/badge.svg
+[github-actions]: https://github.com/gitify-app/gitify/actions
 [coveralls-image]: https://coveralls.io/repos/github/gitify-app/gitify/badge.svg
 [coveralls-url]: https://coveralls.io/github/gitify-app/gitify
 [downloads-image]: https://img.shields.io/github/downloads/gitify-app/gitify/total.svg
-[downloads-url]: https://www.gitify.io
+[brew]: http://brew.sh/
 [faqs]: https://www.gitify.io/faqs

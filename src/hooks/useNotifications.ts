@@ -99,7 +99,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                 return {
                   hostname,
                   notifications: accountNotifications.data.map(
-                    (notification) => {
+                    (notification: Notification) => {
                       return {
                         ...notification,
                         hostname: hostname,
@@ -115,7 +115,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                   {
                     hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
                     notifications: gitHubNotifications.data.map(
-                      (notification) => {
+                      (notification: Notification) => {
                         return {
                           ...notification,
                           hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
