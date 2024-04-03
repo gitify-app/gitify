@@ -26,7 +26,7 @@ interface NotificationsState {
     accounts: AuthState,
     settings: SettingsState,
   ) => Promise<void>;
-  markNotification: (
+  markNotificationRead: (
     accounts: AuthState,
     id: string,
     hostname: string,
@@ -99,7 +99,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                 return {
                   hostname,
                   notifications: accountNotifications.data.map(
-                    (notification) => {
+                    (notification: Notification) => {
                       return {
                         ...notification,
                         hostname: hostname,
@@ -115,7 +115,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                   {
                     hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
                     notifications: gitHubNotifications.data.map(
-                      (notification) => {
+                      (notification: Notification) => {
                         return {
                           ...notification,
                           hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
@@ -202,8 +202,8 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     [notifications],
   );
 
-  const markNotification = useCallback(
-    async (accounts, id, hostname) => {
+  const markNotificationRead = useCallback(
+    async (accounts: AuthState, id: string, hostname: string) => {
       setIsFetching(true);
 
       const isEnterprise = isEnterpriseHost(hostname);
@@ -236,7 +236,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const markNotificationDone = useCallback(
-    async (accounts, id, hostname) => {
+    async (accounts: AuthState, id: string, hostname: string) => {
       setIsFetching(true);
 
       const isEnterprise = isEnterpriseHost(hostname);
@@ -269,7 +269,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const unsubscribeNotification = useCallback(
-    async (accounts, id, hostname) => {
+    async (accounts: AuthState, id: string, hostname: string) => {
       setIsFetching(true);
 
       const isEnterprise = isEnterpriseHost(hostname);
@@ -286,7 +286,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           token,
           { ignored: true },
         );
-        await markNotification(accounts, id, hostname);
+        await markNotificationRead(accounts, id, hostname);
       } catch (err) {
         setIsFetching(false);
       }
@@ -295,7 +295,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const markRepoNotifications = useCallback(
-    async (accounts, repoSlug, hostname) => {
+    async (accounts: AuthState, repoSlug: string, hostname: string) => {
       setIsFetching(true);
 
       const isEnterprise = isEnterpriseHost(hostname);
@@ -328,7 +328,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const markRepoNotificationsDone = useCallback(
-    async (accounts, repoSlug, hostname) => {
+    async (accounts: AuthState, repoSlug: string, hostname: string) => {
       setIsFetching(true);
 
       try {
@@ -371,7 +371,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const removeNotificationFromState = useCallback(
-    (id, hostname) => {
+    (id: string, hostname: string) => {
       const updatedNotifications = removeNotification(
         id,
         notifications,
@@ -391,7 +391,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
 
     removeNotificationFromState,
     fetchNotifications,
-    markNotification,
+    markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
     markRepoNotifications,

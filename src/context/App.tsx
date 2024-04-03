@@ -56,7 +56,7 @@ interface AppContextState {
   requestFailed: boolean;
   removeNotificationFromState: (id: string, hostname: string) => void;
   fetchNotifications: () => Promise<void>;
-  markNotification: (id: string, hostname: string) => Promise<void>;
+  markNotificationRead: (id: string, hostname: string) => Promise<void>;
   markNotificationDone: (id: string, hostname: string) => Promise<void>;
   unsubscribeNotification: (id: string, hostname: string) => Promise<void>;
   markRepoNotifications: (id: string, hostname: string) => Promise<void>;
@@ -77,7 +77,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     requestFailed,
     isFetching,
     removeNotificationFromState,
-    markNotification,
+    markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
     markRepoNotifications,
@@ -190,9 +190,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     [accounts, settings, notifications],
   );
 
-  const markNotificationWithAccounts = useCallback(
+  const markNotificationReadWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await markNotification(accounts, id, hostname),
+      await markNotificationRead(accounts, id, hostname),
     [accounts, notifications],
   );
 
@@ -235,7 +235,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         requestFailed,
         removeNotificationFromState,
         fetchNotifications: fetchNotificationsWithAccounts,
-        markNotification: markNotificationWithAccounts,
+        markNotificationRead: markNotificationReadWithAccounts,
         markNotificationDone: markNotificationDoneWithAccounts,
         unsubscribeNotification: unsubscribeNotificationWithAccounts,
         markRepoNotifications: markRepoNotificationsWithAccounts,
