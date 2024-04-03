@@ -43,7 +43,7 @@ The release process is automated. Follow the steps below.
 5. In the same branch, **bump the version** of the app in the `package.json` file and open a PR. GitHub Actions will build, sign and upload the release assets for each commit to that branch as long as a branch is named like `release/vX.X.X` and there is a draft release with the same version number(`package.json`).
 6. Merge your release branch into `main`.
 7. Publish the release once you've finalized the release notes and confirmed all assets are there.
-8. Raise and merge a pull request in [gitify-app/website](https://github.com/gitify-app/website) using the automatically created branch (ie: `bump/v1.2.3`)
+8. Merge the open pull request in [gitify-app/website](https://github.com/gitify-app/website/pulls) (ie: `bump/v1.2.3`)
 
 ### Tests
 
