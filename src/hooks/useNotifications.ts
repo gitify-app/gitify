@@ -203,7 +203,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const markNotificationRead = useCallback(
-    async (accounts, id, hostname) => {
+    async (accounts: AuthState, id: string, hostname: string) => {
       setIsFetching(true);
 
       const isEnterprise = isEnterpriseHost(hostname);
@@ -236,7 +236,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const markNotificationDone = useCallback(
-    async (accounts, id, hostname) => {
+    async (accounts: AuthState, id: string, hostname: string) => {
       setIsFetching(true);
 
       const isEnterprise = isEnterpriseHost(hostname);
@@ -269,7 +269,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const unsubscribeNotification = useCallback(
-    async (accounts, id, hostname) => {
+    async (accounts: AuthState, id: string, hostname: string) => {
       setIsFetching(true);
 
       const isEnterprise = isEnterpriseHost(hostname);
@@ -295,7 +295,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const markRepoNotifications = useCallback(
-    async (accounts, repoSlug, hostname) => {
+    async (accounts: AuthState, repoSlug: string, hostname: string) => {
       setIsFetching(true);
 
       const isEnterprise = isEnterpriseHost(hostname);
@@ -328,7 +328,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const markRepoNotificationsDone = useCallback(
-    async (accounts, repoSlug, hostname) => {
+    async (accounts: AuthState, repoSlug: string, hostname: string) => {
       setIsFetching(true);
 
       try {
@@ -371,7 +371,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const removeNotificationFromState = useCallback(
-    (id, hostname) => {
+    (id: string, hostname: string) => {
       const updatedNotifications = removeNotification(
         id,
         notifications,
