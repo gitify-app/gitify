@@ -17,6 +17,7 @@ export const LoginRoute: React.FC = () => {
     }
   }, [isLoggedIn]);
 
+  // FIXME: Temporarily disable Login with GitHub (OAuth) as it's currently broken and requires a rewrite - see #485 #561 #747
   /* const loginUser = useCallback(async () => {
     try {
       await login();
@@ -36,14 +37,18 @@ export const LoginRoute: React.FC = () => {
         GitHub Notifications <br /> on your menu bar.
       </div>
 
-      {/* <button
+      {
+        // FIXME: Temporarily disable Login with GitHub (OAuth) as it's currently broken and requires a rewrite - see #485 #561 #747
+        /*      
+      <button
         className={loginButtonClass}
         title="Login with GitHub"
         aria-label="Login with GitHub"
         onClick={loginUser}
       >
         Login to GitHub
-      </button> */}
+      </button> */
+      }
 
       <button
         className={loginButtonClass}
