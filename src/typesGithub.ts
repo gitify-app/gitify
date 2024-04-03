@@ -116,7 +116,6 @@ export interface Plan {
 
 export interface User {
   login: string;
-  name: string;
   id: number;
   node_id: string;
   avatar_url: string;
