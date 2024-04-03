@@ -179,5 +179,8 @@ describe('components/NotificationRow.tsx', () => {
 
     fireEvent.click(getByTitle('View User Profile'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(shell.openExternal).toHaveBeenCalledWith(
+      props.notification.subject.user.html_url,
+    );
   });
 });
