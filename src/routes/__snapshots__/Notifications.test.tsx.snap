@@ -13,6 +13,7 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
     notifications={
       [
         {
+          "hostname": "github.com",
           "id": "138661096",
           "last_read_at": "2017-05-20T17:06:51Z",
           "reason": "subscribed",
@@ -91,7 +92,9 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
             "url": "https://api.github.com/repos/manosim/notifications-test/issues/1",
             "user": {
               "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
+              "html_url": "https://github.com/manosim",
               "login": "manosim",
+              "type": "User",
             },
           },
           "subscription_url": "https://api.github.com/notifications/threads/138661096/subscription",

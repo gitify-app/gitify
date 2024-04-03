@@ -1,22 +1,34 @@
-import { Notification, UserDetails } from './typesGithub';
+import { Notification } from './typesGithub';
 
 export interface AuthState {
   token?: string;
   enterpriseAccounts: EnterpriseAccount[];
-  user: UserDetails | null;
+  user: GitifyUser | null;
 }
 
-export interface SettingsState {
-  participating: boolean;
-  playSound: boolean;
-  showNotifications: boolean;
-  openAtStartup: boolean;
-  appearance: Appearance;
+export type SettingsState = AppearanceSettingsState &
+  NotificationSettingsState &
+  SystemSettingsState;
+
+interface AppearanceSettingsState {
+  theme: Theme;
   colors: boolean | null;
+}
+
+interface NotificationSettingsState {
+  participating: boolean;
+  showNotifications: boolean;
+  showBots: boolean;
   markAsDoneOnOpen: boolean;
 }
 
-export enum Appearance {
+interface SystemSettingsState {
+  playSound: boolean;
+  openAtStartup: boolean;
+  showNotificationsCountInTray: boolean;
+}
+
+export enum Theme {
   SYSTEM = 'SYSTEM',
   LIGHT = 'LIGHT',
   DARK = 'DARK',
@@ -55,4 +67,10 @@ export interface AuthResponse {
 export interface AuthTokenResponse {
   hostname: string;
   token: string;
+}
+
+export interface GitifyUser {
+  login: string;
+  name: string;
+  id: number;
 }

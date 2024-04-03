@@ -10,6 +10,7 @@ import {
 import { formatForDisplay, openInBrowser } from '../utils/helpers';
 import { Notification } from '../typesGithub';
 import { AppContext } from '../context/App';
+import { openExternalLink } from '../utils/comms';
 
 interface IProps {
   hostname: string;
@@ -82,13 +83,11 @@ export const NotificationRow: React.FC<IProps> = ({
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
 
-      <div
-        className="flex-1 overflow-hidden"
-        onClick={() => pressTitle()}
-        role="main"
-      >
+      <div className="flex-1 overflow-hidden">
         <div
-          className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden"
+          className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          role="main"
+          onClick={() => pressTitle()}
           title={notification.subject.title}
         >
           {notification.subject.title}
@@ -106,6 +105,10 @@ export const NotificationRow: React.FC<IProps> = ({
                   className="rounded-full w-4 h-4 mr-1"
                   src={notification.subject.user.avatar_url}
                   title={notification.subject.user.login}
+                  aria-label="View User Profile"
+                  onClick={() =>
+                    openExternalLink(notification.subject.user.html_url)
+                  }
                 />
               )}
               {updatedAtLabel}

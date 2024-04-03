@@ -79,6 +79,7 @@ export interface Notification {
   repository: Repository;
   url: string;
   subscription_url: string;
+  hostname: string; // This is not in the GitHub API, but we add it to the type to make it easier to work with
 }
 
 export type UserDetails = User & UserProfile;
@@ -130,11 +131,22 @@ export interface User {
   repos_url: string;
   events_url: string;
   received_events_url: string;
-  type: UserType;
+  type: string;
   site_admin: boolean;
 }
 
-export type UserType = 'User' | 'Bot';
+export interface SubjectUser {
+  login: string;
+  html_url: string;
+  avatar_url: string;
+  type: string;
+}
+
+export interface DiscussionAuthor {
+  login: string;
+  url: string;
+  avatar_url: string;
+}
 
 export interface Repository {
   id: number;
@@ -219,16 +231,6 @@ interface GitHubSubject {
 export interface GitifySubject {
   state?: StateType;
   user?: SubjectUser;
-}
-
-export interface SubjectUser {
-  login: string;
-  avatar_url: string;
-}
-
-export interface DiscussionAuthor {
-  login: string;
-  avatar_url: string; // Note: We use a GraphQL field aliases to make user details more consistent with Issue, PullRequest and Release
 }
 
 export interface PullRequest {
@@ -330,30 +332,27 @@ export interface GraphQLSearch<T> {
   };
 }
 
-export interface DiscussionSearchResultNode {
+export interface Discussion {
   viewerSubscription: ViewerSubscription;
   title: string;
   stateReason: DiscussionStateType;
   isAnswered: boolean;
   url: string;
   comments: {
-    nodes: DiscussionCommentNode[];
+    nodes: DiscussionComment[];
   };
 }
 
-export interface DiscussionCommentNode {
+export interface DiscussionComment {
   databaseId: string | number;
   createdAt: string;
-  user: DiscussionAuthor; // Note: We use a GraphQL field aliases to make user details more consistent with Issue, PullRequest and Release
-  replies: {
-    nodes: DiscussionSubcommentNode[];
+  author: DiscussionAuthor;
+  bot: {
+    login?: string;
   };
-}
-
-export interface DiscussionSubcommentNode {
-  databaseId: string | number;
-  createdAt: string;
-  user: DiscussionAuthor; // Note: We use a GraphQL field aliases to make user details more consistent with Issue, PullRequest and Release
+  replies?: {
+    nodes: DiscussionComment[];
+  };
 }
 
 export interface CheckSuiteAttributes {

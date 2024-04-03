@@ -36,11 +36,11 @@ exports[`components/NotificationRow.tsx should render itself & its children with
   </div>
   <div
     className="flex-1 overflow-hidden"
-    onClick={[Function]}
-    role="main"
   >
     <div
-      className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden"
+      className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+      onClick={[Function]}
+      role="main"
       title="I am a robot and this is a test!"
     >
       I am a robot and this is a test!
@@ -63,7 +63,9 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           title="manosim updated over 6 years ago"
         >
           <img
+            aria-label="View User Profile"
             className="rounded-full w-4 h-4 mr-1"
+            onClick={[Function]}
             src="https://avatars0.githubusercontent.com/u/6333409?v=3"
             title="manosim"
           />
@@ -199,11 +201,11 @@ exports[`components/NotificationRow.tsx should render itself & its children with
   </div>
   <div
     className="flex-1 overflow-hidden"
-    onClick={[Function]}
-    role="main"
   >
     <div
-      className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden"
+      className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+      onClick={[Function]}
+      role="main"
       title="I am a robot and this is a test!"
     >
       I am a robot and this is a test!

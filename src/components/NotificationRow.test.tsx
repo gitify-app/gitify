@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as TestRenderer from 'react-test-renderer';
-import { fireEvent, render } from '@testing-library/react';
+import { act, fireEvent, render } from '@testing-library/react';
 
 import * as helpers from '../utils/helpers';
 
@@ -8,6 +8,7 @@ import { AppContext } from '../context/App';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
 import { NotificationRow } from './NotificationRow';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
+import { shell } from 'electron';
 
 describe('components/NotificationRow.tsx', () => {
   beforeEach(() => {
@@ -153,14 +154,51 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const { getByLabelText } = render(
+    const { getByTitle } = render(
       <AppContext.Provider value={{}}>
         <AppContext.Provider value={{ unsubscribeNotification }}>
           <NotificationRow {...props} />
         </AppContext.Provider>
       </AppContext.Provider>,
     );
-    fireEvent.click(getByLabelText('Unsubscribe'));
+    fireEvent.click(getByTitle('Unsubscribe'));
     expect(unsubscribeNotification).toHaveBeenCalledTimes(1);
+  });
+
+  it('should open notification user profile', async () => {
+    const props = {
+      notification: {
+        ...mockedSingleNotification,
+        subject: {
+          ...mockedSingleNotification.subject,
+          user: {
+            login: 'some-user',
+            html_url: 'https://github.com/some-user',
+            avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+            type: 'User',
+          },
+        },
+      },
+      hostname: 'github.com',
+    };
+
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider
+          value={{
+            settings: { ...mockSettings },
+            accounts: mockAccounts,
+          }}
+        >
+          <NotificationRow {...props} />
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
+
+    fireEvent.click(getByLabelText('View User Profile'));
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
   });
 });

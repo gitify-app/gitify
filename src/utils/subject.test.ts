@@ -3,7 +3,6 @@ import nock from 'nock';
 
 import { mockAccounts } from '../__mocks__/mock-state';
 import {
-  mockedCommenterUser,
   mockedNotificationUser,
   mockedSingleNotification,
 } from '../__mocks__/mockedData';
@@ -427,11 +426,11 @@ describe('utils/subject.ts', () => {
       it('open issue state', async () => {
         nock('https://api.github.com')
           .get('/repos/manosim/notifications-test/issues/1')
-          .reply(200, { state: 'open', user: mockedNotificationUser });
+          .reply(200, { state: 'open', user: { login: 'some-user' } });
 
         nock('https://api.github.com')
           .get('/repos/manosim/notifications-test/issues/comments/302888448')
-          .reply(200, { user: mockedCommenterUser });
+          .reply(200, { user: { login: 'some-commenter' } });
 
         const result = await getGitifySubjectDetails(
           mockedSingleNotification,
@@ -439,20 +438,17 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('open');
-        expect(result.user.login).toBe('dummyuser');
-        expect(result.user.avatar_url).toBe(
-          'https://avatars.githubusercontent.com/u/123456789?v=4',
-        );
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('closed issue state', async () => {
         nock('https://api.github.com')
           .get('/repos/manosim/notifications-test/issues/1')
-          .reply(200, { state: 'closed', user: mockedNotificationUser });
+          .reply(200, { state: 'closed', user: { login: 'some-user' } });
 
         nock('https://api.github.com')
           .get('/repos/manosim/notifications-test/issues/comments/302888448')
-          .reply(200, { user: mockedCommenterUser });
+          .reply(200, { user: { login: 'some-commenter' } });
 
         const result = await getGitifySubjectDetails(
           mockedSingleNotification,
@@ -460,10 +456,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('closed');
-        expect(result.user.login).toBe('dummyuser');
-        expect(result.user.avatar_url).toBe(
-          'https://avatars.githubusercontent.com/u/123456789?v=4',
-        );
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('completed issue state', async () => {
@@ -472,12 +465,12 @@ describe('utils/subject.ts', () => {
           .reply(200, {
             state: 'closed',
             state_reason: 'completed',
-            user: mockedNotificationUser,
+            user: { login: 'some-user' },
           });
 
         nock('https://api.github.com')
           .get('/repos/manosim/notifications-test/issues/comments/302888448')
-          .reply(200, { user: mockedCommenterUser });
+          .reply(200, { user: { login: 'some-commenter' } });
 
         const result = await getGitifySubjectDetails(
           mockedSingleNotification,
@@ -485,10 +478,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('completed');
-        expect(result.user.login).toBe('dummyuser');
-        expect(result.user.avatar_url).toBe(
-          'https://avatars.githubusercontent.com/u/123456789?v=4',
-        );
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('not_planned issue state', async () => {
@@ -497,12 +487,12 @@ describe('utils/subject.ts', () => {
           .reply(200, {
             state: 'open',
             state_reason: 'not_planned',
-            user: mockedNotificationUser,
+            user: { login: 'some-user' },
           });
 
         nock('https://api.github.com')
           .get('/repos/manosim/notifications-test/issues/comments/302888448')
-          .reply(200, { user: mockedCommenterUser });
+          .reply(200, { user: { login: 'some-commenter' } });
 
         const result = await getGitifySubjectDetails(
           mockedSingleNotification,
@@ -510,10 +500,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('not_planned');
-        expect(result.user.login).toBe('dummyuser');
-        expect(result.user.avatar_url).toBe(
-          'https://avatars.githubusercontent.com/u/123456789?v=4',
-        );
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('reopened issue state', async () => {
@@ -522,12 +509,12 @@ describe('utils/subject.ts', () => {
           .reply(200, {
             state: 'open',
             state_reason: 'reopened',
-            user: mockedNotificationUser,
+            user: { login: 'some-user' },
           });
 
         nock('https://api.github.com')
           .get('/repos/manosim/notifications-test/issues/comments/302888448')
-          .reply(200, { user: mockedCommenterUser });
+          .reply(200, { user: { login: 'some-commenter' } });
 
         const result = await getGitifySubjectDetails(
           mockedSingleNotification,
@@ -535,10 +522,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('reopened');
-        expect(result.user.login).toBe('dummyuser');
-        expect(result.user.avatar_url).toBe(
-          'https://avatars.githubusercontent.com/u/123456789?v=4',
-        );
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('handle issues without latest_comment_url', async () => {
@@ -548,7 +532,7 @@ describe('utils/subject.ts', () => {
             state: 'open',
             draft: false,
             merged: false,
-            user: mockedNotificationUser,
+            user: { login: 'some-user' },
           });
 
         const result = await getGitifySubjectDetails(
@@ -563,10 +547,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('open');
-        expect(result.user.login).toBe('octocat');
-        expect(result.user.avatar_url).toBe(
-          'https://avatars.githubusercontent.com/u/583231?v=4',
-        );
+        expect(result.user).toEqual({ login: 'some-user' });
       });
     });
 
@@ -586,12 +567,12 @@ describe('utils/subject.ts', () => {
             state: 'closed',
             draft: false,
             merged: false,
-            user: mockedNotificationUser,
+            user: { login: 'some-user' },
           });
 
         nock('https://api.github.com')
           .get('/repos/manosim/notifications-test/issues/comments/302888448')
-          .reply(200, { user: mockedCommenterUser });
+          .reply(200, { user: { login: 'some-commenter' } });
 
         const result = await getGitifySubjectDetails(
           mockNotification,
@@ -599,10 +580,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('closed');
-        expect(result.user.login).toBe('dummyuser');
-        expect(result.user.avatar_url).toBe(
-          'https://avatars.githubusercontent.com/u/123456789?v=4',
-        );
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('draft pull request state', async () => {
@@ -612,12 +590,12 @@ describe('utils/subject.ts', () => {
             state: 'open',
             draft: true,
             merged: false,
-            user: mockedNotificationUser,
+            user: { login: 'some-user' },
           });
 
         nock('https://api.github.com')
           .get('/repos/manosim/notifications-test/issues/comments/302888448')
-          .reply(200, { user: mockedCommenterUser });
+          .reply(200, { user: { login: 'some-commenter' } });
 
         const result = await getGitifySubjectDetails(
           mockNotification,
@@ -625,10 +603,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('draft');
-        expect(result.user.login).toBe('dummyuser');
-        expect(result.user.avatar_url).toBe(
-          'https://avatars.githubusercontent.com/u/123456789?v=4',
-        );
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('merged pull request state', async () => {
@@ -638,12 +613,12 @@ describe('utils/subject.ts', () => {
             state: 'open',
             draft: false,
             merged: true,
-            user: mockedNotificationUser,
+            user: { login: 'some-user' },
           });
 
         nock('https://api.github.com')
           .get('/repos/manosim/notifications-test/issues/comments/302888448')
-          .reply(200, { user: mockedCommenterUser });
+          .reply(200, { user: { login: 'some-commenter' } });
 
         const result = await getGitifySubjectDetails(
           mockNotification,
@@ -651,10 +626,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('merged');
-        expect(result.user.login).toBe('dummyuser');
-        expect(result.user.avatar_url).toBe(
-          'https://avatars.githubusercontent.com/u/123456789?v=4',
-        );
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('open pull request state', async () => {
@@ -664,12 +636,12 @@ describe('utils/subject.ts', () => {
             state: 'open',
             draft: false,
             merged: false,
-            user: mockedNotificationUser,
+            user: { login: 'some-user' },
           });
 
         nock('https://api.github.com')
           .get('/repos/manosim/notifications-test/issues/comments/302888448')
-          .reply(200, { user: mockedCommenterUser });
+          .reply(200, { user: { login: 'some-commenter' } });
 
         const result = await getGitifySubjectDetails(
           mockNotification,
@@ -677,10 +649,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('open');
-        expect(result.user.login).toBe('dummyuser');
-        expect(result.user.avatar_url).toBe(
-          'https://avatars.githubusercontent.com/u/123456789?v=4',
-        );
+        expect(result.user).toEqual({ login: 'some-commenter' });
       });
 
       it('handle pull request without latest_comment_url', async () => {
@@ -690,7 +659,7 @@ describe('utils/subject.ts', () => {
             state: 'open',
             draft: false,
             merged: false,
-            user: mockedNotificationUser,
+            user: { login: 'some-user' },
           });
 
         const result = await getGitifySubjectDetails(
@@ -705,10 +674,7 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('open');
-        expect(result.user.login).toBe('octocat');
-        expect(result.user.avatar_url).toBe(
-          'https://avatars.githubusercontent.com/u/583231?v=4',
-        );
+        expect(result.user).toEqual({ login: 'some-user' });
       });
     });
   });
@@ -735,10 +701,12 @@ describe('utils/subject.ts', () => {
         mockAccounts.token,
       );
 
-      expect(result.user.login).toBe('octocat');
-      expect(result.user.avatar_url).toBe(
-        'https://avatars.githubusercontent.com/u/583231?v=4',
-      );
+      expect(result.user).toEqual({
+        login: 'octocat',
+        html_url: 'https://github.com/octocat',
+        avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+        type: 'User',
+      });
     });
   });
 

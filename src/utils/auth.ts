@@ -2,7 +2,12 @@ import { BrowserWindow } from '@electron/remote';
 
 import { generateGitHubAPIUrl, isEnterpriseHost } from './helpers';
 import { apiRequest, apiRequestAuth } from '../utils/api-requests';
-import { AuthResponse, AuthState, AuthTokenResponse } from '../types';
+import {
+  AuthResponse,
+  AuthState,
+  AuthTokenResponse,
+  GitifyUser,
+} from '../types';
 import { Constants } from '../utils/constants';
 import { UserDetails } from '../typesGithub';
 
@@ -76,12 +81,16 @@ export const authGitHub = (
 export const getUserData = async (
   token: string,
   hostname: string,
-): Promise<UserDetails> => {
-  const response = (
+): Promise<GitifyUser> => {
+  const response: UserDetails = (
     await apiRequestAuth(`${generateGitHubAPIUrl(hostname)}user`, 'GET', token)
   ).data;
 
-  return response;
+  return {
+    id: response.id,
+    login: response.login,
+    name: response.name,
+  };
 };
 
 export const getToken = async (
@@ -106,7 +115,7 @@ export const addAccount = (
   accounts: AuthState,
   token,
   hostname,
-  user?: UserDetails,
+  user?: GitifyUser,
 ): AuthState => {
   if (!isEnterpriseHost(hostname)) {
     return {
