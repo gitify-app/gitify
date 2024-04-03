@@ -34,9 +34,9 @@ export const FieldCheckbox = (props: IFieldCheckbox) => {
           {props.label}
         </label>
         {props.placeholder && (
-          <p className="text-gray-500 dark:text-gray-300">
+          <div className="italic text-gray-500 dark:text-gray-300">
             {props.placeholder}
-          </p>
+          </div>
         )}
       </div>
     </div>

@@ -10,6 +10,7 @@ import {
   PullRequest,
   PullRequestStateType,
   ReleaseComments,
+  SubjectUser,
   User,
   WorkflowRunAttributes,
 } from '../typesGithub';
@@ -107,12 +108,21 @@ async function getGitifySubjectForDiscussion(
     }
   }
 
-  const discussionUser = getLatestDiscussionComment(discussion.comments.nodes)
-    ?.author.login;
+  const latestDiscussionComment = getLatestDiscussionComment(
+    discussion.comments.nodes,
+  );
+  let discussionUser: SubjectUser = null;
+  if (latestDiscussionComment) {
+    discussionUser = {
+      login: latestDiscussionComment.author.login,
+      html_url: latestDiscussionComment.author.url,
+      type: latestDiscussionComment.bot?.login ? 'Bot' : 'User',
+    };
+  }
 
   return {
     state: discussionState,
-    user: discussionUser ?? null,
+    user: discussionUser,
   };
 }
 
@@ -128,7 +138,11 @@ async function getGitifySubjectForIssue(
 
   return {
     state: issue.state_reason ?? issue.state,
-    user: issueCommentUser?.login ?? null,
+    user: {
+      login: issueCommentUser?.login ?? issue.user.login,
+      html_url: issueCommentUser?.html_url ?? issue.user.html_url,
+      type: issueCommentUser?.type ?? issue.user.type,
+    },
   };
 }
 
@@ -151,7 +165,11 @@ async function getGitifySubjectForPullRequest(
 
   return {
     state: prState,
-    user: prCommentUser?.login ?? null,
+    user: {
+      login: prCommentUser?.login ?? pr.user.login,
+      html_url: prCommentUser?.html_url ?? pr.user.html_url,
+      type: prCommentUser?.type ?? pr.user.type,
+    },
   };
 }
 
@@ -163,7 +181,11 @@ async function getGitifySubjectForRelease(
 
   return {
     state: null,
-    user: releaseCommentUser.login,
+    user: {
+      login: releaseCommentUser.login,
+      html_url: releaseCommentUser.html_url,
+      type: releaseCommentUser.type,
+    },
   };
 }
 

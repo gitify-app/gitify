@@ -1,6 +1,6 @@
 name: 🐛 Bug Report
 description: Report errors or unexpected behavior
-labels: [bug, needs triage]
+labels: [bug]
 body:
   - type: checkboxes
     attributes:
@@ -32,11 +32,42 @@ body:
     validations:
       required: true
 
-  - type: textarea
+  - type: dropdown
+    id: environment-version
     attributes:
-      label: ℹ System Info
-      description: Please provide system details such as OS and project version.
-      render: Markdown
+      label: Gitify Version
+      description: What version of Gitify are you using?
+      options:
+        - 5.2.0
+        - 5.1.0
+        - 5.0.0
+        - 4.6.1
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment-os
+    attributes:
+      label: Operating System
+      description: What OS are you using?
+      options:
+        - macOS
+        - Windows
+        - Linux
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: environment-github
+    attributes:
+      label: GitHub Account
+      description: What GitHub account type are you using?
+      options:
+        - GitHub.com
+        - GitHub Enterprise
+        - Combination
     validations:
       required: true
 

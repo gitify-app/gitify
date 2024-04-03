@@ -24,8 +24,8 @@ import {
   XIcon,
 } from '@primer/octicons-react';
 import { Reason, Subject } from '../typesGithub';
-import { Appearance } from '../types';
-import { getAppearance } from './appearance';
+import { Theme } from '../types';
+import { getTheme } from './theme';
 
 // prettier-ignore
 const DESCRIPTIONS = {
@@ -171,8 +171,8 @@ export function getNotificationTypeIconColor(subject: Subject): string {
     case 'merged':
       return 'text-purple-500';
     default:
-      const appearance = getAppearance();
-      if (appearance == Appearance.DARK) {
+      const theme = getTheme();
+      if (theme == Theme.DARK) {
         return 'text-gray-300';
       }
       return 'text-gray-500';

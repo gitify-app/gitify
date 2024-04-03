@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { parse } from 'url';
 import { useCallback, useState } from 'react';
 
 import { AccountNotifications, AuthState, SettingsState } from '../types';
@@ -9,6 +8,7 @@ import {
   getEnterpriseAccountToken,
   generateGitHubAPIUrl,
   isEnterpriseHost,
+  getTokenForHost,
 } from '../utils/helpers';
 import { removeNotification } from '../utils/remove-notification';
 import {
@@ -63,7 +63,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   );
 
   const fetchNotifications = useCallback(
-    async (accounts: AuthState, settings) => {
+    async (accounts: AuthState, settings: SettingsState) => {
       const isGitHubLoggedIn = accounts.token !== null;
       const endpointSuffix = `notifications?participating=${settings.participating}`;
 
@@ -95,10 +95,17 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           axios.spread((gitHubNotifications, ...entAccNotifications) => {
             const enterpriseNotifications = entAccNotifications.map(
               (accountNotifications) => {
-                const { hostname } = parse(accountNotifications.config.url);
+                const { hostname } = new URL(accountNotifications.config.url);
                 return {
                   hostname,
-                  notifications: accountNotifications.data,
+                  notifications: accountNotifications.data.map(
+                    (notification) => {
+                      return {
+                        ...notification,
+                        hostname: hostname,
+                      };
+                    },
+                  ),
                 };
               },
             );
@@ -107,7 +114,14 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                   ...enterpriseNotifications,
                   {
                     hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-                    notifications: gitHubNotifications.data,
+                    notifications: gitHubNotifications.data.map(
+                      (notification) => {
+                        return {
+                          ...notification,
+                          hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+                        };
+                      },
+                    ),
                   },
                 ]
               : [...enterpriseNotifications];
@@ -128,32 +142,43 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                 data.map(async (accountNotifications) => {
                   return {
                     hostname: accountNotifications.hostname,
-                    notifications: await axios.all<Notification>(
-                      accountNotifications.notifications.map(
-                        async (notification: Notification) => {
-                          const isEnterprise = isEnterpriseHost(
-                            accountNotifications.hostname,
-                          );
-                          const token = isEnterprise
-                            ? getEnterpriseAccountToken(
-                                accountNotifications.hostname,
-                                accounts.enterpriseAccounts,
-                              )
-                            : accounts.token;
+                    notifications: await axios
+                      .all<Notification>(
+                        accountNotifications.notifications.map(
+                          async (notification: Notification) => {
+                            const token = getTokenForHost(
+                              notification.hostname,
+                              accounts,
+                            );
 
-                          const additionalSubjectDetails =
-                            await getGitifySubjectDetails(notification, token);
+                            const additionalSubjectDetails =
+                              await getGitifySubjectDetails(
+                                notification,
+                                token,
+                              );
 
-                          return {
-                            ...notification,
-                            subject: {
-                              ...notification.subject,
-                              ...additionalSubjectDetails,
-                            },
-                          };
-                        },
-                      ),
-                    ),
+                            return {
+                              ...notification,
+                              subject: {
+                                ...notification.subject,
+                                ...additionalSubjectDetails,
+                              },
+                            };
+                          },
+                        ),
+                      )
+                      .then((notifications) => {
+                        return notifications.filter((notification) => {
+                          if (
+                            !settings.showBots &&
+                            notification.subject?.user.type === 'Bot'
+                          ) {
+                            return false;
+                          }
+
+                          return true;
+                        });
+                      }),
                   };
                 }),
               )
