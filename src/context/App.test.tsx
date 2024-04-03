@@ -43,7 +43,7 @@ describe('context/App.tsx', () => {
     getNotificationCountMock.mockReturnValue(1);
 
     const fetchNotificationsMock = jest.fn();
-    const markNotificationMock = jest.fn();
+    const markNotificationReadMock = jest.fn();
     const markNotificationDoneMock = jest.fn();
     const unsubscribeNotificationMock = jest.fn();
     const markRepoNotificationsMock = jest.fn();
@@ -51,7 +51,7 @@ describe('context/App.tsx', () => {
     beforeEach(() => {
       (useNotifications as jest.Mock).mockReturnValue({
         fetchNotifications: fetchNotificationsMock,
-        markNotification: markNotificationMock,
+        markNotificationRead: markNotificationReadMock,
         markNotificationDone: markNotificationDoneMock,
         unsubscribeNotification: unsubscribeNotificationMock,
         markRepoNotifications: markRepoNotificationsMock,
@@ -104,12 +104,12 @@ describe('context/App.tsx', () => {
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should call markNotification', async () => {
+    it('should call markNotificationRead', async () => {
       const TestComponent = () => {
-        const { markNotification } = useContext(AppContext);
+        const { markNotificationRead } = useContext(AppContext);
 
         return (
-          <button onClick={() => markNotification('123-456', 'github.com')}>
+          <button onClick={() => markNotificationRead('123-456', 'github.com')}>
             Test Case
           </button>
         );
@@ -117,12 +117,12 @@ describe('context/App.tsx', () => {
 
       const { getByText } = customRender(<TestComponent />);
 
-      markNotificationMock.mockReset();
+      markNotificationReadMock.mockReset();
 
       fireEvent.click(getByText('Test Case'));
 
-      expect(markNotificationMock).toHaveBeenCalledTimes(1);
-      expect(markNotificationMock).toHaveBeenCalledWith(
+      expect(markNotificationReadMock).toHaveBeenCalledTimes(1);
+      expect(markNotificationReadMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
         '123-456',
         'github.com',

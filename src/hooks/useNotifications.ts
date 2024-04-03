@@ -26,7 +26,7 @@ interface NotificationsState {
     accounts: AuthState,
     settings: SettingsState,
   ) => Promise<void>;
-  markNotification: (
+  markNotificationRead: (
     accounts: AuthState,
     id: string,
     hostname: string,
@@ -202,7 +202,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     [notifications],
   );
 
-  const markNotification = useCallback(
+  const markNotificationRead = useCallback(
     async (accounts, id, hostname) => {
       setIsFetching(true);
 
@@ -286,7 +286,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           token,
           { ignored: true },
         );
-        await markNotification(accounts, id, hostname);
+        await markNotificationRead(accounts, id, hostname);
       } catch (err) {
         setIsFetching(false);
       }
@@ -391,7 +391,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
 
     removeNotificationFromState,
     fetchNotifications,
-    markNotification,
+    markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
     markRepoNotifications,

@@ -82,7 +82,7 @@ describe('components/NotificationRow.tsx', () => {
   });
 
   it('should mark a notification as read', () => {
-    const markNotification = jest.fn();
+    const markNotificationRead = jest.fn();
 
     const props = {
       notification: mockedSingleNotification,
@@ -96,14 +96,14 @@ describe('components/NotificationRow.tsx', () => {
           accounts: mockAccounts,
         }}
       >
-        <AppContext.Provider value={{ markNotification }}>
+        <AppContext.Provider value={{ markNotificationRead }}>
           <NotificationRow {...props} />
         </AppContext.Provider>
       </AppContext.Provider>,
     );
 
     fireEvent.click(getByTitle('Mark as Read'));
-    expect(markNotification).toHaveBeenCalledTimes(1);
+    expect(markNotificationRead).toHaveBeenCalledTimes(1);
   });
 
   it('should mark a notification as done', () => {
