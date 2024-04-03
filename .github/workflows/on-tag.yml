@@ -9,6 +9,7 @@ jobs:
     name: Homebrew
     runs-on: macos-14
     steps:
+      - run: gh repo sync setchy/homebrew-cask -b master
       - uses: Homebrew/actions/setup-homebrew@master
       - id: version
         run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
