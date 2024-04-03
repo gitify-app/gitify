@@ -1,4 +1,4 @@
-# Gitify [![github][build-workflow-image]][github-actions] [![github][release-workflow-image]][github-actions] [![coveralls][coveralls-image]][coveralls-url] [![github][contributors-image]][github] [![downloads][downloads-image]][website]
+# Gitify [![github][build-workflow-image]][github-actions] [![github][release-workflow-image]][github-actions] [![coveralls][coveralls-image]][coveralls-url] [![github][contributors-image]][github] [![downloads][downloads-total-image]][website] [![downloads][downloads-latest-image]][website]
 
 > GitHub Notifications on your menu bar. Available on macOS, Windows and Linux.
 
@@ -86,7 +86,8 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 [github-actions]: https://github.com/gitify-app/gitify/actions
 [coveralls-image]: https://coveralls.io/repos/github/gitify-app/gitify/badge.svg
 [coveralls-url]: https://coveralls.io/github/gitify-app/gitify
-[downloads-image]: https://img.shields.io/github/downloads/gitify-app/gitify/total.svg
+[downloads-total-image]: https://img.shields.io/github/downloads/gitify-app/gitify/total?label=downloads@all
+[downloads-latest-image]: https://img.shields.io/github/downloads/gitify-app/gitify/latest/total
 [contributors-image]: https://img.shields.io/github/contributors/gitify-app/gitify
 [brew]: http://brew.sh/
 [faqs]: https://www.gitify.io/faqs
