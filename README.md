@@ -62,15 +62,7 @@ There are 2 checks - one for prettier and one for the unit tests with `jest`.
 
 ### FAQ
 
-#### My notifications aren't showing?
-
-Some organisations require applications to request access before allowing access to any data (including notifications) about their repositories.
-
-To check if Gitify is approved by your organisation you can go to https://github.com/settings/applications, then click on **Gitify** and scroll to _Organization access_.
-
-#### Something looks wrong - How can I debug?
-
-You can debug Gitify by pressing <kbd>alt</kbd> + <kbd>command</kbd> + <kbd>I</kbd>. This will open the dev tools and then you can see any logs, network requests etc.
+Please visit our [Gitify FAQs][faqs] for all commonly asked questions.
 
 ### Contributing
 
@@ -91,3 +83,4 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 [coveralls-url]: https://coveralls.io/github/gitify-app/gitify
 [downloads-image]: https://img.shields.io/github/downloads/gitify-app/gitify/total.svg
 [downloads-url]: https://www.gitify.io
+[faqs]: https://www.gitify.io/faqs
