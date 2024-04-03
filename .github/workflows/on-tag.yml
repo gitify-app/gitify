@@ -9,6 +9,11 @@ jobs:
     name: Homebrew
     runs-on: macos-14
     steps:
+      # Ensure our Homebrew/homebrew-cask fork repository is in-sync with the upstream to avoid conflicts
+      # during automated commit and PR creation in the brew bump-cask-pr step below.
+      - run: gh repo sync setchy/homebrew-cask -b master 
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: Homebrew/actions/setup-homebrew@master
       - id: version
         run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
