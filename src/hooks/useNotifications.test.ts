@@ -288,6 +288,7 @@ describe('hooks/useNotifications.ts', () => {
                           createdAt: '2022-03-04T20:39:44Z',
                           author: {
                             login: 'comment-user',
+                            url: 'https://github.com/comment-user',
                           },
                           replies: {
                             nodes: [],
