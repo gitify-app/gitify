@@ -12,7 +12,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
       fill="currentColor"
       focusable="false"
       height={20}
-      role="img"
       style={
         {
           "display": "inline-block",
@@ -46,7 +45,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
     fill="currentColor"
     focusable="false"
     height={20}
-    role="img"
     style={
       {
         "display": "inline-block",

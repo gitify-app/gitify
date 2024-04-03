@@ -61,7 +61,7 @@ describe('components/Sidebar.tsx', () => {
   });
 
   it('should refresh the notifications', () => {
-    const { getByLabelText } = render(
+    const { getByTitle } = render(
       <AppContext.Provider
         value={{ isLoggedIn: true, notifications: [], fetchNotifications }}
       >
@@ -71,19 +71,19 @@ describe('components/Sidebar.tsx', () => {
       </AppContext.Provider>,
     );
     fetchNotifications.mockReset();
-    fireEvent.click(getByLabelText('Refresh Notifications'));
+    fireEvent.click(getByTitle('Refresh Notifications'));
     expect(fetchNotifications).toHaveBeenCalledTimes(1);
   });
 
   it('go to the settings route', () => {
-    const { getByLabelText } = render(
+    const { getByTitle } = render(
       <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
       </AppContext.Provider>,
     );
-    fireEvent.click(getByLabelText('Settings'));
+    fireEvent.click(getByTitle('Settings'));
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/settings');
   });
 
@@ -108,14 +108,14 @@ describe('components/Sidebar.tsx', () => {
   });
 
   it('should quit the app', () => {
-    const { getByLabelText } = render(
+    const { getByTitle } = render(
       <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
       </AppContext.Provider>,
     );
-    fireEvent.click(getByLabelText('Quit App'));
+    fireEvent.click(getByTitle('Quit Gitify'));
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
   });
@@ -137,7 +137,7 @@ describe('components/Sidebar.tsx', () => {
 
   describe('should render the notifications icon', () => {
     it('when there are 0 notifications', () => {
-      const { getByLabelText } = render(
+      const { getByTitle } = render(
         <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
           <MemoryRouter>
             <Sidebar />
@@ -145,14 +145,14 @@ describe('components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
 
-      const notificationsIcon = getByLabelText('0 Unread Notifications');
+      const notificationsIcon = getByTitle('0 Unread Notifications');
       expect(notificationsIcon.className).toContain('text-white');
       expect(notificationsIcon.childNodes.length).toBe(1);
       expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
     });
 
     it('when there are more than 0 notifications', () => {
-      const { getByLabelText } = render(
+      const { getByTitle } = render(
         <AppContext.Provider
           value={{
             isLoggedIn: true,
@@ -165,7 +165,7 @@ describe('components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
 
-      const notificationsIcon = getByLabelText('4 Unread Notifications');
+      const notificationsIcon = getByTitle('4 Unread Notifications');
       expect(notificationsIcon.className).toContain('text-green-500');
       expect(notificationsIcon.childNodes.length).toBe(2);
       expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');

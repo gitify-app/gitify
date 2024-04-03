@@ -8,8 +8,9 @@ import { AppContext } from '../context/App';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
 import { NotificationRow } from './NotificationRow';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
+import { shell } from 'electron';
 
-describe('components/Notification.js', () => {
+describe('components/NotificationRow.tsx', () => {
   beforeEach(() => {
     jest.spyOn(helpers, 'openInBrowser');
   });
@@ -138,14 +139,45 @@ describe('components/Notification.js', () => {
       hostname: 'github.com',
     };
 
-    const { getByLabelText } = render(
+    const { getByTitle } = render(
       <AppContext.Provider value={{}}>
         <AppContext.Provider value={{ unsubscribeNotification }}>
           <NotificationRow {...props} />
         </AppContext.Provider>
       </AppContext.Provider>,
     );
-    fireEvent.click(getByLabelText('Unsubscribe'));
+    fireEvent.click(getByTitle('Unsubscribe'));
     expect(unsubscribeNotification).toHaveBeenCalledTimes(1);
+  });
+
+  it('should open notification user profile', () => {
+    const props = {
+      notification: {
+        ...mockedSingleNotification,
+        subject: {
+          ...mockedSingleNotification.subject,
+          user: {
+            login: 'some-user',
+            html_url: 'https://github.com/some-user',
+            type: 'User',
+          },
+        },
+      },
+      hostname: 'github.com',
+    };
+
+    const { getByTitle } = render(
+      <AppContext.Provider
+        value={{
+          settings: { ...mockSettings },
+          accounts: mockAccounts,
+        }}
+      >
+        <NotificationRow {...props} />
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(getByTitle('View User Profile'));
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
   });
 });

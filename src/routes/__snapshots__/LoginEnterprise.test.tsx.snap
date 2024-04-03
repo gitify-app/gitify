@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`routes/LoginEnterprise.js renders correctly 1`] = `
+exports[`routes/LoginEnterprise.tsx renders correctly 1`] = `
 <div
   className="flex-1 bg-white dark:bg-gray-dark dark:text-white"
 >
@@ -8,12 +8,12 @@ exports[`routes/LoginEnterprise.js renders correctly 1`] = `
     className="flex justify-between items-center mt-4 py-2 mx-8"
   >
     <button
-      aria-label="Go Back"
       className="focus:outline-none"
       onClick={[Function]}
+      title="Go Back"
     >
       <svg
-        aria-hidden="true"
+        aria-label="Go Back"
         className="hover:text-gray-400"
         fill="currentColor"
         focusable="false"

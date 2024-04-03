@@ -6,7 +6,11 @@ jest.mock('axios');
 const url = 'https://example.com';
 const method = 'get';
 
-describe('apiRequest', () => {
+describe('utils/api-requests.ts', () => {
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
   it('should make a request with the correct parameters', async () => {
     const data = { key: 'value' };
 
@@ -37,6 +41,10 @@ describe('apiRequest', () => {
 
 describe('apiRequestAuth', () => {
   const token = 'yourAuthToken';
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
 
   it('should make an authenticated request with the correct parameters', async () => {
     const data = { key: 'value' };

@@ -1,4 +1,9 @@
-import { ArrowLeftIcon } from '@primer/octicons-react';
+import {
+  ArrowLeftIcon,
+  PersonAddIcon,
+  SignOutIcon,
+  XCircleIcon,
+} from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
 import React, {
   useCallback,
@@ -12,13 +17,14 @@ import { useNavigate } from 'react-router-dom';
 import { FieldCheckbox } from '../components/fields/Checkbox';
 import { FieldRadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
-import { IconAddAccount } from '../icons/AddAccount';
-import { IconLogOut } from '../icons/Logout';
-import { IconQuit } from '../icons/Quit';
-import { Appearance } from '../types';
+import { Theme } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
-import { setAppearance } from '../utils/appearance';
-import { updateTrayIcon } from '../utils/comms';
+import { setTheme } from '../utils/theme';
+import {
+  openExternalLink,
+  updateTrayIcon,
+  updateTrayTitle,
+} from '../utils/comms';
 import Constants from '../utils/constants';
 import { generateGitHubAPIUrl } from '../utils/helpers';
 
@@ -29,6 +35,12 @@ export const SettingsRoute: React.FC = () => {
   const [isLinux, setIsLinux] = useState<boolean>(false);
   const [appVersion, setAppVersion] = useState<string | null>(null);
   const [colorScope, setColorScope] = useState<boolean>(false);
+
+  const openGitHubReleaseNotes = useCallback((version) => {
+    openExternalLink(
+      `https://github.com/${Constants.REPO_SLUG}/releases/tag/v${version}`,
+    );
+  }, []);
 
   useEffect(() => {
     ipcRenderer.invoke('get-platform').then((result: string) => {
@@ -53,9 +65,9 @@ export const SettingsRoute: React.FC = () => {
     })();
   }, [accounts.token]);
 
-  ipcRenderer.on('update-native-theme', (_, updatedAppearance: Appearance) => {
-    if (settings.appearance === Appearance.SYSTEM) {
-      setAppearance(updatedAppearance);
+  ipcRenderer.on('update-native-theme', (_, updatedTheme: Theme) => {
+    if (settings.theme === Theme.SYSTEM) {
+      setTheme(updatedTheme);
     }
   });
 
@@ -63,6 +75,7 @@ export const SettingsRoute: React.FC = () => {
     logout();
     navigate(-1);
     updateTrayIcon();
+    updateTrayTitle();
   }, []);
 
   const quitApp = useCallback(() => {
@@ -78,113 +91,165 @@ export const SettingsRoute: React.FC = () => {
 
   return (
     <div
-      className="flex flex-1 flex-col dark:bg-gray-dark dark:text-white"
+      className="flex flex-1 flex-col h-screen dark:bg-gray-dark dark:text-white"
       data-testid="settings"
     >
-      <div className="flex justify-between items-center mt-4 py-2 mx-8">
+      <div className="flex justify-between items-center mt-2 py-2 mx-8">
         <button
           className="focus:outline-none"
-          aria-label="Go Back"
+          title="Go Back"
           onClick={() => navigate(-1)}
         >
-          <ArrowLeftIcon size={20} className="hover:text-gray-400" />
+          <ArrowLeftIcon
+            size={20}
+            className="hover:text-gray-400"
+            aria-label="Go Back"
+          />
         </button>
 
         <h3 className="text-lg font-semibold">Settings</h3>
       </div>
 
-      <div className="flex-1 px-8">
-        <FieldRadioGroup
-          name="appearance"
-          label="Appearance"
-          value={settings.appearance}
-          options={[
-            { label: 'System', value: Appearance.SYSTEM },
-            { label: 'Light', value: Appearance.LIGHT },
-            { label: 'Dark', value: Appearance.DARK },
-          ]}
-          onChange={(evt) => {
-            updateSetting('appearance', evt.target.value);
-          }}
-        />
-
-        <FieldCheckbox
-          name="colors"
-          label={`Use GitHub-like state colors${
-            !colorScope ? ' (requires repo scope)' : ''
-          }`}
-          checked={colorScope && settings.colors}
-          onChange={(evt) =>
-            colorScope && updateSetting('colors', evt.target.checked)
-          }
-          disabled={!colorScope}
-        />
-        <FieldCheckbox
-          name="showOnlyParticipating"
-          label="Show only participating"
-          checked={settings.participating}
-          onChange={(evt) => updateSetting('participating', evt.target.checked)}
-        />
-        <FieldCheckbox
-          name="playSound"
-          label="Play sound"
-          checked={settings.playSound}
-          onChange={(evt) => updateSetting('playSound', evt.target.checked)}
-        />
-        <FieldCheckbox
-          name="showNotifications"
-          label="Show notifications"
-          checked={settings.showNotifications}
-          onChange={(evt) =>
-            updateSetting('showNotifications', evt.target.checked)
-          }
-        />
-        <FieldCheckbox
-          name="markAsDoneOnOpen"
-          label="Mark as done on open"
-          checked={settings.markAsDoneOnOpen}
-          onChange={(evt) =>
-            updateSetting('markAsDoneOnOpen', evt.target.checked)
-          }
-        />
-        {!isLinux && (
+      <div className="flex-grow overflow-x-auto px-8">
+        <fieldset className="mb-3">
+          <legend id="appearance" className="font-semibold mt-2 mb-1">
+            Appearance
+          </legend>
+          <FieldRadioGroup
+            name="theme"
+            label="Theme:"
+            value={settings.theme}
+            options={[
+              { label: 'System', value: Theme.SYSTEM },
+              { label: 'Light', value: Theme.LIGHT },
+              { label: 'Dark', value: Theme.DARK },
+            ]}
+            onChange={(evt) => {
+              updateSetting('theme', evt.target.value);
+            }}
+          />
           <FieldCheckbox
-            name="openAtStartUp"
-            label="Open at startup"
-            checked={settings.openAtStartup}
+            name="colors"
+            label={`Use GitHub-like state colors${
+              !colorScope ? ' (requires repo scope)' : ''
+            }`}
+            checked={colorScope && settings.colors}
             onChange={(evt) =>
-              updateSetting('openAtStartup', evt.target.checked)
+              colorScope && updateSetting('colors', evt.target.checked)
+            }
+            disabled={!colorScope}
+          />
+        </fieldset>
+
+        <fieldset className="mb-3">
+          <legend id="notifications" className="font-semibold  mt-2 mb-1">
+            Notifications
+          </legend>
+          <FieldCheckbox
+            name="showReadNotifications"
+            label="Show read notifications"
+            checked={settings.showReadNotifications}
+            onChange={(evt) =>
+              updateSetting('showReadNotifications', evt.target.checked)
             }
           />
-        )}
+          <FieldCheckbox
+            name="showOnlyParticipating"
+            label="Show only participating"
+            checked={settings.participating}
+            onChange={(evt) =>
+              updateSetting('participating', evt.target.checked)
+            }
+          />
+          <FieldCheckbox
+            name="showBots"
+            label="Show notifications from Bot accounts"
+            checked={settings.showBots}
+            onChange={(evt) => updateSetting('showBots', evt.target.checked)}
+          />
+          <FieldCheckbox
+            name="markAsDoneOnOpen"
+            label="Mark as done on open"
+            checked={settings.markAsDoneOnOpen}
+            onChange={(evt) =>
+              updateSetting('markAsDoneOnOpen', evt.target.checked)
+            }
+          />
+        </fieldset>
+
+        <fieldset className="mb-3">
+          <legend id="system" className="font-semibold  mt-2 mb-1">
+            System
+          </legend>
+          <FieldCheckbox
+            name="showNotificationsCountInTray"
+            label="Show notifications count in tray"
+            checked={settings.showNotificationsCountInTray}
+            onChange={(evt) =>
+              updateSetting('showNotificationsCountInTray', evt.target.checked)
+            }
+          />
+          <FieldCheckbox
+            name="showNotifications"
+            label="Show system notifications"
+            checked={settings.showNotifications}
+            onChange={(evt) =>
+              updateSetting('showNotifications', evt.target.checked)
+            }
+          />
+          <FieldCheckbox
+            name="playSound"
+            label="Play sound"
+            checked={settings.playSound}
+            onChange={(evt) => updateSetting('playSound', evt.target.checked)}
+          />
+          {!isLinux && (
+            <FieldCheckbox
+              name="openAtStartUp"
+              label="Open at startup"
+              checked={settings.openAtStartup}
+              onChange={(evt) =>
+                updateSetting('openAtStartup', evt.target.checked)
+              }
+            />
+          )}
+        </fieldset>
       </div>
 
-      <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-4 px-8">
-        <small className="font-semibold">Gitify v{appVersion}</small>
-
+      <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8">
+        <small
+          className="font-semibold cursor-pointer"
+          title="View release notes"
+          onClick={() => openGitHubReleaseNotes(appVersion)}
+        >
+          Gitify v{appVersion}
+        </small>
         <div>
           <button
             className={footerButtonClass}
-            aria-label="Login with GitHub Enterprise"
+            title="Login with GitHub Enterprise"
             onClick={goToEnterprise}
           >
-            <IconAddAccount className="w-5 h-5" />
+            <PersonAddIcon
+              size={20}
+              aria-label="Login with GitHub Enterprise"
+            />
           </button>
 
           <button
             className={footerButtonClass}
-            aria-label="Logout"
+            title="Logout"
             onClick={logoutUser}
           >
-            <IconLogOut className="w-5 h-5" />
+            <SignOutIcon size={18} aria-label="Logout" />
           </button>
 
           <button
             className={`${footerButtonClass} mr-0`}
-            aria-label="Quit Gitify"
+            title="Quit Gitify"
             onClick={quitApp}
           >
-            <IconQuit className="w-5 h-5" />
+            <XCircleIcon size={18} aria-label="Quit Gitify" />
           </button>
         </div>
       </div>

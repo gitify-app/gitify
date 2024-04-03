@@ -10,6 +10,7 @@ import { AppContext } from '../context/App';
 import * as apiRequests from '../utils/api-requests';
 import Constants from '../utils/constants';
 import { SettingsRoute } from './Settings';
+import { shell } from 'electron';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -46,10 +47,10 @@ describe('routes/Settings.tsx', () => {
 
   it('should press the logout', async () => {
     const logoutMock = jest.fn();
-    let getByLabelText;
+    let getByTitle;
 
     await act(async () => {
-      const { getByLabelText: getByLabelTextLocal } = render(
+      const { getByTitle: getByLabelTextLocal } = render(
         <AppContext.Provider
           value={{
             settings: mockSettings,
@@ -63,15 +64,16 @@ describe('routes/Settings.tsx', () => {
         </AppContext.Provider>,
       );
 
-      getByLabelText = getByLabelTextLocal;
+      getByTitle = getByLabelTextLocal;
     });
 
-    fireEvent.click(getByLabelText('Logout'));
+    fireEvent.click(getByTitle('Logout'));
 
     expect(logoutMock).toHaveBeenCalledTimes(1);
 
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(2);
     expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
+    expect(ipcRenderer.send).toHaveBeenCalledWith('update-title', '');
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
@@ -126,6 +128,65 @@ describe('routes/Settings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('participating', false);
   });
 
+  it('should toggle the showBots checkbox', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
+
+    fireEvent.click(getByLabelText('Show notifications from Bot accounts'), {
+      target: { checked: true },
+    });
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('showBots', false);
+  });
+
+  it('should toggle the showNotificationsCountInTray checkbox', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
+
+    fireEvent.click(getByLabelText('Show notifications count in tray'), {
+      target: { checked: true },
+    });
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith(
+      'showNotificationsCountInTray',
+      false,
+    );
+  });
+
   it('should toggle the playSound checkbox', async () => {
     let getByLabelText;
 
@@ -174,7 +235,7 @@ describe('routes/Settings.tsx', () => {
       getByLabelText = getByLabelTextLocal;
     });
 
-    fireEvent.click(getByLabelText('Show notifications'), {
+    fireEvent.click(getByLabelText('Show system notifications'), {
       target: { checked: true },
     });
 
@@ -238,7 +299,7 @@ describe('routes/Settings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('openAtStartup', false);
   });
 
-  it('should change the appearance radio group', async () => {
+  it('should change the theme radio group', async () => {
     let getByLabelText;
 
     await act(async () => {
@@ -261,14 +322,14 @@ describe('routes/Settings.tsx', () => {
     fireEvent.click(getByLabelText('Light'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('appearance', 'LIGHT');
+    expect(updateSetting).toHaveBeenCalledWith('theme', 'LIGHT');
   });
 
   it('should go to the enterprise login route', async () => {
-    let getByLabelText;
+    let getByTitle;
 
     await act(async () => {
-      const { getByLabelText: getByLabelTextLocal } = render(
+      const { getByTitle: getByTitleLocal } = render(
         <AppContext.Provider
           value={{
             settings: mockSettings,
@@ -280,20 +341,20 @@ describe('routes/Settings.tsx', () => {
           </MemoryRouter>
         </AppContext.Provider>,
       );
-      getByLabelText = getByLabelTextLocal;
+      getByTitle = getByTitleLocal;
     });
 
-    fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
+    fireEvent.click(getByTitle('Login with GitHub Enterprise'));
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-enterprise', {
       replace: true,
     });
   });
 
   it('should quit the app', async () => {
-    let getByLabelText;
+    let getByTitle;
 
     await act(async () => {
-      const { getByLabelText: getByLabelTextLocal } = render(
+      const { getByTitle: getByTitleLocal } = render(
         <AppContext.Provider
           value={{ settings: mockSettings, accounts: mockAccounts }}
         >
@@ -302,10 +363,10 @@ describe('routes/Settings.tsx', () => {
           </MemoryRouter>
         </AppContext.Provider>,
       );
-      getByLabelText = getByLabelTextLocal;
+      getByTitle = getByTitleLocal;
     });
 
-    fireEvent.click(getByLabelText('Quit Gitify'));
+    fireEvent.click(getByTitle('Quit Gitify'));
     expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
   });
 
@@ -389,5 +450,31 @@ describe('routes/Settings.tsx', () => {
         'Use GitHub-like state colors (requires repo scope)',
       ).parentNode.parentNode,
     ).toMatchSnapshot();
+  });
+
+  it('should open release notes', async () => {
+    let getByTitle;
+
+    await act(async () => {
+      const { getByTitle: getByTitleLocal } = render(
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByTitle = getByTitleLocal;
+    });
+
+    fireEvent.click(getByTitle('View release notes'));
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(shell.openExternal).toHaveBeenCalledWith(
+      'https://github.com/gitify-app/gitify/releases/tag/v0.0.1',
+    );
   });
 });

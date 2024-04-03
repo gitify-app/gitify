@@ -1,6 +1,6 @@
 name: ✨ Feature Request
 description: Request a new feature or enhancement
-labels: [feature request, needs triage]
+labels: [enhancement]
 body:
   - type: textarea
     id: description

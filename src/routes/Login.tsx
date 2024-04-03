@@ -38,24 +38,27 @@ export const LoginRoute: React.FC = () => {
 
       <button
         className={loginButtonClass}
-        onClick={loginUser}
+        title="Login with GitHub"
         aria-label="Login with GitHub"
+        onClick={loginUser}
       >
         Login to GitHub
       </button>
 
       <button
         className={loginButtonClass}
-        onClick={() => navigate('/login-enterprise')}
+        title="Login with GitHub Enterprise"
         aria-label="Login with GitHub Enterprise"
+        onClick={() => navigate('/login-enterprise')}
       >
         Login to GitHub Enterprise
       </button>
 
       <button
         className="bg-none hover:text-gray-800 dark:text-gray-100 dark:hover:text-gray-300 mt-4 focus:outline-none"
-        onClick={() => navigate('/login-token')}
+        title="Login with Personal Token"
         aria-label="Login with Personal Token"
+        onClick={() => navigate('/login-token')}
       >
         <small>or login with a personal token</small>
       </button>

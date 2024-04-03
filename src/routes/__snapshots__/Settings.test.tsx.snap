@@ -30,18 +30,18 @@ exports[`routes/Settings.tsx should not be able to enable colors due to missing 
 
 exports[`routes/Settings.tsx should render itself & its children 1`] = `
 <div
-  class="flex flex-1 flex-col dark:bg-gray-dark dark:text-white"
+  class="flex flex-1 flex-col h-screen dark:bg-gray-dark dark:text-white"
   data-testid="settings"
 >
   <div
-    class="flex justify-between items-center mt-4 py-2 mx-8"
+    class="flex justify-between items-center mt-2 py-2 mx-8"
   >
     <button
-      aria-label="Go Back"
       class="focus:outline-none"
+      title="Go Back"
     >
       <svg
-        aria-hidden="true"
+        aria-label="Go Back"
         class="hover:text-gray-400"
         fill="currentColor"
         focusable="false"
@@ -63,318 +63,391 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
     </h3>
   </div>
   <div
-    class="flex-1 px-8"
+    class="flex-grow overflow-x-auto px-8"
   >
     <fieldset
-      class="mb-1"
-      id="appearance"
+      class="mb-3"
     >
-      <div>
-        <legend
-          class="mb-1 text-base font-medium dark:text-white"
-        >
-          Appearance
-        </legend>
-      </div>
+      <legend
+        class="font-semibold mt-2 mb-1"
+        id="appearance"
+      >
+        Appearance
+      </legend>
       <div
-        aria-labelledby="appearance"
-        class="flex items-center space-x-4 py-2"
-        role="group"
+        class="flex items-start mt-1 mb-3"
       >
         <div
-          class="flex items-center mt-1"
+          class="mr-3 text-sm py-1"
         >
-          <input
-            checked=""
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-            id="appearance_system"
-            name="appearance"
-            type="radio"
-            value="SYSTEM"
-          />
           <label
-            class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-            for="appearance_system"
+            class="font-medium text-gray-700 dark:text-gray-200 "
+            for="theme"
           >
-            System
+            Theme:
           </label>
         </div>
         <div
-          class="flex items-center mt-1"
+          aria-labelledby="theme"
+          class="flex items-center space-x-4"
+          role="group"
+        >
+          <div
+            class="flex mt-1"
+          >
+            <input
+              checked=""
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+              id="theme_system"
+              name="theme"
+              type="radio"
+              value="SYSTEM"
+            />
+            <label
+              class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+              for="theme_system"
+            >
+              System
+            </label>
+          </div>
+          <div
+            class="flex mt-1"
+          >
+            <input
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+              id="theme_light"
+              name="theme"
+              type="radio"
+              value="LIGHT"
+            />
+            <label
+              class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+              for="theme_light"
+            >
+              Light
+            </label>
+          </div>
+          <div
+            class="flex mt-1"
+          >
+            <input
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+              id="theme_dark"
+              name="theme"
+              type="radio"
+              value="DARK"
+            />
+            <label
+              class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+              for="theme_dark"
+            >
+              Dark
+            </label>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex items-start mt-1 mb-3"
+      >
+        <div
+          class="flex items-center h-5"
         >
           <input
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-            id="appearance_light"
-            name="appearance"
-            type="radio"
-            value="LIGHT"
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="colors"
+            type="checkbox"
           />
-          <label
-            class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-            for="appearance_light"
-          >
-            Light
-          </label>
         </div>
         <div
-          class="flex items-center mt-1"
+          class="ml-3 text-sm"
         >
-          <input
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-            id="appearance_dark"
-            name="appearance"
-            type="radio"
-            value="DARK"
-          />
           <label
-            class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-            for="appearance_dark"
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="colors"
+            style=""
           >
-            Dark
+            Use GitHub-like state colors
           </label>
         </div>
       </div>
     </fieldset>
-    <div
-      class="flex items-start mt-1 mb-3"
+    <fieldset
+      class="mb-3"
     >
-      <div
-        class="flex items-center h-5"
+      <legend
+        class="font-semibold  mt-2 mb-1"
+        id="notifications"
       >
-        <input
-          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          id="colors"
-          type="checkbox"
-        />
-      </div>
+        Notifications
+      </legend>
       <div
-        class="ml-3 text-sm"
+        class="flex items-start mt-1 mb-3"
       >
-        <label
-          class="font-medium text-gray-700 dark:text-gray-200"
-          for="colors"
-          style=""
+        <div
+          class="flex items-center h-5"
         >
-          Use GitHub-like state colors
-        </label>
+          <input
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="showReadNotifications"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
+        >
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="showReadNotifications"
+          >
+            Show read notifications
+          </label>
+        </div>
       </div>
-    </div>
-    <div
-      class="flex items-start mt-1 mb-3"
+      <div
+        class="flex items-start mt-1 mb-3"
+      >
+        <div
+          class="flex items-center h-5"
+        >
+          <input
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="showOnlyParticipating"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
+        >
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="showOnlyParticipating"
+          >
+            Show only participating
+          </label>
+        </div>
+      </div>
+      <div
+        class="flex items-start mt-1 mb-3"
+      >
+        <div
+          class="flex items-center h-5"
+        >
+          <input
+            checked=""
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="showBots"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
+        >
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="showBots"
+          >
+            Show notifications from Bot accounts
+          </label>
+        </div>
+      </div>
+      <div
+        class="flex items-start mt-1 mb-3"
+      >
+        <div
+          class="flex items-center h-5"
+        >
+          <input
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="markAsDoneOnOpen"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
+        >
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="markAsDoneOnOpen"
+          >
+            Mark as done on open
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset
+      class="mb-3"
     >
-      <div
-        class="flex items-center h-5"
+      <legend
+        class="font-semibold  mt-2 mb-1"
+        id="system"
       >
-        <input
-          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          id="showOnlyParticipating"
-          type="checkbox"
-        />
-      </div>
+        System
+      </legend>
       <div
-        class="ml-3 text-sm"
+        class="flex items-start mt-1 mb-3"
       >
-        <label
-          class="font-medium text-gray-700 dark:text-gray-200"
-          for="showOnlyParticipating"
+        <div
+          class="flex items-center h-5"
         >
-          Show only participating
-        </label>
-      </div>
-    </div>
-    <div
-      class="flex items-start mt-1 mb-3"
-    >
-      <div
-        class="flex items-center h-5"
-      >
-        <input
-          checked=""
-          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          id="playSound"
-          type="checkbox"
-        />
-      </div>
-      <div
-        class="ml-3 text-sm"
-      >
-        <label
-          class="font-medium text-gray-700 dark:text-gray-200"
-          for="playSound"
+          <input
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="showNotificationsCountInTray"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
         >
-          Play sound
-        </label>
-      </div>
-    </div>
-    <div
-      class="flex items-start mt-1 mb-3"
-    >
-      <div
-        class="flex items-center h-5"
-      >
-        <input
-          checked=""
-          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          id="showNotifications"
-          type="checkbox"
-        />
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="showNotificationsCountInTray"
+          >
+            Show notifications count in tray
+          </label>
+        </div>
       </div>
       <div
-        class="ml-3 text-sm"
+        class="flex items-start mt-1 mb-3"
       >
-        <label
-          class="font-medium text-gray-700 dark:text-gray-200"
-          for="showNotifications"
+        <div
+          class="flex items-center h-5"
         >
-          Show notifications
-        </label>
-      </div>
-    </div>
-    <div
-      class="flex items-start mt-1 mb-3"
-    >
-      <div
-        class="flex items-center h-5"
-      >
-        <input
-          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          id="markAsDoneOnOpen"
-          type="checkbox"
-        />
-      </div>
-      <div
-        class="ml-3 text-sm"
-      >
-        <label
-          class="font-medium text-gray-700 dark:text-gray-200"
-          for="markAsDoneOnOpen"
+          <input
+            checked=""
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="showNotifications"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
         >
-          Mark as done on open
-        </label>
-      </div>
-    </div>
-    <div
-      class="flex items-start mt-1 mb-3"
-    >
-      <div
-        class="flex items-center h-5"
-      >
-        <input
-          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          id="openAtStartUp"
-          type="checkbox"
-        />
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="showNotifications"
+          >
+            Show system notifications
+          </label>
+        </div>
       </div>
       <div
-        class="ml-3 text-sm"
+        class="flex items-start mt-1 mb-3"
       >
-        <label
-          class="font-medium text-gray-700 dark:text-gray-200"
-          for="openAtStartUp"
+        <div
+          class="flex items-center h-5"
         >
-          Open at startup
-        </label>
+          <input
+            checked=""
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="playSound"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
+        >
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="playSound"
+          >
+            Play sound
+          </label>
+        </div>
       </div>
-    </div>
+      <div
+        class="flex items-start mt-1 mb-3"
+      >
+        <div
+          class="flex items-center h-5"
+        >
+          <input
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="openAtStartUp"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
+        >
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="openAtStartUp"
+          >
+            Open at startup
+          </label>
+        </div>
+      </div>
+    </fieldset>
   </div>
   <div
-    class="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-4 px-8"
+    class="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8"
   >
     <small
-      class="font-semibold"
+      class="font-semibold cursor-pointer"
+      title="View release notes"
     >
       Gitify v
       0.0.1
     </small>
     <div>
       <button
-        aria-label="Login with GitHub Enterprise"
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
+        title="Login with GitHub Enterprise"
       >
         <svg
-          aria-hidden="true"
-          aria-labelledby="iconAddAccountId"
-          class="w-5 h-5"
+          aria-label="Login with GitHub Enterprise"
+          class="octicon octicon-person-add"
+          fill="currentColor"
+          focusable="false"
+          height="20"
           role="img"
-          viewBox="0 0 640 512"
-          xmlns="http://www.w3.org/2000/svg"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          viewBox="0 0 16 16"
+          width="20"
         >
-          <title
-            id="iconAddAccountId"
-          >
-            Add Account
-          </title>
-          <g>
-            <path
-              d="M640 224v32a16 16 0 01-16 16h-64v64a16 16 0 01-16 16h-32a16 16 0 01-16-16v-64h-64a16 16 0 01-16-16v-32a16 16 0 0116-16h64v-64a16 16 0 0116-16h32a16 16 0 0116 16v64h64a16 16 0 0116 16z"
-              fill="currentColor"
-              opacity="0.4"
-            />
-            <path
-              d="M224 256A128 128 0 1096 128a128 128 0 00128 128zm89.6 32h-16.7a174.08 174.08 0 01-145.8 0h-16.7A134.43 134.43 0 000 422.4V464a48 48 0 0048 48h352a48 48 0 0048-48v-41.6A134.43 134.43 0 00313.6 288z"
-              fill="currentColor"
-            />
-          </g>
+          <path
+            d="M7.9 8.548h-.001a5.528 5.528 0 0 1 3.1 4.659.75.75 0 1 1-1.498.086A4.01 4.01 0 0 0 5.5 9.5a4.01 4.01 0 0 0-4.001 3.793.75.75 0 1 1-1.498-.085 5.527 5.527 0 0 1 3.1-4.66 3.5 3.5 0 1 1 4.799 0ZM13.25 0a.75.75 0 0 1 .75.75V2h1.25a.75.75 0 0 1 0 1.5H14v1.25a.75.75 0 0 1-1.5 0V3.5h-1.25a.75.75 0 0 1 0-1.5h1.25V.75a.75.75 0 0 1 .75-.75ZM5.5 4a2 2 0 1 0-.001 3.999A2 2 0 0 0 5.5 4Z"
+          />
         </svg>
       </button>
       <button
-        aria-label="Logout"
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
+        title="Logout"
       >
         <svg
-          aria-hidden="true"
-          aria-labelledby="iconLogoutId"
-          class="w-5 h-5"
+          aria-label="Logout"
+          class="octicon octicon-sign-out"
+          fill="currentColor"
+          focusable="false"
+          height="18"
           role="img"
-          viewBox="0 0 512 512"
-          xmlns="http://www.w3.org/2000/svg"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          viewBox="0 0 16 16"
+          width="18"
         >
-          <title
-            id="iconLogoutId"
-          >
-            Logout from all accounts
-          </title>
-          <g>
-            <path
-              d="M180 448H96a96 96 0 01-96-96V160a96 96 0 0196-96h84a12 12 0 0112 12v40a12 12 0 01-12 12H96a32 32 0 00-32 32v192a32 32 0 0032 32h84a12 12 0 0112 12v40a12 12 0 01-12 12z"
-              fill="currentColor"
-              opacity="0.4"
-            />
-            <path
-              d="M353 88.3l151.9 150.6a24 24 0 010 34.1l-152 150.8a24.08 24.08 0 01-33.9-.1l-21.9-21.9a24.07 24.07 0 01.8-34.7l77.6-71.1H184a23.94 23.94 0 01-24-24v-32a23.94 23.94 0 0124-24h191.5l-77.6-71.1a24 24 0 01-.7-34.6l21.9-21.9a24 24 0 0133.9-.1z"
-              fill="currentColor"
-            />
-          </g>
+          <path
+            d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm10.44 4.5-1.97-1.97a.749.749 0 0 1 .326-1.275.749.749 0 0 1 .734.215l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734l1.97-1.97H6.75a.75.75 0 0 1 0-1.5Z"
+          />
         </svg>
       </button>
       <button
-        aria-label="Quit Gitify"
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none mr-0"
+        title="Quit Gitify"
       >
         <svg
-          aria-hidden="true"
-          aria-labelledby="iconQuitId"
-          class="w-5 h-5"
+          aria-label="Quit Gitify"
+          class="octicon octicon-x-circle"
+          fill="currentColor"
+          focusable="false"
+          height="18"
           role="img"
-          viewBox="0 0 512 512"
-          xmlns="http://www.w3.org/2000/svg"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          viewBox="0 0 16 16"
+          width="18"
         >
-          <title
-            id="iconQuitId"
-          >
-            Quit Application
-          </title>
-          <g>
-            <path
-              d="M272 0a23.94 23.94 0 0124 24v240a23.94 23.94 0 01-24 24h-32a23.94 23.94 0 01-24-24V24a23.94 23.94 0 0124-24z"
-              fill="currentColor"
-              opacity="0.4"
-            />
-            <path
-              d="M504 256c0 136.8-110.8 247.7-247.5 248C120 504.3 8.2 393 8 256.4A248 248 0 01111.8 54.2a24.07 24.07 0 0135 7.7L162.6 90a24 24 0 01-6.6 31 168 168 0 00100 303c91.6 0 168.6-74.2 168-169.1a168.07 168.07 0 00-68.1-134 23.86 23.86 0 01-6.5-30.9l15.8-28.1a24 24 0 0134.8-7.8A247.51 247.51 0 01504 256z"
-              fill="currentColor"
-            />
-          </g>
+          <path
+            d="M2.344 2.343h-.001a8 8 0 0 1 11.314 11.314A8.002 8.002 0 0 1 .234 10.089a8 8 0 0 1 2.11-7.746Zm1.06 10.253a6.5 6.5 0 1 0 9.108-9.275 6.5 6.5 0 0 0-9.108 9.275ZM6.03 4.97 8 6.94l1.97-1.97a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734L9.06 8l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L8 9.06l-1.97 1.97a.749.749 0 0 1-1.275-.326.749.749 0 0 1 .215-.734L6.94 8 4.97 6.03a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018Z"
+          />
         </svg>
       </button>
     </div>

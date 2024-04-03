@@ -1,29 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`components/fields/radiogroup.tsx should render  1`] = `
-<fieldset
-  className="mb-1"
-  id="appearance"
+<div
+  className="flex items-start mt-1 mb-3"
 >
-  <div>
-    <legend
-      className="mb-1 text-base font-medium dark:text-white"
+  <div
+    className="mr-3 text-sm py-1"
+  >
+    <label
+      className="font-medium text-gray-700 dark:text-gray-200 "
+      htmlFor="appearance"
     >
       Appearance
-    </legend>
-    <p
-      className="text-sm text-gray-500"
+    </label>
+    <div
+      className="italic text-gray-500 dark:text-gray-300"
     >
       This is some helper text
-    </p>
+    </div>
   </div>
   <div
     aria-labelledby="appearance"
-    className="flex items-center space-x-4 py-2"
+    className="flex items-center space-x-4"
     role="group"
   >
     <div
-      className="flex items-center mt-1"
+      className="flex mt-1"
     >
       <input
         checked={false}
@@ -42,7 +44,7 @@ exports[`components/fields/radiogroup.tsx should render  1`] = `
       </label>
     </div>
     <div
-      className="flex items-center mt-1"
+      className="flex mt-1"
     >
       <input
         checked={true}
@@ -61,5 +63,5 @@ exports[`components/fields/radiogroup.tsx should render  1`] = `
       </label>
     </div>
   </div>
-</fieldset>
+</div>
 `;

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/Notification.js should render itself & its children 1`] = `
+exports[`components/NotificationRow.tsx should render itself & its children 1`] = `
 <div
   className="flex space-x-3 py-2 px-3 bg-white border-b border-gray-100 dark:border-gray-darker group dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker
           "
@@ -10,7 +10,6 @@ exports[`components/Notification.js should render itself & its children 1`] = `
     title="Open Issue"
   >
     <svg
-      aria-hidden="false"
       aria-label="Issue"
       className="octicon octicon-issue-opened"
       fill="currentColor"
@@ -35,51 +34,34 @@ exports[`components/Notification.js should render itself & its children 1`] = `
         d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
       />
     </svg>
-    <svg
-      aria-hidden="false"
-      aria-label="Unread"
-      className="focus:outline-none h-full text-blue-500"
-      fill="currentColor"
-      focusable="false"
-      height={14}
-      role="img"
-      style={
-        {
-          "display": "inline-block",
-          "overflow": "visible",
-          "userSelect": "none",
-          "verticalAlign": "text-bottom",
-        }
-      }
-      viewBox="0 0 16 16"
-      width={14}
-    >
-      <path
-        d="M8 4a4 4 0 1 1 0 8 4 4 0 0 1 0-8Z"
-      />
-    </svg>
   </div>
   <div
     className="flex-1 overflow-hidden"
-    onClick={[Function]}
-    role="main"
   >
     <div
-      className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden"
+      className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+      onClick={[Function]}
+      role="main"
+      title="I am a robot and this is a test!"
     >
       I am a robot and this is a test!
     </div>
     <div
-      className="text-xs text-capitalize"
+      className="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
     >
       <span
         title="You're watching the repository."
       >
         Subscribed
       </span>
-       - Updated
+       -
        
-      in over 3 years
+      <span
+        title="Updated in over 3 years"
+      >
+        Updated 
+        in over 3 years
+      </span>
     </div>
   </div>
   <div
@@ -91,7 +73,6 @@ exports[`components/Notification.js should render itself & its children 1`] = `
       title="Mark as Done"
     >
       <svg
-        aria-hidden="false"
         aria-label="Mark as Done"
         className="octicon octicon-check"
         fill="currentColor"
@@ -120,7 +101,6 @@ exports[`components/Notification.js should render itself & its children 1`] = `
       title="Unsubscribe"
     >
       <svg
-        aria-hidden="false"
         aria-label="Unsubscribe"
         className="octicon octicon-bell-slash"
         fill="currentColor"
@@ -149,7 +129,6 @@ exports[`components/Notification.js should render itself & its children 1`] = `
       title="Mark as Read"
     >
       <svg
-        aria-hidden="false"
         aria-label="Mark as Read"
         className="octicon octicon-read"
         fill="currentColor"

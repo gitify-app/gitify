@@ -160,7 +160,7 @@ describe('utils/helpers.ts', () => {
       jest.clearAllMocks();
     });
 
-    it('Subject Latest Comment Url: when not null, fetch lastest comment html url', async () => {
+    it('Subject Latest Comment Url: when not null, fetch latest comment html url', async () => {
       const subject = {
         title: 'generate github web url unit tests',
         url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
@@ -398,7 +398,7 @@ describe('utils/helpers.ts', () => {
 
         const requestPromise = new Promise((resolve) =>
           resolve({
-            data: {},
+            data: { data: { search: { nodes: [] } } },
           } as AxiosResponse),
         ) as AxiosPromise;
 
@@ -443,6 +443,34 @@ describe('utils/helpers.ts', () => {
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
         expect(result).toBe(
           `https://github.com/manosim/notifications-test/discussions/612?${mockedNotificationReferrer}#discussioncomment-2300902`,
+        );
+      });
+
+      it('default to base discussions url when graphql query fails', async () => {
+        const subject = {
+          title: '1.16.0',
+          url: null,
+          latest_comment_url: null,
+          type: 'Discussion' as SubjectType,
+        };
+
+        const requestPromise = new Promise((resolve) =>
+          resolve(null as AxiosResponse),
+        ) as AxiosPromise;
+
+        apiRequestAuthMock.mockResolvedValue(requestPromise);
+
+        const result = await generateGitHubWebUrl(
+          {
+            ...mockedSingleNotification,
+            subject: subject,
+          },
+          mockAccounts,
+        );
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
+        expect(result).toBe(
+          `https://github.com/manosim/notifications-test/discussions?${mockedNotificationReferrer}`,
         );
       });
     });

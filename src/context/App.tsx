@@ -10,19 +10,20 @@ import { useInterval } from '../hooks/useInterval';
 import { useNotifications } from '../hooks/useNotifications';
 import {
   AccountNotifications,
-  Appearance,
+  Theme,
   AuthOptions,
   AuthState,
   AuthTokenOptions,
   SettingsState,
 } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
-import { setAppearance } from '../utils/appearance';
+import { setTheme } from '../utils/theme';
 import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
-import { setAutoLaunch } from '../utils/comms';
+import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
 import Constants from '../utils/constants';
 import { generateGitHubAPIUrl } from '../utils/helpers';
 import { clearState, loadState, saveState } from '../utils/storage';
+import { getNotificationCount } from '../utils/notifications';
 
 const defaultAccounts: AuthState = {
   token: null,
@@ -31,12 +32,14 @@ const defaultAccounts: AuthState = {
 };
 
 export const defaultSettings: SettingsState = {
-  allNotifications: false,
+  showReadNotifications: false,
   participating: false,
   playSound: true,
   showNotifications: true,
+  showBots: true,
+  showNotificationsCountInTray: false,
   openAtStartup: false,
-  appearance: Appearance.SYSTEM,
+  theme: Theme.SYSTEM,
   colors: null,
   markAsDoneOnOpen: false,
 };
@@ -87,23 +90,37 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    setAppearance(settings.appearance as Appearance);
-  }, [settings.appearance]);
+    setTheme(settings.theme as Theme);
+  }, [settings.theme]);
 
   useEffect(() => {
     fetchNotifications(accounts, settings);
-  }, [settings.participating, settings.allNotifications]);
+  }, [
+    settings.participating,
+    settings.showReadNotifications,
+    settings.showBots,
+  ]);
 
   useEffect(() => {
     fetchNotifications(accounts, settings);
   }, [accounts.token, accounts.enterpriseAccounts.length]);
+
+  useEffect(() => {
+    const count = getNotificationCount(notifications);
+
+    if (settings.showNotificationsCountInTray && count > 0) {
+      updateTrayTitle(count.toString());
+    } else {
+      updateTrayTitle();
+    }
+  }, [settings.showNotificationsCountInTray, notifications]);
 
   useInterval(() => {
     fetchNotifications(accounts, settings);
   }, 60000);
 
   const updateSetting = useCallback(
-    (name: keyof SettingsState, value: boolean | Appearance) => {
+    (name: keyof SettingsState, value: boolean | Theme) => {
       if (name === 'openAtStartup') {
         setAutoLaunch(value as boolean);
       }

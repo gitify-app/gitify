@@ -1,11 +1,6 @@
 import React, { useCallback, useContext } from 'react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import {
-  CheckIcon,
-  BellSlashIcon,
-  ReadIcon,
-  DotFillIcon,
-} from '@primer/octicons-react';
+import { CheckIcon, BellSlashIcon, ReadIcon } from '@primer/octicons-react';
 
 import {
   formatReason,
@@ -15,6 +10,7 @@ import {
 import { formatForDisplay, openInBrowser } from '../utils/helpers';
 import { Notification } from '../typesGithub';
 import { AppContext } from '../context/App';
+import { openExternalLink } from '../utils/comms';
 
 interface IProps {
   hostname: string;
@@ -66,6 +62,10 @@ export const NotificationRow: React.FC<IProps> = ({
   const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
     addSuffix: true,
   });
+  const updatedBy = notification.subject.user
+    ? ` by ${notification.subject.user.login}`
+    : '';
+  const updatedLabel = `Updated ${updatedAt}${updatedBy}`;
   const notificationTitle = formatForDisplay([
     notification.subject.state,
     notification.subject.type,
@@ -83,18 +83,36 @@ export const NotificationRow: React.FC<IProps> = ({
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
 
-      <div
-        className="flex-1 overflow-hidden"
-        onClick={() => pressTitle()}
-        role="main"
-      >
-        <div className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden">
+      <div className="flex-1 overflow-hidden">
+        <div
+          className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          role="main"
+          onClick={() => pressTitle()}
+          title={notification.subject.title}
+        >
           {notification.subject.title}
         </div>
 
-        <div className="text-xs text-capitalize">
-          <span title={reason.description}>{reason.type}</span> - Updated{' '}
-          {updatedAt}
+        <div className="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden">
+          <span title={reason.description}>{reason.type}</span> -{' '}
+          <span title={updatedLabel}>
+            Updated {updatedAt}
+            {notification.subject.user && (
+              <>
+                {' '}
+                by{' '}
+                <span
+                  className="cursor-pointer"
+                  title="View User Profile"
+                  onClick={() =>
+                    openExternalLink(notification.subject.user.html_url)
+                  }
+                >
+                  {notification.subject.user.login}
+                </span>
+              </>
+            )}
+          </span>
         </div>
       </div>
 

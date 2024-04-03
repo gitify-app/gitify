@@ -1,11 +1,11 @@
-import { Appearance } from '../types';
+import { Theme } from '../types';
 
-export function getAppearance(): Appearance {
+export function getTheme(): Theme {
   if (document.querySelector('html').classList.contains('dark')) {
-    return Appearance.DARK;
+    return Theme.DARK;
   }
 
-  return Appearance.LIGHT;
+  return Theme.LIGHT;
 }
 
 export const setLightMode = () =>
@@ -14,13 +14,13 @@ export const setLightMode = () =>
 export const setDarkMode = () =>
   document.querySelector('html').classList.add('dark');
 
-export const setAppearance = (mode?: Appearance) => {
+export const setTheme = (mode?: Theme) => {
   switch (mode) {
-    case Appearance.LIGHT:
+    case Theme.LIGHT:
       setLightMode();
       break;
 
-    case Appearance.DARK:
+    case Theme.DARK:
       setDarkMode();
       break;
 
