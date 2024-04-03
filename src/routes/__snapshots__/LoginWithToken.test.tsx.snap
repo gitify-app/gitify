@@ -80,7 +80,9 @@ exports[`routes/LoginWithToken.tsx renders correctly 1`] = `
             personal access tokens
           </a>
            
-          and create one with the three scopes
+          and create one with the 
+          3
+           scopes
            
           <span
             className="underline font-extrabold text-yellow-500"
