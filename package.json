@@ -94,7 +94,8 @@
     "linux": {
       "target": [
         "AppImage",
-        "deb"
+        "deb",
+        "rpm"
       ],
       "category": "Development",
       "maintainer": "Emmanouil Konstantinidis"
