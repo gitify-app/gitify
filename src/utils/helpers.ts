@@ -2,17 +2,25 @@ import { EnterpriseAccount, AuthState } from '../types';
 import {
   Notification,
   GraphQLSearch,
-  DiscussionCommentNode,
-  DiscussionSearchResultNode,
+  Discussion,
   PullRequest,
   Issue,
   IssueComments,
-  DiscussionSubcommentNode,
+  DiscussionComment,
 } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
 import { Constants } from './constants';
 import { getWorkflowRunAttributes, getCheckSuiteAttributes } from './subject';
+
+export function getTokenForHost(hostname: string, accounts: AuthState): string {
+  const isEnterprise = isEnterpriseHost(hostname);
+  const token = isEnterprise
+    ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
+    : accounts.token;
+
+  return token;
+}
 
 export function getEnterpriseAccountToken(
   hostname: string,
@@ -149,10 +157,28 @@ async function getDiscussionUrl(
 export async function fetchDiscussion(
   notification: Notification,
   token: string,
-): Promise<DiscussionSearchResultNode | null> {
-  const response: GraphQLSearch<DiscussionSearchResultNode> =
-    await apiRequestAuth(`https://api.github.com/graphql`, 'POST', token, {
-      query: `query fetchDiscussions(
+): Promise<Discussion | null> {
+  const response: GraphQLSearch<Discussion> = await apiRequestAuth(
+    `https://api.github.com/graphql`,
+    'POST',
+    token,
+    {
+      query: `
+        fragment CommentFields on DiscussionComment {
+          databaseId
+          createdAt
+          author {
+            login
+            url
+          }
+          bot: author {
+            ... on Bot {
+              login
+            }
+          }
+        }
+      
+        query fetchDiscussions(
           $queryStatement: String!,
           $type: SearchType!,
           $firstDiscussions: Int,
@@ -169,18 +195,10 @@ export async function fetchDiscussion(
                 url
                 comments(last: $lastComments){
                   nodes {
-                    databaseId
-                    createdAt
-                    author {
-                      login
-                    }
+                    ...CommentFields
                     replies(last: $firstReplies) {
                       nodes {
-                        databaseId
-                        createdAt
-                        author {
-                          login
-                        }
+                        ...CommentFields
                       }
                     }
                   }
@@ -201,7 +219,8 @@ export async function fetchDiscussion(
         lastComments: 100,
         firstReplies: 1,
       },
-    });
+    },
+  );
 
   let discussions =
     response?.data?.data.search.nodes.filter(
@@ -217,8 +236,8 @@ export async function fetchDiscussion(
 }
 
 export function getLatestDiscussionComment(
-  comments: DiscussionCommentNode[],
-): DiscussionSubcommentNode | null {
+  comments: DiscussionComment[],
+): DiscussionComment | null {
   if (!comments || comments.length == 0) {
     return null;
   }
@@ -234,14 +253,12 @@ export async function generateGitHubWebUrl(
   accounts: AuthState,
 ): Promise<string> {
   let url: string;
+  const token = getTokenForHost(notification.hostname, accounts);
 
   if (notification.subject.latest_comment_url) {
-    url = await getHtmlUrl(
-      notification.subject.latest_comment_url,
-      accounts.token,
-    );
+    url = await getHtmlUrl(notification.subject.latest_comment_url, token);
   } else if (notification.subject.url) {
-    url = await getHtmlUrl(notification.subject.url, accounts.token);
+    url = await getHtmlUrl(notification.subject.url, token);
   } else {
     // Perform any specific notification type handling (only required for a few special notification scenarios)
     switch (notification.subject.type) {
@@ -249,7 +266,7 @@ export async function generateGitHubWebUrl(
         url = getCheckSuiteUrl(notification);
         break;
       case 'Discussion':
-        url = await getDiscussionUrl(notification, accounts.token);
+        url = await getDiscussionUrl(notification, token);
         break;
       case 'RepositoryInvitation':
         url = `${notification.repository.html_url}/invitations`;

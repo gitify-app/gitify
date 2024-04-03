@@ -6,13 +6,17 @@ import { Notification } from '../typesGithub';
 import { AccountNotifications, SettingsState, AuthState } from '../types';
 
 export const setTrayIconColor = (notifications: AccountNotifications[]) => {
-  const allNotificationsCount = notifications.reduce(
-    (memo, acc) => memo + acc.notifications.length,
-    0,
-  );
+  const allNotificationsCount = getNotificationCount(notifications);
 
   updateTrayIcon(allNotificationsCount);
 };
+
+export function getNotificationCount(notifications: AccountNotifications[]) {
+  return notifications.reduce(
+    (memo, acc) => memo + acc.notifications.length,
+    0,
+  );
+}
 
 export const triggerNativeNotifications = (
   previousNotifications: AccountNotifications[],

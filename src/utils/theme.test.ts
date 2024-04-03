@@ -1,7 +1,7 @@
-import { Appearance } from '../types';
-import { setAppearance } from './appearance';
+import { Theme } from '../types';
+import { setTheme } from './theme';
 
-import * as appearanceHelpers from './appearance';
+import * as appearanceHelpers from './theme';
 
 describe('utils/appearance.ts', () => {
   beforeAll(() => {
@@ -17,17 +17,17 @@ describe('utils/appearance.ts', () => {
   });
 
   it('should change to light mode', () => {
-    setAppearance(Appearance.LIGHT);
+    setTheme(Theme.LIGHT);
     expect(appearanceHelpers.setLightMode).toHaveBeenCalledTimes(1);
   });
 
   it('should change to dark mode', () => {
-    setAppearance(Appearance.DARK);
+    setTheme(Theme.DARK);
     expect(appearanceHelpers.setDarkMode).toHaveBeenCalledTimes(1);
   });
 
   it("should use the system's mode - light", () => {
-    setAppearance();
+    setTheme();
     expect(appearanceHelpers.setLightMode).toHaveBeenCalledTimes(1);
   });
 
@@ -38,7 +38,7 @@ describe('utils/appearance.ts', () => {
         matches: true,
       })),
     });
-    setAppearance();
+    setTheme();
     expect(appearanceHelpers.setDarkMode).toHaveBeenCalledTimes(1);
   });
 });
