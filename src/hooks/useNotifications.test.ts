@@ -286,7 +286,7 @@ describe('hooks/useNotifications.ts', () => {
                           databaseId: 2297637,
                           createdAt: '2022-03-04T20:39:44Z',
                           author: {
-                            login: 'comment-user',
+                            login: 'commenst-user',
                             url: 'https://github.com/comment-user',
                             avatar_url:
                               'https://avatars.githubusercontent.com/u/1?v=4',
