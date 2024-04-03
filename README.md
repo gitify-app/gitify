@@ -1,6 +1,6 @@
 # Gitify [![github][github-image]][github-url] [![coveralls][coveralls-image]][coveralls-url] [![downloads][downloads-image]][downloads-url]
 
-> GitHub Notifications on your menu bar. Available on macOS, Windows and Linux. Gitify Mobile has been deprecated in favour of the official [GitHub mobile app](https://github.com/mobile).
+> GitHub Notifications on your menu bar. Available on macOS, Windows and Linux.
 
 ![Gitify](assets/images/press.png)
 
