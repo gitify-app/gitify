@@ -30,11 +30,11 @@ exports[`routes/Settings.tsx should not be able to enable colors due to missing 
 
 exports[`routes/Settings.tsx should render itself & its children 1`] = `
 <div
-  class="flex flex-1 flex-col dark:bg-gray-dark dark:text-white"
+  class="flex flex-1 flex-col h-screen dark:bg-gray-dark dark:text-white"
   data-testid="settings"
 >
   <div
-    class="flex justify-between items-center mt-4 py-2 mx-8"
+    class="flex justify-between items-center mt-2 py-2 mx-8"
   >
     <button
       class="focus:outline-none"
@@ -63,225 +63,305 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
     </h3>
   </div>
   <div
-    class="flex-1 px-8"
+    class="flex-grow overflow-x-auto px-8"
   >
     <fieldset
-      class="mb-1"
-      id="appearance"
+      class="mb-3"
     >
-      <div>
-        <legend
-          class="mb-1 text-base font-medium dark:text-white"
-        >
-          Appearance
-        </legend>
-      </div>
+      <legend
+        class="font-semibold mt-2 mb-1"
+        id="appearance"
+      >
+        Appearance
+      </legend>
       <div
-        aria-labelledby="appearance"
-        class="flex items-center space-x-4 py-2"
-        role="group"
+        class="flex items-start mt-1 mb-3"
       >
         <div
-          class="flex items-center mt-1"
+          class="mr-3 text-sm py-1"
         >
-          <input
-            checked=""
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-            id="appearance_system"
-            name="appearance"
-            type="radio"
-            value="SYSTEM"
-          />
           <label
-            class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-            for="appearance_system"
+            class="font-medium text-gray-700 dark:text-gray-200 "
+            for="theme"
           >
-            System
+            Theme:
           </label>
         </div>
         <div
-          class="flex items-center mt-1"
+          aria-labelledby="theme"
+          class="flex items-center space-x-4"
+          role="group"
+        >
+          <div
+            class="flex mt-1"
+          >
+            <input
+              checked=""
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+              id="theme_system"
+              name="theme"
+              type="radio"
+              value="SYSTEM"
+            />
+            <label
+              class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+              for="theme_system"
+            >
+              System
+            </label>
+          </div>
+          <div
+            class="flex mt-1"
+          >
+            <input
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+              id="theme_light"
+              name="theme"
+              type="radio"
+              value="LIGHT"
+            />
+            <label
+              class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+              for="theme_light"
+            >
+              Light
+            </label>
+          </div>
+          <div
+            class="flex mt-1"
+          >
+            <input
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+              id="theme_dark"
+              name="theme"
+              type="radio"
+              value="DARK"
+            />
+            <label
+              class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+              for="theme_dark"
+            >
+              Dark
+            </label>
+          </div>
+        </div>
+      </div>
+      <div
+        class="flex items-start mt-1 mb-3"
+      >
+        <div
+          class="flex items-center h-5"
         >
           <input
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-            id="appearance_light"
-            name="appearance"
-            type="radio"
-            value="LIGHT"
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="colors"
+            type="checkbox"
           />
-          <label
-            class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-            for="appearance_light"
-          >
-            Light
-          </label>
         </div>
         <div
-          class="flex items-center mt-1"
+          class="ml-3 text-sm"
         >
-          <input
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-            id="appearance_dark"
-            name="appearance"
-            type="radio"
-            value="DARK"
-          />
           <label
-            class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-            for="appearance_dark"
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="colors"
+            style=""
           >
-            Dark
+            Use GitHub-like state colors
           </label>
         </div>
       </div>
     </fieldset>
-    <div
-      class="flex items-start mt-1 mb-3"
+    <fieldset
+      class="mb-3"
     >
-      <div
-        class="flex items-center h-5"
+      <legend
+        class="font-semibold  mt-2 mb-1"
+        id="notifications"
       >
-        <input
-          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          id="colors"
-          type="checkbox"
-        />
-      </div>
+        Notifications
+      </legend>
       <div
-        class="ml-3 text-sm"
+        class="flex items-start mt-1 mb-3"
       >
-        <label
-          class="font-medium text-gray-700 dark:text-gray-200"
-          for="colors"
-          style=""
+        <div
+          class="flex items-center h-5"
         >
-          Use GitHub-like state colors
-        </label>
+          <input
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="showOnlyParticipating"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
+        >
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="showOnlyParticipating"
+          >
+            Show only participating
+          </label>
+        </div>
       </div>
-    </div>
-    <div
-      class="flex items-start mt-1 mb-3"
+      <div
+        class="flex items-start mt-1 mb-3"
+      >
+        <div
+          class="flex items-center h-5"
+        >
+          <input
+            checked=""
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="showBots"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
+        >
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="showBots"
+          >
+            Show notifications from Bot accounts
+          </label>
+        </div>
+      </div>
+      <div
+        class="flex items-start mt-1 mb-3"
+      >
+        <div
+          class="flex items-center h-5"
+        >
+          <input
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="markAsDoneOnOpen"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
+        >
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="markAsDoneOnOpen"
+          >
+            Mark as done on open
+          </label>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset
+      class="mb-3"
     >
-      <div
-        class="flex items-center h-5"
+      <legend
+        class="font-semibold  mt-2 mb-1"
+        id="system"
       >
-        <input
-          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          id="showOnlyParticipating"
-          type="checkbox"
-        />
-      </div>
+        System
+      </legend>
       <div
-        class="ml-3 text-sm"
+        class="flex items-start mt-1 mb-3"
       >
-        <label
-          class="font-medium text-gray-700 dark:text-gray-200"
-          for="showOnlyParticipating"
+        <div
+          class="flex items-center h-5"
         >
-          Show only participating
-        </label>
-      </div>
-    </div>
-    <div
-      class="flex items-start mt-1 mb-3"
-    >
-      <div
-        class="flex items-center h-5"
-      >
-        <input
-          checked=""
-          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          id="playSound"
-          type="checkbox"
-        />
-      </div>
-      <div
-        class="ml-3 text-sm"
-      >
-        <label
-          class="font-medium text-gray-700 dark:text-gray-200"
-          for="playSound"
+          <input
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="showNotificationsCountInTray"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
         >
-          Play sound
-        </label>
-      </div>
-    </div>
-    <div
-      class="flex items-start mt-1 mb-3"
-    >
-      <div
-        class="flex items-center h-5"
-      >
-        <input
-          checked=""
-          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          id="showNotifications"
-          type="checkbox"
-        />
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="showNotificationsCountInTray"
+          >
+            Show notifications count in tray
+          </label>
+        </div>
       </div>
       <div
-        class="ml-3 text-sm"
+        class="flex items-start mt-1 mb-3"
       >
-        <label
-          class="font-medium text-gray-700 dark:text-gray-200"
-          for="showNotifications"
+        <div
+          class="flex items-center h-5"
         >
-          Show notifications
-        </label>
-      </div>
-    </div>
-    <div
-      class="flex items-start mt-1 mb-3"
-    >
-      <div
-        class="flex items-center h-5"
-      >
-        <input
-          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          id="markAsDoneOnOpen"
-          type="checkbox"
-        />
-      </div>
-      <div
-        class="ml-3 text-sm"
-      >
-        <label
-          class="font-medium text-gray-700 dark:text-gray-200"
-          for="markAsDoneOnOpen"
+          <input
+            checked=""
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="showNotifications"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
         >
-          Mark as done on open
-        </label>
-      </div>
-    </div>
-    <div
-      class="flex items-start mt-1 mb-3"
-    >
-      <div
-        class="flex items-center h-5"
-      >
-        <input
-          class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-          id="openAtStartUp"
-          type="checkbox"
-        />
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="showNotifications"
+          >
+            Show system notifications
+          </label>
+        </div>
       </div>
       <div
-        class="ml-3 text-sm"
+        class="flex items-start mt-1 mb-3"
       >
-        <label
-          class="font-medium text-gray-700 dark:text-gray-200"
-          for="openAtStartUp"
+        <div
+          class="flex items-center h-5"
         >
-          Open at startup
-        </label>
+          <input
+            checked=""
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="playSound"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
+        >
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="playSound"
+          >
+            Play sound
+          </label>
+        </div>
       </div>
-    </div>
+      <div
+        class="flex items-start mt-1 mb-3"
+      >
+        <div
+          class="flex items-center h-5"
+        >
+          <input
+            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            id="openAtStartUp"
+            type="checkbox"
+          />
+        </div>
+        <div
+          class="ml-3 text-sm"
+        >
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="openAtStartUp"
+          >
+            Open at startup
+          </label>
+        </div>
+      </div>
+    </fieldset>
   </div>
   <div
-    class="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-4 px-8"
+    class="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8"
   >
     <small
-      class="font-semibold"
+      class="font-semibold cursor-pointer"
+      title="View release notes"
     >
       Gitify v
       0.0.1
