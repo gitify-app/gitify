@@ -25,7 +25,7 @@ export const NotificationRow: React.FC<IProps> = ({
     settings,
     accounts,
     removeNotificationFromState,
-    markNotification,
+    markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
   } = useContext(AppContext);
@@ -137,7 +137,7 @@ export const NotificationRow: React.FC<IProps> = ({
           <button
             className="focus:outline-none h-full hover:text-green-500"
             title="Mark as Read"
-            onClick={() => markNotification(notification.id, hostname)}
+            onClick={() => markNotificationRead(notification.id, hostname)}
           >
             <ReadIcon size={14} aria-label="Mark as Read" />
           </button>

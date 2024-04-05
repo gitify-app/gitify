@@ -1,4 +1,4 @@
-# Gitify [![github][build-workflow-image]][github-actions] [![github][release-workflow-image]][github-actions] [![coveralls][coveralls-image]][coveralls-url] [![downloads][downloads-image]][website]
+# Gitify [![Build Workflow][build-workflow-badge]][github-actions] [![Release Workflow][release-workflow-badge]][github-actions] [![Coveralls][coveralls-badge]][coveralls] [![Contributors][contributors-badge]][github] [![Downloads - Total][downloads-total-badge]][website] [![Downloads - Latest Release][downloads-latest-badge]][website] [![OSS License][license-badge]][license] [![Latest Release][github-release-badge]][github-releases] [![Homebrew Cask][homebrew-cask-badge]][homebrew-cask]
 
 > GitHub Notifications on your menu bar. Available on macOS, Windows and Linux.
 
@@ -37,12 +37,12 @@ To run the **electron app**:
 The release process is automated. Follow the steps below.
 
 1. Verify that all features you want targeted in the release have been merged to `main`.
-2. Create a [new **draft** release][new-release]. Set the tag version to something with the format of `v1.2.3`. Save as a **draft** before moving to the next step
+2. Create a [new **draft** release][github-new-release]. Set the tag version to something with the format of `v1.2.3`. Save as a **draft** before moving to the next step
 3. Create a branch that starts with `release/vX.X.X` (ie. `release/v1.2.3`).
 4. In the same branch, **bump the version** of the app by running `pnpm version <new-version-number`. Commit these changes and open a PR. A GitHub Actions workflow will build, sign and upload the release assets for each commit to that branch as long as a branch is named like `release/vX.X.X` and there is a draft release with the same version number(`package.json`).
 5. Merge your release branch into `main`.
 6. Publish the release once you've finalized the release notes and confirmed all assets are there.
-7. Raise and merge a pull request in [gitify-app/website][github-website] using the automatically created branch (ie: `bump/v1.2.3`)
+7. Merge the open pull request in [gitify-app/website][github-website-pulls] (ie: `bump/v1.2.3`)
 
 ### Tests
 
@@ -78,13 +78,23 @@ Please visit our [Gitify FAQs][faqs] for all commonly asked questions.
 Gitify is licensed under the MIT Open Source license. For more information, see [LICENSE](LICENSE).
 
 [website]: https://www.gitify.io
-[github-website]: https://github.com/gitify-app/website
-[new-release]: https://github.com/gitify-app/gitify/releases/new
-[build-workflow-image]: https://github.com/gitify-app/gitify/actions/workflows/build-app.yml/badge.svg
-[release-workflow-image]: https://github.com/gitify-app/gitify/actions/workflows/release.yml/badge.svg
-[github-actions]: https://github.com/gitify-app/gitify/actions
-[coveralls-image]: https://coveralls.io/repos/github/gitify-app/gitify/badge.svg
-[coveralls-url]: https://coveralls.io/github/gitify-app/gitify
-[downloads-image]: https://img.shields.io/github/downloads/gitify-app/gitify/total.svg
-[brew]: http://brew.sh/
 [faqs]: https://www.gitify.io/faqs
+[github]: https://github.com/gitify-app/gitify
+[github-actions]: https://github.com/gitify-app/gitify/actions
+[github-releases]: https://github.com/gitify-app/gitify/releases/latest
+[github-new-release]: https://github.com/gitify-app/gitify/releases/new
+[github-website]: https://github.com/gitify-app/website
+[github-website-pulls]: https://github.com/gitify-app/website/pulls
+[brew]: http://brew.sh/
+[homebrew-cask]: https://formulae.brew.sh/cask/gitify
+[coveralls]: https://coveralls.io/github/gitify-app/gitify
+[coveralls-badge]: https://coveralls.io/repos/github/gitify-app/gitify/badge.svg
+[build-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/build-app.yml/badge.svg
+[release-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/release.yml/badge.svg
+[downloads-total-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/total?label=downloads@all
+[downloads-latest-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/latest/total
+[contributors-badge]: https://img.shields.io/github/contributors/gitify-app/gitify
+[license]: LICENSE
+[license-badge]: https://img.shields.io/github/license/gitify-app/gitify
+[github-release-badge]: https://img.shields.io/github/v/release/gitify-app/gitify
+[homebrew-cask-badge]: https://img.shields.io/homebrew/cask/v/gitify
