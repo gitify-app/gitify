@@ -52,14 +52,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
         className="flex items-center"
       >
         <span
-          className="mr-1"
-          title="You're watching the repository."
-        >
-          Subscribed
-        </span>
-        -
-        <span
-          className="flex ml-1"
+          className="flex"
           title="manosim updated over 6 years ago"
         >
           <span
@@ -67,12 +60,22 @@ exports[`components/NotificationRow.tsx should render itself & its children with
             title="View User Profile"
           >
             <img
-              className="rounded-full w-4 h-4 mr-1 cursor-pointer"
+              className="rounded-full w-4 h-4 cursor-pointer"
               src="https://avatars0.githubusercontent.com/u/6333409?v=3"
               title="manosim"
             />
           </span>
-          updated over 6 years ago
+          <span
+            className="ml-1"
+            title="You're watching the repository."
+          >
+            Updated
+          </span>
+          <span
+            className="ml-1"
+          >
+            over 6 years ago
+          </span>
         </span>
       </span>
     </div>
@@ -220,17 +223,43 @@ exports[`components/NotificationRow.tsx should render itself & its children with
         className="flex items-center"
       >
         <span
-          className="mr-1"
-          title="You're watching the repository."
-        >
-          Subscribed
-        </span>
-        -
-        <span
-          className="flex ml-1"
+          className="flex"
           title="Updated over 6 years ago"
         >
-          Updated over 6 years ago
+          <span>
+            <svg
+              aria-hidden="true"
+              className="text-gray-500 dark:text-gray-300"
+              fill="currentColor"
+              focusable="false"
+              height={16}
+              style={
+                {
+                  "display": "inline-block",
+                  "overflow": "visible",
+                  "userSelect": "none",
+                  "verticalAlign": "text-bottom",
+                }
+              }
+              viewBox="0 0 16 16"
+              width={16}
+            >
+              <path
+                d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+              />
+            </svg>
+          </span>
+          <span
+            className="ml-1"
+            title="You're watching the repository."
+          >
+            Updated
+          </span>
+          <span
+            className="ml-1"
+          >
+            over 6 years ago
+          </span>
         </span>
       </span>
     </div>
