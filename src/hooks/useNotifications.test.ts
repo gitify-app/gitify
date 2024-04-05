@@ -454,7 +454,7 @@ describe('hooks/useNotifications.ts', () => {
     });
   });
 
-  describe('markNotification', () => {
+  describe('markNotificationRead', () => {
     const id = 'notification-123';
 
     describe('github.com', () => {
@@ -469,7 +469,7 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markNotification(accounts, id, hostname);
+          result.current.markNotificationRead(accounts, id, hostname);
         });
 
         await waitFor(() => {
@@ -487,7 +487,7 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markNotification(accounts, id, hostname);
+          result.current.markNotificationRead(accounts, id, hostname);
         });
 
         await waitFor(() => {
@@ -510,7 +510,7 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markNotification(accounts, id, hostname);
+          result.current.markNotificationRead(accounts, id, hostname);
         });
 
         await waitFor(() => {
@@ -528,7 +528,7 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications(false));
 
         act(() => {
-          result.current.markNotification(accounts, id, hostname);
+          result.current.markNotificationRead(accounts, id, hostname);
         });
 
         await waitFor(() => {

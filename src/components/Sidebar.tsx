@@ -19,7 +19,8 @@ export const Sidebar: React.FC = () => {
   const location = useLocation();
 
   const { isLoggedIn } = useContext(AppContext);
-  const { notifications, fetchNotifications } = useContext(AppContext);
+  const { notifications, fetchNotifications, isFetching } =
+    useContext(AppContext);
 
   const onOpenBrowser = useCallback(() => {
     openExternalLink(`https://github.com/${Constants.REPO_SLUG}`);
@@ -38,10 +39,10 @@ export const Sidebar: React.FC = () => {
   }, [notifications]);
 
   const sidebarButtonClasses =
-    'flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none';
+    'flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none disabled:text-gray-500 disabled:cursor-default';
 
   return (
-    <div className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto	">
+    <div className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto">
       <div className="flex flex-col flex-1 items-center py-4">
         <button
           className="w-5 my-3 mx-auto cursor-pointer outline-none"
@@ -77,8 +78,13 @@ export const Sidebar: React.FC = () => {
                 navigate('/', { replace: true });
                 fetchNotifications();
               }}
+              disabled={isFetching}
             >
-              <SyncIcon size={16} aria-label="Refresh Notifications" />
+              <SyncIcon
+                size={16}
+                aria-label="Refresh Notifications"
+                className={isFetching ? 'animate-spin' : undefined}
+              />
             </button>
 
             <button

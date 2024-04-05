@@ -2,7 +2,7 @@
 
 exports[`components/Sidebar.tsx should render itself & its children (logged in) 1`] = `
 <div
-  className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto	"
+  className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto"
 >
   <div
     className="flex flex-col flex-1 items-center py-4"
@@ -94,7 +94,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
   >
     <button
       aria-label="Quit Gitify"
-      className="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none"
+      className="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none disabled:text-gray-500 disabled:cursor-default"
       onClick={[Function]}
       title="Quit Gitify"
     >
@@ -127,7 +127,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
 
 exports[`components/Sidebar.tsx should render itself & its children (logged out) 1`] = `
 <div
-  className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto	"
+  className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto"
 >
   <div
     className="flex flex-col flex-1 items-center py-4"
@@ -219,7 +219,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
   >
     <button
       aria-label="Quit Gitify"
-      className="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none"
+      className="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none disabled:text-gray-500 disabled:cursor-default"
       onClick={[Function]}
       title="Quit Gitify"
     >
