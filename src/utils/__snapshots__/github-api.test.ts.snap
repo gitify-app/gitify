@@ -112,15 +112,15 @@ exports[`utils/github-api.ts formatReason - should format the notification reaso
 }
 `;
 
-exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 1`] = `"text-gray-500"`;
+exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 1`] = `"text-gray-500 dark:text-gray-300"`;
 
 exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 2`] = `"text-red-500"`;
 
-exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 3`] = `"text-gray-500"`;
+exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 3`] = `"text-gray-500 dark:text-gray-300"`;
 
 exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 4`] = `"text-green-500"`;
 
-exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 5`] = `"text-gray-500"`;
+exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 5`] = `"text-gray-500 dark:text-gray-300"`;
 
 exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 1`] = `"text-green-500"`;
 
@@ -128,11 +128,11 @@ exports[`utils/github-api.ts getNotificationTypeIconColor should format the noti
 
 exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 3`] = `"text-purple-500"`;
 
-exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 4`] = `"text-gray-500"`;
+exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 4`] = `"text-gray-500 dark:text-gray-300"`;
 
 exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 5`] = `"text-purple-500"`;
 
-exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 6`] = `"text-gray-500"`;
+exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 6`] = `"text-gray-500 dark:text-gray-300"`;
 
 exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 7`] = `"text-green-500"`;
 
@@ -140,4 +140,4 @@ exports[`utils/github-api.ts getNotificationTypeIconColor should format the noti
 
 exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 9`] = `"text-purple-500"`;
 
-exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 10`] = `"text-gray-500"`;
+exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 10`] = `"text-gray-500 dark:text-gray-300"`;
