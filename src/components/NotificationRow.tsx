@@ -35,9 +35,19 @@ export const NotificationRow: React.FC<IProps> = ({
 
     if (settings.markAsDoneOnOpen) {
       markNotificationDone(notification.id, hostname);
-    } else {
+    }
+
+    if (!settings.showReadNotifications) {
       // no need to mark as read, github does it by default when opening it
       removeNotificationFromState(notification.id, hostname);
+    }
+  }, [settings]);
+
+  const setRowAsRead = useCallback(() => {
+    if (settings.showReadNotifications && notification.unread) {
+      const notificationRow = document.getElementById(notification.id);
+      notificationRow.className += 'opacity-50 dark:opacity-50';
+      console.log('Notification Row: ', notificationRow.className);
     }
   }, [settings]);
 
@@ -73,6 +83,7 @@ export const NotificationRow: React.FC<IProps> = ({
 
   return (
     <div
+      id={notification.id}
       className={`flex space-x-3 py-2 px-3 bg-white border-b border-gray-100 dark:border-gray-darker group dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker
           ${!notification.unread ? 'opacity-50 dark:opacity-50' : ''}`}
     >
@@ -87,7 +98,10 @@ export const NotificationRow: React.FC<IProps> = ({
         <div
           className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
           role="main"
-          onClick={() => pressTitle()}
+          onClick={() => {
+            setRowAsRead();
+            pressTitle();
+          }}
           title={notification.subject.title}
         >
           {notification.subject.title}
