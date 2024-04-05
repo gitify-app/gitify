@@ -157,6 +157,11 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: null,
                     isAnswered: true,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -172,7 +177,11 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('ANSWERED');
-        expect(result.user).toBe(null);
+        expect(result.user).toEqual({
+          login: 'discussion-creator',
+          html_url: 'https://github.com/discussion-creator',
+          type: 'User',
+        });
       });
 
       it('duplicate discussion state', async () => {
@@ -196,6 +205,11 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: 'DUPLICATE',
                     isAnswered: false,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -211,7 +225,11 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('DUPLICATE');
-        expect(result.user).toBe(null);
+        expect(result.user).toEqual({
+          login: 'discussion-creator',
+          html_url: 'https://github.com/discussion-creator',
+          type: 'User',
+        });
       });
 
       it('open discussion state', async () => {
@@ -235,6 +253,11 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: null,
                     isAnswered: false,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -250,7 +273,11 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('OPEN');
-        expect(result.user).toBe(null);
+        expect(result.user).toEqual({
+          login: 'discussion-creator',
+          html_url: 'https://github.com/discussion-creator',
+          type: 'User',
+        });
       });
 
       it('outdated discussion state', async () => {
@@ -274,6 +301,11 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: 'OUTDATED',
                     isAnswered: false,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -289,7 +321,11 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('OUTDATED');
-        expect(result.user).toBe(null);
+        expect(result.user).toEqual({
+          login: 'discussion-creator',
+          html_url: 'https://github.com/discussion-creator',
+          type: 'User',
+        });
       });
 
       it('reopened discussion state', async () => {
@@ -313,6 +349,11 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: 'REOPENED',
                     isAnswered: false,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -328,7 +369,11 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('REOPENED');
-        expect(result.user).toBe(null);
+        expect(result.user).toEqual({
+          login: 'discussion-creator',
+          html_url: 'https://github.com/discussion-creator',
+          type: 'User',
+        });
       });
 
       it('resolved discussion state', async () => {
@@ -352,6 +397,11 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: 'RESOLVED',
                     isAnswered: false,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -367,7 +417,11 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('RESOLVED');
-        expect(result.user).toBe(null);
+        expect(result.user).toEqual({
+          login: 'discussion-creator',
+          html_url: 'https://github.com/discussion-creator',
+          type: 'User',
+        });
       });
 
       it('filtered response by subscribed', async () => {
@@ -391,6 +445,11 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: null,
                     isAnswered: false,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -400,6 +459,11 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'IGNORED',
                     stateReason: null,
                     isAnswered: true,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -415,7 +479,11 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('OPEN');
-        expect(result.user).toBe(null);
+        expect(result.user).toEqual({
+          login: 'discussion-creator',
+          html_url: 'https://github.com/discussion-creator',
+          type: 'User',
+        });
       });
     });
 

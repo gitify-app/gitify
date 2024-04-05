@@ -111,12 +111,16 @@ async function getGitifySubjectForDiscussion(
   const latestDiscussionComment = getLatestDiscussionComment(
     discussion.comments.nodes,
   );
-  let discussionUser: SubjectUser = null;
+  let discussionUser: SubjectUser = {
+    login: discussion.author.login,
+    html_url: discussion.author.url,
+    type: discussion.author.type,
+  };
   if (latestDiscussionComment) {
     discussionUser = {
       login: latestDiscussionComment.author.login,
       html_url: latestDiscussionComment.author.url,
-      type: latestDiscussionComment.bot?.login ? 'Bot' : 'User',
+      type: latestDiscussionComment.author.type,
     };
   }
 
