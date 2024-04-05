@@ -18,7 +18,7 @@ export const Oops = () => {
       <h2 className="font-semibold text-xl mb-2 text-semibold">
         Something went wrong.
       </h2>
-      <div>Couldn&apos;t get your notifications.</div>
+      <div>Couldn't get your notifications.</div>
     </div>
   );
 };
