@@ -73,7 +73,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
       const isGitHubLoggedIn = accounts.token !== null;
-      const endpointSuffix = `notifications?all=true&participating=${settings.participating}`;
+      const endpointSuffix = `notifications?participating=${settings.participating}`;
 
       function getGitHubNotifications() {
         if (!isGitHubLoggedIn) {
@@ -204,6 +204,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           }),
         )
         .catch((err: AxiosError) => {
+          console.log(JSON.stringify(err));
           let failureType: FailureType = 'UNKNOWN';
 
           const data = err.response.data as GithubRESTError;
