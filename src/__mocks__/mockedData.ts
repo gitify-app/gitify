@@ -379,8 +379,8 @@ const mockDiscussionComments: DiscussionComments = {
       author: {
         login: 'comment-user',
         url: 'https://github.com/comment-user',
-        type: 'User',
         avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+        type: 'User',
       },
       replies: {
         nodes: [],
@@ -392,8 +392,8 @@ const mockDiscussionComments: DiscussionComments = {
       author: {
         login: 'comment-user',
         url: 'https://github.com/comment-user',
-        type: 'User',
         avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+        type: 'User',
       },
       replies: {
         nodes: [],
@@ -405,8 +405,8 @@ const mockDiscussionComments: DiscussionComments = {
       author: {
         login: 'comment-user',
         url: 'https://github.com/comment-user',
-        type: 'User',
         avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+        type: 'User',
       },
       replies: {
         nodes: [
@@ -416,9 +416,9 @@ const mockDiscussionComments: DiscussionComments = {
             author: {
               login: 'reply-user',
               url: 'https://github.com/reply-user',
-              type: 'User',
               avatar_url:
                 'https://avatars.githubusercontent.com/u/123456789?v=4',
+              type: 'User',
             },
           },
         ],
@@ -430,8 +430,8 @@ const mockDiscussionComments: DiscussionComments = {
       author: {
         login: 'comment-user',
         url: 'https://github.com/comment-user',
-        type: 'User',
         avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+        type: 'User',
       },
       replies: {
         nodes: [],
@@ -443,8 +443,8 @@ const mockDiscussionComments: DiscussionComments = {
       author: {
         login: 'comment-user',
         url: 'https://github.com/comment-user',
-        type: 'User',
         avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+        type: 'User',
       },
       replies: {
         nodes: [
@@ -454,9 +454,9 @@ const mockDiscussionComments: DiscussionComments = {
             author: {
               login: 'reply-user',
               url: 'https://github.com/reply-user',
-              type: 'User',
               avatar_url:
                 'https://avatars.githubusercontent.com/u/123456789?v=4',
+              type: 'User',
             },
           },
         ],
@@ -468,8 +468,8 @@ const mockDiscussionComments: DiscussionComments = {
       author: {
         login: 'comment-user',
         url: 'https://github.com/comment-user',
-        type: 'User',
         avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+        type: 'User',
       },
 
       replies: {
@@ -480,9 +480,9 @@ const mockDiscussionComments: DiscussionComments = {
             author: {
               login: 'reply-user',
               url: 'https://github.com/reply-user',
-              type: 'User',
               avatar_url:
                 'https://avatars.githubusercontent.com/u/123456789?v=4',
+              type: 'User',
             },
           },
         ],
@@ -494,8 +494,8 @@ const mockDiscussionComments: DiscussionComments = {
       author: {
         login: 'comment-user',
         url: 'https://github.com/comment-user',
-        type: 'User',
         avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+        type: 'User',
       },
       replies: {
         nodes: [
@@ -505,9 +505,9 @@ const mockDiscussionComments: DiscussionComments = {
             author: {
               login: 'reply-user',
               url: 'https://github.com/reply-user',
-              type: 'User',
               avatar_url:
                 'https://avatars.githubusercontent.com/u/123456789?v=4',
+              type: 'User',
             },
           },
         ],

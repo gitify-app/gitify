@@ -145,8 +145,8 @@ export interface SubjectUser {
 export interface DiscussionAuthor {
   login: string;
   url: string;
-  type: string;
   avatar_url: string;
+  type: string;
 }
 
 export interface Repository {

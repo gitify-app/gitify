@@ -167,6 +167,7 @@ export async function fetchDiscussion(
         fragment AuthorFields on Actor {
           login
           url
+          avatar_url: avatarUrl
           type: __typename
         }
       
