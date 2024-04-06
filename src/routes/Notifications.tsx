@@ -5,7 +5,7 @@ import { AllRead } from '../components/AllRead';
 import { AppContext } from '../context/App';
 import { Oops } from '../components/error/Oops';
 import { getNotificationCount } from '../utils/notifications';
-import { RateLimit } from '../components/error/RateLimit';
+import { RateLimited } from '../components/error/RateLimited';
 import { MissingScopes } from '../components/error/MissingScopes';
 import { BadCredentials } from '../components/error/BadCredentials';
 
@@ -32,7 +32,7 @@ export const NotificationsRoute: React.FC = (props) => {
       case 'MISSING_SCOPES':
         return <MissingScopes />;
       case 'RATE_LIMITED':
-        return <RateLimit />;
+        return <RateLimited />;
       default:
         return <Oops />;
     }

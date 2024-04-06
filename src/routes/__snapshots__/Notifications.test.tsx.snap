@@ -2,7 +2,13 @@
 
 exports[`routes/Notifications.tsx should render itself & its children (all read notifications) 1`] = `<AllRead />`;
 
-exports[`routes/Notifications.tsx should render itself & its children (error page - oops) 1`] = `<Oops />`;
+exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) bad credentials 1`] = `<BadC redentials />`;
+
+exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) default error 1`] = `<Oops />`;
+
+exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) missing scopes 1`] = `<Missing Scopes />`;
+
+exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) rate limited 1`] = `<Rate Limited />`;
 
 exports[`routes/Notifications.tsx should render itself & its children (with notifications) 1`] = `
 <div
