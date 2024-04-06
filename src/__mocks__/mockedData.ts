@@ -530,6 +530,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
             author: {
               login: 'discussion-creator',
               url: 'https://github.com/discussion-creator',
+              avatar_url:
+                'https://avatars.githubusercontent.com/u/123456789?v=4',
               type: 'User',
             },
             comments: mockDiscussionComments,
@@ -543,6 +545,8 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
             author: {
               login: 'discussion-creator',
               url: 'https://github.com/discussion-creator',
+              avatar_url:
+                'https://avatars.githubusercontent.com/u/123456789?v=4',
               type: 'User',
             },
             comments: mockDiscussionComments,
