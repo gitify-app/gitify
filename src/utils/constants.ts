@@ -16,6 +16,13 @@ export const Constants = {
   ALLREAD_EMOJIS: ['😉', '🎉', '🐯', '🙈', '🎈', '🎊', '👏', '🎪', '🍝'],
 
   ERROR_EMOJIS: ['🤔', '😞', '😤', '😱', '😭'],
+
+  ERROR_MESSAGES: {
+    BAD_CREDENTIALS: 'Bad credentials',
+    MISSING_SCOPES: "Missing the 'notifications' scope",
+    RATE_LIMITED_PRIMARY: 'API rate limit exceeded',
+    RATE_LIMITED_SECONDARY: 'You have exceeded a secondary rate limit',
+  },
 };
 
 export default Constants;

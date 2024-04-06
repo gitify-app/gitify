@@ -203,27 +203,11 @@ export const useNotifications = (colors: boolean): NotificationsState => {
               });
           }),
         )
-        .catch((err: AxiosError) => {
-          let failureType: FailureType = 'UNKNOWN';
-
-          const data = err.response.data as GithubRESTError;
-
-          if (err.response.status === 401) {
-            failureType = 'BAD_CREDENTIALS';
-          } else if (err.response.status === 403) {
-            if (data.message.includes("Missing the 'notifications' scope")) {
-              failureType = 'MISSING_SCOPES';
-            } else if (
-              data.message.includes('API rate limit exceeded') ||
-              data.message.includes('You have exceeded a secondary rate limit')
-            ) {
-              failureType = 'RATE_LIMITED';
-            }
-          }
-
+        .catch((err: AxiosError<GithubRESTError>) => {
           setIsFetching(false);
-          setFailureType(failureType);
           setRequestFailed(true);
+          const failureType: FailureType = determineFailureType(err);
+          setFailureType(failureType);
         });
     },
     [notifications],
@@ -426,3 +410,23 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     markRepoNotificationsDone,
   };
 };
+
+function determineFailureType(err: AxiosError<GithubRESTError>) {
+  let failureType: FailureType = 'UNKNOWN';
+  const status = err.response.status;
+  const message = err.response.data.message;
+
+  if (status === 401) {
+    failureType = 'BAD_CREDENTIALS';
+  } else if (status === 403) {
+    if (message.includes(Constants.ERROR_MESSAGES.MISSING_SCOPES)) {
+      failureType = 'MISSING_SCOPES';
+    } else if (
+      message.includes(Constants.ERROR_MESSAGES.RATE_LIMITED_PRIMARY) ||
+      message.includes(Constants.ERROR_MESSAGES.RATE_LIMITED_SECONDARY)
+    ) {
+      failureType = 'RATE_LIMITED';
+    }
+  }
+  return failureType;
+}
