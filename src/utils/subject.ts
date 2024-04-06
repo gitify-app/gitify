@@ -114,6 +114,7 @@ async function getGitifySubjectForDiscussion(
   let discussionUser: SubjectUser = {
     login: discussion.author.login,
     html_url: discussion.author.url,
+    avatar_url: discussion.author.avatar_url,
     type: discussion.author.type,
   };
   if (latestDiscussionComment) {
