@@ -139,6 +139,14 @@ export const SettingsRoute: React.FC = () => {
             }
             disabled={!colorScope}
           />
+          <FieldCheckbox
+            name="showAccountHostname"
+            label="Show account hostname"
+            checked={settings.showAccountHostname}
+            onChange={(evt) =>
+              updateSetting('showAccountHostname', evt.target.checked)
+            }
+          />
         </fieldset>
 
         <fieldset className="mb-3">
