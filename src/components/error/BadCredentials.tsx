@@ -6,9 +6,9 @@ export const BadCredentials = () => {
       <h1 className="text-5xl mb-5">🔓</h1>
 
       <h2 className="font-semibold text-xl mb-2 text-semibold">
-        Bad Credentials.
+        Bad Credentials
       </h2>
-      <div>The credentials you are may be invalid or expired.</div>
+      <div>The credentials you are may be invalid or expired</div>
     </div>
   );
 };

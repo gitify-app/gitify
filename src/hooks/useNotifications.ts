@@ -95,6 +95,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
       }
 
       setIsFetching(true);
+      setFailureType('NONE');
       setRequestFailed(false);
 
       return axios
@@ -210,7 +211,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           if (err.response.status === 401) {
             failureType = 'BAD_CREDENTIALS';
           } else if (err.response.status === 403) {
-            if (data.message.includes('rate limit')) {
+            if (data.message.includes('API rate limit exceeded')) {
               failureType = 'RATE_LIMIT';
             } else if (
               data.message.includes("Missing the 'notifications' scope")

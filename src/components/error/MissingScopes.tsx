@@ -6,10 +6,10 @@ export const MissingScopes = () => {
       <h1 className="text-5xl mb-5">🙃</h1>
 
       <h2 className="font-semibold text-xl mb-2 text-semibold">
-        Missing Scopes.
+        Missing Scopes
       </h2>
       <div>
-        You are missing the <code>notifications</code> API scope.
+        You are missing the <code>notifications</code> API scope
       </div>
     </div>
   );

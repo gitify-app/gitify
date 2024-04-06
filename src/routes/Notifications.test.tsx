@@ -13,7 +13,7 @@ jest.mock('../components/AllRead', () => ({
   AllRead: 'AllRead',
 }));
 
-jest.mock('../components/Oops', () => ({
+jest.mock('../components/error/Oops', () => ({
   Oops: 'Oops',
 }));
 

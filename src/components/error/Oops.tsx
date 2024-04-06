@@ -16,9 +16,9 @@ export const Oops = () => {
       <h1 className="text-5xl mb-5">{emoji}</h1>
 
       <h2 className="font-semibold text-xl mb-2 text-semibold">
-        Something went wrong.
+        Something went wrong
       </h2>
-      <div>Couldn't get your notifications.</div>
+      <div>Couldn't get your notifications</div>
     </div>
   );
 };
