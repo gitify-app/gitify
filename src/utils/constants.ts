@@ -28,8 +28,7 @@ export const Constants = {
     },
     RATE_LIMITED: {
       title: 'Rate Limited',
-      description:
-        'You have made too many requests. Please wait a while before trying again.',
+      description: 'Please wait a while before trying again.',
       emojis: ['😮‍💨'],
     },
     DEFAULT_ERROR: {
