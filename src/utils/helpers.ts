@@ -78,11 +78,14 @@ export function formatSearchQueryString(
 }
 
 export async function getHtmlUrl(url: string, token: string): Promise<string> {
-  const response: Issue | IssueComments | PullRequest = (
-    await apiRequestAuth(url, 'GET', token)
-  ).data;
-
-  return response.html_url;
+  try {
+    const response: Issue | IssueComments | PullRequest = (
+      await apiRequestAuth(url, 'GET', token)
+    ).data;
+    return response.html_url;
+  } catch (err) {
+    console.error('Failed to get html url');
+  }
 }
 
 export function getCheckSuiteUrl(notification: Notification) {
@@ -278,6 +281,10 @@ export async function generateGitHubWebUrl(
         url = notification.repository.html_url;
         break;
     }
+  }
+
+  if (!url) {
+    url;
   }
 
   url = addNotificationReferrerIdToUrl(url, notification.id, accounts.user?.id);
