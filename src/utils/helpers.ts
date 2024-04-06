@@ -252,7 +252,7 @@ export async function generateGitHubWebUrl(
   notification: Notification,
   accounts: AuthState,
 ): Promise<string> {
-  let url: string;
+  let url = notification.repository.html_url;
   const token = getTokenForHost(notification.hostname, accounts);
 
   if (notification.subject.latest_comment_url) {
@@ -275,7 +275,6 @@ export async function generateGitHubWebUrl(
         url = getWorkflowRunUrl(notification);
         break;
       default:
-        url = notification.repository.html_url;
         break;
     }
   }
