@@ -53,6 +53,13 @@ export const NotificationRow: React.FC<IProps> = ({
     unsubscribeNotification(notification.id, hostname);
   };
 
+  const openUserProfile = (event: React.MouseEvent<HTMLElement>) => {
+    // Don't trigger onClick of parent element.
+    event.stopPropagation();
+
+    openExternalLink(notification.subject.user.html_url);
+  };
+
   const reason = formatReason(notification.reason);
   const NotificationIcon = getNotificationTypeIcon(notification.subject);
   const iconColor = getNotificationTypeIconColor(notification.subject);
@@ -80,11 +87,11 @@ export const NotificationRow: React.FC<IProps> = ({
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
 
-      <div className="flex-1 overflow-hidden">
+      <div className="flex-1 overflow-hidden" onClick={() => pressTitle()}>
         <div
           className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
           role="main"
-          onClick={() => pressTitle()}
+          // onClick={() => pressTitle()}
           title={notification.subject.title}
         >
           {notification.subject.title}
@@ -101,9 +108,7 @@ export const NotificationRow: React.FC<IProps> = ({
                 <span
                   className="cursor-pointer"
                   title="View User Profile"
-                  onClick={() =>
-                    openExternalLink(notification.subject.user.html_url)
-                  }
+                  onClick={openUserProfile}
                 >
                   {notification.subject.user.login}
                 </span>
