@@ -118,7 +118,7 @@
     "react-router-dom": "6.22.3",
     "react-transition-group": "4.4.5",
     "ts-loader": "9.5.1",
-    "typescript": "5.4.3"
+    "typescript": "5.4.4"
   },
   "devDependencies": {
     "@electron/notarize": "2.3.0",
