@@ -238,10 +238,14 @@ export const SettingsRoute: React.FC = () => {
 
           <button
             className={footerButtonClass}
-            title="Logout"
+            title={`Logout ${accounts.user.login}`}
+            role="Logout"
             onClick={logoutUser}
           >
-            <SignOutIcon size={18} aria-label="Logout" />
+            <SignOutIcon
+              size={18}
+              aria-label={`Logout ${accounts.user.login}`}
+            />
           </button>
 
           <button

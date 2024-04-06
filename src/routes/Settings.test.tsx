@@ -47,10 +47,10 @@ describe('routes/Settings.tsx', () => {
 
   it('should press the logout', async () => {
     const logoutMock = jest.fn();
-    let getByTitle;
+    let getByRole;
 
     await act(async () => {
-      const { getByTitle: getByLabelTextLocal } = render(
+      const { getByRole: getByRoleLocal } = render(
         <AppContext.Provider
           value={{
             settings: mockSettings,
@@ -64,10 +64,10 @@ describe('routes/Settings.tsx', () => {
         </AppContext.Provider>,
       );
 
-      getByTitle = getByLabelTextLocal;
+      getByRole = getByRoleLocal;
     });
 
-    fireEvent.click(getByTitle('Logout'));
+    fireEvent.click(getByRole('Logout'));
 
     expect(logoutMock).toHaveBeenCalledTimes(1);
 
