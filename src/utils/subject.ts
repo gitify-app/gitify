@@ -116,6 +116,7 @@ async function getGitifySubjectForDiscussion(
     discussionUser = {
       login: latestDiscussionComment.author.login,
       html_url: latestDiscussionComment.author.url,
+      avatar_url: latestDiscussionComment.author.avatar_url,
       type: latestDiscussionComment.bot?.login ? 'Bot' : 'User',
     };
   }
@@ -141,6 +142,7 @@ async function getGitifySubjectForIssue(
     user: {
       login: issueCommentUser?.login ?? issue.user.login,
       html_url: issueCommentUser?.html_url ?? issue.user.html_url,
+      avatar_url: issueCommentUser?.avatar_url ?? issue.user.avatar_url,
       type: issueCommentUser?.type ?? issue.user.type,
     },
   };
@@ -168,6 +170,7 @@ async function getGitifySubjectForPullRequest(
     user: {
       login: prCommentUser?.login ?? pr.user.login,
       html_url: prCommentUser?.html_url ?? pr.user.html_url,
+      avatar_url: prCommentUser?.avatar_url ?? pr.user.avatar_url,
       type: prCommentUser?.type ?? pr.user.type,
     },
   };
@@ -184,6 +187,7 @@ async function getGitifySubjectForRelease(
     user: {
       login: releaseCommentUser.login,
       html_url: releaseCommentUser.html_url,
+      avatar_url: releaseCommentUser.avatar_url,
       type: releaseCommentUser.type,
     },
   };

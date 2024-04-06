@@ -170,10 +170,12 @@ export async function fetchDiscussion(
           author {
             login
             url
+            avatar_url: avatarUrl
           }
           bot: author {
             ... on Bot {
               login
+              avatar_url: avatarUrl
             }
           }
         }
