@@ -1,5 +1,5 @@
-import type { FC, ReactNode } from 'react';
-import { Field } from 'react-final-form';
+import { FC, ReactNode } from "react";
+import { Field } from "react-final-form";
 
 export interface IProps {
   name: string;
@@ -13,9 +13,9 @@ export interface IProps {
 export const FieldInput: FC<IProps> = ({
   label,
   name,
-  placeholder = '',
+  placeholder = "",
   helpText,
-  type = 'text',
+  type = "text",
   required = false,
 }) => {
   return (

@@ -1,7 +1,7 @@
-const { app, dialog } = require('electron');
+const { app, dialog } = require("electron");
 
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 
 async function onFirstRunMaybe() {
   if (isFirstRun()) {
@@ -11,16 +11,16 @@ async function onFirstRunMaybe() {
 
 // Ask user if the app should be moved to the applications folder.
 async function promptMoveToApplicationsFolder() {
-  if (process.platform !== 'darwin') return;
+  if (process.platform !== "darwin") return;
 
   const isDevMode = !!process.defaultApp;
   if (isDevMode || app.isInApplicationsFolder()) return;
 
   const { response } = await dialog.showMessageBox({
-    type: 'question',
-    buttons: ['Move to Applications Folder', 'Do Not Move'],
+    type: "question",
+    buttons: ["Move to Applications Folder", "Do Not Move"],
     defaultId: 0,
-    message: 'Move to Applications Folder?',
+    message: "Move to Applications Folder?",
   });
 
   if (response === 0) {
@@ -29,8 +29,8 @@ async function promptMoveToApplicationsFolder() {
 }
 
 const getConfigPath = () => {
-  const userDataPath = app.getPath('userData');
-  return path.join(userDataPath, 'FirstRun', 'gitify-first-run');
+  const userDataPath = app.getPath("userData");
+  return path.join(userDataPath, "FirstRun", "gitify-first-run");
 };
 
 // Whether or not the app is being run for the first time.
@@ -47,7 +47,7 @@ function isFirstRun() {
       fs.mkdirSync(firstRunFolder);
     }
 
-    fs.writeFileSync(configPath, '');
+    fs.writeFileSync(configPath, "");
   } catch (error) {
     console.warn(`First run: Unable to write firstRun file`, error);
   }

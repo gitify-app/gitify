@@ -1,64 +1,64 @@
-import { ipcRenderer, shell } from 'electron';
+import { ipcRenderer, shell } from "electron";
 import {
   openExternalLink,
   restoreSetting,
   setAutoLaunch,
   updateTrayIcon,
-} from './comms';
+} from "./comms";
 
-describe('utils/comms.ts', () => {
+describe("utils/comms.ts", () => {
   beforeEach(() => {
-    jest.spyOn(ipcRenderer, 'send');
+    jest.spyOn(ipcRenderer, "send");
   });
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it('should send mark the icons as active', () => {
+  it("should send mark the icons as active", () => {
     const notificationsLength = 3;
     updateTrayIcon(notificationsLength);
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon', 'TrayActive');
+    expect(ipcRenderer.send).toHaveBeenCalledWith("update-icon", "TrayActive");
   });
 
-  it('should send mark the icons as idle', () => {
+  it("should send mark the icons as idle", () => {
     const notificationsLength = 0;
     updateTrayIcon(notificationsLength);
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
+    expect(ipcRenderer.send).toHaveBeenCalledWith("update-icon");
   });
 
-  it('should restore a setting', () => {
-    restoreSetting('foo', 'bar');
+  it("should restore a setting", () => {
+    restoreSetting("foo", "bar");
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('foo', 'bar');
+    expect(ipcRenderer.send).toHaveBeenCalledWith("foo", "bar");
   });
 
-  it('should open an external link', () => {
-    openExternalLink('http://www.gitify.io/');
+  it("should open an external link", () => {
+    openExternalLink("http://www.gitify.io/");
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(shell.openExternal).toHaveBeenCalledWith('http://www.gitify.io/');
+    expect(shell.openExternal).toHaveBeenCalledWith("http://www.gitify.io/");
   });
 
-  it('should ignore opening external local links file:///', () => {
-    openExternalLink('file:///Applications/SomeApp.app');
+  it("should ignore opening external local links file:///", () => {
+    openExternalLink("file:///Applications/SomeApp.app");
     expect(shell.openExternal).toHaveBeenCalledTimes(0);
   });
 
-  it('should setAutoLaunch (true)', () => {
+  it("should setAutoLaunch (true)", () => {
     setAutoLaunch(true);
 
-    expect(ipcRenderer.send).toHaveBeenCalledWith('set-login-item-settings', {
+    expect(ipcRenderer.send).toHaveBeenCalledWith("set-login-item-settings", {
       openAtLogin: true,
       openAsHidden: true,
     });
   });
 
-  it('should setAutoLaunch (false)', () => {
+  it("should setAutoLaunch (false)", () => {
     setAutoLaunch(false);
 
-    expect(ipcRenderer.send).toHaveBeenCalledWith('set-login-item-settings', {
+    expect(ipcRenderer.send).toHaveBeenCalledWith("set-login-item-settings", {
       openAsHidden: false,
       openAtLogin: false,
     });

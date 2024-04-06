@@ -1,4 +1,4 @@
-import type { AccountNotifications } from '../types';
+import type { AccountNotifications } from "../types";
 
 export const removeNotification = (
   id: string,

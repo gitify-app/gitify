@@ -4,13 +4,13 @@ interface IProps {
   className?: string;
 }
 
-const LIGHT_GRADIENT_START = '#CCCCCC';
-const LIGHT_GRADIENT_END = '#FFFFFF';
+const LIGHT_GRADIENT_START = "#CCCCCC";
+const LIGHT_GRADIENT_END = "#FFFFFF";
 
-const DARK_GRADIENT_START = '#22283B';
-const DARK_GRADIENT_END = '#555B6E';
+const DARK_GRADIENT_START = "#22283B";
+const DARK_GRADIENT_END = "#555B6E";
 
-export const Logo = ({ isDark, onClick, className = '', ...props }: IProps) => (
+export const Logo = ({ isDark, onClick, className = "", ...props }: IProps) => (
   <svg
     className={className}
     onClick={() => onClick && onClick()}
@@ -26,7 +26,7 @@ export const Logo = ({ isDark, onClick, className = '', ...props }: IProps) => (
         y1="80.0676288%"
         x2="-1.30249747%"
         y2="32.7108237%"
-        id={isDark ? 'linearGradient-dark' : 'linearGradient-light'}
+        id={isDark ? "linearGradient-dark" : "linearGradient-light"}
       >
         <stop
           stopColor={isDark ? DARK_GRADIENT_START : LIGHT_GRADIENT_START}
@@ -43,7 +43,7 @@ export const Logo = ({ isDark, onClick, className = '', ...props }: IProps) => (
         id="Logo"
         transform="translate(6.000000, 6.000000)"
         fill={`url(${
-          isDark ? '#linearGradient-dark' : '#linearGradient-light'
+          isDark ? "#linearGradient-dark" : "#linearGradient-light"
         })`}
         fillRule="nonzero"
       >

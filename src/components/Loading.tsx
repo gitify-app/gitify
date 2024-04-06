@@ -1,7 +1,7 @@
-import NProgress from 'nprogress';
-import { useContext, useEffect } from 'react';
+import NProgress from "nprogress";
+import { useContext, useEffect } from "react";
 
-import { AppContext } from '../context/App';
+import { AppContext } from "../context/App";
 
 export const Loading = () => {
   const { isFetching } = useContext(AppContext);

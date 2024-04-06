@@ -1,14 +1,14 @@
-import { ArrowLeftIcon } from '@primer/octicons-react';
+import { ArrowLeftIcon } from "@primer/octicons-react";
 
-import { type FC, useCallback, useContext, useState } from 'react';
-import { Form, type FormRenderProps } from 'react-final-form';
-import { useNavigate } from 'react-router-dom';
+import { FC, useCallback, useContext, useState } from "react";
+import { Form, type FormRenderProps } from "react-final-form";
+import { useNavigate } from "react-router-dom";
 
-import { FieldInput } from '../components/fields/FieldInput';
-import { AppContext } from '../context/App';
-import type { AuthTokenOptions } from '../types';
-import { openExternalLink } from '../utils/comms';
-import { Constants } from '../utils/constants';
+import { FieldInput } from "../components/fields/FieldInput";
+import { AppContext } from "../context/App";
+import type { AuthTokenOptions } from "../types";
+import { openExternalLink } from "../utils/comms";
+import { Constants } from "../utils/constants";
 
 interface IValues {
   token?: string;
@@ -23,19 +23,19 @@ interface IFormErrors {
 export const validate = (values: IValues): IFormErrors => {
   const errors: IFormErrors = {};
   if (!values.token) {
-    errors.token = 'Required';
+    errors.token = "Required";
   } else if (!/^[A-Z0-9_]{40}$/i.test(values.token)) {
-    errors.token = 'Invalid token.';
+    errors.token = "Invalid token.";
   }
 
   if (!values.hostname) {
-    errors.hostname = 'Required';
+    errors.hostname = "Required";
   } else if (
     !/^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
       values.hostname,
     )
   ) {
-    errors.hostname = 'Invalid hostname.';
+    errors.hostname = "Invalid hostname.";
   }
 
   return errors;
@@ -61,20 +61,20 @@ export const LoginWithToken: FC = () => {
           placeholder="The 40 characters token generated on GitHub"
           helpText={
             <>
-              To generate a token, go to GitHub,{' '}
+              To generate a token, go to GitHub,{" "}
               <a
                 className="underline hover:text-gray-500 dark:hover:text-gray-300  cursor-pointer"
                 onClick={() =>
                   openLink(
-                    'https://github.com/settings/tokens/new?scopes=notifications,read:user,repo&description=gitify_token',
+                    "https://github.com/settings/tokens/new?scopes=notifications,read:user,repo&description=gitify_token",
                   )
                 }
               >
                 personal access tokens
-              </a>{' '}
-              and create one with the {Constants.AUTH_SCOPE.length} scopes{' '}
+              </a>{" "}
+              and create one with the {Constants.AUTH_SCOPE.length} scopes{" "}
               <span className="underline font-extrabold text-yellow-500">
-                {Constants.AUTH_SCOPE.join(', ')}{' '}
+                {Constants.AUTH_SCOPE.join(", ")}{" "}
               </span>
               .
             </>
@@ -139,7 +139,7 @@ export const LoginWithToken: FC = () => {
       <div className="flex-1 px-8">
         <Form
           initialValues={{
-            token: '',
+            token: "",
             hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
           }}
           onSubmit={submit}

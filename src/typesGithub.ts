@@ -1,49 +1,49 @@
 export type Reason =
-  | 'approval_requested'
-  | 'assign'
-  | 'author'
-  | 'ci_activity'
-  | 'comment'
-  | 'invitation'
-  | 'manual'
-  | 'member_feature_requested'
-  | 'mention'
-  | 'review_requested'
-  | 'security_advisory_credit'
-  | 'security_alert'
-  | 'state_change'
-  | 'subscribed'
-  | 'team_mention';
+  | "approval_requested"
+  | "assign"
+  | "author"
+  | "ci_activity"
+  | "comment"
+  | "invitation"
+  | "manual"
+  | "member_feature_requested"
+  | "mention"
+  | "review_requested"
+  | "security_advisory_credit"
+  | "security_alert"
+  | "state_change"
+  | "subscribed"
+  | "team_mention";
 
 // Note: ANSWERED and OPEN are not an official discussion state type in the GitHub API
 export type DiscussionStateType =
-  | 'ANSWERED'
-  | 'DUPLICATE'
-  | 'OPEN'
-  | 'OUTDATED'
-  | 'REOPENED'
-  | 'RESOLVED';
+  | "ANSWERED"
+  | "DUPLICATE"
+  | "OPEN"
+  | "OUTDATED"
+  | "REOPENED"
+  | "RESOLVED";
 
 export type SubjectType =
-  | 'CheckSuite'
-  | 'Commit'
-  | 'Discussion'
-  | 'Issue'
-  | 'PullRequest'
-  | 'Release'
-  | 'RepositoryInvitation'
-  | 'RepositoryVulnerabilityAlert'
-  | 'WorkflowRun';
+  | "CheckSuite"
+  | "Commit"
+  | "Discussion"
+  | "Issue"
+  | "PullRequest"
+  | "Release"
+  | "RepositoryInvitation"
+  | "RepositoryVulnerabilityAlert"
+  | "WorkflowRun";
 
-export type IssueStateType = 'closed' | 'open';
+export type IssueStateType = "closed" | "open";
 
-export type IssueStateReasonType = 'completed' | 'not_planned' | 'reopened';
+export type IssueStateReasonType = "completed" | "not_planned" | "reopened";
 
 /**
  * Note: draft and merged are not official states in the GitHub API.
  * These are derived from the pull request's `merged` and `draft` properties.
  */
-export type PullRequestStateType = 'closed' | 'draft' | 'merged' | 'open';
+export type PullRequestStateType = "closed" | "draft" | "merged" | "open";
 
 export type StateType =
   | CheckSuiteStatus
@@ -52,22 +52,22 @@ export type StateType =
   | IssueStateReasonType
   | PullRequestStateType;
 
-export type ViewerSubscription = 'IGNORED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
+export type ViewerSubscription = "IGNORED" | "SUBSCRIBED" | "UNSUBSCRIBED";
 
 export type CheckSuiteStatus =
-  | 'action_required'
-  | 'cancelled'
-  | 'completed'
-  | 'failure'
-  | 'in_progress'
-  | 'pending'
-  | 'queued'
-  | 'requested'
-  | 'skipped'
-  | 'stale'
-  | 'success'
-  | 'timed_out'
-  | 'waiting';
+  | "action_required"
+  | "cancelled"
+  | "completed"
+  | "failure"
+  | "in_progress"
+  | "pending"
+  | "queued"
+  | "requested"
+  | "skipped"
+  | "stale"
+  | "success"
+  | "timed_out"
+  | "waiting";
 
 export interface Notification {
   id: string;

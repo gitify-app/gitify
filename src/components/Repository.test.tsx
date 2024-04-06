@@ -1,34 +1,34 @@
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render } from "@testing-library/react";
 
-import TestRenderer from 'react-test-renderer';
+import TestRenderer from "react-test-renderer";
 
-import { mockedGithubNotifications } from '../__mocks__/mockedData';
-import { AppContext } from '../context/App';
-import { RepositoryNotifications } from './Repository';
+import { mockedGithubNotifications } from "../__mocks__/mockedData";
+import { AppContext } from "../context/App";
+import { RepositoryNotifications } from "./Repository";
 
-const { shell } = require('electron');
+const { shell } = require("electron");
 
-jest.mock('./NotificationRow', () => ({
+jest.mock("./NotificationRow", () => ({
   NotificationRow: () => <div>NotificationRow</div>,
 }));
 
-describe('components/Repository.tsx', () => {
+describe("components/Repository.tsx", () => {
   const markRepoNotifications = jest.fn();
   const markRepoNotificationsDone = jest.fn();
 
   const props = {
-    hostname: 'github.com',
-    repoName: 'manosim/gitify',
+    hostname: "github.com",
+    repoName: "manosim/gitify",
     repoNotifications: mockedGithubNotifications,
   };
 
   beforeEach(() => {
     markRepoNotifications.mockReset();
 
-    jest.spyOn(shell, 'openExternal');
+    jest.spyOn(shell, "openExternal");
   });
 
-  it('should render itself & its children', () => {
+  it("should render itself & its children", () => {
     const tree = TestRenderer.create(
       <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
@@ -37,7 +37,7 @@ describe('components/Repository.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should open the browser when clicking on the repo name', () => {
+  it("should open the browser when clicking on the repo name", () => {
     const { getByText } = render(
       <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
@@ -48,42 +48,42 @@ describe('components/Repository.tsx', () => {
 
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(
-      'https://github.com/manosim/notifications-test',
+      "https://github.com/manosim/notifications-test",
     );
   });
 
-  it('should mark a repo as read', () => {
+  it("should mark a repo as read", () => {
     const { getByTitle } = render(
       <AppContext.Provider value={{ markRepoNotifications }}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByTitle('Mark Repository as Read'));
+    fireEvent.click(getByTitle("Mark Repository as Read"));
 
     expect(markRepoNotifications).toHaveBeenCalledWith(
-      'manosim/notifications-test',
-      'github.com',
+      "manosim/notifications-test",
+      "github.com",
     );
   });
 
-  it('should mark a repo as done', () => {
+  it("should mark a repo as done", () => {
     const { getByTitle } = render(
       <AppContext.Provider value={{ markRepoNotificationsDone }}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByTitle('Mark Repository as Done'));
+    fireEvent.click(getByTitle("Mark Repository as Done"));
 
     expect(markRepoNotificationsDone).toHaveBeenCalledWith(
-      'manosim/notifications-test',
-      'github.com',
+      "manosim/notifications-test",
+      "github.com",
     );
   });
 
-  it('should use default repository icon when avatar is not available', () => {
-    props.repoNotifications[0].repository.owner.avatar_url = '';
+  it("should use default repository icon when avatar is not available", () => {
+    props.repoNotifications[0].repository.owner.avatar_url = "";
 
     const tree = TestRenderer.create(
       <AppContext.Provider value={{}}>

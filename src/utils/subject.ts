@@ -12,26 +12,26 @@ import type {
   SubjectUser,
   User,
   WorkflowRunAttributes,
-} from '../typesGithub';
-import { apiRequestAuth } from './api-requests';
-import { fetchDiscussion, getLatestDiscussionComment } from './helpers';
+} from "../typesGithub";
+import { apiRequestAuth } from "./api-requests";
+import { fetchDiscussion, getLatestDiscussionComment } from "./helpers";
 
 export async function getGitifySubjectDetails(
   notification: Notification,
   token: string,
 ): Promise<GitifySubject> {
   switch (notification.subject.type) {
-    case 'CheckSuite':
+    case "CheckSuite":
       return getGitifySubjectForCheckSuite(notification);
-    case 'Discussion':
+    case "Discussion":
       return await getGitifySubjectForDiscussion(notification, token);
-    case 'Issue':
+    case "Issue":
       return await getGitifySubjectForIssue(notification, token);
-    case 'PullRequest':
+    case "PullRequest":
       return await getGitifySubjectForPullRequest(notification, token);
-    case 'Release':
+    case "Release":
       return await getGitifySubjectForRelease(notification, token);
-    case 'WorkflowRun':
+    case "WorkflowRun":
       return getGitifySubjectForWorkflowRun(notification);
     default:
       return null;
@@ -69,14 +69,14 @@ export function getCheckSuiteAttributes(
 
 function getCheckSuiteStatus(statusDisplayName: string): CheckSuiteStatus {
   switch (statusDisplayName) {
-    case 'cancelled':
-      return 'cancelled';
-    case 'failed':
-      return 'failure';
-    case 'skipped':
-      return 'skipped';
-    case 'succeeded':
-      return 'success';
+    case "cancelled":
+      return "cancelled";
+    case "failed":
+      return "failure";
+    case "skipped":
+      return "skipped";
+    case "succeeded":
+      return "success";
     default:
       return null;
   }
@@ -96,11 +96,11 @@ async function getGitifySubjectForDiscussion(
   token: string,
 ): Promise<GitifySubject> {
   const discussion = await fetchDiscussion(notification, token);
-  let discussionState: DiscussionStateType = 'OPEN';
+  let discussionState: DiscussionStateType = "OPEN";
 
   if (discussion) {
     if (discussion.isAnswered) {
-      discussionState = 'ANSWERED';
+      discussionState = "ANSWERED";
     }
 
     if (discussion.stateReason) {
@@ -111,19 +111,12 @@ async function getGitifySubjectForDiscussion(
   const latestDiscussionComment = getLatestDiscussionComment(
     discussion.comments.nodes,
   );
-
-  let discussionUser: SubjectUser = {
-    login: discussion.author.login,
-    html_url: discussion.author.url,
-    avatar_url: discussion.author.avatar_url,
-    type: discussion.author.type,
-  };
+  let discussionUser: SubjectUser = null;
   if (latestDiscussionComment) {
     discussionUser = {
       login: latestDiscussionComment.author.login,
       html_url: latestDiscussionComment.author.url,
-      avatar_url: latestDiscussionComment.author.avatar_url,
-      type: latestDiscussionComment.author.type,
+      type: latestDiscussionComment.bot?.login ? "Bot" : "User",
     };
   }
 
@@ -138,7 +131,7 @@ async function getGitifySubjectForIssue(
   token: string,
 ): Promise<GitifySubject> {
   const issue: Issue = (
-    await apiRequestAuth(notification.subject.url, 'GET', token)
+    await apiRequestAuth(notification.subject.url, "GET", token)
   ).data;
 
   const issueCommentUser = await getLatestCommentUser(notification, token);
@@ -148,7 +141,6 @@ async function getGitifySubjectForIssue(
     user: {
       login: issueCommentUser?.login ?? issue.user.login,
       html_url: issueCommentUser?.html_url ?? issue.user.html_url,
-      avatar_url: issueCommentUser?.avatar_url ?? issue.user.avatar_url,
       type: issueCommentUser?.type ?? issue.user.type,
     },
   };
@@ -159,14 +151,14 @@ async function getGitifySubjectForPullRequest(
   token: string,
 ): Promise<GitifySubject> {
   const pr: PullRequest = (
-    await apiRequestAuth(notification.subject.url, 'GET', token)
+    await apiRequestAuth(notification.subject.url, "GET", token)
   ).data;
 
   let prState: PullRequestStateType = pr.state;
   if (pr.merged) {
-    prState = 'merged';
+    prState = "merged";
   } else if (pr.draft) {
-    prState = 'draft';
+    prState = "draft";
   }
 
   const prCommentUser = await getLatestCommentUser(notification, token);
@@ -176,7 +168,6 @@ async function getGitifySubjectForPullRequest(
     user: {
       login: prCommentUser?.login ?? pr.user.login,
       html_url: prCommentUser?.html_url ?? pr.user.html_url,
-      avatar_url: prCommentUser?.avatar_url ?? pr.user.avatar_url,
       type: prCommentUser?.type ?? pr.user.type,
     },
   };
@@ -193,7 +184,6 @@ async function getGitifySubjectForRelease(
     user: {
       login: releaseCommentUser.login,
       html_url: releaseCommentUser.html_url,
-      avatar_url: releaseCommentUser.avatar_url,
       type: releaseCommentUser.type,
     },
   };
@@ -235,8 +225,8 @@ export function getWorkflowRunAttributes(
 
 function getWorkflowRunStatus(statusDisplayName: string): CheckSuiteStatus {
   switch (statusDisplayName) {
-    case 'review':
-      return 'waiting';
+    case "review":
+      return "waiting";
     default:
       return null;
   }
@@ -251,7 +241,7 @@ async function getLatestCommentUser(
   }
 
   const response: IssueComments | ReleaseComments = (
-    await apiRequestAuth(notification.subject.latest_comment_url, 'GET', token)
+    await apiRequestAuth(notification.subject.latest_comment_url, "GET", token)
   )?.data;
 
   return (

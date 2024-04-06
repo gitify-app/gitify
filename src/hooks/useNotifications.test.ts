@@ -1,33 +1,33 @@
-import { act, renderHook, waitFor } from '@testing-library/react';
-import axios from 'axios';
-import nock from 'nock';
+import { act, renderHook, waitFor } from "@testing-library/react";
+import axios from "axios";
+import nock from "nock";
 
-import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
-import { mockedNotificationUser, mockedUser } from '../__mocks__/mockedData';
-import type { AuthState } from '../types';
-import { useNotifications } from './useNotifications';
+import { mockAccounts, mockSettings } from "../__mocks__/mock-state";
+import { mockedUser } from "../__mocks__/mockedData";
+import type { AuthState } from "../types";
+import { useNotifications } from "./useNotifications";
 
-describe('hooks/useNotifications.ts', () => {
+describe("hooks/useNotifications.ts", () => {
   beforeEach(() => {
     // axios will default to using the XHR adapter which can't be intercepted
     // by nock. So, configure axios to use the node adapter.
-    axios.defaults.adapter = 'http';
+    axios.defaults.adapter = "http";
   });
 
-  describe('fetchNotifications', () => {
-    describe('github.com & enterprise', () => {
-      it('should fetch notifications with success - github.com & enterprise', async () => {
+  describe("fetchNotifications", () => {
+    describe("github.com & enterprise", () => {
+      it("should fetch notifications with success - github.com & enterprise", async () => {
         const notifications = [
-          { id: 1, title: 'This is a notification.' },
-          { id: 2, title: 'This is another one.' },
+          { id: 1, title: "This is a notification." },
+          { id: 2, title: "This is another one." },
         ];
 
-        nock('https://api.github.com')
-          .get('/notifications?participating=false')
+        nock("https://api.github.com")
+          .get("/notifications?participating=false")
           .reply(200, notifications);
 
-        nock('https://github.gitify.io/api/v3')
-          .get('/notifications?participating=false')
+        nock("https://github.gitify.io/api/v3")
+          .get("/notifications?participating=false")
           .reply(200, notifications);
 
         const { result } = renderHook(() => useNotifications(false));
@@ -43,20 +43,20 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         expect(result.current.notifications[0].hostname).toBe(
-          'github.gitify.io',
+          "github.gitify.io",
         );
-        expect(result.current.notifications[1].hostname).toBe('github.com');
+        expect(result.current.notifications[1].hostname).toBe("github.com");
       });
 
-      it('should fetch notifications with failure - github.com & enterprise', async () => {
-        const message = 'Oops! Something went wrong.';
+      it("should fetch notifications with failure - github.com & enterprise", async () => {
+        const message = "Oops! Something went wrong.";
 
-        nock('https://api.github.com/')
-          .get('/notifications?participating=false')
+        nock("https://api.github.com/")
+          .get("/notifications?participating=false")
           .reply(400, { message });
 
-        nock('https://github.gitify.io/api/v3/')
-          .get('/notifications?participating=false')
+        nock("https://github.gitify.io/api/v3/")
+          .get("/notifications?participating=false")
           .reply(400, { message });
 
         const { result } = renderHook(() => useNotifications(false));
@@ -75,20 +75,20 @@ describe('hooks/useNotifications.ts', () => {
       });
     });
 
-    describe('enterprise', () => {
-      it('should fetch notifications with success - enterprise only', async () => {
+    describe("enterprise", () => {
+      it("should fetch notifications with success - enterprise only", async () => {
         const accounts: AuthState = {
           ...mockAccounts,
           token: null,
         };
 
         const notifications = [
-          { id: 1, title: 'This is a notification.' },
-          { id: 2, title: 'This is another one.' },
+          { id: 1, title: "This is a notification." },
+          { id: 2, title: "This is another one." },
         ];
 
-        nock('https://github.gitify.io/api/v3/')
-          .get('/notifications?participating=false')
+        nock("https://github.gitify.io/api/v3/")
+          .get("/notifications?participating=false")
           .reply(200, notifications);
 
         const { result } = renderHook(() => useNotifications(false));
@@ -99,22 +99,22 @@ describe('hooks/useNotifications.ts', () => {
 
         await waitFor(() => {
           expect(result.current.notifications[0].hostname).toBe(
-            'github.gitify.io',
+            "github.gitify.io",
           );
         });
 
         expect(result.current.notifications[0].notifications.length).toBe(2);
       });
 
-      it('should fetch notifications with failure - enterprise only', async () => {
+      it("should fetch notifications with failure - enterprise only", async () => {
         const accounts: AuthState = {
           ...mockAccounts,
           token: null,
         };
 
-        nock('https://github.gitify.io/api/v3/')
-          .get('/notifications?participating=false')
-          .reply(400, { message: 'Oops! Something went wrong.' });
+        nock("https://github.gitify.io/api/v3/")
+          .get("/notifications?participating=false")
+          .reply(400, { message: "Oops! Something went wrong." });
 
         const { result } = renderHook(() => useNotifications(false));
 
@@ -128,8 +128,8 @@ describe('hooks/useNotifications.ts', () => {
       });
     });
 
-    describe('github.com', () => {
-      it('should fetch notifications with success - github.com only', async () => {
+    describe("github.com", () => {
+      it("should fetch notifications with success - github.com only", async () => {
         const accounts: AuthState = {
           ...mockAccounts,
           enterpriseAccounts: [],
@@ -137,12 +137,12 @@ describe('hooks/useNotifications.ts', () => {
         };
 
         const notifications = [
-          { id: 1, title: 'This is a notification.' },
-          { id: 2, title: 'This is another one.' },
+          { id: 1, title: "This is a notification." },
+          { id: 2, title: "This is another one." },
         ];
 
-        nock('https://api.github.com')
-          .get('/notifications?participating=false')
+        nock("https://api.github.com")
+          .get("/notifications?participating=false")
           .reply(200, notifications);
 
         const { result } = renderHook(() => useNotifications(false));
@@ -152,21 +152,21 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.notifications[0].hostname).toBe('github.com');
+          expect(result.current.notifications[0].hostname).toBe("github.com");
         });
 
         expect(result.current.notifications[0].notifications.length).toBe(2);
       });
 
-      it('should fetch notifications with failure - github.com only', async () => {
+      it("should fetch notifications with failure - github.com only", async () => {
         const accounts: AuthState = {
           ...mockAccounts,
           enterpriseAccounts: [],
         };
 
-        nock('https://api.github.com/')
-          .get('/notifications?participating=false')
-          .reply(400, { message: 'Oops! Something went wrong.' });
+        nock("https://api.github.com/")
+          .get("/notifications?participating=false")
+          .reply(400, { message: "Oops! Something went wrong." });
 
         const { result } = renderHook(() => useNotifications(false));
 
@@ -180,8 +180,8 @@ describe('hooks/useNotifications.ts', () => {
       });
     });
 
-    describe('with colors', () => {
-      it('should fetch notifications with success - with colors', async () => {
+    describe("with colors", () => {
+      it("should fetch notifications with success - with colors", async () => {
         const accounts: AuthState = {
           ...mockAccounts,
           enterpriseAccounts: [],
@@ -192,112 +192,103 @@ describe('hooks/useNotifications.ts', () => {
           {
             id: 1,
             subject: {
-              title: 'This is a check suite workflow.',
-              type: 'CheckSuite',
+              title: "This is a check suite workflow.",
+              type: "CheckSuite",
               url: null,
               latest_comment_url: null,
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: "some/repo",
             },
+            updated_at: "2024-02-26T00:00:00Z",
           },
           {
             id: 2,
             subject: {
-              title: 'This is a Discussion.',
-              type: 'Discussion',
+              title: "This is a Discussion.",
+              type: "Discussion",
               url: null,
               latest_comment_url: null,
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: "some/repo",
             },
-            updated_at: '2024-02-26T00:00:00Z',
+            updated_at: "2024-02-26T00:00:00Z",
           },
           {
             id: 3,
             subject: {
-              title: 'This is an Issue.',
-              type: 'Issue',
-              url: 'https://api.github.com/3',
-              latest_comment_url: 'https://api.github.com/3/comments',
+              title: "This is an Issue.",
+              type: "Issue",
+              url: "https://api.github.com/3",
+              latest_comment_url: "https://api.github.com/3/comments",
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: "some/repo",
             },
           },
           {
             id: 4,
             subject: {
-              title: 'This is a Pull Request.',
-              type: 'PullRequest',
-              url: 'https://api.github.com/4',
-              latest_comment_url: 'https://api.github.com/4/comments',
+              title: "This is a Pull Request.",
+              type: "PullRequest",
+              url: "https://api.github.com/4",
+              latest_comment_url: "https://api.github.com/4/comments",
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: "some/repo",
             },
           },
           {
             id: 5,
             subject: {
-              title: 'This is an invitation.',
-              type: 'RepositoryInvitation',
+              title: "This is an invitation.",
+              type: "RepositoryInvitation",
               url: null,
               latest_comment_url: null,
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: "some/repo",
             },
           },
           {
             id: 6,
             subject: {
-              title: 'This is a workflow run.',
-              type: 'WorkflowRun',
+              title: "This is a workflow run.",
+              type: "WorkflowRun",
               url: null,
               latest_comment_url: null,
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: "some/repo",
             },
           },
         ];
 
-        nock('https://api.github.com')
-          .get('/notifications?participating=false')
+        nock("https://api.github.com")
+          .get("/notifications?participating=false")
           .reply(200, notifications);
 
-        nock('https://api.github.com')
-          .post('/graphql')
+        nock("https://api.github.com")
+          .post("/graphql")
           .reply(200, {
             data: {
               search: {
                 nodes: [
                   {
-                    title: 'This is a Discussion.',
-                    viewerSubscription: 'SUBSCRIBED',
+                    title: "This is a Discussion.",
+                    viewerSubscription: "SUBSCRIBED",
                     stateReason: null,
                     isAnswered: true,
-                    url: 'https://github.com/manosim/notifications-test/discussions/612',
-                    author: {
-                      login: 'discussion-creator',
-                      url: 'https://github.com/discussion-creator',
-                      avatar_url:
-                        'https://avatars.githubusercontent.com/u/1?v=4',
-                      type: 'User',
-                    },
+                    url: "https://github.com/manosim/notifications-test/discussions/612",
                     comments: {
                       nodes: [
                         {
                           databaseId: 2297637,
-                          createdAt: '2022-03-04T20:39:44Z',
+                          createdAt: "2022-03-04T20:39:44Z",
                           author: {
-                            login: 'comment-user',
-                            url: 'https://github.com/comment-user',
-                            avatar_url:
-                              'https://avatars.githubusercontent.com/u/1?v=4',
-                            type: 'User',
+                            login: "comment-user",
+                            url: "https://github.com/comment-user",
                           },
                           replies: {
                             nodes: [],
@@ -311,22 +302,46 @@ describe('hooks/useNotifications.ts', () => {
             },
           });
 
-        nock('https://api.github.com').get('/3').reply(200, {
-          state: 'closed',
-          merged: true,
-          user: mockedNotificationUser,
-        });
-        nock('https://api.github.com').get('/3/comments').reply(200, {
-          user: mockedNotificationUser,
-        });
-        nock('https://api.github.com').get('/4').reply(200, {
-          state: 'closed',
-          merged: false,
-          user: mockedNotificationUser,
-        });
-        nock('https://api.github.com').get('/4/comments').reply(200, {
-          user: mockedNotificationUser,
-        });
+        nock("https://api.github.com")
+          .get("/3")
+          .reply(200, {
+            state: "closed",
+            merged: true,
+            user: {
+              login: "some-user",
+              html_url: "https://github.com/some-user",
+              type: "User",
+            },
+          });
+        nock("https://api.github.com")
+          .get("/3/comments")
+          .reply(200, {
+            user: {
+              login: "some-commenter",
+              html_url: "https://github.com/some-commenter",
+              type: "User",
+            },
+          });
+        nock("https://api.github.com")
+          .get("/4")
+          .reply(200, {
+            state: "closed",
+            merged: false,
+            user: {
+              login: "some-user",
+              html_url: "https://github.com/some-user",
+              type: "User",
+            },
+          });
+        nock("https://api.github.com")
+          .get("/4/comments")
+          .reply(200, {
+            user: {
+              login: "some-commenter",
+              html_url: "https://github.com/some-commenter",
+              type: "User",
+            },
+          });
 
         const { result } = renderHook(() => useNotifications(true));
 
@@ -340,15 +355,15 @@ describe('hooks/useNotifications.ts', () => {
         expect(result.current.isFetching).toBe(true);
 
         await waitFor(() => {
-          expect(result.current.notifications[0].hostname).toBe('github.com');
+          expect(result.current.notifications[0].hostname).toBe("github.com");
         });
 
         expect(result.current.notifications[0].notifications.length).toBe(6);
       });
     });
 
-    describe('showBots', () => {
-      it('should hide bot notifications when set to false', async () => {
+    describe("showBots", () => {
+      it("should hide bot notifications when set to false", async () => {
         const accounts: AuthState = {
           ...mockAccounts,
           enterpriseAccounts: [],
@@ -359,50 +374,50 @@ describe('hooks/useNotifications.ts', () => {
           {
             id: 1,
             subject: {
-              title: 'This is an Issue.',
-              type: 'Issue',
-              url: 'https://api.github.com/1',
+              title: "This is an Issue.",
+              type: "Issue",
+              url: "https://api.github.com/1",
               latest_comment_url: null,
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: "some/repo",
             },
           },
           {
             id: 2,
             subject: {
-              title: 'This is a Pull Request.',
-              type: 'PullRequest',
-              url: 'https://api.github.com/2',
+              title: "This is a Pull Request.",
+              type: "PullRequest",
+              url: "https://api.github.com/2",
               latest_comment_url: null,
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: "some/repo",
             },
           },
         ];
 
-        nock('https://api.github.com')
-          .get('/notifications?participating=false')
+        nock("https://api.github.com")
+          .get("/notifications?participating=false")
           .reply(200, notifications);
-        nock('https://api.github.com')
-          .get('/1')
+        nock("https://api.github.com")
+          .get("/1")
           .reply(200, {
-            state: 'closed',
+            state: "closed",
             merged: true,
             user: {
-              login: 'some-user',
-              type: 'User',
+              login: "some-user",
+              type: "User",
             },
           });
-        nock('https://api.github.com')
-          .get('/2')
+        nock("https://api.github.com")
+          .get("/2")
           .reply(200, {
-            state: 'closed',
+            state: "closed",
             merged: false,
             user: {
-              login: 'some-bot',
-              type: 'Bot',
+              login: "some-bot",
+              type: "Bot",
             },
           });
 
@@ -418,7 +433,7 @@ describe('hooks/useNotifications.ts', () => {
         expect(result.current.isFetching).toBe(true);
 
         await waitFor(() => {
-          expect(result.current.notifications[0].hostname).toBe('github.com');
+          expect(result.current.notifications[0].hostname).toBe("github.com");
         });
 
         expect(result.current.notifications[0].notifications.length).toBe(1);
@@ -426,19 +441,19 @@ describe('hooks/useNotifications.ts', () => {
     });
   });
 
-  describe('removeNotificationFromState', () => {
-    it('should remove a notification from state', async () => {
+  describe("removeNotificationFromState", () => {
+    it("should remove a notification from state", async () => {
       const notifications = [
-        { id: 1, title: 'This is a notification.' },
-        { id: 2, title: 'This is another one.' },
+        { id: 1, title: "This is a notification." },
+        { id: 2, title: "This is another one." },
       ];
 
-      nock('https://api.github.com')
-        .get('/notifications?participating=false')
+      nock("https://api.github.com")
+        .get("/notifications?participating=false")
         .reply(200, notifications);
 
-      nock('https://github.gitify.io/api/v3')
-        .get('/notifications?participating=false')
+      nock("https://github.gitify.io/api/v3")
+        .get("/notifications?participating=false")
         .reply(200, notifications);
 
       const { result } = renderHook(() => useNotifications(false));
@@ -462,15 +477,15 @@ describe('hooks/useNotifications.ts', () => {
     });
   });
 
-  describe('markNotificationRead', () => {
-    const id = 'notification-123';
+  describe("markNotificationRead", () => {
+    const id = "notification-123";
 
-    describe('github.com', () => {
+    describe("github.com", () => {
       const accounts = { ...mockAccounts, enterpriseAccounts: [] };
-      const hostname = 'github.com';
+      const hostname = "github.com";
 
-      it('should mark a notification as read with success - github.com', async () => {
-        nock('https://api.github.com/')
+      it("should mark a notification as read with success - github.com", async () => {
+        nock("https://api.github.com/")
           .patch(`/notifications/threads/${id}`)
           .reply(200);
 
@@ -487,8 +502,8 @@ describe('hooks/useNotifications.ts', () => {
         expect(result.current.notifications.length).toBe(0);
       });
 
-      it('should mark a notification as read with failure - github.com', async () => {
-        nock('https://api.github.com/')
+      it("should mark a notification as read with failure - github.com", async () => {
+        nock("https://api.github.com/")
           .patch(`/notifications/threads/${id}`)
           .reply(400);
 
@@ -506,12 +521,12 @@ describe('hooks/useNotifications.ts', () => {
       });
     });
 
-    describe('enterprise', () => {
+    describe("enterprise", () => {
       const accounts = { ...mockAccounts, token: null };
-      const hostname = 'github.gitify.io';
+      const hostname = "github.gitify.io";
 
-      it('should mark a notification as read with success - enterprise', async () => {
-        nock('https://github.gitify.io/')
+      it("should mark a notification as read with success - enterprise", async () => {
+        nock("https://github.gitify.io/")
           .patch(`/notifications/threads/${id}`)
           .reply(200);
 
@@ -528,8 +543,8 @@ describe('hooks/useNotifications.ts', () => {
         expect(result.current.notifications.length).toBe(0);
       });
 
-      it('should mark a notification as read with failure - enterprise', async () => {
-        nock('https://github.gitify.io/')
+      it("should mark a notification as read with failure - enterprise", async () => {
+        nock("https://github.gitify.io/")
           .patch(`/notifications/threads/${id}`)
           .reply(400);
 
@@ -548,15 +563,15 @@ describe('hooks/useNotifications.ts', () => {
     });
   });
 
-  describe('markNotificationDone', () => {
-    const id = 'notification-123';
+  describe("markNotificationDone", () => {
+    const id = "notification-123";
 
-    describe('github.com', () => {
+    describe("github.com", () => {
       const accounts = { ...mockAccounts, enterpriseAccounts: [] };
-      const hostname = 'github.com';
+      const hostname = "github.com";
 
-      it('should mark a notification as done with success - github.com', async () => {
-        nock('https://api.github.com/')
+      it("should mark a notification as done with success - github.com", async () => {
+        nock("https://api.github.com/")
           .delete(`/notifications/threads/${id}`)
           .reply(200);
 
@@ -573,8 +588,8 @@ describe('hooks/useNotifications.ts', () => {
         expect(result.current.notifications.length).toBe(0);
       });
 
-      it('should mark a notification as done with failure - github.com', async () => {
-        nock('https://api.github.com/')
+      it("should mark a notification as done with failure - github.com", async () => {
+        nock("https://api.github.com/")
           .delete(`/notifications/threads/${id}`)
           .reply(400);
 
@@ -592,12 +607,12 @@ describe('hooks/useNotifications.ts', () => {
       });
     });
 
-    describe('enterprise', () => {
+    describe("enterprise", () => {
       const accounts = { ...mockAccounts, token: null };
-      const hostname = 'github.gitify.io';
+      const hostname = "github.gitify.io";
 
-      it('should mark a notification as done with success - enterprise', async () => {
-        nock('https://github.gitify.io/')
+      it("should mark a notification as done with success - enterprise", async () => {
+        nock("https://github.gitify.io/")
           .delete(`/notifications/threads/${id}`)
           .reply(200);
 
@@ -614,8 +629,8 @@ describe('hooks/useNotifications.ts', () => {
         expect(result.current.notifications.length).toBe(0);
       });
 
-      it('should mark a notification as done with failure - enterprise', async () => {
-        nock('https://github.gitify.io/')
+      it("should mark a notification as done with failure - enterprise", async () => {
+        nock("https://github.gitify.io/")
           .delete(`/notifications/threads/${id}`)
           .reply(400);
 
@@ -634,21 +649,21 @@ describe('hooks/useNotifications.ts', () => {
     });
   });
 
-  describe('unsubscribeNotification', () => {
-    const id = 'notification-123';
+  describe("unsubscribeNotification", () => {
+    const id = "notification-123";
 
-    describe('github.com', () => {
+    describe("github.com", () => {
       const accounts = { ...mockAccounts, enterpriseAccounts: [] };
-      const hostname = 'github.com';
+      const hostname = "github.com";
 
-      it('should unsubscribe from a notification with success - github.com', async () => {
+      it("should unsubscribe from a notification with success - github.com", async () => {
         // The unsubscribe endpoint call.
-        nock('https://api.github.com/')
+        nock("https://api.github.com/")
           .put(`/notifications/threads/${id}/subscription`)
           .reply(200);
 
         // The mark read endpoint call.
-        nock('https://api.github.com/')
+        nock("https://api.github.com/")
           .patch(`/notifications/threads/${id}`)
           .reply(200);
 
@@ -665,14 +680,14 @@ describe('hooks/useNotifications.ts', () => {
         expect(result.current.notifications.length).toBe(0);
       });
 
-      it('should unsubscribe from a notification with failure - github.com', async () => {
+      it("should unsubscribe from a notification with failure - github.com", async () => {
         // The unsubscribe endpoint call.
-        nock('https://api.github.com/')
+        nock("https://api.github.com/")
           .put(`/notifications/threads/${id}/subscription`)
           .reply(400);
 
         // The mark read endpoint call.
-        nock('https://api.github.com/')
+        nock("https://api.github.com/")
           .patch(`/notifications/threads/${id}`)
           .reply(400);
 
@@ -690,18 +705,18 @@ describe('hooks/useNotifications.ts', () => {
       });
     });
 
-    describe('enterprise', () => {
+    describe("enterprise", () => {
       const accounts = { ...mockAccounts, token: null };
-      const hostname = 'github.gitify.io';
+      const hostname = "github.gitify.io";
 
-      it('should unsubscribe from a notification with success - enterprise', async () => {
+      it("should unsubscribe from a notification with success - enterprise", async () => {
         // The unsubscribe endpoint call.
-        nock('https://github.gitify.io/')
+        nock("https://github.gitify.io/")
           .put(`/notifications/threads/${id}/subscription`)
           .reply(200);
 
         // The mark read endpoint call.
-        nock('https://github.gitify.io/')
+        nock("https://github.gitify.io/")
           .patch(`/notifications/threads/${id}`)
           .reply(200);
 
@@ -718,14 +733,14 @@ describe('hooks/useNotifications.ts', () => {
         expect(result.current.notifications.length).toBe(0);
       });
 
-      it('should unsubscribe from a notification with failure - enterprise', async () => {
+      it("should unsubscribe from a notification with failure - enterprise", async () => {
         // The unsubscribe endpoint call.
-        nock('https://github.gitify.io/')
+        nock("https://github.gitify.io/")
           .put(`/notifications/threads/${id}/subscription`)
           .reply(400);
 
         // The mark read endpoint call.
-        nock('https://github.gitify.io/')
+        nock("https://github.gitify.io/")
           .patch(`/notifications/threads/${id}`)
           .reply(400);
 
@@ -744,15 +759,15 @@ describe('hooks/useNotifications.ts', () => {
     });
   });
 
-  describe('markRepoNotifications', () => {
-    const repoSlug = 'manosim/gitify';
+  describe("markRepoNotifications", () => {
+    const repoSlug = "manosim/gitify";
 
-    describe('github.com', () => {
+    describe("github.com", () => {
       const accounts = { ...mockAccounts, enterpriseAccounts: [] };
-      const hostname = 'github.com';
+      const hostname = "github.com";
 
       it("should mark a repository's notifications as read with success - github.com", async () => {
-        nock('https://api.github.com/')
+        nock("https://api.github.com/")
           .put(`/repos/${repoSlug}/notifications`)
           .reply(200);
 
@@ -770,7 +785,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       it("should mark a repository's notifications as read with failure - github.com", async () => {
-        nock('https://api.github.com/')
+        nock("https://api.github.com/")
           .put(`/repos/${repoSlug}/notifications`)
           .reply(400);
 
@@ -788,12 +803,12 @@ describe('hooks/useNotifications.ts', () => {
       });
     });
 
-    describe('enterprise', () => {
+    describe("enterprise", () => {
       const accounts = { ...mockAccounts, token: null };
-      const hostname = 'github.gitify.io';
+      const hostname = "github.gitify.io";
 
       it("should mark a repository's notifications as read with success - enterprise", async () => {
-        nock('https://github.gitify.io/')
+        nock("https://github.gitify.io/")
           .put(`/repos/${repoSlug}/notifications`)
           .reply(200);
 
@@ -811,7 +826,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       it("should mark a repository's notifications as read with failure - enterprise", async () => {
-        nock('https://github.gitify.io/')
+        nock("https://github.gitify.io/")
           .put(`/repos/${repoSlug}/notifications`)
           .reply(400);
 
@@ -830,16 +845,16 @@ describe('hooks/useNotifications.ts', () => {
     });
   });
 
-  describe('markRepoNotificationsDone', () => {
-    const repoSlug = 'manosim/gitify';
-    const id = 'notification-123';
+  describe("markRepoNotificationsDone", () => {
+    const repoSlug = "manosim/gitify";
+    const id = "notification-123";
 
-    describe('github.com', () => {
+    describe("github.com", () => {
       const accounts = { ...mockAccounts, enterpriseAccounts: [] };
-      const hostname = 'github.com';
+      const hostname = "github.com";
 
       it("should mark a repository's notifications as done with success - github.com", async () => {
-        nock('https://api.github.com/')
+        nock("https://api.github.com/")
           .delete(`/notifications/threads/${id}`)
           .reply(200);
 
@@ -861,7 +876,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       it("should mark a repository's notifications as done with failure - github.com", async () => {
-        nock('https://api.github.com/')
+        nock("https://api.github.com/")
           .delete(`/notifications/threads/${id}`)
           .reply(400);
 
@@ -883,12 +898,12 @@ describe('hooks/useNotifications.ts', () => {
       });
     });
 
-    describe('enterprise', () => {
+    describe("enterprise", () => {
       const accounts = { ...mockAccounts, token: null };
-      const hostname = 'github.gitify.io';
+      const hostname = "github.gitify.io";
 
       it("should mark a repository's notifications as done with success - enterprise", async () => {
-        nock('https://api.github.com/')
+        nock("https://api.github.com/")
           .delete(`/notifications/threads/${id}`)
           .reply(200);
 
@@ -910,7 +925,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       it("should mark a repository's notifications as done with failure - enterprise", async () => {
-        nock('https://api.github.com/')
+        nock("https://api.github.com/")
           .delete(`/notifications/threads/${id}`)
           .reply(400);
 

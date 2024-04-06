@@ -1,14 +1,14 @@
 import {
   mockedSingleAccountNotifications,
   mockedSingleNotification,
-} from '../__mocks__/mockedData';
-import { removeNotification } from './remove-notification';
+} from "../__mocks__/mockedData";
+import { removeNotification } from "./remove-notification";
 
-describe('utils/remove-notification.ts', () => {
+describe("utils/remove-notification.ts", () => {
   const notificationId = mockedSingleNotification.id;
   const hostname = mockedSingleAccountNotifications[0].hostname;
 
-  it('should remove a notification if it exists', () => {
+  it("should remove a notification if it exists", () => {
     expect(mockedSingleAccountNotifications[0].notifications.length).toBe(1);
 
     const result = removeNotification(

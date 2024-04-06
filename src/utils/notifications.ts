@@ -1,9 +1,9 @@
-import { ipcRenderer } from 'electron';
-import { Notification } from '../typesGithub';
-import { openInBrowser } from '../utils/helpers';
-import { updateTrayIcon } from './comms';
+import { ipcRenderer } from "electron";
+import { Notification } from "../typesGithub";
+import { openInBrowser } from "../utils/helpers";
+import { updateTrayIcon } from "./comms";
 
-import type { AccountNotifications, AuthState, SettingsState } from '../types';
+import type { AccountNotifications, AuthState, SettingsState } from "../types";
 
 export const setTrayIconColor = (notifications: AccountNotifications[]) => {
   const allNotificationsCount = getNotificationCount(notifications);
@@ -70,12 +70,12 @@ export const raiseNativeNotification = (
 
   if (notifications.length === 1) {
     const notification = notifications[0];
-    title = `${process.platform !== 'win32' ? 'Gitify - ' : ''}${
+    title = `${process.platform !== "win32" ? "Gitify - " : ""}${
       notification.repository.full_name
     }`;
     body = notification.subject.title;
   } else {
-    title = 'Gitify';
+    title = "Gitify";
     body = `You have ${notifications.length} notifications.`;
   }
 
@@ -86,10 +86,10 @@ export const raiseNativeNotification = (
 
   nativeNotification.onclick = () => {
     if (notifications.length === 1) {
-      ipcRenderer.send('hide-window');
+      ipcRenderer.send("hide-window");
       openInBrowser(notifications[0], accounts);
     } else {
-      ipcRenderer.send('reopen-window');
+      ipcRenderer.send("reopen-window");
     }
   };
 
@@ -97,7 +97,7 @@ export const raiseNativeNotification = (
 };
 
 export const raiseSoundNotification = () => {
-  const audio = new Audio('assets/sounds/clearly.mp3');
+  const audio = new Audio("assets/sounds/clearly.mp3");
   audio.volume = 0.2;
   audio.play();
 };
