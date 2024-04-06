@@ -10,8 +10,8 @@
     "make:linux": "electron-builder --linux",
     "make:macos": "electron-builder --mac --universal",
     "make:win": "electron-builder --win",
-    "prettier:check": "prettier --check '*.{html,js,json,md,ts,tsx}'",
-    "prettier:apply": "prettier --write '*.{html,js,json,md,ts,tsx}'",
+    "lint:check": "biome check *",
+    "lint": "biome check --apply *",
     "test": "jest",
     "start": "electron . --enable-logging",
     "prepare": "husky"
@@ -50,6 +50,10 @@
     {
       "name": "Adam Setch",
       "url": "https://github.com/setchy"
+    },
+    {
+      "name": "Afonso Ramos",
+      "url": "https://github.com/afonsojramos"
     }
   ],
   "license": "MIT",
@@ -76,9 +80,7 @@
       "gatekeeperAssess": false,
       "entitlements": "./entitlements/entitlements.mac.plist",
       "entitlementsInherit": "./entitlements/entitlements.mac.plist",
-      "publish": [
-        "github"
-      ],
+      "publish": ["github"],
       "extendInfo": {
         "NSBluetoothAlwaysUsageDescription": null,
         "NSBluetoothPeripheralUsageDescription": null,
@@ -98,12 +100,7 @@
       "oneClick": false
     },
     "linux": {
-      "target": [
-        "AppImage",
-        "deb",
-        "rpm",
-        "snap"
-      ],
+      "target": ["AppImage", "deb", "rpm", "snap"],
       "category": "Development",
       "maintainer": "Emmanouil Konstantinidis"
     },
@@ -127,6 +124,7 @@
     "typescript": "5.4.4"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.6.4",
     "@electron/notarize": "2.3.0",
     "@testing-library/react": "14.2.2",
     "@types/jest": "29.5.12",
@@ -146,7 +144,6 @@
     "nock": "13.5.4",
     "postcss": "8.4.38",
     "postcss-loader": "8.1.1",
-    "prettier": "3.2.5",
     "react-test-renderer": "18.2.0",
     "rimraf": "5.0.5",
     "style-loader": "3.3.4",
@@ -158,6 +155,6 @@
   },
   "packageManager": "pnpm@8.15.6",
   "lint-staged": {
-    "*.{html,js,json,md,ts,tsx}": "prettier --write"
+    "*.{html,js,json,md,ts,tsx}": "biome format --write"
   }
 }
