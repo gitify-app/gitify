@@ -146,10 +146,7 @@ async function getGitifySubjectForIssue(
       },
     };
   } catch (err) {
-    console.error(
-      'Issue subject retrieval failed',
-      JSON.stringify(err.response.data),
-    );
+    console.error('Issue subject retrieval failed');
   }
 }
 
@@ -180,10 +177,7 @@ async function getGitifySubjectForPullRequest(
       },
     };
   } catch (err) {
-    console.error(
-      'Pull Request subject retrieval failed',
-      JSON.stringify(err.response.data),
-    );
+    console.error('Pull Request subject retrieval failed');
   }
 }
 
@@ -267,9 +261,6 @@ async function getLatestCommentUser(
       (response as IssueComments)?.user ?? (response as ReleaseComments).author
     );
   } catch (err) {
-    console.error(
-      'Discussion latest comment retrieval failed',
-      JSON.stringify(err.response.data),
-    );
+    console.error('Discussion latest comment retrieval failed');
   }
 }
