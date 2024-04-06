@@ -47,10 +47,10 @@ describe('routes/Settings.tsx', () => {
 
   it('should press the logout', async () => {
     const logoutMock = jest.fn();
-    let getByTitle;
+    let getByRole;
 
     await act(async () => {
-      const { getByTitle: getByLabelTextLocal } = render(
+      const { getByRole: getByRoleLocal } = render(
         <AppContext.Provider
           value={{
             settings: mockSettings,
@@ -64,10 +64,10 @@ describe('routes/Settings.tsx', () => {
         </AppContext.Provider>,
       );
 
-      getByTitle = getByLabelTextLocal;
+      getByRole = getByRoleLocal;
     });
 
-    fireEvent.click(getByTitle('Logout'));
+    fireEvent.click(getByRole('Logout'));
 
     expect(logoutMock).toHaveBeenCalledTimes(1);
 
@@ -154,6 +154,34 @@ describe('routes/Settings.tsx', () => {
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('showBots', false);
+  });
+
+  it('should toggle the showAccountHostname checkbox', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
+
+    fireEvent.click(getByLabelText('Show account hostname'), {
+      target: { checked: true },
+    });
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('showAccountHostname', false);
   });
 
   it('should toggle the showNotificationsCountInTray checkbox', async () => {
