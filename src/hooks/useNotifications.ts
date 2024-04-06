@@ -170,12 +170,6 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                       .then((notifications) => {
                         return notifications.filter((notification) => {
                           if (
-                            notification.subject?.user.type === null ||
-                            notification.subject?.user.type === undefined
-                          ) {
-                            console.log(notification.subject.title);
-                          }
-                          if (
                             !settings.showBots &&
                             notification.subject?.user.type === 'Bot'
                           ) {
