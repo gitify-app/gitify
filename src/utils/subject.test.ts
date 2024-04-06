@@ -451,6 +451,8 @@ describe('utils/subject.ts', () => {
                     author: {
                       login: 'discussion-creator',
                       url: 'https://github.com/discussion-creator',
+                      avatar_url:
+                        'https://avatars.githubusercontent.com/u/583231?v=4',
                       type: 'User',
                     },
                     comments: {
@@ -465,6 +467,8 @@ describe('utils/subject.ts', () => {
                     author: {
                       login: 'discussion-creator',
                       url: 'https://github.com/discussion-creator',
+                      avatar_url:
+                        'https://avatars.githubusercontent.com/u/583231?v=4',
                       type: 'User',
                     },
                     comments: {
@@ -485,6 +489,7 @@ describe('utils/subject.ts', () => {
         expect(result.user).toEqual({
           login: 'discussion-creator',
           html_url: 'https://github.com/discussion-creator',
+          avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
           type: 'User',
         });
       });
