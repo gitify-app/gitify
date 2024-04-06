@@ -207,10 +207,10 @@ exports[`components/NotificationRow.tsx should render itself & its children with
   </div>
   <div
     className="flex-1 overflow-hidden"
+    onClick={[Function]}
   >
     <div
       className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
-      onClick={[Function]}
       role="main"
       title="I am a robot and this is a test!"
     >

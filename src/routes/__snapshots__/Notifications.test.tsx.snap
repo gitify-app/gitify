@@ -90,6 +90,12 @@ exports[`routes/Notifications.tsx should render itself & its children (show acco
             "title": "I am a robot and this is a test!",
             "type": "Issue",
             "url": "https://api.github.com/repos/manosim/notifications-test/issues/1",
+            "user": {
+              "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
+              "html_url": "https://github.com/manosim",
+              "login": "manosim",
+              "type": "User",
+            },
           },
           "subscription_url": "https://api.github.com/notifications/threads/138661096/subscription",
           "unread": true,

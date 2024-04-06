@@ -4,6 +4,7 @@ import {
   Repository,
   GraphQLSearch,
   Discussion,
+  DiscussionComments,
   User,
 } from '../typesGithub';
 import Constants from '../utils/constants';
@@ -370,6 +371,151 @@ export const mockedSingleAccountNotifications: AccountNotifications[] = [
   },
 ];
 
+const mockDiscussionComments: DiscussionComments = {
+  nodes: [
+    {
+      databaseId: 2215656,
+      createdAt: '2022-02-20T18:33:39Z',
+      author: {
+        login: 'comment-user',
+        url: 'https://github.com/comment-user',
+        avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+        type: 'User',
+      },
+      replies: {
+        nodes: [],
+      },
+    },
+    {
+      databaseId: 2217789,
+      createdAt: '2022-02-21T03:30:42Z',
+      author: {
+        login: 'comment-user',
+        url: 'https://github.com/comment-user',
+        avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+        type: 'User',
+      },
+      replies: {
+        nodes: [],
+      },
+    },
+    {
+      databaseId: 2223243,
+      createdAt: '2022-02-21T18:26:27Z',
+      author: {
+        login: 'comment-user',
+        url: 'https://github.com/comment-user',
+        avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+        type: 'User',
+      },
+      replies: {
+        nodes: [
+          {
+            databaseId: 2232922,
+            createdAt: '2022-02-23T00:57:58Z',
+            author: {
+              login: 'reply-user',
+              url: 'https://github.com/reply-user',
+              avatar_url:
+                'https://avatars.githubusercontent.com/u/123456789?v=4',
+              type: 'User',
+            },
+          },
+        ],
+      },
+    },
+    {
+      databaseId: 2232921,
+      createdAt: '2022-02-23T00:57:49Z',
+      author: {
+        login: 'comment-user',
+        url: 'https://github.com/comment-user',
+        avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+        type: 'User',
+      },
+      replies: {
+        nodes: [],
+      },
+    },
+    {
+      databaseId: 2258799,
+      createdAt: '2022-02-27T01:22:20Z',
+      author: {
+        login: 'comment-user',
+        url: 'https://github.com/comment-user',
+        avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+        type: 'User',
+      },
+      replies: {
+        nodes: [
+          {
+            databaseId: 2300902,
+            createdAt: '2022-03-05T17:43:52Z',
+            author: {
+              login: 'reply-user',
+              url: 'https://github.com/reply-user',
+              avatar_url:
+                'https://avatars.githubusercontent.com/u/123456789?v=4',
+              type: 'User',
+            },
+          },
+        ],
+      },
+    },
+    {
+      databaseId: 2297637,
+      createdAt: '2022-03-04T20:39:44Z',
+      author: {
+        login: 'comment-user',
+        url: 'https://github.com/comment-user',
+        avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+        type: 'User',
+      },
+
+      replies: {
+        nodes: [
+          {
+            databaseId: 2300893,
+            createdAt: '2022-03-05T17:41:04Z',
+            author: {
+              login: 'reply-user',
+              url: 'https://github.com/reply-user',
+              avatar_url:
+                'https://avatars.githubusercontent.com/u/123456789?v=4',
+              type: 'User',
+            },
+          },
+        ],
+      },
+    },
+    {
+      databaseId: 2299763,
+      createdAt: '2022-03-05T11:05:42Z',
+      author: {
+        login: 'comment-user',
+        url: 'https://github.com/comment-user',
+        avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+        type: 'User',
+      },
+      replies: {
+        nodes: [
+          {
+            databaseId: 2300895,
+            createdAt: '2022-03-05T17:41:44Z',
+            author: {
+              login: 'reply-user',
+              url: 'https://github.com/reply-user',
+              avatar_url:
+                'https://avatars.githubusercontent.com/u/123456789?v=4',
+              type: 'User',
+            },
+          },
+        ],
+      },
+    },
+  ],
+};
+
 export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
   data: {
     data: {
@@ -381,313 +527,29 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
             isAnswered: false,
             stateReason: null,
             url: 'https://github.com/manosim/notifications-test/discussions/612',
-            comments: {
-              nodes: [
-                {
-                  databaseId: 2215656,
-                  createdAt: '2022-02-20T18:33:39Z',
-                  author: {
-                    login: 'comment-user',
-                    url: 'https://github.com/comment-user',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/123456789?v=4',
-                  },
-                  bot: {},
-                  replies: {
-                    nodes: [],
-                  },
-                },
-                {
-                  databaseId: 2217789,
-                  createdAt: '2022-02-21T03:30:42Z',
-                  author: {
-                    login: 'comment-user',
-                    url: 'https://github.com/comment-user',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/123456789?v=4',
-                  },
-                  bot: {},
-                  replies: {
-                    nodes: [],
-                  },
-                },
-                {
-                  databaseId: 2223243,
-                  createdAt: '2022-02-21T18:26:27Z',
-                  author: {
-                    login: 'comment-user',
-                    url: 'https://github.com/comment-user',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/123456789?v=4',
-                  },
-                  bot: {},
-                  replies: {
-                    nodes: [
-                      {
-                        databaseId: 2232922,
-                        createdAt: '2022-02-23T00:57:58Z',
-                        author: {
-                          login: 'reply-user',
-                          url: 'https://github.com/reply-user',
-                          avatar_url:
-                            'https://avatars.githubusercontent.com/u/123456789?v=4',
-                        },
-                        bot: {},
-                      },
-                    ],
-                  },
-                },
-                {
-                  databaseId: 2232921,
-                  createdAt: '2022-02-23T00:57:49Z',
-                  author: {
-                    login: 'comment-user',
-                    url: 'https://github.com/comment-user',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/123456789?v=4',
-                  },
-                  bot: {},
-                  replies: {
-                    nodes: [],
-                  },
-                },
-                {
-                  databaseId: 2258799,
-                  createdAt: '2022-02-27T01:22:20Z',
-                  author: {
-                    login: 'comment-user',
-                    url: 'https://github.com/comment-user',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/123456789?v=4',
-                  },
-                  bot: {},
-                  replies: {
-                    nodes: [
-                      {
-                        databaseId: 2300902,
-                        createdAt: '2022-03-05T17:43:52Z',
-                        author: {
-                          login: 'reply-user',
-                          url: 'https://github.com/reply-user',
-                          avatar_url:
-                            'https://avatars.githubusercontent.com/u/123456789?v=4',
-                        },
-                        bot: {},
-                      },
-                    ],
-                  },
-                },
-                {
-                  databaseId: 2297637,
-                  createdAt: '2022-03-04T20:39:44Z',
-                  author: {
-                    login: 'comment-user',
-                    url: 'https://github.com/comment-user',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/123456789?v=4',
-                  },
-                  bot: {},
-                  replies: {
-                    nodes: [
-                      {
-                        databaseId: 2300893,
-                        createdAt: '2022-03-05T17:41:04Z',
-                        author: {
-                          login: 'reply-user',
-                          url: 'https://github.com/reply-user',
-                          avatar_url:
-                            'https://avatars.githubusercontent.com/u/123456789?v=4',
-                        },
-                        bot: {},
-                      },
-                    ],
-                  },
-                },
-                {
-                  databaseId: 2299763,
-                  createdAt: '2022-03-05T11:05:42Z',
-                  author: {
-                    login: 'comment-user',
-                    url: 'https://github.com/comment-user',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/123456789?v=4',
-                  },
-                  bot: {},
-                  replies: {
-                    nodes: [
-                      {
-                        databaseId: 2300895,
-                        createdAt: '2022-03-05T17:41:44Z',
-                        author: {
-                          login: 'reply-user',
-                          url: 'https://github.com/reply-user',
-                          avatar_url:
-                            'https://avatars.githubusercontent.com/u/123456789?v=4',
-                        },
-                        bot: {},
-                      },
-                    ],
-                  },
-                },
-              ],
+            author: {
+              login: 'discussion-creator',
+              url: 'https://github.com/discussion-creator',
+              avatar_url:
+                'https://avatars.githubusercontent.com/u/123456789?v=4',
+              type: 'User',
             },
+            comments: mockDiscussionComments,
           },
           {
             viewerSubscription: 'IGNORED',
             title: '1.16.0',
             isAnswered: false,
             stateReason: null,
-            url: 'https://github.com/manosim/notifications-test/discussions/612',
-            comments: {
-              nodes: [
-                {
-                  databaseId: 2215656,
-                  createdAt: '2022-02-20T18:33:39Z',
-                  author: {
-                    login: 'comment-user',
-                    url: 'https://github.com/comment-user',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/123456789?v=4',
-                  },
-                  bot: {},
-                  replies: {
-                    nodes: [],
-                  },
-                },
-                {
-                  databaseId: 2217789,
-                  createdAt: '2022-02-21T03:30:42Z',
-                  author: {
-                    login: 'comment-user',
-                    url: 'https://github.com/comment-user',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/123456789?v=4',
-                  },
-                  bot: {},
-                  replies: {
-                    nodes: [],
-                  },
-                },
-                {
-                  databaseId: 2223243,
-                  createdAt: '2022-02-21T18:26:27Z',
-                  author: {
-                    login: 'comment-user',
-                    url: 'https://github.com/comment-user',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/123456789?v=4',
-                  },
-                  bot: {},
-                  replies: {
-                    nodes: [
-                      {
-                        databaseId: 2232922,
-                        createdAt: '2022-02-23T00:57:58Z',
-                        author: {
-                          login: 'reply-user',
-                          url: 'https://github.com/reply-user',
-                          avatar_url:
-                            'https://avatars.githubusercontent.com/u/123456789?v=4',
-                        },
-                        bot: {},
-                      },
-                    ],
-                  },
-                },
-                {
-                  databaseId: 2232921,
-                  createdAt: '2022-02-23T00:57:49Z',
-                  author: {
-                    login: 'comment-user',
-                    url: 'https://github.com/comment-user',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/123456789?v=4',
-                  },
-                  bot: {},
-                  replies: {
-                    nodes: [],
-                  },
-                },
-                {
-                  databaseId: 2258799,
-                  createdAt: '2022-02-27T01:22:20Z',
-                  author: {
-                    login: 'comment-user',
-                    url: 'https://github.com/comment-user',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/123456789?v=4',
-                  },
-                  bot: {},
-                  replies: {
-                    nodes: [
-                      {
-                        databaseId: 2300902,
-                        createdAt: '2022-03-05T17:43:52Z',
-                        author: {
-                          login: 'reply-user',
-                          url: 'https://github.com/reply-user',
-                          avatar_url:
-                            'https://avatars.githubusercontent.com/u/123456789?v=4',
-                        },
-                        bot: {},
-                      },
-                    ],
-                  },
-                },
-                {
-                  databaseId: 2297637,
-                  createdAt: '2022-03-04T20:39:44Z',
-                  author: {
-                    login: 'comment-user',
-                    url: 'https://github.com/comment-user',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/123456789?v=4',
-                  },
-                  bot: {},
-                  replies: {
-                    nodes: [
-                      {
-                        databaseId: 2300893,
-                        createdAt: '2022-03-05T17:41:04Z',
-                        author: {
-                          login: 'reply-user',
-                          url: 'https://github.com/reply-user',
-                          avatar_url:
-                            'https://avatars.githubusercontent.com/u/123456789?v=4',
-                        },
-                        bot: {},
-                      },
-                    ],
-                  },
-                },
-                {
-                  databaseId: 2299763,
-                  createdAt: '2022-03-05T11:05:42Z',
-                  author: {
-                    login: 'comment-user',
-                    url: 'https://github.com/comment-user',
-                    avatar_url:
-                      'https://avatars.githubusercontent.com/u/123456789?v=4',
-                  },
-                  bot: {},
-                  replies: {
-                    nodes: [
-                      {
-                        databaseId: 2300895,
-                        createdAt: '2022-03-05T17:41:44Z',
-                        author: {
-                          login: 'reply-user',
-                          url: 'https://github.com/reply-user',
-                          avatar_url:
-                            'https://avatars.githubusercontent.com/u/123456789?v=4',
-                        },
-                        bot: {},
-                      },
-                    ],
-                  },
-                },
-              ],
+            url: 'https://github.com/manosim/notifications-test/discussions/123',
+            author: {
+              login: 'discussion-creator',
+              url: 'https://github.com/discussion-creator',
+              avatar_url:
+                'https://avatars.githubusercontent.com/u/123456789?v=4',
+              type: 'User',
             },
+            comments: mockDiscussionComments,
           },
         ],
       },

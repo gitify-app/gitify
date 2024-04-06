@@ -280,6 +280,13 @@ describe('hooks/useNotifications.ts', () => {
                     stateReason: null,
                     isAnswered: true,
                     url: 'https://github.com/manosim/notifications-test/discussions/612',
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      avatar_url:
+                        'https://avatars.githubusercontent.com/u/1?v=4',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [
                         {
@@ -290,6 +297,7 @@ describe('hooks/useNotifications.ts', () => {
                             url: 'https://github.com/comment-user',
                             avatar_url:
                               'https://avatars.githubusercontent.com/u/1?v=4',
+                            type: 'User',
                           },
                           replies: {
                             nodes: [],

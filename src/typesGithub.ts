@@ -146,6 +146,7 @@ export interface DiscussionAuthor {
   login: string;
   url: string;
   avatar_url: string;
+  type: string;
 }
 
 export interface Repository {
@@ -338,18 +339,18 @@ export interface Discussion {
   stateReason: DiscussionStateType;
   isAnswered: boolean;
   url: string;
-  comments: {
-    nodes: DiscussionComment[];
-  };
+  author: DiscussionAuthor;
+  comments: DiscussionComments;
+}
+
+export interface DiscussionComments {
+  nodes: DiscussionComment[];
 }
 
 export interface DiscussionComment {
   databaseId: string | number;
   createdAt: string;
   author: DiscussionAuthor;
-  bot: {
-    login?: string;
-  };
   replies?: {
     nodes: DiscussionComment[];
   };
