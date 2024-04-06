@@ -286,10 +286,6 @@ export async function generateGitHubWebUrl(
     }
   }
 
-  if (!url) {
-    url;
-  }
-
   url = addNotificationReferrerIdToUrl(url, notification.id, accounts.user?.id);
 
   return url;
