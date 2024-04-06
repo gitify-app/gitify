@@ -1,11 +1,12 @@
-import React, { useCallback, useContext } from 'react';
-import { ReadIcon, CheckIcon, MarkGithubIcon } from '@primer/octicons-react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
+import { CheckIcon, MarkGithubIcon, ReadIcon } from "@primer/octicons-react";
 
-import { AppContext } from '../context/App';
-import { Notification } from '../typesGithub';
-import { NotificationRow } from './NotificationRow';
-import { openExternalLink } from '../utils/comms';
+import { FC, useCallback, useContext } from "react";
+import { CSSTransition, TransitionGroup } from "react-transition-group";
+
+import { AppContext } from "../context/App";
+import type { Notification } from "../typesGithub";
+import { openExternalLink } from "../utils/comms";
+import { NotificationRow } from "./NotificationRow";
 
 interface IProps {
   hostname: string;
@@ -13,7 +14,7 @@ interface IProps {
   repoName: string;
 }
 
-export const RepositoryNotifications: React.FC<IProps> = ({
+export const RepositoryNotifications: FC<IProps> = ({
   repoName,
   repoNotifications,
   hostname,

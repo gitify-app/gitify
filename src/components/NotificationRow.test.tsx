@@ -1,42 +1,42 @@
-import * as React from 'react';
-import * as TestRenderer from 'react-test-renderer';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render } from "@testing-library/react";
 
-import * as helpers from '../utils/helpers';
+import * as TestRenderer from "react-test-renderer";
 
-import { AppContext } from '../context/App';
-import { mockedSingleNotification } from '../__mocks__/mockedData';
-import { NotificationRow } from './NotificationRow';
-import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
-import { shell } from 'electron';
+import * as helpers from "../utils/helpers";
 
-describe('components/NotificationRow.tsx', () => {
+import { shell } from "electron";
+import { mockAccounts, mockSettings } from "../__mocks__/mock-state";
+import { mockedSingleNotification } from "../__mocks__/mockedData";
+import { AppContext } from "../context/App";
+import { NotificationRow } from "./NotificationRow";
+
+describe("components/NotificationRow.tsx", () => {
   beforeEach(() => {
-    jest.spyOn(helpers, 'openInBrowser');
+    jest.spyOn(helpers, "openInBrowser");
   });
 
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  it('should render itself & its children', async () => {
-    (global as any).Date.now = jest.fn(() => new Date('2014'));
+  it("should render itself & its children", async () => {
+    (global as any).Date.now = jest.fn(() => new Date("2014"));
 
     const props = {
       notification: mockedSingleNotification,
-      hostname: 'github.com',
+      hostname: "github.com",
     };
 
     const tree = TestRenderer.create(<NotificationRow {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
-  it('should open a notification in the browser', () => {
+  it("should open a notification in the browser", () => {
     const removeNotificationFromState = jest.fn();
 
     const props = {
       notification: mockedSingleNotification,
-      hostname: 'github.com',
+      hostname: "github.com",
     };
 
     const { getByRole } = render(
@@ -51,17 +51,17 @@ describe('components/NotificationRow.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByRole('main'));
+    fireEvent.click(getByRole("main"));
     expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
     expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
   });
 
-  it('should open a notification in browser & mark it as done', () => {
+  it("should open a notification in browser & mark it as done", () => {
     const markNotificationDone = jest.fn();
 
     const props = {
       notification: mockedSingleNotification,
-      hostname: 'github.com',
+      hostname: "github.com",
     };
 
     const { getByRole } = render(
@@ -76,17 +76,17 @@ describe('components/NotificationRow.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByRole('main'));
+    fireEvent.click(getByRole("main"));
     expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
     expect(markNotificationDone).toHaveBeenCalledTimes(1);
   });
 
-  it('should mark a notification as read', () => {
+  it("should mark a notification as read", () => {
     const markNotificationRead = jest.fn();
 
     const props = {
       notification: mockedSingleNotification,
-      hostname: 'github.com',
+      hostname: "github.com",
     };
 
     const { getByTitle } = render(
@@ -102,16 +102,16 @@ describe('components/NotificationRow.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByTitle('Mark as Read'));
+    fireEvent.click(getByTitle("Mark as Read"));
     expect(markNotificationRead).toHaveBeenCalledTimes(1);
   });
 
-  it('should mark a notification as done', () => {
+  it("should mark a notification as done", () => {
     const markNotificationDone = jest.fn();
 
     const props = {
       notification: mockedSingleNotification,
-      hostname: 'github.com',
+      hostname: "github.com",
     };
 
     const { getByTitle } = render(
@@ -127,16 +127,16 @@ describe('components/NotificationRow.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByTitle('Mark as Done'));
+    fireEvent.click(getByTitle("Mark as Done"));
     expect(markNotificationDone).toHaveBeenCalledTimes(1);
   });
 
-  it('should unsubscribe from a notification thread', () => {
+  it("should unsubscribe from a notification thread", () => {
     const unsubscribeNotification = jest.fn();
 
     const props = {
       notification: mockedSingleNotification,
-      hostname: 'github.com',
+      hostname: "github.com",
     };
 
     const { getByTitle } = render(
@@ -146,24 +146,24 @@ describe('components/NotificationRow.tsx', () => {
         </AppContext.Provider>
       </AppContext.Provider>,
     );
-    fireEvent.click(getByTitle('Unsubscribe'));
+    fireEvent.click(getByTitle("Unsubscribe"));
     expect(unsubscribeNotification).toHaveBeenCalledTimes(1);
   });
 
-  it('should open notification user profile', () => {
+  it("should open notification user profile", () => {
     const props = {
       notification: {
         ...mockedSingleNotification,
         subject: {
           ...mockedSingleNotification.subject,
           user: {
-            login: 'some-user',
-            html_url: 'https://github.com/some-user',
-            type: 'User',
+            login: "some-user",
+            html_url: "https://github.com/some-user",
+            type: "User",
           },
         },
       },
-      hostname: 'github.com',
+      hostname: "github.com",
     };
 
     const { getByTitle } = render(
@@ -177,7 +177,7 @@ describe('components/NotificationRow.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByTitle('View User Profile'));
+    fireEvent.click(getByTitle("View User Profile"));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(
       props.notification.subject.user.html_url,

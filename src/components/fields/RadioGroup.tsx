@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { RadioGroupItem } from '../../types';
+import { ChangeEvent } from "react";
+import type { RadioGroupItem } from "../../types";
 
 export const FieldRadioGroup = ({
   label,
@@ -13,7 +13,7 @@ export const FieldRadioGroup = ({
   label: string;
   placeholder?: string;
   options: RadioGroupItem[];
-  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void;
   value: string;
 }) => {
   return (

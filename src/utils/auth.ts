@@ -1,15 +1,15 @@
-import { BrowserWindow } from '@electron/remote';
+import { BrowserWindow } from "@electron/remote";
 
-import { generateGitHubAPIUrl, isEnterpriseHost } from './helpers';
-import { apiRequest, apiRequestAuth } from '../utils/api-requests';
-import {
+import type {
   AuthResponse,
   AuthState,
   AuthTokenResponse,
   GitifyUser,
-} from '../types';
-import { Constants } from '../utils/constants';
-import { UserDetails } from '../typesGithub';
+} from "../types";
+import type { UserDetails } from "../typesGithub";
+import { apiRequest, apiRequestAuth } from "../utils/api-requests";
+import { Constants } from "../utils/constants";
+import { generateGitHubAPIUrl, isEnterpriseHost } from "./helpers";
 
 export const authGitHub = (
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
@@ -44,18 +44,18 @@ export const authGitHub = (
       } else if (error) {
         reject(
           "Oops! Something went wrong and we couldn't " +
-            'log you in using Github. Please try again.',
+            "log you in using Github. Please try again.",
         );
       }
     };
 
     // If "Done" button is pressed, hide "Loading"
-    authWindow.on('close', () => {
+    authWindow.on("close", () => {
       authWindow.destroy();
     });
 
     authWindow.webContents.on(
-      'did-fail-load',
+      "did-fail-load",
       (event, errorCode, errorDescription, validatedURL) => {
         if (validatedURL.includes(authOptions.hostname)) {
           authWindow.destroy();
@@ -66,12 +66,12 @@ export const authGitHub = (
       },
     );
 
-    authWindow.webContents.on('will-redirect', (event, url) => {
+    authWindow.webContents.on("will-redirect", (event, url) => {
       event.preventDefault();
       handleCallback(url);
     });
 
-    authWindow.webContents.on('will-navigate', (event, url) => {
+    authWindow.webContents.on("will-navigate", (event, url) => {
       event.preventDefault();
       handleCallback(url);
     });
@@ -83,7 +83,7 @@ export const getUserData = async (
   hostname: string,
 ): Promise<GitifyUser> => {
   const response: UserDetails = (
-    await apiRequestAuth(`${generateGitHubAPIUrl(hostname)}user`, 'GET', token)
+    await apiRequestAuth(`${generateGitHubAPIUrl(hostname)}user`, "GET", token)
   ).data;
 
   return {
@@ -104,7 +104,7 @@ export const getToken = async (
     code: authCode,
   };
 
-  const response = await apiRequest(url, 'POST', data);
+  const response = await apiRequest(url, "POST", data);
   return {
     hostname: authOptions.hostname,
     token: response.data.access_token,

@@ -1,4 +1,4 @@
-import { Notification } from './typesGithub';
+import type { Notification } from "./typesGithub";
 
 export interface AuthState {
   token?: string;
@@ -29,9 +29,9 @@ interface SystemSettingsState {
 }
 
 export enum Theme {
-  SYSTEM = 'SYSTEM',
-  LIGHT = 'LIGHT',
-  DARK = 'DARK',
+  SYSTEM = "SYSTEM",
+  LIGHT = "LIGHT",
+  DARK = "DARK",
 }
 
 export type RadioGroupItem = {

@@ -1,11 +1,10 @@
-import { createRoot } from 'react-dom/client';
-import * as React from 'react';
+import { createRoot } from "react-dom/client";
 
-import 'tailwindcss/tailwind.css';
-import 'nprogress/nprogress.css';
+import "nprogress/nprogress.css";
+import "tailwindcss/tailwind.css";
 
-import { App } from './app';
+import { App } from "./app";
 
-const container = document.getElementById('gitify');
+const container = document.getElementById("gitify");
 const root = createRoot(container);
 root.render(<App />);

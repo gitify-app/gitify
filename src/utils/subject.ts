@@ -1,5 +1,4 @@
-import { fetchDiscussion, getLatestDiscussionComment } from './helpers';
-import {
+import type {
   CheckSuiteAttributes,
   CheckSuiteStatus,
   DiscussionStateType,
@@ -13,25 +12,26 @@ import {
   SubjectUser,
   User,
   WorkflowRunAttributes,
-} from '../typesGithub';
-import { apiRequestAuth } from './api-requests';
+} from "../typesGithub";
+import { apiRequestAuth } from "./api-requests";
+import { fetchDiscussion, getLatestDiscussionComment } from "./helpers";
 
 export async function getGitifySubjectDetails(
   notification: Notification,
   token: string,
 ): Promise<GitifySubject> {
   switch (notification.subject.type) {
-    case 'CheckSuite':
+    case "CheckSuite":
       return getGitifySubjectForCheckSuite(notification);
-    case 'Discussion':
+    case "Discussion":
       return await getGitifySubjectForDiscussion(notification, token);
-    case 'Issue':
+    case "Issue":
       return await getGitifySubjectForIssue(notification, token);
-    case 'PullRequest':
+    case "PullRequest":
       return await getGitifySubjectForPullRequest(notification, token);
-    case 'Release':
+    case "Release":
       return await getGitifySubjectForRelease(notification, token);
-    case 'WorkflowRun':
+    case "WorkflowRun":
       return getGitifySubjectForWorkflowRun(notification);
     default:
       return null;
@@ -56,7 +56,7 @@ export function getCheckSuiteAttributes(
     return {
       workflowName: groups.workflowName,
       attemptNumber: groups.attemptNumber
-        ? parseInt(groups.attemptNumber)
+        ? Number.parseInt(groups.attemptNumber)
         : null,
       status: getCheckSuiteStatus(groups.statusDisplayName),
       statusDisplayName: groups.statusDisplayName,
@@ -69,14 +69,14 @@ export function getCheckSuiteAttributes(
 
 function getCheckSuiteStatus(statusDisplayName: string): CheckSuiteStatus {
   switch (statusDisplayName) {
-    case 'cancelled':
-      return 'cancelled';
-    case 'failed':
-      return 'failure';
-    case 'skipped':
-      return 'skipped';
-    case 'succeeded':
-      return 'success';
+    case "cancelled":
+      return "cancelled";
+    case "failed":
+      return "failure";
+    case "skipped":
+      return "skipped";
+    case "succeeded":
+      return "success";
     default:
       return null;
   }
@@ -96,11 +96,11 @@ async function getGitifySubjectForDiscussion(
   token: string,
 ): Promise<GitifySubject> {
   const discussion = await fetchDiscussion(notification, token);
-  let discussionState: DiscussionStateType = 'OPEN';
+  let discussionState: DiscussionStateType = "OPEN";
 
   if (discussion) {
     if (discussion.isAnswered) {
-      discussionState = 'ANSWERED';
+      discussionState = "ANSWERED";
     }
 
     if (discussion.stateReason) {
@@ -116,7 +116,7 @@ async function getGitifySubjectForDiscussion(
     discussionUser = {
       login: latestDiscussionComment.author.login,
       html_url: latestDiscussionComment.author.url,
-      type: latestDiscussionComment.bot?.login ? 'Bot' : 'User',
+      type: latestDiscussionComment.bot?.login ? "Bot" : "User",
     };
   }
 
@@ -131,7 +131,7 @@ async function getGitifySubjectForIssue(
   token: string,
 ): Promise<GitifySubject> {
   const issue: Issue = (
-    await apiRequestAuth(notification.subject.url, 'GET', token)
+    await apiRequestAuth(notification.subject.url, "GET", token)
   ).data;
 
   const issueCommentUser = await getLatestCommentUser(notification, token);
@@ -151,14 +151,14 @@ async function getGitifySubjectForPullRequest(
   token: string,
 ): Promise<GitifySubject> {
   const pr: PullRequest = (
-    await apiRequestAuth(notification.subject.url, 'GET', token)
+    await apiRequestAuth(notification.subject.url, "GET", token)
   ).data;
 
   let prState: PullRequestStateType = pr.state;
   if (pr.merged) {
-    prState = 'merged';
+    prState = "merged";
   } else if (pr.draft) {
-    prState = 'draft';
+    prState = "draft";
   }
 
   const prCommentUser = await getLatestCommentUser(notification, token);
@@ -225,8 +225,8 @@ export function getWorkflowRunAttributes(
 
 function getWorkflowRunStatus(statusDisplayName: string): CheckSuiteStatus {
   switch (statusDisplayName) {
-    case 'review':
-      return 'waiting';
+    case "review":
+      return "waiting";
     default:
       return null;
   }
@@ -241,7 +241,7 @@ async function getLatestCommentUser(
   }
 
   const response: IssueComments | ReleaseComments = (
-    await apiRequestAuth(notification.subject.latest_comment_url, 'GET', token)
+    await apiRequestAuth(notification.subject.latest_comment_url, "GET", token)
   )?.data;
 
   return (

@@ -1,9 +1,8 @@
-import * as React from 'react';
-
-import { Constants } from '../utils/constants';
+import { useMemo } from "react";
+import { Constants } from "../utils/constants";
 
 export const AllRead = () => {
-  const emoji = React.useMemo(
+  const emoji = useMemo(
     () =>
       Constants.ALLREAD_EMOJIS[
         Math.floor(Math.random() * Constants.ALLREAD_EMOJIS.length)

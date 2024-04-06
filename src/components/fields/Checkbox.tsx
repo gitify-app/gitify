@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 interface IFieldCheckbox {
   name: string;
   label: string;
@@ -28,7 +26,7 @@ export const FieldCheckbox = (props: IFieldCheckbox) => {
           htmlFor={props.name}
           className="font-medium text-gray-700 dark:text-gray-200"
           style={
-            props.disabled ? { textDecoration: 'line-through' } : undefined
+            props.disabled ? { textDecoration: "line-through" } : undefined
           }
         >
           {props.label}

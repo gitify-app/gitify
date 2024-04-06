@@ -1,29 +1,30 @@
-import React, {
+import {
+  ReactNode,
   createContext,
   useCallback,
   useEffect,
   useMemo,
   useState,
-} from 'react';
+} from "react";
 
-import { useInterval } from '../hooks/useInterval';
-import { useNotifications } from '../hooks/useNotifications';
+import { useInterval } from "../hooks/useInterval";
+import { useNotifications } from "../hooks/useNotifications";
 import {
-  AccountNotifications,
+  type AccountNotifications,
+  type AuthOptions,
+  type AuthState,
+  type AuthTokenOptions,
+  type SettingsState,
   Theme,
-  AuthOptions,
-  AuthState,
-  AuthTokenOptions,
-  SettingsState,
-} from '../types';
-import { apiRequestAuth } from '../utils/api-requests';
-import { setTheme } from '../utils/theme';
-import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
-import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
-import Constants from '../utils/constants';
-import { generateGitHubAPIUrl } from '../utils/helpers';
-import { clearState, loadState, saveState } from '../utils/storage';
-import { getNotificationCount } from '../utils/notifications';
+} from "../types";
+import { apiRequestAuth } from "../utils/api-requests";
+import { addAccount, authGitHub, getToken, getUserData } from "../utils/auth";
+import { setAutoLaunch, updateTrayTitle } from "../utils/comms";
+import Constants from "../utils/constants";
+import { generateGitHubAPIUrl } from "../utils/helpers";
+import { getNotificationCount } from "../utils/notifications";
+import { clearState, loadState, saveState } from "../utils/storage";
+import { setTheme } from "../utils/theme";
 
 const defaultAccounts: AuthState = {
   token: null,
@@ -68,7 +69,7 @@ interface AppContextState {
 
 export const AppContext = createContext<Partial<AppContextState>>({});
 
-export const AppProvider = ({ children }: { children: React.ReactNode }) => {
+export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [accounts, setAccounts] = useState<AuthState>(defaultAccounts);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
   const {
@@ -116,7 +117,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
 
   const updateSetting = useCallback(
     (name: keyof SettingsState, value: boolean | Theme) => {
-      if (name === 'openAtStartup') {
+      if (name === "openAtStartup") {
         setAutoLaunch(value as boolean);
       }
 
@@ -156,7 +157,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     async ({ token, hostname }: AuthTokenOptions) => {
       await apiRequestAuth(
         `${generateGitHubAPIUrl(hostname)}notifications`,
-        'HEAD',
+        "HEAD",
         token,
       );
       const user = await getUserData(token, hostname);

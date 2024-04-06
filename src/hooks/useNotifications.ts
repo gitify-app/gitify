@@ -1,23 +1,23 @@
-import axios from 'axios';
-import { useCallback, useState } from 'react';
+import axios from "axios";
+import { useCallback, useState } from "react";
 
-import { AccountNotifications, AuthState, SettingsState } from '../types';
-import { Notification } from '../typesGithub';
-import { apiRequestAuth } from '../utils/api-requests';
+import type { AccountNotifications, AuthState, SettingsState } from "../types";
+import type { Notification } from "../typesGithub";
+import { apiRequestAuth } from "../utils/api-requests";
+import Constants from "../utils/constants";
 import {
-  getEnterpriseAccountToken,
   generateGitHubAPIUrl,
-  isEnterpriseHost,
+  getEnterpriseAccountToken,
   getTokenForHost,
-} from '../utils/helpers';
-import { removeNotification } from '../utils/remove-notification';
+  isEnterpriseHost,
+} from "../utils/helpers";
 import {
-  triggerNativeNotifications,
   setTrayIconColor,
-} from '../utils/notifications';
-import Constants from '../utils/constants';
-import { removeNotifications } from '../utils/remove-notifications';
-import { getGitifySubjectDetails } from '../utils/subject';
+  triggerNativeNotifications,
+} from "../utils/notifications";
+import { removeNotification } from "../utils/remove-notification";
+import { removeNotifications } from "../utils/remove-notifications";
+import { getGitifySubjectDetails } from "../utils/subject";
 
 interface NotificationsState {
   notifications: AccountNotifications[];
@@ -74,7 +74,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
         const url = `${generateGitHubAPIUrl(
           Constants.DEFAULT_AUTH_OPTIONS.hostname,
         )}${endpointSuffix}`;
-        return apiRequestAuth(url, 'GET', accounts.token);
+        return apiRequestAuth(url, "GET", accounts.token);
       }
 
       function getEnterpriseNotifications() {
@@ -82,7 +82,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           const url = `${generateGitHubAPIUrl(
             account.hostname,
           )}${endpointSuffix}`;
-          return apiRequestAuth(url, 'GET', account.token);
+          return apiRequestAuth(url, "GET", account.token);
         });
       }
 
@@ -171,7 +171,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                         return notifications.filter((notification) => {
                           if (
                             !settings.showBots &&
-                            notification.subject?.user.type === 'Bot'
+                            notification.subject?.user.type === "Bot"
                           ) {
                             return false;
                           }
@@ -214,7 +214,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
       try {
         await apiRequestAuth(
           `${generateGitHubAPIUrl(hostname)}notifications/threads/${id}`,
-          'PATCH',
+          "PATCH",
           token,
           {},
         );
@@ -247,7 +247,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
       try {
         await apiRequestAuth(
           `${generateGitHubAPIUrl(hostname)}notifications/threads/${id}`,
-          'DELETE',
+          "DELETE",
           token,
           {},
         );
@@ -282,7 +282,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           `${generateGitHubAPIUrl(
             hostname,
           )}notifications/threads/${id}/subscription`,
-          'PUT',
+          "PUT",
           token,
           { ignored: true },
         );
@@ -306,7 +306,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
       try {
         await apiRequestAuth(
           `${generateGitHubAPIUrl(hostname)}repos/${repoSlug}/notifications`,
-          'PUT',
+          "PUT",
           token,
           {},
         );

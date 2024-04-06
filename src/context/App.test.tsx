@@ -1,16 +1,16 @@
-import React, { useContext } from 'react';
-import { act, fireEvent, render, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, waitFor } from "@testing-library/react";
+import { useContext } from "react";
 
-import { AppContext, AppProvider } from './App';
-import { AuthState, SettingsState } from '../types';
-import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
-import { useNotifications } from '../hooks/useNotifications';
-import * as apiRequests from '../utils/api-requests';
-import * as comms from '../utils/comms';
-import * as storage from '../utils/storage';
-import * as notifications from '../utils/notifications';
+import { mockAccounts, mockSettings } from "../__mocks__/mock-state";
+import { useNotifications } from "../hooks/useNotifications";
+import type { AuthState, SettingsState } from "../types";
+import * as apiRequests from "../utils/api-requests";
+import * as comms from "../utils/comms";
+import * as notifications from "../utils/notifications";
+import * as storage from "../utils/storage";
+import { AppContext, AppProvider } from "./App";
 
-jest.mock('../hooks/useNotifications');
+jest.mock("../hooks/useNotifications");
 
 const customRender = (
   ui,
@@ -24,7 +24,7 @@ const customRender = (
   );
 };
 
-describe('context/App.tsx', () => {
+describe("context/App.tsx", () => {
   beforeEach(() => {
     jest.useFakeTimers();
   });
@@ -34,11 +34,11 @@ describe('context/App.tsx', () => {
     jest.clearAllMocks();
   });
 
-  describe('api methods', () => {
-    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+  describe("api methods", () => {
+    const apiRequestAuthMock = jest.spyOn(apiRequests, "apiRequestAuth");
     const getNotificationCountMock = jest.spyOn(
       notifications,
-      'getNotificationCount',
+      "getNotificationCount",
     );
     getNotificationCountMock.mockReturnValue(1);
 
@@ -58,7 +58,7 @@ describe('context/App.tsx', () => {
       });
     });
 
-    it('fetch notifications every minute', async () => {
+    it("fetch notifications every minute", async () => {
       customRender(null);
 
       // Wait for the useEffects, for settings.participating and accounts, to run.
@@ -88,28 +88,35 @@ describe('context/App.tsx', () => {
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
     });
 
-    it('should call fetchNotifications', async () => {
+    it("should call fetchNotifications", async () => {
       const TestComponent = () => {
         const { fetchNotifications } = useContext(AppContext);
 
-        return <button onClick={fetchNotifications}>Test Case</button>;
+        return (
+          <button type="button" onClick={fetchNotifications}>
+            Test Case
+          </button>
+        );
       };
 
       const { getByText } = customRender(<TestComponent />);
 
       fetchNotificationsMock.mockReset();
 
-      fireEvent.click(getByText('Test Case'));
+      fireEvent.click(getByText("Test Case"));
 
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
     });
 
-    it('should call markNotificationRead', async () => {
+    it("should call markNotificationRead", async () => {
       const TestComponent = () => {
         const { markNotificationRead } = useContext(AppContext);
 
         return (
-          <button onClick={() => markNotificationRead('123-456', 'github.com')}>
+          <button
+            type="button"
+            onClick={() => markNotificationRead("123-456", "github.com")}
+          >
             Test Case
           </button>
         );
@@ -119,22 +126,25 @@ describe('context/App.tsx', () => {
 
       markNotificationReadMock.mockReset();
 
-      fireEvent.click(getByText('Test Case'));
+      fireEvent.click(getByText("Test Case"));
 
       expect(markNotificationReadMock).toHaveBeenCalledTimes(1);
       expect(markNotificationReadMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
-        '123-456',
-        'github.com',
+        "123-456",
+        "github.com",
       );
     });
 
-    it('should call markNotificationDone', async () => {
+    it("should call markNotificationDone", async () => {
       const TestComponent = () => {
         const { markNotificationDone } = useContext(AppContext);
 
         return (
-          <button onClick={() => markNotificationDone('123-456', 'github.com')}>
+          <button
+            type="button"
+            onClick={() => markNotificationDone("123-456", "github.com")}
+          >
             Test Case
           </button>
         );
@@ -144,23 +154,24 @@ describe('context/App.tsx', () => {
 
       markNotificationDoneMock.mockReset();
 
-      fireEvent.click(getByText('Test Case'));
+      fireEvent.click(getByText("Test Case"));
 
       expect(markNotificationDoneMock).toHaveBeenCalledTimes(1);
       expect(markNotificationDoneMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
-        '123-456',
-        'github.com',
+        "123-456",
+        "github.com",
       );
     });
 
-    it('should call unsubscribeNotification', async () => {
+    it("should call unsubscribeNotification", async () => {
       const TestComponent = () => {
         const { unsubscribeNotification } = useContext(AppContext);
 
         return (
           <button
-            onClick={() => unsubscribeNotification('123-456', 'github.com')}
+            type="button"
+            onClick={() => unsubscribeNotification("123-456", "github.com")}
           >
             Test Case
           </button>
@@ -171,24 +182,25 @@ describe('context/App.tsx', () => {
 
       unsubscribeNotificationMock.mockReset();
 
-      fireEvent.click(getByText('Test Case'));
+      fireEvent.click(getByText("Test Case"));
 
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
       expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
-        '123-456',
-        'github.com',
+        "123-456",
+        "github.com",
       );
     });
 
-    it('should call markRepoNotifications', async () => {
+    it("should call markRepoNotifications", async () => {
       const TestComponent = () => {
         const { markRepoNotifications } = useContext(AppContext);
 
         return (
           <button
+            type="button"
             onClick={() =>
-              markRepoNotifications('manosim/gitify', 'github.com')
+              markRepoNotifications("manosim/gitify", "github.com")
             }
           >
             Test Case
@@ -200,17 +212,17 @@ describe('context/App.tsx', () => {
 
       markRepoNotificationsMock.mockReset();
 
-      fireEvent.click(getByText('Test Case'));
+      fireEvent.click(getByText("Test Case"));
 
       expect(markRepoNotificationsMock).toHaveBeenCalledTimes(1);
       expect(markRepoNotificationsMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
-        'manosim/gitify',
-        'github.com',
+        "manosim/gitify",
+        "github.com",
       );
     });
 
-    it('should call validateToken', async () => {
+    it("should call validateToken", async () => {
       apiRequestAuthMock.mockResolvedValueOnce(null);
 
       const TestComponent = () => {
@@ -218,8 +230,9 @@ describe('context/App.tsx', () => {
 
         return (
           <button
+            type="button"
             onClick={() =>
-              validateToken({ hostname: 'github.com', token: '123-456' })
+              validateToken({ hostname: "github.com", token: "123-456" })
             }
           >
             Test Case
@@ -229,7 +242,7 @@ describe('context/App.tsx', () => {
 
       const { getByText } = customRender(<TestComponent />);
 
-      fireEvent.click(getByText('Test Case'));
+      fireEvent.click(getByText("Test Case"));
 
       await waitFor(() =>
         expect(fetchNotificationsMock).toHaveBeenCalledTimes(2),
@@ -237,46 +250,26 @@ describe('context/App.tsx', () => {
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(2);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
-        'https://api.github.com/notifications',
-        'HEAD',
-        '123-456',
+        "https://api.github.com/notifications",
+        "HEAD",
+        "123-456",
       );
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
-        'https://api.github.com/user',
-        'GET',
-        '123-456',
+        "https://api.github.com/user",
+        "GET",
+        "123-456",
       );
     });
   });
 
-  it('should call logout', async () => {
-    const clearStateMock = jest.spyOn(storage, 'clearState');
+  it("should call logout", async () => {
+    const clearStateMock = jest.spyOn(storage, "clearState");
 
     const TestComponent = () => {
       const { logout } = useContext(AppContext);
 
-      return <button onClick={logout}>Test Case</button>;
-    };
-
-    const { getByText } = customRender(<TestComponent />);
-
-    act(() => {
-      fireEvent.click(getByText('Test Case'));
-    });
-
-    expect(clearStateMock).toHaveBeenCalledTimes(1);
-  });
-
-  it('should call updateSetting', async () => {
-    const saveStateMock = jest
-      .spyOn(storage, 'saveState')
-      .mockImplementation(jest.fn());
-
-    const TestComponent = () => {
-      const { updateSetting } = useContext(AppContext);
-
       return (
-        <button onClick={() => updateSetting('participating', true)}>
+        <button type="button" onClick={logout}>
           Test Case
         </button>
       );
@@ -285,7 +278,34 @@ describe('context/App.tsx', () => {
     const { getByText } = customRender(<TestComponent />);
 
     act(() => {
-      fireEvent.click(getByText('Test Case'));
+      fireEvent.click(getByText("Test Case"));
+    });
+
+    expect(clearStateMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("should call updateSetting", async () => {
+    const saveStateMock = jest
+      .spyOn(storage, "saveState")
+      .mockImplementation(jest.fn());
+
+    const TestComponent = () => {
+      const { updateSetting } = useContext(AppContext);
+
+      return (
+        <button
+          type="button"
+          onClick={() => updateSetting("participating", true)}
+        >
+          Test Case
+        </button>
+      );
+    };
+
+    const { getByText } = customRender(<TestComponent />);
+
+    act(() => {
+      fireEvent.click(getByText("Test Case"));
     });
 
     expect(saveStateMock).toHaveBeenCalledWith(
@@ -297,24 +317,27 @@ describe('context/App.tsx', () => {
         showBots: true,
         showNotificationsCountInTray: false,
         openAtStartup: false,
-        theme: 'SYSTEM',
+        theme: "SYSTEM",
         colors: null,
         markAsDoneOnOpen: false,
       },
     );
   });
 
-  it('should call updateSetting and set auto launch(openAtStartup)', async () => {
-    const setAutoLaunchMock = jest.spyOn(comms, 'setAutoLaunch');
+  it("should call updateSetting and set auto launch(openAtStartup)", async () => {
+    const setAutoLaunchMock = jest.spyOn(comms, "setAutoLaunch");
     const saveStateMock = jest
-      .spyOn(storage, 'saveState')
+      .spyOn(storage, "saveState")
       .mockImplementation(jest.fn());
 
     const TestComponent = () => {
       const { updateSetting } = useContext(AppContext);
 
       return (
-        <button onClick={() => updateSetting('openAtStartup', true)}>
+        <button
+          type="button"
+          onClick={() => updateSetting("openAtStartup", true)}
+        >
           Test Case
         </button>
       );
@@ -323,7 +346,7 @@ describe('context/App.tsx', () => {
     const { getByText } = customRender(<TestComponent />);
 
     act(() => {
-      fireEvent.click(getByText('Test Case'));
+      fireEvent.click(getByText("Test Case"));
     });
 
     expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
@@ -337,7 +360,7 @@ describe('context/App.tsx', () => {
         showBots: true,
         showNotificationsCountInTray: false,
         openAtStartup: true,
-        theme: 'SYSTEM',
+        theme: "SYSTEM",
         colors: null,
         markAsDoneOnOpen: false,
       },

@@ -1,21 +1,21 @@
-import React from 'react';
-import { Field } from 'react-final-form';
+import { FC, ReactNode } from "react";
+import { Field } from "react-final-form";
 
 export interface IProps {
   name: string;
   type?: string;
   label: string;
   placeholder?: string;
-  helpText?: React.ReactNode | string;
+  helpText?: ReactNode | string;
   required?: boolean;
 }
 
-export const FieldInput: React.FC<IProps> = ({
+export const FieldInput: FC<IProps> = ({
   label,
   name,
-  placeholder = '',
+  placeholder = "",
   helpText,
-  type = 'text',
+  type = "text",
   required = false,
 }) => {
   return (

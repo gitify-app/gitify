@@ -3,32 +3,34 @@ import {
   PersonAddIcon,
   SignOutIcon,
   XCircleIcon,
-} from '@primer/octicons-react';
-import { ipcRenderer } from 'electron';
-import React, {
+} from "@primer/octicons-react";
+import { ipcRenderer } from "electron";
+
+import {
+  FC,
   useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
-} from 'react';
-import { useNavigate } from 'react-router-dom';
+} from "react";
+import { useNavigate } from "react-router-dom";
 
-import { FieldCheckbox } from '../components/fields/Checkbox';
-import { FieldRadioGroup } from '../components/fields/RadioGroup';
-import { AppContext } from '../context/App';
-import { Theme } from '../types';
-import { apiRequestAuth } from '../utils/api-requests';
-import { setTheme } from '../utils/theme';
+import { FieldCheckbox } from "../components/fields/Checkbox";
+import { FieldRadioGroup } from "../components/fields/RadioGroup";
+import { AppContext } from "../context/App";
+import { Theme } from "../types";
+import { apiRequestAuth } from "../utils/api-requests";
 import {
   openExternalLink,
   updateTrayIcon,
   updateTrayTitle,
-} from '../utils/comms';
-import Constants from '../utils/constants';
-import { generateGitHubAPIUrl } from '../utils/helpers';
+} from "../utils/comms";
+import Constants from "../utils/constants";
+import { generateGitHubAPIUrl } from "../utils/helpers";
+import { setTheme } from "../utils/theme";
 
-export const SettingsRoute: React.FC = () => {
+export const SettingsRoute: FC = () => {
   const { accounts, settings, updateSetting, logout } = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -43,11 +45,11 @@ export const SettingsRoute: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    ipcRenderer.invoke('get-platform').then((result: string) => {
-      setIsLinux(result === 'linux');
+    ipcRenderer.invoke("get-platform").then((result: string) => {
+      setIsLinux(result === "linux");
     });
 
-    ipcRenderer.invoke('get-app-version').then((result: string) => {
+    ipcRenderer.invoke("get-app-version").then((result: string) => {
       setAppVersion(result);
     });
   }, []);
@@ -56,16 +58,16 @@ export const SettingsRoute: React.FC = () => {
     (async () => {
       const response = await apiRequestAuth(
         `${generateGitHubAPIUrl(Constants.DEFAULT_AUTH_OPTIONS.hostname)}`,
-        'GET',
+        "GET",
         accounts.token,
       );
 
-      if (response.headers['x-oauth-scopes'].includes('repo'))
+      if (response.headers["x-oauth-scopes"].includes("repo"))
         setColorScope(true);
     })();
   }, [accounts.token]);
 
-  ipcRenderer.on('update-native-theme', (_, updatedTheme: Theme) => {
+  ipcRenderer.on("update-native-theme", (_, updatedTheme: Theme) => {
     if (settings.theme === Theme.SYSTEM) {
       setTheme(updatedTheme);
     }
@@ -79,15 +81,15 @@ export const SettingsRoute: React.FC = () => {
   }, []);
 
   const quitApp = useCallback(() => {
-    ipcRenderer.send('app-quit');
+    ipcRenderer.send("app-quit");
   }, []);
 
   const goToEnterprise = useCallback(() => {
-    return navigate('/login-enterprise', { replace: true });
+    return navigate("/login-enterprise", { replace: true });
   }, []);
 
   const footerButtonClass =
-    'hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none';
+    "hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none";
 
   return (
     <div
@@ -120,22 +122,22 @@ export const SettingsRoute: React.FC = () => {
             label="Theme:"
             value={settings.theme}
             options={[
-              { label: 'System', value: Theme.SYSTEM },
-              { label: 'Light', value: Theme.LIGHT },
-              { label: 'Dark', value: Theme.DARK },
+              { label: "System", value: Theme.SYSTEM },
+              { label: "Light", value: Theme.LIGHT },
+              { label: "Dark", value: Theme.DARK },
             ]}
             onChange={(evt) => {
-              updateSetting('theme', evt.target.value);
+              updateSetting("theme", evt.target.value);
             }}
           />
           <FieldCheckbox
             name="colors"
             label={`Use GitHub-like state colors${
-              !colorScope ? ' (requires repo scope)' : ''
+              !colorScope ? " (requires repo scope)" : ""
             }`}
             checked={colorScope && settings.colors}
             onChange={(evt) =>
-              colorScope && updateSetting('colors', evt.target.checked)
+              colorScope && updateSetting("colors", evt.target.checked)
             }
             disabled={!colorScope}
           />
@@ -150,21 +152,21 @@ export const SettingsRoute: React.FC = () => {
             label="Show only participating"
             checked={settings.participating}
             onChange={(evt) =>
-              updateSetting('participating', evt.target.checked)
+              updateSetting("participating", evt.target.checked)
             }
           />
           <FieldCheckbox
             name="showBots"
             label="Show notifications from Bot accounts"
             checked={settings.showBots}
-            onChange={(evt) => updateSetting('showBots', evt.target.checked)}
+            onChange={(evt) => updateSetting("showBots", evt.target.checked)}
           />
           <FieldCheckbox
             name="markAsDoneOnOpen"
             label="Mark as done on open"
             checked={settings.markAsDoneOnOpen}
             onChange={(evt) =>
-              updateSetting('markAsDoneOnOpen', evt.target.checked)
+              updateSetting("markAsDoneOnOpen", evt.target.checked)
             }
           />
         </fieldset>
@@ -178,7 +180,7 @@ export const SettingsRoute: React.FC = () => {
             label="Show notifications count in tray"
             checked={settings.showNotificationsCountInTray}
             onChange={(evt) =>
-              updateSetting('showNotificationsCountInTray', evt.target.checked)
+              updateSetting("showNotificationsCountInTray", evt.target.checked)
             }
           />
           <FieldCheckbox
@@ -186,14 +188,14 @@ export const SettingsRoute: React.FC = () => {
             label="Show system notifications"
             checked={settings.showNotifications}
             onChange={(evt) =>
-              updateSetting('showNotifications', evt.target.checked)
+              updateSetting("showNotifications", evt.target.checked)
             }
           />
           <FieldCheckbox
             name="playSound"
             label="Play sound"
             checked={settings.playSound}
-            onChange={(evt) => updateSetting('playSound', evt.target.checked)}
+            onChange={(evt) => updateSetting("playSound", evt.target.checked)}
           />
           {!isLinux && (
             <FieldCheckbox
@@ -201,7 +203,7 @@ export const SettingsRoute: React.FC = () => {
               label="Open at startup"
               checked={settings.openAtStartup}
               onChange={(evt) =>
-                updateSetting('openAtStartup', evt.target.checked)
+                updateSetting("openAtStartup", evt.target.checked)
               }
             />
           )}
