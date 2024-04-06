@@ -15,7 +15,7 @@ const config: Config = {
     // via https://github.com/axios/axios/issues/5101#issuecomment-1276572468
     "^axios$": require.resolve("axios"),
   },
-  testPathIgnorePatterns: ["<rootDir>/build/", "<rootDir>/node_modules/"],
+  modulePathIgnorePatterns: ["<rootDir>/build", "<rootDir>/node_modules"],
 };
 
 module.exports = config;
