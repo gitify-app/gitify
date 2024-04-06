@@ -78,7 +78,13 @@
       "entitlementsInherit": "./entitlements/entitlements.mac.plist",
       "publish": [
         "github"
-      ]
+      ],
+      "extendInfo": {
+        "NSBluetoothAlwaysUsageDescription": null,
+        "NSBluetoothPeripheralUsageDescription": null,
+        "NSCameraUsageDescription": null,
+        "NSMicrophoneUsageDescription": null
+      }
     },
     "dmg": {
       "icon": "assets/images/app-icon.icns",
