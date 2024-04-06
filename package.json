@@ -79,7 +79,7 @@
       "publish": [
         "github"
       ],
-      "extend-info": {
+      "extendInfo": {
         "NSBluetoothAlwaysUsageDescription": null,
         "NSBluetoothPeripheralUsageDescription": null,
         "NSCameraUsageDescription": null,
