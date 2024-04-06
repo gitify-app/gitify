@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 import TestRenderer from "react-test-renderer";
 
@@ -53,13 +53,13 @@ describe("components/Repository.tsx", () => {
   });
 
   it("should mark a repo as read", () => {
-    const { getByTitle } = render(
+    render(
       <AppContext.Provider value={{ markRepoNotifications }}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByTitle("Mark Repository as Read"));
+    fireEvent.click(screen.getByTitle("Mark Repository as Read"));
 
     expect(markRepoNotifications).toHaveBeenCalledWith(
       "manosim/notifications-test",
@@ -68,13 +68,13 @@ describe("components/Repository.tsx", () => {
   });
 
   it("should mark a repo as done", () => {
-    const { getByTitle } = render(
+    render(
       <AppContext.Provider value={{ markRepoNotificationsDone }}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByTitle("Mark Repository as Done"));
+    fireEvent.click(screen.getByTitle("Mark Repository as Done"));
 
     expect(markRepoNotificationsDone).toHaveBeenCalledWith(
       "manosim/notifications-test",

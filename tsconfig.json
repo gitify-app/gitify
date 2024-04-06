@@ -11,9 +11,9 @@
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "types": ["jest"]
+    "types": ["jest"],
+    "skipLibCheck": true
   },
-  "exclude": ["node_modules"],
   "include": [
     "src/**/*.js",
     "src/**/*.ts",

@@ -115,17 +115,13 @@ describe("utils/helpers.ts", () => {
       );
 
       expect(result).toBe(
-        `exampleTitle in:title repo:exampleRepo updated:>2024-02-20T10:00:00.000Z`,
+        "exampleTitle in:title repo:exampleRepo updated:>2024-02-20T10:00:00.000Z",
       );
     });
   });
 
   describe("getHtmlUrl", () => {
-    let apiRequestAuthMock;
-
-    beforeEach(() => {
-      apiRequestAuthMock = jest.spyOn(apiRequests, "apiRequestAuth");
-    });
+    const apiRequestAuthMock = jest.spyOn(apiRequests, "apiRequestAuth");
 
     afterEach(() => {
       jest.clearAllMocks();

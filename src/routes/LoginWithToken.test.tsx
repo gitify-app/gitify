@@ -1,4 +1,10 @@
-import { act, fireEvent, render, waitFor } from "@testing-library/react";
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from "@testing-library/react";
 import { shell } from "electron";
 
 import { MemoryRouter } from "react-router-dom";
@@ -25,38 +31,33 @@ describe("routes/LoginWithToken.tsx", () => {
   });
 
   it("renders correctly", () => {
-    let tree;
-
-    TestRenderer.act(() => {
-      tree = TestRenderer.create(
-        <MemoryRouter>
-          <LoginWithToken />
-        </MemoryRouter>,
-      );
-    });
-
-    expect(tree).toMatchSnapshot();
-  });
-
-  it("let us go back", () => {
-    const { getByLabelText } = render(
+    const tree = TestRenderer.create(
       <MemoryRouter>
         <LoginWithToken />
       </MemoryRouter>,
     );
 
-    fireEvent.click(getByLabelText("Go Back"));
+    expect(tree).toMatchSnapshot();
+  });
+
+  it("let us go back", () => {
+    render(
+      <MemoryRouter>
+        <LoginWithToken />
+      </MemoryRouter>,
+    );
+
+    fireEvent.click(screen.getByLabelText("Go Back"));
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
   it("should validate the form values", () => {
-    let values;
     const emptyValues = {
       hostname: null,
       token: null,
     };
 
-    values = {
+    let values = {
       ...emptyValues,
     };
     expect(validate(values).hostname).toBe("Required");

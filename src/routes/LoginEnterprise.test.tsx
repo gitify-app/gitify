@@ -1,4 +1,4 @@
-import { fireEvent, render } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 import { MemoryRouter } from "react-router-dom";
 import * as TestRenderer from "react-test-renderer";
@@ -41,7 +41,7 @@ describe("routes/LoginEnterprise.tsx", () => {
   });
 
   it("let us go back", () => {
-    const { getByLabelText } = render(
+    render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
         <MemoryRouter>
           <LoginEnterpriseRoute />
@@ -49,19 +49,18 @@ describe("routes/LoginEnterprise.tsx", () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByLabelText("Go Back"));
+    fireEvent.click(screen.getByLabelText("Go Back"));
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
   it("should validate the form values", () => {
-    let values;
     const emptyValues = {
       hostname: null,
       clientId: null,
       clientSecret: null,
     };
 
-    values = {
+    let values = {
       ...emptyValues,
     };
     expect(validate(values).hostname).toBe("Required");
