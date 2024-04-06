@@ -44,7 +44,7 @@ describe('routes/Notifications.tsx', () => {
     const tree = TestRenderer.create(
       <AppContext.Provider
         value={{
-          notifications: [],
+          notifications: [mockedAccountNotifications[0]],
           settings: { ...mockSettings, showAccountHostname: true },
         }}
       >
