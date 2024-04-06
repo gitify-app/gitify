@@ -1,6 +1,177 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/NotificationRow.tsx should render itself & its children 1`] = `
+exports[`components/NotificationRow.tsx should render itself & its children with avatar 1`] = `
+<div
+  className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+>
+  <div
+    className="flex justify-center items-center w-5 text-green-500"
+    title="Open Issue"
+  >
+    <svg
+      aria-label="Issue"
+      className="octicon octicon-issue-opened"
+      fill="currentColor"
+      focusable="false"
+      height={18}
+      role="img"
+      style={
+        {
+          "display": "inline-block",
+          "overflow": "visible",
+          "userSelect": "none",
+          "verticalAlign": "text-bottom",
+        }
+      }
+      viewBox="0 0 16 16"
+      width={18}
+    >
+      <path
+        d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
+      />
+      <path
+        d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
+      />
+    </svg>
+  </div>
+  <div
+    className="flex-1 overflow-hidden"
+    onClick={[Function]}
+  >
+    <div
+      className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+      role="main"
+      title="I am a robot and this is a test!"
+    >
+      I am a robot and this is a test!
+    </div>
+    <div
+      className="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+    >
+      <span
+        className="flex items-center"
+      >
+        <span
+          className="flex"
+          title="manosim updated over 6 years ago"
+        >
+          <span
+            onClick={[Function]}
+            title="View User Profile"
+          >
+            <img
+              className="rounded-full w-4 h-4 cursor-pointer"
+              src="https://avatars0.githubusercontent.com/u/6333409?v=3"
+              title="manosim"
+            />
+          </span>
+          <span
+            className="ml-1"
+            title="You're watching the repository."
+          >
+            Updated
+          </span>
+          <span
+            className="ml-1"
+          >
+            over 6 years ago
+          </span>
+        </span>
+      </span>
+    </div>
+  </div>
+  <div
+    className="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+  >
+    <button
+      className="focus:outline-none h-full hover:text-green-500"
+      onClick={[Function]}
+      title="Mark as Done"
+    >
+      <svg
+        aria-label="Mark as Done"
+        className="octicon octicon-check"
+        fill="currentColor"
+        focusable="false"
+        height={16}
+        role="img"
+        style={
+          {
+            "display": "inline-block",
+            "overflow": "visible",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 16 16"
+        width={16}
+      >
+        <path
+          d="M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z"
+        />
+      </svg>
+    </button>
+    <button
+      className="focus:outline-none h-full hover:text-red-500"
+      onClick={[Function]}
+      title="Unsubscribe"
+    >
+      <svg
+        aria-label="Unsubscribe"
+        className="octicon octicon-bell-slash"
+        fill="currentColor"
+        focusable="false"
+        height={14}
+        role="img"
+        style={
+          {
+            "display": "inline-block",
+            "overflow": "visible",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 16 16"
+        width={14}
+      >
+        <path
+          d="m4.182 4.31.016.011 10.104 7.316.013.01 1.375.996a.75.75 0 1 1-.88 1.214L13.626 13H2.518a1.516 1.516 0 0 1-1.263-2.36l1.703-2.554A.255.255 0 0 0 3 7.947V5.305L.31 3.357a.75.75 0 1 1 .88-1.214Zm7.373 7.19L4.5 6.391v1.556c0 .346-.102.683-.294.97l-1.703 2.556a.017.017 0 0 0-.003.01c0 .005.002.009.005.012l.006.004.007.001ZM8 1.5c-.997 0-1.895.416-2.534 1.086A.75.75 0 1 1 4.38 1.55 5 5 0 0 1 13 5v2.373a.75.75 0 0 1-1.5 0V5A3.5 3.5 0 0 0 8 1.5ZM8 16a2 2 0 0 1-1.985-1.75c-.017-.137.097-.25.235-.25h3.5c.138 0 .252.113.235.25A2 2 0 0 1 8 16Z"
+        />
+      </svg>
+    </button>
+    <button
+      className="focus:outline-none h-full hover:text-green-500"
+      onClick={[Function]}
+      title="Mark as Read"
+    >
+      <svg
+        aria-label="Mark as Read"
+        className="octicon octicon-read"
+        fill="currentColor"
+        focusable="false"
+        height={14}
+        role="img"
+        style={
+          {
+            "display": "inline-block",
+            "overflow": "visible",
+            "userSelect": "none",
+            "verticalAlign": "text-bottom",
+          }
+        }
+        viewBox="0 0 16 16"
+        width={14}
+      >
+        <path
+          d="M7.115.65a1.752 1.752 0 0 1 1.77 0l6.25 3.663c.536.314.865.889.865 1.51v6.427A1.75 1.75 0 0 1 14.25 14H1.75A1.75 1.75 0 0 1 0 12.25V5.823c0-.621.33-1.196.865-1.51Zm1.011 1.293a.252.252 0 0 0-.252 0l-5.72 3.353L6.468 7.76a2.748 2.748 0 0 1 3.066 0l4.312-2.464-5.719-3.353ZM13.15 12.5 8.772 9.06a1.25 1.25 0 0 0-1.544 0L2.85 12.5Zm1.35-5.85-3.687 2.106 3.687 2.897ZM5.187 8.756 1.5 6.65v5.003Z"
+        />
+      </svg>
+    </button>
+  </div>
+</div>
+`;
+
+exports[`components/NotificationRow.tsx should render itself & its children without avatar 1`] = `
 <div
   className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
 >
@@ -49,17 +220,47 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       className="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
     >
       <span
-        title="You're watching the repository."
+        className="flex items-center"
       >
-        Subscribed
-      </span>
-       -
-       
-      <span
-        title="Updated in over 3 years"
-      >
-        Updated 
-        in over 3 years
+        <span
+          className="flex"
+          title="Updated over 6 years ago"
+        >
+          <span>
+            <svg
+              aria-hidden="true"
+              className="text-gray-500 dark:text-gray-300"
+              fill="currentColor"
+              focusable="false"
+              height={16}
+              style={
+                {
+                  "display": "inline-block",
+                  "overflow": "visible",
+                  "userSelect": "none",
+                  "verticalAlign": "text-bottom",
+                }
+              }
+              viewBox="0 0 16 16"
+              width={16}
+            >
+              <path
+                d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+              />
+            </svg>
+          </span>
+          <span
+            className="ml-1"
+            title="You're watching the repository."
+          >
+            Updated
+          </span>
+          <span
+            className="ml-1"
+          >
+            over 6 years ago
+          </span>
+        </span>
       </span>
     </div>
   </div>

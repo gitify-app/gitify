@@ -10,42 +10,42 @@ exports[`utils/github-api.ts formatReason - should format the notification reaso
 exports[`utils/github-api.ts formatReason - should format the notification reason 2`] = `
 {
   "description": "You were assigned to the issue.",
-  "type": "Assign",
+  "type": "Assigned",
 }
 `;
 
 exports[`utils/github-api.ts formatReason - should format the notification reason 3`] = `
 {
   "description": "You created the thread.",
-  "type": "Author",
+  "type": "Authored",
 }
 `;
 
 exports[`utils/github-api.ts formatReason - should format the notification reason 4`] = `
 {
   "description": "A GitHub Actions workflow run was triggered for your repository",
-  "type": "Workflow Run",
+  "type": "Workflow Run Completed",
 }
 `;
 
 exports[`utils/github-api.ts formatReason - should format the notification reason 5`] = `
 {
   "description": "You commented on the thread.",
-  "type": "Comment",
+  "type": "Commented",
 }
 `;
 
 exports[`utils/github-api.ts formatReason - should format the notification reason 6`] = `
 {
   "description": "You accepted an invitation to contribute to the repository.",
-  "type": "Invitation",
+  "type": "Invitation Received",
 }
 `;
 
 exports[`utils/github-api.ts formatReason - should format the notification reason 7`] = `
 {
   "description": "You subscribed to the thread (via an issue or pull request).",
-  "type": "Manual",
+  "type": "Updated",
 }
 `;
 
@@ -59,7 +59,7 @@ exports[`utils/github-api.ts formatReason - should format the notification reaso
 exports[`utils/github-api.ts formatReason - should format the notification reason 9`] = `
 {
   "description": "You were specifically @mentioned in the content.",
-  "type": "Mention",
+  "type": "Mentioned",
 }
 `;
 
@@ -73,35 +73,35 @@ exports[`utils/github-api.ts formatReason - should format the notification reaso
 exports[`utils/github-api.ts formatReason - should format the notification reason 11`] = `
 {
   "description": "You were credited for contributing to a security advisory.",
-  "type": "Security Advisory Credit",
+  "type": "Security Advisory Credit Recevied",
 }
 `;
 
 exports[`utils/github-api.ts formatReason - should format the notification reason 12`] = `
 {
   "description": "GitHub discovered a security vulnerability in your repository.",
-  "type": "Security Alert",
+  "type": "Security Alert Received",
 }
 `;
 
 exports[`utils/github-api.ts formatReason - should format the notification reason 13`] = `
 {
   "description": "You changed the thread state (for example, closing an issue or merging a pull request).",
-  "type": "State Change",
+  "type": "State Changed",
 }
 `;
 
 exports[`utils/github-api.ts formatReason - should format the notification reason 14`] = `
 {
   "description": "You're watching the repository.",
-  "type": "Subscribed",
+  "type": "Updated",
 }
 `;
 
 exports[`utils/github-api.ts formatReason - should format the notification reason 15`] = `
 {
   "description": "You were on a team that was mentioned.",
-  "type": "Team Mention",
+  "type": "Team Mentioned",
 }
 `;
 
@@ -112,15 +112,15 @@ exports[`utils/github-api.ts formatReason - should format the notification reaso
 }
 `;
 
-exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 1`] = `"text-gray-500"`;
+exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 1`] = `"text-gray-500 dark:text-gray-300"`;
 
 exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 2`] = `"text-red-500"`;
 
-exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 3`] = `"text-gray-500"`;
+exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 3`] = `"text-gray-500 dark:text-gray-300"`;
 
 exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 4`] = `"text-green-500"`;
 
-exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 5`] = `"text-gray-500"`;
+exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for check suite 5`] = `"text-gray-500 dark:text-gray-300"`;
 
 exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 1`] = `"text-green-500"`;
 
@@ -128,11 +128,11 @@ exports[`utils/github-api.ts getNotificationTypeIconColor should format the noti
 
 exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 3`] = `"text-purple-500"`;
 
-exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 4`] = `"text-gray-500"`;
+exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 4`] = `"text-gray-500 dark:text-gray-300"`;
 
 exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 5`] = `"text-purple-500"`;
 
-exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 6`] = `"text-gray-500"`;
+exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 6`] = `"text-gray-500 dark:text-gray-300"`;
 
 exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 7`] = `"text-green-500"`;
 
@@ -140,4 +140,4 @@ exports[`utils/github-api.ts getNotificationTypeIconColor should format the noti
 
 exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 9`] = `"text-purple-500"`;
 
-exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 10`] = `"text-gray-500"`;
+exports[`utils/github-api.ts getNotificationTypeIconColor should format the notification color for state 10`] = `"text-gray-500 dark:text-gray-300"`;

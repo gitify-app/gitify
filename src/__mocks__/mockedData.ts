@@ -5,6 +5,7 @@ import {
   GraphQLSearch,
   Discussion,
   DiscussionComments,
+  User,
 } from '../typesGithub';
 import Constants from '../utils/constants';
 
@@ -21,6 +22,49 @@ export const mockedUser: GitifyUser = {
   id: 123456789,
 };
 
+export const mockedNotificationUser: User = {
+  login: 'octocat',
+  id: 123456789,
+  node_id: 'MDQ6VXNlcjE=',
+  avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+  gravatar_url: '',
+  url: 'https://api.github.com/users/octocat',
+  html_url: 'https://github.com/octocat',
+  followers_url: 'https://api.github.com/users/octocat/followers',
+  following_url: 'https://api.github.com/users/octocat/following{/other_user}',
+  gists_url: 'https://api.github.com/users/octocat/gists{/gist_id}',
+  starred_url: 'https://api.github.com/users/octocat/starred{/owner}{/repo}',
+  subscriptions_url: 'https://api.github.com/users/octocat/subscriptions',
+  organizations_url: 'https://api.github.com/users/octocat/orgs',
+  repos_url: 'https://api.github.com/users/octocat/repos',
+  events_url: 'https://api.github.com/users/octocat/events{/privacy}',
+  received_events_url: 'https://api.github.com/users/octocat/received_events',
+  type: 'User',
+  site_admin: false,
+};
+
+export const mockedCommenterUser: User = {
+  login: 'dummyuser',
+  id: 987654321,
+  node_id: 'MDQ6VXNlcjI=',
+  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+  gravatar_url: '',
+  url: 'https://api.github.com/users/dummyuser',
+  html_url: 'https://github.com/dummyuser',
+  followers_url: 'https://api.github.com/users/dummyuser/followers',
+  following_url:
+    'https://api.github.com/users/dummyuser/following{/other_user}',
+  gists_url: 'https://api.github.com/users/dummyuser/gists{/gist_id}',
+  starred_url: 'https://api.github.com/users/dummyuser/starred{/owner}{/repo}',
+  subscriptions_url: 'https://api.github.com/users/dummyuser/subscriptions',
+  organizations_url: 'https://api.github.com/users/dummyuser/orgs',
+  repos_url: 'https://api.github.com/users/dummyuser/repos',
+  events_url: 'https://api.github.com/users/dummyuser/events{/privacy}',
+  received_events_url: 'https://api.github.com/users/dummyuser/received_events',
+  type: 'User',
+  site_admin: false,
+};
+
 // prettier-ignore
 export const mockedSingleNotification: Notification = {
   hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
@@ -32,9 +76,16 @@ export const mockedSingleNotification: Notification = {
   subject: {
     title: 'I am a robot and this is a test!',
     url: 'https://api.github.com/repos/manosim/notifications-test/issues/1',
-    latest_comment_url: 'https://api.github.com/repos/manosim/notifications-test/issues/comments/302888448',
+    latest_comment_url:
+      'https://api.github.com/repos/manosim/notifications-test/issues/comments/302888448',
     type: 'Issue',
     state: 'open',
+    user: {
+      login: 'manosim',
+      html_url: 'https://github.com/manosim',
+      avatar_url: 'https://avatars0.githubusercontent.com/u/6333409?v=3',
+      type: 'User',
+    },
   },
   repository: {
     id: 57216596,
@@ -51,60 +102,96 @@ export const mockedSingleNotification: Notification = {
       url: 'https://api.github.com/users/manosim',
       html_url: 'https://github.com/manosim',
       followers_url: 'https://api.github.com/users/manosim/followers',
-      following_url: 'https://api.github.com/users/manosim/following{/other_user}',
+      following_url:
+        'https://api.github.com/users/manosim/following{/other_user}',
       gists_url: 'https://api.github.com/users/manosim/gists{/gist_id}',
-      starred_url: 'https://api.github.com/users/manosim/starred{/owner}{/repo}',
+      starred_url:
+        'https://api.github.com/users/manosim/starred{/owner}{/repo}',
       subscriptions_url: 'https://api.github.com/users/manosim/subscriptions',
       organizations_url: 'https://api.github.com/users/manosim/orgs',
       repos_url: 'https://api.github.com/users/manosim/repos',
       events_url: 'https://api.github.com/users/manosim/events{/privacy}',
-      received_events_url: 'https://api.github.com/users/manosim/received_events',
+      received_events_url:
+        'https://api.github.com/users/manosim/received_events',
       type: 'User',
       site_admin: false,
     },
     private: true,
     description: 'Test Repository',
     fork: false,
-    archive_url: "https://api.github.com/repos/manosim/notifications-test/{archive_format}{/ref}",
-    assignees_url: "https://api.github.com/repos/manosim/notifications-test/assignees{/user}",
-    blobs_url: "https://api.github.com/repos/manosim/notifications-test/git/blobs{/sha}",
-    branches_url: "https://api.github.com/repos/manosim/notifications-test/branches{/branch}",
-    collaborators_url: "https://api.github.com/repos/manosim/notifications-test/collaborators{/collaborator}",
-    comments_url: "https://api.github.com/repos/manosim/notifications-test/comments{/number}",
-    commits_url: "https://api.github.com/repos/manosim/notifications-test/commits{/sha}",
-    compare_url: "https://api.github.com/repos/manosim/notifications-test/compare/{base}...{head}",
-    contents_url: "https://api.github.com/repos/manosim/notifications-test/contents/{+path}",
-    contributors_url: "https://api.github.com/repos/manosim/notifications-test/contributors",
-    deployments_url: "https://api.github.com/repos/manosim/notifications-test/deployments",
-    downloads_url: "https://api.github.com/repos/manosim/notifications-test/downloads",
-    events_url: "https://api.github.com/repos/manosim/notifications-test/events",
-    forks_url: "https://api.github.com/repos/manosim/notifications-test/forks",
-    git_commits_url: "https://api.github.com/repos/manosim/notifications-test/git/commits{/sha}",
-    git_refs_url: "https://api.github.com/repos/manosim/notifications-test/git/refs{/sha}",
-    git_tags_url: "https://api.github.com/repos/manosim/notifications-test/git/tags{/sha}",
-    hooks_url: "https://api.github.com/repos/manosim/notifications-test/hooks",
+    archive_url:
+      'https://api.github.com/repos/manosim/notifications-test/{archive_format}{/ref}',
+    assignees_url:
+      'https://api.github.com/repos/manosim/notifications-test/assignees{/user}',
+    blobs_url:
+      'https://api.github.com/repos/manosim/notifications-test/git/blobs{/sha}',
+    branches_url:
+      'https://api.github.com/repos/manosim/notifications-test/branches{/branch}',
+    collaborators_url:
+      'https://api.github.com/repos/manosim/notifications-test/collaborators{/collaborator}',
+    comments_url:
+      'https://api.github.com/repos/manosim/notifications-test/comments{/number}',
+    commits_url:
+      'https://api.github.com/repos/manosim/notifications-test/commits{/sha}',
+    compare_url:
+      'https://api.github.com/repos/manosim/notifications-test/compare/{base}...{head}',
+    contents_url:
+      'https://api.github.com/repos/manosim/notifications-test/contents/{+path}',
+    contributors_url:
+      'https://api.github.com/repos/manosim/notifications-test/contributors',
+    deployments_url:
+      'https://api.github.com/repos/manosim/notifications-test/deployments',
+    downloads_url:
+      'https://api.github.com/repos/manosim/notifications-test/downloads',
+    events_url:
+      'https://api.github.com/repos/manosim/notifications-test/events',
+    forks_url: 'https://api.github.com/repos/manosim/notifications-test/forks',
+    git_commits_url:
+      'https://api.github.com/repos/manosim/notifications-test/git/commits{/sha}',
+    git_refs_url:
+      'https://api.github.com/repos/manosim/notifications-test/git/refs{/sha}',
+    git_tags_url:
+      'https://api.github.com/repos/manosim/notifications-test/git/tags{/sha}',
+    hooks_url: 'https://api.github.com/repos/manosim/notifications-test/hooks',
     html_url: 'https://github.com/manosim/notifications-test',
-    issue_comment_url: "https://api.github.com/repos/manosim/notifications-test/issues/comments{/number}",
-    issue_events_url: "https://api.github.com/repos/manosim/notifications-test/issues/events{/number}",
-    issues_url: "https://api.github.com/repos/manosim/notifications-test/issues{/number}",
-    keys_url: "https://api.github.com/repos/manosim/notifications-test/keys{/key_id}",
-    labels_url: "https://api.github.com/repos/manosim/notifications-test/labels{/name}",
-    languages_url: "https://api.github.com/repos/manosim/notifications-test/languages",
-    merges_url: "https://api.github.com/repos/manosim/notifications-test/merges",
-    milestones_url: "https://api.github.com/repos/manosim/notifications-test/milestones{/number}",
-    notifications_url: "https://api.github.com/repos/manosim/notifications-test/notifications{?since,all,participating}",
-    pulls_url: "https://api.github.com/repos/manosim/notifications-test/pulls{/number}",
-    releases_url: "https://api.github.com/repos/manosim/notifications-test/releases{/id}",
-    stargazers_url: "https://api.github.com/repos/manosim/notifications-test/stargazers",
-    statuses_url: "https://api.github.com/repos/manosim/notifications-test/statuses/{sha}",
-    subscribers_url: "https://api.github.com/repos/manosim/notifications-test/subscribers",
-    subscription_url: "https://api.github.com/repos/manosim/notifications-test/subscription",
-    tags_url: "https://api.github.com/repos/manosim/notifications-test/tags",
-    teams_url: "https://api.github.com/repos/manosim/notifications-test/teams",
-    trees_url: "https://api.github.com/repos/manosim/notifications-test/git/trees{/sha}",
+    issue_comment_url:
+      'https://api.github.com/repos/manosim/notifications-test/issues/comments{/number}',
+    issue_events_url:
+      'https://api.github.com/repos/manosim/notifications-test/issues/events{/number}',
+    issues_url:
+      'https://api.github.com/repos/manosim/notifications-test/issues{/number}',
+    keys_url:
+      'https://api.github.com/repos/manosim/notifications-test/keys{/key_id}',
+    labels_url:
+      'https://api.github.com/repos/manosim/notifications-test/labels{/name}',
+    languages_url:
+      'https://api.github.com/repos/manosim/notifications-test/languages',
+    merges_url:
+      'https://api.github.com/repos/manosim/notifications-test/merges',
+    milestones_url:
+      'https://api.github.com/repos/manosim/notifications-test/milestones{/number}',
+    notifications_url:
+      'https://api.github.com/repos/manosim/notifications-test/notifications{?since,all,participating}',
+    pulls_url:
+      'https://api.github.com/repos/manosim/notifications-test/pulls{/number}',
+    releases_url:
+      'https://api.github.com/repos/manosim/notifications-test/releases{/id}',
+    stargazers_url:
+      'https://api.github.com/repos/manosim/notifications-test/stargazers',
+    statuses_url:
+      'https://api.github.com/repos/manosim/notifications-test/statuses/{sha}',
+    subscribers_url:
+      'https://api.github.com/repos/manosim/notifications-test/subscribers',
+    subscription_url:
+      'https://api.github.com/repos/manosim/notifications-test/subscription',
+    tags_url: 'https://api.github.com/repos/manosim/notifications-test/tags',
+    teams_url: 'https://api.github.com/repos/manosim/notifications-test/teams',
+    trees_url:
+      'https://api.github.com/repos/manosim/notifications-test/git/trees{/sha}',
   },
   url: 'https://api.github.com/notifications/threads/138661096',
-  subscription_url: 'https://api.github.com/notifications/threads/138661096/subscription',
+  subscription_url:
+    'https://api.github.com/notifications/threads/138661096/subscription',
 };
 
 // 2 Notifications
@@ -293,6 +380,7 @@ const mockDiscussionComments: DiscussionComments = {
         login: 'comment-user',
         url: 'https://github.com/comment-user',
         type: 'User',
+        avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
       },
       replies: {
         nodes: [],
@@ -305,6 +393,7 @@ const mockDiscussionComments: DiscussionComments = {
         login: 'comment-user',
         url: 'https://github.com/comment-user',
         type: 'User',
+        avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
       },
       replies: {
         nodes: [],
@@ -317,6 +406,7 @@ const mockDiscussionComments: DiscussionComments = {
         login: 'comment-user',
         url: 'https://github.com/comment-user',
         type: 'User',
+        avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
       },
       replies: {
         nodes: [
@@ -327,6 +417,8 @@ const mockDiscussionComments: DiscussionComments = {
               login: 'reply-user',
               url: 'https://github.com/reply-user',
               type: 'User',
+              avatar_url:
+                'https://avatars.githubusercontent.com/u/123456789?v=4',
             },
           },
         ],
@@ -339,6 +431,7 @@ const mockDiscussionComments: DiscussionComments = {
         login: 'comment-user',
         url: 'https://github.com/comment-user',
         type: 'User',
+        avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
       },
       replies: {
         nodes: [],
@@ -351,6 +444,7 @@ const mockDiscussionComments: DiscussionComments = {
         login: 'comment-user',
         url: 'https://github.com/comment-user',
         type: 'User',
+        avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
       },
       replies: {
         nodes: [
@@ -361,6 +455,8 @@ const mockDiscussionComments: DiscussionComments = {
               login: 'reply-user',
               url: 'https://github.com/reply-user',
               type: 'User',
+              avatar_url:
+                'https://avatars.githubusercontent.com/u/123456789?v=4',
             },
           },
         ],
@@ -373,6 +469,7 @@ const mockDiscussionComments: DiscussionComments = {
         login: 'comment-user',
         url: 'https://github.com/comment-user',
         type: 'User',
+        avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
       },
 
       replies: {
@@ -384,6 +481,8 @@ const mockDiscussionComments: DiscussionComments = {
               login: 'reply-user',
               url: 'https://github.com/reply-user',
               type: 'User',
+              avatar_url:
+                'https://avatars.githubusercontent.com/u/123456789?v=4',
             },
           },
         ],
@@ -396,6 +495,7 @@ const mockDiscussionComments: DiscussionComments = {
         login: 'comment-user',
         url: 'https://github.com/comment-user',
         type: 'User',
+        avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
       },
       replies: {
         nodes: [
@@ -406,6 +506,8 @@ const mockDiscussionComments: DiscussionComments = {
               login: 'reply-user',
               url: 'https://github.com/reply-user',
               type: 'User',
+              avatar_url:
+                'https://avatars.githubusercontent.com/u/123456789?v=4',
             },
           },
         ],

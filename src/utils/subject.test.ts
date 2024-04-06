@@ -2,7 +2,10 @@ import axios from 'axios';
 import nock from 'nock';
 
 import { mockAccounts } from '../__mocks__/mock-state';
-import { mockedSingleNotification } from '../__mocks__/mockedData';
+import {
+  mockedNotificationUser,
+  mockedSingleNotification,
+} from '../__mocks__/mockedData';
 import {
   getCheckSuiteAttributes,
   getGitifySubjectDetails,
@@ -759,14 +762,19 @@ describe('utils/subject.ts', () => {
 
       nock('https://api.github.com')
         .get('/repos/manosim/notifications-test/releases/1')
-        .reply(200, { author: { login: 'some-user' } });
+        .reply(200, { author: mockedNotificationUser });
 
       const result = await getGitifySubjectDetails(
         mockNotification,
         mockAccounts.token,
       );
 
-      expect(result.user).toEqual({ login: 'some-user' });
+      expect(result.user).toEqual({
+        login: 'octocat',
+        html_url: 'https://github.com/octocat',
+        avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+        type: 'User',
+      });
     });
   });
 

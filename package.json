@@ -78,7 +78,13 @@
       "entitlementsInherit": "./entitlements/entitlements.mac.plist",
       "publish": [
         "github"
-      ]
+      ],
+      "extendInfo": {
+        "NSBluetoothAlwaysUsageDescription": null,
+        "NSBluetoothPeripheralUsageDescription": null,
+        "NSCameraUsageDescription": null,
+        "NSMicrophoneUsageDescription": null
+      }
     },
     "dmg": {
       "icon": "assets/images/app-icon.icns",
@@ -118,21 +124,21 @@
     "react-router-dom": "6.22.3",
     "react-transition-group": "4.4.5",
     "ts-loader": "9.5.1",
-    "typescript": "5.4.3"
+    "typescript": "5.4.4"
   },
   "devDependencies": {
     "@electron/notarize": "2.3.0",
     "@testing-library/react": "14.2.2",
     "@types/jest": "29.5.12",
-    "@types/node": "20.12.3",
+    "@types/node": "20.12.5",
     "@types/nprogress": "0.2.3",
     "@types/react": "18.2.74",
     "@types/react-router-dom": "5.3.3",
     "@types/react-test-renderer": "18.0.7",
     "@types/react-transition-group": "4.4.10",
     "autoprefixer": "10.4.19",
-    "css-loader": "6.10.0",
-    "electron": "29.1.6",
+    "css-loader": "7.0.0",
+    "electron": "29.2.0",
     "electron-builder": "24.13.3",
     "husky": "9.0.11",
     "jest": "29.7.0",
