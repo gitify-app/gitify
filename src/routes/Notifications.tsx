@@ -29,10 +29,10 @@ export const NotificationsRoute: React.FC = (props) => {
     switch (failureType) {
       case 'BAD_CREDENTIALS':
         return <BadCredentials />;
-      case 'RATE_LIMIT':
-        return <RateLimit />;
       case 'MISSING_SCOPES':
         return <MissingScopes />;
+      case 'RATE_LIMITED':
+        return <RateLimit />;
       default:
         return <Oops />;
     }
