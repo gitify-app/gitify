@@ -3,11 +3,14 @@ import React, { useContext, useMemo } from 'react';
 import { AccountNotifications } from '../components/AccountNotifications';
 import { AllRead } from '../components/AllRead';
 import { AppContext } from '../context/App';
-import { Oops } from '../components/Oops';
+import { Oops } from '../components/error/Oops';
 import { getNotificationCount } from '../utils/notifications';
+import { RateLimit } from '../components/error/RateLimit';
+import { MissingScopes } from '../components/error/MissingScopes';
+import { BadCredentials } from '../components/error/BadCredentials';
 
 export const NotificationsRoute: React.FC = (props) => {
-  const { notifications, requestFailed } = useContext(AppContext);
+  const { notifications, requestFailed, failureType } = useContext(AppContext);
 
   const hasMultipleAccounts = useMemo(
     () => notifications.length > 1,
@@ -23,7 +26,16 @@ export const NotificationsRoute: React.FC = (props) => {
   );
 
   if (requestFailed) {
-    return <Oops />;
+    switch (failureType) {
+      case 'BAD_CREDENTIALS':
+        return <BadCredentials />;
+      case 'RATE_LIMIT':
+        return <RateLimit />;
+      case 'MISSING_SCOPES':
+        return <MissingScopes />;
+      default:
+        return <Oops />;
+    }
   }
 
   if (!hasNotifications) {

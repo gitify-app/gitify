@@ -366,3 +366,8 @@ export interface WorkflowRunAttributes {
   statusDisplayName: string;
   status: CheckSuiteStatus | null;
 }
+
+export interface GithubRESTError {
+  message: string;
+  documentation_url: string;
+}

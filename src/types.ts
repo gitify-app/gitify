@@ -74,3 +74,10 @@ export interface GitifyUser {
   name: string;
   id: number;
 }
+
+export type FailureType =
+  | 'BAD_CREDENTIALS'
+  | 'RATE_LIMIT'
+  | 'MISSING_SCOPES'
+  | 'UNKNOWN'
+  | 'NONE';

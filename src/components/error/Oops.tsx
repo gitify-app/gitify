@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Constants } from '../utils/constants';
+import { Constants } from '../../utils/constants';
 
 export const Oops = () => {
   const emoji = React.useMemo(

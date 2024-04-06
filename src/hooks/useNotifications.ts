@@ -1,8 +1,13 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useCallback, useState } from 'react';
 
-import { AccountNotifications, AuthState, SettingsState } from '../types';
-import { Notification } from '../typesGithub';
+import {
+  AccountNotifications,
+  AuthState,
+  SettingsState,
+  FailureType,
+} from '../types';
+import { GithubRESTError, Notification } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import {
   getEnterpriseAccountToken,
@@ -53,11 +58,14 @@ interface NotificationsState {
   ) => Promise<void>;
   isFetching: boolean;
   requestFailed: boolean;
+  failureType: FailureType;
 }
 
 export const useNotifications = (colors: boolean): NotificationsState => {
   const [isFetching, setIsFetching] = useState(false);
   const [requestFailed, setRequestFailed] = useState(false);
+  const [failureType, setFailureType] = useState<FailureType>('NONE');
+
   const [notifications, setNotifications] = useState<AccountNotifications[]>(
     [],
   );
@@ -65,7 +73,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
       const isGitHubLoggedIn = accounts.token !== null;
-      const endpointSuffix = `notifications?participating=${settings.participating}`;
+      const endpointSuffix = `notifications?all=true&participating=${settings.participating}`;
 
       function getGitHubNotifications() {
         if (!isGitHubLoggedIn) {
@@ -194,8 +202,25 @@ export const useNotifications = (colors: boolean): NotificationsState => {
               });
           }),
         )
-        .catch(() => {
+        .catch((err: AxiosError) => {
+          let failureType: FailureType = 'UNKNOWN';
+
+          const data = err.response.data as GithubRESTError;
+
+          if (err.response.status === 401) {
+            failureType = 'BAD_CREDENTIALS';
+          } else if (err.response.status === 403) {
+            if (data.message.includes('rate limit')) {
+              failureType = 'RATE_LIMIT';
+            } else if (
+              data.message.includes("Missing the 'notifications' scope")
+            ) {
+              failureType = 'MISSING_SCOPES';
+            }
+          }
+
           setIsFetching(false);
+          setFailureType(failureType);
           setRequestFailed(true);
         });
     },
@@ -387,6 +412,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   return {
     isFetching,
     requestFailed,
+    failureType,
     notifications,
 
     removeNotificationFromState,
