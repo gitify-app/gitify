@@ -77,7 +77,6 @@ export interface GitifyUser {
 
 export type FailureType =
   | 'BAD_CREDENTIALS'
-  | 'RATE_LIMIT'
   | 'MISSING_SCOPES'
-  | 'UNKNOWN'
-  | 'NONE';
+  | 'RATE_LIMITED'
+  | 'UNKNOWN';

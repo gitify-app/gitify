@@ -64,7 +64,7 @@ interface NotificationsState {
 export const useNotifications = (colors: boolean): NotificationsState => {
   const [isFetching, setIsFetching] = useState(false);
   const [requestFailed, setRequestFailed] = useState(false);
-  const [failureType, setFailureType] = useState<FailureType>('NONE');
+  const [failureType, setFailureType] = useState<FailureType>();
 
   const [notifications, setNotifications] = useState<AccountNotifications[]>(
     [],
@@ -95,7 +95,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
       }
 
       setIsFetching(true);
-      setFailureType('NONE');
+      setFailureType(null);
       setRequestFailed(false);
 
       return axios
@@ -204,7 +204,6 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           }),
         )
         .catch((err: AxiosError) => {
-          console.log(JSON.stringify(err));
           let failureType: FailureType = 'UNKNOWN';
 
           const data = err.response.data as GithubRESTError;
@@ -212,15 +211,13 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           if (err.response.status === 401) {
             failureType = 'BAD_CREDENTIALS';
           } else if (err.response.status === 403) {
-            if (
+            if (data.message.includes("Missing the 'notifications' scope")) {
+              failureType = 'MISSING_SCOPES';
+            } else if (
               data.message.includes('API rate limit exceeded') ||
               data.message.includes('You have exceeded a secondary rate limit')
             ) {
-              failureType = 'RATE_LIMIT';
-            } else if (
-              data.message.includes("Missing the 'notifications' scope")
-            ) {
-              failureType = 'MISSING_SCOPES';
+              failureType = 'RATE_LIMITED';
             }
           }
 
