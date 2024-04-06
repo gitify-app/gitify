@@ -211,7 +211,10 @@ export const useNotifications = (colors: boolean): NotificationsState => {
           if (err.response.status === 401) {
             failureType = 'BAD_CREDENTIALS';
           } else if (err.response.status === 403) {
-            if (data.message.includes('API rate limit exceeded')) {
+            if (
+              data.message.includes('API rate limit exceeded') ||
+              data.message.includes('You have exceeded a secondary rate limit')
+            ) {
               failureType = 'RATE_LIMIT';
             } else if (
               data.message.includes("Missing the 'notifications' scope")
