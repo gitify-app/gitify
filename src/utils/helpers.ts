@@ -167,17 +167,18 @@ export async function fetchDiscussion(
     token,
     {
       query: `
+        fragment AuthorFields on Actor {
+          login
+          url
+          avatar_url: avatarUrl
+          type: __typename
+        }
+      
         fragment CommentFields on DiscussionComment {
           databaseId
           createdAt
           author {
-            login
-            url
-          }
-          bot: author {
-            ... on Bot {
-              login
-            }
+            ...AuthorFields
           }
         }
       
@@ -196,6 +197,9 @@ export async function fetchDiscussion(
                 stateReason
                 isAnswered
                 url
+                author {
+                  ...AuthorFields
+                }
                 comments(last: $lastComments){
                   nodes {
                     ...CommentFields
@@ -255,7 +259,7 @@ export async function generateGitHubWebUrl(
   notification: Notification,
   accounts: AuthState,
 ): Promise<string> {
-  let url: string;
+  let url = notification.repository.html_url;
   const token = getTokenForHost(notification.hostname, accounts);
 
   if (notification.subject.latest_comment_url) {
@@ -278,7 +282,6 @@ export async function generateGitHubWebUrl(
         url = getWorkflowRunUrl(notification);
         break;
       default:
-        url = notification.repository.html_url;
         break;
     }
   }

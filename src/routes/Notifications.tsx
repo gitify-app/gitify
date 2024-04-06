@@ -3,14 +3,13 @@ import React, { useContext, useMemo } from 'react';
 import { AccountNotifications } from '../components/AccountNotifications';
 import { AllRead } from '../components/AllRead';
 import { AppContext } from '../context/App';
-import { Oops } from '../components/error/Oops';
+import { Error } from '../components/Error';
 import { getNotificationCount } from '../utils/notifications';
-import { RateLimited } from '../components/error/RateLimited';
-import { MissingScopes } from '../components/error/MissingScopes';
-import { BadCredentials } from '../components/error/BadCredentials';
+import Constants from '../utils/constants';
 
 export const NotificationsRoute: React.FC = (props) => {
-  const { notifications, requestFailed, failureType } = useContext(AppContext);
+  const { notifications, requestFailed, failureType, settings } =
+    useContext(AppContext);
 
   const hasMultipleAccounts = useMemo(
     () => notifications.length > 1,
@@ -28,13 +27,13 @@ export const NotificationsRoute: React.FC = (props) => {
   if (requestFailed) {
     switch (failureType) {
       case 'BAD_CREDENTIALS':
-        return <BadCredentials />;
+        return <Error error={Constants.ERRORS.BAD_CREDENTIALS} />;
       case 'MISSING_SCOPES':
-        return <MissingScopes />;
+        return <Error error={Constants.ERRORS.MISSING_SCOPES} />;
       case 'RATE_LIMITED':
-        return <RateLimited />;
+        return <Error error={Constants.ERRORS.RATE_LIMITED} />;
       default:
-        return <Oops />;
+        return <Error error={Constants.ERRORS.DEFAULT_ERROR} />;
     }
   }
 
@@ -49,7 +48,9 @@ export const NotificationsRoute: React.FC = (props) => {
           key={account.hostname}
           hostname={account.hostname}
           notifications={account.notifications}
-          showAccountHostname={hasMultipleAccounts}
+          showAccountHostname={
+            hasMultipleAccounts || settings.showAccountHostname
+          }
         />
       ))}
     </div>

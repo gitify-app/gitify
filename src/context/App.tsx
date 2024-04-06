@@ -42,6 +42,7 @@ export const defaultSettings: SettingsState = {
   theme: Theme.SYSTEM,
   colors: null,
   markAsDoneOnOpen: false,
+  showAccountHostname: false,
 };
 
 interface AppContextState {

@@ -419,11 +419,11 @@ function determineFailureType(err: AxiosError<GithubRESTError>) {
   if (status === 401) {
     failureType = 'BAD_CREDENTIALS';
   } else if (status === 403) {
-    if (message.includes(Constants.ERROR_MESSAGES.MISSING_SCOPES)) {
+    if (message.includes("Missing the 'notifications' scope")) {
       failureType = 'MISSING_SCOPES';
     } else if (
-      message.includes(Constants.ERROR_MESSAGES.RATE_LIMITED_PRIMARY) ||
-      message.includes(Constants.ERROR_MESSAGES.RATE_LIMITED_SECONDARY)
+      message.includes('API rate limit exceeded') ||
+      message.includes('You have exceeded a secondary rate limit')
     ) {
       failureType = 'RATE_LIMITED';
     }

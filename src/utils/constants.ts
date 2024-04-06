@@ -15,13 +15,28 @@ export const Constants = {
 
   ALLREAD_EMOJIS: ['😉', '🎉', '🐯', '🙈', '🎈', '🎊', '👏', '🎪', '🍝'],
 
-  ERROR_EMOJIS: ['🤔', '😞', '😤', '😱', '😭'],
-
-  ERROR_MESSAGES: {
-    BAD_CREDENTIALS: 'Bad credentials',
-    MISSING_SCOPES: "Missing the 'notifications' scope",
-    RATE_LIMITED_PRIMARY: 'API rate limit exceeded',
-    RATE_LIMITED_SECONDARY: 'You have exceeded a secondary rate limit',
+  ERRORS: {
+    BAD_CREDENTIALS: {
+      title: 'Bad Credentials',
+      description: 'Your credentials are either invalid or expired.',
+      emojis: ['🔓'],
+    },
+    MISSING_SCOPES: {
+      title: 'Missing Scopes',
+      description: 'Your credentials are missing a required API scope.',
+      emojis: ['🙃'],
+    },
+    RATE_LIMITED: {
+      title: 'Rate Limited',
+      description:
+        'You have made too many requests. Please wait a while before trying again.',
+      emojis: ['😮‍💨'],
+    },
+    DEFAULT_ERROR: {
+      title: 'Oops! Something went wrong',
+      description: 'Please try again later.',
+      emojis: ['🤔', '😞', '😤', '😱', '😭'],
+    },
   },
 };
 

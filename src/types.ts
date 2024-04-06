@@ -13,6 +13,7 @@ export type SettingsState = AppearanceSettingsState &
 interface AppearanceSettingsState {
   theme: Theme;
   colors: boolean | null;
+  showAccountHostname: boolean;
 }
 
 interface NotificationSettingsState {
@@ -73,6 +74,12 @@ export interface GitifyUser {
   login: string;
   name: string;
   id: number;
+}
+
+export interface GitifyError {
+  emojis: string[];
+  title: string;
+  description: string;
 }
 
 export type FailureType =
