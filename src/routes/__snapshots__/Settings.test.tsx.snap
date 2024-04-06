@@ -389,10 +389,11 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
       </button>
       <button
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
-        title="Logout"
+        role="Logout"
+        title="Logout octocat"
       >
         <svg
-          aria-label="Logout"
+          aria-label="Logout octocat"
           class="octicon octicon-sign-out"
           fill="currentColor"
           focusable="false"
