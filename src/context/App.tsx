@@ -15,7 +15,7 @@ import {
   AuthState,
   AuthTokenOptions,
   SettingsState,
-  FailureType,
+  GitifyError,
 } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
 import { setTheme } from '../utils/theme';
@@ -56,7 +56,7 @@ interface AppContextState {
   notifications: AccountNotifications[];
   isFetching: boolean;
   requestFailed: boolean;
-  failureType: FailureType;
+  errorDetails: GitifyError;
   removeNotificationFromState: (id: string, hostname: string) => void;
   fetchNotifications: () => Promise<void>;
   markNotificationRead: (id: string, hostname: string) => Promise<void>;
@@ -78,7 +78,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     fetchNotifications,
     notifications,
     requestFailed,
-    failureType,
+    errorDetails,
     isFetching,
     removeNotificationFromState,
     markNotificationRead,
@@ -237,7 +237,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         notifications,
         isFetching,
         requestFailed,
-        failureType,
+        errorDetails,
         removeNotificationFromState,
         fetchNotifications: fetchNotificationsWithAccounts,
         markNotificationRead: markNotificationReadWithAccounts,

@@ -5,7 +5,7 @@ import {
   AccountNotifications,
   AuthState,
   SettingsState,
-  FailureType,
+  GitifyError,
 } from '../types';
 import { GithubRESTError, Notification } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
@@ -20,7 +20,7 @@ import {
   triggerNativeNotifications,
   setTrayIconColor,
 } from '../utils/notifications';
-import Constants from '../utils/constants';
+import Constants, { Errors } from '../utils/constants';
 import { removeNotifications } from '../utils/remove-notifications';
 import { getGitifySubjectDetails } from '../utils/subject';
 
@@ -58,13 +58,13 @@ interface NotificationsState {
   ) => Promise<void>;
   isFetching: boolean;
   requestFailed: boolean;
-  failureType: FailureType;
+  errorDetails: GitifyError;
 }
 
 export const useNotifications = (colors: boolean): NotificationsState => {
   const [isFetching, setIsFetching] = useState(false);
   const [requestFailed, setRequestFailed] = useState(false);
-  const [failureType, setFailureType] = useState<FailureType>();
+  const [errorDetails, setErrorDetails] = useState<GitifyError>();
 
   const [notifications, setNotifications] = useState<AccountNotifications[]>(
     [],
@@ -95,7 +95,6 @@ export const useNotifications = (colors: boolean): NotificationsState => {
       }
 
       setIsFetching(true);
-      setFailureType(null);
       setRequestFailed(false);
 
       return axios
@@ -206,8 +205,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
         .catch((err: AxiosError<GithubRESTError>) => {
           setIsFetching(false);
           setRequestFailed(true);
-          const failureType: FailureType = determineFailureType(err);
-          setFailureType(failureType);
+          setErrorDetails(determineFailureType(err));
         });
     },
     [notifications],
@@ -398,7 +396,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   return {
     isFetching,
     requestFailed,
-    failureType,
+    errorDetails,
     notifications,
 
     removeNotificationFromState,
@@ -411,22 +409,24 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   };
 };
 
-function determineFailureType(err: AxiosError<GithubRESTError>) {
-  let failureType: FailureType = 'UNKNOWN';
+function determineFailureType(err: AxiosError<GithubRESTError>): GitifyError {
   const status = err.response.status;
   const message = err.response.data.message;
 
   if (status === 401) {
-    failureType = 'BAD_CREDENTIALS';
-  } else if (status === 403) {
+    return Errors.BAD_CREDENTIALS;
+  }
+
+  if (status === 403) {
     if (message.includes("Missing the 'notifications' scope")) {
-      failureType = 'MISSING_SCOPES';
+      return Errors.MISSING_SCOPES;
     } else if (
       message.includes('API rate limit exceeded') ||
       message.includes('You have exceeded a secondary rate limit')
     ) {
-      failureType = 'RATE_LIMITED';
+      return Errors.RATE_LIMITED;
     }
   }
-  return failureType;
+
+  return Errors.UNKNOWN;
 }

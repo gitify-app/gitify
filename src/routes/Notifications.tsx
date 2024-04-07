@@ -5,10 +5,10 @@ import { AllRead } from '../components/AllRead';
 import { AppContext } from '../context/App';
 import { Error } from '../components/Error';
 import { getNotificationCount } from '../utils/notifications';
-import Constants from '../utils/constants';
+import { Errors } from '../utils/constants';
 
 export const NotificationsRoute: React.FC = (props) => {
-  const { notifications, requestFailed, failureType, settings } =
+  const { notifications, requestFailed, errorDetails, settings } =
     useContext(AppContext);
 
   const hasMultipleAccounts = useMemo(
@@ -25,16 +25,7 @@ export const NotificationsRoute: React.FC = (props) => {
   );
 
   if (requestFailed) {
-    switch (failureType) {
-      case 'BAD_CREDENTIALS':
-        return <Error error={Constants.ERRORS.BAD_CREDENTIALS} />;
-      case 'MISSING_SCOPES':
-        return <Error error={Constants.ERRORS.MISSING_SCOPES} />;
-      case 'RATE_LIMITED':
-        return <Error error={Constants.ERRORS.RATE_LIMITED} />;
-      default:
-        return <Error error={Constants.ERRORS.DEFAULT_ERROR} />;
-    }
+    return <Error error={errorDetails ?? Errors.UNKNOWN} />;
   }
 
   if (!hasNotifications) {

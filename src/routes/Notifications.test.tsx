@@ -5,6 +5,7 @@ import { AppContext } from '../context/App';
 import { mockedAccountNotifications } from '../__mocks__/mockedData';
 import { NotificationsRoute } from './Notifications';
 import { mockSettings } from '../__mocks__/mock-state';
+import { Errors } from '../utils/constants';
 
 jest.mock('../components/AccountNotifications', () => ({
   AccountNotifications: 'AccountNotifications',
@@ -61,7 +62,7 @@ describe('routes/Notifications.tsx', () => {
           value={{
             notifications: [],
             requestFailed: true,
-            failureType: 'BAD_CREDENTIALS',
+            errorDetails: Errors.BAD_CREDENTIALS,
           }}
         >
           <NotificationsRoute />
@@ -77,7 +78,7 @@ describe('routes/Notifications.tsx', () => {
           value={{
             notifications: [],
             requestFailed: true,
-            failureType: 'MISSING_SCOPES',
+            errorDetails: Errors.MISSING_SCOPES,
           }}
         >
           <NotificationsRoute />
@@ -93,7 +94,23 @@ describe('routes/Notifications.tsx', () => {
           value={{
             notifications: [],
             requestFailed: true,
-            failureType: 'RATE_LIMITED',
+            errorDetails: Errors.RATE_LIMITED,
+          }}
+        >
+          <NotificationsRoute />
+        </AppContext.Provider>,
+      );
+
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('unknown error', () => {
+      const tree = TestRenderer.create(
+        <AppContext.Provider
+          value={{
+            notifications: [],
+            requestFailed: true,
+            errorDetails: Errors.UNKNOWN,
           }}
         >
           <NotificationsRoute />
@@ -109,7 +126,7 @@ describe('routes/Notifications.tsx', () => {
           value={{
             notifications: [],
             requestFailed: true,
-            failureType: 'UNKNOWN',
+            errorDetails: null,
           }}
         >
           <NotificationsRoute />

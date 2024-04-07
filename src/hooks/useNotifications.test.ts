@@ -6,6 +6,7 @@ import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { mockedNotificationUser, mockedUser } from '../__mocks__/mockedData';
 import { AuthState } from '../types';
 import { useNotifications } from './useNotifications';
+import { Errors } from '../utils/constants';
 
 describe('hooks/useNotifications.ts', () => {
   beforeEach(() => {
@@ -69,7 +70,7 @@ describe('hooks/useNotifications.ts', () => {
 
           await waitFor(() => {
             expect(result.current.requestFailed).toBe(true);
-            expect(result.current.failureType).toBe('BAD_CREDENTIALS');
+            expect(result.current.errorDetails).toBe(Errors.BAD_CREDENTIALS);
           });
         });
 
@@ -93,7 +94,7 @@ describe('hooks/useNotifications.ts', () => {
 
           await waitFor(() => {
             expect(result.current.requestFailed).toBe(true);
-            expect(result.current.failureType).toBe('MISSING_SCOPES');
+            expect(result.current.errorDetails).toBe(Errors.MISSING_SCOPES);
           });
         });
 
@@ -117,7 +118,7 @@ describe('hooks/useNotifications.ts', () => {
 
           await waitFor(() => {
             expect(result.current.requestFailed).toBe(true);
-            expect(result.current.failureType).toBe('RATE_LIMITED');
+            expect(result.current.errorDetails).toBe(Errors.RATE_LIMITED);
           });
         });
 
@@ -141,7 +142,7 @@ describe('hooks/useNotifications.ts', () => {
 
           await waitFor(() => {
             expect(result.current.requestFailed).toBe(true);
-            expect(result.current.failureType).toBe('RATE_LIMITED');
+            expect(result.current.errorDetails).toBe(Errors.RATE_LIMITED);
           });
         });
 
@@ -278,7 +279,7 @@ describe('hooks/useNotifications.ts', () => {
 
           await waitFor(() => {
             expect(result.current.requestFailed).toBe(true);
-            expect(result.current.failureType).toBe('BAD_CREDENTIALS');
+            expect(result.current.errorDetails).toBe(Errors.BAD_CREDENTIALS);
           });
         });
 
@@ -302,7 +303,7 @@ describe('hooks/useNotifications.ts', () => {
 
           await waitFor(() => {
             expect(result.current.requestFailed).toBe(true);
-            expect(result.current.failureType).toBe('MISSING_SCOPES');
+            expect(result.current.errorDetails).toBe(Errors.MISSING_SCOPES);
           });
         });
 
@@ -326,7 +327,7 @@ describe('hooks/useNotifications.ts', () => {
 
           await waitFor(() => {
             expect(result.current.requestFailed).toBe(true);
-            expect(result.current.failureType).toBe('RATE_LIMITED');
+            expect(result.current.errorDetails).toBe(Errors.RATE_LIMITED);
           });
         });
 
@@ -350,7 +351,7 @@ describe('hooks/useNotifications.ts', () => {
 
           await waitFor(() => {
             expect(result.current.requestFailed).toBe(true);
-            expect(result.current.failureType).toBe('RATE_LIMITED');
+            expect(result.current.errorDetails).toBe(Errors.RATE_LIMITED);
           });
         });
 
@@ -374,7 +375,7 @@ describe('hooks/useNotifications.ts', () => {
 
           await waitFor(() => {
             expect(result.current.requestFailed).toBe(true);
-            expect(result.current.failureType).toBe('UNKNOWN');
+            expect(result.current.errorDetails).toBe(Errors.UNKNOWN);
           });
         });
       });

@@ -77,12 +77,12 @@ export interface GitifyUser {
 }
 
 export interface GitifyError {
-  emojis: string[];
   title: string;
   description: string;
+  emojis: string[];
 }
 
-export type FailureType =
+export type ErrorType =
   | 'BAD_CREDENTIALS'
   | 'MISSING_SCOPES'
   | 'RATE_LIMITED'

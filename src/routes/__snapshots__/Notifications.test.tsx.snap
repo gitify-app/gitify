@@ -62,6 +62,24 @@ exports[`routes/Notifications.tsx should render itself & its children (error con
 />
 `;
 
+exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) unknown error 1`] = `
+<Error
+  error={
+    {
+      "description": "Please try again later.",
+      "emojis": [
+        "🤔",
+        "😞",
+        "😤",
+        "😱",
+        "😭",
+      ],
+      "title": "Oops! Something went wrong",
+    }
+  }
+/>
+`;
+
 exports[`routes/Notifications.tsx should render itself & its children (show account hostname) 1`] = `
 <div
   className="flex flex-col flex-1 bg-white dark:bg-gray-dark"
