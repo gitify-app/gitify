@@ -14,8 +14,8 @@ jest.mock('../components/AllRead', () => ({
   AllRead: 'AllRead',
 }));
 
-jest.mock('../components/Oops', () => ({
-  Oops: 'Oops',
+jest.mock('../components/Error', () => ({
+  Error: 'Error',
 }));
 
 describe('routes/Notifications.tsx', () => {
@@ -54,13 +54,69 @@ describe('routes/Notifications.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself & its children (error page - oops)', () => {
-    const tree = TestRenderer.create(
-      <AppContext.Provider value={{ notifications: [], requestFailed: true }}>
-        <NotificationsRoute />
-      </AppContext.Provider>,
-    );
+  describe('should render itself & its children (error conditions - oops)', () => {
+    it('bad credentials', () => {
+      const tree = TestRenderer.create(
+        <AppContext.Provider
+          value={{
+            notifications: [],
+            requestFailed: true,
+            failureType: 'BAD_CREDENTIALS',
+          }}
+        >
+          <NotificationsRoute />
+        </AppContext.Provider>,
+      );
 
-    expect(tree).toMatchSnapshot();
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('missing scopes', () => {
+      const tree = TestRenderer.create(
+        <AppContext.Provider
+          value={{
+            notifications: [],
+            requestFailed: true,
+            failureType: 'MISSING_SCOPES',
+          }}
+        >
+          <NotificationsRoute />
+        </AppContext.Provider>,
+      );
+
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('rate limited', () => {
+      const tree = TestRenderer.create(
+        <AppContext.Provider
+          value={{
+            notifications: [],
+            requestFailed: true,
+            failureType: 'RATE_LIMITED',
+          }}
+        >
+          <NotificationsRoute />
+        </AppContext.Provider>,
+      );
+
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('default error', () => {
+      const tree = TestRenderer.create(
+        <AppContext.Provider
+          value={{
+            notifications: [],
+            requestFailed: true,
+            failureType: 'UNKNOWN',
+          }}
+        >
+          <NotificationsRoute />
+        </AppContext.Provider>,
+      );
+
+      expect(tree).toMatchSnapshot();
+    });
   });
 });

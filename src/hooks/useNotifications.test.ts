@@ -48,30 +48,129 @@ describe('hooks/useNotifications.ts', () => {
         expect(result.current.notifications[1].hostname).toBe('github.com');
       });
 
-      it('should fetch notifications with failure - github.com & enterprise', async () => {
-        const message = 'Oops! Something went wrong.';
+      describe('should fetch notifications with failures - github.com & enterprise', () => {
+        it('bad credentials', async () => {
+          const status = 401;
+          const message = 'Bad credentials';
 
-        nock('https://api.github.com/')
-          .get('/notifications?participating=false')
-          .reply(400, { message });
+          nock('https://api.github.com/')
+            .get('/notifications?participating=false')
+            .reply(status, { message });
 
-        nock('https://github.gitify.io/api/v3/')
-          .get('/notifications?participating=false')
-          .reply(400, { message });
+          nock('https://github.gitify.io/api/v3/')
+            .get('/notifications?participating=false')
+            .reply(status, { message });
 
-        const { result } = renderHook(() => useNotifications(false));
+          const { result } = renderHook(() => useNotifications(false));
 
-        act(() => {
-          result.current.fetchNotifications(mockAccounts, mockSettings);
+          act(() => {
+            result.current.fetchNotifications(mockAccounts, mockSettings);
+          });
+
+          await waitFor(() => {
+            expect(result.current.requestFailed).toBe(true);
+            expect(result.current.failureType).toBe('BAD_CREDENTIALS');
+          });
         });
 
-        expect(result.current.isFetching).toBe(true);
+        it('missing scopes', async () => {
+          const status = 403;
+          const message = "Missing the 'notifications' scope";
 
-        await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          nock('https://api.github.com/')
+            .get('/notifications?participating=false')
+            .reply(status, { message });
+
+          nock('https://github.gitify.io/api/v3/')
+            .get('/notifications?participating=false')
+            .reply(status, { message });
+
+          const { result } = renderHook(() => useNotifications(false));
+
+          act(() => {
+            result.current.fetchNotifications(mockAccounts, mockSettings);
+          });
+
+          await waitFor(() => {
+            expect(result.current.requestFailed).toBe(true);
+            expect(result.current.failureType).toBe('MISSING_SCOPES');
+          });
         });
 
-        expect(result.current.requestFailed).toBe(true);
+        it('rate limited - primary', async () => {
+          const status = 403;
+          const message = 'API rate limit exceeded';
+
+          nock('https://api.github.com/')
+            .get('/notifications?participating=false')
+            .reply(status, { message });
+
+          nock('https://github.gitify.io/api/v3/')
+            .get('/notifications?participating=false')
+            .reply(status, { message });
+
+          const { result } = renderHook(() => useNotifications(false));
+
+          act(() => {
+            result.current.fetchNotifications(mockAccounts, mockSettings);
+          });
+
+          await waitFor(() => {
+            expect(result.current.requestFailed).toBe(true);
+            expect(result.current.failureType).toBe('RATE_LIMITED');
+          });
+        });
+
+        it('rate limited - secondary', async () => {
+          const status = 403;
+          const message = 'You have exceeded a secondary rate limit';
+
+          nock('https://api.github.com/')
+            .get('/notifications?participating=false')
+            .reply(status, { message });
+
+          nock('https://github.gitify.io/api/v3/')
+            .get('/notifications?participating=false')
+            .reply(status, { message });
+
+          const { result } = renderHook(() => useNotifications(false));
+
+          act(() => {
+            result.current.fetchNotifications(mockAccounts, mockSettings);
+          });
+
+          await waitFor(() => {
+            expect(result.current.requestFailed).toBe(true);
+            expect(result.current.failureType).toBe('RATE_LIMITED');
+          });
+        });
+
+        it('default error', async () => {
+          const status = 400;
+          const message = 'Oops! Something went wrong.';
+
+          nock('https://api.github.com/')
+            .get('/notifications?participating=false')
+            .reply(status, { message });
+
+          nock('https://github.gitify.io/api/v3/')
+            .get('/notifications?participating=false')
+            .reply(status, { message });
+
+          const { result } = renderHook(() => useNotifications(false));
+
+          act(() => {
+            result.current.fetchNotifications(mockAccounts, mockSettings);
+          });
+
+          expect(result.current.isFetching).toBe(true);
+
+          await waitFor(() => {
+            expect(result.current.isFetching).toBe(false);
+          });
+
+          expect(result.current.requestFailed).toBe(true);
+        });
       });
     });
 
@@ -158,24 +257,125 @@ describe('hooks/useNotifications.ts', () => {
         expect(result.current.notifications[0].notifications.length).toBe(2);
       });
 
-      it('should fetch notifications with failure - github.com only', async () => {
-        const accounts: AuthState = {
-          ...mockAccounts,
-          enterpriseAccounts: [],
-        };
+      describe('should fetch notifications with failures - github.com only', () => {
+        it('bad credentials', async () => {
+          const status = 401;
+          const message = 'Bad credentials';
+          const accounts: AuthState = {
+            ...mockAccounts,
+            enterpriseAccounts: [],
+          };
 
-        nock('https://api.github.com/')
-          .get('/notifications?participating=false')
-          .reply(400, { message: 'Oops! Something went wrong.' });
+          nock('https://api.github.com/')
+            .get('/notifications?participating=false')
+            .reply(status, { message });
 
-        const { result } = renderHook(() => useNotifications(false));
+          const { result } = renderHook(() => useNotifications(false));
 
-        act(() => {
-          result.current.fetchNotifications(accounts, mockSettings);
+          act(() => {
+            result.current.fetchNotifications(accounts, mockSettings);
+          });
+
+          await waitFor(() => {
+            expect(result.current.requestFailed).toBe(true);
+            expect(result.current.failureType).toBe('BAD_CREDENTIALS');
+          });
         });
 
-        await waitFor(() => {
-          expect(result.current.requestFailed).toBe(true);
+        it('missing scopes', async () => {
+          const status = 403;
+          const message = "Missing the 'notifications' scope";
+          const accounts: AuthState = {
+            ...mockAccounts,
+            enterpriseAccounts: [],
+          };
+
+          nock('https://api.github.com/')
+            .get('/notifications?participating=false')
+            .reply(status, { message });
+
+          const { result } = renderHook(() => useNotifications(false));
+
+          act(() => {
+            result.current.fetchNotifications(accounts, mockSettings);
+          });
+
+          await waitFor(() => {
+            expect(result.current.requestFailed).toBe(true);
+            expect(result.current.failureType).toBe('MISSING_SCOPES');
+          });
+        });
+
+        it('rate limited - primary', async () => {
+          const status = 403;
+          const message = 'API rate limit exceeded';
+          const accounts: AuthState = {
+            ...mockAccounts,
+            enterpriseAccounts: [],
+          };
+
+          nock('https://api.github.com/')
+            .get('/notifications?participating=false')
+            .reply(status, { message });
+
+          const { result } = renderHook(() => useNotifications(false));
+
+          act(() => {
+            result.current.fetchNotifications(accounts, mockSettings);
+          });
+
+          await waitFor(() => {
+            expect(result.current.requestFailed).toBe(true);
+            expect(result.current.failureType).toBe('RATE_LIMITED');
+          });
+        });
+
+        it('rate limited - secondary', async () => {
+          const status = 403;
+          const message = 'You have exceeded a secondary rate limit';
+          const accounts: AuthState = {
+            ...mockAccounts,
+            enterpriseAccounts: [],
+          };
+
+          nock('https://api.github.com/')
+            .get('/notifications?participating=false')
+            .reply(status, { message });
+
+          const { result } = renderHook(() => useNotifications(false));
+
+          act(() => {
+            result.current.fetchNotifications(accounts, mockSettings);
+          });
+
+          await waitFor(() => {
+            expect(result.current.requestFailed).toBe(true);
+            expect(result.current.failureType).toBe('RATE_LIMITED');
+          });
+        });
+
+        it('default error', async () => {
+          const status = 400;
+          const message = 'Oops! Something went wrong.';
+          const accounts: AuthState = {
+            ...mockAccounts,
+            enterpriseAccounts: [],
+          };
+
+          nock('https://api.github.com/')
+            .get('/notifications?participating=false')
+            .reply(status, { message });
+
+          const { result } = renderHook(() => useNotifications(false));
+
+          act(() => {
+            result.current.fetchNotifications(accounts, mockSettings);
+          });
+
+          await waitFor(() => {
+            expect(result.current.requestFailed).toBe(true);
+            expect(result.current.failureType).toBe('UNKNOWN');
+          });
         });
       });
     });

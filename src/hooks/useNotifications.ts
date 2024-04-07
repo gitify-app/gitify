@@ -1,8 +1,13 @@
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useCallback, useState } from 'react';
 
-import { AccountNotifications, AuthState, SettingsState } from '../types';
-import { Notification } from '../typesGithub';
+import {
+  AccountNotifications,
+  AuthState,
+  SettingsState,
+  FailureType,
+} from '../types';
+import { GithubRESTError, Notification } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import {
   getEnterpriseAccountToken,
@@ -53,11 +58,14 @@ interface NotificationsState {
   ) => Promise<void>;
   isFetching: boolean;
   requestFailed: boolean;
+  failureType: FailureType;
 }
 
 export const useNotifications = (colors: boolean): NotificationsState => {
   const [isFetching, setIsFetching] = useState(false);
   const [requestFailed, setRequestFailed] = useState(false);
+  const [failureType, setFailureType] = useState<FailureType>();
+
   const [notifications, setNotifications] = useState<AccountNotifications[]>(
     [],
   );
@@ -87,6 +95,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
       }
 
       setIsFetching(true);
+      setFailureType(null);
       setRequestFailed(false);
 
       return axios
@@ -194,9 +203,11 @@ export const useNotifications = (colors: boolean): NotificationsState => {
               });
           }),
         )
-        .catch(() => {
+        .catch((err: AxiosError<GithubRESTError>) => {
           setIsFetching(false);
           setRequestFailed(true);
+          const failureType: FailureType = determineFailureType(err);
+          setFailureType(failureType);
         });
     },
     [notifications],
@@ -387,6 +398,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   return {
     isFetching,
     requestFailed,
+    failureType,
     notifications,
 
     removeNotificationFromState,
@@ -398,3 +410,23 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     markRepoNotificationsDone,
   };
 };
+
+function determineFailureType(err: AxiosError<GithubRESTError>) {
+  let failureType: FailureType = 'UNKNOWN';
+  const status = err.response.status;
+  const message = err.response.data.message;
+
+  if (status === 401) {
+    failureType = 'BAD_CREDENTIALS';
+  } else if (status === 403) {
+    if (message.includes("Missing the 'notifications' scope")) {
+      failureType = 'MISSING_SCOPES';
+    } else if (
+      message.includes('API rate limit exceeded') ||
+      message.includes('You have exceeded a secondary rate limit')
+    ) {
+      failureType = 'RATE_LIMITED';
+    }
+  }
+  return failureType;
+}

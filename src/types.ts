@@ -75,3 +75,15 @@ export interface GitifyUser {
   name: string;
   id: number;
 }
+
+export interface GitifyError {
+  emojis: string[];
+  title: string;
+  description: string;
+}
+
+export type FailureType =
+  | 'BAD_CREDENTIALS'
+  | 'MISSING_SCOPES'
+  | 'RATE_LIMITED'
+  | 'UNKNOWN';
