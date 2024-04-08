@@ -1,7 +1,6 @@
-import React from 'react';
 import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
 
-import { Notification } from '../typesGithub';
+import type { Notification } from '../typesGithub';
 import { RepositoryNotifications } from './Repository';
 
 interface IProps {

@@ -25,10 +25,7 @@ export const setTheme = (mode?: Theme) => {
       break;
 
     default:
-      if (
-        window.matchMedia &&
-        window.matchMedia('(prefers-color-scheme: dark)').matches
-      ) {
+      if (window.matchMedia?.('(prefers-color-scheme: dark)').matches) {
         setDarkMode();
       } else {
         setLightMode();

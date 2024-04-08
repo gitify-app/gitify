@@ -1,7 +1,7 @@
 const { app, dialog } = require('electron');
 
-const fs = require('fs');
-const path = require('path');
+const fs = require('node:fs');
+const path = require('node:path');
 
 async function onFirstRunMaybe() {
   if (isFirstRun()) {
@@ -49,7 +49,7 @@ function isFirstRun() {
 
     fs.writeFileSync(configPath, '');
   } catch (error) {
-    console.warn(`First run: Unable to write firstRun file`, error);
+    console.warn('First run: Unable to write firstRun file', error);
   }
 
   return true;

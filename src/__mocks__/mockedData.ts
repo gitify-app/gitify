@@ -1,10 +1,14 @@
-import { AccountNotifications, EnterpriseAccount, GitifyUser } from '../types';
-import {
-  Notification,
-  Repository,
-  GraphQLSearch,
+import type {
+  AccountNotifications,
+  EnterpriseAccount,
+  GitifyUser,
+} from '../types';
+import type {
   Discussion,
   DiscussionComments,
+  GraphQLSearch,
+  Notification,
+  Repository,
   User,
 } from '../typesGithub';
 import Constants from '../utils/constants';
@@ -65,7 +69,6 @@ export const mockedCommenterUser: User = {
   site_admin: false,
 };
 
-// prettier-ignore
 export const mockedSingleNotification: Notification = {
   hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
   id: '138661096',
@@ -242,16 +245,16 @@ export const mockedGithubNotifications = [
       description: null,
       fork: false,
       // Removed the rest of the properties
-    },
+    } as unknown as Repository,
     url: 'https://api.github.com/notifications/threads/148827438',
     subscription_url:
       'https://api.github.com/notifications/threads/148827438/subscription',
+    hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
   } as Notification,
 ];
 
 // 2 Notifications
 // Repository : 'myorg/notifications-test'
-// prettier-ignore
 export const mockedEnterpriseNotifications = [
   {
     id: '4',
@@ -262,7 +265,8 @@ export const mockedEnterpriseNotifications = [
     subject: {
       title: 'Release 0.0.1',
       url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1',
-      latest_comment_url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1',
+      latest_comment_url:
+        'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1',
       type: 'Release',
     },
     repository: {
@@ -277,14 +281,20 @@ export const mockedEnterpriseNotifications = [
         url: 'https://github.gitify.io/api/v3/users/myorg',
         html_url: 'https://github.gitify.io/myorg',
         followers_url: 'https://github.gitify.io/api/v3/users/myorg/followers',
-        following_url: 'https://github.gitify.io/api/v3/users/myorg/following{/other_user}',
-        gists_url: 'https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}',
-        starred_url: 'https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}',
-        subscriptions_url: 'https://github.gitify.io/api/v3/users/myorg/subscriptions',
+        following_url:
+          'https://github.gitify.io/api/v3/users/myorg/following{/other_user}',
+        gists_url:
+          'https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}',
+        starred_url:
+          'https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}',
+        subscriptions_url:
+          'https://github.gitify.io/api/v3/users/myorg/subscriptions',
         organizations_url: 'https://github.gitify.io/api/v3/users/myorg/orgs',
         repos_url: 'https://github.gitify.io/api/v3/users/myorg/repos',
-        events_url: 'https://github.gitify.io/api/v3/users/myorg/events{/privacy}',
-        received_events_url: 'https://github.gitify.io/api/v3/users/myorg/received_events',
+        events_url:
+          'https://github.gitify.io/api/v3/users/myorg/events{/privacy}',
+        received_events_url:
+          'https://github.gitify.io/api/v3/users/myorg/received_events',
         type: 'Organization',
         site_admin: false,
       },
@@ -293,7 +303,7 @@ export const mockedEnterpriseNotifications = [
       description: null,
       fork: false,
       // Removed the rest of the properties
-    } as Repository,
+    } as unknown as Repository,
     url: 'https://github.gitify.io/api/v3/notifications/threads/4',
     subscription_url:
       'https://github.gitify.io/api/v3/notifications/threads/4/subscription',
@@ -306,8 +316,7 @@ export const mockedEnterpriseNotifications = [
     last_read_at: '2017-05-20T14:20:55Z',
     subject: {
       title: 'Bump Version',
-      url:
-        'https://github.gitify.io/api/v3/repos/myorg/notifications-test/pulls/3',
+      url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/pulls/3',
       latest_comment_url:
         'https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21',
       type: 'PullRequest',
@@ -346,10 +355,11 @@ export const mockedEnterpriseNotifications = [
       description: null,
       fork: false,
       // Removed the rest of the properties
-    },
+    } as unknown as Repository,
     url: 'https://github.gitify.io/api/v3/notifications/threads/3',
     subscription_url:
       'https://github.gitify.io/api/v3/notifications/threads/3/subscription',
+    hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
   } as Notification,
 ];
 
@@ -525,7 +535,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
             viewerSubscription: 'SUBSCRIBED',
             title: '1.16.0',
             isAnswered: false,
-            stateReason: null,
+            stateReason: 'OPEN',
             url: 'https://github.com/manosim/notifications-test/discussions/612',
             author: {
               login: 'discussion-creator',
@@ -540,7 +550,7 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
             viewerSubscription: 'IGNORED',
             title: '1.16.0',
             isAnswered: false,
-            stateReason: null,
+            stateReason: 'ANSWERED',
             url: 'https://github.com/manosim/notifications-test/discussions/123',
             author: {
               login: 'discussion-creator',

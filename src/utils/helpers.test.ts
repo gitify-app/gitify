@@ -1,25 +1,35 @@
-import {
-  generateGitHubAPIUrl,
-  generateNotificationReferrerId,
-  isEnterpriseHost,
-  addHours,
-  formatSearchQueryString,
-  addNotificationReferrerIdToUrl,
-  getHtmlUrl,
-  generateGitHubWebUrl,
-  formatForDisplay,
-} from './helpers';
+import type { AxiosPromise, AxiosResponse } from 'axios';
+import { mockAccounts } from '../__mocks__/mock-state';
 import {
   mockedGraphQLResponse,
   mockedSingleNotification,
   mockedUser,
 } from '../__mocks__/mockedData';
+import type { SubjectType } from '../typesGithub';
 import * as apiRequests from './api-requests';
-import { AxiosPromise, AxiosResponse } from 'axios';
-import { mockAccounts } from '../__mocks__/mock-state';
-import { SubjectType } from '../typesGithub';
+import {
+  addHours,
+  addNotificationReferrerIdToUrl,
+  formatForDisplay,
+  formatSearchQueryString,
+  generateGitHubAPIUrl,
+  generateGitHubWebUrl,
+  generateNotificationReferrerId,
+  getHtmlUrl,
+  isEnterpriseHost,
+  isGitHubLoggedIn,
+} from './helpers';
 
 describe('utils/helpers.ts', () => {
+  describe('isGitHubLoggedIn', () => {
+    it('logged in', () => {
+      expect(isGitHubLoggedIn({ ...mockAccounts, token: '1234' })).toBe(true);
+    });
+
+    it('logged out', () => {
+      expect(isGitHubLoggedIn({ ...mockAccounts, token: null })).toBe(false);
+    });
+  });
   describe('isEnterpriseHost', () => {
     it('should return true for enterprise host', () => {
       expect(isEnterpriseHost('github.manos.im')).toBe(true);
@@ -115,17 +125,13 @@ describe('utils/helpers.ts', () => {
       );
 
       expect(result).toBe(
-        `exampleTitle in:title repo:exampleRepo updated:>2024-02-20T10:00:00.000Z`,
+        'exampleTitle in:title repo:exampleRepo updated:>2024-02-20T10:00:00.000Z',
       );
     });
   });
 
   describe('getHtmlUrl', () => {
-    let apiRequestAuthMock;
-
-    beforeEach(() => {
-      apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
-    });
+    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
 
     afterEach(() => {
       jest.clearAllMocks();

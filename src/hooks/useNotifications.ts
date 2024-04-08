@@ -1,26 +1,27 @@
-import axios, { AxiosError } from 'axios';
+import axios, { type AxiosError, type AxiosPromise } from 'axios';
 import { useCallback, useState } from 'react';
 
-import {
+import type {
   AccountNotifications,
   AuthState,
-  SettingsState,
   GitifyError,
+  SettingsState,
 } from '../types';
-import { GithubRESTError, Notification } from '../typesGithub';
+import type { GithubRESTError, Notification } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
-import {
-  getEnterpriseAccountToken,
-  generateGitHubAPIUrl,
-  isEnterpriseHost,
-  getTokenForHost,
-} from '../utils/helpers';
-import { removeNotification } from '../utils/remove-notification';
-import {
-  triggerNativeNotifications,
-  setTrayIconColor,
-} from '../utils/notifications';
 import Constants, { Errors } from '../utils/constants';
+import {
+  generateGitHubAPIUrl,
+  getEnterpriseAccountToken,
+  getTokenForHost,
+  isEnterpriseHost,
+  isGitHubLoggedIn,
+} from '../utils/helpers';
+import {
+  setTrayIconColor,
+  triggerNativeNotifications,
+} from '../utils/notifications';
+import { removeNotification } from '../utils/remove-notification';
 import { removeNotifications } from '../utils/remove-notifications';
 import { getGitifySubjectDetails } from '../utils/subject';
 
@@ -72,25 +73,25 @@ export const useNotifications = (colors: boolean): NotificationsState => {
 
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
-      const isGitHubLoggedIn = accounts.token !== null;
-      const endpointSuffix = `notifications?participating=${settings.participating}`;
+      function getNotifications(hostname: string, token: string): AxiosPromise {
+        const endpointSuffix = `notifications?participating=${settings.participating}`;
+        const url = `${generateGitHubAPIUrl(hostname)}${endpointSuffix}`;
+        return apiRequestAuth(url, 'GET', token);
+      }
 
       function getGitHubNotifications() {
-        if (!isGitHubLoggedIn) {
+        if (!isGitHubLoggedIn(accounts)) {
           return;
         }
-        const url = `${generateGitHubAPIUrl(
+        return getNotifications(
           Constants.DEFAULT_AUTH_OPTIONS.hostname,
-        )}${endpointSuffix}`;
-        return apiRequestAuth(url, 'GET', accounts.token);
+          accounts.token,
+        );
       }
 
       function getEnterpriseNotifications() {
         return accounts.enterpriseAccounts.map((account) => {
-          const url = `${generateGitHubAPIUrl(
-            account.hostname,
-          )}${endpointSuffix}`;
-          return apiRequestAuth(url, 'GET', account.token);
+          return getNotifications(account.hostname, account.token);
         });
       }
 
@@ -117,7 +118,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                 };
               },
             );
-            const data = isGitHubLoggedIn
+            const data = isGitHubLoggedIn(accounts)
               ? [
                   ...enterpriseNotifications,
                   {
@@ -420,7 +421,9 @@ function determineFailureType(err: AxiosError<GithubRESTError>): GitifyError {
   if (status === 403) {
     if (message.includes("Missing the 'notifications' scope")) {
       return Errors.MISSING_SCOPES;
-    } else if (
+    }
+
+    if (
       message.includes('API rate limit exceeded') ||
       message.includes('You have exceeded a secondary rate limit')
     ) {

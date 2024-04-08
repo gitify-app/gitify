@@ -1,4 +1,4 @@
-import { ErrorType, GitifyError } from '../types';
+import type { ErrorType, GitifyError } from '../types';
 
 export const Constants = {
   // GitHub OAuth

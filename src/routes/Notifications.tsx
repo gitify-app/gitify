@@ -1,13 +1,13 @@
-import React, { useContext, useMemo } from 'react';
+import { type FC, useContext, useMemo } from 'react';
 
 import { AccountNotifications } from '../components/AccountNotifications';
 import { AllRead } from '../components/AllRead';
+import { Oops } from '../components/Oops';
 import { AppContext } from '../context/App';
-import { Error } from '../components/Error';
-import { getNotificationCount } from '../utils/notifications';
 import { Errors } from '../utils/constants';
+import { getNotificationCount } from '../utils/notifications';
 
-export const NotificationsRoute: React.FC = (props) => {
+export const NotificationsRoute: FC = () => {
   const { notifications, requestFailed, errorDetails, settings } =
     useContext(AppContext);
 
@@ -25,7 +25,7 @@ export const NotificationsRoute: React.FC = (props) => {
   );
 
   if (requestFailed) {
-    return <Error error={errorDetails ?? Errors.UNKNOWN} />;
+    return <Oops error={errorDetails ?? Errors.UNKNOWN} />;
   }
 
   if (!hasNotifications) {

@@ -1,11 +1,12 @@
-import React, { useCallback, useContext } from 'react';
-import { ReadIcon, CheckIcon, MarkGithubIcon } from '@primer/octicons-react';
+import { CheckIcon, MarkGithubIcon, ReadIcon } from '@primer/octicons-react';
+
+import { type FC, useCallback, useContext } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { AppContext } from '../context/App';
-import { Notification } from '../typesGithub';
-import { NotificationRow } from './NotificationRow';
+import type { Notification } from '../typesGithub';
 import { openExternalLink } from '../utils/comms';
+import { NotificationRow } from './NotificationRow';
 
 interface IProps {
   hostname: string;
@@ -13,7 +14,7 @@ interface IProps {
   repoName: string;
 }
 
-export const RepositoryNotifications: React.FC<IProps> = ({
+export const RepositoryNotifications: FC<IProps> = ({
   repoName,
   repoNotifications,
   hostname,
@@ -37,23 +38,33 @@ export const RepositoryNotifications: React.FC<IProps> = ({
   }, [repoNotifications, hostname]);
 
   const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
+  const repoSlug = repoNotifications[0].repository.full_name;
 
   return (
     <>
       <div className="flex py-2 px-3 bg-gray-100 dark:bg-gray-darker dark:text-white group">
         <div className="flex flex-1 space-x-3 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap">
           {avatarUrl ? (
-            <img className="rounded w-5 h-5" src={avatarUrl} />
+            <img
+              className="rounded w-5 h-5"
+              src={avatarUrl}
+              alt={`${repoSlug}'s avatar`}
+            />
           ) : (
             <MarkGithubIcon size={18} />
           )}
-          <span className="cursor-pointer" onClick={openBrowser}>
+          <span
+            className="cursor-pointer"
+            onClick={openBrowser}
+            onKeyDown={openBrowser}
+          >
             {repoName}
           </span>
         </div>
 
         <div className="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity">
           <button
+            type="button"
             className="focus:outline-none h-full hover:text-green-500"
             title="Mark Repository as Done"
             onClick={markRepoAsDone}
@@ -64,6 +75,7 @@ export const RepositoryNotifications: React.FC<IProps> = ({
           <div className="w-[14px]" />
 
           <button
+            type="button"
             className="focus:outline-none h-full hover:text-green-500"
             title="Mark Repository as Read"
             onClick={markRepoAsRead}

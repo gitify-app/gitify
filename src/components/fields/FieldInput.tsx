@@ -1,4 +1,4 @@
-import React from 'react';
+import type { FC, ReactNode } from 'react';
 import { Field } from 'react-final-form';
 
 export interface IProps {
@@ -6,11 +6,11 @@ export interface IProps {
   type?: string;
   label: string;
   placeholder?: string;
-  helpText?: React.ReactNode | string;
+  helpText?: ReactNode | string;
   required?: boolean;
 }
 
-export const FieldInput: React.FC<IProps> = ({
+export const FieldInput: FC<IProps> = ({
   label,
   name,
   placeholder = '',

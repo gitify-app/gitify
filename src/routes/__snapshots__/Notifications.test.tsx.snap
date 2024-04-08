@@ -3,7 +3,7 @@
 exports[`routes/Notifications.tsx should render itself & its children (all read notifications) 1`] = `<AllRead />`;
 
 exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) bad credentials 1`] = `
-<Error
+<Oops
   error={
     {
       "description": "Your credentials are either invalid or expired.",
@@ -17,7 +17,7 @@ exports[`routes/Notifications.tsx should render itself & its children (error con
 `;
 
 exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) default error 1`] = `
-<Error
+<Oops
   error={
     {
       "description": "Please try again later.",
@@ -35,7 +35,7 @@ exports[`routes/Notifications.tsx should render itself & its children (error con
 `;
 
 exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) missing scopes 1`] = `
-<Error
+<Oops
   error={
     {
       "description": "Your credentials are missing a required API scope.",
@@ -49,7 +49,7 @@ exports[`routes/Notifications.tsx should render itself & its children (error con
 `;
 
 exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) rate limited 1`] = `
-<Error
+<Oops
   error={
     {
       "description": "Please wait a while before trying again.",
@@ -63,7 +63,7 @@ exports[`routes/Notifications.tsx should render itself & its children (error con
 `;
 
 exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) unknown error 1`] = `
-<Error
+<Oops
   error={
     {
       "description": "Please try again later.",
@@ -179,6 +179,7 @@ exports[`routes/Notifications.tsx should render itself & its children (show acco
           "url": "https://api.github.com/notifications/threads/138661096",
         },
         {
+          "hostname": "github.com",
           "id": "148827438",
           "last_read_at": "2017-05-20T16:59:03Z",
           "reason": "author",
@@ -327,6 +328,7 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
           "url": "https://api.github.com/notifications/threads/138661096",
         },
         {
+          "hostname": "github.com",
           "id": "148827438",
           "last_read_at": "2017-05-20T16:59:03Z",
           "reason": "author",
@@ -421,6 +423,7 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
           "url": "https://github.gitify.io/api/v3/notifications/threads/4",
         },
         {
+          "hostname": "github.com",
           "id": "3",
           "last_read_at": "2017-05-20T14:20:55Z",
           "reason": "subscribed",

@@ -6,12 +6,12 @@ import {
   mockedNotificationUser,
   mockedSingleNotification,
 } from '../__mocks__/mockedData';
+import type { SubjectType } from '../typesGithub';
 import {
   getCheckSuiteAttributes,
   getGitifySubjectDetails,
   getWorkflowRunAttributes,
 } from './subject';
-import { SubjectType } from '../typesGithub';
 describe('utils/subject.ts', () => {
   beforeEach(() => {
     // axios will default to using the XHR adapter which can't be intercepted

@@ -46,18 +46,18 @@ The release process is automated. Follow the steps below.
 
 ### Tests
 
-There are 2 checks - one for prettier and one for the unit tests with `jest`.
+There are 2 checks - one for biome (linter & formatter) and one for the unit tests with `jest`.
 
-```
-    // Run prettier to check
-    pnpm prettier:check
+```shell
+# Run biome to check linting and formatting
+pnpm lint:check
 
-    // Run linter & unit tests with coverage
-    pnpm test
+# Run unit tests with coverage
+pnpm test
 
-    // If you want to pass arguments to jest (or other `pnpm` commands)
-    // like `--watch`, you can prepend `--` to the command
-    pnpm test -- --watch
+# If you want to pass arguments to jest (or other `pnpm` commands)
+# like `--watch`, you can prepend `--` to the command
+pnpm test -- --watch
 ```
 
 ### FAQ

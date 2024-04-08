@@ -1,11 +1,10 @@
-import React from 'react';
 import TestRenderer from 'react-test-renderer';
 
-import { AppContext } from '../context/App';
-import { mockedAccountNotifications } from '../__mocks__/mockedData';
-import { NotificationsRoute } from './Notifications';
 import { mockSettings } from '../__mocks__/mock-state';
+import { mockedAccountNotifications } from '../__mocks__/mockedData';
+import { AppContext } from '../context/App';
 import { Errors } from '../utils/constants';
+import { NotificationsRoute } from './Notifications';
 
 jest.mock('../components/AccountNotifications', () => ({
   AccountNotifications: 'AccountNotifications',
@@ -15,8 +14,8 @@ jest.mock('../components/AllRead', () => ({
   AllRead: 'AllRead',
 }));
 
-jest.mock('../components/Error', () => ({
-  Error: 'Error',
+jest.mock('../components/Oops', () => ({
+  Oops: 'Oops',
 }));
 
 describe('routes/Notifications.tsx', () => {

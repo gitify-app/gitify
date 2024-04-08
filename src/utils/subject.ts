@@ -1,5 +1,4 @@
-import { fetchDiscussion, getLatestDiscussionComment } from './helpers';
-import {
+import type {
   CheckSuiteAttributes,
   CheckSuiteStatus,
   DiscussionStateType,
@@ -15,6 +14,7 @@ import {
   WorkflowRunAttributes,
 } from '../typesGithub';
 import { apiRequestAuth } from './api-requests';
+import { fetchDiscussion, getLatestDiscussionComment } from './helpers';
 
 export async function getGitifySubjectDetails(
   notification: Notification,
@@ -56,7 +56,7 @@ export function getCheckSuiteAttributes(
     return {
       workflowName: groups.workflowName,
       attemptNumber: groups.attemptNumber
-        ? parseInt(groups.attemptNumber)
+        ? Number.parseInt(groups.attemptNumber)
         : null,
       status: getCheckSuiteStatus(groups.statusDisplayName),
       statusDisplayName: groups.statusDisplayName,

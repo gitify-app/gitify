@@ -5,7 +5,9 @@ import {
   XCircleIcon,
 } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
-import React, {
+
+import {
+  type FC,
   useCallback,
   useContext,
   useEffect,
@@ -19,7 +21,6 @@ import { FieldRadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
 import { Theme } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
-import { setTheme } from '../utils/theme';
 import {
   openExternalLink,
   updateTrayIcon,
@@ -27,8 +28,9 @@ import {
 } from '../utils/comms';
 import Constants from '../utils/constants';
 import { generateGitHubAPIUrl } from '../utils/helpers';
+import { setTheme } from '../utils/theme';
 
-export const SettingsRoute: React.FC = () => {
+export const SettingsRoute: FC = () => {
   const { accounts, settings, updateSetting, logout } = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -96,6 +98,7 @@ export const SettingsRoute: React.FC = () => {
     >
       <div className="flex justify-between items-center mt-2 py-2 mx-8">
         <button
+          type="button"
           className="focus:outline-none"
           title="Go Back"
           onClick={() => navigate(-1)}
@@ -217,15 +220,17 @@ export const SettingsRoute: React.FC = () => {
       </div>
 
       <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8">
-        <small
+        <button
+          type="button"
           className="font-semibold cursor-pointer"
           title="View release notes"
           onClick={() => openGitHubReleaseNotes(appVersion)}
         >
           Gitify v{appVersion}
-        </small>
+        </button>
         <div>
           <button
+            type="button"
             className={footerButtonClass}
             title="Login with GitHub Enterprise"
             onClick={goToEnterprise}
@@ -237,18 +242,20 @@ export const SettingsRoute: React.FC = () => {
           </button>
 
           <button
+            type="button"
             className={footerButtonClass}
             title={`Logout ${accounts.user.login}`}
-            role="Logout"
+            role="button"
             onClick={logoutUser}
           >
             <SignOutIcon
               size={18}
-              aria-label={`Logout ${accounts.user.login}`}
+              aria-label={`Logout from ${accounts.user.login}`}
             />
           </button>
 
           <button
+            type="button"
             className={`${footerButtonClass} mr-0`}
             title="Quit Gitify"
             onClick={quitApp}

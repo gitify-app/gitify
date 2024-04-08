@@ -2,7 +2,7 @@ const { ipcMain, app, nativeTheme } = require('electron');
 const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
-const path = require('path');
+const path = require('node:path');
 
 require('@electron/remote/main').initialize();
 

@@ -1,31 +1,34 @@
-import React, { useCallback, useContext } from 'react';
+import {
+  BellSlashIcon,
+  CheckIcon,
+  FeedPersonIcon,
+  ReadIcon,
+} from '@primer/octicons-react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import {
-  CheckIcon,
-  BellSlashIcon,
-  ReadIcon,
-  FeedPersonIcon,
-} from '@primer/octicons-react';
+  type FC,
+  type KeyboardEvent,
+  type MouseEvent,
+  useCallback,
+  useContext,
+} from 'react';
 
+import { AppContext } from '../context/App';
+import type { Notification } from '../typesGithub';
+import { openExternalLink } from '../utils/comms';
 import {
   formatReason,
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
 } from '../utils/github-api';
 import { formatForDisplay, openInBrowser } from '../utils/helpers';
-import { Notification } from '../typesGithub';
-import { AppContext } from '../context/App';
-import { openExternalLink } from '../utils/comms';
 
 interface IProps {
   hostname: string;
   notification: Notification;
 }
 
-export const NotificationRow: React.FC<IProps> = ({
-  notification,
-  hostname,
-}) => {
+export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const {
     settings,
     accounts,
@@ -51,14 +54,16 @@ export const NotificationRow: React.FC<IProps> = ({
     [notification],
   );
 
-  const unsubscribe = (event: React.MouseEvent<HTMLElement>) => {
+  const unsubscribe = (event: MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.
     event.stopPropagation();
 
     unsubscribeNotification(notification.id, hostname);
   };
 
-  const openUserProfile = (event: React.MouseEvent<HTMLElement>) => {
+  const openUserProfile = (
+    event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>,
+  ) => {
     // Don't trigger onClick of parent element.
     event.stopPropagation();
 
@@ -92,7 +97,11 @@ export const NotificationRow: React.FC<IProps> = ({
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
 
-      <div className="flex-1 overflow-hidden" onClick={() => pressTitle()}>
+      <div
+        className="flex-1 overflow-hidden"
+        onClick={() => pressTitle()}
+        onKeyDown={() => pressTitle()}
+      >
         <div
           className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
           role="main"
@@ -108,11 +117,13 @@ export const NotificationRow: React.FC<IProps> = ({
                 <span
                   title="View User Profile"
                   onClick={openUserProfile}
+                  onKeyDown={openUserProfile}
                 >
                   <img
                     className="rounded-full w-4 h-4 cursor-pointer"
                     src={notification.subject.user.avatar_url}
                     title={notification.subject.user.login}
+                    alt={`${notification.subject.user.login}'s avatar`}
                   />
                 </span>
               ) : (
@@ -134,6 +145,7 @@ export const NotificationRow: React.FC<IProps> = ({
 
       <div className="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity">
         <button
+          type="button"
           className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Done"
           onClick={() => markNotificationDone(notification.id, hostname)}
@@ -142,6 +154,7 @@ export const NotificationRow: React.FC<IProps> = ({
         </button>
 
         <button
+          type="button"
           className="focus:outline-none h-full hover:text-red-500"
           title="Unsubscribe"
           onClick={unsubscribe}
@@ -150,6 +163,7 @@ export const NotificationRow: React.FC<IProps> = ({
         </button>
 
         <button
+          type="button"
           className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Read"
           onClick={() => markNotificationRead(notification.id, hostname)}
