@@ -1,10 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-
 import { MemoryRouter } from 'react-router-dom';
 import * as TestRenderer from 'react-test-renderer';
-
 const { shell, ipcRenderer } = require('electron');
-
 import { mockSettings } from '../__mocks__/mock-state';
 import { mockedAccountNotifications } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
@@ -61,7 +58,7 @@ describe('components/Sidebar.tsx', () => {
   });
 
   it('should refresh the notifications', () => {
-    const { getByTitle } = render(
+    render(
       <AppContext.Provider
         value={{ isLoggedIn: true, notifications: [], fetchNotifications }}
       >
@@ -71,24 +68,24 @@ describe('components/Sidebar.tsx', () => {
       </AppContext.Provider>,
     );
     fetchNotifications.mockReset();
-    fireEvent.click(getByTitle('Refresh Notifications'));
+    fireEvent.click(screen.getByTitle('Refresh Notifications'));
     expect(fetchNotifications).toHaveBeenCalledTimes(1);
   });
 
   it('go to the settings route', () => {
-    const { getByTitle } = render(
+    render(
       <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
       </AppContext.Provider>,
     );
-    fireEvent.click(getByTitle('Settings'));
+    fireEvent.click(screen.getByTitle('Settings'));
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/settings');
   });
 
   it('opens github in the notifications page', () => {
-    const { getByLabelText } = render(
+    render(
       <AppContext.Provider
         value={{
           isLoggedIn: true,
@@ -100,7 +97,7 @@ describe('components/Sidebar.tsx', () => {
         </MemoryRouter>
       </AppContext.Provider>,
     );
-    fireEvent.click(getByLabelText('4 Unread Notifications'));
+    fireEvent.click(screen.getByLabelText('4 Unread Notifications'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(
       'https://github.com/notifications',
@@ -108,14 +105,14 @@ describe('components/Sidebar.tsx', () => {
   });
 
   it('should quit the app', () => {
-    const { getByTitle } = render(
+    render(
       <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
       </AppContext.Provider>,
     );
-    fireEvent.click(getByTitle('Quit Gitify'));
+    fireEvent.click(screen.getByTitle('Quit Gitify'));
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
   });
@@ -137,7 +134,7 @@ describe('components/Sidebar.tsx', () => {
 
   describe('should render the notifications icon', () => {
     it('when there are 0 notifications', () => {
-      const { getByTitle } = render(
+      render(
         <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
           <MemoryRouter>
             <Sidebar />
@@ -145,14 +142,14 @@ describe('components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
 
-      const notificationsIcon = getByTitle('0 Unread Notifications');
+      const notificationsIcon = screen.getByTitle('0 Unread Notifications');
       expect(notificationsIcon.className).toContain('text-white');
       expect(notificationsIcon.childNodes.length).toBe(1);
       expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
     });
 
     it('when there are more than 0 notifications', () => {
-      const { getByTitle } = render(
+      render(
         <AppContext.Provider
           value={{
             isLoggedIn: true,
@@ -165,7 +162,7 @@ describe('components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
 
-      const notificationsIcon = getByTitle('4 Unread Notifications');
+      const notificationsIcon = screen.getByTitle('4 Unread Notifications');
       expect(notificationsIcon.className).toContain('text-green-500');
       expect(notificationsIcon.childNodes.length).toBe(2);
       expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');

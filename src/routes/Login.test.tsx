@@ -1,10 +1,7 @@
-import { fireEvent, render } from '@testing-library/react';
-
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import TestRenderer from 'react-test-renderer';
-
 const { ipcRenderer } = require('electron');
-
 import { AppContext } from '../context/App';
 import { LoginRoute } from './Login';
 
@@ -53,13 +50,13 @@ describe('routes/Login.tsx', () => {
   });
 
   it('should navigate to login with github enterprise', () => {
-    const { getByLabelText } = render(
+    render(
       <MemoryRouter>
         <LoginRoute />
       </MemoryRouter>,
     );
 
-    fireEvent.click(getByLabelText('Login with GitHub Enterprise'));
+    fireEvent.click(screen.getByLabelText('Login with GitHub Enterprise'));
 
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-enterprise');
   });

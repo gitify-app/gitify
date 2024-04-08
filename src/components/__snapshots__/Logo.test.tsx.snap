@@ -2,9 +2,10 @@
 
 exports[`components/Logo.tsx renders correctly (light) 1`] = `
 <svg
+  aria-label="Gitify Logo"
   className=""
   onClick={[Function]}
-  role="logo"
+  role="img"
   viewBox="0 0 500 500"
   xmlns="http://www.w3.org/2000/svg"
   xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -49,9 +50,10 @@ exports[`components/Logo.tsx renders correctly (light) 1`] = `
 
 exports[`components/Logo.tsx renders correctly(dark) 1`] = `
 <svg
+  aria-label="Gitify Logo"
   className=""
   onClick={[Function]}
-  role="logo"
+  role="img"
   viewBox="0 0 500 500"
   xmlns="http://www.w3.org/2000/svg"
   xmlnsXlink="http://www.w3.org/1999/xlink"
