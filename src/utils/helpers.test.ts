@@ -17,7 +17,7 @@ import {
   generateNotificationReferrerId,
   getHtmlUrl,
   isEnterpriseHost,
-  isGitHubLoggedIn
+  isGitHubLoggedIn,
 } from './helpers';
 
 describe('utils/helpers.ts', () => {
