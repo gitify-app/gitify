@@ -103,6 +103,7 @@ exports[`routes/Notifications.tsx should render itself & its children (show acco
           "url": "https://api.github.com/notifications/threads/138661096",
         },
         {
+          "hostname": "github.com",
           "id": "148827438",
           "last_read_at": "2017-05-20T16:59:03Z",
           "reason": "author",
@@ -251,6 +252,7 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
           "url": "https://api.github.com/notifications/threads/138661096",
         },
         {
+          "hostname": "github.com",
           "id": "148827438",
           "last_read_at": "2017-05-20T16:59:03Z",
           "reason": "author",
@@ -345,6 +347,7 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
           "url": "https://github.gitify.io/api/v3/notifications/threads/4",
         },
         {
+          "hostname": "github.com",
           "id": "3",
           "last_read_at": "2017-05-20T14:20:55Z",
           "reason": "subscribed",

@@ -1,6 +1,6 @@
-import * as React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
+
 import * as TestRendener from 'react-test-renderer';
-import { fireEvent, render } from '@testing-library/react';
 
 import { FieldRadioGroup } from './RadioGroup';
 
@@ -22,9 +22,9 @@ describe('components/fields/radiogroup.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should check that NProgress is getting called in getDerivedStateFromProps (loading)', function () {
-    const { getByLabelText } = render(<FieldRadioGroup {...props} />);
-    fireEvent.click(getByLabelText('Value 1'));
+  it('should check that NProgress is getting called in getDerivedStateFromProps (loading)', () => {
+    render(<FieldRadioGroup {...props} />);
+    fireEvent.click(screen.getByLabelText('Value 1'));
     expect(props.onChange).toHaveBeenCalledTimes(1);
   });
 });

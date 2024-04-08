@@ -1,14 +1,14 @@
-import * as React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
+
 import * as TestRenderer from 'react-test-renderer';
-import { fireEvent, render } from '@testing-library/react';
 
 import * as helpers from '../utils/helpers';
 
-import { AppContext } from '../context/App';
-import { mockedSingleNotification } from '../__mocks__/mockedData';
-import { NotificationRow } from './NotificationRow';
-import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { shell } from 'electron';
+import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
+import { mockedSingleNotification } from '../__mocks__/mockedData';
+import { AppContext } from '../context/App';
+import { NotificationRow } from './NotificationRow';
 
 describe('components/NotificationRow.tsx', () => {
   beforeEach(() => {
@@ -19,8 +19,10 @@ describe('components/NotificationRow.tsx', () => {
     jest.clearAllMocks();
   });
 
-  it('should render itself & its children with avatar', async () => {
-    (global as any).Date.now = jest.fn(() => new Date('2024'));
+  it('should render itself & its children', async () => {
+    jest
+      .spyOn(global.Date, 'now')
+      .mockImplementation(() => new Date('2024').valueOf());
 
     const props = {
       notification: mockedSingleNotification,
@@ -32,7 +34,9 @@ describe('components/NotificationRow.tsx', () => {
   });
 
   it('should render itself & its children without avatar', async () => {
-    (global as any).Date.now = jest.fn(() => new Date('2024'));
+    jest
+      .spyOn(global.Date, 'now')
+      .mockImplementation(() => new Date('2024').valueOf());
 
     const mockNotification = mockedSingleNotification;
     mockNotification.subject.user = null;
@@ -54,7 +58,7 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const { getByRole } = render(
+    render(
       <AppContext.Provider
         value={{
           settings: { ...mockSettings, markAsDoneOnOpen: false },
@@ -66,7 +70,7 @@ describe('components/NotificationRow.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByRole('main'));
+    fireEvent.click(screen.getByRole('main'));
     expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
     expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
   });
@@ -79,7 +83,7 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const { getByRole } = render(
+    render(
       <AppContext.Provider
         value={{
           settings: { ...mockSettings, markAsDoneOnOpen: true },
@@ -91,7 +95,7 @@ describe('components/NotificationRow.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByRole('main'));
+    fireEvent.click(screen.getByRole('main'));
     expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
     expect(markNotificationDone).toHaveBeenCalledTimes(1);
   });
@@ -104,7 +108,7 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const { getByTitle } = render(
+    render(
       <AppContext.Provider
         value={{
           settings: { ...mockSettings, markAsDoneOnOpen: false },
@@ -117,7 +121,7 @@ describe('components/NotificationRow.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByTitle('Mark as Read'));
+    fireEvent.click(screen.getByTitle('Mark as Read'));
     expect(markNotificationRead).toHaveBeenCalledTimes(1);
   });
 
@@ -129,7 +133,7 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const { getByTitle } = render(
+    render(
       <AppContext.Provider
         value={{
           settings: { ...mockSettings },
@@ -142,7 +146,7 @@ describe('components/NotificationRow.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByTitle('Mark as Done'));
+    fireEvent.click(screen.getByTitle('Mark as Done'));
     expect(markNotificationDone).toHaveBeenCalledTimes(1);
   });
 
@@ -154,14 +158,14 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const { getByTitle } = render(
+    render(
       <AppContext.Provider value={{}}>
         <AppContext.Provider value={{ unsubscribeNotification }}>
           <NotificationRow {...props} />
         </AppContext.Provider>
       </AppContext.Provider>,
     );
-    fireEvent.click(getByTitle('Unsubscribe'));
+    fireEvent.click(screen.getByTitle('Unsubscribe'));
     expect(unsubscribeNotification).toHaveBeenCalledTimes(1);
   });
 
@@ -182,7 +186,7 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const { getByTitle } = render(
+    render(
       <AppContext.Provider
         value={{
           settings: { ...mockSettings },
@@ -193,7 +197,7 @@ describe('components/NotificationRow.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByTitle('View User Profile'));
+    fireEvent.click(screen.getByTitle('View User Profile'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(
       props.notification.subject.user.html_url,

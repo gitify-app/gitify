@@ -5,16 +5,17 @@ import {
   XCircleIcon,
 } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
-import React, { useCallback, useContext, useMemo } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 
-import { getNotificationCount } from '../utils/notifications';
+import { type FC, useCallback, useContext, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
-import { Constants } from '../utils/constants';
 import { openExternalLink } from '../utils/comms';
+import { Constants } from '../utils/constants';
+import { getNotificationCount } from '../utils/notifications';
 
-export const Sidebar: React.FC = () => {
+export const Sidebar: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -27,7 +28,7 @@ export const Sidebar: React.FC = () => {
   }, []);
 
   const onOpenGitHubNotifications = useCallback(() => {
-    openExternalLink(`https://github.com/notifications`);
+    openExternalLink('https://github.com/notifications');
   }, []);
 
   const quitApp = useCallback(() => {
@@ -45,6 +46,7 @@ export const Sidebar: React.FC = () => {
     <div className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto">
       <div className="flex flex-col flex-1 items-center py-4">
         <button
+          type="button"
           className="w-5 my-3 mx-auto cursor-pointer outline-none"
           title="Open Gitify on GitHub"
           onClick={onOpenBrowser}
@@ -54,6 +56,7 @@ export const Sidebar: React.FC = () => {
         </button>
 
         <button
+          type="button"
           className={`flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer ${
             notificationsCount > 0 ? 'text-green-500' : 'text-white'
           }`}
@@ -72,6 +75,7 @@ export const Sidebar: React.FC = () => {
         {isLoggedIn && (
           <>
             <button
+              type="button"
               className={sidebarButtonClasses}
               title="Refresh Notifications"
               onClick={() => {
@@ -88,6 +92,7 @@ export const Sidebar: React.FC = () => {
             </button>
 
             <button
+              type="button"
               className={sidebarButtonClasses}
               title="Settings"
               onClick={() => {
@@ -105,6 +110,7 @@ export const Sidebar: React.FC = () => {
 
         {!isLoggedIn && (
           <button
+            type="button"
             className={sidebarButtonClasses}
             title="Quit Gitify"
             aria-label="Quit Gitify"

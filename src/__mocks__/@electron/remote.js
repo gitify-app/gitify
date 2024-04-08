@@ -5,6 +5,7 @@ class BrowserWindow {
     if (!instance) {
       instance = this;
     }
+    // biome-ignore lint/correctness/noConstructorReturn: This is a mock class
     return instance;
   }
   loadURL = jest.fn();

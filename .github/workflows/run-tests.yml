@@ -19,7 +19,7 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm prettier:check
+      - run: pnpm lint:check
       - run: pnpm tsc --noEmit
       - run: pnpm test -- --coverage --runInBand --verbose
       - name: Coveralls

@@ -4,7 +4,7 @@ import nock from 'nock';
 
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { mockedNotificationUser, mockedUser } from '../__mocks__/mockedData';
-import { AuthState } from '../types';
+import type { AuthState } from '../types';
 import { useNotifications } from './useNotifications';
 
 describe('hooks/useNotifications.ts', () => {
