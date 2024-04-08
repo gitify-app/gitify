@@ -9,6 +9,9 @@ import type {
   GraphQLSearch,
   Notification,
   Repository,
+  GraphQLSearch,
+  Discussion,
+  DiscussionComments,
   User,
 } from '../typesGithub';
 import Constants from '../utils/constants';

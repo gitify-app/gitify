@@ -47,7 +47,7 @@ describe('routes/Settings.tsx', () => {
 
   it('should press the logout', async () => {
     const logoutMock = jest.fn();
-    let getByTitle;
+    let getByRole;
 
     await act(async () => {
       const { getByTitle: getByTitleLocal } = render(
