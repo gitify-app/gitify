@@ -54,7 +54,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       >
         <span
           className="flex"
-          title="manosim updated in over 3 years"
+          title="manosim updated over 6 years ago"
         >
           <span
             onClick={[Function]}
@@ -77,7 +77,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
           <span
             className="ml-1"
           >
-            in over 3 years
+            over 6 years ago
           </span>
         </span>
       </span>
@@ -231,7 +231,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
       >
         <span
           className="flex"
-          title="Updated in over 3 years"
+          title="Updated over 6 years ago"
         >
           <span>
             <svg
@@ -265,7 +265,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           <span
             className="ml-1"
           >
-            in over 3 years
+            over 6 years ago
           </span>
         </span>
       </span>
