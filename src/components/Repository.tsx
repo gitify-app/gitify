@@ -48,7 +48,7 @@ export const RepositoryNotifications: FC<IProps> = ({
             <img
               className="rounded w-5 h-5"
               src={avatarUrl}
-              alt={`${repoSlug}'s Avatar`}
+              alt={`${repoSlug}'s avatar`}
             />
           ) : (
             <MarkGithubIcon size={18} />

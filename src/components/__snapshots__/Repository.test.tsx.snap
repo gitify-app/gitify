@@ -9,7 +9,7 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
       className="flex flex-1 space-x-3 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap"
     >
       <img
-        alt="manosim/notifications-test's Avatar"
+        alt="manosim/notifications-test's avatar"
         className="rounded w-5 h-5"
         src="https://avatars0.githubusercontent.com/u/6333409?v=3"
       />
