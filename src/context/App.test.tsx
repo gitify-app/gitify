@@ -93,7 +93,7 @@ describe('context/App.tsx', () => {
         const { fetchNotifications } = useContext(AppContext);
 
         return (
-          <button type='button' onClick={fetchNotifications}>
+          <button type="button" onClick={fetchNotifications}>
             Test Case
           </button>
         );
@@ -114,7 +114,7 @@ describe('context/App.tsx', () => {
 
         return (
           <button
-            type='button'
+            type="button"
             onClick={() => markNotificationRead('123-456', 'github.com')}
           >
             Test Case
@@ -142,7 +142,7 @@ describe('context/App.tsx', () => {
 
         return (
           <button
-            type='button'
+            type="button"
             onClick={() => markNotificationDone('123-456', 'github.com')}
           >
             Test Case
@@ -170,7 +170,7 @@ describe('context/App.tsx', () => {
 
         return (
           <button
-            type='button'
+            type="button"
             onClick={() => unsubscribeNotification('123-456', 'github.com')}
           >
             Test Case
@@ -198,7 +198,7 @@ describe('context/App.tsx', () => {
 
         return (
           <button
-            type='button'
+            type="button"
             onClick={() =>
               markRepoNotifications('manosim/gitify', 'github.com')
             }
@@ -230,7 +230,7 @@ describe('context/App.tsx', () => {
 
         return (
           <button
-            type='button'
+            type="button"
             onClick={() =>
               validateToken({ hostname: 'github.com', token: '123-456' })
             }
@@ -269,7 +269,7 @@ describe('context/App.tsx', () => {
       const { logout } = useContext(AppContext);
 
       return (
-        <button type='button' onClick={logout}>
+        <button type="button" onClick={logout}>
           Test Case
         </button>
       );
@@ -294,7 +294,7 @@ describe('context/App.tsx', () => {
 
       return (
         <button
-          type='button'
+          type="button"
           onClick={() => updateSetting('participating', true)}
         >
           Test Case
@@ -336,7 +336,7 @@ describe('context/App.tsx', () => {
 
       return (
         <button
-          type='button'
+          type="button"
           onClick={() => updateSetting('openAtStartup', true)}
         >
           Test Case

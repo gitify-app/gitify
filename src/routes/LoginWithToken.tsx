@@ -56,14 +56,14 @@ export const LoginWithToken: FC = () => {
     return (
       <form onSubmit={handleSubmit}>
         <FieldInput
-          name='token'
-          label='Token'
-          placeholder='The 40 characters token generated on GitHub'
+          name="token"
+          label="Token"
+          placeholder="The 40 characters token generated on GitHub"
           helpText={
             <>
               To generate a token, go to GitHub,{' '}
               <a
-                className='underline hover:text-gray-500 dark:hover:text-gray-300  cursor-pointer'
+                className="underline hover:text-gray-500 dark:hover:text-gray-300  cursor-pointer"
                 onClick={() =>
                   openLink(
                     'https://github.com/settings/tokens/new?scopes=notifications,read:user,repo&description=gitify_token',
@@ -73,7 +73,7 @@ export const LoginWithToken: FC = () => {
                 personal access tokens
               </a>{' '}
               and create one with the {Constants.AUTH_SCOPE.length} scopes{' '}
-              <span className='underline font-extrabold text-yellow-500'>
+              <span className="underline font-extrabold text-yellow-500">
                 {Constants.AUTH_SCOPE.join(', ')}{' '}
               </span>
               .
@@ -82,23 +82,23 @@ export const LoginWithToken: FC = () => {
         />
 
         <FieldInput
-          name='hostname'
-          label='Hostname'
-          placeholder='github.company.com'
-          helpText='Defaults to github.com. Change only if you are using GitHub for Enterprise.'
+          name="hostname"
+          label="Hostname"
+          placeholder="github.company.com"
+          helpText="Defaults to github.com. Change only if you are using GitHub for Enterprise."
         />
 
         {!isValidToken && (
-          <div className='mt-4 text-red-500 text-sm font-medium'>
+          <div className="mt-4 text-red-500 text-sm font-medium">
             This token could not be validated with {values.hostname}.
           </div>
         )}
 
         <button
-          className='float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none'
-          title='Submit Button'
+          className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
+          title="Submit Button"
           disabled={submitting || pristine}
-          type='submit'
+          type="submit"
         >
           Submit
         </button>
@@ -117,26 +117,26 @@ export const LoginWithToken: FC = () => {
   }, []);
 
   return (
-    <div className='flex-1 bg-white dark:bg-gray-dark dark:text-white'>
-      <div className='flex justify-between items-center mt-4 py-2 mx-8'>
+    <div className="flex-1 bg-white dark:bg-gray-dark dark:text-white">
+      <div className="flex justify-between items-center mt-4 py-2 mx-8">
         <button
-          className='focus:outline-none'
-          title='Go Back'
+          className="focus:outline-none"
+          title="Go Back"
           onClick={() => navigate(-1)}
         >
           <ArrowLeftIcon
             size={20}
-            className='hover:text-gray-400'
-            aria-label='Go Back'
+            className="hover:text-gray-400"
+            aria-label="Go Back"
           />
         </button>
 
-        <h3 className='text-lg font-semibold'>
+        <h3 className="text-lg font-semibold">
           Login with personal access token
         </h3>
       </div>
 
-      <div className='flex-1 px-8'>
+      <div className="flex-1 px-8">
         <Form
           initialValues={{
             token: '',

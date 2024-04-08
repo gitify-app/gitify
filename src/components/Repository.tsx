@@ -41,42 +41,42 @@ export const RepositoryNotifications: FC<IProps> = ({
 
   return (
     <>
-      <div className='flex py-2 px-3 bg-gray-100 dark:bg-gray-darker dark:text-white group'>
-        <div className='flex flex-1 space-x-3 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap'>
+      <div className="flex py-2 px-3 bg-gray-100 dark:bg-gray-darker dark:text-white group">
+        <div className="flex flex-1 space-x-3 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap">
           {avatarUrl ? (
-            <img className='rounded w-5 h-5' src={avatarUrl} />
+            <img className="rounded w-5 h-5" src={avatarUrl} />
           ) : (
             <MarkGithubIcon size={18} />
           )}
-          <span className='cursor-pointer' onClick={openBrowser}>
+          <span className="cursor-pointer" onClick={openBrowser}>
             {repoName}
           </span>
         </div>
 
-        <div className='flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity'>
+        <div className="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity">
           <button
-            className='focus:outline-none h-full hover:text-green-500'
-            title='Mark Repository as Done'
+            className="focus:outline-none h-full hover:text-green-500"
+            title="Mark Repository as Done"
             onClick={markRepoAsDone}
           >
-            <CheckIcon size={16} aria-label='Mark Repository as Done' />
+            <CheckIcon size={16} aria-label="Mark Repository as Done" />
           </button>
 
-          <div className='w-[14px]' />
+          <div className="w-[14px]" />
 
           <button
-            className='focus:outline-none h-full hover:text-green-500'
-            title='Mark Repository as Read'
+            className="focus:outline-none h-full hover:text-green-500"
+            title="Mark Repository as Read"
             onClick={markRepoAsRead}
           >
-            <ReadIcon size={14} aria-label='Mark Repository as Read' />
+            <ReadIcon size={14} aria-label="Mark Repository as Read" />
           </button>
         </div>
       </div>
 
       <TransitionGroup>
         {repoNotifications.map((obj) => (
-          <CSSTransition key={obj.id} timeout={250} classNames='notification'>
+          <CSSTransition key={obj.id} timeout={250} classNames="notification">
             <NotificationRow
               key={obj.id}
               hostname={hostname}

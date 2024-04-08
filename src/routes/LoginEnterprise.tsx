@@ -71,24 +71,24 @@ export const LoginEnterpriseRoute: FC = () => {
     return (
       <form onSubmit={handleSubmit}>
         <FieldInput
-          name='hostname'
-          label='Hostname'
-          placeholder='github.company.com'
+          name="hostname"
+          label="Hostname"
+          placeholder="github.company.com"
         />
 
-        <FieldInput name='clientId' label='Client ID' placeholder='123456789' />
+        <FieldInput name="clientId" label="Client ID" placeholder="123456789" />
 
         <FieldInput
-          name='clientSecret'
-          label='Client Secret'
-          placeholder='ABC123DEF456'
+          name="clientSecret"
+          label="Client Secret"
+          placeholder="ABC123DEF456"
         />
 
         <button
-          className='float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none'
-          title='Login Button'
+          className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
+          title="Login Button"
           disabled={submitting || pristine}
-          type='submit'
+          type="submit"
         >
           Login
         </button>
@@ -105,24 +105,24 @@ export const LoginEnterpriseRoute: FC = () => {
   }, []);
 
   return (
-    <div className='flex-1 bg-white dark:bg-gray-dark dark:text-white'>
-      <div className='flex justify-between items-center mt-4 py-2 mx-8'>
+    <div className="flex-1 bg-white dark:bg-gray-dark dark:text-white">
+      <div className="flex justify-between items-center mt-4 py-2 mx-8">
         <button
-          className='focus:outline-none'
-          title='Go Back'
+          className="focus:outline-none"
+          title="Go Back"
           onClick={() => navigate(-1)}
         >
           <ArrowLeftIcon
             size={20}
-            className='hover:text-gray-400'
-            aria-label='Go Back'
+            className="hover:text-gray-400"
+            aria-label="Go Back"
           />
         </button>
 
-        <h3 className='text-lg font-semibold'>Login with GitHub Enterprise</h3>
+        <h3 className="text-lg font-semibold">Login with GitHub Enterprise</h3>
       </div>
 
-      <div className='flex-1 px-8'>
+      <div className="flex-1 px-8">
         <Form
           initialValues={{
             hostname: '',

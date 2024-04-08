@@ -23,7 +23,7 @@ function RequireAuth({ children }) {
   return isLoggedIn ? (
     children
   ) : (
-    <Navigate to='/login' replace state={{ from: location }} />
+    <Navigate to="/login" replace state={{ from: location }} />
   );
 }
 
@@ -31,12 +31,12 @@ export const App = () => {
   return (
     <AppProvider>
       <Router>
-        <div className='flex flex-col pl-14 h-full'>
+        <div className="flex flex-col pl-14 h-full">
           <Loading />
           <Sidebar />
           <Routes>
             <Route
-              path='/'
+              path="/"
               element={
                 <RequireAuth>
                   <NotificationsRoute />
@@ -44,19 +44,19 @@ export const App = () => {
               }
             />
             <Route
-              path='/settings'
+              path="/settings"
               element={
                 <RequireAuth>
                   <SettingsRoute />
                 </RequireAuth>
               }
             />
-            <Route path='/login' element={<LoginRoute />} />
+            <Route path="/login" element={<LoginRoute />} />
             <Route
-              path='/login-enterprise'
+              path="/login-enterprise"
               element={<LoginEnterpriseRoute />}
             />
-            <Route path='/login-token' element={<LoginWithToken />} />
+            <Route path="/login-token" element={<LoginWithToken />} />
           </Routes>
         </div>
       </Router>

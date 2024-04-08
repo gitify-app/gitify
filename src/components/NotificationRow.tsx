@@ -81,7 +81,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   ]);
 
   return (
-    <div className='flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group'>
+    <div className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group">
       <div
         className={`flex justify-center items-center w-5 ${realIconColor}`}
         title={notificationTitle}
@@ -89,22 +89,22 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
 
-      <div className='flex-1 overflow-hidden' onClick={() => pressTitle()}>
+      <div className="flex-1 overflow-hidden" onClick={() => pressTitle()}>
         <div
-          className='mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer'
-          role='main'
+          className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          role="main"
           title={notification.subject.title}
         >
           {notification.subject.title}
         </div>
 
-        <div className='text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden'>
-          <span className='flex items-center'>
-            <span title={updatedLabel} className='flex'>
+        <div className="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden">
+          <span className="flex items-center">
+            <span title={updatedLabel} className="flex">
               {notification.subject.user ? (
-                <span title='View User Profile' onClick={openUserProfile}>
+                <span title="View User Profile" onClick={openUserProfile}>
                   <img
-                    className='rounded-full w-4 h-4 cursor-pointer'
+                    className="rounded-full w-4 h-4 cursor-pointer"
                     src={notification.subject.user.avatar_url}
                     title={notification.subject.user.login}
                   />
@@ -113,42 +113,42 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 <span>
                   <FeedPersonIcon
                     size={16}
-                    className='text-gray-500 dark:text-gray-300'
+                    className="text-gray-500 dark:text-gray-300"
                   />
                 </span>
               )}
-              <span className='ml-1' title={reason.description}>
+              <span className="ml-1" title={reason.description}>
                 {reason.type}
               </span>
-              <span className='ml-1'>{updatedAt}</span>
+              <span className="ml-1">{updatedAt}</span>
             </span>
           </span>
         </div>
       </div>
 
-      <div className='flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity'>
+      <div className="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity">
         <button
-          className='focus:outline-none h-full hover:text-green-500'
-          title='Mark as Done'
+          className="focus:outline-none h-full hover:text-green-500"
+          title="Mark as Done"
           onClick={() => markNotificationDone(notification.id, hostname)}
         >
-          <CheckIcon size={16} aria-label='Mark as Done' />
+          <CheckIcon size={16} aria-label="Mark as Done" />
         </button>
 
         <button
-          className='focus:outline-none h-full hover:text-red-500'
-          title='Unsubscribe'
+          className="focus:outline-none h-full hover:text-red-500"
+          title="Unsubscribe"
           onClick={unsubscribe}
         >
-          <BellSlashIcon size={14} aria-label='Unsubscribe' />
+          <BellSlashIcon size={14} aria-label="Unsubscribe" />
         </button>
 
         <button
-          className='focus:outline-none h-full hover:text-green-500'
-          title='Mark as Read'
+          className="focus:outline-none h-full hover:text-green-500"
+          title="Mark as Read"
           onClick={() => markNotificationRead(notification.id, hostname)}
         >
-          <ReadIcon size={14} aria-label='Mark as Read' />
+          <ReadIcon size={14} aria-label="Mark as Read" />
         </button>
       </div>
     </div>

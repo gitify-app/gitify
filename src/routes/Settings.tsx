@@ -93,33 +93,33 @@ export const SettingsRoute: FC = () => {
 
   return (
     <div
-      className='flex flex-1 flex-col h-screen dark:bg-gray-dark dark:text-white'
-      data-testid='settings'
+      className="flex flex-1 flex-col h-screen dark:bg-gray-dark dark:text-white"
+      data-testid="settings"
     >
-      <div className='flex justify-between items-center mt-2 py-2 mx-8'>
+      <div className="flex justify-between items-center mt-2 py-2 mx-8">
         <button
-          className='focus:outline-none'
-          title='Go Back'
+          className="focus:outline-none"
+          title="Go Back"
           onClick={() => navigate(-1)}
         >
           <ArrowLeftIcon
             size={20}
-            className='hover:text-gray-400'
-            aria-label='Go Back'
+            className="hover:text-gray-400"
+            aria-label="Go Back"
           />
         </button>
 
-        <h3 className='text-lg font-semibold'>Settings</h3>
+        <h3 className="text-lg font-semibold">Settings</h3>
       </div>
 
-      <div className='flex-grow overflow-x-auto px-8'>
-        <fieldset className='mb-3'>
-          <legend id='appearance' className='font-semibold mt-2 mb-1'>
+      <div className="flex-grow overflow-x-auto px-8">
+        <fieldset className="mb-3">
+          <legend id="appearance" className="font-semibold mt-2 mb-1">
             Appearance
           </legend>
           <FieldRadioGroup
-            name='theme'
-            label='Theme:'
+            name="theme"
+            label="Theme:"
             value={settings.theme}
             options={[
               { label: 'System', value: Theme.SYSTEM },
@@ -131,7 +131,7 @@ export const SettingsRoute: FC = () => {
             }}
           />
           <FieldCheckbox
-            name='colors'
+            name="colors"
             label={`Use GitHub-like state colors${
               !colorScope ? ' (requires repo scope)' : ''
             }`}
@@ -142,8 +142,8 @@ export const SettingsRoute: FC = () => {
             disabled={!colorScope}
           />
           <FieldCheckbox
-            name='showAccountHostname'
-            label='Show account hostname'
+            name="showAccountHostname"
+            label="Show account hostname"
             checked={settings.showAccountHostname}
             onChange={(evt) =>
               updateSetting('showAccountHostname', evt.target.checked)
@@ -151,27 +151,27 @@ export const SettingsRoute: FC = () => {
           />
         </fieldset>
 
-        <fieldset className='mb-3'>
-          <legend id='notifications' className='font-semibold  mt-2 mb-1'>
+        <fieldset className="mb-3">
+          <legend id="notifications" className="font-semibold  mt-2 mb-1">
             Notifications
           </legend>
           <FieldCheckbox
-            name='showOnlyParticipating'
-            label='Show only participating'
+            name="showOnlyParticipating"
+            label="Show only participating"
             checked={settings.participating}
             onChange={(evt) =>
               updateSetting('participating', evt.target.checked)
             }
           />
           <FieldCheckbox
-            name='showBots'
-            label='Show notifications from Bot accounts'
+            name="showBots"
+            label="Show notifications from Bot accounts"
             checked={settings.showBots}
             onChange={(evt) => updateSetting('showBots', evt.target.checked)}
           />
           <FieldCheckbox
-            name='markAsDoneOnOpen'
-            label='Mark as done on open'
+            name="markAsDoneOnOpen"
+            label="Mark as done on open"
             checked={settings.markAsDoneOnOpen}
             onChange={(evt) =>
               updateSetting('markAsDoneOnOpen', evt.target.checked)
@@ -179,36 +179,36 @@ export const SettingsRoute: FC = () => {
           />
         </fieldset>
 
-        <fieldset className='mb-3'>
-          <legend id='system' className='font-semibold  mt-2 mb-1'>
+        <fieldset className="mb-3">
+          <legend id="system" className="font-semibold  mt-2 mb-1">
             System
           </legend>
           <FieldCheckbox
-            name='showNotificationsCountInTray'
-            label='Show notifications count in tray'
+            name="showNotificationsCountInTray"
+            label="Show notifications count in tray"
             checked={settings.showNotificationsCountInTray}
             onChange={(evt) =>
               updateSetting('showNotificationsCountInTray', evt.target.checked)
             }
           />
           <FieldCheckbox
-            name='showNotifications'
-            label='Show system notifications'
+            name="showNotifications"
+            label="Show system notifications"
             checked={settings.showNotifications}
             onChange={(evt) =>
               updateSetting('showNotifications', evt.target.checked)
             }
           />
           <FieldCheckbox
-            name='playSound'
-            label='Play sound'
+            name="playSound"
+            label="Play sound"
             checked={settings.playSound}
             onChange={(evt) => updateSetting('playSound', evt.target.checked)}
           />
           {!isLinux && (
             <FieldCheckbox
-              name='openAtStartUp'
-              label='Open at startup'
+              name="openAtStartUp"
+              label="Open at startup"
               checked={settings.openAtStartup}
               onChange={(evt) =>
                 updateSetting('openAtStartup', evt.target.checked)
@@ -218,10 +218,10 @@ export const SettingsRoute: FC = () => {
         </fieldset>
       </div>
 
-      <div className='flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8'>
+      <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8">
         <small
-          className='font-semibold cursor-pointer'
-          title='View release notes'
+          className="font-semibold cursor-pointer"
+          title="View release notes"
           onClick={() => openGitHubReleaseNotes(appVersion)}
         >
           Gitify v{appVersion}
@@ -229,19 +229,19 @@ export const SettingsRoute: FC = () => {
         <div>
           <button
             className={footerButtonClass}
-            title='Login with GitHub Enterprise'
+            title="Login with GitHub Enterprise"
             onClick={goToEnterprise}
           >
             <PersonAddIcon
               size={20}
-              aria-label='Login with GitHub Enterprise'
+              aria-label="Login with GitHub Enterprise"
             />
           </button>
 
           <button
             className={footerButtonClass}
             title={`Logout ${accounts.user.login}`}
-            role='button'
+            role="button"
             onClick={logoutUser}
           >
             <SignOutIcon
@@ -252,10 +252,10 @@ export const SettingsRoute: FC = () => {
 
           <button
             className={`${footerButtonClass} mr-0`}
-            title='Quit Gitify'
+            title="Quit Gitify"
             onClick={quitApp}
           >
-            <XCircleIcon size={18} aria-label='Quit Gitify' />
+            <XCircleIcon size={18} aria-label="Quit Gitify" />
           </button>
         </div>
       </div>
