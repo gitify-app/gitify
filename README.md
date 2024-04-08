@@ -88,7 +88,7 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 [brew]: http://brew.sh/
 [homebrew-cask]: https://formulae.brew.sh/cask/gitify
 [coveralls]: https://coveralls.io/github/gitify-app/gitify
-[coveralls-badge]: https://img.shields.io/coverallsCoverage/github/gitify-app/gitify
+[coveralls-badge]: https://coveralls.io/repos/github/gitify-app/gitify/badge.svg
 [build-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/build-app.yml/badge.svg
 [release-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/release.yml/badge.svg
 [downloads-total-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/total?label=downloads@all

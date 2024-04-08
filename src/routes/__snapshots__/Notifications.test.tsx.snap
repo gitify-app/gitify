@@ -2,7 +2,83 @@
 
 exports[`routes/Notifications.tsx should render itself & its children (all read notifications) 1`] = `<AllRead />`;
 
-exports[`routes/Notifications.tsx should render itself & its children (error page - oops) 1`] = `<Oops />`;
+exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) bad credentials 1`] = `
+<Oops
+  error={
+    {
+      "description": "Your credentials are either invalid or expired.",
+      "emojis": [
+        "🔓",
+      ],
+      "title": "Bad Credentials",
+    }
+  }
+/>
+`;
+
+exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) default error 1`] = `
+<Oops
+  error={
+    {
+      "description": "Please try again later.",
+      "emojis": [
+        "🤔",
+        "😞",
+        "😤",
+        "😱",
+        "😭",
+      ],
+      "title": "Oops! Something went wrong",
+    }
+  }
+/>
+`;
+
+exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) missing scopes 1`] = `
+<Oops
+  error={
+    {
+      "description": "Your credentials are missing a required API scope.",
+      "emojis": [
+        "🙃",
+      ],
+      "title": "Missing Scopes",
+    }
+  }
+/>
+`;
+
+exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) rate limited 1`] = `
+<Oops
+  error={
+    {
+      "description": "Please wait a while before trying again.",
+      "emojis": [
+        "😮‍💨",
+      ],
+      "title": "Rate Limited",
+    }
+  }
+/>
+`;
+
+exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) unknown error 1`] = `
+<Oops
+  error={
+    {
+      "description": "Please try again later.",
+      "emojis": [
+        "🤔",
+        "😞",
+        "😤",
+        "😱",
+        "😭",
+      ],
+      "title": "Oops! Something went wrong",
+    }
+  }
+/>
+`;
 
 exports[`routes/Notifications.tsx should render itself & its children (show account hostname) 1`] = `
 <div

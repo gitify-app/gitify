@@ -7,15 +7,15 @@ exports[`components/Oops.tsx should render itself & its children 1`] = `
   <h1
     className="text-5xl mb-5"
   >
-    🤔
+    🔥
   </h1>
   <h2
     className="font-semibold text-xl mb-2 text-semibold"
   >
-    Something went wrong.
+    Error title
   </h2>
   <div>
-    Couldn't get your notifications.
+    Error description
   </div>
 </div>
 `;

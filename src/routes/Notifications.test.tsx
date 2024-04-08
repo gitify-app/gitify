@@ -3,6 +3,7 @@ import TestRenderer from 'react-test-renderer';
 import { mockSettings } from '../__mocks__/mock-state';
 import { mockedAccountNotifications } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
+import { Errors } from '../utils/constants';
 import { NotificationsRoute } from './Notifications';
 
 jest.mock('../components/AccountNotifications', () => ({
@@ -53,13 +54,85 @@ describe('routes/Notifications.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself & its children (error page - oops)', () => {
-    const tree = TestRenderer.create(
-      <AppContext.Provider value={{ notifications: [], requestFailed: true }}>
-        <NotificationsRoute />
-      </AppContext.Provider>,
-    );
+  describe('should render itself & its children (error conditions - oops)', () => {
+    it('bad credentials', () => {
+      const tree = TestRenderer.create(
+        <AppContext.Provider
+          value={{
+            notifications: [],
+            requestFailed: true,
+            errorDetails: Errors.BAD_CREDENTIALS,
+          }}
+        >
+          <NotificationsRoute />
+        </AppContext.Provider>,
+      );
 
-    expect(tree).toMatchSnapshot();
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('missing scopes', () => {
+      const tree = TestRenderer.create(
+        <AppContext.Provider
+          value={{
+            notifications: [],
+            requestFailed: true,
+            errorDetails: Errors.MISSING_SCOPES,
+          }}
+        >
+          <NotificationsRoute />
+        </AppContext.Provider>,
+      );
+
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('rate limited', () => {
+      const tree = TestRenderer.create(
+        <AppContext.Provider
+          value={{
+            notifications: [],
+            requestFailed: true,
+            errorDetails: Errors.RATE_LIMITED,
+          }}
+        >
+          <NotificationsRoute />
+        </AppContext.Provider>,
+      );
+
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('unknown error', () => {
+      const tree = TestRenderer.create(
+        <AppContext.Provider
+          value={{
+            notifications: [],
+            requestFailed: true,
+            errorDetails: Errors.UNKNOWN,
+          }}
+        >
+          <NotificationsRoute />
+        </AppContext.Provider>,
+      );
+
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('default error', () => {
+      const tree = TestRenderer.create(
+        <AppContext.Provider
+          value={{
+            notifications: [],
+            requestFailed: true,
+            errorDetails: null,
+          }}
+        >
+          <NotificationsRoute />
+        </AppContext.Provider>,
+      );
+
+      expect(tree).toMatchSnapshot();
+    });
   });
 });

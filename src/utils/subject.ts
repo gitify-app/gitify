@@ -137,49 +137,57 @@ async function getGitifySubjectForIssue(
   notification: Notification,
   token: string,
 ): Promise<GitifySubject> {
-  const issue: Issue = (
-    await apiRequestAuth(notification.subject.url, 'GET', token)
-  ).data;
+  try {
+    const issue: Issue = (
+      await apiRequestAuth(notification.subject.url, 'GET', token)
+    ).data;
 
-  const issueCommentUser = await getLatestCommentUser(notification, token);
+    const issueCommentUser = await getLatestCommentUser(notification, token);
 
-  return {
-    state: issue.state_reason ?? issue.state,
-    user: {
-      login: issueCommentUser?.login ?? issue.user.login,
-      html_url: issueCommentUser?.html_url ?? issue.user.html_url,
-      avatar_url: issueCommentUser?.avatar_url ?? issue.user.avatar_url,
-      type: issueCommentUser?.type ?? issue.user.type,
-    },
-  };
+    return {
+      state: issue.state_reason ?? issue.state,
+      user: {
+        login: issueCommentUser?.login ?? issue.user.login,
+        html_url: issueCommentUser?.html_url ?? issue.user.html_url,
+        avatar_url: issueCommentUser?.avatar_url ?? issue.user.avatar_url,
+        type: issueCommentUser?.type ?? issue.user.type,
+      },
+    };
+  } catch (err) {
+    console.error('Issue subject retrieval failed');
+  }
 }
 
 async function getGitifySubjectForPullRequest(
   notification: Notification,
   token: string,
 ): Promise<GitifySubject> {
-  const pr: PullRequest = (
-    await apiRequestAuth(notification.subject.url, 'GET', token)
-  ).data;
+  try {
+    const pr: PullRequest = (
+      await apiRequestAuth(notification.subject.url, 'GET', token)
+    ).data;
 
-  let prState: PullRequestStateType = pr.state;
-  if (pr.merged) {
-    prState = 'merged';
-  } else if (pr.draft) {
-    prState = 'draft';
+    let prState: PullRequestStateType = pr.state;
+    if (pr.merged) {
+      prState = 'merged';
+    } else if (pr.draft) {
+      prState = 'draft';
+    }
+
+    const prCommentUser = await getLatestCommentUser(notification, token);
+
+    return {
+      state: prState,
+      user: {
+        login: prCommentUser?.login ?? pr.user.login,
+        html_url: prCommentUser?.html_url ?? pr.user.html_url,
+        avatar_url: prCommentUser?.avatar_url ?? pr.user.avatar_url,
+        type: prCommentUser?.type ?? pr.user.type,
+      },
+    };
+  } catch (err) {
+    console.error('Pull Request subject retrieval failed');
   }
-
-  const prCommentUser = await getLatestCommentUser(notification, token);
-
-  return {
-    state: prState,
-    user: {
-      login: prCommentUser?.login ?? pr.user.login,
-      html_url: prCommentUser?.html_url ?? pr.user.html_url,
-      avatar_url: prCommentUser?.avatar_url ?? pr.user.avatar_url,
-      type: prCommentUser?.type ?? pr.user.type,
-    },
-  };
 }
 
 async function getGitifySubjectForRelease(
@@ -250,11 +258,19 @@ async function getLatestCommentUser(
     return null;
   }
 
-  const response: IssueComments | ReleaseComments = (
-    await apiRequestAuth(notification.subject.latest_comment_url, 'GET', token)
-  )?.data;
+  try {
+    const response: IssueComments | ReleaseComments = (
+      await apiRequestAuth(
+        notification.subject.latest_comment_url,
+        'GET',
+        token,
+      )
+    )?.data;
 
-  return (
-    (response as IssueComments)?.user ?? (response as ReleaseComments).author
-  );
+    return (
+      (response as IssueComments)?.user ?? (response as ReleaseComments).author
+    );
+  } catch (err) {
+    console.error('Discussion latest comment retrieval failed');
+  }
 }

@@ -1,10 +1,15 @@
-import axios, { type AxiosPromise } from 'axios';
+import axios, { type AxiosError, type AxiosPromise } from 'axios';
 import { useCallback, useState } from 'react';
 
-import type { AccountNotifications, AuthState, SettingsState } from '../types';
-import type { Notification } from '../typesGithub';
+import type {
+  AccountNotifications,
+  AuthState,
+  GitifyError,
+  SettingsState,
+} from '../types';
+import type { GithubRESTError, Notification } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
-import Constants from '../utils/constants';
+import Constants, { Errors } from '../utils/constants';
 import {
   generateGitHubAPIUrl,
   getEnterpriseAccountToken,
@@ -54,11 +59,14 @@ interface NotificationsState {
   ) => Promise<void>;
   isFetching: boolean;
   requestFailed: boolean;
+  errorDetails: GitifyError;
 }
 
 export const useNotifications = (colors: boolean): NotificationsState => {
   const [isFetching, setIsFetching] = useState(false);
   const [requestFailed, setRequestFailed] = useState(false);
+  const [errorDetails, setErrorDetails] = useState<GitifyError>();
+
   const [notifications, setNotifications] = useState<AccountNotifications[]>(
     [],
   );
@@ -195,9 +203,10 @@ export const useNotifications = (colors: boolean): NotificationsState => {
               });
           }),
         )
-        .catch(() => {
+        .catch((err: AxiosError<GithubRESTError>) => {
           setIsFetching(false);
           setRequestFailed(true);
+          setErrorDetails(determineFailureType(err));
         });
     },
     [notifications],
@@ -388,6 +397,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   return {
     isFetching,
     requestFailed,
+    errorDetails,
     notifications,
 
     removeNotificationFromState,
@@ -399,3 +409,27 @@ export const useNotifications = (colors: boolean): NotificationsState => {
     markRepoNotificationsDone,
   };
 };
+
+function determineFailureType(err: AxiosError<GithubRESTError>): GitifyError {
+  const status = err.response.status;
+  const message = err.response.data.message;
+
+  if (status === 401) {
+    return Errors.BAD_CREDENTIALS;
+  }
+
+  if (status === 403) {
+    if (message.includes("Missing the 'notifications' scope")) {
+      return Errors.MISSING_SCOPES;
+    }
+
+    if (
+      message.includes('API rate limit exceeded') ||
+      message.includes('You have exceeded a secondary rate limit')
+    ) {
+      return Errors.RATE_LIMITED;
+    }
+  }
+
+  return Errors.UNKNOWN;
+}
