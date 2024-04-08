@@ -9,7 +9,7 @@ interface IProps {
 export const Oops: FC<IProps> = ({ error }) => {
   const emoji = useMemo(
     () => error.emojis[Math.floor(Math.random() * error.emojis.length)],
-    [],
+    [error],
   );
 
   return (
