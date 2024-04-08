@@ -73,7 +73,7 @@ describe('routes/LoginWithToken.tsx', () => {
   });
 
   it("should click on the 'personal access tokens' link and open the browser", async () => {
-    const { getByText } = render(
+    render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
         <MemoryRouter>
           <LoginWithToken />
@@ -81,7 +81,7 @@ describe('routes/LoginWithToken.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByText('personal access tokens'));
+    fireEvent.click(screen.getByText('personal access tokens'));
 
     expect(openExternalMock).toHaveBeenCalledTimes(1);
   });
@@ -89,7 +89,7 @@ describe('routes/LoginWithToken.tsx', () => {
   it('should login using a token - success', async () => {
     mockValidateToken.mockResolvedValueOnce(null);
 
-    const { getByLabelText, getByTitle } = render(
+    render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
         <MemoryRouter>
           <LoginWithToken />
@@ -97,14 +97,14 @@ describe('routes/LoginWithToken.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.change(getByLabelText('Token'), {
+    fireEvent.change(screen.getByLabelText('Token'), {
       target: { value: '1234567890123456789012345678901234567890' },
     });
-    fireEvent.change(getByLabelText('Hostname'), {
+    fireEvent.change(screen.getByLabelText('Hostname'), {
       target: { value: 'github.com' },
     });
 
-    fireEvent.submit(getByTitle('Submit Button'));
+    fireEvent.submit(screen.getByTitle('Submit Button'));
 
     await waitFor(() => expect(mockValidateToken).toHaveBeenCalledTimes(1));
 
@@ -115,7 +115,7 @@ describe('routes/LoginWithToken.tsx', () => {
   it('should login using a token - failure', async () => {
     mockValidateToken.mockRejectedValueOnce(null);
 
-    const { getByLabelText, getByTitle } = render(
+    render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
         <MemoryRouter>
           <LoginWithToken />
@@ -124,13 +124,13 @@ describe('routes/LoginWithToken.tsx', () => {
     );
 
     act(() => {
-      fireEvent.change(getByLabelText('Token'), {
+      fireEvent.change(screen.getByLabelText('Token'), {
         target: { value: '1234567890123456789012345678901234567890' },
       });
-      fireEvent.change(getByLabelText('Hostname'), {
+      fireEvent.change(screen.getByLabelText('Hostname'), {
         target: { value: 'github.com' },
       });
-      fireEvent.submit(getByTitle('Submit Button'));
+      fireEvent.submit(screen.getByTitle('Submit Button'));
     });
 
     await waitFor(() => expect(mockValidateToken).toHaveBeenCalledTimes(1));
@@ -140,22 +140,22 @@ describe('routes/LoginWithToken.tsx', () => {
   });
 
   it('should render the form with errors', () => {
-    const { getByLabelText, getByTitle, getByText } = render(
+    render(
       <MemoryRouter>
         <LoginWithToken />
       </MemoryRouter>,
     );
 
-    fireEvent.change(getByLabelText('Hostname'), {
+    fireEvent.change(screen.getByLabelText('Hostname'), {
       target: { value: 'test' },
     });
-    fireEvent.change(getByLabelText('Token'), {
+    fireEvent.change(screen.getByLabelText('Token'), {
       target: { value: '123' },
     });
 
-    fireEvent.submit(getByTitle('Submit Button'));
+    fireEvent.submit(screen.getByTitle('Submit Button'));
 
-    expect(getByText('Invalid hostname.')).toBeDefined();
-    expect(getByText('Invalid token.')).toBeDefined();
+    expect(screen.getByText('Invalid hostname.')).toBeDefined();
+    expect(screen.getByText('Invalid token.')).toBeDefined();
   });
 });

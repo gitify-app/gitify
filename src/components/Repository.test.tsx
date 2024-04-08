@@ -35,13 +35,13 @@ describe('components/Repository.tsx', () => {
   });
 
   it('should open the browser when clicking on the repo name', () => {
-    const { getByText } = render(
+    render(
       <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByText(props.repoName));
+    fireEvent.click(screen.getByText(props.repoName));
 
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(

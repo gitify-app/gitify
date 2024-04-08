@@ -105,7 +105,7 @@ describe('routes/LoginEnterprise.tsx', () => {
   });
 
   it('should render the form with errors', () => {
-    const { getByLabelText, getByTitle, getByText } = render(
+    render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
         <MemoryRouter>
           <LoginEnterpriseRoute />
@@ -113,20 +113,20 @@ describe('routes/LoginEnterprise.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.change(getByLabelText('Hostname'), {
+    fireEvent.change(screen.getByLabelText('Hostname'), {
       target: { value: 'test' },
     });
-    fireEvent.change(getByLabelText('Client ID'), {
+    fireEvent.change(screen.getByLabelText('Client ID'), {
       target: { value: '123' },
     });
-    fireEvent.change(getByLabelText('Client Secret'), {
+    fireEvent.change(screen.getByLabelText('Client Secret'), {
       target: { value: 'abc' },
     });
 
-    fireEvent.submit(getByTitle('Login Button'));
+    fireEvent.submit(screen.getByTitle('Login Button'));
 
-    expect(getByText('Invalid hostname.')).toBeTruthy();
-    expect(getByText('Invalid client id.')).toBeTruthy();
-    expect(getByText('Invalid client secret.')).toBeTruthy();
+    expect(screen.getByText('Invalid hostname.')).toBeTruthy();
+    expect(screen.getByText('Invalid client id.')).toBeTruthy();
+    expect(screen.getByText('Invalid client secret.')).toBeTruthy();
   });
 });

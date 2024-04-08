@@ -56,7 +56,7 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const { getByRole } = render(
+    render(
       <AppContext.Provider
         value={{
           settings: { ...mockSettings, markAsDoneOnOpen: false },
@@ -68,7 +68,7 @@ describe('components/NotificationRow.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByRole('main'));
+    fireEvent.click(screen.getByRole('main'));
     expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
     expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
   });
@@ -81,7 +81,7 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const { getByRole } = render(
+    render(
       <AppContext.Provider
         value={{
           settings: { ...mockSettings, markAsDoneOnOpen: true },
@@ -93,7 +93,7 @@ describe('components/NotificationRow.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByRole('main'));
+    fireEvent.click(screen.getByRole('main'));
     expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
     expect(markNotificationDone).toHaveBeenCalledTimes(1);
   });
