@@ -1,11 +1,11 @@
-import { AxiosPromise, AxiosResponse } from 'axios';
+import type { AxiosPromise, AxiosResponse } from 'axios';
 
 import remote from '@electron/remote';
 const browserWindow = new remote.BrowserWindow();
 
-import * as auth from './auth';
+import type { AuthState } from '../types';
 import * as apiRequests from './api-requests';
-import { AuthState } from '../types';
+import * as auth from './auth';
 
 describe('utils/auth.tsx', () => {
   describe('authGitHub', () => {

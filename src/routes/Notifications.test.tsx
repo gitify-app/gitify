@@ -1,10 +1,9 @@
-import React from 'react';
 import TestRenderer from 'react-test-renderer';
 
-import { AppContext } from '../context/App';
-import { mockedAccountNotifications } from '../__mocks__/mockedData';
-import { NotificationsRoute } from './Notifications';
 import { mockSettings } from '../__mocks__/mock-state';
+import { mockedAccountNotifications } from '../__mocks__/mockedData';
+import { AppContext } from '../context/App';
+import { NotificationsRoute } from './Notifications';
 
 jest.mock('../components/AccountNotifications', () => ({
   AccountNotifications: 'AccountNotifications',

@@ -1,13 +1,14 @@
 const ipcRenderer = require('electron').ipcRenderer;
 
-import React, { useCallback, useContext, useEffect } from 'react';
-import { Form, FormRenderProps } from 'react-final-form';
 import { ArrowLeftIcon } from '@primer/octicons-react';
+
+import { type FC, useCallback, useContext, useEffect } from 'react';
+import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
 
-import { AppContext } from '../context/App';
 import { FieldInput } from '../components/fields/FieldInput';
-import { AuthOptions } from '../types';
+import { AppContext } from '../context/App';
+import type { AuthOptions } from '../types';
 
 interface IValues {
   hostname?: string;
@@ -50,7 +51,7 @@ export const validate = (values: IValues): IFormErrors => {
   return errors;
 };
 
-export const LoginEnterpriseRoute: React.FC = () => {
+export const LoginEnterpriseRoute: FC = () => {
   const {
     accounts: { enterpriseAccounts },
     loginEnterprise,

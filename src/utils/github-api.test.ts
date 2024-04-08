@@ -1,9 +1,9 @@
+import type { Reason, StateType, Subject, SubjectType } from '../typesGithub';
 import {
   formatReason,
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
 } from './github-api';
-import { Reason, StateType, Subject, SubjectType } from '../typesGithub';
 
 describe('utils/github-api.ts', () => {
   it('formatReason - should format the notification reason', () => {

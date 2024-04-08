@@ -1,13 +1,13 @@
 import { ipcRenderer, shell } from 'electron';
 import {
-  updateTrayIcon,
   openExternalLink,
-  setAutoLaunch,
   restoreSetting,
+  setAutoLaunch,
+  updateTrayIcon,
 } from './comms';
 
 describe('utils/comms.ts', () => {
-  beforeEach(function () {
+  beforeEach(() => {
     jest.spyOn(ipcRenderer, 'send');
   });
 

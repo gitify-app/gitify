@@ -1,9 +1,9 @@
-import React from 'react';
-import TestRenderer from 'react-test-renderer';
-import { render, fireEvent } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 
-import { AppContext } from '../context/App';
+import TestRenderer from 'react-test-renderer';
+
 import { mockedGithubNotifications } from '../__mocks__/mockedData';
+import { AppContext } from '../context/App';
 import { RepositoryNotifications } from './Repository';
 
 const { shell } = require('electron');
@@ -52,7 +52,7 @@ describe('components/Repository.tsx', () => {
     );
   });
 
-  it('should mark a repo as read', function () {
+  it('should mark a repo as read', () => {
     const { getByTitle } = render(
       <AppContext.Provider value={{ markRepoNotifications }}>
         <RepositoryNotifications {...props} />
@@ -67,7 +67,7 @@ describe('components/Repository.tsx', () => {
     );
   });
 
-  it('should mark a repo as done', function () {
+  it('should mark a repo as done', () => {
     const { getByTitle } = render(
       <AppContext.Provider value={{ markRepoNotificationsDone }}>
         <RepositoryNotifications {...props} />

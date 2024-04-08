@@ -1,12 +1,12 @@
 const { ipcRenderer } = require('electron');
 
-import React, { useContext, useEffect } from 'react';
+import { type FC, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { AppContext } from '../context/App';
 import { Logo } from '../components/Logo';
+import { AppContext } from '../context/App';
 
-export const LoginRoute: React.FC = () => {
+export const LoginRoute: FC = () => {
   const navigate = useNavigate();
   const { isLoggedIn } = useContext(AppContext);
 

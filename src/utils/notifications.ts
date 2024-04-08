@@ -1,9 +1,9 @@
 import { ipcRenderer } from 'electron';
+import { Notification } from '../typesGithub';
 import { openInBrowser } from '../utils/helpers';
 import { updateTrayIcon } from './comms';
-import { Notification } from '../typesGithub';
 
-import { AccountNotifications, SettingsState, AuthState } from '../types';
+import type { AccountNotifications, AuthState, SettingsState } from '../types';
 
 export const setTrayIconColor = (notifications: AccountNotifications[]) => {
   const allNotificationsCount = getNotificationCount(notifications);
@@ -84,7 +84,7 @@ export const raiseNativeNotification = (
     silent: true,
   });
 
-  nativeNotification.onclick = function () {
+  nativeNotification.onclick = () => {
     if (notifications.length === 1) {
       ipcRenderer.send('hide-window');
       openInBrowser(notifications[0], accounts);

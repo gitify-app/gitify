@@ -7,7 +7,7 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "noUnusedLocals": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,

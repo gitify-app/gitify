@@ -1,14 +1,14 @@
-import * as React from 'react';
-import * as TestRenderer from 'react-test-renderer';
 import { fireEvent, render } from '@testing-library/react';
+
 import { MemoryRouter } from 'react-router-dom';
+import * as TestRenderer from 'react-test-renderer';
 
 const { ipcRenderer } = require('electron');
 
-import { AppContext } from '../context/App';
-import { AuthState } from '../types';
-import { LoginEnterpriseRoute, validate } from './LoginEnterprise';
 import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
+import { AppContext } from '../context/App';
+import type { AuthState } from '../types';
+import { LoginEnterpriseRoute, validate } from './LoginEnterprise';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -22,7 +22,7 @@ describe('routes/LoginEnterprise.tsx', () => {
     user: null,
   };
 
-  beforeEach(function () {
+  beforeEach(() => {
     mockNavigate.mockReset();
 
     jest.spyOn(ipcRenderer, 'send');

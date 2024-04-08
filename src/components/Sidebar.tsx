@@ -5,16 +5,17 @@ import {
   XCircleIcon,
 } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
-import React, { useCallback, useContext, useMemo } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
 
-import { getNotificationCount } from '../utils/notifications';
+import { type FC, useCallback, useContext, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
-import { Constants } from '../utils/constants';
 import { openExternalLink } from '../utils/comms';
+import { Constants } from '../utils/constants';
+import { getNotificationCount } from '../utils/notifications';
 
-export const Sidebar: React.FC = () => {
+export const Sidebar: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 

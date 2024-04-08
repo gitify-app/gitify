@@ -1,14 +1,14 @@
-import * as React from 'react';
-import * as TestRenderer from 'react-test-renderer';
 import { fireEvent, render } from '@testing-library/react';
+
+import * as TestRenderer from 'react-test-renderer';
 
 import * as helpers from '../utils/helpers';
 
-import { AppContext } from '../context/App';
-import { mockedSingleNotification } from '../__mocks__/mockedData';
-import { NotificationRow } from './NotificationRow';
-import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { shell } from 'electron';
+import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
+import { mockedSingleNotification } from '../__mocks__/mockedData';
+import { AppContext } from '../context/App';
+import { NotificationRow } from './NotificationRow';
 
 describe('components/NotificationRow.tsx', () => {
   beforeEach(() => {

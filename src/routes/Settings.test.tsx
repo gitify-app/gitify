@@ -1,16 +1,16 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import React from 'react';
+
 import { MemoryRouter } from 'react-router-dom';
 
 const { ipcRenderer } = require('electron');
 
-import { AxiosResponse } from 'axios';
+import type { AxiosResponse } from 'axios';
+import { shell } from 'electron';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { AppContext } from '../context/App';
 import * as apiRequests from '../utils/api-requests';
 import Constants from '../utils/constants';
 import { SettingsRoute } from './Settings';
-import { shell } from 'electron';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -47,10 +47,10 @@ describe('routes/Settings.tsx', () => {
 
   it('should press the logout', async () => {
     const logoutMock = jest.fn();
-    let getByRole;
+    let getByTitle;
 
     await act(async () => {
-      const { getByRole: getByRoleLocal } = render(
+      const { getByTitle: getByTitleLocal } = render(
         <AppContext.Provider
           value={{
             settings: mockSettings,
@@ -64,10 +64,10 @@ describe('routes/Settings.tsx', () => {
         </AppContext.Provider>,
       );
 
-      getByRole = getByRoleLocal;
+      getByTitle = getByTitleLocal;
     });
 
-    fireEvent.click(getByRole('Logout'));
+    fireEvent.click(getByTitle('Logout octocat'));
 
     expect(logoutMock).toHaveBeenCalledTimes(1);
 

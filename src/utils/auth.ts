@@ -1,15 +1,15 @@
 import { BrowserWindow } from '@electron/remote';
 
-import { generateGitHubAPIUrl, isEnterpriseHost } from './helpers';
-import { apiRequest, apiRequestAuth } from '../utils/api-requests';
-import {
+import type {
   AuthResponse,
   AuthState,
   AuthTokenResponse,
   GitifyUser,
 } from '../types';
+import type { UserDetails } from '../typesGithub';
+import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 import { Constants } from '../utils/constants';
-import { UserDetails } from '../typesGithub';
+import { generateGitHubAPIUrl, isEnterpriseHost } from './helpers';
 
 export const authGitHub = (
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,

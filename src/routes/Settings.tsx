@@ -5,7 +5,9 @@ import {
   XCircleIcon,
 } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
-import React, {
+
+import {
+  type FC,
   useCallback,
   useContext,
   useEffect,
@@ -19,7 +21,6 @@ import { FieldRadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
 import { Theme } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
-import { setTheme } from '../utils/theme';
 import {
   openExternalLink,
   updateTrayIcon,
@@ -27,8 +28,9 @@ import {
 } from '../utils/comms';
 import Constants from '../utils/constants';
 import { generateGitHubAPIUrl } from '../utils/helpers';
+import { setTheme } from '../utils/theme';
 
-export const SettingsRoute: React.FC = () => {
+export const SettingsRoute: FC = () => {
   const { accounts, settings, updateSetting, logout } = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -239,7 +241,7 @@ export const SettingsRoute: React.FC = () => {
           <button
             className={footerButtonClass}
             title={`Logout ${accounts.user.login}`}
-            role="Logout"
+            role="button"
             onClick={logoutUser}
           >
             <SignOutIcon

@@ -1,13 +1,14 @@
-import React, { useCallback, useContext, useState } from 'react';
-import { Form, FormRenderProps } from 'react-final-form';
 import { ArrowLeftIcon } from '@primer/octicons-react';
+
+import { type FC, useCallback, useContext, useState } from 'react';
+import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
 
-import { AppContext } from '../context/App';
-import { AuthTokenOptions } from '../types';
-import { Constants } from '../utils/constants';
 import { FieldInput } from '../components/fields/FieldInput';
+import { AppContext } from '../context/App';
+import type { AuthTokenOptions } from '../types';
 import { openExternalLink } from '../utils/comms';
+import { Constants } from '../utils/constants';
 
 interface IValues {
   token?: string;
@@ -40,7 +41,7 @@ export const validate = (values: IValues): IFormErrors => {
   return errors;
 };
 
-export const LoginWithToken: React.FC = () => {
+export const LoginWithToken: FC = () => {
   const { validateToken } = useContext(AppContext);
   const navigate = useNavigate();
   const [isValidToken, setIsValidToken] = useState<boolean>(true);

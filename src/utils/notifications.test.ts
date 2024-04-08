@@ -1,15 +1,15 @@
 import { ipcRenderer } from 'electron';
 
+import { mockAccounts } from '../__mocks__/mock-state';
 import {
   mockedAccountNotifications,
   mockedGithubNotifications,
   mockedSingleAccountNotifications,
 } from '../__mocks__/mockedData';
-import { mockAccounts } from '../__mocks__/mock-state';
-import * as notificationsHelpers from './notifications';
-import { SettingsState } from '../types';
 import { defaultSettings } from '../context/App';
+import type { SettingsState } from '../types';
 import * as helpers from './helpers';
+import * as notificationsHelpers from './notifications';
 
 describe('utils/notifications.ts', () => {
   afterEach(() => {

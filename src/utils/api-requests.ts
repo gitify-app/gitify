@@ -1,4 +1,4 @@
-import axios, { AxiosPromise, Method } from 'axios';
+import axios, { type AxiosPromise, type Method } from 'axios';
 
 export function apiRequest(
   url: string,

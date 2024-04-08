@@ -1,7 +1,7 @@
-import React from 'react';
-import TestRenderer from 'react-test-renderer';
+import { fireEvent, render } from '@testing-library/react';
+
 import { MemoryRouter } from 'react-router-dom';
-import { render, fireEvent } from '@testing-library/react';
+import TestRenderer from 'react-test-renderer';
 
 const { ipcRenderer } = require('electron');
 

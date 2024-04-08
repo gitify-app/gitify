@@ -1,5 +1,3 @@
-import * as React from 'react';
-
 interface IFieldCheckbox {
   name: string;
   label: string;

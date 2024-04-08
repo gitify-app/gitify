@@ -1,8 +1,8 @@
-import React from 'react';
-import TestRenderer from 'react-test-renderer';
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
 import { shell } from 'electron';
+
+import { MemoryRouter } from 'react-router-dom';
+import TestRenderer from 'react-test-renderer';
 
 import { AppContext } from '../context/App';
 import { LoginWithToken, validate } from './LoginWithToken';
@@ -18,7 +18,7 @@ describe('routes/LoginWithToken.tsx', () => {
 
   const mockValidateToken = jest.fn();
 
-  beforeEach(function () {
+  beforeEach(() => {
     mockValidateToken.mockReset();
     openExternalMock.mockReset();
     mockNavigate.mockReset();
