@@ -1,4 +1,4 @@
-import axios, { AxiosPromise } from 'axios';
+import axios, { type AxiosPromise } from 'axios';
 import { useCallback, useState } from 'react';
 
 import type { AccountNotifications, AuthState, SettingsState } from '../types';
