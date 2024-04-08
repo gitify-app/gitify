@@ -10,6 +10,7 @@ import {
   getEnterpriseAccountToken,
   getTokenForHost,
   isEnterpriseHost,
+  isGitHubLoggedIn,
 } from '../utils/helpers';
 import {
   setTrayIconColor,
@@ -64,8 +65,6 @@ export const useNotifications = (colors: boolean): NotificationsState => {
 
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
-      const isGitHubLoggedIn = accounts.token !== null;
-
       function getNotifications(hostname: string, token: string): AxiosPromise {
         const endpointSuffix = `notifications?participating=${settings.participating}`;
         const url = `${generateGitHubAPIUrl(hostname)}${endpointSuffix}`;
@@ -73,7 +72,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
       }
 
       function getGitHubNotifications() {
-        if (!isGitHubLoggedIn) {
+        if (!isGitHubLoggedIn(accounts)) {
           return;
         }
         return getNotifications(
@@ -111,7 +110,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                 };
               },
             );
-            const data = isGitHubLoggedIn
+            const data = isGitHubLoggedIn(accounts)
               ? [
                   ...enterpriseNotifications,
                   {

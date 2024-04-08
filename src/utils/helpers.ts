@@ -13,6 +13,10 @@ import { openExternalLink } from '../utils/comms';
 import { Constants } from './constants';
 import { getCheckSuiteAttributes, getWorkflowRunAttributes } from './subject';
 
+export function isGitHubLoggedIn(accounts: AuthState): boolean {
+  return accounts.token != null;
+}
+
 export function getTokenForHost(hostname: string, accounts: AuthState): string {
   const isEnterprise = isEnterpriseHost(hostname);
   const token = isEnterprise
