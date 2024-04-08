@@ -59,62 +59,62 @@ export function formatReason(reason: Reason): {
     case 'approval_requested':
       return {
         type: 'Approval Requested',
-        description: DESCRIPTIONS['APPROVAL_REQUESTED'],
+        description: DESCRIPTIONS.APPROVAL_REQUESTED,
       };
     case 'assign':
-      return { type: 'Assigned', description: DESCRIPTIONS['ASSIGN'] };
+      return { type: 'Assigned', description: DESCRIPTIONS.ASSIGN };
     case 'author':
-      return { type: 'Authored', description: DESCRIPTIONS['AUTHOR'] };
+      return { type: 'Authored', description: DESCRIPTIONS.AUTHOR };
     case 'ci_activity':
       return {
         type: 'Workflow Run Completed',
-        description: DESCRIPTIONS['CI_ACTIVITY'],
+        description: DESCRIPTIONS.CI_ACTIVITY,
       };
     case 'comment':
-      return { type: 'Commented', description: DESCRIPTIONS['COMMENT'] };
+      return { type: 'Commented', description: DESCRIPTIONS.COMMENT };
     case 'invitation':
       return {
         type: 'Invitation Received',
-        description: DESCRIPTIONS['INVITATION'],
+        description: DESCRIPTIONS.INVITATION,
       };
     case 'manual':
-      return { type: 'Updated', description: DESCRIPTIONS['MANUAL'] };
+      return { type: 'Updated', description: DESCRIPTIONS.MANUAL };
     case 'member_feature_requested':
       return {
         type: 'Member Feature Requested',
-        description: DESCRIPTIONS['MEMBER_FEATURE_REQUESTED'],
+        description: DESCRIPTIONS.MEMBER_FEATURE_REQUESTED,
       };
     case 'mention':
-      return { type: 'Mentioned', description: DESCRIPTIONS['MENTION'] };
+      return { type: 'Mentioned', description: DESCRIPTIONS.MENTION };
     case 'review_requested':
       return {
         type: 'Review Requested',
-        description: DESCRIPTIONS['REVIEW_REQUESTED'],
+        description: DESCRIPTIONS.REVIEW_REQUESTED,
       };
     case 'security_advisory_credit':
       return {
         type: 'Security Advisory Credit Recevied',
-        description: DESCRIPTIONS['SECURITY_ADVISORY_CREDIT'],
+        description: DESCRIPTIONS.SECURITY_ADVISORY_CREDIT,
       };
     case 'security_alert':
       return {
         type: 'Security Alert Received',
-        description: DESCRIPTIONS['SECURITY_ALERT'],
+        description: DESCRIPTIONS.SECURITY_ALERT,
       };
     case 'state_change':
       return {
         type: 'State Changed',
-        description: DESCRIPTIONS['STATE_CHANGE'],
+        description: DESCRIPTIONS.STATE_CHANGE,
       };
     case 'subscribed':
-      return { type: 'Updated', description: DESCRIPTIONS['SUBSCRIBED'] };
+      return { type: 'Updated', description: DESCRIPTIONS.SUBSCRIBED };
     case 'team_mention':
       return {
         type: 'Team Mentioned',
-        description: DESCRIPTIONS['TEAM_MENTION'],
+        description: DESCRIPTIONS.TEAM_MENTION,
       };
     default:
-      return { type: 'Unknown', description: DESCRIPTIONS['UNKNOWN'] };
+      return { type: 'Unknown', description: DESCRIPTIONS.UNKNOWN };
   }
 }
 

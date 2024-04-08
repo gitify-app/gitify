@@ -5,7 +5,7 @@ export function apiRequest(
   method: Method,
   data = {},
 ): AxiosPromise | null {
-  axios.defaults.headers.common['Accept'] = 'application/json';
+  axios.defaults.headers.common.Accept = 'application/json';
   axios.defaults.headers.common['Content-Type'] = 'application/json';
   axios.defaults.headers.common['Cache-Control'] = 'no-cache';
   return axios({ method, url, data });
@@ -17,8 +17,8 @@ export function apiRequestAuth(
   token: string,
   data = {},
 ): AxiosPromise | null {
-  axios.defaults.headers.common['Accept'] = 'application/json';
-  axios.defaults.headers.common['Authorization'] = `token ${token}`;
+  axios.defaults.headers.common.Accept = 'application/json';
+  axios.defaults.headers.common.Authorization = `token ${token}`;
   axios.defaults.headers.common['Cache-Control'] = 'no-cache';
   axios.defaults.headers.common['Content-Type'] = 'application/json';
   return axios({ method, url, data });

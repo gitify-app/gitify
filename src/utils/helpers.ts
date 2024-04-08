@@ -142,9 +142,7 @@ async function getDiscussionUrl(
 
     const comments = discussion.comments.nodes;
 
-    let latestCommentId: string | number;
-
-    latestCommentId = getLatestDiscussionComment(comments)?.databaseId;
+    const latestCommentId = getLatestDiscussionComment(comments)?.databaseId;
 
     if (latestCommentId) {
       url += `#discussioncomment-${latestCommentId}`;
@@ -159,7 +157,7 @@ export async function fetchDiscussion(
   token: string,
 ): Promise<Discussion | null> {
   const response: GraphQLSearch<Discussion> = await apiRequestAuth(
-    `https://api.github.com/graphql`,
+    'https://api.github.com/graphql',
     'POST',
     token,
     {
@@ -242,7 +240,7 @@ export async function fetchDiscussion(
 export function getLatestDiscussionComment(
   comments: DiscussionComment[],
 ): DiscussionComment | null {
-  if (!comments || comments.length == 0) {
+  if (!comments || comments.length === 0) {
     return null;
   }
 

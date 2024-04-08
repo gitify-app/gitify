@@ -2,7 +2,7 @@ interface IFieldCheckbox {
   name: string;
   label: string;
   checked: boolean;
-  onChange: any;
+  onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   disabled?: boolean;
 }

@@ -98,6 +98,7 @@ export const SettingsRoute: FC = () => {
     >
       <div className="flex justify-between items-center mt-2 py-2 mx-8">
         <button
+          type="button"
           className="focus:outline-none"
           title="Go Back"
           onClick={() => navigate(-1)}
@@ -219,15 +220,17 @@ export const SettingsRoute: FC = () => {
       </div>
 
       <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8">
-        <small
+        <button
+          type="button"
           className="font-semibold cursor-pointer"
           title="View release notes"
           onClick={() => openGitHubReleaseNotes(appVersion)}
         >
           Gitify v{appVersion}
-        </small>
+        </button>
         <div>
           <button
+            type="button"
             className={footerButtonClass}
             title="Login with GitHub Enterprise"
             onClick={goToEnterprise}
@@ -239,6 +242,7 @@ export const SettingsRoute: FC = () => {
           </button>
 
           <button
+            type="button"
             className={footerButtonClass}
             title={`Logout ${accounts.user.login}`}
             role="button"
@@ -251,6 +255,7 @@ export const SettingsRoute: FC = () => {
           </button>
 
           <button
+            type="button"
             className={`${footerButtonClass} mr-0`}
             title="Quit Gitify"
             onClick={quitApp}

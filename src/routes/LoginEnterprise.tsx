@@ -108,6 +108,7 @@ export const LoginEnterpriseRoute: FC = () => {
     <div className="flex-1 bg-white dark:bg-gray-dark dark:text-white">
       <div className="flex justify-between items-center mt-4 py-2 mx-8">
         <button
+          type="button"
           className="focus:outline-none"
           title="Go Back"
           onClick={() => navigate(-1)}

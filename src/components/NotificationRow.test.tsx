@@ -22,7 +22,7 @@ describe('components/NotificationRow.tsx', () => {
   it('should render itself & its children', async () => {
     jest
       .spyOn(global.Date, 'now')
-      .mockImplementation(() => new Date('2014').valueOf());
+      .mockImplementation(() => new Date('2024').valueOf());
 
     const props = {
       notification: mockedSingleNotification,
@@ -34,7 +34,9 @@ describe('components/NotificationRow.tsx', () => {
   });
 
   it('should render itself & its children without avatar', async () => {
-    (global as any).Date.now = jest.fn(() => new Date('2024'));
+    jest
+      .spyOn(global.Date, 'now')
+      .mockImplementation(() => new Date('2024').valueOf());
 
     const mockNotification = mockedSingleNotification;
     mockNotification.subject.user = null;

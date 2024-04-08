@@ -37,6 +37,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
   <div
     className="flex-1 overflow-hidden"
     onClick={[Function]}
+    onKeyDown={[Function]}
   >
     <div
       className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
@@ -53,13 +54,15 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       >
         <span
           className="flex"
-          title="manosim updated in over 3 years"
+          title="manosim updated over 6 years ago"
         >
           <span
             onClick={[Function]}
+            onKeyDown={[Function]}
             title="View User Profile"
           >
             <img
+              alt="manosim's avatar"
               className="rounded-full w-4 h-4 cursor-pointer"
               src="https://avatars0.githubusercontent.com/u/6333409?v=3"
               title="manosim"
@@ -74,7 +77,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
           <span
             className="ml-1"
           >
-            in over 3 years
+            over 6 years ago
           </span>
         </span>
       </span>
@@ -87,6 +90,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       className="focus:outline-none h-full hover:text-green-500"
       onClick={[Function]}
       title="Mark as Done"
+      type="button"
     >
       <svg
         aria-label="Mark as Done"
@@ -115,6 +119,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       className="focus:outline-none h-full hover:text-red-500"
       onClick={[Function]}
       title="Unsubscribe"
+      type="button"
     >
       <svg
         aria-label="Unsubscribe"
@@ -143,6 +148,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       className="focus:outline-none h-full hover:text-green-500"
       onClick={[Function]}
       title="Mark as Read"
+      type="button"
     >
       <svg
         aria-label="Mark as Read"
@@ -208,6 +214,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
   <div
     className="flex-1 overflow-hidden"
     onClick={[Function]}
+    onKeyDown={[Function]}
   >
     <div
       className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
@@ -271,6 +278,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
       className="focus:outline-none h-full hover:text-green-500"
       onClick={[Function]}
       title="Mark as Done"
+      type="button"
     >
       <svg
         aria-label="Mark as Done"
@@ -299,6 +307,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
       className="focus:outline-none h-full hover:text-red-500"
       onClick={[Function]}
       title="Unsubscribe"
+      type="button"
     >
       <svg
         aria-label="Unsubscribe"
@@ -327,6 +336,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
       className="focus:outline-none h-full hover:text-green-500"
       onClick={[Function]}
       title="Mark as Read"
+      type="button"
     >
       <svg
         aria-label="Mark as Read"

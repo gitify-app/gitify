@@ -62,7 +62,8 @@ export const LoginWithToken: FC = () => {
           helpText={
             <>
               To generate a token, go to GitHub,{' '}
-              <a
+              <button
+                type="button"
                 className="underline hover:text-gray-500 dark:hover:text-gray-300  cursor-pointer"
                 onClick={() =>
                   openLink(
@@ -71,7 +72,7 @@ export const LoginWithToken: FC = () => {
                 }
               >
                 personal access tokens
-              </a>{' '}
+              </button>{' '}
               and create one with the {Constants.AUTH_SCOPE.length} scopes{' '}
               <span className="underline font-extrabold text-yellow-500">
                 {Constants.AUTH_SCOPE.join(', ')}{' '}
@@ -120,6 +121,7 @@ export const LoginWithToken: FC = () => {
     <div className="flex-1 bg-white dark:bg-gray-dark dark:text-white">
       <div className="flex justify-between items-center mt-4 py-2 mx-8">
         <button
+          type="button"
           className="focus:outline-none"
           title="Go Back"
           onClick={() => navigate(-1)}
