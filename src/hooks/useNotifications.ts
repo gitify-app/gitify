@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { type AxiosPromise } from 'axios';
 import { useCallback, useState } from 'react';
 
 import type { AccountNotifications, AuthState, SettingsState } from '../types';
@@ -65,24 +65,26 @@ export const useNotifications = (colors: boolean): NotificationsState => {
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
       const isGitHubLoggedIn = accounts.token !== null;
-      const endpointSuffix = `notifications?participating=${settings.participating}`;
+
+      function getNotifications(hostname: string, token: string): AxiosPromise {
+        const endpointSuffix = `notifications?participating=${settings.participating}`;
+        const url = `${generateGitHubAPIUrl(hostname)}${endpointSuffix}`;
+        return apiRequestAuth(url, 'GET', token);
+      }
 
       function getGitHubNotifications() {
         if (!isGitHubLoggedIn) {
           return;
         }
-        const url = `${generateGitHubAPIUrl(
+        return getNotifications(
           Constants.DEFAULT_AUTH_OPTIONS.hostname,
-        )}${endpointSuffix}`;
-        return apiRequestAuth(url, 'GET', accounts.token);
+          accounts.token,
+        );
       }
 
       function getEnterpriseNotifications() {
         return accounts.enterpriseAccounts.map((account) => {
-          const url = `${generateGitHubAPIUrl(
-            account.hostname,
-          )}${endpointSuffix}`;
-          return apiRequestAuth(url, 'GET', account.token);
+          return getNotifications(account.hostname, account.token);
         });
       }
 
