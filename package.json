@@ -135,7 +135,7 @@
     "@types/react-test-renderer": "18.0.7",
     "@types/react-transition-group": "4.4.10",
     "autoprefixer": "10.4.19",
-    "css-loader": "7.0.0",
+    "css-loader": "7.1.0",
     "electron": "29.2.0",
     "electron-builder": "24.13.3",
     "husky": "9.0.11",
