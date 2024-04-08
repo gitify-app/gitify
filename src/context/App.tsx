@@ -65,7 +65,10 @@ interface AppContextState {
   markRepoNotificationsDone: (id: string, hostname: string) => Promise<void>;
 
   settings: SettingsState;
-  updateSetting: (name: keyof SettingsState, value: any) => void;
+  updateSetting: (
+    name: keyof SettingsState,
+    value: boolean | Theme | string | null,
+  ) => void;
 }
 
 export const AppContext = createContext<Partial<AppContextState>>({});

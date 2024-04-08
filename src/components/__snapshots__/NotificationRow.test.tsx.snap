@@ -37,6 +37,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
   <div
     className="flex-1 overflow-hidden"
     onClick={[Function]}
+    onKeyDown={[Function]}
   >
     <div
       className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
@@ -57,9 +58,11 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
         >
           <span
             onClick={[Function]}
+            onKeyDown={[Function]}
             title="View User Profile"
           >
             <img
+              alt="manosim's avatar"
               className="rounded-full w-4 h-4 cursor-pointer"
               src="https://avatars0.githubusercontent.com/u/6333409?v=3"
               title="manosim"
@@ -87,6 +90,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       className="focus:outline-none h-full hover:text-green-500"
       onClick={[Function]}
       title="Mark as Done"
+      type="button"
     >
       <svg
         aria-label="Mark as Done"
@@ -115,6 +119,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       className="focus:outline-none h-full hover:text-red-500"
       onClick={[Function]}
       title="Unsubscribe"
+      type="button"
     >
       <svg
         aria-label="Unsubscribe"
@@ -143,6 +148,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       className="focus:outline-none h-full hover:text-green-500"
       onClick={[Function]}
       title="Mark as Read"
+      type="button"
     >
       <svg
         aria-label="Mark as Read"
@@ -208,6 +214,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
   <div
     className="flex-1 overflow-hidden"
     onClick={[Function]}
+    onKeyDown={[Function]}
   >
     <div
       className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
@@ -224,7 +231,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
       >
         <span
           className="flex"
-          title="Updated over 6 years ago"
+          title="Updated in over 3 years"
         >
           <span>
             <svg
@@ -258,7 +265,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           <span
             className="ml-1"
           >
-            over 6 years ago
+            in over 3 years
           </span>
         </span>
       </span>
@@ -271,6 +278,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
       className="focus:outline-none h-full hover:text-green-500"
       onClick={[Function]}
       title="Mark as Done"
+      type="button"
     >
       <svg
         aria-label="Mark as Done"
@@ -299,6 +307,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
       className="focus:outline-none h-full hover:text-red-500"
       onClick={[Function]}
       title="Unsubscribe"
+      type="button"
     >
       <svg
         aria-label="Unsubscribe"
@@ -327,6 +336,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
       className="focus:outline-none h-full hover:text-green-500"
       onClick={[Function]}
       title="Mark as Read"
+      type="button"
     >
       <svg
         aria-label="Mark as Read"

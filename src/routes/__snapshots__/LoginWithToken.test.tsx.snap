@@ -11,6 +11,7 @@ exports[`routes/LoginWithToken.tsx renders correctly 1`] = `
       className="focus:outline-none"
       onClick={[Function]}
       title="Go Back"
+      type="button"
     >
       <svg
         aria-label="Go Back"
@@ -73,12 +74,13 @@ exports[`routes/LoginWithToken.tsx renders correctly 1`] = `
         >
           To generate a token, go to GitHub,
            
-          <a
+          <button
             className="underline hover:text-gray-500 dark:hover:text-gray-300  cursor-pointer"
             onClick={[Function]}
+            type="button"
           >
             personal access tokens
-          </a>
+          </button>
            
           and create one with the 
           3

@@ -51,6 +51,7 @@ export const LoginRoute: FC = () => {
       }
 
       <button
+        type="button"
         className={loginButtonClass}
         title="Login with Personal Token"
         aria-label="Login with Personal Token"
@@ -60,6 +61,7 @@ export const LoginRoute: FC = () => {
       </button>
 
       <button
+        type="button"
         className={loginButtonClass}
         title="Login with GitHub Enterprise"
         aria-label="Login with GitHub Enterprise"

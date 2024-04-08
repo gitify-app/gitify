@@ -5,7 +5,13 @@ import {
   ReadIcon,
 } from '@primer/octicons-react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import { type FC, type MouseEvent, useCallback, useContext } from 'react';
+import {
+  type FC,
+  type KeyboardEvent,
+  type MouseEvent,
+  useCallback,
+  useContext,
+} from 'react';
 
 import { AppContext } from '../context/App';
 import type { Notification } from '../typesGithub';
@@ -55,7 +61,9 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     unsubscribeNotification(notification.id, hostname);
   };
 
-  const openUserProfile = (event: MouseEvent<HTMLElement>) => {
+  const openUserProfile = (
+    event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>,
+  ) => {
     // Don't trigger onClick of parent element.
     event.stopPropagation();
 
@@ -89,7 +97,11 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
 
-      <div className="flex-1 overflow-hidden" onClick={() => pressTitle()}>
+      <div
+        className="flex-1 overflow-hidden"
+        onClick={() => pressTitle()}
+        onKeyDown={() => pressTitle()}
+      >
         <div
           className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
           role="main"
@@ -102,11 +114,16 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
           <span className="flex items-center">
             <span title={updatedLabel} className="flex">
               {notification.subject.user ? (
-                <span title="View User Profile" onClick={openUserProfile}>
+                <span
+                  title="View User Profile"
+                  onClick={openUserProfile}
+                  onKeyDown={openUserProfile}
+                >
                   <img
                     className="rounded-full w-4 h-4 cursor-pointer"
                     src={notification.subject.user.avatar_url}
                     title={notification.subject.user.login}
+                    alt={`${notification.subject.user.login}'s avatar`}
                   />
                 </span>
               ) : (
@@ -128,6 +145,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
 
       <div className="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity">
         <button
+          type="button"
           className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Done"
           onClick={() => markNotificationDone(notification.id, hostname)}
@@ -136,6 +154,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
         </button>
 
         <button
+          type="button"
           className="focus:outline-none h-full hover:text-red-500"
           title="Unsubscribe"
           onClick={unsubscribe}
@@ -144,6 +163,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
         </button>
 
         <button
+          type="button"
           className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Read"
           onClick={() => markNotificationRead(notification.id, hostname)}

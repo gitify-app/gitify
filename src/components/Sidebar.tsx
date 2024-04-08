@@ -28,7 +28,7 @@ export const Sidebar: FC = () => {
   }, []);
 
   const onOpenGitHubNotifications = useCallback(() => {
-    openExternalLink(`https://github.com/notifications`);
+    openExternalLink('https://github.com/notifications');
   }, []);
 
   const quitApp = useCallback(() => {
@@ -46,6 +46,7 @@ export const Sidebar: FC = () => {
     <div className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto">
       <div className="flex flex-col flex-1 items-center py-4">
         <button
+          type="button"
           className="w-5 my-3 mx-auto cursor-pointer outline-none"
           title="Open Gitify on GitHub"
           onClick={onOpenBrowser}
@@ -55,6 +56,7 @@ export const Sidebar: FC = () => {
         </button>
 
         <button
+          type="button"
           className={`flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer ${
             notificationsCount > 0 ? 'text-green-500' : 'text-white'
           }`}
@@ -73,6 +75,7 @@ export const Sidebar: FC = () => {
         {isLoggedIn && (
           <>
             <button
+              type="button"
               className={sidebarButtonClasses}
               title="Refresh Notifications"
               onClick={() => {
@@ -89,6 +92,7 @@ export const Sidebar: FC = () => {
             </button>
 
             <button
+              type="button"
               className={sidebarButtonClasses}
               title="Settings"
               onClick={() => {
@@ -106,6 +110,7 @@ export const Sidebar: FC = () => {
 
         {!isLoggedIn && (
           <button
+            type="button"
             className={sidebarButtonClasses}
             title="Quit Gitify"
             aria-label="Quit Gitify"

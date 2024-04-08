@@ -11,6 +11,7 @@ exports[`routes/LoginEnterprise.tsx renders correctly 1`] = `
       className="focus:outline-none"
       onClick={[Function]}
       title="Go Back"
+      type="button"
     >
       <svg
         aria-label="Go Back"
