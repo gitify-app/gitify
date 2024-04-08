@@ -1,12 +1,12 @@
-import { Theme } from "../types";
-import { setTheme } from "./theme";
+import { Theme } from '../types';
+import { setTheme } from './theme';
 
-import * as appearanceHelpers from "./theme";
+import * as appearanceHelpers from './theme';
 
-describe("utils/appearance.ts", () => {
+describe('utils/appearance.ts', () => {
   beforeAll(() => {
-    jest.spyOn(appearanceHelpers, "setLightMode");
-    jest.spyOn(appearanceHelpers, "setDarkMode");
+    jest.spyOn(appearanceHelpers, 'setLightMode');
+    jest.spyOn(appearanceHelpers, 'setDarkMode');
   });
 
   beforeEach(() => {
@@ -16,12 +16,12 @@ describe("utils/appearance.ts", () => {
     appearanceHelpers.setDarkMode.mockReset();
   });
 
-  it("should change to light mode", () => {
+  it('should change to light mode', () => {
     setTheme(Theme.LIGHT);
     expect(appearanceHelpers.setLightMode).toHaveBeenCalledTimes(1);
   });
 
-  it("should change to dark mode", () => {
+  it('should change to dark mode', () => {
     setTheme(Theme.DARK);
     expect(appearanceHelpers.setDarkMode).toHaveBeenCalledTimes(1);
   });
@@ -32,7 +32,7 @@ describe("utils/appearance.ts", () => {
   });
 
   it("should use the system's mode - dark", () => {
-    Object.defineProperty(window, "matchMedia", {
+    Object.defineProperty(window, 'matchMedia', {
       writable: true,
       value: jest.fn().mockImplementation((query) => ({
         matches: true,

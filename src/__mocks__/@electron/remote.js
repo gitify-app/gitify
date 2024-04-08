@@ -28,7 +28,7 @@ module.exports = {
   BrowserWindow: BrowserWindow,
   dialog: dialog,
   process: {
-    platform: "darwin",
+    platform: 'darwin',
   },
   app: {
     getLoginItemSettings: jest.fn(),

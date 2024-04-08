@@ -1,7 +1,7 @@
-import { Theme } from "../types";
+import { Theme } from '../types';
 
 export function getTheme(): Theme {
-  if (document.querySelector("html").classList.contains("dark")) {
+  if (document.querySelector('html').classList.contains('dark')) {
     return Theme.DARK;
   }
 
@@ -9,10 +9,10 @@ export function getTheme(): Theme {
 }
 
 export const setLightMode = () =>
-  document.querySelector("html").classList.remove("dark");
+  document.querySelector('html').classList.remove('dark');
 
 export const setDarkMode = () =>
-  document.querySelector("html").classList.add("dark");
+  document.querySelector('html').classList.add('dark');
 
 export const setTheme = (mode?: Theme) => {
   switch (mode) {
@@ -27,7 +27,7 @@ export const setTheme = (mode?: Theme) => {
     default:
       if (
         window.matchMedia &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches
+        window.matchMedia('(prefers-color-scheme: dark)').matches
       ) {
         setDarkMode();
       } else {

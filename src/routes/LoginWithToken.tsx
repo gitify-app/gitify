@@ -1,14 +1,14 @@
-import { ArrowLeftIcon } from "@primer/octicons-react";
+import { ArrowLeftIcon } from '@primer/octicons-react';
 
-import { FC, useCallback, useContext, useState } from "react";
-import { Form, type FormRenderProps } from "react-final-form";
-import { useNavigate } from "react-router-dom";
+import { type FC, useCallback, useContext, useState } from 'react';
+import { Form, type FormRenderProps } from 'react-final-form';
+import { useNavigate } from 'react-router-dom';
 
-import { FieldInput } from "../components/fields/FieldInput";
-import { AppContext } from "../context/App";
-import type { AuthTokenOptions } from "../types";
-import { openExternalLink } from "../utils/comms";
-import { Constants } from "../utils/constants";
+import { FieldInput } from '../components/fields/FieldInput';
+import { AppContext } from '../context/App';
+import type { AuthTokenOptions } from '../types';
+import { openExternalLink } from '../utils/comms';
+import { Constants } from '../utils/constants';
 
 interface IValues {
   token?: string;
@@ -23,19 +23,19 @@ interface IFormErrors {
 export const validate = (values: IValues): IFormErrors => {
   const errors: IFormErrors = {};
   if (!values.token) {
-    errors.token = "Required";
+    errors.token = 'Required';
   } else if (!/^[A-Z0-9_]{40}$/i.test(values.token)) {
-    errors.token = "Invalid token.";
+    errors.token = 'Invalid token.';
   }
 
   if (!values.hostname) {
-    errors.hostname = "Required";
+    errors.hostname = 'Required';
   } else if (
     !/^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
       values.hostname,
     )
   ) {
-    errors.hostname = "Invalid hostname.";
+    errors.hostname = 'Invalid hostname.';
   }
 
   return errors;
@@ -56,25 +56,25 @@ export const LoginWithToken: FC = () => {
     return (
       <form onSubmit={handleSubmit}>
         <FieldInput
-          name="token"
-          label="Token"
-          placeholder="The 40 characters token generated on GitHub"
+          name='token'
+          label='Token'
+          placeholder='The 40 characters token generated on GitHub'
           helpText={
             <>
-              To generate a token, go to GitHub,{" "}
+              To generate a token, go to GitHub,{' '}
               <a
-                className="underline hover:text-gray-500 dark:hover:text-gray-300  cursor-pointer"
+                className='underline hover:text-gray-500 dark:hover:text-gray-300  cursor-pointer'
                 onClick={() =>
                   openLink(
-                    "https://github.com/settings/tokens/new?scopes=notifications,read:user,repo&description=gitify_token",
+                    'https://github.com/settings/tokens/new?scopes=notifications,read:user,repo&description=gitify_token',
                   )
                 }
               >
                 personal access tokens
-              </a>{" "}
-              and create one with the {Constants.AUTH_SCOPE.length} scopes{" "}
-              <span className="underline font-extrabold text-yellow-500">
-                {Constants.AUTH_SCOPE.join(", ")}{" "}
+              </a>{' '}
+              and create one with the {Constants.AUTH_SCOPE.length} scopes{' '}
+              <span className='underline font-extrabold text-yellow-500'>
+                {Constants.AUTH_SCOPE.join(', ')}{' '}
               </span>
               .
             </>
@@ -82,23 +82,23 @@ export const LoginWithToken: FC = () => {
         />
 
         <FieldInput
-          name="hostname"
-          label="Hostname"
-          placeholder="github.company.com"
-          helpText="Defaults to github.com. Change only if you are using GitHub for Enterprise."
+          name='hostname'
+          label='Hostname'
+          placeholder='github.company.com'
+          helpText='Defaults to github.com. Change only if you are using GitHub for Enterprise.'
         />
 
         {!isValidToken && (
-          <div className="mt-4 text-red-500 text-sm font-medium">
+          <div className='mt-4 text-red-500 text-sm font-medium'>
             This token could not be validated with {values.hostname}.
           </div>
         )}
 
         <button
-          className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
-          title="Submit Button"
+          className='float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none'
+          title='Submit Button'
           disabled={submitting || pristine}
-          type="submit"
+          type='submit'
         >
           Submit
         </button>
@@ -117,29 +117,29 @@ export const LoginWithToken: FC = () => {
   }, []);
 
   return (
-    <div className="flex-1 bg-white dark:bg-gray-dark dark:text-white">
-      <div className="flex justify-between items-center mt-4 py-2 mx-8">
+    <div className='flex-1 bg-white dark:bg-gray-dark dark:text-white'>
+      <div className='flex justify-between items-center mt-4 py-2 mx-8'>
         <button
-          className="focus:outline-none"
-          title="Go Back"
+          className='focus:outline-none'
+          title='Go Back'
           onClick={() => navigate(-1)}
         >
           <ArrowLeftIcon
             size={20}
-            className="hover:text-gray-400"
-            aria-label="Go Back"
+            className='hover:text-gray-400'
+            aria-label='Go Back'
           />
         </button>
 
-        <h3 className="text-lg font-semibold">
+        <h3 className='text-lg font-semibold'>
           Login with personal access token
         </h3>
       </div>
 
-      <div className="flex-1 px-8">
+      <div className='flex-1 px-8'>
         <Form
           initialValues={{
-            token: "",
+            token: '',
             hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
           }}
           onSubmit={submit}

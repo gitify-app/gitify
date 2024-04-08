@@ -3,17 +3,17 @@ import {
   GearIcon,
   SyncIcon,
   XCircleIcon,
-} from "@primer/octicons-react";
-import { ipcRenderer } from "electron";
+} from '@primer/octicons-react';
+import { ipcRenderer } from 'electron';
 
-import { FC, useCallback, useContext, useMemo } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { type FC, useCallback, useContext, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-import { Logo } from "../components/Logo";
-import { AppContext } from "../context/App";
-import { openExternalLink } from "../utils/comms";
-import { Constants } from "../utils/constants";
-import { getNotificationCount } from "../utils/notifications";
+import { Logo } from '../components/Logo';
+import { AppContext } from '../context/App';
+import { openExternalLink } from '../utils/comms';
+import { Constants } from '../utils/constants';
+import { getNotificationCount } from '../utils/notifications';
 
 export const Sidebar: FC = () => {
   const navigate = useNavigate();
@@ -32,7 +32,7 @@ export const Sidebar: FC = () => {
   }, []);
 
   const quitApp = useCallback(() => {
-    ipcRenderer.send("app-quit");
+    ipcRenderer.send('app-quit');
   }, []);
 
   const notificationsCount = useMemo(() => {
@@ -40,23 +40,23 @@ export const Sidebar: FC = () => {
   }, [notifications]);
 
   const sidebarButtonClasses =
-    "flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none disabled:text-gray-500 disabled:cursor-default";
+    'flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none disabled:text-gray-500 disabled:cursor-default';
 
   return (
-    <div className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto">
-      <div className="flex flex-col flex-1 items-center py-4">
+    <div className='flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto'>
+      <div className='flex flex-col flex-1 items-center py-4'>
         <button
-          className="w-5 my-3 mx-auto cursor-pointer outline-none"
-          title="Open Gitify on GitHub"
+          className='w-5 my-3 mx-auto cursor-pointer outline-none'
+          title='Open Gitify on GitHub'
           onClick={onOpenBrowser}
-          data-testid="gitify-logo"
+          data-testid='gitify-logo'
         >
-          <Logo aria-label="Open Gitify" />
+          <Logo aria-label='Open Gitify' />
         </button>
 
         <button
           className={`flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer ${
-            notificationsCount > 0 ? "text-green-500" : "text-white"
+            notificationsCount > 0 ? 'text-green-500' : 'text-white'
           }`}
           onClick={onOpenGitHubNotifications}
           title={`${notificationsCount} Unread Notifications`}
@@ -69,37 +69,37 @@ export const Sidebar: FC = () => {
         </button>
       </div>
 
-      <div className="py-4 px-3">
+      <div className='py-4 px-3'>
         {isLoggedIn && (
           <>
             <button
               className={sidebarButtonClasses}
-              title="Refresh Notifications"
+              title='Refresh Notifications'
               onClick={() => {
-                navigate("/", { replace: true });
+                navigate('/', { replace: true });
                 fetchNotifications();
               }}
               disabled={isFetching}
             >
               <SyncIcon
                 size={16}
-                aria-label="Refresh Notifications"
-                className={isFetching ? "animate-spin" : undefined}
+                aria-label='Refresh Notifications'
+                className={isFetching ? 'animate-spin' : undefined}
               />
             </button>
 
             <button
               className={sidebarButtonClasses}
-              title="Settings"
+              title='Settings'
               onClick={() => {
-                if (location.pathname.startsWith("/settings")) {
-                  navigate("/", { replace: true });
+                if (location.pathname.startsWith('/settings')) {
+                  navigate('/', { replace: true });
                 } else {
-                  navigate("/settings");
+                  navigate('/settings');
                 }
               }}
             >
-              <GearIcon size={16} aria-label="Settings" />
+              <GearIcon size={16} aria-label='Settings' />
             </button>
           </>
         )}
@@ -107,11 +107,11 @@ export const Sidebar: FC = () => {
         {!isLoggedIn && (
           <button
             className={sidebarButtonClasses}
-            title="Quit Gitify"
-            aria-label="Quit Gitify"
+            title='Quit Gitify'
+            aria-label='Quit Gitify'
             onClick={quitApp}
           >
-            <XCircleIcon size={16} aria-label="Quit Gitify" />
+            <XCircleIcon size={16} aria-label='Quit Gitify' />
           </button>
         )}
       </div>

@@ -1,5 +1,5 @@
-import type { AuthState, SettingsState } from "../types";
-import { Constants } from "./constants";
+import type { AuthState, SettingsState } from '../types';
+import { Constants } from './constants';
 
 export const loadState = (): {
   accounts?: AuthState;

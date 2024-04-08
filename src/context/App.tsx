@@ -1,14 +1,14 @@
 import {
-  ReactNode,
+  type ReactNode,
   createContext,
   useCallback,
   useEffect,
   useMemo,
   useState,
-} from "react";
+} from 'react';
 
-import { useInterval } from "../hooks/useInterval";
-import { useNotifications } from "../hooks/useNotifications";
+import { useInterval } from '../hooks/useInterval';
+import { useNotifications } from '../hooks/useNotifications';
 import {
   type AccountNotifications,
   type AuthOptions,
@@ -16,15 +16,15 @@ import {
   type AuthTokenOptions,
   type SettingsState,
   Theme,
-} from "../types";
-import { apiRequestAuth } from "../utils/api-requests";
-import { addAccount, authGitHub, getToken, getUserData } from "../utils/auth";
-import { setAutoLaunch, updateTrayTitle } from "../utils/comms";
-import Constants from "../utils/constants";
-import { generateGitHubAPIUrl } from "../utils/helpers";
-import { getNotificationCount } from "../utils/notifications";
-import { clearState, loadState, saveState } from "../utils/storage";
-import { setTheme } from "../utils/theme";
+} from '../types';
+import { apiRequestAuth } from '../utils/api-requests';
+import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
+import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
+import Constants from '../utils/constants';
+import { generateGitHubAPIUrl } from '../utils/helpers';
+import { getNotificationCount } from '../utils/notifications';
+import { clearState, loadState, saveState } from '../utils/storage';
+import { setTheme } from '../utils/theme';
 
 const defaultAccounts: AuthState = {
   token: null,
@@ -117,7 +117,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const updateSetting = useCallback(
     (name: keyof SettingsState, value: boolean | Theme) => {
-      if (name === "openAtStartup") {
+      if (name === 'openAtStartup') {
         setAutoLaunch(value as boolean);
       }
 
@@ -157,7 +157,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     async ({ token, hostname }: AuthTokenOptions) => {
       await apiRequestAuth(
         `${generateGitHubAPIUrl(hostname)}notifications`,
-        "HEAD",
+        'HEAD',
         token,
       );
       const user = await getUserData(token, hostname);

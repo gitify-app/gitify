@@ -1,10 +1,10 @@
-import { FC, useContext, useMemo } from "react";
+import { type FC, useContext, useMemo } from 'react';
 
-import { AccountNotifications } from "../components/AccountNotifications";
-import { AllRead } from "../components/AllRead";
-import { Oops } from "../components/Oops";
-import { AppContext } from "../context/App";
-import { getNotificationCount } from "../utils/notifications";
+import { AccountNotifications } from '../components/AccountNotifications';
+import { AllRead } from '../components/AllRead';
+import { Oops } from '../components/Oops';
+import { AppContext } from '../context/App';
+import { getNotificationCount } from '../utils/notifications';
 
 export const NotificationsRoute: FC = () => {
   const { notifications, requestFailed } = useContext(AppContext);
@@ -31,7 +31,7 @@ export const NotificationsRoute: FC = () => {
   }
 
   return (
-    <div className="flex flex-col flex-1 bg-white dark:bg-gray-dark">
+    <div className='flex flex-col flex-1 bg-white dark:bg-gray-dark'>
       {notifications.map((account) => (
         <AccountNotifications
           key={account.hostname}

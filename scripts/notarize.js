@@ -1,22 +1,22 @@
-const { notarize } = require("@electron/notarize");
+const { notarize } = require('@electron/notarize');
 
-const packageJson = require("../package.json");
+const packageJson = require('../package.json');
 const appBundleId = packageJson.build.appId;
 
 const notarizeApp = async (context) => {
   const { electronPlatformName, appOutDir } = context;
   const appName = context.packager.appInfo.productFilename;
-  const isMacOS = electronPlatformName === "darwin";
-  const shouldNotarize = process.env.NOTARIZE === "true";
+  const isMacOS = electronPlatformName === 'darwin';
+  const shouldNotarize = process.env.NOTARIZE === 'true';
 
   if (!shouldNotarize || !isMacOS) {
     console.log(
-      "  • notarizing      either should not notarize or not building for macOS",
+      '  • notarizing      either should not notarize or not building for macOS',
     );
     return;
   }
 
-  console.log("  • notarizing      started");
+  console.log('  • notarizing      started');
 
   return await notarize({
     appBundleId,
@@ -24,7 +24,7 @@ const notarizeApp = async (context) => {
     appleId: process.env.APPLEID_USERNAME,
     appleIdPassword: process.env.APPLEID_PASSWORD,
     teamId: process.env.APPLEID_TEAM_ID,
-    tool: "notarytool",
+    tool: 'notarytool',
   });
 };
 

@@ -1,14 +1,14 @@
-const ipcRenderer = require("electron").ipcRenderer;
+const ipcRenderer = require('electron').ipcRenderer;
 
-import { ArrowLeftIcon } from "@primer/octicons-react";
+import { ArrowLeftIcon } from '@primer/octicons-react';
 
-import { FC, useCallback, useContext, useEffect } from "react";
-import { Form, type FormRenderProps } from "react-final-form";
-import { useNavigate } from "react-router-dom";
+import { type FC, useCallback, useContext, useEffect } from 'react';
+import { Form, type FormRenderProps } from 'react-final-form';
+import { useNavigate } from 'react-router-dom';
 
-import { FieldInput } from "../components/fields/FieldInput";
-import { AppContext } from "../context/App";
-import type { AuthOptions } from "../types";
+import { FieldInput } from '../components/fields/FieldInput';
+import { AppContext } from '../context/App';
+import type { AuthOptions } from '../types';
 
 interface IValues {
   hostname?: string;
@@ -25,27 +25,27 @@ interface IFormErrors {
 export const validate = (values: IValues): IFormErrors => {
   const errors: IFormErrors = {};
   if (!values.hostname) {
-    errors.hostname = "Required";
+    errors.hostname = 'Required';
   } else if (
     !/^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
       values.hostname,
     )
   ) {
-    errors.hostname = "Invalid hostname.";
+    errors.hostname = 'Invalid hostname.';
   }
 
   if (!values.clientId) {
     // 20
-    errors.clientId = "Required";
+    errors.clientId = 'Required';
   } else if (!/^[A-Z0-9]{20}$/i.test(values.clientId)) {
-    errors.clientId = "Invalid client id.";
+    errors.clientId = 'Invalid client id.';
   }
 
   if (!values.clientSecret) {
     // 40
-    errors.clientSecret = "Required";
+    errors.clientSecret = 'Required';
   } else if (!/^[A-Z0-9]{40}$/i.test(values.clientSecret)) {
-    errors.clientSecret = "Invalid client secret.";
+    errors.clientSecret = 'Invalid client secret.';
   }
 
   return errors;
@@ -60,7 +60,7 @@ export const LoginEnterpriseRoute: FC = () => {
 
   useEffect(() => {
     if (enterpriseAccounts.length) {
-      ipcRenderer.send("reopen-window");
+      ipcRenderer.send('reopen-window');
       navigate(-1);
     }
   }, [enterpriseAccounts]);
@@ -71,24 +71,24 @@ export const LoginEnterpriseRoute: FC = () => {
     return (
       <form onSubmit={handleSubmit}>
         <FieldInput
-          name="hostname"
-          label="Hostname"
-          placeholder="github.company.com"
+          name='hostname'
+          label='Hostname'
+          placeholder='github.company.com'
         />
 
-        <FieldInput name="clientId" label="Client ID" placeholder="123456789" />
+        <FieldInput name='clientId' label='Client ID' placeholder='123456789' />
 
         <FieldInput
-          name="clientSecret"
-          label="Client Secret"
-          placeholder="ABC123DEF456"
+          name='clientSecret'
+          label='Client Secret'
+          placeholder='ABC123DEF456'
         />
 
         <button
-          className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
-          title="Login Button"
+          className='float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none'
+          title='Login Button'
           disabled={submitting || pristine}
-          type="submit"
+          type='submit'
         >
           Login
         </button>
@@ -105,29 +105,29 @@ export const LoginEnterpriseRoute: FC = () => {
   }, []);
 
   return (
-    <div className="flex-1 bg-white dark:bg-gray-dark dark:text-white">
-      <div className="flex justify-between items-center mt-4 py-2 mx-8">
+    <div className='flex-1 bg-white dark:bg-gray-dark dark:text-white'>
+      <div className='flex justify-between items-center mt-4 py-2 mx-8'>
         <button
-          className="focus:outline-none"
-          title="Go Back"
+          className='focus:outline-none'
+          title='Go Back'
           onClick={() => navigate(-1)}
         >
           <ArrowLeftIcon
             size={20}
-            className="hover:text-gray-400"
-            aria-label="Go Back"
+            className='hover:text-gray-400'
+            aria-label='Go Back'
           />
         </button>
 
-        <h3 className="text-lg font-semibold">Login with GitHub Enterprise</h3>
+        <h3 className='text-lg font-semibold'>Login with GitHub Enterprise</h3>
       </div>
 
-      <div className="flex-1 px-8">
+      <div className='flex-1 px-8'>
         <Form
           initialValues={{
-            hostname: "",
-            clientId: "",
-            clientSecret: "",
+            hostname: '',
+            clientId: '',
+            clientSecret: '',
           }}
           onSubmit={login}
           validate={validate}

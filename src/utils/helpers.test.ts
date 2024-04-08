@@ -1,12 +1,12 @@
-import type { AxiosPromise, AxiosResponse } from "axios";
-import { mockAccounts } from "../__mocks__/mock-state";
+import type { AxiosPromise, AxiosResponse } from 'axios';
+import { mockAccounts } from '../__mocks__/mock-state';
 import {
   mockedGraphQLResponse,
   mockedSingleNotification,
   mockedUser,
-} from "../__mocks__/mockedData";
-import type { SubjectType } from "../typesGithub";
-import * as apiRequests from "./api-requests";
+} from '../__mocks__/mockedData';
+import type { SubjectType } from '../typesGithub';
+import * as apiRequests from './api-requests';
 import {
   addHours,
   addNotificationReferrerIdToUrl,
@@ -17,26 +17,26 @@ import {
   generateNotificationReferrerId,
   getHtmlUrl,
   isEnterpriseHost,
-} from "./helpers";
+} from './helpers';
 
-describe("utils/helpers.ts", () => {
-  describe("isEnterpriseHost", () => {
-    it("should return true for enterprise host", () => {
-      expect(isEnterpriseHost("github.manos.im")).toBe(true);
-      expect(isEnterpriseHost("api.github.manos.im")).toBe(true);
+describe('utils/helpers.ts', () => {
+  describe('isEnterpriseHost', () => {
+    it('should return true for enterprise host', () => {
+      expect(isEnterpriseHost('github.manos.im')).toBe(true);
+      expect(isEnterpriseHost('api.github.manos.im')).toBe(true);
     });
 
-    it("should return false for non-enterprise host", () => {
-      expect(isEnterpriseHost("github.com")).toBe(false);
-      expect(isEnterpriseHost("api.github.com")).toBe(false);
+    it('should return false for non-enterprise host', () => {
+      expect(isEnterpriseHost('github.com')).toBe(false);
+      expect(isEnterpriseHost('api.github.com')).toBe(false);
     });
   });
 
-  describe("addNotificationReferrerIdToUrl", () => {
-    it("should add notification_referrer_id to the URL", () => {
+  describe('addNotificationReferrerIdToUrl', () => {
+    it('should add notification_referrer_id to the URL', () => {
       // Mock data
-      const url = "https://github.com/some/repo";
-      const notificationId = "123";
+      const url = 'https://github.com/some/repo';
+      const notificationId = '123';
       const userId = 456;
 
       const result = addNotificationReferrerIdToUrl(
@@ -46,15 +46,15 @@ describe("utils/helpers.ts", () => {
       );
 
       expect(result).toEqual(
-        "https://github.com/some/repo?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEyMzo0NTY%3D",
+        'https://github.com/some/repo?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEyMzo0NTY%3D',
       );
     });
 
-    it("should add notification_referrer_id to the URL, preserving anchor tags", () => {
+    it('should add notification_referrer_id to the URL, preserving anchor tags', () => {
       // Mock data
       const url =
-        "https://github.com/some/repo/pull/123#issuecomment-1951055051";
-      const notificationId = "123";
+        'https://github.com/some/repo/pull/123#issuecomment-1951055051';
+      const notificationId = '123';
       const userId = 456;
 
       const result = addNotificationReferrerIdToUrl(
@@ -64,54 +64,54 @@ describe("utils/helpers.ts", () => {
       );
 
       expect(result).toEqual(
-        "https://github.com/some/repo/pull/123?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEyMzo0NTY%3D#issuecomment-1951055051",
+        'https://github.com/some/repo/pull/123?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEyMzo0NTY%3D#issuecomment-1951055051',
       );
     });
   });
 
-  describe("generateNotificationReferrerId", () => {
-    it("should generate the notification_referrer_id", () => {
+  describe('generateNotificationReferrerId', () => {
+    it('should generate the notification_referrer_id', () => {
       const referrerId = generateNotificationReferrerId(
         mockedSingleNotification.id,
         mockedUser.id,
       );
       expect(referrerId).toBe(
-        "MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=",
+        'MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=',
       );
     });
   });
 
-  describe("generateGitHubAPIUrl", () => {
-    it("should generate a GitHub API url - non enterprise", () => {
-      const result = generateGitHubAPIUrl("github.com");
-      expect(result).toBe("https://api.github.com/");
+  describe('generateGitHubAPIUrl', () => {
+    it('should generate a GitHub API url - non enterprise', () => {
+      const result = generateGitHubAPIUrl('github.com');
+      expect(result).toBe('https://api.github.com/');
     });
 
-    it("should generate a GitHub API url - enterprise", () => {
-      const result = generateGitHubAPIUrl("github.manos.im");
-      expect(result).toBe("https://github.manos.im/api/v3/");
+    it('should generate a GitHub API url - enterprise', () => {
+      const result = generateGitHubAPIUrl('github.manos.im');
+      expect(result).toBe('https://github.manos.im/api/v3/');
     });
   });
 
-  describe("addHours", () => {
+  describe('addHours', () => {
     // Example test using Jest
-    test("adds hours correctly for positive values", () => {
-      const result = addHours("2024-02-20T12:00:00.000Z", 3);
-      expect(result).toBe("2024-02-20T15:00:00.000Z");
+    test('adds hours correctly for positive values', () => {
+      const result = addHours('2024-02-20T12:00:00.000Z', 3);
+      expect(result).toBe('2024-02-20T15:00:00.000Z');
     });
 
-    test("adds hours correctly for negative values", () => {
-      const result = addHours("2024-02-20T12:00:00.000Z", -2);
-      expect(result).toBe("2024-02-20T10:00:00.000Z");
+    test('adds hours correctly for negative values', () => {
+      const result = addHours('2024-02-20T12:00:00.000Z', -2);
+      expect(result).toBe('2024-02-20T10:00:00.000Z');
     });
   });
 
-  describe("formatSearchQueryString", () => {
-    test("formats search query string correctly", () => {
+  describe('formatSearchQueryString', () => {
+    test('formats search query string correctly', () => {
       const result = formatSearchQueryString(
-        "exampleRepo",
-        "exampleTitle",
-        "2024-02-20T12:00:00.000Z",
+        'exampleRepo',
+        'exampleTitle',
+        '2024-02-20T12:00:00.000Z',
       );
 
       expect(result).toBe(
@@ -120,22 +120,22 @@ describe("utils/helpers.ts", () => {
     });
   });
 
-  describe("getHtmlUrl", () => {
+  describe('getHtmlUrl', () => {
     let apiRequestAuthMock;
 
     beforeEach(() => {
-      apiRequestAuthMock = jest.spyOn(apiRequests, "apiRequestAuth");
+      apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
     });
 
     afterEach(() => {
       jest.clearAllMocks();
     });
 
-    it("should return the HTML URL", async () => {
+    it('should return the HTML URL', async () => {
       const requestPromise = new Promise((resolve) =>
         resolve({
           data: {
-            html_url: "https://github.com/gitify-app/gitify/issues/785",
+            html_url: 'https://github.com/gitify-app/gitify/issues/785',
           },
         } as AxiosResponse),
       ) as AxiosPromise;
@@ -143,30 +143,30 @@ describe("utils/helpers.ts", () => {
       apiRequestAuthMock.mockResolvedValue(requestPromise);
 
       const result = await getHtmlUrl(
-        "https://api.github.com/repos/gitify-app/gitify/issues/785",
-        "123",
+        'https://api.github.com/repos/gitify-app/gitify/issues/785',
+        '123',
       );
-      expect(result).toBe("https://github.com/gitify-app/gitify/issues/785");
+      expect(result).toBe('https://github.com/gitify-app/gitify/issues/785');
     });
   });
 
-  describe("generateGitHubWebUrl", () => {
-    const mockedHtmlUrl = "https://github.com/gitify-app/gitify/issues/785";
+  describe('generateGitHubWebUrl', () => {
+    const mockedHtmlUrl = 'https://github.com/gitify-app/gitify/issues/785';
     const mockedNotificationReferrer =
-      "notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D";
-    const apiRequestAuthMock = jest.spyOn(apiRequests, "apiRequestAuth");
+      'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
+    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
 
     afterEach(() => {
       jest.clearAllMocks();
     });
 
-    it("Subject Latest Comment Url: when not null, fetch latest comment html url", async () => {
+    it('Subject Latest Comment Url: when not null, fetch latest comment html url', async () => {
       const subject = {
-        title: "generate github web url unit tests",
-        url: "https://api.github.com/repos/gitify-app/notifications-test/issues/1",
+        title: 'generate github web url unit tests',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
         latest_comment_url:
-          "https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448",
-        type: "Issue" as SubjectType,
+          'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448',
+        type: 'Issue' as SubjectType,
       };
 
       const requestPromise = new Promise((resolve) =>
@@ -190,18 +190,18 @@ describe("utils/helpers.ts", () => {
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         subject.latest_comment_url,
-        "GET",
+        'GET',
         mockAccounts.token,
       );
       expect(result).toBe(`${mockedHtmlUrl}?${mockedNotificationReferrer}`);
     });
 
-    it("Subject Url: when no latest comment url available, fetch subject html url", async () => {
+    it('Subject Url: when no latest comment url available, fetch subject html url', async () => {
       const subject = {
-        title: "generate github web url unit tests",
-        url: "https://api.github.com/repos/gitify-app/notifications-test/issues/1",
+        title: 'generate github web url unit tests',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
         latest_comment_url: null,
-        type: "Issue" as SubjectType,
+        type: 'Issue' as SubjectType,
       };
 
       const requestPromise = new Promise((resolve) =>
@@ -225,19 +225,19 @@ describe("utils/helpers.ts", () => {
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         subject.url,
-        "GET",
+        'GET',
         mockAccounts.token,
       );
       expect(result).toBe(`${mockedHtmlUrl}?${mockedNotificationReferrer}`);
     });
 
-    describe("Check Suite URLs", () => {
-      it("successful workflow", async () => {
+    describe('Check Suite URLs', () => {
+      it('successful workflow', async () => {
         const subject = {
-          title: "Demo workflow run succeeded for main branch",
+          title: 'Demo workflow run succeeded for main branch',
           url: null,
           latest_comment_url: null,
-          type: "CheckSuite" as SubjectType,
+          type: 'CheckSuite' as SubjectType,
         };
 
         const result = await generateGitHubWebUrl(
@@ -254,12 +254,12 @@ describe("utils/helpers.ts", () => {
         );
       });
 
-      it("failed workflow", async () => {
+      it('failed workflow', async () => {
         const subject = {
-          title: "Demo workflow run failed for main branch",
+          title: 'Demo workflow run failed for main branch',
           url: null,
           latest_comment_url: null,
-          type: "CheckSuite" as SubjectType,
+          type: 'CheckSuite' as SubjectType,
         };
 
         const result = await generateGitHubWebUrl(
@@ -276,12 +276,12 @@ describe("utils/helpers.ts", () => {
         );
       });
 
-      it("failed workflow multiple attempts", async () => {
+      it('failed workflow multiple attempts', async () => {
         const subject = {
-          title: "Demo workflow run, Attempt #3 failed for main branch",
+          title: 'Demo workflow run, Attempt #3 failed for main branch',
           url: null,
           latest_comment_url: null,
-          type: "CheckSuite" as SubjectType,
+          type: 'CheckSuite' as SubjectType,
         };
 
         const result = await generateGitHubWebUrl(
@@ -298,12 +298,12 @@ describe("utils/helpers.ts", () => {
         );
       });
 
-      it("skipped workflow", async () => {
+      it('skipped workflow', async () => {
         const subject = {
-          title: "Demo workflow run skipped for main branch",
+          title: 'Demo workflow run skipped for main branch',
           url: null,
           latest_comment_url: null,
-          type: "CheckSuite" as SubjectType,
+          type: 'CheckSuite' as SubjectType,
         };
 
         const result = await generateGitHubWebUrl(
@@ -320,12 +320,12 @@ describe("utils/helpers.ts", () => {
         );
       });
 
-      it("unhandled workflow scenario", async () => {
+      it('unhandled workflow scenario', async () => {
         const subject = {
-          title: "unhandled workflow scenario",
+          title: 'unhandled workflow scenario',
           url: null,
           latest_comment_url: null,
-          type: "CheckSuite" as SubjectType,
+          type: 'CheckSuite' as SubjectType,
         };
 
         const result = await generateGitHubWebUrl(
@@ -342,12 +342,12 @@ describe("utils/helpers.ts", () => {
         );
       });
 
-      it("unhandled status scenario", async () => {
+      it('unhandled status scenario', async () => {
         const subject = {
-          title: "Demo workflow run unhandled-status for main branch",
+          title: 'Demo workflow run unhandled-status for main branch',
           url: null,
           latest_comment_url: null,
-          type: "CheckSuite" as SubjectType,
+          type: 'CheckSuite' as SubjectType,
         };
 
         const result = await generateGitHubWebUrl(
@@ -364,12 +364,12 @@ describe("utils/helpers.ts", () => {
         );
       });
 
-      it("unhandled check suite scenario", async () => {
+      it('unhandled check suite scenario', async () => {
         const subject = {
-          title: "Unhandled scenario",
+          title: 'Unhandled scenario',
           url: null,
           latest_comment_url: null,
-          type: "CheckSuite" as SubjectType,
+          type: 'CheckSuite' as SubjectType,
         };
 
         const result = await generateGitHubWebUrl(
@@ -387,13 +387,13 @@ describe("utils/helpers.ts", () => {
       });
     });
 
-    describe("Discussions URLs", () => {
-      it("when no subject urls and no discussions found via query, default to linking to repository discussions", async () => {
+    describe('Discussions URLs', () => {
+      it('when no subject urls and no discussions found via query, default to linking to repository discussions', async () => {
         const subject = {
-          title: "generate github web url unit tests",
+          title: 'generate github web url unit tests',
           url: null,
           latest_comment_url: null,
-          type: "Discussion" as SubjectType,
+          type: 'Discussion' as SubjectType,
         };
 
         const requestPromise = new Promise((resolve) =>
@@ -418,12 +418,12 @@ describe("utils/helpers.ts", () => {
         );
       });
 
-      it("when no subject urls and no discussions found via query, default to linking to repository discussions", async () => {
+      it('when no subject urls and no discussions found via query, default to linking to repository discussions', async () => {
         const subject = {
-          title: "1.16.0",
+          title: '1.16.0',
           url: null,
           latest_comment_url: null,
-          type: "Discussion" as SubjectType,
+          type: 'Discussion' as SubjectType,
         };
 
         const requestPromise = new Promise((resolve) =>
@@ -446,12 +446,12 @@ describe("utils/helpers.ts", () => {
         );
       });
 
-      it("default to base discussions url when graphql query fails", async () => {
+      it('default to base discussions url when graphql query fails', async () => {
         const subject = {
-          title: "1.16.0",
+          title: '1.16.0',
           url: null,
           latest_comment_url: null,
-          type: "Discussion" as SubjectType,
+          type: 'Discussion' as SubjectType,
         };
 
         const requestPromise = new Promise((resolve) =>
@@ -475,12 +475,12 @@ describe("utils/helpers.ts", () => {
       });
     });
 
-    it("Repository Invitation url", async () => {
+    it('Repository Invitation url', async () => {
       const subject = {
-        title: "Invitation to join manosim/notifications-test from unit-tests",
+        title: 'Invitation to join manosim/notifications-test from unit-tests',
         url: null,
         latest_comment_url: null,
-        type: "RepositoryInvitation" as SubjectType,
+        type: 'RepositoryInvitation' as SubjectType,
       };
 
       const result = await generateGitHubWebUrl(
@@ -497,13 +497,13 @@ describe("utils/helpers.ts", () => {
       );
     });
 
-    describe("Workflow Run URLs", () => {
-      it("approval requested", async () => {
+    describe('Workflow Run URLs', () => {
+      it('approval requested', async () => {
         const subject = {
-          title: "some-user requested your review to deploy to an environment",
+          title: 'some-user requested your review to deploy to an environment',
           url: null,
           latest_comment_url: null,
-          type: "WorkflowRun" as SubjectType,
+          type: 'WorkflowRun' as SubjectType,
         };
 
         const result = await generateGitHubWebUrl(
@@ -520,13 +520,13 @@ describe("utils/helpers.ts", () => {
         );
       });
 
-      it("unhandled status/action scenario", async () => {
+      it('unhandled status/action scenario', async () => {
         const subject = {
           title:
-            "some-user requested your unhandled-action to deploy to an environment",
+            'some-user requested your unhandled-action to deploy to an environment',
           url: null,
           latest_comment_url: null,
-          type: "WorkflowRun" as SubjectType,
+          type: 'WorkflowRun' as SubjectType,
         };
 
         const result = await generateGitHubWebUrl(
@@ -543,12 +543,12 @@ describe("utils/helpers.ts", () => {
         );
       });
 
-      it("unhandled workflow scenario", async () => {
+      it('unhandled workflow scenario', async () => {
         const subject = {
-          title: "some unhandled scenario",
+          title: 'some unhandled scenario',
           url: null,
           latest_comment_url: null,
-          type: "WorkflowRun" as SubjectType,
+          type: 'WorkflowRun' as SubjectType,
         };
 
         const result = await generateGitHubWebUrl(
@@ -566,12 +566,12 @@ describe("utils/helpers.ts", () => {
       });
     });
 
-    it("defaults to repository url", async () => {
+    it('defaults to repository url', async () => {
       const subject = {
-        title: "generate github web url unit tests",
+        title: 'generate github web url unit tests',
         url: null,
         latest_comment_url: null,
-        type: "Issue" as SubjectType,
+        type: 'Issue' as SubjectType,
       };
 
       const result = await generateGitHubWebUrl(
@@ -588,17 +588,17 @@ describe("utils/helpers.ts", () => {
       );
     });
 
-    it("formatForDisplay", () => {
-      expect(formatForDisplay(null)).toBe("");
-      expect(formatForDisplay([])).toBe("");
-      expect(formatForDisplay(["open", "PullRequest"])).toBe(
-        "Open Pull Request",
+    it('formatForDisplay', () => {
+      expect(formatForDisplay(null)).toBe('');
+      expect(formatForDisplay([])).toBe('');
+      expect(formatForDisplay(['open', 'PullRequest'])).toBe(
+        'Open Pull Request',
       );
-      expect(formatForDisplay(["OUTDATED", "Discussion"])).toBe(
-        "Outdated Discussion",
+      expect(formatForDisplay(['OUTDATED', 'Discussion'])).toBe(
+        'Outdated Discussion',
       );
-      expect(formatForDisplay(["not_planned", "Issue"])).toBe(
-        "Not Planned Issue",
+      expect(formatForDisplay(['not_planned', 'Issue'])).toBe(
+        'Not Planned Issue',
       );
     });
   });
