@@ -420,7 +420,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         type="button"
       >
         <svg
-          aria-label="Logout octocat"
+          aria-label="Logout from octocat"
           class="octicon octicon-sign-out"
           fill="currentColor"
           focusable="false"

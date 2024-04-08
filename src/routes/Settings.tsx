@@ -250,7 +250,7 @@ export const SettingsRoute: FC = () => {
           >
             <SignOutIcon
               size={18}
-              aria-label={`Logout ${accounts.user.login}`}
+              aria-label={`Logout from ${accounts.user.login}`}
             />
           </button>
 
