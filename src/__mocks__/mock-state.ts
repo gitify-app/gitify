@@ -17,4 +17,5 @@ export const mockSettings: SettingsState = {
   theme: Theme.SYSTEM,
   colors: false,
   markAsDoneOnOpen: false,
+  showAccountHostname: false,
 };

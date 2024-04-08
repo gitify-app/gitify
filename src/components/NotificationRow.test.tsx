@@ -19,11 +19,26 @@ describe('components/NotificationRow.tsx', () => {
     jest.clearAllMocks();
   });
 
-  it('should render itself & its children', async () => {
-    (global as any).Date.now = jest.fn(() => new Date('2014'));
+  it('should render itself & its children with avatar', async () => {
+    (global as any).Date.now = jest.fn(() => new Date('2024'));
 
     const props = {
       notification: mockedSingleNotification,
+      hostname: 'github.com',
+    };
+
+    const tree = TestRenderer.create(<NotificationRow {...props} />);
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render itself & its children without avatar', async () => {
+    (global as any).Date.now = jest.fn(() => new Date('2024'));
+
+    const mockNotification = mockedSingleNotification;
+    mockNotification.subject.user = null;
+
+    const props = {
+      notification: mockNotification,
       hostname: 'github.com',
     };
 
@@ -159,6 +174,7 @@ describe('components/NotificationRow.tsx', () => {
           user: {
             login: 'some-user',
             html_url: 'https://github.com/some-user',
+            avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
             type: 'User',
           },
         },

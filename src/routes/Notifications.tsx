@@ -7,7 +7,7 @@ import { AppContext } from '../context/App';
 import { getNotificationCount } from '../utils/notifications';
 
 export const NotificationsRoute: FC = () => {
-  const { notifications, requestFailed } = useContext(AppContext);
+  const { notifications, requestFailed, settings } = useContext(AppContext);
 
   const hasMultipleAccounts = useMemo(
     () => notifications.length > 1,
@@ -37,7 +37,9 @@ export const NotificationsRoute: FC = () => {
           key={account.hostname}
           hostname={account.hostname}
           notifications={account.notifications}
-          showAccountHostname={hasMultipleAccounts}
+          showAccountHostname={
+            hasMultipleAccounts || settings.showAccountHostname
+          }
         />
       ))}
     </div>

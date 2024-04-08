@@ -50,7 +50,7 @@ describe('routes/Settings.tsx', () => {
     let getByTitle;
 
     await act(async () => {
-      const { getByTitle: getByLabelTextLocal } = render(
+      const { getByTitle: getByTitleLocal } = render(
         <AppContext.Provider
           value={{
             settings: mockSettings,
@@ -64,10 +64,10 @@ describe('routes/Settings.tsx', () => {
         </AppContext.Provider>,
       );
 
-      getByTitle = getByLabelTextLocal;
+      getByTitle = getByTitleLocal;
     });
 
-    fireEvent.click(getByTitle('Logout'));
+    fireEvent.click(getByTitle('Logout octocat'));
 
     expect(logoutMock).toHaveBeenCalledTimes(1);
 
@@ -154,6 +154,34 @@ describe('routes/Settings.tsx', () => {
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('showBots', false);
+  });
+
+  it('should toggle the showAccountHostname checkbox', async () => {
+    let getByLabelText;
+
+    await act(async () => {
+      const { getByLabelText: getByLabelTextLocal } = render(
+        <AppContext.Provider
+          value={{
+            settings: mockSettings,
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      getByLabelText = getByLabelTextLocal;
+    });
+
+    fireEvent.click(getByLabelText('Show account hostname'), {
+      target: { checked: true },
+    });
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('showAccountHostname', false);
   });
 
   it('should toggle the showNotificationsCountInTray checkbox', async () => {

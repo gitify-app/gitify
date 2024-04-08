@@ -2,7 +2,10 @@ import axios from 'axios';
 import nock from 'nock';
 
 import { mockAccounts } from '../__mocks__/mock-state';
-import { mockedSingleNotification } from '../__mocks__/mockedData';
+import {
+  mockedNotificationUser,
+  mockedSingleNotification,
+} from '../__mocks__/mockedData';
 import type { SubjectType } from '../typesGithub';
 import {
   getCheckSuiteAttributes,
@@ -157,6 +160,13 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: null,
                     isAnswered: true,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      avatar_url:
+                        'https://avatars.githubusercontent.com/u/583231?v=4',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -172,7 +182,12 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('ANSWERED');
-        expect(result.user).toBe(null);
+        expect(result.user).toEqual({
+          login: 'discussion-creator',
+          html_url: 'https://github.com/discussion-creator',
+          avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+          type: 'User',
+        });
       });
 
       it('duplicate discussion state', async () => {
@@ -196,6 +211,13 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: 'DUPLICATE',
                     isAnswered: false,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      avatar_url:
+                        'https://avatars.githubusercontent.com/u/583231?v=4',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -211,7 +233,12 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('DUPLICATE');
-        expect(result.user).toBe(null);
+        expect(result.user).toEqual({
+          login: 'discussion-creator',
+          html_url: 'https://github.com/discussion-creator',
+          avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+          type: 'User',
+        });
       });
 
       it('open discussion state', async () => {
@@ -235,6 +262,13 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: null,
                     isAnswered: false,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      avatar_url:
+                        'https://avatars.githubusercontent.com/u/583231?v=4',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -250,7 +284,12 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('OPEN');
-        expect(result.user).toBe(null);
+        expect(result.user).toEqual({
+          login: 'discussion-creator',
+          html_url: 'https://github.com/discussion-creator',
+          avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+          type: 'User',
+        });
       });
 
       it('outdated discussion state', async () => {
@@ -274,6 +313,13 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: 'OUTDATED',
                     isAnswered: false,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      avatar_url:
+                        'https://avatars.githubusercontent.com/u/583231?v=4',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -289,7 +335,12 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('OUTDATED');
-        expect(result.user).toBe(null);
+        expect(result.user).toEqual({
+          login: 'discussion-creator',
+          html_url: 'https://github.com/discussion-creator',
+          avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+          type: 'User',
+        });
       });
 
       it('reopened discussion state', async () => {
@@ -313,6 +364,13 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: 'REOPENED',
                     isAnswered: false,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      avatar_url:
+                        'https://avatars.githubusercontent.com/u/583231?v=4',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -328,7 +386,12 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('REOPENED');
-        expect(result.user).toBe(null);
+        expect(result.user).toEqual({
+          login: 'discussion-creator',
+          html_url: 'https://github.com/discussion-creator',
+          avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+          type: 'User',
+        });
       });
 
       it('resolved discussion state', async () => {
@@ -352,6 +415,13 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: 'RESOLVED',
                     isAnswered: false,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      avatar_url:
+                        'https://avatars.githubusercontent.com/u/583231?v=4',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -367,7 +437,12 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('RESOLVED');
-        expect(result.user).toBe(null);
+        expect(result.user).toEqual({
+          login: 'discussion-creator',
+          html_url: 'https://github.com/discussion-creator',
+          avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+          type: 'User',
+        });
       });
 
       it('filtered response by subscribed', async () => {
@@ -391,6 +466,13 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: null,
                     isAnswered: false,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      avatar_url:
+                        'https://avatars.githubusercontent.com/u/583231?v=4',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -400,6 +482,13 @@ describe('utils/subject.ts', () => {
                     viewerSubscription: 'IGNORED',
                     stateReason: null,
                     isAnswered: true,
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      avatar_url:
+                        'https://avatars.githubusercontent.com/u/583231?v=4',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [], //TODO - Update this to have real data
                     },
@@ -415,7 +504,12 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result.state).toBe('OPEN');
-        expect(result.user).toBe(null);
+        expect(result.user).toEqual({
+          login: 'discussion-creator',
+          html_url: 'https://github.com/discussion-creator',
+          avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+          type: 'User',
+        });
       });
     });
 
@@ -691,14 +785,19 @@ describe('utils/subject.ts', () => {
 
       nock('https://api.github.com')
         .get('/repos/manosim/notifications-test/releases/1')
-        .reply(200, { author: { login: 'some-user' } });
+        .reply(200, { author: mockedNotificationUser });
 
       const result = await getGitifySubjectDetails(
         mockNotification,
         mockAccounts.token,
       );
 
-      expect(result.user).toEqual({ login: 'some-user' });
+      expect(result.user).toEqual({
+        login: 'octocat',
+        html_url: 'https://github.com/octocat',
+        avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+        type: 'User',
+      });
     });
   });
 

@@ -62,24 +62,30 @@ export function formatReason(reason: Reason): {
         description: DESCRIPTIONS['APPROVAL_REQUESTED'],
       };
     case 'assign':
-      return { type: 'Assign', description: DESCRIPTIONS['ASSIGN'] };
+      return { type: 'Assigned', description: DESCRIPTIONS['ASSIGN'] };
     case 'author':
-      return { type: 'Author', description: DESCRIPTIONS['AUTHOR'] };
+      return { type: 'Authored', description: DESCRIPTIONS['AUTHOR'] };
     case 'ci_activity':
-      return { type: 'Workflow Run', description: DESCRIPTIONS['CI_ACTIVITY'] };
+      return {
+        type: 'Workflow Run Completed',
+        description: DESCRIPTIONS['CI_ACTIVITY'],
+      };
     case 'comment':
-      return { type: 'Comment', description: DESCRIPTIONS['COMMENT'] };
+      return { type: 'Commented', description: DESCRIPTIONS['COMMENT'] };
     case 'invitation':
-      return { type: 'Invitation', description: DESCRIPTIONS['INVITATION'] };
+      return {
+        type: 'Invitation Received',
+        description: DESCRIPTIONS['INVITATION'],
+      };
     case 'manual':
-      return { type: 'Manual', description: DESCRIPTIONS['MANUAL'] };
+      return { type: 'Updated', description: DESCRIPTIONS['MANUAL'] };
     case 'member_feature_requested':
       return {
         type: 'Member Feature Requested',
         description: DESCRIPTIONS['MEMBER_FEATURE_REQUESTED'],
       };
     case 'mention':
-      return { type: 'Mention', description: DESCRIPTIONS['MENTION'] };
+      return { type: 'Mentioned', description: DESCRIPTIONS['MENTION'] };
     case 'review_requested':
       return {
         type: 'Review Requested',
@@ -87,24 +93,24 @@ export function formatReason(reason: Reason): {
       };
     case 'security_advisory_credit':
       return {
-        type: 'Security Advisory Credit',
+        type: 'Security Advisory Credit Recevied',
         description: DESCRIPTIONS['SECURITY_ADVISORY_CREDIT'],
       };
     case 'security_alert':
       return {
-        type: 'Security Alert',
+        type: 'Security Alert Received',
         description: DESCRIPTIONS['SECURITY_ALERT'],
       };
     case 'state_change':
       return {
-        type: 'State Change',
+        type: 'State Changed',
         description: DESCRIPTIONS['STATE_CHANGE'],
       };
     case 'subscribed':
-      return { type: 'Subscribed', description: DESCRIPTIONS['SUBSCRIBED'] };
+      return { type: 'Updated', description: DESCRIPTIONS['SUBSCRIBED'] };
     case 'team_mention':
       return {
-        type: 'Team Mention',
+        type: 'Team Mentioned',
         description: DESCRIPTIONS['TEAM_MENTION'],
       };
     default:

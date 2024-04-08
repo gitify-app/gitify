@@ -164,17 +164,18 @@ export async function fetchDiscussion(
     token,
     {
       query: `
+        fragment AuthorFields on Actor {
+          login
+          url
+          avatar_url: avatarUrl
+          type: __typename
+        }
+      
         fragment CommentFields on DiscussionComment {
           databaseId
           createdAt
           author {
-            login
-            url
-          }
-          bot: author {
-            ... on Bot {
-              login
-            }
+            ...AuthorFields
           }
         }
       
@@ -193,6 +194,9 @@ export async function fetchDiscussion(
                 stateReason
                 isAnswered
                 url
+                author {
+                  ...AuthorFields
+                }
                 comments(last: $lastComments){
                   nodes {
                     ...CommentFields

@@ -141,6 +141,14 @@ export const SettingsRoute: FC = () => {
             }
             disabled={!colorScope}
           />
+          <FieldCheckbox
+            name='showAccountHostname'
+            label='Show account hostname'
+            checked={settings.showAccountHostname}
+            onChange={(evt) =>
+              updateSetting('showAccountHostname', evt.target.checked)
+            }
+          />
         </fieldset>
 
         <fieldset className='mb-3'>
@@ -232,10 +240,14 @@ export const SettingsRoute: FC = () => {
 
           <button
             className={footerButtonClass}
-            title='Logout'
+            title={`Logout ${accounts.user.login}`}
+            role='button'
             onClick={logoutUser}
           >
-            <SignOutIcon size={18} aria-label='Logout' />
+            <SignOutIcon
+              size={18}
+              aria-label={`Logout ${accounts.user.login}`}
+            />
           </button>
 
           <button

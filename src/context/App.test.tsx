@@ -320,6 +320,7 @@ describe('context/App.tsx', () => {
         theme: 'SYSTEM',
         colors: null,
         markAsDoneOnOpen: false,
+        showAccountHostname: false,
       },
     );
   });
@@ -363,6 +364,7 @@ describe('context/App.tsx', () => {
         theme: 'SYSTEM',
         colors: null,
         markAsDoneOnOpen: false,
+        showAccountHostname: false,
       },
     );
   });
