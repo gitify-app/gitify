@@ -1,18 +1,18 @@
-import axios from "axios";
-import { apiRequest, apiRequestAuth } from "./api-requests";
+import axios from 'axios';
+import { apiRequest, apiRequestAuth } from './api-requests';
 
-jest.mock("axios");
+jest.mock('axios');
 
-const url = "https://example.com";
-const method = "get";
+const url = 'https://example.com';
+const method = 'get';
 
-describe("utils/api-requests.ts", () => {
+describe('utils/api-requests.ts', () => {
   afterEach(() => {
     jest.resetAllMocks();
   });
 
-  it("should make a request with the correct parameters", async () => {
-    const data = { key: "value" };
+  it('should make a request with the correct parameters', async () => {
+    const data = { key: 'value' };
 
     await apiRequest(url, method, data);
 
@@ -25,7 +25,7 @@ describe("utils/api-requests.ts", () => {
     expect(axios.defaults.headers.common).toMatchSnapshot();
   });
 
-  it("should make a request with the correct parameters and default data", async () => {
+  it('should make a request with the correct parameters and default data', async () => {
     const data = {};
     await apiRequest(url, method);
 
@@ -39,15 +39,15 @@ describe("utils/api-requests.ts", () => {
   });
 });
 
-describe("apiRequestAuth", () => {
-  const token = "yourAuthToken";
+describe('apiRequestAuth', () => {
+  const token = 'yourAuthToken';
 
   afterEach(() => {
     jest.resetAllMocks();
   });
 
-  it("should make an authenticated request with the correct parameters", async () => {
-    const data = { key: "value" };
+  it('should make an authenticated request with the correct parameters', async () => {
+    const data = { key: 'value' };
 
     await apiRequestAuth(url, method, token, data);
 
@@ -60,7 +60,7 @@ describe("apiRequestAuth", () => {
     expect(axios.defaults.headers.common).toMatchSnapshot();
   });
 
-  it("should make an authenticated request with the correct parameters and default data", async () => {
+  it('should make an authenticated request with the correct parameters and default data', async () => {
     const data = {};
 
     await apiRequestAuth(url, method, token);

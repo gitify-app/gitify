@@ -1,16 +1,21 @@
-import { BellSlashIcon, CheckIcon, ReadIcon } from "@primer/octicons-react";
-import { formatDistanceToNow, parseISO } from "date-fns";
-import { FC, MouseEvent, useCallback, useContext } from "react";
+import {
+  BellSlashIcon,
+  CheckIcon,
+  FeedPersonIcon,
+  ReadIcon,
+} from '@primer/octicons-react';
+import { formatDistanceToNow, parseISO } from 'date-fns';
+import { type FC, type MouseEvent, useCallback, useContext } from 'react';
 
-import { AppContext } from "../context/App";
-import type { Notification } from "../typesGithub";
-import { openExternalLink } from "../utils/comms";
+import { AppContext } from '../context/App';
+import type { Notification } from '../typesGithub';
+import { openExternalLink } from '../utils/comms';
 import {
   formatReason,
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
-} from "../utils/github-api";
-import { formatForDisplay, openInBrowser } from "../utils/helpers";
+} from '../utils/github-api';
+import { formatForDisplay, openInBrowser } from '../utils/helpers';
 
 interface IProps {
   hostname: string;
@@ -61,15 +66,15 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const NotificationIcon = getNotificationTypeIcon(notification.subject);
   const iconColor = getNotificationTypeIconColor(notification.subject);
   const realIconColor = settings
-    ? (settings.colors && iconColor) || ""
+    ? (settings.colors && iconColor) || ''
     : iconColor;
   const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
     addSuffix: true,
   });
-  const updatedBy = notification.subject.user
-    ? ` by ${notification.subject.user.login}`
-    : "";
-  const updatedLabel = `Updated ${updatedAt}${updatedBy}`;
+
+  const updatedLabel = notification.subject.user
+    ? `${notification.subject.user.login} updated ${updatedAt}`
+    : `Updated ${updatedAt}`;
   const notificationTitle = formatForDisplay([
     notification.subject.state,
     notification.subject.type,
@@ -94,22 +99,29 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
         </div>
 
         <div className="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden">
-          <span title={reason.description}>{reason.type}</span> -{" "}
-          <span title={updatedLabel}>
-            Updated {updatedAt}
-            {notification.subject.user && (
-              <>
-                {" "}
-                by{" "}
-                <span
-                  className="cursor-pointer"
-                  title="View User Profile"
-                  onClick={openUserProfile}
-                >
-                  {notification.subject.user.login}
+          <span className="flex items-center">
+            <span title={updatedLabel} className="flex">
+              {notification.subject.user ? (
+                <span title="View User Profile" onClick={openUserProfile}>
+                  <img
+                    className="rounded-full w-4 h-4 cursor-pointer"
+                    src={notification.subject.user.avatar_url}
+                    title={notification.subject.user.login}
+                  />
                 </span>
-              </>
-            )}
+              ) : (
+                <span>
+                  <FeedPersonIcon
+                    size={16}
+                    className="text-gray-500 dark:text-gray-300"
+                  />
+                </span>
+              )}
+              <span className="ml-1" title={reason.description}>
+                {reason.type}
+              </span>
+              <span className="ml-1">{updatedAt}</span>
+            </span>
           </span>
         </div>
       </div>

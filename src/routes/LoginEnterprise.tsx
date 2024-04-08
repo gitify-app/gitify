@@ -1,14 +1,14 @@
-const ipcRenderer = require("electron").ipcRenderer;
+const ipcRenderer = require('electron').ipcRenderer;
 
-import { ArrowLeftIcon } from "@primer/octicons-react";
+import { ArrowLeftIcon } from '@primer/octicons-react';
 
-import { FC, useCallback, useContext, useEffect } from "react";
-import { Form, type FormRenderProps } from "react-final-form";
-import { useNavigate } from "react-router-dom";
+import { type FC, useCallback, useContext, useEffect } from 'react';
+import { Form, type FormRenderProps } from 'react-final-form';
+import { useNavigate } from 'react-router-dom';
 
-import { FieldInput } from "../components/fields/FieldInput";
-import { AppContext } from "../context/App";
-import type { AuthOptions } from "../types";
+import { FieldInput } from '../components/fields/FieldInput';
+import { AppContext } from '../context/App';
+import type { AuthOptions } from '../types';
 
 interface IValues {
   hostname?: string;
@@ -25,27 +25,27 @@ interface IFormErrors {
 export const validate = (values: IValues): IFormErrors => {
   const errors: IFormErrors = {};
   if (!values.hostname) {
-    errors.hostname = "Required";
+    errors.hostname = 'Required';
   } else if (
     !/^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
       values.hostname,
     )
   ) {
-    errors.hostname = "Invalid hostname.";
+    errors.hostname = 'Invalid hostname.';
   }
 
   if (!values.clientId) {
     // 20
-    errors.clientId = "Required";
+    errors.clientId = 'Required';
   } else if (!/^[A-Z0-9]{20}$/i.test(values.clientId)) {
-    errors.clientId = "Invalid client id.";
+    errors.clientId = 'Invalid client id.';
   }
 
   if (!values.clientSecret) {
     // 40
-    errors.clientSecret = "Required";
+    errors.clientSecret = 'Required';
   } else if (!/^[A-Z0-9]{40}$/i.test(values.clientSecret)) {
-    errors.clientSecret = "Invalid client secret.";
+    errors.clientSecret = 'Invalid client secret.';
   }
 
   return errors;
@@ -60,7 +60,7 @@ export const LoginEnterpriseRoute: FC = () => {
 
   useEffect(() => {
     if (enterpriseAccounts.length) {
-      ipcRenderer.send("reopen-window");
+      ipcRenderer.send('reopen-window');
       navigate(-1);
     }
   }, [enterpriseAccounts]);
@@ -125,9 +125,9 @@ export const LoginEnterpriseRoute: FC = () => {
       <div className="flex-1 px-8">
         <Form
           initialValues={{
-            hostname: "",
-            clientId: "",
-            clientSecret: "",
+            hostname: '',
+            clientId: '',
+            clientSecret: '',
           }}
           onSubmit={login}
           validate={validate}

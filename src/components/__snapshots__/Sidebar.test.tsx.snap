@@ -17,7 +17,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         aria-label="Open Gitify"
         className=""
         onClick={[Function]}
-        role="logo"
+        role="img"
         viewBox="0 0 500 500"
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -142,7 +142,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
         aria-label="Open Gitify"
         className=""
         onClick={[Function]}
-        role="logo"
+        role="img"
         viewBox="0 0 500 500"
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"

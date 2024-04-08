@@ -1,21 +1,21 @@
 export const Constants = {
   // GitHub OAuth
-  AUTH_SCOPE: ["read:user", "notifications", "repo"],
+  AUTH_SCOPE: ['read:user', 'notifications', 'repo'],
 
   DEFAULT_AUTH_OPTIONS: {
-    hostname: "github.com",
+    hostname: 'github.com',
     clientId: process.env.OAUTH_CLIENT_ID,
     clientSecret: process.env.OAUTH_CLIENT_SECRET,
   },
 
-  REPO_SLUG: "gitify-app/gitify",
+  REPO_SLUG: 'gitify-app/gitify',
 
   // Storage
-  STORAGE_KEY: "gitify-storage",
+  STORAGE_KEY: 'gitify-storage',
 
-  ALLREAD_EMOJIS: ["😉", "🎉", "🐯", "🙈", "🎈", "🎊", "👏", "🎪", "🍝"],
+  ALLREAD_EMOJIS: ['😉', '🎉', '🐯', '🙈', '🎈', '🎊', '👏', '🎪', '🍝'],
 
-  ERROR_EMOJIS: ["🤔", "😞", "😤", "😱", "😭"],
+  ERROR_EMOJIS: ['🤔', '😞', '😤', '😱', '😭'],
 };
 
 export default Constants;

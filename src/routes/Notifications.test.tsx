@@ -1,23 +1,24 @@
-import TestRenderer from "react-test-renderer";
+import TestRenderer from 'react-test-renderer';
 
-import { mockedAccountNotifications } from "../__mocks__/mockedData";
-import { AppContext } from "../context/App";
-import { NotificationsRoute } from "./Notifications";
+import { mockSettings } from '../__mocks__/mock-state';
+import { mockedAccountNotifications } from '../__mocks__/mockedData';
+import { AppContext } from '../context/App';
+import { NotificationsRoute } from './Notifications';
 
-jest.mock("../components/AccountNotifications", () => ({
-  AccountNotifications: "AccountNotifications",
+jest.mock('../components/AccountNotifications', () => ({
+  AccountNotifications: 'AccountNotifications',
 }));
 
-jest.mock("../components/AllRead", () => ({
-  AllRead: "AllRead",
+jest.mock('../components/AllRead', () => ({
+  AllRead: 'AllRead',
 }));
 
-jest.mock("../components/Oops", () => ({
-  Oops: "Oops",
+jest.mock('../components/Oops', () => ({
+  Oops: 'Oops',
 }));
 
-describe("routes/Notifications.tsx", () => {
-  it("should render itself & its children (with notifications)", () => {
+describe('routes/Notifications.tsx', () => {
+  it('should render itself & its children (with notifications)', () => {
     const tree = TestRenderer.create(
       <AppContext.Provider
         value={{ notifications: mockedAccountNotifications }}
@@ -29,7 +30,7 @@ describe("routes/Notifications.tsx", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("should render itself & its children (all read notifications)", () => {
+  it('should render itself & its children (all read notifications)', () => {
     const tree = TestRenderer.create(
       <AppContext.Provider value={{ notifications: [] }}>
         <NotificationsRoute />
@@ -38,7 +39,21 @@ describe("routes/Notifications.tsx", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("should render itself & its children (error page - oops)", () => {
+  it('should render itself & its children (show account hostname)', () => {
+    const tree = TestRenderer.create(
+      <AppContext.Provider
+        value={{
+          notifications: [mockedAccountNotifications[0]],
+          settings: { ...mockSettings, showAccountHostname: true },
+        }}
+      >
+        <NotificationsRoute />
+      </AppContext.Provider>,
+    );
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render itself & its children (error page - oops)', () => {
     const tree = TestRenderer.create(
       <AppContext.Provider value={{ notifications: [], requestFailed: true }}>
         <NotificationsRoute />

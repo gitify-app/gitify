@@ -1,7 +1,7 @@
-import { ChevronDownIcon, ChevronLeftIcon } from "@primer/octicons-react";
+import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
 
-import type { Notification } from "../typesGithub";
-import { RepositoryNotifications } from "./Repository";
+import type { Notification } from '../typesGithub';
+import { RepositoryNotifications } from './Repository';
 
 interface IProps {
   hostname: string;

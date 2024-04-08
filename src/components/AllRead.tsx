@@ -1,5 +1,5 @@
-import { useMemo } from "react";
-import { Constants } from "../utils/constants";
+import { useMemo } from 'react';
+import { Constants } from '../utils/constants';
 
 export const AllRead = () => {
   const emoji = useMemo(

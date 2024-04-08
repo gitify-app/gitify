@@ -4,23 +4,23 @@ import {
   render,
   screen,
   waitFor,
-} from "@testing-library/react";
-import { shell } from "electron";
+} from '@testing-library/react';
+import { shell } from 'electron';
 
-import { MemoryRouter } from "react-router-dom";
-import TestRenderer from "react-test-renderer";
+import { MemoryRouter } from 'react-router-dom';
+import TestRenderer from 'react-test-renderer';
 
-import { AppContext } from "../context/App";
-import { LoginWithToken, validate } from "./LoginWithToken";
+import { AppContext } from '../context/App';
+import { LoginWithToken, validate } from './LoginWithToken';
 
 const mockNavigate = jest.fn();
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
 
-describe("routes/LoginWithToken.tsx", () => {
-  const openExternalMock = jest.spyOn(shell, "openExternal");
+describe('routes/LoginWithToken.tsx', () => {
+  const openExternalMock = jest.spyOn(shell, 'openExternal');
 
   const mockValidateToken = jest.fn();
 
@@ -30,7 +30,7 @@ describe("routes/LoginWithToken.tsx", () => {
     mockNavigate.mockReset();
   });
 
-  it("renders correctly", () => {
+  it('renders correctly', () => {
     const tree = TestRenderer.create(
       <MemoryRouter>
         <LoginWithToken />
@@ -40,18 +40,18 @@ describe("routes/LoginWithToken.tsx", () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it("let us go back", () => {
+  it('let us go back', () => {
     render(
       <MemoryRouter>
         <LoginWithToken />
       </MemoryRouter>,
     );
 
-    fireEvent.click(screen.getByLabelText("Go Back"));
+    fireEvent.click(screen.getByLabelText('Go Back'));
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
-  it("should validate the form values", () => {
+  it('should validate the form values', () => {
     const emptyValues = {
       hostname: null,
       token: null,
@@ -60,16 +60,16 @@ describe("routes/LoginWithToken.tsx", () => {
     let values = {
       ...emptyValues,
     };
-    expect(validate(values).hostname).toBe("Required");
-    expect(validate(values).token).toBe("Required");
+    expect(validate(values).hostname).toBe('Required');
+    expect(validate(values).token).toBe('Required');
 
     values = {
       ...emptyValues,
-      hostname: "hello",
-      token: "!@£INVALID-.1",
+      hostname: 'hello',
+      token: '!@£INVALID-.1',
     };
-    expect(validate(values).hostname).toBe("Invalid hostname.");
-    expect(validate(values).token).toBe("Invalid token.");
+    expect(validate(values).hostname).toBe('Invalid hostname.');
+    expect(validate(values).token).toBe('Invalid token.');
   });
 
   it("should click on the 'personal access tokens' link and open the browser", async () => {
@@ -81,12 +81,12 @@ describe("routes/LoginWithToken.tsx", () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByText("personal access tokens"));
+    fireEvent.click(getByText('personal access tokens'));
 
     expect(openExternalMock).toHaveBeenCalledTimes(1);
   });
 
-  it("should login using a token - success", async () => {
+  it('should login using a token - success', async () => {
     mockValidateToken.mockResolvedValueOnce(null);
 
     const { getByLabelText, getByTitle } = render(
@@ -97,14 +97,14 @@ describe("routes/LoginWithToken.tsx", () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.change(getByLabelText("Token"), {
-      target: { value: "1234567890123456789012345678901234567890" },
+    fireEvent.change(getByLabelText('Token'), {
+      target: { value: '1234567890123456789012345678901234567890' },
     });
-    fireEvent.change(getByLabelText("Hostname"), {
-      target: { value: "github.com" },
+    fireEvent.change(getByLabelText('Hostname'), {
+      target: { value: 'github.com' },
     });
 
-    fireEvent.submit(getByTitle("Submit Button"));
+    fireEvent.submit(getByTitle('Submit Button'));
 
     await waitFor(() => expect(mockValidateToken).toHaveBeenCalledTimes(1));
 
@@ -112,7 +112,7 @@ describe("routes/LoginWithToken.tsx", () => {
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
-  it("should login using a token - failure", async () => {
+  it('should login using a token - failure', async () => {
     mockValidateToken.mockRejectedValueOnce(null);
 
     const { getByLabelText, getByTitle } = render(
@@ -124,13 +124,13 @@ describe("routes/LoginWithToken.tsx", () => {
     );
 
     act(() => {
-      fireEvent.change(getByLabelText("Token"), {
-        target: { value: "1234567890123456789012345678901234567890" },
+      fireEvent.change(getByLabelText('Token'), {
+        target: { value: '1234567890123456789012345678901234567890' },
       });
-      fireEvent.change(getByLabelText("Hostname"), {
-        target: { value: "github.com" },
+      fireEvent.change(getByLabelText('Hostname'), {
+        target: { value: 'github.com' },
       });
-      fireEvent.submit(getByTitle("Submit Button"));
+      fireEvent.submit(getByTitle('Submit Button'));
     });
 
     await waitFor(() => expect(mockValidateToken).toHaveBeenCalledTimes(1));
@@ -139,23 +139,23 @@ describe("routes/LoginWithToken.tsx", () => {
     expect(mockNavigate).toHaveBeenCalledTimes(0);
   });
 
-  it("should render the form with errors", () => {
+  it('should render the form with errors', () => {
     const { getByLabelText, getByTitle, getByText } = render(
       <MemoryRouter>
         <LoginWithToken />
       </MemoryRouter>,
     );
 
-    fireEvent.change(getByLabelText("Hostname"), {
-      target: { value: "test" },
+    fireEvent.change(getByLabelText('Hostname'), {
+      target: { value: 'test' },
     });
-    fireEvent.change(getByLabelText("Token"), {
-      target: { value: "123" },
+    fireEvent.change(getByLabelText('Token'), {
+      target: { value: '123' },
     });
 
-    fireEvent.submit(getByTitle("Submit Button"));
+    fireEvent.submit(getByTitle('Submit Button'));
 
-    expect(getByText("Invalid hostname.")).toBeDefined();
-    expect(getByText("Invalid token.")).toBeDefined();
+    expect(getByText('Invalid hostname.')).toBeDefined();
+    expect(getByText('Invalid token.')).toBeDefined();
   });
 });

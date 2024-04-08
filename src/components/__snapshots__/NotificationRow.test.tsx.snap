@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/NotificationRow.tsx should render itself & its children with avatar 1`] = `
+exports[`components/NotificationRow.tsx should render itself & its children 1`] = `
 <div
   className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
 >
@@ -53,7 +53,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
       >
         <span
           className="flex"
-          title="manosim updated over 6 years ago"
+          title="manosim updated in over 3 years"
         >
           <span
             onClick={[Function]}
@@ -74,7 +74,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           <span
             className="ml-1"
           >
-            over 6 years ago
+            in over 3 years
           </span>
         </span>
       </span>

@@ -1,4 +1,4 @@
-import type { AuthState, EnterpriseAccount } from "../types";
+import type { AuthState, EnterpriseAccount } from '../types';
 import type {
   Discussion,
   DiscussionComment,
@@ -7,11 +7,11 @@ import type {
   IssueComments,
   Notification,
   PullRequest,
-} from "../typesGithub";
-import { apiRequestAuth } from "../utils/api-requests";
-import { openExternalLink } from "../utils/comms";
-import { Constants } from "./constants";
-import { getCheckSuiteAttributes, getWorkflowRunAttributes } from "./subject";
+} from '../typesGithub';
+import { apiRequestAuth } from '../utils/api-requests';
+import { openExternalLink } from '../utils/comms';
+import { Constants } from './constants';
+import { getCheckSuiteAttributes, getWorkflowRunAttributes } from './subject';
 
 export function getTokenForHost(hostname: string, accounts: AuthState): string {
   const isEnterprise = isEnterpriseHost(hostname);
@@ -48,7 +48,7 @@ export function addNotificationReferrerIdToUrl(
   const parsedUrl = new URL(url);
 
   parsedUrl.searchParams.set(
-    "notification_referrer_id",
+    'notification_referrer_id',
     generateNotificationReferrerId(notificationId, userId),
   );
 
@@ -62,7 +62,7 @@ export function generateNotificationReferrerId(
   const buffer = Buffer.from(
     `018:NotificationThread${notificationId}:${userId}`,
   );
-  return buffer.toString("base64");
+  return buffer.toString('base64');
 }
 
 export function addHours(date: string, hours: number): string {
@@ -79,7 +79,7 @@ export function formatSearchQueryString(
 
 export async function getHtmlUrl(url: string, token: string): Promise<string> {
   const response: Issue | IssueComments | PullRequest = (
-    await apiRequestAuth(url, "GET", token)
+    await apiRequestAuth(url, 'GET', token)
   ).data;
 
   return response.html_url;
@@ -93,7 +93,7 @@ export function getCheckSuiteUrl(notification: Notification) {
 
   if (checkSuiteAttributes?.workflowName) {
     filters.push(
-      `workflow:"${checkSuiteAttributes.workflowName.replaceAll(" ", "+")}"`,
+      `workflow:"${checkSuiteAttributes.workflowName.replaceAll(' ', '+')}"`,
     );
   }
 
@@ -106,7 +106,7 @@ export function getCheckSuiteUrl(notification: Notification) {
   }
 
   if (filters.length > 0) {
-    url += `?query=${filters.join("+")}`;
+    url += `?query=${filters.join('+')}`;
   }
 
   return url;
@@ -123,7 +123,7 @@ export function getWorkflowRunUrl(notification: Notification) {
   }
 
   if (filters.length > 0) {
-    url += `?query=${filters.join("+")}`;
+    url += `?query=${filters.join('+')}`;
   }
 
   return url;
@@ -160,21 +160,22 @@ export async function fetchDiscussion(
 ): Promise<Discussion | null> {
   const response: GraphQLSearch<Discussion> = await apiRequestAuth(
     `https://api.github.com/graphql`,
-    "POST",
+    'POST',
     token,
     {
       query: `
+        fragment AuthorFields on Actor {
+          login
+          url
+          avatar_url: avatarUrl
+          type: __typename
+        }
+      
         fragment CommentFields on DiscussionComment {
           databaseId
           createdAt
           author {
-            login
-            url
-          }
-          bot: author {
-            ... on Bot {
-              login
-            }
+            ...AuthorFields
           }
         }
       
@@ -193,6 +194,9 @@ export async function fetchDiscussion(
                 stateReason
                 isAnswered
                 url
+                author {
+                  ...AuthorFields
+                }
                 comments(last: $lastComments){
                   nodes {
                     ...CommentFields
@@ -214,7 +218,7 @@ export async function fetchDiscussion(
           notification.subject.title,
           notification.updated_at,
         ),
-        type: "DISCUSSION",
+        type: 'DISCUSSION',
         firstDiscussions: 10,
         lastComments: 100,
         firstReplies: 1,
@@ -229,7 +233,7 @@ export async function fetchDiscussion(
 
   if (discussions.length > 1)
     discussions = discussions.filter(
-      (discussion) => discussion.viewerSubscription === "SUBSCRIBED",
+      (discussion) => discussion.viewerSubscription === 'SUBSCRIBED',
     );
 
   return discussions[0];
@@ -262,16 +266,16 @@ export async function generateGitHubWebUrl(
   } else {
     // Perform any specific notification type handling (only required for a few special notification scenarios)
     switch (notification.subject.type) {
-      case "CheckSuite":
+      case 'CheckSuite':
         url = getCheckSuiteUrl(notification);
         break;
-      case "Discussion":
+      case 'Discussion':
         url = await getDiscussionUrl(notification, token);
         break;
-      case "RepositoryInvitation":
+      case 'RepositoryInvitation':
         url = `${notification.repository.html_url}/invitations`;
         break;
-      case "WorkflowRun":
+      case 'WorkflowRun':
         url = getWorkflowRunUrl(notification);
         break;
       default:
@@ -286,13 +290,13 @@ export async function generateGitHubWebUrl(
 
 export function formatForDisplay(text: string[]) {
   if (!text) {
-    return "";
+    return '';
   }
 
   return text
-    .join(" ")
-    .replace(/([a-z])([A-Z])/g, "$1 $2") // Add space between lowercase character followed by an uppercase character
-    .replace(/_/g, " ") // Replace underscores with spaces
+    .join(' ')
+    .replace(/([a-z])([A-Z])/g, '$1 $2') // Add space between lowercase character followed by an uppercase character
+    .replace(/_/g, ' ') // Replace underscores with spaces
     .replace(/\w+/g, (word) => {
       // Convert to proper case (capitalize first letter of each word)
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();

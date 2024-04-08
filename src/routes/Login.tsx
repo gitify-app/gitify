@@ -1,10 +1,10 @@
-const { ipcRenderer } = require("electron");
+const { ipcRenderer } = require('electron');
 
-import { FC, useContext, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { type FC, useContext, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { Logo } from "../components/Logo";
-import { AppContext } from "../context/App";
+import { Logo } from '../components/Logo';
+import { AppContext } from '../context/App';
 
 export const LoginRoute: FC = () => {
   const navigate = useNavigate();
@@ -12,8 +12,8 @@ export const LoginRoute: FC = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      ipcRenderer.send("reopen-window");
-      navigate("/", { replace: true });
+      ipcRenderer.send('reopen-window');
+      navigate('/', { replace: true });
     }
   }, [isLoggedIn]);
 
@@ -27,7 +27,7 @@ export const LoginRoute: FC = () => {
   }, []); */
 
   const loginButtonClass =
-    "w-50 px-2 py-2 my-2 bg-gray-300 font-semibold rounded text-xs text-center dark:text-black hover:bg-gray-500 hover:text-white focus:outline-none";
+    'w-50 px-2 py-2 my-2 bg-gray-300 font-semibold rounded text-xs text-center dark:text-black hover:bg-gray-500 hover:text-white focus:outline-none';
 
   return (
     <div className="flex flex-1 flex-col justify-center items-center p-4 bg-white dark:bg-gray-dark dark:text-white">
@@ -54,7 +54,7 @@ export const LoginRoute: FC = () => {
         className={loginButtonClass}
         title="Login with Personal Token"
         aria-label="Login with Personal Token"
-        onClick={() => navigate("/login-token")}
+        onClick={() => navigate('/login-token')}
       >
         Login with Personal Access Token
       </button>
@@ -63,7 +63,7 @@ export const LoginRoute: FC = () => {
         className={loginButtonClass}
         title="Login with GitHub Enterprise"
         aria-label="Login with GitHub Enterprise"
-        onClick={() => navigate("/login-enterprise")}
+        onClick={() => navigate('/login-enterprise')}
       >
         Login to GitHub Enterprise
       </button>

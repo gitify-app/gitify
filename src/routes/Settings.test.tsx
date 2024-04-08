@@ -1,36 +1,36 @@
-import { act, fireEvent, render, screen } from "@testing-library/react";
+import { act, fireEvent, render, screen } from '@testing-library/react';
 
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter } from 'react-router-dom';
 
-const { ipcRenderer } = require("electron");
+const { ipcRenderer } = require('electron');
 
-import type { AxiosResponse } from "axios";
-import { shell } from "electron";
-import { mockAccounts, mockSettings } from "../__mocks__/mock-state";
-import { AppContext } from "../context/App";
-import * as apiRequests from "../utils/api-requests";
-import Constants from "../utils/constants";
-import { SettingsRoute } from "./Settings";
+import type { AxiosResponse } from 'axios';
+import { shell } from 'electron';
+import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
+import { AppContext } from '../context/App';
+import * as apiRequests from '../utils/api-requests';
+import Constants from '../utils/constants';
+import { SettingsRoute } from './Settings';
 
 const mockNavigate = jest.fn();
-jest.mock("react-router-dom", () => ({
-  ...jest.requireActual("react-router-dom"),
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
-jest.spyOn(apiRequests, "apiRequestAuth").mockResolvedValue({
+jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
   headers: {
-    "x-oauth-scopes": Constants.AUTH_SCOPE.join(", "),
+    'x-oauth-scopes': Constants.AUTH_SCOPE.join(', '),
   },
 } as unknown as AxiosResponse);
 
-describe("routes/Settings.tsx", () => {
+describe('routes/Settings.tsx', () => {
   const updateSetting = jest.fn();
 
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
-  it("should render itself & its children", async () => {
+  it('should render itself & its children', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -43,10 +43,10 @@ describe("routes/Settings.tsx", () => {
       );
     });
 
-    expect(screen.getByTestId("settings")).toMatchSnapshot();
+    expect(screen.getByTestId('settings')).toMatchSnapshot();
   });
 
-  it("should press the logout", async () => {
+  it('should press the logout', async () => {
     const logoutMock = jest.fn();
     await act(async () => {
       render(
@@ -64,17 +64,17 @@ describe("routes/Settings.tsx", () => {
       );
     });
 
-    fireEvent.click(screen.getByTitle("Logout"));
+    fireEvent.click(screen.getByTitle('Logout octocat'));
 
     expect(logoutMock).toHaveBeenCalledTimes(1);
 
     expect(ipcRenderer.send).toHaveBeenCalledTimes(2);
-    expect(ipcRenderer.send).toHaveBeenCalledWith("update-icon");
-    expect(ipcRenderer.send).toHaveBeenCalledWith("update-title", "");
+    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
+    expect(ipcRenderer.send).toHaveBeenCalledWith('update-title', '');
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
-  it("should go back by pressing the icon", async () => {
+  it('should go back by pressing the icon', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -90,11 +90,11 @@ describe("routes/Settings.tsx", () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText("Go Back"));
+    fireEvent.click(screen.getByLabelText('Go Back'));
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
-  it("should toggle the showOnlyParticipating checkbox", async () => {
+  it('should toggle the showOnlyParticipating checkbox', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -111,15 +111,15 @@ describe("routes/Settings.tsx", () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText("Show only participating"), {
+    fireEvent.click(screen.getByLabelText('Show only participating'), {
       target: { checked: true },
     });
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith("participating", false);
+    expect(updateSetting).toHaveBeenCalledWith('participating', false);
   });
 
-  it("should toggle the showBots checkbox", async () => {
+  it('should toggle the showBots checkbox', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -137,17 +137,17 @@ describe("routes/Settings.tsx", () => {
     });
 
     fireEvent.click(
-      screen.getByLabelText("Show notifications from Bot accounts"),
+      screen.getByLabelText('Show notifications from Bot accounts'),
       {
         target: { checked: true },
       },
     );
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith("showBots", false);
+    expect(updateSetting).toHaveBeenCalledWith('showBots', false);
   });
 
-  it("should toggle the showNotificationsCountInTray checkbox", async () => {
+  it('should toggle the showNotificationsCountInTray checkbox', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -164,18 +164,18 @@ describe("routes/Settings.tsx", () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText("Show notifications count in tray"), {
+    fireEvent.click(screen.getByLabelText('Show notifications count in tray'), {
       target: { checked: true },
     });
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith(
-      "showNotificationsCountInTray",
+      'showNotificationsCountInTray',
       false,
     );
   });
 
-  it("should toggle the playSound checkbox", async () => {
+  it('should toggle the playSound checkbox', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -192,15 +192,15 @@ describe("routes/Settings.tsx", () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText("Play sound"), {
+    fireEvent.click(screen.getByLabelText('Play sound'), {
       target: { checked: true },
     });
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith("playSound", false);
+    expect(updateSetting).toHaveBeenCalledWith('playSound', false);
   });
 
-  it("should toggle the showNotifications checkbox", async () => {
+  it('should toggle the showNotifications checkbox', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -217,15 +217,15 @@ describe("routes/Settings.tsx", () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText("Show system notifications"), {
+    fireEvent.click(screen.getByLabelText('Show system notifications'), {
       target: { checked: true },
     });
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith("showNotifications", false);
+    expect(updateSetting).toHaveBeenCalledWith('showNotifications', false);
   });
 
-  it("should toggle the markAsDoneOnOpen checkbox", async () => {
+  it('should toggle the markAsDoneOnOpen checkbox', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -242,15 +242,15 @@ describe("routes/Settings.tsx", () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText("Mark as done on open"), {
+    fireEvent.click(screen.getByLabelText('Mark as done on open'), {
       target: { checked: true },
     });
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith("markAsDoneOnOpen", false);
+    expect(updateSetting).toHaveBeenCalledWith('markAsDoneOnOpen', false);
   });
 
-  it("should toggle the openAtStartup checkbox", async () => {
+  it('should toggle the openAtStartup checkbox', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -267,15 +267,15 @@ describe("routes/Settings.tsx", () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText("Open at startup"), {
+    fireEvent.click(screen.getByLabelText('Open at startup'), {
       target: { checked: true },
     });
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith("openAtStartup", false);
+    expect(updateSetting).toHaveBeenCalledWith('openAtStartup', false);
   });
 
-  it("should change the theme radio group", async () => {
+  it('should change the theme radio group', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -292,13 +292,13 @@ describe("routes/Settings.tsx", () => {
       );
     });
 
-    fireEvent.click(screen.getByLabelText("Light"));
+    fireEvent.click(screen.getByLabelText('Light'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith("theme", "LIGHT");
+    expect(updateSetting).toHaveBeenCalledWith('theme', 'LIGHT');
   });
 
-  it("should go to the enterprise login route", async () => {
+  it('should go to the enterprise login route', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -314,13 +314,13 @@ describe("routes/Settings.tsx", () => {
       );
     });
 
-    fireEvent.click(screen.getByTitle("Login with GitHub Enterprise"));
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, "/login-enterprise", {
+    fireEvent.click(screen.getByTitle('Login with GitHub Enterprise'));
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-enterprise', {
       replace: true,
     });
   });
 
-  it("should quit the app", async () => {
+  it('should quit the app', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -333,14 +333,14 @@ describe("routes/Settings.tsx", () => {
       );
     });
 
-    fireEvent.click(screen.getByTitle("Quit Gitify"));
-    expect(ipcRenderer.send).toHaveBeenCalledWith("app-quit");
+    fireEvent.click(screen.getByTitle('Quit Gitify'));
+    expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
   });
 
-  it("should be able to enable colors", async () => {
-    jest.spyOn(apiRequests, "apiRequestAuth").mockResolvedValue({
+  it('should be able to enable colors', async () => {
+    jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
       headers: {
-        "x-oauth-scopes": Constants.AUTH_SCOPE.join(", "),
+        'x-oauth-scopes': Constants.AUTH_SCOPE.join(', '),
       },
     } as unknown as AxiosResponse);
 
@@ -360,18 +360,18 @@ describe("routes/Settings.tsx", () => {
       );
     });
 
-    await screen.findByLabelText("Use GitHub-like state colors");
+    await screen.findByLabelText('Use GitHub-like state colors');
 
-    fireEvent.click(screen.getByLabelText("Use GitHub-like state colors"));
+    fireEvent.click(screen.getByLabelText('Use GitHub-like state colors'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith("colors", true);
+    expect(updateSetting).toHaveBeenCalledWith('colors', true);
   });
 
-  it("should not be able to enable colors due to missing scope", async () => {
-    jest.spyOn(apiRequests, "apiRequestAuth").mockResolvedValue({
+  it('should not be able to enable colors due to missing scope', async () => {
+    jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
       headers: {
-        "x-oauth-scopes": "read:user, notifications",
+        'x-oauth-scopes': 'read:user, notifications',
       },
     } as unknown as AxiosResponse);
 
@@ -393,14 +393,14 @@ describe("routes/Settings.tsx", () => {
 
     expect(
       screen
-        .getByLabelText("Use GitHub-like state colors (requires repo scope)")
-        .closest("input"),
-    ).toHaveProperty("disabled", true);
+        .getByLabelText('Use GitHub-like state colors (requires repo scope)')
+        .closest('input'),
+    ).toHaveProperty('disabled', true);
 
     // click the checkbox
     fireEvent.click(
       screen.getByLabelText(
-        "Use GitHub-like state colors (requires repo scope)",
+        'Use GitHub-like state colors (requires repo scope)',
       ),
     );
 
@@ -408,18 +408,18 @@ describe("routes/Settings.tsx", () => {
     expect(updateSetting).not.toHaveBeenCalled();
     expect(
       screen.getByLabelText(
-        "Use GitHub-like state colors (requires repo scope)",
+        'Use GitHub-like state colors (requires repo scope)',
       ),
-    ).not.toBe("checked");
+    ).not.toBe('checked');
 
     expect(
       screen.getByLabelText(
-        "Use GitHub-like state colors (requires repo scope)",
+        'Use GitHub-like state colors (requires repo scope)',
       ).parentNode.parentNode,
     ).toMatchSnapshot();
   });
 
-  it("should open release notes", async () => {
+  it('should open release notes', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -435,11 +435,11 @@ describe("routes/Settings.tsx", () => {
       );
     });
 
-    fireEvent.click(screen.getByTitle("View release notes"));
+    fireEvent.click(screen.getByTitle('View release notes'));
 
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(
-      "https://github.com/gitify-app/gitify/releases/tag/v0.0.1",
+      'https://github.com/gitify-app/gitify/releases/tag/v0.0.1',
     );
   });
 });

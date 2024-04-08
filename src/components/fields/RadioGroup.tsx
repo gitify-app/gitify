@@ -1,5 +1,5 @@
-import { ChangeEvent } from "react";
-import type { RadioGroupItem } from "../../types";
+import type { ChangeEvent } from 'react';
+import type { RadioGroupItem } from '../../types';
 
 export const FieldRadioGroup = ({
   label,

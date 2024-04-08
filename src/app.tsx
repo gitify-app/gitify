@@ -1,20 +1,20 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 import {
-  HashRouter as Router,
   Navigate,
   Route,
+  HashRouter as Router,
   Routes,
   useLocation,
-} from "react-router-dom";
+} from 'react-router-dom';
 
-import { Loading } from "./components/Loading";
-import { Sidebar } from "./components/Sidebar";
-import { AppContext, AppProvider } from "./context/App";
-import { LoginRoute } from "./routes/Login";
-import { LoginEnterpriseRoute } from "./routes/LoginEnterprise";
-import { LoginWithToken } from "./routes/LoginWithToken";
-import { NotificationsRoute } from "./routes/Notifications";
-import { SettingsRoute } from "./routes/Settings";
+import { Loading } from './components/Loading';
+import { Sidebar } from './components/Sidebar';
+import { AppContext, AppProvider } from './context/App';
+import { LoginRoute } from './routes/Login';
+import { LoginEnterpriseRoute } from './routes/LoginEnterprise';
+import { LoginWithToken } from './routes/LoginWithToken';
+import { NotificationsRoute } from './routes/Notifications';
+import { SettingsRoute } from './routes/Settings';
 
 function RequireAuth({ children }) {
   const { isLoggedIn } = useContext(AppContext);
