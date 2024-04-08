@@ -1,0 +1,4 @@
+# Snapshots are taken by our test suite and used to determine regressions.
+# We don't need to review their code in PRs, so treat them as auto-generated.
+# https://docs.github.com/en/repositories/working-with-files/managing-files/customizing-how-changed-files-appear-on-github
+*.snap linguist-generated=true
