@@ -7,13 +7,13 @@
     "sourceMap": true,
     "noImplicitAny": false,
     "noUnusedLocals": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "types": ["jest"]
+    "types": ["jest"],
+    "skipLibCheck": true
   },
-  "exclude": ["node_modules"],
   "include": [
     "src/**/*.js",
     "src/**/*.ts",

@@ -1,4 +1,4 @@
-import { Notification } from './typesGithub';
+import type { Notification } from './typesGithub';
 
 export interface AuthState {
   token?: string;
@@ -13,6 +13,7 @@ export type SettingsState = AppearanceSettingsState &
 interface AppearanceSettingsState {
   theme: Theme;
   colors: boolean | null;
+  showAccountHostname: boolean;
 }
 
 interface NotificationSettingsState {

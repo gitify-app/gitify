@@ -46,18 +46,18 @@ The release process is automated. Follow the steps below.
 
 ### Tests
 
-There are 2 checks - one for prettier and one for the unit tests with `jest`.
+There are 2 checks - one for biome (linter & formatter) and one for the unit tests with `jest`.
 
-```
-    // Run prettier to check
-    pnpm prettier:check
+```shell
+# Run biome to check linting and formatting
+pnpm lint:check
 
-    // Run linter & unit tests with coverage
-    pnpm test
+# Run unit tests with coverage
+pnpm test
 
-    // If you want to pass arguments to jest (or other `pnpm` commands)
-    // like `--watch`, you can prepend `--` to the command
-    pnpm test -- --watch
+# If you want to pass arguments to jest (or other `pnpm` commands)
+# like `--watch`, you can prepend `--` to the command
+pnpm test -- --watch
 ```
 
 ### FAQ
@@ -88,7 +88,7 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 [brew]: http://brew.sh/
 [homebrew-cask]: https://formulae.brew.sh/cask/gitify
 [coveralls]: https://coveralls.io/github/gitify-app/gitify
-[coveralls-badge]: https://coveralls.io/repos/github/gitify-app/gitify/badge.svg
+[coveralls-badge]: https://img.shields.io/coverallsCoverage/github/gitify-app/gitify
 [build-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/build-app.yml/badge.svg
 [release-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/release.yml/badge.svg
 [downloads-total-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/total?label=downloads@all

@@ -3,8 +3,8 @@ import axios from 'axios';
 import nock from 'nock';
 
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
-import { mockedUser } from '../__mocks__/mockedData';
-import { AuthState } from '../types';
+import { mockedNotificationUser, mockedUser } from '../__mocks__/mockedData';
+import type { AuthState } from '../types';
 import { useNotifications } from './useNotifications';
 
 describe('hooks/useNotifications.ts', () => {
@@ -200,7 +200,6 @@ describe('hooks/useNotifications.ts', () => {
             repository: {
               full_name: 'some/repo',
             },
-            updated_at: '2024-02-26T00:00:00Z',
           },
           {
             id: 2,
@@ -281,6 +280,13 @@ describe('hooks/useNotifications.ts', () => {
                     stateReason: null,
                     isAnswered: true,
                     url: 'https://github.com/manosim/notifications-test/discussions/612',
+                    author: {
+                      login: 'discussion-creator',
+                      url: 'https://github.com/discussion-creator',
+                      avatar_url:
+                        'https://avatars.githubusercontent.com/u/1?v=4',
+                      type: 'User',
+                    },
                     comments: {
                       nodes: [
                         {
@@ -289,6 +295,9 @@ describe('hooks/useNotifications.ts', () => {
                           author: {
                             login: 'comment-user',
                             url: 'https://github.com/comment-user',
+                            avatar_url:
+                              'https://avatars.githubusercontent.com/u/1?v=4',
+                            type: 'User',
                           },
                           replies: {
                             nodes: [],
@@ -302,46 +311,22 @@ describe('hooks/useNotifications.ts', () => {
             },
           });
 
-        nock('https://api.github.com')
-          .get('/3')
-          .reply(200, {
-            state: 'closed',
-            merged: true,
-            user: {
-              login: 'some-user',
-              html_url: 'https://github.com/some-user',
-              type: 'User',
-            },
-          });
-        nock('https://api.github.com')
-          .get('/3/comments')
-          .reply(200, {
-            user: {
-              login: 'some-commenter',
-              html_url: 'https://github.com/some-commenter',
-              type: 'User',
-            },
-          });
-        nock('https://api.github.com')
-          .get('/4')
-          .reply(200, {
-            state: 'closed',
-            merged: false,
-            user: {
-              login: 'some-user',
-              html_url: 'https://github.com/some-user',
-              type: 'User',
-            },
-          });
-        nock('https://api.github.com')
-          .get('/4/comments')
-          .reply(200, {
-            user: {
-              login: 'some-commenter',
-              html_url: 'https://github.com/some-commenter',
-              type: 'User',
-            },
-          });
+        nock('https://api.github.com').get('/3').reply(200, {
+          state: 'closed',
+          merged: true,
+          user: mockedNotificationUser,
+        });
+        nock('https://api.github.com').get('/3/comments').reply(200, {
+          user: mockedNotificationUser,
+        });
+        nock('https://api.github.com').get('/4').reply(200, {
+          state: 'closed',
+          merged: false,
+          user: mockedNotificationUser,
+        });
+        nock('https://api.github.com').get('/4/comments').reply(200, {
+          user: mockedNotificationUser,
+        });
 
         const { result } = renderHook(() => useNotifications(true));
 

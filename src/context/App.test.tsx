@@ -1,14 +1,14 @@
-import React, { useContext } from 'react';
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
+import { useContext } from 'react';
 
-import { AppContext, AppProvider } from './App';
-import { AuthState, SettingsState } from '../types';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { useNotifications } from '../hooks/useNotifications';
+import type { AuthState, SettingsState } from '../types';
 import * as apiRequests from '../utils/api-requests';
 import * as comms from '../utils/comms';
-import * as storage from '../utils/storage';
 import * as notifications from '../utils/notifications';
+import * as storage from '../utils/storage';
+import { AppContext, AppProvider } from './App';
 
 jest.mock('../hooks/useNotifications');
 
@@ -92,7 +92,11 @@ describe('context/App.tsx', () => {
       const TestComponent = () => {
         const { fetchNotifications } = useContext(AppContext);
 
-        return <button onClick={fetchNotifications}>Test Case</button>;
+        return (
+          <button type="button" onClick={fetchNotifications}>
+            Test Case
+          </button>
+        );
       };
 
       const { getByText } = customRender(<TestComponent />);
@@ -109,7 +113,10 @@ describe('context/App.tsx', () => {
         const { markNotificationRead } = useContext(AppContext);
 
         return (
-          <button onClick={() => markNotificationRead('123-456', 'github.com')}>
+          <button
+            type="button"
+            onClick={() => markNotificationRead('123-456', 'github.com')}
+          >
             Test Case
           </button>
         );
@@ -134,7 +141,10 @@ describe('context/App.tsx', () => {
         const { markNotificationDone } = useContext(AppContext);
 
         return (
-          <button onClick={() => markNotificationDone('123-456', 'github.com')}>
+          <button
+            type="button"
+            onClick={() => markNotificationDone('123-456', 'github.com')}
+          >
             Test Case
           </button>
         );
@@ -160,6 +170,7 @@ describe('context/App.tsx', () => {
 
         return (
           <button
+            type="button"
             onClick={() => unsubscribeNotification('123-456', 'github.com')}
           >
             Test Case
@@ -187,6 +198,7 @@ describe('context/App.tsx', () => {
 
         return (
           <button
+            type="button"
             onClick={() =>
               markRepoNotifications('manosim/gitify', 'github.com')
             }
@@ -218,6 +230,7 @@ describe('context/App.tsx', () => {
 
         return (
           <button
+            type="button"
             onClick={() =>
               validateToken({ hostname: 'github.com', token: '123-456' })
             }
@@ -255,7 +268,11 @@ describe('context/App.tsx', () => {
     const TestComponent = () => {
       const { logout } = useContext(AppContext);
 
-      return <button onClick={logout}>Test Case</button>;
+      return (
+        <button type="button" onClick={logout}>
+          Test Case
+        </button>
+      );
     };
 
     const { getByText } = customRender(<TestComponent />);
@@ -276,7 +293,10 @@ describe('context/App.tsx', () => {
       const { updateSetting } = useContext(AppContext);
 
       return (
-        <button onClick={() => updateSetting('participating', true)}>
+        <button
+          type="button"
+          onClick={() => updateSetting('participating', true)}
+        >
           Test Case
         </button>
       );
@@ -300,6 +320,7 @@ describe('context/App.tsx', () => {
         theme: 'SYSTEM',
         colors: null,
         markAsDoneOnOpen: false,
+        showAccountHostname: false,
       },
     );
   });
@@ -314,7 +335,10 @@ describe('context/App.tsx', () => {
       const { updateSetting } = useContext(AppContext);
 
       return (
-        <button onClick={() => updateSetting('openAtStartup', true)}>
+        <button
+          type="button"
+          onClick={() => updateSetting('openAtStartup', true)}
+        >
           Test Case
         </button>
       );
@@ -340,6 +364,7 @@ describe('context/App.tsx', () => {
         theme: 'SYSTEM',
         colors: null,
         markAsDoneOnOpen: false,
+        showAccountHostname: false,
       },
     );
   });

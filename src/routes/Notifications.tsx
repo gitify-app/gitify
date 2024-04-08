@@ -1,13 +1,13 @@
-import React, { useContext, useMemo } from 'react';
+import { type FC, useContext, useMemo } from 'react';
 
 import { AccountNotifications } from '../components/AccountNotifications';
 import { AllRead } from '../components/AllRead';
-import { AppContext } from '../context/App';
 import { Oops } from '../components/Oops';
+import { AppContext } from '../context/App';
 import { getNotificationCount } from '../utils/notifications';
 
-export const NotificationsRoute: React.FC = (props) => {
-  const { notifications, requestFailed } = useContext(AppContext);
+export const NotificationsRoute: FC = () => {
+  const { notifications, requestFailed, settings } = useContext(AppContext);
 
   const hasMultipleAccounts = useMemo(
     () => notifications.length > 1,
@@ -37,7 +37,9 @@ export const NotificationsRoute: React.FC = (props) => {
           key={account.hostname}
           hostname={account.hostname}
           notifications={account.notifications}
-          showAccountHostname={hasMultipleAccounts}
+          showAccountHostname={
+            hasMultipleAccounts || settings.showAccountHostname
+          }
         />
       ))}
     </div>

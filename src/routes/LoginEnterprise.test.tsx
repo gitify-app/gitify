@@ -1,14 +1,11 @@
-import * as React from 'react';
-import * as TestRenderer from 'react-test-renderer';
-import { fireEvent, render } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-
+import * as TestRenderer from 'react-test-renderer';
 const { ipcRenderer } = require('electron');
-
-import { AppContext } from '../context/App';
-import { AuthState } from '../types';
-import { LoginEnterpriseRoute, validate } from './LoginEnterprise';
 import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
+import { AppContext } from '../context/App';
+import type { AuthState } from '../types';
+import { LoginEnterpriseRoute, validate } from './LoginEnterprise';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -22,7 +19,7 @@ describe('routes/LoginEnterprise.tsx', () => {
     user: null,
   };
 
-  beforeEach(function () {
+  beforeEach(() => {
     mockNavigate.mockReset();
 
     jest.spyOn(ipcRenderer, 'send');
@@ -41,7 +38,7 @@ describe('routes/LoginEnterprise.tsx', () => {
   });
 
   it('let us go back', () => {
-    const { getByLabelText } = render(
+    render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
         <MemoryRouter>
           <LoginEnterpriseRoute />
@@ -49,19 +46,18 @@ describe('routes/LoginEnterprise.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByLabelText('Go Back'));
+    fireEvent.click(screen.getByLabelText('Go Back'));
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
   it('should validate the form values', () => {
-    let values;
     const emptyValues = {
       hostname: null,
       clientId: null,
       clientSecret: null,
     };
 
-    values = {
+    let values = {
       ...emptyValues,
     };
     expect(validate(values).hostname).toBe('Required');
@@ -109,7 +105,7 @@ describe('routes/LoginEnterprise.tsx', () => {
   });
 
   it('should render the form with errors', () => {
-    const { getByLabelText, getByTitle, getByText } = render(
+    render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
         <MemoryRouter>
           <LoginEnterpriseRoute />
@@ -117,20 +113,20 @@ describe('routes/LoginEnterprise.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.change(getByLabelText('Hostname'), {
+    fireEvent.change(screen.getByLabelText('Hostname'), {
       target: { value: 'test' },
     });
-    fireEvent.change(getByLabelText('Client ID'), {
+    fireEvent.change(screen.getByLabelText('Client ID'), {
       target: { value: '123' },
     });
-    fireEvent.change(getByLabelText('Client Secret'), {
+    fireEvent.change(screen.getByLabelText('Client Secret'), {
       target: { value: 'abc' },
     });
 
-    fireEvent.submit(getByTitle('Login Button'));
+    fireEvent.submit(screen.getByTitle('Login Button'));
 
-    expect(getByText('Invalid hostname.')).toBeTruthy();
-    expect(getByText('Invalid client id.')).toBeTruthy();
-    expect(getByText('Invalid client secret.')).toBeTruthy();
+    expect(screen.getByText('Invalid hostname.')).toBeTruthy();
+    expect(screen.getByText('Invalid client id.')).toBeTruthy();
+    expect(screen.getByText('Invalid client secret.')).toBeTruthy();
   });
 });

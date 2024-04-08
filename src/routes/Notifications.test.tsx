@@ -1,8 +1,8 @@
-import React from 'react';
 import TestRenderer from 'react-test-renderer';
 
-import { AppContext } from '../context/App';
+import { mockSettings } from '../__mocks__/mock-state';
 import { mockedAccountNotifications } from '../__mocks__/mockedData';
+import { AppContext } from '../context/App';
 import { NotificationsRoute } from './Notifications';
 
 jest.mock('../components/AccountNotifications', () => ({
@@ -33,6 +33,20 @@ describe('routes/Notifications.tsx', () => {
   it('should render itself & its children (all read notifications)', () => {
     const tree = TestRenderer.create(
       <AppContext.Provider value={{ notifications: [] }}>
+        <NotificationsRoute />
+      </AppContext.Provider>,
+    );
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render itself & its children (show account hostname)', () => {
+    const tree = TestRenderer.create(
+      <AppContext.Provider
+        value={{
+          notifications: [mockedAccountNotifications[0]],
+          settings: { ...mockSettings, showAccountHostname: true },
+        }}
+      >
         <NotificationsRoute />
       </AppContext.Provider>,
     );

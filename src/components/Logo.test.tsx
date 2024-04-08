@@ -1,6 +1,6 @@
-import * as React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
+
 import * as TestRenderer from 'react-test-renderer';
-import { fireEvent, render } from '@testing-library/react';
 
 import { Logo } from './Logo';
 
@@ -19,9 +19,9 @@ describe('components/Logo.tsx', () => {
 
   it('should click on the logo', () => {
     const onClick = jest.fn();
-    const { getByRole } = render(<Logo onClick={onClick} />);
+    render(<Logo onClick={onClick} />);
 
-    fireEvent.click(getByRole('logo'));
+    fireEvent.click(screen.getByLabelText('Gitify Logo'));
 
     expect(onClick).toHaveBeenCalledTimes(1);
   });
