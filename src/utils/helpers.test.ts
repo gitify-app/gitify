@@ -8,6 +8,7 @@ import {
   getHtmlUrl,
   generateGitHubWebUrl,
   formatForDisplay,
+  isGitHubLoggedIn,
 } from './helpers';
 import {
   mockedGraphQLResponse,
@@ -20,6 +21,15 @@ import { mockAccounts } from '../__mocks__/mock-state';
 import { SubjectType } from '../typesGithub';
 
 describe('utils/helpers.ts', () => {
+  describe('isGitHubLoggedIn', () => {
+    it('logged in', () => {
+      expect(isGitHubLoggedIn({ ...mockAccounts, token: '1234' })).toBe(true);
+    });
+
+    it('logged out', () => {
+      expect(isGitHubLoggedIn({ ...mockAccounts, token: null })).toBe(false);
+    });
+  });
   describe('isEnterpriseHost', () => {
     it('should return true for enterprise host', () => {
       expect(isEnterpriseHost('github.manos.im')).toBe(true);

@@ -9,6 +9,7 @@ import {
   generateGitHubAPIUrl,
   isEnterpriseHost,
   getTokenForHost,
+  isGitHubLoggedIn,
 } from '../utils/helpers';
 import { removeNotification } from '../utils/remove-notification';
 import {
@@ -64,11 +65,10 @@ export const useNotifications = (colors: boolean): NotificationsState => {
 
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
-      const isGitHubLoggedIn = accounts.token !== null;
       const endpointSuffix = `notifications?participating=${settings.participating}`;
 
       function getGitHubNotifications() {
-        if (!isGitHubLoggedIn) {
+        if (!isGitHubLoggedIn(accounts)) {
           return;
         }
         const url = `${generateGitHubAPIUrl(
