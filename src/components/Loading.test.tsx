@@ -1,6 +1,5 @@
 import { render } from '@testing-library/react';
 import NProgress from 'nprogress';
-import React from 'react';
 
 import { AppContext } from '../context/App';
 import { Loading } from './Loading';

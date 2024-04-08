@@ -1,22 +1,22 @@
 import axios from 'axios';
 import { useCallback, useState } from 'react';
 
-import { AccountNotifications, AuthState, SettingsState } from '../types';
-import { Notification } from '../typesGithub';
+import type { AccountNotifications, AuthState, SettingsState } from '../types';
+import type { Notification } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
+import Constants from '../utils/constants';
 import {
-  getEnterpriseAccountToken,
   generateGitHubAPIUrl,
-  isEnterpriseHost,
+  getEnterpriseAccountToken,
   getTokenForHost,
+  isEnterpriseHost,
   isGitHubLoggedIn,
 } from '../utils/helpers';
-import { removeNotification } from '../utils/remove-notification';
 import {
-  triggerNativeNotifications,
   setTrayIconColor,
+  triggerNativeNotifications,
 } from '../utils/notifications';
-import Constants from '../utils/constants';
+import { removeNotification } from '../utils/remove-notification';
 import { removeNotifications } from '../utils/remove-notifications';
 import { getGitifySubjectDetails } from '../utils/subject';
 

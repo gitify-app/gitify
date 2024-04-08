@@ -5,9 +5,10 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
   className="flex flex-1 flex-col justify-center items-center p-4 bg-white dark:bg-gray-dark dark:text-white"
 >
   <svg
+    aria-label="Gitify Logo"
     className="w-16 h-16"
     onClick={[Function]}
-    role="logo"
+    role="img"
     viewBox="0 0 500 500"
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -60,6 +61,7 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
     className="w-50 px-2 py-2 my-2 bg-gray-300 font-semibold rounded text-xs text-center dark:text-black hover:bg-gray-500 hover:text-white focus:outline-none"
     onClick={[Function]}
     title="Login with Personal Token"
+    type="button"
   >
     Login with Personal Access Token
   </button>
@@ -68,6 +70,7 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
     className="w-50 px-2 py-2 my-2 bg-gray-300 font-semibold rounded text-xs text-center dark:text-black hover:bg-gray-500 hover:text-white focus:outline-none"
     onClick={[Function]}
     title="Login with GitHub Enterprise"
+    type="button"
   >
     Login to GitHub Enterprise
   </button>

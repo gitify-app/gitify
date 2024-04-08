@@ -1,11 +1,8 @@
-import React from 'react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import TestRenderer from 'react-test-renderer';
-import { render, fireEvent } from '@testing-library/react';
-
-import { AppContext } from '../context/App';
 import { mockedGithubNotifications } from '../__mocks__/mockedData';
+import { AppContext } from '../context/App';
 import { RepositoryNotifications } from './Repository';
-
 const { shell } = require('electron');
 
 jest.mock('./NotificationRow', () => ({
@@ -38,13 +35,13 @@ describe('components/Repository.tsx', () => {
   });
 
   it('should open the browser when clicking on the repo name', () => {
-    const { getByText } = render(
+    render(
       <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByText(props.repoName));
+    fireEvent.click(screen.getByText(props.repoName));
 
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(
@@ -52,14 +49,14 @@ describe('components/Repository.tsx', () => {
     );
   });
 
-  it('should mark a repo as read', function () {
-    const { getByTitle } = render(
+  it('should mark a repo as read', () => {
+    render(
       <AppContext.Provider value={{ markRepoNotifications }}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByTitle('Mark Repository as Read'));
+    fireEvent.click(screen.getByTitle('Mark Repository as Read'));
 
     expect(markRepoNotifications).toHaveBeenCalledWith(
       'manosim/notifications-test',
@@ -67,14 +64,14 @@ describe('components/Repository.tsx', () => {
     );
   });
 
-  it('should mark a repo as done', function () {
-    const { getByTitle } = render(
+  it('should mark a repo as done', () => {
+    render(
       <AppContext.Provider value={{ markRepoNotificationsDone }}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
 
-    fireEvent.click(getByTitle('Mark Repository as Done'));
+    fireEvent.click(screen.getByTitle('Mark Repository as Done'));
 
     expect(markRepoNotificationsDone).toHaveBeenCalledWith(
       'manosim/notifications-test',

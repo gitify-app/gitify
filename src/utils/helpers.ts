@@ -1,17 +1,17 @@
-import { EnterpriseAccount, AuthState } from '../types';
-import {
-  Notification,
-  GraphQLSearch,
+import type { AuthState, EnterpriseAccount } from '../types';
+import type {
   Discussion,
-  PullRequest,
+  DiscussionComment,
+  GraphQLSearch,
   Issue,
   IssueComments,
-  DiscussionComment,
+  Notification,
+  PullRequest,
 } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
 import { Constants } from './constants';
-import { getWorkflowRunAttributes, getCheckSuiteAttributes } from './subject';
+import { getCheckSuiteAttributes, getWorkflowRunAttributes } from './subject';
 
 export function isGitHubLoggedIn(accounts: AuthState): boolean {
   return accounts.token != null;
@@ -91,7 +91,7 @@ export async function getHtmlUrl(url: string, token: string): Promise<string> {
 
 export function getCheckSuiteUrl(notification: Notification) {
   let url = `${notification.repository.html_url}/actions`;
-  let filters = [];
+  const filters = [];
 
   const checkSuiteAttributes = getCheckSuiteAttributes(notification);
 
@@ -118,7 +118,7 @@ export function getCheckSuiteUrl(notification: Notification) {
 
 export function getWorkflowRunUrl(notification: Notification) {
   let url = `${notification.repository.html_url}/actions`;
-  let filters = [];
+  const filters = [];
 
   const workflowRunAttributes = getWorkflowRunAttributes(notification);
 
@@ -144,11 +144,9 @@ async function getDiscussionUrl(
   if (discussion) {
     url = discussion.url;
 
-    let comments = discussion.comments.nodes;
+    const comments = discussion.comments.nodes;
 
-    let latestCommentId: string | number;
-
-    latestCommentId = getLatestDiscussionComment(comments)?.databaseId;
+    const latestCommentId = getLatestDiscussionComment(comments)?.databaseId;
 
     if (latestCommentId) {
       url += `#discussioncomment-${latestCommentId}`;
@@ -163,7 +161,7 @@ export async function fetchDiscussion(
   token: string,
 ): Promise<Discussion | null> {
   const response: GraphQLSearch<Discussion> = await apiRequestAuth(
-    `https://api.github.com/graphql`,
+    'https://api.github.com/graphql',
     'POST',
     token,
     {
@@ -246,7 +244,7 @@ export async function fetchDiscussion(
 export function getLatestDiscussionComment(
   comments: DiscussionComment[],
 ): DiscussionComment | null {
-  if (!comments || comments.length == 0) {
+  if (!comments || comments.length === 0) {
     return null;
   }
 

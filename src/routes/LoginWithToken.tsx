@@ -1,13 +1,14 @@
-import React, { useCallback, useContext, useState } from 'react';
-import { Form, FormRenderProps } from 'react-final-form';
 import { ArrowLeftIcon } from '@primer/octicons-react';
+
+import { type FC, useCallback, useContext, useState } from 'react';
+import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
 
-import { AppContext } from '../context/App';
-import { AuthTokenOptions } from '../types';
-import { Constants } from '../utils/constants';
 import { FieldInput } from '../components/fields/FieldInput';
+import { AppContext } from '../context/App';
+import type { AuthTokenOptions } from '../types';
 import { openExternalLink } from '../utils/comms';
+import { Constants } from '../utils/constants';
 
 interface IValues {
   token?: string;
@@ -40,7 +41,7 @@ export const validate = (values: IValues): IFormErrors => {
   return errors;
 };
 
-export const LoginWithToken: React.FC = () => {
+export const LoginWithToken: FC = () => {
   const { validateToken } = useContext(AppContext);
   const navigate = useNavigate();
   const [isValidToken, setIsValidToken] = useState<boolean>(true);
@@ -61,7 +62,8 @@ export const LoginWithToken: React.FC = () => {
           helpText={
             <>
               To generate a token, go to GitHub,{' '}
-              <a
+              <button
+                type="button"
                 className="underline hover:text-gray-500 dark:hover:text-gray-300  cursor-pointer"
                 onClick={() =>
                   openLink(
@@ -70,7 +72,7 @@ export const LoginWithToken: React.FC = () => {
                 }
               >
                 personal access tokens
-              </a>{' '}
+              </button>{' '}
               and create one with the {Constants.AUTH_SCOPE.length} scopes{' '}
               <span className="underline font-extrabold text-yellow-500">
                 {Constants.AUTH_SCOPE.join(', ')}{' '}
@@ -119,6 +121,7 @@ export const LoginWithToken: React.FC = () => {
     <div className="flex-1 bg-white dark:bg-gray-dark dark:text-white">
       <div className="flex justify-between items-center mt-4 py-2 mx-8">
         <button
+          type="button"
           className="focus:outline-none"
           title="Go Back"
           onClick={() => navigate(-1)}
