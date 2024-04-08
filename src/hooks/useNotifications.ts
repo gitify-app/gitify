@@ -109,7 +109,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                 };
               },
             );
-            const data = isGitHubLoggedIn
+            const data = isGitHubLoggedIn(accounts)
               ? [
                   ...enterpriseNotifications,
                   {
