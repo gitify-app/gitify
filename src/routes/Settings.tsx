@@ -219,7 +219,7 @@ export const SettingsRoute: FC = () => {
         </fieldset>
       </div>
 
-      <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8">
+      <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8 text-sm">
         <button
           type="button"
           className="font-semibold cursor-pointer"
