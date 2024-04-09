@@ -141,6 +141,9 @@ export const SettingsRoute: FC = () => {
               colorScope && updateSetting('colors', evt.target.checked)
             }
             disabled={!colorScope}
+            tooltip="Enabling this feature provides detailed state and last interaction user information.
+            
+Depending on the number of unread notifications, you may experience occasional rate limiting."
           />
           <FieldCheckbox
             name="showAccountHostname"
@@ -153,7 +156,7 @@ export const SettingsRoute: FC = () => {
         </fieldset>
 
         <fieldset className="mb-3">
-          <legend id="notifications" className="font-semibold  mt-2 mb-1">
+          <legend id="notifications" className="font-semibold mt-2 mb-1">
             Notifications
           </legend>
           <FieldCheckbox
@@ -181,7 +184,7 @@ export const SettingsRoute: FC = () => {
         </fieldset>
 
         <fieldset className="mb-3">
-          <legend id="system" className="font-semibold  mt-2 mb-1">
+          <legend id="system" className="font-semibold mt-2 mb-1">
             System
           </legend>
           <FieldCheckbox

@@ -1,3 +1,5 @@
+import { QuestionIcon } from '@primer/octicons-react';
+
 interface IFieldCheckbox {
   name: string;
   label: string;
@@ -5,6 +7,7 @@ interface IFieldCheckbox {
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
   placeholder?: string;
   disabled?: boolean;
+  tooltip?: string;
 }
 
 export const FieldCheckbox = (props: IFieldCheckbox) => {
@@ -30,6 +33,11 @@ export const FieldCheckbox = (props: IFieldCheckbox) => {
           }
         >
           {props.label}
+          {props.tooltip && (
+            <span title={props.tooltip}>
+              <QuestionIcon className="text-blue-500 ml-1" />
+            </span>
+          )}
         </label>
         {props.placeholder && (
           <div className="italic text-gray-500 dark:text-gray-300">
