@@ -128,7 +128,7 @@
     "@electron/notarize": "2.3.0",
     "@testing-library/react": "14.3.0",
     "@types/jest": "29.5.12",
-    "@types/node": "20.12.5",
+    "@types/node": "20.12.6",
     "@types/nprogress": "0.2.3",
     "@types/react": "18.2.75",
     "@types/react-router-dom": "5.3.3",
