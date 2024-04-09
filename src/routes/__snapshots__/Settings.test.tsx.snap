@@ -381,7 +381,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
     </fieldset>
   </div>
   <div
-    class="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8"
+    class="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8 text-sm"
   >
     <button
       class="font-semibold cursor-pointer"
