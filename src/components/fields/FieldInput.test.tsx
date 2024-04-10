@@ -1,5 +1,6 @@
-import * as TestRendener from 'react-test-renderer';
+import * as TestRenderer from 'react-test-renderer';
 
+import { Form } from 'react-final-form';
 import { FieldInput, type IFieldInput } from './FieldInput';
 
 describe('components/fields/FieldInput.tsx', () => {
@@ -10,8 +11,18 @@ describe('components/fields/FieldInput.tsx', () => {
     helpText: 'This is some helper text',
   };
 
-  it('should render ', () => {
-    const tree = TestRendener.create(<FieldInput {...props} />);
+  it('should render', () => {
+    const tree = TestRenderer.create(
+      <Form
+        onSubmit={() => {}}
+        hand
+        render={({ handleSubmit }) => (
+          <form onSubmit={handleSubmit}>
+            <FieldInput {...props} />
+          </form>
+        )}
+      />,
+    );
     expect(tree).toMatchSnapshot();
   });
 });

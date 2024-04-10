@@ -13,7 +13,7 @@ export interface IFieldInput {
 export const FieldInput: FC<IFieldInput> = ({
   label,
   name,
-  placeholder = '',
+  placeholder,
   helpText,
   type = 'text',
   required = false,

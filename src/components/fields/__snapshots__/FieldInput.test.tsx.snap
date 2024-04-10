@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`components/fields/FieldInput.tsx should render 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <div
+    className="mt-2"
+  >
+    <label
+      className="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
+      htmlFor="appearance"
+    >
+      Appearance
+    </label>
+    <input
+      className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
+      id="appearance"
+      name="appearance"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="This is some placeholder text"
+      required={false}
+      type="text"
+      value=""
+    />
+    <div
+      className="mt-3 text-gray-700 dark:text-gray-200 text-xs"
+    >
+      This is some helper text
+    </div>
+  </div>
+</form>
+`;
