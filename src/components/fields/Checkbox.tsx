@@ -1,6 +1,6 @@
 import type { FC, ReactNode } from 'react';
 
-interface IFieldCheckbox {
+export interface ICheckbox {
   name: string;
   label: string;
   helpText?: ReactNode | string;
@@ -9,7 +9,7 @@ interface IFieldCheckbox {
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const FieldCheckbox: FC<IFieldCheckbox> = (props: IFieldCheckbox) => {
+export const Checkbox: FC<ICheckbox> = (props: ICheckbox) => {
   return (
     <div className="mt-1 mb-3 text-sm">
       <div className="flex items-start">
@@ -36,6 +36,7 @@ export const FieldCheckbox: FC<IFieldCheckbox> = (props: IFieldCheckbox) => {
           </label>
         </div>
       </div>
+
       {props.helpText && (
         <div className="text-xs mt-1 italic text-gray-500 dark:text-gray-300">
           {props.helpText}

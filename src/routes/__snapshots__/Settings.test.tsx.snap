@@ -2,7 +2,7 @@
 
 exports[`routes/Settings.tsx should not be able to enable colors due to missing scope 1`] = `
 <div
-  class="flex items-start mt-1 mb-3"
+  class="flex items-start"
 >
   <div
     class="flex items-center h-5"
@@ -15,7 +15,7 @@ exports[`routes/Settings.tsx should not be able to enable colors due to missing 
     />
   </div>
   <div
-    class="ml-3 text-sm"
+    class="ml-3 "
   >
     <label
       class="font-medium text-gray-700 dark:text-gray-200"
@@ -76,122 +76,139 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         Appearance
       </legend>
       <div
-        class="flex items-start mt-1 mb-3"
+        class="mt-1 mb-3 text-sm"
       >
         <div
-          class="mr-3 text-sm py-1"
+          class="flex items-start"
         >
-          <label
-            class="font-medium text-gray-700 dark:text-gray-200 "
-            for="theme"
+          <div
+            class="mr-3 py-1"
           >
-            Theme:
-          </label>
+            <label
+              class="font-medium text-gray-700 dark:text-gray-200 "
+              for="theme"
+            >
+              Theme:
+            </label>
+          </div>
+          <div
+            aria-labelledby="theme"
+            class="flex items-center space-x-4"
+            role="group"
+          >
+            <div
+              class="flex mt-1"
+            >
+              <input
+                checked=""
+                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                id="theme_system"
+                name="theme"
+                type="radio"
+                value="SYSTEM"
+              />
+              <label
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                for="theme_system"
+              >
+                System
+              </label>
+            </div>
+            <div
+              class="flex mt-1"
+            >
+              <input
+                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                id="theme_light"
+                name="theme"
+                type="radio"
+                value="LIGHT"
+              />
+              <label
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                for="theme_light"
+              >
+                Light
+              </label>
+            </div>
+            <div
+              class="flex mt-1"
+            >
+              <input
+                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                id="theme_dark"
+                name="theme"
+                type="radio"
+                value="DARK"
+              />
+              <label
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                for="theme_dark"
+              >
+                Dark
+              </label>
+            </div>
+          </div>
         </div>
         <div
-          aria-labelledby="theme"
-          class="flex items-center space-x-4"
-          role="group"
+          class="text-xs mt-1 italic text-gray-500 dark:text-gray-300"
+        >
+          Changes will take effect after restarting the app
+        </div>
+      </div>
+      <div
+        class="mt-1 mb-3 text-sm"
+      >
+        <div
+          class="flex items-start"
         >
           <div
-            class="flex mt-1"
+            class="flex items-center h-5"
           >
             <input
-              checked=""
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-              id="theme_system"
-              name="theme"
-              type="radio"
-              value="SYSTEM"
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              id="colors"
+              type="checkbox"
             />
-            <label
-              class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-              for="theme_system"
-            >
-              System
-            </label>
           </div>
           <div
-            class="flex mt-1"
+            class="ml-3 "
           >
-            <input
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-              id="theme_light"
-              name="theme"
-              type="radio"
-              value="LIGHT"
-            />
             <label
-              class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-              for="theme_light"
+              class="font-medium text-gray-700 dark:text-gray-200"
+              for="colors"
+              style=""
             >
-              Light
-            </label>
-          </div>
-          <div
-            class="flex mt-1"
-          >
-            <input
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-              id="theme_dark"
-              name="theme"
-              type="radio"
-              value="DARK"
-            />
-            <label
-              class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-              for="theme_dark"
-            >
-              Dark
+              Use GitHub-like state colors
             </label>
           </div>
         </div>
       </div>
       <div
-        class="flex items-start mt-1 mb-3"
+        class="mt-1 mb-3 text-sm"
       >
         <div
-          class="flex items-center h-5"
+          class="flex items-start"
         >
-          <input
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-            id="colors"
-            type="checkbox"
-          />
-        </div>
-        <div
-          class="ml-3 text-sm"
-        >
-          <label
-            class="font-medium text-gray-700 dark:text-gray-200"
-            for="colors"
-            style=""
+          <div
+            class="flex items-center h-5"
           >
-            Use GitHub-like state colors
-          </label>
-        </div>
-      </div>
-      <div
-        class="flex items-start mt-1 mb-3"
-      >
-        <div
-          class="flex items-center h-5"
-        >
-          <input
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-            id="showAccountHostname"
-            type="checkbox"
-          />
-        </div>
-        <div
-          class="ml-3 text-sm"
-        >
-          <label
-            class="font-medium text-gray-700 dark:text-gray-200"
-            for="showAccountHostname"
+            <input
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              id="showAccountHostname"
+              type="checkbox"
+            />
+          </div>
+          <div
+            class="ml-3 "
           >
-            Show account hostname
-          </label>
+            <label
+              class="font-medium text-gray-700 dark:text-gray-200"
+              for="showAccountHostname"
+            >
+              Show account hostname
+            </label>
+          </div>
         </div>
       </div>
     </fieldset>
@@ -199,79 +216,91 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
       class="mb-3"
     >
       <legend
-        class="font-semibold  mt-2 mb-1"
+        class="font-semibold mt-2 mb-1"
         id="notifications"
       >
         Notifications
       </legend>
       <div
-        class="flex items-start mt-1 mb-3"
+        class="mt-1 mb-3 text-sm"
       >
         <div
-          class="flex items-center h-5"
+          class="flex items-start"
         >
-          <input
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-            id="showOnlyParticipating"
-            type="checkbox"
-          />
-        </div>
-        <div
-          class="ml-3 text-sm"
-        >
-          <label
-            class="font-medium text-gray-700 dark:text-gray-200"
-            for="showOnlyParticipating"
+          <div
+            class="flex items-center h-5"
           >
-            Show only participating
-          </label>
+            <input
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              id="showOnlyParticipating"
+              type="checkbox"
+            />
+          </div>
+          <div
+            class="ml-3 "
+          >
+            <label
+              class="font-medium text-gray-700 dark:text-gray-200"
+              for="showOnlyParticipating"
+            >
+              Show only participating
+            </label>
+          </div>
         </div>
       </div>
       <div
-        class="flex items-start mt-1 mb-3"
+        class="mt-1 mb-3 text-sm"
       >
         <div
-          class="flex items-center h-5"
+          class="flex items-start"
         >
-          <input
-            checked=""
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-            id="showBots"
-            type="checkbox"
-          />
-        </div>
-        <div
-          class="ml-3 text-sm"
-        >
-          <label
-            class="font-medium text-gray-700 dark:text-gray-200"
-            for="showBots"
+          <div
+            class="flex items-center h-5"
           >
-            Show notifications from Bot accounts
-          </label>
+            <input
+              checked=""
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              id="showBots"
+              type="checkbox"
+            />
+          </div>
+          <div
+            class="ml-3 "
+          >
+            <label
+              class="font-medium text-gray-700 dark:text-gray-200"
+              for="showBots"
+            >
+              Show notifications from Bot accounts
+            </label>
+          </div>
         </div>
       </div>
       <div
-        class="flex items-start mt-1 mb-3"
+        class="mt-1 mb-3 text-sm"
       >
         <div
-          class="flex items-center h-5"
+          class="flex items-start"
         >
-          <input
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-            id="markAsDoneOnOpen"
-            type="checkbox"
-          />
-        </div>
-        <div
-          class="ml-3 text-sm"
-        >
-          <label
-            class="font-medium text-gray-700 dark:text-gray-200"
-            for="markAsDoneOnOpen"
+          <div
+            class="flex items-center h-5"
           >
-            Mark as done on open
-          </label>
+            <input
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              id="markAsDoneOnOpen"
+              type="checkbox"
+            />
+          </div>
+          <div
+            class="ml-3 "
+          >
+            <label
+              class="font-medium text-gray-700 dark:text-gray-200"
+              for="markAsDoneOnOpen"
+            >
+              Mark as done on open
+            </label>
+          </div>
         </div>
       </div>
     </fieldset>
@@ -279,103 +308,124 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
       class="mb-3"
     >
       <legend
-        class="font-semibold  mt-2 mb-1"
+        class="font-semibold mt-2 mb-1"
         id="system"
       >
         System
       </legend>
       <div
-        class="flex items-start mt-1 mb-3"
+        class="mt-1 mb-3 text-sm"
       >
         <div
-          class="flex items-center h-5"
+          class="flex items-start"
         >
-          <input
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-            id="showNotificationsCountInTray"
-            type="checkbox"
-          />
+          <div
+            class="flex items-center h-5"
+          >
+            <input
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              id="showNotificationsCountInTray"
+              type="checkbox"
+            />
+          </div>
+          <div
+            class="ml-3 "
+          >
+            <label
+              class="font-medium text-gray-700 dark:text-gray-200"
+              for="showNotificationsCountInTray"
+            >
+              Show notifications count in tray
+            </label>
+          </div>
         </div>
         <div
-          class="ml-3 text-sm"
+          class="text-xs mt-1 italic text-gray-500 dark:text-gray-300"
         >
-          <label
-            class="font-medium text-gray-700 dark:text-gray-200"
-            for="showNotificationsCountInTray"
-          >
-            Show notifications count in tray
-          </label>
+          Changes will take effect after restarting the app
         </div>
       </div>
       <div
-        class="flex items-start mt-1 mb-3"
+        class="mt-1 mb-3 text-sm"
       >
         <div
-          class="flex items-center h-5"
+          class="flex items-start"
         >
-          <input
-            checked=""
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-            id="showNotifications"
-            type="checkbox"
-          />
-        </div>
-        <div
-          class="ml-3 text-sm"
-        >
-          <label
-            class="font-medium text-gray-700 dark:text-gray-200"
-            for="showNotifications"
+          <div
+            class="flex items-center h-5"
           >
-            Show system notifications
-          </label>
+            <input
+              checked=""
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              id="showNotifications"
+              type="checkbox"
+            />
+          </div>
+          <div
+            class="ml-3 "
+          >
+            <label
+              class="font-medium text-gray-700 dark:text-gray-200"
+              for="showNotifications"
+            >
+              Show system notifications
+            </label>
+          </div>
         </div>
       </div>
       <div
-        class="flex items-start mt-1 mb-3"
+        class="mt-1 mb-3 text-sm"
       >
         <div
-          class="flex items-center h-5"
+          class="flex items-start"
         >
-          <input
-            checked=""
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-            id="playSound"
-            type="checkbox"
-          />
-        </div>
-        <div
-          class="ml-3 text-sm"
-        >
-          <label
-            class="font-medium text-gray-700 dark:text-gray-200"
-            for="playSound"
+          <div
+            class="flex items-center h-5"
           >
-            Play sound
-          </label>
+            <input
+              checked=""
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              id="playSound"
+              type="checkbox"
+            />
+          </div>
+          <div
+            class="ml-3 "
+          >
+            <label
+              class="font-medium text-gray-700 dark:text-gray-200"
+              for="playSound"
+            >
+              Play sound
+            </label>
+          </div>
         </div>
       </div>
       <div
-        class="flex items-start mt-1 mb-3"
+        class="mt-1 mb-3 text-sm"
       >
         <div
-          class="flex items-center h-5"
+          class="flex items-start"
         >
-          <input
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-            id="openAtStartUp"
-            type="checkbox"
-          />
-        </div>
-        <div
-          class="ml-3 text-sm"
-        >
-          <label
-            class="font-medium text-gray-700 dark:text-gray-200"
-            for="openAtStartUp"
+          <div
+            class="flex items-center h-5"
           >
-            Open at startup
-          </label>
+            <input
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              id="openAtStartUp"
+              type="checkbox"
+            />
+          </div>
+          <div
+            class="ml-3 "
+          >
+            <label
+              class="font-medium text-gray-700 dark:text-gray-200"
+              for="openAtStartUp"
+            >
+              Open at startup
+            </label>
+          </div>
         </div>
       </div>
     </fieldset>

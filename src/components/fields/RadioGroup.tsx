@@ -1,7 +1,7 @@
 import type { ChangeEvent, FC, ReactNode } from 'react';
 import type { RadioGroupItem } from '../../types';
 
-interface IRadioGroup {
+export interface IRadioGroup {
   name: string;
   label: string;
   helpText?: ReactNode | string;
@@ -59,6 +59,7 @@ export const FieldRadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
           })}
         </div>
       </div>
+
       {props.helpText && (
         <div className="text-xs mt-1 italic text-gray-500 dark:text-gray-300">
           {props.helpText}

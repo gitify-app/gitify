@@ -2,13 +2,13 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import * as TestRendener from 'react-test-renderer';
 
-import { FieldRadioGroup } from './RadioGroup';
+import { FieldRadioGroup, type IRadioGroup } from './RadioGroup';
 
-describe('components/fields/radiogroup.tsx', () => {
-  const props = {
+describe('components/fields/RadioGroup.tsx', () => {
+  const props: IRadioGroup = {
     label: 'Appearance',
     name: 'appearance',
-    placeholder: 'This is some helper text',
+    helpText: 'This is some helper text',
     options: [
       { label: 'Value 1', value: 'one' },
       { label: 'Value 2', value: 'two' },
@@ -17,7 +17,7 @@ describe('components/fields/radiogroup.tsx', () => {
     value: 'two',
   };
 
-  it('should render ', () => {
+  it('should render', () => {
     const tree = TestRendener.create(<FieldRadioGroup {...props} />);
     expect(tree).toMatchSnapshot();
   });

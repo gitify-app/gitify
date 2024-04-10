@@ -1,7 +1,7 @@
 import type { FC, ReactNode } from 'react';
 import { Field } from 'react-final-form';
 
-export interface IProps {
+export interface IFieldInput {
   name: string;
   type?: string;
   label: string;
@@ -10,7 +10,7 @@ export interface IProps {
   required?: boolean;
 }
 
-export const FieldInput: FC<IProps> = ({
+export const FieldInput: FC<IFieldInput> = ({
   label,
   name,
   placeholder = '',
