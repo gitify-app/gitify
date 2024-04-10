@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import * as TestRendener from 'react-test-renderer';
+import * as TestRenderer from 'react-test-renderer';
 
 import { FieldRadioGroup } from './RadioGroup';
 
@@ -18,7 +18,7 @@ describe('components/fields/radiogroup.tsx', () => {
   };
 
   it('should render ', () => {
-    const tree = TestRendener.create(<FieldRadioGroup {...props} />);
+    const tree = TestRenderer.create(<FieldRadioGroup {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
