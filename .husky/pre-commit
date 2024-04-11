@@ -1,2 +1,2 @@
 pnpx lint-staged
-pnpm test -- --onlyChanged
+pnpm test
