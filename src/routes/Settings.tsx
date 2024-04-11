@@ -16,8 +16,8 @@ import {
 } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { FieldCheckbox } from '../components/fields/Checkbox';
-import { FieldRadioGroup } from '../components/fields/RadioGroup';
+import { Checkbox } from '../components/fields/Checkbox';
+import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
 import { Theme } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
@@ -118,7 +118,7 @@ export const SettingsRoute: FC = () => {
           <legend id="appearance" className="font-semibold mt-2 mb-1">
             Appearance
           </legend>
-          <FieldRadioGroup
+          <RadioGroup
             name="theme"
             label="Theme:"
             value={settings.theme}
@@ -131,7 +131,7 @@ export const SettingsRoute: FC = () => {
               updateSetting('theme', evt.target.value);
             }}
           />
-          <FieldCheckbox
+          <Checkbox
             name="colors"
             label={`Use GitHub-like state colors${
               !colorScope ? ' (requires repo scope)' : ''
@@ -142,7 +142,7 @@ export const SettingsRoute: FC = () => {
             }
             disabled={!colorScope}
           />
-          <FieldCheckbox
+          <Checkbox
             name="showAccountHostname"
             label="Show account hostname"
             checked={settings.showAccountHostname}
@@ -153,10 +153,10 @@ export const SettingsRoute: FC = () => {
         </fieldset>
 
         <fieldset className="mb-3">
-          <legend id="notifications" className="font-semibold  mt-2 mb-1">
+          <legend id="notifications" className="font-semibold mt-2 mb-1">
             Notifications
           </legend>
-          <FieldCheckbox
+          <Checkbox
             name="showOnlyParticipating"
             label="Show only participating"
             checked={settings.participating}
@@ -164,13 +164,13 @@ export const SettingsRoute: FC = () => {
               updateSetting('participating', evt.target.checked)
             }
           />
-          <FieldCheckbox
+          <Checkbox
             name="showBots"
             label="Show notifications from Bot accounts"
             checked={settings.showBots}
             onChange={(evt) => updateSetting('showBots', evt.target.checked)}
           />
-          <FieldCheckbox
+          <Checkbox
             name="markAsDoneOnOpen"
             label="Mark as done on open"
             checked={settings.markAsDoneOnOpen}
@@ -181,18 +181,19 @@ export const SettingsRoute: FC = () => {
         </fieldset>
 
         <fieldset className="mb-3">
-          <legend id="system" className="font-semibold  mt-2 mb-1">
+          <legend id="system" className="font-semibold mt-2 mb-1">
             System
           </legend>
-          <FieldCheckbox
+          <Checkbox
             name="showNotificationsCountInTray"
             label="Show notifications count in tray"
             checked={settings.showNotificationsCountInTray}
             onChange={(evt) =>
               updateSetting('showNotificationsCountInTray', evt.target.checked)
             }
+            helpText="Changes will take effect after restarting the app"
           />
-          <FieldCheckbox
+          <Checkbox
             name="showNotifications"
             label="Show system notifications"
             checked={settings.showNotifications}
@@ -200,14 +201,14 @@ export const SettingsRoute: FC = () => {
               updateSetting('showNotifications', evt.target.checked)
             }
           />
-          <FieldCheckbox
+          <Checkbox
             name="playSound"
             label="Play sound"
             checked={settings.playSound}
             onChange={(evt) => updateSetting('playSound', evt.target.checked)}
           />
           {!isLinux && (
-            <FieldCheckbox
+            <Checkbox
               name="openAtStartUp"
               label="Open at startup"
               checked={settings.openAtStartup}
