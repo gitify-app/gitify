@@ -244,7 +244,7 @@ export const SettingsRoute: FC = () => {
           <button
             type="button"
             className={footerButtonClass}
-            title={`Logout ${accounts.user.login}`}
+            title={`Logout from ${accounts.user.login}`}
             role="button"
             onClick={logoutUser}
           >

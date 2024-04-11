@@ -416,7 +416,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
       <button
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
         role="button"
-        title="Logout octocat"
+        title="Logout from octocat"
         type="button"
       >
         <svg
