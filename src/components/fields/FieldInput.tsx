@@ -31,7 +31,7 @@ export const FieldInput: FC<IProps> = ({
 
           <input
             type={type}
-            className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
+            className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
             id={input.name}
             placeholder={placeholder}
             required={required}
