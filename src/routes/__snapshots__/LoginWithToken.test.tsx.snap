@@ -39,7 +39,7 @@ exports[`routes/LoginWithToken.tsx renders correctly 1`] = `
     <h3
       className="text-lg font-semibold"
     >
-      Login with personal access token
+      Login with Personal Access Token
     </h3>
   </div>
   <div
@@ -58,7 +58,7 @@ exports[`routes/LoginWithToken.tsx renders correctly 1`] = `
           Token
         </label>
         <input
-          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
+          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
           id="token"
           name="token"
           onBlur={[Function]}
@@ -72,27 +72,22 @@ exports[`routes/LoginWithToken.tsx renders correctly 1`] = `
         <div
           className="mt-3 text-gray-700 dark:text-gray-200 text-xs"
         >
-          To generate a token, go to GitHub,
-           
-          <button
-            className="underline hover:text-gray-500 dark:hover:text-gray-300  cursor-pointer"
-            onClick={[Function]}
-            type="button"
-          >
-            personal access tokens
-          </button>
-           
-          and create one with the 
-          3
-           scopes
-           
-          <span
-            className="underline font-extrabold text-yellow-500"
-          >
-            read:user, notifications, repo
-             
-          </span>
-          .
+          <div>
+            <div>
+              Create a Personal Access Token on GitHub and paste above.
+            </div>
+            <div>
+              The required scopes will be selected for you.
+               
+              <button
+                className="px-2 py-1 my-2 text-xs rounded bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer"
+                onClick={[Function]}
+                type="button"
+              >
+                Generate a PAT
+              </button>
+            </div>
+          </div>
         </div>
       </div>
       <div
@@ -105,7 +100,7 @@ exports[`routes/LoginWithToken.tsx renders correctly 1`] = `
           Hostname
         </label>
         <input
-          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
+          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
           id="hostname"
           name="hostname"
           onBlur={[Function]}
@@ -119,11 +114,20 @@ exports[`routes/LoginWithToken.tsx renders correctly 1`] = `
         <div
           className="mt-3 text-gray-700 dark:text-gray-200 text-xs"
         >
-          Defaults to github.com. Change only if you are using GitHub for Enterprise.
+          <div>
+            <div>
+              Defaults to github.com.
+            </div>
+            <div
+              className="italic"
+            >
+              Change only if you are using GitHub Enterprise Server.
+            </div>
+          </div>
         </div>
       </div>
       <button
-        className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
+        className="float-right px-4 py-2 my-4 rounded bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer"
         disabled={true}
         title="Submit Button"
         type="submit"

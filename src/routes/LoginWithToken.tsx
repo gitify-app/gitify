@@ -10,6 +10,8 @@ import type { AuthTokenOptions } from '../types';
 import { openExternalLink } from '../utils/comms';
 import { Constants } from '../utils/constants';
 
+import { format } from 'date-fns';
+
 interface IValues {
   token?: string;
   hostname?: string;
@@ -53,6 +55,9 @@ export const LoginWithToken: FC = () => {
   const renderForm = (formProps: FormRenderProps) => {
     const { handleSubmit, submitting, pristine, values } = formProps;
 
+    const buttonClasses =
+      'rounded bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer';
+
     return (
       <form onSubmit={handleSubmit}>
         <FieldInput
@@ -60,25 +65,21 @@ export const LoginWithToken: FC = () => {
           label="Token"
           placeholder="The 40 characters token generated on GitHub"
           helpText={
-            <>
-              To generate a token, go to GitHub,{' '}
-              <button
-                type="button"
-                className="underline hover:text-gray-500 dark:hover:text-gray-300  cursor-pointer"
-                onClick={() =>
-                  openLink(
-                    'https://github.com/settings/tokens/new?scopes=notifications,read:user,repo&description=gitify_token',
-                  )
-                }
-              >
-                personal access tokens
-              </button>{' '}
-              and create one with the {Constants.AUTH_SCOPE.length} scopes{' '}
-              <span className="underline font-extrabold text-yellow-500">
-                {Constants.AUTH_SCOPE.join(', ')}{' '}
-              </span>
-              .
-            </>
+            <div>
+              <div>
+                Create a Personal Access Token on GitHub and paste above.
+              </div>
+              <div>
+                The required scopes will be selected for you.{' '}
+                <button
+                  type="button"
+                  className={`px-2 py-1 my-2 text-xs ${buttonClasses}`}
+                  onClick={() => openLink(getNewTokenURL())}
+                >
+                  Generate a PAT
+                </button>
+              </div>
+            </div>
           }
         />
 
@@ -86,7 +87,14 @@ export const LoginWithToken: FC = () => {
           name="hostname"
           label="Hostname"
           placeholder="github.company.com"
-          helpText="Defaults to github.com. Change only if you are using GitHub for Enterprise."
+          helpText={
+            <div>
+              <div>Defaults to github.com.</div>
+              <div className="italic">
+                Change only if you are using GitHub Enterprise Server.
+              </div>
+            </div>
+          }
         />
 
         {!isValidToken && (
@@ -96,7 +104,7 @@ export const LoginWithToken: FC = () => {
         )}
 
         <button
-          className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
+          className={`float-right px-4 py-2 my-4 ${buttonClasses}`}
           title="Submit Button"
           disabled={submitting || pristine}
           type="submit"
@@ -134,7 +142,7 @@ export const LoginWithToken: FC = () => {
         </button>
 
         <h3 className="text-lg font-semibold">
-          Login with personal access token
+          Login with Personal Access Token
         </h3>
       </div>
 
@@ -153,3 +161,12 @@ export const LoginWithToken: FC = () => {
     </div>
   );
 };
+
+function getNewTokenURL(): string {
+  const date = format(new Date(), 'PP p');
+  const newTokenURL = new URL('https://github.com/settings/tokens/new');
+  newTokenURL.searchParams.append('description', `Gitify (Created on ${date})`);
+  newTokenURL.searchParams.append('scopes', Constants.AUTH_SCOPE.join(','));
+
+  return newTokenURL.toString();
+}

@@ -72,7 +72,7 @@ describe('routes/LoginWithToken.tsx', () => {
     expect(validate(values).token).toBe('Invalid token.');
   });
 
-  it("should click on the 'personal access tokens' link and open the browser", async () => {
+  it("should click on the 'Generate a PAT' link and open the browser", async () => {
     render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
         <MemoryRouter>
@@ -81,7 +81,7 @@ describe('routes/LoginWithToken.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByText('personal access tokens'));
+    fireEvent.click(screen.getByText('Generate a PAT'));
 
     expect(openExternalMock).toHaveBeenCalledTimes(1);
   });
