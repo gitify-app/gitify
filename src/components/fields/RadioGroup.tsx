@@ -11,7 +11,7 @@ export interface IRadioGroup {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export const FieldRadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
+export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
   return (
     <div className="mt-1 mb-3 text-sm">
       <div className="flex items-start">

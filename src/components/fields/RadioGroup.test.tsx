@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 
 import * as TestRenderer from 'react-test-renderer';
 
-import { FieldRadioGroup, type IRadioGroup } from './RadioGroup';
+import { type IRadioGroup, RadioGroup } from './RadioGroup';
 
 describe('components/fields/RadioGroup.tsx', () => {
   const props: IRadioGroup = {
@@ -18,19 +18,19 @@ describe('components/fields/RadioGroup.tsx', () => {
   };
 
   it('should render', () => {
-    const tree = TestRenderer.create(<FieldRadioGroup {...props} />);
+    const tree = TestRenderer.create(<RadioGroup {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('should render as disabled', () => {
     const mockProps = { ...props, disabled: true };
 
-    const tree = TestRenderer.create(<FieldRadioGroup {...mockProps} />);
+    const tree = TestRenderer.create(<RadioGroup {...mockProps} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('should check that NProgress is getting called in getDerivedStateFromProps (loading)', () => {
-    render(<FieldRadioGroup {...props} />);
+    render(<RadioGroup {...props} />);
     fireEvent.click(screen.getByLabelText('Value 1'));
     expect(props.onChange).toHaveBeenCalledTimes(1);
   });

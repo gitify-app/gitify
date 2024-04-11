@@ -17,7 +17,7 @@ import {
 import { useNavigate } from 'react-router-dom';
 
 import { Checkbox } from '../components/fields/Checkbox';
-import { FieldRadioGroup } from '../components/fields/RadioGroup';
+import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
 import { Theme } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
@@ -118,7 +118,7 @@ export const SettingsRoute: FC = () => {
           <legend id="appearance" className="font-semibold mt-2 mb-1">
             Appearance
           </legend>
-          <FieldRadioGroup
+          <RadioGroup
             name="theme"
             label="Theme:"
             value={settings.theme}
@@ -130,7 +130,6 @@ export const SettingsRoute: FC = () => {
             onChange={(evt) => {
               updateSetting('theme', evt.target.value);
             }}
-            helpText="Changes will take effect after restarting the app"
           />
           <Checkbox
             name="colors"
