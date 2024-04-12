@@ -1,67 +1,148 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/fields/radiogroup.tsx should render  1`] = `
+exports[`components/fields/RadioGroup.tsx should render 1`] = `
 <div
-  className="flex items-start mt-1 mb-3"
+  className="mt-1 mb-3 text-sm"
 >
   <div
-    className="mr-3 text-sm py-1"
+    className="flex items-start"
   >
-    <label
-      className="font-medium text-gray-700 dark:text-gray-200 "
-      htmlFor="appearance"
-    >
-      Appearance
-    </label>
     <div
-      className="italic text-gray-500 dark:text-gray-300"
+      className="mr-3 py-1"
     >
-      This is some helper text
+      <label
+        className="font-medium text-gray-700 dark:text-gray-200 "
+        htmlFor="appearance"
+      >
+        Appearance
+      </label>
+    </div>
+    <div
+      aria-labelledby="appearance"
+      className="flex items-center space-x-4"
+      role="group"
+    >
+      <div
+        className="flex mt-1"
+      >
+        <input
+          checked={false}
+          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+          id="appearance_one"
+          name="appearance"
+          onChange={[MockFunction]}
+          type="radio"
+          value="one"
+        />
+        <label
+          className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+          htmlFor="appearance_one"
+        >
+          Value 1
+        </label>
+      </div>
+      <div
+        className="flex mt-1"
+      >
+        <input
+          checked={true}
+          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+          id="appearance_two"
+          name="appearance"
+          onChange={[MockFunction]}
+          type="radio"
+          value="two"
+        />
+        <label
+          className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+          htmlFor="appearance_two"
+        >
+          Value 2
+        </label>
+      </div>
     </div>
   </div>
   <div
-    aria-labelledby="appearance"
-    className="flex items-center space-x-4"
-    role="group"
+    className="text-xs mt-1 italic text-gray-500 dark:text-gray-300"
+  >
+    This is some helper text
+  </div>
+</div>
+`;
+
+exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
+<div
+  className="mt-1 mb-3 text-sm"
+>
+  <div
+    className="flex items-start"
   >
     <div
-      className="flex mt-1"
+      className="mr-3 py-1"
     >
-      <input
-        checked={false}
-        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-        id="appearance_one"
-        name="appearance"
-        onChange={[MockFunction]}
-        type="radio"
-        value="one"
-      />
       <label
-        className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-        htmlFor="appearance_one"
+        className="font-medium text-gray-700 dark:text-gray-200 "
+        htmlFor="appearance"
+        style={
+          {
+            "textDecoration": "line-through",
+          }
+        }
       >
-        Value 1
+        Appearance
       </label>
     </div>
     <div
-      className="flex mt-1"
+      aria-labelledby="appearance"
+      className="flex items-center space-x-4"
+      role="group"
     >
-      <input
-        checked={true}
-        className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-        id="appearance_two"
-        name="appearance"
-        onChange={[MockFunction]}
-        type="radio"
-        value="two"
-      />
-      <label
-        className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-        htmlFor="appearance_two"
+      <div
+        className="flex mt-1"
       >
-        Value 2
-      </label>
+        <input
+          checked={false}
+          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+          disabled={true}
+          id="appearance_one"
+          name="appearance"
+          onChange={[MockFunction]}
+          type="radio"
+          value="one"
+        />
+        <label
+          className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+          htmlFor="appearance_one"
+        >
+          Value 1
+        </label>
+      </div>
+      <div
+        className="flex mt-1"
+      >
+        <input
+          checked={true}
+          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+          disabled={true}
+          id="appearance_two"
+          name="appearance"
+          onChange={[MockFunction]}
+          type="radio"
+          value="two"
+        />
+        <label
+          className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+          htmlFor="appearance_two"
+        >
+          Value 2
+        </label>
+      </div>
     </div>
+  </div>
+  <div
+    className="text-xs mt-1 italic text-gray-500 dark:text-gray-300"
+  >
+    This is some helper text
   </div>
 </div>
 `;

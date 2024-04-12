@@ -58,7 +58,7 @@ exports[`routes/LoginEnterprise.tsx renders correctly 1`] = `
           Hostname
         </label>
         <input
-          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
+          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
           id="hostname"
           name="hostname"
           onBlur={[Function]}
@@ -80,7 +80,7 @@ exports[`routes/LoginEnterprise.tsx renders correctly 1`] = `
           Client ID
         </label>
         <input
-          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
+          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
           id="clientId"
           name="clientId"
           onBlur={[Function]}
@@ -102,7 +102,7 @@ exports[`routes/LoginEnterprise.tsx renders correctly 1`] = `
           Client Secret
         </label>
         <input
-          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
+          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
           id="clientSecret"
           name="clientSecret"
           onBlur={[Function]}
