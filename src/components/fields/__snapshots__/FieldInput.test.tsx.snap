@@ -14,7 +14,7 @@ exports[`components/fields/FieldInput.tsx should render 1`] = `
       Appearance
     </label>
     <input
-      className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none"
+      className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
       id="appearance"
       name="appearance"
       onBlur={[Function]}
