@@ -102,11 +102,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     fetchNotifications(accounts, settings);
-  }, [settings.participating, settings.showBots]);
-
-  useEffect(() => {
-    fetchNotifications(accounts, settings);
-  }, [accounts.token, accounts.enterpriseAccounts.length]);
+  }, [accounts, settings]);
 
   useEffect(() => {
     const count = getNotificationCount(notifications);
@@ -116,7 +112,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     } else {
       updateTrayTitle();
     }
-  }, [settings.showNotificationsCountInTray, notifications]);
+  }, [settings.showNotificationsCountInTray]);
 
   useInterval(() => {
     fetchNotifications(accounts, settings);
