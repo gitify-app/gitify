@@ -25,6 +25,7 @@ exports[`routes/Settings.tsx should not be able to enable colors due to missing 
       Use GitHub-like state colors (requires repo scope)
       <span
         class="relative"
+        title="tooltip"
       >
         <svg
           aria-hidden="true"
@@ -195,6 +196,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
               Use GitHub-like state colors
               <span
                 class="relative"
+                title="tooltip"
               >
                 <svg
                   aria-hidden="true"

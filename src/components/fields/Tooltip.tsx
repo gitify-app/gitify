@@ -10,6 +10,7 @@ export const Tooltip: FC<ITooltip> = (props: ITooltip) => {
 
   return (
     <span
+      title="tooltip"
       className="relative"
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
