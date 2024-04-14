@@ -67,17 +67,17 @@ export const LoginWithToken: FC = () => {
           helpText={
             <div>
               <div>
-                Create a Personal Access Token on GitHub and paste above.
-              </div>
-              <div>
-                The required scopes will be selected for you.{' '}
                 <button
                   type="button"
-                  className={`px-2 py-1 my-2 text-xs ${buttonClasses}`}
+                  className={`px-2 py-1 text-xs ${buttonClasses}`}
                   onClick={() => openLink(getNewTokenURL())}
                 >
                   Generate a PAT
-                </button>
+                </button>{' '}
+                on GitHub and paste above.
+              </div>
+              <div className="italic mt-1">
+                The required scopes will be selected for you.
               </div>
             </div>
           }
@@ -90,7 +90,7 @@ export const LoginWithToken: FC = () => {
           helpText={
             <div>
               <div>Defaults to github.com.</div>
-              <div className="italic">
+              <div className="italic mt-1">
                 Change only if you are using GitHub Enterprise Server.
               </div>
             </div>
