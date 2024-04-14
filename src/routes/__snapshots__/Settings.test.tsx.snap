@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`routes/Settings.tsx should not be able to enable colors due to missing scope 1`] = `
+exports[`routes/Settings.tsx should not be able to enable detailed notifications due to missing scope 1`] = `
 <div
   class="flex items-start"
 >
@@ -10,7 +10,7 @@ exports[`routes/Settings.tsx should not be able to enable colors due to missing 
     <input
       class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
       disabled=""
-      id="colors"
+      id="detailedNotifications"
       type="checkbox"
     />
   </div>
@@ -19,10 +19,10 @@ exports[`routes/Settings.tsx should not be able to enable colors due to missing 
   >
     <label
       class="font-medium text-gray-700 dark:text-gray-200"
-      for="colors"
+      for="detailedNotifications"
       style="text-decoration: line-through;"
     >
-      Use GitHub-like state colors (requires repo scope)
+      Detailed notifications (requires repo scope)
     </label>
   </div>
 </div>
@@ -162,7 +162,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           >
             <input
               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-              id="colors"
+              id="detailedNotifications"
               type="checkbox"
             />
           </div>
@@ -171,10 +171,10 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
-              for="colors"
+              for="detailedNotifications"
               style=""
             >
-              Use GitHub-like state colors
+              Detailed notifications
             </label>
           </div>
         </div>

@@ -41,7 +41,7 @@ export const defaultSettings: SettingsState = {
   showNotificationsCountInTray: false,
   openAtStartup: false,
   theme: Theme.SYSTEM,
-  colors: null,
+  detailedNotifications: false,
   markAsDoneOnOpen: false,
   showAccountHostname: false,
 };
@@ -90,7 +90,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     unsubscribeNotification,
     markRepoNotifications,
     markRepoNotificationsDone,
-  } = useNotifications(settings.colors);
+  } = useNotifications();
 
   useEffect(() => {
     restoreSettings();

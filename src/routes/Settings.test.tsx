@@ -337,7 +337,7 @@ describe('routes/Settings.tsx', () => {
     expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
   });
 
-  it('should be able to enable colors', async () => {
+  it('should be able to enable detailed notifications', async () => {
     jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
       headers: {
         'x-oauth-scopes': Constants.AUTH_SCOPE.join(', '),
@@ -360,15 +360,15 @@ describe('routes/Settings.tsx', () => {
       );
     });
 
-    await screen.findByLabelText('Use GitHub-like state colors');
+    await screen.findByLabelText('Detailed notifications');
 
-    fireEvent.click(screen.getByLabelText('Use GitHub-like state colors'));
+    fireEvent.click(screen.getByLabelText('Detailed notifications'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('colors', true);
+    expect(updateSetting).toHaveBeenCalledWith('detailedNotifications', true);
   });
 
-  it('should not be able to enable colors due to missing scope', async () => {
+  it('should not be able to enable detailed notifications due to missing scope', async () => {
     jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
       headers: {
         'x-oauth-scopes': 'read:user, notifications',
@@ -393,29 +393,24 @@ describe('routes/Settings.tsx', () => {
 
     expect(
       screen
-        .getByLabelText('Use GitHub-like state colors (requires repo scope)')
+        .getByLabelText('Detailed notifications (requires repo scope)')
         .closest('input'),
     ).toHaveProperty('disabled', true);
 
     // click the checkbox
     fireEvent.click(
-      screen.getByLabelText(
-        'Use GitHub-like state colors (requires repo scope)',
-      ),
+      screen.getByLabelText('Detailed notifications (requires repo scope)'),
     );
 
     // check if the checkbox is still unchecked
     expect(updateSetting).not.toHaveBeenCalled();
     expect(
-      screen.getByLabelText(
-        'Use GitHub-like state colors (requires repo scope)',
-      ),
+      screen.getByLabelText('Detailed notifications (requires repo scope)'),
     ).not.toBe('checked');
 
     expect(
-      screen.getByLabelText(
-        'Use GitHub-like state colors (requires repo scope)',
-      ).parentNode.parentNode,
+      screen.getByLabelText('Detailed notifications (requires repo scope)')
+        .parentNode.parentNode,
     ).toMatchSnapshot();
   });
 

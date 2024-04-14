@@ -36,7 +36,7 @@ export const SettingsRoute: FC = () => {
 
   const [isLinux, setIsLinux] = useState<boolean>(false);
   const [appVersion, setAppVersion] = useState<string | null>(null);
-  const [colorScope, setColorScope] = useState<boolean>(false);
+  const [repoScope, setRepoScope] = useState<boolean>(false);
 
   const openGitHubReleaseNotes = useCallback((version) => {
     openExternalLink(
@@ -63,7 +63,7 @@ export const SettingsRoute: FC = () => {
       );
 
       if (response.headers['x-oauth-scopes'].includes('repo'))
-        setColorScope(true);
+        setRepoScope(true);
     })();
   }, [accounts.token]);
 
@@ -132,15 +132,16 @@ export const SettingsRoute: FC = () => {
             }}
           />
           <Checkbox
-            name="colors"
-            label={`Use GitHub-like state colors${
-              !colorScope ? ' (requires repo scope)' : ''
+            name="detailedNotifications"
+            label={`Detailed notifications${
+              !repoScope ? ' (requires repo scope)' : ''
             }`}
-            checked={colorScope && settings.colors}
+            checked={repoScope && settings.detailedNotifications}
             onChange={(evt) =>
-              colorScope && updateSetting('colors', evt.target.checked)
+              repoScope &&
+              updateSetting('detailedNotifications', evt.target.checked)
             }
-            disabled={!colorScope}
+            disabled={!repoScope}
           />
           <Checkbox
             name="showAccountHostname"

@@ -62,7 +62,7 @@ interface NotificationsState {
   errorDetails: GitifyError;
 }
 
-export const useNotifications = (colors: boolean): NotificationsState => {
+export const useNotifications = (): NotificationsState => {
   const [isFetching, setIsFetching] = useState(false);
   const [requestFailed, setRequestFailed] = useState(false);
   const [errorDetails, setErrorDetails] = useState<GitifyError>();
@@ -118,6 +118,7 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                 };
               },
             );
+
             const data = isGitHubLoggedIn(accounts)
               ? [
                   ...enterpriseNotifications,
@@ -135,17 +136,6 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                 ]
               : [...enterpriseNotifications];
 
-            if (colors === false) {
-              setNotifications(data);
-              triggerNativeNotifications(
-                notifications,
-                data,
-                settings,
-                accounts,
-              );
-              setIsFetching(false);
-              return;
-            }
             axios
               .all(
                 data.map(async (accountNotifications) => {
@@ -155,6 +145,10 @@ export const useNotifications = (colors: boolean): NotificationsState => {
                       .all<Notification>(
                         accountNotifications.notifications.map(
                           async (notification: Notification) => {
+                            if (!settings.detailedNotifications) {
+                              return notification;
+                            }
+
                             const token = getTokenForHost(
                               notification.hostname,
                               accounts,
