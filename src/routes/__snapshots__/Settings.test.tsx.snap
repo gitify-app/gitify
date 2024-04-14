@@ -214,11 +214,6 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             </label>
           </div>
         </div>
-        <div
-          class="text-xs mt-1 italic text-gray-500 dark:text-gray-300"
-        >
-          Changes will take effect after restarting the app
-        </div>
       </div>
       <div
         class="mt-1 mb-3 text-sm"

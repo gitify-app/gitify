@@ -141,16 +141,16 @@ export const SettingsRoute: FC = () => {
               colorScope && updateSetting('colors', evt.target.checked)
             }
             disabled={!colorScope}
-            helpText="Changes will take effect after restarting the app"
             tooltip={
               <div>
-                <div>
-                  Enabling this feature provides detailed state and last
-                  interaction user information.
+                <div className="pb-3">
+                  Enrich notifications with author or last commenter profile
+                  information, state and GitHub-like colors.
                 </div>
-                <div>
-                  Depending on the number of unread notifications, you may
-                  experience occasional rate limiting.
+                <div className="text-orange-600">
+                  ⚠️ Users with a large number of unread notifications <i>may</i>{' '}
+                  experience rate limiting under certain circumstances. Disable
+                  this setting if you experience this.
                 </div>
               </div>
             }
