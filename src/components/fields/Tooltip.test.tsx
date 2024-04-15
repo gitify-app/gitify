@@ -17,7 +17,7 @@ describe('components/fields/Tooltip.tsx', () => {
   it('should display on mouse enter / leave', () => {
     render(<Tooltip {...props} />);
 
-    const tooltipElement = screen.getByTitle('tooltip');
+    const tooltipElement = screen.getByLabelText('tooltip');
 
     fireEvent.mouseEnter(tooltipElement);
     expect(tooltipElement).toMatchSnapshot();

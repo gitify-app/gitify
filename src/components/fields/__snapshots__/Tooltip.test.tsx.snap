@@ -2,8 +2,8 @@
 
 exports[`components/fields/Tooltip.tsx should display on mouse enter / leave 1`] = `
 <span
+  aria-label="tooltip"
   class="relative"
-  title="tooltip"
 >
   <svg
     aria-hidden="true"
@@ -33,8 +33,8 @@ exports[`components/fields/Tooltip.tsx should display on mouse enter / leave 1`]
 
 exports[`components/fields/Tooltip.tsx should display on mouse enter / leave 2`] = `
 <span
+  aria-label="tooltip"
   class="relative"
-  title="tooltip"
 >
   <svg
     aria-hidden="true"
@@ -55,10 +55,10 @@ exports[`components/fields/Tooltip.tsx should display on mouse enter / leave 2`]
 
 exports[`components/fields/Tooltip.tsx should render 1`] = `
 <span
+  aria-label="tooltip"
   className="relative"
   onMouseEnter={[Function]}
   onMouseLeave={[Function]}
-  title="tooltip"
 >
   <svg
     aria-hidden="true"
