@@ -191,7 +191,6 @@ export const SettingsRoute: FC = () => {
             onChange={(evt) =>
               updateSetting('showNotificationsCountInTray', evt.target.checked)
             }
-            helpText="Changes will take effect after restarting the app"
           />
           <Checkbox
             name="showNotifications"
