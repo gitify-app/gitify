@@ -12,7 +12,7 @@ export type SettingsState = AppearanceSettingsState &
 
 interface AppearanceSettingsState {
   theme: Theme;
-  colors: boolean | null;
+  detailedNotifications: boolean;
   showAccountHostname: boolean;
 }
 

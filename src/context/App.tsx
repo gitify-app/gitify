@@ -41,7 +41,7 @@ export const defaultSettings: SettingsState = {
   showNotificationsCountInTray: false,
   openAtStartup: false,
   theme: Theme.SYSTEM,
-  colors: null,
+  detailedNotifications: false,
   markAsDoneOnOpen: false,
   showAccountHostname: false,
 };
@@ -90,7 +90,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     unsubscribeNotification,
     markRepoNotifications,
     markRepoNotificationsDone,
-  } = useNotifications(settings.colors);
+  } = useNotifications();
 
   useEffect(() => {
     restoreSettings();
@@ -100,14 +100,21 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setTheme(settings.theme as Theme);
   }, [settings.theme]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for a subset of settings changes.
   useEffect(() => {
     fetchNotifications(accounts, settings);
-  }, [settings.participating, settings.showBots]);
+  }, [
+    settings.participating,
+    settings.showBots,
+    settings.detailedNotifications,
+  ]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for certain account changes.
   useEffect(() => {
     fetchNotifications(accounts, settings);
   }, [accounts.token, accounts.enterpriseAccounts.length]);
 
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We need to update tray title when settings or notifications changes.
   useEffect(() => {
     const count = getNotificationCount(notifications);
 

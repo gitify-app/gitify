@@ -73,9 +73,6 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const reason = formatReason(notification.reason);
   const NotificationIcon = getNotificationTypeIcon(notification.subject);
   const iconColor = getNotificationTypeIconColor(notification.subject);
-  const realIconColor = settings
-    ? (settings.colors && iconColor) || ''
-    : iconColor;
   const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
     addSuffix: true,
   });
@@ -91,7 +88,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   return (
     <div className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group">
       <div
-        className={`flex justify-center items-center w-5 ${realIconColor}`}
+        className={`flex justify-center items-center w-5 ${iconColor}`}
         title={notificationTitle}
       >
         <NotificationIcon size={18} aria-label={notification.subject.type} />
