@@ -142,6 +142,19 @@ export const SettingsRoute: FC = () => {
               updateSetting('detailedNotifications', evt.target.checked)
             }
             disabled={!repoScope}
+            tooltip={
+              <div>
+                <div className="pb-3">
+                  Enrich notifications with author or last commenter profile
+                  information, state and GitHub-like colors.
+                </div>
+                <div className="text-orange-600">
+                  ⚠️ Users with a large number of unread notifications <i>may</i>{' '}
+                  experience rate limiting under certain circumstances. Disable
+                  this setting if you experience this.
+                </div>
+              </div>
+            }
           />
           <Checkbox
             name="showAccountHostname"

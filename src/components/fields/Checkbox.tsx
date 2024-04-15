@@ -1,9 +1,11 @@
 import type { FC, ReactNode } from 'react';
+import { Tooltip } from './Tooltip';
 
 export interface ICheckbox {
   name: string;
   label: string;
   helpText?: ReactNode | string;
+  tooltip?: ReactNode | string;
   checked: boolean;
   disabled?: boolean;
   onChange: (evt: React.ChangeEvent<HTMLInputElement>) => void;
@@ -33,6 +35,7 @@ export const Checkbox: FC<ICheckbox> = (props: ICheckbox) => {
             }
           >
             {props.label}
+            {props.tooltip && <Tooltip tooltip={props.tooltip} />}
           </label>
         </div>
       </div>
