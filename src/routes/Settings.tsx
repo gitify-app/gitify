@@ -8,6 +8,7 @@ import { ipcRenderer } from 'electron';
 
 import {
   type FC,
+  type MouseEvent,
   useCallback,
   useContext,
   useEffect,
@@ -43,6 +44,15 @@ export const SettingsRoute: FC = () => {
       `https://github.com/${Constants.REPO_SLUG}/releases/tag/v${version}`,
     );
   }, []);
+
+  const openGitHubParticipatingDocs = (event: MouseEvent<HTMLElement>) => {
+    // Don't trigger onClick of parent element.
+    event.stopPropagation();
+
+    openExternalLink(
+      'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications',
+    );
+  };
 
   useEffect(() => {
     ipcRenderer.invoke('get-platform').then((result: string) => {
@@ -176,6 +186,22 @@ export const SettingsRoute: FC = () => {
             checked={settings.participating}
             onChange={(evt) =>
               updateSetting('participating', evt.target.checked)
+            }
+            tooltip={
+              <div>
+                <div className="pb-3">
+                  See{' '}
+                  <button
+                    type="button"
+                    className="text-blue-500"
+                    title="Open GitHub documentation for participating and watching notifications"
+                    onClick={openGitHubParticipatingDocs}
+                  >
+                    official docs
+                  </button>{' '}
+                  for more details.
+                </div>
+              </div>
             }
           />
           <Checkbox

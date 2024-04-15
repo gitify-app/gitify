@@ -2,6 +2,7 @@ import { QuestionIcon } from '@primer/octicons-react';
 import { type FC, type ReactNode, useState } from 'react';
 
 export interface ITooltip {
+  name: string;
   tooltip: ReactNode | string;
 }
 
@@ -10,7 +11,8 @@ export const Tooltip: FC<ITooltip> = (props: ITooltip) => {
 
   return (
     <span
-      title="tooltip"
+      id={props.name}
+      aria-label={props.name}
       className="relative"
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
