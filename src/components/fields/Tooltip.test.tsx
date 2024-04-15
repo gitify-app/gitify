@@ -6,6 +6,7 @@ import { type ITooltip, Tooltip } from './Tooltip';
 
 describe('components/fields/Tooltip.tsx', () => {
   const props: ITooltip = {
+    name: 'tooltip',
     tooltip: 'This is some tooltip text',
   };
 
