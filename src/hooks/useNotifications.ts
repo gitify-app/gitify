@@ -174,7 +174,7 @@ export const useNotifications = (): NotificationsState => {
                         return notifications.filter((notification) => {
                           if (
                             !settings.showBots &&
-                            notification.subject?.user.type === 'Bot'
+                            notification.subject?.user?.type === 'Bot'
                           ) {
                             return false;
                           }

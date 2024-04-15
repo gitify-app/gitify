@@ -181,8 +181,21 @@ export const SettingsRoute: FC = () => {
           <Checkbox
             name="showBots"
             label="Show notifications from Bot accounts"
-            checked={settings.showBots}
+            checked={!settings.detailedNotifications || settings.showBots}
             onChange={(evt) => updateSetting('showBots', evt.target.checked)}
+            disabled={!settings.detailedNotifications}
+            tooltip={
+              <div>
+                <div className="pb-3">
+                  Show or hide notifications from Bot accounts, such as
+                  @dependabot, @renovatebot, etc
+                </div>
+                <div className="text-orange-600">
+                  ⚠️ This setting requires{' '}
+                  <strong>Detailed Notifications</strong> to be enabled.
+                </div>
+              </div>
+            }
           />
           <Checkbox
             name="markAsDoneOnOpen"
