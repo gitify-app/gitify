@@ -22,7 +22,7 @@ exports[`routes/Settings.tsx should not be able to enable detailed notifications
       for="detailedNotifications"
       style="text-decoration: line-through;"
     >
-      Use GitHub-like state colors (requires repo scope)
+      Detailed notifications (requires repo scope)
       <span
         class="relative"
         title="tooltip"
@@ -193,7 +193,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
               for="detailedNotifications"
               style=""
             >
-              Use GitHub-like state colors
+              Detailed notifications
               <span
                 class="relative"
                 title="tooltip"

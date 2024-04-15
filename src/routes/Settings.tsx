@@ -141,7 +141,7 @@ export const SettingsRoute: FC = () => {
               repoScope &&
               updateSetting('detailedNotifications', evt.target.checked)
             }
-            disabled={!colorScope}
+            disabled={!repoScope}
             tooltip={
               <div>
                 <div className="pb-3">
