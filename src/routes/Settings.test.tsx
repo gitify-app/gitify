@@ -154,12 +154,16 @@ describe('routes/Settings.tsx', () => {
     );
   });
 
-  it('should toggle the showBots checkbox', async () => {
+  it('should not be able to toggle the showBots checkbox when detailedNotifications is disabled', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
           value={{
-            settings: mockSettings,
+            settings: {
+              ...mockSettings,
+              detailedNotifications: false,
+              showBots: true,
+            },
             accounts: mockAccounts,
             updateSetting,
           }}
@@ -171,15 +175,104 @@ describe('routes/Settings.tsx', () => {
       );
     });
 
-    fireEvent.click(
-      screen.getByLabelText('Show notifications from Bot accounts'),
-      {
-        target: { checked: true },
-      },
+    const tooltipElement = screen.getByLabelText(
+      'tooltip-showOnlyParticipating',
     );
 
-    expect(updateSetting).toHaveBeenCalledTimes(1);
+    fireEvent.mouseEnter(tooltipElement);
+
+    fireEvent.click(
+      screen.getByTitle(
+        'Open GitHub documentation for participating and watching notifications',
+      ),
+    );
+
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(shell.openExternal).toHaveBeenCalledWith(
+      'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications',
+    );
+  });
+
+  it('should not be able to toggle the showBots checkbox when detailedNotifications is disabled', async () => {
+    await act(async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            settings: {
+              ...mockSettings,
+              detailedNotifications: false,
+              showBots: true,
+            },
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+    });
+
+    expect(
+      screen
+        .getByLabelText('Show notifications from Bot accounts')
+        .closest('input'),
+    ).toHaveProperty('disabled', true);
+
+    // click the checkbox
+    fireEvent.click(
+      screen.getByLabelText('Show notifications from Bot accounts'),
+    );
+
+    // check if the checkbox is still unchecked
+    expect(updateSetting).not.toHaveBeenCalled();
+
+    expect(
+      screen.getByLabelText('Show notifications from Bot accounts').parentNode
+        .parentNode,
+    ).toMatchSnapshot();
+  });
+
+  it('should be able to toggle the showBots checkbox when detailedNotifications is enabled', async () => {
+    await act(async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            settings: {
+              ...mockSettings,
+              detailedNotifications: true,
+              showBots: true,
+            },
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+    });
+
+    expect(
+      screen
+        .getByLabelText('Show notifications from Bot accounts')
+        .closest('input'),
+    ).toHaveProperty('disabled', false);
+
+    // click the checkbox
+    fireEvent.click(
+      screen.getByLabelText('Show notifications from Bot accounts'),
+    );
+
+    // check if the checkbox is still unchecked
     expect(updateSetting).toHaveBeenCalledWith('showBots', false);
+
+    expect(
+      screen.getByLabelText('Show notifications from Bot accounts').parentNode
+        .parentNode,
+    ).toMatchSnapshot();
   });
 
   it('should toggle the showNotificationsCountInTray checkbox', async () => {
