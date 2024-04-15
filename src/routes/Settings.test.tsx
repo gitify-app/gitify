@@ -137,7 +137,7 @@ describe('routes/Settings.tsx', () => {
     });
 
     const tooltipElement = screen.getByLabelText(
-      'showOnlyParticipating-tooltip',
+      'tooltip-showOnlyParticipating',
     );
 
     fireEvent.mouseEnter(tooltipElement);

@@ -36,7 +36,7 @@ export const Checkbox: FC<ICheckbox> = (props: ICheckbox) => {
           >
             {props.label}
             {props.tooltip && (
-              <Tooltip name={`${props.name}-tooltip`} tooltip={props.tooltip} />
+              <Tooltip name={`tooltip-${props.name}`} tooltip={props.tooltip} />
             )}
           </label>
         </div>

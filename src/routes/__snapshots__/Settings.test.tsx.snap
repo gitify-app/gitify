@@ -24,9 +24,9 @@ exports[`routes/Settings.tsx should not be able to enable detailed notifications
     >
       Detailed notifications (requires repo scope)
       <span
-        aria-label="detailedNotifications-tooltip"
+        aria-label="tooltip-detailedNotifications"
         class="relative"
-        id="detailedNotifications-tooltip"
+        id="tooltip-detailedNotifications"
       >
         <svg
           aria-hidden="true"
@@ -196,9 +196,9 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             >
               Detailed notifications
               <span
-                aria-label="detailedNotifications-tooltip"
+                aria-label="tooltip-detailedNotifications"
                 class="relative"
-                id="detailedNotifications-tooltip"
+                id="tooltip-detailedNotifications"
               >
                 <svg
                   aria-hidden="true"
@@ -280,9 +280,9 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             >
               Show only participating
               <span
-                aria-label="showOnlyParticipating-tooltip"
+                aria-label="tooltip-showOnlyParticipating"
                 class="relative"
-                id="showOnlyParticipating-tooltip"
+                id="tooltip-showOnlyParticipating"
               >
                 <svg
                   aria-hidden="true"
