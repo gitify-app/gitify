@@ -119,12 +119,16 @@ describe('routes/Settings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('participating', false);
   });
 
-  it('should toggle the showBots checkbox', async () => {
+  it('should not be able to toggle the showBots checkbox when detailedNotifications is disabled', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
           value={{
-            settings: mockSettings,
+            settings: {
+              ...mockSettings,
+              detailedNotifications: false,
+              showBots: true,
+            },
             accounts: mockAccounts,
             updateSetting,
           }}
@@ -136,15 +140,65 @@ describe('routes/Settings.tsx', () => {
       );
     });
 
+    expect(
+      screen
+        .getByLabelText('Show notifications from Bot accounts')
+        .closest('input'),
+    ).toHaveProperty('disabled', true);
+
+    // click the checkbox
     fireEvent.click(
       screen.getByLabelText('Show notifications from Bot accounts'),
-      {
-        target: { checked: true },
-      },
     );
 
-    expect(updateSetting).toHaveBeenCalledTimes(1);
+    // check if the checkbox is still unchecked
+    expect(updateSetting).not.toHaveBeenCalled();
+
+    expect(
+      screen.getByLabelText('Show notifications from Bot accounts').parentNode
+        .parentNode,
+    ).toMatchSnapshot();
+  });
+
+  it('should be able to toggle the showBots checkbox when detailedNotifications is enabled', async () => {
+    await act(async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            settings: {
+              ...mockSettings,
+              detailedNotifications: true,
+              showBots: true,
+            },
+            accounts: mockAccounts,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+    });
+
+    expect(
+      screen
+        .getByLabelText('Show notifications from Bot accounts')
+        .closest('input'),
+    ).toHaveProperty('disabled', false);
+
+    // click the checkbox
+    fireEvent.click(
+      screen.getByLabelText('Show notifications from Bot accounts'),
+    );
+
+    // check if the checkbox is still unchecked
     expect(updateSetting).toHaveBeenCalledWith('showBots', false);
+
+    expect(
+      screen.getByLabelText('Show notifications from Bot accounts').parentNode
+        .parentNode,
+    ).toMatchSnapshot();
   });
 
   it('should toggle the showNotificationsCountInTray checkbox', async () => {

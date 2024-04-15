@@ -182,7 +182,10 @@ export const SettingsRoute: FC = () => {
             name="showBots"
             label="Show notifications from Bot accounts"
             checked={!settings.detailedNotifications || settings.showBots}
-            onChange={(evt) => updateSetting('showBots', evt.target.checked)}
+            onChange={(evt) =>
+              settings.detailedNotifications &&
+              updateSetting('showBots', evt.target.checked)
+            }
             disabled={!settings.detailedNotifications}
             tooltip={
               <div>
