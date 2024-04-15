@@ -31,7 +31,7 @@ describe('hooks/useNotifications.ts', () => {
           .get('/notifications?participating=false')
           .reply(200, notifications);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.fetchNotifications(mockAccounts, mockSettings);
@@ -62,7 +62,7 @@ describe('hooks/useNotifications.ts', () => {
             .get('/notifications?participating=false')
             .reply(status, { message });
 
-          const { result } = renderHook(() => useNotifications(false));
+          const { result } = renderHook(() => useNotifications());
 
           act(() => {
             result.current.fetchNotifications(mockAccounts, mockSettings);
@@ -86,7 +86,7 @@ describe('hooks/useNotifications.ts', () => {
             .get('/notifications?participating=false')
             .reply(status, { message });
 
-          const { result } = renderHook(() => useNotifications(false));
+          const { result } = renderHook(() => useNotifications());
 
           act(() => {
             result.current.fetchNotifications(mockAccounts, mockSettings);
@@ -110,7 +110,7 @@ describe('hooks/useNotifications.ts', () => {
             .get('/notifications?participating=false')
             .reply(status, { message });
 
-          const { result } = renderHook(() => useNotifications(false));
+          const { result } = renderHook(() => useNotifications());
 
           act(() => {
             result.current.fetchNotifications(mockAccounts, mockSettings);
@@ -134,7 +134,7 @@ describe('hooks/useNotifications.ts', () => {
             .get('/notifications?participating=false')
             .reply(status, { message });
 
-          const { result } = renderHook(() => useNotifications(false));
+          const { result } = renderHook(() => useNotifications());
 
           act(() => {
             result.current.fetchNotifications(mockAccounts, mockSettings);
@@ -158,7 +158,7 @@ describe('hooks/useNotifications.ts', () => {
             .get('/notifications?participating=false')
             .reply(status, { message });
 
-          const { result } = renderHook(() => useNotifications(false));
+          const { result } = renderHook(() => useNotifications());
 
           act(() => {
             result.current.fetchNotifications(mockAccounts, mockSettings);
@@ -191,7 +191,7 @@ describe('hooks/useNotifications.ts', () => {
           .get('/notifications?participating=false')
           .reply(200, notifications);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.fetchNotifications(accounts, mockSettings);
@@ -216,7 +216,7 @@ describe('hooks/useNotifications.ts', () => {
           .get('/notifications?participating=false')
           .reply(400, { message: 'Oops! Something went wrong.' });
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.fetchNotifications(accounts, mockSettings);
@@ -245,7 +245,7 @@ describe('hooks/useNotifications.ts', () => {
           .get('/notifications?participating=false')
           .reply(200, notifications);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.fetchNotifications(accounts, mockSettings);
@@ -271,7 +271,7 @@ describe('hooks/useNotifications.ts', () => {
             .get('/notifications?participating=false')
             .reply(status, { message });
 
-          const { result } = renderHook(() => useNotifications(false));
+          const { result } = renderHook(() => useNotifications());
 
           act(() => {
             result.current.fetchNotifications(accounts, mockSettings);
@@ -295,7 +295,7 @@ describe('hooks/useNotifications.ts', () => {
             .get('/notifications?participating=false')
             .reply(status, { message });
 
-          const { result } = renderHook(() => useNotifications(false));
+          const { result } = renderHook(() => useNotifications());
 
           act(() => {
             result.current.fetchNotifications(accounts, mockSettings);
@@ -319,7 +319,7 @@ describe('hooks/useNotifications.ts', () => {
             .get('/notifications?participating=false')
             .reply(status, { message });
 
-          const { result } = renderHook(() => useNotifications(false));
+          const { result } = renderHook(() => useNotifications());
 
           act(() => {
             result.current.fetchNotifications(accounts, mockSettings);
@@ -343,7 +343,7 @@ describe('hooks/useNotifications.ts', () => {
             .get('/notifications?participating=false')
             .reply(status, { message });
 
-          const { result } = renderHook(() => useNotifications(false));
+          const { result } = renderHook(() => useNotifications());
 
           act(() => {
             result.current.fetchNotifications(accounts, mockSettings);
@@ -367,7 +367,7 @@ describe('hooks/useNotifications.ts', () => {
             .get('/notifications?participating=false')
             .reply(status, { message });
 
-          const { result } = renderHook(() => useNotifications(false));
+          const { result } = renderHook(() => useNotifications());
 
           act(() => {
             result.current.fetchNotifications(accounts, mockSettings);
@@ -529,12 +529,12 @@ describe('hooks/useNotifications.ts', () => {
           user: mockedNotificationUser,
         });
 
-        const { result } = renderHook(() => useNotifications(true));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.fetchNotifications(accounts, {
             ...mockSettings,
-            colors: true,
+            detailedNotifications: true,
           });
         });
 
@@ -607,11 +607,12 @@ describe('hooks/useNotifications.ts', () => {
             },
           });
 
-        const { result } = renderHook(() => useNotifications(true));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.fetchNotifications(accounts, {
             ...mockSettings,
+            detailedNotifications: true,
             showBots: false,
           });
         });
@@ -642,7 +643,7 @@ describe('hooks/useNotifications.ts', () => {
         .get('/notifications?participating=false')
         .reply(200, notifications);
 
-      const { result } = renderHook(() => useNotifications(false));
+      const { result } = renderHook(() => useNotifications());
 
       act(() => {
         result.current.fetchNotifications(mockAccounts, mockSettings);
@@ -675,7 +676,7 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(200);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markNotificationRead(accounts, id, hostname);
@@ -693,7 +694,7 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(400);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markNotificationRead(accounts, id, hostname);
@@ -716,7 +717,7 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(200);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markNotificationRead(accounts, id, hostname);
@@ -734,7 +735,7 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(400);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markNotificationRead(accounts, id, hostname);
@@ -761,7 +762,7 @@ describe('hooks/useNotifications.ts', () => {
           .delete(`/notifications/threads/${id}`)
           .reply(200);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markNotificationDone(accounts, id, hostname);
@@ -779,7 +780,7 @@ describe('hooks/useNotifications.ts', () => {
           .delete(`/notifications/threads/${id}`)
           .reply(400);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markNotificationDone(accounts, id, hostname);
@@ -802,7 +803,7 @@ describe('hooks/useNotifications.ts', () => {
           .delete(`/notifications/threads/${id}`)
           .reply(200);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markNotificationDone(accounts, id, hostname);
@@ -820,7 +821,7 @@ describe('hooks/useNotifications.ts', () => {
           .delete(`/notifications/threads/${id}`)
           .reply(400);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markNotificationDone(accounts, id, hostname);
@@ -853,7 +854,7 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(200);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.unsubscribeNotification(accounts, id, hostname);
@@ -877,7 +878,7 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(400);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.unsubscribeNotification(accounts, id, hostname);
@@ -906,7 +907,7 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(200);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.unsubscribeNotification(accounts, id, hostname);
@@ -930,7 +931,7 @@ describe('hooks/useNotifications.ts', () => {
           .patch(`/notifications/threads/${id}`)
           .reply(400);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.unsubscribeNotification(accounts, id, hostname);
@@ -957,7 +958,7 @@ describe('hooks/useNotifications.ts', () => {
           .put(`/repos/${repoSlug}/notifications`)
           .reply(200);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markRepoNotifications(accounts, repoSlug, hostname);
@@ -975,7 +976,7 @@ describe('hooks/useNotifications.ts', () => {
           .put(`/repos/${repoSlug}/notifications`)
           .reply(400);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markRepoNotifications(accounts, repoSlug, hostname);
@@ -998,7 +999,7 @@ describe('hooks/useNotifications.ts', () => {
           .put(`/repos/${repoSlug}/notifications`)
           .reply(200);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markRepoNotifications(accounts, repoSlug, hostname);
@@ -1016,7 +1017,7 @@ describe('hooks/useNotifications.ts', () => {
           .put(`/repos/${repoSlug}/notifications`)
           .reply(400);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markRepoNotifications(accounts, repoSlug, hostname);
@@ -1044,7 +1045,7 @@ describe('hooks/useNotifications.ts', () => {
           .delete(`/notifications/threads/${id}`)
           .reply(200);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markRepoNotificationsDone(
@@ -1066,7 +1067,7 @@ describe('hooks/useNotifications.ts', () => {
           .delete(`/notifications/threads/${id}`)
           .reply(400);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markRepoNotificationsDone(
@@ -1093,7 +1094,7 @@ describe('hooks/useNotifications.ts', () => {
           .delete(`/notifications/threads/${id}`)
           .reply(200);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markRepoNotificationsDone(
@@ -1115,7 +1116,7 @@ describe('hooks/useNotifications.ts', () => {
           .delete(`/notifications/threads/${id}`)
           .reply(400);
 
-        const { result } = renderHook(() => useNotifications(false));
+        const { result } = renderHook(() => useNotifications());
 
         act(() => {
           result.current.markRepoNotificationsDone(
