@@ -19,8 +19,7 @@ export const Sidebar: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { isLoggedIn } = useContext(AppContext);
-  const { notifications, fetchNotifications, isFetching } =
+  const { notifications, fetchNotifications, isLoggedIn, isFetching } =
     useContext(AppContext);
 
   const onOpenBrowser = useCallback(() => {
