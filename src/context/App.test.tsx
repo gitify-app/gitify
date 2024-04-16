@@ -25,6 +25,10 @@ const customRender = (
 };
 
 describe('context/App.tsx', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   describe('api methods', () => {
     const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
     const getNotificationCountMock = jest.spyOn(
