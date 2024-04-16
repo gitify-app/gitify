@@ -206,7 +206,7 @@ describe('context/App.tsx', () => {
       fireEvent.click(getByText('Test Case'));
 
       await waitFor(() =>
-        expect(fetchNotificationsMock).toHaveBeenCalledTimes(2),
+        expect(fetchNotificationsMock).toHaveBeenCalledTimes(1),
       );
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(2);

@@ -29,8 +29,7 @@ export const Sidebar: FC = () => {
 
   const [recentlyRefreshed, setRecentlyRefreshed] = useState(false);
 
-  const { isLoggedIn } = useContext(AppContext);
-  const { notifications, fetchNotifications, isFetching } =
+  const { notifications, fetchNotifications, isLoggedIn, isFetching } =
     useContext(AppContext);
 
   const useFetchInterval = (callback, delay: number) => {

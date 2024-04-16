@@ -121,21 +121,21 @@
     "react-router-dom": "6.22.3",
     "react-transition-group": "4.4.5",
     "ts-loader": "9.5.1",
-    "typescript": "5.4.4"
+    "typescript": "5.4.5"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.6.4",
+    "@biomejs/biome": "1.7.0",
     "@electron/notarize": "2.3.0",
-    "@testing-library/react": "14.3.0",
+    "@testing-library/react": "15.0.2",
     "@types/jest": "29.5.12",
-    "@types/node": "20.12.6",
+    "@types/node": "20.12.7",
     "@types/nprogress": "0.2.3",
-    "@types/react": "18.2.75",
+    "@types/react": "18.2.79",
     "@types/react-router-dom": "5.3.3",
     "@types/react-test-renderer": "18.0.7",
     "@types/react-transition-group": "4.4.10",
     "autoprefixer": "10.4.19",
-    "css-loader": "7.1.0",
+    "css-loader": "7.1.1",
     "electron": "29.2.0",
     "electron-builder": "24.13.3",
     "husky": "9.0.11",
@@ -154,7 +154,7 @@
     "webpack-cli": "5.1.4",
     "webpack-merge": "5.10.0"
   },
-  "packageManager": "pnpm@8.15.6",
+  "packageManager": "pnpm@9.0.0",
   "lint-staged": {
     "*.{html,js,json,md,ts,tsx}": "biome format --write"
   }
