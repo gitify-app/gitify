@@ -62,6 +62,12 @@ export const SettingsRoute: FC = () => {
     ipcRenderer.invoke('get-app-version').then((result: string) => {
       setAppVersion(result);
     });
+
+    ipcRenderer.on('update-native-theme', (_, updatedTheme: Theme) => {
+      if (settings.theme === Theme.SYSTEM) {
+        setTheme(updatedTheme);
+      }
+    });
   }, []);
 
   useMemo(() => {
@@ -76,12 +82,6 @@ export const SettingsRoute: FC = () => {
         setRepoScope(true);
     })();
   }, [accounts.token]);
-
-  ipcRenderer.on('update-native-theme', (_, updatedTheme: Theme) => {
-    if (settings.theme === Theme.SYSTEM) {
-      setTheme(updatedTheme);
-    }
-  });
 
   const logoutUser = useCallback(() => {
     logout();
