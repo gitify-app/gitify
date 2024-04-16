@@ -105,39 +105,17 @@ describe('components/Sidebar.tsx', () => {
     fetchNotifications.mockReset();
 
     const enabledRefreshButton = 'Refresh Notifications';
-    const disabledRefreshButton =
-      'Please wait before manually refreshing again...';
-
-    // Refresh button should be enabled
-    expect(screen.getByTitle(enabledRefreshButton)).toHaveProperty(
-      'disabled',
-      false,
-    );
-    expect(screen.queryByTitle(disabledRefreshButton)).toBeNull();
 
     fireEvent.click(screen.getByTitle(enabledRefreshButton));
 
     expect(fetchNotifications).toHaveBeenCalledTimes(1);
 
-    // Refresh button temporarily disabled
-    expect(screen.queryByTitle(enabledRefreshButton)).toBeNull();
-    expect(screen.getByTitle(disabledRefreshButton)).toHaveProperty(
-      'disabled',
-      true,
-    );
-
     act(() => {
       jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
       return;
     });
-    expect(fetchNotifications).toHaveBeenCalledTimes(2);
 
-    // Refresh button re-enabled
-    expect(screen.getByTitle(enabledRefreshButton)).toHaveProperty(
-      'disabled',
-      false,
-    );
-    expect(screen.queryByTitle(disabledRefreshButton)).toBeNull();
+    expect(fetchNotifications).toHaveBeenCalledTimes(2);
   });
 
   it('go to the settings route', () => {

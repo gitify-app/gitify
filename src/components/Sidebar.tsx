@@ -13,7 +13,6 @@ import {
   useEffect,
   useMemo,
   useRef,
-  useState,
 } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -26,8 +25,6 @@ import { getNotificationCount } from '../utils/notifications';
 export const Sidebar: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
-  const [recentlyRefreshed, setRecentlyRefreshed] = useState(false);
 
   const { notifications, fetchNotifications, isLoggedIn, isFetching } =
     useContext(AppContext);
@@ -60,7 +57,6 @@ export const Sidebar: FC = () => {
 
   const { resetFetchInterval } = useFetchInterval(() => {
     if (isLoggedIn) {
-      setRecentlyRefreshed(false);
       fetchNotifications();
     }
   }, Constants.FETCH_INTERVAL);
@@ -119,18 +115,13 @@ export const Sidebar: FC = () => {
             <button
               type="button"
               className={sidebarButtonClasses}
-              title={
-                recentlyRefreshed
-                  ? 'Please wait before manually refreshing again...'
-                  : 'Refresh Notifications'
-              }
+              title="Refresh Notifications"
               onClick={() => {
                 navigate('/', { replace: true });
-                setRecentlyRefreshed(true);
                 fetchNotifications();
                 resetFetchInterval();
               }}
-              disabled={isFetching || recentlyRefreshed}
+              disabled={isFetching}
             >
               <SyncIcon
                 size={16}
