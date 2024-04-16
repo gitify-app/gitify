@@ -25,7 +25,12 @@ const customRender = (
 };
 
 describe('context/App.tsx', () => {
+  beforeEach(() => {
+    jest.useFakeTimers();
+  });
+
   afterEach(() => {
+    jest.clearAllTimers();
     jest.clearAllMocks();
   });
 
