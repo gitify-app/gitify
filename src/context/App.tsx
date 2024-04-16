@@ -110,10 +110,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     accounts.enterpriseAccounts.length,
   ]);
 
-  useInterval(() => {
-    fetchNotifications(accounts, settings);
-  }, 60000);
-
   // biome-ignore lint/correctness/useExhaustiveDependencies: We need to update tray title when settings or notifications changes.
   useEffect(() => {
     const count = getNotificationCount(notifications);
