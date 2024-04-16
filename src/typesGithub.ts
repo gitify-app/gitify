@@ -272,6 +272,76 @@ export interface PullRequest {
   changed_files: number;
 }
 
+export interface Commit {
+  sha: string;
+  node_id: string;
+  commit: {
+    author: CommitUser;
+    committer: CommitUser;
+    message: string;
+    tree: {
+      sha: string;
+      url: string;
+    };
+    url: string;
+    comment_count: number;
+    verification: {
+      verified: boolean;
+      reason: string;
+      signature: string | null;
+      payload: string | null;
+    };
+  };
+  url: string;
+  html_url: string;
+  comments_url: string;
+  author: User;
+  committer: User;
+  parents: CommitParent[];
+  stats: {
+    total: number;
+    additions: number;
+    deletions: number;
+  };
+  files: CommitFiles[];
+}
+
+interface CommitUser {
+  name: string;
+  email: string;
+  date: string;
+}
+
+interface CommitParent {
+  sha: string;
+  url: string;
+  html_url: string;
+}
+
+interface CommitFiles {
+  sha: string;
+  filename: string;
+  status: string;
+  additions: number;
+  deletions: number;
+  changes: number;
+  blob_url: string;
+  raw_url: string;
+  contents_url: string;
+  patch: string;
+}
+export interface CommitComments {
+  url: string;
+  html_url: string;
+  issue_url: string;
+  id: number;
+  node_id: string;
+  user: User;
+  created_at: string;
+  updated_at: string;
+  body: string;
+}
+
 export interface Issue {
   url: string;
   repository_url: string;
