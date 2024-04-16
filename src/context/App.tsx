@@ -7,7 +7,6 @@ import {
   useState,
 } from 'react';
 
-import { useInterval } from '../hooks/useInterval';
 import { useNotifications } from '../hooks/useNotifications';
 import {
   type AccountNotifications,
@@ -110,10 +109,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     accounts.token,
     accounts.enterpriseAccounts.length,
   ]);
-
-  useInterval(() => {
-    fetchNotifications(accounts, settings);
-  }, 60000);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We need to update tray title when settings or notifications changes.
   useEffect(() => {

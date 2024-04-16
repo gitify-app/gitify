@@ -16,6 +16,8 @@ export const Constants = {
   STORAGE_KEY: 'gitify-storage',
 
   ALLREAD_EMOJIS: ['😉', '🎉', '🐯', '🙈', '🎈', '🎊', '👏', '🎪', '🍝'],
+
+  FETCH_INTERVAL: 60000,
 };
 
 export const Errors: Record<ErrorType, GitifyError> = {
