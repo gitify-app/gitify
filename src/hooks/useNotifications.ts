@@ -96,12 +96,13 @@ export const useNotifications = (): NotificationsState => {
       }
 
       setIsFetching(true);
-      setRequestFailed(false);
 
       return axios
         .all([getGitHubNotifications(), ...getEnterpriseNotifications()])
         .then(
           axios.spread((gitHubNotifications, ...entAccNotifications) => {
+            setRequestFailed(false);
+
             const enterpriseNotifications = entAccNotifications.map(
               (accountNotifications) => {
                 const { hostname } = new URL(accountNotifications.config.url);
