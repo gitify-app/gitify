@@ -1,6 +1,7 @@
 import type {
   CheckSuiteAttributes,
   CheckSuiteStatus,
+  Commit,
   DiscussionStateType,
   GitifySubject,
   Issue,
@@ -23,6 +24,8 @@ export async function getGitifySubjectDetails(
   switch (notification.subject.type) {
     case 'CheckSuite':
       return getGitifySubjectForCheckSuite(notification);
+    case 'Commit':
+      return getGitifySubjectForCommit(notification, token);
     case 'Discussion':
       return await getGitifySubjectForDiscussion(notification, token);
     case 'Issue':
@@ -89,6 +92,31 @@ function getGitifySubjectForCheckSuite(
     state: getCheckSuiteAttributes(notification)?.status,
     user: null,
   };
+}
+
+async function getGitifySubjectForCommit(
+  notification: Notification,
+  token: string,
+): Promise<GitifySubject> {
+  try {
+    const commit: Commit = (
+      await apiRequestAuth(notification.subject.url, 'GET', token)
+    ).data;
+
+    const commitCommentUser = await getLatestCommentUser(notification, token);
+
+    return {
+      state: null,
+      user: {
+        login: commitCommentUser?.login ?? commit.author.login,
+        html_url: commitCommentUser?.html_url ?? commit.author.html_url,
+        avatar_url: commitCommentUser?.avatar_url ?? commit.author.avatar_url,
+        type: commitCommentUser?.type ?? commit.author.type,
+      },
+    };
+  } catch (err) {
+    console.error('Issue subject retrieval failed');
+  }
 }
 
 async function getGitifySubjectForDiscussion(
