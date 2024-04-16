@@ -64,7 +64,7 @@ describe('context/App.tsx', () => {
       // Wait for the useEffects, for settings.participating and accounts, to run.
       // Those aren't what we're testing
       await waitFor(() =>
-        expect(fetchNotificationsMock).toHaveBeenCalledTimes(2),
+        expect(fetchNotificationsMock).toHaveBeenCalledTimes(1),
       );
 
       fetchNotificationsMock.mockReset();
@@ -245,7 +245,7 @@ describe('context/App.tsx', () => {
       fireEvent.click(getByText('Test Case'));
 
       await waitFor(() =>
-        expect(fetchNotificationsMock).toHaveBeenCalledTimes(2),
+        expect(fetchNotificationsMock).toHaveBeenCalledTimes(1),
       );
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(2);
