@@ -130,7 +130,7 @@
     "@types/jest": "29.5.12",
     "@types/node": "20.12.6",
     "@types/nprogress": "0.2.3",
-    "@types/react": "18.2.75",
+    "@types/react": "18.2.79",
     "@types/react-router-dom": "5.3.3",
     "@types/react-test-renderer": "18.0.7",
     "@types/react-transition-group": "4.4.10",
