@@ -25,15 +25,6 @@ const customRender = (
 };
 
 describe('context/App.tsx', () => {
-  beforeEach(() => {
-    jest.useFakeTimers();
-  });
-
-  afterEach(() => {
-    jest.clearAllTimers();
-    jest.clearAllMocks();
-  });
-
   describe('api methods', () => {
     const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
     const getNotificationCountMock = jest.spyOn(
@@ -56,36 +47,6 @@ describe('context/App.tsx', () => {
         unsubscribeNotification: unsubscribeNotificationMock,
         markRepoNotifications: markRepoNotificationsMock,
       });
-    });
-
-    it('fetch notifications every minute', async () => {
-      customRender(null);
-
-      // Wait for the useEffects, for settings.participating and accounts, to run.
-      // Those aren't what we're testing
-      await waitFor(() =>
-        expect(fetchNotificationsMock).toHaveBeenCalledTimes(2),
-      );
-
-      fetchNotificationsMock.mockReset();
-
-      act(() => {
-        jest.advanceTimersByTime(60000);
-        return;
-      });
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
-
-      act(() => {
-        jest.advanceTimersByTime(60000);
-        return;
-      });
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
-
-      act(() => {
-        jest.advanceTimersByTime(60000);
-        return;
-      });
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
     });
 
     it('should call fetchNotifications', async () => {

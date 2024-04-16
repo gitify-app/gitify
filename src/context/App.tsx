@@ -7,7 +7,6 @@ import {
   useState,
 } from 'react';
 
-import { useInterval } from '../hooks/useInterval';
 import { useNotifications } from '../hooks/useNotifications';
 import {
   type AccountNotifications,
@@ -124,10 +123,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       updateTrayTitle();
     }
   }, [settings.showNotificationsCountInTray, notifications]);
-
-  useInterval(() => {
-    fetchNotifications(accounts, settings);
-  }, 60000);
 
   const updateSetting = useCallback(
     (name: keyof SettingsState, value: boolean | Theme) => {

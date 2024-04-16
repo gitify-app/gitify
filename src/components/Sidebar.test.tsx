@@ -1,10 +1,11 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import * as TestRenderer from 'react-test-renderer';
 const { shell, ipcRenderer } = require('electron');
 import { mockSettings } from '../__mocks__/mock-state';
 import { mockedAccountNotifications } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
+import Constants from '../utils/constants';
 import { Sidebar } from './Sidebar';
 
 const mockNavigate = jest.fn();
@@ -19,12 +20,15 @@ describe('components/Sidebar.tsx', () => {
   beforeEach(() => {
     fetchNotifications.mockReset();
 
+    jest.useFakeTimers();
+
     jest.spyOn(ipcRenderer, 'send');
     jest.spyOn(shell, 'openExternal');
     jest.spyOn(window, 'clearInterval');
   });
 
   afterEach(() => {
+    jest.clearAllTimers();
     jest.clearAllMocks();
   });
 
@@ -57,6 +61,37 @@ describe('components/Sidebar.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('should fetch notifications every minute', async () => {
+    render(
+      <AppContext.Provider
+        value={{ isLoggedIn: true, notifications: [], fetchNotifications }}
+      >
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+    fetchNotifications.mockReset();
+
+    act(() => {
+      jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
+      return;
+    });
+    expect(fetchNotifications).toHaveBeenCalledTimes(1);
+
+    act(() => {
+      jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
+      return;
+    });
+    expect(fetchNotifications).toHaveBeenCalledTimes(2);
+
+    act(() => {
+      jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
+      return;
+    });
+    expect(fetchNotifications).toHaveBeenCalledTimes(3);
+  });
+
   it('should refresh the notifications', () => {
     render(
       <AppContext.Provider
@@ -68,8 +103,41 @@ describe('components/Sidebar.tsx', () => {
       </AppContext.Provider>,
     );
     fetchNotifications.mockReset();
-    fireEvent.click(screen.getByTitle('Refresh Notifications'));
+
+    const enabledRefreshButton = 'Refresh Notifications';
+    const disabledRefreshButton =
+      'Please wait before manually refreshing again...';
+
+    // Refresh button should be enabled
+    expect(screen.getByTitle(enabledRefreshButton)).toHaveProperty(
+      'disabled',
+      false,
+    );
+    expect(screen.queryByTitle(disabledRefreshButton)).toBeNull();
+
+    fireEvent.click(screen.getByTitle(enabledRefreshButton));
+
     expect(fetchNotifications).toHaveBeenCalledTimes(1);
+
+    // Refresh button temporarily disabled
+    expect(screen.queryByTitle(enabledRefreshButton)).toBeNull();
+    expect(screen.getByTitle(disabledRefreshButton)).toHaveProperty(
+      'disabled',
+      true,
+    );
+
+    act(() => {
+      jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
+      return;
+    });
+    expect(fetchNotifications).toHaveBeenCalledTimes(2);
+
+    // Refresh button re-enabled
+    expect(screen.getByTitle(enabledRefreshButton)).toHaveProperty(
+      'disabled',
+      false,
+    );
+    expect(screen.queryByTitle(disabledRefreshButton)).toBeNull();
   });
 
   it('go to the settings route', () => {

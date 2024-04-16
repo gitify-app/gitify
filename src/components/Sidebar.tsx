@@ -6,7 +6,15 @@ import {
 } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
 
-import { type FC, useCallback, useContext, useMemo } from 'react';
+import {
+  type FC,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Logo } from '../components/Logo';
@@ -19,9 +27,44 @@ export const Sidebar: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [recentlyRefreshed, setRecentlyRefreshed] = useState(false);
+
   const { isLoggedIn } = useContext(AppContext);
   const { notifications, fetchNotifications, isFetching } =
     useContext(AppContext);
+
+  const useFetchInterval = (callback, delay: number) => {
+    const savedCallback = useRef(callback);
+    const intervalRef = useRef(null);
+
+    useEffect(() => {
+      savedCallback.current = callback;
+    }, [callback]);
+
+    useEffect(() => {
+      if (delay !== null) {
+        const id = setInterval(savedCallback.current, delay);
+        intervalRef.current = id;
+        return () => clearInterval(id);
+      }
+    }, [delay]);
+
+    const resetFetchInterval = useCallback(() => {
+      if (intervalRef.current !== null) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = setInterval(savedCallback.current, delay);
+      }
+    }, [delay]);
+
+    return { resetFetchInterval };
+  };
+
+  const { resetFetchInterval } = useFetchInterval(() => {
+    if (isLoggedIn) {
+      setRecentlyRefreshed(false);
+      fetchNotifications();
+    }
+  }, Constants.FETCH_INTERVAL);
 
   const onOpenBrowser = useCallback(() => {
     openExternalLink(`https://github.com/${Constants.REPO_SLUG}`);
@@ -77,12 +120,18 @@ export const Sidebar: FC = () => {
             <button
               type="button"
               className={sidebarButtonClasses}
-              title="Refresh Notifications"
+              title={
+                recentlyRefreshed
+                  ? 'Please wait before manually refreshing again...'
+                  : 'Refresh Notifications'
+              }
               onClick={() => {
                 navigate('/', { replace: true });
+                setRecentlyRefreshed(true);
                 fetchNotifications();
+                resetFetchInterval();
               }}
-              disabled={isFetching}
+              disabled={isFetching || recentlyRefreshed}
             >
               <SyncIcon
                 size={16}
