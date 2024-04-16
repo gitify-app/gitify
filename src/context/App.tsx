@@ -100,19 +100,20 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setTheme(settings.theme as Theme);
   }, [settings.theme]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for a subset of settings changes.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for certain account or setting changes.
   useEffect(() => {
     fetchNotifications(accounts, settings);
   }, [
     settings.participating,
     settings.showBots,
     settings.detailedNotifications,
+    accounts.token,
+    accounts.enterpriseAccounts.length,
   ]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for certain account changes.
-  useEffect(() => {
+  useInterval(() => {
     fetchNotifications(accounts, settings);
-  }, [accounts.token, accounts.enterpriseAccounts.length]);
+  }, 60000);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We need to update tray title when settings or notifications changes.
   useEffect(() => {
@@ -124,10 +125,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       updateTrayTitle();
     }
   }, [settings.showNotificationsCountInTray, notifications]);
-
-  useInterval(() => {
-    fetchNotifications(accounts, settings);
-  }, 60000);
 
   const updateSetting = useCallback(
     (name: keyof SettingsState, value: boolean | Theme) => {
