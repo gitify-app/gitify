@@ -138,6 +138,65 @@ describe('utils/subject.ts', () => {
   });
 
   describe('getGitifySubjectDetails', () => {
+    describe('Commits', () => {
+      it('get commit commenter', async () => {
+        const mockNotification = {
+          ...mockedSingleNotification,
+          subject: {
+            title: 'This is a commit with comments',
+            url: 'https://api.github.com/repos/manosim/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8',
+            latest_comment_url:
+              'https://api.github.com/repos/manosim/notifications-test/comments/141012658',
+            type: 'Commit' as SubjectType,
+          },
+        };
+
+        nock('https://api.github.com')
+          .get(
+            '/repos/manosim/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8',
+          )
+          .reply(200, { author: { login: 'some-author' } });
+
+        nock('https://api.github.com')
+          .get('/repos/manosim/notifications-test/comments/141012658')
+          .reply(200, { user: { login: 'some-commenter' } });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBeNull();
+        expect(result.user).toEqual({ login: 'some-commenter' });
+      });
+
+      it('get commit without commenter', async () => {
+        const mockNotification = {
+          ...mockedSingleNotification,
+          subject: {
+            title: 'This is a commit with comments',
+            url: 'https://api.github.com/repos/manosim/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8',
+            latest_comment_url: null,
+            type: 'Commit' as SubjectType,
+          },
+        };
+
+        nock('https://api.github.com')
+          .get(
+            '/repos/manosim/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8',
+          )
+          .reply(200, { author: { login: 'some-author' } });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAccounts.token,
+        );
+
+        expect(result.state).toBeNull();
+        expect(result.user).toEqual({ login: 'some-author' });
+      });
+    });
+
     describe('Discussions', () => {
       it('answered discussion state', async () => {
         const mockNotification = {

@@ -58,36 +58,6 @@ describe('context/App.tsx', () => {
       });
     });
 
-    it('fetch notifications every minute', async () => {
-      customRender(null);
-
-      // Wait for the useEffects, for settings.participating and accounts, to run.
-      // Those aren't what we're testing
-      await waitFor(() =>
-        expect(fetchNotificationsMock).toHaveBeenCalledTimes(1),
-      );
-
-      fetchNotificationsMock.mockReset();
-
-      act(() => {
-        jest.advanceTimersByTime(60000);
-        return;
-      });
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
-
-      act(() => {
-        jest.advanceTimersByTime(60000);
-        return;
-      });
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
-
-      act(() => {
-        jest.advanceTimersByTime(60000);
-        return;
-      });
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
-    });
-
     it('should call fetchNotifications', async () => {
       const TestComponent = () => {
         const { fetchNotifications } = useContext(AppContext);

@@ -1,12 +1,14 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": ["config:recommended"],
+  "extends": [
+    "config:recommended",
+    ":separateMultipleMajorReleases",
+    ":enableVulnerabilityAlerts",
+    "schedule:weekly"
+  ],
   "labels": ["dependency"],
   "prConcurrentLimit": 5,
   "rangeStrategy": "pin",
-  "schedule": ["monthly"],
-  "separateMultipleMajor": true,
-  "osvVulnerabilityAlerts": true,
   "packageRules": [
     {
       "matchDepTypes": ["engines"],
