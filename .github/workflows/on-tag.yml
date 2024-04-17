@@ -3,7 +3,8 @@ name: On Tag
 on:
   push:
     tags: 'v*'
-  workflow_dispatch:
+    branches:
+      - fix/*
 
 jobs:
   pr-to-homebrew:
