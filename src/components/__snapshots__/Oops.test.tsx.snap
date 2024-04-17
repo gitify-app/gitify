@@ -14,7 +14,9 @@ exports[`components/Oops.tsx should render itself & its children 1`] = `
   >
     Error title
   </h2>
-  <div>
+  <div
+    className="text-center mb-2"
+  >
     Error description
   </div>
 </div>
