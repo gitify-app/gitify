@@ -39,7 +39,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     notifications,
   } = useContext(AppContext);
 
-  const pressTitle = useCallback(() => {
+  const openNotification = useCallback(() => {
     openInBrowser(notification, accounts);
 
     if (settings.markAsDoneOnOpen) {
@@ -92,8 +92,8 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
 
       <div
         className="flex-1 overflow-hidden"
-        onClick={() => pressTitle()}
-        onKeyDown={() => pressTitle()}
+        onClick={() => openNotification()}
+        onKeyDown={() => openNotification()}
       >
         <div
           className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
