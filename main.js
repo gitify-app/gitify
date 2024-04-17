@@ -43,6 +43,11 @@ const menubarApp = menubar({
 });
 
 menubarApp.on('ready', () => {
+  // Force the window to retrieve its previous zoom factor
+  menubarApp.window.webContents.setZoomFactor(
+    menubarApp.window.webContents.getZoomFactor(),
+  );
+
   menubarApp.tray.setIgnoreDoubleClickEvents(true);
 
   autoUpdater.checkForUpdatesAndNotify();
