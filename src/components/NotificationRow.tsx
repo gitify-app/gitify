@@ -17,11 +17,11 @@ import { AppContext } from '../context/App';
 import type { Notification } from '../typesGithub';
 import { openExternalLink } from '../utils/comms';
 import {
-  formatReason,
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
 } from '../utils/github-api';
 import { formatForDisplay, openInBrowser } from '../utils/helpers';
+import { formatReason } from '../utils/reason';
 
 interface IProps {
   hostname: string;
@@ -128,7 +128,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 </span>
               )}
               <span className="ml-1" title={reason.description}>
-                {reason.type}
+                {reason.title}
               </span>
               <span className="ml-1">{updatedAt}</span>
             </span>

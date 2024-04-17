@@ -88,3 +88,8 @@ export type ErrorType =
   | 'NETWORK'
   | 'RATE_LIMITED'
   | 'UNKNOWN';
+
+export interface FormattedReason {
+  title: string;
+  description: string;
+}
