@@ -24,6 +24,7 @@ import {
   XIcon,
 } from '@primer/octicons-react';
 import type { FC } from 'react';
+import { IconColor } from '../types';
 import type { Subject } from '../typesGithub';
 
 export function getNotificationTypeIcon(subject: Subject): FC<OcticonProps> {
@@ -92,21 +93,21 @@ export function getNotificationTypeIcon(subject: Subject): FC<OcticonProps> {
   }
 }
 
-export function getNotificationTypeIconColor(subject: Subject): string {
+export function getNotificationTypeIconColor(subject: Subject): IconColor {
   switch (subject.state) {
     case 'open':
     case 'reopened':
     case 'ANSWERED':
     case 'success':
-      return 'text-green-500';
+      return IconColor.GREEN;
     case 'closed':
     case 'failure':
-      return 'text-red-500';
+      return IconColor.RED;
     case 'completed':
     case 'RESOLVED':
     case 'merged':
-      return 'text-purple-500';
+      return IconColor.PURPLE;
     default:
-      return 'text-gray-500 dark:text-gray-300';
+      return IconColor.GRAY;
   }
 }

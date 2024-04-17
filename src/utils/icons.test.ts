@@ -1,10 +1,7 @@
 import type { StateType, Subject, SubjectType } from '../typesGithub';
-import {
-  getNotificationTypeIcon,
-  getNotificationTypeIconColor,
-} from './github-api';
+import { getNotificationTypeIcon, getNotificationTypeIconColor } from './icons';
 
-describe('utils/github-api.ts', () => {
+describe('utils/icons.ts', () => {
   describe('getNotificationTypeIcon - should get the notification type icon', () => {
     expect(
       getNotificationTypeIcon(
