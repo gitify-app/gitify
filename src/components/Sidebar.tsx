@@ -6,14 +6,7 @@ import {
 } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
 
-import {
-  type FC,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
+import { type FC, useCallback, useContext, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Logo } from '../components/Logo';
@@ -28,38 +21,6 @@ export const Sidebar: FC = () => {
 
   const { notifications, fetchNotifications, isLoggedIn, isFetching } =
     useContext(AppContext);
-
-  const useFetchInterval = (callback, delay: number) => {
-    const savedCallback = useRef(callback);
-    const intervalRef = useRef(null);
-
-    useEffect(() => {
-      savedCallback.current = callback;
-    }, [callback]);
-
-    useEffect(() => {
-      if (delay !== null) {
-        const id = setInterval(savedCallback.current, delay);
-        intervalRef.current = id;
-        return () => clearInterval(id);
-      }
-    }, [delay]);
-
-    const resetFetchInterval = useCallback(() => {
-      if (intervalRef.current !== null) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = setInterval(savedCallback.current, delay);
-      }
-    }, [delay]);
-
-    return { resetFetchInterval };
-  };
-
-  const { resetFetchInterval } = useFetchInterval(() => {
-    if (isLoggedIn) {
-      fetchNotifications();
-    }
-  }, Constants.FETCH_INTERVAL);
 
   const onOpenBrowser = useCallback(() => {
     openExternalLink(`https://github.com/${Constants.REPO_SLUG}`);
@@ -119,7 +80,6 @@ export const Sidebar: FC = () => {
               onClick={() => {
                 navigate('/', { replace: true });
                 fetchNotifications();
-                resetFetchInterval();
               }}
               disabled={isFetching}
             >
