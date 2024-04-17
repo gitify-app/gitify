@@ -6,6 +6,7 @@ import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, SettingsState } from '../types';
 import * as apiRequests from '../utils/api-requests';
 import * as comms from '../utils/comms';
+import Constants from '../utils/constants';
 import * as notifications from '../utils/notifications';
 import * as storage from '../utils/storage';
 import { AppContext, AppProvider } from './App';
@@ -56,6 +57,36 @@ describe('context/App.tsx', () => {
         unsubscribeNotification: unsubscribeNotificationMock,
         markRepoNotifications: markRepoNotificationsMock,
       });
+    });
+
+    it('fetch notifications every minute', async () => {
+      customRender(null);
+
+      // Wait for the useEffects, for settings.participating and accounts, to run.
+      // Those aren't what we're testing
+      await waitFor(() =>
+        expect(fetchNotificationsMock).toHaveBeenCalledTimes(1),
+      );
+
+      fetchNotificationsMock.mockReset();
+
+      act(() => {
+        jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
+        return;
+      });
+      expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
+
+      act(() => {
+        jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
+        return;
+      });
+      expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
+
+      act(() => {
+        jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
+        return;
+      });
+      expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
     });
 
     it('should call fetchNotifications', async () => {
