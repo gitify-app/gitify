@@ -18,4 +18,6 @@ export const mockSettings: SettingsState = {
   detailedNotifications: false,
   markAsDoneOnOpen: false,
   showAccountHostname: false,
+  kbdShortcut: 'CmdOrCtrl+Alt+G',
+  kbdShortcutEnabled: false,
 };

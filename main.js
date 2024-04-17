@@ -1,4 +1,4 @@
-const { ipcMain, app, nativeTheme } = require('electron');
+const { ipcMain, app, nativeTheme, globalShortcut } = require('electron');
 const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
@@ -79,6 +79,20 @@ menubarApp.on('ready', () => {
     if (!menubarApp.tray.isDestroyed()) {
       menubarApp.tray.setTitle(title);
     }
+  });
+  ipcMain.on('update-kbd-shortcut', (_, { enabled, kbdShortcut }) => {
+    if (!enabled) {
+      globalShortcut.unregister(kbdShortcut);
+      return;
+    }
+
+    globalShortcut.register(kbdShortcut, () => {
+      if (menubarApp.window.isVisible()) {
+        menubarApp.hideWindow();
+      } else {
+        menubarApp.showWindow();
+      }
+    });
   });
   ipcMain.on('set-login-item-settings', (event, settings) => {
     app.setLoginItemSettings(settings);

@@ -241,6 +241,14 @@ export const SettingsRoute: FC = () => {
             System
           </legend>
           <Checkbox
+            name="kbdShortcutEnabled"
+            label="Enable keyboard shortcut to open app"
+            checked={settings.kbdShortcutEnabled}
+            onChange={(evt) =>
+              updateSetting('kbdShortcutEnabled', evt.target.checked)
+            }
+          />
+          <Checkbox
             name="showNotificationsCountInTray"
             label="Show notifications count in tray"
             checked={settings.showNotificationsCountInTray}

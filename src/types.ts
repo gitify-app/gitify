@@ -27,6 +27,8 @@ interface SystemSettingsState {
   playSound: boolean;
   openAtStartup: boolean;
   showNotificationsCountInTray: boolean;
+  kbdShortcut: string;
+  kbdShortcutEnabled: boolean;
 }
 
 export enum Theme {

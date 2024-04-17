@@ -19,7 +19,7 @@ import {
 } from '../types';
 import { apiRequestAuth } from '../utils/api-requests';
 import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
-import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
+import { setAutoLaunch, setKbdShortcut, updateTrayTitle } from '../utils/comms';
 import Constants from '../utils/constants';
 import { generateGitHubAPIUrl } from '../utils/helpers';
 import { getNotificationCount } from '../utils/notifications';
@@ -43,6 +43,8 @@ export const defaultSettings: SettingsState = {
   detailedNotifications: false,
   markAsDoneOnOpen: false,
   showAccountHostname: false,
+  kbdShortcut: 'CmdOrCtrl+Alt+G',
+  kbdShortcutEnabled: false,
 };
 
 interface AppContextState {
@@ -121,6 +123,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [settings.showNotificationsCountInTray, notifications]);
 
+  useEffect(() => {
+    setKbdShortcut(settings.kbdShortcutEnabled, settings.kbdShortcut);
+  }, [settings.kbdShortcutEnabled]);
+
   const updateSetting = useCallback(
     (name: keyof SettingsState, value: boolean | Theme) => {
       if (name === 'openAtStartup') {
@@ -184,6 +190,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
     if (existing.accounts) {
       setAccounts({ ...defaultAccounts, ...existing.accounts });
+    }
+
+    if (existing.settings?.kbdShortcutEnabled) {
+      setKbdShortcut(
+        existing.settings.kbdShortcutEnabled,
+        existing.settings.kbdShortcut,
+      );
     }
 
     if (existing.settings) {

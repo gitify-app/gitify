@@ -291,6 +291,8 @@ describe('context/App.tsx', () => {
         detailedNotifications: false,
         markAsDoneOnOpen: false,
         showAccountHostname: false,
+        kbdShortcut: 'CmdOrCtrl+Alt+G',
+        kbdShortcutEnabled: false,
       },
     );
   });
@@ -335,6 +337,8 @@ describe('context/App.tsx', () => {
         detailedNotifications: false,
         markAsDoneOnOpen: false,
         showAccountHostname: false,
+        kbdShortcut: 'CmdOrCtrl+Alt+G',
+        kbdShortcutEnabled: false,
       },
     );
   });

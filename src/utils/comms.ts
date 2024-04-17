@@ -13,6 +13,10 @@ export function setAutoLaunch(value: boolean): void {
   });
 }
 
+export function setKbdShortcut(enabled: boolean, kbdShortcut: string): void {
+  ipcRenderer.send('update-kbd-shortcut', { enabled, kbdShortcut });
+}
+
 export function updateTrayIcon(notificationsLength = 0): void {
   if (notificationsLength > 0) {
     ipcRenderer.send('update-icon', 'TrayActive');

@@ -401,6 +401,33 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
           >
             <input
               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              id="kbdShortcutEnabled"
+              type="checkbox"
+            />
+          </div>
+          <div
+            class="ml-3 "
+          >
+            <label
+              class="font-medium text-gray-700 dark:text-gray-200"
+              for="kbdShortcutEnabled"
+            >
+              Enable keyboard shortcut to open app
+            </label>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-1 mb-3 text-sm"
+      >
+        <div
+          class="flex items-start"
+        >
+          <div
+            class="flex items-center h-5"
+          >
+            <input
+              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
               id="showNotificationsCountInTray"
               type="checkbox"
             />
