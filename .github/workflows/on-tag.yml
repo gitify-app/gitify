@@ -7,23 +7,6 @@ on:
       - fix/*
 
 jobs:
-  pr-to-homebrew:
-    name: Homebrew
-    runs-on: macos-14
-    steps:
-      # Ensure our Homebrew/homebrew-cask fork repository is in-sync with the upstream to avoid conflicts
-      # during automated commit and PR creation in the brew bump-cask-pr step below.
-      - run: gh repo sync setchy/homebrew-cask -b master 
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      - uses: Homebrew/actions/setup-homebrew@master
-      # - id: version
-      #   run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
-      # - run: brew bump-cask-pr gitify --version=${{ steps.version.outputs.version }} --message="Bump gitify to ${{ steps.version.outputs.version }}"
-      - run: brew bump-cask-pr gitify --version=5.4.0 --message="Bump gitify to 5.4.0"
-        env:
-          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GH_TOKEN }}
-
   update-website:
     name: Website
     runs-on: ubuntu-latest
@@ -36,12 +19,13 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
+          token: ${{ secrets.GITHUB_TOKEN }}
       - id: version
         # run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
         run: echo "version="5.4.0"" >> $GITHUB_OUTPUT
       - run: |
-          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
-          git config --global user.name "${{ github.actor }}"          
+          git config user.name "GitHub Actions Bot"
+          git config user.email "<>"      
           pnpm version ${{ steps.version.outputs.version }}
       - uses: peter-evans/create-pull-request@v6
         with:
