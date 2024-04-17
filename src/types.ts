@@ -78,12 +78,13 @@ export interface GitifyUser {
 
 export interface GitifyError {
   title: string;
-  description: string;
+  descriptions: string[];
   emojis: string[];
 }
 
 export type ErrorType =
   | 'BAD_CREDENTIALS'
   | 'MISSING_SCOPES'
+  | 'NETWORK'
   | 'RATE_LIMITED'
   | 'UNKNOWN';

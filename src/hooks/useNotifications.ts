@@ -1,4 +1,4 @@
-import axios, { type AxiosError, type AxiosPromise } from 'axios';
+import axios, { AxiosError, type AxiosPromise } from 'axios';
 import { useCallback, useState } from 'react';
 
 import type {
@@ -405,6 +405,16 @@ export const useNotifications = (): NotificationsState => {
 };
 
 function determineFailureType(err: AxiosError<GithubRESTError>): GitifyError {
+  const code = err.code;
+
+  if (code === AxiosError.ERR_NETWORK) {
+    return Errors.NETWORK;
+  }
+
+  if (code !== AxiosError.ERR_BAD_REQUEST) {
+    return Errors.UNKNOWN;
+  }
+
   const status = err.response.status;
   const message = err.response.data.message;
 

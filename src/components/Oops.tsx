@@ -19,7 +19,14 @@ export const Oops: FC<IProps> = ({ error }) => {
       <h2 className="font-semibold text-xl mb-2 text-semibold">
         {error.title}
       </h2>
-      <div>{error.description}</div>
+      {error.descriptions.map((description, i) => {
+        return (
+          // biome-ignore lint/suspicious/noArrayIndexKey: using index for key to keep the error constants clean
+          <div className="text-center mb-2" key={`error_description_${i}`}>
+            {description}
+          </div>
+        );
+      })}
     </div>
   );
 };

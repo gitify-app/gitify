@@ -1,5 +1,5 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import nock from 'nock';
 
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
@@ -50,17 +50,20 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       describe('should fetch notifications with failures - github.com & enterprise', () => {
-        it('bad credentials', async () => {
-          const status = 401;
-          const message = 'Bad credentials';
+        it('network error', async () => {
+          const code = AxiosError.ERR_NETWORK;
 
           nock('https://api.github.com/')
             .get('/notifications?participating=false')
-            .reply(status, { message });
+            .replyWithError({
+              code: code,
+            });
 
           nock('https://github.gitify.io/api/v3/')
             .get('/notifications?participating=false')
-            .reply(status, { message });
+            .replyWithError({
+              code: code,
+            });
 
           const { result } = renderHook(() => useNotifications());
 
@@ -70,21 +73,234 @@ describe('hooks/useNotifications.ts', () => {
 
           await waitFor(() => {
             expect(result.current.requestFailed).toBe(true);
-            expect(result.current.errorDetails).toBe(Errors.BAD_CREDENTIALS);
+            expect(result.current.errorDetails).toBe(Errors.NETWORK);
           });
         });
 
-        it('missing scopes', async () => {
-          const status = 403;
-          const message = "Missing the 'notifications' scope";
+        describe('bad request errors', () => {
+          it('bad credentials', async () => {
+            const code = AxiosError.ERR_BAD_REQUEST;
+            const status = 401;
+            const message = 'Bad credentials';
+
+            nock('https://api.github.com/')
+              .get('/notifications?participating=false')
+              .replyWithError({
+                code,
+                response: {
+                  status,
+                  data: {
+                    message,
+                  },
+                },
+              });
+
+            nock('https://github.gitify.io/api/v3/')
+              .get('/notifications?participating=false')
+              .replyWithError({
+                code,
+                response: {
+                  status,
+                  data: {
+                    message,
+                  },
+                },
+              });
+
+            const { result } = renderHook(() => useNotifications());
+
+            act(() => {
+              result.current.fetchNotifications(mockAccounts, mockSettings);
+            });
+
+            await waitFor(() => {
+              expect(result.current.requestFailed).toBe(true);
+              expect(result.current.errorDetails).toBe(Errors.BAD_CREDENTIALS);
+            });
+          });
+
+          it('missing scopes', async () => {
+            const code = AxiosError.ERR_BAD_REQUEST;
+            const status = 403;
+            const message = "Missing the 'notifications' scope";
+
+            nock('https://api.github.com/')
+              .get('/notifications?participating=false')
+              .replyWithError({
+                code,
+                response: {
+                  status,
+                  data: {
+                    message,
+                  },
+                },
+              });
+
+            nock('https://github.gitify.io/api/v3/')
+              .get('/notifications?participating=false')
+              .replyWithError({
+                code,
+                response: {
+                  status,
+                  data: {
+                    message,
+                  },
+                },
+              });
+
+            const { result } = renderHook(() => useNotifications());
+
+            act(() => {
+              result.current.fetchNotifications(mockAccounts, mockSettings);
+            });
+
+            await waitFor(() => {
+              expect(result.current.requestFailed).toBe(true);
+              expect(result.current.errorDetails).toBe(Errors.MISSING_SCOPES);
+            });
+          });
+
+          it('rate limited - primary', async () => {
+            const code = AxiosError.ERR_BAD_REQUEST;
+            const status = 403;
+            const message = 'API rate limit exceeded';
+
+            nock('https://api.github.com/')
+              .get('/notifications?participating=false')
+              .replyWithError({
+                code,
+                response: {
+                  status,
+                  data: {
+                    message,
+                  },
+                },
+              });
+
+            nock('https://github.gitify.io/api/v3/')
+              .get('/notifications?participating=false')
+              .replyWithError({
+                code,
+                response: {
+                  status,
+                  data: {
+                    message,
+                  },
+                },
+              });
+
+            const { result } = renderHook(() => useNotifications());
+
+            act(() => {
+              result.current.fetchNotifications(mockAccounts, mockSettings);
+            });
+
+            await waitFor(() => {
+              expect(result.current.requestFailed).toBe(true);
+              expect(result.current.errorDetails).toBe(Errors.RATE_LIMITED);
+            });
+          });
+
+          it('rate limited - secondary', async () => {
+            const code = AxiosError.ERR_BAD_REQUEST;
+            const status = 403;
+            const message = 'You have exceeded a secondary rate limit';
+
+            nock('https://api.github.com/')
+              .get('/notifications?participating=false')
+              .replyWithError({
+                code,
+                response: {
+                  status,
+                  data: {
+                    message,
+                  },
+                },
+              });
+
+            nock('https://github.gitify.io/api/v3/')
+              .get('/notifications?participating=false')
+              .replyWithError({
+                code,
+                response: {
+                  status,
+                  data: {
+                    message,
+                  },
+                },
+              });
+
+            const { result } = renderHook(() => useNotifications());
+
+            act(() => {
+              result.current.fetchNotifications(mockAccounts, mockSettings);
+            });
+
+            await waitFor(() => {
+              expect(result.current.requestFailed).toBe(true);
+              expect(result.current.errorDetails).toBe(Errors.RATE_LIMITED);
+            });
+          });
+
+          it('unhandled bad request error', async () => {
+            const code = AxiosError.ERR_BAD_REQUEST;
+            const status = 400;
+            const message = 'Oops! Something went wrong.';
+
+            nock('https://api.github.com/')
+              .get('/notifications?participating=false')
+              .replyWithError({
+                code,
+                response: {
+                  status,
+                  data: {
+                    message,
+                  },
+                },
+              });
+
+            nock('https://github.gitify.io/api/v3/')
+              .get('/notifications?participating=false')
+              .replyWithError({
+                code,
+                response: {
+                  status,
+                  data: {
+                    message,
+                  },
+                },
+              });
+
+            const { result } = renderHook(() => useNotifications());
+
+            act(() => {
+              result.current.fetchNotifications(mockAccounts, mockSettings);
+            });
+
+            expect(result.current.isFetching).toBe(true);
+
+            await waitFor(() => {
+              expect(result.current.isFetching).toBe(false);
+            });
+
+            expect(result.current.requestFailed).toBe(true);
+          });
+        });
+
+        it('unknown error', async () => {
+          const code = 'anything';
 
           nock('https://api.github.com/')
             .get('/notifications?participating=false')
-            .reply(status, { message });
+            .replyWithError({
+              code: code,
+            });
 
           nock('https://github.gitify.io/api/v3/')
             .get('/notifications?participating=false')
-            .reply(status, { message });
+            .replyWithError({
+              code: code,
+            });
 
           const { result } = renderHook(() => useNotifications());
 
@@ -94,83 +310,8 @@ describe('hooks/useNotifications.ts', () => {
 
           await waitFor(() => {
             expect(result.current.requestFailed).toBe(true);
-            expect(result.current.errorDetails).toBe(Errors.MISSING_SCOPES);
+            expect(result.current.errorDetails).toBe(Errors.UNKNOWN);
           });
-        });
-
-        it('rate limited - primary', async () => {
-          const status = 403;
-          const message = 'API rate limit exceeded';
-
-          nock('https://api.github.com/')
-            .get('/notifications?participating=false')
-            .reply(status, { message });
-
-          nock('https://github.gitify.io/api/v3/')
-            .get('/notifications?participating=false')
-            .reply(status, { message });
-
-          const { result } = renderHook(() => useNotifications());
-
-          act(() => {
-            result.current.fetchNotifications(mockAccounts, mockSettings);
-          });
-
-          await waitFor(() => {
-            expect(result.current.requestFailed).toBe(true);
-            expect(result.current.errorDetails).toBe(Errors.RATE_LIMITED);
-          });
-        });
-
-        it('rate limited - secondary', async () => {
-          const status = 403;
-          const message = 'You have exceeded a secondary rate limit';
-
-          nock('https://api.github.com/')
-            .get('/notifications?participating=false')
-            .reply(status, { message });
-
-          nock('https://github.gitify.io/api/v3/')
-            .get('/notifications?participating=false')
-            .reply(status, { message });
-
-          const { result } = renderHook(() => useNotifications());
-
-          act(() => {
-            result.current.fetchNotifications(mockAccounts, mockSettings);
-          });
-
-          await waitFor(() => {
-            expect(result.current.requestFailed).toBe(true);
-            expect(result.current.errorDetails).toBe(Errors.RATE_LIMITED);
-          });
-        });
-
-        it('default error', async () => {
-          const status = 400;
-          const message = 'Oops! Something went wrong.';
-
-          nock('https://api.github.com/')
-            .get('/notifications?participating=false')
-            .reply(status, { message });
-
-          nock('https://github.gitify.io/api/v3/')
-            .get('/notifications?participating=false')
-            .reply(status, { message });
-
-          const { result } = renderHook(() => useNotifications());
-
-          act(() => {
-            result.current.fetchNotifications(mockAccounts, mockSettings);
-          });
-
-          expect(result.current.isFetching).toBe(true);
-
-          await waitFor(() => {
-            expect(result.current.isFetching).toBe(false);
-          });
-
-          expect(result.current.requestFailed).toBe(true);
         });
       });
     });
