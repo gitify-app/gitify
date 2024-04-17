@@ -36,10 +36,11 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
+    notifications,
   } = useContext(AppContext);
 
-  const pressTitle = useCallback(() => {
-    openBrowser();
+  const openNotification = useCallback(() => {
+    openInBrowser(notification, accounts);
 
     if (settings.markAsDoneOnOpen) {
       markNotificationDone(notification.id, hostname);
@@ -47,12 +48,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
       // no need to mark as read, github does it by default when opening it
       removeNotificationFromState(notification.id, hostname);
     }
-  }, [settings]);
-
-  const openBrowser = useCallback(
-    () => openInBrowser(notification, accounts),
-    [notification],
-  );
+  }, [notifications, notification, accounts, settings]); // notifications required here to prevent weird state issues
 
   const unsubscribe = (event: MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.
@@ -96,8 +92,8 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
 
       <div
         className="flex-1 overflow-hidden"
-        onClick={() => pressTitle()}
-        onKeyDown={() => pressTitle()}
+        onClick={() => openNotification()}
+        onKeyDown={() => openNotification()}
       >
         <div
           className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
