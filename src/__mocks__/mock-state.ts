@@ -1,4 +1,5 @@
 import { type AuthState, type SettingsState, Theme } from '../types';
+import Constants from '../utils/constants';
 import { mockedEnterpriseAccounts, mockedUser } from './mockedData';
 
 export const mockAccounts: AuthState = {
@@ -18,6 +19,6 @@ export const mockSettings: SettingsState = {
   detailedNotifications: false,
   markAsDoneOnOpen: false,
   showAccountHostname: false,
-  kbdShortcut: 'CmdOrCtrl+Alt+G',
+  kbdShortcut: Constants.KBD_SHORTCUT_DEFAULT,
   kbdShortcutEnabled: false,
 };

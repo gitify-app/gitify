@@ -43,7 +43,7 @@ export const defaultSettings: SettingsState = {
   detailedNotifications: false,
   markAsDoneOnOpen: false,
   showAccountHostname: false,
-  kbdShortcut: 'CmdOrCtrl+Alt+G',
+  kbdShortcut: Constants.KBD_SHORTCUT_DEFAULT,
   kbdShortcutEnabled: false,
 };
 

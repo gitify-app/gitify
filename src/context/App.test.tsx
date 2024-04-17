@@ -6,6 +6,7 @@ import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, SettingsState } from '../types';
 import * as apiRequests from '../utils/api-requests';
 import * as comms from '../utils/comms';
+import Constants from '../utils/constants';
 import * as notifications from '../utils/notifications';
 import * as storage from '../utils/storage';
 import { AppContext, AppProvider } from './App';
@@ -291,7 +292,7 @@ describe('context/App.tsx', () => {
         detailedNotifications: false,
         markAsDoneOnOpen: false,
         showAccountHostname: false,
-        kbdShortcut: 'CmdOrCtrl+Alt+G',
+        kbdShortcut: Constants.KBD_SHORTCUT_DEFAULT,
         kbdShortcutEnabled: false,
       },
     );
@@ -337,7 +338,7 @@ describe('context/App.tsx', () => {
         detailedNotifications: false,
         markAsDoneOnOpen: false,
         showAccountHostname: false,
-        kbdShortcut: 'CmdOrCtrl+Alt+G',
+        kbdShortcut: Constants.KBD_SHORTCUT_DEFAULT,
         kbdShortcutEnabled: false,
       },
     );

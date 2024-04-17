@@ -18,6 +18,8 @@ export const Constants = {
   ALLREAD_EMOJIS: ['😉', '🎉', '🐯', '🙈', '🎈', '🎊', '👏', '🎪', '🍝'],
 
   FETCH_INTERVAL: 60000,
+
+  KBD_SHORTCUT_DEFAULT: 'CmdOrCtrl+Alt+G',
 };
 
 export const Errors: Record<ErrorType, GitifyError> = {
