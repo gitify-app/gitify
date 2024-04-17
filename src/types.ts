@@ -1,4 +1,6 @@
-import type { Notification } from './typesGithub';
+import type { OcticonProps } from '@primer/octicons-react';
+import type { FC } from 'react';
+import type { Reason, StateType } from './typesGithub';
 
 export interface AuthState {
   token?: string;
@@ -47,7 +49,7 @@ export interface EnterpriseAccount {
 
 export interface AccountNotifications {
   hostname: string;
-  notifications: Notification[];
+  notifications: GitifyNotification[];
 }
 
 export interface AuthOptions {
@@ -68,6 +70,42 @@ export interface AuthResponse {
 export interface AuthTokenResponse {
   hostname: string;
   token: string;
+}
+
+export interface GitifyNotification {
+  id: string;
+  hostname: string;
+  updated_at: {
+    raw: string;
+    formatted: string;
+  };
+  title: string;
+  type: string;
+  url: string;
+  unread: boolean;
+  reason: {
+    code: Reason;
+    type: string;
+    description: string;
+  };
+  state?: StateType;
+  user?: GitifyNotificationUser;
+  icon: {
+    type: FC<OcticonProps>;
+    color: string;
+  };
+  repository: {
+    full_name: string;
+    avatar_url: string;
+    html_url: string;
+  };
+}
+
+export interface GitifyNotificationUser {
+  login: string;
+  html_url: string;
+  avatar_url: string;
+  type: string;
 }
 
 export interface GitifyUser {

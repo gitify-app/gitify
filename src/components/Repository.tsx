@@ -4,13 +4,13 @@ import { type FC, useCallback, useContext } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { AppContext } from '../context/App';
-import type { Notification } from '../typesGithub';
+import type { GitifyNotification } from '../types';
 import { openExternalLink } from '../utils/comms';
 import { NotificationRow } from './NotificationRow';
 
 interface IProps {
   hostname: string;
-  repoNotifications: Notification[];
+  repoNotifications: GitifyNotification[];
   repoName: string;
 }
 
@@ -37,7 +37,7 @@ export const RepositoryNotifications: FC<IProps> = ({
     markRepoNotificationsDone(repoSlug, hostname);
   }, [repoNotifications, hostname]);
 
-  const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
+  const avatarUrl = repoNotifications[0].repository.avatar_url;
   const repoSlug = repoNotifications[0].repository.full_name;
 
   return (

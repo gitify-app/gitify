@@ -14,6 +14,7 @@ import {
 } from 'react';
 
 import { AppContext } from '../context/App';
+import type { GitifyNotification } from '../types';
 import type { Notification } from '../typesGithub';
 import { openExternalLink } from '../utils/comms';
 import {
@@ -25,7 +26,7 @@ import { formatForDisplay, openInBrowser } from '../utils/helpers';
 
 interface IProps {
   hostname: string;
-  notification: Notification;
+  notification: GitifyNotification;
 }
 
 export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
@@ -50,7 +51,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   }, [settings]);
 
   const openBrowser = useCallback(
-    () => openInBrowser(notification, accounts),
+    () => openExternalLink(notification.url),
     [notification],
   );
 
@@ -67,22 +68,22 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     // Don't trigger onClick of parent element.
     event.stopPropagation();
 
-    openExternalLink(notification.subject.user.html_url);
+    openExternalLink(notification.user.html_url);
   };
 
-  const reason = formatReason(notification.reason);
-  const NotificationIcon = getNotificationTypeIcon(notification.subject);
-  const iconColor = getNotificationTypeIconColor(notification.subject);
-  const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
-    addSuffix: true,
-  });
+  const reason = notification.reason; //formatReason(notification.reason);
+  const NotificationIcon = notification.icon.type; //getNotificationTypeIcon(notification.subject);
+  const iconColor = notification.icon.color; // getNotificationTypeIconColor(notification.subject);
+  // const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
+  //   addSuffix: true,
+  // });
 
-  const updatedLabel = notification.subject.user
-    ? `${notification.subject.user.login} updated ${updatedAt}`
-    : `Updated ${updatedAt}`;
+  const updatedLabel = notification.user
+    ? `${notification.user.login} updated ${notification.updated_at.formatted}`
+    : `Updated ${notification.updated_at.formatted}`;
   const notificationTitle = formatForDisplay([
-    notification.subject.state,
-    notification.subject.type,
+    notification.state,
+    notification.type,
   ]);
 
   return (
@@ -91,7 +92,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
         className={`flex justify-center items-center w-5 ${iconColor}`}
         title={notificationTitle}
       >
-        <NotificationIcon size={18} aria-label={notification.subject.type} />
+        <NotificationIcon size={18} aria-label={notification.type} />
       </div>
 
       <div
@@ -102,15 +103,15 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
         <div
           className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
           role="main"
-          title={notification.subject.title}
+          title={notification.title}
         >
-          {notification.subject.title}
+          {notification.title}
         </div>
 
         <div className="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden">
           <span className="flex items-center">
             <span title={updatedLabel} className="flex">
-              {notification.subject.user ? (
+              {notification.user ? (
                 <span
                   title="View User Profile"
                   onClick={openUserProfile}
@@ -118,9 +119,9 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 >
                   <img
                     className="rounded-full w-4 h-4 cursor-pointer"
-                    src={notification.subject.user.avatar_url}
-                    title={notification.subject.user.login}
-                    alt={`${notification.subject.user.login}'s avatar`}
+                    src={notification.user.avatar_url}
+                    title={notification.user.login}
+                    alt={`${notification.user.login}'s avatar`}
                   />
                 </span>
               ) : (
@@ -134,7 +135,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
               <span className="ml-1" title={reason.description}>
                 {reason.type}
               </span>
-              <span className="ml-1">{updatedAt}</span>
+              <span className="ml-1">{notification.updated_at.formatted}</span>
             </span>
           </span>
         </div>

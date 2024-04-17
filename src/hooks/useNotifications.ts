@@ -1,15 +1,23 @@
 import axios, { type AxiosError, type AxiosPromise } from 'axios';
 import { useCallback, useState } from 'react';
 
+import { RocketIcon } from '@primer/octicons-react';
+import { formatDistanceToNow, parseISO } from 'date-fns';
 import type {
   AccountNotifications,
   AuthState,
   GitifyError,
+  GitifyNotification,
   SettingsState,
 } from '../types';
 import type { GithubRESTError, Notification } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import Constants, { Errors } from '../utils/constants';
+import {
+  formatReason,
+  getNotificationTypeIcon,
+  getNotificationTypeIconColor,
+} from '../utils/github-api';
 import {
   generateGitHubAPIUrl,
   getEnterpriseAccountToken,
@@ -109,12 +117,9 @@ export const useNotifications = (): NotificationsState => {
                   hostname,
                   notifications: accountNotifications.data.map(
                     (notification: Notification) => {
-                      return {
-                        ...notification,
-                        hostname: hostname,
-                      };
+                      return mapToGitifyNotification(notification, hostname);
                     },
-                  ),
+                  ) as GitifyNotification[],
                 };
               },
             );
@@ -126,33 +131,37 @@ export const useNotifications = (): NotificationsState => {
                     hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
                     notifications: gitHubNotifications.data.map(
                       (notification: Notification) => {
-                        return {
-                          ...notification,
-                          hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-                        };
+                        return mapToGitifyNotification(
+                          notification,
+                          Constants.DEFAULT_AUTH_OPTIONS.hostname,
+                        );
                       },
-                    ),
+                    ) as GitifyNotification[],
                   },
                 ]
               : [...enterpriseNotifications];
 
             axios
               .all(
-                data.map(async (accountNotifications) => {
+                data.map(async (accountNotifications: AccountNotifications) => {
                   return {
                     hostname: accountNotifications.hostname,
                     notifications: await axios
-                      .all<Notification>(
+                      .all<GitifyNotification>(
                         accountNotifications.notifications.map(
-                          async (notification: Notification) => {
-                            if (!settings.detailedNotifications) {
-                              return notification;
-                            }
+                          async (notification: GitifyNotification) => {
+                            // if (!settings.detailedNotifications) {
+                            return notification;
+                            // }
+                            /*
 
                             const token = getTokenForHost(
                               notification.hostname,
                               accounts,
                             );
+
+                            // include this also in the same call
+                            await generateGitHubWebUrl(notification, accounts)
 
                             const additionalSubjectDetails =
                               await getGitifySubjectDetails(
@@ -167,6 +176,7 @@ export const useNotifications = (): NotificationsState => {
                                 ...additionalSubjectDetails,
                               },
                             };
+                            */
                           },
                         ),
                       )
@@ -174,7 +184,7 @@ export const useNotifications = (): NotificationsState => {
                         return notifications.filter((notification) => {
                           if (
                             !settings.showBots &&
-                            notification.subject?.user?.type === 'Bot'
+                            notification?.user?.type === 'Bot'
                           ) {
                             return false;
                           }
@@ -403,6 +413,45 @@ export const useNotifications = (): NotificationsState => {
     markRepoNotificationsDone,
   };
 };
+
+function mapToGitifyNotification(
+  notification: Notification,
+  hostname: string,
+): GitifyNotification {
+  const formattedReason = formatReason(notification.reason);
+  // const icon = getNotificationTypeIcon(notification.subject);
+  // const color = getNotificationTypeIconColor(notification.subject);
+
+  return {
+    hostname: hostname,
+    id: notification.id,
+    title: notification.subject.title,
+    type: notification.subject.type,
+    reason: {
+      code: notification.reason,
+      type: formattedReason.type,
+      description: formattedReason.description,
+    },
+    unread: notification.unread,
+    updated_at: {
+      raw: notification.updated_at,
+      formatted: formatDistanceToNow(parseISO(notification.updated_at), {
+        addSuffix: true,
+      }),
+    },
+    url: notification.repository.html_url, // default notification url
+    repository: {
+      full_name: notification.repository.full_name,
+      html_url: notification.repository.html_url,
+      avatar_url: notification.repository.owner.avatar_url,
+    },
+    // FIXME: TEMPORARILY HARDCODED
+    icon: {
+      type: RocketIcon,
+      color: 'text-green-500',
+    },
+  };
+}
 
 function determineFailureType(err: AxiosError<GithubRESTError>): GitifyError {
   const status = err.response.status;
