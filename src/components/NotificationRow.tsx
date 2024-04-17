@@ -132,7 +132,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 </span>
               )}
               <span className="ml-1" title={reason.description}>
-                {reason.type}
+                {reason.title}
               </span>
               <span className="ml-1">{updatedAt}</span>
             </span>
