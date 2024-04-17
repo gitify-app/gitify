@@ -17,11 +17,11 @@ import { AppContext } from '../context/App';
 import type { Notification } from '../typesGithub';
 import { openExternalLink } from '../utils/comms';
 import {
-  formatReason,
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
 } from '../utils/github-api';
 import { formatForDisplay, openInBrowser } from '../utils/helpers';
+import { formatReason } from '../utils/reason';
 
 interface IProps {
   hostname: string;
