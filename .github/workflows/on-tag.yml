@@ -3,6 +3,7 @@ name: On Tag
 on:
   push:
     tags: 'v*'
+  workflow_dispatch:
 
 jobs:
   pr-to-homebrew:
@@ -15,9 +16,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
       - uses: Homebrew/actions/setup-homebrew@master
-      - id: version
-        run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
-      - run: brew bump-cask-pr gitify --version=${{ steps.version.outputs.version }} --message="Bump gitify to ${{ steps.version.outputs.version }}"
+      # - id: version
+      #   run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
+      # - run: brew bump-cask-pr gitify --version=${{ steps.version.outputs.version }} --message="Bump gitify to ${{ steps.version.outputs.version }}"
+      - run: brew bump-cask-pr gitify --version=5.4.0 --message="Bump gitify to 5.4.0"
         env:
           HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GH_TOKEN }}
 
@@ -34,8 +36,12 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       - id: version
-        run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
-      - run: pnpm version ${{ steps.version.outputs.version }}
+        # run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
+        run: echo "version="5.4.0"" >> $GITHUB_OUTPUT
+      - run: |
+          git config --global user.email "${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com"
+          git config --global user.name "${{ github.actor }}"          
+          pnpm version ${{ steps.version.outputs.version }}
       - uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
