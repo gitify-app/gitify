@@ -93,3 +93,10 @@ export interface FormattedReason {
   title: string;
   description: string;
 }
+
+export enum IconColor {
+  GREEN = 'text-green-500',
+  RED = 'text-red-500',
+  PURPLE = 'text-purple-500',
+  GRAY = 'text-gray-500 dark:text-gray-300',
+}
