@@ -24,10 +24,10 @@ jobs:
         # run: echo "GITIFY_VERSION=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT  # uncomment before merging
         run: echo "GITIFY_VERSION=5.4.1" >> $GITHUB_ENV # remove before merging
 
-      - name: setup git config
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+     # - name: setup git config
+     #   run: |
+     #     git config user.name github-actions[bot]
+     #     git config user.email 41898282+github-actions[bot]@users.noreply.github.com
       # - run: git checkout -b "bump/${{ env.GITIFY_VERSION }}"
       - run: pnpm version ${{ env.GITIFY_VERSION }}
       # - run: git push origin "bump/${{ env.GITIFY_VERSION }}"
@@ -37,15 +37,15 @@ jobs:
         with:
           token: ${{ secrets.GH_TOKEN }}
           commit-message: |
-            docs: update latest release to ${{ env.GITIFY_VERSION }}
+            docs: update to latest release version ${{ env.GITIFY_VERSION }}
           committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-          author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
           base: main
           branch: "bump/${{ env.GITIFY_VERSION }}"
           delete-branch: true
           title: |
-            docs: update latest release to ${{ env.GITIFY_VERSION }}
+            docs: update to latest release version ${{ env.GITIFY_VERSION }}
           body: |
-            Update latest release to ${{ env.GITIFY_VERSION }}
+            Automated update to latest release version ${{ env.GITIFY_VERSION }}
           labels: |
             documentation
