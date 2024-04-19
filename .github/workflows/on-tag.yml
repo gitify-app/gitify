@@ -40,6 +40,7 @@ jobs:
             docs: update latest release to ${{ env.GITIFY_VERSION }}
           committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
           author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
+          base: main
           branch: "bump/${{ env.GITIFY_VERSION }}"
           delete-branch: true
           title: |
