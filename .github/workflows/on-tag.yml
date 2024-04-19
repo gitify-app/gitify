@@ -4,7 +4,7 @@ on:
   push:
     tags: 'v*'
     branches:
-      - fix/*
+      - fix/* # remove before merging
 
 jobs:
   update-website:
@@ -21,7 +21,8 @@ jobs:
           node-version-file: '.nvmrc'
       - id: version
         name: Bump version to latest tag
-        run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
+        #run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT # uncomment before merging
+        run: echo "version=5.4.1" >> $GITHUB_ENV # remove before merging
       - run: pnpm version ${{ steps.version.outputs.version }}
       - uses: actions/checkout@v4
         name: Checkout gitify-app/website
