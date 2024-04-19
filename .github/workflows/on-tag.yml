@@ -37,15 +37,9 @@ jobs:
           git config user.name github-actions
           git config user.email github-actions@github.com
 
-      - name: Create branch
-        run: git checkout -b "bump/${{ env.GITIFY_VERSION }}"
-            
       - name: Bump version
         run: pnpm version ${{ env.GITIFY_VERSION }}
       
-      - name: Push changes
-        run: git push origin "bump/${{ env.GITIFY_VERSION }}"
-
       - uses: peter-evans/create-pull-request@v6
         name: Create pull request
         with:
