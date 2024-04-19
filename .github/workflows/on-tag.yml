@@ -8,9 +8,11 @@ on:
 
 jobs:
   update-website:
-    name: Website
+    name: Update Website Version
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+        name: Checkout gitify-app/gitify
       - uses: pnpm/action-setup@v3
         name: Setup pnpm
       - uses: actions/setup-node@v4
@@ -22,7 +24,7 @@ jobs:
         run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
       - run: pnpm version ${{ steps.version.outputs.version }}
       - uses: actions/checkout@v4
-        name: Checkout website
+        name: Checkout gitify-app/website
         with:
           repository: gitify-app/website
           token: ${{ secrets.GH_TOKEN }}
