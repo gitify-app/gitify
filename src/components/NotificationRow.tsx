@@ -16,11 +16,11 @@ import {
 import { AppContext } from '../context/App';
 import type { Notification } from '../typesGithub';
 import { openExternalLink } from '../utils/comms';
+import { formatForDisplay, openInBrowser } from '../utils/helpers';
 import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
-} from '../utils/github-api';
-import { formatForDisplay, openInBrowser } from '../utils/helpers';
+} from '../utils/icons';
 import { formatReason } from '../utils/reason';
 
 interface IProps {

@@ -1,4 +1,4 @@
-import axios, { AxiosError, type AxiosPromise } from 'axios';
+import axios, { type AxiosError, type AxiosPromise } from 'axios';
 import { useCallback, useState } from 'react';
 
 import type {
@@ -9,7 +9,8 @@ import type {
 } from '../types';
 import type { GithubRESTError, Notification } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
-import Constants, { Errors } from '../utils/constants';
+import { determineFailureType } from '../utils/api/errors';
+import Constants from '../utils/constants';
 import {
   generateGitHubAPIUrl,
   getEnterpriseAccountToken,
@@ -403,37 +404,3 @@ export const useNotifications = (): NotificationsState => {
     markRepoNotificationsDone,
   };
 };
-
-function determineFailureType(err: AxiosError<GithubRESTError>): GitifyError {
-  const code = err.code;
-
-  if (code === AxiosError.ERR_NETWORK) {
-    return Errors.NETWORK;
-  }
-
-  if (code !== AxiosError.ERR_BAD_REQUEST) {
-    return Errors.UNKNOWN;
-  }
-
-  const status = err.response.status;
-  const message = err.response.data.message;
-
-  if (status === 401) {
-    return Errors.BAD_CREDENTIALS;
-  }
-
-  if (status === 403) {
-    if (message.includes("Missing the 'notifications' scope")) {
-      return Errors.MISSING_SCOPES;
-    }
-
-    if (
-      message.includes('API rate limit exceeded') ||
-      message.includes('You have exceeded a secondary rate limit')
-    ) {
-      return Errors.RATE_LIMITED;
-    }
-  }
-
-  return Errors.UNKNOWN;
-}
