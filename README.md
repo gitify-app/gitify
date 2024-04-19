@@ -43,6 +43,7 @@ The release process is automated. Follow the steps below.
 5. Merge your release branch into `main`.
 6. Publish the release once you've finalized the release notes and confirmed all assets are there.
 7. Merge the open pull request in [gitify-app/website][github-website-pulls] (ie: `bump/v1.2.3`)
+8. A new homebrew cask will be automatically published (workflow runs ~3 hours)
 
 ### Tests
 
