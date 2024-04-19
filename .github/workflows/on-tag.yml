@@ -31,17 +31,28 @@ jobs:
         with:
           repository: gitify-app/website
           token: ${{ secrets.GH_TOKEN }}
-      
+
+      - name: setup git config
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+
+      - name: Create branch
+        run: git checkout -b "bump/${{ env.GITIFY_VERSION }}"
+            
       - name: Bump version
         run: pnpm version ${{ env.GITIFY_VERSION }}
       
+      - name: Push changes
+        run: git push origin "bump/${{ env.GITIFY_VERSION }}"
+
       - uses: peter-evans/create-pull-request@v6
         name: Create pull request
         with:
           token: ${{ secrets.GH_TOKEN }}
           commit-message: |
             docs: update latest release to ${{ env.GITIFY_VERSION }}
-          branch: 'bump/gitify-version'
+          branch: "bump/${{ env.GITIFY_VERSION }}"
           delete-branch: true
           title: |
             docs: update latest release to ${{ env.GITIFY_VERSION }}
