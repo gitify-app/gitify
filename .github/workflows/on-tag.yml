@@ -10,26 +10,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        name: Checkout website
         with:
           repository: gitify-app/website
           token: ${{ secrets.GH_TOKEN }}
       - uses: pnpm/action-setup@v3
+        name: Setup pnpm
       - uses: actions/setup-node@v4
+        name: Setup Node.js
         with:
           node-version-file: '.nvmrc'
       - id: version
+        name: Bump version to latest tag
         run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
       - run: pnpm version ${{ steps.version.outputs.version }}
       - uses: peter-evans/create-pull-request@v6
+        name: Create pull request
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'docs: update latest release to ${{ steps.version.outputs.version }}'
-          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
-          signoff: false
+          token: ${{ secrets.GH_TOKEN }}
+          commit-message: |
+            docs: update latest release to ${{ steps.version.outputs.version }}
           branch: 'bump/${{ steps.version.outputs.version }}'
           delete-branch: true
-          title: 'docs: update latest release to ${{ steps.version.outputs.version }}'
+          title: |
+            docs: update latest release to ${{ steps.version.outputs.version }}
           body: |
             Update latest release to ${{ steps.version.outputs.version }}
           labels: |
