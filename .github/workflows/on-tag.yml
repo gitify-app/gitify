@@ -3,8 +3,6 @@ name: On Tag
 on:
   push:
     tags: 'v*'
-    branches:
-      - fix/*
 
 jobs:
   update-website:
