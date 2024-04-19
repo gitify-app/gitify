@@ -3,8 +3,6 @@ name: On Tag
 on:
   push:
     tags: 'v*'
-    branches:
-      - fix/*
 
 jobs:
   update-website:
@@ -15,7 +13,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: gitify-app/website
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
       
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
@@ -26,8 +24,7 @@ jobs:
           node-version-file: '.nvmrc'
       
       - name: Bump version to latest tag
-        # run: echo "GITIFY_VERSION=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
-        run: echo "GITIFY_VERSION=5.4.1" >> $GITHUB_OUTPUT
+        run: echo "GITIFY_VERSION=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
 
       - name: Setup git config
         run: |
@@ -40,7 +37,7 @@ jobs:
       - name: Create pull request
         uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.GH_TOKEN }}
           branch: "bump/${{ env.GITIFY_VERSION }}"
           delete-branch: true
           title: |
