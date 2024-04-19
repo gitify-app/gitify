@@ -41,7 +41,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           commit-message: |
             docs: update latest release to ${{ env.GITIFY_VERSION }}
-          branch: 'bump/${{ env.GITIFY_VERSION }}'
+          branch: 'bump/gitify-version'
           delete-branch: true
           title: |
             docs: update latest release to ${{ env.GITIFY_VERSION }}
