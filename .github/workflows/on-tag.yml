@@ -3,8 +3,6 @@ name: On Tag
 on:
   push:
     tags: 'v*'
-    branches:
-      - fix/* # remove before merging
 
 jobs:
   update-website:
@@ -26,8 +24,7 @@ jobs:
           node-version-file: '.nvmrc'
       
       - name: Bump version to latest tag
-        # run: echo "GITIFY_VERSION=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT  # uncomment before merging
-        run: echo "GITIFY_VERSION=5.4.1" >> $GITHUB_ENV # remove before merging
+        run: echo "GITIFY_VERSION=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
 
       - name: Setup git config
         run: |
