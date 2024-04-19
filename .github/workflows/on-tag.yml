@@ -28,9 +28,9 @@ jobs:
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-      - run: git checkout -b "bump/${{ env.GITIFY_VERSION }}"
+      # - run: git checkout -b "bump/${{ env.GITIFY_VERSION }}"
       - run: pnpm version ${{ env.GITIFY_VERSION }}
-      - run: git push origin "bump/${{ env.GITIFY_VERSION }}"
+      # - run: git push origin "bump/${{ env.GITIFY_VERSION }}"
 
       - uses: peter-evans/create-pull-request@v6
         name: Create pull request
