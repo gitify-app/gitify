@@ -10,7 +10,7 @@ jest.mock('./NotificationRow', () => ({
 }));
 
 describe('components/Repository.tsx', () => {
-  const markRepoNotifications = jest.fn();
+  const markRepoNotificationsRead = jest.fn();
   const markRepoNotificationsDone = jest.fn();
 
   const props = {
@@ -20,7 +20,7 @@ describe('components/Repository.tsx', () => {
   };
 
   beforeEach(() => {
-    markRepoNotifications.mockReset();
+    markRepoNotificationsRead.mockReset();
 
     jest.spyOn(shell, 'openExternal');
   });
@@ -51,14 +51,14 @@ describe('components/Repository.tsx', () => {
 
   it('should mark a repo as read', () => {
     render(
-      <AppContext.Provider value={{ markRepoNotifications }}>
+      <AppContext.Provider value={{ markRepoNotificationsRead }}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
 
     fireEvent.click(screen.getByTitle('Mark Repository as Read'));
 
-    expect(markRepoNotifications).toHaveBeenCalledWith(
+    expect(markRepoNotificationsRead).toHaveBeenCalledWith(
       'manosim/notifications-test',
       'github.com',
     );

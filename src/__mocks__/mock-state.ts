@@ -18,4 +18,5 @@ export const mockSettings: SettingsState = {
   detailedNotifications: false,
   markAsDoneOnOpen: false,
   showAccountHostname: false,
+  showReadNotifications: false,
 };

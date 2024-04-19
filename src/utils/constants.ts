@@ -18,6 +18,8 @@ export const Constants = {
   ALLREAD_EMOJIS: ['😉', '🎉', '🐯', '🙈', '🎈', '🎊', '👏', '🎪', '🍝'],
 
   FETCH_INTERVAL: 60000,
+
+  READ_CLASS_NAME: 'opacity-50 dark:opacity-50',
 };
 
 export const Errors: Record<ErrorType, GitifyError> = {

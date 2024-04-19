@@ -183,6 +183,14 @@ export const SettingsRoute: FC = () => {
             Notifications
           </legend>
           <Checkbox
+            name="showReadNotifications"
+            label="Show read notifications"
+            checked={settings.showReadNotifications}
+            onChange={(evt) =>
+              updateSetting('showReadNotifications', evt.target.checked)
+            }
+          />
+          <Checkbox
             name="showOnlyParticipating"
             label="Show only participating"
             checked={settings.participating}

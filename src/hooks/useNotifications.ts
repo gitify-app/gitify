@@ -29,6 +29,11 @@ import { getGitifySubjectDetails } from '../utils/subject';
 interface NotificationsState {
   notifications: AccountNotifications[];
   removeNotificationFromState: (id: string, hostname: string) => void;
+  removeNotificationsFromState: (
+    repoSlug: string,
+    notifications: AccountNotifications[],
+    hostname: string,
+  ) => void;
   fetchNotifications: (
     accounts: AuthState,
     settings: SettingsState,
@@ -48,7 +53,7 @@ interface NotificationsState {
     id: string,
     hostname: string,
   ) => Promise<void>;
-  markRepoNotifications: (
+  markRepoNotificationsRead: (
     accounts: AuthState,
     repoSlug: string,
     hostname: string,
@@ -75,7 +80,7 @@ export const useNotifications = (): NotificationsState => {
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
       function getNotifications(hostname: string, token: string): AxiosPromise {
-        const endpointSuffix = `notifications?participating=${settings.participating}`;
+        const endpointSuffix = `notifications?all=${settings.showReadNotifications}&participating=${settings.participating}`;
         const url = `${generateGitHubAPIUrl(hostname)}${endpointSuffix}`;
         return apiRequestAuth(url, 'GET', token);
       }
@@ -224,14 +229,6 @@ export const useNotifications = (): NotificationsState => {
           {},
         );
 
-        const updatedNotifications = removeNotification(
-          id,
-          notifications,
-          hostname,
-        );
-
-        setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
         setIsFetching(false);
       } catch (err) {
         setIsFetching(false);
@@ -257,14 +254,6 @@ export const useNotifications = (): NotificationsState => {
           {},
         );
 
-        const updatedNotifications = removeNotification(
-          id,
-          notifications,
-          hostname,
-        );
-
-        setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
         setIsFetching(false);
       } catch (err) {
         setIsFetching(false);
@@ -291,7 +280,8 @@ export const useNotifications = (): NotificationsState => {
           token,
           { ignored: true },
         );
-        await markNotificationRead(accounts, id, hostname);
+
+        setIsFetching(false);
       } catch (err) {
         setIsFetching(false);
       }
@@ -299,7 +289,7 @@ export const useNotifications = (): NotificationsState => {
     [notifications],
   );
 
-  const markRepoNotifications = useCallback(
+  const markRepoNotificationsRead = useCallback(
     async (accounts: AuthState, repoSlug: string, hostname: string) => {
       setIsFetching(true);
 
@@ -316,14 +306,6 @@ export const useNotifications = (): NotificationsState => {
           {},
         );
 
-        const updatedNotifications = removeNotifications(
-          repoSlug,
-          notifications,
-          hostname,
-        );
-
-        setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
         setIsFetching(false);
       } catch (err) {
         setIsFetching(false);
@@ -359,14 +341,6 @@ export const useNotifications = (): NotificationsState => {
           );
         }
 
-        const updatedNotifications = removeNotifications(
-          repoSlug,
-          notifications,
-          hostname,
-        );
-
-        setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
         setIsFetching(false);
       } catch (err) {
         setIsFetching(false);
@@ -389,6 +363,24 @@ export const useNotifications = (): NotificationsState => {
     [notifications],
   );
 
+  const removeNotificationsFromState = useCallback(
+    (
+      repoSlug: string,
+      notifications: AccountNotifications[],
+      hostname: string,
+    ) => {
+      const updatedNotifications = removeNotifications(
+        repoSlug,
+        notifications,
+        hostname,
+      );
+
+      setNotifications(updatedNotifications);
+      setTrayIconColor(updatedNotifications);
+    },
+    [notifications],
+  );
+
   return {
     isFetching,
     requestFailed,
@@ -396,11 +388,13 @@ export const useNotifications = (): NotificationsState => {
     notifications,
 
     removeNotificationFromState,
+    removeNotificationsFromState,
+
     fetchNotifications,
     markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
-    markRepoNotifications,
+    markRepoNotificationsRead,
     markRepoNotificationsDone,
   };
 };

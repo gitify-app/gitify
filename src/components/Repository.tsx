@@ -6,6 +6,7 @@ import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AppContext } from '../context/App';
 import type { Notification } from '../typesGithub';
 import { openExternalLink } from '../utils/comms';
+import Constants from '../utils/constants';
 import { NotificationRow } from './NotificationRow';
 
 interface IProps {
@@ -19,8 +20,23 @@ export const RepositoryNotifications: FC<IProps> = ({
   repoNotifications,
   hostname,
 }) => {
-  const { markRepoNotifications, markRepoNotificationsDone } =
-    useContext(AppContext);
+  const {
+    markRepoNotificationsRead,
+    markRepoNotificationsDone,
+    settings,
+    notifications,
+    removeNotificationsFromState,
+  } = useContext(AppContext);
+
+  const setNotificationsAsOpaque = (repoNotifications: Notification[]) => {
+    for (const notification of repoNotifications) {
+      if (notification.unread) {
+        const notificationRow = document.getElementById(notification.id);
+        notificationRow.className += Constants.READ_CLASS_NAME;
+      }
+      notification.unread = false;
+    }
+  };
 
   const openBrowser = useCallback(() => {
     const url = repoNotifications[0].repository.html_url;
@@ -29,12 +45,22 @@ export const RepositoryNotifications: FC<IProps> = ({
 
   const markRepoAsRead = useCallback(() => {
     const repoSlug = repoNotifications[0].repository.full_name;
-    markRepoNotifications(repoSlug, hostname);
+    markRepoNotificationsRead(repoSlug, hostname);
+    if (!settings.showReadNotifications) {
+      removeNotificationsFromState(repoSlug, notifications, hostname);
+    } else {
+      setNotificationsAsOpaque(repoNotifications);
+    }
   }, [repoNotifications, hostname]);
 
   const markRepoAsDone = useCallback(() => {
     const repoSlug = repoNotifications[0].repository.full_name;
     markRepoNotificationsDone(repoSlug, hostname);
+    if (!settings.showReadNotifications) {
+      removeNotificationsFromState(repoSlug, notifications, hostname);
+    } else {
+      setNotificationsAsOpaque(repoNotifications);
+    }
   }, [repoNotifications, hostname]);
 
   const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
@@ -74,14 +100,18 @@ export const RepositoryNotifications: FC<IProps> = ({
 
           <div className="w-[14px]" />
 
-          <button
-            type="button"
-            className="focus:outline-none h-full hover:text-green-500"
-            title="Mark Repository as Read"
-            onClick={markRepoAsRead}
-          >
-            <ReadIcon size={14} aria-label="Mark Repository as Read" />
-          </button>
+          {repoNotifications.some((notification) => notification.unread) ? (
+            <button
+              type="button"
+              className="focus:outline-none h-full hover:text-green-500"
+              title="Mark Repository as Read"
+              onClick={markRepoAsRead}
+            >
+              <ReadIcon size={14} aria-label="Mark Repository as Read" />
+            </button>
+          ) : (
+            <div className="w-[14px]" />
+          )}
         </div>
       </div>
 

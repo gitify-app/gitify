@@ -44,6 +44,7 @@ export const defaultSettings: SettingsState = {
   detailedNotifications: false,
   markAsDoneOnOpen: false,
   showAccountHostname: false,
+  showReadNotifications: false,
 };
 
 interface AppContextState {
@@ -59,11 +60,16 @@ interface AppContextState {
   requestFailed: boolean;
   errorDetails: GitifyError;
   removeNotificationFromState: (id: string, hostname: string) => void;
+  removeNotificationsFromState: (
+    repoSlug: string,
+    notifications: AccountNotifications[],
+    hostname: string,
+  ) => void;
   fetchNotifications: () => Promise<void>;
   markNotificationRead: (id: string, hostname: string) => Promise<void>;
   markNotificationDone: (id: string, hostname: string) => Promise<void>;
   unsubscribeNotification: (id: string, hostname: string) => Promise<void>;
-  markRepoNotifications: (id: string, hostname: string) => Promise<void>;
+  markRepoNotificationsRead: (id: string, hostname: string) => Promise<void>;
   markRepoNotificationsDone: (id: string, hostname: string) => Promise<void>;
 
   settings: SettingsState;
@@ -85,10 +91,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     errorDetails,
     isFetching,
     removeNotificationFromState,
+    removeNotificationsFromState,
     markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
-    markRepoNotifications,
+    markRepoNotificationsRead,
     markRepoNotificationsDone,
   } = useNotifications();
 
@@ -107,6 +114,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     settings.participating,
     settings.showBots,
     settings.detailedNotifications,
+    settings.showReadNotifications,
     accounts.token,
     accounts.enterpriseAccounts.length,
   ]);
@@ -222,7 +230,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const markRepoNotificationsWithAccounts = useCallback(
     async (repoSlug: string, hostname: string) =>
-      await markRepoNotifications(accounts, repoSlug, hostname),
+      await markRepoNotificationsRead(accounts, repoSlug, hostname),
     [accounts, notifications],
   );
 
@@ -247,11 +255,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         requestFailed,
         errorDetails,
         removeNotificationFromState,
+        removeNotificationsFromState,
         fetchNotifications: fetchNotificationsWithAccounts,
         markNotificationRead: markNotificationReadWithAccounts,
         markNotificationDone: markNotificationDoneWithAccounts,
         unsubscribeNotification: unsubscribeNotificationWithAccounts,
-        markRepoNotifications: markRepoNotificationsWithAccounts,
+        markRepoNotificationsRead: markRepoNotificationsWithAccounts,
         markRepoNotificationsDone: markRepoNotificationsDoneWithAccounts,
 
         settings,

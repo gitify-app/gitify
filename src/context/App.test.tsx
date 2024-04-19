@@ -193,15 +193,15 @@ describe('context/App.tsx', () => {
       );
     });
 
-    it('should call markRepoNotifications', async () => {
+    it('should call markRepoNotificationsRead', async () => {
       const TestComponent = () => {
-        const { markRepoNotifications } = useContext(AppContext);
+        const { markRepoNotificationsRead } = useContext(AppContext);
 
         return (
           <button
             type="button"
             onClick={() =>
-              markRepoNotifications('manosim/gitify', 'github.com')
+              markRepoNotificationsRead('manosim/gitify', 'github.com')
             }
           >
             Test Case

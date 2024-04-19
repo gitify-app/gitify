@@ -16,6 +16,7 @@ import {
 import { AppContext } from '../context/App';
 import type { Notification } from '../typesGithub';
 import { openExternalLink } from '../utils/comms';
+import Constants from '../utils/constants';
 import { formatForDisplay, openInBrowser } from '../utils/helpers';
 import {
   getNotificationTypeIcon,
@@ -32,21 +33,32 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const {
     settings,
     accounts,
-    removeNotificationFromState,
     markNotificationRead,
     markNotificationDone,
+    removeNotificationFromState,
     unsubscribeNotification,
     notifications,
   } = useContext(AppContext);
+
+  const setNotificationAsOpaque = () => {
+    if (notification.unread) {
+      const notificationRow = document.getElementById(notification.id);
+      notificationRow.className += Constants.READ_CLASS_NAME;
+    }
+    notification.unread = false;
+  };
 
   const openNotification = useCallback(() => {
     openInBrowser(notification, accounts);
 
     if (settings.markAsDoneOnOpen) {
       markNotificationDone(notification.id, hostname);
-    } else {
-      // no need to mark as read, github does it by default when opening it
+    }
+
+    if (!settings.showReadNotifications) {
       removeNotificationFromState(notification.id, hostname);
+    } else {
+      setNotificationAsOpaque();
     }
   }, [notifications, notification, accounts, settings]); // notifications required here to prevent weird state issues
 
@@ -55,6 +67,33 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     event.stopPropagation();
 
     unsubscribeNotification(notification.id, hostname);
+    markNotificationRead(notification.id, hostname);
+
+    if (!settings.showReadNotifications) {
+      removeNotificationFromState(notification.id, hostname);
+    } else {
+      setNotificationAsOpaque();
+    }
+  };
+
+  const markAsRead = () => {
+    markNotificationRead(notification.id, hostname);
+
+    if (!settings.showReadNotifications) {
+      removeNotificationFromState(notification.id, hostname);
+    } else {
+      setNotificationAsOpaque();
+    }
+  };
+
+  const markAsDone = () => {
+    markNotificationDone(notification.id, hostname);
+
+    if (!settings.showReadNotifications) {
+      removeNotificationFromState(notification.id, hostname);
+    } else {
+      setNotificationAsOpaque();
+    }
   };
 
   const openUserProfile = (
@@ -82,18 +121,21 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   ]);
 
   return (
-    <div className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group">
+    <div
+      id={notification.id}
+      className={`flex space-x-3 py-2 px-3 bg-white border-b border-gray-100 dark:border-gray-darker group dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker
+          ${!notification.unread ? Constants.READ_CLASS_NAME : ''}`}
+    >
       <div
-        className={`flex justify-center items-center w-5 ${iconColor}`}
+        className={`flex flex-col justify-center items-center w-5 ${iconColor}`}
         title={notificationTitle}
       >
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
-
       <div
         className="flex-1 overflow-hidden"
-        onClick={() => openNotification()}
-        onKeyDown={() => openNotification()}
+        onClick={openNotification}
+        onKeyDown={openNotification}
       >
         <div
           className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
@@ -141,7 +183,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
           type="button"
           className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Done"
-          onClick={() => markNotificationDone(notification.id, hostname)}
+          onClick={markAsDone}
         >
           <CheckIcon size={16} aria-label="Mark as Done" />
         </button>
@@ -155,14 +197,18 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
           <BellSlashIcon size={14} aria-label="Unsubscribe" />
         </button>
 
-        <button
-          type="button"
-          className="focus:outline-none h-full hover:text-green-500"
-          title="Mark as Read"
-          onClick={() => markNotificationRead(notification.id, hostname)}
-        >
-          <ReadIcon size={14} aria-label="Mark as Read" />
-        </button>
+        {notification.unread ? (
+          <button
+            type="button"
+            className="focus:outline-none h-full hover:text-green-500"
+            title="Mark as Read"
+            onClick={markAsRead}
+          >
+            <ReadIcon size={14} aria-label="Mark as Read" />
+          </button>
+        ) : (
+          <div className="w-[14px]" />
+        )}
       </div>
     </div>
   );
