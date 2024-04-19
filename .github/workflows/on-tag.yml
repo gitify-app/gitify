@@ -24,7 +24,7 @@ jobs:
       
       - name: Find latest version tag
         #run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT # uncomment before merging
-        run: echo "gitify_version=5.4.1" >> $GITHUB_ENV # remove before merging
+        run: echo "GITIFY_VERSION=5.4.1" >> $GITHUB_ENV # remove before merging
      
       - uses: actions/checkout@v4
         name: Checkout gitify-app/website
