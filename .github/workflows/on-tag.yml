@@ -32,13 +32,15 @@ jobs:
           repository: gitify-app/website
           token: ${{ secrets.GH_TOKEN }}
 
-      - name: setup git config
+      - name: Setup git
         run: |
-          git config user.name github-actions
-          git config user.email github-actions@github.com
-
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          
       - name: Bump version
-        run: pnpm version ${{ env.GITIFY_VERSION }}
+        run: |
+          pnpm version ${{ env.GITIFY_VERSION }}
+          git commit -am "chore: update release to ${{ env.GITIFY_VERSION }}"
       
       - uses: peter-evans/create-pull-request@v6
         name: Create pull request
@@ -46,6 +48,8 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
           commit-message: |
             docs: update latest release to ${{ env.GITIFY_VERSION }}
+          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
           branch: "bump/${{ env.GITIFY_VERSION }}"
           delete-branch: true
           title: |
