@@ -22,10 +22,9 @@ jobs:
         with:
           node-version-file: '.nvmrc'
       
-      - id: version
-        name: Find latest version tag
+      - name: Find latest version tag
         #run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT # uncomment before merging
-        run: echo "version=5.4.1" >> $GITHUB_ENV # remove before merging
+        run: echo "gitify_version=5.4.1" >> $GITHUB_ENV # remove before merging
      
       - uses: actions/checkout@v4
         name: Checkout gitify-app/website
@@ -34,19 +33,19 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
       
       - name: Bump version
-        run: pnpm version ${{ steps.version.outputs.version }}
+        run: pnpm version ${{ env.GITIFY_VERSION }}
       
       - uses: peter-evans/create-pull-request@v6
         name: Create pull request
         with:
           token: ${{ secrets.GH_TOKEN }}
           commit-message: |
-            docs: update latest release to ${{ steps.version.outputs.version }}
-          branch: 'bump/${{ steps.version.outputs.version }}'
+            docs: update latest release to ${{ env.GITIFY_VERSION }}
+          branch: 'bump/${{ env.GITIFY_VERSION }}'
           delete-branch: true
           title: |
-            docs: update latest release to ${{ steps.version.outputs.version }}
+            docs: update latest release to ${{ env.GITIFY_VERSION }}
           body: |
-            Update latest release to ${{ steps.version.outputs.version }}
+            Update latest release to ${{ env.GITIFY_VERSION }}
           labels: |
             documentation
