@@ -37,6 +37,10 @@ jobs:
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           
+      - name: Create version branch
+        run: |
+          git checkout -b "bump/${{ env.GITIFY_VERSION }}"
+
       - name: Bump version
         run: |
           pnpm version ${{ env.GITIFY_VERSION }}
