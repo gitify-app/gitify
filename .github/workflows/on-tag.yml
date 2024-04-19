@@ -11,12 +11,17 @@ jobs:
     name: Update Website Version
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout website repository
+        uses: actions/checkout@v4
         with:
           repository: gitify-app/website
           token: ${{ secrets.GH_TOKEN }}
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
+      
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
       
@@ -24,16 +29,16 @@ jobs:
         # run: echo "GITIFY_VERSION=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT  # uncomment before merging
         run: echo "GITIFY_VERSION=5.4.1" >> $GITHUB_ENV # remove before merging
 
-     # - name: setup git config
-     #   run: |
-     #     git config user.name github-actions[bot]
-     #     git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-      # - run: git checkout -b "bump/${{ env.GITIFY_VERSION }}"
-      - run: pnpm version ${{ env.GITIFY_VERSION }}
-      # - run: git push origin "bump/${{ env.GITIFY_VERSION }}"
+      - name: Setup git config
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
 
-      - uses: peter-evans/create-pull-request@v6
-        name: Create pull request
+      - name: Bump version to latest
+        run: pnpm version ${{ env.GITIFY_VERSION }}
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
         with:
           token: ${{ secrets.GH_TOKEN }}
           commit-message: |
