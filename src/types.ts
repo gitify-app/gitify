@@ -21,7 +21,7 @@ interface NotificationSettingsState {
   showNotifications: boolean;
   showBots: boolean;
   markAsDoneOnOpen: boolean;
-  showReadNotifications: boolean;
+  showAllNotifications: boolean;
 }
 
 interface SystemSettingsState {

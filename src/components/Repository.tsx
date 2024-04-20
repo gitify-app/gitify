@@ -28,16 +28,6 @@ export const RepositoryNotifications: FC<IProps> = ({
     removeNotificationsFromState,
   } = useContext(AppContext);
 
-  const setNotificationsAsOpaque = (repoNotifications: Notification[]) => {
-    for (const notification of repoNotifications) {
-      if (notification.unread) {
-        const notificationRow = document.getElementById(notification.id);
-        notificationRow.className += Constants.READ_CLASS_NAME;
-      }
-      notification.unread = false;
-    }
-  };
-
   const openBrowser = useCallback(() => {
     const url = repoNotifications[0].repository.html_url;
     openExternalLink(url);
@@ -46,22 +36,33 @@ export const RepositoryNotifications: FC<IProps> = ({
   const markRepoAsRead = useCallback(() => {
     const repoSlug = repoNotifications[0].repository.full_name;
     markRepoNotificationsRead(repoSlug, hostname);
-    if (!settings.showReadNotifications) {
-      removeNotificationsFromState(repoSlug, notifications, hostname);
-    } else {
-      setNotificationsAsOpaque(repoNotifications);
-    }
+    handleNotificationState(repoSlug);
   }, [repoNotifications, hostname]);
 
   const markRepoAsDone = useCallback(() => {
     const repoSlug = repoNotifications[0].repository.full_name;
     markRepoNotificationsDone(repoSlug, hostname);
-    if (!settings.showReadNotifications) {
-      removeNotificationsFromState(repoSlug, notifications, hostname);
-    } else {
-      setNotificationsAsOpaque(repoNotifications);
-    }
+    handleNotificationState(repoSlug);
   }, [repoNotifications, hostname]);
+
+  const handleNotificationState = useCallback(
+    (repoSlug: string) => {
+      if (!settings.showAllNotifications) {
+        removeNotificationsFromState(repoSlug, notifications, hostname);
+      }
+
+      for (const notification of repoNotifications) {
+        if (notification.unread) {
+          const notificationRow = document.getElementById(notification.id);
+          notificationRow.className += Constants.READ_CLASS_NAME;
+        }
+
+        // TODO FIXME - this is not updating the notification count
+        notification.unread = false;
+      }
+    },
+    [repoNotifications, hostname, notifications],
+  );
 
   const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
   const repoSlug = repoNotifications[0].repository.full_name;

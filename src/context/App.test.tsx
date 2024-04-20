@@ -37,11 +37,11 @@ describe('context/App.tsx', () => {
 
   describe('api methods', () => {
     const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
-    const getNotificationCountMock = jest.spyOn(
+    const getUnreadNotificationCountMock = jest.spyOn(
       notifications,
-      'getNotificationCount',
+      'getUnreadNotificationCount',
     );
-    getNotificationCountMock.mockReturnValue(1);
+    getUnreadNotificationCountMock.mockReturnValue(1);
 
     const fetchNotificationsMock = jest.fn();
     const markNotificationReadMock = jest.fn();

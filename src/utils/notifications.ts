@@ -6,14 +6,18 @@ import { updateTrayIcon } from './comms';
 import type { AccountNotifications, AuthState, SettingsState } from '../types';
 
 export const setTrayIconColor = (notifications: AccountNotifications[]) => {
-  const allNotificationsCount = getNotificationCount(notifications);
+  const notificationCount = getUnreadNotificationCount(notifications);
 
-  updateTrayIcon(allNotificationsCount);
+  updateTrayIcon(notificationCount);
 };
 
-export function getNotificationCount(notifications: AccountNotifications[]) {
+export function getUnreadNotificationCount(
+  notifications: AccountNotifications[],
+) {
   return notifications.reduce(
-    (memo, acc) => memo + acc.notifications.length,
+    (memo, acc) =>
+      memo +
+      acc.notifications.filter((notification) => notification.unread).length,
     0,
   );
 }

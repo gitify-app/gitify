@@ -183,11 +183,23 @@ export const SettingsRoute: FC = () => {
             Notifications
           </legend>
           <Checkbox
-            name="showReadNotifications"
-            label="Show read notifications"
-            checked={settings.showReadNotifications}
+            name="showAllNotifications"
+            label="Show all notifications"
+            checked={settings.showAllNotifications}
             onChange={(evt) =>
-              updateSetting('showReadNotifications', evt.target.checked)
+              updateSetting('showAllNotifications', evt.target.checked)
+            }
+            tooltip={
+              <div>
+                <div className="pb-3">
+                  Will show up to 50 latest notifications regardless of status
+                  (read, unread, done).
+                </div>
+                <div className="text-orange-600">
+                  ⚠️ Users <i>may</i> experience rate limiting under certain
+                  circumstances. Disable this setting if you experience this.
+                </div>
+              </div>
             }
           />
           <Checkbox

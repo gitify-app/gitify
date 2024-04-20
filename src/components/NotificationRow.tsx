@@ -40,26 +40,13 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     notifications,
   } = useContext(AppContext);
 
-  const setNotificationAsOpaque = () => {
-    if (notification.unread) {
-      const notificationRow = document.getElementById(notification.id);
-      notificationRow.className += Constants.READ_CLASS_NAME;
-    }
-    notification.unread = false;
-  };
-
   const openNotification = useCallback(() => {
     openInBrowser(notification, accounts);
 
     if (settings.markAsDoneOnOpen) {
       markNotificationDone(notification.id, hostname);
     }
-
-    if (!settings.showReadNotifications) {
-      removeNotificationFromState(notification.id, hostname);
-    } else {
-      setNotificationAsOpaque();
-    }
+    handleNotificationState();
   }, [notifications, notification, accounts, settings]); // notifications required here to prevent weird state issues
 
   const unsubscribe = (event: MouseEvent<HTMLElement>) => {
@@ -68,32 +55,17 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
 
     unsubscribeNotification(notification.id, hostname);
     markNotificationRead(notification.id, hostname);
-
-    if (!settings.showReadNotifications) {
-      removeNotificationFromState(notification.id, hostname);
-    } else {
-      setNotificationAsOpaque();
-    }
+    handleNotificationState();
   };
 
   const markAsRead = () => {
     markNotificationRead(notification.id, hostname);
-
-    if (!settings.showReadNotifications) {
-      removeNotificationFromState(notification.id, hostname);
-    } else {
-      setNotificationAsOpaque();
-    }
+    handleNotificationState();
   };
 
   const markAsDone = () => {
     markNotificationDone(notification.id, hostname);
-
-    if (!settings.showReadNotifications) {
-      removeNotificationFromState(notification.id, hostname);
-    } else {
-      setNotificationAsOpaque();
-    }
+    handleNotificationState();
   };
 
   const openUserProfile = (
@@ -104,6 +76,20 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
 
     openExternalLink(notification.subject.user.html_url);
   };
+
+  const handleNotificationState = useCallback(() => {
+    if (!settings.showAllNotifications) {
+      removeNotificationFromState(notification.id, hostname);
+    }
+
+    if (notification.unread) {
+      const notificationRow = document.getElementById(notification.id);
+      notificationRow.className += Constants.READ_CLASS_NAME;
+    }
+
+    // TODO FIXME - this is not updating the notification count
+    notification.unread = false;
+  }, [notification, notifications]);
 
   const reason = formatReason(notification.reason);
   const NotificationIcon = getNotificationTypeIcon(notification.subject);

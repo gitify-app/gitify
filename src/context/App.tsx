@@ -23,7 +23,7 @@ import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
 import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
 import Constants from '../utils/constants';
 import { generateGitHubAPIUrl } from '../utils/helpers';
-import { getNotificationCount } from '../utils/notifications';
+import { getUnreadNotificationCount } from '../utils/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setTheme } from '../utils/theme';
 
@@ -44,7 +44,7 @@ export const defaultSettings: SettingsState = {
   detailedNotifications: false,
   markAsDoneOnOpen: false,
   showAccountHostname: false,
-  showReadNotifications: false,
+  showAllNotifications: false,
 };
 
 interface AppContextState {
@@ -114,7 +114,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     settings.participating,
     settings.showBots,
     settings.detailedNotifications,
-    settings.showReadNotifications,
+    settings.showAllNotifications,
     accounts.token,
     accounts.enterpriseAccounts.length,
   ]);
@@ -125,7 +125,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We need to update tray title when settings or notifications changes.
   useEffect(() => {
-    const count = getNotificationCount(notifications);
+    const count = getUnreadNotificationCount(notifications);
 
     if (settings.showNotificationsCountInTray && count > 0) {
       updateTrayTitle(count.toString());
