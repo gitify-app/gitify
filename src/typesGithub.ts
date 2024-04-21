@@ -232,6 +232,7 @@ interface GitHubSubject {
 export interface GitifySubject {
   state?: StateType;
   user?: SubjectUser;
+  html_url?: string;
 }
 
 export interface PullRequest {
