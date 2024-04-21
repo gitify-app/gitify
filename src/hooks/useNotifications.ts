@@ -74,7 +74,10 @@ export const useNotifications = (): NotificationsState => {
 
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
-      function getNotifications(hostname: string, token: string): AxiosPromise {
+      function getNotifications(
+        hostname: string,
+        token: string,
+      ): AxiosPromise<Notification[]> {
         const endpointSuffix = `notifications?participating=${settings.participating}`;
         const url = `${generateGitHubAPIUrl(hostname)}${endpointSuffix}`;
         return apiRequestAuth(url, 'GET', token);
