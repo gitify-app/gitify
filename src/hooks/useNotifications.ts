@@ -1,16 +1,20 @@
 import axios, { type AxiosError, type AxiosPromise } from 'axios';
 import { useCallback, useState } from 'react';
 
-import { RocketIcon } from '@primer/octicons-react';
 import { formatDistanceToNow, parseISO } from 'date-fns';
 import type {
+  AccountNotifications,
   AccountNotifications,
   AuthState,
   GitifyError,
   GitifyNotification,
   SettingsState,
 } from '../types';
-import type { GithubRESTError, Notification } from '../typesGithub';
+import type {
+  GithubRESTError,
+  GitifySubject,
+  Notification,
+} from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
 import { determineFailureType } from '../utils/api/errors';
 import Constants from '../utils/constants';
@@ -22,9 +26,14 @@ import {
   isGitHubLoggedIn,
 } from '../utils/helpers';
 import {
+  getNotificationTypeIcon,
+  getNotificationTypeIconColor,
+} from '../utils/icons';
+import {
   setTrayIconColor,
   triggerNativeNotifications,
 } from '../utils/notifications';
+import { formatReason } from '../utils/reason';
 import { removeNotification } from '../utils/remove-notification';
 import { removeNotifications } from '../utils/remove-notifications';
 import { getGitifySubjectDetails } from '../utils/subject';
@@ -77,7 +86,7 @@ export const useNotifications = (): NotificationsState => {
 
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
-      function getNotifications(hostname: string, token: string): AxiosPromise {
+      function getNotifications(hostname: string, token: string): AxiosPromise<Notification[]> {
         const endpointSuffix = `notifications?participating=${settings.participating}`;
         const url = `${generateGitHubAPIUrl(hostname)}${endpointSuffix}`;
         return apiRequestAuth(url, 'GET', token);
@@ -113,9 +122,12 @@ export const useNotifications = (): NotificationsState => {
                   hostname,
                   notifications: accountNotifications.data.map(
                     (notification: Notification) => {
-                      return mapToGitifyNotification(notification, hostname);
+                       return {
+                        ...notification,
+                        hostname: hostname,
+                      };
                     },
-                  ) as GitifyNotification[],
+                  ),
                 };
               },
             );
@@ -127,52 +139,34 @@ export const useNotifications = (): NotificationsState => {
                     hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
                     notifications: gitHubNotifications.data.map(
                       (notification: Notification) => {
-                        return mapToGitifyNotification(
-                          notification,
-                          Constants.DEFAULT_AUTH_OPTIONS.hostname,
-                        );
+                        return {
+                          ...notification,
+                          hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+                        };
                       },
-                    ) as GitifyNotification[],
+                    ),
                   },
                 ]
               : [...enterpriseNotifications];
 
             axios
               .all(
-                data.map(async (accountNotifications: AccountNotifications) => {
+                data.map(async (accountNotifications) => {
                   return {
                     hostname: accountNotifications.hostname,
                     notifications: await axios
-                      .all<GitifyNotification>(
+                      .all<Notification>(
                         accountNotifications.notifications.map(
-                          async (notification: GitifyNotification) => {
-                            // if (!settings.detailedNotifications) {
-                            return notification;
-                            // }
-                            /*
-
+                          async (notification: Notification) => {
+                          
                             const token = getTokenForHost(
                               notification.hostname,
                               accounts,
                             );
 
-                            // include this also in the same call
-                            await generateGitHubWebUrl(notification, accounts)
-
-                            const additionalSubjectDetails =
-                              await getGitifySubjectDetails(
-                                notification,
-                                token,
-                              );
-
-                            return {
-                              ...notification,
-                              subject: {
-                                ...notification.subject,
-                                ...additionalSubjectDetails,
-                              },
-                            };
-                            */
+                            // const gitifyNotification = await mapToGitifyNotification(notification, token, settings);)
+                           
+                            return notification;                            
                           },
                         ),
                       )
@@ -410,22 +404,31 @@ export const useNotifications = (): NotificationsState => {
   };
 };
 
-function mapToGitifyNotification(
+async function mapToGitifyNotification(
   notification: Notification,
-  hostname: string,
-): GitifyNotification {
+  token: string,
+  settings: SettingsState,
+): Promise<GitifyNotification> {
+  let extraSubjectDetails: GitifySubject;
+
+  if (settings.detailedNotifications) {
+    extraSubjectDetails = await getGitifySubjectDetails(notification, token);
+
+    notification.subject.state = extraSubjectDetails.state;
+    notification.subject.user = extraSubjectDetails.user;
+    notification.subject.html_url = extraSubjectDetails.user.html_url;
+  }
+
   const formattedReason = formatReason(notification.reason);
-  // const icon = getNotificationTypeIcon(notification.subject);
-  // const color = getNotificationTypeIconColor(notification.subject);
 
   return {
-    hostname: hostname,
+    hostname: notification.hostname,
     id: notification.id,
     title: notification.subject.title,
     type: notification.subject.type,
     reason: {
       code: notification.reason,
-      type: formattedReason.type,
+      type: formattedReason.title,
       description: formattedReason.description,
     },
     unread: notification.unread,
@@ -435,16 +438,17 @@ function mapToGitifyNotification(
         addSuffix: true,
       }),
     },
-    url: notification.repository.html_url, // default notification url
+    url: notification.subject.html_url ?? notification.repository.html_url,
     repository: {
       full_name: notification.repository.full_name,
       html_url: notification.repository.html_url,
       avatar_url: notification.repository.owner.avatar_url,
     },
-    // FIXME: TEMPORARILY HARDCODED
+    state: notification.subject?.state,
+    user: notification.subject?.user,
     icon: {
-      type: RocketIcon,
-      color: 'text-green-500',
+      type: getNotificationTypeIcon(notification.subject),
+      color: getNotificationTypeIconColor(notification.subject),
     },
   };
 }
