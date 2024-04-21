@@ -6,7 +6,7 @@ describe('components/Oops.tsx', () => {
   it('should render itself & its children', () => {
     const mockError = {
       title: 'Error title',
-      description: 'Error description',
+      descriptions: ['Error description'],
       emojis: ['🔥'],
     };
     const tree = TestRenderer.create(<Oops error={mockError} />);

@@ -12,12 +12,8 @@ import type {
 } from '../types';
 import type { GithubRESTError, Notification } from '../typesGithub';
 import { apiRequestAuth } from '../utils/api-requests';
-import Constants, { Errors } from '../utils/constants';
-import {
-  formatReason,
-  getNotificationTypeIcon,
-  getNotificationTypeIconColor,
-} from '../utils/github-api';
+import { determineFailureType } from '../utils/api/errors';
+import Constants from '../utils/constants';
 import {
   generateGitHubAPIUrl,
   getEnterpriseAccountToken,
@@ -451,28 +447,4 @@ function mapToGitifyNotification(
       color: 'text-green-500',
     },
   };
-}
-
-function determineFailureType(err: AxiosError<GithubRESTError>): GitifyError {
-  const status = err.response.status;
-  const message = err.response.data.message;
-
-  if (status === 401) {
-    return Errors.BAD_CREDENTIALS;
-  }
-
-  if (status === 403) {
-    if (message.includes("Missing the 'notifications' scope")) {
-      return Errors.MISSING_SCOPES;
-    }
-
-    if (
-      message.includes('API rate limit exceeded') ||
-      message.includes('You have exceeded a secondary rate limit')
-    ) {
-      return Errors.RATE_LIMITED;
-    }
-  }
-
-  return Errors.UNKNOWN;
 }

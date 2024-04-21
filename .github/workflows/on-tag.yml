@@ -5,48 +5,44 @@ on:
     tags: 'v*'
 
 jobs:
-  pr-to-homebrew:
-    name: Homebrew
-    runs-on: macos-14
-    steps:
-      # Ensure our Homebrew/homebrew-cask fork repository is in-sync with the upstream to avoid conflicts
-      # during automated commit and PR creation in the brew bump-cask-pr step below.
-      - run: gh repo sync setchy/homebrew-cask -b master 
-        env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-      - uses: Homebrew/actions/setup-homebrew@master
-      - id: version
-        run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
-      - run: brew bump-cask-pr gitify --version=${{ steps.version.outputs.version }} --message="Bump gitify to ${{ steps.version.outputs.version }}"
-        env:
-          HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GH_TOKEN }}
-
   update-website:
-    name: Website
+    name: Update Website Version
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout website repository
+        uses: actions/checkout@v4
         with:
           repository: gitify-app/website
           token: ${{ secrets.GH_TOKEN }}
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
+      
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+
+      - name: Setup node
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
-      - id: version
-        run: echo "version=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
-      - run: pnpm version ${{ steps.version.outputs.version }}
-      - uses: peter-evans/create-pull-request@v6
+      
+      - name: Bump version to latest tag
+        run: echo "GITIFY_VERSION=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
+
+      - name: Setup git config
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+
+      - name: Bump version to latest
+        run: pnpm version ${{ env.GITIFY_VERSION }}
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v6
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          commit-message: 'docs: update latest release to ${{ steps.version.outputs.version }}'
-          committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
-          author: ${{ github.actor }} <${{ github.actor_id }}+${{ github.actor }}@users.noreply.github.com>
-          signoff: false
-          branch: 'bump/${{ steps.version.outputs.version }}'
+          token: ${{ secrets.GH_TOKEN }}
+          branch: "bump/${{ env.GITIFY_VERSION }}"
           delete-branch: true
-          title: 'docs: update latest release to ${{ steps.version.outputs.version }}'
+          title: |
+            docs: update to latest release version ${{ env.GITIFY_VERSION }}
           body: |
-            Update latest release to ${{ steps.version.outputs.version }}
+            Automated update to latest release version ${{ env.GITIFY_VERSION }}
           labels: |
             documentation

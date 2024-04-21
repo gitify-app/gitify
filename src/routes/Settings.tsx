@@ -36,6 +36,7 @@ export const SettingsRoute: FC = () => {
   const navigate = useNavigate();
 
   const [isLinux, setIsLinux] = useState<boolean>(false);
+  const [isMacOS, setIsMacOS] = useState<boolean>(false);
   const [appVersion, setAppVersion] = useState<string | null>(null);
   const [repoScope, setRepoScope] = useState<boolean>(false);
 
@@ -57,6 +58,7 @@ export const SettingsRoute: FC = () => {
   useEffect(() => {
     ipcRenderer.invoke('get-platform').then((result: string) => {
       setIsLinux(result === 'linux');
+      setIsMacOS(result === 'darwin');
     });
 
     ipcRenderer.invoke('get-app-version').then((result: string) => {
@@ -240,14 +242,19 @@ export const SettingsRoute: FC = () => {
           <legend id="system" className="font-semibold mt-2 mb-1">
             System
           </legend>
-          <Checkbox
-            name="showNotificationsCountInTray"
-            label="Show notifications count in tray"
-            checked={settings.showNotificationsCountInTray}
-            onChange={(evt) =>
-              updateSetting('showNotificationsCountInTray', evt.target.checked)
-            }
-          />
+          {isMacOS && (
+            <Checkbox
+              name="showNotificationsCountInTray"
+              label="Show notifications count in tray"
+              checked={settings.showNotificationsCountInTray}
+              onChange={(evt) =>
+                updateSetting(
+                  'showNotificationsCountInTray',
+                  evt.target.checked,
+                )
+              }
+            />
+          )}
           <Checkbox
             name="showNotifications"
             label="Show system notifications"

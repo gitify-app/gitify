@@ -17,12 +17,12 @@ import { AppContext } from '../context/App';
 import type { GitifyNotification } from '../types';
 import type { Notification } from '../typesGithub';
 import { openExternalLink } from '../utils/comms';
+import { formatForDisplay, openInBrowser } from '../utils/helpers';
 import {
-  formatReason,
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
-} from '../utils/github-api';
-import { formatForDisplay, openInBrowser } from '../utils/helpers';
+} from '../utils/icons';
+import { formatReason } from '../utils/reason';
 
 interface IProps {
   hostname: string;
@@ -37,10 +37,11 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
+    notifications,
   } = useContext(AppContext);
 
-  const pressTitle = useCallback(() => {
-    openBrowser();
+  const openNotification = useCallback(() => {
+    openInBrowser(notification, accounts);
 
     if (settings.markAsDoneOnOpen) {
       markNotificationDone(notification.id, hostname);
@@ -48,12 +49,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
       // no need to mark as read, github does it by default when opening it
       removeNotificationFromState(notification.id, hostname);
     }
-  }, [settings]);
-
-  const openBrowser = useCallback(
-    () => openExternalLink(notification.url),
-    [notification],
-  );
+  }, [notifications, notification, accounts, settings]); // notifications required here to prevent weird state issues
 
   const unsubscribe = (event: MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.
@@ -97,8 +93,8 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
 
       <div
         className="flex-1 overflow-hidden"
-        onClick={() => pressTitle()}
-        onKeyDown={() => pressTitle()}
+        onClick={() => openNotification()}
+        onKeyDown={() => openNotification()}
       >
         <div
           className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
@@ -133,7 +129,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 </span>
               )}
               <span className="ml-1" title={reason.description}>
-                {reason.type}
+                {reason.title}
               </span>
               <span className="ml-1">{notification.updated_at.formatted}</span>
             </span>

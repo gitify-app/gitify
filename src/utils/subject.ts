@@ -88,10 +88,16 @@ function getCheckSuiteStatus(statusDisplayName: string): CheckSuiteStatus {
 function getGitifySubjectForCheckSuite(
   notification: Notification,
 ): GitifySubject {
-  return {
-    state: getCheckSuiteAttributes(notification)?.status,
-    user: null,
-  };
+  const state = getCheckSuiteAttributes(notification)?.status;
+
+  if (state) {
+    return {
+      state: state,
+      user: null,
+    };
+  }
+
+  return null;
 }
 
 async function getGitifySubjectForCommit(
@@ -238,10 +244,16 @@ async function getGitifySubjectForRelease(
 function getGitifySubjectForWorkflowRun(
   notification: Notification,
 ): GitifySubject {
-  return {
-    state: getWorkflowRunAttributes(notification)?.status,
-    user: null,
-  };
+  const state = getWorkflowRunAttributes(notification)?.status;
+
+  if (state) {
+    return {
+      state: state,
+      user: null,
+    };
+  }
+
+  return null;
 }
 
 /**
