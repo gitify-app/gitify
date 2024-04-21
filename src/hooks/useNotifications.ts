@@ -12,8 +12,8 @@ import { apiRequestAuth } from '../utils/api-requests';
 import { determineFailureType } from '../utils/api/errors';
 import Constants from '../utils/constants';
 import {
-  generateGitHubAPIUrl,
   getEnterpriseAccountToken,
+  getGitHubAPIBaseUrl,
   getTokenForHost,
   isEnterpriseHost,
   isGitHubLoggedIn,
@@ -75,9 +75,16 @@ export const useNotifications = (): NotificationsState => {
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
       function getNotifications(hostname: string, token: string): AxiosPromise {
-        const endpointSuffix = `notifications?participating=${settings.participating}`;
-        const url = `${generateGitHubAPIUrl(hostname)}${endpointSuffix}`;
-        return apiRequestAuth(url, 'GET', token);
+        const baseUrl = getGitHubAPIBaseUrl(hostname);
+        const url = new URL(`${baseUrl}/notifications`);
+        url.searchParams.append(
+          'participating',
+          String(settings.participating),
+        );
+
+        console.log('url', url.toString());
+
+        return apiRequestAuth(url.toString(), 'GET', token);
       }
 
       function getGitHubNotifications() {
@@ -217,12 +224,9 @@ export const useNotifications = (): NotificationsState => {
         : accounts.token;
 
       try {
-        await apiRequestAuth(
-          `${generateGitHubAPIUrl(hostname)}notifications/threads/${id}`,
-          'PATCH',
-          token,
-          {},
-        );
+        const baseUrl = getGitHubAPIBaseUrl(hostname);
+        const url = new URL(`${baseUrl}/notifications/threads/${id}`);
+        await apiRequestAuth(url.toString(), 'PATCH', token, {});
 
         const updatedNotifications = removeNotification(
           id,
@@ -250,12 +254,9 @@ export const useNotifications = (): NotificationsState => {
         : accounts.token;
 
       try {
-        await apiRequestAuth(
-          `${generateGitHubAPIUrl(hostname)}notifications/threads/${id}`,
-          'DELETE',
-          token,
-          {},
-        );
+        const baseUrl = getGitHubAPIBaseUrl(hostname);
+        const url = new URL(`${baseUrl}/notifications/threads/${id}`);
+        await apiRequestAuth(url.toString(), 'DELETE', token, {});
 
         const updatedNotifications = removeNotification(
           id,
@@ -283,14 +284,12 @@ export const useNotifications = (): NotificationsState => {
         : accounts.token;
 
       try {
-        await apiRequestAuth(
-          `${generateGitHubAPIUrl(
-            hostname,
-          )}notifications/threads/${id}/subscription`,
-          'PUT',
-          token,
-          { ignored: true },
+        const baseUrl = getGitHubAPIBaseUrl(hostname);
+        const url = new URL(
+          `${baseUrl}/notifications/threads/${id}/subscriptions`,
         );
+        await apiRequestAuth(url.toString(), 'PUT', token, { ignored: true });
+
         await markNotificationRead(accounts, id, hostname);
       } catch (err) {
         setIsFetching(false);
@@ -309,12 +308,9 @@ export const useNotifications = (): NotificationsState => {
         : accounts.token;
 
       try {
-        await apiRequestAuth(
-          `${generateGitHubAPIUrl(hostname)}repos/${repoSlug}/notifications`,
-          'PUT',
-          token,
-          {},
-        );
+        const baseUrl = getGitHubAPIBaseUrl(hostname);
+        const url = new URL(`${baseUrl}/repos/${repoSlug}/notifications`);
+        await apiRequestAuth(url.toString(), 'PUT', token, {});
 
         const updatedNotifications = removeNotifications(
           repoSlug,

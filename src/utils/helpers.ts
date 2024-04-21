@@ -37,11 +37,11 @@ export function isEnterpriseHost(hostname: string): boolean {
   return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
 }
 
-export function generateGitHubAPIUrl(hostname) {
+export function getGitHubAPIBaseUrl(hostname) {
   const isEnterprise = isEnterpriseHost(hostname);
   return isEnterprise
-    ? `https://${hostname}/api/v3/`
-    : `https://api.${hostname}/`;
+    ? `https://${hostname}/api/v3`
+    : `https://api.${hostname}`;
 }
 
 export function addNotificationReferrerIdToUrl(

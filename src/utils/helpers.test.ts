@@ -12,9 +12,9 @@ import {
   addNotificationReferrerIdToUrl,
   formatForDisplay,
   formatSearchQueryString,
-  generateGitHubAPIUrl,
   generateGitHubWebUrl,
   generateNotificationReferrerId,
+  getGitHubAPIBaseUrl,
   getHtmlUrl,
   isEnterpriseHost,
   isGitHubLoggedIn,
@@ -93,13 +93,13 @@ describe('utils/helpers.ts', () => {
 
   describe('generateGitHubAPIUrl', () => {
     it('should generate a GitHub API url - non enterprise', () => {
-      const result = generateGitHubAPIUrl('github.com');
-      expect(result).toBe('https://api.github.com/');
+      const result = getGitHubAPIBaseUrl('github.com');
+      expect(result).toBe('https://api.github.com');
     });
 
     it('should generate a GitHub API url - enterprise', () => {
-      const result = generateGitHubAPIUrl('github.manos.im');
-      expect(result).toBe('https://github.manos.im/api/v3/');
+      const result = getGitHubAPIBaseUrl('github.manos.im');
+      expect(result).toBe('https://github.manos.im/api/v3');
     });
   });
 

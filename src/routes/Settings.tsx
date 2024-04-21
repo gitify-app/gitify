@@ -28,7 +28,7 @@ import {
   updateTrayTitle,
 } from '../utils/comms';
 import Constants from '../utils/constants';
-import { generateGitHubAPIUrl } from '../utils/helpers';
+import { getGitHubAPIBaseUrl } from '../utils/helpers';
 import { setTheme } from '../utils/theme';
 
 export const SettingsRoute: FC = () => {
@@ -74,8 +74,12 @@ export const SettingsRoute: FC = () => {
 
   useMemo(() => {
     (async () => {
+      const baseUrl = getGitHubAPIBaseUrl(
+        Constants.DEFAULT_AUTH_OPTIONS.hostname,
+      );
+      const url = new URL(baseUrl);
       const response = await apiRequestAuth(
-        `${generateGitHubAPIUrl(Constants.DEFAULT_AUTH_OPTIONS.hostname)}`,
+        url.toString(),
         'GET',
         accounts.token,
       );
