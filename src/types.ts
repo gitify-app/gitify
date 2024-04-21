@@ -1,4 +1,4 @@
-import type { Notification } from './typesGithub';
+import type { Notification } from './typesGitHub';
 
 export interface AuthState {
   token?: string;

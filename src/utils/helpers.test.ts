@@ -5,7 +5,7 @@ import {
   mockedSingleNotification,
   mockedUser,
 } from '../__mocks__/mockedData';
-import type { SubjectType } from '../typesGithub';
+import type { SubjectType } from '../typesGitHub';
 import * as apiRequests from './api-requests';
 import {
   addHours,

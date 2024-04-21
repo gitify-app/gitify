@@ -1,4 +1,4 @@
-import type { Notification, Subject, User } from '../typesGithub';
+import type { Notification, Subject, User } from '../typesGitHub';
 
 export function partialMockNotification(
   subject: Partial<Subject>,

@@ -1,5 +1,5 @@
 import { ipcRenderer } from 'electron';
-import { Notification } from '../typesGithub';
+import { Notification } from '../typesGitHub';
 import { openInBrowser } from '../utils/helpers';
 import { updateTrayIcon } from './comms';
 

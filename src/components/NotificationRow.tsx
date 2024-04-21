@@ -14,7 +14,7 @@ import {
 } from 'react';
 
 import { AppContext } from '../context/App';
-import type { Notification } from '../typesGithub';
+import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
 import { formatForDisplay, openInBrowser } from '../utils/helpers';
 import {

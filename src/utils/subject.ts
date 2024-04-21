@@ -13,7 +13,7 @@ import type {
   SubjectUser,
   User,
   WorkflowRunAttributes,
-} from '../typesGithub';
+} from '../typesGitHub';
 import { apiRequestAuth } from './api-requests';
 import { fetchDiscussion, getLatestDiscussionComment } from './helpers';
 

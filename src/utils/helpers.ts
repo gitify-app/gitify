@@ -7,7 +7,7 @@ import type {
   IssueComments,
   Notification,
   PullRequest,
-} from '../typesGithub';
+} from '../typesGitHub';
 import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
 import { Constants } from './constants';
