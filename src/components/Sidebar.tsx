@@ -13,7 +13,7 @@ import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
 import { openExternalLink } from '../utils/comms';
 import { Constants } from '../utils/constants';
-import { getNotificationCount } from '../utils/notifications';
+import { getUnreadNotificationCount } from '../utils/notifications';
 
 export const Sidebar: FC = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ export const Sidebar: FC = () => {
   }, []);
 
   const notificationsCount = useMemo(() => {
-    return getNotificationCount(notifications);
+    return getUnreadNotificationCount(notifications);
   }, [notifications]);
 
   const sidebarButtonClasses =

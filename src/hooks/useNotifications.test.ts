@@ -796,7 +796,11 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications());
 
         act(() => {
-          result.current.markRepoNotifications(accounts, repoSlug, hostname);
+          result.current.markRepoNotificationsRead(
+            accounts,
+            repoSlug,
+            hostname,
+          );
         });
 
         await waitFor(() => {
@@ -814,7 +818,11 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications());
 
         act(() => {
-          result.current.markRepoNotifications(accounts, repoSlug, hostname);
+          result.current.markRepoNotificationsRead(
+            accounts,
+            repoSlug,
+            hostname,
+          );
         });
 
         await waitFor(() => {
@@ -837,7 +845,11 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications());
 
         act(() => {
-          result.current.markRepoNotifications(accounts, repoSlug, hostname);
+          result.current.markRepoNotificationsRead(
+            accounts,
+            repoSlug,
+            hostname,
+          );
         });
 
         await waitFor(() => {
@@ -855,7 +867,11 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications());
 
         act(() => {
-          result.current.markRepoNotifications(accounts, repoSlug, hostname);
+          result.current.markRepoNotificationsRead(
+            accounts,
+            repoSlug,
+            hostname,
+          );
         });
 
         await waitFor(() => {

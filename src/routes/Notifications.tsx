@@ -5,7 +5,7 @@ import { AllRead } from '../components/AllRead';
 import { Oops } from '../components/Oops';
 import { AppContext } from '../context/App';
 import { Errors } from '../utils/constants';
-import { getNotificationCount } from '../utils/notifications';
+import { getUnreadNotificationCount } from '../utils/notifications';
 
 export const NotificationsRoute: FC = () => {
   const { notifications, requestFailed, errorDetails, settings } =
@@ -16,7 +16,7 @@ export const NotificationsRoute: FC = () => {
     [notifications],
   );
   const notificationsCount = useMemo(() => {
-    return getNotificationCount(notifications);
+    return getUnreadNotificationCount(notifications);
   }, [notifications]);
 
   const hasNotifications = useMemo(
@@ -28,7 +28,7 @@ export const NotificationsRoute: FC = () => {
     return <Oops error={errorDetails ?? Errors.UNKNOWN} />;
   }
 
-  if (!hasNotifications) {
+  if (!hasNotifications && !settings.showAllNotifications) {
     return <AllRead />;
   }
 

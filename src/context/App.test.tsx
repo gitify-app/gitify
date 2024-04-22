@@ -37,11 +37,11 @@ describe('context/App.tsx', () => {
 
   describe('api methods', () => {
     const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
-    const getNotificationCountMock = jest.spyOn(
+    const getUnreadNotificationCountMock = jest.spyOn(
       notifications,
-      'getNotificationCount',
+      'getUnreadNotificationCount',
     );
-    getNotificationCountMock.mockReturnValue(1);
+    getUnreadNotificationCountMock.mockReturnValue(1);
 
     const fetchNotificationsMock = jest.fn();
     const markNotificationReadMock = jest.fn();
@@ -193,15 +193,15 @@ describe('context/App.tsx', () => {
       );
     });
 
-    it('should call markRepoNotifications', async () => {
+    it('should call markRepoNotificationsRead', async () => {
       const TestComponent = () => {
-        const { markRepoNotifications } = useContext(AppContext);
+        const { markRepoNotificationsRead } = useContext(AppContext);
 
         return (
           <button
             type="button"
             onClick={() =>
-              markRepoNotifications('manosim/gitify', 'github.com')
+              markRepoNotificationsRead('manosim/gitify', 'github.com')
             }
           >
             Test Case
