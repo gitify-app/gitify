@@ -14,7 +14,7 @@ import type {
   User,
   WorkflowRunAttributes,
 } from '../typesGithub';
-import { apiRequestAuth } from './api-requests';
+import { apiRequestAuth } from './api/request';
 import { fetchDiscussion, getLatestDiscussionComment } from './helpers';
 
 export async function getGitifySubjectDetails(

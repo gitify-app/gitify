@@ -8,8 +8,8 @@ import type {
   Notification,
   PullRequest,
 } from '../typesGithub';
-import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
+import { apiRequestAuth } from './api/request';
 import { Constants } from './constants';
 import { getCheckSuiteAttributes, getWorkflowRunAttributes } from './subject';
 

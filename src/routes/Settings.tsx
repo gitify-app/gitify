@@ -21,14 +21,13 @@ import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
 import { Theme } from '../types';
-import { apiRequestAuth } from '../utils/api-requests';
+import { getRootHypermediaLinks } from '../utils/api/client';
 import {
   openExternalLink,
   updateTrayIcon,
   updateTrayTitle,
 } from '../utils/comms';
 import Constants from '../utils/constants';
-import { getGitHubAPIBaseUrl } from '../utils/helpers';
 import { setTheme } from '../utils/theme';
 
 export const SettingsRoute: FC = () => {
@@ -74,13 +73,8 @@ export const SettingsRoute: FC = () => {
 
   useMemo(() => {
     (async () => {
-      const baseUrl = getGitHubAPIBaseUrl(
+      const response = await getRootHypermediaLinks(
         Constants.DEFAULT_AUTH_OPTIONS.hostname,
-      );
-      const url = new URL(baseUrl);
-      const response = await apiRequestAuth(
-        url.toString(),
-        'GET',
         accounts.token,
       );
 

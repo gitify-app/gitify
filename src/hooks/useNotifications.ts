@@ -1,4 +1,4 @@
-import axios, { type AxiosError, type AxiosPromise } from 'axios';
+import axios, { type AxiosError } from 'axios';
 import { useCallback, useState } from 'react';
 
 import type {
@@ -8,12 +8,18 @@ import type {
   SettingsState,
 } from '../types';
 import type { GithubRESTError, Notification } from '../typesGithub';
-import { apiRequestAuth } from '../utils/api-requests';
+import {
+  ignoreNotificationThreadSubscription,
+  listNotificationsForAuthenticatedUser,
+  markNotificationThreadAsDone,
+  markRepositoryNotificationsAsRead,
+  markThreadAsRead,
+} from '../utils/api/client';
 import { determineFailureType } from '../utils/api/errors';
+import { apiRequestAuth } from '../utils/api/request';
 import Constants from '../utils/constants';
 import {
   getEnterpriseAccountToken,
-  getGitHubAPIBaseUrl,
   getTokenForHost,
   isEnterpriseHost,
   isGitHubLoggedIn,
@@ -74,32 +80,25 @@ export const useNotifications = (): NotificationsState => {
 
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
-      function getNotifications(hostname: string, token: string): AxiosPromise {
-        const baseUrl = getGitHubAPIBaseUrl(hostname);
-        const url = new URL(`${baseUrl}/notifications`);
-        url.searchParams.append(
-          'participating',
-          String(settings.participating),
-        );
-
-        console.log('url', url.toString());
-
-        return apiRequestAuth(url.toString(), 'GET', token);
-      }
-
       function getGitHubNotifications() {
         if (!isGitHubLoggedIn(accounts)) {
           return;
         }
-        return getNotifications(
+
+        return listNotificationsForAuthenticatedUser(
           Constants.DEFAULT_AUTH_OPTIONS.hostname,
           accounts.token,
+          settings,
         );
       }
 
       function getEnterpriseNotifications() {
         return accounts.enterpriseAccounts.map((account) => {
-          return getNotifications(account.hostname, account.token);
+          return listNotificationsForAuthenticatedUser(
+            account.hostname,
+            account.token,
+            settings,
+          );
         });
       }
 
@@ -224,9 +223,7 @@ export const useNotifications = (): NotificationsState => {
         : accounts.token;
 
       try {
-        const baseUrl = getGitHubAPIBaseUrl(hostname);
-        const url = new URL(`${baseUrl}/notifications/threads/${id}`);
-        await apiRequestAuth(url.toString(), 'PATCH', token, {});
+        await markThreadAsRead(id, hostname, token);
 
         const updatedNotifications = removeNotification(
           id,
@@ -254,9 +251,7 @@ export const useNotifications = (): NotificationsState => {
         : accounts.token;
 
       try {
-        const baseUrl = getGitHubAPIBaseUrl(hostname);
-        const url = new URL(`${baseUrl}/notifications/threads/${id}`);
-        await apiRequestAuth(url.toString(), 'DELETE', token, {});
+        await markNotificationThreadAsDone(id, hostname, token);
 
         const updatedNotifications = removeNotification(
           id,
@@ -284,12 +279,7 @@ export const useNotifications = (): NotificationsState => {
         : accounts.token;
 
       try {
-        const baseUrl = getGitHubAPIBaseUrl(hostname);
-        const url = new URL(
-          `${baseUrl}/notifications/threads/${id}/subscriptions`,
-        );
-        await apiRequestAuth(url.toString(), 'PUT', token, { ignored: true });
-
+        await ignoreNotificationThreadSubscription(id, hostname, token);
         await markNotificationRead(accounts, id, hostname);
       } catch (err) {
         setIsFetching(false);
@@ -308,10 +298,7 @@ export const useNotifications = (): NotificationsState => {
         : accounts.token;
 
       try {
-        const baseUrl = getGitHubAPIBaseUrl(hostname);
-        const url = new URL(`${baseUrl}/repos/${repoSlug}/notifications`);
-        await apiRequestAuth(url.toString(), 'PUT', token, {});
-
+        await markRepositoryNotificationsAsRead(repoSlug, hostname, token);
         const updatedNotifications = removeNotifications(
           repoSlug,
           notifications,
