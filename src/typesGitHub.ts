@@ -107,6 +107,7 @@ export interface UserProfile {
   two_factor_authentication: boolean;
   plan: Plan;
 }
+
 export interface Plan {
   name: string;
   space: number;
@@ -330,6 +331,7 @@ interface CommitFiles {
   contents_url: string;
   patch: string;
 }
+
 export interface CommitComment {
   url: string;
   html_url: string;
