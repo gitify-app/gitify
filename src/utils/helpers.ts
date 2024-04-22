@@ -8,7 +8,6 @@ import type {
   Notification,
   PullRequest,
 } from '../typesGitHub';
-import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
 import { apiRequestAuth } from './api/request';
 import { Constants } from './constants';

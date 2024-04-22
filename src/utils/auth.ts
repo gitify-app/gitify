@@ -7,7 +7,6 @@ import type {
   GitifyUser,
 } from '../types';
 import type { UserDetails } from '../typesGitHub';
-import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 import { Constants } from '../utils/constants';
 import { getAuthenticatedUser } from './api/client';
 import { apiRequest } from './api/request';

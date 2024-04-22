@@ -33,19 +33,3 @@ exports[`utils/api/request.ts should make a request with the correct parameters 
   "Content-Type": "application/json",
 }
 `;
-
-exports[`utils/api-requests.ts should make a request with the correct parameters 1`] = `
-{
-  "Accept": "application/json",
-  "Cache-Control": "no-cache",
-  "Content-Type": "application/json",
-}
-`;
-
-exports[`utils/api-requests.ts should make a request with the correct parameters and default data 1`] = `
-{
-  "Accept": "application/json",
-  "Cache-Control": "no-cache",
-  "Content-Type": "application/json",
-}
-`;

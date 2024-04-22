@@ -12,11 +12,10 @@ import {
   ignoreNotificationThreadSubscription,
   listNotificationsForAuthenticatedUser,
   markNotificationThreadAsDone,
+  markNotificationThreadAsRead,
   markRepositoryNotificationsAsRead,
-  markThreadAsRead,
 } from '../utils/api/client';
 import { determineFailureType } from '../utils/api/errors';
-import { apiRequestAuth } from '../utils/api/request';
 import Constants from '../utils/constants';
 import {
   getEnterpriseAccountToken,
@@ -80,12 +79,6 @@ export const useNotifications = (): NotificationsState => {
 
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
-      function getNotifications(hostname: string, token: string): AxiosPromise {
-        const endpointSuffix = `notifications?participating=${settings.participating}`;
-        const url = `${generateGitHubAPIUrl(hostname)}${endpointSuffix}`;
-        return apiRequestAuth(url, 'GET', token);
-      }
-
       function getGitHubNotifications() {
         if (!isGitHubLoggedIn(accounts)) {
           return;
@@ -229,7 +222,7 @@ export const useNotifications = (): NotificationsState => {
         : accounts.token;
 
       try {
-        await markThreadAsRead(id, hostname, token);
+        await markNotificationThreadAsRead(id, hostname, token);
 
         const updatedNotifications = removeNotification(
           id,

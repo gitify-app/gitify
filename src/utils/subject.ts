@@ -1,20 +1,17 @@
 import type {
   CheckSuiteAttributes,
   CheckSuiteStatus,
-  Commit,
   DiscussionStateType,
   GitifySubject,
-  Issue,
   IssueComments,
   Notification,
-  PullRequest,
   PullRequestStateType,
   ReleaseComments,
   SubjectUser,
   User,
   WorkflowRunAttributes,
 } from '../typesGitHub';
-import { apiRequestAuth } from './api-requests';
+import { getComments, getCommit, getIssue, getPullRequest } from './api/client';
 import { fetchDiscussion, getLatestDiscussionComment } from './helpers';
 
 export async function getGitifySubjectDetails(
@@ -105,9 +102,7 @@ async function getGitifySubjectForCommit(
   token: string,
 ): Promise<GitifySubject> {
   try {
-    const commit: Commit = (
-      await apiRequestAuth(notification.subject.url, 'GET', token)
-    ).data;
+    const commit = (await getCommit(notification.subject.url, token)).data;
 
     const commitCommentUser = await getLatestCommentUser(notification, token);
 
@@ -172,9 +167,7 @@ async function getGitifySubjectForIssue(
   token: string,
 ): Promise<GitifySubject> {
   try {
-    const issue: Issue = (
-      await apiRequestAuth(notification.subject.url, 'GET', token)
-    ).data;
+    const issue = (await getIssue(notification.subject.url, token)).data;
 
     const issueCommentUser = await getLatestCommentUser(notification, token);
 
@@ -197,9 +190,7 @@ async function getGitifySubjectForPullRequest(
   token: string,
 ): Promise<GitifySubject> {
   try {
-    const pr: PullRequest = (
-      await apiRequestAuth(notification.subject.url, 'GET', token)
-    ).data;
+    const pr = (await getPullRequest(notification.subject.url, token)).data;
 
     let prState: PullRequestStateType = pr.state;
     if (pr.merged) {
@@ -300,11 +291,7 @@ async function getLatestCommentUser(
 
   try {
     const response: IssueComments | ReleaseComments = (
-      await apiRequestAuth(
-        notification.subject.latest_comment_url,
-        'GET',
-        token,
-      )
+      await getComments(notification.subject.latest_comment_url, token)
     )?.data;
 
     return (

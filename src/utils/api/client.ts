@@ -1,10 +1,16 @@
-import type { Axios, AxiosPromise } from 'axios';
+import type { AxiosPromise } from 'axios';
 import type { SettingsState } from '../../types';
 import type {
+  Commit,
+  Issue,
+  IssueComments,
+  Notification,
   NotificationThreadSubscription,
+  PullRequest,
+  ReleaseComments,
   RootHypermediaLinks,
   UserDetails,
-} from '../../typesGithub';
+} from '../../typesGitHub';
 import { getGitHubAPIBaseUrl } from '../helpers';
 import { apiRequestAuth } from './request';
 
@@ -87,4 +93,26 @@ export function markRepositoryNotificationsAsRead(
   const baseUrl = getGitHubAPIBaseUrl(hostname);
   const url = new URL(`${baseUrl}/repos/${repoSlug}/notifications`);
   return apiRequestAuth(url.toString(), 'PUT', token, {});
+}
+
+export function getCommit(url: string, token: string): AxiosPromise<Commit> {
+  return apiRequestAuth(url, 'GET', token);
+}
+
+export function getIssue(url: string, token: string): AxiosPromise<Issue> {
+  return apiRequestAuth(url, 'GET', token);
+}
+
+export function getPullRequest(
+  url: string,
+  token: string,
+): AxiosPromise<PullRequest> {
+  return apiRequestAuth(url, 'GET', token);
+}
+
+export function getComments(
+  url: string,
+  token: string,
+): AxiosPromise<IssueComments | ReleaseComments> {
+  return apiRequestAuth(url, 'GET', token);
 }
