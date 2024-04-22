@@ -13,7 +13,7 @@ import type {
   Notification,
   Repository,
   ViewerSubscription,
-} from '../typesGithub';
+} from '../typesGitHub';
 import {
   getCheckSuiteAttributes,
   getGitifySubjectDetails,

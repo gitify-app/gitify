@@ -440,7 +440,7 @@ export interface WorkflowRunAttributes {
   status: CheckSuiteStatus | null;
 }
 
-export interface GithubRESTError {
+export interface GitHubRESTError {
   message: string;
   documentation_url: string;
 }

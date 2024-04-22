@@ -6,7 +6,8 @@ import type {
   AuthTokenResponse,
   GitifyUser,
 } from '../types';
-import type { UserDetails } from '../typesGithub';
+import type { UserDetails } from '../typesGitHub';
+import { apiRequest, apiRequestAuth } from '../utils/api-requests';
 import { Constants } from '../utils/constants';
 import { getAuthenticatedUser } from './api/client';
 import { apiRequest } from './api/request';
@@ -45,7 +46,7 @@ export const authGitHub = (
       } else if (error) {
         reject(
           "Oops! Something went wrong and we couldn't " +
-            'log you in using Github. Please try again.',
+            'log you in using GitHub. Please try again.',
         );
       }
     };

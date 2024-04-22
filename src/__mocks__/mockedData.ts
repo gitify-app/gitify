@@ -10,7 +10,7 @@ import type {
   Notification,
   Repository,
   User,
-} from '../typesGithub';
+} from '../typesGitHub';
 import Constants from '../utils/constants';
 
 export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
@@ -199,7 +199,7 @@ export const mockedSingleNotification: Notification = {
 
 // 2 Notifications
 // Repository : 'manosim/notifications-tests'
-export const mockedGithubNotifications = [
+export const mockedGitHubNotifications = [
   mockedSingleNotification,
   {
     id: '148827438',
@@ -366,7 +366,7 @@ export const mockedEnterpriseNotifications = [
 export const mockedAccountNotifications: AccountNotifications[] = [
   {
     hostname: 'github.com',
-    notifications: mockedGithubNotifications,
+    notifications: mockedGitHubNotifications,
   },
   {
     hostname: 'github.gitify.io',

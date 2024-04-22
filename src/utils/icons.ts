@@ -25,7 +25,7 @@ import {
 } from '@primer/octicons-react';
 import type { FC } from 'react';
 import { IconColor } from '../types';
-import type { Subject } from '../typesGithub';
+import type { Subject } from '../typesGitHub';
 
 export function getNotificationTypeIcon(subject: Subject): FC<OcticonProps> {
   switch (subject.type) {

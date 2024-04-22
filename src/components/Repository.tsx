@@ -4,7 +4,7 @@ import { type FC, useCallback, useContext } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 
 import { AppContext } from '../context/App';
-import type { Notification } from '../typesGithub';
+import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
 import { NotificationRow } from './NotificationRow';
 

@@ -13,8 +13,8 @@ import type {
   SubjectUser,
   User,
   WorkflowRunAttributes,
-} from '../typesGithub';
-import { apiRequestAuth } from './api/request';
+} from '../typesGitHub';
+import { apiRequestAuth } from './api-requests';
 import { fetchDiscussion, getLatestDiscussionComment } from './helpers';
 
 export async function getGitifySubjectDetails(

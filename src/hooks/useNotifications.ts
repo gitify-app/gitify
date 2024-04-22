@@ -7,7 +7,7 @@ import type {
   GitifyError,
   SettingsState,
 } from '../types';
-import type { GithubRESTError, Notification } from '../typesGithub';
+import type { GitHubRESTError, Notification } from '../typesGitHub';
 import {
   ignoreNotificationThreadSubscription,
   listNotificationsForAuthenticatedUser,
@@ -80,6 +80,12 @@ export const useNotifications = (): NotificationsState => {
 
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
+      function getNotifications(hostname: string, token: string): AxiosPromise {
+        const endpointSuffix = `notifications?participating=${settings.participating}`;
+        const url = `${generateGitHubAPIUrl(hostname)}${endpointSuffix}`;
+        return apiRequestAuth(url, 'GET', token);
+      }
+
       function getGitHubNotifications() {
         if (!isGitHubLoggedIn(accounts)) {
           return;
@@ -204,7 +210,7 @@ export const useNotifications = (): NotificationsState => {
               });
           }),
         )
-        .catch((err: AxiosError<GithubRESTError>) => {
+        .catch((err: AxiosError<GitHubRESTError>) => {
           setIsFetching(false);
           setRequestFailed(true);
           setErrorDetails(determineFailureType(err));
