@@ -1,7 +1,8 @@
-import axios from 'axios';
+import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
 import type { SettingsState } from '../../types';
 import {
   getAuthenticatedUser,
+  getHtmlUrl,
   getRootHypermediaLinks,
   headNotifications,
   ignoreNotificationThreadSubscription,
@@ -10,6 +11,7 @@ import {
   markNotificationThreadAsRead,
   markRepositoryNotificationsAsRead,
 } from './client';
+import * as apiRequests from './request';
 
 jest.mock('axios');
 
@@ -273,6 +275,28 @@ describe('utils/api/client.ts', () => {
       });
 
       expect(axios.defaults.headers.common).toMatchSnapshot();
+    });
+  });
+
+  describe('getHtmlUrl', () => {
+    it('should return the HTML URL', async () => {
+      const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+
+      const requestPromise = new Promise((resolve) =>
+        resolve({
+          data: {
+            html_url: 'https://github.com/gitify-app/gitify/issues/785',
+          },
+        } as AxiosResponse),
+      ) as AxiosPromise;
+
+      apiRequestAuthMock.mockResolvedValue(requestPromise);
+
+      const result = await getHtmlUrl(
+        'https://api.github.com/repos/gitify-app/gitify/issues/785',
+        '123',
+      );
+      expect(result).toBe('https://github.com/gitify-app/gitify/issues/785');
     });
   });
 });

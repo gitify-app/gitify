@@ -15,7 +15,6 @@ import {
   generateGitHubWebUrl,
   generateNotificationReferrerId,
   getGitHubAPIBaseUrl,
-  getHtmlUrl,
   isEnterpriseHost,
   isGitHubLoggedIn,
 } from './helpers';
@@ -127,32 +126,6 @@ describe('utils/helpers.ts', () => {
       expect(result).toBe(
         'exampleTitle in:title repo:exampleRepo updated:>2024-02-20T10:00:00.000Z',
       );
-    });
-  });
-
-  describe('getHtmlUrl', () => {
-    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
-
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
-    it('should return the HTML URL', async () => {
-      const requestPromise = new Promise((resolve) =>
-        resolve({
-          data: {
-            html_url: 'https://github.com/gitify-app/gitify/issues/785',
-          },
-        } as AxiosResponse),
-      ) as AxiosPromise;
-
-      apiRequestAuthMock.mockResolvedValue(requestPromise);
-
-      const result = await getHtmlUrl(
-        'https://api.github.com/repos/gitify-app/gitify/issues/785',
-        '123',
-      );
-      expect(result).toBe('https://github.com/gitify-app/gitify/issues/785');
     });
   });
 

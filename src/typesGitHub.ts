@@ -330,7 +330,7 @@ interface CommitFiles {
   contents_url: string;
   patch: string;
 }
-export interface CommitComments {
+export interface CommitComment {
   url: string;
   html_url: string;
   issue_url: string;
@@ -365,7 +365,7 @@ export interface Issue {
   state_reason: IssueStateReasonType | null;
 }
 
-export interface IssueComments {
+export interface IssueOrPullRequestComment {
   url: string;
   html_url: string;
   issue_url: string;
@@ -377,20 +377,22 @@ export interface IssueComments {
   body: string;
 }
 
-export interface ReleaseComments {
+export interface Release {
   url: string;
   assets_url: string;
+  upload_url: string;
   html_url: string;
   id: number;
   author: User;
   node_id: string;
   tag_name: string;
-  name: string;
+  target_commitish: string;
+  name: string | null;
+  body: string | null;
   draft: boolean;
   prerelease: boolean;
   created_at: string;
-  published_at: string;
-  body: string;
+  published_at: string | null;
 }
 
 export interface GraphQLSearch<T> {
