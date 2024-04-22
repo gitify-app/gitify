@@ -1,4 +1,4 @@
-import type { Reason } from '../typesGithub';
+import type { Reason } from '../typesGitHub';
 import { formatReason } from './reason';
 
 describe('utils/reason.ts', () => {

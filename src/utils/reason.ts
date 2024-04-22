@@ -1,5 +1,5 @@
 import type { FormattedReason } from '../types';
-import type { Reason } from '../typesGithub';
+import type { Reason } from '../typesGitHub';
 
 const FORMATTED_REASONS: Record<Reason, FormattedReason> = {
   approval_requested: {

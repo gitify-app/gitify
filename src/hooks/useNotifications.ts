@@ -7,7 +7,7 @@ import type {
   GitifyError,
   SettingsState,
 } from '../types';
-import type { GithubRESTError, Notification } from '../typesGithub';
+import type { GitHubRESTError, Notification } from '../typesGitHub';
 import { apiRequestAuth } from '../utils/api-requests';
 import { determineFailureType } from '../utils/api/errors';
 import Constants from '../utils/constants';
@@ -201,7 +201,7 @@ export const useNotifications = (): NotificationsState => {
               });
           }),
         )
-        .catch((err: AxiosError<GithubRESTError>) => {
+        .catch((err: AxiosError<GitHubRESTError>) => {
           setIsFetching(false);
           setRequestFailed(true);
           setErrorDetails(determineFailureType(err));
