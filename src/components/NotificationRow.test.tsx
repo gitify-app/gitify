@@ -165,7 +165,7 @@ describe('components/NotificationRow.tsx', () => {
         </AppContext.Provider>
       </AppContext.Provider>,
     );
-    fireEvent.click(screen.getByTitle('Unsubscribe'));
+    fireEvent.click(screen.getByTitle('Unsubscribe from Thread'));
     expect(unsubscribeNotification).toHaveBeenCalledTimes(1);
   });
 

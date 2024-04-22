@@ -50,7 +50,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     }
   }, [notifications, notification, accounts, settings]); // notifications required here to prevent weird state issues
 
-  const unsubscribe = (event: MouseEvent<HTMLElement>) => {
+  const unsubscribeFromThread = (event: MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.
     event.stopPropagation();
 
@@ -149,10 +149,10 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
         <button
           type="button"
           className="focus:outline-none h-full hover:text-red-500"
-          title="Unsubscribe"
-          onClick={unsubscribe}
+          title="Unsubscribe from Thread"
+          onClick={unsubscribeFromThread}
         >
-          <BellSlashIcon size={14} aria-label="Unsubscribe" />
+          <BellSlashIcon size={14} aria-label="Unsubscribe from Thread" />
         </button>
 
         <button
