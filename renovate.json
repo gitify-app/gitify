@@ -4,7 +4,8 @@
     "config:recommended",
     ":separateMultipleMajorReleases",
     ":enableVulnerabilityAlerts",
-    "schedule:weekly"
+    "schedule:weekly",
+    "regexManagers:biomeVersions"
   ],
   "labels": ["dependency"],
   "prConcurrentLimit": 5,
