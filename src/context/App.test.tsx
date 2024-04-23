@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, SettingsState } from '../types';
-import * as apiRequests from '../utils/api-requests';
+import * as apiRequests from '../utils/api/request';
 import * as comms from '../utils/comms';
 import Constants from '../utils/constants';
 import * as notifications from '../utils/notifications';

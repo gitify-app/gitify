@@ -3,13 +3,11 @@ import type {
   Discussion,
   DiscussionComment,
   GraphQLSearch,
-  Issue,
-  IssueComments,
   Notification,
-  PullRequest,
 } from '../typesGitHub';
-import { apiRequestAuth } from '../utils/api-requests';
 import { openExternalLink } from '../utils/comms';
+import { getHtmlUrl } from './api/client';
+import { apiRequestAuth } from './api/request';
 import { Constants } from './constants';
 import { getCheckSuiteAttributes, getWorkflowRunAttributes } from './subject';
 
@@ -37,11 +35,11 @@ export function isEnterpriseHost(hostname: string): boolean {
   return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
 }
 
-export function generateGitHubAPIUrl(hostname) {
+export function getGitHubAPIBaseUrl(hostname) {
   const isEnterprise = isEnterpriseHost(hostname);
   return isEnterprise
-    ? `https://${hostname}/api/v3/`
-    : `https://api.${hostname}/`;
+    ? `https://${hostname}/api/v3`
+    : `https://api.${hostname}`;
 }
 
 export function addNotificationReferrerIdToUrl(
@@ -79,17 +77,6 @@ export function formatSearchQueryString(
   lastUpdated: string,
 ): string {
   return `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
-}
-
-export async function getHtmlUrl(url: string, token: string): Promise<string> {
-  try {
-    const response: Issue | IssueComments | PullRequest = (
-      await apiRequestAuth(url, 'GET', token)
-    ).data;
-    return response.html_url;
-  } catch (err) {
-    console.error('Failed to get html url');
-  }
 }
 
 export function getCheckSuiteUrl(notification: Notification) {

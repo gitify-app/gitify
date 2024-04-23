@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { apiRequest, apiRequestAuth } from './api-requests';
+import { apiRequest, apiRequestAuth } from './request';
 
 jest.mock('axios');
 
 const url = 'https://example.com';
 const method = 'get';
 
-describe('utils/api-requests.ts', () => {
+describe('utils/api/request.ts', () => {
   afterEach(() => {
     jest.resetAllMocks();
   });

@@ -8,7 +8,7 @@ import type { AxiosResponse } from 'axios';
 import { shell } from 'electron';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { AppContext } from '../context/App';
-import * as apiRequests from '../utils/api-requests';
+import * as apiRequests from '../utils/api/request';
 import Constants from '../utils/constants';
 import { SettingsRoute } from './Settings';
 

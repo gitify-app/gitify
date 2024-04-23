@@ -4,7 +4,7 @@ import remote from '@electron/remote';
 const browserWindow = new remote.BrowserWindow();
 
 import type { AuthState } from '../types';
-import * as apiRequests from './api-requests';
+import * as apiRequests from './api/request';
 import * as auth from './auth';
 
 describe('utils/auth.tsx', () => {

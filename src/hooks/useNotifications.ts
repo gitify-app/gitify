@@ -1,4 +1,4 @@
-import axios, { type AxiosError, type AxiosPromise } from 'axios';
+import axios, { type AxiosError } from 'axios';
 import { useCallback, useState } from 'react';
 
 import type {
@@ -8,11 +8,16 @@ import type {
   SettingsState,
 } from '../types';
 import type { GitHubRESTError, Notification } from '../typesGitHub';
-import { apiRequestAuth } from '../utils/api-requests';
+import {
+  ignoreNotificationThreadSubscription,
+  listNotificationsForAuthenticatedUser,
+  markNotificationThreadAsDone,
+  markNotificationThreadAsRead,
+  markRepositoryNotificationsAsRead,
+} from '../utils/api/client';
 import { determineFailureType } from '../utils/api/errors';
 import Constants from '../utils/constants';
 import {
-  generateGitHubAPIUrl,
   getEnterpriseAccountToken,
   getTokenForHost,
   isEnterpriseHost,
@@ -74,28 +79,25 @@ export const useNotifications = (): NotificationsState => {
 
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
-      function getNotifications(
-        hostname: string,
-        token: string,
-      ): AxiosPromise<Notification[]> {
-        const endpointSuffix = `notifications?participating=${settings.participating}`;
-        const url = `${generateGitHubAPIUrl(hostname)}${endpointSuffix}`;
-        return apiRequestAuth(url, 'GET', token);
-      }
-
       function getGitHubNotifications() {
         if (!isGitHubLoggedIn(accounts)) {
           return;
         }
-        return getNotifications(
+
+        return listNotificationsForAuthenticatedUser(
           Constants.DEFAULT_AUTH_OPTIONS.hostname,
           accounts.token,
+          settings,
         );
       }
 
       function getEnterpriseNotifications() {
         return accounts.enterpriseAccounts.map((account) => {
-          return getNotifications(account.hostname, account.token);
+          return listNotificationsForAuthenticatedUser(
+            account.hostname,
+            account.token,
+            settings,
+          );
         });
       }
 
@@ -220,12 +222,7 @@ export const useNotifications = (): NotificationsState => {
         : accounts.token;
 
       try {
-        await apiRequestAuth(
-          `${generateGitHubAPIUrl(hostname)}notifications/threads/${id}`,
-          'PATCH',
-          token,
-          {},
-        );
+        await markNotificationThreadAsRead(id, hostname, token);
 
         const updatedNotifications = removeNotification(
           id,
@@ -253,12 +250,7 @@ export const useNotifications = (): NotificationsState => {
         : accounts.token;
 
       try {
-        await apiRequestAuth(
-          `${generateGitHubAPIUrl(hostname)}notifications/threads/${id}`,
-          'DELETE',
-          token,
-          {},
-        );
+        await markNotificationThreadAsDone(id, hostname, token);
 
         const updatedNotifications = removeNotification(
           id,
@@ -286,14 +278,7 @@ export const useNotifications = (): NotificationsState => {
         : accounts.token;
 
       try {
-        await apiRequestAuth(
-          `${generateGitHubAPIUrl(
-            hostname,
-          )}notifications/threads/${id}/subscription`,
-          'PUT',
-          token,
-          { ignored: true },
-        );
+        await ignoreNotificationThreadSubscription(id, hostname, token);
         await markNotificationRead(accounts, id, hostname);
       } catch (err) {
         setIsFetching(false);
@@ -312,13 +297,7 @@ export const useNotifications = (): NotificationsState => {
         : accounts.token;
 
       try {
-        await apiRequestAuth(
-          `${generateGitHubAPIUrl(hostname)}repos/${repoSlug}/notifications`,
-          'PUT',
-          token,
-          {},
-        );
-
+        await markRepositoryNotificationsAsRead(repoSlug, hostname, token);
         const updatedNotifications = removeNotifications(
           repoSlug,
           notifications,
