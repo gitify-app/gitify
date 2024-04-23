@@ -212,6 +212,7 @@ export const useNotifications = (): NotificationsState => {
   const markNotificationRead = useCallback(
     async (accounts: AuthState, id: string, hostname: string) => {
       setStatus('loading');
+
       const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
         ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
