@@ -229,8 +229,8 @@ describe('hooks/useNotifications.ts', () => {
       });
     });
 
-    describe('with colors', () => {
-      it('should fetch notifications with success - with colors', async () => {
+    describe('with detailed notifications setting', () => {
+      it('should fetch notifications with success', async () => {
         const accounts: AuthState = {
           ...mockAccounts,
           enterpriseAccounts: [],
