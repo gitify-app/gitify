@@ -37,10 +37,10 @@ describe('hooks/useNotifications.ts', () => {
           result.current.fetchNotifications(mockAccounts, mockSettings);
         });
 
-        expect(result.current.isFetching).toBe(true);
+        expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications[0].hostname).toBe(
@@ -49,6 +49,7 @@ describe('hooks/useNotifications.ts', () => {
         expect(result.current.notifications[1].hostname).toBe('github.com');
       });
 
+      // TODO - continue refactoring the expect statements
       it('should fetch notifications with failures - github.com & enterprise', async () => {
         const code = AxiosError.ERR_BAD_REQUEST;
         const status = 400;
@@ -84,13 +85,13 @@ describe('hooks/useNotifications.ts', () => {
           result.current.fetchNotifications(mockAccounts, mockSettings);
         });
 
-        expect(result.current.isFetching).toBe(true);
+        expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('error');
         });
 
-        expect(result.current.requestFailed).toBe(true);
+        expect(result.current.errorDetails).toBe(Errors.UNKNOWN);
       });
     });
 
@@ -117,11 +118,12 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.notifications[0].hostname).toBe(
-            'github.gitify.io',
-          );
+          expect(result.current.status).toBe('success');
         });
 
+        expect(result.current.notifications[0].hostname).toBe(
+          'github.gitify.io',
+        );
         expect(result.current.notifications[0].notifications.length).toBe(2);
       });
 
@@ -150,8 +152,10 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.requestFailed).toBe(true);
+          expect(result.current.status).toBe('error');
         });
+
+        expect(result.current.errorDetails).toBe(Errors.UNKNOWN);
       });
     });
 
@@ -210,9 +214,10 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.requestFailed).toBe(true);
-          expect(result.current.errorDetails).toBe(Errors.UNKNOWN);
+          expect(result.current.status).toBe('error');
         });
+
+        expect(result.current.errorDetails).toBe(Errors.UNKNOWN);
       });
     });
 
@@ -373,10 +378,8 @@ describe('hooks/useNotifications.ts', () => {
           });
         });
 
-        expect(result.current.isFetching).toBe(true);
-
         await waitFor(() => {
-          expect(result.current.notifications[0].hostname).toBe('github.com');
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications[0].notifications.length).toBe(6);
@@ -452,10 +455,8 @@ describe('hooks/useNotifications.ts', () => {
           });
         });
 
-        expect(result.current.isFetching).toBe(true);
-
         await waitFor(() => {
-          expect(result.current.notifications[0].hostname).toBe('github.com');
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications[0].notifications.length).toBe(1);
@@ -485,7 +486,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       await waitFor(() => {
-        expect(result.current.isFetching).toBe(false);
+        expect(result.current.status).toBe('success');
       });
 
       act(() => {
@@ -518,7 +519,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -536,7 +537,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -559,7 +560,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -577,7 +578,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -604,7 +605,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -622,7 +623,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -645,7 +646,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -663,7 +664,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -696,7 +697,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -720,7 +721,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -749,7 +750,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -773,7 +774,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -800,7 +801,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -818,7 +819,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -841,7 +842,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -859,7 +860,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -891,7 +892,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -913,7 +914,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -940,7 +941,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -962,7 +963,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe(false);
         });
 
         expect(result.current.notifications.length).toBe(0);

@@ -6,6 +6,7 @@ import type {
   AuthState,
   GitifyError,
   SettingsState,
+  Status,
 } from '../types';
 import type { GitHubRESTError, Notification } from '../typesGitHub';
 import {
@@ -63,14 +64,12 @@ interface NotificationsState {
     repoSlug: string,
     hostname: string,
   ) => Promise<void>;
-  isFetching: boolean;
-  requestFailed: boolean;
+  status: Status;
   errorDetails: GitifyError;
 }
 
 export const useNotifications = (): NotificationsState => {
-  const [isFetching, setIsFetching] = useState(false);
-  const [requestFailed, setRequestFailed] = useState(false);
+  const [status, setStatus] = useState<Status>('success');
   const [errorDetails, setErrorDetails] = useState<GitifyError>();
 
   const [notifications, setNotifications] = useState<AccountNotifications[]>(
@@ -101,13 +100,12 @@ export const useNotifications = (): NotificationsState => {
         });
       }
 
-      setIsFetching(true);
+      setStatus('loading');
 
       return axios
         .all([getGitHubNotifications(), ...getEnterpriseNotifications()])
         .then(
           axios.spread((gitHubNotifications, ...entAccNotifications) => {
-            setRequestFailed(false);
             const enterpriseNotifications = entAccNotifications.map(
               (accountNotifications) => {
                 const { hostname } = new URL(accountNotifications.config.url);
@@ -199,13 +197,12 @@ export const useNotifications = (): NotificationsState => {
                   settings,
                   accounts,
                 );
-                setIsFetching(false);
+                setStatus('success');
               });
           }),
         )
         .catch((err: AxiosError<GitHubRESTError>) => {
-          setIsFetching(false);
-          setRequestFailed(true);
+          setStatus('error');
           setErrorDetails(determineFailureType(err));
         });
     },
@@ -214,8 +211,7 @@ export const useNotifications = (): NotificationsState => {
 
   const markNotificationRead = useCallback(
     async (accounts: AuthState, id: string, hostname: string) => {
-      setIsFetching(true);
-
+      setStatus('loading');
       const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
         ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
@@ -232,9 +228,8 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-        setIsFetching(false);
-      } catch (err) {
-        setIsFetching(false);
+      } finally {
+        setStatus('success');
       }
     },
     [notifications],
@@ -242,7 +237,7 @@ export const useNotifications = (): NotificationsState => {
 
   const markNotificationDone = useCallback(
     async (accounts: AuthState, id: string, hostname: string) => {
-      setIsFetching(true);
+      setStatus('loading');
 
       const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
@@ -260,9 +255,8 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-        setIsFetching(false);
-      } catch (err) {
-        setIsFetching(false);
+      } finally {
+        setStatus('success');
       }
     },
     [notifications],
@@ -270,7 +264,7 @@ export const useNotifications = (): NotificationsState => {
 
   const unsubscribeNotification = useCallback(
     async (accounts: AuthState, id: string, hostname: string) => {
-      setIsFetching(true);
+      setStatus('loading');
 
       const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
@@ -280,8 +274,8 @@ export const useNotifications = (): NotificationsState => {
       try {
         await ignoreNotificationThreadSubscription(id, hostname, token);
         await markNotificationRead(accounts, id, hostname);
-      } catch (err) {
-        setIsFetching(false);
+      } finally {
+        setStatus('success');
       }
     },
     [notifications],
@@ -289,7 +283,7 @@ export const useNotifications = (): NotificationsState => {
 
   const markRepoNotifications = useCallback(
     async (accounts: AuthState, repoSlug: string, hostname: string) => {
-      setIsFetching(true);
+      setStatus('loading');
 
       const isEnterprise = isEnterpriseHost(hostname);
       const token = isEnterprise
@@ -306,9 +300,8 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-        setIsFetching(false);
-      } catch (err) {
-        setIsFetching(false);
+      } finally {
+        setStatus('success');
       }
     },
     [notifications],
@@ -316,7 +309,7 @@ export const useNotifications = (): NotificationsState => {
 
   const markRepoNotificationsDone = useCallback(
     async (accounts: AuthState, repoSlug: string, hostname: string) => {
-      setIsFetching(true);
+      setStatus('loading');
 
       try {
         const accountIndex = notifications.findIndex(
@@ -349,9 +342,8 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-        setIsFetching(false);
-      } catch (err) {
-        setIsFetching(false);
+      } finally {
+        setStatus('success');
       }
     },
     [notifications],
@@ -372,8 +364,7 @@ export const useNotifications = (): NotificationsState => {
   );
 
   return {
-    isFetching,
-    requestFailed,
+    status,
     errorDetails,
     notifications,
 

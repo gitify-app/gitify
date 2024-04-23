@@ -6,6 +6,8 @@ export interface AuthState {
   user: GitifyUser | null;
 }
 
+export type Status = 'loading' | 'success' | 'error';
+
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
   SystemSettingsState;

@@ -16,6 +16,7 @@ import {
   type AuthTokenOptions,
   type GitifyError,
   type SettingsState,
+  type Status,
   Theme,
 } from '../types';
 import { headNotifications } from '../utils/api/client';
@@ -54,8 +55,7 @@ interface AppContextState {
   logout: () => void;
 
   notifications: AccountNotifications[];
-  isFetching: boolean;
-  requestFailed: boolean;
+  status: Status;
   errorDetails: GitifyError;
   removeNotificationFromState: (id: string, hostname: string) => void;
   fetchNotifications: () => Promise<void>;
@@ -80,9 +80,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const {
     fetchNotifications,
     notifications,
-    requestFailed,
     errorDetails,
-    isFetching,
+    status,
     removeNotificationFromState,
     markNotificationRead,
     markNotificationDone,
@@ -239,8 +238,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         logout,
 
         notifications,
-        isFetching,
-        requestFailed,
+        status,
         errorDetails,
         removeNotificationFromState,
         fetchNotifications: fetchNotificationsWithAccounts,
