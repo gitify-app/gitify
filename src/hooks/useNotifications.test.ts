@@ -87,10 +87,10 @@ describe('hooks/useNotifications.ts', () => {
         expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
-          expect(result.current.status).toBe('success');
+          expect(result.current.status).toBe('error');
         });
 
-        expect(result.current.status).toBe('error');
+        expect(result.current.errorDetails).toBe(Errors.UNKNOWN);
       });
     });
 
@@ -486,8 +486,6 @@ describe('hooks/useNotifications.ts', () => {
         result.current.fetchNotifications(mockAccounts, mockSettings);
       });
 
-      //  expect(result.current.status).toBe('loading');
-
       await waitFor(() => {
         expect(result.current.status).toBe('success');
       });
@@ -521,8 +519,6 @@ describe('hooks/useNotifications.ts', () => {
           result.current.markNotificationRead(accounts, id, hostname);
         });
 
-        //  expect(result.current.status).toBe('loading');
-
         await waitFor(() => {
           expect(result.current.status).toBe('success');
         });
@@ -540,8 +536,6 @@ describe('hooks/useNotifications.ts', () => {
         act(() => {
           result.current.markNotificationRead(accounts, id, hostname);
         });
-
-        //  expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
           expect(result.current.status).toBe('success');
@@ -566,8 +560,6 @@ describe('hooks/useNotifications.ts', () => {
           result.current.markNotificationRead(accounts, id, hostname);
         });
 
-        //  expect(result.current.status).toBe('loading');
-
         await waitFor(() => {
           expect(result.current.status).toBe('success');
         });
@@ -585,8 +577,6 @@ describe('hooks/useNotifications.ts', () => {
         act(() => {
           result.current.markNotificationRead(accounts, id, hostname);
         });
-
-        //  expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
           expect(result.current.status).toBe('success');
@@ -615,8 +605,6 @@ describe('hooks/useNotifications.ts', () => {
           result.current.markNotificationDone(accounts, id, hostname);
         });
 
-        //  expect(result.current.status).toBe('loading');
-
         await waitFor(() => {
           expect(result.current.status).toBe('success');
         });
@@ -634,8 +622,6 @@ describe('hooks/useNotifications.ts', () => {
         act(() => {
           result.current.markNotificationDone(accounts, id, hostname);
         });
-
-        //  expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
           expect(result.current.status).toBe('success');
@@ -660,8 +646,6 @@ describe('hooks/useNotifications.ts', () => {
           result.current.markNotificationDone(accounts, id, hostname);
         });
 
-        //  expect(result.current.status).toBe('loading');
-
         await waitFor(() => {
           expect(result.current.status).toBe('success');
         });
@@ -679,8 +663,6 @@ describe('hooks/useNotifications.ts', () => {
         act(() => {
           result.current.markNotificationDone(accounts, id, hostname);
         });
-
-        //  expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
           expect(result.current.status).toBe('success');
@@ -715,8 +697,6 @@ describe('hooks/useNotifications.ts', () => {
           result.current.unsubscribeNotification(accounts, id, hostname);
         });
 
-        //  expect(result.current.status).toBe('loading');
-
         await waitFor(() => {
           expect(result.current.status).toBe('success');
         });
@@ -741,8 +721,6 @@ describe('hooks/useNotifications.ts', () => {
           result.current.unsubscribeNotification(accounts, id, hostname);
         });
 
-        //  expect(result.current.status).toBe('loading');
-
         await waitFor(() => {
           expect(result.current.status).toBe('success');
         });
@@ -762,7 +740,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(200);
 
         // The mark read endpoint call.
-        nock('https://github.gitify.io/')
+        nock('https://github.gitify.io/api/v3')
           .patch(`/notifications/threads/${id}`)
           .reply(200);
 
@@ -771,8 +749,6 @@ describe('hooks/useNotifications.ts', () => {
         act(() => {
           result.current.unsubscribeNotification(accounts, id, hostname);
         });
-
-        //  expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
           expect(result.current.status).toBe('success');
@@ -788,7 +764,7 @@ describe('hooks/useNotifications.ts', () => {
           .reply(400);
 
         // The mark read endpoint call.
-        nock('https://github.gitify.io/')
+        nock('https://github.gitify.io/api/v3')
           .patch(`/notifications/threads/${id}`)
           .reply(400);
 
@@ -797,8 +773,6 @@ describe('hooks/useNotifications.ts', () => {
         act(() => {
           result.current.unsubscribeNotification(accounts, id, hostname);
         });
-
-        //  expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
           expect(result.current.status).toBe('success');
@@ -827,8 +801,6 @@ describe('hooks/useNotifications.ts', () => {
           result.current.markRepoNotifications(accounts, repoSlug, hostname);
         });
 
-        //  expect(result.current.status).toBe('loading');
-
         await waitFor(() => {
           expect(result.current.status).toBe('success');
         });
@@ -846,8 +818,6 @@ describe('hooks/useNotifications.ts', () => {
         act(() => {
           result.current.markRepoNotifications(accounts, repoSlug, hostname);
         });
-
-        //  expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
           expect(result.current.status).toBe('success');
@@ -872,8 +842,6 @@ describe('hooks/useNotifications.ts', () => {
           result.current.markRepoNotifications(accounts, repoSlug, hostname);
         });
 
-        //  expect(result.current.status).toBe('loading');
-
         await waitFor(() => {
           expect(result.current.status).toBe('success');
         });
@@ -891,8 +859,6 @@ describe('hooks/useNotifications.ts', () => {
         act(() => {
           result.current.markRepoNotifications(accounts, repoSlug, hostname);
         });
-
-        //  expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
           expect(result.current.status).toBe('success');
@@ -926,8 +892,6 @@ describe('hooks/useNotifications.ts', () => {
           );
         });
 
-        //  expect(result.current.status).toBe('loading');
-
         await waitFor(() => {
           expect(result.current.status).toBe('success');
         });
@@ -949,8 +913,6 @@ describe('hooks/useNotifications.ts', () => {
             hostname,
           );
         });
-
-        //  expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
           expect(result.current.status).toBe('success');
@@ -979,8 +941,6 @@ describe('hooks/useNotifications.ts', () => {
           );
         });
 
-        //  expect(result.current.status).toBe('loading');
-
         await waitFor(() => {
           expect(result.current.status).toBe('success');
         });
@@ -1002,8 +962,6 @@ describe('hooks/useNotifications.ts', () => {
             hostname,
           );
         });
-
-        //  expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
           expect(result.current.status).toBe('success');

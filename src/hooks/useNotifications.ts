@@ -229,7 +229,8 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-      } finally {
+        setStatus('success');
+      } catch (err) {
         setStatus('success');
       }
     },
@@ -256,7 +257,8 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-      } finally {
+        setStatus('success');
+      } catch (err) {
         setStatus('success');
       }
     },
@@ -275,7 +277,8 @@ export const useNotifications = (): NotificationsState => {
       try {
         await ignoreNotificationThreadSubscription(id, hostname, token);
         await markNotificationRead(accounts, id, hostname);
-      } finally {
+        setStatus('success');
+      } catch (err) {
         setStatus('success');
       }
     },
@@ -301,7 +304,8 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-      } finally {
+        setStatus('success');
+      } catch (err) {
         setStatus('success');
       }
     },
@@ -343,7 +347,8 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-      } finally {
+        setStatus('success');
+      } catch (err) {
         setStatus('success');
       }
     },
