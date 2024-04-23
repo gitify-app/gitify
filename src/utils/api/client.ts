@@ -114,7 +114,7 @@ export function ignoreNotificationThreadSubscription(
 ): AxiosPromise<NotificationThreadSubscription> {
   const baseUrl = getGitHubAPIBaseUrl(hostname);
   const url = new URL(
-    `${baseUrl}/notifications/threads/${threadId}/subscriptions`,
+    `${baseUrl}/notifications/threads/${threadId}/subscription`,
   );
   return apiRequestAuth(url.toString(), 'PUT', token, { ignored: true });
 }

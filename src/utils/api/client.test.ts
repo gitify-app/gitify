@@ -219,7 +219,7 @@ describe('utils/api/client.ts', () => {
       );
 
       expect(axios).toHaveBeenCalledWith({
-        url: `https://api.github.com/notifications/threads/${mockThreadId}/subscriptions`,
+        url: `https://api.github.com/notifications/threads/${mockThreadId}/subscription`,
         method: 'PUT',
         data: { ignored: true },
       });
@@ -235,7 +235,7 @@ describe('utils/api/client.ts', () => {
       );
 
       expect(axios).toHaveBeenCalledWith({
-        url: `https://example.com/api/v3/notifications/threads/${mockThreadId}/subscriptions`,
+        url: `https://example.com/api/v3/notifications/threads/${mockThreadId}/subscription`,
         method: 'PUT',
         data: { ignored: true },
       });
