@@ -55,14 +55,16 @@ export const SettingsRoute: FC = () => {
   };
 
   useEffect(() => {
-    ipcRenderer.invoke('get-platform').then((result: string) => {
+    (async () => {
+      const result = await ipcRenderer.invoke('get-platform');
       setIsLinux(result === 'linux');
       setIsMacOS(result === 'darwin');
-    });
+    })();
 
-    ipcRenderer.invoke('get-app-version').then((result: string) => {
+    (async () => {
+      const result = await ipcRenderer.invoke('get-app-version');
       setAppVersion(result);
-    });
+    })();
 
     ipcRenderer.on('update-native-theme', (_, updatedTheme: Theme) => {
       if (settings.theme === Theme.SYSTEM) {
