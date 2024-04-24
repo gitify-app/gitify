@@ -16,9 +16,9 @@ describe('components/Loading.tsx', () => {
     jest.clearAllMocks();
   });
 
-  it('should check that NProgress is getting called in when isFetching changes (loading)', () => {
+  it('should check that NProgress is getting called in when status changes (loading)', () => {
     const { container } = render(
-      <AppContext.Provider value={{ isFetching: true }}>
+      <AppContext.Provider value={{ status: 'loading' }}>
         <Loading />
       </AppContext.Provider>,
     );
@@ -28,9 +28,9 @@ describe('components/Loading.tsx', () => {
     expect(NProgress.start).toHaveBeenCalledTimes(1);
   });
 
-  it('should check that NProgress is getting called in when isFetching changes (not loading)', () => {
+  it('should check that NProgress is getting called in when status changes (not loading)', () => {
     const { container } = render(
-      <AppContext.Provider value={{ isFetching: false }}>
+      <AppContext.Provider value={{ status: 'success' }}>
         <Loading />
       </AppContext.Provider>,
     );
@@ -42,7 +42,7 @@ describe('components/Loading.tsx', () => {
 
   it('should remove NProgress on unmount', () => {
     const { unmount } = render(
-      <AppContext.Provider value={{ isFetching: true }}>
+      <AppContext.Provider value={{ status: 'loading' }}>
         <Loading />
       </AppContext.Provider>,
     );

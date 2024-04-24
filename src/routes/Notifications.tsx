@@ -8,7 +8,7 @@ import { Errors } from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
 
 export const NotificationsRoute: FC = () => {
-  const { notifications, requestFailed, errorDetails, settings } =
+  const { notifications, status, errorDetails, settings } =
     useContext(AppContext);
 
   const hasMultipleAccounts = useMemo(
@@ -24,7 +24,7 @@ export const NotificationsRoute: FC = () => {
     [notificationsCount],
   );
 
-  if (requestFailed) {
+  if (status === 'error') {
     return <Oops error={errorDetails ?? Errors.UNKNOWN} />;
   }
 

@@ -19,7 +19,7 @@ export const Sidebar: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { notifications, fetchNotifications, isLoggedIn, isFetching } =
+  const { notifications, fetchNotifications, isLoggedIn, status } =
     useContext(AppContext);
 
   const onOpenBrowser = useCallback(() => {
@@ -81,15 +81,14 @@ export const Sidebar: FC = () => {
                 navigate('/', { replace: true });
                 fetchNotifications();
               }}
-              disabled={isFetching}
+              disabled={status === 'loading'}
             >
               <SyncIcon
                 size={16}
                 aria-label="Refresh Notifications"
-                className={isFetching ? 'animate-spin' : undefined}
+                className={status === 'loading' ? 'animate-spin' : undefined}
               />
             </button>
-
             <button
               type="button"
               className={sidebarButtonClasses}
