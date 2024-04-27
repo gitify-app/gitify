@@ -106,8 +106,7 @@ export const useNotifications = (): NotificationsState => {
         getGitHubNotifications(),
         ...getEnterpriseNotifications(),
       ])
-        .then((results) => {
-          const [gitHubNotifications, ...entAccNotifications] = results;
+        .then(([gitHubNotifications, ...entAccNotifications]) => {
           const enterpriseNotifications = entAccNotifications.map(
             (accountNotifications) => {
               const { hostname } = new URL(accountNotifications.config.url);
