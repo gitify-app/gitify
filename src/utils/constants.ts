@@ -10,6 +10,8 @@ export const Constants = {
     clientSecret: process.env.OAUTH_CLIENT_SECRET,
   },
 
+  GITHUB_API_BASE_URL: 'https://api.github.com',
+
   REPO_SLUG: 'gitify-app/gitify',
 
   // Storage
