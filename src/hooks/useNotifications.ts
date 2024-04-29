@@ -1,4 +1,4 @@
-import axios, { type AxiosError } from 'axios';
+import type { AxiosError } from 'axios';
 import { useCallback, useState } from 'react';
 
 import type {
@@ -102,105 +102,98 @@ export const useNotifications = (): NotificationsState => {
 
       setStatus('loading');
 
-      return axios
-        .all([getGitHubNotifications(), ...getEnterpriseNotifications()])
-        .then(
-          axios.spread((gitHubNotifications, ...entAccNotifications) => {
-            const enterpriseNotifications = entAccNotifications.map(
-              (accountNotifications) => {
-                const { hostname } = new URL(accountNotifications.config.url);
-                return {
-                  hostname,
-                  notifications: accountNotifications.data.map(
+      return Promise.all([
+        getGitHubNotifications(),
+        ...getEnterpriseNotifications(),
+      ])
+        .then(([gitHubNotifications, ...entAccNotifications]) => {
+          const enterpriseNotifications = entAccNotifications.map(
+            (accountNotifications) => {
+              const { hostname } = new URL(accountNotifications.config.url);
+              return {
+                hostname,
+                notifications: accountNotifications.data.map(
+                  (notification: Notification) => {
+                    return {
+                      ...notification,
+                      hostname: hostname,
+                    };
+                  },
+                ),
+              };
+            },
+          );
+
+          const data = isGitHubLoggedIn(accounts)
+            ? [
+                ...enterpriseNotifications,
+                {
+                  hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+                  notifications: gitHubNotifications.data.map(
                     (notification: Notification) => {
                       return {
                         ...notification,
-                        hostname: hostname,
+                        hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
                       };
                     },
                   ),
-                };
-              },
-            );
+                },
+              ]
+            : [...enterpriseNotifications];
 
-            const data = isGitHubLoggedIn(accounts)
-              ? [
-                  ...enterpriseNotifications,
-                  {
-                    hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-                    notifications: gitHubNotifications.data.map(
-                      (notification: Notification) => {
-                        return {
-                          ...notification,
-                          hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-                        };
-                      },
-                    ),
-                  },
-                ]
-              : [...enterpriseNotifications];
+          Promise.all(
+            data.map(async (accountNotifications) => {
+              return {
+                hostname: accountNotifications.hostname,
+                notifications: await Promise.all<Notification>(
+                  accountNotifications.notifications.map(
+                    async (notification: Notification) => {
+                      if (!settings.detailedNotifications) {
+                        return notification;
+                      }
 
-            axios
-              .all(
-                data.map(async (accountNotifications) => {
-                  return {
-                    hostname: accountNotifications.hostname,
-                    notifications: await axios
-                      .all<Notification>(
-                        accountNotifications.notifications.map(
-                          async (notification: Notification) => {
-                            if (!settings.detailedNotifications) {
-                              return notification;
-                            }
+                      const token = getTokenForHost(
+                        notification.hostname,
+                        accounts,
+                      );
 
-                            const token = getTokenForHost(
-                              notification.hostname,
-                              accounts,
-                            );
+                      const additionalSubjectDetails =
+                        await getGitifySubjectDetails(notification, token);
 
-                            const additionalSubjectDetails =
-                              await getGitifySubjectDetails(
-                                notification,
-                                token,
-                              );
+                      return {
+                        ...notification,
+                        subject: {
+                          ...notification.subject,
+                          ...additionalSubjectDetails,
+                        },
+                      };
+                    },
+                  ),
+                ).then((notifications) => {
+                  return notifications.filter((notification) => {
+                    if (
+                      !settings.showBots &&
+                      notification.subject?.user?.type === 'Bot'
+                    ) {
+                      return false;
+                    }
 
-                            return {
-                              ...notification,
-                              subject: {
-                                ...notification.subject,
-                                ...additionalSubjectDetails,
-                              },
-                            };
-                          },
-                        ),
-                      )
-                      .then((notifications) => {
-                        return notifications.filter((notification) => {
-                          if (
-                            !settings.showBots &&
-                            notification.subject?.user?.type === 'Bot'
-                          ) {
-                            return false;
-                          }
-
-                          return true;
-                        });
-                      }),
-                  };
+                    return true;
+                  });
                 }),
-              )
-              .then((parsedNotifications) => {
-                setNotifications(parsedNotifications);
-                triggerNativeNotifications(
-                  notifications,
-                  parsedNotifications,
-                  settings,
-                  accounts,
-                );
-                setStatus('success');
-              });
-          }),
-        )
+              };
+            }),
+          ).then((parsedNotifications) => {
+            setNotifications(parsedNotifications);
+            triggerNativeNotifications(
+              notifications,
+              parsedNotifications,
+              settings,
+              accounts,
+            );
+            setStatus('success');
+          });
+        })
         .catch((err: AxiosError<GitHubRESTError>) => {
           setStatus('error');
           setErrorDetails(determineFailureType(err));
