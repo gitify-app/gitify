@@ -79,15 +79,13 @@ export const useNotifications = (): NotificationsState => {
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
       function getGitHubNotifications() {
-        if (!isGitHubLoggedIn(accounts)) {
-          return;
+        if (isGitHubLoggedIn(accounts)) {
+          return listNotificationsForAuthenticatedUser(
+            Constants.DEFAULT_AUTH_OPTIONS.hostname,
+            accounts.token,
+            settings,
+          );
         }
-
-        return listNotificationsForAuthenticatedUser(
-          Constants.DEFAULT_AUTH_OPTIONS.hostname,
-          accounts.token,
-          settings,
-        );
       }
 
       function getEnterpriseNotifications() {
@@ -106,12 +104,16 @@ export const useNotifications = (): NotificationsState => {
         getGitHubNotifications(),
         ...getEnterpriseNotifications(),
       ])
-        .then(([gitHubNotifications, ...entAccNotifications]) => {
-          const enterpriseNotifications = entAccNotifications.map(
-            (accountNotifications) => {
+        .then(([...responses]) => {
+          // Remove any undefined responses
+          const accountResponses = responses.filter(
+            (accountResponse) => !!accountResponse,
+          );
+          const accountsNotifications: AccountNotifications[] =
+            accountResponses.map((accountNotifications) => {
               const { hostname } = new URL(accountNotifications.config.url);
               return {
-                hostname,
+                hostname: hostname,
                 notifications: accountNotifications.data.map(
                   (notification: Notification) => {
                     return {
@@ -121,28 +123,10 @@ export const useNotifications = (): NotificationsState => {
                   },
                 ),
               };
-            },
-          );
-
-          const data = isGitHubLoggedIn(accounts)
-            ? [
-                ...enterpriseNotifications,
-                {
-                  hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-                  notifications: gitHubNotifications.data.map(
-                    (notification: Notification) => {
-                      return {
-                        ...notification,
-                        hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-                      };
-                    },
-                  ),
-                },
-              ]
-            : [...enterpriseNotifications];
+            });
 
           Promise.all(
-            data.map(async (accountNotifications) => {
+            accountsNotifications.map(async (accountNotifications) => {
               return {
                 hostname: accountNotifications.hostname,
                 notifications: await Promise.all<Notification>(
@@ -195,6 +179,7 @@ export const useNotifications = (): NotificationsState => {
           });
         })
         .catch((err: AxiosError<GitHubRESTError>) => {
+          console.error('ADAM', err);
           setStatus('error');
           setErrorDetails(determineFailureType(err));
         });

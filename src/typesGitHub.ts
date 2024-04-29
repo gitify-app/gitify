@@ -79,7 +79,8 @@ export interface Notification {
   repository: Repository;
   url: string;
   subscription_url: string;
-  hostname: string; // This is not in the GitHub API, but we add it to the type to make it easier to work with
+  // TODO - rename this to apiBaseUrl
+  hostname: string; // This is not in the official GitHub API. We add this to make notification interactions easier.
 }
 
 export type UserDetails = User & UserProfile;

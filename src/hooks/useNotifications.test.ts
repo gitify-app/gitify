@@ -43,10 +43,13 @@ describe('hooks/useNotifications.ts', () => {
           expect(result.current.status).toBe('success');
         });
 
-        expect(result.current.notifications[0].hostname).toBe(
+        expect(result.current.notifications[0].hostname).toBe('api.github.com');
+        expect(result.current.notifications[0].notifications.length).toBe(2);
+
+        expect(result.current.notifications[1].hostname).toBe(
           'github.gitify.io',
         );
-        expect(result.current.notifications[1].hostname).toBe('github.com');
+        expect(result.current.notifications[1].notifications.length).toBe(2);
       });
 
       it('should fetch notifications with failures - github.com & enterprise', async () => {
@@ -117,11 +120,12 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.notifications[0].hostname).toBe(
-            'github.gitify.io',
-          );
+          expect(result.current.status).toBe('success');
         });
 
+        expect(result.current.notifications[0].hostname).toBe(
+          'github.gitify.io',
+        );
         expect(result.current.notifications[0].notifications.length).toBe(2);
       });
 
@@ -179,9 +183,10 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.notifications[0].hostname).toBe('github.com');
+          expect(result.current.status).toBe('success');
         });
 
+        expect(result.current.notifications[0].hostname).toBe('api.github.com');
         expect(result.current.notifications[0].notifications.length).toBe(2);
       });
 
@@ -379,7 +384,7 @@ describe('hooks/useNotifications.ts', () => {
           expect(result.current.status).toBe('success');
         });
 
-        expect(result.current.notifications[0].hostname).toBe('github.com');
+        expect(result.current.notifications[0].hostname).toBe('api.github.com');
         expect(result.current.notifications[0].notifications.length).toBe(6);
       });
     });
@@ -459,7 +464,7 @@ describe('hooks/useNotifications.ts', () => {
           expect(result.current.status).toBe('success');
         });
 
-        expect(result.current.notifications[0].hostname).toBe('github.com');
+        expect(result.current.notifications[0].hostname).toBe('api.github.com');
         expect(result.current.notifications[0].notifications.length).toBe(1);
       });
     });
