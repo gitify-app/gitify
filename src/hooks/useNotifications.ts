@@ -105,22 +105,17 @@ export const useNotifications = (): NotificationsState => {
         ...getEnterpriseNotifications(),
       ])
         .then(([...responses]) => {
-          // Remove any undefined responses
-          const accountResponses = responses.filter(
-            (accountResponse) => !!accountResponse,
-          );
-          const accountsNotifications: AccountNotifications[] =
-            accountResponses.map((accountNotifications) => {
+          const accountsNotifications: AccountNotifications[] = responses
+            .filter((response) => !!response)
+            .map((accountNotifications) => {
               const { hostname } = new URL(accountNotifications.config.url);
               return {
-                hostname: hostname,
+                hostname,
                 notifications: accountNotifications.data.map(
-                  (notification: Notification) => {
-                    return {
-                      ...notification,
-                      hostname: hostname,
-                    };
-                  },
+                  (notification: Notification) => ({
+                    ...notification,
+                    hostname,
+                  }),
                 ),
               };
             });
