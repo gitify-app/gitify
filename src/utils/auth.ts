@@ -136,3 +136,17 @@ export const addAccount = (
     ],
   };
 };
+
+export const removeAccount = (
+  accounts: AuthState,
+  hostname: string,
+): AuthState => {
+  if (!isEnterpriseHost(hostname)) {
+    return {
+      ...accounts,
+      enterpriseAccounts: accounts.enterpriseAccounts.filter(
+        (account) => account.hostname !== hostname,
+      ),
+    };
+  }
+};

@@ -20,7 +20,13 @@ import {
   Theme,
 } from '../types';
 import { headNotifications } from '../utils/api/client';
-import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
+import {
+  addAccount,
+  authGitHub,
+  getToken,
+  getUserData,
+  removeAccount,
+} from '../utils/auth';
 import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
 import Constants from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
@@ -51,6 +57,7 @@ interface AppContextState {
   isLoggedIn: boolean;
   login: () => void;
   loginEnterprise: (data: AuthOptions) => void;
+  logoutEnterprise: (hostname: string) => void;
   validateToken: (data: AuthTokenOptions) => void;
   logout: () => void;
 
@@ -153,9 +160,18 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const loginEnterprise = useCallback(
     async (data: AuthOptions) => {
-      const { authOptions, authCode } = await authGitHub(data);
-      const { token, hostname } = await getToken(authCode, authOptions);
-      const updatedAccounts = addAccount(accounts, token, hostname);
+      // const { authOptions, authCode } = await authGitHub(data);
+      // const { token, hostname } = await getToken(authCode, authOptions);
+      const updatedAccounts = addAccount(accounts, '234', 'yahoo.com');
+      setAccounts(updatedAccounts);
+      saveState(updatedAccounts, settings);
+    },
+    [accounts, settings],
+  );
+
+  const logoutEnterprise = useCallback(
+    async (hostname: string) => {
+      const updatedAccounts = removeAccount(accounts, hostname);
       setAccounts(updatedAccounts);
       saveState(updatedAccounts, settings);
     },
@@ -234,6 +250,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         isLoggedIn,
         login,
         loginEnterprise,
+        logoutEnterprise,
         validateToken,
         logout,
 

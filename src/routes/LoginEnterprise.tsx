@@ -58,12 +58,12 @@ export const LoginEnterpriseRoute: FC = () => {
   } = useContext(AppContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (enterpriseAccounts.length) {
-      ipcRenderer.send('reopen-window');
-      navigate(-1);
-    }
-  }, [enterpriseAccounts]);
+  // useEffect(() => {
+  //   if (enterpriseAccounts.length) {
+  //     ipcRenderer.send('reopen-window');
+  //     navigate(-1);
+  //   }
+  // }, [enterpriseAccounts]);
 
   const renderForm = (formProps: FormRenderProps) => {
     const { handleSubmit, submitting, pristine } = formProps;

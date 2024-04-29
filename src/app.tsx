@@ -10,6 +10,7 @@ import {
 import { Loading } from './components/Loading';
 import { Sidebar } from './components/Sidebar';
 import { AppContext, AppProvider } from './context/App';
+import { AccountsRoute } from './routes/Accounts';
 import { LoginRoute } from './routes/Login';
 import { LoginEnterpriseRoute } from './routes/LoginEnterprise';
 import { LoginWithToken } from './routes/LoginWithToken';
@@ -48,6 +49,14 @@ export const App = () => {
               element={
                 <RequireAuth>
                   <SettingsRoute />
+                </RequireAuth>
+              }
+            />
+            <Route
+              path="/accounts"
+              element={
+                <RequireAuth>
+                  <AccountsRoute />
                 </RequireAuth>
               }
             />
