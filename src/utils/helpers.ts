@@ -39,7 +39,7 @@ export function getGitHubAPIBaseUrl(hostname) {
   const isEnterprise = isEnterpriseHost(hostname);
   return isEnterprise
     ? `https://${hostname}/api/v3`
-    : `https://api.${hostname}`;
+    : Constants.GITHUB_API_BASE_URL;
 }
 
 export function addNotificationReferrerIdToUrl(
