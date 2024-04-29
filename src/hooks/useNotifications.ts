@@ -174,7 +174,6 @@ export const useNotifications = (): NotificationsState => {
           });
         })
         .catch((err: AxiosError<GitHubRESTError>) => {
-          console.error('ADAM', err);
           setStatus('error');
           setErrorDetails(determineFailureType(err));
         });
