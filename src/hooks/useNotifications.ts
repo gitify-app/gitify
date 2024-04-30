@@ -106,43 +106,24 @@ export const useNotifications = (): NotificationsState => {
         getGitHubNotifications(),
         ...getEnterpriseNotifications(),
       ])
-        .then(([gitHubNotifications, ...entAccNotifications]) => {
-          const enterpriseNotifications = entAccNotifications.map(
-            (accountNotifications) => {
+        .then(([...responses]) => {
+          const accountsNotifications: AccountNotifications[] = responses
+            .filter((response) => !!response)
+            .map((accountNotifications) => {
               const { hostname } = new URL(accountNotifications.config.url);
               return {
                 hostname,
                 notifications: accountNotifications.data.map(
-                  (notification: Notification) => {
-                    return {
-                      ...notification,
-                      hostname: hostname,
-                    };
-                  },
+                  (notification: Notification) => ({
+                    ...notification,
+                    hostname,
+                  }),
                 ),
               };
-            },
-          );
-
-          const data = isGitHubLoggedIn(accounts)
-            ? [
-                ...enterpriseNotifications,
-                {
-                  hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-                  notifications: gitHubNotifications.data.map(
-                    (notification: Notification) => {
-                      return {
-                        ...notification,
-                        hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-                      };
-                    },
-                  ),
-                },
-              ]
-            : [...enterpriseNotifications];
+            });
 
           Promise.all(
-            data.map(async (accountNotifications) => {
+            accountsNotifications.map(async (accountNotifications) => {
               return {
                 hostname: accountNotifications.hostname,
                 notifications: await Promise.all<Notification>(

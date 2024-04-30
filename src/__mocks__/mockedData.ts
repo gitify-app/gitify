@@ -70,7 +70,7 @@ export const mockedCommenterUser: User = {
 };
 
 export const mockedSingleNotification: Notification = {
-  hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+  hostname: Constants.GITHUB_API_BASE_URL,
   id: '138661096',
   unread: true,
   reason: 'subscribed',
@@ -249,7 +249,7 @@ export const mockedGitHubNotifications = [
     url: 'https://api.github.com/notifications/threads/148827438',
     subscription_url:
       'https://api.github.com/notifications/threads/148827438/subscription',
-    hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+    hostname: Constants.GITHUB_API_BASE_URL,
   } as Notification,
 ];
 
@@ -359,7 +359,7 @@ export const mockedEnterpriseNotifications = [
     url: 'https://github.gitify.io/api/v3/notifications/threads/3',
     subscription_url:
       'https://github.gitify.io/api/v3/notifications/threads/3/subscription',
-    hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+    hostname: Constants.GITHUB_API_BASE_URL,
   } as Notification,
 ];
 
