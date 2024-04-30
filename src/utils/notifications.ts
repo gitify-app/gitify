@@ -1,9 +1,16 @@
 import { ipcRenderer } from 'electron';
 import { Notification } from '../typesGitHub';
-import { openInBrowser } from '../utils/helpers';
+import {
+  getTokenForHost,
+  isGitHubLoggedIn,
+  openInBrowser,
+} from '../utils/helpers';
 import { updateTrayIcon } from './comms';
 
 import type { AccountNotifications, AuthState, SettingsState } from '../types';
+import { listNotificationsForAuthenticatedUser } from './api/client';
+import Constants from './constants';
+import { getGitifySubjectDetails } from './subject';
 
 export const setTrayIconColor = (notifications: AccountNotifications[]) => {
   const allNotificationsCount = getNotificationCount(notifications);
@@ -101,3 +108,113 @@ export const raiseSoundNotification = () => {
   audio.volume = 0.2;
   audio.play();
 };
+
+function getGitHubNotifications(accounts: AuthState, settings: SettingsState) {
+  if (!isGitHubLoggedIn(accounts)) {
+    return;
+  }
+
+  return listNotificationsForAuthenticatedUser(
+    Constants.DEFAULT_AUTH_OPTIONS.hostname,
+    accounts.token,
+    settings,
+  );
+}
+
+function getEnterpriseNotifications(
+  accounts: AuthState,
+  settings: SettingsState,
+) {
+  return accounts.enterpriseAccounts.map((account) => {
+    return listNotificationsForAuthenticatedUser(
+      account.hostname,
+      account.token,
+      settings,
+    );
+  });
+}
+
+export async function getAllNotifications(
+  accounts: AuthState,
+  settings: SettingsState,
+): Promise<AccountNotifications[]> {
+  const responses = await Promise.all([
+    getGitHubNotifications(accounts, settings),
+    ...getEnterpriseNotifications(accounts, settings),
+  ]);
+
+  const notifications: AccountNotifications[] = await Promise.all(
+    responses
+      .filter((response) => !!response)
+      .map(async (accountNotifications) => {
+        const { hostname } = new URL(accountNotifications.config.url);
+
+        let notifications = accountNotifications.data.map(
+          (notification: Notification) => ({
+            ...notification,
+            hostname,
+          }),
+        );
+
+        // Enrich notifications
+        notifications = await enrichNotifications(
+          notifications,
+          accounts,
+          settings,
+        );
+
+        // Filter notifications
+        notifications = filterNotifications(notifications, settings);
+
+        return {
+          hostname,
+          notifications: notifications,
+        };
+      }),
+  );
+
+  return notifications;
+}
+
+export async function enrichNotifications(
+  notifications: Notification[],
+  accounts: AuthState,
+  settings: SettingsState,
+): Promise<Notification[]> {
+  if (!settings.detailedNotifications) {
+    return notifications;
+  }
+
+  const enrichedNotifications = await Promise.all(
+    notifications.map(async (notification: Notification) => {
+      const token = getTokenForHost(notification.hostname, accounts);
+
+      const additionalSubjectDetails = await getGitifySubjectDetails(
+        notification,
+        token,
+      );
+
+      return {
+        ...notification,
+        subject: {
+          ...notification.subject,
+          ...additionalSubjectDetails,
+        },
+      };
+    }),
+  );
+
+  return enrichedNotifications;
+}
+
+export function filterNotifications(
+  notifications: Notification[],
+  settings: SettingsState,
+): Notification[] {
+  return notifications.filter((notification) => {
+    if (!settings.showBots && notification.subject?.user?.type === 'Bot') {
+      return false;
+    }
+    return true;
+  });
+}
