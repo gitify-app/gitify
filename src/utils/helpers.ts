@@ -1,4 +1,4 @@
-import type { AuthState, EnterpriseAccount } from '../types';
+import type { AuthState } from '../types';
 import type {
   Discussion,
   DiscussionComment,
@@ -17,18 +17,13 @@ export function isGitHubLoggedIn(accounts: AuthState): boolean {
 
 export function getTokenForHost(hostname: string, accounts: AuthState): string {
   const isEnterprise = isEnterpriseHost(hostname);
-  const token = isEnterprise
-    ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
-    : accounts.token;
 
-  return token;
-}
+  if (isEnterprise) {
+    return accounts.enterpriseAccounts.find((obj) => obj.hostname === hostname)
+      .token;
+  }
 
-export function getEnterpriseAccountToken(
-  hostname: string,
-  accounts: EnterpriseAccount[],
-): string {
-  return accounts.find((obj) => obj.hostname === hostname).token;
+  return accounts.token;
 }
 
 export function isEnterpriseHost(hostname: string): boolean {
