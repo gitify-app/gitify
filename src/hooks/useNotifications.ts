@@ -79,13 +79,15 @@ export const useNotifications = (): NotificationsState => {
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
       function getGitHubNotifications() {
-        if (isGitHubLoggedIn(accounts)) {
-          return listNotificationsForAuthenticatedUser(
-            Constants.DEFAULT_AUTH_OPTIONS.hostname,
-            accounts.token,
-            settings,
-          );
+        if (!isGitHubLoggedIn(accounts)) {
+          return;
         }
+
+        return listNotificationsForAuthenticatedUser(
+          Constants.DEFAULT_AUTH_OPTIONS.hostname,
+          accounts.token,
+          settings,
+        );
       }
 
       function getEnterpriseNotifications() {
