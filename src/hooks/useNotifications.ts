@@ -14,8 +14,7 @@ import {
   markRepositoryNotificationsAsRead,
 } from '../utils/api/client';
 import { determineFailureType } from '../utils/api/errors';
-import Constants from '../utils/constants';
-import { getTokenForHost, isGitHubLoggedIn } from '../utils/helpers';
+import { getTokenForHost } from '../utils/helpers';
 import {
   getAllNotifications,
   setTrayIconColor,
