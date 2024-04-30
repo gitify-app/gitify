@@ -18,12 +18,7 @@ import {
 } from '../utils/api/client';
 import { determineFailureType } from '../utils/api/errors';
 import Constants from '../utils/constants';
-import {
-  getEnterpriseAccountToken,
-  getTokenForHost,
-  isEnterpriseHost,
-  isGitHubLoggedIn,
-} from '../utils/helpers';
+import { getTokenForHost, isGitHubLoggedIn } from '../utils/helpers';
 import {
   setTrayIconColor,
   triggerNativeNotifications,
@@ -187,10 +182,7 @@ export const useNotifications = (): NotificationsState => {
     async (accounts: AuthState, id: string, hostname: string) => {
       setStatus('loading');
 
-      const isEnterprise = isEnterpriseHost(hostname);
-      const token = isEnterprise
-        ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
-        : accounts.token;
+      const token = getTokenForHost(hostname, accounts);
 
       try {
         await markNotificationThreadAsRead(id, hostname, token);
@@ -215,10 +207,7 @@ export const useNotifications = (): NotificationsState => {
     async (accounts: AuthState, id: string, hostname: string) => {
       setStatus('loading');
 
-      const isEnterprise = isEnterpriseHost(hostname);
-      const token = isEnterprise
-        ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
-        : accounts.token;
+      const token = getTokenForHost(hostname, accounts);
 
       try {
         await markNotificationThreadAsDone(id, hostname, token);
@@ -243,10 +232,7 @@ export const useNotifications = (): NotificationsState => {
     async (accounts: AuthState, id: string, hostname: string) => {
       setStatus('loading');
 
-      const isEnterprise = isEnterpriseHost(hostname);
-      const token = isEnterprise
-        ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
-        : accounts.token;
+      const token = getTokenForHost(hostname, accounts);
 
       try {
         await ignoreNotificationThreadSubscription(id, hostname, token);
@@ -263,10 +249,7 @@ export const useNotifications = (): NotificationsState => {
     async (accounts: AuthState, repoSlug: string, hostname: string) => {
       setStatus('loading');
 
-      const isEnterprise = isEnterpriseHost(hostname);
-      const token = isEnterprise
-        ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
-        : accounts.token;
+      const token = getTokenForHost(hostname, accounts);
 
       try {
         await markRepositoryNotificationsAsRead(repoSlug, hostname, token);
