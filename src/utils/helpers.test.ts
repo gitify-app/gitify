@@ -5,17 +5,16 @@ import {
   mockedSingleNotification,
   mockedUser,
 } from '../__mocks__/mockedData';
-import type { SubjectType } from '../typesGithub';
-import * as apiRequests from './api-requests';
+import type { SubjectType } from '../typesGitHub';
+import * as apiRequests from './api/request';
 import {
   addHours,
   addNotificationReferrerIdToUrl,
   formatForDisplay,
   formatSearchQueryString,
-  generateGitHubAPIUrl,
   generateGitHubWebUrl,
   generateNotificationReferrerId,
-  getHtmlUrl,
+  getGitHubAPIBaseUrl,
   isEnterpriseHost,
   isGitHubLoggedIn,
 } from './helpers';
@@ -93,13 +92,13 @@ describe('utils/helpers.ts', () => {
 
   describe('generateGitHubAPIUrl', () => {
     it('should generate a GitHub API url - non enterprise', () => {
-      const result = generateGitHubAPIUrl('github.com');
-      expect(result).toBe('https://api.github.com/');
+      const result = getGitHubAPIBaseUrl('github.com');
+      expect(result).toBe('https://api.github.com');
     });
 
     it('should generate a GitHub API url - enterprise', () => {
-      const result = generateGitHubAPIUrl('github.manos.im');
-      expect(result).toBe('https://github.manos.im/api/v3/');
+      const result = getGitHubAPIBaseUrl('github.manos.im');
+      expect(result).toBe('https://github.manos.im/api/v3');
     });
   });
 
@@ -127,32 +126,6 @@ describe('utils/helpers.ts', () => {
       expect(result).toBe(
         'exampleTitle in:title repo:exampleRepo updated:>2024-02-20T10:00:00.000Z',
       );
-    });
-  });
-
-  describe('getHtmlUrl', () => {
-    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
-
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
-    it('should return the HTML URL', async () => {
-      const requestPromise = new Promise((resolve) =>
-        resolve({
-          data: {
-            html_url: 'https://github.com/gitify-app/gitify/issues/785',
-          },
-        } as AxiosResponse),
-      ) as AxiosPromise;
-
-      apiRequestAuthMock.mockResolvedValue(requestPromise);
-
-      const result = await getHtmlUrl(
-        'https://api.github.com/repos/gitify-app/gitify/issues/785',
-        '123',
-      );
-      expect(result).toBe('https://github.com/gitify-app/gitify/issues/785');
     });
   });
 

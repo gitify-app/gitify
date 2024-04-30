@@ -18,7 +18,7 @@ exports[`apiRequestAuth should make an authenticated request with the correct pa
 }
 `;
 
-exports[`utils/api-requests.ts should make a request with the correct parameters 1`] = `
+exports[`utils/api/request.ts should make a request with the correct parameters 1`] = `
 {
   "Accept": "application/json",
   "Cache-Control": "no-cache",
@@ -26,7 +26,7 @@ exports[`utils/api-requests.ts should make a request with the correct parameters
 }
 `;
 
-exports[`utils/api-requests.ts should make a request with the correct parameters and default data 1`] = `
+exports[`utils/api/request.ts should make a request with the correct parameters and default data 1`] = `
 {
   "Accept": "application/json",
   "Cache-Control": "no-cache",

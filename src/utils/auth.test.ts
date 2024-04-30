@@ -4,7 +4,7 @@ import remote from '@electron/remote';
 const browserWindow = new remote.BrowserWindow();
 
 import type { AuthState } from '../types';
-import * as apiRequests from './api-requests';
+import * as apiRequests from './api/request';
 import * as auth from './auth';
 
 describe('utils/auth.tsx', () => {
@@ -15,7 +15,7 @@ describe('utils/auth.tsx', () => {
       loadURLMock.mockReset();
     });
 
-    it('should call authGithub - success', async () => {
+    it('should call authGitHub - success', async () => {
       // Casting to jest.Mock avoids Typescript errors, where the spy is expected to match all the original
       // function's typing. I might fix all that if the return type of this was actually used, or if I was
       // writing this test for a new feature. Since I'm just upgrading Jest, jest.Mock is a nice escape hatch
@@ -44,7 +44,7 @@ describe('utils/auth.tsx', () => {
       expect(browserWindow.destroy).toHaveBeenCalledTimes(1);
     });
 
-    it('should call authGithub - failure', async () => {
+    it('should call authGitHub - failure', async () => {
       (
         jest.spyOn(browserWindow.webContents, 'on') as jest.Mock
       ).mockImplementation((event, callback): void => {
@@ -55,7 +55,7 @@ describe('utils/auth.tsx', () => {
       });
 
       await expect(async () => await auth.authGitHub()).rejects.toEqual(
-        "Oops! Something went wrong and we couldn't log you in using Github. Please try again.",
+        "Oops! Something went wrong and we couldn't log you in using GitHub. Please try again.",
       );
       expect(loadURLMock).toHaveBeenCalledTimes(1);
     });

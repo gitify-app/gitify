@@ -60,7 +60,7 @@ describe('routes/Notifications.tsx', () => {
         <AppContext.Provider
           value={{
             notifications: [],
-            requestFailed: true,
+            status: 'error',
             errorDetails: Errors.BAD_CREDENTIALS,
           }}
         >
@@ -76,7 +76,7 @@ describe('routes/Notifications.tsx', () => {
         <AppContext.Provider
           value={{
             notifications: [],
-            requestFailed: true,
+            status: 'error',
             errorDetails: Errors.MISSING_SCOPES,
           }}
         >
@@ -92,7 +92,7 @@ describe('routes/Notifications.tsx', () => {
         <AppContext.Provider
           value={{
             notifications: [],
-            requestFailed: true,
+            status: 'error',
             errorDetails: Errors.RATE_LIMITED,
           }}
         >
@@ -108,7 +108,7 @@ describe('routes/Notifications.tsx', () => {
         <AppContext.Provider
           value={{
             notifications: [],
-            requestFailed: true,
+            status: 'error',
             errorDetails: Errors.UNKNOWN,
           }}
         >
@@ -124,7 +124,7 @@ describe('routes/Notifications.tsx', () => {
         <AppContext.Provider
           value={{
             notifications: [],
-            requestFailed: true,
+            status: 'error',
             errorDetails: null,
           }}
         >

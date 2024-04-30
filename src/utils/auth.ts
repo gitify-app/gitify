@@ -6,10 +6,11 @@ import type {
   AuthTokenResponse,
   GitifyUser,
 } from '../types';
-import type { UserDetails } from '../typesGithub';
-import { apiRequest, apiRequestAuth } from '../utils/api-requests';
+import type { UserDetails } from '../typesGitHub';
 import { Constants } from '../utils/constants';
-import { generateGitHubAPIUrl, isEnterpriseHost } from './helpers';
+import { getAuthenticatedUser } from './api/client';
+import { apiRequest } from './api/request';
+import { isEnterpriseHost } from './helpers';
 
 export const authGitHub = (
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
@@ -44,7 +45,7 @@ export const authGitHub = (
       } else if (error) {
         reject(
           "Oops! Something went wrong and we couldn't " +
-            'log you in using Github. Please try again.',
+            'log you in using GitHub. Please try again.',
         );
       }
     };
@@ -82,9 +83,8 @@ export const getUserData = async (
   token: string,
   hostname: string,
 ): Promise<GitifyUser> => {
-  const response: UserDetails = (
-    await apiRequestAuth(`${generateGitHubAPIUrl(hostname)}user`, 'GET', token)
-  ).data;
+  const response: UserDetails = (await getAuthenticatedUser(hostname, token))
+    .data;
 
   return {
     id: response.id,

@@ -1,4 +1,4 @@
-import type { StateType, Subject, SubjectType } from '../typesGithub';
+import type { StateType, Subject, SubjectType } from '../typesGitHub';
 import { getNotificationTypeIcon, getNotificationTypeIconColor } from './icons';
 
 describe('utils/icons.ts', () => {

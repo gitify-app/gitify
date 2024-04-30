@@ -1,11 +1,12 @@
 import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
 
-import type { Notification } from '../typesGithub';
+import type { GitifyNotification } from '../types';
+import type { Notification } from '../typesGitHub';
 import { RepositoryNotifications } from './Repository';
 
 interface IProps {
   hostname: string;
-  notifications: Notification[];
+  notifications: GitifyNotification[];
   showAccountHostname: boolean;
 }
 
@@ -14,7 +15,7 @@ export const AccountNotifications = (props: IProps) => {
 
   const groupedNotifications = Object.values(
     notifications.reduce(
-      (acc: { [key: string]: Notification[] }, notification) => {
+      (acc: { [key: string]: GitifyNotification[] }, notification) => {
         const key = notification.repository.full_name;
         if (!acc[key]) acc[key] = [];
         acc[key].push(notification);

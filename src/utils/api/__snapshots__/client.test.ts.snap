@@ -1,0 +1,145 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`utils/api/client.ts getAuthenticatedUser should fetch authenticated user - enterprise 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts getAuthenticatedUser should fetch authenticated user - github 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts getRootHypermediaLinks should fetch root hypermedia links - enterprise 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts getRootHypermediaLinks should fetch root hypermedia links - github 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts headNotifications should fetch notifications head - enterprise 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts headNotifications should fetch notifications head - github 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts ignoreNotificationThreadSubscription should ignore notification thread subscription - github 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts ignoreNotificationThreadSubscription should ignore notification thread subscription- enterprise 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts listNotificationsForAuthenticatedUser should list notifications for user - enterprise 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts listNotificationsForAuthenticatedUser should list notifications for user - github 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts markNotificationThreadAsDone should mark notification thread as done - github 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts markNotificationThreadAsDone should mark notification thread as done- enterprise 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts markNotificationThreadAsRead should mark notification thread as read - github 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts markNotificationThreadAsRead should mark notification thread as read- enterprise 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts markRepositoryNotificationsAsRead should mark repository notifications as read - enterprise 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts markRepositoryNotificationsAsRead should mark repository notifications as read - github 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token yourAuthToken",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;

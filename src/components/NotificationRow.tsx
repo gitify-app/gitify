@@ -4,7 +4,6 @@ import {
   FeedPersonIcon,
   ReadIcon,
 } from '@primer/octicons-react';
-import { formatDistanceToNow, parseISO } from 'date-fns';
 import {
   type FC,
   type KeyboardEvent,
@@ -15,14 +14,8 @@ import {
 
 import { AppContext } from '../context/App';
 import type { GitifyNotification } from '../types';
-import type { Notification } from '../typesGithub';
 import { openExternalLink } from '../utils/comms';
-import { formatForDisplay, openInBrowser } from '../utils/helpers';
-import {
-  getNotificationTypeIcon,
-  getNotificationTypeIconColor,
-} from '../utils/icons';
-import { formatReason } from '../utils/reason';
+import { formatForDisplay } from '../utils/helpers';
 
 interface IProps {
   hostname: string;
@@ -41,7 +34,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   } = useContext(AppContext);
 
   const openNotification = useCallback(() => {
-    openInBrowser(notification, accounts);
+    openExternalLink(notification.url);
 
     if (settings.markAsDoneOnOpen) {
       markNotificationDone(notification.id, hostname);
@@ -51,7 +44,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     }
   }, [notifications, notification, accounts, settings]); // notifications required here to prevent weird state issues
 
-  const unsubscribe = (event: MouseEvent<HTMLElement>) => {
+  const unsubscribeFromThread = (event: MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.
     event.stopPropagation();
 
@@ -67,13 +60,6 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     openExternalLink(notification.user.html_url);
   };
 
-  const reason = notification.reason; //formatReason(notification.reason);
-  const NotificationIcon = notification.icon.type; //getNotificationTypeIcon(notification.subject);
-  const iconColor = notification.icon.color; // getNotificationTypeIconColor(notification.subject);
-  // const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
-  //   addSuffix: true,
-  // });
-
   const updatedLabel = notification.user
     ? `${notification.user.login} updated ${notification.updated_at.formatted}`
     : `Updated ${notification.updated_at.formatted}`;
@@ -85,10 +71,10 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   return (
     <div className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group">
       <div
-        className={`flex justify-center items-center w-5 ${iconColor}`}
+        className={`flex justify-center items-center w-5 ${notification.icon.color}`}
         title={notificationTitle}
       >
-        <NotificationIcon size={18} aria-label={notification.type} />
+        <notification.icon.type size={18} aria-label={notification.type} />
       </div>
 
       <div
@@ -128,8 +114,8 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                   />
                 </span>
               )}
-              <span className="ml-1" title={reason.description}>
-                {reason.title}
+              <span className="ml-1" title={notification.reason.description}>
+                {notification.reason.type}
               </span>
               <span className="ml-1">{notification.updated_at.formatted}</span>
             </span>
@@ -150,10 +136,10 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
         <button
           type="button"
           className="focus:outline-none h-full hover:text-red-500"
-          title="Unsubscribe"
-          onClick={unsubscribe}
+          title="Unsubscribe from Thread"
+          onClick={unsubscribeFromThread}
         >
-          <BellSlashIcon size={14} aria-label="Unsubscribe" />
+          <BellSlashIcon size={14} aria-label="Unsubscribe from Thread" />
         </button>
 
         <button

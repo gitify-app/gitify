@@ -3,7 +3,7 @@ import { ipcRenderer } from 'electron';
 import { mockAccounts } from '../__mocks__/mock-state';
 import {
   mockedAccountNotifications,
-  mockedGithubNotifications,
+  mockedGitHubNotifications,
   mockedSingleAccountNotifications,
 } from '../__mocks__/mockedData';
 import { defaultSettings } from '../context/App';
@@ -109,14 +109,14 @@ describe('utils/notifications.ts', () => {
 
     const nativeNotification: Notification =
       notificationsHelpers.raiseNativeNotification(
-        [mockedGithubNotifications[0]],
+        [mockedGitHubNotifications[0]],
         mockAccounts,
       );
     nativeNotification.onclick(null);
 
     expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
     expect(helpers.openInBrowser).toHaveBeenLastCalledWith(
-      mockedGithubNotifications[0],
+      mockedGitHubNotifications[0],
       mockAccounts,
     );
     expect(ipcRenderer.send).toHaveBeenCalledWith('hide-window');
@@ -124,7 +124,7 @@ describe('utils/notifications.ts', () => {
 
   it('should click on a native notification (with more than 1 notification)', () => {
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
-      mockedGithubNotifications,
+      mockedGitHubNotifications,
       mockAccounts,
     );
     nativeNotification.onclick(null);

@@ -79,7 +79,8 @@ export interface Notification {
   repository: Repository;
   url: string;
   subscription_url: string;
-  hostname: string; // This is not in the GitHub API, but we add it to the type to make it easier to work with
+  // TODO - rename this to apiBaseUrl
+  hostname: string; // This is not in the official GitHub API. We add this to make notification interactions easier.
 }
 
 export type UserDetails = User & UserProfile;
@@ -107,6 +108,7 @@ export interface UserProfile {
   two_factor_authentication: boolean;
   plan: Plan;
 }
+
 export interface Plan {
   name: string;
   space: number;
@@ -331,7 +333,8 @@ interface CommitFiles {
   contents_url: string;
   patch: string;
 }
-export interface CommitComments {
+
+export interface CommitComment {
   url: string;
   html_url: string;
   issue_url: string;
@@ -366,7 +369,7 @@ export interface Issue {
   state_reason: IssueStateReasonType | null;
 }
 
-export interface IssueComments {
+export interface IssueOrPullRequestComment {
   url: string;
   html_url: string;
   issue_url: string;
@@ -378,20 +381,22 @@ export interface IssueComments {
   body: string;
 }
 
-export interface ReleaseComments {
+export interface Release {
   url: string;
   assets_url: string;
+  upload_url: string;
   html_url: string;
   id: number;
   author: User;
   node_id: string;
   tag_name: string;
-  name: string;
+  target_commitish: string;
+  name: string | null;
+  body: string | null;
   draft: boolean;
   prerelease: boolean;
   created_at: string;
-  published_at: string;
-  body: string;
+  published_at: string | null;
 }
 
 export interface GraphQLSearch<T> {
@@ -441,7 +446,51 @@ export interface WorkflowRunAttributes {
   status: CheckSuiteStatus | null;
 }
 
-export interface GithubRESTError {
+export interface GitHubRESTError {
   message: string;
   documentation_url: string;
+}
+
+export interface NotificationThreadSubscription {
+  subscribed: boolean;
+  ignored: boolean;
+  reason: string | null;
+  created_at: string;
+  url: string;
+  thread_url: string;
+}
+
+export interface RootHypermediaLinks {
+  current_user_url: string;
+  current_user_authorizations_html_url: string;
+  authorizations_url: string;
+  code_search_url: string;
+  commit_search_url: string;
+  emails_url: string;
+  emojis_url: string;
+  events_url: string;
+  feeds_url: string;
+  followers_url: string;
+  following_url: string;
+  gists_url: string;
+  hub_url: string;
+  issue_search_url: string;
+  issues_url: string;
+  keys_url: string;
+  notifications_url: string;
+  organization_url: string;
+  organization_repositories_url: string;
+  organization_teams_url: string;
+  public_gists_url: string;
+  rate_limit_url: string;
+  repository_url: string;
+  repository_search_url: string;
+  current_user_repositories_url: string;
+  starred_url: string;
+  starred_gists_url: string;
+  topic_search_url: string;
+  user_url: string;
+  user_organizations_url: string;
+  user_repositories_url: string;
+  user_search_url: string;
 }

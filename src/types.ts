@@ -1,12 +1,14 @@
 import type { OcticonProps } from '@primer/octicons-react';
 import type { FC } from 'react';
-import type { Reason, StateType } from './typesGithub';
+import type { Reason, StateType } from './typesGitHub';
 
 export interface AuthState {
   token?: string;
   enterpriseAccounts: EnterpriseAccount[];
   user: GitifyUser | null;
 }
+
+export type Status = 'loading' | 'success' | 'error';
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &

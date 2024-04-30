@@ -21,14 +21,13 @@ import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
 import { Theme } from '../types';
-import { apiRequestAuth } from '../utils/api-requests';
+import { getRootHypermediaLinks } from '../utils/api/client';
 import {
   openExternalLink,
   updateTrayIcon,
   updateTrayTitle,
 } from '../utils/comms';
 import Constants from '../utils/constants';
-import { generateGitHubAPIUrl } from '../utils/helpers';
 import { setTheme } from '../utils/theme';
 
 export const SettingsRoute: FC = () => {
@@ -56,14 +55,16 @@ export const SettingsRoute: FC = () => {
   };
 
   useEffect(() => {
-    ipcRenderer.invoke('get-platform').then((result: string) => {
+    (async () => {
+      const result = await ipcRenderer.invoke('get-platform');
       setIsLinux(result === 'linux');
       setIsMacOS(result === 'darwin');
-    });
+    })();
 
-    ipcRenderer.invoke('get-app-version').then((result: string) => {
+    (async () => {
+      const result = await ipcRenderer.invoke('get-app-version');
       setAppVersion(result);
-    });
+    })();
 
     ipcRenderer.on('update-native-theme', (_, updatedTheme: Theme) => {
       if (settings.theme === Theme.SYSTEM) {
@@ -74,9 +75,8 @@ export const SettingsRoute: FC = () => {
 
   useMemo(() => {
     (async () => {
-      const response = await apiRequestAuth(
-        `${generateGitHubAPIUrl(Constants.DEFAULT_AUTH_OPTIONS.hostname)}`,
-        'GET',
+      const response = await getRootHypermediaLinks(
+        Constants.DEFAULT_AUTH_OPTIONS.hostname,
         accounts.token,
       );
 

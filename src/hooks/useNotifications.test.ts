@@ -37,16 +37,19 @@ describe('hooks/useNotifications.ts', () => {
           result.current.fetchNotifications(mockAccounts, mockSettings);
         });
 
-        expect(result.current.isFetching).toBe(true);
+        expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
-        expect(result.current.notifications[0].hostname).toBe(
+        expect(result.current.notifications[0].hostname).toBe('api.github.com');
+        expect(result.current.notifications[0].notifications.length).toBe(2);
+
+        expect(result.current.notifications[1].hostname).toBe(
           'github.gitify.io',
         );
-        expect(result.current.notifications[1].hostname).toBe('github.com');
+        expect(result.current.notifications[1].notifications.length).toBe(2);
       });
 
       it('should fetch notifications with failures - github.com & enterprise', async () => {
@@ -84,13 +87,13 @@ describe('hooks/useNotifications.ts', () => {
           result.current.fetchNotifications(mockAccounts, mockSettings);
         });
 
-        expect(result.current.isFetching).toBe(true);
+        expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('error');
         });
 
-        expect(result.current.requestFailed).toBe(true);
+        expect(result.current.errorDetails).toBe(Errors.UNKNOWN);
       });
     });
 
@@ -117,11 +120,12 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.notifications[0].hostname).toBe(
-            'github.gitify.io',
-          );
+          expect(result.current.status).toBe('success');
         });
 
+        expect(result.current.notifications[0].hostname).toBe(
+          'github.gitify.io',
+        );
         expect(result.current.notifications[0].notifications.length).toBe(2);
       });
 
@@ -150,7 +154,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.requestFailed).toBe(true);
+          expect(result.current.status).toBe('error');
         });
       });
     });
@@ -179,9 +183,10 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.notifications[0].hostname).toBe('github.com');
+          expect(result.current.status).toBe('success');
         });
 
+        expect(result.current.notifications[0].hostname).toBe('api.github.com');
         expect(result.current.notifications[0].notifications.length).toBe(2);
       });
 
@@ -210,14 +215,14 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.requestFailed).toBe(true);
+          expect(result.current.status).toBe('error');
           expect(result.current.errorDetails).toBe(Errors.UNKNOWN);
         });
       });
     });
 
-    describe('with colors', () => {
-      it('should fetch notifications with success - with colors', async () => {
+    describe('with detailed notifications', () => {
+      it('should fetch notifications with success', async () => {
         const accounts: AuthState = {
           ...mockAccounts,
           enterpriseAccounts: [],
@@ -373,12 +378,13 @@ describe('hooks/useNotifications.ts', () => {
           });
         });
 
-        expect(result.current.isFetching).toBe(true);
+        expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
-          expect(result.current.notifications[0].hostname).toBe('github.com');
+          expect(result.current.status).toBe('success');
         });
 
+        expect(result.current.notifications[0].hostname).toBe('api.github.com');
         expect(result.current.notifications[0].notifications.length).toBe(6);
       });
     });
@@ -452,12 +458,13 @@ describe('hooks/useNotifications.ts', () => {
           });
         });
 
-        expect(result.current.isFetching).toBe(true);
+        expect(result.current.status).toBe('loading');
 
         await waitFor(() => {
-          expect(result.current.notifications[0].hostname).toBe('github.com');
+          expect(result.current.status).toBe('success');
         });
 
+        expect(result.current.notifications[0].hostname).toBe('api.github.com');
         expect(result.current.notifications[0].notifications.length).toBe(1);
       });
     });
@@ -485,7 +492,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       await waitFor(() => {
-        expect(result.current.isFetching).toBe(false);
+        expect(result.current.status).toBe('success');
       });
 
       act(() => {
@@ -518,7 +525,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -536,7 +543,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -548,7 +555,7 @@ describe('hooks/useNotifications.ts', () => {
       const hostname = 'github.gitify.io';
 
       it('should mark a notification as read with success - enterprise', async () => {
-        nock('https://github.gitify.io/')
+        nock('https://github.gitify.io/api/v3')
           .patch(`/notifications/threads/${id}`)
           .reply(200);
 
@@ -559,14 +566,14 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
       });
 
       it('should mark a notification as read with failure - enterprise', async () => {
-        nock('https://github.gitify.io/')
+        nock('https://github.gitify.io/api/v3')
           .patch(`/notifications/threads/${id}`)
           .reply(400);
 
@@ -577,7 +584,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -604,7 +611,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -622,7 +629,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -634,7 +641,7 @@ describe('hooks/useNotifications.ts', () => {
       const hostname = 'github.gitify.io';
 
       it('should mark a notification as done with success - enterprise', async () => {
-        nock('https://github.gitify.io/')
+        nock('https://github.gitify.io/api/v3')
           .delete(`/notifications/threads/${id}`)
           .reply(200);
 
@@ -645,14 +652,14 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
       });
 
       it('should mark a notification as done with failure - enterprise', async () => {
-        nock('https://github.gitify.io/')
+        nock('https://github.gitify.io/api/v3')
           .delete(`/notifications/threads/${id}`)
           .reply(400);
 
@@ -663,7 +670,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -696,7 +703,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -720,7 +727,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -733,12 +740,12 @@ describe('hooks/useNotifications.ts', () => {
 
       it('should unsubscribe from a notification with success - enterprise', async () => {
         // The unsubscribe endpoint call.
-        nock('https://github.gitify.io/')
+        nock('https://github.gitify.io/api/v3')
           .put(`/notifications/threads/${id}/subscription`)
           .reply(200);
 
         // The mark read endpoint call.
-        nock('https://github.gitify.io/')
+        nock('https://github.gitify.io/api/v3')
           .patch(`/notifications/threads/${id}`)
           .reply(200);
 
@@ -749,7 +756,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -757,12 +764,12 @@ describe('hooks/useNotifications.ts', () => {
 
       it('should unsubscribe from a notification with failure - enterprise', async () => {
         // The unsubscribe endpoint call.
-        nock('https://github.gitify.io/')
+        nock('https://github.gitify.io/api/v3')
           .put(`/notifications/threads/${id}/subscription`)
           .reply(400);
 
         // The mark read endpoint call.
-        nock('https://github.gitify.io/')
+        nock('https://github.gitify.io/api/v3')
           .patch(`/notifications/threads/${id}`)
           .reply(400);
 
@@ -773,7 +780,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -800,7 +807,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -818,7 +825,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -830,7 +837,7 @@ describe('hooks/useNotifications.ts', () => {
       const hostname = 'github.gitify.io';
 
       it("should mark a repository's notifications as read with success - enterprise", async () => {
-        nock('https://github.gitify.io/')
+        nock('https://github.gitify.io/api/v3')
           .put(`/repos/${repoSlug}/notifications`)
           .reply(200);
 
@@ -841,14 +848,14 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
       });
 
       it("should mark a repository's notifications as read with failure - enterprise", async () => {
-        nock('https://github.gitify.io/')
+        nock('https://github.gitify.io/api/v3')
           .put(`/repos/${repoSlug}/notifications`)
           .reply(400);
 
@@ -859,7 +866,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -891,7 +898,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -913,7 +920,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
@@ -925,7 +932,7 @@ describe('hooks/useNotifications.ts', () => {
       const hostname = 'github.gitify.io';
 
       it("should mark a repository's notifications as done with success - enterprise", async () => {
-        nock('https://api.github.com/')
+        nock('https://github.gitify.io/api/v3')
           .delete(`/notifications/threads/${id}`)
           .reply(200);
 
@@ -940,14 +947,14 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);
       });
 
       it("should mark a repository's notifications as done with failure - enterprise", async () => {
-        nock('https://api.github.com/')
+        nock('https://github.gitify.io/api/v3')
           .delete(`/notifications/threads/${id}`)
           .reply(400);
 
@@ -962,7 +969,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         await waitFor(() => {
-          expect(result.current.isFetching).toBe(false);
+          expect(result.current.status).toBe('success');
         });
 
         expect(result.current.notifications.length).toBe(0);

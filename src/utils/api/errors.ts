@@ -1,10 +1,10 @@
 import { AxiosError } from 'axios';
 import type { GitifyError } from '../../types';
-import type { GithubRESTError } from '../../typesGithub';
+import type { GitHubRESTError } from '../../typesGitHub';
 import { Errors } from '../constants';
 
 export function determineFailureType(
-  err: AxiosError<GithubRESTError>,
+  err: AxiosError<GitHubRESTError>,
 ): GitifyError {
   const code = err.code;
 

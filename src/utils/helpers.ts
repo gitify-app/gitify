@@ -1,15 +1,13 @@
-import type { AuthState, EnterpriseAccount } from '../types';
+import type { AuthState } from '../types';
 import type {
   Discussion,
   DiscussionComment,
   GraphQLSearch,
-  Issue,
-  IssueComments,
   Notification,
-  PullRequest,
-} from '../typesGithub';
-import { apiRequestAuth } from '../utils/api-requests';
+} from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
+import { getHtmlUrl } from './api/client';
+import { apiRequestAuth } from './api/request';
 import { Constants } from './constants';
 import { getCheckSuiteAttributes, getWorkflowRunAttributes } from './subject';
 
@@ -19,29 +17,24 @@ export function isGitHubLoggedIn(accounts: AuthState): boolean {
 
 export function getTokenForHost(hostname: string, accounts: AuthState): string {
   const isEnterprise = isEnterpriseHost(hostname);
-  const token = isEnterprise
-    ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
-    : accounts.token;
 
-  return token;
-}
+  if (isEnterprise) {
+    return accounts.enterpriseAccounts.find((obj) => obj.hostname === hostname)
+      .token;
+  }
 
-export function getEnterpriseAccountToken(
-  hostname: string,
-  accounts: EnterpriseAccount[],
-): string {
-  return accounts.find((obj) => obj.hostname === hostname).token;
+  return accounts.token;
 }
 
 export function isEnterpriseHost(hostname: string): boolean {
   return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
 }
 
-export function generateGitHubAPIUrl(hostname) {
+export function getGitHubAPIBaseUrl(hostname) {
   const isEnterprise = isEnterpriseHost(hostname);
   return isEnterprise
-    ? `https://${hostname}/api/v3/`
-    : `https://api.${hostname}/`;
+    ? `https://${hostname}/api/v3`
+    : Constants.GITHUB_API_BASE_URL;
 }
 
 export function addNotificationReferrerIdToUrl(
@@ -79,17 +72,6 @@ export function formatSearchQueryString(
   lastUpdated: string,
 ): string {
   return `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
-}
-
-export async function getHtmlUrl(url: string, token: string): Promise<string> {
-  try {
-    const response: Issue | IssueComments | PullRequest = (
-      await apiRequestAuth(url, 'GET', token)
-    ).data;
-    return response.html_url;
-  } catch (err) {
-    console.error('Failed to get html url');
-  }
 }
 
 export function getCheckSuiteUrl(notification: Notification) {

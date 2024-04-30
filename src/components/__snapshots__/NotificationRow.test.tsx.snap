@@ -118,11 +118,11 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
     <button
       className="focus:outline-none h-full hover:text-red-500"
       onClick={[Function]}
-      title="Unsubscribe"
+      title="Unsubscribe from Thread"
       type="button"
     >
       <svg
-        aria-label="Unsubscribe"
+        aria-label="Unsubscribe from Thread"
         className="octicon octicon-bell-slash"
         fill="currentColor"
         focusable="false"
@@ -306,11 +306,11 @@ exports[`components/NotificationRow.tsx should render itself & its children with
     <button
       className="focus:outline-none h-full hover:text-red-500"
       onClick={[Function]}
-      title="Unsubscribe"
+      title="Unsubscribe from Thread"
       type="button"
     >
       <svg
-        aria-label="Unsubscribe"
+        aria-label="Unsubscribe from Thread"
         className="octicon octicon-bell-slash"
         fill="currentColor"
         focusable="false"

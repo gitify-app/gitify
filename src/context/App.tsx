@@ -16,13 +16,13 @@ import {
   type AuthTokenOptions,
   type GitifyError,
   type SettingsState,
+  type Status,
   Theme,
 } from '../types';
-import { apiRequestAuth } from '../utils/api-requests';
+import { headNotifications } from '../utils/api/client';
 import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
 import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
 import Constants from '../utils/constants';
-import { generateGitHubAPIUrl } from '../utils/helpers';
 import { getNotificationCount } from '../utils/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setTheme } from '../utils/theme';
@@ -55,8 +55,7 @@ interface AppContextState {
   logout: () => void;
 
   notifications: AccountNotifications[];
-  isFetching: boolean;
-  requestFailed: boolean;
+  status: Status;
   errorDetails: GitifyError;
   removeNotificationFromState: (id: string, hostname: string) => void;
   fetchNotifications: () => Promise<void>;
@@ -81,9 +80,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const {
     fetchNotifications,
     notifications,
-    requestFailed,
     errorDetails,
-    isFetching,
+    status,
     removeNotificationFromState,
     markNotificationRead,
     markNotificationDone,
@@ -166,11 +164,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const validateToken = useCallback(
     async ({ token, hostname }: AuthTokenOptions) => {
-      await apiRequestAuth(
-        `${generateGitHubAPIUrl(hostname)}notifications`,
-        'HEAD',
-        token,
-      );
+      await headNotifications(hostname, token);
+
       const user = await getUserData(token, hostname);
       const updatedAccounts = addAccount(accounts, token, hostname, user);
       setAccounts(updatedAccounts);
@@ -243,8 +238,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         logout,
 
         notifications,
-        isFetching,
-        requestFailed,
+        status,
         errorDetails,
         removeNotificationFromState,
         fetchNotifications: fetchNotificationsWithAccounts,
