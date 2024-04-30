@@ -156,14 +156,12 @@ export async function getAllNotifications(
           }),
         );
 
-        // Enrich notifications
         notifications = await enrichNotifications(
           notifications,
           accounts,
           settings,
         );
 
-        // Filter notifications
         notifications = filterNotifications(notifications, settings);
 
         return {
