@@ -128,13 +128,8 @@ export const useNotifications = (): NotificationsState => {
                         return notification;
                       }
 
-                      const token = getTokenForHost(
-                        notification.hostname,
-                        accounts,
-                      );
-
                       const additionalSubjectDetails =
-                        await getGitifySubjectDetails(notification, token);
+                        await getGitifySubjectDetails(notification, accounts);
 
                       return {
                         ...notification,

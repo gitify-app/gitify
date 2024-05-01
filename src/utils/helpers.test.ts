@@ -16,6 +16,7 @@ import {
   generateNotificationReferrerId,
   getGitHubAPIBaseUrl,
   isEnterpriseHost,
+  isGitHubHost,
   isGitHubLoggedIn,
 } from './helpers';
 
@@ -38,6 +39,18 @@ describe('utils/helpers.ts', () => {
     it('should return false for non-enterprise host', () => {
       expect(isEnterpriseHost('github.com')).toBe(false);
       expect(isEnterpriseHost('api.github.com')).toBe(false);
+    });
+  });
+
+  describe('isGitHubHost', () => {
+    it('should return true for GitHub host', () => {
+      expect(isGitHubHost('github.com')).toBe(true);
+      expect(isGitHubHost('api.github.com')).toBe(true);
+    });
+
+    it('should return false for non-github host', () => {
+      expect(isGitHubHost('github.manos.im')).toBe(false);
+      expect(isGitHubHost('api.github.manos.im')).toBe(false);
     });
   });
 

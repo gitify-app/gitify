@@ -1,3 +1,4 @@
+import type { AuthState } from '../types';
 import type {
   CheckSuiteAttributes,
   CheckSuiteStatus,
@@ -15,14 +16,22 @@ import {
   getIssue,
   getIssueOrPullRequestComment,
   getPullRequest,
+  getPullRequestReviews,
   getRelease,
 } from './api/client';
-import { fetchDiscussion, getLatestDiscussionComment } from './helpers';
+import {
+  fetchDiscussion,
+  getLatestDiscussionComment,
+  getLoginForHost,
+  getTokenForHost,
+} from './helpers';
 
 export async function getGitifySubjectDetails(
   notification: Notification,
-  token: string,
+  accounts: AuthState,
 ): Promise<GitifySubject> {
+  const token = getTokenForHost(notification.hostname, accounts);
+
   switch (notification.subject.type) {
     case 'CheckSuite':
       return getGitifySubjectForCheckSuite(notification);
@@ -33,7 +42,11 @@ export async function getGitifySubjectDetails(
     case 'Issue':
       return await getGitifySubjectForIssue(notification, token);
     case 'PullRequest':
-      return await getGitifySubjectForPullRequest(notification, token);
+      return await getGitifySubjectForPullRequest(
+        notification,
+        token,
+        accounts,
+      );
     case 'Release':
       return await getGitifySubjectForRelease(notification, token);
     case 'WorkflowRun':
@@ -213,6 +226,7 @@ async function getGitifySubjectForIssue(
 async function getGitifySubjectForPullRequest(
   notification: Notification,
   token: string,
+  accounts: AuthState,
 ): Promise<GitifySubject> {
   try {
     const pr = (await getPullRequest(notification.subject.url, token)).data;
@@ -236,6 +250,8 @@ async function getGitifySubjectForPullRequest(
       prCommentUser = prComment.user;
     }
 
+    const userApprovedPR = await checkIfUserApprovedPR(notification, accounts);
+
     return {
       state: prState,
       user: {
@@ -244,10 +260,37 @@ async function getGitifySubjectForPullRequest(
         avatar_url: prCommentUser?.avatar_url ?? pr.user.avatar_url,
         type: prCommentUser?.type ?? pr.user.type,
       },
+      isApprovedByUser: userApprovedPR,
     };
   } catch (err) {
     console.error('Pull Request subject retrieval failed');
   }
+}
+
+async function checkIfUserApprovedPR(
+  notification: Notification,
+  accounts: AuthState,
+) {
+  if (notification.subject.type !== 'PullRequest') {
+    return false;
+  }
+
+  const token = getTokenForHost(notification.hostname, accounts);
+  const login = getLoginForHost(notification.hostname, accounts);
+
+  const prReviews = await getPullRequestReviews(
+    `${notification.subject.url}/reviews`,
+    token,
+  );
+
+  if (!prReviews) {
+    return false;
+  }
+
+  return prReviews.data.some(
+    (prReview) =>
+      prReview.state === 'APPROVED' && prReview.user.login === login,
+  );
 }
 
 async function getGitifySubjectForRelease(

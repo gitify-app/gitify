@@ -1,5 +1,6 @@
 import {
   BellSlashIcon,
+  CheckCircleFillIcon,
   CheckIcon,
   FeedPersonIcon,
   ReadIcon,
@@ -135,6 +136,18 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
           </span>
         </div>
       </div>
+
+      {notification.subject.isApprovedByUser && (
+        <div className="flex justify-center items-center">
+          <span title="You have previously approved this PR">
+            <CheckCircleFillIcon
+              size={16}
+              className="text-green-500"
+              aria-label="You have approved this PR"
+            />
+          </span>
+        </div>
+      )}
 
       <div className="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity">
         <button
