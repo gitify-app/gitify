@@ -229,7 +229,7 @@ describe('utils/helpers.ts', () => {
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Asuccess+branch%3Amain&${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Asuccess+branch%3Amain&${mockedNotificationReferrer}`,
         );
       });
 
@@ -251,7 +251,7 @@ describe('utils/helpers.ts', () => {
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockedNotificationReferrer}`,
         );
       });
 
@@ -273,7 +273,7 @@ describe('utils/helpers.ts', () => {
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockedNotificationReferrer}`,
         );
       });
 
@@ -295,7 +295,7 @@ describe('utils/helpers.ts', () => {
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Askipped+branch%3Amain&${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Askipped+branch%3Amain&${mockedNotificationReferrer}`,
         );
       });
 
@@ -317,7 +317,7 @@ describe('utils/helpers.ts', () => {
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?${mockedNotificationReferrer}`,
         );
       });
 
@@ -339,7 +339,7 @@ describe('utils/helpers.ts', () => {
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+branch%3Amain&${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+branch%3Amain&${mockedNotificationReferrer}`,
         );
       });
 
@@ -361,7 +361,7 @@ describe('utils/helpers.ts', () => {
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?${mockedNotificationReferrer}`,
         );
       });
     });
@@ -421,7 +421,7 @@ describe('utils/helpers.ts', () => {
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/discussions/612?${mockedNotificationReferrer}#discussioncomment-2300902`,
+          `https://github.com/gitify-app/notifications-test/discussions/612?${mockedNotificationReferrer}#discussioncomment-2300902`,
         );
       });
 
@@ -449,14 +449,15 @@ describe('utils/helpers.ts', () => {
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/discussions?${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/discussions?${mockedNotificationReferrer}`,
         );
       });
     });
 
     it('Repository Invitation url', async () => {
       const subject = {
-        title: 'Invitation to join manosim/notifications-test from unit-tests',
+        title:
+          'Invitation to join gitify-app/notifications-test from unit-tests',
         url: null,
         latest_comment_url: null,
         type: 'RepositoryInvitation' as SubjectType,
@@ -472,7 +473,7 @@ describe('utils/helpers.ts', () => {
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
       expect(result).toBe(
-        `https://github.com/manosim/notifications-test/invitations?${mockedNotificationReferrer}`,
+        `https://github.com/gitify-app/notifications-test/invitations?${mockedNotificationReferrer}`,
       );
     });
 
@@ -495,7 +496,7 @@ describe('utils/helpers.ts', () => {
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?query=is%3Awaiting&${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=is%3Awaiting&${mockedNotificationReferrer}`,
         );
       });
 
@@ -518,7 +519,7 @@ describe('utils/helpers.ts', () => {
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?${mockedNotificationReferrer}`,
         );
       });
 
@@ -540,7 +541,7 @@ describe('utils/helpers.ts', () => {
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?${mockedNotificationReferrer}`,
         );
       });
     });

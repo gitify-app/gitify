@@ -54,7 +54,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       >
         <span
           className="flex"
-          title="manosim updated over 6 years ago"
+          title="mockUser updated May 1st, 2024"
         >
           <span
             onClick={[Function]}
@@ -62,22 +62,22 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
             title="View User Profile"
           >
             <img
-              alt="manosim's avatar"
+              alt="mockUser's avatar"
               className="rounded-full w-4 h-4 cursor-pointer"
-              src="https://avatars0.githubusercontent.com/u/6333409?v=3"
-              title="manosim"
+              src="https://avatars.githubusercontent.com/u/583231?v=4"
+              title="mockUser"
             />
           </span>
           <span
             className="ml-1"
-            title="You're watching the repository."
+            title="You are subscribed to this thread"
           >
-            Updated
+            subscribed
           </span>
           <span
             className="ml-1"
           >
-            over 6 years ago
+            May 1st, 2024
           </span>
         </span>
       </span>
@@ -231,7 +231,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
       >
         <span
           className="flex"
-          title="Updated over 6 years ago"
+          title="Updated May 1st, 2024"
         >
           <span>
             <svg
@@ -258,14 +258,14 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           </span>
           <span
             className="ml-1"
-            title="You're watching the repository."
+            title="You are subscribed to this thread"
           >
-            Updated
+            subscribed
           </span>
           <span
             className="ml-1"
           >
-            over 6 years ago
+            May 1st, 2024
           </span>
         </span>
       </span>
