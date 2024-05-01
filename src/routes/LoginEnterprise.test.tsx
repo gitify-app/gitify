@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import * as TestRenderer from 'react-test-renderer';
 const { ipcRenderer } = require('electron');
-import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
+import { mockedEnterpriseAccounts } from '../__mocks__/mock-gitify';
 import { AppContext } from '../context/App';
 import type { AuthState } from '../types';
 import { LoginEnterpriseRoute, validate } from './LoginEnterprise';

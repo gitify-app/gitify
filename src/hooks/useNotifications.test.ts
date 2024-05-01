@@ -2,8 +2,9 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 import axios, { AxiosError } from 'axios';
 import nock from 'nock';
 
+import { mockedNotificationUser } from '../__mocks__/mock-github';
+import { mockedUser } from '../__mocks__/mock-gitify';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
-import { mockedNotificationUser, mockedUser } from '../__mocks__/mockedData';
 import type { AuthState } from '../types';
 import { Errors } from '../utils/constants';
 import { useNotifications } from './useNotifications';

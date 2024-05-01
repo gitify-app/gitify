@@ -1,7 +1,7 @@
 import TestRenderer from 'react-test-renderer';
 
+import { mockedAccountNotifications } from '../__mocks__/mock-gitify';
 import { mockSettings } from '../__mocks__/mock-state';
-import { mockedAccountNotifications } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
 import { Errors } from '../utils/constants';
 import { NotificationsRoute } from './Notifications';

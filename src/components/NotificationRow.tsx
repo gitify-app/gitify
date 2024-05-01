@@ -34,7 +34,8 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   } = useContext(AppContext);
 
   const openNotification = useCallback(() => {
-    openExternalLink(notification.url);
+    // TODO - this may need extra lookup, too
+    openExternalLink(notification.html_url);
 
     if (settings.markAsDoneOnOpen) {
       markNotificationDone(notification.id, hostname);

@@ -1,33 +1,11 @@
-import { IssueOpenedIcon } from '@primer/octicons-react';
-import {
-  type AccountNotifications,
-  type EnterpriseAccount,
-  type GitifyNotification,
-  type GitifyUser,
-  IconColor,
-} from '../types';
 import type {
   Discussion,
   DiscussionComments,
   GraphQLSearch,
   Notification,
-  Repository,
   User,
 } from '../typesGitHub';
 import Constants from '../utils/constants';
-
-export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
-  {
-    hostname: 'github.gitify.io',
-    token: '1234568790',
-  },
-];
-
-export const mockedUser: GitifyUser = {
-  login: 'octocat',
-  name: 'Mona Lisa Octocat',
-  id: 123456789,
-};
 
 export const mockedNotificationUser: User = {
   login: 'octocat',
@@ -70,40 +48,6 @@ export const mockedCommenterUser: User = {
   received_events_url: 'https://api.github.com/users/dummyuser/received_events',
   type: 'User',
   site_admin: false,
-};
-
-export const mockGitifyNotification: GitifyNotification = {
-  hostname: Constants.GITHUB_API_BASE_URL,
-  id: '138661096',
-  unread: true,
-  reason: {
-    type: 'subscribed',
-    code: 'subscribed',
-    description: 'You are subscribed to this thread',
-  },
-  updated_at: {
-    raw: '2017-05-20T17:51:57Z',
-    formatted: 'May 20th, 2017',
-  },
-  title: 'I am a robot and this is a test!',
-  url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
-  type: 'Issue',
-  state: 'open',
-  icon: {
-    type: IssueOpenedIcon,
-    color: IconColor.GREEN,
-  },
-  user: {
-    login: 'mockUser',
-    html_url: 'https://github.com/mockUser',
-    avatar_url: 'https://avatars0.githubusercontent.com/u/6333409?v=3',
-    type: 'User',
-  },
-  repository: {
-    full_name: 'gitify-app/notifications-test',
-    avatar_url: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
-    html_url: 'https://github.com/gitify-app/notifications-test',
-  },
 };
 
 export const mockedSingleNotification: Notification = {
@@ -233,6 +177,8 @@ export const mockedSingleNotification: Notification = {
   subscription_url:
     'https://api.github.com/notifications/threads/138661096/subscription',
 };
+
+/*
 
 // 2 Notifications
 // Repository : 'manosim/notifications-tests'
@@ -399,24 +345,25 @@ export const mockedEnterpriseNotifications = [
     hostname: Constants.GITHUB_API_BASE_URL,
   } as Notification,
 ];
+*/
 
-export const mockedAccountNotifications: AccountNotifications[] = [
-  {
-    hostname: 'github.com',
-    notifications: mockedGitHubNotifications,
-  },
-  {
-    hostname: 'github.gitify.io',
-    notifications: mockedEnterpriseNotifications,
-  },
-];
+// export const mockedAccountNotifications: AccountNotifications[] = [
+//   {
+//     hostname: 'github.com',
+//     notifications: mockedGitHubNotifications,
+//   },
+//   {
+//     hostname: 'github.gitify.io',
+//     notifications: mockedEnterpriseNotifications,
+//   },
+// ];
 
-export const mockedSingleAccountNotifications: AccountNotifications[] = [
-  {
-    hostname: 'github.com',
-    notifications: [mockGitifyNotification],
-  },
-];
+// export const mockedSingleAccountNotifications: AccountNotifications[] = [
+//   {
+//     hostname: 'github.com',
+//     notifications: [mockedSingleNotification],
+//   },
+// ];
 
 const mockDiscussionComments: DiscussionComments = {
   nodes: [

@@ -1,7 +1,6 @@
 import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
 
 import type { GitifyNotification } from '../types';
-import type { Notification } from '../typesGitHub';
 import { RepositoryNotifications } from './Repository';
 
 interface IProps {

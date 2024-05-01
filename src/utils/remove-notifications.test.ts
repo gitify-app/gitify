@@ -2,7 +2,7 @@ import {
   mockedAccountNotifications,
   mockedSingleAccountNotifications,
   mockedSingleNotification,
-} from '../__mocks__/mockedData';
+} from '../__mocks__/mock-gitify';
 import { removeNotifications } from './remove-notifications';
 
 describe('utils/remove-notifications.ts', () => {

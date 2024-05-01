@@ -2,8 +2,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import * as TestRenderer from 'react-test-renderer';
 const { shell, ipcRenderer } = require('electron');
+import { mockedAccountNotifications } from '../__mocks__/mock-gitify';
 import { mockSettings } from '../__mocks__/mock-state';
-import { mockedAccountNotifications } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
 import { Sidebar } from './Sidebar';
 

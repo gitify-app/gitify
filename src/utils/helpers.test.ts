@@ -1,10 +1,10 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
-import { mockAccounts } from '../__mocks__/mock-state';
 import {
   mockedGraphQLResponse,
   mockedSingleNotification,
-  mockedUser,
-} from '../__mocks__/mockedData';
+} from '../__mocks__/mock-github';
+import { mockedUser } from '../__mocks__/mock-gitify';
+import { mockAccounts } from '../__mocks__/mock-state';
 import type { SubjectType } from '../typesGitHub';
 import * as apiRequests from './api/request';
 import {

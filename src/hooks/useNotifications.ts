@@ -2,7 +2,14 @@ import type { AxiosError } from 'axios';
 import { useCallback, useState } from 'react';
 
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import type { AuthState } from '../types';
+import type {
+  AccountNotifications,
+  AuthState,
+  GitifyError,
+  GitifyNotification,
+  SettingsState,
+  Status,
+} from '../types';
 import type {
   GitHubRESTError,
   GitifySubject,
@@ -106,61 +113,35 @@ export const useNotifications = (): NotificationsState => {
         ...getEnterpriseNotifications(),
       ])
         .then(([...responses]) => {
-          const accountsNotifications: AccountNotifications[] = responses
+          const rawAccountsNotifications = responses
             .filter((response) => !!response)
             .map((accountNotifications) => {
               const { hostname } = new URL(accountNotifications.config.url);
+
               return {
                 hostname,
-                notifications: accountNotifications.data.map(
-                  (notification: Notification) => ({
-                    ...notification,
-                    hostname,
-                  }),
-                ),
+                notifications: accountNotifications.data,
               };
             });
 
           Promise.all(
-            accountsNotifications.map(async (accountNotifications) => {
+            rawAccountsNotifications.map(async (accountNotifications) => {
               return {
                 hostname: accountNotifications.hostname,
-                notifications: await Promise.all<Notification>(
+                notifications: await Promise.all<GitifyNotification>(
                   accountNotifications.notifications.map(
                     async (notification: Notification) => {
-                      if (!settings.detailedNotifications) {
-                        return notification;
-                      }
-
-                      const token = getTokenForHost(
-                        notification.hostname,
-                        accounts,
+                      return mapToGitifyNotification(
+                        notification,
+                        getTokenForHost(
+                          accountNotifications.hostname,
+                          accounts,
+                        ),
+                        settings,
                       );
-
-                      const additionalSubjectDetails =
-                        await getGitifySubjectDetails(notification, token);
-
-                      return {
-                        ...notification,
-                        subject: {
-                          ...notification.subject,
-                          ...additionalSubjectDetails,
-                        },
-                      };
                     },
                   ),
-                ).then((notifications) => {
-                  return notifications.filter((notification) => {
-                    if (
-                      !settings.showBots &&
-                      notification.subject?.user?.type === 'Bot'
-                    ) {
-                      return false;
-                    }
-
-                    return true;
-                  });
-                }),
+                ),
               };
             }),
           ).then((parsedNotifications) => {
@@ -379,11 +360,15 @@ async function mapToGitifyNotification(
         addSuffix: true,
       }),
     },
-    url: notification.subject.html_url ?? notification.repository.html_url,
+    // TODO - this may need to change
+    html_url: notification.subject.html_url ?? notification.repository.html_url,
     repository: {
       full_name: notification.repository.full_name,
       html_url: notification.repository.html_url,
       avatar_url: notification.repository.owner.avatar_url,
+      owner: {
+        avatar_url: notification.repository.owner.avatar_url,
+      },
     },
     state: notification.subject?.state,
     user: notification.subject?.user,

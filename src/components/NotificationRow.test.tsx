@@ -5,8 +5,8 @@ import * as TestRenderer from 'react-test-renderer';
 import * as helpers from '../utils/helpers';
 
 import { shell } from 'electron';
+import { mockedSingleNotification } from '../__mocks__/mock-gitify';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
-import { mockedSingleNotification } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
 import { NotificationRow } from './NotificationRow';
 
@@ -39,7 +39,7 @@ describe('components/NotificationRow.tsx', () => {
       .mockImplementation(() => new Date('2024').valueOf());
 
     const mockNotification = mockedSingleNotification;
-    mockNotification.subject.user = null;
+    mockNotification.user = null;
 
     const props = {
       notification: mockNotification,
@@ -171,18 +171,7 @@ describe('components/NotificationRow.tsx', () => {
 
   it('should open notification user profile', () => {
     const props = {
-      notification: {
-        ...mockedSingleNotification,
-        subject: {
-          ...mockedSingleNotification.subject,
-          user: {
-            login: 'some-user',
-            html_url: 'https://github.com/some-user',
-            avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
-            type: 'User',
-          },
-        },
-      },
+      notification: mockedSingleNotification,
       hostname: 'github.com',
     };
 
@@ -200,7 +189,7 @@ describe('components/NotificationRow.tsx', () => {
     fireEvent.click(screen.getByTitle('View User Profile'));
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(
-      props.notification.subject.user.html_url,
+      props.notification.user.html_url,
     );
   });
 });

@@ -83,7 +83,7 @@ export interface GitifyNotification {
   };
   title: string;
   type: string;
-  url: string;
+  html_url: string;
   unread: boolean;
   reason: {
     code: Reason;
@@ -100,6 +100,9 @@ export interface GitifyNotification {
     full_name: string;
     avatar_url: string;
     html_url: string;
+    owner: {
+      avatar_url: string;
+    };
   };
 }
 

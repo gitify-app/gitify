@@ -1,11 +1,11 @@
 import { ipcRenderer } from 'electron';
 
-import { mockAccounts } from '../__mocks__/mock-state';
 import {
   mockedAccountNotifications,
   mockedGitHubNotifications,
   mockedSingleAccountNotifications,
-} from '../__mocks__/mockedData';
+} from '../__mocks__/mock-gitify';
+import { mockAccounts } from '../__mocks__/mock-state';
 import { defaultSettings } from '../context/App';
 import type { SettingsState } from '../types';
 import * as helpers from './helpers';

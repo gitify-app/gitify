@@ -90,7 +90,9 @@ export const raiseNativeNotification = (
   nativeNotification.onclick = () => {
     if (notifications.length === 1) {
       ipcRenderer.send('hide-window');
-      openExternalLink(notifications[0].url);
+      // TODO - this might need to fetch the html url, too
+
+      openExternalLink(notifications[0].html_url);
     } else {
       ipcRenderer.send('reopen-window');
     }

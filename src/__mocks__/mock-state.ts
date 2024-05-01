@@ -1,5 +1,5 @@
 import { type AuthState, type SettingsState, Theme } from '../types';
-import { mockedEnterpriseAccounts, mockedUser } from './mockedData';
+import { mockedEnterpriseAccounts, mockedUser } from './mock-gitify';
 
 export const mockAccounts: AuthState = {
   token: 'token-123-456',
