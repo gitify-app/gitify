@@ -228,7 +228,7 @@ async function getGitifySubjectForPullRequest(
 
     if (
       notification.subject.latest_comment_url &&
-      notification.subject.latest_comment_url !== notification.subject.url // Sometimes the latest comment URL is the same as the PR URL
+      notification.subject.latest_comment_url !== notification.subject.url
     ) {
       const prComment = (
         await getIssueOrPullRequestComment(
