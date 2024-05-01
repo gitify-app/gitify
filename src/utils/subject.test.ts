@@ -736,6 +736,35 @@ describe('utils/subject.ts', () => {
         });
       });
 
+      it('avoid fetching comments if latest_comment_url and url are the same', async () => {
+        mockNotification.subject.latest_comment_url =
+          mockNotification.subject.url;
+
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
+          .reply(200, {
+            state: 'open',
+            draft: false,
+            merged: false,
+            user: mockAuthor,
+          });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAccounts.token,
+        );
+
+        expect(result).toEqual({
+          state: 'open',
+          user: {
+            login: mockAuthor.login,
+            html_url: mockAuthor.html_url,
+            avatar_url: mockAuthor.avatar_url,
+            type: mockAuthor.type,
+          },
+        });
+      });
+
       it('handle pull request without latest_comment_url', async () => {
         mockNotification.subject.latest_comment_url = null;
 
