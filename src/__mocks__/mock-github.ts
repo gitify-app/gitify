@@ -28,29 +28,7 @@ export const mockedNotificationUser: User = {
   site_admin: false,
 };
 
-export const mockedCommenterUser: User = {
-  login: 'dummyuser',
-  id: 987654321,
-  node_id: 'MDQ6VXNlcjI=',
-  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
-  gravatar_url: '',
-  url: 'https://api.github.com/users/dummyuser',
-  html_url: 'https://github.com/dummyuser',
-  followers_url: 'https://api.github.com/users/dummyuser/followers',
-  following_url:
-    'https://api.github.com/users/dummyuser/following{/other_user}',
-  gists_url: 'https://api.github.com/users/dummyuser/gists{/gist_id}',
-  starred_url: 'https://api.github.com/users/dummyuser/starred{/owner}{/repo}',
-  subscriptions_url: 'https://api.github.com/users/dummyuser/subscriptions',
-  organizations_url: 'https://api.github.com/users/dummyuser/orgs',
-  repos_url: 'https://api.github.com/users/dummyuser/repos',
-  events_url: 'https://api.github.com/users/dummyuser/events{/privacy}',
-  received_events_url: 'https://api.github.com/users/dummyuser/received_events',
-  type: 'User',
-  site_admin: false,
-};
-
-export const mockedSingleNotification: Notification = {
+export const mockedNotificationResponse: Notification = {
   hostname: Constants.GITHUB_API_BASE_URL,
   id: '138661096',
   unread: true,
@@ -59,15 +37,15 @@ export const mockedSingleNotification: Notification = {
   last_read_at: '2017-05-20T17:06:51Z',
   subject: {
     title: 'I am a robot and this is a test!',
-    url: 'https://api.github.com/repos/manosim/notifications-test/issues/1',
+    url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
     latest_comment_url:
-      'https://api.github.com/repos/manosim/notifications-test/issues/comments/302888448',
+      'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448',
     type: 'Issue',
     state: 'open',
     user: {
-      login: 'manosim',
-      html_url: 'https://github.com/manosim',
-      avatar_url: 'https://avatars0.githubusercontent.com/u/6333409?v=3',
+      login: 'gitify-app',
+      html_url: 'https://github.com/gitify-app',
+      avatar_url: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
       type: 'User',
     },
   },
@@ -75,28 +53,29 @@ export const mockedSingleNotification: Notification = {
     id: 57216596,
     node_id: 'MDEwOlJlcG9zaXRvcnkzNjAyOTcwNg==',
     name: 'notifications-test',
-    full_name: 'manosim/notifications-test',
-    url: 'https://api.github.com/manosim/notifications-test',
+    full_name: 'gitify-app/notifications-test',
+    url: 'https://api.github.com/gitify-app/notifications-test',
     owner: {
-      login: 'manosim',
+      login: 'gitify-app',
       id: 6333409,
       node_id: 'MDQ6VXNlcjYzMzM0MDk=',
-      avatar_url: 'https://avatars0.githubusercontent.com/u/6333409?v=3',
+      avatar_url: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
       gravatar_id: '',
-      url: 'https://api.github.com/users/manosim',
-      html_url: 'https://github.com/manosim',
-      followers_url: 'https://api.github.com/users/manosim/followers',
+      url: 'https://api.github.com/users/gitify-app',
+      html_url: 'https://github.com/gitify-app',
+      followers_url: 'https://api.github.com/users/gitify-app/followers',
       following_url:
-        'https://api.github.com/users/manosim/following{/other_user}',
-      gists_url: 'https://api.github.com/users/manosim/gists{/gist_id}',
+        'https://api.github.com/users/gitify-app/following{/other_user}',
+      gists_url: 'https://api.github.com/users/gitify-app/gists{/gist_id}',
       starred_url:
-        'https://api.github.com/users/manosim/starred{/owner}{/repo}',
-      subscriptions_url: 'https://api.github.com/users/manosim/subscriptions',
-      organizations_url: 'https://api.github.com/users/manosim/orgs',
-      repos_url: 'https://api.github.com/users/manosim/repos',
-      events_url: 'https://api.github.com/users/manosim/events{/privacy}',
+        'https://api.github.com/users/gitify-app/starred{/owner}{/repo}',
+      subscriptions_url:
+        'https://api.github.com/users/gitify-app/subscriptions',
+      organizations_url: 'https://api.github.com/users/gitify-app/orgs',
+      repos_url: 'https://api.github.com/users/gitify-app/repos',
+      events_url: 'https://api.github.com/users/gitify-app/events{/privacy}',
       received_events_url:
-        'https://api.github.com/users/manosim/received_events',
+        'https://api.github.com/users/gitify-app/received_events',
       type: 'User',
       site_admin: false,
     },
@@ -104,74 +83,76 @@ export const mockedSingleNotification: Notification = {
     description: 'Test Repository',
     fork: false,
     archive_url:
-      'https://api.github.com/repos/manosim/notifications-test/{archive_format}{/ref}',
+      'https://api.github.com/repos/gitify-app/notifications-test/{archive_format}{/ref}',
     assignees_url:
-      'https://api.github.com/repos/manosim/notifications-test/assignees{/user}',
+      'https://api.github.com/repos/gitify-app/notifications-test/assignees{/user}',
     blobs_url:
-      'https://api.github.com/repos/manosim/notifications-test/git/blobs{/sha}',
+      'https://api.github.com/repos/gitify-app/notifications-test/git/blobs{/sha}',
     branches_url:
-      'https://api.github.com/repos/manosim/notifications-test/branches{/branch}',
+      'https://api.github.com/repos/gitify-app/notifications-test/branches{/branch}',
     collaborators_url:
-      'https://api.github.com/repos/manosim/notifications-test/collaborators{/collaborator}',
+      'https://api.github.com/repos/gitify-app/notifications-test/collaborators{/collaborator}',
     comments_url:
-      'https://api.github.com/repos/manosim/notifications-test/comments{/number}',
+      'https://api.github.com/repos/gitify-app/notifications-test/comments{/number}',
     commits_url:
-      'https://api.github.com/repos/manosim/notifications-test/commits{/sha}',
+      'https://api.github.com/repos/gitify-app/notifications-test/commits{/sha}',
     compare_url:
-      'https://api.github.com/repos/manosim/notifications-test/compare/{base}...{head}',
+      'https://api.github.com/repos/gitify-app/notifications-test/compare/{base}...{head}',
     contents_url:
-      'https://api.github.com/repos/manosim/notifications-test/contents/{+path}',
+      'https://api.github.com/repos/gitify-app/notifications-test/contents/{+path}',
     contributors_url:
-      'https://api.github.com/repos/manosim/notifications-test/contributors',
+      'https://api.github.com/repos/gitify-app/notifications-test/contributors',
     deployments_url:
-      'https://api.github.com/repos/manosim/notifications-test/deployments',
+      'https://api.github.com/repos/gitify-app/notifications-test/deployments',
     downloads_url:
-      'https://api.github.com/repos/manosim/notifications-test/downloads',
+      'https://api.github.com/repos/gitify-app/notifications-test/downloads',
     events_url:
-      'https://api.github.com/repos/manosim/notifications-test/events',
+      'https://api.github.com/repos/gitify-app/notifications-test/events',
     forks_url: 'https://api.github.com/repos/manosim/notifications-test/forks',
     git_commits_url:
-      'https://api.github.com/repos/manosim/notifications-test/git/commits{/sha}',
+      'https://api.github.com/repos/gitify-app/notifications-test/git/commits{/sha}',
     git_refs_url:
-      'https://api.github.com/repos/manosim/notifications-test/git/refs{/sha}',
+      'https://api.github.com/repos/gitify-app/notifications-test/git/refs{/sha}',
     git_tags_url:
-      'https://api.github.com/repos/manosim/notifications-test/git/tags{/sha}',
-    hooks_url: 'https://api.github.com/repos/manosim/notifications-test/hooks',
-    html_url: 'https://github.com/manosim/notifications-test',
+      'https://api.github.com/repos/gitify-app/notifications-test/git/tags{/sha}',
+    hooks_url:
+      'https://api.github.com/repos/gitify-app/notifications-test/hooks',
+    html_url: 'https://github.com/gitify-app/notifications-test',
     issue_comment_url:
-      'https://api.github.com/repos/manosim/notifications-test/issues/comments{/number}',
+      'https://api.github.com/repos/gitify-app/notifications-test/issues/comments{/number}',
     issue_events_url:
-      'https://api.github.com/repos/manosim/notifications-test/issues/events{/number}',
+      'https://api.github.com/repos/gitify-app/notifications-test/issues/events{/number}',
     issues_url:
-      'https://api.github.com/repos/manosim/notifications-test/issues{/number}',
+      'https://api.github.com/repos/gitify-app/notifications-test/issues{/number}',
     keys_url:
-      'https://api.github.com/repos/manosim/notifications-test/keys{/key_id}',
+      'https://api.github.com/repos/gitify-app/notifications-test/keys{/key_id}',
     labels_url:
-      'https://api.github.com/repos/manosim/notifications-test/labels{/name}',
+      'https://api.github.com/repos/gitify-app/notifications-test/labels{/name}',
     languages_url:
-      'https://api.github.com/repos/manosim/notifications-test/languages',
+      'https://api.github.com/repos/gitify-app/notifications-test/languages',
     merges_url:
-      'https://api.github.com/repos/manosim/notifications-test/merges',
+      'https://api.github.com/repos/gitify-app/notifications-test/merges',
     milestones_url:
-      'https://api.github.com/repos/manosim/notifications-test/milestones{/number}',
+      'https://api.github.com/repos/gitify-app/notifications-test/milestones{/number}',
     notifications_url:
-      'https://api.github.com/repos/manosim/notifications-test/notifications{?since,all,participating}',
+      'https://api.github.com/repos/gitify-app/notifications-test/notifications{?since,all,participating}',
     pulls_url:
-      'https://api.github.com/repos/manosim/notifications-test/pulls{/number}',
+      'https://api.github.com/repos/gitify-app/notifications-test/pulls{/number}',
     releases_url:
-      'https://api.github.com/repos/manosim/notifications-test/releases{/id}',
+      'https://api.github.com/repos/gitify-app/notifications-test/releases{/id}',
     stargazers_url:
-      'https://api.github.com/repos/manosim/notifications-test/stargazers',
+      'https://api.github.com/repos/gitify-app/notifications-test/stargazers',
     statuses_url:
-      'https://api.github.com/repos/manosim/notifications-test/statuses/{sha}',
+      'https://api.github.com/repos/gitify-app/notifications-test/statuses/{sha}',
     subscribers_url:
-      'https://api.github.com/repos/manosim/notifications-test/subscribers',
+      'https://api.github.com/repos/gitify-app/notifications-test/subscribers',
     subscription_url:
-      'https://api.github.com/repos/manosim/notifications-test/subscription',
-    tags_url: 'https://api.github.com/repos/manosim/notifications-test/tags',
-    teams_url: 'https://api.github.com/repos/manosim/notifications-test/teams',
+      'https://api.github.com/repos/gitify-app/notifications-test/subscription',
+    tags_url: 'https://api.github.com/repos/gitify-app/notifications-test/tags',
+    teams_url:
+      'https://api.github.com/repos/gitify-app/notifications-test/teams',
     trees_url:
-      'https://api.github.com/repos/manosim/notifications-test/git/trees{/sha}',
+      'https://api.github.com/repos/gitify-app/notifications-test/git/trees{/sha}',
   },
   url: 'https://api.github.com/notifications/threads/138661096',
   subscription_url:

@@ -1,4 +1,9 @@
-import { GitMergeIcon, IssueOpenedIcon } from '@primer/octicons-react';
+import {
+  GitMergeIcon,
+  GitPullRequestIcon,
+  IssueOpenedIcon,
+  TagIcon,
+} from '@primer/octicons-react';
 import {
   type AccountNotifications,
   type EnterpriseAccount,
@@ -24,7 +29,7 @@ export const mockedUser: GitifyUser = {
 export const mockedGitHubNotifications: GitifyNotification[] = [
   {
     hostname: Constants.GITHUB_API_BASE_URL,
-    id: '138661096',
+    id: '1',
     unread: true,
     reason: {
       type: 'subscribed',
@@ -32,8 +37,8 @@ export const mockedGitHubNotifications: GitifyNotification[] = [
       description: 'You are subscribed to this thread',
     },
     updated_at: {
-      raw: '2017-05-20T17:51:57Z',
-      formatted: 'May 20th, 2017',
+      raw: '2024-05-01T10:00:00Z',
+      formatted: 'May 1st, 2024',
     },
     title: 'I am a robot and this is a test!',
     html_url:
@@ -47,7 +52,7 @@ export const mockedGitHubNotifications: GitifyNotification[] = [
     user: {
       login: 'mockUser',
       html_url: 'https://github.com/mockUser',
-      avatar_url: 'https://avatars0.githubusercontent.com/u/6333409?v=3',
+      avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
       type: 'User',
     },
     repository: {
@@ -62,7 +67,7 @@ export const mockedGitHubNotifications: GitifyNotification[] = [
   },
   {
     hostname: Constants.GITHUB_API_BASE_URL,
-    id: '148827438',
+    id: '2',
     unread: true,
     reason: {
       type: 'author',
@@ -70,12 +75,12 @@ export const mockedGitHubNotifications: GitifyNotification[] = [
       description: 'You created this thread',
     },
     updated_at: {
-      raw: '2017-05-20T17:06:34Z',
-      formatted: 'May 20th, 2017',
+      raw: '2024-05-01T10:00:00Z',
+      formatted: 'May 1st, 2024',
     },
     title: 'Improve the UI',
     type: 'Pull Request',
-    html_url: 'https://github.com/repos/gitify-app/notifications-test/pulls/4',
+    html_url: 'https://github.com/repos/gitify-app/notifications-test/pulls/2',
     state: 'merged',
     icon: {
       type: GitMergeIcon,
@@ -84,7 +89,7 @@ export const mockedGitHubNotifications: GitifyNotification[] = [
     user: {
       login: 'mockUser',
       html_url: 'https://github.com/mockUser',
-      avatar_url: 'https://avatars0.githubusercontent.com/u/6333409?v=3',
+      avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
       type: 'User',
     },
     repository: {
@@ -99,11 +104,10 @@ export const mockedGitHubNotifications: GitifyNotification[] = [
   },
 ];
 
-// TODO - Update the mock data to be accurate
 export const mockedEnterpriseNotifications: GitifyNotification[] = [
   {
-    hostname: Constants.GITHUB_API_BASE_URL,
-    id: '138661096',
+    hostname: 'https://github.gitify.io/api/v3',
+    id: '3',
     unread: true,
     reason: {
       type: 'subscribed',
@@ -111,16 +115,52 @@ export const mockedEnterpriseNotifications: GitifyNotification[] = [
       description: 'You are subscribed to this thread',
     },
     updated_at: {
-      raw: '2017-05-20T17:51:57Z',
-      formatted: 'May 20th, 2017',
+      raw: '2024-05-01T10:00:00Z',
+      formatted: 'May 1st, 2024',
     },
-    title: 'I am a robot and this is a test!',
+    title: 'Release 0.0.1',
     html_url:
-      'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
-    type: 'Issue',
+      'https://github.gitify.io/repos/myorg/notifications-test/releases/3',
+    type: 'Release',
+    state: null,
+    icon: {
+      type: TagIcon,
+      color: IconColor.GRAY,
+    },
+    user: {
+      login: 'mockUser',
+      html_url: 'https://github.com/mockUser',
+      avatar_url: 'https://avatars0.githubusercontent.com/u/6333409?v=3',
+      type: 'User',
+    },
+    repository: {
+      full_name: 'myorg/notifications-test',
+      avatar_url: 'https://github.gitify.io/avatars/u/4?',
+      html_url: 'https://github.gitify.io/myorg/notifications-test',
+      owner: {
+        avatar_url: 'https://github.gitify.io/avatars/u/4?',
+      },
+    },
+  },
+  {
+    hostname: 'https://github.gitify.io/api/v3',
+    id: '4',
+    unread: true,
+    reason: {
+      type: 'subscribed',
+      code: 'subscribed',
+      description: 'You are subscribed to this thread',
+    },
+    updated_at: {
+      raw: '2024-05-01T10:00:00Z',
+      formatted: 'May 1st, 2024',
+    },
+    title: 'Bump version',
+    html_url: 'https://github.gitify.io/repos/myorg/notifications-test/pulls/4',
+    type: 'PullRequest',
     state: 'open',
     icon: {
-      type: IssueOpenedIcon,
+      type: GitPullRequestIcon,
       color: IconColor.GREEN,
     },
     user: {
@@ -130,49 +170,11 @@ export const mockedEnterpriseNotifications: GitifyNotification[] = [
       type: 'User',
     },
     repository: {
-      full_name: 'gitify-app/notifications-test',
-      avatar_url: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
-      html_url: 'https://github.com/gitify-app/notifications-test',
+      full_name: 'myorg/notifications-test',
+      avatar_url: 'https://github.gitify.io/avatars/u/4?',
+      html_url: 'https://github.gitify.io/myorg/notifications-test',
       owner: {
-        avatar_url:
-          'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
-      },
-    },
-  },
-  {
-    hostname: Constants.GITHUB_API_BASE_URL,
-    id: '148827438',
-    unread: true,
-    reason: {
-      type: 'author',
-      code: 'author',
-      description: 'You created this thread',
-    },
-    updated_at: {
-      raw: '2017-05-20T17:06:34Z',
-      formatted: 'May 20th, 2017',
-    },
-    title: 'Improve the UI',
-    type: 'Pull Request',
-    html_url: 'https://github.com/repos/gitify-app/notifications-test/pulls/4',
-    state: 'merged',
-    icon: {
-      type: GitMergeIcon,
-      color: IconColor.PURPLE,
-    },
-    user: {
-      login: 'mockUser',
-      html_url: 'https://github.com/mockUser',
-      avatar_url: 'https://avatars0.githubusercontent.com/u/6333409?v=3',
-      type: 'User',
-    },
-    repository: {
-      full_name: 'gitify-app/notifications-test',
-      avatar_url: 'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
-      html_url: 'https://github.com/gitify-app/notifications-test',
-      owner: {
-        avatar_url:
-          'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
+        avatar_url: 'https://github.gitify.io/avatars/u/4?',
       },
     },
   },

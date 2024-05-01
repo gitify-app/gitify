@@ -1,7 +1,7 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
 import {
   mockedGraphQLResponse,
-  mockedSingleNotification,
+  mockedNotificationResponse,
 } from '../__mocks__/mock-github';
 import { mockedUser } from '../__mocks__/mock-gitify';
 import { mockAccounts } from '../__mocks__/mock-state';
@@ -81,7 +81,7 @@ describe('utils/helpers.ts', () => {
   describe('generateNotificationReferrerId', () => {
     it('should generate the notification_referrer_id', () => {
       const referrerId = generateNotificationReferrerId(
-        mockedSingleNotification.id,
+        mockedNotificationResponse.id,
         mockedUser.id,
       );
       expect(referrerId).toBe(
@@ -160,7 +160,7 @@ describe('utils/helpers.ts', () => {
 
       const result = await generateGitHubWebUrl(
         {
-          ...mockedSingleNotification,
+          ...mockedNotificationResponse,
           subject: subject,
         },
         mockAccounts,
@@ -195,7 +195,7 @@ describe('utils/helpers.ts', () => {
 
       const result = await generateGitHubWebUrl(
         {
-          ...mockedSingleNotification,
+          ...mockedNotificationResponse,
           subject: subject,
         },
         mockAccounts,
@@ -221,7 +221,7 @@ describe('utils/helpers.ts', () => {
 
         const result = await generateGitHubWebUrl(
           {
-            ...mockedSingleNotification,
+            ...mockedNotificationResponse,
             subject: subject,
           },
           mockAccounts,
@@ -243,7 +243,7 @@ describe('utils/helpers.ts', () => {
 
         const result = await generateGitHubWebUrl(
           {
-            ...mockedSingleNotification,
+            ...mockedNotificationResponse,
             subject: subject,
           },
           mockAccounts,
@@ -265,7 +265,7 @@ describe('utils/helpers.ts', () => {
 
         const result = await generateGitHubWebUrl(
           {
-            ...mockedSingleNotification,
+            ...mockedNotificationResponse,
             subject: subject,
           },
           mockAccounts,
@@ -287,7 +287,7 @@ describe('utils/helpers.ts', () => {
 
         const result = await generateGitHubWebUrl(
           {
-            ...mockedSingleNotification,
+            ...mockedNotificationResponse,
             subject: subject,
           },
           mockAccounts,
@@ -309,7 +309,7 @@ describe('utils/helpers.ts', () => {
 
         const result = await generateGitHubWebUrl(
           {
-            ...mockedSingleNotification,
+            ...mockedNotificationResponse,
             subject: subject,
           },
           mockAccounts,
@@ -331,7 +331,7 @@ describe('utils/helpers.ts', () => {
 
         const result = await generateGitHubWebUrl(
           {
-            ...mockedSingleNotification,
+            ...mockedNotificationResponse,
             subject: subject,
           },
           mockAccounts,
@@ -353,7 +353,7 @@ describe('utils/helpers.ts', () => {
 
         const result = await generateGitHubWebUrl(
           {
-            ...mockedSingleNotification,
+            ...mockedNotificationResponse,
             subject: subject,
           },
           mockAccounts,
@@ -385,7 +385,7 @@ describe('utils/helpers.ts', () => {
 
         const result = await generateGitHubWebUrl(
           {
-            ...mockedSingleNotification,
+            ...mockedNotificationResponse,
             subject: subject,
           },
           mockAccounts,
@@ -393,7 +393,7 @@ describe('utils/helpers.ts', () => {
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
         expect(result).toBe(
-          `${mockedSingleNotification.repository.html_url}/discussions?${mockedNotificationReferrer}`,
+          `${mockedNotificationResponse.repository.html_url}/discussions?${mockedNotificationReferrer}`,
         );
       });
 
@@ -413,7 +413,7 @@ describe('utils/helpers.ts', () => {
 
         const result = await generateGitHubWebUrl(
           {
-            ...mockedSingleNotification,
+            ...mockedNotificationResponse,
             subject: subject,
           },
           mockAccounts,
@@ -441,7 +441,7 @@ describe('utils/helpers.ts', () => {
 
         const result = await generateGitHubWebUrl(
           {
-            ...mockedSingleNotification,
+            ...mockedNotificationResponse,
             subject: subject,
           },
           mockAccounts,
@@ -464,7 +464,7 @@ describe('utils/helpers.ts', () => {
 
       const result = await generateGitHubWebUrl(
         {
-          ...mockedSingleNotification,
+          ...mockedNotificationResponse,
           subject: subject,
         },
         mockAccounts,
@@ -487,7 +487,7 @@ describe('utils/helpers.ts', () => {
 
         const result = await generateGitHubWebUrl(
           {
-            ...mockedSingleNotification,
+            ...mockedNotificationResponse,
             subject: subject,
           },
           mockAccounts,
@@ -510,7 +510,7 @@ describe('utils/helpers.ts', () => {
 
         const result = await generateGitHubWebUrl(
           {
-            ...mockedSingleNotification,
+            ...mockedNotificationResponse,
             subject: subject,
           },
           mockAccounts,
@@ -532,7 +532,7 @@ describe('utils/helpers.ts', () => {
 
         const result = await generateGitHubWebUrl(
           {
-            ...mockedSingleNotification,
+            ...mockedNotificationResponse,
             subject: subject,
           },
           mockAccounts,
@@ -555,7 +555,7 @@ describe('utils/helpers.ts', () => {
 
       const result = await generateGitHubWebUrl(
         {
-          ...mockedSingleNotification,
+          ...mockedNotificationResponse,
           subject: subject,
         },
         mockAccounts,
@@ -563,7 +563,7 @@ describe('utils/helpers.ts', () => {
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
       expect(result).toBe(
-        `${mockedSingleNotification.repository.html_url}?${mockedNotificationReferrer}`,
+        `${mockedNotificationResponse.repository.html_url}?${mockedNotificationReferrer}`,
       );
     });
 
