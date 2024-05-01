@@ -320,12 +320,12 @@ describe('hooks/useNotifications.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: null,
                     isAnswered: true,
-                    url: 'https://github.com/manosim/notifications-test/discussions/612',
+                    url: 'https://github.com/gitify-app/notifications-test/discussions/612',
                     author: {
                       login: 'discussion-creator',
                       url: 'https://github.com/discussion-creator',
                       avatar_url:
-                        'https://avatars.githubusercontent.com/u/1?v=4',
+                        'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
                       type: 'User',
                     },
                     comments: {
@@ -789,7 +789,7 @@ describe('hooks/useNotifications.ts', () => {
   });
 
   describe('markRepoNotifications', () => {
-    const repoSlug = 'manosim/gitify';
+    const repoSlug = 'gitify-app/notifications-test';
 
     describe('github.com', () => {
       const accounts = { ...mockAccounts, enterpriseAccounts: [] };
@@ -875,7 +875,7 @@ describe('hooks/useNotifications.ts', () => {
   });
 
   describe('markRepoNotificationsDone', () => {
-    const repoSlug = 'manosim/gitify';
+    const repoSlug = 'gitify-app/notifications-test';
     const id = 'notification-123';
 
     describe('github.com', () => {

@@ -15,7 +15,7 @@ describe('components/Repository.tsx', () => {
 
   const props = {
     hostname: 'github.com',
-    repoName: 'manosim/gitify',
+    repoName: 'gitify-app/notifications-test',
     repoNotifications: mockedGitHubNotifications,
   };
 
@@ -45,7 +45,7 @@ describe('components/Repository.tsx', () => {
 
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(
-      'https://github.com/manosim/notifications-test',
+      'https://github.com/gitify-app/notifications-test',
     );
   });
 
@@ -59,7 +59,7 @@ describe('components/Repository.tsx', () => {
     fireEvent.click(screen.getByTitle('Mark Repository as Read'));
 
     expect(markRepoNotifications).toHaveBeenCalledWith(
-      'manosim/notifications-test',
+      'gitify-app/notifications-test',
       'github.com',
     );
   });
@@ -74,7 +74,7 @@ describe('components/Repository.tsx', () => {
     fireEvent.click(screen.getByTitle('Mark Repository as Done'));
 
     expect(markRepoNotificationsDone).toHaveBeenCalledWith(
-      'manosim/notifications-test',
+      'gitify-app/notifications-test',
       'github.com',
     );
   });

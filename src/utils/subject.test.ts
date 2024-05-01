@@ -25,7 +25,7 @@ const mockCommenter = partialMockUser('some-commenter');
 const mockDiscussionAuthor: DiscussionAuthor = {
   login: 'discussion-author',
   url: 'https://github.com/discussion-author',
-  avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
   type: 'User',
 };
 
@@ -1035,7 +1035,6 @@ function mockDiscussionNode(
     isAnswered: isAnswered,
     author: mockDiscussionAuthor,
     comments: {
-      //TODO - Update this to have real data
       nodes: [],
     },
   };

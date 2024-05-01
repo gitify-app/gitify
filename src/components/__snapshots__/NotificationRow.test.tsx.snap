@@ -54,7 +54,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       >
         <span
           className="flex"
-          title="manosim updated over 6 years ago"
+          title="gitify-app updated over 6 years ago"
         >
           <span
             onClick={[Function]}
@@ -62,10 +62,10 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
             title="View User Profile"
           >
             <img
-              alt="manosim's avatar"
+              alt="gitify-app's avatar"
               className="rounded-full w-4 h-4 cursor-pointer"
-              src="https://avatars0.githubusercontent.com/u/6333409?v=3"
-              title="manosim"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+              title="gitify-app"
             />
           </span>
           <span
