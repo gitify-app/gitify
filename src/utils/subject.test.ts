@@ -25,7 +25,7 @@ const mockCommenter = partialMockUser('some-commenter');
 const mockDiscussionAuthor: DiscussionAuthor = {
   login: 'discussion-author',
   url: 'https://github.com/discussion-author',
-  avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
   type: 'User',
 };
 
@@ -889,6 +889,32 @@ describe('utils/subject.ts', () => {
         expect(result).toBeNull();
       });
     });
+
+    describe('Error', () => {
+      it('catches error and logs message', async () => {
+        const consoleErrorSpy = jest
+          .spyOn(console, 'error')
+          .mockImplementation();
+
+        const mockError = new Error('Test error');
+        const mockNotification = partialMockNotification({
+          title: 'This issue will throw an error',
+          type: 'Issue',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+        });
+
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/issues/1')
+          .replyWithError(mockError);
+
+        await getGitifySubjectDetails(mockNotification, mockAccounts.token);
+
+        expect(consoleErrorSpy).toHaveBeenCalledWith(
+          'Error occurred while fetching details for Issue notification: This issue will throw an error',
+          mockError,
+        );
+      });
+    });
   });
 
   describe('getCheckSuiteState', () => {
@@ -1064,7 +1090,6 @@ function mockDiscussionNode(
     isAnswered: isAnswered,
     author: mockDiscussionAuthor,
     comments: {
-      //TODO - Update this to have real data
       nodes: [],
     },
   };
