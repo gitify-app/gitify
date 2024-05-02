@@ -51,7 +51,7 @@ describe('components/NotificationRow.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should open a notification in the browser', () => {
+  it('should open a notification in the browser - click', () => {
     const removeNotificationFromState = jest.fn();
 
     const props = {
@@ -72,6 +72,31 @@ describe('components/NotificationRow.tsx', () => {
     );
 
     fireEvent.click(screen.getByRole('main'));
+    expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
+    expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
+  });
+
+  it('should open a notification in the browser - key down', () => {
+    const removeNotificationFromState = jest.fn();
+
+    const props = {
+      notification: mockedSingleNotification,
+      hostname: 'github.com',
+    };
+
+    render(
+      <AppContext.Provider
+        value={{
+          settings: { ...mockSettings, markAsDoneOnOpen: false },
+          removeNotificationFromState,
+          accounts: mockAccounts,
+        }}
+      >
+        <NotificationRow {...props} />
+      </AppContext.Provider>,
+    );
+
+    fireEvent.keyDown(screen.getByRole('main'));
     expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
     expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
   });
