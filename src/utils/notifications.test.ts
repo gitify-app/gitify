@@ -145,18 +145,20 @@ describe('utils/notifications.ts', () => {
       partialMockNotification({
         title: 'User authored notification',
         user: {
-          login: 'User',
+          login: 'user',
           html_url: 'https://github.com/user',
-          avatar_url: 'https://some-avatar',
+          avatar_url:
+            'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
           type: 'User',
         },
       }),
       partialMockNotification({
         title: 'Bot authored notification',
         user: {
-          login: 'Bot',
+          login: 'bot',
           html_url: 'https://github.com/bot',
-          avatar_url: 'https://some-avatar',
+          avatar_url:
+            'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
           type: 'Bot',
         },
       }),

@@ -8,6 +8,7 @@ import { shell } from 'electron';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
+import type { UserType } from '../typesGitHub';
 import { NotificationRow } from './NotificationRow';
 
 describe('components/NotificationRow.tsx', () => {
@@ -50,7 +51,7 @@ describe('components/NotificationRow.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should open a notification in the browser', () => {
+  it('should open a notification in the browser - click', () => {
     const removeNotificationFromState = jest.fn();
 
     const props = {
@@ -71,6 +72,31 @@ describe('components/NotificationRow.tsx', () => {
     );
 
     fireEvent.click(screen.getByRole('main'));
+    expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
+    expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
+  });
+
+  it('should open a notification in the browser - key down', () => {
+    const removeNotificationFromState = jest.fn();
+
+    const props = {
+      notification: mockedSingleNotification,
+      hostname: 'github.com',
+    };
+
+    render(
+      <AppContext.Provider
+        value={{
+          settings: { ...mockSettings, markAsDoneOnOpen: false },
+          removeNotificationFromState,
+          accounts: mockAccounts,
+        }}
+      >
+        <NotificationRow {...props} />
+      </AppContext.Provider>,
+    );
+
+    fireEvent.keyDown(screen.getByRole('main'));
     expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
     expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
   });
@@ -179,7 +205,7 @@ describe('components/NotificationRow.tsx', () => {
             login: 'some-user',
             html_url: 'https://github.com/some-user',
             avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
-            type: 'User',
+            type: 'User' as UserType,
           },
         },
       },

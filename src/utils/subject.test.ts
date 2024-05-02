@@ -25,7 +25,7 @@ const mockCommenter = partialMockUser('some-commenter');
 const mockDiscussionAuthor: DiscussionAuthor = {
   login: 'discussion-author',
   url: 'https://github.com/discussion-author',
-  avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
   type: 'User',
 };
 
@@ -610,7 +610,7 @@ describe('utils/subject.ts', () => {
         mockNotification = partialMockNotification({
           title: 'This is a mocked pull request',
           type: 'PullRequest',
-          url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/1',
           latest_comment_url:
             'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448',
         });
@@ -618,7 +618,7 @@ describe('utils/subject.ts', () => {
 
       it('closed pull request state', async () => {
         nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/issues/1')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
             state: 'closed',
             draft: false,
@@ -648,7 +648,7 @@ describe('utils/subject.ts', () => {
 
       it('draft pull request state', async () => {
         nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/issues/1')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
             state: 'open',
             draft: true,
@@ -678,7 +678,7 @@ describe('utils/subject.ts', () => {
 
       it('merged pull request state', async () => {
         nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/issues/1')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
             state: 'open',
             draft: false,
@@ -708,7 +708,7 @@ describe('utils/subject.ts', () => {
 
       it('open pull request state', async () => {
         nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/issues/1')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
             state: 'open',
             draft: false,
@@ -736,11 +736,40 @@ describe('utils/subject.ts', () => {
         });
       });
 
+      it('avoid fetching comments if latest_comment_url and url are the same', async () => {
+        mockNotification.subject.latest_comment_url =
+          mockNotification.subject.url;
+
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
+          .reply(200, {
+            state: 'open',
+            draft: false,
+            merged: false,
+            user: mockAuthor,
+          });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAccounts.token,
+        );
+
+        expect(result).toEqual({
+          state: 'open',
+          user: {
+            login: mockAuthor.login,
+            html_url: mockAuthor.html_url,
+            avatar_url: mockAuthor.avatar_url,
+            type: mockAuthor.type,
+          },
+        });
+      });
+
       it('handle pull request without latest_comment_url', async () => {
         mockNotification.subject.latest_comment_url = null;
 
         nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/issues/1')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
             state: 'open',
             draft: false,
@@ -858,6 +887,32 @@ describe('utils/subject.ts', () => {
         );
 
         expect(result).toBeNull();
+      });
+    });
+
+    describe('Error', () => {
+      it('catches error and logs message', async () => {
+        const consoleErrorSpy = jest
+          .spyOn(console, 'error')
+          .mockImplementation();
+
+        const mockError = new Error('Test error');
+        const mockNotification = partialMockNotification({
+          title: 'This issue will throw an error',
+          type: 'Issue',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+        });
+
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/issues/1')
+          .replyWithError(mockError);
+
+        await getGitifySubjectDetails(mockNotification, mockAccounts.token);
+
+        expect(consoleErrorSpy).toHaveBeenCalledWith(
+          'Error occurred while fetching details for Issue notification: This issue will throw an error',
+          mockError,
+        );
       });
     });
   });
@@ -1035,7 +1090,6 @@ function mockDiscussionNode(
     isAnswered: isAnswered,
     author: mockDiscussionAuthor,
     comments: {
-      //TODO - Update this to have real data
       nodes: [],
     },
   };
