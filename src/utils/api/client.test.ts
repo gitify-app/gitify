@@ -19,7 +19,7 @@ const mockGitHubHostname = 'github.com';
 const mockEnterpriseHostname = 'example.com';
 const mockToken = 'yourAuthToken';
 const mockThreadId = '1234';
-const mockRepoSlug = 'gitify-app/notification-test';
+const mockRepoSlug = 'gitify-app/notifications-test';
 
 describe('utils/api/client.ts', () => {
   afterEach(() => {
@@ -285,7 +285,8 @@ describe('utils/api/client.ts', () => {
       const requestPromise = new Promise((resolve) =>
         resolve({
           data: {
-            html_url: 'https://github.com/gitify-app/gitify/issues/785',
+            html_url:
+              'https://github.com/gitify-app/notifications-test/issues/785',
           },
         } as AxiosResponse),
       ) as AxiosPromise;
@@ -293,10 +294,12 @@ describe('utils/api/client.ts', () => {
       apiRequestAuthMock.mockResolvedValue(requestPromise);
 
       const result = await getHtmlUrl(
-        'https://api.github.com/repos/gitify-app/gitify/issues/785',
+        'https://api.github.com/repos/gitify-app/notifications-test/issues/785',
         '123',
       );
-      expect(result).toBe('https://github.com/gitify-app/gitify/issues/785');
+      expect(result).toBe(
+        'https://github.com/gitify-app/notifications-test/issues/785',
+      );
     });
   });
 });

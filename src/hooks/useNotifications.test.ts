@@ -239,7 +239,7 @@ describe('hooks/useNotifications.ts', () => {
               latest_comment_url: null,
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: 'gitify-app/notifications-test',
             },
           },
           {
@@ -251,7 +251,7 @@ describe('hooks/useNotifications.ts', () => {
               latest_comment_url: null,
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: 'gitify-app/notifications-test',
             },
             updated_at: '2024-02-26T00:00:00Z',
           },
@@ -260,11 +260,12 @@ describe('hooks/useNotifications.ts', () => {
             subject: {
               title: 'This is an Issue.',
               type: 'Issue',
-              url: 'https://api.github.com/3',
-              latest_comment_url: 'https://api.github.com/3/comments',
+              url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/3',
+              latest_comment_url:
+                'https://api.github.com/repos/gitify-app/notifications-test/issues/3/comments',
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: 'gitify-app/notifications-test',
             },
           },
           {
@@ -272,11 +273,12 @@ describe('hooks/useNotifications.ts', () => {
             subject: {
               title: 'This is a Pull Request.',
               type: 'PullRequest',
-              url: 'https://api.github.com/4',
-              latest_comment_url: 'https://api.github.com/4/comments',
+              url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/4',
+              latest_comment_url:
+                'https://api.github.com/repos/gitify-app/notifications-test/issues/4/comments',
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: 'gitify-app/notifications-test',
             },
           },
           {
@@ -288,7 +290,7 @@ describe('hooks/useNotifications.ts', () => {
               latest_comment_url: null,
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: 'gitify-app/notifications-test',
             },
           },
           {
@@ -300,7 +302,7 @@ describe('hooks/useNotifications.ts', () => {
               latest_comment_url: null,
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: 'gitify-app/notifications-test',
             },
           },
         ];
@@ -320,12 +322,12 @@ describe('hooks/useNotifications.ts', () => {
                     viewerSubscription: 'SUBSCRIBED',
                     stateReason: null,
                     isAnswered: true,
-                    url: 'https://github.com/manosim/notifications-test/discussions/612',
+                    url: 'https://github.com/gitify-app/notifications-test/discussions/612',
                     author: {
                       login: 'discussion-creator',
                       url: 'https://github.com/discussion-creator',
                       avatar_url:
-                        'https://avatars.githubusercontent.com/u/1?v=4',
+                        'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
                       type: 'User',
                     },
                     comments: {
@@ -352,22 +354,30 @@ describe('hooks/useNotifications.ts', () => {
             },
           });
 
-        nock('https://api.github.com').get('/3').reply(200, {
-          state: 'closed',
-          merged: true,
-          user: mockedNotificationUser,
-        });
-        nock('https://api.github.com').get('/3/comments').reply(200, {
-          user: mockedNotificationUser,
-        });
-        nock('https://api.github.com').get('/4').reply(200, {
-          state: 'closed',
-          merged: false,
-          user: mockedNotificationUser,
-        });
-        nock('https://api.github.com').get('/4/comments').reply(200, {
-          user: mockedNotificationUser,
-        });
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/issues/3')
+          .reply(200, {
+            state: 'closed',
+            merged: true,
+            user: mockedNotificationUser,
+          });
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/issues/3/comments')
+          .reply(200, {
+            user: mockedNotificationUser,
+          });
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/4')
+          .reply(200, {
+            state: 'closed',
+            merged: false,
+            user: mockedNotificationUser,
+          });
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/issues/4/comments')
+          .reply(200, {
+            user: mockedNotificationUser,
+          });
 
         const { result } = renderHook(() => useNotifications());
 
@@ -403,11 +413,11 @@ describe('hooks/useNotifications.ts', () => {
             subject: {
               title: 'This is an Issue.',
               type: 'Issue',
-              url: 'https://api.github.com/1',
+              url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
               latest_comment_url: null,
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: 'gitify-app/notifications-test',
             },
           },
           {
@@ -415,11 +425,11 @@ describe('hooks/useNotifications.ts', () => {
             subject: {
               title: 'This is a Pull Request.',
               type: 'PullRequest',
-              url: 'https://api.github.com/2',
+              url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/2',
               latest_comment_url: null,
             },
             repository: {
-              full_name: 'some/repo',
+              full_name: 'gitify-app/notifications-test',
             },
           },
         ];
@@ -428,7 +438,7 @@ describe('hooks/useNotifications.ts', () => {
           .get('/notifications?participating=false')
           .reply(200, notifications);
         nock('https://api.github.com')
-          .get('/1')
+          .get('/repos/gitify-app/notifications-test/issues/1')
           .reply(200, {
             state: 'closed',
             merged: true,
@@ -438,7 +448,7 @@ describe('hooks/useNotifications.ts', () => {
             },
           });
         nock('https://api.github.com')
-          .get('/2')
+          .get('/repos/gitify-app/notifications-test/pulls/2')
           .reply(200, {
             state: 'closed',
             merged: false,
@@ -789,7 +799,7 @@ describe('hooks/useNotifications.ts', () => {
   });
 
   describe('markRepoNotifications', () => {
-    const repoSlug = 'manosim/gitify';
+    const repoSlug = 'gitify-app/notifications-test';
 
     describe('github.com', () => {
       const accounts = { ...mockAccounts, enterpriseAccounts: [] };
@@ -875,7 +885,7 @@ describe('hooks/useNotifications.ts', () => {
   });
 
   describe('markRepoNotificationsDone', () => {
-    const repoSlug = 'manosim/gitify';
+    const repoSlug = 'gitify-app/notifications-test';
     const id = 'notification-123';
 
     describe('github.com', () => {
