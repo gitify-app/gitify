@@ -1,5 +1,11 @@
+import { CheckIcon, CommentIcon, FileDiffIcon } from '@primer/octicons-react';
+import { IconColor } from '../types';
 import type { StateType, Subject, SubjectType } from '../typesGitHub';
-import { getNotificationTypeIcon, getNotificationTypeIconColor } from './icons';
+import {
+  getNotificationTypeIcon,
+  getNotificationTypeIconColor,
+  getPullRequestReviewIcon,
+} from './icons';
 
 describe('utils/icons.ts', () => {
   describe('getNotificationTypeIcon - should get the notification type icon', () => {
@@ -247,6 +253,31 @@ describe('utils/icons.ts', () => {
         ),
       ).toMatchSnapshot();
     });
+  });
+
+  describe('getPullRequestReviewIcon - should get the approval icon', () => {
+    expect(getPullRequestReviewIcon('APPROVED')).toEqual({
+      type: CheckIcon,
+      color: IconColor.GREEN,
+      description: 'You approved these changes',
+    });
+    expect(getPullRequestReviewIcon('CHANGES_REQUESTED')).toEqual({
+      type: FileDiffIcon,
+      color: IconColor.RED,
+      description: 'You requested changes',
+    });
+    expect(getPullRequestReviewIcon('COMMENTED')).toEqual({
+      type: CommentIcon,
+      color: IconColor.GRAY,
+      description: 'You left review comments',
+    });
+    expect(getPullRequestReviewIcon('DISMISSED')).toEqual({
+      type: CommentIcon,
+      color: IconColor.GRAY,
+      description: 'Your review has been dismissed',
+    });
+    expect(getPullRequestReviewIcon('PENDING')).toBeNull();
+    expect(getPullRequestReviewIcon(null)).toBeNull();
   });
 });
 

@@ -5,6 +5,7 @@ import type {
   DiscussionStateType,
   GitifySubject,
   Notification,
+  PullRequestReviewState,
   PullRequestStateType,
   SubjectUser,
   User,
@@ -250,7 +251,7 @@ async function getGitifySubjectForPullRequest(
       prCommentUser = prComment.user;
     }
 
-    const userApprovedPR = await checkIfUserApprovedPR(notification, accounts);
+    const approvalState = await getUserApprovalState(notification, accounts);
 
     return {
       state: prState,
@@ -260,19 +261,19 @@ async function getGitifySubjectForPullRequest(
         avatar_url: prCommentUser?.avatar_url ?? pr.user.avatar_url,
         type: prCommentUser?.type ?? pr.user.type,
       },
-      isApprovedByUser: userApprovedPR,
+      approvalState: approvalState,
     };
   } catch (err) {
     console.error('Pull Request subject retrieval failed');
   }
 }
 
-async function checkIfUserApprovedPR(
+async function getUserApprovalState(
   notification: Notification,
   accounts: AuthState,
-) {
+): Promise<PullRequestReviewState> | null {
   if (notification.subject.type !== 'PullRequest') {
-    return false;
+    return;
   }
 
   const token = getTokenForHost(notification.hostname, accounts);
@@ -284,13 +285,13 @@ async function checkIfUserApprovedPR(
   );
 
   if (!prReviews) {
-    return false;
+    return;
   }
 
-  return prReviews.data.some(
-    (prReview) =>
-      prReview.state === 'APPROVED' && prReview.user.login === login,
-  );
+  // Find the last occurrence of the user's review, as this is the most recent
+  return prReviews.data
+    .reverse()
+    .find((prReview) => prReview.user.login === login)?.state;
 }
 
 async function getGitifySubjectForRelease(

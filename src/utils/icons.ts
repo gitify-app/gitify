@@ -2,9 +2,11 @@ import {
   AlertIcon,
   CheckIcon,
   CommentDiscussionIcon,
+  CommentIcon,
   DiscussionClosedIcon,
   DiscussionDuplicateIcon,
   DiscussionOutdatedIcon,
+  FileDiffIcon,
   GitCommitIcon,
   GitMergeIcon,
   GitPullRequestClosedIcon,
@@ -24,8 +26,8 @@ import {
   XIcon,
 } from '@primer/octicons-react';
 import type { FC } from 'react';
-import { IconColor } from '../types';
-import type { Subject } from '../typesGitHub';
+import { IconColor, type PullRequestApprovalIcon } from '../types';
+import type { PullRequestReviewState, Subject } from '../typesGitHub';
 
 export function getNotificationTypeIcon(subject: Subject): FC<OcticonProps> {
   switch (subject.type) {
@@ -109,5 +111,38 @@ export function getNotificationTypeIconColor(subject: Subject): IconColor {
       return IconColor.PURPLE;
     default:
       return IconColor.GRAY;
+  }
+}
+
+export function getPullRequestReviewIcon(
+  reviewState: PullRequestReviewState,
+): PullRequestApprovalIcon | null {
+  switch (reviewState) {
+    case 'APPROVED':
+      return {
+        type: CheckIcon,
+        color: IconColor.GREEN,
+        description: 'You approved these changes',
+      };
+    case 'CHANGES_REQUESTED':
+      return {
+        type: FileDiffIcon,
+        color: IconColor.RED,
+        description: 'You requested changes',
+      };
+    case 'COMMENTED':
+      return {
+        type: CommentIcon,
+        color: IconColor.GRAY,
+        description: 'You left review comments',
+      };
+    case 'DISMISSED':
+      return {
+        type: CommentIcon,
+        color: IconColor.GRAY,
+        description: 'Your review has been dismissed',
+      };
+    default:
+      return null;
   }
 }

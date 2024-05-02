@@ -1,6 +1,5 @@
 import {
   BellSlashIcon,
-  CheckCircleFillIcon,
   CheckIcon,
   FeedPersonIcon,
   ReadIcon,
@@ -21,6 +20,7 @@ import { formatForDisplay, openInBrowser } from '../utils/helpers';
 import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
+  getPullRequestReviewIcon,
 } from '../utils/icons';
 import { formatReason } from '../utils/reason';
 
@@ -70,13 +70,19 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const reason = formatReason(notification.reason);
   const NotificationIcon = getNotificationTypeIcon(notification.subject);
   const iconColor = getNotificationTypeIconColor(notification.subject);
+
+  const prApprovalIcon = getPullRequestReviewIcon(
+    notification.subject.approvalState,
+  );
+  const PrApprovalIcon = prApprovalIcon?.type;
+
   const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
     addSuffix: true,
   });
-
   const updatedLabel = notification.subject.user
     ? `${notification.subject.user.login} updated ${updatedAt}`
     : `Updated ${updatedAt}`;
+
   const notificationTitle = formatForDisplay([
     notification.subject.state,
     notification.subject.type,
@@ -137,14 +143,10 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
         </div>
       </div>
 
-      {notification.subject.isApprovedByUser && (
+      {prApprovalIcon && (
         <div className="flex justify-center items-center">
-          <span title="You have previously approved this PR">
-            <CheckCircleFillIcon
-              size={16}
-              className="text-green-500"
-              aria-label="You have approved this PR"
-            />
+          <span title={prApprovalIcon.description}>
+            <PrApprovalIcon size={16} className={prApprovalIcon.color} />
           </span>
         </div>
       )}

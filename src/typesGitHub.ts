@@ -251,7 +251,7 @@ interface GitHubSubject {
 export interface GitifySubject {
   state?: StateType;
   user?: SubjectUser;
-  isApprovedByUser?: boolean;
+  approvalState?: PullRequestReviewState;
 }
 
 export interface PullRequest {
