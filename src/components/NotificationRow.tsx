@@ -71,10 +71,10 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const NotificationIcon = getNotificationTypeIcon(notification.subject);
   const iconColor = getNotificationTypeIconColor(notification.subject);
 
-  const prApprovalIcon = getPullRequestReviewIcon(
-    notification.subject.approvalState,
+  const latestSelfReviewIcon = getPullRequestReviewIcon(
+    notification.subject.latestSelfReviewState,
   );
-  const PrApprovalIcon = prApprovalIcon?.type;
+  const PrSelfApprovalIcon = latestSelfReviewIcon?.type;
 
   const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
     addSuffix: true,
@@ -143,10 +143,13 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
         </div>
       </div>
 
-      {prApprovalIcon && (
+      {latestSelfReviewIcon && (
         <div className="flex justify-center items-center">
-          <span title={prApprovalIcon.description}>
-            <PrApprovalIcon size={16} className={prApprovalIcon.color} />
+          <span title={latestSelfReviewIcon.description}>
+            <PrSelfApprovalIcon
+              size={16}
+              className={latestSelfReviewIcon.color}
+            />
           </span>
         </div>
       )}

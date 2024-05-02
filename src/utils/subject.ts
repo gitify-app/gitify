@@ -251,7 +251,7 @@ async function getGitifySubjectForPullRequest(
       prCommentUser = prComment.user;
     }
 
-    const approvalState = await getUserApprovalState(notification, accounts);
+    const selfApproval = await getLatestSelfApproval(notification, accounts);
 
     return {
       state: prState,
@@ -261,14 +261,14 @@ async function getGitifySubjectForPullRequest(
         avatar_url: prCommentUser?.avatar_url ?? pr.user.avatar_url,
         type: prCommentUser?.type ?? pr.user.type,
       },
-      approvalState: approvalState,
+      latestSelfReviewState: selfApproval,
     };
   } catch (err) {
     console.error('Pull Request subject retrieval failed');
   }
 }
 
-async function getUserApprovalState(
+async function getLatestSelfApproval(
   notification: Notification,
   accounts: AuthState,
 ): Promise<PullRequestReviewState> | null {
@@ -289,9 +289,10 @@ async function getUserApprovalState(
   }
 
   // Find the last occurrence of the user's review, as this is the most recent
-  return prReviews.data
-    .reverse()
-    .find((prReview) => prReview.user.login === login)?.state;
+  return (
+    prReviews.data.reverse().find((prReview) => prReview.user.login === login)
+      ?.state ?? null
+  );
 }
 
 async function getGitifySubjectForRelease(
