@@ -301,5 +301,22 @@ describe('utils/api/client.ts', () => {
         'https://github.com/gitify-app/notifications-test/issues/785',
       );
     });
+
+    it('should handle error', async () => {
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+
+      const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+
+      const mockError = new Error('Test error');
+
+      apiRequestAuthMock.mockRejectedValue(mockError);
+
+      await getHtmlUrl(
+        'https://api.github.com/repos/gitify-app/gitify/issues/785',
+        '123',
+      );
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith('Failed to get html url');
+    });
   });
 });
