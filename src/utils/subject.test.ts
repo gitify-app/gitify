@@ -610,7 +610,7 @@ describe('utils/subject.ts', () => {
         mockNotification = partialMockNotification({
           title: 'This is a mocked pull request',
           type: 'PullRequest',
-          url: 'https://api.github.com/repos/gitify-app/notifications-test/pull/1',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/1',
           latest_comment_url:
             'https://api.github.com/repos/gitify-app/notifications-test/pull/1',
         });
@@ -618,7 +618,7 @@ describe('utils/subject.ts', () => {
 
       it('closed pull request state', async () => {
         nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/pull/1')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
             state: 'closed',
             draft: false,
@@ -648,7 +648,7 @@ describe('utils/subject.ts', () => {
 
       it('draft pull request state', async () => {
         nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/pull/1')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
             state: 'open',
             draft: true,
@@ -678,7 +678,7 @@ describe('utils/subject.ts', () => {
 
       it('merged pull request state', async () => {
         nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/pull/1')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
             state: 'open',
             draft: false,
@@ -708,7 +708,7 @@ describe('utils/subject.ts', () => {
 
       it('open pull request state', async () => {
         nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/pull/1')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
             state: 'open',
             draft: false,
@@ -740,7 +740,7 @@ describe('utils/subject.ts', () => {
         mockNotification.subject.latest_comment_url = null;
 
         nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/pull/1')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
             state: 'open',
             draft: false,
