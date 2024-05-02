@@ -57,32 +57,74 @@ describe('components/Sidebar.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should refresh the notifications', () => {
-    render(
-      <AppContext.Provider
-        value={{ isLoggedIn: true, notifications: [], fetchNotifications }}
-      >
-        <MemoryRouter>
-          <Sidebar />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-    fetchNotifications.mockReset();
-    fireEvent.click(screen.getByTitle('Refresh Notifications'));
+  describe('Refresh Notifications', () => {
+    it('should refresh the notifications when status is not loading', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            fetchNotifications,
+            status: 'success',
+          }}
+        >
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      fetchNotifications.mockReset();
+      fireEvent.click(screen.getByTitle('Refresh Notifications'));
 
-    expect(fetchNotifications).toHaveBeenCalledTimes(1);
+      expect(fetchNotifications).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not refresh the notifications when status is loading', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            fetchNotifications,
+            status: 'loading',
+          }}
+        >
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      fetchNotifications.mockReset();
+      fireEvent.click(screen.getByTitle('Refresh Notifications'));
+
+      expect(fetchNotifications).not.toHaveBeenCalled();
+    });
   });
 
-  it('go to the settings route', () => {
-    render(
-      <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
-        <MemoryRouter>
-          <Sidebar />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-    fireEvent.click(screen.getByTitle('Settings'));
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/settings');
+  describe('Settings', () => {
+    it('go to the settings route', () => {
+      render(
+        <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      fireEvent.click(screen.getByTitle('Settings'));
+      expect(mockNavigate).toHaveBeenCalledWith('/settings');
+    });
+
+    it('go to the home if settings path already shown', () => {
+      render(
+        <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
+          <MemoryRouter initialEntries={['/settings']}>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      fireEvent.click(screen.getByTitle('Settings'));
+      expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
+    });
   });
 
   it('opens github in the notifications page', () => {
