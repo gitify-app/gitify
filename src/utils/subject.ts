@@ -23,23 +23,30 @@ export async function getGitifySubjectDetails(
   notification: Notification,
   token: string,
 ): Promise<GitifySubject> {
-  switch (notification.subject.type) {
-    case 'CheckSuite':
-      return getGitifySubjectForCheckSuite(notification);
-    case 'Commit':
-      return getGitifySubjectForCommit(notification, token);
-    case 'Discussion':
-      return await getGitifySubjectForDiscussion(notification, token);
-    case 'Issue':
-      return await getGitifySubjectForIssue(notification, token);
-    case 'PullRequest':
-      return await getGitifySubjectForPullRequest(notification, token);
-    case 'Release':
-      return await getGitifySubjectForRelease(notification, token);
-    case 'WorkflowRun':
-      return getGitifySubjectForWorkflowRun(notification);
-    default:
-      return null;
+  try {
+    switch (notification.subject.type) {
+      case 'CheckSuite':
+        return getGitifySubjectForCheckSuite(notification);
+      case 'Commit':
+        return getGitifySubjectForCommit(notification, token);
+      case 'Discussion':
+        return await getGitifySubjectForDiscussion(notification, token);
+      case 'Issue':
+        return await getGitifySubjectForIssue(notification, token);
+      case 'PullRequest':
+        return await getGitifySubjectForPullRequest(notification, token);
+      case 'Release':
+        return await getGitifySubjectForRelease(notification, token);
+      case 'WorkflowRun':
+        return getGitifySubjectForWorkflowRun(notification);
+      default:
+        return null;
+    }
+  } catch (err) {
+    console.error(
+      `Error occurred while fetching details for ${notification.subject.type} notification: ${notification.subject.title}`,
+      err,
+    );
   }
 }
 
@@ -106,33 +113,29 @@ async function getGitifySubjectForCommit(
   notification: Notification,
   token: string,
 ): Promise<GitifySubject> {
-  try {
-    let user: User;
+  let user: User;
 
-    if (notification.subject.latest_comment_url) {
-      const commitComment = (
-        await getCommitComment(notification.subject.latest_comment_url, token)
-      ).data;
+  if (notification.subject.latest_comment_url) {
+    const commitComment = (
+      await getCommitComment(notification.subject.latest_comment_url, token)
+    ).data;
 
-      user = commitComment.user;
-    } else {
-      const commit = (await getCommit(notification.subject.url, token)).data;
+    user = commitComment.user;
+  } else {
+    const commit = (await getCommit(notification.subject.url, token)).data;
 
-      user = commit.author;
-    }
-
-    return {
-      state: null,
-      user: {
-        login: user.login,
-        html_url: user.html_url,
-        avatar_url: user.avatar_url,
-        type: user.type,
-      },
-    };
-  } catch (err) {
-    console.error('Commit subject retrieval failed');
+    user = commit.author;
   }
+
+  return {
+    state: null,
+    user: {
+      login: user.login,
+      html_url: user.html_url,
+      avatar_url: user.avatar_url,
+      type: user.type,
+    },
+  };
 }
 
 async function getGitifySubjectForDiscussion(
@@ -181,73 +184,65 @@ async function getGitifySubjectForIssue(
   notification: Notification,
   token: string,
 ): Promise<GitifySubject> {
-  try {
-    const issue = (await getIssue(notification.subject.url, token)).data;
+  const issue = (await getIssue(notification.subject.url, token)).data;
 
-    let issueCommentUser: User;
+  let issueCommentUser: User;
 
-    if (notification.subject.latest_comment_url) {
-      const issueComment = (
-        await getIssueOrPullRequestComment(
-          notification.subject.latest_comment_url,
-          token,
-        )
-      ).data;
-      issueCommentUser = issueComment.user;
-    }
-
-    return {
-      state: issue.state_reason ?? issue.state,
-      user: {
-        login: issueCommentUser?.login ?? issue.user.login,
-        html_url: issueCommentUser?.html_url ?? issue.user.html_url,
-        avatar_url: issueCommentUser?.avatar_url ?? issue.user.avatar_url,
-        type: issueCommentUser?.type ?? issue.user.type,
-      },
-    };
-  } catch (err) {
-    console.error('Issue subject retrieval failed');
+  if (notification.subject.latest_comment_url) {
+    const issueComment = (
+      await getIssueOrPullRequestComment(
+        notification.subject.latest_comment_url,
+        token,
+      )
+    ).data;
+    issueCommentUser = issueComment.user;
   }
+
+  return {
+    state: issue.state_reason ?? issue.state,
+    user: {
+      login: issueCommentUser?.login ?? issue.user.login,
+      html_url: issueCommentUser?.html_url ?? issue.user.html_url,
+      avatar_url: issueCommentUser?.avatar_url ?? issue.user.avatar_url,
+      type: issueCommentUser?.type ?? issue.user.type,
+    },
+  };
 }
 
 async function getGitifySubjectForPullRequest(
   notification: Notification,
   token: string,
 ): Promise<GitifySubject> {
-  try {
-    const pr = (await getPullRequest(notification.subject.url, token)).data;
+  const pr = (await getPullRequest(notification.subject.url, token)).data;
 
-    let prState: PullRequestStateType = pr.state;
-    if (pr.merged) {
-      prState = 'merged';
-    } else if (pr.draft) {
-      prState = 'draft';
-    }
-
-    let prCommentUser: User;
-
-    if (notification.subject.latest_comment_url) {
-      const prComment = (
-        await getIssueOrPullRequestComment(
-          notification.subject.latest_comment_url,
-          token,
-        )
-      ).data;
-      prCommentUser = prComment.user;
-    }
-
-    return {
-      state: prState,
-      user: {
-        login: prCommentUser?.login ?? pr.user.login,
-        html_url: prCommentUser?.html_url ?? pr.user.html_url,
-        avatar_url: prCommentUser?.avatar_url ?? pr.user.avatar_url,
-        type: prCommentUser?.type ?? pr.user.type,
-      },
-    };
-  } catch (err) {
-    console.error('Pull Request subject retrieval failed');
+  let prState: PullRequestStateType = pr.state;
+  if (pr.merged) {
+    prState = 'merged';
+  } else if (pr.draft) {
+    prState = 'draft';
   }
+
+  let prCommentUser: User;
+
+  if (notification.subject.latest_comment_url) {
+    const prComment = (
+      await getIssueOrPullRequestComment(
+        notification.subject.latest_comment_url,
+        token,
+      )
+    ).data;
+    prCommentUser = prComment.user;
+  }
+
+  return {
+    state: prState,
+    user: {
+      login: prCommentUser?.login ?? pr.user.login,
+      html_url: prCommentUser?.html_url ?? pr.user.html_url,
+      avatar_url: prCommentUser?.avatar_url ?? pr.user.avatar_url,
+      type: prCommentUser?.type ?? pr.user.type,
+    },
+  };
 }
 
 async function getGitifySubjectForRelease(

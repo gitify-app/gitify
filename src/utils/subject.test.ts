@@ -860,6 +860,32 @@ describe('utils/subject.ts', () => {
         expect(result).toBeNull();
       });
     });
+
+    describe('Error', () => {
+      it('catches error and logs message', async () => {
+        const consoleErrorSpy = jest
+          .spyOn(console, 'error')
+          .mockImplementation();
+
+        const mockError = new Error('Test error');
+        const mockNotification = partialMockNotification({
+          title: 'This issue will throw an error',
+          type: 'Issue',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+        });
+
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/issues/1')
+          .replyWithError(mockError);
+
+        await getGitifySubjectDetails(mockNotification, mockAccounts.token);
+
+        expect(consoleErrorSpy).toHaveBeenCalledWith(
+          'Error occurred while fetching details for Issue notification: This issue will throw an error',
+          mockError,
+        );
+      });
+    });
   });
 
   describe('getCheckSuiteState', () => {
