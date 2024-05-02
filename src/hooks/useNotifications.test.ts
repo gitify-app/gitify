@@ -403,7 +403,7 @@ describe('hooks/useNotifications.ts', () => {
             subject: {
               title: 'This is an Issue.',
               type: 'Issue',
-              url: 'https://api.github.com/1',
+              url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
               latest_comment_url: null,
             },
             repository: {
@@ -415,7 +415,7 @@ describe('hooks/useNotifications.ts', () => {
             subject: {
               title: 'This is a Pull Request.',
               type: 'PullRequest',
-              url: 'https://api.github.com/2',
+              url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/2',
               latest_comment_url: null,
             },
             repository: {
@@ -427,8 +427,9 @@ describe('hooks/useNotifications.ts', () => {
         nock('https://api.github.com')
           .get('/notifications?participating=false')
           .reply(200, notifications);
+
         nock('https://api.github.com')
-          .get('/1')
+          .get('/repos/gitify-app/notifications-test/issues/1')
           .reply(200, {
             state: 'closed',
             merged: true,
@@ -438,7 +439,7 @@ describe('hooks/useNotifications.ts', () => {
             },
           });
         nock('https://api.github.com')
-          .get('/2')
+          .get('/repos/gitify-app/notifications-test/pulls/2')
           .reply(200, {
             state: 'closed',
             merged: false,
@@ -447,6 +448,9 @@ describe('hooks/useNotifications.ts', () => {
               type: 'Bot',
             },
           });
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/2/reviews')
+          .reply(200, []);
 
         const { result } = renderHook(() => useNotifications());
 

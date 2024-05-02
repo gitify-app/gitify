@@ -630,6 +630,10 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+          .reply(200, []);
+
         const result = await getGitifySubjectDetails(
           mockNotification,
           mockAccounts,
@@ -643,6 +647,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
+          latestSelfReviewState: null,
         });
       });
 
@@ -660,6 +665,10 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+          .reply(200, []);
+
         const result = await getGitifySubjectDetails(
           mockNotification,
           mockAccounts,
@@ -673,6 +682,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
+          latestSelfReviewState: null,
         });
       });
 
@@ -690,6 +700,10 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+          .reply(200, []);
+
         const result = await getGitifySubjectDetails(
           mockNotification,
           mockAccounts,
@@ -703,6 +717,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
+          latestSelfReviewState: null,
         });
       });
 
@@ -720,6 +735,10 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+          .reply(200, []);
+
         const result = await getGitifySubjectDetails(
           mockNotification,
           mockAccounts,
@@ -733,6 +752,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
+          latestSelfReviewState: null,
         });
       });
 
@@ -748,6 +768,10 @@ describe('utils/subject.ts', () => {
             user: mockAuthor,
           });
 
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+          .reply(200, []);
+
         const result = await getGitifySubjectDetails(
           mockNotification,
           mockAccounts,
@@ -761,6 +785,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockAuthor.avatar_url,
             type: mockAuthor.type,
           },
+          latestSelfReviewState: null,
         });
       });
 
