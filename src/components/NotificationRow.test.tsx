@@ -8,6 +8,7 @@ import { shell } from 'electron';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
+import type { UserType } from '../typesGitHub';
 import { NotificationRow } from './NotificationRow';
 
 describe('components/NotificationRow.tsx', () => {
@@ -179,7 +180,7 @@ describe('components/NotificationRow.tsx', () => {
             login: 'some-user',
             html_url: 'https://github.com/some-user',
             avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
-            type: 'User',
+            type: 'User' as UserType,
           },
         },
       },
