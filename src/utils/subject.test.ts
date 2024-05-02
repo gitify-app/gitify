@@ -17,6 +17,7 @@ import type {
 import {
   getCheckSuiteAttributes,
   getGitifySubjectDetails,
+  getLatestSelfApproval,
   getWorkflowRunAttributes,
 } from './subject';
 
@@ -789,25 +790,8 @@ describe('utils/subject.ts', () => {
         });
       });
 
-      describe('Pull Request Reviews', () => {
-        beforeEach(() => {
-          nock('https://api.github.com')
-            .get('/repos/gitify-app/notifications-test/pulls/1')
-            .reply(200, {
-              state: 'open',
-              draft: false,
-              merged: false,
-              user: mockAuthor,
-            });
-
-          nock('https://api.github.com')
-            .get(
-              '/repos/gitify-app/notifications-test/issues/comments/302888448',
-            )
-            .reply(200, { user: mockCommenter });
-        });
-
-        it('fetches latest self review state - none found for self', async () => {
+      describe('Pull Request Reviews - Latest Self Review', () => {
+        it('returns null when no review found for matching user', async () => {
           nock('https://api.github.com')
             .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
             .reply(200, [
@@ -819,15 +803,15 @@ describe('utils/subject.ts', () => {
               },
             ]);
 
-          const result = await getGitifySubjectDetails(
+          const result = await getLatestSelfApproval(
             mockNotification,
             mockAccounts,
           );
 
-          expect(result.latestSelfReviewState).toBeNull();
+          expect(result).toBeNull();
         });
 
-        it('fetches latest self review state - return latest result', async () => {
+        it('returns latest review state for matching user', async () => {
           nock('https://api.github.com')
             .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
             .reply(200, [
@@ -851,25 +835,36 @@ describe('utils/subject.ts', () => {
               },
             ]);
 
-          const result = await getGitifySubjectDetails(
+          const result = await getLatestSelfApproval(
             mockNotification,
             mockAccounts,
           );
 
-          expect(result.latestSelfReviewState).toEqual('APPROVED');
+          expect(result).toEqual('APPROVED');
         });
 
-        it('fetches latest self review state - no reviews', async () => {
+        it('returns null when no reviews on PR yet', async () => {
           nock('https://api.github.com')
             .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
             .reply(200, []);
 
-          const result = await getGitifySubjectDetails(
+          const result = await getLatestSelfApproval(
             mockNotification,
             mockAccounts,
           );
 
-          expect(result.latestSelfReviewState).toBeNull();
+          expect(result).toBeNull();
+        });
+
+        it('returns null when not a PR notification', async () => {
+          mockNotification.subject.type = 'Issue';
+
+          const result = await getLatestSelfApproval(
+            mockNotification,
+            mockAccounts,
+          );
+
+          expect(result).toBeNull();
         });
       });
     });

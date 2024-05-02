@@ -268,12 +268,13 @@ async function getGitifySubjectForPullRequest(
   }
 }
 
-async function getLatestSelfApproval(
+export async function getLatestSelfApproval(
   notification: Notification,
   accounts: AuthState,
 ): Promise<PullRequestReviewState> | null {
+  console.log('ADAM ', notification.subject.type);
   if (notification.subject.type !== 'PullRequest') {
-    return;
+    return null;
   }
 
   const token = getTokenForHost(notification.hostname, accounts);
@@ -283,10 +284,6 @@ async function getLatestSelfApproval(
     `${notification.subject.url}/reviews`,
     token,
   );
-
-  if (!prReviews) {
-    return;
-  }
 
   // Find the last occurrence of the user's review, as this is the most recent
   return (
