@@ -11,13 +11,14 @@ import type {
   DiscussionAuthor,
   DiscussionStateType,
   Notification,
+  PullRequestReviewState,
   Repository,
   ViewerSubscription,
 } from '../typesGitHub';
 import {
   getCheckSuiteAttributes,
   getGitifySubjectDetails,
-  getLatestSelfApproval,
+  getLatestReviewForReviewers,
   getWorkflowRunAttributes,
 } from './subject';
 
@@ -772,7 +773,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockAccounts,
         );
 
         expect(result).toEqual({
@@ -819,67 +820,58 @@ describe('utils/subject.ts', () => {
         });
       });
 
-      describe('Pull Request Reviews - Latest Self Review', () => {
-        it('returns null when no review found for matching user', async () => {
+      describe('Pull Request Reviews - Latest Reviews By Reviewer', () => {
+        it('returns latest review state per reviewer', async () => {
           nock('https://api.github.com')
             .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
             .reply(200, [
               {
                 user: {
-                  login: 'some-other-user',
-                },
-                state: 'APPROVED',
-              },
-            ]);
-
-          const result = await getLatestSelfApproval(
-            mockNotification,
-            mockAccounts,
-          );
-
-          expect(result).toBeNull();
-        });
-
-        it('returns latest review state for matching user', async () => {
-          nock('https://api.github.com')
-            .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
-            .reply(200, [
-              {
-                user: {
-                  login: mockAccounts.user.login,
+                  login: 'reviewer-1',
                 },
                 state: 'REQUESTED_CHANGES',
               },
               {
                 user: {
-                  login: 'some-other-user',
+                  login: 'reviewer-2',
                 },
                 state: 'COMMENTED',
               },
               {
                 user: {
-                  login: mockAccounts.user.login,
+                  login: 'reviewer-1',
+                },
+                state: 'APPROVED',
+              },
+              {
+                user: {
+                  login: 'reviewer-3',
                 },
                 state: 'APPROVED',
               },
             ]);
 
-          const result = await getLatestSelfApproval(
+          const result = await getLatestReviewForReviewers(
             mockNotification,
-            mockAccounts,
+            mockAccounts.token,
           );
 
-          expect(result).toEqual('APPROVED');
+          expect(result).toEqual(
+            new Map<PullRequestReviewState, string[]>([
+              ['APPROVED', ['reviewer-3', 'reviewer-1']],
+              ['COMMENTED', ['reviewer-2']],
+            ]),
+          );
         });
 
-        it('returns null when no reviews on PR yet', async () => {
+        it('handles no PR reviews yet', async () => {
           nock('https://api.github.com')
             .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
             .reply(200, []);
 
-          const result = await getLatestSelfApproval(
+          const result = await getLatestReviewForReviewers(
             mockNotification,
-            mockAccounts,
+            mockAccounts.token,
           );
 
           expect(result).toBeNull();
@@ -888,9 +880,9 @@ describe('utils/subject.ts', () => {
         it('returns null when not a PR notification', async () => {
           mockNotification.subject.type = 'Issue';
 
-          const result = await getLatestSelfApproval(
+          const result = await getLatestReviewForReviewers(
             mockNotification,
-            mockAccounts,
+            mockAccounts.token,
           );
 
           expect(result).toBeNull();
@@ -1011,7 +1003,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/1')
           .replyWithError(mockError);
 
-        await getGitifySubjectDetails(mockNotification, mockAccounts.token);
+        await getGitifySubjectDetails(mockNotification, mockAccounts);
 
         expect(consoleErrorSpy).toHaveBeenCalledWith(
           'Error occurred while fetching details for Issue notification: This issue will throw an error',

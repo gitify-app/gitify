@@ -3,9 +3,10 @@ import type {
   CheckSuiteAttributes,
   CheckSuiteStatus,
   DiscussionStateType,
+  GitifyPullRequestReview,
   GitifySubject,
   Notification,
-  PullRequestReviewState,
+  PullRequestReview,
   PullRequestStateType,
   SubjectUser,
   User,
@@ -23,7 +24,6 @@ import {
 import {
   fetchDiscussion,
   getLatestDiscussionComment,
-  getLoginForHost,
   getTokenForHost,
 } from './helpers';
 
@@ -44,11 +44,7 @@ export async function getGitifySubjectDetails(
       case 'Issue':
         return await getGitifySubjectForIssue(notification, token);
       case 'PullRequest':
-        return await getGitifySubjectForPullRequest(
-          notification,
-          token,
-          accounts,
-        );
+        return await getGitifySubjectForPullRequest(notification, token);
       case 'Release':
         return await getGitifySubjectForRelease(notification, token);
       case 'WorkflowRun':
@@ -226,7 +222,6 @@ async function getGitifySubjectForIssue(
 async function getGitifySubjectForPullRequest(
   notification: Notification,
   token: string,
-  accounts: AuthState,
 ): Promise<GitifySubject> {
   const pr = (await getPullRequest(notification.subject.url, token)).data;
 
@@ -252,7 +247,7 @@ async function getGitifySubjectForPullRequest(
     prCommentUser = prComment.user;
   }
 
-  const selfApproval = await getLatestSelfApproval(notification, accounts);
+  const reviews = await getLatestReviewForReviewers(notification, token);
 
   return {
     state: prState,
@@ -262,32 +257,58 @@ async function getGitifySubjectForPullRequest(
       avatar_url: prCommentUser?.avatar_url ?? pr.user.avatar_url,
       type: prCommentUser?.type ?? pr.user.type,
     },
-    latestSelfReviewState: selfApproval,
+    reviews: reviews,
   };
 }
 
-export async function getLatestSelfApproval(
+export async function getLatestReviewForReviewers(
   notification: Notification,
-  accounts: AuthState,
-): Promise<PullRequestReviewState> | null {
-  console.log('ADAM ', notification.subject.type);
+  token: string,
+): Promise<GitifyPullRequestReviews[]> | null {
   if (notification.subject.type !== 'PullRequest') {
     return null;
   }
-
-  const token = getTokenForHost(notification.hostname, accounts);
-  const login = getLoginForHost(notification.hostname, accounts);
 
   const prReviews = await getPullRequestReviews(
     `${notification.subject.url}/reviews`,
     token,
   );
 
-  // Find the last occurrence of the user's review, as this is the most recent
-  return (
-    prReviews.data.reverse().find((prReview) => prReview.user.login === login)
-      ?.state ?? null
-  );
+  if (!prReviews.data.length) {
+    return null;
+  }
+
+  // Find the most recent review for each reviewer
+  const latestReviews: PullRequestReview[] = [];
+  for (const prReview of prReviews.data.reverse()) {
+    const reviewerFound = latestReviews.find(
+      (review) => review.user.login === prReview.user.login,
+    );
+
+    if (!reviewerFound) {
+      latestReviews.push(prReview);
+    }
+  }
+
+  // Group by the review state
+  const reviewers: GitifyPullRequestReview[] = [];
+  for (const prReview of latestReviews) {
+    const reviewerFound = reviewers.find(
+      (review) => review.state === prReview.state,
+    );
+
+    if (!reviewerFound) {
+      reviewers.push({
+        state: prReview.state,
+        users: [prReview.user.login],
+      });
+      continue;
+    }
+
+    reviewerFound.users.push(prReview.user.login);
+  }
+
+  return reviewers;
 }
 
 async function getGitifySubjectForRelease(

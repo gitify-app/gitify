@@ -258,7 +258,7 @@ interface GitHubSubject {
 export interface GitifySubject {
   state?: StateType;
   user?: SubjectUser;
-  latestSelfReviewState?: PullRequestReviewState;
+  reviews?: GitifyPullRequestReviews[];
 }
 
 export interface PullRequest {
@@ -297,6 +297,11 @@ export interface PullRequest {
   additions: number;
   deletions: number;
   changed_files: number;
+}
+
+export interface GitifyPullRequestReview {
+  state: PullRequestReviewState;
+  users: string[];
 }
 
 export interface PullRequestReview {

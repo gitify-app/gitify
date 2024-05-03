@@ -26,18 +26,8 @@ export function getTokenForHost(hostname: string, accounts: AuthState): string {
   return accounts.token;
 }
 
-export function getLoginForHost(hostname: string, accounts: AuthState): string {
-  const isGitHub = isGitHubHost(hostname);
-
-  return isGitHub ? accounts.user.login : null;
-}
-
 export function isEnterpriseHost(hostname: string): boolean {
   return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
-}
-
-export function isGitHubHost(hostname: string): boolean {
-  return hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
 }
 
 export function getGitHubAPIBaseUrl(hostname) {

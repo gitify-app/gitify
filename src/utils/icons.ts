@@ -27,7 +27,7 @@ import {
 } from '@primer/octicons-react';
 import type { FC } from 'react';
 import { IconColor, type PullRequestApprovalIcon } from '../types';
-import type { PullRequestReviewState, Subject } from '../typesGitHub';
+import type { GitifyPullRequestReview, Subject } from '../typesGitHub';
 
 export function getNotificationTypeIcon(subject: Subject): FC<OcticonProps> {
   switch (subject.type) {
@@ -115,32 +115,36 @@ export function getNotificationTypeIconColor(subject: Subject): IconColor {
 }
 
 export function getPullRequestReviewIcon(
-  reviewState: PullRequestReviewState,
+  review: GitifyPullRequestReview,
 ): PullRequestApprovalIcon | null {
-  switch (reviewState) {
+  const descriptionPrefix = review.users.join(', ');
+
+  switch (review.state) {
     case 'APPROVED':
       return {
         type: CheckIcon,
         color: IconColor.GREEN,
-        description: 'You approved these changes',
+        description: `${descriptionPrefix} approved these changes`,
       };
     case 'CHANGES_REQUESTED':
       return {
         type: FileDiffIcon,
         color: IconColor.RED,
-        description: 'You requested changes',
+        description: `${descriptionPrefix} requested changes`,
       };
     case 'COMMENTED':
       return {
         type: CommentIcon,
         color: IconColor.GRAY,
-        description: 'You left review comments',
+        description: `${descriptionPrefix} left review comments`,
       };
     case 'DISMISSED':
       return {
         type: CommentIcon,
         color: IconColor.GRAY,
-        description: 'Your review has been dismissed',
+        description: `${descriptionPrefix} ${
+          review.users.length > 1 ? 'reviews' : 'review'
+        } has been dismissed`,
       };
     default:
       return null;

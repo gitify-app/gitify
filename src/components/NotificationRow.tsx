@@ -71,11 +71,6 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const NotificationIcon = getNotificationTypeIcon(notification.subject);
   const iconColor = getNotificationTypeIconColor(notification.subject);
 
-  const latestSelfReviewIcon = getPullRequestReviewIcon(
-    notification.subject.latestSelfReviewState,
-  );
-  const PrSelfApprovalIcon = latestSelfReviewIcon?.type;
-
   const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
     addSuffix: true,
   });
@@ -138,21 +133,28 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 {reason.title}
               </span>
               <span className="ml-1">{updatedAt}</span>
+              {notification.subject?.reviews
+                ? notification.subject.reviews.map((review) => {
+                    const icon = getPullRequestReviewIcon(review);
+                    return (
+                      <span
+                        key={review.state}
+                        title={icon.description}
+                        className="ml-1"
+                      >
+                        <icon.type
+                          size={16}
+                          className={icon.color}
+                          aria-label={icon.description}
+                        />
+                      </span>
+                    );
+                  })
+                : null}
             </span>
           </span>
         </div>
       </div>
-
-      {latestSelfReviewIcon && (
-        <div className="flex justify-center items-center">
-          <span title={latestSelfReviewIcon.description}>
-            <PrSelfApprovalIcon
-              size={16}
-              className={latestSelfReviewIcon.color}
-            />
-          </span>
-        </div>
-      )}
 
       <div className="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity">
         <button
