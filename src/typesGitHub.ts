@@ -258,7 +258,7 @@ interface GitHubSubject {
 export interface GitifySubject {
   state?: StateType;
   user?: SubjectUser;
-  reviews?: GitifyPullRequestReviews[];
+  reviews?: GitifyPullRequestReview[];
 }
 
 export interface PullRequest {

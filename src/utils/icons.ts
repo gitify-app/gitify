@@ -143,8 +143,8 @@ export function getPullRequestReviewIcon(
         type: CommentIcon,
         color: IconColor.GRAY,
         description: `${descriptionPrefix} ${
-          review.users.length > 1 ? 'reviews' : 'review'
-        } has been dismissed`,
+          review.users.length > 1 ? 'reviews have' : 'review has'
+        } been dismissed`,
       };
     default:
       return null;

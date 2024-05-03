@@ -264,7 +264,7 @@ async function getGitifySubjectForPullRequest(
 export async function getLatestReviewForReviewers(
   notification: Notification,
   token: string,
-): Promise<GitifyPullRequestReviews[]> | null {
+): Promise<GitifyPullRequestReview[]> | null {
   if (notification.subject.type !== 'PullRequest') {
     return null;
   }

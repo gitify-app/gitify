@@ -207,6 +207,7 @@ describe('components/NotificationRow.tsx', () => {
             avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
             type: 'User' as UserType,
           },
+          reviews: null,
         },
       },
       hostname: 'github.com',

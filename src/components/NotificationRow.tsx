@@ -133,9 +133,13 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 {reason.title}
               </span>
               <span className="ml-1">{updatedAt}</span>
-              {notification.subject?.reviews
+              {notification.subject.reviews
                 ? notification.subject.reviews.map((review) => {
                     const icon = getPullRequestReviewIcon(review);
+                    if (!icon) {
+                      return null;
+                    }
+
                     return (
                       <span
                         key={review.state}

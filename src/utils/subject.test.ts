@@ -11,7 +11,6 @@ import type {
   DiscussionAuthor,
   DiscussionStateType,
   Notification,
-  PullRequestReviewState,
   Repository,
   ViewerSubscription,
 } from '../typesGitHub';
@@ -649,7 +648,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
-          latestSelfReviewState: null,
+          reviews: null,
         });
       });
 
@@ -684,7 +683,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
-          latestSelfReviewState: null,
+          reviews: null,
         });
       });
 
@@ -719,7 +718,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
-          latestSelfReviewState: null,
+          reviews: null,
         });
       });
 
@@ -754,7 +753,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
-          latestSelfReviewState: null,
+          reviews: null,
         });
       });
 
@@ -771,6 +770,10 @@ describe('utils/subject.ts', () => {
             user: mockAuthor,
           });
 
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+          .reply(200, []);
+
         const result = await getGitifySubjectDetails(
           mockNotification,
           mockAccounts,
@@ -784,6 +787,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockAuthor.avatar_url,
             type: mockAuthor.type,
           },
+          reviews: null,
         });
       });
 
@@ -816,7 +820,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockAuthor.avatar_url,
             type: mockAuthor.type,
           },
-          latestSelfReviewState: null,
+          reviews: null,
         });
       });
 
@@ -856,12 +860,10 @@ describe('utils/subject.ts', () => {
             mockAccounts.token,
           );
 
-          expect(result).toEqual(
-            new Map<PullRequestReviewState, string[]>([
-              ['APPROVED', ['reviewer-3', 'reviewer-1']],
-              ['COMMENTED', ['reviewer-2']],
-            ]),
-          );
+          expect(result).toEqual([
+            { state: 'APPROVED', users: ['reviewer-3', 'reviewer-1'] },
+            { state: 'COMMENTED', users: ['reviewer-2'] },
+          ]);
         });
 
         it('handles no PR reviews yet', async () => {

@@ -1,6 +1,11 @@
 import { CheckIcon, CommentIcon, FileDiffIcon } from '@primer/octicons-react';
 import { IconColor } from '../types';
-import type { StateType, Subject, SubjectType } from '../typesGitHub';
+import type {
+  GitifyPullRequestReview,
+  StateType,
+  Subject,
+  SubjectType,
+} from '../typesGitHub';
 import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
@@ -255,29 +260,96 @@ describe('utils/icons.ts', () => {
     });
   });
 
-  describe('getPullRequestReviewIcon - should get the approval icon', () => {
-    expect(getPullRequestReviewIcon('APPROVED')).toEqual({
-      type: CheckIcon,
-      color: IconColor.GREEN,
-      description: 'You approved these changes',
+  describe('getPullRequestReviewIcon', () => {
+    let mockReviewSingleReviewer: GitifyPullRequestReview;
+    let mockReviewMultipleReviewer: GitifyPullRequestReview;
+    beforeEach(() => {
+      mockReviewSingleReviewer = {
+        state: 'APPROVED',
+        users: ['user1'],
+      };
+      mockReviewMultipleReviewer = {
+        state: 'APPROVED',
+        users: ['user1', 'user2'],
+      };
     });
-    expect(getPullRequestReviewIcon('CHANGES_REQUESTED')).toEqual({
-      type: FileDiffIcon,
-      color: IconColor.RED,
-      description: 'You requested changes',
+
+    it('approved', () => {
+      mockReviewSingleReviewer.state = 'APPROVED';
+      mockReviewMultipleReviewer.state = 'APPROVED';
+
+      expect(getPullRequestReviewIcon(mockReviewSingleReviewer)).toEqual({
+        type: CheckIcon,
+        color: IconColor.GREEN,
+        description: 'user1 approved these changes',
+      });
+
+      expect(getPullRequestReviewIcon(mockReviewMultipleReviewer)).toEqual({
+        type: CheckIcon,
+        color: IconColor.GREEN,
+        description: 'user1, user2 approved these changes',
+      });
     });
-    expect(getPullRequestReviewIcon('COMMENTED')).toEqual({
-      type: CommentIcon,
-      color: IconColor.GRAY,
-      description: 'You left review comments',
+
+    it('changes requested', () => {
+      mockReviewSingleReviewer.state = 'CHANGES_REQUESTED';
+      mockReviewMultipleReviewer.state = 'CHANGES_REQUESTED';
+
+      expect(getPullRequestReviewIcon(mockReviewSingleReviewer)).toEqual({
+        type: FileDiffIcon,
+        color: IconColor.RED,
+        description: 'user1 requested changes',
+      });
+
+      expect(getPullRequestReviewIcon(mockReviewMultipleReviewer)).toEqual({
+        type: FileDiffIcon,
+        color: IconColor.RED,
+        description: 'user1, user2 requested changes',
+      });
     });
-    expect(getPullRequestReviewIcon('DISMISSED')).toEqual({
-      type: CommentIcon,
-      color: IconColor.GRAY,
-      description: 'Your review has been dismissed',
+
+    it('commented', () => {
+      mockReviewSingleReviewer.state = 'COMMENTED';
+      mockReviewMultipleReviewer.state = 'COMMENTED';
+
+      expect(getPullRequestReviewIcon(mockReviewSingleReviewer)).toEqual({
+        type: CommentIcon,
+        color: IconColor.GRAY,
+        description: 'user1 left review comments',
+      });
+
+      expect(getPullRequestReviewIcon(mockReviewMultipleReviewer)).toEqual({
+        type: CommentIcon,
+        color: IconColor.GRAY,
+        description: 'user1, user2 left review comments',
+      });
     });
-    expect(getPullRequestReviewIcon('PENDING')).toBeNull();
-    expect(getPullRequestReviewIcon(null)).toBeNull();
+
+    it('dismissed', () => {
+      mockReviewSingleReviewer.state = 'DISMISSED';
+      mockReviewMultipleReviewer.state = 'DISMISSED';
+
+      expect(getPullRequestReviewIcon(mockReviewSingleReviewer)).toEqual({
+        type: CommentIcon,
+        color: IconColor.GRAY,
+        description: 'user1 review has been dismissed',
+      });
+
+      expect(getPullRequestReviewIcon(mockReviewMultipleReviewer)).toEqual({
+        type: CommentIcon,
+        color: IconColor.GRAY,
+        description: 'user1, user2 reviews have been dismissed',
+      });
+    });
+
+    it('pending', () => {
+      mockReviewSingleReviewer.state = 'PENDING';
+      mockReviewMultipleReviewer.state = 'PENDING';
+
+      expect(getPullRequestReviewIcon(mockReviewSingleReviewer)).toBeNull();
+
+      expect(getPullRequestReviewIcon(mockReviewMultipleReviewer)).toBeNull();
+    });
   });
 });
 
