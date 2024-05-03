@@ -97,8 +97,8 @@ export interface FormattedReason {
 }
 
 export enum IconColor {
-  GREEN = 'text-green-500',
-  RED = 'text-red-500',
-  PURPLE = 'text-purple-500',
   GRAY = 'text-gray-500 dark:text-gray-300',
+  GREEN = 'text-green-500',
+  PURPLE = 'text-purple-500',
+  RED = 'text-red-500',
 }
