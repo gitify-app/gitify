@@ -314,6 +314,7 @@ export async function getLatestReviewForReviewers(
     ...reviewers.filter((review) => review.state === 'CHANGES_REQUESTED'),
     ...reviewers.filter((review) => review.state === 'COMMENTED'),
     ...reviewers.filter((review) => review.state === 'DISMISSED'),
+    ...reviewers.filter((review) => review.state === 'PENDING'),
   ];
 }
 
