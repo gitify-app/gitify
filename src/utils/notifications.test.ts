@@ -1,15 +1,17 @@
 import { ipcRenderer } from 'electron';
 
-import { mockAccounts } from '../__mocks__/mock-state';
+import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import {
   mockedAccountNotifications,
   mockedGitHubNotifications,
   mockedSingleAccountNotifications,
 } from '../__mocks__/mockedData';
+import { partialMockNotification } from '../__mocks__/partial-mocks';
 import { defaultSettings } from '../context/App';
 import type { SettingsState } from '../types';
 import * as helpers from './helpers';
 import * as notificationsHelpers from './notifications';
+import { filterNotifications } from './notifications';
 
 describe('utils/notifications.ts', () => {
   afterEach(() => {
@@ -136,5 +138,50 @@ describe('utils/notifications.ts', () => {
     jest.spyOn(window.Audio.prototype, 'play');
     notificationsHelpers.raiseSoundNotification();
     expect(window.Audio.prototype.play).toHaveBeenCalledTimes(1);
+  });
+
+  describe('filterNotifications', () => {
+    const mockNotifications = [
+      partialMockNotification({
+        title: 'User authored notification',
+        user: {
+          login: 'user',
+          html_url: 'https://github.com/user',
+          avatar_url:
+            'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
+          type: 'User',
+        },
+      }),
+      partialMockNotification({
+        title: 'Bot authored notification',
+        user: {
+          login: 'bot',
+          html_url: 'https://github.com/bot',
+          avatar_url:
+            'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
+          type: 'Bot',
+        },
+      }),
+    ];
+
+    it('should hide bot notifications when set to false', async () => {
+      const result = filterNotifications(mockNotifications, {
+        ...mockSettings,
+        showBots: false,
+      });
+
+      expect(result.length).toBe(1);
+      expect(result).toEqual([mockNotifications[0]]);
+    });
+
+    it('should show bot notifications when set to true', async () => {
+      const result = filterNotifications(mockNotifications, {
+        ...mockSettings,
+        showBots: true,
+      });
+
+      expect(result.length).toBe(2);
+      expect(result).toEqual(mockNotifications);
+    });
   });
 });

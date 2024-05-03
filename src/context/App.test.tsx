@@ -201,7 +201,10 @@ describe('context/App.tsx', () => {
           <button
             type="button"
             onClick={() =>
-              markRepoNotifications('manosim/gitify', 'github.com')
+              markRepoNotifications(
+                'gitify-app/notifications-test',
+                'github.com',
+              )
             }
           >
             Test Case
@@ -218,7 +221,7 @@ describe('context/App.tsx', () => {
       expect(markRepoNotificationsMock).toHaveBeenCalledTimes(1);
       expect(markRepoNotificationsMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
-        'manosim/gitify',
+        'gitify-app/notifications-test',
         'github.com',
       );
     });

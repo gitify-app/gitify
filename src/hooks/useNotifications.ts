@@ -1,4 +1,3 @@
-import type { AxiosError } from 'axios';
 import { useCallback, useState } from 'react';
 
 import type {
@@ -8,24 +7,21 @@ import type {
   SettingsState,
   Status,
 } from '../types';
-import type { GitHubRESTError, Notification } from '../typesGitHub';
 import {
   ignoreNotificationThreadSubscription,
-  listNotificationsForAuthenticatedUser,
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
   markRepositoryNotificationsAsRead,
 } from '../utils/api/client';
 import { determineFailureType } from '../utils/api/errors';
-import Constants from '../utils/constants';
-import { getTokenForHost, isGitHubLoggedIn } from '../utils/helpers';
+import { getTokenForHost } from '../utils/helpers';
 import {
+  getAllNotifications,
   setTrayIconColor,
   triggerNativeNotifications,
 } from '../utils/notifications';
 import { removeNotification } from '../utils/remove-notification';
 import { removeNotifications } from '../utils/remove-notifications';
-import { getGitifySubjectDetails } from '../utils/subject';
 
 interface NotificationsState {
   notifications: AccountNotifications[];
@@ -73,102 +69,26 @@ export const useNotifications = (): NotificationsState => {
 
   const fetchNotifications = useCallback(
     async (accounts: AuthState, settings: SettingsState) => {
-      function getGitHubNotifications() {
-        if (!isGitHubLoggedIn(accounts)) {
-          return;
-        }
-
-        return listNotificationsForAuthenticatedUser(
-          Constants.DEFAULT_AUTH_OPTIONS.hostname,
-          accounts.token,
-          settings,
-        );
-      }
-
-      function getEnterpriseNotifications() {
-        return accounts.enterpriseAccounts.map((account) => {
-          return listNotificationsForAuthenticatedUser(
-            account.hostname,
-            account.token,
-            settings,
-          );
-        });
-      }
-
       setStatus('loading');
 
-      return Promise.all([
-        getGitHubNotifications(),
-        ...getEnterpriseNotifications(),
-      ])
-        .then(([...responses]) => {
-          const accountsNotifications: AccountNotifications[] = responses
-            .filter((response) => !!response)
-            .map((accountNotifications) => {
-              const { hostname } = new URL(accountNotifications.config.url);
-              return {
-                hostname,
-                notifications: accountNotifications.data.map(
-                  (notification: Notification) => ({
-                    ...notification,
-                    hostname,
-                  }),
-                ),
-              };
-            });
+      try {
+        const fetchedNotifications = await getAllNotifications(
+          accounts,
+          settings,
+        );
 
-          Promise.all(
-            accountsNotifications.map(async (accountNotifications) => {
-              return {
-                hostname: accountNotifications.hostname,
-                notifications: await Promise.all<Notification>(
-                  accountNotifications.notifications.map(
-                    async (notification: Notification) => {
-                      if (!settings.detailedNotifications) {
-                        return notification;
-                      }
-
-                      const additionalSubjectDetails =
-                        await getGitifySubjectDetails(notification, accounts);
-
-                      return {
-                        ...notification,
-                        subject: {
-                          ...notification.subject,
-                          ...additionalSubjectDetails,
-                        },
-                      };
-                    },
-                  ),
-                ).then((notifications) => {
-                  return notifications.filter((notification) => {
-                    if (
-                      !settings.showBots &&
-                      notification.subject?.user?.type === 'Bot'
-                    ) {
-                      return false;
-                    }
-
-                    return true;
-                  });
-                }),
-              };
-            }),
-          ).then((parsedNotifications) => {
-            setNotifications(parsedNotifications);
-            triggerNativeNotifications(
-              notifications,
-              parsedNotifications,
-              settings,
-              accounts,
-            );
-            setStatus('success');
-          });
-        })
-        .catch((err: AxiosError<GitHubRESTError>) => {
-          setStatus('error');
-          setErrorDetails(determineFailureType(err));
-        });
+        setNotifications(fetchedNotifications);
+        triggerNativeNotifications(
+          notifications,
+          fetchedNotifications,
+          settings,
+          accounts,
+        );
+        setStatus('success');
+      } catch (err) {
+        setStatus('error');
+        setErrorDetails(determineFailureType(err));
+      }
     },
     [notifications],
   );

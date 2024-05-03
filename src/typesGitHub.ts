@@ -39,6 +39,13 @@ export type IssueStateType = 'closed' | 'open';
 
 export type IssueStateReasonType = 'completed' | 'not_planned' | 'reopened';
 
+export type UserType =
+  | 'Bot'
+  | 'EnterpriseUserAccount'
+  | 'Mannequin'
+  | 'Organization'
+  | 'User';
+
 /**
  * Note: draft and merged are not official states in the GitHub API.
  * These are derived from the pull request's `merged` and `draft` properties.
@@ -150,7 +157,7 @@ export interface User {
   repos_url: string;
   events_url: string;
   received_events_url: string;
-  type: string;
+  type: UserType;
   site_admin: boolean;
 }
 
@@ -158,14 +165,14 @@ export interface SubjectUser {
   login: string;
   html_url: string;
   avatar_url: string;
-  type: string;
+  type: UserType;
 }
 
 export interface DiscussionAuthor {
   login: string;
   url: string;
   avatar_url: string;
-  type: string;
+  type: UserType;
 }
 
 export interface Repository {

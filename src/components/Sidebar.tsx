@@ -34,6 +34,14 @@ export const Sidebar: FC = () => {
     ipcRenderer.send('app-quit');
   }, []);
 
+  const toggleSettings = () => {
+    if (location.pathname.startsWith('/settings')) {
+      navigate('/', { replace: true });
+    } else {
+      navigate('/settings');
+    }
+  };
+
   const notificationsCount = useMemo(() => {
     return getNotificationCount(notifications);
   }, [notifications]);
@@ -93,13 +101,7 @@ export const Sidebar: FC = () => {
               type="button"
               className={sidebarButtonClasses}
               title="Settings"
-              onClick={() => {
-                if (location.pathname.startsWith('/settings')) {
-                  navigate('/', { replace: true });
-                } else {
-                  navigate('/settings');
-                }
-              }}
+              onClick={toggleSettings}
             >
               <GearIcon size={16} aria-label="Settings" />
             </button>
