@@ -314,13 +314,13 @@ describe('utils/icons.ts', () => {
 
       expect(getPullRequestReviewIcon(mockReviewSingleReviewer)).toEqual({
         type: CommentIcon,
-        color: IconColor.GRAY,
+        color: IconColor.GREEN,
         description: 'user1 left review comments',
       });
 
       expect(getPullRequestReviewIcon(mockReviewMultipleReviewer)).toEqual({
         type: CommentIcon,
-        color: IconColor.GRAY,
+        color: IconColor.GREEN,
         description: 'user1, user2 left review comments',
       });
     });

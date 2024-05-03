@@ -308,7 +308,13 @@ export async function getLatestReviewForReviewers(
     reviewerFound.users.push(prReview.user.login);
   }
 
-  return reviewers;
+  // Sort the reviews by state for consistent draw order
+  return [
+    ...reviewers.filter((review) => review.state === 'APPROVED'),
+    ...reviewers.filter((review) => review.state === 'CHANGES_REQUESTED'),
+    ...reviewers.filter((review) => review.state === 'COMMENTED'),
+    ...reviewers.filter((review) => review.state === 'DISMISSED'),
+  ];
 }
 
 async function getGitifySubjectForRelease(

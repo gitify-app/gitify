@@ -135,7 +135,7 @@ export function getPullRequestReviewIcon(
     case 'COMMENTED':
       return {
         type: CommentIcon,
-        color: IconColor.GRAY,
+        color: IconColor.GREEN,
         description: `${descriptionPrefix} left review comments`,
       };
     case 'DISMISSED':
