@@ -172,7 +172,20 @@ exports[`routes/Notifications.tsx should render itself & its children (show acco
           },
           "subject": {
             "latest_comment_url": "https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448",
-            "reviews": null,
+            "reviews": [
+              {
+                "state": "APPROVED",
+                "users": [
+                  "octocat",
+                ],
+              },
+              {
+                "state": "CHANGES_REQUESTED",
+                "users": [
+                  "gitify-app",
+                ],
+              },
+            ],
             "state": "open",
             "title": "I am a robot and this is a test!",
             "type": "Issue",
@@ -323,7 +336,20 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
           },
           "subject": {
             "latest_comment_url": "https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448",
-            "reviews": null,
+            "reviews": [
+              {
+                "state": "APPROVED",
+                "users": [
+                  "octocat",
+                ],
+              },
+              {
+                "state": "CHANGES_REQUESTED",
+                "users": [
+                  "gitify-app",
+                ],
+              },
+            ],
             "state": "open",
             "title": "I am a robot and this is a test!",
             "type": "Issue",

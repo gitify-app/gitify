@@ -72,7 +72,16 @@ export const mockedGitHubNotifications: Notification[] = [
           'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
         type: 'User',
       },
-      reviews: null,
+      reviews: [
+        {
+          state: 'APPROVED',
+          users: ['octocat'],
+        },
+        {
+          state: 'CHANGES_REQUESTED',
+          users: ['gitify-app'],
+        },
+      ],
     },
     repository: {
       id: 57216596,
