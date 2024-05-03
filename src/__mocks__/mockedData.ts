@@ -81,6 +81,10 @@ export const mockedGitHubNotifications: Notification[] = [
           state: 'CHANGES_REQUESTED',
           users: ['gitify-app'],
         },
+        {
+          state: 'PENDING',
+          users: ['gitify-user'],
+        },
       ],
     },
     repository: {

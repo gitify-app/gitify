@@ -185,6 +185,12 @@ exports[`routes/Notifications.tsx should render itself & its children (show acco
                   "gitify-app",
                 ],
               },
+              {
+                "state": "PENDING",
+                "users": [
+                  "gitify-user",
+                ],
+              },
             ],
             "state": "open",
             "title": "I am a robot and this is a test!",
@@ -347,6 +353,12 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
                 "state": "CHANGES_REQUESTED",
                 "users": [
                   "gitify-app",
+                ],
+              },
+              {
+                "state": "PENDING",
+                "users": [
+                  "gitify-user",
                 ],
               },
             ],
