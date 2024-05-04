@@ -302,20 +302,15 @@ export async function getLatestReviewForReviewers(
         state: prReview.state,
         users: [prReview.user.login],
       });
-      continue;
+    } else {
+      reviewerFound.users.push(prReview.user.login);
     }
-
-    reviewerFound.users.push(prReview.user.login);
   }
 
-  // Sort the reviews by state for consistent draw order
-  return [
-    ...reviewers.filter((review) => review.state === 'APPROVED'),
-    ...reviewers.filter((review) => review.state === 'CHANGES_REQUESTED'),
-    ...reviewers.filter((review) => review.state === 'COMMENTED'),
-    ...reviewers.filter((review) => review.state === 'DISMISSED'),
-    ...reviewers.filter((review) => review.state === 'PENDING'),
-  ];
+  // Sort reviews by state for consistent order when rendering
+  return reviewers.sort((a, b) => {
+    return a.state.localeCompare(b.state);
+  });
 }
 
 async function getGitifySubjectForRelease(
