@@ -2,12 +2,10 @@ import type { AuthState } from '../types';
 import type {
   Discussion,
   DiscussionComment,
-  GraphQLSearch,
   Notification,
 } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
-import { getHtmlUrl } from './api/client';
-import { apiRequestAuth } from './api/request';
+import { getHtmlUrl, searchDiscussions } from './api/client';
 import { Constants } from './constants';
 import { getCheckSuiteAttributes, getWorkflowRunAttributes } from './subject';
 
@@ -60,18 +58,6 @@ export function generateNotificationReferrerId(
     `018:NotificationThread${notificationId}:${userId}`,
   );
   return buffer.toString('base64');
-}
-
-export function addHours(date: string, hours: number): string {
-  return new Date(new Date(date).getTime() + hours * 36e5).toISOString();
-}
-
-export function formatSearchQueryString(
-  repo: string,
-  title: string,
-  lastUpdated: string,
-): string {
-  return `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
 }
 
 export function getCheckSuiteUrl(notification: Notification) {
@@ -145,85 +131,21 @@ export async function fetchDiscussion(
   notification: Notification,
   token: string,
 ): Promise<Discussion | null> {
-  const response: GraphQLSearch<Discussion> = await apiRequestAuth(
-    'https://api.github.com/graphql',
-    'POST',
-    token,
-    {
-      query: `
-        fragment AuthorFields on Actor {
-          login
-          url
-          avatar_url: avatarUrl
-          type: __typename
-        }
-      
-        fragment CommentFields on DiscussionComment {
-          databaseId
-          createdAt
-          author {
-            ...AuthorFields
-          }
-        }
-      
-        query fetchDiscussions(
-          $queryStatement: String!,
-          $type: SearchType!,
-          $firstDiscussions: Int,
-          $lastComments: Int,
-          $firstReplies: Int
-        ) {
-          search(query:$queryStatement, type: $type, first: $firstDiscussions) {
-            nodes {
-              ... on Discussion {
-                viewerSubscription
-                title
-                stateReason
-                isAnswered
-                url
-                author {
-                  ...AuthorFields
-                }
-                comments(last: $lastComments){
-                  nodes {
-                    ...CommentFields
-                    replies(last: $firstReplies) {
-                      nodes {
-                        ...CommentFields
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      `,
-      variables: {
-        queryStatement: formatSearchQueryString(
-          notification.repository.full_name,
-          notification.subject.title,
-          notification.updated_at,
-        ),
-        type: 'DISCUSSION',
-        firstDiscussions: 10,
-        lastComments: 100,
-        firstReplies: 1,
-      },
-    },
-  );
+  try {
+    const response = await searchDiscussions(notification, token);
 
-  let discussions =
-    response?.data?.data.search.nodes.filter(
-      (discussion) => discussion.title === notification.subject.title,
-    ) || [];
+    let discussions =
+      response.data?.data.search.nodes.filter(
+        (discussion) => discussion.title === notification.subject.title,
+      ) || [];
 
-  if (discussions.length > 1)
-    discussions = discussions.filter(
-      (discussion) => discussion.viewerSubscription === 'SUBSCRIBED',
-    );
+    if (discussions.length > 1)
+      discussions = discussions.filter(
+        (discussion) => discussion.viewerSubscription === 'SUBSCRIBED',
+      );
 
-  return discussions[0];
+    return discussions[0];
+  } catch (err) {}
 }
 
 export function getLatestDiscussionComment(

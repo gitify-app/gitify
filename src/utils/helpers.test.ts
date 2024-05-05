@@ -8,10 +8,8 @@ import {
 import type { SubjectType } from '../typesGitHub';
 import * as apiRequests from './api/request';
 import {
-  addHours,
   addNotificationReferrerIdToUrl,
   formatForDisplay,
-  formatSearchQueryString,
   generateGitHubWebUrl,
   generateNotificationReferrerId,
   getGitHubAPIBaseUrl,
@@ -99,33 +97,6 @@ describe('utils/helpers.ts', () => {
     it('should generate a GitHub API url - enterprise', () => {
       const result = getGitHubAPIBaseUrl('github.manos.im');
       expect(result).toBe('https://github.manos.im/api/v3');
-    });
-  });
-
-  describe('addHours', () => {
-    // Example test using Jest
-    test('adds hours correctly for positive values', () => {
-      const result = addHours('2024-02-20T12:00:00.000Z', 3);
-      expect(result).toBe('2024-02-20T15:00:00.000Z');
-    });
-
-    test('adds hours correctly for negative values', () => {
-      const result = addHours('2024-02-20T12:00:00.000Z', -2);
-      expect(result).toBe('2024-02-20T10:00:00.000Z');
-    });
-  });
-
-  describe('formatSearchQueryString', () => {
-    test('formats search query string correctly', () => {
-      const result = formatSearchQueryString(
-        'exampleRepo',
-        'exampleTitle',
-        '2024-02-20T12:00:00.000Z',
-      );
-
-      expect(result).toBe(
-        'exampleTitle in:title repo:exampleRepo updated:>2024-02-20T10:00:00.000Z',
-      );
     });
   });
 
@@ -398,7 +369,7 @@ describe('utils/helpers.ts', () => {
         );
       });
 
-      it('when no subject urls and no discussions found via query, default to linking to repository discussions', async () => {
+      it('link to matching discussion and comment hash', async () => {
         const subject = {
           title: '1.16.0',
           url: null,
@@ -407,7 +378,11 @@ describe('utils/helpers.ts', () => {
         };
 
         const requestPromise = new Promise((resolve) =>
-          resolve(mockedGraphQLResponse as AxiosResponse),
+          resolve({
+            data: {
+              ...mockedGraphQLResponse,
+            },
+          } as AxiosResponse),
         ) as AxiosPromise;
 
         apiRequestAuthMock.mockResolvedValue(requestPromise);

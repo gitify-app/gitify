@@ -3,6 +3,8 @@ import type { SettingsState } from '../../types';
 import type {
   Commit,
   CommitComment,
+  Discussion,
+  GraphQLSearch,
   Issue,
   IssueOrPullRequestComment,
   Notification,
@@ -14,6 +16,11 @@ import type {
 } from '../../typesGitHub';
 import { getGitHubAPIBaseUrl } from '../helpers';
 import { apiRequestAuth } from './request';
+
+import { print } from 'graphql/language/printer';
+import Constants from '../constants';
+import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
+import { formatSearchQueryString } from './utils';
 
 /**
  * Get Hypermedia links to resources accessible in GitHub's REST API
@@ -212,4 +219,27 @@ export async function getHtmlUrl(url: string, token: string): Promise<string> {
   } catch (err) {
     console.error('Failed to get html url');
   }
+}
+
+/**
+ * Search for Discussions with matching title and repository
+ *
+ */
+export async function searchDiscussions(
+  notification: Notification,
+  token: string,
+): AxiosPromise<GraphQLSearch<Discussion>> {
+  return apiRequestAuth(Constants.GITHUB_API_GRAPHQL_URL, 'POST', token, {
+    query: print(QUERY_SEARCH_DISCUSSIONS),
+    variables: {
+      queryStatement: formatSearchQueryString(
+        notification.repository.full_name,
+        notification.subject.title,
+        notification.updated_at,
+      ),
+      firstDiscussions: 10,
+      lastComments: 100,
+      firstReplies: 1,
+    },
+  });
 }

@@ -11,6 +11,7 @@ export const Constants = {
   },
 
   GITHUB_API_BASE_URL: 'https://api.github.com',
+  GITHUB_API_GRAPHQL_URL: 'https://api.github.com/graphql',
 
   REPO_SLUG: 'gitify-app/gitify',
 
