@@ -1,4 +1,3 @@
-import type { AuthState } from '../types';
 import type {
   CheckSuiteAttributes,
   CheckSuiteStatus,
@@ -21,19 +20,13 @@ import {
   getPullRequestReviews,
   getRelease,
 } from './api/client';
-import {
-  fetchDiscussion,
-  getLatestDiscussionComment,
-  getTokenForHost,
-} from './helpers';
+import { fetchDiscussion, getLatestDiscussionComment } from './helpers';
 
 export async function getGitifySubjectDetails(
   notification: Notification,
-  accounts: AuthState,
+  token: string,
 ): Promise<GitifySubject> {
   try {
-    const token = getTokenForHost(notification.hostname, accounts);
-
     switch (notification.subject.type) {
       case 'CheckSuite':
         return getGitifySubjectForCheckSuite(notification);

@@ -47,7 +47,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -64,7 +64,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -81,7 +81,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -98,7 +98,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -115,7 +115,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -132,7 +132,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toBeNull();
@@ -146,7 +146,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toBeNull();
@@ -174,7 +174,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -204,7 +204,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -246,7 +246,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -273,7 +273,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -300,7 +300,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -327,7 +327,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -354,7 +354,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -381,7 +381,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -411,7 +411,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -449,7 +449,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -474,7 +474,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -503,7 +503,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -532,7 +532,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -561,7 +561,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -589,7 +589,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -637,7 +637,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -672,7 +672,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -707,7 +707,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -742,7 +742,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -776,7 +776,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -809,7 +809,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -908,7 +908,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -932,7 +932,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toEqual({
@@ -950,7 +950,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toBeNull();
@@ -964,7 +964,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toBeNull();
@@ -981,7 +981,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts,
+          mockAccounts.token,
         );
 
         expect(result).toBeNull();
@@ -1005,7 +1005,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/1')
           .replyWithError(mockError);
 
-        await getGitifySubjectDetails(mockNotification, mockAccounts);
+        await getGitifySubjectDetails(mockNotification, mockAccounts.token);
 
         expect(consoleErrorSpy).toHaveBeenCalledWith(
           'Error occurred while fetching details for Issue notification: This issue will throw an error',
