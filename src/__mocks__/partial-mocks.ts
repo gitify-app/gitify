@@ -1,11 +1,9 @@
 import type { Notification, Subject, User } from '../typesGitHub';
-import Constants from '../utils/constants';
 
 export function partialMockNotification(
   subject: Partial<Subject>,
 ): Notification {
   const mockNotification: Partial<Notification> = {
-    hostname: Constants.GITHUB_API_BASE_URL,
     subject: subject as Subject,
   };
 
