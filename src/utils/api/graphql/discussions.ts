@@ -26,7 +26,7 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
     $queryStatement: String!,
     $firstDiscussions: Int,
     $lastComments: Int,
-    $firstReplies: Int
+    $lastReplies: Int
   ) {
     search(query:$queryStatement, type: DISCUSSION, first: $firstDiscussions) {
       nodes {
@@ -42,7 +42,7 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
           comments(last: $lastComments){
             nodes {
               ...CommentFields
-              replies(last: $firstReplies) {
+              replies(last: $lastReplies) {
                 nodes {
                   ...CommentFields
                 }
