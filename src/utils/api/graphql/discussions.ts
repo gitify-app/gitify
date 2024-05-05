@@ -13,9 +13,11 @@ const FRAGMENT_COMMENTS = gql`
   fragment CommentFields on DiscussionComment {
     databaseId
     createdAt
-    author 
+    author {
       ...AuthorFields
+    }
   }
+
   ${FRAGMENT_AUTHOR}
 `;
 
@@ -26,7 +28,7 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
     $lastComments: Int,
     $firstReplies: Int
   ) {
-    search(query:$queryStatement, type: "DISCUSSION", first: $firstDiscussions) {
+    search(query:$queryStatement, type: DISCUSSION, first: $firstDiscussions) {
       nodes {
         ... on Discussion {
           viewerSubscription
