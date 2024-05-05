@@ -2,7 +2,6 @@ import { addHours, formatSearchQueryString } from './utils';
 
 describe('utils/api/utils.ts', () => {
   describe('addHours', () => {
-    // Example test using Jest
     test('adds hours correctly for positive values', () => {
       const result = addHours('2024-02-20T12:00:00.000Z', 3);
       expect(result).toBe('2024-02-20T15:00:00.000Z');

@@ -222,7 +222,9 @@ export async function getHtmlUrl(url: string, token: string): Promise<string> {
 }
 
 /**
- * Search for Discussions with matching title and repository
+ * Search for Discussions that match notification title and repository.
+ *
+ * Returns first 10 matching discussions and their latest comments / replies
  *
  */
 export async function searchDiscussions(
@@ -239,7 +241,7 @@ export async function searchDiscussions(
       ),
       firstDiscussions: 10,
       lastComments: 100,
-      firstReplies: 1,
+      lastReplies: 1,
     },
   });
 }
