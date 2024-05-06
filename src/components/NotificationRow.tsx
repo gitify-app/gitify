@@ -20,6 +20,7 @@ import { formatForDisplay, openInBrowser } from '../utils/helpers';
 import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
+  getPullRequestReviewIcon,
 } from '../utils/icons';
 import { formatReason } from '../utils/reason';
 
@@ -69,13 +70,14 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const reason = formatReason(notification.reason);
   const NotificationIcon = getNotificationTypeIcon(notification.subject);
   const iconColor = getNotificationTypeIconColor(notification.subject);
+
   const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
     addSuffix: true,
   });
-
   const updatedLabel = notification.subject.user
     ? `${notification.subject.user.login} updated ${updatedAt}`
     : `Updated ${updatedAt}`;
+
   const notificationTitle = formatForDisplay([
     notification.subject.state,
     notification.subject.type,
@@ -131,6 +133,28 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 {reason.title}
               </span>
               <span className="ml-1">{updatedAt}</span>
+              {notification.subject.reviews
+                ? notification.subject.reviews.map((review) => {
+                    const icon = getPullRequestReviewIcon(review);
+                    if (!icon) {
+                      return null;
+                    }
+
+                    return (
+                      <span
+                        key={review.state}
+                        title={icon.description}
+                        className="ml-1"
+                      >
+                        <icon.type
+                          size={16}
+                          className={icon.color}
+                          aria-label={icon.description}
+                        />
+                      </span>
+                    );
+                  })
+                : null}
             </span>
           </span>
         </div>

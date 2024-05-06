@@ -2,8 +2,10 @@ import type {
   CheckSuiteAttributes,
   CheckSuiteStatus,
   DiscussionStateType,
+  GitifyPullRequestReview,
   GitifySubject,
   Notification,
+  PullRequestReview,
   PullRequestStateType,
   SubjectUser,
   User,
@@ -15,6 +17,7 @@ import {
   getIssue,
   getIssueOrPullRequestComment,
   getPullRequest,
+  getPullRequestReviews,
   getRelease,
 } from './api/client';
 import { fetchDiscussion, getLatestDiscussionComment } from './helpers';
@@ -237,6 +240,8 @@ async function getGitifySubjectForPullRequest(
     prCommentUser = prComment.user;
   }
 
+  const reviews = await getLatestReviewForReviewers(notification, token);
+
   return {
     state: prState,
     user: {
@@ -245,7 +250,60 @@ async function getGitifySubjectForPullRequest(
       avatar_url: prCommentUser?.avatar_url ?? pr.user.avatar_url,
       type: prCommentUser?.type ?? pr.user.type,
     },
+    reviews: reviews,
   };
+}
+
+export async function getLatestReviewForReviewers(
+  notification: Notification,
+  token: string,
+): Promise<GitifyPullRequestReview[]> | null {
+  if (notification.subject.type !== 'PullRequest') {
+    return null;
+  }
+
+  const prReviews = await getPullRequestReviews(
+    `${notification.subject.url}/reviews`,
+    token,
+  );
+
+  if (!prReviews.data.length) {
+    return null;
+  }
+
+  // Find the most recent review for each reviewer
+  const latestReviews: PullRequestReview[] = [];
+  for (const prReview of prReviews.data.reverse()) {
+    const reviewerFound = latestReviews.find(
+      (review) => review.user.login === prReview.user.login,
+    );
+
+    if (!reviewerFound) {
+      latestReviews.push(prReview);
+    }
+  }
+
+  // Group by the review state
+  const reviewers: GitifyPullRequestReview[] = [];
+  for (const prReview of latestReviews) {
+    const reviewerFound = reviewers.find(
+      (review) => review.state === prReview.state,
+    );
+
+    if (!reviewerFound) {
+      reviewers.push({
+        state: prReview.state,
+        users: [prReview.user.login],
+      });
+    } else {
+      reviewerFound.users.push(prReview.user.login);
+    }
+  }
+
+  // Sort reviews by state for consistent order when rendering
+  return reviewers.sort((a, b) => {
+    return a.state.localeCompare(b.state);
+  });
 }
 
 async function getGitifySubjectForRelease(

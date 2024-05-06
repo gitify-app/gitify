@@ -10,6 +10,7 @@ import type {
   Notification,
   NotificationThreadSubscription,
   PullRequest,
+  PullRequestReview,
   Release,
   RootHypermediaLinks,
   UserDetails,
@@ -197,6 +198,18 @@ export function getPullRequest(
   url: string,
   token: string,
 ): AxiosPromise<PullRequest> {
+  return apiRequestAuth(url, 'GET', token);
+}
+
+/**
+ * Lists all reviews for a specified pull request. The list of reviews returns in chronological order.
+ *
+ * Endpoint documentation: https://docs.github.com/en/rest/pulls/reviews#list-reviews-for-a-pull-request
+ */
+export function getPullRequestReviews(
+  url: string,
+  token: string,
+): AxiosPromise<PullRequestReview[]> {
   return apiRequestAuth(url, 'GET', token);
 }
 

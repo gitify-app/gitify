@@ -1,3 +1,5 @@
+import type { OcticonProps } from '@primer/octicons-react';
+import type { FC } from 'react';
 import type { Notification } from './typesGitHub';
 
 export interface AuthState {
@@ -101,4 +103,11 @@ export enum IconColor {
   GREEN = 'text-green-500',
   PURPLE = 'text-purple-500',
   RED = 'text-red-500',
+  YELLOW = 'text-yellow-500 dark:text-yellow-300',
 }
+
+export type PullRequestApprovalIcon = {
+  type: FC<OcticonProps>;
+  color: IconColor;
+  description: string;
+};

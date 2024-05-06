@@ -172,6 +172,26 @@ exports[`routes/Notifications.tsx should render itself & its children (show acco
           },
           "subject": {
             "latest_comment_url": "https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448",
+            "reviews": [
+              {
+                "state": "APPROVED",
+                "users": [
+                  "octocat",
+                ],
+              },
+              {
+                "state": "CHANGES_REQUESTED",
+                "users": [
+                  "gitify-app",
+                ],
+              },
+              {
+                "state": "PENDING",
+                "users": [
+                  "gitify-user",
+                ],
+              },
+            ],
             "state": "open",
             "title": "I am a robot and this is a test!",
             "type": "Issue",
@@ -223,6 +243,7 @@ exports[`routes/Notifications.tsx should render itself & its children (show acco
           },
           "subject": {
             "latest_comment_url": "https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302885965",
+            "reviews": null,
             "title": "Improve the UI",
             "type": "Issue",
             "url": "https://api.github.com/repos/gitify-app/notifications-test/issues/4",
@@ -321,6 +342,26 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
           },
           "subject": {
             "latest_comment_url": "https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448",
+            "reviews": [
+              {
+                "state": "APPROVED",
+                "users": [
+                  "octocat",
+                ],
+              },
+              {
+                "state": "CHANGES_REQUESTED",
+                "users": [
+                  "gitify-app",
+                ],
+              },
+              {
+                "state": "PENDING",
+                "users": [
+                  "gitify-user",
+                ],
+              },
+            ],
             "state": "open",
             "title": "I am a robot and this is a test!",
             "type": "Issue",
@@ -372,6 +413,7 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
           },
           "subject": {
             "latest_comment_url": "https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302885965",
+            "reviews": null,
             "title": "Improve the UI",
             "type": "Issue",
             "url": "https://api.github.com/repos/gitify-app/notifications-test/issues/4",
@@ -424,6 +466,7 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
           },
           "subject": {
             "latest_comment_url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3",
+            "reviews": null,
             "title": "Release 0.0.1",
             "type": "Release",
             "url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3",
@@ -468,6 +511,7 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
           },
           "subject": {
             "latest_comment_url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21",
+            "reviews": null,
             "title": "Bump Version",
             "type": "PullRequest",
             "url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/pulls/4",

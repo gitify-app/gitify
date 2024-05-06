@@ -72,6 +72,20 @@ export const mockedGitHubNotifications: Notification[] = [
           'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
         type: 'User',
       },
+      reviews: [
+        {
+          state: 'APPROVED',
+          users: ['octocat'],
+        },
+        {
+          state: 'CHANGES_REQUESTED',
+          users: ['gitify-app'],
+        },
+        {
+          state: 'PENDING',
+          users: ['gitify-user'],
+        },
+      ],
     },
     repository: {
       id: 57216596,
@@ -198,6 +212,7 @@ export const mockedGitHubNotifications: Notification[] = [
       latest_comment_url:
         'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302885965',
       type: 'Issue',
+      reviews: null,
     },
     repository: {
       id: 57216596,
@@ -255,6 +270,7 @@ export const mockedEnterpriseNotifications: Notification[] = [
       latest_comment_url:
         'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3',
       type: 'Release',
+      reviews: null,
     },
     repository: {
       id: 1,
@@ -308,6 +324,7 @@ export const mockedEnterpriseNotifications: Notification[] = [
       latest_comment_url:
         'https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21',
       type: 'PullRequest',
+      reviews: null,
     },
     repository: {
       id: 1,
