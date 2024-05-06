@@ -407,10 +407,8 @@ export interface Release {
 
 export interface GraphQLSearch<T> {
   data: {
-    data: {
-      search: {
-        nodes: T[];
-      };
+    search: {
+      nodes: T[];
     };
   };
 }

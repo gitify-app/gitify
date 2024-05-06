@@ -473,41 +473,37 @@ export const mockDiscussionComments: DiscussionComments = {
 
 export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
   data: {
-    data: {
-      search: {
-        nodes: [
-          {
-            viewerSubscription: 'SUBSCRIBED',
-            title: '1.16.0',
-            isAnswered: false,
-            stateReason: 'OPEN',
-            url: 'https://github.com/gitify-app/notifications-test/discussions/612',
-            author: {
-              login: 'discussion-creator',
-              url: 'https://github.com/discussion-creator',
-              avatar_url:
-                'https://avatars.githubusercontent.com/u/123456789?v=4',
-              type: 'User',
-            },
-            comments: mockDiscussionComments,
+    search: {
+      nodes: [
+        {
+          viewerSubscription: 'SUBSCRIBED',
+          title: '1.16.0',
+          isAnswered: false,
+          stateReason: 'OPEN',
+          url: 'https://github.com/gitify-app/notifications-test/discussions/612',
+          author: {
+            login: 'discussion-creator',
+            url: 'https://github.com/discussion-creator',
+            avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+            type: 'User',
           },
-          {
-            viewerSubscription: 'IGNORED',
-            title: '1.16.0',
-            isAnswered: false,
-            stateReason: 'ANSWERED',
-            url: 'https://github.com/gitify-app/notifications-test/discussions/123',
-            author: {
-              login: 'discussion-creator',
-              url: 'https://github.com/discussion-creator',
-              avatar_url:
-                'https://avatars.githubusercontent.com/u/123456789?v=4',
-              type: 'User',
-            },
-            comments: mockDiscussionComments,
+          comments: mockDiscussionComments,
+        },
+        {
+          viewerSubscription: 'IGNORED',
+          title: '1.16.0',
+          isAnswered: false,
+          stateReason: 'ANSWERED',
+          url: 'https://github.com/gitify-app/notifications-test/discussions/123',
+          author: {
+            login: 'discussion-creator',
+            url: 'https://github.com/discussion-creator',
+            avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+            type: 'User',
           },
-        ],
-      },
+          comments: mockDiscussionComments,
+        },
+      ],
     },
   },
 };
