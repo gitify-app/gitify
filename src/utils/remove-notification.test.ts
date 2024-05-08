@@ -1,3 +1,4 @@
+import { mockSettings } from '../__mocks__/mock-state';
 import {
   mockedSingleAccountNotifications,
   mockedSingleNotification,
@@ -12,6 +13,7 @@ describe('utils/remove-notification.ts', () => {
     expect(mockedSingleAccountNotifications[0].notifications.length).toBe(1);
 
     const result = removeNotification(
+      mockSettings,
       notificationId,
       mockedSingleAccountNotifications,
       hostname,

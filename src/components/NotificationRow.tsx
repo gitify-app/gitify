@@ -47,7 +47,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
       markNotificationDone(notification.id, hostname);
     } else {
       // no need to mark as read, github does it by default when opening it
-      removeNotificationFromState(notification.id, hostname);
+      removeNotificationFromState(settings, notification.id, hostname);
     }
   }, [notifications, notification, accounts, settings]); // notifications required here to prevent weird state issues
 
@@ -84,7 +84,10 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   ]);
 
   return (
-    <div className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group">
+    <div
+      id={notification.id}
+      className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+    >
       <div
         className={`flex justify-center items-center w-5 ${iconColor}`}
         title={notificationTitle}

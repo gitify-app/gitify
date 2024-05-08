@@ -44,6 +44,7 @@ export const defaultSettings: SettingsState = {
   detailedNotifications: false,
   markAsDoneOnOpen: false,
   showAccountHostname: false,
+  delayRemoval: false,
 };
 
 interface AppContextState {
@@ -57,7 +58,11 @@ interface AppContextState {
   notifications: AccountNotifications[];
   status: Status;
   errorDetails: GitifyError;
-  removeNotificationFromState: (id: string, hostname: string) => void;
+  removeNotificationFromState: (
+    settings: SettingsState,
+    id: string,
+    hostname: string,
+  ) => void;
   fetchNotifications: () => Promise<void>;
   markNotificationRead: (id: string, hostname: string) => Promise<void>;
   markNotificationDone: (id: string, hostname: string) => Promise<void>;
@@ -199,31 +204,31 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const markNotificationReadWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await markNotificationRead(accounts, id, hostname),
+      await markNotificationRead(accounts, settings, id, hostname),
     [accounts, notifications],
   );
 
   const markNotificationDoneWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await markNotificationDone(accounts, id, hostname),
+      await markNotificationDone(accounts, settings, id, hostname),
     [accounts, notifications],
   );
 
   const unsubscribeNotificationWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await unsubscribeNotification(accounts, id, hostname),
+      await unsubscribeNotification(accounts, settings, id, hostname),
     [accounts, notifications],
   );
 
   const markRepoNotificationsWithAccounts = useCallback(
     async (repoSlug: string, hostname: string) =>
-      await markRepoNotifications(accounts, repoSlug, hostname),
+      await markRepoNotifications(accounts, settings, repoSlug, hostname),
     [accounts, notifications],
   );
 
   const markRepoNotificationsDoneWithAccounts = useCallback(
     async (repoSlug: string, hostname: string) =>
-      await markRepoNotificationsDone(accounts, repoSlug, hostname),
+      await markRepoNotificationsDone(accounts, settings, repoSlug, hostname),
     [accounts, notifications],
   );
 
