@@ -28,7 +28,7 @@ export function isEnterpriseHost(hostname: string): boolean {
   return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
 }
 
-export function getGitHubAPIBaseUrl(hostname) {
+export function getGitHubAPIBaseUrl(hostname: string): string {
   const isEnterprise = isEnterpriseHost(hostname);
   return isEnterprise
     ? `https://${hostname}/api/v3`
@@ -45,7 +45,7 @@ export function generateNotificationReferrerId(
   return buffer.toString('base64');
 }
 
-export function getCheckSuiteUrl(notification: Notification) {
+export function getCheckSuiteUrl(notification: Notification): string {
   const filters = [];
 
   const checkSuiteAttributes = getCheckSuiteAttributes(notification);
@@ -67,7 +67,7 @@ export function getCheckSuiteUrl(notification: Notification) {
   return actionsURL(notification.repository.html_url, filters);
 }
 
-export function getWorkflowRunUrl(notification: Notification) {
+export function getWorkflowRunUrl(notification: Notification): string {
   const filters = [];
 
   const workflowRunAttributes = getWorkflowRunAttributes(notification);
@@ -108,10 +108,10 @@ async function getDiscussionUrl(
 
     const comments = discussion.comments.nodes;
 
-    const latestCommentId = getLatestDiscussionComment(comments)?.databaseId;
+    const latestComment = getLatestDiscussionComment(comments);
 
-    if (latestCommentId) {
-      url.hash = `#discussioncomment-${latestCommentId}`;
+    if (latestComment) {
+      url.hash = `#discussioncomment-${latestComment.databaseId}`;
     }
   }
 
@@ -130,10 +130,11 @@ export async function fetchDiscussion(
         (discussion) => discussion.title === notification.subject.title,
       ) || [];
 
-    if (discussions.length > 1)
+    if (discussions.length > 1) {
       discussions = discussions.filter(
         (discussion) => discussion.viewerSubscription === 'SUBSCRIBED',
       );
+    }
 
     return discussions[0];
   } catch (err) {}
@@ -146,10 +147,13 @@ export function getLatestDiscussionComment(
     return null;
   }
 
-  return comments
-    .flatMap((comment) => comment.replies.nodes)
-    .concat([comments[comments.length - 1]])
-    .reduce((a, b) => (a.createdAt > b.createdAt ? a : b));
+  // Return latest reply if available
+  if (comments[0].replies.nodes.length === 1) {
+    return comments[0].replies.nodes[0];
+  }
+
+  // Return latest comment if no replies
+  return comments[0];
 }
 
 export async function generateGitHubWebUrl(
@@ -191,7 +195,7 @@ export async function generateGitHubWebUrl(
   return url.toString();
 }
 
-export function formatForDisplay(text: string[]) {
+export function formatForDisplay(text: string[]): string {
   if (!text) {
     return '';
   }
