@@ -11,7 +11,6 @@ import {
   formatForDisplay,
   generateGitHubWebUrl,
   generateNotificationReferrerId,
-  getGitHubAPIBaseUrl,
   isEnterpriseHost,
   isGitHubLoggedIn,
 } from './helpers';
@@ -47,18 +46,6 @@ describe('utils/helpers.ts', () => {
       expect(referrerId).toBe(
         'MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=',
       );
-    });
-  });
-
-  describe('generateGitHubAPIUrl', () => {
-    it('should generate a GitHub API url - non enterprise', () => {
-      const result = getGitHubAPIBaseUrl('github.com');
-      expect(result).toBe('https://api.github.com');
-    });
-
-    it('should generate a GitHub API url - enterprise', () => {
-      const result = getGitHubAPIBaseUrl('github.manos.im');
-      expect(result).toBe('https://github.manos.im/api/v3');
     });
   });
 
