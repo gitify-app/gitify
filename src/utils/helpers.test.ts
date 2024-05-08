@@ -8,7 +8,6 @@ import {
 import type { SubjectType } from '../typesGitHub';
 import * as apiRequests from './api/request';
 import {
-  addNotificationReferrerIdToUrl,
   formatForDisplay,
   generateGitHubWebUrl,
   generateNotificationReferrerId,
@@ -36,43 +35,6 @@ describe('utils/helpers.ts', () => {
     it('should return false for non-enterprise host', () => {
       expect(isEnterpriseHost('github.com')).toBe(false);
       expect(isEnterpriseHost('api.github.com')).toBe(false);
-    });
-  });
-
-  describe('addNotificationReferrerIdToUrl', () => {
-    it('should add notification_referrer_id to the URL', () => {
-      // Mock data
-      const url = 'https://github.com/gitify-app/notifications-test';
-      const notificationId = '123';
-      const userId = 456;
-
-      const result = addNotificationReferrerIdToUrl(
-        url,
-        notificationId,
-        userId,
-      );
-
-      expect(result).toEqual(
-        'https://github.com/gitify-app/notifications-test?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEyMzo0NTY%3D',
-      );
-    });
-
-    it('should add notification_referrer_id to the URL, preserving anchor tags', () => {
-      // Mock data
-      const url =
-        'https://github.com/gitify-app/notifications-test/pull/123#issuecomment-1951055051';
-      const notificationId = '123';
-      const userId = 456;
-
-      const result = addNotificationReferrerIdToUrl(
-        url,
-        notificationId,
-        userId,
-      );
-
-      expect(result).toEqual(
-        'https://github.com/gitify-app/notifications-test/pull/123?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEyMzo0NTY%3D#issuecomment-1951055051',
-      );
     });
   });
 
