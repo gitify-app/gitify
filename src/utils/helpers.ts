@@ -28,7 +28,7 @@ export function isEnterpriseHost(hostname: string): boolean {
   return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
 }
 
-export function getGitHubAPIBaseUrl(hostname) {
+export function getGitHubAPIBaseUrl(hostname: string): string {
   const isEnterprise = isEnterpriseHost(hostname);
   return isEnterprise
     ? `https://${hostname}/api/v3`
@@ -60,7 +60,7 @@ export function generateNotificationReferrerId(
   return buffer.toString('base64');
 }
 
-export function getCheckSuiteUrl(notification: Notification) {
+export function getCheckSuiteUrl(notification: Notification): string {
   let url = `${notification.repository.html_url}/actions`;
   const filters = [];
 
@@ -87,7 +87,7 @@ export function getCheckSuiteUrl(notification: Notification) {
   return url;
 }
 
-export function getWorkflowRunUrl(notification: Notification) {
+export function getWorkflowRunUrl(notification: Notification): string {
   let url = `${notification.repository.html_url}/actions`;
   const filters = [];
 
@@ -197,7 +197,7 @@ export async function generateGitHubWebUrl(
   return url;
 }
 
-export function formatForDisplay(text: string[]) {
+export function formatForDisplay(text: string[]): string {
   if (!text) {
     return '';
   }
