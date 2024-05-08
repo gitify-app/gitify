@@ -253,7 +253,7 @@ export async function searchDiscussions(
         notification.updated_at,
       ),
       firstDiscussions: 10,
-      lastComments: 100,
+      lastComments: 1,
       lastReplies: 1,
     },
   });

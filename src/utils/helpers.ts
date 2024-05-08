@@ -117,10 +117,10 @@ async function getDiscussionUrl(
 
     const comments = discussion.comments.nodes;
 
-    const latestCommentId = getLatestDiscussionComment(comments)?.databaseId;
+    const latestComment = getLatestDiscussionComment(comments);
 
-    if (latestCommentId) {
-      url += `#discussioncomment-${latestCommentId}`;
+    if (latestComment) {
+      url += `#discussioncomment-${latestComment.databaseId}`;
     }
   }
 
@@ -139,10 +139,11 @@ export async function fetchDiscussion(
         (discussion) => discussion.title === notification.subject.title,
       ) || [];
 
-    if (discussions.length > 1)
+    if (discussions.length > 1) {
       discussions = discussions.filter(
         (discussion) => discussion.viewerSubscription === 'SUBSCRIBED',
       );
+    }
 
     return discussions[0];
   } catch (err) {}
@@ -155,10 +156,13 @@ export function getLatestDiscussionComment(
     return null;
   }
 
-  return comments
-    .flatMap((comment) => comment.replies.nodes)
-    .concat([comments[comments.length - 1]])
-    .reduce((a, b) => (a.createdAt > b.createdAt ? a : b));
+  // Return latest reply if available
+  if (comments[0].replies.nodes.length === 1) {
+    return comments[0].replies.nodes[0];
+  }
+
+  // Return latest comment if no replies
+  return comments[0];
 }
 
 export async function generateGitHubWebUrl(
