@@ -106,7 +106,7 @@ mb.on('ready', () => {
     }
   });
 
-  ipcMain.on('set-login-item-settings', (event, settings) => {
+  ipcMain.on('set-login-item-settings', (_, settings) => {
     app.setLoginItemSettings(settings);
   });
 });
