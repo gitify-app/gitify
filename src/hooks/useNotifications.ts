@@ -199,14 +199,11 @@ export const useNotifications = (): NotificationsState => {
 
       try {
         await markRepositoryNotificationsAsRead(repoSlug, hostname, token);
-        let updatedNotifications = notifications;
-        if (settings.delayNotificationState) {
-          updatedNotifications = removeNotifications(
-            repoSlug,
-            notifications,
-            hostname,
-          );
-        }
+        const updatedNotifications = removeNotifications(
+          repoSlug,
+          notifications,
+          hostname,
+        );
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
