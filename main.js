@@ -6,8 +6,6 @@ const path = require('node:path');
 
 require('@electron/remote/main').initialize();
 
-app.setAppUserModelId('com.electron.gitify');
-
 const iconIdle = path.join(
   __dirname,
   'assets',
@@ -34,7 +32,7 @@ app.on('ready', async () => {
   await onFirstRunMaybe();
 });
 
-const menubarApp = menubar({
+const mb = menubar({
   icon: iconIdle,
   index: `file://${__dirname}/index.html`,
   browserWindow: browserWindowOpts,
@@ -42,73 +40,73 @@ const menubarApp = menubar({
   showDockIcon: false,
 });
 
-menubarApp.on('ready', () => {
+mb.on('ready', () => {
+  mb.app.setAppUserModelId('com.electron.gitify');
+  mb.tray.setIgnoreDoubleClickEvents(true);
   // Force the window to retrieve its previous zoom factor
-  menubarApp.window.webContents.setZoomFactor(
-    menubarApp.window.webContents.getZoomFactor(),
-  );
+  mb.window.webContents.setZoomFactor(mb.window.webContents.getZoomFactor());
 
-  menubarApp.tray.setIgnoreDoubleClickEvents(true);
+  mb.window.webContents.on('devtools-opened', () => {
+    mb.window.setSize(800, 600);
+    mb.window.center();
+    mb.window.resizable = true;
+  });
+
+  mb.window.webContents.on('devtools-closed', () => {
+    const trayBounds = mb.tray.getBounds();
+    mb.window.setSize(browserWindowOpts.width, browserWindowOpts.height);
+    mb.positioner.move('trayCenter', trayBounds);
+    mb.window.resizable = false;
+  });
+
+  mb.window.webContents.on('before-input-event', (event, input) => {
+    if (input.key === 'Escape') {
+      mb.window.hide();
+      event.preventDefault();
+    }
+  });
 
   autoUpdater.checkForUpdatesAndNotify();
 
   nativeTheme.on('updated', () => {
     if (nativeTheme.shouldUseDarkColors) {
-      menubarApp.window.webContents.send('update-native-theme', 'DARK');
+      mb.window.webContents.send('update-native-theme', 'DARK');
     } else {
-      menubarApp.window.webContents.send('update-native-theme', 'LIGHT');
+      mb.window.webContents.send('update-native-theme', 'LIGHT');
     }
   });
 
   ipcMain.handle('get-platform', async () => {
     return process.platform;
   });
+
   ipcMain.handle('get-app-version', async () => {
     return app.getVersion();
   });
 
-  ipcMain.on('reopen-window', () => menubarApp.showWindow());
-  ipcMain.on('hide-window', () => menubarApp.hideWindow());
+  ipcMain.on('reopen-window', () => mb.showWindow());
 
-  ipcMain.on('app-quit', () => menubarApp.app.quit());
+  ipcMain.on('hide-window', () => mb.hideWindow());
+
+  ipcMain.on('app-quit', () => mb.app.quit());
+
   ipcMain.on('update-icon', (_, arg) => {
-    if (!menubarApp.tray.isDestroyed()) {
+    if (!mb.tray.isDestroyed()) {
       if (arg === 'TrayActive') {
-        menubarApp.tray.setImage(iconActive);
+        mb.tray.setImage(iconActive);
       } else {
-        menubarApp.tray.setImage(iconIdle);
+        mb.tray.setImage(iconIdle);
       }
     }
   });
+
   ipcMain.on('update-title', (_, title) => {
-    if (!menubarApp.tray.isDestroyed()) {
-      menubarApp.tray.setTitle(title);
+    if (!mb.tray.isDestroyed()) {
+      mb.tray.setTitle(title);
     }
   });
+
   ipcMain.on('set-login-item-settings', (event, settings) => {
     app.setLoginItemSettings(settings);
-  });
-
-  menubarApp.window.webContents.on('devtools-opened', () => {
-    menubarApp.window.setSize(800, 600);
-    menubarApp.window.center();
-    menubarApp.window.resizable = true;
-  });
-
-  menubarApp.window.webContents.on('devtools-closed', () => {
-    const trayBounds = menubarApp.tray.getBounds();
-    menubarApp.window.setSize(
-      browserWindowOpts.width,
-      browserWindowOpts.height,
-    );
-    menubarApp.positioner.move('trayCenter', trayBounds);
-    menubarApp.window.resizable = false;
-  });
-
-  menubarApp.window.webContents.on('before-input-event', (event, input) => {
-    if (input.key === 'Escape') {
-      menubarApp.window.hide();
-      event.preventDefault();
-    }
   });
 });
