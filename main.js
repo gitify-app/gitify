@@ -43,6 +43,8 @@ const menubarApp = menubar({
 });
 
 menubarApp.on('ready', () => {
+  menubarApp.hideWindow();
+
   // Force the window to retrieve its previous zoom factor
   menubarApp.window.webContents.setZoomFactor(
     menubarApp.window.webContents.getZoomFactor(),
