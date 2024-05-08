@@ -333,7 +333,7 @@ describe('context/App.tsx', () => {
         detailedNotifications: false,
         markAsDoneOnOpen: false,
         showAccountHostname: false,
-        delayRemoval: false,
+        delayNotificationState: false,
       },
     );
   });
@@ -378,7 +378,7 @@ describe('context/App.tsx', () => {
         detailedNotifications: false,
         markAsDoneOnOpen: false,
         showAccountHostname: false,
-        delayRemoval: false,
+        delayNotificationState: false,
       },
     );
   });

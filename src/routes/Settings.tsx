@@ -237,11 +237,11 @@ export const SettingsRoute: FC = () => {
             }
           />
           <Checkbox
-            name="delayRemoval"
-            label="Delay notification removal"
-            checked={settings.delayRemoval}
+            name="delayNotificationState"
+            label="Delay notification state"
+            checked={settings.delayNotificationState}
             onChange={(evt) =>
-              updateSetting('delayRemoval', evt.target.checked)
+              updateSetting('delayNotificationState', evt.target.checked)
             }
             tooltip={
               <div>

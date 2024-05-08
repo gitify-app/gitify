@@ -44,7 +44,7 @@ export const defaultSettings: SettingsState = {
   detailedNotifications: false,
   markAsDoneOnOpen: false,
   showAccountHostname: false,
-  delayRemoval: false,
+  delayNotificationState: false,
 };
 
 interface AppContextState {

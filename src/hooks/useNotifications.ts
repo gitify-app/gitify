@@ -200,7 +200,7 @@ export const useNotifications = (): NotificationsState => {
       try {
         await markRepositoryNotificationsAsRead(repoSlug, hostname, token);
         let updatedNotifications = notifications;
-        if (settings.delayRemoval) {
+        if (settings.delayNotificationState) {
           updatedNotifications = removeNotifications(
             repoSlug,
             notifications,

@@ -7,7 +7,7 @@ export const removeNotification = (
   notifications: AccountNotifications[],
   hostname: string,
 ): AccountNotifications[] => {
-  if (settings.delayRemoval) {
+  if (settings.delayNotificationState) {
     const notificationRow = document.getElementById(id);
     notificationRow.className += ` ${Constants.READ_CLASS_NAME}`;
     return notifications;

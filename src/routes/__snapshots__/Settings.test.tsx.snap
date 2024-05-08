@@ -391,7 +391,7 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
           >
             <input
               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-              id="delayRemoval"
+              id="delayNotificationState"
               type="checkbox"
             />
           </div>
@@ -400,13 +400,13 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
-              for="delayRemoval"
+              for="delayNotificationState"
             >
-              Delay notification removal
+              Delay notification state
               <span
-                aria-label="tooltip-delayRemoval"
+                aria-label="tooltip-delayNotificationState"
                 class="relative"
-                id="tooltip-delayRemoval"
+                id="tooltip-delayNotificationState"
               >
                 <svg
                   aria-hidden="true"
