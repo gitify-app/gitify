@@ -4,7 +4,6 @@ import {
   mockedSingleNotification,
 } from '../__mocks__/mockedData';
 import Constants from './constants';
-// import Constants from './constants';
 import { removeNotification } from './remove-notification';
 
 describe('utils/remove-notification.ts', () => {
