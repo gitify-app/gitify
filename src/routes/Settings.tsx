@@ -236,6 +236,23 @@ export const SettingsRoute: FC = () => {
               updateSetting('markAsDoneOnOpen', evt.target.checked)
             }
           />
+          <Checkbox
+            name="delayNotificationState"
+            label="Delay notification state"
+            checked={settings.delayNotificationState}
+            onChange={(evt) =>
+              updateSetting('delayNotificationState', evt.target.checked)
+            }
+            tooltip={
+              <div>
+                <div className="pb-3">
+                  Keep the notification within Gitify window upon interaction
+                  (click, mark as read, mark as done, etc) until the next
+                  refresh window (scheduled or user initiated)
+                </div>
+              </div>
+            }
+          />
         </fieldset>
 
         <fieldset className="mb-3">
