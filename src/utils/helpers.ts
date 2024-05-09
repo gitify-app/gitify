@@ -28,28 +28,6 @@ export function isEnterpriseHost(hostname: string): boolean {
   return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
 }
 
-export function getGitHubAPIBaseUrl(hostname: string): string {
-  const isEnterprise = isEnterpriseHost(hostname);
-  return isEnterprise
-    ? `https://${hostname}/api/v3`
-    : Constants.GITHUB_API_BASE_URL;
-}
-
-export function addNotificationReferrerIdToUrl(
-  url: string,
-  notificationId: string,
-  userId: number,
-): string {
-  const parsedUrl = new URL(url);
-
-  parsedUrl.searchParams.set(
-    'notification_referrer_id',
-    generateNotificationReferrerId(notificationId, userId),
-  );
-
-  return parsedUrl.href;
-}
-
 export function generateNotificationReferrerId(
   notificationId: string,
   userId: number,
@@ -61,7 +39,6 @@ export function generateNotificationReferrerId(
 }
 
 export function getCheckSuiteUrl(notification: Notification): string {
-  let url = `${notification.repository.html_url}/actions`;
   const filters = [];
 
   const checkSuiteAttributes = getCheckSuiteAttributes(notification);
@@ -80,15 +57,10 @@ export function getCheckSuiteUrl(notification: Notification): string {
     filters.push(`branch:${checkSuiteAttributes.branchName}`);
   }
 
-  if (filters.length > 0) {
-    url += `?query=${filters.join('+')}`;
-  }
-
-  return url;
+  return actionsURL(notification.repository.html_url, filters);
 }
 
 export function getWorkflowRunUrl(notification: Notification): string {
-  let url = `${notification.repository.html_url}/actions`;
   const filters = [];
 
   const workflowRunAttributes = getWorkflowRunAttributes(notification);
@@ -97,34 +69,46 @@ export function getWorkflowRunUrl(notification: Notification): string {
     filters.push(`is:${workflowRunAttributes.status}`);
   }
 
+  return actionsURL(notification.repository.html_url, filters);
+}
+
+/**
+ * Construct a GitHub Actions URL for a repository with optional filters.
+ */
+export function actionsURL(repositoryURL: string, filters: string[]): string {
+  const url = new URL(repositoryURL);
+  url.pathname += '/actions';
+
   if (filters.length > 0) {
-    url += `?query=${filters.join('+')}`;
+    url.searchParams.append('query', filters.join('+'));
   }
 
-  return url;
+  // Note: the GitHub Actions UI cannot handle encoded '+' characters.
+  return url.toString().replace(/%2B/g, '+');
 }
 
 async function getDiscussionUrl(
   notification: Notification,
   token: string,
 ): Promise<string> {
-  let url = `${notification.repository.html_url}/discussions`;
+  const url = new URL(notification.repository.html_url);
+  url.pathname += '/discussions';
 
   const discussion = await fetchDiscussion(notification, token);
 
   if (discussion) {
-    url = discussion.url;
+    url.href = discussion.url;
 
     const comments = discussion.comments.nodes;
 
     const latestComment = getLatestDiscussionComment(comments);
 
     if (latestComment) {
-      url += `#discussioncomment-${latestComment.databaseId}`;
+      url.hash = `#discussioncomment-${latestComment.databaseId}`;
     }
   }
 
-  return url;
+  return url.toString();
 }
 
 export async function fetchDiscussion(
@@ -169,36 +153,39 @@ export async function generateGitHubWebUrl(
   notification: Notification,
   accounts: AuthState,
 ): Promise<string> {
-  let url = notification.repository.html_url;
+  const url = new URL(notification.repository.html_url);
   const token = getTokenForHost(notification.hostname, accounts);
 
   if (notification.subject.latest_comment_url) {
-    url = await getHtmlUrl(notification.subject.latest_comment_url, token);
+    url.href = await getHtmlUrl(notification.subject.latest_comment_url, token);
   } else if (notification.subject.url) {
-    url = await getHtmlUrl(notification.subject.url, token);
+    url.href = await getHtmlUrl(notification.subject.url, token);
   } else {
     // Perform any specific notification type handling (only required for a few special notification scenarios)
     switch (notification.subject.type) {
       case 'CheckSuite':
-        url = getCheckSuiteUrl(notification);
+        url.href = getCheckSuiteUrl(notification);
         break;
       case 'Discussion':
-        url = await getDiscussionUrl(notification, token);
+        url.href = await getDiscussionUrl(notification, token);
         break;
       case 'RepositoryInvitation':
-        url = `${notification.repository.html_url}/invitations`;
+        url.pathname += '/invitations';
         break;
       case 'WorkflowRun':
-        url = getWorkflowRunUrl(notification);
+        url.href = getWorkflowRunUrl(notification);
         break;
       default:
         break;
     }
   }
 
-  url = addNotificationReferrerIdToUrl(url, notification.id, accounts.user?.id);
+  url.searchParams.set(
+    'notification_referrer_id',
+    generateNotificationReferrerId(notification.id, accounts.user?.id),
+  );
 
-  return url;
+  return url.toString();
 }
 
 export function formatForDisplay(text: string[]): string {

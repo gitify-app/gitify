@@ -336,6 +336,34 @@ describe('routes/Settings.tsx', () => {
       expect(updateSetting).toHaveBeenCalledTimes(1);
       expect(updateSetting).toHaveBeenCalledWith('markAsDoneOnOpen', false);
     });
+
+    it('should toggle the delayNotificationState checkbox', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              settings: mockSettings,
+              accounts: mockAccounts,
+              updateSetting,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      fireEvent.click(screen.getByLabelText('Delay notification state'), {
+        target: { checked: true },
+      });
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith(
+        'delayNotificationState',
+        false,
+      );
+    });
   });
 
   describe('System section', () => {

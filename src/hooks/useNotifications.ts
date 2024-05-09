@@ -25,33 +25,42 @@ import { removeNotifications } from '../utils/remove-notifications';
 
 interface NotificationsState {
   notifications: AccountNotifications[];
-  removeNotificationFromState: (id: string, hostname: string) => void;
+  removeNotificationFromState: (
+    settings: SettingsState,
+    id: string,
+    hostname: string,
+  ) => void;
   fetchNotifications: (
     accounts: AuthState,
     settings: SettingsState,
   ) => Promise<void>;
   markNotificationRead: (
     accounts: AuthState,
+    settings: SettingsState,
     id: string,
     hostname: string,
   ) => Promise<void>;
   markNotificationDone: (
     accounts: AuthState,
+    settings: SettingsState,
     id: string,
     hostname: string,
   ) => Promise<void>;
   unsubscribeNotification: (
     accounts: AuthState,
+    settings: SettingsState,
     id: string,
     hostname: string,
   ) => Promise<void>;
   markRepoNotifications: (
     accounts: AuthState,
+    settings: SettingsState,
     repoSlug: string,
     hostname: string,
   ) => Promise<void>;
   markRepoNotificationsDone: (
     accounts: AuthState,
+    settings: SettingsState,
     repoSlug: string,
     hostname: string,
   ) => Promise<void>;
@@ -94,7 +103,12 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markNotificationRead = useCallback(
-    async (accounts: AuthState, id: string, hostname: string) => {
+    async (
+      accounts: AuthState,
+      settings: SettingsState,
+      id: string,
+      hostname: string,
+    ) => {
       setStatus('loading');
 
       const token = getTokenForHost(hostname, accounts);
@@ -103,6 +117,7 @@ export const useNotifications = (): NotificationsState => {
         await markNotificationThreadAsRead(id, hostname, token);
 
         const updatedNotifications = removeNotification(
+          settings,
           id,
           notifications,
           hostname,
@@ -119,7 +134,12 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markNotificationDone = useCallback(
-    async (accounts: AuthState, id: string, hostname: string) => {
+    async (
+      accounts: AuthState,
+      settings: SettingsState,
+      id: string,
+      hostname: string,
+    ) => {
       setStatus('loading');
 
       const token = getTokenForHost(hostname, accounts);
@@ -128,6 +148,7 @@ export const useNotifications = (): NotificationsState => {
         await markNotificationThreadAsDone(id, hostname, token);
 
         const updatedNotifications = removeNotification(
+          settings,
           id,
           notifications,
           hostname,
@@ -144,14 +165,19 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const unsubscribeNotification = useCallback(
-    async (accounts: AuthState, id: string, hostname: string) => {
+    async (
+      accounts: AuthState,
+      settings: SettingsState,
+      id: string,
+      hostname: string,
+    ) => {
       setStatus('loading');
 
       const token = getTokenForHost(hostname, accounts);
 
       try {
         await ignoreNotificationThreadSubscription(id, hostname, token);
-        await markNotificationRead(accounts, id, hostname);
+        await markNotificationRead(accounts, settings, id, hostname);
         setStatus('success');
       } catch (err) {
         setStatus('success');
@@ -161,7 +187,12 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markRepoNotifications = useCallback(
-    async (accounts: AuthState, repoSlug: string, hostname: string) => {
+    async (
+      accounts: AuthState,
+      settings: SettingsState,
+      repoSlug: string,
+      hostname: string,
+    ) => {
       setStatus('loading');
 
       const token = getTokenForHost(hostname, accounts);
@@ -185,7 +216,12 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markRepoNotificationsDone = useCallback(
-    async (accounts: AuthState, repoSlug: string, hostname: string) => {
+    async (
+      accounts: AuthState,
+      settings: SettingsState,
+      repoSlug: string,
+      hostname: string,
+    ) => {
       setStatus('loading');
 
       try {
@@ -204,6 +240,7 @@ export const useNotifications = (): NotificationsState => {
             notificationsToRemove.map((notification) =>
               markNotificationDone(
                 accounts,
+                settings,
                 notification.id,
                 notifications[accountIndex].hostname,
               ),
@@ -228,8 +265,9 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const removeNotificationFromState = useCallback(
-    (id: string, hostname: string) => {
+    (settings: SettingsState, id: string, hostname: string) => {
       const updatedNotifications = removeNotification(
+        settings,
         id,
         notifications,
         hostname,

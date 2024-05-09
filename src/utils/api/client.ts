@@ -15,13 +15,12 @@ import type {
   RootHypermediaLinks,
   UserDetails,
 } from '../../typesGitHub';
-import { getGitHubAPIBaseUrl } from '../helpers';
 import { apiRequestAuth } from './request';
 
 import { print } from 'graphql/language/printer';
 import Constants from '../constants';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
-import { formatSearchQueryString } from './utils';
+import { formatSearchQueryString, getGitHubAPIBaseUrl } from './utils';
 
 /**
  * Get Hypermedia links to resources accessible in GitHub's REST API
@@ -32,8 +31,7 @@ export function getRootHypermediaLinks(
   hostname: string,
   token: string,
 ): AxiosPromise<RootHypermediaLinks> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(baseUrl);
+  const url = getGitHubAPIBaseUrl(hostname);
   return apiRequestAuth(url.toString(), 'GET', token);
 }
 
@@ -46,8 +44,9 @@ export function getAuthenticatedUser(
   hostname: string,
   token: string,
 ): AxiosPromise<UserDetails> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(`${baseUrl}/user`);
+  const url = getGitHubAPIBaseUrl(hostname);
+  url.pathname += 'user';
+
   return apiRequestAuth(url.toString(), 'GET', token);
 }
 
@@ -56,8 +55,9 @@ export function headNotifications(
   hostname: string,
   token: string,
 ): AxiosPromise<void> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(`${baseUrl}/notifications`);
+  const url = getGitHubAPIBaseUrl(hostname);
+  url.pathname += 'notifications';
+
   return apiRequestAuth(url.toString(), 'HEAD', token);
 }
 
@@ -71,8 +71,8 @@ export function listNotificationsForAuthenticatedUser(
   token: string,
   settings: SettingsState,
 ): AxiosPromise<Notification[]> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(`${baseUrl}/notifications`);
+  const url = getGitHubAPIBaseUrl(hostname);
+  url.pathname += 'notifications';
   url.searchParams.append('participating', String(settings.participating));
 
   return apiRequestAuth(url.toString(), 'GET', token);
@@ -89,8 +89,9 @@ export function markNotificationThreadAsRead(
   hostname: string,
   token: string,
 ): AxiosPromise<void> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(`${baseUrl}/notifications/threads/${threadId}`);
+  const url = getGitHubAPIBaseUrl(hostname);
+  url.pathname += `notifications/threads/${threadId}`;
+
   return apiRequestAuth(url.toString(), 'PATCH', token, {});
 }
 
@@ -105,8 +106,9 @@ export function markNotificationThreadAsDone(
   hostname: string,
   token: string,
 ): AxiosPromise<void> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(`${baseUrl}/notifications/threads/${threadId}`);
+  const url = getGitHubAPIBaseUrl(hostname);
+  url.pathname += `notifications/threads/${threadId}`;
+
   return apiRequestAuth(url.toString(), 'DELETE', token, {});
 }
 
@@ -120,10 +122,9 @@ export function ignoreNotificationThreadSubscription(
   hostname: string,
   token: string,
 ): AxiosPromise<NotificationThreadSubscription> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(
-    `${baseUrl}/notifications/threads/${threadId}/subscription`,
-  );
+  const url = getGitHubAPIBaseUrl(hostname);
+  url.pathname += `notifications/threads/${threadId}/subscription`;
+
   return apiRequestAuth(url.toString(), 'PUT', token, { ignored: true });
 }
 
@@ -140,8 +141,9 @@ export function markRepositoryNotificationsAsRead(
   hostname: string,
   token: string,
 ): AxiosPromise<void> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(`${baseUrl}/repos/${repoSlug}/notifications`);
+  const url = getGitHubAPIBaseUrl(hostname);
+  url.pathname += `repos/${repoSlug}/notifications`;
+
   return apiRequestAuth(url.toString(), 'PUT', token, {});
 }
 

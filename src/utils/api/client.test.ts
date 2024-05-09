@@ -43,7 +43,7 @@ describe('utils/api/client.ts', () => {
       await getRootHypermediaLinks(mockEnterpriseHostname, mockToken);
 
       expect(axios).toHaveBeenCalledWith({
-        url: 'https://example.com/api/v3',
+        url: 'https://example.com/api/v3/',
         method: 'GET',
         data: {},
       });
