@@ -29,8 +29,8 @@ describe('utils/helpers.ts', () => {
   });
   describe('isEnterpriseHost', () => {
     it('should return true for enterprise host', () => {
-      expect(isEnterpriseHost('github.manos.im')).toBe(true);
-      expect(isEnterpriseHost('api.github.manos.im')).toBe(true);
+      expect(isEnterpriseHost('github.gitify.app')).toBe(true);
+      expect(isEnterpriseHost('api.github.gitify.app')).toBe(true);
     });
 
     it('should return false for non-enterprise host', () => {
@@ -95,8 +95,8 @@ describe('utils/helpers.ts', () => {
     });
 
     it('should generate a GitHub API url - enterprise', () => {
-      const result = getGitHubAPIBaseUrl('github.manos.im');
-      expect(result).toBe('https://github.manos.im/api/v3');
+      const result = getGitHubAPIBaseUrl('github.gitify.app');
+      expect(result).toBe('https://github.gitify.app/api/v3');
     });
   });
 
