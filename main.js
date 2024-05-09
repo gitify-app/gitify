@@ -1,4 +1,4 @@
-const { ipcMain, app, nativeTheme } = require('electron');
+const { ipcMain: ipc, app, nativeTheme } = require('electron');
 const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
@@ -76,17 +76,17 @@ mb.on('ready', () => {
     }
   });
 
-  ipcMain.handle('get-platform', () => process.platform);
+  ipc.handle('get-platform', () => process.platform);
 
-  ipcMain.handle('get-app-version', () => app.getVersion());
+  ipc.handle('get-app-version', () => app.getVersion());
 
-  ipcMain.on('reopen-window', () => mb.showWindow());
+  ipc.on('reopen-window', () => mb.showWindow());
 
-  ipcMain.on('hide-window', () => mb.hideWindow());
+  ipc.on('hide-window', () => mb.hideWindow());
 
-  ipcMain.on('app-quit', () => mb.app.quit());
+  ipc.on('app-quit', () => mb.app.quit());
 
-  ipcMain.on('update-icon', (_, arg) => {
+  ipc.on('update-icon', (_, arg) => {
     if (!mb.tray.isDestroyed()) {
       if (arg === 'TrayActive') {
         mb.tray.setImage(iconActive);
@@ -96,13 +96,13 @@ mb.on('ready', () => {
     }
   });
 
-  ipcMain.on('update-title', (_, title) => {
+  ipc.on('update-title', (_, title) => {
     if (!mb.tray.isDestroyed()) {
       mb.tray.setTitle(title);
     }
   });
 
-  ipcMain.on('set-login-item-settings', (_, settings) => {
+  ipc.on('set-login-item-settings', (_, settings) => {
     app.setLoginItemSettings(settings);
   });
 });
