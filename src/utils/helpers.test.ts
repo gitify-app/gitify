@@ -27,8 +27,8 @@ describe('utils/helpers.ts', () => {
   });
   describe('isEnterpriseHost', () => {
     it('should return true for enterprise host', () => {
-      expect(isEnterpriseHost('github.manos.im')).toBe(true);
-      expect(isEnterpriseHost('api.github.manos.im')).toBe(true);
+      expect(isEnterpriseHost('github.gitify.app')).toBe(true);
+      expect(isEnterpriseHost('api.github.gitify.app')).toBe(true);
     });
 
     it('should return false for non-enterprise host', () => {
