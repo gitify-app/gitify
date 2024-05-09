@@ -1,15 +1,19 @@
-import { addHours, formatSearchQueryString } from './utils';
+import {
+  addHours,
+  formatSearchQueryString,
+  getGitHubAPIBaseUrl,
+} from './utils';
 
 describe('utils/api/utils.ts', () => {
-  describe('addHours', () => {
-    test('adds hours correctly for positive values', () => {
-      const result = addHours('2024-02-20T12:00:00.000Z', 3);
-      expect(result).toBe('2024-02-20T15:00:00.000Z');
+  describe('generateGitHubAPIUrl', () => {
+    it('should generate a GitHub API url - non enterprise', () => {
+      const result = getGitHubAPIBaseUrl('github.com');
+      expect(result.toString()).toBe('https://api.github.com/');
     });
 
-    test('adds hours correctly for negative values', () => {
-      const result = addHours('2024-02-20T12:00:00.000Z', -2);
-      expect(result).toBe('2024-02-20T10:00:00.000Z');
+    it('should generate a GitHub API url - enterprise', () => {
+      const result = getGitHubAPIBaseUrl('github.manos.im');
+      expect(result.toString()).toBe('https://github.manos.im/api/v3/');
     });
   });
 
@@ -24,6 +28,18 @@ describe('utils/api/utils.ts', () => {
       expect(result).toBe(
         'exampleTitle in:title repo:exampleRepo updated:>2024-02-20T10:00:00.000Z',
       );
+    });
+  });
+
+  describe('addHours', () => {
+    test('adds hours correctly for positive values', () => {
+      const result = addHours('2024-02-20T12:00:00.000Z', 3);
+      expect(result).toBe('2024-02-20T15:00:00.000Z');
+    });
+
+    test('adds hours correctly for negative values', () => {
+      const result = addHours('2024-02-20T12:00:00.000Z', -2);
+      expect(result).toBe('2024-02-20T10:00:00.000Z');
     });
   });
 });
