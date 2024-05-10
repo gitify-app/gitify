@@ -129,7 +129,6 @@ export async function fetchDiscussion(
 export function getLatestDiscussionComment(
   comments: DiscussionComment[],
 ): DiscussionComment | null {
-  console.log('ADAM - comments: ', JSON.stringify(comments));
   if (!comments || comments.length === 0) {
     return null;
   }
