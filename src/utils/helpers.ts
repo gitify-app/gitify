@@ -117,9 +117,7 @@ export async function fetchDiscussion(
     const response = await searchDiscussions(notification, token);
 
     const discussions = response.data?.data.search.nodes.filter(
-      (discussion) =>
-        discussion.title === notification.subject.title &&
-        discussion.viewerSubscription === 'SUBSCRIBED',
+      (discussion) => discussion.title === notification.subject.title,
     );
 
     return discussions[0] ?? null;

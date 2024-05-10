@@ -253,9 +253,8 @@ export async function searchDiscussions(
       queryStatement: formatAsGitHubSearchSyntax(
         notification.repository.full_name,
         notification.subject.title,
-        notification.updated_at,
       ),
-      firstDiscussions: 10,
+      firstDiscussions: 5,
       lastComments: 1,
       lastReplies: 1,
     },
