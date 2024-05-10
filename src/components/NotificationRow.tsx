@@ -4,7 +4,6 @@ import {
   FeedPersonIcon,
   ReadIcon,
 } from '@primer/octicons-react';
-import { formatDistanceToNow, parseISO } from 'date-fns';
 import {
   type FC,
   type KeyboardEvent,
@@ -16,7 +15,11 @@ import {
 import { AppContext } from '../context/App';
 import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
-import { formatForDisplay, openInBrowser } from '../utils/helpers';
+import {
+  formatForDisplay,
+  formatNotificationUpdatedAt,
+  openInBrowser,
+} from '../utils/helpers';
 import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
@@ -71,9 +74,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const NotificationIcon = getNotificationTypeIcon(notification.subject);
   const iconColor = getNotificationTypeIconColor(notification.subject);
 
-  const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
-    addSuffix: true,
-  });
+  const updatedAt = formatNotificationUpdatedAt(notification);
   const updatedLabel = notification.subject.user
     ? `${notification.subject.user.login} updated ${updatedAt}`
     : `Updated ${updatedAt}`;
