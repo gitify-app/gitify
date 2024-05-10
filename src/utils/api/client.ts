@@ -20,7 +20,8 @@ import { apiRequestAuth } from './request';
 import { print } from 'graphql/language/printer';
 import Constants from '../constants';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
-import { formatSearchQueryString, getGitHubAPIBaseUrl } from './utils';
+import { formatAsGitHubSearchSyntax } from './graphql/utils';
+import { getGitHubAPIBaseUrl } from './utils';
 
 /**
  * Get Hypermedia links to resources accessible in GitHub's REST API
@@ -249,7 +250,7 @@ export async function searchDiscussions(
   return apiRequestAuth(Constants.GITHUB_API_GRAPHQL_URL, 'POST', token, {
     query: print(QUERY_SEARCH_DISCUSSIONS),
     variables: {
-      queryStatement: formatSearchQueryString(
+      queryStatement: formatAsGitHubSearchSyntax(
         notification.repository.full_name,
         notification.subject.title,
         notification.updated_at,

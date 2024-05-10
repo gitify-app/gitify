@@ -99,9 +99,7 @@ async function getDiscussionUrl(
   if (discussion) {
     url.href = discussion.url;
 
-    const comments = discussion.comments.nodes;
-
-    const latestComment = getLatestDiscussionComment(comments);
+    const latestComment = getLatestDiscussionComment(discussion.comments.nodes);
 
     if (latestComment) {
       url.hash = `#discussioncomment-${latestComment.databaseId}`;
@@ -118,24 +116,20 @@ export async function fetchDiscussion(
   try {
     const response = await searchDiscussions(notification, token);
 
-    let discussions =
-      response.data?.data.search.nodes.filter(
-        (discussion) => discussion.title === notification.subject.title,
-      ) || [];
+    const discussions = response.data?.data.search.nodes.filter(
+      (discussion) =>
+        discussion.title === notification.subject.title &&
+        discussion.viewerSubscription === 'SUBSCRIBED',
+    );
 
-    if (discussions.length > 1) {
-      discussions = discussions.filter(
-        (discussion) => discussion.viewerSubscription === 'SUBSCRIBED',
-      );
-    }
-
-    return discussions[0];
+    return discussions[0] ?? null;
   } catch (err) {}
 }
 
 export function getLatestDiscussionComment(
   comments: DiscussionComment[],
 ): DiscussionComment | null {
+  console.log('ADAM - comments: ', JSON.stringify(comments));
   if (!comments || comments.length === 0) {
     return null;
   }
