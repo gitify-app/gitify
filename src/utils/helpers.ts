@@ -116,11 +116,7 @@ export async function fetchDiscussion(
   try {
     const response = await searchDiscussions(notification, token);
 
-    const discussions = response.data?.data.search.nodes.filter(
-      (discussion) => discussion.title === notification.subject.title,
-    );
-
-    return discussions[0] ?? null;
+    return response.data?.data.search.nodes[0] ?? null;
   } catch (err) {}
 }
 

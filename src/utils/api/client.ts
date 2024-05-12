@@ -254,7 +254,7 @@ export async function searchDiscussions(
         notification.repository.full_name,
         notification.subject.title,
       ),
-      firstDiscussions: 5,
+      firstDiscussions: 1,
       lastComments: 1,
       lastReplies: 1,
     },

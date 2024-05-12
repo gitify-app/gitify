@@ -12,7 +12,6 @@ import type {
   DiscussionStateType,
   Notification,
   Repository,
-  ViewerSubscription,
 } from '../typesGitHub';
 import {
   getCheckSuiteAttributes,
@@ -239,7 +238,7 @@ describe('utils/subject.ts', () => {
           .reply(200, {
             data: {
               search: {
-                nodes: [mockDiscussionNode('SUBSCRIBED', null, true)],
+                nodes: [mockDiscussionNode(null, true)],
               },
             },
           });
@@ -266,7 +265,7 @@ describe('utils/subject.ts', () => {
           .reply(200, {
             data: {
               search: {
-                nodes: [mockDiscussionNode('SUBSCRIBED', 'DUPLICATE', false)],
+                nodes: [mockDiscussionNode('DUPLICATE', false)],
               },
             },
           });
@@ -293,7 +292,7 @@ describe('utils/subject.ts', () => {
           .reply(200, {
             data: {
               search: {
-                nodes: [mockDiscussionNode('SUBSCRIBED', null, false)],
+                nodes: [mockDiscussionNode(null, false)],
               },
             },
           });
@@ -320,7 +319,7 @@ describe('utils/subject.ts', () => {
           .reply(200, {
             data: {
               search: {
-                nodes: [mockDiscussionNode('SUBSCRIBED', 'OUTDATED', false)],
+                nodes: [mockDiscussionNode('OUTDATED', false)],
               },
             },
           });
@@ -347,7 +346,7 @@ describe('utils/subject.ts', () => {
           .reply(200, {
             data: {
               search: {
-                nodes: [mockDiscussionNode('SUBSCRIBED', 'REOPENED', false)],
+                nodes: [mockDiscussionNode('REOPENED', false)],
               },
             },
           });
@@ -374,7 +373,7 @@ describe('utils/subject.ts', () => {
           .reply(200, {
             data: {
               search: {
-                nodes: [mockDiscussionNode('SUBSCRIBED', 'RESOLVED', true)],
+                nodes: [mockDiscussionNode('RESOLVED', true)],
               },
             },
           });
@@ -386,36 +385,6 @@ describe('utils/subject.ts', () => {
 
         expect(result).toEqual({
           state: 'RESOLVED',
-          user: {
-            login: mockDiscussionAuthor.login,
-            html_url: mockDiscussionAuthor.url,
-            avatar_url: mockDiscussionAuthor.avatar_url,
-            type: mockDiscussionAuthor.type,
-          },
-        });
-      });
-
-      it('filtered response by subscribed', async () => {
-        nock('https://api.github.com')
-          .post('/graphql')
-          .reply(200, {
-            data: {
-              search: {
-                nodes: [
-                  mockDiscussionNode('SUBSCRIBED', null, false),
-                  mockDiscussionNode('IGNORED', null, true),
-                ],
-              },
-            },
-          });
-
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
-
-        expect(result).toEqual({
-          state: 'OPEN',
           user: {
             login: mockDiscussionAuthor.login,
             html_url: mockDiscussionAuthor.url,
@@ -1176,14 +1145,12 @@ describe('utils/subject.ts', () => {
 });
 
 function mockDiscussionNode(
-  subscription: ViewerSubscription,
   state: DiscussionStateType,
   isAnswered: boolean,
 ): Discussion {
   return {
     title: 'This is a mocked discussion',
     url: 'https://github.com/gitify-app/notifications-test/discussions/1',
-    viewerSubscription: subscription,
     stateReason: state,
     isAnswered: isAnswered,
     author: mockDiscussionAuthor,

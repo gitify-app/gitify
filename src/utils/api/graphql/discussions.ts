@@ -31,7 +31,6 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
     search(query:$queryStatement, type: DISCUSSION, first: $firstDiscussions) {
       nodes {
         ... on Discussion {
-          viewerSubscription
           title
           stateReason
           isAnswered
