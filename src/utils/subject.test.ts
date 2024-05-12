@@ -1189,6 +1189,7 @@ function mockDiscussionNode(
     author: mockDiscussionAuthor,
     comments: {
       nodes: [],
+      totalCount: 0,
     },
   };
 }

@@ -1,6 +1,7 @@
 import {
   BellSlashIcon,
   CheckIcon,
+  CommentIcon,
   FeedPersonIcon,
   ReadIcon,
 } from '@primer/octicons-react';
@@ -14,6 +15,7 @@ import {
 } from 'react';
 
 import { AppContext } from '../context/App';
+import { IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
 import { formatForDisplay, openInBrowser } from '../utils/helpers';
@@ -82,6 +84,10 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     notification.subject.state,
     notification.subject.type,
   ]);
+
+  const commentsLabel = `${notification.subject.comments} ${
+    notification.subject.comments > 1 ? 'comments' : 'comment'
+  }`;
 
   return (
     <div
@@ -158,6 +164,15 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                     );
                   })
                 : null}
+              {notification.subject.comments && (
+                <span className="ml-1" title={commentsLabel}>
+                  <CommentIcon
+                    size={16}
+                    className={IconColor.GRAY}
+                    aria-label={commentsLabel}
+                  />
+                </span>
+              )}
             </span>
           </span>
         </div>
