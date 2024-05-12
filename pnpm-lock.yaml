@@ -121,8 +121,8 @@ importers:
         specifier: 18.3.1
         version: 18.3.1(react@18.3.1)
       rimraf:
-        specifier: 5.0.6
-        version: 5.0.6
+        specifier: 5.0.7
+        version: 5.0.7
       style-loader:
         specifier: 4.0.0
         version: 4.0.0(webpack@5.91.0(webpack-cli@5.1.4))
@@ -2646,9 +2646,9 @@ packages:
     resolution: {integrity: sha512-U9nH88a3fc/ekCF1l0/UP1IosiuIjyTh7hBvXVMHYgVcfGvt897Xguj2UOLDeI5BG2m7/uwyaLVT6fbtCwTyzw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
 
-  rimraf@5.0.6:
-    resolution: {integrity: sha512-X72SgyOf+1lFnGM6gYcmZ4+jMOwuT4E4SajKQzUIlI7EoR5eFHMhS/wf8Ll0mN+w2bxcIVldrJQ6xT7HFQywjg==}
-    engines: {node: '>=14'}
+  rimraf@5.0.7:
+    resolution: {integrity: sha512-nV6YcJo5wbLW77m+8KjH8aB/7/rxQy9SZ0HY5shnwULfS+9nmTtVXAJET5NdZmCzA4fPI/Hm1wo/Po/4mopOdg==}
+    engines: {node: '>=14.18'}
     hasBin: true
 
   roarr@2.15.4:
@@ -6141,7 +6141,7 @@ snapshots:
 
   reusify@1.0.4: {}
 
-  rimraf@5.0.6:
+  rimraf@5.0.7:
     dependencies:
       glob: 10.3.10
 
