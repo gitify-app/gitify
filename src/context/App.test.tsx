@@ -131,7 +131,12 @@ describe('context/App.tsx', () => {
 
       expect(markNotificationReadMock).toHaveBeenCalledTimes(1);
       expect(markNotificationReadMock).toHaveBeenCalledWith(
-        { enterpriseAccounts: [], token: null, user: null },
+        {
+          enterpriseAccounts: [],
+          token: null,
+          user: null,
+        },
+        mockSettings,
         '123-456',
         'github.com',
       );
@@ -160,6 +165,7 @@ describe('context/App.tsx', () => {
       expect(markNotificationDoneMock).toHaveBeenCalledTimes(1);
       expect(markNotificationDoneMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
+        mockSettings,
         '123-456',
         'github.com',
       );
@@ -188,6 +194,7 @@ describe('context/App.tsx', () => {
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
       expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
+        mockSettings,
         '123-456',
         'github.com',
       );
@@ -221,6 +228,7 @@ describe('context/App.tsx', () => {
       expect(markRepoNotificationsMock).toHaveBeenCalledTimes(1);
       expect(markRepoNotificationsMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
+        mockSettings,
         'gitify-app/notifications-test',
         'github.com',
       );
@@ -325,6 +333,7 @@ describe('context/App.tsx', () => {
         detailedNotifications: false,
         markAsDoneOnOpen: false,
         showAccountHostname: false,
+        delayNotificationState: false,
       },
     );
   });
@@ -369,6 +378,7 @@ describe('context/App.tsx', () => {
         detailedNotifications: false,
         markAsDoneOnOpen: false,
         showAccountHostname: false,
+        delayNotificationState: false,
       },
     );
   });

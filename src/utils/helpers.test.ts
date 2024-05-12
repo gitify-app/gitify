@@ -8,11 +8,9 @@ import {
 import type { SubjectType } from '../typesGitHub';
 import * as apiRequests from './api/request';
 import {
-  addNotificationReferrerIdToUrl,
   formatForDisplay,
   generateGitHubWebUrl,
   generateNotificationReferrerId,
-  getGitHubAPIBaseUrl,
   isEnterpriseHost,
   isGitHubLoggedIn,
 } from './helpers';
@@ -29,50 +27,13 @@ describe('utils/helpers.ts', () => {
   });
   describe('isEnterpriseHost', () => {
     it('should return true for enterprise host', () => {
-      expect(isEnterpriseHost('github.manos.im')).toBe(true);
-      expect(isEnterpriseHost('api.github.manos.im')).toBe(true);
+      expect(isEnterpriseHost('github.gitify.app')).toBe(true);
+      expect(isEnterpriseHost('api.github.gitify.app')).toBe(true);
     });
 
     it('should return false for non-enterprise host', () => {
       expect(isEnterpriseHost('github.com')).toBe(false);
       expect(isEnterpriseHost('api.github.com')).toBe(false);
-    });
-  });
-
-  describe('addNotificationReferrerIdToUrl', () => {
-    it('should add notification_referrer_id to the URL', () => {
-      // Mock data
-      const url = 'https://github.com/gitify-app/notifications-test';
-      const notificationId = '123';
-      const userId = 456;
-
-      const result = addNotificationReferrerIdToUrl(
-        url,
-        notificationId,
-        userId,
-      );
-
-      expect(result).toEqual(
-        'https://github.com/gitify-app/notifications-test?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEyMzo0NTY%3D',
-      );
-    });
-
-    it('should add notification_referrer_id to the URL, preserving anchor tags', () => {
-      // Mock data
-      const url =
-        'https://github.com/gitify-app/notifications-test/pull/123#issuecomment-1951055051';
-      const notificationId = '123';
-      const userId = 456;
-
-      const result = addNotificationReferrerIdToUrl(
-        url,
-        notificationId,
-        userId,
-      );
-
-      expect(result).toEqual(
-        'https://github.com/gitify-app/notifications-test/pull/123?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEyMzo0NTY%3D#issuecomment-1951055051',
-      );
     });
   });
 
@@ -85,18 +46,6 @@ describe('utils/helpers.ts', () => {
       expect(referrerId).toBe(
         'MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=',
       );
-    });
-  });
-
-  describe('generateGitHubAPIUrl', () => {
-    it('should generate a GitHub API url - non enterprise', () => {
-      const result = getGitHubAPIBaseUrl('github.com');
-      expect(result).toBe('https://api.github.com');
-    });
-
-    it('should generate a GitHub API url - enterprise', () => {
-      const result = getGitHubAPIBaseUrl('github.manos.im');
-      expect(result).toBe('https://github.manos.im/api/v3');
     });
   });
 

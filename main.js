@@ -62,12 +62,8 @@ menubarApp.on('ready', () => {
     }
   });
 
-  ipcMain.handle('get-platform', async () => {
-    return process.platform;
-  });
-  ipcMain.handle('get-app-version', async () => {
-    return app.getVersion();
-  });
+  ipcMain.handle('get-platform', () => process.platform);
+  ipcMain.handle('get-app-version', () => app.getVersion());
 
   ipcMain.on('reopen-window', () => menubarApp.showWindow());
   ipcMain.on('hide-window', () => menubarApp.hideWindow());
