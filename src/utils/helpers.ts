@@ -115,8 +115,11 @@ export async function fetchDiscussion(
 ): Promise<Discussion | null> {
   try {
     const response = await searchDiscussions(notification, token);
-
-    return response.data?.data.search.nodes[0] ?? null;
+    return (
+      response.data?.data.search.nodes.filter(
+        (discussion) => discussion.title === notification.subject.title,
+      )[0] ?? null
+    );
   } catch (err) {}
 }
 
