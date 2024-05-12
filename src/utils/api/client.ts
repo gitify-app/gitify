@@ -240,7 +240,7 @@ export async function getHtmlUrl(url: string, token: string): Promise<string> {
 /**
  * Search for Discussions that match notification title and repository.
  *
- * Returns first 10 matching discussions and their latest comments / replies
+ * Returns the latest discussion and their latest comments / replies
  *
  */
 export async function searchDiscussions(
@@ -259,4 +259,21 @@ export async function searchDiscussions(
       lastReplies: 1,
     },
   });
+}
+
+/**
+ * Return the latest discussion that matches the notification title and repository.
+ */
+export async function getLatestDiscussion(
+  notification: Notification,
+  token: string,
+): Promise<Discussion | null> {
+  try {
+    const response = await searchDiscussions(notification, token);
+    return (
+      response.data?.data.search.nodes.filter(
+        (discussion) => discussion.title === notification.subject.title,
+      )[0] ?? null
+    );
+  } catch (err) {}
 }

@@ -1,6 +1,7 @@
 import type {
   CheckSuiteAttributes,
   CheckSuiteStatus,
+  DiscussionComment,
   DiscussionStateType,
   GitifyPullRequestReview,
   GitifySubject,
@@ -16,11 +17,11 @@ import {
   getCommitComment,
   getIssue,
   getIssueOrPullRequestComment,
+  getLatestDiscussion,
   getPullRequest,
   getPullRequestReviews,
   getRelease,
 } from './api/client';
-import { fetchDiscussion, getLatestDiscussionComment } from './helpers';
 
 export async function getGitifySubjectDetails(
   notification: Notification,
@@ -145,7 +146,7 @@ async function getGitifySubjectForDiscussion(
   notification: Notification,
   token: string,
 ): Promise<GitifySubject> {
-  const discussion = await fetchDiscussion(notification, token);
+  const discussion = await getLatestDiscussion(notification, token);
   let discussionState: DiscussionStateType = 'OPEN';
 
   if (discussion) {
@@ -181,6 +182,22 @@ async function getGitifySubjectForDiscussion(
     state: discussionState,
     user: discussionUser,
   };
+}
+
+export function getLatestDiscussionComment(
+  comments: DiscussionComment[],
+): DiscussionComment | null {
+  if (!comments || comments.length === 0) {
+    return null;
+  }
+
+  // Return latest reply if available
+  if (comments[0].replies.nodes.length === 1) {
+    return comments[0].replies.nodes[0];
+  }
+
+  // Return latest comment if no replies
+  return comments[0];
 }
 
 async function getGitifySubjectForIssue(

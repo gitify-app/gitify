@@ -1,13 +1,13 @@
 import type { AuthState } from '../types';
-import type {
-  Discussion,
-  DiscussionComment,
-  Notification,
-} from '../typesGitHub';
+import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
-import { getHtmlUrl, searchDiscussions } from './api/client';
+import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import { Constants } from './constants';
-import { getCheckSuiteAttributes, getWorkflowRunAttributes } from './subject';
+import {
+  getCheckSuiteAttributes,
+  getLatestDiscussionComment,
+  getWorkflowRunAttributes,
+} from './subject';
 
 export function isGitHubLoggedIn(accounts: AuthState): boolean {
   return accounts.token != null;
@@ -94,7 +94,7 @@ async function getDiscussionUrl(
   const url = new URL(notification.repository.html_url);
   url.pathname += '/discussions';
 
-  const discussion = await fetchDiscussion(notification, token);
+  const discussion = await getLatestDiscussion(notification, token);
 
   if (discussion) {
     url.href = discussion.url;
@@ -107,36 +107,6 @@ async function getDiscussionUrl(
   }
 
   return url.toString();
-}
-
-export async function fetchDiscussion(
-  notification: Notification,
-  token: string,
-): Promise<Discussion | null> {
-  try {
-    const response = await searchDiscussions(notification, token);
-    return (
-      response.data?.data.search.nodes.filter(
-        (discussion) => discussion.title === notification.subject.title,
-      )[0] ?? null
-    );
-  } catch (err) {}
-}
-
-export function getLatestDiscussionComment(
-  comments: DiscussionComment[],
-): DiscussionComment | null {
-  if (!comments || comments.length === 0) {
-    return null;
-  }
-
-  // Return latest reply if available
-  if (comments[0].replies.nodes.length === 1) {
-    return comments[0].replies.nodes[0];
-  }
-
-  // Return latest comment if no replies
-  return comments[0];
 }
 
 export async function generateGitHubWebUrl(
