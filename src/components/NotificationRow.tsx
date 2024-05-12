@@ -164,7 +164,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                     );
                   })
                 : null}
-              {notification.subject.comments && (
+              {notification.subject?.comments > 0 && (
                 <span className="ml-1" title={commentsLabel}>
                   <CommentIcon
                     size={16}
