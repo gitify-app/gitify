@@ -419,6 +419,7 @@ export const mockDiscussionComments: DiscussionComments = {
       },
     },
   ],
+  totalCount: 2,
 };
 
 export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {

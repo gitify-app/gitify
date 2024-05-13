@@ -40,6 +40,7 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
             ...AuthorFields
           }
           comments(last: $lastComments){
+            totalCount
             nodes {
               ...CommentFields
               replies(last: $lastReplies) {
