@@ -34,6 +34,23 @@ describe('components/NotificationRow.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
+  it('should render itself & its children when last_read_at is null', async () => {
+    jest
+      .spyOn(global.Date, 'now')
+      .mockImplementation(() => new Date('2024').valueOf());
+
+    const mockNotification = mockedSingleNotification;
+    mockNotification.last_read_at = null;
+
+    const props = {
+      notification: mockNotification,
+      hostname: 'github.com',
+    };
+
+    const tree = TestRenderer.create(<NotificationRow {...props} />);
+    expect(tree).toMatchSnapshot();
+  });
+
   it('should render itself & its children without avatar', async () => {
     jest
       .spyOn(global.Date, 'now')
