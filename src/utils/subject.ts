@@ -180,6 +180,7 @@ async function getGitifySubjectForDiscussion(
   return {
     state: discussionState,
     user: discussionUser,
+    comments: discussion.comments.totalCount,
   };
 }
 
@@ -209,6 +210,7 @@ async function getGitifySubjectForIssue(
       avatar_url: issueCommentUser?.avatar_url ?? issue.user.avatar_url,
       type: issueCommentUser?.type ?? issue.user.type,
     },
+    comments: issue.comments,
   };
 }
 
@@ -251,6 +253,7 @@ async function getGitifySubjectForPullRequest(
       type: prCommentUser?.type ?? pr.user.type,
     },
     reviews: reviews,
+    comments: pr.comments,
   };
 }
 
