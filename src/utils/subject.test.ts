@@ -256,6 +256,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockDiscussionAuthor.avatar_url,
             type: mockDiscussionAuthor.type,
           },
+          comments: 0,
         });
       });
 
@@ -283,6 +284,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockDiscussionAuthor.avatar_url,
             type: mockDiscussionAuthor.type,
           },
+          comments: 0,
         });
       });
 
@@ -310,6 +312,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockDiscussionAuthor.avatar_url,
             type: mockDiscussionAuthor.type,
           },
+          comments: 0,
         });
       });
 
@@ -337,6 +340,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockDiscussionAuthor.avatar_url,
             type: mockDiscussionAuthor.type,
           },
+          comments: 0,
         });
       });
 
@@ -364,6 +368,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockDiscussionAuthor.avatar_url,
             type: mockDiscussionAuthor.type,
           },
+          comments: 0,
         });
       });
 
@@ -391,6 +396,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockDiscussionAuthor.avatar_url,
             type: mockDiscussionAuthor.type,
           },
+          comments: 0,
         });
       });
     });
@@ -1156,6 +1162,7 @@ function mockDiscussionNode(
     author: mockDiscussionAuthor,
     comments: {
       nodes: [],
+      totalCount: 0,
     },
   };
 }

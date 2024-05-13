@@ -1,10 +1,10 @@
 import {
   BellSlashIcon,
   CheckIcon,
+  CommentIcon,
   FeedPersonIcon,
   ReadIcon,
 } from '@primer/octicons-react';
-import { formatDistanceToNow, parseISO } from 'date-fns';
 import {
   type FC,
   type KeyboardEvent,
@@ -14,9 +14,14 @@ import {
 } from 'react';
 
 import { AppContext } from '../context/App';
+import { IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
-import { formatForDisplay, openInBrowser } from '../utils/helpers';
+import {
+  formatForDisplay,
+  formatNotificationUpdatedAt,
+  openInBrowser,
+} from '../utils/helpers';
 import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
@@ -71,9 +76,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const NotificationIcon = getNotificationTypeIcon(notification.subject);
   const iconColor = getNotificationTypeIconColor(notification.subject);
 
-  const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
-    addSuffix: true,
-  });
+  const updatedAt = formatNotificationUpdatedAt(notification);
   const updatedLabel = notification.subject.user
     ? `${notification.subject.user.login} updated ${updatedAt}`
     : `Updated ${updatedAt}`;
@@ -82,6 +85,10 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     notification.subject.state,
     notification.subject.type,
   ]);
+
+  const commentsLabel = `${notification.subject.comments} ${
+    notification.subject.comments > 1 ? 'comments' : 'comment'
+  }`;
 
   return (
     <div
@@ -158,6 +165,15 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                     );
                   })
                 : null}
+              {notification.subject?.comments > 0 && (
+                <span className="ml-1" title={commentsLabel}>
+                  <CommentIcon
+                    size={16}
+                    className={IconColor.GRAY}
+                    aria-label={commentsLabel}
+                  />
+                </span>
+              )}
             </span>
           </span>
         </div>

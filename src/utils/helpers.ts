@@ -1,3 +1,4 @@
+import { formatDistanceToNow, parseISO } from 'date-fns';
 import type { AuthState } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
@@ -161,6 +162,16 @@ export function formatForDisplay(text: string[]): string {
       // Convert to proper case (capitalize first letter of each word)
       return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
     });
+}
+
+export function formatNotificationUpdatedAt(
+  notification: Notification,
+): string {
+  const date = notification.last_read_at ?? notification.updated_at;
+
+  return formatDistanceToNow(parseISO(date), {
+    addSuffix: true,
+  });
 }
 
 export async function openInBrowser(

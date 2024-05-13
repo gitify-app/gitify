@@ -257,6 +257,7 @@ export interface GitifySubject {
   state?: StateType;
   user?: SubjectUser;
   reviews?: GitifyPullRequestReview[];
+  comments?: number;
 }
 
 export interface PullRequest {
@@ -458,6 +459,7 @@ export interface Discussion {
 
 export interface DiscussionComments {
   nodes: DiscussionComment[];
+  totalCount: number;
 }
 
 export interface DiscussionComment {

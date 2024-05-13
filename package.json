@@ -130,7 +130,7 @@
     "@types/jest": "29.5.12",
     "@types/node": "20.12.11",
     "@types/nprogress": "0.2.3",
-    "@types/react": "18.3.1",
+    "@types/react": "18.3.2",
     "@types/react-router-dom": "5.3.3",
     "@types/react-test-renderer": "18.3.0",
     "@types/react-transition-group": "4.4.10",
@@ -146,7 +146,7 @@
     "postcss": "8.4.38",
     "postcss-loader": "8.1.1",
     "react-test-renderer": "18.3.1",
-    "rimraf": "5.0.6",
+    "rimraf": "5.0.7",
     "style-loader": "4.0.0",
     "tailwindcss": "3.4.3",
     "ts-jest": "29.1.2",
@@ -155,7 +155,7 @@
     "webpack-cli": "5.1.4",
     "webpack-merge": "5.10.0"
   },
-  "packageManager": "pnpm@9.1.0",
+  "packageManager": "pnpm@9.1.1",
   "lint-staged": {
     "*.{html,js,json,md,ts,tsx}": "biome format --write"
   }
