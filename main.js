@@ -41,8 +41,6 @@ const mb = menubar({
 });
 
 mb.on('ready', () => {
-  require('@electron/remote/main').enable(mb.window.webContents);
-
   mb.app.setAppUserModelId('com.electron.gitify');
   mb.tray.setIgnoreDoubleClickEvents(true);
   // Force the window to retrieve its previous zoom factor
