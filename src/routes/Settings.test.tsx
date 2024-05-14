@@ -499,6 +499,28 @@ describe('routes/Settings.tsx', () => {
       );
     });
 
+    it('should go to the personal token login route', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              settings: mockSettings,
+              accounts: mockAccounts,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      fireEvent.click(screen.getByTitle('Login with Personal Token'));
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-token', {
+        replace: true,
+      });
+    });
+
     it('should go to the enterprise login route', async () => {
       await act(async () => {
         render(
@@ -539,7 +561,7 @@ describe('routes/Settings.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Logout from octocat'));
+      fireEvent.click(screen.getByTitle('Logout'));
 
       expect(logoutMock).toHaveBeenCalledTimes(1);
 

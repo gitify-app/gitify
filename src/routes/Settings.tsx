@@ -1,5 +1,6 @@
 import {
   ArrowLeftIcon,
+  OrganizationIcon,
   PersonAddIcon,
   SignOutIcon,
   XCircleIcon,
@@ -28,6 +29,7 @@ import {
   updateTrayTitle,
 } from '../utils/comms';
 import Constants from '../utils/constants';
+import { isGitHubLoggedIn } from '../utils/helpers';
 import { setTheme } from '../utils/theme';
 
 export const SettingsRoute: FC = () => {
@@ -75,13 +77,15 @@ export const SettingsRoute: FC = () => {
 
   useMemo(() => {
     (async () => {
-      const response = await getRootHypermediaLinks(
-        Constants.DEFAULT_AUTH_OPTIONS.hostname,
-        accounts.token,
-      );
+      if (isGitHubLoggedIn(accounts)) {
+        const response = await getRootHypermediaLinks(
+          Constants.DEFAULT_AUTH_OPTIONS.hostname,
+          accounts.token,
+        );
 
-      if (response.headers['x-oauth-scopes'].includes('repo'))
-        setRepoScope(true);
+        if (response.headers['x-oauth-scopes'].includes('repo'))
+          setRepoScope(true);
+      }
     })();
   }, [accounts.token]);
 
@@ -94,6 +98,10 @@ export const SettingsRoute: FC = () => {
 
   const quitApp = useCallback(() => {
     ipcRenderer.send('app-quit');
+  }, []);
+
+  const goToPersonalToken = useCallback(() => {
+    return navigate('/login-token', { replace: true });
   }, []);
 
   const goToEnterprise = useCallback(() => {
@@ -312,10 +320,18 @@ export const SettingsRoute: FC = () => {
           <button
             type="button"
             className={footerButtonClass}
+            title="Login with Personal Token"
+            onClick={goToPersonalToken}
+          >
+            <PersonAddIcon size={20} aria-label="Login with Personal Token" />
+          </button>
+          <button
+            type="button"
+            className={footerButtonClass}
             title="Login with GitHub Enterprise"
             onClick={goToEnterprise}
           >
-            <PersonAddIcon
+            <OrganizationIcon
               size={20}
               aria-label="Login with GitHub Enterprise"
             />
@@ -324,14 +340,11 @@ export const SettingsRoute: FC = () => {
           <button
             type="button"
             className={footerButtonClass}
-            title={`Logout from ${accounts.user.login}`}
+            title="Logout"
             role="button"
             onClick={logoutUser}
           >
-            <SignOutIcon
-              size={18}
-              aria-label={`Logout from ${accounts.user.login}`}
-            />
+            <SignOutIcon size={18} aria-label="Logout" />
           </button>
 
           <button

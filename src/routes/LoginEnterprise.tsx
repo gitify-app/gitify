@@ -1,8 +1,6 @@
-const ipcRenderer = require('electron').ipcRenderer;
-
 import { ArrowLeftIcon } from '@primer/octicons-react';
 
-import { type FC, useCallback, useContext, useEffect } from 'react';
+import { type FC, useCallback, useContext } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -52,18 +50,8 @@ export const validate = (values: IValues): IFormErrors => {
 };
 
 export const LoginEnterpriseRoute: FC = () => {
-  const {
-    accounts: { enterpriseAccounts },
-    loginEnterprise,
-  } = useContext(AppContext);
+  const { loginEnterprise } = useContext(AppContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (enterpriseAccounts.length) {
-      ipcRenderer.send('reopen-window');
-      navigate(-1);
-    }
-  }, [enterpriseAccounts]);
 
   const renderForm = (formProps: FormRenderProps) => {
     const { handleSubmit, submitting, pristine } = formProps;
@@ -99,6 +87,7 @@ export const LoginEnterpriseRoute: FC = () => {
   const login = useCallback(async (data: IValues) => {
     try {
       await loginEnterprise(data as AuthOptions);
+      navigate(-1);
     } catch (err) {
       // Skip
     }

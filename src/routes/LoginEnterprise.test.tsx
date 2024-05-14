@@ -2,7 +2,6 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import * as TestRenderer from 'react-test-renderer';
 const { ipcRenderer } = require('electron');
-import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
 import type { AuthState } from '../types';
 import { LoginEnterpriseRoute, validate } from './LoginEnterprise';
@@ -73,35 +72,6 @@ describe('routes/LoginEnterprise.tsx', () => {
     expect(validate(values).hostname).toBe('Invalid hostname.');
     expect(validate(values).clientId).toBe('Invalid client id.');
     expect(validate(values).clientSecret).toBe('Invalid client secret.');
-  });
-
-  it('should receive a logged-in enterprise account', () => {
-    const { rerender } = render(
-      <AppContext.Provider value={{ accounts: mockAccounts }}>
-        <MemoryRouter>
-          <LoginEnterpriseRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-
-    rerender(
-      <AppContext.Provider
-        value={{
-          accounts: {
-            enterpriseAccounts: mockedEnterpriseAccounts,
-            user: null,
-          },
-        }}
-      >
-        <MemoryRouter>
-          <LoginEnterpriseRoute />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
   it('should render the form with errors', () => {
