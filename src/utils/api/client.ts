@@ -20,7 +20,8 @@ import { apiRequestAuth } from './request';
 import { print } from 'graphql/language/printer';
 import Constants from '../constants';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
-import { formatSearchQueryString, getGitHubAPIBaseUrl } from './utils';
+import { formatAsGitHubSearchSyntax } from './graphql/utils';
+import { getGitHubAPIBaseUrl } from './utils';
 
 /**
  * Get Hypermedia links to resources accessible in GitHub's REST API
@@ -239,7 +240,7 @@ export async function getHtmlUrl(url: string, token: string): Promise<string> {
 /**
  * Search for Discussions that match notification title and repository.
  *
- * Returns first 10 matching discussions and their latest comments / replies
+ * Returns the latest discussion and their latest comments / replies
  *
  */
 export async function searchDiscussions(
@@ -249,14 +250,30 @@ export async function searchDiscussions(
   return apiRequestAuth(Constants.GITHUB_API_GRAPHQL_URL, 'POST', token, {
     query: print(QUERY_SEARCH_DISCUSSIONS),
     variables: {
-      queryStatement: formatSearchQueryString(
+      queryStatement: formatAsGitHubSearchSyntax(
         notification.repository.full_name,
         notification.subject.title,
-        notification.updated_at,
       ),
-      firstDiscussions: 10,
+      firstDiscussions: 1,
       lastComments: 1,
       lastReplies: 1,
     },
   });
+}
+
+/**
+ * Return the latest discussion that matches the notification title and repository.
+ */
+export async function getLatestDiscussion(
+  notification: Notification,
+  token: string,
+): Promise<Discussion | null> {
+  try {
+    const response = await searchDiscussions(notification, token);
+    return (
+      response.data?.data.search.nodes.filter(
+        (discussion) => discussion.title === notification.subject.title,
+      )[0] ?? null
+    );
+  } catch (err) {}
 }

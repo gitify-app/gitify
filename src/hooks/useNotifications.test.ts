@@ -319,7 +319,6 @@ describe('hooks/useNotifications.ts', () => {
                 nodes: [
                   {
                     title: 'This is a Discussion.',
-                    viewerSubscription: 'SUBSCRIBED',
                     stateReason: null,
                     isAnswered: true,
                     url: 'https://github.com/gitify-app/notifications-test/discussions/612',

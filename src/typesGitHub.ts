@@ -59,8 +59,6 @@ export type StateType =
   | IssueStateReasonType
   | PullRequestStateType;
 
-export type ViewerSubscription = 'IGNORED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
-
 export type CheckSuiteStatus =
   | 'action_required'
   | 'cancelled'
@@ -451,7 +449,6 @@ export interface GraphQLSearch<T> {
 }
 
 export interface Discussion {
-  viewerSubscription: ViewerSubscription;
   title: string;
   stateReason: DiscussionStateType;
   isAnswered: boolean;
