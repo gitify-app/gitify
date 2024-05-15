@@ -125,7 +125,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.7.3",
-    "@electron/notarize": "2.3.0",
+    "@electron/notarize": "2.3.2",
     "@testing-library/react": "15.0.7",
     "@types/jest": "29.5.12",
     "@types/node": "20.12.12",
