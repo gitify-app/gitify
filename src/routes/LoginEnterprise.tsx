@@ -1,6 +1,6 @@
 const ipcRenderer = require('electron').ipcRenderer;
 
-import { ArrowLeftIcon } from '@primer/octicons-react';
+import { ArrowLeftIcon, BookIcon } from '@primer/octicons-react';
 
 import { type FC, useCallback, useContext, useEffect } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
@@ -9,6 +9,10 @@ import { useNavigate } from 'react-router-dom';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
 import type { AuthOptions } from '../types';
+import { openExternalLink } from '../utils/comms';
+
+const GITHUB_DOCS_URL =
+  'https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authenticating-to-the-rest-api-with-an-oauth-app';
 
 interface IValues {
   hostname?: string;
@@ -65,8 +69,15 @@ export const LoginEnterpriseRoute: FC = () => {
     }
   }, [enterpriseAccounts]);
 
+  const openLink = useCallback((url: string) => {
+    openExternalLink(url);
+  }, []);
+
   const renderForm = (formProps: FormRenderProps) => {
     const { handleSubmit, submitting, pristine } = formProps;
+
+    const buttonClasses =
+      'rounded bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer';
 
     return (
       <form onSubmit={handleSubmit}>
@@ -84,14 +95,27 @@ export const LoginEnterpriseRoute: FC = () => {
           placeholder="ABC123DEF456"
         />
 
-        <button
-          className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
-          title="Login Button"
-          disabled={submitting || pristine}
-          type="submit"
-        >
-          Login
-        </button>
+        <div className="flex justify-between items-center">
+          <div className="text-xs italic hover:text-blue-500 justify-center items-center">
+            <button
+              type="button"
+              className={`px-2 py-1 text-xs ${buttonClasses}`}
+              onClick={() => openLink(GITHUB_DOCS_URL)}
+            >
+              <BookIcon size={12} /> Docs
+            </button>
+          </div>
+          <div>
+            <button
+              className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
+              title="Login Button"
+              disabled={submitting || pristine}
+              type="submit"
+            >
+              Login
+            </button>
+          </div>
+        </div>
       </form>
     );
   };
