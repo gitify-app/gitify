@@ -1,6 +1,6 @@
 const ipcRenderer = require('electron').ipcRenderer;
 
-import { ArrowLeftIcon, BookIcon } from '@primer/octicons-react';
+import { ArrowLeftIcon, BookIcon, SignInIcon } from '@primer/octicons-react';
 
 import { type FC, useCallback, useContext, useEffect } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
@@ -106,14 +106,14 @@ export const LoginEnterpriseRoute: FC = () => {
               <BookIcon size={12} /> Docs
             </button>
           </div>
-          <div>
+          <div className="justify-center items-center">
             <button
-              className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
-              title="Login Button"
+              className={`float-right px-4 py-2 my-4 ${buttonClasses}`}
+              title="Login"
               disabled={submitting || pristine}
               type="submit"
             >
-              Login
+              <SignInIcon size={14} /> Login
             </button>
           </div>
         </div>

@@ -1,4 +1,4 @@
-import { ArrowLeftIcon, BookIcon } from '@primer/octicons-react';
+import { ArrowLeftIcon, BookIcon, SignInIcon } from '@primer/octicons-react';
 
 import { type FC, useCallback, useContext, useState } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
@@ -117,14 +117,14 @@ export const LoginWithToken: FC = () => {
               <BookIcon size={12} /> Docs
             </button>
           </div>
-          <div>
+          <div className="justify-center items-center">
             <button
               className={`float-right px-4 py-2 my-4 ${buttonClasses}`}
-              title="Submit Button"
+              title="Login"
               disabled={submitting || pristine}
               type="submit"
             >
-              Submit
+              <SignInIcon size={14} /> Login
             </button>
           </div>
         </div>

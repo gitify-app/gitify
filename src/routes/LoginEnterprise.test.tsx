@@ -126,7 +126,7 @@ describe('routes/LoginEnterprise.tsx', () => {
       target: { value: 'abc' },
     });
 
-    fireEvent.submit(screen.getByTitle('Login Button'));
+    fireEvent.submit(screen.getByTitle('Login'));
 
     expect(screen.getByText('Invalid hostname.')).toBeTruthy();
     expect(screen.getByText('Invalid client id.')).toBeTruthy();
