@@ -93,7 +93,7 @@ describe('routes/LoginEnterprise.tsx', () => {
       expect(openExternalMock).toHaveBeenCalledTimes(0);
     });
 
-    it('should open if hostname configured', async () => {
+    it('should open in browser if hostname configured', async () => {
       render(
         <AppContext.Provider value={{ accounts: mockAccounts }}>
           <MemoryRouter>
