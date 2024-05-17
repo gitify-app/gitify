@@ -95,7 +95,7 @@ export const LoginEnterpriseRoute: FC = () => {
                   Create new OAuth App
                 </button>{' '}
                 then{' '}
-                <span className="italic">Generate a new client secret</span>.
+                <span className="italic">generate a new client secret</span>.
               </div>
             </div>
           }

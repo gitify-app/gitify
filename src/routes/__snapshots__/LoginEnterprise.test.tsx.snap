@@ -90,7 +90,7 @@ exports[`routes/LoginEnterprise.tsx renders correctly 1`] = `
               <span
                 className="italic"
               >
-                Generate a new client secret
+                generate a new client secret
               </span>
               .
             </div>
