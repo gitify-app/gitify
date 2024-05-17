@@ -158,4 +158,18 @@ describe('routes/LoginWithToken.tsx', () => {
     expect(screen.getByText('Invalid hostname.')).toBeDefined();
     expect(screen.getByText('Invalid token.')).toBeDefined();
   });
+
+  it('should open help docs in the browser', async () => {
+    render(
+      <AppContext.Provider value={{ validateToken: mockValidateToken }}>
+        <MemoryRouter>
+          <LoginWithToken />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(screen.getByLabelText('GitHub Docs'));
+
+    expect(openExternalMock).toHaveBeenCalledTimes(1);
+  });
 });

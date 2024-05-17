@@ -99,6 +99,7 @@ export const LoginEnterpriseRoute: FC = () => {
           <div className="text-xs italic hover:text-blue-500 justify-center items-center">
             <button
               type="button"
+              aria-label="GitHub Docs"
               className={`px-2 py-1 text-xs ${buttonClasses}`}
               onClick={() => openLink(GITHUB_DOCS_URL)}
             >
