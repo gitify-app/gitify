@@ -54,14 +54,14 @@ export const LoginRoute: FC = () => {
         name="Personal Access Token"
         icon={KeyIcon}
         label="Login with Personal Access Token"
-        class="w-50 px-2 py-2 my-2 text-xs"
+        class="py-2 mt-2"
         onClick={() => navigate('/login-personal-access-token')}
       />
       <Button
         name="OAuth App"
         icon={PersonIcon}
         label="Login with OAuth App"
-        class="w-50 px-2 py-2 my-2 text-xs"
+        class="py-2 mt-2"
         onClick={() => navigate('/login-oauth-app')}
       />
     </div>

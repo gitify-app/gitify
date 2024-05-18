@@ -16,7 +16,7 @@ export interface IButton {
 
 export const Button: FC<IButton> = (props: IButton) => {
   const baseClass =
-    'rounded bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer';
+    'rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 ';
   return (
     <button
       type={props.type ?? 'button'}
