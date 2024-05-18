@@ -11,9 +11,7 @@ import { AppContext } from '../context/App';
 import type { AuthOptions } from '../types';
 import { getNewOAuthAppURL } from '../utils/auth';
 import { openExternalLink } from '../utils/comms';
-
-const GITHUB_DOCS_URL =
-  'https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authenticating-to-the-rest-api-with-an-oauth-app';
+import Constants from '../utils/constants';
 
 interface IValues {
   hostname?: string;
@@ -118,7 +116,7 @@ export const LoginEnterpriseRoute: FC = () => {
               type="button"
               aria-label="GitHub Docs"
               className={`px-2 py-1 text-xs ${buttonClasses}`}
-              onClick={() => openLink(GITHUB_DOCS_URL)}
+              onClick={() => openLink(Constants.GITHUB_DOCS.OAUTH_URL)}
             >
               <BookIcon size={12} /> Docs
             </button>

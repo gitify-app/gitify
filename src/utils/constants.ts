@@ -23,6 +23,14 @@ export const Constants = {
   FETCH_INTERVAL: 60000,
 
   READ_CLASS_NAME: 'opacity-50 dark:opacity-50',
+
+  // GitHub Docs
+  GITHUB_DOCS: {
+    OAUTH_URL:
+      'https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authenticating-to-the-rest-api-with-an-oauth-app',
+    PAT_URL:
+      'https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens',
+  },
 };
 
 export const Errors: Record<ErrorType, GitifyError> = {

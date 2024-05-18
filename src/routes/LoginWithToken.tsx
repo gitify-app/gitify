@@ -12,9 +12,6 @@ import { Constants } from '../utils/constants';
 
 import { getNewTokenURL } from '../utils/auth';
 
-const GITHUB_DOCS_URL =
-  'https://docs.github.com/en/enterprise-server@3.13/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens';
-
 interface IValues {
   token?: string;
   hostname?: string;
@@ -113,7 +110,7 @@ export const LoginWithToken: FC = () => {
               type="button"
               aria-label="GitHub Docs"
               className={`px-2 py-1 text-xs ${buttonClasses}`}
-              onClick={() => openLink(GITHUB_DOCS_URL)}
+              onClick={() => openLink(Constants.GITHUB_DOCS.PAT_URL)}
             >
               <BookIcon size={12} /> Docs
             </button>
