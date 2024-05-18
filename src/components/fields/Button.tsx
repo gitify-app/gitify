@@ -10,6 +10,7 @@ export interface IButton {
   size?: number;
   class?: string;
   disabled?: boolean;
+  type?: 'button' | 'submit';
 }
 
 export const Button: FC<IButton> = (props: IButton) => {
@@ -17,7 +18,7 @@ export const Button: FC<IButton> = (props: IButton) => {
     'rounded bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer';
   return (
     <button
-      type="button"
+      type={props.type ?? 'button'}
       aria-label={props.label}
       className={`${props.class} ${baseClass}`}
       disabled={props.disabled}
