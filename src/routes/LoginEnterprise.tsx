@@ -9,6 +9,8 @@ import { useNavigate } from 'react-router-dom';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
 import type { AuthOptions } from '../types';
+import { getNewOAuthAppURL } from '../utils/auth';
+import { openExternalLink } from '../utils/comms';
 
 interface IValues {
   hostname?: string;
@@ -65,8 +67,15 @@ export const LoginEnterpriseRoute: FC = () => {
     }
   }, [enterpriseAccounts]);
 
+  const openLink = useCallback((url: string) => {
+    openExternalLink(url);
+  }, []);
+
   const renderForm = (formProps: FormRenderProps) => {
-    const { handleSubmit, submitting, pristine } = formProps;
+    const { handleSubmit, submitting, pristine, values } = formProps;
+
+    const buttonClasses =
+      'rounded bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer';
 
     return (
       <form onSubmit={handleSubmit}>
@@ -74,6 +83,22 @@ export const LoginEnterpriseRoute: FC = () => {
           name="hostname"
           label="Hostname"
           placeholder="github.company.com"
+          helpText={
+            <div>
+              <div className="mb-1">
+                <button
+                  type="button"
+                  className={`px-2 py-1 text-xs ${buttonClasses}`}
+                  disabled={!values.hostname}
+                  onClick={() => openLink(getNewOAuthAppURL(values.hostname))}
+                >
+                  Create new OAuth App
+                </button>{' '}
+                then{' '}
+                <span className="italic">generate a new client secret</span>.
+              </div>
+            </div>
+          }
         />
 
         <FieldInput name="clientId" label="Client ID" placeholder="123456789" />

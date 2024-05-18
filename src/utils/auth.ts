@@ -1,5 +1,6 @@
 import { BrowserWindow } from '@electron/remote';
 
+import { format } from 'date-fns';
 import type {
   AuthResponse,
   AuthState,
@@ -136,3 +137,24 @@ export const addAccount = (
     ],
   };
 };
+
+export function getNewOAuthAppURL(hostname: string): string {
+  const date = format(new Date(), 'PP p');
+  const newOAuthAppURL = new URL(
+    `https://${hostname}/settings/applications/new`,
+  );
+  newOAuthAppURL.searchParams.append(
+    'oauth_application[name]',
+    `Gitify (Created on ${date})`,
+  );
+  newOAuthAppURL.searchParams.append(
+    'oauth_application[url]',
+    'https://www.gitify.io',
+  );
+  newOAuthAppURL.searchParams.append(
+    'oauth_application[callback_url]',
+    'https://www.gitify.io/callback',
+  );
+
+  return newOAuthAppURL.toString();
+}
