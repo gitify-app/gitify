@@ -5,10 +5,11 @@ import { openExternalLink } from '../../utils/comms';
 export interface IButton {
   name: string;
   label: string;
-  icon?: Icon;
-  url?: string;
-  size?: number;
   class?: string;
+  icon?: Icon;
+  size?: number;
+  url?: string;
+  onClick?: () => void;
   disabled?: boolean;
   type?: 'button' | 'submit';
 }
@@ -23,7 +24,12 @@ export const Button: FC<IButton> = (props: IButton) => {
       aria-label={props.label}
       className={`${props.class} ${baseClass}`}
       disabled={props.disabled}
-      onClick={() => props.url && openExternalLink(props.url)}
+      onClick={() => {
+        if (props.url) {
+          return openExternalLink(props.url);
+        }
+        props.onClick();
+      }}
     >
       {props.icon && <props.icon className="mr-1" size={props.size && 14} />}
       {props.name}

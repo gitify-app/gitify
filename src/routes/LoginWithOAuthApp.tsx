@@ -59,7 +59,7 @@ export const validate = (values: IValues): IFormErrors => {
   return errors;
 };
 
-export const LoginEnterpriseRoute: FC = () => {
+export const LoginWithOAuthApp: FC = () => {
   const {
     accounts: { enterpriseAccounts },
     loginEnterprise,
@@ -160,7 +160,9 @@ export const LoginEnterpriseRoute: FC = () => {
           />
         </button>
 
-        <h3 className="text-lg font-semibold">Login with GitHub Enterprise</h3>
+        <h3 className="text-lg font-semibold">
+          <PersonIcon /> Login with OAuth App
+        </h3>
       </div>
 
       <div className="flex-1 px-8">

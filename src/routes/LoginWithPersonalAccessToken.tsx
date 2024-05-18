@@ -48,7 +48,7 @@ export const validate = (values: IValues): IFormErrors => {
   return errors;
 };
 
-export const LoginWithToken: FC = () => {
+export const LoginWithPersonalAccessToken: FC = () => {
   const { validateToken } = useContext(AppContext);
   const navigate = useNavigate();
   const [isValidToken, setIsValidToken] = useState<boolean>(true);
@@ -63,10 +63,8 @@ export const LoginWithToken: FC = () => {
           label="Hostname"
           placeholder="github.company.com"
           helpText={
-            <div>
-              <div className="italic mt-1">
-                Change only if you are using GitHub Enterprise Server.
-              </div>
+            <div className="italic mt-1">
+              Change only if you are using GitHub Enterprise Server.
             </div>
           }
         />
@@ -156,7 +154,7 @@ export const LoginWithToken: FC = () => {
         </button>
 
         <h3 className="text-lg font-semibold">
-          Login with Personal Access Token
+          <KeyIcon /> Login with Personal Access Token
         </h3>
       </div>
 
