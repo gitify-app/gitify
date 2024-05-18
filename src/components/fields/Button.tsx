@@ -19,6 +19,7 @@ export const Button: FC<IButton> = (props: IButton) => {
   return (
     <button
       type={props.type ?? 'button'}
+      title={props.label}
       aria-label={props.label}
       className={`${props.class} ${baseClass}`}
       disabled={props.disabled}

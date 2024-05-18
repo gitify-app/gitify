@@ -1,16 +1,21 @@
 const ipcRenderer = require('electron').ipcRenderer;
 
-import { ArrowLeftIcon, BookIcon, SignInIcon } from '@primer/octicons-react';
+import {
+  ArrowLeftIcon,
+  BookIcon,
+  PersonIcon,
+  SignInIcon,
+} from '@primer/octicons-react';
 
 import { type FC, useCallback, useContext, useEffect } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
 
+import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
 import type { AuthOptions } from '../types';
 import { getNewOAuthAppURL } from '../utils/auth';
-import { openExternalLink } from '../utils/comms';
 import Constants from '../utils/constants';
 
 interface IValues {
@@ -68,15 +73,8 @@ export const LoginEnterpriseRoute: FC = () => {
     }
   }, [enterpriseAccounts]);
 
-  const openLink = useCallback((url: string) => {
-    openExternalLink(url);
-  }, []);
-
   const renderForm = (formProps: FormRenderProps) => {
     const { handleSubmit, submitting, pristine, values } = formProps;
-
-    const buttonClasses =
-      'rounded bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer';
 
     return (
       <form onSubmit={handleSubmit}>
@@ -87,14 +85,15 @@ export const LoginEnterpriseRoute: FC = () => {
           helpText={
             <div>
               <div className="mb-1">
-                <button
-                  type="button"
-                  className={`px-2 py-1 text-xs ${buttonClasses}`}
+                <Button
+                  name="Create new OAuth App"
+                  label="Create new OAuth App"
+                  class="px-2 py-1 text-xs"
                   disabled={!values.hostname}
-                  onClick={() => openLink(getNewOAuthAppURL(values.hostname))}
-                >
-                  Create new OAuth App
-                </button>{' '}
+                  icon={PersonIcon}
+                  size={12}
+                  url={getNewOAuthAppURL(values.hostname)}
+                />{' '}
                 then{' '}
                 <span className="italic">generate a new client secret</span>.
               </div>
@@ -112,24 +111,25 @@ export const LoginEnterpriseRoute: FC = () => {
 
         <div className="flex justify-between items-center">
           <div className="text-xs italic hover:text-blue-500 justify-center items-center">
-            <button
-              type="button"
-              aria-label="GitHub Docs"
-              className={`px-2 py-1 text-xs ${buttonClasses}`}
-              onClick={() => openLink(Constants.GITHUB_DOCS.OAUTH_URL)}
-            >
-              <BookIcon size={12} /> Docs
-            </button>
+            <Button
+              name="Docs"
+              label="GitHub Docs"
+              class="px-2 py-1 text-xs"
+              icon={BookIcon}
+              size={12}
+              url={Constants.GITHUB_DOCS.OAUTH_URL}
+            />
           </div>
           <div className="justify-center items-center">
-            <button
-              className={`float-right px-4 py-2 my-4 ${buttonClasses}`}
-              title="Login"
+            <Button
+              name="Login"
+              label="Login"
+              class="float-right px-4 py-2 my-4"
+              icon={SignInIcon}
+              size={14}
               disabled={submitting || pristine}
               type="submit"
-            >
-              <SignInIcon size={14} /> Login
-            </button>
+            />
           </div>
         </div>
       </form>

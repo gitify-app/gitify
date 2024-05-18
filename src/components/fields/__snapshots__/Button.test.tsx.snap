@@ -5,6 +5,7 @@ exports[`components/fields/Button.tsx should render with icon 1`] = `
   aria-label="button"
   className="undefined rounded bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer"
   onClick={[Function]}
+  title="button"
   type="button"
 >
   <svg
@@ -37,6 +38,7 @@ exports[`components/fields/Button.tsx should render without icon 1`] = `
   aria-label="button"
   className="undefined rounded bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer"
   onClick={[Function]}
+  title="button"
   type="button"
 >
   Button
