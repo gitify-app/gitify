@@ -124,7 +124,7 @@ describe('routes/LoginWithToken.tsx', () => {
       target: { value: 'github.com' },
     });
 
-    fireEvent.submit(screen.getByTitle('Submit Button'));
+    fireEvent.submit(screen.getByTitle('Login'));
 
     await waitFor(() => expect(mockValidateToken).toHaveBeenCalledTimes(1));
 
@@ -150,7 +150,7 @@ describe('routes/LoginWithToken.tsx', () => {
       fireEvent.change(screen.getByLabelText('Hostname'), {
         target: { value: 'github.com' },
       });
-      fireEvent.submit(screen.getByTitle('Submit Button'));
+      fireEvent.submit(screen.getByTitle('Login'));
     });
 
     await waitFor(() => expect(mockValidateToken).toHaveBeenCalledTimes(1));
@@ -173,9 +173,23 @@ describe('routes/LoginWithToken.tsx', () => {
       target: { value: '123' },
     });
 
-    fireEvent.submit(screen.getByTitle('Submit Button'));
+    fireEvent.submit(screen.getByTitle('Login'));
 
     expect(screen.getByText('Invalid hostname.')).toBeDefined();
     expect(screen.getByText('Invalid token.')).toBeDefined();
+  });
+
+  it('should open help docs in the browser', async () => {
+    render(
+      <AppContext.Provider value={{ validateToken: mockValidateToken }}>
+        <MemoryRouter>
+          <LoginWithToken />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(screen.getByLabelText('GitHub Docs'));
+
+    expect(openExternalMock).toHaveBeenCalledTimes(1);
   });
 });

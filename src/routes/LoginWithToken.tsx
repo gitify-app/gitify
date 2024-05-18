@@ -1,4 +1,4 @@
-import { ArrowLeftIcon } from '@primer/octicons-react';
+import { ArrowLeftIcon, BookIcon, SignInIcon } from '@primer/octicons-react';
 
 import { type FC, useCallback, useContext, useState } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
@@ -11,6 +11,9 @@ import { openExternalLink } from '../utils/comms';
 import { Constants } from '../utils/constants';
 
 import { format } from 'date-fns';
+
+const GITHUB_DOCS_URL =
+  'https://docs.github.com/en/enterprise-server@3.13/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens';
 
 interface IValues {
   token?: string;
@@ -104,14 +107,28 @@ export const LoginWithToken: FC = () => {
           </div>
         )}
 
-        <button
-          className={`float-right px-4 py-2 my-4 ${buttonClasses}`}
-          title="Submit Button"
-          disabled={submitting || pristine}
-          type="submit"
-        >
-          Submit
-        </button>
+        <div className="flex justify-between items-center">
+          <div className="text-xs italic hover:text-blue-500 justify-center items-center">
+            <button
+              type="button"
+              aria-label="GitHub Docs"
+              className={`px-2 py-1 text-xs ${buttonClasses}`}
+              onClick={() => openLink(GITHUB_DOCS_URL)}
+            >
+              <BookIcon size={12} /> Docs
+            </button>
+          </div>
+          <div className="justify-center items-center">
+            <button
+              className={`float-right px-4 py-2 my-4 ${buttonClasses}`}
+              title="Login"
+              disabled={submitting || pristine}
+              type="submit"
+            >
+              <SignInIcon size={14} /> Login
+            </button>
+          </div>
+        </div>
       </form>
     );
   };

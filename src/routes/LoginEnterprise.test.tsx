@@ -23,6 +23,7 @@ describe('routes/LoginEnterprise.tsx', () => {
   };
 
   beforeEach(() => {
+    openExternalMock.mockReset();
     mockNavigate.mockReset();
 
     jest.spyOn(ipcRenderer, 'send');
@@ -160,10 +161,24 @@ describe('routes/LoginEnterprise.tsx', () => {
       target: { value: 'abc' },
     });
 
-    fireEvent.submit(screen.getByTitle('Login Button'));
+    fireEvent.submit(screen.getByTitle('Login'));
 
     expect(screen.getByText('Invalid hostname.')).toBeTruthy();
     expect(screen.getByText('Invalid client id.')).toBeTruthy();
     expect(screen.getByText('Invalid client secret.')).toBeTruthy();
+  });
+
+  it('should open help docs in the browser', async () => {
+    render(
+      <AppContext.Provider value={{ accounts: mockAccounts }}>
+        <MemoryRouter>
+          <LoginEnterpriseRoute />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(screen.getByLabelText('GitHub Docs'));
+
+    expect(openExternalMock).toHaveBeenCalledTimes(1);
   });
 });
