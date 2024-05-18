@@ -73,6 +73,7 @@ export const LoginWithToken: FC = () => {
                 <button
                   type="button"
                   className={`px-2 py-1 text-xs ${buttonClasses}`}
+                  disabled={!values.hostname}
                   onClick={() => openLink(getNewTokenURL())}
                 >
                   Generate a PAT

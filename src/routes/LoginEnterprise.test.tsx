@@ -23,6 +23,7 @@ describe('routes/LoginEnterprise.tsx', () => {
   };
 
   beforeEach(() => {
+    openExternalMock.mockReset();
     mockNavigate.mockReset();
 
     jest.spyOn(ipcRenderer, 'send');
@@ -76,6 +77,40 @@ describe('routes/LoginEnterprise.tsx', () => {
     expect(validate(values).hostname).toBe('Invalid hostname.');
     expect(validate(values).clientId).toBe('Invalid client id.');
     expect(validate(values).clientSecret).toBe('Invalid client secret.');
+  });
+
+  describe("'Create new OAuth App' button", () => {
+    it('should be disabled if no hostname configured', async () => {
+      render(
+        <AppContext.Provider value={{ accounts: mockAccounts }}>
+          <MemoryRouter>
+            <LoginEnterpriseRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+
+      fireEvent.click(screen.getByText('Create new OAuth App'));
+
+      expect(openExternalMock).toHaveBeenCalledTimes(0);
+    });
+
+    it('should open in browser if hostname configured', async () => {
+      render(
+        <AppContext.Provider value={{ accounts: mockAccounts }}>
+          <MemoryRouter>
+            <LoginEnterpriseRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+
+      fireEvent.change(screen.getByLabelText('Hostname'), {
+        target: { value: 'company.github.com' },
+      });
+
+      fireEvent.click(screen.getByText('Create new OAuth App'));
+
+      expect(openExternalMock).toHaveBeenCalledTimes(1);
+    });
   });
 
   it('should receive a logged-in enterprise account', () => {

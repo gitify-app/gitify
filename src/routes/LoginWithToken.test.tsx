@@ -72,18 +72,38 @@ describe('routes/LoginWithToken.tsx', () => {
     expect(validate(values).token).toBe('Invalid token.');
   });
 
-  it("should click on the 'Generate a PAT' link and open the browser", async () => {
-    render(
-      <AppContext.Provider value={{ validateToken: mockValidateToken }}>
-        <MemoryRouter>
-          <LoginWithToken />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+  describe("'Generate a PAT' button", () => {
+    it('should be disabled if no hostname configured', async () => {
+      render(
+        <AppContext.Provider value={{ validateToken: mockValidateToken }}>
+          <MemoryRouter>
+            <LoginWithToken />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
 
-    fireEvent.click(screen.getByText('Generate a PAT'));
+      fireEvent.change(screen.getByLabelText('Hostname'), {
+        target: { value: '' },
+      });
 
-    expect(openExternalMock).toHaveBeenCalledTimes(1);
+      fireEvent.click(screen.getByText('Generate a PAT'));
+
+      expect(openExternalMock).toHaveBeenCalledTimes(0);
+    });
+
+    it('should open in browser if hostname configured', async () => {
+      render(
+        <AppContext.Provider value={{ validateToken: mockValidateToken }}>
+          <MemoryRouter>
+            <LoginWithToken />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+
+      fireEvent.click(screen.getByText('Generate a PAT'));
+
+      expect(openExternalMock).toHaveBeenCalledTimes(1);
+    });
   });
 
   it('should login using a token - success', async () => {

@@ -18,10 +18,9 @@ import type {
 import { apiRequestAuth } from './request';
 
 import { print } from 'graphql/language/printer';
-import Constants from '../constants';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
-import { getGitHubAPIBaseUrl } from './utils';
+import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
 
 /**
  * Get Hypermedia links to resources accessible in GitHub's REST API
@@ -247,7 +246,8 @@ export async function searchDiscussions(
   notification: Notification,
   token: string,
 ): AxiosPromise<GraphQLSearch<Discussion>> {
-  return apiRequestAuth(Constants.GITHUB_API_GRAPHQL_URL, 'POST', token, {
+  const url = getGitHubGraphQLUrl(notification.hostname);
+  return apiRequestAuth(url.toString(), 'POST', token, {
     query: print(QUERY_SEARCH_DISCUSSIONS),
     variables: {
       queryStatement: formatAsGitHubSearchSyntax(
