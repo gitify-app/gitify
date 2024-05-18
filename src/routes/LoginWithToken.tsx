@@ -15,7 +15,7 @@ import type { AuthTokenOptions } from '../types';
 import { Constants } from '../utils/constants';
 
 import { Button } from '../components/fields/Button';
-import { getNewTokenURL } from '../utils/auth';
+import { getNewTokenURL, isValidHostname, isValidToken } from '../utils/auth';
 
 interface IValues {
   token?: string;
@@ -31,17 +31,13 @@ export const validate = (values: IValues): IFormErrors => {
   const errors: IFormErrors = {};
   if (!values.token) {
     errors.token = 'Required';
-  } else if (!/^[A-Z0-9_]{40}$/i.test(values.token)) {
+  } else if (!isValidToken(values.token)) {
     errors.token = 'Invalid token.';
   }
 
   if (!values.hostname) {
     errors.hostname = 'Required';
-  } else if (
-    !/^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
-      values.hostname,
-    )
-  ) {
+  } else if (!isValidHostname(values.hostname)) {
     errors.hostname = 'Invalid hostname.';
   }
 

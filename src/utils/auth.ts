@@ -167,3 +167,17 @@ export function getNewOAuthAppURL(hostname: string): string {
 
   return newOAuthAppURL.toString();
 }
+
+export function isValidHostname(hostname: string) {
+  return /^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
+    hostname,
+  );
+}
+
+export function isValidClientId(clientId: string) {
+  return /^[A-Z0-9_]{20}$/i.test(clientId);
+}
+
+export function isValidToken(token: string) {
+  return /^[A-Z0-9_]{40}$/i.test(token);
+}

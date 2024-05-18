@@ -15,7 +15,12 @@ import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
 import type { AuthOptions } from '../types';
-import { getNewOAuthAppURL } from '../utils/auth';
+import {
+  getNewOAuthAppURL,
+  isValidClientId,
+  isValidHostname,
+  isValidToken,
+} from '../utils/auth';
 import Constants from '../utils/constants';
 
 interface IValues {
@@ -34,25 +39,19 @@ export const validate = (values: IValues): IFormErrors => {
   const errors: IFormErrors = {};
   if (!values.hostname) {
     errors.hostname = 'Required';
-  } else if (
-    !/^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
-      values.hostname,
-    )
-  ) {
+  } else if (!isValidHostname(values.hostname)) {
     errors.hostname = 'Invalid hostname.';
   }
 
   if (!values.clientId) {
-    // 20
     errors.clientId = 'Required';
-  } else if (!/^[A-Z0-9]{20}$/i.test(values.clientId)) {
+  } else if (!isValidClientId(values.clientId)) {
     errors.clientId = 'Invalid client id.';
   }
 
   if (!values.clientSecret) {
-    // 40
     errors.clientSecret = 'Required';
-  } else if (!/^[A-Z0-9]{40}$/i.test(values.clientSecret)) {
+  } else if (!isValidToken(values.clientSecret)) {
     errors.clientSecret = 'Invalid client secret.';
   }
 
