@@ -563,11 +563,11 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
     <div>
       <button
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
-        title="Login with GitHub Enterprise"
+        title="Login with OAuth App"
         type="button"
       >
         <svg
-          aria-label="Login with GitHub Enterprise"
+          aria-label="Login with OAuth App"
           class="octicon octicon-person-add"
           fill="currentColor"
           focusable="false"

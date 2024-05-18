@@ -32,6 +32,7 @@ interface IFormErrors {
 
 export const validate = (values: IValues): IFormErrors => {
   const errors: IFormErrors = {};
+
   if (!values.hostname) {
     errors.hostname = 'Required';
   } else if (
@@ -88,12 +89,12 @@ export const LoginWithOAuthApp: FC = () => {
                 name="Create new OAuth App"
                 label="Create new OAuth App"
                 disabled={!values.hostname}
-                class="px-1 py-1 my-0"
                 icon={PersonIcon}
                 size={12}
                 url={getNewOAuthAppURL(values.hostname)}
               />{' '}
-              then <span className="italic">generate a new client secret</span>.
+              on GitHub then paste your{' '}
+              <span className="italic">client id and client secret</span> below.
             </div>
           }
         />
@@ -110,7 +111,7 @@ export const LoginWithOAuthApp: FC = () => {
           <Button
             name="Docs"
             label="GitHub Docs"
-            class="py-1"
+            class="mt-2"
             icon={BookIcon}
             size={12}
             url={Constants.GITHUB_DOCS.OAUTH_URL}
@@ -119,9 +120,9 @@ export const LoginWithOAuthApp: FC = () => {
           <Button
             name="Login"
             label="Login"
-            class="px-4 py-2 mt-4"
+            class="px-4 py-2 mt-2 !text-sm"
             icon={SignInIcon}
-            size={14}
+            size={16}
             disabled={submitting || pristine}
             type="submit"
           />
@@ -155,7 +156,8 @@ export const LoginWithOAuthApp: FC = () => {
         </button>
 
         <h3 className="text-lg font-semibold justify-center">
-          <PersonIcon /> Login with OAuth App
+          <PersonIcon size={20} className="mr-2" />
+          Login with OAuth App
         </h3>
       </div>
 

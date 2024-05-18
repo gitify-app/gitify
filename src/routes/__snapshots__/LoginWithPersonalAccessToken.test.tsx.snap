@@ -37,14 +37,14 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
       </svg>
     </button>
     <h3
-      className="text-lg font-semibold"
+      className="text-lg font-semibold justify-center"
     >
       <svg
         aria-hidden="true"
-        className="octicon octicon-key"
+        className="mr-2"
         fill="currentColor"
         focusable="false"
-        height={16}
+        height={18}
         style={
           {
             "display": "inline-block",
@@ -54,13 +54,13 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
           }
         }
         viewBox="0 0 16 16"
-        width={16}
+        width={18}
       >
         <path
           d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
         />
       </svg>
-       Login with Personal Access Token
+      Login with Personal Access Token
     </h3>
   </div>
   <div
@@ -128,7 +128,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
             <div>
               <button
                 aria-label="Generate a PAT"
-                className="px-2 py-1 text-xs rounded bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer"
+                className="undefined rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
                 disabled={false}
                 onClick={[Function]}
                 title="Generate a PAT"
@@ -139,7 +139,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
                   className="mr-1"
                   fill="currentColor"
                   focusable="false"
-                  height={14}
+                  height={12}
                   style={
                     {
                       "display": "inline-block",
@@ -149,7 +149,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
                     }
                   }
                   viewBox="0 0 16 16"
-                  width={14}
+                  width={12}
                 >
                   <path
                     d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
@@ -169,77 +169,69 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="flex justify-between items-center"
+        className="flex justify-between items-end"
       >
-        <div
-          className="text-xs italic hover:text-blue-500 justify-center items-center"
+        <button
+          aria-label="GitHub Docs"
+          className="mt-2 rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+          onClick={[Function]}
+          title="GitHub Docs"
+          type="button"
         >
-          <button
-            aria-label="GitHub Docs"
-            className="px-2 py-1 text-xs rounded bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer"
-            onClick={[Function]}
-            title="GitHub Docs"
-            type="button"
-          >
-            <svg
-              aria-hidden="true"
-              className="mr-1"
-              fill="currentColor"
-              focusable="false"
-              height={14}
-              style={
-                {
-                  "display": "inline-block",
-                  "overflow": "visible",
-                  "userSelect": "none",
-                  "verticalAlign": "text-bottom",
-                }
+          <svg
+            aria-hidden="true"
+            className="mr-1"
+            fill="currentColor"
+            focusable="false"
+            height={12}
+            style={
+              {
+                "display": "inline-block",
+                "overflow": "visible",
+                "userSelect": "none",
+                "verticalAlign": "text-bottom",
               }
-              viewBox="0 0 16 16"
-              width={14}
-            >
-              <path
-                d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"
-              />
-            </svg>
-            Docs
-          </button>
-        </div>
-        <div
-          className="justify-center items-center"
+            }
+            viewBox="0 0 16 16"
+            width={12}
+          >
+            <path
+              d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"
+            />
+          </svg>
+          Docs
+        </button>
+        <button
+          aria-label="Login"
+          className="px-4 py-2 mt-2 !text-sm rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+          disabled={true}
+          onClick={[Function]}
+          title="Login"
+          type="submit"
         >
-          <button
-            aria-label="Login"
-            className="float-right px-4 py-2 my-4 rounded bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer"
-            disabled={true}
-            onClick={[Function]}
-            title="Login"
-            type="submit"
-          >
-            <svg
-              aria-hidden="true"
-              className="mr-1"
-              fill="currentColor"
-              focusable="false"
-              height={14}
-              style={
-                {
-                  "display": "inline-block",
-                  "overflow": "visible",
-                  "userSelect": "none",
-                  "verticalAlign": "text-bottom",
-                }
+          <svg
+            aria-hidden="true"
+            className="mr-1"
+            fill="currentColor"
+            focusable="false"
+            height={16}
+            style={
+              {
+                "display": "inline-block",
+                "overflow": "visible",
+                "userSelect": "none",
+                "verticalAlign": "text-bottom",
               }
-              viewBox="0 0 16 16"
-              width={14}
-            >
-              <path
-                d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm6.56 4.5h5.69a.75.75 0 0 1 0 1.5H8.56l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L6.22 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734Z"
-              />
-            </svg>
-            Login
-          </button>
-        </div>
+            }
+            viewBox="0 0 16 16"
+            width={16}
+          >
+            <path
+              d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm6.56 4.5h5.69a.75.75 0 0 1 0 1.5H8.56l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L6.22 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734Z"
+            />
+          </svg>
+          Login
+        </button>
       </div>
     </form>
   </div>

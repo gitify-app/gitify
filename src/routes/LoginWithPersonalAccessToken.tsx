@@ -29,11 +29,6 @@ interface IFormErrors {
 
 export const validate = (values: IValues): IFormErrors => {
   const errors: IFormErrors = {};
-  if (!values.token) {
-    errors.token = 'Required';
-  } else if (!/^[A-Z0-9_]{40}$/i.test(values.token)) {
-    errors.token = 'Invalid token.';
-  }
 
   if (!values.hostname) {
     errors.hostname = 'Required';
@@ -43,6 +38,12 @@ export const validate = (values: IValues): IFormErrors => {
     )
   ) {
     errors.hostname = 'Invalid hostname.';
+  }
+
+  if (!values.token) {
+    errors.token = 'Required';
+  } else if (!/^[A-Z0-9_]{40}$/i.test(values.token)) {
+    errors.token = 'Invalid token.';
   }
 
   return errors;
@@ -80,7 +81,6 @@ export const LoginWithPersonalAccessToken: FC = () => {
                   name="Generate a PAT"
                   label="Generate a PAT"
                   disabled={!values.hostname}
-                  class="py-1 my-0 text-xl"
                   icon={KeyIcon}
                   size={12}
                   url={getNewTokenURL(values.hostname)}
@@ -104,7 +104,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
           <Button
             name="Docs"
             label="GitHub Docs"
-            class="py-1"
+            class="mt-2"
             icon={BookIcon}
             size={12}
             url={Constants.GITHUB_DOCS.PAT_URL}
@@ -112,9 +112,9 @@ export const LoginWithPersonalAccessToken: FC = () => {
           <Button
             name="Login"
             label="Login"
-            class="px-4 py-2 mt-4"
+            class="px-4 py-2 mt-2 !text-sm"
             icon={SignInIcon}
-            size={14}
+            size={16}
             disabled={submitting || pristine}
             type="submit"
           />
@@ -123,7 +123,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
     );
   };
 
-  const submit = useCallback(async (data: IValues) => {
+  const login = useCallback(async (data: IValues) => {
     setIsValidToken(true);
     try {
       await validateToken(data as AuthTokenOptions);
@@ -150,17 +150,18 @@ export const LoginWithPersonalAccessToken: FC = () => {
         </button>
 
         <h3 className="text-lg font-semibold justify-center">
-          <KeyIcon /> Login with Personal Access Token
+          <KeyIcon size={18} className="mr-2" />
+          Login with Personal Access Token
         </h3>
       </div>
 
       <div className="flex-1 px-8">
         <Form
           initialValues={{
-            token: '',
             hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+            token: '',
           }}
-          onSubmit={submit}
+          onSubmit={login}
           validate={validate}
         >
           {renderForm}
