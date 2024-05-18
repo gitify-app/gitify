@@ -53,6 +53,39 @@ exports[`routes/LoginWithToken.tsx renders correctly 1`] = `
       >
         <label
           className="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
+          htmlFor="hostname"
+        >
+          Hostname
+        </label>
+        <input
+          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
+          id="hostname"
+          name="hostname"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          placeholder="github.company.com"
+          required={false}
+          type="text"
+          value="github.com"
+        />
+        <div
+          className="mt-3 text-gray-700 dark:text-gray-200 text-xs"
+        >
+          <div>
+            <div
+              className="italic mt-1"
+            >
+              Change only if you are using GitHub Enterprise Server.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="mb-4"
+      >
+        <label
+          className="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
           htmlFor="token"
         >
           Token
@@ -89,42 +122,6 @@ exports[`routes/LoginWithToken.tsx renders correctly 1`] = `
               className="italic mt-1"
             >
               The required scopes will be selected for you.
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="mb-4"
-      >
-        <label
-          className="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
-          htmlFor="hostname"
-        >
-          Hostname
-        </label>
-        <input
-          className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
-          id="hostname"
-          name="hostname"
-          onBlur={[Function]}
-          onChange={[Function]}
-          onFocus={[Function]}
-          placeholder="github.company.com"
-          required={false}
-          type="text"
-          value="github.com"
-        />
-        <div
-          className="mt-3 text-gray-700 dark:text-gray-200 text-xs"
-        >
-          <div>
-            <div>
-              Defaults to github.com.
-            </div>
-            <div
-              className="italic mt-1"
-            >
-              Change only if you are using GitHub Enterprise Server.
             </div>
           </div>
         </div>

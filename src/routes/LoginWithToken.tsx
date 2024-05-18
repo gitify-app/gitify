@@ -61,6 +61,19 @@ export const LoginWithToken: FC = () => {
     return (
       <form onSubmit={handleSubmit}>
         <FieldInput
+          name="hostname"
+          label="Hostname"
+          placeholder="github.company.com"
+          helpText={
+            <div>
+              <div className="italic mt-1">
+                Change only if you are using GitHub Enterprise Server.
+              </div>
+            </div>
+          }
+        />
+
+        <FieldInput
           name="token"
           label="Token"
           placeholder="The 40 characters token generated on GitHub"
@@ -79,20 +92,6 @@ export const LoginWithToken: FC = () => {
               </div>
               <div className="italic mt-1">
                 The required scopes will be selected for you.
-              </div>
-            </div>
-          }
-        />
-
-        <FieldInput
-          name="hostname"
-          label="Hostname"
-          placeholder="github.company.com"
-          helpText={
-            <div>
-              <div>Defaults to github.com.</div>
-              <div className="italic mt-1">
-                Change only if you are using GitHub Enterprise Server.
               </div>
             </div>
           }
