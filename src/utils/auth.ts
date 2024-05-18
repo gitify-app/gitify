@@ -138,6 +138,15 @@ export const addAccount = (
   };
 };
 
+export function getNewTokenURL(hostname: string): string {
+  const date = format(new Date(), 'PP p');
+  const newTokenURL = new URL(`https://${hostname}/settings/tokens/new`);
+  newTokenURL.searchParams.append('description', `Gitify (Created on ${date})`);
+  newTokenURL.searchParams.append('scopes', Constants.AUTH_SCOPE.join(','));
+
+  return newTokenURL.toString();
+}
+
 export function getNewOAuthAppURL(hostname: string): string {
   const date = format(new Date(), 'PP p');
   const newOAuthAppURL = new URL(

@@ -6,7 +6,7 @@ const browserWindow = new remote.BrowserWindow();
 import type { AuthState } from '../types';
 import * as apiRequests from './api/request';
 import * as auth from './auth';
-import { getNewOAuthAppURL } from './auth';
+import { getNewOAuthAppURL, getNewTokenURL } from './auth';
 
 describe('utils/auth.tsx', () => {
   describe('authGitHub', () => {
@@ -129,6 +129,24 @@ describe('utils/auth.tsx', () => {
           { hostname: 'github.gitify.io', token: '123-456' },
         ],
       });
+    });
+  });
+
+  describe('getNewTokenURL', () => {
+    it('should generate new PAT url - github cloud', () => {
+      expect(
+        getNewTokenURL('github.com').startsWith(
+          'https://github.com/settings/tokens/new',
+        ),
+      ).toBeTruthy();
+    });
+
+    it('should generate new PAT url - github server', () => {
+      expect(
+        getNewTokenURL('github.gitify.io').startsWith(
+          'https://github.gitify.io/settings/tokens/new',
+        ),
+      ).toBeTruthy();
     });
   });
 

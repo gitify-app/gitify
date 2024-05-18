@@ -10,7 +10,7 @@ import type { AuthTokenOptions } from '../types';
 import { openExternalLink } from '../utils/comms';
 import { Constants } from '../utils/constants';
 
-import { format } from 'date-fns';
+import { getNewTokenURL } from '../utils/auth';
 
 const GITHUB_DOCS_URL =
   'https://docs.github.com/en/enterprise-server@3.13/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens';
@@ -74,7 +74,7 @@ export const LoginWithToken: FC = () => {
                   type="button"
                   className={`px-2 py-1 text-xs ${buttonClasses}`}
                   disabled={!values.hostname}
-                  onClick={() => openLink(getNewTokenURL())}
+                  onClick={() => openLink(getNewTokenURL(values.hostname))}
                 >
                   Generate a PAT
                 </button>{' '}
@@ -179,12 +179,3 @@ export const LoginWithToken: FC = () => {
     </div>
   );
 };
-
-function getNewTokenURL(): string {
-  const date = format(new Date(), 'PP p');
-  const newTokenURL = new URL('https://github.com/settings/tokens/new');
-  newTokenURL.searchParams.append('description', `Gitify (Created on ${date})`);
-  newTokenURL.searchParams.append('scopes', Constants.AUTH_SCOPE.join(','));
-
-  return newTokenURL.toString();
-}
