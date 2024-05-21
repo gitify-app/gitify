@@ -91,7 +91,7 @@ describe('routes/Settings.tsx', () => {
       expect(updateSetting).toHaveBeenCalledWith('theme', 'LIGHT');
     });
 
-    it('should be able to enable detailed notifications', async () => {
+    it('should toggle detailed notifications checkbox', async () => {
       jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
         headers: {
           'x-oauth-scopes': Constants.AUTH_SCOPE.join(', '),
@@ -119,7 +119,10 @@ describe('routes/Settings.tsx', () => {
       fireEvent.click(screen.getByLabelText('Detailed notifications'));
 
       expect(updateSetting).toHaveBeenCalledTimes(1);
-      expect(updateSetting).toHaveBeenCalledWith('detailedNotifications', true);
+      expect(updateSetting).toHaveBeenCalledWith(
+        'detailedNotifications',
+        false,
+      );
     });
 
     it('should not be able to enable detailed notifications due to missing scope', async () => {

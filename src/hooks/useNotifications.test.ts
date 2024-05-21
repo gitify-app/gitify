@@ -34,7 +34,10 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications());
 
         act(() => {
-          result.current.fetchNotifications(mockAccounts, mockSettings);
+          result.current.fetchNotifications(mockAccounts, {
+            ...mockSettings,
+            detailedNotifications: false,
+          });
         });
 
         expect(result.current.status).toBe('loading');
@@ -116,7 +119,10 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications());
 
         act(() => {
-          result.current.fetchNotifications(accounts, mockSettings);
+          result.current.fetchNotifications(accounts, {
+            ...mockSettings,
+            detailedNotifications: false,
+          });
         });
 
         await waitFor(() => {
@@ -179,7 +185,10 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications());
 
         act(() => {
-          result.current.fetchNotifications(accounts, mockSettings);
+          result.current.fetchNotifications(accounts, {
+            ...mockSettings,
+            detailedNotifications: false,
+          });
         });
 
         await waitFor(() => {
@@ -417,7 +426,10 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.fetchNotifications(mockAccounts, mockSettings);
+        result.current.fetchNotifications(mockAccounts, {
+          ...mockSettings,
+          detailedNotifications: false,
+        });
       });
 
       await waitFor(() => {

@@ -315,7 +315,6 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
             <input
               checked=""
               class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
-              disabled=""
               id="showBots"
               type="checkbox"
             />
@@ -326,7 +325,6 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
               for="showBots"
-              style="text-decoration: line-through;"
             >
               Show notifications from Bot accounts
               <span

@@ -15,7 +15,7 @@ export const mockSettings: SettingsState = {
   showNotificationsCountInTray: false,
   openAtStartup: false,
   theme: Theme.SYSTEM,
-  detailedNotifications: false,
+  detailedNotifications: true,
   markAsDoneOnOpen: false,
   showAccountHostname: false,
   delayNotificationState: false,
