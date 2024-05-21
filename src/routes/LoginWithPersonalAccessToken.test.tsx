@@ -11,7 +11,10 @@ import { MemoryRouter } from 'react-router-dom';
 import TestRenderer from 'react-test-renderer';
 
 import { AppContext } from '../context/App';
-import { LoginWithToken, validate } from './LoginWithToken';
+import {
+  LoginWithPersonalAccessToken,
+  validate,
+} from './LoginWithPersonalAccessToken';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -19,7 +22,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
-describe('routes/LoginWithToken.tsx', () => {
+describe('routes/LoginWithPersonalAccessToken.tsx', () => {
   const openExternalMock = jest.spyOn(shell, 'openExternal');
 
   const mockValidateToken = jest.fn();
@@ -33,7 +36,7 @@ describe('routes/LoginWithToken.tsx', () => {
   it('renders correctly', () => {
     const tree = TestRenderer.create(
       <MemoryRouter>
-        <LoginWithToken />
+        <LoginWithPersonalAccessToken />
       </MemoryRouter>,
     );
 
@@ -43,7 +46,7 @@ describe('routes/LoginWithToken.tsx', () => {
   it('let us go back', () => {
     render(
       <MemoryRouter>
-        <LoginWithToken />
+        <LoginWithPersonalAccessToken />
       </MemoryRouter>,
     );
 
@@ -77,7 +80,7 @@ describe('routes/LoginWithToken.tsx', () => {
       render(
         <AppContext.Provider value={{ validateToken: mockValidateToken }}>
           <MemoryRouter>
-            <LoginWithToken />
+            <LoginWithPersonalAccessToken />
           </MemoryRouter>
         </AppContext.Provider>,
       );
@@ -95,7 +98,7 @@ describe('routes/LoginWithToken.tsx', () => {
       render(
         <AppContext.Provider value={{ validateToken: mockValidateToken }}>
           <MemoryRouter>
-            <LoginWithToken />
+            <LoginWithPersonalAccessToken />
           </MemoryRouter>
         </AppContext.Provider>,
       );
@@ -112,7 +115,7 @@ describe('routes/LoginWithToken.tsx', () => {
     render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
         <MemoryRouter>
-          <LoginWithToken />
+          <LoginWithPersonalAccessToken />
         </MemoryRouter>
       </AppContext.Provider>,
     );
@@ -138,7 +141,7 @@ describe('routes/LoginWithToken.tsx', () => {
     render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
         <MemoryRouter>
-          <LoginWithToken />
+          <LoginWithPersonalAccessToken />
         </MemoryRouter>
       </AppContext.Provider>,
     );
@@ -162,7 +165,7 @@ describe('routes/LoginWithToken.tsx', () => {
   it('should render the form with errors', () => {
     render(
       <MemoryRouter>
-        <LoginWithToken />
+        <LoginWithPersonalAccessToken />
       </MemoryRouter>,
     );
 
@@ -183,7 +186,7 @@ describe('routes/LoginWithToken.tsx', () => {
     render(
       <AppContext.Provider value={{ validateToken: mockValidateToken }}>
         <MemoryRouter>
-          <LoginWithToken />
+          <LoginWithPersonalAccessToken />
         </MemoryRouter>
       </AppContext.Provider>,
     );

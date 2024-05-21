@@ -6,7 +6,7 @@ import { shell } from 'electron';
 import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
 import type { AuthState } from '../types';
-import { LoginEnterpriseRoute, validate } from './LoginEnterprise';
+import { LoginWithOAuthApp, validate } from './LoginWithOAuthApp';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -14,7 +14,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
-describe('routes/LoginEnterprise.tsx', () => {
+describe('routes/LoginWithOAuthApp.tsx', () => {
   const openExternalMock = jest.spyOn(shell, 'openExternal');
 
   const mockAccounts: AuthState = {
@@ -33,7 +33,7 @@ describe('routes/LoginEnterprise.tsx', () => {
     const tree = TestRenderer.create(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
         <MemoryRouter>
-          <LoginEnterpriseRoute />
+          <LoginWithOAuthApp />
         </MemoryRouter>
       </AppContext.Provider>,
     );
@@ -45,7 +45,7 @@ describe('routes/LoginEnterprise.tsx', () => {
     render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
         <MemoryRouter>
-          <LoginEnterpriseRoute />
+          <LoginWithOAuthApp />
         </MemoryRouter>
       </AppContext.Provider>,
     );
@@ -84,7 +84,7 @@ describe('routes/LoginEnterprise.tsx', () => {
       render(
         <AppContext.Provider value={{ accounts: mockAccounts }}>
           <MemoryRouter>
-            <LoginEnterpriseRoute />
+            <LoginWithOAuthApp />
           </MemoryRouter>
         </AppContext.Provider>,
       );
@@ -98,7 +98,7 @@ describe('routes/LoginEnterprise.tsx', () => {
       render(
         <AppContext.Provider value={{ accounts: mockAccounts }}>
           <MemoryRouter>
-            <LoginEnterpriseRoute />
+            <LoginWithOAuthApp />
           </MemoryRouter>
         </AppContext.Provider>,
       );
@@ -117,7 +117,7 @@ describe('routes/LoginEnterprise.tsx', () => {
     const { rerender } = render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
         <MemoryRouter>
-          <LoginEnterpriseRoute />
+          <LoginWithOAuthApp />
         </MemoryRouter>
       </AppContext.Provider>,
     );
@@ -132,7 +132,7 @@ describe('routes/LoginEnterprise.tsx', () => {
         }}
       >
         <MemoryRouter>
-          <LoginEnterpriseRoute />
+          <LoginWithOAuthApp />
         </MemoryRouter>
       </AppContext.Provider>,
     );
@@ -146,7 +146,7 @@ describe('routes/LoginEnterprise.tsx', () => {
     render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
         <MemoryRouter>
-          <LoginEnterpriseRoute />
+          <LoginWithOAuthApp />
         </MemoryRouter>
       </AppContext.Provider>,
     );
@@ -172,7 +172,7 @@ describe('routes/LoginEnterprise.tsx', () => {
     render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
         <MemoryRouter>
-          <LoginEnterpriseRoute />
+          <LoginWithOAuthApp />
         </MemoryRouter>
       </AppContext.Provider>,
     );
