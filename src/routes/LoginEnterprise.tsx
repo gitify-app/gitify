@@ -1,12 +1,22 @@
-import { ArrowLeftIcon } from '@primer/octicons-react';
+const ipcRenderer = require('electron').ipcRenderer;
+
+import {
+  ArrowLeftIcon,
+  BookIcon,
+  PersonIcon,
+  SignInIcon,
+} from '@primer/octicons-react';
 
 import { type FC, useCallback, useContext } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
 
+import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
 import type { AuthOptions } from '../types';
+import { getNewOAuthAppURL } from '../utils/auth';
+import Constants from '../utils/constants';
 
 interface IValues {
   hostname?: string;
@@ -54,7 +64,7 @@ export const LoginEnterpriseRoute: FC = () => {
   const navigate = useNavigate();
 
   const renderForm = (formProps: FormRenderProps) => {
-    const { handleSubmit, submitting, pristine } = formProps;
+    const { handleSubmit, submitting, pristine, values } = formProps;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -62,6 +72,23 @@ export const LoginEnterpriseRoute: FC = () => {
           name="hostname"
           label="Hostname"
           placeholder="github.company.com"
+          helpText={
+            <div>
+              <div className="mb-1">
+                <Button
+                  name="Create new OAuth App"
+                  label="Create new OAuth App"
+                  class="px-2 py-1 text-xs"
+                  disabled={!values.hostname}
+                  icon={PersonIcon}
+                  size={12}
+                  url={getNewOAuthAppURL(values.hostname)}
+                />{' '}
+                then{' '}
+                <span className="italic">generate a new client secret</span>.
+              </div>
+            </div>
+          }
         />
 
         <FieldInput name="clientId" label="Client ID" placeholder="123456789" />
@@ -72,14 +99,29 @@ export const LoginEnterpriseRoute: FC = () => {
           placeholder="ABC123DEF456"
         />
 
-        <button
-          className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
-          title="Login Button"
-          disabled={submitting || pristine}
-          type="submit"
-        >
-          Login
-        </button>
+        <div className="flex justify-between items-center">
+          <div className="text-xs italic hover:text-blue-500 justify-center items-center">
+            <Button
+              name="Docs"
+              label="GitHub Docs"
+              class="px-2 py-1 text-xs"
+              icon={BookIcon}
+              size={12}
+              url={Constants.GITHUB_DOCS.OAUTH_URL}
+            />
+          </div>
+          <div className="justify-center items-center">
+            <Button
+              name="Login"
+              label="Login"
+              class="float-right px-4 py-2 my-4"
+              icon={SignInIcon}
+              size={14}
+              disabled={submitting || pristine}
+              type="submit"
+            />
+          </div>
+        </div>
       </form>
     );
   };

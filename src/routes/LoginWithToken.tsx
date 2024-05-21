@@ -1,4 +1,9 @@
-import { ArrowLeftIcon } from '@primer/octicons-react';
+import {
+  ArrowLeftIcon,
+  BookIcon,
+  KeyIcon,
+  SignInIcon,
+} from '@primer/octicons-react';
 
 import { type FC, useCallback, useContext, useState } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
@@ -7,10 +12,10 @@ import { useNavigate } from 'react-router-dom';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
 import type { AuthTokenOptions } from '../types';
-import { openExternalLink } from '../utils/comms';
 import { Constants } from '../utils/constants';
 
-import { format } from 'date-fns';
+import { Button } from '../components/fields/Button';
+import { getNewTokenURL } from '../utils/auth';
 
 interface IValues {
   token?: string;
@@ -48,18 +53,24 @@ export const LoginWithToken: FC = () => {
   const navigate = useNavigate();
   const [isValidToken, setIsValidToken] = useState<boolean>(true);
 
-  const openLink = useCallback((url: string) => {
-    openExternalLink(url);
-  }, []);
-
   const renderForm = (formProps: FormRenderProps) => {
     const { handleSubmit, submitting, pristine, values } = formProps;
 
-    const buttonClasses =
-      'rounded bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer';
-
     return (
       <form onSubmit={handleSubmit}>
+        <FieldInput
+          name="hostname"
+          label="Hostname"
+          placeholder="github.company.com"
+          helpText={
+            <div>
+              <div className="italic mt-1">
+                Change only if you are using GitHub Enterprise Server.
+              </div>
+            </div>
+          }
+        />
+
         <FieldInput
           name="token"
           label="Token"
@@ -67,31 +78,19 @@ export const LoginWithToken: FC = () => {
           helpText={
             <div>
               <div>
-                <button
-                  type="button"
-                  className={`px-2 py-1 text-xs ${buttonClasses}`}
-                  onClick={() => openLink(getNewTokenURL())}
-                >
-                  Generate a PAT
-                </button>{' '}
+                <Button
+                  name="Generate a PAT"
+                  label="Generate a PAT"
+                  class="px-2 py-1 text-xs"
+                  disabled={!values.hostname}
+                  icon={KeyIcon}
+                  size={12}
+                  url={getNewTokenURL(values.hostname)}
+                />{' '}
                 on GitHub and paste above.
               </div>
               <div className="italic mt-1">
                 The required scopes will be selected for you.
-              </div>
-            </div>
-          }
-        />
-
-        <FieldInput
-          name="hostname"
-          label="Hostname"
-          placeholder="github.company.com"
-          helpText={
-            <div>
-              <div>Defaults to github.com.</div>
-              <div className="italic mt-1">
-                Change only if you are using GitHub Enterprise Server.
               </div>
             </div>
           }
@@ -103,14 +102,29 @@ export const LoginWithToken: FC = () => {
           </div>
         )}
 
-        <button
-          className={`float-right px-4 py-2 my-4 ${buttonClasses}`}
-          title="Submit Button"
-          disabled={submitting || pristine}
-          type="submit"
-        >
-          Submit
-        </button>
+        <div className="flex justify-between items-center">
+          <div className="text-xs italic hover:text-blue-500 justify-center items-center">
+            <Button
+              name="Docs"
+              label="GitHub Docs"
+              class="px-2 py-1 text-xs"
+              icon={BookIcon}
+              size={12}
+              url={Constants.GITHUB_DOCS.PAT_URL}
+            />
+          </div>
+          <div className="justify-center items-center">
+            <Button
+              name="Login"
+              label="Login"
+              class="float-right px-4 py-2 my-4"
+              icon={SignInIcon}
+              size={14}
+              disabled={submitting || pristine}
+              type="submit"
+            />
+          </div>
+        </div>
       </form>
     );
   };
@@ -161,12 +175,3 @@ export const LoginWithToken: FC = () => {
     </div>
   );
 };
-
-function getNewTokenURL(): string {
-  const date = format(new Date(), 'PP p');
-  const newTokenURL = new URL('https://github.com/settings/tokens/new');
-  newTokenURL.searchParams.append('description', `Gitify (Created on ${date})`);
-  newTokenURL.searchParams.append('scopes', Constants.AUTH_SCOPE.join(','));
-
-  return newTokenURL.toString();
-}

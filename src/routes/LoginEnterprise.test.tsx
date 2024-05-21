@@ -2,6 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import * as TestRenderer from 'react-test-renderer';
 const { ipcRenderer } = require('electron');
+import { shell } from 'electron';
 import { AppContext } from '../context/App';
 import type { AuthState } from '../types';
 import { LoginEnterpriseRoute, validate } from './LoginEnterprise';
@@ -13,12 +14,15 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/LoginEnterprise.tsx', () => {
+  const openExternalMock = jest.spyOn(shell, 'openExternal');
+
   const mockAccounts: AuthState = {
     enterpriseAccounts: [],
     user: null,
   };
 
   beforeEach(() => {
+    openExternalMock.mockReset();
     mockNavigate.mockReset();
 
     jest.spyOn(ipcRenderer, 'send');
@@ -74,6 +78,69 @@ describe('routes/LoginEnterprise.tsx', () => {
     expect(validate(values).clientSecret).toBe('Invalid client secret.');
   });
 
+  describe("'Create new OAuth App' button", () => {
+    it('should be disabled if no hostname configured', async () => {
+      render(
+        <AppContext.Provider value={{ accounts: mockAccounts }}>
+          <MemoryRouter>
+            <LoginEnterpriseRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+
+      fireEvent.click(screen.getByText('Create new OAuth App'));
+
+      expect(openExternalMock).toHaveBeenCalledTimes(0);
+    });
+
+    it('should open in browser if hostname configured', async () => {
+      render(
+        <AppContext.Provider value={{ accounts: mockAccounts }}>
+          <MemoryRouter>
+            <LoginEnterpriseRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+
+      fireEvent.change(screen.getByLabelText('Hostname'), {
+        target: { value: 'company.github.com' },
+      });
+
+      fireEvent.click(screen.getByText('Create new OAuth App'));
+
+      expect(openExternalMock).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  it('should receive a logged-in enterprise account', () => {
+    const { rerender } = render(
+      <AppContext.Provider value={{ accounts: mockAccounts }}>
+        <MemoryRouter>
+          <LoginEnterpriseRoute />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+
+    rerender(
+      <AppContext.Provider
+        value={{
+          accounts: {
+            enterpriseAccounts: mockedEnterpriseAccounts,
+            user: null,
+          },
+        }}
+      >
+        <MemoryRouter>
+          <LoginEnterpriseRoute />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+
+    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
+    expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+  });
+
   it('should render the form with errors', () => {
     render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>
@@ -93,10 +160,24 @@ describe('routes/LoginEnterprise.tsx', () => {
       target: { value: 'abc' },
     });
 
-    fireEvent.submit(screen.getByTitle('Login Button'));
+    fireEvent.submit(screen.getByTitle('Login'));
 
     expect(screen.getByText('Invalid hostname.')).toBeTruthy();
     expect(screen.getByText('Invalid client id.')).toBeTruthy();
     expect(screen.getByText('Invalid client secret.')).toBeTruthy();
+  });
+
+  it('should open help docs in the browser', async () => {
+    render(
+      <AppContext.Provider value={{ accounts: mockAccounts }}>
+        <MemoryRouter>
+          <LoginEnterpriseRoute />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(screen.getByLabelText('GitHub Docs'));
+
+    expect(openExternalMock).toHaveBeenCalledTimes(1);
   });
 });

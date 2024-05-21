@@ -72,18 +72,38 @@ describe('routes/LoginWithToken.tsx', () => {
     expect(validate(values).token).toBe('Invalid token.');
   });
 
-  it("should click on the 'Generate a PAT' link and open the browser", async () => {
-    render(
-      <AppContext.Provider value={{ validateToken: mockValidateToken }}>
-        <MemoryRouter>
-          <LoginWithToken />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+  describe("'Generate a PAT' button", () => {
+    it('should be disabled if no hostname configured', async () => {
+      render(
+        <AppContext.Provider value={{ validateToken: mockValidateToken }}>
+          <MemoryRouter>
+            <LoginWithToken />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
 
-    fireEvent.click(screen.getByText('Generate a PAT'));
+      fireEvent.change(screen.getByLabelText('Hostname'), {
+        target: { value: '' },
+      });
 
-    expect(openExternalMock).toHaveBeenCalledTimes(1);
+      fireEvent.click(screen.getByText('Generate a PAT'));
+
+      expect(openExternalMock).toHaveBeenCalledTimes(0);
+    });
+
+    it('should open in browser if hostname configured', async () => {
+      render(
+        <AppContext.Provider value={{ validateToken: mockValidateToken }}>
+          <MemoryRouter>
+            <LoginWithToken />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+
+      fireEvent.click(screen.getByText('Generate a PAT'));
+
+      expect(openExternalMock).toHaveBeenCalledTimes(1);
+    });
   });
 
   it('should login using a token - success', async () => {
@@ -104,7 +124,7 @@ describe('routes/LoginWithToken.tsx', () => {
       target: { value: 'github.com' },
     });
 
-    fireEvent.submit(screen.getByTitle('Submit Button'));
+    fireEvent.submit(screen.getByTitle('Login'));
 
     await waitFor(() => expect(mockValidateToken).toHaveBeenCalledTimes(1));
 
@@ -130,7 +150,7 @@ describe('routes/LoginWithToken.tsx', () => {
       fireEvent.change(screen.getByLabelText('Hostname'), {
         target: { value: 'github.com' },
       });
-      fireEvent.submit(screen.getByTitle('Submit Button'));
+      fireEvent.submit(screen.getByTitle('Login'));
     });
 
     await waitFor(() => expect(mockValidateToken).toHaveBeenCalledTimes(1));
@@ -153,9 +173,23 @@ describe('routes/LoginWithToken.tsx', () => {
       target: { value: '123' },
     });
 
-    fireEvent.submit(screen.getByTitle('Submit Button'));
+    fireEvent.submit(screen.getByTitle('Login'));
 
     expect(screen.getByText('Invalid hostname.')).toBeDefined();
     expect(screen.getByText('Invalid token.')).toBeDefined();
+  });
+
+  it('should open help docs in the browser', async () => {
+    render(
+      <AppContext.Provider value={{ validateToken: mockValidateToken }}>
+        <MemoryRouter>
+          <LoginWithToken />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(screen.getByLabelText('GitHub Docs'));
+
+    expect(openExternalMock).toHaveBeenCalledTimes(1);
   });
 });

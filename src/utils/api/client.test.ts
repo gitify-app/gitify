@@ -3,7 +3,6 @@ import type { SettingsState } from '../../types';
 import {
   getAuthenticatedUser,
   getHtmlUrl,
-  getRootHypermediaLinks,
   headNotifications,
   ignoreNotificationThreadSubscription,
   listNotificationsForAuthenticatedUser,
@@ -24,32 +23,6 @@ const mockRepoSlug = 'gitify-app/notifications-test';
 describe('utils/api/client.ts', () => {
   afterEach(() => {
     jest.resetAllMocks();
-  });
-
-  describe('getRootHypermediaLinks', () => {
-    it('should fetch root hypermedia links - github', async () => {
-      await getRootHypermediaLinks(mockGitHubHostname, mockToken);
-
-      expect(axios).toHaveBeenCalledWith({
-        url: 'https://api.github.com/',
-        method: 'GET',
-        data: {},
-      });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
-    });
-
-    it('should fetch root hypermedia links - enterprise', async () => {
-      await getRootHypermediaLinks(mockEnterpriseHostname, mockToken);
-
-      expect(axios).toHaveBeenCalledWith({
-        url: 'https://example.com/api/v3/',
-        method: 'GET',
-        data: {},
-      });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
-    });
   });
 
   describe('getAuthenticatedUser', () => {

@@ -10,3 +10,14 @@ export function getGitHubAPIBaseUrl(hostname: string): URL {
   }
   return url;
 }
+
+export function getGitHubGraphQLUrl(hostname: string): URL {
+  const url = new URL(Constants.GITHUB_API_GRAPHQL_URL);
+
+  if (isEnterpriseHost(hostname)) {
+    url.hostname = hostname;
+    url.pathname = '/api/graphql';
+  }
+
+  return url;
+}

@@ -12,29 +12,14 @@ import type {
   PullRequest,
   PullRequestReview,
   Release,
-  RootHypermediaLinks,
   UserDetails,
 } from '../../typesGitHub';
 import { apiRequestAuth } from './request';
 
 import { print } from 'graphql/language/printer';
-import Constants from '../constants';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
-import { getGitHubAPIBaseUrl } from './utils';
-
-/**
- * Get Hypermedia links to resources accessible in GitHub's REST API
- *
- * Endpoint documentation: https://docs.github.com/en/rest/meta/meta#github-api-root
- */
-export function getRootHypermediaLinks(
-  hostname: string,
-  token: string,
-): AxiosPromise<RootHypermediaLinks> {
-  const url = getGitHubAPIBaseUrl(hostname);
-  return apiRequestAuth(url.toString(), 'GET', token);
-}
+import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
 
 /**
  * Get the authenticated user
@@ -247,7 +232,8 @@ export async function searchDiscussions(
   notification: Notification,
   token: string,
 ): AxiosPromise<GraphQLSearch<Discussion>> {
-  return apiRequestAuth(Constants.GITHUB_API_GRAPHQL_URL, 'POST', token, {
+  const url = getGitHubGraphQLUrl(notification.hostname);
+  return apiRequestAuth(url.toString(), 'POST', token, {
     query: print(QUERY_SEARCH_DISCUSSIONS),
     variables: {
       queryStatement: formatAsGitHubSearchSyntax(

@@ -18,24 +18,6 @@ exports[`utils/api/client.ts getAuthenticatedUser should fetch authenticated use
 }
 `;
 
-exports[`utils/api/client.ts getRootHypermediaLinks should fetch root hypermedia links - enterprise 1`] = `
-{
-  "Accept": "application/json",
-  "Authorization": "token yourAuthToken",
-  "Cache-Control": "no-cache",
-  "Content-Type": "application/json",
-}
-`;
-
-exports[`utils/api/client.ts getRootHypermediaLinks should fetch root hypermedia links - github 1`] = `
-{
-  "Accept": "application/json",
-  "Authorization": "token yourAuthToken",
-  "Cache-Control": "no-cache",
-  "Content-Type": "application/json",
-}
-`;
-
 exports[`utils/api/client.ts headNotifications should fetch notifications head - enterprise 1`] = `
 {
   "Accept": "application/json",
