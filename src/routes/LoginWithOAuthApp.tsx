@@ -32,6 +32,7 @@ interface IFormErrors {
 
 export const validate = (values: IValues): IFormErrors => {
   const errors: IFormErrors = {};
+
   if (!values.hostname) {
     errors.hostname = 'Required';
   } else if (
@@ -59,7 +60,7 @@ export const validate = (values: IValues): IFormErrors => {
   return errors;
 };
 
-export const LoginEnterpriseRoute: FC = () => {
+export const LoginWithOAuthApp: FC = () => {
   const {
     accounts: { enterpriseAccounts },
     loginEnterprise,
@@ -83,20 +84,17 @@ export const LoginEnterpriseRoute: FC = () => {
           label="Hostname"
           placeholder="github.company.com"
           helpText={
-            <div>
-              <div className="mb-1">
-                <Button
-                  name="Create new OAuth App"
-                  label="Create new OAuth App"
-                  class="px-2 py-1 text-xs"
-                  disabled={!values.hostname}
-                  icon={PersonIcon}
-                  size={12}
-                  url={getNewOAuthAppURL(values.hostname)}
-                />{' '}
-                then{' '}
-                <span className="italic">generate a new client secret</span>.
-              </div>
+            <div className="mb-1">
+              <Button
+                name="Create new OAuth App"
+                label="Create new OAuth App"
+                disabled={!values.hostname}
+                icon={PersonIcon}
+                size={12}
+                url={getNewOAuthAppURL(values.hostname)}
+              />{' '}
+              on GitHub then paste your{' '}
+              <span className="italic">client id and client secret</span> below.
             </div>
           }
         />
@@ -109,28 +107,25 @@ export const LoginEnterpriseRoute: FC = () => {
           placeholder="ABC123DEF456"
         />
 
-        <div className="flex justify-between items-center">
-          <div className="text-xs italic hover:text-blue-500 justify-center items-center">
-            <Button
-              name="Docs"
-              label="GitHub Docs"
-              class="px-2 py-1 text-xs"
-              icon={BookIcon}
-              size={12}
-              url={Constants.GITHUB_DOCS.OAUTH_URL}
-            />
-          </div>
-          <div className="justify-center items-center">
-            <Button
-              name="Login"
-              label="Login"
-              class="float-right px-4 py-2 my-4"
-              icon={SignInIcon}
-              size={14}
-              disabled={submitting || pristine}
-              type="submit"
-            />
-          </div>
+        <div className="flex justify-between items-end">
+          <Button
+            name="Docs"
+            label="GitHub Docs"
+            class="mt-2"
+            icon={BookIcon}
+            size={12}
+            url={Constants.GITHUB_DOCS.OAUTH_URL}
+          />
+
+          <Button
+            name="Login"
+            label="Login"
+            class="px-4 py-2 mt-2 !text-sm"
+            icon={SignInIcon}
+            size={16}
+            disabled={submitting || pristine}
+            type="submit"
+          />
         </div>
       </form>
     );
@@ -160,7 +155,10 @@ export const LoginEnterpriseRoute: FC = () => {
           />
         </button>
 
-        <h3 className="text-lg font-semibold">Login with GitHub Enterprise</h3>
+        <h3 className="text-lg font-semibold justify-center">
+          <PersonIcon size={20} className="mr-2" />
+          Login with OAuth App
+        </h3>
       </div>
 
       <div className="flex-1 px-8">

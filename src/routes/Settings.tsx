@@ -81,8 +81,8 @@ export const SettingsRoute: FC = () => {
     ipcRenderer.send('app-quit');
   }, []);
 
-  const goToEnterprise = useCallback(() => {
-    return navigate('/login-enterprise', { replace: true });
+  const loginWithOAuthApp = useCallback(() => {
+    return navigate('/login-oauth-app', { replace: true });
   }, []);
 
   const footerButtonClass =
@@ -293,13 +293,10 @@ export const SettingsRoute: FC = () => {
           <button
             type="button"
             className={footerButtonClass}
-            title="Login with GitHub Enterprise"
-            onClick={goToEnterprise}
+            title="Login with OAuth App"
+            onClick={loginWithOAuthApp}
           >
-            <PersonAddIcon
-              size={20}
-              aria-label="Login with GitHub Enterprise"
-            />
+            <PersonAddIcon size={20} aria-label="Login with OAuth App" />
           </button>
 
           <button

@@ -447,7 +447,7 @@ describe('routes/Settings.tsx', () => {
       );
     });
 
-    it('should go to the enterprise login route', async () => {
+    it('should go to the login with oauth app route', async () => {
       await act(async () => {
         render(
           <AppContext.Provider
@@ -463,8 +463,8 @@ describe('routes/Settings.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Login with GitHub Enterprise'));
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-enterprise', {
+      fireEvent.click(screen.getByTitle('Login with OAuth App'));
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app', {
         replace: true,
       });
     });
