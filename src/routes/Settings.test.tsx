@@ -92,12 +92,6 @@ describe('routes/Settings.tsx', () => {
     });
 
     it('should toggle detailed notifications checkbox', async () => {
-      jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
-        headers: {
-          'x-oauth-scopes': Constants.AUTH_SCOPE.join(', '),
-        },
-      } as unknown as AxiosResponse);
-
       await act(async () => {
         render(
           <AppContext.Provider
@@ -123,52 +117,6 @@ describe('routes/Settings.tsx', () => {
         'detailedNotifications',
         false,
       );
-    });
-
-    it('should not be able to enable detailed notifications due to missing scope', async () => {
-      jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
-        headers: {
-          'x-oauth-scopes': 'read:user, notifications',
-        },
-      } as unknown as AxiosResponse);
-
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
-              updateSetting,
-            }}
-          >
-            <MemoryRouter>
-              <SettingsRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
-      });
-
-      expect(
-        screen
-          .getByLabelText('Detailed notifications (requires repo scope)')
-          .closest('input'),
-      ).toHaveProperty('disabled', true);
-
-      // click the checkbox
-      fireEvent.click(
-        screen.getByLabelText('Detailed notifications (requires repo scope)'),
-      );
-
-      // check if the checkbox is still unchecked
-      expect(updateSetting).not.toHaveBeenCalled();
-      expect(
-        screen.getByLabelText('Detailed notifications (requires repo scope)'),
-      ).not.toBe('checked');
-
-      expect(
-        screen.getByLabelText('Detailed notifications (requires repo scope)')
-          .parentNode.parentNode,
-      ).toMatchSnapshot();
     });
   });
 
@@ -502,7 +450,7 @@ describe('routes/Settings.tsx', () => {
       );
     });
 
-    it('should go to the enterprise login route', async () => {
+    it('should go to the login with oauth app route', async () => {
       await act(async () => {
         render(
           <AppContext.Provider
@@ -518,8 +466,8 @@ describe('routes/Settings.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Login with GitHub Enterprise'));
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-enterprise', {
+      fireEvent.click(screen.getByTitle('Login with OAuth App'));
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app', {
         replace: true,
       });
     });

@@ -3,7 +3,9 @@ const { ipcRenderer } = require('electron');
 import { type FC, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { KeyIcon, PersonIcon } from '@primer/octicons-react';
 import { Logo } from '../components/Logo';
+import { Button } from '../components/fields/Button';
 import { AppContext } from '../context/App';
 
 export const LoginRoute: FC = () => {
@@ -26,9 +28,6 @@ export const LoginRoute: FC = () => {
     }
   }, []); */
 
-  const loginButtonClass =
-    'w-50 px-2 py-2 my-2 bg-gray-300 font-semibold rounded text-xs text-center dark:text-black hover:bg-gray-500 hover:text-white focus:outline-none';
-
   return (
     <div className="flex flex-1 flex-col justify-center items-center p-4 bg-white dark:bg-gray-dark dark:text-white">
       <Logo className="w-16 h-16" isDark />
@@ -37,38 +36,34 @@ export const LoginRoute: FC = () => {
         GitHub Notifications <br /> on your menu bar.
       </div>
 
+      <div className="font-semibold text-center text-sm italic">Login with</div>
       {
         // FIXME: Temporarily disable Login with GitHub (OAuth) as it's currently broken and requires a rewrite - see #485 #561 #747
-        /*      
-      <button
-        className={loginButtonClass}
-        title="Login with GitHub"
-        aria-label="Login with GitHub"
+        /*    
+       <Button
+        name="GitHub"
+        icon={MarkGitHubIcon}
+        label="Login with GitHub"
+        class="w-50 px-2 py-2 my-2 text-xs"
         onClick={loginUser}
-      >
-        Login to GitHub
-      </button> */
+      />  
+      */
       }
 
-      <button
-        type="button"
-        className={loginButtonClass}
-        title="Login with Personal Token"
-        aria-label="Login with Personal Token"
-        onClick={() => navigate('/login-token')}
-      >
-        Login with Personal Access Token
-      </button>
-
-      <button
-        type="button"
-        className={loginButtonClass}
-        title="Login with GitHub Enterprise"
-        aria-label="Login with GitHub Enterprise"
-        onClick={() => navigate('/login-enterprise')}
-      >
-        Login to GitHub Enterprise
-      </button>
+      <Button
+        name="Personal Access Token"
+        icon={KeyIcon}
+        label="Login with Personal Access Token"
+        class="py-2 mt-2"
+        onClick={() => navigate('/login-personal-access-token')}
+      />
+      <Button
+        name="OAuth App"
+        icon={PersonIcon}
+        label="Login with OAuth App"
+        class="py-2 mt-2"
+        onClick={() => navigate('/login-oauth-app')}
+      />
     </div>
   );
 };
