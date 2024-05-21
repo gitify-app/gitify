@@ -29,11 +29,6 @@ interface IFormErrors {
 
 export const validate = (values: IValues): IFormErrors => {
   const errors: IFormErrors = {};
-  if (!values.token) {
-    errors.token = 'Required';
-  } else if (!/^[A-Z0-9_]{40}$/i.test(values.token)) {
-    errors.token = 'Invalid token.';
-  }
 
   if (!values.hostname) {
     errors.hostname = 'Required';
@@ -45,10 +40,16 @@ export const validate = (values: IValues): IFormErrors => {
     errors.hostname = 'Invalid hostname.';
   }
 
+  if (!values.token) {
+    errors.token = 'Required';
+  } else if (!/^[A-Z0-9_]{40}$/i.test(values.token)) {
+    errors.token = 'Invalid token.';
+  }
+
   return errors;
 };
 
-export const LoginWithToken: FC = () => {
+export const LoginWithPersonalAccessToken: FC = () => {
   const { validateToken } = useContext(AppContext);
   const navigate = useNavigate();
   const [isValidToken, setIsValidToken] = useState<boolean>(true);
@@ -63,10 +64,8 @@ export const LoginWithToken: FC = () => {
           label="Hostname"
           placeholder="github.company.com"
           helpText={
-            <div>
-              <div className="italic mt-1">
-                Change only if you are using GitHub Enterprise Server.
-              </div>
+            <div className="italic mt-1">
+              Change only if you are using GitHub Enterprise Server.
             </div>
           }
         />
@@ -81,7 +80,6 @@ export const LoginWithToken: FC = () => {
                 <Button
                   name="Generate a PAT"
                   label="Generate a PAT"
-                  class="px-2 py-1 text-xs"
                   disabled={!values.hostname}
                   icon={KeyIcon}
                   size={12}
@@ -102,34 +100,30 @@ export const LoginWithToken: FC = () => {
           </div>
         )}
 
-        <div className="flex justify-between items-center">
-          <div className="text-xs italic hover:text-blue-500 justify-center items-center">
-            <Button
-              name="Docs"
-              label="GitHub Docs"
-              class="px-2 py-1 text-xs"
-              icon={BookIcon}
-              size={12}
-              url={Constants.GITHUB_DOCS.PAT_URL}
-            />
-          </div>
-          <div className="justify-center items-center">
-            <Button
-              name="Login"
-              label="Login"
-              class="float-right px-4 py-2 my-4"
-              icon={SignInIcon}
-              size={14}
-              disabled={submitting || pristine}
-              type="submit"
-            />
-          </div>
+        <div className="flex justify-between items-end">
+          <Button
+            name="Docs"
+            label="GitHub Docs"
+            class="mt-2"
+            icon={BookIcon}
+            size={12}
+            url={Constants.GITHUB_DOCS.PAT_URL}
+          />
+          <Button
+            name="Login"
+            label="Login"
+            class="px-4 py-2 mt-2 !text-sm"
+            icon={SignInIcon}
+            size={16}
+            disabled={submitting || pristine}
+            type="submit"
+          />
         </div>
       </form>
     );
   };
 
-  const submit = useCallback(async (data: IValues) => {
+  const login = useCallback(async (data: IValues) => {
     setIsValidToken(true);
     try {
       await validateToken(data as AuthTokenOptions);
@@ -155,7 +149,8 @@ export const LoginWithToken: FC = () => {
           />
         </button>
 
-        <h3 className="text-lg font-semibold">
+        <h3 className="text-lg font-semibold justify-center">
+          <KeyIcon size={18} className="mr-2" />
           Login with Personal Access Token
         </h3>
       </div>
@@ -163,10 +158,10 @@ export const LoginWithToken: FC = () => {
       <div className="flex-1 px-8">
         <Form
           initialValues={{
-            token: '',
             hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+            token: '',
           }}
-          onSubmit={submit}
+          onSubmit={login}
           validate={validate}
         >
           {renderForm}

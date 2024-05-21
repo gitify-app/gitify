@@ -1,7 +1,8 @@
 import {
   ArrowLeftIcon,
-  OrganizationIcon,
-  PersonAddIcon,
+  KeyIcon,
+  PersonIcon,
+  PlusIcon,
   SignOutIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
@@ -27,7 +28,10 @@ import {
   updateTrayTitle,
 } from '../utils/comms';
 import Constants from '../utils/constants';
-import { isGitHubLoggedIn } from '../utils/helpers';
+import {
+  isOAuthAppLoggedIn,
+  isPersonalAccessTokenLoggedIn,
+} from '../utils/helpers';
 import { setTheme } from '../utils/theme';
 
 export const SettingsRoute: FC = () => {
@@ -83,12 +87,12 @@ export const SettingsRoute: FC = () => {
     ipcRenderer.send('app-quit');
   }, []);
 
-  const goToPersonalToken = useCallback(() => {
-    return navigate('/login-token', { replace: true });
+  const loginWithPersonalAccessToken = useCallback(() => {
+    return navigate('/login-personal-access-token', { replace: true });
   }, []);
 
-  const goToEnterprise = useCallback(() => {
-    return navigate('/login-enterprise', { replace: true });
+  const loginWithOAuthApp = useCallback(() => {
+    return navigate('/login-oauth-app', { replace: true });
   }, []);
 
   const footerButtonClass =
@@ -299,21 +303,23 @@ export const SettingsRoute: FC = () => {
           <button
             type="button"
             className={footerButtonClass}
-            title="Login with Personal Token"
-            onClick={goToPersonalToken}
+            title="Login with Personal Access Token"
+            onClick={loginWithPersonalAccessToken}
+            hidden={isPersonalAccessTokenLoggedIn(accounts)}
           >
-            <PersonAddIcon size={20} aria-label="Login with Personal Token" />
+            <KeyIcon size={18} aria-label="Login with Personal Access Token" />
+            <PlusIcon size={10} className="ml-1 mb-2" />
           </button>
+
           <button
             type="button"
             className={footerButtonClass}
-            title="Login with GitHub Enterprise"
-            onClick={goToEnterprise}
+            title="Login with OAuth App"
+            onClick={loginWithOAuthApp}
+            hidden={isOAuthAppLoggedIn(accounts)}
           >
-            <OrganizationIcon
-              size={20}
-              aria-label="Login with GitHub Enterprise"
-            />
+            <PersonIcon size={20} aria-label="Login with OAuth App" />
+            <PlusIcon size={10} className="mb-2" />
           </button>
 
           <button

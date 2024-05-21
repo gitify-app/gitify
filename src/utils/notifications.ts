@@ -2,7 +2,7 @@ import { ipcRenderer } from 'electron';
 import { Notification } from '../typesGitHub';
 import {
   getTokenForHost,
-  isGitHubLoggedIn,
+  isPersonalAccessTokenLoggedIn,
   openInBrowser,
 } from '../utils/helpers';
 import { updateTrayIcon } from './comms';
@@ -110,7 +110,7 @@ export const raiseSoundNotification = () => {
 };
 
 function getGitHubNotifications(accounts: AuthState, settings: SettingsState) {
-  if (!isGitHubLoggedIn(accounts)) {
+  if (!isPersonalAccessTokenLoggedIn(accounts)) {
     return;
   }
 
