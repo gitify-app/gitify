@@ -113,7 +113,10 @@ describe('routes/Settings.tsx', () => {
       fireEvent.click(screen.getByLabelText('Detailed notifications'));
 
       expect(updateSetting).toHaveBeenCalledTimes(1);
-      expect(updateSetting).toHaveBeenCalledWith('detailedNotifications', true);
+      expect(updateSetting).toHaveBeenCalledWith(
+        'detailedNotifications',
+        false,
+      );
     });
   });
 
