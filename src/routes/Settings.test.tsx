@@ -450,25 +450,104 @@ describe('routes/Settings.tsx', () => {
       );
     });
 
-    it('should go to the login with oauth app route', async () => {
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
-            }}
-          >
-            <MemoryRouter>
-              <SettingsRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
+    describe('Login with Personal Access Token', () => {
+      it('should show login with personal access token button if not logged in', async () => {
+        await act(async () => {
+          render(
+            <AppContext.Provider
+              value={{
+                settings: mockSettings,
+                accounts: { ...mockAccounts, token: null },
+              }}
+            >
+              <MemoryRouter>
+                <SettingsRoute />
+              </MemoryRouter>
+            </AppContext.Provider>,
+          );
+        });
+
+        expect(
+          screen.getByTitle('Login with Personal Access Token').hidden,
+        ).toBe(false);
+
+        fireEvent.click(screen.getByTitle('Login with Personal Access Token'));
+        expect(mockNavigate).toHaveBeenNthCalledWith(
+          1,
+          '/login-personal-access-token',
+          {
+            replace: true,
+          },
         );
       });
 
-      fireEvent.click(screen.getByTitle('Login with OAuth App'));
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app', {
-        replace: true,
+      it('should hide login with personal access token button if already logged in', async () => {
+        await act(async () => {
+          render(
+            <AppContext.Provider
+              value={{
+                settings: mockSettings,
+                accounts: { ...mockAccounts, token: '1234' },
+              }}
+            >
+              <MemoryRouter>
+                <SettingsRoute />
+              </MemoryRouter>
+            </AppContext.Provider>,
+          );
+        });
+
+        expect(
+          screen.getByTitle('Login with Personal Access Token').hidden,
+        ).toBe(true);
+      });
+    });
+
+    describe('Login with OAuth App', () => {
+      it('should show login with oauth app if not logged in', async () => {
+        await act(async () => {
+          render(
+            <AppContext.Provider
+              value={{
+                settings: mockSettings,
+                accounts: {
+                  ...mockAccounts,
+                  enterpriseAccounts: [],
+                },
+              }}
+            >
+              <MemoryRouter>
+                <SettingsRoute />
+              </MemoryRouter>
+            </AppContext.Provider>,
+          );
+        });
+
+        expect(screen.getByTitle('Login with OAuth App').hidden).toBe(false);
+
+        fireEvent.click(screen.getByTitle('Login with OAuth App'));
+        expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app', {
+          replace: true,
+        });
+      });
+
+      it('should hide login with oauth app route if already logged in', async () => {
+        await act(async () => {
+          render(
+            <AppContext.Provider
+              value={{
+                settings: mockSettings,
+                accounts: mockAccounts,
+              }}
+            >
+              <MemoryRouter>
+                <SettingsRoute />
+              </MemoryRouter>
+            </AppContext.Provider>,
+          );
+        });
+
+        expect(screen.getByTitle('Login with OAuth App').hidden).toBe(true);
       });
     });
 
@@ -490,7 +569,7 @@ describe('routes/Settings.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Logout from octocat'));
+      fireEvent.click(screen.getByTitle('Logout'));
 
       expect(logoutMock).toHaveBeenCalledTimes(1);
 

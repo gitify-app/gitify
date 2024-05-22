@@ -12,19 +12,46 @@ import {
   generateGitHubWebUrl,
   generateNotificationReferrerId,
   isEnterpriseHost,
-  isGitHubLoggedIn,
+  isOAuthAppLoggedIn,
+  isPersonalAccessTokenLoggedIn,
 } from './helpers';
 
 describe('utils/helpers.ts', () => {
-  describe('isGitHubLoggedIn', () => {
+  describe('isPersonalAccessTokenLoggedIn', () => {
     it('logged in', () => {
-      expect(isGitHubLoggedIn({ ...mockAccounts, token: '1234' })).toBe(true);
+      expect(
+        isPersonalAccessTokenLoggedIn({ ...mockAccounts, token: '1234' }),
+      ).toBe(true);
     });
 
     it('logged out', () => {
-      expect(isGitHubLoggedIn({ ...mockAccounts, token: null })).toBe(false);
+      expect(
+        isPersonalAccessTokenLoggedIn({ ...mockAccounts, token: null }),
+      ).toBe(false);
     });
   });
+
+  describe('isOAuthAppLoggedIn', () => {
+    it('logged in', () => {
+      expect(
+        isOAuthAppLoggedIn({
+          ...mockAccounts,
+          enterpriseAccounts: [{ hostname: 'github.gitify.io', token: '1234' }],
+        }),
+      ).toBe(true);
+    });
+
+    it('logged out', () => {
+      expect(
+        isOAuthAppLoggedIn({ ...mockAccounts, enterpriseAccounts: null }),
+      ).toBe(false);
+
+      expect(
+        isOAuthAppLoggedIn({ ...mockAccounts, enterpriseAccounts: [] }),
+      ).toBe(false);
+    });
+  });
+
   describe('isEnterpriseHost', () => {
     it('should return true for enterprise host', () => {
       expect(isEnterpriseHost('github.gitify.app')).toBe(true);

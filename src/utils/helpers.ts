@@ -10,8 +10,12 @@ import {
   getWorkflowRunAttributes,
 } from './subject';
 
-export function isGitHubLoggedIn(accounts: AuthState): boolean {
+export function isPersonalAccessTokenLoggedIn(accounts: AuthState): boolean {
   return accounts.token != null;
+}
+
+export function isOAuthAppLoggedIn(accounts: AuthState): boolean {
+  return accounts.enterpriseAccounts?.length > 0;
 }
 
 export function getTokenForHost(hostname: string, accounts: AuthState): string {
