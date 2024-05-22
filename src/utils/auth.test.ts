@@ -167,4 +167,52 @@ describe('utils/auth.tsx', () => {
       ).toBeTruthy();
     });
   });
+
+  describe('isValidHostname', () => {
+    it('should validate hostname - github cloud', () => {
+      expect(auth.isValidHostname('github.com')).toBeTruthy();
+    });
+
+    it('should validate hostname - github enterprise server', () => {
+      expect(auth.isValidHostname('github.gitify.io')).toBeTruthy();
+    });
+
+    it('should invalidate hostname - empty', () => {
+      expect(auth.isValidHostname('')).toBeFalsy();
+    });
+
+    it('should invalidate hostname - invalid', () => {
+      expect(auth.isValidHostname('github')).toBeFalsy();
+    });
+  });
+
+  describe('isValidClientId', () => {
+    it('should validate client id - valid', () => {
+      expect(auth.isValidClientId('1234567890_ASDFGHJKL')).toBeTruthy();
+    });
+
+    it('should validate client id - empty', () => {
+      expect(auth.isValidClientId('')).toBeFalsy();
+    });
+
+    it('should validate client id - invalid', () => {
+      expect(auth.isValidClientId('1234567890asdfg')).toBeFalsy();
+    });
+  });
+
+  describe('isValidToken', () => {
+    it('should validate token - valid', () => {
+      expect(
+        auth.isValidToken('1234567890_asdfghjklPOIUYTREWQ0987654321'),
+      ).toBeTruthy();
+    });
+
+    it('should validate token - empty', () => {
+      expect(auth.isValidToken('')).toBeFalsy();
+    });
+
+    it('should validate token - invalid', () => {
+      expect(auth.isValidToken('1234567890asdfg')).toBeFalsy();
+    });
+  });
 });
