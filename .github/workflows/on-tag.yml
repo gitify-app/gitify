@@ -24,7 +24,7 @@ jobs:
           node-version-file: '.nvmrc'
       
       - name: Bump version to latest tag
-        run: echo "GITIFY_VERSION=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITHUB_OUTPUT
+        run: echo "GITIFY_VERSION=$(echo ${{ github.ref }} | sed 's/refs\/tags\/v//')" >> $GITIFY_VERSION
 
       - name: Setup git config
         run: |
