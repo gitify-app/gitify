@@ -29,7 +29,7 @@ import Constants from '../utils/constants';
 import { setTheme } from '../utils/theme';
 
 export const SettingsRoute: FC = () => {
-  const { accounts, settings, updateSetting, logout } = useContext(AppContext);
+  const { settings, updateSetting, logout } = useContext(AppContext);
   const navigate = useNavigate();
 
   const [isLinux, setIsLinux] = useState<boolean>(false);
@@ -302,14 +302,11 @@ export const SettingsRoute: FC = () => {
           <button
             type="button"
             className={footerButtonClass}
-            title={`Logout from ${accounts.user.login}`}
+            title={'Logout'}
             role="button"
             onClick={logoutUser}
           >
-            <SignOutIcon
-              size={18}
-              aria-label={`Logout from ${accounts.user.login}`}
-            />
+            <SignOutIcon size={18} aria-label={'Logout'} />
           </button>
 
           <button

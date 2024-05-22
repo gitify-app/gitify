@@ -487,7 +487,7 @@ describe('routes/Settings.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Logout from octocat'));
+      fireEvent.click(screen.getByTitle('Logout'));
 
       expect(logoutMock).toHaveBeenCalledTimes(1);
 
