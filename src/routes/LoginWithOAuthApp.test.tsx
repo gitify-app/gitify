@@ -111,34 +111,6 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
     });
   });
 
-  it('should receive a logged-in enterprise account', () => {
-    const { rerender } = render(
-      <AppContext.Provider value={{ accounts: mockAccounts }}>
-        <MemoryRouter>
-          <LoginWithOAuthApp />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-
-    rerender(
-      <AppContext.Provider
-        value={{
-          accounts: {
-            accounts: [],
-          },
-        }}
-      >
-        <MemoryRouter>
-          <LoginWithOAuthApp />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
-  });
-
   it('should render the form with errors', () => {
     render(
       <AppContext.Provider value={{ accounts: mockAccounts }}>

@@ -46,7 +46,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         expect(result.current.notifications[0].account.hostname).toBe(
-          'api.github.com',
+          'github.com',
         );
         expect(result.current.notifications[0].notifications.length).toBe(2);
 
