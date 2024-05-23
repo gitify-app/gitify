@@ -45,10 +45,12 @@ describe('hooks/useNotifications.ts', () => {
           expect(result.current.status).toBe('success');
         });
 
-        expect(result.current.notifications[0].hostname).toBe('api.github.com');
+        expect(result.current.notifications[0].account.hostname).toBe(
+          'api.github.com',
+        );
         expect(result.current.notifications[0].notifications.length).toBe(2);
 
-        expect(result.current.notifications[1].hostname).toBe(
+        expect(result.current.notifications[1].account.hostname).toBe(
           'github.gitify.io',
         );
         expect(result.current.notifications[1].notifications.length).toBe(2);
@@ -265,7 +267,9 @@ describe('hooks/useNotifications.ts', () => {
           expect(result.current.status).toBe('success');
         });
 
-        expect(result.current.notifications[0].hostname).toBe('api.github.com');
+        expect(result.current.notifications[0].account.hostname).toBe(
+          'api.github.com',
+        );
         expect(result.current.notifications[0].notifications.length).toBe(6);
       });
     });
@@ -303,7 +307,7 @@ describe('hooks/useNotifications.ts', () => {
         result.current.removeNotificationFromState(
           mockSettings,
           result.current.notifications[0].notifications[0].id,
-          result.current.notifications[0].hostname,
+          result.current.notifications[0].account.hostname,
         );
       });
 

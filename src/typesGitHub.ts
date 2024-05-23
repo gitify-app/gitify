@@ -1,3 +1,5 @@
+import type { AuthAccount } from './types';
+
 export type Reason =
   | 'approval_requested'
   | 'assign'
@@ -101,8 +103,7 @@ export interface Notification {
   repository: Repository;
   url: string;
   subscription_url: string;
-  // TODO - rename this to apiBaseUrl
-  hostname: string; // This is not in the official GitHub API. We add this to make notification interactions easier.
+  account: AuthAccount; // Note: This is not in the official GitHub API. We add this to make notification interactions easier.
 }
 
 export type UserDetails = User & UserProfile;

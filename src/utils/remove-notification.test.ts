@@ -8,7 +8,7 @@ import { removeNotification } from './remove-notification';
 
 describe('utils/remove-notification.ts', () => {
   const notificationId = mockedSingleNotification.id;
-  const hostname = mockedSingleAccountNotifications[0].hostname;
+  const hostname = mockedSingleAccountNotifications[0].account.hostname;
 
   it('should remove a notification if it exists', () => {
     expect(mockedSingleAccountNotifications[0].notifications.length).toBe(1);

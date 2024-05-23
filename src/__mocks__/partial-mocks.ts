@@ -1,11 +1,18 @@
 import type { Notification, Subject, User } from '../typesGitHub';
 import Constants from '../utils/constants';
+import { mockToken } from './mock-state';
 
 export function partialMockNotification(
   subject: Partial<Subject>,
 ): Notification {
   const mockNotification: Partial<Notification> = {
-    hostname: Constants.GITHUB_API_BASE_URL,
+    account: {
+      method: 'Personal Access Token',
+      platform: 'GitHub Cloud',
+      hostname: Constants.GITHUB_API_BASE_URL,
+      token: mockToken,
+      user: null,
+    },
     subject: subject as Subject,
   };
 

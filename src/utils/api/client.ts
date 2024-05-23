@@ -1,5 +1,5 @@
 import type { AxiosPromise } from 'axios';
-import type { SettingsState } from '../../types';
+import type { AuthAccount, SettingsState } from '../../types';
 import type {
   Commit,
   CommitComment,
@@ -53,15 +53,14 @@ export function headNotifications(
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#list-notifications-for-the-authenticated-user
  */
 export function listNotificationsForAuthenticatedUser(
-  hostname: string,
-  token: string,
+  account: AuthAccount,
   settings: SettingsState,
 ): AxiosPromise<Notification[]> {
-  const url = getGitHubAPIBaseUrl(hostname);
+  const url = getGitHubAPIBaseUrl(account.hostname);
   url.pathname += 'notifications';
   url.searchParams.append('participating', String(settings.participating));
 
-  return apiRequestAuth(url.toString(), 'GET', token);
+  return apiRequestAuth(url.toString(), 'GET', account.token);
 }
 
 /**
@@ -230,10 +229,9 @@ export async function getHtmlUrl(url: string, token: string): Promise<string> {
  */
 export async function searchDiscussions(
   notification: Notification,
-  token: string,
 ): AxiosPromise<GraphQLSearch<Discussion>> {
-  const url = getGitHubGraphQLUrl(notification.hostname);
-  return apiRequestAuth(url.toString(), 'POST', token, {
+  const url = getGitHubGraphQLUrl(notification.account.hostname);
+  return apiRequestAuth(url.toString(), 'POST', notification.account.token, {
     query: print(QUERY_SEARCH_DISCUSSIONS),
     variables: {
       queryStatement: formatAsGitHubSearchSyntax(
@@ -252,10 +250,9 @@ export async function searchDiscussions(
  */
 export async function getLatestDiscussion(
   notification: Notification,
-  token: string,
 ): Promise<Discussion | null> {
   try {
-    const response = await searchDiscussions(notification, token);
+    const response = await searchDiscussions(notification);
     return (
       response.data?.data.search.nodes.filter(
         (discussion) => discussion.title === notification.subject.title,

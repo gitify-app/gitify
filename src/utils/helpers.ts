@@ -97,14 +97,11 @@ export function actionsURL(repositoryURL: string, filters: string[]): string {
   return url.toString().replace(/%2B/g, '+');
 }
 
-async function getDiscussionUrl(
-  notification: Notification,
-  token: string,
-): Promise<string> {
+async function getDiscussionUrl(notification: Notification): Promise<string> {
   const url = new URL(notification.repository.html_url);
   url.pathname += '/discussions';
 
-  const discussion = await getLatestDiscussion(notification, token);
+  const discussion = await getLatestDiscussion(notification);
 
   if (discussion) {
     url.href = discussion.url;
@@ -121,18 +118,19 @@ async function getDiscussionUrl(
 
 export async function generateGitHubWebUrl(
   notification: Notification,
-  auth: AuthState,
 ): Promise<string> {
   const url = new URL(notification.repository.html_url);
-  const account = getAccountForHost(notification.hostname, auth);
 
   if (notification.subject.latest_comment_url) {
     url.href = await getHtmlUrl(
       notification.subject.latest_comment_url,
-      account.token,
+      notification.account.token,
     );
   } else if (notification.subject.url) {
-    url.href = await getHtmlUrl(notification.subject.url, account.token);
+    url.href = await getHtmlUrl(
+      notification.subject.url,
+      notification.account.token,
+    );
   } else {
     // Perform any specific notification type handling (only required for a few special notification scenarios)
     switch (notification.subject.type) {
@@ -140,7 +138,7 @@ export async function generateGitHubWebUrl(
         url.href = getCheckSuiteUrl(notification);
         break;
       case 'Discussion':
-        url.href = await getDiscussionUrl(notification, account.token);
+        url.href = await getDiscussionUrl(notification);
         break;
       case 'RepositoryInvitation':
         url.pathname += '/invitations';
@@ -155,7 +153,10 @@ export async function generateGitHubWebUrl(
 
   url.searchParams.set(
     'notification_referrer_id',
-    generateNotificationReferrerId(notification.id, account?.user.id),
+    generateNotificationReferrerId(
+      notification.id,
+      notification.account?.user.id,
+    ),
   );
 
   return url.toString();
@@ -186,11 +187,8 @@ export function formatNotificationUpdatedAt(
   });
 }
 
-export async function openInBrowser(
-  notification: Notification,
-  accounts: AuthState,
-) {
-  const url = await generateGitHubWebUrl(notification, accounts);
+export async function openInBrowser(notification: Notification) {
+  const url = await generateGitHubWebUrl(notification);
 
   openExternalLink(url);
 }

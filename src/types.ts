@@ -69,7 +69,7 @@ export type RadioGroupItem = {
 };
 
 export interface AccountNotifications {
-  hostname: string;
+  account: AuthAccount;
   notifications: Notification[];
 }
 

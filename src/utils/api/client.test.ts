@@ -1,4 +1,9 @@
 import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
+import {
+  mockOAuthAccount,
+  mockPersonalAccessTokenAccount,
+  mockToken,
+} from '../../__mocks__/mock-state';
 import type { SettingsState } from '../../types';
 import {
   getAuthenticatedUser,
@@ -16,7 +21,6 @@ jest.mock('axios');
 
 const mockGitHubHostname = 'github.com';
 const mockEnterpriseHostname = 'example.com';
-const mockToken = 'yourAuthToken';
 const mockThreadId = '1234';
 const mockRepoSlug = 'gitify-app/notifications-test';
 
@@ -84,8 +88,7 @@ describe('utils/api/client.ts', () => {
 
     it('should list notifications for user - github', async () => {
       await listNotificationsForAuthenticatedUser(
-        mockGitHubHostname,
-        mockToken,
+        mockPersonalAccessTokenAccount,
         mockSettings as SettingsState,
       );
 
@@ -100,8 +103,7 @@ describe('utils/api/client.ts', () => {
 
     it('should list notifications for user - enterprise', async () => {
       await listNotificationsForAuthenticatedUser(
-        mockEnterpriseHostname,
-        mockToken,
+        mockOAuthAccount,
         mockSettings as SettingsState,
       );
 

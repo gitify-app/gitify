@@ -46,7 +46,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   } = useContext(AppContext);
 
   const openNotification = useCallback(() => {
-    openInBrowser(notification, accounts);
+    openInBrowser(notification);
 
     if (settings.markAsDoneOnOpen) {
       markNotificationDone(notification.id, hostname);

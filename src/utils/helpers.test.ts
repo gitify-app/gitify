@@ -1,6 +1,5 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
 import {
-  mockAccounts,
   mockOAuthAccount,
   mockPersonalAccessTokenAccount,
 } from '../__mocks__/mock-state';
@@ -134,13 +133,10 @@ describe('utils/helpers.ts', () => {
 
       apiRequestAuthMock.mockResolvedValue(requestPromise);
 
-      const result = await generateGitHubWebUrl(
-        {
-          ...mockedSingleNotification,
-          subject: subject,
-        },
-        mockAccounts,
-      );
+      const result = await generateGitHubWebUrl({
+        ...mockedSingleNotification,
+        subject: subject,
+      });
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
@@ -169,13 +165,10 @@ describe('utils/helpers.ts', () => {
 
       apiRequestAuthMock.mockResolvedValue(requestPromise);
 
-      const result = await generateGitHubWebUrl(
-        {
-          ...mockedSingleNotification,
-          subject: subject,
-        },
-        mockAccounts,
-      );
+      const result = await generateGitHubWebUrl({
+        ...mockedSingleNotification,
+        subject: subject,
+      });
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
@@ -195,13 +188,10 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockedSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -217,13 +207,10 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockedSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -239,13 +226,10 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockedSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -261,13 +245,10 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockedSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -283,13 +264,10 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockedSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -305,13 +283,10 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockedSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -327,13 +302,10 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockedSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -359,13 +331,10 @@ describe('utils/helpers.ts', () => {
 
         apiRequestAuthMock.mockResolvedValue(requestPromise);
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockedSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
         expect(result).toBe(
@@ -391,13 +360,10 @@ describe('utils/helpers.ts', () => {
 
         apiRequestAuthMock.mockResolvedValue(requestPromise);
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockedSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
         expect(result).toBe(
@@ -419,13 +385,10 @@ describe('utils/helpers.ts', () => {
 
         apiRequestAuthMock.mockResolvedValue(requestPromise);
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockedSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
         expect(result).toBe(
@@ -443,13 +406,10 @@ describe('utils/helpers.ts', () => {
         type: 'RepositoryInvitation' as SubjectType,
       };
 
-      const result = await generateGitHubWebUrl(
-        {
-          ...mockedSingleNotification,
-          subject: subject,
-        },
-        mockAccounts,
-      );
+      const result = await generateGitHubWebUrl({
+        ...mockedSingleNotification,
+        subject: subject,
+      });
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
       expect(result).toBe(
@@ -466,13 +426,10 @@ describe('utils/helpers.ts', () => {
           type: 'WorkflowRun' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockedSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -489,13 +446,10 @@ describe('utils/helpers.ts', () => {
           type: 'WorkflowRun' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockedSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -511,13 +465,10 @@ describe('utils/helpers.ts', () => {
           type: 'WorkflowRun' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockedSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -534,13 +485,10 @@ describe('utils/helpers.ts', () => {
         type: 'Issue' as SubjectType,
       };
 
-      const result = await generateGitHubWebUrl(
-        {
-          ...mockedSingleNotification,
-          subject: subject,
-        },
-        mockAccounts,
-      );
+      const result = await generateGitHubWebUrl({
+        ...mockedSingleNotification,
+        subject: subject,
+      });
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
       expect(result).toBe(

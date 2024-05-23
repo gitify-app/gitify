@@ -1,7 +1,6 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { mockToken } from '../__mocks__/mock-state';
 import {
   partialMockNotification,
   partialMockUser,
@@ -44,10 +43,7 @@ describe('utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'cancelled',
@@ -61,10 +57,7 @@ describe('utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'failure',
@@ -78,10 +71,7 @@ describe('utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'failure',
@@ -95,10 +85,7 @@ describe('utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'skipped',
@@ -112,10 +99,7 @@ describe('utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'success',
@@ -129,10 +113,7 @@ describe('utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toBeNull();
       });
@@ -143,10 +124,7 @@ describe('utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toBeNull();
       });
@@ -171,10 +149,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/comments/141012658')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: null,
@@ -201,10 +176,7 @@ describe('utils/subject.ts', () => {
           )
           .reply(200, { author: mockAuthor });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: null,
@@ -243,10 +215,7 @@ describe('utils/subject.ts', () => {
             },
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'ANSWERED',
@@ -271,10 +240,7 @@ describe('utils/subject.ts', () => {
             },
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'DUPLICATE',
@@ -299,10 +265,7 @@ describe('utils/subject.ts', () => {
             },
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'OPEN',
@@ -327,10 +290,7 @@ describe('utils/subject.ts', () => {
             },
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'OUTDATED',
@@ -355,10 +315,7 @@ describe('utils/subject.ts', () => {
             },
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'REOPENED',
@@ -383,10 +340,7 @@ describe('utils/subject.ts', () => {
             },
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'RESOLVED',
@@ -422,10 +376,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'open',
@@ -447,10 +398,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'closed',
@@ -476,10 +424,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'completed',
@@ -505,10 +450,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'not_planned',
@@ -534,10 +476,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'reopened',
@@ -562,10 +501,7 @@ describe('utils/subject.ts', () => {
             user: mockAuthor,
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'open',
@@ -610,10 +546,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
           .reply(200, []);
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'closed',
@@ -645,10 +578,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
           .reply(200, []);
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'draft',
@@ -680,10 +610,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
           .reply(200, []);
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'merged',
@@ -715,10 +642,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
           .reply(200, []);
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'open',
@@ -749,10 +673,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
           .reply(200, []);
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'open',
@@ -782,10 +703,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
           .reply(200, []);
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'open',
@@ -830,10 +748,7 @@ describe('utils/subject.ts', () => {
               },
             ]);
 
-          const result = await getLatestReviewForReviewers(
-            mockNotification,
-            mockToken,
-          );
+          const result = await getLatestReviewForReviewers(mockNotification);
 
           expect(result).toEqual([
             { state: 'APPROVED', users: ['reviewer-3', 'reviewer-1'] },
@@ -846,10 +761,7 @@ describe('utils/subject.ts', () => {
             .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
             .reply(200, []);
 
-          const result = await getLatestReviewForReviewers(
-            mockNotification,
-            mockToken,
-          );
+          const result = await getLatestReviewForReviewers(mockNotification);
 
           expect(result).toBeNull();
         });
@@ -857,10 +769,7 @@ describe('utils/subject.ts', () => {
         it('returns null when not a PR notification', async () => {
           mockNotification.subject.type = 'Issue';
 
-          const result = await getLatestReviewForReviewers(
-            mockNotification,
-            mockToken,
-          );
+          const result = await getLatestReviewForReviewers(mockNotification);
 
           expect(result).toBeNull();
         });
@@ -881,10 +790,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/releases/1')
           .reply(200, { author: mockAuthor });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: null,
@@ -905,10 +811,7 @@ describe('utils/subject.ts', () => {
           type: 'WorkflowRun',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'waiting',
@@ -923,10 +826,7 @@ describe('utils/subject.ts', () => {
           type: 'WorkflowRun',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toBeNull();
       });
@@ -937,10 +837,7 @@ describe('utils/subject.ts', () => {
           type: 'WorkflowRun',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toBeNull();
       });
@@ -954,10 +851,7 @@ describe('utils/subject.ts', () => {
           type: 'RepositoryInvitation',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockToken,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toBeNull();
       });
@@ -980,7 +874,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/1')
           .replyWithError(mockError);
 
-        await getGitifySubjectDetails(mockNotification, mockToken);
+        await getGitifySubjectDetails(mockNotification);
 
         expect(consoleErrorSpy).toHaveBeenCalledWith(
           'Error occurred while fetching details for Issue notification: This issue will throw an error',
