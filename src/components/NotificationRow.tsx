@@ -37,7 +37,7 @@ interface IProps {
 export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const {
     settings,
-    accounts,
+    authAccounts,
     removeNotificationFromState,
     markNotificationRead,
     markNotificationDone,
@@ -54,7 +54,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
       // no need to mark as read, github does it by default when opening it
       removeNotificationFromState(settings, notification.id, hostname);
     }
-  }, [notifications, notification, accounts, settings]); // notifications required here to prevent weird state issues
+  }, [notifications, notification, authAccounts, settings]); // notifications required here to prevent weird state issues
 
   const unsubscribeFromThread = (event: MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.

@@ -1,5 +1,5 @@
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import type { AuthAccount, AuthState } from '../types';
+import type { Account, AuthAccounts } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
@@ -11,20 +11,22 @@ import {
   getWorkflowRunAttributes,
 } from './subject';
 
-export function isPersonalAccessTokenLoggedIn(auth: AuthState): boolean {
-  return auth.accounts.some(
+export function isPersonalAccessTokenLoggedIn(
+  authAccounts: AuthAccounts,
+): boolean {
+  return authAccounts.accounts.some(
     (account) => account.method === 'Personal Access Token',
   );
 }
 
-export function isOAuthAppLoggedIn(auth: AuthState): boolean {
+export function isOAuthAppLoggedIn(auth: AuthAccounts): boolean {
   return auth.accounts.some((account) => account.method === 'OAuth App');
 }
 
 export function getAccountForHost(
   hostname: string,
-  auth: AuthState,
-): AuthAccount {
+  auth: AuthAccounts,
+): Account {
   return auth.accounts.find((account) => hostname.endsWith(account.hostname));
 }
 

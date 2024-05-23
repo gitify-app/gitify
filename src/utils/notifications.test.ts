@@ -1,6 +1,6 @@
 import { ipcRenderer } from 'electron';
 
-import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
+import { mockAuthState, mockSettings } from '../__mocks__/mock-state';
 import {
   mockedAccountNotifications,
   mockedGitHubNotifications,
@@ -32,7 +32,7 @@ describe('utils/notifications.ts', () => {
       [],
       mockedAccountNotifications,
       settings,
-      mockAccounts,
+      mockAuthState,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).toHaveBeenCalledTimes(
@@ -57,7 +57,7 @@ describe('utils/notifications.ts', () => {
       [],
       mockedAccountNotifications,
       settings,
-      mockAccounts,
+      mockAuthState,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -78,7 +78,7 @@ describe('utils/notifications.ts', () => {
       mockedSingleAccountNotifications,
       mockedSingleAccountNotifications,
       settings,
-      mockAccounts,
+      mockAuthState,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -99,7 +99,7 @@ describe('utils/notifications.ts', () => {
       [],
       [],
       settings,
-      mockAccounts,
+      mockAuthState,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -112,7 +112,7 @@ describe('utils/notifications.ts', () => {
     const nativeNotification: Notification =
       notificationsHelpers.raiseNativeNotification(
         [mockedGitHubNotifications[0]],
-        mockAccounts,
+        mockAuthState,
       );
     nativeNotification.onclick(null);
 
@@ -126,7 +126,7 @@ describe('utils/notifications.ts', () => {
   it('should click on a native notification (with more than 1 notification)', () => {
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
       mockedGitHubNotifications,
-      mockAccounts,
+      mockAuthState,
     );
     nativeNotification.onclick(null);
 

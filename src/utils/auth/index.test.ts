@@ -5,7 +5,7 @@ const browserWindow = new remote.BrowserWindow();
 
 import * as auth from '.';
 import { getNewOAuthAppURL, getNewTokenURL } from '.';
-import type { AuthState } from '../../types';
+import type { AuthAccounts } from '../../types';
 import * as apiRequests from '../api/request';
 
 describe('utils/auth/index.ts', () => {
@@ -104,10 +104,10 @@ describe('utils/auth/index.ts', () => {
   });
 
   describe('addAccount', () => {
-    let accounts: AuthState;
+    let mockAuthState: AuthAccounts;
 
     beforeEach(() => {
-      accounts = {
+      mockAuthState = {
         accounts: [],
       };
     });
@@ -115,7 +115,7 @@ describe('utils/auth/index.ts', () => {
     describe('should add GitHub Cloud account', () => {
       it('should add personal access token account', async () => {
         const result = await auth.addAccount(
-          accounts,
+          mockAuthState,
           'Personal Access Token',
           '123-456',
           'github.com',
@@ -134,7 +134,7 @@ describe('utils/auth/index.ts', () => {
 
       it('should add oauth app account', async () => {
         const result = await auth.addAccount(
-          accounts,
+          mockAuthState,
           'OAuth App',
           '123-456',
           'github.com',
@@ -155,7 +155,7 @@ describe('utils/auth/index.ts', () => {
     describe('should add GitHub Enterprise Server account', () => {
       it('should add personal access token account', async () => {
         const result = await auth.addAccount(
-          accounts,
+          mockAuthState,
           'Personal Access Token',
           '123-456',
           'github.gitify.io',
@@ -174,7 +174,7 @@ describe('utils/auth/index.ts', () => {
 
       it('should add oauth app account', async () => {
         const result = await auth.addAccount(
-          accounts,
+          mockAuthState,
           'OAuth App',
           '123-456',
           'github.gitify.io',

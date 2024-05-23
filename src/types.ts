@@ -7,8 +7,8 @@ import type {
   PlatformType,
 } from './utils/auth/types';
 
-export interface AuthState {
-  accounts: AuthAccount[];
+export interface AuthAccounts {
+  accounts: Account[];
   /**
    * @deprecated This attribute is deprecated and will be removed in the future.
    */
@@ -23,7 +23,7 @@ export interface AuthState {
   user?: GitifyUser | null;
 }
 
-export interface AuthAccount {
+export interface Account {
   method: AuthMethod;
   platform: PlatformType;
   hostname: string;
@@ -69,7 +69,7 @@ export type RadioGroupItem = {
 };
 
 export interface AccountNotifications {
-  account: AuthAccount;
+  account: Account;
   notifications: Notification[];
 }
 

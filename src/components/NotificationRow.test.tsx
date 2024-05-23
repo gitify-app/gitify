@@ -5,7 +5,7 @@ import * as TestRenderer from 'react-test-renderer';
 import * as helpers from '../utils/helpers';
 
 import { shell } from 'electron';
-import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
+import { mockAuthState, mockSettings } from '../__mocks__/mock-state';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
 import type { UserType } from '../typesGitHub';
@@ -135,7 +135,7 @@ describe('components/NotificationRow.tsx', () => {
           value={{
             settings: { ...mockSettings, markAsDoneOnOpen: false },
             removeNotificationFromState,
-            accounts: mockAccounts,
+            authAccounts: mockAuthState,
           }}
         >
           <NotificationRow {...props} />
@@ -160,7 +160,7 @@ describe('components/NotificationRow.tsx', () => {
           value={{
             settings: { ...mockSettings, markAsDoneOnOpen: false },
             removeNotificationFromState,
-            accounts: mockAccounts,
+            authAccounts: mockAuthState,
           }}
         >
           <NotificationRow {...props} />
@@ -185,7 +185,7 @@ describe('components/NotificationRow.tsx', () => {
           value={{
             settings: { ...mockSettings, markAsDoneOnOpen: true },
             markNotificationDone,
-            accounts: mockAccounts,
+            authAccounts: mockAuthState,
           }}
         >
           <NotificationRow {...props} />
@@ -209,7 +209,7 @@ describe('components/NotificationRow.tsx', () => {
         <AppContext.Provider
           value={{
             settings: { ...mockSettings, markAsDoneOnOpen: false },
-            accounts: mockAccounts,
+            authAccounts: mockAuthState,
           }}
         >
           <AppContext.Provider value={{ markNotificationRead }}>
@@ -234,7 +234,7 @@ describe('components/NotificationRow.tsx', () => {
         <AppContext.Provider
           value={{
             settings: { ...mockSettings },
-            accounts: mockAccounts,
+            authAccounts: mockAuthState,
           }}
         >
           <AppContext.Provider value={{ markNotificationDone }}>
@@ -289,7 +289,7 @@ describe('components/NotificationRow.tsx', () => {
         <AppContext.Provider
           value={{
             settings: { ...mockSettings },
-            accounts: mockAccounts,
+            authAccounts: mockAuthState,
           }}
         >
           <NotificationRow {...props} />

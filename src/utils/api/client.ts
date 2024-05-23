@@ -1,5 +1,5 @@
 import type { AxiosPromise } from 'axios';
-import type { AuthAccount, SettingsState } from '../../types';
+import type { Account, SettingsState } from '../../types';
 import type {
   Commit,
   CommitComment,
@@ -53,7 +53,7 @@ export function headNotifications(
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#list-notifications-for-the-authenticated-user
  */
 export function listNotificationsForAuthenticatedUser(
-  account: AuthAccount,
+  account: Account,
   settings: SettingsState,
 ): AxiosPromise<Notification[]> {
   const url = getGitHubAPIBaseUrl(account.hostname);

@@ -1,4 +1,4 @@
-import type { AuthAccount } from './types';
+import type { Account } from './types';
 
 export type Reason =
   | 'approval_requested'
@@ -109,7 +109,7 @@ export interface GitHubNotification {
 
 // Note: This is not in the official GitHub API. We add this to make notification interactions easier.
 export interface GitifyNotification {
-  account: AuthAccount;
+  account: Account;
 }
 
 export type UserDetails = User & UserProfile;

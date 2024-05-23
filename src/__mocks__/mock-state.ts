@@ -1,6 +1,6 @@
 import {
-  type AuthAccount,
-  type AuthState,
+  type Account,
+  type AuthAccounts,
   type GitifyUser,
   type SettingsState,
   Theme,
@@ -13,7 +13,7 @@ export const mockedUser: GitifyUser = {
   id: 123456789,
 };
 
-export const mockPersonalAccessTokenAccount: AuthAccount = {
+export const mockPersonalAccessTokenAccount: Account = {
   platform: 'GitHub Cloud',
   method: 'Personal Access Token',
   token: 'token-123-456',
@@ -21,7 +21,7 @@ export const mockPersonalAccessTokenAccount: AuthAccount = {
   user: mockedUser,
 };
 
-export const mockOAuthAccount: AuthAccount = {
+export const mockOAuthAccount: Account = {
   platform: 'GitHub Enterprise Server',
   method: 'OAuth App',
   token: '1234568790',
@@ -29,7 +29,7 @@ export const mockOAuthAccount: AuthAccount = {
   user: mockedUser,
 };
 
-export const mockGitHubCloudAccount: AuthAccount = {
+export const mockGitHubCloudAccount: Account = {
   platform: 'GitHub Cloud',
   method: 'Personal Access Token',
   token: 'token-123-456',
@@ -37,7 +37,7 @@ export const mockGitHubCloudAccount: AuthAccount = {
   user: mockedUser,
 };
 
-export const mockGitHubEnterpriseServerAccount: AuthAccount = {
+export const mockGitHubEnterpriseServerAccount: Account = {
   platform: 'GitHub Enterprise Server',
   method: 'Personal Access Token',
   token: '1234568790',
@@ -45,7 +45,7 @@ export const mockGitHubEnterpriseServerAccount: AuthAccount = {
   user: mockedUser,
 };
 
-export const mockAccounts: AuthState = {
+export const mockAuthState: AuthAccounts = {
   accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
 };
 
