@@ -119,7 +119,6 @@ describe('utils/notifications.ts', () => {
     expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
     expect(helpers.openInBrowser).toHaveBeenLastCalledWith(
       mockedGitHubNotifications[0],
-      mockAccounts,
     );
     expect(ipcRenderer.send).toHaveBeenCalledWith('hide-window');
   });

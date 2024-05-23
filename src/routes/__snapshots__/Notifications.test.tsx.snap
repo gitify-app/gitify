@@ -99,7 +99,17 @@ exports[`routes/Notifications.tsx should render itself & its children (show acco
     notifications={
       [
         {
-          "hostname": "https://api.github.com",
+          "account": {
+            "hostname": "github.com",
+            "method": "Personal Access Token",
+            "platform": "GitHub Cloud",
+            "token": "token-123-456",
+            "user": {
+              "id": 123456789,
+              "login": "octocat",
+              "name": "Mona Lisa Octocat",
+            },
+          },
           "id": "138661096",
           "last_read_at": "2017-05-20T17:06:51Z",
           "reason": "subscribed",
@@ -209,7 +219,17 @@ exports[`routes/Notifications.tsx should render itself & its children (show acco
           "url": "https://api.github.com/notifications/threads/138661096",
         },
         {
-          "hostname": "https://api.github.com",
+          "account": {
+            "hostname": "github.com",
+            "method": "Personal Access Token",
+            "platform": "GitHub Cloud",
+            "token": "token-123-456",
+            "user": {
+              "id": 123456789,
+              "login": "octocat",
+              "name": "Mona Lisa Octocat",
+            },
+          },
           "id": "148827438",
           "last_read_at": "2017-05-20T16:59:03Z",
           "reason": "author",
@@ -269,7 +289,17 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
     notifications={
       [
         {
-          "hostname": "https://api.github.com",
+          "account": {
+            "hostname": "github.com",
+            "method": "Personal Access Token",
+            "platform": "GitHub Cloud",
+            "token": "token-123-456",
+            "user": {
+              "id": 123456789,
+              "login": "octocat",
+              "name": "Mona Lisa Octocat",
+            },
+          },
           "id": "138661096",
           "last_read_at": "2017-05-20T17:06:51Z",
           "reason": "subscribed",
@@ -379,7 +409,17 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
           "url": "https://api.github.com/notifications/threads/138661096",
         },
         {
-          "hostname": "https://api.github.com",
+          "account": {
+            "hostname": "github.com",
+            "method": "Personal Access Token",
+            "platform": "GitHub Cloud",
+            "token": "token-123-456",
+            "user": {
+              "id": 123456789,
+              "login": "octocat",
+              "name": "Mona Lisa Octocat",
+            },
+          },
           "id": "148827438",
           "last_read_at": "2017-05-20T16:59:03Z",
           "reason": "author",
@@ -432,7 +472,17 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
     notifications={
       [
         {
-          "hostname": "https://github.gitify.io/api/v3",
+          "account": {
+            "hostname": "github.gitify.io",
+            "method": "Personal Access Token",
+            "platform": "GitHub Enterprise Server",
+            "token": "1234568790",
+            "user": {
+              "id": 123456789,
+              "login": "octocat",
+              "name": "Mona Lisa Octocat",
+            },
+          },
           "id": "3",
           "last_read_at": null,
           "reason": "subscribed",
@@ -477,7 +527,17 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
           "url": "https://github.gitify.io/api/v3/notifications/threads/4",
         },
         {
-          "hostname": "https://github.gitify.io/api/v3",
+          "account": {
+            "hostname": "github.gitify.io",
+            "method": "Personal Access Token",
+            "platform": "GitHub Enterprise Server",
+            "token": "1234568790",
+            "user": {
+              "id": 123456789,
+              "login": "octocat",
+              "name": "Mona Lisa Octocat",
+            },
+          },
           "id": "4",
           "last_read_at": "2017-05-20T14:20:55Z",
           "reason": "subscribed",

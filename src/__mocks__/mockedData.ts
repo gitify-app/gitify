@@ -1,4 +1,4 @@
-import type { AccountNotifications, GitifyUser } from '../types';
+import type { AccountNotifications } from '../types';
 import type {
   Discussion,
   DiscussionAuthor,
@@ -12,12 +12,6 @@ import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from './mock-state';
-
-export const mockedUser: GitifyUser = {
-  login: 'octocat',
-  name: 'Mona Lisa Octocat',
-  id: 123456789,
-};
 
 export const mockedNotificationUser: User = {
   login: 'octocat',

@@ -1,7 +1,7 @@
 import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
 import {
-  mockOAuthAccount,
-  mockPersonalAccessTokenAccount,
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
   mockToken,
 } from '../../__mocks__/mock-state';
 import type { SettingsState } from '../../types';
@@ -86,9 +86,9 @@ describe('utils/api/client.ts', () => {
       participating: true,
     };
 
-    it('should list notifications for user - github', async () => {
+    it('should list notifications for user - github cloud', async () => {
       await listNotificationsForAuthenticatedUser(
-        mockPersonalAccessTokenAccount,
+        mockGitHubCloudAccount,
         mockSettings as SettingsState,
       );
 
@@ -101,14 +101,14 @@ describe('utils/api/client.ts', () => {
       expect(axios.defaults.headers.common).toMatchSnapshot();
     });
 
-    it('should list notifications for user - enterprise', async () => {
+    it('should list notifications for user - github enterprise server', async () => {
       await listNotificationsForAuthenticatedUser(
-        mockOAuthAccount,
+        mockGitHubEnterpriseServerAccount,
         mockSettings as SettingsState,
       );
 
       expect(axios).toHaveBeenCalledWith({
-        url: 'https://example.com/api/v3/notifications?participating=true',
+        url: 'https://github.gitify.io/api/v3/notifications?participating=true',
         method: 'GET',
         data: {},
       });

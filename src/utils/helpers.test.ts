@@ -6,7 +6,6 @@ import {
 import {
   mockedGraphQLResponse,
   mockedSingleNotification,
-  mockedUser,
 } from '../__mocks__/mockedData';
 import type { SubjectType } from '../typesGitHub';
 import * as apiRequests from './api/request';
@@ -94,8 +93,7 @@ describe('utils/helpers.ts', () => {
   describe('generateNotificationReferrerId', () => {
     it('should generate the notification_referrer_id', () => {
       const referrerId = generateNotificationReferrerId(
-        mockedSingleNotification.id,
-        mockedUser.id,
+        mockedSingleNotification,
       );
       expect(referrerId).toBe(
         'MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=',

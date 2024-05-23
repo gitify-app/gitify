@@ -1,11 +1,17 @@
 import {
   type AuthAccount,
   type AuthState,
+  type GitifyUser,
   type SettingsState,
   Theme,
 } from '../types';
 import Constants from '../utils/constants';
-import { mockedUser } from './mockedData';
+
+export const mockedUser: GitifyUser = {
+  login: 'octocat',
+  name: 'Mona Lisa Octocat',
+  id: 123456789,
+};
 
 export const mockPersonalAccessTokenAccount: AuthAccount = {
   platform: 'GitHub Cloud',

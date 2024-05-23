@@ -39,11 +39,10 @@ export function isEnterpriseHost(hostname: string): boolean {
 }
 
 export function generateNotificationReferrerId(
-  notificationId: string,
-  userId: number,
+  notification: Notification,
 ): string {
   const buffer = Buffer.from(
-    `018:NotificationThread${notificationId}:${userId}`,
+    `018:NotificationThread${notification.id}:${notification.account.user.id}`,
   );
   return buffer.toString('base64');
 }
@@ -153,10 +152,7 @@ export async function generateGitHubWebUrl(
 
   url.searchParams.set(
     'notification_referrer_id',
-    generateNotificationReferrerId(
-      notification.id,
-      notification.account?.user.id,
-    ),
+    generateNotificationReferrerId(notification),
   );
 
   return url.toString();
