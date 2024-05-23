@@ -2,7 +2,11 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 import axios, { AxiosError } from 'axios';
 import nock from 'nock';
 
-import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
+import {
+  mockAccounts,
+  mockGitHubCloudAccount,
+  mockSettings,
+} from '../__mocks__/mock-state';
 import { mockedNotificationUser } from '../__mocks__/mockedData';
 import { Errors } from '../utils/constants';
 import { useNotifications } from './useNotifications';
@@ -255,10 +259,15 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications());
 
         act(() => {
-          result.current.fetchNotifications(mockAccounts, {
-            ...mockSettings,
-            detailedNotifications: true,
-          });
+          result.current.fetchNotifications(
+            {
+              accounts: [mockGitHubCloudAccount],
+            },
+            {
+              ...mockSettings,
+              detailedNotifications: true,
+            },
+          );
         });
 
         expect(result.current.status).toBe('loading');
@@ -268,7 +277,7 @@ describe('hooks/useNotifications.ts', () => {
         });
 
         expect(result.current.notifications[0].account.hostname).toBe(
-          'api.github.com',
+          'github.com',
         );
         expect(result.current.notifications[0].notifications.length).toBe(6);
       });

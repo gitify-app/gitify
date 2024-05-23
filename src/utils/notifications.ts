@@ -130,7 +130,6 @@ export async function getAllNotifications(
           (notification: Notification) => ({
             ...notification,
             account: accountNotifications.account,
-            // TODO: we expect account to be API Base URL, not account hostname.  Need to fix.
           }),
         );
 
