@@ -105,6 +105,7 @@ describe('utils/auth.tsx', () => {
 
   describe('addAccount', () => {
     const accounts: AuthState = {
+      accounts: [],
       token: null,
       enterpriseAccounts: [],
       user: null,

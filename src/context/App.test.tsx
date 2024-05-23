@@ -132,6 +132,7 @@ describe('context/App.tsx', () => {
       expect(markNotificationReadMock).toHaveBeenCalledTimes(1);
       expect(markNotificationReadMock).toHaveBeenCalledWith(
         {
+          accounts: [],
           enterpriseAccounts: [],
           token: null,
           user: null,
@@ -164,7 +165,7 @@ describe('context/App.tsx', () => {
 
       expect(markNotificationDoneMock).toHaveBeenCalledTimes(1);
       expect(markNotificationDoneMock).toHaveBeenCalledWith(
-        { enterpriseAccounts: [], token: null, user: null },
+        { accounts: [], enterpriseAccounts: [], token: null, user: null },
         mockSettings,
         '123-456',
         'github.com',
@@ -193,7 +194,7 @@ describe('context/App.tsx', () => {
 
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
       expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
-        { enterpriseAccounts: [], token: null, user: null },
+        { accounts: [], enterpriseAccounts: [], token: null, user: null },
         mockSettings,
         '123-456',
         'github.com',
@@ -227,7 +228,7 @@ describe('context/App.tsx', () => {
 
       expect(markRepoNotificationsMock).toHaveBeenCalledTimes(1);
       expect(markRepoNotificationsMock).toHaveBeenCalledWith(
-        { enterpriseAccounts: [], token: null, user: null },
+        { accounts: [], enterpriseAccounts: [], token: null, user: null },
         mockSettings,
         'gitify-app/notifications-test',
         'github.com',
@@ -321,7 +322,7 @@ describe('context/App.tsx', () => {
     });
 
     expect(saveStateMock).toHaveBeenCalledWith(
-      { enterpriseAccounts: [], token: null, user: null },
+      { accounts: [], enterpriseAccounts: [], token: null, user: null },
       {
         participating: true,
         playSound: true,
@@ -366,7 +367,7 @@ describe('context/App.tsx', () => {
     expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
 
     expect(saveStateMock).toHaveBeenCalledWith(
-      { enterpriseAccounts: [], token: null, user: null },
+      { accounts: [], enterpriseAccounts: [], token: null, user: null },
       {
         participating: false,
         playSound: true,

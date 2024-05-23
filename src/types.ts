@@ -3,10 +3,32 @@ import type { FC } from 'react';
 import type { Notification } from './typesGitHub';
 
 export interface AuthState {
+  accounts: AuthAccount[];
+  /**
+   * @deprecated This attribute is deprecated and will be removed in the future.
+   */
   token?: string;
-  enterpriseAccounts: EnterpriseAccount[];
+  /**
+   * @deprecated This attribute is deprecated and will be removed in the future.
+   */
+  enterpriseAccounts?: EnterpriseAccount[];
+  /**
+   * @deprecated This attribute is deprecated and will be removed in the future.
+   */
+  user?: GitifyUser | null;
+}
+
+export interface AuthAccount {
+  method: AuthMethod;
+  platform: PlatformType;
+  hostname: string;
+  token: string;
   user: GitifyUser | null;
 }
+
+export type AuthMethod = 'Personal Access Token' | 'OAuth App';
+
+export type PlatformType = 'GitHub Cloud' | 'GitHub Enterprise Server';
 
 export type Status = 'loading' | 'success' | 'error';
 

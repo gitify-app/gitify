@@ -18,6 +18,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
   const openExternalMock = jest.spyOn(shell, 'openExternal');
 
   const mockAccounts: AuthState = {
+    accounts: [],
     enterpriseAccounts: [],
     user: null,
   };
@@ -126,6 +127,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
       <AppContext.Provider
         value={{
           accounts: {
+            accounts: [],
             enterpriseAccounts: mockedEnterpriseAccounts,
             user: null,
           },

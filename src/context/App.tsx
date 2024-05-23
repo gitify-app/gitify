@@ -28,6 +28,7 @@ import { clearState, loadState, saveState } from '../utils/storage';
 import { setTheme } from '../utils/theme';
 
 const defaultAccounts: AuthState = {
+  accounts: [],
   token: null,
   enterpriseAccounts: [],
   user: null,
