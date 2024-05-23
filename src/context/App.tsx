@@ -113,8 +113,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     settings.participating,
     settings.showBots,
     settings.detailedNotifications,
-    accounts.token,
-    accounts.enterpriseAccounts.length,
+    accounts.accounts.length,
   ]);
 
   useInterval(() => {
@@ -146,7 +145,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const isLoggedIn = useMemo(() => {
-    return !!accounts.token || accounts.enterpriseAccounts.length > 0;
+    return accounts.accounts.length > 0;
   }, [accounts]);
 
   const loginWithGitHubApp = useCallback(async () => {

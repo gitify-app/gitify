@@ -30,6 +30,8 @@ export const mockAccounts: AuthState = {
   // user: mockedUser,
 };
 
+export const mockToken = 'token-123-456';
+
 export const mockSettings: SettingsState = {
   participating: false,
   playSound: true,

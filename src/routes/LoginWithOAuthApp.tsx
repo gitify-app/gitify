@@ -1,5 +1,3 @@
-const ipcRenderer = require('electron').ipcRenderer;
-
 import {
   ArrowLeftIcon,
   BookIcon,
@@ -7,7 +5,7 @@ import {
   SignInIcon,
 } from '@primer/octicons-react';
 
-import { type FC, useCallback, useContext, useEffect } from 'react';
+import { type FC, useCallback, useContext } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
 
@@ -60,18 +58,8 @@ export const validate = (values: IValues): IFormErrors => {
 };
 
 export const LoginWithOAuthApp: FC = () => {
-  const {
-    accounts: { enterpriseAccounts },
-    loginWithOAuthApp,
-  } = useContext(AppContext);
+  const { loginWithOAuthApp } = useContext(AppContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (enterpriseAccounts.length) {
-      ipcRenderer.send('reopen-window');
-      navigate(-1);
-    }
-  }, [enterpriseAccounts]);
 
   const renderForm = (formProps: FormRenderProps) => {
     const { handleSubmit, submitting, pristine, values } = formProps;

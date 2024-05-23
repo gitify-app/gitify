@@ -3,7 +3,6 @@ import { MemoryRouter } from 'react-router-dom';
 import * as TestRenderer from 'react-test-renderer';
 const { ipcRenderer } = require('electron');
 import { shell } from 'electron';
-import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
 import type { AuthState } from '../types';
 import { LoginWithOAuthApp, validate } from './LoginWithOAuthApp';
@@ -19,8 +18,6 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
 
   const mockAccounts: AuthState = {
     accounts: [],
-    enterpriseAccounts: [],
-    user: null,
   };
 
   beforeEach(() => {
@@ -128,8 +125,6 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
         value={{
           accounts: {
             accounts: [],
-            enterpriseAccounts: mockedEnterpriseAccounts,
-            user: null,
           },
         }}
       >

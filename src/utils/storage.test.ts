@@ -57,9 +57,6 @@ describe('utils/storage.ts', () => {
             user: null,
           },
         ],
-        token: '123-456',
-        enterpriseAccounts: [],
-        user: null,
       },
       mockSettings,
     );

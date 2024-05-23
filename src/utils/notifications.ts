@@ -1,15 +1,10 @@
 import { ipcRenderer } from 'electron';
 import { Notification } from '../typesGitHub';
-import {
-  getAccountForHost,
-  isPersonalAccessTokenLoggedIn,
-  openInBrowser,
-} from '../utils/helpers';
+import { getAccountForHost, openInBrowser } from '../utils/helpers';
 import { updateTrayIcon } from './comms';
 
 import type { AccountNotifications, AuthState, SettingsState } from '../types';
 import { listNotificationsForAuthenticatedUser } from './api/client';
-import Constants from './constants';
 import { getGitifySubjectDetails } from './subject';
 
 export const setTrayIconColor = (notifications: AccountNotifications[]) => {
@@ -109,39 +104,22 @@ export const raiseSoundNotification = () => {
   audio.play();
 };
 
-function getGitHubNotifications(accounts: AuthState, settings: SettingsState) {
-  if (!isPersonalAccessTokenLoggedIn(accounts)) {
-    return;
-  }
-
-  return listNotificationsForAuthenticatedUser(
-    Constants.DEFAULT_AUTH_OPTIONS.hostname,
-    accounts.token,
-    settings,
-  );
-}
-
-function getEnterpriseNotifications(
-  accounts: AuthState,
-  settings: SettingsState,
-) {
-  return accounts.enterpriseAccounts.map((account) => {
+function getNotifications(auth: AuthState, settings: SettingsState) {
+  return auth.accounts.map((account) => {
     return listNotificationsForAuthenticatedUser(
       account.hostname,
       account.token,
       settings,
     );
+    // TODO - how do we pass hostname and token here correctly
   });
 }
 
 export async function getAllNotifications(
-  accounts: AuthState,
+  auth: AuthState,
   settings: SettingsState,
 ): Promise<AccountNotifications[]> {
-  const responses = await Promise.all([
-    getGitHubNotifications(accounts, settings),
-    ...getEnterpriseNotifications(accounts, settings),
-  ]);
+  const responses = await Promise.all([...getNotifications(auth, settings)]);
 
   const notifications: AccountNotifications[] = await Promise.all(
     responses
@@ -152,13 +130,14 @@ export async function getAllNotifications(
         let notifications = accountNotifications.data.map(
           (notification: Notification) => ({
             ...notification,
+            // TODO - how do we pass hostname and token here correctly
             hostname,
           }),
         );
 
         notifications = await enrichNotifications(
           notifications,
-          accounts,
+          auth,
           settings,
         );
 

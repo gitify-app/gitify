@@ -3,8 +3,7 @@ import axios, { AxiosError } from 'axios';
 import nock from 'nock';
 
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
-import { mockedNotificationUser, mockedUser } from '../__mocks__/mockedData';
-import type { AuthState } from '../types';
+import { mockedNotificationUser } from '../__mocks__/mockedData';
 import { Errors } from '../utils/constants';
 import { useNotifications } from './useNotifications';
 
@@ -100,144 +99,8 @@ describe('hooks/useNotifications.ts', () => {
       });
     });
 
-    describe('enterprise', () => {
-      it('should fetch notifications with success - enterprise only', async () => {
-        const accounts: AuthState = {
-          ...mockAccounts,
-          token: null,
-        };
-
-        const notifications = [
-          { id: 1, title: 'This is a notification.' },
-          { id: 2, title: 'This is another one.' },
-        ];
-
-        nock('https://github.gitify.io/api/v3/')
-          .get('/notifications?participating=false')
-          .reply(200, notifications);
-
-        const { result } = renderHook(() => useNotifications());
-
-        act(() => {
-          result.current.fetchNotifications(accounts, {
-            ...mockSettings,
-            detailedNotifications: false,
-          });
-        });
-
-        await waitFor(() => {
-          expect(result.current.status).toBe('success');
-        });
-
-        expect(result.current.notifications[0].hostname).toBe(
-          'github.gitify.io',
-        );
-        expect(result.current.notifications[0].notifications.length).toBe(2);
-      });
-
-      it('should fetch notifications with failure - enterprise only', async () => {
-        const accounts: AuthState = {
-          ...mockAccounts,
-          token: null,
-        };
-
-        nock('https://github.gitify.io/api/v3/')
-          .get('/notifications?participating=false')
-          .replyWithError({
-            code: AxiosError.ERR_BAD_REQUEST,
-            response: {
-              status: 400,
-              data: {
-                message: 'Oops! Something went wrong.',
-              },
-            },
-          });
-
-        const { result } = renderHook(() => useNotifications());
-
-        act(() => {
-          result.current.fetchNotifications(accounts, mockSettings);
-        });
-
-        await waitFor(() => {
-          expect(result.current.status).toBe('error');
-        });
-      });
-    });
-
-    describe('github.com', () => {
-      it('should fetch notifications with success - github.com only', async () => {
-        const accounts: AuthState = {
-          ...mockAccounts,
-          enterpriseAccounts: [],
-          user: mockedUser,
-        };
-
-        const notifications = [
-          { id: 1, title: 'This is a notification.' },
-          { id: 2, title: 'This is another one.' },
-        ];
-
-        nock('https://api.github.com')
-          .get('/notifications?participating=false')
-          .reply(200, notifications);
-
-        const { result } = renderHook(() => useNotifications());
-
-        act(() => {
-          result.current.fetchNotifications(accounts, {
-            ...mockSettings,
-            detailedNotifications: false,
-          });
-        });
-
-        await waitFor(() => {
-          expect(result.current.status).toBe('success');
-        });
-
-        expect(result.current.notifications[0].hostname).toBe('api.github.com');
-        expect(result.current.notifications[0].notifications.length).toBe(2);
-      });
-
-      it('should fetch notifications with failures - github.com only', async () => {
-        const accounts: AuthState = {
-          ...mockAccounts,
-          enterpriseAccounts: [],
-        };
-
-        nock('https://api.github.com/')
-          .get('/notifications?participating=false')
-          .replyWithError({
-            code: AxiosError.ERR_BAD_REQUEST,
-            response: {
-              status: 400,
-              data: {
-                message: 'Oops! Something went wrong.',
-              },
-            },
-          });
-
-        const { result } = renderHook(() => useNotifications());
-
-        act(() => {
-          result.current.fetchNotifications(accounts, mockSettings);
-        });
-
-        await waitFor(() => {
-          expect(result.current.status).toBe('error');
-          expect(result.current.errorDetails).toBe(Errors.UNKNOWN);
-        });
-      });
-    });
-
     describe('with detailed notifications', () => {
       it('should fetch notifications with success', async () => {
-        const accounts: AuthState = {
-          ...mockAccounts,
-          enterpriseAccounts: [],
-          user: mockedUser,
-        };
-
         const notifications = [
           {
             id: 1,
@@ -390,7 +253,7 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications());
 
         act(() => {
-          result.current.fetchNotifications(accounts, {
+          result.current.fetchNotifications(mockAccounts, {
             ...mockSettings,
             detailedNotifications: true,
           });

@@ -109,9 +109,6 @@ describe('utils/auth/index.ts', () => {
     beforeEach(() => {
       accounts = {
         accounts: [],
-        token: null,
-        enterpriseAccounts: [],
-        user: null,
       };
     });
 
