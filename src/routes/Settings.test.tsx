@@ -4,12 +4,9 @@ import { MemoryRouter } from 'react-router-dom';
 
 const { ipcRenderer } = require('electron');
 
-import type { AxiosResponse } from 'axios';
 import { shell } from 'electron';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { AppContext } from '../context/App';
-import * as apiRequests from '../utils/api/request';
-import Constants from '../utils/constants';
 import { SettingsRoute } from './Settings';
 
 const mockNavigate = jest.fn();
@@ -17,11 +14,6 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
-jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
-  headers: {
-    'x-oauth-scopes': Constants.AUTH_SCOPE.join(', '),
-  },
-} as unknown as AxiosResponse);
 
 describe('routes/Settings.tsx', () => {
   const updateSetting = jest.fn();
