@@ -78,7 +78,9 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
   describe("'Generate a PAT' button", () => {
     it('should be disabled if no hostname configured', async () => {
       render(
-        <AppContext.Provider value={{ validateToken: mockValidateToken }}>
+        <AppContext.Provider
+          value={{ loginWithPersonalAccessToken: mockValidateToken }}
+        >
           <MemoryRouter>
             <LoginWithPersonalAccessToken />
           </MemoryRouter>
@@ -96,7 +98,9 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
 
     it('should open in browser if hostname configured', async () => {
       render(
-        <AppContext.Provider value={{ validateToken: mockValidateToken }}>
+        <AppContext.Provider
+          value={{ loginWithPersonalAccessToken: mockValidateToken }}
+        >
           <MemoryRouter>
             <LoginWithPersonalAccessToken />
           </MemoryRouter>
@@ -113,7 +117,9 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
     mockValidateToken.mockResolvedValueOnce(null);
 
     render(
-      <AppContext.Provider value={{ validateToken: mockValidateToken }}>
+      <AppContext.Provider
+        value={{ loginWithPersonalAccessToken: mockValidateToken }}
+      >
         <MemoryRouter>
           <LoginWithPersonalAccessToken />
         </MemoryRouter>
@@ -139,7 +145,9 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
     mockValidateToken.mockRejectedValueOnce(null);
 
     render(
-      <AppContext.Provider value={{ validateToken: mockValidateToken }}>
+      <AppContext.Provider
+        value={{ loginWithPersonalAccessToken: mockValidateToken }}
+      >
         <MemoryRouter>
           <LoginWithPersonalAccessToken />
         </MemoryRouter>
@@ -184,7 +192,9 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
 
   it('should open help docs in the browser', async () => {
     render(
-      <AppContext.Provider value={{ validateToken: mockValidateToken }}>
+      <AppContext.Provider
+        value={{ loginWithPersonalAccessToken: mockValidateToken }}
+      >
         <MemoryRouter>
           <LoginWithPersonalAccessToken />
         </MemoryRouter>

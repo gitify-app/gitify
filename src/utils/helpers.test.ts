@@ -1,5 +1,9 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
-import { mockAccounts } from '../__mocks__/mock-state';
+import {
+  mockAccounts,
+  mockOAuthAccount,
+  mockPersonalAccessTokenAccount,
+} from '../__mocks__/mock-state';
 import {
   mockedGraphQLResponse,
   mockedSingleNotification,
@@ -11,6 +15,7 @@ import {
   formatForDisplay,
   generateGitHubWebUrl,
   generateNotificationReferrerId,
+  getPlatformFromHostname,
   isEnterpriseHost,
   isOAuthAppLoggedIn,
   isPersonalAccessTokenLoggedIn,
@@ -20,13 +25,23 @@ describe('utils/helpers.ts', () => {
   describe('isPersonalAccessTokenLoggedIn', () => {
     it('logged in', () => {
       expect(
-        isPersonalAccessTokenLoggedIn({ ...mockAccounts, token: '1234' }),
+        isPersonalAccessTokenLoggedIn({
+          accounts: [mockPersonalAccessTokenAccount],
+        }),
       ).toBe(true);
     });
 
     it('logged out', () => {
       expect(
-        isPersonalAccessTokenLoggedIn({ ...mockAccounts, token: null }),
+        isPersonalAccessTokenLoggedIn({
+          accounts: [],
+        }),
+      ).toBe(false);
+
+      expect(
+        isPersonalAccessTokenLoggedIn({
+          accounts: [mockOAuthAccount],
+        }),
       ).toBe(false);
     });
   });
@@ -35,20 +50,33 @@ describe('utils/helpers.ts', () => {
     it('logged in', () => {
       expect(
         isOAuthAppLoggedIn({
-          ...mockAccounts,
-          enterpriseAccounts: [{ hostname: 'github.gitify.io', token: '1234' }],
+          accounts: [mockOAuthAccount],
         }),
       ).toBe(true);
     });
 
     it('logged out', () => {
-      expect(
-        isOAuthAppLoggedIn({ ...mockAccounts, enterpriseAccounts: null }),
-      ).toBe(false);
+      expect(isOAuthAppLoggedIn({ accounts: [] })).toBe(false);
 
       expect(
-        isOAuthAppLoggedIn({ ...mockAccounts, enterpriseAccounts: [] }),
+        isOAuthAppLoggedIn({ accounts: [mockPersonalAccessTokenAccount] }),
       ).toBe(false);
+    });
+  });
+
+  describe('getPlatformFromHostname', () => {
+    it('should return GitHub Cloud', () => {
+      expect(getPlatformFromHostname('github.com')).toBe('GitHub Cloud');
+      expect(getPlatformFromHostname('api.github.com')).toBe('GitHub Cloud');
+    });
+
+    it('should return GitHub Enterprise Server', () => {
+      expect(getPlatformFromHostname('github.gitify.app')).toBe(
+        'GitHub Enterprise Server',
+      );
+      expect(getPlatformFromHostname('api.github.gitify.app')).toBe(
+        'GitHub Enterprise Server',
+      );
     });
   });
 
@@ -118,7 +146,7 @@ describe('utils/helpers.ts', () => {
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         subject.latest_comment_url,
         'GET',
-        mockAccounts.token,
+        mockPersonalAccessTokenAccount.token,
       );
       expect(result).toBe(`${mockedHtmlUrl}?${mockedNotificationReferrer}`);
     });
@@ -153,7 +181,7 @@ describe('utils/helpers.ts', () => {
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         subject.url,
         'GET',
-        mockAccounts.token,
+        mockPersonalAccessTokenAccount.token,
       );
       expect(result).toBe(`${mockedHtmlUrl}?${mockedNotificationReferrer}`);
     });

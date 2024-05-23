@@ -1,7 +1,7 @@
 import { ipcRenderer } from 'electron';
 import { Notification } from '../typesGitHub';
 import {
-  getTokenForHost,
+  getAccountForHost,
   isPersonalAccessTokenLoggedIn,
   openInBrowser,
 } from '../utils/helpers';
@@ -185,11 +185,11 @@ export async function enrichNotifications(
 
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: Notification) => {
-      const token = getTokenForHost(notification.hostname, accounts);
+      const account = getAccountForHost(notification.hostname, accounts);
 
       const additionalSubjectDetails = await getGitifySubjectDetails(
         notification,
-        token,
+        account.token,
       );
 
       return {

@@ -14,13 +14,13 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
-import type { AuthOptions } from '../types';
 import {
   getNewOAuthAppURL,
   isValidClientId,
   isValidHostname,
   isValidToken,
 } from '../utils/auth';
+import type { AuthOptionsOAuthApp } from '../utils/auth/types';
 import Constants from '../utils/constants';
 
 interface IValues {
@@ -62,7 +62,7 @@ export const validate = (values: IValues): IFormErrors => {
 export const LoginWithOAuthApp: FC = () => {
   const {
     accounts: { enterpriseAccounts },
-    loginEnterprise,
+    loginWithOAuthApp,
   } = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -132,7 +132,7 @@ export const LoginWithOAuthApp: FC = () => {
 
   const login = useCallback(async (data: IValues) => {
     try {
-      await loginEnterprise(data as AuthOptions);
+      await loginWithOAuthApp(data as AuthOptionsOAuthApp);
     } catch (err) {
       // Skip
     }

@@ -6,7 +6,12 @@ const { ipcRenderer } = require('electron');
 
 import type { AxiosResponse } from 'axios';
 import { shell } from 'electron';
-import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
+import {
+  mockAccounts,
+  mockOAuthAccount,
+  mockPersonalAccessTokenAccount,
+  mockSettings,
+} from '../__mocks__/mock-state';
 import { AppContext } from '../context/App';
 import * as apiRequests from '../utils/api/request';
 import Constants from '../utils/constants';
@@ -457,7 +462,7 @@ describe('routes/Settings.tsx', () => {
             <AppContext.Provider
               value={{
                 settings: mockSettings,
-                accounts: { ...mockAccounts, token: null },
+                accounts: { accounts: [mockOAuthAccount] },
               }}
             >
               <MemoryRouter>
@@ -487,7 +492,7 @@ describe('routes/Settings.tsx', () => {
             <AppContext.Provider
               value={{
                 settings: mockSettings,
-                accounts: { ...mockAccounts, token: '1234' },
+                accounts: { accounts: [mockPersonalAccessTokenAccount] },
               }}
             >
               <MemoryRouter>
@@ -510,10 +515,7 @@ describe('routes/Settings.tsx', () => {
             <AppContext.Provider
               value={{
                 settings: mockSettings,
-                accounts: {
-                  ...mockAccounts,
-                  enterpriseAccounts: [],
-                },
+                accounts: { accounts: [mockPersonalAccessTokenAccount] },
               }}
             >
               <MemoryRouter>
@@ -537,7 +539,7 @@ describe('routes/Settings.tsx', () => {
             <AppContext.Provider
               value={{
                 settings: mockSettings,
-                accounts: mockAccounts,
+                accounts: { accounts: [mockOAuthAccount] },
               }}
             >
               <MemoryRouter>

@@ -1,6 +1,11 @@
 import type { OcticonProps } from '@primer/octicons-react';
 import type { FC } from 'react';
 import type { Notification } from './typesGitHub';
+import type {
+  AuthMethod,
+  EnterpriseAccount,
+  PlatformType,
+} from './utils/auth/types';
 
 export interface AuthState {
   accounts: AuthAccount[];
@@ -25,10 +30,6 @@ export interface AuthAccount {
   token: string;
   user: GitifyUser | null;
 }
-
-export type AuthMethod = 'Personal Access Token' | 'OAuth App';
-
-export type PlatformType = 'GitHub Cloud' | 'GitHub Enterprise Server';
 
 export type Status = 'loading' | 'success' | 'error';
 
@@ -67,34 +68,9 @@ export type RadioGroupItem = {
   value: string;
 };
 
-export interface EnterpriseAccount {
-  hostname: string;
-  token: string;
-}
-
 export interface AccountNotifications {
   hostname: string;
   notifications: Notification[];
-}
-
-export interface AuthOptions {
-  hostname: string;
-  clientId: string;
-  clientSecret: string;
-}
-
-export interface AuthTokenOptions {
-  hostname: string;
-  token: string;
-}
-
-export interface AuthResponse {
-  authCode: string;
-  authOptions: AuthOptions;
-}
-export interface AuthTokenResponse {
-  hostname: string;
-  token: string;
 }
 
 export interface GitifyUser {

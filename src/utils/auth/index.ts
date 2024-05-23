@@ -1,17 +1,13 @@
 import { BrowserWindow } from '@electron/remote';
 
 import { format } from 'date-fns';
-import type {
-  AuthResponse,
-  AuthState,
-  AuthTokenResponse,
-  GitifyUser,
-} from '../types';
-import type { UserDetails } from '../typesGitHub';
-import { Constants } from '../utils/constants';
-import { getAuthenticatedUser } from './api/client';
-import { apiRequest } from './api/request';
-import { isEnterpriseHost } from './helpers';
+import type { AuthState, GitifyUser } from '../../types';
+import type { UserDetails } from '../../typesGitHub';
+import { getAuthenticatedUser } from '../api/client';
+import { apiRequest } from '../api/request';
+import { Constants } from '../constants';
+import { getPlatformFromHostname } from '../helpers';
+import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
 
 export const authGitHub = (
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
@@ -112,31 +108,23 @@ export const getToken = async (
   };
 };
 
-export const addAccount = (
-  accounts: AuthState,
-  token,
-  hostname,
+export function addAccount(
+  auth: AuthState,
+  method: AuthMethod,
+  token: string,
+  hostname: string,
   user?: GitifyUser,
-): AuthState => {
-  if (!isEnterpriseHost(hostname)) {
-    return {
-      ...accounts,
-      token,
-      user: user ?? null,
-    };
-  }
+): AuthState {
+  auth.accounts.push({
+    hostname: hostname,
+    method: method,
+    platform: getPlatformFromHostname(hostname),
+    token: token,
+    user: user,
+  });
 
-  return {
-    ...accounts,
-    enterpriseAccounts: [
-      ...accounts.enterpriseAccounts,
-      {
-        token,
-        hostname: hostname,
-      },
-    ],
-  };
-};
+  return auth;
+}
 
 export function getNewTokenURL(hostname: string): string {
   const date = format(new Date(), 'PP p');

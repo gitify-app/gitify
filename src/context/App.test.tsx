@@ -235,17 +235,20 @@ describe('context/App.tsx', () => {
       );
     });
 
-    it('should call validateToken', async () => {
+    it('should call loginWithPersonalAccessToken', async () => {
       apiRequestAuthMock.mockResolvedValueOnce(null);
 
       const TestComponent = () => {
-        const { validateToken } = useContext(AppContext);
+        const { loginWithPersonalAccessToken } = useContext(AppContext);
 
         return (
           <button
             type="button"
             onClick={() =>
-              validateToken({ hostname: 'github.com', token: '123-456' })
+              loginWithPersonalAccessToken({
+                hostname: 'github.com',
+                token: '123-456',
+              })
             }
           >
             Test Case

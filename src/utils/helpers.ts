@@ -1,8 +1,9 @@
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import type { AuthState } from '../types';
+import type { AuthAccount, AuthState } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
+import type { PlatformType } from './auth/types';
 import { Constants } from './constants';
 import {
   getCheckSuiteAttributes,
@@ -10,23 +11,27 @@ import {
   getWorkflowRunAttributes,
 } from './subject';
 
-export function isPersonalAccessTokenLoggedIn(accounts: AuthState): boolean {
-  return accounts.token != null;
+export function isPersonalAccessTokenLoggedIn(auth: AuthState): boolean {
+  return auth.accounts.some(
+    (account) => account.method === 'Personal Access Token',
+  );
 }
 
-export function isOAuthAppLoggedIn(accounts: AuthState): boolean {
-  return accounts.enterpriseAccounts?.length > 0;
+export function isOAuthAppLoggedIn(auth: AuthState): boolean {
+  return auth.accounts.some((account) => account.method === 'OAuth App');
 }
 
-export function getTokenForHost(hostname: string, accounts: AuthState): string {
-  const isEnterprise = isEnterpriseHost(hostname);
+export function getAccountForHost(
+  hostname: string,
+  auth: AuthState,
+): AuthAccount {
+  return auth.accounts.find((account) => hostname.endsWith(account.hostname));
+}
 
-  if (isEnterprise) {
-    return accounts.enterpriseAccounts.find((obj) => obj.hostname === hostname)
-      .token;
-  }
-
-  return accounts.token;
+export function getPlatformFromHostname(hostname: string): PlatformType {
+  return hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname)
+    ? 'GitHub Cloud'
+    : 'GitHub Enterprise Server';
 }
 
 export function isEnterpriseHost(hostname: string): boolean {
@@ -116,15 +121,18 @@ async function getDiscussionUrl(
 
 export async function generateGitHubWebUrl(
   notification: Notification,
-  accounts: AuthState,
+  auth: AuthState,
 ): Promise<string> {
   const url = new URL(notification.repository.html_url);
-  const token = getTokenForHost(notification.hostname, accounts);
+  const account = getAccountForHost(notification.hostname, auth);
 
   if (notification.subject.latest_comment_url) {
-    url.href = await getHtmlUrl(notification.subject.latest_comment_url, token);
+    url.href = await getHtmlUrl(
+      notification.subject.latest_comment_url,
+      account.token,
+    );
   } else if (notification.subject.url) {
-    url.href = await getHtmlUrl(notification.subject.url, token);
+    url.href = await getHtmlUrl(notification.subject.url, account.token);
   } else {
     // Perform any specific notification type handling (only required for a few special notification scenarios)
     switch (notification.subject.type) {
@@ -132,7 +140,7 @@ export async function generateGitHubWebUrl(
         url.href = getCheckSuiteUrl(notification);
         break;
       case 'Discussion':
-        url.href = await getDiscussionUrl(notification, token);
+        url.href = await getDiscussionUrl(notification, account.token);
         break;
       case 'RepositoryInvitation':
         url.pathname += '/invitations';
@@ -147,7 +155,7 @@ export async function generateGitHubWebUrl(
 
   url.searchParams.set(
     'notification_referrer_id',
-    generateNotificationReferrerId(notification.id, accounts.user?.id),
+    generateNotificationReferrerId(notification.id, account?.user.id),
   );
 
   return url.toString();

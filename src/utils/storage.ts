@@ -62,8 +62,5 @@ function migrateLegacyAccounts(accounts?: AuthState): AuthState {
 
   return {
     accounts: migratedAccounts,
-    // token: accounts.token,
-    // enterpriseAccounts: accounts.enterpriseAccounts,
-    // user: accounts.user,
   };
 }

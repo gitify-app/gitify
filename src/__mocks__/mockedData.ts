@@ -1,8 +1,4 @@
-import type {
-  AccountNotifications,
-  EnterpriseAccount,
-  GitifyUser,
-} from '../types';
+import type { AccountNotifications, GitifyUser } from '../types';
 import type {
   Discussion,
   DiscussionAuthor,
@@ -12,6 +8,7 @@ import type {
   Repository,
   User,
 } from '../typesGitHub';
+import type { EnterpriseAccount } from '../utils/auth/types';
 import Constants from '../utils/constants';
 
 export const mockedEnterpriseAccounts: EnterpriseAccount[] = [

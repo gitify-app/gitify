@@ -3,12 +3,12 @@ import type { AxiosPromise, AxiosResponse } from 'axios';
 import remote from '@electron/remote';
 const browserWindow = new remote.BrowserWindow();
 
-import type { AuthState } from '../types';
-import * as apiRequests from './api/request';
-import * as auth from './auth';
-import { getNewOAuthAppURL, getNewTokenURL } from './auth';
+import * as auth from '.';
+import { getNewOAuthAppURL, getNewTokenURL } from '.';
+import type { AuthState } from '../../types';
+import * as apiRequests from '../api/request';
 
-describe('utils/auth.tsx', () => {
+describe('utils/auth/index.ts', () => {
   describe('authGitHub', () => {
     const loadURLMock = jest.spyOn(browserWindow, 'loadURL');
 
@@ -104,31 +104,94 @@ describe('utils/auth.tsx', () => {
   });
 
   describe('addAccount', () => {
-    const accounts: AuthState = {
-      accounts: [],
-      token: null,
-      enterpriseAccounts: [],
-      user: null,
-    };
+    let accounts: AuthState;
 
-    it('should add a github.com account', async () => {
-      const result = await auth.addAccount(accounts, '123-456', 'github.com');
-
-      expect(result).toEqual({ ...accounts, token: '123-456' });
+    beforeEach(() => {
+      accounts = {
+        accounts: [],
+        token: null,
+        enterpriseAccounts: [],
+        user: null,
+      };
     });
 
-    it('should add an enterprise account', async () => {
-      const result = await auth.addAccount(
-        accounts,
-        '123-456',
-        'github.gitify.io',
-      );
+    describe('should add GitHub Cloud account', () => {
+      it('should add personal access token account', async () => {
+        const result = await auth.addAccount(
+          accounts,
+          'Personal Access Token',
+          '123-456',
+          'github.com',
+        );
 
-      expect(result).toEqual({
-        ...accounts,
-        enterpriseAccounts: [
-          { hostname: 'github.gitify.io', token: '123-456' },
-        ],
+        expect(result.accounts).toEqual([
+          {
+            hostname: 'github.com',
+            method: 'Personal Access Token',
+            platform: 'GitHub Cloud',
+            token: '123-456',
+            user: undefined,
+          },
+        ]);
+      });
+
+      it('should add oauth app account', async () => {
+        const result = await auth.addAccount(
+          accounts,
+          'OAuth App',
+          '123-456',
+          'github.com',
+        );
+
+        expect(result.accounts).toEqual([
+          {
+            hostname: 'github.com',
+            method: 'OAuth App',
+            platform: 'GitHub Cloud',
+            token: '123-456',
+            user: undefined,
+          },
+        ]);
+      });
+    });
+
+    describe('should add GitHub Enterprise Server account', () => {
+      it('should add personal access token account', async () => {
+        const result = await auth.addAccount(
+          accounts,
+          'Personal Access Token',
+          '123-456',
+          'github.gitify.io',
+        );
+
+        expect(result.accounts).toEqual([
+          {
+            hostname: 'github.gitify.io',
+            method: 'Personal Access Token',
+            platform: 'GitHub Enterprise Server',
+            token: '123-456',
+            user: undefined,
+          },
+        ]);
+      });
+
+      it('should add oauth app account', async () => {
+        const result = await auth.addAccount(
+          accounts,
+          'OAuth App',
+          '123-456',
+          'github.gitify.io',
+        );
+
+        expect(result.accounts).toEqual([
+          {
+            hostname: 'github.gitify.io',
+            method: 'OAuth App',
+            platform: 'GitHub Enterprise Server',
+            token: '123-456',
+            user: undefined,
+          },
+        ]);
       });
     });
   });
