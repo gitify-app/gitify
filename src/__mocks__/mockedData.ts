@@ -8,16 +8,10 @@ import type {
   Repository,
   User,
 } from '../typesGitHub';
-import type { EnterpriseAccount } from '../utils/auth/types';
-import Constants from '../utils/constants';
-import { mockOAuthAccount, mockPersonalAccessTokenAccount } from './mock-state';
-
-export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
-  {
-    hostname: 'github.gitify.io',
-    token: '1234568790',
-  },
-];
+import {
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+} from './mock-state';
 
 export const mockedUser: GitifyUser = {
   login: 'octocat',
@@ -47,13 +41,11 @@ export const mockedNotificationUser: User = {
 };
 
 // 2 Notifications
+// Hostname : 'github.com'
 // Repository : 'gitify-app/notifications-test'
 export const mockedGitHubNotifications: Notification[] = [
   {
-    account: {
-      ...mockPersonalAccessTokenAccount,
-      hostname: Constants.GITHUB_API_BASE_URL,
-    },
+    account: mockGitHubCloudAccount,
     id: '138661096',
     unread: true,
     reason: 'subscribed',
@@ -201,10 +193,7 @@ export const mockedGitHubNotifications: Notification[] = [
       'https://api.github.com/notifications/threads/138661096/subscription',
   },
   {
-    account: {
-      ...mockPersonalAccessTokenAccount,
-      hostname: Constants.GITHUB_API_BASE_URL,
-    },
+    account: mockGitHubCloudAccount,
     id: '148827438',
     unread: true,
     reason: 'author',
@@ -259,13 +248,11 @@ export const mockedGitHubNotifications: Notification[] = [
 ];
 
 // 2 Notifications
+// Hostname : 'github.gitify.io'
 // Repository : 'myorg/notifications-test'
 export const mockedEnterpriseNotifications: Notification[] = [
   {
-    account: {
-      ...mockOAuthAccount,
-      hostname: 'https://github.gitify.io/api/v3',
-    },
+    account: mockGitHubEnterpriseServerAccount,
     id: '3',
     unread: true,
     reason: 'subscribed',
@@ -319,10 +306,7 @@ export const mockedEnterpriseNotifications: Notification[] = [
       'https://github.gitify.io/api/v3/notifications/threads/4/subscription',
   },
   {
-    account: {
-      ...mockOAuthAccount,
-      hostname: 'https://github.gitify.io/api/v3',
-    },
+    account: mockGitHubEnterpriseServerAccount,
     id: '4',
     unread: true,
     reason: 'subscribed',
@@ -382,18 +366,18 @@ export const mockedSingleNotification: Notification =
 
 export const mockedAccountNotifications: AccountNotifications[] = [
   {
-    account: mockPersonalAccessTokenAccount,
+    account: mockGitHubCloudAccount,
     notifications: mockedGitHubNotifications,
   },
   {
-    account: mockOAuthAccount,
+    account: mockGitHubEnterpriseServerAccount,
     notifications: mockedEnterpriseNotifications,
   },
 ];
 
 export const mockedSingleAccountNotifications: AccountNotifications[] = [
   {
-    account: mockPersonalAccessTokenAccount,
+    account: mockGitHubCloudAccount,
     notifications: [mockedSingleNotification],
   },
 ];

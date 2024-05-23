@@ -23,11 +23,24 @@ export const mockOAuthAccount: AuthAccount = {
   user: mockedUser,
 };
 
+export const mockGitHubCloudAccount: AuthAccount = {
+  platform: 'GitHub Cloud',
+  method: 'Personal Access Token',
+  token: 'token-123-456',
+  hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+  user: mockedUser,
+};
+
+export const mockGitHubEnterpriseServerAccount: AuthAccount = {
+  platform: 'GitHub Enterprise Server',
+  method: 'Personal Access Token',
+  token: '1234568790',
+  hostname: 'github.gitify.io',
+  user: mockedUser,
+};
+
 export const mockAccounts: AuthState = {
-  accounts: [mockPersonalAccessTokenAccount, mockOAuthAccount],
-  // token: 'token-123-456',
-  // enterpriseAccounts: mockedEnterpriseAccounts,
-  // user: mockedUser,
+  accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
 };
 
 export const mockToken = 'token-123-456';
