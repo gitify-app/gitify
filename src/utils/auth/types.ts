@@ -24,7 +24,7 @@ export interface AuthTokenResponse {
 }
 
 /**
- * @deprecated This type is deprecated and will be removed in the future.
+ * @deprecated This type is deprecated and will be removed in a future release.
  */
 export interface EnterpriseAccount {
   hostname: string;

@@ -21,7 +21,7 @@ describe('utils/storage.ts', () => {
     );
     const result = loadState();
 
-    expect(result.accounts.accounts).toEqual([
+    expect(result.authAccounts.accounts).toEqual([
       {
         hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
         platform: 'GitHub Cloud',
@@ -30,9 +30,9 @@ describe('utils/storage.ts', () => {
         user: null,
       },
     ]);
-    expect(result.accounts.token).toBeUndefined();
-    expect(result.accounts.enterpriseAccounts).toBeUndefined();
-    expect(result.accounts.user).toBeUndefined();
+    expect(result.authAccounts.token).toBeUndefined();
+    expect(result.authAccounts.enterpriseAccounts).toBeUndefined();
+    expect(result.authAccounts.user).toBeUndefined();
   });
 
   it('should load the state from localstorage - empty', () => {
@@ -40,7 +40,7 @@ describe('utils/storage.ts', () => {
       .spyOn(localStorage.__proto__, 'getItem')
       .mockReturnValueOnce(JSON.stringify({}));
     const result = loadState();
-    expect(result.accounts).toBeUndefined();
+    expect(result.authAccounts).toBeUndefined();
     expect(result.settings).toBeUndefined();
   });
 

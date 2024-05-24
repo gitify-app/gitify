@@ -115,15 +115,18 @@ export function addAccount(
   hostname: string,
   user?: GitifyUser,
 ): AuthAccounts {
-  auth.accounts.push({
-    hostname: hostname,
-    method: method,
-    platform: getPlatformFromHostname(hostname),
-    token: token,
-    user: user,
-  });
-
-  return auth;
+  return {
+    accounts: [
+      ...auth.accounts,
+      {
+        hostname: hostname,
+        method: method,
+        platform: getPlatformFromHostname(hostname),
+        token: token,
+        user: user,
+      },
+    ],
+  };
 }
 
 export function getNewTokenURL(hostname: string): string {

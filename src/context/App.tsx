@@ -19,6 +19,7 @@ import {
 } from '../types';
 import { headNotifications } from '../utils/api/client';
 import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
+import { migrateAuthenticatedAccounts } from '../utils/auth/migration';
 import type {
   AuthOptionsOAuthApp,
   AuthOptionsPersonalAccessToken,
@@ -205,10 +206,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const restoreSettings = useCallback(() => {
+    // Migrate authenticated accounts
+    migrateAuthenticatedAccounts();
+
     const existing = loadState();
 
-    if (existing.accounts) {
-      setAuthAccounts({ ...defaultAuthState, ...existing.accounts });
+    if (existing.authAccounts) {
+      setAuthAccounts({ ...defaultAuthState, ...existing.authAccounts });
     }
 
     if (existing.settings) {

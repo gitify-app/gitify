@@ -10,15 +10,15 @@ import type {
 export interface AuthAccounts {
   accounts: Account[];
   /**
-   * @deprecated This attribute is deprecated and will be removed in the future.
+   * @deprecated This attribute is deprecated and will be removed in a future release.
    */
   token?: string;
   /**
-   * @deprecated This attribute is deprecated and will be removed in the future.
+   * @deprecated This attribute is deprecated and will be removed in a future release.
    */
   enterpriseAccounts?: EnterpriseAccount[];
   /**
-   * @deprecated This attribute is deprecated and will be removed in the future.
+   * @deprecated This attribute is deprecated and will be removed in a future release.
    */
   user?: GitifyUser | null;
 }

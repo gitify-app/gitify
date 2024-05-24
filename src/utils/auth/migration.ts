@@ -1,38 +1,49 @@
-import type { AuthAccounts } from '../../types';
+import type { Account, AuthAccounts } from '../../types';
 import Constants from '../constants';
+import { loadState, saveState } from '../storage';
 
 /**
- * Migrate from old authenticated account structure to new account structure (v5.7.0+)
+ * Migrate authenticated accounts from old data structure to new data structure (v5.7.0+).
  *
  * @deprecated We plan to remove this migration logic in a future major release.
- * @param accounts
- * @returns
  */
-export function migrateLegacyAccounts(accounts?: AuthAccounts): AuthAccounts {
-  const migratedAccounts = accounts?.accounts ?? [];
+export function migrateAuthenticatedAccounts() {
+  const existing = loadState();
 
-  if (accounts === undefined) {
-    return undefined;
+  if (hasAccountsToMigrate(existing.authAccounts)) {
+    console.log('Commencing authenticated accounts migration');
+
+    const migratedAccounts = convertAccounts(existing.authAccounts);
+
+    saveState({ accounts: migratedAccounts }, existing.settings);
+    console.log('Authenticated accounts migration complete');
   }
+}
 
-  if (migratedAccounts.length > 0) {
-    return {
-      accounts: migratedAccounts,
-    };
-  }
+export function hasAccountsToMigrate(
+  existingAuthAccounts: AuthAccounts,
+): boolean {
+  return (
+    !!existingAuthAccounts?.token ||
+    existingAuthAccounts?.enterpriseAccounts.length > 0
+  );
+}
 
-  if (accounts?.token) {
+export function convertAccounts(existingAuthAccounts: AuthAccounts): Account[] {
+  const migratedAccounts: Account[] = [];
+
+  if (existingAuthAccounts?.token) {
     migratedAccounts.push({
       hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
       platform: 'GitHub Cloud',
       method: 'Personal Access Token',
-      token: accounts.token,
-      user: accounts.user,
+      token: existingAuthAccounts.token,
+      user: existingAuthAccounts.user,
     });
   }
 
-  if (accounts?.enterpriseAccounts) {
-    for (const legacyEnterpriseAccount of accounts.enterpriseAccounts) {
+  if (existingAuthAccounts?.enterpriseAccounts) {
+    for (const legacyEnterpriseAccount of existingAuthAccounts.enterpriseAccounts) {
       migratedAccounts.push({
         hostname: legacyEnterpriseAccount.hostname,
         platform: 'GitHub Enterprise Server',
@@ -43,7 +54,5 @@ export function migrateLegacyAccounts(accounts?: AuthAccounts): AuthAccounts {
     }
   }
 
-  return {
-    accounts: migratedAccounts,
-  };
+  return migratedAccounts;
 }

@@ -1,18 +1,18 @@
 import type { AuthAccounts, SettingsState } from '../types';
-import { migrateLegacyAccounts } from './auth/migration';
 import { Constants } from './constants';
 
-export function loadState() {
+export function loadState(): {
+  authAccounts: AuthAccounts;
+  settings: SettingsState;
+} {
   const existing = localStorage.getItem(Constants.STORAGE_KEY);
-  const { auth: accounts, settings } = (existing && JSON.parse(existing)) || {};
-
-  const migratedAccounts = migrateLegacyAccounts(accounts);
-
-  return { accounts: migratedAccounts, settings };
+  const { auth: authAccounts, settings } =
+    (existing && JSON.parse(existing)) || {};
+  return { authAccounts, settings };
 }
 
-export function saveState(auth: AuthAccounts, settings: SettingsState) {
-  const settingsString = JSON.stringify({ auth, settings });
+export function saveState(authAccounts: AuthAccounts, settings: SettingsState) {
+  const settingsString = JSON.stringify({ auth: authAccounts, settings });
   localStorage.setItem(Constants.STORAGE_KEY, settingsString);
 }
 

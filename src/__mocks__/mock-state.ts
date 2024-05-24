@@ -7,7 +7,7 @@ import {
 } from '../types';
 import Constants from '../utils/constants';
 
-export const mockedUser: GitifyUser = {
+export const mockGitifyUser: GitifyUser = {
   login: 'octocat',
   name: 'Mona Lisa Octocat',
   id: 123456789,
@@ -18,7 +18,7 @@ export const mockPersonalAccessTokenAccount: Account = {
   method: 'Personal Access Token',
   token: 'token-123-456',
   hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-  user: mockedUser,
+  user: mockGitifyUser,
 };
 
 export const mockOAuthAccount: Account = {
@@ -26,7 +26,7 @@ export const mockOAuthAccount: Account = {
   method: 'OAuth App',
   token: '1234568790',
   hostname: 'github.gitify.io',
-  user: mockedUser,
+  user: mockGitifyUser,
 };
 
 export const mockGitHubCloudAccount: Account = {
@@ -34,7 +34,7 @@ export const mockGitHubCloudAccount: Account = {
   method: 'Personal Access Token',
   token: 'token-123-456',
   hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-  user: mockedUser,
+  user: mockGitifyUser,
 };
 
 export const mockGitHubEnterpriseServerAccount: Account = {
@@ -42,7 +42,7 @@ export const mockGitHubEnterpriseServerAccount: Account = {
   method: 'Personal Access Token',
   token: '1234568790',
   hostname: 'github.gitify.io',
-  user: mockedUser,
+  user: mockGitifyUser,
 };
 
 export const mockAuthState: AuthAccounts = {
