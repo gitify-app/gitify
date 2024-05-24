@@ -1,5 +1,5 @@
 import { mockGitifyUser, mockToken } from '../../__mocks__/mock-state';
-import type { AuthAccounts } from '../../types';
+import type { AuthState } from '../../types';
 import Constants from '../constants';
 import { convertAccounts, hasAccountsToMigrate } from './migration';
 
@@ -13,7 +13,7 @@ describe('utils/auth/migration.ts', () => {
       expect(
         hasAccountsToMigrate({
           token: mockToken,
-        } as AuthAccounts),
+        } as AuthState),
       ).toBe(true);
     });
 
@@ -23,7 +23,7 @@ describe('utils/auth/migration.ts', () => {
           enterpriseAccounts: [
             { hostname: 'github.gitify.io', token: mockToken },
           ],
-        } as AuthAccounts),
+        } as AuthState),
       ).toBe(true);
     });
   });
@@ -33,7 +33,7 @@ describe('utils/auth/migration.ts', () => {
       const result = convertAccounts({
         token: mockToken,
         user: mockGitifyUser,
-      } as AuthAccounts);
+      } as AuthState);
 
       expect(result).toEqual([
         {
@@ -51,7 +51,7 @@ describe('utils/auth/migration.ts', () => {
         enterpriseAccounts: [
           { hostname: 'github.gitify.io', token: mockToken },
         ],
-      } as AuthAccounts);
+      } as AuthState);
 
       expect(result).toEqual([
         {
@@ -71,7 +71,7 @@ describe('utils/auth/migration.ts', () => {
         enterpriseAccounts: [
           { hostname: 'github.gitify.io', token: mockToken },
         ],
-      } as AuthAccounts);
+      } as AuthState);
 
       expect(result).toEqual([
         {

@@ -1,4 +1,4 @@
-import type { Account, AuthAccounts } from '../../types';
+import type { Account, AuthState } from '../../types';
 import Constants from '../constants';
 import { loadState, saveState } from '../storage';
 
@@ -10,40 +10,38 @@ import { loadState, saveState } from '../storage';
 export function migrateAuthenticatedAccounts() {
   const existing = loadState();
 
-  if (hasAccountsToMigrate(existing.authAccounts)) {
+  if (hasAccountsToMigrate(existing.auth)) {
     console.log('Commencing authenticated accounts migration');
 
-    const migratedAccounts = convertAccounts(existing.authAccounts);
+    const migratedAccounts = convertAccounts(existing.auth);
 
     saveState({ accounts: migratedAccounts }, existing.settings);
     console.log('Authenticated accounts migration complete');
   }
 }
 
-export function hasAccountsToMigrate(
-  existingAuthAccounts: AuthAccounts,
-): boolean {
+export function hasAccountsToMigrate(existingAuthState: AuthState): boolean {
   return (
-    !!existingAuthAccounts?.token ||
-    existingAuthAccounts?.enterpriseAccounts?.length > 0
+    !!existingAuthState?.token ||
+    existingAuthState?.enterpriseAccounts?.length > 0
   );
 }
 
-export function convertAccounts(existingAuthAccounts: AuthAccounts): Account[] {
+export function convertAccounts(existingAuthState: AuthState): Account[] {
   const migratedAccounts: Account[] = [];
 
-  if (existingAuthAccounts?.token) {
+  if (existingAuthState?.token) {
     migratedAccounts.push({
       hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
       platform: 'GitHub Cloud',
       method: 'Personal Access Token',
-      token: existingAuthAccounts.token,
-      user: existingAuthAccounts.user,
+      token: existingAuthState.token,
+      user: existingAuthState.user,
     });
   }
 
-  if (existingAuthAccounts?.enterpriseAccounts) {
-    for (const legacyEnterpriseAccount of existingAuthAccounts.enterpriseAccounts) {
+  if (existingAuthState?.enterpriseAccounts) {
+    for (const legacyEnterpriseAccount of existingAuthState.enterpriseAccounts) {
       migratedAccounts.push({
         hostname: legacyEnterpriseAccount.hostname,
         platform: 'GitHub Enterprise Server',

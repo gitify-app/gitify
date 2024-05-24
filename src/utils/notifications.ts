@@ -3,11 +3,7 @@ import { Notification } from '../typesGitHub';
 import { openInBrowser } from '../utils/helpers';
 import { updateTrayIcon } from './comms';
 
-import type {
-  AccountNotifications,
-  AuthAccounts,
-  SettingsState,
-} from '../types';
+import type { AccountNotifications, AuthState, SettingsState } from '../types';
 import { listNotificationsForAuthenticatedUser } from './api/client';
 import { getGitifySubjectDetails } from './subject';
 
@@ -28,7 +24,7 @@ export const triggerNativeNotifications = (
   previousNotifications: AccountNotifications[],
   newNotifications: AccountNotifications[],
   settings: SettingsState,
-  auth: AuthAccounts,
+  auth: AuthState,
 ) => {
   const diffNotifications = newNotifications
     .map((accountNotifications) => {
@@ -72,7 +68,7 @@ export const triggerNativeNotifications = (
 
 export const raiseNativeNotification = (
   notifications: Notification[],
-  auth: AuthAccounts,
+  auth: AuthState,
 ) => {
   let title: string;
   let body: string;
@@ -111,7 +107,7 @@ export const raiseSoundNotification = () => {
   audio.play();
 };
 
-function getNotifications(auth: AuthAccounts, settings: SettingsState) {
+function getNotifications(auth: AuthState, settings: SettingsState) {
   return auth.accounts.map((account) => {
     return {
       account,
@@ -121,7 +117,7 @@ function getNotifications(auth: AuthAccounts, settings: SettingsState) {
 }
 
 export async function getAllNotifications(
-  auth: AuthAccounts,
+  auth: AuthState,
   settings: SettingsState,
 ): Promise<AccountNotifications[]> {
   const responses = await Promise.all([...getNotifications(auth, settings)]);
@@ -157,7 +153,7 @@ export async function getAllNotifications(
 
 export async function enrichNotifications(
   notifications: Notification[],
-  auth: AuthAccounts,
+  auth: AuthState,
   settings: SettingsState,
 ): Promise<Notification[]> {
   if (!settings.detailedNotifications) {

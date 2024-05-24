@@ -1,6 +1,6 @@
 import { ipcRenderer } from 'electron';
 
-import { mockAuthState, mockSettings } from '../__mocks__/mock-state';
+import { mockAuth, mockSettings } from '../__mocks__/mock-state';
 import {
   mockedAccountNotifications,
   mockedGitHubNotifications,
@@ -32,7 +32,7 @@ describe('utils/notifications.ts', () => {
       [],
       mockedAccountNotifications,
       settings,
-      mockAuthState,
+      mockAuth,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).toHaveBeenCalledTimes(
@@ -57,7 +57,7 @@ describe('utils/notifications.ts', () => {
       [],
       mockedAccountNotifications,
       settings,
-      mockAuthState,
+      mockAuth,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -78,7 +78,7 @@ describe('utils/notifications.ts', () => {
       mockedSingleAccountNotifications,
       mockedSingleAccountNotifications,
       settings,
-      mockAuthState,
+      mockAuth,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -95,12 +95,7 @@ describe('utils/notifications.ts', () => {
     jest.spyOn(notificationsHelpers, 'raiseNativeNotification');
     jest.spyOn(notificationsHelpers, 'raiseSoundNotification');
 
-    notificationsHelpers.triggerNativeNotifications(
-      [],
-      [],
-      settings,
-      mockAuthState,
-    );
+    notificationsHelpers.triggerNativeNotifications([], [], settings, mockAuth);
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
     expect(notificationsHelpers.raiseSoundNotification).not.toHaveBeenCalled();
@@ -112,7 +107,7 @@ describe('utils/notifications.ts', () => {
     const nativeNotification: Notification =
       notificationsHelpers.raiseNativeNotification(
         [mockedGitHubNotifications[0]],
-        mockAuthState,
+        mockAuth,
       );
     nativeNotification.onclick(null);
 
@@ -126,7 +121,7 @@ describe('utils/notifications.ts', () => {
   it('should click on a native notification (with more than 1 notification)', () => {
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
       mockedGitHubNotifications,
-      mockAuthState,
+      mockAuth,
     );
     nativeNotification.onclick(null);
 

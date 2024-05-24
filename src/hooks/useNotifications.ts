@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 
 import type {
   AccountNotifications,
-  AuthAccounts,
+  AuthState,
   GitifyError,
   SettingsState,
   Status,
@@ -31,35 +31,35 @@ interface NotificationsState {
     hostname: string,
   ) => void;
   fetchNotifications: (
-    auth: AuthAccounts,
+    auth: AuthState,
     settings: SettingsState,
   ) => Promise<void>;
   markNotificationRead: (
-    auth: AuthAccounts,
+    auth: AuthState,
     settings: SettingsState,
     id: string,
     hostname: string,
   ) => Promise<void>;
   markNotificationDone: (
-    auth: AuthAccounts,
+    auth: AuthState,
     settings: SettingsState,
     id: string,
     hostname: string,
   ) => Promise<void>;
   unsubscribeNotification: (
-    auth: AuthAccounts,
+    auth: AuthState,
     settings: SettingsState,
     id: string,
     hostname: string,
   ) => Promise<void>;
   markRepoNotifications: (
-    auth: AuthAccounts,
+    auth: AuthState,
     settings: SettingsState,
     repoSlug: string,
     hostname: string,
   ) => Promise<void>;
   markRepoNotificationsDone: (
-    auth: AuthAccounts,
+    auth: AuthState,
     settings: SettingsState,
     repoSlug: string,
     hostname: string,
@@ -77,7 +77,7 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const fetchNotifications = useCallback(
-    async (auth: AuthAccounts, settings: SettingsState) => {
+    async (auth: AuthState, settings: SettingsState) => {
       setStatus('loading');
 
       try {
@@ -101,7 +101,7 @@ export const useNotifications = (): NotificationsState => {
 
   const markNotificationRead = useCallback(
     async (
-      auth: AuthAccounts,
+      auth: AuthState,
       settings: SettingsState,
       id: string,
       hostname: string,
@@ -132,7 +132,7 @@ export const useNotifications = (): NotificationsState => {
 
   const markNotificationDone = useCallback(
     async (
-      auth: AuthAccounts,
+      auth: AuthState,
       settings: SettingsState,
       id: string,
       hostname: string,
@@ -163,7 +163,7 @@ export const useNotifications = (): NotificationsState => {
 
   const unsubscribeNotification = useCallback(
     async (
-      auth: AuthAccounts,
+      auth: AuthState,
       settings: SettingsState,
       id: string,
       hostname: string,
@@ -185,7 +185,7 @@ export const useNotifications = (): NotificationsState => {
 
   const markRepoNotifications = useCallback(
     async (
-      auth: AuthAccounts,
+      auth: AuthState,
       settings: SettingsState,
       repoSlug: string,
       hostname: string,
@@ -218,7 +218,7 @@ export const useNotifications = (): NotificationsState => {
 
   const markRepoNotificationsDone = useCallback(
     async (
-      auth: AuthAccounts,
+      auth: AuthState,
       settings: SettingsState,
       repoSlug: string,
       hostname: string,

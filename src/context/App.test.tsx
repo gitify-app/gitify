@@ -1,9 +1,9 @@
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import { useContext } from 'react';
 
-import { mockAuthState, mockSettings } from '../__mocks__/mock-state';
+import { mockAuth, mockSettings } from '../__mocks__/mock-state';
 import { useNotifications } from '../hooks/useNotifications';
-import type { AuthAccounts, SettingsState } from '../types';
+import type { AuthState, SettingsState } from '../types';
 import * as apiRequests from '../utils/api/request';
 import * as comms from '../utils/comms';
 import Constants from '../utils/constants';
@@ -15,11 +15,11 @@ jest.mock('../hooks/useNotifications');
 
 const customRender = (
   ui,
-  authAccounts: AuthAccounts = mockAuthState,
+  auth: AuthState = mockAuth,
   settings: SettingsState = mockSettings,
 ) => {
   return render(
-    <AppContext.Provider value={{ authAccounts, settings }}>
+    <AppContext.Provider value={{ auth, settings }}>
       <AppProvider>{ui}</AppProvider>
     </AppContext.Provider>,
   );

@@ -1,6 +1,6 @@
 import {
   type Account,
-  type AuthAccounts,
+  type AuthState,
   type GitifyUser,
   type SettingsState,
   Theme,
@@ -45,7 +45,7 @@ export const mockGitHubEnterpriseServerAccount: Account = {
   user: mockGitifyUser,
 };
 
-export const mockAuthState: AuthAccounts = {
+export const mockAuth: AuthState = {
   accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
 };
 

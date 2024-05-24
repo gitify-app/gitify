@@ -5,7 +5,7 @@ const browserWindow = new remote.BrowserWindow();
 
 import * as auth from '.';
 import { getNewOAuthAppURL, getNewTokenURL } from '.';
-import type { AuthAccounts } from '../../types';
+import type { AuthState } from '../../types';
 import * as apiRequests from '../api/request';
 
 describe('utils/auth/index.ts', () => {
@@ -104,7 +104,7 @@ describe('utils/auth/index.ts', () => {
   });
 
   describe('addAccount', () => {
-    let mockAuthState: AuthAccounts;
+    let mockAuthState: AuthState;
 
     beforeEach(() => {
       mockAuthState = {

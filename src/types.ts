@@ -7,7 +7,9 @@ import type {
   PlatformType,
 } from './utils/auth/types';
 
-export interface AuthAccounts {
+export type Status = 'loading' | 'success' | 'error';
+
+export interface AuthState {
   accounts: Account[];
   /**
    * @deprecated This attribute is deprecated and will be removed in a future release.
@@ -30,8 +32,6 @@ export interface Account {
   token: string;
   user: GitifyUser | null;
 }
-
-export type Status = 'loading' | 'success' | 'error';
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &

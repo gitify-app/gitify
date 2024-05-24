@@ -1,7 +1,7 @@
 import { BrowserWindow } from '@electron/remote';
 
 import { format } from 'date-fns';
-import type { AuthAccounts, GitifyUser } from '../../types';
+import type { AuthState, GitifyUser } from '../../types';
 import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
@@ -109,12 +109,12 @@ export const getToken = async (
 };
 
 export function addAccount(
-  auth: AuthAccounts,
+  auth: AuthState,
   method: AuthMethod,
   token: string,
   hostname: string,
   user?: GitifyUser,
-): AuthAccounts {
+): AuthState {
   return {
     accounts: [
       ...auth.accounts,

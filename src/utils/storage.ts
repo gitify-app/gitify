@@ -1,18 +1,17 @@
-import type { AuthAccounts, SettingsState } from '../types';
+import type { AuthState, SettingsState } from '../types';
 import { Constants } from './constants';
 
 export function loadState(): {
-  authAccounts: AuthAccounts;
+  auth: AuthState;
   settings: SettingsState;
 } {
   const existing = localStorage.getItem(Constants.STORAGE_KEY);
-  const { auth: authAccounts, settings } =
-    (existing && JSON.parse(existing)) || {};
-  return { authAccounts, settings };
+  const { auth, settings } = (existing && JSON.parse(existing)) || {};
+  return { auth, settings };
 }
 
-export function saveState(authAccounts: AuthAccounts, settings: SettingsState) {
-  const settingsString = JSON.stringify({ auth: authAccounts, settings });
+export function saveState(auth: AuthState, settings: SettingsState) {
+  const settingsString = JSON.stringify({ auth, settings });
   localStorage.setItem(Constants.STORAGE_KEY, settingsString);
 }
 
