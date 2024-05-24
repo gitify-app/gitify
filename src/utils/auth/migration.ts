@@ -25,7 +25,7 @@ export function hasAccountsToMigrate(
 ): boolean {
   return (
     !!existingAuthAccounts?.token ||
-    existingAuthAccounts?.enterpriseAccounts.length > 0
+    existingAuthAccounts?.enterpriseAccounts?.length > 0
   );
 }
 
