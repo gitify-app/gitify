@@ -1,14 +1,17 @@
 import { ipcRenderer } from 'electron';
 
-import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import {
   mockedAccountNotifications,
-  mockedGitHubNotifications,
   mockedSingleAccountNotifications,
-} from '../__mocks__/mockedData';
-import { partialMockNotification } from '../__mocks__/partial-mocks';
+} from '../__mocks__/notifications-mocks';
+import { partialMockedNotification } from '../__mocks__/partial-mocks';
+import { mockedAccounts, mockedSettings } from '../__mocks__/state-mocks';
 import { defaultSettings } from '../context/App';
 import type { SettingsState } from '../types';
+import {
+  mockedGitHubNotifications,
+  mockedSingleNotification,
+} from './api/__mocks__/response-mocks';
 import * as helpers from './helpers';
 import * as notificationsHelpers from './notifications';
 import { filterNotifications } from './notifications';
@@ -32,7 +35,7 @@ describe('utils/notifications.ts', () => {
       [],
       mockedAccountNotifications,
       settings,
-      mockAccounts,
+      mockedAccounts,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).toHaveBeenCalledTimes(
@@ -57,7 +60,7 @@ describe('utils/notifications.ts', () => {
       [],
       mockedAccountNotifications,
       settings,
-      mockAccounts,
+      mockedAccounts,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -78,7 +81,7 @@ describe('utils/notifications.ts', () => {
       mockedSingleAccountNotifications,
       mockedSingleAccountNotifications,
       settings,
-      mockAccounts,
+      mockedAccounts,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -99,7 +102,7 @@ describe('utils/notifications.ts', () => {
       [],
       [],
       settings,
-      mockAccounts,
+      mockedAccounts,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -111,15 +114,15 @@ describe('utils/notifications.ts', () => {
 
     const nativeNotification: Notification =
       notificationsHelpers.raiseNativeNotification(
-        [mockedGitHubNotifications[0]],
-        mockAccounts,
+        [mockedSingleNotification],
+        mockedAccounts,
       );
     nativeNotification.onclick(null);
 
     expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
     expect(helpers.openInBrowser).toHaveBeenLastCalledWith(
-      mockedGitHubNotifications[0],
-      mockAccounts,
+      mockedSingleNotification,
+      mockedAccounts,
     );
     expect(ipcRenderer.send).toHaveBeenCalledWith('hide-window');
   });
@@ -127,7 +130,7 @@ describe('utils/notifications.ts', () => {
   it('should click on a native notification (with more than 1 notification)', () => {
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
       mockedGitHubNotifications,
-      mockAccounts,
+      mockedAccounts,
     );
     nativeNotification.onclick(null);
 
@@ -142,7 +145,7 @@ describe('utils/notifications.ts', () => {
 
   describe('filterNotifications', () => {
     const mockNotifications = [
-      partialMockNotification({
+      partialMockedNotification({
         title: 'User authored notification',
         user: {
           login: 'user',
@@ -152,7 +155,7 @@ describe('utils/notifications.ts', () => {
           type: 'User',
         },
       }),
-      partialMockNotification({
+      partialMockedNotification({
         title: 'Bot authored notification',
         user: {
           login: 'bot',
@@ -166,7 +169,7 @@ describe('utils/notifications.ts', () => {
 
     it('should hide bot notifications when set to false', async () => {
       const result = filterNotifications(mockNotifications, {
-        ...mockSettings,
+        ...mockedSettings,
         showBots: false,
       });
 
@@ -176,7 +179,7 @@ describe('utils/notifications.ts', () => {
 
     it('should show bot notifications when set to true', async () => {
       const result = filterNotifications(mockNotifications, {
-        ...mockSettings,
+        ...mockedSettings,
         showBots: true,
       });
 

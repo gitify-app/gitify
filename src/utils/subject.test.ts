@@ -1,11 +1,11 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { mockAccounts } from '../__mocks__/mock-state';
 import {
-  partialMockNotification,
-  partialMockUser,
+  partialMockedNotification,
+  partialMockedUser,
 } from '../__mocks__/partial-mocks';
+import { mockedAccounts } from '../__mocks__/state-mocks';
 import type {
   Discussion,
   DiscussionAuthor,
@@ -20,8 +20,8 @@ import {
   getWorkflowRunAttributes,
 } from './subject';
 
-const mockAuthor = partialMockUser('some-author');
-const mockCommenter = partialMockUser('some-commenter');
+const mockAuthor = partialMockedUser('some-author');
+const mockCommenter = partialMockedUser('some-commenter');
 const mockDiscussionAuthor: DiscussionAuthor = {
   login: 'discussion-author',
   url: 'https://github.com/discussion-author',
@@ -39,14 +39,14 @@ describe('utils/subject.ts', () => {
   describe('getGitifySubjectDetails', () => {
     describe('CheckSuites - GitHub Actions', () => {
       it('cancelled check suite state', async () => {
-        const mockNotification = partialMockNotification({
+        const mockNotification = partialMockedNotification({
           title: 'Demo workflow run cancelled for main branch',
           type: 'CheckSuite',
         });
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -56,14 +56,14 @@ describe('utils/subject.ts', () => {
       });
 
       it('failed check suite state', async () => {
-        const mockNotification = partialMockNotification({
+        const mockNotification = partialMockedNotification({
           title: 'Demo workflow run failed for main branch',
           type: 'CheckSuite',
         });
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -73,14 +73,14 @@ describe('utils/subject.ts', () => {
       });
 
       it('multiple attempts failed check suite state', async () => {
-        const mockNotification = partialMockNotification({
+        const mockNotification = partialMockedNotification({
           title: 'Demo workflow run, Attempt #3 failed for main branch',
           type: 'CheckSuite',
         });
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -90,14 +90,14 @@ describe('utils/subject.ts', () => {
       });
 
       it('skipped check suite state', async () => {
-        const mockNotification = partialMockNotification({
+        const mockNotification = partialMockedNotification({
           title: 'Demo workflow run skipped for main branch',
           type: 'CheckSuite',
         });
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -107,14 +107,14 @@ describe('utils/subject.ts', () => {
       });
 
       it('successful check suite state', async () => {
-        const mockNotification = partialMockNotification({
+        const mockNotification = partialMockedNotification({
           title: 'Demo workflow run succeeded for main branch',
           type: 'CheckSuite',
         });
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -124,28 +124,28 @@ describe('utils/subject.ts', () => {
       });
 
       it('unknown check suite state', async () => {
-        const mockNotification = partialMockNotification({
+        const mockNotification = partialMockedNotification({
           title: 'Demo workflow run unknown-status for main branch',
           type: 'CheckSuite',
         });
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toBeNull();
       });
 
       it('unhandled check suite title', async () => {
-        const mockNotification = partialMockNotification({
+        const mockNotification = partialMockedNotification({
           title: 'A title that is not in the structure we expect',
           type: 'CheckSuite',
         });
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toBeNull();
@@ -153,7 +153,7 @@ describe('utils/subject.ts', () => {
     });
     describe('Commits', () => {
       it('get commit commenter', async () => {
-        const mockNotification = partialMockNotification({
+        const mockNotification = partialMockedNotification({
           title: 'This is a commit with comments',
           type: 'Commit',
           url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8',
@@ -173,7 +173,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -188,7 +188,7 @@ describe('utils/subject.ts', () => {
       });
 
       it('get commit without commenter', async () => {
-        const mockNotification = partialMockNotification({
+        const mockNotification = partialMockedNotification({
           title: 'This is a commit with comments',
           type: 'Commit',
           url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8',
@@ -203,7 +203,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -223,7 +223,7 @@ describe('utils/subject.ts', () => {
         full_name: 'gitify-app/notifications-test',
       };
 
-      const mockNotification = partialMockNotification({
+      const mockNotification = partialMockedNotification({
         title: 'This is a mocked discussion',
         type: 'Discussion',
       });
@@ -245,7 +245,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -273,7 +273,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -301,7 +301,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -329,7 +329,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -357,7 +357,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -385,7 +385,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -404,7 +404,7 @@ describe('utils/subject.ts', () => {
     describe('Issues', () => {
       let mockNotification: Notification;
       beforeEach(() => {
-        mockNotification = partialMockNotification({
+        mockNotification = partialMockedNotification({
           title: 'This is a mocked issue',
           type: 'Issue',
           url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
@@ -424,7 +424,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -449,7 +449,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -478,7 +478,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -507,7 +507,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -536,7 +536,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -564,7 +564,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -583,7 +583,7 @@ describe('utils/subject.ts', () => {
       let mockNotification: Notification;
 
       beforeEach(() => {
-        mockNotification = partialMockNotification({
+        mockNotification = partialMockedNotification({
           title: 'This is a mocked pull request',
           type: 'PullRequest',
           url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/1',
@@ -612,7 +612,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -647,7 +647,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -682,7 +682,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -717,7 +717,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -751,7 +751,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -784,7 +784,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -832,7 +832,7 @@ describe('utils/subject.ts', () => {
 
           const result = await getLatestReviewForReviewers(
             mockNotification,
-            mockAccounts.token,
+            mockedAccounts.token,
           );
 
           expect(result).toEqual([
@@ -848,7 +848,7 @@ describe('utils/subject.ts', () => {
 
           const result = await getLatestReviewForReviewers(
             mockNotification,
-            mockAccounts.token,
+            mockedAccounts.token,
           );
 
           expect(result).toBeNull();
@@ -859,7 +859,7 @@ describe('utils/subject.ts', () => {
 
           const result = await getLatestReviewForReviewers(
             mockNotification,
-            mockAccounts.token,
+            mockedAccounts.token,
           );
 
           expect(result).toBeNull();
@@ -869,7 +869,7 @@ describe('utils/subject.ts', () => {
 
     describe('Releases', () => {
       it('release notification', async () => {
-        const mockNotification = partialMockNotification({
+        const mockNotification = partialMockedNotification({
           title: 'This is a mocked release',
           type: 'Release',
           url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1',
@@ -883,7 +883,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -900,14 +900,14 @@ describe('utils/subject.ts', () => {
 
     describe('WorkflowRuns - GitHub Actions', () => {
       it('deploy review workflow run state', async () => {
-        const mockNotification = partialMockNotification({
+        const mockNotification = partialMockedNotification({
           title: 'some-user requested your review to deploy to an environment',
           type: 'WorkflowRun',
         });
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toEqual({
@@ -917,7 +917,7 @@ describe('utils/subject.ts', () => {
       });
 
       it('unknown workflow run state', async () => {
-        const mockNotification = partialMockNotification({
+        const mockNotification = partialMockedNotification({
           title:
             'some-user requested your unknown-state to deploy to an environment',
           type: 'WorkflowRun',
@@ -925,21 +925,21 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toBeNull();
       });
 
       it('unhandled workflow run title', async () => {
-        const mockNotification = partialMockNotification({
+        const mockNotification = partialMockedNotification({
           title: 'unhandled workflow run structure',
           type: 'WorkflowRun',
         });
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toBeNull();
@@ -948,7 +948,7 @@ describe('utils/subject.ts', () => {
 
     describe('Default', () => {
       it('unhandled subject details', async () => {
-        const mockNotification = partialMockNotification({
+        const mockNotification = partialMockedNotification({
           title:
             'There is no special subject handling for this notification type',
           type: 'RepositoryInvitation',
@@ -956,7 +956,7 @@ describe('utils/subject.ts', () => {
 
         const result = await getGitifySubjectDetails(
           mockNotification,
-          mockAccounts.token,
+          mockedAccounts.token,
         );
 
         expect(result).toBeNull();
@@ -970,7 +970,7 @@ describe('utils/subject.ts', () => {
           .mockImplementation();
 
         const mockError = new Error('Test error');
-        const mockNotification = partialMockNotification({
+        const mockNotification = partialMockedNotification({
           title: 'This issue will throw an error',
           type: 'Issue',
           url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
@@ -980,7 +980,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/1')
           .replyWithError(mockError);
 
-        await getGitifySubjectDetails(mockNotification, mockAccounts.token);
+        await getGitifySubjectDetails(mockNotification, mockedAccounts.token);
 
         expect(consoleErrorSpy).toHaveBeenCalledWith(
           'Error occurred while fetching details for Issue notification: This issue will throw an error',
@@ -992,7 +992,7 @@ describe('utils/subject.ts', () => {
 
   describe('getCheckSuiteState', () => {
     it('cancelled check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = partialMockedNotification({
         title: 'Demo workflow run cancelled for feature/foo branch',
         type: 'CheckSuite',
       });
@@ -1009,7 +1009,7 @@ describe('utils/subject.ts', () => {
     });
 
     it('failed check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = partialMockedNotification({
         title: 'Demo workflow run failed for main branch',
         type: 'CheckSuite',
       });
@@ -1026,7 +1026,7 @@ describe('utils/subject.ts', () => {
     });
 
     it('multiple attempts failed check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = partialMockedNotification({
         title: 'Demo workflow run, Attempt #3 failed for main branch',
         type: 'CheckSuite',
       });
@@ -1043,7 +1043,7 @@ describe('utils/subject.ts', () => {
     });
 
     it('skipped check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = partialMockedNotification({
         title: 'Demo workflow run skipped for main branch',
         type: 'CheckSuite',
       });
@@ -1060,7 +1060,7 @@ describe('utils/subject.ts', () => {
     });
 
     it('successful check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = partialMockedNotification({
         title: 'Demo workflow run succeeded for main branch',
         type: 'CheckSuite',
       });
@@ -1077,7 +1077,7 @@ describe('utils/subject.ts', () => {
     });
 
     it('unknown check suite state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = partialMockedNotification({
         title: 'Demo workflow run unknown-status for main branch',
         type: 'CheckSuite',
       });
@@ -1094,7 +1094,7 @@ describe('utils/subject.ts', () => {
     });
 
     it('unhandled check suite title', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = partialMockedNotification({
         title: 'A title that is not in the structure we expect',
         type: 'CheckSuite',
       });
@@ -1107,7 +1107,7 @@ describe('utils/subject.ts', () => {
 
   describe('getWorkflowRunState', () => {
     it('deploy review workflow run state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = partialMockedNotification({
         title: 'some-user requested your review to deploy to an environment',
         type: 'WorkflowRun',
       });
@@ -1122,7 +1122,7 @@ describe('utils/subject.ts', () => {
     });
 
     it('unknown workflow run state', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = partialMockedNotification({
         title:
           'some-user requested your unknown-state to deploy to an environment',
         type: 'WorkflowRun',
@@ -1138,7 +1138,7 @@ describe('utils/subject.ts', () => {
     });
 
     it('unhandled workflow run title', async () => {
-      const mockNotification = partialMockNotification({
+      const mockNotification = partialMockedNotification({
         title: 'unhandled workflow run structure',
         type: 'WorkflowRun',
       });

@@ -1,7 +1,7 @@
 import TestRenderer from 'react-test-renderer';
 
-import { mockSettings } from '../__mocks__/mock-state';
-import { mockedAccountNotifications } from '../__mocks__/mockedData';
+import { mockedAccountNotifications } from '../__mocks__/notifications-mocks';
+import { mockedSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import { Errors } from '../utils/constants';
 import { NotificationsRoute } from './Notifications';
@@ -45,7 +45,7 @@ describe('routes/Notifications.tsx', () => {
       <AppContext.Provider
         value={{
           notifications: [mockedAccountNotifications[0]],
-          settings: { ...mockSettings, showAccountHostname: true },
+          settings: { ...mockedSettings, showAccountHostname: true },
         }}
       >
         <NotificationsRoute />

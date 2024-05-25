@@ -1,6 +1,6 @@
 import TestRenderer from 'react-test-renderer';
 
-import { mockedGitHubNotifications } from '../__mocks__/mockedData';
+import { mockedGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
 import { AccountNotifications } from './AccountNotifications';
 
 jest.mock('./Repository', () => ({

@@ -1,9 +1,4 @@
 import type {
-  AccountNotifications,
-  EnterpriseAccount,
-  GitifyUser,
-} from '../types';
-import type {
   Discussion,
   DiscussionAuthor,
   DiscussionComments,
@@ -11,21 +6,8 @@ import type {
   Notification,
   Repository,
   User,
-} from '../typesGitHub';
-import Constants from '../utils/constants';
-
-export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
-  {
-    hostname: 'github.gitify.io',
-    token: '1234568790',
-  },
-];
-
-export const mockedUser: GitifyUser = {
-  login: 'octocat',
-  name: 'Mona Lisa Octocat',
-  id: 123456789,
-};
+} from '../../../typesGitHub';
+import Constants from '../../constants';
 
 export const mockedNotificationUser: User = {
   login: 'octocat',
@@ -49,6 +31,7 @@ export const mockedNotificationUser: User = {
 };
 
 // 2 Notifications
+// Hostname : 'github.com'
 // Repository : 'gitify-app/notifications-test'
 export const mockedGitHubNotifications: Notification[] = [
   {
@@ -255,6 +238,7 @@ export const mockedGitHubNotifications: Notification[] = [
 ];
 
 // 2 Notifications
+// Hostname : 'github.gitify.io'
 // Repository : 'myorg/notifications-test'
 export const mockedEnterpriseNotifications: Notification[] = [
   {
@@ -367,53 +351,32 @@ export const mockedEnterpriseNotifications: Notification[] = [
   },
 ];
 
-export const mockedSingleNotification: Notification =
-  mockedGitHubNotifications[0];
-
-export const mockedAccountNotifications: AccountNotifications[] = [
-  {
-    hostname: 'github.com',
-    notifications: mockedGitHubNotifications,
-  },
-  {
-    hostname: 'github.gitify.io',
-    notifications: mockedEnterpriseNotifications,
-  },
-];
-
-export const mockedSingleAccountNotifications: AccountNotifications[] = [
-  {
-    hostname: 'github.com',
-    notifications: [mockedSingleNotification],
-  },
-];
-
-const mockDiscussionAuthor: DiscussionAuthor = {
+const mockedDiscussionAuthor: DiscussionAuthor = {
   login: 'comment-user',
   url: 'https://github.com/comment-user',
   avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
   type: 'User',
 };
 
-const mockDiscussionReplier: DiscussionAuthor = {
+const mockedDiscussionReplier: DiscussionAuthor = {
   login: 'reply-user',
   url: 'https://github.com/reply-user',
   avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
   type: 'User',
 };
 
-export const mockDiscussionComments: DiscussionComments = {
+export const mockedDiscussionComments: DiscussionComments = {
   nodes: [
     {
       databaseId: 2258799,
       createdAt: '2022-02-27T01:22:20Z',
-      author: mockDiscussionAuthor,
+      author: mockedDiscussionAuthor,
       replies: {
         nodes: [
           {
             databaseId: 2300902,
             createdAt: '2022-03-05T17:43:52Z',
-            author: mockDiscussionReplier,
+            author: mockedDiscussionReplier,
           },
         ],
       },
@@ -437,9 +400,12 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
             avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
             type: 'User',
           },
-          comments: mockDiscussionComments,
+          comments: mockedDiscussionComments,
         },
       ],
     },
   },
 };
+
+export const mockedSingleNotification: Notification =
+  mockedGitHubNotifications[0];

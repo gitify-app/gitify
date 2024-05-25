@@ -1,8 +1,6 @@
-import { mockSettings } from '../__mocks__/mock-state';
-import {
-  mockedSingleAccountNotifications,
-  mockedSingleNotification,
-} from '../__mocks__/mockedData';
+import { mockedSingleAccountNotifications } from '../__mocks__/notifications-mocks';
+import { mockedSettings } from '../__mocks__/state-mocks';
+import { mockedSingleNotification } from './api/__mocks__/response-mocks';
 import Constants from './constants';
 import { removeNotification } from './remove-notification';
 
@@ -14,7 +12,7 @@ describe('utils/remove-notification.ts', () => {
     expect(mockedSingleAccountNotifications[0].notifications.length).toBe(1);
 
     const result = removeNotification(
-      { ...mockSettings, delayNotificationState: false },
+      { ...mockedSettings, delayNotificationState: false },
       notificationId,
       mockedSingleAccountNotifications,
       hostname,
@@ -31,7 +29,7 @@ describe('utils/remove-notification.ts', () => {
     expect(mockedSingleAccountNotifications[0].notifications.length).toBe(1);
 
     const result = removeNotification(
-      { ...mockSettings, delayNotificationState: true },
+      { ...mockedSettings, delayNotificationState: true },
       notificationId,
       mockedSingleAccountNotifications,
       hostname,

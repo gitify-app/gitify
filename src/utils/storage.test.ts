@@ -1,4 +1,4 @@
-import { mockSettings } from '../__mocks__/mock-state';
+import { mockedSettings } from '../__mocks__/state-mocks';
 import { clearState, loadState, saveState } from './storage';
 
 describe('utils/storage.ts', () => {
@@ -31,7 +31,7 @@ describe('utils/storage.ts', () => {
         enterpriseAccounts: [],
         user: null,
       },
-      mockSettings,
+      mockedSettings,
     );
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
   });

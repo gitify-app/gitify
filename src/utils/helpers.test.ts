@@ -1,11 +1,10 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
-import { mockAccounts } from '../__mocks__/mock-state';
+import { mockedAccounts, mockedUser } from '../__mocks__/state-mocks';
+import type { SubjectType } from '../typesGitHub';
 import {
   mockedGraphQLResponse,
   mockedSingleNotification,
-  mockedUser,
-} from '../__mocks__/mockedData';
-import type { SubjectType } from '../typesGitHub';
+} from './api/__mocks__/response-mocks';
 import * as apiRequests from './api/request';
 import {
   formatForDisplay,
@@ -20,13 +19,13 @@ describe('utils/helpers.ts', () => {
   describe('isPersonalAccessTokenLoggedIn', () => {
     it('logged in', () => {
       expect(
-        isPersonalAccessTokenLoggedIn({ ...mockAccounts, token: '1234' }),
+        isPersonalAccessTokenLoggedIn({ ...mockedAccounts, token: '1234' }),
       ).toBe(true);
     });
 
     it('logged out', () => {
       expect(
-        isPersonalAccessTokenLoggedIn({ ...mockAccounts, token: null }),
+        isPersonalAccessTokenLoggedIn({ ...mockedAccounts, token: null }),
       ).toBe(false);
     });
   });
@@ -35,7 +34,7 @@ describe('utils/helpers.ts', () => {
     it('logged in', () => {
       expect(
         isOAuthAppLoggedIn({
-          ...mockAccounts,
+          ...mockedAccounts,
           enterpriseAccounts: [{ hostname: 'github.gitify.io', token: '1234' }],
         }),
       ).toBe(true);
@@ -43,11 +42,11 @@ describe('utils/helpers.ts', () => {
 
     it('logged out', () => {
       expect(
-        isOAuthAppLoggedIn({ ...mockAccounts, enterpriseAccounts: null }),
+        isOAuthAppLoggedIn({ ...mockedAccounts, enterpriseAccounts: null }),
       ).toBe(false);
 
       expect(
-        isOAuthAppLoggedIn({ ...mockAccounts, enterpriseAccounts: [] }),
+        isOAuthAppLoggedIn({ ...mockedAccounts, enterpriseAccounts: [] }),
       ).toBe(false);
     });
   });
@@ -111,14 +110,14 @@ describe('utils/helpers.ts', () => {
           ...mockedSingleNotification,
           subject: subject,
         },
-        mockAccounts,
+        mockedAccounts,
       );
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         subject.latest_comment_url,
         'GET',
-        mockAccounts.token,
+        mockedAccounts.token,
       );
       expect(result).toBe(`${mockedHtmlUrl}?${mockedNotificationReferrer}`);
     });
@@ -146,14 +145,14 @@ describe('utils/helpers.ts', () => {
           ...mockedSingleNotification,
           subject: subject,
         },
-        mockAccounts,
+        mockedAccounts,
       );
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         subject.url,
         'GET',
-        mockAccounts.token,
+        mockedAccounts.token,
       );
       expect(result).toBe(`${mockedHtmlUrl}?${mockedNotificationReferrer}`);
     });
@@ -172,7 +171,7 @@ describe('utils/helpers.ts', () => {
             ...mockedSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockedAccounts,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -194,7 +193,7 @@ describe('utils/helpers.ts', () => {
             ...mockedSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockedAccounts,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -216,7 +215,7 @@ describe('utils/helpers.ts', () => {
             ...mockedSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockedAccounts,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -238,7 +237,7 @@ describe('utils/helpers.ts', () => {
             ...mockedSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockedAccounts,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -260,7 +259,7 @@ describe('utils/helpers.ts', () => {
             ...mockedSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockedAccounts,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -282,7 +281,7 @@ describe('utils/helpers.ts', () => {
             ...mockedSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockedAccounts,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -304,7 +303,7 @@ describe('utils/helpers.ts', () => {
             ...mockedSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockedAccounts,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -336,7 +335,7 @@ describe('utils/helpers.ts', () => {
             ...mockedSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockedAccounts,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
@@ -368,7 +367,7 @@ describe('utils/helpers.ts', () => {
             ...mockedSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockedAccounts,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
@@ -396,7 +395,7 @@ describe('utils/helpers.ts', () => {
             ...mockedSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockedAccounts,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
@@ -420,7 +419,7 @@ describe('utils/helpers.ts', () => {
           ...mockedSingleNotification,
           subject: subject,
         },
-        mockAccounts,
+        mockedAccounts,
       );
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -443,7 +442,7 @@ describe('utils/helpers.ts', () => {
             ...mockedSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockedAccounts,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -466,7 +465,7 @@ describe('utils/helpers.ts', () => {
             ...mockedSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockedAccounts,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -488,7 +487,7 @@ describe('utils/helpers.ts', () => {
             ...mockedSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockedAccounts,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -511,7 +510,7 @@ describe('utils/helpers.ts', () => {
           ...mockedSingleNotification,
           subject: subject,
         },
-        mockAccounts,
+        mockedAccounts,
       );
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);

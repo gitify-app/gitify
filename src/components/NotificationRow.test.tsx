@@ -5,10 +5,10 @@ import * as TestRenderer from 'react-test-renderer';
 import * as helpers from '../utils/helpers';
 
 import { shell } from 'electron';
-import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
-import { mockedSingleNotification } from '../__mocks__/mockedData';
+import { mockedAccounts, mockedSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import type { UserType } from '../typesGitHub';
+import { mockedSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import { NotificationRow } from './NotificationRow';
 
 describe('components/NotificationRow.tsx', () => {
@@ -133,9 +133,9 @@ describe('components/NotificationRow.tsx', () => {
       render(
         <AppContext.Provider
           value={{
-            settings: { ...mockSettings, markAsDoneOnOpen: false },
+            settings: { ...mockedSettings, markAsDoneOnOpen: false },
             removeNotificationFromState,
-            accounts: mockAccounts,
+            accounts: mockedAccounts,
           }}
         >
           <NotificationRow {...props} />
@@ -158,9 +158,9 @@ describe('components/NotificationRow.tsx', () => {
       render(
         <AppContext.Provider
           value={{
-            settings: { ...mockSettings, markAsDoneOnOpen: false },
+            settings: { ...mockedSettings, markAsDoneOnOpen: false },
             removeNotificationFromState,
-            accounts: mockAccounts,
+            accounts: mockedAccounts,
           }}
         >
           <NotificationRow {...props} />
@@ -183,9 +183,9 @@ describe('components/NotificationRow.tsx', () => {
       render(
         <AppContext.Provider
           value={{
-            settings: { ...mockSettings, markAsDoneOnOpen: true },
+            settings: { ...mockedSettings, markAsDoneOnOpen: true },
             markNotificationDone,
-            accounts: mockAccounts,
+            accounts: mockedAccounts,
           }}
         >
           <NotificationRow {...props} />
@@ -208,8 +208,8 @@ describe('components/NotificationRow.tsx', () => {
       render(
         <AppContext.Provider
           value={{
-            settings: { ...mockSettings, markAsDoneOnOpen: false },
-            accounts: mockAccounts,
+            settings: { ...mockedSettings, markAsDoneOnOpen: false },
+            accounts: mockedAccounts,
           }}
         >
           <AppContext.Provider value={{ markNotificationRead }}>
@@ -233,8 +233,8 @@ describe('components/NotificationRow.tsx', () => {
       render(
         <AppContext.Provider
           value={{
-            settings: { ...mockSettings },
-            accounts: mockAccounts,
+            settings: { ...mockedSettings },
+            accounts: mockedAccounts,
           }}
         >
           <AppContext.Provider value={{ markNotificationDone }}>
@@ -288,8 +288,8 @@ describe('components/NotificationRow.tsx', () => {
       render(
         <AppContext.Provider
           value={{
-            settings: { ...mockSettings },
-            accounts: mockAccounts,
+            settings: { ...mockedSettings },
+            accounts: mockedAccounts,
           }}
         >
           <NotificationRow {...props} />

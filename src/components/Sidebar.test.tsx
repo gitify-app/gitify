@@ -2,8 +2,8 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import * as TestRenderer from 'react-test-renderer';
 const { shell, ipcRenderer } = require('electron');
-import { mockSettings } from '../__mocks__/mock-state';
-import { mockedAccountNotifications } from '../__mocks__/mockedData';
+import { mockedAccountNotifications } from '../__mocks__/notifications-mocks';
+import { mockedSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import { Sidebar } from './Sidebar';
 
@@ -32,7 +32,7 @@ describe('components/Sidebar.tsx', () => {
     const tree = TestRenderer.create(
       <AppContext.Provider
         value={{
-          settings: mockSettings,
+          settings: mockedSettings,
           notifications: mockedAccountNotifications,
         }}
       >

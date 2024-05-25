@@ -1,8 +1,8 @@
 import {
   mockedAccountNotifications,
   mockedSingleAccountNotifications,
-  mockedSingleNotification,
-} from '../__mocks__/mockedData';
+} from '../__mocks__/notifications-mocks';
+import { mockedSingleNotification } from './api/__mocks__/response-mocks';
 import { removeNotifications } from './remove-notifications';
 
 describe('utils/remove-notifications.ts', () => {

@@ -5,7 +5,7 @@ import { MemoryRouter } from 'react-router-dom';
 const { ipcRenderer } = require('electron');
 
 import { shell } from 'electron';
-import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
+import { mockedAccounts, mockedSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import { SettingsRoute } from './Settings';
 
@@ -27,7 +27,7 @@ describe('routes/Settings.tsx', () => {
       await act(async () => {
         render(
           <AppContext.Provider
-            value={{ settings: mockSettings, accounts: mockAccounts }}
+            value={{ settings: mockedSettings, accounts: mockedAccounts }}
           >
             <MemoryRouter>
               <SettingsRoute />
@@ -44,8 +44,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
+              settings: mockedSettings,
+              accounts: mockedAccounts,
             }}
           >
             <MemoryRouter>
@@ -65,8 +65,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
+              settings: mockedSettings,
+              accounts: mockedAccounts,
               updateSetting,
             }}
           >
@@ -88,8 +88,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
+              settings: mockedSettings,
+              accounts: mockedAccounts,
               updateSetting,
             }}
           >
@@ -118,8 +118,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
+              settings: mockedSettings,
+              accounts: mockedAccounts,
               updateSetting,
             }}
           >
@@ -143,8 +143,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
+              settings: mockedSettings,
+              accounts: mockedAccounts,
               updateSetting,
             }}
           >
@@ -179,11 +179,11 @@ describe('routes/Settings.tsx', () => {
           <AppContext.Provider
             value={{
               settings: {
-                ...mockSettings,
+                ...mockedSettings,
                 detailedNotifications: false,
                 showBots: true,
               },
-              accounts: mockAccounts,
+              accounts: mockedAccounts,
               updateSetting,
             }}
           >
@@ -220,11 +220,11 @@ describe('routes/Settings.tsx', () => {
           <AppContext.Provider
             value={{
               settings: {
-                ...mockSettings,
+                ...mockedSettings,
                 detailedNotifications: true,
                 showBots: true,
               },
-              accounts: mockAccounts,
+              accounts: mockedAccounts,
               updateSetting,
             }}
           >
@@ -260,8 +260,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
+              settings: mockedSettings,
+              accounts: mockedAccounts,
               updateSetting,
             }}
           >
@@ -285,8 +285,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
+              settings: mockedSettings,
+              accounts: mockedAccounts,
               updateSetting,
             }}
           >
@@ -315,8 +315,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
+              settings: mockedSettings,
+              accounts: mockedAccounts,
               updateSetting,
             }}
           >
@@ -346,8 +346,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
+              settings: mockedSettings,
+              accounts: mockedAccounts,
               updateSetting,
             }}
           >
@@ -371,8 +371,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
+              settings: mockedSettings,
+              accounts: mockedAccounts,
               updateSetting,
             }}
           >
@@ -396,8 +396,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
+              settings: mockedSettings,
+              accounts: mockedAccounts,
               updateSetting,
             }}
           >
@@ -423,8 +423,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
+              settings: mockedSettings,
+              accounts: mockedAccounts,
             }}
           >
             <MemoryRouter>
@@ -448,8 +448,8 @@ describe('routes/Settings.tsx', () => {
           render(
             <AppContext.Provider
               value={{
-                settings: mockSettings,
-                accounts: { ...mockAccounts, token: null },
+                settings: mockedSettings,
+                accounts: { ...mockedAccounts, token: null },
               }}
             >
               <MemoryRouter>
@@ -478,8 +478,8 @@ describe('routes/Settings.tsx', () => {
           render(
             <AppContext.Provider
               value={{
-                settings: mockSettings,
-                accounts: { ...mockAccounts, token: '1234' },
+                settings: mockedSettings,
+                accounts: { ...mockedAccounts, token: '1234' },
               }}
             >
               <MemoryRouter>
@@ -501,9 +501,9 @@ describe('routes/Settings.tsx', () => {
           render(
             <AppContext.Provider
               value={{
-                settings: mockSettings,
+                settings: mockedSettings,
                 accounts: {
-                  ...mockAccounts,
+                  ...mockedAccounts,
                   enterpriseAccounts: [],
                 },
               }}
@@ -528,8 +528,8 @@ describe('routes/Settings.tsx', () => {
           render(
             <AppContext.Provider
               value={{
-                settings: mockSettings,
-                accounts: mockAccounts,
+                settings: mockedSettings,
+                accounts: mockedAccounts,
               }}
             >
               <MemoryRouter>
@@ -549,8 +549,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
+              settings: mockedSettings,
+              accounts: mockedAccounts,
               logout: logoutMock,
             }}
           >
@@ -575,7 +575,7 @@ describe('routes/Settings.tsx', () => {
       await act(async () => {
         render(
           <AppContext.Provider
-            value={{ settings: mockSettings, accounts: mockAccounts }}
+            value={{ settings: mockedSettings, accounts: mockedAccounts }}
           >
             <MemoryRouter>
               <SettingsRoute />

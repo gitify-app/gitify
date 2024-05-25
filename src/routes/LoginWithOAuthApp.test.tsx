@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import * as TestRenderer from 'react-test-renderer';
 const { ipcRenderer } = require('electron');
 import { shell } from 'electron';
-import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
+import { mockedEnterpriseAccounts } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import type { AuthState } from '../types';
 import { LoginWithOAuthApp, validate } from './LoginWithOAuthApp';
