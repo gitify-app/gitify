@@ -26,6 +26,18 @@ describe('utils/auth/migration.ts', () => {
         } as AuthState),
       ).toBe(true);
     });
+
+    it('should not if there are already accounts', () => {
+      expect(
+        hasAccountsToMigrate({
+          token: mockToken,
+          enterpriseAccounts: [
+            { hostname: 'github.gitify.io', token: mockToken },
+          ],
+          accounts: [{ hostname: 'github.com', token: mockToken }],
+        } as AuthState),
+      ).toBe(false);
+    });
   });
 
   describe('convertAccounts', () => {

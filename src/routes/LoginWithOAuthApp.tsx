@@ -12,13 +12,13 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
+import type { AuthOptionsOAuthApp } from '../utils/auth/types';
 import {
   getNewOAuthAppURL,
   isValidClientId,
   isValidHostname,
   isValidToken,
-} from '../utils/auth';
-import type { AuthOptionsOAuthApp } from '../utils/auth/types';
+} from '../utils/auth/utils';
 import Constants from '../utils/constants';
 
 interface IValues {

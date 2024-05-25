@@ -18,12 +18,17 @@ import {
   Theme,
 } from '../types';
 import { headNotifications } from '../utils/api/client';
-import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
 import { migrateAuthenticatedAccounts } from '../utils/auth/migration';
 import type {
   AuthOptionsOAuthApp,
   AuthOptionsPersonalAccessToken,
 } from '../utils/auth/types';
+import {
+  addAccount,
+  authGitHub,
+  getToken,
+  getUserData,
+} from '../utils/auth/utils';
 import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
 import Constants from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';

@@ -3,12 +3,12 @@ import type { AxiosPromise, AxiosResponse } from 'axios';
 import remote from '@electron/remote';
 const browserWindow = new remote.BrowserWindow();
 
-import * as auth from '.';
-import { getNewOAuthAppURL, getNewTokenURL } from '.';
 import type { AuthState } from '../../types';
 import * as apiRequests from '../api/request';
+import * as auth from './utils';
+import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 
-describe('utils/auth/index.ts', () => {
+describe('utils/auth/utils.ts', () => {
   describe('authGitHub', () => {
     const loadURLMock = jest.spyOn(browserWindow, 'loadURL');
 

@@ -15,16 +15,31 @@ export function migrateAuthenticatedAccounts() {
 
     const migratedAccounts = convertAccounts(existing.auth);
 
-    saveState({ accounts: migratedAccounts }, existing.settings);
+    saveState(
+      { ...existing.auth, accounts: migratedAccounts },
+      existing.settings,
+    );
     console.log('Authenticated accounts migration complete');
   }
 }
 
 export function hasAccountsToMigrate(existingAuthState: AuthState): boolean {
-  return (
-    !!existingAuthState?.token ||
+  if (!existingAuthState) {
+    return false;
+  }
+
+  if (existingAuthState?.accounts?.length > 0) {
+    return false;
+  }
+
+  if (
+    existingAuthState?.token ||
     existingAuthState?.enterpriseAccounts?.length > 0
-  );
+  ) {
+    return true;
+  }
+
+  return false;
 }
 
 export function convertAccounts(existingAuthState: AuthState): Account[] {
