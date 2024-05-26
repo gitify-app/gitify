@@ -1,5 +1,6 @@
 import type { AxiosPromise } from 'axios';
-import type { Account, SettingsState } from '../../types';
+import { print } from 'graphql/language/printer';
+import type { SettingsState } from '../../types';
 import type {
   Commit,
   CommitComment,
@@ -14,11 +15,9 @@ import type {
   Release,
   UserDetails,
 } from '../../typesGitHub';
-import { apiRequestAuth } from './request';
-
-import { print } from 'graphql/language/printer';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
+import { apiRequestAuth } from './request';
 import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
 
 /**

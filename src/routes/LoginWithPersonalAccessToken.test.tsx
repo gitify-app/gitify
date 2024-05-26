@@ -6,10 +6,7 @@ import {
   waitFor,
 } from '@testing-library/react';
 import { shell } from 'electron';
-
 import { MemoryRouter } from 'react-router-dom';
-import TestRenderer from 'react-test-renderer';
-
 import { AppContext } from '../context/App';
 import {
   LoginWithPersonalAccessToken,
@@ -34,7 +31,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
   });
 
   it('renders correctly', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <MemoryRouter>
         <LoginWithPersonalAccessToken />
       </MemoryRouter>,

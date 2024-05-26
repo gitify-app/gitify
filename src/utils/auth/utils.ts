@@ -1,5 +1,4 @@
 import { BrowserWindow } from '@electron/remote';
-
 import { format } from 'date-fns';
 import type { AuthState, GitifyUser } from '../../types';
 import type { UserDetails } from '../../typesGitHub';

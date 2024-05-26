@@ -1,6 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import * as TestRenderer from 'react-test-renderer';
 const { ipcRenderer } = require('electron');
 import { shell } from 'electron';
 import { AppContext } from '../context/App';
@@ -28,8 +27,8 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
   });
 
   it('renders correctly', () => {
-    const tree = TestRenderer.create(
-      <AppContext.Provider value={{ auth: mockAuth }}>
+    const tree = render(
+      <AppContext.Provider value={{ accounts: mockAccounts }}>
         <MemoryRouter>
           <LoginWithOAuthApp />
         </MemoryRouter>

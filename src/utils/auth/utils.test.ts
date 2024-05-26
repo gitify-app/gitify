@@ -1,12 +1,11 @@
-import type { AxiosPromise, AxiosResponse } from 'axios';
-
 import remote from '@electron/remote';
-const browserWindow = new remote.BrowserWindow();
+import type { AxiosPromise, AxiosResponse } from 'axios';
+import type { AuthState } from '../types';
+import * as apiRequests from './api/request';
+import * as auth from './auth';
+import { getNewOAuthAppURL, getNewTokenURL } from './auth';
 
-import type { AuthState } from '../../types';
-import * as apiRequests from '../api/request';
-import * as auth from './utils';
-import { getNewOAuthAppURL, getNewTokenURL } from './utils';
+const browserWindow = new remote.BrowserWindow();
 
 describe('utils/auth/utils.ts', () => {
   describe('authGitHub', () => {
