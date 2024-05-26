@@ -1,6 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import TestRenderer from 'react-test-renderer';
 const { ipcRenderer } = require('electron');
 import { AppContext } from '../context/App';
 import { LoginRoute } from './Login';
@@ -18,7 +17,7 @@ describe('routes/Login.tsx', () => {
   });
 
   it('should render itself & its children', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <MemoryRouter>
         <LoginRoute />
       </MemoryRouter>,

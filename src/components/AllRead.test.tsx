@@ -1,8 +1,6 @@
-import * as TestRenderer from 'react-test-renderer';
-
-import { mockMathRandom } from './test-utils';
-
+import { render } from '@testing-library/react';
 import { AllRead } from './AllRead';
+import { mockMathRandom } from './test-utils';
 
 describe('components/AllRead.tsx', () => {
   // The read emoji randomly rotates, but then the snapshots would never match
@@ -10,7 +8,7 @@ describe('components/AllRead.tsx', () => {
   mockMathRandom(0.1);
 
   it('should render itself & its children', () => {
-    const tree = TestRenderer.create(<AllRead />);
+    const tree = render(<AllRead />);
 
     expect(tree).toMatchSnapshot();
   });

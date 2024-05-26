@@ -1,9 +1,6 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-
 import { MemoryRouter } from 'react-router-dom';
-
 const { ipcRenderer } = require('electron');
-
 import { shell } from 'electron';
 import { mockedAccounts, mockedSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';

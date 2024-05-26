@@ -1,6 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import * as TestRenderer from 'react-test-renderer';
 const { shell, ipcRenderer } = require('electron');
 import { mockedAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockedSettings } from '../__mocks__/state-mocks';
@@ -29,7 +28,7 @@ describe('components/Sidebar.tsx', () => {
   });
 
   it('should render itself & its children (logged in)', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider
         value={{
           settings: mockedSettings,
@@ -45,7 +44,7 @@ describe('components/Sidebar.tsx', () => {
   });
 
   it('should render itself & its children (logged out)', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider
         value={{ isLoggedIn: false, notifications: mockedAccountNotifications }}
       >

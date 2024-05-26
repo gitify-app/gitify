@@ -1,5 +1,4 @@
-import TestRenderer from 'react-test-renderer';
-
+import { render } from '@testing-library/react';
 import { mockedAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockedSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
@@ -20,7 +19,7 @@ jest.mock('../components/Oops', () => ({
 
 describe('routes/Notifications.tsx', () => {
   it('should render itself & its children (with notifications)', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider
         value={{ notifications: mockedAccountNotifications }}
       >
@@ -32,7 +31,7 @@ describe('routes/Notifications.tsx', () => {
   });
 
   it('should render itself & its children (all read notifications)', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider value={{ notifications: [] }}>
         <NotificationsRoute />
       </AppContext.Provider>,
@@ -41,7 +40,7 @@ describe('routes/Notifications.tsx', () => {
   });
 
   it('should render itself & its children (show account hostname)', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider
         value={{
           notifications: [mockedAccountNotifications[0]],
@@ -56,7 +55,7 @@ describe('routes/Notifications.tsx', () => {
 
   describe('should render itself & its children (error conditions - oops)', () => {
     it('bad credentials', () => {
-      const tree = TestRenderer.create(
+      const tree = render(
         <AppContext.Provider
           value={{
             notifications: [],
@@ -72,7 +71,7 @@ describe('routes/Notifications.tsx', () => {
     });
 
     it('missing scopes', () => {
-      const tree = TestRenderer.create(
+      const tree = render(
         <AppContext.Provider
           value={{
             notifications: [],
@@ -88,7 +87,7 @@ describe('routes/Notifications.tsx', () => {
     });
 
     it('rate limited', () => {
-      const tree = TestRenderer.create(
+      const tree = render(
         <AppContext.Provider
           value={{
             notifications: [],
@@ -104,7 +103,7 @@ describe('routes/Notifications.tsx', () => {
     });
 
     it('unknown error', () => {
-      const tree = TestRenderer.create(
+      const tree = render(
         <AppContext.Provider
           value={{
             notifications: [],
@@ -120,7 +119,7 @@ describe('routes/Notifications.tsx', () => {
     });
 
     it('default error', () => {
-      const tree = TestRenderer.create(
+      const tree = render(
         <AppContext.Provider
           value={{
             notifications: [],

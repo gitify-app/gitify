@@ -1,5 +1,4 @@
-import TestRenderer from 'react-test-renderer';
-
+import { render } from '@testing-library/react';
 import { mockedGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
 import { AccountNotifications } from './AccountNotifications';
 
@@ -15,7 +14,7 @@ describe('components/AccountNotifications.tsx', () => {
       showAccountHostname: true,
     };
 
-    const tree = TestRenderer.create(<AccountNotifications {...props} />);
+    const tree = render(<AccountNotifications {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
@@ -26,7 +25,7 @@ describe('components/AccountNotifications.tsx', () => {
       showAccountHostname: true,
     };
 
-    const tree = TestRenderer.create(<AccountNotifications {...props} />);
+    const tree = render(<AccountNotifications {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });

@@ -1,14 +1,13 @@
 import { ipcRenderer } from 'electron';
+import type { AccountNotifications, AuthState, SettingsState } from '../types';
 import { Notification } from '../typesGitHub';
 import {
   getTokenForHost,
   isPersonalAccessTokenLoggedIn,
   openInBrowser,
 } from '../utils/helpers';
-import { updateTrayIcon } from './comms';
-
-import type { AccountNotifications, AuthState, SettingsState } from '../types';
 import { listNotificationsForAuthenticatedUser } from './api/client';
+import { updateTrayIcon } from './comms';
 import Constants from './constants';
 import { getGitifySubjectDetails } from './subject';
 
