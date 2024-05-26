@@ -85,8 +85,8 @@ importers:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
       css-loader:
-        specifier: 7.1.1
-        version: 7.1.1(webpack@5.91.0(webpack-cli@5.1.4))
+        specifier: 7.1.2
+        version: 7.1.2(webpack@5.91.0(webpack-cli@5.1.4))
       electron:
         specifier: 30.0.8
         version: 30.0.8
@@ -1201,8 +1201,8 @@ packages:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
 
-  css-loader@7.1.1:
-    resolution: {integrity: sha512-OxIR5P2mjO1PSXk44bWuQ8XtMK4dpEqpIyERCx3ewOo3I8EmbcxMPUc5ScLtQfgXtOojoMv57So4V/C02HQLsw==}
+  css-loader@7.1.2:
+    resolution: {integrity: sha512-6WvYYn7l/XEGN8Xu2vWFt9nVzrCn39vKyTEFf/ExEyoksJjjSZV/0/35XPlMbpnr6VGhZIUg5yJrL8tGfes/FA==}
     engines: {node: '>= 18.12.0'}
     peerDependencies:
       '@rspack/core': 0.x || 1.x
@@ -4524,7 +4524,7 @@ snapshots:
       shebang-command: 2.0.0
       which: 2.0.2
 
-  css-loader@7.1.1(webpack@5.91.0(webpack-cli@5.1.4)):
+  css-loader@7.1.2(webpack@5.91.0(webpack-cli@5.1.4)):
     dependencies:
       icss-utils: 5.1.0(postcss@8.4.38)
       postcss: 8.4.38
