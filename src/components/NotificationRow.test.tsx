@@ -1,7 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import * as TestRenderer from 'react-test-renderer';
-
 import * as helpers from '../utils/helpers';
 
 import { shell } from 'electron';
@@ -30,7 +28,7 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const tree = TestRenderer.create(<NotificationRow {...props} />);
+    const tree = render(<NotificationRow {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
@@ -47,7 +45,7 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const tree = TestRenderer.create(<NotificationRow {...props} />);
+    const tree = render(<NotificationRow {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
@@ -64,7 +62,7 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const tree = TestRenderer.create(<NotificationRow {...props} />);
+    const tree = render(<NotificationRow {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
@@ -82,7 +80,7 @@ describe('components/NotificationRow.tsx', () => {
         hostname: 'github.com',
       };
 
-      const tree = TestRenderer.create(<NotificationRow {...props} />);
+      const tree = render(<NotificationRow {...props} />);
       expect(tree).toMatchSnapshot();
     });
 
@@ -99,7 +97,7 @@ describe('components/NotificationRow.tsx', () => {
         hostname: 'github.com',
       };
 
-      const tree = TestRenderer.create(<NotificationRow {...props} />);
+      const tree = render(<NotificationRow {...props} />);
       expect(tree).toMatchSnapshot();
     });
 
@@ -116,7 +114,7 @@ describe('components/NotificationRow.tsx', () => {
         hostname: 'github.com',
       };
 
-      const tree = TestRenderer.create(<NotificationRow {...props} />);
+      const tree = render(<NotificationRow {...props} />);
       expect(tree).toMatchSnapshot();
     });
   });

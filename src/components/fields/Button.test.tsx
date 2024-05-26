@@ -1,7 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import * as TestRenderer from 'react-test-renderer';
-
 import { MarkGithubIcon } from '@primer/octicons-react';
 import { shell } from 'electron';
 import { Button, type IButton } from './Button';
@@ -20,14 +18,12 @@ describe('components/fields/Button.tsx', () => {
   });
 
   it('should render without icon', () => {
-    const tree = TestRenderer.create(<Button {...props} />);
+    const tree = render(<Button {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('should render with icon', () => {
-    const tree = TestRenderer.create(
-      <Button {...props} icon={MarkGithubIcon} />,
-    );
+    const tree = render(<Button {...props} icon={MarkGithubIcon} />);
     expect(tree).toMatchSnapshot();
   });
 

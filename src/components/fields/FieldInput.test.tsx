@@ -1,5 +1,4 @@
-import * as TestRenderer from 'react-test-renderer';
-
+import { render } from '@testing-library/react';
 import { Form } from 'react-final-form';
 import { FieldInput, type IFieldInput } from './FieldInput';
 
@@ -12,7 +11,7 @@ describe('components/fields/FieldInput.tsx', () => {
   };
 
   it('should render', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <Form
         onSubmit={() => {}}
         hand

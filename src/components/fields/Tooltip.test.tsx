@@ -1,7 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import * as TestRenderer from 'react-test-renderer';
-
 import { type ITooltip, Tooltip } from './Tooltip';
 
 describe('components/fields/Tooltip.tsx', () => {
@@ -11,7 +9,7 @@ describe('components/fields/Tooltip.tsx', () => {
   };
 
   it('should render', () => {
-    const tree = TestRenderer.create(<Tooltip {...props} />);
+    const tree = render(<Tooltip {...props} />);
     expect(tree).toMatchSnapshot();
   });
 

@@ -1,18 +1,16 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 
-import * as TestRenderer from 'react-test-renderer';
-
 import { Logo } from './Logo';
 
 describe('components/Logo.tsx', () => {
   it('renders correctly (light)', () => {
-    const tree = TestRenderer.create(<Logo />);
+    const tree = render(<Logo />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('renders correctly(dark)', () => {
-    const tree = TestRenderer.create(<Logo isDark />);
+    const tree = render(<Logo isDark />);
 
     expect(tree).toMatchSnapshot();
   });

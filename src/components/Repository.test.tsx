@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import TestRenderer from 'react-test-renderer';
 import { mockedGitHubNotifications } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
 import { RepositoryNotifications } from './Repository';
@@ -26,7 +25,7 @@ describe('components/Repository.tsx', () => {
   });
 
   it('should render itself & its children', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
@@ -82,7 +81,7 @@ describe('components/Repository.tsx', () => {
   it('should use default repository icon when avatar is not available', () => {
     props.repoNotifications[0].repository.owner.avatar_url = '';
 
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
