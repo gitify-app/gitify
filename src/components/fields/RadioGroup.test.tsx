@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-
 import { type IRadioGroup, RadioGroup } from './RadioGroup';
 
 describe('components/fields/RadioGroup.tsx', () => {

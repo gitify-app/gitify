@@ -1,5 +1,4 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-
 import { type ITooltip, Tooltip } from './Tooltip';
 
 describe('components/fields/Tooltip.tsx', () => {

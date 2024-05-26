@@ -1,6 +1,5 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-
 import { MarkGithubIcon } from '@primer/octicons-react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { shell } from 'electron';
 import { Button, type IButton } from './Button';
 

@@ -1,5 +1,4 @@
 import { ipcRenderer } from 'electron';
-
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import {
   mockedAccountNotifications,

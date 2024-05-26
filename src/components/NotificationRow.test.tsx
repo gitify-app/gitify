@@ -1,12 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-
-import * as helpers from '../utils/helpers';
-
 import { shell } from 'electron';
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { mockedSingleNotification } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
 import type { UserType } from '../typesGitHub';
+import * as helpers from '../utils/helpers';
 import { NotificationRow } from './NotificationRow';
 
 describe('components/NotificationRow.tsx', () => {

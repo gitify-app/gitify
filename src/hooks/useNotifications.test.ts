@@ -1,7 +1,6 @@
 import { act, renderHook, waitFor } from '@testing-library/react';
 import axios, { AxiosError } from 'axios';
 import nock from 'nock';
-
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { mockedNotificationUser, mockedUser } from '../__mocks__/mockedData';
 import type { AuthState } from '../types';

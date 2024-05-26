@@ -6,7 +6,6 @@ import {
   Routes,
   useLocation,
 } from 'react-router-dom';
-
 import { Loading } from './components/Loading';
 import { Sidebar } from './components/Sidebar';
 import { AppContext, AppProvider } from './context/App';

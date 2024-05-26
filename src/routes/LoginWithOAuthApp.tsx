@@ -1,16 +1,13 @@
 const ipcRenderer = require('electron').ipcRenderer;
-
 import {
   ArrowLeftIcon,
   BookIcon,
   PersonIcon,
   SignInIcon,
 } from '@primer/octicons-react';
-
 import { type FC, useCallback, useContext, useEffect } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
-
 import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';

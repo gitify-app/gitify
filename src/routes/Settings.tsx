@@ -7,7 +7,6 @@ import {
   XCircleIcon,
 } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
-
 import {
   type FC,
   type MouseEvent,
@@ -17,7 +16,6 @@ import {
   useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';

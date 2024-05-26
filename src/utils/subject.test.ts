@@ -1,6 +1,5 @@
 import axios from 'axios';
 import nock from 'nock';
-
 import { mockAccounts } from '../__mocks__/mock-state';
 import {
   partialMockNotification,

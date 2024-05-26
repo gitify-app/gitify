@@ -1,6 +1,5 @@
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import { useContext } from 'react';
-
 import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
 import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, SettingsState } from '../types';
