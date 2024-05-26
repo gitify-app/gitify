@@ -130,7 +130,7 @@
     "@types/jest": "29.5.12",
     "@types/node": "20.12.12",
     "@types/nprogress": "0.2.3",
-    "@types/react": "18.3.2",
+    "@types/react": "18.3.3",
     "@types/react-router-dom": "5.3.3",
     "@types/react-transition-group": "4.4.10",
     "autoprefixer": "10.4.19",
