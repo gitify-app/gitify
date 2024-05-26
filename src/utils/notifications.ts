@@ -2,10 +2,8 @@ import { ipcRenderer } from 'electron';
 import type { AccountNotifications, AuthState, SettingsState } from '../types';
 import { Notification } from '../typesGitHub';
 import { openInBrowser } from '../utils/helpers';
-import { updateTrayIcon } from './comms';
-
-import type { AccountNotifications, AuthState, SettingsState } from '../types';
 import { listNotificationsForAuthenticatedUser } from './api/client';
+import { updateTrayIcon } from './comms';
 import { getGitifySubjectDetails } from './subject';
 
 export const setTrayIconColor = (notifications: AccountNotifications[]) => {

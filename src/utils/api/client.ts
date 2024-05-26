@@ -1,6 +1,6 @@
 import type { AxiosPromise } from 'axios';
 import { print } from 'graphql/language/printer';
-import type { SettingsState } from '../../types';
+import type { Account, SettingsState } from '../../types';
 import type {
   Commit,
   CommitComment,

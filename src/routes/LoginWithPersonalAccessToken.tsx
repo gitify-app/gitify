@@ -10,15 +10,13 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
-import { Constants } from '../utils/constants';
-
-import { Button } from '../components/fields/Button';
 import type { AuthOptionsPersonalAccessToken } from '../utils/auth/types';
 import {
   getNewTokenURL,
   isValidHostname,
   isValidToken,
 } from '../utils/auth/utils';
+import { Constants } from '../utils/constants';
 
 interface IValues {
   token?: string;

@@ -28,7 +28,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
 
   it('renders correctly', () => {
     const tree = render(
-      <AppContext.Provider value={{ accounts: mockAccounts }}>
+      <AppContext.Provider value={{ auth: mockAuth }}>
         <MemoryRouter>
           <LoginWithOAuthApp />
         </MemoryRouter>
