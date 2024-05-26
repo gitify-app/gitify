@@ -1,10 +1,10 @@
-const ipcRenderer = require('electron').ipcRenderer;
 import {
   ArrowLeftIcon,
   BookIcon,
   PersonIcon,
   SignInIcon,
 } from '@primer/octicons-react';
+import ipcRenderer from 'electron';
 import { type FC, useCallback, useContext, useEffect } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
@@ -65,7 +65,7 @@ export const LoginWithOAuthApp: FC = () => {
 
   useEffect(() => {
     if (enterpriseAccounts.length) {
-      ipcRenderer.send('reopen-window');
+      ipcRenderer.ipcRenderer.send('reopen-window');
       navigate(-1);
     }
   }, [enterpriseAccounts]);

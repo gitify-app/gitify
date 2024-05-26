@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { shell } from 'electron';
 import { mockedGitHubNotifications } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
 import { RepositoryNotifications } from './Repository';
-const { shell } = require('electron');
 
 jest.mock('./NotificationRow', () => ({
   NotificationRow: () => <div>NotificationRow</div>,
