@@ -381,6 +381,9 @@ describe('hooks/useNotifications.ts', () => {
             user: mockedNotificationUser,
           });
         nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/4/reviews')
+          .reply(200, {});
+        nock('https://api.github.com')
           .get('/repos/gitify-app/notifications-test/issues/4/comments')
           .reply(200, {
             user: mockedNotificationUser,
