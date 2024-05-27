@@ -6,26 +6,26 @@ import {
   Theme,
 } from '../types';
 
-export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
+export const mockEnterpriseAccounts: EnterpriseAccount[] = [
   {
     hostname: 'github.gitify.io',
     token: '1234568790',
   },
 ];
 
-export const mockedUser: GitifyUser = {
+export const mockUser: GitifyUser = {
   login: 'octocat',
   name: 'Mona Lisa Octocat',
   id: 123456789,
 };
 
-export const mockedAccounts: AuthState = {
+export const mockAccounts: AuthState = {
   token: 'token-123-456',
-  enterpriseAccounts: mockedEnterpriseAccounts,
-  user: mockedUser,
+  enterpriseAccounts: mockEnterpriseAccounts,
+  user: mockUser,
 };
 
-export const mockedSettings: SettingsState = {
+export const mockSettings: SettingsState = {
   participating: false,
   playSound: true,
   showNotifications: true,

@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 const { shell, ipcRenderer } = require('electron');
-import { mockedAccountNotifications } from '../__mocks__/notifications-mocks';
-import { mockedSettings } from '../__mocks__/state-mocks';
+import { mockAccountNotifications } from '../__mocks__/notifications-mocks';
+import { mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import { Sidebar } from './Sidebar';
 
@@ -31,8 +31,8 @@ describe('components/Sidebar.tsx', () => {
     const tree = render(
       <AppContext.Provider
         value={{
-          settings: mockedSettings,
-          notifications: mockedAccountNotifications,
+          settings: mockSettings,
+          notifications: mockAccountNotifications,
         }}
       >
         <MemoryRouter>
@@ -46,7 +46,7 @@ describe('components/Sidebar.tsx', () => {
   it('should render itself & its children (logged out)', () => {
     const tree = render(
       <AppContext.Provider
-        value={{ isLoggedIn: false, notifications: mockedAccountNotifications }}
+        value={{ isLoggedIn: false, notifications: mockAccountNotifications }}
       >
         <MemoryRouter>
           <Sidebar />
@@ -131,7 +131,7 @@ describe('components/Sidebar.tsx', () => {
       <AppContext.Provider
         value={{
           isLoggedIn: true,
-          notifications: mockedAccountNotifications,
+          notifications: mockAccountNotifications,
         }}
       >
         <MemoryRouter>
@@ -195,7 +195,7 @@ describe('components/Sidebar.tsx', () => {
         <AppContext.Provider
           value={{
             isLoggedIn: true,
-            notifications: mockedAccountNotifications,
+            notifications: mockAccountNotifications,
           }}
         >
           <MemoryRouter>

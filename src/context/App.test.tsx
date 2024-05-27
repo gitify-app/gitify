@@ -1,7 +1,7 @@
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import { useContext } from 'react';
 
-import { mockedAccounts, mockedSettings } from '../__mocks__/state-mocks';
+import { mockAccounts, mockSettings } from '../__mocks__/state-mocks';
 import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, SettingsState } from '../types';
 import * as apiRequests from '../utils/api/request';
@@ -15,8 +15,8 @@ jest.mock('../hooks/useNotifications');
 
 const customRender = (
   ui,
-  accounts: AuthState = mockedAccounts,
-  settings: SettingsState = mockedSettings,
+  accounts: AuthState = mockAccounts,
+  settings: SettingsState = mockSettings,
 ) => {
   return render(
     <AppContext.Provider value={{ accounts, settings }}>
@@ -136,7 +136,7 @@ describe('context/App.tsx', () => {
           token: null,
           user: null,
         },
-        mockedSettings,
+        mockSettings,
         '123-456',
         'github.com',
       );
@@ -165,7 +165,7 @@ describe('context/App.tsx', () => {
       expect(markNotificationDoneMock).toHaveBeenCalledTimes(1);
       expect(markNotificationDoneMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
-        mockedSettings,
+        mockSettings,
         '123-456',
         'github.com',
       );
@@ -194,7 +194,7 @@ describe('context/App.tsx', () => {
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
       expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
-        mockedSettings,
+        mockSettings,
         '123-456',
         'github.com',
       );
@@ -228,7 +228,7 @@ describe('context/App.tsx', () => {
       expect(markRepoNotificationsMock).toHaveBeenCalledTimes(1);
       expect(markRepoNotificationsMock).toHaveBeenCalledWith(
         { enterpriseAccounts: [], token: null, user: null },
-        mockedSettings,
+        mockSettings,
         'gitify-app/notifications-test',
         'github.com',
       );

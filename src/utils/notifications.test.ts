@@ -1,16 +1,16 @@
 import { ipcRenderer } from 'electron';
 
 import {
-  mockedAccountNotifications,
-  mockedSingleAccountNotifications,
+  mockAccountNotifications,
+  mockSingleAccountNotifications,
 } from '../__mocks__/notifications-mocks';
-import { partialMockedNotification } from '../__mocks__/partial-mocks';
-import { mockedAccounts, mockedSettings } from '../__mocks__/state-mocks';
+import { partialMockNotification } from '../__mocks__/partial-mocks';
+import { mockAccounts, mockSettings } from '../__mocks__/state-mocks';
 import { defaultSettings } from '../context/App';
 import type { SettingsState } from '../types';
 import {
-  mockedGitHubNotifications,
-  mockedSingleNotification,
+  mockGitHubNotifications,
+  mockSingleNotification,
 } from './api/__mocks__/response-mocks';
 import * as helpers from './helpers';
 import * as notificationsHelpers from './notifications';
@@ -33,9 +33,9 @@ describe('utils/notifications.ts', () => {
 
     notificationsHelpers.triggerNativeNotifications(
       [],
-      mockedAccountNotifications,
+      mockAccountNotifications,
       settings,
-      mockedAccounts,
+      mockAccounts,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).toHaveBeenCalledTimes(
@@ -58,9 +58,9 @@ describe('utils/notifications.ts', () => {
 
     notificationsHelpers.triggerNativeNotifications(
       [],
-      mockedAccountNotifications,
+      mockAccountNotifications,
       settings,
-      mockedAccounts,
+      mockAccounts,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -78,10 +78,10 @@ describe('utils/notifications.ts', () => {
     jest.spyOn(notificationsHelpers, 'raiseSoundNotification');
 
     notificationsHelpers.triggerNativeNotifications(
-      mockedSingleAccountNotifications,
-      mockedSingleAccountNotifications,
+      mockSingleAccountNotifications,
+      mockSingleAccountNotifications,
       settings,
-      mockedAccounts,
+      mockAccounts,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -102,7 +102,7 @@ describe('utils/notifications.ts', () => {
       [],
       [],
       settings,
-      mockedAccounts,
+      mockAccounts,
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -114,23 +114,23 @@ describe('utils/notifications.ts', () => {
 
     const nativeNotification: Notification =
       notificationsHelpers.raiseNativeNotification(
-        [mockedSingleNotification],
-        mockedAccounts,
+        [mockSingleNotification],
+        mockAccounts,
       );
     nativeNotification.onclick(null);
 
     expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
     expect(helpers.openInBrowser).toHaveBeenLastCalledWith(
-      mockedSingleNotification,
-      mockedAccounts,
+      mockSingleNotification,
+      mockAccounts,
     );
     expect(ipcRenderer.send).toHaveBeenCalledWith('hide-window');
   });
 
   it('should click on a native notification (with more than 1 notification)', () => {
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
-      mockedGitHubNotifications,
-      mockedAccounts,
+      mockGitHubNotifications,
+      mockAccounts,
     );
     nativeNotification.onclick(null);
 
@@ -145,7 +145,7 @@ describe('utils/notifications.ts', () => {
 
   describe('filterNotifications', () => {
     const mockNotifications = [
-      partialMockedNotification({
+      partialMockNotification({
         title: 'User authored notification',
         user: {
           login: 'user',
@@ -155,7 +155,7 @@ describe('utils/notifications.ts', () => {
           type: 'User',
         },
       }),
-      partialMockedNotification({
+      partialMockNotification({
         title: 'Bot authored notification',
         user: {
           login: 'bot',
@@ -169,7 +169,7 @@ describe('utils/notifications.ts', () => {
 
     it('should hide bot notifications when set to false', async () => {
       const result = filterNotifications(mockNotifications, {
-        ...mockedSettings,
+        ...mockSettings,
         showBots: false,
       });
 
@@ -179,7 +179,7 @@ describe('utils/notifications.ts', () => {
 
     it('should show bot notifications when set to true', async () => {
       const result = filterNotifications(mockNotifications, {
-        ...mockedSettings,
+        ...mockSettings,
         showBots: true,
       });
 

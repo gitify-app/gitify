@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
-import { mockedAccountNotifications } from '../__mocks__/notifications-mocks';
-import { mockedSettings } from '../__mocks__/state-mocks';
+import { mockAccountNotifications } from '../__mocks__/notifications-mocks';
+import { mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import { Errors } from '../utils/constants';
 import { NotificationsRoute } from './Notifications';
@@ -20,9 +20,7 @@ jest.mock('../components/Oops', () => ({
 describe('routes/Notifications.tsx', () => {
   it('should render itself & its children (with notifications)', () => {
     const tree = render(
-      <AppContext.Provider
-        value={{ notifications: mockedAccountNotifications }}
-      >
+      <AppContext.Provider value={{ notifications: mockAccountNotifications }}>
         <NotificationsRoute />
       </AppContext.Provider>,
     );
@@ -43,8 +41,8 @@ describe('routes/Notifications.tsx', () => {
     const tree = render(
       <AppContext.Provider
         value={{
-          notifications: [mockedAccountNotifications[0]],
-          settings: { ...mockedSettings, showAccountHostname: true },
+          notifications: [mockAccountNotifications[0]],
+          settings: { ...mockSettings, showAccountHostname: true },
         }}
       >
         <NotificationsRoute />

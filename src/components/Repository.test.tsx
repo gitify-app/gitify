@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { AppContext } from '../context/App';
-import { mockedGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
+import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
 import { RepositoryNotifications } from './Repository';
 const { shell } = require('electron');
 
@@ -15,7 +15,7 @@ describe('components/Repository.tsx', () => {
   const props = {
     hostname: 'github.com',
     repoName: 'gitify-app/notifications-test',
-    repoNotifications: mockedGitHubNotifications,
+    repoNotifications: mockGitHubNotifications,
   };
 
   beforeEach(() => {

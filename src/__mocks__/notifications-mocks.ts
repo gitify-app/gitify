@@ -1,24 +1,24 @@
 import type { AccountNotifications } from '../types';
 import {
-  mockedEnterpriseNotifications,
-  mockedGitHubNotifications,
-  mockedSingleNotification,
+  mockEnterpriseNotifications,
+  mockGitHubNotifications,
+  mockSingleNotification,
 } from '../utils/api/__mocks__/response-mocks';
 
-export const mockedAccountNotifications: AccountNotifications[] = [
+export const mockAccountNotifications: AccountNotifications[] = [
   {
     hostname: 'github.com',
-    notifications: mockedGitHubNotifications,
+    notifications: mockGitHubNotifications,
   },
   {
     hostname: 'github.gitify.io',
-    notifications: mockedEnterpriseNotifications,
+    notifications: mockEnterpriseNotifications,
   },
 ];
 
-export const mockedSingleAccountNotifications: AccountNotifications[] = [
+export const mockSingleAccountNotifications: AccountNotifications[] = [
   {
     hostname: 'github.com',
-    notifications: [mockedSingleNotification],
+    notifications: [mockSingleNotification],
   },
 ];

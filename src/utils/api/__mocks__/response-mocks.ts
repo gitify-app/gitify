@@ -9,7 +9,7 @@ import type {
 } from '../../../typesGitHub';
 import Constants from '../../constants';
 
-export const mockedNotificationUser: User = {
+export const mockNotificationUser: User = {
   login: 'octocat',
   id: 123456789,
   node_id: 'MDQ6VXNlcjE=',
@@ -33,7 +33,7 @@ export const mockedNotificationUser: User = {
 // 2 Notifications
 // Hostname : 'github.com'
 // Repository : 'gitify-app/notifications-test'
-export const mockedGitHubNotifications: Notification[] = [
+export const mockGitHubNotifications: Notification[] = [
   {
     hostname: Constants.GITHUB_API_BASE_URL,
     id: '138661096',
@@ -240,7 +240,7 @@ export const mockedGitHubNotifications: Notification[] = [
 // 2 Notifications
 // Hostname : 'github.gitify.io'
 // Repository : 'myorg/notifications-test'
-export const mockedEnterpriseNotifications: Notification[] = [
+export const mockEnterpriseNotifications: Notification[] = [
   {
     hostname: 'https://github.gitify.io/api/v3',
     id: '3',
@@ -351,32 +351,32 @@ export const mockedEnterpriseNotifications: Notification[] = [
   },
 ];
 
-const mockedDiscussionAuthor: DiscussionAuthor = {
+const mockDiscussionAuthor: DiscussionAuthor = {
   login: 'comment-user',
   url: 'https://github.com/comment-user',
   avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
   type: 'User',
 };
 
-const mockedDiscussionReplier: DiscussionAuthor = {
+const mockDiscussionReplier: DiscussionAuthor = {
   login: 'reply-user',
   url: 'https://github.com/reply-user',
   avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
   type: 'User',
 };
 
-export const mockedDiscussionComments: DiscussionComments = {
+export const mockDiscussionComments: DiscussionComments = {
   nodes: [
     {
       databaseId: 2258799,
       createdAt: '2022-02-27T01:22:20Z',
-      author: mockedDiscussionAuthor,
+      author: mockDiscussionAuthor,
       replies: {
         nodes: [
           {
             databaseId: 2300902,
             createdAt: '2022-03-05T17:43:52Z',
-            author: mockedDiscussionReplier,
+            author: mockDiscussionReplier,
           },
         ],
       },
@@ -385,7 +385,7 @@ export const mockedDiscussionComments: DiscussionComments = {
   totalCount: 2,
 };
 
-export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
+export const mockGraphQLResponse: GraphQLSearch<Discussion> = {
   data: {
     search: {
       nodes: [
@@ -400,12 +400,11 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
             avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
             type: 'User',
           },
-          comments: mockedDiscussionComments,
+          comments: mockDiscussionComments,
         },
       ],
     },
   },
 };
 
-export const mockedSingleNotification: Notification =
-  mockedGitHubNotifications[0];
+export const mockSingleNotification: Notification = mockGitHubNotifications[0];

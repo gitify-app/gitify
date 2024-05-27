@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { shell } from 'electron';
-import { mockedAccounts, mockedSettings } from '../__mocks__/state-mocks';
+import { mockAccounts, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import type { UserType } from '../typesGitHub';
-import { mockedSingleNotification } from '../utils/api/__mocks__/response-mocks';
+import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as helpers from '../utils/helpers';
 import { NotificationRow } from './NotificationRow';
 
@@ -22,7 +22,7 @@ describe('components/NotificationRow.tsx', () => {
       .mockImplementation(() => new Date('2024').valueOf());
 
     const props = {
-      notification: mockedSingleNotification,
+      notification: mockSingleNotification,
       hostname: 'github.com',
     };
 
@@ -35,7 +35,7 @@ describe('components/NotificationRow.tsx', () => {
       .spyOn(global.Date, 'now')
       .mockImplementation(() => new Date('2024').valueOf());
 
-    const mockNotification = mockedSingleNotification;
+    const mockNotification = mockSingleNotification;
     mockNotification.last_read_at = null;
 
     const props = {
@@ -52,7 +52,7 @@ describe('components/NotificationRow.tsx', () => {
       .spyOn(global.Date, 'now')
       .mockImplementation(() => new Date('2024').valueOf());
 
-    const mockNotification = mockedSingleNotification;
+    const mockNotification = mockSingleNotification;
     mockNotification.subject.user = null;
 
     const props = {
@@ -70,7 +70,7 @@ describe('components/NotificationRow.tsx', () => {
         .spyOn(global.Date, 'now')
         .mockImplementation(() => new Date('2024').valueOf());
 
-      const mockNotification = mockedSingleNotification;
+      const mockNotification = mockSingleNotification;
       mockNotification.subject.comments = null;
 
       const props = {
@@ -87,7 +87,7 @@ describe('components/NotificationRow.tsx', () => {
         .spyOn(global.Date, 'now')
         .mockImplementation(() => new Date('2024').valueOf());
 
-      const mockNotification = mockedSingleNotification;
+      const mockNotification = mockSingleNotification;
       mockNotification.subject.comments = 1;
 
       const props = {
@@ -104,7 +104,7 @@ describe('components/NotificationRow.tsx', () => {
         .spyOn(global.Date, 'now')
         .mockImplementation(() => new Date('2024').valueOf());
 
-      const mockNotification = mockedSingleNotification;
+      const mockNotification = mockSingleNotification;
       mockNotification.subject.comments = 2;
 
       const props = {
@@ -122,16 +122,16 @@ describe('components/NotificationRow.tsx', () => {
       const removeNotificationFromState = jest.fn();
 
       const props = {
-        notification: mockedSingleNotification,
+        notification: mockSingleNotification,
         hostname: 'github.com',
       };
 
       render(
         <AppContext.Provider
           value={{
-            settings: { ...mockedSettings, markAsDoneOnOpen: false },
+            settings: { ...mockSettings, markAsDoneOnOpen: false },
             removeNotificationFromState,
-            accounts: mockedAccounts,
+            accounts: mockAccounts,
           }}
         >
           <NotificationRow {...props} />
@@ -147,16 +147,16 @@ describe('components/NotificationRow.tsx', () => {
       const removeNotificationFromState = jest.fn();
 
       const props = {
-        notification: mockedSingleNotification,
+        notification: mockSingleNotification,
         hostname: 'github.com',
       };
 
       render(
         <AppContext.Provider
           value={{
-            settings: { ...mockedSettings, markAsDoneOnOpen: false },
+            settings: { ...mockSettings, markAsDoneOnOpen: false },
             removeNotificationFromState,
-            accounts: mockedAccounts,
+            accounts: mockAccounts,
           }}
         >
           <NotificationRow {...props} />
@@ -172,16 +172,16 @@ describe('components/NotificationRow.tsx', () => {
       const markNotificationDone = jest.fn();
 
       const props = {
-        notification: mockedSingleNotification,
+        notification: mockSingleNotification,
         hostname: 'github.com',
       };
 
       render(
         <AppContext.Provider
           value={{
-            settings: { ...mockedSettings, markAsDoneOnOpen: true },
+            settings: { ...mockSettings, markAsDoneOnOpen: true },
             markNotificationDone,
-            accounts: mockedAccounts,
+            accounts: mockAccounts,
           }}
         >
           <NotificationRow {...props} />
@@ -197,15 +197,15 @@ describe('components/NotificationRow.tsx', () => {
       const markNotificationRead = jest.fn();
 
       const props = {
-        notification: mockedSingleNotification,
+        notification: mockSingleNotification,
         hostname: 'github.com',
       };
 
       render(
         <AppContext.Provider
           value={{
-            settings: { ...mockedSettings, markAsDoneOnOpen: false },
-            accounts: mockedAccounts,
+            settings: { ...mockSettings, markAsDoneOnOpen: false },
+            accounts: mockAccounts,
           }}
         >
           <AppContext.Provider value={{ markNotificationRead }}>
@@ -222,15 +222,15 @@ describe('components/NotificationRow.tsx', () => {
       const markNotificationDone = jest.fn();
 
       const props = {
-        notification: mockedSingleNotification,
+        notification: mockSingleNotification,
         hostname: 'github.com',
       };
 
       render(
         <AppContext.Provider
           value={{
-            settings: { ...mockedSettings },
-            accounts: mockedAccounts,
+            settings: { ...mockSettings },
+            accounts: mockAccounts,
           }}
         >
           <AppContext.Provider value={{ markNotificationDone }}>
@@ -247,7 +247,7 @@ describe('components/NotificationRow.tsx', () => {
       const unsubscribeNotification = jest.fn();
 
       const props = {
-        notification: mockedSingleNotification,
+        notification: mockSingleNotification,
         hostname: 'github.com',
       };
 
@@ -265,9 +265,9 @@ describe('components/NotificationRow.tsx', () => {
     it('should open notification user profile', () => {
       const props = {
         notification: {
-          ...mockedSingleNotification,
+          ...mockSingleNotification,
           subject: {
-            ...mockedSingleNotification.subject,
+            ...mockSingleNotification.subject,
             user: {
               login: 'some-user',
               html_url: 'https://github.com/some-user',
@@ -284,8 +284,8 @@ describe('components/NotificationRow.tsx', () => {
       render(
         <AppContext.Provider
           value={{
-            settings: { ...mockedSettings },
-            accounts: mockedAccounts,
+            settings: { ...mockSettings },
+            accounts: mockAccounts,
           }}
         >
           <NotificationRow {...props} />
