@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-const { ipcRenderer } = require('electron');
+import { ipcRenderer } from 'electron';
 import { shell } from 'electron';
+import { MemoryRouter } from 'react-router-dom';
 import { mockEnterpriseAccounts } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import type { AuthState } from '../types';
