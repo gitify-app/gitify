@@ -1,6 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { ipcRenderer } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
-const { ipcRenderer } = require('electron');
 import { AppContext } from '../context/App';
 import { LoginRoute } from './Login';
 
