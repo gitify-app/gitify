@@ -58,7 +58,7 @@ export const validate = (values: IValues): IFormErrors => {
 
 export const LoginWithOAuthApp: FC = () => {
   const {
-    accounts: { enterpriseAccounts },
+    auth: { enterpriseAccounts },
     loginEnterprise,
   } = useContext(AppContext);
   const navigate = useNavigate();

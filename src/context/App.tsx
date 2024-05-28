@@ -47,7 +47,7 @@ export const defaultSettings: SettingsState = {
 };
 
 interface AppContextState {
-  accounts: AuthState;
+  auth: AuthState;
   isLoggedIn: boolean;
   login: () => void;
   loginEnterprise: (data: AuthOptions) => void;
@@ -136,7 +136,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
       const newSettings = { ...settings, [name]: value };
       setSettings(newSettings);
-      saveState(accounts, newSettings);
+      saveState({ auth: accounts, settings: newSettings });
     },
     [accounts, settings],
   );
@@ -152,7 +152,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const user = await getUserData(token, hostname);
     const updatedAccounts = addAccount(accounts, token, hostname, user);
     setAccounts(updatedAccounts);
-    saveState(updatedAccounts, settings);
+    saveState({ auth: updatedAccounts, settings });
   }, [accounts, settings]);
 
   const loginEnterprise = useCallback(
@@ -161,7 +161,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       const { token, hostname } = await getToken(authCode, authOptions);
       const updatedAccounts = addAccount(accounts, token, hostname);
       setAccounts(updatedAccounts);
-      saveState(updatedAccounts, settings);
+      saveState({ auth: updatedAccounts, settings });
     },
     [accounts, settings],
   );
@@ -173,7 +173,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       const user = await getUserData(token, hostname);
       const updatedAccounts = addAccount(accounts, token, hostname, user);
       setAccounts(updatedAccounts);
-      saveState(updatedAccounts, settings);
+      saveState({ auth: updatedAccounts, settings });
     },
     [accounts, settings],
   );
@@ -186,8 +186,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const restoreSettings = useCallback(() => {
     const existing = loadState();
 
-    if (existing.accounts) {
-      setAccounts({ ...defaultAccounts, ...existing.accounts });
+    if (existing.auth) {
+      setAccounts({ ...defaultAccounts, ...existing.auth });
     }
 
     if (existing.settings) {
@@ -234,7 +234,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   return (
     <AppContext.Provider
       value={{
-        accounts,
+        auth: accounts,
         isLoggedIn,
         login,
         loginEnterprise,

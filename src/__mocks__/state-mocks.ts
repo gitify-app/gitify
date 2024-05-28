@@ -19,7 +19,7 @@ export const mockUser: GitifyUser = {
   id: 123456789,
 };
 
-export const mockAccounts: AuthState = {
+export const mockAuth: AuthState = {
   token: 'token-123-456',
   enterpriseAccounts: mockEnterpriseAccounts,
   user: mockUser,

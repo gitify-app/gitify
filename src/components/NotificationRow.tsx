@@ -37,7 +37,7 @@ interface IProps {
 export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const {
     settings,
-    accounts,
+    auth: accounts,
     removeNotificationFromState,
     markNotificationRead,
     markNotificationDone,

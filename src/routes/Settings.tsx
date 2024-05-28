@@ -33,7 +33,12 @@ import {
 import { setTheme } from '../utils/theme';
 
 export const SettingsRoute: FC = () => {
-  const { accounts, settings, updateSetting, logout } = useContext(AppContext);
+  const {
+    auth: accounts,
+    settings,
+    updateSetting,
+    logout,
+  } = useContext(AppContext);
   const navigate = useNavigate();
 
   const [isLinux, setIsLinux] = useState<boolean>(false);

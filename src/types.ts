@@ -34,6 +34,11 @@ interface SystemSettingsState {
   showNotificationsCountInTray: boolean;
 }
 
+export interface GitifyState {
+  auth?: AuthState;
+  settings?: SettingsState;
+}
+
 export enum Theme {
   SYSTEM = 'SYSTEM',
   LIGHT = 'LIGHT',
