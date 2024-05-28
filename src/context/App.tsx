@@ -144,7 +144,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
       const newSettings = { ...settings, [name]: value };
       setSettings(newSettings);
-      saveState(auth, newSettings);
+      saveState({ auth, settings: newSettings });
     },
     [auth, settings],
   );
@@ -166,7 +166,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       user,
     );
     setAuth(updatedAccounts);
-    saveState(updatedAccounts, settings);
+    saveState({ auth: updatedAccounts, settings });
   }, [auth, settings]);
 
   const loginWithOAuthApp = useCallback(
@@ -175,7 +175,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       const { token, hostname } = await getToken(authCode, authOptions);
       const updatedAccounts = addAccount(auth, 'OAuth App', token, hostname);
       setAuth(updatedAccounts);
-      saveState(updatedAccounts, settings);
+      saveState({ auth: updatedAccounts, settings });
     },
     [auth, settings],
   );
@@ -193,7 +193,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         user,
       );
       setAuth(updatedAccounts);
-      saveState(updatedAccounts, settings);
+      saveState({ auth: updatedAccounts, settings });
     },
     [auth, settings],
   );

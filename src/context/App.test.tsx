@@ -1,6 +1,7 @@
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import { useContext } from 'react';
-import { mockAuth, mockSettings } from '../__mocks__/mock-state';
+
+import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, SettingsState } from '../types';
 import * as apiRequests from '../utils/api/request';
@@ -14,11 +15,11 @@ jest.mock('../hooks/useNotifications');
 
 const customRender = (
   ui,
-  auth: AuthState = mockAuth,
+  accounts: AuthState = mockAuth,
   settings: SettingsState = mockSettings,
 ) => {
   return render(
-    <AppContext.Provider value={{ auth, settings }}>
+    <AppContext.Provider value={{ auth: accounts, settings }}>
       <AppProvider>{ui}</AppProvider>
     </AppContext.Provider>,
   );
@@ -323,9 +324,9 @@ describe('context/App.tsx', () => {
       fireEvent.click(getByText('Test Case'));
     });
 
-    expect(saveStateMock).toHaveBeenCalledWith(
-      { accounts: [], enterpriseAccounts: [], token: null, user: null },
-      {
+    expect(saveStateMock).toHaveBeenCalledWith({
+      auth: { enterpriseAccounts: [], token: null, user: null },
+      settings: {
         participating: true,
         playSound: true,
         showNotifications: true,
@@ -338,7 +339,7 @@ describe('context/App.tsx', () => {
         showAccountHostname: false,
         delayNotificationState: false,
       },
-    );
+    });
   });
 
   it('should call updateSetting and set auto launch(openAtStartup)', async () => {
@@ -368,9 +369,9 @@ describe('context/App.tsx', () => {
 
     expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
 
-    expect(saveStateMock).toHaveBeenCalledWith(
-      { accounts: [], enterpriseAccounts: [], token: null, user: null },
-      {
+    expect(saveStateMock).toHaveBeenCalledWith({
+      auth: { enterpriseAccounts: [], token: null, user: null },
+      settings: {
         participating: false,
         playSound: true,
         showNotifications: true,
@@ -383,6 +384,6 @@ describe('context/App.tsx', () => {
         showAccountHostname: false,
         delayNotificationState: false,
       },
-    );
+    });
   });
 });

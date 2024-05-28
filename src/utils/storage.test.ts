@@ -41,6 +41,7 @@ describe('utils/storage.ts', () => {
       .mockReturnValueOnce(JSON.stringify({}));
     const result = loadState();
     expect(result.auth).toBeUndefined();
+    expect(result.auth).toBeUndefined();
     expect(result.settings).toBeUndefined();
   });
 
@@ -58,8 +59,8 @@ describe('utils/storage.ts', () => {
           },
         ],
       },
-      mockSettings,
-    );
+      settings: mockSettings,
+    });
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
   });
 

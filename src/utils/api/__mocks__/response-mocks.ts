@@ -1,4 +1,3 @@
-import type { AccountNotifications } from '../types';
 import type {
   Discussion,
   DiscussionAuthor,
@@ -7,13 +6,10 @@ import type {
   Notification,
   Repository,
   User,
-} from '../typesGitHub';
-import {
-  mockGitHubCloudAccount,
-  mockGitHubEnterpriseServerAccount,
-} from './mock-state';
+} from '../../../typesGitHub';
+import Constants from '../../constants';
 
-export const mockedNotificationUser: User = {
+export const mockNotificationUser: User = {
   login: 'octocat',
   id: 123456789,
   node_id: 'MDQ6VXNlcjE=',
@@ -37,9 +33,9 @@ export const mockedNotificationUser: User = {
 // 2 Notifications
 // Hostname : 'github.com'
 // Repository : 'gitify-app/notifications-test'
-export const mockedGitHubNotifications: Notification[] = [
+export const mockGitHubNotifications: Notification[] = [
   {
-    account: mockGitHubCloudAccount,
+    hostname: Constants.GITHUB_API_BASE_URL,
     id: '138661096',
     unread: true,
     reason: 'subscribed',
@@ -187,7 +183,7 @@ export const mockedGitHubNotifications: Notification[] = [
       'https://api.github.com/notifications/threads/138661096/subscription',
   },
   {
-    account: mockGitHubCloudAccount,
+    hostname: Constants.GITHUB_API_BASE_URL,
     id: '148827438',
     unread: true,
     reason: 'author',
@@ -244,9 +240,9 @@ export const mockedGitHubNotifications: Notification[] = [
 // 2 Notifications
 // Hostname : 'github.gitify.io'
 // Repository : 'myorg/notifications-test'
-export const mockedEnterpriseNotifications: Notification[] = [
+export const mockEnterpriseNotifications: Notification[] = [
   {
-    account: mockGitHubEnterpriseServerAccount,
+    hostname: 'https://github.gitify.io/api/v3',
     id: '3',
     unread: true,
     reason: 'subscribed',
@@ -300,7 +296,7 @@ export const mockedEnterpriseNotifications: Notification[] = [
       'https://github.gitify.io/api/v3/notifications/threads/4/subscription',
   },
   {
-    account: mockGitHubEnterpriseServerAccount,
+    hostname: 'https://github.gitify.io/api/v3',
     id: '4',
     unread: true,
     reason: 'subscribed',
@@ -355,27 +351,6 @@ export const mockedEnterpriseNotifications: Notification[] = [
   },
 ];
 
-export const mockedSingleNotification: Notification =
-  mockedGitHubNotifications[0];
-
-export const mockedAccountNotifications: AccountNotifications[] = [
-  {
-    account: mockGitHubCloudAccount,
-    notifications: mockedGitHubNotifications,
-  },
-  {
-    account: mockGitHubEnterpriseServerAccount,
-    notifications: mockedEnterpriseNotifications,
-  },
-];
-
-export const mockedSingleAccountNotifications: AccountNotifications[] = [
-  {
-    account: mockGitHubCloudAccount,
-    notifications: [mockedSingleNotification],
-  },
-];
-
 const mockDiscussionAuthor: DiscussionAuthor = {
   login: 'comment-user',
   url: 'https://github.com/comment-user',
@@ -410,7 +385,7 @@ export const mockDiscussionComments: DiscussionComments = {
   totalCount: 2,
 };
 
-export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
+export const mockGraphQLResponse: GraphQLSearch<Discussion> = {
   data: {
     search: {
       nodes: [
@@ -431,3 +406,5 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
     },
   },
 };
+
+export const mockSingleNotification: Notification = mockGitHubNotifications[0];

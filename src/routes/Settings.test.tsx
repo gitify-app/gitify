@@ -1,7 +1,6 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import { ipcRenderer, shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
-const { ipcRenderer } = require('electron');
-import { shell } from 'electron';
 import {
   mockAuth,
   mockOAuthAccount,
@@ -30,6 +29,7 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{ settings: mockSettings, auth: mockAuth }}
+            value={{ settings: mockSettings, auth: mockAuth }}
           >
             <MemoryRouter>
               <SettingsRoute />
@@ -47,6 +47,7 @@ describe('routes/Settings.tsx', () => {
           <AppContext.Provider
             value={{
               settings: mockSettings,
+              auth: mockAuth,
               auth: mockAuth,
             }}
           >
@@ -68,6 +69,7 @@ describe('routes/Settings.tsx', () => {
           <AppContext.Provider
             value={{
               settings: mockSettings,
+              auth: mockAuth,
               auth: mockAuth,
               updateSetting,
             }}
@@ -91,6 +93,7 @@ describe('routes/Settings.tsx', () => {
           <AppContext.Provider
             value={{
               settings: mockSettings,
+              auth: mockAuth,
               auth: mockAuth,
               updateSetting,
             }}
@@ -122,6 +125,7 @@ describe('routes/Settings.tsx', () => {
             value={{
               settings: mockSettings,
               auth: mockAuth,
+              auth: mockAuth,
               updateSetting,
             }}
           >
@@ -146,6 +150,7 @@ describe('routes/Settings.tsx', () => {
           <AppContext.Provider
             value={{
               settings: mockSettings,
+              auth: mockAuth,
               auth: mockAuth,
               updateSetting,
             }}
@@ -185,6 +190,7 @@ describe('routes/Settings.tsx', () => {
                 detailedNotifications: false,
                 showBots: true,
               },
+              auth: mockAuth,
               auth: mockAuth,
               updateSetting,
             }}
@@ -227,6 +233,7 @@ describe('routes/Settings.tsx', () => {
                 showBots: true,
               },
               auth: mockAuth,
+              auth: mockAuth,
               updateSetting,
             }}
           >
@@ -264,6 +271,7 @@ describe('routes/Settings.tsx', () => {
             value={{
               settings: mockSettings,
               auth: mockAuth,
+              auth: mockAuth,
               updateSetting,
             }}
           >
@@ -288,6 +296,7 @@ describe('routes/Settings.tsx', () => {
           <AppContext.Provider
             value={{
               settings: mockSettings,
+              auth: mockAuth,
               auth: mockAuth,
               updateSetting,
             }}
@@ -318,6 +327,7 @@ describe('routes/Settings.tsx', () => {
           <AppContext.Provider
             value={{
               settings: mockSettings,
+              auth: mockAuth,
               auth: mockAuth,
               updateSetting,
             }}
@@ -350,6 +360,7 @@ describe('routes/Settings.tsx', () => {
             value={{
               settings: mockSettings,
               auth: mockAuth,
+              auth: mockAuth,
               updateSetting,
             }}
           >
@@ -375,6 +386,7 @@ describe('routes/Settings.tsx', () => {
             value={{
               settings: mockSettings,
               auth: mockAuth,
+              auth: mockAuth,
               updateSetting,
             }}
           >
@@ -399,6 +411,7 @@ describe('routes/Settings.tsx', () => {
           <AppContext.Provider
             value={{
               settings: mockSettings,
+              auth: mockAuth,
               auth: mockAuth,
               updateSetting,
             }}
@@ -426,6 +439,7 @@ describe('routes/Settings.tsx', () => {
           <AppContext.Provider
             value={{
               settings: mockSettings,
+              auth: mockAuth,
               auth: mockAuth,
             }}
           >
@@ -549,6 +563,7 @@ describe('routes/Settings.tsx', () => {
           <AppContext.Provider
             value={{
               settings: mockSettings,
+              auth: mockAuth,
               auth: mockAuth,
               logout: logoutMock,
             }}

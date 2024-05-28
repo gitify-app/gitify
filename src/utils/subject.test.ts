@@ -5,6 +5,7 @@ import {
   partialMockNotification,
   partialMockUser,
 } from '../__mocks__/partial-mocks';
+import { mockAuth } from '../__mocks__/state-mocks';
 import type {
   Discussion,
   DiscussionAuthor,
@@ -196,7 +197,7 @@ describe('utils/subject.ts', () => {
       };
 
       const mockNotification = partialMockNotification({
-        title: 'This is a mocked discussion',
+        title: 'This is a mock discussion',
         type: 'Discussion',
       });
       mockNotification.updated_at = '2024-01-01T00:00:00Z';
@@ -359,7 +360,7 @@ describe('utils/subject.ts', () => {
       let mockNotification: Notification;
       beforeEach(() => {
         mockNotification = partialMockNotification({
-          title: 'This is a mocked issue',
+          title: 'This is a mock issue',
           type: 'Issue',
           url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
           latest_comment_url:
@@ -520,7 +521,7 @@ describe('utils/subject.ts', () => {
 
       beforeEach(() => {
         mockNotification = partialMockNotification({
-          title: 'This is a mocked pull request',
+          title: 'This is a mock pull request',
           type: 'PullRequest',
           url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/1',
           latest_comment_url:
@@ -779,7 +780,7 @@ describe('utils/subject.ts', () => {
     describe('Releases', () => {
       it('release notification', async () => {
         const mockNotification = partialMockNotification({
-          title: 'This is a mocked release',
+          title: 'This is a mock release',
           type: 'Release',
           url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1',
           latest_comment_url:
@@ -1049,7 +1050,7 @@ function mockDiscussionNode(
   isAnswered: boolean,
 ): Discussion {
   return {
-    title: 'This is a mocked discussion',
+    title: 'This is a mock discussion',
     url: 'https://github.com/gitify-app/notifications-test/discussions/1',
     stateReason: state,
     isAnswered: isAnswered,

@@ -2,13 +2,17 @@ import { ipcRenderer } from 'electron';
 
 import { mockAuth, mockSettings } from '../__mocks__/mock-state';
 import {
-  mockedAccountNotifications,
-  mockedGitHubNotifications,
-  mockedSingleAccountNotifications,
-} from '../__mocks__/mockedData';
+  mockAccountNotifications,
+  mockSingleAccountNotifications,
+} from '../__mocks__/notifications-mocks';
 import { partialMockNotification } from '../__mocks__/partial-mocks';
+import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { defaultSettings } from '../context/App';
 import type { SettingsState } from '../types';
+import {
+  mockGitHubNotifications,
+  mockSingleNotification,
+} from './api/__mocks__/response-mocks';
 import * as helpers from './helpers';
 import * as notificationsHelpers from './notifications';
 import { filterNotifications } from './notifications';
@@ -30,7 +34,7 @@ describe('utils/notifications.ts', () => {
 
     notificationsHelpers.triggerNativeNotifications(
       [],
-      mockedAccountNotifications,
+      mockAccountNotifications,
       settings,
       mockAuth,
     );
@@ -55,7 +59,7 @@ describe('utils/notifications.ts', () => {
 
     notificationsHelpers.triggerNativeNotifications(
       [],
-      mockedAccountNotifications,
+      mockAccountNotifications,
       settings,
       mockAuth,
     );
@@ -75,8 +79,8 @@ describe('utils/notifications.ts', () => {
     jest.spyOn(notificationsHelpers, 'raiseSoundNotification');
 
     notificationsHelpers.triggerNativeNotifications(
-      mockedSingleAccountNotifications,
-      mockedSingleAccountNotifications,
+      mockSingleAccountNotifications,
+      mockSingleAccountNotifications,
       settings,
       mockAuth,
     );
