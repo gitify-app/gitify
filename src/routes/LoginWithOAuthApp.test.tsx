@@ -1,6 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { ipcRenderer } from 'electron';
-import { shell } from 'electron';
+import { ipcRenderer, shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
 import { mockEnterpriseAccounts } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
