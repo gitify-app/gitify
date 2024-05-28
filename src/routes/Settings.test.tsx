@@ -1,7 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { ipcRenderer, shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
-import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
+import { mockAccounts, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import { SettingsRoute } from './Settings';
 

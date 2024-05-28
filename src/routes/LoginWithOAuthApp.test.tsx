@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { ipcRenderer } from 'electron';
 import { shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
-import { mockedEnterpriseAccounts } from '../__mocks__/mockedData';
+import { mockEnterpriseAccounts } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import type { AuthState } from '../types';
 import { LoginWithOAuthApp, validate } from './LoginWithOAuthApp';
@@ -125,7 +125,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
       <AppContext.Provider
         value={{
           accounts: {
-            enterpriseAccounts: mockedEnterpriseAccounts,
+            enterpriseAccounts: mockEnterpriseAccounts,
             user: null,
           },
         }}

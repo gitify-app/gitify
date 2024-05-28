@@ -1,9 +1,4 @@
 import type {
-  AccountNotifications,
-  EnterpriseAccount,
-  GitifyUser,
-} from '../types';
-import type {
   Discussion,
   DiscussionAuthor,
   DiscussionComments,
@@ -11,23 +6,10 @@ import type {
   Notification,
   Repository,
   User,
-} from '../typesGitHub';
-import Constants from '../utils/constants';
+} from '../../../typesGitHub';
+import Constants from '../../constants';
 
-export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
-  {
-    hostname: 'github.gitify.io',
-    token: '1234568790',
-  },
-];
-
-export const mockedUser: GitifyUser = {
-  login: 'octocat',
-  name: 'Mona Lisa Octocat',
-  id: 123456789,
-};
-
-export const mockedNotificationUser: User = {
+export const mockNotificationUser: User = {
   login: 'octocat',
   id: 123456789,
   node_id: 'MDQ6VXNlcjE=',
@@ -49,8 +31,9 @@ export const mockedNotificationUser: User = {
 };
 
 // 2 Notifications
+// Hostname : 'github.com'
 // Repository : 'gitify-app/notifications-test'
-export const mockedGitHubNotifications: Notification[] = [
+export const mockGitHubNotifications: Notification[] = [
   {
     hostname: Constants.GITHUB_API_BASE_URL,
     id: '138661096',
@@ -255,8 +238,9 @@ export const mockedGitHubNotifications: Notification[] = [
 ];
 
 // 2 Notifications
+// Hostname : 'github.gitify.io'
 // Repository : 'myorg/notifications-test'
-export const mockedEnterpriseNotifications: Notification[] = [
+export const mockEnterpriseNotifications: Notification[] = [
   {
     hostname: 'https://github.gitify.io/api/v3',
     id: '3',
@@ -367,27 +351,6 @@ export const mockedEnterpriseNotifications: Notification[] = [
   },
 ];
 
-export const mockedSingleNotification: Notification =
-  mockedGitHubNotifications[0];
-
-export const mockedAccountNotifications: AccountNotifications[] = [
-  {
-    hostname: 'github.com',
-    notifications: mockedGitHubNotifications,
-  },
-  {
-    hostname: 'github.gitify.io',
-    notifications: mockedEnterpriseNotifications,
-  },
-];
-
-export const mockedSingleAccountNotifications: AccountNotifications[] = [
-  {
-    hostname: 'github.com',
-    notifications: [mockedSingleNotification],
-  },
-];
-
 const mockDiscussionAuthor: DiscussionAuthor = {
   login: 'comment-user',
   url: 'https://github.com/comment-user',
@@ -422,7 +385,7 @@ export const mockDiscussionComments: DiscussionComments = {
   totalCount: 2,
 };
 
-export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
+export const mockGraphQLResponse: GraphQLSearch<Discussion> = {
   data: {
     search: {
       nodes: [
@@ -443,3 +406,5 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
     },
   },
 };
+
+export const mockSingleNotification: Notification = mockGitHubNotifications[0];

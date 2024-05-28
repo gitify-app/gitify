@@ -1,4 +1,4 @@
-import { mockSettings } from '../__mocks__/mock-state';
+import { mockSettings } from '../__mocks__/state-mocks';
 import { clearState, loadState, saveState } from './storage';
 
 describe('utils/storage.ts', () => {

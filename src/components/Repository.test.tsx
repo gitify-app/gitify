@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { shell } from 'electron';
-import { mockedGitHubNotifications } from '../__mocks__/mockedData';
 import { AppContext } from '../context/App';
+import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
 import { RepositoryNotifications } from './Repository';
 
 jest.mock('./NotificationRow', () => ({
@@ -15,7 +15,7 @@ describe('components/Repository.tsx', () => {
   const props = {
     hostname: 'github.com',
     repoName: 'gitify-app/notifications-test',
-    repoNotifications: mockedGitHubNotifications,
+    repoNotifications: mockGitHubNotifications,
   };
 
   beforeEach(() => {

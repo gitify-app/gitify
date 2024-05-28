@@ -1,22 +1,20 @@
-import { mockSettings } from '../__mocks__/mock-state';
-import {
-  mockedSingleAccountNotifications,
-  mockedSingleNotification,
-} from '../__mocks__/mockedData';
+import { mockSingleAccountNotifications } from '../__mocks__/notifications-mocks';
+import { mockSettings } from '../__mocks__/state-mocks';
+import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import Constants from './constants';
 import { removeNotification } from './remove-notification';
 
 describe('utils/remove-notification.ts', () => {
-  const notificationId = mockedSingleNotification.id;
-  const hostname = mockedSingleAccountNotifications[0].hostname;
+  const notificationId = mockSingleNotification.id;
+  const hostname = mockSingleAccountNotifications[0].hostname;
 
   it('should remove a notification if it exists', () => {
-    expect(mockedSingleAccountNotifications[0].notifications.length).toBe(1);
+    expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
     const result = removeNotification(
       { ...mockSettings, delayNotificationState: false },
       notificationId,
-      mockedSingleAccountNotifications,
+      mockSingleAccountNotifications,
       hostname,
     );
 
@@ -25,21 +23,21 @@ describe('utils/remove-notification.ts', () => {
 
   it('should set notification as opaque if delayNotificationState enabled', () => {
     const mockElement = document.createElement('div');
-    mockElement.id = mockedSingleAccountNotifications[0].notifications[0].id;
+    mockElement.id = mockSingleAccountNotifications[0].notifications[0].id;
     jest.spyOn(document, 'getElementById').mockReturnValue(mockElement);
 
-    expect(mockedSingleAccountNotifications[0].notifications.length).toBe(1);
+    expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
     const result = removeNotification(
       { ...mockSettings, delayNotificationState: true },
       notificationId,
-      mockedSingleAccountNotifications,
+      mockSingleAccountNotifications,
       hostname,
     );
 
     expect(result[0].notifications.length).toBe(1);
     expect(document.getElementById).toHaveBeenCalledWith(
-      mockedSingleAccountNotifications[0].notifications[0].id,
+      mockSingleAccountNotifications[0].notifications[0].id,
     );
     expect(mockElement.className).toContain(Constants.READ_CLASS_NAME);
   });
