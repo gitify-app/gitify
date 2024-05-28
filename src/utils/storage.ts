@@ -1,23 +1,19 @@
-import type { AuthState, SettingsState } from '../types';
+import type { GitifyState } from '../types';
 import { Constants } from './constants';
 
-export const loadState = (): {
-  accounts?: AuthState;
-  settings?: SettingsState;
-} => {
+export function loadState(): GitifyState {
   const existing = localStorage.getItem(Constants.STORAGE_KEY);
-  const { auth: accounts, settings } = (existing && JSON.parse(existing)) || {};
-  return { accounts, settings };
-};
+  const { auth, settings } = (existing && JSON.parse(existing)) || {};
+  return { auth, settings };
+}
 
-export const saveState = (
-  accounts: AuthState,
-  settings: SettingsState,
-): void => {
-  const settingsString = JSON.stringify({ auth: accounts, settings });
+export function saveState(gitifyState: GitifyState) {
+  const auth = gitifyState.auth;
+  const settings = gitifyState.settings;
+  const settingsString = JSON.stringify({ auth, settings });
   localStorage.setItem(Constants.STORAGE_KEY, settingsString);
-};
+}
 
-export const clearState = (): void => {
+export function clearState() {
   localStorage.clear();
-};
+}

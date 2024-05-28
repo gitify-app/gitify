@@ -10,7 +10,7 @@ describe('utils/storage.ts', () => {
       }),
     );
     const result = loadState();
-    expect(result.accounts.token).toBe('123-456');
+    expect(result.auth.token).toBe('123-456');
     expect(result.settings.theme).toBe('DARK');
   });
 
@@ -19,20 +19,20 @@ describe('utils/storage.ts', () => {
       .spyOn(localStorage.__proto__, 'getItem')
       .mockReturnValueOnce(JSON.stringify({}));
     const result = loadState();
-    expect(result.accounts).toBeUndefined();
+    expect(result.auth).toBeUndefined();
     expect(result.settings).toBeUndefined();
   });
 
   it('should save the state to localstorage', () => {
     jest.spyOn(localStorage.__proto__, 'setItem');
-    saveState(
-      {
+    saveState({
+      auth: {
         token: '123-456',
         enterpriseAccounts: [],
         user: null,
       },
-      mockSettings,
-    );
+      settings: mockSettings,
+    });
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
   });
 

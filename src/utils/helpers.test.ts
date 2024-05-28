@@ -1,5 +1,5 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
-import { mockAccounts, mockUser } from '../__mocks__/state-mocks';
+import { mockAuth, mockUser } from '../__mocks__/state-mocks';
 import type { SubjectType } from '../typesGitHub';
 import {
   mockGraphQLResponse,
@@ -19,14 +19,14 @@ describe('utils/helpers.ts', () => {
   describe('isPersonalAccessTokenLoggedIn', () => {
     it('logged in', () => {
       expect(
-        isPersonalAccessTokenLoggedIn({ ...mockAccounts, token: '1234' }),
+        isPersonalAccessTokenLoggedIn({ ...mockAuth, token: '1234' }),
       ).toBe(true);
     });
 
     it('logged out', () => {
-      expect(
-        isPersonalAccessTokenLoggedIn({ ...mockAccounts, token: null }),
-      ).toBe(false);
+      expect(isPersonalAccessTokenLoggedIn({ ...mockAuth, token: null })).toBe(
+        false,
+      );
     });
   });
 
@@ -34,7 +34,7 @@ describe('utils/helpers.ts', () => {
     it('logged in', () => {
       expect(
         isOAuthAppLoggedIn({
-          ...mockAccounts,
+          ...mockAuth,
           enterpriseAccounts: [{ hostname: 'github.gitify.io', token: '1234' }],
         }),
       ).toBe(true);
@@ -42,12 +42,12 @@ describe('utils/helpers.ts', () => {
 
     it('logged out', () => {
       expect(
-        isOAuthAppLoggedIn({ ...mockAccounts, enterpriseAccounts: null }),
+        isOAuthAppLoggedIn({ ...mockAuth, enterpriseAccounts: null }),
       ).toBe(false);
 
-      expect(
-        isOAuthAppLoggedIn({ ...mockAccounts, enterpriseAccounts: [] }),
-      ).toBe(false);
+      expect(isOAuthAppLoggedIn({ ...mockAuth, enterpriseAccounts: [] })).toBe(
+        false,
+      );
     });
   });
 
@@ -110,14 +110,14 @@ describe('utils/helpers.ts', () => {
           ...mockSingleNotification,
           subject: subject,
         },
-        mockAccounts,
+        mockAuth,
       );
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         subject.latest_comment_url,
         'GET',
-        mockAccounts.token,
+        mockAuth.token,
       );
       expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
@@ -145,14 +145,14 @@ describe('utils/helpers.ts', () => {
           ...mockSingleNotification,
           subject: subject,
         },
-        mockAccounts,
+        mockAuth,
       );
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         subject.url,
         'GET',
-        mockAccounts.token,
+        mockAuth.token,
       );
       expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
@@ -171,7 +171,7 @@ describe('utils/helpers.ts', () => {
             ...mockSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockAuth,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -193,7 +193,7 @@ describe('utils/helpers.ts', () => {
             ...mockSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockAuth,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -215,7 +215,7 @@ describe('utils/helpers.ts', () => {
             ...mockSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockAuth,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -237,7 +237,7 @@ describe('utils/helpers.ts', () => {
             ...mockSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockAuth,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -259,7 +259,7 @@ describe('utils/helpers.ts', () => {
             ...mockSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockAuth,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -281,7 +281,7 @@ describe('utils/helpers.ts', () => {
             ...mockSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockAuth,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -303,7 +303,7 @@ describe('utils/helpers.ts', () => {
             ...mockSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockAuth,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -335,7 +335,7 @@ describe('utils/helpers.ts', () => {
             ...mockSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockAuth,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
@@ -367,7 +367,7 @@ describe('utils/helpers.ts', () => {
             ...mockSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockAuth,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
@@ -395,7 +395,7 @@ describe('utils/helpers.ts', () => {
             ...mockSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockAuth,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
@@ -419,7 +419,7 @@ describe('utils/helpers.ts', () => {
           ...mockSingleNotification,
           subject: subject,
         },
-        mockAccounts,
+        mockAuth,
       );
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -442,7 +442,7 @@ describe('utils/helpers.ts', () => {
             ...mockSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockAuth,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -465,7 +465,7 @@ describe('utils/helpers.ts', () => {
             ...mockSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockAuth,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -487,7 +487,7 @@ describe('utils/helpers.ts', () => {
             ...mockSingleNotification,
             subject: subject,
           },
-          mockAccounts,
+          mockAuth,
         );
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
@@ -510,7 +510,7 @@ describe('utils/helpers.ts', () => {
           ...mockSingleNotification,
           subject: subject,
         },
-        mockAccounts,
+        mockAuth,
       );
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
