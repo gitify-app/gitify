@@ -1,5 +1,6 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
 import { mockAuth, mockUser } from '../__mocks__/state-mocks';
+import { mockPlatform } from '../__mocks__/utils';
 import type { SubjectType } from '../typesGitHub';
 import {
   mockGraphQLResponse,
@@ -11,6 +12,8 @@ import {
   generateGitHubWebUrl,
   generateNotificationReferrerId,
   isEnterpriseHost,
+  isLinux,
+  isMacOS,
   isOAuthAppLoggedIn,
   isPersonalAccessTokenLoggedIn,
 } from './helpers';
@@ -531,6 +534,36 @@ describe('utils/helpers.ts', () => {
       expect(formatForDisplay(['not_planned', 'Issue'])).toBe(
         'Not Planned Issue',
       );
+    });
+  });
+
+  describe('platforms', () => {
+    let originalPlatform: PropertyDescriptor;
+
+    beforeAll(() => {
+      // Save the original process.platform
+      originalPlatform = Object.getOwnPropertyDescriptor(process, 'platform');
+    });
+
+    afterEach(() => {
+      // Restore the original process.platform after each test
+      Object.defineProperty(process, 'platform', originalPlatform);
+    });
+
+    it('isMacOS', () => {
+      mockPlatform('darwin');
+      expect(isMacOS()).toBe(true);
+
+      mockPlatform('linux');
+      expect(isMacOS()).toBe(false);
+    });
+
+    it('isLinux', () => {
+      mockPlatform('darwin');
+      expect(isLinux()).toBe(false);
+
+      mockPlatform('linux');
+      expect(isLinux()).toBe(true);
     });
   });
 });

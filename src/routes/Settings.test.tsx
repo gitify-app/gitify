@@ -2,6 +2,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import { ipcRenderer, shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
+import { mockPlatform } from '../__mocks__/utils';
 import { AppContext } from '../context/App';
 import { SettingsRoute } from './Settings';
 
@@ -12,15 +13,61 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/Settings.tsx', () => {
+  let originalPlatform: PropertyDescriptor;
   const updateSetting = jest.fn();
+
+  beforeAll(() => {
+    // Save the original process.platform
+    originalPlatform = Object.getOwnPropertyDescriptor(process, 'platform');
+  });
 
   beforeEach(() => {
     jest.clearAllMocks();
   });
 
+  afterEach(() => {
+    // Restore the original process.platform after each test
+    Object.defineProperty(process, 'platform', originalPlatform);
+  });
+
   describe('General', () => {
-    it('should render itself & its children', async () => {
+    it('should render itself & its children - macOS', async () => {
       await act(async () => {
+        mockPlatform('darwin');
+        render(
+          <AppContext.Provider
+            value={{ settings: mockSettings, auth: mockAuth }}
+          >
+            <MemoryRouter>
+              <SettingsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      expect(screen.getByTestId('settings')).toMatchSnapshot();
+    });
+
+    it('should render itself & its children - linux', async () => {
+      await act(async () => {
+        mockPlatform('linux');
+        render(
+          <AppContext.Provider
+            value={{ settings: mockSettings, auth: mockAuth }}
+          >
+            <MemoryRouter>
+              <SettingsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      expect(screen.getByTestId('settings')).toMatchSnapshot();
+    });
+
+    it('should render itself & its children - windows', async () => {
+      await act(async () => {
+        mockPlatform('win32');
         render(
           <AppContext.Provider
             value={{ settings: mockSettings, auth: mockAuth }}
@@ -388,6 +435,8 @@ describe('routes/Settings.tsx', () => {
     });
 
     it('should toggle the openAtStartup checkbox', async () => {
+      mockPlatform('darwin');
+
       await act(async () => {
         render(
           <AppContext.Provider
