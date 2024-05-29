@@ -27,6 +27,8 @@ import {
 } from '../utils/comms';
 import Constants from '../utils/constants';
 import {
+  isLinux,
+  isMacOS,
   isOAuthAppLoggedIn,
   isPersonalAccessTokenLoggedIn,
 } from '../utils/helpers';
@@ -41,8 +43,6 @@ export const SettingsRoute: FC = () => {
   } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const [isLinux, setIsLinux] = useState<boolean>(false);
-  const [isMacOS, setIsMacOS] = useState<boolean>(false);
   const [appVersion, setAppVersion] = useState<string | null>(null);
 
   const openGitHubReleaseNotes = useCallback((version) => {
@@ -61,12 +61,6 @@ export const SettingsRoute: FC = () => {
   };
 
   useEffect(() => {
-    (async () => {
-      const result = await ipcRenderer.invoke('get-platform');
-      setIsLinux(result === 'linux');
-      setIsMacOS(result === 'darwin');
-    })();
-
     (async () => {
       const result = await ipcRenderer.invoke('get-app-version');
       setAppVersion(result);
@@ -253,7 +247,7 @@ export const SettingsRoute: FC = () => {
           <legend id="system" className="font-semibold mt-2 mb-1">
             System
           </legend>
-          {isMacOS && (
+          {isMacOS() && (
             <Checkbox
               name="showNotificationsCountInTray"
               label="Show notifications count in tray"
@@ -280,7 +274,7 @@ export const SettingsRoute: FC = () => {
             checked={settings.playSound}
             onChange={(evt) => updateSetting('playSound', evt.target.checked)}
           />
-          {!isLinux && (
+          {!isLinux() && (
             <Checkbox
               name="openAtStartUp"
               label="Open at startup"

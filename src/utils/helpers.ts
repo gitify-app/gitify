@@ -186,3 +186,11 @@ export async function openInBrowser(
 
   openExternalLink(url);
 }
+
+export function isMacOS(): boolean {
+  return process.platform === 'darwin';
+}
+
+export function isLinux(): boolean {
+  return process.platform === 'linux';
+}
