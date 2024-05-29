@@ -15,11 +15,11 @@ jest.mock('../hooks/useNotifications');
 
 const customRender = (
   ui,
-  accounts: AuthState = mockAuth,
+  auth: AuthState = mockAuth,
   settings: SettingsState = mockSettings,
 ) => {
   return render(
-    <AppContext.Provider value={{ auth: accounts, settings }}>
+    <AppContext.Provider value={{ auth, settings }}>
       <AppProvider>{ui}</AppProvider>
     </AppContext.Provider>,
   );
@@ -48,6 +48,7 @@ describe('context/App.tsx', () => {
     const markNotificationDoneMock = jest.fn();
     const unsubscribeNotificationMock = jest.fn();
     const markRepoNotificationsMock = jest.fn();
+    const markRepoNotificationsDoneMock = jest.fn();
 
     beforeEach(() => {
       (useNotifications as jest.Mock).mockReturnValue({
@@ -56,6 +57,7 @@ describe('context/App.tsx', () => {
         markNotificationDone: markNotificationDoneMock,
         unsubscribeNotification: unsubscribeNotificationMock,
         markRepoNotifications: markRepoNotificationsMock,
+        markRepoNotificationsDone: markRepoNotificationsDoneMock,
       });
     });
 
@@ -228,6 +230,74 @@ describe('context/App.tsx', () => {
 
       expect(markRepoNotificationsMock).toHaveBeenCalledTimes(1);
       expect(markRepoNotificationsMock).toHaveBeenCalledWith(
+        { accounts: [], enterpriseAccounts: [], token: null, user: null },
+        mockSettings,
+        'gitify-app/notifications-test',
+        'github.com',
+      );
+    });
+
+    it('should call markRepoNotificationsDone', async () => {
+      const TestComponent = () => {
+        const { markRepoNotificationsDone } = useContext(AppContext);
+
+        return (
+          <button
+            type="button"
+            onClick={() =>
+              markRepoNotificationsDone(
+                'gitify-app/notifications-test',
+                'github.com',
+              )
+            }
+          >
+            Test Case
+          </button>
+        );
+      };
+
+      const { getByText } = customRender(<TestComponent />);
+
+      markRepoNotificationsDoneMock.mockReset();
+
+      fireEvent.click(getByText('Test Case'));
+
+      expect(markRepoNotificationsDoneMock).toHaveBeenCalledTimes(1);
+      expect(markRepoNotificationsDoneMock).toHaveBeenCalledWith(
+        { accounts: [], enterpriseAccounts: [], token: null, user: null },
+        mockSettings,
+        'gitify-app/notifications-test',
+        'github.com',
+      );
+    });
+
+    it('should call markRepoNotificationsDone', async () => {
+      const TestComponent = () => {
+        const { markRepoNotificationsDone } = useContext(AppContext);
+
+        return (
+          <button
+            type="button"
+            onClick={() =>
+              markRepoNotificationsDone(
+                'gitify-app/notifications-test',
+                'github.com',
+              )
+            }
+          >
+            Test Case
+          </button>
+        );
+      };
+
+      const { getByText } = customRender(<TestComponent />);
+
+      markRepoNotificationsDoneMock.mockReset();
+
+      fireEvent.click(getByText('Test Case'));
+
+      expect(markRepoNotificationsDoneMock).toHaveBeenCalledTimes(1);
+      expect(markRepoNotificationsDoneMock).toHaveBeenCalledWith(
         { accounts: [], enterpriseAccounts: [], token: null, user: null },
         mockSettings,
         'gitify-app/notifications-test',
