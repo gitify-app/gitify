@@ -34,12 +34,7 @@ import { isLinux, isMacOS } from '../utils/platform';
 import { setTheme } from '../utils/theme';
 
 export const SettingsRoute: FC = () => {
-  const {
-    auth: accounts,
-    settings,
-    updateSetting,
-    logout,
-  } = useContext(AppContext);
+  const { auth, settings, updateSetting, logout } = useContext(AppContext);
   const navigate = useNavigate();
 
   const [appVersion, setAppVersion] = useState<string | null>(null);
@@ -301,7 +296,7 @@ export const SettingsRoute: FC = () => {
             className={footerButtonClass}
             title="Login with Personal Access Token"
             onClick={loginWithPersonalAccessToken}
-            hidden={isPersonalAccessTokenLoggedIn(accounts)}
+            hidden={isPersonalAccessTokenLoggedIn(auth)}
           >
             <KeyIcon size={18} aria-label="Login with Personal Access Token" />
             <PlusIcon size={10} className="ml-1 mb-2" />
@@ -312,7 +307,7 @@ export const SettingsRoute: FC = () => {
             className={footerButtonClass}
             title="Login with OAuth App"
             onClick={loginWithOAuthApp}
-            hidden={isOAuthAppLoggedIn(accounts)}
+            hidden={isOAuthAppLoggedIn(auth)}
           >
             <PersonIcon size={20} aria-label="Login with OAuth App" />
             <PlusIcon size={10} className="mb-2" />
