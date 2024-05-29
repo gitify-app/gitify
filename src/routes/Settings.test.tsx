@@ -106,6 +106,31 @@ describe('routes/Settings.tsx', () => {
         false,
       );
     });
+
+    it('should toggle account hostname checkbox', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              settings: mockSettings,
+              auth: mockAuth,
+              updateSetting,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      await screen.findByLabelText('Show account hostname');
+
+      fireEvent.click(screen.getByLabelText('Show account hostname'));
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith('showAccountHostname', true);
+    });
   });
 
   describe('Notifications section', () => {
