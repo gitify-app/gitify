@@ -15,11 +15,11 @@ jest.mock('../hooks/useNotifications');
 
 const customRender = (
   ui,
-  accounts: AuthState = mockAuth,
+  auth: AuthState = mockAuth,
   settings: SettingsState = mockSettings,
 ) => {
   return render(
-    <AppContext.Provider value={{ auth: accounts, settings }}>
+    <AppContext.Provider value={{ auth, settings }}>
       <AppProvider>{ui}</AppProvider>
     </AppContext.Provider>,
   );

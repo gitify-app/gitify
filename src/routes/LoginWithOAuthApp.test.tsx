@@ -15,7 +15,7 @@ jest.mock('react-router-dom', () => ({
 describe('routes/LoginWithOAuthApp.tsx', () => {
   const openExternalMock = jest.spyOn(shell, 'openExternal');
 
-  const mockAccounts: AuthState = {
+  const mockAuth: AuthState = {
     enterpriseAccounts: [],
     user: null,
   };
@@ -29,7 +29,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
 
   it('renders correctly', () => {
     const tree = render(
-      <AppContext.Provider value={{ auth: mockAccounts }}>
+      <AppContext.Provider value={{ auth: mockAuth }}>
         <MemoryRouter>
           <LoginWithOAuthApp />
         </MemoryRouter>
@@ -41,7 +41,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
 
   it('let us go back', () => {
     render(
-      <AppContext.Provider value={{ auth: mockAccounts }}>
+      <AppContext.Provider value={{ auth: mockAuth }}>
         <MemoryRouter>
           <LoginWithOAuthApp />
         </MemoryRouter>
@@ -80,7 +80,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
   describe("'Create new OAuth App' button", () => {
     it('should be disabled if no hostname configured', async () => {
       render(
-        <AppContext.Provider value={{ auth: mockAccounts }}>
+        <AppContext.Provider value={{ auth: mockAuth }}>
           <MemoryRouter>
             <LoginWithOAuthApp />
           </MemoryRouter>
@@ -94,7 +94,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
 
     it('should open in browser if hostname configured', async () => {
       render(
-        <AppContext.Provider value={{ auth: mockAccounts }}>
+        <AppContext.Provider value={{ auth: mockAuth }}>
           <MemoryRouter>
             <LoginWithOAuthApp />
           </MemoryRouter>
@@ -113,7 +113,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
 
   it('should receive a logged-in enterprise account', () => {
     const { rerender } = render(
-      <AppContext.Provider value={{ auth: mockAccounts }}>
+      <AppContext.Provider value={{ auth: mockAuth }}>
         <MemoryRouter>
           <LoginWithOAuthApp />
         </MemoryRouter>
@@ -142,7 +142,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
 
   it('should render the form with errors', () => {
     render(
-      <AppContext.Provider value={{ auth: mockAccounts }}>
+      <AppContext.Provider value={{ auth: mockAuth }}>
         <MemoryRouter>
           <LoginWithOAuthApp />
         </MemoryRouter>
@@ -168,7 +168,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
 
   it('should open help docs in the browser', async () => {
     render(
-      <AppContext.Provider value={{ auth: mockAccounts }}>
+      <AppContext.Provider value={{ auth: mockAuth }}>
         <MemoryRouter>
           <LoginWithOAuthApp />
         </MemoryRouter>
