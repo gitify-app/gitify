@@ -112,23 +112,23 @@ export const getToken = async (
 };
 
 export const addAccount = (
-  accounts: AuthState,
+  auth: AuthState,
   token,
   hostname,
   user?: GitifyUser,
 ): AuthState => {
   if (!isEnterpriseHost(hostname)) {
     return {
-      ...accounts,
+      ...auth,
       token,
       user: user ?? null,
     };
   }
 
   return {
-    ...accounts,
+    ...auth,
     enterpriseAccounts: [
-      ...accounts.enterpriseAccounts,
+      ...auth.enterpriseAccounts,
       {
         token,
         hostname: hostname,

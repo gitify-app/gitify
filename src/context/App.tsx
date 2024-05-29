@@ -26,7 +26,7 @@ import { getNotificationCount } from '../utils/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setTheme } from '../utils/theme';
 
-const defaultAccounts: AuthState = {
+const defaultAuth: AuthState = {
   token: null,
   enterpriseAccounts: [],
   user: null,
@@ -79,7 +79,7 @@ interface AppContextState {
 export const AppContext = createContext<Partial<AppContextState>>({});
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-  const [accounts, setAccounts] = useState<AuthState>(defaultAccounts);
+  const [accounts, setAccounts] = useState<AuthState>(defaultAuth);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
   const {
     fetchNotifications,
@@ -179,7 +179,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const logout = useCallback(() => {
-    setAccounts(defaultAccounts);
+    setAccounts(defaultAuth);
     clearState();
   }, []);
 
@@ -187,7 +187,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const existing = loadState();
 
     if (existing.auth) {
-      setAccounts({ ...defaultAccounts, ...existing.auth });
+      setAccounts({ ...defaultAuth, ...existing.auth });
     }
 
     if (existing.settings) {

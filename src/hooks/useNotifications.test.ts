@@ -102,7 +102,7 @@ describe('hooks/useNotifications.ts', () => {
 
     describe('enterprise', () => {
       it('should fetch notifications with success - enterprise only', async () => {
-        const accounts: AuthState = {
+        const auth: AuthState = {
           ...mockAuth,
           token: null,
         };
@@ -119,7 +119,7 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications());
 
         act(() => {
-          result.current.fetchNotifications(accounts, {
+          result.current.fetchNotifications(auth, {
             ...mockSettings,
             detailedNotifications: false,
           });
@@ -136,7 +136,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       it('should fetch notifications with failure - enterprise only', async () => {
-        const accounts: AuthState = {
+        const auth: AuthState = {
           ...mockAuth,
           token: null,
         };
@@ -156,7 +156,7 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications());
 
         act(() => {
-          result.current.fetchNotifications(accounts, mockSettings);
+          result.current.fetchNotifications(auth, mockSettings);
         });
 
         await waitFor(() => {
@@ -167,7 +167,7 @@ describe('hooks/useNotifications.ts', () => {
 
     describe('github.com', () => {
       it('should fetch notifications with success - github.com only', async () => {
-        const accounts: AuthState = {
+        const auth: AuthState = {
           ...mockAuth,
           enterpriseAccounts: [],
           user: mockUser,
@@ -185,7 +185,7 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications());
 
         act(() => {
-          result.current.fetchNotifications(accounts, {
+          result.current.fetchNotifications(auth, {
             ...mockSettings,
             detailedNotifications: false,
           });
@@ -200,7 +200,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       it('should fetch notifications with failures - github.com only', async () => {
-        const accounts: AuthState = {
+        const auth: AuthState = {
           ...mockAuth,
           enterpriseAccounts: [],
         };
@@ -220,7 +220,7 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications());
 
         act(() => {
-          result.current.fetchNotifications(accounts, mockSettings);
+          result.current.fetchNotifications(auth, mockSettings);
         });
 
         await waitFor(() => {
@@ -232,7 +232,7 @@ describe('hooks/useNotifications.ts', () => {
 
     describe('with detailed notifications', () => {
       it('should fetch notifications with success', async () => {
-        const accounts: AuthState = {
+        const auth: AuthState = {
           ...mockAuth,
           enterpriseAccounts: [],
           user: mockUser,
@@ -393,7 +393,7 @@ describe('hooks/useNotifications.ts', () => {
         const { result } = renderHook(() => useNotifications());
 
         act(() => {
-          result.current.fetchNotifications(accounts, {
+          result.current.fetchNotifications(auth, {
             ...mockSettings,
             detailedNotifications: true,
           });

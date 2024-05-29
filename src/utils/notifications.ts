@@ -28,7 +28,7 @@ export const triggerNativeNotifications = (
   previousNotifications: AccountNotifications[],
   newNotifications: AccountNotifications[],
   settings: SettingsState,
-  accounts: AuthState,
+  auth: AuthState,
 ) => {
   const diffNotifications = newNotifications
     .map((account) => {
@@ -63,13 +63,13 @@ export const triggerNativeNotifications = (
   }
 
   if (settings.showNotifications) {
-    raiseNativeNotification(diffNotifications, accounts);
+    raiseNativeNotification(diffNotifications, auth);
   }
 };
 
 export const raiseNativeNotification = (
   notifications: Notification[],
-  accounts: AuthState,
+  auth: AuthState,
 ) => {
   let title: string;
   let body: string;
@@ -93,7 +93,7 @@ export const raiseNativeNotification = (
   nativeNotification.onclick = () => {
     if (notifications.length === 1) {
       ipcRenderer.send('hide-window');
-      openInBrowser(notifications[0], accounts);
+      openInBrowser(notifications[0], auth);
     } else {
       ipcRenderer.send('reopen-window');
     }
@@ -108,23 +108,20 @@ export const raiseSoundNotification = () => {
   audio.play();
 };
 
-function getGitHubNotifications(accounts: AuthState, settings: SettingsState) {
-  if (!isPersonalAccessTokenLoggedIn(accounts)) {
+function getGitHubNotifications(auth: AuthState, settings: SettingsState) {
+  if (!isPersonalAccessTokenLoggedIn(auth)) {
     return;
   }
 
   return listNotificationsForAuthenticatedUser(
     Constants.DEFAULT_AUTH_OPTIONS.hostname,
-    accounts.token,
+    auth.token,
     settings,
   );
 }
 
-function getEnterpriseNotifications(
-  accounts: AuthState,
-  settings: SettingsState,
-) {
-  return accounts.enterpriseAccounts.map((account) => {
+function getEnterpriseNotifications(auth: AuthState, settings: SettingsState) {
+  return auth.enterpriseAccounts.map((account) => {
     return listNotificationsForAuthenticatedUser(
       account.hostname,
       account.token,
@@ -134,12 +131,12 @@ function getEnterpriseNotifications(
 }
 
 export async function getAllNotifications(
-  accounts: AuthState,
+  auth: AuthState,
   settings: SettingsState,
 ): Promise<AccountNotifications[]> {
   const responses = await Promise.all([
-    getGitHubNotifications(accounts, settings),
-    ...getEnterpriseNotifications(accounts, settings),
+    getGitHubNotifications(auth, settings),
+    ...getEnterpriseNotifications(auth, settings),
   ]);
 
   const notifications: AccountNotifications[] = await Promise.all(
@@ -157,7 +154,7 @@ export async function getAllNotifications(
 
         notifications = await enrichNotifications(
           notifications,
-          accounts,
+          auth,
           settings,
         );
 
@@ -175,7 +172,7 @@ export async function getAllNotifications(
 
 export async function enrichNotifications(
   notifications: Notification[],
-  accounts: AuthState,
+  auth: AuthState,
   settings: SettingsState,
 ): Promise<Notification[]> {
   if (!settings.detailedNotifications) {
@@ -184,7 +181,7 @@ export async function enrichNotifications(
 
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: Notification) => {
-      const token = getTokenForHost(notification.hostname, accounts);
+      const token = getTokenForHost(notification.hostname, auth);
 
       const additionalSubjectDetails = await getGitifySubjectDetails(
         notification,

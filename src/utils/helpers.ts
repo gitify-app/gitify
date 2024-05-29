@@ -10,23 +10,24 @@ import {
   getWorkflowRunAttributes,
 } from './subject';
 
-export function isPersonalAccessTokenLoggedIn(accounts: AuthState): boolean {
-  return accounts.token != null;
+export function isPersonalAccessTokenLoggedIn(auth: AuthState): boolean {
+  return auth.token != null;
 }
 
-export function isOAuthAppLoggedIn(accounts: AuthState): boolean {
-  return accounts.enterpriseAccounts?.length > 0;
+export function isOAuthAppLoggedIn(auth: AuthState): boolean {
+  return auth.enterpriseAccounts?.length > 0;
 }
 
-export function getTokenForHost(hostname: string, accounts: AuthState): string {
+export function getTokenForHost(hostname: string, auth: AuthState): string {
   const isEnterprise = isEnterpriseHost(hostname);
 
   if (isEnterprise) {
-    return accounts.enterpriseAccounts.find((obj) => obj.hostname === hostname)
-      .token;
+    return auth.enterpriseAccounts.find(
+      (account) => account.hostname === hostname,
+    ).token;
   }
 
-  return accounts.token;
+  return auth.token;
 }
 
 export function isEnterpriseHost(hostname: string): boolean {
@@ -116,10 +117,10 @@ async function getDiscussionUrl(
 
 export async function generateGitHubWebUrl(
   notification: Notification,
-  accounts: AuthState,
+  auth: AuthState,
 ): Promise<string> {
   const url = new URL(notification.repository.html_url);
-  const token = getTokenForHost(notification.hostname, accounts);
+  const token = getTokenForHost(notification.hostname, auth);
 
   if (notification.subject.latest_comment_url) {
     url.href = await getHtmlUrl(notification.subject.latest_comment_url, token);
@@ -147,7 +148,7 @@ export async function generateGitHubWebUrl(
 
   url.searchParams.set(
     'notification_referrer_id',
-    generateNotificationReferrerId(notification.id, accounts.user?.id),
+    generateNotificationReferrerId(notification.id, auth.user?.id),
   );
 
   return url.toString();
@@ -180,9 +181,9 @@ export function formatNotificationUpdatedAt(
 
 export async function openInBrowser(
   notification: Notification,
-  accounts: AuthState,
+  auth: AuthState,
 ) {
-  const url = await generateGitHubWebUrl(notification, accounts);
+  const url = await generateGitHubWebUrl(notification, auth);
 
   openExternalLink(url);
 }

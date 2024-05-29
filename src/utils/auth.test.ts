@@ -103,27 +103,23 @@ describe('utils/auth.tsx', () => {
   });
 
   describe('addAccount', () => {
-    const accounts: AuthState = {
+    const mockAuth: AuthState = {
       token: null,
       enterpriseAccounts: [],
       user: null,
     };
 
-    it('should add a github.com account', async () => {
-      const result = await auth.addAccount(accounts, '123-456', 'github.com');
+    it('should add a github.com account', () => {
+      const result = auth.addAccount(mockAuth, '123-456', 'github.com');
 
-      expect(result).toEqual({ ...accounts, token: '123-456' });
+      expect(result).toEqual({ ...mockAuth, token: '123-456' });
     });
 
-    it('should add an enterprise account', async () => {
-      const result = await auth.addAccount(
-        accounts,
-        '123-456',
-        'github.gitify.io',
-      );
+    it('should add an enterprise account', () => {
+      const result = auth.addAccount(mockAuth, '123-456', 'github.gitify.io');
 
       expect(result).toEqual({
-        ...accounts,
+        ...mockAuth,
         enterpriseAccounts: [
           { hostname: 'github.gitify.io', token: '123-456' },
         ],
