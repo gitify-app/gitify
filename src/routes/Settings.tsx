@@ -27,11 +27,10 @@ import {
 } from '../utils/comms';
 import Constants from '../utils/constants';
 import {
-  isLinux,
-  isMacOS,
   isOAuthAppLoggedIn,
   isPersonalAccessTokenLoggedIn,
 } from '../utils/helpers';
+import { isLinux, isMacOS } from '../utils/platform';
 import { setTheme } from '../utils/theme';
 
 export const SettingsRoute: FC = () => {
