@@ -2,11 +2,7 @@ import type { AxiosPromise, AxiosResponse } from 'axios';
 import {
   mockOAuthAccount,
   mockPersonalAccessTokenAccount,
-} from '../__mocks__/mock-state';
-import {
-  mockedGraphQLResponse,
-  mockedSingleNotification,
-} from '../__mocks__/mockedData';
+} from '../__mocks__/state-mocks';
 import type { SubjectType } from '../typesGitHub';
 import {
   mockGraphQLResponse,
@@ -96,9 +92,7 @@ describe('utils/helpers.ts', () => {
 
   describe('generateNotificationReferrerId', () => {
     it('should generate the notification_referrer_id', () => {
-      const referrerId = generateNotificationReferrerId(
-        mockedSingleNotification,
-      );
+      const referrerId = generateNotificationReferrerId(mockSingleNotification);
       expect(referrerId).toBe(
         'MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=',
       );
@@ -136,7 +130,7 @@ describe('utils/helpers.ts', () => {
       apiRequestAuthMock.mockResolvedValue(requestPromise);
 
       const result = await generateGitHubWebUrl({
-        ...mockedSingleNotification,
+        ...mockSingleNotification,
         subject: subject,
       });
 
@@ -168,7 +162,7 @@ describe('utils/helpers.ts', () => {
       apiRequestAuthMock.mockResolvedValue(requestPromise);
 
       const result = await generateGitHubWebUrl({
-        ...mockedSingleNotification,
+        ...mockSingleNotification,
         subject: subject,
       });
 
@@ -191,7 +185,7 @@ describe('utils/helpers.ts', () => {
         };
 
         const result = await generateGitHubWebUrl({
-          ...mockedSingleNotification,
+          ...mockSingleNotification,
           subject: subject,
         });
 
@@ -210,7 +204,7 @@ describe('utils/helpers.ts', () => {
         };
 
         const result = await generateGitHubWebUrl({
-          ...mockedSingleNotification,
+          ...mockSingleNotification,
           subject: subject,
         });
 
@@ -229,7 +223,7 @@ describe('utils/helpers.ts', () => {
         };
 
         const result = await generateGitHubWebUrl({
-          ...mockedSingleNotification,
+          ...mockSingleNotification,
           subject: subject,
         });
 
@@ -248,7 +242,7 @@ describe('utils/helpers.ts', () => {
         };
 
         const result = await generateGitHubWebUrl({
-          ...mockedSingleNotification,
+          ...mockSingleNotification,
           subject: subject,
         });
 
@@ -267,7 +261,7 @@ describe('utils/helpers.ts', () => {
         };
 
         const result = await generateGitHubWebUrl({
-          ...mockedSingleNotification,
+          ...mockSingleNotification,
           subject: subject,
         });
 
@@ -286,7 +280,7 @@ describe('utils/helpers.ts', () => {
         };
 
         const result = await generateGitHubWebUrl({
-          ...mockedSingleNotification,
+          ...mockSingleNotification,
           subject: subject,
         });
 
@@ -305,7 +299,7 @@ describe('utils/helpers.ts', () => {
         };
 
         const result = await generateGitHubWebUrl({
-          ...mockedSingleNotification,
+          ...mockSingleNotification,
           subject: subject,
         });
 
@@ -334,7 +328,7 @@ describe('utils/helpers.ts', () => {
         apiRequestAuthMock.mockResolvedValue(requestPromise);
 
         const result = await generateGitHubWebUrl({
-          ...mockedSingleNotification,
+          ...mockSingleNotification,
           subject: subject,
         });
 
@@ -363,7 +357,7 @@ describe('utils/helpers.ts', () => {
         apiRequestAuthMock.mockResolvedValue(requestPromise);
 
         const result = await generateGitHubWebUrl({
-          ...mockedSingleNotification,
+          ...mockSingleNotification,
           subject: subject,
         });
 
@@ -388,7 +382,7 @@ describe('utils/helpers.ts', () => {
         apiRequestAuthMock.mockResolvedValue(requestPromise);
 
         const result = await generateGitHubWebUrl({
-          ...mockedSingleNotification,
+          ...mockSingleNotification,
           subject: subject,
         });
 
@@ -409,7 +403,7 @@ describe('utils/helpers.ts', () => {
       };
 
       const result = await generateGitHubWebUrl({
-        ...mockedSingleNotification,
+        ...mockSingleNotification,
         subject: subject,
       });
 
@@ -429,7 +423,7 @@ describe('utils/helpers.ts', () => {
         };
 
         const result = await generateGitHubWebUrl({
-          ...mockedSingleNotification,
+          ...mockSingleNotification,
           subject: subject,
         });
 
@@ -449,7 +443,7 @@ describe('utils/helpers.ts', () => {
         };
 
         const result = await generateGitHubWebUrl({
-          ...mockedSingleNotification,
+          ...mockSingleNotification,
           subject: subject,
         });
 
@@ -468,7 +462,7 @@ describe('utils/helpers.ts', () => {
         };
 
         const result = await generateGitHubWebUrl({
-          ...mockedSingleNotification,
+          ...mockSingleNotification,
           subject: subject,
         });
 
@@ -488,7 +482,7 @@ describe('utils/helpers.ts', () => {
       };
 
       const result = await generateGitHubWebUrl({
-        ...mockedSingleNotification,
+        ...mockSingleNotification,
         subject: subject,
       });
 

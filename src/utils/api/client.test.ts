@@ -3,7 +3,7 @@ import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
   mockToken,
-} from '../../__mocks__/mock-state';
+} from '../../__mocks__/state-mocks';
 import type { SettingsState } from '../../types';
 import {
   getAuthenticatedUser,

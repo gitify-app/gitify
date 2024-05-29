@@ -6,8 +6,8 @@ import {
   mockAuth,
   mockGitHubCloudAccount,
   mockSettings,
-} from '../__mocks__/mock-state';
-import { mockedNotificationUser } from '../utils/api/__mocks__/response-mocks';
+} from '../__mocks__/state-mocks';
+import { mockNotificationUser } from '../utils/api/__mocks__/response-mocks';
 import { Errors } from '../utils/constants';
 import { useNotifications } from './useNotifications';
 

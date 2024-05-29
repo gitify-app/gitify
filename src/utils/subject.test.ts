@@ -5,7 +5,6 @@ import {
   partialMockNotification,
   partialMockUser,
 } from '../__mocks__/partial-mocks';
-import { mockAuth } from '../__mocks__/state-mocks';
 import type {
   Discussion,
   DiscussionAuthor,

@@ -325,7 +325,7 @@ describe('context/App.tsx', () => {
     });
 
     expect(saveStateMock).toHaveBeenCalledWith({
-      auth: { enterpriseAccounts: [], token: null, user: null },
+      auth: { accounts: [], enterpriseAccounts: [], token: null, user: null },
       settings: {
         participating: true,
         playSound: true,
@@ -370,7 +370,7 @@ describe('context/App.tsx', () => {
     expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
 
     expect(saveStateMock).toHaveBeenCalledWith({
-      auth: { enterpriseAccounts: [], token: null, user: null },
+      auth: { accounts: [], enterpriseAccounts: [], token: null, user: null },
       settings: {
         participating: false,
         playSound: true,
