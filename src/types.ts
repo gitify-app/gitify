@@ -60,20 +60,20 @@ export interface AccountNotifications {
   notifications: Notification[];
 }
 
-export interface AuthOptions {
+export interface LoginOAuthAppOptions {
   hostname: string;
   clientId: string;
   clientSecret: string;
 }
 
-export interface AuthTokenOptions {
+export interface LoginPersonalAccessTokenOptions {
   hostname: string;
   token: string;
 }
 
 export interface AuthResponse {
   authCode: string;
-  authOptions: AuthOptions;
+  authOptions: LoginOAuthAppOptions;
 }
 export interface AuthTokenResponse {
   hostname: string;

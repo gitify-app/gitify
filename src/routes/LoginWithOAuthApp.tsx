@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
-import type { AuthOptions } from '../types';
+import type { LoginOAuthAppOptions } from '../types';
 import {
   getNewOAuthAppURL,
   isValidClientId,
@@ -59,7 +59,7 @@ export const validate = (values: IValues): IFormErrors => {
 export const LoginWithOAuthApp: FC = () => {
   const {
     auth: { enterpriseAccounts },
-    loginEnterprise,
+    loginWithOAuthApp: loginEnterprise,
   } = useContext(AppContext);
   const navigate = useNavigate();
 
@@ -129,7 +129,7 @@ export const LoginWithOAuthApp: FC = () => {
 
   const login = useCallback(async (data: IValues) => {
     try {
-      await loginEnterprise(data as AuthOptions);
+      await loginEnterprise(data as LoginOAuthAppOptions);
     } catch (err) {
       // Skip
     }
