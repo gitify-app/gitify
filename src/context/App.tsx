@@ -12,14 +12,21 @@ import {
   type AccountNotifications,
   type AuthState,
   type GitifyError,
-  type LoginOAuthAppOptions,
-  type LoginPersonalAccessTokenOptions,
   type SettingsState,
   type Status,
   Theme,
 } from '../types';
 import { headNotifications } from '../utils/api/client';
-import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
+import type {
+  LoginOAuthAppOptions,
+  LoginPersonalAccessTokenOptions,
+} from '../utils/auth/types';
+import {
+  addAccount,
+  authGitHub,
+  getToken,
+  getUserData,
+} from '../utils/auth/utils';
 import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
 import Constants from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';

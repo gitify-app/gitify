@@ -1,9 +1,9 @@
 import remote from '@electron/remote';
 import type { AxiosPromise, AxiosResponse } from 'axios';
-import type { AuthState } from '../types';
-import * as apiRequests from './api/request';
-import * as auth from './auth';
-import { getNewOAuthAppURL, getNewTokenURL } from './auth';
+import type { AuthState } from '../../types';
+import * as apiRequests from '../api/request';
+import * as auth from './utils';
+import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 
 const browserWindow = new remote.BrowserWindow();
 

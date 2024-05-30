@@ -1,10 +1,10 @@
 import {
   type AuthState,
-  type EnterpriseAccount,
   type GitifyUser,
   type SettingsState,
   Theme,
 } from '../types';
+import type { EnterpriseAccount } from '../utils/auth/types';
 
 export const mockEnterpriseAccounts: EnterpriseAccount[] = [
   {
