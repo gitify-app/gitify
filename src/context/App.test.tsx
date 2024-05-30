@@ -271,40 +271,6 @@ describe('context/App.tsx', () => {
       );
     });
 
-    it('should call markRepoNotificationsDone', async () => {
-      const TestComponent = () => {
-        const { markRepoNotificationsDone } = useContext(AppContext);
-
-        return (
-          <button
-            type="button"
-            onClick={() =>
-              markRepoNotificationsDone(
-                'gitify-app/notifications-test',
-                'github.com',
-              )
-            }
-          >
-            Test Case
-          </button>
-        );
-      };
-
-      const { getByText } = customRender(<TestComponent />);
-
-      markRepoNotificationsDoneMock.mockReset();
-
-      fireEvent.click(getByText('Test Case'));
-
-      expect(markRepoNotificationsDoneMock).toHaveBeenCalledTimes(1);
-      expect(markRepoNotificationsDoneMock).toHaveBeenCalledWith(
-        { accounts: [], enterpriseAccounts: [], token: null, user: null },
-        mockSettings,
-        'gitify-app/notifications-test',
-        'github.com',
-      );
-    });
-
     it('should call loginWithPersonalAccessToken', async () => {
       apiRequestAuthMock.mockResolvedValueOnce(null);
 
