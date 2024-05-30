@@ -79,7 +79,7 @@ interface AppContextState {
 export const AppContext = createContext<Partial<AppContextState>>({});
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-  const [accounts, setAccounts] = useState<AuthState>(defaultAuth);
+  const [auth, setAuth] = useState<AuthState>(defaultAuth);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
   const {
     fetchNotifications,
@@ -104,17 +104,17 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for certain account or setting changes.
   useEffect(() => {
-    fetchNotifications(accounts, settings);
+    fetchNotifications(auth, settings);
   }, [
     settings.participating,
     settings.showBots,
     settings.detailedNotifications,
-    accounts.token,
-    accounts.enterpriseAccounts.length,
+    auth.token,
+    auth.enterpriseAccounts.length,
   ]);
 
   useInterval(() => {
-    fetchNotifications(accounts, settings);
+    fetchNotifications(auth, settings);
   }, Constants.FETCH_INTERVAL);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We need to update tray title when settings or notifications changes.
@@ -136,34 +136,34 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
       const newSettings = { ...settings, [name]: value };
       setSettings(newSettings);
-      saveState({ auth: accounts, settings: newSettings });
+      saveState({ auth, settings: newSettings });
     },
-    [accounts, settings],
+    [auth, settings],
   );
 
   const isLoggedIn = useMemo(() => {
-    return !!accounts.token || accounts.enterpriseAccounts.length > 0;
-  }, [accounts]);
+    return !!auth.token || auth.enterpriseAccounts.length > 0;
+  }, [auth]);
 
   const login = useCallback(async () => {
     const { authCode } = await authGitHub();
     const { token } = await getToken(authCode);
     const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
     const user = await getUserData(token, hostname);
-    const updatedAccounts = addAccount(accounts, token, hostname, user);
-    setAccounts(updatedAccounts);
-    saveState({ auth: updatedAccounts, settings });
-  }, [accounts, settings]);
+    const updatedAuth = addAccount(auth, token, hostname, user);
+    setAuth(updatedAuth);
+    saveState({ auth: updatedAuth, settings });
+  }, [auth, settings]);
 
   const loginEnterprise = useCallback(
     async (data: AuthOptions) => {
       const { authOptions, authCode } = await authGitHub(data);
       const { token, hostname } = await getToken(authCode, authOptions);
-      const updatedAccounts = addAccount(accounts, token, hostname);
-      setAccounts(updatedAccounts);
-      saveState({ auth: updatedAccounts, settings });
+      const updatedAuth = addAccount(auth, token, hostname);
+      setAuth(updatedAuth);
+      saveState({ auth: updatedAuth, settings });
     },
-    [accounts, settings],
+    [auth, settings],
   );
 
   const validateToken = useCallback(
@@ -171,15 +171,15 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       await headNotifications(hostname, token);
 
       const user = await getUserData(token, hostname);
-      const updatedAccounts = addAccount(accounts, token, hostname, user);
-      setAccounts(updatedAccounts);
+      const updatedAccounts = addAccount(auth, token, hostname, user);
+      setAuth(updatedAccounts);
       saveState({ auth: updatedAccounts, settings });
     },
-    [accounts, settings],
+    [auth, settings],
   );
 
   const logout = useCallback(() => {
-    setAccounts(defaultAuth);
+    setAuth(defaultAuth);
     clearState();
   }, []);
 
@@ -187,7 +187,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const existing = loadState();
 
     if (existing.auth) {
-      setAccounts({ ...defaultAuth, ...existing.auth });
+      setAuth({ ...defaultAuth, ...existing.auth });
     }
 
     if (existing.settings) {
@@ -197,44 +197,44 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const fetchNotificationsWithAccounts = useCallback(
-    async () => await fetchNotifications(accounts, settings),
-    [accounts, settings, notifications],
+    async () => await fetchNotifications(auth, settings),
+    [auth, settings, notifications],
   );
 
   const markNotificationReadWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await markNotificationRead(accounts, settings, id, hostname),
-    [accounts, notifications],
+      await markNotificationRead(auth, settings, id, hostname),
+    [auth, notifications],
   );
 
   const markNotificationDoneWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await markNotificationDone(accounts, settings, id, hostname),
-    [accounts, notifications],
+      await markNotificationDone(auth, settings, id, hostname),
+    [auth, notifications],
   );
 
   const unsubscribeNotificationWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await unsubscribeNotification(accounts, settings, id, hostname),
-    [accounts, notifications],
+      await unsubscribeNotification(auth, settings, id, hostname),
+    [auth, notifications],
   );
 
   const markRepoNotificationsWithAccounts = useCallback(
     async (repoSlug: string, hostname: string) =>
-      await markRepoNotifications(accounts, settings, repoSlug, hostname),
-    [accounts, notifications],
+      await markRepoNotifications(auth, settings, repoSlug, hostname),
+    [auth, notifications],
   );
 
   const markRepoNotificationsDoneWithAccounts = useCallback(
     async (repoSlug: string, hostname: string) =>
-      await markRepoNotificationsDone(accounts, settings, repoSlug, hostname),
-    [accounts, notifications],
+      await markRepoNotificationsDone(auth, settings, repoSlug, hostname),
+    [auth, notifications],
   );
 
   return (
     <AppContext.Provider
       value={{
-        auth: accounts,
+        auth,
         isLoggedIn,
         login,
         loginEnterprise,
