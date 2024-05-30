@@ -34,7 +34,7 @@ import { getNotificationCount } from '../utils/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setTheme } from '../utils/theme';
 
-const defaultAuthState: AuthState = {
+const defaultAuth: AuthState = {
   accounts: [],
   token: null,
   enterpriseAccounts: [],
@@ -88,7 +88,7 @@ interface AppContextState {
 export const AppContext = createContext<Partial<AppContextState>>({});
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-  const [auth, setAuth] = useState<AuthState>(defaultAuthState);
+  const [auth, setAuth] = useState<AuthState>(defaultAuth);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
   const {
     fetchNotifications,
@@ -158,24 +158,18 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const { token } = await getToken(authCode);
     const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
     const user = await getUserData(token, hostname);
-    const updatedAccounts = addAccount(
-      auth,
-      'GitHub App',
-      token,
-      hostname,
-      user,
-    );
-    setAuth(updatedAccounts);
-    saveState({ auth: updatedAccounts, settings });
+    const updatedAuth = addAccount(auth, 'GitHub App', token, hostname, user);
+    setAuth(updatedAuth);
+    saveState({ auth: updatedAuth, settings });
   }, [auth, settings]);
 
   const loginWithOAuthApp = useCallback(
     async (data: AuthOptionsOAuthApp) => {
       const { authOptions, authCode } = await authGitHub(data);
       const { token, hostname } = await getToken(authCode, authOptions);
-      const updatedAccounts = addAccount(auth, 'OAuth App', token, hostname);
-      setAuth(updatedAccounts);
-      saveState({ auth: updatedAccounts, settings });
+      const updatedAuth = addAccount(auth, 'OAuth App', token, hostname);
+      setAuth(updatedAuth);
+      saveState({ auth: updatedAuth, settings });
     },
     [auth, settings],
   );
@@ -185,21 +179,21 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       await headNotifications(hostname, token);
 
       const user = await getUserData(token, hostname);
-      const updatedAccounts = addAccount(
+      const updatedAuth = addAccount(
         auth,
         'Personal Access Token',
         token,
         hostname,
         user,
       );
-      setAuth(updatedAccounts);
-      saveState({ auth: updatedAccounts, settings });
+      setAuth(updatedAuth);
+      saveState({ auth: updatedAuth, settings });
     },
     [auth, settings],
   );
 
   const logout = useCallback(() => {
-    setAuth(defaultAuthState);
+    setAuth(defaultAuth);
     clearState();
   }, []);
 
@@ -210,7 +204,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const existing = loadState();
 
     if (existing.auth) {
-      setAuth({ ...defaultAuthState, ...existing.auth });
+      setAuth({ ...defaultAuth, ...existing.auth });
     }
 
     if (existing.settings) {
