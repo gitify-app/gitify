@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
 import { AppContext } from '../context/App';
-import type { AuthState as mockAuthState } from '../types';
+import type { AuthState } from '../types';
 import { LoginWithOAuthApp, validate } from './LoginWithOAuthApp';
 
 const mockNavigate = jest.fn();
@@ -14,7 +14,7 @@ jest.mock('react-router-dom', () => ({
 describe('routes/LoginWithOAuthApp.tsx', () => {
   const openExternalMock = jest.spyOn(shell, 'openExternal');
 
-  const mockAuth: mockAuthState = {
+  const mockAuth: AuthState = {
     accounts: [],
   };
 
