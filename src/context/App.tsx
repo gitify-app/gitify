@@ -10,16 +10,23 @@ import { useInterval } from '../hooks/useInterval';
 import { useNotifications } from '../hooks/useNotifications';
 import {
   type AccountNotifications,
-  type AuthOptions,
   type AuthState,
-  type AuthTokenOptions,
   type GitifyError,
   type SettingsState,
   type Status,
   Theme,
 } from '../types';
 import { headNotifications } from '../utils/api/client';
-import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
+import type {
+  LoginOAuthAppOptions,
+  LoginPersonalAccessTokenOptions,
+} from '../utils/auth/types';
+import {
+  addAccount,
+  authGitHub,
+  getToken,
+  getUserData,
+} from '../utils/auth/utils';
 import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
 import Constants from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
@@ -49,9 +56,9 @@ export const defaultSettings: SettingsState = {
 interface AppContextState {
   auth: AuthState;
   isLoggedIn: boolean;
-  login: () => void;
-  loginEnterprise: (data: AuthOptions) => void;
-  validateToken: (data: AuthTokenOptions) => void;
+  loginWithGitHubApp: () => void;
+  loginWithOAuthApp: (data: LoginOAuthAppOptions) => void;
+  loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => void;
   logout: () => void;
 
   notifications: AccountNotifications[];
@@ -145,7 +152,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     return !!auth.token || auth.enterpriseAccounts.length > 0;
   }, [auth]);
 
-  const login = useCallback(async () => {
+  const loginWithGitHubApp = useCallback(async () => {
     const { authCode } = await authGitHub();
     const { token } = await getToken(authCode);
     const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
@@ -155,8 +162,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     saveState({ auth: updatedAuth, settings });
   }, [auth, settings]);
 
-  const loginEnterprise = useCallback(
-    async (data: AuthOptions) => {
+  const loginWithOAuthApp = useCallback(
+    async (data: LoginOAuthAppOptions) => {
       const { authOptions, authCode } = await authGitHub(data);
       const { token, hostname } = await getToken(authCode, authOptions);
       const updatedAuth = addAccount(auth, token, hostname);
@@ -166,14 +173,14 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [auth, settings],
   );
 
-  const validateToken = useCallback(
-    async ({ token, hostname }: AuthTokenOptions) => {
+  const loginWithPersonalAccessToken = useCallback(
+    async ({ token, hostname }: LoginPersonalAccessTokenOptions) => {
       await headNotifications(hostname, token);
 
       const user = await getUserData(token, hostname);
-      const updatedAccounts = addAccount(auth, token, hostname, user);
-      setAuth(updatedAccounts);
-      saveState({ auth: updatedAccounts, settings });
+      const updatedAuth = addAccount(auth, token, hostname, user);
+      setAuth(updatedAuth);
+      saveState({ auth: updatedAuth, settings });
     },
     [auth, settings],
   );
@@ -236,9 +243,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       value={{
         auth,
         isLoggedIn,
-        login,
-        loginEnterprise,
-        validateToken,
+        loginWithGitHubApp,
+        loginWithOAuthApp,
+        loginWithPersonalAccessToken,
         logout,
 
         notifications,

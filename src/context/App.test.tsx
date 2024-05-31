@@ -35,8 +35,7 @@ describe('context/App.tsx', () => {
     jest.clearAllMocks();
   });
 
-  describe('api methods', () => {
-    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+  describe('notification methods', () => {
     const getNotificationCountMock = jest.spyOn(
       notifications,
       'getNotificationCount',
@@ -269,18 +268,31 @@ describe('context/App.tsx', () => {
         'github.com',
       );
     });
+  });
+  describe('authentication methods', () => {
+    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+    const fetchNotificationsMock = jest.fn();
 
-    it('should call validateToken', async () => {
+    beforeEach(() => {
+      (useNotifications as jest.Mock).mockReturnValue({
+        fetchNotifications: fetchNotificationsMock,
+      });
+    });
+
+    it('should call loginWithPersonalAccessToken', async () => {
       apiRequestAuthMock.mockResolvedValueOnce(null);
 
       const TestComponent = () => {
-        const { validateToken } = useContext(AppContext);
+        const { loginWithPersonalAccessToken } = useContext(AppContext);
 
         return (
           <button
             type="button"
             onClick={() =>
-              validateToken({ hostname: 'github.com', token: '123-456' })
+              loginWithPersonalAccessToken({
+                hostname: 'github.com',
+                token: '123-456',
+              })
             }
           >
             Test Case
@@ -332,90 +344,92 @@ describe('context/App.tsx', () => {
     expect(clearStateMock).toHaveBeenCalledTimes(1);
   });
 
-  it('should call updateSetting', async () => {
-    const saveStateMock = jest
-      .spyOn(storage, 'saveState')
-      .mockImplementation(jest.fn());
+  describe('settings methods', () => {
+    it('should call updateSetting', async () => {
+      const saveStateMock = jest
+        .spyOn(storage, 'saveState')
+        .mockImplementation(jest.fn());
 
-    const TestComponent = () => {
-      const { updateSetting } = useContext(AppContext);
+      const TestComponent = () => {
+        const { updateSetting } = useContext(AppContext);
 
-      return (
-        <button
-          type="button"
-          onClick={() => updateSetting('participating', true)}
-        >
-          Test Case
-        </button>
-      );
-    };
+        return (
+          <button
+            type="button"
+            onClick={() => updateSetting('participating', true)}
+          >
+            Test Case
+          </button>
+        );
+      };
 
-    const { getByText } = customRender(<TestComponent />);
+      const { getByText } = customRender(<TestComponent />);
 
-    act(() => {
-      fireEvent.click(getByText('Test Case'));
+      act(() => {
+        fireEvent.click(getByText('Test Case'));
+      });
+
+      expect(saveStateMock).toHaveBeenCalledWith({
+        auth: { enterpriseAccounts: [], token: null, user: null },
+        settings: {
+          participating: true,
+          playSound: true,
+          showNotifications: true,
+          showBots: true,
+          showNotificationsCountInTray: false,
+          openAtStartup: false,
+          theme: 'SYSTEM',
+          detailedNotifications: true,
+          markAsDoneOnOpen: false,
+          showAccountHostname: false,
+          delayNotificationState: false,
+        },
+      });
     });
 
-    expect(saveStateMock).toHaveBeenCalledWith({
-      auth: { enterpriseAccounts: [], token: null, user: null },
-      settings: {
-        participating: true,
-        playSound: true,
-        showNotifications: true,
-        showBots: true,
-        showNotificationsCountInTray: false,
-        openAtStartup: false,
-        theme: 'SYSTEM',
-        detailedNotifications: true,
-        markAsDoneOnOpen: false,
-        showAccountHostname: false,
-        delayNotificationState: false,
-      },
-    });
-  });
+    it('should call updateSetting and set auto launch(openAtStartup)', async () => {
+      const setAutoLaunchMock = jest.spyOn(comms, 'setAutoLaunch');
+      const saveStateMock = jest
+        .spyOn(storage, 'saveState')
+        .mockImplementation(jest.fn());
 
-  it('should call updateSetting and set auto launch(openAtStartup)', async () => {
-    const setAutoLaunchMock = jest.spyOn(comms, 'setAutoLaunch');
-    const saveStateMock = jest
-      .spyOn(storage, 'saveState')
-      .mockImplementation(jest.fn());
+      const TestComponent = () => {
+        const { updateSetting } = useContext(AppContext);
 
-    const TestComponent = () => {
-      const { updateSetting } = useContext(AppContext);
+        return (
+          <button
+            type="button"
+            onClick={() => updateSetting('openAtStartup', true)}
+          >
+            Test Case
+          </button>
+        );
+      };
 
-      return (
-        <button
-          type="button"
-          onClick={() => updateSetting('openAtStartup', true)}
-        >
-          Test Case
-        </button>
-      );
-    };
+      const { getByText } = customRender(<TestComponent />);
 
-    const { getByText } = customRender(<TestComponent />);
+      act(() => {
+        fireEvent.click(getByText('Test Case'));
+      });
 
-    act(() => {
-      fireEvent.click(getByText('Test Case'));
-    });
+      expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
 
-    expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
-
-    expect(saveStateMock).toHaveBeenCalledWith({
-      auth: { enterpriseAccounts: [], token: null, user: null },
-      settings: {
-        participating: false,
-        playSound: true,
-        showNotifications: true,
-        showBots: true,
-        showNotificationsCountInTray: false,
-        openAtStartup: true,
-        theme: 'SYSTEM',
-        detailedNotifications: true,
-        markAsDoneOnOpen: false,
-        showAccountHostname: false,
-        delayNotificationState: false,
-      },
+      expect(saveStateMock).toHaveBeenCalledWith({
+        auth: { enterpriseAccounts: [], token: null, user: null },
+        settings: {
+          participating: false,
+          playSound: true,
+          showNotifications: true,
+          showBots: true,
+          showNotificationsCountInTray: false,
+          openAtStartup: true,
+          theme: 'SYSTEM',
+          detailedNotifications: true,
+          markAsDoneOnOpen: false,
+          showAccountHostname: false,
+          delayNotificationState: false,
+        },
+      });
     });
   });
 });
