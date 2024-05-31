@@ -322,44 +322,15 @@ describe('context/App.tsx', () => {
       );
     });
   });
-});
 
-it('should call logout', async () => {
-  const clearStateMock = jest.spyOn(storage, 'clearState');
-
-  const TestComponent = () => {
-    const { logout } = useContext(AppContext);
-
-    return (
-      <button type="button" onClick={logout}>
-        Test Case
-      </button>
-    );
-  };
-
-  const { getByText } = customRender(<TestComponent />);
-
-  act(() => {
-    fireEvent.click(getByText('Test Case'));
-  });
-
-  expect(clearStateMock).toHaveBeenCalledTimes(1);
-});
-
-describe('settings methods', () => {
-  it('should call updateSetting', async () => {
-    const saveStateMock = jest
-      .spyOn(storage, 'saveState')
-      .mockImplementation(jest.fn());
+  it('should call logout', async () => {
+    const clearStateMock = jest.spyOn(storage, 'clearState');
 
     const TestComponent = () => {
-      const { updateSetting } = useContext(AppContext);
+      const { logout } = useContext(AppContext);
 
       return (
-        <button
-          type="button"
-          onClick={() => updateSetting('participating', true)}
-        >
+        <button type="button" onClick={logout}>
           Test Case
         </button>
       );
@@ -371,66 +342,95 @@ describe('settings methods', () => {
       fireEvent.click(getByText('Test Case'));
     });
 
-    expect(saveStateMock).toHaveBeenCalledWith({
-      auth: { accounts: [], enterpriseAccounts: [], token: null, user: null },
-      settings: {
-        participating: true,
-        playSound: true,
-        showNotifications: true,
-        showBots: true,
-        showNotificationsCountInTray: false,
-        openAtStartup: false,
-        theme: 'SYSTEM',
-        detailedNotifications: true,
-        markAsDoneOnOpen: false,
-        showAccountHostname: false,
-        delayNotificationState: false,
-      },
-    });
+    expect(clearStateMock).toHaveBeenCalledTimes(1);
   });
 
-  it('should call updateSetting and set auto launch(openAtStartup)', async () => {
-    const setAutoLaunchMock = jest.spyOn(comms, 'setAutoLaunch');
-    const saveStateMock = jest
-      .spyOn(storage, 'saveState')
-      .mockImplementation(jest.fn());
+  describe('settings methods', () => {
+    it('should call updateSetting', async () => {
+      const saveStateMock = jest
+        .spyOn(storage, 'saveState')
+        .mockImplementation(jest.fn());
 
-    const TestComponent = () => {
-      const { updateSetting } = useContext(AppContext);
+      const TestComponent = () => {
+        const { updateSetting } = useContext(AppContext);
 
-      return (
-        <button
-          type="button"
-          onClick={() => updateSetting('openAtStartup', true)}
-        >
-          Test Case
-        </button>
-      );
-    };
+        return (
+          <button
+            type="button"
+            onClick={() => updateSetting('participating', true)}
+          >
+            Test Case
+          </button>
+        );
+      };
 
-    const { getByText } = customRender(<TestComponent />);
+      const { getByText } = customRender(<TestComponent />);
 
-    act(() => {
-      fireEvent.click(getByText('Test Case'));
+      act(() => {
+        fireEvent.click(getByText('Test Case'));
+      });
+
+      expect(saveStateMock).toHaveBeenCalledWith({
+        auth: { accounts: [], enterpriseAccounts: [], token: null, user: null },
+        settings: {
+          participating: true,
+          playSound: true,
+          showNotifications: true,
+          showBots: true,
+          showNotificationsCountInTray: false,
+          openAtStartup: false,
+          theme: 'SYSTEM',
+          detailedNotifications: true,
+          markAsDoneOnOpen: false,
+          showAccountHostname: false,
+          delayNotificationState: false,
+        },
+      });
     });
 
-    expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
+    it('should call updateSetting and set auto launch(openAtStartup)', async () => {
+      const setAutoLaunchMock = jest.spyOn(comms, 'setAutoLaunch');
+      const saveStateMock = jest
+        .spyOn(storage, 'saveState')
+        .mockImplementation(jest.fn());
 
-    expect(saveStateMock).toHaveBeenCalledWith({
-      auth: { accounts: [], enterpriseAccounts: [], token: null, user: null },
-      settings: {
-        participating: false,
-        playSound: true,
-        showNotifications: true,
-        showBots: true,
-        showNotificationsCountInTray: false,
-        openAtStartup: true,
-        theme: 'SYSTEM',
-        detailedNotifications: true,
-        markAsDoneOnOpen: false,
-        showAccountHostname: false,
-        delayNotificationState: false,
-      },
+      const TestComponent = () => {
+        const { updateSetting } = useContext(AppContext);
+
+        return (
+          <button
+            type="button"
+            onClick={() => updateSetting('openAtStartup', true)}
+          >
+            Test Case
+          </button>
+        );
+      };
+
+      const { getByText } = customRender(<TestComponent />);
+
+      act(() => {
+        fireEvent.click(getByText('Test Case'));
+      });
+
+      expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
+
+      expect(saveStateMock).toHaveBeenCalledWith({
+        auth: { accounts: [], enterpriseAccounts: [], token: null, user: null },
+        settings: {
+          participating: false,
+          playSound: true,
+          showNotifications: true,
+          showBots: true,
+          showNotificationsCountInTray: false,
+          openAtStartup: true,
+          theme: 'SYSTEM',
+          detailedNotifications: true,
+          markAsDoneOnOpen: false,
+          showAccountHostname: false,
+          delayNotificationState: false,
+        },
+      });
     });
   });
 });
