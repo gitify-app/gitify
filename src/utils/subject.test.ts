@@ -18,6 +18,7 @@ import {
   getGitifySubjectDetails,
   getLatestReviewForReviewers,
   getWorkflowRunAttributes,
+  parseLinkedIssuesFromPrBody,
 } from './subject';
 
 const mockAuthor = partialMockUser('some-author');
@@ -624,6 +625,7 @@ describe('utils/subject.ts', () => {
             type: mockCommenter.type,
           },
           reviews: null,
+          linkedIssues: [],
         });
       });
 
@@ -659,6 +661,7 @@ describe('utils/subject.ts', () => {
             type: mockCommenter.type,
           },
           reviews: null,
+          linkedIssues: [],
         });
       });
 
@@ -694,6 +697,7 @@ describe('utils/subject.ts', () => {
             type: mockCommenter.type,
           },
           reviews: null,
+          linkedIssues: [],
         });
       });
 
@@ -729,6 +733,7 @@ describe('utils/subject.ts', () => {
             type: mockCommenter.type,
           },
           reviews: null,
+          linkedIssues: [],
         });
       });
 
@@ -763,6 +768,7 @@ describe('utils/subject.ts', () => {
             type: mockAuthor.type,
           },
           reviews: null,
+          linkedIssues: [],
         });
       });
 
@@ -796,6 +802,7 @@ describe('utils/subject.ts', () => {
             type: mockAuthor.type,
           },
           reviews: null,
+          linkedIssues: [],
         });
       });
 
@@ -863,6 +870,19 @@ describe('utils/subject.ts', () => {
           );
 
           expect(result).toBeNull();
+        });
+      });
+
+      describe('Pull Request Reviews - Extract Linked Issues', () => {
+        it('returns empty if no pr body', () => {
+          const result = parseLinkedIssuesFromPrBody(null);
+          expect(result).toEqual([]);
+        });
+
+        it('returns linked issues', () => {
+          const mockPrBody = 'This PR is linked to #1, #2, and #3';
+          const result = parseLinkedIssuesFromPrBody(mockPrBody);
+          expect(result).toEqual(['#1', '#2', '#3']);
         });
       });
     });

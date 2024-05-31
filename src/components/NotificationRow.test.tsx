@@ -117,6 +117,42 @@ describe('components/NotificationRow.tsx', () => {
     });
   });
 
+  describe('linked issues/prs', () => {
+    it('should render when linked to one issue/pr', async () => {
+      jest
+        .spyOn(global.Date, 'now')
+        .mockImplementation(() => new Date('2024').valueOf());
+
+      const mockNotification = mockSingleNotification;
+      mockNotification.subject.linkedIssues = ['#1'];
+
+      const props = {
+        notification: mockNotification,
+        hostname: 'github.com',
+      };
+
+      const tree = render(<NotificationRow {...props} />);
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('should render when linked to multiple issues/prs', async () => {
+      jest
+        .spyOn(global.Date, 'now')
+        .mockImplementation(() => new Date('2024').valueOf());
+
+      const mockNotification = mockSingleNotification;
+      mockNotification.subject.linkedIssues = ['#1', '#2'];
+
+      const props = {
+        notification: mockNotification,
+        hostname: 'github.com',
+      };
+
+      const tree = render(<NotificationRow {...props} />);
+      expect(tree).toMatchSnapshot();
+    });
+  });
+
   describe('notification interactions', () => {
     it('should open a notification in the browser - click', () => {
       const removeNotificationFromState = jest.fn();

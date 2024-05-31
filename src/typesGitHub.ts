@@ -257,6 +257,7 @@ export interface GitifySubject {
   state?: StateType;
   user?: SubjectUser;
   reviews?: GitifyPullRequestReview[];
+  linkedIssues?: string[];
   comments?: number;
 }
 
