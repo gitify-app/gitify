@@ -47,8 +47,7 @@ export const validate = (values: IValues): IFormErrors => {
 };
 
 export const LoginWithPersonalAccessToken: FC = () => {
-  const { loginWithPersonalAccessToken: validateToken } =
-    useContext(AppContext);
+  const { loginWithPersonalAccessToken } = useContext(AppContext);
   const navigate = useNavigate();
   const [isValidToken, setIsValidToken] = useState<boolean>(true);
 
@@ -124,7 +123,9 @@ export const LoginWithPersonalAccessToken: FC = () => {
   const login = useCallback(async (data: IValues) => {
     setIsValidToken(true);
     try {
-      await validateToken(data as LoginPersonalAccessTokenOptions);
+      await loginWithPersonalAccessToken(
+        data as LoginPersonalAccessTokenOptions,
+      );
       navigate(-1);
     } catch (err) {
       setIsValidToken(false);
