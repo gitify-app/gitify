@@ -19,8 +19,8 @@ import {
 import { headNotifications } from '../utils/api/client';
 import { migrateAuthenticatedAccounts } from '../utils/auth/migration';
 import type {
-  AuthOptionsOAuthApp,
-  AuthOptionsPersonalAccessToken,
+  LoginOAuthAppOptions,
+  LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
 import {
   addAccount,
@@ -34,7 +34,7 @@ import { getNotificationCount } from '../utils/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setTheme } from '../utils/theme';
 
-const defaultAuthState: AuthState = {
+const defaultAuth: AuthState = {
   accounts: [],
   token: null,
   enterpriseAccounts: [],
@@ -59,8 +59,8 @@ interface AppContextState {
   auth: AuthState;
   isLoggedIn: boolean;
   loginWithGitHubApp: () => void;
-  loginWithOAuthApp: (data: AuthOptionsOAuthApp) => void;
-  loginWithPersonalAccessToken: (data: AuthOptionsPersonalAccessToken) => void;
+  loginWithOAuthApp: (data: LoginOAuthAppOptions) => void;
+  loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => void;
   logout: () => void;
 
   notifications: AccountNotifications[];
@@ -88,7 +88,7 @@ interface AppContextState {
 export const AppContext = createContext<Partial<AppContextState>>({});
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-  const [auth, setAuth] = useState<AuthState>(defaultAuthState);
+  const [auth, setAuth] = useState<AuthState>(defaultAuth);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
   const {
     fetchNotifications,
@@ -144,7 +144,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
       const newSettings = { ...settings, [name]: value };
       setSettings(newSettings);
-      saveState(auth, newSettings);
+      saveState({ auth, settings: newSettings });
     },
     [auth, settings],
   );
@@ -158,48 +158,42 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const { token } = await getToken(authCode);
     const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
     const user = await getUserData(token, hostname);
-    const updatedAccounts = addAccount(
-      auth,
-      'GitHub App',
-      token,
-      hostname,
-      user,
-    );
-    setAuth(updatedAccounts);
-    saveState(updatedAccounts, settings);
+    const updatedAuth = addAccount(auth, 'GitHub App', token, hostname, user);
+    setAuth(updatedAuth);
+    saveState({ auth: updatedAuth, settings });
   }, [auth, settings]);
 
   const loginWithOAuthApp = useCallback(
-    async (data: AuthOptionsOAuthApp) => {
+    async (data: LoginOAuthAppOptions) => {
       const { authOptions, authCode } = await authGitHub(data);
       const { token, hostname } = await getToken(authCode, authOptions);
-      const updatedAccounts = addAccount(auth, 'OAuth App', token, hostname);
-      setAuth(updatedAccounts);
-      saveState(updatedAccounts, settings);
+      const updatedAuth = addAccount(auth, 'OAuth App', token, hostname);
+      setAuth(updatedAuth);
+      saveState({ auth: updatedAuth, settings });
     },
     [auth, settings],
   );
 
   const loginWithPersonalAccessToken = useCallback(
-    async ({ token, hostname }: AuthOptionsPersonalAccessToken) => {
+    async ({ token, hostname }: LoginPersonalAccessTokenOptions) => {
       await headNotifications(hostname, token);
 
       const user = await getUserData(token, hostname);
-      const updatedAccounts = addAccount(
+      const updatedAuth = addAccount(
         auth,
         'Personal Access Token',
         token,
         hostname,
         user,
       );
-      setAuth(updatedAccounts);
-      saveState(updatedAccounts, settings);
+      setAuth(updatedAuth);
+      saveState({ auth: updatedAuth, settings });
     },
     [auth, settings],
   );
 
   const logout = useCallback(() => {
-    setAuth(defaultAuthState);
+    setAuth(defaultAuth);
     clearState();
   }, []);
 
@@ -210,7 +204,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const existing = loadState();
 
     if (existing.auth) {
-      setAuth({ ...defaultAuthState, ...existing.auth });
+      setAuth({ ...defaultAuth, ...existing.auth });
     }
 
     if (existing.settings) {

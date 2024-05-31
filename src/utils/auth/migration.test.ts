@@ -1,4 +1,4 @@
-import { mockGitifyUser, mockToken } from '../../__mocks__/mock-state';
+import { mockGitifyUser, mockToken } from '../../__mocks__/state-mocks';
 import type { AuthState } from '../../types';
 import Constants from '../constants';
 import { convertAccounts, hasAccountsToMigrate } from './migration';

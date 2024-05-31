@@ -1,4 +1,4 @@
-import { mockSettings } from '../__mocks__/mock-state';
+import { mockSettings } from '../__mocks__/state-mocks';
 import Constants from './constants';
 import { clearState, loadState, saveState } from './storage';
 
@@ -41,13 +41,14 @@ describe('utils/storage.ts', () => {
       .mockReturnValueOnce(JSON.stringify({}));
     const result = loadState();
     expect(result.auth).toBeUndefined();
+    expect(result.auth).toBeUndefined();
     expect(result.settings).toBeUndefined();
   });
 
   it('should save the state to localstorage', () => {
     jest.spyOn(localStorage.__proto__, 'setItem');
-    saveState(
-      {
+    saveState({
+      auth: {
         accounts: [
           {
             hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
@@ -58,8 +59,8 @@ describe('utils/storage.ts', () => {
           },
         ],
       },
-      mockSettings,
-    );
+      settings: mockSettings,
+    });
     expect(localStorage.setItem).toHaveBeenCalledTimes(1);
   });
 

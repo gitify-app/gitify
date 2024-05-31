@@ -6,8 +6,8 @@ import {
   mockAuth,
   mockGitHubCloudAccount,
   mockSettings,
-} from '../__mocks__/mock-state';
-import { mockedNotificationUser } from '../__mocks__/mockedData';
+} from '../__mocks__/state-mocks';
+import { mockNotificationUser } from '../utils/api/__mocks__/response-mocks';
 import { Errors } from '../utils/constants';
 import { useNotifications } from './useNotifications';
 
@@ -236,24 +236,27 @@ describe('hooks/useNotifications.ts', () => {
           .reply(200, {
             state: 'closed',
             merged: true,
-            user: mockedNotificationUser,
+            user: mockNotificationUser,
           });
         nock('https://api.github.com')
           .get('/repos/gitify-app/notifications-test/issues/3/comments')
           .reply(200, {
-            user: mockedNotificationUser,
+            user: mockNotificationUser,
           });
         nock('https://api.github.com')
           .get('/repos/gitify-app/notifications-test/pulls/4')
           .reply(200, {
             state: 'closed',
             merged: false,
-            user: mockedNotificationUser,
+            user: mockNotificationUser,
           });
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/4/reviews')
+          .reply(200, {});
         nock('https://api.github.com')
           .get('/repos/gitify-app/notifications-test/issues/4/comments')
           .reply(200, {
-            user: mockedNotificationUser,
+            user: mockNotificationUser,
           });
 
         const { result } = renderHook(() => useNotifications());

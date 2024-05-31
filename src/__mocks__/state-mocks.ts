@@ -5,7 +5,15 @@ import {
   type SettingsState,
   Theme,
 } from '../types';
+import type { EnterpriseAccount } from '../utils/auth/types';
 import Constants from '../utils/constants';
+
+export const mockEnterpriseAccounts: EnterpriseAccount[] = [
+  {
+    hostname: 'github.gitify.io',
+    token: '1234568790',
+  },
+];
 
 export const mockGitifyUser: GitifyUser = {
   login: 'octocat',

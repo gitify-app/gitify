@@ -1,5 +1,5 @@
-const { ipcRenderer } = require('electron');
 import { KeyIcon, PersonIcon } from '@primer/octicons-react';
+import { ipcRenderer } from 'electron';
 import { type FC, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Logo } from '../components/Logo';

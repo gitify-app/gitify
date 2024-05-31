@@ -1,13 +1,13 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
+import { ipcRenderer, shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
-const { ipcRenderer } = require('electron');
-import { shell } from 'electron';
 import {
   mockAuth,
   mockOAuthAccount,
   mockPersonalAccessTokenAccount,
   mockSettings,
-} from '../__mocks__/mock-state';
+} from '../__mocks__/state-mocks';
+import { mockPlatform } from '../__mocks__/utils';
 import { AppContext } from '../context/App';
 import { SettingsRoute } from './Settings';
 
@@ -18,10 +18,24 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/Settings.tsx', () => {
+  let originalPlatform: NodeJS.Platform;
   const updateSetting = jest.fn();
+
+  beforeAll(() => {
+    // Save the original platform value
+    originalPlatform = process.platform;
+    mockPlatform('darwin');
+  });
 
   beforeEach(() => {
     jest.clearAllMocks();
+  });
+
+  afterAll(() => {
+    // Restore the original platform value
+    Object.defineProperty(process, 'platform', {
+      value: originalPlatform,
+    });
   });
 
   describe('General', () => {
@@ -111,6 +125,31 @@ describe('routes/Settings.tsx', () => {
         'detailedNotifications',
         false,
       );
+    });
+
+    it('should toggle account hostname checkbox', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              settings: mockSettings,
+              auth: mockAuth,
+              updateSetting,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      await screen.findByLabelText('Show account hostname');
+
+      fireEvent.click(screen.getByLabelText('Show account hostname'));
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith('showAccountHostname', true);
     });
   });
 

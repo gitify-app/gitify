@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
-import type { AuthOptionsPersonalAccessToken } from '../utils/auth/types';
+import type { LoginPersonalAccessTokenOptions } from '../utils/auth/types';
 import {
   getNewTokenURL,
   isValidHostname,
@@ -124,7 +124,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
     setIsValidToken(true);
     try {
       await loginWithPersonalAccessToken(
-        data as AuthOptionsPersonalAccessToken,
+        data as LoginPersonalAccessTokenOptions,
       );
       navigate(-1);
     } catch (err) {

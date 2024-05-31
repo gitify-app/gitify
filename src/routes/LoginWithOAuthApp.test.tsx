@@ -1,7 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
-const { ipcRenderer } = require('electron');
 import { shell } from 'electron';
+import { MemoryRouter } from 'react-router-dom';
 import { AppContext } from '../context/App';
 import type { AuthState as mockAuthState } from '../types';
 import { LoginWithOAuthApp, validate } from './LoginWithOAuthApp';
@@ -22,8 +21,6 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
   beforeEach(() => {
     openExternalMock.mockReset();
     mockNavigate.mockReset();
-
-    jest.spyOn(ipcRenderer, 'send');
   });
 
   it('renders correctly', () => {

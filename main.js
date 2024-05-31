@@ -76,8 +76,6 @@ mb.on('ready', () => {
     }
   });
 
-  ipc.handle('get-platform', () => process.platform);
-
   ipc.handle('get-app-version', () => app.getVersion());
 
   ipc.on('reopen-window', () => mb.showWindow());

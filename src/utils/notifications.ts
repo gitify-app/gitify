@@ -4,6 +4,7 @@ import { Notification } from '../typesGitHub';
 import { openInBrowser } from '../utils/helpers';
 import { listNotificationsForAuthenticatedUser } from './api/client';
 import { updateTrayIcon } from './comms';
+import { isWindows } from './platform';
 import { getGitifySubjectDetails } from './subject';
 
 export const setTrayIconColor = (notifications: AccountNotifications[]) => {
@@ -74,7 +75,7 @@ export const raiseNativeNotification = (
 
   if (notifications.length === 1) {
     const notification = notifications[0];
-    title = `${process.platform !== 'win32' ? 'Gitify - ' : ''}${
+    title = `${isWindows() ? '' : 'Gitify - '}${
       notification.repository.full_name
     }`;
     body = notification.subject.title;

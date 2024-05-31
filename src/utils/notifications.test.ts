@@ -1,14 +1,14 @@
 import { ipcRenderer } from 'electron';
 
-import { mockAuth, mockSettings } from '../__mocks__/mock-state';
 import {
-  mockedAccountNotifications,
-  mockedGitHubNotifications,
-  mockedSingleAccountNotifications,
-} from '../__mocks__/mockedData';
+  mockAccountNotifications,
+  mockSingleAccountNotifications,
+} from '../__mocks__/notifications-mocks';
 import { partialMockNotification } from '../__mocks__/partial-mocks';
+import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { defaultSettings } from '../context/App';
 import type { SettingsState } from '../types';
+import { mockGitHubNotifications } from './api/__mocks__/response-mocks';
 import * as helpers from './helpers';
 import * as notificationsHelpers from './notifications';
 import { filterNotifications } from './notifications';
@@ -30,7 +30,7 @@ describe('utils/notifications.ts', () => {
 
     notificationsHelpers.triggerNativeNotifications(
       [],
-      mockedAccountNotifications,
+      mockAccountNotifications,
       settings,
       mockAuth,
     );
@@ -55,7 +55,7 @@ describe('utils/notifications.ts', () => {
 
     notificationsHelpers.triggerNativeNotifications(
       [],
-      mockedAccountNotifications,
+      mockAccountNotifications,
       settings,
       mockAuth,
     );
@@ -75,8 +75,8 @@ describe('utils/notifications.ts', () => {
     jest.spyOn(notificationsHelpers, 'raiseSoundNotification');
 
     notificationsHelpers.triggerNativeNotifications(
-      mockedSingleAccountNotifications,
-      mockedSingleAccountNotifications,
+      mockSingleAccountNotifications,
+      mockSingleAccountNotifications,
       settings,
       mockAuth,
     );
@@ -96,6 +96,7 @@ describe('utils/notifications.ts', () => {
     jest.spyOn(notificationsHelpers, 'raiseSoundNotification');
 
     notificationsHelpers.triggerNativeNotifications([], [], settings, mockAuth);
+    notificationsHelpers.triggerNativeNotifications([], [], settings, mockAuth);
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
     expect(notificationsHelpers.raiseSoundNotification).not.toHaveBeenCalled();
@@ -106,21 +107,21 @@ describe('utils/notifications.ts', () => {
 
     const nativeNotification: Notification =
       notificationsHelpers.raiseNativeNotification(
-        [mockedGitHubNotifications[0]],
+        [mockGitHubNotifications[0]],
         mockAuth,
       );
     nativeNotification.onclick(null);
 
     expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
     expect(helpers.openInBrowser).toHaveBeenLastCalledWith(
-      mockedGitHubNotifications[0],
+      mockGitHubNotifications[0],
     );
     expect(ipcRenderer.send).toHaveBeenCalledWith('hide-window');
   });
 
   it('should click on a native notification (with more than 1 notification)', () => {
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
-      mockedGitHubNotifications,
+      mockGitHubNotifications,
       mockAuth,
     );
     nativeNotification.onclick(null);

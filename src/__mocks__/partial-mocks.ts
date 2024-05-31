@@ -1,6 +1,6 @@
 import type { Notification, Subject, User } from '../typesGitHub';
 import Constants from '../utils/constants';
-import { mockToken } from './mock-state';
+import { mockToken } from './state-mocks';
 
 export function partialMockNotification(
   subject: Partial<Subject>,

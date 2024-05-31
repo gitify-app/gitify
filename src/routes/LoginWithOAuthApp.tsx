@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
-import type { AuthOptionsOAuthApp } from '../utils/auth/types';
+import type { LoginOAuthAppOptions } from '../utils/auth/types';
 import {
   getNewOAuthAppURL,
   isValidClientId,
@@ -118,7 +118,7 @@ export const LoginWithOAuthApp: FC = () => {
 
   const login = useCallback(async (data: IValues) => {
     try {
-      await loginWithOAuthApp(data as AuthOptionsOAuthApp);
+      await loginWithOAuthApp(data as LoginOAuthAppOptions);
     } catch (err) {
       // Skip
     }

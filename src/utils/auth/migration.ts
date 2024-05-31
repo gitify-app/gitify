@@ -15,10 +15,10 @@ export function migrateAuthenticatedAccounts() {
 
     const migratedAccounts = convertAccounts(existing.auth);
 
-    saveState(
-      { ...existing.auth, accounts: migratedAccounts },
-      existing.settings,
-    );
+    saveState({
+      auth: { ...existing.auth, accounts: migratedAccounts },
+      settings: existing.settings,
+    });
     console.log('Authenticated accounts migration complete');
   }
 }
