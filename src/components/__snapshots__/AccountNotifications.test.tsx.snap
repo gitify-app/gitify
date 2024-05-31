@@ -6,7 +6,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-1 items-center justify-between py-2 px-4 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm"
+        class="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm"
       >
         github.com
         <svg
@@ -31,7 +31,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   </body>,
   "container": <div>
     <div
-      class="flex flex-1 items-center justify-between py-2 px-4 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm"
+      class="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm"
     >
       github.com
       <svg
@@ -113,7 +113,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-1 items-center justify-between py-2 px-4 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm"
+        class="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm"
       >
         github.com
         <svg
@@ -135,7 +135,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   </body>,
   "container": <div>
     <div
-      class="flex flex-1 items-center justify-between py-2 px-4 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm"
+      class="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm"
     >
       github.com
       <svg
