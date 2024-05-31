@@ -268,9 +268,19 @@ describe('context/App.tsx', () => {
         'github.com',
       );
     });
+  });
+
+  describe('authentication methods', () => {
+    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+    const fetchNotificationsMock = jest.fn();
+
+    beforeEach(() => {
+      (useNotifications as jest.Mock).mockReturnValue({
+        fetchNotifications: fetchNotificationsMock,
+      });
+    });
 
     it('should call loginWithPersonalAccessToken', async () => {
-      const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
       apiRequestAuthMock.mockResolvedValueOnce(null);
 
       const TestComponent = () => {
@@ -334,93 +344,93 @@ describe('context/App.tsx', () => {
 
     expect(clearStateMock).toHaveBeenCalledTimes(1);
   });
+});
 
-  describe('settings methods', () => {
-    it('should call updateSetting', async () => {
-      const saveStateMock = jest
-        .spyOn(storage, 'saveState')
-        .mockImplementation(jest.fn());
+describe('settings methods', () => {
+  it('should call updateSetting', async () => {
+    const saveStateMock = jest
+      .spyOn(storage, 'saveState')
+      .mockImplementation(jest.fn());
 
-      const TestComponent = () => {
-        const { updateSetting } = useContext(AppContext);
+    const TestComponent = () => {
+      const { updateSetting } = useContext(AppContext);
 
-        return (
-          <button
-            type="button"
-            onClick={() => updateSetting('participating', true)}
-          >
-            Test Case
-          </button>
-        );
-      };
+      return (
+        <button
+          type="button"
+          onClick={() => updateSetting('participating', true)}
+        >
+          Test Case
+        </button>
+      );
+    };
 
-      const { getByText } = customRender(<TestComponent />);
+    const { getByText } = customRender(<TestComponent />);
 
-      act(() => {
-        fireEvent.click(getByText('Test Case'));
-      });
-
-      expect(saveStateMock).toHaveBeenCalledWith({
-        auth: { accounts: [], enterpriseAccounts: [], token: null, user: null },
-        settings: {
-          participating: true,
-          playSound: true,
-          showNotifications: true,
-          showBots: true,
-          showNotificationsCountInTray: false,
-          openAtStartup: false,
-          theme: 'SYSTEM',
-          detailedNotifications: true,
-          markAsDoneOnOpen: false,
-          showAccountHostname: false,
-          delayNotificationState: false,
-        },
-      });
+    act(() => {
+      fireEvent.click(getByText('Test Case'));
     });
 
-    it('should call updateSetting and set auto launch(openAtStartup)', async () => {
-      const setAutoLaunchMock = jest.spyOn(comms, 'setAutoLaunch');
-      const saveStateMock = jest
-        .spyOn(storage, 'saveState')
-        .mockImplementation(jest.fn());
+    expect(saveStateMock).toHaveBeenCalledWith({
+      auth: { accounts: [], enterpriseAccounts: [], token: null, user: null },
+      settings: {
+        participating: true,
+        playSound: true,
+        showNotifications: true,
+        showBots: true,
+        showNotificationsCountInTray: false,
+        openAtStartup: false,
+        theme: 'SYSTEM',
+        detailedNotifications: true,
+        markAsDoneOnOpen: false,
+        showAccountHostname: false,
+        delayNotificationState: false,
+      },
+    });
+  });
 
-      const TestComponent = () => {
-        const { updateSetting } = useContext(AppContext);
+  it('should call updateSetting and set auto launch(openAtStartup)', async () => {
+    const setAutoLaunchMock = jest.spyOn(comms, 'setAutoLaunch');
+    const saveStateMock = jest
+      .spyOn(storage, 'saveState')
+      .mockImplementation(jest.fn());
 
-        return (
-          <button
-            type="button"
-            onClick={() => updateSetting('openAtStartup', true)}
-          >
-            Test Case
-          </button>
-        );
-      };
+    const TestComponent = () => {
+      const { updateSetting } = useContext(AppContext);
 
-      const { getByText } = customRender(<TestComponent />);
+      return (
+        <button
+          type="button"
+          onClick={() => updateSetting('openAtStartup', true)}
+        >
+          Test Case
+        </button>
+      );
+    };
 
-      act(() => {
-        fireEvent.click(getByText('Test Case'));
-      });
+    const { getByText } = customRender(<TestComponent />);
 
-      expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
+    act(() => {
+      fireEvent.click(getByText('Test Case'));
+    });
 
-      expect(saveStateMock).toHaveBeenCalledWith({
-        auth: { accounts: [], enterpriseAccounts: [], token: null, user: null },
-        settings: {
-          participating: false,
-          playSound: true,
-          showNotifications: true,
-          showBots: true,
-          showNotificationsCountInTray: false,
-          openAtStartup: true,
-          theme: 'SYSTEM',
-          detailedNotifications: true,
-          markAsDoneOnOpen: false,
-          showAccountHostname: false,
-          delayNotificationState: false,
-        },
-      });
+    expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
+
+    expect(saveStateMock).toHaveBeenCalledWith({
+      auth: { accounts: [], enterpriseAccounts: [], token: null, user: null },
+      settings: {
+        participating: false,
+        playSound: true,
+        showNotifications: true,
+        showBots: true,
+        showNotificationsCountInTray: false,
+        openAtStartup: true,
+        theme: 'SYSTEM',
+        detailedNotifications: true,
+        markAsDoneOnOpen: false,
+        showAccountHostname: false,
+        delayNotificationState: false,
+      },
     });
   });
 });
