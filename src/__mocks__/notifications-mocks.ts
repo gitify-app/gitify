@@ -2,7 +2,6 @@ import type { AccountNotifications } from '../types';
 import {
   mockEnterpriseNotifications,
   mockGitHubNotifications,
-  mockSingleNotification,
 } from '../utils/api/__mocks__/response-mocks';
 import {
   mockGitHubCloudAccount,
@@ -23,6 +22,6 @@ export const mockAccountNotifications: AccountNotifications[] = [
 export const mockSingleAccountNotifications: AccountNotifications[] = [
   {
     account: mockGitHubCloudAccount,
-    notifications: [mockSingleNotification],
+    notifications: [mockGitHubNotifications[0]],
   },
 ];
