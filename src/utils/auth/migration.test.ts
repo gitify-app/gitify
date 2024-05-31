@@ -3,12 +3,47 @@ import nock from 'nock';
 import { mockGitifyUser, mockToken } from '../../__mocks__/state-mocks';
 import type { AuthState } from '../../types';
 import Constants from '../constants';
-import { convertAccounts, hasAccountsToMigrate } from './migration';
+import {
+  convertAccounts,
+  hasAccountsToMigrate,
+  migrateAuthenticatedAccounts,
+} from './migration';
 
 describe('utils/auth/migration.ts', () => {
+  beforeEach(() => {
+    // axios will default to using the XHR adapter which can't be intercepted
+    // by nock. So, configure axios to use the node adapter.
+    axios.defaults.adapter = 'http';
+  });
+
+  describe('migrateAuthenticatedAccounts', () => {
+    it('migrate and save legacy accounts', async () => {
+      jest.spyOn(localStorage.__proto__, 'getItem').mockReturnValueOnce(
+        JSON.stringify({
+          auth: {
+            token: mockToken,
+          },
+          settings: { theme: 'DARK' },
+        }),
+      );
+
+      nock('https://api.github.com').get('/user').reply(200, mockGitifyUser);
+
+      jest.spyOn(localStorage.__proto__, 'setItem');
+
+      await migrateAuthenticatedAccounts();
+
+      expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+    });
+  });
+
   describe('hasAccountsToMigrate', () => {
     it('should not migrate if none exist', () => {
       expect(hasAccountsToMigrate(null)).toBe(false);
+    });
+
+    it('should not migrate if empty', () => {
+      expect(hasAccountsToMigrate({} as AuthState)).toBe(false);
     });
 
     it('should migrate if token exist', () => {
@@ -43,12 +78,6 @@ describe('utils/auth/migration.ts', () => {
   });
 
   describe('convertAccounts', () => {
-    beforeEach(() => {
-      // axios will default to using the XHR adapter which can't be intercepted
-      // by nock. So, configure axios to use the node adapter.
-      axios.defaults.adapter = 'http';
-    });
-
     it('should convert accounts - personal access token only', async () => {
       nock('https://api.github.com').get('/user').reply(200, mockGitifyUser);
 
