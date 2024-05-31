@@ -2,6 +2,7 @@ import type {
   Discussion,
   DiscussionAuthor,
   DiscussionComments,
+  DiscussionLabels,
   GraphQLSearch,
   Notification,
   Repository,
@@ -385,6 +386,14 @@ export const mockDiscussionComments: DiscussionComments = {
   totalCount: 2,
 };
 
+export const mockDiscussionLabels: DiscussionLabels = {
+  nodes: [
+    {
+      name: 'enhancement',
+    },
+  ],
+};
+
 export const mockGraphQLResponse: GraphQLSearch<Discussion> = {
   data: {
     search: {
@@ -401,6 +410,7 @@ export const mockGraphQLResponse: GraphQLSearch<Discussion> = {
             type: 'User',
           },
           comments: mockDiscussionComments,
+          labels: mockDiscussionLabels,
         },
       ],
     },

@@ -1164,5 +1164,6 @@ function mockDiscussionNode(
       nodes: [],
       totalCount: 0,
     },
+    labels: null,
   };
 }

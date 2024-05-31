@@ -4,6 +4,7 @@ import {
   CommentIcon,
   FeedPersonIcon,
   ReadIcon,
+  TagIcon,
 } from '@primer/octicons-react';
 import {
   type FC,
@@ -90,6 +91,8 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     notification.subject.comments > 1 ? 'comments' : 'comment'
   }`;
 
+  const labelsLabel = notification.subject?.labels?.join('\n');
+
   return (
     <div
       id={notification.id}
@@ -171,6 +174,15 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                     size={16}
                     className={IconColor.GRAY}
                     aria-label={commentsLabel}
+                  />
+                </span>
+              )}
+              {notification.subject?.labels?.length > 0 && (
+                <span className="ml-1" title={labelsLabel}>
+                  <TagIcon
+                    size={16}
+                    className={IconColor.PURPLE}
+                    aria-label={labelsLabel}
                   />
                 </span>
               )}
