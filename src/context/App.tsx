@@ -197,9 +197,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     clearState();
   }, []);
 
-  const restoreSettings = useCallback(() => {
+  const restoreSettings = useCallback(async () => {
     // Migrate authenticated accounts
-    migrateAuthenticatedAccounts();
+    await migrateAuthenticatedAccounts();
 
     const existing = loadState();
 

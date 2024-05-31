@@ -1,3 +1,5 @@
+import axios from 'axios';
+import nock from 'nock';
 import { mockGitifyUser, mockToken } from '../../__mocks__/state-mocks';
 import type { AuthState } from '../../types';
 import Constants from '../constants';
@@ -41,8 +43,16 @@ describe('utils/auth/migration.ts', () => {
   });
 
   describe('convertAccounts', () => {
-    it('should convert accounts - personal access token only', () => {
-      const result = convertAccounts({
+    beforeEach(() => {
+      // axios will default to using the XHR adapter which can't be intercepted
+      // by nock. So, configure axios to use the node adapter.
+      axios.defaults.adapter = 'http';
+    });
+
+    it('should convert accounts - personal access token only', async () => {
+      nock('https://api.github.com').get('/user').reply(200, mockGitifyUser);
+
+      const result = await convertAccounts({
         token: mockToken,
         user: mockGitifyUser,
       } as AuthState);
@@ -58,8 +68,12 @@ describe('utils/auth/migration.ts', () => {
       ]);
     });
 
-    it('should convert accounts - oauth app only', () => {
-      const result = convertAccounts({
+    it('should convert accounts - oauth app only', async () => {
+      nock('https://github.gitify.io/api/v3')
+        .get('/user')
+        .reply(200, mockGitifyUser);
+
+      const result = await convertAccounts({
         enterpriseAccounts: [
           { hostname: 'github.gitify.io', token: mockToken },
         ],
@@ -71,13 +85,18 @@ describe('utils/auth/migration.ts', () => {
           platform: 'GitHub Enterprise Server',
           method: 'OAuth App',
           token: mockToken,
-          user: null,
+          user: mockGitifyUser,
         },
       ]);
     });
 
-    it('should convert accounts - combination', () => {
-      const result = convertAccounts({
+    it('should convert accounts - combination', async () => {
+      nock('https://api.github.com').get('/user').reply(200, mockGitifyUser);
+      nock('https://github.gitify.io/api/v3')
+        .get('/user')
+        .reply(200, mockGitifyUser);
+
+      const result = await convertAccounts({
         token: mockToken,
         user: mockGitifyUser,
         enterpriseAccounts: [
@@ -98,7 +117,7 @@ describe('utils/auth/migration.ts', () => {
           platform: 'GitHub Enterprise Server',
           method: 'OAuth App',
           token: mockToken,
-          user: null,
+          user: mockGitifyUser,
         },
       ]);
     });
