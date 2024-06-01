@@ -178,9 +178,9 @@ export function formatNotificationUpdatedAt(
     return formatDistanceToNow(parseISO(date), {
       addSuffix: true,
     });
-  } catch (e) {
-    return '';
-  }
+  } catch (e) {}
+
+  return '';
 }
 
 export async function openInBrowser(
