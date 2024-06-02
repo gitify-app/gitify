@@ -142,8 +142,8 @@ exports[`components/NotificationRow.tsx notification labels should render labels
                 <span
                   class="ml-1"
                   title="Labels:
-  • enhancement
-  • good-first-issue"
+🏷️ enhancement
+🏷️ good-first-issue"
                 >
                   <button
                     class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
@@ -151,8 +151,8 @@ exports[`components/NotificationRow.tsx notification labels should render labels
                   >
                     <svg
                       aria-label="Labels:
-  • enhancement
-  • good-first-issue"
+🏷️ enhancement
+🏷️ good-first-issue"
                       class="mr-1 text-gray-500 dark:text-gray-300"
                       fill="currentColor"
                       focusable="false"
@@ -381,8 +381,8 @@ exports[`components/NotificationRow.tsx notification labels should render labels
               <span
                 class="ml-1"
                 title="Labels:
-  • enhancement
-  • good-first-issue"
+🏷️ enhancement
+🏷️ good-first-issue"
               >
                 <button
                   class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
@@ -390,8 +390,8 @@ exports[`components/NotificationRow.tsx notification labels should render labels
                 >
                   <svg
                     aria-label="Labels:
-  • enhancement
-  • good-first-issue"
+🏷️ enhancement
+🏷️ good-first-issue"
                     class="mr-1 text-gray-500 dark:text-gray-300"
                     fill="currentColor"
                     focusable="false"
