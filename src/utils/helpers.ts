@@ -174,9 +174,13 @@ export function formatNotificationUpdatedAt(
 ): string {
   const date = notification.last_read_at ?? notification.updated_at;
 
-  return formatDistanceToNow(parseISO(date), {
-    addSuffix: true,
-  });
+  try {
+    return formatDistanceToNow(parseISO(date), {
+      addSuffix: true,
+    });
+  } catch (e) {}
+
+  return '';
 }
 
 export async function openInBrowser(
