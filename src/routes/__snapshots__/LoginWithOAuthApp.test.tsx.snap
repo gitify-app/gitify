@@ -102,9 +102,11 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                     </svg>
                     Create new OAuth App
                   </button>
-                   
-                  on GitHub then paste your
-                   
+                  <span
+                    class="mx-1"
+                  >
+                    on GitHub then paste your
+                  </span>
                   <span
                     class="italic"
                   >
@@ -302,9 +304,11 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   </svg>
                   Create new OAuth App
                 </button>
-                 
-                on GitHub then paste your
-                 
+                <span
+                  class="mx-1"
+                >
+                  on GitHub then paste your
+                </span>
                 <span
                   class="italic"
                 >
