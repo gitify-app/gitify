@@ -18,6 +18,7 @@ import { AppContext } from '../context/App';
 import { IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
+import Constants from '../utils/constants';
 import {
   formatForDisplay,
   formatNotificationUpdatedAt,
@@ -91,7 +92,9 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     notification.subject.comments > 1 ? 'comments' : 'comment'
   }`;
 
-  const labelsLabel = notification.subject?.labels?.join('\n');
+  const labelsPillDescription = `Labels:\n${notification.subject.labels
+    ?.map((label) => `  - ${label}`)
+    .join('\n')}`;
 
   return (
     <div
@@ -178,12 +181,15 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 </span>
               )}
               {notification.subject?.labels?.length > 0 && (
-                <span className="ml-1" title={labelsLabel}>
-                  <TagIcon
-                    size={16}
-                    className={IconColor.PURPLE}
-                    aria-label={labelsLabel}
-                  />
+                <span className="ml-1" title={labelsPillDescription}>
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <TagIcon
+                      size={12}
+                      className={`mr-1 ${IconColor.GRAY}`}
+                      aria-label={labelsPillDescription}
+                    />
+                    {notification.subject.labels.length}
+                  </button>
                 </span>
               )}
             </span>
