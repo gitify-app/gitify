@@ -18,6 +18,7 @@ import { AppContext } from '../context/App';
 import { IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
+import Constants from '../utils/constants';
 import {
   formatForDisplay,
   formatNotificationUpdatedAt,
@@ -91,7 +92,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     notification.subject.comments > 1 ? 'comments' : 'comment'
   }`;
 
-  const linkedIssuesLabel = `Linked to ${
+  const linkedIssuesPillDescription = `Linked to ${
     notification.subject.linkedIssues?.length > 1 ? 'issues' : 'issue'
   } ${notification.subject?.linkedIssues?.join(', ')}`;
 
@@ -149,12 +150,15 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
               </span>
               <span className="ml-1">{updatedAt}</span>
               {notification.subject?.linkedIssues?.length > 0 && (
-                <span className="ml-1" title={linkedIssuesLabel}>
-                  <IssueClosedIcon
-                    size={16}
-                    className={IconColor.GREEN}
-                    aria-label={linkedIssuesLabel}
-                  />
+                <span className="ml-1" title={linkedIssuesPillDescription}>
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <IssueClosedIcon
+                      size={16}
+                      className={`mr-1 ${IconColor.GREEN}`}
+                      aria-label={linkedIssuesPillDescription}
+                    />
+                    {notification.subject.linkedIssues.length}
+                  </button>
                 </span>
               )}
               {notification.subject.reviews
