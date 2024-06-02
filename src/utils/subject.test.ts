@@ -630,6 +630,36 @@ describe('utils/subject.ts', () => {
           labels: [],
         });
       });
+
+      it('issue with labels', async () => {
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/issues/1')
+          .reply(200, {
+            state: 'open',
+            user: mockAuthor,
+            labels: [{ name: 'enhancement' }],
+          });
+
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
+          .reply(200, { user: mockCommenter });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAuth.token,
+        );
+
+        expect(result).toEqual({
+          state: 'open',
+          user: {
+            login: mockCommenter.login,
+            html_url: mockCommenter.html_url,
+            avatar_url: mockCommenter.avatar_url,
+            type: mockCommenter.type,
+          },
+          labels: ['enhancement'],
+        });
+      });
     });
 
     describe('Pull Requests', () => {
@@ -928,6 +958,43 @@ describe('utils/subject.ts', () => {
           );
 
           expect(result).toBeNull();
+        });
+      });
+
+      it('pull request with labels', async () => {
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
+          .reply(200, {
+            state: 'open',
+            draft: false,
+            merged: false,
+            user: mockAuthor,
+            labels: [{ name: 'enhancement' }],
+          });
+
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
+          .reply(200, { user: mockCommenter });
+
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+          .reply(200, []);
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAuth.token,
+        );
+
+        expect(result).toEqual({
+          state: 'open',
+          user: {
+            login: mockCommenter.login,
+            html_url: mockCommenter.html_url,
+            avatar_url: mockCommenter.avatar_url,
+            type: mockCommenter.type,
+          },
+          reviews: null,
+          labels: ['enhancement'],
         });
       });
     });
