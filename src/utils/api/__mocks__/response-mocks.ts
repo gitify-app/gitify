@@ -1,3 +1,7 @@
+import {
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+} from '../../../__mocks__/state-mocks';
 import type {
   Discussion,
   DiscussionAuthor,
@@ -8,7 +12,6 @@ import type {
   Repository,
   User,
 } from '../../../typesGitHub';
-import Constants from '../../constants';
 
 export const mockNotificationUser: User = {
   login: 'octocat',
@@ -36,7 +39,7 @@ export const mockNotificationUser: User = {
 // Repository : 'gitify-app/notifications-test'
 export const mockGitHubNotifications: Notification[] = [
   {
-    hostname: Constants.GITHUB_API_BASE_URL,
+    account: mockGitHubCloudAccount,
     id: '138661096',
     unread: true,
     reason: 'subscribed',
@@ -184,7 +187,7 @@ export const mockGitHubNotifications: Notification[] = [
       'https://api.github.com/notifications/threads/138661096/subscription',
   },
   {
-    hostname: Constants.GITHUB_API_BASE_URL,
+    account: mockGitHubCloudAccount,
     id: '148827438',
     unread: true,
     reason: 'author',
@@ -243,7 +246,7 @@ export const mockGitHubNotifications: Notification[] = [
 // Repository : 'myorg/notifications-test'
 export const mockEnterpriseNotifications: Notification[] = [
   {
-    hostname: 'https://github.gitify.io/api/v3',
+    account: mockGitHubEnterpriseServerAccount,
     id: '3',
     unread: true,
     reason: 'subscribed',
@@ -297,7 +300,7 @@ export const mockEnterpriseNotifications: Notification[] = [
       'https://github.gitify.io/api/v3/notifications/threads/4/subscription',
   },
   {
-    hostname: 'https://github.gitify.io/api/v3',
+    account: mockGitHubEnterpriseServerAccount,
     id: '4',
     unread: true,
     reason: 'subscribed',

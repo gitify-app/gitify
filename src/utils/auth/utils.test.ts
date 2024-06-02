@@ -103,26 +103,91 @@ describe('utils/auth/utils.ts', () => {
   });
 
   describe('addAccount', () => {
-    const mockAuth: AuthState = {
-      token: null,
-      enterpriseAccounts: [],
-      user: null,
-    };
+    let mockAuthState: AuthState;
 
-    it('should add a github.com account', () => {
-      const result = auth.addAccount(mockAuth, '123-456', 'github.com');
-
-      expect(result).toEqual({ ...mockAuth, token: '123-456' });
+    beforeEach(() => {
+      mockAuthState = {
+        accounts: [],
+      };
     });
 
-    it('should add an enterprise account', () => {
-      const result = auth.addAccount(mockAuth, '123-456', 'github.gitify.io');
+    describe('should add GitHub Cloud account', () => {
+      it('should add personal access token account', async () => {
+        const result = await auth.addAccount(
+          mockAuthState,
+          'Personal Access Token',
+          '123-456',
+          'github.com',
+        );
 
-      expect(result).toEqual({
-        ...mockAuth,
-        enterpriseAccounts: [
-          { hostname: 'github.gitify.io', token: '123-456' },
-        ],
+        expect(result.accounts).toEqual([
+          {
+            hostname: 'github.com',
+            method: 'Personal Access Token',
+            platform: 'GitHub Cloud',
+            token: '123-456',
+            user: undefined,
+          },
+        ]);
+      });
+
+      it('should add oauth app account', async () => {
+        const result = await auth.addAccount(
+          mockAuthState,
+          'OAuth App',
+          '123-456',
+          'github.com',
+        );
+
+        expect(result.accounts).toEqual([
+          {
+            hostname: 'github.com',
+            method: 'OAuth App',
+            platform: 'GitHub Cloud',
+            token: '123-456',
+            user: undefined,
+          },
+        ]);
+      });
+    });
+
+    describe('should add GitHub Enterprise Server account', () => {
+      it('should add personal access token account', async () => {
+        const result = await auth.addAccount(
+          mockAuthState,
+          'Personal Access Token',
+          '123-456',
+          'github.gitify.io',
+        );
+
+        expect(result.accounts).toEqual([
+          {
+            hostname: 'github.gitify.io',
+            method: 'Personal Access Token',
+            platform: 'GitHub Enterprise Server',
+            token: '123-456',
+            user: undefined,
+          },
+        ]);
+      });
+
+      it('should add oauth app account', async () => {
+        const result = await auth.addAccount(
+          mockAuthState,
+          'OAuth App',
+          '123-456',
+          'github.gitify.io',
+        );
+
+        expect(result.accounts).toEqual([
+          {
+            hostname: 'github.gitify.io',
+            method: 'OAuth App',
+            platform: 'GitHub Enterprise Server',
+            token: '123-456',
+            user: undefined,
+          },
+        ]);
       });
     });
   });

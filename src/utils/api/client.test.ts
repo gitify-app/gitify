@@ -1,4 +1,9 @@
 import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
+import {
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+  mockToken,
+} from '../../__mocks__/state-mocks';
 import type { SettingsState } from '../../types';
 import {
   getAuthenticatedUser,
@@ -16,7 +21,6 @@ jest.mock('axios');
 
 const mockGitHubHostname = 'github.com';
 const mockEnterpriseHostname = 'example.com';
-const mockToken = 'yourAuthToken';
 const mockThreadId = '1234';
 const mockRepoSlug = 'gitify-app/notifications-test';
 
@@ -82,10 +86,9 @@ describe('utils/api/client.ts', () => {
       participating: true,
     };
 
-    it('should list notifications for user - github', async () => {
+    it('should list notifications for user - github cloud', async () => {
       await listNotificationsForAuthenticatedUser(
-        mockGitHubHostname,
-        mockToken,
+        mockGitHubCloudAccount,
         mockSettings as SettingsState,
       );
 
@@ -98,15 +101,14 @@ describe('utils/api/client.ts', () => {
       expect(axios.defaults.headers.common).toMatchSnapshot();
     });
 
-    it('should list notifications for user - enterprise', async () => {
+    it('should list notifications for user - github enterprise server', async () => {
       await listNotificationsForAuthenticatedUser(
-        mockEnterpriseHostname,
-        mockToken,
+        mockGitHubEnterpriseServerAccount,
         mockSettings as SettingsState,
       );
 
       expect(axios).toHaveBeenCalledWith({
-        url: 'https://example.com/api/v3/notifications?participating=true',
+        url: 'https://github.gitify.io/api/v3/notifications?participating=true',
         method: 'GET',
         data: {},
       });

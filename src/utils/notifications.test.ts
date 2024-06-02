@@ -8,10 +8,7 @@ import { partialMockNotification } from '../__mocks__/partial-mocks';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { defaultSettings } from '../context/App';
 import type { SettingsState } from '../types';
-import {
-  mockGitHubNotifications,
-  mockSingleNotification,
-} from './api/__mocks__/response-mocks';
+import { mockGitHubNotifications } from './api/__mocks__/response-mocks';
 import * as helpers from './helpers';
 import * as notificationsHelpers from './notifications';
 import { filterNotifications } from './notifications';
@@ -99,6 +96,7 @@ describe('utils/notifications.ts', () => {
     jest.spyOn(notificationsHelpers, 'raiseSoundNotification');
 
     notificationsHelpers.triggerNativeNotifications([], [], settings, mockAuth);
+    notificationsHelpers.triggerNativeNotifications([], [], settings, mockAuth);
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
     expect(notificationsHelpers.raiseSoundNotification).not.toHaveBeenCalled();
@@ -109,15 +107,14 @@ describe('utils/notifications.ts', () => {
 
     const nativeNotification: Notification =
       notificationsHelpers.raiseNativeNotification(
-        [mockSingleNotification],
+        [mockGitHubNotifications[0]],
         mockAuth,
       );
     nativeNotification.onclick(null);
 
     expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
     expect(helpers.openInBrowser).toHaveBeenLastCalledWith(
-      mockSingleNotification,
-      mockAuth,
+      mockGitHubNotifications[0],
     );
     expect(ipcRenderer.send).toHaveBeenCalledWith('hide-window');
   });

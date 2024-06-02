@@ -1,5 +1,9 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
-import { mockAuth, mockUser } from '../__mocks__/state-mocks';
+import {
+  mockOAuthAccount,
+  mockPersonalAccessTokenAccount,
+} from '../__mocks__/state-mocks';
+
 import type { SubjectType } from '../typesGitHub';
 import {
   mockGraphQLResponse,
@@ -8,8 +12,10 @@ import {
 import * as apiRequests from './api/request';
 import {
   formatForDisplay,
+  formatNotificationUpdatedAt,
   generateGitHubWebUrl,
   generateNotificationReferrerId,
+  getPlatformFromHostname,
   isEnterpriseHost,
   isOAuthAppLoggedIn,
   isPersonalAccessTokenLoggedIn,
@@ -19,14 +25,24 @@ describe('utils/helpers.ts', () => {
   describe('isPersonalAccessTokenLoggedIn', () => {
     it('logged in', () => {
       expect(
-        isPersonalAccessTokenLoggedIn({ ...mockAuth, token: '1234' }),
+        isPersonalAccessTokenLoggedIn({
+          accounts: [mockPersonalAccessTokenAccount],
+        }),
       ).toBe(true);
     });
 
     it('logged out', () => {
-      expect(isPersonalAccessTokenLoggedIn({ ...mockAuth, token: null })).toBe(
-        false,
-      );
+      expect(
+        isPersonalAccessTokenLoggedIn({
+          accounts: [],
+        }),
+      ).toBe(false);
+
+      expect(
+        isPersonalAccessTokenLoggedIn({
+          accounts: [mockOAuthAccount],
+        }),
+      ).toBe(false);
     });
   });
 
@@ -34,19 +50,32 @@ describe('utils/helpers.ts', () => {
     it('logged in', () => {
       expect(
         isOAuthAppLoggedIn({
-          ...mockAuth,
-          enterpriseAccounts: [{ hostname: 'github.gitify.io', token: '1234' }],
+          accounts: [mockOAuthAccount],
         }),
       ).toBe(true);
     });
 
     it('logged out', () => {
-      expect(
-        isOAuthAppLoggedIn({ ...mockAuth, enterpriseAccounts: null }),
-      ).toBe(false);
+      expect(isOAuthAppLoggedIn({ accounts: [] })).toBe(false);
 
-      expect(isOAuthAppLoggedIn({ ...mockAuth, enterpriseAccounts: [] })).toBe(
-        false,
+      expect(
+        isOAuthAppLoggedIn({ accounts: [mockPersonalAccessTokenAccount] }),
+      ).toBe(false);
+    });
+  });
+
+  describe('getPlatformFromHostname', () => {
+    it('should return GitHub Cloud', () => {
+      expect(getPlatformFromHostname('github.com')).toBe('GitHub Cloud');
+      expect(getPlatformFromHostname('api.github.com')).toBe('GitHub Cloud');
+    });
+
+    it('should return GitHub Enterprise Server', () => {
+      expect(getPlatformFromHostname('github.gitify.app')).toBe(
+        'GitHub Enterprise Server',
+      );
+      expect(getPlatformFromHostname('api.github.gitify.app')).toBe(
+        'GitHub Enterprise Server',
       );
     });
   });
@@ -65,10 +94,7 @@ describe('utils/helpers.ts', () => {
 
   describe('generateNotificationReferrerId', () => {
     it('should generate the notification_referrer_id', () => {
-      const referrerId = generateNotificationReferrerId(
-        mockSingleNotification.id,
-        mockUser.id,
-      );
+      const referrerId = generateNotificationReferrerId(mockSingleNotification);
       expect(referrerId).toBe(
         'MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=',
       );
@@ -105,19 +131,16 @@ describe('utils/helpers.ts', () => {
 
       apiRequestAuthMock.mockResolvedValue(requestPromise);
 
-      const result = await generateGitHubWebUrl(
-        {
-          ...mockSingleNotification,
-          subject: subject,
-        },
-        mockAuth,
-      );
+      const result = await generateGitHubWebUrl({
+        ...mockSingleNotification,
+        subject: subject,
+      });
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         subject.latest_comment_url,
         'GET',
-        mockAuth.token,
+        mockPersonalAccessTokenAccount.token,
       );
       expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
@@ -140,19 +163,16 @@ describe('utils/helpers.ts', () => {
 
       apiRequestAuthMock.mockResolvedValue(requestPromise);
 
-      const result = await generateGitHubWebUrl(
-        {
-          ...mockSingleNotification,
-          subject: subject,
-        },
-        mockAuth,
-      );
+      const result = await generateGitHubWebUrl({
+        ...mockSingleNotification,
+        subject: subject,
+      });
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         subject.url,
         'GET',
-        mockAuth.token,
+        mockPersonalAccessTokenAccount.token,
       );
       expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
@@ -166,13 +186,10 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockSingleNotification,
-            subject: subject,
-          },
-          mockAuth,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -188,13 +205,10 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockSingleNotification,
-            subject: subject,
-          },
-          mockAuth,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -210,13 +224,10 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockSingleNotification,
-            subject: subject,
-          },
-          mockAuth,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -232,13 +243,10 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockSingleNotification,
-            subject: subject,
-          },
-          mockAuth,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -254,13 +262,10 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockSingleNotification,
-            subject: subject,
-          },
-          mockAuth,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -276,13 +281,10 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockSingleNotification,
-            subject: subject,
-          },
-          mockAuth,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -298,13 +300,10 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockSingleNotification,
-            subject: subject,
-          },
-          mockAuth,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -330,13 +329,10 @@ describe('utils/helpers.ts', () => {
 
         apiRequestAuthMock.mockResolvedValue(requestPromise);
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockSingleNotification,
-            subject: subject,
-          },
-          mockAuth,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
         expect(result).toBe(
@@ -362,13 +358,10 @@ describe('utils/helpers.ts', () => {
 
         apiRequestAuthMock.mockResolvedValue(requestPromise);
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockSingleNotification,
-            subject: subject,
-          },
-          mockAuth,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
         expect(result).toBe(
@@ -390,13 +383,10 @@ describe('utils/helpers.ts', () => {
 
         apiRequestAuthMock.mockResolvedValue(requestPromise);
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockSingleNotification,
-            subject: subject,
-          },
-          mockAuth,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
         expect(result).toBe(
@@ -414,13 +404,10 @@ describe('utils/helpers.ts', () => {
         type: 'RepositoryInvitation' as SubjectType,
       };
 
-      const result = await generateGitHubWebUrl(
-        {
-          ...mockSingleNotification,
-          subject: subject,
-        },
-        mockAuth,
-      );
+      const result = await generateGitHubWebUrl({
+        ...mockSingleNotification,
+        subject: subject,
+      });
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
       expect(result).toBe(
@@ -437,13 +424,10 @@ describe('utils/helpers.ts', () => {
           type: 'WorkflowRun' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockSingleNotification,
-            subject: subject,
-          },
-          mockAuth,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -460,13 +444,10 @@ describe('utils/helpers.ts', () => {
           type: 'WorkflowRun' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockSingleNotification,
-            subject: subject,
-          },
-          mockAuth,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -482,13 +463,10 @@ describe('utils/helpers.ts', () => {
           type: 'WorkflowRun' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockSingleNotification,
-            subject: subject,
-          },
-          mockAuth,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
@@ -505,13 +483,10 @@ describe('utils/helpers.ts', () => {
         type: 'Issue' as SubjectType,
       };
 
-      const result = await generateGitHubWebUrl(
-        {
-          ...mockSingleNotification,
-          subject: subject,
-        },
-        mockAuth,
-      );
+      const result = await generateGitHubWebUrl({
+        ...mockSingleNotification,
+        subject: subject,
+      });
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
       expect(result).toBe(
@@ -533,6 +508,48 @@ describe('utils/helpers.ts', () => {
       expect(formatForDisplay(['not_planned', 'Issue'])).toBe(
         'Not Planned Issue',
       );
+    });
+
+    describe('formatNotificationUpdatedAt', () => {
+      it('should use last_read_at if available', () => {
+        const notification = {
+          ...mockSingleNotification,
+          last_read_at: '2021-06-23T16:00:00Z',
+          updated_at: '2021-06-23T17:00:00Z',
+        };
+
+        expect(formatNotificationUpdatedAt(notification)).toContain('ago');
+      });
+
+      it('should use updated_at if last_read_at is null', () => {
+        const notification = {
+          ...mockSingleNotification,
+          last_read_at: null,
+          updated_at: '2021-06-23T17:00:00Z',
+        };
+
+        expect(formatNotificationUpdatedAt(notification)).toContain('ago');
+      });
+
+      it('should return empty if all dates are null', () => {
+        const notification = {
+          ...mockSingleNotification,
+          last_read_at: null,
+          updated_at: null,
+        };
+
+        expect(formatNotificationUpdatedAt(notification)).toBe('');
+      });
+
+      it('should return empty if unable to parse dates', () => {
+        const notification = {
+          ...mockSingleNotification,
+          last_read_at: 'not an iso date',
+          updated_at: 'not an iso date',
+        };
+
+        expect(formatNotificationUpdatedAt(notification)).toBe('');
+      });
     });
   });
 });

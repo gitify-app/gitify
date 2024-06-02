@@ -13,7 +13,7 @@ import {
   markRepositoryNotificationsAsRead,
 } from '../utils/api/client';
 import { determineFailureType } from '../utils/api/errors';
-import { getTokenForHost } from '../utils/helpers';
+import { getAccountForHost } from '../utils/helpers';
 import {
   getAllNotifications,
   setTrayIconColor,
@@ -107,10 +107,10 @@ export const useNotifications = (): NotificationsState => {
     ) => {
       setStatus('loading');
 
-      const token = getTokenForHost(hostname, auth);
+      const account = getAccountForHost(hostname, auth);
 
       try {
-        await markNotificationThreadAsRead(id, hostname, token);
+        await markNotificationThreadAsRead(id, hostname, account.token);
 
         const updatedNotifications = removeNotification(
           settings,
@@ -138,10 +138,10 @@ export const useNotifications = (): NotificationsState => {
     ) => {
       setStatus('loading');
 
-      const token = getTokenForHost(hostname, auth);
+      const account = getAccountForHost(hostname, auth);
 
       try {
-        await markNotificationThreadAsDone(id, hostname, token);
+        await markNotificationThreadAsDone(id, hostname, account.token);
 
         const updatedNotifications = removeNotification(
           settings,
@@ -169,10 +169,10 @@ export const useNotifications = (): NotificationsState => {
     ) => {
       setStatus('loading');
 
-      const token = getTokenForHost(hostname, auth);
+      const account = getAccountForHost(hostname, auth);
 
       try {
-        await ignoreNotificationThreadSubscription(id, hostname, token);
+        await ignoreNotificationThreadSubscription(id, hostname, account.token);
         await markNotificationRead(auth, settings, id, hostname);
         setStatus('success');
       } catch (err) {
@@ -191,10 +191,14 @@ export const useNotifications = (): NotificationsState => {
     ) => {
       setStatus('loading');
 
-      const token = getTokenForHost(hostname, auth);
+      const account = getAccountForHost(hostname, auth);
 
       try {
-        await markRepositoryNotificationsAsRead(repoSlug, hostname, token);
+        await markRepositoryNotificationsAsRead(
+          repoSlug,
+          hostname,
+          account.token,
+        );
         const updatedNotifications = removeNotifications(
           repoSlug,
           notifications,
@@ -222,7 +226,8 @@ export const useNotifications = (): NotificationsState => {
 
       try {
         const accountIndex = notifications.findIndex(
-          (accountNotifications) => accountNotifications.hostname === hostname,
+          (accountNotifications) =>
+            accountNotifications.account.hostname === hostname,
         );
 
         if (accountIndex !== -1) {
@@ -238,7 +243,7 @@ export const useNotifications = (): NotificationsState => {
                 auth,
                 settings,
                 notification.id,
-                notifications[accountIndex].hostname,
+                notifications[accountIndex].account.hostname,
               ),
             ),
           );

@@ -1,16 +1,39 @@
 import { mockSettings } from '../__mocks__/state-mocks';
+import Constants from './constants';
 import { clearState, loadState, saveState } from './storage';
 
 describe('utils/storage.ts', () => {
   it('should load the state from localstorage - existing', () => {
     jest.spyOn(localStorage.__proto__, 'getItem').mockReturnValueOnce(
       JSON.stringify({
-        auth: { token: '123-456' },
+        auth: {
+          accounts: [
+            {
+              hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+              platform: 'GitHub Cloud',
+              method: 'Personal Access Token',
+              token: '123-456',
+              user: null,
+            },
+          ],
+        },
         settings: { theme: 'DARK' },
       }),
     );
     const result = loadState();
-    expect(result.auth.token).toBe('123-456');
+
+    expect(result.auth.accounts).toEqual([
+      {
+        hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+        platform: 'GitHub Cloud',
+        method: 'Personal Access Token',
+        token: '123-456',
+        user: null,
+      },
+    ]);
+    expect(result.auth.token).toBeUndefined();
+    expect(result.auth.enterpriseAccounts).toBeUndefined();
+    expect(result.auth.user).toBeUndefined();
     expect(result.settings.theme).toBe('DARK');
   });
 
@@ -20,6 +43,7 @@ describe('utils/storage.ts', () => {
       .mockReturnValueOnce(JSON.stringify({}));
     const result = loadState();
     expect(result.auth).toBeUndefined();
+    expect(result.auth).toBeUndefined();
     expect(result.settings).toBeUndefined();
   });
 
@@ -27,9 +51,15 @@ describe('utils/storage.ts', () => {
     jest.spyOn(localStorage.__proto__, 'setItem');
     saveState({
       auth: {
-        token: '123-456',
-        enterpriseAccounts: [],
-        user: null,
+        accounts: [
+          {
+            hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+            platform: 'GitHub Cloud',
+            method: 'Personal Access Token',
+            token: '123-456',
+            user: null,
+          },
+        ],
       },
       settings: mockSettings,
     });

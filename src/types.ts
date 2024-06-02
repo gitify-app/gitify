@@ -1,15 +1,37 @@
 import type { OcticonProps } from '@primer/octicons-react';
 import type { FC } from 'react';
 import type { Notification } from './typesGitHub';
-import type { EnterpriseAccount } from './utils/auth/types';
-
-export interface AuthState {
-  token?: string;
-  enterpriseAccounts: EnterpriseAccount[];
-  user: GitifyUser | null;
-}
+import type {
+  AuthMethod,
+  EnterpriseAccount,
+  PlatformType,
+} from './utils/auth/types';
 
 export type Status = 'loading' | 'success' | 'error';
+
+export interface AuthState {
+  accounts: Account[];
+  /**
+   * @deprecated This attribute is deprecated and will be removed in a future release.
+   */
+  token?: string;
+  /**
+   * @deprecated This attribute is deprecated and will be removed in a future release.
+   */
+  enterpriseAccounts?: EnterpriseAccount[];
+  /**
+   * @deprecated This attribute is deprecated and will be removed in a future release.
+   */
+  user?: GitifyUser | null;
+}
+
+export interface Account {
+  method: AuthMethod;
+  platform: PlatformType;
+  hostname: string;
+  token: string;
+  user: GitifyUser | null;
+}
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
@@ -52,7 +74,7 @@ export type RadioGroupItem = {
 };
 
 export interface AccountNotifications {
-  hostname: string;
+  account: Account;
   notifications: Notification[];
 }
 

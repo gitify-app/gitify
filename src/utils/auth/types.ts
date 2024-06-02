@@ -1,3 +1,7 @@
+export type AuthMethod = 'GitHub App' | 'Personal Access Token' | 'OAuth App';
+
+export type PlatformType = 'GitHub Cloud' | 'GitHub Enterprise Server';
+
 export interface LoginOAuthAppOptions {
   hostname: string;
   clientId: string;
@@ -19,6 +23,9 @@ export interface AuthTokenResponse {
   token: string;
 }
 
+/**
+ * @deprecated This type is deprecated and will be removed in a future release.
+ */
 export interface EnterpriseAccount {
   hostname: string;
   token: string;
