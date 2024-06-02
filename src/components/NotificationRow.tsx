@@ -163,9 +163,9 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                         >
                           <icon.type
                             size={12}
-                            className={icon.color}
+                            className={`mr-1 ${icon.color}`}
                             aria-label={icon.description}
-                          />{' '}
+                          />
                           {review.users.length}
                         </button>
                       </span>
@@ -177,9 +177,9 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                   <button type="button" className={Constants.PILL_CLASS_NAME}>
                     <CommentIcon
                       size={12}
-                      className={IconColor.GRAY}
+                      className={`mr-1 ${IconColor.GRAY}`}
                       aria-label={commentsPillDescription}
-                    />{' '}
+                    />
                     {notification.subject.comments}
                   </button>
                 </span>
