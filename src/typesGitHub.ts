@@ -1,3 +1,5 @@
+import type { Account } from './types';
+
 export type Reason =
   | 'approval_requested'
   | 'assign'
@@ -91,7 +93,9 @@ export type PullRequestReviewAuthorAssociation =
   | 'NONE'
   | 'OWNER';
 
-export interface Notification {
+export type Notification = GitHubNotification & GitifyNotification;
+
+export interface GitHubNotification {
   id: string;
   unread: boolean;
   reason: Reason;
@@ -101,8 +105,11 @@ export interface Notification {
   repository: Repository;
   url: string;
   subscription_url: string;
-  // TODO - rename this to apiBaseUrl
-  hostname: string; // This is not in the official GitHub API. We add this to make notification interactions easier.
+}
+
+// Note: This is not in the official GitHub API. We add this to make notification interactions easier.
+export interface GitifyNotification {
+  account: Account;
 }
 
 export type UserDetails = User & UserProfile;

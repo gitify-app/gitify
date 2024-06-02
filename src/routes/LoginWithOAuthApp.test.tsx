@@ -1,7 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { ipcRenderer, shell } from 'electron';
+import { shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
-import { mockEnterpriseAccounts } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import type { AuthState } from '../types';
 import { LoginWithOAuthApp, validate } from './LoginWithOAuthApp';
@@ -16,15 +15,12 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
   const openExternalMock = jest.spyOn(shell, 'openExternal');
 
   const mockAuth: AuthState = {
-    enterpriseAccounts: [],
-    user: null,
+    accounts: [],
   };
 
   beforeEach(() => {
     openExternalMock.mockReset();
     mockNavigate.mockReset();
-
-    jest.spyOn(ipcRenderer, 'send');
   });
 
   it('renders correctly', () => {
@@ -109,35 +105,6 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
 
       expect(openExternalMock).toHaveBeenCalledTimes(1);
     });
-  });
-
-  it('should receive a logged-in enterprise account', () => {
-    const { rerender } = render(
-      <AppContext.Provider value={{ auth: mockAuth }}>
-        <MemoryRouter>
-          <LoginWithOAuthApp />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-
-    rerender(
-      <AppContext.Provider
-        value={{
-          auth: {
-            enterpriseAccounts: mockEnterpriseAccounts,
-            user: null,
-          },
-        }}
-      >
-        <MemoryRouter>
-          <LoginWithOAuthApp />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
   it('should render the form with errors', () => {

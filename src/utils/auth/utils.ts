@@ -5,8 +5,8 @@ import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
 import { Constants } from '../constants';
-import { isEnterpriseHost } from '../helpers';
-import type { AuthResponse, AuthTokenResponse } from './types';
+import { getPlatformFromHostname } from '../helpers';
+import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
 
 export const authGitHub = (
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
@@ -107,31 +107,26 @@ export const getToken = async (
   };
 };
 
-export const addAccount = (
+export function addAccount(
   auth: AuthState,
-  token,
-  hostname,
+  method: AuthMethod,
+  token: string,
+  hostname: string,
   user?: GitifyUser,
-): AuthState => {
-  if (!isEnterpriseHost(hostname)) {
-    return {
-      ...auth,
-      token,
-      user: user ?? null,
-    };
-  }
-
+): AuthState {
   return {
-    ...auth,
-    enterpriseAccounts: [
-      ...auth.enterpriseAccounts,
+    accounts: [
+      ...auth.accounts,
       {
-        token,
         hostname: hostname,
+        method: method,
+        platform: getPlatformFromHostname(hostname),
+        token: token,
+        user: user,
       },
     ],
   };
-};
+}
 
 export function getNewTokenURL(hostname: string): string {
   const date = format(new Date(), 'PP p');
