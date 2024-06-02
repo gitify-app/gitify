@@ -10,8 +10,12 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
-import type { AuthTokenOptions } from '../types';
-import { getNewTokenURL, isValidHostname, isValidToken } from '../utils/auth';
+import type { LoginPersonalAccessTokenOptions } from '../utils/auth/types';
+import {
+  getNewTokenURL,
+  isValidHostname,
+  isValidToken,
+} from '../utils/auth/utils';
 import { Constants } from '../utils/constants';
 
 interface IValues {
@@ -43,7 +47,7 @@ export const validate = (values: IValues): IFormErrors => {
 };
 
 export const LoginWithPersonalAccessToken: FC = () => {
-  const { validateToken } = useContext(AppContext);
+  const { loginWithPersonalAccessToken } = useContext(AppContext);
   const navigate = useNavigate();
   const [isValidToken, setIsValidToken] = useState<boolean>(true);
 
@@ -119,7 +123,9 @@ export const LoginWithPersonalAccessToken: FC = () => {
   const login = useCallback(async (data: IValues) => {
     setIsValidToken(true);
     try {
-      await validateToken(data as AuthTokenOptions);
+      await loginWithPersonalAccessToken(
+        data as LoginPersonalAccessTokenOptions,
+      );
       navigate(-1);
     } catch (err) {
       setIsValidToken(false);
