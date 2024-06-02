@@ -12,6 +12,7 @@ import {
 import * as apiRequests from './api/request';
 import {
   formatForDisplay,
+  formatNotificationUpdatedAt,
   generateGitHubWebUrl,
   generateNotificationReferrerId,
   getPlatformFromHostname,
@@ -492,7 +493,9 @@ describe('utils/helpers.ts', () => {
         `${mockSingleNotification.repository.html_url}?${mockNotificationReferrer}`,
       );
     });
+  });
 
+  describe('formatting', () => {
     it('formatForDisplay', () => {
       expect(formatForDisplay(null)).toBe('');
       expect(formatForDisplay([])).toBe('');
@@ -505,6 +508,48 @@ describe('utils/helpers.ts', () => {
       expect(formatForDisplay(['not_planned', 'Issue'])).toBe(
         'Not Planned Issue',
       );
+    });
+
+    describe('formatNotificationUpdatedAt', () => {
+      it('should use last_read_at if available', () => {
+        const notification = {
+          ...mockSingleNotification,
+          last_read_at: '2021-06-23T16:00:00Z',
+          updated_at: '2021-06-23T17:00:00Z',
+        };
+
+        expect(formatNotificationUpdatedAt(notification)).toContain('ago');
+      });
+
+      it('should use updated_at if last_read_at is null', () => {
+        const notification = {
+          ...mockSingleNotification,
+          last_read_at: null,
+          updated_at: '2021-06-23T17:00:00Z',
+        };
+
+        expect(formatNotificationUpdatedAt(notification)).toContain('ago');
+      });
+
+      it('should return empty if all dates are null', () => {
+        const notification = {
+          ...mockSingleNotification,
+          last_read_at: null,
+          updated_at: null,
+        };
+
+        expect(formatNotificationUpdatedAt(notification)).toBe('');
+      });
+
+      it('should return empty if unable to parse dates', () => {
+        const notification = {
+          ...mockSingleNotification,
+          last_read_at: 'not an iso date',
+          updated_at: 'not an iso date',
+        };
+
+        expect(formatNotificationUpdatedAt(notification)).toBe('');
+      });
     });
   });
 });
