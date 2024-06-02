@@ -17,6 +17,7 @@ import { AppContext } from '../context/App';
 import { IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
+import Constants from '../utils/constants';
 import {
   formatForDisplay,
   formatNotificationUpdatedAt,
@@ -86,7 +87,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     notification.subject.type,
   ]);
 
-  const commentsLabel = `${notification.subject.comments} ${
+  const commentsPillDescription = `${notification.subject.comments} ${
     notification.subject.comments > 1 ? 'comments' : 'comment'
   }`;
 
@@ -156,22 +157,31 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                         title={icon.description}
                         className="ml-1"
                       >
-                        <icon.type
-                          size={16}
-                          className={icon.color}
-                          aria-label={icon.description}
-                        />
+                        <button
+                          type="button"
+                          className={Constants.PILL_CLASS_NAME}
+                        >
+                          <icon.type
+                            size={12}
+                            className={`mr-1 ${icon.color}`}
+                            aria-label={icon.description}
+                          />
+                          {review.users.length}
+                        </button>
                       </span>
                     );
                   })
                 : null}
               {notification.subject?.comments > 0 && (
-                <span className="ml-1" title={commentsLabel}>
-                  <CommentIcon
-                    size={16}
-                    className={IconColor.GRAY}
-                    aria-label={commentsLabel}
-                  />
+                <span className="ml-1" title={commentsPillDescription}>
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <CommentIcon
+                      size={12}
+                      className={`mr-1 ${IconColor.GRAY}`}
+                      aria-label={commentsPillDescription}
+                    />
+                    {notification.subject.comments}
+                  </button>
                 </span>
               )}
             </span>
