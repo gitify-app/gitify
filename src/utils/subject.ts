@@ -182,7 +182,9 @@ async function getGitifySubjectForDiscussion(
     state: discussionState,
     user: discussionUser,
     comments: discussion.comments.totalCount,
-    labels: discussion.labels?.nodes.map((label) => label.name),
+    labels: discussion.labels
+      ? discussion.labels.nodes.map((label) => label.name)
+      : [],
   };
 }
 
