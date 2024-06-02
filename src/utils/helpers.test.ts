@@ -518,7 +518,9 @@ describe('utils/helpers.ts', () => {
         `${mockSingleNotification.repository.html_url}?${mockNotificationReferrer}`,
       );
     });
+  });
 
+  describe('formatting', () => {
     it('formatForDisplay', () => {
       expect(formatForDisplay(null)).toBe('');
       expect(formatForDisplay([])).toBe('');

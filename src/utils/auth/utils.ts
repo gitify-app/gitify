@@ -1,16 +1,12 @@
 import { BrowserWindow } from '@electron/remote';
 import { format } from 'date-fns';
-import type {
-  AuthResponse,
-  AuthState,
-  AuthTokenResponse,
-  GitifyUser,
-} from '../types';
-import type { UserDetails } from '../typesGitHub';
-import { Constants } from '../utils/constants';
-import { getAuthenticatedUser } from './api/client';
-import { apiRequest } from './api/request';
-import { isEnterpriseHost } from './helpers';
+import type { AuthState, GitifyUser } from '../../types';
+import type { UserDetails } from '../../typesGitHub';
+import { getAuthenticatedUser } from '../api/client';
+import { apiRequest } from '../api/request';
+import { Constants } from '../constants';
+import { isEnterpriseHost } from '../helpers';
+import type { AuthResponse, AuthTokenResponse } from './types';
 
 export const authGitHub = (
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
