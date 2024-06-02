@@ -405,6 +405,43 @@ describe('utils/subject.ts', () => {
           labels: [],
         });
       });
+
+      it('discussion with labels', async () => {
+        const mockDiscussion = mockDiscussionNode(null, true);
+        mockDiscussion.labels = {
+          nodes: [
+            {
+              name: 'enhancement',
+            },
+          ],
+        };
+        nock('https://api.github.com')
+          .post('/graphql')
+          .reply(200, {
+            data: {
+              search: {
+                nodes: [mockDiscussion],
+              },
+            },
+          });
+
+        const result = await getGitifySubjectDetails(
+          mockNotification,
+          mockAuth.token,
+        );
+
+        expect(result).toEqual({
+          state: 'ANSWERED',
+          user: {
+            login: mockDiscussionAuthor.login,
+            html_url: mockDiscussionAuthor.url,
+            avatar_url: mockDiscussionAuthor.avatar_url,
+            type: mockDiscussionAuthor.type,
+          },
+          comments: 0,
+          labels: ['enhancement'],
+        });
+      });
     });
 
     describe('Issues', () => {
