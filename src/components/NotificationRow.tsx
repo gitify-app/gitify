@@ -153,7 +153,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 <span className="ml-1" title={linkedIssuesPillDescription}>
                   <button type="button" className={Constants.PILL_CLASS_NAME}>
                     <IssueClosedIcon
-                      size={16}
+                      size={12}
                       className={`mr-1 ${IconColor.GREEN}`}
                       aria-label={linkedIssuesPillDescription}
                     />
