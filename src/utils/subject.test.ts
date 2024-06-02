@@ -257,6 +257,7 @@ describe('utils/subject.ts', () => {
             type: mockDiscussionAuthor.type,
           },
           comments: 0,
+          labels: [],
         });
       });
 
@@ -285,6 +286,7 @@ describe('utils/subject.ts', () => {
             type: mockDiscussionAuthor.type,
           },
           comments: 0,
+          labels: [],
         });
       });
 
@@ -313,6 +315,7 @@ describe('utils/subject.ts', () => {
             type: mockDiscussionAuthor.type,
           },
           comments: 0,
+          labels: [],
         });
       });
 
@@ -341,6 +344,7 @@ describe('utils/subject.ts', () => {
             type: mockDiscussionAuthor.type,
           },
           comments: 0,
+          labels: [],
         });
       });
 
@@ -369,6 +373,7 @@ describe('utils/subject.ts', () => {
             type: mockDiscussionAuthor.type,
           },
           comments: 0,
+          labels: [],
         });
       });
 
@@ -397,6 +402,7 @@ describe('utils/subject.ts', () => {
             type: mockDiscussionAuthor.type,
           },
           comments: 0,
+          labels: [],
         });
       });
     });
@@ -416,7 +422,7 @@ describe('utils/subject.ts', () => {
       it('open issue state', async () => {
         nock('https://api.github.com')
           .get('/repos/gitify-app/notifications-test/issues/1')
-          .reply(200, { state: 'open', user: mockAuthor });
+          .reply(200, { state: 'open', user: mockAuthor, labels: [] });
 
         nock('https://api.github.com')
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
@@ -435,13 +441,14 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
+          labels: [],
         });
       });
 
       it('closed issue state', async () => {
         nock('https://api.github.com')
           .get('/repos/gitify-app/notifications-test/issues/1')
-          .reply(200, { state: 'closed', user: mockAuthor });
+          .reply(200, { state: 'closed', user: mockAuthor, labels: [] });
 
         nock('https://api.github.com')
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
@@ -460,6 +467,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
+          labels: [],
         });
       });
 
@@ -470,6 +478,7 @@ describe('utils/subject.ts', () => {
             state: 'closed',
             state_reason: 'completed',
             user: mockAuthor,
+            labels: [],
           });
 
         nock('https://api.github.com')
@@ -489,6 +498,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
+          labels: [],
         });
       });
 
@@ -499,6 +509,7 @@ describe('utils/subject.ts', () => {
             state: 'open',
             state_reason: 'not_planned',
             user: mockAuthor,
+            labels: [],
           });
 
         nock('https://api.github.com')
@@ -518,6 +529,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
+          labels: [],
         });
       });
 
@@ -528,6 +540,7 @@ describe('utils/subject.ts', () => {
             state: 'open',
             state_reason: 'reopened',
             user: mockAuthor,
+            labels: [],
           });
 
         nock('https://api.github.com')
@@ -547,6 +560,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
+          labels: [],
         });
       });
 
@@ -560,6 +574,7 @@ describe('utils/subject.ts', () => {
             draft: false,
             merged: false,
             user: mockAuthor,
+            labels: [],
           });
 
         const result = await getGitifySubjectDetails(
@@ -575,6 +590,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockAuthor.avatar_url,
             type: mockAuthor.type,
           },
+          labels: [],
         });
       });
     });
@@ -600,6 +616,7 @@ describe('utils/subject.ts', () => {
             draft: false,
             merged: false,
             user: mockAuthor,
+            labels: [],
           });
 
         nock('https://api.github.com')
@@ -624,6 +641,7 @@ describe('utils/subject.ts', () => {
             type: mockCommenter.type,
           },
           reviews: null,
+          labels: [],
         });
       });
 
@@ -635,6 +653,7 @@ describe('utils/subject.ts', () => {
             draft: true,
             merged: false,
             user: mockAuthor,
+            labels: [],
           });
 
         nock('https://api.github.com')
@@ -659,6 +678,7 @@ describe('utils/subject.ts', () => {
             type: mockCommenter.type,
           },
           reviews: null,
+          labels: [],
         });
       });
 
@@ -670,6 +690,7 @@ describe('utils/subject.ts', () => {
             draft: false,
             merged: true,
             user: mockAuthor,
+            labels: [],
           });
 
         nock('https://api.github.com')
@@ -694,6 +715,7 @@ describe('utils/subject.ts', () => {
             type: mockCommenter.type,
           },
           reviews: null,
+          labels: [],
         });
       });
 
@@ -705,6 +727,7 @@ describe('utils/subject.ts', () => {
             draft: false,
             merged: false,
             user: mockAuthor,
+            labels: [],
           });
 
         nock('https://api.github.com')
@@ -729,6 +752,7 @@ describe('utils/subject.ts', () => {
             type: mockCommenter.type,
           },
           reviews: null,
+          labels: [],
         });
       });
 
@@ -743,6 +767,7 @@ describe('utils/subject.ts', () => {
             draft: false,
             merged: false,
             user: mockAuthor,
+            labels: [],
           });
 
         nock('https://api.github.com')
@@ -763,6 +788,7 @@ describe('utils/subject.ts', () => {
             type: mockAuthor.type,
           },
           reviews: null,
+          labels: [],
         });
       });
 
@@ -776,6 +802,7 @@ describe('utils/subject.ts', () => {
             draft: false,
             merged: false,
             user: mockAuthor,
+            labels: [],
           });
 
         nock('https://api.github.com')
@@ -796,6 +823,7 @@ describe('utils/subject.ts', () => {
             type: mockAuthor.type,
           },
           reviews: null,
+          labels: [],
         });
       });
 
@@ -1164,6 +1192,8 @@ function mockDiscussionNode(
       nodes: [],
       totalCount: 0,
     },
-    labels: null,
+    labels: {
+      nodes: [],
+    },
   };
 }
