@@ -81,8 +81,8 @@ export const LoginWithPersonalAccessToken: FC = () => {
                   icon={KeyIcon}
                   size={12}
                   url={getNewTokenURL(values.hostname)}
-                />{' '}
-                on GitHub and paste above.
+                />
+                <span className="mx-1">on GitHub and paste above.</span>
               </div>
               <div className="italic mt-1">
                 The required scopes will be selected for you.

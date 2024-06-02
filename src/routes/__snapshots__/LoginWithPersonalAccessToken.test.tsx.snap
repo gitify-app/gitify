@@ -127,8 +127,11 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
                       </svg>
                       Generate a PAT
                     </button>
-                     
-                    on GitHub and paste above.
+                    <span
+                      class="mx-1"
+                    >
+                      on GitHub and paste above.
+                    </span>
                   </div>
                   <div
                     class="italic mt-1"
@@ -315,8 +318,11 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
                     </svg>
                     Generate a PAT
                   </button>
-                   
-                  on GitHub and paste above.
+                  <span
+                    class="mx-1"
+                  >
+                    on GitHub and paste above.
+                  </span>
                 </div>
                 <div
                   class="italic mt-1"

@@ -77,8 +77,8 @@ export const LoginWithOAuthApp: FC = () => {
                 icon={PersonIcon}
                 size={12}
                 url={getNewOAuthAppURL(values.hostname)}
-              />{' '}
-              on GitHub then paste your{' '}
+              />
+              <span className="mx-1">on GitHub then paste your</span>
               <span className="italic">client id and client secret</span> below.
             </div>
           }
