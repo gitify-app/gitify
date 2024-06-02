@@ -93,7 +93,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   }`;
 
   const labelsPillDescription = `Labels:\n${notification.subject.labels
-    ?.map((label) => `  - ${label}`)
+    ?.map((label) => `  • ${label}`)
     .join('\n')}`;
 
   return (
