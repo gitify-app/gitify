@@ -141,8 +141,7 @@ exports[`components/NotificationRow.tsx notification labels should render labels
                 </span>
                 <span
                   class="ml-1"
-                  title="Labels:
-🏷️ enhancement
+                  title="🏷️ enhancement
 🏷️ good-first-issue"
                 >
                   <button
@@ -150,8 +149,7 @@ exports[`components/NotificationRow.tsx notification labels should render labels
                     type="button"
                   >
                     <svg
-                      aria-label="Labels:
-🏷️ enhancement
+                      aria-label="🏷️ enhancement
 🏷️ good-first-issue"
                       class="mr-1 text-gray-500 dark:text-gray-300"
                       fill="currentColor"
@@ -380,8 +378,7 @@ exports[`components/NotificationRow.tsx notification labels should render labels
               </span>
               <span
                 class="ml-1"
-                title="Labels:
-🏷️ enhancement
+                title="🏷️ enhancement
 🏷️ good-first-issue"
               >
                 <button
@@ -389,8 +386,7 @@ exports[`components/NotificationRow.tsx notification labels should render labels
                   type="button"
                 >
                   <svg
-                    aria-label="Labels:
-🏷️ enhancement
+                    aria-label="🏷️ enhancement
 🏷️ good-first-issue"
                     class="mr-1 text-gray-500 dark:text-gray-300"
                     fill="currentColor"

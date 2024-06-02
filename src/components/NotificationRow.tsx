@@ -92,9 +92,9 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     notification.subject.comments > 1 ? 'comments' : 'comment'
   }`;
 
-  const labelsPillDescription = `Labels:\n${notification.subject.labels
+  const labelsPillDescription = notification.subject.labels
     ?.map((label) => `🏷️ ${label}`)
-    .join('\n')}`;
+    .join('\n');
 
   return (
     <div
