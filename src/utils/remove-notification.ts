@@ -14,7 +14,8 @@ export const removeNotification = (
   }
 
   const accountIndex = notifications.findIndex(
-    (accountNotifications) => accountNotifications.hostname === hostname,
+    (accountNotifications) =>
+      accountNotifications.account.hostname === hostname,
   );
 
   if (accountIndex !== -1) {

@@ -7,7 +7,7 @@ import { removeNotifications } from './remove-notifications';
 
 describe('utils/remove-notifications.ts', () => {
   const repoSlug = mockSingleNotification.repository.full_name;
-  const hostname = mockSingleAccountNotifications[0].hostname;
+  const hostname = mockSingleAccountNotifications[0].account.hostname;
 
   it("should remove a repo's notifications - single", () => {
     expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);

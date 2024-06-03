@@ -549,7 +549,6 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
       </button>
       <button
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
-        hidden=""
         title="Login with OAuth App"
         type="button"
       >

@@ -4,8 +4,7 @@ import {
   PersonIcon,
   SignInIcon,
 } from '@primer/octicons-react';
-import ipcRenderer from 'electron';
-import { type FC, useCallback, useContext, useEffect } from 'react';
+import { type FC, useCallback, useContext } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/fields/Button';
@@ -57,18 +56,8 @@ export const validate = (values: IValues): IFormErrors => {
 };
 
 export const LoginWithOAuthApp: FC = () => {
-  const {
-    auth: { enterpriseAccounts },
-    loginWithOAuthApp: loginEnterprise,
-  } = useContext(AppContext);
+  const { loginWithOAuthApp } = useContext(AppContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (enterpriseAccounts.length) {
-      ipcRenderer.ipcRenderer.send('reopen-window');
-      navigate(-1);
-    }
-  }, [enterpriseAccounts]);
 
   const renderForm = (formProps: FormRenderProps) => {
     const { handleSubmit, submitting, pristine, values } = formProps;
@@ -88,8 +77,8 @@ export const LoginWithOAuthApp: FC = () => {
                 icon={PersonIcon}
                 size={12}
                 url={getNewOAuthAppURL(values.hostname)}
-              />{' '}
-              on GitHub then paste your{' '}
+              />
+              <span className="mx-1">on GitHub then paste your</span>
               <span className="italic">client id and client secret</span> below.
             </div>
           }
@@ -129,7 +118,7 @@ export const LoginWithOAuthApp: FC = () => {
 
   const login = useCallback(async (data: IValues) => {
     try {
-      await loginEnterprise(data as LoginOAuthAppOptions);
+      await loginWithOAuthApp(data as LoginOAuthAppOptions);
     } catch (err) {
       // Skip
     }

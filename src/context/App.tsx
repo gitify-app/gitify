@@ -17,6 +17,7 @@ import {
   Theme,
 } from '../types';
 import { headNotifications } from '../utils/api/client';
+import { migrateAuthenticatedAccounts } from '../utils/auth/migration';
 import type {
   LoginOAuthAppOptions,
   LoginPersonalAccessTokenOptions,
@@ -34,6 +35,7 @@ import { clearState, loadState, saveState } from '../utils/storage';
 import { setTheme } from '../utils/theme';
 
 const defaultAuth: AuthState = {
+  accounts: [],
   token: null,
   enterpriseAccounts: [],
   user: null,
@@ -116,8 +118,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     settings.participating,
     settings.showBots,
     settings.detailedNotifications,
-    auth.token,
-    auth.enterpriseAccounts.length,
+    auth.accounts.length,
   ]);
 
   useInterval(() => {
@@ -149,7 +150,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const isLoggedIn = useMemo(() => {
-    return !!auth.token || auth.enterpriseAccounts.length > 0;
+    return auth.accounts.length > 0;
   }, [auth]);
 
   const loginWithGitHubApp = useCallback(async () => {
@@ -157,7 +158,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const { token } = await getToken(authCode);
     const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
     const user = await getUserData(token, hostname);
-    const updatedAuth = addAccount(auth, token, hostname, user);
+    const updatedAuth = addAccount(auth, 'GitHub App', token, hostname, user);
     setAuth(updatedAuth);
     saveState({ auth: updatedAuth, settings });
   }, [auth, settings]);
@@ -166,7 +167,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     async (data: LoginOAuthAppOptions) => {
       const { authOptions, authCode } = await authGitHub(data);
       const { token, hostname } = await getToken(authCode, authOptions);
-      const updatedAuth = addAccount(auth, token, hostname);
+      const updatedAuth = addAccount(auth, 'OAuth App', token, hostname);
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
@@ -178,7 +179,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       await headNotifications(hostname, token);
 
       const user = await getUserData(token, hostname);
-      const updatedAuth = addAccount(auth, token, hostname, user);
+      const updatedAuth = addAccount(
+        auth,
+        'Personal Access Token',
+        token,
+        hostname,
+        user,
+      );
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
@@ -190,7 +197,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     clearState();
   }, []);
 
-  const restoreSettings = useCallback(() => {
+  const restoreSettings = useCallback(async () => {
+    await migrateAuthenticatedAccounts();
+
     const existing = loadState();
 
     if (existing.auth) {

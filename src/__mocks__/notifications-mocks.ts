@@ -2,23 +2,26 @@ import type { AccountNotifications } from '../types';
 import {
   mockEnterpriseNotifications,
   mockGitHubNotifications,
-  mockSingleNotification,
 } from '../utils/api/__mocks__/response-mocks';
+import {
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+} from './state-mocks';
 
 export const mockAccountNotifications: AccountNotifications[] = [
   {
-    hostname: 'github.com',
+    account: mockGitHubCloudAccount,
     notifications: mockGitHubNotifications,
   },
   {
-    hostname: 'github.gitify.io',
+    account: mockGitHubEnterpriseServerAccount,
     notifications: mockEnterpriseNotifications,
   },
 ];
 
 export const mockSingleAccountNotifications: AccountNotifications[] = [
   {
-    hostname: 'github.com',
-    notifications: [mockSingleNotification],
+    account: mockGitHubCloudAccount,
+    notifications: [mockGitHubNotifications[0]],
   },
 ];

@@ -1,6 +1,5 @@
 import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import { useContext } from 'react';
-
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, SettingsState } from '../types';
@@ -133,6 +132,7 @@ describe('context/App.tsx', () => {
       expect(markNotificationReadMock).toHaveBeenCalledTimes(1);
       expect(markNotificationReadMock).toHaveBeenCalledWith(
         {
+          accounts: [],
           enterpriseAccounts: [],
           token: null,
           user: null,
@@ -165,7 +165,7 @@ describe('context/App.tsx', () => {
 
       expect(markNotificationDoneMock).toHaveBeenCalledTimes(1);
       expect(markNotificationDoneMock).toHaveBeenCalledWith(
-        { enterpriseAccounts: [], token: null, user: null },
+        { accounts: [], enterpriseAccounts: [], token: null, user: null },
         mockSettings,
         '123-456',
         'github.com',
@@ -194,7 +194,7 @@ describe('context/App.tsx', () => {
 
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
       expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
-        { enterpriseAccounts: [], token: null, user: null },
+        { accounts: [], enterpriseAccounts: [], token: null, user: null },
         mockSettings,
         '123-456',
         'github.com',
@@ -228,7 +228,7 @@ describe('context/App.tsx', () => {
 
       expect(markRepoNotificationsMock).toHaveBeenCalledTimes(1);
       expect(markRepoNotificationsMock).toHaveBeenCalledWith(
-        { enterpriseAccounts: [], token: null, user: null },
+        { accounts: [], enterpriseAccounts: [], token: null, user: null },
         mockSettings,
         'gitify-app/notifications-test',
         'github.com',
@@ -262,13 +262,14 @@ describe('context/App.tsx', () => {
 
       expect(markRepoNotificationsDoneMock).toHaveBeenCalledTimes(1);
       expect(markRepoNotificationsDoneMock).toHaveBeenCalledWith(
-        { enterpriseAccounts: [], token: null, user: null },
+        { accounts: [], enterpriseAccounts: [], token: null, user: null },
         mockSettings,
         'gitify-app/notifications-test',
         'github.com',
       );
     });
   });
+
   describe('authentication methods', () => {
     const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
     const fetchNotificationsMock = jest.fn();
@@ -370,7 +371,7 @@ describe('context/App.tsx', () => {
       });
 
       expect(saveStateMock).toHaveBeenCalledWith({
-        auth: { enterpriseAccounts: [], token: null, user: null },
+        auth: { accounts: [], enterpriseAccounts: [], token: null, user: null },
         settings: {
           participating: true,
           playSound: true,
@@ -415,7 +416,7 @@ describe('context/App.tsx', () => {
       expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
 
       expect(saveStateMock).toHaveBeenCalledWith({
-        auth: { enterpriseAccounts: [], token: null, user: null },
+        auth: { accounts: [], enterpriseAccounts: [], token: null, user: null },
         settings: {
           participating: false,
           playSound: true,

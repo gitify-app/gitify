@@ -1,8 +1,9 @@
 import { formatDistanceToNow, parseISO } from 'date-fns';
-import type { AuthState } from '../types';
+import type { Account, AuthState } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
+import type { PlatformType } from './auth/types';
 import { Constants } from './constants';
 import {
   getCheckSuiteAttributes,
@@ -11,23 +12,23 @@ import {
 } from './subject';
 
 export function isPersonalAccessTokenLoggedIn(auth: AuthState): boolean {
-  return auth.token != null;
+  return auth.accounts.some(
+    (account) => account.method === 'Personal Access Token',
+  );
 }
 
 export function isOAuthAppLoggedIn(auth: AuthState): boolean {
-  return auth.enterpriseAccounts?.length > 0;
+  return auth.accounts.some((account) => account.method === 'OAuth App');
 }
 
-export function getTokenForHost(hostname: string, auth: AuthState): string {
-  const isEnterprise = isEnterpriseHost(hostname);
+export function getAccountForHost(hostname: string, auth: AuthState): Account {
+  return auth.accounts.find((account) => hostname.endsWith(account.hostname));
+}
 
-  if (isEnterprise) {
-    return auth.enterpriseAccounts.find(
-      (account) => account.hostname === hostname,
-    ).token;
-  }
-
-  return auth.token;
+export function getPlatformFromHostname(hostname: string): PlatformType {
+  return hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname)
+    ? 'GitHub Cloud'
+    : 'GitHub Enterprise Server';
 }
 
 export function isEnterpriseHost(hostname: string): boolean {
@@ -35,11 +36,10 @@ export function isEnterpriseHost(hostname: string): boolean {
 }
 
 export function generateNotificationReferrerId(
-  notificationId: string,
-  userId: number,
+  notification: Notification,
 ): string {
   const buffer = Buffer.from(
-    `018:NotificationThread${notificationId}:${userId}`,
+    `018:NotificationThread${notification.id}:${notification.account.user.id}`,
   );
   return buffer.toString('base64');
 }
@@ -93,14 +93,11 @@ export function actionsURL(repositoryURL: string, filters: string[]): string {
   return url.toString().replace(/%2B/g, '+');
 }
 
-async function getDiscussionUrl(
-  notification: Notification,
-  token: string,
-): Promise<string> {
+async function getDiscussionUrl(notification: Notification): Promise<string> {
   const url = new URL(notification.repository.html_url);
   url.pathname += '/discussions';
 
-  const discussion = await getLatestDiscussion(notification, token);
+  const discussion = await getLatestDiscussion(notification);
 
   if (discussion) {
     url.href = discussion.url;
@@ -117,15 +114,19 @@ async function getDiscussionUrl(
 
 export async function generateGitHubWebUrl(
   notification: Notification,
-  auth: AuthState,
 ): Promise<string> {
   const url = new URL(notification.repository.html_url);
-  const token = getTokenForHost(notification.hostname, auth);
 
   if (notification.subject.latest_comment_url) {
-    url.href = await getHtmlUrl(notification.subject.latest_comment_url, token);
+    url.href = await getHtmlUrl(
+      notification.subject.latest_comment_url,
+      notification.account.token,
+    );
   } else if (notification.subject.url) {
-    url.href = await getHtmlUrl(notification.subject.url, token);
+    url.href = await getHtmlUrl(
+      notification.subject.url,
+      notification.account.token,
+    );
   } else {
     // Perform any specific notification type handling (only required for a few special notification scenarios)
     switch (notification.subject.type) {
@@ -133,7 +134,7 @@ export async function generateGitHubWebUrl(
         url.href = getCheckSuiteUrl(notification);
         break;
       case 'Discussion':
-        url.href = await getDiscussionUrl(notification, token);
+        url.href = await getDiscussionUrl(notification);
         break;
       case 'RepositoryInvitation':
         url.pathname += '/invitations';
@@ -148,7 +149,7 @@ export async function generateGitHubWebUrl(
 
   url.searchParams.set(
     'notification_referrer_id',
-    generateNotificationReferrerId(notification.id, auth.user?.id),
+    generateNotificationReferrerId(notification),
   );
 
   return url.toString();
@@ -174,16 +175,17 @@ export function formatNotificationUpdatedAt(
 ): string {
   const date = notification.last_read_at ?? notification.updated_at;
 
-  return formatDistanceToNow(parseISO(date), {
-    addSuffix: true,
-  });
+  try {
+    return formatDistanceToNow(parseISO(date), {
+      addSuffix: true,
+    });
+  } catch (e) {}
+
+  return '';
 }
 
-export async function openInBrowser(
-  notification: Notification,
-  auth: AuthState,
-) {
-  const url = await generateGitHubWebUrl(notification, auth);
+export async function openInBrowser(notification: Notification) {
+  const url = await generateGitHubWebUrl(notification);
 
   openExternalLink(url);
 }
