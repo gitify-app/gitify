@@ -37,6 +37,12 @@ export const AccountsRoute: FC = () => {
     updateTrayTitle();
   }, []);
 
+  const openProfile = (account: Account) => {
+    const url = new URL(`https://${account.hostname}`);
+    url.pathname = account.user.login;
+    openExternalLink(url.toString());
+  };
+
   const openHost = (hostname: string) => {
     openExternalLink(`https://${hostname}`);
   };
@@ -87,9 +93,11 @@ export const AccountsRoute: FC = () => {
               className="flex justify-between items-center bg-gray-100 dark:bg-gray-900 rounded-md p-1 mb-4"
             >
               <div className="ml-2 text-xs">
-                <div
-                  className="font-semibold mb-1 text-sm"
+                <button
+                  type="button"
+                  className="cursor-pointer font-semibold mb-1 text-sm"
                   title="Open Profile"
+                  onClick={() => openProfile(account)}
                 >
                   @{account.user.login}
                   <span
@@ -98,13 +106,13 @@ export const AccountsRoute: FC = () => {
                   >
                     - {account.user?.name}
                   </span>
-                </div>
+                </button>
 
-                <div
+                <button
+                  type="button"
                   className="cursor-pointer mb-1 ml-1 align-middle"
                   title="Open Host"
                   onClick={() => openHost(account.hostname)}
-                  onKeyDown={() => openHost(account.hostname)}
                 >
                   {account.platform === 'GitHub Cloud' ? (
                     <MarkGithubIcon
@@ -121,12 +129,12 @@ export const AccountsRoute: FC = () => {
                     />
                   ) : null}
                   {account.platform} - {account.hostname}
-                </div>
-                <div
+                </button>
+                <button
+                  type="button"
                   className="cursor-pointer ml-1 align-middle"
                   title="Open Developer Settings"
                   onClick={() => openDeveloperSettings(account)}
-                  onKeyDown={() => openDeveloperSettings(account)}
                 >
                   {account.method === 'GitHub App' ? (
                     <AppsIcon
@@ -150,7 +158,7 @@ export const AccountsRoute: FC = () => {
                     />
                   ) : null}
                   {account.method}
-                </div>
+                </button>
               </div>
               <div>
                 <button
@@ -158,7 +166,6 @@ export const AccountsRoute: FC = () => {
                   className={buttonClass}
                   title={`Logout ${account.user.login}`}
                   onClick={() => logoutAccount(account)}
-                  onKeyDown={() => logoutAccount(account)}
                 >
                   <SignOutIcon
                     size={20}
