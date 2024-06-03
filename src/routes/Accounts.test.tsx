@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import {
+  mockAuth,
   mockOAuthAccount,
   mockPersonalAccessTokenAccount,
   mockSettings,
@@ -17,6 +18,44 @@ jest.mock('react-router-dom', () => ({
 describe('routes/Accounts.tsx', () => {
   beforeEach(() => {
     jest.clearAllMocks();
+  });
+
+  describe('General', () => {
+    it('should render itself & its children', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{ auth: mockAuth, settings: mockSettings }}
+          >
+            <MemoryRouter>
+              <AccountsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      expect(screen.getByTestId('accounts')).toMatchSnapshot();
+    });
+
+    it('should go back by pressing the icon', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <AccountsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      fireEvent.click(screen.getByLabelText('Go Back'));
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+    });
   });
 
   describe('Login with Personal Access Token', () => {

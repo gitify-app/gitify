@@ -58,7 +58,10 @@ export const AccountsRoute: FC = () => {
     'hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none';
 
   return (
-    <div className="flex flex-1 flex-col h-screen dark:bg-gray-dark dark:text-white">
+    <div
+      className="flex flex-1 flex-col h-screen dark:bg-gray-dark dark:text-white"
+      data-testid="accounts"
+    >
       <div className="flex justify-between items-center mt-2 py-2 mx-8">
         <button
           type="button"
