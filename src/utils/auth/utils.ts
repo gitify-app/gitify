@@ -129,12 +129,12 @@ export function addAccount(
 }
 
 export function removeAccount(auth: AuthState, account: Account): AuthState {
+  const updatedAccounts = auth.accounts.filter(
+    (a) => a.token !== account.token,
+  );
+
   return {
-    accounts: [
-      ...auth.accounts.filter(
-        (a) => a.hostname !== account.hostname && a.token !== account.token,
-      ),
-    ],
+    accounts: updatedAccounts,
   };
 }
 

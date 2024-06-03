@@ -1,6 +1,7 @@
 import remote from '@electron/remote';
 import type { AxiosPromise, AxiosResponse } from 'axios';
-import type { AuthState } from '../../types';
+import { mockAuth, mockGitHubCloudAccount } from '../../__mocks__/state-mocks';
+import type { Account, AuthState } from '../../types';
 import * as apiRequests from '../api/request';
 import * as auth from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
@@ -189,6 +190,28 @@ describe('utils/auth/utils.ts', () => {
           },
         ]);
       });
+    });
+  });
+
+  describe('removeAccount', () => {
+    it('should remove account with matching token', async () => {
+      expect(mockAuth.accounts.length).toBe(2);
+
+      const result = auth.removeAccount(mockAuth, mockGitHubCloudAccount);
+
+      expect(result.accounts.length).toBe(1);
+    });
+
+    it('should do nothing if no accounts match', async () => {
+      const mockAccount = {
+        token: 'unknown-token',
+      } as Account;
+
+      expect(mockAuth.accounts.length).toBe(2);
+
+      const result = auth.removeAccount(mockAuth, mockAccount);
+
+      expect(result.accounts.length).toBe(2);
     });
   });
 
