@@ -1,484 +1,577 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`routes/Notifications.tsx should render itself & its children (all read notifications) 1`] = `<AllRead />`;
+exports[`routes/Notifications.tsx should render itself & its children (all read notifications) 1`] = `
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <allread />
+    </div>
+  </body>,
+  "container": <div>
+    <allread />
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
+`;
 
 exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) bad credentials 1`] = `
-<Oops
-  error={
-    {
-      "descriptions": [
-        "Your credentials are either invalid or expired.",
-      ],
-      "emojis": [
-        "🔓",
-      ],
-      "title": "Bad Credentials",
-    }
-  }
-/>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <oops
+        error="[object Object]"
+      />
+    </div>
+  </body>,
+  "container": <div>
+    <oops
+      error="[object Object]"
+    />
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) default error 1`] = `
-<Oops
-  error={
-    {
-      "descriptions": [
-        "Please try again later.",
-      ],
-      "emojis": [
-        "🤔",
-        "😞",
-        "😤",
-        "😱",
-        "😭",
-      ],
-      "title": "Oops! Something went wrong",
-    }
-  }
-/>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <oops
+        error="[object Object]"
+      />
+    </div>
+  </body>,
+  "container": <div>
+    <oops
+      error="[object Object]"
+    />
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) missing scopes 1`] = `
-<Oops
-  error={
-    {
-      "descriptions": [
-        "Your credentials are missing a required API scope.",
-      ],
-      "emojis": [
-        "🙃",
-      ],
-      "title": "Missing Scopes",
-    }
-  }
-/>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <oops
+        error="[object Object]"
+      />
+    </div>
+  </body>,
+  "container": <div>
+    <oops
+      error="[object Object]"
+    />
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) rate limited 1`] = `
-<Oops
-  error={
-    {
-      "descriptions": [
-        "Please wait a while before trying again.",
-      ],
-      "emojis": [
-        "😮‍💨",
-      ],
-      "title": "Rate Limited",
-    }
-  }
-/>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <oops
+        error="[object Object]"
+      />
+    </div>
+  </body>,
+  "container": <div>
+    <oops
+      error="[object Object]"
+    />
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`routes/Notifications.tsx should render itself & its children (error conditions - oops) unknown error 1`] = `
-<Oops
-  error={
-    {
-      "descriptions": [
-        "Please try again later.",
-      ],
-      "emojis": [
-        "🤔",
-        "😞",
-        "😤",
-        "😱",
-        "😭",
-      ],
-      "title": "Oops! Something went wrong",
-    }
-  }
-/>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <oops
+        error="[object Object]"
+      />
+    </div>
+  </body>,
+  "container": <div>
+    <oops
+      error="[object Object]"
+    />
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`routes/Notifications.tsx should render itself & its children (show account hostname) 1`] = `
-<div
-  className="flex flex-col flex-1 bg-white dark:bg-gray-dark"
->
-  <AccountNotifications
-    hostname="github.com"
-    notifications={
-      [
-        {
-          "hostname": "github.com",
-          "id": "138661096",
-          "last_read_at": "2017-05-20T17:06:51Z",
-          "reason": "subscribed",
-          "repository": {
-            "archive_url": "https://api.github.com/repos/manosim/notifications-test/{archive_format}{/ref}",
-            "assignees_url": "https://api.github.com/repos/manosim/notifications-test/assignees{/user}",
-            "blobs_url": "https://api.github.com/repos/manosim/notifications-test/git/blobs{/sha}",
-            "branches_url": "https://api.github.com/repos/manosim/notifications-test/branches{/branch}",
-            "collaborators_url": "https://api.github.com/repos/manosim/notifications-test/collaborators{/collaborator}",
-            "comments_url": "https://api.github.com/repos/manosim/notifications-test/comments{/number}",
-            "commits_url": "https://api.github.com/repos/manosim/notifications-test/commits{/sha}",
-            "compare_url": "https://api.github.com/repos/manosim/notifications-test/compare/{base}...{head}",
-            "contents_url": "https://api.github.com/repos/manosim/notifications-test/contents/{+path}",
-            "contributors_url": "https://api.github.com/repos/manosim/notifications-test/contributors",
-            "deployments_url": "https://api.github.com/repos/manosim/notifications-test/deployments",
-            "description": "Test Repository",
-            "downloads_url": "https://api.github.com/repos/manosim/notifications-test/downloads",
-            "events_url": "https://api.github.com/repos/manosim/notifications-test/events",
-            "fork": false,
-            "forks_url": "https://api.github.com/repos/manosim/notifications-test/forks",
-            "full_name": "manosim/notifications-test",
-            "git_commits_url": "https://api.github.com/repos/manosim/notifications-test/git/commits{/sha}",
-            "git_refs_url": "https://api.github.com/repos/manosim/notifications-test/git/refs{/sha}",
-            "git_tags_url": "https://api.github.com/repos/manosim/notifications-test/git/tags{/sha}",
-            "hooks_url": "https://api.github.com/repos/manosim/notifications-test/hooks",
-            "html_url": "https://github.com/manosim/notifications-test",
-            "id": 57216596,
-            "issue_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments{/number}",
-            "issue_events_url": "https://api.github.com/repos/manosim/notifications-test/issues/events{/number}",
-            "issues_url": "https://api.github.com/repos/manosim/notifications-test/issues{/number}",
-            "keys_url": "https://api.github.com/repos/manosim/notifications-test/keys{/key_id}",
-            "labels_url": "https://api.github.com/repos/manosim/notifications-test/labels{/name}",
-            "languages_url": "https://api.github.com/repos/manosim/notifications-test/languages",
-            "merges_url": "https://api.github.com/repos/manosim/notifications-test/merges",
-            "milestones_url": "https://api.github.com/repos/manosim/notifications-test/milestones{/number}",
-            "name": "notifications-test",
-            "node_id": "MDEwOlJlcG9zaXRvcnkzNjAyOTcwNg==",
-            "notifications_url": "https://api.github.com/repos/manosim/notifications-test/notifications{?since,all,participating}",
-            "owner": {
-              "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
-              "events_url": "https://api.github.com/users/manosim/events{/privacy}",
-              "followers_url": "https://api.github.com/users/manosim/followers",
-              "following_url": "https://api.github.com/users/manosim/following{/other_user}",
-              "gists_url": "https://api.github.com/users/manosim/gists{/gist_id}",
-              "gravatar_id": "",
-              "html_url": "https://github.com/manosim",
-              "id": 6333409,
-              "login": "manosim",
-              "node_id": "MDQ6VXNlcjYzMzM0MDk=",
-              "organizations_url": "https://api.github.com/users/manosim/orgs",
-              "received_events_url": "https://api.github.com/users/manosim/received_events",
-              "repos_url": "https://api.github.com/users/manosim/repos",
-              "site_admin": false,
-              "starred_url": "https://api.github.com/users/manosim/starred{/owner}{/repo}",
-              "subscriptions_url": "https://api.github.com/users/manosim/subscriptions",
-              "type": "User",
-              "url": "https://api.github.com/users/manosim",
-            },
-            "private": true,
-            "pulls_url": "https://api.github.com/repos/manosim/notifications-test/pulls{/number}",
-            "releases_url": "https://api.github.com/repos/manosim/notifications-test/releases{/id}",
-            "stargazers_url": "https://api.github.com/repos/manosim/notifications-test/stargazers",
-            "statuses_url": "https://api.github.com/repos/manosim/notifications-test/statuses/{sha}",
-            "subscribers_url": "https://api.github.com/repos/manosim/notifications-test/subscribers",
-            "subscription_url": "https://api.github.com/repos/manosim/notifications-test/subscription",
-            "tags_url": "https://api.github.com/repos/manosim/notifications-test/tags",
-            "teams_url": "https://api.github.com/repos/manosim/notifications-test/teams",
-            "trees_url": "https://api.github.com/repos/manosim/notifications-test/git/trees{/sha}",
-            "url": "https://api.github.com/manosim/notifications-test",
-          },
-          "subject": {
-            "latest_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments/302888448",
-            "state": "open",
-            "title": "I am a robot and this is a test!",
-            "type": "Issue",
-            "url": "https://api.github.com/repos/manosim/notifications-test/issues/1",
-            "user": {
-              "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
-              "html_url": "https://github.com/manosim",
-              "login": "manosim",
-              "type": "User",
-            },
-          },
-          "subscription_url": "https://api.github.com/notifications/threads/138661096/subscription",
-          "unread": true,
-          "updated_at": "2017-05-20T17:51:57Z",
-          "url": "https://api.github.com/notifications/threads/138661096",
-        },
-        {
-          "hostname": "github.com",
-          "id": "148827438",
-          "last_read_at": "2017-05-20T16:59:03Z",
-          "reason": "author",
-          "repository": {
-            "description": null,
-            "fork": false,
-            "full_name": "manosim/notifications-test",
-            "html_url": "https://github.com/manosim/notifications-test",
-            "id": 57216596,
-            "name": "notifications-test",
-            "owner": {
-              "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
-              "events_url": "https://api.github.com/users/manosim/events{/privacy}",
-              "followers_url": "https://api.github.com/users/manosim/followers",
-              "following_url": "https://api.github.com/users/manosim/following{/other_user}",
-              "gists_url": "https://api.github.com/users/manosim/gists{/gist_id}",
-              "gravatar_id": "",
-              "html_url": "https://github.com/manosim",
-              "id": 6333409,
-              "login": "manosim",
-              "organizations_url": "https://api.github.com/users/manosim/orgs",
-              "received_events_url": "https://api.github.com/users/manosim/received_events",
-              "repos_url": "https://api.github.com/users/manosim/repos",
-              "site_admin": false,
-              "starred_url": "https://api.github.com/users/manosim/starred{/owner}{/repo}",
-              "subscriptions_url": "https://api.github.com/users/manosim/subscriptions",
-              "type": "User",
-              "url": "https://api.github.com/users/manosim",
-            },
-            "private": true,
-          },
-          "subject": {
-            "latest_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments/302885965",
-            "title": "Improve the UI",
-            "type": "Issue",
-            "url": "https://api.github.com/repos/manosim/notifications-test/issues/4",
-          },
-          "subscription_url": "https://api.github.com/notifications/threads/148827438/subscription",
-          "unread": true,
-          "updated_at": "2017-05-20T17:06:34Z",
-          "url": "https://api.github.com/notifications/threads/148827438",
-        },
-      ]
-    }
-    showAccountHostname={true}
-  />
-</div>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="flex flex-col flex-1 bg-white dark:bg-gray-dark"
+      >
+        <accountnotifications
+          hostname="github.com"
+          notifications="[object Object],[object Object]"
+        />
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="flex flex-col flex-1 bg-white dark:bg-gray-dark"
+    >
+      <accountnotifications
+        hostname="github.com"
+        notifications="[object Object],[object Object]"
+      />
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`routes/Notifications.tsx should render itself & its children (with notifications) 1`] = `
-<div
-  className="flex flex-col flex-1 bg-white dark:bg-gray-dark"
->
-  <AccountNotifications
-    hostname="github.com"
-    notifications={
-      [
-        {
-          "hostname": "github.com",
-          "id": "138661096",
-          "last_read_at": "2017-05-20T17:06:51Z",
-          "reason": "subscribed",
-          "repository": {
-            "archive_url": "https://api.github.com/repos/manosim/notifications-test/{archive_format}{/ref}",
-            "assignees_url": "https://api.github.com/repos/manosim/notifications-test/assignees{/user}",
-            "blobs_url": "https://api.github.com/repos/manosim/notifications-test/git/blobs{/sha}",
-            "branches_url": "https://api.github.com/repos/manosim/notifications-test/branches{/branch}",
-            "collaborators_url": "https://api.github.com/repos/manosim/notifications-test/collaborators{/collaborator}",
-            "comments_url": "https://api.github.com/repos/manosim/notifications-test/comments{/number}",
-            "commits_url": "https://api.github.com/repos/manosim/notifications-test/commits{/sha}",
-            "compare_url": "https://api.github.com/repos/manosim/notifications-test/compare/{base}...{head}",
-            "contents_url": "https://api.github.com/repos/manosim/notifications-test/contents/{+path}",
-            "contributors_url": "https://api.github.com/repos/manosim/notifications-test/contributors",
-            "deployments_url": "https://api.github.com/repos/manosim/notifications-test/deployments",
-            "description": "Test Repository",
-            "downloads_url": "https://api.github.com/repos/manosim/notifications-test/downloads",
-            "events_url": "https://api.github.com/repos/manosim/notifications-test/events",
-            "fork": false,
-            "forks_url": "https://api.github.com/repos/manosim/notifications-test/forks",
-            "full_name": "manosim/notifications-test",
-            "git_commits_url": "https://api.github.com/repos/manosim/notifications-test/git/commits{/sha}",
-            "git_refs_url": "https://api.github.com/repos/manosim/notifications-test/git/refs{/sha}",
-            "git_tags_url": "https://api.github.com/repos/manosim/notifications-test/git/tags{/sha}",
-            "hooks_url": "https://api.github.com/repos/manosim/notifications-test/hooks",
-            "html_url": "https://github.com/manosim/notifications-test",
-            "id": 57216596,
-            "issue_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments{/number}",
-            "issue_events_url": "https://api.github.com/repos/manosim/notifications-test/issues/events{/number}",
-            "issues_url": "https://api.github.com/repos/manosim/notifications-test/issues{/number}",
-            "keys_url": "https://api.github.com/repos/manosim/notifications-test/keys{/key_id}",
-            "labels_url": "https://api.github.com/repos/manosim/notifications-test/labels{/name}",
-            "languages_url": "https://api.github.com/repos/manosim/notifications-test/languages",
-            "merges_url": "https://api.github.com/repos/manosim/notifications-test/merges",
-            "milestones_url": "https://api.github.com/repos/manosim/notifications-test/milestones{/number}",
-            "name": "notifications-test",
-            "node_id": "MDEwOlJlcG9zaXRvcnkzNjAyOTcwNg==",
-            "notifications_url": "https://api.github.com/repos/manosim/notifications-test/notifications{?since,all,participating}",
-            "owner": {
-              "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
-              "events_url": "https://api.github.com/users/manosim/events{/privacy}",
-              "followers_url": "https://api.github.com/users/manosim/followers",
-              "following_url": "https://api.github.com/users/manosim/following{/other_user}",
-              "gists_url": "https://api.github.com/users/manosim/gists{/gist_id}",
-              "gravatar_id": "",
-              "html_url": "https://github.com/manosim",
-              "id": 6333409,
-              "login": "manosim",
-              "node_id": "MDQ6VXNlcjYzMzM0MDk=",
-              "organizations_url": "https://api.github.com/users/manosim/orgs",
-              "received_events_url": "https://api.github.com/users/manosim/received_events",
-              "repos_url": "https://api.github.com/users/manosim/repos",
-              "site_admin": false,
-              "starred_url": "https://api.github.com/users/manosim/starred{/owner}{/repo}",
-              "subscriptions_url": "https://api.github.com/users/manosim/subscriptions",
-              "type": "User",
-              "url": "https://api.github.com/users/manosim",
-            },
-            "private": true,
-            "pulls_url": "https://api.github.com/repos/manosim/notifications-test/pulls{/number}",
-            "releases_url": "https://api.github.com/repos/manosim/notifications-test/releases{/id}",
-            "stargazers_url": "https://api.github.com/repos/manosim/notifications-test/stargazers",
-            "statuses_url": "https://api.github.com/repos/manosim/notifications-test/statuses/{sha}",
-            "subscribers_url": "https://api.github.com/repos/manosim/notifications-test/subscribers",
-            "subscription_url": "https://api.github.com/repos/manosim/notifications-test/subscription",
-            "tags_url": "https://api.github.com/repos/manosim/notifications-test/tags",
-            "teams_url": "https://api.github.com/repos/manosim/notifications-test/teams",
-            "trees_url": "https://api.github.com/repos/manosim/notifications-test/git/trees{/sha}",
-            "url": "https://api.github.com/manosim/notifications-test",
-          },
-          "subject": {
-            "latest_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments/302888448",
-            "state": "open",
-            "title": "I am a robot and this is a test!",
-            "type": "Issue",
-            "url": "https://api.github.com/repos/manosim/notifications-test/issues/1",
-            "user": {
-              "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
-              "html_url": "https://github.com/manosim",
-              "login": "manosim",
-              "type": "User",
-            },
-          },
-          "subscription_url": "https://api.github.com/notifications/threads/138661096/subscription",
-          "unread": true,
-          "updated_at": "2017-05-20T17:51:57Z",
-          "url": "https://api.github.com/notifications/threads/138661096",
-        },
-        {
-          "hostname": "github.com",
-          "id": "148827438",
-          "last_read_at": "2017-05-20T16:59:03Z",
-          "reason": "author",
-          "repository": {
-            "description": null,
-            "fork": false,
-            "full_name": "manosim/notifications-test",
-            "html_url": "https://github.com/manosim/notifications-test",
-            "id": 57216596,
-            "name": "notifications-test",
-            "owner": {
-              "avatar_url": "https://avatars0.githubusercontent.com/u/6333409?v=3",
-              "events_url": "https://api.github.com/users/manosim/events{/privacy}",
-              "followers_url": "https://api.github.com/users/manosim/followers",
-              "following_url": "https://api.github.com/users/manosim/following{/other_user}",
-              "gists_url": "https://api.github.com/users/manosim/gists{/gist_id}",
-              "gravatar_id": "",
-              "html_url": "https://github.com/manosim",
-              "id": 6333409,
-              "login": "manosim",
-              "organizations_url": "https://api.github.com/users/manosim/orgs",
-              "received_events_url": "https://api.github.com/users/manosim/received_events",
-              "repos_url": "https://api.github.com/users/manosim/repos",
-              "site_admin": false,
-              "starred_url": "https://api.github.com/users/manosim/starred{/owner}{/repo}",
-              "subscriptions_url": "https://api.github.com/users/manosim/subscriptions",
-              "type": "User",
-              "url": "https://api.github.com/users/manosim",
-            },
-            "private": true,
-          },
-          "subject": {
-            "latest_comment_url": "https://api.github.com/repos/manosim/notifications-test/issues/comments/302885965",
-            "title": "Improve the UI",
-            "type": "Issue",
-            "url": "https://api.github.com/repos/manosim/notifications-test/issues/4",
-          },
-          "subscription_url": "https://api.github.com/notifications/threads/148827438/subscription",
-          "unread": true,
-          "updated_at": "2017-05-20T17:06:34Z",
-          "url": "https://api.github.com/notifications/threads/148827438",
-        },
-      ]
-    }
-    showAccountHostname={true}
-  />
-  <AccountNotifications
-    hostname="github.gitify.io"
-    notifications={
-      [
-        {
-          "id": "4",
-          "last_read_at": null,
-          "reason": "subscribed",
-          "repository": {
-            "description": null,
-            "fork": false,
-            "full_name": "myorg/notifications-test",
-            "html_url": "https://github.gitify.io/myorg/notifications-test",
-            "id": 1,
-            "name": "notifications-test",
-            "owner": {
-              "avatar_url": "https://github.gitify.io/avatars/u/4?",
-              "events_url": "https://github.gitify.io/api/v3/users/myorg/events{/privacy}",
-              "followers_url": "https://github.gitify.io/api/v3/users/myorg/followers",
-              "following_url": "https://github.gitify.io/api/v3/users/myorg/following{/other_user}",
-              "gists_url": "https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}",
-              "gravatar_id": "",
-              "html_url": "https://github.gitify.io/myorg",
-              "id": 4,
-              "login": "myorg",
-              "organizations_url": "https://github.gitify.io/api/v3/users/myorg/orgs",
-              "received_events_url": "https://github.gitify.io/api/v3/users/myorg/received_events",
-              "repos_url": "https://github.gitify.io/api/v3/users/myorg/repos",
-              "site_admin": false,
-              "starred_url": "https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}",
-              "subscriptions_url": "https://github.gitify.io/api/v3/users/myorg/subscriptions",
-              "type": "Organization",
-              "url": "https://github.gitify.io/api/v3/users/myorg",
-            },
-            "private": true,
-          },
-          "subject": {
-            "latest_comment_url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1",
-            "title": "Release 0.0.1",
-            "type": "Release",
-            "url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/1",
-          },
-          "subscription_url": "https://github.gitify.io/api/v3/notifications/threads/4/subscription",
-          "unread": true,
-          "updated_at": "2017-05-20T13:02:48Z",
-          "url": "https://github.gitify.io/api/v3/notifications/threads/4",
-        },
-        {
-          "hostname": "github.com",
-          "id": "3",
-          "last_read_at": "2017-05-20T14:20:55Z",
-          "reason": "subscribed",
-          "repository": {
-            "description": null,
-            "fork": false,
-            "full_name": "myorg/notifications-test",
-            "html_url": "https://github.gitify.io/myorg/notifications-test",
-            "id": 1,
-            "name": "notifications-test",
-            "owner": {
-              "avatar_url": "https://github.gitify.io/avatars/u/4?",
-              "events_url": "https://github.gitify.io/api/v3/users/myorg/events{/privacy}",
-              "followers_url": "https://github.gitify.io/api/v3/users/myorg/followers",
-              "following_url": "https://github.gitify.io/api/v3/users/myorg/following{/other_user}",
-              "gists_url": "https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}",
-              "gravatar_id": "",
-              "html_url": "https://github.gitify.io/myorg",
-              "id": 4,
-              "login": "myorg",
-              "organizations_url": "https://github.gitify.io/api/v3/users/myorg/orgs",
-              "received_events_url": "https://github.gitify.io/api/v3/users/myorg/received_events",
-              "repos_url": "https://github.gitify.io/api/v3/users/myorg/repos",
-              "site_admin": false,
-              "starred_url": "https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}",
-              "subscriptions_url": "https://github.gitify.io/api/v3/users/myorg/subscriptions",
-              "type": "Organization",
-              "url": "https://github.gitify.io/api/v3/users/myorg",
-            },
-            "private": true,
-          },
-          "subject": {
-            "latest_comment_url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21",
-            "title": "Bump Version",
-            "type": "PullRequest",
-            "url": "https://github.gitify.io/api/v3/repos/myorg/notifications-test/pulls/3",
-          },
-          "subscription_url": "https://github.gitify.io/api/v3/notifications/threads/3/subscription",
-          "unread": true,
-          "updated_at": "2017-05-20T15:52:20Z",
-          "url": "https://github.gitify.io/api/v3/notifications/threads/3",
-        },
-      ]
-    }
-    showAccountHostname={true}
-  />
-</div>
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="flex flex-col flex-1 bg-white dark:bg-gray-dark"
+      >
+        <accountnotifications
+          hostname="github.com"
+          notifications="[object Object],[object Object]"
+        />
+        <accountnotifications
+          hostname="github.gitify.io"
+          notifications="[object Object],[object Object]"
+        />
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="flex flex-col flex-1 bg-white dark:bg-gray-dark"
+    >
+      <accountnotifications
+        hostname="github.com"
+        notifications="[object Object],[object Object]"
+      />
+      <accountnotifications
+        hostname="github.gitify.io"
+        notifications="[object Object],[object Object]"
+      />
+    </div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;

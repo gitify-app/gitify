@@ -1,9 +1,13 @@
 import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
+import {
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+  mockToken,
+} from '../../__mocks__/state-mocks';
 import type { SettingsState } from '../../types';
 import {
   getAuthenticatedUser,
   getHtmlUrl,
-  getRootHypermediaLinks,
   headNotifications,
   ignoreNotificationThreadSubscription,
   listNotificationsForAuthenticatedUser,
@@ -17,39 +21,12 @@ jest.mock('axios');
 
 const mockGitHubHostname = 'github.com';
 const mockEnterpriseHostname = 'example.com';
-const mockToken = 'yourAuthToken';
 const mockThreadId = '1234';
-const mockRepoSlug = 'gitify-app/notification-test';
+const mockRepoSlug = 'gitify-app/notifications-test';
 
 describe('utils/api/client.ts', () => {
   afterEach(() => {
     jest.resetAllMocks();
-  });
-
-  describe('getRootHypermediaLinks', () => {
-    it('should fetch root hypermedia links - github', async () => {
-      await getRootHypermediaLinks(mockGitHubHostname, mockToken);
-
-      expect(axios).toHaveBeenCalledWith({
-        url: 'https://api.github.com/',
-        method: 'GET',
-        data: {},
-      });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
-    });
-
-    it('should fetch root hypermedia links - enterprise', async () => {
-      await getRootHypermediaLinks(mockEnterpriseHostname, mockToken);
-
-      expect(axios).toHaveBeenCalledWith({
-        url: 'https://example.com/api/v3',
-        method: 'GET',
-        data: {},
-      });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
-    });
   });
 
   describe('getAuthenticatedUser', () => {
@@ -109,10 +86,9 @@ describe('utils/api/client.ts', () => {
       participating: true,
     };
 
-    it('should list notifications for user - github', async () => {
+    it('should list notifications for user - github cloud', async () => {
       await listNotificationsForAuthenticatedUser(
-        mockGitHubHostname,
-        mockToken,
+        mockGitHubCloudAccount,
         mockSettings as SettingsState,
       );
 
@@ -125,15 +101,14 @@ describe('utils/api/client.ts', () => {
       expect(axios.defaults.headers.common).toMatchSnapshot();
     });
 
-    it('should list notifications for user - enterprise', async () => {
+    it('should list notifications for user - github enterprise server', async () => {
       await listNotificationsForAuthenticatedUser(
-        mockEnterpriseHostname,
-        mockToken,
+        mockGitHubEnterpriseServerAccount,
         mockSettings as SettingsState,
       );
 
       expect(axios).toHaveBeenCalledWith({
-        url: 'https://example.com/api/v3/notifications?participating=true',
+        url: 'https://github.gitify.io/api/v3/notifications?participating=true',
         method: 'GET',
         data: {},
       });
@@ -285,7 +260,8 @@ describe('utils/api/client.ts', () => {
       const requestPromise = new Promise((resolve) =>
         resolve({
           data: {
-            html_url: 'https://github.com/gitify-app/gitify/issues/785',
+            html_url:
+              'https://github.com/gitify-app/notifications-test/issues/785',
           },
         } as AxiosResponse),
       ) as AxiosPromise;
@@ -293,10 +269,29 @@ describe('utils/api/client.ts', () => {
       apiRequestAuthMock.mockResolvedValue(requestPromise);
 
       const result = await getHtmlUrl(
+        'https://api.github.com/repos/gitify-app/notifications-test/issues/785',
+        '123',
+      );
+      expect(result).toBe(
+        'https://github.com/gitify-app/notifications-test/issues/785',
+      );
+    });
+
+    it('should handle error', async () => {
+      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+
+      const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+
+      const mockError = new Error('Test error');
+
+      apiRequestAuthMock.mockRejectedValue(mockError);
+
+      await getHtmlUrl(
         'https://api.github.com/repos/gitify-app/gitify/issues/785',
         '123',
       );
-      expect(result).toBe('https://github.com/gitify-app/gitify/issues/785');
+
+      expect(consoleErrorSpy).toHaveBeenCalledWith('Failed to get html url');
     });
   });
 });

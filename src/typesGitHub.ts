@@ -1,3 +1,5 @@
+import type { Account } from './types';
+
 export type Reason =
   | 'approval_requested'
   | 'assign'
@@ -39,6 +41,13 @@ export type IssueStateType = 'closed' | 'open';
 
 export type IssueStateReasonType = 'completed' | 'not_planned' | 'reopened';
 
+export type UserType =
+  | 'Bot'
+  | 'EnterpriseUserAccount'
+  | 'Mannequin'
+  | 'Organization'
+  | 'User';
+
 /**
  * Note: draft and merged are not official states in the GitHub API.
  * These are derived from the pull request's `merged` and `draft` properties.
@@ -51,8 +60,6 @@ export type StateType =
   | IssueStateType
   | IssueStateReasonType
   | PullRequestStateType;
-
-export type ViewerSubscription = 'IGNORED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
 
 export type CheckSuiteStatus =
   | 'action_required'
@@ -69,7 +76,26 @@ export type CheckSuiteStatus =
   | 'timed_out'
   | 'waiting';
 
-export interface Notification {
+export type PullRequestReviewState =
+  | 'APPROVED'
+  | 'CHANGES_REQUESTED'
+  | 'COMMENTED'
+  | 'DISMISSED'
+  | 'PENDING';
+
+export type PullRequestReviewAuthorAssociation =
+  | 'COLLABORATOR'
+  | 'CONTRIBUTOR'
+  | 'FIRST_TIMER'
+  | 'FIRST_TIME_CONTRIBUTOR'
+  | 'MANNEQUIN'
+  | 'MEMBER'
+  | 'NONE'
+  | 'OWNER';
+
+export type Notification = GitHubNotification & GitifyNotification;
+
+export interface GitHubNotification {
   id: string;
   unread: boolean;
   reason: Reason;
@@ -79,7 +105,11 @@ export interface Notification {
   repository: Repository;
   url: string;
   subscription_url: string;
-  hostname: string; // This is not in the GitHub API, but we add it to the type to make it easier to work with
+}
+
+// Note: This is not in the official GitHub API. We add this to make notification interactions easier.
+export interface GitifyNotification {
+  account: Account;
 }
 
 export type UserDetails = User & UserProfile;
@@ -132,7 +162,7 @@ export interface User {
   repos_url: string;
   events_url: string;
   received_events_url: string;
-  type: string;
+  type: UserType;
   site_admin: boolean;
 }
 
@@ -140,14 +170,14 @@ export interface SubjectUser {
   login: string;
   html_url: string;
   avatar_url: string;
-  type: string;
+  type: UserType;
 }
 
 export interface DiscussionAuthor {
   login: string;
   url: string;
   avatar_url: string;
-  type: string;
+  type: UserType;
 }
 
 export interface Repository {
@@ -233,6 +263,8 @@ interface GitHubSubject {
 export interface GitifySubject {
   state?: StateType;
   user?: SubjectUser;
+  reviews?: GitifyPullRequestReview[];
+  comments?: number;
 }
 
 export interface PullRequest {
@@ -271,6 +303,24 @@ export interface PullRequest {
   additions: number;
   deletions: number;
   changed_files: number;
+}
+
+export interface GitifyPullRequestReview {
+  state: PullRequestReviewState;
+  users: string[];
+}
+
+export interface PullRequestReview {
+  id: number;
+  node_id: string;
+  user: User;
+  body: string;
+  state: PullRequestReviewState;
+  html_url: string;
+  pull_request_url: string;
+  author_association: PullRequestReviewAuthorAssociation;
+  submitted_at: string;
+  commit_id: string;
 }
 
 export interface Commit {
@@ -399,16 +449,13 @@ export interface Release {
 
 export interface GraphQLSearch<T> {
   data: {
-    data: {
-      search: {
-        nodes: T[];
-      };
+    search: {
+      nodes: T[];
     };
   };
 }
 
 export interface Discussion {
-  viewerSubscription: ViewerSubscription;
   title: string;
   stateReason: DiscussionStateType;
   isAnswered: boolean;
@@ -419,6 +466,7 @@ export interface Discussion {
 
 export interface DiscussionComments {
   nodes: DiscussionComment[];
+  totalCount: number;
 }
 
 export interface DiscussionComment {
@@ -456,39 +504,4 @@ export interface NotificationThreadSubscription {
   created_at: string;
   url: string;
   thread_url: string;
-}
-
-export interface RootHypermediaLinks {
-  current_user_url: string;
-  current_user_authorizations_html_url: string;
-  authorizations_url: string;
-  code_search_url: string;
-  commit_search_url: string;
-  emails_url: string;
-  emojis_url: string;
-  events_url: string;
-  feeds_url: string;
-  followers_url: string;
-  following_url: string;
-  gists_url: string;
-  hub_url: string;
-  issue_search_url: string;
-  issues_url: string;
-  keys_url: string;
-  notifications_url: string;
-  organization_url: string;
-  organization_repositories_url: string;
-  organization_teams_url: string;
-  public_gists_url: string;
-  rate_limit_url: string;
-  repository_url: string;
-  repository_search_url: string;
-  current_user_repositories_url: string;
-  starred_url: string;
-  starred_gists_url: string;
-  topic_search_url: string;
-  user_url: string;
-  user_organizations_url: string;
-  user_repositories_url: string;
-  user_search_url: string;
 }

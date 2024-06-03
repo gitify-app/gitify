@@ -1,7 +1,4 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-
-import * as TestRenderer from 'react-test-renderer';
-
 import { type IRadioGroup, RadioGroup } from './RadioGroup';
 
 describe('components/fields/RadioGroup.tsx', () => {
@@ -18,14 +15,14 @@ describe('components/fields/RadioGroup.tsx', () => {
   };
 
   it('should render', () => {
-    const tree = TestRenderer.create(<RadioGroup {...props} />);
+    const tree = render(<RadioGroup {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
   it('should render as disabled', () => {
     const mockProps = { ...props, disabled: true };
 
-    const tree = TestRenderer.create(<RadioGroup {...mockProps} />);
+    const tree = render(<RadioGroup {...mockProps} />);
     expect(tree).toMatchSnapshot();
   });
 

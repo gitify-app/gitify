@@ -6,10 +6,8 @@ import {
   XCircleIcon,
 } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
-
 import { type FC, useCallback, useContext, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
 import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
 import { openExternalLink } from '../utils/comms';
@@ -34,6 +32,14 @@ export const Sidebar: FC = () => {
   const quitApp = useCallback(() => {
     ipcRenderer.send('app-quit');
   }, []);
+
+  const toggleSettings = () => {
+    if (location.pathname.startsWith('/settings')) {
+      navigate('/', { replace: true });
+    } else {
+      navigate('/settings');
+    }
+  };
 
   const notificationsCount = useMemo(() => {
     return getNotificationCount(notifications);
@@ -108,13 +114,7 @@ export const Sidebar: FC = () => {
               type="button"
               className={sidebarButtonClasses}
               title="Settings"
-              onClick={() => {
-                if (location.pathname.startsWith('/settings')) {
-                  navigate('/', { replace: true });
-                } else {
-                  navigate('/settings');
-                }
-              }}
+              onClick={toggleSettings}
             >
               <GearIcon size={16} aria-label="Settings" />
             </button>

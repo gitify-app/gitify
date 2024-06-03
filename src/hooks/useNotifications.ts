@@ -1,6 +1,4 @@
-import type { AxiosError } from 'axios';
 import { useCallback, useState } from 'react';
-
 import type {
   AccountNotifications,
   AuthState,
@@ -8,59 +6,60 @@ import type {
   SettingsState,
   Status,
 } from '../types';
-import type { GitHubRESTError, Notification } from '../typesGitHub';
 import {
   ignoreNotificationThreadSubscription,
-  listNotificationsForAuthenticatedUser,
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
   markRepositoryNotificationsAsRead,
 } from '../utils/api/client';
 import { determineFailureType } from '../utils/api/errors';
-import Constants from '../utils/constants';
+import { getAccountForHost } from '../utils/helpers';
 import {
-  getEnterpriseAccountToken,
-  getTokenForHost,
-  isEnterpriseHost,
-  isGitHubLoggedIn,
-} from '../utils/helpers';
-import {
+  getAllNotifications,
   setTrayIconColor,
   triggerNativeNotifications,
 } from '../utils/notifications';
 import { removeNotification } from '../utils/remove-notification';
 import { removeNotifications } from '../utils/remove-notifications';
-import { getGitifySubjectDetails } from '../utils/subject';
 
 interface NotificationsState {
   notifications: AccountNotifications[];
-  removeNotificationFromState: (id: string, hostname: string) => void;
+  removeNotificationFromState: (
+    settings: SettingsState,
+    id: string,
+    hostname: string,
+  ) => void;
   fetchNotifications: (
-    accounts: AuthState,
+    auth: AuthState,
     settings: SettingsState,
   ) => Promise<void>;
   markNotificationRead: (
-    accounts: AuthState,
+    auth: AuthState,
+    settings: SettingsState,
     id: string,
     hostname: string,
   ) => Promise<void>;
   markNotificationDone: (
-    accounts: AuthState,
+    auth: AuthState,
+    settings: SettingsState,
     id: string,
     hostname: string,
   ) => Promise<void>;
   unsubscribeNotification: (
-    accounts: AuthState,
+    auth: AuthState,
+    settings: SettingsState,
     id: string,
     hostname: string,
   ) => Promise<void>;
   markRepoNotifications: (
-    accounts: AuthState,
+    auth: AuthState,
+    settings: SettingsState,
     repoSlug: string,
     hostname: string,
   ) => Promise<void>;
   markRepoNotificationsDone: (
-    accounts: AuthState,
+    auth: AuthState,
+    settings: SettingsState,
     repoSlug: string,
     hostname: string,
   ) => Promise<void>;
@@ -77,144 +76,44 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const fetchNotifications = useCallback(
-    async (accounts: AuthState, settings: SettingsState) => {
-      function getGitHubNotifications() {
-        if (!isGitHubLoggedIn(accounts)) {
-          return;
-        }
-
-        return listNotificationsForAuthenticatedUser(
-          Constants.DEFAULT_AUTH_OPTIONS.hostname,
-          accounts.token,
-          settings,
-        );
-      }
-
-      function getEnterpriseNotifications() {
-        return accounts.enterpriseAccounts.map((account) => {
-          return listNotificationsForAuthenticatedUser(
-            account.hostname,
-            account.token,
-            settings,
-          );
-        });
-      }
-
+    async (auth: AuthState, settings: SettingsState) => {
       setStatus('loading');
 
-      return Promise.all([
-        getGitHubNotifications(),
-        ...getEnterpriseNotifications(),
-      ])
-        .then(([gitHubNotifications, ...entAccNotifications]) => {
-          const enterpriseNotifications = entAccNotifications.map(
-            (accountNotifications) => {
-              const { hostname } = new URL(accountNotifications.config.url);
-              return {
-                hostname,
-                notifications: accountNotifications.data.map(
-                  (notification: Notification) => {
-                    return {
-                      ...notification,
-                      hostname: hostname,
-                    };
-                  },
-                ),
-              };
-            },
-          );
+      try {
+        const fetchedNotifications = await getAllNotifications(auth, settings);
 
-          const data = isGitHubLoggedIn(accounts)
-            ? [
-                ...enterpriseNotifications,
-                {
-                  hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-                  notifications: gitHubNotifications.data.map(
-                    (notification: Notification) => {
-                      return {
-                        ...notification,
-                        hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-                      };
-                    },
-                  ),
-                },
-              ]
-            : [...enterpriseNotifications];
-
-          Promise.all(
-            data.map(async (accountNotifications) => {
-              return {
-                hostname: accountNotifications.hostname,
-                notifications: await Promise.all<Notification>(
-                  accountNotifications.notifications.map(
-                    async (notification: Notification) => {
-                      if (!settings.detailedNotifications) {
-                        return notification;
-                      }
-
-                      const token = getTokenForHost(
-                        notification.hostname,
-                        accounts,
-                      );
-
-                      const additionalSubjectDetails =
-                        await getGitifySubjectDetails(notification, token);
-
-                      return {
-                        ...notification,
-                        subject: {
-                          ...notification.subject,
-                          ...additionalSubjectDetails,
-                        },
-                      };
-                    },
-                  ),
-                ).then((notifications) => {
-                  return notifications.filter((notification) => {
-                    if (
-                      !settings.showBots &&
-                      notification.subject?.user?.type === 'Bot'
-                    ) {
-                      return false;
-                    }
-
-                    return true;
-                  });
-                }),
-              };
-            }),
-          ).then((parsedNotifications) => {
-            setNotifications(parsedNotifications);
-            triggerNativeNotifications(
-              notifications,
-              parsedNotifications,
-              settings,
-              accounts,
-            );
-            setStatus('success');
-          });
-        })
-        .catch((err: AxiosError<GitHubRESTError>) => {
-          setStatus('error');
-          setErrorDetails(determineFailureType(err));
-        });
+        setNotifications(fetchedNotifications);
+        triggerNativeNotifications(
+          notifications,
+          fetchedNotifications,
+          settings,
+          auth,
+        );
+        setStatus('success');
+      } catch (err) {
+        setStatus('error');
+        setErrorDetails(determineFailureType(err));
+      }
     },
     [notifications],
   );
 
   const markNotificationRead = useCallback(
-    async (accounts: AuthState, id: string, hostname: string) => {
+    async (
+      auth: AuthState,
+      settings: SettingsState,
+      id: string,
+      hostname: string,
+    ) => {
       setStatus('loading');
 
-      const isEnterprise = isEnterpriseHost(hostname);
-      const token = isEnterprise
-        ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
-        : accounts.token;
+      const account = getAccountForHost(hostname, auth);
 
       try {
-        await markNotificationThreadAsRead(id, hostname, token);
+        await markNotificationThreadAsRead(id, hostname, account.token);
 
         const updatedNotifications = removeNotification(
+          settings,
           id,
           notifications,
           hostname,
@@ -231,18 +130,21 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markNotificationDone = useCallback(
-    async (accounts: AuthState, id: string, hostname: string) => {
+    async (
+      auth: AuthState,
+      settings: SettingsState,
+      id: string,
+      hostname: string,
+    ) => {
       setStatus('loading');
 
-      const isEnterprise = isEnterpriseHost(hostname);
-      const token = isEnterprise
-        ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
-        : accounts.token;
+      const account = getAccountForHost(hostname, auth);
 
       try {
-        await markNotificationThreadAsDone(id, hostname, token);
+        await markNotificationThreadAsDone(id, hostname, account.token);
 
         const updatedNotifications = removeNotification(
+          settings,
           id,
           notifications,
           hostname,
@@ -259,17 +161,19 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const unsubscribeNotification = useCallback(
-    async (accounts: AuthState, id: string, hostname: string) => {
+    async (
+      auth: AuthState,
+      settings: SettingsState,
+      id: string,
+      hostname: string,
+    ) => {
       setStatus('loading');
 
-      const isEnterprise = isEnterpriseHost(hostname);
-      const token = isEnterprise
-        ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
-        : accounts.token;
+      const account = getAccountForHost(hostname, auth);
 
       try {
-        await ignoreNotificationThreadSubscription(id, hostname, token);
-        await markNotificationRead(accounts, id, hostname);
+        await ignoreNotificationThreadSubscription(id, hostname, account.token);
+        await markNotificationRead(auth, settings, id, hostname);
         setStatus('success');
       } catch (err) {
         setStatus('success');
@@ -279,16 +183,22 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markRepoNotifications = useCallback(
-    async (accounts: AuthState, repoSlug: string, hostname: string) => {
+    async (
+      auth: AuthState,
+      settings: SettingsState,
+      repoSlug: string,
+      hostname: string,
+    ) => {
       setStatus('loading');
 
-      const isEnterprise = isEnterpriseHost(hostname);
-      const token = isEnterprise
-        ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
-        : accounts.token;
+      const account = getAccountForHost(hostname, auth);
 
       try {
-        await markRepositoryNotificationsAsRead(repoSlug, hostname, token);
+        await markRepositoryNotificationsAsRead(
+          repoSlug,
+          hostname,
+          account.token,
+        );
         const updatedNotifications = removeNotifications(
           repoSlug,
           notifications,
@@ -306,12 +216,18 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markRepoNotificationsDone = useCallback(
-    async (accounts: AuthState, repoSlug: string, hostname: string) => {
+    async (
+      auth: AuthState,
+      settings: SettingsState,
+      repoSlug: string,
+      hostname: string,
+    ) => {
       setStatus('loading');
 
       try {
         const accountIndex = notifications.findIndex(
-          (accountNotifications) => accountNotifications.hostname === hostname,
+          (accountNotifications) =>
+            accountNotifications.account.hostname === hostname,
         );
 
         if (accountIndex !== -1) {
@@ -324,9 +240,10 @@ export const useNotifications = (): NotificationsState => {
           await Promise.all(
             notificationsToRemove.map((notification) =>
               markNotificationDone(
-                accounts,
+                auth,
+                settings,
                 notification.id,
-                notifications[accountIndex].hostname,
+                notifications[accountIndex].account.hostname,
               ),
             ),
           );
@@ -349,8 +266,9 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const removeNotificationFromState = useCallback(
-    (id: string, hostname: string) => {
+    (settings: SettingsState, id: string, hostname: string) => {
       const updatedNotifications = removeNotification(
+        settings,
         id,
         notifications,
         hostname,

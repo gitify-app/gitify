@@ -1,5 +1,4 @@
 import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
-
 import type { Notification } from '../typesGitHub';
 import { RepositoryNotifications } from './Repository';
 
@@ -29,9 +28,8 @@ export const AccountNotifications = (props: IProps) => {
   return (
     <>
       {showAccountHostname && (
-        <div className="flex flex-1 items-center justify-between py-2 px-4 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm">
+        <div className="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm">
           {hostname}
-
           <Chevron size={20} />
         </div>
       )}

@@ -1,10 +1,10 @@
 import {
   BellSlashIcon,
   CheckIcon,
+  CommentIcon,
   FeedPersonIcon,
   ReadIcon,
 } from '@primer/octicons-react';
-import { formatDistanceToNow, parseISO } from 'date-fns';
 import {
   type FC,
   type KeyboardEvent,
@@ -14,12 +14,19 @@ import {
 } from 'react';
 
 import { AppContext } from '../context/App';
+import { IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
-import { formatForDisplay, openInBrowser } from '../utils/helpers';
+import Constants from '../utils/constants';
+import {
+  formatForDisplay,
+  formatNotificationUpdatedAt,
+  openInBrowser,
+} from '../utils/helpers';
 import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
+  getPullRequestReviewIcon,
 } from '../utils/icons';
 import { formatReason } from '../utils/reason';
 
@@ -30,8 +37,8 @@ interface IProps {
 
 export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const {
+    auth,
     settings,
-    accounts,
     removeNotificationFromState,
     markNotificationRead,
     markNotificationDone,
@@ -40,15 +47,15 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   } = useContext(AppContext);
 
   const openNotification = useCallback(() => {
-    openInBrowser(notification, accounts);
+    openInBrowser(notification);
 
     if (settings.markAsDoneOnOpen) {
       markNotificationDone(notification.id, hostname);
     } else {
       // no need to mark as read, github does it by default when opening it
-      removeNotificationFromState(notification.id, hostname);
+      removeNotificationFromState(settings, notification.id, hostname);
     }
-  }, [notifications, notification, accounts, settings]); // notifications required here to prevent weird state issues
+  }, [notifications, notification, auth, settings]); // notifications required here to prevent weird state issues
 
   const unsubscribeFromThread = (event: MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.
@@ -69,20 +76,26 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const reason = formatReason(notification.reason);
   const NotificationIcon = getNotificationTypeIcon(notification.subject);
   const iconColor = getNotificationTypeIconColor(notification.subject);
-  const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
-    addSuffix: true,
-  });
 
+  const updatedAt = formatNotificationUpdatedAt(notification);
   const updatedLabel = notification.subject.user
     ? `${notification.subject.user.login} updated ${updatedAt}`
     : `Updated ${updatedAt}`;
+
   const notificationTitle = formatForDisplay([
     notification.subject.state,
     notification.subject.type,
   ]);
 
+  const commentsPillDescription = `${notification.subject.comments} ${
+    notification.subject.comments > 1 ? 'comments' : 'comment'
+  }`;
+
   return (
-    <div className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group">
+    <div
+      id={notification.id}
+      className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+    >
       <div
         className={`flex justify-center items-center w-5 ${iconColor}`}
         title={notificationTitle}
@@ -131,6 +144,46 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 {reason.title}
               </span>
               <span className="ml-1">{updatedAt}</span>
+              {notification.subject.reviews
+                ? notification.subject.reviews.map((review) => {
+                    const icon = getPullRequestReviewIcon(review);
+                    if (!icon) {
+                      return null;
+                    }
+
+                    return (
+                      <span
+                        key={review.state}
+                        title={icon.description}
+                        className="ml-1"
+                      >
+                        <button
+                          type="button"
+                          className={Constants.PILL_CLASS_NAME}
+                        >
+                          <icon.type
+                            size={12}
+                            className={`mr-1 ${icon.color}`}
+                            aria-label={icon.description}
+                          />
+                          {review.users.length}
+                        </button>
+                      </span>
+                    );
+                  })
+                : null}
+              {notification.subject?.comments > 0 && (
+                <span className="ml-1" title={commentsPillDescription}>
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <CommentIcon
+                      size={12}
+                      className={`mr-1 ${IconColor.GRAY}`}
+                      aria-label={commentsPillDescription}
+                    />
+                    {notification.subject.comments}
+                  </button>
+                </span>
+              )}
             </span>
           </span>
         </div>

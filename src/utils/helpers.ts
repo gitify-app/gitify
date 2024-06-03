@@ -1,86 +1,50 @@
-import type { AuthState, EnterpriseAccount } from '../types';
-import type {
-  Discussion,
-  DiscussionComment,
-  GraphQLSearch,
-  Notification,
-} from '../typesGitHub';
+import { formatDistanceToNow, parseISO } from 'date-fns';
+import type { Account, AuthState } from '../types';
+import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
-import { getHtmlUrl } from './api/client';
-import { apiRequestAuth } from './api/request';
+import { getHtmlUrl, getLatestDiscussion } from './api/client';
+import type { PlatformType } from './auth/types';
 import { Constants } from './constants';
-import { getCheckSuiteAttributes, getWorkflowRunAttributes } from './subject';
+import {
+  getCheckSuiteAttributes,
+  getLatestDiscussionComment,
+  getWorkflowRunAttributes,
+} from './subject';
 
-export function isGitHubLoggedIn(accounts: AuthState): boolean {
-  return accounts.token != null;
+export function isPersonalAccessTokenLoggedIn(auth: AuthState): boolean {
+  return auth.accounts.some(
+    (account) => account.method === 'Personal Access Token',
+  );
 }
 
-export function getTokenForHost(hostname: string, accounts: AuthState): string {
-  const isEnterprise = isEnterpriseHost(hostname);
-  const token = isEnterprise
-    ? getEnterpriseAccountToken(hostname, accounts.enterpriseAccounts)
-    : accounts.token;
-
-  return token;
+export function isOAuthAppLoggedIn(auth: AuthState): boolean {
+  return auth.accounts.some((account) => account.method === 'OAuth App');
 }
 
-export function getEnterpriseAccountToken(
-  hostname: string,
-  accounts: EnterpriseAccount[],
-): string {
-  return accounts.find((obj) => obj.hostname === hostname).token;
+export function getAccountForHost(hostname: string, auth: AuthState): Account {
+  return auth.accounts.find((account) => hostname.endsWith(account.hostname));
+}
+
+export function getPlatformFromHostname(hostname: string): PlatformType {
+  return hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname)
+    ? 'GitHub Cloud'
+    : 'GitHub Enterprise Server';
 }
 
 export function isEnterpriseHost(hostname: string): boolean {
   return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
 }
 
-export function getGitHubAPIBaseUrl(hostname) {
-  const isEnterprise = isEnterpriseHost(hostname);
-  return isEnterprise
-    ? `https://${hostname}/api/v3`
-    : Constants.GITHUB_API_BASE_URL;
-}
-
-export function addNotificationReferrerIdToUrl(
-  url: string,
-  notificationId: string,
-  userId: number,
-): string {
-  const parsedUrl = new URL(url);
-
-  parsedUrl.searchParams.set(
-    'notification_referrer_id',
-    generateNotificationReferrerId(notificationId, userId),
-  );
-
-  return parsedUrl.href;
-}
-
 export function generateNotificationReferrerId(
-  notificationId: string,
-  userId: number,
+  notification: Notification,
 ): string {
   const buffer = Buffer.from(
-    `018:NotificationThread${notificationId}:${userId}`,
+    `018:NotificationThread${notification.id}:${notification.account.user.id}`,
   );
   return buffer.toString('base64');
 }
 
-export function addHours(date: string, hours: number): string {
-  return new Date(new Date(date).getTime() + hours * 36e5).toISOString();
-}
-
-export function formatSearchQueryString(
-  repo: string,
-  title: string,
-  lastUpdated: string,
-): string {
-  return `${title} in:title repo:${repo} updated:>${addHours(lastUpdated, -2)}`;
-}
-
-export function getCheckSuiteUrl(notification: Notification) {
-  let url = `${notification.repository.html_url}/actions`;
+export function getCheckSuiteUrl(notification: Notification): string {
   const filters = [];
 
   const checkSuiteAttributes = getCheckSuiteAttributes(notification);
@@ -99,15 +63,10 @@ export function getCheckSuiteUrl(notification: Notification) {
     filters.push(`branch:${checkSuiteAttributes.branchName}`);
   }
 
-  if (filters.length > 0) {
-    url += `?query=${filters.join('+')}`;
-  }
-
-  return url;
+  return actionsURL(notification.repository.html_url, filters);
 }
 
-export function getWorkflowRunUrl(notification: Notification) {
-  let url = `${notification.repository.html_url}/actions`;
+export function getWorkflowRunUrl(notification: Notification): string {
   const filters = [];
 
   const workflowRunAttributes = getWorkflowRunAttributes(notification);
@@ -116,171 +75,87 @@ export function getWorkflowRunUrl(notification: Notification) {
     filters.push(`is:${workflowRunAttributes.status}`);
   }
 
-  if (filters.length > 0) {
-    url += `?query=${filters.join('+')}`;
-  }
-
-  return url;
+  return actionsURL(notification.repository.html_url, filters);
 }
 
-async function getDiscussionUrl(
-  notification: Notification,
-  token: string,
-): Promise<string> {
-  let url = `${notification.repository.html_url}/discussions`;
+/**
+ * Construct a GitHub Actions URL for a repository with optional filters.
+ */
+export function actionsURL(repositoryURL: string, filters: string[]): string {
+  const url = new URL(repositoryURL);
+  url.pathname += '/actions';
 
-  const discussion = await fetchDiscussion(notification, token);
+  if (filters.length > 0) {
+    url.searchParams.append('query', filters.join('+'));
+  }
+
+  // Note: the GitHub Actions UI cannot handle encoded '+' characters.
+  return url.toString().replace(/%2B/g, '+');
+}
+
+async function getDiscussionUrl(notification: Notification): Promise<string> {
+  const url = new URL(notification.repository.html_url);
+  url.pathname += '/discussions';
+
+  const discussion = await getLatestDiscussion(notification);
 
   if (discussion) {
-    url = discussion.url;
+    url.href = discussion.url;
 
-    const comments = discussion.comments.nodes;
+    const latestComment = getLatestDiscussionComment(discussion.comments.nodes);
 
-    const latestCommentId = getLatestDiscussionComment(comments)?.databaseId;
-
-    if (latestCommentId) {
-      url += `#discussioncomment-${latestCommentId}`;
+    if (latestComment) {
+      url.hash = `#discussioncomment-${latestComment.databaseId}`;
     }
   }
 
-  return url;
-}
-
-export async function fetchDiscussion(
-  notification: Notification,
-  token: string,
-): Promise<Discussion | null> {
-  const response: GraphQLSearch<Discussion> = await apiRequestAuth(
-    'https://api.github.com/graphql',
-    'POST',
-    token,
-    {
-      query: `
-        fragment AuthorFields on Actor {
-          login
-          url
-          avatar_url: avatarUrl
-          type: __typename
-        }
-      
-        fragment CommentFields on DiscussionComment {
-          databaseId
-          createdAt
-          author {
-            ...AuthorFields
-          }
-        }
-      
-        query fetchDiscussions(
-          $queryStatement: String!,
-          $type: SearchType!,
-          $firstDiscussions: Int,
-          $lastComments: Int,
-          $firstReplies: Int
-        ) {
-          search(query:$queryStatement, type: $type, first: $firstDiscussions) {
-            nodes {
-              ... on Discussion {
-                viewerSubscription
-                title
-                stateReason
-                isAnswered
-                url
-                author {
-                  ...AuthorFields
-                }
-                comments(last: $lastComments){
-                  nodes {
-                    ...CommentFields
-                    replies(last: $firstReplies) {
-                      nodes {
-                        ...CommentFields
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      `,
-      variables: {
-        queryStatement: formatSearchQueryString(
-          notification.repository.full_name,
-          notification.subject.title,
-          notification.updated_at,
-        ),
-        type: 'DISCUSSION',
-        firstDiscussions: 10,
-        lastComments: 100,
-        firstReplies: 1,
-      },
-    },
-  );
-
-  let discussions =
-    response?.data?.data.search.nodes.filter(
-      (discussion) => discussion.title === notification.subject.title,
-    ) || [];
-
-  if (discussions.length > 1)
-    discussions = discussions.filter(
-      (discussion) => discussion.viewerSubscription === 'SUBSCRIBED',
-    );
-
-  return discussions[0];
-}
-
-export function getLatestDiscussionComment(
-  comments: DiscussionComment[],
-): DiscussionComment | null {
-  if (!comments || comments.length === 0) {
-    return null;
-  }
-
-  return comments
-    .flatMap((comment) => comment.replies.nodes)
-    .concat([comments[comments.length - 1]])
-    .reduce((a, b) => (a.createdAt > b.createdAt ? a : b));
+  return url.toString();
 }
 
 export async function generateGitHubWebUrl(
   notification: Notification,
-  accounts: AuthState,
 ): Promise<string> {
-  let url = notification.repository.html_url;
-  const token = getTokenForHost(notification.hostname, accounts);
+  const url = new URL(notification.repository.html_url);
 
   if (notification.subject.latest_comment_url) {
-    url = await getHtmlUrl(notification.subject.latest_comment_url, token);
+    url.href = await getHtmlUrl(
+      notification.subject.latest_comment_url,
+      notification.account.token,
+    );
   } else if (notification.subject.url) {
-    url = await getHtmlUrl(notification.subject.url, token);
+    url.href = await getHtmlUrl(
+      notification.subject.url,
+      notification.account.token,
+    );
   } else {
     // Perform any specific notification type handling (only required for a few special notification scenarios)
     switch (notification.subject.type) {
       case 'CheckSuite':
-        url = getCheckSuiteUrl(notification);
+        url.href = getCheckSuiteUrl(notification);
         break;
       case 'Discussion':
-        url = await getDiscussionUrl(notification, token);
+        url.href = await getDiscussionUrl(notification);
         break;
       case 'RepositoryInvitation':
-        url = `${notification.repository.html_url}/invitations`;
+        url.pathname += '/invitations';
         break;
       case 'WorkflowRun':
-        url = getWorkflowRunUrl(notification);
+        url.href = getWorkflowRunUrl(notification);
         break;
       default:
         break;
     }
   }
 
-  url = addNotificationReferrerIdToUrl(url, notification.id, accounts.user?.id);
+  url.searchParams.set(
+    'notification_referrer_id',
+    generateNotificationReferrerId(notification),
+  );
 
-  return url;
+  return url.toString();
 }
 
-export function formatForDisplay(text: string[]) {
+export function formatForDisplay(text: string[]): string {
   if (!text) {
     return '';
   }
@@ -295,11 +170,22 @@ export function formatForDisplay(text: string[]) {
     });
 }
 
-export async function openInBrowser(
+export function formatNotificationUpdatedAt(
   notification: Notification,
-  accounts: AuthState,
-) {
-  const url = await generateGitHubWebUrl(notification, accounts);
+): string {
+  const date = notification.last_read_at ?? notification.updated_at;
+
+  try {
+    return formatDistanceToNow(parseISO(date), {
+      addSuffix: true,
+    });
+  } catch (e) {}
+
+  return '';
+}
+
+export async function openInBrowser(notification: Notification) {
+  const url = await generateGitHubWebUrl(notification);
 
   openExternalLink(url);
 }

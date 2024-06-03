@@ -1,15 +1,14 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-
+import { ipcRenderer, shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
-
-const { ipcRenderer } = require('electron');
-
-import type { AxiosResponse } from 'axios';
-import { shell } from 'electron';
-import { mockAccounts, mockSettings } from '../__mocks__/mock-state';
+import {
+  mockAuth,
+  mockOAuthAccount,
+  mockPersonalAccessTokenAccount,
+  mockSettings,
+} from '../__mocks__/state-mocks';
+import { mockPlatform } from '../__mocks__/utils';
 import { AppContext } from '../context/App';
-import * as apiRequests from '../utils/api/request';
-import Constants from '../utils/constants';
 import { SettingsRoute } from './Settings';
 
 const mockNavigate = jest.fn();
@@ -17,17 +16,26 @@ jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
   useNavigate: () => mockNavigate,
 }));
-jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
-  headers: {
-    'x-oauth-scopes': Constants.AUTH_SCOPE.join(', '),
-  },
-} as unknown as AxiosResponse);
 
 describe('routes/Settings.tsx', () => {
+  let originalPlatform: NodeJS.Platform;
   const updateSetting = jest.fn();
+
+  beforeAll(() => {
+    // Save the original platform value
+    originalPlatform = process.platform;
+    mockPlatform('darwin');
+  });
 
   beforeEach(() => {
     jest.clearAllMocks();
+  });
+
+  afterAll(() => {
+    // Restore the original platform value
+    Object.defineProperty(process, 'platform', {
+      value: originalPlatform,
+    });
   });
 
   describe('General', () => {
@@ -35,7 +43,7 @@ describe('routes/Settings.tsx', () => {
       await act(async () => {
         render(
           <AppContext.Provider
-            value={{ settings: mockSettings, accounts: mockAccounts }}
+            value={{ auth: mockAuth, settings: mockSettings }}
           >
             <MemoryRouter>
               <SettingsRoute />
@@ -52,8 +60,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
+              auth: mockAuth,
               settings: mockSettings,
-              accounts: mockAccounts,
             }}
           >
             <MemoryRouter>
@@ -73,8 +81,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
+              auth: mockAuth,
               settings: mockSettings,
-              accounts: mockAccounts,
               updateSetting,
             }}
           >
@@ -91,19 +99,13 @@ describe('routes/Settings.tsx', () => {
       expect(updateSetting).toHaveBeenCalledWith('theme', 'LIGHT');
     });
 
-    it('should be able to enable detailed notifications', async () => {
-      jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
-        headers: {
-          'x-oauth-scopes': Constants.AUTH_SCOPE.join(', '),
-        },
-      } as unknown as AxiosResponse);
-
+    it('should toggle detailed notifications checkbox', async () => {
       await act(async () => {
         render(
           <AppContext.Provider
             value={{
+              auth: mockAuth,
               settings: mockSettings,
-              accounts: mockAccounts,
               updateSetting,
             }}
           >
@@ -119,22 +121,19 @@ describe('routes/Settings.tsx', () => {
       fireEvent.click(screen.getByLabelText('Detailed notifications'));
 
       expect(updateSetting).toHaveBeenCalledTimes(1);
-      expect(updateSetting).toHaveBeenCalledWith('detailedNotifications', true);
+      expect(updateSetting).toHaveBeenCalledWith(
+        'detailedNotifications',
+        false,
+      );
     });
 
-    it('should not be able to enable detailed notifications due to missing scope', async () => {
-      jest.spyOn(apiRequests, 'apiRequestAuth').mockResolvedValue({
-        headers: {
-          'x-oauth-scopes': 'read:user, notifications',
-        },
-      } as unknown as AxiosResponse);
-
+    it('should toggle account hostname checkbox', async () => {
       await act(async () => {
         render(
           <AppContext.Provider
             value={{
+              auth: mockAuth,
               settings: mockSettings,
-              accounts: mockAccounts,
               updateSetting,
             }}
           >
@@ -145,27 +144,12 @@ describe('routes/Settings.tsx', () => {
         );
       });
 
-      expect(
-        screen
-          .getByLabelText('Detailed notifications (requires repo scope)')
-          .closest('input'),
-      ).toHaveProperty('disabled', true);
+      await screen.findByLabelText('Show account hostname');
 
-      // click the checkbox
-      fireEvent.click(
-        screen.getByLabelText('Detailed notifications (requires repo scope)'),
-      );
+      fireEvent.click(screen.getByLabelText('Show account hostname'));
 
-      // check if the checkbox is still unchecked
-      expect(updateSetting).not.toHaveBeenCalled();
-      expect(
-        screen.getByLabelText('Detailed notifications (requires repo scope)'),
-      ).not.toBe('checked');
-
-      expect(
-        screen.getByLabelText('Detailed notifications (requires repo scope)')
-          .parentNode.parentNode,
-      ).toMatchSnapshot();
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith('showAccountHostname', true);
     });
   });
 
@@ -175,8 +159,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
+              auth: mockAuth,
               settings: mockSettings,
-              accounts: mockAccounts,
               updateSetting,
             }}
           >
@@ -200,8 +184,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
+              auth: mockAuth,
               settings: mockSettings,
-              accounts: mockAccounts,
               updateSetting,
             }}
           >
@@ -235,12 +219,12 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
+              auth: mockAuth,
               settings: {
                 ...mockSettings,
                 detailedNotifications: false,
                 showBots: true,
               },
-              accounts: mockAccounts,
               updateSetting,
             }}
           >
@@ -276,12 +260,12 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
+              auth: mockAuth,
               settings: {
                 ...mockSettings,
                 detailedNotifications: true,
                 showBots: true,
               },
-              accounts: mockAccounts,
               updateSetting,
             }}
           >
@@ -317,8 +301,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
+              auth: mockAuth,
               settings: mockSettings,
-              accounts: mockAccounts,
               updateSetting,
             }}
           >
@@ -336,6 +320,34 @@ describe('routes/Settings.tsx', () => {
       expect(updateSetting).toHaveBeenCalledTimes(1);
       expect(updateSetting).toHaveBeenCalledWith('markAsDoneOnOpen', false);
     });
+
+    it('should toggle the delayNotificationState checkbox', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+              updateSetting,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      fireEvent.click(screen.getByLabelText('Delay notification state'), {
+        target: { checked: true },
+      });
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith(
+        'delayNotificationState',
+        false,
+      );
+    });
   });
 
   describe('System section', () => {
@@ -344,8 +356,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
+              auth: mockAuth,
               settings: mockSettings,
-              accounts: mockAccounts,
               updateSetting,
             }}
           >
@@ -375,8 +387,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
+              auth: mockAuth,
               settings: mockSettings,
-              accounts: mockAccounts,
               updateSetting,
             }}
           >
@@ -400,8 +412,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
+              auth: mockAuth,
               settings: mockSettings,
-              accounts: mockAccounts,
               updateSetting,
             }}
           >
@@ -425,8 +437,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
+              auth: mockAuth,
               settings: mockSettings,
-              accounts: mockAccounts,
               updateSetting,
             }}
           >
@@ -452,8 +464,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
+              auth: mockAuth,
               settings: mockSettings,
-              accounts: mockAccounts,
             }}
           >
             <MemoryRouter>
@@ -471,25 +483,101 @@ describe('routes/Settings.tsx', () => {
       );
     });
 
-    it('should go to the enterprise login route', async () => {
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              settings: mockSettings,
-              accounts: mockAccounts,
-            }}
-          >
-            <MemoryRouter>
-              <SettingsRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
+    describe('Login with Personal Access Token', () => {
+      it('should show login with personal access token button if not logged in', async () => {
+        await act(async () => {
+          render(
+            <AppContext.Provider
+              value={{
+                auth: { accounts: [mockOAuthAccount] },
+                settings: mockSettings,
+              }}
+            >
+              <MemoryRouter>
+                <SettingsRoute />
+              </MemoryRouter>
+            </AppContext.Provider>,
+          );
+        });
+
+        expect(
+          screen.getByTitle('Login with Personal Access Token').hidden,
+        ).toBe(false);
+
+        fireEvent.click(screen.getByTitle('Login with Personal Access Token'));
+        expect(mockNavigate).toHaveBeenNthCalledWith(
+          1,
+          '/login-personal-access-token',
+          {
+            replace: true,
+          },
         );
       });
 
-      fireEvent.click(screen.getByTitle('Login with GitHub Enterprise'));
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-enterprise', {
-        replace: true,
+      it('should hide login with personal access token button if already logged in', async () => {
+        await act(async () => {
+          render(
+            <AppContext.Provider
+              value={{
+                auth: { accounts: [mockPersonalAccessTokenAccount] },
+                settings: mockSettings,
+              }}
+            >
+              <MemoryRouter>
+                <SettingsRoute />
+              </MemoryRouter>
+            </AppContext.Provider>,
+          );
+        });
+
+        expect(
+          screen.getByTitle('Login with Personal Access Token').hidden,
+        ).toBe(true);
+      });
+    });
+
+    describe('Login with OAuth App', () => {
+      it('should show login with oauth app if not logged in', async () => {
+        await act(async () => {
+          render(
+            <AppContext.Provider
+              value={{
+                auth: { accounts: [mockPersonalAccessTokenAccount] },
+                settings: mockSettings,
+              }}
+            >
+              <MemoryRouter>
+                <SettingsRoute />
+              </MemoryRouter>
+            </AppContext.Provider>,
+          );
+        });
+
+        expect(screen.getByTitle('Login with OAuth App').hidden).toBe(false);
+
+        fireEvent.click(screen.getByTitle('Login with OAuth App'));
+        expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app', {
+          replace: true,
+        });
+      });
+
+      it('should hide login with oauth app route if already logged in', async () => {
+        await act(async () => {
+          render(
+            <AppContext.Provider
+              value={{
+                auth: { accounts: [mockOAuthAccount] },
+                settings: mockSettings,
+              }}
+            >
+              <MemoryRouter>
+                <SettingsRoute />
+              </MemoryRouter>
+            </AppContext.Provider>,
+          );
+        });
+
+        expect(screen.getByTitle('Login with OAuth App').hidden).toBe(true);
       });
     });
 
@@ -499,8 +587,8 @@ describe('routes/Settings.tsx', () => {
         render(
           <AppContext.Provider
             value={{
+              auth: mockAuth,
               settings: mockSettings,
-              accounts: mockAccounts,
               logout: logoutMock,
             }}
           >
@@ -511,7 +599,7 @@ describe('routes/Settings.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Logout from octocat'));
+      fireEvent.click(screen.getByTitle('Logout'));
 
       expect(logoutMock).toHaveBeenCalledTimes(1);
 
@@ -525,7 +613,10 @@ describe('routes/Settings.tsx', () => {
       await act(async () => {
         render(
           <AppContext.Provider
-            value={{ settings: mockSettings, accounts: mockAccounts }}
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+            }}
           >
             <MemoryRouter>
               <SettingsRoute />

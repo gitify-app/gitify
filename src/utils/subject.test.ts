@@ -1,7 +1,6 @@
 import axios from 'axios';
 import nock from 'nock';
 
-import { mockAccounts } from '../__mocks__/mock-state';
 import {
   partialMockNotification,
   partialMockUser,
@@ -12,11 +11,11 @@ import type {
   DiscussionStateType,
   Notification,
   Repository,
-  ViewerSubscription,
 } from '../typesGitHub';
 import {
   getCheckSuiteAttributes,
   getGitifySubjectDetails,
+  getLatestReviewForReviewers,
   getWorkflowRunAttributes,
 } from './subject';
 
@@ -25,7 +24,7 @@ const mockCommenter = partialMockUser('some-commenter');
 const mockDiscussionAuthor: DiscussionAuthor = {
   login: 'discussion-author',
   url: 'https://github.com/discussion-author',
-  avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
   type: 'User',
 };
 
@@ -44,10 +43,7 @@ describe('utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'cancelled',
@@ -61,10 +57,7 @@ describe('utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'failure',
@@ -78,10 +71,7 @@ describe('utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'failure',
@@ -95,10 +85,7 @@ describe('utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'skipped',
@@ -112,10 +99,7 @@ describe('utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'success',
@@ -129,10 +113,7 @@ describe('utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toBeNull();
       });
@@ -143,10 +124,7 @@ describe('utils/subject.ts', () => {
           type: 'CheckSuite',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toBeNull();
       });
@@ -171,10 +149,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/comments/141012658')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: null,
@@ -201,10 +176,7 @@ describe('utils/subject.ts', () => {
           )
           .reply(200, { author: mockAuthor });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: null,
@@ -224,7 +196,7 @@ describe('utils/subject.ts', () => {
       };
 
       const mockNotification = partialMockNotification({
-        title: 'This is a mocked discussion',
+        title: 'This is a mock discussion',
         type: 'Discussion',
       });
       mockNotification.updated_at = '2024-01-01T00:00:00Z';
@@ -238,15 +210,12 @@ describe('utils/subject.ts', () => {
           .reply(200, {
             data: {
               search: {
-                nodes: [mockDiscussionNode('SUBSCRIBED', null, true)],
+                nodes: [mockDiscussionNode(null, true)],
               },
             },
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'ANSWERED',
@@ -256,6 +225,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockDiscussionAuthor.avatar_url,
             type: mockDiscussionAuthor.type,
           },
+          comments: 0,
         });
       });
 
@@ -265,15 +235,12 @@ describe('utils/subject.ts', () => {
           .reply(200, {
             data: {
               search: {
-                nodes: [mockDiscussionNode('SUBSCRIBED', 'DUPLICATE', false)],
+                nodes: [mockDiscussionNode('DUPLICATE', false)],
               },
             },
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'DUPLICATE',
@@ -283,6 +250,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockDiscussionAuthor.avatar_url,
             type: mockDiscussionAuthor.type,
           },
+          comments: 0,
         });
       });
 
@@ -292,15 +260,12 @@ describe('utils/subject.ts', () => {
           .reply(200, {
             data: {
               search: {
-                nodes: [mockDiscussionNode('SUBSCRIBED', null, false)],
+                nodes: [mockDiscussionNode(null, false)],
               },
             },
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'OPEN',
@@ -310,6 +275,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockDiscussionAuthor.avatar_url,
             type: mockDiscussionAuthor.type,
           },
+          comments: 0,
         });
       });
 
@@ -319,15 +285,12 @@ describe('utils/subject.ts', () => {
           .reply(200, {
             data: {
               search: {
-                nodes: [mockDiscussionNode('SUBSCRIBED', 'OUTDATED', false)],
+                nodes: [mockDiscussionNode('OUTDATED', false)],
               },
             },
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'OUTDATED',
@@ -337,6 +300,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockDiscussionAuthor.avatar_url,
             type: mockDiscussionAuthor.type,
           },
+          comments: 0,
         });
       });
 
@@ -346,15 +310,12 @@ describe('utils/subject.ts', () => {
           .reply(200, {
             data: {
               search: {
-                nodes: [mockDiscussionNode('SUBSCRIBED', 'REOPENED', false)],
+                nodes: [mockDiscussionNode('REOPENED', false)],
               },
             },
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'REOPENED',
@@ -364,6 +325,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockDiscussionAuthor.avatar_url,
             type: mockDiscussionAuthor.type,
           },
+          comments: 0,
         });
       });
 
@@ -373,15 +335,12 @@ describe('utils/subject.ts', () => {
           .reply(200, {
             data: {
               search: {
-                nodes: [mockDiscussionNode('SUBSCRIBED', 'RESOLVED', true)],
+                nodes: [mockDiscussionNode('RESOLVED', true)],
               },
             },
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'RESOLVED',
@@ -391,36 +350,7 @@ describe('utils/subject.ts', () => {
             avatar_url: mockDiscussionAuthor.avatar_url,
             type: mockDiscussionAuthor.type,
           },
-        });
-      });
-
-      it('filtered response by subscribed', async () => {
-        nock('https://api.github.com')
-          .post('/graphql')
-          .reply(200, {
-            data: {
-              search: {
-                nodes: [
-                  mockDiscussionNode('SUBSCRIBED', null, false),
-                  mockDiscussionNode('IGNORED', null, true),
-                ],
-              },
-            },
-          });
-
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
-
-        expect(result).toEqual({
-          state: 'OPEN',
-          user: {
-            login: mockDiscussionAuthor.login,
-            html_url: mockDiscussionAuthor.url,
-            avatar_url: mockDiscussionAuthor.avatar_url,
-            type: mockDiscussionAuthor.type,
-          },
+          comments: 0,
         });
       });
     });
@@ -429,7 +359,7 @@ describe('utils/subject.ts', () => {
       let mockNotification: Notification;
       beforeEach(() => {
         mockNotification = partialMockNotification({
-          title: 'This is a mocked issue',
+          title: 'This is a mock issue',
           type: 'Issue',
           url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
           latest_comment_url:
@@ -446,10 +376,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'open',
@@ -471,10 +398,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'closed',
@@ -500,10 +424,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'completed',
@@ -529,10 +450,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'not_planned',
@@ -558,10 +476,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'reopened',
@@ -586,10 +501,7 @@ describe('utils/subject.ts', () => {
             user: mockAuthor,
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'open',
@@ -608,9 +520,9 @@ describe('utils/subject.ts', () => {
 
       beforeEach(() => {
         mockNotification = partialMockNotification({
-          title: 'This is a mocked pull request',
+          title: 'This is a mock pull request',
           type: 'PullRequest',
-          url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/1',
           latest_comment_url:
             'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448',
         });
@@ -618,7 +530,7 @@ describe('utils/subject.ts', () => {
 
       it('closed pull request state', async () => {
         nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/issues/1')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
             state: 'closed',
             draft: false,
@@ -630,10 +542,11 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+          .reply(200, []);
+
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'closed',
@@ -643,12 +556,13 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
+          reviews: null,
         });
       });
 
       it('draft pull request state', async () => {
         nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/issues/1')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
             state: 'open',
             draft: true,
@@ -660,10 +574,11 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+          .reply(200, []);
+
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'draft',
@@ -673,12 +588,13 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
+          reviews: null,
         });
       });
 
       it('merged pull request state', async () => {
         nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/issues/1')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
             state: 'open',
             draft: false,
@@ -690,10 +606,11 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+          .reply(200, []);
+
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'merged',
@@ -703,12 +620,13 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
+          reviews: null,
         });
       });
 
       it('open pull request state', async () => {
         nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/issues/1')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
             state: 'open',
             draft: false,
@@ -720,10 +638,11 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+          .reply(200, []);
+
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'open',
@@ -733,14 +652,16 @@ describe('utils/subject.ts', () => {
             avatar_url: mockCommenter.avatar_url,
             type: mockCommenter.type,
           },
+          reviews: null,
         });
       });
 
-      it('handle pull request without latest_comment_url', async () => {
-        mockNotification.subject.latest_comment_url = null;
+      it('avoid fetching comments if latest_comment_url and url are the same', async () => {
+        mockNotification.subject.latest_comment_url =
+          mockNotification.subject.url;
 
         nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/issues/1')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
             state: 'open',
             draft: false,
@@ -748,10 +669,11 @@ describe('utils/subject.ts', () => {
             user: mockAuthor,
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+          .reply(200, []);
+
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'open',
@@ -761,6 +683,95 @@ describe('utils/subject.ts', () => {
             avatar_url: mockAuthor.avatar_url,
             type: mockAuthor.type,
           },
+          reviews: null,
+        });
+      });
+
+      it('handle pull request without latest_comment_url', async () => {
+        mockNotification.subject.latest_comment_url = null;
+
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1')
+          .reply(200, {
+            state: 'open',
+            draft: false,
+            merged: false,
+            user: mockAuthor,
+          });
+
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+          .reply(200, []);
+
+        const result = await getGitifySubjectDetails(mockNotification);
+
+        expect(result).toEqual({
+          state: 'open',
+          user: {
+            login: mockAuthor.login,
+            html_url: mockAuthor.html_url,
+            avatar_url: mockAuthor.avatar_url,
+            type: mockAuthor.type,
+          },
+          reviews: null,
+        });
+      });
+
+      describe('Pull Request Reviews - Latest Reviews By Reviewer', () => {
+        it('returns latest review state per reviewer', async () => {
+          nock('https://api.github.com')
+            .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+            .reply(200, [
+              {
+                user: {
+                  login: 'reviewer-1',
+                },
+                state: 'REQUESTED_CHANGES',
+              },
+              {
+                user: {
+                  login: 'reviewer-2',
+                },
+                state: 'COMMENTED',
+              },
+              {
+                user: {
+                  login: 'reviewer-1',
+                },
+                state: 'APPROVED',
+              },
+              {
+                user: {
+                  login: 'reviewer-3',
+                },
+                state: 'APPROVED',
+              },
+            ]);
+
+          const result = await getLatestReviewForReviewers(mockNotification);
+
+          expect(result).toEqual([
+            { state: 'APPROVED', users: ['reviewer-3', 'reviewer-1'] },
+            { state: 'COMMENTED', users: ['reviewer-2'] },
+          ]);
+        });
+
+        it('handles no PR reviews yet', async () => {
+          nock('https://api.github.com')
+            .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+            .reply(200, []);
+
+          const result = await getLatestReviewForReviewers(mockNotification);
+
+          expect(result).toBeNull();
+        });
+
+        it('returns null when not a PR notification', async () => {
+          mockNotification.subject.type = 'Issue';
+
+          const result = await getLatestReviewForReviewers(mockNotification);
+
+          expect(result).toBeNull();
         });
       });
     });
@@ -768,7 +779,7 @@ describe('utils/subject.ts', () => {
     describe('Releases', () => {
       it('release notification', async () => {
         const mockNotification = partialMockNotification({
-          title: 'This is a mocked release',
+          title: 'This is a mock release',
           type: 'Release',
           url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1',
           latest_comment_url:
@@ -779,10 +790,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/releases/1')
           .reply(200, { author: mockAuthor });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: null,
@@ -803,10 +811,7 @@ describe('utils/subject.ts', () => {
           type: 'WorkflowRun',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'waiting',
@@ -821,10 +826,7 @@ describe('utils/subject.ts', () => {
           type: 'WorkflowRun',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toBeNull();
       });
@@ -835,10 +837,7 @@ describe('utils/subject.ts', () => {
           type: 'WorkflowRun',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toBeNull();
       });
@@ -852,12 +851,35 @@ describe('utils/subject.ts', () => {
           type: 'RepositoryInvitation',
         });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAccounts.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toBeNull();
+      });
+    });
+
+    describe('Error', () => {
+      it('catches error and logs message', async () => {
+        const consoleErrorSpy = jest
+          .spyOn(console, 'error')
+          .mockImplementation();
+
+        const mockError = new Error('Test error');
+        const mockNotification = partialMockNotification({
+          title: 'This issue will throw an error',
+          type: 'Issue',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+        });
+
+        nock('https://api.github.com')
+          .get('/repos/gitify-app/notifications-test/issues/1')
+          .replyWithError(mockError);
+
+        await getGitifySubjectDetails(mockNotification);
+
+        expect(consoleErrorSpy).toHaveBeenCalledWith(
+          'Error occurred while fetching details for Issue notification: This issue will throw an error',
+          mockError,
+        );
       });
     });
   });
@@ -1023,20 +1045,18 @@ describe('utils/subject.ts', () => {
 });
 
 function mockDiscussionNode(
-  subscription: ViewerSubscription,
   state: DiscussionStateType,
   isAnswered: boolean,
 ): Discussion {
   return {
-    title: 'This is a mocked discussion',
+    title: 'This is a mock discussion',
     url: 'https://github.com/gitify-app/notifications-test/discussions/1',
-    viewerSubscription: subscription,
     stateReason: state,
     isAnswered: isAnswered,
     author: mockDiscussionAuthor,
     comments: {
-      //TODO - Update this to have real data
       nodes: [],
+      totalCount: 0,
     },
   };
 }

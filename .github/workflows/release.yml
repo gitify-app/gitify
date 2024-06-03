@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - 'release/v**'
-  workflow_dispatch: #For manually running release process to verify codesigning of artifacts
+  workflow_dispatch: # For manually running release process to verify codesigning of artifacts
 
 jobs:
   release-macos:
@@ -87,3 +87,35 @@ jobs:
           name: Gitify-release-linux
           path: dist/
           overwrite: true
+
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+    authors:
+      - octocat
+  categories:
+    - title: 🚀 Features
+      labels:
+        - enhancement
+    - title: 🐛 Bug Fixes
+      labels:
+        - bug
+    - title: 🧼 Code Refactoring
+      labels:
+        - refactor
+    - title: 📚 Documentation
+      labels:
+        - documentation
+    - title: 🧪 Testing
+      labels:
+        - test
+    - title: 🏗️ Build System
+      labels:
+        - build
+    - title: 📦 Dependency Updates
+      labels:
+        - build
+    - title: Other Changes
+      labels:
+        - "*"

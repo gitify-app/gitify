@@ -8,11 +8,13 @@ export function getTheme(): Theme {
   return Theme.LIGHT;
 }
 
-export const setLightMode = () =>
+export const setLightMode = () => {
   document.querySelector('html').classList.remove('dark');
+};
 
-export const setDarkMode = () =>
+export const setDarkMode = () => {
   document.querySelector('html').classList.add('dark');
+};
 
 export const setTheme = (mode?: Theme) => {
   switch (mode) {

@@ -1,14 +1,23 @@
-const ipcRenderer = require('electron').ipcRenderer;
-
-import { ArrowLeftIcon } from '@primer/octicons-react';
-
-import { type FC, useCallback, useContext, useEffect } from 'react';
+import {
+  ArrowLeftIcon,
+  BookIcon,
+  PersonIcon,
+  SignInIcon,
+} from '@primer/octicons-react';
+import { type FC, useCallback, useContext } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
-
+import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
-import type { AuthOptions } from '../types';
+import type { LoginOAuthAppOptions } from '../utils/auth/types';
+import {
+  getNewOAuthAppURL,
+  isValidClientId,
+  isValidHostname,
+  isValidToken,
+} from '../utils/auth/utils';
+import Constants from '../utils/constants';
 
 interface IValues {
   hostname?: string;
@@ -24,49 +33,34 @@ interface IFormErrors {
 
 export const validate = (values: IValues): IFormErrors => {
   const errors: IFormErrors = {};
+
   if (!values.hostname) {
     errors.hostname = 'Required';
-  } else if (
-    !/^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
-      values.hostname,
-    )
-  ) {
+  } else if (!isValidHostname(values.hostname)) {
     errors.hostname = 'Invalid hostname.';
   }
 
   if (!values.clientId) {
-    // 20
     errors.clientId = 'Required';
-  } else if (!/^[A-Z0-9]{20}$/i.test(values.clientId)) {
+  } else if (!isValidClientId(values.clientId)) {
     errors.clientId = 'Invalid client id.';
   }
 
   if (!values.clientSecret) {
-    // 40
     errors.clientSecret = 'Required';
-  } else if (!/^[A-Z0-9]{40}$/i.test(values.clientSecret)) {
+  } else if (!isValidToken(values.clientSecret)) {
     errors.clientSecret = 'Invalid client secret.';
   }
 
   return errors;
 };
 
-export const LoginEnterpriseRoute: FC = () => {
-  const {
-    accounts: { enterpriseAccounts },
-    loginEnterprise,
-  } = useContext(AppContext);
+export const LoginWithOAuthApp: FC = () => {
+  const { loginWithOAuthApp } = useContext(AppContext);
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   if (enterpriseAccounts.length) {
-  //     ipcRenderer.send('reopen-window');
-  //     navigate(-1);
-  //   }
-  // }, [enterpriseAccounts]);
-
   const renderForm = (formProps: FormRenderProps) => {
-    const { handleSubmit, submitting, pristine } = formProps;
+    const { handleSubmit, submitting, pristine, values } = formProps;
 
     return (
       <form onSubmit={handleSubmit}>
@@ -74,6 +68,20 @@ export const LoginEnterpriseRoute: FC = () => {
           name="hostname"
           label="Hostname"
           placeholder="github.company.com"
+          helpText={
+            <div className="mb-1">
+              <Button
+                name="Create new OAuth App"
+                label="Create new OAuth App"
+                disabled={!values.hostname}
+                icon={PersonIcon}
+                size={12}
+                url={getNewOAuthAppURL(values.hostname)}
+              />
+              <span className="mx-1">on GitHub then paste your</span>
+              <span className="italic">client id and client secret</span> below.
+            </div>
+          }
         />
 
         <FieldInput name="clientId" label="Client ID" placeholder="123456789" />
@@ -84,21 +92,33 @@ export const LoginEnterpriseRoute: FC = () => {
           placeholder="ABC123DEF456"
         />
 
-        <button
-          className="float-right px-4 py-2 my-4 bg-gray-300 font-semibold rounded text-sm text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none"
-          title="Login Button"
-          disabled={submitting || pristine}
-          type="submit"
-        >
-          Login
-        </button>
+        <div className="flex justify-between items-end">
+          <Button
+            name="Docs"
+            label="GitHub Docs"
+            class="mt-2"
+            icon={BookIcon}
+            size={12}
+            url={Constants.GITHUB_DOCS.OAUTH_URL}
+          />
+
+          <Button
+            name="Login"
+            label="Login"
+            class="px-4 py-2 mt-2 !text-sm"
+            icon={SignInIcon}
+            size={16}
+            disabled={submitting || pristine}
+            type="submit"
+          />
+        </div>
       </form>
     );
   };
 
   const login = useCallback(async (data: IValues) => {
     try {
-      await loginEnterprise(data as AuthOptions);
+      await loginWithOAuthApp(data as LoginOAuthAppOptions);
     } catch (err) {
       // Skip
     }
@@ -120,7 +140,10 @@ export const LoginEnterpriseRoute: FC = () => {
           />
         </button>
 
-        <h3 className="text-lg font-semibold">Login with GitHub Enterprise</h3>
+        <h3 className="text-lg font-semibold justify-center">
+          <PersonIcon size={20} className="mr-2" />
+          Login with OAuth App
+        </h3>
       </div>
 
       <div className="flex-1 px-8">

@@ -6,14 +6,13 @@ import {
   Routes,
   useLocation,
 } from 'react-router-dom';
-
 import { Loading } from './components/Loading';
 import { Sidebar } from './components/Sidebar';
 import { AppContext, AppProvider } from './context/App';
 import { AccountsRoute } from './routes/Accounts';
 import { LoginRoute } from './routes/Login';
-import { LoginEnterpriseRoute } from './routes/LoginEnterprise';
-import { LoginWithToken } from './routes/LoginWithToken';
+import { LoginWithOAuthApp } from './routes/LoginWithOAuthApp';
+import { LoginWithPersonalAccessToken } from './routes/LoginWithPersonalAccessToken';
 import { NotificationsRoute } from './routes/Notifications';
 import { SettingsRoute } from './routes/Settings';
 
@@ -62,10 +61,10 @@ export const App = () => {
             />
             <Route path="/login" element={<LoginRoute />} />
             <Route
-              path="/login-enterprise"
-              element={<LoginEnterpriseRoute />}
+              path="/login-personal-access-token"
+              element={<LoginWithPersonalAccessToken />}
             />
-            <Route path="/login-token" element={<LoginWithToken />} />
+            <Route path="/login-oauth-app" element={<LoginWithOAuthApp />} />
           </Routes>
         </div>
       </Router>

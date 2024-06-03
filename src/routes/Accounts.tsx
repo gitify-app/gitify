@@ -1,6 +1,10 @@
 import {
   ArrowLeftIcon,
-  PersonAddIcon,
+  KeyIcon,
+  MarkGithubIcon,
+  PersonIcon,
+  PlusIcon,
+  ServerIcon,
   SignOutIcon,
 } from '@primer/octicons-react';
 
@@ -16,30 +20,26 @@ import {
 } from '../utils/comms';
 
 export const AccountsRoute: FC = () => {
-  const { accounts, logout, logoutEnterprise } = useContext(AppContext);
+  const { auth, logoutFromAccount } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const logoutUser = useCallback(() => {
-    logout();
+  const logoutAccount = useCallback((account) => {
+    logoutFromAccount(account);
     navigate(-1);
     updateTrayIcon();
     updateTrayTitle();
   }, []);
 
-  const openProfile = (username) => {
-    openExternalLink(new URL(username, 'https://github.com/').href);
-  };
-
-  const openEnterpriseServer = (hostname) => {
+  const openAccount = (hostname) => {
     openExternalLink(`https://${hostname}`);
   };
 
-  const goToLoginEnterprise = useCallback(() => {
-    return navigate('/login-enterprise', { replace: true });
+  const loginWithPersonalAccessToken = useCallback(() => {
+    return navigate('/login-personal-access-token', { replace: true });
   }, []);
 
-  const goToLogin = useCallback(() => {
-    return navigate('/login', { replace: true });
+  const loginWithOAuthApp = useCallback(() => {
+    return navigate('/login-oauth-app', { replace: true });
   }, []);
 
   const buttonClass =
@@ -68,95 +68,71 @@ export const AccountsRoute: FC = () => {
       </div>
 
       <div className="flex-grow overflow-x-auto px-8">
-        <div className="flex justify-between items-center">
-          <div className="text-m font-semibold my-2">GitHub.com</div>
-          {!accounts?.token && (
-            <div>
-              <button type="button" className={buttonClass} onClick={goToLogin}>
-                <PersonAddIcon size={16} className="mr-2" />
-              </button>
-            </div>
-          )}
-        </div>
-
-        <div className="flex flex-col bg-gray-100 dark:bg-gray-900 rounded-lg p-2">
-          <div className="flex justify-between items-center ml-2">
-            {accounts?.token && (
-              <>
-                <div
-                  className="text-sm font-semibold cursor-pointer"
-                  title="View Profile"
-                  onClick={() => openProfile(accounts.user.login)}
-                  onKeyDown={() => openProfile(accounts.user.login)}
-                >
-                  @{accounts.user.login}{' '}
-                  <span className="text-xs italic">({accounts.user.name})</span>
-                </div>
-                <div className="flex">
-                  <button
-                    type="button"
-                    className={buttonClass}
-                    title="Logout"
-                    onClick={logoutUser}
-                  >
-                    <SignOutIcon size={16} aria-label="Logout" />
-                  </button>
-                </div>
-              </>
-            )}
-          </div>
-        </div>
-
-        <div className="flex flex-col mt-4">
-          <div className="flex justify-between items-center">
-            <div className="text-m font-semibold my-2">
-              GitHub Enterprise Server
-            </div>
-            <div>
-              <button
-                type="button"
-                className={buttonClass}
-                onClick={goToLoginEnterprise}
-              >
-                <PersonAddIcon size={16} className="mr-2" />
-              </button>
-            </div>
-          </div>
-
-          {accounts.enterpriseAccounts.map((enterpriseAccount) => (
-            <div
-              key={enterpriseAccount.hostname}
-              className="flex flex-col bg-gray-100 dark:bg-gray-900 rounded-lg p-2"
+        <div className="flex flex-col mt-4 text-sm">
+          {auth.accounts.map((account) => (
+            <span
+              key={account.hostname}
+              className="flex justify-between items-center bg-gray-100 dark:bg-gray-900 rounded-md p-1 mb-2"
             >
-              <div className="flex justify-between items-center ml-2">
-                <div className="flex flex-col">
-                  <div
-                    className="text-sm font-semibold cursor-pointer"
-                    title="View Enterprise Server"
-                    onClick={() =>
-                      openEnterpriseServer(enterpriseAccount.hostname)
-                    }
-                    onKeyDown={() =>
-                      openEnterpriseServer(enterpriseAccount.hostname)
-                    }
-                  >
-                    {enterpriseAccount.hostname}
-                  </div>
-                </div>
-
-                <div className="flex">
-                  <button
-                    type="button"
-                    className={buttonClass}
-                    title="Logout"
-                    onClick={() => logoutEnterprise(enterpriseAccount.hostname)}
-                  >
-                    <SignOutIcon size={16} aria-label="Logout" />
-                  </button>
-                </div>
+              <div
+                className="ml-2 cursor-pointer"
+                title={account.platform}
+                onClick={() => openAccount(account.hostname)}
+                onKeyDown={() => openAccount(account.hostname)}
+              >
+                {account.platform === 'GitHub Cloud' ? (
+                  <MarkGithubIcon size={16} aria-label="GitHub Cloud" />
+                ) : (
+                  <ServerIcon size={16} aria-label="GitHub Enterprise" />
+                )}
               </div>
-            </div>
+              <div title={account.user.name}>@{account.user.login}</div>
+              <div title={account.method}>
+                {account.method === 'Personal Access Token' ? (
+                  <KeyIcon size={16} aria-label="Personal Access Token" />
+                ) : null}
+                {account.method === 'OAuth App' ? (
+                  <PersonIcon size={16} aria-label="OAuth App" />
+                ) : null}
+              </div>
+
+              <div>
+                <button
+                  type="button"
+                  className={buttonClass}
+                  title="Logout from account"
+                  onClick={() => logoutAccount(account)}
+                  onKeyDown={() => logoutAccount(account)}
+                >
+                  <SignOutIcon size={16} aria-label="Logout from account" />
+                </button>
+              </div>
+            </span>
           ))}
+        </div>
+      </div>
+
+      <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8 text-sm">
+        <div className="font-semibold italic">Add new account</div>
+        <div>
+          <button
+            type="button"
+            className={buttonClass}
+            title="Login with Personal Access Token"
+            onClick={loginWithPersonalAccessToken}
+          >
+            <KeyIcon size={18} aria-label="Login with Personal Access Token" />
+            <PlusIcon size={10} className="ml-1 mb-2" />
+          </button>
+          <button
+            type="button"
+            className={buttonClass}
+            title="Login with OAuth App"
+            onClick={loginWithOAuthApp}
+          >
+            <PersonIcon size={20} aria-label="Login with OAuth App" />
+            <PlusIcon size={10} className="mb-2" />
+          </button>
         </div>
       </div>
     </div>

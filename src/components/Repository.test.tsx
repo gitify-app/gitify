@@ -1,9 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import TestRenderer from 'react-test-renderer';
-import { mockedGitHubNotifications } from '../__mocks__/mockedData';
+import { shell } from 'electron';
 import { AppContext } from '../context/App';
+import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
 import { RepositoryNotifications } from './Repository';
-const { shell } = require('electron');
 
 jest.mock('./NotificationRow', () => ({
   NotificationRow: () => <div>NotificationRow</div>,
@@ -15,8 +14,8 @@ describe('components/Repository.tsx', () => {
 
   const props = {
     hostname: 'github.com',
-    repoName: 'manosim/gitify',
-    repoNotifications: mockedGitHubNotifications,
+    repoName: 'gitify-app/notifications-test',
+    repoNotifications: mockGitHubNotifications,
   };
 
   beforeEach(() => {
@@ -26,7 +25,7 @@ describe('components/Repository.tsx', () => {
   });
 
   it('should render itself & its children', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
@@ -45,7 +44,7 @@ describe('components/Repository.tsx', () => {
 
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
     expect(shell.openExternal).toHaveBeenCalledWith(
-      'https://github.com/manosim/notifications-test',
+      'https://github.com/gitify-app/notifications-test',
     );
   });
 
@@ -59,7 +58,7 @@ describe('components/Repository.tsx', () => {
     fireEvent.click(screen.getByTitle('Mark Repository as Read'));
 
     expect(markRepoNotifications).toHaveBeenCalledWith(
-      'manosim/notifications-test',
+      'gitify-app/notifications-test',
       'github.com',
     );
   });
@@ -74,7 +73,7 @@ describe('components/Repository.tsx', () => {
     fireEvent.click(screen.getByTitle('Mark Repository as Done'));
 
     expect(markRepoNotificationsDone).toHaveBeenCalledWith(
-      'manosim/notifications-test',
+      'gitify-app/notifications-test',
       'github.com',
     );
   });
@@ -82,7 +81,7 @@ describe('components/Repository.tsx', () => {
   it('should use default repository icon when avatar is not available', () => {
     props.repoNotifications[0].repository.owner.avatar_url = '';
 
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
