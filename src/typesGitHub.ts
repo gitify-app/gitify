@@ -289,7 +289,6 @@ export interface PullRequest {
   merged_at: string | null;
   merge_commit_sha: string | null;
   labels: Labels[];
-  milestone: string | null;
   draft: boolean;
   commits_url: string;
   review_comments_url: string;
