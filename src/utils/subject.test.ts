@@ -379,10 +379,7 @@ describe('utils/subject.ts', () => {
             },
           });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAuth.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'ANSWERED',
@@ -580,10 +577,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
           .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAuth.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'open',
@@ -889,10 +883,7 @@ describe('utils/subject.ts', () => {
           .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
           .reply(200, []);
 
-        const result = await getGitifySubjectDetails(
-          mockNotification,
-          mockAuth.token,
-        );
+        const result = await getGitifySubjectDetails(mockNotification);
 
         expect(result).toEqual({
           state: 'open',
