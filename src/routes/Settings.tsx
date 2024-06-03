@@ -174,15 +174,15 @@ export const SettingsRoute: FC = () => {
             tooltip={
               <div>
                 <div className="pb-3">
-                  See{' '}
+                  See
                   <button
                     type="button"
-                    className="text-blue-500"
+                    className="text-blue-500 mx-1"
                     title="Open GitHub documentation for participating and watching notifications"
                     onClick={openGitHubParticipatingDocs}
                   >
                     official docs
-                  </button>{' '}
+                  </button>
                   for more details.
                 </div>
               </div>

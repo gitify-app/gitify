@@ -17,6 +17,7 @@ import {
   getGitifySubjectDetails,
   getLatestReviewForReviewers,
   getWorkflowRunAttributes,
+  parseLinkedIssuesFromPrBody,
 } from './subject';
 
 const mockAuthor = partialMockUser('some-author');
@@ -636,6 +637,7 @@ describe('utils/subject.ts', () => {
           },
           reviews: null,
           labels: [],
+          linkedIssues: [],
         });
       });
 
@@ -670,6 +672,7 @@ describe('utils/subject.ts', () => {
           },
           reviews: null,
           labels: [],
+          linkedIssues: [],
         });
       });
 
@@ -704,6 +707,7 @@ describe('utils/subject.ts', () => {
           },
           reviews: null,
           labels: [],
+          linkedIssues: [],
         });
       });
 
@@ -738,6 +742,7 @@ describe('utils/subject.ts', () => {
           },
           reviews: null,
           labels: [],
+          linkedIssues: [],
         });
       });
 
@@ -771,6 +776,7 @@ describe('utils/subject.ts', () => {
           },
           reviews: null,
           labels: [],
+          linkedIssues: [],
         });
       });
 
@@ -803,6 +809,7 @@ describe('utils/subject.ts', () => {
           },
           reviews: null,
           labels: [],
+          linkedIssues: [],
         });
       });
 
@@ -864,7 +871,7 @@ describe('utils/subject.ts', () => {
         });
       });
 
-      it('pull request with labels', async () => {
+      it('Pull Requests With labels', async () => {
         nock('https://api.github.com')
           .get('/repos/gitify-app/notifications-test/pulls/1')
           .reply(200, {
@@ -895,6 +902,20 @@ describe('utils/subject.ts', () => {
           },
           reviews: null,
           labels: ['enhancement'],
+          linkedIssues: [],
+        });
+      });
+
+      describe('Pull Request With Linked Issues', () => {
+        it('returns empty if no pr body', () => {
+          const result = parseLinkedIssuesFromPrBody(null);
+          expect(result).toEqual([]);
+        });
+
+        it('returns linked issues', () => {
+          const mockPrBody = 'This PR is linked to #1, #2, and #3';
+          const result = parseLinkedIssuesFromPrBody(mockPrBody);
+          expect(result).toEqual(['#1', '#2', '#3']);
         });
       });
     });
