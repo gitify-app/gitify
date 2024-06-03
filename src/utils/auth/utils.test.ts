@@ -112,8 +112,8 @@ describe('utils/auth/utils.ts', () => {
     });
 
     describe('should add GitHub Cloud account', () => {
-      it('should add personal access token account', async () => {
-        const result = await auth.addAccount(
+      it('should add personal access token account', () => {
+        const result = auth.addAccount(
           mockAuthState,
           'Personal Access Token',
           '123-456',
@@ -131,8 +131,8 @@ describe('utils/auth/utils.ts', () => {
         ]);
       });
 
-      it('should add oauth app account', async () => {
-        const result = await auth.addAccount(
+      it('should add oauth app account', () => {
+        const result = auth.addAccount(
           mockAuthState,
           'OAuth App',
           '123-456',
@@ -152,8 +152,8 @@ describe('utils/auth/utils.ts', () => {
     });
 
     describe('should add GitHub Enterprise Server account', () => {
-      it('should add personal access token account', async () => {
-        const result = await auth.addAccount(
+      it('should add personal access token account', () => {
+        const result = auth.addAccount(
           mockAuthState,
           'Personal Access Token',
           '123-456',
@@ -171,8 +171,8 @@ describe('utils/auth/utils.ts', () => {
         ]);
       });
 
-      it('should add oauth app account', async () => {
-        const result = await auth.addAccount(
+      it('should add oauth app account', () => {
+        const result = auth.addAccount(
           mockAuthState,
           'OAuth App',
           '123-456',
