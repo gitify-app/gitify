@@ -108,7 +108,7 @@ export const Sidebar: FC = () => {
                 }
               }}
             >
-              <PersonIcon size={16} aria-label="Accounts" />
+              <PersonIcon size={18} aria-label="Accounts" />
             </button>
             <button
               type="button"

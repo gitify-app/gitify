@@ -215,6 +215,27 @@ describe('utils/auth/utils.ts', () => {
     });
   });
 
+  it('getDeveloperSettingsURL', () => {
+    expect(
+      auth.getDeveloperSettingsURL({
+        hostname: 'github.com',
+        method: 'GitHub App',
+      } as Account),
+    ).toBe('https://github.com/settings/apps');
+    expect(
+      auth.getDeveloperSettingsURL({
+        hostname: 'github.com',
+        method: 'OAuth App',
+      } as Account),
+    ).toBe('https://github.com/settings/developers');
+    expect(
+      auth.getDeveloperSettingsURL({
+        hostname: 'github.com',
+        method: 'Personal Access Token',
+      } as Account),
+    ).toBe('https://github.com/settings/tokens');
+  });
+
   describe('getNewTokenURL', () => {
     it('should generate new PAT url - github cloud', () => {
       expect(
