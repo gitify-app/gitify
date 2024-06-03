@@ -264,6 +264,7 @@ async function getGitifySubjectForPullRequest(
   }
 
   const reviews = await getLatestReviewForReviewers(notification);
+  const linkedIssues = parseLinkedIssuesFromPrBody(pr.body);
 
   return {
     state: prState,
@@ -275,6 +276,7 @@ async function getGitifySubjectForPullRequest(
     },
     reviews: reviews,
     comments: pr.comments,
+    linkedIssues: linkedIssues,
   };
 }
 
@@ -327,6 +329,26 @@ export async function getLatestReviewForReviewers(
   return reviewers.sort((a, b) => {
     return a.state.localeCompare(b.state);
   });
+}
+
+export function parseLinkedIssuesFromPrBody(body: string): string[] {
+  const linkedIssues: string[] = [];
+
+  if (!body) {
+    return linkedIssues;
+  }
+
+  const regexPattern = /\s*#(\d+)\s*/gi;
+
+  const matches = body.matchAll(regexPattern);
+
+  for (const match of matches) {
+    if (match[0]) {
+      linkedIssues.push(match[0].trim());
+    }
+  }
+
+  return linkedIssues;
 }
 
 async function getGitifySubjectForRelease(

@@ -3,6 +3,7 @@ import {
   CheckIcon,
   CommentIcon,
   FeedPersonIcon,
+  IssueClosedIcon,
   ReadIcon,
 } from '@primer/octicons-react';
 import {
@@ -91,6 +92,10 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     notification.subject.comments > 1 ? 'comments' : 'comment'
   }`;
 
+  const linkedIssuesPillDescription = `Linked to ${
+    notification.subject.linkedIssues?.length > 1 ? 'issues' : 'issue'
+  } ${notification.subject?.linkedIssues?.join(', ')}`;
+
   return (
     <div
       id={notification.id}
@@ -144,6 +149,18 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 {reason.title}
               </span>
               <span className="ml-1">{updatedAt}</span>
+              {notification.subject?.linkedIssues?.length > 0 && (
+                <span className="ml-1" title={linkedIssuesPillDescription}>
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <IssueClosedIcon
+                      size={12}
+                      className={`mr-1 ${IconColor.GREEN}`}
+                      aria-label={linkedIssuesPillDescription}
+                    />
+                    {notification.subject.linkedIssues.length}
+                  </button>
+                </span>
+              )}
               {notification.subject.reviews
                 ? notification.subject.reviews.map((review) => {
                     const icon = getPullRequestReviewIcon(review);
