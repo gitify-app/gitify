@@ -279,11 +279,11 @@ export const SettingsRoute: FC = () => {
           <button
             type="button"
             className={footerButtonClass}
-            title="Logout Gitify"
+            title="Logout of Gitify"
             role="button"
             onClick={logoutGitify}
           >
-            <SignOutIcon size={18} aria-label="Logout Gitify" />
+            <SignOutIcon size={18} aria-label="Logout of Gitify" />
           </button>
 
           <button

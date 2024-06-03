@@ -496,7 +496,7 @@ describe('routes/Settings.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Logout Gitify'));
+      fireEvent.click(screen.getByTitle('Logout of Gitify'));
 
       expect(logoutMock).toHaveBeenCalledTimes(1);
 
