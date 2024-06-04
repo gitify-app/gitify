@@ -565,30 +565,63 @@ describe('utils/subject.ts', () => {
         });
       });
 
-      it('issue with labels', async () => {
-        nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/issues/1')
-          .reply(200, {
+      describe('Issue With Labels', () => {
+        it('with labels', async () => {
+          nock('https://api.github.com')
+            .get('/repos/gitify-app/notifications-test/issues/1')
+            .reply(200, {
+              state: 'open',
+              user: mockAuthor,
+              labels: [{ name: 'enhancement' }],
+            });
+
+          nock('https://api.github.com')
+            .get(
+              '/repos/gitify-app/notifications-test/issues/comments/302888448',
+            )
+            .reply(200, { user: mockCommenter });
+
+          const result = await getGitifySubjectDetails(mockNotification);
+
+          expect(result).toEqual({
             state: 'open',
-            user: mockAuthor,
-            labels: [{ name: 'enhancement' }],
+            user: {
+              login: mockCommenter.login,
+              html_url: mockCommenter.html_url,
+              avatar_url: mockCommenter.avatar_url,
+              type: mockCommenter.type,
+            },
+            labels: ['enhancement'],
           });
+        });
 
-        nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
-          .reply(200, { user: mockCommenter });
+        it('handle null labels', async () => {
+          nock('https://api.github.com')
+            .get('/repos/gitify-app/notifications-test/issues/1')
+            .reply(200, {
+              state: 'open',
+              user: mockAuthor,
+              labels: null,
+            });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+          nock('https://api.github.com')
+            .get(
+              '/repos/gitify-app/notifications-test/issues/comments/302888448',
+            )
+            .reply(200, { user: mockCommenter });
 
-        expect(result).toEqual({
-          state: 'open',
-          user: {
-            login: mockCommenter.login,
-            html_url: mockCommenter.html_url,
-            avatar_url: mockCommenter.avatar_url,
-            type: mockCommenter.type,
-          },
-          labels: ['enhancement'],
+          const result = await getGitifySubjectDetails(mockNotification);
+
+          expect(result).toEqual({
+            state: 'open',
+            user: {
+              login: mockCommenter.login,
+              html_url: mockCommenter.html_url,
+              avatar_url: mockCommenter.avatar_url,
+              type: mockCommenter.type,
+            },
+            labels: [],
+          });
         });
       });
     });
@@ -871,38 +904,79 @@ describe('utils/subject.ts', () => {
         });
       });
 
-      it('Pull Requests With labels', async () => {
-        nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/pulls/1')
-          .reply(200, {
+      describe('Pull Requests With Labels', () => {
+        it('with labels', async () => {
+          nock('https://api.github.com')
+            .get('/repos/gitify-app/notifications-test/pulls/1')
+            .reply(200, {
+              state: 'open',
+              draft: false,
+              merged: false,
+              user: mockAuthor,
+              labels: [{ name: 'enhancement' }],
+            });
+
+          nock('https://api.github.com')
+            .get(
+              '/repos/gitify-app/notifications-test/issues/comments/302888448',
+            )
+            .reply(200, { user: mockCommenter });
+
+          nock('https://api.github.com')
+            .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+            .reply(200, []);
+
+          const result = await getGitifySubjectDetails(mockNotification);
+
+          expect(result).toEqual({
             state: 'open',
-            draft: false,
-            merged: false,
-            user: mockAuthor,
-            labels: [{ name: 'enhancement' }],
+            user: {
+              login: mockCommenter.login,
+              html_url: mockCommenter.html_url,
+              avatar_url: mockCommenter.avatar_url,
+              type: mockCommenter.type,
+            },
+            reviews: null,
+            labels: ['enhancement'],
+            linkedIssues: [],
           });
+        });
 
-        nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/issues/comments/302888448')
-          .reply(200, { user: mockCommenter });
+        it('handle null labels', async () => {
+          nock('https://api.github.com')
+            .get('/repos/gitify-app/notifications-test/pulls/1')
+            .reply(200, {
+              state: 'open',
+              draft: false,
+              merged: false,
+              user: mockAuthor,
+              labels: null,
+            });
 
-        nock('https://api.github.com')
-          .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
-          .reply(200, []);
+          nock('https://api.github.com')
+            .get(
+              '/repos/gitify-app/notifications-test/issues/comments/302888448',
+            )
+            .reply(200, { user: mockCommenter });
 
-        const result = await getGitifySubjectDetails(mockNotification);
+          nock('https://api.github.com')
+            .get('/repos/gitify-app/notifications-test/pulls/1/reviews')
+            .reply(200, []);
 
-        expect(result).toEqual({
-          state: 'open',
-          user: {
-            login: mockCommenter.login,
-            html_url: mockCommenter.html_url,
-            avatar_url: mockCommenter.avatar_url,
-            type: mockCommenter.type,
-          },
-          reviews: null,
-          labels: ['enhancement'],
-          linkedIssues: [],
+          const result = await getGitifySubjectDetails(mockNotification);
+
+          expect(result).toEqual({
+            state: 'open',
+            user: {
+              login: mockCommenter.login,
+              html_url: mockCommenter.html_url,
+              avatar_url: mockCommenter.avatar_url,
+              type: mockCommenter.type,
+            },
+            reviews: null,
+            labels: [],
+            linkedIssues: [],
+          });
         });
       });
 
