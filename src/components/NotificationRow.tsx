@@ -4,6 +4,7 @@ import {
   CommentIcon,
   FeedPersonIcon,
   IssueClosedIcon,
+  MilestoneIcon,
   ReadIcon,
   TagIcon,
 } from '@primer/octicons-react';
@@ -215,6 +216,24 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                       aria-label={labelsPillDescription}
                     />
                     {notification.subject.labels.length}
+                  </button>
+                </span>
+              )}
+              {notification.subject.milestone && (
+                <span
+                  className="ml-1"
+                  title={notification.subject.milestone.title}
+                >
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <MilestoneIcon
+                      size={12}
+                      className={
+                        notification.subject.milestone.state === 'open'
+                          ? IconColor.GREEN
+                          : IconColor.RED
+                      }
+                      aria-label={notification.subject.milestone.title}
+                    />
                   </button>
                 </span>
               )}
