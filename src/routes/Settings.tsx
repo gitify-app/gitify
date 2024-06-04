@@ -1,5 +1,6 @@
 import {
   ArrowLeftIcon,
+  PersonIcon,
   SignOutIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
@@ -276,6 +277,21 @@ export const SettingsRoute: FC = () => {
           Gitify v{appVersion}
         </button>
         <div>
+          <button
+            type="button"
+            className={footerButtonClass}
+            title="Accounts"
+            onClick={() => {
+              if (location.pathname.startsWith('/accounts')) {
+                navigate('/', { replace: true });
+              } else {
+                navigate('/accounts');
+              }
+            }}
+          >
+            <PersonIcon size={20} aria-label="Accounts" />
+          </button>
+
           <button
             type="button"
             className={footerButtonClass}

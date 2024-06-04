@@ -100,32 +100,6 @@ describe('components/Sidebar.tsx', () => {
     });
   });
 
-  describe('Accounts', () => {
-    it('go to the accounts route', () => {
-      render(
-        <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
-          <MemoryRouter>
-            <Sidebar />
-          </MemoryRouter>
-        </AppContext.Provider>,
-      );
-      fireEvent.click(screen.getByTitle('Accounts'));
-      expect(mockNavigate).toHaveBeenCalledWith('/accounts');
-    });
-
-    it('go to the home if accounts path already shown', () => {
-      render(
-        <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
-          <MemoryRouter initialEntries={['/accounts']}>
-            <Sidebar />
-          </MemoryRouter>
-        </AppContext.Provider>,
-      );
-      fireEvent.click(screen.getByTitle('Accounts'));
-      expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
-    });
-  });
-
   describe('Settings', () => {
     it('go to the settings route', () => {
       render(

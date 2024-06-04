@@ -1,7 +1,6 @@
 import {
   BellIcon,
   GearIcon,
-  PersonIcon,
   SyncIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
@@ -95,20 +94,6 @@ export const Sidebar: FC = () => {
                 aria-label="Refresh Notifications"
                 className={status === 'loading' ? 'animate-spin' : undefined}
               />
-            </button>
-            <button
-              type="button"
-              className={sidebarButtonClasses}
-              title="Accounts"
-              onClick={() => {
-                if (location.pathname.startsWith('/accounts')) {
-                  navigate('/', { replace: true });
-                } else {
-                  navigate('/accounts');
-                }
-              }}
-            >
-              <PersonIcon size={18} aria-label="Accounts" />
             </button>
             <button
               type="button"

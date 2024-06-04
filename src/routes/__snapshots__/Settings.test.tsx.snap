@@ -513,6 +513,27 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
     <div>
       <button
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
+        title="Accounts"
+        type="button"
+      >
+        <svg
+          aria-label="Accounts"
+          class="octicon octicon-person"
+          fill="currentColor"
+          focusable="false"
+          height="20"
+          role="img"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          viewBox="0 0 16 16"
+          width="20"
+        >
+          <path
+            d="M10.561 8.073a6.005 6.005 0 0 1 3.432 5.142.75.75 0 1 1-1.498.07 4.5 4.5 0 0 0-8.99 0 .75.75 0 0 1-1.498-.07 6.004 6.004 0 0 1 3.431-5.142 3.999 3.999 0 1 1 5.123 0ZM10.5 5a2.5 2.5 0 1 0-5 0 2.5 2.5 0 0 0 5 0Z"
+          />
+        </svg>
+      </button>
+      <button
+        class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
         role="button"
         title="Logout of Gitify"
         type="button"

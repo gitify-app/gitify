@@ -478,6 +478,23 @@ describe('routes/Settings.tsx', () => {
       );
     });
 
+    it('should open account management', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            auth: mockAuth,
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      fireEvent.click(screen.getByTitle('Accounts'));
+      expect(mockNavigate).toHaveBeenCalledWith('/accounts');
+    });
+
     it('should press the logout', async () => {
       const logoutMock = jest.fn();
       await act(async () => {
