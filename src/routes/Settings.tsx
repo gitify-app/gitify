@@ -266,11 +266,7 @@ export const SettingsRoute: FC = () => {
             className={footerButtonClass}
             title="Accounts"
             onClick={() => {
-              if (location.pathname.startsWith('/accounts')) {
-                navigate('/', { replace: true });
-              } else {
-                navigate('/accounts');
-              }
+              navigate('/accounts');
             }}
           >
             <PersonIcon size={18} aria-label="Accounts" />
