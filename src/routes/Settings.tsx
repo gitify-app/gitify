@@ -1,9 +1,4 @@
-import {
-  ArrowLeftIcon,
-  PersonIcon,
-  SignOutIcon,
-  XCircleIcon,
-} from '@primer/octicons-react';
+import { ArrowLeftIcon, PersonIcon, XCircleIcon } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
 import {
   type FC,
@@ -18,17 +13,13 @@ import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
 import { Theme } from '../types';
-import {
-  openExternalLink,
-  updateTrayIcon,
-  updateTrayTitle,
-} from '../utils/comms';
+import { openExternalLink } from '../utils/comms';
 import Constants from '../utils/constants';
 import { isLinux, isMacOS } from '../utils/platform';
 import { setTheme } from '../utils/theme';
 
 export const SettingsRoute: FC = () => {
-  const { settings, updateSetting, logout } = useContext(AppContext);
+  const { settings, updateSetting } = useContext(AppContext);
   const navigate = useNavigate();
 
   const [appVersion, setAppVersion] = useState<string | null>(null);
@@ -59,13 +50,6 @@ export const SettingsRoute: FC = () => {
         setTheme(updatedTheme);
       }
     });
-  }, []);
-
-  const logoutGitify = useCallback(() => {
-    logout();
-    navigate(-1);
-    updateTrayIcon();
-    updateTrayTitle();
   }, []);
 
   const quitApp = useCallback(() => {
@@ -289,17 +273,7 @@ export const SettingsRoute: FC = () => {
               }
             }}
           >
-            <PersonIcon size={20} aria-label="Accounts" />
-          </button>
-
-          <button
-            type="button"
-            className={footerButtonClass}
-            title="Logout of Gitify"
-            role="button"
-            onClick={logoutGitify}
-          >
-            <SignOutIcon size={18} aria-label="Logout of Gitify" />
+            <PersonIcon size={18} aria-label="Accounts" />
           </button>
 
           <button

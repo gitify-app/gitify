@@ -495,34 +495,6 @@ describe('routes/Settings.tsx', () => {
       expect(mockNavigate).toHaveBeenCalledWith('/accounts');
     });
 
-    it('should press the logout', async () => {
-      const logoutMock = jest.fn();
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: mockAuth,
-              settings: mockSettings,
-              logout: logoutMock,
-            }}
-          >
-            <MemoryRouter>
-              <SettingsRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
-      });
-
-      fireEvent.click(screen.getByTitle('Logout of Gitify'));
-
-      expect(logoutMock).toHaveBeenCalledTimes(1);
-
-      expect(ipcRenderer.send).toHaveBeenCalledTimes(2);
-      expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
-      expect(ipcRenderer.send).toHaveBeenCalledWith('update-title', '');
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
-    });
-
     it('should quit the app', async () => {
       await act(async () => {
         render(
