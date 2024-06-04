@@ -174,7 +174,7 @@ describe('components/NotificationRow.tsx', () => {
     });
 
     describe('milestone pills', () => {
-      it('should render milestone pill', async () => {
+      it('should render open milestone pill', async () => {
         jest
           .spyOn(global.Date, 'now')
           .mockImplementation(() => new Date('2024').valueOf());
@@ -182,6 +182,27 @@ describe('components/NotificationRow.tsx', () => {
         const mockNotification = mockSingleNotification;
         mockNotification.subject.milestone = {
           title: 'Milestone 1',
+          state: 'open',
+        } as Milestone;
+
+        const props = {
+          notification: mockNotification,
+          hostname: 'github.com',
+        };
+
+        const tree = render(<NotificationRow {...props} />);
+        expect(tree).toMatchSnapshot();
+      });
+
+      it('should render closed milestone pill', async () => {
+        jest
+          .spyOn(global.Date, 'now')
+          .mockImplementation(() => new Date('2024').valueOf());
+
+        const mockNotification = mockSingleNotification;
+        mockNotification.subject.milestone = {
+          title: 'Milestone 1',
+          state: 'closed',
         } as Milestone;
 
         const props = {
