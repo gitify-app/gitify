@@ -6,15 +6,15 @@ import { Errors } from '../utils/constants';
 import { NotificationsRoute } from './Notifications';
 
 jest.mock('../components/AccountNotifications', () => ({
-  AccountNotifications: 'AccountNotifications',
+  AccountNotifications: () => <p>AccountNotifications</p>,
 }));
 
 jest.mock('../components/AllRead', () => ({
-  AllRead: 'AllRead',
+  AllRead: () => <p>AllRead</p>,
 }));
 
 jest.mock('../components/Oops', () => ({
-  Oops: 'Oops',
+  Oops: () => <p>Oops</p>,
 }));
 
 describe('routes/Notifications.tsx', () => {
