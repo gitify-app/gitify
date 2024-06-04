@@ -5,6 +5,7 @@ import {
   FeedPersonIcon,
   IssueClosedIcon,
   ReadIcon,
+  TagIcon,
 } from '@primer/octicons-react';
 import {
   type FC,
@@ -91,6 +92,10 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const commentsPillDescription = `${notification.subject.comments} ${
     notification.subject.comments > 1 ? 'comments' : 'comment'
   }`;
+
+  const labelsPillDescription = notification.subject.labels
+    ?.map((label) => `🏷️ ${label}`)
+    .join('\n');
 
   const linkedIssuesPillDescription = `Linked to ${
     notification.subject.linkedIssues?.length > 1 ? 'issues' : 'issue'
@@ -198,6 +203,18 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                       aria-label={commentsPillDescription}
                     />
                     {notification.subject.comments}
+                  </button>
+                </span>
+              )}
+              {notification.subject?.labels?.length > 0 && (
+                <span className="ml-1" title={labelsPillDescription}>
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <TagIcon
+                      size={12}
+                      className={`mr-1 ${IconColor.GRAY}`}
+                      aria-label={labelsPillDescription}
+                    />
+                    {notification.subject.labels.length}
                   </button>
                 </span>
               )}

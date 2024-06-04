@@ -117,6 +117,25 @@ describe('components/NotificationRow.tsx', () => {
     });
   });
 
+  describe('notification labels', () => {
+    it('should render labels metric when available', async () => {
+      jest
+        .spyOn(global.Date, 'now')
+        .mockImplementation(() => new Date('2024').valueOf());
+
+      const mockNotification = mockSingleNotification;
+      mockNotification.subject.labels = ['enhancement', 'good-first-issue'];
+
+      const props = {
+        notification: mockNotification,
+        hostname: 'github.com',
+      };
+
+      const tree = render(<NotificationRow {...props} />);
+      expect(tree).toMatchSnapshot();
+    });
+  });
+
   describe('linked issues/prs', () => {
     it('should render when linked to one issue/pr', async () => {
       jest

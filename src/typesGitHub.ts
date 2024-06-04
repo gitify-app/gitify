@@ -266,6 +266,7 @@ export interface GitifySubject {
   reviews?: GitifyPullRequestReview[];
   linkedIssues?: string[];
   comments?: number;
+  labels?: string[];
 }
 
 export interface PullRequest {
@@ -287,6 +288,7 @@ export interface PullRequest {
   closed_at: string | null;
   merged_at: string | null;
   merge_commit_sha: string | null;
+  labels: Labels[];
   draft: boolean;
   commits_url: string;
   review_comments_url: string;
@@ -309,6 +311,16 @@ export interface PullRequest {
 export interface GitifyPullRequestReview {
   state: PullRequestReviewState;
   users: string[];
+}
+
+export interface Labels {
+  id: number;
+  node_id: string;
+  url: string;
+  name: string;
+  color: string;
+  default: boolean;
+  description: string;
 }
 
 export interface PullRequestReview {
@@ -416,6 +428,7 @@ export interface Issue {
   author_association: string;
   body: string;
   state_reason: IssueStateReasonType | null;
+  labels: Labels[];
 }
 
 export interface IssueOrPullRequestComment {
@@ -463,6 +476,15 @@ export interface Discussion {
   url: string;
   author: DiscussionAuthor;
   comments: DiscussionComments;
+  labels: DiscussionLabels | null;
+}
+
+export interface DiscussionLabels {
+  nodes: DiscussionLabel[];
+}
+
+export interface DiscussionLabel {
+  name: string;
 }
 
 export interface DiscussionComments {
