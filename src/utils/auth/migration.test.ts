@@ -9,6 +9,8 @@ import {
   migrateAuthenticatedAccounts,
 } from './migration';
 
+jest.spyOn(console, 'log').mockImplementation(() => null);
+
 describe('utils/auth/migration.ts', () => {
   beforeEach(() => {
     // axios will default to using the XHR adapter which can't be intercepted
@@ -34,6 +36,7 @@ describe('utils/auth/migration.ts', () => {
       await migrateAuthenticatedAccounts();
 
       expect(localStorage.setItem).toHaveBeenCalledTimes(1);
+      expect(console.log).toHaveBeenCalledTimes(2);
     });
   });
 
