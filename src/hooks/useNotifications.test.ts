@@ -225,6 +225,7 @@ describe('hooks/useNotifications.ts', () => {
                         },
                       ],
                     },
+                    labels: null,
                   },
                 ],
               },
@@ -237,6 +238,7 @@ describe('hooks/useNotifications.ts', () => {
             state: 'closed',
             merged: true,
             user: mockNotificationUser,
+            labels: [],
           });
         nock('https://api.github.com')
           .get('/repos/gitify-app/notifications-test/issues/3/comments')
@@ -249,6 +251,7 @@ describe('hooks/useNotifications.ts', () => {
             state: 'closed',
             merged: false,
             user: mockNotificationUser,
+            labels: [],
           });
         nock('https://api.github.com')
           .get('/repos/gitify-app/notifications-test/pulls/4/reviews')

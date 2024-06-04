@@ -476,7 +476,7 @@ export interface Discussion {
   url: string;
   author: DiscussionAuthor;
   comments: DiscussionComments;
-  labels: DiscussionLabels;
+  labels: DiscussionLabels | null;
 }
 
 export interface DiscussionLabels {
