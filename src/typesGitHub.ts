@@ -267,6 +267,7 @@ export interface GitifySubject {
   linkedIssues?: string[];
   comments?: number;
   labels?: string[];
+  milestone?: Milestone;
 }
 
 export interface PullRequest {
@@ -289,6 +290,7 @@ export interface PullRequest {
   merged_at: string | null;
   merge_commit_sha: string | null;
   labels: Labels[];
+  milestone: Milestone | null;
   draft: boolean;
   commits_url: string;
   review_comments_url: string;
@@ -421,6 +423,8 @@ export interface Issue {
   user: User;
   state: IssueStateType;
   locked: boolean;
+  labels: Labels[];
+  milestone: Milestone | null;
   comments: number;
   created_at: string;
   updated_at: string;
@@ -428,7 +432,6 @@ export interface Issue {
   author_association: string;
   body: string;
   state_reason: IssueStateReasonType | null;
-  labels: Labels[];
 }
 
 export interface IssueOrPullRequestComment {
@@ -442,6 +445,27 @@ export interface IssueOrPullRequestComment {
   updated_at: string;
   body: string;
 }
+
+export interface Milestone {
+  url: string;
+  html_url: string;
+  labels_url: string;
+  id: number;
+  node_id: string;
+  number: number;
+  title: string;
+  description: string;
+  creator: User;
+  open_issues: number;
+  closed_issues: number;
+  state: MilestoneStateType;
+  created_at: string;
+  updated_at: string;
+  due_on: string | null;
+  closed_at: string | null;
+}
+
+type MilestoneStateType = 'open' | 'closed';
 
 export interface Release {
   url: string;

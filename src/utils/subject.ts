@@ -233,6 +233,7 @@ async function getGitifySubjectForIssue(
     },
     comments: issue.comments,
     labels: issue.labels?.map((label) => label.name) ?? [],
+    milestone: issue.milestone,
   };
 }
 
@@ -280,6 +281,7 @@ async function getGitifySubjectForPullRequest(
     comments: pr.comments,
     labels: pr.labels?.map((label) => label.name) ?? [],
     linkedIssues: linkedIssues,
+    milestone: pr.milestone,
   };
 }
 
