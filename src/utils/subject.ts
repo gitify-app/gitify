@@ -184,6 +184,7 @@ async function getGitifySubjectForDiscussion(
     state: discussionState,
     user: discussionUser,
     comments: discussion.comments.totalCount,
+    labels: discussion.labels?.nodes.map((label) => label.name) ?? [],
   };
 }
 
@@ -231,6 +232,8 @@ async function getGitifySubjectForIssue(
       type: issueCommentUser?.type ?? issue.user.type,
     },
     comments: issue.comments,
+    labels: issue.labels?.map((label) => label.name) ?? [],
+    milestone: issue.milestone,
   };
 }
 
@@ -264,6 +267,7 @@ async function getGitifySubjectForPullRequest(
   }
 
   const reviews = await getLatestReviewForReviewers(notification);
+  const linkedIssues = parseLinkedIssuesFromPrBody(pr.body);
 
   return {
     state: prState,
@@ -275,6 +279,9 @@ async function getGitifySubjectForPullRequest(
     },
     reviews: reviews,
     comments: pr.comments,
+    labels: pr.labels?.map((label) => label.name) ?? [],
+    linkedIssues: linkedIssues,
+    milestone: pr.milestone,
   };
 }
 
@@ -327,6 +334,26 @@ export async function getLatestReviewForReviewers(
   return reviewers.sort((a, b) => {
     return a.state.localeCompare(b.state);
   });
+}
+
+export function parseLinkedIssuesFromPrBody(body: string): string[] {
+  const linkedIssues: string[] = [];
+
+  if (!body) {
+    return linkedIssues;
+  }
+
+  const regexPattern = /\s*#(\d+)\s*/gi;
+
+  const matches = body.matchAll(regexPattern);
+
+  for (const match of matches) {
+    if (match[0]) {
+      linkedIssues.push(match[0].trim());
+    }
+  }
+
+  return linkedIssues;
 }
 
 async function getGitifySubjectForRelease(

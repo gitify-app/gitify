@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { shell } from 'electron';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
-import type { UserType } from '../typesGitHub';
+import type { Milestone, UserType } from '../typesGitHub';
 import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as helpers from '../utils/helpers';
 import { NotificationRow } from './NotificationRow';
@@ -64,56 +64,155 @@ describe('components/NotificationRow.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  describe('rendering for notification comments count', () => {
-    it('should render when no comments', async () => {
-      jest
-        .spyOn(global.Date, 'now')
-        .mockImplementation(() => new Date('2024').valueOf());
+  describe('notification pills / metrics', () => {
+    describe('linked issue pills', () => {
+      it('should render issues pill when linked to one issue/pr', async () => {
+        jest
+          .spyOn(global.Date, 'now')
+          .mockImplementation(() => new Date('2024').valueOf());
 
-      const mockNotification = mockSingleNotification;
-      mockNotification.subject.comments = null;
+        const mockNotification = mockSingleNotification;
+        mockNotification.subject.linkedIssues = ['#1'];
 
-      const props = {
-        notification: mockNotification,
-        hostname: 'github.com',
-      };
+        const props = {
+          notification: mockNotification,
+          hostname: 'github.com',
+        };
 
-      const tree = render(<NotificationRow {...props} />);
-      expect(tree).toMatchSnapshot();
+        const tree = render(<NotificationRow {...props} />);
+        expect(tree).toMatchSnapshot();
+      });
+
+      it('should render issues pill when linked to multiple issues/prs', async () => {
+        jest
+          .spyOn(global.Date, 'now')
+          .mockImplementation(() => new Date('2024').valueOf());
+
+        const mockNotification = mockSingleNotification;
+        mockNotification.subject.linkedIssues = ['#1', '#2'];
+
+        const props = {
+          notification: mockNotification,
+          hostname: 'github.com',
+        };
+
+        const tree = render(<NotificationRow {...props} />);
+        expect(tree).toMatchSnapshot();
+      });
     });
 
-    it('should render when 1 comment', async () => {
-      jest
-        .spyOn(global.Date, 'now')
-        .mockImplementation(() => new Date('2024').valueOf());
+    describe('comment pills', () => {
+      it('should render when no comments', async () => {
+        jest
+          .spyOn(global.Date, 'now')
+          .mockImplementation(() => new Date('2024').valueOf());
 
-      const mockNotification = mockSingleNotification;
-      mockNotification.subject.comments = 1;
+        const mockNotification = mockSingleNotification;
+        mockNotification.subject.comments = null;
 
-      const props = {
-        notification: mockNotification,
-        hostname: 'github.com',
-      };
+        const props = {
+          notification: mockNotification,
+          hostname: 'github.com',
+        };
 
-      const tree = render(<NotificationRow {...props} />);
-      expect(tree).toMatchSnapshot();
+        const tree = render(<NotificationRow {...props} />);
+        expect(tree).toMatchSnapshot();
+      });
+
+      it('should render when 1 comment', async () => {
+        jest
+          .spyOn(global.Date, 'now')
+          .mockImplementation(() => new Date('2024').valueOf());
+
+        const mockNotification = mockSingleNotification;
+        mockNotification.subject.comments = 1;
+
+        const props = {
+          notification: mockNotification,
+          hostname: 'github.com',
+        };
+
+        const tree = render(<NotificationRow {...props} />);
+        expect(tree).toMatchSnapshot();
+      });
+
+      it('should render when more than 1 comments', async () => {
+        jest
+          .spyOn(global.Date, 'now')
+          .mockImplementation(() => new Date('2024').valueOf());
+
+        const mockNotification = mockSingleNotification;
+        mockNotification.subject.comments = 2;
+
+        const props = {
+          notification: mockNotification,
+          hostname: 'github.com',
+        };
+
+        const tree = render(<NotificationRow {...props} />);
+        expect(tree).toMatchSnapshot();
+      });
     });
 
-    it('should render when more than 1 comments', async () => {
-      jest
-        .spyOn(global.Date, 'now')
-        .mockImplementation(() => new Date('2024').valueOf());
+    describe('label pills', () => {
+      it('should render labels pill', async () => {
+        jest
+          .spyOn(global.Date, 'now')
+          .mockImplementation(() => new Date('2024').valueOf());
 
-      const mockNotification = mockSingleNotification;
-      mockNotification.subject.comments = 2;
+        const mockNotification = mockSingleNotification;
+        mockNotification.subject.labels = ['enhancement', 'good-first-issue'];
 
-      const props = {
-        notification: mockNotification,
-        hostname: 'github.com',
-      };
+        const props = {
+          notification: mockNotification,
+          hostname: 'github.com',
+        };
 
-      const tree = render(<NotificationRow {...props} />);
-      expect(tree).toMatchSnapshot();
+        const tree = render(<NotificationRow {...props} />);
+        expect(tree).toMatchSnapshot();
+      });
+    });
+
+    describe('milestone pills', () => {
+      it('should render open milestone pill', async () => {
+        jest
+          .spyOn(global.Date, 'now')
+          .mockImplementation(() => new Date('2024').valueOf());
+
+        const mockNotification = mockSingleNotification;
+        mockNotification.subject.milestone = {
+          title: 'Milestone 1',
+          state: 'open',
+        } as Milestone;
+
+        const props = {
+          notification: mockNotification,
+          hostname: 'github.com',
+        };
+
+        const tree = render(<NotificationRow {...props} />);
+        expect(tree).toMatchSnapshot();
+      });
+
+      it('should render closed milestone pill', async () => {
+        jest
+          .spyOn(global.Date, 'now')
+          .mockImplementation(() => new Date('2024').valueOf());
+
+        const mockNotification = mockSingleNotification;
+        mockNotification.subject.milestone = {
+          title: 'Milestone 1',
+          state: 'closed',
+        } as Milestone;
+
+        const props = {
+          notification: mockNotification,
+          hostname: 'github.com',
+        };
+
+        const tree = render(<NotificationRow {...props} />);
+        expect(tree).toMatchSnapshot();
+      });
     });
   });
 

@@ -80,7 +80,7 @@ export interface AccountNotifications {
 
 export interface GitifyUser {
   login: string;
-  name: string;
+  name: string | null;
   id: number;
 }
 

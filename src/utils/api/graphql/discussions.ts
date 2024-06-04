@@ -49,6 +49,11 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
               }
             }
           }
+          labels {
+            nodes {
+              name
+            }
+          }
         }
       }
     }

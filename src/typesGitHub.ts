@@ -264,7 +264,10 @@ export interface GitifySubject {
   state?: StateType;
   user?: SubjectUser;
   reviews?: GitifyPullRequestReview[];
+  linkedIssues?: string[];
   comments?: number;
+  labels?: string[];
+  milestone?: Milestone;
 }
 
 export interface PullRequest {
@@ -286,6 +289,8 @@ export interface PullRequest {
   closed_at: string | null;
   merged_at: string | null;
   merge_commit_sha: string | null;
+  labels: Labels[];
+  milestone: Milestone | null;
   draft: boolean;
   commits_url: string;
   review_comments_url: string;
@@ -308,6 +313,16 @@ export interface PullRequest {
 export interface GitifyPullRequestReview {
   state: PullRequestReviewState;
   users: string[];
+}
+
+export interface Labels {
+  id: number;
+  node_id: string;
+  url: string;
+  name: string;
+  color: string;
+  default: boolean;
+  description: string;
 }
 
 export interface PullRequestReview {
@@ -408,6 +423,8 @@ export interface Issue {
   user: User;
   state: IssueStateType;
   locked: boolean;
+  labels: Labels[];
+  milestone: Milestone | null;
   comments: number;
   created_at: string;
   updated_at: string;
@@ -428,6 +445,27 @@ export interface IssueOrPullRequestComment {
   updated_at: string;
   body: string;
 }
+
+export interface Milestone {
+  url: string;
+  html_url: string;
+  labels_url: string;
+  id: number;
+  node_id: string;
+  number: number;
+  title: string;
+  description: string;
+  creator: User;
+  open_issues: number;
+  closed_issues: number;
+  state: MilestoneStateType;
+  created_at: string;
+  updated_at: string;
+  due_on: string | null;
+  closed_at: string | null;
+}
+
+type MilestoneStateType = 'open' | 'closed';
 
 export interface Release {
   url: string;
@@ -462,6 +500,15 @@ export interface Discussion {
   url: string;
   author: DiscussionAuthor;
   comments: DiscussionComments;
+  labels: DiscussionLabels | null;
+}
+
+export interface DiscussionLabels {
+  nodes: DiscussionLabel[];
+}
+
+export interface DiscussionLabel {
+  name: string;
 }
 
 export interface DiscussionComments {

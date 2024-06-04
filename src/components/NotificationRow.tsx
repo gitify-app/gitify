@@ -3,7 +3,10 @@ import {
   CheckIcon,
   CommentIcon,
   FeedPersonIcon,
+  IssueClosedIcon,
+  MilestoneIcon,
   ReadIcon,
+  TagIcon,
 } from '@primer/octicons-react';
 import {
   type FC,
@@ -91,6 +94,14 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     notification.subject.comments > 1 ? 'comments' : 'comment'
   }`;
 
+  const labelsPillDescription = notification.subject.labels
+    ?.map((label) => `🏷️ ${label}`)
+    .join('\n');
+
+  const linkedIssuesPillDescription = `Linked to ${
+    notification.subject.linkedIssues?.length > 1 ? 'issues' : 'issue'
+  } ${notification.subject?.linkedIssues?.join(', ')}`;
+
   return (
     <div
       id={notification.id}
@@ -144,6 +155,18 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 {reason.title}
               </span>
               <span className="ml-1">{updatedAt}</span>
+              {notification.subject?.linkedIssues?.length > 0 && (
+                <span className="ml-1" title={linkedIssuesPillDescription}>
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <IssueClosedIcon
+                      size={12}
+                      className={`mr-1 ${IconColor.GREEN}`}
+                      aria-label={linkedIssuesPillDescription}
+                    />
+                    {notification.subject.linkedIssues.length}
+                  </button>
+                </span>
+              )}
               {notification.subject.reviews
                 ? notification.subject.reviews.map((review) => {
                     const icon = getPullRequestReviewIcon(review);
@@ -181,6 +204,36 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                       aria-label={commentsPillDescription}
                     />
                     {notification.subject.comments}
+                  </button>
+                </span>
+              )}
+              {notification.subject?.labels?.length > 0 && (
+                <span className="ml-1" title={labelsPillDescription}>
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <TagIcon
+                      size={12}
+                      className={`mr-1 ${IconColor.GRAY}`}
+                      aria-label={labelsPillDescription}
+                    />
+                    {notification.subject.labels.length}
+                  </button>
+                </span>
+              )}
+              {notification.subject.milestone && (
+                <span
+                  className="ml-1"
+                  title={notification.subject.milestone.title}
+                >
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <MilestoneIcon
+                      size={12}
+                      className={
+                        notification.subject.milestone.state === 'open'
+                          ? IconColor.GREEN
+                          : IconColor.RED
+                      }
+                      aria-label={notification.subject.milestone.title}
+                    />
                   </button>
                 </span>
               )}
