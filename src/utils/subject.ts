@@ -184,9 +184,7 @@ async function getGitifySubjectForDiscussion(
     state: discussionState,
     user: discussionUser,
     comments: discussion.comments.totalCount,
-    labels: discussion.labels
-      ? discussion.labels.nodes.map((label) => label.name)
-      : [],
+    labels: discussion.labels?.nodes.map((label) => label.name) ?? [],
   };
 }
 
@@ -234,7 +232,7 @@ async function getGitifySubjectForIssue(
       type: issueCommentUser?.type ?? issue.user.type,
     },
     comments: issue.comments,
-    labels: issue.labels.map((label) => label.name),
+    labels: issue.labels?.map((label) => label.name) ?? [],
   };
 }
 
@@ -280,7 +278,7 @@ async function getGitifySubjectForPullRequest(
     },
     reviews: reviews,
     comments: pr.comments,
-    labels: pr.labels.map((label) => label.name),
+    labels: pr.labels?.map((label) => label.name) ?? [],
     linkedIssues: linkedIssues,
   };
 }
