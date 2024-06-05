@@ -33,58 +33,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </div>
         <div
-          class="flex-1 overflow-hidden"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+            class="text-xs text-capitalize"
           >
             <span
-              class="flex items-center"
+              class="flex items-center gap-1"
+              title="Updated over 6 years ago"
             >
+              <span>
+                <svg
+                  aria-hidden="true"
+                  class="text-gray-500 dark:text-gray-300"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                  />
+                </svg>
+              </span>
               <span
-                class="flex"
-                title="Updated over 6 years ago"
+                title="You're watching the repository."
               >
-                <span>
-                  <svg
-                    aria-hidden="true"
-                    class="text-gray-500 dark:text-gray-300"
-                    fill="currentColor"
-                    focusable="false"
-                    height="16"
-                    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                    viewBox="0 0 16 16"
-                    width="16"
-                  >
-                    <path
-                      d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                    />
-                  </svg>
-                </span>
+                Updated
+              </span>
+              <span>
+                over 6 years ago
+              </span>
+              <span
+                class="hover:overflow-auto"
+              >
                 <span
-                  class="ml-1"
-                  title="You're watching the repository."
-                >
-                  Updated
-                </span>
-                <span
-                  class="ml-1"
-                >
-                  over 6 years ago
-                </span>
-                <span
-                  class="ml-1"
                   title="Linked to issues #1, #2"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -109,11 +105,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="octocat approved these changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -135,11 +130,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="gitify-app requested changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -161,11 +155,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="1 comment"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -289,58 +282,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         </svg>
       </div>
       <div
-        class="flex-1 overflow-hidden"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+          class="text-xs text-capitalize"
         >
           <span
-            class="flex items-center"
+            class="flex items-center gap-1"
+            title="Updated over 6 years ago"
           >
+            <span>
+              <svg
+                aria-hidden="true"
+                class="text-gray-500 dark:text-gray-300"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                />
+              </svg>
+            </span>
             <span
-              class="flex"
-              title="Updated over 6 years ago"
+              title="You're watching the repository."
             >
-              <span>
-                <svg
-                  aria-hidden="true"
-                  class="text-gray-500 dark:text-gray-300"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                  />
-                </svg>
-              </span>
+              Updated
+            </span>
+            <span>
+              over 6 years ago
+            </span>
+            <span
+              class="hover:overflow-auto"
+            >
               <span
-                class="ml-1"
-                title="You're watching the repository."
-              >
-                Updated
-              </span>
-              <span
-                class="ml-1"
-              >
-                over 6 years ago
-              </span>
-              <span
-                class="ml-1"
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -365,11 +354,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -391,11 +379,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -417,11 +404,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="1 comment"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -602,58 +588,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </div>
         <div
-          class="flex-1 overflow-hidden"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+            class="text-xs text-capitalize"
           >
             <span
-              class="flex items-center"
+              class="flex items-center gap-1"
+              title="Updated over 6 years ago"
             >
+              <span>
+                <svg
+                  aria-hidden="true"
+                  class="text-gray-500 dark:text-gray-300"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                  />
+                </svg>
+              </span>
               <span
-                class="flex"
-                title="Updated over 6 years ago"
+                title="You're watching the repository."
               >
-                <span>
-                  <svg
-                    aria-hidden="true"
-                    class="text-gray-500 dark:text-gray-300"
-                    fill="currentColor"
-                    focusable="false"
-                    height="16"
-                    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                    viewBox="0 0 16 16"
-                    width="16"
-                  >
-                    <path
-                      d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                    />
-                  </svg>
-                </span>
+                Updated
+              </span>
+              <span>
+                over 6 years ago
+              </span>
+              <span
+                class="hover:overflow-auto"
+              >
                 <span
-                  class="ml-1"
-                  title="You're watching the repository."
-                >
-                  Updated
-                </span>
-                <span
-                  class="ml-1"
-                >
-                  over 6 years ago
-                </span>
-                <span
-                  class="ml-1"
                   title="Linked to issues #1, #2"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -678,11 +660,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="octocat approved these changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -704,11 +685,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="gitify-app requested changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -730,11 +710,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="2 comments"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -858,58 +837,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         </svg>
       </div>
       <div
-        class="flex-1 overflow-hidden"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+          class="text-xs text-capitalize"
         >
           <span
-            class="flex items-center"
+            class="flex items-center gap-1"
+            title="Updated over 6 years ago"
           >
+            <span>
+              <svg
+                aria-hidden="true"
+                class="text-gray-500 dark:text-gray-300"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                />
+              </svg>
+            </span>
             <span
-              class="flex"
-              title="Updated over 6 years ago"
+              title="You're watching the repository."
             >
-              <span>
-                <svg
-                  aria-hidden="true"
-                  class="text-gray-500 dark:text-gray-300"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                  />
-                </svg>
-              </span>
+              Updated
+            </span>
+            <span>
+              over 6 years ago
+            </span>
+            <span
+              class="hover:overflow-auto"
+            >
               <span
-                class="ml-1"
-                title="You're watching the repository."
-              >
-                Updated
-              </span>
-              <span
-                class="ml-1"
-              >
-                over 6 years ago
-              </span>
-              <span
-                class="ml-1"
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -934,11 +909,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -960,11 +934,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -986,11 +959,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="2 comments"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1171,58 +1143,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </div>
         <div
-          class="flex-1 overflow-hidden"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+            class="text-xs text-capitalize"
           >
             <span
-              class="flex items-center"
+              class="flex items-center gap-1"
+              title="Updated over 6 years ago"
             >
+              <span>
+                <svg
+                  aria-hidden="true"
+                  class="text-gray-500 dark:text-gray-300"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                  />
+                </svg>
+              </span>
               <span
-                class="flex"
-                title="Updated over 6 years ago"
+                title="You're watching the repository."
               >
-                <span>
-                  <svg
-                    aria-hidden="true"
-                    class="text-gray-500 dark:text-gray-300"
-                    fill="currentColor"
-                    focusable="false"
-                    height="16"
-                    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                    viewBox="0 0 16 16"
-                    width="16"
-                  >
-                    <path
-                      d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                    />
-                  </svg>
-                </span>
+                Updated
+              </span>
+              <span>
+                over 6 years ago
+              </span>
+              <span
+                class="hover:overflow-auto"
+              >
                 <span
-                  class="ml-1"
-                  title="You're watching the repository."
-                >
-                  Updated
-                </span>
-                <span
-                  class="ml-1"
-                >
-                  over 6 years ago
-                </span>
-                <span
-                  class="ml-1"
                   title="Linked to issues #1, #2"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -1247,11 +1215,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="octocat approved these changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -1273,11 +1240,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="gitify-app requested changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -1401,58 +1367,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         </svg>
       </div>
       <div
-        class="flex-1 overflow-hidden"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+          class="text-xs text-capitalize"
         >
           <span
-            class="flex items-center"
+            class="flex items-center gap-1"
+            title="Updated over 6 years ago"
           >
+            <span>
+              <svg
+                aria-hidden="true"
+                class="text-gray-500 dark:text-gray-300"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                />
+              </svg>
+            </span>
             <span
-              class="flex"
-              title="Updated over 6 years ago"
+              title="You're watching the repository."
             >
-              <span>
-                <svg
-                  aria-hidden="true"
-                  class="text-gray-500 dark:text-gray-300"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                  />
-                </svg>
-              </span>
+              Updated
+            </span>
+            <span>
+              over 6 years ago
+            </span>
+            <span
+              class="hover:overflow-auto"
+            >
               <span
-                class="ml-1"
-                title="You're watching the repository."
-              >
-                Updated
-              </span>
-              <span
-                class="ml-1"
-              >
-                over 6 years ago
-              </span>
-              <span
-                class="ml-1"
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1477,11 +1439,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1503,11 +1464,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1688,58 +1648,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
           </svg>
         </div>
         <div
-          class="flex-1 overflow-hidden"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+            class="text-xs text-capitalize"
           >
             <span
-              class="flex items-center"
+              class="flex items-center gap-1"
+              title="Updated over 6 years ago"
             >
+              <span>
+                <svg
+                  aria-hidden="true"
+                  class="text-gray-500 dark:text-gray-300"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                  />
+                </svg>
+              </span>
               <span
-                class="flex"
-                title="Updated over 6 years ago"
+                title="You're watching the repository."
               >
-                <span>
-                  <svg
-                    aria-hidden="true"
-                    class="text-gray-500 dark:text-gray-300"
-                    fill="currentColor"
-                    focusable="false"
-                    height="16"
-                    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                    viewBox="0 0 16 16"
-                    width="16"
-                  >
-                    <path
-                      d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                    />
-                  </svg>
-                </span>
+                Updated
+              </span>
+              <span>
+                over 6 years ago
+              </span>
+              <span
+                class="hover:overflow-auto"
+              >
                 <span
-                  class="ml-1"
-                  title="You're watching the repository."
-                >
-                  Updated
-                </span>
-                <span
-                  class="ml-1"
-                >
-                  over 6 years ago
-                </span>
-                <span
-                  class="ml-1"
                   title="Linked to issues #1, #2"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -1764,11 +1720,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="octocat approved these changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -1790,11 +1745,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="gitify-app requested changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -1816,11 +1770,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="2 comments"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -1842,12 +1795,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="🏷️ enhancement
 🏷️ good-first-issue"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -1972,58 +1924,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
         </svg>
       </div>
       <div
-        class="flex-1 overflow-hidden"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+          class="text-xs text-capitalize"
         >
           <span
-            class="flex items-center"
+            class="flex items-center gap-1"
+            title="Updated over 6 years ago"
           >
+            <span>
+              <svg
+                aria-hidden="true"
+                class="text-gray-500 dark:text-gray-300"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                />
+              </svg>
+            </span>
             <span
-              class="flex"
-              title="Updated over 6 years ago"
+              title="You're watching the repository."
             >
-              <span>
-                <svg
-                  aria-hidden="true"
-                  class="text-gray-500 dark:text-gray-300"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                  />
-                </svg>
-              </span>
+              Updated
+            </span>
+            <span>
+              over 6 years ago
+            </span>
+            <span
+              class="hover:overflow-auto"
+            >
               <span
-                class="ml-1"
-                title="You're watching the repository."
-              >
-                Updated
-              </span>
-              <span
-                class="ml-1"
-              >
-                over 6 years ago
-              </span>
-              <span
-                class="ml-1"
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2048,11 +1996,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2074,11 +2021,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2100,11 +2046,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="2 comments"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2126,12 +2071,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="🏷️ enhancement
 🏷️ good-first-issue"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2313,58 +2257,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           </svg>
         </div>
         <div
-          class="flex-1 overflow-hidden"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+            class="text-xs text-capitalize"
           >
             <span
-              class="flex items-center"
+              class="flex items-center gap-1"
+              title="Updated over 6 years ago"
             >
+              <span>
+                <svg
+                  aria-hidden="true"
+                  class="text-gray-500 dark:text-gray-300"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                  />
+                </svg>
+              </span>
               <span
-                class="flex"
-                title="Updated over 6 years ago"
+                title="You're watching the repository."
               >
-                <span>
-                  <svg
-                    aria-hidden="true"
-                    class="text-gray-500 dark:text-gray-300"
-                    fill="currentColor"
-                    focusable="false"
-                    height="16"
-                    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                    viewBox="0 0 16 16"
-                    width="16"
-                  >
-                    <path
-                      d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                    />
-                  </svg>
-                </span>
+                Updated
+              </span>
+              <span>
+                over 6 years ago
+              </span>
+              <span
+                class="hover:overflow-auto"
+              >
                 <span
-                  class="ml-1"
-                  title="You're watching the repository."
-                >
-                  Updated
-                </span>
-                <span
-                  class="ml-1"
-                >
-                  over 6 years ago
-                </span>
-                <span
-                  class="ml-1"
                   title="Linked to issues #1, #2"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -2389,11 +2329,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="octocat approved these changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -2415,11 +2354,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="gitify-app requested changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -2543,58 +2481,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
         </svg>
       </div>
       <div
-        class="flex-1 overflow-hidden"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+          class="text-xs text-capitalize"
         >
           <span
-            class="flex items-center"
+            class="flex items-center gap-1"
+            title="Updated over 6 years ago"
           >
+            <span>
+              <svg
+                aria-hidden="true"
+                class="text-gray-500 dark:text-gray-300"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                />
+              </svg>
+            </span>
             <span
-              class="flex"
-              title="Updated over 6 years ago"
+              title="You're watching the repository."
             >
-              <span>
-                <svg
-                  aria-hidden="true"
-                  class="text-gray-500 dark:text-gray-300"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                  />
-                </svg>
-              </span>
+              Updated
+            </span>
+            <span>
+              over 6 years ago
+            </span>
+            <span
+              class="hover:overflow-auto"
+            >
               <span
-                class="ml-1"
-                title="You're watching the repository."
-              >
-                Updated
-              </span>
-              <span
-                class="ml-1"
-              >
-                over 6 years ago
-              </span>
-              <span
-                class="ml-1"
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2619,11 +2553,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2645,11 +2578,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2830,58 +2762,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           </svg>
         </div>
         <div
-          class="flex-1 overflow-hidden"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+            class="text-xs text-capitalize"
           >
             <span
-              class="flex items-center"
+              class="flex items-center gap-1"
+              title="Updated over 6 years ago"
             >
+              <span>
+                <svg
+                  aria-hidden="true"
+                  class="text-gray-500 dark:text-gray-300"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                  />
+                </svg>
+              </span>
               <span
-                class="flex"
-                title="Updated over 6 years ago"
+                title="You're watching the repository."
               >
-                <span>
-                  <svg
-                    aria-hidden="true"
-                    class="text-gray-500 dark:text-gray-300"
-                    fill="currentColor"
-                    focusable="false"
-                    height="16"
-                    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                    viewBox="0 0 16 16"
-                    width="16"
-                  >
-                    <path
-                      d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                    />
-                  </svg>
-                </span>
+                Updated
+              </span>
+              <span>
+                over 6 years ago
+              </span>
+              <span
+                class="hover:overflow-auto"
+              >
                 <span
-                  class="ml-1"
-                  title="You're watching the repository."
-                >
-                  Updated
-                </span>
-                <span
-                  class="ml-1"
-                >
-                  over 6 years ago
-                </span>
-                <span
-                  class="ml-1"
                   title="Linked to issue #1"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -2906,11 +2834,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="octocat approved these changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -2932,11 +2859,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="gitify-app requested changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -3060,58 +2986,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
         </svg>
       </div>
       <div
-        class="flex-1 overflow-hidden"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+          class="text-xs text-capitalize"
         >
           <span
-            class="flex items-center"
+            class="flex items-center gap-1"
+            title="Updated over 6 years ago"
           >
+            <span>
+              <svg
+                aria-hidden="true"
+                class="text-gray-500 dark:text-gray-300"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                />
+              </svg>
+            </span>
             <span
-              class="flex"
-              title="Updated over 6 years ago"
+              title="You're watching the repository."
             >
-              <span>
-                <svg
-                  aria-hidden="true"
-                  class="text-gray-500 dark:text-gray-300"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                  />
-                </svg>
-              </span>
+              Updated
+            </span>
+            <span>
+              over 6 years ago
+            </span>
+            <span
+              class="hover:overflow-auto"
+            >
               <span
-                class="ml-1"
-                title="You're watching the repository."
-              >
-                Updated
-              </span>
-              <span
-                class="ml-1"
-              >
-                over 6 years ago
-              </span>
-              <span
-                class="ml-1"
                 title="Linked to issue #1"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3136,11 +3058,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3162,11 +3083,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3347,58 +3267,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           </svg>
         </div>
         <div
-          class="flex-1 overflow-hidden"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+            class="text-xs text-capitalize"
           >
             <span
-              class="flex items-center"
+              class="flex items-center gap-1"
+              title="Updated over 6 years ago"
             >
+              <span>
+                <svg
+                  aria-hidden="true"
+                  class="text-gray-500 dark:text-gray-300"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                  />
+                </svg>
+              </span>
               <span
-                class="flex"
-                title="Updated over 6 years ago"
+                title="You're watching the repository."
               >
-                <span>
-                  <svg
-                    aria-hidden="true"
-                    class="text-gray-500 dark:text-gray-300"
-                    fill="currentColor"
-                    focusable="false"
-                    height="16"
-                    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                    viewBox="0 0 16 16"
-                    width="16"
-                  >
-                    <path
-                      d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                    />
-                  </svg>
-                </span>
+                Updated
+              </span>
+              <span>
+                over 6 years ago
+              </span>
+              <span
+                class="hover:overflow-auto"
+              >
                 <span
-                  class="ml-1"
-                  title="You're watching the repository."
-                >
-                  Updated
-                </span>
-                <span
-                  class="ml-1"
-                >
-                  over 6 years ago
-                </span>
-                <span
-                  class="ml-1"
                   title="Linked to issues #1, #2"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -3423,11 +3339,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="octocat approved these changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -3449,11 +3364,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="gitify-app requested changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -3475,11 +3389,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="2 comments"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -3501,12 +3414,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="🏷️ enhancement
 🏷️ good-first-issue"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -3533,7 +3445,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                   title="Milestone 1"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -3656,58 +3568,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
         </svg>
       </div>
       <div
-        class="flex-1 overflow-hidden"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+          class="text-xs text-capitalize"
         >
           <span
-            class="flex items-center"
+            class="flex items-center gap-1"
+            title="Updated over 6 years ago"
           >
+            <span>
+              <svg
+                aria-hidden="true"
+                class="text-gray-500 dark:text-gray-300"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                />
+              </svg>
+            </span>
             <span
-              class="flex"
-              title="Updated over 6 years ago"
+              title="You're watching the repository."
             >
-              <span>
-                <svg
-                  aria-hidden="true"
-                  class="text-gray-500 dark:text-gray-300"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                  />
-                </svg>
-              </span>
+              Updated
+            </span>
+            <span>
+              over 6 years ago
+            </span>
+            <span
+              class="hover:overflow-auto"
+            >
               <span
-                class="ml-1"
-                title="You're watching the repository."
-              >
-                Updated
-              </span>
-              <span
-                class="ml-1"
-              >
-                over 6 years ago
-              </span>
-              <span
-                class="ml-1"
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3732,11 +3640,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3758,11 +3665,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3784,11 +3690,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="2 comments"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3810,12 +3715,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="🏷️ enhancement
 🏷️ good-first-issue"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3842,7 +3746,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="Milestone 1"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4022,58 +3926,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           </svg>
         </div>
         <div
-          class="flex-1 overflow-hidden"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+            class="text-xs text-capitalize"
           >
             <span
-              class="flex items-center"
+              class="flex items-center gap-1"
+              title="Updated over 6 years ago"
             >
+              <span>
+                <svg
+                  aria-hidden="true"
+                  class="text-gray-500 dark:text-gray-300"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                  />
+                </svg>
+              </span>
               <span
-                class="flex"
-                title="Updated over 6 years ago"
+                title="You're watching the repository."
               >
-                <span>
-                  <svg
-                    aria-hidden="true"
-                    class="text-gray-500 dark:text-gray-300"
-                    fill="currentColor"
-                    focusable="false"
-                    height="16"
-                    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                    viewBox="0 0 16 16"
-                    width="16"
-                  >
-                    <path
-                      d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                    />
-                  </svg>
-                </span>
+                Updated
+              </span>
+              <span>
+                over 6 years ago
+              </span>
+              <span
+                class="hover:overflow-auto"
+              >
                 <span
-                  class="ml-1"
-                  title="You're watching the repository."
-                >
-                  Updated
-                </span>
-                <span
-                  class="ml-1"
-                >
-                  over 6 years ago
-                </span>
-                <span
-                  class="ml-1"
                   title="Linked to issues #1, #2"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -4098,11 +3998,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="octocat approved these changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -4124,11 +4023,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="gitify-app requested changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -4150,11 +4048,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="2 comments"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -4176,12 +4073,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="🏷️ enhancement
 🏷️ good-first-issue"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -4208,7 +4104,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                   title="Milestone 1"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -4331,58 +4227,54 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
         </svg>
       </div>
       <div
-        class="flex-1 overflow-hidden"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+          class="text-xs text-capitalize"
         >
           <span
-            class="flex items-center"
+            class="flex items-center gap-1"
+            title="Updated over 6 years ago"
           >
+            <span>
+              <svg
+                aria-hidden="true"
+                class="text-gray-500 dark:text-gray-300"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                />
+              </svg>
+            </span>
             <span
-              class="flex"
-              title="Updated over 6 years ago"
+              title="You're watching the repository."
             >
-              <span>
-                <svg
-                  aria-hidden="true"
-                  class="text-gray-500 dark:text-gray-300"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                  />
-                </svg>
-              </span>
+              Updated
+            </span>
+            <span>
+              over 6 years ago
+            </span>
+            <span
+              class="hover:overflow-auto"
+            >
               <span
-                class="ml-1"
-                title="You're watching the repository."
-              >
-                Updated
-              </span>
-              <span
-                class="ml-1"
-              >
-                over 6 years ago
-              </span>
-              <span
-                class="ml-1"
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4407,11 +4299,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4433,11 +4324,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4459,11 +4349,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="2 comments"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4485,12 +4374,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="🏷️ enhancement
 🏷️ good-first-issue"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4517,7 +4405,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="Milestone 1"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4697,52 +4585,49 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
           </svg>
         </div>
         <div
-          class="flex-1 overflow-hidden"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+            class="text-xs text-capitalize"
           >
             <span
-              class="flex items-center"
+              class="flex items-center gap-1"
+              title="gitify-app updated over 6 years ago"
             >
               <span
-                class="flex"
-                title="gitify-app updated over 6 years ago"
+                class="flex-shrink-0"
+                title="View User Profile"
+              >
+                <img
+                  alt="gitify-app's avatar"
+                  class="rounded-full w-4 h-4 object-cover cursor-pointer"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  title="gitify-app"
+                />
+              </span>
+              <span
+                title="You're watching the repository."
+              >
+                Updated
+              </span>
+              <span>
+                over 6 years ago
+              </span>
+              <span
+                class="hover:overflow-auto"
               >
                 <span
-                  title="View User Profile"
-                >
-                  <img
-                    alt="gitify-app's avatar"
-                    class="rounded-full w-4 h-4 cursor-pointer"
-                    src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                    title="gitify-app"
-                  />
-                </span>
-                <span
-                  class="ml-1"
-                  title="You're watching the repository."
-                >
-                  Updated
-                </span>
-                <span
-                  class="ml-1"
-                >
-                  over 6 years ago
-                </span>
-                <span
-                  class="ml-1"
                   title="octocat approved these changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -4764,11 +4649,10 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="gitify-app requested changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -4892,52 +4776,49 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
         </svg>
       </div>
       <div
-        class="flex-1 overflow-hidden"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+          class="text-xs text-capitalize"
         >
           <span
-            class="flex items-center"
+            class="flex items-center gap-1"
+            title="gitify-app updated over 6 years ago"
           >
             <span
-              class="flex"
-              title="gitify-app updated over 6 years ago"
+              class="flex-shrink-0"
+              title="View User Profile"
+            >
+              <img
+                alt="gitify-app's avatar"
+                class="rounded-full w-4 h-4 object-cover cursor-pointer"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                title="gitify-app"
+              />
+            </span>
+            <span
+              title="You're watching the repository."
+            >
+              Updated
+            </span>
+            <span>
+              over 6 years ago
+            </span>
+            <span
+              class="hover:overflow-auto"
             >
               <span
-                title="View User Profile"
-              >
-                <img
-                  alt="gitify-app's avatar"
-                  class="rounded-full w-4 h-4 cursor-pointer"
-                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                  title="gitify-app"
-                />
-              </span>
-              <span
-                class="ml-1"
-                title="You're watching the repository."
-              >
-                Updated
-              </span>
-              <span
-                class="ml-1"
-              >
-                over 6 years ago
-              </span>
-              <span
-                class="ml-1"
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4959,11 +4840,10 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -5144,52 +5024,49 @@ exports[`components/NotificationRow.tsx should render itself & its children when
           </svg>
         </div>
         <div
-          class="flex-1 overflow-hidden"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+            class="text-xs text-capitalize"
           >
             <span
-              class="flex items-center"
+              class="flex items-center gap-1"
+              title="gitify-app updated over 6 years ago"
             >
               <span
-                class="flex"
-                title="gitify-app updated over 6 years ago"
+                class="flex-shrink-0"
+                title="View User Profile"
+              >
+                <img
+                  alt="gitify-app's avatar"
+                  class="rounded-full w-4 h-4 object-cover cursor-pointer"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  title="gitify-app"
+                />
+              </span>
+              <span
+                title="You're watching the repository."
+              >
+                Updated
+              </span>
+              <span>
+                over 6 years ago
+              </span>
+              <span
+                class="hover:overflow-auto"
               >
                 <span
-                  title="View User Profile"
-                >
-                  <img
-                    alt="gitify-app's avatar"
-                    class="rounded-full w-4 h-4 cursor-pointer"
-                    src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                    title="gitify-app"
-                  />
-                </span>
-                <span
-                  class="ml-1"
-                  title="You're watching the repository."
-                >
-                  Updated
-                </span>
-                <span
-                  class="ml-1"
-                >
-                  over 6 years ago
-                </span>
-                <span
-                  class="ml-1"
                   title="octocat approved these changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -5211,11 +5088,10 @@ exports[`components/NotificationRow.tsx should render itself & its children when
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="gitify-app requested changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -5339,52 +5215,49 @@ exports[`components/NotificationRow.tsx should render itself & its children when
         </svg>
       </div>
       <div
-        class="flex-1 overflow-hidden"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+          class="text-xs text-capitalize"
         >
           <span
-            class="flex items-center"
+            class="flex items-center gap-1"
+            title="gitify-app updated over 6 years ago"
           >
             <span
-              class="flex"
-              title="gitify-app updated over 6 years ago"
+              class="flex-shrink-0"
+              title="View User Profile"
+            >
+              <img
+                alt="gitify-app's avatar"
+                class="rounded-full w-4 h-4 object-cover cursor-pointer"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                title="gitify-app"
+              />
+            </span>
+            <span
+              title="You're watching the repository."
+            >
+              Updated
+            </span>
+            <span>
+              over 6 years ago
+            </span>
+            <span
+              class="hover:overflow-auto"
             >
               <span
-                title="View User Profile"
-              >
-                <img
-                  alt="gitify-app's avatar"
-                  class="rounded-full w-4 h-4 cursor-pointer"
-                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                  title="gitify-app"
-                />
-              </span>
-              <span
-                class="ml-1"
-                title="You're watching the repository."
-              >
-                Updated
-              </span>
-              <span
-                class="ml-1"
-              >
-                over 6 years ago
-              </span>
-              <span
-                class="ml-1"
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -5406,11 +5279,10 @@ exports[`components/NotificationRow.tsx should render itself & its children when
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -5591,58 +5463,54 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           </svg>
         </div>
         <div
-          class="flex-1 overflow-hidden"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+            class="text-xs text-capitalize"
           >
             <span
-              class="flex items-center"
+              class="flex items-center gap-1"
+              title="Updated over 6 years ago"
             >
+              <span>
+                <svg
+                  aria-hidden="true"
+                  class="text-gray-500 dark:text-gray-300"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                  />
+                </svg>
+              </span>
               <span
-                class="flex"
-                title="Updated over 6 years ago"
+                title="You're watching the repository."
               >
-                <span>
-                  <svg
-                    aria-hidden="true"
-                    class="text-gray-500 dark:text-gray-300"
-                    fill="currentColor"
-                    focusable="false"
-                    height="16"
-                    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                    viewBox="0 0 16 16"
-                    width="16"
-                  >
-                    <path
-                      d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                    />
-                  </svg>
-                </span>
+                Updated
+              </span>
+              <span>
+                over 6 years ago
+              </span>
+              <span
+                class="hover:overflow-auto"
+              >
                 <span
-                  class="ml-1"
-                  title="You're watching the repository."
-                >
-                  Updated
-                </span>
-                <span
-                  class="ml-1"
-                >
-                  over 6 years ago
-                </span>
-                <span
-                  class="ml-1"
                   title="octocat approved these changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -5664,11 +5532,10 @@ exports[`components/NotificationRow.tsx should render itself & its children with
                   </button>
                 </span>
                 <span
-                  class="ml-1"
                   title="gitify-app requested changes"
                 >
                   <button
-                    class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                    class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                     type="button"
                   >
                     <svg
@@ -5792,58 +5659,54 @@ exports[`components/NotificationRow.tsx should render itself & its children with
         </svg>
       </div>
       <div
-        class="flex-1 overflow-hidden"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden"
+          class="text-xs text-capitalize"
         >
           <span
-            class="flex items-center"
+            class="flex items-center gap-1"
+            title="Updated over 6 years ago"
           >
+            <span>
+              <svg
+                aria-hidden="true"
+                class="text-gray-500 dark:text-gray-300"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                />
+              </svg>
+            </span>
             <span
-              class="flex"
-              title="Updated over 6 years ago"
+              title="You're watching the repository."
             >
-              <span>
-                <svg
-                  aria-hidden="true"
-                  class="text-gray-500 dark:text-gray-300"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                  />
-                </svg>
-              </span>
+              Updated
+            </span>
+            <span>
+              over 6 years ago
+            </span>
+            <span
+              class="hover:overflow-auto"
+            >
               <span
-                class="ml-1"
-                title="You're watching the repository."
-              >
-                Updated
-              </span>
-              <span
-                class="ml-1"
-              >
-                over 6 years ago
-              </span>
-              <span
-                class="ml-1"
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -5865,11 +5728,10 @@ exports[`components/NotificationRow.tsx should render itself & its children with
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
