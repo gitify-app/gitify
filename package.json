@@ -10,8 +10,8 @@
     "make:linux": "electron-builder --linux",
     "make:macos": "electron-builder --mac --universal",
     "make:win": "electron-builder --win",
-    "lint:check": "biome check *",
-    "lint": "biome check --apply *",
+    "lint:check": "biome check",
+    "lint": "biome check --fix",
     "test": "jest",
     "start": "electron . --enable-logging",
     "prepare": "husky"
