@@ -76,7 +76,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -104,7 +104,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -129,7 +129,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -154,7 +154,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="1 comment"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -320,7 +320,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="Linked to issues #1, #2"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -348,7 +348,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -373,7 +373,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -398,7 +398,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="1 comment"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -621,7 +621,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -649,7 +649,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -674,7 +674,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -699,7 +699,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="2 comments"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -865,7 +865,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="Linked to issues #1, #2"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -893,7 +893,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -918,7 +918,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -943,7 +943,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="2 comments"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -1166,7 +1166,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1194,7 +1194,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1219,7 +1219,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1385,7 +1385,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="Linked to issues #1, #2"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -1413,7 +1413,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -1438,7 +1438,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -1661,7 +1661,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1689,7 +1689,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1714,7 +1714,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1739,7 +1739,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 title="2 comments"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1765,7 +1765,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
 🏷️ good-first-issue"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1932,7 +1932,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
               title="Linked to issues #1, #2"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -1960,7 +1960,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -1985,7 +1985,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -2010,7 +2010,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
               title="2 comments"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -2036,7 +2036,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
 🏷️ good-first-issue"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -2260,7 +2260,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2288,7 +2288,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2313,7 +2313,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2479,7 +2479,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               title="Linked to issues #1, #2"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -2507,7 +2507,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -2532,7 +2532,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -2755,7 +2755,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 title="Linked to issue #1"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2783,7 +2783,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2808,7 +2808,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2974,7 +2974,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               title="Linked to issue #1"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3002,7 +3002,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3027,7 +3027,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3250,7 +3250,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3278,7 +3278,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3303,7 +3303,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3328,7 +3328,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="2 comments"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3354,7 +3354,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
 🏷️ good-first-issue"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3381,7 +3381,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="Milestone 1"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3546,7 +3546,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="Linked to issues #1, #2"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3574,7 +3574,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3599,7 +3599,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3624,7 +3624,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="2 comments"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3650,7 +3650,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
 🏷️ good-first-issue"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3677,7 +3677,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="Milestone 1"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3899,7 +3899,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3927,7 +3927,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3952,7 +3952,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3977,7 +3977,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="2 comments"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4003,7 +4003,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
 🏷️ good-first-issue"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4030,7 +4030,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="Milestone 1"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4195,7 +4195,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="Linked to issues #1, #2"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -4223,7 +4223,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -4248,7 +4248,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -4273,7 +4273,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="2 comments"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -4299,7 +4299,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
 🏷️ good-first-issue"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -4326,7 +4326,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="Milestone 1"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -4543,7 +4543,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4568,7 +4568,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4729,7 +4729,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -4754,7 +4754,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -4972,7 +4972,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4997,7 +4997,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -5158,7 +5158,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -5183,7 +5183,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -5406,7 +5406,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -5431,7 +5431,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -5597,7 +5597,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -5622,7 +5622,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xs px-1.5 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
