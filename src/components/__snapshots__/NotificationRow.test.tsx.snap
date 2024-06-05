@@ -6,11 +6,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
   "baseElement": <body>
     <div>
       <div
-        class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
         id="138661096"
       >
         <div
-          class="flex justify-center items-center w-5 text-green-500"
+          class="flex justify-center items-center mr-3 w-5 text-green-500"
           title="Open Issue"
         >
           <svg
@@ -33,17 +33,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+            class="mb-1 text-sm truncate cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
           >
             <div>
               <svg
@@ -71,9 +71,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             >
               7 years ago
             </div>
-            <div
-              class="overflow-auto whitespace-normal"
-            >
+            <div>
               <span
                 title="Linked to issues #1, #2"
               >
@@ -252,11 +250,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
   </body>,
   "container": <div>
     <div
-      class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
       id="138661096"
     >
       <div
-        class="flex justify-center items-center w-5 text-green-500"
+        class="flex justify-center items-center mr-3 w-5 text-green-500"
         title="Open Issue"
       >
         <svg
@@ -279,17 +277,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+          class="mb-1 text-sm truncate cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
         >
           <div>
             <svg
@@ -317,9 +315,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           >
             7 years ago
           </div>
-          <div
-            class="overflow-auto whitespace-normal"
-          >
+          <div>
             <span
               title="Linked to issues #1, #2"
             >
@@ -555,11 +551,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
   "baseElement": <body>
     <div>
       <div
-        class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
         id="138661096"
       >
         <div
-          class="flex justify-center items-center w-5 text-green-500"
+          class="flex justify-center items-center mr-3 w-5 text-green-500"
           title="Open Issue"
         >
           <svg
@@ -582,17 +578,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+            class="mb-1 text-sm truncate cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
           >
             <div>
               <svg
@@ -620,9 +616,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             >
               7 years ago
             </div>
-            <div
-              class="overflow-auto whitespace-normal"
-            >
+            <div>
               <span
                 title="Linked to issues #1, #2"
               >
@@ -801,11 +795,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
   </body>,
   "container": <div>
     <div
-      class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
       id="138661096"
     >
       <div
-        class="flex justify-center items-center w-5 text-green-500"
+        class="flex justify-center items-center mr-3 w-5 text-green-500"
         title="Open Issue"
       >
         <svg
@@ -828,17 +822,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+          class="mb-1 text-sm truncate cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
         >
           <div>
             <svg
@@ -866,9 +860,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           >
             7 years ago
           </div>
-          <div
-            class="overflow-auto whitespace-normal"
-          >
+          <div>
             <span
               title="Linked to issues #1, #2"
             >
@@ -1104,11 +1096,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
   "baseElement": <body>
     <div>
       <div
-        class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
         id="138661096"
       >
         <div
-          class="flex justify-center items-center w-5 text-green-500"
+          class="flex justify-center items-center mr-3 w-5 text-green-500"
           title="Open Issue"
         >
           <svg
@@ -1131,17 +1123,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+            class="mb-1 text-sm truncate cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
           >
             <div>
               <svg
@@ -1169,9 +1161,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             >
               7 years ago
             </div>
-            <div
-              class="overflow-auto whitespace-normal"
-            >
+            <div>
               <span
                 title="Linked to issues #1, #2"
               >
@@ -1325,11 +1315,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
   </body>,
   "container": <div>
     <div
-      class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
       id="138661096"
     >
       <div
-        class="flex justify-center items-center w-5 text-green-500"
+        class="flex justify-center items-center mr-3 w-5 text-green-500"
         title="Open Issue"
       >
         <svg
@@ -1352,17 +1342,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+          class="mb-1 text-sm truncate cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
         >
           <div>
             <svg
@@ -1390,9 +1380,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           >
             7 years ago
           </div>
-          <div
-            class="overflow-auto whitespace-normal"
-          >
+          <div>
             <span
               title="Linked to issues #1, #2"
             >
@@ -1603,11 +1591,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
   "baseElement": <body>
     <div>
       <div
-        class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
         id="138661096"
       >
         <div
-          class="flex justify-center items-center w-5 text-green-500"
+          class="flex justify-center items-center mr-3 w-5 text-green-500"
           title="Open Issue"
         >
           <svg
@@ -1630,17 +1618,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+            class="mb-1 text-sm truncate cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
           >
             <div>
               <svg
@@ -1668,9 +1656,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
             >
               7 years ago
             </div>
-            <div
-              class="overflow-auto whitespace-normal"
-            >
+            <div>
               <span
                 title="Linked to issues #1, #2"
               >
@@ -1876,11 +1862,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
   </body>,
   "container": <div>
     <div
-      class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
       id="138661096"
     >
       <div
-        class="flex justify-center items-center w-5 text-green-500"
+        class="flex justify-center items-center mr-3 w-5 text-green-500"
         title="Open Issue"
       >
         <svg
@@ -1903,17 +1889,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+          class="mb-1 text-sm truncate cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
         >
           <div>
             <svg
@@ -1941,9 +1927,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
           >
             7 years ago
           </div>
-          <div
-            class="overflow-auto whitespace-normal"
-          >
+          <div>
             <span
               title="Linked to issues #1, #2"
             >
@@ -2206,11 +2190,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
   "baseElement": <body>
     <div>
       <div
-        class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
         id="138661096"
       >
         <div
-          class="flex justify-center items-center w-5 text-green-500"
+          class="flex justify-center items-center mr-3 w-5 text-green-500"
           title="Open Issue"
         >
           <svg
@@ -2233,17 +2217,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+            class="mb-1 text-sm truncate cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
           >
             <div>
               <svg
@@ -2271,9 +2255,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             >
               7 years ago
             </div>
-            <div
-              class="overflow-auto whitespace-normal"
-            >
+            <div>
               <span
                 title="Linked to issues #1, #2"
               >
@@ -2427,11 +2409,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
   </body>,
   "container": <div>
     <div
-      class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
       id="138661096"
     >
       <div
-        class="flex justify-center items-center w-5 text-green-500"
+        class="flex justify-center items-center mr-3 w-5 text-green-500"
         title="Open Issue"
       >
         <svg
@@ -2454,17 +2436,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+          class="mb-1 text-sm truncate cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
         >
           <div>
             <svg
@@ -2492,9 +2474,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           >
             7 years ago
           </div>
-          <div
-            class="overflow-auto whitespace-normal"
-          >
+          <div>
             <span
               title="Linked to issues #1, #2"
             >
@@ -2705,11 +2685,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
   "baseElement": <body>
     <div>
       <div
-        class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
         id="138661096"
       >
         <div
-          class="flex justify-center items-center w-5 text-green-500"
+          class="flex justify-center items-center mr-3 w-5 text-green-500"
           title="Open Issue"
         >
           <svg
@@ -2732,17 +2712,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+            class="mb-1 text-sm truncate cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
           >
             <div>
               <svg
@@ -2770,9 +2750,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             >
               7 years ago
             </div>
-            <div
-              class="overflow-auto whitespace-normal"
-            >
+            <div>
               <span
                 title="Linked to issue #1"
               >
@@ -2926,11 +2904,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
   </body>,
   "container": <div>
     <div
-      class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
       id="138661096"
     >
       <div
-        class="flex justify-center items-center w-5 text-green-500"
+        class="flex justify-center items-center mr-3 w-5 text-green-500"
         title="Open Issue"
       >
         <svg
@@ -2953,17 +2931,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+          class="mb-1 text-sm truncate cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
         >
           <div>
             <svg
@@ -2991,9 +2969,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           >
             7 years ago
           </div>
-          <div
-            class="overflow-auto whitespace-normal"
-          >
+          <div>
             <span
               title="Linked to issue #1"
             >
@@ -3204,11 +3180,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
   "baseElement": <body>
     <div>
       <div
-        class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
         id="138661096"
       >
         <div
-          class="flex justify-center items-center w-5 text-green-500"
+          class="flex justify-center items-center mr-3 w-5 text-green-500"
           title="Open Issue"
         >
           <svg
@@ -3231,17 +3207,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+            class="mb-1 text-sm truncate cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
           >
             <div>
               <svg
@@ -3269,9 +3245,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             >
               7 years ago
             </div>
-            <div
-              class="overflow-auto whitespace-normal"
-            >
+            <div>
               <span
                 title="Linked to issues #1, #2"
               >
@@ -3502,11 +3476,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
   </body>,
   "container": <div>
     <div
-      class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
       id="138661096"
     >
       <div
-        class="flex justify-center items-center w-5 text-green-500"
+        class="flex justify-center items-center mr-3 w-5 text-green-500"
         title="Open Issue"
       >
         <svg
@@ -3529,17 +3503,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+          class="mb-1 text-sm truncate cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
         >
           <div>
             <svg
@@ -3567,9 +3541,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           >
             7 years ago
           </div>
-          <div
-            class="overflow-auto whitespace-normal"
-          >
+          <div>
             <span
               title="Linked to issues #1, #2"
             >
@@ -3857,11 +3829,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
   "baseElement": <body>
     <div>
       <div
-        class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
         id="138661096"
       >
         <div
-          class="flex justify-center items-center w-5 text-green-500"
+          class="flex justify-center items-center mr-3 w-5 text-green-500"
           title="Open Issue"
         >
           <svg
@@ -3884,17 +3856,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+            class="mb-1 text-sm truncate cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
           >
             <div>
               <svg
@@ -3922,9 +3894,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             >
               7 years ago
             </div>
-            <div
-              class="overflow-auto whitespace-normal"
-            >
+            <div>
               <span
                 title="Linked to issues #1, #2"
               >
@@ -4155,11 +4125,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
   </body>,
   "container": <div>
     <div
-      class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
       id="138661096"
     >
       <div
-        class="flex justify-center items-center w-5 text-green-500"
+        class="flex justify-center items-center mr-3 w-5 text-green-500"
         title="Open Issue"
       >
         <svg
@@ -4182,17 +4152,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+          class="mb-1 text-sm truncate cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
         >
           <div>
             <svg
@@ -4220,9 +4190,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           >
             7 years ago
           </div>
-          <div
-            class="overflow-auto whitespace-normal"
-          >
+          <div>
             <span
               title="Linked to issues #1, #2"
             >
@@ -4510,11 +4478,11 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
   "baseElement": <body>
     <div>
       <div
-        class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
         id="138661096"
       >
         <div
-          class="flex justify-center items-center w-5 text-green-500"
+          class="flex justify-center items-center mr-3 w-5 text-green-500"
           title="Open Issue"
         >
           <svg
@@ -4537,17 +4505,17 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+            class="mb-1 text-sm truncate cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
           >
             <div
               class="flex-shrink-0"
@@ -4570,9 +4538,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
             >
               7 years ago
             </div>
-            <div
-              class="overflow-auto whitespace-normal"
-            >
+            <div>
               <span
                 title="octocat approved these changes"
               >
@@ -4698,11 +4664,11 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
   </body>,
   "container": <div>
     <div
-      class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
       id="138661096"
     >
       <div
-        class="flex justify-center items-center w-5 text-green-500"
+        class="flex justify-center items-center mr-3 w-5 text-green-500"
         title="Open Issue"
       >
         <svg
@@ -4725,17 +4691,17 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+          class="mb-1 text-sm truncate cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
         >
           <div
             class="flex-shrink-0"
@@ -4758,9 +4724,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
           >
             7 years ago
           </div>
-          <div
-            class="overflow-auto whitespace-normal"
-          >
+          <div>
             <span
               title="octocat approved these changes"
             >
@@ -4943,11 +4907,11 @@ exports[`components/NotificationRow.tsx should render itself & its children when
   "baseElement": <body>
     <div>
       <div
-        class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
         id="138661096"
       >
         <div
-          class="flex justify-center items-center w-5 text-green-500"
+          class="flex justify-center items-center mr-3 w-5 text-green-500"
           title="Open Issue"
         >
           <svg
@@ -4970,17 +4934,17 @@ exports[`components/NotificationRow.tsx should render itself & its children when
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+            class="mb-1 text-sm truncate cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
           >
             <div
               class="flex-shrink-0"
@@ -5003,9 +4967,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
             >
               7 years ago
             </div>
-            <div
-              class="overflow-auto whitespace-normal"
-            >
+            <div>
               <span
                 title="octocat approved these changes"
               >
@@ -5131,11 +5093,11 @@ exports[`components/NotificationRow.tsx should render itself & its children when
   </body>,
   "container": <div>
     <div
-      class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
       id="138661096"
     >
       <div
-        class="flex justify-center items-center w-5 text-green-500"
+        class="flex justify-center items-center mr-3 w-5 text-green-500"
         title="Open Issue"
       >
         <svg
@@ -5158,17 +5120,17 @@ exports[`components/NotificationRow.tsx should render itself & its children when
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+          class="mb-1 text-sm truncate cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
         >
           <div
             class="flex-shrink-0"
@@ -5191,9 +5153,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
           >
             7 years ago
           </div>
-          <div
-            class="overflow-auto whitespace-normal"
-          >
+          <div>
             <span
               title="octocat approved these changes"
             >
@@ -5376,11 +5336,11 @@ exports[`components/NotificationRow.tsx should render itself & its children with
   "baseElement": <body>
     <div>
       <div
-        class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
         id="138661096"
       >
         <div
-          class="flex justify-center items-center w-5 text-green-500"
+          class="flex justify-center items-center mr-3 w-5 text-green-500"
           title="Open Issue"
         >
           <svg
@@ -5403,17 +5363,17 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         >
           <div
-            class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+            class="mb-1 text-sm truncate cursor-pointer"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
           >
             <div>
               <svg
@@ -5441,9 +5401,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
             >
               7 years ago
             </div>
-            <div
-              class="overflow-auto whitespace-normal"
-            >
+            <div>
               <span
                 title="octocat approved these changes"
               >
@@ -5569,11 +5527,11 @@ exports[`components/NotificationRow.tsx should render itself & its children with
   </body>,
   "container": <div>
     <div
-      class="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
       id="138661096"
     >
       <div
-        class="flex justify-center items-center w-5 text-green-500"
+        class="flex justify-center items-center mr-3 w-5 text-green-500"
         title="Open Issue"
       >
         <svg
@@ -5596,17 +5554,17 @@ exports[`components/NotificationRow.tsx should render itself & its children with
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
       >
         <div
-          class="mb-1 text-sm whitespace-nowrap cursor-pointer"
+          class="mb-1 text-sm truncate cursor-pointer"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
         >
           <div>
             <svg
@@ -5634,9 +5592,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           >
             7 years ago
           </div>
-          <div
-            class="overflow-auto whitespace-normal"
-          >
+          <div>
             <span
               title="octocat approved these changes"
             >

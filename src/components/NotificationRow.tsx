@@ -105,29 +105,29 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   return (
     <div
       id={notification.id}
-      className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      className="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
     >
       <div
-        className={`flex justify-center items-center w-5 ${iconColor}`}
+        className={`flex justify-center items-center mr-3 w-5 ${iconColor}`}
         title={notificationTitle}
       >
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
 
       <div
-        className="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis gap-1"
+        className="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         onClick={() => openNotification()}
         onKeyDown={() => openNotification()}
       >
         <div
-          className="mb-1 text-sm whitespace-nowrap cursor-pointer"
+          className="mb-1 text-sm truncate cursor-pointer"
           role="main"
           title={notification.subject.title}
         >
           {notification.subject.title}
         </div>
 
-        <div className="flex items-center text-xs text-capitalize gap-1">
+        <div className="flex flex-wrap items-center text-xs text-capitalize gap-1">
           {notification.subject.user ? (
             <div
               title="View User Profile"
@@ -152,7 +152,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
           )}
           <div title={reason.description}>{reason.title}</div>
           <div title={updatedLabel}>{updatedAt}</div>
-          <div className="overflow-auto whitespace-normal">
+          <div>
             {notification.subject?.linkedIssues?.length > 0 && (
               <span title={linkedIssuesPillDescription}>
                 <button type="button" className={Constants.PILL_CLASS_NAME}>
@@ -165,30 +165,25 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 </button>
               </span>
             )}
-            {notification.subject.reviews
-              ? notification.subject.reviews.map((review) => {
-                  const icon = getPullRequestReviewIcon(review);
-                  if (!icon) {
-                    return null;
-                  }
+            {notification.subject.reviews?.map((review) => {
+              const icon = getPullRequestReviewIcon(review);
+              if (!icon) {
+                return null;
+              }
 
-                  return (
-                    <span key={review.state} title={icon.description}>
-                      <button
-                        type="button"
-                        className={Constants.PILL_CLASS_NAME}
-                      >
-                        <icon.type
-                          size={12}
-                          className={`mr-1 ${icon.color}`}
-                          aria-label={icon.description}
-                        />
-                        {review.users.length}
-                      </button>
-                    </span>
-                  );
-                })
-              : null}
+              return (
+                <span key={review.state} title={icon.description}>
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <icon.type
+                      size={12}
+                      className={`mr-1 ${icon.color}`}
+                      aria-label={icon.description}
+                    />
+                    {review.users.length}
+                  </button>
+                </span>
+              );
+            })}
             {notification.subject?.comments > 0 && (
               <span title={commentsPillDescription}>
                 <button type="button" className={Constants.PILL_CLASS_NAME}>
