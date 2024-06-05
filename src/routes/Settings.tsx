@@ -1,9 +1,14 @@
 import {
   ArrowLeftIcon,
+  CheckIcon,
+  CommentIcon,
+  IssueClosedIcon,
   KeyIcon,
+  MilestoneIcon,
   PersonIcon,
   PlusIcon,
   SignOutIcon,
+  TagIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
@@ -146,6 +151,41 @@ export const SettingsRoute: FC = () => {
                   ⚠️ Users with a large number of unread notifications <i>may</i>{' '}
                   experience rate limiting under certain circumstances. Disable
                   this setting if you experience this.
+                </div>
+              </div>
+            }
+          />
+          <Checkbox
+            name="showPills"
+            label="Show notification metric pills"
+            checked={settings.showPills}
+            onChange={(evt) => updateSetting('showPills', evt.target.checked)}
+            tooltip={
+              <div>
+                <div>Show notification metric pills for:</div>
+                <div className="pl-6">
+                  <ul className="list-disc">
+                    <li>
+                      <IssueClosedIcon size={16} className="pr-1" />
+                      linked issues
+                    </li>
+                    <li>
+                      <CheckIcon size={16} className="pr-1" /> pr reviews
+                    </li>
+                    <li>
+                      <CommentIcon size={16} className="pr-1" />
+                      comments
+                    </li>
+
+                    <li>
+                      <TagIcon size={16} className="pr-1" />
+                      labels
+                    </li>
+                    <li>
+                      <MilestoneIcon size={16} className="pr-1" />
+                      milestones
+                    </li>
+                  </ul>
                 </div>
               </div>
             }

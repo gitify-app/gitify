@@ -71,4 +71,5 @@ export const mockSettings: SettingsState = {
   markAsDoneOnOpen: false,
   showAccountHostname: false,
   delayNotificationState: false,
+  showPills: true,
 };
