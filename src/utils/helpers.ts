@@ -1,4 +1,4 @@
-import { formatDistanceToNow, parseISO } from 'date-fns';
+import { formatDistanceToNowStrict, parseISO } from 'date-fns';
 import type { Account, AuthState } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
@@ -176,7 +176,7 @@ export function formatNotificationUpdatedAt(
   const date = notification.last_read_at ?? notification.updated_at;
 
   try {
-    return formatDistanceToNow(parseISO(date), {
+    return formatDistanceToNowStrict(parseISO(date), {
       addSuffix: true,
     });
   } catch (e) {}

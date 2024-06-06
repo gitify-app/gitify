@@ -3,6 +3,9 @@ module.exports = {
   darkMode: 'class',
   theme: {
     extend: {
+      fontSize: {
+        xss: '0.625rem', // 10px
+      },
       colors: {
         gray: {
           sidebar: '#24292e',

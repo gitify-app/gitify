@@ -52,7 +52,7 @@ export const RepositoryNotifications: FC<IProps> = ({
             <MarkGithubIcon size={18} />
           )}
           <span
-            className="cursor-pointer"
+            className="cursor-pointer truncate"
             onClick={openBrowser}
             onKeyDown={openBrowser}
           >

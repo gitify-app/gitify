@@ -21,7 +21,7 @@ exports[`components/fields/Tooltip.tsx should display on mouse enter / leave 1`]
     />
   </svg>
   <div
-    class="absolute bg-white dark:bg-gray-sidebar border border-gray-300 rounded p-2 shadow"
+    class="absolute bg-white dark:bg-gray-sidebar border border-gray-300 rounded p-2 shadow z-10"
   >
     <div
       class="text-gray-700 dark:text-white text-xs text-left"

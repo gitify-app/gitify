@@ -374,7 +374,12 @@ describe('context/App.tsx', () => {
       });
 
       expect(saveStateMock).toHaveBeenCalledWith({
-        auth: { accounts: [], enterpriseAccounts: [], token: null, user: null },
+        auth: {
+          accounts: [],
+          enterpriseAccounts: [],
+          token: null,
+          user: null,
+        } as AuthState,
         settings: {
           participating: true,
           playSound: true,
@@ -387,7 +392,8 @@ describe('context/App.tsx', () => {
           markAsDoneOnOpen: false,
           showAccountHostname: false,
           delayNotificationState: false,
-        },
+          showPills: true,
+        } as SettingsState,
       });
     });
 
@@ -419,7 +425,12 @@ describe('context/App.tsx', () => {
       expect(setAutoLaunchMock).toHaveBeenCalledWith(true);
 
       expect(saveStateMock).toHaveBeenCalledWith({
-        auth: { accounts: [], enterpriseAccounts: [], token: null, user: null },
+        auth: {
+          accounts: [],
+          enterpriseAccounts: [],
+          token: null,
+          user: null,
+        } as AuthState,
         settings: {
           participating: false,
           playSound: true,
@@ -432,7 +443,8 @@ describe('context/App.tsx', () => {
           markAsDoneOnOpen: false,
           showAccountHostname: false,
           delayNotificationState: false,
-        },
+          showPills: true,
+        } as SettingsState,
       });
     });
   });

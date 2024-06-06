@@ -1,6 +1,6 @@
 {
   "name": "gitify",
-  "version": "5.6.0",
+  "version": "5.7.0",
   "description": "GitHub Notifications on your menu bar.",
   "main": "main.js",
   "scripts": {
@@ -146,14 +146,14 @@
     "postcss-loader": "8.1.1",
     "rimraf": "5.0.7",
     "style-loader": "4.0.0",
-    "tailwindcss": "3.4.3",
+    "tailwindcss": "3.4.4",
     "ts-jest": "29.1.4",
     "ts-node": "10.9.2",
     "webpack": "5.91.0",
     "webpack-cli": "5.1.4",
     "webpack-merge": "5.10.0"
   },
-  "packageManager": "pnpm@9.1.4",
+  "packageManager": "pnpm@9.2.0",
   "lint-staged": {
     "*.{html,js,json,md,ts,tsx}": "biome format --write"
   }
