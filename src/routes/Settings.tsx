@@ -1,43 +1,37 @@
 import {
   ArrowLeftIcon,
-  PersonAddIcon,
-  SignOutIcon,
+  CheckIcon,
+  CommentIcon,
+  IssueClosedIcon,
+  MilestoneIcon,
+  PersonIcon,
+  TagIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
-
 import {
   type FC,
   type MouseEvent,
   useCallback,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
 import { Theme } from '../types';
-import { getRootHypermediaLinks } from '../utils/api/client';
-import {
-  openExternalLink,
-  updateTrayIcon,
-  updateTrayTitle,
-} from '../utils/comms';
+import { openExternalLink } from '../utils/comms';
 import Constants from '../utils/constants';
+import { isLinux, isMacOS } from '../utils/platform';
 import { setTheme } from '../utils/theme';
 
 export const SettingsRoute: FC = () => {
-  const { accounts, settings, updateSetting, logout } = useContext(AppContext);
+  const { settings, updateSetting } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const [isLinux, setIsLinux] = useState<boolean>(false);
-  const [isMacOS, setIsMacOS] = useState<boolean>(false);
   const [appVersion, setAppVersion] = useState<string | null>(null);
-  const [repoScope, setRepoScope] = useState<boolean>(false);
 
   const openGitHubReleaseNotes = useCallback((version) => {
     openExternalLink(
@@ -56,12 +50,6 @@ export const SettingsRoute: FC = () => {
 
   useEffect(() => {
     (async () => {
-      const result = await ipcRenderer.invoke('get-platform');
-      setIsLinux(result === 'linux');
-      setIsMacOS(result === 'darwin');
-    })();
-
-    (async () => {
       const result = await ipcRenderer.invoke('get-app-version');
       setAppVersion(result);
     })();
@@ -73,31 +61,8 @@ export const SettingsRoute: FC = () => {
     });
   }, []);
 
-  useMemo(() => {
-    (async () => {
-      const response = await getRootHypermediaLinks(
-        Constants.DEFAULT_AUTH_OPTIONS.hostname,
-        accounts.token,
-      );
-
-      if (response.headers['x-oauth-scopes'].includes('repo'))
-        setRepoScope(true);
-    })();
-  }, [accounts.token]);
-
-  const logoutUser = useCallback(() => {
-    logout();
-    navigate(-1);
-    updateTrayIcon();
-    updateTrayTitle();
-  }, []);
-
   const quitApp = useCallback(() => {
     ipcRenderer.send('app-quit');
-  }, []);
-
-  const goToEnterprise = useCallback(() => {
-    return navigate('/login-enterprise', { replace: true });
   }, []);
 
   const footerButtonClass =
@@ -145,15 +110,11 @@ export const SettingsRoute: FC = () => {
           />
           <Checkbox
             name="detailedNotifications"
-            label={`Detailed notifications${
-              !repoScope ? ' (requires repo scope)' : ''
-            }`}
-            checked={repoScope && settings.detailedNotifications}
+            label="Detailed notifications"
+            checked={settings.detailedNotifications}
             onChange={(evt) =>
-              repoScope &&
               updateSetting('detailedNotifications', evt.target.checked)
             }
-            disabled={!repoScope}
             tooltip={
               <div>
                 <div className="pb-3">
@@ -164,6 +125,41 @@ export const SettingsRoute: FC = () => {
                   ⚠️ Users with a large number of unread notifications <i>may</i>{' '}
                   experience rate limiting under certain circumstances. Disable
                   this setting if you experience this.
+                </div>
+              </div>
+            }
+          />
+          <Checkbox
+            name="showPills"
+            label="Show notification metric pills"
+            checked={settings.showPills}
+            onChange={(evt) => updateSetting('showPills', evt.target.checked)}
+            tooltip={
+              <div>
+                <div>Show notification metric pills for:</div>
+                <div className="pl-6">
+                  <ul className="list-disc">
+                    <li>
+                      <IssueClosedIcon size={16} className="pr-1" />
+                      linked issues
+                    </li>
+                    <li>
+                      <CheckIcon size={16} className="pr-1" /> pr reviews
+                    </li>
+                    <li>
+                      <CommentIcon size={16} className="pr-1" />
+                      comments
+                    </li>
+
+                    <li>
+                      <TagIcon size={16} className="pr-1" />
+                      labels
+                    </li>
+                    <li>
+                      <MilestoneIcon size={16} className="pr-1" />
+                      milestones
+                    </li>
+                  </ul>
                 </div>
               </div>
             }
@@ -191,18 +187,16 @@ export const SettingsRoute: FC = () => {
             }
             tooltip={
               <div>
-                <div className="pb-3">
-                  See{' '}
-                  <button
-                    type="button"
-                    className="text-blue-500"
-                    title="Open GitHub documentation for participating and watching notifications"
-                    onClick={openGitHubParticipatingDocs}
-                  >
-                    official docs
-                  </button>{' '}
-                  for more details.
-                </div>
+                See
+                <button
+                  type="button"
+                  className="text-blue-500 mx-1"
+                  title="Open GitHub documentation for participating and watching notifications"
+                  onClick={openGitHubParticipatingDocs}
+                >
+                  official docs
+                </button>
+                for more details.
               </div>
             }
           />
@@ -236,13 +230,28 @@ export const SettingsRoute: FC = () => {
               updateSetting('markAsDoneOnOpen', evt.target.checked)
             }
           />
+          <Checkbox
+            name="delayNotificationState"
+            label="Delay notification state"
+            checked={settings.delayNotificationState}
+            onChange={(evt) =>
+              updateSetting('delayNotificationState', evt.target.checked)
+            }
+            tooltip={
+              <div>
+                Keep the notification within Gitify window upon interaction
+                (click, mark as read, mark as done, etc) until the next refresh
+                window (scheduled or user initiated)
+              </div>
+            }
+          />
         </fieldset>
 
         <fieldset className="mb-3">
           <legend id="system" className="font-semibold mt-2 mb-1">
             System
           </legend>
-          {isMacOS && (
+          {isMacOS() && (
             <Checkbox
               name="showNotificationsCountInTray"
               label="Show notifications count in tray"
@@ -269,7 +278,7 @@ export const SettingsRoute: FC = () => {
             checked={settings.playSound}
             onChange={(evt) => updateSetting('playSound', evt.target.checked)}
           />
-          {!isLinux && (
+          {!isLinux() && (
             <Checkbox
               name="openAtStartUp"
               label="Open at startup"
@@ -295,26 +304,12 @@ export const SettingsRoute: FC = () => {
           <button
             type="button"
             className={footerButtonClass}
-            title="Login with GitHub Enterprise"
-            onClick={goToEnterprise}
+            title="Accounts"
+            onClick={() => {
+              navigate('/accounts');
+            }}
           >
-            <PersonAddIcon
-              size={20}
-              aria-label="Login with GitHub Enterprise"
-            />
-          </button>
-
-          <button
-            type="button"
-            className={footerButtonClass}
-            title={`Logout from ${accounts.user.login}`}
-            role="button"
-            onClick={logoutUser}
-          >
-            <SignOutIcon
-              size={18}
-              aria-label={`Logout from ${accounts.user.login}`}
-            />
+            <PersonIcon size={18} aria-label="Accounts" />
           </button>
 
           <button

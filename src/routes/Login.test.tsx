@@ -1,7 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { ipcRenderer } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
-import TestRenderer from 'react-test-renderer';
-const { ipcRenderer } = require('electron');
 import { AppContext } from '../context/App';
 import { LoginRoute } from './Login';
 
@@ -18,7 +17,7 @@ describe('routes/Login.tsx', () => {
   });
 
   it('should render itself & its children', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <MemoryRouter>
         <LoginRoute />
       </MemoryRouter>,
@@ -49,15 +48,30 @@ describe('routes/Login.tsx', () => {
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
   });
 
-  it('should navigate to login with github enterprise', () => {
+  it('should navigate to login with personal access token', () => {
     render(
       <MemoryRouter>
         <LoginRoute />
       </MemoryRouter>,
     );
 
-    fireEvent.click(screen.getByLabelText('Login with GitHub Enterprise'));
+    fireEvent.click(screen.getByLabelText('Login with Personal Access Token'));
 
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-enterprise');
+    expect(mockNavigate).toHaveBeenNthCalledWith(
+      1,
+      '/login-personal-access-token',
+    );
+  });
+
+  it('should navigate to login with oauth app', () => {
+    render(
+      <MemoryRouter>
+        <LoginRoute />
+      </MemoryRouter>,
+    );
+
+    fireEvent.click(screen.getByLabelText('Login with OAuth App'));
+
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app');
   });
 });

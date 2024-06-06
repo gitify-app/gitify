@@ -1,5 +1,6 @@
 import type { AxiosPromise } from 'axios';
-import type { SettingsState } from '../../types';
+import { print } from 'graphql/language/printer';
+import type { Account, SettingsState } from '../../types';
 import type {
   Commit,
   CommitComment,
@@ -12,30 +13,12 @@ import type {
   PullRequest,
   PullRequestReview,
   Release,
-  RootHypermediaLinks,
   UserDetails,
 } from '../../typesGitHub';
-import { getGitHubAPIBaseUrl } from '../helpers';
-import { apiRequestAuth } from './request';
-
-import { print } from 'graphql/language/printer';
-import Constants from '../constants';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
-import { formatSearchQueryString } from './utils';
-
-/**
- * Get Hypermedia links to resources accessible in GitHub's REST API
- *
- * Endpoint documentation: https://docs.github.com/en/rest/meta/meta#github-api-root
- */
-export function getRootHypermediaLinks(
-  hostname: string,
-  token: string,
-): AxiosPromise<RootHypermediaLinks> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(baseUrl);
-  return apiRequestAuth(url.toString(), 'GET', token);
-}
+import { formatAsGitHubSearchSyntax } from './graphql/utils';
+import { apiRequestAuth } from './request';
+import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
 
 /**
  * Get the authenticated user
@@ -46,8 +29,9 @@ export function getAuthenticatedUser(
   hostname: string,
   token: string,
 ): AxiosPromise<UserDetails> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(`${baseUrl}/user`);
+  const url = getGitHubAPIBaseUrl(hostname);
+  url.pathname += 'user';
+
   return apiRequestAuth(url.toString(), 'GET', token);
 }
 
@@ -56,8 +40,9 @@ export function headNotifications(
   hostname: string,
   token: string,
 ): AxiosPromise<void> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(`${baseUrl}/notifications`);
+  const url = getGitHubAPIBaseUrl(hostname);
+  url.pathname += 'notifications';
+
   return apiRequestAuth(url.toString(), 'HEAD', token);
 }
 
@@ -67,15 +52,14 @@ export function headNotifications(
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#list-notifications-for-the-authenticated-user
  */
 export function listNotificationsForAuthenticatedUser(
-  hostname: string,
-  token: string,
+  account: Account,
   settings: SettingsState,
 ): AxiosPromise<Notification[]> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(`${baseUrl}/notifications`);
+  const url = getGitHubAPIBaseUrl(account.hostname);
+  url.pathname += 'notifications';
   url.searchParams.append('participating', String(settings.participating));
 
-  return apiRequestAuth(url.toString(), 'GET', token);
+  return apiRequestAuth(url.toString(), 'GET', account.token);
 }
 
 /**
@@ -89,8 +73,9 @@ export function markNotificationThreadAsRead(
   hostname: string,
   token: string,
 ): AxiosPromise<void> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(`${baseUrl}/notifications/threads/${threadId}`);
+  const url = getGitHubAPIBaseUrl(hostname);
+  url.pathname += `notifications/threads/${threadId}`;
+
   return apiRequestAuth(url.toString(), 'PATCH', token, {});
 }
 
@@ -105,8 +90,9 @@ export function markNotificationThreadAsDone(
   hostname: string,
   token: string,
 ): AxiosPromise<void> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(`${baseUrl}/notifications/threads/${threadId}`);
+  const url = getGitHubAPIBaseUrl(hostname);
+  url.pathname += `notifications/threads/${threadId}`;
+
   return apiRequestAuth(url.toString(), 'DELETE', token, {});
 }
 
@@ -120,10 +106,9 @@ export function ignoreNotificationThreadSubscription(
   hostname: string,
   token: string,
 ): AxiosPromise<NotificationThreadSubscription> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(
-    `${baseUrl}/notifications/threads/${threadId}/subscription`,
-  );
+  const url = getGitHubAPIBaseUrl(hostname);
+  url.pathname += `notifications/threads/${threadId}/subscription`;
+
   return apiRequestAuth(url.toString(), 'PUT', token, { ignored: true });
 }
 
@@ -140,8 +125,9 @@ export function markRepositoryNotificationsAsRead(
   hostname: string,
   token: string,
 ): AxiosPromise<void> {
-  const baseUrl = getGitHubAPIBaseUrl(hostname);
-  const url = new URL(`${baseUrl}/repos/${repoSlug}/notifications`);
+  const url = getGitHubAPIBaseUrl(hostname);
+  url.pathname += `repos/${repoSlug}/notifications`;
+
   return apiRequestAuth(url.toString(), 'PUT', token, {});
 }
 
@@ -237,24 +223,39 @@ export async function getHtmlUrl(url: string, token: string): Promise<string> {
 /**
  * Search for Discussions that match notification title and repository.
  *
- * Returns first 10 matching discussions and their latest comments / replies
+ * Returns the latest discussion and their latest comments / replies
  *
  */
 export async function searchDiscussions(
   notification: Notification,
-  token: string,
 ): AxiosPromise<GraphQLSearch<Discussion>> {
-  return apiRequestAuth(Constants.GITHUB_API_GRAPHQL_URL, 'POST', token, {
+  const url = getGitHubGraphQLUrl(notification.account.hostname);
+  return apiRequestAuth(url.toString(), 'POST', notification.account.token, {
     query: print(QUERY_SEARCH_DISCUSSIONS),
     variables: {
-      queryStatement: formatSearchQueryString(
+      queryStatement: formatAsGitHubSearchSyntax(
         notification.repository.full_name,
         notification.subject.title,
-        notification.updated_at,
       ),
-      firstDiscussions: 10,
+      firstDiscussions: 1,
       lastComments: 1,
       lastReplies: 1,
     },
   });
+}
+
+/**
+ * Return the latest discussion that matches the notification title and repository.
+ */
+export async function getLatestDiscussion(
+  notification: Notification,
+): Promise<Discussion | null> {
+  try {
+    const response = await searchDiscussions(notification);
+    return (
+      response.data?.data.search.nodes.filter(
+        (discussion) => discussion.title === notification.subject.title,
+      )[0] ?? null
+    );
+  } catch (err) {}
 }

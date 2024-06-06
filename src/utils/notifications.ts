@@ -1,15 +1,10 @@
 import { ipcRenderer } from 'electron';
-import { Notification } from '../typesGitHub';
-import {
-  getTokenForHost,
-  isGitHubLoggedIn,
-  openInBrowser,
-} from '../utils/helpers';
-import { updateTrayIcon } from './comms';
-
 import type { AccountNotifications, AuthState, SettingsState } from '../types';
+import { Notification } from '../typesGitHub';
+import { openInBrowser } from '../utils/helpers';
 import { listNotificationsForAuthenticatedUser } from './api/client';
-import Constants from './constants';
+import { updateTrayIcon } from './comms';
+import { isWindows } from './platform';
 import { getGitifySubjectDetails } from './subject';
 
 export const setTrayIconColor = (notifications: AccountNotifications[]) => {
@@ -29,24 +24,27 @@ export const triggerNativeNotifications = (
   previousNotifications: AccountNotifications[],
   newNotifications: AccountNotifications[],
   settings: SettingsState,
-  accounts: AuthState,
+  auth: AuthState,
 ) => {
   const diffNotifications = newNotifications
-    .map((account) => {
+    .map((accountNotifications) => {
       const accountPreviousNotifications = previousNotifications.find(
-        (item) => item.hostname === account.hostname,
+        (item) =>
+          item.account.hostname === accountNotifications.account.hostname,
       );
 
       if (!accountPreviousNotifications) {
-        return account.notifications;
+        return accountNotifications.notifications;
       }
 
       const accountPreviousNotificationsIds =
         accountPreviousNotifications.notifications.map((item) => item.id);
 
-      const accountNewNotifications = account.notifications.filter((item) => {
-        return !accountPreviousNotificationsIds.includes(`${item.id}`);
-      });
+      const accountNewNotifications = accountNotifications.notifications.filter(
+        (item) => {
+          return !accountPreviousNotificationsIds.includes(`${item.id}`);
+        },
+      );
 
       return accountNewNotifications;
     })
@@ -64,20 +62,20 @@ export const triggerNativeNotifications = (
   }
 
   if (settings.showNotifications) {
-    raiseNativeNotification(diffNotifications, accounts);
+    raiseNativeNotification(diffNotifications, auth);
   }
 };
 
 export const raiseNativeNotification = (
   notifications: Notification[],
-  accounts: AuthState,
+  auth: AuthState,
 ) => {
   let title: string;
   let body: string;
 
   if (notifications.length === 1) {
     const notification = notifications[0];
-    title = `${process.platform !== 'win32' ? 'Gitify - ' : ''}${
+    title = `${isWindows() ? '' : 'Gitify - '}${
       notification.repository.full_name
     }`;
     body = notification.subject.title;
@@ -94,7 +92,7 @@ export const raiseNativeNotification = (
   nativeNotification.onclick = () => {
     if (notifications.length === 1) {
       ipcRenderer.send('hide-window');
-      openInBrowser(notifications[0], accounts);
+      openInBrowser(notifications[0]);
     } else {
       ipcRenderer.send('reopen-window');
     }
@@ -109,63 +107,42 @@ export const raiseSoundNotification = () => {
   audio.play();
 };
 
-function getGitHubNotifications(accounts: AuthState, settings: SettingsState) {
-  if (!isGitHubLoggedIn(accounts)) {
-    return;
-  }
-
-  return listNotificationsForAuthenticatedUser(
-    Constants.DEFAULT_AUTH_OPTIONS.hostname,
-    accounts.token,
-    settings,
-  );
-}
-
-function getEnterpriseNotifications(
-  accounts: AuthState,
-  settings: SettingsState,
-) {
-  return accounts.enterpriseAccounts.map((account) => {
-    return listNotificationsForAuthenticatedUser(
-      account.hostname,
-      account.token,
-      settings,
-    );
+function getNotifications(auth: AuthState, settings: SettingsState) {
+  return auth.accounts.map((account) => {
+    return {
+      account,
+      notifications: listNotificationsForAuthenticatedUser(account, settings),
+    };
   });
 }
 
 export async function getAllNotifications(
-  accounts: AuthState,
+  auth: AuthState,
   settings: SettingsState,
 ): Promise<AccountNotifications[]> {
-  const responses = await Promise.all([
-    getGitHubNotifications(accounts, settings),
-    ...getEnterpriseNotifications(accounts, settings),
-  ]);
+  const responses = await Promise.all([...getNotifications(auth, settings)]);
 
   const notifications: AccountNotifications[] = await Promise.all(
     responses
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
-        const { hostname } = new URL(accountNotifications.config.url);
-
-        let notifications = accountNotifications.data.map(
+        let notifications = (await accountNotifications.notifications).data.map(
           (notification: Notification) => ({
             ...notification,
-            hostname,
+            account: accountNotifications.account,
           }),
         );
 
         notifications = await enrichNotifications(
           notifications,
-          accounts,
+          auth,
           settings,
         );
 
         notifications = filterNotifications(notifications, settings);
 
         return {
-          hostname,
+          account: accountNotifications.account,
           notifications: notifications,
         };
       }),
@@ -176,7 +153,7 @@ export async function getAllNotifications(
 
 export async function enrichNotifications(
   notifications: Notification[],
-  accounts: AuthState,
+  auth: AuthState,
   settings: SettingsState,
 ): Promise<Notification[]> {
   if (!settings.detailedNotifications) {
@@ -185,12 +162,8 @@ export async function enrichNotifications(
 
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: Notification) => {
-      const token = getTokenForHost(notification.hostname, accounts);
-
-      const additionalSubjectDetails = await getGitifySubjectDetails(
-        notification,
-        token,
-      );
+      const additionalSubjectDetails =
+        await getGitifySubjectDetails(notification);
 
       return {
         ...notification,

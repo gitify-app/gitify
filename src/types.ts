@@ -1,14 +1,37 @@
 import type { OcticonProps } from '@primer/octicons-react';
 import type { FC } from 'react';
 import type { Notification } from './typesGitHub';
-
-export interface AuthState {
-  token?: string;
-  enterpriseAccounts: EnterpriseAccount[];
-  user: GitifyUser | null;
-}
+import type {
+  AuthMethod,
+  EnterpriseAccount,
+  PlatformType,
+} from './utils/auth/types';
 
 export type Status = 'loading' | 'success' | 'error';
+
+export interface AuthState {
+  accounts: Account[];
+  /**
+   * @deprecated This attribute is deprecated and will be removed in a future release.
+   */
+  token?: string;
+  /**
+   * @deprecated This attribute is deprecated and will be removed in a future release.
+   */
+  enterpriseAccounts?: EnterpriseAccount[];
+  /**
+   * @deprecated This attribute is deprecated and will be removed in a future release.
+   */
+  user?: GitifyUser | null;
+}
+
+export interface Account {
+  method: AuthMethod;
+  platform: PlatformType;
+  hostname: string;
+  token: string;
+  user: GitifyUser | null;
+}
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
@@ -18,6 +41,7 @@ interface AppearanceSettingsState {
   theme: Theme;
   detailedNotifications: boolean;
   showAccountHostname: boolean;
+  showPills: boolean;
 }
 
 interface NotificationSettingsState {
@@ -25,12 +49,18 @@ interface NotificationSettingsState {
   showNotifications: boolean;
   showBots: boolean;
   markAsDoneOnOpen: boolean;
+  delayNotificationState: boolean;
 }
 
 interface SystemSettingsState {
   playSound: boolean;
   openAtStartup: boolean;
   showNotificationsCountInTray: boolean;
+}
+
+export interface GitifyState {
+  auth?: AuthState;
+  settings?: SettingsState;
 }
 
 export enum Theme {
@@ -44,39 +74,14 @@ export type RadioGroupItem = {
   value: string;
 };
 
-export interface EnterpriseAccount {
-  hostname: string;
-  token: string;
-}
-
 export interface AccountNotifications {
-  hostname: string;
+  account: Account;
   notifications: Notification[];
-}
-
-export interface AuthOptions {
-  hostname: string;
-  clientId: string;
-  clientSecret: string;
-}
-
-export interface AuthTokenOptions {
-  hostname: string;
-  token: string;
-}
-
-export interface AuthResponse {
-  authCode: string;
-  authOptions: AuthOptions;
-}
-export interface AuthTokenResponse {
-  hostname: string;
-  token: string;
 }
 
 export interface GitifyUser {
   login: string;
-  name: string;
+  name: string | null;
   id: number;
 }
 

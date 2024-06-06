@@ -31,7 +31,6 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
     search(query:$queryStatement, type: DISCUSSION, first: $firstDiscussions) {
       nodes {
         ... on Discussion {
-          viewerSubscription
           title
           stateReason
           isAnswered
@@ -40,6 +39,7 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
             ...AuthorFields
           }
           comments(last: $lastComments){
+            totalCount
             nodes {
               ...CommentFields
               replies(last: $lastReplies) {
@@ -47,6 +47,11 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
                   ...CommentFields
                 }
               }
+            }
+          }
+          labels {
+            nodes {
+              name
             }
           }
         }

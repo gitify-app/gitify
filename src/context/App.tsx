@@ -6,28 +6,38 @@ import {
   useMemo,
   useState,
 } from 'react';
-
 import { useInterval } from '../hooks/useInterval';
 import { useNotifications } from '../hooks/useNotifications';
 import {
+  type Account,
   type AccountNotifications,
-  type AuthOptions,
   type AuthState,
-  type AuthTokenOptions,
   type GitifyError,
   type SettingsState,
   type Status,
   Theme,
 } from '../types';
 import { headNotifications } from '../utils/api/client';
-import { addAccount, authGitHub, getToken, getUserData } from '../utils/auth';
+import { migrateAuthenticatedAccounts } from '../utils/auth/migration';
+import type {
+  LoginOAuthAppOptions,
+  LoginPersonalAccessTokenOptions,
+} from '../utils/auth/types';
+import {
+  addAccount,
+  authGitHub,
+  getToken,
+  getUserData,
+  removeAccount,
+} from '../utils/auth/utils';
 import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
 import Constants from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setTheme } from '../utils/theme';
 
-const defaultAccounts: AuthState = {
+const defaultAuth: AuthState = {
+  accounts: [],
   token: null,
   enterpriseAccounts: [],
   user: null,
@@ -41,23 +51,30 @@ export const defaultSettings: SettingsState = {
   showNotificationsCountInTray: false,
   openAtStartup: false,
   theme: Theme.SYSTEM,
-  detailedNotifications: false,
+  detailedNotifications: true,
   markAsDoneOnOpen: false,
   showAccountHostname: false,
+  delayNotificationState: false,
+  showPills: true,
 };
 
 interface AppContextState {
-  accounts: AuthState;
+  auth: AuthState;
   isLoggedIn: boolean;
-  login: () => void;
-  loginEnterprise: (data: AuthOptions) => void;
-  validateToken: (data: AuthTokenOptions) => void;
+  loginWithGitHubApp: () => void;
+  loginWithOAuthApp: (data: LoginOAuthAppOptions) => void;
+  loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => void;
+  logoutFromAccount: (account: Account) => void;
   logout: () => void;
 
   notifications: AccountNotifications[];
   status: Status;
   errorDetails: GitifyError;
-  removeNotificationFromState: (id: string, hostname: string) => void;
+  removeNotificationFromState: (
+    settings: SettingsState,
+    id: string,
+    hostname: string,
+  ) => void;
   fetchNotifications: () => Promise<void>;
   markNotificationRead: (id: string, hostname: string) => Promise<void>;
   markNotificationDone: (id: string, hostname: string) => Promise<void>;
@@ -75,7 +92,7 @@ interface AppContextState {
 export const AppContext = createContext<Partial<AppContextState>>({});
 
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-  const [accounts, setAccounts] = useState<AuthState>(defaultAccounts);
+  const [auth, setAuth] = useState<AuthState>(defaultAuth);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
   const {
     fetchNotifications,
@@ -100,17 +117,16 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for certain account or setting changes.
   useEffect(() => {
-    fetchNotifications(accounts, settings);
+    fetchNotifications(auth, settings);
   }, [
     settings.participating,
     settings.showBots,
     settings.detailedNotifications,
-    accounts.token,
-    accounts.enterpriseAccounts.length,
+    auth.accounts.length,
   ]);
 
   useInterval(() => {
-    fetchNotifications(accounts, settings);
+    fetchNotifications(auth, settings);
   }, Constants.FETCH_INTERVAL);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We need to update tray title when settings or notifications changes.
@@ -132,58 +148,75 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
       const newSettings = { ...settings, [name]: value };
       setSettings(newSettings);
-      saveState(accounts, newSettings);
+      saveState({ auth, settings: newSettings });
     },
-    [accounts, settings],
+    [auth, settings],
   );
 
   const isLoggedIn = useMemo(() => {
-    return !!accounts.token || accounts.enterpriseAccounts.length > 0;
-  }, [accounts]);
+    return auth.accounts.length > 0;
+  }, [auth]);
 
-  const login = useCallback(async () => {
+  const loginWithGitHubApp = useCallback(async () => {
     const { authCode } = await authGitHub();
     const { token } = await getToken(authCode);
     const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
     const user = await getUserData(token, hostname);
-    const updatedAccounts = addAccount(accounts, token, hostname, user);
-    setAccounts(updatedAccounts);
-    saveState(updatedAccounts, settings);
-  }, [accounts, settings]);
+    const updatedAuth = addAccount(auth, 'GitHub App', token, hostname, user);
+    setAuth(updatedAuth);
+    saveState({ auth: updatedAuth, settings });
+  }, [auth, settings]);
 
-  const loginEnterprise = useCallback(
-    async (data: AuthOptions) => {
+  const loginWithOAuthApp = useCallback(
+    async (data: LoginOAuthAppOptions) => {
       const { authOptions, authCode } = await authGitHub(data);
       const { token, hostname } = await getToken(authCode, authOptions);
-      const updatedAccounts = addAccount(accounts, token, hostname);
-      setAccounts(updatedAccounts);
-      saveState(updatedAccounts, settings);
+      const updatedAuth = addAccount(auth, 'OAuth App', token, hostname);
+      setAuth(updatedAuth);
+      saveState({ auth: updatedAuth, settings });
     },
-    [accounts, settings],
+    [auth, settings],
   );
 
-  const validateToken = useCallback(
-    async ({ token, hostname }: AuthTokenOptions) => {
+  const loginWithPersonalAccessToken = useCallback(
+    async ({ token, hostname }: LoginPersonalAccessTokenOptions) => {
       await headNotifications(hostname, token);
 
       const user = await getUserData(token, hostname);
-      const updatedAccounts = addAccount(accounts, token, hostname, user);
-      setAccounts(updatedAccounts);
-      saveState(updatedAccounts, settings);
+      const updatedAuth = addAccount(
+        auth,
+        'Personal Access Token',
+        token,
+        hostname,
+        user,
+      );
+      setAuth(updatedAuth);
+      saveState({ auth: updatedAuth, settings });
     },
-    [accounts, settings],
+    [auth, settings],
+  );
+
+  const logoutFromAccount = useCallback(
+    async (account: Account) => {
+      const updatedAuth = removeAccount(auth, account);
+      setAuth(updatedAuth);
+      saveState({ auth: updatedAuth, settings });
+    },
+    [auth, settings],
   );
 
   const logout = useCallback(() => {
-    setAccounts(defaultAccounts);
+    setAuth(defaultAuth);
     clearState();
   }, []);
 
-  const restoreSettings = useCallback(() => {
+  const restoreSettings = useCallback(async () => {
+    await migrateAuthenticatedAccounts();
+
     const existing = loadState();
 
-    if (existing.accounts) {
-      setAccounts({ ...defaultAccounts, ...existing.accounts });
+    if (existing.auth) {
+      setAuth({ ...defaultAuth, ...existing.auth });
     }
 
     if (existing.settings) {
@@ -193,48 +226,49 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const fetchNotificationsWithAccounts = useCallback(
-    async () => await fetchNotifications(accounts, settings),
-    [accounts, settings, notifications],
+    async () => await fetchNotifications(auth, settings),
+    [auth, settings, notifications],
   );
 
   const markNotificationReadWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await markNotificationRead(accounts, id, hostname),
-    [accounts, notifications],
+      await markNotificationRead(auth, settings, id, hostname),
+    [auth, notifications],
   );
 
   const markNotificationDoneWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await markNotificationDone(accounts, id, hostname),
-    [accounts, notifications],
+      await markNotificationDone(auth, settings, id, hostname),
+    [auth, notifications],
   );
 
   const unsubscribeNotificationWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await unsubscribeNotification(accounts, id, hostname),
-    [accounts, notifications],
+      await unsubscribeNotification(auth, settings, id, hostname),
+    [auth, notifications],
   );
 
   const markRepoNotificationsWithAccounts = useCallback(
     async (repoSlug: string, hostname: string) =>
-      await markRepoNotifications(accounts, repoSlug, hostname),
-    [accounts, notifications],
+      await markRepoNotifications(auth, settings, repoSlug, hostname),
+    [auth, notifications],
   );
 
   const markRepoNotificationsDoneWithAccounts = useCallback(
     async (repoSlug: string, hostname: string) =>
-      await markRepoNotificationsDone(accounts, repoSlug, hostname),
-    [accounts, notifications],
+      await markRepoNotificationsDone(auth, settings, repoSlug, hostname),
+    [auth, notifications],
   );
 
   return (
     <AppContext.Provider
       value={{
-        accounts,
+        auth,
         isLoggedIn,
-        login,
-        loginEnterprise,
-        validateToken,
+        loginWithGitHubApp,
+        loginWithOAuthApp,
+        loginWithPersonalAccessToken,
+        logoutFromAccount,
         logout,
 
         notifications,

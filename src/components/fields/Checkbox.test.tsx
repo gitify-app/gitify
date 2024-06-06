@@ -1,5 +1,4 @@
-import * as TestRenderer from 'react-test-renderer';
-
+import { render } from '@testing-library/react';
 import { Checkbox, type ICheckbox } from './Checkbox';
 
 describe('components/fields/Checkbox.tsx', () => {
@@ -12,7 +11,7 @@ describe('components/fields/Checkbox.tsx', () => {
   };
 
   it('should render', () => {
-    const tree = TestRenderer.create(<Checkbox {...props} />);
+    const tree = render(<Checkbox {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });

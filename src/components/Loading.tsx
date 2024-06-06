@@ -1,6 +1,5 @@
 import NProgress from 'nprogress';
 import { useContext, useEffect } from 'react';
-
 import { AppContext } from '../context/App';
 
 export const Loading = () => {

@@ -1,3 +1,5 @@
+import type { Account } from './types';
+
 export type Reason =
   | 'approval_requested'
   | 'assign'
@@ -59,8 +61,6 @@ export type StateType =
   | IssueStateReasonType
   | PullRequestStateType;
 
-export type ViewerSubscription = 'IGNORED' | 'SUBSCRIBED' | 'UNSUBSCRIBED';
-
 export type CheckSuiteStatus =
   | 'action_required'
   | 'cancelled'
@@ -93,7 +93,9 @@ export type PullRequestReviewAuthorAssociation =
   | 'NONE'
   | 'OWNER';
 
-export interface Notification {
+export type Notification = GitHubNotification & GitifyNotification;
+
+export interface GitHubNotification {
   id: string;
   unread: boolean;
   reason: Reason;
@@ -103,8 +105,11 @@ export interface Notification {
   repository: Repository;
   url: string;
   subscription_url: string;
-  // TODO - rename this to apiBaseUrl
-  hostname: string; // This is not in the official GitHub API. We add this to make notification interactions easier.
+}
+
+// Note: This is not in the official GitHub API. We add this to make notification interactions easier.
+export interface GitifyNotification {
+  account: Account;
 }
 
 export type UserDetails = User & UserProfile;
@@ -259,6 +264,10 @@ export interface GitifySubject {
   state?: StateType;
   user?: SubjectUser;
   reviews?: GitifyPullRequestReview[];
+  linkedIssues?: string[];
+  comments?: number;
+  labels?: string[];
+  milestone?: Milestone;
 }
 
 export interface PullRequest {
@@ -280,6 +289,8 @@ export interface PullRequest {
   closed_at: string | null;
   merged_at: string | null;
   merge_commit_sha: string | null;
+  labels: Labels[];
+  milestone: Milestone | null;
   draft: boolean;
   commits_url: string;
   review_comments_url: string;
@@ -302,6 +313,16 @@ export interface PullRequest {
 export interface GitifyPullRequestReview {
   state: PullRequestReviewState;
   users: string[];
+}
+
+export interface Labels {
+  id: number;
+  node_id: string;
+  url: string;
+  name: string;
+  color: string;
+  default: boolean;
+  description: string;
 }
 
 export interface PullRequestReview {
@@ -402,6 +423,8 @@ export interface Issue {
   user: User;
   state: IssueStateType;
   locked: boolean;
+  labels: Labels[];
+  milestone: Milestone | null;
   comments: number;
   created_at: string;
   updated_at: string;
@@ -422,6 +445,27 @@ export interface IssueOrPullRequestComment {
   updated_at: string;
   body: string;
 }
+
+export interface Milestone {
+  url: string;
+  html_url: string;
+  labels_url: string;
+  id: number;
+  node_id: string;
+  number: number;
+  title: string;
+  description: string;
+  creator: User;
+  open_issues: number;
+  closed_issues: number;
+  state: MilestoneStateType;
+  created_at: string;
+  updated_at: string;
+  due_on: string | null;
+  closed_at: string | null;
+}
+
+type MilestoneStateType = 'open' | 'closed';
 
 export interface Release {
   url: string;
@@ -450,17 +494,26 @@ export interface GraphQLSearch<T> {
 }
 
 export interface Discussion {
-  viewerSubscription: ViewerSubscription;
   title: string;
   stateReason: DiscussionStateType;
   isAnswered: boolean;
   url: string;
   author: DiscussionAuthor;
   comments: DiscussionComments;
+  labels: DiscussionLabels | null;
+}
+
+export interface DiscussionLabels {
+  nodes: DiscussionLabel[];
+}
+
+export interface DiscussionLabel {
+  name: string;
 }
 
 export interface DiscussionComments {
   nodes: DiscussionComment[];
+  totalCount: number;
 }
 
 export interface DiscussionComment {
@@ -498,39 +551,4 @@ export interface NotificationThreadSubscription {
   created_at: string;
   url: string;
   thread_url: string;
-}
-
-export interface RootHypermediaLinks {
-  current_user_url: string;
-  current_user_authorizations_html_url: string;
-  authorizations_url: string;
-  code_search_url: string;
-  commit_search_url: string;
-  emails_url: string;
-  emojis_url: string;
-  events_url: string;
-  feeds_url: string;
-  followers_url: string;
-  following_url: string;
-  gists_url: string;
-  hub_url: string;
-  issue_search_url: string;
-  issues_url: string;
-  keys_url: string;
-  notifications_url: string;
-  organization_url: string;
-  organization_repositories_url: string;
-  organization_teams_url: string;
-  public_gists_url: string;
-  rate_limit_url: string;
-  repository_url: string;
-  repository_search_url: string;
-  current_user_repositories_url: string;
-  starred_url: string;
-  starred_gists_url: string;
-  topic_search_url: string;
-  user_url: string;
-  user_organizations_url: string;
-  user_repositories_url: string;
-  user_search_url: string;
 }

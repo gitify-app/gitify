@@ -1,16 +1,12 @@
 import { BrowserWindow } from '@electron/remote';
-
-import type {
-  AuthResponse,
-  AuthState,
-  AuthTokenResponse,
-  GitifyUser,
-} from '../types';
-import type { UserDetails } from '../typesGitHub';
-import { Constants } from '../utils/constants';
-import { getAuthenticatedUser } from './api/client';
-import { apiRequest } from './api/request';
-import { isEnterpriseHost } from './helpers';
+import { format } from 'date-fns';
+import type { Account, AuthState, GitifyUser } from '../../types';
+import type { UserDetails } from '../../typesGitHub';
+import { getAuthenticatedUser } from '../api/client';
+import { apiRequest } from '../api/request';
+import { Constants } from '../constants';
+import { getPlatformFromHostname } from '../helpers';
+import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
 
 export const authGitHub = (
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
@@ -111,28 +107,98 @@ export const getToken = async (
   };
 };
 
-export const addAccount = (
-  accounts: AuthState,
-  token,
-  hostname,
+export function addAccount(
+  auth: AuthState,
+  method: AuthMethod,
+  token: string,
+  hostname: string,
   user?: GitifyUser,
-): AuthState => {
-  if (!isEnterpriseHost(hostname)) {
-    return {
-      ...accounts,
-      token,
-      user: user ?? null,
-    };
-  }
-
+): AuthState {
   return {
-    ...accounts,
-    enterpriseAccounts: [
-      ...accounts.enterpriseAccounts,
+    accounts: [
+      ...auth.accounts,
       {
-        token,
         hostname: hostname,
+        method: method,
+        platform: getPlatformFromHostname(hostname),
+        token: token,
+        user: user,
       },
     ],
   };
-};
+}
+
+export function removeAccount(auth: AuthState, account: Account): AuthState {
+  const updatedAccounts = auth.accounts.filter(
+    (a) => a.token !== account.token,
+  );
+
+  return {
+    accounts: updatedAccounts,
+  };
+}
+
+export function getDeveloperSettingsURL(account: Account): string {
+  const settingsURL = new URL(`https://${account.hostname}`);
+
+  switch (account.method) {
+    case 'GitHub App':
+      settingsURL.pathname = '/settings/apps';
+      break;
+    case 'OAuth App':
+      settingsURL.pathname = '/settings/developers';
+      break;
+    case 'Personal Access Token':
+      settingsURL.pathname = 'settings/tokens';
+      break;
+  }
+  return settingsURL.toString();
+}
+
+export function getNewTokenURL(hostname: string): string {
+  const date = format(new Date(), 'PP p');
+  const newTokenURL = new URL(`https://${hostname}/settings/tokens/new`);
+  newTokenURL.searchParams.append('description', `Gitify (Created on ${date})`);
+  newTokenURL.searchParams.append('scopes', Constants.AUTH_SCOPE.join(','));
+
+  return newTokenURL.toString();
+}
+
+export function getNewOAuthAppURL(hostname: string): string {
+  const date = format(new Date(), 'PP p');
+  const newOAuthAppURL = new URL(
+    `https://${hostname}/settings/applications/new`,
+  );
+  newOAuthAppURL.searchParams.append(
+    'oauth_application[name]',
+    `Gitify (Created on ${date})`,
+  );
+  newOAuthAppURL.searchParams.append(
+    'oauth_application[url]',
+    'https://www.gitify.io',
+  );
+  newOAuthAppURL.searchParams.append(
+    'oauth_application[callback_url]',
+    'https://www.gitify.io/callback',
+  );
+
+  return newOAuthAppURL.toString();
+}
+
+export function isValidHostname(hostname: string) {
+  return /^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
+    hostname,
+  );
+}
+
+export function isValidClientId(clientId: string) {
+  return /^[A-Z0-9_]{20}$/i.test(clientId);
+}
+
+export function isValidToken(token: string) {
+  return /^[A-Z0-9_]{40}$/i.test(token);
+}
+
+export function getAccountUUID(account: Account): string {
+  return btoa(`${account.hostname}-${account.user.id}-${account.method}`);
+}

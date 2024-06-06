@@ -1,10 +1,13 @@
 import {
   BellSlashIcon,
   CheckIcon,
+  CommentIcon,
   FeedPersonIcon,
+  IssueClosedIcon,
+  MilestoneIcon,
   ReadIcon,
+  TagIcon,
 } from '@primer/octicons-react';
-import { formatDistanceToNow, parseISO } from 'date-fns';
 import {
   type FC,
   type KeyboardEvent,
@@ -14,9 +17,15 @@ import {
 } from 'react';
 
 import { AppContext } from '../context/App';
+import { IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
-import { formatForDisplay, openInBrowser } from '../utils/helpers';
+import Constants from '../utils/constants';
+import {
+  formatForDisplay,
+  formatNotificationUpdatedAt,
+  openInBrowser,
+} from '../utils/helpers';
 import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
@@ -31,8 +40,8 @@ interface IProps {
 
 export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const {
+    auth,
     settings,
-    accounts,
     removeNotificationFromState,
     markNotificationRead,
     markNotificationDone,
@@ -41,15 +50,15 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   } = useContext(AppContext);
 
   const openNotification = useCallback(() => {
-    openInBrowser(notification, accounts);
+    openInBrowser(notification);
 
     if (settings.markAsDoneOnOpen) {
       markNotificationDone(notification.id, hostname);
     } else {
       // no need to mark as read, github does it by default when opening it
-      removeNotificationFromState(notification.id, hostname);
+      removeNotificationFromState(settings, notification.id, hostname);
     }
-  }, [notifications, notification, accounts, settings]); // notifications required here to prevent weird state issues
+  }, [notifications, notification, auth, settings]); // notifications required here to prevent weird state issues
 
   const unsubscribeFromThread = (event: MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.
@@ -71,9 +80,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
   const NotificationIcon = getNotificationTypeIcon(notification.subject);
   const iconColor = getNotificationTypeIconColor(notification.subject);
 
-  const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
-    addSuffix: true,
-  });
+  const updatedAt = formatNotificationUpdatedAt(notification);
   const updatedLabel = notification.subject.user
     ? `${notification.subject.user.login} updated ${updatedAt}`
     : `Updated ${updatedAt}`;
@@ -83,80 +90,145 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     notification.subject.type,
   ]);
 
+  const commentsPillDescription = `${notification.subject.comments} ${
+    notification.subject.comments > 1 ? 'comments' : 'comment'
+  }`;
+
+  const labelsPillDescription = notification.subject.labels
+    ?.map((label) => `🏷️ ${label}`)
+    .join('\n');
+
+  const linkedIssuesPillDescription = `Linked to ${
+    notification.subject.linkedIssues?.length > 1 ? 'issues' : 'issue'
+  } ${notification.subject?.linkedIssues?.join(', ')}`;
+
   return (
-    <div className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group">
+    <div
+      id={notification.id}
+      className="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+    >
       <div
-        className={`flex justify-center items-center w-5 ${iconColor}`}
+        className={`flex justify-center items-center mr-3 w-5 ${iconColor}`}
         title={notificationTitle}
       >
         <NotificationIcon size={18} aria-label={notification.subject.type} />
       </div>
 
       <div
-        className="flex-1 overflow-hidden"
+        className="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         onClick={() => openNotification()}
         onKeyDown={() => openNotification()}
       >
         <div
-          className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          className="mb-1 text-sm truncate cursor-pointer"
           role="main"
           title={notification.subject.title}
         >
           {notification.subject.title}
         </div>
 
-        <div className="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden">
-          <span className="flex items-center">
-            <span title={updatedLabel} className="flex">
-              {notification.subject.user ? (
-                <span
-                  title="View User Profile"
-                  onClick={openUserProfile}
-                  onKeyDown={openUserProfile}
-                >
-                  <img
-                    className="rounded-full w-4 h-4 cursor-pointer"
-                    src={notification.subject.user.avatar_url}
-                    title={notification.subject.user.login}
-                    alt={`${notification.subject.user.login}'s avatar`}
-                  />
-                </span>
-              ) : (
-                <span>
-                  <FeedPersonIcon
-                    size={16}
-                    className="text-gray-500 dark:text-gray-300"
-                  />
+        <div className="flex flex-wrap items-center text-xs text-capitalize gap-1">
+          {notification.subject.user ? (
+            <div
+              title="View User Profile"
+              onClick={openUserProfile}
+              onKeyDown={openUserProfile}
+              className="flex-shrink-0"
+            >
+              <img
+                className="rounded-full w-4 h-4 object-cover cursor-pointer"
+                src={notification.subject.user.avatar_url}
+                title={notification.subject.user.login}
+                alt={`${notification.subject.user.login}'s avatar`}
+              />
+            </div>
+          ) : (
+            <div>
+              <FeedPersonIcon
+                size={16}
+                className="text-gray-500 dark:text-gray-300"
+              />
+            </div>
+          )}
+          <div title={reason.description}>{reason.title}</div>
+          <div title={updatedLabel}>{updatedAt}</div>
+          {settings.showPills && (
+            <div>
+              {notification.subject?.linkedIssues?.length > 0 && (
+                <span title={linkedIssuesPillDescription}>
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <IssueClosedIcon
+                      size={12}
+                      className={`mr-1 ${IconColor.GREEN}`}
+                      aria-label={linkedIssuesPillDescription}
+                    />
+                    {notification.subject.linkedIssues.length}
+                  </button>
                 </span>
               )}
-              <span className="ml-1" title={reason.description}>
-                {reason.title}
-              </span>
-              <span className="ml-1">{updatedAt}</span>
-              {notification.subject.reviews
-                ? notification.subject.reviews.map((review) => {
-                    const icon = getPullRequestReviewIcon(review);
-                    if (!icon) {
-                      return null;
-                    }
+              {notification.subject.reviews?.map((review) => {
+                const icon = getPullRequestReviewIcon(review);
+                if (!icon) {
+                  return null;
+                }
 
-                    return (
-                      <span
-                        key={review.state}
-                        title={icon.description}
-                        className="ml-1"
-                      >
-                        <icon.type
-                          size={16}
-                          className={icon.color}
-                          aria-label={icon.description}
-                        />
-                      </span>
-                    );
-                  })
-                : null}
-            </span>
-          </span>
+                return (
+                  <span key={review.state} title={icon.description}>
+                    <button type="button" className={Constants.PILL_CLASS_NAME}>
+                      <icon.type
+                        size={12}
+                        className={`mr-1 ${icon.color}`}
+                        aria-label={icon.description}
+                      />
+                      {review.users.length}
+                    </button>
+                  </span>
+                );
+              })}
+              {notification.subject?.comments > 0 && (
+                <span title={commentsPillDescription}>
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <CommentIcon
+                      size={12}
+                      className={`mr-1 ${IconColor.GRAY}`}
+                      aria-label={commentsPillDescription}
+                    />
+                    {notification.subject.comments}
+                  </button>
+                </span>
+              )}
+              {notification.subject?.labels?.length > 0 && (
+                <span title={labelsPillDescription}>
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <TagIcon
+                      size={12}
+                      className={`mr-1 ${IconColor.GRAY}`}
+                      aria-label={labelsPillDescription}
+                    />
+                    {notification.subject.labels.length}
+                  </button>
+                </span>
+              )}
+              {notification.subject.milestone && (
+                <span
+                  className="ml-1"
+                  title={notification.subject.milestone.title}
+                >
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <MilestoneIcon
+                      size={12}
+                      className={
+                        notification.subject.milestone.state === 'open'
+                          ? IconColor.GREEN
+                          : IconColor.RED
+                      }
+                      aria-label={notification.subject.milestone.title}
+                    />
+                  </button>
+                </span>
+              )}
+            </div>
+          )}
         </div>
       </div>
 

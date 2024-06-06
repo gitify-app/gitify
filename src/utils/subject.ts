@@ -1,6 +1,7 @@
 import type {
   CheckSuiteAttributes,
   CheckSuiteStatus,
+  DiscussionComment,
   DiscussionStateType,
   GitifyPullRequestReview,
   GitifySubject,
@@ -16,30 +17,29 @@ import {
   getCommitComment,
   getIssue,
   getIssueOrPullRequestComment,
+  getLatestDiscussion,
   getPullRequest,
   getPullRequestReviews,
   getRelease,
 } from './api/client';
-import { fetchDiscussion, getLatestDiscussionComment } from './helpers';
 
 export async function getGitifySubjectDetails(
   notification: Notification,
-  token: string,
 ): Promise<GitifySubject> {
   try {
     switch (notification.subject.type) {
       case 'CheckSuite':
         return getGitifySubjectForCheckSuite(notification);
       case 'Commit':
-        return getGitifySubjectForCommit(notification, token);
+        return getGitifySubjectForCommit(notification);
       case 'Discussion':
-        return await getGitifySubjectForDiscussion(notification, token);
+        return await getGitifySubjectForDiscussion(notification);
       case 'Issue':
-        return await getGitifySubjectForIssue(notification, token);
+        return await getGitifySubjectForIssue(notification);
       case 'PullRequest':
-        return await getGitifySubjectForPullRequest(notification, token);
+        return await getGitifySubjectForPullRequest(notification);
       case 'Release':
-        return await getGitifySubjectForRelease(notification, token);
+        return await getGitifySubjectForRelease(notification);
       case 'WorkflowRun':
         return getGitifySubjectForWorkflowRun(notification);
       default:
@@ -114,18 +114,22 @@ function getGitifySubjectForCheckSuite(
 
 async function getGitifySubjectForCommit(
   notification: Notification,
-  token: string,
 ): Promise<GitifySubject> {
   let user: User;
 
   if (notification.subject.latest_comment_url) {
     const commitComment = (
-      await getCommitComment(notification.subject.latest_comment_url, token)
+      await getCommitComment(
+        notification.subject.latest_comment_url,
+        notification.account.token,
+      )
     ).data;
 
     user = commitComment.user;
   } else {
-    const commit = (await getCommit(notification.subject.url, token)).data;
+    const commit = (
+      await getCommit(notification.subject.url, notification.account.token)
+    ).data;
 
     user = commit.author;
   }
@@ -143,9 +147,8 @@ async function getGitifySubjectForCommit(
 
 async function getGitifySubjectForDiscussion(
   notification: Notification,
-  token: string,
 ): Promise<GitifySubject> {
-  const discussion = await fetchDiscussion(notification, token);
+  const discussion = await getLatestDiscussion(notification);
   let discussionState: DiscussionStateType = 'OPEN';
 
   if (discussion) {
@@ -180,14 +183,33 @@ async function getGitifySubjectForDiscussion(
   return {
     state: discussionState,
     user: discussionUser,
+    comments: discussion.comments.totalCount,
+    labels: discussion.labels?.nodes.map((label) => label.name) ?? [],
   };
+}
+
+export function getLatestDiscussionComment(
+  comments: DiscussionComment[],
+): DiscussionComment | null {
+  if (!comments || comments.length === 0) {
+    return null;
+  }
+
+  // Return latest reply if available
+  if (comments[0].replies.nodes.length === 1) {
+    return comments[0].replies.nodes[0];
+  }
+
+  // Return latest comment if no replies
+  return comments[0];
 }
 
 async function getGitifySubjectForIssue(
   notification: Notification,
-  token: string,
 ): Promise<GitifySubject> {
-  const issue = (await getIssue(notification.subject.url, token)).data;
+  const issue = (
+    await getIssue(notification.subject.url, notification.account.token)
+  ).data;
 
   let issueCommentUser: User;
 
@@ -195,7 +217,7 @@ async function getGitifySubjectForIssue(
     const issueComment = (
       await getIssueOrPullRequestComment(
         notification.subject.latest_comment_url,
-        token,
+        notification.account.token,
       )
     ).data;
     issueCommentUser = issueComment.user;
@@ -209,14 +231,18 @@ async function getGitifySubjectForIssue(
       avatar_url: issueCommentUser?.avatar_url ?? issue.user.avatar_url,
       type: issueCommentUser?.type ?? issue.user.type,
     },
+    comments: issue.comments,
+    labels: issue.labels?.map((label) => label.name) ?? [],
+    milestone: issue.milestone,
   };
 }
 
 async function getGitifySubjectForPullRequest(
   notification: Notification,
-  token: string,
 ): Promise<GitifySubject> {
-  const pr = (await getPullRequest(notification.subject.url, token)).data;
+  const pr = (
+    await getPullRequest(notification.subject.url, notification.account.token)
+  ).data;
 
   let prState: PullRequestStateType = pr.state;
   if (pr.merged) {
@@ -234,13 +260,14 @@ async function getGitifySubjectForPullRequest(
     const prComment = (
       await getIssueOrPullRequestComment(
         notification.subject.latest_comment_url,
-        token,
+        notification.account.token,
       )
     ).data;
     prCommentUser = prComment.user;
   }
 
-  const reviews = await getLatestReviewForReviewers(notification, token);
+  const reviews = await getLatestReviewForReviewers(notification);
+  const linkedIssues = parseLinkedIssuesFromPrBody(pr.body);
 
   return {
     state: prState,
@@ -251,12 +278,15 @@ async function getGitifySubjectForPullRequest(
       type: prCommentUser?.type ?? pr.user.type,
     },
     reviews: reviews,
+    comments: pr.comments,
+    labels: pr.labels?.map((label) => label.name) ?? [],
+    linkedIssues: linkedIssues,
+    milestone: pr.milestone,
   };
 }
 
 export async function getLatestReviewForReviewers(
   notification: Notification,
-  token: string,
 ): Promise<GitifyPullRequestReview[]> | null {
   if (notification.subject.type !== 'PullRequest') {
     return null;
@@ -264,7 +294,7 @@ export async function getLatestReviewForReviewers(
 
   const prReviews = await getPullRequestReviews(
     `${notification.subject.url}/reviews`,
-    token,
+    notification.account.token,
   );
 
   if (!prReviews.data.length) {
@@ -306,11 +336,32 @@ export async function getLatestReviewForReviewers(
   });
 }
 
+export function parseLinkedIssuesFromPrBody(body: string): string[] {
+  const linkedIssues: string[] = [];
+
+  if (!body) {
+    return linkedIssues;
+  }
+
+  const regexPattern = /\s*#(\d+)\s*/gi;
+
+  const matches = body.matchAll(regexPattern);
+
+  for (const match of matches) {
+    if (match[0]) {
+      linkedIssues.push(match[0].trim());
+    }
+  }
+
+  return linkedIssues;
+}
+
 async function getGitifySubjectForRelease(
   notification: Notification,
-  token: string,
 ): Promise<GitifySubject> {
-  const release = (await getRelease(notification.subject.url, token)).data;
+  const release = (
+    await getRelease(notification.subject.url, notification.account.token)
+  ).data;
 
   return {
     state: null,

@@ -78,6 +78,8 @@ Please visit our [Gitify FAQs][faqs] for all commonly asked questions.
 
 Gitify is licensed under the MIT Open Source license. For more information, see [LICENSE](LICENSE).
 
+
+<!-- LINK LABELS -->
 [website]: https://www.gitify.io
 [faqs]: https://www.gitify.io/faqs
 [github]: https://github.com/gitify-app/gitify

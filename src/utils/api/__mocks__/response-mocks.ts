@@ -1,33 +1,19 @@
-import type {
-  AccountNotifications,
-  EnterpriseAccount,
-  GitifyUser,
-} from '../types';
+import {
+  mockGitHubCloudAccount,
+  mockGitHubEnterpriseServerAccount,
+} from '../../../__mocks__/state-mocks';
 import type {
   Discussion,
   DiscussionAuthor,
   DiscussionComments,
+  DiscussionLabels,
   GraphQLSearch,
   Notification,
   Repository,
   User,
-} from '../typesGitHub';
-import Constants from '../utils/constants';
+} from '../../../typesGitHub';
 
-export const mockedEnterpriseAccounts: EnterpriseAccount[] = [
-  {
-    hostname: 'github.gitify.io',
-    token: '1234568790',
-  },
-];
-
-export const mockedUser: GitifyUser = {
-  login: 'octocat',
-  name: 'Mona Lisa Octocat',
-  id: 123456789,
-};
-
-export const mockedNotificationUser: User = {
+export const mockNotificationUser: User = {
   login: 'octocat',
   id: 123456789,
   node_id: 'MDQ6VXNlcjE=',
@@ -49,10 +35,11 @@ export const mockedNotificationUser: User = {
 };
 
 // 2 Notifications
+// Hostname : 'github.com'
 // Repository : 'gitify-app/notifications-test'
-export const mockedGitHubNotifications: Notification[] = [
+export const mockGitHubNotifications: Notification[] = [
   {
-    hostname: Constants.GITHUB_API_BASE_URL,
+    account: mockGitHubCloudAccount,
     id: '138661096',
     unread: true,
     reason: 'subscribed',
@@ -200,7 +187,7 @@ export const mockedGitHubNotifications: Notification[] = [
       'https://api.github.com/notifications/threads/138661096/subscription',
   },
   {
-    hostname: Constants.GITHUB_API_BASE_URL,
+    account: mockGitHubCloudAccount,
     id: '148827438',
     unread: true,
     reason: 'author',
@@ -255,10 +242,11 @@ export const mockedGitHubNotifications: Notification[] = [
 ];
 
 // 2 Notifications
+// Hostname : 'github.gitify.io'
 // Repository : 'myorg/notifications-test'
-export const mockedEnterpriseNotifications: Notification[] = [
+export const mockEnterpriseNotifications: Notification[] = [
   {
-    hostname: 'https://github.gitify.io/api/v3',
+    account: mockGitHubEnterpriseServerAccount,
     id: '3',
     unread: true,
     reason: 'subscribed',
@@ -312,7 +300,7 @@ export const mockedEnterpriseNotifications: Notification[] = [
       'https://github.gitify.io/api/v3/notifications/threads/4/subscription',
   },
   {
-    hostname: 'https://github.gitify.io/api/v3',
+    account: mockGitHubEnterpriseServerAccount,
     id: '4',
     unread: true,
     reason: 'subscribed',
@@ -367,27 +355,6 @@ export const mockedEnterpriseNotifications: Notification[] = [
   },
 ];
 
-export const mockedSingleNotification: Notification =
-  mockedGitHubNotifications[0];
-
-export const mockedAccountNotifications: AccountNotifications[] = [
-  {
-    hostname: 'github.com',
-    notifications: mockedGitHubNotifications,
-  },
-  {
-    hostname: 'github.gitify.io',
-    notifications: mockedEnterpriseNotifications,
-  },
-];
-
-export const mockedSingleAccountNotifications: AccountNotifications[] = [
-  {
-    hostname: 'github.com',
-    notifications: [mockedSingleNotification],
-  },
-];
-
 const mockDiscussionAuthor: DiscussionAuthor = {
   login: 'comment-user',
   url: 'https://github.com/comment-user',
@@ -419,14 +386,22 @@ export const mockDiscussionComments: DiscussionComments = {
       },
     },
   ],
+  totalCount: 2,
 };
 
-export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
+export const mockDiscussionLabels: DiscussionLabels = {
+  nodes: [
+    {
+      name: 'enhancement',
+    },
+  ],
+};
+
+export const mockGraphQLResponse: GraphQLSearch<Discussion> = {
   data: {
     search: {
       nodes: [
         {
-          viewerSubscription: 'SUBSCRIBED',
           title: '1.16.0',
           isAnswered: false,
           stateReason: 'OPEN',
@@ -438,22 +413,11 @@ export const mockedGraphQLResponse: GraphQLSearch<Discussion> = {
             type: 'User',
           },
           comments: mockDiscussionComments,
-        },
-        {
-          viewerSubscription: 'IGNORED',
-          title: '1.16.0',
-          isAnswered: false,
-          stateReason: 'ANSWERED',
-          url: 'https://github.com/gitify-app/notifications-test/discussions/123',
-          author: {
-            login: 'discussion-creator',
-            url: 'https://github.com/discussion-creator',
-            avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
-            type: 'User',
-          },
-          comments: mockDiscussionComments,
+          labels: mockDiscussionLabels,
         },
       ],
     },
   },
 };
+
+export const mockSingleNotification: Notification = mockGitHubNotifications[0];

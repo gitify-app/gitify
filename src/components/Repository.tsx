@@ -1,8 +1,6 @@
 import { CheckIcon, MarkGithubIcon, ReadIcon } from '@primer/octicons-react';
-
 import { type FC, useCallback, useContext } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-
 import { AppContext } from '../context/App';
 import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
@@ -54,7 +52,7 @@ export const RepositoryNotifications: FC<IProps> = ({
             <MarkGithubIcon size={18} />
           )}
           <span
-            className="cursor-pointer"
+            className="cursor-pointer truncate"
             onClick={openBrowser}
             onKeyDown={openBrowser}
           >

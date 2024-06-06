@@ -1,9 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { ipcRenderer, shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
-import * as TestRenderer from 'react-test-renderer';
-const { shell, ipcRenderer } = require('electron');
-import { mockSettings } from '../__mocks__/mock-state';
-import { mockedAccountNotifications } from '../__mocks__/mockedData';
+import { mockAccountNotifications } from '../__mocks__/notifications-mocks';
+import { mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import { Sidebar } from './Sidebar';
 
@@ -29,11 +28,11 @@ describe('components/Sidebar.tsx', () => {
   });
 
   it('should render itself & its children (logged in)', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider
         value={{
           settings: mockSettings,
-          notifications: mockedAccountNotifications,
+          notifications: mockAccountNotifications,
         }}
       >
         <MemoryRouter>
@@ -45,9 +44,9 @@ describe('components/Sidebar.tsx', () => {
   });
 
   it('should render itself & its children (logged out)', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider
-        value={{ isLoggedIn: false, notifications: mockedAccountNotifications }}
+        value={{ isLoggedIn: false, notifications: mockAccountNotifications }}
       >
         <MemoryRouter>
           <Sidebar />
@@ -132,7 +131,7 @@ describe('components/Sidebar.tsx', () => {
       <AppContext.Provider
         value={{
           isLoggedIn: true,
-          notifications: mockedAccountNotifications,
+          notifications: mockAccountNotifications,
         }}
       >
         <MemoryRouter>
@@ -196,7 +195,7 @@ describe('components/Sidebar.tsx', () => {
         <AppContext.Provider
           value={{
             isLoggedIn: true,
-            notifications: mockedAccountNotifications,
+            notifications: mockAccountNotifications,
           }}
         >
           <MemoryRouter>

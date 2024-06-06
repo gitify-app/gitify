@@ -1,6 +1,5 @@
-import TestRenderer from 'react-test-renderer';
-
-import { mockedGitHubNotifications } from '../__mocks__/mockedData';
+import { render } from '@testing-library/react';
+import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
 import { AccountNotifications } from './AccountNotifications';
 
 jest.mock('./Repository', () => ({
@@ -11,11 +10,11 @@ describe('components/AccountNotifications.tsx', () => {
   it('should render itself (github.com with notifications)', () => {
     const props = {
       hostname: 'github.com',
-      notifications: mockedGitHubNotifications,
+      notifications: mockGitHubNotifications,
       showAccountHostname: true,
     };
 
-    const tree = TestRenderer.create(<AccountNotifications {...props} />);
+    const tree = render(<AccountNotifications {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
@@ -26,7 +25,7 @@ describe('components/AccountNotifications.tsx', () => {
       showAccountHostname: true,
     };
 
-    const tree = TestRenderer.create(<AccountNotifications {...props} />);
+    const tree = render(<AccountNotifications {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });
