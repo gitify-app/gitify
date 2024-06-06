@@ -173,18 +173,16 @@ export const SettingsRoute: FC = () => {
             }
             tooltip={
               <div>
-                <div className="pb-3">
-                  See
-                  <button
-                    type="button"
-                    className="text-blue-500 mx-1"
-                    title="Open GitHub documentation for participating and watching notifications"
-                    onClick={openGitHubParticipatingDocs}
-                  >
-                    official docs
-                  </button>
-                  for more details.
-                </div>
+                See
+                <button
+                  type="button"
+                  className="text-blue-500 mx-1"
+                  title="Open GitHub documentation for participating and watching notifications"
+                  onClick={openGitHubParticipatingDocs}
+                >
+                  official docs
+                </button>
+                for more details.
               </div>
             }
           />
@@ -227,11 +225,9 @@ export const SettingsRoute: FC = () => {
             }
             tooltip={
               <div>
-                <div className="pb-3">
-                  Keep the notification within Gitify window upon interaction
-                  (click, mark as read, mark as done, etc) until the next
-                  refresh window (scheduled or user initiated)
-                </div>
+                Keep the notification within Gitify window upon interaction
+                (click, mark as read, mark as done, etc) until the next refresh
+                window (scheduled or user initiated)
               </div>
             }
           />
