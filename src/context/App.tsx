@@ -9,6 +9,7 @@ import {
 import { useInterval } from '../hooks/useInterval';
 import { useNotifications } from '../hooks/useNotifications';
 import {
+  type Account,
   type AccountNotifications,
   type AuthState,
   type GitifyError,
@@ -27,6 +28,7 @@ import {
   authGitHub,
   getToken,
   getUserData,
+  removeAccount,
 } from '../utils/auth/utils';
 import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
 import Constants from '../utils/constants';
@@ -62,6 +64,7 @@ interface AppContextState {
   loginWithGitHubApp: () => void;
   loginWithOAuthApp: (data: LoginOAuthAppOptions) => void;
   loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => void;
+  logoutFromAccount: (account: Account) => void;
   logout: () => void;
 
   notifications: AccountNotifications[];
@@ -193,6 +196,15 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [auth, settings],
   );
 
+  const logoutFromAccount = useCallback(
+    async (account: Account) => {
+      const updatedAuth = removeAccount(auth, account);
+      setAuth(updatedAuth);
+      saveState({ auth: updatedAuth, settings });
+    },
+    [auth, settings],
+  );
+
   const logout = useCallback(() => {
     setAuth(defaultAuth);
     clearState();
@@ -256,6 +268,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         loginWithGitHubApp,
         loginWithOAuthApp,
         loginWithPersonalAccessToken,
+        logoutFromAccount,
         logout,
 
         notifications,

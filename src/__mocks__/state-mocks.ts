@@ -53,6 +53,14 @@ export const mockGitHubEnterpriseServerAccount: Account = {
   user: mockGitifyUser,
 };
 
+export const mockGitHubAppAccount: Account = {
+  platform: 'GitHub Cloud',
+  method: 'GitHub App',
+  token: '987654321',
+  hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
+  user: mockGitifyUser,
+};
+
 export const mockAuth: AuthState = {
   accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
 };

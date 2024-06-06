@@ -3,11 +3,8 @@ import {
   CheckIcon,
   CommentIcon,
   IssueClosedIcon,
-  KeyIcon,
   MilestoneIcon,
   PersonIcon,
-  PlusIcon,
-  SignOutIcon,
   TagIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
@@ -25,21 +22,13 @@ import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
 import { Theme } from '../types';
-import {
-  openExternalLink,
-  updateTrayIcon,
-  updateTrayTitle,
-} from '../utils/comms';
+import { openExternalLink } from '../utils/comms';
 import Constants from '../utils/constants';
-import {
-  isOAuthAppLoggedIn,
-  isPersonalAccessTokenLoggedIn,
-} from '../utils/helpers';
 import { isLinux, isMacOS } from '../utils/platform';
 import { setTheme } from '../utils/theme';
 
 export const SettingsRoute: FC = () => {
-  const { auth, settings, updateSetting, logout } = useContext(AppContext);
+  const { settings, updateSetting } = useContext(AppContext);
   const navigate = useNavigate();
 
   const [appVersion, setAppVersion] = useState<string | null>(null);
@@ -72,23 +61,8 @@ export const SettingsRoute: FC = () => {
     });
   }, []);
 
-  const logoutUser = useCallback(() => {
-    logout();
-    navigate(-1);
-    updateTrayIcon();
-    updateTrayTitle();
-  }, []);
-
   const quitApp = useCallback(() => {
     ipcRenderer.send('app-quit');
-  }, []);
-
-  const loginWithPersonalAccessToken = useCallback(() => {
-    return navigate('/login-personal-access-token', { replace: true });
-  }, []);
-
-  const loginWithOAuthApp = useCallback(() => {
-    return navigate('/login-oauth-app', { replace: true });
   }, []);
 
   const footerButtonClass =
@@ -330,33 +304,12 @@ export const SettingsRoute: FC = () => {
           <button
             type="button"
             className={footerButtonClass}
-            title="Login with Personal Access Token"
-            onClick={loginWithPersonalAccessToken}
-            hidden={isPersonalAccessTokenLoggedIn(auth)}
+            title="Accounts"
+            onClick={() => {
+              navigate('/accounts');
+            }}
           >
-            <KeyIcon size={18} aria-label="Login with Personal Access Token" />
-            <PlusIcon size={10} className="ml-1 mb-2" />
-          </button>
-
-          <button
-            type="button"
-            className={footerButtonClass}
-            title="Login with OAuth App"
-            onClick={loginWithOAuthApp}
-            hidden={isOAuthAppLoggedIn(auth)}
-          >
-            <PersonIcon size={20} aria-label="Login with OAuth App" />
-            <PlusIcon size={10} className="mb-2" />
-          </button>
-
-          <button
-            type="button"
-            className={footerButtonClass}
-            title="Logout"
-            role="button"
-            onClick={logoutUser}
-          >
-            <SignOutIcon size={18} aria-label="Logout" />
+            <PersonIcon size={18} aria-label="Accounts" />
           </button>
 
           <button

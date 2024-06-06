@@ -1,6 +1,6 @@
 import { BrowserWindow } from '@electron/remote';
 import { format } from 'date-fns';
-import type { AuthState, GitifyUser } from '../../types';
+import type { Account, AuthState, GitifyUser } from '../../types';
 import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
@@ -128,6 +128,33 @@ export function addAccount(
   };
 }
 
+export function removeAccount(auth: AuthState, account: Account): AuthState {
+  const updatedAccounts = auth.accounts.filter(
+    (a) => a.token !== account.token,
+  );
+
+  return {
+    accounts: updatedAccounts,
+  };
+}
+
+export function getDeveloperSettingsURL(account: Account): string {
+  const settingsURL = new URL(`https://${account.hostname}`);
+
+  switch (account.method) {
+    case 'GitHub App':
+      settingsURL.pathname = '/settings/apps';
+      break;
+    case 'OAuth App':
+      settingsURL.pathname = '/settings/developers';
+      break;
+    case 'Personal Access Token':
+      settingsURL.pathname = 'settings/tokens';
+      break;
+  }
+  return settingsURL.toString();
+}
+
 export function getNewTokenURL(hostname: string): string {
   const date = format(new Date(), 'PP p');
   const newTokenURL = new URL(`https://${hostname}/settings/tokens/new`);
@@ -170,4 +197,8 @@ export function isValidClientId(clientId: string) {
 
 export function isValidToken(token: string) {
   return /^[A-Z0-9_]{40}$/i.test(token);
+}
+
+export function getAccountUUID(account: Account): string {
+  return btoa(`${account.hostname}-${account.user.id}-${account.method}`);
 }
