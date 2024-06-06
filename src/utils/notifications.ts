@@ -1,5 +1,10 @@
 import { ipcRenderer } from 'electron';
-import type { AccountNotifications, AuthState, SettingsState } from '../types';
+import type {
+  AccountNotifications,
+  AuthState,
+  GitifyState,
+  SettingsState,
+} from '../types';
 import { Notification } from '../typesGitHub';
 import { openInBrowser } from '../utils/helpers';
 import { listNotificationsForAuthenticatedUser } from './api/client';
@@ -23,8 +28,7 @@ export function getNotificationCount(notifications: AccountNotifications[]) {
 export const triggerNativeNotifications = (
   previousNotifications: AccountNotifications[],
   newNotifications: AccountNotifications[],
-  settings: SettingsState,
-  auth: AuthState,
+  state: GitifyState,
 ) => {
   const diffNotifications = newNotifications
     .map((accountNotifications) => {
@@ -57,12 +61,12 @@ export const triggerNativeNotifications = (
     return;
   }
 
-  if (settings.playSound) {
+  if (state.settings.playSound) {
     raiseSoundNotification();
   }
 
-  if (settings.showNotifications) {
-    raiseNativeNotification(diffNotifications, auth);
+  if (state.settings.showNotifications) {
+    raiseNativeNotification(diffNotifications, state.auth);
   }
 };
 
@@ -107,20 +111,22 @@ export const raiseSoundNotification = () => {
   audio.play();
 };
 
-function getNotifications(auth: AuthState, settings: SettingsState) {
-  return auth.accounts.map((account) => {
+function getNotifications(state: GitifyState) {
+  return state.auth.accounts.map((account) => {
     return {
       account,
-      notifications: listNotificationsForAuthenticatedUser(account, settings),
+      notifications: listNotificationsForAuthenticatedUser(
+        account,
+        state.settings,
+      ),
     };
   });
 }
 
 export async function getAllNotifications(
-  auth: AuthState,
-  settings: SettingsState,
+  state: GitifyState,
 ): Promise<AccountNotifications[]> {
-  const responses = await Promise.all([...getNotifications(auth, settings)]);
+  const responses = await Promise.all([...getNotifications(state)]);
 
   const notifications: AccountNotifications[] = await Promise.all(
     responses
@@ -133,13 +139,9 @@ export async function getAllNotifications(
           }),
         );
 
-        notifications = await enrichNotifications(
-          notifications,
-          auth,
-          settings,
-        );
+        notifications = await enrichNotifications(notifications, state);
 
-        notifications = filterNotifications(notifications, settings);
+        notifications = filterNotifications(notifications, state.settings);
 
         return {
           account: accountNotifications.account,
@@ -153,10 +155,9 @@ export async function getAllNotifications(
 
 export async function enrichNotifications(
   notifications: Notification[],
-  auth: AuthState,
-  settings: SettingsState,
+  state: GitifyState,
 ): Promise<Notification[]> {
-  if (!settings.detailedNotifications) {
+  if (!state.settings.detailedNotifications) {
     return notifications;
   }
 
