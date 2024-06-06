@@ -43,6 +43,9 @@ const mb = menubar({
 mb.on('ready', () => {
   mb.app.setAppUserModelId('com.electron.gitify');
   mb.tray.setIgnoreDoubleClickEvents(true);
+
+  mb.hideWindow();
+
   // Force the window to retrieve its previous zoom factor
   mb.window.webContents.setZoomFactor(mb.window.webContents.getZoomFactor());
 
