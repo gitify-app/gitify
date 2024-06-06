@@ -503,19 +503,22 @@ describe('routes/Settings.tsx', () => {
       );
     });
 
-    it('should open account management', () => {
-      render(
-        <AppContext.Provider
-          value={{
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <MemoryRouter>
-            <SettingsRoute />
-          </MemoryRouter>
-        </AppContext.Provider>,
-      );
+    it('should open account management', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
       fireEvent.click(screen.getByTitle('Accounts'));
       expect(mockNavigate).toHaveBeenCalledWith('/accounts');
     });
