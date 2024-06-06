@@ -122,6 +122,31 @@ describe('routes/Settings.tsx', () => {
       );
     });
 
+    it('should toggle metric pills checkbox', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+              updateSetting,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      await screen.findByLabelText('Show notification metric pills');
+
+      fireEvent.click(screen.getByLabelText('Show notification metric pills'));
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith('showPills', false);
+    });
+
     it('should toggle account hostname checkbox', async () => {
       await act(async () => {
         render(

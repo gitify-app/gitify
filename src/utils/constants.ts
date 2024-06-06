@@ -25,7 +25,7 @@ export const Constants = {
   READ_CLASS_NAME: 'opacity-50 dark:opacity-50',
 
   PILL_CLASS_NAME:
-    'rounded-full text-xs px-2 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700',
+    'rounded-full text-xs px-1.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700',
 
   // GitHub Docs
   GITHUB_DOCS: {

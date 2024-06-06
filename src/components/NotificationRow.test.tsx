@@ -26,7 +26,11 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const tree = render(<NotificationRow {...props} />);
+    const tree = render(
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <NotificationRow {...props} />
+      </AppContext.Provider>,
+    );
     expect(tree).toMatchSnapshot();
   });
 
@@ -43,7 +47,11 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const tree = render(<NotificationRow {...props} />);
+    const tree = render(
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <NotificationRow {...props} />
+      </AppContext.Provider>,
+    );
     expect(tree).toMatchSnapshot();
   });
 
@@ -60,11 +68,42 @@ describe('components/NotificationRow.tsx', () => {
       hostname: 'github.com',
     };
 
-    const tree = render(<NotificationRow {...props} />);
+    const tree = render(
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <NotificationRow {...props} />
+      </AppContext.Provider>,
+    );
     expect(tree).toMatchSnapshot();
   });
 
   describe('notification pills / metrics', () => {
+    describe('showPills disabled', () => {
+      it('should not render any pills when showPills is disabled', async () => {
+        jest
+          .spyOn(global.Date, 'now')
+          .mockImplementation(() => new Date('2024').valueOf());
+
+        const mockNotification = mockSingleNotification;
+        mockNotification.subject.linkedIssues = ['#1'];
+
+        const props = {
+          notification: mockNotification,
+          hostname: 'github.com',
+        };
+
+        const tree = render(
+          <AppContext.Provider
+            value={{
+              settings: { ...mockSettings, showPills: false },
+            }}
+          >
+            <NotificationRow {...props} />
+          </AppContext.Provider>,
+        );
+        expect(tree).toMatchSnapshot();
+      });
+    });
+
     describe('linked issue pills', () => {
       it('should render issues pill when linked to one issue/pr', async () => {
         jest
@@ -79,7 +118,15 @@ describe('components/NotificationRow.tsx', () => {
           hostname: 'github.com',
         };
 
-        const tree = render(<NotificationRow {...props} />);
+        const tree = render(
+          <AppContext.Provider
+            value={{
+              settings: mockSettings,
+            }}
+          >
+            <NotificationRow {...props} />
+          </AppContext.Provider>,
+        );
         expect(tree).toMatchSnapshot();
       });
 
@@ -96,7 +143,15 @@ describe('components/NotificationRow.tsx', () => {
           hostname: 'github.com',
         };
 
-        const tree = render(<NotificationRow {...props} />);
+        const tree = render(
+          <AppContext.Provider
+            value={{
+              settings: mockSettings,
+            }}
+          >
+            <NotificationRow {...props} />
+          </AppContext.Provider>,
+        );
         expect(tree).toMatchSnapshot();
       });
     });
@@ -115,7 +170,15 @@ describe('components/NotificationRow.tsx', () => {
           hostname: 'github.com',
         };
 
-        const tree = render(<NotificationRow {...props} />);
+        const tree = render(
+          <AppContext.Provider
+            value={{
+              settings: mockSettings,
+            }}
+          >
+            <NotificationRow {...props} />
+          </AppContext.Provider>,
+        );
         expect(tree).toMatchSnapshot();
       });
 
@@ -132,7 +195,15 @@ describe('components/NotificationRow.tsx', () => {
           hostname: 'github.com',
         };
 
-        const tree = render(<NotificationRow {...props} />);
+        const tree = render(
+          <AppContext.Provider
+            value={{
+              settings: mockSettings,
+            }}
+          >
+            <NotificationRow {...props} />
+          </AppContext.Provider>,
+        );
         expect(tree).toMatchSnapshot();
       });
 
@@ -149,7 +220,15 @@ describe('components/NotificationRow.tsx', () => {
           hostname: 'github.com',
         };
 
-        const tree = render(<NotificationRow {...props} />);
+        const tree = render(
+          <AppContext.Provider
+            value={{
+              settings: mockSettings,
+            }}
+          >
+            <NotificationRow {...props} />
+          </AppContext.Provider>,
+        );
         expect(tree).toMatchSnapshot();
       });
     });
@@ -168,7 +247,15 @@ describe('components/NotificationRow.tsx', () => {
           hostname: 'github.com',
         };
 
-        const tree = render(<NotificationRow {...props} />);
+        const tree = render(
+          <AppContext.Provider
+            value={{
+              settings: mockSettings,
+            }}
+          >
+            <NotificationRow {...props} />
+          </AppContext.Provider>,
+        );
         expect(tree).toMatchSnapshot();
       });
     });
@@ -190,7 +277,15 @@ describe('components/NotificationRow.tsx', () => {
           hostname: 'github.com',
         };
 
-        const tree = render(<NotificationRow {...props} />);
+        const tree = render(
+          <AppContext.Provider
+            value={{
+              settings: mockSettings,
+            }}
+          >
+            <NotificationRow {...props} />
+          </AppContext.Provider>,
+        );
         expect(tree).toMatchSnapshot();
       });
 
@@ -210,7 +305,15 @@ describe('components/NotificationRow.tsx', () => {
           hostname: 'github.com',
         };
 
-        const tree = render(<NotificationRow {...props} />);
+        const tree = render(
+          <AppContext.Provider
+            value={{
+              settings: mockSettings,
+            }}
+          >
+            <NotificationRow {...props} />
+          </AppContext.Provider>,
+        );
         expect(tree).toMatchSnapshot();
       });
     });
@@ -304,12 +407,10 @@ describe('components/NotificationRow.tsx', () => {
         <AppContext.Provider
           value={{
             settings: { ...mockSettings, markAsDoneOnOpen: false },
-            auth: mockAuth,
+            markNotificationRead,
           }}
         >
-          <AppContext.Provider value={{ markNotificationRead }}>
-            <NotificationRow {...props} />
-          </AppContext.Provider>
+          <NotificationRow {...props} />
         </AppContext.Provider>,
       );
 
@@ -327,14 +428,9 @@ describe('components/NotificationRow.tsx', () => {
 
       render(
         <AppContext.Provider
-          value={{
-            settings: { ...mockSettings },
-            auth: mockAuth,
-          }}
+          value={{ settings: mockSettings, markNotificationDone }}
         >
-          <AppContext.Provider value={{ markNotificationDone }}>
-            <NotificationRow {...props} />
-          </AppContext.Provider>
+          <NotificationRow {...props} />
         </AppContext.Provider>,
       );
 
@@ -352,7 +448,9 @@ describe('components/NotificationRow.tsx', () => {
 
       render(
         <AppContext.Provider value={{}}>
-          <AppContext.Provider value={{ unsubscribeNotification }}>
+          <AppContext.Provider
+            value={{ settings: mockSettings, unsubscribeNotification }}
+          >
             <NotificationRow {...props} />
           </AppContext.Provider>
         </AppContext.Provider>,

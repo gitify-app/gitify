@@ -115,129 +115,126 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
       </div>
 
       <div
-        className="flex-1 overflow-hidden"
+        className="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
         onClick={() => openNotification()}
         onKeyDown={() => openNotification()}
       >
         <div
-          className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          className="mb-1 text-sm whitespace-nowrap cursor-pointer"
           role="main"
           title={notification.subject.title}
         >
           {notification.subject.title}
         </div>
 
-        <div className="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden">
-          <span className="flex items-center">
-            <span title={updatedLabel} className="flex">
-              {notification.subject.user ? (
-                <span
-                  title="View User Profile"
-                  onClick={openUserProfile}
-                  onKeyDown={openUserProfile}
-                >
-                  <img
-                    className="rounded-full w-4 h-4 cursor-pointer"
-                    src={notification.subject.user.avatar_url}
-                    title={notification.subject.user.login}
-                    alt={`${notification.subject.user.login}'s avatar`}
-                  />
-                </span>
-              ) : (
-                <span>
-                  <FeedPersonIcon
-                    size={16}
-                    className="text-gray-500 dark:text-gray-300"
-                  />
-                </span>
-              )}
-              <span className="ml-1" title={reason.description}>
-                {reason.title}
+        <div className="text-xs text-capitalize">
+          <span title={updatedLabel} className="flex items-center gap-1">
+            {notification.subject.user ? (
+              <span
+                title="View User Profile"
+                onClick={openUserProfile}
+                onKeyDown={openUserProfile}
+                className="flex-shrink-0"
+              >
+                <img
+                  className="rounded-full w-4 h-4 object-cover cursor-pointer"
+                  src={notification.subject.user.avatar_url}
+                  title={notification.subject.user.login}
+                  alt={`${notification.subject.user.login}'s avatar`}
+                />
               </span>
-              <span className="ml-1">{updatedAt}</span>
-              {notification.subject?.linkedIssues?.length > 0 && (
-                <span className="ml-1" title={linkedIssuesPillDescription}>
-                  <button type="button" className={Constants.PILL_CLASS_NAME}>
-                    <IssueClosedIcon
-                      size={12}
-                      className={`mr-1 ${IconColor.GREEN}`}
-                      aria-label={linkedIssuesPillDescription}
-                    />
-                    {notification.subject.linkedIssues.length}
-                  </button>
-                </span>
-              )}
-              {notification.subject.reviews
-                ? notification.subject.reviews.map((review) => {
-                    const icon = getPullRequestReviewIcon(review);
-                    if (!icon) {
-                      return null;
-                    }
-
-                    return (
-                      <span
-                        key={review.state}
-                        title={icon.description}
-                        className="ml-1"
-                      >
-                        <button
-                          type="button"
-                          className={Constants.PILL_CLASS_NAME}
-                        >
-                          <icon.type
-                            size={12}
-                            className={`mr-1 ${icon.color}`}
-                            aria-label={icon.description}
-                          />
-                          {review.users.length}
-                        </button>
-                      </span>
-                    );
-                  })
-                : null}
-              {notification.subject?.comments > 0 && (
-                <span className="ml-1" title={commentsPillDescription}>
-                  <button type="button" className={Constants.PILL_CLASS_NAME}>
-                    <CommentIcon
-                      size={12}
-                      className={`mr-1 ${IconColor.GRAY}`}
-                      aria-label={commentsPillDescription}
-                    />
-                    {notification.subject.comments}
-                  </button>
-                </span>
-              )}
-              {notification.subject?.labels?.length > 0 && (
-                <span className="ml-1" title={labelsPillDescription}>
-                  <button type="button" className={Constants.PILL_CLASS_NAME}>
-                    <TagIcon
-                      size={12}
-                      className={`mr-1 ${IconColor.GRAY}`}
-                      aria-label={labelsPillDescription}
-                    />
-                    {notification.subject.labels.length}
-                  </button>
-                </span>
-              )}
-              {notification.subject.milestone && (
-                <span
-                  className="ml-1"
-                  title={notification.subject.milestone.title}
-                >
-                  <button type="button" className={Constants.PILL_CLASS_NAME}>
-                    <MilestoneIcon
-                      size={12}
-                      className={
-                        notification.subject.milestone.state === 'open'
-                          ? IconColor.GREEN
-                          : IconColor.RED
+            ) : (
+              <span>
+                <FeedPersonIcon
+                  size={16}
+                  className="text-gray-500 dark:text-gray-300"
+                />
+              </span>
+            )}
+            <span title={reason.description}>{reason.title}</span>
+            <span>{updatedAt}</span>
+            {settings.showPills && (
+              <span className="hover:overflow-auto">
+                {notification.subject?.linkedIssues?.length > 0 && (
+                  <span title={linkedIssuesPillDescription}>
+                    <button type="button" className={Constants.PILL_CLASS_NAME}>
+                      <IssueClosedIcon
+                        size={12}
+                        className={`mr-1 ${IconColor.GREEN}`}
+                        aria-label={linkedIssuesPillDescription}
+                      />
+                      {notification.subject.linkedIssues.length}
+                    </button>
+                  </span>
+                )}
+                {notification.subject.reviews
+                  ? notification.subject.reviews.map((review) => {
+                      const icon = getPullRequestReviewIcon(review);
+                      if (!icon) {
+                        return null;
                       }
-                      aria-label={notification.subject.milestone.title}
-                    />
-                  </button>
-                </span>
-              )}
-            </span>
+
+                      return (
+                        <span key={review.state} title={icon.description}>
+                          <button
+                            type="button"
+                            className={Constants.PILL_CLASS_NAME}
+                          >
+                            <icon.type
+                              size={12}
+                              className={`mr-1 ${icon.color}`}
+                              aria-label={icon.description}
+                            />
+                            {review.users.length}
+                          </button>
+                        </span>
+                      );
+                    })
+                  : null}
+                {notification.subject?.comments > 0 && (
+                  <span title={commentsPillDescription}>
+                    <button type="button" className={Constants.PILL_CLASS_NAME}>
+                      <CommentIcon
+                        size={12}
+                        className={`mr-1 ${IconColor.GRAY}`}
+                        aria-label={commentsPillDescription}
+                      />
+                      {notification.subject.comments}
+                    </button>
+                  </span>
+                )}
+                {notification.subject?.labels?.length > 0 && (
+                  <span title={labelsPillDescription}>
+                    <button type="button" className={Constants.PILL_CLASS_NAME}>
+                      <TagIcon
+                        size={12}
+                        className={`mr-1 ${IconColor.GRAY}`}
+                        aria-label={labelsPillDescription}
+                      />
+                      {notification.subject.labels.length}
+                    </button>
+                  </span>
+                )}
+                {notification.subject.milestone && (
+                  <span
+                    className="ml-1"
+                    title={notification.subject.milestone.title}
+                  >
+                    <button type="button" className={Constants.PILL_CLASS_NAME}>
+                      <MilestoneIcon
+                        size={12}
+                        className={
+                          notification.subject.milestone.state === 'open'
+                            ? IconColor.GREEN
+                            : IconColor.RED
+                        }
+                        aria-label={notification.subject.milestone.title}
+                      />
+                    </button>
+                  </span>
+                )}
+              </span>
+            )}
           </span>
         </div>
       </div>

@@ -55,6 +55,7 @@ export const defaultSettings: SettingsState = {
   markAsDoneOnOpen: false,
   showAccountHostname: false,
   delayNotificationState: false,
+  showPills: true,
 };
 
 interface AppContextState {

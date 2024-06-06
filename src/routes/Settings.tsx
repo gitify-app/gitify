@@ -1,4 +1,13 @@
-import { ArrowLeftIcon, PersonIcon, XCircleIcon } from '@primer/octicons-react';
+import {
+  ArrowLeftIcon,
+  CheckIcon,
+  CommentIcon,
+  IssueClosedIcon,
+  MilestoneIcon,
+  PersonIcon,
+  TagIcon,
+  XCircleIcon,
+} from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
 import {
   type FC,
@@ -121,6 +130,41 @@ export const SettingsRoute: FC = () => {
             }
           />
           <Checkbox
+            name="showPills"
+            label="Show notification metric pills"
+            checked={settings.showPills}
+            onChange={(evt) => updateSetting('showPills', evt.target.checked)}
+            tooltip={
+              <div>
+                <div>Show notification metric pills for:</div>
+                <div className="pl-6">
+                  <ul className="list-disc">
+                    <li>
+                      <IssueClosedIcon size={16} className="pr-1" />
+                      linked issues
+                    </li>
+                    <li>
+                      <CheckIcon size={16} className="pr-1" /> pr reviews
+                    </li>
+                    <li>
+                      <CommentIcon size={16} className="pr-1" />
+                      comments
+                    </li>
+
+                    <li>
+                      <TagIcon size={16} className="pr-1" />
+                      labels
+                    </li>
+                    <li>
+                      <MilestoneIcon size={16} className="pr-1" />
+                      milestones
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            }
+          />
+          <Checkbox
             name="showAccountHostname"
             label="Show account hostname"
             checked={settings.showAccountHostname}
@@ -143,18 +187,16 @@ export const SettingsRoute: FC = () => {
             }
             tooltip={
               <div>
-                <div className="pb-3">
-                  See
-                  <button
-                    type="button"
-                    className="text-blue-500 mx-1"
-                    title="Open GitHub documentation for participating and watching notifications"
-                    onClick={openGitHubParticipatingDocs}
-                  >
-                    official docs
-                  </button>
-                  for more details.
-                </div>
+                See
+                <button
+                  type="button"
+                  className="text-blue-500 mx-1"
+                  title="Open GitHub documentation for participating and watching notifications"
+                  onClick={openGitHubParticipatingDocs}
+                >
+                  official docs
+                </button>
+                for more details.
               </div>
             }
           />
@@ -197,11 +239,9 @@ export const SettingsRoute: FC = () => {
             }
             tooltip={
               <div>
-                <div className="pb-3">
-                  Keep the notification within Gitify window upon interaction
-                  (click, mark as read, mark as done, etc) until the next
-                  refresh window (scheduled or user initiated)
-                </div>
+                Keep the notification within Gitify window upon interaction
+                (click, mark as read, mark as done, etc) until the next refresh
+                window (scheduled or user initiated)
               </div>
             }
           />
