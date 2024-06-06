@@ -1,9 +1,11 @@
 import {
   ArrowLeftIcon,
-  KeyIcon,
+  CheckIcon,
+  CommentIcon,
+  IssueClosedIcon,
+  MilestoneIcon,
   PersonIcon,
-  PlusIcon,
-  SignOutIcon,
+  TagIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
@@ -20,21 +22,13 @@ import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
 import { Theme } from '../types';
-import {
-  openExternalLink,
-  updateTrayIcon,
-  updateTrayTitle,
-} from '../utils/comms';
+import { openExternalLink } from '../utils/comms';
 import Constants from '../utils/constants';
-import {
-  isOAuthAppLoggedIn,
-  isPersonalAccessTokenLoggedIn,
-} from '../utils/helpers';
 import { isLinux, isMacOS } from '../utils/platform';
 import { setTheme } from '../utils/theme';
 
 export const SettingsRoute: FC = () => {
-  const { auth, settings, updateSetting, logout } = useContext(AppContext);
+  const { settings, updateSetting } = useContext(AppContext);
   const navigate = useNavigate();
 
   const [appVersion, setAppVersion] = useState<string | null>(null);
@@ -67,23 +61,8 @@ export const SettingsRoute: FC = () => {
     });
   }, []);
 
-  const logoutUser = useCallback(() => {
-    logout();
-    navigate(-1);
-    updateTrayIcon();
-    updateTrayTitle();
-  }, []);
-
   const quitApp = useCallback(() => {
     ipcRenderer.send('app-quit');
-  }, []);
-
-  const loginWithPersonalAccessToken = useCallback(() => {
-    return navigate('/login-personal-access-token', { replace: true });
-  }, []);
-
-  const loginWithOAuthApp = useCallback(() => {
-    return navigate('/login-oauth-app', { replace: true });
   }, []);
 
   const footerButtonClass =
@@ -151,6 +130,41 @@ export const SettingsRoute: FC = () => {
             }
           />
           <Checkbox
+            name="showPills"
+            label="Show notification metric pills"
+            checked={settings.showPills}
+            onChange={(evt) => updateSetting('showPills', evt.target.checked)}
+            tooltip={
+              <div>
+                <div>Show notification metric pills for:</div>
+                <div className="pl-6">
+                  <ul className="list-disc">
+                    <li>
+                      <IssueClosedIcon size={16} className="pr-1" />
+                      linked issues
+                    </li>
+                    <li>
+                      <CheckIcon size={16} className="pr-1" /> pr reviews
+                    </li>
+                    <li>
+                      <CommentIcon size={16} className="pr-1" />
+                      comments
+                    </li>
+
+                    <li>
+                      <TagIcon size={16} className="pr-1" />
+                      labels
+                    </li>
+                    <li>
+                      <MilestoneIcon size={16} className="pr-1" />
+                      milestones
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            }
+          />
+          <Checkbox
             name="showAccountHostname"
             label="Show account hostname"
             checked={settings.showAccountHostname}
@@ -173,18 +187,16 @@ export const SettingsRoute: FC = () => {
             }
             tooltip={
               <div>
-                <div className="pb-3">
-                  See
-                  <button
-                    type="button"
-                    className="text-blue-500 mx-1"
-                    title="Open GitHub documentation for participating and watching notifications"
-                    onClick={openGitHubParticipatingDocs}
-                  >
-                    official docs
-                  </button>
-                  for more details.
-                </div>
+                See
+                <button
+                  type="button"
+                  className="text-blue-500 mx-1"
+                  title="Open GitHub documentation for participating and watching notifications"
+                  onClick={openGitHubParticipatingDocs}
+                >
+                  official docs
+                </button>
+                for more details.
               </div>
             }
           />
@@ -227,11 +239,9 @@ export const SettingsRoute: FC = () => {
             }
             tooltip={
               <div>
-                <div className="pb-3">
-                  Keep the notification within Gitify window upon interaction
-                  (click, mark as read, mark as done, etc) until the next
-                  refresh window (scheduled or user initiated)
-                </div>
+                Keep the notification within Gitify window upon interaction
+                (click, mark as read, mark as done, etc) until the next refresh
+                window (scheduled or user initiated)
               </div>
             }
           />
@@ -294,33 +304,12 @@ export const SettingsRoute: FC = () => {
           <button
             type="button"
             className={footerButtonClass}
-            title="Login with Personal Access Token"
-            onClick={loginWithPersonalAccessToken}
-            hidden={isPersonalAccessTokenLoggedIn(auth)}
+            title="Accounts"
+            onClick={() => {
+              navigate('/accounts');
+            }}
           >
-            <KeyIcon size={18} aria-label="Login with Personal Access Token" />
-            <PlusIcon size={10} className="ml-1 mb-2" />
-          </button>
-
-          <button
-            type="button"
-            className={footerButtonClass}
-            title="Login with OAuth App"
-            onClick={loginWithOAuthApp}
-            hidden={isOAuthAppLoggedIn(auth)}
-          >
-            <PersonIcon size={20} aria-label="Login with OAuth App" />
-            <PlusIcon size={10} className="mb-2" />
-          </button>
-
-          <button
-            type="button"
-            className={footerButtonClass}
-            title="Logout"
-            role="button"
-            onClick={logoutUser}
-          >
-            <SignOutIcon size={18} aria-label="Logout" />
+            <PersonIcon size={18} aria-label="Accounts" />
           </button>
 
           <button

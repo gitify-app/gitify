@@ -152,81 +152,83 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
           )}
           <div title={reason.description}>{reason.title}</div>
           <div title={updatedLabel}>{updatedAt}</div>
-          <div>
-            {notification.subject?.linkedIssues?.length > 0 && (
-              <span title={linkedIssuesPillDescription}>
-                <button type="button" className={Constants.PILL_CLASS_NAME}>
-                  <IssueClosedIcon
-                    size={12}
-                    className={`mr-1 ${IconColor.GREEN}`}
-                    aria-label={linkedIssuesPillDescription}
-                  />
-                  {notification.subject.linkedIssues.length}
-                </button>
-              </span>
-            )}
-            {notification.subject.reviews?.map((review) => {
-              const icon = getPullRequestReviewIcon(review);
-              if (!icon) {
-                return null;
-              }
-
-              return (
-                <span key={review.state} title={icon.description}>
+          {settings.showPills && (
+            <div>
+              {notification.subject?.linkedIssues?.length > 0 && (
+                <span title={linkedIssuesPillDescription}>
                   <button type="button" className={Constants.PILL_CLASS_NAME}>
-                    <icon.type
+                    <IssueClosedIcon
                       size={12}
-                      className={`mr-1 ${icon.color}`}
-                      aria-label={icon.description}
+                      className={`mr-1 ${IconColor.GREEN}`}
+                      aria-label={linkedIssuesPillDescription}
                     />
-                    {review.users.length}
+                    {notification.subject.linkedIssues.length}
                   </button>
                 </span>
-              );
-            })}
-            {notification.subject?.comments > 0 && (
-              <span title={commentsPillDescription}>
-                <button type="button" className={Constants.PILL_CLASS_NAME}>
-                  <CommentIcon
-                    size={12}
-                    className={`mr-1 ${IconColor.GRAY}`}
-                    aria-label={commentsPillDescription}
-                  />
-                  {notification.subject.comments}
-                </button>
-              </span>
-            )}
-            {notification.subject?.labels?.length > 0 && (
-              <span title={labelsPillDescription}>
-                <button type="button" className={Constants.PILL_CLASS_NAME}>
-                  <TagIcon
-                    size={12}
-                    className={`mr-1 ${IconColor.GRAY}`}
-                    aria-label={labelsPillDescription}
-                  />
-                  {notification.subject.labels.length}
-                </button>
-              </span>
-            )}
-            {notification.subject.milestone && (
-              <span
-                className="ml-1"
-                title={notification.subject.milestone.title}
-              >
-                <button type="button" className={Constants.PILL_CLASS_NAME}>
-                  <MilestoneIcon
-                    size={12}
-                    className={
-                      notification.subject.milestone.state === 'open'
-                        ? IconColor.GREEN
-                        : IconColor.RED
-                    }
-                    aria-label={notification.subject.milestone.title}
-                  />
-                </button>
-              </span>
-            )}
-          </div>
+              )}
+              {notification.subject.reviews?.map((review) => {
+                const icon = getPullRequestReviewIcon(review);
+                if (!icon) {
+                  return null;
+                }
+
+                return (
+                  <span key={review.state} title={icon.description}>
+                    <button type="button" className={Constants.PILL_CLASS_NAME}>
+                      <icon.type
+                        size={12}
+                        className={`mr-1 ${icon.color}`}
+                        aria-label={icon.description}
+                      />
+                      {review.users.length}
+                    </button>
+                  </span>
+                );
+              })}
+              {notification.subject?.comments > 0 && (
+                <span title={commentsPillDescription}>
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <CommentIcon
+                      size={12}
+                      className={`mr-1 ${IconColor.GRAY}`}
+                      aria-label={commentsPillDescription}
+                    />
+                    {notification.subject.comments}
+                  </button>
+                </span>
+              )}
+              {notification.subject?.labels?.length > 0 && (
+                <span title={labelsPillDescription}>
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <TagIcon
+                      size={12}
+                      className={`mr-1 ${IconColor.GRAY}`}
+                      aria-label={labelsPillDescription}
+                    />
+                    {notification.subject.labels.length}
+                  </button>
+                </span>
+              )}
+              {notification.subject.milestone && (
+                <span
+                  className="ml-1"
+                  title={notification.subject.milestone.title}
+                >
+                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <MilestoneIcon
+                      size={12}
+                      className={
+                        notification.subject.milestone.state === 'open'
+                          ? IconColor.GREEN
+                          : IconColor.RED
+                      }
+                      aria-label={notification.subject.milestone.title}
+                    />
+                  </button>
+                </span>
+              )}
+            </div>
+          )}
         </div>
       </div>
 

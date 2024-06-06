@@ -1,12 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { ipcRenderer, shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
-import {
-  mockAuth,
-  mockOAuthAccount,
-  mockPersonalAccessTokenAccount,
-  mockSettings,
-} from '../__mocks__/state-mocks';
+import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { mockPlatform } from '../__mocks__/utils';
 import { AppContext } from '../context/App';
 import { SettingsRoute } from './Settings';
@@ -125,6 +120,31 @@ describe('routes/Settings.tsx', () => {
         'detailedNotifications',
         false,
       );
+    });
+
+    it('should toggle metric pills checkbox', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+              updateSetting,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      await screen.findByLabelText('Show notification metric pills');
+
+      fireEvent.click(screen.getByLabelText('Show notification metric pills'));
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith('showPills', false);
     });
 
     it('should toggle account hostname checkbox', async () => {
@@ -483,130 +503,21 @@ describe('routes/Settings.tsx', () => {
       );
     });
 
-    describe('Login with Personal Access Token', () => {
-      it('should show login with personal access token button if not logged in', async () => {
-        await act(async () => {
-          render(
-            <AppContext.Provider
-              value={{
-                auth: { accounts: [mockOAuthAccount] },
-                settings: mockSettings,
-              }}
-            >
-              <MemoryRouter>
-                <SettingsRoute />
-              </MemoryRouter>
-            </AppContext.Provider>,
-          );
-        });
-
-        expect(
-          screen.getByTitle('Login with Personal Access Token').hidden,
-        ).toBe(false);
-
-        fireEvent.click(screen.getByTitle('Login with Personal Access Token'));
-        expect(mockNavigate).toHaveBeenNthCalledWith(
-          1,
-          '/login-personal-access-token',
-          {
-            replace: true,
-          },
-        );
-      });
-
-      it('should hide login with personal access token button if already logged in', async () => {
-        await act(async () => {
-          render(
-            <AppContext.Provider
-              value={{
-                auth: { accounts: [mockPersonalAccessTokenAccount] },
-                settings: mockSettings,
-              }}
-            >
-              <MemoryRouter>
-                <SettingsRoute />
-              </MemoryRouter>
-            </AppContext.Provider>,
-          );
-        });
-
-        expect(
-          screen.getByTitle('Login with Personal Access Token').hidden,
-        ).toBe(true);
-      });
-    });
-
-    describe('Login with OAuth App', () => {
-      it('should show login with oauth app if not logged in', async () => {
-        await act(async () => {
-          render(
-            <AppContext.Provider
-              value={{
-                auth: { accounts: [mockPersonalAccessTokenAccount] },
-                settings: mockSettings,
-              }}
-            >
-              <MemoryRouter>
-                <SettingsRoute />
-              </MemoryRouter>
-            </AppContext.Provider>,
-          );
-        });
-
-        expect(screen.getByTitle('Login with OAuth App').hidden).toBe(false);
-
-        fireEvent.click(screen.getByTitle('Login with OAuth App'));
-        expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app', {
-          replace: true,
-        });
-      });
-
-      it('should hide login with oauth app route if already logged in', async () => {
-        await act(async () => {
-          render(
-            <AppContext.Provider
-              value={{
-                auth: { accounts: [mockOAuthAccount] },
-                settings: mockSettings,
-              }}
-            >
-              <MemoryRouter>
-                <SettingsRoute />
-              </MemoryRouter>
-            </AppContext.Provider>,
-          );
-        });
-
-        expect(screen.getByTitle('Login with OAuth App').hidden).toBe(true);
-      });
-    });
-
-    it('should press the logout', async () => {
-      const logoutMock = jest.fn();
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: mockAuth,
-              settings: mockSettings,
-              logout: logoutMock,
-            }}
-          >
-            <MemoryRouter>
-              <SettingsRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
-      });
-
-      fireEvent.click(screen.getByTitle('Logout'));
-
-      expect(logoutMock).toHaveBeenCalledTimes(1);
-
-      expect(ipcRenderer.send).toHaveBeenCalledTimes(2);
-      expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
-      expect(ipcRenderer.send).toHaveBeenCalledWith('update-title', '');
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
+    it('should open account management', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            auth: mockAuth,
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsRoute />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      fireEvent.click(screen.getByTitle('Accounts'));
+      expect(mockNavigate).toHaveBeenCalledWith('/accounts');
     });
 
     it('should quit the app', async () => {
