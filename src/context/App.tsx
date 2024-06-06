@@ -113,7 +113,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for certain account or setting changes.
   useEffect(() => {
-    fetchNotifications(auth, settings);
+    fetchNotifications({ auth, settings });
   }, [
     settings.participating,
     settings.showBots,
@@ -122,7 +122,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   ]);
 
   useInterval(() => {
-    fetchNotifications(auth, settings);
+    fetchNotifications({ auth, settings });
   }, Constants.FETCH_INTERVAL);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We need to update tray title when settings or notifications changes.
@@ -213,37 +213,37 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const fetchNotificationsWithAccounts = useCallback(
-    async () => await fetchNotifications(auth, settings),
+    async () => await fetchNotifications({ auth, settings }),
     [auth, settings, notifications],
   );
 
   const markNotificationReadWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await markNotificationRead(auth, settings, id, hostname),
+      await markNotificationRead({ auth, settings }, id, hostname),
     [auth, notifications],
   );
 
   const markNotificationDoneWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await markNotificationDone(auth, settings, id, hostname),
+      await markNotificationDone({ auth, settings }, id, hostname),
     [auth, notifications],
   );
 
   const unsubscribeNotificationWithAccounts = useCallback(
     async (id: string, hostname: string) =>
-      await unsubscribeNotification(auth, settings, id, hostname),
+      await unsubscribeNotification({ auth, settings }, id, hostname),
     [auth, notifications],
   );
 
   const markRepoNotificationsWithAccounts = useCallback(
     async (repoSlug: string, hostname: string) =>
-      await markRepoNotifications(auth, settings, repoSlug, hostname),
+      await markRepoNotifications({ auth, settings }, repoSlug, hostname),
     [auth, notifications],
   );
 
   const markRepoNotificationsDoneWithAccounts = useCallback(
     async (repoSlug: string, hostname: string) =>
-      await markRepoNotificationsDone(auth, settings, repoSlug, hostname),
+      await markRepoNotificationsDone({ auth, settings }, repoSlug, hostname),
     [auth, notifications],
   );
 

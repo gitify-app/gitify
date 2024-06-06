@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react';
 import type {
   AccountNotifications,
-  AuthState,
   GitifyError,
+  GitifyState,
   SettingsState,
   Status,
 } from '../types';
@@ -29,37 +29,29 @@ interface NotificationsState {
     id: string,
     hostname: string,
   ) => void;
-  fetchNotifications: (
-    auth: AuthState,
-    settings: SettingsState,
-  ) => Promise<void>;
+  fetchNotifications: (state: GitifyState) => Promise<void>;
   markNotificationRead: (
-    auth: AuthState,
-    settings: SettingsState,
+    state: GitifyState,
     id: string,
     hostname: string,
   ) => Promise<void>;
   markNotificationDone: (
-    auth: AuthState,
-    settings: SettingsState,
+    state: GitifyState,
     id: string,
     hostname: string,
   ) => Promise<void>;
   unsubscribeNotification: (
-    auth: AuthState,
-    settings: SettingsState,
+    state: GitifyState,
     id: string,
     hostname: string,
   ) => Promise<void>;
   markRepoNotifications: (
-    auth: AuthState,
-    settings: SettingsState,
+    state: GitifyState,
     repoSlug: string,
     hostname: string,
   ) => Promise<void>;
   markRepoNotificationsDone: (
-    auth: AuthState,
-    settings: SettingsState,
+    state: GitifyState,
     repoSlug: string,
     hostname: string,
   ) => Promise<void>;
@@ -76,19 +68,14 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const fetchNotifications = useCallback(
-    async (auth: AuthState, settings: SettingsState) => {
+    async (state: GitifyState) => {
       setStatus('loading');
 
       try {
-        const fetchedNotifications = await getAllNotifications(auth, settings);
+        const fetchedNotifications = await getAllNotifications(state);
 
         setNotifications(fetchedNotifications);
-        triggerNativeNotifications(
-          notifications,
-          fetchedNotifications,
-          settings,
-          auth,
-        );
+        triggerNativeNotifications(notifications, fetchedNotifications, state);
         setStatus('success');
       } catch (err) {
         setStatus('error');
@@ -99,21 +86,16 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markNotificationRead = useCallback(
-    async (
-      auth: AuthState,
-      settings: SettingsState,
-      id: string,
-      hostname: string,
-    ) => {
+    async (state: GitifyState, id: string, hostname: string) => {
       setStatus('loading');
 
-      const account = getAccountForHost(hostname, auth);
+      const account = getAccountForHost(hostname, state.auth);
 
       try {
         await markNotificationThreadAsRead(id, hostname, account.token);
 
         const updatedNotifications = removeNotification(
-          settings,
+          state.settings,
           id,
           notifications,
           hostname,
@@ -130,21 +112,16 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markNotificationDone = useCallback(
-    async (
-      auth: AuthState,
-      settings: SettingsState,
-      id: string,
-      hostname: string,
-    ) => {
+    async (state: GitifyState, id: string, hostname: string) => {
       setStatus('loading');
 
-      const account = getAccountForHost(hostname, auth);
+      const account = getAccountForHost(hostname, state.auth);
 
       try {
         await markNotificationThreadAsDone(id, hostname, account.token);
 
         const updatedNotifications = removeNotification(
-          settings,
+          state.settings,
           id,
           notifications,
           hostname,
@@ -161,19 +138,14 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const unsubscribeNotification = useCallback(
-    async (
-      auth: AuthState,
-      settings: SettingsState,
-      id: string,
-      hostname: string,
-    ) => {
+    async (state: GitifyState, id: string, hostname: string) => {
       setStatus('loading');
 
-      const account = getAccountForHost(hostname, auth);
+      const account = getAccountForHost(hostname, state.auth);
 
       try {
         await ignoreNotificationThreadSubscription(id, hostname, account.token);
-        await markNotificationRead(auth, settings, id, hostname);
+        await markNotificationRead(state, id, hostname);
         setStatus('success');
       } catch (err) {
         setStatus('success');
@@ -183,15 +155,10 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markRepoNotifications = useCallback(
-    async (
-      auth: AuthState,
-      settings: SettingsState,
-      repoSlug: string,
-      hostname: string,
-    ) => {
+    async (state: GitifyState, repoSlug: string, hostname: string) => {
       setStatus('loading');
 
-      const account = getAccountForHost(hostname, auth);
+      const account = getAccountForHost(hostname, state.auth);
 
       try {
         await markRepositoryNotificationsAsRead(
@@ -216,12 +183,7 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markRepoNotificationsDone = useCallback(
-    async (
-      auth: AuthState,
-      settings: SettingsState,
-      repoSlug: string,
-      hostname: string,
-    ) => {
+    async (state: GitifyState, repoSlug: string, hostname: string) => {
       setStatus('loading');
 
       try {
@@ -240,8 +202,7 @@ export const useNotifications = (): NotificationsState => {
           await Promise.all(
             notificationsToRemove.map((notification) =>
               markNotificationDone(
-                auth,
-                settings,
+                state,
                 notification.id,
                 notifications[accountIndex].account.hostname,
               ),

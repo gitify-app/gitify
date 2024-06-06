@@ -31,8 +31,10 @@ describe('utils/notifications.ts', () => {
     notificationsHelpers.triggerNativeNotifications(
       [],
       mockAccountNotifications,
-      settings,
-      mockAuth,
+      {
+        auth: mockAuth,
+        settings,
+      },
     );
 
     expect(notificationsHelpers.raiseNativeNotification).toHaveBeenCalledTimes(
@@ -56,8 +58,10 @@ describe('utils/notifications.ts', () => {
     notificationsHelpers.triggerNativeNotifications(
       [],
       mockAccountNotifications,
-      settings,
-      mockAuth,
+      {
+        auth: mockAuth,
+        settings,
+      },
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -77,8 +81,7 @@ describe('utils/notifications.ts', () => {
     notificationsHelpers.triggerNativeNotifications(
       mockSingleAccountNotifications,
       mockSingleAccountNotifications,
-      settings,
-      mockAuth,
+      { auth: mockAuth, settings },
     );
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
@@ -95,8 +98,14 @@ describe('utils/notifications.ts', () => {
     jest.spyOn(notificationsHelpers, 'raiseNativeNotification');
     jest.spyOn(notificationsHelpers, 'raiseSoundNotification');
 
-    notificationsHelpers.triggerNativeNotifications([], [], settings, mockAuth);
-    notificationsHelpers.triggerNativeNotifications([], [], settings, mockAuth);
+    notificationsHelpers.triggerNativeNotifications([], [], {
+      auth: mockAuth,
+      settings,
+    });
+    notificationsHelpers.triggerNativeNotifications([], [], {
+      auth: mockAuth,
+      settings,
+    });
 
     expect(notificationsHelpers.raiseNativeNotification).not.toHaveBeenCalled();
     expect(notificationsHelpers.raiseSoundNotification).not.toHaveBeenCalled();

@@ -1,6 +1,7 @@
 import {
   type Account,
   type AuthState,
+  type GitifyState,
   type GitifyUser,
   type SettingsState,
   Theme,
@@ -71,4 +72,9 @@ export const mockSettings: SettingsState = {
   markAsDoneOnOpen: false,
   showAccountHostname: false,
   delayNotificationState: false,
+};
+
+export const mockState: GitifyState = {
+  auth: mockAuth,
+  settings: mockSettings,
 };
