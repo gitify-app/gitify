@@ -41,6 +41,7 @@ interface AppearanceSettingsState {
   theme: Theme;
   detailedNotifications: boolean;
   showAccountHostname: boolean;
+  showPills: boolean;
 }
 
 interface NotificationSettingsState {
