@@ -1,5 +1,4 @@
 import {
-  AppsIcon,
   ArrowLeftIcon,
   KeyIcon,
   PersonIcon,
@@ -12,6 +11,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { AppContext } from '../context/App';
 
+import { AuthMethodIcon } from '../components/icons/AuthMethodIcon';
 import { PlatformIcon } from '../components/icons/PlatformIcon';
 import type { Account } from '../types';
 import { getAccountUUID, getDeveloperSettingsURL } from '../utils/auth/utils';
@@ -122,27 +122,7 @@ export const AccountsRoute: FC = () => {
                   title="Open Developer Settings"
                   onClick={() => openDeveloperSettings(account)}
                 >
-                  {account.method === 'GitHub App' ? (
-                    <AppsIcon
-                      size={12}
-                      aria-label="GitHub App"
-                      className="mr-1"
-                    />
-                  ) : null}
-                  {account.method === 'Personal Access Token' ? (
-                    <KeyIcon
-                      size={12}
-                      aria-label="Personal Access Token"
-                      className="mr-1"
-                    />
-                  ) : null}
-                  {account.method === 'OAuth App' ? (
-                    <PersonIcon
-                      size={12}
-                      aria-label="OAuth App"
-                      className="mr-1"
-                    />
-                  ) : null}
+                  <AuthMethodIcon type={account.method} size={12} />
                   {account.method}
                 </button>
               </div>
