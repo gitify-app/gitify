@@ -1,21 +1,22 @@
 import type { AccountNotifications, SettingsState } from '../types';
+import type { Notification } from '../typesGitHub';
 import Constants from './constants';
 
 export const removeNotification = (
   settings: SettingsState,
-  id: string,
+  notification: Notification,
   notifications: AccountNotifications[],
-  hostname: string,
 ): AccountNotifications[] => {
   if (settings.delayNotificationState) {
-    const notificationRow = document.getElementById(id);
+    const notificationRow = document.getElementById(notification.id);
     notificationRow.className += ` ${Constants.READ_CLASS_NAME}`;
     return notifications;
   }
 
+  // TODO Adam - FIX ME
   const accountIndex = notifications.findIndex(
     (accountNotifications) =>
-      accountNotifications.account.hostname === hostname,
+      accountNotifications.account.hostname === notification.account.hostname,
   );
 
   if (accountIndex !== -1) {
@@ -23,7 +24,7 @@ export const removeNotification = (
     updatedNotifications[accountIndex] = {
       ...updatedNotifications[accountIndex],
       notifications: updatedNotifications[accountIndex].notifications.filter(
-        (notification) => notification.id !== id,
+        (notif) => notif.id !== notification.id,
       ),
     };
     return updatedNotifications;

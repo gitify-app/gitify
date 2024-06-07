@@ -20,10 +20,6 @@ import {
   updateTrayIcon,
   updateTrayTitle,
 } from '../utils/comms';
-import {
-  isOAuthAppLoggedIn,
-  isPersonalAccessTokenLoggedIn,
-} from '../utils/helpers';
 
 export const AccountsRoute: FC = () => {
   const { auth, logoutFromAccount } = useContext(AppContext);
@@ -152,7 +148,6 @@ export const AccountsRoute: FC = () => {
             className={buttonClass}
             title="Login with Personal Access Token"
             onClick={loginWithPersonalAccessToken}
-            hidden={isPersonalAccessTokenLoggedIn(auth)}
           >
             <KeyIcon size={18} aria-label="Login with Personal Access Token" />
             <PlusIcon size={10} className="ml-1 mb-2" />
@@ -162,7 +157,6 @@ export const AccountsRoute: FC = () => {
             className={buttonClass}
             title="Login with OAuth App"
             onClick={loginWithOAuthApp}
-            hidden={isOAuthAppLoggedIn(auth)}
           >
             <PersonIcon size={20} aria-label="Login with OAuth App" />
             <PlusIcon size={10} className="mb-2" />

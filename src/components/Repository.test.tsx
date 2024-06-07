@@ -1,7 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { shell } from 'electron';
 import { AppContext } from '../context/App';
-import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
+import {
+  mockGitHubNotifications,
+  mockSingleNotification,
+} from '../utils/api/__mocks__/response-mocks';
 import { RepositoryNotifications } from './Repository';
 
 jest.mock('./NotificationRow', () => ({
@@ -57,10 +60,7 @@ describe('components/Repository.tsx', () => {
 
     fireEvent.click(screen.getByTitle('Mark Repository as Read'));
 
-    expect(markRepoNotifications).toHaveBeenCalledWith(
-      'gitify-app/notifications-test',
-      'github.com',
-    );
+    expect(markRepoNotifications).toHaveBeenCalledWith(mockSingleNotification);
   });
 
   it('should mark a repo as done', () => {
@@ -73,8 +73,7 @@ describe('components/Repository.tsx', () => {
     fireEvent.click(screen.getByTitle('Mark Repository as Done'));
 
     expect(markRepoNotificationsDone).toHaveBeenCalledWith(
-      'gitify-app/notifications-test',
-      'github.com',
+      mockSingleNotification,
     );
   });
 

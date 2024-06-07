@@ -26,13 +26,11 @@ export const RepositoryNotifications: FC<IProps> = ({
   }, [repoNotifications]);
 
   const markRepoAsRead = useCallback(() => {
-    const repoSlug = repoNotifications[0].repository.full_name;
-    markRepoNotifications(repoSlug, hostname);
+    markRepoNotifications(repoNotifications[0]);
   }, [repoNotifications, hostname]);
 
   const markRepoAsDone = useCallback(() => {
-    const repoSlug = repoNotifications[0].repository.full_name;
-    markRepoNotificationsDone(repoSlug, hostname);
+    markRepoNotificationsDone(repoNotifications[0]);
   }, [repoNotifications, hostname]);
 
   const avatarUrl = repoNotifications[0].repository.owner.avatar_url;

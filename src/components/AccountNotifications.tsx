@@ -1,15 +1,16 @@
 import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
+import type { Account } from '../types';
 import type { Notification } from '../typesGitHub';
 import { RepositoryNotifications } from './Repository';
 
 interface IProps {
-  hostname: string;
+  account: Account;
   notifications: Notification[];
   showAccountHostname: boolean;
 }
 
 export const AccountNotifications = (props: IProps) => {
-  const { hostname, showAccountHostname, notifications } = props;
+  const { account, showAccountHostname, notifications } = props;
 
   const groupedNotifications = Object.values(
     notifications.reduce(
@@ -29,7 +30,7 @@ export const AccountNotifications = (props: IProps) => {
     <>
       {showAccountHostname && (
         <div className="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm">
-          {hostname}
+          {account.hostname} - {account.user.login}
           <Chevron size={20} />
         </div>
       )}
@@ -40,7 +41,7 @@ export const AccountNotifications = (props: IProps) => {
         return (
           <RepositoryNotifications
             key={repoSlug}
-            hostname={hostname}
+            hostname={account.hostname}
             repoName={repoSlug}
             repoNotifications={repoNotifications}
           />
