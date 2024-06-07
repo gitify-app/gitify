@@ -2,10 +2,8 @@ import {
   AppsIcon,
   ArrowLeftIcon,
   KeyIcon,
-  MarkGithubIcon,
   PersonIcon,
   PlusIcon,
-  ServerIcon,
   SignOutIcon,
 } from '@primer/octicons-react';
 
@@ -14,6 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { AppContext } from '../context/App';
 
+import { PlatformIcon } from '../components/icons/PlatformIcon';
 import type { Account } from '../types';
 import { getAccountUUID, getDeveloperSettingsURL } from '../utils/auth/utils';
 import {
@@ -114,20 +113,7 @@ export const AccountsRoute: FC = () => {
                   title="Open Host"
                   onClick={() => openHost(account.hostname)}
                 >
-                  {account.platform === 'GitHub Cloud' ? (
-                    <MarkGithubIcon
-                      size={12}
-                      aria-label="GitHub Cloud"
-                      className="mr-1"
-                    />
-                  ) : null}
-                  {account.platform === 'GitHub Enterprise Server' ? (
-                    <ServerIcon
-                      size={12}
-                      aria-label="GitHub Enterprise Server"
-                      className="mr-1"
-                    />
-                  ) : null}
+                  <PlatformIcon type={account.platform} size={12} />
                   {account.platform} - {account.hostname}
                 </button>
                 <button
