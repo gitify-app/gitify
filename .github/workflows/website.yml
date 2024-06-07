@@ -10,9 +10,5 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Redeploy Website
-        env:
-          GH_TOKEN: ${{ secrets.GH_TOKEN }}
-        run: |
-          gh api repos/gitify-app/website/dispatches \
-            -f event_type=release_triggered
+        run: curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
         
