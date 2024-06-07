@@ -81,7 +81,7 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 
 <!-- LINK LABELS -->
 [website]: https://www.gitify.io
-[faqs]: https://www.gitify.io/faqs
+[faqs]: https://www.gitify.io/faq/
 [github]: https://github.com/gitify-app/gitify
 [github-actions]: https://github.com/gitify-app/gitify/actions
 [github-releases]: https://github.com/gitify-app/gitify/releases/latest
