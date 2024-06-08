@@ -1,10 +1,5 @@
 import { ipcRenderer, shell } from 'electron';
-import {
-  openExternalLink,
-  restoreSetting,
-  setAutoLaunch,
-  updateTrayIcon,
-} from './comms';
+import { openExternalLink, setAutoLaunch, updateTrayIcon } from './comms';
 
 describe('utils/comms.ts', () => {
   beforeEach(() => {
@@ -27,12 +22,6 @@ describe('utils/comms.ts', () => {
     updateTrayIcon(notificationsLength);
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
     expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
-  });
-
-  it('should restore a setting', () => {
-    restoreSetting('foo', 'bar');
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('foo', 'bar');
   });
 
   it('should open an external link', () => {

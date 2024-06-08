@@ -24,7 +24,3 @@ export function updateTrayIcon(notificationsLength = 0): void {
 export function updateTrayTitle(title = ''): void {
   ipcRenderer.send('update-title', title);
 }
-
-export function restoreSetting(setting, value): void {
-  ipcRenderer.send(setting, value);
-}
