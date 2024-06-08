@@ -95,8 +95,8 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
             type="button"
           >
             <span
-              aria-label="Personal Access Token"
               class="mr-1"
+              title="Personal Access Token"
             >
               <svg
                 aria-hidden="true"
@@ -194,8 +194,8 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
             type="button"
           >
             <span
-              aria-label="OAuth App"
               class="mr-1"
+              title="OAuth App"
             >
               <svg
                 aria-hidden="true"
@@ -293,8 +293,8 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
             type="button"
           >
             <span
-              aria-label="GitHub App"
               class="mr-1"
+              title="GitHub App"
             >
               <svg
                 aria-hidden="true"
