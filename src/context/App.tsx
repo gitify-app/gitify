@@ -112,7 +112,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    setTheme(settings.theme as Theme);
+    setTheme(settings.theme);
   }, [settings.theme]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for certain account or setting changes.
