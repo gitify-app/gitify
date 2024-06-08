@@ -4,7 +4,6 @@ import {
   hideWindow,
   openExternalLink,
   quitApp,
-  restoreSetting,
   setAutoLaunch,
   showWindow,
   updateTrayIcon,
