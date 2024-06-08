@@ -92,39 +92,44 @@ export const AccountsRoute: FC = () => {
               className="flex justify-between items-center bg-gray-100 dark:bg-gray-900 rounded-md p-1 mb-4"
             >
               <div className="ml-2 text-xs">
-                <button
-                  type="button"
-                  className="cursor-pointer font-semibold mb-1 text-sm"
-                  title="Open Profile"
-                  onClick={() => openProfile(account)}
-                >
-                  @{account.user.login}
-                  <span
-                    hidden={!account.user?.name}
-                    className="pl-1 font-medium text-xs italic"
+                <div>
+                  <button
+                    type="button"
+                    className="cursor-pointer font-semibold mb-1 text-sm"
+                    title="Open Profile"
+                    onClick={() => openProfile(account)}
                   >
-                    - {account.user?.name}
-                  </span>
-                </button>
-
-                <button
-                  type="button"
-                  className="cursor-pointer mb-1 ml-1 align-middle"
-                  title="Open Host"
-                  onClick={() => openHost(account.hostname)}
-                >
-                  <PlatformIcon type={account.platform} size={12} />
-                  {account.platform} - {account.hostname}
-                </button>
-                <button
-                  type="button"
-                  className="cursor-pointer ml-1 align-middle"
-                  title="Open Developer Settings"
-                  onClick={() => openDeveloperSettings(account)}
-                >
-                  <AuthMethodIcon type={account.method} size={12} />
-                  {account.method}
-                </button>
+                    @{account.user.login}
+                    <span
+                      hidden={!account.user?.name}
+                      className="pl-1 font-medium text-xs italic"
+                    >
+                      - {account.user?.name}
+                    </span>
+                  </button>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    className="cursor-pointer mb-1 ml-1 align-middle"
+                    title="Open Host"
+                    onClick={() => openHost(account.hostname)}
+                  >
+                    <PlatformIcon type={account.platform} size={12} />
+                    {account.platform} - {account.hostname}
+                  </button>
+                </div>
+                <div>
+                  <button
+                    type="button"
+                    className="cursor-pointer ml-1 align-middle"
+                    title="Open Developer Settings"
+                    onClick={() => openDeveloperSettings(account)}
+                  >
+                    <AuthMethodIcon type={account.method} size={12} />
+                    {account.method}
+                  </button>
+                </div>
               </div>
               <div>
                 <button
