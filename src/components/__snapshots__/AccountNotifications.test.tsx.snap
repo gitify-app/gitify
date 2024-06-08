@@ -10,8 +10,8 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
       >
         <div>
           <span
-            aria-label="GitHub Cloud"
             class="mr-1"
+            title="GitHub Cloud"
           >
             <svg
               aria-hidden="true"
@@ -64,8 +64,8 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
     >
       <div>
         <span
-          aria-label="GitHub Cloud"
           class="mr-1"
+          title="GitHub Cloud"
         >
           <svg
             aria-hidden="true"
@@ -175,8 +175,8 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
       >
         <div>
           <span
-            aria-label="GitHub Cloud"
             class="mr-1"
+            title="GitHub Cloud"
           >
             <svg
               aria-hidden="true"
@@ -226,8 +226,8 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
     >
       <div>
         <span
-          aria-label="GitHub Cloud"
           class="mr-1"
+          title="GitHub Cloud"
         >
           <svg
             aria-hidden="true"
