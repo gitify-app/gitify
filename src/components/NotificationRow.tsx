@@ -17,7 +17,7 @@ import {
 } from 'react';
 
 import { AppContext } from '../context/App';
-import { IconColor } from '../types';
+import { type Account, IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
 import Constants from '../utils/constants';
@@ -34,11 +34,11 @@ import {
 import { formatReason } from '../utils/reason';
 
 interface IProps {
-  hostname: string;
+  account: Account;
   notification: Notification;
 }
 
-export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
+export const NotificationRow: FC<IProps> = ({ notification, account }) => {
   const {
     auth,
     settings,

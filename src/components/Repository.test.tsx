@@ -1,5 +1,6 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { shell } from 'electron';
+import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import {
   mockGitHubNotifications,
@@ -16,7 +17,7 @@ describe('components/Repository.tsx', () => {
   const markRepoNotificationsDone = jest.fn();
 
   const props = {
-    hostname: 'github.com',
+    account: mockGitHubCloudAccount,
     repoName: 'gitify-app/notifications-test',
     repoNotifications: mockGitHubNotifications,
   };
