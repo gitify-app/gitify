@@ -79,7 +79,7 @@ interface AppContextState {
   markNotificationRead: (id: string, hostname: string) => Promise<void>;
   markNotificationDone: (id: string, hostname: string) => Promise<void>;
   unsubscribeNotification: (id: string, hostname: string) => Promise<void>;
-  markRepoNotifications: (id: string, hostname: string) => Promise<void>;
+  markRepoNotificationsRead: (id: string, hostname: string) => Promise<void>;
   markRepoNotificationsDone: (id: string, hostname: string) => Promise<void>;
 
   settings: SettingsState;
@@ -103,7 +103,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
-    markRepoNotifications,
+    markRepoNotificationsRead,
     markRepoNotificationsDone,
   } = useNotifications();
 
@@ -112,7 +112,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    setTheme(settings.theme as Theme);
+    setTheme(settings.theme);
   }, [settings.theme]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for certain account or setting changes.
@@ -248,9 +248,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [auth, notifications],
   );
 
-  const markRepoNotificationsWithAccounts = useCallback(
+  const markRepoNotificationsReadWithAccounts = useCallback(
     async (repoSlug: string, hostname: string) =>
-      await markRepoNotifications({ auth, settings }, repoSlug, hostname),
+      await markRepoNotificationsRead({ auth, settings }, repoSlug, hostname),
     [auth, notifications],
   );
 
@@ -279,7 +279,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         markNotificationRead: markNotificationReadWithAccounts,
         markNotificationDone: markNotificationDoneWithAccounts,
         unsubscribeNotification: unsubscribeNotificationWithAccounts,
-        markRepoNotifications: markRepoNotificationsWithAccounts,
+        markRepoNotificationsRead: markRepoNotificationsReadWithAccounts,
         markRepoNotificationsDone: markRepoNotificationsDoneWithAccounts,
 
         settings,

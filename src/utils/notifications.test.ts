@@ -1,5 +1,3 @@
-import { ipcRenderer } from 'electron';
-
 import {
   mockAccountNotifications,
   mockSingleAccountNotifications,
@@ -9,6 +7,7 @@ import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { defaultSettings } from '../context/App';
 import type { SettingsState } from '../types';
 import { mockGitHubNotifications } from './api/__mocks__/response-mocks';
+import * as comms from './comms';
 import * as helpers from './helpers';
 import * as notificationsHelpers from './notifications';
 import { filterNotifications } from './notifications';
@@ -112,6 +111,7 @@ describe('utils/notifications.ts', () => {
   });
 
   it('should click on a native notification (with 1 notification)', () => {
+    const hideWindowMock = jest.spyOn(comms, 'hideWindow');
     jest.spyOn(helpers, 'openInBrowser');
 
     const nativeNotification: Notification =
@@ -125,17 +125,19 @@ describe('utils/notifications.ts', () => {
     expect(helpers.openInBrowser).toHaveBeenLastCalledWith(
       mockGitHubNotifications[0],
     );
-    expect(ipcRenderer.send).toHaveBeenCalledWith('hide-window');
+    expect(hideWindowMock).toHaveBeenCalledTimes(1);
   });
 
   it('should click on a native notification (with more than 1 notification)', () => {
+    const showWindowMock = jest.spyOn(comms, 'showWindow');
+
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
       mockGitHubNotifications,
       mockAuth,
     );
     nativeNotification.onclick(null);
 
-    expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
+    expect(showWindowMock).toHaveBeenCalledTimes(1);
   });
 
   it('should play a sound', () => {

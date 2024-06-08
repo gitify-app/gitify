@@ -22,7 +22,7 @@ import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
 import { Theme } from '../types';
-import { openExternalLink } from '../utils/comms';
+import { getAppVersion, openExternalLink, quitApp } from '../utils/comms';
 import Constants from '../utils/constants';
 import { isLinux, isMacOS } from '../utils/platform';
 import { setTheme } from '../utils/theme';
@@ -50,20 +50,16 @@ export const SettingsRoute: FC = () => {
 
   useEffect(() => {
     (async () => {
-      const result = await ipcRenderer.invoke('get-app-version');
+      const result = await getAppVersion();
       setAppVersion(result);
     })();
 
-    ipcRenderer.on('update-native-theme', (_, updatedTheme: Theme) => {
+    ipcRenderer.on('gitify:update-theme', (_, updatedTheme: Theme) => {
       if (settings.theme === Theme.SYSTEM) {
         setTheme(updatedTheme);
       }
     });
-  }, []);
-
-  const quitApp = useCallback(() => {
-    ipcRenderer.send('app-quit');
-  }, []);
+  }, [settings.theme]);
 
   const footerButtonClass =
     'hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none';

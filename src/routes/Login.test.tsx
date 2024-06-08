@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { ipcRenderer } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
 import { AppContext } from '../context/App';
+import * as comms from '../utils/comms';
 import { LoginRoute } from './Login';
 
 const mockNavigate = jest.fn();
@@ -13,7 +13,6 @@ jest.mock('react-router-dom', () => ({
 describe('routes/Login.tsx', () => {
   beforeEach(() => {
     mockNavigate.mockReset();
-    jest.spyOn(ipcRenderer, 'send');
   });
 
   it('should render itself & its children', () => {
@@ -27,6 +26,8 @@ describe('routes/Login.tsx', () => {
   });
 
   it('should redirect to notifications once logged in', () => {
+    const showWindowMock = jest.spyOn(comms, 'showWindow');
+
     const { rerender } = render(
       <AppContext.Provider value={{ isLoggedIn: false }}>
         <MemoryRouter>
@@ -43,8 +44,7 @@ describe('routes/Login.tsx', () => {
       </AppContext.Provider>,
     );
 
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
+    expect(showWindowMock).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
   });
 
