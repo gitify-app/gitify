@@ -67,8 +67,8 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
             type="button"
           >
             <span
-              aria-label="GitHub Cloud"
               class="mr-1"
+              title="GitHub Cloud"
             >
               <svg
                 aria-hidden="true"
@@ -166,8 +166,8 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
             type="button"
           >
             <span
-              aria-label="GitHub Enterprise Server"
               class="mr-1"
+              title="GitHub Enterprise Server"
             >
               <svg
                 aria-hidden="true"
@@ -265,8 +265,8 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
             type="button"
           >
             <span
-              aria-label="GitHub Cloud"
               class="mr-1"
+              title="GitHub Cloud"
             >
               <svg
                 aria-hidden="true"
