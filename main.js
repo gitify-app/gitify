@@ -1,18 +1,17 @@
-const { ipcMain: ipc, app, nativeTheme } = require('electron');
+const { ipcMain: ipc, app, nativeTheme } = require('electron/main');
 const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('node:path');
 
-require('@electron/remote/main').initialize();
-
-const iconIdle = path.join(
+const idleIcon = path.join(
   __dirname,
   'assets',
   'images',
   'tray-idleTemplate.png',
 );
-const iconActive = path.join(__dirname, 'assets', 'images', 'tray-active.png');
+
+const activeIcon = path.join(__dirname, 'assets', 'images', 'tray-active.png');
 
 const browserWindowOpts = {
   width: 500,
@@ -28,48 +27,48 @@ const browserWindowOpts = {
   },
 };
 
-app.on('ready', async () => {
+app.whenReady().then(async () => {
   await onFirstRunMaybe();
-});
 
-const mb = menubar({
-  icon: iconIdle,
-  index: `file://${__dirname}/index.html`,
-  browserWindow: browserWindowOpts,
-  preloadWindow: true,
-  showDockIcon: false,
-});
-
-mb.on('ready', () => {
-  mb.app.setAppUserModelId('com.electron.gitify');
-  mb.tray.setIgnoreDoubleClickEvents(true);
-
-  mb.hideWindow();
-
-  // Force the window to retrieve its previous zoom factor
-  mb.window.webContents.setZoomFactor(mb.window.webContents.getZoomFactor());
-
-  mb.window.webContents.on('devtools-opened', () => {
-    mb.window.setSize(800, 600);
-    mb.window.center();
-    mb.window.resizable = true;
+  const mb = menubar({
+    icon: idleIcon,
+    index: `file://${__dirname}/index.html`,
+    browserWindow: browserWindowOpts,
+    preloadWindow: true,
+    showDockIcon: false,
   });
 
-  mb.window.webContents.on('devtools-closed', () => {
-    const trayBounds = mb.tray.getBounds();
-    mb.window.setSize(browserWindowOpts.width, browserWindowOpts.height);
-    mb.positioner.move('trayCenter', trayBounds);
-    mb.window.resizable = false;
-  });
+  mb.on('ready', () => {
+    autoUpdater.checkForUpdatesAndNotify();
 
-  mb.window.webContents.on('before-input-event', (event, input) => {
-    if (input.key === 'Escape') {
-      mb.window.hide();
-      event.preventDefault();
-    }
-  });
+    mb.app.setAppUserModelId('com.electron.gitify');
+    mb.tray.setIgnoreDoubleClickEvents(true);
 
-  autoUpdater.checkForUpdatesAndNotify();
+    mb.hideWindow();
+
+    // Force the window to retrieve its previous zoom factor
+    mb.window.webContents.setZoomFactor(mb.window.webContents.getZoomFactor());
+
+    mb.window.webContents.on('before-input-event', (event, input) => {
+      if (input.key === 'Escape') {
+        mb.window.hide();
+        event.preventDefault();
+      }
+    });
+
+    mb.window.webContents.on('devtools-opened', () => {
+      mb.window.setSize(800, 600);
+      mb.window.center();
+      mb.window.resizable = true;
+    });
+
+    mb.window.webContents.on('devtools-closed', () => {
+      const trayBounds = mb.tray.getBounds();
+      mb.window.setSize(browserWindowOpts.width, browserWindowOpts.height);
+      mb.positioner.move('trayCenter', trayBounds);
+      mb.window.resizable = false;
+    });
+  });
 
   nativeTheme.on('updated', () => {
     if (nativeTheme.shouldUseDarkColors) {
@@ -90,9 +89,9 @@ mb.on('ready', () => {
   ipc.on('update-icon', (_, arg) => {
     if (!mb.tray.isDestroyed()) {
       if (arg === 'TrayActive') {
-        mb.tray.setImage(iconActive);
+        mb.tray.setImage(activeIcon);
       } else {
-        mb.tray.setImage(iconIdle);
+        mb.tray.setImage(idleIcon);
       }
     }
   });
