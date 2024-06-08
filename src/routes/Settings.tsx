@@ -59,7 +59,7 @@ export const SettingsRoute: FC = () => {
         setTheme(updatedTheme);
       }
     });
-  }, []);
+  }, [settings.theme]);
 
   const quitApp = useCallback(() => {
     ipcRenderer.send('app-quit');
