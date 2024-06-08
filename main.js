@@ -77,34 +77,34 @@ app.whenReady().then(async () => {
       mb.window.webContents.send('gitify:update-theme', 'LIGHT');
     }
   });
-});
 
-ipc.handle('gitify:version', () => app.getVersion());
+  ipc.handle('gitify:version', () => app.getVersion());
 
-ipc.on('gitify:window-show', () => mb.showWindow());
+  ipc.on('gitify:window-show', () => mb.showWindow());
 
-ipc.on('gitify:window-hide', () => mb.hideWindow());
+  ipc.on('gitify:window-hide', () => mb.hideWindow());
 
-ipc.on('gitify:quit', () => mb.app.quit());
+  ipc.on('gitify:quit', () => mb.app.quit());
 
-ipc.on('gitify:icon-active', () => {
-  if (!mb.tray.isDestroyed()) {
-    mb.tray.setImage(iconActive);
-  }
-});
+  ipc.on('gitify:icon-active', () => {
+    if (!mb.tray.isDestroyed()) {
+      mb.tray.setImage(activeIcon);
+    }
+  });
 
-ipc.on('gitify:icon-idle', () => {
-  if (!mb.tray.isDestroyed()) {
-    mb.tray.setImage(iconIdle);
-  }
-});
+  ipc.on('gitify:icon-idle', () => {
+    if (!mb.tray.isDestroyed()) {
+      mb.tray.setImage(idleIcon);
+    }
+  });
 
-ipc.on('gitify:update-title', (_, title) => {
-  if (!mb.tray.isDestroyed()) {
-    mb.tray.setTitle(title);
-  }
-});
+  ipc.on('gitify:update-title', (_, title) => {
+    if (!mb.tray.isDestroyed()) {
+      mb.tray.setTitle(title);
+    }
+  });
 
-ipc.on('gitify:update-auto-launch', (_, settings) => {
-  app.setLoginItemSettings(settings);
+  ipc.on('gitify:update-auto-launch', (_, settings) => {
+    app.setLoginItemSettings(settings);
+  });
 });
