@@ -1,9 +1,10 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { ipcRenderer, shell } from 'electron';
+import { shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { mockPlatform } from '../__mocks__/utils';
 import { AppContext } from '../context/App';
+import * as comms from '../utils/comms';
 import { SettingsRoute } from './Settings';
 
 const mockNavigate = jest.fn();
@@ -524,6 +525,8 @@ describe('routes/Settings.tsx', () => {
     });
 
     it('should quit the app', async () => {
+      const quitAppMock = jest.spyOn(comms, 'quitApp');
+
       await act(async () => {
         render(
           <AppContext.Provider
@@ -540,7 +543,7 @@ describe('routes/Settings.tsx', () => {
       });
 
       fireEvent.click(screen.getByTitle('Quit Gitify'));
-      expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
+      expect(quitAppMock).toHaveBeenCalledTimes(1);
     });
   });
 });
