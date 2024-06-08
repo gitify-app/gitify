@@ -1,5 +1,6 @@
 import type { AccountNotifications, SettingsState } from '../types';
 import type { Notification } from '../typesGitHub';
+import { getAccountUUID } from './auth/utils';
 import Constants from './constants';
 
 export const removeNotification = (
@@ -13,10 +14,12 @@ export const removeNotification = (
     return notifications;
   }
 
-  // TODO Adam - FIX ME
+  const notificationId = notification.id;
+
   const accountIndex = notifications.findIndex(
     (accountNotifications) =>
-      accountNotifications.account.hostname === notification.account.hostname,
+      getAccountUUID(accountNotifications.account) ===
+      getAccountUUID(notification.account),
   );
 
   if (accountIndex !== -1) {
@@ -24,7 +27,7 @@ export const removeNotification = (
     updatedNotifications[accountIndex] = {
       ...updatedNotifications[accountIndex],
       notifications: updatedNotifications[accountIndex].notifications.filter(
-        (notif) => notif.id !== notification.id,
+        (notification) => notification.id !== notificationId,
       ),
     };
     return updatedNotifications;

@@ -7,6 +7,7 @@ import type {
   Status,
 } from '../types';
 import type { Notification } from '../typesGitHub';
+import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import {
   ignoreNotificationThreadSubscription,
   markNotificationThreadAsDone,
@@ -14,6 +15,7 @@ import {
   markRepositoryNotificationsAsRead,
 } from '../utils/api/client';
 import { determineFailureType } from '../utils/api/errors';
+import { getAccountUUID } from '../utils/auth/utils';
 import {
   getAllNotifications,
   setTrayIconColor,
@@ -166,9 +168,8 @@ export const useNotifications = (): NotificationsState => {
           notification.account.token,
         );
         const updatedNotifications = removeNotifications(
-          repoSlug,
+          mockSingleNotification,
           notifications,
-          hostname,
         );
 
         setNotifications(updatedNotifications);
@@ -186,13 +187,12 @@ export const useNotifications = (): NotificationsState => {
       setStatus('loading');
 
       const repoSlug = notification.repository.full_name;
-      const hostname = notification.account.hostname;
 
-      // TODO Adam - FIX ME
       try {
         const accountIndex = notifications.findIndex(
           (accountNotifications) =>
-            accountNotifications.account.hostname === hostname,
+            getAccountUUID(accountNotifications.account) ===
+            getAccountUUID(notification.account),
         );
 
         if (accountIndex !== -1) {
@@ -210,9 +210,8 @@ export const useNotifications = (): NotificationsState => {
         }
 
         const updatedNotifications = removeNotifications(
-          repoSlug,
+          notification,
           notifications,
-          hostname,
         );
 
         setNotifications(updatedNotifications);

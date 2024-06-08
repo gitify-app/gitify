@@ -6,16 +6,12 @@ import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import { removeNotifications } from './remove-notifications';
 
 describe('utils/remove-notifications.ts', () => {
-  const repoSlug = mockSingleNotification.repository.full_name;
-  const hostname = mockSingleAccountNotifications[0].account.hostname;
-
   it("should remove a repo's notifications - single", () => {
     expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
     const result = removeNotifications(
-      repoSlug,
+      mockSingleNotification,
       mockSingleAccountNotifications,
-      hostname,
     );
 
     expect(result[0].notifications.length).toBe(0);
@@ -26,9 +22,8 @@ describe('utils/remove-notifications.ts', () => {
     expect(mockAccountNotifications[1].notifications.length).toBe(2);
 
     const result = removeNotifications(
-      repoSlug,
+      mockSingleNotification,
       mockAccountNotifications,
-      hostname,
     );
 
     expect(result[0].notifications.length).toBe(0);
