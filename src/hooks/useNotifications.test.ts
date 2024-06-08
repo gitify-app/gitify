@@ -467,7 +467,7 @@ describe('hooks/useNotifications.ts', () => {
     });
   });
 
-  describe('markRepoNotifications', () => {
+  describe('markRepoNotificationsRead', () => {
     const hostname = 'github.com';
     const repoSlug = 'gitify-app/notifications-test';
 
@@ -479,7 +479,7 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markRepoNotifications(mockState, repoSlug, hostname);
+        result.current.markRepoNotificationsRead(mockState, repoSlug, hostname);
       });
 
       await waitFor(() => {
@@ -497,7 +497,7 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markRepoNotifications(mockState, repoSlug, hostname);
+        result.current.markRepoNotificationsRead(mockState, repoSlug, hostname);
       });
 
       await waitFor(() => {
