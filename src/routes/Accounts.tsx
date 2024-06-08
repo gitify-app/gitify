@@ -20,6 +20,7 @@ import {
   updateTrayIcon,
   updateTrayTitle,
 } from '../utils/comms';
+import { openProfile } from '../utils/helpers';
 
 export const AccountsRoute: FC = () => {
   const { auth, logoutFromAccount } = useContext(AppContext);
@@ -31,12 +32,6 @@ export const AccountsRoute: FC = () => {
     updateTrayIcon();
     updateTrayTitle();
   }, []);
-
-  const openProfile = (account: Account) => {
-    const url = new URL(`https://${account.hostname}`);
-    url.pathname = account.user.login;
-    openExternalLink(url.toString());
-  };
 
   const openHost = (hostname: string) => {
     openExternalLink(`https://${hostname}`);

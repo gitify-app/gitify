@@ -1,7 +1,9 @@
 import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
 import type { Account } from '../types';
 import type { Notification } from '../typesGitHub';
+import { openProfile } from '../utils/helpers';
 import { RepositoryNotifications } from './Repository';
+import { PlatformIcon } from './icons/PlatformIcon';
 
 interface IProps {
   account: Account;
@@ -29,9 +31,20 @@ export const AccountNotifications = (props: IProps) => {
   return (
     <>
       {showAccountHostname && (
-        <div className="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm">
-          {account.hostname} - {account.user.login}
-          <Chevron size={20} />
+        <div className="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm text-semibold">
+          <div>
+            <PlatformIcon type={account.platform} size={16} />
+            <button
+              type="button"
+              title="Open Profile"
+              onClick={() => openProfile(account)}
+            >
+              @{account.user.login}
+            </button>
+          </div>
+          <div>
+            <Chevron size={20} />
+          </div>
         </div>
       )}
 
