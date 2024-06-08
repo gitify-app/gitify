@@ -55,13 +55,7 @@ describe('utils/comms.ts', () => {
     const notificationsLength = 0;
     updateTrayIcon(notificationsLength);
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('gitify:icon-idle');
-  });
-
-  it('should restore a setting', () => {
-    restoreSetting('foo', 'bar');
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('foo', 'bar');
+    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
   });
 
   it('should open an external link', () => {

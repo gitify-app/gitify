@@ -59,7 +59,7 @@ export const SettingsRoute: FC = () => {
         setTheme(updatedTheme);
       }
     });
-  }, []);
+  }, [settings.theme]);
 
   const footerButtonClass =
     'hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none';
