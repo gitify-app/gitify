@@ -6,12 +6,7 @@ const path = require('node:path');
 
 require('@electron/remote/main').initialize();
 
-const iconIdle = path.join(
-  __dirname,
-  'assets',
-  'images',
-  'tray-idleTemplate.png',
-);
+const iconIdle = path.join(__dirname, 'assets', 'images', 'tray-idle.png');
 const iconActive = path.join(__dirname, 'assets', 'images', 'tray-active.png');
 
 const browserWindowOpts = {
