@@ -54,7 +54,7 @@ describe('utils/comms.ts', () => {
     const notificationsLength = 0;
     updateTrayIcon(notificationsLength);
     expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
+    expect(ipcRenderer.send).toHaveBeenCalledWith('gitify:icon-idle');
   });
 
   it('should open an external link', () => {
