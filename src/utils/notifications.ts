@@ -8,6 +8,7 @@ import type {
 import { Notification } from '../typesGitHub';
 import { openInBrowser } from '../utils/helpers';
 import { listNotificationsForAuthenticatedUser } from './api/client';
+import { getAccountUUID } from './auth/utils';
 import { updateTrayIcon } from './comms';
 import { isWindows } from './platform';
 import { getGitifySubjectDetails } from './subject';
@@ -34,7 +35,8 @@ export const triggerNativeNotifications = (
     .map((accountNotifications) => {
       const accountPreviousNotifications = previousNotifications.find(
         (item) =>
-          item.account.hostname === accountNotifications.account.hostname,
+          getAccountUUID(item.account) ===
+          getAccountUUID(accountNotifications.account),
       );
 
       if (!accountPreviousNotifications) {
