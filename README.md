@@ -42,11 +42,13 @@ The release process is automated. Follow the steps below.
 4. In the same branch, **bump the version** of the app by running `pnpm version <new-version-number`. Commit these changes and open a PR. A GitHub Actions workflow will build, sign and upload the release assets for each commit to that branch as long as a branch is named like `release/vX.X.X` and there is a draft release with the same version number(`package.json`).
 5. Merge your release branch into `main`.
 6. Publish the release once you've finalized the release notes and confirmed all assets are there.
-7. A new homebrew cask will be automatically published (workflow runs ~3 hours)
+7. A new homebrew cask will be automatically published (workflow runs ~3 hours) and 6ghg6g5
 
 ### Tests
 
-There are 2 checks - one for biome (linter & formatter) and one for the unit tests with `jest`.
+There are 2 checks:
+1. linter & formatter with [biome][biome-website]
+2. unit tests with [jest][jest-website]
 
 ```shell
 # Run biome to check linting and formatting
@@ -75,7 +77,8 @@ Please visit our [Gitify FAQs][faqs] for all commonly asked questions.
 
 ### License
 
-Gitify is licensed under the MIT Open Source license. For more information, see [LICENSE](LICENSE).
+Gitify is licensed under the MIT Open Source license. 
+For more information, see [LICENSE](LICENSE).
 
 
 <!-- LINK LABELS -->
@@ -89,6 +92,7 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 [github-website-pulls]: https://github.com/gitify-app/website/pulls
 [brew]: http://brew.sh/
 [homebrew-cask]: https://formulae.brew.sh/cask/gitify
+[biome-website]: biomejs.dev/
 [coveralls]: https://coveralls.io/github/gitify-app/gitify
 [coveralls-badge]: https://img.shields.io/coverallsCoverage/github/gitify-app/gitify
 [build-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/build-app.yml/badge.svg
@@ -100,5 +104,6 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 [license-badge]: https://img.shields.io/github/license/gitify-app/gitify
 [github-release-badge]: https://img.shields.io/github/v/release/gitify-app/gitify
 [homebrew-cask-badge]: https://img.shields.io/homebrew/cask/v/gitify
+[jest-website]: https://jestjs.io/
 [renovate]: https://renovatebot.com/
 [renovate-badge]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg
