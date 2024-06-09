@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { shell } from 'electron';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import type { Milestone, UserType } from '../typesGitHub';
 import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
+import * as comms from '../utils/comms';
 import * as helpers from '../utils/helpers';
 import { NotificationRow } from './NotificationRow';
 
@@ -460,6 +460,8 @@ describe('components/NotificationRow.tsx', () => {
     });
 
     it('should open notification user profile', () => {
+      const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
       const props = {
         notification: {
           ...mockSingleNotification,
@@ -490,8 +492,8 @@ describe('components/NotificationRow.tsx', () => {
       );
 
       fireEvent.click(screen.getByTitle('View User Profile'));
-      expect(shell.openExternal).toHaveBeenCalledTimes(1);
-      expect(shell.openExternal).toHaveBeenCalledWith(
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
         props.notification.subject.user.html_url,
       );
     });
