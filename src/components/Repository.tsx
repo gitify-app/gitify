@@ -3,7 +3,7 @@ import { type FC, useCallback, useContext } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AppContext } from '../context/App';
 import type { Notification } from '../typesGitHub';
-import { openExternalLink } from '../utils/comms';
+import { openRepository } from '../utils/links';
 import { NotificationRow } from './NotificationRow';
 
 interface IProps {
@@ -19,11 +19,6 @@ export const RepositoryNotifications: FC<IProps> = ({
 }) => {
   const { markRepoNotificationsRead, markRepoNotificationsDone } =
     useContext(AppContext);
-
-  const openBrowser = useCallback(() => {
-    const url = repoNotifications[0].repository.html_url;
-    openExternalLink(url);
-  }, [repoNotifications]);
 
   const markRepoAsRead = useCallback(() => {
     const repoSlug = repoNotifications[0].repository.full_name;
@@ -53,8 +48,8 @@ export const RepositoryNotifications: FC<IProps> = ({
           )}
           <span
             className="cursor-pointer truncate"
-            onClick={openBrowser}
-            onKeyDown={openBrowser}
+            onClick={() => openRepository(repoNotifications[0].repository)}
+            onKeyDown={() => openRepository(repoNotifications[0].repository)}
           >
             {repoName}
           </span>
