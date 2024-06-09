@@ -42,7 +42,7 @@ The release process is automated. Follow the steps below.
 4. In the same branch, **bump the version** of the app by running `pnpm version <new-version-number`. Commit these changes and open a PR. A GitHub Actions workflow will build, sign and upload the release assets for each commit to that branch as long as a branch is named like `release/vX.X.X` and there is a draft release with the same version number(`package.json`).
 5. Merge your release branch into `main`.
 6. Publish the release once you've finalized the release notes and confirmed all assets are there.
-7. A new homebrew cask will be automatically published (workflow runs ~3 hours) and 6ghg6g5
+7. A new homebrew cask will be automatically published (workflow runs ~3 hours)
 
 ### Tests
 
