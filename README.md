@@ -46,7 +46,9 @@ The release process is automated. Follow the steps below.
 
 ### Tests
 
-There are 2 checks - one for biome (linter & formatter) and one for the unit tests with `jest`.
+There are 2 checks:
+1. linter & formatter with [biome][biome-website]
+2. unit tests with [jest][jest-website]
 
 ```shell
 # Run biome to check linting and formatting
@@ -75,7 +77,8 @@ Please visit our [Gitify FAQs][faqs] for all commonly asked questions.
 
 ### License
 
-Gitify is licensed under the MIT Open Source license. For more information, see [LICENSE](LICENSE).
+Gitify is licensed under the MIT Open Source license. 
+For more information, see [LICENSE](LICENSE).
 
 
 <!-- LINK LABELS -->
@@ -89,6 +92,7 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 [github-website-pulls]: https://github.com/gitify-app/website/pulls
 [brew]: http://brew.sh/
 [homebrew-cask]: https://formulae.brew.sh/cask/gitify
+[biome-website]: biomejs.dev/
 [coveralls]: https://coveralls.io/github/gitify-app/gitify
 [coveralls-badge]: https://img.shields.io/coverallsCoverage/github/gitify-app/gitify
 [build-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/build-app.yml/badge.svg
@@ -100,5 +104,6 @@ Gitify is licensed under the MIT Open Source license. For more information, see 
 [license-badge]: https://img.shields.io/github/license/gitify-app/gitify
 [github-release-badge]: https://img.shields.io/github/v/release/gitify-app/gitify
 [homebrew-cask-badge]: https://img.shields.io/homebrew/cask/v/gitify
+[jest-website]: https://jestjs.io/
 [renovate]: https://renovatebot.com/
 [renovate-badge]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg
