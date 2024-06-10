@@ -43,7 +43,7 @@ interface NotificationsState {
     state: GitifyState,
     notification: Notification,
   ) => Promise<void>;
-  markRepoNotifications: (
+  markRepoNotificationsRead: (
     state: GitifyState,
     notification: Notification,
   ) => Promise<void>;
@@ -154,7 +154,7 @@ export const useNotifications = (): NotificationsState => {
     [notifications],
   );
 
-  const markRepoNotifications = useCallback(
+  const markRepoNotificationsRead = useCallback(
     async (state: GitifyState, notification: Notification) => {
       setStatus('loading');
 
@@ -248,7 +248,7 @@ export const useNotifications = (): NotificationsState => {
     markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
-    markRepoNotifications,
+    markRepoNotificationsRead,
     markRepoNotificationsDone,
   };
 };

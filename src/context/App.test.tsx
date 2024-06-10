@@ -46,7 +46,7 @@ describe('context/App.tsx', () => {
     const markNotificationReadMock = jest.fn();
     const markNotificationDoneMock = jest.fn();
     const unsubscribeNotificationMock = jest.fn();
-    const markRepoNotificationsMock = jest.fn();
+    const markRepoNotificationsReadMock = jest.fn();
     const markRepoNotificationsDoneMock = jest.fn();
 
     const mockDefaultState = {
@@ -60,7 +60,7 @@ describe('context/App.tsx', () => {
         markNotificationRead: markNotificationReadMock,
         markNotificationDone: markNotificationDoneMock,
         unsubscribeNotification: unsubscribeNotificationMock,
-        markRepoNotifications: markRepoNotificationsMock,
+        markRepoNotificationsRead: markRepoNotificationsReadMock,
         markRepoNotificationsDone: markRepoNotificationsDoneMock,
       });
     });
@@ -196,14 +196,14 @@ describe('context/App.tsx', () => {
       );
     });
 
-    it('should call markRepoNotifications', async () => {
+    it('should call markRepoNotificationsRead', async () => {
       const TestComponent = () => {
-        const { markRepoNotifications } = useContext(AppContext);
+        const { markRepoNotificationsRead } = useContext(AppContext);
 
         return (
           <button
             type="button"
-            onClick={() => markRepoNotifications(mockSingleNotification)}
+            onClick={() => markRepoNotificationsRead(mockSingleNotification)}
           >
             Test Case
           </button>
@@ -212,12 +212,12 @@ describe('context/App.tsx', () => {
 
       const { getByText } = customRender(<TestComponent />);
 
-      markRepoNotificationsMock.mockReset();
+      markRepoNotificationsReadMock.mockReset();
 
       fireEvent.click(getByText('Test Case'));
 
-      expect(markRepoNotificationsMock).toHaveBeenCalledTimes(1);
-      expect(markRepoNotificationsMock).toHaveBeenCalledWith(
+      expect(markRepoNotificationsReadMock).toHaveBeenCalledTimes(1);
+      expect(markRepoNotificationsReadMock).toHaveBeenCalledWith(
         mockDefaultState,
         mockSingleNotification,
       );

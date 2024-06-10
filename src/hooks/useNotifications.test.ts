@@ -470,7 +470,7 @@ describe('hooks/useNotifications.ts', () => {
     });
   });
 
-  describe('markRepoNotifications', () => {
+  describe('markRepoNotificationsRead', () => {
     const repoSlug = 'gitify-app/notifications-test';
 
     it("should mark a repository's notifications as read with success", async () => {
@@ -481,7 +481,10 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markRepoNotifications(mockState, mockSingleNotification);
+        result.current.markRepoNotificationsRead(
+          mockState,
+          mockSingleNotification,
+        );
       });
 
       await waitFor(() => {
@@ -499,7 +502,10 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markRepoNotifications(mockState, mockSingleNotification);
+        result.current.markRepoNotificationsRead(
+          mockState,
+          mockSingleNotification,
+        );
       });
 
       await waitFor(() => {

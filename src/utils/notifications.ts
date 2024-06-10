@@ -1,4 +1,3 @@
-import { ipcRenderer } from 'electron';
 import type {
   AccountNotifications,
   AuthState,
@@ -9,7 +8,7 @@ import { Notification } from '../typesGitHub';
 import { openInBrowser } from '../utils/helpers';
 import { listNotificationsForAuthenticatedUser } from './api/client';
 import { getAccountUUID } from './auth/utils';
-import { updateTrayIcon } from './comms';
+import { hideWindow, showWindow, updateTrayIcon } from './comms';
 import { isWindows } from './platform';
 import { getGitifySubjectDetails } from './subject';
 
@@ -97,10 +96,10 @@ export const raiseNativeNotification = (
 
   nativeNotification.onclick = () => {
     if (notifications.length === 1) {
-      ipcRenderer.send('hide-window');
+      hideWindow();
       openInBrowser(notifications[0]);
     } else {
-      ipcRenderer.send('reopen-window');
+      showWindow();
     }
   };
 

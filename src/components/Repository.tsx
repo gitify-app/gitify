@@ -18,7 +18,7 @@ export const RepositoryNotifications: FC<IProps> = ({
   repoNotifications,
   account,
 }) => {
-  const { markRepoNotifications, markRepoNotificationsDone } =
+  const { markRepoNotificationsRead, markRepoNotificationsDone } =
     useContext(AppContext);
 
   const openBrowser = useCallback(() => {
@@ -27,7 +27,7 @@ export const RepositoryNotifications: FC<IProps> = ({
   }, [repoNotifications]);
 
   const markRepoAsRead = useCallback(() => {
-    markRepoNotifications(repoNotifications[0]);
+    markRepoNotificationsRead(repoNotifications[0]);
   }, [repoNotifications, account]);
 
   const markRepoAsDone = useCallback(() => {

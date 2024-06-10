@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { ipcRenderer, shell } from 'electron';
+import { shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
 import {
   mockAuth,
@@ -9,6 +9,7 @@ import {
   mockSettings,
 } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
+import * as comms from '../utils/comms';
 import { AccountsRoute } from './Accounts';
 
 const mockNavigate = jest.fn();
@@ -148,6 +149,9 @@ describe('routes/Accounts.tsx', () => {
 
     it('should logout', async () => {
       const logoutFromAccountMock = jest.fn();
+      const updateTrayIconMock = jest.spyOn(comms, 'updateTrayIcon');
+      const updateTrayTitleMock = jest.spyOn(comms, 'updateTrayTitle');
+
       await act(async () => {
         render(
           <AppContext.Provider
@@ -170,9 +174,10 @@ describe('routes/Accounts.tsx', () => {
 
       expect(logoutFromAccountMock).toHaveBeenCalledTimes(1);
 
-      expect(ipcRenderer.send).toHaveBeenCalledTimes(2);
-      expect(ipcRenderer.send).toHaveBeenCalledWith('update-icon');
-      expect(ipcRenderer.send).toHaveBeenCalledWith('update-title', '');
+      expect(updateTrayIconMock).toHaveBeenCalledTimes(1);
+      expect(updateTrayIconMock).toHaveBeenCalledWith();
+      expect(updateTrayTitleMock).toHaveBeenCalledTimes(1);
+      expect(updateTrayTitleMock).toHaveBeenCalledWith();
       expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
     });
   });

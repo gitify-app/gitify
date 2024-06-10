@@ -1,10 +1,10 @@
 import { KeyIcon, PersonIcon } from '@primer/octicons-react';
-import { ipcRenderer } from 'electron';
 import { type FC, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Logo } from '../components/Logo';
 import { Button } from '../components/fields/Button';
 import { AppContext } from '../context/App';
+import { showWindow } from '../utils/comms';
 
 export const LoginRoute: FC = () => {
   const navigate = useNavigate();
@@ -12,7 +12,7 @@ export const LoginRoute: FC = () => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      ipcRenderer.send('reopen-window');
+      showWindow();
       navigate('/', { replace: true });
     }
   }, [isLoggedIn]);

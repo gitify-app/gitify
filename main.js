@@ -6,12 +6,7 @@ const path = require('node:path');
 
 require('@electron/remote/main').initialize();
 
-const iconIdle = path.join(
-  __dirname,
-  'assets',
-  'images',
-  'tray-idleTemplate.png',
-);
+const iconIdle = path.join(__dirname, 'assets', 'images', 'tray-idle.png');
 const iconActive = path.join(__dirname, 'assets', 'images', 'tray-active.png');
 
 const browserWindowOpts = {
@@ -73,37 +68,39 @@ mb.on('ready', () => {
 
   nativeTheme.on('updated', () => {
     if (nativeTheme.shouldUseDarkColors) {
-      mb.window.webContents.send('update-native-theme', 'DARK');
+      mb.window.webContents.send('gitify:update-theme', 'DARK');
     } else {
-      mb.window.webContents.send('update-native-theme', 'LIGHT');
+      mb.window.webContents.send('gitify:update-theme', 'LIGHT');
     }
   });
+});
 
-  ipc.handle('get-app-version', () => app.getVersion());
+ipc.handle('gitify:version', () => app.getVersion());
 
-  ipc.on('reopen-window', () => mb.showWindow());
+ipc.on('gitify:window-show', () => mb.showWindow());
 
-  ipc.on('hide-window', () => mb.hideWindow());
+ipc.on('gitify:window-hide', () => mb.hideWindow());
 
-  ipc.on('app-quit', () => mb.app.quit());
+ipc.on('gitify:quit', () => mb.app.quit());
 
-  ipc.on('update-icon', (_, arg) => {
-    if (!mb.tray.isDestroyed()) {
-      if (arg === 'TrayActive') {
-        mb.tray.setImage(iconActive);
-      } else {
-        mb.tray.setImage(iconIdle);
-      }
-    }
-  });
+ipc.on('gitify:icon-active', () => {
+  if (!mb.tray.isDestroyed()) {
+    mb.tray.setImage(iconActive);
+  }
+});
 
-  ipc.on('update-title', (_, title) => {
-    if (!mb.tray.isDestroyed()) {
-      mb.tray.setTitle(title);
-    }
-  });
+ipc.on('gitify:icon-idle', () => {
+  if (!mb.tray.isDestroyed()) {
+    mb.tray.setImage(iconIdle);
+  }
+});
 
-  ipc.on('set-login-item-settings', (_, settings) => {
-    app.setLoginItemSettings(settings);
-  });
+ipc.on('gitify:update-title', (_, title) => {
+  if (!mb.tray.isDestroyed()) {
+    mb.tray.setTitle(title);
+  }
+});
+
+ipc.on('gitify:update-auto-launch', (_, settings) => {
+  app.setLoginItemSettings(settings);
 });

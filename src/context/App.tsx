@@ -79,7 +79,7 @@ interface AppContextState {
   markNotificationRead: (notification: Notification) => Promise<void>;
   markNotificationDone: (notification: Notification) => Promise<void>;
   unsubscribeNotification: (notification: Notification) => Promise<void>;
-  markRepoNotifications: (notification: Notification) => Promise<void>;
+  markRepoNotificationsRead: (notification: Notification) => Promise<void>;
   markRepoNotificationsDone: (notification: Notification) => Promise<void>;
 
   settings: SettingsState;
@@ -103,7 +103,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
-    markRepoNotifications,
+    markRepoNotificationsRead,
     markRepoNotificationsDone,
   } = useNotifications();
 
@@ -112,7 +112,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    setTheme(settings.theme as Theme);
+    setTheme(settings.theme);
   }, [settings.theme]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for certain account or setting changes.
@@ -248,9 +248,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [auth, notifications],
   );
 
-  const markRepoNotificationsWithAccounts = useCallback(
+  const markRepoNotificationsReadWithAccounts = useCallback(
     async (notification: Notification) =>
-      await markRepoNotifications({ auth, settings }, notification),
+      await markRepoNotificationsRead({ auth, settings }, notification),
     [auth, notifications],
   );
 
@@ -279,7 +279,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         markNotificationRead: markNotificationReadWithAccounts,
         markNotificationDone: markNotificationDoneWithAccounts,
         unsubscribeNotification: unsubscribeNotificationWithAccounts,
-        markRepoNotifications: markRepoNotificationsWithAccounts,
+        markRepoNotificationsRead: markRepoNotificationsReadWithAccounts,
         markRepoNotificationsDone: markRepoNotificationsDoneWithAccounts,
 
         settings,
