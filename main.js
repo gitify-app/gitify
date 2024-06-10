@@ -4,6 +4,9 @@ const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('node:path');
 
+// TODO: Remove @electron/remote use - see #650
+require('@electron/remote/main').initialize();
+
 const idleIcon = path.join(__dirname, 'assets', 'images', 'tray-idle.png');
 const activeIcon = path.join(__dirname, 'assets', 'images', 'tray-active.png');
 
