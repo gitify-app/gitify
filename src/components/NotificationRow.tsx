@@ -11,9 +11,9 @@ import {
 import { type FC, type MouseEvent, useCallback, useContext } from 'react';
 
 import { AppContext } from '../context/App';
+import { PILL_CLASS_NAME } from '../styles/gitify';
 import { IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
-import Constants from '../utils/constants';
 import {
   formatForDisplay,
   formatNotificationUpdatedAt,
@@ -144,7 +144,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
             <div>
               {notification.subject?.linkedIssues?.length > 0 && (
                 <span title={linkedIssuesPillDescription}>
-                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                  <button type="button" className={PILL_CLASS_NAME}>
                     <IssueClosedIcon
                       size={12}
                       className={`mr-1 ${IconColor.GREEN}`}
@@ -162,7 +162,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
 
                 return (
                   <span key={review.state} title={icon.description}>
-                    <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <button type="button" className={PILL_CLASS_NAME}>
                       <icon.type
                         size={12}
                         className={`mr-1 ${icon.color}`}
@@ -175,7 +175,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
               })}
               {notification.subject?.comments > 0 && (
                 <span title={commentsPillDescription}>
-                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                  <button type="button" className={PILL_CLASS_NAME}>
                     <CommentIcon
                       size={12}
                       className={`mr-1 ${IconColor.GRAY}`}
@@ -187,7 +187,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
               )}
               {notification.subject?.labels?.length > 0 && (
                 <span title={labelsPillDescription}>
-                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                  <button type="button" className={PILL_CLASS_NAME}>
                     <TagIcon
                       size={12}
                       className={`mr-1 ${IconColor.GRAY}`}
@@ -202,7 +202,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                   className="ml-1"
                   title={notification.subject.milestone.title}
                 >
-                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                  <button type="button" className={PILL_CLASS_NAME}>
                     <MilestoneIcon
                       size={12}
                       className={

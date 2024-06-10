@@ -115,10 +115,9 @@ describe('utils/notifications.ts', () => {
     jest.spyOn(links, 'openNotification');
 
     const nativeNotification: Notification =
-      notificationsHelpers.raiseNativeNotification(
-        [mockGitHubNotifications[0]],
-        mockAuth,
-      );
+      notificationsHelpers.raiseNativeNotification([
+        mockGitHubNotifications[0],
+      ]);
     nativeNotification.onclick(null);
 
     expect(links.openNotification).toHaveBeenCalledTimes(1);
@@ -133,7 +132,6 @@ describe('utils/notifications.ts', () => {
 
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
       mockGitHubNotifications,
-      mockAuth,
     );
     nativeNotification.onclick(null);
 

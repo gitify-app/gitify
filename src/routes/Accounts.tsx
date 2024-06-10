@@ -13,6 +13,7 @@ import { AppContext } from '../context/App';
 
 import { AuthMethodIcon } from '../components/icons/AuthMethodIcon';
 import { PlatformIcon } from '../components/icons/PlatformIcon';
+import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import type { Account } from '../types';
 import { getAccountUUID } from '../utils/auth/utils';
 import { updateTrayIcon, updateTrayTitle } from '../utils/comms';
@@ -44,9 +45,6 @@ export const AccountsRoute: FC = () => {
   const loginWithOAuthApp = useCallback(() => {
     return navigate('/login-oauth-app', { replace: true });
   }, []);
-
-  const buttonClass =
-    'hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none';
 
   return (
     <div
@@ -120,7 +118,7 @@ export const AccountsRoute: FC = () => {
               <div>
                 <button
                   type="button"
-                  className={buttonClass}
+                  className={BUTTON_CLASS_NAME}
                   title={`Logout ${account.user.login}`}
                   onClick={() => logoutAccount(account)}
                 >
@@ -140,7 +138,7 @@ export const AccountsRoute: FC = () => {
         <div>
           <button
             type="button"
-            className={buttonClass}
+            className={BUTTON_CLASS_NAME}
             title="Login with Personal Access Token"
             onClick={loginWithPersonalAccessToken}
             hidden={isPersonalAccessTokenLoggedIn(auth)}
@@ -150,7 +148,7 @@ export const AccountsRoute: FC = () => {
           </button>
           <button
             type="button"
-            className={buttonClass}
+            className={BUTTON_CLASS_NAME}
             title="Login with OAuth App"
             onClick={loginWithOAuthApp}
             hidden={isOAuthAppLoggedIn(auth)}

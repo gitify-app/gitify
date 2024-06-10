@@ -20,6 +20,7 @@ import { useNavigate } from 'react-router-dom';
 import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
+import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import { Theme } from '../types';
 import { getAppVersion, quitApp } from '../utils/comms';
 import {
@@ -47,9 +48,6 @@ export const SettingsRoute: FC = () => {
       }
     });
   }, [settings.theme]);
-
-  const footerButtonClass =
-    'hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none';
 
   return (
     <div
@@ -290,7 +288,7 @@ export const SettingsRoute: FC = () => {
         <div>
           <button
             type="button"
-            className={footerButtonClass}
+            className={BUTTON_CLASS_NAME}
             title="Accounts"
             onClick={() => {
               navigate('/accounts');
@@ -301,7 +299,7 @@ export const SettingsRoute: FC = () => {
 
           <button
             type="button"
-            className={`${footerButtonClass} mr-0`}
+            className={BUTTON_CLASS_NAME}
             title="Quit Gitify"
             onClick={quitApp}
           >

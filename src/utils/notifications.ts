@@ -1,6 +1,5 @@
 import type {
   AccountNotifications,
-  AuthState,
   GitifyState,
   SettingsState,
 } from '../types';
@@ -65,14 +64,11 @@ export const triggerNativeNotifications = (
   }
 
   if (state.settings.showNotifications) {
-    raiseNativeNotification(diffNotifications, state.auth);
+    raiseNativeNotification(diffNotifications);
   }
 };
 
-export const raiseNativeNotification = (
-  notifications: Notification[],
-  auth: AuthState,
-) => {
+export const raiseNativeNotification = (notifications: Notification[]) => {
   let title: string;
   let body: string;
 
