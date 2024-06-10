@@ -1,21 +1,25 @@
 import { READ_NOTIFICATION_CLASS_NAME } from '../styles/gitify';
 import type { AccountNotifications, SettingsState } from '../types';
+import type { Notification } from '../typesGitHub';
+import { getAccountUUID } from './auth/utils';
 
 export const removeNotification = (
   settings: SettingsState,
-  id: string,
+  notification: Notification,
   notifications: AccountNotifications[],
-  hostname: string,
 ): AccountNotifications[] => {
   if (settings.delayNotificationState) {
-    const notificationRow = document.getElementById(id);
+    const notificationRow = document.getElementById(notification.id);
     notificationRow.className += ` ${READ_NOTIFICATION_CLASS_NAME}`;
     return notifications;
   }
 
+  const notificationId = notification.id;
+
   const accountIndex = notifications.findIndex(
     (accountNotifications) =>
-      accountNotifications.account.hostname === hostname,
+      getAccountUUID(accountNotifications.account) ===
+      getAccountUUID(notification.account),
   );
 
   if (accountIndex !== -1) {
@@ -23,7 +27,7 @@ export const removeNotification = (
     updatedNotifications[accountIndex] = {
       ...updatedNotifications[accountIndex],
       notifications: updatedNotifications[accountIndex].notifications.filter(
-        (notification) => notification.id !== id,
+        (notification) => notification.id !== notificationId,
       ),
     };
     return updatedNotifications;

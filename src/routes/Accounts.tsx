@@ -18,10 +18,6 @@ import type { Account } from '../types';
 import { getAccountUUID } from '../utils/auth/utils';
 import { updateTrayIcon, updateTrayTitle } from '../utils/comms';
 import {
-  isOAuthAppLoggedIn,
-  isPersonalAccessTokenLoggedIn,
-} from '../utils/helpers';
-import {
   openAccountProfile,
   openDeveloperSettings,
   openHost,
@@ -141,7 +137,6 @@ export const AccountsRoute: FC = () => {
             className={BUTTON_CLASS_NAME}
             title="Login with Personal Access Token"
             onClick={loginWithPersonalAccessToken}
-            hidden={isPersonalAccessTokenLoggedIn(auth)}
           >
             <KeyIcon size={18} aria-label="Login with Personal Access Token" />
             <PlusIcon size={10} className="ml-1 mb-2" />
@@ -151,7 +146,6 @@ export const AccountsRoute: FC = () => {
             className={BUTTON_CLASS_NAME}
             title="Login with OAuth App"
             onClick={loginWithOAuthApp}
-            hidden={isOAuthAppLoggedIn(auth)}
           >
             <PersonIcon size={20} aria-label="Login with OAuth App" />
             <PlusIcon size={10} className="mb-2" />

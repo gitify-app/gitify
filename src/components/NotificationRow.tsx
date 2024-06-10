@@ -12,7 +12,7 @@ import { type FC, type MouseEvent, useCallback, useContext } from 'react';
 
 import { AppContext } from '../context/App';
 import { PILL_CLASS_NAME } from '../styles/gitify';
-import { IconColor } from '../types';
+import { type Account, IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
 import {
   formatForDisplay,
@@ -27,11 +27,11 @@ import { openNotification, openUserProfile } from '../utils/links';
 import { formatReason } from '../utils/reason';
 
 interface IProps {
-  hostname: string;
+  account: Account;
   notification: Notification;
 }
 
-export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
+export const NotificationRow: FC<IProps> = ({ notification, account }) => {
   const {
     auth,
     settings,
@@ -46,10 +46,10 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     openNotification(notification);
 
     if (settings.markAsDoneOnOpen) {
-      markNotificationDone(notification.id, hostname);
+      markNotificationDone(notification);
     } else {
       // no need to mark as read, github does it by default when opening it
-      removeNotificationFromState(settings, notification.id, hostname);
+      removeNotificationFromState(settings, notification);
     }
   }, [notifications, notification, auth, settings]); // notifications required here to prevent weird state issues
 
@@ -57,7 +57,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     // Don't trigger onClick of parent element.
     event.stopPropagation();
 
-    unsubscribeNotification(notification.id, hostname);
+    unsubscribeNotification(notification);
   };
 
   const reason = formatReason(notification.reason);
@@ -225,7 +225,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
           type="button"
           className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Done"
-          onClick={() => markNotificationDone(notification.id, hostname)}
+          onClick={() => markNotificationDone(notification)}
         >
           <CheckIcon size={16} aria-label="Mark as Done" />
         </button>
@@ -243,7 +243,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
           type="button"
           className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Read"
-          onClick={() => markNotificationRead(notification.id, hostname)}
+          onClick={() => markNotificationRead(notification)}
         >
           <ReadIcon size={14} aria-label="Mark as Read" />
         </button>

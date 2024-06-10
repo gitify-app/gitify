@@ -17,6 +17,7 @@ import {
   type Status,
   Theme,
 } from '../types';
+import type { Notification } from '../typesGitHub';
 import { headNotifications } from '../utils/api/client';
 import { migrateAuthenticatedAccounts } from '../utils/auth/migration';
 import type {
@@ -72,15 +73,14 @@ interface AppContextState {
   errorDetails: GitifyError;
   removeNotificationFromState: (
     settings: SettingsState,
-    id: string,
-    hostname: string,
+    notification: Notification,
   ) => void;
   fetchNotifications: () => Promise<void>;
-  markNotificationRead: (id: string, hostname: string) => Promise<void>;
-  markNotificationDone: (id: string, hostname: string) => Promise<void>;
-  unsubscribeNotification: (id: string, hostname: string) => Promise<void>;
-  markRepoNotificationsRead: (id: string, hostname: string) => Promise<void>;
-  markRepoNotificationsDone: (id: string, hostname: string) => Promise<void>;
+  markNotificationRead: (notification: Notification) => Promise<void>;
+  markNotificationDone: (notification: Notification) => Promise<void>;
+  unsubscribeNotification: (notification: Notification) => Promise<void>;
+  markRepoNotificationsRead: (notification: Notification) => Promise<void>;
+  markRepoNotificationsDone: (notification: Notification) => Promise<void>;
 
   settings: SettingsState;
   updateSetting: (
@@ -231,32 +231,32 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const markNotificationReadWithAccounts = useCallback(
-    async (id: string, hostname: string) =>
-      await markNotificationRead({ auth, settings }, id, hostname),
+    async (notification: Notification) =>
+      await markNotificationRead({ auth, settings }, notification),
     [auth, notifications],
   );
 
   const markNotificationDoneWithAccounts = useCallback(
-    async (id: string, hostname: string) =>
-      await markNotificationDone({ auth, settings }, id, hostname),
+    async (notification: Notification) =>
+      await markNotificationDone({ auth, settings }, notification),
     [auth, notifications],
   );
 
   const unsubscribeNotificationWithAccounts = useCallback(
-    async (id: string, hostname: string) =>
-      await unsubscribeNotification({ auth, settings }, id, hostname),
+    async (notification: Notification) =>
+      await unsubscribeNotification({ auth, settings }, notification),
     [auth, notifications],
   );
 
   const markRepoNotificationsReadWithAccounts = useCallback(
-    async (repoSlug: string, hostname: string) =>
-      await markRepoNotificationsRead({ auth, settings }, repoSlug, hostname),
+    async (notification: Notification) =>
+      await markRepoNotificationsRead({ auth, settings }, notification),
     [auth, notifications],
   );
 
   const markRepoNotificationsDoneWithAccounts = useCallback(
-    async (repoSlug: string, hostname: string) =>
-      await markRepoNotificationsDone({ auth, settings }, repoSlug, hostname),
+    async (notification: Notification) =>
+      await markRepoNotificationsDone({ auth, settings }, notification),
     [auth, notifications],
   );
 

@@ -1,6 +1,10 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
-import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
+import {
+  mockGitHubNotifications,
+  mockSingleNotification,
+} from '../utils/api/__mocks__/response-mocks';
 import * as comms from '../utils/comms';
 import { RepositoryNotifications } from './Repository';
 
@@ -13,7 +17,7 @@ describe('components/Repository.tsx', () => {
   const markRepoNotificationsDone = jest.fn();
 
   const props = {
-    hostname: 'github.com',
+    account: mockGitHubCloudAccount,
     repoName: 'gitify-app/notifications-test',
     repoNotifications: mockGitHubNotifications,
   };
@@ -58,8 +62,7 @@ describe('components/Repository.tsx', () => {
     fireEvent.click(screen.getByTitle('Mark Repository as Read'));
 
     expect(markRepoNotificationsRead).toHaveBeenCalledWith(
-      'gitify-app/notifications-test',
-      'github.com',
+      mockSingleNotification,
     );
   });
 
@@ -73,8 +76,7 @@ describe('components/Repository.tsx', () => {
     fireEvent.click(screen.getByTitle('Mark Repository as Done'));
 
     expect(markRepoNotificationsDone).toHaveBeenCalledWith(
-      'gitify-app/notifications-test',
-      'github.com',
+      mockSingleNotification,
     );
   });
 

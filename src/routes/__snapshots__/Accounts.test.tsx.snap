@@ -369,7 +369,6 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
     <div>
       <button
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
-        hidden=""
         title="Login with Personal Access Token"
         type="button"
       >
@@ -405,7 +404,6 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
       </button>
       <button
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
-        hidden=""
         title="Login with OAuth App"
         type="button"
       >

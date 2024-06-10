@@ -8,7 +8,10 @@ import {
   mockSettings,
   mockState,
 } from '../__mocks__/state-mocks';
-import { mockNotificationUser } from '../utils/api/__mocks__/response-mocks';
+import {
+  mockNotificationUser,
+  mockSingleNotification,
+} from '../utils/api/__mocks__/response-mocks';
 import { Errors } from '../utils/constants';
 import { useNotifications } from './useNotifications';
 
@@ -18,6 +21,8 @@ describe('hooks/useNotifications.ts', () => {
     // by nock. So, configure axios to use the node adapter.
     axios.defaults.adapter = 'http';
   });
+
+  const id = mockSingleNotification.id;
 
   describe('fetchNotifications', () => {
     it('should fetch non-detailed notifications with success', async () => {
@@ -323,8 +328,7 @@ describe('hooks/useNotifications.ts', () => {
       act(() => {
         result.current.removeNotificationFromState(
           mockSettings,
-          result.current.notifications[0].notifications[0].id,
-          result.current.notifications[0].account.hostname,
+          result.current.notifications[0].notifications[0],
         );
       });
 
@@ -333,9 +337,6 @@ describe('hooks/useNotifications.ts', () => {
   });
 
   describe('markNotificationRead', () => {
-    const hostname = 'github.com';
-    const id = 'notification-123';
-
     it('should mark a notification as read with success', async () => {
       nock('https://api.github.com/')
         .patch(`/notifications/threads/${id}`)
@@ -344,7 +345,7 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markNotificationRead(mockState, id, hostname);
+        result.current.markNotificationRead(mockState, mockSingleNotification);
       });
 
       await waitFor(() => {
@@ -362,7 +363,7 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markNotificationRead(mockState, id, hostname);
+        result.current.markNotificationRead(mockState, mockSingleNotification);
       });
 
       await waitFor(() => {
@@ -374,9 +375,6 @@ describe('hooks/useNotifications.ts', () => {
   });
 
   describe('markNotificationDone', () => {
-    const hostname = 'github.com';
-    const id = 'notification-123';
-
     it('should mark a notification as done with success', async () => {
       nock('https://api.github.com/')
         .delete(`/notifications/threads/${id}`)
@@ -385,7 +383,7 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markNotificationDone(mockState, id, hostname);
+        result.current.markNotificationDone(mockState, mockSingleNotification);
       });
 
       await waitFor(() => {
@@ -403,7 +401,7 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markNotificationDone(mockState, id, hostname);
+        result.current.markNotificationDone(mockState, mockSingleNotification);
       });
 
       await waitFor(() => {
@@ -415,7 +413,6 @@ describe('hooks/useNotifications.ts', () => {
   });
 
   describe('unsubscribeNotification', () => {
-    const hostname = 'github.com';
     const id = 'notification-123';
 
     it('should unsubscribe from a notification with success', async () => {
@@ -432,7 +429,10 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.unsubscribeNotification(mockState, id, hostname);
+        result.current.unsubscribeNotification(
+          mockState,
+          mockSingleNotification,
+        );
       });
 
       await waitFor(() => {
@@ -456,7 +456,10 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.unsubscribeNotification(mockState, id, hostname);
+        result.current.unsubscribeNotification(
+          mockState,
+          mockSingleNotification,
+        );
       });
 
       await waitFor(() => {
@@ -468,7 +471,6 @@ describe('hooks/useNotifications.ts', () => {
   });
 
   describe('markRepoNotificationsRead', () => {
-    const hostname = 'github.com';
     const repoSlug = 'gitify-app/notifications-test';
 
     it("should mark a repository's notifications as read with success", async () => {
@@ -479,7 +481,10 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markRepoNotificationsRead(mockState, repoSlug, hostname);
+        result.current.markRepoNotificationsRead(
+          mockState,
+          mockSingleNotification,
+        );
       });
 
       await waitFor(() => {
@@ -497,7 +502,10 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markRepoNotificationsRead(mockState, repoSlug, hostname);
+        result.current.markRepoNotificationsRead(
+          mockState,
+          mockSingleNotification,
+        );
       });
 
       await waitFor(() => {
@@ -509,10 +517,6 @@ describe('hooks/useNotifications.ts', () => {
   });
 
   describe('markRepoNotificationsDone', () => {
-    const hostname = 'github.com';
-    const repoSlug = 'gitify-app/notifications-test';
-    const id = 'notification-123';
-
     it("should mark a repository's notifications as done with success", async () => {
       nock('https://api.github.com/')
         .delete(`/notifications/threads/${id}`)
@@ -521,7 +525,10 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markRepoNotificationsDone(mockState, repoSlug, hostname);
+        result.current.markRepoNotificationsDone(
+          mockState,
+          mockSingleNotification,
+        );
       });
 
       await waitFor(() => {
@@ -539,7 +546,10 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markRepoNotificationsDone(mockState, repoSlug, hostname);
+        result.current.markRepoNotificationsDone(
+          mockState,
+          mockSingleNotification,
+        );
       });
 
       await waitFor(() => {

@@ -1,5 +1,4 @@
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
-import type { Account, AuthState } from '../types';
 import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
@@ -9,20 +8,6 @@ import {
   getLatestDiscussionComment,
   getWorkflowRunAttributes,
 } from './subject';
-
-export function isPersonalAccessTokenLoggedIn(auth: AuthState): boolean {
-  return auth.accounts.some(
-    (account) => account.method === 'Personal Access Token',
-  );
-}
-
-export function isOAuthAppLoggedIn(auth: AuthState): boolean {
-  return auth.accounts.some((account) => account.method === 'OAuth App');
-}
-
-export function getAccountForHost(hostname: string, auth: AuthState): Account {
-  return auth.accounts.find((account) => hostname.endsWith(account.hostname));
-}
 
 export function getPlatformFromHostname(hostname: string): PlatformType {
   return hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname)

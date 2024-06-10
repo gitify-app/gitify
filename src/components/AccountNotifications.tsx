@@ -1,15 +1,18 @@
 import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
+import type { Account } from '../types';
 import type { Notification } from '../typesGitHub';
+import { openAccountProfile } from '../utils/links';
 import { RepositoryNotifications } from './Repository';
+import { PlatformIcon } from './icons/PlatformIcon';
 
 interface IProps {
-  hostname: string;
+  account: Account;
   notifications: Notification[];
   showAccountHostname: boolean;
 }
 
 export const AccountNotifications = (props: IProps) => {
-  const { hostname, showAccountHostname, notifications } = props;
+  const { account, showAccountHostname, notifications } = props;
 
   const groupedNotifications = Object.values(
     notifications.reduce(
@@ -28,9 +31,20 @@ export const AccountNotifications = (props: IProps) => {
   return (
     <>
       {showAccountHostname && (
-        <div className="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm">
-          {hostname}
-          <Chevron size={20} />
+        <div className="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm text-semibold">
+          <div>
+            <PlatformIcon type={account.platform} size={16} />
+            <button
+              type="button"
+              title="Open Profile"
+              onClick={() => openAccountProfile(account)}
+            >
+              @{account.user.login}
+            </button>
+          </div>
+          <div>
+            <Chevron size={20} />
+          </div>
         </div>
       )}
 
@@ -40,7 +54,7 @@ export const AccountNotifications = (props: IProps) => {
         return (
           <RepositoryNotifications
             key={repoSlug}
-            hostname={hostname}
+            account={account}
             repoName={repoSlug}
             repoNotifications={repoNotifications}
           />

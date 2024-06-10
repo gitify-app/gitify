@@ -1,8 +1,5 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
-import {
-  mockOAuthAccount,
-  mockPersonalAccessTokenAccount,
-} from '../__mocks__/state-mocks';
+import { mockPersonalAccessTokenAccount } from '../__mocks__/state-mocks';
 
 import type { SubjectType } from '../typesGitHub';
 import {
@@ -17,53 +14,9 @@ import {
   generateNotificationReferrerId,
   getPlatformFromHostname,
   isEnterpriseHost,
-  isOAuthAppLoggedIn,
-  isPersonalAccessTokenLoggedIn,
 } from './helpers';
 
 describe('utils/helpers.ts', () => {
-  describe('isPersonalAccessTokenLoggedIn', () => {
-    it('logged in', () => {
-      expect(
-        isPersonalAccessTokenLoggedIn({
-          accounts: [mockPersonalAccessTokenAccount],
-        }),
-      ).toBe(true);
-    });
-
-    it('logged out', () => {
-      expect(
-        isPersonalAccessTokenLoggedIn({
-          accounts: [],
-        }),
-      ).toBe(false);
-
-      expect(
-        isPersonalAccessTokenLoggedIn({
-          accounts: [mockOAuthAccount],
-        }),
-      ).toBe(false);
-    });
-  });
-
-  describe('isOAuthAppLoggedIn', () => {
-    it('logged in', () => {
-      expect(
-        isOAuthAppLoggedIn({
-          accounts: [mockOAuthAccount],
-        }),
-      ).toBe(true);
-    });
-
-    it('logged out', () => {
-      expect(isOAuthAppLoggedIn({ accounts: [] })).toBe(false);
-
-      expect(
-        isOAuthAppLoggedIn({ accounts: [mockPersonalAccessTokenAccount] }),
-      ).toBe(false);
-    });
-  });
-
   describe('getPlatformFromHostname', () => {
     it('should return GitHub Cloud', () => {
       expect(getPlatformFromHostname('github.com')).toBe('GitHub Cloud');

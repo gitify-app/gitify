@@ -5,6 +5,7 @@ import type {
 } from '../types';
 import { Notification } from '../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from './api/client';
+import { getAccountUUID } from './auth/utils';
 import { hideWindow, showWindow, updateTrayIcon } from './comms';
 import { openNotification } from './links';
 import { isWindows } from './platform';
@@ -32,7 +33,8 @@ export const triggerNativeNotifications = (
     .map((accountNotifications) => {
       const accountPreviousNotifications = previousNotifications.find(
         (item) =>
-          item.account.hostname === accountNotifications.account.hostname,
+          getAccountUUID(item.account) ===
+          getAccountUUID(accountNotifications.account),
       );
 
       if (!accountPreviousNotifications) {

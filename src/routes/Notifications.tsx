@@ -3,6 +3,7 @@ import { AccountNotifications } from '../components/AccountNotifications';
 import { AllRead } from '../components/AllRead';
 import { Oops } from '../components/Oops';
 import { AppContext } from '../context/App';
+import { getAccountUUID } from '../utils/auth/utils';
 import { Errors } from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
 
@@ -35,8 +36,8 @@ export const NotificationsRoute: FC = () => {
     <div className="flex flex-col flex-1 bg-white dark:bg-gray-dark">
       {notifications.map((accountNotifications) => (
         <AccountNotifications
-          key={accountNotifications.account.hostname}
-          hostname={accountNotifications.account.hostname}
+          key={getAccountUUID(accountNotifications.account)}
+          account={accountNotifications.account}
           notifications={accountNotifications.notifications}
           showAccountHostname={
             hasMultipleAccounts || settings.showAccountHostname

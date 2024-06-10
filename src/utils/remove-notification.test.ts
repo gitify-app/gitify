@@ -5,17 +5,13 @@ import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import { removeNotification } from './remove-notification';
 
 describe('utils/remove-notification.ts', () => {
-  const notificationId = mockSingleNotification.id;
-  const hostname = mockSingleAccountNotifications[0].account.hostname;
-
   it('should remove a notification if it exists', () => {
     expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
     const result = removeNotification(
       { ...mockSettings, delayNotificationState: false },
-      notificationId,
+      mockSingleNotification,
       mockSingleAccountNotifications,
-      hostname,
     );
 
     expect(result[0].notifications.length).toBe(0);
@@ -30,9 +26,8 @@ describe('utils/remove-notification.ts', () => {
 
     const result = removeNotification(
       { ...mockSettings, delayNotificationState: true },
-      notificationId,
+      mockSingleNotification,
       mockSingleAccountNotifications,
-      hostname,
     );
 
     expect(result[0].notifications.length).toBe(1);
