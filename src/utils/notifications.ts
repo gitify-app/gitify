@@ -1,13 +1,12 @@
 import type {
   AccountNotifications,
-  AuthState,
   GitifyState,
   SettingsState,
 } from '../types';
 import { Notification } from '../typesGitHub';
-import { openInBrowser } from '../utils/helpers';
 import { listNotificationsForAuthenticatedUser } from './api/client';
 import { hideWindow, showWindow, updateTrayIcon } from './comms';
+import { openNotification } from './links';
 import { isWindows } from './platform';
 import { getGitifySubjectDetails } from './subject';
 
@@ -65,14 +64,11 @@ export const triggerNativeNotifications = (
   }
 
   if (state.settings.showNotifications) {
-    raiseNativeNotification(diffNotifications, state.auth);
+    raiseNativeNotification(diffNotifications);
   }
 };
 
-export const raiseNativeNotification = (
-  notifications: Notification[],
-  auth: AuthState,
-) => {
+export const raiseNativeNotification = (notifications: Notification[]) => {
   let title: string;
   let body: string;
 
@@ -95,7 +91,7 @@ export const raiseNativeNotification = (
   nativeNotification.onclick = () => {
     if (notifications.length === 1) {
       hideWindow();
-      openInBrowser(notifications[0]);
+      openNotification(notifications[0]);
     } else {
       showWindow();
     }

@@ -8,7 +8,7 @@ import { defaultSettings } from '../context/App';
 import type { SettingsState } from '../types';
 import { mockGitHubNotifications } from './api/__mocks__/response-mocks';
 import * as comms from './comms';
-import * as helpers from './helpers';
+import * as links from './links';
 import * as notificationsHelpers from './notifications';
 import { filterNotifications } from './notifications';
 
@@ -112,17 +112,16 @@ describe('utils/notifications.ts', () => {
 
   it('should click on a native notification (with 1 notification)', () => {
     const hideWindowMock = jest.spyOn(comms, 'hideWindow');
-    jest.spyOn(helpers, 'openInBrowser');
+    jest.spyOn(links, 'openNotification');
 
     const nativeNotification: Notification =
-      notificationsHelpers.raiseNativeNotification(
-        [mockGitHubNotifications[0]],
-        mockAuth,
-      );
+      notificationsHelpers.raiseNativeNotification([
+        mockGitHubNotifications[0],
+      ]);
     nativeNotification.onclick(null);
 
-    expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
-    expect(helpers.openInBrowser).toHaveBeenLastCalledWith(
+    expect(links.openNotification).toHaveBeenCalledTimes(1);
+    expect(links.openNotification).toHaveBeenLastCalledWith(
       mockGitHubNotifications[0],
     );
     expect(hideWindowMock).toHaveBeenCalledTimes(1);
@@ -133,7 +132,6 @@ describe('utils/notifications.ts', () => {
 
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
       mockGitHubNotifications,
-      mockAuth,
     );
     nativeNotification.onclick(null);
 

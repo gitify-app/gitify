@@ -13,17 +13,19 @@ import { AppContext } from '../context/App';
 
 import { AuthMethodIcon } from '../components/icons/AuthMethodIcon';
 import { PlatformIcon } from '../components/icons/PlatformIcon';
+import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import type { Account } from '../types';
-import { getAccountUUID, getDeveloperSettingsURL } from '../utils/auth/utils';
-import {
-  openExternalLink,
-  updateTrayIcon,
-  updateTrayTitle,
-} from '../utils/comms';
+import { getAccountUUID } from '../utils/auth/utils';
+import { updateTrayIcon, updateTrayTitle } from '../utils/comms';
 import {
   isOAuthAppLoggedIn,
   isPersonalAccessTokenLoggedIn,
 } from '../utils/helpers';
+import {
+  openAccountProfile,
+  openDeveloperSettings,
+  openHost,
+} from '../utils/links';
 
 export const AccountsRoute: FC = () => {
   const { auth, logoutFromAccount } = useContext(AppContext);
@@ -36,21 +38,6 @@ export const AccountsRoute: FC = () => {
     updateTrayTitle();
   }, []);
 
-  const openProfile = (account: Account) => {
-    const url = new URL(`https://${account.hostname}`);
-    url.pathname = account.user.login;
-    openExternalLink(url.toString());
-  };
-
-  const openHost = (hostname: string) => {
-    openExternalLink(`https://${hostname}`);
-  };
-
-  const openDeveloperSettings = (account: Account) => {
-    const url = getDeveloperSettingsURL(account);
-    openExternalLink(url);
-  };
-
   const loginWithPersonalAccessToken = useCallback(() => {
     return navigate('/login-personal-access-token', { replace: true });
   }, []);
@@ -58,9 +45,6 @@ export const AccountsRoute: FC = () => {
   const loginWithOAuthApp = useCallback(() => {
     return navigate('/login-oauth-app', { replace: true });
   }, []);
-
-  const buttonClass =
-    'hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none';
 
   return (
     <div
@@ -97,7 +81,7 @@ export const AccountsRoute: FC = () => {
                     type="button"
                     className="cursor-pointer font-semibold mb-1 text-sm"
                     title="Open Profile"
-                    onClick={() => openProfile(account)}
+                    onClick={() => openAccountProfile(account)}
                   >
                     @{account.user.login}
                     <span
@@ -134,7 +118,7 @@ export const AccountsRoute: FC = () => {
               <div>
                 <button
                   type="button"
-                  className={buttonClass}
+                  className={BUTTON_CLASS_NAME}
                   title={`Logout ${account.user.login}`}
                   onClick={() => logoutAccount(account)}
                 >
@@ -154,7 +138,7 @@ export const AccountsRoute: FC = () => {
         <div>
           <button
             type="button"
-            className={buttonClass}
+            className={BUTTON_CLASS_NAME}
             title="Login with Personal Access Token"
             onClick={loginWithPersonalAccessToken}
             hidden={isPersonalAccessTokenLoggedIn(auth)}
@@ -164,7 +148,7 @@ export const AccountsRoute: FC = () => {
           </button>
           <button
             type="button"
-            className={buttonClass}
+            className={BUTTON_CLASS_NAME}
             title="Login with OAuth App"
             onClick={loginWithOAuthApp}
             hidden={isOAuthAppLoggedIn(auth)}

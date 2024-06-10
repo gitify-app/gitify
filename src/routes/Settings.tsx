@@ -12,7 +12,6 @@ import { ipcRenderer } from 'electron';
 import {
   type FC,
   type MouseEvent,
-  useCallback,
   useContext,
   useEffect,
   useState,
@@ -21,9 +20,13 @@ import { useNavigate } from 'react-router-dom';
 import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
+import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import { Theme } from '../types';
-import { getAppVersion, openExternalLink, quitApp } from '../utils/comms';
-import Constants from '../utils/constants';
+import { getAppVersion, quitApp } from '../utils/comms';
+import {
+  openGitHubParticipatingDocs,
+  openGitifyReleaseNotes,
+} from '../utils/links';
 import { isLinux, isMacOS } from '../utils/platform';
 import { setTheme } from '../utils/theme';
 
@@ -32,21 +35,6 @@ export const SettingsRoute: FC = () => {
   const navigate = useNavigate();
 
   const [appVersion, setAppVersion] = useState<string | null>(null);
-
-  const openGitHubReleaseNotes = useCallback((version) => {
-    openExternalLink(
-      `https://github.com/${Constants.REPO_SLUG}/releases/tag/v${version}`,
-    );
-  }, []);
-
-  const openGitHubParticipatingDocs = (event: MouseEvent<HTMLElement>) => {
-    // Don't trigger onClick of parent element.
-    event.stopPropagation();
-
-    openExternalLink(
-      'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications',
-    );
-  };
 
   useEffect(() => {
     (async () => {
@@ -60,9 +48,6 @@ export const SettingsRoute: FC = () => {
       }
     });
   }, [settings.theme]);
-
-  const footerButtonClass =
-    'hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none';
 
   return (
     <div
@@ -188,7 +173,11 @@ export const SettingsRoute: FC = () => {
                   type="button"
                   className="text-blue-500 mx-1"
                   title="Open GitHub documentation for participating and watching notifications"
-                  onClick={openGitHubParticipatingDocs}
+                  onClick={(event: MouseEvent<HTMLElement>) => {
+                    // Don't trigger onClick of parent element.
+                    event.stopPropagation();
+                    openGitHubParticipatingDocs();
+                  }}
                 >
                   official docs
                 </button>
@@ -292,14 +281,14 @@ export const SettingsRoute: FC = () => {
           type="button"
           className="font-semibold cursor-pointer"
           title="View release notes"
-          onClick={() => openGitHubReleaseNotes(appVersion)}
+          onClick={() => openGitifyReleaseNotes(appVersion)}
         >
           Gitify v{appVersion}
         </button>
         <div>
           <button
             type="button"
-            className={footerButtonClass}
+            className={BUTTON_CLASS_NAME}
             title="Accounts"
             onClick={() => {
               navigate('/accounts');
@@ -310,7 +299,7 @@ export const SettingsRoute: FC = () => {
 
           <button
             type="button"
-            className={`${footerButtonClass} mr-0`}
+            className={BUTTON_CLASS_NAME}
             title="Quit Gitify"
             onClick={quitApp}
           >

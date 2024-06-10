@@ -22,17 +22,14 @@ export const Constants = {
 
   FETCH_INTERVAL: 60000,
 
-  READ_CLASS_NAME: 'opacity-50 dark:opacity-50',
-
-  PILL_CLASS_NAME:
-    'rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700',
-
   // GitHub Docs
   GITHUB_DOCS: {
     OAUTH_URL:
       'https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authenticating-to-the-rest-api-with-an-oauth-app',
     PAT_URL:
       'https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens',
+    PARTICIPATING_URL:
+      'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications',
   },
 };
 

@@ -1,4 +1,4 @@
-const { ipcMain: ipc, app, nativeTheme } = require('electron/main');
+const { ipcMain: ipc, app, nativeTheme, Menu } = require('electron/main');
 const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
@@ -27,6 +27,15 @@ const browserWindowOpts = {
   },
 };
 
+const contextMenu = Menu.buildFromTemplate([
+  {
+    label: 'Quit',
+    click: () => {
+      app.quit();
+    },
+  },
+]);
+
 app.whenReady().then(async () => {
   await onFirstRunMaybe();
 
@@ -45,6 +54,10 @@ app.whenReady().then(async () => {
     mb.tray.setIgnoreDoubleClickEvents(true);
 
     mb.hideWindow();
+
+    mb.tray.on('right-click', (_event, bounds) => {
+      mb.tray.popUpContextMenu(contextMenu, { x: bounds.x, y: bounds.y });
+    });
 
     // Force the window to retrieve its previous zoom factor
     mb.window.webContents.setZoomFactor(mb.window.webContents.getZoomFactor());
