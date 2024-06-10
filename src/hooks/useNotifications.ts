@@ -7,7 +7,6 @@ import type {
   Status,
 } from '../types';
 import type { Notification } from '../typesGitHub';
-import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import {
   ignoreNotificationThreadSubscription,
   markNotificationThreadAsDone,
@@ -168,7 +167,7 @@ export const useNotifications = (): NotificationsState => {
           notification.account.token,
         );
         const updatedNotifications = removeNotifications(
-          mockSingleNotification,
+          notification,
           notifications,
         );
 
