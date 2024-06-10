@@ -4,6 +4,7 @@ import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import type { Milestone, UserType } from '../typesGitHub';
 import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
+import type { HostName } from '../utils/branded-types';
 import * as helpers from '../utils/helpers';
 import { NotificationRow } from './NotificationRow';
 
@@ -23,7 +24,7 @@ describe('components/NotificationRow.tsx', () => {
 
     const props = {
       notification: mockSingleNotification,
-      hostname: 'github.com',
+      hostname: 'github.com' as HostName,
     };
 
     const tree = render(
@@ -44,7 +45,7 @@ describe('components/NotificationRow.tsx', () => {
 
     const props = {
       notification: mockNotification,
-      hostname: 'github.com',
+      hostname: 'github.com' as HostName,
     };
 
     const tree = render(
@@ -65,7 +66,7 @@ describe('components/NotificationRow.tsx', () => {
 
     const props = {
       notification: mockNotification,
-      hostname: 'github.com',
+      hostname: 'github.com' as HostName,
     };
 
     const tree = render(
@@ -88,7 +89,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com',
+          hostname: 'github.com' as HostName,
         };
 
         const tree = render(
@@ -115,7 +116,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com',
+          hostname: 'github.com' as HostName,
         };
 
         const tree = render(
@@ -140,7 +141,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com',
+          hostname: 'github.com' as HostName,
         };
 
         const tree = render(
@@ -167,7 +168,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com',
+          hostname: 'github.com' as HostName,
         };
 
         const tree = render(
@@ -192,7 +193,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com',
+          hostname: 'github.com' as HostName,
         };
 
         const tree = render(
@@ -217,7 +218,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com',
+          hostname: 'github.com' as HostName,
         };
 
         const tree = render(
@@ -244,7 +245,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com',
+          hostname: 'github.com' as HostName,
         };
 
         const tree = render(
@@ -274,7 +275,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com',
+          hostname: 'github.com' as HostName,
         };
 
         const tree = render(
@@ -302,7 +303,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com',
+          hostname: 'github.com' as HostName,
         };
 
         const tree = render(
@@ -325,7 +326,7 @@ describe('components/NotificationRow.tsx', () => {
 
       const props = {
         notification: mockSingleNotification,
-        hostname: 'github.com',
+        hostname: 'github.com' as HostName,
       };
 
       render(
@@ -350,7 +351,7 @@ describe('components/NotificationRow.tsx', () => {
 
       const props = {
         notification: mockSingleNotification,
-        hostname: 'github.com',
+        hostname: 'github.com' as HostName,
       };
 
       render(
@@ -375,7 +376,7 @@ describe('components/NotificationRow.tsx', () => {
 
       const props = {
         notification: mockSingleNotification,
-        hostname: 'github.com',
+        hostname: 'github.com' as HostName,
       };
 
       render(
@@ -400,7 +401,7 @@ describe('components/NotificationRow.tsx', () => {
 
       const props = {
         notification: mockSingleNotification,
-        hostname: 'github.com',
+        hostname: 'github.com' as HostName,
       };
 
       render(
@@ -423,7 +424,7 @@ describe('components/NotificationRow.tsx', () => {
 
       const props = {
         notification: mockSingleNotification,
-        hostname: 'github.com',
+        hostname: 'github.com' as HostName,
       };
 
       render(
@@ -443,7 +444,7 @@ describe('components/NotificationRow.tsx', () => {
 
       const props = {
         notification: mockSingleNotification,
-        hostname: 'github.com',
+        hostname: 'github.com' as HostName,
       };
 
       render(
@@ -475,7 +476,7 @@ describe('components/NotificationRow.tsx', () => {
             reviews: null,
           },
         },
-        hostname: 'github.com',
+        hostname: 'github.com' as HostName,
       };
 
       render(

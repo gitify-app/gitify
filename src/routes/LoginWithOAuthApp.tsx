@@ -17,12 +17,13 @@ import {
   isValidHostname,
   isValidToken,
 } from '../utils/auth/utils';
+import type { ClientID, ClientSecret, HostName } from '../utils/branded-types';
 import Constants from '../utils/constants';
 
 interface IValues {
-  hostname?: string;
-  clientId?: string;
-  clientSecret?: string;
+  hostname?: HostName;
+  clientId?: ClientID;
+  clientSecret?: ClientSecret;
 }
 
 interface IFormErrors {

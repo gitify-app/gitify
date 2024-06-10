@@ -1,9 +1,10 @@
 import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
 import type { Notification } from '../typesGitHub';
+import type { HostName } from '../utils/branded-types';
 import { RepositoryNotifications } from './Repository';
 
 interface IProps {
-  hostname: string;
+  hostname: HostName;
   notifications: Notification[];
   showAccountHostname: boolean;
 }

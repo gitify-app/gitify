@@ -15,6 +15,7 @@ import type {
   Release,
   UserDetails,
 } from '../../typesGitHub';
+import type { HostName } from '../branded-types';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
 import { apiRequestAuth } from './request';
@@ -26,7 +27,7 @@ import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
  * Endpoint documentation: https://docs.github.com/en/rest/users/users#get-the-authenticated-user
  */
 export function getAuthenticatedUser(
-  hostname: string,
+  hostname: HostName,
   token: string,
 ): AxiosPromise<UserDetails> {
   const url = getGitHubAPIBaseUrl(hostname);
@@ -37,7 +38,7 @@ export function getAuthenticatedUser(
 
 //
 export function headNotifications(
-  hostname: string,
+  hostname: HostName,
   token: string,
 ): AxiosPromise<void> {
   const url = getGitHubAPIBaseUrl(hostname);
@@ -70,7 +71,7 @@ export function listNotificationsForAuthenticatedUser(
  */
 export function markNotificationThreadAsRead(
   threadId: string,
-  hostname: string,
+  hostname: HostName,
   token: string,
 ): AxiosPromise<void> {
   const url = getGitHubAPIBaseUrl(hostname);
@@ -87,7 +88,7 @@ export function markNotificationThreadAsRead(
  */
 export function markNotificationThreadAsDone(
   threadId: string,
-  hostname: string,
+  hostname: HostName,
   token: string,
 ): AxiosPromise<void> {
   const url = getGitHubAPIBaseUrl(hostname);
@@ -103,7 +104,7 @@ export function markNotificationThreadAsDone(
  */
 export function ignoreNotificationThreadSubscription(
   threadId: string,
-  hostname: string,
+  hostname: HostName,
   token: string,
 ): AxiosPromise<NotificationThreadSubscription> {
   const url = getGitHubAPIBaseUrl(hostname);
@@ -122,7 +123,7 @@ export function ignoreNotificationThreadSubscription(
  */
 export function markRepositoryNotificationsAsRead(
   repoSlug: string,
-  hostname: string,
+  hostname: HostName,
   token: string,
 ): AxiosPromise<void> {
   const url = getGitHubAPIBaseUrl(hostname);

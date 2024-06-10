@@ -4,6 +4,7 @@ import type { Account, AuthState, GitifyUser } from '../../types';
 import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
+import type { HostName } from '../branded-types';
 import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
 import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
@@ -77,7 +78,7 @@ export const authGitHub = (
 
 export const getUserData = async (
   token: string,
-  hostname: string,
+  hostname: HostName,
 ): Promise<GitifyUser> => {
   const response: UserDetails = (await getAuthenticatedUser(hostname, token))
     .data;
@@ -111,7 +112,7 @@ export function addAccount(
   auth: AuthState,
   method: AuthMethod,
   token: string,
-  hostname: string,
+  hostname: HostName,
   user?: GitifyUser,
 ): AuthState {
   return {
@@ -155,7 +156,7 @@ export function getDeveloperSettingsURL(account: Account): string {
   return settingsURL.toString();
 }
 
-export function getNewTokenURL(hostname: string): string {
+export function getNewTokenURL(hostname: HostName): string {
   const date = format(new Date(), 'PP p');
   const newTokenURL = new URL(`https://${hostname}/settings/tokens/new`);
   newTokenURL.searchParams.append('description', `Gitify (Created on ${date})`);
@@ -164,7 +165,7 @@ export function getNewTokenURL(hostname: string): string {
   return newTokenURL.toString();
 }
 
-export function getNewOAuthAppURL(hostname: string): string {
+export function getNewOAuthAppURL(hostname: HostName): string {
   const date = format(new Date(), 'PP p');
   const newOAuthAppURL = new URL(
     `https://${hostname}/settings/applications/new`,
@@ -185,7 +186,7 @@ export function getNewOAuthAppURL(hostname: string): string {
   return newOAuthAppURL.toString();
 }
 
-export function isValidHostname(hostname: string) {
+export function isValidHostname(hostname: HostName) {
   return /^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
     hostname,
   );

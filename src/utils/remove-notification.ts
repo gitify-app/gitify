@@ -1,11 +1,12 @@
 import type { AccountNotifications, SettingsState } from '../types';
+import type { HostName } from './branded-types';
 import Constants from './constants';
 
 export const removeNotification = (
   settings: SettingsState,
   id: string,
   notifications: AccountNotifications[],
-  hostname: string,
+  hostname: HostName,
 ): AccountNotifications[] => {
   if (settings.delayNotificationState) {
     const notificationRow = document.getElementById(id);

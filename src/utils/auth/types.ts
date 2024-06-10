@@ -1,15 +1,17 @@
+import type { ClientID, ClientSecret, HostName, Token } from '../branded-types';
+
 export type AuthMethod = 'GitHub App' | 'Personal Access Token' | 'OAuth App';
 
 export type PlatformType = 'GitHub Cloud' | 'GitHub Enterprise Server';
 
 export interface LoginOAuthAppOptions {
-  hostname: string;
+  hostname: HostName;
   clientId: string;
   clientSecret: string;
 }
 
 export interface LoginPersonalAccessTokenOptions {
-  hostname: string;
+  hostname: HostName;
   token: string;
 }
 
@@ -19,7 +21,7 @@ export interface AuthResponse {
 }
 
 export interface AuthTokenResponse {
-  hostname: string;
+  hostname: HostName;
   token: string;
 }
 
@@ -27,6 +29,6 @@ export interface AuthTokenResponse {
  * @deprecated This type is deprecated and will be removed in a future release.
  */
 export interface EnterpriseAccount {
-  hostname: string;
+  hostname: HostName;
   token: string;
 }

@@ -13,6 +13,7 @@ import {
   markRepositoryNotificationsAsRead,
 } from '../utils/api/client';
 import { determineFailureType } from '../utils/api/errors';
+import type { HostName } from '../utils/branded-types';
 import { getAccountForHost } from '../utils/helpers';
 import {
   getAllNotifications,
@@ -27,33 +28,33 @@ interface NotificationsState {
   removeNotificationFromState: (
     settings: SettingsState,
     id: string,
-    hostname: string,
+    hostname: HostName,
   ) => void;
   fetchNotifications: (state: GitifyState) => Promise<void>;
   markNotificationRead: (
     state: GitifyState,
     id: string,
-    hostname: string,
+    hostname: HostName,
   ) => Promise<void>;
   markNotificationDone: (
     state: GitifyState,
     id: string,
-    hostname: string,
+    hostname: HostName,
   ) => Promise<void>;
   unsubscribeNotification: (
     state: GitifyState,
     id: string,
-    hostname: string,
+    hostname: HostName,
   ) => Promise<void>;
   markRepoNotifications: (
     state: GitifyState,
     repoSlug: string,
-    hostname: string,
+    hostname: HostName,
   ) => Promise<void>;
   markRepoNotificationsDone: (
     state: GitifyState,
     repoSlug: string,
-    hostname: string,
+    hostname: HostName,
   ) => Promise<void>;
   status: Status;
   errorDetails: GitifyError;
@@ -86,7 +87,7 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markNotificationRead = useCallback(
-    async (state: GitifyState, id: string, hostname: string) => {
+    async (state: GitifyState, id: string, hostname: HostName) => {
       setStatus('loading');
 
       const account = getAccountForHost(hostname, state.auth);
@@ -112,7 +113,7 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markNotificationDone = useCallback(
-    async (state: GitifyState, id: string, hostname: string) => {
+    async (state: GitifyState, id: string, hostname: HostName) => {
       setStatus('loading');
 
       const account = getAccountForHost(hostname, state.auth);
@@ -138,7 +139,7 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const unsubscribeNotification = useCallback(
-    async (state: GitifyState, id: string, hostname: string) => {
+    async (state: GitifyState, id: string, hostname: HostName) => {
       setStatus('loading');
 
       const account = getAccountForHost(hostname, state.auth);
@@ -155,7 +156,7 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markRepoNotifications = useCallback(
-    async (state: GitifyState, repoSlug: string, hostname: string) => {
+    async (state: GitifyState, repoSlug: string, hostname: HostName) => {
       setStatus('loading');
 
       const account = getAccountForHost(hostname, state.auth);
@@ -183,7 +184,7 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markRepoNotificationsDone = useCallback(
-    async (state: GitifyState, repoSlug: string, hostname: string) => {
+    async (state: GitifyState, repoSlug: string, hostname: HostName) => {
       setStatus('loading');
 
       try {
@@ -227,7 +228,7 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const removeNotificationFromState = useCallback(
-    (settings: SettingsState, id: string, hostname: string) => {
+    (settings: SettingsState, id: string, hostname: HostName) => {
       const updatedNotifications = removeNotification(
         settings,
         id,

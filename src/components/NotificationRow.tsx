@@ -19,6 +19,7 @@ import {
 import { AppContext } from '../context/App';
 import { IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
+import type { HostName } from '../utils/branded-types';
 import { openExternalLink } from '../utils/comms';
 import Constants from '../utils/constants';
 import {
@@ -34,7 +35,7 @@ import {
 import { formatReason } from '../utils/reason';
 
 interface IProps {
-  hostname: string;
+  hostname: HostName;
   notification: Notification;
 }
 

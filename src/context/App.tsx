@@ -30,6 +30,7 @@ import {
   getUserData,
   removeAccount,
 } from '../utils/auth/utils';
+import type { HostName } from '../utils/branded-types';
 import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
 import Constants from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
@@ -73,14 +74,14 @@ interface AppContextState {
   removeNotificationFromState: (
     settings: SettingsState,
     id: string,
-    hostname: string,
+    hostname: HostName,
   ) => void;
   fetchNotifications: () => Promise<void>;
-  markNotificationRead: (id: string, hostname: string) => Promise<void>;
-  markNotificationDone: (id: string, hostname: string) => Promise<void>;
-  unsubscribeNotification: (id: string, hostname: string) => Promise<void>;
-  markRepoNotifications: (id: string, hostname: string) => Promise<void>;
-  markRepoNotificationsDone: (id: string, hostname: string) => Promise<void>;
+  markNotificationRead: (id: string, hostname: HostName) => Promise<void>;
+  markNotificationDone: (id: string, hostname: HostName) => Promise<void>;
+  unsubscribeNotification: (id: string, hostname: HostName) => Promise<void>;
+  markRepoNotifications: (id: string, hostname: HostName) => Promise<void>;
+  markRepoNotificationsDone: (id: string, hostname: HostName) => Promise<void>;
 
   settings: SettingsState;
   updateSetting: (
@@ -231,31 +232,31 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const markNotificationReadWithAccounts = useCallback(
-    async (id: string, hostname: string) =>
+    async (id: string, hostname: HostName) =>
       await markNotificationRead({ auth, settings }, id, hostname),
     [auth, notifications],
   );
 
   const markNotificationDoneWithAccounts = useCallback(
-    async (id: string, hostname: string) =>
+    async (id: string, hostname: HostName) =>
       await markNotificationDone({ auth, settings }, id, hostname),
     [auth, notifications],
   );
 
   const unsubscribeNotificationWithAccounts = useCallback(
-    async (id: string, hostname: string) =>
+    async (id: string, hostname: HostName) =>
       await unsubscribeNotification({ auth, settings }, id, hostname),
     [auth, notifications],
   );
 
   const markRepoNotificationsWithAccounts = useCallback(
-    async (repoSlug: string, hostname: string) =>
+    async (repoSlug: string, hostname: HostName) =>
       await markRepoNotifications({ auth, settings }, repoSlug, hostname),
     [auth, notifications],
   );
 
   const markRepoNotificationsDoneWithAccounts = useCallback(
-    async (repoSlug: string, hostname: string) =>
+    async (repoSlug: string, hostname: HostName) =>
       await markRepoNotificationsDone({ auth, settings }, repoSlug, hostname),
     [auth, notifications],
   );

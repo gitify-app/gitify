@@ -3,6 +3,7 @@ import type { AxiosPromise, AxiosResponse } from 'axios';
 import { mockAuth, mockGitHubCloudAccount } from '../../__mocks__/state-mocks';
 import type { Account, AuthState } from '../../types';
 import * as apiRequests from '../api/request';
+import type { HostName } from '../branded-types';
 import * as auth from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 
@@ -85,7 +86,7 @@ describe('utils/auth/utils.ts', () => {
         },
       );
       expect(res.token).toBe('this-is-a-token');
-      expect(res.hostname).toBe('github.com');
+      expect(res.hostname).toBe('github.com' as HostName);
     });
 
     it('should get a token - failure', async () => {
@@ -118,12 +119,12 @@ describe('utils/auth/utils.ts', () => {
           mockAuthState,
           'Personal Access Token',
           '123-456',
-          'github.com',
+          'github.com' as HostName,
         );
 
         expect(result.accounts).toEqual([
           {
-            hostname: 'github.com',
+            hostname: 'github.com' as HostName,
             method: 'Personal Access Token',
             platform: 'GitHub Cloud',
             token: '123-456',
@@ -137,12 +138,12 @@ describe('utils/auth/utils.ts', () => {
           mockAuthState,
           'OAuth App',
           '123-456',
-          'github.com',
+          'github.com' as HostName,
         );
 
         expect(result.accounts).toEqual([
           {
-            hostname: 'github.com',
+            hostname: 'github.com' as HostName,
             method: 'OAuth App',
             platform: 'GitHub Cloud',
             token: '123-456',
@@ -158,12 +159,12 @@ describe('utils/auth/utils.ts', () => {
           mockAuthState,
           'Personal Access Token',
           '123-456',
-          'github.gitify.io',
+          'github.gitify.io' as HostName,
         );
 
         expect(result.accounts).toEqual([
           {
-            hostname: 'github.gitify.io',
+            hostname: 'github.gitify.io' as HostName,
             method: 'Personal Access Token',
             platform: 'GitHub Enterprise Server',
             token: '123-456',
@@ -177,12 +178,12 @@ describe('utils/auth/utils.ts', () => {
           mockAuthState,
           'OAuth App',
           '123-456',
-          'github.gitify.io',
+          'github.gitify.io' as HostName,
         );
 
         expect(result.accounts).toEqual([
           {
-            hostname: 'github.gitify.io',
+            hostname: 'github.gitify.io' as HostName,
             method: 'OAuth App',
             platform: 'GitHub Enterprise Server',
             token: '123-456',
@@ -218,19 +219,19 @@ describe('utils/auth/utils.ts', () => {
   it('getDeveloperSettingsURL', () => {
     expect(
       auth.getDeveloperSettingsURL({
-        hostname: 'github.com',
+        hostname: 'github.com' as HostName,
         method: 'GitHub App',
       } as Account),
     ).toBe('https://github.com/settings/apps');
     expect(
       auth.getDeveloperSettingsURL({
-        hostname: 'github.com',
+        hostname: 'github.com' as HostName,
         method: 'OAuth App',
       } as Account),
     ).toBe('https://github.com/settings/developers');
     expect(
       auth.getDeveloperSettingsURL({
-        hostname: 'github.com',
+        hostname: 'github.com' as HostName,
         method: 'Personal Access Token',
       } as Account),
     ).toBe('https://github.com/settings/tokens');
@@ -239,7 +240,7 @@ describe('utils/auth/utils.ts', () => {
   describe('getNewTokenURL', () => {
     it('should generate new PAT url - github cloud', () => {
       expect(
-        getNewTokenURL('github.com').startsWith(
+        getNewTokenURL('github.com' as HostName).startsWith(
           'https://github.com/settings/tokens/new',
         ),
       ).toBeTruthy();
@@ -247,7 +248,7 @@ describe('utils/auth/utils.ts', () => {
 
     it('should generate new PAT url - github server', () => {
       expect(
-        getNewTokenURL('github.gitify.io').startsWith(
+        getNewTokenURL('github.gitify.io' as HostName).startsWith(
           'https://github.gitify.io/settings/tokens/new',
         ),
       ).toBeTruthy();
@@ -257,7 +258,7 @@ describe('utils/auth/utils.ts', () => {
   describe('getNewOAuthAppURL', () => {
     it('should generate new oauth app url - github cloud', () => {
       expect(
-        getNewOAuthAppURL('github.com').startsWith(
+        getNewOAuthAppURL('github.com' as HostName).startsWith(
           'https://github.com/settings/applications/new',
         ),
       ).toBeTruthy();
@@ -265,7 +266,7 @@ describe('utils/auth/utils.ts', () => {
 
     it('should generate new oauth app url - github server', () => {
       expect(
-        getNewOAuthAppURL('github.gitify.io').startsWith(
+        getNewOAuthAppURL('github.gitify.io' as HostName).startsWith(
           'https://github.gitify.io/settings/applications/new',
         ),
       ).toBeTruthy();
@@ -274,19 +275,19 @@ describe('utils/auth/utils.ts', () => {
 
   describe('isValidHostname', () => {
     it('should validate hostname - github cloud', () => {
-      expect(auth.isValidHostname('github.com')).toBeTruthy();
+      expect(auth.isValidHostname('github.com' as HostName)).toBeTruthy();
     });
 
     it('should validate hostname - github enterprise server', () => {
-      expect(auth.isValidHostname('github.gitify.io')).toBeTruthy();
+      expect(auth.isValidHostname('github.gitify.io' as HostName)).toBeTruthy();
     });
 
     it('should invalidate hostname - empty', () => {
-      expect(auth.isValidHostname('')).toBeFalsy();
+      expect(auth.isValidHostname('' as HostName)).toBeFalsy();
     });
 
     it('should invalidate hostname - invalid', () => {
-      expect(auth.isValidHostname('github')).toBeFalsy();
+      expect(auth.isValidHostname('github' as HostName)).toBeFalsy();
     });
   });
 

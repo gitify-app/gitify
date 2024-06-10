@@ -1,5 +1,6 @@
 import { render } from '@testing-library/react';
 import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
+import type { HostName } from '../utils/branded-types';
 import { AccountNotifications } from './AccountNotifications';
 
 jest.mock('./Repository', () => ({
@@ -9,7 +10,7 @@ jest.mock('./Repository', () => ({
 describe('components/AccountNotifications.tsx', () => {
   it('should render itself (github.com with notifications)', () => {
     const props = {
-      hostname: 'github.com',
+      hostname: 'github.com' as HostName,
       notifications: mockGitHubNotifications,
       showAccountHostname: true,
     };
@@ -20,7 +21,7 @@ describe('components/AccountNotifications.tsx', () => {
 
   it('should render itself (github.com without notifications)', () => {
     const props = {
-      hostname: 'github.com',
+      hostname: 'github.com' as HostName,
       notifications: [],
       showAccountHostname: true,
     };

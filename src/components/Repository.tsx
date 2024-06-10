@@ -3,11 +3,12 @@ import { type FC, useCallback, useContext } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AppContext } from '../context/App';
 import type { Notification } from '../typesGitHub';
+import type { HostName } from '../utils/branded-types';
 import { openExternalLink } from '../utils/comms';
 import { NotificationRow } from './NotificationRow';
 
 interface IProps {
-  hostname: string;
+  hostname: HostName;
   repoNotifications: Notification[];
   repoName: string;
 }

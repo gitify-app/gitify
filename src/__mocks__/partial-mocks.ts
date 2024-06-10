@@ -1,4 +1,5 @@
 import type { Notification, Subject, User } from '../typesGitHub';
+import type { HostName } from '../utils/branded-types';
 import Constants from '../utils/constants';
 import { mockGitifyUser, mockToken } from './state-mocks';
 
@@ -9,7 +10,7 @@ export function partialMockNotification(
     account: {
       method: 'Personal Access Token',
       platform: 'GitHub Cloud',
-      hostname: Constants.GITHUB_API_BASE_URL,
+      hostname: Constants.GITHUB_API_BASE_URL as HostName,
       token: mockToken,
       user: mockGitifyUser,
     },

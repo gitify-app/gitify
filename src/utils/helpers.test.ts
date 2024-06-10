@@ -10,6 +10,7 @@ import {
   mockSingleNotification,
 } from './api/__mocks__/response-mocks';
 import * as apiRequests from './api/request';
+import type { HostName } from './branded-types';
 import {
   formatForDisplay,
   formatNotificationUpdatedAt,
@@ -66,15 +67,19 @@ describe('utils/helpers.ts', () => {
 
   describe('getPlatformFromHostname', () => {
     it('should return GitHub Cloud', () => {
-      expect(getPlatformFromHostname('github.com')).toBe('GitHub Cloud');
-      expect(getPlatformFromHostname('api.github.com')).toBe('GitHub Cloud');
+      expect(getPlatformFromHostname('github.com' as HostName)).toBe(
+        'GitHub Cloud',
+      );
+      expect(getPlatformFromHostname('api.github.com' as HostName)).toBe(
+        'GitHub Cloud',
+      );
     });
 
     it('should return GitHub Enterprise Server', () => {
-      expect(getPlatformFromHostname('github.gitify.app')).toBe(
+      expect(getPlatformFromHostname('github.gitify.app' as HostName)).toBe(
         'GitHub Enterprise Server',
       );
-      expect(getPlatformFromHostname('api.github.gitify.app')).toBe(
+      expect(getPlatformFromHostname('api.github.gitify.app' as HostName)).toBe(
         'GitHub Enterprise Server',
       );
     });
@@ -82,13 +87,13 @@ describe('utils/helpers.ts', () => {
 
   describe('isEnterpriseHost', () => {
     it('should return true for enterprise host', () => {
-      expect(isEnterpriseHost('github.gitify.app')).toBe(true);
-      expect(isEnterpriseHost('api.github.gitify.app')).toBe(true);
+      expect(isEnterpriseHost('github.gitify.app' as HostName)).toBe(true);
+      expect(isEnterpriseHost('api.github.gitify.app' as HostName)).toBe(true);
     });
 
     it('should return false for non-enterprise host', () => {
-      expect(isEnterpriseHost('github.com')).toBe(false);
-      expect(isEnterpriseHost('api.github.com')).toBe(false);
+      expect(isEnterpriseHost('github.com' as HostName)).toBe(false);
+      expect(isEnterpriseHost('api.github.com' as HostName)).toBe(false);
     });
   });
 

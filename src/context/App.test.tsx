@@ -4,6 +4,7 @@ import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, SettingsState } from '../types';
 import * as apiRequests from '../utils/api/request';
+import type { HostName } from '../utils/branded-types';
 import * as comms from '../utils/comms';
 import Constants from '../utils/constants';
 import * as notifications from '../utils/notifications';
@@ -121,7 +122,9 @@ describe('context/App.tsx', () => {
         return (
           <button
             type="button"
-            onClick={() => markNotificationRead('123-456', 'github.com')}
+            onClick={() =>
+              markNotificationRead('123-456', 'github.com' as HostName)
+            }
           >
             Test Case
           </button>
@@ -138,7 +141,7 @@ describe('context/App.tsx', () => {
       expect(markNotificationReadMock).toHaveBeenCalledWith(
         mockDefaultState,
         '123-456',
-        'github.com',
+        'github.com' as HostName,
       );
     });
 
@@ -149,7 +152,9 @@ describe('context/App.tsx', () => {
         return (
           <button
             type="button"
-            onClick={() => markNotificationDone('123-456', 'github.com')}
+            onClick={() =>
+              markNotificationDone('123-456', 'github.com' as HostName)
+            }
           >
             Test Case
           </button>
@@ -166,7 +171,7 @@ describe('context/App.tsx', () => {
       expect(markNotificationDoneMock).toHaveBeenCalledWith(
         mockDefaultState,
         '123-456',
-        'github.com',
+        'github.com' as HostName,
       );
     });
 
@@ -177,7 +182,9 @@ describe('context/App.tsx', () => {
         return (
           <button
             type="button"
-            onClick={() => unsubscribeNotification('123-456', 'github.com')}
+            onClick={() =>
+              unsubscribeNotification('123-456', 'github.com' as HostName)
+            }
           >
             Test Case
           </button>
@@ -194,7 +201,7 @@ describe('context/App.tsx', () => {
       expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
         mockDefaultState,
         '123-456',
-        'github.com',
+        'github.com' as HostName,
       );
     });
 
@@ -208,7 +215,7 @@ describe('context/App.tsx', () => {
             onClick={() =>
               markRepoNotifications(
                 'gitify-app/notifications-test',
-                'github.com',
+                'github.com' as HostName,
               )
             }
           >
@@ -227,7 +234,7 @@ describe('context/App.tsx', () => {
       expect(markRepoNotificationsMock).toHaveBeenCalledWith(
         mockDefaultState,
         'gitify-app/notifications-test',
-        'github.com',
+        'github.com' as HostName,
       );
     });
 
@@ -241,7 +248,7 @@ describe('context/App.tsx', () => {
             onClick={() =>
               markRepoNotificationsDone(
                 'gitify-app/notifications-test',
-                'github.com',
+                'github.com' as HostName,
               )
             }
           >
@@ -268,7 +275,7 @@ describe('context/App.tsx', () => {
           settings: mockSettings,
         },
         'gitify-app/notifications-test',
-        'github.com',
+        'github.com' as HostName,
       );
     });
   });
@@ -294,7 +301,7 @@ describe('context/App.tsx', () => {
             type="button"
             onClick={() =>
               loginWithPersonalAccessToken({
-                hostname: 'github.com',
+                hostname: 'github.com' as HostName as HostName,
                 token: '123-456',
               })
             }

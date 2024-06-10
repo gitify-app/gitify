@@ -2,6 +2,7 @@ import axios from 'axios';
 import nock from 'nock';
 import { mockGitifyUser, mockToken } from '../../__mocks__/state-mocks';
 import type { AuthState } from '../../types';
+import type { HostName } from '../branded-types';
 import Constants from '../constants';
 import {
   convertAccounts,
@@ -61,7 +62,7 @@ describe('utils/auth/migration.ts', () => {
       expect(
         hasAccountsToMigrate({
           enterpriseAccounts: [
-            { hostname: 'github.gitify.io', token: mockToken },
+            { hostname: 'github.gitify.io' as HostName, token: mockToken },
           ],
         } as AuthState),
       ).toBe(true);
@@ -72,9 +73,9 @@ describe('utils/auth/migration.ts', () => {
         hasAccountsToMigrate({
           token: mockToken,
           enterpriseAccounts: [
-            { hostname: 'github.gitify.io', token: mockToken },
+            { hostname: 'github.gitify.io' as HostName, token: mockToken },
           ],
-          accounts: [{ hostname: 'github.com', token: mockToken }],
+          accounts: [{ hostname: 'github.com' as HostName, token: mockToken }],
         } as AuthState),
       ).toBe(false);
     });
@@ -107,13 +108,13 @@ describe('utils/auth/migration.ts', () => {
 
       const result = await convertAccounts({
         enterpriseAccounts: [
-          { hostname: 'github.gitify.io', token: mockToken },
+          { hostname: 'github.gitify.io' as HostName, token: mockToken },
         ],
       } as AuthState);
 
       expect(result).toEqual([
         {
-          hostname: 'github.gitify.io',
+          hostname: 'github.gitify.io' as HostName,
           platform: 'GitHub Enterprise Server',
           method: 'OAuth App',
           token: mockToken,
@@ -132,7 +133,7 @@ describe('utils/auth/migration.ts', () => {
         token: mockToken,
         user: mockGitifyUser,
         enterpriseAccounts: [
-          { hostname: 'github.gitify.io', token: mockToken },
+          { hostname: 'github.gitify.io' as HostName, token: mockToken },
         ],
       } as AuthState);
 
@@ -145,7 +146,7 @@ describe('utils/auth/migration.ts', () => {
           user: mockGitifyUser,
         },
         {
-          hostname: 'github.gitify.io',
+          hostname: 'github.gitify.io' as HostName,
           platform: 'GitHub Enterprise Server',
           method: 'OAuth App',
           token: mockToken,

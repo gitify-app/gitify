@@ -4,6 +4,7 @@ import type { Notification } from '../typesGitHub';
 import { openExternalLink } from '../utils/comms';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
+import type { HostName } from './branded-types';
 import { Constants } from './constants';
 import {
   getCheckSuiteAttributes,
@@ -21,17 +22,20 @@ export function isOAuthAppLoggedIn(auth: AuthState): boolean {
   return auth.accounts.some((account) => account.method === 'OAuth App');
 }
 
-export function getAccountForHost(hostname: string, auth: AuthState): Account {
+export function getAccountForHost(
+  hostname: HostName,
+  auth: AuthState,
+): Account {
   return auth.accounts.find((account) => hostname.endsWith(account.hostname));
 }
 
-export function getPlatformFromHostname(hostname: string): PlatformType {
+export function getPlatformFromHostname(hostname: HostName): PlatformType {
   return hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname)
     ? 'GitHub Cloud'
     : 'GitHub Enterprise Server';
 }
 
-export function isEnterpriseHost(hostname: string): boolean {
+export function isEnterpriseHost(hostname: HostName): boolean {
   return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
 }
 

@@ -9,6 +9,7 @@ import {
   mockState,
 } from '../__mocks__/state-mocks';
 import { mockNotificationUser } from '../utils/api/__mocks__/response-mocks';
+import type { HostName } from '../utils/branded-types';
 import { Errors } from '../utils/constants';
 import { useNotifications } from './useNotifications';
 
@@ -333,7 +334,7 @@ describe('hooks/useNotifications.ts', () => {
   });
 
   describe('markNotificationRead', () => {
-    const hostname = 'github.com';
+    const hostname = 'github.com' as HostName;
     const id = 'notification-123';
 
     it('should mark a notification as read with success', async () => {
@@ -374,7 +375,7 @@ describe('hooks/useNotifications.ts', () => {
   });
 
   describe('markNotificationDone', () => {
-    const hostname = 'github.com';
+    const hostname = 'github.com' as HostName;
     const id = 'notification-123';
 
     it('should mark a notification as done with success', async () => {
@@ -415,7 +416,7 @@ describe('hooks/useNotifications.ts', () => {
   });
 
   describe('unsubscribeNotification', () => {
-    const hostname = 'github.com';
+    const hostname = 'github.com' as HostName;
     const id = 'notification-123';
 
     it('should unsubscribe from a notification with success', async () => {
@@ -468,7 +469,7 @@ describe('hooks/useNotifications.ts', () => {
   });
 
   describe('markRepoNotifications', () => {
-    const hostname = 'github.com';
+    const hostname = 'github.com' as HostName;
     const repoSlug = 'gitify-app/notifications-test';
 
     it("should mark a repository's notifications as read with success", async () => {
@@ -509,7 +510,7 @@ describe('hooks/useNotifications.ts', () => {
   });
 
   describe('markRepoNotificationsDone', () => {
-    const hostname = 'github.com';
+    const hostname = 'github.com' as HostName;
     const repoSlug = 'gitify-app/notifications-test';
     const id = 'notification-123';
 

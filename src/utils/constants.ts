@@ -1,11 +1,12 @@
 import type { ErrorType, GitifyError } from '../types';
+import type { HostName } from './branded-types';
 
 export const Constants = {
   // GitHub OAuth
   AUTH_SCOPE: ['read:user', 'notifications', 'repo'],
 
   DEFAULT_AUTH_OPTIONS: {
-    hostname: 'github.com',
+    hostname: 'github.com' as HostName,
     clientId: process.env.OAUTH_CLIENT_ID,
     clientSecret: process.env.OAUTH_CLIENT_SECRET,
   },

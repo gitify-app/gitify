@@ -15,6 +15,7 @@ import { AuthMethodIcon } from '../components/icons/AuthMethodIcon';
 import { PlatformIcon } from '../components/icons/PlatformIcon';
 import type { Account } from '../types';
 import { getAccountUUID, getDeveloperSettingsURL } from '../utils/auth/utils';
+import type { HostName } from '../utils/branded-types';
 import {
   openExternalLink,
   updateTrayIcon,
@@ -42,7 +43,7 @@ export const AccountsRoute: FC = () => {
     openExternalLink(url.toString());
   };
 
-  const openHost = (hostname: string) => {
+  const openHost = (hostname: HostName) => {
     openExternalLink(`https://${hostname}`);
   };
 

@@ -1,9 +1,10 @@
 import type { AccountNotifications } from '../types';
+import type { HostName } from './branded-types';
 
 export const removeNotifications = (
   repoSlug: string,
   notifications: AccountNotifications[],
-  hostname: string,
+  hostname: HostName,
 ): AccountNotifications[] => {
   const accountIndex = notifications.findIndex(
     (accountNotifications) =>
