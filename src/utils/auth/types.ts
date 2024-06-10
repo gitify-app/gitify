@@ -12,7 +12,7 @@ export interface LoginOAuthAppOptions {
 
 export interface LoginPersonalAccessTokenOptions {
   hostname: HostName;
-  token: string;
+  token: Token;
 }
 
 export interface AuthResponse {
@@ -22,7 +22,7 @@ export interface AuthResponse {
 
 export interface AuthTokenResponse {
   hostname: HostName;
-  token: string;
+  token: Token;
 }
 
 /**
@@ -30,5 +30,5 @@ export interface AuthTokenResponse {
  */
 export interface EnterpriseAccount {
   hostname: HostName;
-  token: string;
+  token: Token;
 }

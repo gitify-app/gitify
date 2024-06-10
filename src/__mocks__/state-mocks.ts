@@ -7,13 +7,13 @@ import {
   Theme,
 } from '../types';
 import type { EnterpriseAccount } from '../utils/auth/types';
-import type { HostName } from '../utils/branded-types';
+import type { HostName, Token } from '../utils/branded-types';
 import Constants from '../utils/constants';
 
 export const mockEnterpriseAccounts: EnterpriseAccount[] = [
   {
     hostname: 'github.gitify.io' as HostName,
-    token: '1234568790',
+    token: '1234568790' as Token,
   },
 ];
 
@@ -26,7 +26,7 @@ export const mockGitifyUser: GitifyUser = {
 export const mockPersonalAccessTokenAccount: Account = {
   platform: 'GitHub Cloud',
   method: 'Personal Access Token',
-  token: 'token-123-456',
+  token: 'token-123-456' as Token,
   hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
   user: mockGitifyUser,
 };
@@ -34,7 +34,7 @@ export const mockPersonalAccessTokenAccount: Account = {
 export const mockOAuthAccount: Account = {
   platform: 'GitHub Enterprise Server',
   method: 'OAuth App',
-  token: '1234568790',
+  token: '1234568790' as Token,
   hostname: 'github.gitify.io' as HostName,
   user: mockGitifyUser,
 };
@@ -42,7 +42,7 @@ export const mockOAuthAccount: Account = {
 export const mockGitHubCloudAccount: Account = {
   platform: 'GitHub Cloud',
   method: 'Personal Access Token',
-  token: 'token-123-456',
+  token: 'token-123-456' as Token,
   hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
   user: mockGitifyUser,
 };
@@ -50,7 +50,7 @@ export const mockGitHubCloudAccount: Account = {
 export const mockGitHubEnterpriseServerAccount: Account = {
   platform: 'GitHub Enterprise Server',
   method: 'Personal Access Token',
-  token: '1234568790',
+  token: '1234568790' as Token,
   hostname: 'github.gitify.io' as HostName,
   user: mockGitifyUser,
 };
@@ -58,7 +58,7 @@ export const mockGitHubEnterpriseServerAccount: Account = {
 export const mockGitHubAppAccount: Account = {
   platform: 'GitHub Cloud',
   method: 'GitHub App',
-  token: '987654321',
+  token: '987654321' as Token,
   hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
   user: mockGitifyUser,
 };
@@ -67,7 +67,7 @@ export const mockAuth: AuthState = {
   accounts: [mockGitHubCloudAccount, mockGitHubEnterpriseServerAccount],
 };
 
-export const mockToken = 'token-123-456';
+export const mockToken = 'token-123-456' as Token;
 
 export const mockSettings: SettingsState = {
   participating: false,

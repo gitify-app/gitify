@@ -1,4 +1,5 @@
 import axios, { type AxiosPromise, type Method } from 'axios';
+import type { Token } from '../branded-types';
 
 export function apiRequest(
   url: string,
@@ -14,7 +15,7 @@ export function apiRequest(
 export function apiRequestAuth(
   url: string,
   method: Method,
-  token: string,
+  token: Token,
   data = {},
 ): AxiosPromise | null {
   axios.defaults.headers.common.Accept = 'application/json';

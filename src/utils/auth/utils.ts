@@ -4,7 +4,7 @@ import type { Account, AuthState, GitifyUser } from '../../types';
 import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
-import type { HostName } from '../branded-types';
+import type { HostName, Token } from '../branded-types';
 import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
 import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
@@ -77,7 +77,7 @@ export const authGitHub = (
 };
 
 export const getUserData = async (
-  token: string,
+  token: Token,
   hostname: HostName,
 ): Promise<GitifyUser> => {
   const response: UserDetails = (await getAuthenticatedUser(hostname, token))
@@ -111,7 +111,7 @@ export const getToken = async (
 export function addAccount(
   auth: AuthState,
   method: AuthMethod,
-  token: string,
+  token: Token,
   hostname: HostName,
   user?: GitifyUser,
 ): AuthState {
@@ -196,7 +196,7 @@ export function isValidClientId(clientId: string) {
   return /^[A-Z0-9_]{20}$/i.test(clientId);
 }
 
-export function isValidToken(token: string) {
+export function isValidToken(token: Token) {
   return /^[A-Z0-9_]{40}$/i.test(token);
 }
 

@@ -3,7 +3,7 @@ import type { AxiosPromise, AxiosResponse } from 'axios';
 import { mockAuth, mockGitHubCloudAccount } from '../../__mocks__/state-mocks';
 import type { Account, AuthState } from '../../types';
 import * as apiRequests from '../api/request';
-import type { HostName } from '../branded-types';
+import type { HostName, Token } from '../branded-types';
 import * as auth from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 
@@ -118,7 +118,7 @@ describe('utils/auth/utils.ts', () => {
         const result = auth.addAccount(
           mockAuthState,
           'Personal Access Token',
-          '123-456',
+          '123-456' as Token,
           'github.com' as HostName,
         );
 
@@ -127,7 +127,7 @@ describe('utils/auth/utils.ts', () => {
             hostname: 'github.com' as HostName,
             method: 'Personal Access Token',
             platform: 'GitHub Cloud',
-            token: '123-456',
+            token: '123-456' as Token,
             user: undefined,
           },
         ]);
@@ -137,7 +137,7 @@ describe('utils/auth/utils.ts', () => {
         const result = auth.addAccount(
           mockAuthState,
           'OAuth App',
-          '123-456',
+          '123-456' as Token,
           'github.com' as HostName,
         );
 
@@ -146,7 +146,7 @@ describe('utils/auth/utils.ts', () => {
             hostname: 'github.com' as HostName,
             method: 'OAuth App',
             platform: 'GitHub Cloud',
-            token: '123-456',
+            token: '123-456' as Token,
             user: undefined,
           },
         ]);
@@ -158,7 +158,7 @@ describe('utils/auth/utils.ts', () => {
         const result = auth.addAccount(
           mockAuthState,
           'Personal Access Token',
-          '123-456',
+          '123-456' as Token,
           'github.gitify.io' as HostName,
         );
 
@@ -167,7 +167,7 @@ describe('utils/auth/utils.ts', () => {
             hostname: 'github.gitify.io' as HostName,
             method: 'Personal Access Token',
             platform: 'GitHub Enterprise Server',
-            token: '123-456',
+            token: '123-456' as Token,
             user: undefined,
           },
         ]);
@@ -177,7 +177,7 @@ describe('utils/auth/utils.ts', () => {
         const result = auth.addAccount(
           mockAuthState,
           'OAuth App',
-          '123-456',
+          '123-456' as Token,
           'github.gitify.io' as HostName,
         );
 
@@ -186,7 +186,7 @@ describe('utils/auth/utils.ts', () => {
             hostname: 'github.gitify.io' as HostName,
             method: 'OAuth App',
             platform: 'GitHub Enterprise Server',
-            token: '123-456',
+            token: '123-456' as Token,
             user: undefined,
           },
         ]);
@@ -308,16 +308,16 @@ describe('utils/auth/utils.ts', () => {
   describe('isValidToken', () => {
     it('should validate token - valid', () => {
       expect(
-        auth.isValidToken('1234567890_asdfghjklPOIUYTREWQ0987654321'),
+        auth.isValidToken('1234567890_asdfghjklPOIUYTREWQ0987654321' as Token),
       ).toBeTruthy();
     });
 
     it('should validate token - empty', () => {
-      expect(auth.isValidToken('')).toBeFalsy();
+      expect(auth.isValidToken('' as Token)).toBeFalsy();
     });
 
     it('should validate token - invalid', () => {
-      expect(auth.isValidToken('1234567890asdfg')).toBeFalsy();
+      expect(auth.isValidToken('1234567890asdfg' as Token)).toBeFalsy();
     });
   });
 });

@@ -17,7 +17,12 @@ import {
   isValidHostname,
   isValidToken,
 } from '../utils/auth/utils';
-import type { ClientID, ClientSecret, HostName } from '../utils/branded-types';
+import type {
+  ClientID,
+  ClientSecret,
+  HostName,
+  Token,
+} from '../utils/branded-types';
 import Constants from '../utils/constants';
 
 interface IValues {
@@ -49,7 +54,7 @@ export const validate = (values: IValues): IFormErrors => {
 
   if (!values.clientSecret) {
     errors.clientSecret = 'Required';
-  } else if (!isValidToken(values.clientSecret)) {
+  } else if (!isValidToken(values.clientSecret as unknown as Token)) {
     errors.clientSecret = 'Invalid client secret.';
   }
 

@@ -15,7 +15,7 @@ import type {
   Release,
   UserDetails,
 } from '../../typesGitHub';
-import type { HostName } from '../branded-types';
+import type { HostName, Token } from '../branded-types';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
 import { apiRequestAuth } from './request';
@@ -28,7 +28,7 @@ import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
  */
 export function getAuthenticatedUser(
   hostname: HostName,
-  token: string,
+  token: Token,
 ): AxiosPromise<UserDetails> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += 'user';
@@ -39,7 +39,7 @@ export function getAuthenticatedUser(
 //
 export function headNotifications(
   hostname: HostName,
-  token: string,
+  token: Token,
 ): AxiosPromise<void> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += 'notifications';
@@ -72,7 +72,7 @@ export function listNotificationsForAuthenticatedUser(
 export function markNotificationThreadAsRead(
   threadId: string,
   hostname: HostName,
-  token: string,
+  token: Token,
 ): AxiosPromise<void> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
@@ -89,7 +89,7 @@ export function markNotificationThreadAsRead(
 export function markNotificationThreadAsDone(
   threadId: string,
   hostname: HostName,
-  token: string,
+  token: Token,
 ): AxiosPromise<void> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
@@ -105,7 +105,7 @@ export function markNotificationThreadAsDone(
 export function ignoreNotificationThreadSubscription(
   threadId: string,
   hostname: HostName,
-  token: string,
+  token: Token,
 ): AxiosPromise<NotificationThreadSubscription> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}/subscription`;
@@ -124,7 +124,7 @@ export function ignoreNotificationThreadSubscription(
 export function markRepositoryNotificationsAsRead(
   repoSlug: string,
   hostname: HostName,
-  token: string,
+  token: Token,
 ): AxiosPromise<void> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `repos/${repoSlug}/notifications`;
@@ -137,7 +137,7 @@ export function markRepositoryNotificationsAsRead(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/commits/commits#get-a-commit
  */
-export function getCommit(url: string, token: string): AxiosPromise<Commit> {
+export function getCommit(url: string, token: Token): AxiosPromise<Commit> {
   return apiRequestAuth(url, 'GET', token);
 }
 
@@ -149,7 +149,7 @@ export function getCommit(url: string, token: string): AxiosPromise<Commit> {
  */
 export function getCommitComment(
   url: string,
-  token: string,
+  token: Token,
 ): AxiosPromise<CommitComment> {
   return apiRequestAuth(url, 'GET', token);
 }
@@ -159,7 +159,7 @@ export function getCommitComment(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/issues/issues#get-an-issue
  */
-export function getIssue(url: string, token: string): AxiosPromise<Issue> {
+export function getIssue(url: string, token: Token): AxiosPromise<Issue> {
   return apiRequestAuth(url, 'GET', token);
 }
 
@@ -171,7 +171,7 @@ export function getIssue(url: string, token: string): AxiosPromise<Issue> {
  */
 export function getIssueOrPullRequestComment(
   url: string,
-  token: string,
+  token: Token,
 ): AxiosPromise<IssueOrPullRequestComment> {
   return apiRequestAuth(url, 'GET', token);
 }
@@ -183,7 +183,7 @@ export function getIssueOrPullRequestComment(
  */
 export function getPullRequest(
   url: string,
-  token: string,
+  token: Token,
 ): AxiosPromise<PullRequest> {
   return apiRequestAuth(url, 'GET', token);
 }
@@ -195,7 +195,7 @@ export function getPullRequest(
  */
 export function getPullRequestReviews(
   url: string,
-  token: string,
+  token: Token,
 ): AxiosPromise<PullRequestReview[]> {
   return apiRequestAuth(url, 'GET', token);
 }
@@ -205,14 +205,14 @@ export function getPullRequestReviews(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/releases/releases#get-a-release
  */
-export function getRelease(url: string, token: string): AxiosPromise<Release> {
+export function getRelease(url: string, token: Token): AxiosPromise<Release> {
   return apiRequestAuth(url, 'GET', token);
 }
 
 /**
  * Get the `html_url` from the GitHub response
  */
-export async function getHtmlUrl(url: string, token: string): Promise<string> {
+export async function getHtmlUrl(url: string, token: Token): Promise<string> {
   try {
     const response = (await apiRequestAuth(url, 'GET', token)).data;
     return response.html_url;

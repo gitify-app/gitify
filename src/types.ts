@@ -6,7 +6,7 @@ import type {
   EnterpriseAccount,
   PlatformType,
 } from './utils/auth/types';
-import type { HostName } from './utils/branded-types';
+import type { HostName, Token } from './utils/branded-types';
 
 export type Status = 'loading' | 'success' | 'error';
 
@@ -15,7 +15,7 @@ export interface AuthState {
   /**
    * @deprecated This attribute is deprecated and will be removed in a future release.
    */
-  token?: string;
+  token?: Token;
   /**
    * @deprecated This attribute is deprecated and will be removed in a future release.
    */
@@ -30,7 +30,7 @@ export interface Account {
   method: AuthMethod;
   platform: PlatformType;
   hostname: HostName;
-  token: string;
+  token: Token;
   user: GitifyUser | null;
 }
 

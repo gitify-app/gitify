@@ -5,7 +5,7 @@ import {
   mockToken,
 } from '../../__mocks__/state-mocks';
 import type { SettingsState } from '../../types';
-import type { HostName } from '../branded-types';
+import type { HostName, Token } from '../branded-types';
 import {
   getAuthenticatedUser,
   getHtmlUrl,
@@ -271,7 +271,7 @@ describe('utils/api/client.ts', () => {
 
       const result = await getHtmlUrl(
         'https://api.github.com/repos/gitify-app/notifications-test/issues/785',
-        '123',
+        '123' as Token,
       );
       expect(result).toBe(
         'https://github.com/gitify-app/notifications-test/issues/785',
@@ -289,7 +289,7 @@ describe('utils/api/client.ts', () => {
 
       await getHtmlUrl(
         'https://api.github.com/repos/gitify-app/gitify/issues/785',
-        '123',
+        '123' as Token,
       );
 
       expect(consoleErrorSpy).toHaveBeenCalledWith('Failed to get html url');

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import type { Token } from '../branded-types';
 import { apiRequest, apiRequestAuth } from './request';
 
 jest.mock('axios');
@@ -40,7 +41,7 @@ describe('utils/api/request.ts', () => {
 });
 
 describe('apiRequestAuth', () => {
-  const token = 'yourAuthToken';
+  const token = 'yourAuthToken' as Token;
 
   afterEach(() => {
     jest.resetAllMocks();
