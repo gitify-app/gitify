@@ -1,5 +1,4 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
 import {
   mockAuth,
@@ -72,6 +71,8 @@ describe('routes/Accounts.tsx', () => {
 
   describe('Account interactions', () => {
     it('open profile in external browser', async () => {
+      const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
       await act(async () => {
         render(
           <AppContext.Provider
@@ -91,13 +92,15 @@ describe('routes/Accounts.tsx', () => {
 
       fireEvent.click(screen.getByTitle('Open Profile'));
 
-      expect(shell.openExternal).toHaveBeenCalledTimes(1);
-      expect(shell.openExternal).toHaveBeenCalledWith(
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
         'https://github.com/octocat',
       );
     });
 
     it('open host in external browser', async () => {
+      const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
       await act(async () => {
         render(
           <AppContext.Provider
@@ -117,11 +120,13 @@ describe('routes/Accounts.tsx', () => {
 
       fireEvent.click(screen.getByTitle('Open Host'));
 
-      expect(shell.openExternal).toHaveBeenCalledTimes(1);
-      expect(shell.openExternal).toHaveBeenCalledWith('https://github.com');
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith('https://github.com');
     });
 
     it('open developer settings in external browser', async () => {
+      const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
       await act(async () => {
         render(
           <AppContext.Provider
@@ -141,8 +146,8 @@ describe('routes/Accounts.tsx', () => {
 
       fireEvent.click(screen.getByTitle('Open Developer Settings'));
 
-      expect(shell.openExternal).toHaveBeenCalledTimes(1);
-      expect(shell.openExternal).toHaveBeenCalledWith(
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
         'https://github.com/settings/tokens',
       );
     });

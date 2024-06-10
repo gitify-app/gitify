@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { shell } from 'electron';
 import { AppContext } from '../context/App';
 import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
+import * as comms from '../utils/comms';
 import { RepositoryNotifications } from './Repository';
 
 jest.mock('./NotificationRow', () => ({
@@ -20,8 +20,6 @@ describe('components/Repository.tsx', () => {
 
   beforeEach(() => {
     markRepoNotificationsRead.mockReset();
-
-    jest.spyOn(shell, 'openExternal');
   });
 
   it('should render itself & its children', () => {
@@ -34,6 +32,8 @@ describe('components/Repository.tsx', () => {
   });
 
   it('should open the browser when clicking on the repo name', () => {
+    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
     render(
       <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
@@ -42,8 +42,8 @@ describe('components/Repository.tsx', () => {
 
     fireEvent.click(screen.getByText(props.repoName));
 
-    expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(shell.openExternal).toHaveBeenCalledWith(
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/gitify-app/notifications-test',
     );
   });
