@@ -4,13 +4,7 @@ const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('node:path');
 
-const idleIcon = path.join(
-  __dirname,
-  'assets',
-  'images',
-  'tray-idleTemplate.png',
-);
-
+const idleIcon = path.join(__dirname, 'assets', 'images', 'tray-idle.png');
 const activeIcon = path.join(__dirname, 'assets', 'images', 'tray-active.png');
 
 const browserWindowOpts = {
