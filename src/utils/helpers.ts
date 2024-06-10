@@ -1,5 +1,4 @@
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
-import type { Account } from '../types';
 import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
