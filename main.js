@@ -47,11 +47,11 @@ app.whenReady().then(async () => {
   mb.on('ready', () => {
     autoUpdater.checkForUpdatesAndNotify();
 
-    mb.app.setAppUserModelId('com.electron.gitify');
-    mb.tray.setIgnoreDoubleClickEvents(true);
-
     mb.hideWindow();
+    mb.app.setAppUserModelId('com.electron.gitify');
 
+    // Tray configuration
+    mb.tray.setIgnoreDoubleClickEvents(true);
     mb.tray.on('right-click', (_event, bounds) => {
       mb.tray.popUpContextMenu(contextMenu, { x: bounds.x, y: bounds.y });
     });
@@ -59,6 +59,7 @@ app.whenReady().then(async () => {
     // Force the window to retrieve its previous zoom factor
     mb.window.webContents.setZoomFactor(mb.window.webContents.getZoomFactor());
 
+    // Custom key events
     mb.window.webContents.on('before-input-event', (event, input) => {
       if (input.key === 'Escape') {
         mb.window.hide();
@@ -66,6 +67,7 @@ app.whenReady().then(async () => {
       }
     });
 
+    // DevTools configuration
     mb.window.webContents.on('devtools-opened', () => {
       mb.window.setSize(800, 600);
       mb.window.center();
@@ -88,6 +90,9 @@ app.whenReady().then(async () => {
     }
   });
 
+  /**
+   * Gitify custom IPC events
+   */
   ipc.handle('gitify:version', () => app.getVersion());
 
   ipc.on('gitify:window-show', () => mb.showWindow());
