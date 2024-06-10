@@ -1,4 +1,4 @@
-# Gitify [![Build Workflow][build-workflow-badge]][github-actions] [![Release Workflow][release-workflow-badge]][github-actions] [![Coveralls][coveralls-badge]][coveralls] [![Renovate enabled][renovate-badge]][renovate] [![Contributors][contributors-badge]][github] [![Downloads - Total][downloads-total-badge]][website] [![Downloads - Latest Release][downloads-latest-badge]][website] [![OSS License][license-badge]][license] [![Latest Release][github-release-badge]][github-releases] [![Homebrew Cask][homebrew-cask-badge]][homebrew-cask]
+# Gitify [![Build Workflow][build-workflow-badge]][github-actions] [![Release Workflow][release-workflow-badge]][github-actions] [![Coveralls][coveralls-badge]][coveralls] [![Renovate enabled][renovate-badge]][renovate] [![Libraries.io dependency status][librariesio-badge]][librariesio] [![Contributors][contributors-badge]][github] [![Downloads - Total][downloads-total-badge]][website] [![Downloads - Latest Release][downloads-latest-badge]][website] [![OSS License][license-badge]][license] [![Latest Release][github-release-badge]][github-releases] [![Homebrew Cask][homebrew-cask-badge]][homebrew-cask]
 
 > GitHub Notifications on your menu bar. Available on macOS, Windows and Linux.
 
@@ -100,6 +100,8 @@ For more information, see [LICENSE](LICENSE).
 [downloads-total-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/total?label=downloads@all
 [downloads-latest-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/latest/total
 [contributors-badge]: https://img.shields.io/github/contributors/gitify-app/gitify
+[librariesio]: https://libraries.io/
+[librariesio-badge]: https://img.shields.io/librariesio/github/gitify-app/gitify
 [license]: LICENSE
 [license-badge]: https://img.shields.io/github/license/gitify-app/gitify
 [github-release-badge]: https://img.shields.io/github/v/release/gitify-app/gitify
