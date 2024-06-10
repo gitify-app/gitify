@@ -4852,9 +4852,10 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
           <div
             class="flex flex-wrap items-center text-xs text-capitalize gap-1"
           >
-            <div
+            <button
               class="flex-shrink-0"
               title="View User Profile"
+              type="button"
             >
               <img
                 alt="gitify-app's avatar"
@@ -4862,7 +4863,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
                 title="gitify-app"
               />
-            </div>
+            </button>
             <div
               title="You're watching the repository."
             >
@@ -5038,9 +5039,10 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
         <div
           class="flex flex-wrap items-center text-xs text-capitalize gap-1"
         >
-          <div
+          <button
             class="flex-shrink-0"
             title="View User Profile"
+            type="button"
           >
             <img
               alt="gitify-app's avatar"
@@ -5048,7 +5050,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
               title="gitify-app"
             />
-          </div>
+          </button>
           <div
             title="You're watching the repository."
           >
@@ -5281,9 +5283,10 @@ exports[`components/NotificationRow.tsx should render itself & its children when
           <div
             class="flex flex-wrap items-center text-xs text-capitalize gap-1"
           >
-            <div
+            <button
               class="flex-shrink-0"
               title="View User Profile"
+              type="button"
             >
               <img
                 alt="gitify-app's avatar"
@@ -5291,7 +5294,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
                 title="gitify-app"
               />
-            </div>
+            </button>
             <div
               title="You're watching the repository."
             >
@@ -5467,9 +5470,10 @@ exports[`components/NotificationRow.tsx should render itself & its children when
         <div
           class="flex flex-wrap items-center text-xs text-capitalize gap-1"
         >
-          <div
+          <button
             class="flex-shrink-0"
             title="View User Profile"
+            type="button"
           >
             <img
               alt="gitify-app's avatar"
@@ -5477,7 +5481,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
               title="gitify-app"
             />
-          </div>
+          </button>
           <div
             title="You're watching the repository."
           >

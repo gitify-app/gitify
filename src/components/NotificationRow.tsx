@@ -8,29 +8,22 @@ import {
   ReadIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import {
-  type FC,
-  type KeyboardEvent,
-  type MouseEvent,
-  useCallback,
-  useContext,
-} from 'react';
+import { type FC, type MouseEvent, useCallback, useContext } from 'react';
 
 import { AppContext } from '../context/App';
 import { PILL_CLASS_NAME } from '../styles/gitify';
 import { IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
-import { openExternalLink } from '../utils/comms';
 import {
   formatForDisplay,
   formatNotificationUpdatedAt,
-  openInBrowser,
 } from '../utils/helpers';
 import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
   getPullRequestReviewIcon,
 } from '../utils/icons';
+import { openNotification, openUserProfile } from '../utils/links';
 import { formatReason } from '../utils/reason';
 
 interface IProps {
@@ -49,8 +42,8 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     notifications,
   } = useContext(AppContext);
 
-  const openNotification = useCallback(() => {
-    openInBrowser(notification);
+  const handleNotification = useCallback(() => {
+    openNotification(notification);
 
     if (settings.markAsDoneOnOpen) {
       markNotificationDone(notification.id, hostname);
@@ -65,15 +58,6 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     event.stopPropagation();
 
     unsubscribeNotification(notification.id, hostname);
-  };
-
-  const openUserProfile = (
-    event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>,
-  ) => {
-    // Don't trigger onClick of parent element.
-    event.stopPropagation();
-
-    openExternalLink(notification.subject.user.html_url);
   };
 
   const reason = formatReason(notification.reason);
@@ -116,8 +100,8 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
 
       <div
         className="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
-        onClick={() => openNotification()}
-        onKeyDown={() => openNotification()}
+        onClick={() => handleNotification()}
+        onKeyDown={() => handleNotification()}
       >
         <div
           className="mb-1 text-sm truncate cursor-pointer"
@@ -129,10 +113,14 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
 
         <div className="flex flex-wrap items-center text-xs text-capitalize gap-1">
           {notification.subject.user ? (
-            <div
+            <button
+              type="button"
               title="View User Profile"
-              onClick={openUserProfile}
-              onKeyDown={openUserProfile}
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                openUserProfile(notification.subject.user);
+              }}
               className="flex-shrink-0"
             >
               <img
@@ -141,7 +129,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 title={notification.subject.user.login}
                 alt={`${notification.subject.user.login}'s avatar`}
               />
-            </div>
+            </button>
           ) : (
             <div>
               <FeedPersonIcon

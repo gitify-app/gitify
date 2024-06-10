@@ -1,7 +1,6 @@
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
 import type { Account, AuthState } from '../types';
 import type { Notification } from '../typesGitHub';
-import { openExternalLink } from '../utils/comms';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
 import { Constants } from './constants';
@@ -182,10 +181,4 @@ export function formatNotificationUpdatedAt(
   } catch (e) {}
 
   return '';
-}
-
-export async function openInBrowser(notification: Notification) {
-  const url = await generateGitHubWebUrl(notification);
-
-  openExternalLink(url);
 }

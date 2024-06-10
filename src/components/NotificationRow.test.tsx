@@ -4,12 +4,12 @@ import { AppContext } from '../context/App';
 import type { Milestone, UserType } from '../typesGitHub';
 import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as comms from '../utils/comms';
-import * as helpers from '../utils/helpers';
+import * as links from '../utils/links';
 import { NotificationRow } from './NotificationRow';
 
 describe('components/NotificationRow.tsx', () => {
   beforeEach(() => {
-    jest.spyOn(helpers, 'openInBrowser');
+    jest.spyOn(links, 'openNotification');
   });
 
   afterEach(() => {
@@ -341,7 +341,7 @@ describe('components/NotificationRow.tsx', () => {
       );
 
       fireEvent.click(screen.getByRole('main'));
-      expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
+      expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
     });
 
@@ -366,7 +366,7 @@ describe('components/NotificationRow.tsx', () => {
       );
 
       fireEvent.keyDown(screen.getByRole('main'));
-      expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
+      expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
     });
 
@@ -391,7 +391,7 @@ describe('components/NotificationRow.tsx', () => {
       );
 
       fireEvent.click(screen.getByRole('main'));
-      expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
+      expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(markNotificationDone).toHaveBeenCalledTimes(1);
     });
 

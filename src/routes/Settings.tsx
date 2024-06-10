@@ -12,7 +12,6 @@ import { ipcRenderer } from 'electron';
 import {
   type FC,
   type MouseEvent,
-  useCallback,
   useContext,
   useEffect,
   useState,
@@ -23,8 +22,11 @@ import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import { Theme } from '../types';
-import { getAppVersion, openExternalLink, quitApp } from '../utils/comms';
-import Constants from '../utils/constants';
+import { getAppVersion, quitApp } from '../utils/comms';
+import {
+  openGitHubParticipatingDocs,
+  openGitifyReleaseNotes,
+} from '../utils/links';
 import { isLinux, isMacOS } from '../utils/platform';
 import { setTheme } from '../utils/theme';
 
@@ -33,21 +35,6 @@ export const SettingsRoute: FC = () => {
   const navigate = useNavigate();
 
   const [appVersion, setAppVersion] = useState<string | null>(null);
-
-  const openGitHubReleaseNotes = useCallback((version) => {
-    openExternalLink(
-      `https://github.com/${Constants.REPO_SLUG}/releases/tag/v${version}`,
-    );
-  }, []);
-
-  const openGitHubParticipatingDocs = (event: MouseEvent<HTMLElement>) => {
-    // Don't trigger onClick of parent element.
-    event.stopPropagation();
-
-    openExternalLink(
-      'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications',
-    );
-  };
 
   useEffect(() => {
     (async () => {
@@ -186,7 +173,11 @@ export const SettingsRoute: FC = () => {
                   type="button"
                   className="text-blue-500 mx-1"
                   title="Open GitHub documentation for participating and watching notifications"
-                  onClick={openGitHubParticipatingDocs}
+                  onClick={(event: MouseEvent<HTMLElement>) => {
+                    // Don't trigger onClick of parent element.
+                    event.stopPropagation();
+                    openGitHubParticipatingDocs();
+                  }}
                 >
                   official docs
                 </button>
@@ -290,7 +281,7 @@ export const SettingsRoute: FC = () => {
           type="button"
           className="font-semibold cursor-pointer"
           title="View release notes"
-          onClick={() => openGitHubReleaseNotes(appVersion)}
+          onClick={() => openGitifyReleaseNotes(appVersion)}
         >
           Gitify v{appVersion}
         </button>
