@@ -1,6 +1,7 @@
-import { render } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
 import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
+import * as links from '../utils/links';
 import { AccountNotifications } from './AccountNotifications';
 
 jest.mock('./Repository', () => ({
@@ -28,5 +29,24 @@ describe('components/AccountNotifications.tsx', () => {
 
     const tree = render(<AccountNotifications {...props} />);
     expect(tree).toMatchSnapshot();
+  });
+
+  it('should open profile when clicked', async () => {
+    const openAccountProfileMock = jest.spyOn(links, 'openAccountProfile');
+
+    const props = {
+      account: mockGitHubCloudAccount,
+      notifications: [],
+      showAccountHostname: true,
+    };
+
+    await act(async () => {
+      render(<AccountNotifications {...props} />);
+    });
+
+    fireEvent.click(screen.getByTitle('Open Profile'));
+
+    expect(openAccountProfileMock).toHaveBeenCalledTimes(1);
+    expect(openAccountProfileMock).toHaveBeenCalledWith(mockGitHubCloudAccount);
   });
 });

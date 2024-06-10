@@ -9,6 +9,8 @@ import {
 } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import * as comms from '../utils/comms';
+import * as links from '../utils/links';
+
 import { AccountsRoute } from './Accounts';
 
 const mockNavigate = jest.fn();
@@ -71,7 +73,7 @@ describe('routes/Accounts.tsx', () => {
 
   describe('Account interactions', () => {
     it('open profile in external browser', async () => {
-      const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+      const openAccountProfileMock = jest.spyOn(links, 'openAccountProfile');
 
       await act(async () => {
         render(
@@ -92,9 +94,9 @@ describe('routes/Accounts.tsx', () => {
 
       fireEvent.click(screen.getByTitle('Open Profile'));
 
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith(
-        'https://github.com/octocat',
+      expect(openAccountProfileMock).toHaveBeenCalledTimes(1);
+      expect(openAccountProfileMock).toHaveBeenCalledWith(
+        mockPersonalAccessTokenAccount,
       );
     });
 
