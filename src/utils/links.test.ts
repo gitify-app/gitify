@@ -106,13 +106,3 @@ describe('utils/links.ts', () => {
     );
   });
 });
-
-// export function openDeveloperSettings(account: Account) {
-//   const url = getDeveloperSettingsURL(account);
-//   openExternalLink(url);
-// }
-
-// export async function openNotification(notification: Notification) {
-//   const url = await generateGitHubWebUrl(notification);
-//   openExternalLink(url);
-// }
