@@ -267,7 +267,8 @@ async function getGitifySubjectForPullRequest(
   }
 
   const reviews = await getLatestReviewForReviewers(notification);
-  const linkedIssues = parseLinkedIssuesFromPrBody(pr.body);
+  const linkedIssues =
+    pr.user.type === 'User' ? parseLinkedIssuesFromPrBody(pr.body) : [];
 
   return {
     state: prState,
