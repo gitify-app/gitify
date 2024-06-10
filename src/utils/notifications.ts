@@ -4,10 +4,10 @@ import type {
   SettingsState,
 } from '../types';
 import { Notification } from '../typesGitHub';
-import { openInBrowser } from '../utils/helpers';
 import { listNotificationsForAuthenticatedUser } from './api/client';
 import { getAccountUUID } from './auth/utils';
 import { hideWindow, showWindow, updateTrayIcon } from './comms';
+import { openNotification } from './links';
 import { isWindows } from './platform';
 import { getGitifySubjectDetails } from './subject';
 
@@ -93,7 +93,7 @@ export const raiseNativeNotification = (notifications: Notification[]) => {
   nativeNotification.onclick = () => {
     if (notifications.length === 1) {
       hideWindow();
-      openInBrowser(notifications[0]);
+      openNotification(notifications[0]);
     } else {
       showWindow();
     }

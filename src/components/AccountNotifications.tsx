@@ -1,7 +1,7 @@
 import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
 import type { Account } from '../types';
 import type { Notification } from '../typesGitHub';
-import { openProfile } from '../utils/helpers';
+import { openAccountProfile } from '../utils/links';
 import { RepositoryNotifications } from './Repository';
 import { PlatformIcon } from './icons/PlatformIcon';
 
@@ -37,7 +37,7 @@ export const AccountNotifications = (props: IProps) => {
             <button
               type="button"
               title="Open Profile"
-              onClick={() => openProfile(account)}
+              onClick={() => openAccountProfile(account)}
             >
               @{account.user.login}
             </button>

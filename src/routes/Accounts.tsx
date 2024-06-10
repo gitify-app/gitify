@@ -15,13 +15,13 @@ import { AuthMethodIcon } from '../components/icons/AuthMethodIcon';
 import { PlatformIcon } from '../components/icons/PlatformIcon';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import type { Account } from '../types';
-import { getAccountUUID, getDeveloperSettingsURL } from '../utils/auth/utils';
+import { getAccountUUID } from '../utils/auth/utils';
+import { updateTrayIcon, updateTrayTitle } from '../utils/comms';
 import {
-  openExternalLink,
-  updateTrayIcon,
-  updateTrayTitle,
-} from '../utils/comms';
-import { openProfile } from '../utils/helpers';
+  openAccountProfile,
+  openDeveloperSettings,
+  openHost,
+} from '../utils/links';
 
 export const AccountsRoute: FC = () => {
   const { auth, logoutFromAccount } = useContext(AppContext);
@@ -33,15 +33,6 @@ export const AccountsRoute: FC = () => {
     updateTrayIcon();
     updateTrayTitle();
   }, []);
-
-  const openHost = (hostname: string) => {
-    openExternalLink(`https://${hostname}`);
-  };
-
-  const openDeveloperSettings = (account: Account) => {
-    const url = getDeveloperSettingsURL(account);
-    openExternalLink(url);
-  };
 
   const loginWithPersonalAccessToken = useCallback(() => {
     return navigate('/login-personal-access-token', { replace: true });
@@ -86,7 +77,7 @@ export const AccountsRoute: FC = () => {
                     type="button"
                     className="cursor-pointer font-semibold mb-1 text-sm"
                     title="Open Profile"
-                    onClick={() => openProfile(account)}
+                    onClick={() => openAccountProfile(account)}
                   >
                     @{account.user.login}
                     <span
