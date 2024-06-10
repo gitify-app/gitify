@@ -1,7 +1,7 @@
 import { mockSingleAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
+import { READ_NOTIFICATION_CLASS_NAME } from '../styles/gitify';
 import { mockSingleNotification } from './api/__mocks__/response-mocks';
-import Constants from './constants';
 import { removeNotification } from './remove-notification';
 
 describe('utils/remove-notification.ts', () => {
@@ -34,6 +34,6 @@ describe('utils/remove-notification.ts', () => {
     expect(document.getElementById).toHaveBeenCalledWith(
       mockSingleAccountNotifications[0].notifications[0].id,
     );
-    expect(mockElement.className).toContain(Constants.READ_CLASS_NAME);
+    expect(mockElement.className).toContain(READ_NOTIFICATION_CLASS_NAME);
   });
 });

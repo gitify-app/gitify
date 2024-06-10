@@ -1,7 +1,7 @@
+import { READ_NOTIFICATION_CLASS_NAME } from '../styles/gitify';
 import type { AccountNotifications, SettingsState } from '../types';
 import type { Notification } from '../typesGitHub';
 import { getAccountUUID } from './auth/utils';
-import Constants from './constants';
 
 export const removeNotification = (
   settings: SettingsState,
@@ -10,7 +10,7 @@ export const removeNotification = (
 ): AccountNotifications[] => {
   if (settings.delayNotificationState) {
     const notificationRow = document.getElementById(notification.id);
-    notificationRow.className += ` ${Constants.READ_CLASS_NAME}`;
+    notificationRow.className += ` ${READ_NOTIFICATION_CLASS_NAME}`;
     return notifications;
   }
 

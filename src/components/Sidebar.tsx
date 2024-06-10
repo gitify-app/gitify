@@ -8,6 +8,7 @@ import { type FC, useCallback, useContext, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
+import { BUTTON_SIDEBAR_CLASS_NAME } from '../styles/gitify';
 import { openExternalLink, quitApp } from '../utils/comms';
 import { Constants } from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
@@ -38,9 +39,6 @@ export const Sidebar: FC = () => {
   const notificationsCount = useMemo(() => {
     return getNotificationCount(notifications);
   }, [notifications]);
-
-  const sidebarButtonClasses =
-    'flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none disabled:text-gray-500 disabled:cursor-default';
 
   return (
     <div className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto">
@@ -76,7 +74,7 @@ export const Sidebar: FC = () => {
           <>
             <button
               type="button"
-              className={sidebarButtonClasses}
+              className={BUTTON_SIDEBAR_CLASS_NAME}
               title="Refresh Notifications"
               onClick={() => {
                 navigate('/', { replace: true });
@@ -92,7 +90,7 @@ export const Sidebar: FC = () => {
             </button>
             <button
               type="button"
-              className={sidebarButtonClasses}
+              className={BUTTON_SIDEBAR_CLASS_NAME}
               title="Settings"
               onClick={toggleSettings}
             >
@@ -104,7 +102,7 @@ export const Sidebar: FC = () => {
         {!isLoggedIn && (
           <button
             type="button"
-            className={sidebarButtonClasses}
+            className={BUTTON_SIDEBAR_CLASS_NAME}
             title="Quit Gitify"
             aria-label="Quit Gitify"
             onClick={quitApp}
