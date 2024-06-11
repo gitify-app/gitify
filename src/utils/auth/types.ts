@@ -6,8 +6,8 @@ export type PlatformType = 'GitHub Cloud' | 'GitHub Enterprise Server';
 
 export interface LoginOAuthAppOptions {
   hostname: HostName;
-  clientId: string;
-  clientSecret: string;
+  clientId: ClientID;
+  clientSecret: ClientSecret;
 }
 
 export interface LoginPersonalAccessTokenOptions {

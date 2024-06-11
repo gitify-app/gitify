@@ -4,7 +4,7 @@ import type { Account, AuthState, GitifyUser } from '../../types';
 import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
-import type { HostName, Token } from '../branded-types';
+import type { ClientID, HostName, Token } from '../branded-types';
 import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
 import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
@@ -192,7 +192,7 @@ export function isValidHostname(hostname: HostName) {
   );
 }
 
-export function isValidClientId(clientId: string) {
+export function isValidClientId(clientId: ClientID) {
   return /^[A-Z0-9_]{20}$/i.test(clientId);
 }
 

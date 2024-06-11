@@ -1,5 +1,5 @@
 import type { ErrorType, GitifyError } from '../types';
-import type { HostName } from './branded-types';
+import type { ClientID, ClientSecret, HostName } from './branded-types';
 
 export const Constants = {
   // GitHub OAuth
@@ -7,8 +7,8 @@ export const Constants = {
 
   DEFAULT_AUTH_OPTIONS: {
     hostname: 'github.com' as HostName,
-    clientId: process.env.OAUTH_CLIENT_ID,
-    clientSecret: process.env.OAUTH_CLIENT_SECRET,
+    clientId: process.env.OAUTH_CLIENT_ID as ClientID,
+    clientSecret: process.env.OAUTH_CLIENT_SECRET as ClientSecret,
   },
 
   GITHUB_API_BASE_URL: 'https://api.github.com',

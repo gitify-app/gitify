@@ -3,7 +3,7 @@ import type { AxiosPromise, AxiosResponse } from 'axios';
 import { mockAuth, mockGitHubCloudAccount } from '../../__mocks__/state-mocks';
 import type { Account, AuthState } from '../../types';
 import * as apiRequests from '../api/request';
-import type { HostName, Token } from '../branded-types';
+import type { ClientID, HostName, Token } from '../branded-types';
 import * as auth from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 
@@ -293,15 +293,17 @@ describe('utils/auth/utils.ts', () => {
 
   describe('isValidClientId', () => {
     it('should validate client id - valid', () => {
-      expect(auth.isValidClientId('1234567890_ASDFGHJKL')).toBeTruthy();
+      expect(
+        auth.isValidClientId('1234567890_ASDFGHJKL' as ClientID),
+      ).toBeTruthy();
     });
 
     it('should validate client id - empty', () => {
-      expect(auth.isValidClientId('')).toBeFalsy();
+      expect(auth.isValidClientId('' as ClientID)).toBeFalsy();
     });
 
     it('should validate client id - invalid', () => {
-      expect(auth.isValidClientId('1234567890asdfg')).toBeFalsy();
+      expect(auth.isValidClientId('1234567890asdfg' as ClientID)).toBeFalsy();
     });
   });
 
