@@ -17,6 +17,7 @@ import {
   type Status,
   Theme,
 } from '../types';
+import type { Notification } from '../typesGitHub';
 import { headNotifications } from '../utils/api/client';
 import { migrateAuthenticatedAccounts } from '../utils/auth/migration';
 import type {
@@ -30,7 +31,6 @@ import {
   getUserData,
   removeAccount,
 } from '../utils/auth/utils';
-import type { HostName } from '../utils/branded-types';
 import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
 import Constants from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
@@ -73,15 +73,14 @@ interface AppContextState {
   errorDetails: GitifyError;
   removeNotificationFromState: (
     settings: SettingsState,
-    id: string,
-    hostname: HostName,
+    notification: Notification,
   ) => void;
   fetchNotifications: () => Promise<void>;
-  markNotificationRead: (id: string, hostname: HostName) => Promise<void>;
-  markNotificationDone: (id: string, hostname: HostName) => Promise<void>;
-  unsubscribeNotification: (id: string, hostname: HostName) => Promise<void>;
-  markRepoNotifications: (id: string, hostname: HostName) => Promise<void>;
-  markRepoNotificationsDone: (id: string, hostname: HostName) => Promise<void>;
+  markNotificationRead: (notification: Notification) => Promise<void>;
+  markNotificationDone: (notification: Notification) => Promise<void>;
+  unsubscribeNotification: (notification: Notification) => Promise<void>;
+  markRepoNotificationsRead: (notification: Notification) => Promise<void>;
+  markRepoNotificationsDone: (notification: Notification) => Promise<void>;
 
   settings: SettingsState;
   updateSetting: (
@@ -104,7 +103,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
-    markRepoNotifications,
+    markRepoNotificationsRead,
     markRepoNotificationsDone,
   } = useNotifications();
 
@@ -113,7 +112,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    setTheme(settings.theme as Theme);
+    setTheme(settings.theme);
   }, [settings.theme]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for certain account or setting changes.
@@ -172,7 +171,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     async (data: LoginOAuthAppOptions) => {
       const { authOptions, authCode } = await authGitHub(data);
       const { token, hostname } = await getToken(authCode, authOptions);
-      const updatedAuth = addAccount(auth, 'OAuth App', token, hostname);
+      const user = await getUserData(token, hostname);
+      const updatedAuth = addAccount(auth, 'OAuth App', token, hostname, user);
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
@@ -182,7 +182,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const loginWithPersonalAccessToken = useCallback(
     async ({ token, hostname }: LoginPersonalAccessTokenOptions) => {
       await headNotifications(hostname, token);
-
       const user = await getUserData(token, hostname);
       const updatedAuth = addAccount(
         auth,
@@ -232,32 +231,32 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const markNotificationReadWithAccounts = useCallback(
-    async (id: string, hostname: HostName) =>
-      await markNotificationRead({ auth, settings }, id, hostname),
+    async (notification: Notification) =>
+      await markNotificationRead({ auth, settings }, notification),
     [auth, notifications],
   );
 
   const markNotificationDoneWithAccounts = useCallback(
-    async (id: string, hostname: HostName) =>
-      await markNotificationDone({ auth, settings }, id, hostname),
+    async (notification: Notification) =>
+      await markNotificationDone({ auth, settings }, notification),
     [auth, notifications],
   );
 
   const unsubscribeNotificationWithAccounts = useCallback(
-    async (id: string, hostname: HostName) =>
-      await unsubscribeNotification({ auth, settings }, id, hostname),
+    async (notification: Notification) =>
+      await unsubscribeNotification({ auth, settings }, notification),
     [auth, notifications],
   );
 
-  const markRepoNotificationsWithAccounts = useCallback(
-    async (repoSlug: string, hostname: HostName) =>
-      await markRepoNotifications({ auth, settings }, repoSlug, hostname),
+  const markRepoNotificationsReadWithAccounts = useCallback(
+    async (notification: Notification) =>
+      await markRepoNotificationsRead({ auth, settings }, notification),
     [auth, notifications],
   );
 
   const markRepoNotificationsDoneWithAccounts = useCallback(
-    async (repoSlug: string, hostname: HostName) =>
-      await markRepoNotificationsDone({ auth, settings }, repoSlug, hostname),
+    async (notification: Notification) =>
+      await markRepoNotificationsDone({ auth, settings }, notification),
     [auth, notifications],
   );
 
@@ -280,7 +279,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         markNotificationRead: markNotificationReadWithAccounts,
         markNotificationDone: markNotificationDoneWithAccounts,
         unsubscribeNotification: unsubscribeNotificationWithAccounts,
-        markRepoNotifications: markRepoNotificationsWithAccounts,
+        markRepoNotificationsRead: markRepoNotificationsReadWithAccounts,
         markRepoNotificationsDone: markRepoNotificationsDoneWithAccounts,
 
         settings,

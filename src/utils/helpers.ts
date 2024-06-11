@@ -1,7 +1,5 @@
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
-import type { Account, AuthState } from '../types';
 import type { Notification } from '../typesGitHub';
-import { openExternalLink } from '../utils/comms';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
 import type { HostName } from './branded-types';
@@ -12,24 +10,7 @@ import {
   getWorkflowRunAttributes,
 } from './subject';
 
-export function isPersonalAccessTokenLoggedIn(auth: AuthState): boolean {
-  return auth.accounts.some(
-    (account) => account.method === 'Personal Access Token',
-  );
-}
-
-export function isOAuthAppLoggedIn(auth: AuthState): boolean {
-  return auth.accounts.some((account) => account.method === 'OAuth App');
-}
-
-export function getAccountForHost(
-  hostname: HostName,
-  auth: AuthState,
-): Account {
-  return auth.accounts.find((account) => hostname.endsWith(account.hostname));
-}
-
-export function getPlatformFromHostname(hostname: HostName): PlatformType {
+export function getPlatformFromHostname(hostname: string): PlatformType {
   return hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname)
     ? 'GitHub Cloud'
     : 'GitHub Enterprise Server';
@@ -186,10 +167,4 @@ export function formatNotificationUpdatedAt(
   } catch (e) {}
 
   return '';
-}
-
-export async function openInBrowser(notification: Notification) {
-  const url = await generateGitHubWebUrl(notification);
-
-  openExternalLink(url);
 }

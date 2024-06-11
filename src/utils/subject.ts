@@ -6,6 +6,7 @@ import type {
   GitifyPullRequestReview,
   GitifySubject,
   Notification,
+  PullRequest,
   PullRequestReview,
   PullRequestStateType,
   SubjectUser,
@@ -267,7 +268,7 @@ async function getGitifySubjectForPullRequest(
   }
 
   const reviews = await getLatestReviewForReviewers(notification);
-  const linkedIssues = parseLinkedIssuesFromPrBody(pr.body);
+  const linkedIssues = parseLinkedIssuesFromPr(pr);
 
   return {
     state: prState,
@@ -336,16 +337,16 @@ export async function getLatestReviewForReviewers(
   });
 }
 
-export function parseLinkedIssuesFromPrBody(body: string): string[] {
+export function parseLinkedIssuesFromPr(pr: PullRequest): string[] {
   const linkedIssues: string[] = [];
 
-  if (!body) {
+  if (!pr.body || pr.user.type !== 'User') {
     return linkedIssues;
   }
 
   const regexPattern = /\s*#(\d+)\s*/gi;
 
-  const matches = body.matchAll(regexPattern);
+  const matches = pr.body.matchAll(regexPattern);
 
   for (const match of matches) {
     if (match[0]) {

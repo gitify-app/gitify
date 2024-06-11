@@ -1,0 +1,14 @@
+name: Update Website
+
+on:
+  push:
+    tags: 'v*'
+  workflow_dispatch: # For manually verify
+
+jobs:
+  redeploy-website:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Redeploy Website
+        run: curl -X POST -d {} ${{ secrets.NETLIFY_BUILD_HOOK_URL }}
+        

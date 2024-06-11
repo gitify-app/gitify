@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, SettingsState } from '../types';
+import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as apiRequests from '../utils/api/request';
 import type { HostName, Token } from '../utils/branded-types';
 import * as comms from '../utils/comms';
@@ -46,7 +47,7 @@ describe('context/App.tsx', () => {
     const markNotificationReadMock = jest.fn();
     const markNotificationDoneMock = jest.fn();
     const unsubscribeNotificationMock = jest.fn();
-    const markRepoNotificationsMock = jest.fn();
+    const markRepoNotificationsReadMock = jest.fn();
     const markRepoNotificationsDoneMock = jest.fn();
 
     const mockDefaultState = {
@@ -60,7 +61,7 @@ describe('context/App.tsx', () => {
         markNotificationRead: markNotificationReadMock,
         markNotificationDone: markNotificationDoneMock,
         unsubscribeNotification: unsubscribeNotificationMock,
-        markRepoNotifications: markRepoNotificationsMock,
+        markRepoNotificationsRead: markRepoNotificationsReadMock,
         markRepoNotificationsDone: markRepoNotificationsDoneMock,
       });
     });
@@ -122,9 +123,7 @@ describe('context/App.tsx', () => {
         return (
           <button
             type="button"
-            onClick={() =>
-              markNotificationRead('123-456', 'github.com' as HostName)
-            }
+            onClick={() => markNotificationRead(mockSingleNotification)}
           >
             Test Case
           </button>
@@ -140,8 +139,7 @@ describe('context/App.tsx', () => {
       expect(markNotificationReadMock).toHaveBeenCalledTimes(1);
       expect(markNotificationReadMock).toHaveBeenCalledWith(
         mockDefaultState,
-        '123-456',
-        'github.com' as HostName,
+        mockSingleNotification,
       );
     });
 
@@ -152,9 +150,7 @@ describe('context/App.tsx', () => {
         return (
           <button
             type="button"
-            onClick={() =>
-              markNotificationDone('123-456', 'github.com' as HostName)
-            }
+            onClick={() => markNotificationDone(mockSingleNotification)}
           >
             Test Case
           </button>
@@ -170,8 +166,7 @@ describe('context/App.tsx', () => {
       expect(markNotificationDoneMock).toHaveBeenCalledTimes(1);
       expect(markNotificationDoneMock).toHaveBeenCalledWith(
         mockDefaultState,
-        '123-456',
-        'github.com' as HostName,
+        mockSingleNotification,
       );
     });
 
@@ -182,9 +177,7 @@ describe('context/App.tsx', () => {
         return (
           <button
             type="button"
-            onClick={() =>
-              unsubscribeNotification('123-456', 'github.com' as HostName)
-            }
+            onClick={() => unsubscribeNotification(mockSingleNotification)}
           >
             Test Case
           </button>
@@ -200,24 +193,18 @@ describe('context/App.tsx', () => {
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
       expect(unsubscribeNotificationMock).toHaveBeenCalledWith(
         mockDefaultState,
-        '123-456',
-        'github.com' as HostName,
+        mockSingleNotification,
       );
     });
 
-    it('should call markRepoNotifications', async () => {
+    it('should call markRepoNotificationsRead', async () => {
       const TestComponent = () => {
-        const { markRepoNotifications } = useContext(AppContext);
+        const { markRepoNotificationsRead } = useContext(AppContext);
 
         return (
           <button
             type="button"
-            onClick={() =>
-              markRepoNotifications(
-                'gitify-app/notifications-test',
-                'github.com' as HostName,
-              )
-            }
+            onClick={() => markRepoNotificationsRead(mockSingleNotification)}
           >
             Test Case
           </button>
@@ -226,15 +213,14 @@ describe('context/App.tsx', () => {
 
       const { getByText } = customRender(<TestComponent />);
 
-      markRepoNotificationsMock.mockReset();
+      markRepoNotificationsReadMock.mockReset();
 
       fireEvent.click(getByText('Test Case'));
 
-      expect(markRepoNotificationsMock).toHaveBeenCalledTimes(1);
-      expect(markRepoNotificationsMock).toHaveBeenCalledWith(
+      expect(markRepoNotificationsReadMock).toHaveBeenCalledTimes(1);
+      expect(markRepoNotificationsReadMock).toHaveBeenCalledWith(
         mockDefaultState,
-        'gitify-app/notifications-test',
-        'github.com' as HostName,
+        mockSingleNotification,
       );
     });
 
@@ -245,12 +231,7 @@ describe('context/App.tsx', () => {
         return (
           <button
             type="button"
-            onClick={() =>
-              markRepoNotificationsDone(
-                'gitify-app/notifications-test',
-                'github.com' as HostName,
-              )
-            }
+            onClick={() => markRepoNotificationsDone(mockSingleNotification)}
           >
             Test Case
           </button>
@@ -274,8 +255,7 @@ describe('context/App.tsx', () => {
           },
           settings: mockSettings,
         },
-        'gitify-app/notifications-test',
-        'github.com' as HostName,
+        mockSingleNotification,
       );
     });
   });

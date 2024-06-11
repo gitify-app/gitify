@@ -2,13 +2,13 @@ import { CheckIcon, MarkGithubIcon, ReadIcon } from '@primer/octicons-react';
 import { type FC, useCallback, useContext } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AppContext } from '../context/App';
+import type { Account } from '../types';
 import type { Notification } from '../typesGitHub';
-import type { HostName } from '../utils/branded-types';
-import { openExternalLink } from '../utils/comms';
+import { openRepository } from '../utils/links';
 import { NotificationRow } from './NotificationRow';
 
 interface IProps {
-  hostname: HostName;
+  account: Account;
   repoNotifications: Notification[];
   repoName: string;
 }
@@ -16,25 +16,18 @@ interface IProps {
 export const RepositoryNotifications: FC<IProps> = ({
   repoName,
   repoNotifications,
-  hostname,
+  account,
 }) => {
-  const { markRepoNotifications, markRepoNotificationsDone } =
+  const { markRepoNotificationsRead, markRepoNotificationsDone } =
     useContext(AppContext);
 
-  const openBrowser = useCallback(() => {
-    const url = repoNotifications[0].repository.html_url;
-    openExternalLink(url);
-  }, [repoNotifications]);
-
   const markRepoAsRead = useCallback(() => {
-    const repoSlug = repoNotifications[0].repository.full_name;
-    markRepoNotifications(repoSlug, hostname);
-  }, [repoNotifications, hostname]);
+    markRepoNotificationsRead(repoNotifications[0]);
+  }, [repoNotifications, account]);
 
   const markRepoAsDone = useCallback(() => {
-    const repoSlug = repoNotifications[0].repository.full_name;
-    markRepoNotificationsDone(repoSlug, hostname);
-  }, [repoNotifications, hostname]);
+    markRepoNotificationsDone(repoNotifications[0]);
+  }, [repoNotifications, account]);
 
   const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
   const repoSlug = repoNotifications[0].repository.full_name;
@@ -54,8 +47,8 @@ export const RepositoryNotifications: FC<IProps> = ({
           )}
           <span
             className="cursor-pointer truncate"
-            onClick={openBrowser}
-            onKeyDown={openBrowser}
+            onClick={() => openRepository(repoNotifications[0].repository)}
+            onKeyDown={() => openRepository(repoNotifications[0].repository)}
           >
             {repoName}
           </span>
@@ -89,7 +82,7 @@ export const RepositoryNotifications: FC<IProps> = ({
           <CSSTransition key={obj.id} timeout={250} classNames="notification">
             <NotificationRow
               key={obj.id}
-              hostname={hostname}
+              account={account}
               notification={obj}
             />
           </CSSTransition>

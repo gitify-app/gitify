@@ -1,16 +1,19 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { shell } from 'electron';
-import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
+import {
+  mockAuth,
+  mockGitHubCloudAccount,
+  mockSettings,
+} from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import type { Milestone, UserType } from '../typesGitHub';
 import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
-import type { HostName } from '../utils/branded-types';
-import * as helpers from '../utils/helpers';
+import * as comms from '../utils/comms';
+import * as links from '../utils/links';
 import { NotificationRow } from './NotificationRow';
 
 describe('components/NotificationRow.tsx', () => {
   beforeEach(() => {
-    jest.spyOn(helpers, 'openInBrowser');
+    jest.spyOn(links, 'openNotification');
   });
 
   afterEach(() => {
@@ -24,7 +27,7 @@ describe('components/NotificationRow.tsx', () => {
 
     const props = {
       notification: mockSingleNotification,
-      hostname: 'github.com' as HostName,
+      account: mockGitHubCloudAccount,
     };
 
     const tree = render(
@@ -45,7 +48,7 @@ describe('components/NotificationRow.tsx', () => {
 
     const props = {
       notification: mockNotification,
-      hostname: 'github.com' as HostName,
+      account: mockGitHubCloudAccount,
     };
 
     const tree = render(
@@ -66,7 +69,7 @@ describe('components/NotificationRow.tsx', () => {
 
     const props = {
       notification: mockNotification,
-      hostname: 'github.com' as HostName,
+      account: mockGitHubCloudAccount,
     };
 
     const tree = render(
@@ -89,7 +92,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com' as HostName,
+          account: mockGitHubCloudAccount,
         };
 
         const tree = render(
@@ -116,7 +119,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com' as HostName,
+          account: mockGitHubCloudAccount,
         };
 
         const tree = render(
@@ -141,7 +144,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com' as HostName,
+          account: mockGitHubCloudAccount,
         };
 
         const tree = render(
@@ -168,7 +171,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com' as HostName,
+          account: mockGitHubCloudAccount,
         };
 
         const tree = render(
@@ -193,7 +196,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com' as HostName,
+          account: mockGitHubCloudAccount,
         };
 
         const tree = render(
@@ -218,7 +221,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com' as HostName,
+          account: mockGitHubCloudAccount,
         };
 
         const tree = render(
@@ -245,7 +248,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com' as HostName,
+          account: mockGitHubCloudAccount,
         };
 
         const tree = render(
@@ -275,7 +278,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com' as HostName,
+          account: mockGitHubCloudAccount,
         };
 
         const tree = render(
@@ -303,7 +306,7 @@ describe('components/NotificationRow.tsx', () => {
 
         const props = {
           notification: mockNotification,
-          hostname: 'github.com' as HostName,
+          account: mockGitHubCloudAccount,
         };
 
         const tree = render(
@@ -326,7 +329,7 @@ describe('components/NotificationRow.tsx', () => {
 
       const props = {
         notification: mockSingleNotification,
-        hostname: 'github.com' as HostName,
+        account: mockGitHubCloudAccount,
       };
 
       render(
@@ -342,7 +345,7 @@ describe('components/NotificationRow.tsx', () => {
       );
 
       fireEvent.click(screen.getByRole('main'));
-      expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
+      expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
     });
 
@@ -351,7 +354,7 @@ describe('components/NotificationRow.tsx', () => {
 
       const props = {
         notification: mockSingleNotification,
-        hostname: 'github.com' as HostName,
+        account: mockGitHubCloudAccount,
       };
 
       render(
@@ -367,7 +370,7 @@ describe('components/NotificationRow.tsx', () => {
       );
 
       fireEvent.keyDown(screen.getByRole('main'));
-      expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
+      expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
     });
 
@@ -376,7 +379,7 @@ describe('components/NotificationRow.tsx', () => {
 
       const props = {
         notification: mockSingleNotification,
-        hostname: 'github.com' as HostName,
+        account: mockGitHubCloudAccount,
       };
 
       render(
@@ -392,7 +395,7 @@ describe('components/NotificationRow.tsx', () => {
       );
 
       fireEvent.click(screen.getByRole('main'));
-      expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
+      expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(markNotificationDone).toHaveBeenCalledTimes(1);
     });
 
@@ -401,7 +404,7 @@ describe('components/NotificationRow.tsx', () => {
 
       const props = {
         notification: mockSingleNotification,
-        hostname: 'github.com' as HostName,
+        account: mockGitHubCloudAccount,
       };
 
       render(
@@ -424,7 +427,7 @@ describe('components/NotificationRow.tsx', () => {
 
       const props = {
         notification: mockSingleNotification,
-        hostname: 'github.com' as HostName,
+        account: mockGitHubCloudAccount,
       };
 
       render(
@@ -444,7 +447,7 @@ describe('components/NotificationRow.tsx', () => {
 
       const props = {
         notification: mockSingleNotification,
-        hostname: 'github.com' as HostName,
+        account: mockGitHubCloudAccount,
       };
 
       render(
@@ -461,6 +464,8 @@ describe('components/NotificationRow.tsx', () => {
     });
 
     it('should open notification user profile', () => {
+      const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
       const props = {
         notification: {
           ...mockSingleNotification,
@@ -476,7 +481,7 @@ describe('components/NotificationRow.tsx', () => {
             reviews: null,
           },
         },
-        hostname: 'github.com' as HostName,
+        account: mockGitHubCloudAccount,
       };
 
       render(
@@ -491,8 +496,8 @@ describe('components/NotificationRow.tsx', () => {
       );
 
       fireEvent.click(screen.getByTitle('View User Profile'));
-      expect(shell.openExternal).toHaveBeenCalledTimes(1);
-      expect(shell.openExternal).toHaveBeenCalledWith(
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
         props.notification.subject.user.html_url,
       );
     });

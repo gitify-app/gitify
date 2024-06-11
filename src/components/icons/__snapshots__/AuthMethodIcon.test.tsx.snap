@@ -6,8 +6,8 @@ exports[`components/icons/AuthMethodIcon.tsx should render GitHub App icon 1`] =
   "baseElement": <body>
     <div>
       <span
-        aria-label="GitHub App"
         class="mr-1"
+        title="GitHub App"
       >
         <svg
           aria-hidden="true"
@@ -28,8 +28,8 @@ exports[`components/icons/AuthMethodIcon.tsx should render GitHub App icon 1`] =
   </body>,
   "container": <div>
     <span
-      aria-label="GitHub App"
       class="mr-1"
+      title="GitHub App"
     >
       <svg
         aria-hidden="true"
@@ -107,8 +107,8 @@ exports[`components/icons/AuthMethodIcon.tsx should render OAuth App icon 1`] = 
   "baseElement": <body>
     <div>
       <span
-        aria-label="OAuth App"
         class="mr-1"
+        title="OAuth App"
       >
         <svg
           aria-hidden="true"
@@ -129,8 +129,8 @@ exports[`components/icons/AuthMethodIcon.tsx should render OAuth App icon 1`] = 
   </body>,
   "container": <div>
     <span
-      aria-label="OAuth App"
       class="mr-1"
+      title="OAuth App"
     >
       <svg
         aria-hidden="true"
@@ -208,8 +208,8 @@ exports[`components/icons/AuthMethodIcon.tsx should render Personal Access Token
   "baseElement": <body>
     <div>
       <span
-        aria-label="Personal Access Token"
         class="mr-1"
+        title="Personal Access Token"
       >
         <svg
           aria-hidden="true"
@@ -230,8 +230,8 @@ exports[`components/icons/AuthMethodIcon.tsx should render Personal Access Token
   </body>,
   "container": <div>
     <span
-      aria-label="Personal Access Token"
       class="mr-1"
+      title="Personal Access Token"
     >
       <svg
         aria-hidden="true"

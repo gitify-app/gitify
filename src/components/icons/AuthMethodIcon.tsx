@@ -9,7 +9,7 @@ export interface IAuthMethodIcon {
 
 export const AuthMethodIcon: FC<IAuthMethodIcon> = (props: IAuthMethodIcon) => {
   return (
-    <span aria-label={props.type} className="mr-1">
+    <span title={props.type} className="mr-1">
       {props.type === 'GitHub App' ? <AppsIcon size={props.size} /> : null}
       {props.type === 'Personal Access Token' ? (
         <KeyIcon size={props.size} />

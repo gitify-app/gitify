@@ -1,9 +1,9 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { ipcRenderer, shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { mockPlatform } from '../__mocks__/utils';
 import { AppContext } from '../context/App';
+import * as comms from '../utils/comms';
 import { SettingsRoute } from './Settings';
 
 const mockNavigate = jest.fn();
@@ -200,6 +200,8 @@ describe('routes/Settings.tsx', () => {
     });
 
     it('should open official docs for showOnlyParticipating tooltip', async () => {
+      const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
       await act(async () => {
         render(
           <AppContext.Provider
@@ -228,8 +230,8 @@ describe('routes/Settings.tsx', () => {
         ),
       );
 
-      expect(shell.openExternal).toHaveBeenCalledTimes(1);
-      expect(shell.openExternal).toHaveBeenCalledWith(
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
         'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications',
       );
     });
@@ -480,6 +482,8 @@ describe('routes/Settings.tsx', () => {
 
   describe('Footer section', () => {
     it('should open release notes', async () => {
+      const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
       await act(async () => {
         render(
           <AppContext.Provider
@@ -497,8 +501,8 @@ describe('routes/Settings.tsx', () => {
 
       fireEvent.click(screen.getByTitle('View release notes'));
 
-      expect(shell.openExternal).toHaveBeenCalledTimes(1);
-      expect(shell.openExternal).toHaveBeenCalledWith(
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
         'https://github.com/gitify-app/gitify/releases/tag/v0.0.1',
       );
     });
@@ -524,6 +528,8 @@ describe('routes/Settings.tsx', () => {
     });
 
     it('should quit the app', async () => {
+      const quitAppMock = jest.spyOn(comms, 'quitApp');
+
       await act(async () => {
         render(
           <AppContext.Provider
@@ -540,7 +546,7 @@ describe('routes/Settings.tsx', () => {
       });
 
       fireEvent.click(screen.getByTitle('Quit Gitify'));
-      expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
+      expect(quitAppMock).toHaveBeenCalledTimes(1);
     });
   });
 });

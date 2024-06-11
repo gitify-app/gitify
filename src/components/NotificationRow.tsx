@@ -8,38 +8,30 @@ import {
   ReadIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import {
-  type FC,
-  type KeyboardEvent,
-  type MouseEvent,
-  useCallback,
-  useContext,
-} from 'react';
+import { type FC, type MouseEvent, useCallback, useContext } from 'react';
 
 import { AppContext } from '../context/App';
-import { IconColor } from '../types';
+import { PILL_CLASS_NAME } from '../styles/gitify';
+import { type Account, IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
-import type { HostName } from '../utils/branded-types';
-import { openExternalLink } from '../utils/comms';
-import Constants from '../utils/constants';
 import {
   formatForDisplay,
   formatNotificationUpdatedAt,
-  openInBrowser,
 } from '../utils/helpers';
 import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
   getPullRequestReviewIcon,
 } from '../utils/icons';
+import { openNotification, openUserProfile } from '../utils/links';
 import { formatReason } from '../utils/reason';
 
 interface IProps {
-  hostname: HostName;
+  account: Account;
   notification: Notification;
 }
 
-export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
+export const NotificationRow: FC<IProps> = ({ notification, account }) => {
   const {
     auth,
     settings,
@@ -50,14 +42,14 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     notifications,
   } = useContext(AppContext);
 
-  const openNotification = useCallback(() => {
-    openInBrowser(notification);
+  const handleNotification = useCallback(() => {
+    openNotification(notification);
 
     if (settings.markAsDoneOnOpen) {
-      markNotificationDone(notification.id, hostname);
+      markNotificationDone(notification);
     } else {
       // no need to mark as read, github does it by default when opening it
-      removeNotificationFromState(settings, notification.id, hostname);
+      removeNotificationFromState(settings, notification);
     }
   }, [notifications, notification, auth, settings]); // notifications required here to prevent weird state issues
 
@@ -65,16 +57,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
     // Don't trigger onClick of parent element.
     event.stopPropagation();
 
-    unsubscribeNotification(notification.id, hostname);
-  };
-
-  const openUserProfile = (
-    event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>,
-  ) => {
-    // Don't trigger onClick of parent element.
-    event.stopPropagation();
-
-    openExternalLink(notification.subject.user.html_url);
+    unsubscribeNotification(notification);
   };
 
   const reason = formatReason(notification.reason);
@@ -117,8 +100,8 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
 
       <div
         className="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
-        onClick={() => openNotification()}
-        onKeyDown={() => openNotification()}
+        onClick={() => handleNotification()}
+        onKeyDown={() => handleNotification()}
       >
         <div
           className="mb-1 text-sm truncate cursor-pointer"
@@ -130,10 +113,14 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
 
         <div className="flex flex-wrap items-center text-xs text-capitalize gap-1">
           {notification.subject.user ? (
-            <div
+            <button
+              type="button"
               title="View User Profile"
-              onClick={openUserProfile}
-              onKeyDown={openUserProfile}
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                openUserProfile(notification.subject.user);
+              }}
               className="flex-shrink-0"
             >
               <img
@@ -142,7 +129,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                 title={notification.subject.user.login}
                 alt={`${notification.subject.user.login}'s avatar`}
               />
-            </div>
+            </button>
           ) : (
             <div>
               <FeedPersonIcon
@@ -157,7 +144,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
             <div>
               {notification.subject?.linkedIssues?.length > 0 && (
                 <span title={linkedIssuesPillDescription}>
-                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                  <button type="button" className={PILL_CLASS_NAME}>
                     <IssueClosedIcon
                       size={12}
                       className={`mr-1 ${IconColor.GREEN}`}
@@ -175,7 +162,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
 
                 return (
                   <span key={review.state} title={icon.description}>
-                    <button type="button" className={Constants.PILL_CLASS_NAME}>
+                    <button type="button" className={PILL_CLASS_NAME}>
                       <icon.type
                         size={12}
                         className={`mr-1 ${icon.color}`}
@@ -188,7 +175,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
               })}
               {notification.subject?.comments > 0 && (
                 <span title={commentsPillDescription}>
-                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                  <button type="button" className={PILL_CLASS_NAME}>
                     <CommentIcon
                       size={12}
                       className={`mr-1 ${IconColor.GRAY}`}
@@ -200,7 +187,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
               )}
               {notification.subject?.labels?.length > 0 && (
                 <span title={labelsPillDescription}>
-                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                  <button type="button" className={PILL_CLASS_NAME}>
                     <TagIcon
                       size={12}
                       className={`mr-1 ${IconColor.GRAY}`}
@@ -215,7 +202,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
                   className="ml-1"
                   title={notification.subject.milestone.title}
                 >
-                  <button type="button" className={Constants.PILL_CLASS_NAME}>
+                  <button type="button" className={PILL_CLASS_NAME}>
                     <MilestoneIcon
                       size={12}
                       className={
@@ -238,7 +225,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
           type="button"
           className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Done"
-          onClick={() => markNotificationDone(notification.id, hostname)}
+          onClick={() => markNotificationDone(notification)}
         >
           <CheckIcon size={16} aria-label="Mark as Done" />
         </button>
@@ -256,7 +243,7 @@ export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
           type="button"
           className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Read"
-          onClick={() => markNotificationRead(notification.id, hostname)}
+          onClick={() => markNotificationRead(notification)}
         >
           <ReadIcon size={14} aria-label="Mark as Read" />
         </button>

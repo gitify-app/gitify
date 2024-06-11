@@ -1,5 +1,3 @@
-import { ipcRenderer } from 'electron';
-
 import {
   mockAccountNotifications,
   mockSingleAccountNotifications,
@@ -9,7 +7,8 @@ import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { defaultSettings } from '../context/App';
 import type { SettingsState } from '../types';
 import { mockGitHubNotifications } from './api/__mocks__/response-mocks';
-import * as helpers from './helpers';
+import * as comms from './comms';
+import * as links from './links';
 import * as notificationsHelpers from './notifications';
 import { filterNotifications } from './notifications';
 
@@ -112,30 +111,31 @@ describe('utils/notifications.ts', () => {
   });
 
   it('should click on a native notification (with 1 notification)', () => {
-    jest.spyOn(helpers, 'openInBrowser');
+    const hideWindowMock = jest.spyOn(comms, 'hideWindow');
+    jest.spyOn(links, 'openNotification');
 
     const nativeNotification: Notification =
-      notificationsHelpers.raiseNativeNotification(
-        [mockGitHubNotifications[0]],
-        mockAuth,
-      );
+      notificationsHelpers.raiseNativeNotification([
+        mockGitHubNotifications[0],
+      ]);
     nativeNotification.onclick(null);
 
-    expect(helpers.openInBrowser).toHaveBeenCalledTimes(1);
-    expect(helpers.openInBrowser).toHaveBeenLastCalledWith(
+    expect(links.openNotification).toHaveBeenCalledTimes(1);
+    expect(links.openNotification).toHaveBeenLastCalledWith(
       mockGitHubNotifications[0],
     );
-    expect(ipcRenderer.send).toHaveBeenCalledWith('hide-window');
+    expect(hideWindowMock).toHaveBeenCalledTimes(1);
   });
 
   it('should click on a native notification (with more than 1 notification)', () => {
+    const showWindowMock = jest.spyOn(comms, 'showWindow');
+
     const nativeNotification = notificationsHelpers.raiseNativeNotification(
       mockGitHubNotifications,
-      mockAuth,
     );
     nativeNotification.onclick(null);
 
-    expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
+    expect(showWindowMock).toHaveBeenCalledTimes(1);
   });
 
   it('should play a sound', () => {

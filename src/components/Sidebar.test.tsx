@@ -1,9 +1,9 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { ipcRenderer, shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
 import { mockAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
+import * as comms from '../utils/comms';
 import { Sidebar } from './Sidebar';
 
 const mockNavigate = jest.fn();
@@ -18,8 +18,6 @@ describe('components/Sidebar.tsx', () => {
   beforeEach(() => {
     fetchNotifications.mockReset();
 
-    jest.spyOn(ipcRenderer, 'send');
-    jest.spyOn(shell, 'openExternal');
     jest.spyOn(window, 'clearInterval');
   });
 
@@ -127,6 +125,8 @@ describe('components/Sidebar.tsx', () => {
   });
 
   it('opens github in the notifications page', () => {
+    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
     render(
       <AppContext.Provider
         value={{
@@ -140,13 +140,15 @@ describe('components/Sidebar.tsx', () => {
       </AppContext.Provider>,
     );
     fireEvent.click(screen.getByLabelText('4 Unread Notifications'));
-    expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(shell.openExternal).toHaveBeenCalledWith(
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/notifications',
     );
   });
 
   it('should quit the app', () => {
+    const quitAppMock = jest.spyOn(comms, 'quitApp');
+
     render(
       <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
         <MemoryRouter>
@@ -155,11 +157,12 @@ describe('components/Sidebar.tsx', () => {
       </AppContext.Provider>,
     );
     fireEvent.click(screen.getByTitle('Quit Gitify'));
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
+    expect(quitAppMock).toHaveBeenCalledTimes(1);
   });
 
   it('should open the gitify repository', () => {
+    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
     render(
       <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
         <MemoryRouter>
@@ -168,8 +171,8 @@ describe('components/Sidebar.tsx', () => {
       </AppContext.Provider>,
     );
     fireEvent.click(screen.getByTestId('gitify-logo'));
-    expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(shell.openExternal).toHaveBeenCalledWith(
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/gitify-app/gitify',
     );
   });

@@ -6,8 +6,8 @@ exports[`components/icons/PlatformIcon.tsx should render GitHub Cloud icon 1`] =
   "baseElement": <body>
     <div>
       <span
-        aria-label="GitHub Cloud"
         class="mr-1"
+        title="GitHub Cloud"
       >
         <svg
           aria-hidden="true"
@@ -28,8 +28,8 @@ exports[`components/icons/PlatformIcon.tsx should render GitHub Cloud icon 1`] =
   </body>,
   "container": <div>
     <span
-      aria-label="GitHub Cloud"
       class="mr-1"
+      title="GitHub Cloud"
     >
       <svg
         aria-hidden="true"
@@ -107,8 +107,8 @@ exports[`components/icons/PlatformIcon.tsx should render GitHub Enterprise Servi
   "baseElement": <body>
     <div>
       <span
-        aria-label="GitHub Enterprise Server"
         class="mr-1"
+        title="GitHub Enterprise Server"
       >
         <svg
           aria-hidden="true"
@@ -129,8 +129,8 @@ exports[`components/icons/PlatformIcon.tsx should render GitHub Enterprise Servi
   </body>,
   "container": <div>
     <span
-      aria-label="GitHub Enterprise Server"
       class="mr-1"
+      title="GitHub Enterprise Server"
     >
       <svg
         aria-hidden="true"

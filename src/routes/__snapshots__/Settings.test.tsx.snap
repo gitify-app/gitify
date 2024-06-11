@@ -581,7 +581,7 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
         </svg>
       </button>
       <button
-        class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none mr-0"
+        class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
         title="Quit Gitify"
         type="button"
       >
