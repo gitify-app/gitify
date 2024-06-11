@@ -10,6 +10,7 @@ import type {
   DiscussionAuthor,
   DiscussionStateType,
   Notification,
+  PullRequest,
   Repository,
 } from '../typesGitHub';
 import {
@@ -17,7 +18,7 @@ import {
   getGitifySubjectDetails,
   getLatestReviewForReviewers,
   getWorkflowRunAttributes,
-  parseLinkedIssuesFromPrBody,
+  parseLinkedIssuesFromPr,
 } from './subject';
 
 const mockAuthor = partialMockUser('some-author');
@@ -982,13 +983,36 @@ describe('utils/subject.ts', () => {
 
       describe('Pull Request With Linked Issues', () => {
         it('returns empty if no pr body', () => {
-          const result = parseLinkedIssuesFromPrBody(null);
+          const mockPr = {
+            user: {
+              type: 'User',
+            },
+            body: null,
+          } as PullRequest;
+
+          const result = parseLinkedIssuesFromPr(mockPr);
+          expect(result).toEqual([]);
+        });
+
+        it('returns empty if pr from non-user', () => {
+          const mockPr = {
+            user: {
+              type: 'Bot',
+            },
+            body: 'This PR is linked to #1, #2, and #3',
+          } as PullRequest;
+          const result = parseLinkedIssuesFromPr(mockPr);
           expect(result).toEqual([]);
         });
 
         it('returns linked issues', () => {
-          const mockPrBody = 'This PR is linked to #1, #2, and #3';
-          const result = parseLinkedIssuesFromPrBody(mockPrBody);
+          const mockPr = {
+            user: {
+              type: 'User',
+            },
+            body: 'This PR is linked to #1, #2, and #3',
+          } as PullRequest;
+          const result = parseLinkedIssuesFromPr(mockPr);
           expect(result).toEqual(['#1', '#2', '#3']);
         });
       });
