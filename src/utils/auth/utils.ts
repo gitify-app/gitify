@@ -4,7 +4,7 @@ import type { Account, AuthState, GitifyUser } from '../../types';
 import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
-import type { ClientID, HostName, Token } from '../branded-types';
+import type { AuthCode, ClientID, HostName, Token } from '../branded-types';
 import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
 import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
@@ -30,7 +30,8 @@ export const authGitHub = (
 
     const handleCallback = (url: string) => {
       const raw_code = /code=([^&]*)/.exec(url) || null;
-      const authCode = raw_code && raw_code.length > 1 ? raw_code[1] : null;
+      const authCode =
+        raw_code && raw_code.length > 1 ? (raw_code[1] as AuthCode) : null;
       const error = /\?error=(.+)$/.exec(url);
       if (authCode || error) {
         // Close the browser if code found or error
@@ -91,7 +92,7 @@ export const getUserData = async (
 };
 
 export const getToken = async (
-  authCode: string,
+  authCode: AuthCode,
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthTokenResponse> => {
   const url = `https://${authOptions.hostname}/login/oauth/access_token`;

@@ -1,4 +1,10 @@
-import type { ClientID, ClientSecret, HostName, Token } from '../branded-types';
+import type {
+  AuthCode,
+  ClientID,
+  ClientSecret,
+  HostName,
+  Token,
+} from '../branded-types';
 
 export type AuthMethod = 'GitHub App' | 'Personal Access Token' | 'OAuth App';
 
@@ -16,7 +22,7 @@ export interface LoginPersonalAccessTokenOptions {
 }
 
 export interface AuthResponse {
-  authCode: string;
+  authCode: AuthCode;
   authOptions: LoginOAuthAppOptions;
 }
 

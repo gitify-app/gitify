@@ -4,7 +4,7 @@ type Brand<B> = { [__brand]: B };
 
 export type Branded<T, B> = T & Brand<B>;
 
-export type URL = Branded<string, 'URL'>;
+export type AuthCode = Branded<string, 'AuthCode'>;
 
 export type Token = Branded<string, 'Token'>;
 

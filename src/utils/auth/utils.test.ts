@@ -3,7 +3,7 @@ import type { AxiosPromise, AxiosResponse } from 'axios';
 import { mockAuth, mockGitHubCloudAccount } from '../../__mocks__/state-mocks';
 import type { Account, AuthState } from '../../types';
 import * as apiRequests from '../api/request';
-import type { ClientID, HostName, Token } from '../branded-types';
+import type { AuthCode, ClientID, HostName, Token } from '../branded-types';
 import * as auth from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 
@@ -64,7 +64,7 @@ describe('utils/auth/utils.ts', () => {
   });
 
   describe('getToken', () => {
-    const authCode = '123-456';
+    const authCode = '123-456' as AuthCode;
     const apiRequestMock = jest.spyOn(apiRequests, 'apiRequest');
 
     it('should get a token - success', async () => {
