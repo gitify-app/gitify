@@ -4,8 +4,8 @@ import { Constants } from '../utils/constants';
 export const AllRead = () => {
   const emoji = useMemo(
     () =>
-      Constants.ALLREAD_EMOJIS[
-        Math.floor(Math.random() * Constants.ALLREAD_EMOJIS.length)
+      Constants.ALL_READ_EMOJIS[
+        Math.floor(Math.random() * Constants.ALL_READ_EMOJIS.length)
       ],
     [],
   );
