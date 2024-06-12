@@ -3377,7 +3377,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="Milestone 1"
               >
                 <button
@@ -3386,7 +3385,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 >
                   <svg
                     aria-label="Milestone 1"
-                    class="text-red-500"
+                    class="mr-1 text-red-500"
                     fill="currentColor"
                     focusable="false"
                     height="12"
@@ -3673,7 +3672,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               </button>
             </span>
             <span
-              class="ml-1"
               title="Milestone 1"
             >
               <button
@@ -3682,7 +3680,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               >
                 <svg
                   aria-label="Milestone 1"
-                  class="text-red-500"
+                  class="mr-1 text-red-500"
                   fill="currentColor"
                   focusable="false"
                   height="12"
@@ -4026,7 +4024,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 </button>
               </span>
               <span
-                class="ml-1"
                 title="Milestone 1"
               >
                 <button
@@ -4035,7 +4032,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 >
                   <svg
                     aria-label="Milestone 1"
-                    class="text-green-500"
+                    class="mr-1 text-green-500"
                     fill="currentColor"
                     focusable="false"
                     height="12"
@@ -4322,7 +4319,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               </button>
             </span>
             <span
-              class="ml-1"
               title="Milestone 1"
             >
               <button
@@ -4331,7 +4327,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               >
                 <svg
                   aria-label="Milestone 1"
-                  class="text-green-500"
+                  class="mr-1 text-green-500"
                   fill="currentColor"
                   focusable="false"
                   height="12"
