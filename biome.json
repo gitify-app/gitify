@@ -10,6 +10,14 @@
       "nursery": {
         "noUnusedFunctionParameters": "error",
         "useDefaultSwitchClause": "error"
+      },
+      "correctness": {
+        "useExhaustiveDependencies": {
+          "level": "warn",
+          "options": {
+            "hooks": [{ "name": "useNavigate", "stableResult": true }]
+          }
+        }
       }
     }
   },
