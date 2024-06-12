@@ -6,11 +6,10 @@ on:
 
 jobs:
   pr-lint:
-    name: Validate PR name
+    name: Validate PR title
     runs-on: ubuntu-latest
     steps:
-      - name: Validate PR title
-        uses: actions/github-script@v7
+      - uses: actions/github-script@v7
         with:
           script: |
             const title = context.payload.pull_request.title;

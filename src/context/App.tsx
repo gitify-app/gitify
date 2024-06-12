@@ -171,7 +171,8 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     async (data: LoginOAuthAppOptions) => {
       const { authOptions, authCode } = await authGitHub(data);
       const { token, hostname } = await getToken(authCode, authOptions);
-      const updatedAuth = addAccount(auth, 'OAuth App', token, hostname);
+      const user = await getUserData(token, hostname);
+      const updatedAuth = addAccount(auth, 'OAuth App', token, hostname, user);
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
@@ -181,7 +182,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const loginWithPersonalAccessToken = useCallback(
     async ({ token, hostname }: LoginPersonalAccessTokenOptions) => {
       await headNotifications(hostname, token);
-
       const user = await getUserData(token, hostname);
       const updatedAuth = addAccount(
         auth,

@@ -18,7 +18,6 @@ const browserWindowOpts = {
   resizable: false,
   webPreferences: {
     enableRemoteModule: true,
-    overlayScrollbars: true,
     nodeIntegration: true,
     contextIsolation: false,
   },

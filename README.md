@@ -95,7 +95,7 @@ For more information, see [LICENSE](LICENSE).
 [biome-website]: biomejs.dev/
 [coveralls]: https://coveralls.io/github/gitify-app/gitify
 [coveralls-badge]: https://img.shields.io/coverallsCoverage/github/gitify-app/gitify
-[build-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/build-app.yml/badge.svg
+[build-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/build.yml/badge.svg
 [release-workflow-badge]: https://github.com/gitify-app/gitify/actions/workflows/release.yml/badge.svg
 [downloads-total-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/total?label=downloads@all
 [downloads-latest-badge]: https://img.shields.io/github/downloads/gitify-app/gitify/latest/total
