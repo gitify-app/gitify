@@ -53,7 +53,7 @@ export const authGitHub = (
 
     authWindow.webContents.on(
       'did-fail-load',
-      (event, errorCode, errorDescription, validatedURL) => {
+      (_event, _errorCode, _errorDescription, validatedURL) => {
         if (validatedURL.includes(authOptions.hostname)) {
           authWindow.destroy();
           reject(

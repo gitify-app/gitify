@@ -23,11 +23,11 @@ export const RepositoryNotifications: FC<IProps> = ({
 
   const markRepoAsRead = useCallback(() => {
     markRepoNotificationsRead(repoNotifications[0]);
-  }, [repoNotifications, account]);
+  }, [repoNotifications, markRepoNotificationsRead]);
 
   const markRepoAsDone = useCallback(() => {
     markRepoNotificationsDone(repoNotifications[0]);
-  }, [repoNotifications, account]);
+  }, [repoNotifications, markRepoNotificationsDone]);
 
   const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
   const repoSlug = repoNotifications[0].repository.full_name;
@@ -80,11 +80,7 @@ export const RepositoryNotifications: FC<IProps> = ({
       <TransitionGroup>
         {repoNotifications.map((obj) => (
           <CSSTransition key={obj.id} timeout={250} classNames="notification">
-            <NotificationRow
-              key={obj.id}
-              account={account}
-              notification={obj}
-            />
+            <NotificationRow key={obj.id} notification={obj} />
           </CSSTransition>
         ))}
       </TransitionGroup>

@@ -27,12 +27,15 @@ export const AccountsRoute: FC = () => {
   const { auth, logoutFromAccount } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const logoutAccount = useCallback((account: Account) => {
-    logoutFromAccount(account);
-    navigate(-1);
-    updateTrayIcon();
-    updateTrayTitle();
-  }, []);
+  const logoutAccount = useCallback(
+    (account: Account) => {
+      logoutFromAccount(account);
+      navigate(-1);
+      updateTrayIcon();
+      updateTrayTitle();
+    },
+    [logoutFromAccount],
+  );
 
   const loginWithPersonalAccessToken = useCallback(() => {
     return navigate('/login-personal-access-token', { replace: true });
