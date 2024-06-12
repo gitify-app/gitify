@@ -2,13 +2,11 @@ import { CheckIcon, MarkGithubIcon, ReadIcon } from '@primer/octicons-react';
 import { type FC, useCallback, useContext } from 'react';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AppContext } from '../context/App';
-import type { Account } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openRepository } from '../utils/links';
 import { NotificationRow } from './NotificationRow';
 
 interface IProps {
-  account: Account;
   repoNotifications: Notification[];
   repoName: string;
 }
@@ -16,7 +14,6 @@ interface IProps {
 export const RepositoryNotifications: FC<IProps> = ({
   repoName,
   repoNotifications,
-  account,
 }) => {
   const { markRepoNotificationsRead, markRepoNotificationsDone } =
     useContext(AppContext);

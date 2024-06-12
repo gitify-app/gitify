@@ -151,6 +151,9 @@ export function getDeveloperSettingsURL(account: Account): string {
     case 'Personal Access Token':
       settingsURL.pathname = '/settings/tokens';
       break;
+    default:
+      settingsURL.pathname = '/settings';
+      break;
   }
   return settingsURL.toString();
 }

@@ -8,7 +8,8 @@
     "rules": {
       "recommended": true,
       "nursery": {
-        "noUnusedFunctionParameters": "error"
+        "noUnusedFunctionParameters": "error",
+        "useDefaultSwitchClause": "error"
       },
       "correctness": {
         "useExhaustiveDependencies": {

@@ -3,6 +3,7 @@ import type { AxiosPromise, AxiosResponse } from 'axios';
 import { mockAuth, mockGitHubCloudAccount } from '../../__mocks__/state-mocks';
 import type { Account, AuthState } from '../../types';
 import * as apiRequests from '../api/request';
+import type { AuthMethod } from './types';
 import * as auth from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 
@@ -222,18 +223,27 @@ describe('utils/auth/utils.ts', () => {
         method: 'GitHub App',
       } as Account),
     ).toBe('https://github.com/settings/apps');
+
     expect(
       auth.getDeveloperSettingsURL({
         hostname: 'github.com',
         method: 'OAuth App',
       } as Account),
     ).toBe('https://github.com/settings/developers');
+
     expect(
       auth.getDeveloperSettingsURL({
         hostname: 'github.com',
         method: 'Personal Access Token',
       } as Account),
     ).toBe('https://github.com/settings/tokens');
+
+    expect(
+      auth.getDeveloperSettingsURL({
+        hostname: 'github.com',
+        method: 'unknown' as AuthMethod,
+      } as Account),
+    ).toBe('https://github.com/settings');
   });
 
   describe('getNewTokenURL', () => {
