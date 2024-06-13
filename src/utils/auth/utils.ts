@@ -7,8 +7,8 @@ import type {
   ClientID,
   GitifyUser,
   Hostname,
+  Link,
   Token,
-  WebUrl,
 } from '../../types';
 import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
@@ -36,7 +36,7 @@ export const authGitHub = (
 
     authWindow.loadURL(authUrl);
 
-    const handleCallback = (url: WebUrl) => {
+    const handleCallback = (url: Link) => {
       const raw_code = /code=([^&]*)/.exec(url) || null;
       const authCode =
         raw_code && raw_code.length > 1 ? (raw_code[1] as AuthCode) : null;
@@ -75,12 +75,12 @@ export const authGitHub = (
 
     authWindow.webContents.on('will-redirect', (event, url) => {
       event.preventDefault();
-      handleCallback(url as WebUrl);
+      handleCallback(url as Link);
     });
 
     authWindow.webContents.on('will-navigate', (event, url) => {
       event.preventDefault();
-      handleCallback(url as WebUrl);
+      handleCallback(url as Link);
     });
   });
 };
@@ -104,7 +104,7 @@ export const getToken = async (
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthTokenResponse> => {
   const url =
-    `https://${authOptions.hostname}/login/oauth/access_token` as WebUrl;
+    `https://${authOptions.hostname}/login/oauth/access_token` as Link;
   const data = {
     client_id: authOptions.clientId,
     client_secret: authOptions.clientSecret,
@@ -149,7 +149,7 @@ export function removeAccount(auth: AuthState, account: Account): AuthState {
   };
 }
 
-export function getDeveloperSettingsURL(account: Account): WebUrl {
+export function getDeveloperSettingsURL(account: Account): Link {
   const settingsURL = new URL(`https://${account.hostname}`);
 
   switch (account.method) {
@@ -163,19 +163,19 @@ export function getDeveloperSettingsURL(account: Account): WebUrl {
       settingsURL.pathname = '/settings/tokens';
       break;
   }
-  return settingsURL.toString() as WebUrl;
+  return settingsURL.toString() as Link;
 }
 
-export function getNewTokenURL(hostname: Hostname): WebUrl {
+export function getNewTokenURL(hostname: Hostname): Link {
   const date = format(new Date(), 'PP p');
   const newTokenURL = new URL(`https://${hostname}/settings/tokens/new`);
   newTokenURL.searchParams.append('description', `Gitify (Created on ${date})`);
   newTokenURL.searchParams.append('scopes', Constants.AUTH_SCOPE.join(','));
 
-  return newTokenURL.toString() as WebUrl;
+  return newTokenURL.toString() as Link;
 }
 
-export function getNewOAuthAppURL(hostname: Hostname): WebUrl {
+export function getNewOAuthAppURL(hostname: Hostname): Link {
   const date = format(new Date(), 'PP p');
   const newOAuthAppURL = new URL(
     `https://${hostname}/settings/applications/new`,
@@ -193,7 +193,7 @@ export function getNewOAuthAppURL(hostname: Hostname): WebUrl {
     'https://www.gitify.io/callback',
   );
 
-  return newOAuthAppURL.toString() as WebUrl;
+  return newOAuthAppURL.toString() as Link;
 }
 
 export function isValidHostname(hostname: Hostname) {

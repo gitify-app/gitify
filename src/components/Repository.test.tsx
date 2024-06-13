@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
-import type { WebUrl } from '../types';
+import type { Link } from '../types';
 import {
   mockGitHubNotifications,
   mockSingleNotification,
@@ -82,7 +82,7 @@ describe('components/Repository.tsx', () => {
   });
 
   it('should use default repository icon when avatar is not available', () => {
-    props.repoNotifications[0].repository.owner.avatar_url = '' as WebUrl;
+    props.repoNotifications[0].repository.owner.avatar_url = '' as Link;
 
     const tree = render(
       <AppContext.Provider value={{}}>

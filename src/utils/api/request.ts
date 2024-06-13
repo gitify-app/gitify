@@ -1,8 +1,8 @@
 import axios, { type AxiosPromise, type Method } from 'axios';
-import type { Token, WebUrl } from '../../types';
+import type { Link, Token } from '../../types';
 
 export function apiRequest(
-  url: WebUrl,
+  url: Link,
   method: Method,
   data = {},
 ): AxiosPromise | null {
@@ -13,7 +13,7 @@ export function apiRequest(
 }
 
 export function apiRequestAuth(
-  url: WebUrl,
+  url: Link,
   method: Method,
   token: Token,
   data = {},

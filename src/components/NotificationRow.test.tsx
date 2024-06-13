@@ -5,7 +5,7 @@ import {
   mockSettings,
 } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
-import type { WebUrl } from '../types';
+import type { Link } from '../types';
 import type { Milestone, UserType } from '../typesGitHub';
 import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as comms from '../utils/comms';
@@ -474,9 +474,9 @@ describe('components/NotificationRow.tsx', () => {
             ...mockSingleNotification.subject,
             user: {
               login: 'some-user',
-              html_url: 'https://github.com/some-user' as WebUrl,
+              html_url: 'https://github.com/some-user' as Link,
               avatar_url:
-                'https://avatars.githubusercontent.com/u/123456789?v=4' as WebUrl,
+                'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
               type: 'User' as UserType,
             },
             reviews: null,

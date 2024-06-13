@@ -3,9 +3,9 @@ import { print } from 'graphql/language/printer';
 import type {
   Account,
   Hostname,
+  Link,
   SettingsState,
   Token,
-  WebUrl,
 } from '../../types';
 import type {
   Commit,
@@ -38,7 +38,7 @@ export function getAuthenticatedUser(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += 'user';
 
-  return apiRequestAuth(url.toString() as WebUrl, 'GET', token);
+  return apiRequestAuth(url.toString() as Link, 'GET', token);
 }
 
 //
@@ -49,7 +49,7 @@ export function headNotifications(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += 'notifications';
 
-  return apiRequestAuth(url.toString() as WebUrl, 'HEAD', token);
+  return apiRequestAuth(url.toString() as Link, 'HEAD', token);
 }
 
 /**
@@ -65,7 +65,7 @@ export function listNotificationsForAuthenticatedUser(
   url.pathname += 'notifications';
   url.searchParams.append('participating', String(settings.participating));
 
-  return apiRequestAuth(url.toString() as WebUrl, 'GET', account.token);
+  return apiRequestAuth(url.toString() as Link, 'GET', account.token);
 }
 
 /**
@@ -82,7 +82,7 @@ export function markNotificationThreadAsRead(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
 
-  return apiRequestAuth(url.toString() as WebUrl, 'PATCH', token, {});
+  return apiRequestAuth(url.toString() as Link, 'PATCH', token, {});
 }
 
 /**
@@ -99,7 +99,7 @@ export function markNotificationThreadAsDone(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
 
-  return apiRequestAuth(url.toString() as WebUrl, 'DELETE', token, {});
+  return apiRequestAuth(url.toString() as Link, 'DELETE', token, {});
 }
 
 /**
@@ -115,7 +115,7 @@ export function ignoreNotificationThreadSubscription(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}/subscription`;
 
-  return apiRequestAuth(url.toString() as WebUrl, 'PUT', token, {
+  return apiRequestAuth(url.toString() as Link, 'PUT', token, {
     ignored: true,
   });
 }
@@ -136,7 +136,7 @@ export function markRepositoryNotificationsAsRead(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `repos/${repoSlug}/notifications`;
 
-  return apiRequestAuth(url.toString() as WebUrl, 'PUT', token, {});
+  return apiRequestAuth(url.toString() as Link, 'PUT', token, {});
 }
 
 /**
@@ -144,7 +144,7 @@ export function markRepositoryNotificationsAsRead(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/commits/commits#get-a-commit
  */
-export function getCommit(url: WebUrl, token: Token): AxiosPromise<Commit> {
+export function getCommit(url: Link, token: Token): AxiosPromise<Commit> {
   return apiRequestAuth(url, 'GET', token);
 }
 
@@ -155,7 +155,7 @@ export function getCommit(url: WebUrl, token: Token): AxiosPromise<Commit> {
 
  */
 export function getCommitComment(
-  url: WebUrl,
+  url: Link,
   token: Token,
 ): AxiosPromise<CommitComment> {
   return apiRequestAuth(url, 'GET', token);
@@ -166,7 +166,7 @@ export function getCommitComment(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/issues/issues#get-an-issue
  */
-export function getIssue(url: WebUrl, token: Token): AxiosPromise<Issue> {
+export function getIssue(url: Link, token: Token): AxiosPromise<Issue> {
   return apiRequestAuth(url, 'GET', token);
 }
 
@@ -177,7 +177,7 @@ export function getIssue(url: WebUrl, token: Token): AxiosPromise<Issue> {
  * Endpoint documentation: https://docs.github.com/en/rest/issues/comments#get-an-issue-comment
  */
 export function getIssueOrPullRequestComment(
-  url: WebUrl,
+  url: Link,
   token: Token,
 ): AxiosPromise<IssueOrPullRequestComment> {
   return apiRequestAuth(url, 'GET', token);
@@ -189,7 +189,7 @@ export function getIssueOrPullRequestComment(
  * Endpoint documentation: https://docs.github.com/en/rest/pulls/pulls#get-a-pull-request
  */
 export function getPullRequest(
-  url: WebUrl,
+  url: Link,
   token: Token,
 ): AxiosPromise<PullRequest> {
   return apiRequestAuth(url, 'GET', token);
@@ -201,7 +201,7 @@ export function getPullRequest(
  * Endpoint documentation: https://docs.github.com/en/rest/pulls/reviews#list-reviews-for-a-pull-request
  */
 export function getPullRequestReviews(
-  url: WebUrl,
+  url: Link,
   token: Token,
 ): AxiosPromise<PullRequestReview[]> {
   return apiRequestAuth(url, 'GET', token);
@@ -212,14 +212,14 @@ export function getPullRequestReviews(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/releases/releases#get-a-release
  */
-export function getRelease(url: WebUrl, token: Token): AxiosPromise<Release> {
+export function getRelease(url: Link, token: Token): AxiosPromise<Release> {
   return apiRequestAuth(url, 'GET', token);
 }
 
 /**
  * Get the `html_url` from the GitHub response
  */
-export async function getHtmlUrl(url: WebUrl, token: Token): Promise<string> {
+export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
   try {
     const response = (await apiRequestAuth(url, 'GET', token)).data;
     return response.html_url;
@@ -239,7 +239,7 @@ export async function searchDiscussions(
 ): AxiosPromise<GraphQLSearch<Discussion>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
   return apiRequestAuth(
-    url.toString() as WebUrl,
+    url.toString() as Link,
     'POST',
     notification.account.token,
     {

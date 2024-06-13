@@ -1,10 +1,10 @@
 import axios from 'axios';
-import type { Token, WebUrl } from '../../types';
+import type { Link, Token } from '../../types';
 import { apiRequest, apiRequestAuth } from './request';
 
 jest.mock('axios');
 
-const url = 'https://example.com' as WebUrl;
+const url = 'https://example.com' as Link;
 const method = 'get';
 
 describe('utils/api/request.ts', () => {

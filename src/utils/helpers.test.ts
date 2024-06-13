@@ -1,7 +1,7 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
 import { mockPersonalAccessTokenAccount } from '../__mocks__/state-mocks';
 
-import type { Hostname, WebUrl } from '../types';
+import type { Hostname, Link } from '../types';
 import type { SubjectType } from '../typesGitHub';
 import {
   mockGraphQLResponse,
@@ -73,9 +73,9 @@ describe('utils/helpers.ts', () => {
     it('Subject Latest Comment Url: when not null, fetch latest comment html url', async () => {
       const subject = {
         title: 'generate github web url unit tests',
-        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as WebUrl,
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
         latest_comment_url:
-          'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as WebUrl,
+          'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
         type: 'Issue' as SubjectType,
       };
 
@@ -106,7 +106,7 @@ describe('utils/helpers.ts', () => {
     it('Subject Url: when no latest comment url available, fetch subject html url', async () => {
       const subject = {
         title: 'generate github web url unit tests',
-        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as WebUrl,
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
         latest_comment_url: null,
         type: 'Issue' as SubjectType,
       };

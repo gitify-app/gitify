@@ -4,7 +4,7 @@ import {
   mockGitHubEnterpriseServerAccount,
   mockToken,
 } from '../../__mocks__/state-mocks';
-import type { Hostname, SettingsState, Token, WebUrl } from '../../types';
+import type { Hostname, Link, SettingsState, Token } from '../../types';
 import {
   getAuthenticatedUser,
   getHtmlUrl,
@@ -269,7 +269,7 @@ describe('utils/api/client.ts', () => {
       apiRequestAuthMock.mockResolvedValue(requestPromise);
 
       const result = await getHtmlUrl(
-        'https://api.github.com/repos/gitify-app/notifications-test/issues/785' as WebUrl,
+        'https://api.github.com/repos/gitify-app/notifications-test/issues/785' as Link,
         '123' as Token,
       );
       expect(result).toBe(
@@ -287,7 +287,7 @@ describe('utils/api/client.ts', () => {
       apiRequestAuthMock.mockRejectedValue(mockError);
 
       await getHtmlUrl(
-        'https://api.github.com/repos/gitify-app/gitify/issues/785' as WebUrl,
+        'https://api.github.com/repos/gitify-app/gitify/issues/785' as Link,
         '123' as Token,
       );
 

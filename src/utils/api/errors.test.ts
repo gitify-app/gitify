@@ -1,5 +1,5 @@
 import { AxiosError, type AxiosResponse } from 'axios';
-import type { WebUrl } from '../../types';
+import type { Link } from '../../types';
 import type { GitHubRESTError } from '../../typesGitHub';
 import { Errors } from '../constants';
 import { determineFailureType } from './errors';
@@ -112,7 +112,7 @@ function createMockResponse(
   return {
     data: {
       message,
-      documentation_url: 'https://some-url.com' as WebUrl,
+      documentation_url: 'https://some-url.com' as Link,
     },
     status,
     statusText: 'Some status text',

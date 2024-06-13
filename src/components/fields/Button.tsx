@@ -1,6 +1,6 @@
 import type { Icon } from '@primer/octicons-react';
 import type { FC } from 'react';
-import type { WebUrl } from '../../types';
+import type { Link } from '../../types';
 import { cn } from '../../utils/cn';
 import { openExternalLink } from '../../utils/comms';
 
@@ -10,7 +10,7 @@ export interface IButton {
   className?: string;
   icon?: Icon;
   size?: number;
-  url?: WebUrl;
+  url?: Link;
   onClick?: () => void;
   disabled?: boolean;
   type?: 'button' | 'submit';

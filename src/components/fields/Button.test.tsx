@@ -1,7 +1,7 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { shell } from 'electron';
-import type { WebUrl } from '../../types';
+import type { Link } from '../../types';
 import { Button, type IButton } from './Button';
 
 describe('components/fields/Button.tsx', () => {
@@ -28,7 +28,7 @@ describe('components/fields/Button.tsx', () => {
   });
 
   it('should render with url', () => {
-    render(<Button {...props} url={'https://github.com' as WebUrl} />);
+    render(<Button {...props} url={'https://github.com' as Link} />);
 
     const buttonElement = screen.getByLabelText('button');
 
