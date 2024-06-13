@@ -30,6 +30,7 @@ jobs:
           APPLEID_TEAM_ID: ${{ secrets.appleid_teamid }}
           CSC_LINK: ${{ secrets.mac_certs }}
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
+          GITHUB_TOKEN: ${{ secrets.github_token }}
           NOTARIZE: true
       - uses: actions/upload-artifact@v4
         with:
@@ -54,6 +55,8 @@ jobs:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
       - run: pnpm make:win --publish onTagOrDraft
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
       - uses: actions/upload-artifact@v4
         with:
           name: Gitify-release-win
@@ -77,6 +80,8 @@ jobs:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
       - run: pnpm make:linux --publish onTagOrDraft
+        env:
+          GITHUB_TOKEN: ${{ secrets.github_token }}
       - uses: actions/upload-artifact@v4
         with:
           name: Gitify-release-linux
