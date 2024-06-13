@@ -92,7 +92,7 @@ export const LoginWithOAuthApp: FC = () => {
           placeholder="ABC123DEF456"
         />
 
-        <div className="flex justify-between items-end">
+        <div className="flex items-end justify-between">
           <Button
             name="Docs"
             label="GitHub Docs"
@@ -105,7 +105,7 @@ export const LoginWithOAuthApp: FC = () => {
           <Button
             name="Login"
             label="Login"
-            className="px-4 py-2 mt-2 !text-sm"
+            className="mt-2 px-4 py-2 !text-sm"
             icon={SignInIcon}
             size={16}
             disabled={submitting || pristine}
@@ -126,7 +126,7 @@ export const LoginWithOAuthApp: FC = () => {
 
   return (
     <div className="flex-1 bg-white dark:bg-gray-dark dark:text-white">
-      <div className="flex justify-between items-center mt-4 py-2 mx-8">
+      <div className="mx-8 mt-4 flex items-center justify-between py-2">
         <button
           type="button"
           className="focus:outline-none"
@@ -140,7 +140,7 @@ export const LoginWithOAuthApp: FC = () => {
           />
         </button>
 
-        <h3 className="text-lg font-semibold justify-center">
+        <h3 className="justify-center text-lg font-semibold">
           <PersonIcon size={20} className="mr-2" />
           Login with OAuth App
         </h3>

@@ -2,11 +2,11 @@
 
 exports[`routes/Settings.tsx General should render itself & its children 1`] = `
 <div
-  class="flex flex-1 flex-col h-screen dark:bg-gray-dark dark:text-white"
+  class="flex h-screen flex-1 flex-col dark:bg-gray-dark dark:text-white"
   data-testid="settings"
 >
   <div
-    class="flex justify-between items-center mt-2 py-2 mx-8"
+    class="mx-8 mt-2 flex items-center justify-between py-2"
   >
     <button
       class="focus:outline-none"
@@ -42,13 +42,13 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
       class="mb-3"
     >
       <legend
-        class="font-semibold mt-2 mb-1"
+        class="mb-1 mt-2 font-semibold"
         id="appearance"
       >
         Appearance
       </legend>
       <div
-        class="mt-1 mb-3 text-sm"
+        class="mb-3 mt-1 text-sm"
       >
         <div
           class="flex items-start"
@@ -57,7 +57,7 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
             class="mr-3 py-1"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 "
+              class="font-medium text-gray-700 dark:text-gray-200"
               for="theme"
             >
               Theme:
@@ -69,11 +69,11 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
             role="group"
           >
             <div
-              class="flex mt-1"
+              class="mt-1 flex"
             >
               <input
                 checked=""
-                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                 id="theme_system"
                 name="theme"
                 type="radio"
@@ -87,10 +87,10 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
               </label>
             </div>
             <div
-              class="flex mt-1"
+              class="mt-1 flex"
             >
               <input
-                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                 id="theme_light"
                 name="theme"
                 type="radio"
@@ -104,10 +104,10 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
               </label>
             </div>
             <div
-              class="flex mt-1"
+              class="mt-1 flex"
             >
               <input
-                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                 id="theme_dark"
                 name="theme"
                 type="radio"
@@ -124,23 +124,23 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mt-1 mb-3 text-sm"
+        class="mb-3 mt-1 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="flex items-center h-5"
+            class="flex h-5 items-center"
           >
             <input
               checked=""
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               id="detailedNotifications"
               type="checkbox"
             />
           </div>
           <div
-            class="ml-3 "
+            class="ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -154,7 +154,7 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  class="text-blue-500 ml-1"
+                  class="ml-1 text-blue-500"
                   fill="currentColor"
                   focusable="false"
                   height="16"
@@ -172,23 +172,23 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mt-1 mb-3 text-sm"
+        class="mb-3 mt-1 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="flex items-center h-5"
+            class="flex h-5 items-center"
           >
             <input
               checked=""
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               id="showPills"
               type="checkbox"
             />
           </div>
           <div
-            class="ml-3 "
+            class="ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -202,7 +202,7 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  class="text-blue-500 ml-1"
+                  class="ml-1 text-blue-500"
                   fill="currentColor"
                   focusable="false"
                   height="16"
@@ -220,22 +220,22 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mt-1 mb-3 text-sm"
+        class="mb-3 mt-1 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="flex items-center h-5"
+            class="flex h-5 items-center"
           >
             <input
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               id="showAccountHostname"
               type="checkbox"
             />
           </div>
           <div
-            class="ml-3 "
+            class="ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -251,28 +251,28 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
       class="mb-3"
     >
       <legend
-        class="font-semibold mt-2 mb-1"
+        class="mb-1 mt-2 font-semibold"
         id="notifications"
       >
         Notifications
       </legend>
       <div
-        class="mt-1 mb-3 text-sm"
+        class="mb-3 mt-1 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="flex items-center h-5"
+            class="flex h-5 items-center"
           >
             <input
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               id="showOnlyParticipating"
               type="checkbox"
             />
           </div>
           <div
-            class="ml-3 "
+            class="ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -286,7 +286,7 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  class="text-blue-500 ml-1"
+                  class="ml-1 text-blue-500"
                   fill="currentColor"
                   focusable="false"
                   height="16"
@@ -304,23 +304,23 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mt-1 mb-3 text-sm"
+        class="mb-3 mt-1 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="flex items-center h-5"
+            class="flex h-5 items-center"
           >
             <input
               checked=""
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               id="showBots"
               type="checkbox"
             />
           </div>
           <div
-            class="ml-3 "
+            class="ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -334,7 +334,7 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  class="text-blue-500 ml-1"
+                  class="ml-1 text-blue-500"
                   fill="currentColor"
                   focusable="false"
                   height="16"
@@ -352,22 +352,22 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mt-1 mb-3 text-sm"
+        class="mb-3 mt-1 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="flex items-center h-5"
+            class="flex h-5 items-center"
           >
             <input
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               id="markAsDoneOnOpen"
               type="checkbox"
             />
           </div>
           <div
-            class="ml-3 "
+            class="ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -379,22 +379,22 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mt-1 mb-3 text-sm"
+        class="mb-3 mt-1 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="flex items-center h-5"
+            class="flex h-5 items-center"
           >
             <input
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               id="delayNotificationState"
               type="checkbox"
             />
           </div>
           <div
-            class="ml-3 "
+            class="ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -408,7 +408,7 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  class="text-blue-500 ml-1"
+                  class="ml-1 text-blue-500"
                   fill="currentColor"
                   focusable="false"
                   height="16"
@@ -430,28 +430,28 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
       class="mb-3"
     >
       <legend
-        class="font-semibold mt-2 mb-1"
+        class="mb-1 mt-2 font-semibold"
         id="system"
       >
         System
       </legend>
       <div
-        class="mt-1 mb-3 text-sm"
+        class="mb-3 mt-1 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="flex items-center h-5"
+            class="flex h-5 items-center"
           >
             <input
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               id="showNotificationsCountInTray"
               type="checkbox"
             />
           </div>
           <div
-            class="ml-3 "
+            class="ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -463,23 +463,23 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mt-1 mb-3 text-sm"
+        class="mb-3 mt-1 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="flex items-center h-5"
+            class="flex h-5 items-center"
           >
             <input
               checked=""
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               id="showNotifications"
               type="checkbox"
             />
           </div>
           <div
-            class="ml-3 "
+            class="ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -491,23 +491,23 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mt-1 mb-3 text-sm"
+        class="mb-3 mt-1 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="flex items-center h-5"
+            class="flex h-5 items-center"
           >
             <input
               checked=""
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               id="playSound"
               type="checkbox"
             />
           </div>
           <div
-            class="ml-3 "
+            class="ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -519,22 +519,22 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mt-1 mb-3 text-sm"
+        class="mb-3 mt-1 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="flex items-center h-5"
+            class="flex h-5 items-center"
           >
             <input
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               id="openAtStartUp"
               type="checkbox"
             />
           </div>
           <div
-            class="ml-3 "
+            class="ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -548,10 +548,10 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
     </fieldset>
   </div>
   <div
-    class="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8 text-sm"
+    class="flex items-center justify-between bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker"
   >
     <button
-      class="font-semibold cursor-pointer"
+      class="cursor-pointer font-semibold"
       title="View release notes"
       type="button"
     >
@@ -611,17 +611,17 @@ exports[`routes/Settings.tsx Notifications section should be able to toggle the 
   class="flex items-start"
 >
   <div
-    class="flex items-center h-5"
+    class="flex h-5 items-center"
   >
     <input
       checked=""
-      class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+      class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
       id="showBots"
       type="checkbox"
     />
   </div>
   <div
-    class="ml-3 "
+    class="ml-3"
   >
     <label
       class="font-medium text-gray-700 dark:text-gray-200"
@@ -635,7 +635,7 @@ exports[`routes/Settings.tsx Notifications section should be able to toggle the 
       >
         <svg
           aria-hidden="true"
-          class="text-blue-500 ml-1"
+          class="ml-1 text-blue-500"
           fill="currentColor"
           focusable="false"
           height="16"
@@ -658,18 +658,18 @@ exports[`routes/Settings.tsx Notifications section should not be able to toggle 
   class="flex items-start"
 >
   <div
-    class="flex items-center h-5"
+    class="flex h-5 items-center"
   >
     <input
       checked=""
-      class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+      class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
       disabled=""
       id="showBots"
       type="checkbox"
     />
   </div>
   <div
-    class="ml-3 "
+    class="ml-3"
   >
     <label
       class="font-medium text-gray-700 dark:text-gray-200"
@@ -684,7 +684,7 @@ exports[`routes/Settings.tsx Notifications section should not be able to toggle 
       >
         <svg
           aria-hidden="true"
-          class="text-blue-500 ml-1"
+          class="ml-1 text-blue-500"
           fill="currentColor"
           focusable="false"
           height="16"

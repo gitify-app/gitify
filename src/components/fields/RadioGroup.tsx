@@ -13,12 +13,12 @@ export interface IRadioGroup {
 
 export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
   return (
-    <div className="mt-1 mb-3 text-sm">
+    <div className="mb-3 mt-1 text-sm">
       <div className="flex items-start">
         <div className="mr-3 py-1">
           <label
             htmlFor={props.name}
-            className="font-medium text-gray-700 dark:text-gray-200 "
+            className="font-medium text-gray-700 dark:text-gray-200"
             style={
               props.disabled ? { textDecoration: 'line-through' } : undefined
             }
@@ -35,12 +35,12 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
           {props.options.map((item) => {
             return (
               <div
-                className="flex mt-1"
+                className="mt-1 flex"
                 key={`radio_item_${item.value.toLowerCase()}`}
               >
                 <input
                   type="radio"
-                  className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                  className="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                   id={`${props.name}_${item.value.toLowerCase()}`}
                   name={props.name}
                   value={item.value}
@@ -61,7 +61,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
       </div>
 
       {props.helpText && (
-        <div className="text-xs mt-1 italic text-gray-500 dark:text-gray-300">
+        <div className="mt-1 text-xs italic text-gray-500 dark:text-gray-300">
           {props.helpText}
         </div>
       )}

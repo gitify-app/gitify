@@ -10,7 +10,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         id="138661096"
       >
         <div
-          class="flex justify-center items-center mr-3 w-5 text-green-500"
+          class="mr-3 flex w-5 items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -33,17 +33,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         >
           <div
-            class="mb-1 text-sm truncate cursor-pointer"
+            class="mb-1 cursor-pointer truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center gap-1 text-xs capitalize"
           >
             <div>
               <svg
@@ -76,7 +76,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -104,7 +104,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -129,7 +129,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -154,7 +154,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="1 comment"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -179,10 +179,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </div>
         </div>
         <div
-          class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Done"
             type="button"
           >
@@ -203,7 +203,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-red-500"
+            class="h-full hover:text-red-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -224,7 +224,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Read"
             type="button"
           >
@@ -254,7 +254,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
       id="138661096"
     >
       <div
-        class="flex justify-center items-center mr-3 w-5 text-green-500"
+        class="mr-3 flex w-5 items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -277,17 +277,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >
         <div
-          class="mb-1 text-sm truncate cursor-pointer"
+          class="mb-1 cursor-pointer truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center gap-1 text-xs capitalize"
         >
           <div>
             <svg
@@ -320,7 +320,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="Linked to issues #1, #2"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -348,7 +348,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -373,7 +373,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -398,7 +398,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="1 comment"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -423,10 +423,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         </div>
       </div>
       <div
-        class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Done"
           type="button"
         >
@@ -447,7 +447,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-red-500"
+          class="h-full hover:text-red-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -468,7 +468,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Read"
           type="button"
         >
@@ -555,7 +555,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         id="138661096"
       >
         <div
-          class="flex justify-center items-center mr-3 w-5 text-green-500"
+          class="mr-3 flex w-5 items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -578,17 +578,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         >
           <div
-            class="mb-1 text-sm truncate cursor-pointer"
+            class="mb-1 cursor-pointer truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center gap-1 text-xs capitalize"
           >
             <div>
               <svg
@@ -621,7 +621,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -649,7 +649,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -674,7 +674,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -699,7 +699,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="2 comments"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -724,10 +724,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </div>
         </div>
         <div
-          class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Done"
             type="button"
           >
@@ -748,7 +748,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-red-500"
+            class="h-full hover:text-red-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -769,7 +769,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Read"
             type="button"
           >
@@ -799,7 +799,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
       id="138661096"
     >
       <div
-        class="flex justify-center items-center mr-3 w-5 text-green-500"
+        class="mr-3 flex w-5 items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -822,17 +822,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >
         <div
-          class="mb-1 text-sm truncate cursor-pointer"
+          class="mb-1 cursor-pointer truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center gap-1 text-xs capitalize"
         >
           <div>
             <svg
@@ -865,7 +865,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="Linked to issues #1, #2"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -893,7 +893,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -918,7 +918,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -943,7 +943,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="2 comments"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -968,10 +968,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         </div>
       </div>
       <div
-        class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Done"
           type="button"
         >
@@ -992,7 +992,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-red-500"
+          class="h-full hover:text-red-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -1013,7 +1013,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Read"
           type="button"
         >
@@ -1100,7 +1100,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         id="138661096"
       >
         <div
-          class="flex justify-center items-center mr-3 w-5 text-green-500"
+          class="mr-3 flex w-5 items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -1123,17 +1123,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         >
           <div
-            class="mb-1 text-sm truncate cursor-pointer"
+            class="mb-1 cursor-pointer truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center gap-1 text-xs capitalize"
           >
             <div>
               <svg
@@ -1166,7 +1166,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1194,7 +1194,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1219,7 +1219,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1244,10 +1244,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </div>
         </div>
         <div
-          class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Done"
             type="button"
           >
@@ -1268,7 +1268,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-red-500"
+            class="h-full hover:text-red-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -1289,7 +1289,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Read"
             type="button"
           >
@@ -1319,7 +1319,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
       id="138661096"
     >
       <div
-        class="flex justify-center items-center mr-3 w-5 text-green-500"
+        class="mr-3 flex w-5 items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -1342,17 +1342,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >
         <div
-          class="mb-1 text-sm truncate cursor-pointer"
+          class="mb-1 cursor-pointer truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center gap-1 text-xs capitalize"
         >
           <div>
             <svg
@@ -1385,7 +1385,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="Linked to issues #1, #2"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -1413,7 +1413,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -1438,7 +1438,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -1463,10 +1463,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         </div>
       </div>
       <div
-        class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Done"
           type="button"
         >
@@ -1487,7 +1487,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-red-500"
+          class="h-full hover:text-red-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -1508,7 +1508,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Read"
           type="button"
         >
@@ -1595,7 +1595,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
         id="138661096"
       >
         <div
-          class="flex justify-center items-center mr-3 w-5 text-green-500"
+          class="mr-3 flex w-5 items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -1618,17 +1618,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         >
           <div
-            class="mb-1 text-sm truncate cursor-pointer"
+            class="mb-1 cursor-pointer truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center gap-1 text-xs capitalize"
           >
             <div>
               <svg
@@ -1661,7 +1661,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1689,7 +1689,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1714,7 +1714,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1739,7 +1739,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 title="2 comments"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1765,7 +1765,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
 🏷️ good-first-issue"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -1791,10 +1791,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
           </div>
         </div>
         <div
-          class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Done"
             type="button"
           >
@@ -1815,7 +1815,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-red-500"
+            class="h-full hover:text-red-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -1836,7 +1836,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Read"
             type="button"
           >
@@ -1866,7 +1866,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
       id="138661096"
     >
       <div
-        class="flex justify-center items-center mr-3 w-5 text-green-500"
+        class="mr-3 flex w-5 items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -1889,17 +1889,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >
         <div
-          class="mb-1 text-sm truncate cursor-pointer"
+          class="mb-1 cursor-pointer truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center gap-1 text-xs capitalize"
         >
           <div>
             <svg
@@ -1932,7 +1932,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
               title="Linked to issues #1, #2"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -1960,7 +1960,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -1985,7 +1985,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -2010,7 +2010,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
               title="2 comments"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -2036,7 +2036,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
 🏷️ good-first-issue"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -2062,10 +2062,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
         </div>
       </div>
       <div
-        class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Done"
           type="button"
         >
@@ -2086,7 +2086,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-red-500"
+          class="h-full hover:text-red-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -2107,7 +2107,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Read"
           type="button"
         >
@@ -2194,7 +2194,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
         id="138661096"
       >
         <div
-          class="flex justify-center items-center mr-3 w-5 text-green-500"
+          class="mr-3 flex w-5 items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -2217,17 +2217,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         >
           <div
-            class="mb-1 text-sm truncate cursor-pointer"
+            class="mb-1 cursor-pointer truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center gap-1 text-xs capitalize"
           >
             <div>
               <svg
@@ -2260,7 +2260,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2288,7 +2288,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2313,7 +2313,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2338,10 +2338,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           </div>
         </div>
         <div
-          class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Done"
             type="button"
           >
@@ -2362,7 +2362,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-red-500"
+            class="h-full hover:text-red-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -2383,7 +2383,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Read"
             type="button"
           >
@@ -2413,7 +2413,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
       id="138661096"
     >
       <div
-        class="flex justify-center items-center mr-3 w-5 text-green-500"
+        class="mr-3 flex w-5 items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -2436,17 +2436,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >
         <div
-          class="mb-1 text-sm truncate cursor-pointer"
+          class="mb-1 cursor-pointer truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center gap-1 text-xs capitalize"
         >
           <div>
             <svg
@@ -2479,7 +2479,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               title="Linked to issues #1, #2"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -2507,7 +2507,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -2532,7 +2532,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -2557,10 +2557,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
         </div>
       </div>
       <div
-        class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Done"
           type="button"
         >
@@ -2581,7 +2581,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-red-500"
+          class="h-full hover:text-red-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -2602,7 +2602,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Read"
           type="button"
         >
@@ -2689,7 +2689,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
         id="138661096"
       >
         <div
-          class="flex justify-center items-center mr-3 w-5 text-green-500"
+          class="mr-3 flex w-5 items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -2712,17 +2712,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         >
           <div
-            class="mb-1 text-sm truncate cursor-pointer"
+            class="mb-1 cursor-pointer truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center gap-1 text-xs capitalize"
           >
             <div>
               <svg
@@ -2755,7 +2755,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 title="Linked to issue #1"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2783,7 +2783,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2808,7 +2808,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -2833,10 +2833,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           </div>
         </div>
         <div
-          class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Done"
             type="button"
           >
@@ -2857,7 +2857,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-red-500"
+            class="h-full hover:text-red-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -2878,7 +2878,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Read"
             type="button"
           >
@@ -2908,7 +2908,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
       id="138661096"
     >
       <div
-        class="flex justify-center items-center mr-3 w-5 text-green-500"
+        class="mr-3 flex w-5 items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -2931,17 +2931,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >
         <div
-          class="mb-1 text-sm truncate cursor-pointer"
+          class="mb-1 cursor-pointer truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center gap-1 text-xs capitalize"
         >
           <div>
             <svg
@@ -2974,7 +2974,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               title="Linked to issue #1"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3002,7 +3002,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3027,7 +3027,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3052,10 +3052,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
         </div>
       </div>
       <div
-        class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Done"
           type="button"
         >
@@ -3076,7 +3076,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-red-500"
+          class="h-full hover:text-red-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -3097,7 +3097,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Read"
           type="button"
         >
@@ -3184,7 +3184,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
         id="138661096"
       >
         <div
-          class="flex justify-center items-center mr-3 w-5 text-green-500"
+          class="mr-3 flex w-5 items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -3207,17 +3207,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         >
           <div
-            class="mb-1 text-sm truncate cursor-pointer"
+            class="mb-1 cursor-pointer truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center gap-1 text-xs capitalize"
           >
             <div>
               <svg
@@ -3250,7 +3250,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3278,7 +3278,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3303,7 +3303,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3328,7 +3328,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="2 comments"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3354,7 +3354,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
 🏷️ good-first-issue"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3380,7 +3380,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="Milestone 1"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3404,10 +3404,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           </div>
         </div>
         <div
-          class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Done"
             type="button"
           >
@@ -3428,7 +3428,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-red-500"
+            class="h-full hover:text-red-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -3449,7 +3449,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Read"
             type="button"
           >
@@ -3479,7 +3479,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
       id="138661096"
     >
       <div
-        class="flex justify-center items-center mr-3 w-5 text-green-500"
+        class="mr-3 flex w-5 items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -3502,17 +3502,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >
         <div
-          class="mb-1 text-sm truncate cursor-pointer"
+          class="mb-1 cursor-pointer truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center gap-1 text-xs capitalize"
         >
           <div>
             <svg
@@ -3545,7 +3545,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="Linked to issues #1, #2"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3573,7 +3573,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3598,7 +3598,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3623,7 +3623,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="2 comments"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3649,7 +3649,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
 🏷️ good-first-issue"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3675,7 +3675,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="Milestone 1"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -3699,10 +3699,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
         </div>
       </div>
       <div
-        class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Done"
           type="button"
         >
@@ -3723,7 +3723,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-red-500"
+          class="h-full hover:text-red-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -3744,7 +3744,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Read"
           type="button"
         >
@@ -3831,7 +3831,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
         id="138661096"
       >
         <div
-          class="flex justify-center items-center mr-3 w-5 text-green-500"
+          class="mr-3 flex w-5 items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -3854,17 +3854,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         >
           <div
-            class="mb-1 text-sm truncate cursor-pointer"
+            class="mb-1 cursor-pointer truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center gap-1 text-xs capitalize"
           >
             <div>
               <svg
@@ -3897,7 +3897,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="Linked to issues #1, #2"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3925,7 +3925,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3950,7 +3950,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -3975,7 +3975,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="2 comments"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4001,7 +4001,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
 🏷️ good-first-issue"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4027,7 +4027,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 title="Milestone 1"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4051,10 +4051,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           </div>
         </div>
         <div
-          class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Done"
             type="button"
           >
@@ -4075,7 +4075,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-red-500"
+            class="h-full hover:text-red-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -4096,7 +4096,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Read"
             type="button"
           >
@@ -4126,7 +4126,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
       id="138661096"
     >
       <div
-        class="flex justify-center items-center mr-3 w-5 text-green-500"
+        class="mr-3 flex w-5 items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -4149,17 +4149,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >
         <div
-          class="mb-1 text-sm truncate cursor-pointer"
+          class="mb-1 cursor-pointer truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center gap-1 text-xs capitalize"
         >
           <div>
             <svg
@@ -4192,7 +4192,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="Linked to issues #1, #2"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -4220,7 +4220,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -4245,7 +4245,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -4270,7 +4270,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="2 comments"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -4296,7 +4296,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
 🏷️ good-first-issue"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -4322,7 +4322,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               title="Milestone 1"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -4346,10 +4346,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
         </div>
       </div>
       <div
-        class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Done"
           type="button"
         >
@@ -4370,7 +4370,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-red-500"
+          class="h-full hover:text-red-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -4391,7 +4391,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Read"
           type="button"
         >
@@ -4478,7 +4478,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
         id="138661096"
       >
         <div
-          class="flex justify-center items-center mr-3 w-5 text-green-500"
+          class="mr-3 flex w-5 items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -4501,17 +4501,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         >
           <div
-            class="mb-1 text-sm truncate cursor-pointer"
+            class="mb-1 cursor-pointer truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center gap-1 text-xs capitalize"
           >
             <div>
               <svg
@@ -4542,10 +4542,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
           </div>
         </div>
         <div
-          class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Done"
             type="button"
           >
@@ -4566,7 +4566,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-red-500"
+            class="h-full hover:text-red-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -4587,7 +4587,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Read"
             type="button"
           >
@@ -4617,7 +4617,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
       id="138661096"
     >
       <div
-        class="flex justify-center items-center mr-3 w-5 text-green-500"
+        class="mr-3 flex w-5 items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -4640,17 +4640,17 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >
         <div
-          class="mb-1 text-sm truncate cursor-pointer"
+          class="mb-1 cursor-pointer truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center gap-1 text-xs capitalize"
         >
           <div>
             <svg
@@ -4681,10 +4681,10 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
         </div>
       </div>
       <div
-        class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Done"
           type="button"
         >
@@ -4705,7 +4705,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-red-500"
+          class="h-full hover:text-red-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -4726,7 +4726,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Read"
           type="button"
         >
@@ -4813,7 +4813,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
         id="138661096"
       >
         <div
-          class="flex justify-center items-center mr-3 w-5 text-green-500"
+          class="mr-3 flex w-5 items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -4836,17 +4836,17 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         >
           <div
-            class="mb-1 text-sm truncate cursor-pointer"
+            class="mb-1 cursor-pointer truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center gap-1 text-xs capitalize"
           >
             <button
               class="flex-shrink-0"
@@ -4855,7 +4855,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
             >
               <img
                 alt="gitify-app's avatar"
-                class="rounded-full w-4 h-4 object-cover cursor-pointer"
+                class="size-4 cursor-pointer rounded-full object-cover"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
                 title="gitify-app"
               />
@@ -4875,7 +4875,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4900,7 +4900,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -4925,10 +4925,10 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
           </div>
         </div>
         <div
-          class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Done"
             type="button"
           >
@@ -4949,7 +4949,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-red-500"
+            class="h-full hover:text-red-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -4970,7 +4970,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Read"
             type="button"
           >
@@ -5000,7 +5000,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
       id="138661096"
     >
       <div
-        class="flex justify-center items-center mr-3 w-5 text-green-500"
+        class="mr-3 flex w-5 items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -5023,17 +5023,17 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >
         <div
-          class="mb-1 text-sm truncate cursor-pointer"
+          class="mb-1 cursor-pointer truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center gap-1 text-xs capitalize"
         >
           <button
             class="flex-shrink-0"
@@ -5042,7 +5042,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
           >
             <img
               alt="gitify-app's avatar"
-              class="rounded-full w-4 h-4 object-cover cursor-pointer"
+              class="size-4 cursor-pointer rounded-full object-cover"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
               title="gitify-app"
             />
@@ -5062,7 +5062,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -5087,7 +5087,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -5112,10 +5112,10 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
         </div>
       </div>
       <div
-        class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Done"
           type="button"
         >
@@ -5136,7 +5136,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-red-500"
+          class="h-full hover:text-red-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -5157,7 +5157,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Read"
           type="button"
         >
@@ -5244,7 +5244,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
         id="138661096"
       >
         <div
-          class="flex justify-center items-center mr-3 w-5 text-green-500"
+          class="mr-3 flex w-5 items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -5267,17 +5267,17 @@ exports[`components/NotificationRow.tsx should render itself & its children when
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         >
           <div
-            class="mb-1 text-sm truncate cursor-pointer"
+            class="mb-1 cursor-pointer truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center gap-1 text-xs capitalize"
           >
             <button
               class="flex-shrink-0"
@@ -5286,7 +5286,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
             >
               <img
                 alt="gitify-app's avatar"
-                class="rounded-full w-4 h-4 object-cover cursor-pointer"
+                class="size-4 cursor-pointer rounded-full object-cover"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
                 title="gitify-app"
               />
@@ -5306,7 +5306,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -5331,7 +5331,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -5356,10 +5356,10 @@ exports[`components/NotificationRow.tsx should render itself & its children when
           </div>
         </div>
         <div
-          class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Done"
             type="button"
           >
@@ -5380,7 +5380,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-red-500"
+            class="h-full hover:text-red-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -5401,7 +5401,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Read"
             type="button"
           >
@@ -5431,7 +5431,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
       id="138661096"
     >
       <div
-        class="flex justify-center items-center mr-3 w-5 text-green-500"
+        class="mr-3 flex w-5 items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -5454,17 +5454,17 @@ exports[`components/NotificationRow.tsx should render itself & its children when
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >
         <div
-          class="mb-1 text-sm truncate cursor-pointer"
+          class="mb-1 cursor-pointer truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center gap-1 text-xs capitalize"
         >
           <button
             class="flex-shrink-0"
@@ -5473,7 +5473,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
           >
             <img
               alt="gitify-app's avatar"
-              class="rounded-full w-4 h-4 object-cover cursor-pointer"
+              class="size-4 cursor-pointer rounded-full object-cover"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
               title="gitify-app"
             />
@@ -5493,7 +5493,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -5518,7 +5518,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -5543,10 +5543,10 @@ exports[`components/NotificationRow.tsx should render itself & its children when
         </div>
       </div>
       <div
-        class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Done"
           type="button"
         >
@@ -5567,7 +5567,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-red-500"
+          class="h-full hover:text-red-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -5588,7 +5588,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Read"
           type="button"
         >
@@ -5675,7 +5675,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
         id="138661096"
       >
         <div
-          class="flex justify-center items-center mr-3 w-5 text-green-500"
+          class="mr-3 flex w-5 items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -5698,17 +5698,17 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           </svg>
         </div>
         <div
-          class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         >
           <div
-            class="mb-1 text-sm truncate cursor-pointer"
+            class="mb-1 cursor-pointer truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+            class="flex flex-wrap items-center gap-1 text-xs capitalize"
           >
             <div>
               <svg
@@ -5741,7 +5741,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
                 title="octocat approved these changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -5766,7 +5766,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
                 title="gitify-app requested changes"
               >
                 <button
-                  class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                  class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                   type="button"
                 >
                   <svg
@@ -5791,10 +5791,10 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           </div>
         </div>
         <div
-          class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Done"
             type="button"
           >
@@ -5815,7 +5815,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-red-500"
+            class="h-full hover:text-red-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -5836,7 +5836,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
             </svg>
           </button>
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark as Read"
             type="button"
           >
@@ -5866,7 +5866,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
       id="138661096"
     >
       <div
-        class="flex justify-center items-center mr-3 w-5 text-green-500"
+        class="mr-3 flex w-5 items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -5889,17 +5889,17 @@ exports[`components/NotificationRow.tsx should render itself & its children with
         </svg>
       </div>
       <div
-        class="flex-1 whitespace-nowrap overflow-hidden overflow-ellipsis"
+        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >
         <div
-          class="mb-1 text-sm truncate cursor-pointer"
+          class="mb-1 cursor-pointer truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex flex-wrap items-center text-xs text-capitalize gap-1"
+          class="flex flex-wrap items-center gap-1 text-xs capitalize"
         >
           <div>
             <svg
@@ -5932,7 +5932,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
               title="octocat approved these changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -5957,7 +5957,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
               title="gitify-app requested changes"
             >
               <button
-                class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 type="button"
               >
                 <svg
@@ -5982,10 +5982,10 @@ exports[`components/NotificationRow.tsx should render itself & its children with
         </div>
       </div>
       <div
-        class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Done"
           type="button"
         >
@@ -6006,7 +6006,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-red-500"
+          class="h-full hover:text-red-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -6027,7 +6027,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           </svg>
         </button>
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Read"
           type="button"
         >
