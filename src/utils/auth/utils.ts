@@ -1,6 +1,15 @@
 import { BrowserWindow } from '@electron/remote';
 import { format } from 'date-fns';
-import type { Account, AuthState, GitifyUser } from '../../types';
+import type {
+  Account,
+  AuthCode,
+  AuthState,
+  ClientID,
+  GitifyUser,
+  Hostname,
+  Link,
+  Token,
+} from '../../types';
 import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
@@ -27,9 +36,10 @@ export const authGitHub = (
 
     authWindow.loadURL(authUrl);
 
-    const handleCallback = (url: string) => {
+    const handleCallback = (url: Link) => {
       const raw_code = /code=([^&]*)/.exec(url) || null;
-      const authCode = raw_code && raw_code.length > 1 ? raw_code[1] : null;
+      const authCode =
+        raw_code && raw_code.length > 1 ? (raw_code[1] as AuthCode) : null;
       const error = /\?error=(.+)$/.exec(url);
       if (authCode || error) {
         // Close the browser if code found or error
@@ -65,19 +75,19 @@ export const authGitHub = (
 
     authWindow.webContents.on('will-redirect', (event, url) => {
       event.preventDefault();
-      handleCallback(url);
+      handleCallback(url as Link);
     });
 
     authWindow.webContents.on('will-navigate', (event, url) => {
       event.preventDefault();
-      handleCallback(url);
+      handleCallback(url as Link);
     });
   });
 };
 
 export const getUserData = async (
-  token: string,
-  hostname: string,
+  token: Token,
+  hostname: Hostname,
 ): Promise<GitifyUser> => {
   const response: UserDetails = (await getAuthenticatedUser(hostname, token))
     .data;
@@ -90,10 +100,11 @@ export const getUserData = async (
 };
 
 export const getToken = async (
-  authCode: string,
+  authCode: AuthCode,
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthTokenResponse> => {
-  const url = `https://${authOptions.hostname}/login/oauth/access_token`;
+  const url =
+    `https://${authOptions.hostname}/login/oauth/access_token` as Link;
   const data = {
     client_id: authOptions.clientId,
     client_secret: authOptions.clientSecret,
@@ -110,8 +121,8 @@ export const getToken = async (
 export function addAccount(
   auth: AuthState,
   method: AuthMethod,
-  token: string,
-  hostname: string,
+  token: Token,
+  hostname: Hostname,
   user?: GitifyUser,
 ): AuthState {
   return {
@@ -138,7 +149,7 @@ export function removeAccount(auth: AuthState, account: Account): AuthState {
   };
 }
 
-export function getDeveloperSettingsURL(account: Account): string {
+export function getDeveloperSettingsURL(account: Account): Link {
   const settingsURL = new URL(`https://${account.hostname}`);
 
   switch (account.method) {
@@ -152,19 +163,19 @@ export function getDeveloperSettingsURL(account: Account): string {
       settingsURL.pathname = '/settings/tokens';
       break;
   }
-  return settingsURL.toString();
+  return settingsURL.toString() as Link;
 }
 
-export function getNewTokenURL(hostname: string): string {
+export function getNewTokenURL(hostname: Hostname): Link {
   const date = format(new Date(), 'PP p');
   const newTokenURL = new URL(`https://${hostname}/settings/tokens/new`);
   newTokenURL.searchParams.append('description', `Gitify (Created on ${date})`);
   newTokenURL.searchParams.append('scopes', Constants.AUTH_SCOPE.join(','));
 
-  return newTokenURL.toString();
+  return newTokenURL.toString() as Link;
 }
 
-export function getNewOAuthAppURL(hostname: string): string {
+export function getNewOAuthAppURL(hostname: Hostname): Link {
   const date = format(new Date(), 'PP p');
   const newOAuthAppURL = new URL(
     `https://${hostname}/settings/applications/new`,
@@ -182,20 +193,20 @@ export function getNewOAuthAppURL(hostname: string): string {
     'https://www.gitify.io/callback',
   );
 
-  return newOAuthAppURL.toString();
+  return newOAuthAppURL.toString() as Link;
 }
 
-export function isValidHostname(hostname: string) {
+export function isValidHostname(hostname: Hostname) {
   return /^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
     hostname,
   );
 }
 
-export function isValidClientId(clientId: string) {
+export function isValidClientId(clientId: ClientID) {
   return /^[A-Z0-9_]{20}$/i.test(clientId);
 }
 
-export function isValidToken(token: string) {
+export function isValidToken(token: Token) {
   return /^[A-Z0-9_]{40}$/i.test(token);
 }
 

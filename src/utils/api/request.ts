@@ -1,7 +1,8 @@
 import axios, { type AxiosPromise, type Method } from 'axios';
+import type { Link, Token } from '../../types';
 
 export function apiRequest(
-  url: string,
+  url: Link,
   method: Method,
   data = {},
 ): AxiosPromise | null {
@@ -12,9 +13,9 @@ export function apiRequest(
 }
 
 export function apiRequestAuth(
-  url: string,
+  url: Link,
   method: Method,
-  token: string,
+  token: Token,
   data = {},
 ): AxiosPromise | null {
   axios.defaults.headers.common.Accept = 'application/json';

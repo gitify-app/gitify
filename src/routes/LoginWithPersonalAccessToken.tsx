@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
+import type { Hostname, Token } from '../types';
 import type { LoginPersonalAccessTokenOptions } from '../utils/auth/types';
 import {
   getNewTokenURL,
@@ -19,8 +20,8 @@ import {
 import { Constants } from '../utils/constants';
 
 interface IValues {
-  token?: string;
-  hostname?: string;
+  token?: Token;
+  hostname?: Hostname;
 }
 
 interface IFormErrors {
@@ -158,7 +159,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
         <Form
           initialValues={{
             hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
-            token: '',
+            token: '' as Token,
           }}
           onSubmit={login}
           validate={validate}

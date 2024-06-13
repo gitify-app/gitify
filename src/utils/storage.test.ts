@@ -1,4 +1,5 @@
 import { mockSettings } from '../__mocks__/state-mocks';
+import type { Token } from '../types';
 import Constants from './constants';
 import { clearState, loadState, saveState } from './storage';
 
@@ -12,7 +13,7 @@ describe('utils/storage.ts', () => {
               hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
               platform: 'GitHub Cloud',
               method: 'Personal Access Token',
-              token: '123-456',
+              token: '123-456' as Token,
               user: null,
             },
           ],
@@ -27,7 +28,7 @@ describe('utils/storage.ts', () => {
         hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
         platform: 'GitHub Cloud',
         method: 'Personal Access Token',
-        token: '123-456',
+        token: '123-456' as Token,
         user: null,
       },
     ]);
@@ -56,7 +57,7 @@ describe('utils/storage.ts', () => {
             hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
             platform: 'GitHub Cloud',
             method: 'Personal Access Token',
-            token: '123-456',
+            token: '123-456' as Token,
             user: null,
           },
         ],

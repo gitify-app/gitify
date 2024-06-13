@@ -1,4 +1,5 @@
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
+import type { Hostname, Link } from '../types';
 import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
@@ -15,7 +16,7 @@ export function getPlatformFromHostname(hostname: string): PlatformType {
     : 'GitHub Enterprise Server';
 }
 
-export function isEnterpriseHost(hostname: string): boolean {
+export function isEnterpriseHost(hostname: Hostname): boolean {
   return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
 }
 
@@ -28,7 +29,7 @@ export function generateNotificationReferrerId(
   return buffer.toString('base64');
 }
 
-export function getCheckSuiteUrl(notification: Notification): string {
+export function getCheckSuiteUrl(notification: Notification): Link {
   const filters = [];
 
   const checkSuiteAttributes = getCheckSuiteAttributes(notification);
@@ -50,7 +51,7 @@ export function getCheckSuiteUrl(notification: Notification): string {
   return actionsURL(notification.repository.html_url, filters);
 }
 
-export function getWorkflowRunUrl(notification: Notification): string {
+export function getWorkflowRunUrl(notification: Notification): Link {
   const filters = [];
 
   const workflowRunAttributes = getWorkflowRunAttributes(notification);
@@ -65,7 +66,7 @@ export function getWorkflowRunUrl(notification: Notification): string {
 /**
  * Construct a GitHub Actions URL for a repository with optional filters.
  */
-export function actionsURL(repositoryURL: string, filters: string[]): string {
+export function actionsURL(repositoryURL: string, filters: string[]): Link {
   const url = new URL(repositoryURL);
   url.pathname += '/actions';
 
@@ -74,10 +75,10 @@ export function actionsURL(repositoryURL: string, filters: string[]): string {
   }
 
   // Note: the GitHub Actions UI cannot handle encoded '+' characters.
-  return url.toString().replace(/%2B/g, '+');
+  return url.toString().replace(/%2B/g, '+') as Link;
 }
 
-async function getDiscussionUrl(notification: Notification): Promise<string> {
+async function getDiscussionUrl(notification: Notification): Promise<Link> {
   const url = new URL(notification.repository.html_url);
   url.pathname += '/discussions';
 
@@ -93,12 +94,12 @@ async function getDiscussionUrl(notification: Notification): Promise<string> {
     }
   }
 
-  return url.toString();
+  return url.toString() as Link;
 }
 
 export async function generateGitHubWebUrl(
   notification: Notification,
-): Promise<string> {
+): Promise<Link> {
   const url = new URL(notification.repository.html_url);
 
   if (notification.subject.latest_comment_url) {
@@ -136,7 +137,7 @@ export async function generateGitHubWebUrl(
     generateNotificationReferrerId(notification),
   );
 
-  return url.toString();
+  return url.toString() as Link;
 }
 
 export function formatForDisplay(text: string[]): string {

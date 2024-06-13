@@ -1,9 +1,10 @@
 import axios from 'axios';
+import type { Link, Token } from '../../types';
 import { apiRequest, apiRequestAuth } from './request';
 
 jest.mock('axios');
 
-const url = 'https://example.com';
+const url = 'https://example.com' as Link;
 const method = 'get';
 
 describe('utils/api/request.ts', () => {
@@ -40,7 +41,7 @@ describe('utils/api/request.ts', () => {
 });
 
 describe('apiRequestAuth', () => {
-  const token = 'yourAuthToken';
+  const token = 'yourAuthToken' as Token;
 
   afterEach(() => {
     jest.resetAllMocks();

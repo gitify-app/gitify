@@ -1,4 +1,4 @@
-import type { Account } from '../types';
+import type { Account, Hostname, Link } from '../types';
 import type { Notification, Repository, SubjectUser } from '../typesGitHub';
 import { getDeveloperSettingsURL } from './auth/utils';
 import { openExternalLink } from './comms';
@@ -6,31 +6,31 @@ import Constants from './constants';
 import { generateGitHubWebUrl } from './helpers';
 
 export function openGitifyRepository() {
-  openExternalLink(`https://github.com/${Constants.REPO_SLUG}`);
+  openExternalLink(`https://github.com/${Constants.REPO_SLUG}` as Link);
 }
 
 export function openGitifyReleaseNotes(version: string) {
   openExternalLink(
-    `https://github.com/${Constants.REPO_SLUG}/releases/tag/v${version}`,
+    `https://github.com/${Constants.REPO_SLUG}/releases/tag/v${version}` as Link,
   );
 }
 
 export function openGitHubNotifications() {
-  openExternalLink('https://github.com/notifications');
+  openExternalLink('https://github.com/notifications' as Link);
 }
 
 export function openAccountProfile(account: Account) {
   const url = new URL(`https://${account.hostname}`);
   url.pathname = account.user.login;
-  openExternalLink(url.toString());
+  openExternalLink(url.toString() as Link);
 }
 
 export function openUserProfile(user: SubjectUser) {
   openExternalLink(user.html_url);
 }
 
-export function openHost(hostname: string) {
-  openExternalLink(`https://${hostname}`);
+export function openHost(hostname: Hostname) {
+  openExternalLink(`https://${hostname}` as Link);
 }
 
 export function openDeveloperSettings(account: Account) {

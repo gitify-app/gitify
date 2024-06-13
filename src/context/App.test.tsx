@@ -2,7 +2,7 @@ import { act, fireEvent, render, waitFor } from '@testing-library/react';
 import { useContext } from 'react';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { useNotifications } from '../hooks/useNotifications';
-import type { AuthState, SettingsState } from '../types';
+import type { AuthState, Hostname, SettingsState, Token } from '../types';
 import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as apiRequests from '../utils/api/request';
 import * as comms from '../utils/comms';
@@ -280,8 +280,8 @@ describe('context/App.tsx', () => {
             type="button"
             onClick={() =>
               loginWithPersonalAccessToken({
-                hostname: 'github.com',
-                token: '123-456',
+                hostname: 'github.com' as Hostname,
+                token: '123-456' as Token,
               })
             }
           >

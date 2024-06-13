@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
+import type { ClientID, ClientSecret, Hostname, Token } from '../types';
 import type { LoginOAuthAppOptions } from '../utils/auth/types';
 import {
   getNewOAuthAppURL,
@@ -20,9 +21,9 @@ import {
 import Constants from '../utils/constants';
 
 interface IValues {
-  hostname?: string;
-  clientId?: string;
-  clientSecret?: string;
+  hostname?: Hostname;
+  clientId?: ClientID;
+  clientSecret?: ClientSecret;
 }
 
 interface IFormErrors {
@@ -48,7 +49,7 @@ export const validate = (values: IValues): IFormErrors => {
 
   if (!values.clientSecret) {
     errors.clientSecret = 'Required';
-  } else if (!isValidToken(values.clientSecret)) {
+  } else if (!isValidToken(values.clientSecret as unknown as Token)) {
     errors.clientSecret = 'Invalid client secret.';
   }
 

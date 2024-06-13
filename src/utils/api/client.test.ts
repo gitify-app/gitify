@@ -4,7 +4,7 @@ import {
   mockGitHubEnterpriseServerAccount,
   mockToken,
 } from '../../__mocks__/state-mocks';
-import type { SettingsState } from '../../types';
+import type { Hostname, Link, SettingsState, Token } from '../../types';
 import {
   getAuthenticatedUser,
   getHtmlUrl,
@@ -19,8 +19,8 @@ import * as apiRequests from './request';
 
 jest.mock('axios');
 
-const mockGitHubHostname = 'github.com';
-const mockEnterpriseHostname = 'example.com';
+const mockGitHubHostname = 'github.com' as Hostname;
+const mockEnterpriseHostname = 'example.com' as Hostname;
 const mockThreadId = '1234';
 const mockRepoSlug = 'gitify-app/notifications-test';
 
@@ -269,8 +269,8 @@ describe('utils/api/client.ts', () => {
       apiRequestAuthMock.mockResolvedValue(requestPromise);
 
       const result = await getHtmlUrl(
-        'https://api.github.com/repos/gitify-app/notifications-test/issues/785',
-        '123',
+        'https://api.github.com/repos/gitify-app/notifications-test/issues/785' as Link,
+        '123' as Token,
       );
       expect(result).toBe(
         'https://github.com/gitify-app/notifications-test/issues/785',
@@ -287,8 +287,8 @@ describe('utils/api/client.ts', () => {
       apiRequestAuthMock.mockRejectedValue(mockError);
 
       await getHtmlUrl(
-        'https://api.github.com/repos/gitify-app/gitify/issues/785',
-        '123',
+        'https://api.github.com/repos/gitify-app/gitify/issues/785' as Link,
+        '123' as Token,
       );
 
       expect(consoleErrorSpy).toHaveBeenCalledWith('Failed to get html url');

@@ -2,6 +2,7 @@ import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
 } from '../../../__mocks__/state-mocks';
+import type { Link } from '../../../types';
 import type {
   Discussion,
   DiscussionAuthor,
@@ -17,19 +18,23 @@ export const mockNotificationUser: User = {
   login: 'octocat',
   id: 123456789,
   node_id: 'MDQ6VXNlcjE=',
-  avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
-  gravatar_url: '',
-  url: 'https://api.github.com/users/octocat',
-  html_url: 'https://github.com/octocat',
-  followers_url: 'https://api.github.com/users/octocat/followers',
-  following_url: 'https://api.github.com/users/octocat/following{/other_user}',
-  gists_url: 'https://api.github.com/users/octocat/gists{/gist_id}',
-  starred_url: 'https://api.github.com/users/octocat/starred{/owner}{/repo}',
-  subscriptions_url: 'https://api.github.com/users/octocat/subscriptions',
-  organizations_url: 'https://api.github.com/users/octocat/orgs',
-  repos_url: 'https://api.github.com/users/octocat/repos',
-  events_url: 'https://api.github.com/users/octocat/events{/privacy}',
-  received_events_url: 'https://api.github.com/users/octocat/received_events',
+  avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
+  gravatar_url: '' as Link,
+  url: 'https://api.github.com/users/octocat' as Link,
+  html_url: 'https://github.com/octocat' as Link,
+  followers_url: 'https://api.github.com/users/octocat/followers' as Link,
+  following_url:
+    'https://api.github.com/users/octocat/following{/other_user}' as Link,
+  gists_url: 'https://api.github.com/users/octocat/gists{/gist_id}' as Link,
+  starred_url:
+    'https://api.github.com/users/octocat/starred{/owner}{/repo}' as Link,
+  subscriptions_url:
+    'https://api.github.com/users/octocat/subscriptions' as Link,
+  organizations_url: 'https://api.github.com/users/octocat/orgs' as Link,
+  repos_url: 'https://api.github.com/users/octocat/repos' as Link,
+  events_url: 'https://api.github.com/users/octocat/events{/privacy}' as Link,
+  received_events_url:
+    'https://api.github.com/users/octocat/received_events' as Link,
   type: 'User',
   site_admin: false,
 };
@@ -47,16 +52,16 @@ export const mockGitHubNotifications: Notification[] = [
     last_read_at: '2017-05-20T17:06:51Z',
     subject: {
       title: 'I am a robot and this is a test!',
-      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
       latest_comment_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448',
+        'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
       type: 'Issue',
       state: 'open',
       user: {
         login: 'gitify-app',
-        html_url: 'https://github.com/gitify-app',
+        html_url: 'https://github.com/gitify-app' as Link,
         avatar_url:
-          'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
+          'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
         type: 'User',
       },
       reviews: [
@@ -79,29 +84,33 @@ export const mockGitHubNotifications: Notification[] = [
       node_id: 'MDEwOlJlcG9zaXRvcnkzNjAyOTcwNg==',
       name: 'notifications-test',
       full_name: 'gitify-app/notifications-test',
-      url: 'https://api.github.com/gitify-app/notifications-test',
+      url: 'https://api.github.com/gitify-app/notifications-test' as Link,
       owner: {
         login: 'gitify-app',
         id: 6333409,
         node_id: 'MDQ6VXNlcjYzMzM0MDk=',
         avatar_url:
-          'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
+          'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
         gravatar_id: '',
-        url: 'https://api.github.com/users/gitify-app',
-        html_url: 'https://github.com/gitify-app',
-        followers_url: 'https://api.github.com/users/gitify-app/followers',
+        url: 'https://api.github.com/users/gitify-app' as Link,
+        html_url: 'https://github.com/gitify-app' as Link,
+        followers_url:
+          'https://api.github.com/users/gitify-app/followers' as Link,
         following_url:
-          'https://api.github.com/users/gitify-app/following{/other_user}',
-        gists_url: 'https://api.github.com/users/gitify-app/gists{/gist_id}',
+          'https://api.github.com/users/gitify-app/following{/other_user}' as Link,
+        gists_url:
+          'https://api.github.com/users/gitify-app/gists{/gist_id}' as Link,
         starred_url:
-          'https://api.github.com/users/gitify-app/starred{/owner}{/repo}',
+          'https://api.github.com/users/gitify-app/starred{/owner}{/repo}' as Link,
         subscriptions_url:
-          'https://api.github.com/users/gitify-app/subscriptions',
-        organizations_url: 'https://api.github.com/users/gitify-app/orgs',
-        repos_url: 'https://api.github.com/users/gitify-app/repos',
-        events_url: 'https://api.github.com/users/gitify-app/events{/privacy}',
+          'https://api.github.com/users/gitify-app/subscriptions' as Link,
+        organizations_url:
+          'https://api.github.com/users/gitify-app/orgs' as Link,
+        repos_url: 'https://api.github.com/users/gitify-app/repos' as Link,
+        events_url:
+          'https://api.github.com/users/gitify-app/events{/privacy}' as Link,
         received_events_url:
-          'https://api.github.com/users/gitify-app/received_events',
+          'https://api.github.com/users/gitify-app/received_events' as Link,
         type: 'User',
         site_admin: false,
       },
@@ -109,82 +118,82 @@ export const mockGitHubNotifications: Notification[] = [
       description: 'Test Repository',
       fork: false,
       archive_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/{archive_format}{/ref}',
+        'https://api.github.com/repos/gitify-app/notifications-test/{archive_format}{/ref}' as Link,
       assignees_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/assignees{/user}',
+        'https://api.github.com/repos/gitify-app/notifications-test/assignees{/user}' as Link,
       blobs_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/git/blobs{/sha}',
+        'https://api.github.com/repos/gitify-app/notifications-test/git/blobs{/sha}' as Link,
       branches_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/branches{/branch}',
+        'https://api.github.com/repos/gitify-app/notifications-test/branches{/branch}' as Link,
       collaborators_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/collaborators{/collaborator}',
+        'https://api.github.com/repos/gitify-app/notifications-test/collaborators{/collaborator}' as Link,
       comments_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/comments{/number}',
+        'https://api.github.com/repos/gitify-app/notifications-test/comments{/number}' as Link,
       commits_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/commits{/sha}',
+        'https://api.github.com/repos/gitify-app/notifications-test/commits{/sha}' as Link,
       compare_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/compare/{base}...{head}',
+        'https://api.github.com/repos/gitify-app/notifications-test/compare/{base}...{head}' as Link,
       contents_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/contents/{+path}',
+        'https://api.github.com/repos/gitify-app/notifications-test/contents/{+path}' as Link,
       contributors_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/contributors',
+        'https://api.github.com/repos/gitify-app/notifications-test/contributors' as Link,
       deployments_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/deployments',
+        'https://api.github.com/repos/gitify-app/notifications-test/deployments' as Link,
       downloads_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/downloads',
+        'https://api.github.com/repos/gitify-app/notifications-test/downloads' as Link,
       events_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/events',
+        'https://api.github.com/repos/gitify-app/notifications-test/events' as Link,
       forks_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/forks',
+        'https://api.github.com/repos/gitify-app/notifications-test/forks' as Link,
       git_commits_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/git/commits{/sha}',
+        'https://api.github.com/repos/gitify-app/notifications-test/git/commits{/sha}' as Link,
       git_refs_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/git/refs{/sha}',
+        'https://api.github.com/repos/gitify-app/notifications-test/git/refs{/sha}' as Link,
       git_tags_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/git/tags{/sha}',
+        'https://api.github.com/repos/gitify-app/notifications-test/git/tags{/sha}' as Link,
       hooks_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/hooks',
-      html_url: 'https://github.com/gitify-app/notifications-test',
+        'https://api.github.com/repos/gitify-app/notifications-test/hooks' as Link,
+      html_url: 'https://github.com/gitify-app/notifications-test' as Link,
       issue_comment_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/issues/comments{/number}',
+        'https://api.github.com/repos/gitify-app/notifications-test/issues/comments{/number}' as Link,
       issue_events_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/issues/events{/number}',
+        'https://api.github.com/repos/gitify-app/notifications-test/issues/events{/number}' as Link,
       issues_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/issues{/number}',
+        'https://api.github.com/repos/gitify-app/notifications-test/issues{/number}' as Link,
       keys_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/keys{/key_id}',
+        'https://api.github.com/repos/gitify-app/notifications-test/keys{/key_id}' as Link,
       labels_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/labels{/name}',
+        'https://api.github.com/repos/gitify-app/notifications-test/labels{/name}' as Link,
       languages_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/languages',
+        'https://api.github.com/repos/gitify-app/notifications-test/languages' as Link,
       merges_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/merges',
+        'https://api.github.com/repos/gitify-app/notifications-test/merges' as Link,
       milestones_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/milestones{/number}',
+        'https://api.github.com/repos/gitify-app/notifications-test/milestones{/number}' as Link,
       notifications_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/notifications{?since,all,participating}',
+        'https://api.github.com/repos/gitify-app/notifications-test/notifications{?since,all,participating}' as Link,
       pulls_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/pulls{/number}',
+        'https://api.github.com/repos/gitify-app/notifications-test/pulls{/number}' as Link,
       releases_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/releases{/id}',
+        'https://api.github.com/repos/gitify-app/notifications-test/releases{/id}' as Link,
       stargazers_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/stargazers',
+        'https://api.github.com/repos/gitify-app/notifications-test/stargazers' as Link,
       statuses_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/statuses/{sha}',
+        'https://api.github.com/repos/gitify-app/notifications-test/statuses/{sha}' as Link,
       subscribers_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/subscribers',
+        'https://api.github.com/repos/gitify-app/notifications-test/subscribers' as Link,
       subscription_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/subscription',
+        'https://api.github.com/repos/gitify-app/notifications-test/subscription' as Link,
       tags_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/tags',
+        'https://api.github.com/repos/gitify-app/notifications-test/tags' as Link,
       teams_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/teams',
+        'https://api.github.com/repos/gitify-app/notifications-test/teams' as Link,
       trees_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/git/trees{/sha}',
+        'https://api.github.com/repos/gitify-app/notifications-test/git/trees{/sha}' as Link,
     },
-    url: 'https://api.github.com/notifications/threads/138661096',
+    url: 'https://api.github.com/notifications/threads/138661096' as Link,
     subscription_url:
-      'https://api.github.com/notifications/threads/138661096/subscription',
+      'https://api.github.com/notifications/threads/138661096/subscription' as Link,
   },
   {
     account: mockGitHubCloudAccount,
@@ -195,9 +204,9 @@ export const mockGitHubNotifications: Notification[] = [
     last_read_at: '2017-05-20T16:59:03Z',
     subject: {
       title: 'Improve the UI',
-      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/4',
+      url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/4' as Link,
       latest_comment_url:
-        'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302885965',
+        'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302885965' as Link,
       type: 'Issue',
       reviews: null,
     },
@@ -209,23 +218,27 @@ export const mockGitHubNotifications: Notification[] = [
         login: 'gitify-app',
         id: 6333409,
         avatar_url:
-          'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
+          'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as Link,
         gravatar_id: '',
-        url: 'https://api.github.com/users/gitify-app',
-        html_url: 'https://github.com/gitify-app',
-        followers_url: 'https://api.github.com/users/gitify-app/followers',
+        url: 'https://api.github.com/users/gitify-app' as Link,
+        html_url: 'https://github.com/gitify-app' as Link,
+        followers_url:
+          'https://api.github.com/users/gitify-app/followers' as Link,
         following_url:
-          'https://api.github.com/users/gitify-app/following{/other_user}',
-        gists_url: 'https://api.github.com/users/gitify-app/gists{/gist_id}',
+          'https://api.github.com/users/gitify-app/following{/other_user}' as Link,
+        gists_url:
+          'https://api.github.com/users/gitify-app/gists{/gist_id}' as Link,
         starred_url:
-          'https://api.github.com/users/gitify-app/starred{/owner}{/repo}',
+          'https://api.github.com/users/gitify-app/starred{/owner}{/repo}' as Link,
         subscriptions_url:
-          'https://api.github.com/users/gitify-app/subscriptions',
-        organizations_url: 'https://api.github.com/users/gitify-app/orgs',
-        repos_url: 'https://api.github.com/users/gitify-app/repos',
-        events_url: 'https://api.github.com/users/gitify-app/events{/privacy}',
+          'https://api.github.com/users/gitify-app/subscriptions' as Link,
+        organizations_url:
+          'https://api.github.com/users/gitify-app/orgs' as Link,
+        repos_url: 'https://api.github.com/users/gitify-app/repos' as Link,
+        events_url:
+          'https://api.github.com/users/gitify-app/events{/privacy}' as Link,
         received_events_url:
-          'https://api.github.com/users/gitify-app/received_events',
+          'https://api.github.com/users/gitify-app/received_events' as Link,
         type: 'User',
         site_admin: false,
       },
@@ -235,9 +248,9 @@ export const mockGitHubNotifications: Notification[] = [
       fork: false,
       // Removed the rest of the properties
     } as unknown as Repository,
-    url: 'https://api.github.com/notifications/threads/148827438',
+    url: 'https://api.github.com/notifications/threads/148827438' as Link,
     subscription_url:
-      'https://api.github.com/notifications/threads/148827438/subscription',
+      'https://api.github.com/notifications/threads/148827438/subscription' as Link,
   },
 ];
 
@@ -254,9 +267,9 @@ export const mockEnterpriseNotifications: Notification[] = [
     last_read_at: null,
     subject: {
       title: 'Release 0.0.1',
-      url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3',
+      url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3' as Link,
       latest_comment_url:
-        'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3',
+        'https://github.gitify.io/api/v3/repos/myorg/notifications-test/releases/3' as Link,
       type: 'Release',
       reviews: null,
     },
@@ -267,37 +280,39 @@ export const mockEnterpriseNotifications: Notification[] = [
       owner: {
         login: 'myorg',
         id: 4,
-        avatar_url: 'https://github.gitify.io/avatars/u/4?',
+        avatar_url: 'https://github.gitify.io/avatars/u/4?' as Link,
         gravatar_id: '',
         url: 'https://github.gitify.io/api/v3/users/myorg',
-        html_url: 'https://github.gitify.io/myorg',
-        followers_url: 'https://github.gitify.io/api/v3/users/myorg/followers',
+        html_url: 'https://github.gitify.io/myorg' as Link,
+        followers_url:
+          'https://github.gitify.io/api/v3/users/myorg/followers' as Link,
         following_url:
-          'https://github.gitify.io/api/v3/users/myorg/following{/other_user}',
+          'https://github.gitify.io/api/v3/users/myorg/following{/other_user}' as Link,
         gists_url:
-          'https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}',
+          'https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}' as Link,
         starred_url:
-          'https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}',
+          'https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}' as Link,
         subscriptions_url:
-          'https://github.gitify.io/api/v3/users/myorg/subscriptions',
-        organizations_url: 'https://github.gitify.io/api/v3/users/myorg/orgs',
-        repos_url: 'https://github.gitify.io/api/v3/users/myorg/repos',
+          'https://github.gitify.io/api/v3/users/myorg/subscriptions' as Link,
+        organizations_url:
+          'https://github.gitify.io/api/v3/users/myorg/orgs' as Link,
+        repos_url: 'https://github.gitify.io/api/v3/users/myorg/repos' as Link,
         events_url:
-          'https://github.gitify.io/api/v3/users/myorg/events{/privacy}',
+          'https://github.gitify.io/api/v3/users/myorg/events{/privacy}' as Link,
         received_events_url:
-          'https://github.gitify.io/api/v3/users/myorg/received_events',
+          'https://github.gitify.io/api/v3/users/myorg/received_events' as Link,
         type: 'Organization',
         site_admin: false,
       },
       private: true,
-      html_url: 'https://github.gitify.io/myorg/notifications-test',
+      html_url: 'https://github.gitify.io/myorg/notifications-test' as Link,
       description: null,
       fork: false,
       // Removed the rest of the properties
     } as unknown as Repository,
-    url: 'https://github.gitify.io/api/v3/notifications/threads/4',
+    url: 'https://github.gitify.io/api/v3/notifications/threads/4' as Link,
     subscription_url:
-      'https://github.gitify.io/api/v3/notifications/threads/4/subscription',
+      'https://github.gitify.io/api/v3/notifications/threads/4/subscription' as Link,
   },
   {
     account: mockGitHubEnterpriseServerAccount,
@@ -308,9 +323,9 @@ export const mockEnterpriseNotifications: Notification[] = [
     last_read_at: '2017-05-20T14:20:55Z',
     subject: {
       title: 'Bump Version',
-      url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/pulls/4',
+      url: 'https://github.gitify.io/api/v3/repos/myorg/notifications-test/pulls/4' as Link,
       latest_comment_url:
-        'https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21',
+        'https://github.gitify.io/api/v3/repos/myorg/notifications-test/issues/comments/21' as Link,
       type: 'PullRequest',
       reviews: null,
     },
@@ -321,51 +336,53 @@ export const mockEnterpriseNotifications: Notification[] = [
       owner: {
         login: 'myorg',
         id: 4,
-        avatar_url: 'https://github.gitify.io/avatars/u/4?',
+        avatar_url: 'https://github.gitify.io/avatars/u/4?' as Link,
         gravatar_id: '',
-        url: 'https://github.gitify.io/api/v3/users/myorg',
-        html_url: 'https://github.gitify.io/myorg',
-        followers_url: 'https://github.gitify.io/api/v3/users/myorg/followers',
+        url: 'https://github.gitify.io/api/v3/users/myorg' as Link,
+        html_url: 'https://github.gitify.io/myorg' as Link,
+        followers_url:
+          'https://github.gitify.io/api/v3/users/myorg/followers' as Link,
         following_url:
-          'https://github.gitify.io/api/v3/users/myorg/following{/other_user}',
+          'https://github.gitify.io/api/v3/users/myorg/following{/other_user}' as Link,
         gists_url:
-          'https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}',
+          'https://github.gitify.io/api/v3/users/myorg/gists{/gist_id}' as Link,
         starred_url:
-          'https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}',
+          'https://github.gitify.io/api/v3/users/myorg/starred{/owner}{/repo}' as Link,
         subscriptions_url:
-          'https://github.gitify.io/api/v3/users/myorg/subscriptions',
-        organizations_url: 'https://github.gitify.io/api/v3/users/myorg/orgs',
-        repos_url: 'https://github.gitify.io/api/v3/users/myorg/repos',
+          'https://github.gitify.io/api/v3/users/myorg/subscriptions' as Link,
+        organizations_url:
+          'https://github.gitify.io/api/v3/users/myorg/orgs' as Link,
+        repos_url: 'https://github.gitify.io/api/v3/users/myorg/repos' as Link,
         events_url:
-          'https://github.gitify.io/api/v3/users/myorg/events{/privacy}',
+          'https://github.gitify.io/api/v3/users/myorg/events{/privacy}' as Link,
         received_events_url:
-          'https://github.gitify.io/api/v3/users/myorg/received_events',
+          'https://github.gitify.io/api/v3/users/myorg/received_events' as Link,
         type: 'Organization',
         site_admin: false,
       },
       private: true,
-      html_url: 'https://github.gitify.io/myorg/notifications-test',
+      html_url: 'https://github.gitify.io/myorg/notifications-test' as Link,
       description: null,
       fork: false,
       // Removed the rest of the properties
     } as unknown as Repository,
-    url: 'https://github.gitify.io/api/v3/notifications/threads/3',
+    url: 'https://github.gitify.io/api/v3/notifications/threads/3' as Link,
     subscription_url:
-      'https://github.gitify.io/api/v3/notifications/threads/3/subscription',
+      'https://github.gitify.io/api/v3/notifications/threads/3/subscription' as Link,
   },
 ];
 
 const mockDiscussionAuthor: DiscussionAuthor = {
   login: 'comment-user',
-  url: 'https://github.com/comment-user',
-  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+  url: 'https://github.com/comment-user' as Link,
+  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
   type: 'User',
 };
 
 const mockDiscussionReplier: DiscussionAuthor = {
   login: 'reply-user',
-  url: 'https://github.com/reply-user',
-  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+  url: 'https://github.com/reply-user' as Link,
+  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
   type: 'User',
 };
 
@@ -405,11 +422,12 @@ export const mockGraphQLResponse: GraphQLSearch<Discussion> = {
           title: '1.16.0',
           isAnswered: false,
           stateReason: 'OPEN',
-          url: 'https://github.com/gitify-app/notifications-test/discussions/612',
+          url: 'https://github.com/gitify-app/notifications-test/discussions/612' as Link,
           author: {
             login: 'discussion-creator',
-            url: 'https://github.com/discussion-creator',
-            avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+            url: 'https://github.com/discussion-creator' as Link,
+            avatar_url:
+              'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
             type: 'User',
           },
           comments: mockDiscussionComments,

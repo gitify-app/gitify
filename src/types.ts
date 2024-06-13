@@ -7,14 +7,16 @@ import type {
   PlatformType,
 } from './utils/auth/types';
 
-export type Status = 'loading' | 'success' | 'error';
+declare const __brand: unique symbol;
+
+type Brand<B> = { [__brand]: B };
 
 export interface AuthState {
   accounts: Account[];
   /**
    * @deprecated This attribute is deprecated and will be removed in a future release.
    */
-  token?: string;
+  token?: Token;
   /**
    * @deprecated This attribute is deprecated and will be removed in a future release.
    */
@@ -25,11 +27,27 @@ export interface AuthState {
   user?: GitifyUser | null;
 }
 
+export type Branded<T, B> = T & Brand<B>;
+
+export type AuthCode = Branded<string, 'AuthCode'>;
+
+export type Token = Branded<string, 'Token'>;
+
+export type ClientID = Branded<string, 'ClientID'>;
+
+export type ClientSecret = Branded<string, 'ClientSecret'>;
+
+export type Hostname = Branded<string, 'Hostname'>;
+
+export type Link = Branded<string, 'WebUrl'>;
+
+export type Status = 'loading' | 'success' | 'error';
+
 export interface Account {
   method: AuthMethod;
   platform: PlatformType;
-  hostname: string;
-  token: string;
+  hostname: Hostname;
+  token: Token;
   user: GitifyUser | null;
 }
 

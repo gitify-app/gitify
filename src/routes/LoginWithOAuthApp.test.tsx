@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
 import { AppContext } from '../context/App';
-import type { AuthState } from '../types';
+import type { AuthState, ClientID, ClientSecret, Hostname } from '../types';
 import { LoginWithOAuthApp, validate } from './LoginWithOAuthApp';
 
 const mockNavigate = jest.fn();
@@ -64,9 +64,9 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
 
     values = {
       ...emptyValues,
-      hostname: 'hello',
-      clientId: '!@£INVALID-.1',
-      clientSecret: '!@£INVALID-.1',
+      hostname: 'hello' as Hostname,
+      clientId: '!@£INVALID-.1' as ClientID,
+      clientSecret: '!@£INVALID-.1' as ClientSecret,
     };
     expect(validate(values).hostname).toBe('Invalid hostname.');
     expect(validate(values).clientId).toBe('Invalid client id.');

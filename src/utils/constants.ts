@@ -1,13 +1,14 @@
-import type { ErrorType, GitifyError } from '../types';
+import type { ErrorType, GitifyError, Link } from '../types';
+import type { ClientID, ClientSecret, Hostname } from '../types';
 
 export const Constants = {
   // GitHub OAuth
   AUTH_SCOPE: ['read:user', 'notifications', 'repo'],
 
   DEFAULT_AUTH_OPTIONS: {
-    hostname: 'github.com',
-    clientId: process.env.OAUTH_CLIENT_ID,
-    clientSecret: process.env.OAUTH_CLIENT_SECRET,
+    hostname: 'github.com' as Hostname,
+    clientId: process.env.OAUTH_CLIENT_ID as ClientID,
+    clientSecret: process.env.OAUTH_CLIENT_SECRET as ClientSecret,
   },
 
   GITHUB_API_BASE_URL: 'https://api.github.com',
@@ -25,11 +26,11 @@ export const Constants = {
   // GitHub Docs
   GITHUB_DOCS: {
     OAUTH_URL:
-      'https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authenticating-to-the-rest-api-with-an-oauth-app',
+      'https://docs.github.com/en/apps/oauth-apps/building-oauth-apps/authenticating-to-the-rest-api-with-an-oauth-app' as Link,
     PAT_URL:
-      'https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens',
+      'https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens' as Link,
     PARTICIPATING_URL:
-      'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications',
+      'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications' as Link,
   },
 };
 

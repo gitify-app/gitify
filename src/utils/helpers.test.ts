@@ -1,6 +1,7 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
 import { mockPersonalAccessTokenAccount } from '../__mocks__/state-mocks';
 
+import type { Hostname, Link } from '../types';
 import type { SubjectType } from '../typesGitHub';
 import {
   mockGraphQLResponse,
@@ -19,15 +20,19 @@ import {
 describe('utils/helpers.ts', () => {
   describe('getPlatformFromHostname', () => {
     it('should return GitHub Cloud', () => {
-      expect(getPlatformFromHostname('github.com')).toBe('GitHub Cloud');
-      expect(getPlatformFromHostname('api.github.com')).toBe('GitHub Cloud');
+      expect(getPlatformFromHostname('github.com' as Hostname)).toBe(
+        'GitHub Cloud',
+      );
+      expect(getPlatformFromHostname('api.github.com' as Hostname)).toBe(
+        'GitHub Cloud',
+      );
     });
 
     it('should return GitHub Enterprise Server', () => {
-      expect(getPlatformFromHostname('github.gitify.app')).toBe(
+      expect(getPlatformFromHostname('github.gitify.app' as Hostname)).toBe(
         'GitHub Enterprise Server',
       );
-      expect(getPlatformFromHostname('api.github.gitify.app')).toBe(
+      expect(getPlatformFromHostname('api.github.gitify.app' as Hostname)).toBe(
         'GitHub Enterprise Server',
       );
     });
@@ -35,13 +40,13 @@ describe('utils/helpers.ts', () => {
 
   describe('isEnterpriseHost', () => {
     it('should return true for enterprise host', () => {
-      expect(isEnterpriseHost('github.gitify.app')).toBe(true);
-      expect(isEnterpriseHost('api.github.gitify.app')).toBe(true);
+      expect(isEnterpriseHost('github.gitify.app' as Hostname)).toBe(true);
+      expect(isEnterpriseHost('api.github.gitify.app' as Hostname)).toBe(true);
     });
 
     it('should return false for non-enterprise host', () => {
-      expect(isEnterpriseHost('github.com')).toBe(false);
-      expect(isEnterpriseHost('api.github.com')).toBe(false);
+      expect(isEnterpriseHost('github.com' as Hostname)).toBe(false);
+      expect(isEnterpriseHost('api.github.com' as Hostname)).toBe(false);
     });
   });
 
@@ -68,9 +73,9 @@ describe('utils/helpers.ts', () => {
     it('Subject Latest Comment Url: when not null, fetch latest comment html url', async () => {
       const subject = {
         title: 'generate github web url unit tests',
-        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
         latest_comment_url:
-          'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448',
+          'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
         type: 'Issue' as SubjectType,
       };
 
@@ -101,7 +106,7 @@ describe('utils/helpers.ts', () => {
     it('Subject Url: when no latest comment url available, fetch subject html url', async () => {
       const subject = {
         title: 'generate github web url unit tests',
-        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
         latest_comment_url: null,
         type: 'Issue' as SubjectType,
       };

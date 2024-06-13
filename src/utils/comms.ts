@@ -1,6 +1,7 @@
 import { ipcRenderer, shell } from 'electron';
+import type { Link } from '../types';
 
-export function openExternalLink(url: string): void {
+export function openExternalLink(url: Link): void {
   if (!url.toLowerCase().startsWith('file:///')) {
     shell.openExternal(url);
   }
