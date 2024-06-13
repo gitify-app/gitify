@@ -6,7 +6,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
   "baseElement": <body>
     <div>
       <div
-        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -250,7 +250,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
   </body>,
   "container": <div>
     <div
-      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -551,7 +551,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
   "baseElement": <body>
     <div>
       <div
-        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -795,7 +795,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
   </body>,
   "container": <div>
     <div
-      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -1096,7 +1096,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
   "baseElement": <body>
     <div>
       <div
-        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -1315,7 +1315,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
   </body>,
   "container": <div>
     <div
-      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -1591,7 +1591,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
   "baseElement": <body>
     <div>
       <div
-        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -1862,7 +1862,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
   </body>,
   "container": <div>
     <div
-      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -2190,7 +2190,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
   "baseElement": <body>
     <div>
       <div
-        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -2409,7 +2409,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
   </body>,
   "container": <div>
     <div
-      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -2685,7 +2685,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
   "baseElement": <body>
     <div>
       <div
-        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -2904,7 +2904,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
   </body>,
   "container": <div>
     <div
-      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -3180,7 +3180,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
   "baseElement": <body>
     <div>
       <div
-        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -3475,7 +3475,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
   </body>,
   "container": <div>
     <div
-      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -3827,7 +3827,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
   "baseElement": <body>
     <div>
       <div
-        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -4122,7 +4122,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
   </body>,
   "container": <div>
     <div
-      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -4474,7 +4474,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
   "baseElement": <body>
     <div>
       <div
-        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -4613,7 +4613,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
   </body>,
   "container": <div>
     <div
-      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -4809,7 +4809,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
   "baseElement": <body>
     <div>
       <div
-        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -4996,7 +4996,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
   </body>,
   "container": <div>
     <div
-      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -5240,7 +5240,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
   "baseElement": <body>
     <div>
       <div
-        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -5427,7 +5427,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
   </body>,
   "container": <div>
     <div
-      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -5671,7 +5671,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
   "baseElement": <body>
     <div>
       <div
-        class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -5862,7 +5862,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
   </body>,
   "container": <div>
     <div
-      class="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div

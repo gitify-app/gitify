@@ -73,12 +73,10 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
         </div>
       </div>
       <div>
-        <div>
-          NotificationRow
-        </div>
-        <div>
-          NotificationRow
-        </div>
+        NotificationRow
+      </div>
+      <div>
+        NotificationRow
       </div>
     </div>
   </body>,
@@ -151,12 +149,10 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
       </div>
     </div>
     <div>
-      <div>
-        NotificationRow
-      </div>
-      <div>
-        NotificationRow
-      </div>
+      NotificationRow
+    </div>
+    <div>
+      NotificationRow
     </div>
   </div>,
   "debug": [Function],
@@ -295,12 +291,10 @@ exports[`components/Repository.tsx should use default repository icon when avata
         </div>
       </div>
       <div>
-        <div>
-          NotificationRow
-        </div>
-        <div>
-          NotificationRow
-        </div>
+        NotificationRow
+      </div>
+      <div>
+        NotificationRow
       </div>
     </div>
   </body>,
@@ -382,12 +376,10 @@ exports[`components/Repository.tsx should use default repository icon when avata
       </div>
     </div>
     <div>
-      <div>
-        NotificationRow
-      </div>
-      <div>
-        NotificationRow
-      </div>
+      NotificationRow
+    </div>
+    <div>
+      NotificationRow
     </div>
   </div>,
   "debug": [Function],
