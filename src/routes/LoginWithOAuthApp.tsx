@@ -96,7 +96,7 @@ export const LoginWithOAuthApp: FC = () => {
           <Button
             name="Docs"
             label="GitHub Docs"
-            class="mt-2"
+            className="mt-2"
             icon={BookIcon}
             size={12}
             url={Constants.GITHUB_DOCS.OAUTH_URL}
@@ -105,7 +105,7 @@ export const LoginWithOAuthApp: FC = () => {
           <Button
             name="Login"
             label="Login"
-            class="px-4 py-2 mt-2 !text-sm"
+            className="px-4 py-2 mt-2 !text-sm"
             icon={SignInIcon}
             size={16}
             disabled={submitting || pristine}

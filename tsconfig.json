@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "es6",
-    "moduleResolution": "node",
+    "moduleResolution": "Bundler",
     "target": "es2022",
     "outDir": "./build/",
     "sourceMap": true,

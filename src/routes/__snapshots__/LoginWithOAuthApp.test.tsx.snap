@@ -81,7 +81,7 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 >
                   <button
                     aria-label="Create new OAuth App"
-                    class="undefined rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+                    class="rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
                     disabled=""
                     title="Create new OAuth App"
                     type="button"
@@ -283,7 +283,7 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               >
                 <button
                   aria-label="Create new OAuth App"
-                  class="undefined rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+                  class="rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
                   disabled=""
                   title="Create new OAuth App"
                   type="button"

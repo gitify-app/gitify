@@ -1,6 +1,7 @@
 import type { Icon } from '@primer/octicons-react';
 import type { FC } from 'react';
 import type { IconColor } from '../../types';
+import { cn } from '../../utils/cn';
 
 export interface IPillButton {
   key?: string;
@@ -19,7 +20,7 @@ export const PillButton: FC<IPillButton> = (props: IPillButton) => {
       >
         <props.icon
           size={12}
-          className={`mr-1 ${props.color}`}
+          className={cn('mr-1', props.color)}
           aria-label={props.title}
         />
         {props.metric}

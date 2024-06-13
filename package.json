@@ -110,6 +110,7 @@
     "@electron/remote": "2.1.2",
     "@primer/octicons-react": "19.9.0",
     "axios": "1.7.2",
+    "clsx": "2.1.1",
     "date-fns": "3.6.0",
     "electron-updater": "6.2.1",
     "final-form": "4.20.10",
