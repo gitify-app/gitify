@@ -49,7 +49,7 @@ export const NotificationRow: FC<IProps> = ({ notification }) => {
       removeNotificationFromState(settings, notification);
     }
   }, [
-    notification, // notifications required here to prevent weird state issues
+    notification,
     markNotificationDone,
     removeNotificationFromState,
     settings,
