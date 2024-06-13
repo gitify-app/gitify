@@ -18,7 +18,7 @@ export const Constants = {
   // Storage
   STORAGE_KEY: 'gitify-storage',
 
-  ALLREAD_EMOJIS: ['😉', '🎉', '🐯', '🙈', '🎈', '🎊', '👏', '🎪', '🍝'],
+  ALL_READ_EMOJIS: ['😉', '🎉', '🐯', '🙈', '🎈', '🎊', '👏', '🎪', '🍝'],
 
   FETCH_INTERVAL: 60000,
 
