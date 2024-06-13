@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
 import { BUTTON_SIDEBAR_CLASS_NAME } from '../styles/gitify';
+import { cn } from '../utils/cn';
 import { quitApp } from '../utils/comms';
 import { openGitHubNotifications, openGitifyRepository } from '../utils/links';
 import { getNotificationCount } from '../utils/notifications';
@@ -47,9 +48,10 @@ export const Sidebar: FC = () => {
 
         <button
           type="button"
-          className={`flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer ${
-            notificationsCount > 0 ? 'text-green-500' : 'text-white'
-          }`}
+          className={cn(
+            'flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer',
+            notificationsCount > 0 ? 'text-green-500' : 'text-white',
+          )}
           onClick={() => openGitHubNotifications()}
           title={`${notificationsCount} Unread Notifications`}
         >

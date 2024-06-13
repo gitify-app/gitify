@@ -1,11 +1,12 @@
 import type { Icon } from '@primer/octicons-react';
 import type { FC } from 'react';
+import { cn } from '../../utils/cn';
 import { openExternalLink } from '../../utils/comms';
 
 export interface IButton {
   name: string;
   label: string;
-  class?: string;
+  className?: string;
   icon?: Icon;
   size?: number;
   url?: string;
@@ -22,7 +23,7 @@ export const Button: FC<IButton> = (props: IButton) => {
       type={props.type ?? 'button'}
       title={props.label}
       aria-label={props.label}
-      className={`${props.class} ${baseClass}`}
+      className={cn(props.className, baseClass)}
       disabled={props.disabled}
       onClick={() => {
         if (props.url) {
