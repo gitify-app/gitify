@@ -8,11 +8,17 @@ import {
   ReadIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import { type FC, type MouseEvent, useCallback, useContext } from 'react';
-
+import {
+  type FC,
+  type MouseEvent,
+  useCallback,
+  useContext,
+  useState,
+} from 'react';
 import { AppContext } from '../context/App';
 import { type Account, IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
+import { cn } from '../utils/cn';
 import {
   formatForDisplay,
   formatNotificationUpdatedAt,
@@ -41,8 +47,10 @@ export const NotificationRow: FC<IProps> = ({ notification, account }) => {
     unsubscribeNotification,
     notifications,
   } = useContext(AppContext);
+  const [animateExit, setAnimateExit] = useState(false);
 
   const handleNotification = useCallback(() => {
+    setAnimateExit(true);
     openNotification(notification);
 
     if (settings.markAsDoneOnOpen) {
@@ -89,10 +97,14 @@ export const NotificationRow: FC<IProps> = ({ notification, account }) => {
   return (
     <div
       id={notification.id}
-      className="flex py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group"
+      className={cn(
+        'group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker',
+        animateExit &&
+          'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
+      )}
     >
       <div
-        className={`flex justify-center items-center mr-3 w-5 ${iconColor}`}
+        className={cn('flex justify-center items-center mr-3 w-5', iconColor)}
         title={notificationTitle}
       >
         <NotificationIcon size={18} aria-label={notification.subject.type} />
@@ -204,7 +216,10 @@ export const NotificationRow: FC<IProps> = ({ notification, account }) => {
           type="button"
           className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Done"
-          onClick={() => markNotificationDone(notification)}
+          onClick={() => {
+            setAnimateExit(true);
+            markNotificationDone(notification);
+          }}
         >
           <CheckIcon size={16} aria-label="Mark as Done" />
         </button>
@@ -222,7 +237,10 @@ export const NotificationRow: FC<IProps> = ({ notification, account }) => {
           type="button"
           className="focus:outline-none h-full hover:text-green-500"
           title="Mark as Read"
-          onClick={() => markNotificationRead(notification)}
+          onClick={() => {
+            setAnimateExit(true);
+            markNotificationRead(notification);
+          }}
         >
           <ReadIcon size={14} aria-label="Mark as Read" />
         </button>

@@ -1,6 +1,5 @@
 import { CheckIcon, MarkGithubIcon, ReadIcon } from '@primer/octicons-react';
 import { type FC, useCallback, useContext } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AppContext } from '../context/App';
 import type { Account } from '../types';
 import type { Notification } from '../typesGitHub';
@@ -77,17 +76,9 @@ export const RepositoryNotifications: FC<IProps> = ({
         </div>
       </div>
 
-      <TransitionGroup>
-        {repoNotifications.map((obj) => (
-          <CSSTransition key={obj.id} timeout={250} classNames="notification">
-            <NotificationRow
-              key={obj.id}
-              account={account}
-              notification={obj}
-            />
-          </CSSTransition>
-        ))}
-      </TransitionGroup>
+      {repoNotifications.map((obj) => (
+        <NotificationRow key={obj.id} account={account} notification={obj} />
+      ))}
     </>
   );
 };
