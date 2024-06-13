@@ -5,7 +5,7 @@ import {
   mockToken,
 } from '../../__mocks__/state-mocks';
 import type { SettingsState } from '../../types';
-import type { HostName, Token } from '../branded-types';
+import type { Hostname, Token } from '../branded-types';
 import {
   getAuthenticatedUser,
   getHtmlUrl,
@@ -20,8 +20,8 @@ import * as apiRequests from './request';
 
 jest.mock('axios');
 
-const mockGitHubHostname = 'github.com' as HostName;
-const mockEnterpriseHostname = 'example.com' as HostName;
+const mockGitHubHostname = 'github.com' as Hostname;
+const mockEnterpriseHostname = 'example.com' as Hostname;
 const mockThreadId = '1234';
 const mockRepoSlug = 'gitify-app/notifications-test';
 

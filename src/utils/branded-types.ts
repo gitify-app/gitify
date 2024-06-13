@@ -12,4 +12,4 @@ export type ClientID = Branded<string, 'ClientID'>;
 
 export type ClientSecret = Branded<string, 'ClientSecret'>;
 
-export type HostName = Branded<string, 'HostName'>;
+export type Hostname = Branded<string, 'Hostname'>;

@@ -3,7 +3,7 @@ import { shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
 import { AppContext } from '../context/App';
 import type { AuthState } from '../types';
-import type { ClientID, ClientSecret, HostName } from '../utils/branded-types';
+import type { ClientID, ClientSecret, Hostname } from '../utils/branded-types';
 import { LoginWithOAuthApp, validate } from './LoginWithOAuthApp';
 
 const mockNavigate = jest.fn();
@@ -65,7 +65,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
 
     values = {
       ...emptyValues,
-      hostname: 'hello' as HostName,
+      hostname: 'hello' as Hostname,
       clientId: '!@£INVALID-.1' as ClientID,
       clientSecret: '!@£INVALID-.1' as ClientSecret,
     };

@@ -1,7 +1,7 @@
 import type { Account } from '../types';
 import type { Notification, Repository, SubjectUser } from '../typesGitHub';
 import { getDeveloperSettingsURL } from './auth/utils';
-import type { HostName } from './branded-types';
+import type { Hostname } from './branded-types';
 import { openExternalLink } from './comms';
 import Constants from './constants';
 import { generateGitHubWebUrl } from './helpers';
@@ -30,7 +30,7 @@ export function openUserProfile(user: SubjectUser) {
   openExternalLink(user.html_url);
 }
 
-export function openHost(hostname: HostName) {
+export function openHost(hostname: Hostname) {
   openExternalLink(`https://${hostname}`);
 }
 

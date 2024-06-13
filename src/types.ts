@@ -6,7 +6,7 @@ import type {
   EnterpriseAccount,
   PlatformType,
 } from './utils/auth/types';
-import type { HostName, Token } from './utils/branded-types';
+import type { Hostname, Token } from './utils/branded-types';
 
 export type Status = 'loading' | 'success' | 'error';
 
@@ -29,7 +29,7 @@ export interface AuthState {
 export interface Account {
   method: AuthMethod;
   platform: PlatformType;
-  hostname: HostName;
+  hostname: Hostname;
   token: Token;
   user: GitifyUser | null;
 }

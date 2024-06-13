@@ -16,12 +16,12 @@ import {
   isValidHostname,
   isValidToken,
 } from '../utils/auth/utils';
-import type { HostName, Token } from '../utils/branded-types';
+import type { Hostname, Token } from '../utils/branded-types';
 import { Constants } from '../utils/constants';
 
 interface IValues {
   token?: Token;
-  hostname?: HostName;
+  hostname?: Hostname;
 }
 
 interface IFormErrors {

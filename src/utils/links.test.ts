@@ -3,7 +3,7 @@ import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
 import type { Repository } from '../typesGitHub';
 import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import * as authUtils from './auth/utils';
-import type { HostName } from './branded-types';
+import type { Hostname } from './branded-types';
 import * as comms from './comms';
 import Constants from './constants';
 import * as helpers from './helpers';
@@ -66,7 +66,7 @@ describe('utils/links.ts', () => {
   });
 
   it('openHost', () => {
-    openHost('github.com' as HostName);
+    openHost('github.com' as Hostname);
     expect(comms.openExternalLink).toHaveBeenCalledWith('https://github.com');
   });
 

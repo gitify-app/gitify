@@ -7,7 +7,7 @@ import {
   mockSingleNotification,
 } from './api/__mocks__/response-mocks';
 import * as apiRequests from './api/request';
-import type { HostName } from './branded-types';
+import type { Hostname } from './branded-types';
 import {
   formatForDisplay,
   formatNotificationUpdatedAt,
@@ -20,19 +20,19 @@ import {
 describe('utils/helpers.ts', () => {
   describe('getPlatformFromHostname', () => {
     it('should return GitHub Cloud', () => {
-      expect(getPlatformFromHostname('github.com' as HostName)).toBe(
+      expect(getPlatformFromHostname('github.com' as Hostname)).toBe(
         'GitHub Cloud',
       );
-      expect(getPlatformFromHostname('api.github.com' as HostName)).toBe(
+      expect(getPlatformFromHostname('api.github.com' as Hostname)).toBe(
         'GitHub Cloud',
       );
     });
 
     it('should return GitHub Enterprise Server', () => {
-      expect(getPlatformFromHostname('github.gitify.app' as HostName)).toBe(
+      expect(getPlatformFromHostname('github.gitify.app' as Hostname)).toBe(
         'GitHub Enterprise Server',
       );
-      expect(getPlatformFromHostname('api.github.gitify.app' as HostName)).toBe(
+      expect(getPlatformFromHostname('api.github.gitify.app' as Hostname)).toBe(
         'GitHub Enterprise Server',
       );
     });
@@ -40,13 +40,13 @@ describe('utils/helpers.ts', () => {
 
   describe('isEnterpriseHost', () => {
     it('should return true for enterprise host', () => {
-      expect(isEnterpriseHost('github.gitify.app' as HostName)).toBe(true);
-      expect(isEnterpriseHost('api.github.gitify.app' as HostName)).toBe(true);
+      expect(isEnterpriseHost('github.gitify.app' as Hostname)).toBe(true);
+      expect(isEnterpriseHost('api.github.gitify.app' as Hostname)).toBe(true);
     });
 
     it('should return false for non-enterprise host', () => {
-      expect(isEnterpriseHost('github.com' as HostName)).toBe(false);
-      expect(isEnterpriseHost('api.github.com' as HostName)).toBe(false);
+      expect(isEnterpriseHost('github.com' as Hostname)).toBe(false);
+      expect(isEnterpriseHost('api.github.com' as Hostname)).toBe(false);
     });
   });
 

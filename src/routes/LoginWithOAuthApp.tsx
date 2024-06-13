@@ -20,13 +20,13 @@ import {
 import type {
   ClientID,
   ClientSecret,
-  HostName,
+  Hostname,
   Token,
 } from '../utils/branded-types';
 import Constants from '../utils/constants';
 
 interface IValues {
-  hostname?: HostName;
+  hostname?: Hostname;
   clientId?: ClientID;
   clientSecret?: ClientSecret;
 }

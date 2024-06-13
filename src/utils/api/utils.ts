@@ -1,8 +1,8 @@
-import type { HostName } from '../branded-types';
+import type { Hostname } from '../branded-types';
 import Constants from '../constants';
 import { isEnterpriseHost } from '../helpers';
 
-export function getGitHubAPIBaseUrl(hostname: HostName): URL {
+export function getGitHubAPIBaseUrl(hostname: Hostname): URL {
   const url = new URL(Constants.GITHUB_API_BASE_URL);
 
   if (isEnterpriseHost(hostname)) {
@@ -12,7 +12,7 @@ export function getGitHubAPIBaseUrl(hostname: HostName): URL {
   return url;
 }
 
-export function getGitHubGraphQLUrl(hostname: HostName): URL {
+export function getGitHubGraphQLUrl(hostname: Hostname): URL {
   const url = new URL(Constants.GITHUB_API_GRAPHQL_URL);
 
   if (isEnterpriseHost(hostname)) {

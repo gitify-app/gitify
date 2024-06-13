@@ -7,12 +7,12 @@ import {
   Theme,
 } from '../types';
 import type { EnterpriseAccount } from '../utils/auth/types';
-import type { HostName, Token } from '../utils/branded-types';
+import type { Hostname, Token } from '../utils/branded-types';
 import Constants from '../utils/constants';
 
 export const mockEnterpriseAccounts: EnterpriseAccount[] = [
   {
-    hostname: 'github.gitify.io' as HostName,
+    hostname: 'github.gitify.io' as Hostname,
     token: '1234568790' as Token,
   },
 ];
@@ -35,7 +35,7 @@ export const mockOAuthAccount: Account = {
   platform: 'GitHub Enterprise Server',
   method: 'OAuth App',
   token: '1234568790' as Token,
-  hostname: 'github.gitify.io' as HostName,
+  hostname: 'github.gitify.io' as Hostname,
   user: mockGitifyUser,
 };
 
@@ -51,7 +51,7 @@ export const mockGitHubEnterpriseServerAccount: Account = {
   platform: 'GitHub Enterprise Server',
   method: 'Personal Access Token',
   token: '1234568790' as Token,
-  hostname: 'github.gitify.io' as HostName,
+  hostname: 'github.gitify.io' as Hostname,
   user: mockGitifyUser,
 };
 

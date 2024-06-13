@@ -2,7 +2,7 @@ import { formatDistanceToNowStrict, parseISO } from 'date-fns';
 import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
-import type { HostName } from './branded-types';
+import type { Hostname } from './branded-types';
 import { Constants } from './constants';
 import {
   getCheckSuiteAttributes,
@@ -16,7 +16,7 @@ export function getPlatformFromHostname(hostname: string): PlatformType {
     : 'GitHub Enterprise Server';
 }
 
-export function isEnterpriseHost(hostname: HostName): boolean {
+export function isEnterpriseHost(hostname: Hostname): boolean {
   return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
 }
 

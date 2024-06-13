@@ -5,7 +5,7 @@ import { useNotifications } from '../hooks/useNotifications';
 import type { AuthState, SettingsState } from '../types';
 import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as apiRequests from '../utils/api/request';
-import type { HostName, Token } from '../utils/branded-types';
+import type { Hostname, Token } from '../utils/branded-types';
 import * as comms from '../utils/comms';
 import Constants from '../utils/constants';
 import * as notifications from '../utils/notifications';
@@ -281,7 +281,7 @@ describe('context/App.tsx', () => {
             type="button"
             onClick={() =>
               loginWithPersonalAccessToken({
-                hostname: 'github.com' as HostName,
+                hostname: 'github.com' as Hostname,
                 token: '123-456' as Token,
               })
             }

@@ -4,7 +4,7 @@ import type { Account, AuthState, GitifyUser } from '../../types';
 import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
-import type { AuthCode, ClientID, HostName, Token } from '../branded-types';
+import type { AuthCode, ClientID, Hostname, Token } from '../branded-types';
 import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
 import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
@@ -79,7 +79,7 @@ export const authGitHub = (
 
 export const getUserData = async (
   token: Token,
-  hostname: HostName,
+  hostname: Hostname,
 ): Promise<GitifyUser> => {
   const response: UserDetails = (await getAuthenticatedUser(hostname, token))
     .data;
@@ -113,7 +113,7 @@ export function addAccount(
   auth: AuthState,
   method: AuthMethod,
   token: Token,
-  hostname: HostName,
+  hostname: Hostname,
   user?: GitifyUser,
 ): AuthState {
   return {
@@ -157,7 +157,7 @@ export function getDeveloperSettingsURL(account: Account): string {
   return settingsURL.toString();
 }
 
-export function getNewTokenURL(hostname: HostName): string {
+export function getNewTokenURL(hostname: Hostname): string {
   const date = format(new Date(), 'PP p');
   const newTokenURL = new URL(`https://${hostname}/settings/tokens/new`);
   newTokenURL.searchParams.append('description', `Gitify (Created on ${date})`);
@@ -166,7 +166,7 @@ export function getNewTokenURL(hostname: HostName): string {
   return newTokenURL.toString();
 }
 
-export function getNewOAuthAppURL(hostname: HostName): string {
+export function getNewOAuthAppURL(hostname: Hostname): string {
   const date = format(new Date(), 'PP p');
   const newOAuthAppURL = new URL(
     `https://${hostname}/settings/applications/new`,
@@ -187,7 +187,7 @@ export function getNewOAuthAppURL(hostname: HostName): string {
   return newOAuthAppURL.toString();
 }
 
-export function isValidHostname(hostname: HostName) {
+export function isValidHostname(hostname: Hostname) {
   return /^([a-zA-Z0-9]([a-zA-Z0-9\-]{0,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}$/i.test(
     hostname,
   );
