@@ -17,10 +17,10 @@ export const Tooltip: FC<ITooltip> = (props: ITooltip) => {
       onMouseEnter={() => setShowTooltip(true)}
       onMouseLeave={() => setShowTooltip(false)}
     >
-      <QuestionIcon className="text-blue-500 ml-1" />
+      <QuestionIcon className="ml-1 text-blue-500" />
       {showTooltip && (
-        <div className="absolute bg-white dark:bg-gray-sidebar border border-gray-300 rounded p-2 shadow z-10">
-          <div className="text-gray-700 dark:text-white text-xs text-left">
+        <div className="absolute z-10 rounded border border-gray-300 bg-white p-2 shadow dark:bg-gray-sidebar">
+          <div className="text-left text-xs text-gray-700 dark:text-white">
             {props.tooltip}
           </div>
         </div>

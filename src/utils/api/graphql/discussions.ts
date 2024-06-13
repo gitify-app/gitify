@@ -23,12 +23,12 @@ const FRAGMENT_COMMENTS = gql`
 
 export const QUERY_SEARCH_DISCUSSIONS = gql`
   query fetchDiscussions(
-    $queryStatement: String!,
-    $firstDiscussions: Int,
-    $lastComments: Int,
+    $queryStatement: String!
+    $firstDiscussions: Int
+    $lastComments: Int
     $lastReplies: Int
   ) {
-    search(query:$queryStatement, type: DISCUSSION, first: $firstDiscussions) {
+    search(query: $queryStatement, type: DISCUSSION, first: $firstDiscussions) {
       nodes {
         ... on Discussion {
           title
@@ -38,7 +38,7 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
           author {
             ...AuthorFields
           }
-          comments(last: $lastComments){
+          comments(last: $lastComments) {
             totalCount
             nodes {
               ...CommentFields

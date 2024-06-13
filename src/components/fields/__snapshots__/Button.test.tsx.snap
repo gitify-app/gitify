@@ -7,7 +7,7 @@ exports[`components/fields/Button.tsx should render with icon 1`] = `
     <div>
       <button
         aria-label="button"
-        class="undefined rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+        class="rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
         title="button"
         type="button"
       >
@@ -32,7 +32,7 @@ exports[`components/fields/Button.tsx should render with icon 1`] = `
   "container": <div>
     <button
       aria-label="button"
-      class="undefined rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+      class="rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
       title="button"
       type="button"
     >
@@ -114,7 +114,7 @@ exports[`components/fields/Button.tsx should render without icon 1`] = `
     <div>
       <button
         aria-label="button"
-        class="undefined rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+        class="rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
         title="button"
         type="button"
       >
@@ -125,7 +125,7 @@ exports[`components/fields/Button.tsx should render without icon 1`] = `
   "container": <div>
     <button
       aria-label="button"
-      class="undefined rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+      class="rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
       title="button"
       type="button"
     >

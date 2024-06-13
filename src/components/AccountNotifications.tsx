@@ -54,7 +54,7 @@ export const AccountNotifications = (props: IProps) => {
   return (
     <>
       {showAccountHostname && (
-        <div className="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm text-semibold">
+        <div className="flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white">
           <div>
             <PlatformIcon type={account.platform} size={16} />
             <button

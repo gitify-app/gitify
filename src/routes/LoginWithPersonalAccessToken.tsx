@@ -62,7 +62,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
           label="Hostname"
           placeholder="github.company.com"
           helpText={
-            <div className="italic mt-1">
+            <div className="mt-1 italic">
               Change only if you are using GitHub Enterprise Server.
             </div>
           }
@@ -85,7 +85,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
                 />
                 <span className="mx-1">on GitHub and paste above.</span>
               </div>
-              <div className="italic mt-1">
+              <div className="mt-1 italic">
                 The required scopes will be selected for you.
               </div>
             </div>
@@ -93,16 +93,16 @@ export const LoginWithPersonalAccessToken: FC = () => {
         />
 
         {!isValidToken && (
-          <div className="mt-4 text-red-500 text-sm font-medium">
+          <div className="mt-4 text-sm font-medium text-red-500">
             This token could not be validated with {values.hostname}.
           </div>
         )}
 
-        <div className="flex justify-between items-end">
+        <div className="flex items-end justify-between">
           <Button
             name="Docs"
             label="GitHub Docs"
-            class="mt-2"
+            className="mt-2"
             icon={BookIcon}
             size={12}
             url={Constants.GITHUB_DOCS.PAT_URL}
@@ -110,7 +110,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
           <Button
             name="Login"
             label="Login"
-            class="px-4 py-2 mt-2 !text-sm"
+            className="mt-2 px-4 py-2 !text-sm"
             icon={SignInIcon}
             size={16}
             disabled={submitting || pristine}
@@ -135,7 +135,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
 
   return (
     <div className="flex-1 bg-white dark:bg-gray-dark dark:text-white">
-      <div className="flex justify-between items-center mt-4 py-2 mx-8">
+      <div className="mx-8 mt-4 flex items-center justify-between py-2">
         <button
           type="button"
           className="focus:outline-none"
@@ -149,7 +149,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
           />
         </button>
 
-        <h3 className="text-lg font-semibold justify-center">
+        <h3 className="justify-center text-lg font-semibold">
           <KeyIcon size={18} className="mr-2" />
           Login with Personal Access Token
         </h3>

@@ -27,14 +27,14 @@ export const LoginRoute: FC = () => {
   }, []); */
 
   return (
-    <div className="flex flex-1 flex-col justify-center items-center p-4 bg-white dark:bg-gray-dark dark:text-white">
-      <Logo className="w-16 h-16" isDark />
+    <div className="flex flex-1 flex-col items-center justify-center bg-white p-4 dark:bg-gray-dark dark:text-white">
+      <Logo className="h-16 w-16" isDark />
 
-      <div className="my-4 px-2.5 py-1.5 font-semibold text-center">
+      <div className="my-4 px-2.5 py-1.5 text-center font-semibold">
         GitHub Notifications <br /> on your menu bar.
       </div>
 
-      <div className="font-semibold text-center text-sm italic">Login with</div>
+      <div className="text-center text-sm font-semibold italic">Login with</div>
       {
         // FIXME: Temporarily disable Login with GitHub (OAuth) as it's currently broken and requires a rewrite - see #485 #561 #747
         /*    
@@ -52,14 +52,14 @@ export const LoginRoute: FC = () => {
         name="Personal Access Token"
         icon={KeyIcon}
         label="Login with Personal Access Token"
-        class="py-2 mt-2"
+        className="mt-2 py-2"
         onClick={() => navigate('/login-personal-access-token')}
       />
       <Button
         name="OAuth App"
         icon={PersonIcon}
         label="Login with OAuth App"
-        class="py-2 mt-2"
+        className="mt-2 py-2"
         onClick={() => navigate('/login-oauth-app')}
       />
     </div>

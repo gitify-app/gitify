@@ -31,7 +31,7 @@ export const App = () => {
   return (
     <AppProvider>
       <Router>
-        <div className="flex flex-col pl-14 h-full">
+        <div className="flex h-full flex-col pl-14">
           <Loading />
           <Sidebar />
           <Routes>

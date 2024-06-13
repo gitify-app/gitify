@@ -6,7 +6,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   "baseElement": <body>
     <div>
       <div
-        class="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm text-semibold"
+        class="flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
       >
         <div>
           <span
@@ -65,7 +65,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   </body>,
   "container": <div>
     <div
-      class="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm text-semibold"
+      class="flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
     >
       <div>
         <span
@@ -181,7 +181,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   "baseElement": <body>
     <div>
       <div
-        class="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm text-semibold"
+        class="flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
       >
         <div>
           <span
@@ -237,7 +237,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   </body>,
   "container": <div>
     <div
-      class="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm text-semibold"
+      class="flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
     >
       <div>
         <span
@@ -350,7 +350,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
   "baseElement": <body>
     <div>
       <div
-        class="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm text-semibold"
+        class="flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
       >
         <div>
           <span
@@ -405,7 +405,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
     </div>
     <div>
       <div
-        class="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm text-semibold"
+        class="flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
       >
         <div>
           <span
@@ -464,7 +464,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
   </body>,
   "container": <div>
     <div
-      class="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm text-semibold"
+      class="flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
     >
       <div>
         <span
