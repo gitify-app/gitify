@@ -1,10 +1,17 @@
 import { BrowserWindow } from '@electron/remote';
 import { format } from 'date-fns';
-import type { Account, AuthState, GitifyUser } from '../../types';
+import type {
+  Account,
+  AuthCode,
+  AuthState,
+  ClientID,
+  GitifyUser,
+  Hostname,
+  Token,
+} from '../../types';
 import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
-import type { AuthCode, ClientID, Hostname, Token } from '../branded-types';
 import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
 import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';

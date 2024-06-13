@@ -10,13 +10,13 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
+import type { Hostname, Token } from '../types';
 import type { LoginPersonalAccessTokenOptions } from '../utils/auth/types';
 import {
   getNewTokenURL,
   isValidHostname,
   isValidToken,
 } from '../utils/auth/utils';
-import type { Hostname, Token } from '../utils/branded-types';
 import { Constants } from '../utils/constants';
 
 interface IValues {

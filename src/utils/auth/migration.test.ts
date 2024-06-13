@@ -1,8 +1,7 @@
 import axios from 'axios';
 import nock from 'nock';
 import { mockGitifyUser, mockToken } from '../../__mocks__/state-mocks';
-import type { AuthState } from '../../types';
-import type { Hostname } from '../branded-types';
+import type { AuthState, Hostname } from '../../types';
 import Constants from '../constants';
 import {
   convertAccounts,

@@ -1,5 +1,5 @@
 import type { ErrorType, GitifyError } from '../types';
-import type { ClientID, ClientSecret, Hostname } from './branded-types';
+import type { ClientID, ClientSecret, Hostname } from '../types';
 
 export const Constants = {
   // GitHub OAuth

@@ -4,7 +4,7 @@ import type {
   ClientSecret,
   Hostname,
   Token,
-} from '../branded-types';
+} from '../../types';
 
 export type AuthMethod = 'GitHub App' | 'Personal Access Token' | 'OAuth App';
 

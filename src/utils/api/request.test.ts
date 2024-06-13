@@ -1,5 +1,5 @@
 import axios from 'axios';
-import type { Token } from '../branded-types';
+import type { Token } from '../../types';
 import { apiRequest, apiRequestAuth } from './request';
 
 jest.mock('axios');

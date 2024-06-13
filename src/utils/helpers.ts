@@ -1,8 +1,8 @@
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
+import type { Hostname } from '../types';
 import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
-import type { Hostname } from './branded-types';
 import { Constants } from './constants';
 import {
   getCheckSuiteAttributes,

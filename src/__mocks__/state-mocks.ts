@@ -3,11 +3,12 @@ import {
   type AuthState,
   type GitifyState,
   type GitifyUser,
+  type Hostname,
   type SettingsState,
   Theme,
+  type Token,
 } from '../types';
 import type { EnterpriseAccount } from '../utils/auth/types';
-import type { Hostname, Token } from '../utils/branded-types';
 import Constants from '../utils/constants';
 
 export const mockEnterpriseAccounts: EnterpriseAccount[] = [

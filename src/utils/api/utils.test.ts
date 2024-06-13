@@ -1,4 +1,4 @@
-import type { Hostname } from '../branded-types';
+import type { Hostname } from '../../types';
 import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
 
 describe('utils/api/utils.ts', () => {

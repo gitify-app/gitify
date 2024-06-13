@@ -1,5 +1,5 @@
+import type { Hostname } from '../types';
 import type { Notification, Subject, User } from '../typesGitHub';
-import type { Hostname } from '../utils/branded-types';
 import Constants from '../utils/constants';
 import { mockGitifyUser, mockToken } from './state-mocks';
 

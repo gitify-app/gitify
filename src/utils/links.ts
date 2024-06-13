@@ -1,7 +1,6 @@
-import type { Account } from '../types';
+import type { Account, Hostname } from '../types';
 import type { Notification, Repository, SubjectUser } from '../typesGitHub';
 import { getDeveloperSettingsURL } from './auth/utils';
-import type { Hostname } from './branded-types';
 import { openExternalLink } from './comms';
 import Constants from './constants';
 import { generateGitHubWebUrl } from './helpers';

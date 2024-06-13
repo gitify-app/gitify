@@ -1,13 +1,13 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
 import { mockPersonalAccessTokenAccount } from '../__mocks__/state-mocks';
 
+import type { Hostname } from '../types';
 import type { SubjectType } from '../typesGitHub';
 import {
   mockGraphQLResponse,
   mockSingleNotification,
 } from './api/__mocks__/response-mocks';
 import * as apiRequests from './api/request';
-import type { Hostname } from './branded-types';
 import {
   formatForDisplay,
   formatNotificationUpdatedAt,

@@ -6,9 +6,10 @@ import type {
   EnterpriseAccount,
   PlatformType,
 } from './utils/auth/types';
-import type { Hostname, Token } from './utils/branded-types';
 
-export type Status = 'loading' | 'success' | 'error';
+declare const __brand: unique symbol;
+
+type Brand<B> = { [__brand]: B };
 
 export interface AuthState {
   accounts: Account[];
@@ -25,6 +26,20 @@ export interface AuthState {
    */
   user?: GitifyUser | null;
 }
+
+export type Branded<T, B> = T & Brand<B>;
+
+export type AuthCode = Branded<string, 'AuthCode'>;
+
+export type Token = Branded<string, 'Token'>;
+
+export type ClientID = Branded<string, 'ClientID'>;
+
+export type ClientSecret = Branded<string, 'ClientSecret'>;
+
+export type Hostname = Branded<string, 'Hostname'>;
+
+export type Status = 'loading' | 'success' | 'error';
 
 export interface Account {
   method: AuthMethod;

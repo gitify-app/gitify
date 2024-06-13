@@ -1,5 +1,5 @@
 import axios, { type AxiosPromise, type Method } from 'axios';
-import type { Token } from '../branded-types';
+import type { Token } from '../../types';
 
 export function apiRequest(
   url: string,

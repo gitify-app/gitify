@@ -1,4 +1,4 @@
-import type { Hostname } from '../branded-types';
+import type { Hostname } from '../../types';
 import Constants from '../constants';
 import { isEnterpriseHost } from '../helpers';
 

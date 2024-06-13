@@ -4,8 +4,7 @@ import {
   mockGitHubEnterpriseServerAccount,
   mockToken,
 } from '../../__mocks__/state-mocks';
-import type { SettingsState } from '../../types';
-import type { Hostname, Token } from '../branded-types';
+import type { Hostname, SettingsState, Token } from '../../types';
 import {
   getAuthenticatedUser,
   getHtmlUrl,

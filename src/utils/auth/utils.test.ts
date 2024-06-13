@@ -1,9 +1,15 @@
 import remote from '@electron/remote';
 import type { AxiosPromise, AxiosResponse } from 'axios';
 import { mockAuth, mockGitHubCloudAccount } from '../../__mocks__/state-mocks';
-import type { Account, AuthState } from '../../types';
+import type {
+  Account,
+  AuthCode,
+  AuthState,
+  ClientID,
+  Hostname,
+  Token,
+} from '../../types';
 import * as apiRequests from '../api/request';
-import type { AuthCode, ClientID, Hostname, Token } from '../branded-types';
 import * as auth from './utils';
 import { getNewOAuthAppURL, getNewTokenURL } from './utils';
 

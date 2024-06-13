@@ -2,8 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
 import { AppContext } from '../context/App';
-import type { AuthState } from '../types';
-import type { ClientID, ClientSecret, Hostname } from '../utils/branded-types';
+import type { AuthState, ClientID, ClientSecret, Hostname } from '../types';
 import { LoginWithOAuthApp, validate } from './LoginWithOAuthApp';
 
 const mockNavigate = jest.fn();
