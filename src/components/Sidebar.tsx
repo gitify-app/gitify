@@ -34,11 +34,11 @@ export const Sidebar: FC = () => {
   }, [notifications]);
 
   return (
-    <div className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto">
-      <div className="flex flex-col flex-1 items-center py-4">
+    <div className="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar">
+      <div className="flex flex-1 flex-col items-center py-4">
         <button
           type="button"
-          className="w-5 my-3 mx-auto cursor-pointer outline-none"
+          className="mx-auto my-3 w-5 cursor-pointer outline-none"
           title="Open Gitify on GitHub"
           onClick={() => openGitifyRepository()}
           data-testid="gitify-logo"
@@ -49,7 +49,7 @@ export const Sidebar: FC = () => {
         <button
           type="button"
           className={cn(
-            'flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer',
+            'my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold',
             notificationsCount > 0 ? 'text-green-500' : 'text-white',
           )}
           onClick={() => openGitHubNotifications()}
@@ -63,7 +63,7 @@ export const Sidebar: FC = () => {
         </button>
       </div>
 
-      <div className="py-4 px-3">
+      <div className="px-3 py-4">
         {isLoggedIn && (
           <>
             <button

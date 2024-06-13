@@ -13,20 +13,20 @@ export interface ICheckbox {
 
 export const Checkbox: FC<ICheckbox> = (props: ICheckbox) => {
   return (
-    <div className="mt-1 mb-3 text-sm">
+    <div className="mb-3 mt-1 text-sm">
       <div className="flex items-start">
-        <div className="flex items-center h-5">
+        <div className="flex h-5 items-center">
           <input
             type="checkbox"
             id={props.name}
-            className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            className="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
             checked={props.checked}
             onChange={props.onChange}
             disabled={props.disabled}
           />
         </div>
 
-        <div className="ml-3 ">
+        <div className="ml-3">
           <label
             htmlFor={props.name}
             className="font-medium text-gray-700 dark:text-gray-200"
@@ -43,7 +43,7 @@ export const Checkbox: FC<ICheckbox> = (props: ICheckbox) => {
       </div>
 
       {props.helpText && (
-        <div className="text-xs mt-1 italic text-gray-500 dark:text-gray-300">
+        <div className="mt-1 text-xs italic text-gray-500 dark:text-gray-300">
           {props.helpText}
         </div>
       )}

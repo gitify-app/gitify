@@ -9,7 +9,7 @@ exports[`components/buttons/PillButton.tsx should render 1`] = `
         title="Mock Pill"
       >
         <button
-          class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           type="button"
         >
           <svg
@@ -37,7 +37,7 @@ exports[`components/buttons/PillButton.tsx should render 1`] = `
       title="Mock Pill"
     >
       <button
-        class="rounded-full text-xss px-1 m-0.5 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         type="button"
       >
         <svg

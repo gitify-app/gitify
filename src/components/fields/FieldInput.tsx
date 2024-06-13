@@ -23,7 +23,7 @@ export const FieldInput: FC<IFieldInput> = ({
       {({ input, meta: { touched, error } }) => (
         <div className="mb-4">
           <label
-            className="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
+            className="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
             htmlFor={input.name}
           >
             {label}
@@ -31,7 +31,7 @@ export const FieldInput: FC<IFieldInput> = ({
 
           <input
             type={type}
-            className="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
+            className="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
             id={input.name}
             placeholder={placeholder}
             required={required}
@@ -39,13 +39,13 @@ export const FieldInput: FC<IFieldInput> = ({
           />
 
           {helpText && (
-            <div className="mt-3 text-gray-700 dark:text-gray-200 text-xs">
+            <div className="mt-3 text-xs text-gray-700 dark:text-gray-200">
               {helpText}
             </div>
           )}
 
           {touched && error && (
-            <div className="mt-2 text-red-500 text-xs italic">{error}</div>
+            <div className="mt-2 text-xs italic text-red-500">{error}</div>
           )}
         </div>
       )}

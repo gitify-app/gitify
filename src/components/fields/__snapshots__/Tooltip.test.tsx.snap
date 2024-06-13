@@ -8,7 +8,7 @@ exports[`components/fields/Tooltip.tsx should display on mouse enter / leave 1`]
 >
   <svg
     aria-hidden="true"
-    class="text-blue-500 ml-1"
+    class="ml-1 text-blue-500"
     fill="currentColor"
     focusable="false"
     height="16"
@@ -21,10 +21,10 @@ exports[`components/fields/Tooltip.tsx should display on mouse enter / leave 1`]
     />
   </svg>
   <div
-    class="absolute bg-white dark:bg-gray-sidebar border border-gray-300 rounded p-2 shadow z-10"
+    class="absolute z-10 rounded border border-gray-300 bg-white p-2 shadow dark:bg-gray-sidebar"
   >
     <div
-      class="text-gray-700 dark:text-white text-xs text-left"
+      class="text-left text-xs text-gray-700 dark:text-white"
     >
       This is some tooltip text
     </div>
@@ -40,7 +40,7 @@ exports[`components/fields/Tooltip.tsx should display on mouse enter / leave 2`]
 >
   <svg
     aria-hidden="true"
-    class="text-blue-500 ml-1"
+    class="ml-1 text-blue-500"
     fill="currentColor"
     focusable="false"
     height="16"
@@ -67,7 +67,7 @@ exports[`components/fields/Tooltip.tsx should render 1`] = `
       >
         <svg
           aria-hidden="true"
-          class="text-blue-500 ml-1"
+          class="ml-1 text-blue-500"
           fill="currentColor"
           focusable="false"
           height="16"
@@ -90,7 +90,7 @@ exports[`components/fields/Tooltip.tsx should render 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="text-blue-500 ml-1"
+        class="ml-1 text-blue-500"
         fill="currentColor"
         focusable="false"
         height="16"

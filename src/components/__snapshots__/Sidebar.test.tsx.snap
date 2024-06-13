@@ -6,13 +6,13 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto"
+        class="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar"
       >
         <div
-          class="flex flex-col flex-1 items-center py-4"
+          class="flex flex-1 flex-col items-center py-4"
         >
           <button
-            class="w-5 my-3 mx-auto cursor-pointer outline-none"
+            class="mx-auto my-3 w-5 cursor-pointer outline-none"
             data-testid="gitify-logo"
             title="Open Gitify on GitHub"
             type="button"
@@ -63,7 +63,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
             </svg>
           </button>
           <button
-            class="flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer text-green-500"
+            class="my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold text-green-500"
             title="4 Unread Notifications"
             type="button"
           >
@@ -86,7 +86,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
           </button>
         </div>
         <div
-          class="py-4 px-3"
+          class="px-3 py-4"
         >
           <button
             aria-label="Quit Gitify"
@@ -116,13 +116,13 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
   </body>,
   "container": <div>
     <div
-      class="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto"
+      class="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar"
     >
       <div
-        class="flex flex-col flex-1 items-center py-4"
+        class="flex flex-1 flex-col items-center py-4"
       >
         <button
-          class="w-5 my-3 mx-auto cursor-pointer outline-none"
+          class="mx-auto my-3 w-5 cursor-pointer outline-none"
           data-testid="gitify-logo"
           title="Open Gitify on GitHub"
           type="button"
@@ -173,7 +173,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
           </svg>
         </button>
         <button
-          class="flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer text-green-500"
+          class="my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold text-green-500"
           title="4 Unread Notifications"
           type="button"
         >
@@ -196,7 +196,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         </button>
       </div>
       <div
-        class="py-4 px-3"
+        class="px-3 py-4"
       >
         <button
           aria-label="Quit Gitify"
@@ -283,13 +283,13 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto"
+        class="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar"
       >
         <div
-          class="flex flex-col flex-1 items-center py-4"
+          class="flex flex-1 flex-col items-center py-4"
         >
           <button
-            class="w-5 my-3 mx-auto cursor-pointer outline-none"
+            class="mx-auto my-3 w-5 cursor-pointer outline-none"
             data-testid="gitify-logo"
             title="Open Gitify on GitHub"
             type="button"
@@ -340,7 +340,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
             </svg>
           </button>
           <button
-            class="flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer text-green-500"
+            class="my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold text-green-500"
             title="4 Unread Notifications"
             type="button"
           >
@@ -363,7 +363,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
           </button>
         </div>
         <div
-          class="py-4 px-3"
+          class="px-3 py-4"
         >
           <button
             aria-label="Quit Gitify"
@@ -393,13 +393,13 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
   </body>,
   "container": <div>
     <div
-      class="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto"
+      class="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar"
     >
       <div
-        class="flex flex-col flex-1 items-center py-4"
+        class="flex flex-1 flex-col items-center py-4"
       >
         <button
-          class="w-5 my-3 mx-auto cursor-pointer outline-none"
+          class="mx-auto my-3 w-5 cursor-pointer outline-none"
           data-testid="gitify-logo"
           title="Open Gitify on GitHub"
           type="button"
@@ -450,7 +450,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
           </svg>
         </button>
         <button
-          class="flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer text-green-500"
+          class="my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold text-green-500"
           title="4 Unread Notifications"
           type="button"
         >
@@ -473,7 +473,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
         </button>
       </div>
       <div
-        class="py-4 px-3"
+        class="px-3 py-4"
       >
         <button
           aria-label="Quit Gitify"

@@ -51,10 +51,10 @@ export const SettingsRoute: FC = () => {
 
   return (
     <div
-      className="flex flex-1 flex-col h-screen dark:bg-gray-dark dark:text-white"
+      className="flex h-screen flex-1 flex-col dark:bg-gray-dark dark:text-white"
       data-testid="settings"
     >
-      <div className="flex justify-between items-center mt-2 py-2 mx-8">
+      <div className="mx-8 mt-2 flex items-center justify-between py-2">
         <button
           type="button"
           className="focus:outline-none"
@@ -73,7 +73,7 @@ export const SettingsRoute: FC = () => {
 
       <div className="flex-grow overflow-x-auto px-8">
         <fieldset className="mb-3">
-          <legend id="appearance" className="font-semibold mt-2 mb-1">
+          <legend id="appearance" className="mb-1 mt-2 font-semibold">
             Appearance
           </legend>
           <RadioGroup
@@ -156,7 +156,7 @@ export const SettingsRoute: FC = () => {
         </fieldset>
 
         <fieldset className="mb-3">
-          <legend id="notifications" className="font-semibold mt-2 mb-1">
+          <legend id="notifications" className="mb-1 mt-2 font-semibold">
             Notifications
           </legend>
           <Checkbox
@@ -171,7 +171,7 @@ export const SettingsRoute: FC = () => {
                 See
                 <button
                   type="button"
-                  className="text-blue-500 mx-1"
+                  className="mx-1 text-blue-500"
                   title="Open GitHub documentation for participating and watching notifications"
                   onClick={(event: MouseEvent<HTMLElement>) => {
                     // Don't trigger onClick of parent element.
@@ -233,7 +233,7 @@ export const SettingsRoute: FC = () => {
         </fieldset>
 
         <fieldset className="mb-3">
-          <legend id="system" className="font-semibold mt-2 mb-1">
+          <legend id="system" className="mb-1 mt-2 font-semibold">
             System
           </legend>
           {isMacOS() && (
@@ -276,10 +276,10 @@ export const SettingsRoute: FC = () => {
         </fieldset>
       </div>
 
-      <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8 text-sm">
+      <div className="flex items-center justify-between bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker">
         <button
           type="button"
-          className="font-semibold cursor-pointer"
+          className="cursor-pointer font-semibold"
           title="View release notes"
           onClick={() => openGitifyReleaseNotes(appVersion)}
         >

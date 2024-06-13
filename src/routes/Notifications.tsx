@@ -33,7 +33,7 @@ export const NotificationsRoute: FC = () => {
   }
 
   return (
-    <div className="flex flex-col flex-1 bg-white dark:bg-gray-dark">
+    <div className="flex flex-1 flex-col bg-white dark:bg-gray-dark">
       {notifications.map((accountNotifications) => (
         <AccountNotifications
           key={getAccountUUID(accountNotifications.account)}

@@ -6,11 +6,11 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-1 flex-col justify-center items-center p-4 bg-white dark:bg-gray-dark dark:text-white"
+        class="flex flex-1 flex-col items-center justify-center bg-white p-4 dark:bg-gray-dark dark:text-white"
       >
         <svg
           aria-label="Gitify Logo"
-          class="w-16 h-16"
+          class="h-16 w-16"
           role="img"
           viewBox="0 0 500 500"
           xmlns="http://www.w3.org/2000/svg"
@@ -53,20 +53,20 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
           </g>
         </svg>
         <div
-          class="my-4 px-2.5 py-1.5 font-semibold text-center"
+          class="my-4 px-2.5 py-1.5 text-center font-semibold"
         >
           GitHub Notifications 
           <br />
            on your menu bar.
         </div>
         <div
-          class="font-semibold text-center text-sm italic"
+          class="text-center text-sm font-semibold italic"
         >
           Login with
         </div>
         <button
           aria-label="Login with Personal Access Token"
-          class="py-2 mt-2 rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+          class="mt-2 py-2 rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
           title="Login with Personal Access Token"
           type="button"
         >
@@ -88,7 +88,7 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
         </button>
         <button
           aria-label="Login with OAuth App"
-          class="py-2 mt-2 rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+          class="mt-2 py-2 rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
           title="Login with OAuth App"
           type="button"
         >
@@ -113,11 +113,11 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
   </body>,
   "container": <div>
     <div
-      class="flex flex-1 flex-col justify-center items-center p-4 bg-white dark:bg-gray-dark dark:text-white"
+      class="flex flex-1 flex-col items-center justify-center bg-white p-4 dark:bg-gray-dark dark:text-white"
     >
       <svg
         aria-label="Gitify Logo"
-        class="w-16 h-16"
+        class="h-16 w-16"
         role="img"
         viewBox="0 0 500 500"
         xmlns="http://www.w3.org/2000/svg"
@@ -160,20 +160,20 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
         </g>
       </svg>
       <div
-        class="my-4 px-2.5 py-1.5 font-semibold text-center"
+        class="my-4 px-2.5 py-1.5 text-center font-semibold"
       >
         GitHub Notifications 
         <br />
          on your menu bar.
       </div>
       <div
-        class="font-semibold text-center text-sm italic"
+        class="text-center text-sm font-semibold italic"
       >
         Login with
       </div>
       <button
         aria-label="Login with Personal Access Token"
-        class="py-2 mt-2 rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+        class="mt-2 py-2 rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
         title="Login with Personal Access Token"
         type="button"
       >
@@ -195,7 +195,7 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
       </button>
       <button
         aria-label="Login with OAuth App"
-        class="py-2 mt-2 rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+        class="mt-2 py-2 rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
         title="Login with OAuth App"
         type="button"
       >

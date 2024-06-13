@@ -6,23 +6,23 @@ exports[`components/fields/Checkbox.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="mt-1 mb-3 text-sm"
+        class="mb-3 mt-1 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="flex items-center h-5"
+            class="flex h-5 items-center"
           >
             <input
               checked=""
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
               id="appearance"
               type="checkbox"
             />
           </div>
           <div
-            class="ml-3 "
+            class="ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -33,7 +33,7 @@ exports[`components/fields/Checkbox.tsx should render 1`] = `
           </div>
         </div>
         <div
-          class="text-xs mt-1 italic text-gray-500 dark:text-gray-300"
+          class="mt-1 text-xs italic text-gray-500 dark:text-gray-300"
         >
           This is some helper text
         </div>
@@ -42,23 +42,23 @@ exports[`components/fields/Checkbox.tsx should render 1`] = `
   </body>,
   "container": <div>
     <div
-      class="mt-1 mb-3 text-sm"
+      class="mb-3 mt-1 text-sm"
     >
       <div
         class="flex items-start"
       >
         <div
-          class="flex items-center h-5"
+          class="flex h-5 items-center"
         >
           <input
             checked=""
-            class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300 rounded"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
             id="appearance"
             type="checkbox"
           />
         </div>
         <div
-          class="ml-3 "
+          class="ml-3"
         >
           <label
             class="font-medium text-gray-700 dark:text-gray-200"
@@ -69,7 +69,7 @@ exports[`components/fields/Checkbox.tsx should render 1`] = `
         </div>
       </div>
       <div
-        class="text-xs mt-1 italic text-gray-500 dark:text-gray-300"
+        class="mt-1 text-xs italic text-gray-500 dark:text-gray-300"
       >
         This is some helper text
       </div>

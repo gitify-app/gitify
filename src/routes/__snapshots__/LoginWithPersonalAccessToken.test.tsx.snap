@@ -9,7 +9,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
         class="flex-1 bg-white dark:bg-gray-dark dark:text-white"
       >
         <div
-          class="flex justify-between items-center mt-4 py-2 mx-8"
+          class="mx-8 mt-4 flex items-center justify-between py-2"
         >
           <button
             class="focus:outline-none"
@@ -33,7 +33,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
             </svg>
           </button>
           <h3
-            class="text-lg font-semibold justify-center"
+            class="justify-center text-lg font-semibold"
           >
             <svg
               aria-hidden="true"
@@ -60,13 +60,13 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
               class="mb-4"
             >
               <label
-                class="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
+                class="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
                 for="hostname"
               >
                 Hostname
               </label>
               <input
-                class="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
+                class="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
                 id="hostname"
                 name="hostname"
                 placeholder="github.company.com"
@@ -74,10 +74,10 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
                 value="github.com"
               />
               <div
-                class="mt-3 text-gray-700 dark:text-gray-200 text-xs"
+                class="mt-3 text-xs text-gray-700 dark:text-gray-200"
               >
                 <div
-                  class="italic mt-1"
+                  class="mt-1 italic"
                 >
                   Change only if you are using GitHub Enterprise Server.
                 </div>
@@ -87,13 +87,13 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
               class="mb-4"
             >
               <label
-                class="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
+                class="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
                 for="token"
               >
                 Token
               </label>
               <input
-                class="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
+                class="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
                 id="token"
                 name="token"
                 placeholder="The 40 characters token generated on GitHub"
@@ -101,7 +101,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
                 value=""
               />
               <div
-                class="mt-3 text-gray-700 dark:text-gray-200 text-xs"
+                class="mt-3 text-xs text-gray-700 dark:text-gray-200"
               >
                 <div>
                   <div>
@@ -134,7 +134,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
                     </span>
                   </div>
                   <div
-                    class="italic mt-1"
+                    class="mt-1 italic"
                   >
                     The required scopes will be selected for you.
                   </div>
@@ -142,7 +142,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
               </div>
             </div>
             <div
-              class="flex justify-between items-end"
+              class="flex items-end justify-between"
             >
               <button
                 aria-label="GitHub Docs"
@@ -168,7 +168,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
               </button>
               <button
                 aria-label="Login"
-                class="px-4 py-2 mt-2 !text-sm rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+                class="mt-2 px-4 py-2 !text-sm rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
                 disabled=""
                 title="Login"
                 type="submit"
@@ -200,7 +200,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
       class="flex-1 bg-white dark:bg-gray-dark dark:text-white"
     >
       <div
-        class="flex justify-between items-center mt-4 py-2 mx-8"
+        class="mx-8 mt-4 flex items-center justify-between py-2"
       >
         <button
           class="focus:outline-none"
@@ -224,7 +224,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
           </svg>
         </button>
         <h3
-          class="text-lg font-semibold justify-center"
+          class="justify-center text-lg font-semibold"
         >
           <svg
             aria-hidden="true"
@@ -251,13 +251,13 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
             class="mb-4"
           >
             <label
-              class="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
+              class="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
               for="hostname"
             >
               Hostname
             </label>
             <input
-              class="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
+              class="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
               id="hostname"
               name="hostname"
               placeholder="github.company.com"
@@ -265,10 +265,10 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
               value="github.com"
             />
             <div
-              class="mt-3 text-gray-700 dark:text-gray-200 text-xs"
+              class="mt-3 text-xs text-gray-700 dark:text-gray-200"
             >
               <div
-                class="italic mt-1"
+                class="mt-1 italic"
               >
                 Change only if you are using GitHub Enterprise Server.
               </div>
@@ -278,13 +278,13 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
             class="mb-4"
           >
             <label
-              class="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
+              class="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
               for="token"
             >
               Token
             </label>
             <input
-              class="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
+              class="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
               id="token"
               name="token"
               placeholder="The 40 characters token generated on GitHub"
@@ -292,7 +292,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
               value=""
             />
             <div
-              class="mt-3 text-gray-700 dark:text-gray-200 text-xs"
+              class="mt-3 text-xs text-gray-700 dark:text-gray-200"
             >
               <div>
                 <div>
@@ -325,7 +325,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
                   </span>
                 </div>
                 <div
-                  class="italic mt-1"
+                  class="mt-1 italic"
                 >
                   The required scopes will be selected for you.
                 </div>
@@ -333,7 +333,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
             </div>
           </div>
           <div
-            class="flex justify-between items-end"
+            class="flex items-end justify-between"
           >
             <button
               aria-label="GitHub Docs"
@@ -359,7 +359,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
             </button>
             <button
               aria-label="Login"
-              class="px-4 py-2 mt-2 !text-sm rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+              class="mt-2 px-4 py-2 !text-sm rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
               disabled=""
               title="Login"
               type="submit"

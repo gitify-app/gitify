@@ -6,14 +6,14 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="flex py-2 px-3 bg-gray-100 dark:bg-gray-darker dark:text-white group"
+        class="group flex bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="flex flex-1 space-x-3 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap"
+          class="mt-0 flex flex-1 items-center space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
         >
           <img
             alt="gitify-app/notifications-test's avatar"
-            class="rounded w-5 h-5"
+            class="size-5 rounded"
             src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
           />
           <span
@@ -23,10 +23,10 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
           </span>
         </div>
         <div
-          class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark Repository as Done"
             type="button"
           >
@@ -50,7 +50,7 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
             class="w-[14px]"
           />
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark Repository as Read"
             type="button"
           >
@@ -82,14 +82,14 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
   </body>,
   "container": <div>
     <div
-      class="flex py-2 px-3 bg-gray-100 dark:bg-gray-darker dark:text-white group"
+      class="group flex bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
     >
       <div
-        class="flex flex-1 space-x-3 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap"
+        class="mt-0 flex flex-1 items-center space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
       >
         <img
           alt="gitify-app/notifications-test's avatar"
-          class="rounded w-5 h-5"
+          class="size-5 rounded"
           src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
         />
         <span
@@ -99,10 +99,10 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
         </span>
       </div>
       <div
-        class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark Repository as Done"
           type="button"
         >
@@ -126,7 +126,7 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
           class="w-[14px]"
         />
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark Repository as Read"
           type="button"
         >
@@ -215,10 +215,10 @@ exports[`components/Repository.tsx should use default repository icon when avata
   "baseElement": <body>
     <div>
       <div
-        class="flex py-2 px-3 bg-gray-100 dark:bg-gray-darker dark:text-white group"
+        class="group flex bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="flex flex-1 space-x-3 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap"
+          class="mt-0 flex flex-1 items-center space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
         >
           <svg
             aria-hidden="true"
@@ -241,10 +241,10 @@ exports[`components/Repository.tsx should use default repository icon when avata
           </span>
         </div>
         <div
-          class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark Repository as Done"
             type="button"
           >
@@ -268,7 +268,7 @@ exports[`components/Repository.tsx should use default repository icon when avata
             class="w-[14px]"
           />
           <button
-            class="focus:outline-none h-full hover:text-green-500"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Mark Repository as Read"
             type="button"
           >
@@ -300,10 +300,10 @@ exports[`components/Repository.tsx should use default repository icon when avata
   </body>,
   "container": <div>
     <div
-      class="flex py-2 px-3 bg-gray-100 dark:bg-gray-darker dark:text-white group"
+      class="group flex bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
     >
       <div
-        class="flex flex-1 space-x-3 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap"
+        class="mt-0 flex flex-1 items-center space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
       >
         <svg
           aria-hidden="true"
@@ -326,10 +326,10 @@ exports[`components/Repository.tsx should use default repository icon when avata
         </span>
       </div>
       <div
-        class="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark Repository as Done"
           type="button"
         >
@@ -353,7 +353,7 @@ exports[`components/Repository.tsx should use default repository icon when avata
           class="w-[14px]"
         />
         <button
-          class="focus:outline-none h-full hover:text-green-500"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Mark Repository as Read"
           type="button"
         >

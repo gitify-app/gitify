@@ -6,7 +6,7 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="mt-1 mb-3 text-sm"
+        class="mb-3 mt-1 text-sm"
       >
         <div
           class="flex items-start"
@@ -15,7 +15,7 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
             class="mr-3 py-1"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 "
+              class="font-medium text-gray-700 dark:text-gray-200"
               for="appearance"
             >
               Appearance
@@ -27,10 +27,10 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
             role="group"
           >
             <div
-              class="flex mt-1"
+              class="mt-1 flex"
             >
               <input
-                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                 id="appearance_one"
                 name="appearance"
                 type="radio"
@@ -44,11 +44,11 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
               </label>
             </div>
             <div
-              class="flex mt-1"
+              class="mt-1 flex"
             >
               <input
                 checked=""
-                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                 id="appearance_two"
                 name="appearance"
                 type="radio"
@@ -64,7 +64,7 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
           </div>
         </div>
         <div
-          class="text-xs mt-1 italic text-gray-500 dark:text-gray-300"
+          class="mt-1 text-xs italic text-gray-500 dark:text-gray-300"
         >
           This is some helper text
         </div>
@@ -73,7 +73,7 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
   </body>,
   "container": <div>
     <div
-      class="mt-1 mb-3 text-sm"
+      class="mb-3 mt-1 text-sm"
     >
       <div
         class="flex items-start"
@@ -82,7 +82,7 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
           class="mr-3 py-1"
         >
           <label
-            class="font-medium text-gray-700 dark:text-gray-200 "
+            class="font-medium text-gray-700 dark:text-gray-200"
             for="appearance"
           >
             Appearance
@@ -94,10 +94,10 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
           role="group"
         >
           <div
-            class="flex mt-1"
+            class="mt-1 flex"
           >
             <input
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+              class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
               id="appearance_one"
               name="appearance"
               type="radio"
@@ -111,11 +111,11 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
             </label>
           </div>
           <div
-            class="flex mt-1"
+            class="mt-1 flex"
           >
             <input
               checked=""
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+              class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
               id="appearance_two"
               name="appearance"
               type="radio"
@@ -131,7 +131,7 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
         </div>
       </div>
       <div
-        class="text-xs mt-1 italic text-gray-500 dark:text-gray-300"
+        class="mt-1 text-xs italic text-gray-500 dark:text-gray-300"
       >
         This is some helper text
       </div>
@@ -197,7 +197,7 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="mt-1 mb-3 text-sm"
+        class="mb-3 mt-1 text-sm"
       >
         <div
           class="flex items-start"
@@ -206,7 +206,7 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
             class="mr-3 py-1"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200 "
+              class="font-medium text-gray-700 dark:text-gray-200"
               for="appearance"
               style="text-decoration: line-through;"
             >
@@ -219,10 +219,10 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
             role="group"
           >
             <div
-              class="flex mt-1"
+              class="mt-1 flex"
             >
               <input
-                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                 disabled=""
                 id="appearance_one"
                 name="appearance"
@@ -237,11 +237,11 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
               </label>
             </div>
             <div
-              class="flex mt-1"
+              class="mt-1 flex"
             >
               <input
                 checked=""
-                class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
                 disabled=""
                 id="appearance_two"
                 name="appearance"
@@ -258,7 +258,7 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
           </div>
         </div>
         <div
-          class="text-xs mt-1 italic text-gray-500 dark:text-gray-300"
+          class="mt-1 text-xs italic text-gray-500 dark:text-gray-300"
         >
           This is some helper text
         </div>
@@ -267,7 +267,7 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
   </body>,
   "container": <div>
     <div
-      class="mt-1 mb-3 text-sm"
+      class="mb-3 mt-1 text-sm"
     >
       <div
         class="flex items-start"
@@ -276,7 +276,7 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
           class="mr-3 py-1"
         >
           <label
-            class="font-medium text-gray-700 dark:text-gray-200 "
+            class="font-medium text-gray-700 dark:text-gray-200"
             for="appearance"
             style="text-decoration: line-through;"
           >
@@ -289,10 +289,10 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
           role="group"
         >
           <div
-            class="flex mt-1"
+            class="mt-1 flex"
           >
             <input
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+              class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
               disabled=""
               id="appearance_one"
               name="appearance"
@@ -307,11 +307,11 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
             </label>
           </div>
           <div
-            class="flex mt-1"
+            class="mt-1 flex"
           >
             <input
               checked=""
-              class="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
+              class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
               disabled=""
               id="appearance_two"
               name="appearance"
@@ -328,7 +328,7 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
         </div>
       </div>
       <div
-        class="text-xs mt-1 italic text-gray-500 dark:text-gray-300"
+        class="mt-1 text-xs italic text-gray-500 dark:text-gray-300"
       >
         This is some helper text
       </div>
