@@ -1,6 +1,12 @@
 import type { AxiosPromise } from 'axios';
 import { print } from 'graphql/language/printer';
-import type { Account, Hostname, SettingsState, Token } from '../../types';
+import type {
+  Account,
+  Hostname,
+  SettingsState,
+  Token,
+  WebUrl,
+} from '../../types';
 import type {
   Commit,
   CommitComment,
@@ -32,7 +38,7 @@ export function getAuthenticatedUser(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += 'user';
 
-  return apiRequestAuth(url.toString(), 'GET', token);
+  return apiRequestAuth(url.toString() as WebUrl, 'GET', token);
 }
 
 //
@@ -43,7 +49,7 @@ export function headNotifications(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += 'notifications';
 
-  return apiRequestAuth(url.toString(), 'HEAD', token);
+  return apiRequestAuth(url.toString() as WebUrl, 'HEAD', token);
 }
 
 /**
@@ -59,7 +65,7 @@ export function listNotificationsForAuthenticatedUser(
   url.pathname += 'notifications';
   url.searchParams.append('participating', String(settings.participating));
 
-  return apiRequestAuth(url.toString(), 'GET', account.token);
+  return apiRequestAuth(url.toString() as WebUrl, 'GET', account.token);
 }
 
 /**
@@ -76,7 +82,7 @@ export function markNotificationThreadAsRead(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
 
-  return apiRequestAuth(url.toString(), 'PATCH', token, {});
+  return apiRequestAuth(url.toString() as WebUrl, 'PATCH', token, {});
 }
 
 /**
@@ -93,7 +99,7 @@ export function markNotificationThreadAsDone(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
 
-  return apiRequestAuth(url.toString(), 'DELETE', token, {});
+  return apiRequestAuth(url.toString() as WebUrl, 'DELETE', token, {});
 }
 
 /**
@@ -109,7 +115,9 @@ export function ignoreNotificationThreadSubscription(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}/subscription`;
 
-  return apiRequestAuth(url.toString(), 'PUT', token, { ignored: true });
+  return apiRequestAuth(url.toString() as WebUrl, 'PUT', token, {
+    ignored: true,
+  });
 }
 
 /**
@@ -128,7 +136,7 @@ export function markRepositoryNotificationsAsRead(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `repos/${repoSlug}/notifications`;
 
-  return apiRequestAuth(url.toString(), 'PUT', token, {});
+  return apiRequestAuth(url.toString() as WebUrl, 'PUT', token, {});
 }
 
 /**
@@ -136,7 +144,7 @@ export function markRepositoryNotificationsAsRead(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/commits/commits#get-a-commit
  */
-export function getCommit(url: string, token: Token): AxiosPromise<Commit> {
+export function getCommit(url: WebUrl, token: Token): AxiosPromise<Commit> {
   return apiRequestAuth(url, 'GET', token);
 }
 
@@ -147,7 +155,7 @@ export function getCommit(url: string, token: Token): AxiosPromise<Commit> {
 
  */
 export function getCommitComment(
-  url: string,
+  url: WebUrl,
   token: Token,
 ): AxiosPromise<CommitComment> {
   return apiRequestAuth(url, 'GET', token);
@@ -158,7 +166,7 @@ export function getCommitComment(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/issues/issues#get-an-issue
  */
-export function getIssue(url: string, token: Token): AxiosPromise<Issue> {
+export function getIssue(url: WebUrl, token: Token): AxiosPromise<Issue> {
   return apiRequestAuth(url, 'GET', token);
 }
 
@@ -169,7 +177,7 @@ export function getIssue(url: string, token: Token): AxiosPromise<Issue> {
  * Endpoint documentation: https://docs.github.com/en/rest/issues/comments#get-an-issue-comment
  */
 export function getIssueOrPullRequestComment(
-  url: string,
+  url: WebUrl,
   token: Token,
 ): AxiosPromise<IssueOrPullRequestComment> {
   return apiRequestAuth(url, 'GET', token);
@@ -181,7 +189,7 @@ export function getIssueOrPullRequestComment(
  * Endpoint documentation: https://docs.github.com/en/rest/pulls/pulls#get-a-pull-request
  */
 export function getPullRequest(
-  url: string,
+  url: WebUrl,
   token: Token,
 ): AxiosPromise<PullRequest> {
   return apiRequestAuth(url, 'GET', token);
@@ -193,7 +201,7 @@ export function getPullRequest(
  * Endpoint documentation: https://docs.github.com/en/rest/pulls/reviews#list-reviews-for-a-pull-request
  */
 export function getPullRequestReviews(
-  url: string,
+  url: WebUrl,
   token: Token,
 ): AxiosPromise<PullRequestReview[]> {
   return apiRequestAuth(url, 'GET', token);
@@ -204,14 +212,14 @@ export function getPullRequestReviews(
  *
  * Endpoint documentation: https://docs.github.com/en/rest/releases/releases#get-a-release
  */
-export function getRelease(url: string, token: Token): AxiosPromise<Release> {
+export function getRelease(url: WebUrl, token: Token): AxiosPromise<Release> {
   return apiRequestAuth(url, 'GET', token);
 }
 
 /**
  * Get the `html_url` from the GitHub response
  */
-export async function getHtmlUrl(url: string, token: Token): Promise<string> {
+export async function getHtmlUrl(url: WebUrl, token: Token): Promise<string> {
   try {
     const response = (await apiRequestAuth(url, 'GET', token)).data;
     return response.html_url;
@@ -230,18 +238,23 @@ export async function searchDiscussions(
   notification: Notification,
 ): AxiosPromise<GraphQLSearch<Discussion>> {
   const url = getGitHubGraphQLUrl(notification.account.hostname);
-  return apiRequestAuth(url.toString(), 'POST', notification.account.token, {
-    query: print(QUERY_SEARCH_DISCUSSIONS),
-    variables: {
-      queryStatement: formatAsGitHubSearchSyntax(
-        notification.repository.full_name,
-        notification.subject.title,
-      ),
-      firstDiscussions: 1,
-      lastComments: 1,
-      lastReplies: 1,
+  return apiRequestAuth(
+    url.toString() as WebUrl,
+    'POST',
+    notification.account.token,
+    {
+      query: print(QUERY_SEARCH_DISCUSSIONS),
+      variables: {
+        queryStatement: formatAsGitHubSearchSyntax(
+          notification.repository.full_name,
+          notification.subject.title,
+        ),
+        firstDiscussions: 1,
+        lastComments: 1,
+        lastReplies: 1,
+      },
     },
-  });
+  );
 }
 
 /**

@@ -1,5 +1,5 @@
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
-import type { Hostname } from '../types';
+import type { Hostname, WebUrl } from '../types';
 import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
@@ -29,7 +29,7 @@ export function generateNotificationReferrerId(
   return buffer.toString('base64');
 }
 
-export function getCheckSuiteUrl(notification: Notification): string {
+export function getCheckSuiteUrl(notification: Notification): WebUrl {
   const filters = [];
 
   const checkSuiteAttributes = getCheckSuiteAttributes(notification);
@@ -51,7 +51,7 @@ export function getCheckSuiteUrl(notification: Notification): string {
   return actionsURL(notification.repository.html_url, filters);
 }
 
-export function getWorkflowRunUrl(notification: Notification): string {
+export function getWorkflowRunUrl(notification: Notification): WebUrl {
   const filters = [];
 
   const workflowRunAttributes = getWorkflowRunAttributes(notification);
@@ -66,7 +66,7 @@ export function getWorkflowRunUrl(notification: Notification): string {
 /**
  * Construct a GitHub Actions URL for a repository with optional filters.
  */
-export function actionsURL(repositoryURL: string, filters: string[]): string {
+export function actionsURL(repositoryURL: string, filters: string[]): WebUrl {
   const url = new URL(repositoryURL);
   url.pathname += '/actions';
 
@@ -75,10 +75,10 @@ export function actionsURL(repositoryURL: string, filters: string[]): string {
   }
 
   // Note: the GitHub Actions UI cannot handle encoded '+' characters.
-  return url.toString().replace(/%2B/g, '+');
+  return url.toString().replace(/%2B/g, '+') as WebUrl;
 }
 
-async function getDiscussionUrl(notification: Notification): Promise<string> {
+async function getDiscussionUrl(notification: Notification): Promise<WebUrl> {
   const url = new URL(notification.repository.html_url);
   url.pathname += '/discussions';
 
@@ -94,12 +94,12 @@ async function getDiscussionUrl(notification: Notification): Promise<string> {
     }
   }
 
-  return url.toString();
+  return url.toString() as WebUrl;
 }
 
 export async function generateGitHubWebUrl(
   notification: Notification,
-): Promise<string> {
+): Promise<WebUrl> {
   const url = new URL(notification.repository.html_url);
 
   if (notification.subject.latest_comment_url) {
@@ -137,7 +137,7 @@ export async function generateGitHubWebUrl(
     generateNotificationReferrerId(notification),
   );
 
-  return url.toString();
+  return url.toString() as WebUrl;
 }
 
 export function formatForDisplay(text: string[]): string {

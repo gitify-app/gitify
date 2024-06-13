@@ -5,7 +5,7 @@ import {
 import { partialMockNotification } from '../__mocks__/partial-mocks';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { defaultSettings } from '../context/App';
-import type { SettingsState } from '../types';
+import type { SettingsState, WebUrl } from '../types';
 import { mockGitHubNotifications } from './api/__mocks__/response-mocks';
 import * as comms from './comms';
 import * as links from './links';
@@ -150,9 +150,9 @@ describe('utils/notifications.ts', () => {
         title: 'User authored notification',
         user: {
           login: 'user',
-          html_url: 'https://github.com/user',
+          html_url: 'https://github.com/user' as WebUrl,
           avatar_url:
-            'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
+            'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as WebUrl,
           type: 'User',
         },
       }),
@@ -160,9 +160,9 @@ describe('utils/notifications.ts', () => {
         title: 'Bot authored notification',
         user: {
           login: 'bot',
-          html_url: 'https://github.com/bot',
+          html_url: 'https://github.com/bot' as WebUrl,
           avatar_url:
-            'https://avatars.githubusercontent.com/u/133795385?s=200&v=4',
+            'https://avatars.githubusercontent.com/u/133795385?s=200&v=4' as WebUrl,
           type: 'Bot',
         },
       }),

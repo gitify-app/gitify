@@ -1,6 +1,6 @@
 import { partialMockUser } from '../__mocks__/partial-mocks';
 import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
-import type { Hostname } from '../types';
+import type { Hostname, WebUrl } from '../types';
 import type { Repository } from '../typesGitHub';
 import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import * as authUtils from './auth/utils';
@@ -71,7 +71,7 @@ describe('utils/links.ts', () => {
   });
 
   it('openDeveloperSettings', () => {
-    const mockSettingsURL = 'https://github.com/settings/tokens';
+    const mockSettingsURL = 'https://github.com/settings/tokens' as WebUrl;
 
     jest
       .spyOn(authUtils, 'getDeveloperSettingsURL')

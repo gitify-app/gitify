@@ -1,3 +1,4 @@
+import type { WebUrl } from '../types';
 import type {
   CheckSuiteAttributes,
   CheckSuiteStatus,
@@ -294,7 +295,7 @@ export async function getLatestReviewForReviewers(
   }
 
   const prReviews = await getPullRequestReviews(
-    `${notification.subject.url}/reviews`,
+    `${notification.subject.url}/reviews` as WebUrl,
     notification.account.token,
   );
 

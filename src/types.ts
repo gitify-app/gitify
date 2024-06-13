@@ -39,6 +39,8 @@ export type ClientSecret = Branded<string, 'ClientSecret'>;
 
 export type Hostname = Branded<string, 'Hostname'>;
 
+export type WebUrl = Branded<string, 'WebUrl'>;
+
 export type Status = 'loading' | 'success' | 'error';
 
 export interface Account {

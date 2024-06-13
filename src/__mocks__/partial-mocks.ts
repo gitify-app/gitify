@@ -1,4 +1,4 @@
-import type { Hostname } from '../types';
+import type { Hostname, WebUrl } from '../types';
 import type { Notification, Subject, User } from '../typesGitHub';
 import Constants from '../utils/constants';
 import { mockGitifyUser, mockToken } from './state-mocks';
@@ -23,8 +23,8 @@ export function partialMockNotification(
 export function partialMockUser(login: string): User {
   const mockUser: Partial<User> = {
     login: login,
-    html_url: `https://github.com/${login}`,
-    avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+    html_url: `https://github.com/${login}` as WebUrl,
+    avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4' as WebUrl,
     type: 'User',
   };
 

@@ -1,4 +1,4 @@
-import type { Account } from './types';
+import type { Account, WebUrl } from './types';
 
 export type Reason =
   | 'approval_requested'
@@ -103,8 +103,8 @@ export interface GitHubNotification {
   last_read_at: string | null;
   subject: Subject;
   repository: Repository;
-  url: string;
-  subscription_url: string;
+  url: WebUrl;
+  subscription_url: WebUrl;
 }
 
 // Note: This is not in the official GitHub API. We add this to make notification interactions easier.
@@ -149,34 +149,34 @@ export interface User {
   login: string;
   id: number;
   node_id: string;
-  avatar_url: string;
-  gravatar_url: string;
-  url: string;
-  html_url: string;
-  followers_url: string;
-  following_url: string;
-  gists_url: string;
-  starred_url: string;
-  subscriptions_url: string;
-  organizations_url: string;
-  repos_url: string;
-  events_url: string;
-  received_events_url: string;
+  avatar_url: WebUrl;
+  gravatar_url: WebUrl;
+  url: WebUrl;
+  html_url: WebUrl;
+  followers_url: WebUrl;
+  following_url: WebUrl;
+  gists_url: WebUrl;
+  starred_url: WebUrl;
+  subscriptions_url: WebUrl;
+  organizations_url: WebUrl;
+  repos_url: WebUrl;
+  events_url: WebUrl;
+  received_events_url: WebUrl;
   type: UserType;
   site_admin: boolean;
 }
 
 export interface SubjectUser {
   login: string;
-  html_url: string;
-  avatar_url: string;
+  html_url: WebUrl;
+  avatar_url: WebUrl;
   type: UserType;
 }
 
 export interface DiscussionAuthor {
   login: string;
-  url: string;
-  avatar_url: string;
+  url: WebUrl;
+  avatar_url: WebUrl;
   type: UserType;
 }
 
@@ -187,65 +187,65 @@ export interface Repository {
   full_name: string;
   private: boolean;
   owner: Owner;
-  html_url: string;
+  html_url: WebUrl;
   description: string;
   fork: boolean;
-  url: string;
-  forks_url: string;
-  keys_url: string;
-  collaborators_url: string;
-  teams_url: string;
-  hooks_url: string;
-  issue_events_url: string;
-  events_url: string;
-  assignees_url: string;
-  branches_url: string;
-  tags_url: string;
-  blobs_url: string;
-  git_tags_url: string;
-  git_refs_url: string;
-  trees_url: string;
-  statuses_url: string;
-  languages_url: string;
-  stargazers_url: string;
-  contributors_url: string;
-  subscribers_url: string;
-  subscription_url: string;
-  commits_url: string;
-  git_commits_url: string;
-  comments_url: string;
-  issue_comment_url: string;
-  contents_url: string;
-  compare_url: string;
-  merges_url: string;
-  archive_url: string;
-  downloads_url: string;
-  issues_url: string;
-  pulls_url: string;
-  milestones_url: string;
-  notifications_url: string;
-  labels_url: string;
-  releases_url: string;
-  deployments_url: string;
+  url: WebUrl;
+  forks_url: WebUrl;
+  keys_url: WebUrl;
+  collaborators_url: WebUrl;
+  teams_url: WebUrl;
+  hooks_url: WebUrl;
+  issue_events_url: WebUrl;
+  events_url: WebUrl;
+  assignees_url: WebUrl;
+  branches_url: WebUrl;
+  tags_url: WebUrl;
+  blobs_url: WebUrl;
+  git_tags_url: WebUrl;
+  git_refs_url: WebUrl;
+  trees_url: WebUrl;
+  statuses_url: WebUrl;
+  languages_url: WebUrl;
+  stargazers_url: WebUrl;
+  contributors_url: WebUrl;
+  subscribers_url: WebUrl;
+  subscription_url: WebUrl;
+  commits_url: WebUrl;
+  git_commits_url: WebUrl;
+  comments_url: WebUrl;
+  issue_comment_url: WebUrl;
+  contents_url: WebUrl;
+  compare_url: WebUrl;
+  merges_url: WebUrl;
+  archive_url: WebUrl;
+  downloads_url: WebUrl;
+  issues_url: WebUrl;
+  pulls_url: WebUrl;
+  milestones_url: WebUrl;
+  notifications_url: WebUrl;
+  labels_url: WebUrl;
+  releases_url: WebUrl;
+  deployments_url: WebUrl;
 }
 
 export interface Owner {
   login: string;
   id: number;
   node_id: string;
-  avatar_url: string;
+  avatar_url: WebUrl;
   gravatar_id: string;
-  url: string;
-  html_url: string;
-  followers_url: string;
-  following_url: string;
-  gists_url: string;
-  starred_url: string;
-  subscriptions_url: string;
-  organizations_url: string;
-  repos_url: string;
-  events_url: string;
-  received_events_url: string;
+  url: WebUrl;
+  html_url: WebUrl;
+  followers_url: WebUrl;
+  following_url: WebUrl;
+  gists_url: WebUrl;
+  starred_url: WebUrl;
+  subscriptions_url: WebUrl;
+  organizations_url: WebUrl;
+  repos_url: WebUrl;
+  events_url: WebUrl;
+  received_events_url: WebUrl;
   type: string;
   site_admin: boolean;
 }
@@ -254,8 +254,8 @@ export type Subject = GitHubSubject & GitifySubject;
 
 interface GitHubSubject {
   title: string;
-  url: string | null;
-  latest_comment_url: string | null;
+  url: WebUrl | null;
+  latest_comment_url: WebUrl | null;
   type: SubjectType;
 }
 
@@ -271,13 +271,13 @@ export interface GitifySubject {
 }
 
 export interface PullRequest {
-  url: string;
+  url: WebUrl;
   id: number;
   node_id: string;
-  html_url: string;
-  diff_url: string;
-  patch_url: string;
-  issue_url: string;
+  html_url: WebUrl;
+  diff_url: WebUrl;
+  patch_url: WebUrl;
+  issue_url: WebUrl;
   number: number;
   state: PullRequestStateType;
   locked: boolean;
@@ -292,11 +292,11 @@ export interface PullRequest {
   labels: Labels[];
   milestone: Milestone | null;
   draft: boolean;
-  commits_url: string;
-  review_comments_url: string;
-  review_comment_url: string;
-  comments_url: string;
-  statuses_url: string;
+  commits_url: WebUrl;
+  review_comments_url: WebUrl;
+  review_comment_url: WebUrl;
+  comments_url: WebUrl;
+  statuses_url: WebUrl;
   author_association: string;
   merged: boolean;
   mergeable: boolean;
@@ -318,7 +318,7 @@ export interface GitifyPullRequestReview {
 export interface Labels {
   id: number;
   node_id: string;
-  url: string;
+  url: WebUrl;
   name: string;
   color: string;
   default: boolean;
@@ -331,8 +331,8 @@ export interface PullRequestReview {
   user: User;
   body: string;
   state: PullRequestReviewState;
-  html_url: string;
-  pull_request_url: string;
+  html_url: WebUrl;
+  pull_request_url: WebUrl;
   author_association: PullRequestReviewAuthorAssociation;
   submitted_at: string;
   commit_id: string;
@@ -347,9 +347,9 @@ export interface Commit {
     message: string;
     tree: {
       sha: string;
-      url: string;
+      url: WebUrl;
     };
-    url: string;
+    url: WebUrl;
     comment_count: number;
     verification: {
       verified: boolean;
@@ -358,9 +358,9 @@ export interface Commit {
       payload: string | null;
     };
   };
-  url: string;
-  html_url: string;
-  comments_url: string;
+  url: WebUrl;
+  html_url: WebUrl;
+  comments_url: WebUrl;
   author: User;
   committer: User;
   parents: CommitParent[];
@@ -380,8 +380,8 @@ interface CommitUser {
 
 interface CommitParent {
   sha: string;
-  url: string;
-  html_url: string;
+  url: WebUrl;
+  html_url: WebUrl;
 }
 
 interface CommitFiles {
@@ -391,16 +391,16 @@ interface CommitFiles {
   additions: number;
   deletions: number;
   changes: number;
-  blob_url: string;
-  raw_url: string;
-  contents_url: string;
+  blob_url: WebUrl;
+  raw_url: WebUrl;
+  contents_url: WebUrl;
   patch: string;
 }
 
 export interface CommitComment {
-  url: string;
-  html_url: string;
-  issue_url: string;
+  url: WebUrl;
+  html_url: WebUrl;
+  issue_url: WebUrl;
   id: number;
   node_id: string;
   user: User;
@@ -410,12 +410,12 @@ export interface CommitComment {
 }
 
 export interface Issue {
-  url: string;
-  repository_url: string;
-  labels_url: string;
-  comments_url: string;
-  events_url: string;
-  html_url: string;
+  url: WebUrl;
+  repository_url: WebUrl;
+  labels_url: WebUrl;
+  comments_url: WebUrl;
+  events_url: WebUrl;
+  html_url: WebUrl;
   id: number;
   node_id: string;
   number: number;
@@ -435,9 +435,9 @@ export interface Issue {
 }
 
 export interface IssueOrPullRequestComment {
-  url: string;
-  html_url: string;
-  issue_url: string;
+  url: WebUrl;
+  html_url: WebUrl;
+  issue_url: WebUrl;
   id: number;
   node_id: string;
   user: User;
@@ -447,9 +447,9 @@ export interface IssueOrPullRequestComment {
 }
 
 export interface Milestone {
-  url: string;
-  html_url: string;
-  labels_url: string;
+  url: WebUrl;
+  html_url: WebUrl;
+  labels_url: WebUrl;
   id: number;
   node_id: string;
   number: number;
@@ -468,10 +468,10 @@ export interface Milestone {
 type MilestoneStateType = 'open' | 'closed';
 
 export interface Release {
-  url: string;
-  assets_url: string;
-  upload_url: string;
-  html_url: string;
+  url: WebUrl;
+  assets_url: WebUrl;
+  upload_url: WebUrl;
+  html_url: WebUrl;
   id: number;
   author: User;
   node_id: string;
@@ -497,7 +497,7 @@ export interface Discussion {
   title: string;
   stateReason: DiscussionStateType;
   isAnswered: boolean;
-  url: string;
+  url: WebUrl;
   author: DiscussionAuthor;
   comments: DiscussionComments;
   labels: DiscussionLabels | null;
@@ -541,7 +541,7 @@ export interface WorkflowRunAttributes {
 
 export interface GitHubRESTError {
   message: string;
-  documentation_url: string;
+  documentation_url: WebUrl;
 }
 
 export interface NotificationThreadSubscription {
@@ -549,6 +549,6 @@ export interface NotificationThreadSubscription {
   ignored: boolean;
   reason: string | null;
   created_at: string;
-  url: string;
-  thread_url: string;
+  url: WebUrl;
+  thread_url: WebUrl;
 }

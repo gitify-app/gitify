@@ -5,6 +5,7 @@ import {
   partialMockNotification,
   partialMockUser,
 } from '../__mocks__/partial-mocks';
+import type { WebUrl } from '../types';
 import type {
   Discussion,
   DiscussionAuthor,
@@ -25,8 +26,8 @@ const mockAuthor = partialMockUser('some-author');
 const mockCommenter = partialMockUser('some-commenter');
 const mockDiscussionAuthor: DiscussionAuthor = {
   login: 'discussion-author',
-  url: 'https://github.com/discussion-author',
-  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4',
+  url: 'https://github.com/discussion-author' as WebUrl,
+  avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as WebUrl,
   type: 'User',
 };
 
@@ -136,9 +137,9 @@ describe('utils/subject.ts', () => {
         const mockNotification = partialMockNotification({
           title: 'This is a commit with comments',
           type: 'Commit',
-          url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as WebUrl,
           latest_comment_url:
-            'https://api.github.com/repos/gitify-app/notifications-test/comments/141012658',
+            'https://api.github.com/repos/gitify-app/notifications-test/comments/141012658' as WebUrl,
         });
 
         nock('https://api.github.com')
@@ -168,7 +169,7 @@ describe('utils/subject.ts', () => {
         const mockNotification = partialMockNotification({
           title: 'This is a commit with comments',
           type: 'Commit',
-          url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/commits/d2a86d80e3d24ea9510d5de6c147e53c30f313a8' as WebUrl,
           latest_comment_url: null,
         });
 
@@ -403,9 +404,9 @@ describe('utils/subject.ts', () => {
         mockNotification = partialMockNotification({
           title: 'This is a mock issue',
           type: 'Issue',
-          url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as WebUrl,
           latest_comment_url:
-            'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448',
+            'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as WebUrl,
         });
       });
 
@@ -634,9 +635,9 @@ describe('utils/subject.ts', () => {
         mockNotification = partialMockNotification({
           title: 'This is a mock pull request',
           type: 'PullRequest',
-          url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/1',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/pulls/1' as WebUrl,
           latest_comment_url:
-            'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448',
+            'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as WebUrl,
         });
       });
 
@@ -1023,9 +1024,9 @@ describe('utils/subject.ts', () => {
         const mockNotification = partialMockNotification({
           title: 'This is a mock release',
           type: 'Release',
-          url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as WebUrl,
           latest_comment_url:
-            'https://api.github.com/repos/gitify-app/notifications-test/releases/1',
+            'https://api.github.com/repos/gitify-app/notifications-test/releases/1' as WebUrl,
         });
 
         nock('https://api.github.com')
@@ -1109,7 +1110,7 @@ describe('utils/subject.ts', () => {
         const mockNotification = partialMockNotification({
           title: 'This issue will throw an error',
           type: 'Issue',
-          url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as WebUrl,
         });
 
         nock('https://api.github.com')
@@ -1292,7 +1293,7 @@ function mockDiscussionNode(
 ): Discussion {
   return {
     title: 'This is a mock discussion',
-    url: 'https://github.com/gitify-app/notifications-test/discussions/1',
+    url: 'https://github.com/gitify-app/notifications-test/discussions/1' as WebUrl,
     stateReason: state,
     isAnswered: isAnswered,
     author: mockDiscussionAuthor,
