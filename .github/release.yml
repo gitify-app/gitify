@@ -1,9 +1,7 @@
 changelog:
   exclude:
     labels:
-      - ignore-for-release
-    authors:
-      - octocat
+      - release
   categories:
     - title: 🚀 Features
       labels:
@@ -25,7 +23,7 @@ changelog:
         - build
     - title: 📦 Dependency Updates
       labels:
-        - build
+        - dependency
     - title: Other Changes
       labels:
         - "*"
