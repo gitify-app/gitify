@@ -157,10 +157,8 @@ export function formatForDisplay(text: string[]): string {
 export function formatNotificationUpdatedAt(
   notification: Notification,
 ): string {
-  const date = notification.last_read_at ?? notification.updated_at;
-
   try {
-    return formatDistanceToNowStrict(parseISO(date), {
+    return formatDistanceToNowStrict(parseISO(notification.updated_at), {
       addSuffix: true,
     });
   } catch (e) {}
