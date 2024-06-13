@@ -49,4 +49,21 @@ describe('components/AccountNotifications.tsx', () => {
     expect(openAccountProfileMock).toHaveBeenCalledTimes(1);
     expect(openAccountProfileMock).toHaveBeenCalledWith(mockGitHubCloudAccount);
   });
+
+  it('should toggle account notifications visibility', async () => {
+    const props = {
+      account: mockGitHubCloudAccount,
+      notifications: mockGitHubNotifications,
+      showAccountHostname: true,
+    };
+
+    await act(async () => {
+      render(<AccountNotifications {...props} />);
+    });
+
+    fireEvent.click(screen.getByTitle('Hide account notifications'));
+
+    const tree = render(<AccountNotifications {...props} />);
+    expect(tree).toMatchSnapshot();
+  });
 });
