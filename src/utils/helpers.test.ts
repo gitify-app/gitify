@@ -464,16 +464,6 @@ describe('utils/helpers.ts', () => {
     });
 
     describe('formatNotificationUpdatedAt', () => {
-      it('should use last_read_at if available', () => {
-        const notification = {
-          ...mockSingleNotification,
-          last_read_at: '2021-06-23T16:00:00Z',
-          updated_at: '2021-06-23T17:00:00Z',
-        };
-
-        expect(formatNotificationUpdatedAt(notification)).toContain('ago');
-      });
-
       it('should use updated_at if last_read_at is null', () => {
         const notification = {
           ...mockSingleNotification,

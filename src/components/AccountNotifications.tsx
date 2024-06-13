@@ -1,4 +1,9 @@
-import { ChevronDownIcon, ChevronLeftIcon } from '@primer/octicons-react';
+import {
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronUpIcon,
+} from '@primer/octicons-react';
+import { useState } from 'react';
 import type { Account } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openAccountProfile } from '../utils/links';
@@ -26,12 +31,30 @@ export const AccountNotifications = (props: IProps) => {
     ),
   );
 
-  const Chevron = notifications.length > 0 ? ChevronDownIcon : ChevronLeftIcon;
+  const [showNotifications, setShowNotifications] = useState(true);
+
+  const toggleNotifications = () => {
+    setShowNotifications(!showNotifications);
+  };
+
+  const ChevronIcon =
+    notifications.length === 0
+      ? ChevronLeftIcon
+      : showNotifications
+        ? ChevronDownIcon
+        : ChevronUpIcon;
+
+  const toggleNotificationsLabel =
+    notifications.length === 0
+      ? 'No notifications for account'
+      : showNotifications
+        ? 'Hide account notifications'
+        : 'Show account notifications';
 
   return (
     <>
       {showAccountHostname && (
-        <div className="flex items-center justify-between py-2 px-3 bg-gray-300 dark:bg-gray-darkest dark:text-white text-sm text-semibold">
+        <div className="flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white">
           <div>
             <PlatformIcon type={account.platform} size={16} />
             <button
@@ -43,22 +66,29 @@ export const AccountNotifications = (props: IProps) => {
             </button>
           </div>
           <div>
-            <Chevron size={20} />
+            <button
+              type="button"
+              title={toggleNotificationsLabel}
+              onClick={toggleNotifications}
+            >
+              <ChevronIcon size={20} />
+            </button>
           </div>
         </div>
       )}
 
-      {Object.values(groupedNotifications).map((repoNotifications) => {
-        const repoSlug = repoNotifications[0].repository.full_name;
+      {showNotifications &&
+        Object.values(groupedNotifications).map((repoNotifications) => {
+          const repoSlug = repoNotifications[0].repository.full_name;
 
-        return (
-          <RepositoryNotifications
-            key={repoSlug}
-            repoName={repoSlug}
-            repoNotifications={repoNotifications}
-          />
-        );
-      })}
+          return (
+            <RepositoryNotifications
+              key={repoSlug}
+              repoName={repoSlug}
+              repoNotifications={repoNotifications}
+            />
+          );
+        })}
     </>
   );
 };

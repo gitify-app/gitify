@@ -10,13 +10,16 @@ importers:
     dependencies:
       '@electron/remote':
         specifier: 2.1.2
-        version: 2.1.2(electron@31.0.0)
+        version: 2.1.2(electron@31.0.1)
       '@primer/octicons-react':
         specifier: 19.9.0
         version: 19.9.0(react@18.3.1)
       axios:
         specifier: 1.7.2
         version: 1.7.2
+      clsx:
+        specifier: 2.1.1
+        version: 2.1.1
       date-fns:
         specifier: 3.6.0
         version: 3.6.0
@@ -28,7 +31,7 @@ importers:
         version: 4.20.10
       menubar:
         specifier: 9.4.0
-        version: 9.4.0(electron@31.0.0)
+        version: 9.4.0(electron@31.0.1)
       nprogress:
         specifier: 0.2.0
         version: 0.2.0
@@ -44,9 +47,6 @@ importers:
       react-router-dom:
         specifier: 6.23.1
         version: 6.23.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
-      react-transition-group:
-        specifier: 4.4.5
-        version: 4.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       ts-loader:
         specifier: 9.5.1
         version: 9.5.1(typescript@5.4.5)(webpack@5.92.0(webpack-cli@5.1.4))
@@ -78,9 +78,6 @@ importers:
       '@types/react-router-dom':
         specifier: 5.3.3
         version: 5.3.3
-      '@types/react-transition-group':
-        specifier: 4.4.10
-        version: 4.4.10
       autoprefixer:
         specifier: 10.4.19
         version: 10.4.19(postcss@8.4.38)
@@ -88,8 +85,8 @@ importers:
         specifier: 7.1.2
         version: 7.1.2(webpack@5.92.0(webpack-cli@5.1.4))
       electron:
-        specifier: 31.0.0
-        version: 31.0.0
+        specifier: 31.0.1
+        version: 31.0.1
       electron-builder:
         specifier: 24.13.3
         version: 24.13.3(electron-builder-squirrel-windows@24.13.3(dmg-builder@24.13.3))
@@ -694,9 +691,6 @@ packages:
   '@types/react-router@5.1.20':
     resolution: {integrity: sha512-jGjmu/ZqS7FjSH6owMcD5qpq19+1RS9DeVRqfl1FeBMxTDQAGwlMWOcs52NDoXaNKyG3d1cYQFMs9rCrb88o9Q==}
 
-  '@types/react-transition-group@4.4.10':
-    resolution: {integrity: sha512-hT/+s0VQs2ojCX823m60m5f0sL5idt9SO6Tj6Dg+rdphGPIeJbJ6CxvBYkgkGKrYeDjvIpKTR38UzmtHJOGW3Q==}
-
   '@types/react@18.3.3':
     resolution: {integrity: sha512-hti/R0pS0q1/xx+TsI73XIqk26eBsISZ2R0wUijXIngRK9R/e7Xw/cXVxQK7R5JjW+SV4zGcn5hXjudkN/pLIw==}
 
@@ -1103,6 +1097,10 @@ packages:
   clone-response@1.0.3:
     resolution: {integrity: sha512-ROoL94jJH2dUVML2Y/5PEDNaSHgeOdSDicUyS7izcF63G6sTc/FTjLub4b8Il9S8S0beOfYt0TaA5qvFK+w0wA==}
 
+  clsx@2.1.1:
+    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
+    engines: {node: '>=6'}
+
   co@4.6.0:
     resolution: {integrity: sha512-QVb0dM5HvG+uaxitm8wONl7jltx8dqhfU33DcqtOZcLSVIKSDDLDi7+0LbAKiyI8hD9u42m2YxXSkMGWThaecQ==}
     engines: {iojs: '>= 1.0.0', node: '>= 0.12.0'}
@@ -1322,9 +1320,6 @@ packages:
   dom-accessibility-api@0.5.16:
     resolution: {integrity: sha512-X7BJ2yElsnOJ30pZF4uIIDfBEVgF4XEBxL9Bxhy6dnrm5hkzqmsWHGTiHqRiITNhMyFLyAiWndIJP7Z1NTteDg==}
 
-  dom-helpers@5.2.1:
-    resolution: {integrity: sha512-nRCa7CK3VTrM2NmGkIy4cbK7IZlgBE/PYMn55rrXefr5xXDP0LdtfPnblFDoVdcAfslJ7or6iqAUnx0CCGIWQA==}
-
   domexception@4.0.0:
     resolution: {integrity: sha512-A2is4PLG+eeSfoTMA95/s4pvAoSo2mKtiM5jlHkAVewmiO8ISFTFKZjH7UAM1Atli/OT/7JHOrJRJiMKUZKYBw==}
     engines: {node: '>=12'}
@@ -1365,8 +1360,8 @@ packages:
   electron-updater@6.2.1:
     resolution: {integrity: sha512-83eKIPW14qwZqUUM6wdsIRwVKZyjmHxQ4/8G+1C6iS5PdDt7b1umYQyj1/qPpH510GmHEQe4q0kCPe3qmb3a0Q==}
 
-  electron@31.0.0:
-    resolution: {integrity: sha512-yJMhwu5NVqor7h5mt65uKtBsjSAD7NiRwNCigK8xAlJMaP0X2FKipEzQocOzusy7E0dny4gkTgOTATy+ucDtjw==}
+  electron@31.0.1:
+    resolution: {integrity: sha512-2eBcp4iqLkTsml6mMq+iqrS5u3kJ/2mpOLP7Mj7lo0uNK3OyfNqRS9z1ArsHjBF2/HV250Te/O9nKrwQRTX/+g==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -2482,9 +2477,6 @@ packages:
     resolution: {integrity: sha512-NxNv/kLguCA7p3jE8oL2aEBsrJWgAakBpgmgK6lpPWV+WuOmY6r2/zbAVnP+T8bQlA0nzHXSJSJW0Hq7ylaD2Q==}
     engines: {node: '>= 6'}
 
-  prop-types@15.8.1:
-    resolution: {integrity: sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==}
-
   propagate@2.0.1:
     resolution: {integrity: sha512-vGrhOavPSTz4QVNuBNdcNXePNdNMaO1xj9yBeH1ScQPjk/rhg9sSlCXPhMkFuaNNW/syTvYqsnbIJxMBfRbbag==}
     engines: {node: '>= 8'}
@@ -2529,9 +2521,6 @@ packages:
       final-form: ^4.20.4
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
 
-  react-is@16.13.1:
-    resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
-
   react-is@17.0.2:
     resolution: {integrity: sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==}
 
@@ -2550,12 +2539,6 @@ packages:
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
-
-  react-transition-group@4.4.5:
-    resolution: {integrity: sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==}
-    peerDependencies:
-      react: '>=16.6.0'
-      react-dom: '>=16.6.0'
 
   react@18.3.1:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
@@ -3479,9 +3462,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@electron/remote@2.1.2(electron@31.0.0)':
+  '@electron/remote@2.1.2(electron@31.0.1)':
     dependencies:
-      electron: 31.0.0
+      electron: 31.0.1
 
   '@electron/universal@1.5.1':
     dependencies:
@@ -3899,10 +3882,6 @@ snapshots:
   '@types/react-router@5.1.20':
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 18.3.3
-
-  '@types/react-transition-group@4.4.10':
-    dependencies:
       '@types/react': 18.3.3
 
   '@types/react@18.3.3':
@@ -4425,6 +4404,8 @@ snapshots:
     dependencies:
       mimic-response: 1.0.1
 
+  clsx@2.1.1: {}
+
   co@4.6.0: {}
 
   collect-v8-coverage@1.0.2: {}
@@ -4635,11 +4616,6 @@ snapshots:
 
   dom-accessibility-api@0.5.16: {}
 
-  dom-helpers@5.2.1:
-    dependencies:
-      '@babel/runtime': 7.24.1
-      csstype: 3.1.3
-
   domexception@4.0.0:
     dependencies:
       webidl-conversions: 7.0.0
@@ -4710,7 +4686,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@31.0.0:
+  electron@31.0.1:
     dependencies:
       '@electron/get': 2.0.3
       '@types/node': 20.14.2
@@ -5686,9 +5662,9 @@ snapshots:
       escape-string-regexp: 4.0.0
     optional: true
 
-  menubar@9.4.0(electron@31.0.0):
+  menubar@9.4.0(electron@31.0.1):
     dependencies:
-      electron: 31.0.0
+      electron: 31.0.1
       electron-positioner: 4.1.0
 
   merge-stream@2.0.0: {}
@@ -5961,12 +5937,6 @@ snapshots:
       kleur: 3.0.3
       sisteransi: 1.0.5
 
-  prop-types@15.8.1:
-    dependencies:
-      loose-envify: 1.4.0
-      object-assign: 4.1.1
-      react-is: 16.13.1
-
   propagate@2.0.1: {}
 
   proxy-from-env@1.1.0: {}
@@ -6004,8 +5974,6 @@ snapshots:
       final-form: 4.20.10
       react: 18.3.1
 
-  react-is@16.13.1: {}
-
   react-is@17.0.2: {}
 
   react-is@18.2.0: {}
@@ -6021,15 +5989,6 @@ snapshots:
     dependencies:
       '@remix-run/router': 1.16.1
       react: 18.3.1
-
-  react-transition-group@4.4.5(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
-    dependencies:
-      '@babel/runtime': 7.24.1
-      dom-helpers: 5.2.1
-      loose-envify: 1.4.0
-      prop-types: 15.8.1
-      react: 18.3.1
-      react-dom: 18.3.1(react@18.3.1)
 
   react@18.3.1:
     dependencies:

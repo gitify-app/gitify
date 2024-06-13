@@ -2,11 +2,11 @@
 
 exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
 <div
-  class="flex flex-1 flex-col h-screen dark:bg-gray-dark dark:text-white"
+  class="flex h-screen flex-1 flex-col dark:bg-gray-dark dark:text-white"
   data-testid="accounts"
 >
   <div
-    class="flex justify-between items-center mt-2 py-2 mx-8"
+    class="mx-8 mt-2 flex items-center justify-between py-2"
   >
     <button
       class="focus:outline-none"
@@ -39,24 +39,24 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
     class="flex-grow overflow-x-auto px-8"
   >
     <div
-      class="flex flex-col mt-4 text-sm"
+      class="mt-4 flex flex-col text-sm"
     >
       <div
-        class="flex justify-between items-center bg-gray-100 dark:bg-gray-900 rounded-md p-1 mb-4"
+        class="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-1 dark:bg-gray-900"
       >
         <div
           class="ml-2 text-xs"
         >
           <div>
             <button
-              class="cursor-pointer font-semibold mb-1 text-sm"
+              class="mb-1 cursor-pointer text-sm font-semibold"
               title="Open Profile"
               type="button"
             >
               @
               octocat
               <span
-                class="pl-1 font-medium text-xs italic"
+                class="pl-1 text-xs font-medium italic"
               >
                 - 
                 Mona Lisa Octocat
@@ -65,7 +65,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
           </div>
           <div>
             <button
-              class="cursor-pointer mb-1 ml-1 align-middle"
+              class="mb-1 ml-1 cursor-pointer align-middle"
               title="Open Host"
               type="button"
             >
@@ -95,7 +95,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
           </div>
           <div>
             <button
-              class="cursor-pointer ml-1 align-middle"
+              class="ml-1 cursor-pointer align-middle"
               title="Open Developer Settings"
               type="button"
             >
@@ -147,21 +147,21 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="flex justify-between items-center bg-gray-100 dark:bg-gray-900 rounded-md p-1 mb-4"
+        class="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-1 dark:bg-gray-900"
       >
         <div
           class="ml-2 text-xs"
         >
           <div>
             <button
-              class="cursor-pointer font-semibold mb-1 text-sm"
+              class="mb-1 cursor-pointer text-sm font-semibold"
               title="Open Profile"
               type="button"
             >
               @
               octocat
               <span
-                class="pl-1 font-medium text-xs italic"
+                class="pl-1 text-xs font-medium italic"
               >
                 - 
                 Mona Lisa Octocat
@@ -170,7 +170,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
           </div>
           <div>
             <button
-              class="cursor-pointer mb-1 ml-1 align-middle"
+              class="mb-1 ml-1 cursor-pointer align-middle"
               title="Open Host"
               type="button"
             >
@@ -200,7 +200,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
           </div>
           <div>
             <button
-              class="cursor-pointer ml-1 align-middle"
+              class="ml-1 cursor-pointer align-middle"
               title="Open Developer Settings"
               type="button"
             >
@@ -252,21 +252,21 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="flex justify-between items-center bg-gray-100 dark:bg-gray-900 rounded-md p-1 mb-4"
+        class="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-1 dark:bg-gray-900"
       >
         <div
           class="ml-2 text-xs"
         >
           <div>
             <button
-              class="cursor-pointer font-semibold mb-1 text-sm"
+              class="mb-1 cursor-pointer text-sm font-semibold"
               title="Open Profile"
               type="button"
             >
               @
               octocat
               <span
-                class="pl-1 font-medium text-xs italic"
+                class="pl-1 text-xs font-medium italic"
               >
                 - 
                 Mona Lisa Octocat
@@ -275,7 +275,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
           </div>
           <div>
             <button
-              class="cursor-pointer mb-1 ml-1 align-middle"
+              class="mb-1 ml-1 cursor-pointer align-middle"
               title="Open Host"
               type="button"
             >
@@ -305,7 +305,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
           </div>
           <div>
             <button
-              class="cursor-pointer ml-1 align-middle"
+              class="ml-1 cursor-pointer align-middle"
               title="Open Developer Settings"
               type="button"
             >
@@ -359,7 +359,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
     </div>
   </div>
   <div
-    class="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8 text-sm"
+    class="flex items-center justify-between bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker"
   >
     <div
       class="font-semibold italic"
@@ -389,7 +389,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
         </svg>
         <svg
           aria-hidden="true"
-          class="ml-1 mb-2"
+          class="mb-2 ml-1"
           fill="currentColor"
           focusable="false"
           height="10"

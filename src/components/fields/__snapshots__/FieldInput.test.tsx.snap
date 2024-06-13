@@ -10,13 +10,13 @@ exports[`components/fields/FieldInput.tsx should render 1`] = `
           class="mb-4"
         >
           <label
-            class="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
+            class="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
             for="appearance"
           >
             Appearance
           </label>
           <input
-            class="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
+            class="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
             id="appearance"
             name="appearance"
             placeholder="This is some placeholder text"
@@ -24,7 +24,7 @@ exports[`components/fields/FieldInput.tsx should render 1`] = `
             value=""
           />
           <div
-            class="mt-3 text-gray-700 dark:text-gray-200 text-xs"
+            class="mt-3 text-xs text-gray-700 dark:text-gray-200"
           >
             This is some helper text
           </div>
@@ -38,13 +38,13 @@ exports[`components/fields/FieldInput.tsx should render 1`] = `
         class="mb-4"
       >
         <label
-          class="block tracking-wide text-grey-dark text-sm font-semibold mb-2"
+          class="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
           for="appearance"
         >
           Appearance
         </label>
         <input
-          class="appearance-none block w-full dark:text-gray-800 bg-gray-100 border border-red rounded py-1.5 px-4 mb-2 focus:bg-gray-200 focus:outline-none text-sm"
+          class="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
           id="appearance"
           name="appearance"
           placeholder="This is some placeholder text"
@@ -52,7 +52,7 @@ exports[`components/fields/FieldInput.tsx should render 1`] = `
           value=""
         />
         <div
-          class="mt-3 text-gray-700 dark:text-gray-200 text-xs"
+          class="mt-3 text-xs text-gray-700 dark:text-gray-200"
         >
           This is some helper text
         </div>

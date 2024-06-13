@@ -1,6 +1,5 @@
 import { CheckIcon, MarkGithubIcon, ReadIcon } from '@primer/octicons-react';
 import { type FC, useCallback, useContext } from 'react';
-import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import { AppContext } from '../context/App';
 import type { Notification } from '../typesGitHub';
 import { openRepository } from '../utils/links';
@@ -31,11 +30,11 @@ export const RepositoryNotifications: FC<IProps> = ({
 
   return (
     <>
-      <div className="flex py-2 px-3 bg-gray-100 dark:bg-gray-darker dark:text-white group">
-        <div className="flex flex-1 space-x-3 items-center mt-0 text-sm font-medium overflow-hidden overflow-ellipsis whitespace-nowrap">
+      <div className="group flex bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white">
+        <div className="mt-0 flex flex-1 items-center space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium">
           {avatarUrl ? (
             <img
-              className="rounded w-5 h-5"
+              className="size-5 rounded"
               src={avatarUrl}
               alt={`${repoSlug}'s avatar`}
             />
@@ -51,10 +50,10 @@ export const RepositoryNotifications: FC<IProps> = ({
           </span>
         </div>
 
-        <div className="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity">
+        <div className="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80">
           <button
             type="button"
-            className="focus:outline-none h-full hover:text-green-500"
+            className="h-full hover:text-green-500 focus:outline-none"
             title="Mark Repository as Done"
             onClick={markRepoAsDone}
           >
@@ -65,7 +64,7 @@ export const RepositoryNotifications: FC<IProps> = ({
 
           <button
             type="button"
-            className="focus:outline-none h-full hover:text-green-500"
+            className="h-full hover:text-green-500 focus:outline-none"
             title="Mark Repository as Read"
             onClick={markRepoAsRead}
           >
@@ -74,13 +73,9 @@ export const RepositoryNotifications: FC<IProps> = ({
         </div>
       </div>
 
-      <TransitionGroup>
-        {repoNotifications.map((obj) => (
-          <CSSTransition key={obj.id} timeout={250} classNames="notification">
-            <NotificationRow key={obj.id} notification={obj} />
-          </CSSTransition>
-        ))}
-      </TransitionGroup>
+      {repoNotifications.map((obj) => (
+        <NotificationRow key={obj.id} notification={obj} />
+      ))}
     </>
   );
 };

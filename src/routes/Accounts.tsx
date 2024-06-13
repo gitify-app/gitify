@@ -47,10 +47,10 @@ export const AccountsRoute: FC = () => {
 
   return (
     <div
-      className="flex flex-1 flex-col h-screen dark:bg-gray-dark dark:text-white"
+      className="flex h-screen flex-1 flex-col dark:bg-gray-dark dark:text-white"
       data-testid="accounts"
     >
-      <div className="flex justify-between items-center mt-2 py-2 mx-8">
+      <div className="mx-8 mt-2 flex items-center justify-between py-2">
         <button
           type="button"
           className="focus:outline-none"
@@ -68,24 +68,24 @@ export const AccountsRoute: FC = () => {
       </div>
 
       <div className="flex-grow overflow-x-auto px-8">
-        <div className="flex flex-col mt-4 text-sm">
+        <div className="mt-4 flex flex-col text-sm">
           {auth.accounts.map((account) => (
             <div
               key={getAccountUUID(account)}
-              className="flex justify-between items-center bg-gray-100 dark:bg-gray-900 rounded-md p-1 mb-4"
+              className="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-1 dark:bg-gray-900"
             >
               <div className="ml-2 text-xs">
                 <div>
                   <button
                     type="button"
-                    className="cursor-pointer font-semibold mb-1 text-sm"
+                    className="mb-1 cursor-pointer text-sm font-semibold"
                     title="Open Profile"
                     onClick={() => openAccountProfile(account)}
                   >
                     @{account.user.login}
                     <span
                       hidden={!account.user?.name}
-                      className="pl-1 font-medium text-xs italic"
+                      className="pl-1 text-xs font-medium italic"
                     >
                       - {account.user?.name}
                     </span>
@@ -94,7 +94,7 @@ export const AccountsRoute: FC = () => {
                 <div>
                   <button
                     type="button"
-                    className="cursor-pointer mb-1 ml-1 align-middle"
+                    className="mb-1 ml-1 cursor-pointer align-middle"
                     title="Open Host"
                     onClick={() => openHost(account.hostname)}
                   >
@@ -105,7 +105,7 @@ export const AccountsRoute: FC = () => {
                 <div>
                   <button
                     type="button"
-                    className="cursor-pointer ml-1 align-middle"
+                    className="ml-1 cursor-pointer align-middle"
                     title="Open Developer Settings"
                     onClick={() => openDeveloperSettings(account)}
                   >
@@ -132,7 +132,7 @@ export const AccountsRoute: FC = () => {
         </div>
       </div>
 
-      <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8 text-sm">
+      <div className="flex items-center justify-between bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker">
         <div className="font-semibold italic">Add new account</div>
         <div>
           <button
@@ -142,7 +142,7 @@ export const AccountsRoute: FC = () => {
             onClick={loginWithPersonalAccessToken}
           >
             <KeyIcon size={18} aria-label="Login with Personal Access Token" />
-            <PlusIcon size={10} className="ml-1 mb-2" />
+            <PlusIcon size={10} className="mb-2 ml-1" />
           </button>
           <button
             type="button"
