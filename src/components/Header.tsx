@@ -9,7 +9,7 @@ interface IHeader {
 export const Header = ({ children }: IHeader) => {
   const navigate = useNavigate();
   return (
-    <div className="mx-8 mt-4 flex items-center justify-between py-2">
+    <div className="mx-8 mt-2 flex items-center justify-between py-2">
       <button
         type="button"
         className="focus:outline-none"

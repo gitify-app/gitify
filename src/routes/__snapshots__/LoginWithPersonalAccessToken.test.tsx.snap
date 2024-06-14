@@ -7,7 +7,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
     <div>
       <div>
         <div
-          class="mx-8 mt-4 flex items-center justify-between py-2"
+          class="mx-8 mt-2 flex items-center justify-between py-2"
         >
           <button
             class="focus:outline-none"
@@ -196,7 +196,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
   "container": <div>
     <div>
       <div
-        class="mx-8 mt-4 flex items-center justify-between py-2"
+        class="mx-8 mt-2 flex items-center justify-between py-2"
       >
         <button
           class="focus:outline-none"

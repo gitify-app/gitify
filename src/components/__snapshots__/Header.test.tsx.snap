@@ -6,7 +6,7 @@ exports[`components/Header.tsx should render itself & its children 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="mx-8 mt-4 flex items-center justify-between py-2"
+        class="mx-8 mt-2 flex items-center justify-between py-2"
       >
         <button
           class="focus:outline-none"
@@ -39,7 +39,7 @@ exports[`components/Header.tsx should render itself & its children 1`] = `
   </body>,
   "container": <div>
     <div
-      class="mx-8 mt-4 flex items-center justify-between py-2"
+      class="mx-8 mt-2 flex items-center justify-between py-2"
     >
       <button
         class="focus:outline-none"
