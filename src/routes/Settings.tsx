@@ -55,10 +55,7 @@ export const SettingsRoute: FC = () => {
   }, [settings.theme]);
 
   return (
-    <div
-      className="flex h-screen flex-1 flex-col dark:bg-gray-dark dark:text-white"
-      data-testid="settings"
-    >
+    <div className="flex h-screen flex-col" data-testid="settings">
       <div className="mx-8 mt-2 flex items-center justify-between py-2">
         <button
           type="button"

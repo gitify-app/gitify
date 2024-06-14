@@ -12,7 +12,7 @@ export const Oops: FC<IProps> = ({ error }) => {
   );
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center bg-white p-4 text-black dark:bg-gray-dark dark:text-white">
+    <div className="flex flex-1 flex-col items-center justify-center p-4">
       <h1 className="mb-5 text-5xl">{emoji}</h1>
 
       <h2 className="mb-2 text-xl font-semibold">{error.title}</h2>

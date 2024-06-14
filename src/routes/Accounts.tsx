@@ -46,10 +46,7 @@ export const AccountsRoute: FC = () => {
   }, []);
 
   return (
-    <div
-      className="flex h-screen flex-1 flex-col dark:bg-gray-dark dark:text-white"
-      data-testid="accounts"
-    >
+    <div className="flex h-screen flex-col" data-testid="accounts">
       <div className="mx-8 mt-2 flex items-center justify-between py-2">
         <button
           type="button"
@@ -72,7 +69,7 @@ export const AccountsRoute: FC = () => {
           {auth.accounts.map((account) => (
             <div
               key={getAccountUUID(account)}
-              className="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-1 dark:bg-gray-900"
+              className="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-2 dark:bg-gray-sidebar"
             >
               <div className="ml-2 text-xs">
                 <div>

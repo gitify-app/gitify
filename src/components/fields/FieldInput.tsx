@@ -23,7 +23,7 @@ export const FieldInput: FC<IFieldInput> = ({
       {({ input, meta: { touched, error } }) => (
         <div className="mb-4">
           <label
-            className="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
+            className="mb-2 block text-sm font-semibold tracking-wide"
             htmlFor={input.name}
           >
             {label}

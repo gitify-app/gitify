@@ -5,9 +5,7 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="flex-1 bg-white dark:bg-gray-dark dark:text-white"
-      >
+      <div>
         <div
           class="mx-8 mt-4 flex items-center justify-between py-2"
         >
@@ -53,14 +51,14 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
           </h3>
         </div>
         <div
-          class="flex-1 px-8"
+          class="px-8"
         >
           <form>
             <div
               class="mb-4"
             >
               <label
-                class="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
+                class="mb-2 block text-sm font-semibold tracking-wide"
                 for="hostname"
               >
                 Hostname
@@ -120,7 +118,7 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               class="mb-4"
             >
               <label
-                class="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
+                class="mb-2 block text-sm font-semibold tracking-wide"
                 for="clientId"
               >
                 Client ID
@@ -138,7 +136,7 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               class="mb-4"
             >
               <label
-                class="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
+                class="mb-2 block text-sm font-semibold tracking-wide"
                 for="clientSecret"
               >
                 Client Secret
@@ -207,9 +205,7 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
     </div>
   </body>,
   "container": <div>
-    <div
-      class="flex-1 bg-white dark:bg-gray-dark dark:text-white"
-    >
+    <div>
       <div
         class="mx-8 mt-4 flex items-center justify-between py-2"
       >
@@ -255,14 +251,14 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
         </h3>
       </div>
       <div
-        class="flex-1 px-8"
+        class="px-8"
       >
         <form>
           <div
             class="mb-4"
           >
             <label
-              class="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
+              class="mb-2 block text-sm font-semibold tracking-wide"
               for="hostname"
             >
               Hostname
@@ -322,7 +318,7 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             class="mb-4"
           >
             <label
-              class="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
+              class="mb-2 block text-sm font-semibold tracking-wide"
               for="clientId"
             >
               Client ID
@@ -340,7 +336,7 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             class="mb-4"
           >
             <label
-              class="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
+              class="mb-2 block text-sm font-semibold tracking-wide"
               for="clientSecret"
             >
               Client Secret
