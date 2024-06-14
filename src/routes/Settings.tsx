@@ -38,8 +38,13 @@ export const SettingsRoute: FC = () => {
 
   useEffect(() => {
     (async () => {
-      const result = await getAppVersion();
-      setAppVersion(result);
+      console.log('process.env.NODE_ENV', process.env.NODE_ENV);
+      if (process.env.NODE_ENV === 'development') {
+        setAppVersion('dev');
+      } else {
+        const result = await getAppVersion();
+        setAppVersion(`v${result}`);
+      }
     })();
 
     ipcRenderer.on('gitify:update-theme', (_, updatedTheme: Theme) => {
@@ -283,7 +288,7 @@ export const SettingsRoute: FC = () => {
           title="View release notes"
           onClick={() => openGitifyReleaseNotes(appVersion)}
         >
-          Gitify v{appVersion}
+          <span title="app-version">Gitify {appVersion}</span>
         </button>
         <div>
           <button
