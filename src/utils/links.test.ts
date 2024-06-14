@@ -37,7 +37,7 @@ describe('utils/links.ts', () => {
   });
 
   it('openGitifyReleaseNotes', () => {
-    openGitifyReleaseNotes('1.0.0');
+    openGitifyReleaseNotes('v1.0.0');
     expect(comms.openExternalLink).toHaveBeenCalledWith(
       'https://github.com/gitify-app/gitify/releases/tag/v1.0.0',
     );

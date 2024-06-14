@@ -11,7 +11,7 @@ export function openGitifyRepository() {
 
 export function openGitifyReleaseNotes(version: string) {
   openExternalLink(
-    `https://github.com/${Constants.REPO_SLUG}/releases/tag/v${version}` as Link,
+    `https://github.com/${Constants.REPO_SLUG}/releases/tag/${version}` as Link,
   );
 }
 

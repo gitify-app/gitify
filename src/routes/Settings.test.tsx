@@ -31,6 +31,11 @@ describe('routes/Settings.tsx', () => {
     Object.defineProperty(process, 'platform', {
       value: originalPlatform,
     });
+
+    // Restore the original node env value
+    Object.defineProperty(process, 'platform', {
+      value: originalPlatform,
+    });
   });
 
   describe('General', () => {
@@ -481,6 +486,68 @@ describe('routes/Settings.tsx', () => {
   });
 
   describe('Footer section', () => {
+    describe('app version', () => {
+      let originalEnv: NodeJS.ProcessEnv;
+
+      beforeEach(() => {
+        // Save the original node env state
+        originalEnv = process.env;
+      });
+
+      afterEach(() => {
+        // Restore the original node env state
+        process.env = originalEnv;
+      });
+
+      it('should show production app version', async () => {
+        process.env = {
+          ...originalEnv,
+          NODE_ENV: 'production',
+        };
+
+        await act(async () => {
+          render(
+            <AppContext.Provider
+              value={{
+                auth: mockAuth,
+                settings: mockSettings,
+              }}
+            >
+              <MemoryRouter>
+                <SettingsRoute />
+              </MemoryRouter>
+            </AppContext.Provider>,
+          );
+        });
+
+        expect(screen.getByTitle('app-version')).toMatchSnapshot();
+      });
+
+      it('should show development app version', async () => {
+        process.env = {
+          ...originalEnv,
+          NODE_ENV: 'development',
+        };
+
+        await act(async () => {
+          render(
+            <AppContext.Provider
+              value={{
+                auth: mockAuth,
+                settings: mockSettings,
+              }}
+            >
+              <MemoryRouter>
+                <SettingsRoute />
+              </MemoryRouter>
+            </AppContext.Provider>,
+          );
+        });
+
+        expect(screen.getByTitle('app-version')).toMatchSnapshot();
+      });
+    });
+
     it('should open release notes', async () => {
       const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
 
