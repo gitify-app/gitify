@@ -16,7 +16,7 @@ import {
   useState,
 } from 'react';
 import { AppContext } from '../context/App';
-import { type Account, IconColor } from '../types';
+import { IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
 import {
@@ -33,19 +33,16 @@ import { formatReason } from '../utils/reason';
 import { PillButton } from './buttons/PillButton';
 
 interface IProps {
-  account: Account;
   notification: Notification;
 }
 
-export const NotificationRow: FC<IProps> = ({ notification, account }) => {
+export const NotificationRow: FC<IProps> = ({ notification }) => {
   const {
-    auth,
     settings,
     removeNotificationFromState,
     markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
-    notifications,
   } = useContext(AppContext);
   const [animateExit, setAnimateExit] = useState(false);
 
@@ -59,8 +56,12 @@ export const NotificationRow: FC<IProps> = ({ notification, account }) => {
       // no need to mark as read, github does it by default when opening it
       removeNotificationFromState(settings, notification);
     }
-  }, [notifications, notification, auth, settings]); // notifications required here to prevent weird state issues
-
+  }, [
+    notification,
+    markNotificationDone,
+    removeNotificationFromState,
+    settings,
+  ]);
   const unsubscribeFromThread = (event: MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.
     event.stopPropagation();

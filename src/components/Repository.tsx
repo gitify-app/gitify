@@ -1,13 +1,11 @@
 import { CheckIcon, MarkGithubIcon, ReadIcon } from '@primer/octicons-react';
 import { type FC, useCallback, useContext } from 'react';
 import { AppContext } from '../context/App';
-import type { Account } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openRepository } from '../utils/links';
 import { NotificationRow } from './NotificationRow';
 
 interface IProps {
-  account: Account;
   repoNotifications: Notification[];
   repoName: string;
 }
@@ -15,18 +13,17 @@ interface IProps {
 export const RepositoryNotifications: FC<IProps> = ({
   repoName,
   repoNotifications,
-  account,
 }) => {
   const { markRepoNotificationsRead, markRepoNotificationsDone } =
     useContext(AppContext);
 
   const markRepoAsRead = useCallback(() => {
     markRepoNotificationsRead(repoNotifications[0]);
-  }, [repoNotifications, account]);
+  }, [repoNotifications, markRepoNotificationsRead]);
 
   const markRepoAsDone = useCallback(() => {
     markRepoNotificationsDone(repoNotifications[0]);
-  }, [repoNotifications, account]);
+  }, [repoNotifications, markRepoNotificationsDone]);
 
   const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
   const repoSlug = repoNotifications[0].repository.full_name;
@@ -77,7 +74,7 @@ export const RepositoryNotifications: FC<IProps> = ({
       </div>
 
       {repoNotifications.map((obj) => (
-        <NotificationRow key={obj.id} account={account} notification={obj} />
+        <NotificationRow key={obj.id} notification={obj} />
       ))}
     </>
   );

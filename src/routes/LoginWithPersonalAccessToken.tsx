@@ -121,17 +121,20 @@ export const LoginWithPersonalAccessToken: FC = () => {
     );
   };
 
-  const login = useCallback(async (data: IValues) => {
-    setIsValidToken(true);
-    try {
-      await loginWithPersonalAccessToken(
-        data as LoginPersonalAccessTokenOptions,
-      );
-      navigate(-1);
-    } catch (err) {
-      setIsValidToken(false);
-    }
-  }, []);
+  const login = useCallback(
+    async (data: IValues) => {
+      setIsValidToken(true);
+      try {
+        await loginWithPersonalAccessToken(
+          data as LoginPersonalAccessTokenOptions,
+        );
+        navigate(-1);
+      } catch (err) {
+        setIsValidToken(false);
+      }
+    },
+    [loginWithPersonalAccessToken],
+  );
 
   return (
     <div className="flex-1 bg-white dark:bg-gray-dark dark:text-white">

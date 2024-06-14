@@ -7,6 +7,10 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "nursery": {
+        "noUnusedFunctionParameters": "error",
+        "useDefaultSwitchClause": "error"
+      },
       "correctness": {
         "useExhaustiveDependencies": {
           "level": "warn",

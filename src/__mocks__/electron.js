@@ -32,7 +32,7 @@ module.exports = {
     send: jest.fn(),
     on: jest.fn(),
     sendSync: jest.fn(),
-    invoke: jest.fn((channel, ...args) => {
+    invoke: jest.fn((channel, ..._args) => {
       switch (channel) {
         case 'get-platform':
           return Promise.resolve('darwin');

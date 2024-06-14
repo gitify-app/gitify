@@ -63,7 +63,7 @@ export const authGitHub = (
 
     authWindow.webContents.on(
       'did-fail-load',
-      (event, errorCode, errorDescription, validatedURL) => {
+      (_event, _errorCode, _errorDescription, validatedURL) => {
         if (validatedURL.includes(authOptions.hostname)) {
           authWindow.destroy();
           reject(
@@ -161,6 +161,9 @@ export function getDeveloperSettingsURL(account: Account): Link {
       break;
     case 'Personal Access Token':
       settingsURL.pathname = '/settings/tokens';
+      break;
+    default:
+      settingsURL.pathname = '/settings';
       break;
   }
   return settingsURL.toString() as Link;

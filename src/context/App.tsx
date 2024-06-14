@@ -129,7 +129,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     fetchNotifications({ auth, settings });
   }, Constants.FETCH_INTERVAL);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We need to update tray title when settings or notifications changes.
   useEffect(() => {
     const count = getNotificationCount(notifications);
 
@@ -227,37 +226,37 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const fetchNotificationsWithAccounts = useCallback(
     async () => await fetchNotifications({ auth, settings }),
-    [auth, settings, notifications],
+    [auth, settings, fetchNotifications],
   );
 
   const markNotificationReadWithAccounts = useCallback(
     async (notification: Notification) =>
       await markNotificationRead({ auth, settings }, notification),
-    [auth, notifications],
+    [auth, settings, markNotificationRead],
   );
 
   const markNotificationDoneWithAccounts = useCallback(
     async (notification: Notification) =>
       await markNotificationDone({ auth, settings }, notification),
-    [auth, notifications],
+    [auth, settings, markNotificationDone],
   );
 
   const unsubscribeNotificationWithAccounts = useCallback(
     async (notification: Notification) =>
       await unsubscribeNotification({ auth, settings }, notification),
-    [auth, notifications],
+    [auth, settings, unsubscribeNotification],
   );
 
   const markRepoNotificationsReadWithAccounts = useCallback(
     async (notification: Notification) =>
       await markRepoNotificationsRead({ auth, settings }, notification),
-    [auth, notifications],
+    [auth, settings, markRepoNotificationsRead],
   );
 
   const markRepoNotificationsDoneWithAccounts = useCallback(
     async (notification: Notification) =>
       await markRepoNotificationsDone({ auth, settings }, notification),
-    [auth, notifications],
+    [auth, settings, markRepoNotificationsDone],
   );
 
   return (

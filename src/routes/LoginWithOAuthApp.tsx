@@ -117,13 +117,16 @@ export const LoginWithOAuthApp: FC = () => {
     );
   };
 
-  const login = useCallback(async (data: IValues) => {
-    try {
-      await loginWithOAuthApp(data as LoginOAuthAppOptions);
-    } catch (err) {
-      // Skip
-    }
-  }, []);
+  const login = useCallback(
+    async (data: IValues) => {
+      try {
+        await loginWithOAuthApp(data as LoginOAuthAppOptions);
+      } catch (err) {
+        // Skip
+      }
+    },
+    [loginWithOAuthApp],
+  );
 
   return (
     <div className="flex-1 bg-white dark:bg-gray-dark dark:text-white">

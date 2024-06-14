@@ -21,7 +21,7 @@ describe('utils/theme.ts', () => {
   it("should use the system's mode - light", () => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: jest.fn().mockImplementation((query) => ({
+      value: jest.fn().mockImplementation((_query) => ({
         matches: false,
       })),
     });
@@ -32,7 +32,7 @@ describe('utils/theme.ts', () => {
   it("should use the system's mode - dark", () => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: jest.fn().mockImplementation((query) => ({
+      value: jest.fn().mockImplementation((_query) => ({
         matches: true,
       })),
     });
