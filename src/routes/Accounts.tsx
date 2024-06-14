@@ -1,5 +1,4 @@
 import {
-  ArrowLeftIcon,
   KeyIcon,
   PersonIcon,
   PlusIcon,
@@ -8,11 +7,10 @@ import {
 
 import { type FC, useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import { AppContext } from '../context/App';
-
+import { Header } from '../components/Header';
 import { AuthMethodIcon } from '../components/icons/AuthMethodIcon';
 import { PlatformIcon } from '../components/icons/PlatformIcon';
+import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import type { Account } from '../types';
 import { getAccountUUID } from '../utils/auth/utils';
@@ -47,23 +45,7 @@ export const AccountsRoute: FC = () => {
 
   return (
     <div className="flex h-screen flex-col" data-testid="accounts">
-      <div className="mx-8 mt-2 flex items-center justify-between py-2">
-        <button
-          type="button"
-          className="focus:outline-none"
-          title="Go Back"
-          onClick={() => navigate(-1)}
-        >
-          <ArrowLeftIcon
-            size={20}
-            className="hover:text-gray-400"
-            aria-label="Go Back"
-          />
-        </button>
-
-        <h3 className="text-lg font-semibold">Accounts</h3>
-      </div>
-
+      <Header>Accounts</Header>
       <div className="flex-grow overflow-x-auto px-8">
         <div className="mt-4 flex flex-col text-sm">
           {auth.accounts.map((account) => (
