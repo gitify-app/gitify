@@ -420,7 +420,7 @@ exports[`routes/Notifications.tsx should render itself & its children (show acco
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-col bg-white dark:bg-gray-dark"
+        class="flex flex-col"
       >
         <p>
           AccountNotifications
@@ -430,7 +430,7 @@ exports[`routes/Notifications.tsx should render itself & its children (show acco
   </body>,
   "container": <div>
     <div
-      class="flex flex-col bg-white dark:bg-gray-dark"
+      class="flex flex-col"
     >
       <p>
         AccountNotifications
@@ -497,7 +497,7 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-col bg-white dark:bg-gray-dark"
+        class="flex flex-col"
       >
         <p>
           AccountNotifications
@@ -510,7 +510,7 @@ exports[`routes/Notifications.tsx should render itself & its children (with noti
   </body>,
   "container": <div>
     <div
-      class="flex flex-col bg-white dark:bg-gray-dark"
+      class="flex flex-col"
     >
       <p>
         AccountNotifications
