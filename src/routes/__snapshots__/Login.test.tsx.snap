@@ -6,7 +6,7 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-1 flex-col items-center justify-center bg-white p-4 dark:bg-gray-dark dark:text-white"
+        class="flex flex-col items-center justify-center p-4"
       >
         <svg
           aria-label="Gitify Logo"
@@ -113,7 +113,7 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
   </body>,
   "container": <div>
     <div
-      class="flex flex-1 flex-col items-center justify-center bg-white p-4 dark:bg-gray-dark dark:text-white"
+      class="flex flex-col items-center justify-center p-4"
     >
       <svg
         aria-label="Gitify Logo"

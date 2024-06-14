@@ -10,7 +10,7 @@ exports[`components/fields/FieldInput.tsx should render 1`] = `
           class="mb-4"
         >
           <label
-            class="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
+            class="mb-2 block text-sm font-semibold tracking-wide"
             for="appearance"
           >
             Appearance
@@ -38,7 +38,7 @@ exports[`components/fields/FieldInput.tsx should render 1`] = `
         class="mb-4"
       >
         <label
-          class="mb-2 block text-sm font-semibold tracking-wide text-gray-dark"
+          class="mb-2 block text-sm font-semibold tracking-wide"
           for="appearance"
         >
           Appearance

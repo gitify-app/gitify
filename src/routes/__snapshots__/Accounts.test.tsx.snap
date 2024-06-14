@@ -2,7 +2,7 @@
 
 exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
 <div
-  class="flex h-screen flex-1 flex-col dark:bg-gray-dark dark:text-white"
+  class="flex h-screen flex-col"
   data-testid="accounts"
 >
   <div
@@ -42,7 +42,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
       class="mt-4 flex flex-col text-sm"
     >
       <div
-        class="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-1 dark:bg-gray-900"
+        class="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-2 dark:bg-gray-sidebar"
       >
         <div
           class="ml-2 text-xs"
@@ -147,7 +147,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-1 dark:bg-gray-900"
+        class="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-2 dark:bg-gray-sidebar"
       >
         <div
           class="ml-2 text-xs"
@@ -252,7 +252,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-1 dark:bg-gray-900"
+        class="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-2 dark:bg-gray-sidebar"
       >
         <div
           class="ml-2 text-xs"

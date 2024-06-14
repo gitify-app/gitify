@@ -20,7 +20,7 @@ exports[`routes/Settings.tsx Footer section app version should show production a
 
 exports[`routes/Settings.tsx General should render itself & its children 1`] = `
 <div
-  class="flex h-screen flex-1 flex-col dark:bg-gray-dark dark:text-white"
+  class="flex h-screen flex-col"
   data-testid="settings"
 >
   <div

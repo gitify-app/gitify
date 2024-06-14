@@ -137,7 +137,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
   );
 
   return (
-    <div className="flex-1 bg-white dark:bg-gray-dark dark:text-white">
+    <div>
       <div className="mx-8 mt-4 flex items-center justify-between py-2">
         <button
           type="button"
@@ -158,7 +158,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
         </h3>
       </div>
 
-      <div className="flex-1 px-8">
+      <div className="px-8">
         <Form
           initialValues={{
             hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,

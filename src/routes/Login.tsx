@@ -27,7 +27,7 @@ export const LoginRoute: FC = () => {
   }, []); */
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center bg-white p-4 dark:bg-gray-dark dark:text-white">
+    <div className="flex flex-col items-center justify-center p-4">
       <Logo className="h-16 w-16" isDark />
 
       <div className="my-4 px-2.5 py-1.5 text-center font-semibold">
