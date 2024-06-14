@@ -1,12 +1,8 @@
-import {
-  ArrowLeftIcon,
-  BookIcon,
-  KeyIcon,
-  SignInIcon,
-} from '@primer/octicons-react';
+import { BookIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
 import { type FC, useCallback, useContext, useState } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
+import { Header } from '../components/Header';
 import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
@@ -138,25 +134,10 @@ export const LoginWithPersonalAccessToken: FC = () => {
 
   return (
     <div>
-      <div className="mx-8 mt-4 flex items-center justify-between py-2">
-        <button
-          type="button"
-          className="focus:outline-none"
-          title="Go Back"
-          onClick={() => navigate(-1)}
-        >
-          <ArrowLeftIcon
-            size={20}
-            className="hover:text-gray-400"
-            aria-label="Go Back"
-          />
-        </button>
-
-        <h3 className="justify-center text-lg font-semibold">
-          <KeyIcon size={18} className="mr-2" />
-          Login with Personal Access Token
-        </h3>
-      </div>
+      <Header>
+        <KeyIcon size={18} className="mr-2" />
+        Login with Personal Access Token
+      </Header>
 
       <div className="px-8">
         <Form

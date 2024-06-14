@@ -31,7 +31,7 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             </svg>
           </button>
           <h3
-            class="justify-center text-lg font-semibold"
+            class="text-lg font-semibold"
           >
             <svg
               aria-hidden="true"
@@ -231,7 +231,7 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
           </svg>
         </button>
         <h3
-          class="justify-center text-lg font-semibold"
+          class="text-lg font-semibold"
         >
           <svg
             aria-hidden="true"

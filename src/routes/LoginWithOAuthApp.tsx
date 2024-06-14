@@ -1,12 +1,7 @@
-import {
-  ArrowLeftIcon,
-  BookIcon,
-  PersonIcon,
-  SignInIcon,
-} from '@primer/octicons-react';
+import { BookIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
 import { type FC, useCallback, useContext } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
-import { useNavigate } from 'react-router-dom';
+import { Header } from '../components/Header';
 import { Button } from '../components/fields/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
@@ -58,7 +53,6 @@ export const validate = (values: IValues): IFormErrors => {
 
 export const LoginWithOAuthApp: FC = () => {
   const { loginWithOAuthApp } = useContext(AppContext);
-  const navigate = useNavigate();
 
   const renderForm = (formProps: FormRenderProps) => {
     const { handleSubmit, submitting, pristine, values } = formProps;
@@ -130,26 +124,10 @@ export const LoginWithOAuthApp: FC = () => {
 
   return (
     <div>
-      <div className="mx-8 mt-4 flex items-center justify-between py-2">
-        <button
-          type="button"
-          className="focus:outline-none"
-          title="Go Back"
-          onClick={() => navigate(-1)}
-        >
-          <ArrowLeftIcon
-            size={20}
-            className="hover:text-gray-400"
-            aria-label="Go Back"
-          />
-        </button>
-
-        <h3 className="justify-center text-lg font-semibold">
-          <PersonIcon size={20} className="mr-2" />
-          Login with OAuth App
-        </h3>
-      </div>
-
+      <Header>
+        <PersonIcon size={20} className="mr-2" />
+        Login with OAuth App
+      </Header>
       <div className="px-8">
         <Form
           initialValues={{

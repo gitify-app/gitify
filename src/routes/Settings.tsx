@@ -1,5 +1,4 @@
 import {
-  ArrowLeftIcon,
   CheckIcon,
   CommentIcon,
   IssueClosedIcon,
@@ -17,6 +16,7 @@ import {
   useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Header } from '../components/Header';
 import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
@@ -55,23 +55,7 @@ export const SettingsRoute: FC = () => {
 
   return (
     <div className="flex h-screen flex-col" data-testid="settings">
-      <div className="mx-8 mt-2 flex items-center justify-between py-2">
-        <button
-          type="button"
-          className="focus:outline-none"
-          title="Go Back"
-          onClick={() => navigate(-1)}
-        >
-          <ArrowLeftIcon
-            size={20}
-            className="hover:text-gray-400"
-            aria-label="Go Back"
-          />
-        </button>
-
-        <h3 className="text-lg font-semibold">Settings</h3>
-      </div>
-
+      <Header>Settings</Header>
       <div className="flex-grow overflow-x-auto px-8">
         <fieldset className="mb-3">
           <legend id="appearance" className="mb-1 mt-2 font-semibold">
