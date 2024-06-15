@@ -1,4 +1,4 @@
-name: Run Tests
+name: Linting
 
 on:
   push:
@@ -7,8 +7,8 @@ on:
   pull_request:
 
 jobs:
-  run-unit-tests:
-    name: Run Tests
+  run-linting:
+    name: Linting
     runs-on: ubuntu-latest
 
     steps:
@@ -19,7 +19,4 @@ jobs:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm tsc --noEmit
-      - run: pnpm test -- --coverage --runInBand --verbose
-      - name: Coveralls
-        uses: coverallsapp/github-action@v2
+      - run: pnpm lint:check
