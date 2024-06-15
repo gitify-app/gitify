@@ -8,7 +8,6 @@ on:
 
 jobs:
   run-linting:
-    name: Linting
     runs-on: ubuntu-latest
 
     steps:
