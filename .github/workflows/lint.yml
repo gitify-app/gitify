@@ -8,7 +8,7 @@ on:
 
 jobs:
   lint:
-    name: biomejs check
+    name: biomejs
     runs-on: ubuntu-latest
 
     steps:
