@@ -6,10 +6,10 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="group flex bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
+        class="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="mt-0 flex flex-1 items-center space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
+          class="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
         >
           <img
             alt="gitify-app/notifications-test's avatar"
@@ -25,6 +25,26 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
         <div
           class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
+          <button
+            class="h-full hover:text-green-500 focus:outline-none"
+            title="Hide repository notifications"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-chevron-down"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+              />
+            </svg>
+          </button>
           <button
             class="h-full hover:text-green-500 focus:outline-none"
             title="Mark Repository as Done"
@@ -82,10 +102,10 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
   </body>,
   "container": <div>
     <div
-      class="group flex bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
+      class="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
     >
       <div
-        class="mt-0 flex flex-1 items-center space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
+        class="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
       >
         <img
           alt="gitify-app/notifications-test's avatar"
@@ -101,6 +121,26 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
       <div
         class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
+        <button
+          class="h-full hover:text-green-500 focus:outline-none"
+          title="Hide repository notifications"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-chevron-down"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+            />
+          </svg>
+        </button>
         <button
           class="h-full hover:text-green-500 focus:outline-none"
           title="Mark Repository as Done"
@@ -215,10 +255,10 @@ exports[`components/Repository.tsx should use default repository icon when avata
   "baseElement": <body>
     <div>
       <div
-        class="group flex bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
+        class="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="mt-0 flex flex-1 items-center space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
+          class="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
         >
           <svg
             aria-hidden="true"
@@ -243,6 +283,26 @@ exports[`components/Repository.tsx should use default repository icon when avata
         <div
           class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
+          <button
+            class="h-full hover:text-green-500 focus:outline-none"
+            title="Hide repository notifications"
+            type="button"
+          >
+            <svg
+              aria-hidden="true"
+              class="octicon octicon-chevron-down"
+              fill="currentColor"
+              focusable="false"
+              height="16"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+              />
+            </svg>
+          </button>
           <button
             class="h-full hover:text-green-500 focus:outline-none"
             title="Mark Repository as Done"
@@ -300,10 +360,10 @@ exports[`components/Repository.tsx should use default repository icon when avata
   </body>,
   "container": <div>
     <div
-      class="group flex bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
+      class="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
     >
       <div
-        class="mt-0 flex flex-1 items-center space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
+        class="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
       >
         <svg
           aria-hidden="true"
@@ -328,6 +388,26 @@ exports[`components/Repository.tsx should use default repository icon when avata
       <div
         class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
+        <button
+          class="h-full hover:text-green-500 focus:outline-none"
+          title="Hide repository notifications"
+          type="button"
+        >
+          <svg
+            aria-hidden="true"
+            class="octicon octicon-chevron-down"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M12.78 5.22a.749.749 0 0 1 0 1.06l-4.25 4.25a.749.749 0 0 1-1.06 0L3.22 6.28a.749.749 0 1 1 1.06-1.06L8 8.939l3.72-3.719a.749.749 0 0 1 1.06 0Z"
+            />
+          </svg>
+        </button>
         <button
           class="h-full hover:text-green-500 focus:outline-none"
           title="Mark Repository as Done"
