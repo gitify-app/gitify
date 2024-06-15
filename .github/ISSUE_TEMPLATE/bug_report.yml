@@ -71,8 +71,8 @@ body:
       label: GitHub Account
       description: What GitHub account type are you using?
       options:
-        - GitHub.com
-        - GitHub Enterprise
+        - GitHub Cloud
+        - GitHub Enterprise Server
         - Combination
     validations:
       required: true
