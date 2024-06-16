@@ -370,7 +370,7 @@ describe('components/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.keyDown(screen.getByRole('main'));
+      fireEvent.click(screen.getByRole('main'));
       expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
     });
