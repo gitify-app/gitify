@@ -55,7 +55,10 @@ export const AccountNotifications = (props: IProps) => {
   return (
     <>
       {showAccountHostname && (
-        <div className="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white">
+        <div
+          className="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+          onClick={toggleAccountNotifications}
+        >
           <div>
             <PlatformIcon type={account.platform} size={16} />
             <button
@@ -73,7 +76,7 @@ export const AccountNotifications = (props: IProps) => {
               title={toggleAccountNotificationsLabel}
               onClick={toggleAccountNotifications}
             >
-              <ChevronIcon size={20} />
+              <ChevronIcon size={14} />
             </button>
           </div>
         </div>
