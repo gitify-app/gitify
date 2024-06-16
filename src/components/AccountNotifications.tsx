@@ -31,30 +31,31 @@ export const AccountNotifications = (props: IProps) => {
     ),
   );
 
-  const [showNotifications, setShowNotifications] = useState(true);
+  const [showAccountNotifications, setShowAccountNotifications] =
+    useState(true);
 
-  const toggleNotifications = () => {
-    setShowNotifications(!showNotifications);
+  const toggleAccountNotifications = () => {
+    setShowAccountNotifications(!showAccountNotifications);
   };
 
   const ChevronIcon =
     notifications.length === 0
       ? ChevronLeftIcon
-      : showNotifications
+      : showAccountNotifications
         ? ChevronDownIcon
         : ChevronUpIcon;
 
-  const toggleNotificationsLabel =
+  const toggleAccountNotificationsLabel =
     notifications.length === 0
       ? 'No notifications for account'
-      : showNotifications
+      : showAccountNotifications
         ? 'Hide account notifications'
         : 'Show account notifications';
 
   return (
     <>
       {showAccountHostname && (
-        <div className="flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white">
+        <div className="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white">
           <div>
             <PlatformIcon type={account.platform} size={16} />
             <button
@@ -66,11 +67,12 @@ export const AccountNotifications = (props: IProps) => {
               @{account.user.login}
             </button>
           </div>
-          <div>
+          <div className="opacity-0 transition-opacity group-hover:opacity-80">
             <button
               type="button"
-              title={toggleNotificationsLabel}
-              onClick={toggleNotifications}
+              className="h-full hover:text-green-500 focus:outline-none"
+              title={toggleAccountNotificationsLabel}
+              onClick={toggleAccountNotifications}
             >
               <ChevronIcon size={20} />
             </button>
@@ -78,7 +80,7 @@ export const AccountNotifications = (props: IProps) => {
         </div>
       )}
 
-      {showNotifications &&
+      {showAccountNotifications &&
         Object.values(groupedNotifications).map((repoNotifications) => {
           const repoSlug = repoNotifications[0].repository.full_name;
 
