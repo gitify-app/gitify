@@ -1,0 +1,21 @@
+html.dark::-webkit-scrollbar,
+html.dark div.flex-grow::-webkit-scrollbar {
+    width: 10px;
+}
+
+html.dark::-webkit-scrollbar-track,
+html.dark div.flex-grow::-webkit-scrollbar-track {
+    background-color: #090E15;
+}
+
+html.dark::-webkit-scrollbar-thumb,
+html.dark div.flex-grow::-webkit-scrollbar-thumb {
+    background-color: #24292e;
+    border-radius: 10px;
+}
+
+html.dark::-webkit-scrollbar-thumb:hover,
+html.dark div.flex-grow::-webkit-scrollbar-thumb:hover {
+    background-color: #3a3f44;
+    border-radius: 10px;
+}
