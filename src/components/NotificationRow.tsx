@@ -108,7 +108,7 @@ export const NotificationRow: FC<IProps> = ({ notification }) => {
         className={cn('mr-3 flex w-5 items-center justify-center', iconColor)}
         title={notificationTitle}
       >
-        <NotificationIcon size={18} aria-label={notification.subject.type} />
+        <NotificationIcon size={14} aria-label={notification.subject.type} />
       </div>
 
       <div
@@ -154,7 +154,7 @@ export const NotificationRow: FC<IProps> = ({ notification }) => {
           <div title={reason.description}>{reason.title}</div>
           <div title={updatedLabel}>{updatedAt}</div>
           {settings.showPills && (
-            <div>
+            <div className="flex">
               {notification.subject?.linkedIssues?.length > 0 && (
                 <PillButton
                   title={linkedIssuesPillDescription}
