@@ -45,9 +45,12 @@ export const NotificationRow: FC<IProps> = ({ notification }) => {
     unsubscribeNotification,
   } = useContext(AppContext);
   const [animateExit, setAnimateExit] = useState(false);
+  const [showAsRead, setShowAsRead] = useState(false);
 
   const handleNotification = useCallback(() => {
-    setAnimateExit(true);
+    setAnimateExit(!settings.delayNotificationState);
+    setShowAsRead(settings.delayNotificationState);
+
     openNotification(notification);
 
     if (settings.markAsDoneOnOpen) {
@@ -102,6 +105,7 @@ export const NotificationRow: FC<IProps> = ({ notification }) => {
         'group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker',
         animateExit &&
           'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
+        showAsRead && 'opacity-50 dark:opacity-50',
       )}
     >
       <div
@@ -218,7 +222,8 @@ export const NotificationRow: FC<IProps> = ({ notification }) => {
           className="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Done"
           onClick={() => {
-            setAnimateExit(true);
+            setAnimateExit(!settings.delayNotificationState);
+            setShowAsRead(settings.delayNotificationState);
             markNotificationDone(notification);
           }}
         >
@@ -239,7 +244,8 @@ export const NotificationRow: FC<IProps> = ({ notification }) => {
           className="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Read"
           onClick={() => {
-            setAnimateExit(true);
+            setAnimateExit(!settings.delayNotificationState);
+            setShowAsRead(settings.delayNotificationState);
             markNotificationRead(notification);
           }}
         >

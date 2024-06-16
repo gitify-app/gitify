@@ -122,6 +122,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     settings.participating,
     settings.showBots,
     settings.detailedNotifications,
+    settings.delayNotificationState,
     auth.accounts.length,
   ]);
 
