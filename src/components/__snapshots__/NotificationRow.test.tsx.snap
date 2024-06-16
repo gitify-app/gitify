@@ -18,11 +18,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
-            height="18"
+            height="14"
             role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
-            width="18"
+            width="14"
           >
             <path
               d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -71,7 +71,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             >
               7 years ago
             </div>
-            <div>
+            <div
+              class="flex"
+            >
               <span
                 title="Linked to issues #1, #2"
               >
@@ -262,11 +264,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           class="octicon octicon-issue-opened"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="14"
           role="img"
           style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
-          width="18"
+          width="14"
         >
           <path
             d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -315,7 +317,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           >
             7 years ago
           </div>
-          <div>
+          <div
+            class="flex"
+          >
             <span
               title="Linked to issues #1, #2"
             >
@@ -563,11 +567,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
-            height="18"
+            height="14"
             role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
-            width="18"
+            width="14"
           >
             <path
               d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -616,7 +620,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             >
               7 years ago
             </div>
-            <div>
+            <div
+              class="flex"
+            >
               <span
                 title="Linked to issues #1, #2"
               >
@@ -807,11 +813,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           class="octicon octicon-issue-opened"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="14"
           role="img"
           style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
-          width="18"
+          width="14"
         >
           <path
             d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -860,7 +866,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           >
             7 years ago
           </div>
-          <div>
+          <div
+            class="flex"
+          >
             <span
               title="Linked to issues #1, #2"
             >
@@ -1108,11 +1116,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
-            height="18"
+            height="14"
             role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
-            width="18"
+            width="14"
           >
             <path
               d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -1161,7 +1169,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             >
               7 years ago
             </div>
-            <div>
+            <div
+              class="flex"
+            >
               <span
                 title="Linked to issues #1, #2"
               >
@@ -1327,11 +1337,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           class="octicon octicon-issue-opened"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="14"
           role="img"
           style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
-          width="18"
+          width="14"
         >
           <path
             d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -1380,7 +1390,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           >
             7 years ago
           </div>
-          <div>
+          <div
+            class="flex"
+          >
             <span
               title="Linked to issues #1, #2"
             >
@@ -1603,11 +1615,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
-            height="18"
+            height="14"
             role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
-            width="18"
+            width="14"
           >
             <path
               d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -1656,7 +1668,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
             >
               7 years ago
             </div>
-            <div>
+            <div
+              class="flex"
+            >
               <span
                 title="Linked to issues #1, #2"
               >
@@ -1874,11 +1888,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
           class="octicon octicon-issue-opened"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="14"
           role="img"
           style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
-          width="18"
+          width="14"
         >
           <path
             d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -1927,7 +1941,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
           >
             7 years ago
           </div>
-          <div>
+          <div
+            class="flex"
+          >
             <span
               title="Linked to issues #1, #2"
             >
@@ -2202,11 +2218,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
-            height="18"
+            height="14"
             role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
-            width="18"
+            width="14"
           >
             <path
               d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -2255,7 +2271,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             >
               7 years ago
             </div>
-            <div>
+            <div
+              class="flex"
+            >
               <span
                 title="Linked to issues #1, #2"
               >
@@ -2421,11 +2439,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           class="octicon octicon-issue-opened"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="14"
           role="img"
           style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
-          width="18"
+          width="14"
         >
           <path
             d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -2474,7 +2492,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           >
             7 years ago
           </div>
-          <div>
+          <div
+            class="flex"
+          >
             <span
               title="Linked to issues #1, #2"
             >
@@ -2697,11 +2717,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
-            height="18"
+            height="14"
             role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
-            width="18"
+            width="14"
           >
             <path
               d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -2750,7 +2770,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             >
               7 years ago
             </div>
-            <div>
+            <div
+              class="flex"
+            >
               <span
                 title="Linked to issue #1"
               >
@@ -2916,11 +2938,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           class="octicon octicon-issue-opened"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="14"
           role="img"
           style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
-          width="18"
+          width="14"
         >
           <path
             d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -2969,7 +2991,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           >
             7 years ago
           </div>
-          <div>
+          <div
+            class="flex"
+          >
             <span
               title="Linked to issue #1"
             >
@@ -3192,11 +3216,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
-            height="18"
+            height="14"
             role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
-            width="18"
+            width="14"
           >
             <path
               d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -3245,7 +3269,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             >
               7 years ago
             </div>
-            <div>
+            <div
+              class="flex"
+            >
               <span
                 title="Linked to issues #1, #2"
               >
@@ -3487,11 +3513,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           class="octicon octicon-issue-opened"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="14"
           role="img"
           style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
-          width="18"
+          width="14"
         >
           <path
             d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -3540,7 +3566,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           >
             7 years ago
           </div>
-          <div>
+          <div
+            class="flex"
+          >
             <span
               title="Linked to issues #1, #2"
             >
@@ -3839,11 +3867,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
-            height="18"
+            height="14"
             role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
-            width="18"
+            width="14"
           >
             <path
               d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -3892,7 +3920,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             >
               7 years ago
             </div>
-            <div>
+            <div
+              class="flex"
+            >
               <span
                 title="Linked to issues #1, #2"
               >
@@ -4134,11 +4164,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           class="octicon octicon-issue-opened"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="14"
           role="img"
           style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
-          width="18"
+          width="14"
         >
           <path
             d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -4187,7 +4217,9 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           >
             7 years ago
           </div>
-          <div>
+          <div
+            class="flex"
+          >
             <span
               title="Linked to issues #1, #2"
             >
@@ -4486,11 +4518,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
-            height="18"
+            height="14"
             role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
-            width="18"
+            width="14"
           >
             <path
               d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -4625,11 +4657,11 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
           class="octicon octicon-issue-opened"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="14"
           role="img"
           style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
-          width="18"
+          width="14"
         >
           <path
             d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -4821,11 +4853,11 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
-            height="18"
+            height="14"
             role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
-            width="18"
+            width="14"
           >
             <path
               d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -4870,7 +4902,9 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
             >
               7 years ago
             </div>
-            <div>
+            <div
+              class="flex"
+            >
               <span
                 title="octocat approved these changes"
               >
@@ -5008,11 +5042,11 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
           class="octicon octicon-issue-opened"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="14"
           role="img"
           style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
-          width="18"
+          width="14"
         >
           <path
             d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -5057,7 +5091,9 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
           >
             7 years ago
           </div>
-          <div>
+          <div
+            class="flex"
+          >
             <span
               title="octocat approved these changes"
             >
@@ -5252,11 +5288,11 @@ exports[`components/NotificationRow.tsx should render itself & its children when
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
-            height="18"
+            height="14"
             role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
-            width="18"
+            width="14"
           >
             <path
               d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -5301,7 +5337,9 @@ exports[`components/NotificationRow.tsx should render itself & its children when
             >
               7 years ago
             </div>
-            <div>
+            <div
+              class="flex"
+            >
               <span
                 title="octocat approved these changes"
               >
@@ -5439,11 +5477,11 @@ exports[`components/NotificationRow.tsx should render itself & its children when
           class="octicon octicon-issue-opened"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="14"
           role="img"
           style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
-          width="18"
+          width="14"
         >
           <path
             d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -5488,7 +5526,9 @@ exports[`components/NotificationRow.tsx should render itself & its children when
           >
             7 years ago
           </div>
-          <div>
+          <div
+            class="flex"
+          >
             <span
               title="octocat approved these changes"
             >
@@ -5683,11 +5723,11 @@ exports[`components/NotificationRow.tsx should render itself & its children with
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
-            height="18"
+            height="14"
             role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
-            width="18"
+            width="14"
           >
             <path
               d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -5736,7 +5776,9 @@ exports[`components/NotificationRow.tsx should render itself & its children with
             >
               7 years ago
             </div>
-            <div>
+            <div
+              class="flex"
+            >
               <span
                 title="octocat approved these changes"
               >
@@ -5874,11 +5916,11 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           class="octicon octicon-issue-opened"
           fill="currentColor"
           focusable="false"
-          height="18"
+          height="14"
           role="img"
           style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
-          width="18"
+          width="14"
         >
           <path
             d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -5927,7 +5969,9 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           >
             7 years ago
           </div>
-          <div>
+          <div
+            class="flex"
+          >
             <span
               title="octocat approved these changes"
             >
