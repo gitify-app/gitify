@@ -51,7 +51,6 @@ app.whenReady().then(async () => {
   mb.on('ready', () => {
     autoUpdater.checkForUpdatesAndNotify();
 
-    mb.hideWindow();
     mb.app.setAppUserModelId('com.electron.gitify');
 
     // Tray configuration

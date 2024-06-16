@@ -38,6 +38,7 @@ body:
       label: Gitify Version
       description: What version of Gitify are you using?
       options:
+        - 5.8.1
         - 5.8.0
         - 5.7.0
         - 5.6.0
@@ -71,8 +72,8 @@ body:
       label: GitHub Account
       description: What GitHub account type are you using?
       options:
-        - GitHub.com
-        - GitHub Enterprise
+        - GitHub Cloud
+        - GitHub Enterprise Server
         - Combination
     validations:
       required: true
