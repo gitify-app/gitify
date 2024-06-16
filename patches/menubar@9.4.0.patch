@@ -1,0 +1,13 @@
+diff --git a/lib/util/getWindowPosition.js b/lib/util/getWindowPosition.js
+index ea754091aeeb953db8a439a609f047ddf65b7cfc..00c21a8538530c4ea8e502a8c0efa1c9b5fbc78c 100644
+--- a/lib/util/getWindowPosition.js
++++ b/lib/util/getWindowPosition.js
+@@ -72,7 +72,7 @@ function getWindowPosition(tray) {
+                 return isLinux ? 'topRight' : 'trayCenter';
+             }
+             if (traySide === 'bottom') {
+-                return isLinux ? 'bottomRight' : 'trayBottomCenter';
++                return 'trayBottomCenter';
+             }
+             if (traySide === 'left') {
+                 return 'bottomLeft';

@@ -4,6 +4,11 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  menubar@9.4.0:
+    hash: tg6p5suscg27k4ubqfjwk3f7uu
+    path: patches/menubar@9.4.0.patch
+
 importers:
 
   .:
@@ -31,7 +36,7 @@ importers:
         version: 4.20.10
       menubar:
         specifier: 9.4.0
-        version: 9.4.0(electron@31.0.1)
+        version: 9.4.0(patch_hash=tg6p5suscg27k4ubqfjwk3f7uu)(electron@31.0.1)
       nprogress:
         specifier: 0.2.0
         version: 0.2.0
@@ -5662,7 +5667,7 @@ snapshots:
       escape-string-regexp: 4.0.0
     optional: true
 
-  menubar@9.4.0(electron@31.0.1):
+  menubar@9.4.0(patch_hash=tg6p5suscg27k4ubqfjwk3f7uu)(electron@31.0.1):
     dependencies:
       electron: 31.0.1
       electron-positioner: 4.1.0
