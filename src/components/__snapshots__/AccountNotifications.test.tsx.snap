@@ -8,7 +8,9 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
       <div
         class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
       >
-        <div>
+        <div
+          class="flex gap-3"
+        >
           <span
             class="mr-1"
             title="GitHub Cloud"
@@ -71,7 +73,9 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
     <div
       class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
     >
-      <div>
+      <div
+        class="flex gap-3"
+      >
         <span
           class="mr-1"
           title="GitHub Cloud"
@@ -191,7 +195,9 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
       <div
         class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
       >
-        <div>
+        <div
+          class="flex gap-3"
+        >
           <span
             class="mr-1"
             title="GitHub Cloud"
@@ -251,7 +257,9 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
     <div
       class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
     >
-      <div>
+      <div
+        class="flex gap-3"
+      >
         <span
           class="mr-1"
           title="GitHub Cloud"
@@ -368,7 +376,9 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
       <div
         class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
       >
-        <div>
+        <div
+          class="flex gap-3"
+        >
           <span
             class="mr-1"
             title="GitHub Cloud"
@@ -427,7 +437,9 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
       <div
         class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
       >
-        <div>
+        <div
+          class="flex gap-3"
+        >
           <span
             class="mr-1"
             title="GitHub Cloud"
@@ -490,7 +502,9 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
     <div
       class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
     >
-      <div>
+      <div
+        class="flex gap-3"
+      >
         <span
           class="mr-1"
           title="GitHub Cloud"
