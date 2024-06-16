@@ -6,10 +6,6 @@ import { removeNotification } from './remove-notification';
 
 describe('utils/remove-notification.ts', () => {
   it('should remove a notification if it exists', () => {
-    const mockElement = document.createElement('div');
-    mockElement.id = mockSingleAccountNotifications[0].notifications[0].id;
-    jest.spyOn(document, 'getElementById').mockReturnValue(mockElement);
-
     expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
     const result = removeNotification(

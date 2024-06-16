@@ -5,6 +5,3 @@ export const BUTTON_SIDEBAR_CLASS_NAME =
   'flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none disabled:text-gray-500 disabled:cursor-default';
 
 export const READ_NOTIFICATION_CLASS_NAME = 'opacity-50 dark:opacity-50';
-
-export const ANIMATE_NOTIFICATION_CLASS_NAME =
-  'translate-x-full opacity-0 transition duration-[350ms] ease-in-out';

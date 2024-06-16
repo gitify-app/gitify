@@ -2,7 +2,6 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 import axios, { AxiosError } from 'axios';
 import nock from 'nock';
 
-import { mockSingleAccountNotifications } from '../__mocks__/notifications-mocks';
 import {
   mockAuth,
   mockGitHubCloudAccount,
@@ -300,10 +299,6 @@ describe('hooks/useNotifications.ts', () => {
 
   describe('removeNotificationFromState', () => {
     it('should remove a notification from state', async () => {
-      const mockElement = document.createElement('div');
-      mockElement.id = mockSingleAccountNotifications[0].notifications[0].id;
-      jest.spyOn(document, 'getElementById').mockReturnValue(mockElement);
-
       const notifications = [
         { id: 1, title: 'This is a notification.' },
         { id: 2, title: 'This is another one.' },

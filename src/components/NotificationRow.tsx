@@ -8,7 +8,13 @@ import {
   ReadIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import { type FC, type MouseEvent, useCallback, useContext } from 'react';
+import {
+  type FC,
+  type MouseEvent,
+  useCallback,
+  useContext,
+  useState,
+} from 'react';
 import { AppContext } from '../context/App';
 import { IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
@@ -38,8 +44,10 @@ export const NotificationRow: FC<IProps> = ({ notification }) => {
     markNotificationDone,
     unsubscribeNotification,
   } = useContext(AppContext);
+  const [animateExit, setAnimateExit] = useState(false);
 
   const handleNotification = useCallback(() => {
+    setAnimateExit(!settings.delayNotificationState);
     openNotification(notification);
 
     if (settings.markAsDoneOnOpen) {
@@ -90,9 +98,11 @@ export const NotificationRow: FC<IProps> = ({ notification }) => {
   return (
     <div
       id={notification.id}
-      className={
-        'group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker'
-      }
+      className={cn(
+        'group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker',
+        animateExit &&
+          'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
+      )}
     >
       <div
         className={cn('mr-3 flex w-5 items-center justify-center', iconColor)}
@@ -208,6 +218,7 @@ export const NotificationRow: FC<IProps> = ({ notification }) => {
           className="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Done"
           onClick={() => {
+            setAnimateExit(!settings.delayNotificationState);
             markNotificationDone(notification);
           }}
         >
@@ -228,6 +239,7 @@ export const NotificationRow: FC<IProps> = ({ notification }) => {
           className="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Read"
           onClick={() => {
+            setAnimateExit(!settings.delayNotificationState);
             markNotificationRead(notification);
           }}
         >
