@@ -17,7 +17,7 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
             src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
           />
           <span
-            class="cursor-pointer truncate"
+            class="cursor-pointer truncate opacity-90"
           >
             gitify-app/notifications-test
           </span>
@@ -110,7 +110,7 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
           src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
         />
         <span
-          class="cursor-pointer truncate"
+          class="cursor-pointer truncate opacity-90"
         >
           gitify-app/notifications-test
         </span>
@@ -269,7 +269,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
             />
           </svg>
           <span
-            class="cursor-pointer truncate"
+            class="cursor-pointer truncate opacity-90"
           >
             gitify-app/notifications-test
           </span>
@@ -364,7 +364,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
             />
           </svg>
           <span
-            class="cursor-pointer truncate"
+            class="cursor-pointer truncate opacity-90"
           >
             gitify-app/notifications-test
           </span>
@@ -466,7 +466,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
           />
         </svg>
         <span
-          class="cursor-pointer truncate"
+          class="cursor-pointer truncate opacity-90"
         >
           gitify-app/notifications-test
         </span>
@@ -625,7 +625,7 @@ exports[`components/Repository.tsx should use default repository icon when avata
             />
           </svg>
           <span
-            class="cursor-pointer truncate"
+            class="cursor-pointer truncate opacity-90"
           >
             gitify-app/notifications-test
           </span>
@@ -727,7 +727,7 @@ exports[`components/Repository.tsx should use default repository icon when avata
           />
         </svg>
         <span
-          class="cursor-pointer truncate"
+          class="cursor-pointer truncate opacity-90"
         >
           gitify-app/notifications-test
         </span>

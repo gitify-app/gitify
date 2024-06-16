@@ -65,6 +65,7 @@ export const AccountNotifications = (props: IProps) => {
               type="button"
               title="Open Profile"
               onClick={() => openAccountProfile(account)}
+              className="opacity-80"
             >
               @{account.user.login}
             </button>

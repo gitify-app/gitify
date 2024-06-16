@@ -350,6 +350,35 @@ describe('components/NotificationRow.tsx', () => {
       expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
     });
 
+    it('should open a notification in the browser - delay notification setting enabled', () => {
+      const removeNotificationFromState = jest.fn();
+
+      const props = {
+        notification: mockSingleNotification,
+        account: mockGitHubCloudAccount,
+      };
+
+      render(
+        <AppContext.Provider
+          value={{
+            settings: {
+              ...mockSettings,
+              markAsDoneOnOpen: false,
+              delayNotificationState: true,
+            },
+            removeNotificationFromState,
+            auth: mockAuth,
+          }}
+        >
+          <NotificationRow {...props} />
+        </AppContext.Provider>,
+      );
+
+      fireEvent.click(screen.getByRole('main'));
+      expect(links.openNotification).toHaveBeenCalledTimes(1);
+      expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
+    });
+
     it('should open a notification in the browser - key down', () => {
       const removeNotificationFromState = jest.fn();
 

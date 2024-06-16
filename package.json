@@ -154,6 +154,6 @@
   },
   "packageManager": "pnpm@9.3.0",
   "lint-staged": {
-    "*.{html,js,json,ts,tsx}": "biome format --fix"
+    "*.{js,json,ts,tsx}": "biome format --fix"
   }
 }
