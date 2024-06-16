@@ -42,7 +42,7 @@ export const RepositoryNotifications: FC<IProps> = ({
             <MarkGithubIcon size={18} />
           )}
           <span
-            className="cursor-pointer truncate"
+            className="cursor-pointer truncate opacity-90"
             onClick={() => openRepository(repoNotifications[0].repository)}
             onKeyDown={() => openRepository(repoNotifications[0].repository)}
           >

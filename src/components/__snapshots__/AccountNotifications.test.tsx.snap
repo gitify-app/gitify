@@ -29,6 +29,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </svg>
           </span>
           <button
+            class="opacity-80"
             title="Open Profile"
             type="button"
           >
@@ -88,6 +89,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </svg>
         </span>
         <button
+          class="opacity-80"
           title="Open Profile"
           type="button"
         >
@@ -204,6 +206,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </svg>
           </span>
           <button
+            class="opacity-80"
             title="Open Profile"
             type="button"
           >
@@ -260,6 +263,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </svg>
         </span>
         <button
+          class="opacity-80"
           title="Open Profile"
           type="button"
         >
@@ -373,6 +377,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
             </svg>
           </span>
           <button
+            class="opacity-80"
             title="Open Profile"
             type="button"
           >
@@ -428,6 +433,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
             </svg>
           </span>
           <button
+            class="opacity-80"
             title="Open Profile"
             type="button"
           >
@@ -487,6 +493,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
           </svg>
         </span>
         <button
+          class="opacity-80"
           title="Open Profile"
           type="button"
         >
