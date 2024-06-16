@@ -275,7 +275,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
             />
           </svg>
           <span
-            class="cursor-pointer truncate"
+            class="cursor-pointer truncate opacity-90"
           >
             gitify-app/notifications-test
           </span>
@@ -373,7 +373,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
             />
           </svg>
           <span
-            class="cursor-pointer truncate"
+            class="cursor-pointer truncate opacity-90"
           >
             gitify-app/notifications-test
           </span>
@@ -478,7 +478,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
           />
         </svg>
         <span
-          class="cursor-pointer truncate"
+          class="cursor-pointer truncate opacity-90"
         >
           gitify-app/notifications-test
         </span>
