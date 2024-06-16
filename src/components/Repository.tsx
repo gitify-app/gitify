@@ -1,5 +1,11 @@
-import { CheckIcon, MarkGithubIcon, ReadIcon } from '@primer/octicons-react';
-import { type FC, useCallback, useContext } from 'react';
+import {
+  CheckIcon,
+  ChevronDownIcon,
+  ChevronUpIcon,
+  MarkGithubIcon,
+  ReadIcon,
+} from '@primer/octicons-react';
+import { type FC, useCallback, useContext, useState } from 'react';
 import { AppContext } from '../context/App';
 import type { Notification } from '../typesGitHub';
 import { openRepository } from '../utils/links';
@@ -28,10 +34,25 @@ export const RepositoryNotifications: FC<IProps> = ({
   const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
   const repoSlug = repoNotifications[0].repository.full_name;
 
+  const [showRepositoryNotifications, setShowRepositoryNotifications] =
+    useState(true);
+
+  const toggleRepositoryNotifications = () => {
+    setShowRepositoryNotifications(!showRepositoryNotifications);
+  };
+
+  const ChevronIcon = showRepositoryNotifications
+    ? ChevronDownIcon
+    : ChevronUpIcon;
+
+  const toggleRepositoryNotificationsLabel = showRepositoryNotifications
+    ? 'Hide repository notifications'
+    : 'Show repository notifications';
+
   return (
     <>
-      <div className="group flex bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white">
-        <div className="mt-0 flex flex-1 items-center space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium">
+      <div className="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white">
+        <div className="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium">
           {avatarUrl ? (
             <img
               className="size-5 rounded"
@@ -42,7 +63,7 @@ export const RepositoryNotifications: FC<IProps> = ({
             <MarkGithubIcon size={18} />
           )}
           <span
-            className="cursor-pointer truncate"
+            className="cursor-pointer truncate opacity-90"
             onClick={() => openRepository(repoNotifications[0].repository)}
             onKeyDown={() => openRepository(repoNotifications[0].repository)}
           >
@@ -51,6 +72,14 @@ export const RepositoryNotifications: FC<IProps> = ({
         </div>
 
         <div className="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80">
+          <button
+            type="button"
+            className="h-full hover:text-green-500 focus:outline-none"
+            title={toggleRepositoryNotificationsLabel}
+            onClick={toggleRepositoryNotifications}
+          >
+            <ChevronIcon size={16} />
+          </button>
           <button
             type="button"
             className="h-full hover:text-green-500 focus:outline-none"
@@ -73,9 +102,10 @@ export const RepositoryNotifications: FC<IProps> = ({
         </div>
       </div>
 
-      {repoNotifications.map((obj) => (
-        <NotificationRow key={obj.id} notification={obj} />
-      ))}
+      {showRepositoryNotifications &&
+        repoNotifications.map((obj) => (
+          <NotificationRow key={obj.id} notification={obj} />
+        ))}
     </>
   );
 };

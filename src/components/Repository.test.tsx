@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { act, fireEvent, render, screen } from '@testing-library/react';
 import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import type { Link } from '../types';
@@ -89,6 +89,17 @@ describe('components/Repository.tsx', () => {
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should toggle account notifications visibility', async () => {
+    await act(async () => {
+      render(<RepositoryNotifications {...props} />);
+    });
+
+    fireEvent.click(screen.getByTitle('Hide repository notifications'));
+
+    const tree = render(<RepositoryNotifications {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });
