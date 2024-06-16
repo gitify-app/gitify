@@ -118,7 +118,6 @@ export const NotificationRow: FC<IProps> = ({ notification }) => {
       <div
         className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         onClick={() => handleNotification()}
-        onKeyDown={() => handleNotification()}
       >
         <div
           className="mb-1 cursor-pointer truncate text-sm"
@@ -232,15 +231,6 @@ export const NotificationRow: FC<IProps> = ({ notification }) => {
 
         <button
           type="button"
-          className="h-full hover:text-red-500 focus:outline-none"
-          title="Unsubscribe from Thread"
-          onClick={unsubscribeFromThread}
-        >
-          <BellSlashIcon size={14} aria-label="Unsubscribe from Thread" />
-        </button>
-
-        <button
-          type="button"
           className="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Read"
           onClick={() => {
@@ -250,6 +240,15 @@ export const NotificationRow: FC<IProps> = ({ notification }) => {
           }}
         >
           <ReadIcon size={14} aria-label="Mark as Read" />
+        </button>
+
+        <button
+          type="button"
+          className="h-full hover:text-red-500 focus:outline-none"
+          title="Unsubscribe from Thread"
+          onClick={unsubscribeFromThread}
+        >
+          <BellSlashIcon size={14} aria-label="Unsubscribe from Thread" />
         </button>
       </div>
     </div>

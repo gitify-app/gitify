@@ -51,7 +51,10 @@ export const RepositoryNotifications: FC<IProps> = ({
 
   return (
     <>
-      <div className="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white">
+      <div
+        className="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
+        onClick={toggleRepositoryNotifications}
+      >
         <div className="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium">
           {avatarUrl ? (
             <img
@@ -65,7 +68,6 @@ export const RepositoryNotifications: FC<IProps> = ({
           <span
             className="cursor-pointer truncate opacity-90"
             onClick={() => openRepository(repoNotifications[0].repository)}
-            onKeyDown={() => openRepository(repoNotifications[0].repository)}
           >
             {repoName}
           </span>
@@ -75,21 +77,11 @@ export const RepositoryNotifications: FC<IProps> = ({
           <button
             type="button"
             className="h-full hover:text-green-500 focus:outline-none"
-            title={toggleRepositoryNotificationsLabel}
-            onClick={toggleRepositoryNotifications}
-          >
-            <ChevronIcon size={16} />
-          </button>
-          <button
-            type="button"
-            className="h-full hover:text-green-500 focus:outline-none"
             title="Mark Repository as Done"
             onClick={markRepoAsDone}
           >
             <CheckIcon size={16} aria-label="Mark Repository as Done" />
           </button>
-
-          <div className="w-[14px]" />
 
           <button
             type="button"
@@ -98,6 +90,15 @@ export const RepositoryNotifications: FC<IProps> = ({
             onClick={markRepoAsRead}
           >
             <ReadIcon size={14} aria-label="Mark Repository as Read" />
+          </button>
+
+          <button
+            type="button"
+            className="h-full hover:text-green-500 focus:outline-none"
+            title={toggleRepositoryNotificationsLabel}
+            onClick={toggleRepositoryNotifications}
+          >
+            <ChevronIcon size={14} />
           </button>
         </div>
       </div>

@@ -11,6 +11,9 @@
         "noUnusedFunctionParameters": "error",
         "useDefaultSwitchClause": "error"
       },
+      "a11y": {
+        "useKeyWithClickEvents": "off"
+      },
       "correctness": {
         "useExhaustiveDependencies": {
           "level": "warn",
