@@ -232,7 +232,10 @@ export const SettingsRoute: FC = () => {
             tooltip={
               <div>
                 When enabled you can choose to use the hotkeys{' '}
-                {Constants.DEFAULT_KEYBOARD_SHORTCUT} to show or hide Gitify.
+                <span className="text-orange-600">
+                  {Constants.DEFAULT_KEYBOARD_SHORTCUT}'
+                </span>{' '}
+                to show or hide Gitify.
               </div>
             }
           />
