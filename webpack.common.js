@@ -1,3 +1,5 @@
+// @ts-check
+
 const path = require('node:path');
 const webpack = require('webpack');
 
