@@ -1,6 +1,8 @@
 import {
   BellIcon,
   GearIcon,
+  GitPullRequestIcon,
+  IssueOpenedIcon,
   SyncIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
@@ -11,7 +13,12 @@ import { AppContext } from '../context/App';
 import { BUTTON_SIDEBAR_CLASS_NAME } from '../styles/gitify';
 import { cn } from '../utils/cn';
 import { quitApp } from '../utils/comms';
-import { openGitHubNotifications, openGitifyRepository } from '../utils/links';
+import {
+  openGitHubIssues,
+  openGitHubNotifications,
+  openGitHubPulls,
+  openGitifyRepository,
+} from '../utils/links';
 import { getNotificationCount } from '../utils/notifications';
 
 export const Sidebar: FC = () => {
@@ -33,6 +40,11 @@ export const Sidebar: FC = () => {
     return getNotificationCount(notifications);
   }, [notifications]);
 
+  const hasNotifications = useMemo(
+    () => notificationsCount > 0,
+    [notificationsCount],
+  );
+
   return (
     <div className="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar">
       <div className="flex flex-1 flex-col items-center py-4">
@@ -50,7 +62,7 @@ export const Sidebar: FC = () => {
           type="button"
           className={cn(
             'my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold',
-            notificationsCount > 0 ? 'text-green-500' : 'text-white',
+            hasNotifications ? 'text-green-500' : 'text-white',
           )}
           onClick={() => openGitHubNotifications()}
           title={`${notificationsCount} Unread Notifications`}
@@ -59,7 +71,25 @@ export const Sidebar: FC = () => {
             size={12}
             aria-label={`${notificationsCount} Unread Notifications`}
           />
-          {notificationsCount > 0 && notificationsCount}
+          {hasNotifications && notificationsCount}
+        </button>
+
+        <button
+          type="button"
+          className="my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold text-white"
+          onClick={() => openGitHubIssues()}
+          title="My Issues"
+        >
+          <IssueOpenedIcon size={12} aria-label="My Issues" />
+        </button>
+
+        <button
+          type="button"
+          className="my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold text-white"
+          onClick={() => openGitHubPulls()}
+          title="My Pull Requests"
+        >
+          <GitPullRequestIcon size={12} aria-label="My Pull Requests" />
         </button>
       </div>
 

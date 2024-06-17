@@ -146,6 +146,50 @@ describe('components/Sidebar.tsx', () => {
     );
   });
 
+  it('opens my github issues page', () => {
+    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
+    render(
+      <AppContext.Provider
+        value={{
+          isLoggedIn: true,
+          notifications: mockAccountNotifications,
+        }}
+      >
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+    fireEvent.click(screen.getByLabelText('My Issues'));
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
+      'https://github.com/issues',
+    );
+  });
+
+  it('opens my github pull requests page', () => {
+    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
+    render(
+      <AppContext.Provider
+        value={{
+          isLoggedIn: true,
+          notifications: mockAccountNotifications,
+        }}
+      >
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+    fireEvent.click(screen.getByLabelText('My Pull Requests'));
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
+      'https://github.com/pulls',
+    );
+  });
+
   it('should quit the app', () => {
     const quitAppMock = jest.spyOn(comms, 'quitApp');
 
