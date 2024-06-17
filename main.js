@@ -1,20 +1,25 @@
-const { ipcMain, app, nativeTheme, globalShortcut } = require('electron');
+const {
+  ipcMain: ipc,
+  app,
+  nativeTheme,
+  globalShortcut,
+  Menu,
+} = require('electron/main');
 const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('node:path');
 
+// TODO: Remove @electron/remote use - see #650
 require('@electron/remote/main').initialize();
 
-app.setAppUserModelId('com.electron.gitify');
-
-const iconIdle = path.join(
+const idleIcon = path.join(
   __dirname,
   'assets',
   'images',
   'tray-idleTemplate.png',
 );
-const iconActive = path.join(__dirname, 'assets', 'images', 'tray-active.png');
+const activeIcon = path.join(__dirname, 'assets', 'images', 'tray-active.png');
 
 const browserWindowOpts = {
   width: 500,
@@ -24,100 +29,127 @@ const browserWindowOpts = {
   resizable: false,
   webPreferences: {
     enableRemoteModule: true,
-    overlayScrollbars: true,
     nodeIntegration: true,
     contextIsolation: false,
   },
 };
 
-app.on('ready', async () => {
+const contextMenu = Menu.buildFromTemplate([
+  {
+    label: 'Quit',
+    click: () => {
+      app.quit();
+    },
+  },
+]);
+
+app.whenReady().then(async () => {
   await onFirstRunMaybe();
-});
 
-const menubarApp = menubar({
-  icon: iconIdle,
-  index: `file://${__dirname}/index.html`,
-  browserWindow: browserWindowOpts,
-  preloadWindow: true,
-  showDockIcon: false,
-});
+  const mb = menubar({
+    icon: idleIcon,
+    index: `file://${__dirname}/index.html`,
+    browserWindow: browserWindowOpts,
+    preloadWindow: true,
+    showDockIcon: false,
+  });
 
-menubarApp.on('ready', () => {
-  menubarApp.tray.setIgnoreDoubleClickEvents(true);
+  mb.on('ready', () => {
+    autoUpdater.checkForUpdatesAndNotify();
 
-  autoUpdater.checkForUpdatesAndNotify();
+    mb.app.setAppUserModelId('com.electron.gitify');
+
+    // Tray configuration
+    mb.tray.setIgnoreDoubleClickEvents(true);
+    mb.tray.on('right-click', (_event, bounds) => {
+      mb.tray.popUpContextMenu(contextMenu, { x: bounds.x, y: bounds.y });
+    });
+
+    // Force the window to retrieve its previous zoom factor
+    mb.window.webContents.setZoomFactor(mb.window.webContents.getZoomFactor());
+
+    // Custom key events
+    mb.window.webContents.on('before-input-event', (event, input) => {
+      if (input.key === 'Escape') {
+        mb.window.hide();
+        event.preventDefault();
+      }
+    });
+
+    // DevTools configuration
+    mb.window.webContents.on('devtools-opened', () => {
+      mb.window.setSize(800, 600);
+      mb.window.center();
+      mb.window.resizable = true;
+    });
+
+    mb.window.webContents.on('devtools-closed', () => {
+      const trayBounds = mb.tray.getBounds();
+      mb.window.setSize(browserWindowOpts.width, browserWindowOpts.height);
+      mb.positioner.move('trayCenter', trayBounds);
+      mb.window.resizable = false;
+    });
+  });
 
   nativeTheme.on('updated', () => {
     if (nativeTheme.shouldUseDarkColors) {
-      menubarApp.window.webContents.send('update-native-theme', 'DARK');
+      mb.window.webContents.send('gitify:update-theme', 'DARK');
     } else {
-      menubarApp.window.webContents.send('update-native-theme', 'LIGHT');
+      mb.window.webContents.send('gitify:update-theme', 'LIGHT');
     }
   });
 
-  ipcMain.handle('get-platform', async () => {
-    return process.platform;
-  });
-  ipcMain.handle('get-app-version', async () => {
-    return app.getVersion();
+  /**
+   * Gitify custom IPC events
+   */
+  ipc.handle('gitify:version', () => app.getVersion());
+
+  ipc.on('gitify:window-show', () => mb.showWindow());
+
+  ipc.on('gitify:window-hide', () => mb.hideWindow());
+
+  ipc.on('gitify:quit', () => mb.app.quit());
+
+  ipc.on('gitify:icon-active', () => {
+    if (!mb.tray.isDestroyed()) {
+      mb.tray.setImage(activeIcon);
+    }
   });
 
-  ipcMain.on('reopen-window', () => menubarApp.showWindow());
-  ipcMain.on('hide-window', () => menubarApp.hideWindow());
+  ipc.on('gitify:icon-idle', () => {
+    if (!mb.tray.isDestroyed()) {
+      mb.tray.setImage(idleIcon);
+    }
+  });
 
-  ipcMain.on('app-quit', () => menubarApp.app.quit());
-  ipcMain.on('update-icon', (_, arg) => {
-    if (!menubarApp.tray.isDestroyed()) {
-      if (arg === 'TrayActive') {
-        menubarApp.tray.setImage(iconActive);
-      } else {
-        menubarApp.tray.setImage(iconIdle);
+  ipc.on('gitify:update-title', (_, title) => {
+    if (!mb.tray.isDestroyed()) {
+      mb.tray.setTitle(title);
+    }
+  });
+
+  ipc.on(
+    'gitify:update-keyboard-shortcut',
+    (_, { enabled, keyboardShortcut }) => {
+      console.log('enabled', enabled);
+
+      console.log('keyboardShortcut', keyboardShortcut);
+      if (!enabled) {
+        globalShortcut.unregister(keyboardShortcut);
+        return;
       }
-    }
-  });
-  ipcMain.on('update-title', (_, title) => {
-    if (!menubarApp.tray.isDestroyed()) {
-      menubarApp.tray.setTitle(title);
-    }
-  });
-  ipcMain.on('update-kbd-shortcut', (_, { enabled, kbdShortcut }) => {
-    if (!enabled) {
-      globalShortcut.unregister(kbdShortcut);
-      return;
-    }
 
-    globalShortcut.register(kbdShortcut, () => {
-      if (menubarApp.window.isVisible()) {
-        menubarApp.hideWindow();
-      } else {
-        menubarApp.showWindow();
-      }
-    });
-  });
-  ipcMain.on('set-login-item-settings', (event, settings) => {
+      globalShortcut.register(keyboardShortcut, () => {
+        if (mb.window.isVisible()) {
+          mb.hideWindow();
+        } else {
+          mb.showWindow();
+        }
+      });
+    },
+  );
+
+  ipc.on('gitify:update-auto-launch', (_, settings) => {
     app.setLoginItemSettings(settings);
-  });
-
-  menubarApp.window.webContents.on('devtools-opened', () => {
-    menubarApp.window.setSize(800, 600);
-    menubarApp.window.center();
-    menubarApp.window.resizable = true;
-  });
-
-  menubarApp.window.webContents.on('devtools-closed', () => {
-    const trayBounds = menubarApp.tray.getBounds();
-    menubarApp.window.setSize(
-      browserWindowOpts.width,
-      browserWindowOpts.height,
-    );
-    menubarApp.positioner.move('trayCenter', trayBounds);
-    menubarApp.window.resizable = false;
-  });
-
-  menubarApp.window.webContents.on('before-input-event', (event, input) => {
-    if (input.key === 'Escape') {
-      menubarApp.window.hide();
-      event.preventDefault();
-    }
   });
 });

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.6.4/schema.json",
+  "$schema": "https://biomejs.dev/schemas/1.8.1/schema.json",
   "organizeImports": {
     "enabled": true
   },
@@ -7,6 +7,13 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "nursery": {
+        "noUnusedFunctionParameters": "error",
+        "useDefaultSwitchClause": "error"
+      },
+      "a11y": {
+        "useKeyWithClickEvents": "off"
+      },
       "correctness": {
         "useExhaustiveDependencies": {
           "level": "warn",

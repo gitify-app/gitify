@@ -1,15 +1,14 @@
-import * as TestRenderer from 'react-test-renderer';
-
+import { render } from '@testing-library/react';
 import { Oops } from './Oops';
 
 describe('components/Oops.tsx', () => {
   it('should render itself & its children', () => {
     const mockError = {
       title: 'Error title',
-      description: 'Error description',
+      descriptions: ['Error description'],
       emojis: ['🔥'],
     };
-    const tree = TestRenderer.create(<Oops error={mockError} />);
+    const tree = render(<Oops error={mockError} />);
 
     expect(tree).toMatchSnapshot();
   });

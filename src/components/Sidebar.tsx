@@ -4,90 +4,43 @@ import {
   SyncIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
-import { ipcRenderer } from 'electron';
-
-import {
-  type FC,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-} from 'react';
+import { type FC, useContext, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-
 import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
-import { openExternalLink } from '../utils/comms';
-import { Constants } from '../utils/constants';
+import { BUTTON_SIDEBAR_CLASS_NAME } from '../styles/gitify';
+import { cn } from '../utils/cn';
+import { quitApp } from '../utils/comms';
+import { openGitHubNotifications, openGitifyRepository } from '../utils/links';
 import { getNotificationCount } from '../utils/notifications';
 
 export const Sidebar: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { notifications, fetchNotifications, isLoggedIn, isFetching } =
+  const { notifications, fetchNotifications, isLoggedIn, status } =
     useContext(AppContext);
 
-  const useFetchInterval = (callback, delay: number) => {
-    const savedCallback = useRef(callback);
-    const intervalRef = useRef(null);
-
-    useEffect(() => {
-      savedCallback.current = callback;
-    }, [callback]);
-
-    useEffect(() => {
-      if (delay !== null) {
-        const id = setInterval(savedCallback.current, delay);
-        intervalRef.current = id;
-        return () => clearInterval(id);
-      }
-    }, [delay]);
-
-    const resetFetchInterval = useCallback(() => {
-      if (intervalRef.current !== null) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = setInterval(savedCallback.current, delay);
-      }
-    }, [delay]);
-
-    return { resetFetchInterval };
-  };
-
-  const { resetFetchInterval } = useFetchInterval(() => {
-    if (isLoggedIn) {
-      fetchNotifications();
+  const toggleSettings = () => {
+    if (location.pathname.startsWith('/settings')) {
+      navigate('/', { replace: true });
+    } else {
+      navigate('/settings');
     }
-  }, Constants.FETCH_INTERVAL);
-
-  const onOpenBrowser = useCallback(() => {
-    openExternalLink(`https://github.com/${Constants.REPO_SLUG}`);
-  }, []);
-
-  const onOpenGitHubNotifications = useCallback(() => {
-    openExternalLink('https://github.com/notifications');
-  }, []);
-
-  const quitApp = useCallback(() => {
-    ipcRenderer.send('app-quit');
-  }, []);
+  };
 
   const notificationsCount = useMemo(() => {
     return getNotificationCount(notifications);
   }, [notifications]);
 
-  const sidebarButtonClasses =
-    'flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none disabled:text-gray-500 disabled:cursor-default';
-
   return (
-    <div className="flex flex-col fixed left-14 w-14 -ml-14 h-full bg-gray-sidebar overflow-y-auto">
-      <div className="flex flex-col flex-1 items-center py-4">
+    <div className="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar">
+      <div className="flex flex-1 flex-col items-center py-4">
         <button
           type="button"
-          className="w-5 my-3 mx-auto cursor-pointer outline-none"
+          className="mx-auto my-3 w-5 cursor-pointer outline-none"
           title="Open Gitify on GitHub"
-          onClick={onOpenBrowser}
+          onClick={() => openGitifyRepository()}
           data-testid="gitify-logo"
         >
           <Logo aria-label="Open Gitify" />
@@ -95,10 +48,11 @@ export const Sidebar: FC = () => {
 
         <button
           type="button"
-          className={`flex justify-around self-stretch items-center my-1 py-1 px-2 text-xs font-extrabold cursor-pointer ${
-            notificationsCount > 0 ? 'text-green-500' : 'text-white'
-          }`}
-          onClick={onOpenGitHubNotifications}
+          className={cn(
+            'my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold',
+            notificationsCount > 0 ? 'text-green-500' : 'text-white',
+          )}
+          onClick={() => openGitHubNotifications()}
           title={`${notificationsCount} Unread Notifications`}
         >
           <BellIcon
@@ -109,38 +63,30 @@ export const Sidebar: FC = () => {
         </button>
       </div>
 
-      <div className="py-4 px-3">
+      <div className="px-3 py-4">
         {isLoggedIn && (
           <>
             <button
               type="button"
-              className={sidebarButtonClasses}
+              className={BUTTON_SIDEBAR_CLASS_NAME}
               title="Refresh Notifications"
               onClick={() => {
                 navigate('/', { replace: true });
                 fetchNotifications();
-                resetFetchInterval();
               }}
-              disabled={isFetching}
+              disabled={status === 'loading'}
             >
               <SyncIcon
                 size={16}
                 aria-label="Refresh Notifications"
-                className={isFetching ? 'animate-spin' : undefined}
+                className={status === 'loading' ? 'animate-spin' : undefined}
               />
             </button>
-
             <button
               type="button"
-              className={sidebarButtonClasses}
+              className={BUTTON_SIDEBAR_CLASS_NAME}
               title="Settings"
-              onClick={() => {
-                if (location.pathname.startsWith('/settings')) {
-                  navigate('/', { replace: true });
-                } else {
-                  navigate('/settings');
-                }
-              }}
+              onClick={toggleSettings}
             >
               <GearIcon size={16} aria-label="Settings" />
             </button>
@@ -150,7 +96,7 @@ export const Sidebar: FC = () => {
         {!isLoggedIn && (
           <button
             type="button"
-            className={sidebarButtonClasses}
+            className={BUTTON_SIDEBAR_CLASS_NAME}
             title="Quit Gitify"
             aria-label="Quit Gitify"
             onClick={quitApp}

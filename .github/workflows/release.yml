@@ -4,12 +4,12 @@ on:
   push:
     branches:
       - 'release/v**'
-  workflow_dispatch: #For manually running release process to verify codesigning of artifacts
+  workflow_dispatch: # For manually running release process to verify codesigning of artifacts
 
 jobs:
   release-macos:
     name: Publish macOS (electron-builder)
-    runs-on: macos-14
+    runs-on: macos-latest
 
     steps:
       - uses: actions/checkout@v4

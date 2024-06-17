@@ -1,8 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import TestRenderer from 'react-test-renderer';
-const { ipcRenderer } = require('electron');
 import { AppContext } from '../context/App';
+import * as comms from '../utils/comms';
 import { LoginRoute } from './Login';
 
 const mockNavigate = jest.fn();
@@ -14,11 +13,10 @@ jest.mock('react-router-dom', () => ({
 describe('routes/Login.tsx', () => {
   beforeEach(() => {
     mockNavigate.mockReset();
-    jest.spyOn(ipcRenderer, 'send');
   });
 
   it('should render itself & its children', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <MemoryRouter>
         <LoginRoute />
       </MemoryRouter>,
@@ -28,6 +26,8 @@ describe('routes/Login.tsx', () => {
   });
 
   it('should redirect to notifications once logged in', () => {
+    const showWindowMock = jest.spyOn(comms, 'showWindow');
+
     const { rerender } = render(
       <AppContext.Provider value={{ isLoggedIn: false }}>
         <MemoryRouter>
@@ -44,20 +44,34 @@ describe('routes/Login.tsx', () => {
       </AppContext.Provider>,
     );
 
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('reopen-window');
+    expect(showWindowMock).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
   });
 
-  it('should navigate to login with github enterprise', () => {
+  it('should navigate to login with personal access token', () => {
     render(
       <MemoryRouter>
         <LoginRoute />
       </MemoryRouter>,
     );
 
-    fireEvent.click(screen.getByLabelText('Login with GitHub Enterprise'));
+    fireEvent.click(screen.getByLabelText('Login with Personal Access Token'));
 
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-enterprise');
+    expect(mockNavigate).toHaveBeenNthCalledWith(
+      1,
+      '/login-personal-access-token',
+    );
+  });
+
+  it('should navigate to login with oauth app', () => {
+    render(
+      <MemoryRouter>
+        <LoginRoute />
+      </MemoryRouter>,
+    );
+
+    fireEvent.click(screen.getByLabelText('Login with OAuth App'));
+
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app');
   });
 });

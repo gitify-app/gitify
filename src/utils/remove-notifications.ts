@@ -1,12 +1,17 @@
 import type { AccountNotifications } from '../types';
+import type { Notification } from '../typesGitHub';
+import { getAccountUUID } from './auth/utils';
 
 export const removeNotifications = (
-  repoSlug: string,
+  notification: Notification,
   notifications: AccountNotifications[],
-  hostname: string,
 ): AccountNotifications[] => {
+  const repoSlug = notification.repository.full_name;
+
   const accountIndex = notifications.findIndex(
-    (accountNotifications) => accountNotifications.hostname === hostname,
+    (accountNotifications) =>
+      getAccountUUID(accountNotifications.account) ===
+      getAccountUUID(notification.account),
   );
 
   if (accountIndex !== -1) {

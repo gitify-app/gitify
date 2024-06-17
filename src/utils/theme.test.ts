@@ -1,44 +1,42 @@
 import { Theme } from '../types';
-import { setTheme } from './theme';
+import { getTheme, setTheme } from './theme';
 
-import * as appearanceHelpers from './theme';
-
-describe('utils/appearance.ts', () => {
-  beforeAll(() => {
-    jest.spyOn(appearanceHelpers, 'setLightMode');
-    jest.spyOn(appearanceHelpers, 'setDarkMode');
-  });
+describe('utils/theme.ts', () => {
+  const htmlElement = document.createElement('html');
 
   beforeEach(() => {
-    // @ts-ignore
-    appearanceHelpers.setLightMode.mockReset();
-    // @ts-ignore
-    appearanceHelpers.setDarkMode.mockReset();
+    document.querySelector = jest.fn(() => htmlElement);
   });
 
   it('should change to light mode', () => {
     setTheme(Theme.LIGHT);
-    expect(appearanceHelpers.setLightMode).toHaveBeenCalledTimes(1);
+    expect(getTheme()).toBe(Theme.LIGHT);
   });
 
   it('should change to dark mode', () => {
     setTheme(Theme.DARK);
-    expect(appearanceHelpers.setDarkMode).toHaveBeenCalledTimes(1);
+    expect(getTheme()).toBe(Theme.DARK);
   });
 
   it("should use the system's mode - light", () => {
+    Object.defineProperty(window, 'matchMedia', {
+      writable: true,
+      value: jest.fn().mockImplementation((_query) => ({
+        matches: false,
+      })),
+    });
     setTheme();
-    expect(appearanceHelpers.setLightMode).toHaveBeenCalledTimes(1);
+    expect(getTheme()).toBe(Theme.LIGHT);
   });
 
   it("should use the system's mode - dark", () => {
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: jest.fn().mockImplementation((query) => ({
+      value: jest.fn().mockImplementation((_query) => ({
         matches: true,
       })),
     });
     setTheme();
-    expect(appearanceHelpers.setDarkMode).toHaveBeenCalledTimes(1);
+    expect(getTheme()).toBe(Theme.DARK);
   });
 });

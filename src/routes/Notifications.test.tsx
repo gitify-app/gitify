@@ -1,29 +1,26 @@
-import TestRenderer from 'react-test-renderer';
-
-import { mockSettings } from '../__mocks__/mock-state';
-import { mockedAccountNotifications } from '../__mocks__/mockedData';
+import { render } from '@testing-library/react';
+import { mockAccountNotifications } from '../__mocks__/notifications-mocks';
+import { mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import { Errors } from '../utils/constants';
 import { NotificationsRoute } from './Notifications';
 
 jest.mock('../components/AccountNotifications', () => ({
-  AccountNotifications: 'AccountNotifications',
+  AccountNotifications: () => <p>AccountNotifications</p>,
 }));
 
 jest.mock('../components/AllRead', () => ({
-  AllRead: 'AllRead',
+  AllRead: () => <p>AllRead</p>,
 }));
 
 jest.mock('../components/Oops', () => ({
-  Oops: 'Oops',
+  Oops: () => <p>Oops</p>,
 }));
 
 describe('routes/Notifications.tsx', () => {
   it('should render itself & its children (with notifications)', () => {
-    const tree = TestRenderer.create(
-      <AppContext.Provider
-        value={{ notifications: mockedAccountNotifications }}
-      >
+    const tree = render(
+      <AppContext.Provider value={{ notifications: mockAccountNotifications }}>
         <NotificationsRoute />
       </AppContext.Provider>,
     );
@@ -32,7 +29,7 @@ describe('routes/Notifications.tsx', () => {
   });
 
   it('should render itself & its children (all read notifications)', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider value={{ notifications: [] }}>
         <NotificationsRoute />
       </AppContext.Provider>,
@@ -41,10 +38,10 @@ describe('routes/Notifications.tsx', () => {
   });
 
   it('should render itself & its children (show account hostname)', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider
         value={{
-          notifications: [mockedAccountNotifications[0]],
+          notifications: [mockAccountNotifications[0]],
           settings: { ...mockSettings, showAccountHostname: true },
         }}
       >
@@ -56,11 +53,11 @@ describe('routes/Notifications.tsx', () => {
 
   describe('should render itself & its children (error conditions - oops)', () => {
     it('bad credentials', () => {
-      const tree = TestRenderer.create(
+      const tree = render(
         <AppContext.Provider
           value={{
             notifications: [],
-            requestFailed: true,
+            status: 'error',
             errorDetails: Errors.BAD_CREDENTIALS,
           }}
         >
@@ -72,11 +69,11 @@ describe('routes/Notifications.tsx', () => {
     });
 
     it('missing scopes', () => {
-      const tree = TestRenderer.create(
+      const tree = render(
         <AppContext.Provider
           value={{
             notifications: [],
-            requestFailed: true,
+            status: 'error',
             errorDetails: Errors.MISSING_SCOPES,
           }}
         >
@@ -88,11 +85,11 @@ describe('routes/Notifications.tsx', () => {
     });
 
     it('rate limited', () => {
-      const tree = TestRenderer.create(
+      const tree = render(
         <AppContext.Provider
           value={{
             notifications: [],
-            requestFailed: true,
+            status: 'error',
             errorDetails: Errors.RATE_LIMITED,
           }}
         >
@@ -104,11 +101,11 @@ describe('routes/Notifications.tsx', () => {
     });
 
     it('unknown error', () => {
-      const tree = TestRenderer.create(
+      const tree = render(
         <AppContext.Provider
           value={{
             notifications: [],
-            requestFailed: true,
+            status: 'error',
             errorDetails: Errors.UNKNOWN,
           }}
         >
@@ -120,11 +117,11 @@ describe('routes/Notifications.tsx', () => {
     });
 
     it('default error', () => {
-      const tree = TestRenderer.create(
+      const tree = render(
         <AppContext.Provider
           value={{
             notifications: [],
-            requestFailed: true,
+            status: 'error',
             errorDetails: null,
           }}
         >

@@ -1,11 +1,9 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
-import * as TestRenderer from 'react-test-renderer';
-const { shell, ipcRenderer } = require('electron');
-import { mockSettings } from '../__mocks__/mock-state';
-import { mockedAccountNotifications } from '../__mocks__/mockedData';
+import { mockAccountNotifications } from '../__mocks__/notifications-mocks';
+import { mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
-import Constants from '../utils/constants';
+import * as comms from '../utils/comms';
 import { Sidebar } from './Sidebar';
 
 const mockNavigate = jest.fn();
@@ -20,24 +18,19 @@ describe('components/Sidebar.tsx', () => {
   beforeEach(() => {
     fetchNotifications.mockReset();
 
-    jest.useFakeTimers();
-
-    jest.spyOn(ipcRenderer, 'send');
-    jest.spyOn(shell, 'openExternal');
     jest.spyOn(window, 'clearInterval');
   });
 
   afterEach(() => {
-    jest.clearAllTimers();
     jest.clearAllMocks();
   });
 
   it('should render itself & its children (logged in)', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider
         value={{
           settings: mockSettings,
-          notifications: mockedAccountNotifications,
+          notifications: mockAccountNotifications,
         }}
       >
         <MemoryRouter>
@@ -49,9 +42,9 @@ describe('components/Sidebar.tsx', () => {
   });
 
   it('should render itself & its children (logged out)', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider
-        value={{ isLoggedIn: false, notifications: mockedAccountNotifications }}
+        value={{ isLoggedIn: false, notifications: mockAccountNotifications }}
       >
         <MemoryRouter>
           <Sidebar />
@@ -61,81 +54,84 @@ describe('components/Sidebar.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should fetch notifications every minute', async () => {
-    render(
-      <AppContext.Provider
-        value={{ isLoggedIn: true, notifications: [], fetchNotifications }}
-      >
-        <MemoryRouter>
-          <Sidebar />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-    fetchNotifications.mockReset();
+  describe('Refresh Notifications', () => {
+    it('should refresh the notifications when status is not loading', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            fetchNotifications,
+            status: 'success',
+          }}
+        >
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      fetchNotifications.mockReset();
+      fireEvent.click(screen.getByTitle('Refresh Notifications'));
 
-    act(() => {
-      jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
-      return;
+      expect(fetchNotifications).toHaveBeenCalledTimes(1);
     });
-    expect(fetchNotifications).toHaveBeenCalledTimes(1);
 
-    act(() => {
-      jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
-      return;
-    });
-    expect(fetchNotifications).toHaveBeenCalledTimes(2);
+    it('should not refresh the notifications when status is loading', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            fetchNotifications,
+            status: 'loading',
+          }}
+        >
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      fetchNotifications.mockReset();
+      fireEvent.click(screen.getByTitle('Refresh Notifications'));
 
-    act(() => {
-      jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
-      return;
+      expect(fetchNotifications).not.toHaveBeenCalled();
     });
-    expect(fetchNotifications).toHaveBeenCalledTimes(3);
   });
 
-  it('should refresh the notifications', () => {
-    render(
-      <AppContext.Provider
-        value={{ isLoggedIn: true, notifications: [], fetchNotifications }}
-      >
-        <MemoryRouter>
-          <Sidebar />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-    fetchNotifications.mockReset();
-
-    const enabledRefreshButton = 'Refresh Notifications';
-
-    fireEvent.click(screen.getByTitle(enabledRefreshButton));
-
-    expect(fetchNotifications).toHaveBeenCalledTimes(1);
-
-    act(() => {
-      jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
-      return;
+  describe('Settings', () => {
+    it('go to the settings route', () => {
+      render(
+        <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      fireEvent.click(screen.getByTitle('Settings'));
+      expect(mockNavigate).toHaveBeenCalledWith('/settings');
     });
 
-    expect(fetchNotifications).toHaveBeenCalledTimes(2);
-  });
-
-  it('go to the settings route', () => {
-    render(
-      <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
-        <MemoryRouter>
-          <Sidebar />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-    fireEvent.click(screen.getByTitle('Settings'));
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/settings');
+    it('go to the home if settings path already shown', () => {
+      render(
+        <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
+          <MemoryRouter initialEntries={['/settings']}>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      fireEvent.click(screen.getByTitle('Settings'));
+      expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
+    });
   });
 
   it('opens github in the notifications page', () => {
+    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
     render(
       <AppContext.Provider
         value={{
           isLoggedIn: true,
-          notifications: mockedAccountNotifications,
+          notifications: mockAccountNotifications,
         }}
       >
         <MemoryRouter>
@@ -144,13 +140,15 @@ describe('components/Sidebar.tsx', () => {
       </AppContext.Provider>,
     );
     fireEvent.click(screen.getByLabelText('4 Unread Notifications'));
-    expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(shell.openExternal).toHaveBeenCalledWith(
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/notifications',
     );
   });
 
   it('should quit the app', () => {
+    const quitAppMock = jest.spyOn(comms, 'quitApp');
+
     render(
       <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
         <MemoryRouter>
@@ -159,11 +157,12 @@ describe('components/Sidebar.tsx', () => {
       </AppContext.Provider>,
     );
     fireEvent.click(screen.getByTitle('Quit Gitify'));
-    expect(ipcRenderer.send).toHaveBeenCalledTimes(1);
-    expect(ipcRenderer.send).toHaveBeenCalledWith('app-quit');
+    expect(quitAppMock).toHaveBeenCalledTimes(1);
   });
 
   it('should open the gitify repository', () => {
+    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
     render(
       <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
         <MemoryRouter>
@@ -172,8 +171,8 @@ describe('components/Sidebar.tsx', () => {
       </AppContext.Provider>,
     );
     fireEvent.click(screen.getByTestId('gitify-logo'));
-    expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(shell.openExternal).toHaveBeenCalledWith(
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/gitify-app/gitify',
     );
   });
@@ -199,7 +198,7 @@ describe('components/Sidebar.tsx', () => {
         <AppContext.Provider
           value={{
             isLoggedIn: true,
-            notifications: mockedAccountNotifications,
+            notifications: mockAccountNotifications,
           }}
         >
           <MemoryRouter>

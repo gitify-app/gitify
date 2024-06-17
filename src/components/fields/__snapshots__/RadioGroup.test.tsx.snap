@@ -1,148 +1,389 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`components/fields/RadioGroup.tsx should render 1`] = `
-<div
-  className="mt-1 mb-3 text-sm"
->
-  <div
-    className="flex items-start"
-  >
-    <div
-      className="mr-3 py-1"
-    >
-      <label
-        className="font-medium text-gray-700 dark:text-gray-200 "
-        htmlFor="appearance"
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="mb-3 mt-1 text-sm"
       >
-        Appearance
-      </label>
+        <div
+          class="flex items-start"
+        >
+          <div
+            class="mr-3 py-1"
+          >
+            <label
+              class="font-medium text-gray-700 dark:text-gray-200"
+              for="appearance"
+            >
+              Appearance
+            </label>
+          </div>
+          <div
+            aria-labelledby="appearance"
+            class="flex items-center space-x-4"
+            role="group"
+          >
+            <div
+              class="mt-1 flex"
+            >
+              <input
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                id="appearance_one"
+                name="appearance"
+                type="radio"
+                value="one"
+              />
+              <label
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                for="appearance_one"
+              >
+                Value 1
+              </label>
+            </div>
+            <div
+              class="mt-1 flex"
+            >
+              <input
+                checked=""
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                id="appearance_two"
+                name="appearance"
+                type="radio"
+                value="two"
+              />
+              <label
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                for="appearance_two"
+              >
+                Value 2
+              </label>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-1 text-xs italic text-gray-500 dark:text-gray-300"
+        >
+          This is some helper text
+        </div>
+      </div>
     </div>
+  </body>,
+  "container": <div>
     <div
-      aria-labelledby="appearance"
-      className="flex items-center space-x-4"
-      role="group"
+      class="mb-3 mt-1 text-sm"
     >
       <div
-        className="flex mt-1"
+        class="flex items-start"
       >
-        <input
-          checked={false}
-          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-          id="appearance_one"
-          name="appearance"
-          onChange={[MockFunction]}
-          type="radio"
-          value="one"
-        />
-        <label
-          className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-          htmlFor="appearance_one"
+        <div
+          class="mr-3 py-1"
         >
-          Value 1
-        </label>
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="appearance"
+          >
+            Appearance
+          </label>
+        </div>
+        <div
+          aria-labelledby="appearance"
+          class="flex items-center space-x-4"
+          role="group"
+        >
+          <div
+            class="mt-1 flex"
+          >
+            <input
+              class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              id="appearance_one"
+              name="appearance"
+              type="radio"
+              value="one"
+            />
+            <label
+              class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+              for="appearance_one"
+            >
+              Value 1
+            </label>
+          </div>
+          <div
+            class="mt-1 flex"
+          >
+            <input
+              checked=""
+              class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              id="appearance_two"
+              name="appearance"
+              type="radio"
+              value="two"
+            />
+            <label
+              class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+              for="appearance_two"
+            >
+              Value 2
+            </label>
+          </div>
+        </div>
       </div>
       <div
-        className="flex mt-1"
+        class="mt-1 text-xs italic text-gray-500 dark:text-gray-300"
       >
-        <input
-          checked={true}
-          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-          id="appearance_two"
-          name="appearance"
-          onChange={[MockFunction]}
-          type="radio"
-          value="two"
-        />
-        <label
-          className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-          htmlFor="appearance_two"
-        >
-          Value 2
-        </label>
+        This is some helper text
       </div>
     </div>
-  </div>
-  <div
-    className="text-xs mt-1 italic text-gray-500 dark:text-gray-300"
-  >
-    This is some helper text
-  </div>
-</div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;
 
 exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
-<div
-  className="mt-1 mb-3 text-sm"
->
-  <div
-    className="flex items-start"
-  >
-    <div
-      className="mr-3 py-1"
-    >
-      <label
-        className="font-medium text-gray-700 dark:text-gray-200 "
-        htmlFor="appearance"
-        style={
-          {
-            "textDecoration": "line-through",
-          }
-        }
+{
+  "asFragment": [Function],
+  "baseElement": <body>
+    <div>
+      <div
+        class="mb-3 mt-1 text-sm"
       >
-        Appearance
-      </label>
+        <div
+          class="flex items-start"
+        >
+          <div
+            class="mr-3 py-1"
+          >
+            <label
+              class="font-medium text-gray-700 dark:text-gray-200"
+              for="appearance"
+              style="text-decoration: line-through;"
+            >
+              Appearance
+            </label>
+          </div>
+          <div
+            aria-labelledby="appearance"
+            class="flex items-center space-x-4"
+            role="group"
+          >
+            <div
+              class="mt-1 flex"
+            >
+              <input
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                disabled=""
+                id="appearance_one"
+                name="appearance"
+                type="radio"
+                value="one"
+              />
+              <label
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                for="appearance_one"
+              >
+                Value 1
+              </label>
+            </div>
+            <div
+              class="mt-1 flex"
+            >
+              <input
+                checked=""
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                disabled=""
+                id="appearance_two"
+                name="appearance"
+                type="radio"
+                value="two"
+              />
+              <label
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                for="appearance_two"
+              >
+                Value 2
+              </label>
+            </div>
+          </div>
+        </div>
+        <div
+          class="mt-1 text-xs italic text-gray-500 dark:text-gray-300"
+        >
+          This is some helper text
+        </div>
+      </div>
     </div>
+  </body>,
+  "container": <div>
     <div
-      aria-labelledby="appearance"
-      className="flex items-center space-x-4"
-      role="group"
+      class="mb-3 mt-1 text-sm"
     >
       <div
-        className="flex mt-1"
+        class="flex items-start"
       >
-        <input
-          checked={false}
-          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-          disabled={true}
-          id="appearance_one"
-          name="appearance"
-          onChange={[MockFunction]}
-          type="radio"
-          value="one"
-        />
-        <label
-          className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-          htmlFor="appearance_one"
+        <div
+          class="mr-3 py-1"
         >
-          Value 1
-        </label>
+          <label
+            class="font-medium text-gray-700 dark:text-gray-200"
+            for="appearance"
+            style="text-decoration: line-through;"
+          >
+            Appearance
+          </label>
+        </div>
+        <div
+          aria-labelledby="appearance"
+          class="flex items-center space-x-4"
+          role="group"
+        >
+          <div
+            class="mt-1 flex"
+          >
+            <input
+              class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              disabled=""
+              id="appearance_one"
+              name="appearance"
+              type="radio"
+              value="one"
+            />
+            <label
+              class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+              for="appearance_one"
+            >
+              Value 1
+            </label>
+          </div>
+          <div
+            class="mt-1 flex"
+          >
+            <input
+              checked=""
+              class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+              disabled=""
+              id="appearance_two"
+              name="appearance"
+              type="radio"
+              value="two"
+            />
+            <label
+              class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+              for="appearance_two"
+            >
+              Value 2
+            </label>
+          </div>
+        </div>
       </div>
       <div
-        className="flex mt-1"
+        class="mt-1 text-xs italic text-gray-500 dark:text-gray-300"
       >
-        <input
-          checked={true}
-          className="focus:ring-indigo-500 h-4 w-4 text-indigo-600 border-gray-300"
-          disabled={true}
-          id="appearance_two"
-          name="appearance"
-          onChange={[MockFunction]}
-          type="radio"
-          value="two"
-        />
-        <label
-          className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-          htmlFor="appearance_two"
-        >
-          Value 2
-        </label>
+        This is some helper text
       </div>
     </div>
-  </div>
-  <div
-    className="text-xs mt-1 italic text-gray-500 dark:text-gray-300"
-  >
-    This is some helper text
-  </div>
-</div>
+  </div>,
+  "debug": [Function],
+  "findAllByAltText": [Function],
+  "findAllByDisplayValue": [Function],
+  "findAllByLabelText": [Function],
+  "findAllByPlaceholderText": [Function],
+  "findAllByRole": [Function],
+  "findAllByTestId": [Function],
+  "findAllByText": [Function],
+  "findAllByTitle": [Function],
+  "findByAltText": [Function],
+  "findByDisplayValue": [Function],
+  "findByLabelText": [Function],
+  "findByPlaceholderText": [Function],
+  "findByRole": [Function],
+  "findByTestId": [Function],
+  "findByText": [Function],
+  "findByTitle": [Function],
+  "getAllByAltText": [Function],
+  "getAllByDisplayValue": [Function],
+  "getAllByLabelText": [Function],
+  "getAllByPlaceholderText": [Function],
+  "getAllByRole": [Function],
+  "getAllByTestId": [Function],
+  "getAllByText": [Function],
+  "getAllByTitle": [Function],
+  "getByAltText": [Function],
+  "getByDisplayValue": [Function],
+  "getByLabelText": [Function],
+  "getByPlaceholderText": [Function],
+  "getByRole": [Function],
+  "getByTestId": [Function],
+  "getByText": [Function],
+  "getByTitle": [Function],
+  "queryAllByAltText": [Function],
+  "queryAllByDisplayValue": [Function],
+  "queryAllByLabelText": [Function],
+  "queryAllByPlaceholderText": [Function],
+  "queryAllByRole": [Function],
+  "queryAllByTestId": [Function],
+  "queryAllByText": [Function],
+  "queryAllByTitle": [Function],
+  "queryByAltText": [Function],
+  "queryByDisplayValue": [Function],
+  "queryByLabelText": [Function],
+  "queryByPlaceholderText": [Function],
+  "queryByRole": [Function],
+  "queryByTestId": [Function],
+  "queryByText": [Function],
+  "queryByTitle": [Function],
+  "rerender": [Function],
+  "unmount": [Function],
+}
 `;

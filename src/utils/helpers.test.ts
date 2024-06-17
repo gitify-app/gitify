@@ -1,164 +1,68 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
-import { mockAccounts } from '../__mocks__/mock-state';
+import { mockPersonalAccessTokenAccount } from '../__mocks__/state-mocks';
+
+import type { Hostname, Link } from '../types';
+import type { SubjectType } from '../typesGitHub';
 import {
-  mockedGraphQLResponse,
-  mockedSingleNotification,
-  mockedUser,
-} from '../__mocks__/mockedData';
-import type { SubjectType } from '../typesGithub';
-import * as apiRequests from './api-requests';
+  mockGraphQLResponse,
+  mockSingleNotification,
+} from './api/__mocks__/response-mocks';
+import * as apiRequests from './api/request';
 import {
-  addHours,
-  addNotificationReferrerIdToUrl,
   formatForDisplay,
-  formatSearchQueryString,
-  generateGitHubAPIUrl,
+  formatNotificationUpdatedAt,
   generateGitHubWebUrl,
   generateNotificationReferrerId,
-  getHtmlUrl,
+  getPlatformFromHostname,
   isEnterpriseHost,
-  isGitHubLoggedIn,
 } from './helpers';
 
 describe('utils/helpers.ts', () => {
-  describe('isGitHubLoggedIn', () => {
-    it('logged in', () => {
-      expect(isGitHubLoggedIn({ ...mockAccounts, token: '1234' })).toBe(true);
+  describe('getPlatformFromHostname', () => {
+    it('should return GitHub Cloud', () => {
+      expect(getPlatformFromHostname('github.com' as Hostname)).toBe(
+        'GitHub Cloud',
+      );
+      expect(getPlatformFromHostname('api.github.com' as Hostname)).toBe(
+        'GitHub Cloud',
+      );
     });
 
-    it('logged out', () => {
-      expect(isGitHubLoggedIn({ ...mockAccounts, token: null })).toBe(false);
+    it('should return GitHub Enterprise Server', () => {
+      expect(getPlatformFromHostname('github.gitify.app' as Hostname)).toBe(
+        'GitHub Enterprise Server',
+      );
+      expect(getPlatformFromHostname('api.github.gitify.app' as Hostname)).toBe(
+        'GitHub Enterprise Server',
+      );
     });
   });
+
   describe('isEnterpriseHost', () => {
     it('should return true for enterprise host', () => {
-      expect(isEnterpriseHost('github.manos.im')).toBe(true);
-      expect(isEnterpriseHost('api.github.manos.im')).toBe(true);
+      expect(isEnterpriseHost('github.gitify.app' as Hostname)).toBe(true);
+      expect(isEnterpriseHost('api.github.gitify.app' as Hostname)).toBe(true);
     });
 
     it('should return false for non-enterprise host', () => {
-      expect(isEnterpriseHost('github.com')).toBe(false);
-      expect(isEnterpriseHost('api.github.com')).toBe(false);
-    });
-  });
-
-  describe('addNotificationReferrerIdToUrl', () => {
-    it('should add notification_referrer_id to the URL', () => {
-      // Mock data
-      const url = 'https://github.com/some/repo';
-      const notificationId = '123';
-      const userId = 456;
-
-      const result = addNotificationReferrerIdToUrl(
-        url,
-        notificationId,
-        userId,
-      );
-
-      expect(result).toEqual(
-        'https://github.com/some/repo?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEyMzo0NTY%3D',
-      );
-    });
-
-    it('should add notification_referrer_id to the URL, preserving anchor tags', () => {
-      // Mock data
-      const url =
-        'https://github.com/some/repo/pull/123#issuecomment-1951055051';
-      const notificationId = '123';
-      const userId = 456;
-
-      const result = addNotificationReferrerIdToUrl(
-        url,
-        notificationId,
-        userId,
-      );
-
-      expect(result).toEqual(
-        'https://github.com/some/repo/pull/123?notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEyMzo0NTY%3D#issuecomment-1951055051',
-      );
+      expect(isEnterpriseHost('github.com' as Hostname)).toBe(false);
+      expect(isEnterpriseHost('api.github.com' as Hostname)).toBe(false);
     });
   });
 
   describe('generateNotificationReferrerId', () => {
     it('should generate the notification_referrer_id', () => {
-      const referrerId = generateNotificationReferrerId(
-        mockedSingleNotification.id,
-        mockedUser.id,
-      );
+      const referrerId = generateNotificationReferrerId(mockSingleNotification);
       expect(referrerId).toBe(
         'MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk=',
       );
     });
   });
 
-  describe('generateGitHubAPIUrl', () => {
-    it('should generate a GitHub API url - non enterprise', () => {
-      const result = generateGitHubAPIUrl('github.com');
-      expect(result).toBe('https://api.github.com/');
-    });
-
-    it('should generate a GitHub API url - enterprise', () => {
-      const result = generateGitHubAPIUrl('github.manos.im');
-      expect(result).toBe('https://github.manos.im/api/v3/');
-    });
-  });
-
-  describe('addHours', () => {
-    // Example test using Jest
-    test('adds hours correctly for positive values', () => {
-      const result = addHours('2024-02-20T12:00:00.000Z', 3);
-      expect(result).toBe('2024-02-20T15:00:00.000Z');
-    });
-
-    test('adds hours correctly for negative values', () => {
-      const result = addHours('2024-02-20T12:00:00.000Z', -2);
-      expect(result).toBe('2024-02-20T10:00:00.000Z');
-    });
-  });
-
-  describe('formatSearchQueryString', () => {
-    test('formats search query string correctly', () => {
-      const result = formatSearchQueryString(
-        'exampleRepo',
-        'exampleTitle',
-        '2024-02-20T12:00:00.000Z',
-      );
-
-      expect(result).toBe(
-        'exampleTitle in:title repo:exampleRepo updated:>2024-02-20T10:00:00.000Z',
-      );
-    });
-  });
-
-  describe('getHtmlUrl', () => {
-    const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
-
-    afterEach(() => {
-      jest.clearAllMocks();
-    });
-
-    it('should return the HTML URL', async () => {
-      const requestPromise = new Promise((resolve) =>
-        resolve({
-          data: {
-            html_url: 'https://github.com/gitify-app/gitify/issues/785',
-          },
-        } as AxiosResponse),
-      ) as AxiosPromise;
-
-      apiRequestAuthMock.mockResolvedValue(requestPromise);
-
-      const result = await getHtmlUrl(
-        'https://api.github.com/repos/gitify-app/gitify/issues/785',
-        '123',
-      );
-      expect(result).toBe('https://github.com/gitify-app/gitify/issues/785');
-    });
-  });
-
   describe('generateGitHubWebUrl', () => {
-    const mockedHtmlUrl = 'https://github.com/gitify-app/gitify/issues/785';
-    const mockedNotificationReferrer =
+    const mockHtmlUrl =
+      'https://github.com/gitify-app/notifications-test/issues/785';
+    const mockNotificationReferrer =
       'notification_referrer_id=MDE4Ok5vdGlmaWNhdGlvblRocmVhZDEzODY2MTA5NjoxMjM0NTY3ODk%3D';
     const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
 
@@ -169,43 +73,40 @@ describe('utils/helpers.ts', () => {
     it('Subject Latest Comment Url: when not null, fetch latest comment html url', async () => {
       const subject = {
         title: 'generate github web url unit tests',
-        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
         latest_comment_url:
-          'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448',
+          'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
         type: 'Issue' as SubjectType,
       };
 
       const requestPromise = new Promise((resolve) =>
         resolve({
           data: {
-            html_url: mockedHtmlUrl,
+            html_url: mockHtmlUrl,
           },
         } as AxiosResponse),
       ) as AxiosPromise;
 
       apiRequestAuthMock.mockResolvedValue(requestPromise);
 
-      const result = await generateGitHubWebUrl(
-        {
-          ...mockedSingleNotification,
-          subject: subject,
-        },
-        mockAccounts,
-      );
+      const result = await generateGitHubWebUrl({
+        ...mockSingleNotification,
+        subject: subject,
+      });
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         subject.latest_comment_url,
         'GET',
-        mockAccounts.token,
+        mockPersonalAccessTokenAccount.token,
       );
-      expect(result).toBe(`${mockedHtmlUrl}?${mockedNotificationReferrer}`);
+      expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
 
     it('Subject Url: when no latest comment url available, fetch subject html url', async () => {
       const subject = {
         title: 'generate github web url unit tests',
-        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1',
+        url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
         latest_comment_url: null,
         type: 'Issue' as SubjectType,
       };
@@ -213,28 +114,25 @@ describe('utils/helpers.ts', () => {
       const requestPromise = new Promise((resolve) =>
         resolve({
           data: {
-            html_url: mockedHtmlUrl,
+            html_url: mockHtmlUrl,
           },
         } as AxiosResponse),
       ) as AxiosPromise;
 
       apiRequestAuthMock.mockResolvedValue(requestPromise);
 
-      const result = await generateGitHubWebUrl(
-        {
-          ...mockedSingleNotification,
-          subject: subject,
-        },
-        mockAccounts,
-      );
+      const result = await generateGitHubWebUrl({
+        ...mockSingleNotification,
+        subject: subject,
+      });
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
         subject.url,
         'GET',
-        mockAccounts.token,
+        mockPersonalAccessTokenAccount.token,
       );
-      expect(result).toBe(`${mockedHtmlUrl}?${mockedNotificationReferrer}`);
+      expect(result).toBe(`${mockHtmlUrl}?${mockNotificationReferrer}`);
     });
 
     describe('Check Suite URLs', () => {
@@ -246,17 +144,14 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Asuccess+branch%3Amain&${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Asuccess+branch%3Amain&${mockNotificationReferrer}`,
         );
       });
 
@@ -268,17 +163,14 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockNotificationReferrer}`,
         );
       });
 
@@ -290,17 +182,14 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Afailure+branch%3Amain&${mockNotificationReferrer}`,
         );
       });
 
@@ -312,17 +201,14 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Askipped+branch%3Amain&${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+is%3Askipped+branch%3Amain&${mockNotificationReferrer}`,
         );
       });
 
@@ -334,17 +220,14 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?${mockNotificationReferrer}`,
         );
       });
 
@@ -356,17 +239,14 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?query=workflow%3A%22Demo%22+branch%3Amain&${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=workflow%3A%22Demo%22+branch%3Amain&${mockNotificationReferrer}`,
         );
       });
 
@@ -378,17 +258,14 @@ describe('utils/helpers.ts', () => {
           type: 'CheckSuite' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?${mockNotificationReferrer}`,
         );
       });
     });
@@ -410,21 +287,18 @@ describe('utils/helpers.ts', () => {
 
         apiRequestAuthMock.mockResolvedValue(requestPromise);
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
         expect(result).toBe(
-          `${mockedSingleNotification.repository.html_url}/discussions?${mockedNotificationReferrer}`,
+          `${mockSingleNotification.repository.html_url}/discussions?${mockNotificationReferrer}`,
         );
       });
 
-      it('when no subject urls and no discussions found via query, default to linking to repository discussions', async () => {
+      it('link to matching discussion and comment hash', async () => {
         const subject = {
           title: '1.16.0',
           url: null,
@@ -433,22 +307,23 @@ describe('utils/helpers.ts', () => {
         };
 
         const requestPromise = new Promise((resolve) =>
-          resolve(mockedGraphQLResponse as AxiosResponse),
+          resolve({
+            data: {
+              ...mockGraphQLResponse,
+            },
+          } as AxiosResponse),
         ) as AxiosPromise;
 
         apiRequestAuthMock.mockResolvedValue(requestPromise);
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/discussions/612?${mockedNotificationReferrer}#discussioncomment-2300902`,
+          `https://github.com/gitify-app/notifications-test/discussions/612?${mockNotificationReferrer}#discussioncomment-2300902`,
         );
       });
 
@@ -466,40 +341,35 @@ describe('utils/helpers.ts', () => {
 
         apiRequestAuthMock.mockResolvedValue(requestPromise);
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/discussions?${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/discussions?${mockNotificationReferrer}`,
         );
       });
     });
 
     it('Repository Invitation url', async () => {
       const subject = {
-        title: 'Invitation to join manosim/notifications-test from unit-tests',
+        title:
+          'Invitation to join gitify-app/notifications-test from unit-tests',
         url: null,
         latest_comment_url: null,
         type: 'RepositoryInvitation' as SubjectType,
       };
 
-      const result = await generateGitHubWebUrl(
-        {
-          ...mockedSingleNotification,
-          subject: subject,
-        },
-        mockAccounts,
-      );
+      const result = await generateGitHubWebUrl({
+        ...mockSingleNotification,
+        subject: subject,
+      });
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
       expect(result).toBe(
-        `https://github.com/manosim/notifications-test/invitations?${mockedNotificationReferrer}`,
+        `https://github.com/gitify-app/notifications-test/invitations?${mockNotificationReferrer}`,
       );
     });
 
@@ -512,17 +382,14 @@ describe('utils/helpers.ts', () => {
           type: 'WorkflowRun' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?query=is%3Awaiting&${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?query=is%3Awaiting&${mockNotificationReferrer}`,
         );
       });
 
@@ -535,17 +402,14 @@ describe('utils/helpers.ts', () => {
           type: 'WorkflowRun' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?${mockNotificationReferrer}`,
         );
       });
 
@@ -557,17 +421,14 @@ describe('utils/helpers.ts', () => {
           type: 'WorkflowRun' as SubjectType,
         };
 
-        const result = await generateGitHubWebUrl(
-          {
-            ...mockedSingleNotification,
-            subject: subject,
-          },
-          mockAccounts,
-        );
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
 
         expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
         expect(result).toBe(
-          `https://github.com/manosim/notifications-test/actions?${mockedNotificationReferrer}`,
+          `https://github.com/gitify-app/notifications-test/actions?${mockNotificationReferrer}`,
         );
       });
     });
@@ -580,20 +441,19 @@ describe('utils/helpers.ts', () => {
         type: 'Issue' as SubjectType,
       };
 
-      const result = await generateGitHubWebUrl(
-        {
-          ...mockedSingleNotification,
-          subject: subject,
-        },
-        mockAccounts,
-      );
+      const result = await generateGitHubWebUrl({
+        ...mockSingleNotification,
+        subject: subject,
+      });
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
       expect(result).toBe(
-        `${mockedSingleNotification.repository.html_url}?${mockedNotificationReferrer}`,
+        `${mockSingleNotification.repository.html_url}?${mockNotificationReferrer}`,
       );
     });
+  });
 
+  describe('formatting', () => {
     it('formatForDisplay', () => {
       expect(formatForDisplay(null)).toBe('');
       expect(formatForDisplay([])).toBe('');
@@ -606,6 +466,38 @@ describe('utils/helpers.ts', () => {
       expect(formatForDisplay(['not_planned', 'Issue'])).toBe(
         'Not Planned Issue',
       );
+    });
+
+    describe('formatNotificationUpdatedAt', () => {
+      it('should use updated_at if last_read_at is null', () => {
+        const notification = {
+          ...mockSingleNotification,
+          last_read_at: null,
+          updated_at: '2021-06-23T17:00:00Z',
+        };
+
+        expect(formatNotificationUpdatedAt(notification)).toContain('ago');
+      });
+
+      it('should return empty if all dates are null', () => {
+        const notification = {
+          ...mockSingleNotification,
+          last_read_at: null,
+          updated_at: null,
+        };
+
+        expect(formatNotificationUpdatedAt(notification)).toBe('');
+      });
+
+      it('should return empty if unable to parse dates', () => {
+        const notification = {
+          ...mockSingleNotification,
+          last_read_at: 'not an iso date',
+          updated_at: 'not an iso date',
+        };
+
+        expect(formatNotificationUpdatedAt(notification)).toBe('');
+      });
     });
   });
 });

@@ -1,32 +1,34 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import TestRenderer from 'react-test-renderer';
-import { mockedGithubNotifications } from '../__mocks__/mockedData';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
+import type { Link } from '../types';
+import {
+  mockGitHubNotifications,
+  mockSingleNotification,
+} from '../utils/api/__mocks__/response-mocks';
+import * as comms from '../utils/comms';
 import { RepositoryNotifications } from './Repository';
-const { shell } = require('electron');
 
 jest.mock('./NotificationRow', () => ({
   NotificationRow: () => <div>NotificationRow</div>,
 }));
 
 describe('components/Repository.tsx', () => {
-  const markRepoNotifications = jest.fn();
+  const markRepoNotificationsRead = jest.fn();
   const markRepoNotificationsDone = jest.fn();
 
   const props = {
-    hostname: 'github.com',
-    repoName: 'manosim/gitify',
-    repoNotifications: mockedGithubNotifications,
+    account: mockGitHubCloudAccount,
+    repoName: 'gitify-app/notifications-test',
+    repoNotifications: mockGitHubNotifications,
   };
 
   beforeEach(() => {
-    markRepoNotifications.mockReset();
-
-    jest.spyOn(shell, 'openExternal');
+    markRepoNotificationsRead.mockReset();
   });
 
   it('should render itself & its children', () => {
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
@@ -35,6 +37,8 @@ describe('components/Repository.tsx', () => {
   });
 
   it('should open the browser when clicking on the repo name', () => {
+    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
     render(
       <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
@@ -43,24 +47,23 @@ describe('components/Repository.tsx', () => {
 
     fireEvent.click(screen.getByText(props.repoName));
 
-    expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(shell.openExternal).toHaveBeenCalledWith(
-      'https://github.com/manosim/notifications-test',
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
+      'https://github.com/gitify-app/notifications-test',
     );
   });
 
   it('should mark a repo as read', () => {
     render(
-      <AppContext.Provider value={{ markRepoNotifications }}>
+      <AppContext.Provider value={{ markRepoNotificationsRead }}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
 
     fireEvent.click(screen.getByTitle('Mark Repository as Read'));
 
-    expect(markRepoNotifications).toHaveBeenCalledWith(
-      'manosim/notifications-test',
-      'github.com',
+    expect(markRepoNotificationsRead).toHaveBeenCalledWith(
+      mockSingleNotification,
     );
   });
 
@@ -74,19 +77,29 @@ describe('components/Repository.tsx', () => {
     fireEvent.click(screen.getByTitle('Mark Repository as Done'));
 
     expect(markRepoNotificationsDone).toHaveBeenCalledWith(
-      'manosim/notifications-test',
-      'github.com',
+      mockSingleNotification,
     );
   });
 
   it('should use default repository icon when avatar is not available', () => {
-    props.repoNotifications[0].repository.owner.avatar_url = '';
+    props.repoNotifications[0].repository.owner.avatar_url = '' as Link;
 
-    const tree = TestRenderer.create(
+    const tree = render(
       <AppContext.Provider value={{}}>
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
     );
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should toggle account notifications visibility', async () => {
+    await act(async () => {
+      render(<RepositoryNotifications {...props} />);
+    });
+
+    fireEvent.click(screen.getByTitle('Hide repository notifications'));
+
+    const tree = render(<RepositoryNotifications {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });

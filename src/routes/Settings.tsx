@@ -1,131 +1,65 @@
 import {
-  ArrowLeftIcon,
-  PersonAddIcon,
-  SignOutIcon,
+  CheckIcon,
+  CommentIcon,
+  IssueClosedIcon,
+  MilestoneIcon,
+  PersonIcon,
+  TagIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
-
 import {
   type FC,
   type MouseEvent,
-  useCallback,
   useContext,
   useEffect,
-  useMemo,
   useState,
 } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import { Header } from '../components/Header';
 import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
+import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import { Theme } from '../types';
-import { apiRequestAuth } from '../utils/api-requests';
-import {
-  openExternalLink,
-  updateTrayIcon,
-  updateTrayTitle,
-} from '../utils/comms';
+import { getAppVersion, quitApp } from '../utils/comms';
 import Constants from '../utils/constants';
-import { generateGitHubAPIUrl } from '../utils/helpers';
+import {
+  openGitHubParticipatingDocs,
+  openGitifyReleaseNotes,
+} from '../utils/links';
+import { isLinux, isMacOS } from '../utils/platform';
 import { setTheme } from '../utils/theme';
 
 export const SettingsRoute: FC = () => {
-  const { accounts, settings, updateSetting, logout } = useContext(AppContext);
+  const { settings, updateSetting } = useContext(AppContext);
   const navigate = useNavigate();
 
-  const [isLinux, setIsLinux] = useState<boolean>(false);
   const [appVersion, setAppVersion] = useState<string | null>(null);
-  const [repoScope, setRepoScope] = useState<boolean>(false);
-
-  const openGitHubReleaseNotes = useCallback((version) => {
-    openExternalLink(
-      `https://github.com/${Constants.REPO_SLUG}/releases/tag/v${version}`,
-    );
-  }, []);
-
-  const openGitHubParticipatingDocs = (event: MouseEvent<HTMLElement>) => {
-    // Don't trigger onClick of parent element.
-    event.stopPropagation();
-
-    openExternalLink(
-      'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications',
-    );
-  };
 
   useEffect(() => {
-    ipcRenderer.invoke('get-platform').then((result: string) => {
-      setIsLinux(result === 'linux');
-    });
+    (async () => {
+      if (process.env.NODE_ENV === 'development') {
+        setAppVersion('dev');
+      } else {
+        const result = await getAppVersion();
+        setAppVersion(`v${result}`);
+      }
+    })();
 
-    ipcRenderer.invoke('get-app-version').then((result: string) => {
-      setAppVersion(result);
-    });
-
-    ipcRenderer.on('update-native-theme', (_, updatedTheme: Theme) => {
+    ipcRenderer.on('gitify:update-theme', (_, updatedTheme: Theme) => {
       if (settings.theme === Theme.SYSTEM) {
         setTheme(updatedTheme);
       }
     });
-  }, []);
-
-  useMemo(() => {
-    (async () => {
-      const response = await apiRequestAuth(
-        `${generateGitHubAPIUrl(Constants.DEFAULT_AUTH_OPTIONS.hostname)}`,
-        'GET',
-        accounts.token,
-      );
-
-      if (response.headers['x-oauth-scopes'].includes('repo'))
-        setRepoScope(true);
-    })();
-  }, [accounts.token]);
-
-  const logoutUser = useCallback(() => {
-    logout();
-    navigate(-1);
-    updateTrayIcon();
-    updateTrayTitle();
-  }, []);
-
-  const quitApp = useCallback(() => {
-    ipcRenderer.send('app-quit');
-  }, []);
-
-  const goToEnterprise = useCallback(() => {
-    return navigate('/login-enterprise', { replace: true });
-  }, []);
-
-  const footerButtonClass =
-    'hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none';
+  }, [settings.theme]);
 
   return (
-    <div
-      className="flex flex-1 flex-col h-screen dark:bg-gray-dark dark:text-white"
-      data-testid="settings"
-    >
-      <div className="flex justify-between items-center mt-2 py-2 mx-8">
-        <button
-          type="button"
-          className="focus:outline-none"
-          title="Go Back"
-          onClick={() => navigate(-1)}
-        >
-          <ArrowLeftIcon
-            size={20}
-            className="hover:text-gray-400"
-            aria-label="Go Back"
-          />
-        </button>
-
-        <h3 className="text-lg font-semibold">Settings</h3>
-      </div>
-
+    <div className="flex h-screen flex-col" data-testid="settings">
+      <Header>Settings</Header>
       <div className="flex-grow overflow-x-auto px-8">
         <fieldset className="mb-3">
-          <legend id="appearance" className="font-semibold mt-2 mb-1">
+          <legend id="appearance" className="mb-1 mt-2 font-semibold">
             Appearance
           </legend>
           <RadioGroup
@@ -143,15 +77,11 @@ export const SettingsRoute: FC = () => {
           />
           <Checkbox
             name="detailedNotifications"
-            label={`Detailed notifications${
-              !repoScope ? ' (requires repo scope)' : ''
-            }`}
-            checked={repoScope && settings.detailedNotifications}
+            label="Detailed notifications"
+            checked={settings.detailedNotifications}
             onChange={(evt) =>
-              repoScope &&
               updateSetting('detailedNotifications', evt.target.checked)
             }
-            disabled={!repoScope}
             tooltip={
               <div>
                 <div className="pb-3">
@@ -167,6 +97,41 @@ export const SettingsRoute: FC = () => {
             }
           />
           <Checkbox
+            name="showPills"
+            label="Show notification metric pills"
+            checked={settings.showPills}
+            onChange={(evt) => updateSetting('showPills', evt.target.checked)}
+            tooltip={
+              <div>
+                <div>Show notification metric pills for:</div>
+                <div className="pl-6">
+                  <ul className="list-disc">
+                    <li>
+                      <IssueClosedIcon size={16} className="pr-1" />
+                      linked issues
+                    </li>
+                    <li>
+                      <CheckIcon size={16} className="pr-1" /> pr reviews
+                    </li>
+                    <li>
+                      <CommentIcon size={16} className="pr-1" />
+                      comments
+                    </li>
+
+                    <li>
+                      <TagIcon size={16} className="pr-1" />
+                      labels
+                    </li>
+                    <li>
+                      <MilestoneIcon size={16} className="pr-1" />
+                      milestones
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            }
+          />
+          <Checkbox
             name="showAccountHostname"
             label="Show account hostname"
             checked={settings.showAccountHostname}
@@ -177,7 +142,7 @@ export const SettingsRoute: FC = () => {
         </fieldset>
 
         <fieldset className="mb-3">
-          <legend id="notifications" className="font-semibold mt-2 mb-1">
+          <legend id="notifications" className="mb-1 mt-2 font-semibold">
             Notifications
           </legend>
           <Checkbox
@@ -189,18 +154,20 @@ export const SettingsRoute: FC = () => {
             }
             tooltip={
               <div>
-                <div className="pb-3">
-                  See{' '}
-                  <button
-                    type="button"
-                    className="text-blue-500"
-                    title="Open GitHub documentation for participating and watching notifications"
-                    onClick={openGitHubParticipatingDocs}
-                  >
-                    official docs
-                  </button>{' '}
-                  for more details.
-                </div>
+                See
+                <button
+                  type="button"
+                  className="mx-1 text-blue-500"
+                  title="Open GitHub documentation for participating and watching notifications"
+                  onClick={(event: MouseEvent<HTMLElement>) => {
+                    // Don't trigger onClick of parent element.
+                    event.stopPropagation();
+                    openGitHubParticipatingDocs();
+                  }}
+                >
+                  official docs
+                </button>
+                for more details.
               </div>
             }
           />
@@ -234,28 +201,54 @@ export const SettingsRoute: FC = () => {
               updateSetting('markAsDoneOnOpen', evt.target.checked)
             }
           />
+          <Checkbox
+            name="delayNotificationState"
+            label="Delay notification state"
+            checked={settings.delayNotificationState}
+            onChange={(evt) =>
+              updateSetting('delayNotificationState', evt.target.checked)
+            }
+            tooltip={
+              <div>
+                Keep the notification within Gitify window upon interaction
+                (click, mark as read, mark as done, etc) until the next refresh
+                window (scheduled or user initiated).
+              </div>
+            }
+          />
         </fieldset>
 
         <fieldset className="mb-3">
-          <legend id="system" className="font-semibold mt-2 mb-1">
+          <legend id="system" className="mb-1 mt-2 font-semibold">
             System
           </legend>
           <Checkbox
             name="kbdShortcutEnabled"
-            label="Enable keyboard shortcut to open app"
-            checked={settings.kbdShortcutEnabled}
+            label="Enable keyboard shortcut"
+            checked={!!settings.keyboardShortcut}
             onChange={(evt) =>
-              updateSetting('kbdShortcutEnabled', evt.target.checked)
+              updateSetting('keyboardShortcut', evt.target.checked)
+            }
+            tooltip={
+              <div>
+                When enabled you can choose to use the hotkeys{' '}
+                {Constants.DEFAULT_KEYBOARD_SHORTCUT} to show or hide Gitify.
+              </div>
             }
           />
-          <Checkbox
-            name="showNotificationsCountInTray"
-            label="Show notifications count in tray"
-            checked={settings.showNotificationsCountInTray}
-            onChange={(evt) =>
-              updateSetting('showNotificationsCountInTray', evt.target.checked)
-            }
-          />
+          {isMacOS() && (
+            <Checkbox
+              name="showNotificationsCountInTray"
+              label="Show notifications count in tray"
+              checked={settings.showNotificationsCountInTray}
+              onChange={(evt) =>
+                updateSetting(
+                  'showNotificationsCountInTray',
+                  evt.target.checked,
+                )
+              }
+            />
+          )}
           <Checkbox
             name="showNotifications"
             label="Show system notifications"
@@ -270,7 +263,7 @@ export const SettingsRoute: FC = () => {
             checked={settings.playSound}
             onChange={(evt) => updateSetting('playSound', evt.target.checked)}
           />
-          {!isLinux && (
+          {!isLinux() && (
             <Checkbox
               name="openAtStartUp"
               label="Open at startup"
@@ -283,44 +276,30 @@ export const SettingsRoute: FC = () => {
         </fieldset>
       </div>
 
-      <div className="flex justify-between items-center bg-gray-200 dark:bg-gray-darker py-1 px-8 text-sm">
+      <div className="flex items-center justify-between bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker">
         <button
           type="button"
-          className="font-semibold cursor-pointer"
+          className="cursor-pointer font-semibold"
           title="View release notes"
-          onClick={() => openGitHubReleaseNotes(appVersion)}
+          onClick={() => openGitifyReleaseNotes(appVersion)}
         >
-          Gitify v{appVersion}
+          <span title="app-version">Gitify {appVersion}</span>
         </button>
         <div>
           <button
             type="button"
-            className={footerButtonClass}
-            title="Login with GitHub Enterprise"
-            onClick={goToEnterprise}
+            className={BUTTON_CLASS_NAME}
+            title="Accounts"
+            onClick={() => {
+              navigate('/accounts');
+            }}
           >
-            <PersonAddIcon
-              size={20}
-              aria-label="Login with GitHub Enterprise"
-            />
+            <PersonIcon size={18} aria-label="Accounts" />
           </button>
 
           <button
             type="button"
-            className={footerButtonClass}
-            title={`Logout from ${accounts.user.login}`}
-            role="button"
-            onClick={logoutUser}
-          >
-            <SignOutIcon
-              size={18}
-              aria-label={`Logout from ${accounts.user.login}`}
-            />
-          </button>
-
-          <button
-            type="button"
-            className={`${footerButtonClass} mr-0`}
+            className={BUTTON_CLASS_NAME}
             title="Quit Gitify"
             onClick={quitApp}
           >

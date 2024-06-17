@@ -1,171 +1,254 @@
 import {
   BellSlashIcon,
   CheckIcon,
+  CommentIcon,
   FeedPersonIcon,
+  IssueClosedIcon,
+  MilestoneIcon,
   ReadIcon,
+  TagIcon,
 } from '@primer/octicons-react';
-import { formatDistanceToNow, parseISO } from 'date-fns';
 import {
   type FC,
-  type KeyboardEvent,
   type MouseEvent,
   useCallback,
   useContext,
+  useState,
 } from 'react';
-
 import { AppContext } from '../context/App';
-import type { Notification } from '../typesGithub';
-import { openExternalLink } from '../utils/comms';
+import { IconColor } from '../types';
+import type { Notification } from '../typesGitHub';
+import { cn } from '../utils/cn';
 import {
-  formatReason,
+  formatForDisplay,
+  formatNotificationUpdatedAt,
+} from '../utils/helpers';
+import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
-} from '../utils/github-api';
-import { formatForDisplay, openInBrowser } from '../utils/helpers';
+  getPullRequestReviewIcon,
+} from '../utils/icons';
+import { openNotification, openUserProfile } from '../utils/links';
+import { formatReason } from '../utils/reason';
+import { PillButton } from './buttons/PillButton';
 
 interface IProps {
-  hostname: string;
   notification: Notification;
 }
 
-export const NotificationRow: FC<IProps> = ({ notification, hostname }) => {
+export const NotificationRow: FC<IProps> = ({ notification }) => {
   const {
     settings,
-    accounts,
     removeNotificationFromState,
     markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
   } = useContext(AppContext);
+  const [animateExit, setAnimateExit] = useState(false);
+  const [showAsRead, setShowAsRead] = useState(false);
 
-  const pressTitle = useCallback(() => {
-    openBrowser();
+  const handleNotification = useCallback(() => {
+    setAnimateExit(!settings.delayNotificationState);
+    setShowAsRead(settings.delayNotificationState);
+
+    openNotification(notification);
 
     if (settings.markAsDoneOnOpen) {
-      markNotificationDone(notification.id, hostname);
+      markNotificationDone(notification);
     } else {
       // no need to mark as read, github does it by default when opening it
-      removeNotificationFromState(notification.id, hostname);
+      removeNotificationFromState(settings, notification);
     }
-  }, [settings]);
-
-  const openBrowser = useCallback(
-    () => openInBrowser(notification, accounts),
-    [notification],
-  );
-
-  const unsubscribe = (event: MouseEvent<HTMLElement>) => {
+  }, [
+    notification,
+    markNotificationDone,
+    removeNotificationFromState,
+    settings,
+  ]);
+  const unsubscribeFromThread = (event: MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.
     event.stopPropagation();
 
-    unsubscribeNotification(notification.id, hostname);
-  };
-
-  const openUserProfile = (
-    event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>,
-  ) => {
-    // Don't trigger onClick of parent element.
-    event.stopPropagation();
-
-    openExternalLink(notification.subject.user.html_url);
+    unsubscribeNotification(notification);
   };
 
   const reason = formatReason(notification.reason);
   const NotificationIcon = getNotificationTypeIcon(notification.subject);
   const iconColor = getNotificationTypeIconColor(notification.subject);
-  const updatedAt = formatDistanceToNow(parseISO(notification.updated_at), {
-    addSuffix: true,
-  });
 
+  const updatedAt = formatNotificationUpdatedAt(notification);
   const updatedLabel = notification.subject.user
     ? `${notification.subject.user.login} updated ${updatedAt}`
     : `Updated ${updatedAt}`;
+
   const notificationTitle = formatForDisplay([
     notification.subject.state,
     notification.subject.type,
   ]);
 
+  const commentsPillDescription = `${notification.subject.comments} ${
+    notification.subject.comments > 1 ? 'comments' : 'comment'
+  }`;
+
+  const labelsPillDescription = notification.subject.labels
+    ?.map((label) => `🏷️ ${label}`)
+    .join('\n');
+
+  const linkedIssuesPillDescription = `Linked to ${
+    notification.subject.linkedIssues?.length > 1 ? 'issues' : 'issue'
+  } ${notification.subject?.linkedIssues?.join(', ')}`;
+
   return (
-    <div className="flex space-x-3 py-2 px-3 bg-white dark:bg-gray-dark dark:text-white hover:bg-gray-100 dark:hover:bg-gray-darker border-b border-gray-100 dark:border-gray-darker group">
+    <div
+      id={notification.id}
+      className={cn(
+        'group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker',
+        animateExit &&
+          'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
+        showAsRead && 'opacity-50 dark:opacity-50',
+      )}
+    >
       <div
-        className={`flex justify-center items-center w-5 ${iconColor}`}
+        className={cn('mr-3 flex w-5 items-center justify-center', iconColor)}
         title={notificationTitle}
       >
-        <NotificationIcon size={18} aria-label={notification.subject.type} />
+        <NotificationIcon size={16} aria-label={notification.subject.type} />
       </div>
 
       <div
-        className="flex-1 overflow-hidden"
-        onClick={() => pressTitle()}
-        onKeyDown={() => pressTitle()}
+        className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
+        onClick={() => handleNotification()}
       >
         <div
-          className="mb-1 text-sm whitespace-nowrap overflow-ellipsis overflow-hidden cursor-pointer"
+          className="mb-1 cursor-pointer truncate text-sm"
           role="main"
           title={notification.subject.title}
         >
           {notification.subject.title}
         </div>
 
-        <div className="text-xs text-capitalize whitespace-nowrap overflow-ellipsis overflow-hidden">
-          <span className="flex items-center">
-            <span title={updatedLabel} className="flex">
-              {notification.subject.user ? (
-                <span
-                  title="View User Profile"
-                  onClick={openUserProfile}
-                  onKeyDown={openUserProfile}
-                >
-                  <img
-                    className="rounded-full w-4 h-4 cursor-pointer"
-                    src={notification.subject.user.avatar_url}
-                    title={notification.subject.user.login}
-                    alt={`${notification.subject.user.login}'s avatar`}
-                  />
-                </span>
-              ) : (
-                <span>
-                  <FeedPersonIcon
-                    size={16}
-                    className="text-gray-500 dark:text-gray-300"
-                  />
-                </span>
+        <div className="flex flex-wrap items-center gap-1 text-xs capitalize">
+          {notification.subject.user ? (
+            <button
+              type="button"
+              title="View User Profile"
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                openUserProfile(notification.subject.user);
+              }}
+              className="flex-shrink-0"
+            >
+              <img
+                className="size-4 cursor-pointer rounded-full object-cover"
+                src={notification.subject.user.avatar_url}
+                title={notification.subject.user.login}
+                alt={`${notification.subject.user.login}'s avatar`}
+              />
+            </button>
+          ) : (
+            <div>
+              <FeedPersonIcon
+                size={16}
+                className="text-gray-500 dark:text-gray-300"
+              />
+            </div>
+          )}
+          <div title={reason.description}>{reason.title}</div>
+          <div title={updatedLabel}>{updatedAt}</div>
+          {settings.showPills && (
+            <div className="flex">
+              {notification.subject?.linkedIssues?.length > 0 && (
+                <PillButton
+                  title={linkedIssuesPillDescription}
+                  metric={notification.subject.linkedIssues.length}
+                  icon={IssueClosedIcon}
+                  color={IconColor.GREEN}
+                />
               )}
-              <span className="ml-1" title={reason.description}>
-                {reason.type}
-              </span>
-              <span className="ml-1">{updatedAt}</span>
-            </span>
-          </span>
+
+              {notification.subject.reviews?.map((review) => {
+                const icon = getPullRequestReviewIcon(review);
+                if (!icon) {
+                  return null;
+                }
+
+                return (
+                  <PillButton
+                    key={review.state}
+                    title={icon.description}
+                    metric={review.users.length}
+                    icon={icon.type}
+                    color={icon.color}
+                  />
+                );
+              })}
+              {notification.subject?.comments > 0 && (
+                <PillButton
+                  title={commentsPillDescription}
+                  metric={notification.subject.comments}
+                  icon={CommentIcon}
+                  color={IconColor.GRAY}
+                />
+              )}
+              {notification.subject?.labels?.length > 0 && (
+                <PillButton
+                  title={labelsPillDescription}
+                  metric={notification.subject.labels.length}
+                  icon={TagIcon}
+                  color={IconColor.GRAY}
+                />
+              )}
+              {notification.subject.milestone && (
+                <PillButton
+                  title={notification.subject.milestone.title}
+                  icon={MilestoneIcon}
+                  color={
+                    notification.subject.milestone.state === 'open'
+                      ? IconColor.GREEN
+                      : IconColor.RED
+                  }
+                />
+              )}
+            </div>
+          )}
         </div>
       </div>
 
-      <div className="flex justify-center items-center gap-2 opacity-0 group-hover:opacity-80 transition-opacity">
+      <div className="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80">
         <button
           type="button"
-          className="focus:outline-none h-full hover:text-green-500"
+          className="h-full hover:text-green-500 focus:outline-none"
           title="Mark as Done"
-          onClick={() => markNotificationDone(notification.id, hostname)}
+          onClick={() => {
+            setAnimateExit(!settings.delayNotificationState);
+            setShowAsRead(settings.delayNotificationState);
+            markNotificationDone(notification);
+          }}
         >
           <CheckIcon size={16} aria-label="Mark as Done" />
         </button>
 
         <button
           type="button"
-          className="focus:outline-none h-full hover:text-red-500"
-          title="Unsubscribe"
-          onClick={unsubscribe}
+          className="h-full hover:text-green-500 focus:outline-none"
+          title="Mark as Read"
+          onClick={() => {
+            setAnimateExit(!settings.delayNotificationState);
+            setShowAsRead(settings.delayNotificationState);
+            markNotificationRead(notification);
+          }}
         >
-          <BellSlashIcon size={14} aria-label="Unsubscribe" />
+          <ReadIcon size={14} aria-label="Mark as Read" />
         </button>
 
         <button
           type="button"
-          className="focus:outline-none h-full hover:text-green-500"
-          title="Mark as Read"
-          onClick={() => markNotificationRead(notification.id, hostname)}
+          className="h-full hover:text-red-500 focus:outline-none"
+          title="Unsubscribe from Thread"
+          onClick={unsubscribeFromThread}
         >
-          <ReadIcon size={14} aria-label="Mark as Read" />
+          <BellSlashIcon size={14} aria-label="Unsubscribe from Thread" />
         </button>
       </div>
     </div>

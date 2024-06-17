@@ -1,34 +1,29 @@
 import {
-  mockedAccountNotifications,
-  mockedSingleAccountNotifications,
-  mockedSingleNotification,
-} from '../__mocks__/mockedData';
+  mockAccountNotifications,
+  mockSingleAccountNotifications,
+} from '../__mocks__/notifications-mocks';
+import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import { removeNotifications } from './remove-notifications';
 
 describe('utils/remove-notifications.ts', () => {
-  const repoSlug = mockedSingleNotification.repository.full_name;
-  const hostname = mockedSingleAccountNotifications[0].hostname;
-
   it("should remove a repo's notifications - single", () => {
-    expect(mockedSingleAccountNotifications[0].notifications.length).toBe(1);
+    expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
     const result = removeNotifications(
-      repoSlug,
-      mockedSingleAccountNotifications,
-      hostname,
+      mockSingleNotification,
+      mockSingleAccountNotifications,
     );
 
     expect(result[0].notifications.length).toBe(0);
   });
 
   it("should remove a repo's notifications - multiple", () => {
-    expect(mockedAccountNotifications[0].notifications.length).toBe(2);
-    expect(mockedAccountNotifications[1].notifications.length).toBe(2);
+    expect(mockAccountNotifications[0].notifications.length).toBe(2);
+    expect(mockAccountNotifications[1].notifications.length).toBe(2);
 
     const result = removeNotifications(
-      repoSlug,
-      mockedAccountNotifications,
-      hostname,
+      mockSingleNotification,
+      mockAccountNotifications,
     );
 
     expect(result[0].notifications.length).toBe(0);
