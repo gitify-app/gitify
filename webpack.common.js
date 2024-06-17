@@ -1,7 +1,14 @@
 const path = require('node:path');
 const webpack = require('webpack');
 
-module.exports = {
+/**
+ * @typedef {import('webpack').Configuration} WebpackConfig
+ */
+
+/**
+ * @type {WebpackConfig}
+ */
+const config = {
   mode: 'development',
   entry: './src/index.tsx',
   devtool: 'inline-source-map',
@@ -34,3 +41,5 @@ module.exports = {
     path: path.resolve(__dirname, 'build', 'js'),
   },
 };
+
+module.exports = config;
