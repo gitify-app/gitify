@@ -3,6 +3,11 @@ import Constants from '../constants';
 import { loadState, saveState } from '../storage';
 import { getUserData } from './utils';
 
+export function logMigrationProgress(msg: string) {
+  // biome-ignore lint/suspicious/noConsoleLog: log migration progress
+  console.log(`Account Migration: ${msg}`);
+}
+
 /**
  * Migrate authenticated accounts from old data structure to new data structure (v5.7.0+).
  *
@@ -12,8 +17,7 @@ export async function migrateAuthenticatedAccounts() {
   const existing = loadState();
 
   if (hasAccountsToMigrate(existing.auth)) {
-    // biome-ignore lint/suspicious/noConsoleLog: console.log is used for debugging
-    console.log('Commencing authenticated accounts migration');
+    logMigrationProgress('Commencing authenticated accounts migration');
 
     const migratedAccounts = await convertAccounts(existing.auth);
 
@@ -21,8 +25,7 @@ export async function migrateAuthenticatedAccounts() {
       auth: { ...existing.auth, accounts: migratedAccounts },
       settings: existing.settings,
     });
-    // biome-ignore lint/suspicious/noConsoleLog: console.log is used for debugging
-    console.log('Authenticated accounts migration complete');
+    logMigrationProgress('Authenticated accounts migration complete');
   }
 }
 
