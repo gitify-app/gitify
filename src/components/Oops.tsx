@@ -1,11 +1,11 @@
 import { type FC, useMemo } from 'react';
 import type { GitifyError } from '../types';
 
-interface IProps {
+interface IOops {
   error: GitifyError;
 }
 
-export const Oops: FC<IProps> = ({ error }) => {
+export const Oops: FC<IOops> = ({ error }: IOops) => {
   const emoji = useMemo(
     () => error.emojis[Math.floor(Math.random() * error.emojis.length)],
     [error],
