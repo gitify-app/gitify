@@ -3,20 +3,22 @@ import {
   ChevronLeftIcon,
   ChevronUpIcon,
 } from '@primer/octicons-react';
-import { useState } from 'react';
+import { type FC, useState } from 'react';
 import type { Account } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openAccountProfile } from '../utils/links';
 import { RepositoryNotifications } from './Repository';
 import { PlatformIcon } from './icons/PlatformIcon';
 
-interface IProps {
+interface IAccountNotifications {
   account: Account;
   notifications: Notification[];
   showAccountHostname: boolean;
 }
 
-export const AccountNotifications = (props: IProps) => {
+export const AccountNotifications: FC<IAccountNotifications> = (
+  props: IAccountNotifications,
+) => {
   const { account, showAccountHostname, notifications } = props;
 
   const groupedNotifications = Object.values(

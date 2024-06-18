@@ -1,8 +1,8 @@
 import NProgress from 'nprogress';
-import { useContext, useEffect } from 'react';
+import { type FC, useContext, useEffect } from 'react';
 import { AppContext } from '../context/App';
 
-export const Loading = () => {
+export const Loading: FC = () => {
   const { status } = useContext(AppContext);
 
   useEffect(() => {
