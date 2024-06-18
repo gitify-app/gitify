@@ -2,7 +2,7 @@ import { KeyIcon, PersonIcon } from '@primer/octicons-react';
 import { type FC, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Logo } from '../components/Logo';
-import { Button } from '../components/fields/Button';
+import { Button } from '../components/buttons/Button';
 import { AppContext } from '../context/App';
 import { showWindow } from '../utils/comms';
 
