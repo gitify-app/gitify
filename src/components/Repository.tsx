@@ -11,12 +11,12 @@ import type { Notification } from '../typesGitHub';
 import { openRepository } from '../utils/links';
 import { NotificationRow } from './NotificationRow';
 
-interface IProps {
+interface IRepositoryNotifications {
   repoNotifications: Notification[];
   repoName: string;
 }
 
-export const RepositoryNotifications: FC<IProps> = ({
+export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
   repoName,
   repoNotifications,
 }) => {
