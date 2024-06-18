@@ -74,6 +74,7 @@ interface SystemSettingsState {
   playSound: boolean;
   openAtStartup: boolean;
   showNotificationsCountInTray: boolean;
+  keyboardShortcut: boolean;
 }
 
 export interface GitifyState {

@@ -83,6 +83,7 @@ export const mockSettings: SettingsState = {
   showAccountHostname: false,
   delayNotificationState: false,
   showPills: true,
+  keyboardShortcut: true,
 };
 
 export const mockState: GitifyState = {

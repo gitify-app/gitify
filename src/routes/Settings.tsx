@@ -23,6 +23,7 @@ import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import { Theme } from '../types';
 import { getAppVersion, quitApp } from '../utils/comms';
+import Constants from '../utils/constants';
 import {
   openGitHubParticipatingDocs,
   openGitifyReleaseNotes,
@@ -211,7 +212,7 @@ export const SettingsRoute: FC = () => {
               <div>
                 Keep the notification within Gitify window upon interaction
                 (click, mark as read, mark as done, etc) until the next refresh
-                window (scheduled or user initiated)
+                window (scheduled or user initiated).
               </div>
             }
           />
@@ -221,6 +222,23 @@ export const SettingsRoute: FC = () => {
           <legend id="system" className="mb-1 mt-2 font-semibold">
             System
           </legend>
+          <Checkbox
+            name="kbdShortcutEnabled"
+            label="Enable keyboard shortcut"
+            checked={!!settings.keyboardShortcut}
+            onChange={(evt) =>
+              updateSetting('keyboardShortcut', evt.target.checked)
+            }
+            tooltip={
+              <div>
+                When enabled you can choose to use the hotkeys{' '}
+                <span className="text-orange-600">
+                  {Constants.DEFAULT_KEYBOARD_SHORTCUT}
+                </span>{' '}
+                to show or hide Gitify.
+              </div>
+            }
+          />
           {isMacOS() && (
             <Checkbox
               name="showNotificationsCountInTray"

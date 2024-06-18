@@ -378,6 +378,31 @@ describe('routes/Settings.tsx', () => {
   });
 
   describe('System section', () => {
+    it('should toggle the keyboardShortcut checkbox', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+              updateSetting,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      fireEvent.click(screen.getByLabelText('Enable keyboard shortcut'), {
+        target: { checked: true },
+      });
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith('keyboardShortcut', false);
+    });
+
     it('should toggle the showNotificationsCountInTray checkbox', async () => {
       await act(async () => {
         render(

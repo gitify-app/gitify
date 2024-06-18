@@ -379,6 +379,7 @@ describe('context/App.tsx', () => {
           showAccountHostname: false,
           delayNotificationState: false,
           showPills: true,
+          keyboardShortcut: true,
         } as SettingsState,
       });
     });
@@ -430,6 +431,7 @@ describe('context/App.tsx', () => {
           showAccountHostname: false,
           delayNotificationState: false,
           showPills: true,
+          keyboardShortcut: true,
         } as SettingsState,
       });
     });

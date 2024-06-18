@@ -1,4 +1,10 @@
-const { ipcMain: ipc, app, nativeTheme, Menu } = require('electron/main');
+const {
+  ipcMain: ipc,
+  app,
+  nativeTheme,
+  globalShortcut,
+  Menu,
+} = require('electron/main');
 const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
@@ -121,6 +127,24 @@ app.whenReady().then(async () => {
       mb.tray.setTitle(title);
     }
   });
+
+  ipc.on(
+    'gitify:update-keyboard-shortcut',
+    (_, { enabled, keyboardShortcut }) => {
+      if (!enabled) {
+        globalShortcut.unregister(keyboardShortcut);
+        return;
+      }
+
+      globalShortcut.register(keyboardShortcut, () => {
+        if (mb.window.isVisible()) {
+          mb.hideWindow();
+        } else {
+          mb.showWindow();
+        }
+      });
+    },
+  );
 
   ipc.on('gitify:update-auto-launch', (_, settings) => {
     app.setLoginItemSettings(settings);

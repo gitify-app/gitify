@@ -31,7 +31,11 @@ import {
   getUserData,
   removeAccount,
 } from '../utils/auth/utils';
-import { setAutoLaunch, updateTrayTitle } from '../utils/comms';
+import {
+  setAutoLaunch,
+  setKeyboardShortcut,
+  updateTrayTitle,
+} from '../utils/comms';
 import Constants from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
@@ -57,6 +61,7 @@ export const defaultSettings: SettingsState = {
   showAccountHostname: false,
   delayNotificationState: false,
   showPills: true,
+  keyboardShortcut: true,
 };
 
 interface AppContextState {
@@ -140,6 +145,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }
   }, [settings.showNotificationsCountInTray, notifications]);
 
+  useEffect(() => {
+    setKeyboardShortcut(settings.keyboardShortcut);
+  }, [settings.keyboardShortcut]);
+
   const updateSetting = useCallback(
     (name: keyof SettingsState, value: boolean | Theme) => {
       if (name === 'openAtStartup') {
@@ -220,6 +229,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     }
 
     if (existing.settings) {
+      setKeyboardShortcut(existing.settings.keyboardShortcut);
       setSettings({ ...defaultSettings, ...existing.settings });
       return existing.settings;
     }

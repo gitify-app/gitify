@@ -23,6 +23,8 @@ export const Constants = {
 
   FETCH_INTERVAL: 60000,
 
+  DEFAULT_KEYBOARD_SHORTCUT: 'CommandOrControl+Shift+G',
+
   // GitHub Docs
   GITHUB_DOCS: {
     OAUTH_URL:
