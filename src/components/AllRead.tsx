@@ -1,7 +1,7 @@
-import { useMemo } from 'react';
+import { type FC, useMemo } from 'react';
 import { Constants } from '../utils/constants';
 
-export const AllRead = () => {
+export const AllRead: FC = () => {
   const emoji = useMemo(
     () =>
       Constants.ALL_READ_EMOJIS[
