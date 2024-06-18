@@ -8,15 +8,15 @@ export function getTheme(): Theme {
   return Theme.LIGHT;
 }
 
-export const setLightMode = () => {
+export function setLightMode() {
   document.querySelector('html').classList.remove('dark');
-};
+}
 
-export const setDarkMode = () => {
+export function setDarkMode() {
   document.querySelector('html').classList.add('dark');
-};
+}
 
-export const setTheme = (mode?: Theme) => {
+export function setTheme(mode?: Theme) {
   switch (mode) {
     case Theme.LIGHT:
       setLightMode();
@@ -33,4 +33,4 @@ export const setTheme = (mode?: Theme) => {
         setLightMode();
       }
   }
-};
+}

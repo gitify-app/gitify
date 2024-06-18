@@ -11,11 +11,11 @@ import { openNotification } from './links';
 import { isWindows } from './platform';
 import { getGitifySubjectDetails } from './subject';
 
-export const setTrayIconColor = (notifications: AccountNotifications[]) => {
+export function setTrayIconColor(notifications: AccountNotifications[]) {
   const allNotificationsCount = getNotificationCount(notifications);
 
   updateTrayIcon(allNotificationsCount);
-};
+}
 
 export function getNotificationCount(notifications: AccountNotifications[]) {
   return notifications.reduce(
