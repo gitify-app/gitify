@@ -152,7 +152,7 @@
     "webpack-cli": "5.1.4",
     "webpack-merge": "5.10.0"
   },
-  "packageManager": "pnpm@9.3.0",
+  "packageManager": "pnpm@9.4.0",
   "lint-staged": {
     "*.{js,json,ts,tsx}": "biome format --fix"
   }
