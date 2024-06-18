@@ -4,8 +4,8 @@ import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
 import * as links from '../utils/links';
 import { AccountNotifications } from './AccountNotifications';
 
-jest.mock('./Repository', () => ({
-  RepositoryNotifications: () => <div>Repository</div>,
+jest.mock('./RepositoryNotifications', () => ({
+  RepositoryNotifications: () => <div>Repository Notifications</div>,
 }));
 
 describe('components/AccountNotifications.tsx', () => {
