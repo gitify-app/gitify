@@ -10,12 +10,14 @@ const notarizeApp = async (context) => {
   const shouldNotarize = process.env.NOTARIZE === 'true';
 
   if (!shouldNotarize || !isMacOS) {
+    // biome-ignore lint/suspicious/noConsoleLog: console.log is used for debugging
     console.log(
       '  • notarizing      either should not notarize or not building for macOS',
     );
     return;
   }
 
+  // biome-ignore lint/suspicious/noConsoleLog: console.log is used for debugging
   console.log('  • notarizing      started');
 
   return await notarize({

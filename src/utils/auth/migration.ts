@@ -12,6 +12,7 @@ export async function migrateAuthenticatedAccounts() {
   const existing = loadState();
 
   if (hasAccountsToMigrate(existing.auth)) {
+    // biome-ignore lint/suspicious/noConsoleLog: console.log is used for debugging
     console.log('Commencing authenticated accounts migration');
 
     const migratedAccounts = await convertAccounts(existing.auth);
@@ -20,6 +21,7 @@ export async function migrateAuthenticatedAccounts() {
       auth: { ...existing.auth, accounts: migratedAccounts },
       settings: existing.settings,
     });
+    // biome-ignore lint/suspicious/noConsoleLog: console.log is used for debugging
     console.log('Authenticated accounts migration complete');
   }
 }
