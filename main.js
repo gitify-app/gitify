@@ -131,9 +131,6 @@ app.whenReady().then(async () => {
   ipc.on(
     'gitify:update-keyboard-shortcut',
     (_, { enabled, keyboardShortcut }) => {
-      console.log('enabled', enabled);
-
-      console.log('keyboardShortcut', keyboardShortcut);
       if (!enabled) {
         globalShortcut.unregister(keyboardShortcut);
         return;
