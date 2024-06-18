@@ -6,7 +6,7 @@ exports[`components/buttons/SidebarButton.tsx should render with metric 1`] = `
   "baseElement": <body>
     <div>
       <button
-        class="my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold text-green-500"
+        class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500  disabled:cursor-default text-green-500 hover:text-green-700 py-1"
         title="Mock Sidebar Button"
         type="button"
       >
@@ -31,7 +31,7 @@ exports[`components/buttons/SidebarButton.tsx should render with metric 1`] = `
   </body>,
   "container": <div>
     <button
-      class="my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold text-green-500"
+      class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500  disabled:cursor-default text-green-500 hover:text-green-700 py-1"
       title="Mock Sidebar Button"
       type="button"
     >
@@ -113,7 +113,7 @@ exports[`components/buttons/SidebarButton.tsx should render without metric 1`] =
   "baseElement": <body>
     <div>
       <button
-        class="my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold text-white"
+        class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500  disabled:cursor-default text-white hover:text-gray-500 py-1"
         title="Mock Sidebar Button"
         type="button"
       >
@@ -137,7 +137,7 @@ exports[`components/buttons/SidebarButton.tsx should render without metric 1`] =
   </body>,
   "container": <div>
     <button
-      class="my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold text-white"
+      class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500  disabled:cursor-default text-white hover:text-gray-500 py-1"
       title="Mock Sidebar Button"
       type="button"
     >

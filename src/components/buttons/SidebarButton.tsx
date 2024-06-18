@@ -8,6 +8,9 @@ export interface ISidebarButton {
   metric?: number;
   icon: Icon;
   onClick?: () => void;
+  size?: number;
+  loading?: boolean;
+  disabled?: boolean;
 }
 
 export const SidebarButton: FC<ISidebarButton> = (props: ISidebarButton) => {
@@ -17,13 +20,18 @@ export const SidebarButton: FC<ISidebarButton> = (props: ISidebarButton) => {
     <button
       type="button"
       className={cn(
-        'my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold',
-        hasMetric ? IconColor.GREEN : IconColor.WHITE,
+        'flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500  disabled:cursor-default',
+        hasMetric
+          ? `${IconColor.GREEN} hover:text-green-700`
+          : `${IconColor.WHITE} hover:text-gray-500`,
+        props.loading ? 'animate-spin' : undefined,
+        props.size ? 'py-2' : 'py-1',
       )}
       onClick={() => props.onClick()}
       title={props.title}
+      disabled={props.disabled}
     >
-      <props.icon size={12} aria-label={props.title} />
+      <props.icon size={props.size ?? 12} aria-label={props.title} />
       {hasMetric && props.metric}
     </button>
   );
