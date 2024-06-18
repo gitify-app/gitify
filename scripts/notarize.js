@@ -5,7 +5,7 @@ const appBundleId = packageJson.build.appId;
 
 function logNotarizingProgress(msg) {
   // biome-ignore lint/suspicious/noConsoleLog: log notarizing progress
-  console.log(` • notarizing:\t${msg}`);
+  console.log(`  • notarizing        ${msg}`);
 }
 
 const notarizeApp = async (context) => {
