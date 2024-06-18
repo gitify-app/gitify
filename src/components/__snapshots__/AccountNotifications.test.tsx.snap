@@ -65,7 +65,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         </div>
       </div>
       <div>
-        Repository
+        Repository Notifications
       </div>
     </div>
   </body>,
@@ -130,7 +130,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
       </div>
     </div>
     <div>
-      Repository
+      Repository Notifications
     </div>
   </div>,
   "debug": [Function],
@@ -494,7 +494,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
         </div>
       </div>
       <div>
-        Repository
+        Repository Notifications
       </div>
     </div>
   </body>,
@@ -559,7 +559,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
       </div>
     </div>
     <div>
-      Repository
+      Repository Notifications
     </div>
   </div>,
   "debug": [Function],
