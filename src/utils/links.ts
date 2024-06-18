@@ -19,14 +19,6 @@ export function openGitHubNotifications() {
   openExternalLink('https://github.com/notifications' as Link);
 }
 
-export function openGitHubIssues() {
-  openExternalLink('https://github.com/issues' as Link);
-}
-
-export function openGitHubPulls() {
-  openExternalLink('https://github.com/pulls' as Link);
-}
-
 export function openAccountProfile(account: Account) {
   const url = new URL(`https://${account.hostname}`);
   url.pathname = account.user.login;

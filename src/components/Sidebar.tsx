@@ -1,8 +1,6 @@
 import {
   BellIcon,
   GearIcon,
-  GitPullRequestIcon,
-  IssueOpenedIcon,
   SyncIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
@@ -11,12 +9,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
 import { quitApp } from '../utils/comms';
-import {
-  openGitHubIssues,
-  openGitHubNotifications,
-  openGitHubPulls,
-  openGitifyRepository,
-} from '../utils/links';
+import { openGitHubNotifications, openGitifyRepository } from '../utils/links';
 import { getNotificationCount } from '../utils/notifications';
 import { SidebarButton } from './buttons/SidebarButton';
 
@@ -62,18 +55,6 @@ export const Sidebar: FC = () => {
           metric={notificationsCount}
           icon={BellIcon}
           onClick={() => openGitHubNotifications()}
-        />
-
-        <SidebarButton
-          title="My Issues"
-          icon={IssueOpenedIcon}
-          onClick={() => openGitHubIssues()}
-        />
-
-        <SidebarButton
-          title="My Pull Requests"
-          icon={GitPullRequestIcon}
-          onClick={() => openGitHubPulls()}
         />
       </div>
 

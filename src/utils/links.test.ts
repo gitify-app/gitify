@@ -10,10 +10,8 @@ import * as helpers from './helpers';
 import {
   openAccountProfile,
   openDeveloperSettings,
-  openGitHubIssues,
   openGitHubNotifications,
   openGitHubParticipatingDocs,
-  openGitHubPulls,
   openGitifyReleaseNotes,
   openGitifyRepository,
   openHost,
@@ -49,20 +47,6 @@ describe('utils/links.ts', () => {
     openGitHubNotifications();
     expect(comms.openExternalLink).toHaveBeenCalledWith(
       'https://github.com/notifications',
-    );
-  });
-
-  it('openGitHubIssues', () => {
-    openGitHubIssues();
-    expect(comms.openExternalLink).toHaveBeenCalledWith(
-      'https://github.com/issues',
-    );
-  });
-
-  it('openGitHubPulls', () => {
-    openGitHubPulls();
-    expect(comms.openExternalLink).toHaveBeenCalledWith(
-      'https://github.com/pulls',
     );
   });
 
