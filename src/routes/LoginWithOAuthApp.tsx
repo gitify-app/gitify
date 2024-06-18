@@ -2,7 +2,7 @@ import { BookIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
 import { type FC, useCallback, useContext } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { Header } from '../components/Header';
-import { Button } from '../components/fields/Button';
+import { Button } from '../components/buttons/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
 import type { ClientID, ClientSecret, Hostname, Token } from '../types';

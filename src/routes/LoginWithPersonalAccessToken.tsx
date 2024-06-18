@@ -3,7 +3,7 @@ import { type FC, useCallback, useContext, useState } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
-import { Button } from '../components/fields/Button';
+import { Button } from '../components/buttons/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
 import type { Hostname, Token } from '../types';
