@@ -3,6 +3,11 @@ const { notarize } = require('@electron/notarize');
 const packageJson = require('../package.json');
 const appBundleId = packageJson.build.appId;
 
+function logNotarizingProgress(msg) {
+  // biome-ignore lint/suspicious/noConsoleLog: log notarizing progress
+  console.log(`  • notarizing        ${msg}`);
+}
+
 const notarizeApp = async (context) => {
   const { electronPlatformName, appOutDir } = context;
   const appName = context.packager.appInfo.productFilename;
@@ -10,13 +15,13 @@ const notarizeApp = async (context) => {
   const shouldNotarize = process.env.NOTARIZE === 'true';
 
   if (!shouldNotarize || !isMacOS) {
-    console.log(
-      '  • notarizing      either should not notarize or not building for macOS',
+    logNotarizingProgress(
+      'either should not notarize or not building for macOS',
     );
     return;
   }
 
-  console.log('  • notarizing      started');
+  logNotarizingProgress('process started');
 
   return await notarize({
     appBundleId,
