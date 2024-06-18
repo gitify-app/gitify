@@ -7,7 +7,7 @@ import { type FC, useState } from 'react';
 import type { Account } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openAccountProfile } from '../utils/links';
-import { RepositoryNotifications } from './Repository';
+import { RepositoryNotifications } from './RepositoryNotifications';
 import { PlatformIcon } from './icons/PlatformIcon';
 
 interface IAccountNotifications {
