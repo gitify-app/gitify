@@ -32,11 +32,13 @@ import { openNotification, openUserProfile } from '../utils/links';
 import { formatReason } from '../utils/reason';
 import { PillButton } from './buttons/PillButton';
 
-interface IProps {
+interface INotificationRow {
   notification: Notification;
 }
 
-export const NotificationRow: FC<IProps> = ({ notification }) => {
+export const NotificationRow: FC<INotificationRow> = ({
+  notification,
+}: INotificationRow) => {
   const {
     settings,
     removeNotificationFromState,

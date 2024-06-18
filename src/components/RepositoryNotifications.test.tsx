@@ -7,7 +7,7 @@ import {
   mockSingleNotification,
 } from '../utils/api/__mocks__/response-mocks';
 import * as comms from '../utils/comms';
-import { RepositoryNotifications } from './Repository';
+import { RepositoryNotifications } from './RepositoryNotifications';
 
 jest.mock('./NotificationRow', () => ({
   NotificationRow: () => <div>NotificationRow</div>,
