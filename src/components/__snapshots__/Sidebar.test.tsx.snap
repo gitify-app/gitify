@@ -63,7 +63,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
             </svg>
           </button>
           <button
-            class="my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold text-green-500"
+            class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500  disabled:cursor-default text-green-500 hover:text-green-700 py-1"
             title="4 Unread Notifications"
             type="button"
           >
@@ -89,8 +89,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
           class="px-3 py-4"
         >
           <button
-            aria-label="Quit Gitify"
-            class="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none disabled:text-gray-500 disabled:cursor-default"
+            class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500  disabled:cursor-default text-white hover:text-gray-500 py-2"
             title="Quit Gitify"
             type="button"
           >
@@ -173,7 +172,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
           </svg>
         </button>
         <button
-          class="my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold text-green-500"
+          class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500  disabled:cursor-default text-green-500 hover:text-green-700 py-1"
           title="4 Unread Notifications"
           type="button"
         >
@@ -199,8 +198,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         class="px-3 py-4"
       >
         <button
-          aria-label="Quit Gitify"
-          class="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none disabled:text-gray-500 disabled:cursor-default"
+          class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500  disabled:cursor-default text-white hover:text-gray-500 py-2"
           title="Quit Gitify"
           type="button"
         >
@@ -340,7 +338,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
             </svg>
           </button>
           <button
-            class="my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold text-green-500"
+            class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500  disabled:cursor-default text-green-500 hover:text-green-700 py-1"
             title="4 Unread Notifications"
             type="button"
           >
@@ -366,8 +364,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
           class="px-3 py-4"
         >
           <button
-            aria-label="Quit Gitify"
-            class="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none disabled:text-gray-500 disabled:cursor-default"
+            class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500  disabled:cursor-default text-white hover:text-gray-500 py-2"
             title="Quit Gitify"
             type="button"
           >
@@ -450,7 +447,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
           </svg>
         </button>
         <button
-          class="my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold text-green-500"
+          class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500  disabled:cursor-default text-green-500 hover:text-green-700 py-1"
           title="4 Unread Notifications"
           type="button"
         >
@@ -476,8 +473,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
         class="px-3 py-4"
       >
         <button
-          aria-label="Quit Gitify"
-          class="flex justify-evenly items-center bg-transparent border-0 w-full text-sm text-white my-1 py-2 cursor-pointer hover:text-gray-500 focus:outline-none disabled:text-gray-500 disabled:cursor-default"
+          class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500  disabled:cursor-default text-white hover:text-gray-500 py-2"
           title="Quit Gitify"
           type="button"
         >
