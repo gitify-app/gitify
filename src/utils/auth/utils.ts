@@ -17,9 +17,9 @@ import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
 import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
 
-export const authGitHub = (
+export function authGitHub(
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
-): Promise<AuthResponse> => {
+): Promise<AuthResponse> {
   return new Promise((resolve, reject) => {
     // Build the OAuth consent page URL
     const authWindow = new BrowserWindow({
@@ -83,12 +83,12 @@ export const authGitHub = (
       handleCallback(url as Link);
     });
   });
-};
+}
 
-export const getUserData = async (
+export async function getUserData(
   token: Token,
   hostname: Hostname,
-): Promise<GitifyUser> => {
+): Promise<GitifyUser> {
   const response: UserDetails = (await getAuthenticatedUser(hostname, token))
     .data;
 
@@ -97,12 +97,12 @@ export const getUserData = async (
     login: response.login,
     name: response.name,
   };
-};
+}
 
-export const getToken = async (
+export async function getToken(
   authCode: AuthCode,
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
-): Promise<AuthTokenResponse> => {
+): Promise<AuthTokenResponse> {
   const url =
     `https://${authOptions.hostname}/login/oauth/access_token` as Link;
   const data = {
@@ -116,7 +116,7 @@ export const getToken = async (
     hostname: authOptions.hostname,
     token: response.data.access_token,
   };
-};
+}
 
 export function addAccount(
   auth: AuthState,
