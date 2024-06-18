@@ -7,6 +7,9 @@
     "enabled": true,
     "rules": {
       "recommended": true,
+      "suspicious": {
+        "noConsoleLog": "error"
+      },
       "nursery": {
         "noUnusedFunctionParameters": "error",
         "useDefaultSwitchClause": "error"

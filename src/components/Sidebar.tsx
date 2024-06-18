@@ -8,11 +8,10 @@ import { type FC, useContext, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
-import { BUTTON_SIDEBAR_CLASS_NAME } from '../styles/gitify';
-import { cn } from '../utils/cn';
 import { quitApp } from '../utils/comms';
 import { openGitHubNotifications, openGitifyRepository } from '../utils/links';
 import { getNotificationCount } from '../utils/notifications';
+import { SidebarButton } from './buttons/SidebarButton';
 
 export const Sidebar: FC = () => {
   const navigate = useNavigate();
@@ -27,6 +26,11 @@ export const Sidebar: FC = () => {
     } else {
       navigate('/settings');
     }
+  };
+
+  const refreshNotifications = () => {
+    navigate('/', { replace: true });
+    fetchNotifications();
   };
 
   const notificationsCount = useMemo(() => {
@@ -46,63 +50,42 @@ export const Sidebar: FC = () => {
           <Logo aria-label="Open Gitify" />
         </button>
 
-        <button
-          type="button"
-          className={cn(
-            'my-1 flex cursor-pointer items-center justify-around self-stretch px-2 py-1 text-xs font-extrabold',
-            notificationsCount > 0 ? 'text-green-500' : 'text-white',
-          )}
-          onClick={() => openGitHubNotifications()}
+        <SidebarButton
           title={`${notificationsCount} Unread Notifications`}
-        >
-          <BellIcon
-            size={12}
-            aria-label={`${notificationsCount} Unread Notifications`}
-          />
-          {notificationsCount > 0 && notificationsCount}
-        </button>
+          metric={notificationsCount}
+          icon={BellIcon}
+          onClick={() => openGitHubNotifications()}
+        />
       </div>
 
       <div className="px-3 py-4">
         {isLoggedIn && (
           <>
-            <button
-              type="button"
-              className={BUTTON_SIDEBAR_CLASS_NAME}
+            <SidebarButton
               title="Refresh Notifications"
-              onClick={() => {
-                navigate('/', { replace: true });
-                fetchNotifications();
-              }}
+              icon={SyncIcon}
+              size={16}
+              loading={status === 'loading'}
               disabled={status === 'loading'}
-            >
-              <SyncIcon
-                size={16}
-                aria-label="Refresh Notifications"
-                className={status === 'loading' ? 'animate-spin' : undefined}
-              />
-            </button>
-            <button
-              type="button"
-              className={BUTTON_SIDEBAR_CLASS_NAME}
+              onClick={() => refreshNotifications()}
+            />
+
+            <SidebarButton
               title="Settings"
-              onClick={toggleSettings}
-            >
-              <GearIcon size={16} aria-label="Settings" />
-            </button>
+              icon={GearIcon}
+              size={16}
+              onClick={() => toggleSettings()}
+            />
           </>
         )}
 
         {!isLoggedIn && (
-          <button
-            type="button"
-            className={BUTTON_SIDEBAR_CLASS_NAME}
+          <SidebarButton
             title="Quit Gitify"
-            aria-label="Quit Gitify"
-            onClick={quitApp}
-          >
-            <XCircleIcon size={16} aria-label="Quit Gitify" />
-          </button>
+            icon={XCircleIcon}
+            size={16}
+            onClick={() => quitApp()}
+          />
         )}
       </div>
     </div>

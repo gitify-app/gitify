@@ -2,11 +2,11 @@ import type { AccountNotifications, SettingsState } from '../types';
 import type { Notification } from '../typesGitHub';
 import { getAccountUUID } from './auth/utils';
 
-export const removeNotification = (
+export function removeNotification(
   settings: SettingsState,
   notification: Notification,
   notifications: AccountNotifications[],
-): AccountNotifications[] => {
+): AccountNotifications[] {
   if (settings.delayNotificationState) {
     return notifications;
   }
@@ -31,4 +31,4 @@ export const removeNotification = (
   }
 
   return notifications;
-};
+}

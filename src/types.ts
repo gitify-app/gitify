@@ -128,6 +128,7 @@ export enum IconColor {
   PURPLE = 'text-purple-500',
   RED = 'text-red-500',
   YELLOW = 'text-yellow-500 dark:text-yellow-300',
+  WHITE = 'text-white',
 }
 
 export type PullRequestApprovalIcon = {
