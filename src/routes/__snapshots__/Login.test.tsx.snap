@@ -10,7 +10,7 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
       >
         <svg
           aria-label="Gitify Logo"
-          class="h-16 w-16"
+          class="size-16"
           role="img"
           viewBox="0 0 500 500"
           xmlns="http://www.w3.org/2000/svg"
@@ -117,7 +117,7 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
     >
       <svg
         aria-label="Gitify Logo"
-        class="h-16 w-16"
+        class="size-16"
         role="img"
         viewBox="0 0 500 500"
         xmlns="http://www.w3.org/2000/svg"
