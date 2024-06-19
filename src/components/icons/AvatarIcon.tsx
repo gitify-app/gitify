@@ -2,14 +2,14 @@ import type { Icon } from '@primer/octicons-react';
 import type { FC } from 'react';
 import { cn } from '../../utils/cn';
 
-export interface IAvatar {
+export interface IAvatarIcon {
   title: string;
   url: string | null;
   size: 'small' | 'medium';
   defaultIcon: Icon;
 }
 
-export const AvatarIcon: FC<IAvatar> = (props: IAvatar) => {
+export const AvatarIcon: FC<IAvatarIcon> = (props: IAvatarIcon) => {
   if (props.url) {
     return (
       <img

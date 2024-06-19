@@ -1,10 +1,10 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
 import { render } from '@testing-library/react';
-import { AvatarIcon, type IAvatar } from './AvatarIcon';
+import { AvatarIcon, type IAvatarIcon } from './AvatarIcon';
 
 describe('components/icons/AvatarIcon.tsx', () => {
   it('should render small avatar', () => {
-    const props: IAvatar = {
+    const props: IAvatarIcon = {
       defaultIcon: MarkGithubIcon,
       title: 'test',
       url: 'https://avatars.githubusercontent.com/u/583231?v=4',
@@ -15,7 +15,7 @@ describe('components/icons/AvatarIcon.tsx', () => {
   });
 
   it('should render medium avatar', () => {
-    const props: IAvatar = {
+    const props: IAvatarIcon = {
       defaultIcon: MarkGithubIcon,
       title: 'test',
       url: 'https://avatars.githubusercontent.com/u/583231?v=4',
@@ -26,7 +26,7 @@ describe('components/icons/AvatarIcon.tsx', () => {
   });
 
   it('should render default icon when no url', () => {
-    const props: IAvatar = {
+    const props: IAvatarIcon = {
       defaultIcon: MarkGithubIcon,
       title: 'test',
       url: null,
