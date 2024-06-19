@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       fontSize: {
-        xss: '0.625rem', // 10px
+        xxs: '0.625rem', // 10px
       },
       colors: {
         gray: {
