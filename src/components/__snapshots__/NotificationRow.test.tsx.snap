@@ -4683,9 +4683,8 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
             >
               <img
                 alt="gitify-app's avatar"
-                class="size-4 cursor-pointer rounded-full object-cover"
+                class="cursor-pointer rounded-full object-cover size-4"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                title="gitify-app"
               />
             </button>
             <div
@@ -4866,9 +4865,8 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
           >
             <img
               alt="gitify-app's avatar"
-              class="size-4 cursor-pointer rounded-full object-cover"
+              class="cursor-pointer rounded-full object-cover size-4"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              title="gitify-app"
             />
           </button>
           <div
@@ -5106,9 +5104,8 @@ exports[`components/NotificationRow.tsx should render itself & its children when
             >
               <img
                 alt="gitify-app's avatar"
-                class="size-4 cursor-pointer rounded-full object-cover"
+                class="cursor-pointer rounded-full object-cover size-4"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                title="gitify-app"
               />
             </button>
             <div
@@ -5289,9 +5286,8 @@ exports[`components/NotificationRow.tsx should render itself & its children when
           >
             <img
               alt="gitify-app's avatar"
-              class="size-4 cursor-pointer rounded-full object-cover"
+              class="cursor-pointer rounded-full object-cover size-4"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              title="gitify-app"
             />
           </button>
           <div

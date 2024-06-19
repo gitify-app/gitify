@@ -9,6 +9,7 @@ import { type FC, useCallback, useContext, useState } from 'react';
 import { AppContext } from '../context/App';
 import type { Notification } from '../typesGitHub';
 import { openRepository } from '../utils/links';
+import { Avatar } from './Avatar';
 import { NotificationRow } from './NotificationRow';
 
 interface IRepositoryNotifications {
@@ -55,15 +56,12 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
         onClick={toggleRepositoryNotifications}
       >
         <div className="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium">
-          {avatarUrl ? (
-            <img
-              className="size-5 rounded"
-              src={avatarUrl}
-              alt={`${repoName}'s avatar`}
-            />
-          ) : (
-            <MarkGithubIcon size={18} />
-          )}
+          <Avatar
+            title={repoName}
+            url={avatarUrl}
+            size="medium"
+            defaultIcon={MarkGithubIcon}
+          />
           <span
             className="cursor-pointer truncate opacity-90"
             onClick={() => openRepository(repoNotifications[0].repository)}
