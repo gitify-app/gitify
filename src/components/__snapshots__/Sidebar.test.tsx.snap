@@ -12,14 +12,14 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
           class="flex flex-1 flex-col items-center py-4"
         >
           <button
-            class="mx-auto my-3 w-5 cursor-pointer outline-none"
+            class="mx-auto my-3 cursor-pointer outline-none"
             data-testid="gitify-logo"
             title="Open Gitify on GitHub"
             type="button"
           >
             <svg
               aria-label="Open Gitify"
-              class=""
+              class="size-5"
               role="img"
               viewBox="0 0 500 500"
               xmlns="http://www.w3.org/2000/svg"
@@ -166,14 +166,14 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         class="flex flex-1 flex-col items-center py-4"
       >
         <button
-          class="mx-auto my-3 w-5 cursor-pointer outline-none"
+          class="mx-auto my-3 cursor-pointer outline-none"
           data-testid="gitify-logo"
           title="Open Gitify on GitHub"
           type="button"
         >
           <svg
             aria-label="Open Gitify"
-            class=""
+            class="size-5"
             role="img"
             viewBox="0 0 500 500"
             xmlns="http://www.w3.org/2000/svg"
@@ -377,14 +377,14 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
           class="flex flex-1 flex-col items-center py-4"
         >
           <button
-            class="mx-auto my-3 w-5 cursor-pointer outline-none"
+            class="mx-auto my-3 cursor-pointer outline-none"
             data-testid="gitify-logo"
             title="Open Gitify on GitHub"
             type="button"
           >
             <svg
               aria-label="Open Gitify"
-              class=""
+              class="size-5"
               role="img"
               viewBox="0 0 500 500"
               xmlns="http://www.w3.org/2000/svg"
@@ -531,14 +531,14 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
         class="flex flex-1 flex-col items-center py-4"
       >
         <button
-          class="mx-auto my-3 w-5 cursor-pointer outline-none"
+          class="mx-auto my-3 cursor-pointer outline-none"
           data-testid="gitify-logo"
           title="Open Gitify on GitHub"
           type="button"
         >
           <svg
             aria-label="Open Gitify"
-            class=""
+            class="size-5"
             role="img"
             viewBox="0 0 500 500"
             xmlns="http://www.w3.org/2000/svg"

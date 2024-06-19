@@ -49,12 +49,12 @@ export const Sidebar: FC = () => {
       <div className="flex flex-1 flex-col items-center py-4">
         <button
           type="button"
-          className="mx-auto my-3 w-5 cursor-pointer outline-none"
+          className="mx-auto my-3 cursor-pointer outline-none"
           title="Open Gitify on GitHub"
           onClick={() => openGitifyRepository()}
           data-testid="gitify-logo"
         >
-          <LogoIcon aria-label="Open Gitify" />
+          <LogoIcon size="small" aria-label="Open Gitify" />
         </button>
 
         <SidebarButton

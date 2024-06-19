@@ -8,7 +8,7 @@ describe('components/icons/LogoIcon.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('renders correctly(dark)', () => {
+  it('renders correctly (dark)', () => {
     const tree = render(<LogoIcon isDark />);
 
     expect(tree).toMatchSnapshot();
@@ -16,10 +16,16 @@ describe('components/icons/LogoIcon.tsx', () => {
 
   it('should click on the logo', () => {
     const onClick = jest.fn();
-    render(<LogoIcon onClick={onClick} />);
+    render(<LogoIcon onClick={onClick} size="small" />);
 
     fireEvent.click(screen.getByLabelText('Gitify Logo'));
 
     expect(onClick).toHaveBeenCalledTimes(1);
+  });
+
+  it('should render a different size', () => {
+    const tree = render(<LogoIcon size="large" />);
+
+    expect(tree).toMatchSnapshot();
   });
 });
