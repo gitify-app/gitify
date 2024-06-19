@@ -6,7 +6,7 @@ exports[`components/buttons/PillButton.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <button
-        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+        class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
         title="Mock Pill"
         type="button"
       >
@@ -31,7 +31,7 @@ exports[`components/buttons/PillButton.tsx should render 1`] = `
   </body>,
   "container": <div>
     <button
-      class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+      class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
       title="Mock Pill"
       type="button"
     >
