@@ -32,7 +32,6 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
   }, [repoNotifications, markRepoNotificationsDone]);
 
   const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
-  const repoSlug = repoNotifications[0].repository.full_name;
 
   const [showRepositoryNotifications, setShowRepositoryNotifications] =
     useState(true);
@@ -60,7 +59,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
             <img
               className="size-5 rounded"
               src={avatarUrl}
-              alt={`${repoSlug}'s avatar`}
+              alt={`${repoName}'s avatar`}
             />
           ) : (
             <MarkGithubIcon size={18} />
@@ -104,8 +103,8 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
       </div>
 
       {showRepositoryNotifications &&
-        repoNotifications.map((obj) => (
-          <NotificationRow key={obj.id} notification={obj} />
+        repoNotifications.map((notification) => (
+          <NotificationRow key={notification.id} notification={notification} />
         ))}
     </>
   );
