@@ -1,4 +1,5 @@
 import {
+  BellIcon,
   CheckIcon,
   ChevronDownIcon,
   ChevronUpIcon,
@@ -7,9 +8,11 @@ import {
 } from '@primer/octicons-react';
 import { type FC, useCallback, useContext, useState } from 'react';
 import { AppContext } from '../context/App';
+import { IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openRepository } from '../utils/links';
 import { NotificationRow } from './NotificationRow';
+import { PillButton } from './buttons/PillButton';
 import { AvatarIcon } from './icons/AvatarIcon';
 
 interface IRepositoryNotifications {
@@ -68,6 +71,12 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
           >
             {repoName}
           </span>
+          <PillButton
+            title="Account Notifications"
+            metric={repoNotifications.length}
+            color={IconColor.GREEN}
+            icon={BellIcon}
+          />
         </div>
 
         <div className="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80">

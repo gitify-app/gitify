@@ -1,13 +1,15 @@
 import {
+  BellIcon,
   ChevronDownIcon,
   ChevronLeftIcon,
   ChevronUpIcon,
 } from '@primer/octicons-react';
 import { type FC, useState } from 'react';
-import type { Account } from '../types';
+import { type Account, IconColor } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openAccountProfile } from '../utils/links';
 import { RepositoryNotifications } from './RepositoryNotifications';
+import { PillButton } from './buttons/PillButton';
 import { PlatformIcon } from './icons/PlatformIcon';
 
 interface IAccountNotifications {
@@ -61,7 +63,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
           className="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
           onClick={toggleAccountNotifications}
         >
-          <div className="flex gap-3">
+          <div className="flex gap-3 items-center">
             <PlatformIcon type={account.platform} size={16} />
             <button
               type="button"
@@ -71,6 +73,12 @@ export const AccountNotifications: FC<IAccountNotifications> = (
             >
               @{account.user.login}
             </button>
+            <PillButton
+              title="Account Notifications"
+              metric={notifications.length}
+              color={IconColor.GREEN}
+              icon={BellIcon}
+            />
           </div>
           <div className="opacity-0 transition-opacity group-hover:opacity-80">
             <button
