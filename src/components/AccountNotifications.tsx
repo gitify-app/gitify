@@ -3,7 +3,8 @@ import {
   ChevronLeftIcon,
   ChevronUpIcon,
 } from '@primer/octicons-react';
-import { type FC, useState } from 'react';
+import { type FC, useContext, useState } from 'react';
+import { AppContext } from '../context/App';
 import type { Account } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openAccountProfile } from '../utils/links';
@@ -22,6 +23,8 @@ export const AccountNotifications: FC<IAccountNotifications> = (
 ) => {
   const { account, showAccountHostname, notifications } = props;
 
+  const { settings } = useContext(AppContext);
+
   const groupedNotifications = Object.values(
     notifications.reduce(
       (acc: { [key: string]: Notification[] }, notification) => {
@@ -33,9 +36,6 @@ export const AccountNotifications: FC<IAccountNotifications> = (
       {},
     ),
   );
-
-  // TODO Remove this
-  const groupByRepo = false;
 
   const [showAccountNotifications, setShowAccountNotifications] =
     useState(true);
@@ -89,7 +89,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
         </div>
       )}
 
-      {showAccountNotifications && groupByRepo
+      {showAccountNotifications && settings.groupByRepository
         ? Object.values(groupedNotifications).map((repoNotifications) => {
             const repoSlug = repoNotifications[0].repository.full_name;
 

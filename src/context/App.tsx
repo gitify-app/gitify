@@ -62,6 +62,7 @@ export const defaultSettings: SettingsState = {
   delayNotificationState: false,
   showPills: true,
   keyboardShortcut: true,
+  groupByRepository: true,
 };
 
 interface AppContextState {

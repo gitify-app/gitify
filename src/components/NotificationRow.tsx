@@ -133,13 +133,13 @@ export const NotificationRow: FC<INotificationRow> = ({
       >
         {showRepositoryName && (
           <div
-            className="mb-1 flex flex-1 space-x-1 cursor-pointer truncate text-sm font-medium "
+            className="mb-1 flex items-center gap-1 cursor-pointer truncate text-sm font-medium "
             title={repoSlug}
           >
             <span>
               {repoAvatarUrl ? (
                 <img
-                  className="size-5 rounded"
+                  className="size-4 rounded object-cover"
                   src={repoAvatarUrl}
                   alt={`${repoSlug}'s avatar`}
                 />

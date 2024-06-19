@@ -84,6 +84,7 @@ export const mockSettings: SettingsState = {
   delayNotificationState: false,
   showPills: true,
   keyboardShortcut: true,
+  groupByRepository: true,
 };
 
 export const mockState: GitifyState = {

@@ -194,6 +194,23 @@ export const SettingsRoute: FC = () => {
             }
           />
           <Checkbox
+            name="groupByRepository"
+            label="Group notifications by repository"
+            checked={settings.groupByRepository}
+            onChange={(evt) =>
+              updateSetting('groupByRepository', evt.target.checked)
+            }
+            tooltip={
+              <div>
+                <div className="pb-3">
+                  Group notifications by repository name.
+                </div>
+                <div>If unchecked will group by date.</div>
+              </div>
+            }
+          />
+
+          <Checkbox
             name="markAsDoneOnOpen"
             label="Mark as done on open"
             checked={settings.markAsDoneOnOpen}
