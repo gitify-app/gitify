@@ -36,6 +36,7 @@ import {
 } from '../utils/links';
 import { formatReason } from '../utils/reason';
 import { PillButton } from './buttons/PillButton';
+import { AvatarIcon } from './icons/AvatarIcon';
 
 interface INotificationRow {
   notification: Notification;
@@ -179,11 +180,11 @@ export const NotificationRow: FC<INotificationRow> = ({
               }}
               className="flex-shrink-0"
             >
-              <img
-                className="size-4 cursor-pointer rounded-full object-cover"
-                src={notification.subject.user.avatar_url}
+              <AvatarIcon
                 title={notification.subject.user.login}
-                alt={`${notification.subject.user.login}'s avatar`}
+                url={notification.subject.user.avatar_url}
+                size="small"
+                defaultIcon={FeedPersonIcon}
               />
             </button>
           ) : (
