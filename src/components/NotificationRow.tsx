@@ -141,15 +141,12 @@ export const NotificationRow: FC<INotificationRow> = ({
             title={repoSlug}
           >
             <span>
-              {repoAvatarUrl ? (
-                <img
-                  className="size-4 rounded object-cover"
-                  src={repoAvatarUrl}
-                  alt={`${repoSlug}'s avatar`}
-                />
-              ) : (
-                <MarkGithubIcon size={16} />
-              )}
+              <AvatarIcon
+                title={repoSlug}
+                url={repoAvatarUrl}
+                size="medium"
+                defaultIcon={MarkGithubIcon}
+              />
             </span>
             <span
               className="cursor-pointer truncate opacity-90"
