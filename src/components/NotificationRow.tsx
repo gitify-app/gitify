@@ -145,7 +145,7 @@ export const NotificationRow: FC<INotificationRow> = ({
                   alt={`${repoSlug}'s avatar`}
                 />
               ) : (
-                <MarkGithubIcon size={18} />
+                <MarkGithubIcon size={16} />
               )}
             </span>
             <span
