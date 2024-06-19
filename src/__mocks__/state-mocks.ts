@@ -3,6 +3,7 @@ import {
   type AuthState,
   type GitifyState,
   type GitifyUser,
+  GroupBy,
   type Hostname,
   type SettingsState,
   Theme,
@@ -84,7 +85,7 @@ export const mockSettings: SettingsState = {
   delayNotificationState: false,
   showPills: true,
   keyboardShortcut: true,
-  groupByRepository: true,
+  groupBy: GroupBy.REPOSITORY,
 };
 
 export const mockState: GitifyState = {

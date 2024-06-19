@@ -21,7 +21,7 @@ import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
-import { Theme } from '../types';
+import { GroupBy, Theme } from '../types';
 import { getAppVersion, quitApp } from '../utils/comms';
 import Constants from '../utils/constants';
 import {
@@ -193,23 +193,18 @@ export const SettingsRoute: FC = () => {
               </div>
             }
           />
-          <Checkbox
-            name="groupByRepository"
-            label="Group notifications by repository"
-            checked={settings.groupByRepository}
-            onChange={(evt) =>
-              updateSetting('groupByRepository', evt.target.checked)
-            }
-            tooltip={
-              <div>
-                <div className="pb-3">
-                  Group notifications by repository name.
-                </div>
-                <div>If unchecked will group by date.</div>
-              </div>
-            }
+          <RadioGroup
+            name="groupBy"
+            label="Group notifications by:"
+            value={settings.groupBy}
+            options={[
+              { label: 'Repository', value: GroupBy.REPOSITORY },
+              { label: 'Date', value: GroupBy.DATE },
+            ]}
+            onChange={(evt) => {
+              updateSetting('groupBy', evt.target.value);
+            }}
           />
-
           <Checkbox
             name="markAsDoneOnOpen"
             label="Mark as done on open"

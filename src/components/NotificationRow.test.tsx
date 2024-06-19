@@ -5,7 +5,7 @@ import {
   mockSettings,
 } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
-import type { Link } from '../types';
+import { GroupBy, type Link } from '../types';
 import type { Milestone, UserType } from '../typesGitHub';
 import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as comms from '../utils/comms';
@@ -21,7 +21,7 @@ describe('components/NotificationRow.tsx', () => {
     jest.clearAllMocks();
   });
 
-  it('should render itself & its children - hide repository name', async () => {
+  it('should render itself & its children - group by date', async () => {
     jest
       .spyOn(global.Date, 'now')
       .mockImplementation(() => new Date('2024').valueOf());
@@ -33,7 +33,7 @@ describe('components/NotificationRow.tsx', () => {
 
     const tree = render(
       <AppContext.Provider
-        value={{ settings: { ...mockSettings, groupByRepository: false } }}
+        value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
       >
         <NotificationRow {...props} />
       </AppContext.Provider>,
@@ -41,7 +41,7 @@ describe('components/NotificationRow.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself & its children - show repository name', async () => {
+  it('should render itself & its children - group by repositories', async () => {
     jest
       .spyOn(global.Date, 'now')
       .mockImplementation(() => new Date('2024').valueOf());
@@ -52,7 +52,9 @@ describe('components/NotificationRow.tsx', () => {
     };
 
     const tree = render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
+      <AppContext.Provider
+        value={{ settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY } }}
+      >
         <NotificationRow {...props} />
       </AppContext.Provider>,
     );

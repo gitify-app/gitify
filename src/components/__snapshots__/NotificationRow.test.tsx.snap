@@ -4631,7 +4631,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
 }
 `;
 
-exports[`components/NotificationRow.tsx should render itself & its children - hide repository name 1`] = `
+exports[`components/NotificationRow.tsx should render itself & its children - group by date 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -5088,7 +5088,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - hi
 }
 `;
 
-exports[`components/NotificationRow.tsx should render itself & its children - show repository name 1`] = `
+exports[`components/NotificationRow.tsx should render itself & its children - group by repositories 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

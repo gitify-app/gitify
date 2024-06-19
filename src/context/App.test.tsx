@@ -380,7 +380,7 @@ describe('context/App.tsx', () => {
           delayNotificationState: false,
           showPills: true,
           keyboardShortcut: true,
-          groupByRepository: true,
+          groupBy: 'REPOSITORY',
         } as SettingsState,
       });
     });
@@ -433,7 +433,7 @@ describe('context/App.tsx', () => {
           delayNotificationState: false,
           showPills: true,
           keyboardShortcut: true,
-          groupByRepository: true,
+          groupBy: 'REPOSITORY',
         } as SettingsState,
       });
     });

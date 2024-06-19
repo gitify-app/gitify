@@ -1,6 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { mockGitHubCloudAccount, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
+import { GroupBy } from '../types';
 import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
 import * as links from '../utils/links';
 import { AccountNotifications } from './AccountNotifications';
@@ -18,7 +19,9 @@ describe('components/AccountNotifications.tsx', () => {
     };
 
     const tree = render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
+      <AppContext.Provider
+        value={{ settings: { ...mockSettings, groupBy: GroupBy.REPOSITORY } }}
+      >
         <AccountNotifications {...props} />
       </AppContext.Provider>,
     );
@@ -34,7 +37,7 @@ describe('components/AccountNotifications.tsx', () => {
 
     const tree = render(
       <AppContext.Provider
-        value={{ settings: { ...mockSettings, groupByRepository: false } }}
+        value={{ settings: { ...mockSettings, groupBy: GroupBy.DATE } }}
       >
         <AccountNotifications {...props} />
       </AppContext.Provider>,

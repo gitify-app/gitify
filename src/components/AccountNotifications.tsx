@@ -58,6 +58,8 @@ export const AccountNotifications: FC<IAccountNotifications> = (
         ? 'Hide account notifications'
         : 'Show account notifications';
 
+  const groupByRepository = settings.groupBy === 'REPOSITORY';
+
   return (
     <>
       {showAccountHostname && (
@@ -89,7 +91,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
         </div>
       )}
 
-      {showAccountNotifications && settings.groupByRepository
+      {showAccountNotifications && groupByRepository
         ? Object.values(groupedNotifications).map((repoNotifications) => {
             const repoSlug = repoNotifications[0].repository.full_name;
 

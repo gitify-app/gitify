@@ -323,7 +323,7 @@ describe('routes/Settings.tsx', () => {
       ).toMatchSnapshot();
     });
 
-    it('should toggle the groupByRepository checkbox', async () => {
+    it('should change the groupBy radio group', async () => {
       await act(async () => {
         render(
           <AppContext.Provider
@@ -340,15 +340,10 @@ describe('routes/Settings.tsx', () => {
         );
       });
 
-      fireEvent.click(
-        screen.getByLabelText('Group notifications by repository'),
-        {
-          target: { checked: true },
-        },
-      );
+      fireEvent.click(screen.getByLabelText('Date'));
 
       expect(updateSetting).toHaveBeenCalledTimes(1);
-      expect(updateSetting).toHaveBeenCalledWith('groupByRepository', false);
+      expect(updateSetting).toHaveBeenCalledWith('groupBy', 'DATE');
     });
 
     it('should toggle the markAsDoneOnOpen checkbox', async () => {
