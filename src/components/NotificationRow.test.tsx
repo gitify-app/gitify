@@ -21,7 +21,27 @@ describe('components/NotificationRow.tsx', () => {
     jest.clearAllMocks();
   });
 
-  it('should render itself & its children', async () => {
+  it('should render itself & its children - hide repository name', async () => {
+    jest
+      .spyOn(global.Date, 'now')
+      .mockImplementation(() => new Date('2024').valueOf());
+
+    const props = {
+      notification: mockSingleNotification,
+      account: mockGitHubCloudAccount,
+    };
+
+    const tree = render(
+      <AppContext.Provider
+        value={{ settings: { ...mockSettings, groupByRepository: false } }}
+      >
+        <NotificationRow {...props} />
+      </AppContext.Provider>,
+    );
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render itself & its children - show repository name', async () => {
     jest
       .spyOn(global.Date, 'now')
       .mockImplementation(() => new Date('2024').valueOf());

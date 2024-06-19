@@ -105,7 +105,6 @@ export const AccountNotifications: FC<IAccountNotifications> = (
             <NotificationRow
               key={notification.id}
               notification={notification}
-              showRepositoryName={true}
             />
           ))}
     </>

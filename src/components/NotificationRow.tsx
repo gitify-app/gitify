@@ -39,12 +39,10 @@ import { PillButton } from './buttons/PillButton';
 
 interface INotificationRow {
   notification: Notification;
-  showRepositoryName?: boolean;
 }
 
 export const NotificationRow: FC<INotificationRow> = ({
   notification,
-  showRepositoryName = false,
 }: INotificationRow) => {
   const {
     settings,
@@ -131,7 +129,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         onClick={() => handleNotification()}
       >
-        {showRepositoryName && (
+        {!settings.groupByRepository && (
           <div
             className="mb-1 flex items-center gap-1 cursor-pointer truncate text-sm font-medium "
             title={repoSlug}

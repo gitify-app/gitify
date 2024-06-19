@@ -1,5 +1,6 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
+import { mockGitHubCloudAccount, mockSettings } from '../__mocks__/state-mocks';
+import { AppContext } from '../context/App';
 import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
 import * as links from '../utils/links';
 import { AccountNotifications } from './AccountNotifications';
@@ -9,14 +10,35 @@ jest.mock('./RepositoryNotifications', () => ({
 }));
 
 describe('components/AccountNotifications.tsx', () => {
-  it('should render itself (github.com with notifications)', () => {
+  it('should render itself (github.com with notifications) - group by repositories', () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: mockGitHubNotifications,
       showAccountHostname: true,
     };
 
-    const tree = render(<AccountNotifications {...props} />);
+    const tree = render(
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <AccountNotifications {...props} />
+      </AppContext.Provider>,
+    );
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render itself (github.com with notifications) - group by date', () => {
+    const props = {
+      account: mockGitHubCloudAccount,
+      notifications: mockGitHubNotifications,
+      showAccountHostname: true,
+    };
+
+    const tree = render(
+      <AppContext.Provider
+        value={{ settings: { ...mockSettings, groupByRepository: false } }}
+      >
+        <AccountNotifications {...props} />
+      </AppContext.Provider>,
+    );
     expect(tree).toMatchSnapshot();
   });
 
@@ -27,7 +49,11 @@ describe('components/AccountNotifications.tsx', () => {
       showAccountHostname: true,
     };
 
-    const tree = render(<AccountNotifications {...props} />);
+    const tree = render(
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <AccountNotifications {...props} />
+      </AppContext.Provider>,
+    );
     expect(tree).toMatchSnapshot();
   });
 
@@ -41,7 +67,11 @@ describe('components/AccountNotifications.tsx', () => {
     };
 
     await act(async () => {
-      render(<AccountNotifications {...props} />);
+      render(
+        <AppContext.Provider value={{ settings: mockSettings }}>
+          <AccountNotifications {...props} />
+        </AppContext.Provider>,
+      );
     });
 
     fireEvent.click(screen.getByTitle('Open Profile'));
@@ -58,12 +88,20 @@ describe('components/AccountNotifications.tsx', () => {
     };
 
     await act(async () => {
-      render(<AccountNotifications {...props} />);
+      render(
+        <AppContext.Provider value={{ settings: mockSettings }}>
+          <AccountNotifications {...props} />
+        </AppContext.Provider>,
+      );
     });
 
     fireEvent.click(screen.getByTitle('Hide account notifications'));
 
-    const tree = render(<AccountNotifications {...props} />);
+    const tree = render(
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <AccountNotifications {...props} />
+      </AppContext.Provider>,
+    );
     expect(tree).toMatchSnapshot();
   });
 });

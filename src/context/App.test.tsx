@@ -380,6 +380,7 @@ describe('context/App.tsx', () => {
           delayNotificationState: false,
           showPills: true,
           keyboardShortcut: true,
+          groupByRepository: true,
         } as SettingsState,
       });
     });
@@ -432,6 +433,7 @@ describe('context/App.tsx', () => {
           delayNotificationState: false,
           showPills: true,
           keyboardShortcut: true,
+          groupByRepository: true,
         } as SettingsState,
       });
     });
