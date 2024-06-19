@@ -83,10 +83,17 @@ export const NotificationRow: FC<INotificationRow> = ({
     ? `${notification.subject.user.login} updated ${updatedAt}`
     : `Updated ${updatedAt}`;
 
-  const notificationTitle = formatForDisplay([
+  const notificationType = formatForDisplay([
     notification.subject.state,
     notification.subject.type,
   ]);
+
+  const notificationNumber = notification.subject?.number
+    ? `#${notification.subject.number}`
+    : '';
+
+  const notificationTitle =
+    `${notification.subject.title} ${notificationNumber}`.trim();
 
   const commentsPillDescription = `${notification.subject.comments} ${
     notification.subject.comments > 1 ? 'comments' : 'comment'
@@ -112,7 +119,7 @@ export const NotificationRow: FC<INotificationRow> = ({
     >
       <div
         className={cn('mr-3 flex w-5 items-center justify-center', iconColor)}
-        title={notificationTitle}
+        title={notificationType}
       >
         <NotificationIcon size={16} aria-label={notification.subject.type} />
       </div>
@@ -124,9 +131,10 @@ export const NotificationRow: FC<INotificationRow> = ({
         <div
           className="mb-1 cursor-pointer truncate text-sm"
           role="main"
-          title={notification.subject.title}
+          title={notificationTitle}
         >
           {notification.subject.title}
+          <span className="text-xs"> {notificationNumber}</span>
         </div>
 
         <div className="flex flex-wrap items-center gap-1 text-xs capitalize">
