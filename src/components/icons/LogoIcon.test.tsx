@@ -1,22 +1,22 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { Logo } from './Logo';
+import { LogoIcon } from './LogoIcon';
 
-describe('components/Logo.tsx', () => {
+describe('components/icons/LogoIcon.tsx', () => {
   it('renders correctly (light)', () => {
-    const tree = render(<Logo />);
+    const tree = render(<LogoIcon />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('renders correctly(dark)', () => {
-    const tree = render(<Logo isDark />);
+    const tree = render(<LogoIcon isDark />);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should click on the logo', () => {
     const onClick = jest.fn();
-    render(<Logo onClick={onClick} />);
+    render(<LogoIcon onClick={onClick} />);
 
     fireEvent.click(screen.getByLabelText('Gitify Logo'));
 

@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 
-interface ILogo {
+interface ILogoIcon {
   isDark?: boolean;
   onClick?: () => void;
   className?: string;
@@ -12,12 +12,12 @@ const LIGHT_GRADIENT_END = '#FFFFFF';
 const DARK_GRADIENT_START = '#22283B';
 const DARK_GRADIENT_END = '#555B6E';
 
-export const Logo: FC<ILogo> = ({
+export const LogoIcon: FC<ILogoIcon> = ({
   isDark,
   onClick,
   className = '',
   ...props
-}: ILogo) => (
+}: ILogoIcon) => (
   <svg
     className={className}
     onClick={() => onClick?.()}

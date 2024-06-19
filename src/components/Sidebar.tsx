@@ -8,7 +8,6 @@ import {
 } from '@primer/octicons-react';
 import { type FC, useContext, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
 import { quitApp } from '../utils/comms';
 import {
@@ -19,6 +18,7 @@ import {
 } from '../utils/links';
 import { getNotificationCount } from '../utils/notifications';
 import { SidebarButton } from './buttons/SidebarButton';
+import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
   const navigate = useNavigate();
@@ -54,7 +54,7 @@ export const Sidebar: FC = () => {
           onClick={() => openGitifyRepository()}
           data-testid="gitify-logo"
         >
-          <Logo aria-label="Open Gitify" />
+          <LogoIcon aria-label="Open Gitify" />
         </button>
 
         <SidebarButton
