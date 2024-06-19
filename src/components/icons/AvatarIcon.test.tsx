@@ -1,8 +1,8 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
 import { render } from '@testing-library/react';
-import { Avatar, type IAvatar } from './Avatar';
+import { AvatarIcon, type IAvatar } from './AvatarIcon';
 
-describe('components/Avatar.tsx', () => {
+describe('components/icons/AvatarIcon.tsx', () => {
   it('should render small avatar', () => {
     const props: IAvatar = {
       defaultIcon: MarkGithubIcon,
@@ -10,7 +10,7 @@ describe('components/Avatar.tsx', () => {
       url: 'https://avatars.githubusercontent.com/u/583231?v=4',
       size: 'small',
     };
-    const tree = render(<Avatar {...props} />);
+    const tree = render(<AvatarIcon {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
@@ -21,7 +21,7 @@ describe('components/Avatar.tsx', () => {
       url: 'https://avatars.githubusercontent.com/u/583231?v=4',
       size: 'medium',
     };
-    const tree = render(<Avatar {...props} />);
+    const tree = render(<AvatarIcon {...props} />);
     expect(tree).toMatchSnapshot();
   });
 
@@ -32,7 +32,7 @@ describe('components/Avatar.tsx', () => {
       url: null,
       size: 'small',
     };
-    const tree = render(<Avatar {...props} />);
+    const tree = render(<AvatarIcon {...props} />);
     expect(tree).toMatchSnapshot();
   });
 });

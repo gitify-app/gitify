@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/Avatar.tsx should render default icon when no url 1`] = `
+exports[`components/icons/AvatarIcon.tsx should render default icon when no url 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -91,7 +91,7 @@ exports[`components/Avatar.tsx should render default icon when no url 1`] = `
 }
 `;
 
-exports[`components/Avatar.tsx should render medium avatar 1`] = `
+exports[`components/icons/AvatarIcon.tsx should render medium avatar 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -164,7 +164,7 @@ exports[`components/Avatar.tsx should render medium avatar 1`] = `
 }
 `;
 
-exports[`components/Avatar.tsx should render small avatar 1`] = `
+exports[`components/icons/AvatarIcon.tsx should render small avatar 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

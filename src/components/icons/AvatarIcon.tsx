@@ -1,6 +1,6 @@
 import type { Icon } from '@primer/octicons-react';
 import type { FC } from 'react';
-import { cn } from '../utils/cn';
+import { cn } from '../../utils/cn';
 
 export interface IAvatar {
   title: string;
@@ -9,7 +9,7 @@ export interface IAvatar {
   defaultIcon: Icon;
 }
 
-export const Avatar: FC<IAvatar> = (props: IAvatar) => {
+export const AvatarIcon: FC<IAvatar> = (props: IAvatar) => {
   if (props.url) {
     return (
       <img
