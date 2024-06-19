@@ -323,6 +323,34 @@ describe('routes/Settings.tsx', () => {
       ).toMatchSnapshot();
     });
 
+    it('should toggle the groupByRepository checkbox', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+              updateSetting,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      fireEvent.click(
+        screen.getByLabelText('Group notifications by repository'),
+        {
+          target: { checked: true },
+        },
+      );
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith('groupByRepository', false);
+    });
+
     it('should toggle the markAsDoneOnOpen checkbox', async () => {
       await act(async () => {
         render(
