@@ -122,7 +122,10 @@ export const NotificationRow: FC<INotificationRow> = ({
         className={cn('mr-3 flex w-5 items-center justify-center', iconColor)}
         title={notificationTitle}
       >
-        <NotificationIcon size={16} aria-label={notification.subject.type} />
+        <NotificationIcon
+          size={settings.groupByRepository ? 16 : 20}
+          aria-label={notification.subject.type}
+        />
       </div>
 
       <div

@@ -77,11 +77,11 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
-            height="16"
+            height="20"
             role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
-            width="16"
+            width="20"
           >
             <path
               d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -274,11 +274,11 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
-            height="16"
+            height="20"
             role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
-            width="16"
+            width="20"
           >
             <path
               d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -492,11 +492,11 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           class="octicon octicon-issue-opened"
           fill="currentColor"
           focusable="false"
-          height="16"
+          height="20"
           role="img"
           style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
-          width="16"
+          width="20"
         >
           <path
             d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
@@ -689,11 +689,11 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           class="octicon octicon-issue-opened"
           fill="currentColor"
           focusable="false"
-          height="16"
+          height="20"
           role="img"
           style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
-          width="16"
+          width="20"
         >
           <path
             d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
