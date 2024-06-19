@@ -6,10 +6,10 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+        class="group flex justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
       >
         <div
-          class="flex gap-3"
+          class="flex gap-3 items-center"
         >
           <span
             class="mr-1"
@@ -71,10 +71,10 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+      class="group flex justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
     >
       <div
-        class="flex gap-3"
+        class="flex gap-3 items-center"
       >
         <span
           class="mr-1"
@@ -193,10 +193,10 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+        class="group flex justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
       >
         <div
-          class="flex gap-3"
+          class="flex gap-3 items-center"
         >
           <span
             class="mr-1"
@@ -255,10 +255,10 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+      class="group flex justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
     >
       <div
-        class="flex gap-3"
+        class="flex gap-3 items-center"
       >
         <span
           class="mr-1"
@@ -374,10 +374,10 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+        class="group flex justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
       >
         <div
-          class="flex gap-3"
+          class="flex gap-3 items-center"
         >
           <span
             class="mr-1"
@@ -435,10 +435,10 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
     </div>
     <div>
       <div
-        class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+        class="group flex justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
       >
         <div
-          class="flex gap-3"
+          class="flex gap-3 items-center"
         >
           <span
             class="mr-1"
@@ -500,10 +500,10 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+      class="group flex justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
     >
       <div
-        class="flex gap-3"
+        class="flex gap-3 items-center"
       >
         <span
           class="mr-1"
