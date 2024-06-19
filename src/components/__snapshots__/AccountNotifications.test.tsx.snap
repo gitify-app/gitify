@@ -146,7 +146,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -168,7 +168,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -560,7 +560,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             class="flex"
           >
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="octocat approved these changes"
               type="button"
             >
@@ -582,7 +582,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="gitify-app requested changes"
               type="button"
             >
@@ -1382,7 +1382,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -1404,7 +1404,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >

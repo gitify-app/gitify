@@ -189,10 +189,7 @@ export const NotificationRow: FC<INotificationRow> = ({
             </button>
           ) : (
             <div>
-              <FeedPersonIcon
-                size={16}
-                className="text-gray-500 dark:text-gray-300"
-              />
+              <FeedPersonIcon size={16} className={IconColor.GRAY} />
             </div>
           )}
           <div title={reason.description}>{reason.title}</div>
