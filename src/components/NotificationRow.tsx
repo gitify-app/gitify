@@ -4,6 +4,7 @@ import {
   CommentIcon,
   FeedPersonIcon,
   IssueClosedIcon,
+  MarkGithubIcon,
   MilestoneIcon,
   ReadIcon,
   TagIcon,
@@ -28,16 +29,22 @@ import {
   getNotificationTypeIconColor,
   getPullRequestReviewIcon,
 } from '../utils/icons';
-import { openNotification, openUserProfile } from '../utils/links';
+import {
+  openNotification,
+  openRepository,
+  openUserProfile,
+} from '../utils/links';
 import { formatReason } from '../utils/reason';
 import { PillButton } from './buttons/PillButton';
 
 interface INotificationRow {
   notification: Notification;
+  showRepositoryName?: boolean;
 }
 
 export const NotificationRow: FC<INotificationRow> = ({
   notification,
+  showRepositoryName = false,
 }: INotificationRow) => {
   const {
     settings,
@@ -100,6 +107,9 @@ export const NotificationRow: FC<INotificationRow> = ({
     notification.subject.linkedIssues?.length > 1 ? 'issues' : 'issue'
   } ${notification.subject?.linkedIssues?.join(', ')}`;
 
+  const repoAvatarUrl = notification.repository.owner.avatar_url;
+  const repoSlug = notification.repository.full_name;
+
   return (
     <div
       id={notification.id}
@@ -121,6 +131,31 @@ export const NotificationRow: FC<INotificationRow> = ({
         className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         onClick={() => handleNotification()}
       >
+        {showRepositoryName && (
+          <div
+            className="mb-1 flex flex-1 space-x-1 cursor-pointer truncate text-sm font-medium "
+            title={repoSlug}
+          >
+            <span>
+              {repoAvatarUrl ? (
+                <img
+                  className="size-5 rounded"
+                  src={repoAvatarUrl}
+                  alt={`${repoSlug}'s avatar`}
+                />
+              ) : (
+                <MarkGithubIcon size={18} />
+              )}
+            </span>
+            <span
+              className="cursor-pointer truncate opacity-90"
+              onClick={() => openRepository(notification.repository)}
+            >
+              {repoSlug}
+            </span>
+          </div>
+        )}
+
         <div
           className="mb-1 cursor-pointer truncate text-sm"
           role="main"
