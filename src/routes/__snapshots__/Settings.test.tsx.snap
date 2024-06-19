@@ -281,6 +281,65 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
           class="flex items-start"
         >
           <div
+            class="mr-3 py-1"
+          >
+            <label
+              class="font-medium text-gray-700 dark:text-gray-200"
+              for="groupBy"
+            >
+              Group by:
+            </label>
+          </div>
+          <div
+            aria-labelledby="groupBy"
+            class="flex items-center space-x-4"
+            role="group"
+          >
+            <div
+              class="mt-1 flex"
+            >
+              <input
+                checked=""
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                id="groupBy_repository"
+                name="groupBy"
+                type="radio"
+                value="REPOSITORY"
+              />
+              <label
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                for="groupBy_repository"
+              >
+                Repository
+              </label>
+            </div>
+            <div
+              class="mt-1 flex"
+            >
+              <input
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                id="groupBy_date"
+                name="groupBy"
+                type="radio"
+                value="DATE"
+              />
+              <label
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                for="groupBy_date"
+              >
+                Date
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mb-3 mt-1 text-sm"
+      >
+        <div
+          class="flex items-start"
+        >
+          <div
             class="flex h-5 items-center"
           >
             <input
@@ -366,65 +425,6 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
                 </svg>
               </span>
             </label>
-          </div>
-        </div>
-      </div>
-      <div
-        class="mb-3 mt-1 text-sm"
-      >
-        <div
-          class="flex items-start"
-        >
-          <div
-            class="mr-3 py-1"
-          >
-            <label
-              class="font-medium text-gray-700 dark:text-gray-200"
-              for="groupBy"
-            >
-              Group notifications by:
-            </label>
-          </div>
-          <div
-            aria-labelledby="groupBy"
-            class="flex items-center space-x-4"
-            role="group"
-          >
-            <div
-              class="mt-1 flex"
-            >
-              <input
-                checked=""
-                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                id="groupBy_repository"
-                name="groupBy"
-                type="radio"
-                value="REPOSITORY"
-              />
-              <label
-                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-                for="groupBy_repository"
-              >
-                Repository
-              </label>
-            </div>
-            <div
-              class="mt-1 flex"
-            >
-              <input
-                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                id="groupBy_date"
-                name="groupBy"
-                type="radio"
-                value="DATE"
-              />
-              <label
-                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
-                for="groupBy_date"
-              >
-                Date
-              </label>
-            </div>
           </div>
         </div>
       </div>

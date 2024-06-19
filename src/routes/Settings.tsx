@@ -145,6 +145,18 @@ export const SettingsRoute: FC = () => {
           <legend id="notifications" className="mb-1 mt-2 font-semibold">
             Notifications
           </legend>
+          <RadioGroup
+            name="groupBy"
+            label="Group by:"
+            value={settings.groupBy}
+            options={[
+              { label: 'Repository', value: GroupBy.REPOSITORY },
+              { label: 'Date', value: GroupBy.DATE },
+            ]}
+            onChange={(evt) => {
+              updateSetting('groupBy', evt.target.value);
+            }}
+          />
           <Checkbox
             name="showOnlyParticipating"
             label="Show only participating"
@@ -192,18 +204,6 @@ export const SettingsRoute: FC = () => {
                 </div>
               </div>
             }
-          />
-          <RadioGroup
-            name="groupBy"
-            label="Group notifications by:"
-            value={settings.groupBy}
-            options={[
-              { label: 'Repository', value: GroupBy.REPOSITORY },
-              { label: 'Date', value: GroupBy.DATE },
-            ]}
-            onChange={(evt) => {
-              updateSetting('groupBy', evt.target.value);
-            }}
           />
           <Checkbox
             name="markAsDoneOnOpen"
