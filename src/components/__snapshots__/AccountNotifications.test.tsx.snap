@@ -39,7 +39,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             octocat
           </button>
           <button
-            class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+            class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
             title="Account Notifications"
             type="button"
           >
@@ -126,7 +126,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           octocat
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="Account Notifications"
           type="button"
         >
@@ -270,7 +270,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             octocat
           </button>
           <button
-            class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+            class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
             title="Account Notifications"
             type="button"
           >
@@ -354,7 +354,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           octocat
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="Account Notifications"
           type="button"
         >
@@ -495,7 +495,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
             octocat
           </button>
           <button
-            class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+            class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
             title="Account Notifications"
             type="button"
           >
@@ -578,7 +578,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
             octocat
           </button>
           <button
-            class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+            class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
             title="Account Notifications"
             type="button"
           >
@@ -665,7 +665,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
           octocat
         </button>
         <button
-          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+          class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
           title="Account Notifications"
           type="button"
         >
