@@ -134,7 +134,7 @@ export const NotificationRow: FC<INotificationRow> = ({
           title={notificationTitle}
         >
           {notification.subject.title}
-          <span className="text-xs"> {notificationNumber}</span>
+          <span className="text-xs opacity-60"> {notificationNumber}</span>
         </div>
 
         <div className="flex flex-wrap items-center gap-1 text-xs capitalize">
