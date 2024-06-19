@@ -80,7 +80,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="Linked to issues #1, #2"
                 type="button"
               >
@@ -105,7 +105,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 2
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -127,7 +127,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -149,7 +149,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="1 comment"
                 type="button"
               >
@@ -319,7 +319,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             class="flex"
           >
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="Linked to issues #1, #2"
               type="button"
             >
@@ -344,7 +344,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               2
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="octocat approved these changes"
               type="button"
             >
@@ -366,7 +366,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="gitify-app requested changes"
               type="button"
             >
@@ -388,7 +388,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="1 comment"
               type="button"
             >
@@ -615,7 +615,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="Linked to issues #1, #2"
                 type="button"
               >
@@ -640,7 +640,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 2
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -662,7 +662,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -684,7 +684,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="2 comments"
                 type="button"
               >
@@ -854,7 +854,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             class="flex"
           >
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="Linked to issues #1, #2"
               type="button"
             >
@@ -879,7 +879,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               2
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="octocat approved these changes"
               type="button"
             >
@@ -901,7 +901,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="gitify-app requested changes"
               type="button"
             >
@@ -923,7 +923,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="2 comments"
               type="button"
             >
@@ -1150,7 +1150,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="Linked to issues #1, #2"
                 type="button"
               >
@@ -1175,7 +1175,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 2
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -1197,7 +1197,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -1367,7 +1367,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             class="flex"
           >
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="Linked to issues #1, #2"
               type="button"
             >
@@ -1392,7 +1392,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               2
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="octocat approved these changes"
               type="button"
             >
@@ -1414,7 +1414,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="gitify-app requested changes"
               type="button"
             >
@@ -1641,7 +1641,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="Linked to issues #1, #2"
                 type="button"
               >
@@ -1666,7 +1666,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 2
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -1688,7 +1688,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -1710,7 +1710,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="2 comments"
                 type="button"
               >
@@ -1732,7 +1732,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
                 2
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="🏷️ enhancement
 🏷️ good-first-issue"
                 type="button"
@@ -1904,7 +1904,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
             class="flex"
           >
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="Linked to issues #1, #2"
               type="button"
             >
@@ -1929,7 +1929,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
               2
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="octocat approved these changes"
               type="button"
             >
@@ -1951,7 +1951,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="gitify-app requested changes"
               type="button"
             >
@@ -1973,7 +1973,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="2 comments"
               type="button"
             >
@@ -1995,7 +1995,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
               2
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="🏷️ enhancement
 🏷️ good-first-issue"
               type="button"
@@ -2224,7 +2224,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="Linked to issues #1, #2"
                 type="button"
               >
@@ -2249,7 +2249,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 2
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -2271,7 +2271,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -2441,7 +2441,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             class="flex"
           >
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="Linked to issues #1, #2"
               type="button"
             >
@@ -2466,7 +2466,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               2
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="octocat approved these changes"
               type="button"
             >
@@ -2488,7 +2488,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="gitify-app requested changes"
               type="button"
             >
@@ -2715,7 +2715,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="Linked to issue #1"
                 type="button"
               >
@@ -2740,7 +2740,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -2762,7 +2762,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -2932,7 +2932,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             class="flex"
           >
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="Linked to issue #1"
               type="button"
             >
@@ -2957,7 +2957,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="octocat approved these changes"
               type="button"
             >
@@ -2979,7 +2979,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="gitify-app requested changes"
               type="button"
             >
@@ -3206,7 +3206,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="Linked to issues #1, #2"
                 type="button"
               >
@@ -3231,7 +3231,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 2
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -3253,7 +3253,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -3275,7 +3275,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="2 comments"
                 type="button"
               >
@@ -3297,7 +3297,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 2
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="🏷️ enhancement
 🏷️ good-first-issue"
                 type="button"
@@ -3321,7 +3321,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 2
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="Milestone 1"
                 type="button"
               >
@@ -3490,7 +3490,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             class="flex"
           >
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="Linked to issues #1, #2"
               type="button"
             >
@@ -3515,7 +3515,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               2
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="octocat approved these changes"
               type="button"
             >
@@ -3537,7 +3537,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="gitify-app requested changes"
               type="button"
             >
@@ -3559,7 +3559,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="2 comments"
               type="button"
             >
@@ -3581,7 +3581,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               2
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="🏷️ enhancement
 🏷️ good-first-issue"
               type="button"
@@ -3605,7 +3605,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               2
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="Milestone 1"
               type="button"
             >
@@ -3831,7 +3831,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="Linked to issues #1, #2"
                 type="button"
               >
@@ -3856,7 +3856,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 2
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -3878,7 +3878,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -3900,7 +3900,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="2 comments"
                 type="button"
               >
@@ -3922,7 +3922,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 2
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="🏷️ enhancement
 🏷️ good-first-issue"
                 type="button"
@@ -3946,7 +3946,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
                 2
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="Milestone 1"
                 type="button"
               >
@@ -4115,7 +4115,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             class="flex"
           >
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="Linked to issues #1, #2"
               type="button"
             >
@@ -4140,7 +4140,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               2
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="octocat approved these changes"
               type="button"
             >
@@ -4162,7 +4162,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="gitify-app requested changes"
               type="button"
             >
@@ -4184,7 +4184,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="2 comments"
               type="button"
             >
@@ -4206,7 +4206,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               2
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="🏷️ enhancement
 🏷️ good-first-issue"
               type="button"
@@ -4230,7 +4230,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
               2
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="Milestone 1"
               type="button"
             >
@@ -4778,9 +4778,8 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
             >
               <img
                 alt="gitify-app's avatar"
-                class="size-4 cursor-pointer rounded-full object-cover"
+                class="cursor-pointer rounded-full object-cover size-4"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                title="gitify-app"
               />
             </button>
             <div
@@ -4797,7 +4796,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -4819,7 +4818,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -4966,9 +4965,8 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
           >
             <img
               alt="gitify-app's avatar"
-              class="size-4 cursor-pointer rounded-full object-cover"
+              class="cursor-pointer rounded-full object-cover size-4"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              title="gitify-app"
             />
           </button>
           <div
@@ -4985,7 +4983,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
             class="flex"
           >
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="octocat approved these changes"
               type="button"
             >
@@ -5007,7 +5005,7 @@ exports[`components/NotificationRow.tsx should render itself & its children 1`] 
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="gitify-app requested changes"
               type="button"
             >
@@ -5211,9 +5209,8 @@ exports[`components/NotificationRow.tsx should render itself & its children when
             >
               <img
                 alt="gitify-app's avatar"
-                class="size-4 cursor-pointer rounded-full object-cover"
+                class="cursor-pointer rounded-full object-cover size-4"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                title="gitify-app"
               />
             </button>
             <div
@@ -5230,7 +5227,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -5252,7 +5249,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -5399,9 +5396,8 @@ exports[`components/NotificationRow.tsx should render itself & its children when
           >
             <img
               alt="gitify-app's avatar"
-              class="size-4 cursor-pointer rounded-full object-cover"
+              class="cursor-pointer rounded-full object-cover size-4"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              title="gitify-app"
             />
           </button>
           <div
@@ -5418,7 +5414,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
             class="flex"
           >
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="octocat approved these changes"
               type="button"
             >
@@ -5440,7 +5436,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="gitify-app requested changes"
               type="button"
             >
@@ -5667,7 +5663,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
               class="flex"
             >
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="octocat approved these changes"
                 type="button"
               >
@@ -5689,7 +5685,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
                 1
               </button>
               <button
-                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+                class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
                 title="gitify-app requested changes"
                 type="button"
               >
@@ -5859,7 +5855,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
             class="flex"
           >
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="octocat approved these changes"
               type="button"
             >
@@ -5881,7 +5877,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
               1
             </button>
             <button
-              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xss hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
+              class="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
               title="gitify-app requested changes"
               type="button"
             >
