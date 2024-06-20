@@ -149,8 +149,13 @@ export const NotificationRow: FC<INotificationRow> = ({
               />
             </span>
             <span
+              title={repoSlug}
               className="cursor-pointer truncate opacity-90"
-              onClick={() => openRepository(notification.repository)}
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                openRepository(notification.repository);
+              }}
             >
               {repoSlug}
             </span>

@@ -5,7 +5,13 @@ import {
   MarkGithubIcon,
   ReadIcon,
 } from '@primer/octicons-react';
-import { type FC, useCallback, useContext, useState } from 'react';
+import {
+  type FC,
+  type MouseEvent,
+  useCallback,
+  useContext,
+  useState,
+} from 'react';
 import { AppContext } from '../context/App';
 import { Size } from '../types';
 import type { Notification } from '../typesGitHub';
@@ -65,7 +71,11 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
           />
           <span
             className="cursor-pointer truncate opacity-90"
-            onClick={() => openRepository(repoNotifications[0].repository)}
+            onClick={(event: MouseEvent<HTMLElement>) => {
+              // Don't trigger onClick of parent element.
+              event.stopPropagation();
+              openRepository(repoNotifications[0].repository);
+            }}
           >
             {repoName}
           </span>

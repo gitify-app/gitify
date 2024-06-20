@@ -107,6 +107,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </span>
             <span
               class="cursor-pointer truncate opacity-90"
+              title="gitify-app/notifications-test"
             >
               gitify-app/notifications-test
             </span>
@@ -303,6 +304,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </span>
             <span
               class="cursor-pointer truncate opacity-90"
+              title="gitify-app/notifications-test"
             >
               gitify-app/notifications-test
             </span>
@@ -521,6 +523,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </span>
           <span
             class="cursor-pointer truncate opacity-90"
+            title="gitify-app/notifications-test"
           >
             gitify-app/notifications-test
           </span>
@@ -717,6 +720,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </span>
           <span
             class="cursor-pointer truncate opacity-90"
+            title="gitify-app/notifications-test"
           >
             gitify-app/notifications-test
           </span>
