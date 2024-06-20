@@ -9,6 +9,7 @@ import {
 import { type FC, useContext, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/App';
+import { Size } from '../types';
 import { quitApp } from '../utils/comms';
 import {
   openGitHubIssues,
@@ -54,7 +55,7 @@ export const Sidebar: FC = () => {
           onClick={() => openGitifyRepository()}
           data-testid="gitify-logo"
         >
-          <LogoIcon size="small" aria-label="Open Gitify" />
+          <LogoIcon size={Size.SMALL} aria-label="Open Gitify" />
         </button>
 
         <SidebarButton
@@ -83,7 +84,7 @@ export const Sidebar: FC = () => {
             <SidebarButton
               title="Refresh Notifications"
               icon={SyncIcon}
-              size={16}
+              size={Size.MEDIUM}
               loading={status === 'loading'}
               disabled={status === 'loading'}
               onClick={() => refreshNotifications()}
@@ -92,7 +93,7 @@ export const Sidebar: FC = () => {
             <SidebarButton
               title="Settings"
               icon={GearIcon}
-              size={16}
+              size={Size.MEDIUM}
               onClick={() => toggleSettings()}
             />
           </>
@@ -102,7 +103,7 @@ export const Sidebar: FC = () => {
           <SidebarButton
             title="Quit Gitify"
             icon={XCircleIcon}
-            size={16}
+            size={Size.MEDIUM}
             onClick={() => quitApp()}
           />
         )}
