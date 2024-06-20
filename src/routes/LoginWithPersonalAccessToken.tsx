@@ -6,7 +6,7 @@ import { Header } from '../components/Header';
 import { Button } from '../components/buttons/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
-import type { Hostname, Token } from '../types';
+import { type Hostname, Size, type Token } from '../types';
 import type { LoginPersonalAccessTokenOptions } from '../utils/auth/types';
 import {
   getNewTokenURL,
@@ -76,7 +76,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
                   label="Generate a PAT"
                   disabled={!values.hostname}
                   icon={KeyIcon}
-                  size={12}
+                  size={Size.XSMALL}
                   url={getNewTokenURL(values.hostname)}
                 />
                 <span className="mx-1">on GitHub and paste above.</span>
@@ -100,7 +100,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
             label="GitHub Docs"
             className="mt-2"
             icon={BookIcon}
-            size={12}
+            size={Size.XSMALL}
             url={Constants.GITHUB_DOCS.PAT_URL}
           />
           <Button
@@ -108,7 +108,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
             label="Login"
             className="mt-2 px-4 py-2 !text-sm"
             icon={SignInIcon}
-            size={16}
+            size={Size.MEDIUM}
             disabled={submitting || pristine}
             type="submit"
           />
@@ -135,7 +135,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
   return (
     <div>
       <Header>
-        <KeyIcon size={18} className="mr-2" />
+        <KeyIcon size={Size.LARGE} className="mr-2" />
         Login with Personal Access Token
       </Header>
 

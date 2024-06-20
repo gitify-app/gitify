@@ -1,6 +1,6 @@
 import type { Icon } from '@primer/octicons-react';
 import type { FC } from 'react';
-import { IconColor } from '../../types';
+import { IconColor, Size } from '../../types';
 import { cn } from '../../utils/cn';
 
 export interface ISidebarButton {
@@ -8,7 +8,7 @@ export interface ISidebarButton {
   metric?: number;
   icon: Icon;
   onClick?: () => void;
-  size?: number;
+  size?: Size;
   loading?: boolean;
   disabled?: boolean;
 }
@@ -31,7 +31,7 @@ export const SidebarButton: FC<ISidebarButton> = (props: ISidebarButton) => {
       title={props.title}
       disabled={props.disabled}
     >
-      <props.icon size={props.size ?? 12} aria-label={props.title} />
+      <props.icon size={props.size ?? Size.XSMALL} aria-label={props.title} />
       {hasMetric && props.metric}
     </button>
   );

@@ -1,11 +1,12 @@
 import type { Icon } from '@primer/octicons-react';
 import type { FC } from 'react';
+import { Size } from '../../types';
 import { cn } from '../../utils/cn';
 
 export interface IAvatarIcon {
   title: string;
   url: string | null;
-  size: 'small' | 'medium';
+  size: Size;
   defaultIcon: Icon;
 }
 
@@ -15,7 +16,11 @@ export const AvatarIcon: FC<IAvatarIcon> = (props: IAvatarIcon) => {
       <img
         className={cn(
           'rounded-full object-cover',
-          props.size === 'small' ? 'size-4' : 'size-5',
+          props.size === Size.XSMALL
+            ? 'size-4'
+            : props.size === Size.SMALL
+              ? 'size-5'
+              : 'size-6',
         )}
         src={props.url}
         alt={`${props.title}'s avatar`}
@@ -25,7 +30,7 @@ export const AvatarIcon: FC<IAvatarIcon> = (props: IAvatarIcon) => {
 
   return (
     <props.defaultIcon
-      size={props.size === 'small' ? 14 : 18}
+      size={props.size}
       className="text-gray-500 dark:text-gray-300"
     />
   );

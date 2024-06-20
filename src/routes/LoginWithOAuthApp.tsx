@@ -5,7 +5,13 @@ import { Header } from '../components/Header';
 import { Button } from '../components/buttons/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
-import type { ClientID, ClientSecret, Hostname, Token } from '../types';
+import {
+  type ClientID,
+  type ClientSecret,
+  type Hostname,
+  Size,
+  type Token,
+} from '../types';
 import type { LoginOAuthAppOptions } from '../utils/auth/types';
 import {
   getNewOAuthAppURL,
@@ -70,7 +76,7 @@ export const LoginWithOAuthApp: FC = () => {
                 label="Create new OAuth App"
                 disabled={!values.hostname}
                 icon={PersonIcon}
-                size={12}
+                size={Size.XSMALL}
                 url={getNewOAuthAppURL(values.hostname)}
               />
               <span className="mx-1">on GitHub then paste your</span>
@@ -93,7 +99,7 @@ export const LoginWithOAuthApp: FC = () => {
             label="GitHub Docs"
             className="mt-2"
             icon={BookIcon}
-            size={12}
+            size={Size.XSMALL}
             url={Constants.GITHUB_DOCS.OAUTH_URL}
           />
 
@@ -102,7 +108,7 @@ export const LoginWithOAuthApp: FC = () => {
             label="Login"
             className="mt-2 px-4 py-2 !text-sm"
             icon={SignInIcon}
-            size={16}
+            size={Size.MEDIUM}
             disabled={submitting || pristine}
             type="submit"
           />
@@ -125,7 +131,7 @@ export const LoginWithOAuthApp: FC = () => {
   return (
     <div>
       <Header>
-        <PersonIcon size={20} className="mr-2" />
+        <PersonIcon size={Size.XLARGE} className="mr-2" />
         Login with OAuth App
       </Header>
       <div className="px-8">
