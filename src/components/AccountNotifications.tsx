@@ -5,7 +5,7 @@ import {
 } from '@primer/octicons-react';
 import { type FC, type MouseEvent, useContext, useState } from 'react';
 import { AppContext } from '../context/App';
-import type { Account } from '../types';
+import { type Account, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openAccountProfile } from '../utils/links';
 import { NotificationRow } from './NotificationRow';
@@ -68,7 +68,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
           onClick={toggleAccountNotifications}
         >
           <div className="flex gap-3">
-            <PlatformIcon type={account.platform} size={16} />
+            <PlatformIcon type={account.platform} size={Size.MEDIUM} />
             <button
               type="button"
               title="Open Profile"
@@ -89,7 +89,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
               title={toggleAccountNotificationsLabel}
               onClick={toggleAccountNotifications}
             >
-              <ChevronIcon size={14} />
+              <ChevronIcon size={Size.SMALL} />
             </button>
           </div>
         </div>

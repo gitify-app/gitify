@@ -101,7 +101,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             <span>
               <img
                 alt="gitify-app/notifications-test's avatar"
-                class="cursor-pointer rounded-full object-cover size-4"
+                class="cursor-pointer rounded-full object-cover size-5"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
               />
             </span>
@@ -298,7 +298,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             <span>
               <img
                 alt="gitify-app/notifications-test's avatar"
-                class="cursor-pointer rounded-full object-cover size-4"
+                class="cursor-pointer rounded-full object-cover size-5"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
               />
             </span>
@@ -517,7 +517,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           <span>
             <img
               alt="gitify-app/notifications-test's avatar"
-              class="cursor-pointer rounded-full object-cover size-4"
+              class="cursor-pointer rounded-full object-cover size-5"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
             />
           </span>
@@ -714,7 +714,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           <span>
             <img
               alt="gitify-app/notifications-test's avatar"
-              class="cursor-pointer rounded-full object-cover size-4"
+              class="cursor-pointer rounded-full object-cover size-5"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
             />
           </span>

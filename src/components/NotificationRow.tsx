@@ -17,7 +17,7 @@ import {
   useState,
 } from 'react';
 import { AppContext } from '../context/App';
-import { IconColor } from '../types';
+import { IconColor, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
 import {
@@ -126,7 +126,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         title={notificationTitle}
       >
         <NotificationIcon
-          size={groupByDate ? 20 : 16}
+          size={groupByDate ? Size.XLARGE : Size.MEDIUM}
           aria-label={notification.subject.type}
         />
       </div>
@@ -144,7 +144,7 @@ export const NotificationRow: FC<INotificationRow> = ({
               <AvatarIcon
                 title={repoSlug}
                 url={repoAvatarUrl}
-                size="small"
+                size={Size.SMALL}
                 defaultIcon={MarkGithubIcon}
               />
             </span>
@@ -185,13 +185,13 @@ export const NotificationRow: FC<INotificationRow> = ({
               <AvatarIcon
                 title={notification.subject.user.login}
                 url={notification.subject.user.avatar_url}
-                size="small"
+                size={Size.XSMALL}
                 defaultIcon={FeedPersonIcon}
               />
             </button>
           ) : (
             <div>
-              <FeedPersonIcon size={16} className={IconColor.GRAY} />
+              <FeedPersonIcon size={Size.MEDIUM} className={IconColor.GRAY} />
             </div>
           )}
           <div title={reason.description}>{reason.title}</div>
@@ -266,7 +266,7 @@ export const NotificationRow: FC<INotificationRow> = ({
             markNotificationDone(notification);
           }}
         >
-          <CheckIcon size={16} aria-label="Mark as Done" />
+          <CheckIcon size={Size.MEDIUM} aria-label="Mark as Done" />
         </button>
 
         <button
@@ -279,7 +279,7 @@ export const NotificationRow: FC<INotificationRow> = ({
             markNotificationRead(notification);
           }}
         >
-          <ReadIcon size={14} aria-label="Mark as Read" />
+          <ReadIcon size={Size.SMALL} aria-label="Mark as Read" />
         </button>
 
         <button
@@ -288,7 +288,10 @@ export const NotificationRow: FC<INotificationRow> = ({
           title="Unsubscribe from Thread"
           onClick={unsubscribeFromThread}
         >
-          <BellSlashIcon size={14} aria-label="Unsubscribe from Thread" />
+          <BellSlashIcon
+            size={Size.SMALL}
+            aria-label="Unsubscribe from Thread"
+          />
         </button>
       </div>
     </div>

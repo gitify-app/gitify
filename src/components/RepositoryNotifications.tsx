@@ -13,6 +13,7 @@ import {
   useState,
 } from 'react';
 import { AppContext } from '../context/App';
+import { Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openRepository } from '../utils/links';
 import { NotificationRow } from './NotificationRow';
@@ -65,7 +66,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
           <AvatarIcon
             title={repoName}
             url={avatarUrl}
-            size="medium"
+            size={Size.LARGE}
             defaultIcon={MarkGithubIcon}
           />
           <span
@@ -87,7 +88,10 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
             title="Mark Repository as Done"
             onClick={markRepoAsDone}
           >
-            <CheckIcon size={16} aria-label="Mark Repository as Done" />
+            <CheckIcon
+              size={Size.MEDIUM}
+              aria-label="Mark Repository as Done"
+            />
           </button>
 
           <button
@@ -96,7 +100,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
             title="Mark Repository as Read"
             onClick={markRepoAsRead}
           >
-            <ReadIcon size={14} aria-label="Mark Repository as Read" />
+            <ReadIcon size={Size.SMALL} aria-label="Mark Repository as Read" />
           </button>
 
           <button
@@ -105,7 +109,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
             title={toggleRepositoryNotificationsLabel}
             onClick={toggleRepositoryNotifications}
           >
-            <ChevronIcon size={14} />
+            <ChevronIcon size={Size.SMALL} />
           </button>
         </div>
       </div>

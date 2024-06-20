@@ -1,6 +1,6 @@
 import type { Icon } from '@primer/octicons-react';
 import type { FC } from 'react';
-import type { Link } from '../../types';
+import { type Link, Size } from '../../types';
 import { cn } from '../../utils/cn';
 import { openExternalLink } from '../../utils/comms';
 
@@ -9,7 +9,7 @@ export interface IButton {
   label: string;
   className?: string;
   icon?: Icon;
-  size?: number;
+  size?: Size;
   url?: Link;
   onClick?: () => void;
   disabled?: boolean;
@@ -36,7 +36,9 @@ export const Button: FC<IButton> = (props: IButton) => {
         }
       }}
     >
-      {props.icon && <props.icon className="mr-1" size={props.size ?? 14} />}
+      {props.icon && (
+        <props.icon className="mr-1" size={props.size ?? Size.MEDIUM} />
+      )}
       {props.name}
     </button>
   );

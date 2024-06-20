@@ -142,3 +142,11 @@ export type PullRequestApprovalIcon = {
   color: IconColor;
   description: string;
 };
+
+export enum Size {
+  XSMALL = 12,
+  SMALL = 14,
+  MEDIUM = 16,
+  LARGE = 18,
+  XLARGE = 20,
+}
