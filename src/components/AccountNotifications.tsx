@@ -5,8 +5,9 @@ import {
 } from '@primer/octicons-react';
 import { type FC, useContext, useState } from 'react';
 import { AppContext } from '../context/App';
-import type { Account } from '../types';
+import { type Account, Opacity } from '../types';
 import type { Notification } from '../typesGitHub';
+import { cn } from '../utils/cn';
 import { openAccountProfile } from '../utils/links';
 import { NotificationRow } from './NotificationRow';
 import { RepositoryNotifications } from './RepositoryNotifications';
@@ -64,7 +65,11 @@ export const AccountNotifications: FC<IAccountNotifications> = (
     <>
       {showAccountHostname && (
         <div
-          className="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+          className={cn(
+            'group flex items-center justify-between px-3 py-2 text-sm font-semibold',
+            'bg-gray-300 dark:bg-gray-darkest dark:text-white',
+            Opacity.LOW,
+          )}
           onClick={toggleAccountNotifications}
         >
           <div className="flex gap-3">
@@ -73,7 +78,6 @@ export const AccountNotifications: FC<IAccountNotifications> = (
               type="button"
               title="Open Profile"
               onClick={() => openAccountProfile(account)}
-              className="opacity-80"
             >
               @{account.user.login}
             </button>

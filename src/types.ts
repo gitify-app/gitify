@@ -137,6 +137,13 @@ export enum IconColor {
   WHITE = 'text-white',
 }
 
+export enum Opacity {
+  READ = 'opacity-50',
+  LOW = 'opacity-70',
+  MEDIUM = 'opacity-80',
+  HIGH = 'opacity-90',
+}
+
 export type PullRequestApprovalIcon = {
   type: FC<OcticonProps>;
   color: IconColor;

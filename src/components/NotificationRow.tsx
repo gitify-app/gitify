@@ -17,7 +17,7 @@ import {
   useState,
 } from 'react';
 import { AppContext } from '../context/App';
-import { IconColor } from '../types';
+import { IconColor, Opacity } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
 import {
@@ -118,7 +118,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         'group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker',
         animateExit &&
           'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
-        showAsRead && 'opacity-50 dark:opacity-50',
+        showAsRead && Opacity.READ,
       )}
     >
       <div
@@ -132,19 +132,22 @@ export const NotificationRow: FC<INotificationRow> = ({
       </div>
 
       <div
-        className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
+        className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
         onClick={() => handleNotification()}
       >
         {!groupByRepository && (
           <div
-            className="mb-1 flex items-center gap-1 cursor-pointer truncate text-sm font-medium "
+            className={cn(
+              'mb-1 flex items-center gap-1 text-xs',
+              Opacity.MEDIUM,
+            )}
             title={repoSlug}
           >
             <span>
               <AvatarIcon
                 title={repoSlug}
                 url={repoAvatarUrl}
-                size="medium"
+                size="small"
                 defaultIcon={MarkGithubIcon}
               />
             </span>
@@ -158,14 +161,19 @@ export const NotificationRow: FC<INotificationRow> = ({
         )}
 
         <div
-          className="mb-1 cursor-pointer truncate text-sm"
+          className="mb-1 truncate text-sm"
           role="main"
           title={notification.subject.title}
         >
           {notification.subject.title}
         </div>
 
-        <div className="flex flex-wrap items-center gap-1 text-xs capitalize">
+        <div
+          className={cn(
+            'flex flex-wrap items-center gap-1 text-xs capitalize',
+            Opacity.MEDIUM,
+          )}
+        >
           {notification.subject.user ? (
             <button
               type="button"

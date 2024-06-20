@@ -7,7 +7,9 @@ import {
 } from '@primer/octicons-react';
 import { type FC, useCallback, useContext, useState } from 'react';
 import { AppContext } from '../context/App';
+import { Opacity } from '../types';
 import type { Notification } from '../typesGitHub';
+import { cn } from '../utils/cn';
 import { openRepository } from '../utils/links';
 import { NotificationRow } from './NotificationRow';
 import { AvatarIcon } from './icons/AvatarIcon';
@@ -55,7 +57,12 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
         className="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
         onClick={toggleRepositoryNotifications}
       >
-        <div className="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium">
+        <div
+          className={cn(
+            'flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium',
+            Opacity.MEDIUM,
+          )}
+        >
           <AvatarIcon
             title={repoName}
             url={avatarUrl}
@@ -63,7 +70,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
             defaultIcon={MarkGithubIcon}
           />
           <span
-            className="cursor-pointer truncate opacity-90"
+            className="cursor-pointer truncate "
             onClick={() => openRepository(repoNotifications[0].repository)}
           >
             {repoName}
