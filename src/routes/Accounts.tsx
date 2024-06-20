@@ -12,7 +12,7 @@ import { AuthMethodIcon } from '../components/icons/AuthMethodIcon';
 import { PlatformIcon } from '../components/icons/PlatformIcon';
 import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
-import type { Account } from '../types';
+import { type Account, Size } from '../types';
 import { getAccountUUID } from '../utils/auth/utils';
 import { updateTrayIcon, updateTrayTitle } from '../utils/comms';
 import {
@@ -77,7 +77,7 @@ export const AccountsRoute: FC = () => {
                     title="Open Host"
                     onClick={() => openHost(account.hostname)}
                   >
-                    <PlatformIcon type={account.platform} size={12} />
+                    <PlatformIcon type={account.platform} size={Size.XSMALL} />
                     {account.platform} - {account.hostname}
                   </button>
                 </div>
@@ -88,7 +88,7 @@ export const AccountsRoute: FC = () => {
                     title="Open Developer Settings"
                     onClick={() => openDeveloperSettings(account)}
                   >
-                    <AuthMethodIcon type={account.method} size={12} />
+                    <AuthMethodIcon type={account.method} size={Size.XSMALL} />
                     {account.method}
                   </button>
                 </div>
@@ -101,7 +101,7 @@ export const AccountsRoute: FC = () => {
                   onClick={() => logoutAccount(account)}
                 >
                   <SignOutIcon
-                    size={20}
+                    size={Size.XLARGE}
                     aria-label={`Logout ${account.user.login}`}
                   />
                 </button>
@@ -120,8 +120,11 @@ export const AccountsRoute: FC = () => {
             title="Login with Personal Access Token"
             onClick={loginWithPersonalAccessToken}
           >
-            <KeyIcon size={18} aria-label="Login with Personal Access Token" />
-            <PlusIcon size={10} className="mb-2 ml-1" />
+            <KeyIcon
+              size={Size.LARGE}
+              aria-label="Login with Personal Access Token"
+            />
+            <PlusIcon size={Size.SMALL} className="mb-2 ml-1" />
           </button>
           <button
             type="button"
@@ -129,8 +132,8 @@ export const AccountsRoute: FC = () => {
             title="Login with OAuth App"
             onClick={loginWithOAuthApp}
           >
-            <PersonIcon size={20} aria-label="Login with OAuth App" />
-            <PlusIcon size={10} className="mb-2" />
+            <PersonIcon size={Size.XLARGE} aria-label="Login with OAuth App" />
+            <PlusIcon size={Size.SMALL} className="mb-2" />
           </button>
         </div>
       </div>

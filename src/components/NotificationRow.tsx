@@ -17,7 +17,7 @@ import {
   useState,
 } from 'react';
 import { AppContext } from '../context/App';
-import { IconColor, Opacity } from '../types';
+import { IconColor, Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
 import {
@@ -35,6 +35,8 @@ import {
   openUserProfile,
 } from '../utils/links';
 import { formatReason } from '../utils/reason';
+import { HoverGroup } from './HoverGroup';
+import { InteractionButton } from './buttons/InteractionButton';
 import { PillButton } from './buttons/PillButton';
 import { AvatarIcon } from './icons/AvatarIcon';
 
@@ -109,7 +111,7 @@ export const NotificationRow: FC<INotificationRow> = ({
   const repoAvatarUrl = notification.repository.owner.avatar_url;
   const repoSlug = notification.repository.full_name;
 
-  const groupByRepository = settings.groupBy === 'REPOSITORY';
+  const groupByDate = settings.groupBy === 'DATE';
 
   return (
     <div
@@ -126,7 +128,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         title={notificationTitle}
       >
         <NotificationIcon
-          size={groupByRepository ? 16 : 20}
+          size={groupByDate ? Size.XLARGE : Size.MEDIUM}
           aria-label={notification.subject.type}
         />
       </div>
@@ -135,7 +137,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
         onClick={() => handleNotification()}
       >
-        {!groupByRepository && (
+        {groupByDate && (
           <div
             className={cn(
               'mb-1 flex items-center gap-1 text-xs',
@@ -147,13 +149,18 @@ export const NotificationRow: FC<INotificationRow> = ({
               <AvatarIcon
                 title={repoSlug}
                 url={repoAvatarUrl}
-                size="small"
+                size={Size.SMALL}
                 defaultIcon={MarkGithubIcon}
               />
             </span>
             <span
+              title={repoSlug}
               className="cursor-pointer truncate opacity-90"
-              onClick={() => openRepository(notification.repository)}
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                openRepository(notification.repository);
+              }}
             >
               {repoSlug}
             </span>
@@ -188,13 +195,13 @@ export const NotificationRow: FC<INotificationRow> = ({
               <AvatarIcon
                 title={notification.subject.user.login}
                 url={notification.subject.user.avatar_url}
-                size="small"
+                size={Size.XSMALL}
                 defaultIcon={FeedPersonIcon}
               />
             </button>
           ) : (
             <div>
-              <FeedPersonIcon size={16} className={IconColor.GRAY} />
+              <FeedPersonIcon size={Size.MEDIUM} className={IconColor.GRAY} />
             </div>
           )}
           <div title={reason.description}>{reason.title}</div>
@@ -258,42 +265,34 @@ export const NotificationRow: FC<INotificationRow> = ({
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80">
-        <button
-          type="button"
-          className="h-full hover:text-green-500 focus:outline-none"
+      <HoverGroup>
+        <InteractionButton
           title="Mark as Done"
+          icon={CheckIcon}
+          size={Size.MEDIUM}
           onClick={() => {
             setAnimateExit(!settings.delayNotificationState);
             setShowAsRead(settings.delayNotificationState);
             markNotificationDone(notification);
           }}
-        >
-          <CheckIcon size={16} aria-label="Mark as Done" />
-        </button>
-
-        <button
-          type="button"
-          className="h-full hover:text-green-500 focus:outline-none"
+        />
+        <InteractionButton
           title="Mark as Read"
+          icon={ReadIcon}
+          size={Size.SMALL}
           onClick={() => {
             setAnimateExit(!settings.delayNotificationState);
             setShowAsRead(settings.delayNotificationState);
             markNotificationRead(notification);
           }}
-        >
-          <ReadIcon size={14} aria-label="Mark as Read" />
-        </button>
-
-        <button
-          type="button"
-          className="h-full hover:text-red-500 focus:outline-none"
+        />
+        <InteractionButton
           title="Unsubscribe from Thread"
+          icon={BellSlashIcon}
+          size={Size.SMALL}
           onClick={unsubscribeFromThread}
-        >
-          <BellSlashIcon size={14} aria-label="Unsubscribe from Thread" />
-        </button>
-      </div>
+        />
+      </HoverGroup>
     </div>
   );
 };

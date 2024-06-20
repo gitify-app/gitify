@@ -1,6 +1,7 @@
 import { ArrowLeftIcon } from '@primer/octicons-react';
 import type { FC, ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Size } from '../types';
 
 interface IHeader {
   children: ReactNode;
@@ -17,7 +18,7 @@ export const Header: FC<IHeader> = ({ children }: IHeader) => {
         onClick={() => navigate(-1)}
       >
         <ArrowLeftIcon
-          size={20}
+          size={Size.XLARGE}
           className="hover:text-gray-400"
           aria-label="Go Back"
         />
