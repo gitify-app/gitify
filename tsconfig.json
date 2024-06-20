@@ -15,11 +15,5 @@
     "skipLibCheck": true,
     "checkJs": true
   },
-  "include": [
-    "src/**/*.js",
-    "src/**/*.ts",
-    "src/**/*.tsx",
-    "first-run.js",
-    "main.js"
-  ]
+  "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"]
 }
