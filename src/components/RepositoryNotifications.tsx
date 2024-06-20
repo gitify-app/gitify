@@ -62,19 +62,19 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
   return (
     <>
       <div
-        className="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
+        className="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
         onClick={toggleRepositoryNotifications}
       >
         <div
           className={cn(
-            'flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium',
+            'flex flex-1 gap-4 items-center overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium',
             Opacity.MEDIUM,
           )}
         >
           <AvatarIcon
             title={repoName}
             url={avatarUrl}
-            size={Size.LARGE}
+            size={Size.XSMALL}
             defaultIcon={MarkGithubIcon}
           />
           <span
