@@ -9,7 +9,7 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
         class="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
+          class="flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium opacity-80"
         >
           <img
             alt="gitify-app/notifications-test's avatar"
@@ -17,7 +17,7 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
             src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
           />
           <span
-            class="cursor-pointer truncate opacity-90"
+            class="cursor-pointer truncate"
           >
             gitify-app/notifications-test
           </span>
@@ -103,7 +103,7 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
       class="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
     >
       <div
-        class="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
+        class="flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium opacity-80"
       >
         <img
           alt="gitify-app/notifications-test's avatar"
@@ -111,7 +111,7 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
           src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
         />
         <span
-          class="cursor-pointer truncate opacity-90"
+          class="cursor-pointer truncate"
         >
           gitify-app/notifications-test
         </span>
@@ -254,7 +254,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
         class="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
+          class="flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium opacity-80"
         >
           <svg
             aria-hidden="true"
@@ -271,7 +271,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
             />
           </svg>
           <span
-            class="cursor-pointer truncate opacity-90"
+            class="cursor-pointer truncate"
           >
             gitify-app/notifications-test
           </span>
@@ -350,7 +350,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
         class="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
+          class="flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium opacity-80"
         >
           <svg
             aria-hidden="true"
@@ -367,7 +367,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
             />
           </svg>
           <span
-            class="cursor-pointer truncate opacity-90"
+            class="cursor-pointer truncate"
           >
             gitify-app/notifications-test
           </span>
@@ -453,7 +453,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
       class="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
     >
       <div
-        class="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
+        class="flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium opacity-80"
       >
         <svg
           aria-hidden="true"
@@ -470,7 +470,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
           />
         </svg>
         <span
-          class="cursor-pointer truncate opacity-90"
+          class="cursor-pointer truncate"
         >
           gitify-app/notifications-test
         </span>
@@ -613,7 +613,7 @@ exports[`components/Repository.tsx should use default repository icon when avata
         class="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
+          class="flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium opacity-80"
         >
           <svg
             aria-hidden="true"
@@ -630,7 +630,7 @@ exports[`components/Repository.tsx should use default repository icon when avata
             />
           </svg>
           <span
-            class="cursor-pointer truncate opacity-90"
+            class="cursor-pointer truncate"
           >
             gitify-app/notifications-test
           </span>
@@ -716,7 +716,7 @@ exports[`components/Repository.tsx should use default repository icon when avata
       class="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
     >
       <div
-        class="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium"
+        class="flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium opacity-80"
       >
         <svg
           aria-hidden="true"
@@ -733,7 +733,7 @@ exports[`components/Repository.tsx should use default repository icon when avata
           />
         </svg>
         <span
-          class="cursor-pointer truncate opacity-90"
+          class="cursor-pointer truncate"
         >
           gitify-app/notifications-test
         </span>

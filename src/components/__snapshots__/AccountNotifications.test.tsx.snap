@@ -6,7 +6,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+        class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
       >
         <div
           class="flex gap-3"
@@ -93,10 +93,10 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </svg>
         </div>
         <div
-          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
+          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
         >
           <div
-            class="mb-1 flex items-center gap-1 cursor-pointer truncate text-sm font-medium "
+            class="mb-1 flex items-center gap-1 text-xs opacity-80"
             title="gitify-app/notifications-test"
           >
             <span>
@@ -114,14 +114,14 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </span>
           </div>
           <div
-            class="mb-1 cursor-pointer truncate text-sm"
+            class="mb-1 truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
           </div>
           <div
-            class="flex flex-wrap items-center gap-1 text-xs capitalize"
+            class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
           >
             <button
               class="flex-shrink-0"
@@ -290,10 +290,10 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </svg>
         </div>
         <div
-          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
+          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
         >
           <div
-            class="mb-1 flex items-center gap-1 cursor-pointer truncate text-sm font-medium "
+            class="mb-1 flex items-center gap-1 text-xs opacity-80"
             title="gitify-app/notifications-test"
           >
             <span>
@@ -311,14 +311,14 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </span>
           </div>
           <div
-            class="mb-1 cursor-pointer truncate text-sm"
+            class="mb-1 truncate text-sm"
             role="main"
             title="Improve the UI"
           >
             Improve the UI
           </div>
           <div
-            class="flex flex-wrap items-center gap-1 text-xs capitalize"
+            class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
           >
             <div>
               <svg
@@ -423,7 +423,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+      class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
     >
       <div
         class="flex gap-3"
@@ -510,10 +510,10 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         </svg>
       </div>
       <div
-        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
+        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
       >
         <div
-          class="mb-1 flex items-center gap-1 cursor-pointer truncate text-sm font-medium "
+          class="mb-1 flex items-center gap-1 text-xs opacity-80"
           title="gitify-app/notifications-test"
         >
           <span>
@@ -531,14 +531,14 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </span>
         </div>
         <div
-          class="mb-1 cursor-pointer truncate text-sm"
+          class="mb-1 truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
         </div>
         <div
-          class="flex flex-wrap items-center gap-1 text-xs capitalize"
+          class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
         >
           <button
             class="flex-shrink-0"
@@ -707,10 +707,10 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         </svg>
       </div>
       <div
-        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
+        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
       >
         <div
-          class="mb-1 flex items-center gap-1 cursor-pointer truncate text-sm font-medium "
+          class="mb-1 flex items-center gap-1 text-xs opacity-80"
           title="gitify-app/notifications-test"
         >
           <span>
@@ -728,14 +728,14 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </span>
         </div>
         <div
-          class="mb-1 cursor-pointer truncate text-sm"
+          class="mb-1 truncate text-sm"
           role="main"
           title="Improve the UI"
         >
           Improve the UI
         </div>
         <div
-          class="flex flex-wrap items-center gap-1 text-xs capitalize"
+          class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
         >
           <div>
             <svg
@@ -897,7 +897,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+        class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
       >
         <div
           class="flex gap-3"
@@ -963,7 +963,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+      class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
     >
       <div
         class="flex gap-3"
@@ -1086,7 +1086,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+        class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
       >
         <div
           class="flex gap-3"
@@ -1149,7 +1149,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+      class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
     >
       <div
         class="flex gap-3"
@@ -1269,7 +1269,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+        class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
       >
         <div
           class="flex gap-3"
@@ -1331,7 +1331,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
     </div>
     <div>
       <div
-        class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+        class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
       >
         <div
           class="flex gap-3"
@@ -1397,7 +1397,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between bg-gray-300 px-3 py-2 text-sm font-semibold dark:bg-gray-darkest dark:text-white"
+      class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
     >
       <div
         class="flex gap-3"

@@ -13,8 +13,9 @@ import {
   useState,
 } from 'react';
 import { AppContext } from '../context/App';
-import { Size } from '../types';
+import { Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
+import { cn } from '../utils/cn';
 import { openRepository } from '../utils/links';
 import { HoverGroup } from './HoverGroup';
 import { NotificationRow } from './NotificationRow';
@@ -64,7 +65,12 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
         className="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
         onClick={toggleRepositoryNotifications}
       >
-        <div className="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium">
+        <div
+          className={cn(
+            'flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium',
+            Opacity.MEDIUM,
+          )}
+        >
           <AvatarIcon
             title={repoName}
             url={avatarUrl}
@@ -72,7 +78,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
             defaultIcon={MarkGithubIcon}
           />
           <span
-            className="cursor-pointer truncate opacity-90"
+            className="cursor-pointer truncate"
             onClick={(event: MouseEvent<HTMLElement>) => {
               // Don't trigger onClick of parent element.
               event.stopPropagation();
