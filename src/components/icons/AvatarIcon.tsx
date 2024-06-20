@@ -15,7 +15,7 @@ export const AvatarIcon: FC<IAvatarIcon> = (props: IAvatarIcon) => {
     return (
       <img
         className={cn(
-          'cursor-pointer rounded-full object-cover',
+          'rounded-full object-cover',
           props.size === Size.XSMALL
             ? 'size-4'
             : props.size === Size.SMALL
