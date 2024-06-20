@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/buttons/SidebarButton.tsx should render - medium 1`] = `
+exports[`components/buttons/SidebarButton.tsx should render - with specific size 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
