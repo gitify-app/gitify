@@ -1,10 +1,11 @@
 import { AppsIcon, KeyIcon, PersonIcon } from '@primer/octicons-react';
 import type { FC } from 'react';
+import type { Size } from '../../types';
 import type { AuthMethod } from '../../utils/auth/types';
 
 export interface IAuthMethodIcon {
   type: AuthMethod;
-  size: number;
+  size: Size;
 }
 
 export const AuthMethodIcon: FC<IAuthMethodIcon> = (props: IAuthMethodIcon) => {
