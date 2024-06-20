@@ -9,7 +9,9 @@ import { type FC, useCallback, useContext, useState } from 'react';
 import { AppContext } from '../context/App';
 import type { Notification } from '../typesGitHub';
 import { openRepository } from '../utils/links';
+import { HoverGroup } from './HoverGroup';
 import { NotificationRow } from './NotificationRow';
+import { InteractionButton } from './buttons/InteractionButton';
 import { AvatarIcon } from './icons/AvatarIcon';
 
 interface IRepositoryNotifications {
@@ -70,34 +72,26 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
           </span>
         </div>
 
-        <div className="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80">
-          <button
-            type="button"
-            className="h-full hover:text-green-500 focus:outline-none"
+        <HoverGroup>
+          <InteractionButton
             title="Mark Repository as Done"
+            icon={CheckIcon}
+            size="medium"
             onClick={markRepoAsDone}
-          >
-            <CheckIcon size={16} aria-label="Mark Repository as Done" />
-          </button>
-
-          <button
-            type="button"
-            className="h-full hover:text-green-500 focus:outline-none"
+          />
+          <InteractionButton
             title="Mark Repository as Read"
+            icon={ReadIcon}
+            size="small"
             onClick={markRepoAsRead}
-          >
-            <ReadIcon size={14} aria-label="Mark Repository as Read" />
-          </button>
-
-          <button
-            type="button"
-            className="h-full hover:text-green-500 focus:outline-none"
+          />
+          <InteractionButton
             title={toggleRepositoryNotificationsLabel}
+            icon={ChevronIcon}
+            size="small"
             onClick={toggleRepositoryNotifications}
-          >
-            <ChevronIcon size={14} />
-          </button>
-        </div>
+          />
+        </HoverGroup>
       </div>
 
       {showRepositoryNotifications &&

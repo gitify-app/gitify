@@ -214,7 +214,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             </svg>
           </button>
           <button
-            class="h-full hover:text-red-500 focus:outline-none"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -448,7 +448,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </button>
         <button
-          class="h-full hover:text-red-500 focus:outline-none"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -739,7 +739,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             </svg>
           </button>
           <button
-            class="h-full hover:text-red-500 focus:outline-none"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -973,7 +973,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </button>
         <button
-          class="h-full hover:text-red-500 focus:outline-none"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -1242,7 +1242,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             </svg>
           </button>
           <button
-            class="h-full hover:text-red-500 focus:outline-none"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -1454,7 +1454,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           </svg>
         </button>
         <button
-          class="h-full hover:text-red-500 focus:outline-none"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -1769,7 +1769,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
             </svg>
           </button>
           <button
-            class="h-full hover:text-red-500 focus:outline-none"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -2027,7 +2027,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
           </svg>
         </button>
         <button
-          class="h-full hover:text-red-500 focus:outline-none"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -2296,7 +2296,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             </svg>
           </button>
           <button
-            class="h-full hover:text-red-500 focus:outline-none"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -2508,7 +2508,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           </svg>
         </button>
         <button
-          class="h-full hover:text-red-500 focus:outline-none"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -2777,7 +2777,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             </svg>
           </button>
           <button
-            class="h-full hover:text-red-500 focus:outline-none"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -2989,7 +2989,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           </svg>
         </button>
         <button
-          class="h-full hover:text-red-500 focus:outline-none"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -3325,7 +3325,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             </svg>
           </button>
           <button
-            class="h-full hover:text-red-500 focus:outline-none"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -3604,7 +3604,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           </svg>
         </button>
         <button
-          class="h-full hover:text-red-500 focus:outline-none"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -3940,7 +3940,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             </svg>
           </button>
           <button
-            class="h-full hover:text-red-500 focus:outline-none"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -4219,7 +4219,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           </svg>
         </button>
         <button
-          class="h-full hover:text-red-500 focus:outline-none"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -4415,7 +4415,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
             </svg>
           </button>
           <button
-            class="h-full hover:text-red-500 focus:outline-none"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -4554,7 +4554,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
           </svg>
         </button>
         <button
-          class="h-full hover:text-red-500 focus:outline-none"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -4810,7 +4810,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
             </svg>
           </button>
           <button
-            class="h-full hover:text-red-500 focus:outline-none"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -5009,7 +5009,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           </svg>
         </button>
         <button
-          class="h-full hover:text-red-500 focus:outline-none"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -5248,7 +5248,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
             </svg>
           </button>
           <button
-            class="h-full hover:text-red-500 focus:outline-none"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -5430,7 +5430,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           </svg>
         </button>
         <button
-          class="h-full hover:text-red-500 focus:outline-none"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -5669,7 +5669,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
             </svg>
           </button>
           <button
-            class="h-full hover:text-red-500 focus:outline-none"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -5851,7 +5851,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
           </svg>
         </button>
         <button
-          class="h-full hover:text-red-500 focus:outline-none"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -6095,7 +6095,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
             </svg>
           </button>
           <button
-            class="h-full hover:text-red-500 focus:outline-none"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -6282,7 +6282,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           </svg>
         </button>
         <button
-          class="h-full hover:text-red-500 focus:outline-none"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >

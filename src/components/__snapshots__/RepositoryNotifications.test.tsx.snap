@@ -73,11 +73,12 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
             type="button"
           >
             <svg
-              aria-hidden="true"
+              aria-label="Hide repository notifications"
               class="octicon octicon-chevron-down"
               fill="currentColor"
               focusable="false"
               height="14"
+              role="img"
               style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 12 12"
               width="14"
@@ -166,11 +167,12 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
           type="button"
         >
           <svg
-            aria-hidden="true"
+            aria-label="Hide repository notifications"
             class="octicon octicon-chevron-down"
             fill="currentColor"
             focusable="false"
             height="14"
+            role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 12 12"
             width="14"
@@ -325,11 +327,12 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
             type="button"
           >
             <svg
-              aria-hidden="true"
+              aria-label="Show repository notifications"
               class="octicon octicon-chevron-up"
               fill="currentColor"
               focusable="false"
               height="14"
+              role="img"
               style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 12 12"
               width="14"
@@ -420,11 +423,12 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
             type="button"
           >
             <svg
-              aria-hidden="true"
+              aria-label="Hide repository notifications"
               class="octicon octicon-chevron-down"
               fill="currentColor"
               focusable="false"
               height="14"
+              role="img"
               style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 12 12"
               width="14"
@@ -522,11 +526,12 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
           type="button"
         >
           <svg
-            aria-hidden="true"
+            aria-label="Hide repository notifications"
             class="octicon octicon-chevron-down"
             fill="currentColor"
             focusable="false"
             height="14"
+            role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 12 12"
             width="14"
@@ -681,11 +686,12 @@ exports[`components/Repository.tsx should use default repository icon when avata
             type="button"
           >
             <svg
-              aria-hidden="true"
+              aria-label="Hide repository notifications"
               class="octicon octicon-chevron-down"
               fill="currentColor"
               focusable="false"
               height="14"
+              role="img"
               style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 12 12"
               width="14"
@@ -783,11 +789,12 @@ exports[`components/Repository.tsx should use default repository icon when avata
           type="button"
         >
           <svg
-            aria-hidden="true"
+            aria-label="Hide repository notifications"
             class="octicon octicon-chevron-down"
             fill="currentColor"
             focusable="false"
             height="14"
+            role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 12 12"
             width="14"

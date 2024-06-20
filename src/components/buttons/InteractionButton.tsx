@@ -1,11 +1,11 @@
 import type { Icon } from '@primer/octicons-react';
-import type { FC, MouseEventHandler } from 'react';
+import type { FC, MouseEvent } from 'react';
 
 export interface IInteractionButton {
   title: string;
   icon: Icon;
   size: 'small' | 'medium';
-  onClick: () => MouseEventHandler;
+  onClick: (event?: MouseEvent<HTMLElement>) => void;
 }
 
 export const InteractionButton: FC<IInteractionButton> = (
@@ -16,9 +16,12 @@ export const InteractionButton: FC<IInteractionButton> = (
       type="button"
       className="h-full hover:text-green-500 focus:outline-none"
       title={props.title}
-      onClick={props.onClick()}
+      onClick={props.onClick}
     >
-      <props.icon size={14} />
+      <props.icon
+        size={props.size === 'small' ? 14 : 16}
+        aria-label={props.title}
+      />
     </button>
   );
 };
