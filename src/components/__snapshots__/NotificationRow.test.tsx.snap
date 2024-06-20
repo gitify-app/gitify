@@ -4667,18 +4667,18 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         >
           <div
-            class="mb-1 flex items-center gap-1 cursor-pointer truncate text-sm font-medium "
-            title="gitify-app/notifications-test"
+            class="mb-1 flex items-center gap-1 text-xs "
           >
             <span>
               <img
                 alt="gitify-app/notifications-test's avatar"
-                class="cursor-pointer rounded-full object-cover size-5"
+                class="cursor-pointer rounded-full object-cover size-4"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
               />
             </span>
             <span
               class="cursor-pointer truncate opacity-90"
+              title="gitify-app/notifications-test"
             >
               gitify-app/notifications-test
             </span>
@@ -4866,18 +4866,18 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
         class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
       >
         <div
-          class="mb-1 flex items-center gap-1 cursor-pointer truncate text-sm font-medium "
-          title="gitify-app/notifications-test"
+          class="mb-1 flex items-center gap-1 text-xs "
         >
           <span>
             <img
               alt="gitify-app/notifications-test's avatar"
-              class="cursor-pointer rounded-full object-cover size-5"
+              class="cursor-pointer rounded-full object-cover size-4"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
             />
           </span>
           <span
             class="cursor-pointer truncate opacity-90"
+            title="gitify-app/notifications-test"
           >
             gitify-app/notifications-test
           </span>

@@ -3,7 +3,7 @@ import {
   ChevronLeftIcon,
   ChevronUpIcon,
 } from '@primer/octicons-react';
-import { type FC, useContext, useState } from 'react';
+import { type FC, type MouseEvent, useContext, useState } from 'react';
 import { AppContext } from '../context/App';
 import type { Account } from '../types';
 import type { Notification } from '../typesGitHub';
@@ -72,7 +72,11 @@ export const AccountNotifications: FC<IAccountNotifications> = (
             <button
               type="button"
               title="Open Profile"
-              onClick={() => openAccountProfile(account)}
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                openAccountProfile(account);
+              }}
               className="opacity-80"
             >
               @{account.user.login}

@@ -136,21 +136,23 @@ export const NotificationRow: FC<INotificationRow> = ({
         onClick={() => handleNotification()}
       >
         {!groupByRepository && (
-          <div
-            className="mb-1 flex items-center gap-1 cursor-pointer truncate text-sm font-medium "
-            title={repoSlug}
-          >
+          <div className="mb-1 flex items-center gap-1 text-xs ">
             <span>
               <AvatarIcon
                 title={repoSlug}
                 url={repoAvatarUrl}
-                size="medium"
+                size="small"
                 defaultIcon={MarkGithubIcon}
               />
             </span>
             <span
+              title={repoSlug}
               className="cursor-pointer truncate opacity-90"
-              onClick={() => openRepository(notification.repository)}
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                openRepository(notification.repository);
+              }}
             >
               {repoSlug}
             </span>
