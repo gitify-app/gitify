@@ -70,7 +70,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
             defaultIcon={MarkGithubIcon}
           />
           <span
-            className="cursor-pointer truncate "
+            className="cursor-pointer truncate"
             onClick={() => openRepository(repoNotifications[0].repository)}
           >
             {repoName}
