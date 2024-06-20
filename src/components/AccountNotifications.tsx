@@ -68,7 +68,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
       {showAccountHostname && (
         <div
           className={cn(
-            'group flex items-center justify-between px-3 py-2 text-sm font-semibold',
+            'group flex items-center justify-between px-3 py-1.5 text-sm font-semibold',
             'bg-gray-300 dark:bg-gray-darkest dark:text-white',
             Opacity.LOW,
           )}
@@ -84,7 +84,6 @@ export const AccountNotifications: FC<IAccountNotifications> = (
                 event.stopPropagation();
                 openAccountProfile(account);
               }}
-              className="opacity-80"
             >
               @{account.user.login}
             </button>

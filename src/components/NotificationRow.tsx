@@ -140,7 +140,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         {groupByDate && (
           <div
             className={cn(
-              'mb-1 flex items-center gap-1 text-xs',
+              'mb-1 flex items-center gap-1 text-xs font-medium',
               Opacity.MEDIUM,
             )}
             title={repoSlug}

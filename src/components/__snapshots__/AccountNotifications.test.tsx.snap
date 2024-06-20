@@ -6,7 +6,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
       >
         <div
           class="flex gap-3"
@@ -31,7 +31,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </svg>
           </span>
           <button
-            class="opacity-80"
             title="Open Profile"
             type="button"
           >
@@ -96,7 +95,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
         >
           <div
-            class="mb-1 flex items-center gap-1 text-xs opacity-80"
+            class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
             title="gitify-app/notifications-test"
           >
             <span>
@@ -293,7 +292,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
         >
           <div
-            class="mb-1 flex items-center gap-1 text-xs opacity-80"
+            class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
             title="gitify-app/notifications-test"
           >
             <span>
@@ -423,7 +422,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
     >
       <div
         class="flex gap-3"
@@ -448,7 +447,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </svg>
         </span>
         <button
-          class="opacity-80"
           title="Open Profile"
           type="button"
         >
@@ -513,7 +511,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
       >
         <div
-          class="mb-1 flex items-center gap-1 text-xs opacity-80"
+          class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
           title="gitify-app/notifications-test"
         >
           <span>
@@ -710,7 +708,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
       >
         <div
-          class="mb-1 flex items-center gap-1 text-xs opacity-80"
+          class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
           title="gitify-app/notifications-test"
         >
           <span>
@@ -897,7 +895,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
       >
         <div
           class="flex gap-3"
@@ -922,7 +920,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </svg>
           </span>
           <button
-            class="opacity-80"
             title="Open Profile"
             type="button"
           >
@@ -963,7 +960,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
     >
       <div
         class="flex gap-3"
@@ -988,7 +985,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </svg>
         </span>
         <button
-          class="opacity-80"
           title="Open Profile"
           type="button"
         >
@@ -1086,7 +1082,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
       >
         <div
           class="flex gap-3"
@@ -1111,7 +1107,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </svg>
           </span>
           <button
-            class="opacity-80"
             title="Open Profile"
             type="button"
           >
@@ -1149,7 +1144,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
     >
       <div
         class="flex gap-3"
@@ -1174,7 +1169,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </svg>
         </span>
         <button
-          class="opacity-80"
           title="Open Profile"
           type="button"
         >
@@ -1269,7 +1263,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
       >
         <div
           class="flex gap-3"
@@ -1294,7 +1288,6 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
             </svg>
           </span>
           <button
-            class="opacity-80"
             title="Open Profile"
             type="button"
           >
@@ -1331,7 +1324,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
     </div>
     <div>
       <div
-        class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
       >
         <div
           class="flex gap-3"
@@ -1356,7 +1349,6 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
             </svg>
           </span>
           <button
-            class="opacity-80"
             title="Open Profile"
             type="button"
           >
@@ -1397,7 +1389,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between px-3 py-2 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
     >
       <div
         class="flex gap-3"
@@ -1422,7 +1414,6 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
           </svg>
         </span>
         <button
-          class="opacity-80"
           title="Open Profile"
           type="button"
         >

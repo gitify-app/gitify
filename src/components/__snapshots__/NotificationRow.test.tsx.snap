@@ -4667,7 +4667,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
         >
           <div
-            class="mb-1 flex items-center gap-1 text-xs opacity-80"
+            class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
             title="gitify-app/notifications-test"
           >
             <span>
@@ -4867,7 +4867,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
         class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
       >
         <div
-          class="mb-1 flex items-center gap-1 text-xs opacity-80"
+          class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
           title="gitify-app/notifications-test"
         >
           <span>
