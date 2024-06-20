@@ -8,12 +8,17 @@ const {
 const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
+const path = require('node:path');
 
 // TODO: Remove @electron/remote use - see #650
 require('@electron/remote/main').initialize();
 
-const idleIcon = `${__dirname}/../../assets/images/tray-idleTemplate.png`;
-const activeIcon = `${__dirname}/../../assets/images/tray-active.png`;
+const idleIcon = path.resolve(
+  `${__dirname}/../../assets/images/tray-idleTemplate.png`,
+);
+const activeIcon = path.resolve(
+  `${__dirname}/../../assets/images/tray-active.png`,
+);
 
 const browserWindowOpts = {
   width: 500,
