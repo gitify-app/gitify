@@ -8,8 +8,10 @@ import { AppContext } from '../context/App';
 import { type Account, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openAccountProfile } from '../utils/links';
+import { HoverGroup } from './HoverGroup';
 import { NotificationRow } from './NotificationRow';
 import { RepositoryNotifications } from './RepositoryNotifications';
+import { InteractionButton } from './buttons/InteractionButton';
 import { PlatformIcon } from './icons/PlatformIcon';
 
 interface IAccountNotifications {
@@ -82,16 +84,14 @@ export const AccountNotifications: FC<IAccountNotifications> = (
               @{account.user.login}
             </button>
           </div>
-          <div className="opacity-0 transition-opacity group-hover:opacity-80">
-            <button
-              type="button"
-              className="h-full hover:text-green-500 focus:outline-none"
+          <HoverGroup>
+            <InteractionButton
               title={toggleAccountNotificationsLabel}
+              icon={ChevronIcon}
+              size={Size.SMALL}
               onClick={toggleAccountNotifications}
-            >
-              <ChevronIcon size={Size.SMALL} />
-            </button>
-          </div>
+            />
+          </HoverGroup>
         </div>
       )}
 

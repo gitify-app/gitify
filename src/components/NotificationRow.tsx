@@ -35,6 +35,8 @@ import {
   openUserProfile,
 } from '../utils/links';
 import { formatReason } from '../utils/reason';
+import { HoverGroup } from './HoverGroup';
+import { InteractionButton } from './buttons/InteractionButton';
 import { PillButton } from './buttons/PillButton';
 import { AvatarIcon } from './icons/AvatarIcon';
 
@@ -255,45 +257,34 @@ export const NotificationRow: FC<INotificationRow> = ({
         </div>
       </div>
 
-      <div className="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80">
-        <button
-          type="button"
-          className="h-full hover:text-green-500 focus:outline-none"
+      <HoverGroup>
+        <InteractionButton
           title="Mark as Done"
+          icon={CheckIcon}
+          size={Size.MEDIUM}
           onClick={() => {
             setAnimateExit(!settings.delayNotificationState);
             setShowAsRead(settings.delayNotificationState);
             markNotificationDone(notification);
           }}
-        >
-          <CheckIcon size={Size.MEDIUM} aria-label="Mark as Done" />
-        </button>
-
-        <button
-          type="button"
-          className="h-full hover:text-green-500 focus:outline-none"
+        />
+        <InteractionButton
           title="Mark as Read"
+          icon={ReadIcon}
+          size={Size.SMALL}
           onClick={() => {
             setAnimateExit(!settings.delayNotificationState);
             setShowAsRead(settings.delayNotificationState);
             markNotificationRead(notification);
           }}
-        >
-          <ReadIcon size={Size.SMALL} aria-label="Mark as Read" />
-        </button>
-
-        <button
-          type="button"
-          className="h-full hover:text-red-500 focus:outline-none"
+        />
+        <InteractionButton
           title="Unsubscribe from Thread"
+          icon={BellSlashIcon}
+          size={Size.SMALL}
           onClick={unsubscribeFromThread}
-        >
-          <BellSlashIcon
-            size={Size.SMALL}
-            aria-label="Unsubscribe from Thread"
-          />
-        </button>
-      </div>
+        />
+      </HoverGroup>
     </div>
   );
 };

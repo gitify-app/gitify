@@ -24,7 +24,7 @@ describe('components/buttons/SidebarButton.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render - medium', () => {
+  it('should render - with specific size', () => {
     const props: ISidebarButton = {
       title: 'Mock Sidebar Button',
       metric: 0,
