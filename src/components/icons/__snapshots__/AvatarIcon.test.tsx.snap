@@ -98,7 +98,7 @@ exports[`components/icons/AvatarIcon.tsx should render medium avatar 1`] = `
     <div>
       <img
         alt="test's avatar"
-        class="cursor-pointer rounded-full object-cover size-6"
+        class="rounded-full object-cover size-6"
         src="https://avatars.githubusercontent.com/u/583231?v=4"
       />
     </div>
@@ -106,7 +106,7 @@ exports[`components/icons/AvatarIcon.tsx should render medium avatar 1`] = `
   "container": <div>
     <img
       alt="test's avatar"
-      class="cursor-pointer rounded-full object-cover size-6"
+      class="rounded-full object-cover size-6"
       src="https://avatars.githubusercontent.com/u/583231?v=4"
     />
   </div>,
@@ -171,7 +171,7 @@ exports[`components/icons/AvatarIcon.tsx should render medium avatar 2`] = `
     <div>
       <img
         alt="test's avatar"
-        class="cursor-pointer rounded-full object-cover size-6"
+        class="rounded-full object-cover size-6"
         src="https://avatars.githubusercontent.com/u/583231?v=4"
       />
     </div>
@@ -179,7 +179,7 @@ exports[`components/icons/AvatarIcon.tsx should render medium avatar 2`] = `
   "container": <div>
     <img
       alt="test's avatar"
-      class="cursor-pointer rounded-full object-cover size-6"
+      class="rounded-full object-cover size-6"
       src="https://avatars.githubusercontent.com/u/583231?v=4"
     />
   </div>,
@@ -244,7 +244,7 @@ exports[`components/icons/AvatarIcon.tsx should render small avatar 1`] = `
     <div>
       <img
         alt="test's avatar"
-        class="cursor-pointer rounded-full object-cover size-4"
+        class="rounded-full object-cover size-4"
         src="https://avatars.githubusercontent.com/u/583231?v=4"
       />
     </div>
@@ -252,7 +252,7 @@ exports[`components/icons/AvatarIcon.tsx should render small avatar 1`] = `
   "container": <div>
     <img
       alt="test's avatar"
-      class="cursor-pointer rounded-full object-cover size-4"
+      class="rounded-full object-cover size-4"
       src="https://avatars.githubusercontent.com/u/583231?v=4"
     />
   </div>,

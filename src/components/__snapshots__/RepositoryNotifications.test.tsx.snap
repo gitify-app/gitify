@@ -13,7 +13,7 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
         >
           <img
             alt="gitify-app/notifications-test's avatar"
-            class="cursor-pointer rounded-full object-cover size-6"
+            class="rounded-full object-cover size-6"
             src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
           />
           <span
@@ -107,7 +107,7 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
       >
         <img
           alt="gitify-app/notifications-test's avatar"
-          class="cursor-pointer rounded-full object-cover size-6"
+          class="rounded-full object-cover size-6"
           src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
         />
         <span
