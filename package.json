@@ -2,7 +2,7 @@
   "name": "gitify",
   "version": "5.9.0",
   "description": "GitHub Notifications on your menu bar.",
-  "main": "main.js",
+  "main": "src/electron/main.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "clean": "rimraf build coverage node_modules",
@@ -64,14 +64,7 @@
   "build": {
     "appId": "com.electron.gitify",
     "productName": "Gitify",
-    "files": [
-      "build/**/*",
-      "assets/**/*",
-      "index.html",
-      "LICENSE",
-      "main.js",
-      "first-run.js"
-    ],
+    "files": ["build/**/*", "assets/**/*", "src/electron/*", "LICENSE"],
     "mac": {
       "category": "public.app-category.developer-tools",
       "icon": "assets/images/app-icon.icns",
