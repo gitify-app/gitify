@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/fields/Button.tsx should render with icon 1`] = `
+exports[`components/buttons/Button.tsx should render with icon 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -107,7 +107,7 @@ exports[`components/fields/Button.tsx should render with icon 1`] = `
 }
 `;
 
-exports[`components/fields/Button.tsx should render without icon 1`] = `
+exports[`components/buttons/Button.tsx should render without icon 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

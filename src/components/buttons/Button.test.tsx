@@ -4,7 +4,7 @@ import { shell } from 'electron';
 import type { Link } from '../../types';
 import { Button, type IButton } from './Button';
 
-describe('components/fields/Button.tsx', () => {
+describe('components/buttons/Button.tsx', () => {
   const openExternalMock = jest.spyOn(shell, 'openExternal');
 
   const props: IButton = {
