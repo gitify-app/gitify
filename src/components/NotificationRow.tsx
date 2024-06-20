@@ -1,13 +1,9 @@
 import {
   BellSlashIcon,
   CheckIcon,
-  CommentIcon,
   FeedPersonIcon,
-  IssueClosedIcon,
   MarkGithubIcon,
-  MilestoneIcon,
   ReadIcon,
-  TagIcon,
 } from '@primer/octicons-react';
 import {
   type FC,
@@ -27,7 +23,6 @@ import {
 import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
-  getPullRequestReviewIcon,
 } from '../utils/icons';
 import {
   openNotification,
@@ -37,8 +32,8 @@ import {
 import { formatReason } from '../utils/reason';
 import { HoverGroup } from './HoverGroup';
 import { InteractionButton } from './buttons/InteractionButton';
-import { PillButton } from './buttons/PillButton';
 import { AvatarIcon } from './icons/AvatarIcon';
+import { Pills } from './notification/Pills';
 
 interface INotificationRow {
   notification: Notification;
@@ -95,18 +90,6 @@ export const NotificationRow: FC<INotificationRow> = ({
     notification.subject.state,
     notification.subject.type,
   ]);
-
-  const commentsPillDescription = `${notification.subject.comments} ${
-    notification.subject.comments > 1 ? 'comments' : 'comment'
-  }`;
-
-  const labelsPillDescription = notification.subject.labels
-    ?.map((label) => `🏷️ ${label}`)
-    .join('\n');
-
-  const linkedIssuesPillDescription = `Linked to ${
-    notification.subject.linkedIssues?.length > 1 ? 'issues' : 'issue'
-  } ${notification.subject?.linkedIssues?.join(', ')}`;
 
   const repoAvatarUrl = notification.repository.owner.avatar_url;
   const repoSlug = notification.repository.full_name;
@@ -206,62 +189,7 @@ export const NotificationRow: FC<INotificationRow> = ({
           )}
           <div title={reason.description}>{reason.title}</div>
           <div title={updatedLabel}>{updatedAt}</div>
-          {settings.showPills && (
-            <div className="flex">
-              {notification.subject?.linkedIssues?.length > 0 && (
-                <PillButton
-                  title={linkedIssuesPillDescription}
-                  metric={notification.subject.linkedIssues.length}
-                  icon={IssueClosedIcon}
-                  color={IconColor.GREEN}
-                />
-              )}
-
-              {notification.subject.reviews?.map((review) => {
-                const icon = getPullRequestReviewIcon(review);
-                if (!icon) {
-                  return null;
-                }
-
-                return (
-                  <PillButton
-                    key={review.state}
-                    title={icon.description}
-                    metric={review.users.length}
-                    icon={icon.type}
-                    color={icon.color}
-                  />
-                );
-              })}
-              {notification.subject?.comments > 0 && (
-                <PillButton
-                  title={commentsPillDescription}
-                  metric={notification.subject.comments}
-                  icon={CommentIcon}
-                  color={IconColor.GRAY}
-                />
-              )}
-              {notification.subject?.labels?.length > 0 && (
-                <PillButton
-                  title={labelsPillDescription}
-                  metric={notification.subject.labels.length}
-                  icon={TagIcon}
-                  color={IconColor.GRAY}
-                />
-              )}
-              {notification.subject.milestone && (
-                <PillButton
-                  title={notification.subject.milestone.title}
-                  icon={MilestoneIcon}
-                  color={
-                    notification.subject.milestone.state === 'open'
-                      ? IconColor.GREEN
-                      : IconColor.RED
-                  }
-                />
-              )}
-            </div>
-          )}
+          <Pills notification={notification} />
         </div>
       </div>
 
