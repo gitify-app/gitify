@@ -5,12 +5,20 @@ import {
   MarkGithubIcon,
   ReadIcon,
 } from '@primer/octicons-react';
-import { type FC, useCallback, useContext, useState } from 'react';
+import {
+  type FC,
+  type MouseEvent,
+  useCallback,
+  useContext,
+  useState,
+} from 'react';
 import { AppContext } from '../context/App';
 import { Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openRepository } from '../utils/links';
+import { HoverGroup } from './HoverGroup';
 import { NotificationRow } from './NotificationRow';
+import { InteractionButton } from './buttons/InteractionButton';
 import { AvatarIcon } from './icons/AvatarIcon';
 
 interface IRepositoryNotifications {
@@ -65,43 +73,36 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
           />
           <span
             className="cursor-pointer truncate opacity-90"
-            onClick={() => openRepository(repoNotifications[0].repository)}
+            onClick={(event: MouseEvent<HTMLElement>) => {
+              // Don't trigger onClick of parent element.
+              event.stopPropagation();
+              openRepository(repoNotifications[0].repository);
+            }}
           >
             {repoName}
           </span>
         </div>
 
-        <div className="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80">
-          <button
-            type="button"
-            className="h-full hover:text-green-500 focus:outline-none"
+        <HoverGroup>
+          <InteractionButton
             title="Mark Repository as Done"
+            icon={CheckIcon}
+            size={Size.MEDIUM}
             onClick={markRepoAsDone}
-          >
-            <CheckIcon
-              size={Size.MEDIUM}
-              aria-label="Mark Repository as Done"
-            />
-          </button>
-
-          <button
-            type="button"
-            className="h-full hover:text-green-500 focus:outline-none"
+          />
+          <InteractionButton
             title="Mark Repository as Read"
+            icon={ReadIcon}
+            size={Size.SMALL}
             onClick={markRepoAsRead}
-          >
-            <ReadIcon size={Size.SMALL} aria-label="Mark Repository as Read" />
-          </button>
-
-          <button
-            type="button"
-            className="h-full hover:text-green-500 focus:outline-none"
+          />
+          <InteractionButton
             title={toggleRepositoryNotificationsLabel}
+            icon={ChevronIcon}
+            size={Size.SMALL}
             onClick={toggleRepositoryNotifications}
-          >
-            <ChevronIcon size={Size.SMALL} />
-          </button>
-        </div>
+          />
+        </HoverGroup>
       </div>
 
       {showRepositoryNotifications &&

@@ -40,7 +40,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </button>
         </div>
         <div
-          class="opacity-0 transition-opacity group-hover:opacity-80"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
             class="h-full hover:text-green-500 focus:outline-none"
@@ -48,11 +48,12 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             type="button"
           >
             <svg
-              aria-hidden="true"
+              aria-label="Hide account notifications"
               class="octicon octicon-chevron-down"
               fill="currentColor"
               focusable="false"
               height="14"
+              role="img"
               style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 12 12"
               width="14"
@@ -107,6 +108,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </span>
             <span
               class="cursor-pointer truncate opacity-90"
+              title="gitify-app/notifications-test"
             >
               gitify-app/notifications-test
             </span>
@@ -238,7 +240,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </svg>
           </button>
           <button
-            class="h-full hover:text-red-500 focus:outline-none"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -303,6 +305,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </span>
             <span
               class="cursor-pointer truncate opacity-90"
+              title="gitify-app/notifications-test"
             >
               gitify-app/notifications-test
             </span>
@@ -394,7 +397,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </svg>
           </button>
           <button
-            class="h-full hover:text-red-500 focus:outline-none"
+            class="h-full hover:text-green-500 focus:outline-none"
             title="Unsubscribe from Thread"
             type="button"
           >
@@ -454,7 +457,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         </button>
       </div>
       <div
-        class="opacity-0 transition-opacity group-hover:opacity-80"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
           class="h-full hover:text-green-500 focus:outline-none"
@@ -462,11 +465,12 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           type="button"
         >
           <svg
-            aria-hidden="true"
+            aria-label="Hide account notifications"
             class="octicon octicon-chevron-down"
             fill="currentColor"
             focusable="false"
             height="14"
+            role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 12 12"
             width="14"
@@ -521,6 +525,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </span>
           <span
             class="cursor-pointer truncate opacity-90"
+            title="gitify-app/notifications-test"
           >
             gitify-app/notifications-test
           </span>
@@ -652,7 +657,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </svg>
         </button>
         <button
-          class="h-full hover:text-red-500 focus:outline-none"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -717,6 +722,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </span>
           <span
             class="cursor-pointer truncate opacity-90"
+            title="gitify-app/notifications-test"
           >
             gitify-app/notifications-test
           </span>
@@ -808,7 +814,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </svg>
         </button>
         <button
-          class="h-full hover:text-red-500 focus:outline-none"
+          class="h-full hover:text-green-500 focus:outline-none"
           title="Unsubscribe from Thread"
           type="button"
         >
@@ -925,7 +931,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </button>
         </div>
         <div
-          class="opacity-0 transition-opacity group-hover:opacity-80"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
             class="h-full hover:text-green-500 focus:outline-none"
@@ -933,11 +939,12 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             type="button"
           >
             <svg
-              aria-hidden="true"
+              aria-label="Hide account notifications"
               class="octicon octicon-chevron-down"
               fill="currentColor"
               focusable="false"
               height="14"
+              role="img"
               style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 12 12"
               width="14"
@@ -990,7 +997,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         </button>
       </div>
       <div
-        class="opacity-0 transition-opacity group-hover:opacity-80"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
           class="h-full hover:text-green-500 focus:outline-none"
@@ -998,11 +1005,12 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           type="button"
         >
           <svg
-            aria-hidden="true"
+            aria-label="Hide account notifications"
             class="octicon octicon-chevron-down"
             fill="currentColor"
             focusable="false"
             height="14"
+            role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 12 12"
             width="14"
@@ -1112,7 +1120,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </button>
         </div>
         <div
-          class="opacity-0 transition-opacity group-hover:opacity-80"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
             class="h-full hover:text-green-500 focus:outline-none"
@@ -1120,11 +1128,12 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             type="button"
           >
             <svg
-              aria-hidden="true"
+              aria-label="No notifications for account"
               class="octicon octicon-chevron-left"
               fill="currentColor"
               focusable="false"
               height="14"
+              role="img"
               style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 12 12"
               width="14"
@@ -1174,7 +1183,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         </button>
       </div>
       <div
-        class="opacity-0 transition-opacity group-hover:opacity-80"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
           class="h-full hover:text-green-500 focus:outline-none"
@@ -1182,11 +1191,12 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           type="button"
         >
           <svg
-            aria-hidden="true"
+            aria-label="No notifications for account"
             class="octicon octicon-chevron-left"
             fill="currentColor"
             focusable="false"
             height="14"
+            role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 12 12"
             width="14"
@@ -1293,7 +1303,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
           </button>
         </div>
         <div
-          class="opacity-0 transition-opacity group-hover:opacity-80"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
             class="h-full hover:text-green-500 focus:outline-none"
@@ -1301,11 +1311,12 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
             type="button"
           >
             <svg
-              aria-hidden="true"
+              aria-label="Show account notifications"
               class="octicon octicon-chevron-up"
               fill="currentColor"
               focusable="false"
               height="14"
+              role="img"
               style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 12 12"
               width="14"
@@ -1354,7 +1365,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
           </button>
         </div>
         <div
-          class="opacity-0 transition-opacity group-hover:opacity-80"
+          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
         >
           <button
             class="h-full hover:text-green-500 focus:outline-none"
@@ -1362,11 +1373,12 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
             type="button"
           >
             <svg
-              aria-hidden="true"
+              aria-label="Hide account notifications"
               class="octicon octicon-chevron-down"
               fill="currentColor"
               focusable="false"
               height="14"
+              role="img"
               style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 12 12"
               width="14"
@@ -1419,7 +1431,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
         </button>
       </div>
       <div
-        class="opacity-0 transition-opacity group-hover:opacity-80"
+        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
       >
         <button
           class="h-full hover:text-green-500 focus:outline-none"
@@ -1427,11 +1439,12 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
           type="button"
         >
           <svg
-            aria-hidden="true"
+            aria-label="Hide account notifications"
             class="octicon octicon-chevron-down"
             fill="currentColor"
             focusable="false"
             height="14"
+            role="img"
             style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 12 12"
             width="14"
