@@ -109,7 +109,7 @@ export const NotificationRow: FC<INotificationRow> = ({
   const repoAvatarUrl = notification.repository.owner.avatar_url;
   const repoSlug = notification.repository.full_name;
 
-  const groupByRepository = settings.groupBy === 'REPOSITORY';
+  const groupByDate = settings.groupBy === 'DATE';
 
   return (
     <div
@@ -126,7 +126,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         title={notificationTitle}
       >
         <NotificationIcon
-          size={groupByRepository ? Size.MEDIUM : Size.XLARGE}
+          size={groupByDate ? Size.XLARGE : Size.MEDIUM}
           aria-label={notification.subject.type}
         />
       </div>
@@ -135,7 +135,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         onClick={() => handleNotification()}
       >
-        {!groupByRepository && (
+        {groupByDate && (
           <div
             className="mb-1 flex items-center gap-1 cursor-pointer truncate text-sm font-medium "
             title={repoSlug}
