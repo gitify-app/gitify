@@ -144,7 +144,7 @@ export const NotificationRow: FC<INotificationRow> = ({
               <AvatarIcon
                 title={repoSlug}
                 url={repoAvatarUrl}
-                size={Size.LARGE}
+                size={Size.SMALL}
                 defaultIcon={MarkGithubIcon}
               />
             </span>
@@ -180,7 +180,7 @@ export const NotificationRow: FC<INotificationRow> = ({
               <AvatarIcon
                 title={notification.subject.user.login}
                 url={notification.subject.user.avatar_url}
-                size={Size.SMALL}
+                size={Size.XSMALL}
                 defaultIcon={FeedPersonIcon}
               />
             </button>
