@@ -3,10 +3,12 @@ import {
   ChevronLeftIcon,
   ChevronUpIcon,
 } from '@primer/octicons-react';
-import { type FC, useState } from 'react';
+import { type FC, useContext, useState } from 'react';
+import { AppContext } from '../context/App';
 import type { Account } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openAccountProfile } from '../utils/links';
+import { NotificationRow } from './NotificationRow';
 import { RepositoryNotifications } from './RepositoryNotifications';
 import { PlatformIcon } from './icons/PlatformIcon';
 
@@ -20,6 +22,8 @@ export const AccountNotifications: FC<IAccountNotifications> = (
   props: IAccountNotifications,
 ) => {
   const { account, showAccountHostname, notifications } = props;
+
+  const { settings } = useContext(AppContext);
 
   const groupedNotifications = Object.values(
     notifications.reduce(
@@ -54,6 +58,8 @@ export const AccountNotifications: FC<IAccountNotifications> = (
         ? 'Hide account notifications'
         : 'Show account notifications';
 
+  const groupByRepository = settings.groupBy === 'REPOSITORY';
+
   return (
     <>
       {showAccountHostname && (
@@ -85,18 +91,24 @@ export const AccountNotifications: FC<IAccountNotifications> = (
         </div>
       )}
 
-      {showAccountNotifications &&
-        Object.values(groupedNotifications).map((repoNotifications) => {
-          const repoSlug = repoNotifications[0].repository.full_name;
+      {showAccountNotifications && groupByRepository
+        ? Object.values(groupedNotifications).map((repoNotifications) => {
+            const repoSlug = repoNotifications[0].repository.full_name;
 
-          return (
-            <RepositoryNotifications
-              key={repoSlug}
-              repoName={repoSlug}
-              repoNotifications={repoNotifications}
+            return (
+              <RepositoryNotifications
+                key={repoSlug}
+                repoName={repoSlug}
+                repoNotifications={repoNotifications}
+              />
+            );
+          })
+        : notifications.map((notification) => (
+            <NotificationRow
+              key={notification.id}
+              notification={notification}
             />
-          );
-        })}
+          ))}
     </>
   );
 };

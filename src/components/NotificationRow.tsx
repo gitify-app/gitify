@@ -4,6 +4,7 @@ import {
   CommentIcon,
   FeedPersonIcon,
   IssueClosedIcon,
+  MarkGithubIcon,
   MilestoneIcon,
   ReadIcon,
   TagIcon,
@@ -28,7 +29,11 @@ import {
   getNotificationTypeIconColor,
   getPullRequestReviewIcon,
 } from '../utils/icons';
-import { openNotification, openUserProfile } from '../utils/links';
+import {
+  openNotification,
+  openRepository,
+  openUserProfile,
+} from '../utils/links';
 import { formatReason } from '../utils/reason';
 import { PillButton } from './buttons/PillButton';
 import { AvatarIcon } from './icons/AvatarIcon';
@@ -101,6 +106,11 @@ export const NotificationRow: FC<INotificationRow> = ({
     notification.subject.linkedIssues?.length > 1 ? 'issues' : 'issue'
   } ${notification.subject?.linkedIssues?.join(', ')}`;
 
+  const repoAvatarUrl = notification.repository.owner.avatar_url;
+  const repoSlug = notification.repository.full_name;
+
+  const groupByRepository = settings.groupBy === 'REPOSITORY';
+
   return (
     <div
       id={notification.id}
@@ -115,13 +125,38 @@ export const NotificationRow: FC<INotificationRow> = ({
         className={cn('mr-3 flex w-5 items-center justify-center', iconColor)}
         title={notificationTitle}
       >
-        <NotificationIcon size={16} aria-label={notification.subject.type} />
+        <NotificationIcon
+          size={groupByRepository ? 16 : 20}
+          aria-label={notification.subject.type}
+        />
       </div>
 
       <div
         className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         onClick={() => handleNotification()}
       >
+        {!groupByRepository && (
+          <div
+            className="mb-1 flex items-center gap-1 cursor-pointer truncate text-sm font-medium "
+            title={repoSlug}
+          >
+            <span>
+              <AvatarIcon
+                title={repoSlug}
+                url={repoAvatarUrl}
+                size="medium"
+                defaultIcon={MarkGithubIcon}
+              />
+            </span>
+            <span
+              className="cursor-pointer truncate opacity-90"
+              onClick={() => openRepository(notification.repository)}
+            >
+              {repoSlug}
+            </span>
+          </div>
+        )}
+
         <div
           className="mb-1 cursor-pointer truncate text-sm"
           role="main"

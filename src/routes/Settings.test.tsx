@@ -179,6 +179,28 @@ describe('routes/Settings.tsx', () => {
   });
 
   describe('Notifications section', () => {
+    it('should change the groupBy radio group', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+              updateSetting,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      fireEvent.click(screen.getByLabelText('Date'));
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith('groupBy', 'DATE');
+    });
     it('should toggle the showOnlyParticipating checkbox', async () => {
       await act(async () => {
         render(

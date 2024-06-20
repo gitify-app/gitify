@@ -21,7 +21,7 @@ import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
-import { Theme } from '../types';
+import { GroupBy, Theme } from '../types';
 import { getAppVersion, quitApp } from '../utils/comms';
 import Constants from '../utils/constants';
 import {
@@ -145,6 +145,18 @@ export const SettingsRoute: FC = () => {
           <legend id="notifications" className="mb-1 mt-2 font-semibold">
             Notifications
           </legend>
+          <RadioGroup
+            name="groupBy"
+            label="Group by:"
+            value={settings.groupBy}
+            options={[
+              { label: 'Repository', value: GroupBy.REPOSITORY },
+              { label: 'Date', value: GroupBy.DATE },
+            ]}
+            onChange={(evt) => {
+              updateSetting('groupBy', evt.target.value);
+            }}
+          />
           <Checkbox
             name="showOnlyParticipating"
             label="Show only participating"

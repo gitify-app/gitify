@@ -68,6 +68,7 @@ interface NotificationSettingsState {
   showBots: boolean;
   markAsDoneOnOpen: boolean;
   delayNotificationState: boolean;
+  groupBy: GroupBy;
 }
 
 interface SystemSettingsState {
@@ -86,6 +87,11 @@ export enum Theme {
   SYSTEM = 'SYSTEM',
   LIGHT = 'LIGHT',
   DARK = 'DARK',
+}
+
+export enum GroupBy {
+  REPOSITORY = 'REPOSITORY',
+  DATE = 'DATE',
 }
 
 export type RadioGroupItem = {
