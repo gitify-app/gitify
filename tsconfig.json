@@ -12,7 +12,8 @@
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
     "types": ["jest"],
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "checkJs": true
   },
   "include": [
     "src/**/*.js",
