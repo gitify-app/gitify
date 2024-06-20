@@ -1,5 +1,6 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
 import { render } from '@testing-library/react';
+import { Size } from '../../types';
 import { type ISidebarButton, SidebarButton } from './SidebarButton';
 
 describe('components/buttons/SidebarButton.tsx', () => {
@@ -18,6 +19,17 @@ describe('components/buttons/SidebarButton.tsx', () => {
       title: 'Mock Sidebar Button',
       metric: 0,
       icon: MarkGithubIcon,
+    };
+    const tree = render(<SidebarButton {...props} />);
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render - with specific size', () => {
+    const props: ISidebarButton = {
+      title: 'Mock Sidebar Button',
+      metric: 0,
+      icon: MarkGithubIcon,
+      size: Size.MEDIUM,
     };
     const tree = render(<SidebarButton {...props} />);
     expect(tree).toMatchSnapshot();

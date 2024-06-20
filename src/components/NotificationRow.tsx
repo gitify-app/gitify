@@ -17,7 +17,7 @@ import {
   useState,
 } from 'react';
 import { AppContext } from '../context/App';
-import { IconColor } from '../types';
+import { IconColor, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
 import {
@@ -111,7 +111,7 @@ export const NotificationRow: FC<INotificationRow> = ({
   const repoAvatarUrl = notification.repository.owner.avatar_url;
   const repoSlug = notification.repository.full_name;
 
-  const groupByRepository = settings.groupBy === 'REPOSITORY';
+  const groupByDate = settings.groupBy === 'DATE';
 
   return (
     <div
@@ -128,7 +128,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         title={notificationTitle}
       >
         <NotificationIcon
-          size={groupByRepository ? 16 : 20}
+          size={groupByDate ? Size.XLARGE : Size.MEDIUM}
           aria-label={notification.subject.type}
         />
       </div>
@@ -137,7 +137,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap"
         onClick={() => handleNotification()}
       >
-        {!groupByRepository && (
+        {groupByDate && (
           <div
             className="mb-1 flex items-center gap-1 cursor-pointer truncate text-sm font-medium "
             title={repoSlug}
@@ -146,13 +146,18 @@ export const NotificationRow: FC<INotificationRow> = ({
               <AvatarIcon
                 title={repoSlug}
                 url={repoAvatarUrl}
-                size="medium"
+                size={Size.SMALL}
                 defaultIcon={MarkGithubIcon}
               />
             </span>
             <span
+              title={repoSlug}
               className="cursor-pointer truncate opacity-90"
-              onClick={() => openRepository(notification.repository)}
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                openRepository(notification.repository);
+              }}
             >
               {repoSlug}
             </span>
@@ -182,13 +187,13 @@ export const NotificationRow: FC<INotificationRow> = ({
               <AvatarIcon
                 title={notification.subject.user.login}
                 url={notification.subject.user.avatar_url}
-                size="small"
+                size={Size.XSMALL}
                 defaultIcon={FeedPersonIcon}
               />
             </button>
           ) : (
             <div>
-              <FeedPersonIcon size={16} className={IconColor.GRAY} />
+              <FeedPersonIcon size={Size.MEDIUM} className={IconColor.GRAY} />
             </div>
           )}
           <div title={reason.description}>{reason.title}</div>
@@ -256,7 +261,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         <InteractionButton
           title="Mark as Done"
           icon={CheckIcon}
-          size="medium"
+          size={Size.MEDIUM}
           onClick={() => {
             setAnimateExit(!settings.delayNotificationState);
             setShowAsRead(settings.delayNotificationState);
@@ -266,7 +271,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         <InteractionButton
           title="Mark as Read"
           icon={ReadIcon}
-          size="small"
+          size={Size.SMALL}
           onClick={() => {
             setAnimateExit(!settings.delayNotificationState);
             setShowAsRead(settings.delayNotificationState);
@@ -276,7 +281,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         <InteractionButton
           title="Unsubscribe from Thread"
           icon={BellSlashIcon}
-          size="small"
+          size={Size.SMALL}
           onClick={unsubscribeFromThread}
         />
       </HoverGroup>

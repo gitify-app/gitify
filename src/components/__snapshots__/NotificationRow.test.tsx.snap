@@ -4679,6 +4679,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
             </span>
             <span
               class="cursor-pointer truncate opacity-90"
+              title="gitify-app/notifications-test"
             >
               gitify-app/notifications-test
             </span>
@@ -4878,6 +4879,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           </span>
           <span
             class="cursor-pointer truncate opacity-90"
+            title="gitify-app/notifications-test"
           >
             gitify-app/notifications-test
           </span>

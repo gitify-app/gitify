@@ -5,8 +5,15 @@ import {
   MarkGithubIcon,
   ReadIcon,
 } from '@primer/octicons-react';
-import { type FC, useCallback, useContext, useState } from 'react';
+import {
+  type FC,
+  type MouseEvent,
+  useCallback,
+  useContext,
+  useState,
+} from 'react';
 import { AppContext } from '../context/App';
+import { Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { openRepository } from '../utils/links';
 import { HoverGroup } from './HoverGroup';
@@ -61,12 +68,16 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
           <AvatarIcon
             title={repoName}
             url={avatarUrl}
-            size="medium"
+            size={Size.LARGE}
             defaultIcon={MarkGithubIcon}
           />
           <span
             className="cursor-pointer truncate opacity-90"
-            onClick={() => openRepository(repoNotifications[0].repository)}
+            onClick={(event: MouseEvent<HTMLElement>) => {
+              // Don't trigger onClick of parent element.
+              event.stopPropagation();
+              openRepository(repoNotifications[0].repository);
+            }}
           >
             {repoName}
           </span>
@@ -76,19 +87,19 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
           <InteractionButton
             title="Mark Repository as Done"
             icon={CheckIcon}
-            size="medium"
+            size={Size.MEDIUM}
             onClick={markRepoAsDone}
           />
           <InteractionButton
             title="Mark Repository as Read"
             icon={ReadIcon}
-            size="small"
+            size={Size.SMALL}
             onClick={markRepoAsRead}
           />
           <InteractionButton
             title={toggleRepositoryNotificationsLabel}
             icon={ChevronIcon}
-            size="small"
+            size={Size.SMALL}
             onClick={toggleRepositoryNotifications}
           />
         </HoverGroup>
