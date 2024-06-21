@@ -118,10 +118,8 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs opacity-60"
-            >
-               
-            </span>
+              class="text-xxs ml-1 opacity-50"
+            />
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -319,10 +317,8 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           >
             Improve the UI
             <span
-              class="text-xxs opacity-60"
-            >
-               
-            </span>
+              class="text-xxs ml-1 opacity-50"
+            />
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -542,10 +538,8 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs opacity-60"
-          >
-             
-          </span>
+            class="text-xxs ml-1 opacity-50"
+          />
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -743,10 +737,8 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         >
           Improve the UI
           <span
-            class="text-xxs opacity-60"
-          >
-             
-          </span>
+            class="text-xxs ml-1 opacity-50"
+          />
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"

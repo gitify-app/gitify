@@ -42,10 +42,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs opacity-60"
-            >
-               
-            </span>
+              class="text-xxs ml-1 opacity-50"
+            />
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -281,10 +279,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs opacity-60"
-          >
-             
-          </span>
+            class="text-xxs ml-1 opacity-50"
+          />
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -577,10 +573,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs opacity-60"
-            >
-               
-            </span>
+              class="text-xxs ml-1 opacity-50"
+            />
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -816,10 +810,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs opacity-60"
-          >
-             
-          </span>
+            class="text-xxs ml-1 opacity-50"
+          />
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -1112,10 +1104,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs opacity-60"
-            >
-               
-            </span>
+              class="text-xxs ml-1 opacity-50"
+            />
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -1329,10 +1319,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs opacity-60"
-          >
-             
-          </span>
+            class="text-xxs ml-1 opacity-50"
+          />
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -1603,10 +1591,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs opacity-60"
-            >
-               
-            </span>
+              class="text-xxs ml-1 opacity-50"
+            />
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -1866,10 +1852,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs opacity-60"
-          >
-             
-          </span>
+            class="text-xxs ml-1 opacity-50"
+          />
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -2186,10 +2170,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs opacity-60"
-            >
-               
-            </span>
+              class="text-xxs ml-1 opacity-50"
+            />
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -2403,10 +2385,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs opacity-60"
-          >
-             
-          </span>
+            class="text-xxs ml-1 opacity-50"
+          />
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -2677,10 +2657,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs opacity-60"
-            >
-               
-            </span>
+              class="text-xxs ml-1 opacity-50"
+            />
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -2894,10 +2872,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs opacity-60"
-          >
-             
-          </span>
+            class="text-xxs ml-1 opacity-50"
+          />
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -3168,10 +3144,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs opacity-60"
-            >
-               
-            </span>
+              class="text-xxs ml-1 opacity-50"
+            />
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -3452,10 +3426,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs opacity-60"
-          >
-             
-          </span>
+            class="text-xxs ml-1 opacity-50"
+          />
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -3793,10 +3765,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs opacity-60"
-            >
-               
-            </span>
+              class="text-xxs ml-1 opacity-50"
+            />
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -4077,10 +4047,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs opacity-60"
-          >
-             
-          </span>
+            class="text-xxs ml-1 opacity-50"
+          />
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -4418,10 +4386,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs opacity-60"
-            >
-               
-            </span>
+              class="text-xxs ml-1 opacity-50"
+            />
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -4562,10 +4528,8 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs opacity-60"
-          >
-             
-          </span>
+            class="text-xxs ml-1 opacity-50"
+          />
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -4780,10 +4744,8 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs opacity-60"
-            >
-               
-            </span>
+              class="text-xxs ml-1 opacity-50"
+            />
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -4984,10 +4946,8 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs opacity-60"
-          >
-             
-          </span>
+            class="text-xxs ml-1 opacity-50"
+          />
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -5228,10 +5188,8 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs opacity-60"
-            >
-               
-            </span>
+              class="text-xxs ml-1 opacity-50"
+            />
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -5415,10 +5373,8 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs opacity-60"
-          >
-             
-          </span>
+            class="text-xxs ml-1 opacity-50"
+          />
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -5659,10 +5615,8 @@ exports[`components/NotificationRow.tsx should render itself & its children when
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs opacity-60"
-            >
-               
-            </span>
+              class="text-xxs ml-1 opacity-50"
+            />
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -5846,10 +5800,8 @@ exports[`components/NotificationRow.tsx should render itself & its children when
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs opacity-60"
-          >
-             
-          </span>
+            class="text-xxs ml-1 opacity-50"
+          />
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -6090,10 +6042,8 @@ exports[`components/NotificationRow.tsx should render itself & its children with
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs opacity-60"
-            >
-               
-            </span>
+              class="text-xxs ml-1 opacity-50"
+            />
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -6282,10 +6232,8 @@ exports[`components/NotificationRow.tsx should render itself & its children with
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs opacity-60"
-          >
-             
-          </span>
+            class="text-xxs ml-1 opacity-50"
+          />
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
