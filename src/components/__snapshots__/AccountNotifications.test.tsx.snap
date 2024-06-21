@@ -118,7 +118,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           >
             I am a robot and this is a test!
             <span
-              class="text-xs opacity-60"
+              class="text-xxs opacity-60"
             >
                
             </span>
@@ -319,7 +319,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           >
             Improve the UI
             <span
-              class="text-xs opacity-60"
+              class="text-xxs opacity-60"
             >
                
             </span>
@@ -542,7 +542,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         >
           I am a robot and this is a test!
           <span
-            class="text-xs opacity-60"
+            class="text-xxs opacity-60"
           >
              
           </span>
@@ -743,7 +743,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         >
           Improve the UI
           <span
-            class="text-xs opacity-60"
+            class="text-xxs opacity-60"
           >
              
           </span>
