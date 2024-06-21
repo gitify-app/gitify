@@ -91,14 +91,14 @@ exports[`components/icons/AvatarIcon.tsx should render default icon when no url 
 }
 `;
 
-exports[`components/icons/AvatarIcon.tsx should render medium avatar 1`] = `
+exports[`components/icons/AvatarIcon.tsx should render extra small avatar 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
       <img
         alt="test's avatar"
-        class="rounded-full object-cover size-6"
+        class="rounded-full object-cover size-4"
         src="https://avatars.githubusercontent.com/u/583231?v=4"
       />
     </div>
@@ -106,7 +106,7 @@ exports[`components/icons/AvatarIcon.tsx should render medium avatar 1`] = `
   "container": <div>
     <img
       alt="test's avatar"
-      class="rounded-full object-cover size-6"
+      class="rounded-full object-cover size-4"
       src="https://avatars.githubusercontent.com/u/583231?v=4"
     />
   </div>,
@@ -164,7 +164,7 @@ exports[`components/icons/AvatarIcon.tsx should render medium avatar 1`] = `
 }
 `;
 
-exports[`components/icons/AvatarIcon.tsx should render medium avatar 2`] = `
+exports[`components/icons/AvatarIcon.tsx should render medium avatar 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -244,7 +244,7 @@ exports[`components/icons/AvatarIcon.tsx should render small avatar 1`] = `
     <div>
       <img
         alt="test's avatar"
-        class="rounded-full object-cover size-4"
+        class="rounded-full object-cover size-5"
         src="https://avatars.githubusercontent.com/u/583231?v=4"
       />
     </div>
@@ -252,7 +252,7 @@ exports[`components/icons/AvatarIcon.tsx should render small avatar 1`] = `
   "container": <div>
     <img
       alt="test's avatar"
-      class="rounded-full object-cover size-4"
+      class="rounded-full object-cover size-5"
       src="https://avatars.githubusercontent.com/u/583231?v=4"
     />
   </div>,
