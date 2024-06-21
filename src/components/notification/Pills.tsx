@@ -32,60 +32,62 @@ export const Pills: FC<IPills> = ({ notification }: IPills) => {
     notification.subject.linkedIssues?.length > 1 ? 'issues' : 'issue'
   } ${notification.subject?.linkedIssues?.join(', ')}`;
 
-  return settings.showPills ? (
-    <div className="flex">
-      {notification.subject?.linkedIssues?.length > 0 && (
-        <PillButton
-          title={linkedIssuesPillDescription}
-          metric={notification.subject.linkedIssues.length}
-          icon={IssueClosedIcon}
-          color={IconColor.GREEN}
-        />
-      )}
-
-      {notification.subject.reviews?.map((review) => {
-        const icon = getPullRequestReviewIcon(review);
-        if (!icon) {
-          return null;
-        }
-
-        return (
+  return (
+    settings.showPills && (
+      <div className="flex">
+        {notification.subject?.linkedIssues?.length > 0 && (
           <PillButton
-            key={review.state}
-            title={icon.description}
-            metric={review.users.length}
-            icon={icon.type}
-            color={icon.color}
+            title={linkedIssuesPillDescription}
+            metric={notification.subject.linkedIssues.length}
+            icon={IssueClosedIcon}
+            color={IconColor.GREEN}
           />
-        );
-      })}
-      {notification.subject?.comments > 0 && (
-        <PillButton
-          title={commentsPillDescription}
-          metric={notification.subject.comments}
-          icon={CommentIcon}
-          color={IconColor.GRAY}
-        />
-      )}
-      {notification.subject?.labels?.length > 0 && (
-        <PillButton
-          title={labelsPillDescription}
-          metric={notification.subject.labels.length}
-          icon={TagIcon}
-          color={IconColor.GRAY}
-        />
-      )}
-      {notification.subject.milestone && (
-        <PillButton
-          title={notification.subject.milestone.title}
-          icon={MilestoneIcon}
-          color={
-            notification.subject.milestone.state === 'open'
-              ? IconColor.GREEN
-              : IconColor.RED
+        )}
+
+        {notification.subject.reviews?.map((review) => {
+          const icon = getPullRequestReviewIcon(review);
+          if (!icon) {
+            return null;
           }
-        />
-      )}
-    </div>
-  ) : null;
+
+          return (
+            <PillButton
+              key={review.state}
+              title={icon.description}
+              metric={review.users.length}
+              icon={icon.type}
+              color={icon.color}
+            />
+          );
+        })}
+        {notification.subject?.comments > 0 && (
+          <PillButton
+            title={commentsPillDescription}
+            metric={notification.subject.comments}
+            icon={CommentIcon}
+            color={IconColor.GRAY}
+          />
+        )}
+        {notification.subject?.labels?.length > 0 && (
+          <PillButton
+            title={labelsPillDescription}
+            metric={notification.subject.labels.length}
+            icon={TagIcon}
+            color={IconColor.GRAY}
+          />
+        )}
+        {notification.subject.milestone && (
+          <PillButton
+            title={notification.subject.milestone.title}
+            icon={MilestoneIcon}
+            color={
+              notification.subject.milestone.state === 'open'
+                ? IconColor.GREEN
+                : IconColor.RED
+            }
+          />
+        )}
+      </div>
+    )
+  );
 };
