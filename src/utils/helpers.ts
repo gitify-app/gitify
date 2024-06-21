@@ -1,4 +1,5 @@
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
+import { defaultSettings } from '../context/App';
 import type { Hostname, Link, SettingsState } from '../types';
 import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
@@ -170,11 +171,15 @@ export function formatNotificationUpdatedAt(
 export function getFilterCount(settings: SettingsState): number {
   let count = 0;
 
-  if (settings.filterReasons) {
+  console.log('filter reasons', settings.filterReasons);
+  console.log('default settings', defaultSettings.filterReasons);
+  console.log('equal?', settings.filterReasons == '');
+
+  if (settings.filterReasons !== defaultSettings.filterReasons) {
     count += settings.filterReasons.split(',').length;
   }
 
-  if (!settings.showBots) {
+  if (settings.showBots !== defaultSettings.showBots) {
     count += 1;
   }
 

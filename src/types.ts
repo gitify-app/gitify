@@ -80,7 +80,7 @@ interface SystemSettingsState {
 }
 
 interface FilterSettingsState {
-  filterReasons: string | null;
+  filterReasons: string;
 }
 
 export interface GitifyState {
