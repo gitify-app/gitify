@@ -106,6 +106,44 @@ describe('components/Sidebar.tsx', () => {
     });
   });
 
+  describe('Filters', () => {
+    it('go to the filters route', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      fireEvent.click(screen.getByTitle('Filters'));
+      expect(mockNavigate).toHaveBeenCalledWith('/filters');
+    });
+
+    it('go to the home if filters path already shown', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter initialEntries={['/filters']}>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      fireEvent.click(screen.getByTitle('Filters'));
+      expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
+    });
+  });
+
   describe('Settings', () => {
     it('go to the settings route', () => {
       render(
