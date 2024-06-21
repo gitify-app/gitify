@@ -5227,6 +5227,11 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
+            <span
+              class="text-xs opacity-60"
+            >
+               
+            </span>
           </div>
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
@@ -5409,6 +5414,11 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
+          <span
+            class="text-xs opacity-60"
+          >
+             
+          </span>
         </div>
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
