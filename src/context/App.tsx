@@ -64,6 +64,7 @@ export const defaultSettings: SettingsState = {
   showPills: true,
   keyboardShortcut: true,
   groupBy: GroupBy.REPOSITORY,
+  filterReasons: null,
 };
 
 interface AppContextState {
@@ -128,6 +129,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [
     settings.participating,
     settings.showBots,
+    settings.filterReasons,
     settings.detailedNotifications,
     settings.delayNotificationState,
     auth.accounts.length,

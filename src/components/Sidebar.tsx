@@ -1,5 +1,6 @@
 import {
   BellIcon,
+  FilterIcon,
   GearIcon,
   GitPullRequestIcon,
   IssueOpenedIcon,
@@ -11,6 +12,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/App';
 import { Size } from '../types';
 import { quitApp } from '../utils/comms';
+import { getFilterCount } from '../utils/helpers';
 import {
   openGitHubIssues,
   openGitHubNotifications,
@@ -25,8 +27,16 @@ export const Sidebar: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { notifications, fetchNotifications, isLoggedIn, status } =
+  const { notifications, fetchNotifications, isLoggedIn, status, settings } =
     useContext(AppContext);
+
+  const toggleFilters = () => {
+    if (location.pathname.startsWith('/filters')) {
+      navigate('/', { replace: true });
+    } else {
+      navigate('/filters');
+    }
+  };
 
   const toggleSettings = () => {
     if (location.pathname.startsWith('/settings')) {
@@ -44,6 +54,10 @@ export const Sidebar: FC = () => {
   const notificationsCount = useMemo(() => {
     return getNotificationCount(notifications);
   }, [notifications]);
+
+  const filterCount = useMemo(() => {
+    return getFilterCount(settings);
+  }, [settings]);
 
   return (
     <div className="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar">
@@ -88,6 +102,14 @@ export const Sidebar: FC = () => {
               loading={status === 'loading'}
               disabled={status === 'loading'}
               onClick={() => refreshNotifications()}
+            />
+
+            <SidebarButton
+              title="Filters"
+              icon={FilterIcon}
+              size={Size.MEDIUM}
+              metric={filterCount}
+              onClick={() => toggleFilters()}
             />
 
             <SidebarButton

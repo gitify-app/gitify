@@ -184,6 +184,14 @@ export function filterNotifications(
     if (!settings.showBots && notification.subject?.user?.type === 'Bot') {
       return false;
     }
+
+    if (
+      settings.filterReasons &&
+      !settings.filterReasons.split(',').includes(notification.reason)
+    ) {
+      return false;
+    }
+
     return true;
   });
 }

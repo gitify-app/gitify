@@ -53,7 +53,8 @@ export interface Account {
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
-  SystemSettingsState;
+  SystemSettingsState &
+  FilterSettingsState;
 
 interface AppearanceSettingsState {
   theme: Theme;
@@ -76,6 +77,10 @@ interface SystemSettingsState {
   openAtStartup: boolean;
   showNotificationsCountInTray: boolean;
   keyboardShortcut: boolean;
+}
+
+interface FilterSettingsState {
+  filterReasons: string | null;
 }
 
 export interface GitifyState {

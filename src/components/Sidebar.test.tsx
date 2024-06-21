@@ -45,7 +45,11 @@ describe('components/Sidebar.tsx', () => {
   it('should render itself & its children (logged out)', () => {
     const tree = render(
       <AppContext.Provider
-        value={{ isLoggedIn: false, notifications: mockAccountNotifications }}
+        value={{
+          isLoggedIn: false,
+          notifications: mockAccountNotifications,
+          settings: mockSettings,
+        }}
       >
         <MemoryRouter>
           <Sidebar />
@@ -62,6 +66,7 @@ describe('components/Sidebar.tsx', () => {
           value={{
             isLoggedIn: true,
             notifications: [],
+            settings: mockSettings,
             fetchNotifications,
             status: 'success',
           }}
@@ -83,6 +88,8 @@ describe('components/Sidebar.tsx', () => {
           value={{
             isLoggedIn: true,
             notifications: [],
+            settings: mockSettings,
+
             fetchNotifications,
             status: 'loading',
           }}
@@ -102,7 +109,13 @@ describe('components/Sidebar.tsx', () => {
   describe('Settings', () => {
     it('go to the settings route', () => {
       render(
-        <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            settings: mockSettings,
+          }}
+        >
           <MemoryRouter>
             <Sidebar />
           </MemoryRouter>
@@ -114,7 +127,13 @@ describe('components/Sidebar.tsx', () => {
 
     it('go to the home if settings path already shown', () => {
       render(
-        <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            settings: mockSettings,
+          }}
+        >
           <MemoryRouter initialEntries={['/settings']}>
             <Sidebar />
           </MemoryRouter>
@@ -133,6 +152,7 @@ describe('components/Sidebar.tsx', () => {
         value={{
           isLoggedIn: true,
           notifications: mockAccountNotifications,
+          settings: mockSettings,
         }}
       >
         <MemoryRouter>
@@ -155,6 +175,7 @@ describe('components/Sidebar.tsx', () => {
         value={{
           isLoggedIn: true,
           notifications: mockAccountNotifications,
+          settings: mockSettings,
         }}
       >
         <MemoryRouter>
@@ -177,6 +198,7 @@ describe('components/Sidebar.tsx', () => {
         value={{
           isLoggedIn: true,
           notifications: mockAccountNotifications,
+          settings: mockSettings,
         }}
       >
         <MemoryRouter>
@@ -195,7 +217,9 @@ describe('components/Sidebar.tsx', () => {
     const quitAppMock = jest.spyOn(comms, 'quitApp');
 
     render(
-      <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
+      <AppContext.Provider
+        value={{ isLoggedIn: false, notifications: [], settings: mockSettings }}
+      >
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
@@ -209,7 +233,9 @@ describe('components/Sidebar.tsx', () => {
     const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
 
     render(
-      <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
+      <AppContext.Provider
+        value={{ isLoggedIn: false, notifications: [], settings: mockSettings }}
+      >
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
@@ -225,7 +251,13 @@ describe('components/Sidebar.tsx', () => {
   describe('should render the notifications icon', () => {
     it('when there are 0 notifications', () => {
       render(
-        <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            settings: mockSettings,
+          }}
+        >
           <MemoryRouter>
             <Sidebar />
           </MemoryRouter>
@@ -244,6 +276,7 @@ describe('components/Sidebar.tsx', () => {
           value={{
             isLoggedIn: true,
             notifications: mockAccountNotifications,
+            settings: mockSettings,
           }}
         >
           <MemoryRouter>
