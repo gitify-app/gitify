@@ -1,4 +1,5 @@
 import { fireEvent, render, screen } from '@testing-library/react';
+import { AppContext } from '../context/App';
 import { Header } from './Header';
 
 const mockNavigate = jest.fn();
@@ -8,6 +9,12 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('components/Header.tsx', () => {
+  const fetchNotifications = jest.fn();
+
+  afterEach(() => {
+    jest.resetAllMocks();
+  });
+
   it('should render itself & its children', () => {
     const tree = render(<Header>Test Header</Header>);
 
@@ -18,9 +25,26 @@ describe('components/Header.tsx', () => {
     render(<Header>Test Header</Header>);
 
     fireEvent.click(screen.getByLabelText('Go Back'));
-    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
 
     expect(mockNavigate).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenCalledWith(-1);
+  });
+
+  it('should navigate back and fetch notifications', () => {
+    render(
+      <AppContext.Provider
+        value={{
+          fetchNotifications,
+        }}
+      >
+        <Header fetchOnBack={true}>Test Header</Header>
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(screen.getByLabelText('Go Back'));
+
+    expect(mockNavigate).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenCalledWith(-1);
+    expect(fetchNotifications).toHaveBeenCalledTimes(1);
   });
 });
