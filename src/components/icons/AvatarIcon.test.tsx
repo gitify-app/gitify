@@ -4,12 +4,23 @@ import { Size } from '../../types';
 import { AvatarIcon, type IAvatarIcon } from './AvatarIcon';
 
 describe('components/icons/AvatarIcon.tsx', () => {
-  it('should render small avatar', () => {
+  it('should render extra small avatar', () => {
     const props: IAvatarIcon = {
       defaultIcon: MarkGithubIcon,
       title: 'test',
       url: 'https://avatars.githubusercontent.com/u/583231?v=4',
       size: Size.XSMALL,
+    };
+    const tree = render(<AvatarIcon {...props} />);
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render small avatar', () => {
+    const props: IAvatarIcon = {
+      defaultIcon: MarkGithubIcon,
+      title: 'test',
+      url: 'https://avatars.githubusercontent.com/u/583231?v=4',
+      size: Size.SMALL,
     };
     const tree = render(<AvatarIcon {...props} />);
     expect(tree).toMatchSnapshot();
@@ -21,17 +32,6 @@ describe('components/icons/AvatarIcon.tsx', () => {
       title: 'test',
       url: 'https://avatars.githubusercontent.com/u/583231?v=4',
       size: Size.MEDIUM,
-    };
-    const tree = render(<AvatarIcon {...props} />);
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('should render medium avatar', () => {
-    const props: IAvatarIcon = {
-      defaultIcon: MarkGithubIcon,
-      title: 'test',
-      url: 'https://avatars.githubusercontent.com/u/583231?v=4',
-      size: Size.XLARGE,
     };
     const tree = render(<AvatarIcon {...props} />);
     expect(tree).toMatchSnapshot();

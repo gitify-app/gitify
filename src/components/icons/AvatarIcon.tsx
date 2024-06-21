@@ -6,7 +6,7 @@ import { cn } from '../../utils/cn';
 export interface IAvatarIcon {
   title: string;
   url: string | null;
-  size: Size;
+  size: Size.XSMALL | Size.SMALL | Size.MEDIUM;
   defaultIcon: Icon;
 }
 
@@ -16,11 +16,9 @@ export const AvatarIcon: FC<IAvatarIcon> = (props: IAvatarIcon) => {
       <img
         className={cn(
           'rounded-full object-cover',
-          props.size === Size.XSMALL
-            ? 'size-4'
-            : props.size === Size.SMALL
-              ? 'size-5'
-              : 'size-6',
+          props.size === Size.XSMALL && 'size-4',
+          props.size === Size.SMALL && 'size-5',
+          props.size === Size.MEDIUM && 'size-6',
         )}
         src={props.url}
         alt={`${props.title}'s avatar`}

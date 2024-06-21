@@ -29,7 +29,7 @@ export const LoginRoute: FC = () => {
 
   return (
     <div className="flex flex-1 flex-col items-center justify-center p-4">
-      <LogoIcon size={Size.XLARGE} isDark />
+      <LogoIcon size={Size.LARGE} isDark />
 
       <div className="my-4 px-2.5 py-1.5 text-center font-semibold">
         GitHub Notifications <br /> on your menu bar.
