@@ -187,5 +187,17 @@ describe('utils/notifications.ts', () => {
       expect(result.length).toBe(2);
       expect(result).toEqual(mockNotifications);
     });
+
+    it('should show bot notifications when set to true', async () => {
+      mockNotifications[0].reason = 'subscribed';
+      mockNotifications[1].reason = 'manual';
+      const result = filterNotifications(mockNotifications, {
+        ...mockSettings,
+        filterReasons: 'manual',
+      });
+
+      expect(result.length).toBe(1);
+      expect(result).toEqual([mockNotifications[1]]);
+    });
   });
 });
