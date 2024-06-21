@@ -29,7 +29,6 @@ exports[`components/notification/NotificationFooter.tsx should render itself & i
         >
           7 years ago
         </div>
-        // TODO - Remove this once #1296 is merged
         <div
           class="flex"
         >
@@ -106,7 +105,6 @@ exports[`components/notification/NotificationFooter.tsx should render itself & i
       >
         7 years ago
       </div>
-      // TODO - Remove this once #1296 is merged
       <div
         class="flex"
       >
@@ -240,7 +238,6 @@ exports[`components/notification/NotificationFooter.tsx should render itself & i
         >
           7 years ago
         </div>
-        // TODO - Remove this once #1296 is merged
         <div
           class="flex"
         >
@@ -317,7 +314,6 @@ exports[`components/notification/NotificationFooter.tsx should render itself & i
       >
         7 years ago
       </div>
-      // TODO - Remove this once #1296 is merged
       <div
         class="flex"
       >
@@ -456,7 +452,6 @@ exports[`components/notification/NotificationFooter.tsx should render itself & i
         >
           7 years ago
         </div>
-        // TODO - Remove this once #1296 is merged
         <div
           class="flex"
         >
@@ -538,7 +533,6 @@ exports[`components/notification/NotificationFooter.tsx should render itself & i
       >
         7 years ago
       </div>
-      // TODO - Remove this once #1296 is merged
       <div
         class="flex"
       >

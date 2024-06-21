@@ -143,7 +143,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             >
               7 years ago
             </div>
-            // TODO - Remove this once #1296 is merged
             <div
               class="flex"
             >
@@ -346,7 +345,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             >
               7 years ago
             </div>
-            // TODO - Remove this once #1296 is merged
             <div
               class="flex"
             />
@@ -561,7 +559,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           >
             7 years ago
           </div>
-          // TODO - Remove this once #1296 is merged
           <div
             class="flex"
           >
@@ -764,7 +761,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           >
             7 years ago
           </div>
-          // TODO - Remove this once #1296 is merged
           <div
             class="flex"
           />

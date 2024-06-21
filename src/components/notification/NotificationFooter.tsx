@@ -77,7 +77,6 @@ export const NotificationFooter: FC<INotificationFooter> = ({
       )}
       <div title={reason.description}>{reason.title}</div>
       <div title={updatedLabel}>{updatedAt}</div>
-      // TODO - Remove this once #1296 is merged
       {settings.showPills && (
         <div className="flex">
           {notification.subject?.linkedIssues?.length > 0 && (

@@ -66,7 +66,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             >
               7 years ago
             </div>
-            // TODO - Remove this once #1296 is merged
             <div
               class="flex"
             >
@@ -296,7 +295,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           >
             7 years ago
           </div>
-          // TODO - Remove this once #1296 is merged
           <div
             class="flex"
           >
@@ -583,7 +581,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             >
               7 years ago
             </div>
-            // TODO - Remove this once #1296 is merged
             <div
               class="flex"
             >
@@ -813,7 +810,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           >
             7 years ago
           </div>
-          // TODO - Remove this once #1296 is merged
           <div
             class="flex"
           >
@@ -1100,7 +1096,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
             >
               7 years ago
             </div>
-            // TODO - Remove this once #1296 is merged
             <div
               class="flex"
             >
@@ -1308,7 +1303,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
           >
             7 years ago
           </div>
-          // TODO - Remove this once #1296 is merged
           <div
             class="flex"
           >
@@ -1573,7 +1567,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
             >
               7 years ago
             </div>
-            // TODO - Remove this once #1296 is merged
             <div
               class="flex"
             >
@@ -1827,7 +1820,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
           >
             7 years ago
           </div>
-          // TODO - Remove this once #1296 is merged
           <div
             class="flex"
           >
@@ -2138,7 +2130,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             >
               7 years ago
             </div>
-            // TODO - Remove this once #1296 is merged
             <div
               class="flex"
             >
@@ -2346,7 +2337,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           >
             7 years ago
           </div>
-          // TODO - Remove this once #1296 is merged
           <div
             class="flex"
           >
@@ -2611,7 +2601,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
             >
               7 years ago
             </div>
-            // TODO - Remove this once #1296 is merged
             <div
               class="flex"
             >
@@ -2819,7 +2808,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
           >
             7 years ago
           </div>
-          // TODO - Remove this once #1296 is merged
           <div
             class="flex"
           >
@@ -3084,7 +3072,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             >
               7 years ago
             </div>
-            // TODO - Remove this once #1296 is merged
             <div
               class="flex"
             >
@@ -3359,7 +3346,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           >
             7 years ago
           </div>
-          // TODO - Remove this once #1296 is merged
           <div
             class="flex"
           >
@@ -3691,7 +3677,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
             >
               7 years ago
             </div>
-            // TODO - Remove this once #1296 is merged
             <div
               class="flex"
             >
@@ -3966,7 +3951,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
           >
             7 years ago
           </div>
-          // TODO - Remove this once #1296 is merged
           <div
             class="flex"
           >
@@ -4298,7 +4282,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
             >
               7 years ago
             </div>
-            // TODO - Remove this once #1296 is merged
           </div>
         </div>
         <div
@@ -4433,7 +4416,6 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
           >
             7 years ago
           </div>
-          // TODO - Remove this once #1296 is merged
         </div>
       </div>
       <div
@@ -4643,7 +4625,6 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
             >
               7 years ago
             </div>
-            // TODO - Remove this once #1296 is merged
             <div
               class="flex"
             >
@@ -4844,7 +4825,6 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           >
             7 years ago
           </div>
-          // TODO - Remove this once #1296 is merged
           <div
             class="flex"
           >
@@ -5084,7 +5064,6 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
             >
               7 years ago
             </div>
-            // TODO - Remove this once #1296 is merged
             <div
               class="flex"
             >
@@ -5267,7 +5246,6 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           >
             7 years ago
           </div>
-          // TODO - Remove this once #1296 is merged
           <div
             class="flex"
           >
