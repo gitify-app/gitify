@@ -171,10 +171,6 @@ export function formatNotificationUpdatedAt(
 export function getFilterCount(settings: SettingsState): number {
   let count = 0;
 
-  console.log('filter reasons', settings.filterReasons);
-  console.log('default settings', defaultSettings.filterReasons);
-  console.log('equal?', settings.filterReasons == '');
-
   if (settings.filterReasons !== defaultSettings.filterReasons) {
     count += settings.filterReasons.split(',').length;
   }
