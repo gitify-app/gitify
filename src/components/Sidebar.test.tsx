@@ -17,8 +17,6 @@ describe('components/Sidebar.tsx', () => {
   const fetchNotifications = jest.fn();
 
   beforeEach(() => {
-    fetchNotifications.mockReset();
-
     jest.spyOn(window, 'clearInterval');
   });
 
@@ -71,7 +69,7 @@ describe('components/Sidebar.tsx', () => {
           </MemoryRouter>
         </AppContext.Provider>,
       );
-      fetchNotifications.mockReset();
+
       fireEvent.click(screen.getByTitle('Refresh Notifications'));
 
       expect(fetchNotifications).toHaveBeenCalledTimes(1);
@@ -92,7 +90,7 @@ describe('components/Sidebar.tsx', () => {
           </MemoryRouter>
         </AppContext.Provider>,
       );
-      fetchNotifications.mockReset();
+
       fireEvent.click(screen.getByTitle('Refresh Notifications'));
 
       expect(fetchNotifications).not.toHaveBeenCalled();
@@ -114,13 +112,18 @@ describe('components/Sidebar.tsx', () => {
 
     it('go to the home if settings path already shown', () => {
       render(
-        <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
+        <AppContext.Provider
+          value={{ isLoggedIn: true, notifications: [], fetchNotifications }}
+        >
           <MemoryRouter initialEntries={['/settings']}>
             <Sidebar />
           </MemoryRouter>
         </AppContext.Provider>,
       );
+
       fireEvent.click(screen.getByTitle('Settings'));
+
+      expect(fetchNotifications).toHaveBeenCalledTimes(1);
       expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
     });
   });
