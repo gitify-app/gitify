@@ -39,7 +39,7 @@ export const FiltersRoute: FC = () => {
   };
 
   return (
-    <div className="flex h-screen flex-col" data-testid="settings">
+    <div className="flex h-screen flex-col" data-testid="filters">
       <Header>Filters</Header>
       <div className="flex-grow overflow-x-auto px-8">
         <fieldset className="mb-3">
@@ -99,13 +99,13 @@ export const FiltersRoute: FC = () => {
           <button
             type="button"
             className={BUTTON_CLASS_NAME}
-            title="Reset to Defaults"
+            title="Reset to default filters"
             onClick={resetToDefaultFilters}
           >
             <FilterRemoveIcon
               size={Size.LARGE}
               className="mr-2"
-              aria-label="Reset to Defaults"
+              aria-label="Reset to default filters"
             />
             Reset to default filters
           </button>
