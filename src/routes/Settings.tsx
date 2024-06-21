@@ -21,7 +21,7 @@ import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
 import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
-import { Theme } from '../types';
+import { GroupBy, Size, Theme } from '../types';
 import { getAppVersion, quitApp } from '../utils/comms';
 import Constants from '../utils/constants';
 import {
@@ -107,23 +107,24 @@ export const SettingsRoute: FC = () => {
                 <div className="pl-6">
                   <ul className="list-disc">
                     <li>
-                      <IssueClosedIcon size={16} className="pr-1" />
+                      <IssueClosedIcon size={Size.MEDIUM} className="pr-1" />
                       linked issues
                     </li>
                     <li>
-                      <CheckIcon size={16} className="pr-1" /> pr reviews
+                      <CheckIcon size={Size.MEDIUM} className="pr-1" /> pr
+                      reviews
                     </li>
                     <li>
-                      <CommentIcon size={16} className="pr-1" />
+                      <CommentIcon size={Size.MEDIUM} className="pr-1" />
                       comments
                     </li>
 
                     <li>
-                      <TagIcon size={16} className="pr-1" />
+                      <TagIcon size={Size.MEDIUM} className="pr-1" />
                       labels
                     </li>
                     <li>
-                      <MilestoneIcon size={16} className="pr-1" />
+                      <MilestoneIcon size={Size.MEDIUM} className="pr-1" />
                       milestones
                     </li>
                   </ul>
@@ -145,6 +146,18 @@ export const SettingsRoute: FC = () => {
           <legend id="notifications" className="mb-1 mt-2 font-semibold">
             Notifications
           </legend>
+          <RadioGroup
+            name="groupBy"
+            label="Group by:"
+            value={settings.groupBy}
+            options={[
+              { label: 'Repository', value: GroupBy.REPOSITORY },
+              { label: 'Date', value: GroupBy.DATE },
+            ]}
+            onChange={(evt) => {
+              updateSetting('groupBy', evt.target.value);
+            }}
+          />
           <Checkbox
             name="showOnlyParticipating"
             label="Show only participating"
@@ -297,7 +310,7 @@ export const SettingsRoute: FC = () => {
               navigate('/accounts');
             }}
           >
-            <PersonIcon size={18} aria-label="Accounts" />
+            <PersonIcon size={Size.LARGE} aria-label="Accounts" />
           </button>
 
           <button
@@ -306,7 +319,7 @@ export const SettingsRoute: FC = () => {
             title="Quit Gitify"
             onClick={quitApp}
           >
-            <XCircleIcon size={18} aria-label="Quit Gitify" />
+            <XCircleIcon size={Size.LARGE} aria-label="Quit Gitify" />
           </button>
         </div>
       </div>

@@ -5,11 +5,21 @@ import {
   MarkGithubIcon,
   ReadIcon,
 } from '@primer/octicons-react';
-import { type FC, useCallback, useContext, useState } from 'react';
+import {
+  type FC,
+  type MouseEvent,
+  useCallback,
+  useContext,
+  useState,
+} from 'react';
 import { AppContext } from '../context/App';
+import { Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
+import { cn } from '../utils/cn';
 import { openRepository } from '../utils/links';
+import { HoverGroup } from './HoverGroup';
 import { NotificationRow } from './NotificationRow';
+import { InteractionButton } from './buttons/InteractionButton';
 import { AvatarIcon } from './icons/AvatarIcon';
 
 interface IRepositoryNotifications {
@@ -52,52 +62,53 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
   return (
     <>
       <div
-        className="group flex items-center justify-between bg-gray-100 px-3 py-2 dark:bg-gray-darker dark:text-white"
+        className="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
         onClick={toggleRepositoryNotifications}
       >
-        <div className="mt-0 flex flex-1 space-x-3 overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium">
+        <div
+          className={cn(
+            'flex flex-1 gap-4 items-center overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium',
+            Opacity.MEDIUM,
+          )}
+        >
           <AvatarIcon
             title={repoName}
             url={avatarUrl}
-            size="medium"
+            size={Size.XSMALL}
             defaultIcon={MarkGithubIcon}
           />
           <span
-            className="cursor-pointer truncate opacity-90"
-            onClick={() => openRepository(repoNotifications[0].repository)}
+            className="cursor-pointer truncate"
+            onClick={(event: MouseEvent<HTMLElement>) => {
+              // Don't trigger onClick of parent element.
+              event.stopPropagation();
+              openRepository(repoNotifications[0].repository);
+            }}
           >
             {repoName}
           </span>
         </div>
 
-        <div className="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80">
-          <button
-            type="button"
-            className="h-full hover:text-green-500 focus:outline-none"
+        <HoverGroup>
+          <InteractionButton
             title="Mark Repository as Done"
+            icon={CheckIcon}
+            size={Size.MEDIUM}
             onClick={markRepoAsDone}
-          >
-            <CheckIcon size={16} aria-label="Mark Repository as Done" />
-          </button>
-
-          <button
-            type="button"
-            className="h-full hover:text-green-500 focus:outline-none"
+          />
+          <InteractionButton
             title="Mark Repository as Read"
+            icon={ReadIcon}
+            size={Size.SMALL}
             onClick={markRepoAsRead}
-          >
-            <ReadIcon size={14} aria-label="Mark Repository as Read" />
-          </button>
-
-          <button
-            type="button"
-            className="h-full hover:text-green-500 focus:outline-none"
+          />
+          <InteractionButton
             title={toggleRepositoryNotificationsLabel}
+            icon={ChevronIcon}
+            size={Size.SMALL}
             onClick={toggleRepositoryNotifications}
-          >
-            <ChevronIcon size={14} />
-          </button>
-        </div>
+          />
+        </HoverGroup>
       </div>
 
       {showRepositoryNotifications &&

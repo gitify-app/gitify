@@ -8,8 +8,8 @@ import {
 } from '@primer/octicons-react';
 import { type FC, useContext, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Logo } from '../components/Logo';
 import { AppContext } from '../context/App';
+import { Size } from '../types';
 import { quitApp } from '../utils/comms';
 import {
   openGitHubIssues,
@@ -19,6 +19,7 @@ import {
 } from '../utils/links';
 import { getNotificationCount } from '../utils/notifications';
 import { SidebarButton } from './buttons/SidebarButton';
+import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
   const navigate = useNavigate();
@@ -49,12 +50,12 @@ export const Sidebar: FC = () => {
       <div className="flex flex-1 flex-col items-center py-4">
         <button
           type="button"
-          className="mx-auto my-3 w-5 cursor-pointer outline-none"
+          className="mx-auto my-3 cursor-pointer outline-none"
           title="Open Gitify on GitHub"
           onClick={() => openGitifyRepository()}
           data-testid="gitify-logo"
         >
-          <Logo aria-label="Open Gitify" />
+          <LogoIcon size={Size.SMALL} aria-label="Open Gitify" />
         </button>
 
         <SidebarButton
@@ -83,7 +84,7 @@ export const Sidebar: FC = () => {
             <SidebarButton
               title="Refresh Notifications"
               icon={SyncIcon}
-              size={16}
+              size={Size.MEDIUM}
               loading={status === 'loading'}
               disabled={status === 'loading'}
               onClick={() => refreshNotifications()}
@@ -92,7 +93,7 @@ export const Sidebar: FC = () => {
             <SidebarButton
               title="Settings"
               icon={GearIcon}
-              size={16}
+              size={Size.MEDIUM}
               onClick={() => toggleSettings()}
             />
           </>
@@ -102,7 +103,7 @@ export const Sidebar: FC = () => {
           <SidebarButton
             title="Quit Gitify"
             icon={XCircleIcon}
-            size={16}
+            size={Size.MEDIUM}
             onClick={() => quitApp()}
           />
         )}

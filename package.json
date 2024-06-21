@@ -2,7 +2,7 @@
   "name": "gitify",
   "version": "5.9.0",
   "description": "GitHub Notifications on your menu bar.",
-  "main": "main.js",
+  "main": "src/electron/main.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
     "clean": "rimraf build coverage node_modules",
@@ -64,14 +64,7 @@
   "build": {
     "appId": "com.electron.gitify",
     "productName": "Gitify",
-    "files": [
-      "build/**/*",
-      "assets/**/*",
-      "index.html",
-      "LICENSE",
-      "main.js",
-      "first-run.js"
-    ],
+    "files": ["build/**/*", "assets/**/*", "src/electron/*", "LICENSE"],
     "mac": {
       "category": "public.app-category.developer-tools",
       "icon": "assets/images/app-icon.icns",
@@ -121,20 +114,20 @@
     "react-final-form": "6.5.9",
     "react-router-dom": "6.23.1",
     "ts-loader": "9.5.1",
-    "typescript": "5.4.5"
+    "typescript": "5.5.2"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.8.1",
+    "@biomejs/biome": "1.8.2",
     "@electron/notarize": "2.3.2",
     "@testing-library/react": "16.0.0",
     "@types/jest": "29.5.12",
-    "@types/node": "20.14.5",
+    "@types/node": "20.14.7",
     "@types/nprogress": "0.2.3",
     "@types/react": "18.3.3",
     "@types/react-router-dom": "5.3.3",
     "autoprefixer": "10.4.19",
     "css-loader": "7.1.2",
-    "electron": "31.0.1",
+    "electron": "31.0.2",
     "electron-builder": "24.13.3",
     "graphql-tag": "2.12.6",
     "husky": "9.0.11",
@@ -148,7 +141,7 @@
     "tailwindcss": "3.4.4",
     "ts-jest": "29.1.5",
     "ts-node": "10.9.2",
-    "webpack": "5.92.0",
+    "webpack": "5.92.1",
     "webpack-cli": "5.1.4",
     "webpack-merge": "5.10.0"
   },

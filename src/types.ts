@@ -68,6 +68,7 @@ interface NotificationSettingsState {
   showBots: boolean;
   markAsDoneOnOpen: boolean;
   delayNotificationState: boolean;
+  groupBy: GroupBy;
 }
 
 interface SystemSettingsState {
@@ -86,6 +87,11 @@ export enum Theme {
   SYSTEM = 'SYSTEM',
   LIGHT = 'LIGHT',
   DARK = 'DARK',
+}
+
+export enum GroupBy {
+  REPOSITORY = 'REPOSITORY',
+  DATE = 'DATE',
 }
 
 export type RadioGroupItem = {
@@ -131,8 +137,23 @@ export enum IconColor {
   WHITE = 'text-white',
 }
 
+export enum Opacity {
+  READ = 'opacity-50',
+  LOW = 'opacity-70',
+  MEDIUM = 'opacity-80',
+  HIGH = 'opacity-90',
+}
+
 export type PullRequestApprovalIcon = {
   type: FC<OcticonProps>;
   color: IconColor;
   description: string;
 };
+
+export enum Size {
+  XSMALL = 12,
+  SMALL = 14,
+  MEDIUM = 16,
+  LARGE = 18,
+  XLARGE = 20,
+}

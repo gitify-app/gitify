@@ -1,10 +1,11 @@
 import { MarkGithubIcon, ServerIcon } from '@primer/octicons-react';
 import type { FC } from 'react';
+import type { Size } from '../../types';
 import type { PlatformType } from '../../utils/auth/types';
 
 export interface IPlatformIcon {
   type: PlatformType;
-  size: number;
+  size: Size;
 }
 
 export const PlatformIcon: FC<IPlatformIcon> = (props: IPlatformIcon) => {

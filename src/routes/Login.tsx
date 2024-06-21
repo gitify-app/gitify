@@ -1,9 +1,10 @@
 import { KeyIcon, PersonIcon } from '@primer/octicons-react';
 import { type FC, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Logo } from '../components/Logo';
 import { Button } from '../components/buttons/Button';
+import { LogoIcon } from '../components/icons/LogoIcon';
 import { AppContext } from '../context/App';
+import { Size } from '../types';
 import { showWindow } from '../utils/comms';
 
 export const LoginRoute: FC = () => {
@@ -27,8 +28,8 @@ export const LoginRoute: FC = () => {
   }, []); */
 
   return (
-    <div className="flex flex-col items-center justify-center p-4">
-      <Logo className="h-16 w-16" isDark />
+    <div className="flex flex-1 flex-col items-center justify-center p-4">
+      <LogoIcon size={Size.LARGE} isDark />
 
       <div className="my-4 px-2.5 py-1.5 text-center font-semibold">
         GitHub Notifications <br /> on your menu bar.

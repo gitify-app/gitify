@@ -13,6 +13,7 @@ import {
   type AccountNotifications,
   type AuthState,
   type GitifyError,
+  GroupBy,
   type SettingsState,
   type Status,
   Theme,
@@ -62,6 +63,7 @@ export const defaultSettings: SettingsState = {
   delayNotificationState: false,
   showPills: true,
   keyboardShortcut: true,
+  groupBy: GroupBy.REPOSITORY,
 };
 
 interface AppContextState {

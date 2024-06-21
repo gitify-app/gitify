@@ -1,9 +1,11 @@
 import type { FC } from 'react';
+import { Size } from '../../types';
+import { cn } from '../../utils/cn';
 
-interface ILogo {
+interface ILogoIcon {
   isDark?: boolean;
   onClick?: () => void;
-  className?: string;
+  size: Size.SMALL | Size.MEDIUM | Size.LARGE;
 }
 
 const LIGHT_GRADIENT_START = '#CCCCCC';
@@ -12,14 +14,18 @@ const LIGHT_GRADIENT_END = '#FFFFFF';
 const DARK_GRADIENT_START = '#22283B';
 const DARK_GRADIENT_END = '#555B6E';
 
-export const Logo: FC<ILogo> = ({
+export const LogoIcon: FC<ILogoIcon> = ({
   isDark,
   onClick,
-  className = '',
+  size = Size.MEDIUM,
   ...props
-}: ILogo) => (
+}: ILogoIcon) => (
   <svg
-    className={className}
+    className={cn(
+      size === Size.SMALL && 'size-5',
+      size === Size.MEDIUM && 'size-10',
+      size === Size.LARGE && 'size-16',
+    )}
     onClick={() => onClick?.()}
     xmlns="http://www.w3.org/2000/svg"
     xmlnsXlink="http://www.w3.org/1999/xlink"
