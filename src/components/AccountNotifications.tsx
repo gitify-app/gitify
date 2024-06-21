@@ -99,26 +99,28 @@ export const AccountNotifications: FC<IAccountNotifications> = (
         </div>
       )}
 
-      {showAccountNotifications
-        ? groupByRepository
-          ? Object.values(groupedNotifications).map((repoNotifications) => {
-              const repoSlug = repoNotifications[0].repository.full_name;
+      {showAccountNotifications && (
+        <>
+          {groupByRepository
+            ? Object.values(groupedNotifications).map((repoNotifications) => {
+                const repoSlug = repoNotifications[0].repository.full_name;
 
-              return (
-                <RepositoryNotifications
-                  key={repoSlug}
-                  repoName={repoSlug}
-                  repoNotifications={repoNotifications}
+                return (
+                  <RepositoryNotifications
+                    key={repoSlug}
+                    repoName={repoSlug}
+                    repoNotifications={repoNotifications}
+                  />
+                );
+              })
+            : notifications.map((notification) => (
+                <NotificationRow
+                  key={notification.id}
+                  notification={notification}
                 />
-              );
-            })
-          : notifications.map((notification) => (
-              <NotificationRow
-                key={notification.id}
-                notification={notification}
-              />
-            ))
-        : null}
+              ))}
+        </>
+      )}
     </>
   );
 };

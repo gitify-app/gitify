@@ -11,12 +11,10 @@ export interface IPlatformIcon {
 export const PlatformIcon: FC<IPlatformIcon> = (props: IPlatformIcon) => {
   return (
     <span title={props.type} className="mr-1">
-      {props.type === 'GitHub Cloud' ? (
-        <MarkGithubIcon size={props.size} />
-      ) : null}
-      {props.type === 'GitHub Enterprise Server' ? (
+      {props.type === 'GitHub Cloud' && <MarkGithubIcon size={props.size} />}
+      {props.type === 'GitHub Enterprise Server' && (
         <ServerIcon size={props.size} />
-      ) : null}
+      )}
     </span>
   );
 };
