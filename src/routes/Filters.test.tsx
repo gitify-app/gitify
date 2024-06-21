@@ -139,7 +139,72 @@ describe('routes/Filters.tsx', () => {
     });
   });
 
-  describe('Reasons section', () => {});
+  describe('Reasons section', () => {
+    it('should be able to toggle reason type - none already set', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: {
+                ...mockSettings,
+                filterReasons: '',
+              },
+              updateSetting,
+            }}
+          >
+            <MemoryRouter>
+              <FiltersRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      // click the checkbox
+      fireEvent.click(screen.getByLabelText('Mentioned'));
+
+      // check if the checkbox is still unchecked
+      expect(updateSetting).toHaveBeenCalledWith('filterReasons', 'mention');
+
+      expect(
+        screen.getByLabelText('Mentioned').parentNode.parentNode,
+      ).toMatchSnapshot();
+    });
+
+    it('should be able to toggle reason type - some filters already set', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: {
+                ...mockSettings,
+                filterReasons: 'security',
+              },
+              updateSetting,
+            }}
+          >
+            <MemoryRouter>
+              <FiltersRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      // click the checkbox
+      fireEvent.click(screen.getByLabelText('Mentioned'));
+
+      // check if the checkbox is still unchecked
+      expect(updateSetting).toHaveBeenCalledWith(
+        'filterReasons',
+        'security,mention',
+      );
+
+      expect(
+        screen.getByLabelText('Mentioned').parentNode.parentNode,
+      ).toMatchSnapshot();
+    });
+  });
 
   describe('Footer section', () => {
     it('should reset filters', async () => {
