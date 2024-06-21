@@ -96,7 +96,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         >
           <div
             class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
-            title="gitify-app/notifications-test"
           >
             <span>
               <img
@@ -293,7 +292,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         >
           <div
             class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
-            title="gitify-app/notifications-test"
           >
             <span>
               <img
@@ -512,7 +510,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
       >
         <div
           class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
-          title="gitify-app/notifications-test"
         >
           <span>
             <img
@@ -709,7 +706,6 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
       >
         <div
           class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
-          title="gitify-app/notifications-test"
         >
           <span>
             <img

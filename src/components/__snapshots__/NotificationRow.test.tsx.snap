@@ -37,7 +37,6 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
         >
           <div
             class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
-            title="gitify-app/notifications-test"
           >
             <span>
               <img
@@ -237,7 +236,6 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
       >
         <div
           class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
-          title="gitify-app/notifications-test"
         >
           <span>
             <img
