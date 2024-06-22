@@ -10,7 +10,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         id="138661096"
       >
         <div
-          class="mr-3 flex w-5 items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -244,7 +244,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
       id="138661096"
     >
       <div
-        class="mr-3 flex w-5 items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -535,7 +535,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         id="138661096"
       >
         <div
-          class="mr-3 flex w-5 items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -769,7 +769,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
       id="138661096"
     >
       <div
-        class="mr-3 flex w-5 items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -1060,7 +1060,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
         id="138661096"
       >
         <div
-          class="mr-3 flex w-5 items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -1272,7 +1272,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics comment pil
       id="138661096"
     >
       <div
-        class="mr-3 flex w-5 items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -1541,7 +1541,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
         id="138661096"
       >
         <div
-          class="mr-3 flex w-5 items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -1799,7 +1799,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics label pills
       id="138661096"
     >
       <div
-        class="mr-3 flex w-5 items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -2114,7 +2114,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
         id="138661096"
       >
         <div
-          class="mr-3 flex w-5 items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -2326,7 +2326,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
       id="138661096"
     >
       <div
-        class="mr-3 flex w-5 items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -2595,7 +2595,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
         id="138661096"
       >
         <div
-          class="mr-3 flex w-5 items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -2807,7 +2807,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics linked issu
       id="138661096"
     >
       <div
-        class="mr-3 flex w-5 items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -3076,7 +3076,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
         id="138661096"
       >
         <div
-          class="mr-3 flex w-5 items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -3355,7 +3355,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
       id="138661096"
     >
       <div
-        class="mr-3 flex w-5 items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -3691,7 +3691,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
         id="138661096"
       >
         <div
-          class="mr-3 flex w-5 items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -3970,7 +3970,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics milestone p
       id="138661096"
     >
       <div
-        class="mr-3 flex w-5 items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -4306,7 +4306,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
         id="138661096"
       >
         <div
-          class="mr-3 flex w-5 items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -4445,7 +4445,7 @@ exports[`components/NotificationRow.tsx notification pills / metrics showPills d
       id="138661096"
     >
       <div
-        class="mr-3 flex w-5 items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -4641,7 +4641,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
         id="138661096"
       >
         <div
-          class="mr-3 flex w-5 items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -4672,7 +4672,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
             <span>
               <img
                 alt="gitify-app/notifications-test's avatar"
-                class="rounded-full object-cover size-5"
+                class="rounded-full object-cover size-4"
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
               />
             </span>
@@ -4840,7 +4840,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
       id="138661096"
     >
       <div
-        class="mr-3 flex w-5 items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -4871,7 +4871,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           <span>
             <img
               alt="gitify-app/notifications-test's avatar"
-              class="rounded-full object-cover size-5"
+              class="rounded-full object-cover size-4"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
             />
           </span>
@@ -5096,7 +5096,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
         id="138661096"
       >
         <div
-          class="mr-3 flex w-5 items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -5278,7 +5278,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
       id="138661096"
     >
       <div
-        class="mr-3 flex w-5 items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -5517,7 +5517,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
         id="138661096"
       >
         <div
-          class="mr-3 flex w-5 items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -5699,7 +5699,7 @@ exports[`components/NotificationRow.tsx should render itself & its children when
       id="138661096"
     >
       <div
-        class="mr-3 flex w-5 items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
@@ -5938,7 +5938,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
         id="138661096"
       >
         <div
-          class="mr-3 flex w-5 items-center justify-center text-green-500"
+          class="mr-3 flex items-center justify-center text-green-500"
           title="Open Issue"
         >
           <svg
@@ -6125,7 +6125,7 @@ exports[`components/NotificationRow.tsx should render itself & its children with
       id="138661096"
     >
       <div
-        class="mr-3 flex w-5 items-center justify-center text-green-500"
+        class="mr-3 flex items-center justify-center text-green-500"
         title="Open Issue"
       >
         <svg
