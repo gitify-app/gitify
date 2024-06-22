@@ -62,8 +62,8 @@ export const FiltersRoute: FC = () => {
                   @dependabot, @renovatebot, etc
                 </div>
                 <div className="text-orange-600">
-                  ⚠️ This setting requires{' '}
-                  <strong>Detailed Notifications</strong> to be enabled.
+                  ⚠️ This filter requires the{' '}
+                  <strong>Detailed Notifications</strong> setting to be enabled.
                 </div>
               </div>
             }
