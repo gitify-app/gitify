@@ -100,7 +100,7 @@ export const NotificationRow: FC<INotificationRow> = ({
       )}
     >
       <div
-        className={cn('mr-3 flex w-5 items-center justify-center', iconColor)}
+        className={cn('mr-3 flex items-center justify-center', iconColor)}
         title={notificationTitle}
       >
         <NotificationIcon
