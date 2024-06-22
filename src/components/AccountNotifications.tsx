@@ -74,8 +74,10 @@ export const AccountNotifications: FC<IAccountNotifications> = (
           )}
           onClick={toggleAccountNotifications}
         >
-          <div className="flex gap-3">
-            <PlatformIcon type={account.platform} size={Size.MEDIUM} />
+          <div className="flex">
+            <div className="mr-3 flex items-center justify-center">
+              <PlatformIcon type={account.platform} size={Size.MEDIUM} />
+            </div>
             <button
               type="button"
               title="Open Profile"
