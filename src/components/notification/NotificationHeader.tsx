@@ -33,7 +33,7 @@ export const NotificationHeader: FC<INotificationHeader> = ({
           <AvatarIcon
             title={repoSlug}
             url={repoAvatarUrl}
-            size={Size.SMALL}
+            size={Size.XSMALL}
             defaultIcon={MarkGithubIcon}
           />
         </span>
