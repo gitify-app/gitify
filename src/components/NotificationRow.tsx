@@ -4,7 +4,6 @@ import {
   CommentIcon,
   FeedPersonIcon,
   IssueClosedIcon,
-  MarkGithubIcon,
   MilestoneIcon,
   ReadIcon,
   TagIcon,
@@ -29,16 +28,13 @@ import {
   getNotificationTypeIconColor,
   getPullRequestReviewIcon,
 } from '../utils/icons';
-import {
-  openNotification,
-  openRepository,
-  openUserProfile,
-} from '../utils/links';
+import { openNotification, openUserProfile } from '../utils/links';
 import { formatReason } from '../utils/reason';
 import { HoverGroup } from './HoverGroup';
 import { InteractionButton } from './buttons/InteractionButton';
 import { PillButton } from './buttons/PillButton';
 import { AvatarIcon } from './icons/AvatarIcon';
+import { NotificationHeader } from './notification/NotificationHeader';
 
 interface INotificationRow {
   notification: Notification;
@@ -108,9 +104,6 @@ export const NotificationRow: FC<INotificationRow> = ({
     notification.subject.linkedIssues?.length > 1 ? 'issues' : 'issue'
   } ${notification.subject?.linkedIssues?.join(', ')}`;
 
-  const repoAvatarUrl = notification.repository.owner.avatar_url;
-  const repoSlug = notification.repository.full_name;
-
   const groupByDate = settings.groupBy === 'DATE';
 
   return (
@@ -137,35 +130,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
         onClick={() => handleNotification()}
       >
-        {groupByDate && (
-          <div
-            className={cn(
-              'mb-1 flex items-center gap-1 text-xs font-medium',
-              Opacity.MEDIUM,
-            )}
-            title={repoSlug}
-          >
-            <span>
-              <AvatarIcon
-                title={repoSlug}
-                url={repoAvatarUrl}
-                size={Size.XSMALL}
-                defaultIcon={MarkGithubIcon}
-              />
-            </span>
-            <span
-              title={repoSlug}
-              className="cursor-pointer truncate opacity-90"
-              onClick={(event: MouseEvent<HTMLElement>) => {
-                // Don't trigger onClick of parent element.
-                event.stopPropagation();
-                openRepository(notification.repository);
-              }}
-            >
-              {repoSlug}
-            </span>
-          </div>
-        )}
+        <NotificationHeader notification={notification} />
 
         <div
           className="mb-1 truncate text-sm"
