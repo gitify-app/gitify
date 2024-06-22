@@ -18,9 +18,8 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
     accounts: [],
   };
 
-  beforeEach(() => {
-    openExternalMock.mockReset();
-    mockNavigate.mockReset();
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('renders correctly', () => {

@@ -24,10 +24,8 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
 
   const mockValidateToken = jest.fn();
 
-  beforeEach(() => {
-    mockValidateToken.mockReset();
-    openExternalMock.mockReset();
-    mockNavigate.mockReset();
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('renders correctly', () => {
