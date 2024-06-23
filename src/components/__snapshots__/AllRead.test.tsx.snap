@@ -11,7 +11,7 @@ exports[`components/AllRead.tsx should render itself & its children 1`] = `
         <h1
           class="mb-5 text-5xl"
         >
-          😉
+          🎊
         </h1>
         <h2
           class="mb-2 text-xl font-semibold"
@@ -28,7 +28,7 @@ exports[`components/AllRead.tsx should render itself & its children 1`] = `
       <h1
         class="mb-5 text-5xl"
       >
-        😉
+        🎊
       </h1>
       <h2
         class="mb-2 text-xl font-semibold"
