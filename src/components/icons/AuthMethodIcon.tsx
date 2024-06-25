@@ -11,11 +11,9 @@ export interface IAuthMethodIcon {
 export const AuthMethodIcon: FC<IAuthMethodIcon> = (props: IAuthMethodIcon) => {
   return (
     <span title={props.type} className="mr-1">
-      {props.type === 'GitHub App' ? <AppsIcon size={props.size} /> : null}
-      {props.type === 'Personal Access Token' ? (
-        <KeyIcon size={props.size} />
-      ) : null}
-      {props.type === 'OAuth App' ? <PersonIcon size={props.size} /> : null}
+      {props.type === 'GitHub App' && <AppsIcon size={props.size} />}
+      {props.type === 'Personal Access Token' && <KeyIcon size={props.size} />}
+      {props.type === 'OAuth App' && <PersonIcon size={props.size} />}
     </span>
   );
 };
