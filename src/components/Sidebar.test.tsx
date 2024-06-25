@@ -15,6 +15,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('components/Sidebar.tsx', () => {
   const fetchNotifications = jest.fn();
+
   const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
 
   afterEach(() => {
@@ -230,7 +231,9 @@ describe('components/Sidebar.tsx', () => {
 
     it('go to the home if settings path already shown', () => {
       render(
-        <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
+        <AppContext.Provider
+          value={{ isLoggedIn: true, notifications: [], fetchNotifications }}
+        >
           <MemoryRouter initialEntries={['/settings']}>
             <Sidebar />
           </MemoryRouter>
@@ -239,6 +242,7 @@ describe('components/Sidebar.tsx', () => {
 
       fireEvent.click(screen.getByTitle('Settings'));
 
+      expect(fetchNotifications).toHaveBeenCalledTimes(1);
       expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
     });
   });
