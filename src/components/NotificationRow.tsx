@@ -1,9 +1,4 @@
-import {
-  BellSlashIcon,
-  CheckIcon,
-  FeedPersonIcon,
-  ReadIcon,
-} from '@primer/octicons-react';
+import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import {
   type FC,
   type MouseEvent,
@@ -12,24 +7,19 @@ import {
   useState,
 } from 'react';
 import { AppContext } from '../context/App';
-import { IconColor, Opacity, Size } from '../types';
+import { Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
-import {
-  formatForDisplay,
-  formatNotificationUpdatedAt,
-} from '../utils/helpers';
+import { formatForDisplay } from '../utils/helpers';
 import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
 } from '../utils/icons';
-import { openNotification, openUserProfile } from '../utils/links';
-import { formatReason } from '../utils/reason';
+import { openNotification } from '../utils/links';
 import { HoverGroup } from './HoverGroup';
 import { InteractionButton } from './buttons/InteractionButton';
-import { AvatarIcon } from './icons/AvatarIcon';
+import { NotificationFooter } from './notification/NotificationFooter';
 import { NotificationHeader } from './notification/NotificationHeader';
-import { Pills } from './notification/Pills';
 
 interface INotificationRow {
   notification: Notification;
@@ -73,16 +63,10 @@ export const NotificationRow: FC<INotificationRow> = ({
     unsubscribeNotification(notification);
   };
 
-  const reason = formatReason(notification.reason);
   const NotificationIcon = getNotificationTypeIcon(notification.subject);
   const iconColor = getNotificationTypeIconColor(notification.subject);
 
-  const updatedAt = formatNotificationUpdatedAt(notification);
-  const updatedLabel = notification.subject.user
-    ? `${notification.subject.user.login} updated ${updatedAt}`
-    : `Updated ${updatedAt}`;
-
-  const notificationTitle = formatForDisplay([
+  const notificationType = formatForDisplay([
     notification.subject.state,
     notification.subject.type,
   ]);
@@ -101,7 +85,7 @@ export const NotificationRow: FC<INotificationRow> = ({
     >
       <div
         className={cn('mr-3 flex items-center justify-center', iconColor)}
-        title={notificationTitle}
+        title={notificationType}
       >
         <NotificationIcon
           size={groupByDate ? Size.XLARGE : Size.MEDIUM}
@@ -123,39 +107,7 @@ export const NotificationRow: FC<INotificationRow> = ({
           {notification.subject.title}
         </div>
 
-        <div
-          className={cn(
-            'flex flex-wrap items-center gap-1 text-xs capitalize',
-            Opacity.MEDIUM,
-          )}
-        >
-          {notification.subject.user ? (
-            <button
-              type="button"
-              title="View User Profile"
-              onClick={(event: MouseEvent<HTMLElement>) => {
-                // Don't trigger onClick of parent element.
-                event.stopPropagation();
-                openUserProfile(notification.subject.user);
-              }}
-              className="flex-shrink-0"
-            >
-              <AvatarIcon
-                title={notification.subject.user.login}
-                url={notification.subject.user.avatar_url}
-                size={Size.XSMALL}
-                defaultIcon={FeedPersonIcon}
-              />
-            </button>
-          ) : (
-            <div>
-              <FeedPersonIcon size={Size.MEDIUM} className={IconColor.GRAY} />
-            </div>
-          )}
-          <div title={reason.description}>{reason.title}</div>
-          <div title={updatedLabel}>{updatedAt}</div>
-          <Pills notification={notification} />
-        </div>
+        <NotificationFooter notification={notification} />
       </div>
 
       <HoverGroup>
