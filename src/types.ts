@@ -51,6 +51,8 @@ export interface Account {
   user: GitifyUser | null;
 }
 
+export type SettingsValue = boolean | Theme | GroupBy | string[];
+
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
   SystemSettingsState &

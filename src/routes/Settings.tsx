@@ -72,7 +72,7 @@ export const SettingsRoute: FC = () => {
               { label: 'Dark', value: Theme.DARK },
             ]}
             onChange={(evt) => {
-              updateSetting('theme', evt.target.value);
+              updateSetting('theme', evt.target.value as Theme);
             }}
           />
           <Checkbox
@@ -155,7 +155,7 @@ export const SettingsRoute: FC = () => {
               { label: 'Date', value: GroupBy.DATE },
             ]}
             onChange={(evt) => {
-              updateSetting('groupBy', evt.target.value);
+              updateSetting('groupBy', evt.target.value as GroupBy);
             }}
           />
           <Checkbox

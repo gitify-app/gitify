@@ -15,6 +15,7 @@ import {
   type GitifyError,
   GroupBy,
   type SettingsState,
+  type SettingsValue,
   type Status,
   Theme,
 } from '../types';
@@ -91,10 +92,7 @@ interface AppContextState {
   markRepoNotificationsDone: (notification: Notification) => Promise<void>;
 
   settings: SettingsState;
-  updateSetting: (
-    name: keyof SettingsState,
-    value: boolean | Theme | string | null,
-  ) => void;
+  updateSetting: (name: keyof SettingsState, value: SettingsValue) => void;
 }
 
 export const AppContext = createContext<Partial<AppContextState>>({});
@@ -147,7 +145,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   }, [settings.keyboardShortcut]);
 
   const updateSetting = useCallback(
-    (name: keyof SettingsState, value: boolean | Theme) => {
+    (name: keyof SettingsState, value: SettingsValue) => {
       if (name === 'openAtStartup') {
         setAutoLaunch(value as boolean);
       }
