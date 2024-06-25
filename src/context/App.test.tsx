@@ -373,7 +373,7 @@ describe('context/App.tsx', () => {
           showPills: true,
           keyboardShortcut: true,
           groupBy: 'REPOSITORY',
-          filterReasons: '',
+          filterReasons: [],
         } as SettingsState,
       });
     });
@@ -427,7 +427,7 @@ describe('context/App.tsx', () => {
           showPills: true,
           keyboardShortcut: true,
           groupBy: 'REPOSITORY',
-          filterReasons: '',
+          filterReasons: [],
         } as SettingsState,
       });
     });

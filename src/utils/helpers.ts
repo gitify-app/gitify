@@ -171,8 +171,8 @@ export function formatNotificationUpdatedAt(
 export function getFilterCount(settings: SettingsState): number {
   let count = 0;
 
-  if (settings.filterReasons !== defaultSettings.filterReasons) {
-    count += settings.filterReasons.split(',').length;
+  if (settings.filterReasons.length !== defaultSettings.filterReasons.length) {
+    count += settings.filterReasons.length;
   }
 
   if (settings.showBots !== defaultSettings.showBots) {

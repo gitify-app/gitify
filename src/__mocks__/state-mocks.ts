@@ -86,7 +86,7 @@ export const mockSettings: SettingsState = {
   showPills: true,
   keyboardShortcut: true,
   groupBy: GroupBy.REPOSITORY,
-  filterReasons: '',
+  filterReasons: [],
 };
 
 export const mockState: GitifyState = {

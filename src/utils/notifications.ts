@@ -186,8 +186,8 @@ export function filterNotifications(
     }
 
     if (
-      settings.filterReasons &&
-      !settings.filterReasons.split(',').includes(notification.reason)
+      settings.filterReasons.length > 0 &&
+      !settings.filterReasons.includes(notification.reason)
     ) {
       return false;
     }

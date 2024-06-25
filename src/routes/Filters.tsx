@@ -12,13 +12,7 @@ export const FiltersRoute: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
 
   const updateReasonFilter = (reason: Reason, checked: boolean) => {
-    let reasons: Reason[];
-
-    if (!settings.filterReasons) {
-      reasons = [];
-    } else {
-      reasons = settings.filterReasons.split(',') as Reason[];
-    }
+    let reasons: Reason[] = settings.filterReasons;
 
     if (checked) {
       reasons.push(reason);
@@ -26,11 +20,11 @@ export const FiltersRoute: FC = () => {
       reasons = reasons.filter((r) => r !== reason);
     }
 
-    updateSetting('filterReasons', reasons.join(','));
+    updateSetting('filterReasons', reasons);
   };
 
   const shouldShowReason = (reason: Reason) => {
-    return settings.filterReasons.split(',').includes(reason);
+    return settings.filterReasons.includes(reason);
   };
 
   const resetToDefaultFilters = () => {

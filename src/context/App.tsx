@@ -65,7 +65,7 @@ export const defaultSettings: SettingsState = {
   showPills: true,
   keyboardShortcut: true,
   groupBy: GroupBy.REPOSITORY,
-  filterReasons: '',
+  filterReasons: [],
 };
 
 interface AppContextState {

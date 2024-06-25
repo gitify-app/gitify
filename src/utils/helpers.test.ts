@@ -511,7 +511,7 @@ describe('utils/helpers.ts', () => {
     it('non-default reason filters', () => {
       const settings = {
         ...defaultSettings,
-        filterReasons: 'subscribed,manual',
+        filterReasons: ['subscribed', 'manual'],
       } as SettingsState;
       expect(getFilterCount(settings)).toBe(2);
     });

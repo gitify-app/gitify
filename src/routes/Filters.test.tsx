@@ -150,7 +150,7 @@ describe('routes/Filters.tsx', () => {
               auth: mockAuth,
               settings: {
                 ...mockSettings,
-                filterReasons: '',
+                filterReasons: [],
               },
               updateSetting,
             }}
@@ -166,7 +166,7 @@ describe('routes/Filters.tsx', () => {
       fireEvent.click(screen.getByLabelText('Mentioned'));
 
       // check if the checkbox is still unchecked
-      expect(updateSetting).toHaveBeenCalledWith('filterReasons', 'mention');
+      expect(updateSetting).toHaveBeenCalledWith('filterReasons', ['mention']);
 
       expect(
         screen.getByLabelText('Mentioned').parentNode.parentNode,
@@ -181,7 +181,7 @@ describe('routes/Filters.tsx', () => {
               auth: mockAuth,
               settings: {
                 ...mockSettings,
-                filterReasons: 'security',
+                filterReasons: ['security_alert'],
               },
               updateSetting,
             }}
@@ -197,10 +197,10 @@ describe('routes/Filters.tsx', () => {
       fireEvent.click(screen.getByLabelText('Mentioned'));
 
       // check if the checkbox is still unchecked
-      expect(updateSetting).toHaveBeenCalledWith(
-        'filterReasons',
-        'security,mention',
-      );
+      expect(updateSetting).toHaveBeenCalledWith('filterReasons', [
+        'security_alert',
+        'mention',
+      ]);
 
       expect(
         screen.getByLabelText('Mentioned').parentNode.parentNode,

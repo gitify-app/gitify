@@ -193,7 +193,7 @@ describe('utils/notifications.ts', () => {
       mockNotifications[1].reason = 'manual';
       const result = filterNotifications(mockNotifications, {
         ...mockSettings,
-        filterReasons: 'manual',
+        filterReasons: ['manual'],
       });
 
       expect(result.length).toBe(1);

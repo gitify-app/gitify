@@ -1,6 +1,6 @@
 import type { OcticonProps } from '@primer/octicons-react';
 import type { FC } from 'react';
-import type { Notification } from './typesGitHub';
+import type { Notification, Reason } from './typesGitHub';
 import type {
   AuthMethod,
   EnterpriseAccount,
@@ -51,7 +51,7 @@ export interface Account {
   user: GitifyUser | null;
 }
 
-export type SettingsValue = boolean | Theme | GroupBy | string[];
+export type SettingsValue = boolean | Theme | GroupBy | Reason[];
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
@@ -68,7 +68,6 @@ interface AppearanceSettingsState {
 interface NotificationSettingsState {
   participating: boolean;
   showNotifications: boolean;
-  showBots: boolean;
   markAsDoneOnOpen: boolean;
   delayNotificationState: boolean;
   groupBy: GroupBy;
@@ -82,7 +81,8 @@ interface SystemSettingsState {
 }
 
 interface FilterSettingsState {
-  filterReasons: string;
+  showBots: boolean;
+  filterReasons: Reason[];
 }
 
 export interface GitifyState {
