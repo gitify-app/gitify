@@ -26,7 +26,7 @@ const mockRepoSlug = 'gitify-app/notifications-test';
 
 describe('utils/api/client.ts', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
   });
 
   describe('getAuthenticatedUser', () => {

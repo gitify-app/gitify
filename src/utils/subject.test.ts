@@ -400,6 +400,7 @@ describe('utils/subject.ts', () => {
 
     describe('Issues', () => {
       let mockNotification: Notification;
+
       beforeEach(() => {
         mockNotification = partialMockNotification({
           title: 'This is a mock issue',

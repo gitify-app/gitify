@@ -263,6 +263,7 @@ describe('utils/icons.ts', () => {
   describe('getPullRequestReviewIcon', () => {
     let mockReviewSingleReviewer: GitifyPullRequestReview;
     let mockReviewMultipleReviewer: GitifyPullRequestReview;
+
     beforeEach(() => {
       mockReviewSingleReviewer = {
         state: 'APPROVED',

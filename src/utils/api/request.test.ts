@@ -9,7 +9,7 @@ const method = 'get';
 
 describe('utils/api/request.ts', () => {
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
   });
 
   it('should make a request with the correct parameters', async () => {
@@ -44,7 +44,7 @@ describe('apiRequestAuth', () => {
   const token = 'yourAuthToken' as Token;
 
   afterEach(() => {
-    jest.resetAllMocks();
+    jest.clearAllMocks();
   });
 
   it('should make an authenticated request with the correct parameters', async () => {
