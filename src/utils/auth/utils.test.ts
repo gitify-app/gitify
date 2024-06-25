@@ -20,8 +20,8 @@ describe('utils/auth/utils.ts', () => {
   describe('authGitHub', () => {
     const loadURLMock = jest.spyOn(browserWindow, 'loadURL');
 
-    beforeEach(() => {
-      loadURLMock.mockReset();
+    afterEach(() => {
+      jest.clearAllMocks();
     });
 
     it('should call authGitHub - success', async () => {
@@ -47,7 +47,7 @@ describe('utils/auth/utils.ts', () => {
 
       expect(loadURLMock).toHaveBeenCalledTimes(1);
       expect(loadURLMock).toHaveBeenCalledWith(
-        'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read:user,notifications,repo',
+        'https://github.com/login/oauth/authorize?client_id=FAKE_CLIENT_ID_123&scope=read%3Auser%2Cnotifications%2Crepo',
       );
 
       expect(browserWindow.destroy).toHaveBeenCalledTimes(1);

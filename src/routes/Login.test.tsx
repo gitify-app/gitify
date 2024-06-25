@@ -11,8 +11,8 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/Login.tsx', () => {
-  beforeEach(() => {
-    mockNavigate.mockReset();
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('should render itself & its children', () => {

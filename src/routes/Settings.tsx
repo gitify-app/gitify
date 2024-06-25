@@ -56,7 +56,7 @@ export const SettingsRoute: FC = () => {
 
   return (
     <div className="flex h-screen flex-col" data-testid="settings">
-      <Header>Settings</Header>
+      <Header fetchOnBack={true}>Settings</Header>
       <div className="flex-grow overflow-x-auto px-8">
         <fieldset className="mb-3">
           <legend id="appearance" className="mb-1 mt-2 font-semibold">

@@ -20,7 +20,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/Accounts.tsx', () => {
-  beforeEach(() => {
+  afterEach(() => {
     jest.clearAllMocks();
   });
 

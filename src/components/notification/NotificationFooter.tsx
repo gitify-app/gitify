@@ -1,21 +1,13 @@
-import {
-  CommentIcon,
-  FeedPersonIcon,
-  IssueClosedIcon,
-  MilestoneIcon,
-  TagIcon,
-} from '@primer/octicons-react';
-import { type FC, type MouseEvent, useContext } from 'react';
-import { AppContext } from '../../context/App';
+import { FeedPersonIcon } from '@primer/octicons-react';
+import type { FC, MouseEvent } from 'react';
 import { IconColor, Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { cn } from '../../utils/cn';
 import { formatNotificationUpdatedAt } from '../../utils/helpers';
-import { getPullRequestReviewIcon } from '../../utils/icons';
 import { openUserProfile } from '../../utils/links';
 import { formatReason } from '../../utils/reason';
-import { PillButton } from '../buttons/PillButton';
 import { AvatarIcon } from '../icons/AvatarIcon';
+import { Pills } from './Pills';
 
 interface INotificationFooter {
   notification: Notification;
@@ -24,26 +16,12 @@ interface INotificationFooter {
 export const NotificationFooter: FC<INotificationFooter> = ({
   notification,
 }: INotificationFooter) => {
-  const { settings } = useContext(AppContext);
-
   const reason = formatReason(notification.reason);
 
   const updatedAt = formatNotificationUpdatedAt(notification);
   const updatedLabel = notification.subject.user
     ? `${notification.subject.user.login} updated ${updatedAt}`
     : `Updated ${updatedAt}`;
-
-  const commentsPillDescription = `${notification.subject.comments} ${
-    notification.subject.comments > 1 ? 'comments' : 'comment'
-  }`;
-
-  const labelsPillDescription = notification.subject.labels
-    ?.map((label) => `🏷️ ${label}`)
-    .join('\n');
-
-  const linkedIssuesPillDescription = `Linked to ${
-    notification.subject.linkedIssues?.length > 1 ? 'issues' : 'issue'
-  } ${notification.subject?.linkedIssues?.join(', ')}`;
 
   return (
     <div
@@ -77,62 +55,7 @@ export const NotificationFooter: FC<INotificationFooter> = ({
       )}
       <div title={reason.description}>{reason.title}</div>
       <div title={updatedLabel}>{updatedAt}</div>
-      {settings.showPills && (
-        <div className="flex">
-          {notification.subject?.linkedIssues?.length > 0 && (
-            <PillButton
-              title={linkedIssuesPillDescription}
-              metric={notification.subject.linkedIssues.length}
-              icon={IssueClosedIcon}
-              color={IconColor.GREEN}
-            />
-          )}
-
-          {notification.subject.reviews?.map((review) => {
-            const icon = getPullRequestReviewIcon(review);
-            if (!icon) {
-              return null;
-            }
-
-            return (
-              <PillButton
-                key={review.state}
-                title={icon.description}
-                metric={review.users.length}
-                icon={icon.type}
-                color={icon.color}
-              />
-            );
-          })}
-          {notification.subject?.comments > 0 && (
-            <PillButton
-              title={commentsPillDescription}
-              metric={notification.subject.comments}
-              icon={CommentIcon}
-              color={IconColor.GRAY}
-            />
-          )}
-          {notification.subject?.labels?.length > 0 && (
-            <PillButton
-              title={labelsPillDescription}
-              metric={notification.subject.labels.length}
-              icon={TagIcon}
-              color={IconColor.GRAY}
-            />
-          )}
-          {notification.subject.milestone && (
-            <PillButton
-              title={notification.subject.milestone.title}
-              icon={MilestoneIcon}
-              color={
-                notification.subject.milestone.state === 'open'
-                  ? IconColor.GREEN
-                  : IconColor.RED
-              }
-            />
-          )}
-        </div>
-      )}
+      <Pills notification={notification} />
     </div>
   );
 };
