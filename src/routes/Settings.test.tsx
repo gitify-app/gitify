@@ -155,6 +155,31 @@ describe('routes/Settings.tsx', () => {
       expect(updateSetting).toHaveBeenCalledWith('showPills', false);
     });
 
+    it('should toggle show number checkbox', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+              updateSetting,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      await screen.findByLabelText('Show number');
+
+      fireEvent.click(screen.getByLabelText('Show number'));
+
+      expect(updateSetting).toHaveBeenCalledTimes(1);
+      expect(updateSetting).toHaveBeenCalledWith('showNumber', false);
+    });
+
     it('should toggle account hostname checkbox', async () => {
       await act(async () => {
         render(

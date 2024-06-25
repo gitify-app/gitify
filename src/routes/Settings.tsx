@@ -1,6 +1,7 @@
 import {
   CheckIcon,
   CommentIcon,
+  GitPullRequestIcon,
   IssueClosedIcon,
   MilestoneIcon,
   PersonIcon,
@@ -126,6 +127,33 @@ export const SettingsRoute: FC = () => {
                     <li>
                       <MilestoneIcon size={Size.MEDIUM} className="pr-1" />
                       milestones
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            }
+          />
+          <Checkbox
+            name="showNumber"
+            label="Show number"
+            checked={settings.showNumber}
+            onChange={(evt) => updateSetting('showNumber', evt.target.checked)}
+            tooltip={
+              <div>
+                <div>Show GitHub number for:</div>
+                <div className="pl-6">
+                  <ul className="list-disc">
+                    <li>
+                      <CommentIcon size={Size.MEDIUM} className="pr-1" />
+                      Discussion
+                    </li>
+                    <li>
+                      <IssueClosedIcon size={Size.MEDIUM} className="pr-1" />
+                      Issue
+                    </li>
+                    <li>
+                      <GitPullRequestIcon size={Size.MEDIUM} className="pr-1" />
+                      Pull Request
                     </li>
                   </ul>
                 </div>

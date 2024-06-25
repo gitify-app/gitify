@@ -112,7 +112,13 @@ export const NotificationRow: FC<INotificationRow> = ({
           title={notificationTitle}
         >
           {notification.subject.title}
-          <span className={cn('text-xxs ml-1', Opacity.READ)}>
+          <span
+            className={cn(
+              'text-xxs ml-1',
+              Opacity.READ,
+              !settings.showNumber && 'hidden',
+            )}
+          >
             {notificationNumber}
           </span>
         </div>
