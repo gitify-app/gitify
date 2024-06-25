@@ -23,8 +23,8 @@ describe('components/Repository.tsx', () => {
     repoNotifications: mockGitHubNotifications,
   };
 
-  beforeEach(() => {
-    markRepoNotificationsRead.mockReset();
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('should render itself & its children', () => {

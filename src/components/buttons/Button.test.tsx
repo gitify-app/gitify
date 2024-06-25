@@ -13,8 +13,8 @@ describe('components/buttons/Button.tsx', () => {
     size: Size.MEDIUM,
   };
 
-  beforeEach(() => {
-    openExternalMock.mockReset();
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('should render without icon', () => {

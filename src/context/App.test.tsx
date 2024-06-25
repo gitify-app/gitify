@@ -65,6 +65,10 @@ describe('context/App.tsx', () => {
       });
     });
 
+    afterEach(() => {
+      jest.clearAllMocks();
+    });
+
     it('fetch notifications every minute', async () => {
       customRender(null);
 
@@ -73,14 +77,6 @@ describe('context/App.tsx', () => {
       await waitFor(() =>
         expect(fetchNotificationsMock).toHaveBeenCalledTimes(1),
       );
-
-      fetchNotificationsMock.mockReset();
-
-      act(() => {
-        jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
-        return;
-      });
-      expect(fetchNotificationsMock).toHaveBeenCalledTimes(1);
 
       act(() => {
         jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
@@ -93,6 +89,12 @@ describe('context/App.tsx', () => {
         return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
+
+      act(() => {
+        jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
+        return;
+      });
+      expect(fetchNotificationsMock).toHaveBeenCalledTimes(4);
     });
 
     it('should call fetchNotifications', async () => {
@@ -131,8 +133,6 @@ describe('context/App.tsx', () => {
 
       const { getByText } = customRender(<TestComponent />);
 
-      markNotificationReadMock.mockReset();
-
       fireEvent.click(getByText('Test Case'));
 
       expect(markNotificationReadMock).toHaveBeenCalledTimes(1);
@@ -157,8 +157,6 @@ describe('context/App.tsx', () => {
       };
 
       const { getByText } = customRender(<TestComponent />);
-
-      markNotificationDoneMock.mockReset();
 
       fireEvent.click(getByText('Test Case'));
 
@@ -185,8 +183,6 @@ describe('context/App.tsx', () => {
 
       const { getByText } = customRender(<TestComponent />);
 
-      unsubscribeNotificationMock.mockReset();
-
       fireEvent.click(getByText('Test Case'));
 
       expect(unsubscribeNotificationMock).toHaveBeenCalledTimes(1);
@@ -212,8 +208,6 @@ describe('context/App.tsx', () => {
 
       const { getByText } = customRender(<TestComponent />);
 
-      markRepoNotificationsReadMock.mockReset();
-
       fireEvent.click(getByText('Test Case'));
 
       expect(markRepoNotificationsReadMock).toHaveBeenCalledTimes(1);
@@ -238,8 +232,6 @@ describe('context/App.tsx', () => {
       };
 
       const { getByText } = customRender(<TestComponent />);
-
-      markRepoNotificationsDoneMock.mockReset();
 
       fireEvent.click(getByText('Test Case'));
 
