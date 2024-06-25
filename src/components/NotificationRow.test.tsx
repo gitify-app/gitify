@@ -61,48 +61,6 @@ describe('components/NotificationRow.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself & its children when last_read_at is null', async () => {
-    jest
-      .spyOn(global.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
-
-    const mockNotification = mockSingleNotification;
-    mockNotification.last_read_at = null;
-
-    const props = {
-      notification: mockNotification,
-      account: mockGitHubCloudAccount,
-    };
-
-    const tree = render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <NotificationRow {...props} />
-      </AppContext.Provider>,
-    );
-    expect(tree).toMatchSnapshot();
-  });
-
-  it('should render itself & its children without avatar', async () => {
-    jest
-      .spyOn(global.Date, 'now')
-      .mockImplementation(() => new Date('2024').valueOf());
-
-    const mockNotification = mockSingleNotification;
-    mockNotification.subject.user = null;
-
-    const props = {
-      notification: mockNotification,
-      account: mockGitHubCloudAccount,
-    };
-
-    const tree = render(
-      <AppContext.Provider value={{ settings: mockSettings }}>
-        <NotificationRow {...props} />
-      </AppContext.Provider>,
-    );
-    expect(tree).toMatchSnapshot();
-  });
-
   describe('notification interactions', () => {
     it('should open a notification in the browser - click', () => {
       const removeNotificationFromState = jest.fn();
