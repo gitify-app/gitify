@@ -66,7 +66,7 @@ export const NotificationRow: FC<INotificationRow> = ({
   const NotificationIcon = getNotificationTypeIcon(notification.subject);
   const iconColor = getNotificationTypeIconColor(notification.subject);
 
-  const notificationTitle = formatForDisplay([
+  const notificationType = formatForDisplay([
     notification.subject.state,
     notification.subject.type,
   ]);
@@ -85,7 +85,7 @@ export const NotificationRow: FC<INotificationRow> = ({
     >
       <div
         className={cn('mr-3 flex items-center justify-center', iconColor)}
-        title={notificationTitle}
+        title={notificationType}
       >
         <NotificationIcon
           size={groupByDate ? Size.XLARGE : Size.MEDIUM}
