@@ -22,7 +22,7 @@ describe('routes/Settings.tsx', () => {
     mockPlatform('darwin');
   });
 
-  beforeEach(() => {
+  afterEach(() => {
     jest.clearAllMocks();
   });
 

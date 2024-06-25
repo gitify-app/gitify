@@ -20,8 +20,8 @@ describe('utils/auth/utils.ts', () => {
   describe('authGitHub', () => {
     const loadURLMock = jest.spyOn(browserWindow, 'loadURL');
 
-    beforeEach(() => {
-      loadURLMock.mockReset();
+    afterEach(() => {
+      jest.clearAllMocks();
     });
 
     it('should call authGitHub - success', async () => {
