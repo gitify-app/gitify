@@ -28,13 +28,15 @@ export function authGitHub(
       show: true,
     });
 
-    const githubUrl = `https://${authOptions.hostname}/login/oauth/authorize`;
-    const authUrl = `${githubUrl}?client_id=${authOptions.clientId}&scope=${Constants.AUTH_SCOPE}`;
+    const authUrl = new URL(`https://${authOptions.hostname}`);
+    authUrl.pathname = '/login/oauth/authorize';
+    authUrl.searchParams.append('client_id', authOptions.clientId);
+    authUrl.searchParams.append('scope', Constants.AUTH_SCOPE.toString());
 
     const session = authWindow.webContents.session;
     session.clearStorageData();
 
-    authWindow.loadURL(authUrl);
+    authWindow.loadURL(authUrl.toString());
 
     const handleCallback = (url: Link) => {
       const raw_code = /code=([^&]*)/.exec(url) || null;

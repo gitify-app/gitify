@@ -19,7 +19,7 @@ export const Constants = {
   // Storage
   STORAGE_KEY: 'gitify-storage',
 
-  ALL_READ_EMOJIS: ['😉', '🎉', '🐯', '🙈', '🎈', '🎊', '👏', '🎪', '🍝'],
+  ALL_READ_EMOJIS: ['🎉', '🎊', '🥳', '👏', '🙌', '😎', '🏖️', '🚀', '✨', '🏆'],
 
   FETCH_INTERVAL: 60000,
 
@@ -45,7 +45,7 @@ export const Errors: Record<ErrorType, GitifyError> = {
   MISSING_SCOPES: {
     title: 'Missing Scopes',
     descriptions: ['Your credentials are missing a required API scope.'],
-    emojis: ['🙃'],
+    emojis: ['🔭'],
   },
   NETWORK: {
     title: 'Network Error',
@@ -63,7 +63,7 @@ export const Errors: Record<ErrorType, GitifyError> = {
   UNKNOWN: {
     title: 'Oops! Something went wrong',
     descriptions: ['Please try again later.'],
-    emojis: ['🤔', '😞', '😤', '😱', '😭'],
+    emojis: ['🤔', '🥲', '😳', '🫠', '🙃', '🙈'],
   },
 };
 

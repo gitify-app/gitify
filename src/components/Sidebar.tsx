@@ -41,6 +41,7 @@ export const Sidebar: FC = () => {
   const toggleSettings = () => {
     if (location.pathname.startsWith('/settings')) {
       navigate('/', { replace: true });
+      fetchNotifications();
     } else {
       navigate('/settings');
     }

@@ -15,6 +15,7 @@ jest.mock('react-router-dom', () => ({
 describe('routes/Settings.tsx', () => {
   let originalPlatform: NodeJS.Platform;
   const updateSetting = jest.fn();
+  const fetchNotifications = jest.fn();
 
   beforeAll(() => {
     // Save the original platform value
@@ -22,7 +23,7 @@ describe('routes/Settings.tsx', () => {
     mockPlatform('darwin');
   });
 
-  beforeEach(() => {
+  afterEach(() => {
     jest.clearAllMocks();
   });
 
@@ -62,6 +63,7 @@ describe('routes/Settings.tsx', () => {
             value={{
               auth: mockAuth,
               settings: mockSettings,
+              fetchNotifications,
             }}
           >
             <MemoryRouter>
@@ -72,6 +74,7 @@ describe('routes/Settings.tsx', () => {
       });
 
       fireEvent.click(screen.getByLabelText('Go Back'));
+      expect(fetchNotifications).toHaveBeenCalledTimes(1);
       expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
     });
   });

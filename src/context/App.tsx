@@ -123,16 +123,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setTheme(settings.theme);
   }, [settings.theme]);
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for certain account or setting changes.
+  // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for account changes
   useEffect(() => {
     fetchNotifications({ auth, settings });
-  }, [
-    settings.participating,
-    settings.showBots,
-    settings.detailedNotifications,
-    settings.delayNotificationState,
-    auth.accounts.length,
-  ]);
+  }, [auth.accounts]);
 
   useInterval(() => {
     fetchNotifications({ auth, settings });

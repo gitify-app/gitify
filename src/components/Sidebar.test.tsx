@@ -16,11 +16,7 @@ jest.mock('react-router-dom', () => ({
 describe('components/Sidebar.tsx', () => {
   const fetchNotifications = jest.fn();
 
-  beforeEach(() => {
-    fetchNotifications.mockReset();
-
-    jest.spyOn(window, 'clearInterval');
-  });
+  const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -39,6 +35,7 @@ describe('components/Sidebar.tsx', () => {
         </MemoryRouter>
       </AppContext.Provider>,
     );
+
     expect(tree).toMatchSnapshot();
   });
 
@@ -56,7 +53,136 @@ describe('components/Sidebar.tsx', () => {
         </MemoryRouter>
       </AppContext.Provider>,
     );
+
     expect(tree).toMatchSnapshot();
+  });
+
+  it('should open the gitify repository', () => {
+    render(
+      <AppContext.Provider
+        value={{ isLoggedIn: false, notifications: [], settings: mockSettings }}
+      >
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(screen.getByTestId('gitify-logo'));
+
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
+      'https://github.com/gitify-app/gitify',
+    );
+  });
+
+  describe('quick links', () => {
+    describe('notifications icon', () => {
+      it('when there are 0 notifications', () => {
+        render(
+          <AppContext.Provider
+            value={{
+              isLoggedIn: true,
+              notifications: [],
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <Sidebar />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+
+        const notificationsIcon = screen.getByTitle('0 Unread Notifications');
+
+        expect(notificationsIcon.className).toContain('text-white');
+        expect(notificationsIcon.childNodes.length).toBe(1);
+        expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
+
+        fireEvent.click(screen.getByLabelText('0 Unread Notifications'));
+
+        expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+        expect(openExternalLinkMock).toHaveBeenCalledWith(
+          'https://github.com/notifications',
+        );
+      });
+
+      it('when there are more than 0 notifications', () => {
+        render(
+          <AppContext.Provider
+            value={{
+              isLoggedIn: true,
+              notifications: mockAccountNotifications,
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <Sidebar />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+
+        const notificationsIcon = screen.getByTitle('4 Unread Notifications');
+
+        expect(notificationsIcon.className).toContain(IconColor.GREEN);
+        expect(notificationsIcon.childNodes.length).toBe(2);
+        expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
+        expect(notificationsIcon.childNodes[1].nodeValue).toBe('4');
+
+        fireEvent.click(screen.getByLabelText('4 Unread Notifications'));
+
+        expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+        expect(openExternalLinkMock).toHaveBeenCalledWith(
+          'https://github.com/notifications',
+        );
+      });
+    });
+  });
+
+  it('opens my github issues page', () => {
+    render(
+      <AppContext.Provider
+        value={{
+          isLoggedIn: true,
+          notifications: mockAccountNotifications,
+          settings: mockSettings,
+        }}
+      >
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(screen.getByLabelText('My Issues'));
+
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
+      'https://github.com/issues',
+    );
+  });
+
+  it('opens my github pull requests page', () => {
+    render(
+      <AppContext.Provider
+        value={{
+          isLoggedIn: true,
+          notifications: mockAccountNotifications,
+          settings: mockSettings,
+        }}
+      >
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(screen.getByLabelText('My Pull Requests'));
+
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
+      'https://github.com/pulls',
+    );
   });
 
   describe('Refresh Notifications', () => {
@@ -76,7 +202,7 @@ describe('components/Sidebar.tsx', () => {
           </MemoryRouter>
         </AppContext.Provider>,
       );
-      fetchNotifications.mockReset();
+
       fireEvent.click(screen.getByTitle('Refresh Notifications'));
 
       expect(fetchNotifications).toHaveBeenCalledTimes(1);
@@ -89,7 +215,6 @@ describe('components/Sidebar.tsx', () => {
             isLoggedIn: true,
             notifications: [],
             settings: mockSettings,
-
             fetchNotifications,
             status: 'loading',
           }}
@@ -99,7 +224,7 @@ describe('components/Sidebar.tsx', () => {
           </MemoryRouter>
         </AppContext.Provider>,
       );
-      fetchNotifications.mockReset();
+
       fireEvent.click(screen.getByTitle('Refresh Notifications'));
 
       expect(fetchNotifications).not.toHaveBeenCalled();
@@ -159,7 +284,9 @@ describe('components/Sidebar.tsx', () => {
           </MemoryRouter>
         </AppContext.Provider>,
       );
+
       fireEvent.click(screen.getByTitle('Settings'));
+
       expect(mockNavigate).toHaveBeenCalledWith('/settings');
     });
 
@@ -170,6 +297,7 @@ describe('components/Sidebar.tsx', () => {
             isLoggedIn: true,
             notifications: [],
             settings: mockSettings,
+            fetchNotifications,
           }}
         >
           <MemoryRouter initialEntries={['/settings']}>
@@ -177,7 +305,10 @@ describe('components/Sidebar.tsx', () => {
           </MemoryRouter>
         </AppContext.Provider>,
       );
+
       fireEvent.click(screen.getByTitle('Settings'));
+
+      expect(fetchNotifications).toHaveBeenCalledTimes(1);
       expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
     });
   });
@@ -263,7 +394,9 @@ describe('components/Sidebar.tsx', () => {
         </MemoryRouter>
       </AppContext.Provider>,
     );
+
     fireEvent.click(screen.getByTitle('Quit Gitify'));
+
     expect(quitAppMock).toHaveBeenCalledTimes(1);
   });
 
