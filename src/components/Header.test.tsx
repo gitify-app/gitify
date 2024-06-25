@@ -26,8 +26,7 @@ describe('components/Header.tsx', () => {
 
     fireEvent.click(screen.getByLabelText('Go Back'));
 
-    expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith(-1);
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
   it('should navigate back and fetch notifications', () => {
@@ -43,8 +42,7 @@ describe('components/Header.tsx', () => {
 
     fireEvent.click(screen.getByLabelText('Go Back'));
 
-    expect(mockNavigate).toHaveBeenCalledTimes(1);
-    expect(mockNavigate).toHaveBeenCalledWith(-1);
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
     expect(fetchNotifications).toHaveBeenCalledTimes(1);
   });
 });

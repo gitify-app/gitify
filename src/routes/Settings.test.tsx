@@ -559,7 +559,7 @@ describe('routes/Settings.tsx', () => {
       });
 
       fireEvent.click(screen.getByTitle('Accounts'));
-      expect(mockNavigate).toHaveBeenCalledWith('/accounts');
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/accounts');
     });
 
     it('should quit the app', async () => {

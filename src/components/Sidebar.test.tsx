@@ -247,7 +247,7 @@ describe('components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
       fireEvent.click(screen.getByTitle('Filters'));
-      expect(mockNavigate).toHaveBeenCalledWith('/filters');
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/filters');
     });
 
     it('go to the home if filters path already shown', () => {
@@ -265,7 +265,7 @@ describe('components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
       fireEvent.click(screen.getByTitle('Filters'));
-      expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
     });
   });
 
@@ -287,7 +287,7 @@ describe('components/Sidebar.tsx', () => {
 
       fireEvent.click(screen.getByTitle('Settings'));
 
-      expect(mockNavigate).toHaveBeenCalledWith('/settings');
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/settings');
     });
 
     it('go to the home if settings path already shown', () => {
@@ -309,7 +309,7 @@ describe('components/Sidebar.tsx', () => {
       fireEvent.click(screen.getByTitle('Settings'));
 
       expect(fetchNotifications).toHaveBeenCalledTimes(1);
-      expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
     });
   });
 

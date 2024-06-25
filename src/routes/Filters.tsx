@@ -40,7 +40,7 @@ export const FiltersRoute: FC = () => {
 
   return (
     <div className="flex h-screen flex-col" data-testid="filters">
-      <Header>Filters</Header>
+      <Header fetchOnBack={true}>Filters</Header>
       <div className="flex-grow overflow-x-auto px-8">
         <fieldset className="mb-3">
           <legend id="notifications" className="mb-1 mt-2 font-semibold">

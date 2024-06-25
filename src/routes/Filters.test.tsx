@@ -12,6 +12,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('routes/Filters.tsx', () => {
   const updateSetting = jest.fn();
+  const fetchNotifications = jest.fn();
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -41,6 +42,7 @@ describe('routes/Filters.tsx', () => {
             value={{
               auth: mockAuth,
               settings: mockSettings,
+              fetchNotifications,
             }}
           >
             <MemoryRouter>
@@ -51,7 +53,7 @@ describe('routes/Filters.tsx', () => {
       });
 
       fireEvent.click(screen.getByLabelText('Go Back'));
-      // TODO - add expects fetch notifications to be called.  pending #1305
+      expect(fetchNotifications).toHaveBeenCalledTimes(1);
       expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
     });
   });
