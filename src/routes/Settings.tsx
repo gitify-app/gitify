@@ -216,7 +216,7 @@ export const SettingsRoute: FC = () => {
           <Checkbox
             name="kbdShortcutEnabled"
             label="Enable keyboard shortcut"
-            checked={!!settings.keyboardShortcut}
+            checked={settings.keyboardShortcut}
             onChange={(evt) =>
               updateSetting('keyboardShortcut', evt.target.checked)
             }
