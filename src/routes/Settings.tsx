@@ -100,8 +100,12 @@ export const SettingsRoute: FC = () => {
           <Checkbox
             name="showPills"
             label="Show notification metric pills"
-            checked={settings.showPills}
-            onChange={(evt) => updateSetting('showPills', evt.target.checked)}
+            checked={settings.detailedNotifications && settings.showPills}
+            onChange={(evt) =>
+              settings.detailedNotifications &&
+              updateSetting('showPills', evt.target.checked)
+            }
+            disabled={!settings.detailedNotifications}
             tooltip={
               <div>
                 <div>Show notification metric pills for:</div>
@@ -130,14 +134,22 @@ export const SettingsRoute: FC = () => {
                     </li>
                   </ul>
                 </div>
+                <div className="pt-3 text-orange-600">
+                  ⚠️ This setting requires{' '}
+                  <strong>Detailed Notifications</strong> to be enabled.
+                </div>
               </div>
             }
           />
           <Checkbox
             name="showNumber"
             label="Show number"
-            checked={settings.showNumber}
-            onChange={(evt) => updateSetting('showNumber', evt.target.checked)}
+            checked={settings.detailedNotifications && settings.showNumber}
+            onChange={(evt) =>
+              settings.detailedNotifications &&
+              updateSetting('showNumber', evt.target.checked)
+            }
+            disabled={!settings.detailedNotifications}
             tooltip={
               <div>
                 <div>Show GitHub number for:</div>
@@ -156,6 +168,10 @@ export const SettingsRoute: FC = () => {
                       Pull Request
                     </li>
                   </ul>
+                </div>
+                <div className="pt-3 text-orange-600">
+                  ⚠️ This setting requires{' '}
+                  <strong>Detailed Notifications</strong> to be enabled.
                 </div>
               </div>
             }
@@ -223,11 +239,11 @@ export const SettingsRoute: FC = () => {
             disabled={!settings.detailedNotifications}
             tooltip={
               <div>
-                <div className="pb-3">
+                <div>
                   Show or hide notifications from Bot accounts, such as
                   @dependabot, @renovatebot, etc
                 </div>
-                <div className="text-orange-600">
+                <div className="pt-3 text-orange-600">
                   ⚠️ This setting requires{' '}
                   <strong>Detailed Notifications</strong> to be enabled.
                 </div>
@@ -266,7 +282,7 @@ export const SettingsRoute: FC = () => {
           <Checkbox
             name="kbdShortcutEnabled"
             label="Enable keyboard shortcut"
-            checked={!!settings.keyboardShortcut}
+            checked={settings.keyboardShortcut}
             onChange={(evt) =>
               updateSetting('keyboardShortcut', evt.target.checked)
             }
