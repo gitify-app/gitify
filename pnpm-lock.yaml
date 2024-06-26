@@ -10,7 +10,7 @@ importers:
     dependencies:
       '@electron/remote':
         specifier: 2.1.2
-        version: 2.1.2(electron@31.0.2)
+        version: 2.1.2(electron@31.1.0)
       '@primer/octicons-react':
         specifier: 19.10.0
         version: 19.10.0(react@18.3.1)
@@ -31,7 +31,7 @@ importers:
         version: 4.20.10
       menubar:
         specifier: 9.5.0
-        version: 9.5.0(electron@31.0.2)
+        version: 9.5.0(electron@31.1.0)
       nprogress:
         specifier: 0.2.0
         version: 0.2.0
@@ -85,8 +85,8 @@ importers:
         specifier: 7.1.2
         version: 7.1.2(webpack@5.92.1(webpack-cli@5.1.4))
       electron:
-        specifier: 31.0.2
-        version: 31.0.2
+        specifier: 31.1.0
+        version: 31.1.0
       electron-builder:
         specifier: 24.13.3
         version: 24.13.3(electron-builder-squirrel-windows@24.13.3(dmg-builder@24.13.3))
@@ -1360,8 +1360,8 @@ packages:
   electron-updater@6.2.1:
     resolution: {integrity: sha512-83eKIPW14qwZqUUM6wdsIRwVKZyjmHxQ4/8G+1C6iS5PdDt7b1umYQyj1/qPpH510GmHEQe4q0kCPe3qmb3a0Q==}
 
-  electron@31.0.2:
-    resolution: {integrity: sha512-55efQ5yfLN+AQHcFC00AXQqtxC3iAGaxX2GQ3EDbFJ0ca9GHNOdSXkcrdBElLleiDrR2hpXNkQxN1bDn0oxe6w==}
+  electron@31.1.0:
+    resolution: {integrity: sha512-TBOwqLxSxnx6+pH6GMri7R3JPH2AkuGJHfWZS0p1HsmN+Qr1T9b0IRJnnehSd/3NZAmAre4ft9Ljec7zjyKFJA==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -3462,9 +3462,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@electron/remote@2.1.2(electron@31.0.2)':
+  '@electron/remote@2.1.2(electron@31.1.0)':
     dependencies:
-      electron: 31.0.2
+      electron: 31.1.0
 
   '@electron/universal@1.5.1':
     dependencies:
@@ -4686,7 +4686,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@31.0.2:
+  electron@31.1.0:
     dependencies:
       '@electron/get': 2.0.3
       '@types/node': 20.14.9
@@ -5662,9 +5662,9 @@ snapshots:
       escape-string-regexp: 4.0.0
     optional: true
 
-  menubar@9.5.0(electron@31.0.2):
+  menubar@9.5.0(electron@31.1.0):
     dependencies:
-      electron: 31.0.2
+      electron: 31.1.0
       electron-positioner: 4.1.0
 
   merge-stream@2.0.0: {}
