@@ -7,7 +7,7 @@ import {
   TagIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
-import { ipcRenderer } from 'electron';
+import { ipcRenderer, webFrame } from 'electron';
 import {
   type FC,
   type MouseEvent,
@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Checkbox } from '../components/fields/Checkbox';
 import { RadioGroup } from '../components/fields/RadioGroup';
+import { Slider } from '../components/fields/Slider';
 import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import { GroupBy, Size, Theme } from '../types';
@@ -73,6 +74,17 @@ export const SettingsRoute: FC = () => {
             ]}
             onChange={(evt) => {
               updateSetting('theme', evt.target.value);
+            }}
+            className="mb-0.5"
+          />
+          <Slider
+            defaultValue={[webFrame.getZoomLevel() * 100 + 100]}
+            max={150}
+            min={50}
+            step={25}
+            name="Zoom"
+            onValueChange={(value) => {
+              webFrame.setZoomLevel(value[0] / 100 - 1);
             }}
           />
           <Checkbox
