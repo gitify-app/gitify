@@ -222,7 +222,7 @@ export const SettingsRoute: FC = () => {
             }
             tooltip={
               <div>
-                When enabled you can choose to use the hotkeys{' '}
+                When enabled you can use the hotkeys{' '}
                 <span className="text-orange-600">
                   {Constants.DEFAULT_KEYBOARD_SHORTCUT}
                 </span>{' '}
