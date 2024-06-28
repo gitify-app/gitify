@@ -14,7 +14,7 @@ exports[`routes/Settings.tsx Footer section app version should show production a
   title="app-version"
 >
   Gitify 
-  v0.0.1
+  vdev
 </span>
 `;
 
@@ -66,7 +66,7 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
         Appearance
       </legend>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-1 text-sm mb-0.5"
       >
         <div
           class="flex items-start"
@@ -141,6 +141,81 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
           </div>
         </div>
       </div>
+      <span
+        aria-disabled="false"
+        class="relative grid w-full touch-none select-none items-center mb-3"
+        data-orientation="horizontal"
+        dir="ltr"
+        style="--radix-slider-thumb-transform: translateX(-50%);"
+      >
+        <label
+          class="text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
+          for="Zoom"
+        >
+          Zoom
+          :
+        </label>
+        <span
+          class="relative h-2 bg-clip-padding dark:bg-white mx-[1rem] overflow-visible bg-gray-300 rounded-full grow"
+          data-orientation="horizontal"
+        >
+          <span
+            class="absolute h-full bg-blue-500 rounded-full border-x-[6px] border-transparent"
+            data-orientation="horizontal"
+            style="left: 0%;"
+          />
+          <span
+            style="transform: var(--radix-slider-thumb-transform); position: absolute; left: calc(NaN% + 0px);"
+          >
+            <span
+              aria-orientation="horizontal"
+              aria-valuemax="150"
+              aria-valuemin="50"
+              aria-valuenow="NaN"
+              class="block -mt-1 h-4 w-4 rounded-full border border-blue-500 bg-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+              data-orientation="horizontal"
+              data-radix-collection-item=""
+              role="slider"
+              style=""
+              tabindex="0"
+            />
+          </span>
+        </span>
+        <div
+          class="relative mx-3 grow flex flex-row justify-between mt-1"
+        >
+          <span
+            class="text-sm font-light"
+            role="presentation"
+          >
+            50
+          </span>
+          <span
+            class="text-sm font-light"
+            role="presentation"
+          >
+            |
+          </span>
+          <span
+            class="text-sm font-light"
+            role="presentation"
+          >
+            100
+          </span>
+          <span
+            class="text-sm font-light"
+            role="presentation"
+          >
+            |
+          </span>
+          <span
+            class="text-sm font-light"
+            role="presentation"
+          >
+            150
+          </span>
+        </div>
+      </span>
       <div
         class="mb-3 mt-1 text-sm"
       >
@@ -684,7 +759,7 @@ exports[`routes/Settings.tsx General should render itself & its children 1`] = `
         title="app-version"
       >
         Gitify 
-        v0.0.1
+        dev
       </span>
     </button>
     <div>

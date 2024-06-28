@@ -3,11 +3,15 @@ import * as SliderPrimitive from '@radix-ui/react-slider';
 import {
   type ComponentPropsWithoutRef,
   type ElementRef,
+  type RefAttributes,
   forwardRef,
 } from 'react';
 import { cn } from '../../utils/cn';
 
-const Slider = forwardRef<
+export type ISlider = SliderPrimitive.SliderProps &
+  RefAttributes<HTMLSpanElement>;
+
+export const Slider = forwardRef<
   ElementRef<typeof SliderPrimitive.Root>,
   ComponentPropsWithoutRef<typeof SliderPrimitive.Root>
 >(({ className, min, max, step, name, ...props }, ref) => {
@@ -62,6 +66,3 @@ const Slider = forwardRef<
     </SliderPrimitive.Root>
   );
 });
-Slider.displayName = SliderPrimitive.Root.displayName;
-
-export { Slider };

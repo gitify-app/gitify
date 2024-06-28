@@ -166,7 +166,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
               </button>
               <button
                 aria-label="Login"
-                class="mt-2 px-4 py-2 !text-sm rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+                class="mt-2 !text-sm rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
                 disabled=""
                 title="Login"
                 type="submit"
@@ -355,7 +355,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
             </button>
             <button
               aria-label="Login"
-              class="mt-2 px-4 py-2 !text-sm rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
+              class="mt-2 !text-sm rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
               disabled=""
               title="Login"
               type="submit"

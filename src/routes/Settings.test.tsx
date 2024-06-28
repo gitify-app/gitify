@@ -6,6 +6,8 @@ import { AppContext } from '../context/App';
 import * as comms from '../utils/comms';
 import { SettingsRoute } from './Settings';
 
+global.ResizeObserver = require('resize-observer-polyfill');
+
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
@@ -620,7 +622,7 @@ describe('routes/Settings.tsx', () => {
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
       expect(openExternalLinkMock).toHaveBeenCalledWith(
-        'https://github.com/gitify-app/gitify/releases/tag/v0.0.1',
+        'https://github.com/gitify-app/gitify/releases/tag/dev',
       );
     });
 
