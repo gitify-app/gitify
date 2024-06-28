@@ -89,6 +89,7 @@ export const FiltersRoute: FC = () => {
       </div>
 
       <div className="flex items-center justify-between bg-gray-200 px-3 py-1 text-sm dark:bg-gray-darker">
+        <div />
         <div>
           <button
             type="button"
@@ -101,7 +102,6 @@ export const FiltersRoute: FC = () => {
               className="mr-2"
               aria-label="Reset to default filters"
             />
-            Reset to default filters
           </button>
         </div>
       </div>
