@@ -8,63 +8,59 @@ export const SystemSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
 
   return (
-    <div className="px-8">
-      <fieldset className="mb-3">
-        <legend id="system" className="mb-1 mt-2 font-semibold">
-          System
-        </legend>
+    <fieldset className="mb-3">
+      <legend id="system" className="mb-1 mt-2 font-semibold">
+        System
+      </legend>
+      <Checkbox
+        name="kbdShortcutEnabled"
+        label="Enable keyboard shortcut"
+        checked={settings.keyboardShortcut}
+        onChange={(evt) =>
+          updateSetting('keyboardShortcut', evt.target.checked)
+        }
+        tooltip={
+          <div>
+            When enabled you can use the hotkeys{' '}
+            <span className="text-orange-600">
+              {Constants.DEFAULT_KEYBOARD_SHORTCUT}
+            </span>{' '}
+            to show or hide Gitify.
+          </div>
+        }
+      />
+      {isMacOS() && (
         <Checkbox
-          name="kbdShortcutEnabled"
-          label="Enable keyboard shortcut"
-          checked={settings.keyboardShortcut}
+          name="showNotificationsCountInTray"
+          label="Show notifications count in tray"
+          checked={settings.showNotificationsCountInTray}
           onChange={(evt) =>
-            updateSetting('keyboardShortcut', evt.target.checked)
-          }
-          tooltip={
-            <div>
-              When enabled you can use the hotkeys{' '}
-              <span className="text-orange-600">
-                {Constants.DEFAULT_KEYBOARD_SHORTCUT}
-              </span>{' '}
-              to show or hide Gitify.
-            </div>
+            updateSetting('showNotificationsCountInTray', evt.target.checked)
           }
         />
-        {isMacOS() && (
-          <Checkbox
-            name="showNotificationsCountInTray"
-            label="Show notifications count in tray"
-            checked={settings.showNotificationsCountInTray}
-            onChange={(evt) =>
-              updateSetting('showNotificationsCountInTray', evt.target.checked)
-            }
-          />
-        )}
+      )}
+      <Checkbox
+        name="showNotifications"
+        label="Show system notifications"
+        checked={settings.showNotifications}
+        onChange={(evt) =>
+          updateSetting('showNotifications', evt.target.checked)
+        }
+      />
+      <Checkbox
+        name="playSound"
+        label="Play sound"
+        checked={settings.playSound}
+        onChange={(evt) => updateSetting('playSound', evt.target.checked)}
+      />
+      {!isLinux() && (
         <Checkbox
-          name="showNotifications"
-          label="Show system notifications"
-          checked={settings.showNotifications}
-          onChange={(evt) =>
-            updateSetting('showNotifications', evt.target.checked)
-          }
+          name="openAtStartUp"
+          label="Open at startup"
+          checked={settings.openAtStartup}
+          onChange={(evt) => updateSetting('openAtStartup', evt.target.checked)}
         />
-        <Checkbox
-          name="playSound"
-          label="Play sound"
-          checked={settings.playSound}
-          onChange={(evt) => updateSetting('playSound', evt.target.checked)}
-        />
-        {!isLinux() && (
-          <Checkbox
-            name="openAtStartUp"
-            label="Open at startup"
-            checked={settings.openAtStartup}
-            onChange={(evt) =>
-              updateSetting('openAtStartup', evt.target.checked)
-            }
-          />
-        )}
-      </fieldset>
-    </div>
+      )}
+    </fieldset>
   );
 };

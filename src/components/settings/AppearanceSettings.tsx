@@ -25,89 +25,87 @@ export const AppearanceSettings: FC = () => {
   }, [settings.theme]);
 
   return (
-    <div className="px-8">
-      <fieldset className="mb-3">
-        <legend id="appearance" className="mb-1 mt-2 font-semibold">
-          Appearance
-        </legend>
-        <RadioGroup
-          name="theme"
-          label="Theme:"
-          value={settings.theme}
-          options={[
-            { label: 'System', value: Theme.SYSTEM },
-            { label: 'Light', value: Theme.LIGHT },
-            { label: 'Dark', value: Theme.DARK },
-          ]}
-          onChange={(evt) => {
-            updateSetting('theme', evt.target.value);
-          }}
-        />
-        <Checkbox
-          name="detailedNotifications"
-          label="Detailed notifications"
-          checked={settings.detailedNotifications}
-          onChange={(evt) =>
-            updateSetting('detailedNotifications', evt.target.checked)
-          }
-          tooltip={
-            <div>
-              <div className="pb-3">
-                Enrich notifications with author or last commenter profile
-                information, state and GitHub-like colors.
-              </div>
-              <div className="text-orange-600">
-                ⚠️ Users with a large number of unread notifications <i>may</i>{' '}
-                experience rate limiting under certain circumstances. Disable
-                this setting if you experience this.
-              </div>
+    <fieldset className="mb-3">
+      <legend id="appearance" className="mb-1 mt-2 font-semibold">
+        Appearance
+      </legend>
+      <RadioGroup
+        name="theme"
+        label="Theme:"
+        value={settings.theme}
+        options={[
+          { label: 'System', value: Theme.SYSTEM },
+          { label: 'Light', value: Theme.LIGHT },
+          { label: 'Dark', value: Theme.DARK },
+        ]}
+        onChange={(evt) => {
+          updateSetting('theme', evt.target.value);
+        }}
+      />
+      <Checkbox
+        name="detailedNotifications"
+        label="Detailed notifications"
+        checked={settings.detailedNotifications}
+        onChange={(evt) =>
+          updateSetting('detailedNotifications', evt.target.checked)
+        }
+        tooltip={
+          <div>
+            <div className="pb-3">
+              Enrich notifications with author or last commenter profile
+              information, state and GitHub-like colors.
             </div>
-          }
-        />
-        <Checkbox
-          name="showPills"
-          label="Show notification metric pills"
-          checked={settings.showPills}
-          onChange={(evt) => updateSetting('showPills', evt.target.checked)}
-          tooltip={
-            <div>
-              <div>Show notification metric pills for:</div>
-              <div className="pl-6">
-                <ul className="list-disc">
-                  <li>
-                    <IssueClosedIcon size={Size.MEDIUM} className="pr-1" />
-                    linked issues
-                  </li>
-                  <li>
-                    <CheckIcon size={Size.MEDIUM} className="pr-1" /> pr reviews
-                  </li>
-                  <li>
-                    <CommentIcon size={Size.MEDIUM} className="pr-1" />
-                    comments
-                  </li>
+            <div className="text-orange-600">
+              ⚠️ Users with a large number of unread notifications <i>may</i>{' '}
+              experience rate limiting under certain circumstances. Disable this
+              setting if you experience this.
+            </div>
+          </div>
+        }
+      />
+      <Checkbox
+        name="showPills"
+        label="Show notification metric pills"
+        checked={settings.showPills}
+        onChange={(evt) => updateSetting('showPills', evt.target.checked)}
+        tooltip={
+          <div>
+            <div>Show notification metric pills for:</div>
+            <div className="pl-6">
+              <ul className="list-disc">
+                <li>
+                  <IssueClosedIcon size={Size.MEDIUM} className="pr-1" />
+                  linked issues
+                </li>
+                <li>
+                  <CheckIcon size={Size.MEDIUM} className="pr-1" /> pr reviews
+                </li>
+                <li>
+                  <CommentIcon size={Size.MEDIUM} className="pr-1" />
+                  comments
+                </li>
 
-                  <li>
-                    <TagIcon size={Size.MEDIUM} className="pr-1" />
-                    labels
-                  </li>
-                  <li>
-                    <MilestoneIcon size={Size.MEDIUM} className="pr-1" />
-                    milestones
-                  </li>
-                </ul>
-              </div>
+                <li>
+                  <TagIcon size={Size.MEDIUM} className="pr-1" />
+                  labels
+                </li>
+                <li>
+                  <MilestoneIcon size={Size.MEDIUM} className="pr-1" />
+                  milestones
+                </li>
+              </ul>
             </div>
-          }
-        />
-        <Checkbox
-          name="showAccountHostname"
-          label="Show account hostname"
-          checked={settings.showAccountHostname}
-          onChange={(evt) =>
-            updateSetting('showAccountHostname', evt.target.checked)
-          }
-        />
-      </fieldset>
-    </div>
+          </div>
+        }
+      />
+      <Checkbox
+        name="showAccountHostname"
+        label="Show account hostname"
+        checked={settings.showAccountHostname}
+        onChange={(evt) =>
+          updateSetting('showAccountHostname', evt.target.checked)
+        }
+      />
+    </fieldset>
   );
 };

@@ -10,7 +10,7 @@ export const SettingsRoute: FC = () => {
     <div className="flex h-screen flex-col" data-testid="settings">
       <Header fetchOnBack={true}>Settings</Header>
 
-      <div className="flex-grow overflow-x-auto">
+      <div className="flex-grow overflow-x-auto px-8">
         <AppearanceSettings />
         <NotificationSettings />
         <SystemSettings />
