@@ -9,7 +9,7 @@ import * as comms from '../utils/comms';
 import Constants from '../utils/constants';
 import * as notifications from '../utils/notifications';
 import * as storage from '../utils/storage';
-import { AppContext, AppProvider } from './App';
+import { AppContext, AppProvider, defaultSettings } from './App';
 
 jest.mock('../hooks/useNotifications');
 
@@ -327,6 +327,14 @@ describe('context/App.tsx', () => {
   });
 
   describe('settings methods', () => {
+    const fetchNotificationsMock = jest.fn();
+
+    beforeEach(() => {
+      (useNotifications as jest.Mock).mockReturnValue({
+        fetchNotifications: fetchNotificationsMock,
+      });
+    });
+
     it('should call updateSetting', async () => {
       const saveStateMock = jest
         .spyOn(storage, 'saveState')
@@ -427,6 +435,38 @@ describe('context/App.tsx', () => {
           keyboardShortcut: true,
           groupBy: 'REPOSITORY',
         } as SettingsState,
+      });
+    });
+
+    it('should call resetSettings', async () => {
+      const saveStateMock = jest
+        .spyOn(storage, 'saveState')
+        .mockImplementation(jest.fn());
+
+      const TestComponent = () => {
+        const { resetSettings } = useContext(AppContext);
+
+        return (
+          <button type="button" onClick={() => resetSettings()}>
+            Test Case
+          </button>
+        );
+      };
+
+      const { getByText } = customRender(<TestComponent />);
+
+      act(() => {
+        fireEvent.click(getByText('Test Case'));
+      });
+
+      expect(saveStateMock).toHaveBeenCalledWith({
+        auth: {
+          accounts: [],
+          enterpriseAccounts: [],
+          token: null,
+          user: null,
+        } as AuthState,
+        settings: defaultSettings,
       });
     });
   });
