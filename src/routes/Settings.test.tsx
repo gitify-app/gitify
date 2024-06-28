@@ -15,6 +15,8 @@ jest.mock('react-router-dom', () => ({
 describe('routes/Settings.tsx', () => {
   let originalPlatform: NodeJS.Platform;
   const updateSetting = jest.fn();
+  const resetSettings = jest.fn();
+
   const fetchNotifications = jest.fn();
 
   beforeAll(() => {
@@ -622,6 +624,27 @@ describe('routes/Settings.tsx', () => {
       expect(openExternalLinkMock).toHaveBeenCalledWith(
         'https://github.com/gitify-app/gitify/releases/tag/v0.0.1',
       );
+    });
+
+    it('should reset default settings', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+              resetSettings,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      fireEvent.click(screen.getByTitle('Reset default settings'));
+      expect(resetSettings).toHaveBeenCalled();
     });
 
     it('should open account management', async () => {

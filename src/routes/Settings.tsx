@@ -5,6 +5,7 @@ import {
   MilestoneIcon,
   PersonIcon,
   TagIcon,
+  UndoIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
@@ -32,7 +33,7 @@ import { isLinux, isMacOS } from '../utils/platform';
 import { setTheme } from '../utils/theme';
 
 export const SettingsRoute: FC = () => {
-  const { settings, updateSetting } = useContext(AppContext);
+  const { settings, updateSetting, resetSettings } = useContext(AppContext);
   const navigate = useNavigate();
 
   const [appVersion, setAppVersion] = useState<string | null>(null);
@@ -302,6 +303,17 @@ export const SettingsRoute: FC = () => {
           <span title="app-version">Gitify {appVersion}</span>
         </button>
         <div>
+          <button
+            type="button"
+            className={BUTTON_CLASS_NAME}
+            title="Reset default settings"
+            onClick={() => {
+              resetSettings();
+            }}
+          >
+            <UndoIcon size={Size.LARGE} aria-label="Reset default settings" />
+          </button>
+
           <button
             type="button"
             className={BUTTON_CLASS_NAME}
