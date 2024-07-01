@@ -31,6 +31,7 @@ export const QUERY_SEARCH_DISCUSSIONS = gql`
     search(query: $queryStatement, type: DISCUSSION, first: $firstDiscussions) {
       nodes {
         ... on Discussion {
+          number
           title
           stateReason
           isAnswered

@@ -60,6 +60,7 @@ interface AppearanceSettingsState {
   detailedNotifications: boolean;
   showAccountHostname: boolean;
   showPills: boolean;
+  showNumber: boolean;
 }
 
 interface NotificationSettingsState {

@@ -261,6 +261,7 @@ interface GitHubSubject {
 
 // This is not in the GitHub API, but we add it to the type to make it easier to work with
 export interface GitifySubject {
+  number?: number;
   state?: StateType;
   user?: SubjectUser;
   reviews?: GitifyPullRequestReview[];
@@ -494,6 +495,7 @@ export interface GraphQLSearch<T> {
 }
 
 export interface Discussion {
+  number: number;
   title: string;
   stateReason: DiscussionStateType;
   isAnswered: boolean;

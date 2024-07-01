@@ -419,6 +419,7 @@ export const mockGraphQLResponse: GraphQLSearch<Discussion> = {
     search: {
       nodes: [
         {
+          number: 123,
           title: '1.16.0',
           isAnswered: false,
           stateReason: 'OPEN',
