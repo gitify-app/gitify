@@ -6,7 +6,7 @@ import {
   TagIcon,
 } from '@primer/octicons-react';
 import { ipcRenderer, webFrame } from 'electron';
-import { type FC, useContext, useEffect } from 'react';
+import { type FC, useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { setTheme } from '../../utils/theme';
@@ -16,6 +16,9 @@ import { Slider } from '../fields/Slider';
 
 export const AppearanceSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
+  const [zoomLevel, setZoomLevel] = useState(
+    webFrame.getZoomLevel() * 100 + 100,
+  );
 
   useEffect(() => {
     ipcRenderer.on('gitify:update-theme', (_, updatedTheme: Theme) => {
@@ -24,6 +27,10 @@ export const AppearanceSettings: FC = () => {
       }
     });
   }, [settings.theme]);
+
+  window.addEventListener('resize', () => {
+    setZoomLevel(webFrame.getZoomLevel() * 100 + 100);
+  });
 
   return (
     <fieldset className="mb-3">
@@ -45,9 +52,10 @@ export const AppearanceSettings: FC = () => {
         className="mb-1"
       />
       <Slider
-        defaultValue={[webFrame.getZoomLevel() * 100 + 100]}
+        defaultValue={[zoomLevel]}
+        value={[zoomLevel]}
         max={150}
-        min={50}
+        min={0}
         step={25}
         name="Zoom"
         onValueChange={(value) => {
