@@ -40,7 +40,7 @@ module.exports = {
         case 'get-platform':
           return Promise.resolve('darwin');
         case 'gitify:version':
-          return Promise.resolve('dev');
+          return Promise.resolve('0.0.1');
         default:
           return Promise.reject(new Error(`Unknown channel: ${channel}`));
       }
