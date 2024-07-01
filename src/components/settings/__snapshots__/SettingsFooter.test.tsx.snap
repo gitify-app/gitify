@@ -14,6 +14,6 @@ exports[`routes/components/SettingsFooter.tsx app version should show production
   title="app-version"
 >
   Gitify 
-  vdev
+  v0.0.1
 </span>
 `;
