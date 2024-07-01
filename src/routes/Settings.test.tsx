@@ -5,6 +5,8 @@ import { mockPlatform } from '../__mocks__/utils';
 import { AppContext } from '../context/App';
 import { SettingsRoute } from './Settings';
 
+global.ResizeObserver = require('resize-observer-polyfill');
+
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),

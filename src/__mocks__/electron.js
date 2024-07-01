@@ -49,4 +49,8 @@ module.exports = {
   shell: {
     openExternal: jest.fn(),
   },
+  webFrame: {
+    setZoomLevel: jest.fn(),
+    getZoomLevel: jest.fn(),
+  },
 };

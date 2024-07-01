@@ -1,5 +1,6 @@
 import type { ChangeEvent, FC, ReactNode } from 'react';
 import type { RadioGroupItem } from '../../types';
+import { cn } from '../../utils/cn';
 
 export interface IRadioGroup {
   name: string;
@@ -9,11 +10,12 @@ export interface IRadioGroup {
   value: string;
   disabled?: boolean;
   onChange: (event: ChangeEvent<HTMLInputElement>) => void;
+  className?: string;
 }
 
 export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
   return (
-    <div className="mb-3 mt-1 text-sm">
+    <div className={cn('mb-3 mt-1 text-sm', props.className)}>
       <div className="flex items-start">
         <div className="mr-3 py-1">
           <label

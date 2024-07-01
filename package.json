@@ -102,6 +102,7 @@
   "dependencies": {
     "@electron/remote": "2.1.2",
     "@primer/octicons-react": "19.10.0",
+    "@radix-ui/react-slider": "^1.2.0",
     "axios": "1.7.2",
     "clsx": "2.1.1",
     "date-fns": "3.6.0",
@@ -113,6 +114,7 @@
     "react-dom": "18.3.1",
     "react-final-form": "6.5.9",
     "react-router-dom": "6.24.0",
+    "tailwind-merge": "^2.3.0",
     "ts-loader": "9.5.1",
     "typescript": "5.5.2"
   },
@@ -136,6 +138,7 @@
     "nock": "13.5.4",
     "postcss": "8.4.39",
     "postcss-loader": "8.1.1",
+    "resize-observer-polyfill": "^1.5.1",
     "rimraf": "5.0.7",
     "style-loader": "4.0.0",
     "tailwindcss": "3.4.4",

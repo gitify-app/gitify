@@ -5,16 +5,21 @@ import {
   MilestoneIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import { ipcRenderer } from 'electron';
-import { type FC, useContext, useEffect } from 'react';
+import { ipcRenderer, webFrame } from 'electron';
+import { type FC, useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { setTheme } from '../../utils/theme';
+import { percentageToZoom, zoomToPercentage } from '../../utils/zoom';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
+import { Slider } from '../fields/Slider';
 
 export const AppearanceSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
+  const [zoomLevel, setZoomLevel] = useState(
+    zoomToPercentage(webFrame.getZoomLevel()),
+  );
 
   useEffect(() => {
     ipcRenderer.on('gitify:update-theme', (_, updatedTheme: Theme) => {
@@ -23,6 +28,10 @@ export const AppearanceSettings: FC = () => {
       }
     });
   }, [settings.theme]);
+
+  window.addEventListener('resize', () => {
+    setZoomLevel(zoomToPercentage(webFrame.getZoomLevel()));
+  });
 
   return (
     <fieldset className="mb-3">
@@ -41,6 +50,19 @@ export const AppearanceSettings: FC = () => {
         onChange={(evt) => {
           updateSetting('theme', evt.target.value);
         }}
+        className="mb-1"
+      />
+      <Slider
+        defaultValue={[zoomLevel]}
+        value={[zoomLevel]}
+        max={120}
+        min={0}
+        step={20}
+        name="Zoom"
+        onValueChange={(value) =>
+          webFrame.setZoomLevel(percentageToZoom(value[0]))
+        }
+        unit="%"
       />
       <Checkbox
         name="detailedNotifications"
