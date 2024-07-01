@@ -8,7 +8,7 @@ import { SystemSettings } from '../components/settings/SystemSettings';
 export const SettingsRoute: FC = () => {
   return (
     <div className="flex h-screen flex-col" data-testid="settings">
-      <Header fetchOnBack={true}>Settings</Header>
+      <Header fetchOnBack>Settings</Header>
 
       <div className="flex-grow overflow-x-auto px-8">
         <AppearanceSettings />

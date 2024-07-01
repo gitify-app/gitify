@@ -10,6 +10,7 @@ import { type FC, useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { setTheme } from '../../utils/theme';
+import { percentageToZoom, zoomToPercentage } from '../../utils/zoom';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Slider } from '../fields/Slider';
@@ -17,7 +18,7 @@ import { Slider } from '../fields/Slider';
 export const AppearanceSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
   const [zoomLevel, setZoomLevel] = useState(
-    webFrame.getZoomLevel() * 100 + 100,
+    zoomToPercentage(webFrame.getZoomLevel()),
   );
 
   useEffect(() => {
@@ -29,7 +30,7 @@ export const AppearanceSettings: FC = () => {
   }, [settings.theme]);
 
   window.addEventListener('resize', () => {
-    setZoomLevel(webFrame.getZoomLevel() * 100 + 100);
+    setZoomLevel(zoomToPercentage(webFrame.getZoomLevel()));
   });
 
   return (
@@ -58,9 +59,9 @@ export const AppearanceSettings: FC = () => {
         min={0}
         step={25}
         name="Zoom"
-        onValueChange={(value) => {
-          webFrame.setZoomLevel(value[0] / 100 - 1);
-        }}
+        onValueChange={(value) =>
+          webFrame.setZoomLevel(percentageToZoom(value[0]))
+        }
         unit="%"
       />
       <Checkbox
