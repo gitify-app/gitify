@@ -77,16 +77,13 @@ app.whenReady().then(async () => {
 
     // DevTools configuration
     mb.window.webContents.on('devtools-opened', () => {
-      mb.window.setSize(800, 600);
-      mb.window.center();
-      mb.window.resizable = true;
+      if (process.env.NODE_ENV === 'development')
+        mb.window.setAlwaysOnTop(true);
     });
 
-    mb.window.webContents.on('devtools-closed', () => {
-      const trayBounds = mb.tray.getBounds();
-      mb.window.setSize(browserWindowOpts.width, browserWindowOpts.height);
-      mb.positioner.move('trayCenter', trayBounds);
-      mb.window.resizable = false;
+    mb.window.on('ready-to-show', () => {
+      if (process.env.NODE_ENV === 'development')
+        mb.window.webContents.openDevTools();
     });
   });
 

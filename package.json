@@ -13,7 +13,7 @@
     "lint:check": "biome check",
     "lint": "biome check --fix",
     "test": "jest",
-    "start": "electron . --enable-logging",
+    "start": "NODE_ENV='development' && electron . --enable-logging",
     "prepare": "husky"
   },
   "engines": {
