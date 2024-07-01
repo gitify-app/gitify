@@ -94,6 +94,7 @@ interface AppContextState {
     name: keyof SettingsState,
     value: boolean | Theme | string | null,
   ) => void;
+  resetSettings: () => void;
 }
 
 export const AppContext = createContext<Partial<AppContextState>>({});
@@ -157,6 +158,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     },
     [auth, settings],
   );
+
+  const resetSettings = useCallback(() => {
+    setSettings(defaultSettings);
+    saveState({ auth, settings: defaultSettings });
+  }, [auth]);
 
   const isLoggedIn = useMemo(() => {
     return auth.accounts.length > 0;
@@ -290,6 +296,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
         settings,
         updateSetting,
+        resetSettings,
       }}
     >
       {children}
