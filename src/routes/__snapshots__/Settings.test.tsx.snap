@@ -151,7 +151,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           >
             <span
               aria-orientation="horizontal"
-              aria-valuemax="150"
+              aria-valuemax="120"
               aria-valuemin="0"
               aria-valuenow="NaN"
               class="block -mt-1 h-4 w-4 rounded-full border border-blue-500 bg-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
@@ -189,7 +189,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             class="text-sm font-light w-10 text-center"
             role="presentation"
           >
-            75
+            60
             %
           </span>
           <span
@@ -208,7 +208,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             class="text-sm font-light w-10 text-center"
             role="presentation"
           >
-            150
+            120
             %
           </span>
         </div>

@@ -1,5 +1,5 @@
 const RECOMMENDED = 100;
-const MULTIPLIER = 1.85;
+const MULTIPLIER = 2;
 
 /**
  * Percentage to zoom level. 100% is the recommended zoom level (0).
@@ -11,5 +11,5 @@ export const percentageToZoom = (percentage: number): number => {
 };
 
 export const zoomToPercentage = (zoom: number): number => {
-  return Math.round((zoom / MULTIPLIER) * 100 + RECOMMENDED);
+  return (zoom / MULTIPLIER) * 100 + RECOMMENDED;
 };

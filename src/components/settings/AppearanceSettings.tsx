@@ -55,9 +55,9 @@ export const AppearanceSettings: FC = () => {
       <Slider
         defaultValue={[zoomLevel]}
         value={[zoomLevel]}
-        max={150}
+        max={120}
         min={0}
-        step={25}
+        step={20}
         name="Zoom"
         onValueChange={(value) =>
           webFrame.setZoomLevel(percentageToZoom(value[0]))
