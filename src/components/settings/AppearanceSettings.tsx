@@ -53,6 +53,7 @@ export const AppearanceSettings: FC = () => {
         onValueChange={(value) => {
           webFrame.setZoomLevel(value[0] / 100 - 1);
         }}
+        unit="%"
       />
       <Checkbox
         name="detailedNotifications"

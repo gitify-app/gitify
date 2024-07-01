@@ -48,7 +48,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         Appearance
       </legend>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-1 text-sm mb-1"
       >
         <div
           class="flex items-start"
@@ -131,14 +131,14 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         style="--radix-slider-thumb-transform: translateX(-50%);"
       >
         <label
-          class="text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
+          class="text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
           for="Zoom"
         >
           Zoom
           :
         </label>
         <span
-          class="relative h-2 bg-clip-padding dark:bg-white mx-[1rem] overflow-visible bg-gray-300 rounded-full grow"
+          class="relative h-2 bg-clip-padding dark:bg-white mx-4 overflow-visible bg-gray-300 rounded-full grow"
           data-orientation="horizontal"
         >
           <span
@@ -164,37 +164,40 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           </span>
         </span>
         <div
-          class="relative mx-3 grow flex flex-row justify-between mt-1"
+          class="relative mx-1 grow flex flex-row justify-between mt-1"
         >
           <span
-            class="text-sm font-light"
+            class="text-sm font-light w-10 text-center"
             role="presentation"
           >
             50
+            %
           </span>
           <span
-            class="text-sm font-light"
+            class="text-sm font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light"
+            class="text-sm font-light w-10 text-center"
             role="presentation"
           >
             100
+            %
           </span>
           <span
-            class="text-sm font-light"
+            class="text-sm font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light"
+            class="text-sm font-light w-10 text-center"
             role="presentation"
           >
             150
+            %
           </span>
         </div>
       </span>
@@ -741,7 +744,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         title="app-version"
       >
         Gitify 
-        dev
+        v0.0.1
       </span>
     </button>
     <div>
