@@ -32,13 +32,13 @@ export const Slider = forwardRef<
     >
       {name && (
         <label
-          className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-1"
+          className="text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
           htmlFor={name}
         >
           {name}:
         </label>
       )}
-      <SliderPrimitive.Track className="relative h-2 bg-clip-padding dark:bg-white mx-[1rem] overflow-visible bg-gray-300 rounded-full grow">
+      <SliderPrimitive.Track className="relative h-2 bg-clip-padding dark:bg-white mx-4 overflow-visible bg-gray-300 rounded-full grow">
         <SliderPrimitive.Range className="absolute h-full bg-blue-500 rounded-full border-x-[6px] border-transparent" />
         <SliderPrimitive.Thumb className="block -mt-1 h-4 w-4 rounded-full border border-blue-500 bg-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50" />
       </SliderPrimitive.Track>
@@ -47,7 +47,7 @@ export const Slider = forwardRef<
           <span
             // biome-ignore lint/suspicious/noArrayIndexKey: This is a static array
             key={`${name}-${i}`}
-            className={cn('text-sm font-light', {
+            className={cn('text-sm font-light w-7 text-center', {
               'text-10 opacity-40':
                 i > min / step && i + 1 < (max - min) / step,
             })}

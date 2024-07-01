@@ -42,6 +42,7 @@ export const AppearanceSettings: FC = () => {
         onChange={(evt) => {
           updateSetting('theme', evt.target.value);
         }}
+        className="mb-1"
       />
       <Slider
         defaultValue={[webFrame.getZoomLevel() * 100 + 100]}
