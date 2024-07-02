@@ -81,7 +81,7 @@ interface SystemSettingsState {
 }
 
 interface FilterSettingsState {
-  showBots: boolean;
+  hideBots: boolean;
   filterReasons: Reason[];
 }
 

@@ -168,27 +168,27 @@ describe('utils/notifications.ts', () => {
       }),
     ];
 
-    it('should hide bot notifications when set to false', async () => {
+    it('should hide bot notifications when set to true', async () => {
       const result = filterNotifications(mockNotifications, {
         ...mockSettings,
-        showBots: false,
+        hideBots: true,
       });
 
       expect(result.length).toBe(1);
       expect(result).toEqual([mockNotifications[0]]);
     });
 
-    it('should show bot notifications when set to true', async () => {
+    it('should show bot notifications when set to false', async () => {
       const result = filterNotifications(mockNotifications, {
         ...mockSettings,
-        showBots: true,
+        hideBots: false,
       });
 
       expect(result.length).toBe(2);
       expect(result).toEqual(mockNotifications);
     });
 
-    it('should show bot notifications when set to true', async () => {
+    it('should filter notifications by reasons when provided', async () => {
       mockNotifications[0].reason = 'subscribed';
       mockNotifications[1].reason = 'manual';
       const result = filterNotifications(mockNotifications, {

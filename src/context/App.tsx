@@ -50,11 +50,15 @@ const defaultAuth: AuthState = {
   user: null,
 };
 
+export const defaultFilters = {
+  hideBots: false,
+  filterReasons: [],
+};
+
 export const defaultSettings: SettingsState = {
   participating: false,
   playSound: true,
   showNotifications: true,
-  showBots: true,
   showNotificationsCountInTray: false,
   openAtStartup: false,
   theme: Theme.SYSTEM,
@@ -65,7 +69,7 @@ export const defaultSettings: SettingsState = {
   showPills: true,
   keyboardShortcut: true,
   groupBy: GroupBy.REPOSITORY,
-  filterReasons: [],
+  ...defaultFilters,
 };
 
 interface AppContextState {
@@ -93,6 +97,7 @@ interface AppContextState {
 
   settings: SettingsState;
   updateSetting: (name: keyof SettingsState, value: SettingsValue) => void;
+  clearFilters: () => void;
 }
 
 export const AppContext = createContext<Partial<AppContextState>>({});
@@ -156,6 +161,12 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     },
     [auth, settings],
   );
+
+  const clearFilters = useCallback(() => {
+    const newSettings = { ...settings, ...defaultFilters };
+    setSettings(newSettings);
+    saveState({ auth, settings: newSettings });
+  }, [auth]);
 
   const isLoggedIn = useMemo(() => {
     return auth.accounts.length > 0;
@@ -289,6 +300,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
         settings,
         updateSetting,
+        clearFilters,
       }}
     >
       {children}

@@ -1,7 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
-import { AppContext, defaultSettings } from '../context/App';
+import { AppContext } from '../context/App';
 import { FiltersRoute } from './Filters';
 
 const mockNavigate = jest.fn();
@@ -12,6 +12,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('routes/Filters.tsx', () => {
   const updateSetting = jest.fn();
+  const clearFilters = jest.fn();
   const fetchNotifications = jest.fn();
 
   afterEach(() => {
@@ -58,7 +59,7 @@ describe('routes/Filters.tsx', () => {
     });
   });
   describe('Users section', () => {
-    it('should not be able to toggle the showBots checkbox when detailedNotifications is disabled', async () => {
+    it('should not be able to toggle the hideBots checkbox when detailedNotifications is disabled', async () => {
       await act(async () => {
         render(
           <AppContext.Provider
@@ -67,7 +68,7 @@ describe('routes/Filters.tsx', () => {
               settings: {
                 ...mockSettings,
                 detailedNotifications: false,
-                showBots: true,
+                hideBots: false,
               },
               updateSetting,
             }}
@@ -81,25 +82,25 @@ describe('routes/Filters.tsx', () => {
 
       expect(
         screen
-          .getByLabelText('Show notifications from Bot accounts')
+          .getByLabelText('Hide notifications from Bot accounts')
           .closest('input'),
       ).toHaveProperty('disabled', true);
 
       // click the checkbox
       fireEvent.click(
-        screen.getByLabelText('Show notifications from Bot accounts'),
+        screen.getByLabelText('Hide notifications from Bot accounts'),
       );
 
       // check if the checkbox is still unchecked
       expect(updateSetting).not.toHaveBeenCalled();
 
       expect(
-        screen.getByLabelText('Show notifications from Bot accounts').parentNode
+        screen.getByLabelText('Hide notifications from Bot accounts').parentNode
           .parentNode,
       ).toMatchSnapshot();
     });
 
-    it('should be able to toggle the showBots checkbox when detailedNotifications is enabled', async () => {
+    it('should be able to toggle the hideBots checkbox when detailedNotifications is enabled', async () => {
       await act(async () => {
         render(
           <AppContext.Provider
@@ -108,7 +109,7 @@ describe('routes/Filters.tsx', () => {
               settings: {
                 ...mockSettings,
                 detailedNotifications: true,
-                showBots: true,
+                hideBots: false,
               },
               updateSetting,
             }}
@@ -122,20 +123,20 @@ describe('routes/Filters.tsx', () => {
 
       expect(
         screen
-          .getByLabelText('Show notifications from Bot accounts')
+          .getByLabelText('Hide notifications from Bot accounts')
           .closest('input'),
       ).toHaveProperty('disabled', false);
 
       // click the checkbox
       fireEvent.click(
-        screen.getByLabelText('Show notifications from Bot accounts'),
+        screen.getByLabelText('Hide notifications from Bot accounts'),
       );
 
       // check if the checkbox is still unchecked
-      expect(updateSetting).toHaveBeenCalledWith('showBots', false);
+      expect(updateSetting).toHaveBeenCalledWith('hideBots', true);
 
       expect(
-        screen.getByLabelText('Show notifications from Bot accounts').parentNode
+        screen.getByLabelText('Hide notifications from Bot accounts').parentNode
           .parentNode,
       ).toMatchSnapshot();
     });
@@ -209,14 +210,14 @@ describe('routes/Filters.tsx', () => {
   });
 
   describe('Footer section', () => {
-    it('should reset filters', async () => {
+    it('should clear filters', async () => {
       await act(async () => {
         render(
           <AppContext.Provider
             value={{
               auth: mockAuth,
               settings: mockSettings,
-              updateSetting,
+              clearFilters,
             }}
           >
             <MemoryRouter>
@@ -226,17 +227,9 @@ describe('routes/Filters.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Reset to default filters'));
+      fireEvent.click(screen.getByTitle('Clear filters'));
 
-      expect(updateSetting).toHaveBeenCalled();
-      expect(updateSetting).toHaveBeenCalledWith(
-        'showBots',
-        defaultSettings.showBots,
-      );
-      expect(updateSetting).toHaveBeenCalledWith(
-        'filterReasons',
-        defaultSettings.filterReasons,
-      );
+      expect(clearFilters).toHaveBeenCalled();
     });
   });
 });

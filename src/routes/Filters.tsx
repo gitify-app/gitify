@@ -2,14 +2,14 @@ import { FilterRemoveIcon } from '@primer/octicons-react';
 import { type FC, useContext } from 'react';
 import { Header } from '../components/Header';
 import { Checkbox } from '../components/fields/Checkbox';
-import { AppContext, defaultSettings } from '../context/App';
+import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import { Size } from '../types';
 import type { Reason } from '../typesGitHub';
 import { FORMATTED_REASONS, formatReason } from '../utils/reason';
 
 export const FiltersRoute: FC = () => {
-  const { settings, updateSetting } = useContext(AppContext);
+  const { settings, clearFilters, updateSetting } = useContext(AppContext);
 
   const updateReasonFilter = (reason: Reason, checked: boolean) => {
     let reasons: Reason[] = settings.filterReasons;
@@ -27,11 +27,6 @@ export const FiltersRoute: FC = () => {
     return settings.filterReasons.includes(reason);
   };
 
-  const resetToDefaultFilters = () => {
-    updateSetting('filterReasons', defaultSettings.filterReasons);
-    updateSetting('showBots', defaultSettings.showBots);
-  };
-
   return (
     <div className="flex h-screen flex-col" data-testid="filters">
       <Header fetchOnBack={true}>Filters</Header>
@@ -41,19 +36,19 @@ export const FiltersRoute: FC = () => {
             Users
           </legend>
           <Checkbox
-            name="showBots"
-            label="Show notifications from Bot accounts"
-            checked={!settings.detailedNotifications || settings.showBots}
+            name="hideBots"
+            label="Hide notifications from Bot accounts"
+            checked={settings.detailedNotifications && settings.hideBots}
             onChange={(evt) =>
               settings.detailedNotifications &&
-              updateSetting('showBots', evt.target.checked)
+              updateSetting('hideBots', evt.target.checked)
             }
             disabled={!settings.detailedNotifications}
             tooltip={
               <div>
                 <div className="pb-3">
-                  Show or hide notifications from Bot accounts, such as
-                  @dependabot, @renovatebot, etc
+                  Hide notifications from GitHub Bot accounts, such as
+                  @dependabot, @renovate, @netlify, etc
                 </div>
                 <div className="text-orange-600">
                   ⚠️ This filter requires the{' '}
@@ -94,14 +89,15 @@ export const FiltersRoute: FC = () => {
           <button
             type="button"
             className={BUTTON_CLASS_NAME}
-            title="Reset to default filters"
-            onClick={resetToDefaultFilters}
+            title="Clear filters"
+            onClick={clearFilters}
           >
             <FilterRemoveIcon
               size={Size.LARGE}
               className="mr-2"
-              aria-label="Reset to default filters"
+              aria-label="Clear filters"
             />
+            Clear filters
           </button>
         </div>
       </div>

@@ -519,7 +519,7 @@ describe('utils/helpers.ts', () => {
     it('non-default bot filters', () => {
       const settings = {
         ...defaultSettings,
-        showBots: false,
+        hideBots: true,
       } as SettingsState;
       expect(getFilterCount(settings)).toBe(1);
     });

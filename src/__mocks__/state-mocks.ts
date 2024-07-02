@@ -75,7 +75,7 @@ export const mockSettings: SettingsState = {
   participating: false,
   playSound: true,
   showNotifications: true,
-  showBots: true,
+  hideBots: false,
   showNotificationsCountInTray: false,
   openAtStartup: false,
   theme: Theme.SYSTEM,

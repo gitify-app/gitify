@@ -57,9 +57,8 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="flex h-5 items-center"
           >
             <input
-              checked=""
               class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="showBots"
+              id="hideBots"
               type="checkbox"
             />
           </div>
@@ -68,13 +67,13 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
-              for="showBots"
+              for="hideBots"
             >
-              Show notifications from Bot accounts
+              Hide notifications from Bot accounts
               <span
-                aria-label="tooltip-showBots"
+                aria-label="tooltip-hideBots"
                 class="relative"
-                id="tooltip-showBots"
+                id="tooltip-hideBots"
               >
                 <svg
                   aria-hidden="true"
@@ -824,11 +823,11 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
     <div>
       <button
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
-        title="Reset to default filters"
+        title="Clear filters"
         type="button"
       >
         <svg
-          aria-label="Reset to default filters"
+          aria-label="Clear filters"
           class="mr-2"
           fill="currentColor"
           focusable="false"
@@ -842,6 +841,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             d="M14.384 4.57a.752.752 0 0 0 1.061 0 .752.752 0 0 0 0-1.061l-.884-.884.883-.884A.75.75 0 0 0 14.384.68l-.884.884-.884-.884a.75.75 0 0 0-1.06 1.061l.883.884-.883.884a.75.75 0 0 0 1.06 1.061l.884-.884.884.884ZM.75 3a.75.75 0 0 0 0 1.5H9A.75.75 0 0 0 9 3H.75ZM3 7.75A.75.75 0 0 1 3.75 7h8.5a.75.75 0 0 1 0 1.5h-8.5A.75.75 0 0 1 3 7.75Zm3 4a.75.75 0 0 1 .75-.75h2.5a.75.75 0 0 1 0 1.5h-2.5a.75.75 0 0 1-.75-.75Z"
           />
         </svg>
+        Clear filters
       </button>
     </div>
   </div>
@@ -940,7 +940,7 @@ exports[`routes/Filters.tsx Reasons section should be able to toggle reason type
 </div>
 `;
 
-exports[`routes/Filters.tsx Users section should be able to toggle the showBots checkbox when detailedNotifications is enabled 1`] = `
+exports[`routes/Filters.tsx Users section should be able to toggle the hideBots checkbox when detailedNotifications is enabled 1`] = `
 <div
   class="flex items-start"
 >
@@ -948,9 +948,8 @@ exports[`routes/Filters.tsx Users section should be able to toggle the showBots 
     class="flex h-5 items-center"
   >
     <input
-      checked=""
       class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-      id="showBots"
+      id="hideBots"
       type="checkbox"
     />
   </div>
@@ -959,13 +958,13 @@ exports[`routes/Filters.tsx Users section should be able to toggle the showBots 
   >
     <label
       class="font-medium text-gray-700 dark:text-gray-200"
-      for="showBots"
+      for="hideBots"
     >
-      Show notifications from Bot accounts
+      Hide notifications from Bot accounts
       <span
-        aria-label="tooltip-showBots"
+        aria-label="tooltip-hideBots"
         class="relative"
-        id="tooltip-showBots"
+        id="tooltip-hideBots"
       >
         <svg
           aria-hidden="true"
@@ -987,7 +986,7 @@ exports[`routes/Filters.tsx Users section should be able to toggle the showBots 
 </div>
 `;
 
-exports[`routes/Filters.tsx Users section should not be able to toggle the showBots checkbox when detailedNotifications is disabled 1`] = `
+exports[`routes/Filters.tsx Users section should not be able to toggle the hideBots checkbox when detailedNotifications is disabled 1`] = `
 <div
   class="flex items-start"
 >
@@ -995,10 +994,9 @@ exports[`routes/Filters.tsx Users section should not be able to toggle the showB
     class="flex h-5 items-center"
   >
     <input
-      checked=""
       class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
       disabled=""
-      id="showBots"
+      id="hideBots"
       type="checkbox"
     />
   </div>
@@ -1007,14 +1005,14 @@ exports[`routes/Filters.tsx Users section should not be able to toggle the showB
   >
     <label
       class="font-medium text-gray-700 dark:text-gray-200"
-      for="showBots"
+      for="hideBots"
       style="text-decoration: line-through;"
     >
-      Show notifications from Bot accounts
+      Hide notifications from Bot accounts
       <span
-        aria-label="tooltip-showBots"
+        aria-label="tooltip-hideBots"
         class="relative"
-        id="tooltip-showBots"
+        id="tooltip-hideBots"
       >
         <svg
           aria-hidden="true"

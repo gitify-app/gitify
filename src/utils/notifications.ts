@@ -181,7 +181,7 @@ export function filterNotifications(
   settings: SettingsState,
 ): Notification[] {
   return notifications.filter((notification) => {
-    if (!settings.showBots && notification.subject?.user?.type === 'Bot') {
+    if (settings.hideBots && notification.subject?.user?.type === 'Bot') {
       return false;
     }
 
