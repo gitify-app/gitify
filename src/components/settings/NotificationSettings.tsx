@@ -22,7 +22,7 @@ export const NotificationSettings: FC = () => {
           { label: 'Date', value: GroupBy.DATE },
         ]}
         onChange={(evt) => {
-          updateSetting('groupBy', evt.target.value);
+          updateSetting('groupBy', evt.target.value as GroupBy);
         }}
       />
       <Checkbox
@@ -46,28 +46,6 @@ export const NotificationSettings: FC = () => {
               official docs
             </button>
             for more details.
-          </div>
-        }
-      />
-      <Checkbox
-        name="showBots"
-        label="Show notifications from Bot accounts"
-        checked={!settings.detailedNotifications || settings.showBots}
-        onChange={(evt) =>
-          settings.detailedNotifications &&
-          updateSetting('showBots', evt.target.checked)
-        }
-        disabled={!settings.detailedNotifications}
-        tooltip={
-          <div>
-            <div className="pb-3">
-              Show or hide notifications from Bot accounts, such as @dependabot,
-              @renovatebot, etc
-            </div>
-            <div className="text-orange-600">
-              ⚠️ This setting requires <strong>Detailed Notifications</strong> to
-              be enabled.
-            </div>
           </div>
         }
       />

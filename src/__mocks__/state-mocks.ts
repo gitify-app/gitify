@@ -75,7 +75,7 @@ export const mockSettings: SettingsState = {
   participating: false,
   playSound: true,
   showNotifications: true,
-  showBots: true,
+  hideBots: false,
   showNotificationsCountInTray: false,
   openAtStartup: false,
   theme: Theme.SYSTEM,
@@ -86,6 +86,7 @@ export const mockSettings: SettingsState = {
   showPills: true,
   keyboardShortcut: true,
   groupBy: GroupBy.REPOSITORY,
+  filterReasons: [],
 };
 
 export const mockState: GitifyState = {
