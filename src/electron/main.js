@@ -35,16 +35,12 @@ const browserWindowOpts = {
 
 const contextMenu = Menu.buildFromTemplate([
   {
-    label: 'View',
-    submenu: [
-      { role: 'reload' },
-      { role: 'toggleDevTools' },
-      { type: 'separator' },
-      { role: 'resetZoom' },
-      { role: 'zoomIn' },
-      { role: 'zoomOut' },
-    ],
+    role: 'reload',
   },
+  {
+    role: 'toggleDevTools',
+  },
+  { type: 'separator' },
   {
     label: 'Quit',
     click: () => {
