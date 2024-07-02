@@ -1,24 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`routes/Settings.tsx Footer section app version should show development app version 1`] = `
-<span
-  title="app-version"
->
-  Gitify 
-  dev
-</span>
-`;
-
-exports[`routes/Settings.tsx Footer section app version should show production app version 1`] = `
-<span
-  title="app-version"
->
-  Gitify 
-  v0.0.1
-</span>
-`;
-
-exports[`routes/Settings.tsx General should render itself & its children 1`] = `
+exports[`routes/Settings.tsx should render itself & its children 1`] = `
 <div
   class="flex h-screen flex-col"
   data-testid="settings"
