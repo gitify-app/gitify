@@ -5,22 +5,684 @@ exports[`components/fields/Slider.tsx should render 1`] = `
   "asFragment": [Function],
   "baseElement": <body>
     <div>
+      <div
+        class="flex flex-col"
+      >
+        <span
+          aria-disabled="false"
+          class="grid touch-none select-none items-center mb-2 mx-4"
+          data-orientation="horizontal"
+          dir="ltr"
+          style="--radix-slider-thumb-transform: translateX(-50%);"
+        >
+          <div
+            class="flex h-full relative"
+          >
+            <span
+              class="relative h-2 bg-clip-padding dark:bg-white overflow-visible bg-gray-300 rounded-full w-full"
+              data-orientation="horizontal"
+            >
+              <span
+                class="absolute h-full bg-blue-500 rounded-full border-x-[6px] border-transparent"
+                data-orientation="horizontal"
+                style="left: 0%; right: 50%;"
+              />
+            </span>
+            <span
+              style="transform: var(--radix-slider-thumb-transform); position: absolute; left: calc(50% + 0px);"
+            >
+              <span
+                aria-orientation="horizontal"
+                aria-valuemax="100"
+                aria-valuemin="0"
+                aria-valuenow="50"
+                class="block -mt-1 h-4 w-4 rounded-full border border-blue-500 bg-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                data-orientation="horizontal"
+                data-radix-collection-item=""
+                role="slider"
+                style=""
+                tabindex="0"
+              />
+            </span>
+          </div>
+          <div
+            class="relative -mx-3 grow flex flex-row justify-between mt-1"
+          >
+            <span
+              class="text-xs font-light w-10 text-center"
+              role="presentation"
+            >
+              0
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center"
+              role="presentation"
+            >
+              50
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center"
+              role="presentation"
+            >
+              100
+            </span>
+          </div>
+        </span>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="flex flex-col"
+    >
       <span
         aria-disabled="false"
-        class="relative grid w-full touch-none select-none items-center mb-3"
+        class="grid touch-none select-none items-center mb-2 mx-4"
         data-orientation="horizontal"
         dir="ltr"
         style="--radix-slider-thumb-transform: translateX(-50%);"
       >
-        <span
-          class="relative h-2 bg-clip-padding dark:bg-white mx-4 overflow-visible bg-gray-300 rounded-full grow"
-          data-orientation="horizontal"
+        <div
+          class="flex h-full relative"
         >
           <span
-            class="absolute h-full bg-blue-500 rounded-full border-x-[6px] border-transparent"
+            class="relative h-2 bg-clip-padding dark:bg-white overflow-visible bg-gray-300 rounded-full w-full"
             data-orientation="horizontal"
-            style="left: 0%; right: 50%;"
-          />
+          >
+            <span
+              class="absolute h-full bg-blue-500 rounded-full border-x-[6px] border-transparent"
+              data-orientation="horizontal"
+              style="left: 0%; right: 50%;"
+            />
+          </span>
           <span
             style="transform: var(--radix-slider-thumb-transform); position: absolute; left: calc(50% + 0px);"
           >
@@ -37,612 +699,612 @@ exports[`components/fields/Slider.tsx should render 1`] = `
               tabindex="0"
             />
           </span>
-        </span>
+        </div>
         <div
-          class="relative mx-1 grow flex flex-row justify-between mt-1"
+          class="relative -mx-3 grow flex flex-row justify-between mt-1"
         >
           <span
-            class="text-sm font-light w-10 text-center"
+            class="text-xs font-light w-10 text-center"
             role="presentation"
           >
             0
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center"
+            class="text-xs font-light w-10 text-center"
             role="presentation"
           >
             50
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center"
+            class="text-xs font-light w-10 text-center"
             role="presentation"
           >
             100
@@ -650,652 +1312,6 @@ exports[`components/fields/Slider.tsx should render 1`] = `
         </div>
       </span>
     </div>
-  </body>,
-  "container": <div>
-    <span
-      aria-disabled="false"
-      class="relative grid w-full touch-none select-none items-center mb-3"
-      data-orientation="horizontal"
-      dir="ltr"
-      style="--radix-slider-thumb-transform: translateX(-50%);"
-    >
-      <span
-        class="relative h-2 bg-clip-padding dark:bg-white mx-4 overflow-visible bg-gray-300 rounded-full grow"
-        data-orientation="horizontal"
-      >
-        <span
-          class="absolute h-full bg-blue-500 rounded-full border-x-[6px] border-transparent"
-          data-orientation="horizontal"
-          style="left: 0%; right: 50%;"
-        />
-        <span
-          style="transform: var(--radix-slider-thumb-transform); position: absolute; left: calc(50% + 0px);"
-        >
-          <span
-            aria-orientation="horizontal"
-            aria-valuemax="100"
-            aria-valuemin="0"
-            aria-valuenow="50"
-            class="block -mt-1 h-4 w-4 rounded-full border border-blue-500 bg-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-            data-orientation="horizontal"
-            data-radix-collection-item=""
-            role="slider"
-            style=""
-            tabindex="0"
-          />
-        </span>
-      </span>
-      <div
-        class="relative mx-1 grow flex flex-row justify-between mt-1"
-      >
-        <span
-          class="text-sm font-light w-10 text-center"
-          role="presentation"
-        >
-          0
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center"
-          role="presentation"
-        >
-          50
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center"
-          role="presentation"
-        >
-          100
-        </span>
-      </div>
-    </span>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
@@ -1356,12 +1372,8 @@ exports[`components/fields/Slider.tsx should render with a name 1`] = `
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <span
-        aria-disabled="false"
-        class="relative grid w-full touch-none select-none items-center mb-3"
-        data-orientation="horizontal"
-        dir="ltr"
-        style="--radix-slider-thumb-transform: translateX(-50%);"
+      <div
+        class="flex flex-col"
       >
         <label
           class="text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
@@ -1371,14 +1383,687 @@ exports[`components/fields/Slider.tsx should render with a name 1`] = `
           :
         </label>
         <span
-          class="relative h-2 bg-clip-padding dark:bg-white mx-4 overflow-visible bg-gray-300 rounded-full grow"
+          aria-disabled="false"
+          class="grid touch-none select-none items-center mb-2 mx-4"
           data-orientation="horizontal"
+          dir="ltr"
+          style="--radix-slider-thumb-transform: translateX(-50%);"
+        >
+          <div
+            class="flex h-full relative"
+          >
+            <span
+              class="relative h-2 bg-clip-padding dark:bg-white overflow-visible bg-gray-300 rounded-full w-full"
+              data-orientation="horizontal"
+            >
+              <span
+                class="absolute h-full bg-blue-500 rounded-full border-x-[6px] border-transparent"
+                data-orientation="horizontal"
+                style="left: 0%; right: 50%;"
+              />
+            </span>
+            <span
+              style="transform: var(--radix-slider-thumb-transform); position: absolute; left: calc(50% + 0px);"
+            >
+              <span
+                aria-orientation="horizontal"
+                aria-valuemax="100"
+                aria-valuemin="0"
+                aria-valuenow="50"
+                class="block -mt-1 h-4 w-4 rounded-full border border-blue-500 bg-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
+                data-orientation="horizontal"
+                data-radix-collection-item=""
+                role="slider"
+                style=""
+                tabindex="0"
+              />
+            </span>
+          </div>
+          <div
+            class="relative -mx-3 grow flex flex-row justify-between mt-1"
+          >
+            <span
+              class="text-xs font-light w-10 text-center"
+              role="presentation"
+            >
+              0
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center"
+              role="presentation"
+            >
+              50
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center opacity-40"
+              role="presentation"
+            >
+              |
+            </span>
+            <span
+              class="text-xs font-light w-10 text-center"
+              role="presentation"
+            >
+              100
+            </span>
+          </div>
+        </span>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="flex flex-col"
+    >
+      <label
+        class="text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
+        for="slider"
+      >
+        slider
+        :
+      </label>
+      <span
+        aria-disabled="false"
+        class="grid touch-none select-none items-center mb-2 mx-4"
+        data-orientation="horizontal"
+        dir="ltr"
+        style="--radix-slider-thumb-transform: translateX(-50%);"
+      >
+        <div
+          class="flex h-full relative"
         >
           <span
-            class="absolute h-full bg-blue-500 rounded-full border-x-[6px] border-transparent"
+            class="relative h-2 bg-clip-padding dark:bg-white overflow-visible bg-gray-300 rounded-full w-full"
             data-orientation="horizontal"
-            style="left: 0%; right: 50%;"
-          />
+          >
+            <span
+              class="absolute h-full bg-blue-500 rounded-full border-x-[6px] border-transparent"
+              data-orientation="horizontal"
+              style="left: 0%; right: 50%;"
+            />
+          </span>
           <span
             style="transform: var(--radix-slider-thumb-transform); position: absolute; left: calc(50% + 0px);"
           >
@@ -1395,612 +2080,612 @@ exports[`components/fields/Slider.tsx should render with a name 1`] = `
               tabindex="0"
             />
           </span>
-        </span>
+        </div>
         <div
-          class="relative mx-1 grow flex flex-row justify-between mt-1"
+          class="relative -mx-3 grow flex flex-row justify-between mt-1"
         >
           <span
-            class="text-sm font-light w-10 text-center"
+            class="text-xs font-light w-10 text-center"
             role="presentation"
           >
             0
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center"
+            class="text-xs font-light w-10 text-center"
             role="presentation"
           >
             50
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center opacity-40"
+            class="text-xs font-light w-10 text-center opacity-40"
             role="presentation"
           >
             |
           </span>
           <span
-            class="text-sm font-light w-10 text-center"
+            class="text-xs font-light w-10 text-center"
             role="presentation"
           >
             100
@@ -2008,659 +2693,6 @@ exports[`components/fields/Slider.tsx should render with a name 1`] = `
         </div>
       </span>
     </div>
-  </body>,
-  "container": <div>
-    <span
-      aria-disabled="false"
-      class="relative grid w-full touch-none select-none items-center mb-3"
-      data-orientation="horizontal"
-      dir="ltr"
-      style="--radix-slider-thumb-transform: translateX(-50%);"
-    >
-      <label
-        class="text-sm font-medium text-gray-700 dark:text-gray-200 mb-2"
-        for="slider"
-      >
-        slider
-        :
-      </label>
-      <span
-        class="relative h-2 bg-clip-padding dark:bg-white mx-4 overflow-visible bg-gray-300 rounded-full grow"
-        data-orientation="horizontal"
-      >
-        <span
-          class="absolute h-full bg-blue-500 rounded-full border-x-[6px] border-transparent"
-          data-orientation="horizontal"
-          style="left: 0%; right: 50%;"
-        />
-        <span
-          style="transform: var(--radix-slider-thumb-transform); position: absolute; left: calc(50% + 0px);"
-        >
-          <span
-            aria-orientation="horizontal"
-            aria-valuemax="100"
-            aria-valuemin="0"
-            aria-valuenow="50"
-            class="block -mt-1 h-4 w-4 rounded-full border border-blue-500 bg-white shadow transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50"
-            data-orientation="horizontal"
-            data-radix-collection-item=""
-            role="slider"
-            style=""
-            tabindex="0"
-          />
-        </span>
-      </span>
-      <div
-        class="relative mx-1 grow flex flex-row justify-between mt-1"
-      >
-        <span
-          class="text-sm font-light w-10 text-center"
-          role="presentation"
-        >
-          0
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center"
-          role="presentation"
-        >
-          50
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center opacity-40"
-          role="presentation"
-        >
-          |
-        </span>
-        <span
-          class="text-sm font-light w-10 text-center"
-          role="presentation"
-        >
-          100
-        </span>
-      </div>
-    </span>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
