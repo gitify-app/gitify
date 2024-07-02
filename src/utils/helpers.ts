@@ -175,7 +175,10 @@ export function getFilterCount(settings: SettingsState): number {
     count += settings.filterReasons.length;
   }
 
-  if (settings.hideBots !== defaultSettings.hideBots) {
+  if (
+    settings.detailedNotifications &&
+    settings.hideBots !== defaultSettings.hideBots
+  ) {
     count += 1;
   }
 
