@@ -17,12 +17,11 @@ export const Slider = forwardRef<
   ComponentPropsWithoutRef<ForwardRefExoticComponent<ISlider>>
 >(
   (
-    { className, min, max, step, name, unit = '', visualSteps = 0, ...props },
+    { className, min, max, step, name, unit = '', visualSteps = 5, ...props },
     ref,
   ) => {
-    const steps = visualSteps || (max - min) / step;
     const stepAmount = visualSteps ? (max - min) / visualSteps : step;
-    const length = steps % 2 === 0 ? steps + 1 : steps;
+    const length = visualSteps % 2 === 0 ? visualSteps + 1 : visualSteps;
 
     return (
       <div className={cn('flex flex-col', className)}>

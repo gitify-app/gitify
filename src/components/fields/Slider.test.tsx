@@ -20,7 +20,7 @@ describe('components/fields/Slider.tsx', () => {
   });
 
   it('should render with a name', () => {
-    const tree = render(<Slider {...props} name="slider" />);
+    const tree = render(<Slider visualSteps={6} {...props} name="slider" />);
     expect(tree).toMatchSnapshot();
   });
 
