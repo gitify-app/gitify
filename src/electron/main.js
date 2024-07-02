@@ -35,6 +35,17 @@ const browserWindowOpts = {
 
 const contextMenu = Menu.buildFromTemplate([
   {
+    label: 'View',
+    submenu: [
+      { role: 'reload' },
+      { role: 'toggleDevTools' },
+      { type: 'separator' },
+      { role: 'resetZoom' },
+      { role: 'zoomIn' },
+      { role: 'zoomOut' },
+    ],
+  },
+  {
     label: 'Quit',
     click: () => {
       app.quit();
@@ -77,13 +88,17 @@ app.whenReady().then(async () => {
 
     // DevTools configuration
     mb.window.webContents.on('devtools-opened', () => {
-      if (process.env.NODE_ENV === 'development')
-        mb.window.setAlwaysOnTop(true);
+      mb.window.setSize(800, 600);
+      mb.window.center();
+      mb.window.resizable = true;
+      mb.window.setAlwaysOnTop(true);
     });
 
-    mb.window.on('ready-to-show', () => {
-      if (process.env.NODE_ENV === 'development')
-        mb.window.webContents.openDevTools();
+    mb.window.webContents.on('devtools-closed', () => {
+      const trayBounds = mb.tray.getBounds();
+      mb.window.setSize(browserWindowOpts.width, browserWindowOpts.height);
+      mb.positioner.move('trayCenter', trayBounds);
+      mb.window.resizable = false;
     });
   });
 
