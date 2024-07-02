@@ -1,7 +1,7 @@
 import type { FormattedReason } from '../types';
 import type { Reason } from '../typesGitHub';
 
-const FORMATTED_REASONS: Record<Reason, FormattedReason> = {
+export const FORMATTED_REASONS: Record<Reason, FormattedReason> = {
   approval_requested: {
     title: 'Approval Requested',
     description: 'You were requested to review and approve a deployment.',
