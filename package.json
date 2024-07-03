@@ -114,7 +114,7 @@
     "react-final-form": "6.5.9",
     "react-router-dom": "6.24.0",
     "ts-loader": "9.5.1",
-    "typescript": "5.5.2"
+    "typescript": "5.5.3"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
