@@ -42,7 +42,11 @@ describe('components/Sidebar.tsx', () => {
   it('should render itself & its children (logged out)', () => {
     const tree = render(
       <AppContext.Provider
-        value={{ isLoggedIn: false, notifications: mockAccountNotifications }}
+        value={{
+          isLoggedIn: false,
+          notifications: mockAccountNotifications,
+          settings: mockSettings,
+        }}
       >
         <MemoryRouter>
           <Sidebar />
@@ -55,7 +59,9 @@ describe('components/Sidebar.tsx', () => {
 
   it('should open the gitify repository', () => {
     render(
-      <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
+      <AppContext.Provider
+        value={{ isLoggedIn: false, notifications: [], settings: mockSettings }}
+      >
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
@@ -74,7 +80,13 @@ describe('components/Sidebar.tsx', () => {
     describe('notifications icon', () => {
       it('when there are 0 notifications', () => {
         render(
-          <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
+          <AppContext.Provider
+            value={{
+              isLoggedIn: true,
+              notifications: [],
+              settings: mockSettings,
+            }}
+          >
             <MemoryRouter>
               <Sidebar />
             </MemoryRouter>
@@ -101,6 +113,7 @@ describe('components/Sidebar.tsx', () => {
             value={{
               isLoggedIn: true,
               notifications: mockAccountNotifications,
+              settings: mockSettings,
             }}
           >
             <MemoryRouter>
@@ -132,6 +145,7 @@ describe('components/Sidebar.tsx', () => {
         value={{
           isLoggedIn: true,
           notifications: mockAccountNotifications,
+          settings: mockSettings,
         }}
       >
         <MemoryRouter>
@@ -154,6 +168,7 @@ describe('components/Sidebar.tsx', () => {
         value={{
           isLoggedIn: true,
           notifications: mockAccountNotifications,
+          settings: mockSettings,
         }}
       >
         <MemoryRouter>
@@ -177,6 +192,7 @@ describe('components/Sidebar.tsx', () => {
           value={{
             isLoggedIn: true,
             notifications: [],
+            settings: mockSettings,
             fetchNotifications,
             status: 'success',
           }}
@@ -198,6 +214,7 @@ describe('components/Sidebar.tsx', () => {
           value={{
             isLoggedIn: true,
             notifications: [],
+            settings: mockSettings,
             fetchNotifications,
             status: 'loading',
           }}
@@ -214,10 +231,54 @@ describe('components/Sidebar.tsx', () => {
     });
   });
 
+  describe('Filters', () => {
+    it('go to the filters route', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      fireEvent.click(screen.getByTitle('Filters'));
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/filters');
+    });
+
+    it('go to the home if filters path already shown', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter initialEntries={['/filters']}>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+      fireEvent.click(screen.getByTitle('Filters'));
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
+    });
+  });
+
   describe('Settings', () => {
     it('go to the settings route', () => {
       render(
-        <AppContext.Provider value={{ isLoggedIn: true, notifications: [] }}>
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            settings: mockSettings,
+          }}
+        >
           <MemoryRouter>
             <Sidebar />
           </MemoryRouter>
@@ -226,13 +287,18 @@ describe('components/Sidebar.tsx', () => {
 
       fireEvent.click(screen.getByTitle('Settings'));
 
-      expect(mockNavigate).toHaveBeenCalledWith('/settings');
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/settings');
     });
 
     it('go to the home if settings path already shown', () => {
       render(
         <AppContext.Provider
-          value={{ isLoggedIn: true, notifications: [], fetchNotifications }}
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            settings: mockSettings,
+            fetchNotifications,
+          }}
         >
           <MemoryRouter initialEntries={['/settings']}>
             <Sidebar />
@@ -243,15 +309,86 @@ describe('components/Sidebar.tsx', () => {
       fireEvent.click(screen.getByTitle('Settings'));
 
       expect(fetchNotifications).toHaveBeenCalledTimes(1);
-      expect(mockNavigate).toHaveBeenCalledWith('/', { replace: true });
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
     });
+  });
+
+  it('opens github in the notifications page', () => {
+    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
+    render(
+      <AppContext.Provider
+        value={{
+          isLoggedIn: true,
+          notifications: mockAccountNotifications,
+          settings: mockSettings,
+        }}
+      >
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+    fireEvent.click(screen.getByLabelText('4 Unread Notifications'));
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
+      'https://github.com/notifications',
+    );
+  });
+
+  it('opens my github issues page', () => {
+    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
+    render(
+      <AppContext.Provider
+        value={{
+          isLoggedIn: true,
+          notifications: mockAccountNotifications,
+          settings: mockSettings,
+        }}
+      >
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+    fireEvent.click(screen.getByLabelText('My Issues'));
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
+      'https://github.com/issues',
+    );
+  });
+
+  it('opens my github pull requests page', () => {
+    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
+    render(
+      <AppContext.Provider
+        value={{
+          isLoggedIn: true,
+          notifications: mockAccountNotifications,
+          settings: mockSettings,
+        }}
+      >
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+    fireEvent.click(screen.getByLabelText('My Pull Requests'));
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
+      'https://github.com/pulls',
+    );
   });
 
   it('should quit the app', () => {
     const quitAppMock = jest.spyOn(comms, 'quitApp');
 
     render(
-      <AppContext.Provider value={{ isLoggedIn: false, notifications: [] }}>
+      <AppContext.Provider
+        value={{ isLoggedIn: false, notifications: [], settings: mockSettings }}
+      >
         <MemoryRouter>
           <Sidebar />
         </MemoryRouter>
@@ -261,5 +398,69 @@ describe('components/Sidebar.tsx', () => {
     fireEvent.click(screen.getByTitle('Quit Gitify'));
 
     expect(quitAppMock).toHaveBeenCalledTimes(1);
+  });
+
+  it('should open the gitify repository', () => {
+    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+
+    render(
+      <AppContext.Provider
+        value={{ isLoggedIn: false, notifications: [], settings: mockSettings }}
+      >
+        <MemoryRouter>
+          <Sidebar />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+    fireEvent.click(screen.getByTestId('gitify-logo'));
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
+      'https://github.com/gitify-app/gitify',
+    );
+  });
+
+  describe('should render the notifications icon', () => {
+    it('when there are 0 notifications', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+
+      const notificationsIcon = screen.getByTitle('0 Unread Notifications');
+      expect(notificationsIcon.className).toContain('text-white');
+      expect(notificationsIcon.childNodes.length).toBe(1);
+      expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
+    });
+
+    it('when there are more than 0 notifications', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: mockAccountNotifications,
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+
+      const notificationsIcon = screen.getByTitle('4 Unread Notifications');
+      expect(notificationsIcon.className).toContain(IconColor.GREEN);
+      expect(notificationsIcon.childNodes.length).toBe(2);
+      expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
+      expect(notificationsIcon.childNodes[1].nodeValue).toBe('4');
+    });
   });
 });

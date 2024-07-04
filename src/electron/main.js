@@ -35,6 +35,13 @@ const browserWindowOpts = {
 
 const contextMenu = Menu.buildFromTemplate([
   {
+    role: 'reload',
+  },
+  {
+    role: 'toggleDevTools',
+  },
+  { type: 'separator' },
+  {
     label: 'Quit',
     click: () => {
       app.quit();
@@ -80,6 +87,7 @@ app.whenReady().then(async () => {
       mb.window.setSize(800, 600);
       mb.window.center();
       mb.window.resizable = true;
+      mb.window.setAlwaysOnTop(true);
     });
 
     mb.window.webContents.on('devtools-closed', () => {

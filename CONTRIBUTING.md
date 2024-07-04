@@ -30,6 +30,8 @@ To run the **electron app**:
 pnpm start
 ```
 
+To reload the app with the changes that `pnpm watch` has detected, you can use the `CmdOrCtrl+R` shortcut.
+
 ### Tests
 
 There are 2 checks:

@@ -39,7 +39,7 @@ export const AppearanceSettings: FC = () => {
           { label: 'Dark', value: Theme.DARK },
         ]}
         onChange={(evt) => {
-          updateSetting('theme', evt.target.value);
+          updateSetting('theme', evt.target.value as Theme);
         }}
       />
       <Checkbox

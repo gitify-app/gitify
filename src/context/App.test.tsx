@@ -370,7 +370,7 @@ describe('context/App.tsx', () => {
           participating: true,
           playSound: true,
           showNotifications: true,
-          showBots: true,
+          hideBots: false,
           showNotificationsCountInTray: false,
           openAtStartup: false,
           theme: 'SYSTEM',
@@ -381,6 +381,7 @@ describe('context/App.tsx', () => {
           showPills: true,
           keyboardShortcut: true,
           groupBy: 'REPOSITORY',
+          filterReasons: [],
         } as SettingsState,
       });
     });
@@ -423,7 +424,7 @@ describe('context/App.tsx', () => {
           participating: false,
           playSound: true,
           showNotifications: true,
-          showBots: true,
+          hideBots: false,
           showNotificationsCountInTray: false,
           openAtStartup: true,
           theme: 'SYSTEM',
@@ -434,7 +435,44 @@ describe('context/App.tsx', () => {
           showPills: true,
           keyboardShortcut: true,
           groupBy: 'REPOSITORY',
+          filterReasons: [],
         } as SettingsState,
+      });
+    });
+
+    it('should clear filters back to default', async () => {
+      const saveStateMock = jest
+        .spyOn(storage, 'saveState')
+        .mockImplementation(jest.fn());
+
+      const TestComponent = () => {
+        const { clearFilters } = useContext(AppContext);
+
+        return (
+          <button type="button" onClick={() => clearFilters()}>
+            Test Case
+          </button>
+        );
+      };
+
+      const { getByText } = customRender(<TestComponent />);
+
+      act(() => {
+        fireEvent.click(getByText('Test Case'));
+      });
+
+      expect(saveStateMock).toHaveBeenCalledWith({
+        auth: {
+          accounts: [],
+          enterpriseAccounts: [],
+          token: null,
+          user: null,
+        } as AuthState,
+        settings: {
+          ...mockSettings,
+          hideBots: defaultSettings.hideBots,
+          filterReasons: defaultSettings.filterReasons,
+        },
       });
     });
 
