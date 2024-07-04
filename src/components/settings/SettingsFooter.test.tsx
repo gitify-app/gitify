@@ -106,7 +106,9 @@ describe('routes/components/SettingsFooter.tsx', () => {
     );
   });
 
-  it('should reset default settings', async () => {
+  it('should reset default settings when `OK`', async () => {
+    window.confirm = jest.fn(() => true); // always click 'OK'
+
     await act(async () => {
       render(
         <AppContext.Provider
@@ -125,6 +127,29 @@ describe('routes/components/SettingsFooter.tsx', () => {
 
     fireEvent.click(screen.getByTitle('Reset default settings'));
     expect(resetSettings).toHaveBeenCalled();
+  });
+
+  it('should skip reset default settings when `cancelled`', async () => {
+    window.confirm = jest.fn(() => false); // always click 'cancel'
+
+    await act(async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            auth: mockAuth,
+            settings: mockSettings,
+            resetSettings,
+          }}
+        >
+          <MemoryRouter>
+            <SettingsFooter />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+    });
+
+    fireEvent.click(screen.getByTitle('Reset default settings'));
+    expect(resetSettings).not.toHaveBeenCalled();
   });
 
   it('should open account management', async () => {

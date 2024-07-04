@@ -39,7 +39,8 @@ export const SettingsFooter: FC = () => {
           className={BUTTON_CLASS_NAME}
           title="Reset default settings"
           onClick={() => {
-            resetSettings();
+            confirm('Are you sure you want to reset all settings?') &&
+              resetSettings();
           }}
         >
           <UndoIcon size={Size.LARGE} aria-label="Reset default settings" />
