@@ -1,3 +1,4 @@
+import { BellIcon } from '@primer/octicons-react';
 import { type FC, type MouseEvent, useContext } from 'react';
 import { AppContext } from '../../context/App';
 import { GroupBy } from '../../types';
@@ -11,6 +12,7 @@ export const NotificationSettings: FC = () => {
   return (
     <fieldset className="mb-3">
       <legend id="notifications" className="mb-1 mt-2 font-semibold">
+        <BellIcon className="mr-2" />
         Notifications
       </legend>
       <RadioGroup

@@ -3,6 +3,7 @@ import {
   CommentIcon,
   IssueClosedIcon,
   MilestoneIcon,
+  PaintbrushIcon,
   TagIcon,
 } from '@primer/octicons-react';
 import { ipcRenderer } from 'electron';
@@ -27,6 +28,7 @@ export const AppearanceSettings: FC = () => {
   return (
     <fieldset className="mb-3">
       <legend id="appearance" className="mb-1 mt-2 font-semibold">
+        <PaintbrushIcon className="mr-2" />
         Appearance
       </legend>
       <RadioGroup
