@@ -37,7 +37,7 @@ export const SettingsFooter: FC = () => {
           className={BUTTON_CLASS_NAME}
           title="Accounts"
           onClick={() => {
-            navigate('/accounts');
+            navigate('/settings/accounts');
           }}
         >
           <PersonIcon size={Size.LARGE} aria-label="Accounts" />

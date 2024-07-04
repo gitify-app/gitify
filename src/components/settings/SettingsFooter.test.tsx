@@ -121,7 +121,7 @@ describe('routes/components/SettingsFooter.tsx', () => {
     });
 
     fireEvent.click(screen.getByTitle('Accounts'));
-    expect(mockNavigate).toHaveBeenCalledWith('/accounts');
+    expect(mockNavigate).toHaveBeenCalledWith('/settings/accounts');
   });
 
   it('should quit the app', async () => {

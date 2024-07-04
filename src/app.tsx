@@ -61,7 +61,7 @@ export const App = () => {
               }
             />
             <Route
-              path="/accounts"
+              path="/settings/accounts"
               element={
                 <RequireAuth>
                   <AccountsRoute />

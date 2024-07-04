@@ -110,6 +110,7 @@ export const Sidebar: FC = () => {
               icon={FilterIcon}
               size={Size.MEDIUM}
               metric={filterCount}
+              route={'/filters'}
               onClick={() => toggleFilters()}
             />
 
@@ -117,6 +118,7 @@ export const Sidebar: FC = () => {
               title="Settings"
               icon={GearIcon}
               size={Size.MEDIUM}
+              route={'/settings'}
               onClick={() => toggleSettings()}
             />
           </>

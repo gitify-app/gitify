@@ -1,5 +1,6 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
 import { render } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
 import { Size } from '../../types';
 import { type ISidebarButton, SidebarButton } from './SidebarButton';
 
@@ -10,7 +11,11 @@ describe('components/buttons/SidebarButton.tsx', () => {
       metric: 1,
       icon: MarkGithubIcon,
     };
-    const tree = render(<SidebarButton {...props} />);
+    const tree = render(
+      <MemoryRouter>
+        <SidebarButton {...props} />
+      </MemoryRouter>,
+    );
     expect(tree).toMatchSnapshot();
   });
 
@@ -20,7 +25,11 @@ describe('components/buttons/SidebarButton.tsx', () => {
       metric: 0,
       icon: MarkGithubIcon,
     };
-    const tree = render(<SidebarButton {...props} />);
+    const tree = render(
+      <MemoryRouter>
+        <SidebarButton {...props} />
+      </MemoryRouter>,
+    );
     expect(tree).toMatchSnapshot();
   });
 
@@ -31,7 +40,11 @@ describe('components/buttons/SidebarButton.tsx', () => {
       icon: MarkGithubIcon,
       size: Size.MEDIUM,
     };
-    const tree = render(<SidebarButton {...props} />);
+    const tree = render(
+      <MemoryRouter>
+        <SidebarButton {...props} />
+      </MemoryRouter>,
+    );
     expect(tree).toMatchSnapshot();
   });
 });
