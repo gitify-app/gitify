@@ -5,16 +5,21 @@ import {
   MilestoneIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import { ipcRenderer } from 'electron';
-import { type FC, useContext, useEffect } from 'react';
+import { ipcRenderer, webFrame } from 'electron';
+import { type FC, useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { setTheme } from '../../utils/theme';
+import { percentageToZoom, zoomToPercentage } from '../../utils/zoom';
+import { Button } from '../buttons/Button';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
 
 export const AppearanceSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
+  const [zoomLevel, setZoomLevel] = useState(
+    zoomToPercentage(webFrame.getZoomLevel()),
+  );
 
   useEffect(() => {
     ipcRenderer.on('gitify:update-theme', (_, updatedTheme: Theme) => {
@@ -23,6 +28,10 @@ export const AppearanceSettings: FC = () => {
       }
     });
   }, [settings.theme]);
+
+  window.addEventListener('resize', () => {
+    setZoomLevel(zoomToPercentage(webFrame.getZoomLevel()));
+  });
 
   return (
     <fieldset className="mb-3">
@@ -43,6 +52,48 @@ export const AppearanceSettings: FC = () => {
         }}
         className="mb-0"
       />
+      <div className="flex">
+        <label
+          htmlFor="Zoom"
+          className="mr-3 content-center font-medium text-sm text-gray-700 dark:text-gray-200"
+        >
+          Zoom:
+        </label>
+        <Button
+          label="Zoom Out"
+          onClick={() =>
+            zoomLevel > 0 &&
+            webFrame.setZoomLevel(percentageToZoom(zoomLevel - 10))
+          }
+          className="rounded-r-none"
+          size="sm"
+        >
+          -
+        </Button>
+        <span className="flex w-16 items-center justify-center rounded-none border border-gray-300 bg-transparent text-sm text-gray-700 dark:text-gray-200">
+          {zoomLevel.toFixed(0)}%
+        </span>
+        <Button
+          label="Zoom In"
+          onClick={() =>
+            zoomLevel < 120 &&
+            webFrame.setZoomLevel(percentageToZoom(zoomLevel + 10))
+          }
+          className="rounded-none"
+          size="sm"
+        >
+          +
+        </Button>
+        <Button
+          label="Reset"
+          onClick={() => webFrame.setZoomLevel(0)}
+          variant="destructive"
+          className="rounded-l-none"
+          size="sm"
+        >
+          X
+        </Button>
+      </div>
       <Checkbox
         name="detailedNotifications"
         label="Detailed notifications"

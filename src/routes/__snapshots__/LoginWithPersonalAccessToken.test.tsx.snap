@@ -185,6 +185,41 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
               Login
             </button>
           </div>
+          <div
+            class="flex flex-col"
+          >
+            <button
+              aria-label="Test Button"
+              class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
+              disabled=""
+            >
+              Test
+            </button>
+            <button
+              aria-label="Test Button"
+              class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-red-600 text-white hover:opacity-90 min-w-20 h-10 px-4 py-1"
+            >
+              Test
+            </button>
+            <button
+              aria-label="Test Button"
+              class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border-zinc-300 hover:text-inherit dark:hover:text-white border bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-600 min-w-20 h-10 px-4 py-1"
+            >
+              Test
+            </button>
+            <button
+              aria-label="Test Button"
+              class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white min-w-20 h-10 px-4 py-1"
+            >
+              Test
+            </button>
+            <button
+              aria-label="Test Button"
+              class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 underline-offset-2 hover:underline min-w-20 h-10 px-4 py-1"
+            >
+              Test
+            </button>
+          </div>
         </form>
       </div>
     </div>
@@ -368,6 +403,41 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
               />
             </svg>
             Login
+          </button>
+        </div>
+        <div
+          class="flex flex-col"
+        >
+          <button
+            aria-label="Test Button"
+            class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
+            disabled=""
+          >
+            Test
+          </button>
+          <button
+            aria-label="Test Button"
+            class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-red-600 text-white hover:opacity-90 min-w-20 h-10 px-4 py-1"
+          >
+            Test
+          </button>
+          <button
+            aria-label="Test Button"
+            class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border-zinc-300 hover:text-inherit dark:hover:text-white border bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-600 min-w-20 h-10 px-4 py-1"
+          >
+            Test
+          </button>
+          <button
+            aria-label="Test Button"
+            class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white min-w-20 h-10 px-4 py-1"
+          >
+            Test
+          </button>
+          <button
+            aria-label="Test Button"
+            class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 underline-offset-2 hover:underline min-w-20 h-10 px-4 py-1"
+          >
+            Test
           </button>
         </div>
       </form>
