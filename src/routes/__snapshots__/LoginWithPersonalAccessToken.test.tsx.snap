@@ -104,7 +104,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
                 <div>
                   <button
                     aria-label="Generate a PAT"
-                    class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 text-white dark:text-black hover:opacity-90 min-w-20 h-10 px-2 py-1"
+                    class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
                     icon="[object Object]"
                   >
                     <svg
@@ -142,7 +142,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
           >
             <button
               aria-label="GitHub Docs"
-              class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 text-white dark:text-black hover:opacity-90 min-w-20 h-10 px-2 py-1"
+              class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
               icon="[object Object]"
             >
               <svg
@@ -163,7 +163,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
             </button>
             <button
               aria-label="Login"
-              class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 text-white dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-2 !text-sm"
+              class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-2 !text-sm"
               disabled=""
               icon="[object Object]"
               type="submit"
@@ -289,7 +289,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
               <div>
                 <button
                   aria-label="Generate a PAT"
-                  class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 text-white dark:text-black hover:opacity-90 min-w-20 h-10 px-2 py-1"
+                  class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
                   icon="[object Object]"
                 >
                   <svg
@@ -327,7 +327,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
         >
           <button
             aria-label="GitHub Docs"
-            class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 text-white dark:text-black hover:opacity-90 min-w-20 h-10 px-2 py-1"
+            class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
             icon="[object Object]"
           >
             <svg
@@ -348,7 +348,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
           </button>
           <button
             aria-label="Login"
-            class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 text-white dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-2 !text-sm"
+            class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-2 !text-sm"
             disabled=""
             icon="[object Object]"
             type="submit"

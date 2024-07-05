@@ -66,7 +66,7 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
         </div>
         <button
           aria-label="Login with Personal Access Token"
-          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 text-white dark:text-black hover:opacity-90 min-w-20 h-10 px-2 mt-2 py-2"
+          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 mt-2 py-2"
           icon="[object Object]"
         >
           <svg
@@ -87,7 +87,7 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
         </button>
         <button
           aria-label="Login with OAuth App"
-          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 text-white dark:text-black hover:opacity-90 min-w-20 h-10 px-2 mt-2 py-2"
+          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 mt-2 py-2"
           icon="[object Object]"
         >
           <svg
@@ -171,7 +171,7 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
       </div>
       <button
         aria-label="Login with Personal Access Token"
-        class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 text-white dark:text-black hover:opacity-90 min-w-20 h-10 px-2 mt-2 py-2"
+        class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 mt-2 py-2"
         icon="[object Object]"
       >
         <svg
@@ -192,7 +192,7 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
       </button>
       <button
         aria-label="Login with OAuth App"
-        class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 text-white dark:text-black hover:opacity-90 min-w-20 h-10 px-2 mt-2 py-2"
+        class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 mt-2 py-2"
         icon="[object Object]"
       >
         <svg

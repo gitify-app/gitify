@@ -10,17 +10,17 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: 'bg-gray-300 text-white dark:text-black hover:opacity-90',
+        default: 'bg-gray-300 dark:text-black hover:opacity-90',
         destructive: 'bg-red-600 text-white hover:opacity-90',
         outline:
-          'border-zinc-300 hover:text-white border bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-600',
-        ghost: 'hover:bg-zinc-100 dark:hover:bg-zinc-600 hover:text-white',
+          'border-zinc-300 hover:text-inherit dark:hover:text-white border bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-600',
+        ghost: 'hover:bg-zinc-100 dark:hover:bg-zinc-600 dark:hover:text-white',
         link: 'underline-offset-2 hover:underline',
       },
       size: {
-        default: 'min-w-20 h-10 px-2 py-1',
+        default: 'min-w-20 h-10 px-4 py-1',
         xs: 'h-6 rounded-md px-2',
-        sm: 'h-9 rounded-md px-2',
+        sm: 'h-9 rounded-md px-2 py-1',
         lg: 'h-11 rounded-md px-8',
         icon: 'h-10 w-10',
       },

@@ -7,7 +7,7 @@ exports[`components/buttons/Button.tsx should render with icon 1`] = `
     <div>
       <button
         aria-label="button"
-        class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 text-white dark:text-black hover:opacity-90 min-w-20 h-10 px-2 py-1"
+        class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
         icon="[object Object]"
       >
         <svg
@@ -31,7 +31,7 @@ exports[`components/buttons/Button.tsx should render with icon 1`] = `
   "container": <div>
     <button
       aria-label="button"
-      class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 text-white dark:text-black hover:opacity-90 min-w-20 h-10 px-2 py-1"
+      class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
       icon="[object Object]"
     >
       <svg
@@ -112,7 +112,7 @@ exports[`components/buttons/Button.tsx should render without icon 1`] = `
     <div>
       <button
         aria-label="button"
-        class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 text-white dark:text-black hover:opacity-90 min-w-20 h-10 px-2 py-1"
+        class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
       >
         Button
       </button>
@@ -121,7 +121,7 @@ exports[`components/buttons/Button.tsx should render without icon 1`] = `
   "container": <div>
     <button
       aria-label="button"
-      class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 text-white dark:text-black hover:opacity-90 min-w-20 h-10 px-2 py-1"
+      class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
     >
       Button
     </button>
