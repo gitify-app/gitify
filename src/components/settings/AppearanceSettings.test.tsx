@@ -4,8 +4,6 @@ import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import { AppearanceSettings } from './AppearanceSettings';
 
-global.ResizeObserver = require('resize-observer-polyfill');
-
 describe('routes/components/AppearanceSettings.tsx', () => {
   const updateSetting = jest.fn();
 

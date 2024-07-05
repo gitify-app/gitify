@@ -117,9 +117,6 @@ importers:
       postcss-loader:
         specifier: 8.1.1
         version: 8.1.1(postcss@8.4.39)(typescript@5.5.2)(webpack@5.92.1(webpack-cli@5.1.4))
-      resize-observer-polyfill:
-        specifier: ^1.5.1
-        version: 1.5.1
       rimraf:
         specifier: 5.0.7
         version: 5.0.7
@@ -2597,9 +2594,6 @@ packages:
 
   requires-port@1.0.0:
     resolution: {integrity: sha512-KigOCHcocU3XODJxsu8i/j8T9tzT4adHiecwORRQ0ZZFcp7ahwXuRU1m+yuO90C5ZUyGeGfocHDI14M3L3yDAQ==}
-
-  resize-observer-polyfill@1.5.1:
-    resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
 
   resolve-alpn@1.2.1:
     resolution: {integrity: sha512-0a1F4l73/ZFZOakJnQ3FvkJ2+gSTQWz/r2KE5OdDY0TxPm5h4GkqkWWfM47T7HsbnOtcJVEF4epCVy6u7Q3K+g==}
@@ -6073,8 +6067,6 @@ snapshots:
   require-directory@2.1.1: {}
 
   requires-port@1.0.0: {}
-
-  resize-observer-polyfill@1.5.1: {}
 
   resolve-alpn@1.2.1: {}
 
