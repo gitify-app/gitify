@@ -36,11 +36,9 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
     </h3>
   </div>
   <div
-    class="flex-grow overflow-x-auto px-8"
+    class="flex flex-col flex-grow overflow-x-auto px-8 gap-3"
   >
-    <fieldset
-      class="mb-3"
-    >
+    <fieldset>
       <legend
         class="mb-1 mt-2 font-semibold"
         id="appearance"
@@ -247,9 +245,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
     </fieldset>
-    <fieldset
-      class="mb-3"
-    >
+    <fieldset>
       <legend
         class="mb-1 mt-2 font-semibold"
         id="notifications"
@@ -437,9 +433,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
     </fieldset>
-    <fieldset
-      class="mb-3"
-    >
+    <fieldset>
       <legend
         class="mb-1 mt-2 font-semibold"
         id="system"
@@ -605,6 +599,12 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
     </fieldset>
+    <button
+      class="text-sm hover:underline mb-4 hover:cursor-pointer"
+      type="button"
+    >
+      Restore settings to their defaults
+    </button>
   </div>
   <div
     class="flex items-center justify-between bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker"
@@ -622,27 +622,6 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
       </span>
     </button>
     <div>
-      <button
-        class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
-        title="Reset default settings"
-        type="button"
-      >
-        <svg
-          aria-label="Reset default settings"
-          class="octicon octicon-undo"
-          fill="currentColor"
-          focusable="false"
-          height="18"
-          role="img"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-          viewBox="0 0 16 16"
-          width="18"
-        >
-          <path
-            d="M1.22 6.28a.749.749 0 0 1 0-1.06l3.5-3.5a.749.749 0 1 1 1.06 1.06L3.561 5h7.188l.001.007L10.749 5c.058 0 .116.007.171.019A4.501 4.501 0 0 1 10.5 14H8.796a.75.75 0 0 1 0-1.5H10.5a3 3 0 1 0 0-6H3.561L5.78 8.72a.749.749 0 1 1-1.06 1.06l-3.5-3.5Z"
-          />
-        </svg>
-      </button>
       <button
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
         title="Accounts"

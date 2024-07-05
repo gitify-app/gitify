@@ -1,14 +1,12 @@
-import { PersonIcon, UndoIcon, XCircleIcon } from '@primer/octicons-react';
-import { type FC, useContext, useEffect, useState } from 'react';
+import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
+import { type FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { AppContext } from '../../context/App';
 import { BUTTON_CLASS_NAME } from '../../styles/gitify';
 import { Size } from '../../types';
 import { getAppVersion, quitApp } from '../../utils/comms';
 import { openGitifyReleaseNotes } from '../../utils/links';
 
 export const SettingsFooter: FC = () => {
-  const { resetSettings } = useContext(AppContext);
   const [appVersion, setAppVersion] = useState<string | null>(null);
   const navigate = useNavigate();
 
@@ -34,17 +32,6 @@ export const SettingsFooter: FC = () => {
         <span title="app-version">Gitify {appVersion}</span>
       </button>
       <div>
-        <button
-          type="button"
-          className={BUTTON_CLASS_NAME}
-          title="Reset default settings"
-          onClick={() => {
-            confirm('Are you sure you want to reset all settings?') &&
-              resetSettings();
-          }}
-        >
-          <UndoIcon size={Size.LARGE} aria-label="Reset default settings" />
-        </button>
         <button
           type="button"
           className={BUTTON_CLASS_NAME}
