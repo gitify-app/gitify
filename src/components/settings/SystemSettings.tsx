@@ -8,7 +8,7 @@ export const SystemSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
 
   return (
-    <fieldset className="mb-3">
+    <fieldset>
       <legend id="system" className="mb-1 mt-2 font-semibold">
         System
       </legend>

@@ -96,8 +96,9 @@ interface AppContextState {
   markRepoNotificationsDone: (notification: Notification) => Promise<void>;
 
   settings: SettingsState;
-  updateSetting: (name: keyof SettingsState, value: SettingsValue) => void;
   clearFilters: () => void;
+  resetSettings: () => void;
+  updateSetting: (name: keyof SettingsState, value: SettingsValue) => void;
 }
 
 export const AppContext = createContext<Partial<AppContextState>>({});
@@ -149,6 +150,17 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setKeyboardShortcut(settings.keyboardShortcut);
   }, [settings.keyboardShortcut]);
 
+  const clearFilters = useCallback(() => {
+    const newSettings = { ...settings, ...defaultFilters };
+    setSettings(newSettings);
+    saveState({ auth, settings: newSettings });
+  }, [auth]);
+
+  const resetSettings = useCallback(() => {
+    setSettings(defaultSettings);
+    saveState({ auth, settings: defaultSettings });
+  }, [auth]);
+
   const updateSetting = useCallback(
     (name: keyof SettingsState, value: SettingsValue) => {
       if (name === 'openAtStartup') {
@@ -161,12 +173,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     },
     [auth, settings],
   );
-
-  const clearFilters = useCallback(() => {
-    const newSettings = { ...settings, ...defaultFilters };
-    setSettings(newSettings);
-    saveState({ auth, settings: newSettings });
-  }, [auth]);
 
   const isLoggedIn = useMemo(() => {
     return auth.accounts.length > 0;
@@ -299,8 +305,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         markRepoNotificationsDone: markRepoNotificationsDoneWithAccounts,
 
         settings,
-        updateSetting,
         clearFilters,
+        resetSettings,
+        updateSetting,
       }}
     >
       {children}

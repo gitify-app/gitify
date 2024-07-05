@@ -9,7 +9,7 @@ export const NotificationSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
 
   return (
-    <fieldset className="mb-3">
+    <fieldset>
       <legend id="notifications" className="mb-1 mt-2 font-semibold">
         Notifications
       </legend>
