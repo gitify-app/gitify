@@ -66,13 +66,12 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
         </div>
         <button
           aria-label="Login with Personal Access Token"
-          class="mt-2 py-2 rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
-          title="Login with Personal Access Token"
-          type="button"
+          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 mt-2 py-2"
+          icon="[object Object]"
         >
           <svg
             aria-hidden="true"
-            class="mr-1"
+            class="mr-2"
             fill="currentColor"
             focusable="false"
             height="16"
@@ -88,13 +87,12 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
         </button>
         <button
           aria-label="Login with OAuth App"
-          class="mt-2 py-2 rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
-          title="Login with OAuth App"
-          type="button"
+          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 mt-2 py-2"
+          icon="[object Object]"
         >
           <svg
             aria-hidden="true"
-            class="mr-1"
+            class="mr-2"
             fill="currentColor"
             focusable="false"
             height="16"
@@ -173,13 +171,12 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
       </div>
       <button
         aria-label="Login with Personal Access Token"
-        class="mt-2 py-2 rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
-        title="Login with Personal Access Token"
-        type="button"
+        class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 mt-2 py-2"
+        icon="[object Object]"
       >
         <svg
           aria-hidden="true"
-          class="mr-1"
+          class="mr-2"
           fill="currentColor"
           focusable="false"
           height="16"
@@ -195,13 +192,12 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
       </button>
       <button
         aria-label="Login with OAuth App"
-        class="mt-2 py-2 rounded bg-gray-300 font-semibold text-xs text-center hover:bg-gray-500 hover:text-white dark:text-black focus:outline-none cursor-pointer px-2 py-1"
-        title="Login with OAuth App"
-        type="button"
+        class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 mt-2 py-2"
+        icon="[object Object]"
       >
         <svg
           aria-hidden="true"
-          class="mr-1"
+          class="mr-2"
           fill="currentColor"
           focusable="false"
           height="16"

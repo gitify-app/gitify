@@ -41,6 +41,7 @@ export const AppearanceSettings: FC = () => {
         onChange={(evt) => {
           updateSetting('theme', evt.target.value as Theme);
         }}
+        className="mb-0"
       />
       <Checkbox
         name="detailedNotifications"

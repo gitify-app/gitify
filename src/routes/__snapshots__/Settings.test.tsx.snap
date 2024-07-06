@@ -46,7 +46,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         Appearance
       </legend>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-1 text-sm mb-0"
       >
         <div
           class="flex items-start"

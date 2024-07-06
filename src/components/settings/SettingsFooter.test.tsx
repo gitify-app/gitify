@@ -14,21 +14,17 @@ jest.mock('react-router-dom', () => ({
 describe('routes/components/SettingsFooter.tsx', () => {
   afterEach(() => {
     jest.clearAllMocks();
+    process.env = originalEnv;
+  });
+
+  let originalEnv: NodeJS.ProcessEnv;
+
+  beforeEach(() => {
+    // Save the original node env state
+    originalEnv = process.env;
   });
 
   describe('app version', () => {
-    let originalEnv: NodeJS.ProcessEnv;
-
-    beforeEach(() => {
-      // Save the original node env state
-      originalEnv = process.env;
-    });
-
-    afterEach(() => {
-      // Restore the original node env state
-      process.env = originalEnv;
-    });
-
     it('should show production app version', async () => {
       process.env = {
         ...originalEnv,
@@ -79,6 +75,10 @@ describe('routes/components/SettingsFooter.tsx', () => {
   });
 
   it('should open release notes', async () => {
+    process.env = {
+      ...originalEnv,
+      NODE_ENV: 'production',
+    };
     const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
 
     await act(async () => {
