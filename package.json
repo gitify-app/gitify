@@ -103,7 +103,7 @@
     "@electron/remote": "2.1.2",
     "@primer/octicons-react": "19.10.0",
     "axios": "1.7.2",
-    "class-variance-authority": "^0.7.0",
+    "class-variance-authority": "0.7.0",
     "clsx": "2.1.1",
     "date-fns": "3.6.0",
     "electron-updater": "6.2.1",
@@ -114,7 +114,7 @@
     "react-dom": "18.3.1",
     "react-final-form": "6.5.9",
     "react-router-dom": "6.24.1",
-    "tailwind-merge": "^2.3.0",
+    "tailwind-merge": "2.3.0",
     "ts-loader": "9.5.1",
     "typescript": "5.5.3"
   },
