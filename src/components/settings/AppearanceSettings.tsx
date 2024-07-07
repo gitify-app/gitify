@@ -34,7 +34,7 @@ export const AppearanceSettings: FC = () => {
   });
 
   return (
-    <fieldset className="mb-3">
+    <fieldset>
       <legend id="appearance" className="mb-1 mt-2 font-semibold">
         Appearance
       </legend>

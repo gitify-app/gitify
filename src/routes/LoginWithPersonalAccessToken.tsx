@@ -112,23 +112,6 @@ export const LoginWithPersonalAccessToken: FC = () => {
             Login
           </Button>
         </div>
-        <div className="flex flex-col">
-          <Button variant="default" size="default" label="Test Button" disabled>
-            Test
-          </Button>
-          <Button variant="destructive" size="default" label="Test Button">
-            Test
-          </Button>
-          <Button variant="outline" size="default" label="Test Button">
-            Test
-          </Button>
-          <Button variant="ghost" size="default" label="Test Button">
-            Test
-          </Button>
-          <Button variant="link" size="default" label="Test Button">
-            Test
-          </Button>
-        </div>
       </form>
     );
   };

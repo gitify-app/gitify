@@ -475,5 +475,37 @@ describe('context/App.tsx', () => {
         },
       });
     });
+
+    it('should call resetSettings', async () => {
+      const saveStateMock = jest
+        .spyOn(storage, 'saveState')
+        .mockImplementation(jest.fn());
+
+      const TestComponent = () => {
+        const { resetSettings } = useContext(AppContext);
+
+        return (
+          <button type="button" onClick={() => resetSettings()}>
+            Test Case
+          </button>
+        );
+      };
+
+      const { getByText } = customRender(<TestComponent />);
+
+      act(() => {
+        fireEvent.click(getByText('Test Case'));
+      });
+
+      expect(saveStateMock).toHaveBeenCalledWith({
+        auth: {
+          accounts: [],
+          enterpriseAccounts: [],
+          token: null,
+          user: null,
+        } as AuthState,
+        settings: defaultSettings,
+      });
+    });
   });
 });

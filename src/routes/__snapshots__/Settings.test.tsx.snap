@@ -36,11 +36,9 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
     </h3>
   </div>
   <div
-    class="flex-grow overflow-x-auto px-8"
+    class="flex flex-col flex-grow overflow-x-auto px-8 gap-3"
   >
-    <fieldset
-      class="mb-3"
-    >
+    <fieldset>
       <legend
         class="mb-1 mt-2 font-semibold"
         id="appearance"
@@ -281,9 +279,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
     </fieldset>
-    <fieldset
-      class="mb-3"
-    >
+    <fieldset>
       <legend
         class="mb-1 mt-2 font-semibold"
         id="notifications"
@@ -471,9 +467,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
     </fieldset>
-    <fieldset
-      class="mb-3"
-    >
+    <fieldset>
       <legend
         class="mb-1 mt-2 font-semibold"
         id="system"
@@ -639,6 +633,12 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
     </fieldset>
+    <button
+      class="text-sm hover:underline mb-4 hover:cursor-pointer"
+      type="button"
+    >
+      Restore settings to their defaults
+    </button>
   </div>
   <div
     class="flex items-center justify-between bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker"
