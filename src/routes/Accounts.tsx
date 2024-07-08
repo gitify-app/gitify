@@ -45,7 +45,7 @@ export const AccountsRoute: FC = () => {
 
   return (
     <div className="flex h-screen flex-col" data-testid="accounts">
-      <Header>Accounts</Header>
+      <Header icon={PersonIcon}>Accounts</Header>
       <div className="flex-grow overflow-x-auto px-8">
         <div className="mt-4 flex flex-col text-sm">
           {auth.accounts.map((account) => (

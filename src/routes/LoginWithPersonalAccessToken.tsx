@@ -133,10 +133,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
 
   return (
     <>
-      <Header>
-        <KeyIcon size={Size.LARGE} className="mr-2" />
-        Login with Personal Access Token
-      </Header>
+      <Header icon={KeyIcon}>Login with Personal Access Token</Header>
 
       <div className="px-8">
         <Form

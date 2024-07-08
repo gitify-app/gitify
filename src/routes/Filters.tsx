@@ -1,5 +1,6 @@
 import {
   FeedPersonIcon,
+  FilterIcon,
   FilterRemoveIcon,
   NoteIcon,
 } from '@primer/octicons-react';
@@ -33,7 +34,9 @@ export const FiltersRoute: FC = () => {
 
   return (
     <div className="flex h-screen flex-col" data-testid="filters">
-      <Header fetchOnBack={true}>Filters</Header>
+      <Header fetchOnBack={true} icon={FilterIcon}>
+        Filters
+      </Header>
       <div className="flex-grow overflow-x-auto px-8">
         <fieldset className="mb-3">
           <legend id="notifications" className="mb-1 mt-2 font-semibold">
