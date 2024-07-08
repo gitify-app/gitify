@@ -1,6 +1,7 @@
 import {
   CheckIcon,
   CommentIcon,
+  GitPullRequestIcon,
   IssueClosedIcon,
   MilestoneIcon,
   PaintbrushIcon,
@@ -95,6 +96,41 @@ export const AppearanceSettings: FC = () => {
                   milestones
                 </li>
               </ul>
+            </div>
+          </div>
+        }
+      />
+      <Checkbox
+        name="showNumber"
+        label="Show number"
+        checked={settings.detailedNotifications && settings.showNumber}
+        onChange={(evt) =>
+          settings.detailedNotifications &&
+          updateSetting('showNumber', evt.target.checked)
+        }
+        disabled={!settings.detailedNotifications}
+        tooltip={
+          <div>
+            <div>Show GitHub number for:</div>
+            <div className="pl-6">
+              <ul className="list-disc">
+                <li>
+                  <CommentIcon size={Size.MEDIUM} className="pr-1" />
+                  Discussion
+                </li>
+                <li>
+                  <IssueClosedIcon size={Size.MEDIUM} className="pr-1" />
+                  Issue
+                </li>
+                <li>
+                  <GitPullRequestIcon size={Size.MEDIUM} className="pr-1" />
+                  Pull Request
+                </li>
+              </ul>
+            </div>
+            <div className="pt-3 text-orange-600">
+              ⚠️ This setting requires <strong>Detailed Notifications</strong> to
+              be enabled.
             </div>
           </div>
         }
