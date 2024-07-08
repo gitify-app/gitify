@@ -1,3 +1,4 @@
+import { DeviceDesktopIcon } from '@primer/octicons-react';
 import { type FC, useContext } from 'react';
 import { AppContext } from '../../context/App';
 import Constants from '../../utils/constants';
@@ -10,6 +11,7 @@ export const SystemSettings: FC = () => {
   return (
     <fieldset>
       <legend id="system" className="mb-1 mt-2 font-semibold">
+        <DeviceDesktopIcon className="mr-2" />
         System
       </legend>
       <Checkbox
