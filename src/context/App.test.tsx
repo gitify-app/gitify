@@ -382,6 +382,7 @@ describe('context/App.tsx', () => {
           keyboardShortcut: true,
           groupBy: 'REPOSITORY',
           filterReasons: [],
+          zoomPercentage: 100,
         } as SettingsState,
       });
     });
@@ -436,6 +437,7 @@ describe('context/App.tsx', () => {
           keyboardShortcut: true,
           groupBy: 'REPOSITORY',
           filterReasons: [],
+          zoomPercentage: 100,
         } as SettingsState,
       });
     });

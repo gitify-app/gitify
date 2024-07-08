@@ -51,7 +51,7 @@ export interface Account {
   user: GitifyUser | null;
 }
 
-export type SettingsValue = boolean | Theme | GroupBy | Reason[];
+export type SettingsValue = boolean | Theme | GroupBy | Reason[] | number;
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
@@ -60,6 +60,7 @@ export type SettingsState = AppearanceSettingsState &
 
 interface AppearanceSettingsState {
   theme: Theme;
+  zoomPercentage: number;
   detailedNotifications: boolean;
   showAccountHostname: boolean;
   showPills: boolean;

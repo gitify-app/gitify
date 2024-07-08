@@ -132,7 +132,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </label>
         <button
           aria-label="Zoom Out"
-          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-9 rounded-md px-2 py-1 rounded-r-none"
+          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-7 rounded-md px-2 py-1 rounded-r-none"
         >
           -
         </button>
@@ -144,13 +144,13 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </span>
         <button
           aria-label="Zoom In"
-          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-9 px-2 py-1 rounded-none"
+          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-7 px-2 py-1 rounded-none"
         >
           +
         </button>
         <button
-          aria-label="Reset"
-          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-red-600 text-white hover:opacity-90 h-9 rounded-md px-2 py-1 rounded-l-none"
+          aria-label="Reset Zoom"
+          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-red-600 text-white hover:opacity-90 h-7 rounded-md px-2 py-1 rounded-l-none"
         >
           X
         </button>

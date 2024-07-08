@@ -79,6 +79,7 @@ export const mockSettings: SettingsState = {
   showNotificationsCountInTray: false,
   openAtStartup: false,
   theme: Theme.SYSTEM,
+  zoomPercentage: 100,
   detailedNotifications: true,
   markAsDoneOnOpen: false,
   showAccountHostname: false,

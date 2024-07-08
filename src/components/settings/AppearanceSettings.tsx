@@ -10,15 +10,18 @@ import { type FC, useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { setTheme } from '../../utils/theme';
-import { percentageToZoom, zoomToPercentage } from '../../utils/zoom';
+import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
 import { Button } from '../buttons/Button';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
 
+let timeout: NodeJS.Timeout;
+const DELAY = 200;
+
 export const AppearanceSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
-  const [zoomLevel, setZoomLevel] = useState(
-    zoomToPercentage(webFrame.getZoomLevel()),
+  const [zoomPercentage, setZoomPercentage] = useState(
+    zoomLevelToPercentage(webFrame.getZoomLevel()),
   );
 
   useEffect(() => {
@@ -30,7 +33,14 @@ export const AppearanceSettings: FC = () => {
   }, [settings.theme]);
 
   window.addEventListener('resize', () => {
-    setZoomLevel(zoomToPercentage(webFrame.getZoomLevel()));
+    // clear the timeout
+    clearTimeout(timeout);
+    // start timing for event "completion"
+    timeout = setTimeout(() => {
+      const zoomPercentage = zoomLevelToPercentage(webFrame.getZoomLevel());
+      setZoomPercentage(zoomPercentage);
+      updateSetting('zoomPercentage', zoomPercentage);
+    }, DELAY);
   });
 
   return (
@@ -62,34 +72,34 @@ export const AppearanceSettings: FC = () => {
         <Button
           label="Zoom Out"
           onClick={() =>
-            zoomLevel > 0 &&
-            webFrame.setZoomLevel(percentageToZoom(zoomLevel - 10))
+            zoomPercentage > 0 &&
+            webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage - 10))
           }
           className="rounded-r-none"
-          size="sm"
+          size="xs"
         >
           -
         </Button>
         <span className="flex w-16 items-center justify-center rounded-none border border-gray-300 bg-transparent text-sm text-gray-700 dark:text-gray-200">
-          {zoomLevel.toFixed(0)}%
+          {zoomPercentage.toFixed(0)}%
         </span>
         <Button
           label="Zoom In"
           onClick={() =>
-            zoomLevel < 120 &&
-            webFrame.setZoomLevel(percentageToZoom(zoomLevel + 10))
+            zoomPercentage < 120 &&
+            webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage + 10))
           }
           className="rounded-none"
-          size="sm"
+          size="xs"
         >
           +
         </Button>
         <Button
-          label="Reset"
+          label="Reset Zoom"
           onClick={() => webFrame.setZoomLevel(0)}
           variant="destructive"
           className="rounded-l-none"
-          size="sm"
+          size="xs"
         >
           X
         </Button>
