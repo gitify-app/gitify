@@ -150,6 +150,7 @@
   },
   "packageManager": "pnpm@9.5.0",
   "lint-staged": {
-    "*.{js,json,ts,tsx}": "biome format --fix"
+    "*.{js,json,ts,tsx}": "biome format --fix",
+    "*.{js,ts,tsx}": "pnpm test -- --onlyChanged -u --passWithNoTests"
   }
 }

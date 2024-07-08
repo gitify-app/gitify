@@ -1,8 +1,10 @@
 import {
   CheckIcon,
   CommentIcon,
+  GitPullRequestIcon,
   IssueClosedIcon,
   MilestoneIcon,
+  PaintbrushIcon,
   TagIcon,
 } from '@primer/octicons-react';
 import { ipcRenderer, webFrame } from 'electron';
@@ -14,6 +16,7 @@ import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
 import { Button } from '../buttons/Button';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
+import { Legend } from './Legend';
 
 let timeout: NodeJS.Timeout;
 const DELAY = 200;
@@ -45,9 +48,7 @@ export const AppearanceSettings: FC = () => {
 
   return (
     <fieldset>
-      <legend id="appearance" className="mb-1 mt-2 font-semibold">
-        Appearance
-      </legend>
+      <Legend icon={PaintbrushIcon}>Appearance</Legend>
       <RadioGroup
         name="theme"
         label="Theme:"
@@ -156,6 +157,41 @@ export const AppearanceSettings: FC = () => {
                   milestones
                 </li>
               </ul>
+            </div>
+          </div>
+        }
+      />
+      <Checkbox
+        name="showNumber"
+        label="Show number"
+        checked={settings.detailedNotifications && settings.showNumber}
+        onChange={(evt) =>
+          settings.detailedNotifications &&
+          updateSetting('showNumber', evt.target.checked)
+        }
+        disabled={!settings.detailedNotifications}
+        tooltip={
+          <div>
+            <div>Show GitHub number for:</div>
+            <div className="pl-6">
+              <ul className="list-disc">
+                <li>
+                  <CommentIcon size={Size.MEDIUM} className="pr-1" />
+                  Discussion
+                </li>
+                <li>
+                  <IssueClosedIcon size={Size.MEDIUM} className="pr-1" />
+                  Issue
+                </li>
+                <li>
+                  <GitPullRequestIcon size={Size.MEDIUM} className="pr-1" />
+                  Pull Request
+                </li>
+              </ul>
+            </div>
+            <div className="pt-3 text-orange-600">
+              ⚠️ This setting requires <strong>Detailed Notifications</strong> to
+              be enabled.
             </div>
           </div>
         }
