@@ -37,7 +37,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
           {props.options.map((item) => {
             return (
               <div
-                className="mt-1 flex"
+                className="mt-1 flex items-center"
                 key={`radio_item_${item.value.toLowerCase()}`}
               >
                 <input

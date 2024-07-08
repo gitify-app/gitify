@@ -81,7 +81,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             role="group"
           >
             <div
-              class="mt-1 flex"
+              class="mt-1 flex items-center"
             >
               <input
                 checked=""
@@ -99,7 +99,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
               </label>
             </div>
             <div
-              class="mt-1 flex"
+              class="mt-1 flex items-center"
             >
               <input
                 class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -116,7 +116,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
               </label>
             </div>
             <div
-              class="mt-1 flex"
+              class="mt-1 flex items-center"
             >
               <input
                 class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -302,7 +302,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             role="group"
           >
             <div
-              class="mt-1 flex"
+              class="mt-1 flex items-center"
             >
               <input
                 checked=""
@@ -320,7 +320,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
               </label>
             </div>
             <div
-              class="mt-1 flex"
+              class="mt-1 flex items-center"
             >
               <input
                 class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
