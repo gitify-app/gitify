@@ -4,7 +4,7 @@ import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import { AppearanceSettings } from './AppearanceSettings';
 
-describe('routes/components/AppearanceSettings.tsx', () => {
+describe('routes/components/settings/AppearanceSettings.tsx', () => {
   const updateSetting = jest.fn();
 
   afterEach(() => {

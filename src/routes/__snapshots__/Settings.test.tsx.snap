@@ -40,7 +40,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
   >
     <fieldset>
       <legend
-        class="mb-1 mt-2 font-semibold"
+        class="mb-1 mt-2 font-semibold flex items-center"
         id="appearance"
       >
         <svg
@@ -261,7 +261,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
     </fieldset>
     <fieldset>
       <legend
-        class="mb-1 mt-2 font-semibold"
+        class="mb-1 mt-2 font-semibold flex items-center"
         id="notifications"
       >
         <svg
@@ -463,7 +463,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
     </fieldset>
     <fieldset>
       <legend
-        class="mb-1 mt-2 font-semibold"
+        class="mb-1 mt-2 font-semibold flex items-center"
         id="system"
       >
         <svg

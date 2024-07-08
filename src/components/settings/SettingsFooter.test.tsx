@@ -11,7 +11,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
-describe('routes/components/SettingsFooter.tsx', () => {
+describe('routes/components/settings/SettingsFooter.tsx', () => {
   afterEach(() => {
     jest.clearAllMocks();
     process.env = originalEnv;

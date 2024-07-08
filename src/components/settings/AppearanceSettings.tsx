@@ -13,6 +13,7 @@ import { Size, Theme } from '../../types';
 import { setTheme } from '../../utils/theme';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
+import { Legend } from './Legend';
 
 export const AppearanceSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
@@ -27,10 +28,7 @@ export const AppearanceSettings: FC = () => {
 
   return (
     <fieldset>
-      <legend id="appearance" className="mb-1 mt-2 font-semibold">
-        <PaintbrushIcon className="mr-2" />
-        Appearance
-      </legend>
+      <Legend icon={PaintbrushIcon}>Appearance</Legend>
       <RadioGroup
         name="theme"
         label="Theme:"
