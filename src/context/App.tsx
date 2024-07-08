@@ -246,9 +246,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     if (existing.settings) {
       setKeyboardShortcut(existing.settings.keyboardShortcut);
       setSettings({ ...defaultSettings, ...existing.settings });
-      webFrame.setZoomLevel(
-        zoomPercentageToLevel(existing.settings.zoomPercentage),
-      );
+      webFrame.setZoomLevel(zoomPercentageToLevel(settings.zoomPercentage));
       return existing.settings;
     }
   }, []);
