@@ -1,3 +1,4 @@
+import { GearIcon } from '@primer/octicons-react';
 import { type FC, useContext } from 'react';
 import { Header } from '../components/Header';
 import { AppearanceSettings } from '../components/settings/AppearanceSettings';
@@ -10,7 +11,9 @@ export const SettingsRoute: FC = () => {
   const { resetSettings } = useContext(AppContext);
   return (
     <div className="flex h-screen flex-col" data-testid="settings">
-      <Header fetchOnBack>Settings</Header>
+      <Header fetchOnBack icon={GearIcon}>
+        Settings
+      </Header>
 
       <div className="flex flex-col flex-grow overflow-x-auto px-8 gap-3">
         <AppearanceSettings />
