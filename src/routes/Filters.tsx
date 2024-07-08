@@ -6,6 +6,7 @@ import {
 import { type FC, useContext } from 'react';
 import { Header } from '../components/Header';
 import { Checkbox } from '../components/fields/Checkbox';
+import { Legend } from '../components/settings/Legend';
 import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import { Size } from '../types';
@@ -36,10 +37,7 @@ export const FiltersRoute: FC = () => {
       <Header fetchOnBack={true}>Filters</Header>
       <div className="flex-grow overflow-x-auto px-8">
         <fieldset className="mb-3">
-          <legend id="notifications" className="mb-1 mt-2 font-semibold">
-            <FeedPersonIcon className="mr-2" />
-            Users
-          </legend>
+          <Legend icon={FeedPersonIcon}>Users</Legend>
           <Checkbox
             name="hideBots"
             label="Hide notifications from Bot accounts"
@@ -65,10 +63,7 @@ export const FiltersRoute: FC = () => {
         </fieldset>
 
         <fieldset className="mb-3">
-          <legend id="appearance" className="mb-1 mt-2 font-semibold">
-            <NoteIcon className="mr-2" />
-            Reason
-          </legend>
+          <Legend icon={NoteIcon}>Reason</Legend>
           <span className="text-xs italic">
             Note: if no reasons are selected, all notifications will be shown.
           </span>

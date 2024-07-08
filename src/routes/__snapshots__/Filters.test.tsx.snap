@@ -42,8 +42,8 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
       class="mb-3"
     >
       <legend
-        class="mb-1 mt-2 font-semibold"
-        id="notifications"
+        class="mb-1 mt-2 font-semibold flex items-center"
+        id="users"
       >
         <svg
           aria-hidden="true"
@@ -113,8 +113,8 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
       class="mb-3"
     >
       <legend
-        class="mb-1 mt-2 font-semibold"
-        id="appearance"
+        class="mb-1 mt-2 font-semibold flex items-center"
+        id="reason"
       >
         <svg
           aria-hidden="true"
