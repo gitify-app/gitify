@@ -4,7 +4,7 @@ import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import { SystemSettings } from './SystemSettings';
 
-describe('routes/components/SystemSettings.tsx', () => {
+describe('routes/components/settings/SystemSettings.tsx', () => {
   const updateSetting = jest.fn();
 
   afterEach(() => {

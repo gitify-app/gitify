@@ -70,6 +70,7 @@ export const defaultSettings: SettingsState = {
   showAccountHostname: false,
   delayNotificationState: false,
   showPills: true,
+  showNumber: true,
   keyboardShortcut: true,
   groupBy: GroupBy.REPOSITORY,
   ...defaultFilters,

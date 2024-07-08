@@ -1,4 +1,8 @@
-import { FilterRemoveIcon } from '@primer/octicons-react';
+import {
+  FeedPersonIcon,
+  FilterRemoveIcon,
+  NoteIcon,
+} from '@primer/octicons-react';
 import { type FC, useContext } from 'react';
 import { Header } from '../components/Header';
 import { Checkbox } from '../components/fields/Checkbox';
@@ -33,6 +37,7 @@ export const FiltersRoute: FC = () => {
       <div className="flex-grow overflow-x-auto px-8">
         <fieldset className="mb-3">
           <legend id="notifications" className="mb-1 mt-2 font-semibold">
+            <FeedPersonIcon className="mr-2" />
             Users
           </legend>
           <Checkbox
@@ -61,6 +66,7 @@ export const FiltersRoute: FC = () => {
 
         <fieldset className="mb-3">
           <legend id="appearance" className="mb-1 mt-2 font-semibold">
+            <NoteIcon className="mr-2" />
             Reason
           </legend>
           <span className="text-xs italic">
