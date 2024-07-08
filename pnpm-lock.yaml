@@ -118,7 +118,7 @@ importers:
         specifier: 8.1.1
         version: 8.1.1(postcss@8.4.39)(typescript@5.5.3)(webpack@5.92.1(webpack-cli@5.1.4))
       resize-observer-polyfill:
-        specifier: ^1.5.1
+        specifier: 1.5.1
         version: 1.5.1
       rimraf:
         specifier: 5.0.8
