@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`routes/components/SettingsFooter.tsx app version should show development app version 1`] = `
+exports[`routes/components/settings/SettingsFooter.tsx app version should show development app version 1`] = `
 <span
   title="app-version"
 >
@@ -9,7 +9,7 @@ exports[`routes/components/SettingsFooter.tsx app version should show developmen
 </span>
 `;
 
-exports[`routes/components/SettingsFooter.tsx app version should show production app version 1`] = `
+exports[`routes/components/settings/SettingsFooter.tsx app version should show production app version 1`] = `
 <span
   title="app-version"
 >
