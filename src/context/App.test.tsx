@@ -9,7 +9,7 @@ import * as comms from '../utils/comms';
 import Constants from '../utils/constants';
 import * as notifications from '../utils/notifications';
 import * as storage from '../utils/storage';
-import { AppContext, AppProvider } from './App';
+import { AppContext, AppProvider, defaultSettings } from './App';
 
 jest.mock('../hooks/useNotifications');
 
@@ -327,6 +327,14 @@ describe('context/App.tsx', () => {
   });
 
   describe('settings methods', () => {
+    const fetchNotificationsMock = jest.fn();
+
+    beforeEach(() => {
+      (useNotifications as jest.Mock).mockReturnValue({
+        fetchNotifications: fetchNotificationsMock,
+      });
+    });
+
     it('should call updateSetting', async () => {
       const saveStateMock = jest
         .spyOn(storage, 'saveState')
@@ -362,7 +370,7 @@ describe('context/App.tsx', () => {
           participating: true,
           playSound: true,
           showNotifications: true,
-          showBots: true,
+          hideBots: false,
           showNotificationsCountInTray: false,
           openAtStartup: false,
           theme: 'SYSTEM',
@@ -374,6 +382,7 @@ describe('context/App.tsx', () => {
           showNumber: true,
           keyboardShortcut: true,
           groupBy: 'REPOSITORY',
+          filterReasons: [],
         } as SettingsState,
       });
     });
@@ -416,7 +425,7 @@ describe('context/App.tsx', () => {
           participating: false,
           playSound: true,
           showNotifications: true,
-          showBots: true,
+          hideBots: false,
           showNotificationsCountInTray: false,
           openAtStartup: true,
           theme: 'SYSTEM',
@@ -428,7 +437,76 @@ describe('context/App.tsx', () => {
           showNumber: true,
           keyboardShortcut: true,
           groupBy: 'REPOSITORY',
+          filterReasons: [],
         } as SettingsState,
+      });
+    });
+
+    it('should clear filters back to default', async () => {
+      const saveStateMock = jest
+        .spyOn(storage, 'saveState')
+        .mockImplementation(jest.fn());
+
+      const TestComponent = () => {
+        const { clearFilters } = useContext(AppContext);
+
+        return (
+          <button type="button" onClick={() => clearFilters()}>
+            Test Case
+          </button>
+        );
+      };
+
+      const { getByText } = customRender(<TestComponent />);
+
+      act(() => {
+        fireEvent.click(getByText('Test Case'));
+      });
+
+      expect(saveStateMock).toHaveBeenCalledWith({
+        auth: {
+          accounts: [],
+          enterpriseAccounts: [],
+          token: null,
+          user: null,
+        } as AuthState,
+        settings: {
+          ...mockSettings,
+          hideBots: defaultSettings.hideBots,
+          filterReasons: defaultSettings.filterReasons,
+        },
+      });
+    });
+
+    it('should call resetSettings', async () => {
+      const saveStateMock = jest
+        .spyOn(storage, 'saveState')
+        .mockImplementation(jest.fn());
+
+      const TestComponent = () => {
+        const { resetSettings } = useContext(AppContext);
+
+        return (
+          <button type="button" onClick={() => resetSettings()}>
+            Test Case
+          </button>
+        );
+      };
+
+      const { getByText } = customRender(<TestComponent />);
+
+      act(() => {
+        fireEvent.click(getByText('Test Case'));
+      });
+
+      expect(saveStateMock).toHaveBeenCalledWith({
+        auth: {
+          accounts: [],
+          enterpriseAccounts: [],
+          token: null,
+          user: null,
+        } as AuthState,
+        settings: defaultSettings,
       });
     });
   });

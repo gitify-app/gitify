@@ -72,13 +72,13 @@ export const LoginWithPersonalAccessToken: FC = () => {
             <div>
               <div>
                 <Button
-                  name="Generate a PAT"
                   label="Generate a PAT"
                   disabled={!values.hostname}
-                  icon={KeyIcon}
-                  size={Size.XSMALL}
+                  icon={{ icon: KeyIcon, size: Size.XSMALL }}
                   url={getNewTokenURL(values.hostname)}
-                />
+                >
+                  Generate a PAT
+                </Button>
                 <span className="mx-1">on GitHub and paste above.</span>
               </div>
               <div className="mt-1 italic">
@@ -94,24 +94,23 @@ export const LoginWithPersonalAccessToken: FC = () => {
           </div>
         )}
 
-        <div className="flex items-end justify-between">
+        <div className="flex items-end justify-between mt-2">
           <Button
-            name="Docs"
             label="GitHub Docs"
-            className="mt-2"
-            icon={BookIcon}
-            size={Size.XSMALL}
+            icon={{ icon: BookIcon, size: Size.XSMALL }}
             url={Constants.GITHUB_DOCS.PAT_URL}
-          />
+          >
+            Docs
+          </Button>
           <Button
-            name="Login"
             label="Login"
-            className="mt-2 px-4 py-2 !text-sm"
-            icon={SignInIcon}
-            size={Size.MEDIUM}
+            className="px-4 py-2 !text-sm"
+            icon={{ icon: SignInIcon, size: Size.MEDIUM }}
             disabled={submitting || pristine}
             type="submit"
-          />
+          >
+            Login
+          </Button>
         </div>
       </form>
     );
@@ -133,7 +132,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
   );
 
   return (
-    <div>
+    <>
       <Header>
         <KeyIcon size={Size.LARGE} className="mr-2" />
         Login with Personal Access Token
@@ -151,6 +150,6 @@ export const LoginWithPersonalAccessToken: FC = () => {
           {renderForm}
         </Form>
       </div>
-    </div>
+    </>
   );
 };

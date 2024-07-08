@@ -27,7 +27,7 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
             role="group"
           >
             <div
-              class="mt-1 flex"
+              class="mt-1 flex items-center"
             >
               <input
                 class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -44,7 +44,7 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
               </label>
             </div>
             <div
-              class="mt-1 flex"
+              class="mt-1 flex items-center"
             >
               <input
                 checked=""
@@ -94,7 +94,7 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
           role="group"
         >
           <div
-            class="mt-1 flex"
+            class="mt-1 flex items-center"
           >
             <input
               class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -111,7 +111,7 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
             </label>
           </div>
           <div
-            class="mt-1 flex"
+            class="mt-1 flex items-center"
           >
             <input
               checked=""
@@ -219,7 +219,7 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
             role="group"
           >
             <div
-              class="mt-1 flex"
+              class="mt-1 flex items-center"
             >
               <input
                 class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -237,7 +237,7 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
               </label>
             </div>
             <div
-              class="mt-1 flex"
+              class="mt-1 flex items-center"
             >
               <input
                 checked=""
@@ -289,7 +289,7 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
           role="group"
         >
           <div
-            class="mt-1 flex"
+            class="mt-1 flex items-center"
           >
             <input
               class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -307,7 +307,7 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
             </label>
           </div>
           <div
-            class="mt-1 flex"
+            class="mt-1 flex items-center"
           >
             <input
               checked=""
