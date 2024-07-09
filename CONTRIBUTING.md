@@ -65,7 +65,7 @@ The release process is automated. Follow the steps below.
    * description: link to the release notes
    * due date: date of release
    * close milestone
-9. Create new [Milestone][github-milestones] for upcoming release.
+9. Create a [New Milestone][github-new-milestone] for upcoming release.
 10. A new homebrew cask will be automatically published (workflow runs ~3 hours)
 
 ### Project Philosophy
@@ -86,6 +86,7 @@ This project is a tool for monitoring new notifications from Github. It's not me
 [biome-website]: https://biomejs.dev/
 [github-dependency-dashboard]: https://github.com/gitify-app/gitify/issues/576
 [github-milestones]: https://github.com/gitify-app/gitify/milestones
+[github-new-milestone]: https://github.com/gitify-app/gitify/milestones/new
 [github-new-release]: https://github.com/gitify-app/gitify/releases/new
 [jest-website]: https://jestjs.io/
 
