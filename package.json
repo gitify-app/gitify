@@ -142,7 +142,7 @@
     "rimraf": "5.0.8",
     "style-loader": "4.0.0",
     "tailwindcss": "3.4.4",
-    "ts-jest": "29.1.5",
+    "ts-jest": "29.2.0",
     "ts-node": "10.9.2",
     "webpack": "5.92.1",
     "webpack-cli": "5.1.4",
