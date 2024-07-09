@@ -6,6 +6,9 @@ on:
       - 'release/v**'
   workflow_dispatch: # For manually running release process to verify codesigning of artifacts
 
+permissions:
+  contents: write
+
 jobs:
   release-macos:
     name: Publish macOS (electron-builder)
