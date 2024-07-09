@@ -71,9 +71,6 @@ app.whenReady().then(async () => {
       mb.tray.popUpContextMenu(contextMenu, { x: bounds.x, y: bounds.y });
     });
 
-    // Force the window to retrieve its previous zoom factor
-    mb.window.webContents.setZoomFactor(mb.window.webContents.getZoomFactor());
-
     // Custom key events
     mb.window.webContents.on('before-input-event', (event, input) => {
       if (input.key === 'Escape') {
