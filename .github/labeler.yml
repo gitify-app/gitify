@@ -24,6 +24,10 @@ labels:
   - label: 'build'
     matcher:
       title: '^(ci|build): .*'
+
+  - label: 'dependency'
+    matcher:
+      title: '^(deps): .*'
     
 checks:
   - context: 'Semantic Pull Request'
