@@ -55,7 +55,7 @@ pnpm test -- --watch
 The release process is automated. Follow the steps below.
 
 1. Verify that all features you want targeted in the release have been merged to `main`.
-2. Check the [Renovate Dependency Dashboard](https://github.com/gitify-app/gitify/issues/576) to see if there are any updates you want included.
+2. Check the [Renovate Dependency Dashboard][github-dependency-dashboard] to see if there are any updates you want included.
 3. Create a [new **draft** release][github-new-release]. Set the tag version to something with the format of `v1.2.3`. Save as a **draft** before moving to the next step
 4. Create a branch that starts with `release/vX.X.X` (ie. `release/v1.2.3`).
 5. In the same branch, **bump the version** of the app by running `pnpm version <new-version-number`. Commit these changes and open a PR. A GitHub Actions workflow will build, sign and upload the release assets for each commit to that branch as long as a branch is named like `release/vX.X.X` and there is a draft release with the same version number(`package.json`).
@@ -81,3 +81,4 @@ This project is a tool for monitoring new notifications from Github. It's not me
 [biome-website]: https://biomejs.dev/
 [jest-website]: https://jestjs.io/
 [github-new-release]: https://github.com/gitify-app/gitify/releases/new
+[github-dependency-dashboard]: https://github.com/gitify-app/gitify/issues/576
