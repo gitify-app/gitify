@@ -2,30 +2,42 @@ version: v1
 
 labels:
   - label: 'enhancement'
+    sync: true
     matcher:
       title: '^feat(\(\w+\))?: .*'
 
   - label: 'bug'
+    sync: true
     matcher:
       title: '^fix(\(\w+\))?: .*'
 
   - label: 'refactor'
+    sync: true
     matcher:
       title: '^refactor(\(\w+\))?: .*'
 
   - label: 'documentation'
+    sync: true
     matcher:
       title: '^docs(\(\w+\))?: .*'
 
   - label: 'test'
+    sync: true
     matcher:
       title: '^test(\(\w+\))?: .*'
 
   - label: 'build'
+    sync: true
     matcher:
-      title: '^(ci|build)(\(\w+\))?: .*'
+      title: '^(ci|build)(\((?!release)\w+\))?: (?!.*\brelease\b).*'
+
+  - label: 'release'
+    sync: true
+    matcher:
+      branch: '^release/.*'
 
   - label: 'dependency'
+    sync: true
     matcher:
       title: '^(deps)(\(\w+\))?: .*'
     
@@ -43,3 +55,4 @@ checks:
         - test
         - build
         - dependency
+        - release
