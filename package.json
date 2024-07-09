@@ -139,7 +139,7 @@
     "postcss": "8.4.39",
     "postcss-loader": "8.1.1",
     "resize-observer-polyfill": "1.5.1",
-    "rimraf": "5.0.8",
+    "rimraf": "6.0.0",
     "style-loader": "4.0.0",
     "tailwindcss": "3.4.4",
     "ts-jest": "29.2.0",
