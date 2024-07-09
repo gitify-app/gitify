@@ -23,7 +23,7 @@ labels:
 
   - label: 'build'
     matcher:
-      title: '^ci: .*'
+      title: '^(ci|build): .*'
     
 checks:
   - context: 'Semantic Pull Request'
