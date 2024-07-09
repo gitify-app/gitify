@@ -1,0 +1,26 @@
+name: Check PR Label
+
+on:
+  pull_request:
+    types: [opened, edited, labeled, unlabeled]
+
+jobs:
+  check-label:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out the repository
+      uses: actions/checkout@v4
+
+    - name: Check if PR has labels
+      id: check_labels
+      run: |
+        labels=$(jq -r '.pull_request.labels | length' $GITHUB_EVENT_PATH)
+        if [ "$labels" -eq 0 ]; then
+          echo "No labels found on the PR"
+          exit 1
+        fi
+
+    - name: Set status
+      if: failure()
+      run: echo "Please add at least one label to the Pull Request."
