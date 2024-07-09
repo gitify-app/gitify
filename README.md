@@ -52,4 +52,4 @@ For more information, see [LICENSE](LICENSE).
 [github-release-badge]: https://img.shields.io/github/v/release/gitify-app/gitify?logo=github
 [homebrew-cask-badge]: https://img.shields.io/homebrew/cask/v/gitify?logo=homebrew
 [renovate]: https://renovatebot.com/
-[renovate-badge]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg?logo=renovatebot
+[renovate-badge]: https://img.shields.io/badge/renovate-enabled-brightgreen.svg?logo=renovate
