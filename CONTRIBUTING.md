@@ -84,7 +84,8 @@ This project is a tool for monitoring new notifications from Github. It's not me
 
 <!-- LINK LABELS -->
 [biome-website]: https://biomejs.dev/
-[jest-website]: https://jestjs.io/
-[github-new-release]: https://github.com/gitify-app/gitify/releases/new
 [github-dependency-dashboard]: https://github.com/gitify-app/gitify/issues/576
 [github-milestones]: https://github.com/gitify-app/gitify/milestones
+[github-new-release]: https://github.com/gitify-app/gitify/releases/new
+[jest-website]: https://jestjs.io/
+
