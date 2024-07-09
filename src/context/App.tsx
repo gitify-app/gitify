@@ -1,3 +1,4 @@
+import { webFrame } from 'electron';
 import {
   type ReactNode,
   createContext,
@@ -42,6 +43,7 @@ import Constants from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setTheme } from '../utils/theme';
+import { zoomPercentageToLevel } from '../utils/zoom';
 
 const defaultAuth: AuthState = {
   accounts: [],
@@ -62,6 +64,7 @@ export const defaultSettings: SettingsState = {
   showNotificationsCountInTray: false,
   openAtStartup: false,
   theme: Theme.SYSTEM,
+  zoomPercentage: 100,
   detailedNotifications: true,
   markAsDoneOnOpen: false,
   showAccountHostname: false,
@@ -244,6 +247,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     if (existing.settings) {
       setKeyboardShortcut(existing.settings.keyboardShortcut);
       setSettings({ ...defaultSettings, ...existing.settings });
+      webFrame.setZoomLevel(
+        zoomPercentageToLevel(existing.settings.zoomPercentage),
+      );
       return existing.settings;
     }
   }, []);

@@ -138,6 +138,7 @@
     "nock": "13.5.4",
     "postcss": "8.4.39",
     "postcss-loader": "8.1.1",
+    "resize-observer-polyfill": "1.5.1",
     "rimraf": "5.0.8",
     "style-loader": "4.0.0",
     "tailwindcss": "3.4.4",
@@ -150,6 +151,6 @@
   "packageManager": "pnpm@9.5.0",
   "lint-staged": {
     "*.{js,json,ts,tsx}": "biome format --fix",
-    "*.{js,ts,tsx}": "pnpm test -- --onlyChanged -u --passWithNoTests"
+    "*.{js,ts,tsx}": "pnpm test -- --findRelatedTests -u --passWithNoTests"
   }
 }

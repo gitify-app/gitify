@@ -11,6 +11,8 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
+global.ResizeObserver = require('resize-observer-polyfill');
+
 describe('routes/components/settings/SettingsFooter.tsx', () => {
   afterEach(() => {
     jest.clearAllMocks();

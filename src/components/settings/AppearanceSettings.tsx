@@ -7,17 +7,25 @@ import {
   PaintbrushIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import { ipcRenderer } from 'electron';
-import { type FC, useContext, useEffect } from 'react';
+import { ipcRenderer, webFrame } from 'electron';
+import { type FC, useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { setTheme } from '../../utils/theme';
+import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
+import { Button } from '../buttons/Button';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Legend } from './Legend';
 
+let timeout: NodeJS.Timeout;
+const DELAY = 200;
+
 export const AppearanceSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
+  const [zoomPercentage, setZoomPercentage] = useState(
+    zoomLevelToPercentage(webFrame.getZoomLevel()),
+  );
 
   useEffect(() => {
     ipcRenderer.on('gitify:update-theme', (_, updatedTheme: Theme) => {
@@ -26,6 +34,17 @@ export const AppearanceSettings: FC = () => {
       }
     });
   }, [settings.theme]);
+
+  window.addEventListener('resize', () => {
+    // clear the timeout
+    clearTimeout(timeout);
+    // start timing for event "completion"
+    timeout = setTimeout(() => {
+      const zoomPercentage = zoomLevelToPercentage(webFrame.getZoomLevel());
+      setZoomPercentage(zoomPercentage);
+      updateSetting('zoomPercentage', zoomPercentage);
+    }, DELAY);
+  });
 
   return (
     <fieldset>
@@ -44,6 +63,48 @@ export const AppearanceSettings: FC = () => {
         }}
         className="mb-0"
       />
+      <div className="flex">
+        <label
+          htmlFor="Zoom"
+          className="mr-3 content-center font-medium text-sm text-gray-700 dark:text-gray-200"
+        >
+          Zoom:
+        </label>
+        <Button
+          label="Zoom Out"
+          onClick={() =>
+            zoomPercentage > 0 &&
+            webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage - 10))
+          }
+          className="rounded-r-none"
+          size="xs"
+        >
+          -
+        </Button>
+        <span className="flex w-16 items-center justify-center rounded-none border border-gray-300 bg-transparent text-sm text-gray-700 dark:text-gray-200">
+          {zoomPercentage.toFixed(0)}%
+        </span>
+        <Button
+          label="Zoom In"
+          onClick={() =>
+            zoomPercentage < 120 &&
+            webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage + 10))
+          }
+          className="rounded-none"
+          size="xs"
+        >
+          +
+        </Button>
+        <Button
+          label="Reset Zoom"
+          onClick={() => webFrame.setZoomLevel(0)}
+          variant="destructive"
+          className="rounded-l-none"
+          size="xs"
+        >
+          X
+        </Button>
+      </div>
       <Checkbox
         name="detailedNotifications"
         label="Detailed notifications"
