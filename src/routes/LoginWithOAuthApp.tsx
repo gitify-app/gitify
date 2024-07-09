@@ -128,10 +128,7 @@ export const LoginWithOAuthApp: FC = () => {
 
   return (
     <div>
-      <Header>
-        <PersonIcon size={Size.XLARGE} className="mr-2" />
-        Login with OAuth App
-      </Header>
+      <Header icon={PersonIcon}>Login with OAuth App</Header>
       <div className="px-8">
         <Form
           initialValues={{

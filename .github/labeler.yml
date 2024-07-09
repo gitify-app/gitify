@@ -1,0 +1,45 @@
+version: v1
+
+labels:
+  - label: 'enhancement'
+    matcher:
+      title: '^feat(\(\w+\))?: .*'
+
+  - label: 'bug'
+    matcher:
+      title: '^fix(\(\w+\))?: .*'
+
+  - label: 'refactor'
+    matcher:
+      title: '^refactor(\(\w+\))?: .*'
+
+  - label: 'documentation'
+    matcher:
+      title: '^docs(\(\w+\))?: .*'
+
+  - label: 'test'
+    matcher:
+      title: '^test(\(\w+\))?: .*'
+
+  - label: 'build'
+    matcher:
+      title: '^(ci|build)(\(\w+\))?: .*'
+
+  - label: 'dependency'
+    matcher:
+      title: '^(deps)(\(\w+\))?: .*'
+    
+checks:
+  - context: 'Semantic Pull Request'
+    description:
+      success: Ready for review & merge.
+      failure: Missing semantic label for merge.
+    labels:
+      any:
+        - enhancement
+        - bug
+        - refactor
+        - documentation
+        - test
+        - build
+        - dependency
