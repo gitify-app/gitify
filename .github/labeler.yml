@@ -24,6 +24,11 @@ labels:
   - label: 'build'
     matcher:
       title: '^(ci|build)(\(\w+\))?: .*'
+      branch: '^(?!release/.*$)'
+
+  - label: 'release'
+    matcher:
+      branch: '^release/.*'
 
   - label: 'dependency'
     matcher:
@@ -43,3 +48,4 @@ checks:
         - test
         - build
         - dependency
+        - release
