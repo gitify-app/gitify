@@ -61,7 +61,12 @@ The release process is automated. Follow the steps below.
 5. In the same branch, **bump the version** of the app by running `pnpm version <new-version-number`. Commit these changes and open a PR. A GitHub Actions workflow will build, sign and upload the release assets for each commit to that branch as long as a branch is named like `release/vX.X.X` and there is a draft release with the same version number(`package.json`).
 6. Merge your release branch into `main`.
 7. Publish the release once you've finalized the release notes and confirmed all assets are there.
-8. A new homebrew cask will be automatically published (workflow runs ~3 hours)
+8. Edit current [Milestone][github-milestones] to have: 
+   * description: link to the release notes
+   * due date: date of release
+   * close milestone
+9. Create new [Milestone][github-milestones] for upcoming release.
+10. A new homebrew cask will be automatically published (workflow runs ~3 hours)
 
 ### Project Philosophy
 
@@ -82,3 +87,4 @@ This project is a tool for monitoring new notifications from Github. It's not me
 [jest-website]: https://jestjs.io/
 [github-new-release]: https://github.com/gitify-app/gitify/releases/new
 [github-dependency-dashboard]: https://github.com/gitify-app/gitify/issues/576
+[github-milestones]: https://github.com/gitify-app/gitify/milestones
