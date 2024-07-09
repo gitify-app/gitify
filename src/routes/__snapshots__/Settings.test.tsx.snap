@@ -153,7 +153,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         <span
           class="flex w-16 items-center justify-center rounded-none border border-gray-300 bg-transparent text-sm text-gray-700 dark:text-gray-200"
         >
-          NaN
+          100
           %
         </span>
         <button
