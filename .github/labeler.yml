@@ -3,31 +3,31 @@ version: v1
 labels:
   - label: 'enhancement'
     matcher:
-      title: '^feat: .*'
+      title: '^feat(\(\w+\))?: .*'
 
   - label: 'bug'
     matcher:
-      title: '^fix: .*'
+      title: '^fix(\(\w+\))?: .*'
 
   - label: 'refactor'
     matcher:
-      title: '^refactor: .*'
+      title: '^refactor(\(\w+\))?: .*'
 
   - label: 'documentation'
     matcher:
-      title: '^docs: .*'
+      title: '^docs(\(\w+\))?: .*'
 
   - label: 'test'
     matcher:
-      title: '^test: .*'
+      title: '^test(\(\w+\))?: .*'
 
   - label: 'build'
     matcher:
-      title: '^(ci|build): .*'
+      title: '^(ci|build)(\(\w+\))?: .*'
 
   - label: 'dependency'
     matcher:
-      title: '^(deps): .*'
+      title: '^(deps)(\(\w+\))?: .*'
     
 checks:
   - context: 'Semantic Pull Request'
