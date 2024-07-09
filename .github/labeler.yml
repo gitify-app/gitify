@@ -1,0 +1,41 @@
+version: v1
+
+labels:
+  - label: 'enhancement'
+    matcher:
+      title: '^feat: .*'
+
+  - label: 'bug'
+    matcher:
+      title: '^fix: .*'
+
+  - label: 'refactor'
+    matcher:
+      title: '^refactor: .*'
+
+  - label: 'documentation'
+    matcher:
+      title: '^docs: .*'
+
+  - label: 'test'
+    matcher:
+      title: '^test: .*'
+
+  - label: 'build'
+    matcher:
+      title: '^ci: .*'
+    
+checks:
+  - context: 'Semantic Pull Request'
+    description:
+      success: Ready for review & merge.
+      failure: Missing semantic label for merge.
+    labels:
+      any:
+        - enhancement
+        - bug
+        - refactor
+        - documentation
+        - test
+        - build
+        - dependency
