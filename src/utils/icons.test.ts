@@ -152,6 +152,13 @@ describe('utils/icons.ts', () => {
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
+          type: 'RepositoryDependabotAlertsThread',
+        }),
+      ).displayName,
+    ).toBe('AlertIcon');
+    expect(
+      getNotificationTypeIcon(
+        createSubjectMock({
           type: 'RepositoryInvitation',
         }),
       ).displayName,
