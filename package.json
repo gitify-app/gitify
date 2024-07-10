@@ -129,7 +129,7 @@
     "@types/react-router-dom": "5.3.3",
     "autoprefixer": "10.4.19",
     "css-loader": "7.1.2",
-    "electron": "31.1.0",
+    "electron": "31.2.0",
     "electron-builder": "24.13.3",
     "graphql-tag": "2.12.6",
     "husky": "9.0.11",
