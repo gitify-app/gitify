@@ -375,6 +375,25 @@ describe('utils/helpers.ts', () => {
       );
     });
 
+    it('Repository Dependabot Alerts Thread url', async () => {
+      const subject = {
+        title: 'Your repository has dependencies with security vulnerabilities',
+        url: null,
+        latest_comment_url: null,
+        type: 'RepositoryDependabotAlertsThread' as SubjectType,
+      };
+
+      const result = await generateGitHubWebUrl({
+        ...mockSingleNotification,
+        subject: subject,
+      });
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+      expect(result).toBe(
+        `https://github.com/gitify-app/notifications-test/security/dependabot?${mockNotificationReferrer}`,
+      );
+    });
+
     describe('Workflow Run URLs', () => {
       it('approval requested', async () => {
         const subject = {

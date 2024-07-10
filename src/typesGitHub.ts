@@ -33,6 +33,7 @@ export type SubjectType =
   | 'Issue'
   | 'PullRequest'
   | 'Release'
+  | 'RepositoryDependabotAlertsThread'
   | 'RepositoryInvitation'
   | 'RepositoryVulnerabilityAlert'
   | 'WorkflowRun';

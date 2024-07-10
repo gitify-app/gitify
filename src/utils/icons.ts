@@ -84,6 +84,8 @@ export function getNotificationTypeIcon(subject: Subject): FC<OcticonProps> {
       }
     case 'Release':
       return TagIcon;
+    case 'RepositoryDependabotAlertsThread':
+      return AlertIcon;
     case 'RepositoryInvitation':
       return MailIcon;
     case 'RepositoryVulnerabilityAlert':
