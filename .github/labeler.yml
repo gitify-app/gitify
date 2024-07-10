@@ -39,8 +39,9 @@ labels:
   - label: 'dependency'
     sync: true
     matcher:
-      title: '^(deps)(\(\w+\))?: .*'
-    
+      title: '^deps(\(\w+\))?: .*'
+      branch: '^renovate/.*'
+ 
 checks:
   - context: 'Semantic Pull Request'
     description:
