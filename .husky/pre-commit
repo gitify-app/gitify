@@ -1,1 +1,1 @@
-pnpx lint-staged
+pnpm lint-staged
