@@ -1,4 +1,4 @@
-import { FeedPersonIcon } from '@primer/octicons-react';
+import { FeedPersonIcon, MarkGithubIcon } from '@primer/octicons-react';
 import type { FC, MouseEvent } from 'react';
 import { IconColor, Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
@@ -50,7 +50,12 @@ export const NotificationFooter: FC<INotificationFooter> = ({
         </button>
       ) : (
         <div>
-          <FeedPersonIcon size={Size.MEDIUM} className={IconColor.GRAY} />
+          {notification.subject.type === 'RepositoryDependabotAlertsThread' ||
+          notification.subject.type === 'RepositoryVulnerabilityAlert' ? (
+            <MarkGithubIcon size={Size.MEDIUM} />
+          ) : (
+            <FeedPersonIcon size={Size.MEDIUM} className={IconColor.GRAY} />
+          )}
         </div>
       )}
       <div title={reason.description}>{reason.title}</div>
