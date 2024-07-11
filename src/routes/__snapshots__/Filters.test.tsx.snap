@@ -81,20 +81,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         Users
       </legend>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="hideBots"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="hideBots"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -157,20 +153,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         Note: if no reasons are selected, all notifications will be shown.
       </span>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="approval_requested"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="approval_requested"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -204,20 +196,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="assign"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="assign"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -251,20 +239,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="author"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="author"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -298,20 +282,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="ci_activity"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="ci_activity"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -345,20 +325,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="comment"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="comment"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -392,20 +368,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="invitation"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="invitation"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -439,20 +411,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="manual"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="manual"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -486,20 +454,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="member_feature_requested"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="member_feature_requested"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -533,20 +497,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="mention"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="mention"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -580,20 +540,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="review_requested"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="review_requested"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -627,20 +583,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="security_advisory_credit"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="security_advisory_credit"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -674,20 +626,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="security_alert"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="security_alert"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -721,20 +669,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="state_change"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="state_change"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -768,20 +712,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="subscribed"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="subscribed"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -815,20 +755,16 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="team_mention"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="team_mention"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -897,148 +833,148 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
 
 exports[`routes/Filters.tsx Reasons section should be able to toggle reason type - none already set 1`] = `
 <div
-  class="flex items-start"
+  class="mt-3 mb-2 text-sm"
 >
   <div
-    class="flex h-5 items-center"
+    class="flex items-center"
   >
     <input
       class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
       id="mention"
       type="checkbox"
     />
-  </div>
-  <div
-    class="ml-3"
-  >
-    <label
-      class="font-medium text-gray-700 dark:text-gray-200"
-      for="mention"
+    <div
+      class="ml-3"
     >
-      Mentioned
-      <span
-        aria-label="tooltip-mention"
-        class="relative"
-        id="tooltip-mention"
+      <label
+        class="font-medium text-gray-700 dark:text-gray-200"
+        for="mention"
       >
-        <svg
-          aria-hidden="true"
-          class="ml-1 text-blue-500"
-          fill="currentColor"
-          focusable="false"
-          height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-          viewBox="0 0 16 16"
-          width="16"
+        Mentioned
+        <span
+          aria-label="tooltip-mention"
+          class="relative"
+          id="tooltip-mention"
         >
-          <path
-            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-          />
-        </svg>
-      </span>
-    </label>
+          <svg
+            aria-hidden="true"
+            class="ml-1 text-blue-500"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+            />
+          </svg>
+        </span>
+      </label>
+    </div>
   </div>
 </div>
 `;
 
 exports[`routes/Filters.tsx Reasons section should be able to toggle reason type - some filters already set 1`] = `
 <div
-  class="flex items-start"
+  class="mt-3 mb-2 text-sm"
 >
   <div
-    class="flex h-5 items-center"
+    class="flex items-center"
   >
     <input
       class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
       id="mention"
       type="checkbox"
     />
-  </div>
-  <div
-    class="ml-3"
-  >
-    <label
-      class="font-medium text-gray-700 dark:text-gray-200"
-      for="mention"
+    <div
+      class="ml-3"
     >
-      Mentioned
-      <span
-        aria-label="tooltip-mention"
-        class="relative"
-        id="tooltip-mention"
+      <label
+        class="font-medium text-gray-700 dark:text-gray-200"
+        for="mention"
       >
-        <svg
-          aria-hidden="true"
-          class="ml-1 text-blue-500"
-          fill="currentColor"
-          focusable="false"
-          height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-          viewBox="0 0 16 16"
-          width="16"
+        Mentioned
+        <span
+          aria-label="tooltip-mention"
+          class="relative"
+          id="tooltip-mention"
         >
-          <path
-            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-          />
-        </svg>
-      </span>
-    </label>
+          <svg
+            aria-hidden="true"
+            class="ml-1 text-blue-500"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+            />
+          </svg>
+        </span>
+      </label>
+    </div>
   </div>
 </div>
 `;
 
 exports[`routes/Filters.tsx Users section should be able to toggle the hideBots checkbox when detailedNotifications is enabled 1`] = `
 <div
-  class="flex items-start"
+  class="mt-3 mb-2 text-sm"
 >
   <div
-    class="flex h-5 items-center"
+    class="flex items-center"
   >
     <input
       class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
       id="hideBots"
       type="checkbox"
     />
-  </div>
-  <div
-    class="ml-3"
-  >
-    <label
-      class="font-medium text-gray-700 dark:text-gray-200"
-      for="hideBots"
+    <div
+      class="ml-3"
     >
-      Hide notifications from Bot accounts
-      <span
-        aria-label="tooltip-hideBots"
-        class="relative"
-        id="tooltip-hideBots"
+      <label
+        class="font-medium text-gray-700 dark:text-gray-200"
+        for="hideBots"
       >
-        <svg
-          aria-hidden="true"
-          class="ml-1 text-blue-500"
-          fill="currentColor"
-          focusable="false"
-          height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-          viewBox="0 0 16 16"
-          width="16"
+        Hide notifications from Bot accounts
+        <span
+          aria-label="tooltip-hideBots"
+          class="relative"
+          id="tooltip-hideBots"
         >
-          <path
-            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-          />
-        </svg>
-      </span>
-    </label>
+          <svg
+            aria-hidden="true"
+            class="ml-1 text-blue-500"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+            />
+          </svg>
+        </span>
+      </label>
+    </div>
   </div>
 </div>
 `;
 
 exports[`routes/Filters.tsx Users section should not be able to toggle the hideBots checkbox when detailedNotifications is disabled 1`] = `
 <div
-  class="flex items-start"
+  class="mt-3 mb-2 text-sm"
 >
   <div
-    class="flex h-5 items-center"
+    class="flex items-center"
   >
     <input
       class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -1046,37 +982,37 @@ exports[`routes/Filters.tsx Users section should not be able to toggle the hideB
       id="hideBots"
       type="checkbox"
     />
-  </div>
-  <div
-    class="ml-3"
-  >
-    <label
-      class="font-medium text-gray-700 dark:text-gray-200"
-      for="hideBots"
-      style="text-decoration: line-through;"
+    <div
+      class="ml-3"
     >
-      Hide notifications from Bot accounts
-      <span
-        aria-label="tooltip-hideBots"
-        class="relative"
-        id="tooltip-hideBots"
+      <label
+        class="font-medium text-gray-700 dark:text-gray-200"
+        for="hideBots"
+        style="text-decoration: line-through;"
       >
-        <svg
-          aria-hidden="true"
-          class="ml-1 text-blue-500"
-          fill="currentColor"
-          focusable="false"
-          height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-          viewBox="0 0 16 16"
-          width="16"
+        Hide notifications from Bot accounts
+        <span
+          aria-label="tooltip-hideBots"
+          class="relative"
+          id="tooltip-hideBots"
         >
-          <path
-            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-          />
-        </svg>
-      </span>
-    </label>
+          <svg
+            aria-hidden="true"
+            class="ml-1 text-blue-500"
+            fill="currentColor"
+            focusable="false"
+            height="16"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            viewBox="0 0 16 16"
+            width="16"
+          >
+            <path
+              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+            />
+          </svg>
+        </span>
+      </label>
+    </div>
   </div>
 </div>
 `;

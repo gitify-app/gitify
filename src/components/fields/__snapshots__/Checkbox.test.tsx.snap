@@ -6,21 +6,17 @@ exports[`components/fields/Checkbox.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              checked=""
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="appearance"
-              type="checkbox"
-            />
-          </div>
+          <input
+            checked=""
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="appearance"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -42,21 +38,17 @@ exports[`components/fields/Checkbox.tsx should render 1`] = `
   </body>,
   "container": <div>
     <div
-      class="mb-3 mt-1 text-sm"
+      class="mt-3 mb-2 text-sm"
     >
       <div
-        class="flex items-start"
+        class="flex items-center"
       >
-        <div
-          class="flex h-5 items-center"
-        >
-          <input
-            checked=""
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-            id="appearance"
-            type="checkbox"
-          />
-        </div>
+        <input
+          checked=""
+          class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+          id="appearance"
+          type="checkbox"
+        />
         <div
           class="ml-3"
         >

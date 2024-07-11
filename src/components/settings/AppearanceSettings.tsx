@@ -61,12 +61,11 @@ export const AppearanceSettings: FC = () => {
         onChange={(evt) => {
           updateSetting('theme', evt.target.value as Theme);
         }}
-        className="mb-0"
       />
-      <div className="flex items-center mb-3 mt-1 text-sm">
+      <div className="flex items-center mt-3 mb-2 text-sm">
         <label
           htmlFor="Zoom"
-          className="mr-3 py-1 content-center font-medium text-gray-700 dark:text-gray-200"
+          className="mr-3 content-center font-medium text-gray-700 dark:text-gray-200"
         >
           Zoom:
         </label>
