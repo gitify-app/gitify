@@ -13,18 +13,16 @@ export interface ICheckbox {
 
 export const Checkbox: FC<ICheckbox> = (props: ICheckbox) => {
   return (
-    <div className="mb-3 mt-1 text-sm">
-      <div className="flex items-start">
-        <div className="flex h-5 items-center">
-          <input
-            type="checkbox"
-            id={props.name}
-            className="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-            checked={props.checked}
-            onChange={props.onChange}
-            disabled={props.disabled}
-          />
-        </div>
+    <div className="mt-3 mb-2 text-sm">
+      <div className="flex items-center">
+        <input
+          type="checkbox"
+          id={props.name}
+          className="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+          checked={props.checked}
+          onChange={props.onChange}
+          disabled={props.disabled}
+        />
 
         <div className="ml-3">
           <label

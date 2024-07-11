@@ -79,13 +79,13 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         Appearance
       </legend>
       <div
-        class="mt-1 text-sm mb-0"
+        class="mt-3 mb-2 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="mr-3 py-1"
+            class="mr-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -100,7 +100,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             role="group"
           >
             <div
-              class="mt-1 flex items-center"
+              class="flex items-center"
             >
               <input
                 checked=""
@@ -118,7 +118,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
               </label>
             </div>
             <div
-              class="mt-1 flex items-center"
+              class="flex items-center"
             >
               <input
                 class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -135,7 +135,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
               </label>
             </div>
             <div
-              class="mt-1 flex items-center"
+              class="flex items-center"
             >
               <input
                 class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -155,55 +155,51 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="flex"
+        class="flex items-center mt-3 mb-2 text-sm"
       >
         <label
-          class="mr-3 content-center font-medium text-sm text-gray-700 dark:text-gray-200"
+          class="mr-3 content-center font-medium text-gray-700 dark:text-gray-200"
           for="Zoom"
         >
           Zoom:
         </label>
         <button
           aria-label="Zoom Out"
-          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-7 rounded-md px-2 py-1 rounded-r-none"
+          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-5 rounded-md px-2 py-1 rounded-r-none"
         >
           -
         </button>
         <span
-          class="flex w-16 items-center justify-center rounded-none border border-gray-300 bg-transparent text-sm text-gray-700 dark:text-gray-200"
+          class="flex w-16 h-5 items-center justify-center rounded-none border border-gray-300 bg-transparent text-xs text-gray-700 dark:text-gray-200"
         >
           100
           %
         </span>
         <button
           aria-label="Zoom In"
-          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-7 px-2 py-1 rounded-none"
+          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-5 px-2 py-1 rounded-none"
         >
           +
         </button>
         <button
           aria-label="Reset Zoom"
-          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-red-600 text-white hover:opacity-90 h-7 rounded-md px-2 py-1 rounded-l-none"
+          class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-red-600 text-white hover:opacity-90 h-5 rounded-md px-2 py-1 rounded-l-none"
         >
           X
         </button>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              checked=""
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="detailedNotifications"
-              type="checkbox"
-            />
-          </div>
+          <input
+            checked=""
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="detailedNotifications"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -237,21 +233,17 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              checked=""
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="showPills"
-              type="checkbox"
-            />
-          </div>
+          <input
+            checked=""
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="showPills"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -285,21 +277,17 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              checked=""
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="showNumber"
-              type="checkbox"
-            />
-          </div>
+          <input
+            checked=""
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="showNumber"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -333,20 +321,16 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="showAccountHostname"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="showAccountHostname"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -382,13 +366,13 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         Notifications
       </legend>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="mr-3 py-1"
+            class="mr-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -403,7 +387,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             role="group"
           >
             <div
-              class="mt-1 flex items-center"
+              class="flex items-center"
             >
               <input
                 checked=""
@@ -421,7 +405,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
               </label>
             </div>
             <div
-              class="mt-1 flex items-center"
+              class="flex items-center"
             >
               <input
                 class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -441,20 +425,16 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="showOnlyParticipating"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="showOnlyParticipating"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -488,20 +468,16 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="markAsDoneOnOpen"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="markAsDoneOnOpen"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -515,20 +491,16 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="delayNotificationState"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="delayNotificationState"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -584,21 +556,17 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         System
       </legend>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              checked=""
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="kbdShortcutEnabled"
-              type="checkbox"
-            />
-          </div>
+          <input
+            checked=""
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="kbdShortcutEnabled"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -632,20 +600,16 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="showNotificationsCountInTray"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="showNotificationsCountInTray"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -659,21 +623,17 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              checked=""
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="showNotifications"
-              type="checkbox"
-            />
-          </div>
+          <input
+            checked=""
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="showNotifications"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -687,21 +647,17 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              checked=""
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="playSound"
-              type="checkbox"
-            />
-          </div>
+          <input
+            checked=""
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="playSound"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
@@ -715,20 +671,16 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         </div>
       </div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
-          class="flex items-start"
+          class="flex items-center"
         >
-          <div
-            class="flex h-5 items-center"
-          >
-            <input
-              class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-              id="openAtStartUp"
-              type="checkbox"
-            />
-          </div>
+          <input
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            id="openAtStartUp"
+            type="checkbox"
+          />
           <div
             class="ml-3"
           >
