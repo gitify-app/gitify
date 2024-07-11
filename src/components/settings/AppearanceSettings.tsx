@@ -63,10 +63,10 @@ export const AppearanceSettings: FC = () => {
         }}
         className="mb-0"
       />
-      <div className="flex">
+      <div className="flex items-center mb-3 mt-1 text-sm">
         <label
           htmlFor="Zoom"
-          className="mr-3 content-center font-medium text-sm text-gray-700 dark:text-gray-200"
+          className="mr-3 py-1 content-center font-medium text-gray-700 dark:text-gray-200"
         >
           Zoom:
         </label>
@@ -77,11 +77,11 @@ export const AppearanceSettings: FC = () => {
             webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage - 10))
           }
           className="rounded-r-none"
-          size="xs"
+          size="inline"
         >
           -
         </Button>
-        <span className="flex w-16 items-center justify-center rounded-none border border-gray-300 bg-transparent text-sm text-gray-700 dark:text-gray-200">
+        <span className="flex w-16 h-5 items-center justify-center rounded-none border border-gray-300 bg-transparent text-xs text-gray-700 dark:text-gray-200">
           {zoomPercentage.toFixed(0)}%
         </span>
         <Button
@@ -91,7 +91,7 @@ export const AppearanceSettings: FC = () => {
             webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage + 10))
           }
           className="rounded-none"
-          size="xs"
+          size="inline"
         >
           +
         </Button>
@@ -100,7 +100,7 @@ export const AppearanceSettings: FC = () => {
           onClick={() => webFrame.setZoomLevel(0)}
           variant="destructive"
           className="rounded-l-none"
-          size="xs"
+          size="inline"
         >
           X
         </Button>
