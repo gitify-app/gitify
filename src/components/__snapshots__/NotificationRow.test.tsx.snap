@@ -53,13 +53,13 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
             </span>
           </div>
           <div
-            class="mb-1 truncate text-sm"
+            class="flex gap-1 items-center mb-1 truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs ml-1 opacity-50"
+              class="text-xxs opacity-50"
             />
           </div>
           <div
@@ -255,13 +255,13 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           </span>
         </div>
         <div
-          class="mb-1 truncate text-sm"
+          class="flex gap-1 items-center mb-1 truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs ml-1 opacity-50"
+            class="text-xxs opacity-50"
           />
         </div>
         <div
@@ -497,13 +497,13 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
         >
           <div
-            class="mb-1 truncate text-sm"
+            class="flex gap-1 items-center mb-1 truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs ml-1 opacity-50"
+              class="text-xxs opacity-50"
             />
           </div>
           <div
@@ -682,13 +682,13 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
         class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
       >
         <div
-          class="mb-1 truncate text-sm"
+          class="flex gap-1 items-center mb-1 truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs ml-1 opacity-50"
+            class="text-xxs opacity-50"
           />
         </div>
         <div
@@ -924,13 +924,13 @@ exports[`components/NotificationRow.tsx should render itself & its children - hi
           class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
         >
           <div
-            class="mb-1 truncate text-sm"
+            class="flex gap-1 items-center mb-1 truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs ml-1 opacity-50 hidden"
+              class="text-xxs opacity-50 hidden"
             />
           </div>
           <div
@@ -1109,13 +1109,13 @@ exports[`components/NotificationRow.tsx should render itself & its children - hi
         class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
       >
         <div
-          class="mb-1 truncate text-sm"
+          class="flex gap-1 items-center mb-1 truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs ml-1 opacity-50 hidden"
+            class="text-xxs opacity-50 hidden"
           />
         </div>
         <div
