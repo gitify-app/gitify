@@ -116,13 +116,13 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </span>
           </div>
           <div
-            class="mb-1 truncate text-sm"
+            class="flex gap-1 items-center mb-1 truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
             I am a robot and this is a test!
             <span
-              class="text-xxs ml-1 opacity-50"
+              class="text-xxs opacity-50"
             />
           </div>
           <div
@@ -315,13 +315,13 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </span>
           </div>
           <div
-            class="mb-1 truncate text-sm"
+            class="flex gap-1 items-center mb-1 truncate text-sm"
             role="main"
             title="Improve the UI"
           >
             Improve the UI
             <span
-              class="text-xxs ml-1 opacity-50"
+              class="text-xxs opacity-50"
             />
           </div>
           <div
@@ -540,13 +540,13 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </span>
         </div>
         <div
-          class="mb-1 truncate text-sm"
+          class="flex gap-1 items-center mb-1 truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
           I am a robot and this is a test!
           <span
-            class="text-xxs ml-1 opacity-50"
+            class="text-xxs opacity-50"
           />
         </div>
         <div
@@ -739,13 +739,13 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </span>
         </div>
         <div
-          class="mb-1 truncate text-sm"
+          class="flex gap-1 items-center mb-1 truncate text-sm"
           role="main"
           title="Improve the UI"
         >
           Improve the UI
           <span
-            class="text-xxs ml-1 opacity-50"
+            class="text-xxs opacity-50"
           />
         </div>
         <div
