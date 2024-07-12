@@ -49,7 +49,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         setShowAsRead(settings.delayNotificationState);
       }
 
-      openNotification(notification, !isCmdOrCtrlHeld);
+      openNotification(notification);
 
       if (settings.markAsDoneOnOpen) {
         markNotificationDone(notification);

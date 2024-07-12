@@ -100,7 +100,6 @@ async function getDiscussionUrl(notification: Notification): Promise<Link> {
 
 export async function generateGitHubWebUrl(
   notification: Notification,
-  withReferer = true,
 ): Promise<Link> {
   const url = new URL(notification.repository.html_url);
 
@@ -137,12 +136,10 @@ export async function generateGitHubWebUrl(
     }
   }
 
-  if (withReferer) {
-    url.searchParams.set(
-      'notification_referrer_id',
-      generateNotificationReferrerId(notification),
-    );
-  }
+  url.searchParams.set(
+    'notification_referrer_id',
+    generateNotificationReferrerId(notification),
+  );
 
   return url.toString() as Link;
 }
