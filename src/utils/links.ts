@@ -50,8 +50,11 @@ export function openRepository(repository: Repository) {
   openExternalLink(repository.html_url);
 }
 
-export async function openNotification(notification: Notification) {
-  const url = await generateGitHubWebUrl(notification);
+export async function openNotification(
+  notification: Notification,
+  withReferer = true,
+) {
+  const url = await generateGitHubWebUrl(notification, withReferer);
   openExternalLink(url);
 }
 

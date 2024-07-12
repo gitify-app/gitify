@@ -16,6 +16,7 @@ import {
   getNotificationTypeIconColor,
 } from '../utils/icons';
 import { openNotification } from '../utils/links';
+import { isMacOS } from '../utils/platform';
 import { HoverGroup } from './HoverGroup';
 import { InteractionButton } from './buttons/InteractionButton';
 import { NotificationFooter } from './notification/NotificationFooter';
@@ -38,24 +39,27 @@ export const NotificationRow: FC<INotificationRow> = ({
   const [animateExit, setAnimateExit] = useState(false);
   const [showAsRead, setShowAsRead] = useState(false);
 
-  const handleNotification = useCallback(() => {
-    setAnimateExit(!settings.delayNotificationState);
-    setShowAsRead(settings.delayNotificationState);
+  const handleNotification = useCallback(
+    (event: MouseEvent<HTMLElement>) => {
+      // If the user is on a Mac, use the command key, otherwise use the control key.
+      const isCmdOrCtrlHeld = isMacOS() ? event.metaKey : event.ctrlKey;
 
-    openNotification(notification);
+      if (!isCmdOrCtrlHeld) {
+        setAnimateExit(!settings.delayNotificationState);
+        setShowAsRead(settings.delayNotificationState);
+      }
 
-    if (settings.markAsDoneOnOpen) {
-      markNotificationDone(notification);
-    } else {
-      // no need to mark as read, github does it by default when opening it
-      removeNotificationFromState(settings, notification);
-    }
-  }, [
-    notification,
-    markNotificationDone,
-    removeNotificationFromState,
-    settings,
-  ]);
+      openNotification(notification, !isCmdOrCtrlHeld);
+
+      if (settings.markAsDoneOnOpen) {
+        markNotificationDone(notification);
+      } else if (!isCmdOrCtrlHeld) {
+        // no need to mark as read, github does it by default when opening it
+        removeNotificationFromState(settings, notification);
+      }
+    },
+    [notification, markNotificationDone, removeNotificationFromState, settings],
+  );
   const unsubscribeFromThread = (event: MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.
     event.stopPropagation();
@@ -102,7 +106,7 @@ export const NotificationRow: FC<INotificationRow> = ({
 
       <div
         className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
-        onClick={() => handleNotification()}
+        onClick={(event) => handleNotification(event)}
       >
         <NotificationHeader notification={notification} />
 
