@@ -1,5 +1,5 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
+import { mockGitHubCloudAccount, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import type { Link } from '../types';
 import {
@@ -7,6 +7,7 @@ import {
   mockSingleNotification,
 } from '../utils/api/__mocks__/response-mocks';
 import * as comms from '../utils/comms';
+import * as storage from '../utils/storage';
 import { RepositoryNotifications } from './RepositoryNotifications';
 
 jest.mock('./NotificationRow', () => ({
@@ -16,6 +17,7 @@ jest.mock('./NotificationRow', () => ({
 describe('components/Repository.tsx', () => {
   const markRepoNotificationsRead = jest.fn();
   const markRepoNotificationsDone = jest.fn();
+  jest.spyOn(storage, 'loadState').mockReturnValue({ settings: mockSettings });
 
   const props = {
     account: mockGitHubCloudAccount,

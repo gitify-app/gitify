@@ -1,5 +1,5 @@
 import { partialMockUser } from '../__mocks__/partial-mocks';
-import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
+import { mockGitHubCloudAccount, mockSettings } from '../__mocks__/state-mocks';
 import type { Hostname, Link } from '../types';
 import type { Repository } from '../typesGitHub';
 import { mockSingleNotification } from './api/__mocks__/response-mocks';
@@ -21,11 +21,11 @@ import {
   openRepository,
   openUserProfile,
 } from './links';
+import * as storage from './storage';
 
 describe('utils/links.ts', () => {
-  beforeEach(() => {
-    jest.spyOn(comms, 'openExternalLink');
-  });
+  jest.spyOn(comms, 'openExternalLink');
+  jest.spyOn(storage, 'loadState').mockReturnValue({ settings: mockSettings });
 
   afterEach(() => {
     jest.clearAllMocks();

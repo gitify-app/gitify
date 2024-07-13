@@ -9,12 +9,12 @@ import type { UserType } from '../../typesGitHub';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
 import * as links from '../../utils/links';
+import * as storage from '../../utils/storage';
 import { NotificationFooter } from './NotificationFooter';
 
 describe('components/notification/NotificationFooter.tsx', () => {
-  beforeEach(() => {
-    jest.spyOn(links, 'openNotification');
-  });
+  jest.spyOn(links, 'openNotification');
+  jest.spyOn(storage, 'loadState').mockReturnValue({ settings: mockSettings });
 
   afterEach(() => {
     jest.clearAllMocks();

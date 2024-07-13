@@ -4,6 +4,7 @@ import { AppContext } from '../context/App';
 import { GroupBy } from '../types';
 import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
 import * as links from '../utils/links';
+import * as storage from '../utils/storage';
 import { AccountNotifications } from './AccountNotifications';
 
 jest.mock('./RepositoryNotifications', () => ({
@@ -61,6 +62,9 @@ describe('components/AccountNotifications.tsx', () => {
   });
 
   it('should open profile when clicked', async () => {
+    jest
+      .spyOn(storage, 'loadState')
+      .mockReturnValue({ settings: mockSettings });
     const openAccountProfileMock = jest.spyOn(links, 'openAccountProfile');
 
     const props = {

@@ -10,6 +10,7 @@ import {
 import { AppContext } from '../context/App';
 import * as comms from '../utils/comms';
 import * as links from '../utils/links';
+import * as storage from '../utils/storage';
 
 import { AccountsRoute } from './Accounts';
 
@@ -20,6 +21,8 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/Accounts.tsx', () => {
+  jest.spyOn(storage, 'loadState').mockReturnValue({ settings: mockSettings });
+
   afterEach(() => {
     jest.clearAllMocks();
   });

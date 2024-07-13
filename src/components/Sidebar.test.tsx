@@ -5,6 +5,7 @@ import { mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import { IconColor } from '../types';
 import * as comms from '../utils/comms';
+import * as storage from '../utils/storage';
 import { Sidebar } from './Sidebar';
 
 const mockNavigate = jest.fn();
@@ -15,6 +16,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('components/Sidebar.tsx', () => {
   const fetchNotifications = jest.fn();
+  jest.spyOn(storage, 'loadState').mockReturnValue({ settings: mockSettings });
 
   const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
 

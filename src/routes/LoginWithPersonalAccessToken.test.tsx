@@ -7,7 +7,9 @@ import {
 } from '@testing-library/react';
 import { shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
+import { mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
+import * as storage from '../utils/storage';
 import {
   LoginWithPersonalAccessToken,
   validate,
@@ -21,6 +23,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('routes/LoginWithPersonalAccessToken.tsx', () => {
   const openExternalMock = jest.spyOn(shell, 'openExternal');
+  jest.spyOn(storage, 'loadState').mockReturnValue({ settings: mockSettings });
 
   const mockValidateToken = jest.fn();
 

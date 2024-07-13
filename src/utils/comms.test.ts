@@ -1,4 +1,5 @@
 import { ipcRenderer, shell } from 'electron';
+import { mockSettings } from '../__mocks__/state-mocks';
 import type { Link } from '../types';
 import {
   getAppVersion,
@@ -9,6 +10,7 @@ import {
   showWindow,
   updateTrayIcon,
 } from './comms';
+import * as storage from './storage';
 
 describe('utils/comms.ts', () => {
   beforeEach(() => {
@@ -59,9 +61,15 @@ describe('utils/comms.ts', () => {
   });
 
   it('should open an external link', () => {
+    jest
+      .spyOn(storage, 'loadState')
+      .mockReturnValue({ settings: mockSettings });
+
     openExternalLink('http://www.gitify.io/' as Link);
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(shell.openExternal).toHaveBeenCalledWith('http://www.gitify.io/');
+    expect(shell.openExternal).toHaveBeenCalledWith('http://www.gitify.io/', {
+      activate: true,
+    });
   });
 
   it('should ignore opening external local links file:///', () => {

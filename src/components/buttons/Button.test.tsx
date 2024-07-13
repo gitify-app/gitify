@@ -1,11 +1,14 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { shell } from 'electron';
+import { mockSettings } from '../../__mocks__/state-mocks';
 import type { Link } from '../../types';
+import * as storage from '../../utils/storage';
 import { Button, type IButton } from './Button';
 
 describe('components/buttons/Button.tsx', () => {
   const openExternalMock = jest.spyOn(shell, 'openExternal');
+  jest.spyOn(storage, 'loadState').mockReturnValue({ settings: mockSettings });
 
   const props: IButton = {
     label: 'button',

@@ -15,6 +15,7 @@ import {
   type AuthState,
   type GitifyError,
   GroupBy,
+  OpenPreference,
   type SettingsState,
   type SettingsValue,
   type Status,
@@ -73,6 +74,7 @@ export const defaultSettings: SettingsState = {
   showNumber: true,
   keyboardShortcut: true,
   groupBy: GroupBy.REPOSITORY,
+  openLinks: OpenPreference.FOREGROUND,
   ...defaultFilters,
 };
 

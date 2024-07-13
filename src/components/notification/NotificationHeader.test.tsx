@@ -4,9 +4,12 @@ import { AppContext } from '../../context/App';
 import { GroupBy } from '../../types';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
+import * as storage from '../../utils/storage';
 import { NotificationHeader } from './NotificationHeader';
 
 describe('components/notification/NotificationHeader.tsx', () => {
+  jest.spyOn(storage, 'loadState').mockReturnValue({ settings: mockSettings });
+
   it('should render itself & its children - group by repositories', async () => {
     const props = {
       notification: mockSingleNotification,

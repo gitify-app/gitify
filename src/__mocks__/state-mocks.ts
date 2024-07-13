@@ -5,6 +5,7 @@ import {
   type GitifyUser,
   GroupBy,
   type Hostname,
+  OpenPreference,
   type SettingsState,
   Theme,
   type Token,
@@ -89,6 +90,7 @@ export const mockSettings: SettingsState = {
   keyboardShortcut: true,
   groupBy: GroupBy.REPOSITORY,
   filterReasons: [],
+  openLinks: OpenPreference.FOREGROUND,
 };
 
 export const mockState: GitifyState = {
