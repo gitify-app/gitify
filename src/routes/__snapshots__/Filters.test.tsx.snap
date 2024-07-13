@@ -87,7 +87,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="hideBots"
             type="checkbox"
           />
@@ -95,7 +95,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="hideBots"
             >
               Hide notifications from Bot accounts
@@ -159,7 +159,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="approval_requested"
             type="checkbox"
           />
@@ -167,7 +167,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="approval_requested"
             >
               Approval Requested
@@ -202,7 +202,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="assign"
             type="checkbox"
           />
@@ -210,7 +210,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="assign"
             >
               Assigned
@@ -245,7 +245,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="author"
             type="checkbox"
           />
@@ -253,7 +253,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="author"
             >
               Authored
@@ -288,7 +288,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="ci_activity"
             type="checkbox"
           />
@@ -296,7 +296,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="ci_activity"
             >
               Workflow Run Completed
@@ -331,7 +331,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="comment"
             type="checkbox"
           />
@@ -339,7 +339,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="comment"
             >
               Commented
@@ -374,7 +374,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="invitation"
             type="checkbox"
           />
@@ -382,7 +382,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="invitation"
             >
               Invitation Received
@@ -417,7 +417,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="manual"
             type="checkbox"
           />
@@ -425,7 +425,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="manual"
             >
               Updated
@@ -460,7 +460,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="member_feature_requested"
             type="checkbox"
           />
@@ -468,7 +468,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="member_feature_requested"
             >
               Member Feature Requested
@@ -503,7 +503,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="mention"
             type="checkbox"
           />
@@ -511,7 +511,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="mention"
             >
               Mentioned
@@ -546,7 +546,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="review_requested"
             type="checkbox"
           />
@@ -554,7 +554,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="review_requested"
             >
               Review Requested
@@ -589,7 +589,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="security_advisory_credit"
             type="checkbox"
           />
@@ -597,7 +597,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="security_advisory_credit"
             >
               Security Advisory Credit Received
@@ -632,7 +632,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="security_alert"
             type="checkbox"
           />
@@ -640,7 +640,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="security_alert"
             >
               Security Alert Received
@@ -675,7 +675,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="state_change"
             type="checkbox"
           />
@@ -683,7 +683,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="state_change"
             >
               State Changed
@@ -718,7 +718,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="subscribed"
             type="checkbox"
           />
@@ -726,7 +726,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="subscribed"
             >
               Updated
@@ -761,7 +761,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="team_mention"
             type="checkbox"
           />
@@ -769,7 +769,7 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="team_mention"
             >
               Team Mentioned
@@ -839,7 +839,7 @@ exports[`routes/Filters.tsx Reasons section should be able to toggle reason type
     class="flex items-center"
   >
     <input
-      class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+      class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
       id="mention"
       type="checkbox"
     />
@@ -847,7 +847,7 @@ exports[`routes/Filters.tsx Reasons section should be able to toggle reason type
       class="ml-3"
     >
       <label
-        class="font-medium text-gray-700 dark:text-gray-200"
+        class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
         for="mention"
       >
         Mentioned
@@ -885,7 +885,7 @@ exports[`routes/Filters.tsx Reasons section should be able to toggle reason type
     class="flex items-center"
   >
     <input
-      class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+      class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
       id="mention"
       type="checkbox"
     />
@@ -893,7 +893,7 @@ exports[`routes/Filters.tsx Reasons section should be able to toggle reason type
       class="ml-3"
     >
       <label
-        class="font-medium text-gray-700 dark:text-gray-200"
+        class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
         for="mention"
       >
         Mentioned
@@ -931,7 +931,7 @@ exports[`routes/Filters.tsx Users section should be able to toggle the hideBots 
     class="flex items-center"
   >
     <input
-      class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+      class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
       id="hideBots"
       type="checkbox"
     />
@@ -939,7 +939,7 @@ exports[`routes/Filters.tsx Users section should be able to toggle the hideBots 
       class="ml-3"
     >
       <label
-        class="font-medium text-gray-700 dark:text-gray-200"
+        class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
         for="hideBots"
       >
         Hide notifications from Bot accounts
@@ -977,7 +977,7 @@ exports[`routes/Filters.tsx Users section should not be able to toggle the hideB
     class="flex items-center"
   >
     <input
-      class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+      class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
       disabled=""
       id="hideBots"
       type="checkbox"
@@ -986,7 +986,7 @@ exports[`routes/Filters.tsx Users section should not be able to toggle the hideB
       class="ml-3"
     >
       <label
-        class="font-medium text-gray-700 dark:text-gray-200"
+        class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
         for="hideBots"
         style="text-decoration: line-through;"
       >

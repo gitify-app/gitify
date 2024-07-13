@@ -42,7 +42,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
               >
                 <input
                   type="radio"
-                  className="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                  className="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
                   id={`${props.name}_${item.value.toLowerCase()}`}
                   name={props.name}
                   value={item.value}
@@ -52,7 +52,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
                 />
                 <label
                   htmlFor={`${props.name}_${item.value.toLowerCase()}`}
-                  className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                  className="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
                 >
                   {item.label}
                 </label>
