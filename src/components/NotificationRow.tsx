@@ -101,13 +101,13 @@ export const NotificationRow: FC<INotificationRow> = ({
       </div>
 
       <div
-        className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
+        className="flex-1 truncate cursor-pointer"
         onClick={() => handleNotification()}
       >
         <NotificationHeader notification={notification} />
 
         <div
-          className="flex gap-1 items-center mb-1 truncate text-sm"
+          className="flex gap-1 items-center mb-1 text-sm"
           role="main"
           title={notificationTitle}
         >
