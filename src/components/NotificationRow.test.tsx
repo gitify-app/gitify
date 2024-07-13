@@ -4,6 +4,7 @@ import {
   mockGitHubCloudAccount,
   mockSettings,
 } from '../__mocks__/state-mocks';
+import { setPlatform } from '../__mocks__/utils';
 import { AppContext } from '../context/App';
 import { GroupBy, type Link } from '../types';
 import type { UserType } from '../typesGitHub';
@@ -82,6 +83,18 @@ describe('components/NotificationRow.tsx', () => {
   });
 
   describe('notification interactions', () => {
+    let originalPlatform: NodeJS.Platform;
+
+    beforeEach(() => {
+      // Save the original platform value
+      originalPlatform = process.platform;
+    });
+
+    afterEach(() => {
+      // Restore the original platform value
+      setPlatform(originalPlatform);
+    });
+
     it('should open a notification in the browser - click', () => {
       const removeNotificationFromState = jest.fn();
 
@@ -105,6 +118,60 @@ describe('components/NotificationRow.tsx', () => {
       fireEvent.click(screen.getByRole('main'));
       expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(removeNotificationFromState).toHaveBeenCalledTimes(1);
+    });
+
+    it('should open a notification in the browser - macOS meta key click', () => {
+      setPlatform('darwin');
+
+      const removeNotificationFromState = jest.fn();
+
+      const props = {
+        notification: mockSingleNotification,
+        account: mockGitHubCloudAccount,
+      };
+
+      render(
+        <AppContext.Provider
+          value={{
+            settings: { ...mockSettings, markAsDoneOnOpen: false },
+            removeNotificationFromState,
+            auth: mockAuth,
+          }}
+        >
+          <NotificationRow {...props} />
+        </AppContext.Provider>,
+      );
+
+      fireEvent.click(screen.getByRole('main'), { metaKey: true });
+      expect(links.openNotification).toHaveBeenCalledTimes(1);
+      expect(removeNotificationFromState).toHaveBeenCalledTimes(0);
+    });
+
+    it('should open a notification in the browser - ctrl key click', () => {
+      setPlatform('win32');
+
+      const removeNotificationFromState = jest.fn();
+
+      const props = {
+        notification: mockSingleNotification,
+        account: mockGitHubCloudAccount,
+      };
+
+      render(
+        <AppContext.Provider
+          value={{
+            settings: { ...mockSettings, markAsDoneOnOpen: false },
+            removeNotificationFromState,
+            auth: mockAuth,
+          }}
+        >
+          <NotificationRow {...props} />
+        </AppContext.Provider>,
+      );
+
+      fireEvent.click(screen.getByRole('main'), { ctrlKey: true });
+      expect(links.openNotification).toHaveBeenCalledTimes(1);
+      expect(removeNotificationFromState).toHaveBeenCalledTimes(0);
     });
 
     it('should open a notification in the browser - delay notification setting enabled', () => {

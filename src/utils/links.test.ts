@@ -107,13 +107,28 @@ describe('utils/links.ts', () => {
     expect(comms.openExternalLink).toHaveBeenCalledWith(mockHtmlUrl);
   });
 
-  it('openNotification', async () => {
+  it('openNotification - foreground', async () => {
     const mockNotificationUrl = mockSingleNotification.repository.html_url;
     jest
       .spyOn(helpers, 'generateGitHubWebUrl')
       .mockResolvedValue(mockNotificationUrl);
-    await openNotification(mockSingleNotification);
-    expect(comms.openExternalLink).toHaveBeenCalledWith(mockNotificationUrl);
+    await openNotification(mockSingleNotification, true);
+    expect(comms.openExternalLink).toHaveBeenCalledWith(
+      mockNotificationUrl,
+      true,
+    );
+  });
+
+  it('openNotification - background', async () => {
+    const mockNotificationUrl = mockSingleNotification.repository.html_url;
+    jest
+      .spyOn(helpers, 'generateGitHubWebUrl')
+      .mockResolvedValue(mockNotificationUrl);
+    await openNotification(mockSingleNotification, false);
+    expect(comms.openExternalLink).toHaveBeenCalledWith(
+      mockNotificationUrl,
+      false,
+    );
   });
 
   it('openParticipatingDocs', () => {

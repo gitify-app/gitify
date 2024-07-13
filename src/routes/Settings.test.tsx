@@ -1,7 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
-import { mockPlatform } from '../__mocks__/utils';
+import { setPlatform } from '../__mocks__/utils';
 import { AppContext } from '../context/App';
 import { SettingsRoute } from './Settings';
 
@@ -21,7 +21,7 @@ describe('routes/Settings.tsx', () => {
   beforeAll(() => {
     // Save the original platform value
     originalPlatform = process.platform;
-    mockPlatform('darwin');
+    setPlatform('darwin');
   });
 
   afterEach(() => {

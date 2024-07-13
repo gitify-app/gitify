@@ -49,11 +49,13 @@ export const NotificationRow: FC<INotificationRow> = ({
         setShowAsRead(settings.delayNotificationState);
       }
 
-      openNotification(notification);
+      openNotification(notification, !isCmdOrCtrlHeld);
 
       if (settings.markAsDoneOnOpen) {
         markNotificationDone(notification);
-      } else if (!isCmdOrCtrlHeld) {
+      } else if (isCmdOrCtrlHeld) {
+        setShowAsRead(settings.delayNotificationState);
+      } else {
         // no need to mark as read, github does it by default when opening it
         removeNotificationFromState(settings, notification);
       }

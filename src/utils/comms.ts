@@ -2,9 +2,11 @@ import { ipcRenderer, shell } from 'electron';
 import type { Link } from '../types';
 import Constants from './constants';
 
-export function openExternalLink(url: Link): void {
+export function openExternalLink(url: Link, openInForeground = true): void {
   if (!url.toLowerCase().startsWith('file:///')) {
-    shell.openExternal(url);
+    shell.openExternal(url, {
+      activate: openInForeground,
+    });
   }
 }
 
