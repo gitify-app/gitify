@@ -1,3 +1,4 @@
+import { MarkGithubIcon } from '@primer/octicons-react';
 import { fireEvent, render, screen } from '@testing-library/react';
 import { AppContext } from '../context/App';
 import { Header } from './Header';
@@ -16,13 +17,13 @@ describe('components/Header.tsx', () => {
   });
 
   it('should render itself & its children', () => {
-    const tree = render(<Header>Test Header</Header>);
+    const tree = render(<Header icon={MarkGithubIcon}>Test Header</Header>);
 
     expect(tree).toMatchSnapshot();
   });
 
   it('should navigate back', () => {
-    render(<Header>Test Header</Header>);
+    render(<Header icon={MarkGithubIcon}>Test Header</Header>);
 
     fireEvent.click(screen.getByLabelText('Go Back'));
 
@@ -36,7 +37,9 @@ describe('components/Header.tsx', () => {
           fetchNotifications,
         }}
       >
-        <Header fetchOnBack={true}>Test Header</Header>
+        <Header fetchOnBack={true} icon={MarkGithubIcon}>
+          Test Header
+        </Header>
       </AppContext.Provider>,
     );
 

@@ -32,7 +32,7 @@ export const App = () => {
   return (
     <AppProvider>
       <Router>
-        <div className="flex h-full flex-col pl-14">
+        <div className="flex h-full overflow-y-auto flex-col pl-14">
           <Loading />
           <Sidebar />
           <Routes>

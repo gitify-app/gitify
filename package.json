@@ -1,6 +1,6 @@
 {
   "name": "gitify",
-  "version": "5.9.0",
+  "version": "5.10.0",
   "description": "GitHub Notifications on your menu bar.",
   "main": "src/electron/main.js",
   "scripts": {
@@ -101,8 +101,9 @@
   },
   "dependencies": {
     "@electron/remote": "2.1.2",
-    "@primer/octicons-react": "19.10.0",
+    "@primer/octicons-react": "19.11.0",
     "axios": "1.7.2",
+    "class-variance-authority": "0.7.0",
     "clsx": "2.1.1",
     "date-fns": "3.6.0",
     "electron-updater": "6.2.1",
@@ -113,6 +114,7 @@
     "react-dom": "18.3.1",
     "react-final-form": "6.5.9",
     "react-router-dom": "6.24.1",
+    "tailwind-merge": "2.4.0",
     "ts-loader": "9.5.1",
     "typescript": "5.5.3"
   },
@@ -121,13 +123,13 @@
     "@electron/notarize": "2.3.2",
     "@testing-library/react": "16.0.0",
     "@types/jest": "29.5.12",
-    "@types/node": "20.14.9",
+    "@types/node": "20.14.10",
     "@types/nprogress": "0.2.3",
     "@types/react": "18.3.3",
     "@types/react-router-dom": "5.3.3",
     "autoprefixer": "10.4.19",
     "css-loader": "7.1.2",
-    "electron": "31.1.0",
+    "electron": "31.2.0",
     "electron-builder": "24.13.3",
     "graphql-tag": "2.12.6",
     "husky": "9.0.11",
@@ -136,17 +138,19 @@
     "nock": "13.5.4",
     "postcss": "8.4.39",
     "postcss-loader": "8.1.1",
-    "rimraf": "5.0.7",
+    "resize-observer-polyfill": "1.5.1",
+    "rimraf": "6.0.1",
     "style-loader": "4.0.0",
     "tailwindcss": "3.4.4",
-    "ts-jest": "29.1.5",
+    "ts-jest": "29.2.2",
     "ts-node": "10.9.2",
-    "webpack": "5.92.1",
+    "webpack": "5.93.0",
     "webpack-cli": "5.1.4",
     "webpack-merge": "6.0.1"
   },
-  "packageManager": "pnpm@9.4.0",
+  "packageManager": "pnpm@9.5.0",
   "lint-staged": {
-    "*.{js,json,ts,tsx}": "biome format --fix"
+    "*": "biome check --fix --no-errors-on-unmatched",
+    "*.{js,ts,tsx}": "pnpm test -- --findRelatedTests -u --passWithNoTests"
   }
 }

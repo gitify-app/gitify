@@ -71,6 +71,13 @@ export const NotificationRow: FC<INotificationRow> = ({
     notification.subject.type,
   ]);
 
+  const notificationNumber = notification.subject?.number
+    ? `#${notification.subject.number}`
+    : '';
+
+  const notificationTitle =
+    `${notification.subject.title} ${notificationNumber}`.trim();
+
   const groupByDate = settings.groupBy === 'DATE';
 
   return (
@@ -100,11 +107,20 @@ export const NotificationRow: FC<INotificationRow> = ({
         <NotificationHeader notification={notification} />
 
         <div
-          className="mb-1 truncate text-sm"
+          className="flex gap-1 items-center mb-1 truncate text-sm"
           role="main"
-          title={notification.subject.title}
+          title={notificationTitle}
         >
           {notification.subject.title}
+          <span
+            className={cn(
+              'text-xxs',
+              Opacity.READ,
+              !settings.showNumber && 'hidden',
+            )}
+          >
+            {notificationNumber}
+          </span>
         </div>
 
         <NotificationFooter notification={notification} />

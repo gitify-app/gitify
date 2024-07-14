@@ -128,7 +128,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
       target: { value: 'github.com' },
     });
 
-    fireEvent.submit(screen.getByTitle('Login'));
+    fireEvent.submit(screen.getByLabelText('Login'));
 
     await waitFor(() => expect(mockValidateToken).toHaveBeenCalledTimes(1));
 
@@ -156,7 +156,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
       fireEvent.change(screen.getByLabelText('Hostname'), {
         target: { value: 'github.com' },
       });
-      fireEvent.submit(screen.getByTitle('Login'));
+      fireEvent.submit(screen.getByLabelText('Login'));
     });
 
     await waitFor(() => expect(mockValidateToken).toHaveBeenCalledTimes(1));
@@ -179,7 +179,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
       target: { value: '123' },
     });
 
-    fireEvent.submit(screen.getByTitle('Login'));
+    fireEvent.submit(screen.getByLabelText('Login'));
 
     expect(screen.getByText('Invalid hostname.')).toBeDefined();
     expect(screen.getByText('Invalid token.')).toBeDefined();

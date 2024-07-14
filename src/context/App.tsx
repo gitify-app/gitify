@@ -1,3 +1,4 @@
+import { webFrame } from 'electron';
 import {
   type ReactNode,
   createContext,
@@ -42,6 +43,7 @@ import Constants from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setTheme } from '../utils/theme';
+import { zoomPercentageToLevel } from '../utils/zoom';
 
 const defaultAuth: AuthState = {
   accounts: [],
@@ -62,11 +64,13 @@ export const defaultSettings: SettingsState = {
   showNotificationsCountInTray: false,
   openAtStartup: false,
   theme: Theme.SYSTEM,
+  zoomPercentage: 100,
   detailedNotifications: true,
   markAsDoneOnOpen: false,
   showAccountHostname: false,
   delayNotificationState: false,
   showPills: true,
+  showNumber: true,
   keyboardShortcut: true,
   groupBy: GroupBy.REPOSITORY,
   ...defaultFilters,
@@ -96,8 +100,9 @@ interface AppContextState {
   markRepoNotificationsDone: (notification: Notification) => Promise<void>;
 
   settings: SettingsState;
-  updateSetting: (name: keyof SettingsState, value: SettingsValue) => void;
   clearFilters: () => void;
+  resetSettings: () => void;
+  updateSetting: (name: keyof SettingsState, value: SettingsValue) => void;
 }
 
 export const AppContext = createContext<Partial<AppContextState>>({});
@@ -149,6 +154,17 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setKeyboardShortcut(settings.keyboardShortcut);
   }, [settings.keyboardShortcut]);
 
+  const clearFilters = useCallback(() => {
+    const newSettings = { ...settings, ...defaultFilters };
+    setSettings(newSettings);
+    saveState({ auth, settings: newSettings });
+  }, [auth]);
+
+  const resetSettings = useCallback(() => {
+    setSettings(defaultSettings);
+    saveState({ auth, settings: defaultSettings });
+  }, [auth]);
+
   const updateSetting = useCallback(
     (name: keyof SettingsState, value: SettingsValue) => {
       if (name === 'openAtStartup') {
@@ -161,12 +177,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     },
     [auth, settings],
   );
-
-  const clearFilters = useCallback(() => {
-    const newSettings = { ...settings, ...defaultFilters };
-    setSettings(newSettings);
-    saveState({ auth, settings: newSettings });
-  }, [auth]);
 
   const isLoggedIn = useMemo(() => {
     return auth.accounts.length > 0;
@@ -237,6 +247,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     if (existing.settings) {
       setKeyboardShortcut(existing.settings.keyboardShortcut);
       setSettings({ ...defaultSettings, ...existing.settings });
+      webFrame.setZoomLevel(
+        zoomPercentageToLevel(existing.settings.zoomPercentage),
+      );
       return existing.settings;
     }
   }, []);
@@ -299,8 +312,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         markRepoNotificationsDone: markRepoNotificationsDoneWithAccounts,
 
         settings,
-        updateSetting,
         clearFilters,
+        resetSettings,
+        updateSetting,
       }}
     >
       {children}

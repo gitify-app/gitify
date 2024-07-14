@@ -72,13 +72,13 @@ export const LoginWithOAuthApp: FC = () => {
           helpText={
             <div className="mb-1">
               <Button
-                name="Create new OAuth App"
                 label="Create new OAuth App"
                 disabled={!values.hostname}
-                icon={PersonIcon}
-                size={Size.XSMALL}
+                icon={{ icon: PersonIcon, size: Size.XSMALL }}
                 url={getNewOAuthAppURL(values.hostname)}
-              />
+              >
+                Create new OAuth App
+              </Button>
               <span className="mx-1">on GitHub then paste your</span>
               <span className="italic">client id and client secret</span> below.
             </div>
@@ -98,8 +98,7 @@ export const LoginWithOAuthApp: FC = () => {
             name="Docs"
             label="GitHub Docs"
             className="mt-2"
-            icon={BookIcon}
-            size={Size.XSMALL}
+            icon={{ icon: BookIcon, size: Size.XSMALL }}
             url={Constants.GITHUB_DOCS.OAUTH_URL}
           />
 
@@ -107,8 +106,7 @@ export const LoginWithOAuthApp: FC = () => {
             name="Login"
             label="Login"
             className="mt-2 px-4 py-2 !text-sm"
-            icon={SignInIcon}
-            size={Size.MEDIUM}
+            icon={{ icon: SignInIcon, size: Size.MEDIUM }}
             disabled={submitting || pristine}
             type="submit"
           />
@@ -130,10 +128,7 @@ export const LoginWithOAuthApp: FC = () => {
 
   return (
     <div>
-      <Header>
-        <PersonIcon size={Size.XLARGE} className="mr-2" />
-        Login with OAuth App
-      </Header>
+      <Header icon={PersonIcon}>Login with OAuth App</Header>
       <div className="px-8">
         <Form
           initialValues={{

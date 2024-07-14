@@ -1,19 +1,19 @@
+import { DeviceDesktopIcon } from '@primer/octicons-react';
 import { type FC, useContext } from 'react';
 import { AppContext } from '../../context/App';
 import Constants from '../../utils/constants';
 import { isLinux, isMacOS } from '../../utils/platform';
 import { Checkbox } from '../fields/Checkbox';
+import { Legend } from './Legend';
 
 export const SystemSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
 
   return (
-    <fieldset className="mb-3">
-      <legend id="system" className="mb-1 mt-2 font-semibold">
-        System
-      </legend>
+    <fieldset>
+      <Legend icon={DeviceDesktopIcon}>System</Legend>
       <Checkbox
-        name="kbdShortcutEnabled"
+        name="keyboardShortcutEnabled"
         label="Enable keyboard shortcut"
         checked={settings.keyboardShortcut}
         onChange={(evt) =>

@@ -59,7 +59,49 @@ describe('components/notification/NotificationFooter.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself & its children without avatar', async () => {
+  describe('security alerts should use github icon for avatar', () => {
+    it('Repository Dependabot Alerts Thread', async () => {
+      jest
+        .spyOn(global.Date, 'now')
+        .mockImplementation(() => new Date('2024').valueOf());
+
+      const mockNotification = mockSingleNotification;
+      mockNotification.subject.type = 'RepositoryDependabotAlertsThread';
+
+      const props = {
+        notification: mockNotification,
+      };
+
+      const tree = render(
+        <AppContext.Provider value={{ settings: mockSettings }}>
+          <NotificationFooter {...props} />
+        </AppContext.Provider>,
+      );
+      expect(tree).toMatchSnapshot();
+    });
+
+    it('Repository Vulnerability Alert', async () => {
+      jest
+        .spyOn(global.Date, 'now')
+        .mockImplementation(() => new Date('2024').valueOf());
+
+      const mockNotification = mockSingleNotification;
+      mockNotification.subject.type = 'RepositoryVulnerabilityAlert';
+
+      const props = {
+        notification: mockNotification,
+      };
+
+      const tree = render(
+        <AppContext.Provider value={{ settings: mockSettings }}>
+          <NotificationFooter {...props} />
+        </AppContext.Provider>,
+      );
+      expect(tree).toMatchSnapshot();
+    });
+  });
+
+  it('should default to known avatar if no user found', async () => {
     jest
       .spyOn(global.Date, 'now')
       .mockImplementation(() => new Date('2024').valueOf());

@@ -125,6 +125,9 @@ export async function generateGitHubWebUrl(
       case 'RepositoryInvitation':
         url.pathname += '/invitations';
         break;
+      case 'RepositoryDependabotAlertsThread':
+        url.pathname += '/security/dependabot';
+        break;
       case 'WorkflowRun':
         url.href = getWorkflowRunUrl(notification);
         break;

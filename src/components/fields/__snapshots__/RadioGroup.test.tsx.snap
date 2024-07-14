@@ -6,13 +6,13 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="mr-3 py-1"
+            class="mr-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -27,7 +27,7 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
             role="group"
           >
             <div
-              class="mt-1 flex"
+              class="flex items-center"
             >
               <input
                 class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -44,7 +44,7 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
               </label>
             </div>
             <div
-              class="mt-1 flex"
+              class="flex items-center"
             >
               <input
                 checked=""
@@ -73,13 +73,13 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
   </body>,
   "container": <div>
     <div
-      class="mb-3 mt-1 text-sm"
+      class="mt-3 mb-2 text-sm"
     >
       <div
         class="flex items-start"
       >
         <div
-          class="mr-3 py-1"
+          class="mr-3"
         >
           <label
             class="font-medium text-gray-700 dark:text-gray-200"
@@ -94,7 +94,7 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
           role="group"
         >
           <div
-            class="mt-1 flex"
+            class="flex items-center"
           >
             <input
               class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -111,7 +111,7 @@ exports[`components/fields/RadioGroup.tsx should render 1`] = `
             </label>
           </div>
           <div
-            class="mt-1 flex"
+            class="flex items-center"
           >
             <input
               checked=""
@@ -197,13 +197,13 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="mb-3 mt-1 text-sm"
+        class="mt-3 mb-2 text-sm"
       >
         <div
           class="flex items-start"
         >
           <div
-            class="mr-3 py-1"
+            class="mr-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200"
@@ -219,7 +219,7 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
             role="group"
           >
             <div
-              class="mt-1 flex"
+              class="flex items-center"
             >
               <input
                 class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -237,7 +237,7 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
               </label>
             </div>
             <div
-              class="mt-1 flex"
+              class="flex items-center"
             >
               <input
                 checked=""
@@ -267,13 +267,13 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
   </body>,
   "container": <div>
     <div
-      class="mb-3 mt-1 text-sm"
+      class="mt-3 mb-2 text-sm"
     >
       <div
         class="flex items-start"
       >
         <div
-          class="mr-3 py-1"
+          class="mr-3"
         >
           <label
             class="font-medium text-gray-700 dark:text-gray-200"
@@ -289,7 +289,7 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
           role="group"
         >
           <div
-            class="mt-1 flex"
+            class="flex items-center"
           >
             <input
               class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
@@ -307,7 +307,7 @@ exports[`components/fields/RadioGroup.tsx should render as disabled 1`] = `
             </label>
           </div>
           <div
-            class="mt-1 flex"
+            class="flex items-center"
           >
             <input
               checked=""

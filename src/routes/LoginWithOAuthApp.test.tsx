@@ -125,7 +125,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
       target: { value: 'abc' },
     });
 
-    fireEvent.submit(screen.getByTitle('Login'));
+    fireEvent.submit(screen.getByLabelText('Login'));
 
     expect(screen.getByText('Invalid hostname.')).toBeTruthy();
     expect(screen.getByText('Invalid client id.')).toBeTruthy();

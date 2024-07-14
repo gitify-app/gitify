@@ -1,18 +1,18 @@
+import { BellIcon } from '@primer/octicons-react';
 import { type FC, type MouseEvent, useContext } from 'react';
 import { AppContext } from '../../context/App';
 import { GroupBy } from '../../types';
 import { openGitHubParticipatingDocs } from '../../utils/links';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
+import { Legend } from './Legend';
 
 export const NotificationSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
 
   return (
-    <fieldset className="mb-3">
-      <legend id="notifications" className="mb-1 mt-2 font-semibold">
-        Notifications
-      </legend>
+    <fieldset>
+      <Legend icon={BellIcon}>Notifications</Legend>
       <RadioGroup
         name="groupBy"
         label="Group by:"

@@ -6,6 +6,9 @@ on:
       - 'release/v**'
   workflow_dispatch: # For manually running release process to verify codesigning of artifacts
 
+permissions:
+  contents: write
+
 jobs:
   release-macos:
     name: Publish macOS (electron-builder)
@@ -30,7 +33,7 @@ jobs:
           APPLEID_TEAM_ID: ${{ secrets.appleid_teamid }}
           CSC_LINK: ${{ secrets.mac_certs }}
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
-          GH_TOKEN: ${{ secrets.gh_token }}
+          GH_TOKEN: ${{ secrets.github_token }}
           NOTARIZE: true
       - uses: actions/upload-artifact@v4
         with:
@@ -56,7 +59,7 @@ jobs:
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
       - run: pnpm make:win --publish onTagOrDraft
         env:
-          GH_TOKEN: ${{ secrets.gh_token }}
+          GH_TOKEN: ${{ secrets.github_token }}
       - uses: actions/upload-artifact@v4
         with:
           name: Gitify-release-win
@@ -81,7 +84,7 @@ jobs:
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
       - run: pnpm make:linux --publish onTagOrDraft
         env:
-          GH_TOKEN: ${{ secrets.gh_token }}
+          GH_TOKEN: ${{ secrets.github_token }}
       - uses: actions/upload-artifact@v4
         with:
           name: Gitify-release-linux
