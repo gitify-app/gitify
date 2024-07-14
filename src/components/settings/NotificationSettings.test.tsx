@@ -3,12 +3,10 @@ import { MemoryRouter } from 'react-router-dom';
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import * as comms from '../../utils/comms';
-import * as storage from '../../utils/storage';
 import { NotificationSettings } from './NotificationSettings';
 
 describe('routes/components/settings/NotificationSettings.tsx', () => {
   const updateSetting = jest.fn();
-  jest.spyOn(storage, 'loadState').mockReturnValue({ settings: mockSettings });
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -62,7 +60,9 @@ describe('routes/components/settings/NotificationSettings.tsx', () => {
   });
 
   it('should open official docs for showOnlyParticipating tooltip', async () => {
-    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+    const openExternalLinkMock = jest
+      .spyOn(comms, 'openExternalLink')
+      .mockImplementation();
 
     await act(async () => {
       render(

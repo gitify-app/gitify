@@ -4,11 +4,12 @@ import { AppContext } from '../../context/App';
 import { GroupBy } from '../../types';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
-import * as storage from '../../utils/storage';
 import { NotificationHeader } from './NotificationHeader';
 
 describe('components/notification/NotificationHeader.tsx', () => {
-  jest.spyOn(storage, 'loadState').mockReturnValue({ settings: mockSettings });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   it('should render itself & its children - group by repositories', async () => {
     const props = {
@@ -41,7 +42,9 @@ describe('components/notification/NotificationHeader.tsx', () => {
   });
 
   it('should open notification user profile - group by date', () => {
-    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+    const openExternalLinkMock = jest
+      .spyOn(comms, 'openExternalLink')
+      .mockImplementation();
 
     const props = {
       notification: mockSingleNotification,

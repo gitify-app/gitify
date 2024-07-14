@@ -10,7 +10,6 @@ import {
 import { AppContext } from '../context/App';
 import * as comms from '../utils/comms';
 import * as links from '../utils/links';
-import * as storage from '../utils/storage';
 
 import { AccountsRoute } from './Accounts';
 
@@ -21,8 +20,6 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/Accounts.tsx', () => {
-  jest.spyOn(storage, 'loadState').mockReturnValue({ settings: mockSettings });
-
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -76,7 +73,9 @@ describe('routes/Accounts.tsx', () => {
 
   describe('Account interactions', () => {
     it('open profile in external browser', async () => {
-      const openAccountProfileMock = jest.spyOn(links, 'openAccountProfile');
+      const openAccountProfileMock = jest
+        .spyOn(links, 'openAccountProfile')
+        .mockImplementation();
 
       await act(async () => {
         render(
@@ -104,7 +103,9 @@ describe('routes/Accounts.tsx', () => {
     });
 
     it('open host in external browser', async () => {
-      const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+      const openExternalLinkMock = jest
+        .spyOn(comms, 'openExternalLink')
+        .mockImplementation();
 
       await act(async () => {
         render(
@@ -130,7 +131,9 @@ describe('routes/Accounts.tsx', () => {
     });
 
     it('open developer settings in external browser', async () => {
-      const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+      const openExternalLinkMock = jest
+        .spyOn(comms, 'openExternalLink')
+        .mockImplementation();
 
       await act(async () => {
         render(

@@ -8,14 +8,9 @@ import { GroupBy, type Link } from '../../types';
 import type { UserType } from '../../typesGitHub';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
-import * as links from '../../utils/links';
-import * as storage from '../../utils/storage';
 import { NotificationFooter } from './NotificationFooter';
 
 describe('components/notification/NotificationFooter.tsx', () => {
-  jest.spyOn(links, 'openNotification');
-  jest.spyOn(storage, 'loadState').mockReturnValue({ settings: mockSettings });
-
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -122,7 +117,9 @@ describe('components/notification/NotificationFooter.tsx', () => {
   });
 
   it('should open notification user profile', () => {
-    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+    const openExternalLinkMock = jest
+      .spyOn(comms, 'openExternalLink')
+      .mockImplementation();
 
     const props = {
       notification: {

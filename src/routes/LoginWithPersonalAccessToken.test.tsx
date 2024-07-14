@@ -5,11 +5,9 @@ import {
   screen,
   waitFor,
 } from '@testing-library/react';
-import { shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
-import { mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
-import * as storage from '../utils/storage';
+import * as comms from '../utils/comms';
 import {
   LoginWithPersonalAccessToken,
   validate,
@@ -22,10 +20,10 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/LoginWithPersonalAccessToken.tsx', () => {
-  const openExternalMock = jest.spyOn(shell, 'openExternal');
-  jest.spyOn(storage, 'loadState').mockReturnValue({ settings: mockSettings });
-
   const mockValidateToken = jest.fn();
+  const openExternalLinkMock = jest
+    .spyOn(comms, 'openExternalLink')
+    .mockImplementation();
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -91,7 +89,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
 
       fireEvent.click(screen.getByText('Generate a PAT'));
 
-      expect(openExternalMock).toHaveBeenCalledTimes(0);
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(0);
     });
 
     it('should open in browser if hostname configured', async () => {
@@ -107,7 +105,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
 
       fireEvent.click(screen.getByText('Generate a PAT'));
 
-      expect(openExternalMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -201,6 +199,6 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
 
     fireEvent.click(screen.getByLabelText('GitHub Docs'));
 
-    expect(openExternalMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
   });
 });

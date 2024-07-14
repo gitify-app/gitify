@@ -10,12 +10,11 @@ import type { UserType } from '../typesGitHub';
 import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as comms from '../utils/comms';
 import * as links from '../utils/links';
-import * as storage from '../utils/storage';
 import { NotificationRow } from './NotificationRow';
 
 describe('components/NotificationRow.tsx', () => {
   jest.spyOn(links, 'openNotification');
-  jest.spyOn(storage, 'loadState').mockReturnValue({ settings: mockSettings });
+  jest.spyOn(comms, 'openExternalLink').mockImplementation();
 
   afterEach(() => {
     jest.clearAllMocks();

@@ -3,7 +3,6 @@ import { MemoryRouter } from 'react-router-dom';
 import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import * as comms from '../../utils/comms';
-import * as storage from '../../utils/storage';
 import { SettingsFooter } from './SettingsFooter';
 
 const mockNavigate = jest.fn();
@@ -15,8 +14,6 @@ jest.mock('react-router-dom', () => ({
 global.ResizeObserver = require('resize-observer-polyfill');
 
 describe('routes/components/settings/SettingsFooter.tsx', () => {
-  jest.spyOn(storage, 'loadState').mockReturnValue({ settings: mockSettings });
-
   afterEach(() => {
     jest.clearAllMocks();
     process.env = originalEnv;
@@ -84,7 +81,9 @@ describe('routes/components/settings/SettingsFooter.tsx', () => {
       ...originalEnv,
       NODE_ENV: 'production',
     };
-    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+    const openExternalLinkMock = jest
+      .spyOn(comms, 'openExternalLink')
+      .mockImplementation();
 
     await act(async () => {
       render(
