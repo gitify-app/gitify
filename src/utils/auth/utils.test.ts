@@ -33,7 +33,7 @@ describe('utils/auth/utils.ts', () => {
       ).mockImplementation((event, callback): void => {
         if (event === 'will-redirect') {
           const event = new Event('will-redirect');
-          callback(event, 'http://github.com/?code=123-456');
+          callback(event, 'https://github.com/?code=123-456');
         }
       });
 
@@ -59,7 +59,7 @@ describe('utils/auth/utils.ts', () => {
       ).mockImplementation((event, callback): void => {
         if (event === 'will-redirect') {
           const event = new Event('will-redirect');
-          callback(event, 'http://www.github.com/?error=Oops');
+          callback(event, 'https://www.github.com/?error=Oops');
         }
       });
 
