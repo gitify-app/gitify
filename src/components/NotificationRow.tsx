@@ -107,11 +107,11 @@ export const NotificationRow: FC<INotificationRow> = ({
         <NotificationHeader notification={notification} />
 
         <div
-          className="flex gap-1 items-center mb-1 text-sm"
+          className="flex gap-1 items-center mb-1 truncate text-sm"
           role="main"
           title={notificationTitle}
         >
-          {notification.subject.title}
+          <span className="truncate">{notification.subject.title}</span>
           <span
             className={cn(
               'text-xxs',

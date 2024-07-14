@@ -116,11 +116,15 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </span>
           </div>
           <div
-            class="flex gap-1 items-center mb-1 text-sm"
+            class="flex gap-1 items-center mb-1 truncate text-sm"
             role="main"
             title="I am a robot and this is a test!"
           >
-            I am a robot and this is a test!
+            <span
+              class="truncate"
+            >
+              I am a robot and this is a test!
+            </span>
             <span
               class="text-xxs opacity-50"
             />
@@ -315,11 +319,15 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </span>
           </div>
           <div
-            class="flex gap-1 items-center mb-1 text-sm"
+            class="flex gap-1 items-center mb-1 truncate text-sm"
             role="main"
             title="Improve the UI"
           >
-            Improve the UI
+            <span
+              class="truncate"
+            >
+              Improve the UI
+            </span>
             <span
               class="text-xxs opacity-50"
             />
@@ -540,11 +548,15 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </span>
         </div>
         <div
-          class="flex gap-1 items-center mb-1 text-sm"
+          class="flex gap-1 items-center mb-1 truncate text-sm"
           role="main"
           title="I am a robot and this is a test!"
         >
-          I am a robot and this is a test!
+          <span
+            class="truncate"
+          >
+            I am a robot and this is a test!
+          </span>
           <span
             class="text-xxs opacity-50"
           />
@@ -739,11 +751,15 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </span>
         </div>
         <div
-          class="flex gap-1 items-center mb-1 text-sm"
+          class="flex gap-1 items-center mb-1 truncate text-sm"
           role="main"
           title="Improve the UI"
         >
-          Improve the UI
+          <span
+            class="truncate"
+          >
+            Improve the UI
+          </span>
           <span
             class="text-xxs opacity-50"
           />
