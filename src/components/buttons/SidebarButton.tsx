@@ -26,11 +26,11 @@ export const SidebarButton: FC<ISidebarButton> = (props: ISidebarButton) => {
     <button
       type="button"
       className={cn(
-        'flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500  disabled:cursor-default',
+        'flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold rounded-md focus:outline-none disabled:text-gray-500  disabled:cursor-default',
         hasMetric
-          ? `${IconColor.GREEN} hover:text-green-700`
-          : `${IconColor.WHITE} hover:text-gray-500`,
-        isRoute && 'rounded-md ring-1 ring-current',
+          ? `${IconColor.GREEN} hover:text-green-700 shadow-green-500`
+          : `${IconColor.WHITE} hover:text-gray-500 shadow-white`,
+        isRoute && 'shadow',
         props.loading ? 'animate-spin' : undefined,
         props.size ? 'py-2' : 'py-1',
       )}
