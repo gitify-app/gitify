@@ -59,9 +59,9 @@ describe('utils/comms.ts', () => {
   });
 
   it('should open an external link', () => {
-    openExternalLink('http://www.gitify.io/' as Link);
+    openExternalLink('https://www.gitify.io/' as Link);
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(shell.openExternal).toHaveBeenCalledWith('http://www.gitify.io/');
+    expect(shell.openExternal).toHaveBeenCalledWith('https://www.gitify.io/');
   });
 
   it('should ignore opening external local links file:///', () => {
