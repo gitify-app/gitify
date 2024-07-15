@@ -13,7 +13,7 @@ export const SystemSettings: FC = () => {
     <fieldset>
       <Legend icon={DeviceDesktopIcon}>System</Legend>
       <Checkbox
-        name="kbdShortcutEnabled"
+        name="keyboardShortcutEnabled"
         label="Enable keyboard shortcut"
         checked={settings.keyboardShortcut}
         onChange={(evt) =>

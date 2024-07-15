@@ -52,27 +52,39 @@ const defaultAuth: AuthState = {
   user: null,
 };
 
+const defaultApperanceSettings = {
+  theme: Theme.SYSTEM,
+  zoomPercentage: 100,
+  detailedNotifications: true,
+  showPills: true,
+  showNumber: true,
+  showAccountHostname: false,
+};
+
+const defaultNotificationSettings = {
+  groupBy: GroupBy.REPOSITORY,
+  participating: false,
+  markAsDoneOnOpen: false,
+  delayNotificationState: false,
+};
+
+const defaultSystemSettings = {
+  keyboardShortcut: true,
+  showNotificationsCountInTray: false,
+  showNotifications: true,
+  playSound: true,
+  openAtStartup: false,
+};
+
 export const defaultFilters = {
   hideBots: false,
   filterReasons: [],
 };
 
 export const defaultSettings: SettingsState = {
-  participating: false,
-  playSound: true,
-  showNotifications: true,
-  showNotificationsCountInTray: false,
-  openAtStartup: false,
-  theme: Theme.SYSTEM,
-  zoomPercentage: 100,
-  detailedNotifications: true,
-  markAsDoneOnOpen: false,
-  showAccountHostname: false,
-  delayNotificationState: false,
-  showPills: true,
-  showNumber: true,
-  keyboardShortcut: true,
-  groupBy: GroupBy.REPOSITORY,
+  ...defaultApperanceSettings,
+  ...defaultNotificationSettings,
+  ...defaultSystemSettings,
   ...defaultFilters,
 };
 

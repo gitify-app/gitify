@@ -564,7 +564,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           <input
             checked=""
             class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
-            id="kbdShortcutEnabled"
+            id="keyboardShortcutEnabled"
             type="checkbox"
           />
           <div
@@ -572,13 +572,13 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
-              for="kbdShortcutEnabled"
+              for="keyboardShortcutEnabled"
             >
               Enable keyboard shortcut
               <span
-                aria-label="tooltip-kbdShortcutEnabled"
+                aria-label="tooltip-keyboardShortcutEnabled"
                 class="relative"
-                id="tooltip-kbdShortcutEnabled"
+                id="tooltip-keyboardShortcutEnabled"
               >
                 <svg
                   aria-hidden="true"

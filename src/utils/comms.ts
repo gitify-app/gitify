@@ -3,7 +3,7 @@ import type { Link } from '../types';
 import Constants from './constants';
 
 export function openExternalLink(url: Link): void {
-  if (!url.toLowerCase().startsWith('file:///')) {
+  if (url.toLowerCase().startsWith('https://')) {
     shell.openExternal(url);
   }
 }

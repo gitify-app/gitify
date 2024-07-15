@@ -1,7 +1,6 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
-import { mockPlatform } from '../__mocks__/utils';
 import { AppContext } from '../context/App';
 import { SettingsRoute } from './Settings';
 
@@ -14,30 +13,11 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/Settings.tsx', () => {
-  let originalPlatform: NodeJS.Platform;
   const fetchNotifications = jest.fn();
   const resetSettings = jest.fn();
 
-  beforeAll(() => {
-    // Save the original platform value
-    originalPlatform = process.platform;
-    mockPlatform('darwin');
-  });
-
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  afterAll(() => {
-    // Restore the original platform value
-    Object.defineProperty(process, 'platform', {
-      value: originalPlatform,
-    });
-
-    // Restore the original node env value
-    Object.defineProperty(process, 'platform', {
-      value: originalPlatform,
-    });
   });
 
   it('should render itself & its children', async () => {

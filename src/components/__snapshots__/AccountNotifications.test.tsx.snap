@@ -96,7 +96,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </svg>
         </div>
         <div
-          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
+          class="flex-1 truncate cursor-pointer"
         >
           <div
             class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
@@ -120,7 +120,11 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             role="main"
             title="I am a robot and this is a test!"
           >
-            I am a robot and this is a test!
+            <span
+              class="truncate"
+            >
+              I am a robot and this is a test!
+            </span>
             <span
               class="text-xxs opacity-50"
             />
@@ -295,7 +299,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           </svg>
         </div>
         <div
-          class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
+          class="flex-1 truncate cursor-pointer"
         >
           <div
             class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
@@ -319,7 +323,11 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             role="main"
             title="Improve the UI"
           >
-            Improve the UI
+            <span
+              class="truncate"
+            >
+              Improve the UI
+            </span>
             <span
               class="text-xxs opacity-50"
             />
@@ -520,7 +528,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         </svg>
       </div>
       <div
-        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
+        class="flex-1 truncate cursor-pointer"
       >
         <div
           class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
@@ -544,7 +552,11 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           role="main"
           title="I am a robot and this is a test!"
         >
-          I am a robot and this is a test!
+          <span
+            class="truncate"
+          >
+            I am a robot and this is a test!
+          </span>
           <span
             class="text-xxs opacity-50"
           />
@@ -719,7 +731,7 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         </svg>
       </div>
       <div
-        class="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
+        class="flex-1 truncate cursor-pointer"
       >
         <div
           class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
@@ -743,7 +755,11 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           role="main"
           title="Improve the UI"
         >
-          Improve the UI
+          <span
+            class="truncate"
+          >
+            Improve the UI
+          </span>
           <span
             class="text-xxs opacity-50"
           />
