@@ -89,6 +89,7 @@ const mockNotificationSettings = {
 };
 
 const mockSystemSettings = {
+  openLinks: OpenPreference.FOREGROUND,
   keyboardShortcut: true,
   showNotificationsCountInTray: false,
   showNotifications: true,
@@ -99,7 +100,6 @@ const mockSystemSettings = {
 const mockFilters = {
   hideBots: false,
   filterReasons: [],
-  openLinks: OpenPreference.FOREGROUND,
 };
 
 export const mockSettings: SettingsState = {
