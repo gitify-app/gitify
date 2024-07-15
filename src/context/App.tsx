@@ -15,6 +15,7 @@ import {
   type AuthState,
   type GitifyError,
   GroupBy,
+  OpenPreference,
   type SettingsState,
   type SettingsValue,
   type Status,
@@ -69,6 +70,7 @@ const defaultNotificationSettings = {
 };
 
 const defaultSystemSettings = {
+  openLinks: OpenPreference.FOREGROUND,
   keyboardShortcut: true,
   showNotificationsCountInTray: false,
   showNotifications: true,
