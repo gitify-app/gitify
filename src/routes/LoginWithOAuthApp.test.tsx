@@ -1,8 +1,8 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { shell } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
 import { AppContext } from '../context/App';
 import type { AuthState, ClientID, ClientSecret, Hostname } from '../types';
+import * as comms from '../utils/comms';
 import { LoginWithOAuthApp, validate } from './LoginWithOAuthApp';
 
 const mockNavigate = jest.fn();
@@ -12,7 +12,9 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/LoginWithOAuthApp.tsx', () => {
-  const openExternalMock = jest.spyOn(shell, 'openExternal');
+  const openExternalLinkMock = jest
+    .spyOn(comms, 'openExternalLink')
+    .mockImplementation();
 
   const mockAuth: AuthState = {
     accounts: [],
@@ -84,7 +86,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
 
       fireEvent.click(screen.getByText('Create new OAuth App'));
 
-      expect(openExternalMock).toHaveBeenCalledTimes(0);
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(0);
     });
 
     it('should open in browser if hostname configured', async () => {
@@ -102,7 +104,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
 
       fireEvent.click(screen.getByText('Create new OAuth App'));
 
-      expect(openExternalMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -143,6 +145,6 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
 
     fireEvent.click(screen.getByLabelText('GitHub Docs'));
 
-    expect(openExternalMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
   });
 });

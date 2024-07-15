@@ -27,8 +27,8 @@ export const LogoIcon: FC<ILogoIcon> = ({
       size === Size.LARGE && 'size-16',
     )}
     onClick={() => onClick?.()}
-    xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
+    xmlns="https://www.w3.org/2000/svg"
+    xmlnsXlink="https://www.w3.org/1999/xlink"
     viewBox="0 0 500 500"
     role="img"
     aria-label="Gitify Logo"

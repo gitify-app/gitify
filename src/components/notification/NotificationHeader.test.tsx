@@ -7,6 +7,10 @@ import * as comms from '../../utils/comms';
 import { NotificationHeader } from './NotificationHeader';
 
 describe('components/notification/NotificationHeader.tsx', () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should render itself & its children - group by repositories', async () => {
     const props = {
       notification: mockSingleNotification,
@@ -38,7 +42,9 @@ describe('components/notification/NotificationHeader.tsx', () => {
   });
 
   it('should open notification user profile - group by date', () => {
-    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+    const openExternalLinkMock = jest
+      .spyOn(comms, 'openExternalLink')
+      .mockImplementation();
 
     const props = {
       notification: mockSingleNotification,

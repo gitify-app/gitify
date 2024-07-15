@@ -61,7 +61,9 @@ describe('components/AccountNotifications.tsx', () => {
   });
 
   it('should open profile when clicked', async () => {
-    const openAccountProfileMock = jest.spyOn(links, 'openAccountProfile');
+    const openAccountProfileMock = jest
+      .spyOn(links, 'openAccountProfile')
+      .mockImplementation();
 
     const props = {
       account: mockGitHubCloudAccount,

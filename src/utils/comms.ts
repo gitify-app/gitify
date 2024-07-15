@@ -1,10 +1,16 @@
 import { ipcRenderer, shell } from 'electron';
-import type { Link } from '../types';
+import { type Link, OpenPreference } from '../types';
 import Constants from './constants';
+import { loadState } from './storage';
 
 export function openExternalLink(url: Link): void {
-  if (!url.toLowerCase().startsWith('file:///')) {
-    shell.openExternal(url);
+  if (url.toLowerCase().startsWith('https://')) {
+    // Load the state from local storage to avoid having to pass settings as a parameter
+    const { settings } = loadState();
+
+    shell.openExternal(url, {
+      activate: settings.openLinks === OpenPreference.FOREGROUND,
+    });
   }
 }
 

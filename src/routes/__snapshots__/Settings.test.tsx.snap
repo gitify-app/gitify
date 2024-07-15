@@ -104,14 +104,14 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             >
               <input
                 checked=""
-                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
                 id="theme_system"
                 name="theme"
                 type="radio"
                 value="SYSTEM"
               />
               <label
-                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
                 for="theme_system"
               >
                 System
@@ -121,14 +121,14 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
               class="flex items-center"
             >
               <input
-                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
                 id="theme_light"
                 name="theme"
                 type="radio"
                 value="LIGHT"
               />
               <label
-                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
                 for="theme_light"
               >
                 Light
@@ -138,14 +138,14 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
               class="flex items-center"
             >
               <input
-                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
                 id="theme_dark"
                 name="theme"
                 type="radio"
                 value="DARK"
               />
               <label
-                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
                 for="theme_dark"
               >
                 Dark
@@ -196,7 +196,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         >
           <input
             checked=""
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="detailedNotifications"
             type="checkbox"
           />
@@ -204,7 +204,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="detailedNotifications"
             >
               Detailed notifications
@@ -240,7 +240,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         >
           <input
             checked=""
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="showPills"
             type="checkbox"
           />
@@ -248,7 +248,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="showPills"
             >
               Show notification metric pills
@@ -284,7 +284,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         >
           <input
             checked=""
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="showNumber"
             type="checkbox"
           />
@@ -292,7 +292,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="showNumber"
             >
               Show number
@@ -327,7 +327,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="showAccountHostname"
             type="checkbox"
           />
@@ -335,7 +335,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="showAccountHostname"
             >
               Show account hostname
@@ -391,14 +391,14 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             >
               <input
                 checked=""
-                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
                 id="groupBy_repository"
                 name="groupBy"
                 type="radio"
                 value="REPOSITORY"
               />
               <label
-                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
                 for="groupBy_repository"
               >
                 Repository
@@ -408,14 +408,14 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
               class="flex items-center"
             >
               <input
-                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
                 id="groupBy_date"
                 name="groupBy"
                 type="radio"
                 value="DATE"
               />
               <label
-                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
                 for="groupBy_date"
               >
                 Date
@@ -431,7 +431,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="showOnlyParticipating"
             type="checkbox"
           />
@@ -439,7 +439,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="showOnlyParticipating"
             >
               Show only participating
@@ -474,7 +474,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="markAsDoneOnOpen"
             type="checkbox"
           />
@@ -482,7 +482,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="markAsDoneOnOpen"
             >
               Mark as done on open
@@ -497,7 +497,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="delayNotificationState"
             type="checkbox"
           />
@@ -505,7 +505,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="delayNotificationState"
             >
               Delay notification state
@@ -559,26 +559,85 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         class="mt-3 mb-2 text-sm"
       >
         <div
+          class="flex items-start"
+        >
+          <div
+            class="mr-3"
+          >
+            <label
+              class="font-medium text-gray-700 dark:text-gray-200"
+              for="openLinks"
+            >
+              Open Links:
+            </label>
+          </div>
+          <div
+            aria-labelledby="openLinks"
+            class="flex items-center space-x-4"
+            role="group"
+          >
+            <div
+              class="flex items-center"
+            >
+              <input
+                checked=""
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                id="openLinks_foreground"
+                name="openLinks"
+                type="radio"
+                value="FOREGROUND"
+              />
+              <label
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
+                for="openLinks_foreground"
+              >
+                Foreground
+              </label>
+            </div>
+            <div
+              class="flex items-center"
+            >
+              <input
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                id="openLinks_background"
+                name="openLinks"
+                type="radio"
+                value="BACKGROUND"
+              />
+              <label
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
+                for="openLinks_background"
+              >
+                Background
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3 mb-2 text-sm"
+      >
+        <div
           class="flex items-center"
         >
           <input
             checked=""
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-            id="kbdShortcutEnabled"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            id="keyboardShortcutEnabled"
             type="checkbox"
           />
           <div
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
-              for="kbdShortcutEnabled"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
+              for="keyboardShortcutEnabled"
             >
               Enable keyboard shortcut
               <span
-                aria-label="tooltip-kbdShortcutEnabled"
+                aria-label="tooltip-keyboardShortcutEnabled"
                 class="relative"
-                id="tooltip-kbdShortcutEnabled"
+                id="tooltip-keyboardShortcutEnabled"
               >
                 <svg
                   aria-hidden="true"
@@ -606,7 +665,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="showNotificationsCountInTray"
             type="checkbox"
           />
@@ -614,7 +673,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="showNotificationsCountInTray"
             >
               Show notifications count in tray
@@ -630,7 +689,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         >
           <input
             checked=""
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="showNotifications"
             type="checkbox"
           />
@@ -638,7 +697,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="showNotifications"
             >
               Show system notifications
@@ -654,7 +713,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         >
           <input
             checked=""
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="playSound"
             type="checkbox"
           />
@@ -662,7 +721,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="playSound"
             >
               Play sound
@@ -677,7 +736,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
-            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+            class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
             id="openAtStartUp"
             type="checkbox"
           />
@@ -685,7 +744,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             class="ml-3"
           >
             <label
-              class="font-medium text-gray-700 dark:text-gray-200"
+              class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="openAtStartUp"
             >
               Open at startup

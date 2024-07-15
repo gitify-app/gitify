@@ -37,7 +37,9 @@ describe('components/Repository.tsx', () => {
   });
 
   it('should open the browser when clicking on the repo name', () => {
-    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+    const openExternalLinkMock = jest
+      .spyOn(comms, 'openExternalLink')
+      .mockImplementation();
 
     render(
       <AppContext.Provider value={{}}>

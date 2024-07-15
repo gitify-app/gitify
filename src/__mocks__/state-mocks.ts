@@ -5,6 +5,7 @@ import {
   type GitifyUser,
   GroupBy,
   type Hostname,
+  OpenPreference,
   type SettingsState,
   Theme,
   type Token,
@@ -71,24 +72,41 @@ export const mockAuth: AuthState = {
 
 export const mockToken = 'token-123-456' as Token;
 
-export const mockSettings: SettingsState = {
-  participating: false,
-  playSound: true,
-  showNotifications: true,
-  hideBots: false,
-  showNotificationsCountInTray: false,
-  openAtStartup: false,
+const mockAppearanceSettings = {
   theme: Theme.SYSTEM,
   zoomPercentage: 100,
   detailedNotifications: true,
-  markAsDoneOnOpen: false,
-  showAccountHostname: false,
-  delayNotificationState: false,
   showPills: true,
   showNumber: true,
-  keyboardShortcut: true,
+  showAccountHostname: false,
+};
+
+const mockNotificationSettings = {
   groupBy: GroupBy.REPOSITORY,
+  participating: false,
+  markAsDoneOnOpen: false,
+  delayNotificationState: false,
+};
+
+const mockSystemSettings = {
+  openLinks: OpenPreference.FOREGROUND,
+  keyboardShortcut: true,
+  showNotificationsCountInTray: false,
+  showNotifications: true,
+  playSound: true,
+  openAtStartup: false,
+};
+
+const mockFilters = {
+  hideBots: false,
   filterReasons: [],
+};
+
+export const mockSettings: SettingsState = {
+  ...mockAppearanceSettings,
+  ...mockNotificationSettings,
+  ...mockSystemSettings,
+  ...mockFilters,
 };
 
 export const mockState: GitifyState = {

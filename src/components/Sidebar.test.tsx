@@ -15,8 +15,9 @@ jest.mock('react-router-dom', () => ({
 
 describe('components/Sidebar.tsx', () => {
   const fetchNotifications = jest.fn();
-
-  const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+  const openExternalLinkMock = jest
+    .spyOn(comms, 'openExternalLink')
+    .mockImplementation();
 
   afterEach(() => {
     jest.clearAllMocks();

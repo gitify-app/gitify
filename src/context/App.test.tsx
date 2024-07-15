@@ -384,6 +384,7 @@ describe('context/App.tsx', () => {
           groupBy: 'REPOSITORY',
           filterReasons: [],
           zoomPercentage: 100,
+          openLinks: 'FOREGROUND',
         } as SettingsState,
       });
     });
@@ -440,6 +441,7 @@ describe('context/App.tsx', () => {
           groupBy: 'REPOSITORY',
           filterReasons: [],
           zoomPercentage: 100,
+          openLinks: 'FOREGROUND',
         } as SettingsState,
       });
     });
