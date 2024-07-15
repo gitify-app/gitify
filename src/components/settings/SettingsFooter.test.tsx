@@ -81,7 +81,9 @@ describe('routes/components/settings/SettingsFooter.tsx', () => {
       ...originalEnv,
       NODE_ENV: 'production',
     };
-    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+    const openExternalLinkMock = jest
+      .spyOn(comms, 'openExternalLink')
+      .mockImplementation();
 
     await act(async () => {
       render(

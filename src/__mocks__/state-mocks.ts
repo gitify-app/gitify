@@ -5,6 +5,7 @@ import {
   type GitifyUser,
   GroupBy,
   type Hostname,
+  OpenPreference,
   type SettingsState,
   Theme,
   type Token,
@@ -88,6 +89,7 @@ const mockNotificationSettings = {
 };
 
 const mockSystemSettings = {
+  openLinks: OpenPreference.FOREGROUND,
   keyboardShortcut: true,
   showNotificationsCountInTray: false,
   showNotifications: true,

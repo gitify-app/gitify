@@ -60,7 +60,9 @@ describe('routes/components/settings/NotificationSettings.tsx', () => {
   });
 
   it('should open official docs for showOnlyParticipating tooltip', async () => {
-    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
+    const openExternalLinkMock = jest
+      .spyOn(comms, 'openExternalLink')
+      .mockImplementation();
 
     await act(async () => {
       render(

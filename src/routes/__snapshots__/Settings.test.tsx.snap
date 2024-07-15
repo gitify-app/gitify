@@ -559,6 +559,65 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         class="mt-3 mb-2 text-sm"
       >
         <div
+          class="flex items-start"
+        >
+          <div
+            class="mr-3"
+          >
+            <label
+              class="font-medium text-gray-700 dark:text-gray-200"
+              for="openLinks"
+            >
+              Open Links:
+            </label>
+          </div>
+          <div
+            aria-labelledby="openLinks"
+            class="flex items-center space-x-4"
+            role="group"
+          >
+            <div
+              class="flex items-center"
+            >
+              <input
+                checked=""
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                id="openLinks_foreground"
+                name="openLinks"
+                type="radio"
+                value="FOREGROUND"
+              />
+              <label
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
+                for="openLinks_foreground"
+              >
+                Foreground
+              </label>
+            </div>
+            <div
+              class="flex items-center"
+            >
+              <input
+                class="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+                id="openLinks_background"
+                name="openLinks"
+                type="radio"
+                value="BACKGROUND"
+              />
+              <label
+                class="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
+                for="openLinks_background"
+              >
+                Background
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="mt-3 mb-2 text-sm"
+      >
+        <div
           class="flex items-center"
         >
           <input

@@ -13,9 +13,8 @@ import * as links from '../utils/links';
 import { NotificationRow } from './NotificationRow';
 
 describe('components/NotificationRow.tsx', () => {
-  beforeEach(() => {
-    jest.spyOn(links, 'openNotification');
-  });
+  jest.spyOn(links, 'openNotification');
+  jest.spyOn(comms, 'openExternalLink').mockImplementation();
 
   afterEach(() => {
     jest.clearAllMocks();

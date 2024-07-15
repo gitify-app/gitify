@@ -23,9 +23,9 @@ import {
 } from './links';
 
 describe('utils/links.ts', () => {
-  beforeEach(() => {
-    jest.spyOn(comms, 'openExternalLink');
-  });
+  const openExternalLinkMock = jest
+    .spyOn(comms, 'openExternalLink')
+    .mockImplementation();
 
   afterEach(() => {
     jest.clearAllMocks();
@@ -33,42 +33,42 @@ describe('utils/links.ts', () => {
 
   it('openGitifyRepository', () => {
     openGitifyRepository();
-    expect(comms.openExternalLink).toHaveBeenCalledWith(
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/gitify-app/gitify',
     );
   });
 
   it('openGitifyReleaseNotes', () => {
     openGitifyReleaseNotes('v1.0.0');
-    expect(comms.openExternalLink).toHaveBeenCalledWith(
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/gitify-app/gitify/releases/tag/v1.0.0',
     );
   });
 
   it('openGitHubNotifications', () => {
     openGitHubNotifications();
-    expect(comms.openExternalLink).toHaveBeenCalledWith(
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/notifications',
     );
   });
 
   it('openGitHubIssues', () => {
     openGitHubIssues();
-    expect(comms.openExternalLink).toHaveBeenCalledWith(
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/issues',
     );
   });
 
   it('openGitHubPulls', () => {
     openGitHubPulls();
-    expect(comms.openExternalLink).toHaveBeenCalledWith(
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/pulls',
     );
   });
 
   it('openAccountProfile', () => {
     openAccountProfile(mockGitHubCloudAccount);
-    expect(comms.openExternalLink).toHaveBeenCalledWith(
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/octocat',
     );
   });
@@ -76,14 +76,14 @@ describe('utils/links.ts', () => {
   it('openUserProfile', () => {
     const mockUser = partialMockUser('mock-user');
     openUserProfile(mockUser);
-    expect(comms.openExternalLink).toHaveBeenCalledWith(
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/mock-user',
     );
   });
 
   it('openHost', () => {
     openHost('github.com' as Hostname);
-    expect(comms.openExternalLink).toHaveBeenCalledWith('https://github.com');
+    expect(openExternalLinkMock).toHaveBeenCalledWith('https://github.com');
   });
 
   it('openDeveloperSettings', () => {
@@ -93,7 +93,7 @@ describe('utils/links.ts', () => {
       .spyOn(authUtils, 'getDeveloperSettingsURL')
       .mockReturnValue(mockSettingsURL);
     openDeveloperSettings(mockGitHubCloudAccount);
-    expect(comms.openExternalLink).toHaveBeenCalledWith(mockSettingsURL);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(mockSettingsURL);
   });
 
   it('openRepository', () => {
@@ -104,7 +104,7 @@ describe('utils/links.ts', () => {
     } as Repository;
 
     openRepository(repo);
-    expect(comms.openExternalLink).toHaveBeenCalledWith(mockHtmlUrl);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(mockHtmlUrl);
   });
 
   it('openNotification', async () => {
@@ -113,12 +113,12 @@ describe('utils/links.ts', () => {
       .spyOn(helpers, 'generateGitHubWebUrl')
       .mockResolvedValue(mockNotificationUrl);
     await openNotification(mockSingleNotification);
-    expect(comms.openExternalLink).toHaveBeenCalledWith(mockNotificationUrl);
+    expect(openExternalLinkMock).toHaveBeenCalledWith(mockNotificationUrl);
   });
 
   it('openParticipatingDocs', () => {
     openGitHubParticipatingDocs();
-    expect(comms.openExternalLink).toHaveBeenCalledWith(
+    expect(openExternalLinkMock).toHaveBeenCalledWith(
       Constants.GITHUB_DOCS.PARTICIPATING_URL,
     );
   });

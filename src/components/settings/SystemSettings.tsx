@@ -1,9 +1,11 @@
 import { DeviceDesktopIcon } from '@primer/octicons-react';
 import { type FC, useContext } from 'react';
 import { AppContext } from '../../context/App';
+import type { OpenPreference } from '../../types';
 import Constants from '../../utils/constants';
 import { isLinux, isMacOS } from '../../utils/platform';
 import { Checkbox } from '../fields/Checkbox';
+import { RadioGroup } from '../fields/RadioGroup';
 import { Legend } from './Legend';
 
 export const SystemSettings: FC = () => {
@@ -12,6 +14,18 @@ export const SystemSettings: FC = () => {
   return (
     <fieldset>
       <Legend icon={DeviceDesktopIcon}>System</Legend>
+      <RadioGroup
+        name="openLinks"
+        label="Open Links:"
+        value={settings.openLinks}
+        options={[
+          { label: 'Foreground', value: 'FOREGROUND' },
+          { label: 'Background', value: 'BACKGROUND' },
+        ]}
+        onChange={(evt) => {
+          updateSetting('openLinks', evt.target.value as OpenPreference);
+        }}
+      />
       <Checkbox
         name="keyboardShortcutEnabled"
         label="Enable keyboard shortcut"

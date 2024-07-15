@@ -1,11 +1,13 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { shell } from 'electron';
 import type { Link } from '../../types';
+import * as comms from '../../utils/comms';
 import { Button, type IButton } from './Button';
 
 describe('components/buttons/Button.tsx', () => {
-  const openExternalMock = jest.spyOn(shell, 'openExternal');
+  const openExternalLinkMock = jest
+    .spyOn(comms, 'openExternalLink')
+    .mockImplementation();
 
   const props: IButton = {
     label: 'button',
@@ -39,6 +41,6 @@ describe('components/buttons/Button.tsx', () => {
     const buttonElement = screen.getByLabelText('button');
 
     fireEvent.click(buttonElement);
-    expect(openExternalMock).toHaveBeenCalledTimes(1);
+    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
   });
 });

@@ -51,7 +51,13 @@ export interface Account {
   user: GitifyUser | null;
 }
 
-export type SettingsValue = boolean | Theme | GroupBy | Reason[] | number;
+export type SettingsValue =
+  | boolean
+  | number
+  | GroupBy
+  | OpenPreference
+  | Reason[]
+  | Theme;
 
 export type SettingsState = AppearanceSettingsState &
   NotificationSettingsState &
@@ -76,6 +82,7 @@ interface NotificationSettingsState {
 }
 
 interface SystemSettingsState {
+  openLinks: OpenPreference;
   playSound: boolean;
   openAtStartup: boolean;
   showNotificationsCountInTray: boolean;
@@ -96,6 +103,11 @@ export enum Theme {
   SYSTEM = 'SYSTEM',
   LIGHT = 'LIGHT',
   DARK = 'DARK',
+}
+
+export enum OpenPreference {
+  FOREGROUND = 'FOREGROUND',
+  BACKGROUND = 'FOREGROUND',
 }
 
 export enum GroupBy {
