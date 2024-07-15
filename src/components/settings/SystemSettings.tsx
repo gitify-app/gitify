@@ -27,7 +27,7 @@ export const SystemSettings: FC = () => {
         }}
       />
       <Checkbox
-        name="kbdShortcutEnabled"
+        name="keyboardShortcutEnabled"
         label="Enable keyboard shortcut"
         checked={settings.keyboardShortcut}
         onChange={(evt) =>

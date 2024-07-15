@@ -1,11 +1,13 @@
 import type { ChangeEvent, FC, ReactNode } from 'react';
 import type { RadioGroupItem } from '../../types';
 import { cn } from '../../utils/cn';
+import { Tooltip } from './Tooltip';
 
 export interface IRadioGroup {
   name: string;
   label: string;
   helpText?: ReactNode | string;
+  tooltip?: ReactNode | string;
   options: RadioGroupItem[];
   value: string;
   disabled?: boolean;
@@ -26,6 +28,9 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
             }
           >
             {props.label}
+            {props.tooltip && (
+              <Tooltip name={`tooltip-${props.name}`} tooltip={props.tooltip} />
+            )}
           </label>
         </div>
 
@@ -42,7 +47,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
               >
                 <input
                   type="radio"
-                  className="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                  className="size-4 border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
                   id={`${props.name}_${item.value.toLowerCase()}`}
                   name={props.name}
                   value={item.value}
@@ -52,7 +57,7 @@ export const RadioGroup: FC<IRadioGroup> = (props: IRadioGroup) => {
                 />
                 <label
                   htmlFor={`${props.name}_${item.value.toLowerCase()}`}
-                  className="ml-3 block text-sm font-medium text-gray-700 dark:text-white"
+                  className="ml-3 block text-sm font-medium text-gray-700 dark:text-white cursor-pointer"
                 >
                   {item.label}
                 </label>

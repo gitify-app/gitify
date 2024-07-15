@@ -65,9 +65,9 @@ describe('utils/comms.ts', () => {
       .spyOn(storage, 'loadState')
       .mockReturnValue({ settings: mockSettings });
 
-    openExternalLink('http://www.gitify.io/' as Link);
+    openExternalLink('https://www.gitify.io/' as Link);
     expect(shell.openExternal).toHaveBeenCalledTimes(1);
-    expect(shell.openExternal).toHaveBeenCalledWith('http://www.gitify.io/', {
+    expect(shell.openExternal).toHaveBeenCalledWith('https://www.gitify.io/', {
       activate: true,
     });
   });

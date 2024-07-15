@@ -101,7 +101,7 @@ export const NotificationRow: FC<INotificationRow> = ({
       </div>
 
       <div
-        className="flex-1 overflow-hidden overflow-ellipsis whitespace-nowrap cursor-pointer"
+        className="flex-1 truncate cursor-pointer"
         onClick={() => handleNotification()}
       >
         <NotificationHeader notification={notification} />
@@ -111,7 +111,7 @@ export const NotificationRow: FC<INotificationRow> = ({
           role="main"
           title={notificationTitle}
         >
-          {notification.subject.title}
+          <span className="truncate">{notification.subject.title}</span>
           <span
             className={cn(
               'text-xxs',

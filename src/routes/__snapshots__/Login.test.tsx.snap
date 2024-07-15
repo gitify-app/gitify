@@ -13,8 +13,8 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
           class="size-16"
           role="img"
           viewBox="0 0 500 500"
-          xmlns="http://www.w3.org/2000/svg"
-          xmlns:xlink="http://www.w3.org/1999/xlink"
+          xmlns="https://www.w3.org/2000/svg"
+          xmlns:xlink="https://www.w3.org/1999/xlink"
         >
           <defs>
             <lineargradient
@@ -118,8 +118,8 @@ exports[`routes/Login.tsx should render itself & its children 1`] = `
         class="size-16"
         role="img"
         viewBox="0 0 500 500"
-        xmlns="http://www.w3.org/2000/svg"
-        xmlns:xlink="http://www.w3.org/1999/xlink"
+        xmlns="https://www.w3.org/2000/svg"
+        xmlns:xlink="https://www.w3.org/1999/xlink"
       >
         <defs>
           <lineargradient
