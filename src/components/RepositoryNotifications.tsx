@@ -67,7 +67,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
       >
         <div
           className={cn(
-            'flex flex-1 gap-4 items-center overflow-hidden overflow-ellipsis whitespace-nowrap text-sm font-medium',
+            'flex flex-1 gap-4 items-center truncate text-sm font-medium',
             Opacity.MEDIUM,
           )}
         >
