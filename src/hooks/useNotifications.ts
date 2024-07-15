@@ -154,7 +154,7 @@ export const useNotifications = (): NotificationsState => {
   );
 
   const markRepoNotificationsRead = useCallback(
-    async (_state: GitifyState, notification: Notification) => {
+    async (state: GitifyState, notification: Notification) => {
       setStatus('loading');
 
       const repoSlug = notification.repository.full_name;
@@ -166,7 +166,9 @@ export const useNotifications = (): NotificationsState => {
           hostname,
           notification.account.token,
         );
+
         const updatedNotifications = removeNotifications(
+          state.settings,
           notification,
           notifications,
         );
@@ -209,6 +211,7 @@ export const useNotifications = (): NotificationsState => {
         }
 
         const updatedNotifications = removeNotifications(
+          state.settings,
           notification,
           notifications,
         );

@@ -23,10 +23,12 @@ import { NotificationHeader } from './notification/NotificationHeader';
 
 interface INotificationRow {
   notification: Notification;
+  isRead?: boolean;
 }
 
 export const NotificationRow: FC<INotificationRow> = ({
   notification,
+  isRead = false,
 }: INotificationRow) => {
   const {
     settings,
@@ -56,6 +58,7 @@ export const NotificationRow: FC<INotificationRow> = ({
     removeNotificationFromState,
     settings,
   ]);
+
   const unsubscribeFromThread = (event: MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.
     event.stopPropagation();
@@ -88,6 +91,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         animateExit &&
           'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
         showAsRead && Opacity.READ,
+        isRead && Opacity.READ,
       )}
     >
       <div

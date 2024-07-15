@@ -5,13 +5,7 @@ import {
   MarkGithubIcon,
   ReadIcon,
 } from '@primer/octicons-react';
-import {
-  type FC,
-  type MouseEvent,
-  useCallback,
-  useContext,
-  useState,
-} from 'react';
+import { type FC, type MouseEvent, useContext, useState } from 'react';
 import { AppContext } from '../context/App';
 import { Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
@@ -31,21 +25,14 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
   repoName,
   repoNotifications,
 }) => {
-  const { markRepoNotificationsRead, markRepoNotificationsDone } =
+  const { settings, markRepoNotificationsRead, markRepoNotificationsDone } =
     useContext(AppContext);
-
-  const markRepoAsRead = useCallback(() => {
-    markRepoNotificationsRead(repoNotifications[0]);
-  }, [repoNotifications, markRepoNotificationsRead]);
-
-  const markRepoAsDone = useCallback(() => {
-    markRepoNotificationsDone(repoNotifications[0]);
-  }, [repoNotifications, markRepoNotificationsDone]);
-
-  const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
-
+  const [animateExit, setAnimateExit] = useState(false);
+  const [showAsRead, setShowAsRead] = useState(false);
   const [showRepositoryNotifications, setShowRepositoryNotifications] =
     useState(true);
+
+  const avatarUrl = repoNotifications[0].repository.owner.avatar_url;
 
   const toggleRepositoryNotifications = () => {
     setShowRepositoryNotifications(!showRepositoryNotifications);
@@ -68,7 +55,9 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
         <div
           className={cn(
             'flex flex-1 gap-4 items-center truncate text-sm font-medium',
-            Opacity.MEDIUM,
+            animateExit &&
+              'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
+            showAsRead ? Opacity.READ : Opacity.MEDIUM,
           )}
         >
           <AvatarIcon
@@ -94,13 +83,25 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
             title="Mark Repository as Done"
             icon={CheckIcon}
             size={Size.MEDIUM}
-            onClick={markRepoAsDone}
+            onClick={(event: MouseEvent<HTMLElement>) => {
+              // Don't trigger onClick of parent element.
+              event.stopPropagation();
+              setAnimateExit(!settings.delayNotificationState);
+              setShowAsRead(settings.delayNotificationState);
+              markRepoNotificationsDone(repoNotifications[0]);
+            }}
           />
           <InteractionButton
             title="Mark Repository as Read"
             icon={ReadIcon}
             size={Size.SMALL}
-            onClick={markRepoAsRead}
+            onClick={(event: MouseEvent<HTMLElement>) => {
+              // Don't trigger onClick of parent element.
+              event.stopPropagation();
+              setAnimateExit(!settings.delayNotificationState);
+              setShowAsRead(settings.delayNotificationState);
+              markRepoNotificationsRead(repoNotifications[0]);
+            }}
           />
           <InteractionButton
             title={toggleRepositoryNotificationsLabel}
@@ -113,7 +114,11 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
 
       {showRepositoryNotifications &&
         repoNotifications.map((notification) => (
-          <NotificationRow key={notification.id} notification={notification} />
+          <NotificationRow
+            key={notification.id}
+            notification={notification}
+            isRead={showAsRead}
+          />
         ))}
     </>
   );
