@@ -118,6 +118,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
             key={notification.id}
             notification={notification}
             isRead={showAsRead}
+            isAnimated={animateExit}
           />
         ))}
     </>
