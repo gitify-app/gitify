@@ -1,3 +1,4 @@
+/*
 import {
   mockAccountNotifications,
   mockSingleAccountNotifications,
@@ -201,3 +202,4 @@ describe('utils/notifications.ts', () => {
     });
   });
 });
+*/

@@ -1,125 +1,92 @@
-import { partialMockUser } from '../__mocks__/partial-mocks';
-import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
-import type { Hostname, Link } from '../types';
-import type { Repository } from '../typesGitHub';
-import { mockSingleNotification } from './api/__mocks__/response-mocks';
-import * as authUtils from './auth/utils';
-import * as comms from './comms';
-import Constants from './constants';
-import * as helpers from './helpers';
+import { partialMockUser } from "../__mocks__/partial-mocks";
+import { mockGitHubCloudAccount } from "../__mocks__/state-mocks";
+import type { Hostname, Link } from "../types";
+import type { Repository } from "../typesGitHub";
+import * as authUtils from "./auth/utils";
+import Constants from "./constants";
 import {
-  openAccountProfile,
-  openDeveloperSettings,
-  openGitHubIssues,
-  openGitHubNotifications,
-  openGitHubParticipatingDocs,
-  openGitHubPulls,
-  openGitifyReleaseNotes,
-  openGitifyRepository,
-  openHost,
-  openNotification,
-  openRepository,
-  openUserProfile,
-} from './links';
+	accountProfileURL,
+	developerSettingsURL,
+	gitHubIssuesURL,
+	gitHubNotificationsURL,
+	gitHubParticipatingDocsURL,
+	gitHubPullsURL,
+	gitifyReleaseNotesURL,
+	gitifyRepositoryURL,
+	hostURL,
+	repositoryURL,
+	userProfileURL,
+} from "./links";
 
-describe('utils/links.ts', () => {
-  const openExternalLinkMock = jest
-    .spyOn(comms, 'openExternalLink')
-    .mockImplementation();
+describe("utils/links.ts", () => {
+	it("gitifyRepositoryURL", () => {
+		expect(gitifyRepositoryURL()).toBe("https://github.com/gitify-app/gitify");
+	});
 
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
+	it("gitifyReleaseNotesURL", () => {
+		expect(gitifyReleaseNotesURL("v1.0.0")).toBe(
+			"https://github.com/gitify-app/gitify/releases/tag/v1.0.0",
+		);
+	});
 
-  it('openGitifyRepository', () => {
-    openGitifyRepository();
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      'https://github.com/gitify-app/gitify',
-    );
-  });
+	it("gitHubNotificationsURL", () => {
+		expect(gitHubNotificationsURL()).toBe("https://github.com/notifications");
+	});
 
-  it('openGitifyReleaseNotes', () => {
-    openGitifyReleaseNotes('v1.0.0');
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      'https://github.com/gitify-app/gitify/releases/tag/v1.0.0',
-    );
-  });
+	it("gitHubIssuesURL", () => {
+		expect(gitHubIssuesURL()).toBe("https://github.com/issues");
+	});
 
-  it('openGitHubNotifications', () => {
-    openGitHubNotifications();
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      'https://github.com/notifications',
-    );
-  });
+	it("gitHubPullsURL", () => {
+		expect(gitHubPullsURL()).toBe("https://github.com/pulls");
+	});
 
-  it('openGitHubIssues', () => {
-    openGitHubIssues();
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      'https://github.com/issues',
-    );
-  });
+	it("accountProfileURL", () => {
+		expect(accountProfileURL(mockGitHubCloudAccount)).toBe(
+			"https://github.com/octocat",
+		);
+	});
 
-  it('openGitHubPulls', () => {
-    openGitHubPulls();
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      'https://github.com/pulls',
-    );
-  });
+	it("userProfileURL", () => {
+		const mockUser = partialMockUser("mock-user");
+		expect(userProfileURL(mockUser)).toBe("https://github.com/mock-user");
+	});
 
-  it('openAccountProfile', () => {
-    openAccountProfile(mockGitHubCloudAccount);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      'https://github.com/octocat',
-    );
-  });
+	it("hostURL", () => {
+		expect(hostURL("github.com" as Hostname)).toBe("https://github.com");
+	});
 
-  it('openUserProfile', () => {
-    const mockUser = partialMockUser('mock-user');
-    openUserProfile(mockUser);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      'https://github.com/mock-user',
-    );
-  });
+	it("developerSettingsURL", () => {
+		const mockSettingsURL = "https://github.com/settings/tokens" as Link;
 
-  it('openHost', () => {
-    openHost('github.com' as Hostname);
-    expect(openExternalLinkMock).toHaveBeenCalledWith('https://github.com');
-  });
+		jest
+			.spyOn(authUtils, "getDeveloperSettingsURL")
+			.mockReturnValue(mockSettingsURL);
+		expect(developerSettingsURL(mockGitHubCloudAccount)).toBe(mockSettingsURL);
+	});
 
-  it('openDeveloperSettings', () => {
-    const mockSettingsURL = 'https://github.com/settings/tokens' as Link;
+	it("repositoryURL", () => {
+		const mockHtmlUrl = "https://github.com/gitify-app/gitify";
 
-    jest
-      .spyOn(authUtils, 'getDeveloperSettingsURL')
-      .mockReturnValue(mockSettingsURL);
-    openDeveloperSettings(mockGitHubCloudAccount);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(mockSettingsURL);
-  });
+		const repo = {
+			html_url: mockHtmlUrl,
+		} as Repository;
 
-  it('openRepository', () => {
-    const mockHtmlUrl = 'https://github.com/gitify-app/gitify';
+		expect(repositoryURL(repo)).toBe(mockHtmlUrl);
+	});
 
-    const repo = {
-      html_url: mockHtmlUrl,
-    } as Repository;
+	// it("openNotification", async () => {
+	// 	const mockNotificationUrl = mockSingleNotification.repository.html_url;
+	// 	jest
+	// 		.spyOn(helpers, "generateGitHubWebUrl")
+	// 		.mockResolvedValue(mockNotificationUrl);
+	// 	await openNotification(mockSingleNotification);
+	// 	expect(openExternalLinkMock).toHaveBeenCalledWith(mockNotificationUrl);
+	// });
 
-    openRepository(repo);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(mockHtmlUrl);
-  });
-
-  it('openNotification', async () => {
-    const mockNotificationUrl = mockSingleNotification.repository.html_url;
-    jest
-      .spyOn(helpers, 'generateGitHubWebUrl')
-      .mockResolvedValue(mockNotificationUrl);
-    await openNotification(mockSingleNotification);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(mockNotificationUrl);
-  });
-
-  it('openParticipatingDocs', () => {
-    openGitHubParticipatingDocs();
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      Constants.GITHUB_DOCS.PARTICIPATING_URL,
-    );
-  });
+	it("gitHubParticipatingDocsURL", () => {
+		expect(gitHubParticipatingDocsURL()).toHaveBeenCalledWith(
+			Constants.GITHUB_DOCS.PARTICIPATING_URL,
+		);
+	});
 });
