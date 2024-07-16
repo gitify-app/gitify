@@ -15,12 +15,16 @@ exports[`components/notification/NotificationHeader.tsx should render itself & i
             src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
           />
         </span>
-        <span
-          class="cursor-pointer truncate opacity-90"
-          title="gitify-app/notifications-test"
+        <a
+          href="https://github.com/gitify-app/notifications-test"
         >
-          gitify-app/notifications-test
-        </span>
+          <span
+            class="cursor-pointer truncate opacity-90"
+            title="gitify-app/notifications-test"
+          >
+            gitify-app/notifications-test
+          </span>
+        </a>
       </div>
     </div>
   </body>,
@@ -35,12 +39,16 @@ exports[`components/notification/NotificationHeader.tsx should render itself & i
           src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
         />
       </span>
-      <span
-        class="cursor-pointer truncate opacity-90"
-        title="gitify-app/notifications-test"
+      <a
+        href="https://github.com/gitify-app/notifications-test"
       >
-        gitify-app/notifications-test
-      </span>
+        <span
+          class="cursor-pointer truncate opacity-90"
+          title="gitify-app/notifications-test"
+        >
+          gitify-app/notifications-test
+        </span>
+      </a>
     </div>
   </div>,
   "debug": [Function],

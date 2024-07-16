@@ -14,18 +14,27 @@ export const SystemSettings: FC = () => {
   return (
     <fieldset>
       <Legend icon={DeviceDesktopIcon}>System</Legend>
-      <RadioGroup
-        name="openLinks"
-        label="Open Links:"
-        value={settings.openLinks}
-        options={[
-          { label: 'Foreground', value: 'FOREGROUND' },
-          { label: 'Background', value: 'BACKGROUND' },
-        ]}
-        onChange={(evt) => {
-          updateSetting('openLinks', evt.target.value as OpenPreference);
-        }}
-      />
+      {isMacOS() && (
+        <RadioGroup
+          name="openLinks"
+          label="Open Links:"
+          value={settings.openLinks}
+          options={[
+            { label: 'Foreground', value: 'FOREGROUND' },
+            { label: 'Background', value: 'BACKGROUND' },
+          ]}
+          onChange={(evt) => {
+            updateSetting('openLinks', evt.target.value as OpenPreference);
+          }}
+          tooltip={
+            <div>
+              Users can also use{' '}
+              <span className="text-orange-600">Command+Click</span> to
+              selectively open links in the background.
+            </div>
+          }
+        />
+      )}
       <Checkbox
         name="keyboardShortcutEnabled"
         label="Enable keyboard shortcut"

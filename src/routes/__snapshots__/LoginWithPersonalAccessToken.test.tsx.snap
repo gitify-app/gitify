@@ -107,27 +107,31 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
             >
               <div>
                 <div>
-                  <button
-                    aria-label="Generate a PAT"
-                    class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
-                    icon="[object Object]"
+                  <a
+                    href="https://github.com/settings/tokens/new?description=Gitify+%28Created+on+Jul+16%2C+2024+12%3A22+PM%29&scopes=read%3Auser%2Cnotifications%2Crepo"
                   >
-                    <svg
-                      aria-hidden="true"
-                      class="mr-2"
-                      fill="currentColor"
-                      focusable="false"
-                      height="12"
-                      style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                      viewBox="0 0 16 16"
-                      width="12"
+                    <button
+                      aria-label="Generate a PAT"
+                      class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
+                      icon="[object Object]"
                     >
-                      <path
-                        d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                      />
-                    </svg>
-                    Generate a PAT
-                  </button>
+                      <svg
+                        aria-hidden="true"
+                        class="mr-2"
+                        fill="currentColor"
+                        focusable="false"
+                        height="12"
+                        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                        viewBox="0 0 16 16"
+                        width="12"
+                      >
+                        <path
+                          d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+                        />
+                      </svg>
+                      Generate a PAT
+                    </button>
+                  </a>
                   <span
                     class="mx-1"
                   >
@@ -145,50 +149,56 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
           <div
             class="flex items-end justify-between mt-2"
           >
-            <button
-              aria-label="GitHub Docs"
-              class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
-              icon="[object Object]"
+            <a
+              href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens"
             >
-              <svg
-                aria-hidden="true"
-                class="mr-2"
-                fill="currentColor"
-                focusable="false"
-                height="12"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                viewBox="0 0 16 16"
-                width="12"
+              <button
+                aria-label="GitHub Docs"
+                class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
+                icon="[object Object]"
               >
-                <path
-                  d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"
-                />
-              </svg>
-              Docs
-            </button>
-            <button
-              aria-label="Login"
-              class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-2 !text-sm"
-              disabled=""
-              icon="[object Object]"
-              type="submit"
-            >
-              <svg
-                aria-hidden="true"
-                class="mr-2"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                viewBox="0 0 16 16"
-                width="16"
+                <svg
+                  aria-hidden="true"
+                  class="mr-2"
+                  fill="currentColor"
+                  focusable="false"
+                  height="12"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  viewBox="0 0 16 16"
+                  width="12"
+                >
+                  <path
+                    d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"
+                  />
+                </svg>
+                Docs
+              </button>
+            </a>
+            <a>
+              <button
+                aria-label="Login"
+                class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-2 !text-sm"
+                disabled=""
+                icon="[object Object]"
+                type="submit"
               >
-                <path
-                  d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm6.56 4.5h5.69a.75.75 0 0 1 0 1.5H8.56l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L6.22 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734Z"
-                />
-              </svg>
-              Login
-            </button>
+                <svg
+                  aria-hidden="true"
+                  class="mr-2"
+                  fill="currentColor"
+                  focusable="false"
+                  height="16"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  viewBox="0 0 16 16"
+                  width="16"
+                >
+                  <path
+                    d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm6.56 4.5h5.69a.75.75 0 0 1 0 1.5H8.56l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L6.22 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734Z"
+                  />
+                </svg>
+                Login
+              </button>
+            </a>
           </div>
         </form>
       </div>
@@ -297,27 +307,31 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
           >
             <div>
               <div>
-                <button
-                  aria-label="Generate a PAT"
-                  class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
-                  icon="[object Object]"
+                <a
+                  href="https://github.com/settings/tokens/new?description=Gitify+%28Created+on+Jul+16%2C+2024+12%3A22+PM%29&scopes=read%3Auser%2Cnotifications%2Crepo"
                 >
-                  <svg
-                    aria-hidden="true"
-                    class="mr-2"
-                    fill="currentColor"
-                    focusable="false"
-                    height="12"
-                    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                    viewBox="0 0 16 16"
-                    width="12"
+                  <button
+                    aria-label="Generate a PAT"
+                    class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
+                    icon="[object Object]"
                   >
-                    <path
-                      d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
-                    />
-                  </svg>
-                  Generate a PAT
-                </button>
+                    <svg
+                      aria-hidden="true"
+                      class="mr-2"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+                      />
+                    </svg>
+                    Generate a PAT
+                  </button>
+                </a>
                 <span
                   class="mx-1"
                 >
@@ -335,50 +349,56 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
         <div
           class="flex items-end justify-between mt-2"
         >
-          <button
-            aria-label="GitHub Docs"
-            class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
-            icon="[object Object]"
+          <a
+            href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens"
           >
-            <svg
-              aria-hidden="true"
-              class="mr-2"
-              fill="currentColor"
-              focusable="false"
-              height="12"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-              viewBox="0 0 16 16"
-              width="12"
+            <button
+              aria-label="GitHub Docs"
+              class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
+              icon="[object Object]"
             >
-              <path
-                d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"
-              />
-            </svg>
-            Docs
-          </button>
-          <button
-            aria-label="Login"
-            class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-2 !text-sm"
-            disabled=""
-            icon="[object Object]"
-            type="submit"
-          >
-            <svg
-              aria-hidden="true"
-              class="mr-2"
-              fill="currentColor"
-              focusable="false"
-              height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-              viewBox="0 0 16 16"
-              width="16"
+              <svg
+                aria-hidden="true"
+                class="mr-2"
+                fill="currentColor"
+                focusable="false"
+                height="12"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                viewBox="0 0 16 16"
+                width="12"
+              >
+                <path
+                  d="M0 1.75A.75.75 0 0 1 .75 1h4.253c1.227 0 2.317.59 3 1.501A3.743 3.743 0 0 1 11.006 1h4.245a.75.75 0 0 1 .75.75v10.5a.75.75 0 0 1-.75.75h-4.507a2.25 2.25 0 0 0-1.591.659l-.622.621a.75.75 0 0 1-1.06 0l-.622-.621A2.25 2.25 0 0 0 5.258 13H.75a.75.75 0 0 1-.75-.75Zm7.251 10.324.004-5.073-.002-2.253A2.25 2.25 0 0 0 5.003 2.5H1.5v9h3.757a3.75 3.75 0 0 1 1.994.574ZM8.755 4.75l-.004 7.322a3.752 3.752 0 0 1 1.992-.572H14.5v-9h-3.495a2.25 2.25 0 0 0-2.25 2.25Z"
+                />
+              </svg>
+              Docs
+            </button>
+          </a>
+          <a>
+            <button
+              aria-label="Login"
+              class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-2 !text-sm"
+              disabled=""
+              icon="[object Object]"
+              type="submit"
             >
-              <path
-                d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm6.56 4.5h5.69a.75.75 0 0 1 0 1.5H8.56l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L6.22 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734Z"
-              />
-            </svg>
-            Login
-          </button>
+              <svg
+                aria-hidden="true"
+                class="mr-2"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M2 2.75C2 1.784 2.784 1 3.75 1h2.5a.75.75 0 0 1 0 1.5h-2.5a.25.25 0 0 0-.25.25v10.5c0 .138.112.25.25.25h2.5a.75.75 0 0 1 0 1.5h-2.5A1.75 1.75 0 0 1 2 13.25Zm6.56 4.5h5.69a.75.75 0 0 1 0 1.5H8.56l1.97 1.97a.749.749 0 0 1-.326 1.275.749.749 0 0 1-.734-.215L6.22 8.53a.75.75 0 0 1 0-1.06l3.25-3.25a.749.749 0 0 1 1.275.326.749.749 0 0 1-.215.734Z"
+                />
+              </svg>
+              Login
+            </button>
+          </a>
         </div>
       </form>
     </div>

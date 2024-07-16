@@ -8,17 +8,21 @@ exports[`components/notification/NotificationFooter.tsx security alerts should u
       <div
         class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
       >
-        <button
-          class="flex-shrink-0"
-          title="View User Profile"
-          type="button"
+        <a
+          href="https://github.com/gitify-app"
         >
-          <img
-            alt="gitify-app's avatar"
-            class="rounded-full object-cover size-4"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-          />
-        </button>
+          <button
+            class="flex-shrink-0"
+            title="View User Profile"
+            type="button"
+          >
+            <img
+              alt="gitify-app's avatar"
+              class="rounded-full object-cover size-4"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+            />
+          </button>
+        </a>
         <div
           title="You're watching the repository."
         >
@@ -84,17 +88,21 @@ exports[`components/notification/NotificationFooter.tsx security alerts should u
     <div
       class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
     >
-      <button
-        class="flex-shrink-0"
-        title="View User Profile"
-        type="button"
+      <a
+        href="https://github.com/gitify-app"
       >
-        <img
-          alt="gitify-app's avatar"
-          class="rounded-full object-cover size-4"
-          src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-        />
-      </button>
+        <button
+          class="flex-shrink-0"
+          title="View User Profile"
+          type="button"
+        >
+          <img
+            alt="gitify-app's avatar"
+            class="rounded-full object-cover size-4"
+            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+          />
+        </button>
+      </a>
       <div
         title="You're watching the repository."
       >
@@ -217,17 +225,21 @@ exports[`components/notification/NotificationFooter.tsx security alerts should u
       <div
         class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
       >
-        <button
-          class="flex-shrink-0"
-          title="View User Profile"
-          type="button"
+        <a
+          href="https://github.com/gitify-app"
         >
-          <img
-            alt="gitify-app's avatar"
-            class="rounded-full object-cover size-4"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-          />
-        </button>
+          <button
+            class="flex-shrink-0"
+            title="View User Profile"
+            type="button"
+          >
+            <img
+              alt="gitify-app's avatar"
+              class="rounded-full object-cover size-4"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+            />
+          </button>
+        </a>
         <div
           title="You're watching the repository."
         >
@@ -293,17 +305,21 @@ exports[`components/notification/NotificationFooter.tsx security alerts should u
     <div
       class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
     >
-      <button
-        class="flex-shrink-0"
-        title="View User Profile"
-        type="button"
+      <a
+        href="https://github.com/gitify-app"
       >
-        <img
-          alt="gitify-app's avatar"
-          class="rounded-full object-cover size-4"
-          src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-        />
-      </button>
+        <button
+          class="flex-shrink-0"
+          title="View User Profile"
+          type="button"
+        >
+          <img
+            alt="gitify-app's avatar"
+            class="rounded-full object-cover size-4"
+            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+          />
+        </button>
+      </a>
       <div
         title="You're watching the repository."
       >
@@ -645,17 +661,21 @@ exports[`components/notification/NotificationFooter.tsx should render itself & i
       <div
         class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
       >
-        <button
-          class="flex-shrink-0"
-          title="View User Profile"
-          type="button"
+        <a
+          href="https://github.com/gitify-app"
         >
-          <img
-            alt="gitify-app's avatar"
-            class="rounded-full object-cover size-4"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-          />
-        </button>
+          <button
+            class="flex-shrink-0"
+            title="View User Profile"
+            type="button"
+          >
+            <img
+              alt="gitify-app's avatar"
+              class="rounded-full object-cover size-4"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+            />
+          </button>
+        </a>
         <div
           title="You're watching the repository."
         >
@@ -721,17 +741,21 @@ exports[`components/notification/NotificationFooter.tsx should render itself & i
     <div
       class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
     >
-      <button
-        class="flex-shrink-0"
-        title="View User Profile"
-        type="button"
+      <a
+        href="https://github.com/gitify-app"
       >
-        <img
-          alt="gitify-app's avatar"
-          class="rounded-full object-cover size-4"
-          src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-        />
-      </button>
+        <button
+          class="flex-shrink-0"
+          title="View User Profile"
+          type="button"
+        >
+          <img
+            alt="gitify-app's avatar"
+            class="rounded-full object-cover size-4"
+            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+          />
+        </button>
+      </a>
       <div
         title="You're watching the repository."
       >
@@ -854,17 +878,21 @@ exports[`components/notification/NotificationFooter.tsx should render itself & i
       <div
         class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
       >
-        <button
-          class="flex-shrink-0"
-          title="View User Profile"
-          type="button"
+        <a
+          href="https://github.com/gitify-app"
         >
-          <img
-            alt="gitify-app's avatar"
-            class="rounded-full object-cover size-4"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-          />
-        </button>
+          <button
+            class="flex-shrink-0"
+            title="View User Profile"
+            type="button"
+          >
+            <img
+              alt="gitify-app's avatar"
+              class="rounded-full object-cover size-4"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+            />
+          </button>
+        </a>
         <div
           title="You're watching the repository."
         >
@@ -930,17 +958,21 @@ exports[`components/notification/NotificationFooter.tsx should render itself & i
     <div
       class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
     >
-      <button
-        class="flex-shrink-0"
-        title="View User Profile"
-        type="button"
+      <a
+        href="https://github.com/gitify-app"
       >
-        <img
-          alt="gitify-app's avatar"
-          class="rounded-full object-cover size-4"
-          src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-        />
-      </button>
+        <button
+          class="flex-shrink-0"
+          title="View User Profile"
+          type="button"
+        >
+          <img
+            alt="gitify-app's avatar"
+            class="rounded-full object-cover size-4"
+            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+          />
+        </button>
+      </a>
       <div
         title="You're watching the repository."
       >

@@ -28,7 +28,7 @@ export const SidebarButton: FC<ISidebarButton> = (props: ISidebarButton) => {
         props.loading ? 'animate-spin' : undefined,
         props.size ? 'py-2' : 'py-1',
       )}
-      onClick={() => props.onClick()}
+      onClick={() => props.onClick?.()}
       title={props.title}
       disabled={props.disabled}
     >

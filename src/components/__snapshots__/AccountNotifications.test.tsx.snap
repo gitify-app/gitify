@@ -34,13 +34,17 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
               </svg>
             </span>
           </div>
-          <button
-            title="Open Profile"
-            type="button"
+          <a
+            href="https://github.com/octocat"
           >
-            @
-            octocat
-          </button>
+            <button
+              title="Open Profile"
+              type="button"
+            >
+              @
+              octocat
+            </button>
+          </a>
         </div>
         <div
           class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
@@ -108,12 +112,16 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
               />
             </span>
-            <span
-              class="cursor-pointer truncate opacity-90"
-              title="gitify-app/notifications-test"
+            <a
+              href="https://github.com/gitify-app/notifications-test"
             >
-              gitify-app/notifications-test
-            </span>
+              <span
+                class="cursor-pointer truncate opacity-90"
+                title="gitify-app/notifications-test"
+              >
+                gitify-app/notifications-test
+              </span>
+            </a>
           </div>
           <div
             class="flex gap-1 items-center mb-1 truncate text-sm"
@@ -132,17 +140,21 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
           <div
             class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
           >
-            <button
-              class="flex-shrink-0"
-              title="View User Profile"
-              type="button"
+            <a
+              href="https://github.com/gitify-app"
             >
-              <img
-                alt="gitify-app's avatar"
-                class="rounded-full object-cover size-4"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              />
-            </button>
+              <button
+                class="flex-shrink-0"
+                title="View User Profile"
+                type="button"
+              >
+                <img
+                  alt="gitify-app's avatar"
+                  class="rounded-full object-cover size-4"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                />
+              </button>
+            </a>
             <div
               title="You're watching the repository."
             >
@@ -311,12 +323,16 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
                 src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
               />
             </span>
-            <span
-              class="cursor-pointer truncate opacity-90"
-              title="gitify-app/notifications-test"
+            <a
+              href="https://github.com/gitify-app/notifications-test"
             >
-              gitify-app/notifications-test
-            </span>
+              <span
+                class="cursor-pointer truncate opacity-90"
+                title="gitify-app/notifications-test"
+              >
+                gitify-app/notifications-test
+              </span>
+            </a>
           </div>
           <div
             class="flex gap-1 items-center mb-1 truncate text-sm"
@@ -466,13 +482,17 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </svg>
           </span>
         </div>
-        <button
-          title="Open Profile"
-          type="button"
+        <a
+          href="https://github.com/octocat"
         >
-          @
-          octocat
-        </button>
+          <button
+            title="Open Profile"
+            type="button"
+          >
+            @
+            octocat
+          </button>
+        </a>
       </div>
       <div
         class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
@@ -540,12 +560,16 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
             />
           </span>
-          <span
-            class="cursor-pointer truncate opacity-90"
-            title="gitify-app/notifications-test"
+          <a
+            href="https://github.com/gitify-app/notifications-test"
           >
-            gitify-app/notifications-test
-          </span>
+            <span
+              class="cursor-pointer truncate opacity-90"
+              title="gitify-app/notifications-test"
+            >
+              gitify-app/notifications-test
+            </span>
+          </a>
         </div>
         <div
           class="flex gap-1 items-center mb-1 truncate text-sm"
@@ -564,17 +588,21 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
         <div
           class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
         >
-          <button
-            class="flex-shrink-0"
-            title="View User Profile"
-            type="button"
+          <a
+            href="https://github.com/gitify-app"
           >
-            <img
-              alt="gitify-app's avatar"
-              class="rounded-full object-cover size-4"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            />
-          </button>
+            <button
+              class="flex-shrink-0"
+              title="View User Profile"
+              type="button"
+            >
+              <img
+                alt="gitify-app's avatar"
+                class="rounded-full object-cover size-4"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+              />
+            </button>
+          </a>
           <div
             title="You're watching the repository."
           >
@@ -743,12 +771,16 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
             />
           </span>
-          <span
-            class="cursor-pointer truncate opacity-90"
-            title="gitify-app/notifications-test"
+          <a
+            href="https://github.com/gitify-app/notifications-test"
           >
-            gitify-app/notifications-test
-          </span>
+            <span
+              class="cursor-pointer truncate opacity-90"
+              title="gitify-app/notifications-test"
+            >
+              gitify-app/notifications-test
+            </span>
+          </a>
         </div>
         <div
           class="flex gap-1 items-center mb-1 truncate text-sm"
@@ -955,13 +987,17 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
               </svg>
             </span>
           </div>
-          <button
-            title="Open Profile"
-            type="button"
+          <a
+            href="https://github.com/octocat"
           >
-            @
-            octocat
-          </button>
+            <button
+              title="Open Profile"
+              type="button"
+            >
+              @
+              octocat
+            </button>
+          </a>
         </div>
         <div
           class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
@@ -1024,13 +1060,17 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </svg>
           </span>
         </div>
-        <button
-          title="Open Profile"
-          type="button"
+        <a
+          href="https://github.com/octocat"
         >
-          @
-          octocat
-        </button>
+          <button
+            title="Open Profile"
+            type="button"
+          >
+            @
+            octocat
+          </button>
+        </a>
       </div>
       <div
         class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
@@ -1150,13 +1190,17 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
               </svg>
             </span>
           </div>
-          <button
-            title="Open Profile"
-            type="button"
+          <a
+            href="https://github.com/octocat"
           >
-            @
-            octocat
-          </button>
+            <button
+              title="Open Profile"
+              type="button"
+            >
+              @
+              octocat
+            </button>
+          </a>
         </div>
         <div
           class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
@@ -1216,13 +1260,17 @@ exports[`components/AccountNotifications.tsx should render itself (github.com wi
             </svg>
           </span>
         </div>
-        <button
-          title="Open Profile"
-          type="button"
+        <a
+          href="https://github.com/octocat"
         >
-          @
-          octocat
-        </button>
+          <button
+            title="Open Profile"
+            type="button"
+          >
+            @
+            octocat
+          </button>
+        </a>
       </div>
       <div
         class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
@@ -1339,13 +1387,15 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
               </svg>
             </span>
           </div>
-          <button
-            title="Open Profile"
-            type="button"
-          >
-            @
-            octocat
-          </button>
+          <a>
+            <button
+              title="Open Profile"
+              type="button"
+            >
+              @
+              octocat
+            </button>
+          </a>
         </div>
         <div
           class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
@@ -1404,13 +1454,15 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
               </svg>
             </span>
           </div>
-          <button
-            title="Open Profile"
-            type="button"
-          >
-            @
-            octocat
-          </button>
+          <a>
+            <button
+              title="Open Profile"
+              type="button"
+            >
+              @
+              octocat
+            </button>
+          </a>
         </div>
         <div
           class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
@@ -1473,13 +1525,15 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
             </svg>
           </span>
         </div>
-        <button
-          title="Open Profile"
-          type="button"
-        >
-          @
-          octocat
-        </button>
+        <a>
+          <button
+            title="Open Profile"
+            type="button"
+          >
+            @
+            octocat
+          </button>
+        </a>
       </div>
       <div
         class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
