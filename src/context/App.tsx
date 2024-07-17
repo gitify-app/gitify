@@ -102,10 +102,6 @@ interface AppContextState {
   notifications: AccountNotifications[];
   status: Status;
   errorDetails: GitifyError;
-  removeNotificationFromState: (
-    settings: SettingsState,
-    notification: Notification,
-  ) => void;
   fetchNotifications: () => Promise<void>;
   markNotificationRead: (notification: Notification) => Promise<void>;
   markNotificationDone: (notification: Notification) => Promise<void>;
@@ -129,7 +125,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     notifications,
     errorDetails,
     status,
-    removeNotificationFromState,
     markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
@@ -317,7 +312,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         notifications,
         status,
         errorDetails,
-        removeNotificationFromState,
         fetchNotifications: fetchNotificationsWithAccounts,
         markNotificationRead: markNotificationReadWithAccounts,
         markNotificationDone: markNotificationDoneWithAccounts,
