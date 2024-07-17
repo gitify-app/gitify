@@ -32,7 +32,6 @@ export const NotificationRow: FC<INotificationRow> = ({
 }: INotificationRow) => {
   const {
     settings,
-    removeNotificationFromState,
     markNotificationRead,
     markNotificationDone,
     unsubscribeNotification,
@@ -49,15 +48,9 @@ export const NotificationRow: FC<INotificationRow> = ({
     if (settings.markAsDoneOnOpen) {
       markNotificationDone(notification);
     } else {
-      // no need to mark as read, github does it by default when opening it
-      removeNotificationFromState(settings, notification);
+      markNotificationRead(notification);
     }
-  }, [
-    notification,
-    markNotificationDone,
-    removeNotificationFromState,
-    settings,
-  ]);
+  }, [notification, markNotificationDone, markNotificationRead, settings]);
 
   const unsubscribeFromThread = (event: MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.
