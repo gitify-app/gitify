@@ -297,45 +297,6 @@ describe('hooks/useNotifications.ts', () => {
     });
   });
 
-  describe('removeNotificationFromState', () => {
-    it('should remove a notification from state', async () => {
-      const notifications = [
-        { id: 1, title: 'This is a notification.' },
-        { id: 2, title: 'This is another one.' },
-      ];
-
-      nock('https://api.github.com')
-        .get('/notifications?participating=false')
-        .reply(200, notifications);
-
-      nock('https://github.gitify.io/api/v3')
-        .get('/notifications?participating=false')
-        .reply(200, notifications);
-
-      const { result } = renderHook(() => useNotifications());
-
-      act(() => {
-        result.current.fetchNotifications({
-          ...mockState,
-          settings: { ...mockSettings, detailedNotifications: false },
-        });
-      });
-
-      await waitFor(() => {
-        expect(result.current.status).toBe('success');
-      });
-
-      act(() => {
-        result.current.removeNotificationFromState(
-          mockSettings,
-          result.current.notifications[0].notifications[0],
-        );
-      });
-
-      expect(result.current.notifications[0].notifications.length).toBe(1);
-    });
-  });
-
   describe('markNotificationRead', () => {
     it('should mark a notification as read with success', async () => {
       nock('https://api.github.com/')

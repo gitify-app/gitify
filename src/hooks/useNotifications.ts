@@ -3,7 +3,6 @@ import type {
   AccountNotifications,
   GitifyError,
   GitifyState,
-  SettingsState,
   Status,
 } from '../types';
 import type { Notification } from '../typesGitHub';
@@ -25,10 +24,6 @@ import { removeNotifications } from '../utils/remove-notifications';
 
 interface NotificationsState {
   notifications: AccountNotifications[];
-  removeNotificationFromState: (
-    settings: SettingsState,
-    notification: Notification,
-  ) => void;
   fetchNotifications: (state: GitifyState) => Promise<void>;
   markNotificationRead: (
     state: GitifyState,
@@ -226,26 +221,11 @@ export const useNotifications = (): NotificationsState => {
     [notifications, markNotificationDone],
   );
 
-  const removeNotificationFromState = useCallback(
-    (settings: SettingsState, notification: Notification) => {
-      const updatedNotifications = removeNotification(
-        settings,
-        notification,
-        notifications,
-      );
-
-      setNotifications(updatedNotifications);
-      setTrayIconColor(updatedNotifications);
-    },
-    [notifications],
-  );
-
   return {
     status,
     errorDetails,
     notifications,
 
-    removeNotificationFromState,
     fetchNotifications,
     markNotificationRead,
     markNotificationDone,
