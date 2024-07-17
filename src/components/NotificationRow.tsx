@@ -23,13 +23,13 @@ import { NotificationHeader } from './notification/NotificationHeader';
 
 interface INotificationRow {
   notification: Notification;
-  is animated?: Boolean;
+  isAnimated?: Boolean;
   isRead?: boolean;
 }
 
 export const NotificationRow: FC<INotificationRow> = ({
   notification,
-  is animated = false,
+  isAnimated = false,
   isRead = false,
 }: INotificationRow) => {
   const {
