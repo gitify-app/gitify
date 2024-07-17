@@ -23,7 +23,7 @@ import { NotificationHeader } from './notification/NotificationHeader';
 
 interface INotificationRow {
   notification: Notification;
-  isAnimated?: Boolean;
+  isAnimated?: boolean;
   isRead?: boolean;
 }
 
