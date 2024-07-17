@@ -41,6 +41,7 @@ labels:
     matcher:
       title: '^deps(\(\w+\))?: .*'
       branch: '^renovate/.*'
+      files: ['pnpm-lock.yaml']
  
 checks:
   - context: 'Semantic Pull Request'
