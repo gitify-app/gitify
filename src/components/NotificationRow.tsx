@@ -23,11 +23,13 @@ import { NotificationHeader } from './notification/NotificationHeader';
 
 interface INotificationRow {
   notification: Notification;
+  isAnimated?: boolean;
   isRead?: boolean;
 }
 
 export const NotificationRow: FC<INotificationRow> = ({
   notification,
+  isAnimated = false,
   isRead = false,
 }: INotificationRow) => {
   const {
@@ -88,10 +90,9 @@ export const NotificationRow: FC<INotificationRow> = ({
       id={notification.id}
       className={cn(
         'group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker',
-        animateExit &&
+        (isAnimated || animateExit) &&
           'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
-        showAsRead && Opacity.READ,
-        isRead && Opacity.READ,
+        (isRead || showAsRead) && Opacity.READ,
       )}
     >
       <div
