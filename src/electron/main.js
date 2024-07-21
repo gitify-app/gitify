@@ -109,17 +109,20 @@ app.whenReady().then(async () => {
     }
   });
 
-  autoUpdater.on('checking-for-update', () => {
-    console.log('Checking for update...');
-    // TODO - display the update status in the UI
-  });
   autoUpdater.on('update-available', (info) => {
-    console.log('Update available.');
-    // TODO - display the update status in the UI
+    mb.window.webContents.send(
+      'gitify:version-check',
+      'UPDATE_AVAILABLE',
+      info,
+    );
   });
+
   autoUpdater.on('update-not-available', (info) => {
-    console.log('Update not available.');
-    // TODO - display the update status in the UI
+    mb.window.webContents.send(
+      'gitify:version-check',
+      'UPDATE_NOT_AVAILABLE',
+      info,
+    );
   });
 
   /**

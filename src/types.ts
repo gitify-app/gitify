@@ -105,6 +105,11 @@ export enum Theme {
   DARK = 'DARK',
 }
 
+export enum VersionCheck {
+  UPDATE_AVAILABLE = 'UPDATE_AVAILABLE',
+  UPDATE_NOT_AVAILABLE = 'UPDATE_NOT_AVAILABLE',
+}
+
 export enum OpenPreference {
   FOREGROUND = 'FOREGROUND',
   BACKGROUND = 'FOREGROUND',
