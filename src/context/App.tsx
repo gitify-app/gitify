@@ -1,4 +1,5 @@
 import { webFrame } from 'electron';
+import { autoUpdater } from 'electron-updater';
 import {
   type ReactNode,
   createContext,
@@ -148,6 +149,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   useInterval(() => {
     fetchNotifications({ auth, settings });
   }, Constants.FETCH_INTERVAL);
+
+  useInterval(() => {
+    autoUpdater.checkForUpdatesAndNotify();
+  }, Constants.AUTO_UPDATE_CHECK_INTERVAL);
 
   useEffect(() => {
     const count = getNotificationCount(notifications);
