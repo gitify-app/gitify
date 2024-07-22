@@ -9,6 +9,10 @@ const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('node:path');
+const log = require('electron-log');
+
+log.initialize();
+autoUpdater.logger = log;
 
 // TODO: Remove @electron/remote use - see #650
 require('@electron/remote/main').initialize();

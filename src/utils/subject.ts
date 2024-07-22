@@ -1,3 +1,4 @@
+import log from 'electron-log';
 import type { Link } from '../types';
 import type {
   CheckSuiteAttributes,
@@ -48,7 +49,7 @@ export async function getGitifySubjectDetails(
         return null;
     }
   } catch (err) {
-    console.error(
+    log.error(
       `Error occurred while fetching details for ${notification.subject.type} notification: ${notification.subject.title}`,
       err,
     );

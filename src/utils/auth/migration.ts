@@ -1,12 +1,8 @@
+import log from 'electron-log';
 import type { Account, AuthState } from '../../types';
 import Constants from '../constants';
 import { loadState, saveState } from '../storage';
 import { getUserData } from './utils';
-
-export function logMigrationProgress(msg: string) {
-  // biome-ignore lint/suspicious/noConsoleLog: log migration progress
-  console.log(`Account Migration: ${msg}`);
-}
 
 /**
  * Migrate authenticated accounts from old data structure to new data structure (v5.7.0+).
@@ -16,17 +12,20 @@ export function logMigrationProgress(msg: string) {
 export async function migrateAuthenticatedAccounts() {
   const existing = loadState();
 
-  if (hasAccountsToMigrate(existing.auth)) {
-    logMigrationProgress('Commencing authenticated accounts migration');
-
-    const migratedAccounts = await convertAccounts(existing.auth);
-
-    saveState({
-      auth: { ...existing.auth, accounts: migratedAccounts },
-      settings: existing.settings,
-    });
-    logMigrationProgress('Authenticated accounts migration complete');
+  if (!hasAccountsToMigrate(existing.auth)) {
+    log.info('Account Migration: No accounts need migrating');
+    return;
   }
+
+  log.info('Account Migration: Commencing authenticated accounts migration');
+
+  const migratedAccounts = await convertAccounts(existing.auth);
+
+  saveState({
+    auth: { ...existing.auth, accounts: migratedAccounts },
+    settings: existing.settings,
+  });
+  log.info('Account Migration: Authenticated accounts migration complete');
 }
 
 export function hasAccountsToMigrate(existingAuthState: AuthState): boolean {
