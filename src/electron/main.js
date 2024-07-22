@@ -36,7 +36,30 @@ const browserWindowOpts = {
   },
 };
 
+let isUpdateAvailable = false;
+let isUpdateDownloaded = false;
+
 const contextMenu = Menu.buildFromTemplate([
+  {
+    label: 'Check for updates',
+    click: () => {
+      checkForUpdates();
+    },
+  },
+  {
+    label: 'An update is available',
+    enabled: false,
+    visible: isUpdateAvailable,
+  },
+  {
+    label: 'Restart to update',
+    visible: isUpdateDownloaded,
+    click: () => {
+      autoUpdater.quitAndInstall();
+    },
+  },
+  { type: 'separator' },
+
   {
     role: 'reload',
   },
@@ -44,12 +67,6 @@ const contextMenu = Menu.buildFromTemplate([
     role: 'toggleDevTools',
   },
   { type: 'separator' },
-  {
-    label: 'Check for updates',
-    click: () => {
-      checkForUpdates();
-    },
-  },
   {
     label: 'Quit',
     click: () => {
@@ -105,29 +122,21 @@ app.whenReady().then(async () => {
     checkForUpdates();
     setInterval(checkForUpdates, 24 * 60 * 60 * 1000); // 24 hours
 
-    autoUpdater.on('update-available', (info) => {
-      log.info('Auto Updater: New update available', info);
-      mb.window.webContents.send(
-        'gitify:auto-updater',
-        'UPDATE_AVAILABLE',
-        info,
-      );
+    autoUpdater.on('update-available', () => {
+      log.info('Auto Updater: New update available');
+      isUpdateAvailable = true;
+      mb.window.webContents.send('gitify:auto-updater', isUpdateAvailable);
     });
 
-    autoUpdater.on('update-not-available', (info) => {
+    autoUpdater.on('update-not-available', () => {
       log.info('Auto Updater: Already on the latest version');
-      mb.window.webContents.send(
-        'gitify:auto-updater',
-        'UPDATE_NOT_AVAILABLE',
-        info,
-      );
+      isUpdateAvailable = false;
+      mb.window.webContents.send('gitify:auto-updater', isUpdateAvailable);
     });
 
-    autoUpdater.on('update-downloaded', (_info) => {
-      log.info('Auto Updater: Update downloaded; will install in 5 seconds');
-      setTimeout(() => {
-        autoUpdater.quitAndInstall();
-      }, 5000);
+    autoUpdater.on('update-downloaded', () => {
+      log.info('Auto Updater: Update downloaded');
+      isUpdateDownloaded = true;
     });
   });
 

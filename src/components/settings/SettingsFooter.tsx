@@ -8,13 +8,13 @@ import { ipcRenderer } from 'electron';
 import { type FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BUTTON_CLASS_NAME } from '../../styles/gitify';
-import { AutoUpdaterCheck, IconColor, Size } from '../../types';
+import { IconColor, Size } from '../../types';
 import { getAppVersion, quitApp } from '../../utils/comms';
 import { openGitifyReleaseNotes } from '../../utils/links';
 
 export const SettingsFooter: FC = () => {
   const [appVersion, setAppVersion] = useState<string | null>(null);
-  const [newVersionAvailable, setNewVersionAvailable] = useState(false);
+  const [isUpdateAvailable, setIsUpdateAvailable] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -29,12 +29,9 @@ export const SettingsFooter: FC = () => {
   }, []);
 
   useEffect(() => {
-    ipcRenderer.on(
-      'gitify:auto-updater',
-      (_, version: AutoUpdaterCheck, _info: string) => {
-        setNewVersionAvailable(version === AutoUpdaterCheck.UPDATE_AVAILABLE);
-      },
-    );
+    ipcRenderer.on('gitify:auto-updater', (_, isUpdateAvailable: boolean) => {
+      setIsUpdateAvailable(isUpdateAvailable);
+    });
   }, []);
 
   return (
@@ -47,7 +44,7 @@ export const SettingsFooter: FC = () => {
       >
         <span className="flex items-center gap-1">
           <span aria-label="app-version">Gitify {appVersion}</span>
-          {newVersionAvailable ? (
+          {isUpdateAvailable ? (
             <span title="New version available">
               <AlertFillIcon size={Size.XSMALL} className={IconColor.YELLOW} />
             </span>
