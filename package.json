@@ -116,7 +116,7 @@
     "react-router-dom": "6.25.1",
     "tailwind-merge": "2.4.0",
     "ts-loader": "9.5.1",
-    "typescript": "5.5.3"
+    "typescript": "5.5.4"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
