@@ -23,8 +23,6 @@ export const Constants = {
 
   FETCH_INTERVAL: 60000,
 
-  AUTO_UPDATE_CHECK_INTERVAL: 3600000,
-
   DEFAULT_KEYBOARD_SHORTCUT: 'CommandOrControl+Shift+G',
 
   // GitHub Docs
