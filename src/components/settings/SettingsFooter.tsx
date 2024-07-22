@@ -8,7 +8,7 @@ import { ipcRenderer } from 'electron';
 import { type FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BUTTON_CLASS_NAME } from '../../styles/gitify';
-import { IconColor, Size, VersionCheck } from '../../types';
+import { AutoUpdaterCheck, IconColor, Size } from '../../types';
 import { getAppVersion, quitApp } from '../../utils/comms';
 import { openGitifyReleaseNotes } from '../../utils/links';
 
@@ -30,9 +30,9 @@ export const SettingsFooter: FC = () => {
 
   useEffect(() => {
     ipcRenderer.on(
-      'gitify:version-check',
-      (_, version: VersionCheck, _info: string) => {
-        setNewVersionAvailable(version === VersionCheck.UPDATE_AVAILABLE);
+      'gitify:auto-updater',
+      (_, version: AutoUpdaterCheck, _info: string) => {
+        setNewVersionAvailable(version === AutoUpdaterCheck.UPDATE_AVAILABLE);
       },
     );
   }, []);

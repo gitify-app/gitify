@@ -105,7 +105,7 @@ export enum Theme {
   DARK = 'DARK',
 }
 
-export enum VersionCheck {
+export enum AutoUpdaterCheck {
   UPDATE_AVAILABLE = 'UPDATE_AVAILABLE',
   UPDATE_NOT_AVAILABLE = 'UPDATE_NOT_AVAILABLE',
 }
