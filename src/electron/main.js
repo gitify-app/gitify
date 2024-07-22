@@ -62,13 +62,16 @@ const contextMenu = Menu.buildFromTemplate([
 
   {
     role: 'reload',
+    accelerator: 'CommandOrControl+R',
   },
   {
     role: 'toggleDevTools',
+    accelerator: 'CommandOrControl+I',
   },
   { type: 'separator' },
   {
     label: 'Quit',
+    accelerator: 'CommandOrControl+Q',
     click: () => {
       app.quit();
     },
