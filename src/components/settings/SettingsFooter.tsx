@@ -46,7 +46,7 @@ export const SettingsFooter: FC = () => {
         onClick={() => openGitifyReleaseNotes(appVersion)}
       >
         <span className="flex items-center gap-1">
-          Gitify {appVersion}
+          <span aria-label="app-version">Gitify {appVersion}</span>
           {newVersionAvailable ? (
             <span title="New version available">
               <AlertFillIcon size={Size.XSMALL} className={IconColor.YELLOW} />

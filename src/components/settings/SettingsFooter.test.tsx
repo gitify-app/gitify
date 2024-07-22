@@ -48,7 +48,7 @@ describe('routes/components/settings/SettingsFooter.tsx', () => {
         );
       });
 
-      expect(screen.getByTitle('app-version')).toMatchSnapshot();
+      expect(screen.getByLabelText('app-version')).toMatchSnapshot();
     });
 
     it('should show development app version', async () => {
@@ -72,7 +72,7 @@ describe('routes/components/settings/SettingsFooter.tsx', () => {
         );
       });
 
-      expect(screen.getByTitle('app-version')).toMatchSnapshot();
+      expect(screen.getByLabelText('app-version')).toMatchSnapshot();
     });
   });
 

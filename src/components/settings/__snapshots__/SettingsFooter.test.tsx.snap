@@ -2,7 +2,7 @@
 
 exports[`routes/components/settings/SettingsFooter.tsx app version should show development app version 1`] = `
 <span
-  title="app-version"
+  aria-label="app-version"
 >
   Gitify 
   dev
@@ -11,7 +11,7 @@ exports[`routes/components/settings/SettingsFooter.tsx app version should show d
 
 exports[`routes/components/settings/SettingsFooter.tsx app version should show production app version 1`] = `
 <span
-  title="app-version"
+  aria-label="app-version"
 >
   Gitify 
   v0.0.1
