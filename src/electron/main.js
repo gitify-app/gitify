@@ -50,7 +50,7 @@ const contextMenu = Menu.buildFromTemplate([
   },
   { type: 'separator' },
   {
-    label: 'Quit',
+    label: 'Quit Gitify',
     accelerator: 'CommandOrControl+Q',
     click: () => {
       app.quit();
