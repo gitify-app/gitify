@@ -36,7 +36,7 @@ const browserWindowOpts = {
   },
 };
 
-let isUpdateAvailable = false;
+let isUpdateAvailable = true;
 let isUpdateDownloaded = false;
 
 const contextMenu = Menu.buildFromTemplate([
@@ -173,7 +173,7 @@ app.whenReady().then(async () => {
 
   ipc.on('gitify:update-title', (_, title) => {
     if (!mb.tray.isDestroyed()) {
-      mb.tray.setTitle(`${isUpdateAvailable ? '⬇ ' : ''}${title}`);
+      mb.tray.setTitle(`${isUpdateAvailable ? '⤓' : ''}${title}`);
     }
   });
 
