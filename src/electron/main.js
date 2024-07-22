@@ -173,7 +173,7 @@ app.whenReady().then(async () => {
 
   ipc.on('gitify:update-title', (_, title) => {
     if (!mb.tray.isDestroyed()) {
-      mb.tray.setTitle(title);
+      mb.tray.setTitle(`${isUpdateAvailable ? '⬇ ' : ''}${title}`);
     }
   });
 
