@@ -69,6 +69,7 @@ app.whenReady().then(async () => {
     mb.app.setAppUserModelId('com.electron.gitify');
 
     // Tray configuration
+    mb.tray.setToolTip('Gitify');
     mb.tray.setIgnoreDoubleClickEvents(true);
     mb.tray.on('right-click', (_event, bounds) => {
       mb.tray.popUpContextMenu(contextMenu, { x: bounds.x, y: bounds.y });
