@@ -128,7 +128,7 @@ app.whenReady().then(async () => {
       mb.window.resizable = false;
     });
 
-    // Auto Update
+    // Auto Updater
     checkForUpdates();
     setInterval(checkForUpdates, 24 * 60 * 60 * 1000); // 24 hours
 
