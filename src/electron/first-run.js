@@ -49,7 +49,7 @@ function isFirstRun() {
 
     fs.writeFileSync(configPath, '');
   } catch (error) {
-    log.warn('First run: Unable to write firstRun file', error);
+    log.error('First run: Unable to write firstRun file', error);
   }
 
   return true;
