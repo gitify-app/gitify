@@ -35,16 +35,22 @@ const browserWindowOpts = {
 
 const contextMenu = Menu.buildFromTemplate([
   {
-    role: 'reload',
-    accelerator: 'CommandOrControl+R',
-  },
-  {
-    role: 'toggleDevTools',
-    accelerator: 'CommandOrControl+I',
+    label: 'Developer',
+    submenu: [
+      {
+        role: 'reload',
+        accelerator: 'CommandOrControl+R',
+      },
+      {
+        role: 'toggleDevTools',
+        accelerator:
+          process.platform === 'darwin' ? 'Alt+Cmd+I' : 'Ctrl+Shift+I',
+      },
+    ],
   },
   { type: 'separator' },
   {
-    label: 'Quit',
+    label: 'Quit Gitify',
     accelerator: 'CommandOrControl+Q',
     click: () => {
       app.quit();
