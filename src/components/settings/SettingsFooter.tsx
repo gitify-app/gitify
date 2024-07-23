@@ -4,7 +4,6 @@ import {
   PersonIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
-import { ipcRenderer } from 'electron';
 import { type FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BUTTON_CLASS_NAME } from '../../styles/gitify';
@@ -12,9 +11,14 @@ import { IconColor, Size } from '../../types';
 import { getAppVersion, quitApp } from '../../utils/comms';
 import { openGitifyReleaseNotes } from '../../utils/links';
 
-export const SettingsFooter: FC = () => {
+interface ISettingsFooter {
+  isUpdateAvailable?: boolean;
+}
+
+export const SettingsFooter: FC<ISettingsFooter> = ({
+  isUpdateAvailable = false,
+}: ISettingsFooter) => {
   const [appVersion, setAppVersion] = useState<string | null>(null);
-  const [isUpdateAvailable, setIsUpdateAvailable] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,12 +30,6 @@ export const SettingsFooter: FC = () => {
         setAppVersion(`v${result}`);
       }
     })();
-  }, []);
-
-  useEffect(() => {
-    ipcRenderer.on('gitify:auto-updater', (_, isUpdateAvailable: boolean) => {
-      setIsUpdateAvailable(isUpdateAvailable);
-    });
   }, []);
 
   return (

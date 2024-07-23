@@ -76,6 +76,48 @@ describe('routes/components/settings/SettingsFooter.tsx', () => {
     });
   });
 
+  describe('update available visual indicator', () => {
+    it('using latest version', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsFooter isUpdateAvailable={false} />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      expect(
+        screen.getByTitle('You are using the latest version'),
+      ).toMatchSnapshot();
+    });
+
+    it('new version available', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsFooter isUpdateAvailable={true} />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      expect(screen.getByTitle('New version available')).toMatchSnapshot();
+    });
+  });
+
   it('should open release notes', async () => {
     process.env = {
       ...originalEnv,
