@@ -40,21 +40,26 @@ export const SettingsFooter: FC<ISettingsFooter> = ({
         title="View release notes"
         onClick={() => openGitifyReleaseNotes(appVersion)}
       >
-        <span className="flex items-center gap-1">
+        <div className="flex items-center gap-1">
           <span aria-label="app-version">Gitify {appVersion}</span>
-          {isUpdateAvailable ? (
-            <span title="New version available">
-              <AlertFillIcon size={Size.XSMALL} className={IconColor.YELLOW} />
-            </span>
-          ) : (
-            <span title="You are using the latest version">
-              <CheckCircleFillIcon
-                size={Size.XSMALL}
-                className={IconColor.GREEN}
-              />
-            </span>
-          )}
-        </span>
+          <span className="pb-1">
+            {isUpdateAvailable ? (
+              <span title="New version available">
+                <AlertFillIcon
+                  size={Size.XSMALL}
+                  className={IconColor.YELLOW}
+                />
+              </span>
+            ) : (
+              <span title="You are using the latest version">
+                <CheckCircleFillIcon
+                  size={Size.XSMALL}
+                  className={IconColor.GREEN}
+                />
+              </span>
+            )}
+          </span>
+        </div>
       </button>
       <div>
         <button
