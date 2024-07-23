@@ -42,6 +42,7 @@ let isUpdateDownloaded = false;
 const contextMenu = Menu.buildFromTemplate([
   {
     label: 'Check for updates',
+    visible: !isUpdateAvailable,
     click: () => {
       checkForUpdates();
     },
