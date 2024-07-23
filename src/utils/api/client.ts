@@ -1,4 +1,5 @@
 import type { AxiosPromise } from 'axios';
+import log from 'electron-log';
 import { print } from 'graphql/language/printer';
 import type {
   Account,
@@ -224,7 +225,7 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
     const response = (await apiRequestAuth(url, 'GET', token)).data;
     return response.html_url;
   } catch (err) {
-    console.error('Failed to get html url');
+    log.error('Failed to get html url');
   }
 }
 

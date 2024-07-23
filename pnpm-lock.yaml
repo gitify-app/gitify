@@ -26,6 +26,9 @@ importers:
       date-fns:
         specifier: 3.6.0
         version: 3.6.0
+      electron-log:
+        specifier: 5.1.6
+        version: 5.1.6
       electron-updater:
         specifier: 6.3.0
         version: 6.3.0
@@ -1372,6 +1375,10 @@ packages:
     resolution: {integrity: sha512-yZSgVHft5dNVlo31qmJAe4BVKQfFdwpRw7sFp1iQglDRCDD6r22zfRJuZlhtB5gp9FHUxCMEoWGq10SkCnMAIg==}
     engines: {node: '>=14.0.0'}
     hasBin: true
+
+  electron-log@5.1.6:
+    resolution: {integrity: sha512-o7+gNnlth67wexW7ym4niGAghXE5GZ7J1bhdNBSnqGeiMQwJ0Mhr7/HtDw2m/2thCngaOsvfjU5FDZs81TCcXw==}
+    engines: {node: '>= 14'}
 
   electron-positioner@4.1.0:
     resolution: {integrity: sha512-726DfbI9ZNoCg+Fcu6XLuTKTnzf+6nFqv7h+K/V6Ug7IbaPMI7s9S8URnGtWFCy5N5PL4HSzRFF2mXuinftDdg==}
@@ -4735,6 +4742,8 @@ snapshots:
     transitivePeerDependencies:
       - electron-builder-squirrel-windows
       - supports-color
+
+  electron-log@5.1.6: {}
 
   electron-positioner@4.1.0: {}
 
