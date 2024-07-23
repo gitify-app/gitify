@@ -106,7 +106,7 @@
     "class-variance-authority": "0.7.0",
     "clsx": "2.1.1",
     "date-fns": "3.6.0",
-    "electron-log": "^5.1.6",
+    "electron-log": "5.1.6",
     "electron-updater": "6.3.0",
     "final-form": "4.20.10",
     "menubar": "9.5.0",
@@ -117,7 +117,7 @@
     "react-router-dom": "6.25.1",
     "tailwind-merge": "2.4.0",
     "ts-loader": "9.5.1",
-    "typescript": "5.5.3"
+    "typescript": "5.5.4"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",

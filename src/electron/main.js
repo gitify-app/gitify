@@ -11,6 +11,7 @@ const { onFirstRunMaybe } = require('./first-run');
 const path = require('node:path');
 const log = require('electron-log');
 
+log.initialize();
 autoUpdater.logger = log;
 
 // TODO: Remove @electron/remote use - see #650
@@ -60,18 +61,22 @@ const contextMenu = Menu.buildFromTemplate([
     },
   },
   { type: 'separator' },
-
   {
-    role: 'reload',
-    accelerator: 'CommandOrControl+R',
-  },
-  {
-    role: 'toggleDevTools',
-    accelerator: 'CommandOrControl+I',
+    label: 'Developer',
+    submenu: [
+      {
+        role: 'reload',
+        accelerator: 'CommandOrControl+R',
+      },
+      {
+        role: 'toggleDevTools',
+        accelerator: 'CommandOrControl+I',
+      },
+    ],
   },
   { type: 'separator' },
   {
-    label: 'Quit',
+    label: 'Quit Gitify',
     accelerator: 'CommandOrControl+Q',
     click: () => {
       app.quit();
@@ -94,6 +99,7 @@ app.whenReady().then(async () => {
     mb.app.setAppUserModelId('com.electron.gitify');
 
     // Tray configuration
+    mb.tray.setToolTip('Gitify');
     mb.tray.setIgnoreDoubleClickEvents(true);
     mb.tray.on('right-click', (_event, bounds) => {
       mb.tray.popUpContextMenu(contextMenu, { x: bounds.x, y: bounds.y });

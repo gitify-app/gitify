@@ -1,4 +1,5 @@
 import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
+import log from 'electron-log';
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
@@ -278,7 +279,7 @@ describe('utils/api/client.ts', () => {
     });
 
     it('should handle error', async () => {
-      const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation();
+      const logErrorSpy = jest.spyOn(log, 'error').mockImplementation();
 
       const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
 
@@ -291,7 +292,7 @@ describe('utils/api/client.ts', () => {
         '123' as Token,
       );
 
-      expect(consoleErrorSpy).toHaveBeenCalledWith('Failed to get html url');
+      expect(logErrorSpy).toHaveBeenCalledWith('Failed to get html url');
     });
   });
 });

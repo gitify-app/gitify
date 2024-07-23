@@ -30,6 +30,7 @@ const mockDiscussionAuthor: DiscussionAuthor = {
   avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
   type: 'User',
 };
+import log from 'electron-log';
 
 describe('utils/subject.ts', () => {
   beforeEach(() => {
@@ -1150,9 +1151,7 @@ describe('utils/subject.ts', () => {
 
     describe('Error', () => {
       it('catches error and logs message', async () => {
-        const consoleErrorSpy = jest
-          .spyOn(console, 'error')
-          .mockImplementation();
+        const logErrorSpy = jest.spyOn(log, 'error').mockImplementation();
 
         const mockError = new Error('Test error');
         const mockNotification = partialMockNotification({
@@ -1167,7 +1166,7 @@ describe('utils/subject.ts', () => {
 
         await getGitifySubjectDetails(mockNotification);
 
-        expect(consoleErrorSpy).toHaveBeenCalledWith(
+        expect(logErrorSpy).toHaveBeenCalledWith(
           'Error occurred while fetching details for Issue notification: This issue will throw an error',
           mockError,
         );
