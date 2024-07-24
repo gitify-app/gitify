@@ -4,6 +4,7 @@
     "config:recommended",
     ":separateMultipleMajorReleases",
     ":enableVulnerabilityAlerts",
+    "schedule:weekly",
     "regexManagers:biomeVersions"
   ],
   "labels": ["dependency"],
