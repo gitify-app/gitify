@@ -36,6 +36,9 @@ export const Sidebar: FC = () => {
     auth,
   } = useContext(AppContext);
 
+  // We naively assume that the first account is the primary account for the purposes of our sidebar quick links
+  const primaryAccount = auth.accounts[0];
+
   const toggleFilters = () => {
     if (location.pathname.startsWith('/filters')) {
       navigate('/', { replace: true });
@@ -83,19 +86,19 @@ export const Sidebar: FC = () => {
           title={`${notificationsCount} Unread Notifications`}
           metric={notificationsCount}
           icon={BellIcon}
-          onClick={() => openGitHubNotifications(auth.accounts[0])}
+          onClick={() => openGitHubNotifications(primaryAccount)}
         />
 
         <SidebarButton
           title="My Issues"
           icon={IssueOpenedIcon}
-          onClick={() => openGitHubIssues(auth.accounts[0])}
+          onClick={() => openGitHubIssues(primaryAccount)}
         />
 
         <SidebarButton
           title="My Pull Requests"
           icon={GitPullRequestIcon}
-          onClick={() => openGitHubPulls(auth.accounts[0])}
+          onClick={() => openGitHubPulls(primaryAccount)}
         />
       </div>
 
