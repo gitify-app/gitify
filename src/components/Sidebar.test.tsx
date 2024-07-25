@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { mockAccountNotifications } from '../__mocks__/notifications-mocks';
-import { mockSettings } from '../__mocks__/state-mocks';
+import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import { IconColor } from '../types';
 import * as comms from '../utils/comms';
@@ -85,6 +85,7 @@ describe('components/Sidebar.tsx', () => {
             value={{
               isLoggedIn: true,
               notifications: [],
+              auth: mockAuth,
               settings: mockSettings,
             }}
           >
@@ -114,6 +115,7 @@ describe('components/Sidebar.tsx', () => {
             value={{
               isLoggedIn: true,
               notifications: mockAccountNotifications,
+              auth: mockAuth,
               settings: mockSettings,
             }}
           >
@@ -146,6 +148,7 @@ describe('components/Sidebar.tsx', () => {
         value={{
           isLoggedIn: true,
           notifications: mockAccountNotifications,
+          auth: mockAuth,
           settings: mockSettings,
         }}
       >
@@ -169,6 +172,7 @@ describe('components/Sidebar.tsx', () => {
         value={{
           isLoggedIn: true,
           notifications: mockAccountNotifications,
+          auth: mockAuth,
           settings: mockSettings,
         }}
       >
@@ -322,6 +326,7 @@ describe('components/Sidebar.tsx', () => {
         value={{
           isLoggedIn: true,
           notifications: mockAccountNotifications,
+          auth: mockAuth,
           settings: mockSettings,
         }}
       >
@@ -345,6 +350,7 @@ describe('components/Sidebar.tsx', () => {
         value={{
           isLoggedIn: true,
           notifications: mockAccountNotifications,
+          auth: mockAuth,
           settings: mockSettings,
         }}
       >
@@ -368,6 +374,7 @@ describe('components/Sidebar.tsx', () => {
         value={{
           isLoggedIn: true,
           notifications: mockAccountNotifications,
+          auth: mockAuth,
           settings: mockSettings,
         }}
       >

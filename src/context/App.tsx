@@ -167,7 +167,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const newSettings = { ...settings, ...defaultFilters };
     setSettings(newSettings);
     saveState({ auth, settings: newSettings });
-  }, [auth]);
+  }, [auth, settings]);
 
   const resetSettings = useCallback(() => {
     setSettings(defaultSettings);
