@@ -15,20 +15,20 @@ export function openGitifyReleaseNotes(version: string) {
   );
 }
 
-export function openGitHubNotifications(account: Account) {
-  const url = new URL(`https://${account.hostname}`);
+export function openGitHubNotifications(hostname: Hostname) {
+  const url = new URL(`https://${hostname}`);
   url.pathname = 'notifications';
   openExternalLink(url.toString() as Link);
 }
 
-export function openGitHubIssues(account: Account) {
-  const url = new URL(`https://${account.hostname}`);
+export function openGitHubIssues(hostname: Hostname) {
+  const url = new URL(`https://${hostname}`);
   url.pathname = 'issues';
   openExternalLink(url.toString() as Link);
 }
 
-export function openGitHubPulls(account: Account) {
-  const url = new URL(`https://${account.hostname}`);
+export function openGitHubPulls(hostname: Hostname) {
+  const url = new URL(`https://${hostname}`);
   url.pathname = 'pulls';
   openExternalLink(url.toString() as Link);
 }
