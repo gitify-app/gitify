@@ -1,12 +1,12 @@
 import type { AxiosResponse } from 'axios';
 import type { Hostname } from '../../types';
 import Constants from '../constants';
-import { isEnterpriseHost } from '../helpers';
+import { isEnterpriseServerHost } from '../helpers';
 
 export function getGitHubAPIBaseUrl(hostname: Hostname): URL {
   const url = new URL(Constants.GITHUB_API_BASE_URL);
 
-  if (isEnterpriseHost(hostname)) {
+  if (isEnterpriseServerHost(hostname)) {
     url.hostname = hostname;
     url.pathname = '/api/v3/';
   }
@@ -16,7 +16,7 @@ export function getGitHubAPIBaseUrl(hostname: Hostname): URL {
 export function getGitHubGraphQLUrl(hostname: Hostname): URL {
   const url = new URL(Constants.GITHUB_API_GRAPHQL_URL);
 
-  if (isEnterpriseHost(hostname)) {
+  if (isEnterpriseServerHost(hostname)) {
     url.hostname = hostname;
     url.pathname = '/api/graphql';
   }

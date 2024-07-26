@@ -16,7 +16,7 @@ import {
   generateNotificationReferrerId,
   getFilterCount,
   getPlatformFromHostname,
-  isEnterpriseHost,
+  isEnterpriseServerHost,
 } from './helpers';
 
 describe('utils/helpers.ts', () => {
@@ -40,15 +40,19 @@ describe('utils/helpers.ts', () => {
     });
   });
 
-  describe('isEnterpriseHost', () => {
+  describe('isEnterpriseServerHost', () => {
     it('should return true for enterprise host', () => {
-      expect(isEnterpriseHost('github.gitify.app' as Hostname)).toBe(true);
-      expect(isEnterpriseHost('api.github.gitify.app' as Hostname)).toBe(true);
+      expect(isEnterpriseServerHost('github.gitify.app' as Hostname)).toBe(
+        true,
+      );
+      expect(isEnterpriseServerHost('api.github.gitify.app' as Hostname)).toBe(
+        true,
+      );
     });
 
     it('should return false for non-enterprise host', () => {
-      expect(isEnterpriseHost('github.com' as Hostname)).toBe(false);
-      expect(isEnterpriseHost('api.github.com' as Hostname)).toBe(false);
+      expect(isEnterpriseServerHost('github.com' as Hostname)).toBe(false);
+      expect(isEnterpriseServerHost('api.github.com' as Hostname)).toBe(false);
     });
   });
 
