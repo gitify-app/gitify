@@ -108,7 +108,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
               <div>
                 <div>
                   <a
-                    href="https://github.com/settings/tokens/new?description=Gitify+%28Created+on+Jul+16%2C+2024+12%3A22+PM%29&scopes=read%3Auser%2Cnotifications%2Crepo"
+                    href="https://github.com/settings/tokens/new?description=Gitify+%28Created+on+Jul+27%2C+2024+4%3A43+AM%29&scopes=read%3Auser%2Cnotifications%2Crepo"
                   >
                     <button
                       aria-label="Generate a PAT"
@@ -308,7 +308,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
             <div>
               <div>
                 <a
-                  href="https://github.com/settings/tokens/new?description=Gitify+%28Created+on+Jul+16%2C+2024+12%3A22+PM%29&scopes=read%3Auser%2Cnotifications%2Crepo"
+                  href="https://github.com/settings/tokens/new?description=Gitify+%28Created+on+Jul+27%2C+2024+4%3A43+AM%29&scopes=read%3Auser%2Cnotifications%2Crepo"
                 >
                   <button
                     aria-label="Generate a PAT"

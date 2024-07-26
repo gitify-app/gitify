@@ -83,7 +83,7 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   class="mb-1"
                 >
                   <a
-                    href="https://settings/applications/new?oauth_application%5Bname%5D=Gitify+%28Created+on+Jul+16%2C+2024+12%3A22+PM%29&oauth_application%5Burl%5D=https%3A%2F%2Fwww.gitify.io&oauth_application%5Bcallback_url%5D=https%3A%2F%2Fwww.gitify.io%2Fcallback"
+                    href="https://settings/applications/new?oauth_application%5Bname%5D=Gitify+%28Created+on+Jul+27%2C+2024+4%3A43+AM%29&oauth_application%5Burl%5D=https%3A%2F%2Fwww.gitify.io&oauth_application%5Bcallback_url%5D=https%3A%2F%2Fwww.gitify.io%2Fcallback"
                   >
                     <button
                       aria-label="Create new OAuth App"
@@ -296,7 +296,7 @@ exports[`routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 class="mb-1"
               >
                 <a
-                  href="https://settings/applications/new?oauth_application%5Bname%5D=Gitify+%28Created+on+Jul+16%2C+2024+12%3A22+PM%29&oauth_application%5Burl%5D=https%3A%2F%2Fwww.gitify.io&oauth_application%5Bcallback_url%5D=https%3A%2F%2Fwww.gitify.io%2Fcallback"
+                  href="https://settings/applications/new?oauth_application%5Bname%5D=Gitify+%28Created+on+Jul+27%2C+2024+4%3A43+AM%29&oauth_application%5Burl%5D=https%3A%2F%2Fwww.gitify.io&oauth_application%5Bcallback_url%5D=https%3A%2F%2Fwww.gitify.io%2Fcallback"
                 >
                   <button
                     aria-label="Create new OAuth App"
