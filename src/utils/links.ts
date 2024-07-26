@@ -59,7 +59,7 @@ export async function openNotification(
   shouldOpenInBackground = false,
 ) {
   const url = await generateGitHubWebUrl(notification);
-  shell.openExternal(url, { activate: !shouldOpenInBackground });
+  openLinkInBrowser(url, shouldOpenInBackground);
 }
 
 export function gitHubParticipatingDocsURL() {
@@ -90,13 +90,13 @@ export const globalClickHandler = (event: MouseEvent) => {
 
     const { settings } = loadState();
 
-    const userOpenBackground = isCtrlOrMetaKey(event);
-    const openLinkPreferenceBackground =
-      settings.openLinks === OpenPreference.BACKGROUND;
+    const openLinkUserForeground = !isCtrlOrMetaKey(event);
+    const openLinkPreferenceForeground =
+      settings.openLinks === OpenPreference.FOREGROUND;
 
     openLinkInBrowser(
       url,
-      !userOpenBackground && !openLinkPreferenceBackground,
+      openLinkUserForeground && openLinkPreferenceForeground,
     );
   }
 };

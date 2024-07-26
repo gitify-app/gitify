@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 import { AppContext } from '../context/App';
-import { Opacity, Size } from '../types';
+import { Opacity, OpenPreference, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
 import { formatForDisplay } from '../utils/helpers';
@@ -45,8 +45,14 @@ export const NotificationRow: FC<INotificationRow> = ({
       setAnimateExit(!settings.delayNotificationState);
       setShowAsRead(settings.delayNotificationState);
 
-      const userOpenBackground = isCtrlOrMetaKey(event);
-      openNotification(notification, userOpenBackground);
+      const openLinkUserForeground = !isCtrlOrMetaKey(event);
+      const openLinkPreferenceForeground =
+        settings.openLinks === OpenPreference.FOREGROUND;
+
+      openNotification(
+        notification,
+        openLinkUserForeground && openLinkPreferenceForeground,
+      );
 
       if (settings.markAsDoneOnOpen) {
         markNotificationDone(notification);
