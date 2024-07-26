@@ -4,6 +4,7 @@ const {
   nativeTheme,
   globalShortcut,
   Menu,
+  dialog,
 } = require('electron/main');
 const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
@@ -56,6 +57,12 @@ const contextMenu = Menu.buildFromTemplate([
         label: 'Take Screenshot',
         accelerator: 'CommandOrControl+S',
         click: () => takeScreenshot(),
+      },
+      {
+        label: 'Reset App',
+        click: () => {
+          resetApp();
+        },
       },
     ],
   },
@@ -186,4 +193,25 @@ function takeScreenshot() {
       log.info(`Screenshot saved ${capturedPicFilePath}`),
     );
   });
+}
+
+function resetApp() {
+  const cancelButtonId = 0;
+
+  const response = dialog.showMessageBoxSync(mb.window, {
+    type: 'warning',
+    title: 'Reset Gitify',
+    message:
+      'Are you sure you want to reset Gitify? You will be logged out of all accounts',
+    buttons: ['Cancel', 'Reset'],
+    defaultId: cancelButtonId,
+    cancelId: cancelButtonId,
+  });
+
+  if (response === cancelButtonId) {
+    return;
+  }
+
+  mb.window.webContents.send('gitify:reset-app');
+  mb.app.quit();
 }
