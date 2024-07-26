@@ -4,6 +4,7 @@ const {
   nativeTheme,
   globalShortcut,
   Menu,
+  dialog,
 } = require('electron/main');
 const { menubar } = require('menubar');
 const { autoUpdater } = require('electron-updater');
@@ -50,6 +51,12 @@ const contextMenu = Menu.buildFromTemplate([
         accelerator:
           process.platform === 'darwin' ? 'Alt+Cmd+I' : 'Ctrl+Shift+I',
       },
+      {
+        label: 'Reset App',
+        click: () => {
+          resetApp();
+        },
+      },
     ],
   },
   { type: 'separator' },
@@ -62,16 +69,16 @@ const contextMenu = Menu.buildFromTemplate([
   },
 ]);
 
+const mb = menubar({
+  icon: idleIcon,
+  index: `file://${__dirname}/index.html`,
+  browserWindow: browserWindowOpts,
+  preloadWindow: true,
+  showDockIcon: false,
+});
+
 app.whenReady().then(async () => {
   await onFirstRunMaybe();
-
-  const mb = menubar({
-    icon: idleIcon,
-    index: `file://${__dirname}/index.html`,
-    browserWindow: browserWindowOpts,
-    preloadWindow: true,
-    showDockIcon: false,
-  });
 
   mb.on('ready', () => {
     autoUpdater.checkForUpdatesAndNotify();
@@ -168,3 +175,24 @@ app.whenReady().then(async () => {
     app.setLoginItemSettings(settings);
   });
 });
+
+function resetApp() {
+  const cancelButtonId = 0;
+
+  const response = dialog.showMessageBoxSync(mb.window, {
+    type: 'warning',
+    title: 'Reset Gitify',
+    message:
+      'Are you sure you want to reset Gitify? You will be logged out of all accounts',
+    buttons: ['Cancel', 'Reset'],
+    defaultId: cancelButtonId,
+    cancelId: cancelButtonId,
+  });
+
+  if (response === cancelButtonId) {
+    return;
+  }
+
+  mb.window.webContents.send('gitify:reset-app');
+  mb.app.quit();
+}
