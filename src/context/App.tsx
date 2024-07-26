@@ -1,4 +1,4 @@
-import { webFrame } from 'electron';
+import { ipcRenderer, webFrame } from 'electron';
 import {
   type ReactNode,
   createContext,
@@ -97,7 +97,6 @@ interface AppContextState {
   loginWithOAuthApp: (data: LoginOAuthAppOptions) => void;
   loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => void;
   logoutFromAccount: (account: Account) => void;
-  logout: () => void;
 
   notifications: AccountNotifications[];
   status: Status;
@@ -162,6 +161,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     setKeyboardShortcut(settings.keyboardShortcut);
   }, [settings.keyboardShortcut]);
+
+  useEffect(() => {
+    ipcRenderer.on('gitify:reset-app', () => {
+      setAuth(defaultAuth);
+      clearState();
+    });
+  }, []);
 
   const clearFilters = useCallback(() => {
     const newSettings = { ...settings, ...defaultFilters };
@@ -239,11 +245,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [auth, settings],
   );
 
-  const logout = useCallback(() => {
-    setAuth(defaultAuth);
-    clearState();
-  }, []);
-
   const restoreSettings = useCallback(async () => {
     await migrateAuthenticatedAccounts();
 
@@ -307,7 +308,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         loginWithOAuthApp,
         loginWithPersonalAccessToken,
         logoutFromAccount,
-        logout,
 
         notifications,
         status,

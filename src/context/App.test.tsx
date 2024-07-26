@@ -304,28 +304,6 @@ describe('context/App.tsx', () => {
     });
   });
 
-  it('should call logout', async () => {
-    const clearStateMock = jest.spyOn(storage, 'clearState');
-
-    const TestComponent = () => {
-      const { logout } = useContext(AppContext);
-
-      return (
-        <button type="button" onClick={logout}>
-          Test Case
-        </button>
-      );
-    };
-
-    const { getByText } = customRender(<TestComponent />);
-
-    act(() => {
-      fireEvent.click(getByText('Test Case'));
-    });
-
-    expect(clearStateMock).toHaveBeenCalledTimes(1);
-  });
-
   describe('settings methods', () => {
     const fetchNotificationsMock = jest.fn();
 
