@@ -4,7 +4,7 @@ exports[`apiRequestAuth should make an authenticated request with the correct pa
 {
   "Accept": "application/json",
   "Authorization": "token yourAuthToken",
-  "Cache-Control": "no-cache",
+  "Cache-Control": "",
   "Content-Type": "application/json",
 }
 `;
@@ -13,7 +13,7 @@ exports[`apiRequestAuth should make an authenticated request with the correct pa
 {
   "Accept": "application/json",
   "Authorization": "token yourAuthToken",
-  "Cache-Control": "no-cache",
+  "Cache-Control": "",
   "Content-Type": "application/json",
 }
 `;

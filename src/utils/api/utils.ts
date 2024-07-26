@@ -1,3 +1,4 @@
+import type { AxiosResponse } from 'axios';
 import type { Hostname } from '../../types';
 import Constants from '../constants';
 import { isEnterpriseHost } from '../helpers';
@@ -21,4 +22,10 @@ export function getGitHubGraphQLUrl(hostname: Hostname): URL {
   }
 
   return url;
+}
+
+export function parseNextUrl(response: AxiosResponse): string | null {
+  const linkHeader = response.headers.link;
+  const matches = linkHeader?.match(/<([^>]+)>;\s*rel="next"/);
+  return matches ? matches[1] : null;
 }
