@@ -17,7 +17,7 @@ export function getPlatformFromHostname(hostname: string): PlatformType {
     : 'GitHub Enterprise Server';
 }
 
-export function isEnterpriseHost(hostname: Hostname): boolean {
+export function isEnterpriseServerHost(hostname: Hostname): boolean {
   return !hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname);
 }
 
