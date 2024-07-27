@@ -12,7 +12,6 @@ import {
   markNotificationThreadAsRead,
   markRepositoryNotificationsAsRead,
 } from '../utils/api/client';
-import { determineFailureType } from '../utils/api/errors';
 import { getAccountUUID } from '../utils/auth/utils';
 import {
   getAllNotifications,
@@ -61,16 +60,21 @@ export const useNotifications = (): NotificationsState => {
     async (state: GitifyState) => {
       setStatus('loading');
 
-      try {
-        const fetchedNotifications = await getAllNotifications(state);
+      const fetchedNotifications = await getAllNotifications(state);
 
-        setNotifications(fetchedNotifications);
-        triggerNativeNotifications(notifications, fetchedNotifications, state);
-        setStatus('success');
-      } catch (err) {
+      if (
+        fetchedNotifications.every((account) => {
+          return account.error !== null;
+        })
+      ) {
         setStatus('error');
-        setErrorDetails(determineFailureType(err));
+        setErrorDetails(fetchedNotifications[0].error);
+        return;
       }
+
+      setNotifications(fetchedNotifications);
+      triggerNativeNotifications(notifications, fetchedNotifications, state);
+      setStatus('success');
     },
     [notifications],
   );

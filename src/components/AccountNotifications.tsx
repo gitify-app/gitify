@@ -5,12 +5,13 @@ import {
 } from '@primer/octicons-react';
 import { type FC, type MouseEvent, useContext, useState } from 'react';
 import { AppContext } from '../context/App';
-import { type Account, Opacity, Size } from '../types';
+import { type Account, type GitifyError, Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
 import { openAccountProfile } from '../utils/links';
 import { HoverGroup } from './HoverGroup';
 import { NotificationRow } from './NotificationRow';
+import { Oops } from './Oops';
 import { RepositoryNotifications } from './RepositoryNotifications';
 import { InteractionButton } from './buttons/InteractionButton';
 import { PlatformIcon } from './icons/PlatformIcon';
@@ -18,6 +19,7 @@ import { PlatformIcon } from './icons/PlatformIcon';
 interface IAccountNotifications {
   account: Account;
   notifications: Notification[];
+  error?: GitifyError;
   showAccountHostname: boolean;
 }
 
@@ -103,6 +105,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
 
       {showAccountNotifications && (
         <>
+          {props?.error && <Oops error={props.error} />}
           {groupByRepository
             ? Object.values(groupedNotifications).map((repoNotifications) => {
                 const repoSlug = repoNotifications[0].repository.full_name;

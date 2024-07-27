@@ -39,6 +39,7 @@ export const NotificationsRoute: FC = () => {
           key={getAccountUUID(accountNotifications.account)}
           account={accountNotifications.account}
           notifications={accountNotifications.notifications}
+          error={accountNotifications.error}
           showAccountHostname={
             hasMultipleAccounts || settings.showAccountHostname
           }
