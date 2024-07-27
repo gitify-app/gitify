@@ -105,7 +105,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
 
       {showAccountNotifications && (
         <>
-          {props?.error && <Oops error={props.error} />}
+          {props.error && <Oops error={props.error} />}
           {groupByRepository
             ? Object.values(groupedNotifications).map((repoNotifications) => {
                 const repoSlug = repoNotifications[0].repository.full_name;
