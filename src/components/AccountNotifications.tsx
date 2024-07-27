@@ -19,7 +19,7 @@ import { PlatformIcon } from './icons/PlatformIcon';
 interface IAccountNotifications {
   account: Account;
   notifications: Notification[];
-  error?: GitifyError;
+  error: GitifyError | null;
   showAccountHostname: boolean;
 }
 
