@@ -50,7 +50,7 @@ interface NotificationsState {
 
 export const useNotifications = (): NotificationsState => {
   const [status, setStatus] = useState<Status>('success');
-  const [errorDetails, setErrorDetails] = useState<GitifyError>();
+  const [globalError, setGlobalError] = useState<GitifyError>();
 
   const [notifications, setNotifications] = useState<AccountNotifications[]>(
     [],
@@ -62,13 +62,22 @@ export const useNotifications = (): NotificationsState => {
 
       const fetchedNotifications = await getAllNotifications(state);
 
-      if (
-        fetchedNotifications.every((account) => {
-          return account.error !== null;
-        })
-      ) {
+      // Set Global Error if all accounts have the same error
+      const allAccountsHaveErrors = fetchedNotifications.every((account) => {
+        return account.error !== null;
+      });
+      let accountErrorsAreAllSame = true;
+      const accountError = fetchedNotifications[0]?.error;
+      for (const fetchedNotification of fetchedNotifications) {
+        if (accountError !== fetchedNotification.error) {
+          accountErrorsAreAllSame = false;
+          break;
+        }
+      }
+
+      if (allAccountsHaveErrors && accountErrorsAreAllSame) {
         setStatus('error');
-        setErrorDetails(fetchedNotifications[0].error);
+        setGlobalError(accountError);
         return;
       }
 
@@ -227,7 +236,7 @@ export const useNotifications = (): NotificationsState => {
 
   return {
     status,
-    errorDetails,
+    errorDetails: globalError,
     notifications,
 
     fetchNotifications,

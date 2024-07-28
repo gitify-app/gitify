@@ -9,6 +9,7 @@ import { type Account, type GitifyError, Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
 import { openAccountProfile } from '../utils/links';
+import { AllRead } from './AllRead';
 import { HoverGroup } from './HoverGroup';
 import { NotificationRow } from './NotificationRow';
 import { Oops } from './Oops';
@@ -105,7 +106,11 @@ export const AccountNotifications: FC<IAccountNotifications> = (
 
       {showAccountNotifications && (
         <>
-          {props.error && <Oops error={props.error} />}
+          {props.error ? (
+            <Oops error={props.error} />
+          ) : (
+            props.notifications.length === 0 && <AllRead />
+          )}
           {groupByRepository
             ? Object.values(groupedNotifications).map((repoNotifications) => {
                 const repoSlug = repoNotifications[0].repository.full_name;

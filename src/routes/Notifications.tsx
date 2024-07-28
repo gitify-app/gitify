@@ -15,6 +15,12 @@ export const NotificationsRoute: FC = () => {
     () => notifications.length > 1,
     [notifications],
   );
+
+  const hasAccountError = useMemo(
+    () => notifications.some((account) => account.error !== null),
+    [notifications],
+  );
+
   const notificationsCount = useMemo(() => {
     return getNotificationCount(notifications);
   }, [notifications]);
@@ -28,7 +34,7 @@ export const NotificationsRoute: FC = () => {
     return <Oops error={errorDetails ?? Errors.UNKNOWN} />;
   }
 
-  if (!hasNotifications) {
+  if (!hasNotifications && !hasAccountError) {
     return <AllRead />;
   }
 
