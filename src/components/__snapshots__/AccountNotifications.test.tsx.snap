@@ -1411,6 +1411,20 @@ exports[`components/AccountNotifications.tsx should render itself - no notificat
           </button>
         </div>
       </div>
+      <div
+        class="flex flex-1 flex-col items-center justify-center bg-white p-4 text-black dark:bg-gray-dark dark:text-white"
+      >
+        <h1
+          class="mb-5 text-5xl"
+        >
+          👏
+        </h1>
+        <h2
+          class="mb-2 text-xl font-semibold"
+        >
+          No new notifications.
+        </h2>
+      </div>
     </div>
   </body>,
   "container": <div>
@@ -1476,6 +1490,20 @@ exports[`components/AccountNotifications.tsx should render itself - no notificat
           </svg>
         </button>
       </div>
+    </div>
+    <div
+      class="flex flex-1 flex-col items-center justify-center bg-white p-4 text-black dark:bg-gray-dark dark:text-white"
+    >
+      <h1
+        class="mb-5 text-5xl"
+      >
+        👏
+      </h1>
+      <h2
+        class="mb-2 text-xl font-semibold"
+      >
+        No new notifications.
+      </h2>
     </div>
   </div>,
   "debug": [Function],
