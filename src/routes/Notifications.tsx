@@ -21,13 +21,9 @@ export const NotificationsRoute: FC = () => {
     [notifications],
   );
 
-  const notificationsCount = useMemo(() => {
-    return getNotificationCount(notifications);
-  }, [notifications]);
-
   const hasNotifications = useMemo(
-    () => notificationsCount > 0,
-    [notificationsCount],
+    () => getNotificationCount(notifications) > 0,
+    [notifications],
   );
 
   if (status === 'error') {

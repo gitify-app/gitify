@@ -6,7 +6,7 @@ exports[`components/AccountNotifications.tsx should render itself - account erro
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-red-300 dark:bg-red-500 opacity-70"
       >
         <div
           class="flex"
@@ -72,7 +72,7 @@ exports[`components/AccountNotifications.tsx should render itself - account erro
         class="flex flex-1 flex-col items-center justify-center p-4"
       >
         <h1
-          class="mb-5 text-5xl"
+          class="mt-2 mb-5 text-5xl"
         >
           🔥
         </h1>
@@ -91,7 +91,7 @@ exports[`components/AccountNotifications.tsx should render itself - account erro
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-red-300 dark:bg-red-500 opacity-70"
     >
       <div
         class="flex"
@@ -157,7 +157,7 @@ exports[`components/AccountNotifications.tsx should render itself - account erro
       class="flex flex-1 flex-col items-center justify-center p-4"
     >
       <h1
-        class="mb-5 text-5xl"
+        class="mt-2 mb-5 text-5xl"
       >
         🔥
       </h1>
@@ -233,7 +233,7 @@ exports[`components/AccountNotifications.tsx should render itself - group notifi
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
       >
         <div
           class="flex"
@@ -665,7 +665,7 @@ exports[`components/AccountNotifications.tsx should render itself - group notifi
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
     >
       <div
         class="flex"
@@ -1154,7 +1154,7 @@ exports[`components/AccountNotifications.tsx should render itself - group notifi
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
       >
         <div
           class="flex"
@@ -1223,7 +1223,7 @@ exports[`components/AccountNotifications.tsx should render itself - group notifi
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
     >
       <div
         class="flex"
@@ -1349,7 +1349,7 @@ exports[`components/AccountNotifications.tsx should render itself - no notificat
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
       >
         <div
           class="flex"
@@ -1415,9 +1415,9 @@ exports[`components/AccountNotifications.tsx should render itself - no notificat
         class="flex flex-1 flex-col items-center justify-center bg-white p-4 text-black dark:bg-gray-dark dark:text-white"
       >
         <h1
-          class="mb-5 text-5xl"
+          class="mt-2 mb-5 text-5xl"
         >
-          👏
+          🚀
         </h1>
         <h2
           class="mb-2 text-xl font-semibold"
@@ -1429,7 +1429,7 @@ exports[`components/AccountNotifications.tsx should render itself - no notificat
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
     >
       <div
         class="flex"
@@ -1495,9 +1495,9 @@ exports[`components/AccountNotifications.tsx should render itself - no notificat
       class="flex flex-1 flex-col items-center justify-center bg-white p-4 text-black dark:bg-gray-dark dark:text-white"
     >
       <h1
-        class="mb-5 text-5xl"
+        class="mt-2 mb-5 text-5xl"
       >
-        👏
+        🚀
       </h1>
       <h2
         class="mb-2 text-xl font-semibold"
@@ -1566,7 +1566,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
       >
         <div
           class="flex"
@@ -1631,7 +1631,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
     </div>
     <div>
       <div
-        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
       >
         <div
           class="flex"
@@ -1700,7 +1700,7 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold bg-gray-300 dark:bg-gray-darkest dark:text-white opacity-70"
+      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
     >
       <div
         class="flex"
