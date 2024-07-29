@@ -1417,7 +1417,7 @@ exports[`components/AccountNotifications.tsx should render itself - no notificat
         <h1
           class="mt-2 mb-5 text-5xl"
         >
-          ✨
+          🎊
         </h1>
         <h2
           class="mb-2 text-xl font-semibold"
@@ -1497,7 +1497,7 @@ exports[`components/AccountNotifications.tsx should render itself - no notificat
       <h1
         class="mt-2 mb-5 text-5xl"
       >
-        ✨
+        🎊
       </h1>
       <h2
         class="mb-2 text-xl font-semibold"
