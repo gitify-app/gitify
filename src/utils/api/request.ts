@@ -5,7 +5,7 @@ import axios, {
 } from 'axios';
 import log from 'electron-log';
 import type { Link, Token } from '../../types';
-import { parseNextUrl } from './utils';
+import { getNextURLFromLinkHeader } from './utils';
 
 export function apiRequest(
   url: Link,
@@ -46,7 +46,7 @@ export async function apiRequestAuth(
       response = await axios({ method, url: nextUrl, data });
       combinedData = combinedData.concat(response.data); // Accumulate data
 
-      nextUrl = parseNextUrl(response);
+      nextUrl = getNextURLFromLinkHeader(response);
     }
   } catch (error) {
     log.error('API request failed:', error);

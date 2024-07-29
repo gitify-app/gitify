@@ -24,7 +24,9 @@ export function getGitHubGraphQLUrl(hostname: Hostname): URL {
   return url;
 }
 
-export function parseNextUrl(response: AxiosResponse): string | null {
+export function getNextURLFromLinkHeader(
+  response: AxiosResponse,
+): string | null {
   const linkHeader = response.headers.link;
   const matches = linkHeader?.match(/<([^>]+)>;\s*rel="next"/);
   return matches ? matches[1] : null;

@@ -3,7 +3,7 @@ import type { Hostname } from '../../types';
 import {
   getGitHubAPIBaseUrl,
   getGitHubGraphQLUrl,
-  parseNextUrl,
+  getNextURLFromLinkHeader,
 } from './utils';
 
 describe('utils/api/utils.ts', () => {
@@ -31,7 +31,7 @@ describe('utils/api/utils.ts', () => {
     });
   });
 
-  describe('parseNextUrl', () => {
+  describe('getNextURLFromLinkHeader', () => {
     it('should parse next url from link header', () => {
       const mockResponse = {
         headers: {
@@ -39,7 +39,9 @@ describe('utils/api/utils.ts', () => {
         },
       };
 
-      const result = parseNextUrl(mockResponse as unknown as AxiosResponse);
+      const result = getNextURLFromLinkHeader(
+        mockResponse as unknown as AxiosResponse,
+      );
       expect(result.toString()).toBe(
         'https://api.github.com/notifications?participating=false&page=2',
       );
@@ -52,7 +54,9 @@ describe('utils/api/utils.ts', () => {
         },
       };
 
-      const result = parseNextUrl(mockResponse as unknown as AxiosResponse);
+      const result = getNextURLFromLinkHeader(
+        mockResponse as unknown as AxiosResponse,
+      );
       expect(result).toBeNull();
     });
 
@@ -61,7 +65,9 @@ describe('utils/api/utils.ts', () => {
         headers: {},
       };
 
-      const result = parseNextUrl(mockResponse as unknown as AxiosResponse);
+      const result = getNextURLFromLinkHeader(
+        mockResponse as unknown as AxiosResponse,
+      );
       expect(result).toBeNull();
     });
   });
