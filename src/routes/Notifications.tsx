@@ -4,20 +4,18 @@ import { AllRead } from '../components/AllRead';
 import { Oops } from '../components/Oops';
 import { AppContext } from '../context/App';
 import { getAccountUUID } from '../utils/auth/utils';
-import { Errors } from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
 
 export const NotificationsRoute: FC = () => {
-  const { notifications, status, errorDetails, settings } =
-    useContext(AppContext);
+  const { notifications, globalError, settings } = useContext(AppContext);
 
   const hasMultipleAccounts = useMemo(
     () => notifications.length > 1,
     [notifications],
   );
 
-  const hasAccountError = useMemo(
-    () => notifications.some((account) => account.error !== null),
+  const hasNoAccountErrors = useMemo(
+    () => notifications.every((account) => account.error === null),
     [notifications],
   );
 
@@ -26,11 +24,11 @@ export const NotificationsRoute: FC = () => {
     [notifications],
   );
 
-  if (status === 'error') {
-    return <Oops error={errorDetails ?? Errors.UNKNOWN} />;
+  if (globalError) {
+    return <Oops error={globalError} />;
   }
 
-  if (!hasNotifications && !hasAccountError) {
+  if (!hasNotifications && hasNoAccountErrors) {
     return <AllRead />;
   }
 

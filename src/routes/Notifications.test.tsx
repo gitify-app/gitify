@@ -58,7 +58,7 @@ describe('routes/Notifications.tsx', () => {
           value={{
             notifications: [],
             status: 'error',
-            errorDetails: Errors.BAD_CREDENTIALS,
+            globalError: Errors.BAD_CREDENTIALS,
           }}
         >
           <NotificationsRoute />
@@ -74,7 +74,7 @@ describe('routes/Notifications.tsx', () => {
           value={{
             notifications: [],
             status: 'error',
-            errorDetails: Errors.MISSING_SCOPES,
+            globalError: Errors.MISSING_SCOPES,
           }}
         >
           <NotificationsRoute />
@@ -90,7 +90,7 @@ describe('routes/Notifications.tsx', () => {
           value={{
             notifications: [],
             status: 'error',
-            errorDetails: Errors.RATE_LIMITED,
+            globalError: Errors.RATE_LIMITED,
           }}
         >
           <NotificationsRoute />
@@ -106,7 +106,7 @@ describe('routes/Notifications.tsx', () => {
           value={{
             notifications: [],
             status: 'error',
-            errorDetails: Errors.UNKNOWN,
+            globalError: Errors.UNKNOWN,
           }}
         >
           <NotificationsRoute />
@@ -122,7 +122,7 @@ describe('routes/Notifications.tsx', () => {
           value={{
             notifications: [],
             status: 'error',
-            errorDetails: null,
+            globalError: null,
           }}
         >
           <NotificationsRoute />

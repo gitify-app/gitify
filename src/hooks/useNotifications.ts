@@ -45,7 +45,7 @@ interface NotificationsState {
     notification: Notification,
   ) => Promise<void>;
   status: Status;
-  errorDetails: GitifyError;
+  globalError: GitifyError;
 }
 
 export const useNotifications = (): NotificationsState => {
@@ -75,9 +75,9 @@ export const useNotifications = (): NotificationsState => {
         }
       }
 
-      if (allAccountsHaveErrors && accountErrorsAreAllSame) {
+      if (allAccountsHaveErrors) {
         setStatus('error');
-        setGlobalError(accountError);
+        setGlobalError(accountErrorsAreAllSame ? accountError : null);
         return;
       }
 
@@ -236,7 +236,7 @@ export const useNotifications = (): NotificationsState => {
 
   return {
     status,
-    errorDetails: globalError,
+    globalError,
     notifications,
 
     fetchNotifications,
