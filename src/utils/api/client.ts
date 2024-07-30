@@ -107,12 +107,12 @@ export function markNotificationThreadAsDone(
     // Handle error that may be thrown thrown on older instances of GitHub Enterprise Server (pre 3.13)
   } catch (err) {
     const version =
-      err?.response?.headers['x-github-enterprise-version'] ?? 'unknown';
+      err?.response?.headers['x-github-enterprise-version'] ?? 'cloud';
 
     log.warn(
       'Failed to mark notification thread as done',
-      hostname,
-      version,
+      `hostname: ${hostname}`,
+      `version: ${version}`,
       'Note: This feature requires GitHub Cloud or GitHub Enterprise Server 3.13 or later.',
     );
   }
