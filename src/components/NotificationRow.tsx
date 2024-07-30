@@ -47,7 +47,10 @@ export const NotificationRow: FC<INotificationRow> = ({
 
     openNotification(notification);
 
-    if (settings.markAsDoneOnOpen) {
+    if (
+      settings.markAsDoneOnOpen &&
+      !isEnterpriseServerHost(notification.account.hostname)
+    ) {
       markNotificationDone(notification);
     } else {
       markNotificationRead(notification);
@@ -105,7 +108,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         <NotificationHeader notification={notification} />
 
         <div
-          className="flex gap-1 items-center mb-1 truncate text-sm"
+          className="flex items-center gap-1 mb-1 text-sm truncate"
           role="main"
           title={notificationTitle}
         >
