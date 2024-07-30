@@ -25,7 +25,7 @@ export function isMarkAsDoneFeatureSupported(account: Account): boolean {
   if (isEnterpriseServerHost(account.hostname)) {
     // Support for "Mark as Done" was added to GitHub Enterprise Server in v3.13 or newer
     if (account.version) {
-      const version = account.version.split('.').map(Number);
+      const version = account?.version.split('.').map(Number);
       return version[0] >= 3 && version[1] >= 13;
     }
 

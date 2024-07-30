@@ -83,6 +83,24 @@ describe('utils/helpers.ts', () => {
 
       expect(isMarkAsDoneFeatureSupported(account)).toBe(true);
     });
+
+    it('should return false for GitHub Enterprise Server when partial version available', () => {
+      const account = {
+        ...mockGitHubEnterpriseServerAccount,
+        version: '3',
+      };
+
+      expect(isMarkAsDoneFeatureSupported(account)).toBe(false);
+    });
+
+    it('should return false for GitHub Enterprise Server when no version available', () => {
+      const account = {
+        ...mockGitHubEnterpriseServerAccount,
+        version: null,
+      };
+
+      expect(isMarkAsDoneFeatureSupported(account)).toBe(false);
+    });
   });
 
   describe('generateNotificationReferrerId', () => {
