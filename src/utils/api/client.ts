@@ -22,6 +22,7 @@ import type {
   Release,
   UserDetails,
 } from '../../typesGitHub';
+import { isEnterpriseServerHost } from '../helpers';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
 import { apiRequestAuth } from './request';
@@ -102,20 +103,19 @@ export function markNotificationThreadAsDone(
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
 
-  try {
-    return apiRequestAuth(url.toString() as Link, 'DELETE', token, {});
-    // Handle error that may be thrown thrown on older instances of GitHub Enterprise Server (pre 3.13)
-  } catch (err) {
-    const version =
-      err?.response?.headers['x-github-enterprise-version'] ?? 'cloud';
-
-    log.warn(
-      'Failed to mark notification thread as done',
-      `hostname: ${hostname}`,
-      `version: ${version}`,
-      'Note: This feature requires GitHub Cloud or GitHub Enterprise Server 3.13 or later.',
-    );
+  // GitHub Enterprise Server: This feature is only supported in v3.13 or later.
+  if (isEnterpriseServerHost(hostname)) {
+    try {
+      return apiRequestAuth(url.toString() as Link, 'DELETE', token, {});
+    } catch (err) {
+      log.warn(
+        'Failed to mark notification thread as done',
+        'Note: This feature requires GitHub Cloud or GitHub Enterprise Server 3.13 or later.',
+      );
+    }
   }
+
+  return apiRequestAuth(url.toString() as Link, 'DELETE', token, {});
 }
 
 /**

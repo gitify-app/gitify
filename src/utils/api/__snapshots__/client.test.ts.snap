@@ -36,7 +36,7 @@ exports[`utils/api/client.ts headNotifications should fetch notifications head -
 }
 `;
 
-exports[`utils/api/client.ts ignoreNotificationThreadSubscription should ignore notification thread subscription - github 1`] = `
+exports[`utils/api/client.ts ignoreNotificationThreadSubscription should ignore notification thread subscription - enterprise 1`] = `
 {
   "Accept": "application/json",
   "Authorization": "token token-123-456",
@@ -45,7 +45,7 @@ exports[`utils/api/client.ts ignoreNotificationThreadSubscription should ignore 
 }
 `;
 
-exports[`utils/api/client.ts ignoreNotificationThreadSubscription should ignore notification thread subscription- enterprise 1`] = `
+exports[`utils/api/client.ts ignoreNotificationThreadSubscription should ignore notification thread subscription - github 1`] = `
 {
   "Accept": "application/json",
   "Authorization": "token token-123-456",
@@ -72,6 +72,15 @@ exports[`utils/api/client.ts listNotificationsForAuthenticatedUser should list n
 }
 `;
 
+exports[`utils/api/client.ts markNotificationThreadAsDone should mark notification thread as done - enterprise 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token token-123-456",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
 exports[`utils/api/client.ts markNotificationThreadAsDone should mark notification thread as done - github 1`] = `
 {
   "Accept": "application/json",
@@ -81,7 +90,7 @@ exports[`utils/api/client.ts markNotificationThreadAsDone should mark notificati
 }
 `;
 
-exports[`utils/api/client.ts markNotificationThreadAsDone should mark notification thread as done- enterprise 1`] = `
+exports[`utils/api/client.ts markNotificationThreadAsRead should mark notification thread as read - enterprise 1`] = `
 {
   "Accept": "application/json",
   "Authorization": "token token-123-456",
@@ -91,15 +100,6 @@ exports[`utils/api/client.ts markNotificationThreadAsDone should mark notificati
 `;
 
 exports[`utils/api/client.ts markNotificationThreadAsRead should mark notification thread as read - github 1`] = `
-{
-  "Accept": "application/json",
-  "Authorization": "token token-123-456",
-  "Cache-Control": "no-cache",
-  "Content-Type": "application/json",
-}
-`;
-
-exports[`utils/api/client.ts markNotificationThreadAsRead should mark notification thread as read- enterprise 1`] = `
 {
   "Accept": "application/json",
   "Authorization": "token token-123-456",
