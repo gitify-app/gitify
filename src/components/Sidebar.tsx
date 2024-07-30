@@ -27,8 +27,17 @@ export const Sidebar: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { notifications, fetchNotifications, isLoggedIn, status, settings } =
-    useContext(AppContext);
+  const {
+    auth,
+    notifications,
+    fetchNotifications,
+    isLoggedIn,
+    status,
+    settings,
+  } = useContext(AppContext);
+
+  const isSingleAccount = auth?.accounts.length === 1;
+  const account = isSingleAccount ? auth?.accounts[0] : undefined;
 
   const toggleFilters = () => {
     if (location.pathname.startsWith('/filters')) {
@@ -77,19 +86,19 @@ export const Sidebar: FC = () => {
           title={`${notificationsCount} Unread Notifications`}
           metric={notificationsCount}
           icon={BellIcon}
-          onClick={() => openGitHubNotifications()}
+          onClick={() => openGitHubNotifications(account)}
         />
 
         <SidebarButton
           title="My Issues"
           icon={IssueOpenedIcon}
-          onClick={() => openGitHubIssues()}
+          onClick={() => openGitHubIssues(account)}
         />
 
         <SidebarButton
           title="My Pull Requests"
           icon={GitPullRequestIcon}
-          onClick={() => openGitHubPulls()}
+          onClick={() => openGitHubPulls(account)}
         />
       </div>
 

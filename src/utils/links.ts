@@ -15,16 +15,19 @@ export function openGitifyReleaseNotes(version: string) {
   );
 }
 
-export function openGitHubNotifications() {
-  openExternalLink('https://github.com/notifications' as Link);
+export function openGitHubNotifications(account?: Account) {
+  const hostname = account?.hostname || Constants.DEFAULT_AUTH_OPTIONS.hostname;
+  openExternalLink(`https://${hostname}/notifications` as Link);
 }
 
-export function openGitHubIssues() {
-  openExternalLink('https://github.com/issues' as Link);
+export function openGitHubIssues(account?: Account) {
+  const hostname = account?.hostname || Constants.DEFAULT_AUTH_OPTIONS.hostname;
+  openExternalLink(`https://${hostname}/issues` as Link);
 }
 
-export function openGitHubPulls() {
-  openExternalLink('https://github.com/pulls' as Link);
+export function openGitHubPulls(account?: Account) {
+  const hostname = account?.hostname || Constants.DEFAULT_AUTH_OPTIONS.hostname;
+  openExternalLink(`https://${hostname}/pulls` as Link);
 }
 
 export function openAccountProfile(account: Account) {
