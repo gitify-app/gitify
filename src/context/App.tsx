@@ -262,6 +262,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       );
       return existing.settings;
     }
+
+    for (const account of auth.accounts.filter(
+      (a) => a.platform === 'GitHub Enterprise Server',
+    )) {
+      const res = await headNotifications(account.hostname, account.token);
+      account.version = res.headers['x-github-enterprise-version'];
+    }
   }, []);
 
   const fetchNotificationsWithAccounts = useCallback(

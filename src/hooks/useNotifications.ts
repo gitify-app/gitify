@@ -14,6 +14,7 @@ import {
 } from '../utils/api/client';
 import { determineFailureType } from '../utils/api/errors';
 import { getAccountUUID } from '../utils/auth/utils';
+import { isMarkAsDoneFeatureSupported } from '../utils/helpers';
 import {
   getAllNotifications,
   setTrayIconColor,
@@ -107,11 +108,13 @@ export const useNotifications = (): NotificationsState => {
       setStatus('loading');
 
       try {
-        await markNotificationThreadAsDone(
-          notification.id,
-          notification.account.hostname,
-          notification.account.token,
-        );
+        if (isMarkAsDoneFeatureSupported(notification.account)) {
+          await markNotificationThreadAsDone(
+            notification.id,
+            notification.account.hostname,
+            notification.account.token,
+          );
+        }
 
         const updatedNotifications = removeNotification(
           state.settings,
