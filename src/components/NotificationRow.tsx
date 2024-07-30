@@ -10,7 +10,7 @@ import { AppContext } from '../context/App';
 import { Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
-import { formatForDisplay } from '../utils/helpers';
+import { formatForDisplay, isEnterpriseServerHost } from '../utils/helpers';
 import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
@@ -125,16 +125,18 @@ export const NotificationRow: FC<INotificationRow> = ({
       </div>
 
       <HoverGroup>
-        <InteractionButton
-          title="Mark as Done"
-          icon={CheckIcon}
-          size={Size.MEDIUM}
-          onClick={() => {
-            setAnimateExit(!settings.delayNotificationState);
-            setShowAsRead(settings.delayNotificationState);
-            markNotificationDone(notification);
-          }}
-        />
+        {!isEnterpriseServerHost(notification.account.hostname) && (
+          <InteractionButton
+            title="Mark as Done"
+            icon={CheckIcon}
+            size={Size.MEDIUM}
+            onClick={() => {
+              setAnimateExit(!settings.delayNotificationState);
+              setShowAsRead(settings.delayNotificationState);
+              markNotificationDone(notification);
+            }}
+          />
+        )}
         <InteractionButton
           title="Mark as Read"
           icon={ReadIcon}

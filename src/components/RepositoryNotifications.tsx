@@ -10,6 +10,7 @@ import { AppContext } from '../context/App';
 import { Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
+import { isEnterpriseServerHost } from '../utils/helpers';
 import { openRepository } from '../utils/links';
 import { HoverGroup } from './HoverGroup';
 import { NotificationRow } from './NotificationRow';
@@ -79,18 +80,20 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
         </div>
 
         <HoverGroup>
-          <InteractionButton
-            title="Mark Repository as Done"
-            icon={CheckIcon}
-            size={Size.MEDIUM}
-            onClick={(event: MouseEvent<HTMLElement>) => {
-              // Don't trigger onClick of parent element.
-              event.stopPropagation();
-              setAnimateExit(!settings.delayNotificationState);
-              setShowAsRead(settings.delayNotificationState);
-              markRepoNotificationsDone(repoNotifications[0]);
-            }}
-          />
+          {!isEnterpriseServerHost(repoNotifications[0].account.hostname) && (
+            <InteractionButton
+              title="Mark Repository as Done"
+              icon={CheckIcon}
+              size={Size.MEDIUM}
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                setAnimateExit(!settings.delayNotificationState);
+                setShowAsRead(settings.delayNotificationState);
+                markRepoNotificationsDone(repoNotifications[0]);
+              }}
+            />
+          )}
           <InteractionButton
             title="Mark Repository as Read"
             icon={ReadIcon}
