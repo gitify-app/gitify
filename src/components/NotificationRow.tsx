@@ -124,34 +124,36 @@ export const NotificationRow: FC<INotificationRow> = ({
         <NotificationFooter notification={notification} />
       </div>
 
-      <HoverGroup>
-        <InteractionButton
-          title="Mark as Done"
-          icon={CheckIcon}
-          size={Size.MEDIUM}
-          onClick={() => {
-            setAnimateExit(!settings.delayNotificationState);
-            setShowAsRead(settings.delayNotificationState);
-            markNotificationDone(notification);
-          }}
-        />
-        <InteractionButton
-          title="Mark as Read"
-          icon={ReadIcon}
-          size={Size.SMALL}
-          onClick={() => {
-            setAnimateExit(!settings.delayNotificationState);
-            setShowAsRead(settings.delayNotificationState);
-            markNotificationRead(notification);
-          }}
-        />
-        <InteractionButton
-          title="Unsubscribe from Thread"
-          icon={BellSlashIcon}
-          size={Size.SMALL}
-          onClick={unsubscribeFromThread}
-        />
-      </HoverGroup>
+      {!animateExit && (
+        <HoverGroup>
+          <InteractionButton
+            title="Mark as Done"
+            icon={CheckIcon}
+            size={Size.MEDIUM}
+            onClick={() => {
+              setAnimateExit(!settings.delayNotificationState);
+              setShowAsRead(settings.delayNotificationState);
+              markNotificationDone(notification);
+            }}
+          />
+          <InteractionButton
+            title="Mark as Read"
+            icon={ReadIcon}
+            size={Size.SMALL}
+            onClick={() => {
+              setAnimateExit(!settings.delayNotificationState);
+              setShowAsRead(settings.delayNotificationState);
+              markNotificationRead(notification);
+            }}
+          />
+          <InteractionButton
+            title="Unsubscribe from Thread"
+            icon={BellSlashIcon}
+            size={Size.SMALL}
+            onClick={unsubscribeFromThread}
+          />
+        </HoverGroup>
+      )}
     </div>
   );
 };
