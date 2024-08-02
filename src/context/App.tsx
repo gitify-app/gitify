@@ -100,7 +100,7 @@ interface AppContextState {
 
   notifications: AccountNotifications[];
   status: Status;
-  errorDetails: GitifyError;
+  globalError: GitifyError;
   fetchNotifications: () => Promise<void>;
   markNotificationRead: (notification: Notification) => Promise<void>;
   markNotificationDone: (notification: Notification) => Promise<void>;
@@ -122,7 +122,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const {
     fetchNotifications,
     notifications,
-    errorDetails,
+    globalError,
     status,
     markNotificationRead,
     markNotificationDone,
@@ -311,7 +311,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
         notifications,
         status,
-        errorDetails,
+        globalError,
         fetchNotifications: fetchNotificationsWithAccounts,
         markNotificationRead: markNotificationReadWithAccounts,
         markNotificationDone: markNotificationDoneWithAccounts,
