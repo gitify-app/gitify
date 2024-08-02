@@ -12,7 +12,6 @@ import {
   markNotificationThreadAsRead,
   markRepositoryNotificationsAsRead,
 } from '../utils/api/client';
-import { determineFailureType } from '../utils/api/errors';
 import { getAccountUUID } from '../utils/auth/utils';
 import {
   getAllNotifications,
@@ -46,12 +45,12 @@ interface NotificationsState {
     notification: Notification,
   ) => Promise<void>;
   status: Status;
-  errorDetails: GitifyError;
+  globalError: GitifyError;
 }
 
 export const useNotifications = (): NotificationsState => {
   const [status, setStatus] = useState<Status>('success');
-  const [errorDetails, setErrorDetails] = useState<GitifyError>();
+  const [globalError, setGlobalError] = useState<GitifyError>();
 
   const [notifications, setNotifications] = useState<AccountNotifications[]>(
     [],
@@ -61,16 +60,30 @@ export const useNotifications = (): NotificationsState => {
     async (state: GitifyState) => {
       setStatus('loading');
 
-      try {
-        const fetchedNotifications = await getAllNotifications(state);
+      const fetchedNotifications = await getAllNotifications(state);
 
-        setNotifications(fetchedNotifications);
-        triggerNativeNotifications(notifications, fetchedNotifications, state);
-        setStatus('success');
-      } catch (err) {
-        setStatus('error');
-        setErrorDetails(determineFailureType(err));
+      // Set Global Error if all accounts have the same error
+      const allAccountsHaveErrors = fetchedNotifications.every((account) => {
+        return account.error !== null;
+      });
+      let accountErrorsAreAllSame = true;
+      const accountError = fetchedNotifications[0]?.error;
+      for (const fetchedNotification of fetchedNotifications) {
+        if (accountError !== fetchedNotification.error) {
+          accountErrorsAreAllSame = false;
+          break;
+        }
       }
+
+      if (allAccountsHaveErrors) {
+        setStatus('error');
+        setGlobalError(accountErrorsAreAllSame ? accountError : null);
+        return;
+      }
+
+      setNotifications(fetchedNotifications);
+      triggerNativeNotifications(notifications, fetchedNotifications, state);
+      setStatus('success');
     },
     [notifications],
   );
@@ -223,7 +236,7 @@ export const useNotifications = (): NotificationsState => {
 
   return {
     status,
-    errorDetails,
+    globalError,
     notifications,
 
     fetchNotifications,

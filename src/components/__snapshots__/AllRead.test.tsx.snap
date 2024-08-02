@@ -9,7 +9,7 @@ exports[`components/AllRead.tsx should render itself & its children 1`] = `
         class="flex flex-1 flex-col items-center justify-center bg-white p-4 text-black dark:bg-gray-dark dark:text-white"
       >
         <h1
-          class="mb-5 text-5xl"
+          class="mt-2 mb-5 text-5xl"
         >
           🎊
         </h1>
@@ -26,7 +26,7 @@ exports[`components/AllRead.tsx should render itself & its children 1`] = `
       class="flex flex-1 flex-col items-center justify-center bg-white p-4 text-black dark:bg-gray-dark dark:text-white"
     >
       <h1
-        class="mb-5 text-5xl"
+        class="mt-2 mb-5 text-5xl"
       >
         🎊
       </h1>

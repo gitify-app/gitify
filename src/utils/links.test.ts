@@ -46,21 +46,21 @@ describe('utils/links.ts', () => {
   });
 
   it('openGitHubNotifications', () => {
-    openGitHubNotifications();
+    openGitHubNotifications(mockGitHubCloudAccount.hostname);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/notifications',
     );
   });
 
   it('openGitHubIssues', () => {
-    openGitHubIssues();
+    openGitHubIssues(mockGitHubCloudAccount.hostname);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/issues',
     );
   });
 
   it('openGitHubPulls', () => {
-    openGitHubPulls();
+    openGitHubPulls(mockGitHubCloudAccount.hostname);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/pulls',
     );

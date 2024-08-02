@@ -11,6 +11,8 @@ const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('node:path');
 const log = require('electron-log');
+const fs = require('node:fs');
+const os = require('node:os');
 
 log.initialize();
 autoUpdater.logger = log;
@@ -73,6 +75,11 @@ const contextMenu = Menu.buildFromTemplate([
         role: 'toggleDevTools',
         accelerator:
           process.platform === 'darwin' ? 'Alt+Cmd+I' : 'Ctrl+Shift+I',
+      },
+      {
+        label: 'Take Screenshot',
+        accelerator: 'CommandOrControl+S',
+        click: () => takeScreenshot(),
       },
       {
         label: 'Reset App',
@@ -221,6 +228,18 @@ app.whenReady().then(async () => {
 function checkForUpdates() {
   log.info('Auto Updater: Checking for updates...');
   autoUpdater.checkForUpdatesAndNotify();
+}
+
+function takeScreenshot() {
+  const date = new Date();
+  const dateStr = date.toISOString().replace(/:/g, '-');
+
+  const capturedPicFilePath = `${os.homedir()}/${dateStr}-gitify-screenshot.png`;
+  mb.window.capturePage().then((img) => {
+    fs.writeFile(capturedPicFilePath, img.toPNG(), () =>
+      log.info(`Screenshot saved ${capturedPicFilePath}`),
+    );
+  });
 }
 
 function resetApp() {
