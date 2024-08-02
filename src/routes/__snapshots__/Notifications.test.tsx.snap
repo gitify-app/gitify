@@ -144,13 +144,13 @@ exports[`routes/Notifications.tsx should render itself & its children (error con
   "baseElement": <body>
     <div>
       <p>
-        Oops
+        AllRead
       </p>
     </div>
   </body>,
   "container": <div>
     <p>
-      Oops
+      AllRead
     </p>
   </div>,
   "debug": [Function],

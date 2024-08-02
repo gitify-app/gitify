@@ -13,7 +13,6 @@ export async function migrateAuthenticatedAccounts() {
   const existing = loadState();
 
   if (!hasAccountsToMigrate(existing.auth)) {
-    log.info('Account Migration: No accounts need migrating');
     return;
   }
 

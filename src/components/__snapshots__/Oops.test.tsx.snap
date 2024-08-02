@@ -9,7 +9,7 @@ exports[`components/Oops.tsx should render itself & its children 1`] = `
         class="flex flex-1 flex-col items-center justify-center p-4"
       >
         <h1
-          class="mb-5 text-5xl"
+          class="mt-2 mb-5 text-5xl"
         >
           🔥
         </h1>
@@ -31,7 +31,7 @@ exports[`components/Oops.tsx should render itself & its children 1`] = `
       class="flex flex-1 flex-col items-center justify-center p-4"
     >
       <h1
-        class="mb-5 text-5xl"
+        class="mt-2 mb-5 text-5xl"
       >
         🔥
       </h1>

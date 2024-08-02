@@ -124,6 +124,7 @@ export type RadioGroupItem = {
 export interface AccountNotifications {
   account: Account;
   notifications: Notification[];
+  error: GitifyError | null;
 }
 
 export interface GitifyUser {

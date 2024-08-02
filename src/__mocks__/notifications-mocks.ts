@@ -12,10 +12,12 @@ export const mockAccountNotifications: AccountNotifications[] = [
   {
     account: mockGitHubCloudAccount,
     notifications: mockGitHubNotifications,
+    error: null,
   },
   {
     account: mockGitHubEnterpriseServerAccount,
     notifications: mockEnterpriseNotifications,
+    error: null,
   },
 ];
 
@@ -23,5 +25,6 @@ export const mockSingleAccountNotifications: AccountNotifications[] = [
   {
     account: mockGitHubCloudAccount,
     notifications: [mockGitHubNotifications[0]],
+    error: null,
   },
 ];
