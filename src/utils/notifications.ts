@@ -5,6 +5,7 @@ import type {
 } from '../types';
 import { Notification } from '../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from './api/client';
+import { determineFailureType } from './api/errors';
 import { getAccountUUID } from './auth/utils';
 import { hideWindow, showWindow, updateTrayIcon } from './comms';
 import { openNotification } from './links';
@@ -129,21 +130,30 @@ export async function getAllNotifications(
     responses
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
-        let notifications = (await accountNotifications.notifications).data.map(
-          (notification: Notification) => ({
+        try {
+          let notifications = (
+            await accountNotifications.notifications
+          ).data.map((notification: Notification) => ({
             ...notification,
             account: accountNotifications.account,
-          }),
-        );
+          }));
 
-        notifications = await enrichNotifications(notifications, state);
+          notifications = await enrichNotifications(notifications, state);
 
-        notifications = filterNotifications(notifications, state.settings);
+          notifications = filterNotifications(notifications, state.settings);
 
-        return {
-          account: accountNotifications.account,
-          notifications: notifications,
-        };
+          return {
+            account: accountNotifications.account,
+            notifications: notifications,
+            error: null,
+          };
+        } catch (error) {
+          return {
+            account: accountNotifications.account,
+            notifications: [],
+            error: determineFailureType(error),
+          };
+        }
       }),
   );
 

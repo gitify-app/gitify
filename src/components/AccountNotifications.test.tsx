@@ -11,11 +11,18 @@ jest.mock('./RepositoryNotifications', () => ({
 }));
 
 describe('components/AccountNotifications.tsx', () => {
-  it('should render itself (github.com with notifications) - group by repositories', () => {
+  // The read emoji randomly rotates, but then the snapshots would never match
+  // Have to make it consistent so the emojis are always the same
+  beforeEach(() => {
+    global.Math.random = jest.fn(() => 0.1);
+  });
+
+  it('should render itself - group notifications by repositories', () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: mockGitHubNotifications,
       showAccountHostname: true,
+      error: null,
     };
 
     const tree = render(
@@ -28,11 +35,12 @@ describe('components/AccountNotifications.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself (github.com with notifications) - group by date', () => {
+  it('should render itself - group notifications by date', () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: mockGitHubNotifications,
       showAccountHostname: true,
+      error: null,
     };
 
     const tree = render(
@@ -45,10 +53,31 @@ describe('components/AccountNotifications.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself (github.com without notifications)', () => {
+  it('should render itself - no notifications', () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: [],
+      showAccountHostname: true,
+      error: null,
+    };
+
+    const tree = render(
+      <AppContext.Provider value={{ settings: mockSettings }}>
+        <AccountNotifications {...props} />
+      </AppContext.Provider>,
+    );
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render itself - account error', () => {
+    const props = {
+      account: mockGitHubCloudAccount,
+      notifications: [],
+      error: {
+        title: 'Error title',
+        descriptions: ['Error description'],
+        emojis: ['🔥'],
+      },
       showAccountHostname: true,
     };
 
@@ -69,6 +98,7 @@ describe('components/AccountNotifications.tsx', () => {
       account: mockGitHubCloudAccount,
       notifications: [],
       showAccountHostname: true,
+      error: null,
     };
 
     await act(async () => {
@@ -90,6 +120,7 @@ describe('components/AccountNotifications.tsx', () => {
       account: mockGitHubCloudAccount,
       notifications: mockGitHubNotifications,
       showAccountHostname: true,
+      error: null,
     };
 
     await act(async () => {
