@@ -12,6 +12,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/App';
 import { Size } from '../types';
 import { quitApp } from '../utils/comms';
+import Constants from '../utils/constants';
 import { getFilterCount } from '../utils/helpers';
 import {
   openGitHubIssues,
@@ -27,8 +28,18 @@ export const Sidebar: FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const { notifications, fetchNotifications, isLoggedIn, status, settings } =
-    useContext(AppContext);
+  const {
+    notifications,
+    fetchNotifications,
+    isLoggedIn,
+    status,
+    settings,
+    auth,
+  } = useContext(AppContext);
+
+  // We naively assume that the first account is the primary account for the purposes of our sidebar quick links
+  const primaryAccountHostname =
+    auth.accounts[0]?.hostname ?? Constants.DEFAULT_AUTH_OPTIONS.hostname;
 
   const toggleFilters = () => {
     if (location.pathname.startsWith('/filters')) {
@@ -77,19 +88,19 @@ export const Sidebar: FC = () => {
           title={`${notificationsCount} Unread Notifications`}
           metric={notificationsCount}
           icon={BellIcon}
-          onClick={() => openGitHubNotifications()}
+          onClick={() => openGitHubNotifications(primaryAccountHostname)}
         />
 
         <SidebarButton
           title="My Issues"
           icon={IssueOpenedIcon}
-          onClick={() => openGitHubIssues()}
+          onClick={() => openGitHubIssues(primaryAccountHostname)}
         />
 
         <SidebarButton
           title="My Pull Requests"
           icon={GitPullRequestIcon}
-          onClick={() => openGitHubPulls()}
+          onClick={() => openGitHubPulls(primaryAccountHostname)}
         />
       </div>
 
