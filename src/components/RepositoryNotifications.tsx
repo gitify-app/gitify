@@ -78,38 +78,40 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
           </span>
         </div>
 
-        <HoverGroup>
-          <InteractionButton
-            title="Mark Repository as Done"
-            icon={CheckIcon}
-            size={Size.MEDIUM}
-            onClick={(event: MouseEvent<HTMLElement>) => {
-              // Don't trigger onClick of parent element.
-              event.stopPropagation();
-              setAnimateExit(!settings.delayNotificationState);
-              setShowAsRead(settings.delayNotificationState);
-              markRepoNotificationsDone(repoNotifications[0]);
-            }}
-          />
-          <InteractionButton
-            title="Mark Repository as Read"
-            icon={ReadIcon}
-            size={Size.SMALL}
-            onClick={(event: MouseEvent<HTMLElement>) => {
-              // Don't trigger onClick of parent element.
-              event.stopPropagation();
-              setAnimateExit(!settings.delayNotificationState);
-              setShowAsRead(settings.delayNotificationState);
-              markRepoNotificationsRead(repoNotifications[0]);
-            }}
-          />
-          <InteractionButton
-            title={toggleRepositoryNotificationsLabel}
-            icon={ChevronIcon}
-            size={Size.SMALL}
-            onClick={toggleRepositoryNotifications}
-          />
-        </HoverGroup>
+        {!animateExit && (
+          <HoverGroup>
+            <InteractionButton
+              title="Mark Repository as Done"
+              icon={CheckIcon}
+              size={Size.MEDIUM}
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                setAnimateExit(!settings.delayNotificationState);
+                setShowAsRead(settings.delayNotificationState);
+                markRepoNotificationsDone(repoNotifications[0]);
+              }}
+            />
+            <InteractionButton
+              title="Mark Repository as Read"
+              icon={ReadIcon}
+              size={Size.SMALL}
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                setAnimateExit(!settings.delayNotificationState);
+                setShowAsRead(settings.delayNotificationState);
+                markRepoNotificationsRead(repoNotifications[0]);
+              }}
+            />
+            <InteractionButton
+              title={toggleRepositoryNotificationsLabel}
+              icon={ChevronIcon}
+              size={Size.SMALL}
+              onClick={toggleRepositoryNotifications}
+            />
+          </HoverGroup>
+        )}
       </div>
 
       {showRepositoryNotifications &&
