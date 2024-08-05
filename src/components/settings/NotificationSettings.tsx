@@ -56,6 +56,12 @@ export const NotificationSettings: FC = () => {
         onChange={(evt) =>
           updateSetting('markAsDoneOnOpen', evt.target.checked)
         }
+        tooltip={
+          <div>
+            <strong>Mark as Done</strong> feature is supported in GitHub Cloud
+            and GitHub Enterprise Server 3.13 or later.
+          </div>
+        }
       />
       <Checkbox
         name="delayNotificationState"

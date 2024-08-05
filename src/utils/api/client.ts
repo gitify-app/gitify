@@ -90,6 +90,8 @@ export function markNotificationThreadAsRead(
  * Marks a thread as "done." Marking a thread as "done" is equivalent to marking a
  * notification in your notification inbox on GitHub as done.
  *
+ * NOTE: This was added to GitHub Enterprise Server in version 3.13 or later.
+ *
  * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#mark-a-thread-as-done
  */
 export function markNotificationThreadAsDone(
@@ -99,7 +101,6 @@ export function markNotificationThreadAsDone(
 ): AxiosPromise<void> {
   const url = getGitHubAPIBaseUrl(hostname);
   url.pathname += `notifications/threads/${threadId}`;
-
   return apiRequestAuth(url.toString() as Link, 'DELETE', token, {});
 }
 

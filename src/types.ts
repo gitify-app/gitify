@@ -46,6 +46,7 @@ export type Status = 'loading' | 'success' | 'error';
 export interface Account {
   method: AuthMethod;
   platform: PlatformType;
+  version?: string;
   hostname: Hostname;
   token: Token;
   user: GitifyUser | null;
