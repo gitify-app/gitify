@@ -3,6 +3,8 @@ import {
   PersonIcon,
   PlusIcon,
   SignOutIcon,
+  StarFillIcon,
+  StarIcon,
 } from '@primer/octicons-react';
 
 import { type FC, useCallback, useContext } from 'react';
@@ -12,17 +14,19 @@ import { AuthMethodIcon } from '../components/icons/AuthMethodIcon';
 import { PlatformIcon } from '../components/icons/PlatformIcon';
 import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
-import { type Account, Size } from '../types';
+import { type Account, IconColor, Size } from '../types';
 import { getAccountUUID } from '../utils/auth/utils';
+import { cn } from '../utils/cn';
 import { updateTrayIcon, updateTrayTitle } from '../utils/comms';
 import {
   openAccountProfile,
   openDeveloperSettings,
   openHost,
 } from '../utils/links';
+import { saveState } from '../utils/storage';
 
 export const AccountsRoute: FC = () => {
-  const { auth, logoutFromAccount } = useContext(AppContext);
+  const { auth, settings, logoutFromAccount } = useContext(AppContext);
   const navigate = useNavigate();
 
   const logoutAccount = useCallback(
@@ -34,6 +38,12 @@ export const AccountsRoute: FC = () => {
     },
     [logoutFromAccount],
   );
+
+  const setAsPrimaryAccount = useCallback((account: Account) => {
+    auth.accounts = [account, ...auth.accounts.filter((a) => a !== account)];
+    saveState({ auth, settings });
+    navigate('/accounts', { replace: true });
+  }, []);
 
   const loginWithPersonalAccessToken = useCallback(() => {
     return navigate('/login-personal-access-token', { replace: true });
@@ -48,7 +58,7 @@ export const AccountsRoute: FC = () => {
       <Header icon={PersonIcon}>Accounts</Header>
       <div className="flex-grow overflow-x-auto px-8">
         <div className="mt-4 flex flex-col text-sm">
-          {auth.accounts.map((account) => (
+          {auth.accounts.map((account, i) => (
             <div
               key={getAccountUUID(account)}
               className="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-2 dark:bg-gray-sidebar"
@@ -94,6 +104,31 @@ export const AccountsRoute: FC = () => {
                 </div>
               </div>
               <div>
+                <button
+                  type="button"
+                  className={cn(BUTTON_CLASS_NAME, 'cursor-default')}
+                  title="Primary account"
+                  hidden={i !== 0}
+                >
+                  <StarFillIcon
+                    size={Size.XLARGE}
+                    className={IconColor.YELLOW}
+                    aria-label="Primary account"
+                  />
+                </button>
+                <button
+                  type="button"
+                  className={BUTTON_CLASS_NAME}
+                  title="Set as primary account"
+                  onClick={() => setAsPrimaryAccount(account)}
+                  hidden={i === 0}
+                >
+                  <StarIcon
+                    size={Size.XLARGE}
+                    className={IconColor.YELLOW}
+                    aria-label="Set as primary account"
+                  />
+                </button>
                 <button
                   type="button"
                   className={BUTTON_CLASS_NAME}
