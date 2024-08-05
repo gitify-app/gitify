@@ -40,7 +40,30 @@ const browserWindowOpts = {
   },
 };
 
+let isUpdateAvailable = false;
+let isUpdateDownloaded = false;
+
 const contextMenu = Menu.buildFromTemplate([
+  {
+    label: 'Check for updates',
+    visible: !isUpdateAvailable,
+    click: () => {
+      checkForUpdates();
+    },
+  },
+  {
+    label: 'An update is available',
+    enabled: false,
+    visible: isUpdateAvailable,
+  },
+  {
+    label: 'Restart to update',
+    visible: isUpdateDownloaded,
+    click: () => {
+      autoUpdater.quitAndInstall();
+    },
+  },
+  { type: 'separator' },
   {
     label: 'Developer',
     submenu: [
@@ -88,8 +111,6 @@ app.whenReady().then(async () => {
   await onFirstRunMaybe();
 
   mb.on('ready', () => {
-    autoUpdater.checkForUpdatesAndNotify();
-
     mb.app.setAppUserModelId('com.electron.gitify');
 
     // Tray configuration
@@ -120,6 +141,27 @@ app.whenReady().then(async () => {
       mb.window.setSize(browserWindowOpts.width, browserWindowOpts.height);
       mb.positioner.move('trayCenter', trayBounds);
       mb.window.resizable = false;
+    });
+
+    // Auto Updater
+    checkForUpdates();
+    setInterval(checkForUpdates, 24 * 60 * 60 * 1000); // 24 hours
+
+    autoUpdater.on('update-available', () => {
+      log.info('Auto Updater: New update available');
+      isUpdateAvailable = true;
+      mb.window.webContents.send('gitify:auto-updater', isUpdateAvailable);
+    });
+
+    autoUpdater.on('update-not-available', () => {
+      log.info('Auto Updater: Already on the latest version');
+      isUpdateAvailable = false;
+      mb.window.webContents.send('gitify:auto-updater', isUpdateAvailable);
+    });
+
+    autoUpdater.on('update-downloaded', () => {
+      log.info('Auto Updater: Update downloaded');
+      isUpdateDownloaded = true;
     });
   });
 
@@ -156,7 +198,7 @@ app.whenReady().then(async () => {
 
   ipc.on('gitify:update-title', (_, title) => {
     if (!mb.tray.isDestroyed()) {
-      mb.tray.setTitle(title);
+      mb.tray.setTitle(`${isUpdateAvailable ? '⤓' : ''}${title}`);
     }
   });
 
@@ -182,6 +224,11 @@ app.whenReady().then(async () => {
     app.setLoginItemSettings(settings);
   });
 });
+
+function checkForUpdates() {
+  log.info('Auto Updater: Checking for updates...');
+  autoUpdater.checkForUpdatesAndNotify();
+}
 
 function takeScreenshot() {
   const date = new Date();

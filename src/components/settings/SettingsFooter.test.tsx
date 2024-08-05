@@ -48,7 +48,7 @@ describe('routes/components/settings/SettingsFooter.tsx', () => {
         );
       });
 
-      expect(screen.getByTitle('app-version')).toMatchSnapshot();
+      expect(screen.getByLabelText('app-version')).toMatchSnapshot();
     });
 
     it('should show development app version', async () => {
@@ -72,7 +72,49 @@ describe('routes/components/settings/SettingsFooter.tsx', () => {
         );
       });
 
-      expect(screen.getByTitle('app-version')).toMatchSnapshot();
+      expect(screen.getByLabelText('app-version')).toMatchSnapshot();
+    });
+  });
+
+  describe('update available visual indicator', () => {
+    it('using latest version', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsFooter isUpdateAvailable={false} />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      expect(
+        screen.getByTitle('You are using the latest version'),
+      ).toMatchSnapshot();
+    });
+
+    it('new version available', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: mockAuth,
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <SettingsFooter isUpdateAvailable={true} />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      expect(screen.getByTitle('New version available')).toMatchSnapshot();
     });
   });
 
