@@ -65,8 +65,7 @@ export function listNotificationsForAuthenticatedUser(
   const url = getGitHubAPIBaseUrl(account.hostname);
   url.pathname += 'notifications';
   url.searchParams.append('participating', String(settings.participating));
-
-  return apiRequestAuth(url.toString() as Link, 'GET', account.token);
+  return apiRequestAuth(url.toString() as Link, 'GET', account.token, {}, true);
 }
 
 /**
@@ -271,5 +270,7 @@ export async function getLatestDiscussion(
         (discussion) => discussion.title === notification.subject.title,
       )[0] ?? null
     );
-  } catch (err) {}
+  } catch (err) {
+    log.error('Failed to get latest discussion');
+  }
 }
