@@ -8,6 +8,7 @@ import {
   mockSettings,
 } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
+import * as apiRequests from '../utils/api/request';
 import * as comms from '../utils/comms';
 import * as links from '../utils/links';
 
@@ -157,6 +158,36 @@ describe('routes/Accounts.tsx', () => {
       expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
       expect(openExternalLinkMock).toHaveBeenCalledWith(
         'https://github.com/settings/tokens',
+      );
+    });
+
+    it('should refresh account', async () => {
+      const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [mockPersonalAccessTokenAccount],
+              },
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <AccountsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      fireEvent.click(screen.getByTitle('Refresh octocat'));
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
+      expect(apiRequestAuthMock).toHaveBeenCalledWith(
+        'https://api.github.com/user',
+        'GET',
+        'token-123-456',
       );
     });
 
