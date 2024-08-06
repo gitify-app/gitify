@@ -55,7 +55,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
       >
         <div
           className={cn(
-            'flex flex-1 gap-4 items-center truncate text-sm font-medium',
+            'flex flex-1 gap-3 items-center truncate text-sm font-medium',
             animateExit &&
               'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
             showAsRead ? Opacity.READ : Opacity.MEDIUM,

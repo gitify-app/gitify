@@ -1,19 +1,22 @@
 import {
+  FeedPersonIcon,
   KeyIcon,
   PersonIcon,
   PlusIcon,
   SignOutIcon,
+  SyncIcon,
 } from '@primer/octicons-react';
 
 import { type FC, useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { AuthMethodIcon } from '../components/icons/AuthMethodIcon';
+import { AvatarIcon } from '../components/icons/AvatarIcon';
 import { PlatformIcon } from '../components/icons/PlatformIcon';
 import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import { type Account, Size } from '../types';
-import { getAccountUUID } from '../utils/auth/utils';
+import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
 import { updateTrayIcon, updateTrayTitle } from '../utils/comms';
 import {
   openAccountProfile,
@@ -57,16 +60,22 @@ export const AccountsRoute: FC = () => {
                 <div>
                   <button
                     type="button"
-                    className="mb-1 cursor-pointer text-sm font-semibold"
+                    className="flex flex-1 gap-2 items-center justify-center mb-1 cursor-pointer text-sm font-semibold"
                     title="Open Profile"
                     onClick={() => openAccountProfile(account)}
                   >
+                    <AvatarIcon
+                      title={account.user.login}
+                      url={account.user.avatar}
+                      size={Size.MEDIUM}
+                      defaultIcon={FeedPersonIcon}
+                    />
                     @{account.user.login}
                     <span
                       hidden={!account.user?.name}
-                      className="pl-1 text-xs font-medium italic"
+                      className="text-xs font-medium italic"
                     >
-                      - {account.user?.name}
+                      ({account.user?.name})
                     </span>
                   </button>
                 </div>
@@ -94,6 +103,20 @@ export const AccountsRoute: FC = () => {
                 </div>
               </div>
               <div>
+                <button
+                  type="button"
+                  className={BUTTON_CLASS_NAME}
+                  title={`Refresh ${account.user.login}`}
+                  onClick={async () => {
+                    await refreshAccount(account);
+                    navigate('/accounts', { replace: true });
+                  }}
+                >
+                  <SyncIcon
+                    size={Size.XLARGE}
+                    aria-label={`Refresh ${account.user.login}`}
+                  />
+                </button>
                 <button
                   type="button"
                   className={BUTTON_CLASS_NAME}

@@ -11,7 +11,7 @@ import type {
   Token,
 } from '../../types';
 import type { UserDetails } from '../../typesGitHub';
-import { getAuthenticatedUser } from '../api/client';
+import { getAuthenticatedUser, headNotifications } from '../api/client';
 import { apiRequest } from '../api/request';
 import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
@@ -98,6 +98,7 @@ export async function getUserData(
     id: response.id,
     login: response.login,
     name: response.name,
+    avatar: response.avatar_url,
   };
 }
 
@@ -120,24 +121,23 @@ export async function getToken(
   };
 }
 
-export function addAccount(
+export async function addAccount(
   auth: AuthState,
   method: AuthMethod,
   token: Token,
   hostname: Hostname,
-  user?: GitifyUser,
-): AuthState {
+): Promise<AuthState> {
+  let newAccount = {
+    hostname: hostname,
+    method: method,
+    platform: getPlatformFromHostname(hostname),
+    token: token,
+  } as Account;
+
+  newAccount = await refreshAccount(newAccount);
+
   return {
-    accounts: [
-      ...auth.accounts,
-      {
-        hostname: hostname,
-        method: method,
-        platform: getPlatformFromHostname(hostname),
-        token: token,
-        user: user,
-      },
-    ],
+    accounts: [...auth.accounts, newAccount],
   };
 }
 
@@ -149,6 +149,17 @@ export function removeAccount(auth: AuthState, account: Account): AuthState {
   return {
     accounts: updatedAccounts,
   };
+}
+
+export async function refreshAccount(account: Account): Promise<Account> {
+  // Refresh user data
+  account.user = await getUserData(account.token, account.hostname);
+
+  // Refresh platform version
+  const res = await headNotifications(account.hostname, account.token);
+  account.version = res.headers['x-github-enterprise-version'] ?? 'latest';
+
+  return account;
 }
 
 export function getDeveloperSettingsURL(account: Account): Link {
