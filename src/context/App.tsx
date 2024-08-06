@@ -146,7 +146,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   useInterval(() => {
     fetchNotifications({ auth, settings });
-  }, Constants.FETCH_INTERVAL);
+  }, Constants.FETCH_NOTIFICATIONS_INTERVAL);
+
+  useInterval(() => {
+    for (const account of auth.accounts) {
+      refreshAccount(account);
+    }
+  }, Constants.REFRESH_ACCOUNTS_INTERVAL);
 
   useEffect(() => {
     const count = getNotificationCount(notifications);
@@ -247,6 +253,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
     if (existing.auth) {
       setAuth({ ...defaultAuth, ...existing.auth });
+
+      // Refresh account data on app start
+      for (const account of existing.auth.accounts) {
+        await refreshAccount(account);
+      }
     }
 
     if (existing.settings) {
@@ -255,11 +266,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       webFrame.setZoomLevel(
         zoomPercentageToLevel(existing.settings.zoomPercentage),
       );
-    }
-
-    // Refresh account data on app start
-    for (const account of existing.auth.accounts) {
-      await refreshAccount(account);
     }
   }, []);
 

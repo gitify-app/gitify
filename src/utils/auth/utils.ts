@@ -1,5 +1,6 @@
 import { BrowserWindow } from '@electron/remote';
 import { format } from 'date-fns';
+import log from 'electron-log';
 import type {
   Account,
   AuthCode,
@@ -11,7 +12,7 @@ import type {
   Token,
 } from '../../types';
 import type { UserDetails } from '../../typesGitHub';
-import { getAuthenticatedUser, headNotifications } from '../api/client';
+import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
 import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
@@ -152,12 +153,22 @@ export function removeAccount(auth: AuthState, account: Account): AuthState {
 }
 
 export async function refreshAccount(account: Account): Promise<Account> {
-  // Refresh user data
-  account.user = await getUserData(account.token, account.hostname);
+  try {
+    const res = await getAuthenticatedUser(account.hostname, account.token);
 
-  // Refresh platform version
-  const res = await headNotifications(account.hostname, account.token);
-  account.version = res.headers['x-github-enterprise-version'] ?? 'latest';
+    // Refresh user data
+    account.user = {
+      id: res.data.id,
+      login: res.data.login,
+      name: res.data.name,
+      avatar: res.data.avatar_url,
+    };
+
+    // Refresh platform version
+    account.version = res.headers['x-github-enterprise-version'] ?? 'latest';
+  } catch (error) {
+    log.error('Failed to refresh account', error);
+  }
 
   return account;
 }
