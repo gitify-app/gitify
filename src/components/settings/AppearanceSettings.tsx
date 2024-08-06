@@ -22,7 +22,7 @@ let timeout: NodeJS.Timeout;
 const DELAY = 200;
 
 export const AppearanceSettings: FC = () => {
-  const { settings, updateSetting } = useContext(AppContext);
+  const { auth, settings, updateSetting } = useContext(AppContext);
   const [zoomPercentage, setZoomPercentage] = useState(
     zoomLevelToPercentage(webFrame.getZoomLevel()),
   );
@@ -198,7 +198,8 @@ export const AppearanceSettings: FC = () => {
       <Checkbox
         name="showAccountHostname"
         label="Show account hostname"
-        checked={settings.showAccountHostname}
+        checked={settings.showAccountHostname || auth.accounts.length > 1}
+        disabled={auth.accounts.length > 1}
         onChange={(evt) =>
           updateSetting('showAccountHostname', evt.target.checked)
         }
