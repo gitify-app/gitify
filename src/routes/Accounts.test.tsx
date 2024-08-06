@@ -1,4 +1,10 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import {
   mockAuth,
@@ -188,6 +194,11 @@ describe('routes/Accounts.tsx', () => {
         'https://api.github.com/user',
         'GET',
         'token-123-456',
+      );
+      await waitFor(() =>
+        expect(mockNavigate).toHaveBeenNthCalledWith(1, '/accounts', {
+          replace: true,
+        }),
       );
     });
 
