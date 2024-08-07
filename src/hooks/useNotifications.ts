@@ -60,6 +60,7 @@ export const useNotifications = (): NotificationsState => {
   const fetchNotifications = useCallback(
     async (state: GitifyState) => {
       setStatus('loading');
+      setGlobalError(null);
 
       const fetchedNotifications = await getAllNotifications(state);
 
