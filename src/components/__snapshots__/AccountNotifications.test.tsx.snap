@@ -77,6 +77,7 @@ exports[`components/AccountNotifications.tsx should render itself - account erro
           <svg
             aria-hidden="true"
             class="svg-inline--fa fa-circle-exclamation "
+            color=""
             data-icon="circle-exclamation"
             data-prefix="fas"
             focusable="false"
@@ -176,6 +177,7 @@ exports[`components/AccountNotifications.tsx should render itself - account erro
         <svg
           aria-hidden="true"
           class="svg-inline--fa fa-circle-exclamation "
+          color=""
           data-icon="circle-exclamation"
           data-prefix="fas"
           focusable="false"

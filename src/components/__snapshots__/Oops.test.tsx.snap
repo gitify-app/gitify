@@ -14,6 +14,7 @@ exports[`components/Oops.tsx should render itself & its children 1`] = `
           <svg
             aria-hidden="true"
             class="svg-inline--fa fa-circle-exclamation "
+            color=""
             data-icon="circle-exclamation"
             data-prefix="fas"
             focusable="false"
@@ -50,6 +51,7 @@ exports[`components/Oops.tsx should render itself & its children 1`] = `
         <svg
           aria-hidden="true"
           class="svg-inline--fa fa-circle-exclamation "
+          color=""
           data-icon="circle-exclamation"
           data-prefix="fas"
           focusable="false"
