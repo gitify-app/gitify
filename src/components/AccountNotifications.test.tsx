@@ -1,3 +1,4 @@
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { mockGitHubCloudAccount, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
@@ -76,7 +77,7 @@ describe('components/AccountNotifications.tsx', () => {
       error: {
         title: 'Error title',
         descriptions: ['Error description'],
-        emojis: ['🔥'],
+        icons: [faCircleExclamation],
       },
       showAccountHostname: true,
     };

@@ -101,6 +101,9 @@
   },
   "dependencies": {
     "@electron/remote": "2.1.2",
+    "@fortawesome/fontawesome-svg-core": "6.6.0",
+    "@fortawesome/free-solid-svg-icons": "6.6.0",
+    "@fortawesome/react-fontawesome": "0.2.2",
     "@primer/octicons-react": "19.11.0",
     "axios": "1.7.3",
     "class-variance-authority": "0.7.0",

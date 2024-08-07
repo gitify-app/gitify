@@ -1,3 +1,4 @@
+import type { IconProp as FontAwesomeIcon } from '@fortawesome/fontawesome-svg-core';
 import type { OcticonProps } from '@primer/octicons-react';
 import type { FC } from 'react';
 import type { Notification, Reason } from './typesGitHub';
@@ -136,7 +137,7 @@ export interface GitifyUser {
 export interface GitifyError {
   title: string;
   descriptions: string[];
-  emojis: string[];
+  icons: FontAwesomeIcon[];
 }
 
 export type ErrorType =

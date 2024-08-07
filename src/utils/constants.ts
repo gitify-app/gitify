@@ -1,3 +1,11 @@
+import {
+  faBomb,
+  faHourglass,
+  faKey,
+  faMeteor,
+  faMicroscope,
+  faWifi,
+} from '@fortawesome/free-solid-svg-icons';
 import type { ErrorType, GitifyError, Link } from '../types';
 import type { ClientID, ClientSecret, Hostname } from '../types';
 
@@ -40,12 +48,12 @@ export const Errors: Record<ErrorType, GitifyError> = {
   BAD_CREDENTIALS: {
     title: 'Bad Credentials',
     descriptions: ['Your credentials are either invalid or expired.'],
-    emojis: ['🔓'],
+    icons: [faKey],
   },
   MISSING_SCOPES: {
     title: 'Missing Scopes',
     descriptions: ['Your credentials are missing a required API scope.'],
-    emojis: ['🔭'],
+    icons: [faMicroscope],
   },
   NETWORK: {
     title: 'Network Error',
@@ -53,17 +61,17 @@ export const Errors: Record<ErrorType, GitifyError> = {
       'Unable to connect to one or more of your GitHub environments.',
       'Please check your network connection, including whether you require a VPN, and try again.',
     ],
-    emojis: ['🛜'],
+    icons: [faWifi],
   },
   RATE_LIMITED: {
     title: 'Rate Limited',
     descriptions: ['Please wait a while before trying again.'],
-    emojis: ['😮‍💨'],
+    icons: [faHourglass],
   },
   UNKNOWN: {
     title: 'Oops! Something went wrong',
     descriptions: ['Please try again later.'],
-    emojis: ['🤔', '🥲', '😳', '🫠', '🙃', '🙈'],
+    icons: [faBomb, faMeteor],
   },
 };
 

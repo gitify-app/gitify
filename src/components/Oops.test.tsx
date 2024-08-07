@@ -1,3 +1,4 @@
+import { faCircleExclamation } from '@fortawesome/free-solid-svg-icons';
 import { render } from '@testing-library/react';
 import { Oops } from './Oops';
 
@@ -6,7 +7,7 @@ describe('components/Oops.tsx', () => {
     const mockError = {
       title: 'Error title',
       descriptions: ['Error description'],
-      emojis: ['🔥'],
+      icons: [faCircleExclamation],
     };
     const tree = render(<Oops error={mockError} />);
 
