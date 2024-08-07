@@ -75,13 +75,13 @@ exports[`routes/Notifications.tsx should render itself & its children (error con
   "baseElement": <body>
     <div>
       <p>
-        AllRead
+        Oops
       </p>
     </div>
   </body>,
   "container": <div>
     <p>
-      AllRead
+      Oops
     </p>
   </div>,
   "debug": [Function],
@@ -144,13 +144,13 @@ exports[`routes/Notifications.tsx should render itself & its children (error con
   "baseElement": <body>
     <div>
       <p>
-        AllRead
+        Oops
       </p>
     </div>
   </body>,
   "container": <div>
     <p>
-      AllRead
+      Oops
     </p>
   </div>,
   "debug": [Function],
@@ -213,13 +213,13 @@ exports[`routes/Notifications.tsx should render itself & its children (error con
   "baseElement": <body>
     <div>
       <p>
-        AllRead
+        Oops
       </p>
     </div>
   </body>,
   "container": <div>
     <p>
-      AllRead
+      Oops
     </p>
   </div>,
   "debug": [Function],
@@ -282,13 +282,13 @@ exports[`routes/Notifications.tsx should render itself & its children (error con
   "baseElement": <body>
     <div>
       <p>
-        AllRead
+        Oops
       </p>
     </div>
   </body>,
   "container": <div>
     <p>
-      AllRead
+      Oops
     </p>
   </div>,
   "debug": [Function],
@@ -351,13 +351,13 @@ exports[`routes/Notifications.tsx should render itself & its children (error con
   "baseElement": <body>
     <div>
       <p>
-        AllRead
+        Oops
       </p>
     </div>
   </body>,
   "container": <div>
     <p>
-      AllRead
+      Oops
     </p>
   </div>,
   "debug": [Function],
