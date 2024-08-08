@@ -47,7 +47,7 @@ const browserWindowOpts = {
   },
 };
 
-let isUpdateAvailable = true;
+let isUpdateAvailable = false;
 
 const contextMenu = Menu.buildFromTemplate([
   {
