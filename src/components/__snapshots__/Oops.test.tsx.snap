@@ -8,16 +8,23 @@ exports[`components/Oops.tsx should render itself & its children 1`] = `
       <div
         class="flex flex-1 flex-col items-center justify-center p-4"
       >
-        <h1
+        <div
           class="mt-2 mb-5 text-5xl"
         >
-          🔥
-        </h1>
-        <h2
+          <span>
+            <img
+              alt="🔥"
+              class="emoji"
+              draggable="false"
+              src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f525.svg"
+            />
+          </span>
+        </div>
+        <div
           class="mb-2 text-xl font-semibold"
         >
           Error title
-        </h2>
+        </div>
         <div
           class="mb-2 text-center"
         >
@@ -30,16 +37,23 @@ exports[`components/Oops.tsx should render itself & its children 1`] = `
     <div
       class="flex flex-1 flex-col items-center justify-center p-4"
     >
-      <h1
+      <div
         class="mt-2 mb-5 text-5xl"
       >
-        🔥
-      </h1>
-      <h2
+        <span>
+          <img
+            alt="🔥"
+            class="emoji"
+            draggable="false"
+            src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f525.svg"
+          />
+        </span>
+      </div>
+      <div
         class="mb-2 text-xl font-semibold"
       >
         Error title
-      </h2>
+      </div>
       <div
         class="mb-2 text-center"
       >

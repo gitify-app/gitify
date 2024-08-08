@@ -1,55 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/AllRead.tsx should render itself & its children 1`] = `
+exports[`components/icons/Emoji.tsx should render 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
     <div>
-      <div
-        class="flex flex-1 flex-col items-center justify-center bg-white p-4 text-black dark:bg-gray-dark dark:text-white"
-      >
-        <div
-          class="mt-2 mb-5 text-5xl"
-        >
-          <span>
-            <img
-              alt="🎊"
-              class="emoji"
-              draggable="false"
-              src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f38a.svg"
-            />
-          </span>
-        </div>
-        <div
-          class="mb-2 text-xl font-semibold"
-        >
-          No new notifications.
-        </div>
-      </div>
+      <span>
+        <img
+          alt="🍺"
+          class="emoji"
+          draggable="false"
+          src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f37a.svg"
+        />
+      </span>
     </div>
   </body>,
   "container": <div>
-    <div
-      class="flex flex-1 flex-col items-center justify-center bg-white p-4 text-black dark:bg-gray-dark dark:text-white"
-    >
-      <div
-        class="mt-2 mb-5 text-5xl"
-      >
-        <span>
-          <img
-            alt="🎊"
-            class="emoji"
-            draggable="false"
-            src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f38a.svg"
-          />
-        </span>
-      </div>
-      <div
-        class="mb-2 text-xl font-semibold"
-      >
-        No new notifications.
-      </div>
-    </div>
+    <span>
+      <img
+        alt="🍺"
+        class="emoji"
+        draggable="false"
+        src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets/svg/1f37a.svg"
+      />
+    </span>
   </div>,
   "debug": [Function],
   "findAllByAltText": [Function],
