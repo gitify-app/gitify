@@ -17,20 +17,21 @@ const { autoUpdater } = require('electron');
 
 log.initialize();
 
-// Auto Updater;
-updateElectronApp({
-  updateInterval: '24 hours',
-  logger: log,
-});
-
 // TODO: Remove @electron/remote use - see #650
 require('@electron/remote/main').initialize();
 
+// Tray Icons
 const idleIcon = path.resolve(
   `${__dirname}/../../assets/images/tray-idleTemplate.png`,
 );
+const idleUpdateAvailableIcon = path.resolve(
+  `${__dirname}/../../assets/images/tray-update-idleTemplate.png`,
+);
 const activeIcon = path.resolve(
   `${__dirname}/../../assets/images/tray-active.png`,
+);
+const activeUpdateAvailableIcon = path.resolve(
+  `${__dirname}/../../assets/images/tray-active-update.png`,
 );
 
 const browserWindowOpts = {
@@ -46,12 +47,12 @@ const browserWindowOpts = {
   },
 };
 
-const isUpdateAvailable = false;
+let isUpdateAvailable = true;
 
 const contextMenu = Menu.buildFromTemplate([
   {
     label: 'Check for updates',
-    visible: !isUpdateAvailable,
+    enabled: !isUpdateAvailable,
     click: () => {
       autoUpdater.checkForUpdates();
     },
@@ -158,19 +159,21 @@ app.whenReady().then(async () => {
 
   ipc.on('gitify:icon-active', () => {
     if (!mb.tray.isDestroyed()) {
-      mb.tray.setImage(activeIcon);
+      mb.tray.setImage(
+        isUpdateAvailable ? activeUpdateAvailableIcon : activeIcon,
+      );
     }
   });
 
   ipc.on('gitify:icon-idle', () => {
     if (!mb.tray.isDestroyed()) {
-      mb.tray.setImage(idleIcon);
+      mb.tray.setImage(isUpdateAvailable ? idleUpdateAvailableIcon : idleIcon);
     }
   });
 
   ipc.on('gitify:update-title', (_, title) => {
     if (!mb.tray.isDestroyed()) {
-      mb.tray.setTitle(`${isUpdateAvailable ? '⤓' : ''}${title}`);
+      mb.tray.setTitle(title);
     }
   });
 
@@ -195,12 +198,19 @@ app.whenReady().then(async () => {
   ipc.on('gitify:update-auto-launch', (_, settings) => {
     app.setLoginItemSettings(settings);
   });
-});
 
-// function checkForUpdates() {
-//   log.info('Auto Updater: Checking for updates...');
-//   autoUpdater.checkForUpdatesAndNotify();
-// }
+  // Auto Updater
+  updateElectronApp({
+    updateInterval: '24 hours',
+    logger: log,
+  });
+
+  autoUpdater.on('update-available', () => {
+    log.info('Auto Updater: New update available');
+    isUpdateAvailable = true;
+    mb.tray.setToolTip('Gitify - New update available 🚀');
+  });
+});
 
 function takeScreenshot() {
   const date = new Date();
