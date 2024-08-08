@@ -25,7 +25,7 @@ const idleIcon = path.resolve(
   `${__dirname}/../../assets/images/tray-idleTemplate.png`,
 );
 const idleUpdateAvailableIcon = path.resolve(
-  `${__dirname}/../../assets/images/tray-update-idleTemplate.png`,
+  `${__dirname}/../../assets/images/tray-idle-update.png`,
 );
 const activeIcon = path.resolve(
   `${__dirname}/../../assets/images/tray-active.png`,
