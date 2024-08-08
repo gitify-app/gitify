@@ -7,15 +7,21 @@ const {
   dialog,
 } = require('electron/main');
 const { menubar } = require('menubar');
-const { autoUpdater } = require('electron-updater');
+const { updateElectronApp } = require('update-electron-app');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('node:path');
 const log = require('electron-log');
 const fs = require('node:fs');
 const os = require('node:os');
+const { autoUpdater } = require('electron');
 
 log.initialize();
-autoUpdater.logger = log;
+
+// Auto Updater;
+updateElectronApp({
+  updateInterval: '24 hours',
+  logger: log,
+});
 
 // TODO: Remove @electron/remote use - see #650
 require('@electron/remote/main').initialize();
@@ -40,27 +46,14 @@ const browserWindowOpts = {
   },
 };
 
-let isUpdateAvailable = false;
-let isUpdateDownloaded = false;
+const isUpdateAvailable = false;
 
 const contextMenu = Menu.buildFromTemplate([
   {
     label: 'Check for updates',
     visible: !isUpdateAvailable,
     click: () => {
-      checkForUpdates();
-    },
-  },
-  {
-    label: 'An update is available',
-    enabled: false,
-    visible: isUpdateAvailable,
-  },
-  {
-    label: 'Restart to update',
-    visible: isUpdateDownloaded,
-    click: () => {
-      autoUpdater.quitAndInstall();
+      autoUpdater.checkForUpdates();
     },
   },
   { type: 'separator' },
@@ -142,27 +135,6 @@ app.whenReady().then(async () => {
       mb.positioner.move('trayCenter', trayBounds);
       mb.window.resizable = false;
     });
-
-    // Auto Updater
-    checkForUpdates();
-    setInterval(checkForUpdates, 24 * 60 * 60 * 1000); // 24 hours
-
-    autoUpdater.on('update-available', () => {
-      log.info('Auto Updater: New update available');
-      isUpdateAvailable = true;
-      mb.window.webContents.send('gitify:auto-updater', isUpdateAvailable);
-    });
-
-    autoUpdater.on('update-not-available', () => {
-      log.info('Auto Updater: Already on the latest version');
-      isUpdateAvailable = false;
-      mb.window.webContents.send('gitify:auto-updater', isUpdateAvailable);
-    });
-
-    autoUpdater.on('update-downloaded', () => {
-      log.info('Auto Updater: Update downloaded');
-      isUpdateDownloaded = true;
-    });
   });
 
   nativeTheme.on('updated', () => {
@@ -225,10 +197,10 @@ app.whenReady().then(async () => {
   });
 });
 
-function checkForUpdates() {
-  log.info('Auto Updater: Checking for updates...');
-  autoUpdater.checkForUpdatesAndNotify();
-}
+// function checkForUpdates() {
+//   log.info('Auto Updater: Checking for updates...');
+//   autoUpdater.checkForUpdatesAndNotify();
+// }
 
 function takeScreenshot() {
   const date = new Date();
