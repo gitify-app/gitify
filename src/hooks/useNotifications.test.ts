@@ -476,7 +476,7 @@ describe('hooks/useNotifications.ts', () => {
   describe('markRepoNotificationsRead', () => {
     const repoSlug = 'gitify-app/notifications-test';
 
-    it("should mark a repository's notifications as read with success", async () => {
+    it('should mark repository notifications as read with success', async () => {
       nock('https://api.github.com/')
         .put(`/repos/${repoSlug}/notifications`)
         .reply(200);
@@ -497,7 +497,7 @@ describe('hooks/useNotifications.ts', () => {
       expect(result.current.notifications.length).toBe(0);
     });
 
-    it("should mark a repository's notifications as read with failure", async () => {
+    it('should mark repository notifications as read with failure', async () => {
       nock('https://api.github.com/')
         .put(`/repos/${repoSlug}/notifications`)
         .reply(400);
@@ -520,7 +520,7 @@ describe('hooks/useNotifications.ts', () => {
   });
 
   describe('markRepoNotificationsDone', () => {
-    it("should mark a repository's notifications as done with success", async () => {
+    it('should mark repository notifications as done with success', async () => {
       nock('https://api.github.com/')
         .delete(`/notifications/threads/${id}`)
         .reply(200);
@@ -541,7 +541,7 @@ describe('hooks/useNotifications.ts', () => {
       expect(result.current.notifications.length).toBe(0);
     });
 
-    it("should mark a repository's notifications as done with failure", async () => {
+    it('should mark repository notifications as done with failure', async () => {
       nock('https://api.github.com/')
         .delete(`/notifications/threads/${id}`)
         .reply(400);
