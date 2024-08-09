@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@discordapp/twemoji':
+        specifier: ^15.0.3
+        version: 15.0.3
       '@electron/remote':
         specifier: 2.1.2
         version: 2.1.2(electron@31.3.1)
@@ -396,6 +399,9 @@ packages:
     resolution: {integrity: sha512-0cp4PsWQ/9avqTVMCtZ+GirikIA36ikvjtHweU4/j8yLtgObI0+JUPhYFScgwlteveGB1rt3Cm8UhN04XayDig==}
     engines: {node: '>= 8.9.0'}
 
+  '@discordapp/twemoji@15.0.3':
+    resolution: {integrity: sha512-5t0LLrNaSqViG0cSaomWwfR0+3fWqok+xLq40M8hJHxNX7s8gIoyNZYybQJo+s5/rGMjgdldpt8Ox8MapGvBUA==}
+
   '@discoveryjs/json-ext@0.5.7':
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
     engines: {node: '>=10.0.0'}
@@ -621,6 +627,9 @@ packages:
 
   '@twemoji/api@15.1.0':
     resolution: {integrity: sha512-CySXR4/e6vY0z9lC2tW9EVjsH6zzz2/LQvLRMwwpHsDI4xcaweSIP+LcESf1Mq7w2/zcrrhG4ozniMvpSsEXag==}
+
+  '@twemoji/parser@15.0.0':
+    resolution: {integrity: sha512-lh9515BNsvKSNvyUqbj5yFu83iIDQ77SwVcsN/SnEGawczhsKU6qWuogewN1GweTi5Imo5ToQ9s+nNTf97IXvg==}
 
   '@twemoji/parser@15.1.0':
     resolution: {integrity: sha512-3HTiSxPvkWUJ4kZeCvwyKlIwkpTUfBOk6igpBBRQni58ceQMv5YK4smkc8vX/eqOlMMNER/9qobv+Q6Q8LVrqA==}
@@ -3511,6 +3520,13 @@ snapshots:
       ajv: 6.12.6
       ajv-keywords: 3.5.2(ajv@6.12.6)
 
+  '@discordapp/twemoji@15.0.3':
+    dependencies:
+      '@twemoji/parser': 15.0.0
+      fs-extra: 8.1.0
+      jsonfile: 5.0.0
+      universalify: 0.1.2
+
   '@discoveryjs/json-ext@0.5.7': {}
 
   '@electron/asar@3.2.9':
@@ -3871,6 +3887,8 @@ snapshots:
       fs-extra: 8.1.0
       jsonfile: 5.0.0
       universalify: 0.1.2
+
+  '@twemoji/parser@15.0.0': {}
 
   '@twemoji/parser@15.1.0': {}
 

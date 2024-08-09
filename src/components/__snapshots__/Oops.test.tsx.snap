@@ -16,7 +16,7 @@ exports[`components/Oops.tsx should render itself & its children 1`] = `
               alt="🔥"
               class="emoji"
               draggable="false"
-              src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets//svg/1f525.svg"
+              src="/Users/asetch/Documents/dev/GitHub/gitify-app/gitify/src/node_modules/@discordapp/twemoji/dist/svg/1f525.svg"
             />
           </span>
         </div>
@@ -45,7 +45,7 @@ exports[`components/Oops.tsx should render itself & its children 1`] = `
             alt="🔥"
             class="emoji"
             draggable="false"
-            src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.1.0/assets//svg/1f525.svg"
+            src="/Users/asetch/Documents/dev/GitHub/gitify-app/gitify/src/node_modules/@discordapp/twemoji/dist/svg/1f525.svg"
           />
         </span>
       </div>

@@ -1,5 +1,5 @@
 import path from 'node:path';
-import twemoji from '@twemoji/api';
+import twemoji from '@discordapp/twemoji';
 import type { FC } from 'react';
 
 export interface IEmoji {
@@ -18,18 +18,10 @@ export const Emoji: FC<IEmoji> = (props: IEmoji) => {
     folder: 'svg',
     ext: '.svg',
     callback: (icon: string, options: TwemojiOptions, _variant: string) => {
-      // Offline
-      let source: string;
+      const source = path.resolve(
+        `${__dirname}/../../node_modules/@discordapp/twemoji/dist`,
+      );
 
-      switch (icon) {
-        // Offline Emojis sourced from ../assets/svg
-        case '1f6dc': // 🛜 wifi/network
-          source = path.resolve(`${__dirname}/../../assets`);
-          break;
-        default:
-          source = options.base;
-          break;
-      }
       return ''.concat(source, '/', options.size, '/', icon, options.ext);
     },
   });
