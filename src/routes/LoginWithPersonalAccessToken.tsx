@@ -58,8 +58,28 @@ export const LoginWithPersonalAccessToken: FC = () => {
           label="Hostname"
           placeholder="github.company.com"
           helpText={
-            <div className="mt-1 italic">
-              Change only if you are using GitHub Enterprise Server.
+            <div>
+              <div className="mt-1 italic">
+                Change only if you are using GitHub Enterprise Server.
+              </div>
+              <div className="mt-3">
+                <Button
+                  label="Generate a PAT"
+                  disabled={!values.hostname}
+                  icon={{ icon: KeyIcon, size: Size.XSMALL }}
+                  url={getNewTokenURL(values.hostname)}
+                  size="xs"
+                >
+                  Generate a PAT
+                </Button>
+                <span className="mx-1">
+                  on GitHub then paste your{' '}
+                  <span className="italic">token</span> below.
+                </span>
+              </div>
+              <div className="mt-1 italic">
+                The required scopes will be automatically selected for you.
+              </div>
             </div>
           }
         />
@@ -68,24 +88,6 @@ export const LoginWithPersonalAccessToken: FC = () => {
           name="token"
           label="Token"
           placeholder="The 40 characters token generated on GitHub"
-          helpText={
-            <div>
-              <div>
-                <Button
-                  label="Generate a PAT"
-                  disabled={!values.hostname}
-                  icon={{ icon: KeyIcon, size: Size.XSMALL }}
-                  url={getNewTokenURL(values.hostname)}
-                >
-                  Generate a PAT
-                </Button>
-                <span className="mx-1">on GitHub and paste above.</span>
-              </div>
-              <div className="mt-1 italic">
-                The required scopes will be selected for you.
-              </div>
-            </div>
-          }
         />
 
         {!isValidToken && (
@@ -99,6 +101,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
             label="GitHub Docs"
             icon={{ icon: BookIcon, size: Size.XSMALL }}
             url={Constants.GITHUB_DOCS.PAT_URL}
+            size="xs"
           >
             Docs
           </Button>
