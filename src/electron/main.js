@@ -5,15 +5,16 @@ const {
   globalShortcut,
   Menu,
   dialog,
+  MenuItem,
 } = require('electron/main');
 const { menubar } = require('menubar');
-const { updateElectronApp } = require('update-electron-app');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('node:path');
 const log = require('electron-log');
 const fs = require('node:fs');
 const os = require('node:os');
-const { autoUpdater } = require('electron');
+const { autoUpdater } = require('electron-updater');
+const { updateElectronApp } = require('update-electron-app');
 
 log.initialize();
 
@@ -47,16 +48,32 @@ const browserWindowOpts = {
   },
 };
 
-let isUpdateAvailable = false;
+const checkForUpdatesMenuItem = new MenuItem({
+  label: 'Check for updates',
+  enabled: true,
+  click: () => {
+    autoUpdater.checkForUpdatesAndNotify();
+  },
+});
+
+const updateAvailableMenuItem = new MenuItem({
+  label: 'An update is available',
+  enabled: false,
+  visible: false,
+});
+
+const updateReadyForInstallMenuItem = new MenuItem({
+  label: 'Restart to update',
+  visible: false,
+  click: () => {
+    autoUpdater.quitAndInstall();
+  },
+});
 
 const contextMenu = Menu.buildFromTemplate([
-  {
-    label: 'Check for updates',
-    enabled: !isUpdateAvailable,
-    click: () => {
-      autoUpdater.checkForUpdates();
-    },
-  },
+  checkForUpdatesMenuItem,
+  updateAvailableMenuItem,
+  updateReadyForInstallMenuItem,
   { type: 'separator' },
   {
     label: 'Developer',
@@ -160,14 +177,18 @@ app.whenReady().then(async () => {
   ipc.on('gitify:icon-active', () => {
     if (!mb.tray.isDestroyed()) {
       mb.tray.setImage(
-        isUpdateAvailable ? activeUpdateAvailableIcon : activeIcon,
+        updateAvailableMenuItem.visible
+          ? activeUpdateAvailableIcon
+          : activeIcon,
       );
     }
   });
 
   ipc.on('gitify:icon-idle', () => {
     if (!mb.tray.isDestroyed()) {
-      mb.tray.setImage(isUpdateAvailable ? idleUpdateAvailableIcon : idleIcon);
+      mb.tray.setImage(
+        updateAvailableMenuItem.visible ? idleUpdateAvailableIcon : idleIcon,
+      );
     }
   });
 
@@ -205,10 +226,31 @@ app.whenReady().then(async () => {
     logger: log,
   });
 
+  autoUpdater.on('checking-for-update', () => {
+    log.info('Auto Updater: Checking for update');
+    checkForUpdatesMenuItem.enabled = false;
+  });
+
+  autoUpdater.on('error', (error) => {
+    log.error('Auto Updater: error checking for update', error);
+    checkForUpdatesMenuItem.enabled = true;
+  });
+
   autoUpdater.on('update-available', () => {
     log.info('Auto Updater: New update available');
-    isUpdateAvailable = true;
+    updateAvailableMenuItem.visible = true;
     mb.tray.setToolTip('Gitify - New update available 🚀');
+  });
+
+  autoUpdater.on('update-downloaded', () => {
+    log.info('Auto Updater: Update downloaded');
+    updateReadyForInstallMenuItem.visible = true;
+    mb.tray.setToolTip('Gitify - New update ready for install 🚀');
+  });
+
+  autoUpdater.on('update-not-available', () => {
+    log.info('Auto Updater: update not available');
+    checkForUpdatesMenuItem.enabled = true;
   });
 });
 
