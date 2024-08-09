@@ -1,4 +1,5 @@
 import { render } from '@testing-library/react';
+import { mockDirectoryPath } from '../__mocks__/utils';
 import { AllRead } from './AllRead';
 
 describe('components/AllRead.tsx', () => {
@@ -6,6 +7,8 @@ describe('components/AllRead.tsx', () => {
   // Have to make it consistent so the emojis are always the same
   beforeEach(() => {
     global.Math.random = jest.fn(() => 0.1);
+
+    mockDirectoryPath();
   });
 
   it('should render itself & its children', () => {
