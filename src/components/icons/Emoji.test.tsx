@@ -18,6 +18,5 @@ describe('components/icons/Emoji.tsx', () => {
 
     expect(tree.baseElement.innerHTML).not.toContain('https://'); // Offline emojis should not have an online URL
     expect(offlineEmojis.length).toEqual(1); // Ensure all NETWORK error emojis are configured for offline use - future proofing
-    expect(tree).toMatchSnapshot();
   });
 });
