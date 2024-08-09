@@ -107,7 +107,7 @@
     "clsx": "2.1.1",
     "date-fns": "3.6.0",
     "electron-log": "5.1.7",
-    "electron-updater": "6.2.1",
+    "electron-updater": "6.3.2",
     "final-form": "4.20.10",
     "menubar": "9.5.0",
     "nprogress": "0.2.0",
@@ -118,7 +118,7 @@
     "tailwind-merge": "2.4.0",
     "ts-loader": "9.5.1",
     "typescript": "5.5.4",
-    "update-electron-app": "^3.0.0"
+    "update-electron-app": "3.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
