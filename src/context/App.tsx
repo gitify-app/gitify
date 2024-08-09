@@ -164,8 +164,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     ipcRenderer.on('gitify:reset-app', () => {
-      setAuth(defaultAuth);
       clearState();
+      setAuth(defaultAuth);
+      setSettings(defaultSettings);
     });
   }, []);
 

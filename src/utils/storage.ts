@@ -1,13 +1,9 @@
-import { defaultAuth, defaultSettings } from '../context/App';
 import type { GitifyState } from '../types';
 import { Constants } from './constants';
 
 export function loadState(): GitifyState {
   const existing = localStorage.getItem(Constants.STORAGE_KEY);
-  const { auth, settings } = (existing && JSON.parse(existing)) || {
-    auth: defaultAuth,
-    settings: defaultSettings,
-  };
+  const { auth, settings } = (existing && JSON.parse(existing)) || {};
   return { auth, settings };
 }
 
