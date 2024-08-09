@@ -130,6 +130,7 @@ export interface AccountNotifications {
 export interface GitifyUser {
   login: string;
   name: string | null;
+  avatar: Link | null;
   id: number;
 }
 

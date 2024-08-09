@@ -115,6 +115,62 @@ describe('components/AccountNotifications.tsx', () => {
     expect(openAccountProfileMock).toHaveBeenCalledWith(mockGitHubCloudAccount);
   });
 
+  it('should open my issues when clicked', async () => {
+    const openMyIssuesMock = jest
+      .spyOn(links, 'openGitHubIssues')
+      .mockImplementation();
+
+    const props = {
+      account: mockGitHubCloudAccount,
+      notifications: [],
+      showAccountHostname: true,
+      error: null,
+    };
+
+    await act(async () => {
+      render(
+        <AppContext.Provider value={{ settings: mockSettings }}>
+          <AccountNotifications {...props} />
+        </AppContext.Provider>,
+      );
+    });
+
+    fireEvent.click(screen.getByTitle('My Issues'));
+
+    expect(openMyIssuesMock).toHaveBeenCalledTimes(1);
+    expect(openMyIssuesMock).toHaveBeenCalledWith(
+      mockGitHubCloudAccount.hostname,
+    );
+  });
+
+  it('should open my pull requests when clicked', async () => {
+    const openPullRequestsMock = jest
+      .spyOn(links, 'openGitHubPulls')
+      .mockImplementation();
+
+    const props = {
+      account: mockGitHubCloudAccount,
+      notifications: [],
+      showAccountHostname: true,
+      error: null,
+    };
+
+    await act(async () => {
+      render(
+        <AppContext.Provider value={{ settings: mockSettings }}>
+          <AccountNotifications {...props} />
+        </AppContext.Provider>,
+      );
+    });
+
+    fireEvent.click(screen.getByTitle('My Pull Requests'));
+
+    expect(openPullRequestsMock).toHaveBeenCalledTimes(1);
+    expect(openPullRequestsMock).toHaveBeenCalledWith(
+      mockGitHubCloudAccount.hostname,
+    );
+  });
+
   it('should toggle account notifications visibility', async () => {
     const props = {
       account: mockGitHubCloudAccount,

@@ -79,19 +79,19 @@ describe('context/App.tsx', () => {
       );
 
       act(() => {
-        jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
+        jest.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL);
         return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
 
       act(() => {
-        jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
+        jest.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL);
         return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
 
       act(() => {
-        jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
+        jest.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL);
         return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(4);

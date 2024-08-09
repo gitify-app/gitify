@@ -9,7 +9,7 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
         class="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="flex flex-1 gap-4 items-center truncate text-sm font-medium opacity-80"
+          class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
         >
           <img
             alt="gitify-app/notifications-test's avatar"
@@ -103,7 +103,7 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
       class="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
     >
       <div
-        class="flex flex-1 gap-4 items-center truncate text-sm font-medium opacity-80"
+        class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
       >
         <img
           alt="gitify-app/notifications-test's avatar"
@@ -254,7 +254,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
         class="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="flex flex-1 gap-4 items-center truncate text-sm font-medium opacity-80"
+          class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
         >
           <svg
             aria-hidden="true"
@@ -350,7 +350,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
         class="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="flex flex-1 gap-4 items-center truncate text-sm font-medium opacity-80"
+          class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
         >
           <svg
             aria-hidden="true"
@@ -453,7 +453,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
       class="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
     >
       <div
-        class="flex flex-1 gap-4 items-center truncate text-sm font-medium opacity-80"
+        class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
       >
         <svg
           aria-hidden="true"
@@ -613,7 +613,7 @@ exports[`components/Repository.tsx should use default repository icon when avata
         class="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="flex flex-1 gap-4 items-center truncate text-sm font-medium opacity-80"
+          class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
         >
           <svg
             aria-hidden="true"
@@ -716,7 +716,7 @@ exports[`components/Repository.tsx should use default repository icon when avata
       class="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
     >
       <div
-        class="flex flex-1 gap-4 items-center truncate text-sm font-medium opacity-80"
+        class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
       >
         <svg
           aria-hidden="true"
