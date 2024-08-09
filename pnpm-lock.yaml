@@ -9,7 +9,7 @@ importers:
   .:
     dependencies:
       '@discordapp/twemoji':
-        specifier: ^15.0.3
+        specifier: 15.0.3
         version: 15.0.3
       '@electron/remote':
         specifier: 2.1.2
