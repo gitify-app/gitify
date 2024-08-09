@@ -46,7 +46,7 @@ import { clearState, loadState, saveState } from '../utils/storage';
 import { setTheme } from '../utils/theme';
 import { zoomPercentageToLevel } from '../utils/zoom';
 
-const defaultAuth: AuthState = {
+export const defaultAuth: AuthState = {
   accounts: [],
   token: null,
   enterpriseAccounts: [],
@@ -268,11 +268,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     )) {
       const res = await headNotifications(account.hostname, account.token);
       account.version = res.headers['x-github-enterprise-version'];
-    }
-
-    if (!(existing.auth || existing.settings)) {
-      setSettings(defaultSettings);
-      saveState({ auth: defaultAuth, settings: defaultSettings });
     }
   }, []);
 
