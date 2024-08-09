@@ -46,7 +46,7 @@ import { clearState, loadState, saveState } from '../utils/storage';
 import { setTheme } from '../utils/theme';
 import { zoomPercentageToLevel } from '../utils/zoom';
 
-const defaultAuth: AuthState = {
+export const defaultAuth: AuthState = {
   accounts: [],
   token: null,
   enterpriseAccounts: [],
