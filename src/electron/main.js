@@ -268,6 +268,7 @@ function takeScreenshot() {
 
 function resetApp() {
   const cancelButtonId = 0;
+  const resetButtonId = 1;
 
   const response = dialog.showMessageBoxSync(mb.window, {
     type: 'warning',
@@ -279,10 +280,8 @@ function resetApp() {
     cancelId: cancelButtonId,
   });
 
-  if (response === cancelButtonId) {
-    return;
+  if (response === resetButtonId) {
+    mb.window.webContents.send('gitify:reset-app');
+    mb.app.quit();
   }
-
-  mb.window.webContents.send('gitify:reset-app');
-  mb.app.quit();
 }
