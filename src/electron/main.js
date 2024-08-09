@@ -239,13 +239,13 @@ app.whenReady().then(async () => {
   autoUpdater.on('update-available', () => {
     log.info('Auto Updater: New update available');
     updateAvailableMenuItem.visible = true;
-    mb.tray.setToolTip('Gitify - New update available 🚀');
+    mb.tray.setToolTip('Gitify\nA new update is available');
   });
 
   autoUpdater.on('update-downloaded', () => {
     log.info('Auto Updater: Update downloaded');
     updateReadyForInstallMenuItem.visible = true;
-    mb.tray.setToolTip('Gitify - New update ready for install 🚀');
+    mb.tray.setToolTip('Gitify\nA new update is ready to install');
   });
 
   autoUpdater.on('update-not-available', () => {
