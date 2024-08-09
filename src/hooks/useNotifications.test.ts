@@ -2,6 +2,7 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 import axios, { AxiosError } from 'axios';
 import nock from 'nock';
 
+import log from 'electron-log';
 import {
   mockAuth,
   mockGitHubCloudAccount,
@@ -16,10 +17,13 @@ import { Errors } from '../utils/constants';
 import { useNotifications } from './useNotifications';
 
 describe('hooks/useNotifications.ts', () => {
+  const logErrorSpy = jest.spyOn(log, 'error').mockImplementation();
+
   beforeEach(() => {
     // axios will default to using the XHR adapter which can't be intercepted
     // by nock. So, configure axios to use the node adapter.
     axios.defaults.adapter = 'http';
+    logErrorSpy.mockReset();
   });
 
   const id = mockSingleNotification.id;
@@ -294,6 +298,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.globalError).toBe(Errors.BAD_CREDENTIALS);
+      expect(logErrorSpy).toHaveBeenCalledTimes(2);
     });
 
     it('should fetch notifications with different failures', async () => {
@@ -336,6 +341,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.globalError).toBeNull();
+      expect(logErrorSpy).toHaveBeenCalledTimes(2);
     });
   });
 
@@ -374,6 +380,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
+      expect(logErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -412,6 +419,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
+      expect(logErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -470,6 +478,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
+      expect(logErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -516,6 +525,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
+      expect(logErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
 

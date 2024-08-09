@@ -226,7 +226,7 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
     const response = (await apiRequestAuth(url, 'GET', token)).data;
     return response.html_url;
   } catch (err) {
-    log.error('Failed to get html url');
+    log.error('Error occurred while fetching notification html url', err);
   }
 }
 
@@ -272,5 +272,10 @@ export async function getLatestDiscussion(
         (discussion) => discussion.title === notification.subject.title,
       )[0] ?? null
     );
-  } catch (err) {}
+  } catch (err) {
+    log.error(
+      'Error occurred while fetching notification latest discussion',
+      err,
+    );
+  }
 }
