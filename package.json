@@ -117,7 +117,8 @@
     "react-router-dom": "6.26.0",
     "tailwind-merge": "2.4.0",
     "ts-loader": "9.5.1",
-    "typescript": "5.5.4"
+    "typescript": "5.5.4",
+    "update-electron-app": "3.0.0"
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
