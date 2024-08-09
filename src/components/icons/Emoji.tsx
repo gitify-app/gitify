@@ -1,6 +1,7 @@
 import path from 'node:path';
 import twemoji from '@discordapp/twemoji';
 import type { FC } from 'react';
+import { getDirectoryPath } from '../../utils/helpers';
 
 export interface IEmoji {
   emoji: string;
@@ -19,7 +20,8 @@ export const Emoji: FC<IEmoji> = (props: IEmoji) => {
     ext: '.svg',
     callback: (icon: string, options: TwemojiOptions, _variant: string) => {
       const source = path.resolve(
-        `${__dirname}/../../node_modules/@discordapp/twemoji/dist`,
+        getDirectoryPath(),
+        '../../node_modules/@discordapp/twemoji/dist',
       );
 
       return ''.concat(source, '/', options.size, '/', icon, options.ext);

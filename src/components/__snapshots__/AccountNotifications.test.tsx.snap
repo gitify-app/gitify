@@ -79,7 +79,7 @@ exports[`components/AccountNotifications.tsx should render itself - account erro
               alt="🔥"
               class="emoji"
               draggable="false"
-              src="/Users/asetch/Documents/dev/GitHub/gitify-app/gitify/src/node_modules/@discordapp/twemoji/dist/svg/1f525.svg"
+              src="/mocked/node_modules/@discordapp/twemoji/dist/svg/1f525.svg"
             />
           </span>
         </div>
@@ -171,7 +171,7 @@ exports[`components/AccountNotifications.tsx should render itself - account erro
             alt="🔥"
             class="emoji"
             draggable="false"
-            src="/Users/asetch/Documents/dev/GitHub/gitify-app/gitify/src/node_modules/@discordapp/twemoji/dist/svg/1f525.svg"
+            src="/mocked/node_modules/@discordapp/twemoji/dist/svg/1f525.svg"
           />
         </span>
       </div>
@@ -1436,7 +1436,7 @@ exports[`components/AccountNotifications.tsx should render itself - no notificat
               alt="🎊"
               class="emoji"
               draggable="false"
-              src="/Users/asetch/Documents/dev/GitHub/gitify-app/gitify/src/node_modules/@discordapp/twemoji/dist/svg/1f38a.svg"
+              src="/mocked/node_modules/@discordapp/twemoji/dist/svg/1f38a.svg"
             />
           </span>
         </div>
@@ -1523,7 +1523,7 @@ exports[`components/AccountNotifications.tsx should render itself - no notificat
             alt="🎊"
             class="emoji"
             draggable="false"
-            src="/Users/asetch/Documents/dev/GitHub/gitify-app/gitify/src/node_modules/@discordapp/twemoji/dist/svg/1f38a.svg"
+            src="/mocked/node_modules/@discordapp/twemoji/dist/svg/1f38a.svg"
           />
         </span>
       </div>

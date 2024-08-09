@@ -1,5 +1,6 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { mockGitHubCloudAccount, mockSettings } from '../__mocks__/state-mocks';
+import { mockDirectoryPath } from '../__mocks__/utils';
 import { AppContext } from '../context/App';
 import { GroupBy } from '../types';
 import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
@@ -15,6 +16,8 @@ describe('components/AccountNotifications.tsx', () => {
   // Have to make it consistent so the emojis are always the same
   beforeEach(() => {
     global.Math.random = jest.fn(() => 0.1);
+
+    mockDirectoryPath();
   });
 
   it('should render itself - group notifications by repositories', () => {
