@@ -78,38 +78,18 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
             <div
               class="mt-3 text-xs text-gray-700 dark:text-gray-200"
             >
-              <div
-                class="mt-1 italic"
-              >
-                Change only if you are using GitHub Enterprise Server.
-              </div>
-            </div>
-          </div>
-          <div
-            class="mb-4"
-          >
-            <label
-              class="mb-2 block text-sm font-semibold tracking-wide"
-              for="token"
-            >
-              Token
-            </label>
-            <input
-              class="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
-              id="token"
-              name="token"
-              placeholder="The 40 characters token generated on GitHub"
-              type="text"
-              value=""
-            />
-            <div
-              class="mt-3 text-xs text-gray-700 dark:text-gray-200"
-            >
               <div>
-                <div>
+                <div
+                  class="mt-1 italic"
+                >
+                  Change only if you are using GitHub Enterprise Server.
+                </div>
+                <div
+                  class="mt-3"
+                >
                   <button
                     aria-label="Generate a PAT"
-                    class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
+                    class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-7 rounded-md px-2 py-1"
                     icon="[object Object]"
                   >
                     <svg
@@ -131,23 +111,48 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
                   <span
                     class="mx-1"
                   >
-                    on GitHub and paste above.
+                    on GitHub then paste your
+                     
+                    <span
+                      class="italic"
+                    >
+                      token
+                    </span>
+                     below.
                   </span>
                 </div>
                 <div
                   class="mt-1 italic"
                 >
-                  The required scopes will be selected for you.
+                  The required scopes will be automatically selected for you.
                 </div>
               </div>
             </div>
+          </div>
+          <div
+            class="mb-4"
+          >
+            <label
+              class="mb-2 block text-sm font-semibold tracking-wide"
+              for="token"
+            >
+              Token
+            </label>
+            <input
+              class="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
+              id="token"
+              name="token"
+              placeholder="The 40 characters token generated on GitHub"
+              type="text"
+              value=""
+            />
           </div>
           <div
             class="flex items-end justify-between mt-2"
           >
             <button
               aria-label="GitHub Docs"
-              class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
+              class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-7 rounded-md px-2 py-1"
               icon="[object Object]"
             >
               <svg
@@ -268,38 +273,18 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
           <div
             class="mt-3 text-xs text-gray-700 dark:text-gray-200"
           >
-            <div
-              class="mt-1 italic"
-            >
-              Change only if you are using GitHub Enterprise Server.
-            </div>
-          </div>
-        </div>
-        <div
-          class="mb-4"
-        >
-          <label
-            class="mb-2 block text-sm font-semibold tracking-wide"
-            for="token"
-          >
-            Token
-          </label>
-          <input
-            class="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
-            id="token"
-            name="token"
-            placeholder="The 40 characters token generated on GitHub"
-            type="text"
-            value=""
-          />
-          <div
-            class="mt-3 text-xs text-gray-700 dark:text-gray-200"
-          >
             <div>
-              <div>
+              <div
+                class="mt-1 italic"
+              >
+                Change only if you are using GitHub Enterprise Server.
+              </div>
+              <div
+                class="mt-3"
+              >
                 <button
                   aria-label="Generate a PAT"
-                  class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
+                  class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-7 rounded-md px-2 py-1"
                   icon="[object Object]"
                 >
                   <svg
@@ -321,23 +306,48 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
                 <span
                   class="mx-1"
                 >
-                  on GitHub and paste above.
+                  on GitHub then paste your
+                   
+                  <span
+                    class="italic"
+                  >
+                    token
+                  </span>
+                   below.
                 </span>
               </div>
               <div
                 class="mt-1 italic"
               >
-                The required scopes will be selected for you.
+                The required scopes will be automatically selected for you.
               </div>
             </div>
           </div>
+        </div>
+        <div
+          class="mb-4"
+        >
+          <label
+            class="mb-2 block text-sm font-semibold tracking-wide"
+            for="token"
+          >
+            Token
+          </label>
+          <input
+            class="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
+            id="token"
+            name="token"
+            placeholder="The 40 characters token generated on GitHub"
+            type="text"
+            value=""
+          />
         </div>
         <div
           class="flex items-end justify-between mt-2"
         >
           <button
             aria-label="GitHub Docs"
-            class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap rounded text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 min-w-20 h-10 px-4 py-1"
+            class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-7 rounded-md px-2 py-1"
             icon="[object Object]"
           >
             <svg
