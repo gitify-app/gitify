@@ -1,3 +1,4 @@
+import log from 'electron-log';
 import { useCallback, useState } from 'react';
 import type {
   AccountNotifications,
@@ -109,10 +110,11 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-        setStatus('success');
       } catch (err) {
-        setStatus('success');
+        log.error('Error occurred while marking notification as read', err);
       }
+
+      setStatus('success');
     },
     [notifications],
   );
@@ -138,10 +140,11 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-        setStatus('success');
       } catch (err) {
-        setStatus('success');
+        log.error('Error occurred while marking notification as done', err);
       }
+
+      setStatus('success');
     },
     [notifications],
   );
@@ -157,10 +160,14 @@ export const useNotifications = (): NotificationsState => {
           notification.account.token,
         );
         await markNotificationRead(state, notification);
-        setStatus('success');
       } catch (err) {
-        setStatus('success');
+        log.error(
+          'Error occurred while unsubscribing from notification thread',
+          err,
+        );
       }
+
+      setStatus('success');
     },
     [markNotificationRead],
   );
@@ -187,10 +194,14 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-        setStatus('success');
       } catch (err) {
-        setStatus('success');
+        log.error(
+          'Error occurred while marking repository notifications as read',
+          err,
+        );
       }
+
+      setStatus('success');
     },
     [notifications],
   );
@@ -230,10 +241,14 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-        setStatus('success');
       } catch (err) {
-        setStatus('success');
+        log.error(
+          'Error occurred while marking repository notifications as done',
+          err,
+        );
       }
+
+      setStatus('success');
     },
     [notifications, markNotificationDone],
   );

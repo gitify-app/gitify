@@ -1,4 +1,5 @@
 import { BookIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
+import log from 'electron-log';
 import { type FC, useCallback, useContext } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { Header } from '../components/Header';
@@ -120,6 +121,7 @@ export const LoginWithOAuthApp: FC = () => {
       try {
         await loginWithOAuthApp(data as LoginOAuthAppOptions);
       } catch (err) {
+        log.error('Auth: Failed to login with oauth app', err);
         // Skip
       }
     },

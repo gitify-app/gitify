@@ -1,3 +1,4 @@
+import log from 'electron-log';
 import type {
   AccountNotifications,
   GitifyState,
@@ -148,6 +149,10 @@ export async function getAllNotifications(
             error: null,
           };
         } catch (error) {
+          log.error(
+            'Error occurred while fetching account notifications',
+            error,
+          );
           return {
             account: accountNotifications.account,
             notifications: [],
