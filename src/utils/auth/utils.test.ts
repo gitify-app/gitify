@@ -338,4 +338,37 @@ describe('utils/auth/utils.ts', () => {
       expect(auth.isValidToken('1234567890asdfg' as Token)).toBeFalsy();
     });
   });
+
+  describe('hasAccounts', () => {
+    it('should return true', () => {
+      expect(auth.hasAccounts(mockAuth)).toBeTruthy();
+    });
+
+    it('should validate false', () => {
+      expect(
+        auth.hasAccounts({
+          accounts: [],
+        }),
+      ).toBeFalsy();
+    });
+  });
+
+  describe('hasMultipleAccounts', () => {
+    it('should return true', () => {
+      expect(auth.hasMultipleAccounts(mockAuth)).toBeTruthy();
+    });
+
+    it('should validate false', () => {
+      expect(
+        auth.hasMultipleAccounts({
+          accounts: [],
+        }),
+      ).toBeFalsy();
+      expect(
+        auth.hasMultipleAccounts({
+          accounts: [mockGitHubCloudAccount],
+        }),
+      ).toBeFalsy();
+    });
+  });
 });

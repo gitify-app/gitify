@@ -1,7 +1,11 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { webFrame } from 'electron';
 import { MemoryRouter } from 'react-router-dom';
-import { mockAuth, mockSettings } from '../../__mocks__/state-mocks';
+import {
+  mockAuth,
+  mockGitHubAppAccount,
+  mockSettings,
+} from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
 import { AppearanceSettings } from './AppearanceSettings';
 
@@ -200,7 +204,9 @@ describe('routes/components/settings/AppearanceSettings.tsx', () => {
       render(
         <AppContext.Provider
           value={{
-            auth: mockAuth,
+            auth: {
+              accounts: [mockGitHubAppAccount],
+            },
             settings: mockSettings,
             updateSetting,
           }}

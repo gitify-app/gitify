@@ -327,7 +327,9 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           class="flex items-center"
         >
           <input
+            checked=""
             class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
+            disabled=""
             id="showAccountHostname"
             type="checkbox"
           />
@@ -337,6 +339,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="showAccountHostname"
+              style="text-decoration: line-through;"
             >
               Show account hostname
             </label>
