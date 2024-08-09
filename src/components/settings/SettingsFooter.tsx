@@ -1,23 +1,12 @@
-import {
-  AlertFillIcon,
-  CheckCircleFillIcon,
-  PersonIcon,
-  XCircleIcon,
-} from '@primer/octicons-react';
+import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
 import { type FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BUTTON_CLASS_NAME } from '../../styles/gitify';
-import { IconColor, Size } from '../../types';
+import { Size } from '../../types';
 import { getAppVersion, quitApp } from '../../utils/comms';
 import { openGitifyReleaseNotes } from '../../utils/links';
 
-interface ISettingsFooter {
-  isUpdateAvailable?: boolean;
-}
-
-export const SettingsFooter: FC<ISettingsFooter> = ({
-  isUpdateAvailable = false,
-}: ISettingsFooter) => {
+export const SettingsFooter: FC = () => {
   const [appVersion, setAppVersion] = useState<string | null>(null);
   const navigate = useNavigate();
 
@@ -42,23 +31,6 @@ export const SettingsFooter: FC<ISettingsFooter> = ({
       >
         <div className="flex items-center gap-1">
           <span aria-label="app-version">Gitify {appVersion}</span>
-          <span className="pb-1">
-            {isUpdateAvailable ? (
-              <span title="New version available">
-                <AlertFillIcon
-                  size={Size.XSMALL}
-                  className={IconColor.YELLOW}
-                />
-              </span>
-            ) : (
-              <span title="You are using the latest version">
-                <CheckCircleFillIcon
-                  size={Size.XSMALL}
-                  className={IconColor.GREEN}
-                />
-              </span>
-            )}
-          </span>
         </div>
       </button>
       <div>

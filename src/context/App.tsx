@@ -46,7 +46,7 @@ import { clearState, loadState, saveState } from '../utils/storage';
 import { setTheme } from '../utils/theme';
 import { zoomPercentageToLevel } from '../utils/zoom';
 
-const defaultAuth: AuthState = {
+export const defaultAuth: AuthState = {
   accounts: [],
   token: null,
   enterpriseAccounts: [],
@@ -164,8 +164,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     ipcRenderer.on('gitify:reset-app', () => {
-      setAuth(defaultAuth);
       clearState();
+      setAuth(defaultAuth);
+      setSettings(defaultSettings);
     });
   }, []);
 
