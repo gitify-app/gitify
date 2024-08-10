@@ -1,6 +1,6 @@
 import { type FC, useMemo } from 'react';
 import type { GitifyError } from '../types';
-import { Emoji } from './icons/Emoji';
+import { EmojiText } from './EmojiText';
 
 interface IOops {
   error: GitifyError;
@@ -15,7 +15,7 @@ export const Oops: FC<IOops> = ({ error }: IOops) => {
   return (
     <div className="flex flex-1 flex-col items-center justify-center p-4">
       <div className="mt-2 mb-5 text-5xl">
-        <Emoji emoji={emoji} />
+        <EmojiText text={`${emoji} foo`} />
       </div>
 
       <div className="mb-2 text-xl font-semibold">{error.title}</div>
