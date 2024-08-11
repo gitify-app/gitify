@@ -107,7 +107,7 @@
     "clsx": "2.1.1",
     "date-fns": "3.6.0",
     "electron-log": "5.1.7",
-    "electron-updater": "6.3.2",
+    "electron-updater": "6.3.3",
     "final-form": "4.20.10",
     "menubar": "9.5.0",
     "nprogress": "0.2.0",
