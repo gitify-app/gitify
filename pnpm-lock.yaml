@@ -54,8 +54,8 @@ importers:
         specifier: 6.26.0
         version: 6.26.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-merge:
-        specifier: 2.4.0
-        version: 2.4.0
+        specifier: 2.5.0
+        version: 2.5.0
       ts-loader:
         specifier: 9.5.1
         version: 9.5.1(typescript@5.5.4)(webpack@5.93.0(webpack-cli@5.1.4))
@@ -2894,8 +2894,8 @@ packages:
   symbol-tree@3.2.4:
     resolution: {integrity: sha512-9QNk5KwDF+Bvz+PyObkmSYjI5ksVUYtjW7AU22r2NKcfLJcXp96hkDWU3+XndOsUb+AQ9QhfzfCT2O+CNWT5Tw==}
 
-  tailwind-merge@2.4.0:
-    resolution: {integrity: sha512-49AwoOQNKdqKPd9CViyH5wJoSKsCDjUlzL8DxuGp3P1FsGY36NJDAa18jLZcaHAUUuTj+JB8IAo8zWgBNvBF7A==}
+  tailwind-merge@2.5.0:
+    resolution: {integrity: sha512-a6Q/isR5XAo9IR7Hjh80BQDkn8PG9ONJpSO/U3vGzdKyKG125lPHNXdiPfeQ5X0EOG0qKlS/0qnxdBYkLlD6tA==}
 
   tailwindcss@3.4.7:
     resolution: {integrity: sha512-rxWZbe87YJb4OcSopb7up2Ba4U82BoiSGUdoDr3Ydrg9ckxFS/YWsvhN323GMcddgU65QRy7JndC7ahhInhvlQ==}
@@ -6430,7 +6430,7 @@ snapshots:
 
   symbol-tree@3.2.4: {}
 
-  tailwind-merge@2.4.0: {}
+  tailwind-merge@2.5.0: {}
 
   tailwindcss@3.4.7(ts-node@10.9.2(@types/node@20.14.14)(typescript@5.5.4)):
     dependencies:
