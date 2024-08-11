@@ -17,6 +17,7 @@ import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
 import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
 
+// TODO - Refactor our OAuth2 flow to use system browser and local app gitify://callback - see #485 #561
 export function authGitHub(
   authOptions = Constants.DEFAULT_AUTH_OPTIONS,
 ): Promise<AuthResponse> {

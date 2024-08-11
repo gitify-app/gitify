@@ -1,4 +1,5 @@
 import { BookIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
+import log from 'electron-log';
 import { type FC, useCallback, useContext, useState } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
@@ -125,6 +126,7 @@ export const LoginWithPersonalAccessToken: FC = () => {
         );
         navigate(-1);
       } catch (err) {
+        log.error('Auth: failed to login with personal access token', err);
         setIsValidToken(false);
       }
     },

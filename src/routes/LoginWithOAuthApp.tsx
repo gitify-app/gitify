@@ -1,6 +1,8 @@
 import { BookIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
+import log from 'electron-log';
 import { type FC, useCallback, useContext } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Button } from '../components/buttons/Button';
 import { FieldInput } from '../components/fields/FieldInput';
@@ -58,6 +60,8 @@ export const validate = (values: IValues): IFormErrors => {
 };
 
 export const LoginWithOAuthApp: FC = () => {
+  const navigate = useNavigate();
+
   const { loginWithOAuthApp } = useContext(AppContext);
 
   const renderForm = (formProps: FormRenderProps) => {
@@ -119,8 +123,9 @@ export const LoginWithOAuthApp: FC = () => {
     async (data: IValues) => {
       try {
         await loginWithOAuthApp(data as LoginOAuthAppOptions);
+        navigate('/', { replace: true });
       } catch (err) {
-        // Skip
+        log.error('Auth: Failed to login with oauth app', err);
       }
     },
     [loginWithOAuthApp],
