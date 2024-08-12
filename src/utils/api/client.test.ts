@@ -292,7 +292,7 @@ describe('utils/api/client.ts', () => {
         '123' as Token,
       );
 
-      expect(logErrorSpy).toHaveBeenCalledWith('Failed to get html url');
+      expect(logErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
 });

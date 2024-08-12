@@ -1,13 +1,10 @@
 import { render } from '@testing-library/react';
-import { mockDirectoryPath } from '../__mocks__/utils';
+import { ensureStableEmojis, mockDirectoryPath } from '../__mocks__/utils';
 import { AllRead } from './AllRead';
 
 describe('components/AllRead.tsx', () => {
-  // The read emoji randomly rotates, but then the snapshots would never match
-  // Have to make it consistent so the emojis are always the same
   beforeEach(() => {
-    global.Math.random = jest.fn(() => 0.1);
-
+    ensureStableEmojis();
     mockDirectoryPath();
   });
 
