@@ -5,6 +5,7 @@ import {
   type GitifyUser,
   GroupBy,
   type Hostname,
+  type Link,
   OpenPreference,
   type SettingsState,
   Theme,
@@ -24,6 +25,7 @@ export const mockGitifyUser: GitifyUser = {
   login: 'octocat',
   name: 'Mona Lisa Octocat',
   id: 123456789,
+  avatar: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
 };
 
 export const mockPersonalAccessTokenAccount: Account = {

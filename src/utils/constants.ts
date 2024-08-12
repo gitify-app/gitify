@@ -21,7 +21,8 @@ export const Constants = {
 
   ALL_READ_EMOJIS: ['🎉', '🎊', '🥳', '👏', '🙌', '😎', '🏖️', '🚀', '✨', '🏆'],
 
-  FETCH_INTERVAL: 60000,
+  FETCH_NOTIFICATIONS_INTERVAL: 60000,
+  REFRESH_ACCOUNTS_INTERVAL: 3600000,
 
   DEFAULT_KEYBOARD_SHORTCUT: 'CommandOrControl+Shift+G',
 

@@ -23,7 +23,7 @@ export const LoginRoute: FC = () => {
     try {
       await login();
     } catch (err) {
-      // Skip
+      log.error('Auth: failed to login with GitHub', err);
     }
   }, []); */
 

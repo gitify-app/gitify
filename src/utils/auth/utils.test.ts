@@ -1,6 +1,12 @@
 import remote from '@electron/remote';
+import axios from 'axios';
 import type { AxiosPromise, AxiosResponse } from 'axios';
-import { mockAuth, mockGitHubCloudAccount } from '../../__mocks__/state-mocks';
+import nock from 'nock';
+import {
+  mockAuth,
+  mockGitHubCloudAccount,
+  mockGitifyUser,
+} from '../../__mocks__/state-mocks';
 import type {
   Account,
   AuthCode,
@@ -118,11 +124,21 @@ describe('utils/auth/utils.ts', () => {
       mockAuthState = {
         accounts: [],
       };
+
+      // axios will default to using the XHR adapter which can't be intercepted
+      // by nock. So, configure axios to use the node adapter.
+      axios.defaults.adapter = 'http';
     });
 
     describe('should add GitHub Cloud account', () => {
-      it('should add personal access token account', () => {
-        const result = auth.addAccount(
+      beforeEach(() => {
+        nock('https://api.github.com')
+          .get('/user')
+          .reply(200, { ...mockGitifyUser, avatar_url: mockGitifyUser.avatar });
+      });
+
+      it('should add personal access token account', async () => {
+        const result = await auth.addAccount(
           mockAuthState,
           'Personal Access Token',
           '123-456' as Token,
@@ -135,13 +151,14 @@ describe('utils/auth/utils.ts', () => {
             method: 'Personal Access Token',
             platform: 'GitHub Cloud',
             token: '123-456' as Token,
-            user: undefined,
+            user: mockGitifyUser,
+            version: 'latest',
           },
         ]);
       });
 
-      it('should add oauth app account', () => {
-        const result = auth.addAccount(
+      it('should add oauth app account', async () => {
+        const result = await auth.addAccount(
           mockAuthState,
           'OAuth App',
           '123-456' as Token,
@@ -154,15 +171,26 @@ describe('utils/auth/utils.ts', () => {
             method: 'OAuth App',
             platform: 'GitHub Cloud',
             token: '123-456' as Token,
-            user: undefined,
+            user: mockGitifyUser,
+            version: 'latest',
           },
         ]);
       });
     });
 
     describe('should add GitHub Enterprise Server account', () => {
-      it('should add personal access token account', () => {
-        const result = auth.addAccount(
+      beforeEach(() => {
+        nock('https://github.gitify.io/api/v3')
+          .get('/user')
+          .reply(
+            200,
+            { ...mockGitifyUser, avatar_url: mockGitifyUser.avatar },
+            { 'x-github-enterprise-version': '3.0.0' },
+          );
+      });
+
+      it('should add personal access token account', async () => {
+        const result = await auth.addAccount(
           mockAuthState,
           'Personal Access Token',
           '123-456' as Token,
@@ -175,13 +203,14 @@ describe('utils/auth/utils.ts', () => {
             method: 'Personal Access Token',
             platform: 'GitHub Enterprise Server',
             token: '123-456' as Token,
-            user: undefined,
+            user: mockGitifyUser,
+            version: '3.0.0',
           },
         ]);
       });
 
-      it('should add oauth app account', () => {
-        const result = auth.addAccount(
+      it('should add oauth app account', async () => {
+        const result = await auth.addAccount(
           mockAuthState,
           'OAuth App',
           '123-456' as Token,
@@ -194,7 +223,8 @@ describe('utils/auth/utils.ts', () => {
             method: 'OAuth App',
             platform: 'GitHub Enterprise Server',
             token: '123-456' as Token,
-            user: undefined,
+            user: mockGitifyUser,
+            version: '3.0.0',
           },
         ]);
       });

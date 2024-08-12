@@ -1,4 +1,5 @@
 import { BookIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
+import log from 'electron-log';
 import { type FC, useCallback, useContext } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { Header } from '../components/Header';
@@ -76,6 +77,7 @@ export const LoginWithOAuthApp: FC = () => {
                 disabled={!values.hostname}
                 icon={{ icon: PersonIcon, size: Size.XSMALL }}
                 url={getNewOAuthAppURL(values.hostname)}
+                size="xs"
               >
                 Create new OAuth App
               </Button>
@@ -100,7 +102,10 @@ export const LoginWithOAuthApp: FC = () => {
             className="mt-2"
             icon={{ icon: BookIcon, size: Size.XSMALL }}
             url={Constants.GITHUB_DOCS.OAUTH_URL}
-          />
+            size="xs"
+          >
+            Docs
+          </Button>
 
           <Button
             name="Login"
@@ -109,7 +114,9 @@ export const LoginWithOAuthApp: FC = () => {
             icon={{ icon: SignInIcon, size: Size.MEDIUM }}
             disabled={submitting || pristine}
             type="submit"
-          />
+          >
+            Login
+          </Button>
         </div>
       </form>
     );
@@ -120,6 +127,7 @@ export const LoginWithOAuthApp: FC = () => {
       try {
         await loginWithOAuthApp(data as LoginOAuthAppOptions);
       } catch (err) {
+        log.error('Auth: Failed to login with oauth app', err);
         // Skip
       }
     },
