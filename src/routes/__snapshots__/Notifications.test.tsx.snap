@@ -414,7 +414,7 @@ exports[`routes/Notifications.tsx should render itself & its children (error con
 }
 `;
 
-exports[`routes/Notifications.tsx should render itself & its children (show account hostname) 1`] = `
+exports[`routes/Notifications.tsx should render itself & its children (show account header) 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

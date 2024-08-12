@@ -195,7 +195,7 @@ describe('routes/components/settings/AppearanceSettings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('showNumber', false);
   });
 
-  it('should toggle account hostname checkbox', async () => {
+  it('should toggle account header checkbox', async () => {
     await act(async () => {
       render(
         <AppContext.Provider
@@ -212,11 +212,11 @@ describe('routes/components/settings/AppearanceSettings.tsx', () => {
       );
     });
 
-    await screen.findByLabelText('Show account hostname');
+    await screen.findByLabelText('Show account header');
 
-    fireEvent.click(screen.getByLabelText('Show account hostname'));
+    fireEvent.click(screen.getByLabelText('Show account header'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
-    expect(updateSetting).toHaveBeenCalledWith('showAccountHostname', true);
+    expect(updateSetting).toHaveBeenCalledWith('showAccountHeader', true);
   });
 });

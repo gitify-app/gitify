@@ -59,7 +59,7 @@ const defaultAppearanceSettings = {
   detailedNotifications: true,
   showPills: true,
   showNumber: true,
-  showAccountHostname: false,
+  showAccountHeader: false,
 };
 
 const defaultNotificationSettings = {

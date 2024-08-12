@@ -80,7 +80,7 @@ const mockAppearanceSettings = {
   detailedNotifications: true,
   showPills: true,
   showNumber: true,
-  showAccountHostname: false,
+  showAccountHeader: false,
 };
 
 const mockNotificationSettings = {

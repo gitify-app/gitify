@@ -196,11 +196,11 @@ export const AppearanceSettings: FC = () => {
         }
       />
       <Checkbox
-        name="showAccountHostname"
-        label="Show account hostname"
-        checked={settings.showAccountHostname}
+        name="showAccountHeader"
+        label="Show account header"
+        checked={settings.showAccountHeader}
         onChange={(evt) =>
-          updateSetting('showAccountHostname', evt.target.checked)
+          updateSetting('showAccountHeader', evt.target.checked)
         }
       />
     </fieldset>

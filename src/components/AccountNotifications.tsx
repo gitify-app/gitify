@@ -29,13 +29,13 @@ interface IAccountNotifications {
   account: Account;
   notifications: Notification[];
   error: GitifyError | null;
-  showAccountHostname: boolean;
+  showAccountHeader: boolean;
 }
 
 export const AccountNotifications: FC<IAccountNotifications> = (
   props: IAccountNotifications,
 ) => {
-  const { account, showAccountHostname, notifications } = props;
+  const { account, showAccountHeader, notifications } = props;
 
   const { settings } = useContext(AppContext);
 
@@ -81,7 +81,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
 
   return (
     <>
-      {showAccountHostname && (
+      {showAccountHeader && (
         <div
           className={cn(
             'group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white',
