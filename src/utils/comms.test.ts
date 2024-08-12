@@ -72,6 +72,16 @@ describe('utils/comms.ts', () => {
     });
   });
 
+  it('should use default open preference if user settings not found', () => {
+    jest.spyOn(storage, 'loadState').mockReturnValue({ settings: null });
+
+    openExternalLink('https://www.gitify.io/' as Link);
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(shell.openExternal).toHaveBeenCalledWith('https://www.gitify.io/', {
+      activate: true,
+    });
+  });
+
   it('should ignore opening external local links file:///', () => {
     openExternalLink('file:///Applications/SomeApp.app' as Link);
     expect(shell.openExternal).toHaveBeenCalledTimes(0);

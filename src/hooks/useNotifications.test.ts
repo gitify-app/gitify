@@ -2,6 +2,7 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 import axios, { AxiosError } from 'axios';
 import nock from 'nock';
 
+import log from 'electron-log';
 import {
   mockAuth,
   mockGitHubCloudAccount,
@@ -16,10 +17,13 @@ import { Errors } from '../utils/constants';
 import { useNotifications } from './useNotifications';
 
 describe('hooks/useNotifications.ts', () => {
+  const logErrorSpy = jest.spyOn(log, 'error').mockImplementation();
+
   beforeEach(() => {
     // axios will default to using the XHR adapter which can't be intercepted
     // by nock. So, configure axios to use the node adapter.
     axios.defaults.adapter = 'http';
+    logErrorSpy.mockReset();
   });
 
   const id = mockSingleNotification.id;
@@ -294,6 +298,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.globalError).toBe(Errors.BAD_CREDENTIALS);
+      expect(logErrorSpy).toHaveBeenCalledTimes(2);
     });
 
     it('should fetch notifications with different failures', async () => {
@@ -336,6 +341,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.globalError).toBeNull();
+      expect(logErrorSpy).toHaveBeenCalledTimes(2);
     });
   });
 
@@ -374,6 +380,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
+      expect(logErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -412,6 +419,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
+      expect(logErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
 
@@ -470,13 +478,14 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
+      expect(logErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('markRepoNotificationsRead', () => {
     const repoSlug = 'gitify-app/notifications-test';
 
-    it("should mark a repository's notifications as read with success", async () => {
+    it('should mark repository notifications as read with success', async () => {
       nock('https://api.github.com/')
         .put(`/repos/${repoSlug}/notifications`)
         .reply(200);
@@ -497,7 +506,7 @@ describe('hooks/useNotifications.ts', () => {
       expect(result.current.notifications.length).toBe(0);
     });
 
-    it("should mark a repository's notifications as read with failure", async () => {
+    it('should mark repository notifications as read with failure', async () => {
       nock('https://api.github.com/')
         .put(`/repos/${repoSlug}/notifications`)
         .reply(400);
@@ -516,11 +525,12 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.notifications.length).toBe(0);
+      expect(logErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
 
   describe('markRepoNotificationsDone', () => {
-    it("should mark a repository's notifications as done with success", async () => {
+    it('should mark repository notifications as done with success', async () => {
       nock('https://api.github.com/')
         .delete(`/notifications/threads/${id}`)
         .reply(200);
@@ -541,7 +551,7 @@ describe('hooks/useNotifications.ts', () => {
       expect(result.current.notifications.length).toBe(0);
     });
 
-    it("should mark a repository's notifications as done with failure", async () => {
+    it('should mark repository notifications as done with failure', async () => {
       nock('https://api.github.com/')
         .delete(`/notifications/threads/${id}`)
         .reply(400);

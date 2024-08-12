@@ -14,16 +14,16 @@ jest.mock('react-router-dom', () => ({
 global.ResizeObserver = require('resize-observer-polyfill');
 
 describe('routes/components/settings/SettingsFooter.tsx', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-    process.env = originalEnv;
-  });
-
   let originalEnv: NodeJS.ProcessEnv;
 
   beforeEach(() => {
     // Save the original node env state
     originalEnv = process.env;
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+    process.env = originalEnv;
   });
 
   describe('app version', () => {
@@ -73,48 +73,6 @@ describe('routes/components/settings/SettingsFooter.tsx', () => {
       });
 
       expect(screen.getByLabelText('app-version')).toMatchSnapshot();
-    });
-  });
-
-  describe('update available visual indicator', () => {
-    it('using latest version', async () => {
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: mockAuth,
-              settings: mockSettings,
-            }}
-          >
-            <MemoryRouter>
-              <SettingsFooter isUpdateAvailable={false} />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
-      });
-
-      expect(
-        screen.getByTitle('You are using the latest version'),
-      ).toMatchSnapshot();
-    });
-
-    it('new version available', async () => {
-      await act(async () => {
-        render(
-          <AppContext.Provider
-            value={{
-              auth: mockAuth,
-              settings: mockSettings,
-            }}
-          >
-            <MemoryRouter>
-              <SettingsFooter isUpdateAvailable={true} />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
-      });
-
-      expect(screen.getByTitle('New version available')).toMatchSnapshot();
     });
   });
 

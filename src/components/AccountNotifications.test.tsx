@@ -1,5 +1,6 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { mockGitHubCloudAccount, mockSettings } from '../__mocks__/state-mocks';
+import { ensureStableEmojis } from '../__mocks__/utils';
 import { AppContext } from '../context/App';
 import { GroupBy } from '../types';
 import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
@@ -11,10 +12,8 @@ jest.mock('./RepositoryNotifications', () => ({
 }));
 
 describe('components/AccountNotifications.tsx', () => {
-  // The read emoji randomly rotates, but then the snapshots would never match
-  // Have to make it consistent so the emojis are always the same
   beforeEach(() => {
-    global.Math.random = jest.fn(() => 0.1);
+    ensureStableEmojis();
   });
 
   it('should render itself - group notifications by repositories', () => {
