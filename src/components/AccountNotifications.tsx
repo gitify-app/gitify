@@ -2,19 +2,27 @@ import {
   ChevronDownIcon,
   ChevronLeftIcon,
   ChevronUpIcon,
+  FeedPersonIcon,
+  GitPullRequestIcon,
+  IssueOpenedIcon,
 } from '@primer/octicons-react';
 import { type FC, type MouseEvent, useContext, useMemo, useState } from 'react';
 import { AppContext } from '../context/App';
 import { type Account, type GitifyError, Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
-import { openAccountProfile } from '../utils/links';
+import {
+  openAccountProfile,
+  openGitHubIssues,
+  openGitHubPulls,
+} from '../utils/links';
 import { AllRead } from './AllRead';
 import { HoverGroup } from './HoverGroup';
 import { NotificationRow } from './NotificationRow';
 import { Oops } from './Oops';
 import { RepositoryNotifications } from './RepositoryNotifications';
 import { InteractionButton } from './buttons/InteractionButton';
+import { AvatarIcon } from './icons/AvatarIcon';
 import { PlatformIcon } from './icons/PlatformIcon';
 
 interface IAccountNotifications {
@@ -85,8 +93,13 @@ export const AccountNotifications: FC<IAccountNotifications> = (
           onClick={toggleAccountNotifications}
         >
           <div className="flex">
-            <div className="mr-3 flex items-center justify-center">
-              <PlatformIcon type={account.platform} size={Size.MEDIUM} />
+            <div className="mr-2 flex items-center justify-center">
+              <AvatarIcon
+                title={account.user.login}
+                url={account.user.avatar}
+                size={Size.SMALL}
+                defaultIcon={FeedPersonIcon}
+              />
             </div>
             <button
               type="button"
@@ -101,6 +114,19 @@ export const AccountNotifications: FC<IAccountNotifications> = (
             </button>
           </div>
           <HoverGroup>
+            <PlatformIcon type={account.platform} size={Size.SMALL} />
+            <InteractionButton
+              title="My Issues"
+              icon={IssueOpenedIcon}
+              size={Size.SMALL}
+              onClick={() => openGitHubIssues(account.hostname)}
+            />
+            <InteractionButton
+              title="My Pull Requests"
+              icon={GitPullRequestIcon}
+              size={Size.SMALL}
+              onClick={() => openGitHubPulls(account.hostname)}
+            />
             <InteractionButton
               title={toggleAccountNotificationsLabel}
               icon={ChevronIcon}

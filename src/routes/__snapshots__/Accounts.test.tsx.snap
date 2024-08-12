@@ -68,17 +68,23 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
         >
           <div>
             <button
-              class="mb-1 cursor-pointer text-sm font-semibold"
+              class="flex flex-1 gap-2 items-center justify-center mb-1 cursor-pointer text-sm font-semibold"
               title="Open Profile"
               type="button"
             >
+              <img
+                alt="octocat's avatar"
+                class="rounded-full object-cover size-6"
+                src="https://avatars.githubusercontent.com/u/583231?v=4"
+              />
               @
               octocat
               <span
-                class="pl-1 text-xs font-medium italic"
+                class="text-xs font-medium italic"
               >
-                - 
+                (
                 Mona Lisa Octocat
+                )
               </span>
             </button>
           </div>
@@ -143,7 +149,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
         </div>
         <div>
           <button
-            class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none cursor-default"
+            class="hover:text-gray-500 py-1 my-1 mx-2 focus:outline-none px-0 cursor-default"
             title="Primary account"
             type="button"
           >
@@ -164,7 +170,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
             </svg>
           </button>
           <button
-            class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
+            class="hover:text-gray-500 py-1 my-1 mx-2 focus:outline-none px-0"
             hidden=""
             title="Set as primary account"
             type="button"
@@ -186,7 +192,28 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
             </svg>
           </button>
           <button
-            class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
+            class="hover:text-gray-500 py-1 my-1 mx-2 focus:outline-none px-0"
+            title="Refresh octocat"
+            type="button"
+          >
+            <svg
+              aria-label="Refresh octocat"
+              class="octicon octicon-sync"
+              fill="currentColor"
+              focusable="false"
+              height="20"
+              role="img"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              viewBox="0 0 16 16"
+              width="20"
+            >
+              <path
+                d="M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z"
+              />
+            </svg>
+          </button>
+          <button
+            class="hover:text-gray-500 py-1 my-1 mx-2 focus:outline-none px-0"
             title="Logout octocat"
             type="button"
           >
@@ -216,17 +243,23 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
         >
           <div>
             <button
-              class="mb-1 cursor-pointer text-sm font-semibold"
+              class="flex flex-1 gap-2 items-center justify-center mb-1 cursor-pointer text-sm font-semibold"
               title="Open Profile"
               type="button"
             >
+              <img
+                alt="octocat's avatar"
+                class="rounded-full object-cover size-6"
+                src="https://avatars.githubusercontent.com/u/583231?v=4"
+              />
               @
               octocat
               <span
-                class="pl-1 text-xs font-medium italic"
+                class="text-xs font-medium italic"
               >
-                - 
+                (
                 Mona Lisa Octocat
+                )
               </span>
             </button>
           </div>
@@ -291,7 +324,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
         </div>
         <div>
           <button
-            class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none cursor-default"
+            class="hover:text-gray-500 py-1 my-1 mx-2 focus:outline-none px-0 cursor-default"
             hidden=""
             title="Primary account"
             type="button"
@@ -313,7 +346,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
             </svg>
           </button>
           <button
-            class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
+            class="hover:text-gray-500 py-1 my-1 mx-2 focus:outline-none px-0"
             title="Set as primary account"
             type="button"
           >
@@ -334,7 +367,28 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
             </svg>
           </button>
           <button
-            class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
+            class="hover:text-gray-500 py-1 my-1 mx-2 focus:outline-none px-0"
+            title="Refresh octocat"
+            type="button"
+          >
+            <svg
+              aria-label="Refresh octocat"
+              class="octicon octicon-sync"
+              fill="currentColor"
+              focusable="false"
+              height="20"
+              role="img"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              viewBox="0 0 16 16"
+              width="20"
+            >
+              <path
+                d="M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z"
+              />
+            </svg>
+          </button>
+          <button
+            class="hover:text-gray-500 py-1 my-1 mx-2 focus:outline-none px-0"
             title="Logout octocat"
             type="button"
           >
@@ -364,17 +418,23 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
         >
           <div>
             <button
-              class="mb-1 cursor-pointer text-sm font-semibold"
+              class="flex flex-1 gap-2 items-center justify-center mb-1 cursor-pointer text-sm font-semibold"
               title="Open Profile"
               type="button"
             >
+              <img
+                alt="octocat's avatar"
+                class="rounded-full object-cover size-6"
+                src="https://avatars.githubusercontent.com/u/583231?v=4"
+              />
               @
               octocat
               <span
-                class="pl-1 text-xs font-medium italic"
+                class="text-xs font-medium italic"
               >
-                - 
+                (
                 Mona Lisa Octocat
+                )
               </span>
             </button>
           </div>
@@ -439,7 +499,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
         </div>
         <div>
           <button
-            class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none cursor-default"
+            class="hover:text-gray-500 py-1 my-1 mx-2 focus:outline-none px-0 cursor-default"
             hidden=""
             title="Primary account"
             type="button"
@@ -461,7 +521,7 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
             </svg>
           </button>
           <button
-            class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
+            class="hover:text-gray-500 py-1 my-1 mx-2 focus:outline-none px-0"
             title="Set as primary account"
             type="button"
           >
@@ -482,7 +542,28 @@ exports[`routes/Accounts.tsx General should render itself & its children 1`] = `
             </svg>
           </button>
           <button
-            class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
+            class="hover:text-gray-500 py-1 my-1 mx-2 focus:outline-none px-0"
+            title="Refresh octocat"
+            type="button"
+          >
+            <svg
+              aria-label="Refresh octocat"
+              class="octicon octicon-sync"
+              fill="currentColor"
+              focusable="false"
+              height="20"
+              role="img"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              viewBox="0 0 16 16"
+              width="20"
+            >
+              <path
+                d="M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z"
+              />
+            </svg>
+          </button>
+          <button
+            class="hover:text-gray-500 py-1 my-1 mx-2 focus:outline-none px-0"
             title="Logout octocat"
             type="button"
           >
