@@ -101,6 +101,7 @@ interface AppContextState {
   notifications: AccountNotifications[];
   status: Status;
   globalError: GitifyError;
+  removeAccountNotifications: (account: Account) => Promise<void>;
   fetchNotifications: () => Promise<void>;
   markNotificationRead: (notification: Notification) => Promise<void>;
   markNotificationDone: (notification: Notification) => Promise<void>;
@@ -120,6 +121,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [auth, setAuth] = useState<AuthState>(defaultAuth);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
   const {
+    removeAccountNotifications,
     fetchNotifications,
     notifications,
     globalError,
@@ -130,7 +132,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     markRepoNotificationsRead,
     markRepoNotificationsDone,
   } = useNotifications();
-
+  getNotificationCount;
   useEffect(() => {
     restoreSettings();
   }, []);
@@ -239,6 +241,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const logoutFromAccount = useCallback(
     async (account: Account) => {
+      // Remove notifications for account
+      removeAccountNotifications(account);
+
+      // Remove from auth state
+
       const updatedAuth = removeAccount(auth, account);
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
