@@ -86,7 +86,7 @@ export const Sidebar: FC = () => {
 
         <SidebarButton
           title={`${notificationsCount} Unread Notifications`}
-          metric={notificationsCount}
+          metric={isLoggedIn ? notificationsCount : null}
           icon={BellIcon}
           onClick={() => openGitHubNotifications(primaryAccountHostname)}
         />
