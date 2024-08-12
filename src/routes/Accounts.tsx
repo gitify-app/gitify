@@ -115,7 +115,7 @@ export const AccountsRoute: FC = () => {
               <div>
                 <button
                   type="button"
-                  className={cn(BUTTON_CLASS_NAME, 'cursor-default')}
+                  className={cn(BUTTON_CLASS_NAME, 'px-0', 'cursor-default')}
                   title="Primary account"
                   hidden={i !== 0}
                 >
@@ -127,7 +127,7 @@ export const AccountsRoute: FC = () => {
                 </button>
                 <button
                   type="button"
-                  className={BUTTON_CLASS_NAME}
+                  className={cn(BUTTON_CLASS_NAME, 'px-0')}
                   title="Set as primary account"
                   onClick={() => setAsPrimaryAccount(account)}
                   hidden={i === 0}
@@ -140,7 +140,7 @@ export const AccountsRoute: FC = () => {
                 </button>
                 <button
                   type="button"
-                  className={BUTTON_CLASS_NAME}
+                  className={cn(BUTTON_CLASS_NAME, 'px-0')}
                   title={`Refresh ${account.user.login}`}
                   onClick={async () => {
                     await refreshAccount(account);
@@ -154,7 +154,7 @@ export const AccountsRoute: FC = () => {
                 </button>
                 <button
                   type="button"
-                  className={BUTTON_CLASS_NAME}
+                  className={cn(BUTTON_CLASS_NAME, 'px-0')}
                   title={`Logout ${account.user.login}`}
                   onClick={() => logoutAccount(account)}
                 >
