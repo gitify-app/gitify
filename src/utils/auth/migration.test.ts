@@ -84,7 +84,9 @@ describe('utils/auth/migration.ts', () => {
 
   describe('convertAccounts', () => {
     it('should convert accounts - personal access token only', async () => {
-      nock('https://api.github.com').get('/user').reply(200, mockGitifyUser);
+      nock('https://api.github.com')
+        .get('/user')
+        .reply(200, { ...mockGitifyUser, avatar_url: mockGitifyUser.avatar });
 
       const result = await convertAccounts({
         token: mockToken,
@@ -105,7 +107,7 @@ describe('utils/auth/migration.ts', () => {
     it('should convert accounts - oauth app only', async () => {
       nock('https://github.gitify.io/api/v3')
         .get('/user')
-        .reply(200, mockGitifyUser);
+        .reply(200, { ...mockGitifyUser, avatar_url: mockGitifyUser.avatar });
 
       const result = await convertAccounts({
         enterpriseAccounts: [
@@ -125,10 +127,12 @@ describe('utils/auth/migration.ts', () => {
     });
 
     it('should convert accounts - combination', async () => {
-      nock('https://api.github.com').get('/user').reply(200, mockGitifyUser);
+      nock('https://api.github.com')
+        .get('/user')
+        .reply(200, { ...mockGitifyUser, avatar_url: mockGitifyUser.avatar });
       nock('https://github.gitify.io/api/v3')
         .get('/user')
-        .reply(200, mockGitifyUser);
+        .reply(200, { ...mockGitifyUser, avatar_url: mockGitifyUser.avatar });
 
       const result = await convertAccounts({
         token: mockToken,

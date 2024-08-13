@@ -32,7 +32,7 @@ import {
   addAccount,
   authGitHub,
   getToken,
-  getUserData,
+  refreshAccount,
   removeAccount,
 } from '../utils/auth/utils';
 import {
@@ -101,6 +101,7 @@ interface AppContextState {
   notifications: AccountNotifications[];
   status: Status;
   globalError: GitifyError;
+  removeAccountNotifications: (account: Account) => Promise<void>;
   fetchNotifications: () => Promise<void>;
   markNotificationRead: (notification: Notification) => Promise<void>;
   markNotificationDone: (notification: Notification) => Promise<void>;
@@ -120,6 +121,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [auth, setAuth] = useState<AuthState>(defaultAuth);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
   const {
+    removeAccountNotifications,
     fetchNotifications,
     notifications,
     globalError,
@@ -130,7 +132,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     markRepoNotificationsRead,
     markRepoNotificationsDone,
   } = useNotifications();
-
+  getNotificationCount;
   useEffect(() => {
     restoreSettings();
   }, []);
@@ -146,7 +148,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   useInterval(() => {
     fetchNotifications({ auth, settings });
-  }, Constants.FETCH_INTERVAL);
+  }, Constants.FETCH_NOTIFICATIONS_INTERVAL);
+
+  useInterval(() => {
+    for (const account of auth.accounts) {
+      refreshAccount(account);
+    }
+  }, Constants.REFRESH_ACCOUNTS_INTERVAL);
 
   useEffect(() => {
     const count = getNotificationCount(notifications);
@@ -202,8 +210,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     const { authCode } = await authGitHub();
     const { token } = await getToken(authCode);
     const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
-    const user = await getUserData(token, hostname);
-    const updatedAuth = addAccount(auth, 'GitHub App', token, hostname, user);
+    const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
     setAuth(updatedAuth);
     saveState({ auth: updatedAuth, settings });
   }, [auth, settings]);
@@ -212,8 +219,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     async (data: LoginOAuthAppOptions) => {
       const { authOptions, authCode } = await authGitHub(data);
       const { token, hostname } = await getToken(authCode, authOptions);
-      const user = await getUserData(token, hostname);
-      const updatedAuth = addAccount(auth, 'OAuth App', token, hostname, user);
+      const updatedAuth = await addAccount(auth, 'OAuth App', token, hostname);
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
@@ -223,13 +229,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const loginWithPersonalAccessToken = useCallback(
     async ({ token, hostname }: LoginPersonalAccessTokenOptions) => {
       await headNotifications(hostname, token);
-      const user = await getUserData(token, hostname);
-      const updatedAuth = addAccount(
+      const updatedAuth = await addAccount(
         auth,
         'Personal Access Token',
         token,
         hostname,
-        user,
       );
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
@@ -239,6 +243,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const logoutFromAccount = useCallback(
     async (account: Account) => {
+      // Remove notifications for account
+      removeAccountNotifications(account);
+
+      // Remove from auth state
       const updatedAuth = removeAccount(auth, account);
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
@@ -248,11 +256,15 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const restoreSettings = useCallback(async () => {
     await migrateAuthenticatedAccounts();
-
     const existing = loadState();
 
     if (existing.auth) {
       setAuth({ ...defaultAuth, ...existing.auth });
+
+      // Refresh account data on app start
+      for (const account of existing.auth.accounts) {
+        await refreshAccount(account);
+      }
     }
 
     if (existing.settings) {
@@ -261,14 +273,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       webFrame.setZoomLevel(
         zoomPercentageToLevel(existing.settings.zoomPercentage),
       );
-      return existing.settings;
-    }
-
-    for (const account of auth.accounts.filter(
-      (a) => a.platform === 'GitHub Enterprise Server',
-    )) {
-      const res = await headNotifications(account.hostname, account.token);
-      account.version = res.headers['x-github-enterprise-version'];
     }
   }, []);
 

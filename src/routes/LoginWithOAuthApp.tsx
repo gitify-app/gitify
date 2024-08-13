@@ -80,6 +80,7 @@ export const LoginWithOAuthApp: FC = () => {
                 disabled={!values.hostname}
                 icon={{ icon: PersonIcon, size: Size.XSMALL }}
                 url={getNewOAuthAppURL(values.hostname)}
+                size="xs"
               >
                 Create new OAuth App
               </Button>
@@ -104,7 +105,10 @@ export const LoginWithOAuthApp: FC = () => {
             className="mt-2"
             icon={{ icon: BookIcon, size: Size.XSMALL }}
             url={Constants.GITHUB_DOCS.OAUTH_URL}
-          />
+            size="xs"
+          >
+            Docs
+          </Button>
 
           <Button
             name="Login"
@@ -113,7 +117,9 @@ export const LoginWithOAuthApp: FC = () => {
             icon={{ icon: SignInIcon, size: Size.MEDIUM }}
             disabled={submitting || pristine}
             type="submit"
-          />
+          >
+            Login
+          </Button>
         </div>
       </form>
     );

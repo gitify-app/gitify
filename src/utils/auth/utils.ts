@@ -1,5 +1,6 @@
 import { BrowserWindow } from '@electron/remote';
 import { format } from 'date-fns';
+import log from 'electron-log';
 import type {
   Account,
   AuthCode,
@@ -99,6 +100,7 @@ export async function getUserData(
     id: response.id,
     login: response.login,
     name: response.name,
+    avatar: response.avatar_url,
   };
 }
 
@@ -121,24 +123,23 @@ export async function getToken(
   };
 }
 
-export function addAccount(
+export async function addAccount(
   auth: AuthState,
   method: AuthMethod,
   token: Token,
   hostname: Hostname,
-  user?: GitifyUser,
-): AuthState {
+): Promise<AuthState> {
+  let newAccount = {
+    hostname: hostname,
+    method: method,
+    platform: getPlatformFromHostname(hostname),
+    token: token,
+  } as Account;
+
+  newAccount = await refreshAccount(newAccount);
+
   return {
-    accounts: [
-      ...auth.accounts,
-      {
-        hostname: hostname,
-        method: method,
-        platform: getPlatformFromHostname(hostname),
-        token: token,
-        user: user,
-      },
-    ],
+    accounts: [...auth.accounts, newAccount],
   };
 }
 
@@ -150,6 +151,27 @@ export function removeAccount(auth: AuthState, account: Account): AuthState {
   return {
     accounts: updatedAccounts,
   };
+}
+
+export async function refreshAccount(account: Account): Promise<Account> {
+  try {
+    const res = await getAuthenticatedUser(account.hostname, account.token);
+
+    // Refresh user data
+    account.user = {
+      id: res.data.id,
+      login: res.data.login,
+      name: res.data.name,
+      avatar: res.data.avatar_url,
+    };
+
+    // Refresh platform version
+    account.version = res.headers['x-github-enterprise-version'] ?? 'latest';
+  } catch (error) {
+    log.error('Failed to refresh account', error);
+  }
+
+  return account;
 }
 
 export function getDeveloperSettingsURL(account: Account): Link {
