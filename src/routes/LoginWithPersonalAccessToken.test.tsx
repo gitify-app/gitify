@@ -20,7 +20,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/LoginWithPersonalAccessToken.tsx', () => {
-  const mockValidateToken = jest.fn();
+  const mockLoginWithPersonalAccessToken = jest.fn();
   const openExternalLinkMock = jest
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
@@ -75,7 +75,9 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
     it('should be disabled if no hostname configured', async () => {
       render(
         <AppContext.Provider
-          value={{ loginWithPersonalAccessToken: mockValidateToken }}
+          value={{
+            loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
+          }}
         >
           <MemoryRouter>
             <LoginWithPersonalAccessToken />
@@ -95,7 +97,9 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
     it('should open in browser if hostname configured', async () => {
       render(
         <AppContext.Provider
-          value={{ loginWithPersonalAccessToken: mockValidateToken }}
+          value={{
+            loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
+          }}
         >
           <MemoryRouter>
             <LoginWithPersonalAccessToken />
@@ -110,11 +114,13 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
   });
 
   it('should login using a token - success', async () => {
-    mockValidateToken.mockResolvedValueOnce(null);
+    mockLoginWithPersonalAccessToken.mockResolvedValueOnce(null);
 
     render(
       <AppContext.Provider
-        value={{ loginWithPersonalAccessToken: mockValidateToken }}
+        value={{
+          loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
+        }}
       >
         <MemoryRouter>
           <LoginWithPersonalAccessToken />
@@ -131,18 +137,22 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
 
     fireEvent.submit(screen.getByLabelText('Login'));
 
-    await waitFor(() => expect(mockValidateToken).toHaveBeenCalledTimes(1));
+    await waitFor(() =>
+      expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1),
+    );
 
-    expect(mockValidateToken).toHaveBeenCalledTimes(1);
+    expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
   it('should login using a token - failure', async () => {
-    mockValidateToken.mockRejectedValueOnce(null);
+    mockLoginWithPersonalAccessToken.mockRejectedValueOnce(null);
 
     render(
       <AppContext.Provider
-        value={{ loginWithPersonalAccessToken: mockValidateToken }}
+        value={{
+          loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
+        }}
       >
         <MemoryRouter>
           <LoginWithPersonalAccessToken />
@@ -160,9 +170,11 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
       fireEvent.submit(screen.getByLabelText('Login'));
     });
 
-    await waitFor(() => expect(mockValidateToken).toHaveBeenCalledTimes(1));
+    await waitFor(() =>
+      expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1),
+    );
 
-    expect(mockValidateToken).toHaveBeenCalledTimes(1);
+    expect(mockLoginWithPersonalAccessToken).toHaveBeenCalledTimes(1);
     expect(mockNavigate).toHaveBeenCalledTimes(0);
   });
 
@@ -189,7 +201,9 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
   it('should open help docs in the browser', async () => {
     render(
       <AppContext.Provider
-        value={{ loginWithPersonalAccessToken: mockValidateToken }}
+        value={{
+          loginWithPersonalAccessToken: mockLoginWithPersonalAccessToken,
+        }}
       >
         <MemoryRouter>
           <LoginWithPersonalAccessToken />

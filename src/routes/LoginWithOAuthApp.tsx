@@ -129,7 +129,7 @@ export const LoginWithOAuthApp: FC = () => {
     async (data: IValues) => {
       try {
         await loginWithOAuthApp(data as LoginOAuthAppOptions);
-        navigate('/', { replace: true });
+        navigate(-1);
       } catch (err) {
         log.error('Auth: Failed to login with oauth app', err);
       }
