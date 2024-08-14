@@ -328,7 +328,7 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
         >
           <input
             class="size-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500 cursor-pointer"
-            id="showAccountHostname"
+            id="showAccountHeader"
             type="checkbox"
           />
           <div
@@ -336,9 +336,9 @@ exports[`routes/Settings.tsx should render itself & its children 1`] = `
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
-              for="showAccountHostname"
+              for="showAccountHeader"
             >
-              Show account hostname
+              Show account header
             </label>
           </div>
         </div>
