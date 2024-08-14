@@ -1,5 +1,6 @@
-import { KeyIcon, PersonIcon } from '@primer/octicons-react';
-import { type FC, useContext, useEffect } from 'react';
+import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
+import log from 'electron-log';
+import { type FC, useCallback, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/buttons/Button';
 import { LogoIcon } from '../components/icons/LogoIcon';
@@ -9,7 +10,7 @@ import { showWindow } from '../utils/comms';
 
 export const LoginRoute: FC = () => {
   const navigate = useNavigate();
-  const { isLoggedIn } = useContext(AppContext);
+  const { loginWithGitHubApp, isLoggedIn } = useContext(AppContext);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -18,14 +19,13 @@ export const LoginRoute: FC = () => {
     }
   }, [isLoggedIn]);
 
-  // FIXME: Temporarily disable Login with GitHub (OAuth) as it's currently broken and requires a rewrite - see #485 #561 #747
-  /* const loginUser = useCallback(async () => {
+  const loginUser = useCallback(async () => {
     try {
-      await login();
+      await loginWithGitHubApp();
     } catch (err) {
       log.error('Auth: failed to login with GitHub', err);
     }
-  }, []); */
+  }, [loginWithGitHubApp]);
 
   return (
     <div className="flex flex-1 flex-col items-center justify-center p-4">
@@ -36,18 +36,16 @@ export const LoginRoute: FC = () => {
       </div>
 
       <div className="text-center text-sm font-semibold italic">Login with</div>
-      {
-        // FIXME: Temporarily disable Login with GitHub (OAuth) as it's currently broken and requires a rewrite - see #485 #561 #747
-        /*    
-       <Button
+
+      <Button
         name="GitHub"
-        icon={MarkGitHubIcon}
+        icon={{ icon: MarkGithubIcon }}
         label="Login with GitHub"
-        class="w-50 px-2 py-2 my-2 text-xs"
-        onClick={loginUser}
-      />  
-      */
-      }
+        className="mt-2 py-2"
+        onClick={() => loginUser()}
+      >
+        GitHub
+      </Button>
 
       <Button
         icon={{ icon: KeyIcon }}
