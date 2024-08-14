@@ -69,7 +69,7 @@ interface AppearanceSettingsState {
   theme: Theme;
   zoomPercentage: number;
   detailedNotifications: boolean;
-  showAccountHostname: boolean;
+  showAccountHeader: boolean;
   showPills: boolean;
   showNumber: boolean;
 }

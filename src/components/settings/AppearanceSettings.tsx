@@ -197,12 +197,12 @@ export const AppearanceSettings: FC = () => {
         }
       />
       <Checkbox
-        name="showAccountHostname"
-        label="Show account hostname"
-        checked={settings.showAccountHostname || hasMultipleAccounts(auth)}
+        name="showAccountHeader"
+        label="Show account header"
+        checked={settings.showAccountHeader || hasMultipleAccounts(auth)}
         disabled={hasMultipleAccounts(auth)}
         onChange={(evt) =>
-          updateSetting('showAccountHostname', evt.target.checked)
+          updateSetting('showAccountHeader', evt.target.checked)
         }
       />
     </fieldset>

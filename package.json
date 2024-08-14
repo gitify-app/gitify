@@ -102,7 +102,7 @@
   "dependencies": {
     "@electron/remote": "2.1.2",
     "@primer/octicons-react": "19.11.0",
-    "axios": "1.7.3",
+    "axios": "1.7.4",
     "class-variance-authority": "0.7.0",
     "clsx": "2.1.1",
     "date-fns": "3.6.0",
@@ -115,7 +115,7 @@
     "react-dom": "18.3.1",
     "react-final-form": "6.5.9",
     "react-router-dom": "6.26.0",
-    "tailwind-merge": "2.5.0",
+    "tailwind-merge": "2.5.2",
     "ts-loader": "9.5.1",
     "typescript": "5.5.4",
     "update-electron-app": "3.0.0"

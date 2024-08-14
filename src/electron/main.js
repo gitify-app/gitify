@@ -17,10 +17,6 @@ const { autoUpdater } = require('electron-updater');
 const { updateElectronApp } = require('update-electron-app');
 
 log.initialize();
-
-// TODO: Remove @electron/remote use - see #650
-require('@electron/remote/main').initialize();
-
 // Tray Icons
 const idleIcon = path.resolve(
   `${__dirname}/../../assets/images/tray-idleTemplate.png`,
@@ -123,6 +119,13 @@ app.whenReady().then(async () => {
 
   mb.on('ready', () => {
     mb.app.setAppUserModelId('com.electron.gitify');
+
+    /**
+     * TODO: Remove @electron/remote use - see #650
+     * GitHub OAuth 2 Login Flows - Enable Remote Browser Window Launch
+     */
+    require('@electron/remote/main').initialize();
+    require('@electron/remote/main').enable(mb.window.webContents);
 
     // Tray configuration
     mb.tray.setToolTip('Gitify');

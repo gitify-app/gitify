@@ -37,12 +37,12 @@ describe('routes/Notifications.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself & its children (show account hostname)', () => {
+  it('should render itself & its children (show account header)', () => {
     const tree = render(
       <AppContext.Provider
         value={{
           notifications: [mockAccountNotifications[0]],
-          settings: { ...mockSettings, showAccountHostname: true },
+          settings: { ...mockSettings, showAccountHeader: true },
         }}
       >
         <NotificationsRoute />
