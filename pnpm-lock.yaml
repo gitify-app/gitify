@@ -17,9 +17,6 @@ importers:
       '@primer/octicons-react':
         specifier: 19.11.0
         version: 19.11.0(react@18.3.1)
-      '@twemoji/api':
-        specifier: 15.1.0
-        version: 15.1.0
       axios:
         specifier: 1.7.4
         version: 1.7.4
@@ -628,14 +625,8 @@ packages:
   '@tsconfig/node16@1.0.4':
     resolution: {integrity: sha512-vxhUy4J8lyeyinH7Azl1pdd43GJhZH/tP2weN8TntQblOY+A0XbT8DJk1/oCPuOOyg/Ja757rG0CgHcWC8OfMA==}
 
-  '@twemoji/api@15.1.0':
-    resolution: {integrity: sha512-CySXR4/e6vY0z9lC2tW9EVjsH6zzz2/LQvLRMwwpHsDI4xcaweSIP+LcESf1Mq7w2/zcrrhG4ozniMvpSsEXag==}
-
   '@twemoji/parser@15.0.0':
     resolution: {integrity: sha512-lh9515BNsvKSNvyUqbj5yFu83iIDQ77SwVcsN/SnEGawczhsKU6qWuogewN1GweTi5Imo5ToQ9s+nNTf97IXvg==}
-
-  '@twemoji/parser@15.1.0':
-    resolution: {integrity: sha512-3HTiSxPvkWUJ4kZeCvwyKlIwkpTUfBOk6igpBBRQni58ceQMv5YK4smkc8vX/eqOlMMNER/9qobv+Q6Q8LVrqA==}
 
   '@types/aria-query@5.0.4':
     resolution: {integrity: sha512-rfT93uj5s0PRL7EzccGMs3brplhcrghnDoV26NqKhCAS1hVo+WdNsPvE/yb6ilfr5hi2MEk6d5EWJTKdxg8jVw==}
@@ -3893,16 +3884,7 @@ snapshots:
 
   '@tsconfig/node16@1.0.4': {}
 
-  '@twemoji/api@15.1.0':
-    dependencies:
-      '@twemoji/parser': 15.1.0
-      fs-extra: 8.1.0
-      jsonfile: 5.0.0
-      universalify: 0.1.2
-
   '@twemoji/parser@15.0.0': {}
-
-  '@twemoji/parser@15.1.0': {}
 
   '@types/aria-query@5.0.4': {}
 
