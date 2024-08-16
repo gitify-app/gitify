@@ -131,7 +131,7 @@
     "@types/react-router-dom": "5.3.3",
     "autoprefixer": "10.4.20",
     "css-loader": "7.1.2",
-    "electron": "31.3.1",
+    "electron": "31.4.0",
     "electron-builder": "24.13.3",
     "graphql-tag": "2.12.6",
     "husky": "9.1.4",
