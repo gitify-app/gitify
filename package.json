@@ -115,7 +115,7 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "react-final-form": "6.5.9",
-    "react-router-dom": "6.26.0",
+    "react-router-dom": "6.26.1",
     "tailwind-merge": "2.5.2",
     "ts-loader": "9.5.1",
     "typescript": "5.5.4",
@@ -123,7 +123,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.8.3",
-    "@electron/notarize": "2.3.2",
+    "@electron/notarize": "2.4.0",
     "@testing-library/react": "16.0.0",
     "@types/jest": "29.5.12",
     "@types/node": "20.14.15",
@@ -132,7 +132,7 @@
     "@types/react-router-dom": "5.3.3",
     "autoprefixer": "10.4.20",
     "css-loader": "7.1.2",
-    "electron": "31.3.1",
+    "electron": "31.4.0",
     "electron-builder": "24.13.3",
     "graphql-tag": "2.12.6",
     "husky": "9.1.4",
@@ -144,14 +144,14 @@
     "resize-observer-polyfill": "1.5.1",
     "rimraf": "6.0.1",
     "style-loader": "4.0.0",
-    "tailwindcss": "3.4.9",
+    "tailwindcss": "3.4.10",
     "ts-jest": "29.2.4",
     "ts-node": "10.9.2",
     "webpack": "5.93.0",
     "webpack-cli": "5.1.4",
     "webpack-merge": "6.0.1"
   },
-  "packageManager": "pnpm@9.7.0",
+  "packageManager": "pnpm@9.7.1",
   "lint-staged": {
     "*": "biome check --fix --no-errors-on-unmatched",
     "*.{js,ts,tsx}": "pnpm test -- --findRelatedTests -u --passWithNoTests"

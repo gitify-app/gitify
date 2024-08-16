@@ -241,3 +241,11 @@ export function isValidToken(token: Token) {
 export function getAccountUUID(account: Account): string {
   return btoa(`${account.hostname}-${account.user.id}-${account.method}`);
 }
+
+export function hasAccounts(auth: AuthState) {
+  return auth.accounts.length > 0;
+}
+
+export function hasMultipleAccounts(auth: AuthState) {
+  return auth.accounts.length > 1;
+}

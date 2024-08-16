@@ -42,9 +42,7 @@ export const NotificationsRoute: FC = () => {
           account={accountNotifications.account}
           notifications={accountNotifications.notifications}
           error={accountNotifications.error}
-          showAccountHostname={
-            hasMultipleAccounts || settings.showAccountHostname
-          }
+          showAccountHeader={hasMultipleAccounts || settings.showAccountHeader}
         />
       ))}
     </div>

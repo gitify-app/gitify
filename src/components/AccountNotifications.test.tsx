@@ -21,7 +21,7 @@ describe('components/AccountNotifications.tsx', () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: mockGitHubNotifications,
-      showAccountHostname: true,
+      showAccountHeader: true,
       error: null,
     };
 
@@ -39,7 +39,7 @@ describe('components/AccountNotifications.tsx', () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: mockGitHubNotifications,
-      showAccountHostname: true,
+      showAccountHeader: true,
       error: null,
     };
 
@@ -57,7 +57,7 @@ describe('components/AccountNotifications.tsx', () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: [],
-      showAccountHostname: true,
+      showAccountHeader: true,
       error: null,
     };
 
@@ -78,7 +78,7 @@ describe('components/AccountNotifications.tsx', () => {
         descriptions: ['Error description'],
         emojis: ['🔥'],
       },
-      showAccountHostname: true,
+      showAccountHeader: true,
     };
 
     const tree = render(
@@ -97,7 +97,7 @@ describe('components/AccountNotifications.tsx', () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: [],
-      showAccountHostname: true,
+      showAccountHeader: true,
       error: null,
     };
 
@@ -123,7 +123,7 @@ describe('components/AccountNotifications.tsx', () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: [],
-      showAccountHostname: true,
+      showAccountHeader: true,
       error: null,
     };
 
@@ -151,7 +151,7 @@ describe('components/AccountNotifications.tsx', () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: [],
-      showAccountHostname: true,
+      showAccountHeader: true,
       error: null,
     };
 
@@ -175,7 +175,7 @@ describe('components/AccountNotifications.tsx', () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: mockGitHubNotifications,
-      showAccountHostname: true,
+      showAccountHeader: true,
       error: null,
     };
 

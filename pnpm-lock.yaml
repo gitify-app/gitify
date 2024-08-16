@@ -13,7 +13,7 @@ importers:
         version: 15.0.3
       '@electron/remote':
         specifier: 2.1.2
-        version: 2.1.2(electron@31.3.1)
+        version: 2.1.2(electron@31.4.0)
       '@primer/octicons-react':
         specifier: 19.11.0
         version: 19.11.0(react@18.3.1)
@@ -40,7 +40,7 @@ importers:
         version: 4.20.10
       menubar:
         specifier: 9.5.0
-        version: 9.5.0(electron@31.3.1)
+        version: 9.5.0(electron@31.4.0)
       nprogress:
         specifier: 0.2.0
         version: 0.2.0
@@ -54,8 +54,8 @@ importers:
         specifier: 6.5.9
         version: 6.5.9(final-form@4.20.10)(react@18.3.1)
       react-router-dom:
-        specifier: 6.26.0
-        version: 6.26.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+        specifier: 6.26.1
+        version: 6.26.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       tailwind-merge:
         specifier: 2.5.2
         version: 2.5.2
@@ -73,8 +73,8 @@ importers:
         specifier: 1.8.3
         version: 1.8.3
       '@electron/notarize':
-        specifier: 2.3.2
-        version: 2.3.2
+        specifier: 2.4.0
+        version: 2.4.0
       '@testing-library/react':
         specifier: 16.0.0
         version: 16.0.0(@testing-library/dom@10.0.0)(@types/react-dom@18.2.22)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -100,8 +100,8 @@ importers:
         specifier: 7.1.2
         version: 7.1.2(webpack@5.93.0(webpack-cli@5.1.4))
       electron:
-        specifier: 31.3.1
-        version: 31.3.1
+        specifier: 31.4.0
+        version: 31.4.0
       electron-builder:
         specifier: 24.13.3
         version: 24.13.3(electron-builder-squirrel-windows@24.13.3(dmg-builder@24.13.3))
@@ -136,8 +136,8 @@ importers:
         specifier: 4.0.0
         version: 4.0.0(webpack@5.93.0(webpack-cli@5.1.4))
       tailwindcss:
-        specifier: 3.4.9
-        version: 3.4.9(ts-node@10.9.2(@types/node@20.14.15)(typescript@5.5.4))
+        specifier: 3.4.10
+        version: 3.4.10(ts-node@10.9.2(@types/node@20.14.15)(typescript@5.5.4))
       ts-jest:
         specifier: 29.2.4
         version: 29.2.4(@babel/core@7.24.3)(@jest/transform@29.7.0)(@jest/types@29.6.3)(babel-jest@29.7.0(@babel/core@7.24.3))(jest@29.7.0(@types/node@20.14.15)(ts-node@10.9.2(@types/node@20.14.15)(typescript@5.5.4)))(typescript@5.5.4)
@@ -419,8 +419,8 @@ packages:
     resolution: {integrity: sha512-aL+bFMIkpR0cmmj5Zgy0LMKEpgy43/hw5zadEArgmAMWWlKc5buwFvFT9G/o/YJkvXAJm5q3iuTuLaiaXW39sg==}
     engines: {node: '>= 10.0.0'}
 
-  '@electron/notarize@2.3.2':
-    resolution: {integrity: sha512-zfayxCe19euNwRycCty1C7lF7snk9YwfRpB5M8GLr1a4ICH63znxaPNAubrMvj0yDvVozqfgsdYpXVUnpWBDpg==}
+  '@electron/notarize@2.4.0':
+    resolution: {integrity: sha512-ArHnRPIJJGrmV+uWNQSINAht+cM4gAo3uA3WFI54bYF93mzmD15gzhPQ0Dd+v/fkMhnRiiIO8NNkGdn87Vsy0g==}
     engines: {node: '>= 10.0.0'}
 
   '@electron/osx-sign@1.0.5':
@@ -569,8 +569,8 @@ packages:
     peerDependencies:
       react: '>=16.3'
 
-  '@remix-run/router@1.19.0':
-    resolution: {integrity: sha512-zDICCLKEwbVYTS6TjYaWtHXxkdoUvD/QXvyVZjGCsWz5vyH7aFeONlPffPdW+Y/t6KT0MgXb2Mfjun9YpWN1dA==}
+  '@remix-run/router@1.19.1':
+    resolution: {integrity: sha512-S45oynt/WH19bHbIXjtli6QmwNYvaz+vtnubvNpNDvUOoA/OWh6j1OikIP3G+v5GHdxyC6EXoChG3HgYGEUfcg==}
     engines: {node: '>=14.0.0'}
 
   '@sinclair/typebox@0.27.8':
@@ -1415,8 +1415,8 @@ packages:
   electron-updater@6.3.3:
     resolution: {integrity: sha512-Kj1u6kfyxUyatnspvKa6qhGn82rMZfUD03WOvCGJ12PyRss/AC8kkYsN9IrJihKTlN8nRwTjZ1JM2UUXoD0KsA==}
 
-  electron@31.3.1:
-    resolution: {integrity: sha512-9fiuWlRhBfygtcT+auRd/WdBK/f8LZZcrpx0RjpXhH2DPTP/PfnkC4JB1PW55qCbGbh4wAgkYbf4ExIag8oGCA==}
+  electron@31.4.0:
+    resolution: {integrity: sha512-YTwKoAA+nrJMlI1TTHnIXLYWoQLKnhbkz0qxZcI7Hadcy0UaFMFs9xzwvH2MnrRpVJy7RKo49kVGuvSdRl8zMA==}
     engines: {node: '>= 12.20.55'}
     hasBin: true
 
@@ -2618,15 +2618,15 @@ packages:
   react-is@18.2.0:
     resolution: {integrity: sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==}
 
-  react-router-dom@6.26.0:
-    resolution: {integrity: sha512-RRGUIiDtLrkX3uYcFiCIxKFWMcWQGMojpYZfcstc63A1+sSnVgILGIm9gNUA6na3Fm1QuPGSBQH2EMbAZOnMsQ==}
+  react-router-dom@6.26.1:
+    resolution: {integrity: sha512-veut7m41S1fLql4pLhxeSW3jlqs+4MtjRLj0xvuCEXsxusJCbs6I8yn9BxzzDX2XDgafrccY6hwjmd/bL54tFw==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
       react-dom: '>=16.8'
 
-  react-router@6.26.0:
-    resolution: {integrity: sha512-wVQq0/iFYd3iZ9H2l3N3k4PL8EEHcb0XlU2Na8nEwmiXgIUElEH6gaJDtUQxJ+JFzmIXaQjfdpcGWaM6IoQGxg==}
+  react-router@6.26.1:
+    resolution: {integrity: sha512-kIwJveZNwp7teQRI5QmwWo39A5bXRyqpH0COKKmPnyD2vBvDwgFXSqDUYtt1h+FEyfnE8eXr7oe0MxRzVwCcvQ==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
       react: '>=16.8'
@@ -2909,8 +2909,8 @@ packages:
   tailwind-merge@2.5.2:
     resolution: {integrity: sha512-kjEBm+pvD+6eAwzJL2Bi+02/9LFLal1Gs61+QB7HvTfQQ0aXwC5LGT8PEt1gS0CWKktKe6ysPTAy3cBC5MeiIg==}
 
-  tailwindcss@3.4.9:
-    resolution: {integrity: sha512-1SEOvRr6sSdV5IDf9iC+NU4dhwdqzF4zKKq3sAbasUWHEM6lsMhX+eNN5gkPx1BvLFEnZQEUFbXnGj8Qlp83Pg==}
+  tailwindcss@3.4.10:
+    resolution: {integrity: sha512-KWZkVPm7yJRhdu4SRSl9d4AK2wM3a50UsvgHZO7xY77NQr2V+fIrEuoDGQcbvswWvFGbS2f6e+jC/6WJm1Dl0w==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -3560,7 +3560,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@electron/notarize@2.3.2':
+  '@electron/notarize@2.4.0':
     dependencies:
       debug: 4.3.4
       fs-extra: 9.1.0
@@ -3579,9 +3579,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@electron/remote@2.1.2(electron@31.3.1)':
+  '@electron/remote@2.1.2(electron@31.4.0)':
     dependencies:
-      electron: 31.3.1
+      electron: 31.4.0
 
   '@electron/universal@1.5.1':
     dependencies:
@@ -3835,7 +3835,7 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  '@remix-run/router@1.19.0': {}
+  '@remix-run/router@1.19.1': {}
 
   '@sinclair/typebox@0.27.8': {}
 
@@ -4835,7 +4835,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  electron@31.3.1:
+  electron@31.4.0:
     dependencies:
       '@electron/get': 2.0.3
       '@types/node': 20.14.15
@@ -5840,9 +5840,9 @@ snapshots:
       escape-string-regexp: 4.0.0
     optional: true
 
-  menubar@9.5.0(electron@31.3.1):
+  menubar@9.5.0(electron@31.4.0):
     dependencies:
-      electron: 31.3.1
+      electron: 31.4.0
       electron-positioner: 4.1.0
 
   merge-stream@2.0.0: {}
@@ -6169,16 +6169,16 @@ snapshots:
 
   react-is@18.2.0: {}
 
-  react-router-dom@6.26.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+  react-router-dom@6.26.1(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
     dependencies:
-      '@remix-run/router': 1.19.0
+      '@remix-run/router': 1.19.1
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
-      react-router: 6.26.0(react@18.3.1)
+      react-router: 6.26.1(react@18.3.1)
 
-  react-router@6.26.0(react@18.3.1):
+  react-router@6.26.1(react@18.3.1):
     dependencies:
-      '@remix-run/router': 1.19.0
+      '@remix-run/router': 1.19.1
       react: 18.3.1
 
   react@18.3.1:
@@ -6459,7 +6459,7 @@ snapshots:
 
   tailwind-merge@2.5.2: {}
 
-  tailwindcss@3.4.9(ts-node@10.9.2(@types/node@20.14.15)(typescript@5.5.4)):
+  tailwindcss@3.4.10(ts-node@10.9.2(@types/node@20.14.15)(typescript@5.5.4)):
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
