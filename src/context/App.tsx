@@ -32,6 +32,7 @@ import {
   addAccount,
   authGitHub,
   getToken,
+  hasAccounts,
   refreshAccount,
   removeAccount,
 } from '../utils/auth/utils';
@@ -203,7 +204,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const isLoggedIn = useMemo(() => {
-    return auth.accounts.length > 0;
+    return hasAccounts(auth);
   }, [auth]);
 
   const loginWithGitHubApp = useCallback(async () => {

@@ -11,6 +11,7 @@ import { ipcRenderer, webFrame } from 'electron';
 import { type FC, useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
+import { hasMultipleAccounts } from '../../utils/auth/utils';
 import { setTheme } from '../../utils/theme';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
 import { Button } from '../buttons/Button';
@@ -22,7 +23,7 @@ let timeout: NodeJS.Timeout;
 const DELAY = 200;
 
 export const AppearanceSettings: FC = () => {
-  const { settings, updateSetting } = useContext(AppContext);
+  const { auth, settings, updateSetting } = useContext(AppContext);
   const [zoomPercentage, setZoomPercentage] = useState(
     zoomLevelToPercentage(webFrame.getZoomLevel()),
   );
@@ -198,7 +199,8 @@ export const AppearanceSettings: FC = () => {
       <Checkbox
         name="showAccountHeader"
         label="Show account header"
-        checked={settings.showAccountHeader}
+        checked={settings.showAccountHeader || hasMultipleAccounts(auth)}
+        disabled={hasMultipleAccounts(auth)}
         onChange={(evt) =>
           updateSetting('showAccountHeader', evt.target.checked)
         }
