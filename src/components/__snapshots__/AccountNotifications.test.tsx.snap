@@ -121,16 +121,24 @@ exports[`components/AccountNotifications.tsx should render itself - account erro
       <div
         class="flex flex-1 flex-col items-center justify-center p-4"
       >
-        <h1
+        <div
           class="mt-2 mb-5 text-5xl"
         >
-          🔥
-        </h1>
-        <h2
+          <span>
+            <img
+              alt="🔥"
+              class="emoji"
+              draggable="false"
+              src="/mocked/node_modules/@discordapp/twemoji/dist/svg/1f525.svg"
+            />
+             foo
+          </span>
+        </div>
+        <div
           class="mb-2 text-xl font-semibold"
         >
           Error title
-        </h2>
+        </div>
         <div
           class="mb-2 text-center"
         >
@@ -256,16 +264,24 @@ exports[`components/AccountNotifications.tsx should render itself - account erro
     <div
       class="flex flex-1 flex-col items-center justify-center p-4"
     >
-      <h1
+      <div
         class="mt-2 mb-5 text-5xl"
       >
-        🔥
-      </h1>
-      <h2
+        <span>
+          <img
+            alt="🔥"
+            class="emoji"
+            draggable="false"
+            src="/mocked/node_modules/@discordapp/twemoji/dist/svg/1f525.svg"
+          />
+           foo
+        </span>
+      </div>
+      <div
         class="mb-2 text-xl font-semibold"
       >
         Error title
-      </h2>
+      </div>
       <div
         class="mb-2 text-center"
       >
@@ -1764,16 +1780,23 @@ exports[`components/AccountNotifications.tsx should render itself - no notificat
       <div
         class="flex flex-1 flex-col items-center justify-center bg-white p-4 text-black dark:bg-gray-dark dark:text-white"
       >
-        <h1
+        <div
           class="mt-2 mb-5 text-5xl"
         >
-          🎊
-        </h1>
-        <h2
+          <span>
+            <img
+              alt="🎊"
+              class="emoji"
+              draggable="false"
+              src="/mocked/node_modules/@discordapp/twemoji/dist/svg/1f38a.svg"
+            />
+          </span>
+        </div>
+        <div
           class="mb-2 text-xl font-semibold"
         >
           No new notifications.
-        </h2>
+        </div>
       </div>
     </div>
   </body>,
@@ -1894,16 +1917,23 @@ exports[`components/AccountNotifications.tsx should render itself - no notificat
     <div
       class="flex flex-1 flex-col items-center justify-center bg-white p-4 text-black dark:bg-gray-dark dark:text-white"
     >
-      <h1
+      <div
         class="mt-2 mb-5 text-5xl"
       >
-        🎊
-      </h1>
-      <h2
+        <span>
+          <img
+            alt="🎊"
+            class="emoji"
+            draggable="false"
+            src="/mocked/node_modules/@discordapp/twemoji/dist/svg/1f38a.svg"
+          />
+        </span>
+      </div>
+      <div
         class="mb-2 text-xl font-semibold"
       >
         No new notifications.
-      </h2>
+      </div>
     </div>
   </div>,
   "debug": [Function],

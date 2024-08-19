@@ -1,7 +1,7 @@
-export function setPlatform(platform: NodeJS.Platform) {
-  Object.defineProperty(process, 'platform', {
-    value: platform,
-  });
+import * as helpers from '../utils/helpers';
+
+export function mockDirectoryPath() {
+  jest.spyOn(helpers, 'getDirectoryPath').mockReturnValue('/mocked/dir/name');
 }
 
 /**

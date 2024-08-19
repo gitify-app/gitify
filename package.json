@@ -100,6 +100,7 @@
     "afterSign": "scripts/notarize.js"
   },
   "dependencies": {
+    "@discordapp/twemoji": "15.0.3",
     "@electron/remote": "2.1.2",
     "@primer/octicons-react": "19.11.0",
     "axios": "1.7.4",
