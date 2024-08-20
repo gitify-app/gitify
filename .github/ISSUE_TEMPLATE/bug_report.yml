@@ -38,6 +38,7 @@ body:
       label: Gitify Version
       description: What version of Gitify are you using?
       options:
+        - 5.13.1
         - 5.13.0
         - 5.12.1
         - 5.12.0
