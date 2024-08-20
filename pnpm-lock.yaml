@@ -118,8 +118,8 @@ importers:
         specifier: 29.7.0
         version: 29.7.0
       nock:
-        specifier: 13.5.4
-        version: 13.5.4
+        specifier: 13.5.5
+        version: 13.5.5
       postcss:
         specifier: 8.4.41
         version: 8.4.41
@@ -2327,8 +2327,8 @@ packages:
   neo-async@2.6.2:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
 
-  nock@13.5.4:
-    resolution: {integrity: sha512-yAyTfdeNJGGBFxWdzSKCBYxs5FxLbCg5X5Q4ets974hcQzG1+qCxvIyOo4j2Ry6MUlhWVMX4OoYDefAIIwupjw==}
+  nock@13.5.5:
+    resolution: {integrity: sha512-XKYnqUrCwXC8DGG1xX4YH5yNIrlh9c065uaMZZHUoeUUINTOyt+x/G+ezYk0Ft6ExSREVIs+qBJDK503viTfFA==}
     engines: {node: '>= 10.13'}
 
   node-addon-api@1.7.2:
@@ -5915,7 +5915,7 @@ snapshots:
 
   neo-async@2.6.2: {}
 
-  nock@13.5.4:
+  nock@13.5.5:
     dependencies:
       debug: 4.3.4
       json-stringify-safe: 5.0.1
