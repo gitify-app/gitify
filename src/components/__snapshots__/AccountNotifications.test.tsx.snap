@@ -131,7 +131,6 @@ exports[`components/AccountNotifications.tsx should render itself - account erro
               draggable="false"
               src="/mocked/node_modules/@discordapp/twemoji/dist/svg/1f525.svg"
             />
-             foo
           </span>
         </div>
         <div
@@ -274,7 +273,6 @@ exports[`components/AccountNotifications.tsx should render itself - account erro
             draggable="false"
             src="/mocked/node_modules/@discordapp/twemoji/dist/svg/1f525.svg"
           />
-           foo
         </span>
       </div>
       <div
