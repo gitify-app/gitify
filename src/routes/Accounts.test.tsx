@@ -238,6 +238,27 @@ describe('routes/Accounts.tsx', () => {
   });
 
   describe('Add new accounts', () => {
+    it('should show login with github app', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: { accounts: [mockOAuthAccount] },
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <AccountsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      expect(screen.getByTitle('Login with GitHub App').hidden).toBe(false);
+
+      fireEvent.click(screen.getByTitle('Login with GitHub App'));
+    });
+
     it('should show login with personal access token', async () => {
       await act(async () => {
         render(

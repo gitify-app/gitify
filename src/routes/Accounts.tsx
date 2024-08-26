@@ -1,6 +1,7 @@
 import {
   FeedPersonIcon,
   KeyIcon,
+  MarkGithubIcon,
   PersonIcon,
   PlusIcon,
   SignOutIcon,
@@ -9,6 +10,7 @@ import {
   SyncIcon,
 } from '@primer/octicons-react';
 
+import log from 'electron-log';
 import { type FC, useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
@@ -29,7 +31,8 @@ import {
 import { saveState } from '../utils/storage';
 
 export const AccountsRoute: FC = () => {
-  const { auth, settings, logoutFromAccount } = useContext(AppContext);
+  const { auth, settings, loginWithGitHubApp, logoutFromAccount } =
+    useContext(AppContext);
   const navigate = useNavigate();
 
   const logoutAccount = useCallback(
@@ -46,6 +49,14 @@ export const AccountsRoute: FC = () => {
     auth.accounts = [account, ...auth.accounts.filter((a) => a !== account)];
     saveState({ auth, settings });
     navigate('/accounts', { replace: true });
+  }, []);
+
+  const loginWithGitHub = useCallback(async () => {
+    try {
+      await loginWithGitHubApp();
+    } catch (err) {
+      log.error('Auth: failed to login with GitHub', err);
+    }
   }, []);
 
   const loginWithPersonalAccessToken = useCallback(() => {
@@ -97,7 +108,7 @@ export const AccountsRoute: FC = () => {
                     onClick={() => openHost(account.hostname)}
                   >
                     <PlatformIcon type={account.platform} size={Size.XSMALL} />
-                    {account.platform} - {account.hostname}
+                    {account.hostname}
                   </button>
                 </div>
                 <div>
@@ -172,6 +183,18 @@ export const AccountsRoute: FC = () => {
       <div className="flex items-center justify-between bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker">
         <div className="font-semibold italic">Add new account</div>
         <div>
+          <button
+            type="button"
+            className={BUTTON_CLASS_NAME}
+            title="Login with GitHub App"
+            onClick={loginWithGitHub}
+          >
+            <MarkGithubIcon
+              size={Size.LARGE}
+              aria-label="Login with GitHub App"
+            />
+            <PlusIcon size={Size.SMALL} className="mb-2 ml-1" />
+          </button>
           <button
             type="button"
             className={BUTTON_CLASS_NAME}
