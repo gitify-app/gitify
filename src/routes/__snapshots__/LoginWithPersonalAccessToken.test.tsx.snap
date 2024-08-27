@@ -88,7 +88,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
                   class="mt-3"
                 >
                   <button
-                    aria-label="Generate a PAT"
+                    aria-label="Generate a PAT (classic)"
                     class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-7 rounded-md px-2 py-1"
                     icon="[object Object]"
                   >
@@ -106,7 +106,31 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
                         d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
                       />
                     </svg>
-                    Generate a PAT
+                    Generate a PAT (classic)
+                  </button>
+                   
+                  or
+                   
+                  <button
+                    aria-label="Generate a PAT (fine-grained)"
+                    class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-7 rounded-md px-2 py-1"
+                    icon="[object Object]"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      class="mr-2"
+                      fill="currentColor"
+                      focusable="false"
+                      height="12"
+                      style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                      viewBox="0 0 16 16"
+                      width="12"
+                    >
+                      <path
+                        d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+                      />
+                    </svg>
+                    Generate a PAT (fine-grained)
                   </button>
                   <span
                     class="mx-1"
@@ -283,7 +307,7 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
                 class="mt-3"
               >
                 <button
-                  aria-label="Generate a PAT"
+                  aria-label="Generate a PAT (classic)"
                   class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-7 rounded-md px-2 py-1"
                   icon="[object Object]"
                 >
@@ -301,7 +325,31 @@ exports[`routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] = `
                       d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
                     />
                   </svg>
-                  Generate a PAT
+                  Generate a PAT (classic)
+                </button>
+                 
+                or
+                 
+                <button
+                  aria-label="Generate a PAT (fine-grained)"
+                  class="ring-offset-background focus-visible:ring-ring inline-flex w-fit items-center justify-center whitespace-nowrap text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-gray-300 dark:text-black hover:opacity-90 h-7 rounded-md px-2 py-1"
+                  icon="[object Object]"
+                >
+                  <svg
+                    aria-hidden="true"
+                    class="mr-2"
+                    fill="currentColor"
+                    focusable="false"
+                    height="12"
+                    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                    viewBox="0 0 16 16"
+                    width="12"
+                  >
+                    <path
+                      d="M10.5 0a5.499 5.499 0 1 1-1.288 10.848l-.932.932a.749.749 0 0 1-.53.22H7v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22H5v.75a.749.749 0 0 1-.22.53l-.5.5a.749.749 0 0 1-.53.22h-2A1.75 1.75 0 0 1 0 14.25v-2c0-.199.079-.389.22-.53l4.932-4.932A5.5 5.5 0 0 1 10.5 0Zm-4 5.5c-.001.431.069.86.205 1.269a.75.75 0 0 1-.181.768L1.5 12.56v1.69c0 .138.112.25.25.25h1.69l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l.06-.06v-1.19a.75.75 0 0 1 .75-.75h1.19l1.023-1.025a.75.75 0 0 1 .768-.18A4 4 0 1 0 6.5 5.5ZM11 6a1 1 0 1 1 0-2 1 1 0 0 1 0 2Z"
+                    />
+                  </svg>
+                  Generate a PAT (fine-grained)
                 </button>
                 <span
                   class="mx-1"

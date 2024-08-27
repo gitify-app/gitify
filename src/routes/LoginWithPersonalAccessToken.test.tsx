@@ -89,7 +89,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
         target: { value: '' },
       });
 
-      fireEvent.click(screen.getByText('Generate a PAT'));
+      fireEvent.click(screen.getByText('Generate a PAT (classic)'));
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(0);
     });
@@ -107,7 +107,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByText('Generate a PAT'));
+      fireEvent.click(screen.getByText('Generate a PAT (classic)'));
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     });

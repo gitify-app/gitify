@@ -18,7 +18,11 @@ import type {
 import * as apiRequests from '../api/request';
 import type { AuthMethod } from './types';
 import * as auth from './utils';
-import { getNewOAuthAppURL, getNewTokenURL } from './utils';
+import {
+  getNewClassicTokenURL,
+  getNewFineGrainedTokenURL,
+  getNewOAuthAppURL,
+} from './utils';
 
 const browserWindow = new remote.BrowserWindow();
 
@@ -283,19 +287,37 @@ describe('utils/auth/utils.ts', () => {
     ).toBe('https://github.com/settings');
   });
 
-  describe('getNewTokenURL', () => {
-    it('should generate new PAT url - github cloud', () => {
+  describe('getNewClassicTokenURL', () => {
+    it('should generate new PAT (classic) url - github cloud', () => {
       expect(
-        getNewTokenURL('github.com' as Hostname).startsWith(
+        getNewClassicTokenURL('github.com' as Hostname).startsWith(
           'https://github.com/settings/tokens/new',
         ),
       ).toBeTruthy();
     });
 
-    it('should generate new PAT url - github server', () => {
+    it('should generate new PAT (classic) url - github server', () => {
       expect(
-        getNewTokenURL('github.gitify.io' as Hostname).startsWith(
+        getNewClassicTokenURL('github.gitify.io' as Hostname).startsWith(
           'https://github.gitify.io/settings/tokens/new',
+        ),
+      ).toBeTruthy();
+    });
+  });
+
+  describe('getNewFineGrainedTokenURL', () => {
+    it('should generate new PAT (fine-grained) url - github cloud', () => {
+      expect(
+        getNewFineGrainedTokenURL('github.com' as Hostname).startsWith(
+          'https://github.com/settings/personal-access-tokens/new',
+        ),
+      ).toBeTruthy();
+    });
+
+    it('should generate new PAT (fine-grained) url - github server', () => {
+      expect(
+        getNewFineGrainedTokenURL('github.gitify.io' as Hostname).startsWith(
+          'https://github.gitify.io/settings/personal-access-tokens/new',
         ),
       ).toBeTruthy();
     });
@@ -366,6 +388,26 @@ describe('utils/auth/utils.ts', () => {
 
     it('should validate token - invalid', () => {
       expect(auth.isValidToken('1234567890asdfg' as Token)).toBeFalsy();
+    });
+  });
+
+  describe('isValidFineGrainedToken', () => {
+    it('should validate fine-grained token - valid', () => {
+      expect(
+        auth.isValidFineGrainedToken(
+          'github_pat_1234567890123456789012_asdfghjklPOIUYTREWQ0987654321asdfghjklasdfghjklasdfghjkl123' as Token,
+        ),
+      ).toBeTruthy();
+    });
+
+    it('should validate fine-grained token - empty', () => {
+      expect(auth.isValidFineGrainedToken('' as Token)).toBeFalsy();
+    });
+
+    it('should validate fine-grained token - invalid', () => {
+      expect(
+        auth.isValidFineGrainedToken('1234567890asdfg' as Token),
+      ).toBeFalsy();
     });
   });
 

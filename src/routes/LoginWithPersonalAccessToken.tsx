@@ -10,7 +10,9 @@ import { AppContext } from '../context/App';
 import { type Hostname, Size, type Token } from '../types';
 import type { LoginPersonalAccessTokenOptions } from '../utils/auth/types';
 import {
-  getNewTokenURL,
+  getNewClassicTokenURL,
+  getNewFineGrainedTokenURL,
+  isValidFineGrainedToken,
   isValidHostname,
   isValidToken,
 } from '../utils/auth/utils';
@@ -37,7 +39,10 @@ export const validate = (values: IValues): IFormErrors => {
 
   if (!values.token) {
     errors.token = 'Required';
-  } else if (!isValidToken(values.token)) {
+  } else if (
+    !isValidToken(values.token) &&
+    !isValidFineGrainedToken(values.token)
+  ) {
     errors.token = 'Invalid token.';
   }
 
@@ -65,13 +70,23 @@ export const LoginWithPersonalAccessToken: FC = () => {
               </div>
               <div className="mt-3">
                 <Button
-                  label="Generate a PAT"
+                  label="Generate a PAT (classic)"
                   disabled={!values.hostname}
                   icon={{ icon: KeyIcon, size: Size.XSMALL }}
-                  url={getNewTokenURL(values.hostname)}
+                  url={getNewClassicTokenURL(values.hostname)}
                   size="xs"
                 >
-                  Generate a PAT
+                  Generate a PAT (classic)
+                </Button>{' '}
+                or{' '}
+                <Button
+                  label="Generate a PAT (fine-grained)"
+                  disabled={!values.hostname}
+                  icon={{ icon: KeyIcon, size: Size.XSMALL }}
+                  url={getNewFineGrainedTokenURL(values.hostname)}
+                  size="xs"
+                >
+                  Generate a PAT (fine-grained)
                 </Button>
                 <span className="mx-1">
                   on GitHub then paste your{' '}

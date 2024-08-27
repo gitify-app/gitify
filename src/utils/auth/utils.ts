@@ -194,9 +194,20 @@ export function getDeveloperSettingsURL(account: Account): Link {
   return settingsURL.toString() as Link;
 }
 
-export function getNewTokenURL(hostname: Hostname): Link {
+export function getNewClassicTokenURL(hostname: Hostname): Link {
   const date = format(new Date(), 'PP p');
   const newTokenURL = new URL(`https://${hostname}/settings/tokens/new`);
+  newTokenURL.searchParams.append('description', `Gitify (Created on ${date})`);
+  newTokenURL.searchParams.append('scopes', Constants.AUTH_SCOPE.join(','));
+
+  return newTokenURL.toString() as Link;
+}
+
+export function getNewFineGrainedTokenURL(hostname: Hostname): Link {
+  const date = format(new Date(), 'PP p');
+  const newTokenURL = new URL(
+    `https://${hostname}/settings/personal-access-tokens/new`,
+  );
   newTokenURL.searchParams.append('description', `Gitify (Created on ${date})`);
   newTokenURL.searchParams.append('scopes', Constants.AUTH_SCOPE.join(','));
 
@@ -236,6 +247,10 @@ export function isValidClientId(clientId: ClientID) {
 
 export function isValidToken(token: Token) {
   return /^[A-Z0-9_]{40}$/i.test(token);
+}
+
+export function isValidFineGrainedToken(token: Token) {
+  return /^github_pat_[A-Z0-9]{22}_[A-Z0-9]{59}$/i.test(token);
 }
 
 export function getAccountUUID(account: Account): string {
