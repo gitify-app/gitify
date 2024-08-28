@@ -135,10 +135,37 @@ export async function getAllNotifications(
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
         try {
+          // TODO - this needs to be correctly implemented
           if (accountNotifications.account.platform === 'Bitbucket Cloud') {
-            console.log(
-              JSON.stringify(await accountNotifications.notifications),
-            );
+            const pulls =
+              // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+              ((await accountNotifications.notifications).data as any)
+                .pullRequests.authored;
+
+            console.log(JSON.stringify(pulls, null, 2));
+
+            const notifications = pulls.map((pull: any) => ({
+              id: 1,
+              reason: 'pull_request',
+              repository: {
+                full_name: pull.links.html.href,
+                owner: {
+                  avatar_url:
+                    'https://avatars.githubusercontent.com/u/987654321?v=4',
+                },
+              },
+              subject: {
+                title: pull.extra.commit_statuses[0].key,
+                url: pull.links.html.href,
+              },
+              account: accountNotifications.account,
+            }));
+
+            return {
+              account: accountNotifications.account,
+              notifications: notifications,
+              error: null,
+            };
           } else {
             let notifications = (
               await accountNotifications.notifications
