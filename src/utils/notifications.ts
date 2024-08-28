@@ -5,7 +5,10 @@ import type {
   SettingsState,
 } from '../types';
 import { Notification } from '../typesGitHub';
-import { listNotificationsForAuthenticatedUser } from './api/client';
+import {
+  listBitbucketWork,
+  listNotificationsForAuthenticatedUser,
+} from './api/client';
 import { determineFailureType } from './api/errors';
 import { getAccountUUID } from './auth/utils';
 import { hideWindow, showWindow, updateTrayIcon } from './comms';
@@ -116,7 +119,7 @@ function getNotifications(state: GitifyState) {
       account,
       notifications:
         account.platform === 'Bitbucket Cloud'
-          ? null
+          ? listBitbucketWork(account)
           : listNotificationsForAuthenticatedUser(account, state.settings),
     };
   });
@@ -132,22 +135,28 @@ export async function getAllNotifications(
       .filter((response) => !!response)
       .map(async (accountNotifications) => {
         try {
-          let notifications = (
-            await accountNotifications.notifications
-          ).data.map((notification: Notification) => ({
-            ...notification,
-            account: accountNotifications.account,
-          }));
+          if (accountNotifications.account.platform === 'Bitbucket Cloud') {
+            console.log(
+              JSON.stringify(await accountNotifications.notifications),
+            );
+          } else {
+            let notifications = (
+              await accountNotifications.notifications
+            ).data.map((notification: Notification) => ({
+              ...notification,
+              account: accountNotifications.account,
+            }));
 
-          notifications = await enrichNotifications(notifications, state);
+            notifications = await enrichNotifications(notifications, state);
 
-          notifications = filterNotifications(notifications, state.settings);
+            notifications = filterNotifications(notifications, state.settings);
 
-          return {
-            account: accountNotifications.account,
-            notifications: notifications,
-            error: null,
-          };
+            return {
+              account: accountNotifications.account,
+              notifications: notifications,
+              error: null,
+            };
+          }
         } catch (error) {
           log.error(
             'Error occurred while fetching account notifications',

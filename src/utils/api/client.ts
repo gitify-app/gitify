@@ -24,7 +24,7 @@ import type {
 } from '../../typesGitHub';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
-import { apiRequestAuth } from './request';
+import { apiRequestAuth, apiRequestBitbucket } from './request';
 import { getGitHubAPIBaseUrl, getGitHubGraphQLUrl } from './utils';
 
 /**
@@ -67,6 +67,24 @@ export function listNotificationsForAuthenticatedUser(
   url.searchParams.append('participating', String(settings.participating));
 
   return apiRequestAuth(url.toString() as Link, 'GET', account.token);
+}
+
+/**
+ * List all notifications for the current user, sorted by most recently updated.
+ *
+ * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#list-notifications-for-the-authenticated-user
+ */
+export function listBitbucketWork(
+  account: Account,
+): AxiosPromise<Notification[]> {
+  const url = `${account.hostname}/overview-view-state?fields=pullRequestFilters.*,pullRequests.authored.links.html,-pullRequests.authored.extra.*`;
+
+  return apiRequestBitbucket(
+    url.toString() as Link,
+    'GET',
+    account.user.login,
+    account.token,
+  );
 }
 
 /**
