@@ -1,4 +1,9 @@
-import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
+import {
+  BeakerIcon,
+  KeyIcon,
+  MarkGithubIcon,
+  PersonIcon,
+} from '@primer/octicons-react';
 import log from 'electron-log';
 import { type FC, useCallback, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -62,6 +67,14 @@ export const LoginRoute: FC = () => {
         onClick={() => navigate('/login-oauth-app')}
       >
         OAuth App
+      </Button>
+      <Button
+        icon={{ icon: BeakerIcon }}
+        label="Login with Bitbucket Cloud"
+        className="mt-2 py-2"
+        onClick={() => navigate('/login-bitbucket-cloud')}
+      >
+        Bitbucket Cloud
       </Button>
     </div>
   );

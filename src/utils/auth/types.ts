@@ -4,11 +4,20 @@ import type {
   ClientSecret,
   Hostname,
   Token,
+  Username,
+  Workspace,
 } from '../../types';
 
-export type AuthMethod = 'GitHub App' | 'Personal Access Token' | 'OAuth App';
+export type AuthMethod =
+  | 'GitHub App'
+  | 'Personal Access Token'
+  | 'OAuth App'
+  | 'App Password';
 
-export type PlatformType = 'GitHub Cloud' | 'GitHub Enterprise Server';
+export type PlatformType =
+  | 'GitHub Cloud'
+  | 'GitHub Enterprise Server'
+  | 'Bitbucket Cloud';
 
 export interface LoginOAuthAppOptions {
   hostname: Hostname;
@@ -19,6 +28,12 @@ export interface LoginOAuthAppOptions {
 export interface LoginPersonalAccessTokenOptions {
   hostname: Hostname;
   token: Token;
+}
+
+export interface LoginBitbucketCloudOptions {
+  username: Username;
+  token: Token;
+  workspace: Workspace;
 }
 
 export interface AuthResponse {

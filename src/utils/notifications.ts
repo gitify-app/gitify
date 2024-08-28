@@ -114,10 +114,10 @@ function getNotifications(state: GitifyState) {
   return state.auth.accounts.map((account) => {
     return {
       account,
-      notifications: listNotificationsForAuthenticatedUser(
-        account,
-        state.settings,
-      ),
+      notifications:
+        account.platform === 'Bitbucket Cloud'
+          ? null
+          : listNotificationsForAuthenticatedUser(account, state.settings),
     };
   });
 }

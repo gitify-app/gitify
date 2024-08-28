@@ -15,6 +15,7 @@ import {
   type AuthState,
   type GitifyError,
   GroupBy,
+  type Hostname,
   OpenPreference,
   type SettingsState,
   type SettingsValue,
@@ -25,6 +26,7 @@ import type { Notification } from '../typesGitHub';
 import { headNotifications } from '../utils/api/client';
 import { migrateAuthenticatedAccounts } from '../utils/auth/migration';
 import type {
+  LoginBitbucketCloudOptions,
   LoginOAuthAppOptions,
   LoginPersonalAccessTokenOptions,
 } from '../utils/auth/types';
@@ -97,6 +99,7 @@ interface AppContextState {
   loginWithGitHubApp: () => void;
   loginWithOAuthApp: (data: LoginOAuthAppOptions) => void;
   loginWithPersonalAccessToken: (data: LoginPersonalAccessTokenOptions) => void;
+  loginWithBitbucketCloud: (data: LoginBitbucketCloudOptions) => void;
   logoutFromAccount: (account: Account) => void;
 
   notifications: AccountNotifications[];
@@ -242,6 +245,21 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [auth, settings],
   );
 
+  const loginWithBitbucketCloud = useCallback(
+    async ({ token, workspace, username }: LoginBitbucketCloudOptions) => {
+      const updatedAuth = await addAccount(
+        auth,
+        'App Password',
+        token,
+        `https://api.bitbucket.org/internal/workspaces/${workspace}` as Hostname,
+        username,
+      );
+      setAuth(updatedAuth);
+      saveState({ auth: updatedAuth, settings });
+    },
+    [auth, settings],
+  );
+
   const logoutFromAccount = useCallback(
     async (account: Account) => {
       // Remove notifications for account
@@ -320,6 +338,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         loginWithGitHubApp,
         loginWithOAuthApp,
         loginWithPersonalAccessToken,
+        loginWithBitbucketCloud,
         logoutFromAccount,
 
         notifications,

@@ -196,7 +196,7 @@ describe('routes/Accounts.tsx', () => {
         'token-123-456',
       );
       await waitFor(() =>
-        expect(mockNavigate).toHaveBeenNthCalledWith(1, '/accounts', {
+        expect(mockNavigate).toHaveBeenNthCalledWith(1, '/settings/accounts', {
           replace: true,
         }),
       );

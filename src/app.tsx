@@ -12,6 +12,7 @@ import { AppContext, AppProvider } from './context/App';
 import { AccountsRoute } from './routes/Accounts';
 import { FiltersRoute } from './routes/Filters';
 import { LoginRoute } from './routes/Login';
+import { LoginWithBitbucketCloud } from './routes/LoginWithBitbucketCloud';
 import { LoginWithOAuthApp } from './routes/LoginWithOAuthApp';
 import { LoginWithPersonalAccessToken } from './routes/LoginWithPersonalAccessToken';
 import { NotificationsRoute } from './routes/Notifications';
@@ -61,7 +62,7 @@ export const App = () => {
               }
             />
             <Route
-              path="/accounts"
+              path="/settings/accounts"
               element={
                 <RequireAuth>
                   <AccountsRoute />
@@ -74,6 +75,10 @@ export const App = () => {
               element={<LoginWithPersonalAccessToken />}
             />
             <Route path="/login-oauth-app" element={<LoginWithOAuthApp />} />
+            <Route
+              path="/login-bitbucket-cloud"
+              element={<LoginWithBitbucketCloud />}
+            />
           </Routes>
         </div>
       </Router>

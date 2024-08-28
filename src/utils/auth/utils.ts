@@ -10,6 +10,7 @@ import type {
   Hostname,
   Link,
   Token,
+  Username,
 } from '../../types';
 import type { UserDetails } from '../../typesGitHub';
 import { getAuthenticatedUser } from '../api/client';
@@ -128,6 +129,7 @@ export async function addAccount(
   method: AuthMethod,
   token: Token,
   hostname: Hostname,
+  username?: Username,
 ): Promise<AuthState> {
   let newAccount = {
     hostname: hostname,
@@ -136,7 +138,16 @@ export async function addAccount(
     token: token,
   } as Account;
 
-  newAccount = await refreshAccount(newAccount);
+  if (newAccount.platform === 'Bitbucket Cloud') {
+    newAccount.user = {
+      id: 0,
+      login: username,
+      name: username,
+      avatar: null,
+    };
+  } else {
+    newAccount = await refreshAccount(newAccount);
+  }
 
   return {
     accounts: [...auth.accounts, newAccount],
@@ -236,6 +247,10 @@ export function isValidClientId(clientId: ClientID) {
 
 export function isValidToken(token: Token) {
   return /^[A-Z0-9_]{40}$/i.test(token);
+}
+
+export function isValidAppPassword(token: Token) {
+  return /^[A-Z0-9_]{36}$/i.test(token);
 }
 
 export function getAccountUUID(account: Account): string {

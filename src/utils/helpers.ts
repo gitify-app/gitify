@@ -12,6 +12,10 @@ import {
 } from './subject';
 
 export function getPlatformFromHostname(hostname: string): PlatformType {
+  if (hostname.startsWith(Constants.BITBUCKET_API_BASE_URL)) {
+    return 'Bitbucket Cloud';
+  }
+
   return hostname.endsWith(Constants.DEFAULT_AUTH_OPTIONS.hostname)
     ? 'GitHub Cloud'
     : 'GitHub Enterprise Server';

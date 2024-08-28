@@ -11,6 +11,8 @@ export const Constants = {
     clientSecret: process.env.OAUTH_CLIENT_SECRET as ClientSecret,
   },
 
+  BITBUCKET_API_BASE_URL: 'https://api.bitbucket.org/',
+
   GITHUB_API_BASE_URL: 'https://api.github.com',
   GITHUB_API_GRAPHQL_URL: 'https://api.github.com/graphql',
 
@@ -34,6 +36,11 @@ export const Constants = {
       'https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens' as Link,
     PARTICIPATING_URL:
       'https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#about-participating-and-watching-notifications' as Link,
+  },
+
+  ATLASSIAN_DOCS: {
+    BITBUCKET_APP_PASSWORD_URL:
+      'https://support.atlassian.com/bitbucket-cloud/docs/app-passwords/' as Link,
   },
 };
 

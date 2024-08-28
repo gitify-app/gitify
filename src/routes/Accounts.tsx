@@ -1,4 +1,5 @@
 import {
+  BeakerIcon,
   FeedPersonIcon,
   KeyIcon,
   MarkGithubIcon,
@@ -48,7 +49,7 @@ export const AccountsRoute: FC = () => {
   const setAsPrimaryAccount = useCallback((account: Account) => {
     auth.accounts = [account, ...auth.accounts.filter((a) => a !== account)];
     saveState({ auth, settings });
-    navigate('/accounts', { replace: true });
+    navigate('/settings/accounts', { replace: true });
   }, []);
 
   const loginWithGitHub = useCallback(async () => {
@@ -65,6 +66,10 @@ export const AccountsRoute: FC = () => {
 
   const loginWithOAuthApp = useCallback(() => {
     return navigate('/login-oauth-app', { replace: true });
+  }, []);
+
+  const loginWithBitbucketCloud = useCallback(() => {
+    return navigate('/login-bitbucket-cloud', { replace: true });
   }, []);
 
   return (
@@ -155,7 +160,7 @@ export const AccountsRoute: FC = () => {
                   title={`Refresh ${account.user.login}`}
                   onClick={async () => {
                     await refreshAccount(account);
-                    navigate('/accounts', { replace: true });
+                    navigate('/settings/accounts', { replace: true });
                   }}
                 >
                   <SyncIcon
@@ -214,6 +219,18 @@ export const AccountsRoute: FC = () => {
             onClick={loginWithOAuthApp}
           >
             <PersonIcon size={Size.XLARGE} aria-label="Login with OAuth App" />
+            <PlusIcon size={Size.SMALL} className="mb-2" />
+          </button>
+          <button
+            type="button"
+            className={BUTTON_CLASS_NAME}
+            title="Login with Bitbucket Cloud"
+            onClick={loginWithBitbucketCloud}
+          >
+            <BeakerIcon
+              size={Size.XLARGE}
+              aria-label="Login with Bitbucket Cloud"
+            />
             <PlusIcon size={Size.SMALL} className="mb-2" />
           </button>
         </div>
