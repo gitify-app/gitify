@@ -123,6 +123,34 @@ describe('routes/components/settings/NotificationSettings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('markAsDoneOnOpen', false);
   });
 
+  it('should toggle the markAsDoneOnUnsubscribe checkbox', async () => {
+    await act(async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            auth: mockAuth,
+            settings: mockSettings,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <NotificationSettings />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+    });
+
+    fireEvent.click(screen.getByLabelText('Mark as done on unsubscribe'), {
+      target: { checked: true },
+    });
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith(
+      'markAsDoneOnUnsubscribe',
+      false,
+    );
+  });
+
   it('should toggle the delayNotificationState checkbox', async () => {
     await act(async () => {
       render(

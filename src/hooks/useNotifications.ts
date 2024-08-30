@@ -176,7 +176,12 @@ export const useNotifications = (): NotificationsState => {
           notification.account.hostname,
           notification.account.token,
         );
-        await markNotificationRead(state, notification);
+
+        if (state.settings.markAsDoneOnUnsubscribe) {
+          await markNotificationDone(state, notification);
+        } else {
+          await markNotificationRead(state, notification);
+        }
       } catch (err) {
         log.error(
           'Error occurred while unsubscribing from notification thread',
