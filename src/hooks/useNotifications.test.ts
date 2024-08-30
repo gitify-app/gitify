@@ -426,7 +426,7 @@ describe('hooks/useNotifications.ts', () => {
   describe('unsubscribeNotification', () => {
     const id = 'notification-123';
 
-    it('should unsubscribe from a notification with success', async () => {
+    it('should unsubscribe from a notification with success - markAsDoneOnUnsubscribe = false', async () => {
       // The unsubscribe endpoint call.
       nock('https://api.github.com/')
         .put(`/notifications/threads/${id}/subscription`)
@@ -442,6 +442,39 @@ describe('hooks/useNotifications.ts', () => {
       act(() => {
         result.current.unsubscribeNotification(
           mockState,
+          mockSingleNotification,
+        );
+      });
+
+      await waitFor(() => {
+        expect(result.current.status).toBe('success');
+      });
+
+      expect(result.current.notifications.length).toBe(0);
+    });
+
+    it('should unsubscribe from a notification with success - markAsDoneOnUnsubscribe = true', async () => {
+      // The unsubscribe endpoint call.
+      nock('https://api.github.com/')
+        .put(`/notifications/threads/${id}/subscription`)
+        .reply(200);
+
+      // The mark done endpoint call.
+      nock('https://api.github.com/')
+        .delete(`/notifications/threads/${id}`)
+        .reply(200);
+
+      const { result } = renderHook(() => useNotifications());
+
+      act(() => {
+        result.current.unsubscribeNotification(
+          {
+            ...mockState,
+            settings: {
+              ...mockState.settings,
+              markAsDoneOnUnsubscribe: true,
+            },
+          },
           mockSingleNotification,
         );
       });
