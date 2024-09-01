@@ -195,15 +195,15 @@ app.whenReady().then(async () => {
 
   ipc.on('gitify:icon-idle', () => {
     if (!mb.tray.isDestroyed()) {
-      if (process.platform === 'darwin' || process.platform === 'win32') {
-        mb.tray.setImage(
-          updateAvailableMenuItem.visible ? idleUpdateAvailableIcon : idleIcon,
-        );
-      } else {
+      if (process.platform === 'linux') {
         mb.tray.setImage(
           updateAvailableMenuItem.visible
             ? idleAlternateUpdateAvailableIcon
             : idleAlternateIcon,
+        );
+      } else {
+        mb.tray.setImage(
+          updateAvailableMenuItem.visible ? idleUpdateAvailableIcon : idleIcon,
         );
       }
     }
