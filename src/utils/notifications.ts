@@ -140,23 +140,30 @@ export async function getAllNotifications(
             const pulls =
               // biome-ignore lint/suspicious/noExplicitAny: <explanation>
               ((await accountNotifications.notifications).data as any)
-                .pullRequests.authored;
+                .pullRequests?.reviewing;
 
-            console.log(JSON.stringify(pulls, null, 2));
-
-            const notifications = pulls.map((pull: any) => ({
+            const notifications = pulls?.map((pull: any) => ({
               id: 1,
-              reason: 'pull_request',
+              reason: 'review_requested',
+              updated_at: pull.updated_on,
+              url: pull.links.html.href,
               repository: {
-                full_name: pull.links.html.href,
+                full_name: pull.destination.repository.links.html.href,
                 owner: {
-                  avatar_url:
-                    'https://avatars.githubusercontent.com/u/987654321?v=4',
+                  avatar_url: pull.destination.repository.links.avatar.href,
                 },
               },
               subject: {
-                title: pull.extra.commit_statuses[0].key,
+                number: pull.id,
+                title: pull.title,
                 url: pull.links.html.href,
+                type: 'PullRequest',
+                user: {
+                  login: pull.author.display_name,
+                  html_url: pull.author.links.html.href,
+                  avatar_url: pull.author.links.avatar.href,
+                  type: 'User',
+                },
               },
               account: accountNotifications.account,
             }));

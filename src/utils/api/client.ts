@@ -77,8 +77,9 @@ export function listNotificationsForAuthenticatedUser(
 export function listBitbucketWork(
   account: Account,
 ): AxiosPromise<Notification[]> {
-  const url = `${account.hostname}/overview-view-state?fields=pullRequestFilters.*,pullRequests.authored.links.html,-pullRequests.authored.extra.*`;
+  const url = `${account.hostname}/overview-view-state?fields=pullRequests.reviewing.id,pullRequests.reviewing.title,pullRequest.reviewing.state,pullRequests.reviewing.author,pullRequests.reviewing.created_on,pullRequests.reviewing.updated_on,pullRequests.reviewing.links,pullRequests.reviewing.task_count,pullRequests.reviewing.comment_count,pullRequests.reviewing.destination.repository.*`;
 
+  console.log(url);
   return apiRequestBitbucket(
     url.toString() as Link,
     'GET',
