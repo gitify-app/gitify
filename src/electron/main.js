@@ -21,8 +21,14 @@ log.initialize();
 const idleIcon = path.resolve(
   `${__dirname}/../../assets/images/tray-idleTemplate.png`,
 );
+const idleAlternateIcon = path.resolve(
+  `${__dirname}/../../assets/images/tray-idle-white.png`,
+);
 const idleUpdateAvailableIcon = path.resolve(
   `${__dirname}/../../assets/images/tray-idle-update.png`,
+);
+const idleAlternateUpdateAvailableIcon = path.resolve(
+  `${__dirname}/../../assets/images/tray-idle-white-update.png`,
 );
 const activeIcon = path.resolve(
   `${__dirname}/../../assets/images/tray-active.png`,
@@ -189,9 +195,17 @@ app.whenReady().then(async () => {
 
   ipc.on('gitify:icon-idle', () => {
     if (!mb.tray.isDestroyed()) {
-      mb.tray.setImage(
-        updateAvailableMenuItem.visible ? idleUpdateAvailableIcon : idleIcon,
-      );
+      if (process.platform === 'darwin' || process.platform === 'win32') {
+        mb.tray.setImage(
+          updateAvailableMenuItem.visible ? idleUpdateAvailableIcon : idleIcon,
+        );
+      } else {
+        mb.tray.setImage(
+          updateAvailableMenuItem.visible
+            ? idleAlternateUpdateAvailableIcon
+            : idleAlternateIcon,
+        );
+      }
     }
   });
 
