@@ -33,6 +33,13 @@ export function openGitHubPulls(hostname: Hostname) {
   openExternalLink(url.toString() as Link);
 }
 
+export function openBitbucketPulls(account: Account) {
+  const url = new URL(
+    `${account.hostname.replace('api.bitbucket.org/internal/workspaces', 'bitbucket.org')}/workspace/pull-requests/?user_filter=ALL&author=${account.user.id}`,
+  );
+  openExternalLink(url.toString() as Link);
+}
+
 export function openAccountProfile(account: Account) {
   if (account.platform === 'Bitbucket Cloud') {
     openExternalLink('https://bitbucket.org/account/settings/' as Link);

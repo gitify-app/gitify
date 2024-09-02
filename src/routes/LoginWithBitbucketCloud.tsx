@@ -52,6 +52,7 @@ export const LoginWithBitbucketCloud: FC = () => {
   const renderForm = (formProps: FormRenderProps) => {
     const { handleSubmit, submitting, pristine, values } = formProps;
 
+    // TODO - Correctly set account.id and account.hostname
     return (
       <form onSubmit={handleSubmit}>
         <FieldInput

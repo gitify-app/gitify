@@ -13,6 +13,7 @@ import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
 import {
   openAccountProfile,
+  openBitbucketPulls,
   openGitHubIssues,
   openGitHubPulls,
 } from '../utils/links';
@@ -115,17 +116,26 @@ export const AccountNotifications: FC<IAccountNotifications> = (
           </div>
           <HoverGroup>
             <PlatformIcon type={account.platform} size={Size.SMALL} />
-            <InteractionButton
-              title="My Issues"
-              icon={IssueOpenedIcon}
-              size={Size.SMALL}
-              onClick={() => openGitHubIssues(account.hostname)}
-            />
+            {account.platform !== 'Bitbucket Cloud' && (
+              <InteractionButton
+                title="My Issues"
+                icon={IssueOpenedIcon}
+                size={Size.SMALL}
+                onClick={() => openGitHubIssues(account.hostname)}
+              />
+            )}
             <InteractionButton
               title="My Pull Requests"
               icon={GitPullRequestIcon}
               size={Size.SMALL}
-              onClick={() => openGitHubPulls(account.hostname)}
+              onClick={() => {
+                event.stopPropagation();
+                if (account.platform === 'Bitbucket Cloud') {
+                  openBitbucketPulls(account);
+                } else {
+                  openGitHubPulls(account.hostname);
+                }
+              }}
             />
             <InteractionButton
               title={toggleAccountNotificationsLabel}
