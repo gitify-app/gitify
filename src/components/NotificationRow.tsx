@@ -45,6 +45,11 @@ export const NotificationRow: FC<INotificationRow> = ({
   const [showAsRead, setShowAsRead] = useState(false);
 
   const handleNotification = useCallback(() => {
+    if (notification.account.platform === 'Bitbucket Cloud') {
+      openNotification(notification);
+      return;
+    }
+
     setAnimateExit(!settings.delayNotificationState);
     setShowAsRead(settings.delayNotificationState);
 
@@ -127,7 +132,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         <NotificationFooter notification={notification} />
       </div>
 
-      {!animateExit && (
+      {!animateExit && notification.account.platform !== 'Bitbucket Cloud' && (
         <HoverGroup>
           {isMarkAsDoneFeatureSupported(notification.account) && (
             <InteractionButton
