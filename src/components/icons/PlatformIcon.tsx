@@ -1,4 +1,4 @@
-import { MarkGithubIcon, ServerIcon } from '@primer/octicons-react';
+import { BeakerIcon, MarkGithubIcon, ServerIcon } from '@primer/octicons-react';
 import type { FC } from 'react';
 import type { Size } from '../../types';
 import type { PlatformType } from '../../utils/auth/types';
@@ -15,6 +15,7 @@ export const PlatformIcon: FC<IPlatformIcon> = (props: IPlatformIcon) => {
       {props.type === 'GitHub Enterprise Server' && (
         <ServerIcon size={props.size} />
       )}
+      {props.type === 'Bitbucket Cloud' && <BeakerIcon size={props.size} />}
     </span>
   );
 };
