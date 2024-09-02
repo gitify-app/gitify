@@ -4,7 +4,7 @@ import { AllRead } from '../components/AllRead';
 import { Oops } from '../components/Oops';
 import { AppContext } from '../context/App';
 import { getAccountUUID } from '../utils/auth/utils';
-import { Errors } from '../utils/constants';
+import { Errors } from '../utils/errors';
 import { getNotificationCount } from '../utils/notifications';
 
 export const NotificationsRoute: FC = () => {

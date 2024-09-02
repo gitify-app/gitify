@@ -1,7 +1,7 @@
 import { ipcRenderer, shell } from 'electron';
 import { defaultSettings } from '../context/App';
 import { type Link, OpenPreference } from '../types';
-import Constants from './constants';
+import { Constants } from './constants';
 import { loadState } from './storage';
 
 export function openExternalLink(url: Link): void {

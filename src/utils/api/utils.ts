@@ -1,5 +1,5 @@
 import type { Hostname } from '../../types';
-import Constants from '../constants';
+import { Constants } from '../constants';
 import { isEnterpriseServerHost } from '../helpers';
 
 export function getGitHubAPIBaseUrl(hostname: Hostname): URL {

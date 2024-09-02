@@ -12,7 +12,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { AppContext } from '../context/App';
 import { Size } from '../types';
 import { quitApp } from '../utils/comms';
-import Constants from '../utils/constants';
+import { Constants } from '../utils/constants';
 import { getFilterCount } from '../utils/helpers';
 import {
   openGitHubIssues,

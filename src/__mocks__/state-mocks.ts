@@ -12,7 +12,7 @@ import {
   type Token,
 } from '../types';
 import type { EnterpriseAccount } from '../utils/auth/types';
-import Constants from '../utils/constants';
+import { Constants } from '../utils/constants';
 
 export const mockEnterpriseAccounts: EnterpriseAccount[] = [
   {

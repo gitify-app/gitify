@@ -5,7 +5,7 @@ import type { Repository } from '../typesGitHub';
 import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import * as authUtils from './auth/utils';
 import * as comms from './comms';
-import Constants from './constants';
+import { Constants } from './constants';
 import * as helpers from './helpers';
 import {
   openAccountProfile,
