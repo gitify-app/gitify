@@ -15,6 +15,7 @@ import { quitApp } from '../utils/comms';
 import Constants from '../utils/constants';
 import { getFilterCount } from '../utils/helpers';
 import {
+  openBitbucketPulls,
   openGitHubIssues,
   openGitHubNotifications,
   openGitHubPulls,
@@ -38,8 +39,10 @@ export const Sidebar: FC = () => {
   } = useContext(AppContext);
 
   // We naively assume that the first account is the primary account for the purposes of our sidebar quick links
+  const primaryAccount = auth.accounts[0];
+
   const primaryAccountHostname =
-    auth.accounts[0]?.hostname ?? Constants.DEFAULT_AUTH_OPTIONS.hostname;
+    primaryAccount?.hostname ?? Constants.DEFAULT_AUTH_OPTIONS.hostname;
 
   const toggleFilters = () => {
     if (location.pathname.startsWith('/filters')) {
@@ -91,16 +94,24 @@ export const Sidebar: FC = () => {
           onClick={() => openGitHubNotifications(primaryAccountHostname)}
         />
 
-        <SidebarButton
-          title="My Issues"
-          icon={IssueOpenedIcon}
-          onClick={() => openGitHubIssues(primaryAccountHostname)}
-        />
+        {primaryAccount?.platform !== 'Bitbucket Cloud' && (
+          <SidebarButton
+            title="My Issues"
+            icon={IssueOpenedIcon}
+            onClick={() => openGitHubIssues(primaryAccountHostname)}
+          />
+        )}
 
         <SidebarButton
           title="My Pull Requests"
           icon={GitPullRequestIcon}
-          onClick={() => openGitHubPulls(primaryAccountHostname)}
+          onClick={() => {
+            if (primaryAccount?.platform === 'Bitbucket Cloud') {
+              openBitbucketPulls(primaryAccount);
+            } else {
+              openGitHubPulls(primaryAccountHostname);
+            }
+          }}
         />
       </div>
 
