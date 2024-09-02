@@ -34,9 +34,13 @@ export function openGitHubPulls(hostname: Hostname) {
 }
 
 export function openAccountProfile(account: Account) {
-  const url = new URL(`https://${account.hostname}`);
-  url.pathname = account.user.login;
-  openExternalLink(url.toString() as Link);
+  if (account.platform === 'Bitbucket Cloud') {
+    openExternalLink('https://bitbucket.org/account/settings/' as Link);
+  } else {
+    const url = new URL(`https://${account.hostname}`);
+    url.pathname = account.user.login;
+    openExternalLink(url.toString() as Link);
+  }
 }
 
 export function openUserProfile(user: SubjectUser) {
