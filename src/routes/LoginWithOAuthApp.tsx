@@ -21,7 +21,7 @@ import {
   isValidHostname,
   isValidToken,
 } from '../utils/auth/utils';
-import Constants from '../utils/constants';
+import { Constants } from '../utils/constants';
 
 interface IValues {
   hostname?: Hostname;

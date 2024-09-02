@@ -6,7 +6,7 @@ import type { AuthState, Hostname, SettingsState, Token } from '../types';
 import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as apiRequests from '../utils/api/request';
 import * as comms from '../utils/comms';
-import Constants from '../utils/constants';
+import { Constants } from '../utils/constants';
 import * as notifications from '../utils/notifications';
 import * as storage from '../utils/storage';
 import { AppContext, AppProvider, defaultSettings } from './App';

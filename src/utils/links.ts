@@ -2,7 +2,7 @@ import type { Account, Hostname, Link } from '../types';
 import type { Notification, Repository, SubjectUser } from '../typesGitHub';
 import { getDeveloperSettingsURL } from './auth/utils';
 import { openExternalLink } from './comms';
-import Constants from './constants';
+import { Constants } from './constants';
 import { generateGitHubWebUrl } from './helpers';
 
 export function openGitifyRepository() {

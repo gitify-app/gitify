@@ -13,7 +13,7 @@ import {
   mockNotificationUser,
   mockSingleNotification,
 } from '../utils/api/__mocks__/response-mocks';
-import { Errors } from '../utils/constants';
+import { Errors } from '../utils/errors';
 import { useNotifications } from './useNotifications';
 
 describe('hooks/useNotifications.ts', () => {
