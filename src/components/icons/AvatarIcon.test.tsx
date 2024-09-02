@@ -37,12 +37,34 @@ describe('components/icons/AvatarIcon.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render default icon when no url', () => {
+  it('should render default extra small icon when no url', () => {
     const props: IAvatarIcon = {
       defaultIcon: MarkGithubIcon,
       title: 'test',
       url: null,
       size: Size.XSMALL,
+    };
+    const tree = render(<AvatarIcon {...props} />);
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render default small icon when no url', () => {
+    const props: IAvatarIcon = {
+      defaultIcon: MarkGithubIcon,
+      title: 'test',
+      url: null,
+      size: Size.SMALL,
+    };
+    const tree = render(<AvatarIcon {...props} />);
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should render default medium icon when no url', () => {
+    const props: IAvatarIcon = {
+      defaultIcon: MarkGithubIcon,
+      title: 'test',
+      url: null,
+      size: Size.MEDIUM,
     };
     const tree = render(<AvatarIcon {...props} />);
     expect(tree).toMatchSnapshot();
