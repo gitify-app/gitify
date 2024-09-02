@@ -142,22 +142,25 @@ export async function getAllNotifications(
               ((await accountNotifications.notifications).data as any)
                 .pullRequests?.reviewing;
 
+            // console.log(pulls);
             const notifications = pulls?.map((pull: any) => ({
-              id: 1,
+              id: `${pull.destination.repository.full_name}-${pull.id}`,
               reason: 'review_requested',
               updated_at: pull.updated_on,
               url: pull.links.html.href,
               repository: {
-                full_name: pull.destination.repository.links.html.href,
+                full_name: pull.destination.repository.full_name,
                 owner: {
                   avatar_url: pull.destination.repository.links.avatar.href,
                 },
+                html_url: pull.destination.repository.links.html.href,
               },
               subject: {
                 number: pull.id,
                 title: pull.title,
                 url: pull.links.html.href,
                 type: 'PullRequest',
+                state: 'open',
                 user: {
                   login: pull.author.display_name,
                   html_url: pull.author.links.html.href,

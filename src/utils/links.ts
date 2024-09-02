@@ -57,7 +57,13 @@ export function openRepository(repository: Repository) {
 }
 
 export async function openNotification(notification: Notification) {
-  const url = await generateGitHubWebUrl(notification);
+  let url = '' as Link;
+  if (notification.account.platform === 'Bitbucket Cloud') {
+    url = notification.url;
+  } else {
+    url = await generateGitHubWebUrl(notification);
+  }
+
   openExternalLink(url);
 }
 
