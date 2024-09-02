@@ -64,6 +64,20 @@ export const NotificationSettings: FC = () => {
         }
       />
       <Checkbox
+        name="markAsDoneOnUnsubscribe"
+        label="Mark as done on unsubscribe"
+        checked={settings.markAsDoneOnUnsubscribe}
+        onChange={(evt) =>
+          updateSetting('markAsDoneOnUnsubscribe', evt.target.checked)
+        }
+        tooltip={
+          <div>
+            <strong>Mark as Done</strong> feature is supported in GitHub Cloud
+            and GitHub Enterprise Server 3.13 or later.
+          </div>
+        }
+      />
+      <Checkbox
         name="delayNotificationState"
         label="Delay notification state"
         checked={settings.delayNotificationState}

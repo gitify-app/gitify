@@ -87,6 +87,7 @@ const mockNotificationSettings = {
   groupBy: GroupBy.REPOSITORY,
   participating: false,
   markAsDoneOnOpen: false,
+  markAsDoneOnUnsubscribe: false,
   delayNotificationState: false,
 };
 
