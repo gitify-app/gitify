@@ -268,6 +268,7 @@ export interface GitifySubject {
   reviews?: GitifyPullRequestReview[];
   linkedIssues?: string[];
   comments?: number;
+  tasks?: number;
   labels?: string[];
   milestone?: Milestone;
 }

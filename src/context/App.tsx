@@ -251,7 +251,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         auth,
         'App Password',
         token,
-        `https://api.bitbucket.org/internal/workspaces/${workspace}` as Hostname,
+        `https://api.bitbucket.org/internal/workspaces/${workspace}` as Hostname, // TODO - ideally we don't set it like this
         username,
       );
       setAuth(updatedAuth);

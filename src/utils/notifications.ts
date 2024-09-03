@@ -5,10 +5,8 @@ import type {
   SettingsState,
 } from '../types';
 import { Notification } from '../typesGitHub';
-import {
-  listBitbucketWork,
-  listNotificationsForAuthenticatedUser,
-} from './api/client';
+import { listBitbucketWork } from './api/bitbucket';
+import { listNotificationsForAuthenticatedUser } from './api/client';
 import { determineFailureType } from './api/errors';
 import { getAccountUUID } from './auth/utils';
 import { hideWindow, showWindow, updateTrayIcon } from './comms';
@@ -142,7 +140,7 @@ export async function getAllNotifications(
               ((await accountNotifications.notifications).data as any)
                 .pullRequests?.reviewing;
 
-            // console.log(pulls);
+            console.log(pulls);
             const notifications = pulls?.map((pull: any) => ({
               id: `${pull.destination.repository.full_name}-${pull.id}`,
               reason: 'review_requested',
@@ -167,6 +165,8 @@ export async function getAllNotifications(
                   avatar_url: pull.author.links.avatar.href,
                   type: 'User',
                 },
+                comments: pull.comment_count,
+                tasks: pull.task_count,
               },
               account: accountNotifications.account,
             }));

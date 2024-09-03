@@ -1,5 +1,4 @@
 import {
-  BeakerIcon,
   FeedPersonIcon,
   KeyIcon,
   MarkGithubIcon,
@@ -17,6 +16,7 @@ import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { AuthMethodIcon } from '../components/icons/AuthMethodIcon';
 import { AvatarIcon } from '../components/icons/AvatarIcon';
+import { BitbucketIcon } from '../components/icons/BitbucketIcon';
 import { PlatformIcon } from '../components/icons/PlatformIcon';
 import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
@@ -112,8 +112,13 @@ export const AccountsRoute: FC = () => {
                     title="Open Host"
                     onClick={() => openHost(account.hostname)}
                   >
-                    <PlatformIcon type={account.platform} size={Size.XSMALL} />
-                    {account.hostname}
+                    <div className="flex flex-col-1">
+                      <PlatformIcon
+                        type={account.platform}
+                        size={Size.XSMALL}
+                      />
+                      {account.hostname.split('/').pop()}
+                    </div>
                   </button>
                 </div>
                 <div>
@@ -227,11 +232,13 @@ export const AccountsRoute: FC = () => {
             title="Login with Bitbucket Cloud"
             onClick={loginWithBitbucketCloud}
           >
-            <BeakerIcon
-              size={Size.XLARGE}
-              aria-label="Login with Bitbucket Cloud"
-            />
-            <PlusIcon size={Size.SMALL} className="mb-2" />
+            <div className="flex flex-col-1">
+              <BitbucketIcon
+                size={Size.MEDIUM}
+                aria-label="Login with Bitbucket Cloud"
+              />
+              <PlusIcon size={Size.SMALL} className="mb-2" />
+            </div>
           </button>
         </div>
       </div>

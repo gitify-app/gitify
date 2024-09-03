@@ -13,6 +13,7 @@ import type {
   Username,
 } from '../../types';
 import type { UserDetails } from '../../typesGitHub';
+import { getBitbucketUser } from '../api/bitbucket';
 import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
 import { Constants } from '../constants';
@@ -138,16 +139,7 @@ export async function addAccount(
     token: token,
   } as Account;
 
-  if (newAccount.platform === 'Bitbucket Cloud') {
-    newAccount.user = {
-      id: 0,
-      login: username,
-      name: username,
-      avatar: null,
-    };
-  } else {
-    newAccount = await refreshAccount(newAccount);
-  }
+  newAccount = await refreshAccount(newAccount);
 
   return {
     accounts: [...auth.accounts, newAccount],
@@ -165,6 +157,38 @@ export function removeAccount(auth: AuthState, account: Account): AuthState {
 }
 
 export async function refreshAccount(account: Account): Promise<Account> {
+  if (account.platform === 'Bitbucket Cloud') {
+    return refreshBitbucketAccount(account);
+  }
+
+  return refreshGitHubAccount(account);
+}
+
+export async function refreshBitbucketAccount(
+  account: Account,
+): Promise<Account> {
+  try {
+    // TODO correctly type
+    // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+    const res: any = await getBitbucketUser(account);
+
+    console.log(JSON.stringify(res));
+
+    // Refresh user data
+    account.user = {
+      id: res.data.account_id,
+      login: res.data.username,
+      name: res.data.display_name,
+      avatar: res.data.links.avatar.href,
+    };
+  } catch (error) {
+    log.error('Failed to refresh account', error);
+  }
+
+  return account;
+}
+
+export async function refreshGitHubAccount(account: Account): Promise<Account> {
   try {
     const res = await getAuthenticatedUser(account.hostname, account.token);
 

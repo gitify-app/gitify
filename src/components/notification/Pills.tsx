@@ -1,4 +1,5 @@
 import {
+  CheckboxIcon,
   CommentIcon,
   IssueClosedIcon,
   MilestoneIcon,
@@ -22,6 +23,10 @@ export const Pills: FC<IPills> = ({ notification }: IPills) => {
 
   const commentsPillDescription = `${notification.subject.comments} ${
     notification.subject.comments > 1 ? 'comments' : 'comment'
+  }`;
+
+  const tasksPillDescription = `${notification.subject.tasks} ${
+    notification.subject.tasks > 1 ? 'tasks' : 'task'
   }`;
 
   const labelsPillDescription = notification.subject.labels
@@ -85,6 +90,14 @@ export const Pills: FC<IPills> = ({ notification }: IPills) => {
                 ? IconColor.GREEN
                 : IconColor.RED
             }
+          />
+        )}
+        {notification.subject?.tasks > 0 && (
+          <PillButton
+            title={tasksPillDescription}
+            metric={notification.subject.tasks}
+            icon={CheckboxIcon}
+            color={IconColor.GRAY}
           />
         )}
       </div>
