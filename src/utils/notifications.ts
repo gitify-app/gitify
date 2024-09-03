@@ -135,12 +135,15 @@ export async function getAllNotifications(
         try {
           // TODO - this needs to be correctly implemented
           if (accountNotifications.account.platform === 'Bitbucket Cloud') {
-            const pulls =
-              // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-              ((await accountNotifications.notifications).data as any)
-                .pullRequests?.reviewing;
+            // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+            const res = (await accountNotifications.notifications).data as any;
 
-            console.log(pulls);
+            // TODO - when using IP allowlists, Bitbucket doesn't return any response indicator
+
+            const pulls = res.pullRequests?.reviewing;
+
+            // console.log(JSON.stringify(pulls));
+            // biome-ignore lint/suspicious/noExplicitAny: <explanation>
             const notifications = pulls?.map((pull: any) => ({
               id: `${pull.destination.repository.full_name}-${pull.id}`,
               reason: 'review_requested',

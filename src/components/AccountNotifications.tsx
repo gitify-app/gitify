@@ -121,14 +121,19 @@ export const AccountNotifications: FC<IAccountNotifications> = (
                 title="My Issues"
                 icon={IssueOpenedIcon}
                 size={Size.SMALL}
-                onClick={() => openGitHubIssues(account.hostname)}
+                onClick={(event: MouseEvent<HTMLElement>) => {
+                  // Don't trigger onClick of parent element.
+                  event.stopPropagation();
+                  openGitHubIssues(account.hostname);
+                }}
               />
             )}
             <InteractionButton
               title="My Pull Requests"
               icon={GitPullRequestIcon}
               size={Size.SMALL}
-              onClick={() => {
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
                 event.stopPropagation();
                 if (account.platform === 'Bitbucket Cloud') {
                   openBitbucketPulls(account);

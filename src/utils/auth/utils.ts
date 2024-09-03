@@ -172,8 +172,6 @@ export async function refreshBitbucketAccount(
     // biome-ignore lint/suspicious/noExplicitAny: <explanation>
     const res: any = await getBitbucketUser(account);
 
-    console.log(JSON.stringify(res));
-
     // Refresh user data
     account.user = {
       id: res.data.account_id,
