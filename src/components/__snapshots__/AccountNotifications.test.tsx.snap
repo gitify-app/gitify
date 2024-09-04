@@ -11,21 +11,25 @@ exports[`components/AccountNotifications.tsx should render itself - account erro
         <div
           class="flex"
         >
-          <div
-            class="mr-2 flex items-center justify-center"
-          >
-            <img
-              alt="octocat's avatar"
-              class="rounded-full object-cover size-5"
-              src="https://avatars.githubusercontent.com/u/583231?v=4"
-            />
-          </div>
           <button
             title="Open Profile"
             type="button"
           >
-            @
-            octocat
+            <div
+              class="flex"
+            >
+              <img
+                alt="octocat's avatar"
+                class="rounded-full object-cover size-5"
+                src="https://avatars.githubusercontent.com/u/583231?v=4"
+              />
+              <span
+                class="ml-2"
+              >
+                @
+                octocat
+              </span>
+            </div>
           </button>
         </div>
         <div
@@ -153,21 +157,25 @@ exports[`components/AccountNotifications.tsx should render itself - account erro
       <div
         class="flex"
       >
-        <div
-          class="mr-2 flex items-center justify-center"
-        >
-          <img
-            alt="octocat's avatar"
-            class="rounded-full object-cover size-5"
-            src="https://avatars.githubusercontent.com/u/583231?v=4"
-          />
-        </div>
         <button
           title="Open Profile"
           type="button"
         >
-          @
-          octocat
+          <div
+            class="flex"
+          >
+            <img
+              alt="octocat's avatar"
+              class="rounded-full object-cover size-5"
+              src="https://avatars.githubusercontent.com/u/583231?v=4"
+            />
+            <span
+              class="ml-2"
+            >
+              @
+              octocat
+            </span>
+          </div>
         </button>
       </div>
       <div
@@ -352,21 +360,25 @@ exports[`components/AccountNotifications.tsx should render itself - group notifi
         <div
           class="flex"
         >
-          <div
-            class="mr-2 flex items-center justify-center"
-          >
-            <img
-              alt="octocat's avatar"
-              class="rounded-full object-cover size-5"
-              src="https://avatars.githubusercontent.com/u/583231?v=4"
-            />
-          </div>
           <button
             title="Open Profile"
             type="button"
           >
-            @
-            octocat
+            <div
+              class="flex"
+            >
+              <img
+                alt="octocat's avatar"
+                class="rounded-full object-cover size-5"
+                src="https://avatars.githubusercontent.com/u/583231?v=4"
+              />
+              <span
+                class="ml-2"
+              >
+                @
+                octocat
+              </span>
+            </div>
           </button>
         </div>
         <div
@@ -834,21 +846,25 @@ exports[`components/AccountNotifications.tsx should render itself - group notifi
       <div
         class="flex"
       >
-        <div
-          class="mr-2 flex items-center justify-center"
-        >
-          <img
-            alt="octocat's avatar"
-            class="rounded-full object-cover size-5"
-            src="https://avatars.githubusercontent.com/u/583231?v=4"
-          />
-        </div>
         <button
           title="Open Profile"
           type="button"
         >
-          @
-          octocat
+          <div
+            class="flex"
+          >
+            <img
+              alt="octocat's avatar"
+              class="rounded-full object-cover size-5"
+              src="https://avatars.githubusercontent.com/u/583231?v=4"
+            />
+            <span
+              class="ml-2"
+            >
+              @
+              octocat
+            </span>
+          </div>
         </button>
       </div>
       <div
@@ -1373,21 +1389,25 @@ exports[`components/AccountNotifications.tsx should render itself - group notifi
         <div
           class="flex"
         >
-          <div
-            class="mr-2 flex items-center justify-center"
-          >
-            <img
-              alt="octocat's avatar"
-              class="rounded-full object-cover size-5"
-              src="https://avatars.githubusercontent.com/u/583231?v=4"
-            />
-          </div>
           <button
             title="Open Profile"
             type="button"
           >
-            @
-            octocat
+            <div
+              class="flex"
+            >
+              <img
+                alt="octocat's avatar"
+                class="rounded-full object-cover size-5"
+                src="https://avatars.githubusercontent.com/u/583231?v=4"
+              />
+              <span
+                class="ml-2"
+              >
+                @
+                octocat
+              </span>
+            </div>
           </button>
         </div>
         <div
@@ -1492,21 +1512,25 @@ exports[`components/AccountNotifications.tsx should render itself - group notifi
       <div
         class="flex"
       >
-        <div
-          class="mr-2 flex items-center justify-center"
-        >
-          <img
-            alt="octocat's avatar"
-            class="rounded-full object-cover size-5"
-            src="https://avatars.githubusercontent.com/u/583231?v=4"
-          />
-        </div>
         <button
           title="Open Profile"
           type="button"
         >
-          @
-          octocat
+          <div
+            class="flex"
+          >
+            <img
+              alt="octocat's avatar"
+              class="rounded-full object-cover size-5"
+              src="https://avatars.githubusercontent.com/u/583231?v=4"
+            />
+            <span
+              class="ml-2"
+            >
+              @
+              octocat
+            </span>
+          </div>
         </button>
       </div>
       <div
@@ -1668,21 +1692,25 @@ exports[`components/AccountNotifications.tsx should render itself - no notificat
         <div
           class="flex"
         >
-          <div
-            class="mr-2 flex items-center justify-center"
-          >
-            <img
-              alt="octocat's avatar"
-              class="rounded-full object-cover size-5"
-              src="https://avatars.githubusercontent.com/u/583231?v=4"
-            />
-          </div>
           <button
             title="Open Profile"
             type="button"
           >
-            @
-            octocat
+            <div
+              class="flex"
+            >
+              <img
+                alt="octocat's avatar"
+                class="rounded-full object-cover size-5"
+                src="https://avatars.githubusercontent.com/u/583231?v=4"
+              />
+              <span
+                class="ml-2"
+              >
+                @
+                octocat
+              </span>
+            </div>
           </button>
         </div>
         <div
@@ -1805,21 +1833,25 @@ exports[`components/AccountNotifications.tsx should render itself - no notificat
       <div
         class="flex"
       >
-        <div
-          class="mr-2 flex items-center justify-center"
-        >
-          <img
-            alt="octocat's avatar"
-            class="rounded-full object-cover size-5"
-            src="https://avatars.githubusercontent.com/u/583231?v=4"
-          />
-        </div>
         <button
           title="Open Profile"
           type="button"
         >
-          @
-          octocat
+          <div
+            class="flex"
+          >
+            <img
+              alt="octocat's avatar"
+              class="rounded-full object-cover size-5"
+              src="https://avatars.githubusercontent.com/u/583231?v=4"
+            />
+            <span
+              class="ml-2"
+            >
+              @
+              octocat
+            </span>
+          </div>
         </button>
       </div>
       <div
@@ -1999,21 +2031,25 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
         <div
           class="flex"
         >
-          <div
-            class="mr-2 flex items-center justify-center"
-          >
-            <img
-              alt="octocat's avatar"
-              class="rounded-full object-cover size-5"
-              src="https://avatars.githubusercontent.com/u/583231?v=4"
-            />
-          </div>
           <button
             title="Open Profile"
             type="button"
           >
-            @
-            octocat
+            <div
+              class="flex"
+            >
+              <img
+                alt="octocat's avatar"
+                class="rounded-full object-cover size-5"
+                src="https://avatars.githubusercontent.com/u/583231?v=4"
+              />
+              <span
+                class="ml-2"
+              >
+                @
+                octocat
+              </span>
+            </div>
           </button>
         </div>
         <div
@@ -2114,21 +2150,25 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
         <div
           class="flex"
         >
-          <div
-            class="mr-2 flex items-center justify-center"
-          >
-            <img
-              alt="octocat's avatar"
-              class="rounded-full object-cover size-5"
-              src="https://avatars.githubusercontent.com/u/583231?v=4"
-            />
-          </div>
           <button
             title="Open Profile"
             type="button"
           >
-            @
-            octocat
+            <div
+              class="flex"
+            >
+              <img
+                alt="octocat's avatar"
+                class="rounded-full object-cover size-5"
+                src="https://avatars.githubusercontent.com/u/583231?v=4"
+              />
+              <span
+                class="ml-2"
+              >
+                @
+                octocat
+              </span>
+            </div>
           </button>
         </div>
         <div
@@ -2233,21 +2273,25 @@ exports[`components/AccountNotifications.tsx should toggle account notifications
       <div
         class="flex"
       >
-        <div
-          class="mr-2 flex items-center justify-center"
-        >
-          <img
-            alt="octocat's avatar"
-            class="rounded-full object-cover size-5"
-            src="https://avatars.githubusercontent.com/u/583231?v=4"
-          />
-        </div>
         <button
           title="Open Profile"
           type="button"
         >
-          @
-          octocat
+          <div
+            class="flex"
+          >
+            <img
+              alt="octocat's avatar"
+              class="rounded-full object-cover size-5"
+              src="https://avatars.githubusercontent.com/u/583231?v=4"
+            />
+            <span
+              class="ml-2"
+            >
+              @
+              octocat
+            </span>
+          </div>
         </button>
       </div>
       <div
