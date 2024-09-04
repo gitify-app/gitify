@@ -139,6 +139,16 @@ export async function addAccount(
     token: token,
   } as Account;
 
+  // TODO - find a better way to pass the username through
+  if (username) {
+    newAccount.user = {
+      id: 0,
+      login: username,
+      name: username,
+      avatar: '' as Link,
+    };
+  }
+
   newAccount = await refreshAccount(newAccount);
 
   return {
