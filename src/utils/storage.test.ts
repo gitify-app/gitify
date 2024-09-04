@@ -1,6 +1,6 @@
 import { mockSettings } from '../__mocks__/state-mocks';
 import type { Token } from '../types';
-import Constants from './constants';
+import { Constants } from './constants';
 import { clearState, loadState, saveState } from './storage';
 
 describe('utils/storage.ts', () => {

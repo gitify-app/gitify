@@ -42,7 +42,7 @@ import {
   setKeyboardShortcut,
   updateTrayTitle,
 } from '../utils/comms';
-import Constants from '../utils/constants';
+import { Constants } from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setTheme } from '../utils/theme';
@@ -68,6 +68,7 @@ const defaultNotificationSettings = {
   groupBy: GroupBy.REPOSITORY,
   participating: false,
   markAsDoneOnOpen: false,
+  markAsDoneOnUnsubscribe: false,
   delayNotificationState: false,
 };
 

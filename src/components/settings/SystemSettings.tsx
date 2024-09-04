@@ -2,7 +2,7 @@ import { DeviceDesktopIcon } from '@primer/octicons-react';
 import { type FC, useContext } from 'react';
 import { AppContext } from '../../context/App';
 import type { OpenPreference } from '../../types';
-import Constants from '../../utils/constants';
+import { Constants } from '../../utils/constants';
 import { isLinux, isMacOS } from '../../utils/platform';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';

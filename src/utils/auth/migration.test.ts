@@ -3,7 +3,7 @@ import log from 'electron-log';
 import nock from 'nock';
 import { mockGitifyUser, mockToken } from '../../__mocks__/state-mocks';
 import type { AuthState, Hostname } from '../../types';
-import Constants from '../constants';
+import { Constants } from '../constants';
 import {
   convertAccounts,
   hasAccountsToMigrate,

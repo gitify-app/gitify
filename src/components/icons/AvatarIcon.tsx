@@ -26,9 +26,12 @@ export const AvatarIcon: FC<IAvatarIcon> = (props: IAvatarIcon) => {
     );
   }
 
+  const defaultIconSize =
+    props.size === Size.XSMALL ? 16 : props.size === Size.SMALL ? 20 : 24;
+
   return (
     <props.defaultIcon
-      size={props.size}
+      size={defaultIconSize}
       className="text-gray-500 dark:text-gray-300"
     />
   );

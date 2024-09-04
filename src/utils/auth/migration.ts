@@ -1,6 +1,6 @@
 import log from 'electron-log';
 import type { Account, AuthState } from '../../types';
-import Constants from '../constants';
+import { Constants } from '../constants';
 import { loadState, saveState } from '../storage';
 import { getUserData } from './utils';
 

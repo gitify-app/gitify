@@ -78,6 +78,7 @@ interface NotificationSettingsState {
   groupBy: GroupBy;
   participating: boolean;
   markAsDoneOnOpen: boolean;
+  markAsDoneOnUnsubscribe: boolean;
   delayNotificationState: boolean;
 }
 
