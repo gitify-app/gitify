@@ -96,6 +96,7 @@ const mockSystemSettings = {
   showNotificationsCountInTray: false,
   showNotifications: true,
   playSound: true,
+  useAlternateIdleIcon: false,
   openAtStartup: false,
 };
 

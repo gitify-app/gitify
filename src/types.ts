@@ -75,19 +75,20 @@ interface AppearanceSettingsState {
 }
 
 interface NotificationSettingsState {
+  groupBy: GroupBy;
   participating: boolean;
-  showNotifications: boolean;
   markAsDoneOnOpen: boolean;
   delayNotificationState: boolean;
-  groupBy: GroupBy;
 }
 
 interface SystemSettingsState {
   openLinks: OpenPreference;
+  keyboardShortcut: boolean;
+  showNotificationsCountInTray: boolean;
+  showNotifications: boolean;
+  useAlternateIdleIcon: boolean;
   playSound: boolean;
   openAtStartup: boolean;
-  showNotificationsCountInTray: boolean;
-  keyboardShortcut: boolean;
 }
 
 interface FilterSettingsState {

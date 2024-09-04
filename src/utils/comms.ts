@@ -42,6 +42,10 @@ export function setAutoLaunch(value: boolean): void {
   });
 }
 
+export function setAlternateIdleIcon(value: boolean): void {
+  ipcRenderer.send('gitify:use-alternate-idle-icon', value);
+}
+
 export function setKeyboardShortcut(keyboardShortcut: boolean): void {
   ipcRenderer.send('gitify:update-keyboard-shortcut', {
     enabled: keyboardShortcut,

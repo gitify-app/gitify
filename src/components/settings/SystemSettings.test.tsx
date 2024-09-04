@@ -137,6 +137,31 @@ describe('routes/components/settings/SystemSettings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('playSound', false);
   });
 
+  it('should toggle the useAlternateIdleIcon checkbox', async () => {
+    await act(async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            auth: mockAuth,
+            settings: mockSettings,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <SystemSettings />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+    });
+
+    fireEvent.click(screen.getByLabelText('Use alternate idle icon'), {
+      target: { checked: true },
+    });
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('useAlternateIdleIcon', false);
+  });
+
   it('should toggle the openAtStartup checkbox', async () => {
     await act(async () => {
       render(

@@ -67,6 +67,21 @@ export const SystemSettings: FC = () => {
         checked={settings.playSound}
         onChange={(evt) => updateSetting('playSound', evt.target.checked)}
       />
+      <Checkbox
+        name="useAlternateIdleIcon"
+        label="Use alternate idle icon"
+        checked={settings.useAlternateIdleIcon}
+        onChange={(evt) =>
+          updateSetting('useAlternateIdleIcon', evt.target.checked)
+        }
+        tooltip={
+          <div>
+            Use a white Gitify logo (instead of the default black logo) when all
+            notifications are read. Particularly useful for devices which have a
+            dark-themed menubar or taskbar.
+          </div>
+        }
+      />
       {!isLinux() && (
         <Checkbox
           name="openAtStartUp"

@@ -120,6 +120,8 @@ const mb = menubar({
   showDockIcon: false,
 });
 
+let shouldUseAlternateIdleIcon = false;
+
 app.whenReady().then(async () => {
   await onFirstRunMaybe();
 
@@ -183,6 +185,10 @@ app.whenReady().then(async () => {
 
   ipc.on('gitify:quit', () => mb.app.quit());
 
+  ipc.on('gitify:use-alternate-idle-icon', (_, useAlternateIdleIcon) => {
+    shouldUseAlternateIdleIcon = useAlternateIdleIcon;
+  });
+
   ipc.on('gitify:icon-active', () => {
     if (!mb.tray.isDestroyed()) {
       mb.tray.setImage(
@@ -195,7 +201,7 @@ app.whenReady().then(async () => {
 
   ipc.on('gitify:icon-idle', () => {
     if (!mb.tray.isDestroyed()) {
-      if (process.platform === 'linux') {
+      if (shouldUseAlternateIdleIcon) {
         mb.tray.setImage(
           updateAvailableMenuItem.visible
             ? idleAlternateUpdateAvailableIcon
