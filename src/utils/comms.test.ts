@@ -6,6 +6,7 @@ import {
   hideWindow,
   openExternalLink,
   quitApp,
+  setAlternateIdleIcon,
   setAutoLaunch,
   showWindow,
   updateTrayIcon,
@@ -103,5 +104,14 @@ describe('utils/comms.ts', () => {
       openAsHidden: false,
       openAtLogin: false,
     });
+  });
+
+  it('should setAlternateIdleIcon', () => {
+    setAlternateIdleIcon(true);
+
+    expect(ipcRenderer.send).toHaveBeenCalledWith(
+      'gitify:use-alternate-idle-icon',
+      true,
+    );
   });
 });

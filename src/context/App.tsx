@@ -37,6 +37,7 @@ import {
   removeAccount,
 } from '../utils/auth/utils';
 import {
+  setAlternateIdleIcon,
   setAutoLaunch,
   setKeyboardShortcut,
   updateTrayTitle,
@@ -77,6 +78,7 @@ const defaultSystemSettings = {
   showNotificationsCountInTray: false,
   showNotifications: true,
   playSound: true,
+  useAlternateIdleIcon: false,
   openAtStartup: false,
 };
 
@@ -196,6 +198,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       if (name === 'openAtStartup') {
         setAutoLaunch(value as boolean);
       }
+      if (name === 'useAlternateIdleIcon') {
+        setAlternateIdleIcon(value as boolean);
+      }
 
       const newSettings = { ...settings, [name]: value };
       setSettings(newSettings);
@@ -271,6 +276,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
     if (existing.settings) {
       setKeyboardShortcut(existing.settings.keyboardShortcut);
+      setAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
       setSettings({ ...defaultSettings, ...existing.settings });
       webFrame.setZoomLevel(
         zoomPercentageToLevel(existing.settings.zoomPercentage),
