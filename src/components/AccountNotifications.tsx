@@ -93,14 +93,6 @@ export const AccountNotifications: FC<IAccountNotifications> = (
           onClick={toggleAccountNotifications}
         >
           <div className="flex">
-            <div className="mr-2 flex items-center justify-center">
-              <AvatarIcon
-                title={account.user.login}
-                url={account.user.avatar}
-                size={Size.SMALL}
-                defaultIcon={FeedPersonIcon}
-              />
-            </div>
             <button
               type="button"
               title="Open Profile"
@@ -110,7 +102,15 @@ export const AccountNotifications: FC<IAccountNotifications> = (
                 openAccountProfile(account);
               }}
             >
-              @{account.user.login}
+              <div className="flex">
+                <AvatarIcon
+                  title={account.user.login}
+                  url={account.user.avatar}
+                  size={Size.SMALL}
+                  defaultIcon={FeedPersonIcon}
+                />
+                <span className="ml-2">@{account.user.login}</span>
+              </div>
             </button>
           </div>
           <HoverGroup>
@@ -119,13 +119,21 @@ export const AccountNotifications: FC<IAccountNotifications> = (
               title="My Issues"
               icon={IssueOpenedIcon}
               size={Size.SMALL}
-              onClick={() => openGitHubIssues(account.hostname)}
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                openGitHubIssues(account.hostname);
+              }}
             />
             <InteractionButton
               title="My Pull Requests"
               icon={GitPullRequestIcon}
               size={Size.SMALL}
-              onClick={() => openGitHubPulls(account.hostname)}
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                openGitHubPulls(account.hostname);
+              }}
             />
             <InteractionButton
               title={toggleAccountNotificationsLabel}
