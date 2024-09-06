@@ -7,6 +7,14 @@ import log from 'electron-log';
 import type { Link, Token } from '../../types';
 import { getNextURLFromLinkHeader } from './utils';
 
+/**
+ * Perform an unauthenticated API request
+ *
+ * @param url
+ * @param method
+ * @param data
+ * @returns
+ */
 export function apiRequest(
   url: Link,
   method: Method,
@@ -18,12 +26,22 @@ export function apiRequest(
   return axios({ method, url, data });
 }
 
+/**
+ * Perform an authenticated API request
+ *
+ * @param url
+ * @param method
+ * @param token
+ * @param data
+ * @param fetchAllRecords whether to fetch all records or just the first page
+ * @returns
+ */
 export async function apiRequestAuth(
   url: Link,
   method: Method,
   token: Token,
   data = {},
-  paginated = false,
+  fetchAllRecords = false,
 ): AxiosPromise | null {
   axios.defaults.headers.common.Accept = 'application/json';
   axios.defaults.headers.common.Authorization = `token ${token}`;
@@ -32,7 +50,7 @@ export async function apiRequestAuth(
     ? 'no-cache'
     : '';
 
-  if (!paginated) {
+  if (!fetchAllRecords) {
     return axios({ method, url, data });
   }
 
@@ -44,13 +62,19 @@ export async function apiRequestAuth(
 
     while (nextUrl) {
       response = await axios({ method, url: nextUrl, data });
+
+      // If no data is returned, break the loop
+      if (!response?.data) {
+        break;
+      }
+
       combinedData = combinedData.concat(response.data); // Accumulate data
 
       nextUrl = getNextURLFromLinkHeader(response);
     }
   } catch (error) {
     log.error('API request failed:', error);
-    return null;
+    throw error;
   }
 
   return {
@@ -59,6 +83,12 @@ export async function apiRequestAuth(
   } as AxiosResponse;
 }
 
+/**
+ * Return true if the request should be made with no-cache
+ *
+ * @param url
+ * @returns boolean
+ */
 function shouldRequestWithNoCache(url: string) {
   const parsedUrl = new URL(url);
 

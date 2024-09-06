@@ -298,7 +298,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.globalError).toBe(Errors.BAD_CREDENTIALS);
-      expect(logErrorSpy).toHaveBeenCalledTimes(2);
+      expect(logErrorSpy).toHaveBeenCalledTimes(4);
     });
 
     it('should fetch notifications with different failures', async () => {
@@ -341,7 +341,7 @@ describe('hooks/useNotifications.ts', () => {
       });
 
       expect(result.current.globalError).toBeNull();
-      expect(logErrorSpy).toHaveBeenCalledTimes(2);
+      expect(logErrorSpy).toHaveBeenCalledTimes(4);
     });
   });
 
