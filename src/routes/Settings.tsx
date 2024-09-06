@@ -9,6 +9,7 @@ import { AppContext } from '../context/App';
 
 export const SettingsRoute: FC = () => {
   const { resetSettings } = useContext(AppContext);
+
   return (
     <div className="flex h-screen flex-col" data-testid="settings">
       <Header fetchOnBack icon={GearIcon}>

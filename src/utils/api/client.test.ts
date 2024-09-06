@@ -135,7 +135,7 @@ describe('utils/api/client.ts', () => {
       expect(axios.defaults.headers.common).toMatchSnapshot();
     });
 
-    it('should mark notification thread as read- enterprise', async () => {
+    it('should mark notification thread as read - enterprise', async () => {
       await markNotificationThreadAsRead(
         mockThreadId,
         mockEnterpriseHostname,
@@ -169,7 +169,7 @@ describe('utils/api/client.ts', () => {
       expect(axios.defaults.headers.common).toMatchSnapshot();
     });
 
-    it('should mark notification thread as done- enterprise', async () => {
+    it('should mark notification thread as done - enterprise', async () => {
       await markNotificationThreadAsDone(
         mockThreadId,
         mockEnterpriseHostname,
@@ -203,7 +203,7 @@ describe('utils/api/client.ts', () => {
       expect(axios.defaults.headers.common).toMatchSnapshot();
     });
 
-    it('should ignore notification thread subscription- enterprise', async () => {
+    it('should ignore notification thread subscription - enterprise', async () => {
       await ignoreNotificationThreadSubscription(
         mockThreadId,
         mockEnterpriseHostname,
@@ -292,7 +292,7 @@ describe('utils/api/client.ts', () => {
         '123' as Token,
       );
 
-      expect(logErrorSpy).toHaveBeenCalledWith('Failed to get html url');
+      expect(logErrorSpy).toHaveBeenCalledTimes(1);
     });
   });
 });

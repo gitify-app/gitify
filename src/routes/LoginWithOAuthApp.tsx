@@ -1,6 +1,8 @@
 import { BookIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
+import log from 'electron-log';
 import { type FC, useCallback, useContext } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { Button } from '../components/buttons/Button';
 import { FieldInput } from '../components/fields/FieldInput';
@@ -19,7 +21,7 @@ import {
   isValidHostname,
   isValidToken,
 } from '../utils/auth/utils';
-import Constants from '../utils/constants';
+import { Constants } from '../utils/constants';
 
 interface IValues {
   hostname?: Hostname;
@@ -58,6 +60,8 @@ export const validate = (values: IValues): IFormErrors => {
 };
 
 export const LoginWithOAuthApp: FC = () => {
+  const navigate = useNavigate();
+
   const { loginWithOAuthApp } = useContext(AppContext);
 
   const renderForm = (formProps: FormRenderProps) => {
@@ -76,6 +80,7 @@ export const LoginWithOAuthApp: FC = () => {
                 disabled={!values.hostname}
                 icon={{ icon: PersonIcon, size: Size.XSMALL }}
                 url={getNewOAuthAppURL(values.hostname)}
+                size="xs"
               >
                 Create new OAuth App
               </Button>
@@ -100,7 +105,10 @@ export const LoginWithOAuthApp: FC = () => {
             className="mt-2"
             icon={{ icon: BookIcon, size: Size.XSMALL }}
             url={Constants.GITHUB_DOCS.OAUTH_URL}
-          />
+            size="xs"
+          >
+            Docs
+          </Button>
 
           <Button
             name="Login"
@@ -109,7 +117,9 @@ export const LoginWithOAuthApp: FC = () => {
             icon={{ icon: SignInIcon, size: Size.MEDIUM }}
             disabled={submitting || pristine}
             type="submit"
-          />
+          >
+            Login
+          </Button>
         </div>
       </form>
     );
@@ -119,8 +129,9 @@ export const LoginWithOAuthApp: FC = () => {
     async (data: IValues) => {
       try {
         await loginWithOAuthApp(data as LoginOAuthAppOptions);
+        navigate(-1);
       } catch (err) {
-        // Skip
+        log.error('Auth: Failed to login with oauth app', err);
       }
     },
     [loginWithOAuthApp],

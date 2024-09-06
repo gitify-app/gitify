@@ -2,32 +2,40 @@ import {
   ChevronDownIcon,
   ChevronLeftIcon,
   ChevronUpIcon,
+  FeedPersonIcon,
+  GitPullRequestIcon,
+  IssueOpenedIcon,
 } from '@primer/octicons-react';
 import { type FC, type MouseEvent, useContext, useMemo, useState } from 'react';
 import { AppContext } from '../context/App';
 import { type Account, type GitifyError, Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
-import { openAccountProfile } from '../utils/links';
+import {
+  openAccountProfile,
+  openGitHubIssues,
+  openGitHubPulls,
+} from '../utils/links';
 import { AllRead } from './AllRead';
 import { HoverGroup } from './HoverGroup';
 import { NotificationRow } from './NotificationRow';
 import { Oops } from './Oops';
 import { RepositoryNotifications } from './RepositoryNotifications';
 import { InteractionButton } from './buttons/InteractionButton';
+import { AvatarIcon } from './icons/AvatarIcon';
 import { PlatformIcon } from './icons/PlatformIcon';
 
 interface IAccountNotifications {
   account: Account;
   notifications: Notification[];
   error: GitifyError | null;
-  showAccountHostname: boolean;
+  showAccountHeader: boolean;
 }
 
 export const AccountNotifications: FC<IAccountNotifications> = (
   props: IAccountNotifications,
 ) => {
-  const { account, showAccountHostname, notifications } = props;
+  const { account, showAccountHeader, notifications } = props;
 
   const { settings } = useContext(AppContext);
 
@@ -73,7 +81,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
 
   return (
     <>
-      {showAccountHostname && (
+      {showAccountHeader && (
         <div
           className={cn(
             'group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white',
@@ -85,9 +93,6 @@ export const AccountNotifications: FC<IAccountNotifications> = (
           onClick={toggleAccountNotifications}
         >
           <div className="flex">
-            <div className="mr-3 flex items-center justify-center">
-              <PlatformIcon type={account.platform} size={Size.MEDIUM} />
-            </div>
             <button
               type="button"
               title="Open Profile"
@@ -97,10 +102,39 @@ export const AccountNotifications: FC<IAccountNotifications> = (
                 openAccountProfile(account);
               }}
             >
-              @{account.user.login}
+              <div className="flex">
+                <AvatarIcon
+                  title={account.user.login}
+                  url={account.user.avatar}
+                  size={Size.SMALL}
+                  defaultIcon={FeedPersonIcon}
+                />
+                <span className="ml-2">@{account.user.login}</span>
+              </div>
             </button>
           </div>
           <HoverGroup>
+            <PlatformIcon type={account.platform} size={Size.SMALL} />
+            <InteractionButton
+              title="My Issues"
+              icon={IssueOpenedIcon}
+              size={Size.SMALL}
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                openGitHubIssues(account.hostname);
+              }}
+            />
+            <InteractionButton
+              title="My Pull Requests"
+              icon={GitPullRequestIcon}
+              size={Size.SMALL}
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                openGitHubPulls(account.hostname);
+              }}
+            />
             <InteractionButton
               title={toggleAccountNotificationsLabel}
               icon={ChevronIcon}

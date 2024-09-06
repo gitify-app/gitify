@@ -1,4 +1,10 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import {
+  act,
+  fireEvent,
+  render,
+  screen,
+  waitFor,
+} from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import {
   mockAuth,
@@ -8,6 +14,7 @@ import {
   mockSettings,
 } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
+import * as apiRequests from '../utils/api/request';
 import * as comms from '../utils/comms';
 import * as links from '../utils/links';
 
@@ -160,6 +167,41 @@ describe('routes/Accounts.tsx', () => {
       );
     });
 
+    it('should refresh account', async () => {
+      const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
+
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [mockPersonalAccessTokenAccount],
+              },
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <AccountsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      fireEvent.click(screen.getByTitle('Refresh octocat'));
+
+      expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
+      expect(apiRequestAuthMock).toHaveBeenCalledWith(
+        'https://api.github.com/user',
+        'GET',
+        'token-123-456',
+      );
+      await waitFor(() =>
+        expect(mockNavigate).toHaveBeenNthCalledWith(1, '/accounts', {
+          replace: true,
+        }),
+      );
+    });
+
     it('should logout', async () => {
       const logoutFromAccountMock = jest.fn();
       const updateTrayIconMock = jest.spyOn(comms, 'updateTrayIcon');
@@ -196,6 +238,27 @@ describe('routes/Accounts.tsx', () => {
   });
 
   describe('Add new accounts', () => {
+    it('should show login with github app', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: { accounts: [mockOAuthAccount] },
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <AccountsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      expect(screen.getByTitle('Login with GitHub App').hidden).toBe(false);
+
+      fireEvent.click(screen.getByTitle('Login with GitHub App'));
+    });
+
     it('should show login with personal access token', async () => {
       await act(async () => {
         render(

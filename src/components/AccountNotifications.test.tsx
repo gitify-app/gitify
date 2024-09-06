@@ -1,5 +1,6 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { mockGitHubCloudAccount, mockSettings } from '../__mocks__/state-mocks';
+import { ensureStableEmojis, mockDirectoryPath } from '../__mocks__/utils';
 import { AppContext } from '../context/App';
 import { GroupBy } from '../types';
 import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
@@ -11,17 +12,16 @@ jest.mock('./RepositoryNotifications', () => ({
 }));
 
 describe('components/AccountNotifications.tsx', () => {
-  // The read emoji randomly rotates, but then the snapshots would never match
-  // Have to make it consistent so the emojis are always the same
   beforeEach(() => {
-    global.Math.random = jest.fn(() => 0.1);
+    ensureStableEmojis();
+    mockDirectoryPath();
   });
 
   it('should render itself - group notifications by repositories', () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: mockGitHubNotifications,
-      showAccountHostname: true,
+      showAccountHeader: true,
       error: null,
     };
 
@@ -39,7 +39,7 @@ describe('components/AccountNotifications.tsx', () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: mockGitHubNotifications,
-      showAccountHostname: true,
+      showAccountHeader: true,
       error: null,
     };
 
@@ -57,7 +57,7 @@ describe('components/AccountNotifications.tsx', () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: [],
-      showAccountHostname: true,
+      showAccountHeader: true,
       error: null,
     };
 
@@ -78,7 +78,7 @@ describe('components/AccountNotifications.tsx', () => {
         descriptions: ['Error description'],
         emojis: ['🔥'],
       },
-      showAccountHostname: true,
+      showAccountHeader: true,
     };
 
     const tree = render(
@@ -97,7 +97,7 @@ describe('components/AccountNotifications.tsx', () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: [],
-      showAccountHostname: true,
+      showAccountHeader: true,
       error: null,
     };
 
@@ -115,11 +115,67 @@ describe('components/AccountNotifications.tsx', () => {
     expect(openAccountProfileMock).toHaveBeenCalledWith(mockGitHubCloudAccount);
   });
 
+  it('should open my issues when clicked', async () => {
+    const openMyIssuesMock = jest
+      .spyOn(links, 'openGitHubIssues')
+      .mockImplementation();
+
+    const props = {
+      account: mockGitHubCloudAccount,
+      notifications: [],
+      showAccountHeader: true,
+      error: null,
+    };
+
+    await act(async () => {
+      render(
+        <AppContext.Provider value={{ settings: mockSettings }}>
+          <AccountNotifications {...props} />
+        </AppContext.Provider>,
+      );
+    });
+
+    fireEvent.click(screen.getByTitle('My Issues'));
+
+    expect(openMyIssuesMock).toHaveBeenCalledTimes(1);
+    expect(openMyIssuesMock).toHaveBeenCalledWith(
+      mockGitHubCloudAccount.hostname,
+    );
+  });
+
+  it('should open my pull requests when clicked', async () => {
+    const openPullRequestsMock = jest
+      .spyOn(links, 'openGitHubPulls')
+      .mockImplementation();
+
+    const props = {
+      account: mockGitHubCloudAccount,
+      notifications: [],
+      showAccountHeader: true,
+      error: null,
+    };
+
+    await act(async () => {
+      render(
+        <AppContext.Provider value={{ settings: mockSettings }}>
+          <AccountNotifications {...props} />
+        </AppContext.Provider>,
+      );
+    });
+
+    fireEvent.click(screen.getByTitle('My Pull Requests'));
+
+    expect(openPullRequestsMock).toHaveBeenCalledTimes(1);
+    expect(openPullRequestsMock).toHaveBeenCalledWith(
+      mockGitHubCloudAccount.hostname,
+    );
+  });
+
   it('should toggle account notifications visibility', async () => {
     const props = {
       account: mockGitHubCloudAccount,
       notifications: mockGitHubNotifications,
-      showAccountHostname: true,
+      showAccountHeader: true,
       error: null,
     };
 

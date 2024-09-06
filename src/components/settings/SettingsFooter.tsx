@@ -29,7 +29,9 @@ export const SettingsFooter: FC = () => {
         title="View release notes"
         onClick={() => openGitifyReleaseNotes(appVersion)}
       >
-        <span title="app-version">Gitify {appVersion}</span>
+        <div className="flex items-center gap-1">
+          <span aria-label="app-version">Gitify {appVersion}</span>
+        </div>
       </button>
       <div>
         <button

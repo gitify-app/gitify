@@ -10,6 +10,7 @@ import { AppContext } from '../context/App';
 import { Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
+import { isMarkAsDoneFeatureSupported } from '../utils/helpers';
 import { openRepository } from '../utils/links';
 import { HoverGroup } from './HoverGroup';
 import { NotificationRow } from './NotificationRow';
@@ -54,7 +55,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
       >
         <div
           className={cn(
-            'flex flex-1 gap-4 items-center truncate text-sm font-medium',
+            'flex flex-1 gap-3 items-center truncate text-sm font-medium',
             animateExit &&
               'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
             showAsRead ? Opacity.READ : Opacity.MEDIUM,
@@ -80,18 +81,20 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
 
         {!animateExit && (
           <HoverGroup>
-            <InteractionButton
-              title="Mark Repository as Done"
-              icon={CheckIcon}
-              size={Size.MEDIUM}
-              onClick={(event: MouseEvent<HTMLElement>) => {
-                // Don't trigger onClick of parent element.
-                event.stopPropagation();
-                setAnimateExit(!settings.delayNotificationState);
-                setShowAsRead(settings.delayNotificationState);
-                markRepoNotificationsDone(repoNotifications[0]);
-              }}
-            />
+            {isMarkAsDoneFeatureSupported(repoNotifications[0].account) && (
+              <InteractionButton
+                title="Mark Repository as Done"
+                icon={CheckIcon}
+                size={Size.MEDIUM}
+                onClick={(event: MouseEvent<HTMLElement>) => {
+                  // Don't trigger onClick of parent element.
+                  event.stopPropagation();
+                  setAnimateExit(!settings.delayNotificationState);
+                  setShowAsRead(settings.delayNotificationState);
+                  markRepoNotificationsDone(repoNotifications[0]);
+                }}
+              />
+            )}
             <InteractionButton
               title="Mark Repository as Read"
               icon={ReadIcon}

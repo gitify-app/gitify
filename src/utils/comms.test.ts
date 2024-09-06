@@ -6,6 +6,7 @@ import {
   hideWindow,
   openExternalLink,
   quitApp,
+  setAlternateIdleIcon,
   setAutoLaunch,
   showWindow,
   updateTrayIcon,
@@ -72,6 +73,16 @@ describe('utils/comms.ts', () => {
     });
   });
 
+  it('should use default open preference if user settings not found', () => {
+    jest.spyOn(storage, 'loadState').mockReturnValue({ settings: null });
+
+    openExternalLink('https://www.gitify.io/' as Link);
+    expect(shell.openExternal).toHaveBeenCalledTimes(1);
+    expect(shell.openExternal).toHaveBeenCalledWith('https://www.gitify.io/', {
+      activate: true,
+    });
+  });
+
   it('should ignore opening external local links file:///', () => {
     openExternalLink('file:///Applications/SomeApp.app' as Link);
     expect(shell.openExternal).toHaveBeenCalledTimes(0);
@@ -93,5 +104,14 @@ describe('utils/comms.ts', () => {
       openAsHidden: false,
       openAtLogin: false,
     });
+  });
+
+  it('should setAlternateIdleIcon', () => {
+    setAlternateIdleIcon(true);
+
+    expect(ipcRenderer.send).toHaveBeenCalledWith(
+      'gitify:use-alternate-idle-icon',
+      true,
+    );
   });
 });

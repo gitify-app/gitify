@@ -32,21 +32,23 @@ import {
   addAccount,
   authGitHub,
   getToken,
-  getUserData,
+  hasAccounts,
+  refreshAccount,
   removeAccount,
 } from '../utils/auth/utils';
 import {
+  setAlternateIdleIcon,
   setAutoLaunch,
   setKeyboardShortcut,
   updateTrayTitle,
 } from '../utils/comms';
-import Constants from '../utils/constants';
+import { Constants } from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
 import { setTheme } from '../utils/theme';
 import { zoomPercentageToLevel } from '../utils/zoom';
 
-const defaultAuth: AuthState = {
+export const defaultAuth: AuthState = {
   accounts: [],
   token: null,
   enterpriseAccounts: [],
@@ -59,13 +61,14 @@ const defaultAppearanceSettings = {
   detailedNotifications: true,
   showPills: true,
   showNumber: true,
-  showAccountHostname: false,
+  showAccountHeader: false,
 };
 
 const defaultNotificationSettings = {
   groupBy: GroupBy.REPOSITORY,
   participating: false,
   markAsDoneOnOpen: false,
+  markAsDoneOnUnsubscribe: false,
   delayNotificationState: false,
 };
 
@@ -75,6 +78,7 @@ const defaultSystemSettings = {
   showNotificationsCountInTray: false,
   showNotifications: true,
   playSound: true,
+  useAlternateIdleIcon: false,
   openAtStartup: false,
 };
 
@@ -101,6 +105,7 @@ interface AppContextState {
   notifications: AccountNotifications[];
   status: Status;
   globalError: GitifyError;
+  removeAccountNotifications: (account: Account) => Promise<void>;
   fetchNotifications: () => Promise<void>;
   markNotificationRead: (notification: Notification) => Promise<void>;
   markNotificationDone: (notification: Notification) => Promise<void>;
@@ -120,6 +125,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const [auth, setAuth] = useState<AuthState>(defaultAuth);
   const [settings, setSettings] = useState<SettingsState>(defaultSettings);
   const {
+    removeAccountNotifications,
     fetchNotifications,
     notifications,
     globalError,
@@ -130,7 +136,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     markRepoNotificationsRead,
     markRepoNotificationsDone,
   } = useNotifications();
-
+  getNotificationCount;
   useEffect(() => {
     restoreSettings();
   }, []);
@@ -146,7 +152,13 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   useInterval(() => {
     fetchNotifications({ auth, settings });
-  }, Constants.FETCH_INTERVAL);
+  }, Constants.FETCH_NOTIFICATIONS_INTERVAL);
+
+  useInterval(() => {
+    for (const account of auth.accounts) {
+      refreshAccount(account);
+    }
+  }, Constants.REFRESH_ACCOUNTS_INTERVAL);
 
   useEffect(() => {
     const count = getNotificationCount(notifications);
@@ -164,8 +176,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     ipcRenderer.on('gitify:reset-app', () => {
-      setAuth(defaultAuth);
       clearState();
+      setAuth(defaultAuth);
+      setSettings(defaultSettings);
     });
   }, []);
 
@@ -185,6 +198,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       if (name === 'openAtStartup') {
         setAutoLaunch(value as boolean);
       }
+      if (name === 'useAlternateIdleIcon') {
+        setAlternateIdleIcon(value as boolean);
+      }
 
       const newSettings = { ...settings, [name]: value };
       setSettings(newSettings);
@@ -194,15 +210,14 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   );
 
   const isLoggedIn = useMemo(() => {
-    return auth.accounts.length > 0;
+    return hasAccounts(auth);
   }, [auth]);
 
   const loginWithGitHubApp = useCallback(async () => {
     const { authCode } = await authGitHub();
     const { token } = await getToken(authCode);
     const hostname = Constants.DEFAULT_AUTH_OPTIONS.hostname;
-    const user = await getUserData(token, hostname);
-    const updatedAuth = addAccount(auth, 'GitHub App', token, hostname, user);
+    const updatedAuth = await addAccount(auth, 'GitHub App', token, hostname);
     setAuth(updatedAuth);
     saveState({ auth: updatedAuth, settings });
   }, [auth, settings]);
@@ -211,8 +226,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     async (data: LoginOAuthAppOptions) => {
       const { authOptions, authCode } = await authGitHub(data);
       const { token, hostname } = await getToken(authCode, authOptions);
-      const user = await getUserData(token, hostname);
-      const updatedAuth = addAccount(auth, 'OAuth App', token, hostname, user);
+      const updatedAuth = await addAccount(auth, 'OAuth App', token, hostname);
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
     },
@@ -222,13 +236,11 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   const loginWithPersonalAccessToken = useCallback(
     async ({ token, hostname }: LoginPersonalAccessTokenOptions) => {
       await headNotifications(hostname, token);
-      const user = await getUserData(token, hostname);
-      const updatedAuth = addAccount(
+      const updatedAuth = await addAccount(
         auth,
         'Personal Access Token',
         token,
         hostname,
-        user,
       );
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
@@ -238,6 +250,10 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const logoutFromAccount = useCallback(
     async (account: Account) => {
+      // Remove notifications for account
+      removeAccountNotifications(account);
+
+      // Remove from auth state
       const updatedAuth = removeAccount(auth, account);
       setAuth(updatedAuth);
       saveState({ auth: updatedAuth, settings });
@@ -247,20 +263,24 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
 
   const restoreSettings = useCallback(async () => {
     await migrateAuthenticatedAccounts();
-
     const existing = loadState();
 
     if (existing.auth) {
       setAuth({ ...defaultAuth, ...existing.auth });
+
+      // Refresh account data on app start
+      for (const account of existing.auth.accounts) {
+        await refreshAccount(account);
+      }
     }
 
     if (existing.settings) {
       setKeyboardShortcut(existing.settings.keyboardShortcut);
+      setAlternateIdleIcon(existing.settings.useAlternateIdleIcon);
       setSettings({ ...defaultSettings, ...existing.settings });
       webFrame.setZoomLevel(
         zoomPercentageToLevel(existing.settings.zoomPercentage),
       );
-      return existing.settings;
     }
   }, []);
 

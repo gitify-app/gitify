@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import { mockAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
-import { Errors } from '../utils/constants';
+import { Errors } from '../utils/errors';
 import { NotificationsRoute } from './Notifications';
 
 jest.mock('../components/AccountNotifications', () => ({
@@ -37,12 +37,12 @@ describe('routes/Notifications.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should render itself & its children (show account hostname)', () => {
+  it('should render itself & its children (show account header)', () => {
     const tree = render(
       <AppContext.Provider
         value={{
           notifications: [mockAccountNotifications[0]],
-          settings: { ...mockSettings, showAccountHostname: true },
+          settings: { ...mockSettings, showAccountHeader: true },
         }}
       >
         <NotificationsRoute />

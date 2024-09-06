@@ -1,5 +1,7 @@
+import log from 'electron-log';
 import { useCallback, useState } from 'react';
 import type {
+  Account,
   AccountNotifications,
   GitifyError,
   GitifyState,
@@ -13,6 +15,7 @@ import {
   markRepositoryNotificationsAsRead,
 } from '../utils/api/client';
 import { getAccountUUID } from '../utils/auth/utils';
+import { isMarkAsDoneFeatureSupported } from '../utils/helpers';
 import {
   getAllNotifications,
   setTrayIconColor,
@@ -23,6 +26,7 @@ import { removeNotifications } from '../utils/remove-notifications';
 
 interface NotificationsState {
   notifications: AccountNotifications[];
+  removeAccountNotifications: (account: Account) => Promise<void>;
   fetchNotifications: (state: GitifyState) => Promise<void>;
   markNotificationRead: (
     state: GitifyState,
@@ -56,9 +60,25 @@ export const useNotifications = (): NotificationsState => {
     [],
   );
 
+  const removeAccountNotifications = useCallback(
+    async (account: Account) => {
+      setStatus('loading');
+
+      const updatedNotifications = notifications.filter(
+        (notification) => notification.account !== account,
+      );
+
+      setNotifications(updatedNotifications);
+      setTrayIconColor(updatedNotifications);
+      setStatus('success');
+    },
+    [notifications],
+  );
+
   const fetchNotifications = useCallback(
     async (state: GitifyState) => {
       setStatus('loading');
+      setGlobalError(null);
 
       const fetchedNotifications = await getAllNotifications(state);
 
@@ -107,10 +127,11 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-        setStatus('success');
       } catch (err) {
-        setStatus('success');
+        log.error('Error occurred while marking notification as read', err);
       }
+
+      setStatus('success');
     },
     [notifications],
   );
@@ -120,11 +141,13 @@ export const useNotifications = (): NotificationsState => {
       setStatus('loading');
 
       try {
-        await markNotificationThreadAsDone(
-          notification.id,
-          notification.account.hostname,
-          notification.account.token,
-        );
+        if (isMarkAsDoneFeatureSupported(notification.account)) {
+          await markNotificationThreadAsDone(
+            notification.id,
+            notification.account.hostname,
+            notification.account.token,
+          );
+        }
 
         const updatedNotifications = removeNotification(
           state.settings,
@@ -134,10 +157,11 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-        setStatus('success');
       } catch (err) {
-        setStatus('success');
+        log.error('Error occurred while marking notification as done', err);
       }
+
+      setStatus('success');
     },
     [notifications],
   );
@@ -152,11 +176,20 @@ export const useNotifications = (): NotificationsState => {
           notification.account.hostname,
           notification.account.token,
         );
-        await markNotificationRead(state, notification);
-        setStatus('success');
+
+        if (state.settings.markAsDoneOnUnsubscribe) {
+          await markNotificationDone(state, notification);
+        } else {
+          await markNotificationRead(state, notification);
+        }
       } catch (err) {
-        setStatus('success');
+        log.error(
+          'Error occurred while unsubscribing from notification thread',
+          err,
+        );
       }
+
+      setStatus('success');
     },
     [markNotificationRead],
   );
@@ -183,10 +216,14 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-        setStatus('success');
       } catch (err) {
-        setStatus('success');
+        log.error(
+          'Error occurred while marking repository notifications as read',
+          err,
+        );
       }
+
+      setStatus('success');
     },
     [notifications],
   );
@@ -226,10 +263,14 @@ export const useNotifications = (): NotificationsState => {
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
-        setStatus('success');
       } catch (err) {
-        setStatus('success');
+        log.error(
+          'Error occurred while marking repository notifications as done',
+          err,
+        );
       }
+
+      setStatus('success');
     },
     [notifications, markNotificationDone],
   );
@@ -239,6 +280,7 @@ export const useNotifications = (): NotificationsState => {
     globalError,
     notifications,
 
+    removeAccountNotifications,
     fetchNotifications,
     markNotificationRead,
     markNotificationDone,

@@ -6,7 +6,7 @@ import type { AuthState, Hostname, SettingsState, Token } from '../types';
 import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
 import * as apiRequests from '../utils/api/request';
 import * as comms from '../utils/comms';
-import Constants from '../utils/constants';
+import { Constants } from '../utils/constants';
 import * as notifications from '../utils/notifications';
 import * as storage from '../utils/storage';
 import { AppContext, AppProvider, defaultSettings } from './App';
@@ -79,19 +79,19 @@ describe('context/App.tsx', () => {
       );
 
       act(() => {
-        jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
+        jest.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL);
         return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(2);
 
       act(() => {
-        jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
+        jest.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL);
         return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(3);
 
       act(() => {
-        jest.advanceTimersByTime(Constants.FETCH_INTERVAL);
+        jest.advanceTimersByTime(Constants.FETCH_NOTIFICATIONS_INTERVAL);
         return;
       });
       expect(fetchNotificationsMock).toHaveBeenCalledTimes(4);
@@ -345,24 +345,8 @@ describe('context/App.tsx', () => {
           user: null,
         } as AuthState,
         settings: {
+          ...defaultSettings,
           participating: true,
-          playSound: true,
-          showNotifications: true,
-          hideBots: false,
-          showNotificationsCountInTray: false,
-          openAtStartup: false,
-          theme: 'SYSTEM',
-          detailedNotifications: true,
-          markAsDoneOnOpen: false,
-          showAccountHostname: false,
-          delayNotificationState: false,
-          showPills: true,
-          showNumber: true,
-          keyboardShortcut: true,
-          groupBy: 'REPOSITORY',
-          filterReasons: [],
-          zoomPercentage: 100,
-          openLinks: 'FOREGROUND',
         } as SettingsState,
       });
     });
@@ -402,24 +386,8 @@ describe('context/App.tsx', () => {
           user: null,
         } as AuthState,
         settings: {
-          participating: false,
-          playSound: true,
-          showNotifications: true,
-          hideBots: false,
-          showNotificationsCountInTray: false,
+          ...defaultSettings,
           openAtStartup: true,
-          theme: 'SYSTEM',
-          detailedNotifications: true,
-          markAsDoneOnOpen: false,
-          showAccountHostname: false,
-          delayNotificationState: false,
-          showPills: true,
-          showNumber: true,
-          keyboardShortcut: true,
-          groupBy: 'REPOSITORY',
-          filterReasons: [],
-          zoomPercentage: 100,
-          openLinks: 'FOREGROUND',
         } as SettingsState,
       });
     });

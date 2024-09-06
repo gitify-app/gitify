@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 import { AppContext } from '../context/App';
 import type { AuthState, ClientID, ClientSecret, Hostname } from '../types';
@@ -12,6 +12,8 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('routes/LoginWithOAuthApp.tsx', () => {
+  const mockLoginWithOAuthApp = jest.fn();
+
   const openExternalLinkMock = jest
     .spyOn(comms, 'openExternalLink')
     .mockImplementation();
@@ -106,6 +108,39 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     });
+  });
+
+  it('should login using a token - success', async () => {
+    mockLoginWithOAuthApp.mockResolvedValueOnce(null);
+
+    render(
+      <AppContext.Provider
+        value={{
+          loginWithOAuthApp: mockLoginWithOAuthApp,
+        }}
+      >
+        <MemoryRouter>
+          <LoginWithOAuthApp />
+        </MemoryRouter>
+      </AppContext.Provider>,
+    );
+
+    fireEvent.change(screen.getByLabelText('Hostname'), {
+      target: { value: 'github.com' },
+    });
+    fireEvent.change(screen.getByLabelText('Client ID'), {
+      target: { value: '1234567890_ASDFGHJKL' },
+    });
+    fireEvent.change(screen.getByLabelText('Client Secret'), {
+      target: { value: '1234567890_asdfghjklPOIUYTREWQ0987654321' },
+    });
+
+    fireEvent.submit(screen.getByLabelText('Login'));
+
+    await waitFor(() => expect(mockLoginWithOAuthApp).toHaveBeenCalledTimes(1));
+
+    expect(mockLoginWithOAuthApp).toHaveBeenCalledTimes(1);
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
   });
 
   it('should render the form with errors', () => {

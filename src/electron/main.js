@@ -5,26 +5,36 @@ const {
   globalShortcut,
   Menu,
   dialog,
+  MenuItem,
 } = require('electron/main');
 const { menubar } = require('menubar');
-const { autoUpdater } = require('electron-updater');
 const { onFirstRunMaybe } = require('./first-run');
 const path = require('node:path');
 const log = require('electron-log');
 const fs = require('node:fs');
 const os = require('node:os');
+const { autoUpdater } = require('electron-updater');
+const { updateElectronApp } = require('update-electron-app');
 
 log.initialize();
-autoUpdater.logger = log;
-
-// TODO: Remove @electron/remote use - see #650
-require('@electron/remote/main').initialize();
-
+// Tray Icons
 const idleIcon = path.resolve(
   `${__dirname}/../../assets/images/tray-idleTemplate.png`,
 );
+const idleAlternateIcon = path.resolve(
+  `${__dirname}/../../assets/images/tray-idle-white.png`,
+);
+const idleUpdateAvailableIcon = path.resolve(
+  `${__dirname}/../../assets/images/tray-idle-update.png`,
+);
+const idleAlternateUpdateAvailableIcon = path.resolve(
+  `${__dirname}/../../assets/images/tray-idle-white-update.png`,
+);
 const activeIcon = path.resolve(
   `${__dirname}/../../assets/images/tray-active.png`,
+);
+const activeUpdateAvailableIcon = path.resolve(
+  `${__dirname}/../../assets/images/tray-active-update.png`,
 );
 
 const browserWindowOpts = {
@@ -40,7 +50,33 @@ const browserWindowOpts = {
   },
 };
 
+const checkForUpdatesMenuItem = new MenuItem({
+  label: 'Check for updates',
+  enabled: true,
+  click: () => {
+    autoUpdater.checkForUpdatesAndNotify();
+  },
+});
+
+const updateAvailableMenuItem = new MenuItem({
+  label: 'An update is available',
+  enabled: false,
+  visible: false,
+});
+
+const updateReadyForInstallMenuItem = new MenuItem({
+  label: 'Restart to update',
+  visible: false,
+  click: () => {
+    autoUpdater.quitAndInstall();
+  },
+});
+
 const contextMenu = Menu.buildFromTemplate([
+  checkForUpdatesMenuItem,
+  updateAvailableMenuItem,
+  updateReadyForInstallMenuItem,
+  { type: 'separator' },
   {
     label: 'Developer',
     submenu: [
@@ -84,13 +120,20 @@ const mb = menubar({
   showDockIcon: false,
 });
 
+let shouldUseAlternateIdleIcon = false;
+
 app.whenReady().then(async () => {
   await onFirstRunMaybe();
 
   mb.on('ready', () => {
-    autoUpdater.checkForUpdatesAndNotify();
-
     mb.app.setAppUserModelId('com.electron.gitify');
+
+    /**
+     * TODO: Remove @electron/remote use - see #650
+     * GitHub OAuth 2 Login Flows - Enable Remote Browser Window Launch
+     */
+    require('@electron/remote/main').initialize();
+    require('@electron/remote/main').enable(mb.window.webContents);
 
     // Tray configuration
     mb.tray.setToolTip('Gitify');
@@ -142,15 +185,33 @@ app.whenReady().then(async () => {
 
   ipc.on('gitify:quit', () => mb.app.quit());
 
+  ipc.on('gitify:use-alternate-idle-icon', (_, useAlternateIdleIcon) => {
+    shouldUseAlternateIdleIcon = useAlternateIdleIcon;
+  });
+
   ipc.on('gitify:icon-active', () => {
     if (!mb.tray.isDestroyed()) {
-      mb.tray.setImage(activeIcon);
+      mb.tray.setImage(
+        updateAvailableMenuItem.visible
+          ? activeUpdateAvailableIcon
+          : activeIcon,
+      );
     }
   });
 
   ipc.on('gitify:icon-idle', () => {
     if (!mb.tray.isDestroyed()) {
-      mb.tray.setImage(idleIcon);
+      if (shouldUseAlternateIdleIcon) {
+        mb.tray.setImage(
+          updateAvailableMenuItem.visible
+            ? idleAlternateUpdateAvailableIcon
+            : idleAlternateIcon,
+        );
+      } else {
+        mb.tray.setImage(
+          updateAvailableMenuItem.visible ? idleUpdateAvailableIcon : idleIcon,
+        );
+      }
     }
   });
 
@@ -181,6 +242,39 @@ app.whenReady().then(async () => {
   ipc.on('gitify:update-auto-launch', (_, settings) => {
     app.setLoginItemSettings(settings);
   });
+
+  // Auto Updater
+  updateElectronApp({
+    updateInterval: '24 hours',
+    logger: log,
+  });
+
+  autoUpdater.on('checking-for-update', () => {
+    log.info('Auto Updater: Checking for update');
+    checkForUpdatesMenuItem.enabled = false;
+  });
+
+  autoUpdater.on('error', (error) => {
+    log.error('Auto Updater: error checking for update', error);
+    checkForUpdatesMenuItem.enabled = true;
+  });
+
+  autoUpdater.on('update-available', () => {
+    log.info('Auto Updater: New update available');
+    updateAvailableMenuItem.visible = true;
+    mb.tray.setToolTip('Gitify\nA new update is available');
+  });
+
+  autoUpdater.on('update-downloaded', () => {
+    log.info('Auto Updater: Update downloaded');
+    updateReadyForInstallMenuItem.visible = true;
+    mb.tray.setToolTip('Gitify\nA new update is ready to install');
+  });
+
+  autoUpdater.on('update-not-available', () => {
+    log.info('Auto Updater: update not available');
+    checkForUpdatesMenuItem.enabled = true;
+  });
 });
 
 function takeScreenshot() {
@@ -197,6 +291,7 @@ function takeScreenshot() {
 
 function resetApp() {
   const cancelButtonId = 0;
+  const resetButtonId = 1;
 
   const response = dialog.showMessageBoxSync(mb.window, {
     type: 'warning',
@@ -208,10 +303,8 @@ function resetApp() {
     cancelId: cancelButtonId,
   });
 
-  if (response === cancelButtonId) {
-    return;
+  if (response === resetButtonId) {
+    mb.window.webContents.send('gitify:reset-app');
+    mb.app.quit();
   }
-
-  mb.window.webContents.send('gitify:reset-app');
-  mb.app.quit();
 }

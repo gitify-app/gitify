@@ -14,16 +14,16 @@ jest.mock('react-router-dom', () => ({
 global.ResizeObserver = require('resize-observer-polyfill');
 
 describe('routes/components/settings/SettingsFooter.tsx', () => {
-  afterEach(() => {
-    jest.clearAllMocks();
-    process.env = originalEnv;
-  });
-
   let originalEnv: NodeJS.ProcessEnv;
 
   beforeEach(() => {
     // Save the original node env state
     originalEnv = process.env;
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+    process.env = originalEnv;
   });
 
   describe('app version', () => {
@@ -48,7 +48,7 @@ describe('routes/components/settings/SettingsFooter.tsx', () => {
         );
       });
 
-      expect(screen.getByTitle('app-version')).toMatchSnapshot();
+      expect(screen.getByLabelText('app-version')).toMatchSnapshot();
     });
 
     it('should show development app version', async () => {
@@ -72,7 +72,7 @@ describe('routes/components/settings/SettingsFooter.tsx', () => {
         );
       });
 
-      expect(screen.getByTitle('app-version')).toMatchSnapshot();
+      expect(screen.getByLabelText('app-version')).toMatchSnapshot();
     });
   });
 

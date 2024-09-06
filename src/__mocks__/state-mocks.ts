@@ -5,13 +5,14 @@ import {
   type GitifyUser,
   GroupBy,
   type Hostname,
+  type Link,
   OpenPreference,
   type SettingsState,
   Theme,
   type Token,
 } from '../types';
 import type { EnterpriseAccount } from '../utils/auth/types';
-import Constants from '../utils/constants';
+import { Constants } from '../utils/constants';
 
 export const mockEnterpriseAccounts: EnterpriseAccount[] = [
   {
@@ -24,6 +25,7 @@ export const mockGitifyUser: GitifyUser = {
   login: 'octocat',
   name: 'Mona Lisa Octocat',
   id: 123456789,
+  avatar: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
 };
 
 export const mockPersonalAccessTokenAccount: Account = {
@@ -78,13 +80,14 @@ const mockAppearanceSettings = {
   detailedNotifications: true,
   showPills: true,
   showNumber: true,
-  showAccountHostname: false,
+  showAccountHeader: false,
 };
 
 const mockNotificationSettings = {
   groupBy: GroupBy.REPOSITORY,
   participating: false,
   markAsDoneOnOpen: false,
+  markAsDoneOnUnsubscribe: false,
   delayNotificationState: false,
 };
 
@@ -94,6 +97,7 @@ const mockSystemSettings = {
   showNotificationsCountInTray: false,
   showNotifications: true,
   playSound: true,
+  useAlternateIdleIcon: false,
   openAtStartup: false,
 };
 

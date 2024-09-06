@@ -46,6 +46,7 @@ export type Status = 'loading' | 'success' | 'error';
 export interface Account {
   method: AuthMethod;
   platform: PlatformType;
+  version?: string;
   hostname: Hostname;
   token: Token;
   user: GitifyUser | null;
@@ -68,25 +69,27 @@ interface AppearanceSettingsState {
   theme: Theme;
   zoomPercentage: number;
   detailedNotifications: boolean;
-  showAccountHostname: boolean;
+  showAccountHeader: boolean;
   showPills: boolean;
   showNumber: boolean;
 }
 
 interface NotificationSettingsState {
-  participating: boolean;
-  showNotifications: boolean;
-  markAsDoneOnOpen: boolean;
-  delayNotificationState: boolean;
   groupBy: GroupBy;
+  participating: boolean;
+  markAsDoneOnOpen: boolean;
+  markAsDoneOnUnsubscribe: boolean;
+  delayNotificationState: boolean;
 }
 
 interface SystemSettingsState {
   openLinks: OpenPreference;
+  keyboardShortcut: boolean;
+  showNotificationsCountInTray: boolean;
+  showNotifications: boolean;
+  useAlternateIdleIcon: boolean;
   playSound: boolean;
   openAtStartup: boolean;
-  showNotificationsCountInTray: boolean;
-  keyboardShortcut: boolean;
 }
 
 interface FilterSettingsState {
@@ -129,6 +132,7 @@ export interface AccountNotifications {
 export interface GitifyUser {
   login: string;
   name: string | null;
+  avatar: Link | null;
   id: number;
 }
 
