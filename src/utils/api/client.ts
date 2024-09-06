@@ -42,7 +42,11 @@ export function getAuthenticatedUser(
   return apiRequestAuth(url.toString() as Link, 'GET', token);
 }
 
-//
+/**
+ * Perform a HEAD operation, used to validate that connectivity is established.
+ *
+ * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications
+ */
 export function headNotifications(
   hostname: Hostname,
   token: Token,
