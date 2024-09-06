@@ -67,7 +67,7 @@ exports[`utils/api/client.ts listNotificationsForAuthenticatedUser should list n
 {
   "Accept": "application/json",
   "Authorization": "token 1234568790",
-  "Cache-Control": "no-cache",
+  "Cache-Control": "",
   "Content-Type": "application/json",
 }
 `;
@@ -76,7 +76,7 @@ exports[`utils/api/client.ts markNotificationThreadAsDone should mark notificati
 {
   "Accept": "application/json",
   "Authorization": "token token-123-456",
-  "Cache-Control": "no-cache",
+  "Cache-Control": "",
   "Content-Type": "application/json",
 }
 `;
