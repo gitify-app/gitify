@@ -66,6 +66,7 @@ const defaultAppearanceSettings = {
 
 const defaultNotificationSettings = {
   groupBy: GroupBy.REPOSITORY,
+  fetchAllNotifications: true,
   participating: false,
   markAsDoneOnOpen: false,
   markAsDoneOnUnsubscribe: false,

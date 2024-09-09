@@ -85,6 +85,7 @@ const mockAppearanceSettings = {
 
 const mockNotificationSettings = {
   groupBy: GroupBy.REPOSITORY,
+  fetchAllNotifications: true,
   participating: false,
   markAsDoneOnOpen: false,
   markAsDoneOnUnsubscribe: false,

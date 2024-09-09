@@ -34,6 +34,32 @@ describe('routes/components/settings/NotificationSettings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledTimes(1);
     expect(updateSetting).toHaveBeenCalledWith('groupBy', 'DATE');
   });
+
+  it('should toggle the fetchAllNotifications checkbox', async () => {
+    await act(async () => {
+      render(
+        <AppContext.Provider
+          value={{
+            auth: mockAuth,
+            settings: mockSettings,
+            updateSetting,
+          }}
+        >
+          <MemoryRouter>
+            <NotificationSettings />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+    });
+
+    fireEvent.click(screen.getByLabelText('Fetch all notifications'), {
+      target: { checked: true },
+    });
+
+    expect(updateSetting).toHaveBeenCalledTimes(1);
+    expect(updateSetting).toHaveBeenCalledWith('fetchAllNotifications', false);
+  });
+
   it('should toggle the showOnlyParticipating checkbox', async () => {
     await act(async () => {
       render(
