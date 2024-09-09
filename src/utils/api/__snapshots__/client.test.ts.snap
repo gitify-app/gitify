@@ -54,7 +54,16 @@ exports[`utils/api/client.ts ignoreNotificationThreadSubscription should ignore 
 }
 `;
 
-exports[`utils/api/client.ts listNotificationsForAuthenticatedUser should list notifications for user - github cloud 1`] = `
+exports[`utils/api/client.ts listNotificationsForAuthenticatedUser should list notifications for user - github cloud - fetchAllNotifications false 1`] = `
+{
+  "Accept": "application/json",
+  "Authorization": "token token-123-456",
+  "Cache-Control": "no-cache",
+  "Content-Type": "application/json",
+}
+`;
+
+exports[`utils/api/client.ts listNotificationsForAuthenticatedUser should list notifications for user - github cloud - fetchAllNotifications true 1`] = `
 {
   "Accept": "application/json",
   "Authorization": "token token-123-456",
