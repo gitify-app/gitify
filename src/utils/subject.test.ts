@@ -18,6 +18,7 @@ import {
   getCheckSuiteAttributes,
   getGitifySubjectDetails,
   getLatestReviewForReviewers,
+  getSubjectUser,
   getWorkflowRunAttributes,
   parseLinkedIssuesFromPr,
 } from './subject';
@@ -1330,6 +1331,36 @@ describe('utils/subject.ts', () => {
       const result = getWorkflowRunAttributes(mockNotification);
 
       expect(result).toBeNull();
+    });
+  });
+
+  describe('getSubjectUser', () => {
+    it('returns null when all users are null', () => {
+      const result = getSubjectUser([null, null]);
+
+      expect(result).toBeNull();
+    });
+
+    it('returns first user', () => {
+      const result = getSubjectUser([mockAuthor, null]);
+
+      expect(result).toEqual({
+        login: mockAuthor.login,
+        html_url: mockAuthor.html_url,
+        avatar_url: mockAuthor.avatar_url,
+        type: mockAuthor.type,
+      });
+    });
+
+    it('returns second user if first is null', () => {
+      const result = getSubjectUser([null, mockAuthor]);
+
+      expect(result).toEqual({
+        login: mockAuthor.login,
+        html_url: mockAuthor.html_url,
+        avatar_url: mockAuthor.avatar_url,
+        type: mockAuthor.type,
+      });
     });
   });
 });
