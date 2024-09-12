@@ -139,12 +139,7 @@ async function getGitifySubjectForCommit(
 
   return {
     state: null,
-    user: {
-      login: user.login,
-      html_url: user.html_url,
-      avatar_url: user.avatar_url,
-      type: user.type,
-    },
+    user: getSubjectUser([user]),
   };
 }
 
@@ -230,12 +225,7 @@ async function getGitifySubjectForIssue(
   return {
     number: issue.number,
     state: issue.state_reason ?? issue.state,
-    user: {
-      login: issueCommentUser?.login ?? issue.user.login,
-      html_url: issueCommentUser?.html_url ?? issue.user.html_url,
-      avatar_url: issueCommentUser?.avatar_url ?? issue.user.avatar_url,
-      type: issueCommentUser?.type ?? issue.user.type,
-    },
+    user: getSubjectUser([issueCommentUser, issue.user]),
     comments: issue.comments,
     labels: issue.labels?.map((label) => label.name) ?? [],
     milestone: issue.milestone,
@@ -277,12 +267,7 @@ async function getGitifySubjectForPullRequest(
   return {
     number: pr.number,
     state: prState,
-    user: {
-      login: prCommentUser?.login ?? pr.user.login,
-      html_url: prCommentUser?.html_url ?? pr.user.html_url,
-      avatar_url: prCommentUser?.avatar_url ?? pr.user.avatar_url,
-      type: prCommentUser?.type ?? pr.user.type,
-    },
+    user: getSubjectUser([prCommentUser, pr.user]),
     reviews: reviews,
     comments: pr.comments,
     labels: pr.labels?.map((label) => label.name) ?? [],
@@ -371,12 +356,7 @@ async function getGitifySubjectForRelease(
 
   return {
     state: null,
-    user: {
-      login: release.author.login,
-      html_url: release.author.html_url,
-      avatar_url: release.author.avatar_url,
-      type: release.author.type,
-    },
+    user: getSubjectUser([release.author]),
   };
 }
 
@@ -427,4 +407,28 @@ function getWorkflowRunStatus(statusDisplayName: string): CheckSuiteStatus {
     default:
       return null;
   }
+}
+
+/**
+ * Construct the notification subject user based on an order prioritized list of users
+ * @param users array of users in order or priority
+ * @returns the subject user
+ */
+export function getSubjectUser(users: User[]): SubjectUser {
+  let subjectUser: SubjectUser = null;
+
+  for (const user of users) {
+    if (user) {
+      subjectUser = {
+        login: user.login,
+        html_url: user.html_url,
+        avatar_url: user.avatar_url,
+        type: user.type,
+      };
+
+      return subjectUser;
+    }
+  }
+
+  return subjectUser;
 }
