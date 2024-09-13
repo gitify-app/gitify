@@ -14,7 +14,8 @@
         "useDefaultSwitchClause": "error"
       },
       "a11y": {
-        "useKeyWithClickEvents": "off"
+        "useKeyWithClickEvents": "off",
+        "useSemanticElements": "off"
       },
       "correctness": {
         "noUnusedFunctionParameters": "error",
