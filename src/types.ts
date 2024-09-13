@@ -76,6 +76,7 @@ interface AppearanceSettingsState {
 
 interface NotificationSettingsState {
   groupBy: GroupBy;
+  fetchAllNotifications: boolean;
   participating: boolean;
   markAsDoneOnOpen: boolean;
   markAsDoneOnUnsubscribe: boolean;

@@ -83,11 +83,32 @@ describe('utils/api/client.ts', () => {
   });
 
   describe('listNotificationsForAuthenticatedUser', () => {
-    const mockSettings: Partial<SettingsState> = {
-      participating: true,
-    };
+    it('should list notifications for user - github cloud - fetchAllNotifications true', async () => {
+      const mockSettings: Partial<SettingsState> = {
+        participating: true,
+        fetchAllNotifications: true,
+      };
 
-    it('should list notifications for user - github cloud', async () => {
+      await listNotificationsForAuthenticatedUser(
+        mockGitHubCloudAccount,
+        mockSettings as SettingsState,
+      );
+
+      expect(axios).toHaveBeenCalledWith({
+        url: 'https://api.github.com/notifications?participating=true',
+        method: 'GET',
+        data: {},
+      });
+
+      expect(axios.defaults.headers.common).toMatchSnapshot();
+    });
+
+    it('should list notifications for user - github cloud - fetchAllNotifications false', async () => {
+      const mockSettings: Partial<SettingsState> = {
+        participating: true,
+        fetchAllNotifications: false,
+      };
+
       await listNotificationsForAuthenticatedUser(
         mockGitHubCloudAccount,
         mockSettings as SettingsState,
@@ -103,6 +124,10 @@ describe('utils/api/client.ts', () => {
     });
 
     it('should list notifications for user - github enterprise server', async () => {
+      const mockSettings: Partial<SettingsState> = {
+        participating: true,
+      };
+
       await listNotificationsForAuthenticatedUser(
         mockGitHubEnterpriseServerAccount,
         mockSettings as SettingsState,

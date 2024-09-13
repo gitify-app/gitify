@@ -26,6 +26,26 @@ export const NotificationSettings: FC = () => {
         }}
       />
       <Checkbox
+        name="fetchAllNotifications"
+        label="Fetch all notifications"
+        checked={settings.fetchAllNotifications}
+        onChange={(evt) =>
+          updateSetting('fetchAllNotifications', evt.target.checked)
+        }
+        tooltip={
+          <div>
+            <div className="pb-3">
+              When <em>checked</em>, Gitify will fetch <strong>all</strong>{' '}
+              notifications from your inbox.
+            </div>
+            <div>
+              When <em>unchecked</em>, Gitify will only fetch the first page of
+              notifications (max 50 records per GitHub account)
+            </div>
+          </div>
+        }
+      />
+      <Checkbox
         name="showOnlyParticipating"
         label="Show only participating"
         checked={settings.participating}
