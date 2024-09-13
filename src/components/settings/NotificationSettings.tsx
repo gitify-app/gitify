@@ -39,7 +39,7 @@ export const NotificationSettings: FC = () => {
               notifications from your inbox.
             </div>
             <div>
-              When <em>unhecked</em>, Gitify will only fetch the first page of
+              When <em>unchecked</em>, Gitify will only fetch the first page of
               notifications (max 50 records per GitHub account)
             </div>
           </div>
