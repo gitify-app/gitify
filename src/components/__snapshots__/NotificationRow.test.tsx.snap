@@ -33,7 +33,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           </svg>
         </div>
         <div
-          class="flex flex-1 truncate cursor-pointer"
+          class="flex-1 truncate cursor-pointer"
         >
           <div
             class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
@@ -239,7 +239,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
         </svg>
       </div>
       <div
-        class="flex flex-1 truncate cursor-pointer"
+        class="flex-1 truncate cursor-pointer"
       >
         <div
           class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
@@ -502,7 +502,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           </svg>
         </div>
         <div
-          class="flex flex-1 truncate cursor-pointer"
+          class="flex-1 truncate cursor-pointer"
         >
           <div
             class="flex gap-1 items-center mb-1 truncate text-sm"
@@ -691,7 +691,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
         </svg>
       </div>
       <div
-        class="flex flex-1 truncate cursor-pointer"
+        class="flex-1 truncate cursor-pointer"
       >
         <div
           class="flex gap-1 items-center mb-1 truncate text-sm"
@@ -937,7 +937,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - hi
           </svg>
         </div>
         <div
-          class="flex flex-1 truncate cursor-pointer"
+          class="flex-1 truncate cursor-pointer"
         >
           <div
             class="flex gap-1 items-center mb-1 truncate text-sm"
@@ -1126,7 +1126,7 @@ exports[`components/NotificationRow.tsx should render itself & its children - hi
         </svg>
       </div>
       <div
-        class="flex flex-1 truncate cursor-pointer"
+        class="flex-1 truncate cursor-pointer"
       >
         <div
           class="flex gap-1 items-center mb-1 truncate text-sm"

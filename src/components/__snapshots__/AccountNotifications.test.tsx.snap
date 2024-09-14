@@ -499,7 +499,7 @@ exports[`components/AccountNotifications.tsx should render itself - group notifi
           </svg>
         </div>
         <div
-          class="flex flex-1 truncate cursor-pointer"
+          class="flex-1 truncate cursor-pointer"
         >
           <div
             class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
@@ -702,7 +702,7 @@ exports[`components/AccountNotifications.tsx should render itself - group notifi
           </svg>
         </div>
         <div
-          class="flex flex-1 truncate cursor-pointer"
+          class="flex-1 truncate cursor-pointer"
         >
           <div
             class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
@@ -985,7 +985,7 @@ exports[`components/AccountNotifications.tsx should render itself - group notifi
         </svg>
       </div>
       <div
-        class="flex flex-1 truncate cursor-pointer"
+        class="flex-1 truncate cursor-pointer"
       >
         <div
           class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
@@ -1188,7 +1188,7 @@ exports[`components/AccountNotifications.tsx should render itself - group notifi
         </svg>
       </div>
       <div
-        class="flex flex-1 truncate cursor-pointer"
+        class="flex-1 truncate cursor-pointer"
       >
         <div
           class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
