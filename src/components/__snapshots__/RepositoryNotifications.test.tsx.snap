@@ -245,7 +245,7 @@ exports[`components/RepositoryNotifications.tsx should render itself & its child
 }
 `;
 
-exports[`components/RepositoryNotifications.tsx should toggle account notifications visibility 1`] = `
+exports[`components/RepositoryNotifications.tsx should toggle repository notifications visibility 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

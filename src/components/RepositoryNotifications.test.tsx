@@ -98,7 +98,7 @@ describe('components/RepositoryNotifications.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should toggle account notifications visibility', async () => {
+  it('should toggle repository notifications visibility', async () => {
     await act(async () => {
       render(<RepositoryNotifications {...props} />);
     });
