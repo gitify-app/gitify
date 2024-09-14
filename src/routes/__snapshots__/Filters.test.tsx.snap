@@ -802,7 +802,6 @@ exports[`routes/Filters.tsx General should render itself & its children 1`] = `
   <div
     class="flex items-center justify-between bg-gray-200 px-3 py-1 text-sm dark:bg-gray-darker"
   >
-    <div />
     <div>
       <button
         class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
