@@ -1,7 +1,7 @@
 import { DeviceDesktopIcon } from '@primer/octicons-react';
 import { type FC, useContext } from 'react';
 import { AppContext } from '../../context/App';
-import type { OpenPreference } from '../../types';
+import { OpenPreference } from '../../types';
 import { Constants } from '../../utils/constants';
 import { isLinux, isMacOS } from '../../utils/platform';
 import { Checkbox } from '../fields/Checkbox';
@@ -19,8 +19,8 @@ export const SystemSettings: FC = () => {
         label="Open Links:"
         value={settings.openLinks}
         options={[
-          { label: 'Foreground', value: 'FOREGROUND' },
-          { label: 'Background', value: 'BACKGROUND' },
+          { label: 'Foreground', value: OpenPreference.FOREGROUND },
+          { label: 'Background', value: OpenPreference.BACKGROUND },
         ]}
         onChange={(evt) => {
           updateSetting('openLinks', evt.target.value as OpenPreference);
