@@ -13,7 +13,7 @@ jest.mock('./NotificationRow', () => ({
   NotificationRow: () => <div>NotificationRow</div>,
 }));
 
-describe('components/Repository.tsx', () => {
+describe('components/RepositoryNotifications.tsx', () => {
   const markRepoNotificationsRead = jest.fn();
   const markRepoNotificationsDone = jest.fn();
 

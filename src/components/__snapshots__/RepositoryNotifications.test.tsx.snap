@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/Repository.tsx should render itself & its children 1`] = `
+exports[`components/RepositoryNotifications.tsx should render itself & its children 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -245,7 +245,7 @@ exports[`components/Repository.tsx should render itself & its children 1`] = `
 }
 `;
 
-exports[`components/Repository.tsx should toggle account notifications visibility 1`] = `
+exports[`components/RepositoryNotifications.tsx should toggle account notifications visibility 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -604,7 +604,7 @@ exports[`components/Repository.tsx should toggle account notifications visibilit
 }
 `;
 
-exports[`components/Repository.tsx should use default repository icon when avatar is not available 1`] = `
+exports[`components/RepositoryNotifications.tsx should use default repository icon when avatar is not available 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
