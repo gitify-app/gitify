@@ -102,7 +102,7 @@ export const NotificationRow: FC<INotificationRow> = ({
       </div>
 
       <div
-        className="flex-1 truncate cursor-pointer"
+        className="flex flex-1 truncate cursor-pointer"
         onClick={() => handleNotification()}
       >
         <NotificationHeader notification={notification} />
