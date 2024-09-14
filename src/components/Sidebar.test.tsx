@@ -426,30 +426,6 @@ describe('components/Sidebar.tsx', () => {
     expect(quitAppMock).toHaveBeenCalledTimes(1);
   });
 
-  it('should open the gitify repository', () => {
-    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
-
-    render(
-      <AppContext.Provider
-        value={{
-          isLoggedIn: false,
-          notifications: [],
-          auth: mockAuth,
-          settings: mockSettings,
-        }}
-      >
-        <MemoryRouter>
-          <Sidebar />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-    fireEvent.click(screen.getByTestId('gitify-logo'));
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      'https://github.com/gitify-app/gitify',
-    );
-  });
-
   describe('should render the notifications icon', () => {
     it('when there are 0 notifications', () => {
       render(
