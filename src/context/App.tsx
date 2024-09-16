@@ -137,7 +137,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     markRepoNotificationsRead,
     markRepoNotificationsDone,
   } = useNotifications();
-  getNotificationCount;
 
   useEffect(() => {
     restoreSettings();
