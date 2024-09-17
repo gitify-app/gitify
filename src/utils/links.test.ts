@@ -15,7 +15,6 @@ import {
   openGitHubParticipatingDocs,
   openGitHubPulls,
   openGitifyReleaseNotes,
-  openGitifyRepository,
   openHost,
   openNotification,
   openRepository,
@@ -29,13 +28,6 @@ describe('utils/links.ts', () => {
 
   afterEach(() => {
     jest.clearAllMocks();
-  });
-
-  it('openGitifyRepository', () => {
-    openGitifyRepository();
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      'https://github.com/gitify-app/gitify',
-    );
   });
 
   it('openGitifyReleaseNotes', () => {

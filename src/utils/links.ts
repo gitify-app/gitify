@@ -5,10 +5,6 @@ import { openExternalLink } from './comms';
 import { Constants } from './constants';
 import { generateGitHubWebUrl } from './helpers';
 
-export function openGitifyRepository() {
-  openExternalLink(`https://github.com/${Constants.REPO_SLUG}` as Link);
-}
-
 export function openGitifyReleaseNotes(version: string) {
   openExternalLink(
     `https://github.com/${Constants.REPO_SLUG}/releases/tag/${version}` as Link,

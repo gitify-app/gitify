@@ -60,7 +60,7 @@ describe('components/Sidebar.tsx', () => {
     expect(tree).toMatchSnapshot();
   });
 
-  it('should open the gitify repository', () => {
+  it('should navigate home when clicking the gitify logo', () => {
     render(
       <AppContext.Provider
         value={{
@@ -78,10 +78,7 @@ describe('components/Sidebar.tsx', () => {
 
     fireEvent.click(screen.getByTestId('gitify-logo'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      'https://github.com/gitify-app/gitify',
-    );
+    expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
   });
 
   describe('quick links', () => {
