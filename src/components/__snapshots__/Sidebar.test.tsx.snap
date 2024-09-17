@@ -64,11 +64,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
           </button>
           <button
             class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500 disabled:cursor-default text-white hover:text-gray-500 py-1"
-            title="4 Unread Notifications"
+            title="4 unread notifications"
             type="button"
           >
             <svg
-              aria-label="4 Unread Notifications"
+              aria-label="4 unread notifications"
               class="octicon octicon-bell"
               fill="currentColor"
               focusable="false"
@@ -85,11 +85,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
           </button>
           <button
             class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500 disabled:cursor-default text-white hover:text-gray-500 py-1"
-            title="My Issues"
+            title="My issues"
             type="button"
           >
             <svg
-              aria-label="My Issues"
+              aria-label="My issues"
               class="octicon octicon-issue-opened"
               fill="currentColor"
               focusable="false"
@@ -109,11 +109,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
           </button>
           <button
             class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500 disabled:cursor-default text-white hover:text-gray-500 py-1"
-            title="My Pull Requests"
+            title="My pull requests"
             type="button"
           >
             <svg
-              aria-label="My Pull Requests"
+              aria-label="My pull requests"
               class="octicon octicon-git-pull-request"
               fill="currentColor"
               focusable="false"
@@ -217,11 +217,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         </button>
         <button
           class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500 disabled:cursor-default text-white hover:text-gray-500 py-1"
-          title="4 Unread Notifications"
+          title="4 unread notifications"
           type="button"
         >
           <svg
-            aria-label="4 Unread Notifications"
+            aria-label="4 unread notifications"
             class="octicon octicon-bell"
             fill="currentColor"
             focusable="false"
@@ -238,11 +238,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         </button>
         <button
           class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500 disabled:cursor-default text-white hover:text-gray-500 py-1"
-          title="My Issues"
+          title="My issues"
           type="button"
         >
           <svg
-            aria-label="My Issues"
+            aria-label="My issues"
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
@@ -262,11 +262,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         </button>
         <button
           class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500 disabled:cursor-default text-white hover:text-gray-500 py-1"
-          title="My Pull Requests"
+          title="My pull requests"
           type="button"
         >
           <svg
-            aria-label="My Pull Requests"
+            aria-label="My pull requests"
             class="octicon octicon-git-pull-request"
             fill="currentColor"
             focusable="false"
@@ -427,11 +427,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
           </button>
           <button
             class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500 disabled:cursor-default text-white hover:text-gray-500 py-1"
-            title="4 Unread Notifications"
+            title="4 unread notifications"
             type="button"
           >
             <svg
-              aria-label="4 Unread Notifications"
+              aria-label="4 unread notifications"
               class="octicon octicon-bell"
               fill="currentColor"
               focusable="false"
@@ -448,11 +448,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
           </button>
           <button
             class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500 disabled:cursor-default text-white hover:text-gray-500 py-1"
-            title="My Issues"
+            title="My issues"
             type="button"
           >
             <svg
-              aria-label="My Issues"
+              aria-label="My issues"
               class="octicon octicon-issue-opened"
               fill="currentColor"
               focusable="false"
@@ -472,11 +472,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
           </button>
           <button
             class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500 disabled:cursor-default text-white hover:text-gray-500 py-1"
-            title="My Pull Requests"
+            title="My pull requests"
             type="button"
           >
             <svg
-              aria-label="My Pull Requests"
+              aria-label="My pull requests"
               class="octicon octicon-git-pull-request"
               fill="currentColor"
               focusable="false"
@@ -580,11 +580,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
         </button>
         <button
           class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500 disabled:cursor-default text-white hover:text-gray-500 py-1"
-          title="4 Unread Notifications"
+          title="4 unread notifications"
           type="button"
         >
           <svg
-            aria-label="4 Unread Notifications"
+            aria-label="4 unread notifications"
             class="octicon octicon-bell"
             fill="currentColor"
             focusable="false"
@@ -601,11 +601,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
         </button>
         <button
           class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500 disabled:cursor-default text-white hover:text-gray-500 py-1"
-          title="My Issues"
+          title="My issues"
           type="button"
         >
           <svg
-            aria-label="My Issues"
+            aria-label="My issues"
             class="octicon octicon-issue-opened"
             fill="currentColor"
             focusable="false"
@@ -625,11 +625,11 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
         </button>
         <button
           class="flex justify-evenly items-center w-full my-1 cursor-pointer text-xs font-extrabold focus:outline-none disabled:text-gray-500 disabled:cursor-default text-white hover:text-gray-500 py-1"
-          title="My Pull Requests"
+          title="My pull requests"
           type="button"
         >
           <svg
-            aria-label="My Pull Requests"
+            aria-label="My pull requests"
             class="octicon octicon-git-pull-request"
             fill="currentColor"
             focusable="false"
