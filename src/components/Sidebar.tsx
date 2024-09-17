@@ -78,7 +78,6 @@ export const Sidebar: FC = () => {
           className="mx-auto my-3 cursor-pointer outline-none"
           title="Home"
           onClick={() => navigate('/', { replace: true })}
-          data-testid="gitify-logo"
         >
           <LogoIcon size={Size.SMALL} aria-label="Open Gitify" />
         </button>

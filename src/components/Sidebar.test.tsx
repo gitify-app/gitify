@@ -76,8 +76,7 @@ describe('components/Sidebar.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTestId('gitify-logo'));
-
+    fireEvent.click(screen.getByTitle('Home'));
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
   });
 
