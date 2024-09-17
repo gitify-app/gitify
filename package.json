@@ -1,7 +1,7 @@
 {
   "name": "gitify",
   "version": "5.14.0",
-  "description": "GitHub Notifications on your menu bar.",
+  "description": "GitHub notifications on your menu bar.",
   "main": "src/electron/main.js",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
