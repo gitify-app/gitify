@@ -83,20 +83,20 @@ export const Sidebar: FC = () => {
         </button>
 
         <SidebarButton
-          title={`${notificationsCount} Unread Notifications`}
+          title={`${notificationsCount} unread notifications`}
           metric={isLoggedIn ? notificationsCount : null}
           icon={BellIcon}
           onClick={() => openGitHubNotifications(primaryAccountHostname)}
         />
 
         <SidebarButton
-          title="My Issues"
+          title="My issues"
           icon={IssueOpenedIcon}
           onClick={() => openGitHubIssues(primaryAccountHostname)}
         />
 
         <SidebarButton
-          title="My Pull Requests"
+          title="My pull requests"
           icon={GitPullRequestIcon}
           onClick={() => openGitHubPulls(primaryAccountHostname)}
         />
@@ -106,7 +106,7 @@ export const Sidebar: FC = () => {
         {isLoggedIn && (
           <>
             <SidebarButton
-              title="Refresh Notifications"
+              title="Refresh notifications"
               icon={SyncIcon}
               size={Size.MEDIUM}
               loading={status === 'loading'}

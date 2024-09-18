@@ -98,13 +98,13 @@ describe('components/Sidebar.tsx', () => {
           </AppContext.Provider>,
         );
 
-        const notificationsIcon = screen.getByTitle('0 Unread Notifications');
+        const notificationsIcon = screen.getByTitle('0 unread notifications');
 
         expect(notificationsIcon.className).toContain('text-white');
         expect(notificationsIcon.childNodes.length).toBe(1);
         expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
 
-        fireEvent.click(screen.getByLabelText('0 Unread Notifications'));
+        fireEvent.click(screen.getByLabelText('0 unread notifications'));
 
         expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
         expect(openExternalLinkMock).toHaveBeenCalledWith(
@@ -128,14 +128,14 @@ describe('components/Sidebar.tsx', () => {
           </AppContext.Provider>,
         );
 
-        const notificationsIcon = screen.getByTitle('4 Unread Notifications');
+        const notificationsIcon = screen.getByTitle('4 unread notifications');
 
         expect(notificationsIcon.className).toContain(IconColor.GREEN);
         expect(notificationsIcon.childNodes.length).toBe(2);
         expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
         expect(notificationsIcon.childNodes[1].nodeValue).toBe('4');
 
-        fireEvent.click(screen.getByLabelText('4 Unread Notifications'));
+        fireEvent.click(screen.getByLabelText('4 unread notifications'));
 
         expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
         expect(openExternalLinkMock).toHaveBeenCalledWith(
@@ -161,7 +161,7 @@ describe('components/Sidebar.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByLabelText('My Issues'));
+    fireEvent.click(screen.getByLabelText('My issues'));
 
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
@@ -185,7 +185,7 @@ describe('components/Sidebar.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByLabelText('My Pull Requests'));
+    fireEvent.click(screen.getByLabelText('My pull requests'));
 
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
@@ -212,7 +212,7 @@ describe('components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTitle('Refresh Notifications'));
+      fireEvent.click(screen.getByTitle('Refresh notifications'));
 
       expect(fetchNotifications).toHaveBeenCalledTimes(1);
     });
@@ -235,7 +235,7 @@ describe('components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTitle('Refresh Notifications'));
+      fireEvent.click(screen.getByTitle('Refresh notifications'));
 
       expect(fetchNotifications).not.toHaveBeenCalled();
     });
@@ -344,7 +344,7 @@ describe('components/Sidebar.tsx', () => {
         </MemoryRouter>
       </AppContext.Provider>,
     );
-    fireEvent.click(screen.getByLabelText('4 Unread Notifications'));
+    fireEvent.click(screen.getByLabelText('4 unread notifications'));
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/notifications',
@@ -368,7 +368,7 @@ describe('components/Sidebar.tsx', () => {
         </MemoryRouter>
       </AppContext.Provider>,
     );
-    fireEvent.click(screen.getByLabelText('My Issues'));
+    fireEvent.click(screen.getByLabelText('My issues'));
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/issues',
@@ -392,7 +392,7 @@ describe('components/Sidebar.tsx', () => {
         </MemoryRouter>
       </AppContext.Provider>,
     );
-    fireEvent.click(screen.getByLabelText('My Pull Requests'));
+    fireEvent.click(screen.getByLabelText('My pull requests'));
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
       'https://github.com/pulls',
@@ -439,7 +439,7 @@ describe('components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
 
-      const notificationsIcon = screen.getByTitle('0 Unread Notifications');
+      const notificationsIcon = screen.getByTitle('0 unread notifications');
       expect(notificationsIcon.className).toContain('text-white');
       expect(notificationsIcon.childNodes.length).toBe(1);
       expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
@@ -461,7 +461,7 @@ describe('components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
 
-      const notificationsIcon = screen.getByTitle('4 Unread Notifications');
+      const notificationsIcon = screen.getByTitle('4 unread notifications');
       expect(notificationsIcon.className).toContain(IconColor.GREEN);
       expect(notificationsIcon.childNodes.length).toBe(2);
       expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
