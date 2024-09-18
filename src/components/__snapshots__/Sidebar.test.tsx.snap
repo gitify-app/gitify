@@ -13,8 +13,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
         >
           <button
             class="mx-auto my-3 cursor-pointer outline-none"
-            data-testid="gitify-logo"
-            title="Open Gitify on GitHub"
+            title="Home"
             type="button"
           >
             <svg
@@ -166,8 +165,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged in) 
       >
         <button
           class="mx-auto my-3 cursor-pointer outline-none"
-          data-testid="gitify-logo"
-          title="Open Gitify on GitHub"
+          title="Home"
           type="button"
         >
           <svg
@@ -376,8 +374,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
         >
           <button
             class="mx-auto my-3 cursor-pointer outline-none"
-            data-testid="gitify-logo"
-            title="Open Gitify on GitHub"
+            title="Home"
             type="button"
           >
             <svg
@@ -529,8 +526,7 @@ exports[`components/Sidebar.tsx should render itself & its children (logged out)
       >
         <button
           class="mx-auto my-3 cursor-pointer outline-none"
-          data-testid="gitify-logo"
-          title="Open Gitify on GitHub"
+          title="Home"
           type="button"
         >
           <svg

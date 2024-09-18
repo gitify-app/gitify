@@ -18,7 +18,6 @@ import {
   openGitHubIssues,
   openGitHubNotifications,
   openGitHubPulls,
-  openGitifyRepository,
 } from '../utils/links';
 import { getNotificationCount } from '../utils/notifications';
 import { SidebarButton } from './buttons/SidebarButton';
@@ -77,9 +76,8 @@ export const Sidebar: FC = () => {
         <button
           type="button"
           className="mx-auto my-3 cursor-pointer outline-none"
-          title="Open Gitify on GitHub"
-          onClick={() => openGitifyRepository()}
-          data-testid="gitify-logo"
+          title="Home"
+          onClick={() => navigate('/', { replace: true })}
         >
           <LogoIcon size={Size.SMALL} aria-label="Open Gitify" />
         </button>
