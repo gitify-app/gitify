@@ -1,7 +1,7 @@
 import {
   CheckIcon,
   ChevronDownIcon,
-  ChevronUpIcon,
+  ChevronRightIcon,
   MarkGithubIcon,
   ReadIcon,
 } from '@primer/octicons-react';
@@ -41,7 +41,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
 
   const ChevronIcon = showRepositoryNotifications
     ? ChevronDownIcon
-    : ChevronUpIcon;
+    : ChevronRightIcon;
 
   const toggleRepositoryNotificationsLabel = showRepositoryNotifications
     ? 'Hide repository notifications'

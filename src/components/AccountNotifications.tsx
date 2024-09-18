@@ -1,7 +1,7 @@
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
-  ChevronUpIcon,
+  ChevronRightIcon,
   FeedPersonIcon,
   GitPullRequestIcon,
   IssueOpenedIcon,
@@ -68,7 +68,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
       ? ChevronLeftIcon
       : showAccountNotifications
         ? ChevronDownIcon
-        : ChevronUpIcon;
+        : ChevronRightIcon;
 
   const toggleAccountNotificationsLabel =
     notifications.length === 0
