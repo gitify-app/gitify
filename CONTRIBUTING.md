@@ -70,6 +70,11 @@ The release process is automated. Follow the steps below.
 8. Create a [New Milestone][github-new-milestone] for upcoming release.
 9. A new homebrew cask will be [automatically published][homebrew-cask-autobump-workflow] (workflow runs ~3 hours)
 
+### Design Guidelines
+
+1. Use sentence case where possible
+2. Use GitHub's [Octicons][github-octicons] for iconography
+
 ### Project Philosophy
 
 This project is a tool for monitoring new notifications from Github. It's not meant to be a full-featured Github client. We want to keep it simple and focused on that core functionality. We're happy to accept contributions that help us achieve that goal, but we're also happy to say no to things that don't. We're not trying to be everything to everyone. 
@@ -90,6 +95,7 @@ This project is a tool for monitoring new notifications from Github. It's not me
 [github-milestones]: https://github.com/gitify-app/gitify/milestones
 [github-new-milestone]: https://github.com/gitify-app/gitify/milestones/new
 [github-new-release]: https://github.com/gitify-app/gitify/releases/new
+[github-octicons]: https://primer.style/foundations/icons
 [homebrew-cask-autobump-workflow]: https://github.com/Homebrew/homebrew-cask/actions/workflows/autobump.yml
 [jest-website]: https://jestjs.io/
 
