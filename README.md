@@ -11,7 +11,7 @@
 You can download Gitify for **free** from the website [www.gitify.io][website] or install it via [Homebrew Cask][brew].
 
 ```shell
-brew install --cask gitify
+brew install gitify
 ```
 
 Gitify supports macOS, Windows and Linux.
