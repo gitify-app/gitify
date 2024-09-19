@@ -78,9 +78,7 @@ export const raiseNativeNotification = (notifications: Notification[]) => {
 
   if (notifications.length === 1) {
     const notification = notifications[0];
-    title = `${isWindows() ? '' : 'Gitify - '}${
-      notification.repository.full_name
-    }`;
+    title = isWindows() ? '' : notification.repository.full_name;
     body = notification.subject.title;
   } else {
     title = 'Gitify';
