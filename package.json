@@ -122,7 +122,7 @@
     "update-electron-app": "3.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.1",
+    "@biomejs/biome": "1.9.2",
     "@electron/notarize": "2.5.0",
     "@testing-library/react": "16.0.1",
     "@types/jest": "29.5.13",
