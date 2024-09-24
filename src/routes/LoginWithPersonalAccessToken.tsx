@@ -44,7 +44,7 @@ export const validate = (values: IValues): IFormErrors => {
   return errors;
 };
 
-export const LoginWithPersonalAccessToken: FC = () => {
+export const LoginWithPersonalAccessTokenRoute: FC = () => {
   const { loginWithPersonalAccessToken } = useContext(AppContext);
   const navigate = useNavigate();
   const [isValidToken, setIsValidToken] = useState<boolean>(true);

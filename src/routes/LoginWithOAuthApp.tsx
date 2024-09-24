@@ -59,7 +59,7 @@ export const validate = (values: IValues): IFormErrors => {
   return errors;
 };
 
-export const LoginWithOAuthApp: FC = () => {
+export const LoginWithOAuthAppRoute: FC = () => {
   const navigate = useNavigate();
 
   const { loginWithOAuthApp } = useContext(AppContext);
