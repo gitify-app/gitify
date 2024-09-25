@@ -5,6 +5,7 @@ import {
   mockPersonalAccessTokenAccount,
 } from '../__mocks__/state-mocks';
 
+import log from 'electron-log';
 import { defaultSettings } from '../context/App';
 import type { Hostname, Link, SettingsState } from '../types';
 import type { SubjectType } from '../typesGitHub';
@@ -505,23 +506,57 @@ describe('utils/helpers.ts', () => {
       });
     });
 
-    it('defaults to repository url', async () => {
-      const subject = {
-        title: 'generate github web url unit tests',
-        url: null,
-        latest_comment_url: null,
-        type: 'Issue' as SubjectType,
-      };
+    describe('defaults to repository url', () => {
+      it('defaults when no urls present in notification', async () => {
+        const subject = {
+          title: 'generate github web url unit tests',
+          url: null,
+          latest_comment_url: null,
+          type: 'Issue' as SubjectType,
+        };
 
-      const result = await generateGitHubWebUrl({
-        ...mockSingleNotification,
-        subject: subject,
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
+        expect(result).toBe(
+          `${mockSingleNotification.repository.html_url}?${mockNotificationReferrer}`,
+        );
       });
 
-      expect(apiRequestAuthMock).toHaveBeenCalledTimes(0);
-      expect(result).toBe(
-        `${mockSingleNotification.repository.html_url}?${mockNotificationReferrer}`,
-      );
+      it('defaults when exception handled during specialized html enrichment process', async () => {
+        const logErrorSpy = jest.spyOn(log, 'error').mockImplementation();
+
+        const subject = {
+          title: 'generate github web url unit tests',
+          url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
+          latest_comment_url:
+            'https://api.github.com/repos/gitify-app/notifications-test/issues/comments/302888448' as Link,
+          type: 'Issue' as SubjectType,
+        };
+
+        const mockError = new Error('Test error');
+
+        apiRequestAuthMock.mockRejectedValue(mockError);
+
+        const result = await generateGitHubWebUrl({
+          ...mockSingleNotification,
+          subject: subject,
+        });
+
+        expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
+        expect(apiRequestAuthMock).toHaveBeenCalledWith(
+          subject.latest_comment_url,
+          'GET',
+          mockPersonalAccessTokenAccount.token,
+        );
+        expect(result).toBe(
+          `https://github.com/gitify-app/notifications-test?${mockNotificationReferrer}`,
+        );
+        expect(logErrorSpy).toHaveBeenCalledTimes(2);
+      });
     });
   });
 
