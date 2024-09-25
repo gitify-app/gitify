@@ -12,8 +12,8 @@ import { AppContext, AppProvider } from './context/App';
 import { AccountsRoute } from './routes/Accounts';
 import { FiltersRoute } from './routes/Filters';
 import { LoginRoute } from './routes/Login';
-import { LoginWithOAuthApp } from './routes/LoginWithOAuthApp';
-import { LoginWithPersonalAccessToken } from './routes/LoginWithPersonalAccessToken';
+import { LoginWithOAuthAppRoute } from './routes/LoginWithOAuthApp';
+import { LoginWithPersonalAccessTokenRoute } from './routes/LoginWithPersonalAccessToken';
 import { NotificationsRoute } from './routes/Notifications';
 import { SettingsRoute } from './routes/Settings';
 
@@ -71,9 +71,12 @@ export const App = () => {
             <Route path="/login" element={<LoginRoute />} />
             <Route
               path="/login-personal-access-token"
-              element={<LoginWithPersonalAccessToken />}
+              element={<LoginWithPersonalAccessTokenRoute />}
             />
-            <Route path="/login-oauth-app" element={<LoginWithOAuthApp />} />
+            <Route
+              path="/login-oauth-app"
+              element={<LoginWithOAuthAppRoute />}
+            />
           </Routes>
         </div>
       </Router>

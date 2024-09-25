@@ -9,7 +9,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { AppContext } from '../context/App';
 import * as comms from '../utils/comms';
 import {
-  LoginWithPersonalAccessToken,
+  LoginWithPersonalAccessTokenRoute,
   validate,
 } from './LoginWithPersonalAccessToken';
 
@@ -32,7 +32,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
   it('renders correctly', () => {
     const tree = render(
       <MemoryRouter>
-        <LoginWithPersonalAccessToken />
+        <LoginWithPersonalAccessTokenRoute />
       </MemoryRouter>,
     );
 
@@ -42,7 +42,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
   it('let us go back', () => {
     render(
       <MemoryRouter>
-        <LoginWithPersonalAccessToken />
+        <LoginWithPersonalAccessTokenRoute />
       </MemoryRouter>,
     );
 
@@ -80,7 +80,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
           }}
         >
           <MemoryRouter>
-            <LoginWithPersonalAccessToken />
+            <LoginWithPersonalAccessTokenRoute />
           </MemoryRouter>
         </AppContext.Provider>,
       );
@@ -102,7 +102,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
           }}
         >
           <MemoryRouter>
-            <LoginWithPersonalAccessToken />
+            <LoginWithPersonalAccessTokenRoute />
           </MemoryRouter>
         </AppContext.Provider>,
       );
@@ -123,7 +123,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
         }}
       >
         <MemoryRouter>
-          <LoginWithPersonalAccessToken />
+          <LoginWithPersonalAccessTokenRoute />
         </MemoryRouter>
       </AppContext.Provider>,
     );
@@ -155,7 +155,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
         }}
       >
         <MemoryRouter>
-          <LoginWithPersonalAccessToken />
+          <LoginWithPersonalAccessTokenRoute />
         </MemoryRouter>
       </AppContext.Provider>,
     );
@@ -181,7 +181,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
   it('should render the form with errors', () => {
     render(
       <MemoryRouter>
-        <LoginWithPersonalAccessToken />
+        <LoginWithPersonalAccessTokenRoute />
       </MemoryRouter>,
     );
 
@@ -206,7 +206,7 @@ describe('routes/LoginWithPersonalAccessToken.tsx', () => {
         }}
       >
         <MemoryRouter>
-          <LoginWithPersonalAccessToken />
+          <LoginWithPersonalAccessTokenRoute />
         </MemoryRouter>
       </AppContext.Provider>,
     );

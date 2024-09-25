@@ -3,7 +3,7 @@ import { MemoryRouter } from 'react-router-dom';
 import { AppContext } from '../context/App';
 import type { AuthState, ClientID, ClientSecret, Hostname } from '../types';
 import * as comms from '../utils/comms';
-import { LoginWithOAuthApp, validate } from './LoginWithOAuthApp';
+import { LoginWithOAuthAppRoute, validate } from './LoginWithOAuthApp';
 
 const mockNavigate = jest.fn();
 jest.mock('react-router-dom', () => ({
@@ -30,7 +30,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
     const tree = render(
       <AppContext.Provider value={{ auth: mockAuth }}>
         <MemoryRouter>
-          <LoginWithOAuthApp />
+          <LoginWithOAuthAppRoute />
         </MemoryRouter>
       </AppContext.Provider>,
     );
@@ -42,7 +42,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
     render(
       <AppContext.Provider value={{ auth: mockAuth }}>
         <MemoryRouter>
-          <LoginWithOAuthApp />
+          <LoginWithOAuthAppRoute />
         </MemoryRouter>
       </AppContext.Provider>,
     );
@@ -81,7 +81,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
       render(
         <AppContext.Provider value={{ auth: mockAuth }}>
           <MemoryRouter>
-            <LoginWithOAuthApp />
+            <LoginWithOAuthAppRoute />
           </MemoryRouter>
         </AppContext.Provider>,
       );
@@ -95,7 +95,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
       render(
         <AppContext.Provider value={{ auth: mockAuth }}>
           <MemoryRouter>
-            <LoginWithOAuthApp />
+            <LoginWithOAuthAppRoute />
           </MemoryRouter>
         </AppContext.Provider>,
       );
@@ -120,7 +120,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
         }}
       >
         <MemoryRouter>
-          <LoginWithOAuthApp />
+          <LoginWithOAuthAppRoute />
         </MemoryRouter>
       </AppContext.Provider>,
     );
@@ -147,7 +147,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
     render(
       <AppContext.Provider value={{ auth: mockAuth }}>
         <MemoryRouter>
-          <LoginWithOAuthApp />
+          <LoginWithOAuthAppRoute />
         </MemoryRouter>
       </AppContext.Provider>,
     );
@@ -173,7 +173,7 @@ describe('routes/LoginWithOAuthApp.tsx', () => {
     render(
       <AppContext.Provider value={{ auth: mockAuth }}>
         <MemoryRouter>
-          <LoginWithOAuthApp />
+          <LoginWithOAuthAppRoute />
         </MemoryRouter>
       </AppContext.Provider>,
     );
