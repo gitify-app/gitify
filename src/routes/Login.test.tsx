@@ -48,6 +48,26 @@ describe('routes/Login.tsx', () => {
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
   });
 
+  it('should login with github', () => {
+    const mockLoginWithGitHubApp = jest.fn();
+    render(
+      <AppContext.Provider
+        value={{
+          loginWithGitHubApp: mockLoginWithGitHubApp,
+        }}
+      >
+        <MemoryRouter>
+          <LoginRoute />
+        </MemoryRouter>
+        ,
+      </AppContext.Provider>,
+    );
+
+    fireEvent.click(screen.getByLabelText('Login with GitHub'));
+
+    expect(mockLoginWithGitHubApp).toHaveBeenCalled();
+  });
+
   it('should navigate to login with personal access token', () => {
     render(
       <MemoryRouter>
