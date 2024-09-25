@@ -239,12 +239,15 @@ describe('routes/Accounts.tsx', () => {
 
   describe('Add new accounts', () => {
     it('should show login with github app', async () => {
+      const mockLoginWithGitHubApp = jest.fn();
+
       await act(async () => {
         render(
           <AppContext.Provider
             value={{
               auth: { accounts: [mockOAuthAccount] },
               settings: mockSettings,
+              loginWithGitHubApp: mockLoginWithGitHubApp,
             }}
           >
             <MemoryRouter>
@@ -254,9 +257,9 @@ describe('routes/Accounts.tsx', () => {
         );
       });
 
-      expect(screen.getByTitle('Login with GitHub App').hidden).toBe(false);
+      fireEvent.click(screen.getByTitle('Login with GitHub'));
 
-      fireEvent.click(screen.getByTitle('Login with GitHub App'));
+      expect(mockLoginWithGitHubApp).toHaveBeenCalled();
     });
 
     it('should show login with personal access token', async () => {
@@ -275,11 +278,8 @@ describe('routes/Accounts.tsx', () => {
         );
       });
 
-      expect(screen.getByTitle('Login with Personal Access Token').hidden).toBe(
-        false,
-      );
-
       fireEvent.click(screen.getByTitle('Login with Personal Access Token'));
+
       expect(mockNavigate).toHaveBeenNthCalledWith(
         1,
         '/login-personal-access-token',
@@ -305,9 +305,8 @@ describe('routes/Accounts.tsx', () => {
         );
       });
 
-      expect(screen.getByTitle('Login with OAuth App').hidden).toBe(false);
-
       fireEvent.click(screen.getByTitle('Login with OAuth App'));
+
       expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app', {
         replace: true,
       });

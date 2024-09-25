@@ -186,7 +186,7 @@ export const AccountsRoute: FC = () => {
           <button
             type="button"
             className={BUTTON_CLASS_NAME}
-            title="Login with GitHub App"
+            title="Login with GitHub"
             onClick={loginWithGitHub}
           >
             <MarkGithubIcon
