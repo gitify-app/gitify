@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import { mockDirectoryPath } from '../__mocks__/utils';
 import { EmojiText, type IEmojiText } from './EmojiText';
 
-describe('components/icons/Emoji.tsx', () => {
+describe('components/Emoji.tsx', () => {
   beforeEach(() => {
     mockDirectoryPath();
   });

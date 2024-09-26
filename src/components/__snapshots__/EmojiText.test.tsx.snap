@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`components/icons/Emoji.tsx should render 1`] = `
+exports[`components/Emoji.tsx should render 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
