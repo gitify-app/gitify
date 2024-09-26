@@ -128,7 +128,7 @@
     "@types/jest": "29.5.13",
     "@types/node": "20.16.5",
     "@types/nprogress": "0.2.3",
-    "@types/react": "18.3.8",
+    "@types/react": "18.3.9",
     "@types/react-router-dom": "5.3.3",
     "autoprefixer": "10.4.20",
     "css-loader": "7.1.2",
