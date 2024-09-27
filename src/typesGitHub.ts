@@ -94,6 +94,7 @@ export type PullRequestReviewAuthorAssociation =
   | 'NONE'
   | 'OWNER';
 
+// TODO: Add explicit types for GitHub API response vs Gitify Notifications object
 export type Notification = GitHubNotification & GitifyNotification;
 
 export interface GitHubNotification {
