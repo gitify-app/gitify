@@ -32,6 +32,7 @@ const browserWindowOpts = {
   minWidth: 500,
   minHeight: 400,
   resizable: false,
+  skipTaskbar: true, // Hide the app from the Windows taskbar
   webPreferences: {
     enableRemoteModule: true,
     nodeIntegration: true,
@@ -106,7 +107,7 @@ const mb = menubar({
   index: `file://${__dirname}/index.html`,
   browserWindow: browserWindowOpts,
   preloadWindow: true,
-  showDockIcon: false,
+  showDockIcon: false, // Hide the app from the macOS dock
 });
 
 let shouldUseAlternateIdleIcon = false;
