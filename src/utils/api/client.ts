@@ -132,25 +132,6 @@ export function ignoreNotificationThreadSubscription(
 }
 
 /**
- * Marks all notifications in a repository as "read" for the current user.
- * If the number of notifications is too large to complete in one request,
- * you will receive a 202 Accepted status and GitHub will run an asynchronous
- * process to mark notifications as "read."
- *
- * Endpoint documentation: https://docs.github.com/en/rest/activity/notifications#mark-repository-notifications-as-read
- */
-export function markRepositoryNotificationsAsRead(
-  repoSlug: string,
-  hostname: Hostname,
-  token: Token,
-): AxiosPromise<void> {
-  const url = getGitHubAPIBaseUrl(hostname);
-  url.pathname += `repos/${repoSlug}/notifications`;
-
-  return apiRequestAuth(url.toString() as Link, 'PUT', token, {});
-}
-
-/**
  * Returns the contents of a single commit reference.
  *
  * Endpoint documentation: https://docs.github.com/en/rest/commits/commits#get-a-commit

@@ -1,15 +1,15 @@
-import { mockSingleAccountNotifications } from '../__mocks__/notifications-mocks';
-import { mockSettings } from '../__mocks__/state-mocks';
-import { mockSingleNotification } from './api/__mocks__/response-mocks';
-import { removeNotification } from './remove-notification';
+import { mockSingleAccountNotifications } from '../../__mocks__/notifications-mocks';
+import { mockSettings } from '../../__mocks__/state-mocks';
+import { mockSingleNotification } from '../api/__mocks__/response-mocks';
+import { removeNotifications } from './remove';
 
-describe('utils/remove-notification.ts', () => {
+describe('utils/remove.ts', () => {
   it('should remove a notification if it exists', () => {
     expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
-    const result = removeNotification(
+    const result = removeNotifications(
       { ...mockSettings, delayNotificationState: false },
-      mockSingleNotification,
+      [mockSingleNotification],
       mockSingleAccountNotifications,
     );
 
@@ -19,9 +19,9 @@ describe('utils/remove-notification.ts', () => {
   it('should skip notification removal if delay state enabled', () => {
     expect(mockSingleAccountNotifications[0].notifications.length).toBe(1);
 
-    const result = removeNotification(
+    const result = removeNotifications(
       { ...mockSettings, delayNotificationState: true },
-      mockSingleNotification,
+      [mockSingleNotification],
       mockSingleAccountNotifications,
     );
 

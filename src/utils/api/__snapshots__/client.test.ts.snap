@@ -116,21 +116,3 @@ exports[`utils/api/client.ts markNotificationThreadAsRead should mark notificati
   "Content-Type": "application/json",
 }
 `;
-
-exports[`utils/api/client.ts markRepositoryNotificationsAsRead should mark repository notifications as read - enterprise 1`] = `
-{
-  "Accept": "application/json",
-  "Authorization": "token token-123-456",
-  "Cache-Control": "",
-  "Content-Type": "application/json",
-}
-`;
-
-exports[`utils/api/client.ts markRepositoryNotificationsAsRead should mark repository notifications as read - github 1`] = `
-{
-  "Accept": "application/json",
-  "Authorization": "token token-123-456",
-  "Cache-Control": "",
-  "Content-Type": "application/json",
-}
-`;

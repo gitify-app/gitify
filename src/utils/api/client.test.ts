@@ -14,7 +14,6 @@ import {
   listNotificationsForAuthenticatedUser,
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
-  markRepositoryNotificationsAsRead,
 } from './client';
 import * as apiRequests from './request';
 
@@ -23,7 +22,6 @@ jest.mock('axios');
 const mockGitHubHostname = 'github.com' as Hostname;
 const mockEnterpriseHostname = 'example.com' as Hostname;
 const mockThreadId = '1234';
-const mockRepoSlug = 'gitify-app/notifications-test';
 
 describe('utils/api/client.ts', () => {
   afterEach(() => {
@@ -239,40 +237,6 @@ describe('utils/api/client.ts', () => {
         url: `https://example.com/api/v3/notifications/threads/${mockThreadId}/subscription`,
         method: 'PUT',
         data: { ignored: true },
-      });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
-    });
-  });
-
-  describe('markRepositoryNotificationsAsRead', () => {
-    it('should mark repository notifications as read - github', async () => {
-      await markRepositoryNotificationsAsRead(
-        mockRepoSlug,
-        mockGitHubHostname,
-        mockToken,
-      );
-
-      expect(axios).toHaveBeenCalledWith({
-        url: `https://api.github.com/repos/${mockRepoSlug}/notifications`,
-        method: 'PUT',
-        data: {},
-      });
-
-      expect(axios.defaults.headers.common).toMatchSnapshot();
-    });
-
-    it('should mark repository notifications as read - enterprise', async () => {
-      await markRepositoryNotificationsAsRead(
-        mockRepoSlug,
-        mockEnterpriseHostname,
-        mockToken,
-      );
-
-      expect(axios).toHaveBeenCalledWith({
-        url: `https://example.com/api/v3/repos/${mockRepoSlug}/notifications`,
-        method: 'PUT',
-        data: {},
       });
 
       expect(axios.defaults.headers.common).toMatchSnapshot();
