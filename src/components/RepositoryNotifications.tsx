@@ -83,7 +83,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
           <HoverGroup>
             {isMarkAsDoneFeatureSupported(repoNotifications[0].account) && (
               <InteractionButton
-                title="Mark Repository as Done"
+                title="Mark repository as done"
                 icon={CheckIcon}
                 size={Size.MEDIUM}
                 onClick={(event: MouseEvent<HTMLElement>) => {
@@ -96,7 +96,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
               />
             )}
             <InteractionButton
-              title="Mark Repository as Read"
+              title="Mark repository as read"
               icon={ReadIcon}
               size={Size.SMALL}
               onClick={(event: MouseEvent<HTMLElement>) => {

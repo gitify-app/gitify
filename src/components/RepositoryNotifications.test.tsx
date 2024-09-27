@@ -64,7 +64,7 @@ describe('components/RepositoryNotifications.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTitle('Mark Repository as Read'));
+    fireEvent.click(screen.getByTitle('Mark repository as read'));
 
     expect(markRepoNotificationsRead).toHaveBeenCalledWith(
       mockSingleNotification,
@@ -80,7 +80,7 @@ describe('components/RepositoryNotifications.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTitle('Mark Repository as Done'));
+    fireEvent.click(screen.getByTitle('Mark repository as done'));
 
     expect(markRepoNotificationsDone).toHaveBeenCalledWith(
       mockSingleNotification,
