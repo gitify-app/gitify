@@ -71,8 +71,8 @@
       "identity": "Emmanouil Konstantinidis (3YP8SXP3BF)",
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
-      "entitlements": "./entitlements/entitlements.mac.plist",
-      "entitlementsInherit": "./entitlements/entitlements.mac.plist",
+      "entitlements": "assets/entitlements.mac.plist",
+      "entitlementsInherit": "assets/entitlements.mac.plist",
       "publish": ["github"],
       "extendInfo": {
         "NSBluetoothAlwaysUsageDescription": null,
