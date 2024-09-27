@@ -131,7 +131,7 @@ export const NotificationRow: FC<INotificationRow> = ({
         <HoverGroup>
           {isMarkAsDoneFeatureSupported(notification.account) && (
             <InteractionButton
-              title="Mark as Done"
+              title="Mark as done"
               icon={CheckIcon}
               size={Size.MEDIUM}
               onClick={() => {
@@ -142,7 +142,7 @@ export const NotificationRow: FC<INotificationRow> = ({
             />
           )}
           <InteractionButton
-            title="Mark as Read"
+            title="Mark as read"
             icon={ReadIcon}
             size={Size.SMALL}
             onClick={() => {
