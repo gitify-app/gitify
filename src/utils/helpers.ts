@@ -1,4 +1,5 @@
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
+import log from 'electron-log';
 import { defaultSettings } from '../context/App';
 import type { Account, Hostname, Link, SettingsState } from '../types';
 import type { Notification } from '../typesGitHub';
@@ -117,37 +118,44 @@ export async function generateGitHubWebUrl(
 ): Promise<Link> {
   const url = new URL(notification.repository.html_url);
 
-  if (notification.subject.latest_comment_url) {
-    url.href = await getHtmlUrl(
-      notification.subject.latest_comment_url,
-      notification.account.token,
-    );
-  } else if (notification.subject.url) {
-    url.href = await getHtmlUrl(
-      notification.subject.url,
-      notification.account.token,
-    );
-  } else {
-    // Perform any specific notification type handling (only required for a few special notification scenarios)
-    switch (notification.subject.type) {
-      case 'CheckSuite':
-        url.href = getCheckSuiteUrl(notification);
-        break;
-      case 'Discussion':
-        url.href = await getDiscussionUrl(notification);
-        break;
-      case 'RepositoryInvitation':
-        url.pathname += '/invitations';
-        break;
-      case 'RepositoryDependabotAlertsThread':
-        url.pathname += '/security/dependabot';
-        break;
-      case 'WorkflowRun':
-        url.href = getWorkflowRunUrl(notification);
-        break;
-      default:
-        break;
+  try {
+    if (notification.subject.latest_comment_url) {
+      url.href = await getHtmlUrl(
+        notification.subject.latest_comment_url,
+        notification.account.token,
+      );
+    } else if (notification.subject.url) {
+      url.href = await getHtmlUrl(
+        notification.subject.url,
+        notification.account.token,
+      );
+    } else {
+      // Perform any specific notification type handling (only required for a few special notification scenarios)
+      switch (notification.subject.type) {
+        case 'CheckSuite':
+          url.href = getCheckSuiteUrl(notification);
+          break;
+        case 'Discussion':
+          url.href = await getDiscussionUrl(notification);
+          break;
+        case 'RepositoryInvitation':
+          url.pathname += '/invitations';
+          break;
+        case 'RepositoryDependabotAlertsThread':
+          url.pathname += '/security/dependabot';
+          break;
+        case 'WorkflowRun':
+          url.href = getWorkflowRunUrl(notification);
+          break;
+        default:
+          break;
+      }
     }
+  } catch (err) {
+    log.error(
+      'Error occurred while attempting to get a specific notification URL.  Will fall back to defaults',
+      err,
+    );
   }
 
   url.searchParams.set(
