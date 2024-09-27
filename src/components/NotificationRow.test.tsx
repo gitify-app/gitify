@@ -204,7 +204,7 @@ describe('components/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTitle('Mark as Read'));
+      fireEvent.click(screen.getByTitle('Mark as read'));
       expect(markNotificationRead).toHaveBeenCalledTimes(1);
     });
 
@@ -224,7 +224,7 @@ describe('components/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTitle('Mark as Done'));
+      fireEvent.click(screen.getByTitle('Mark as done'));
       expect(markNotificationDone).toHaveBeenCalledTimes(1);
     });
 

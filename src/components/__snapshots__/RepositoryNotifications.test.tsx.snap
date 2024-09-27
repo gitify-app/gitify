@@ -27,11 +27,11 @@ exports[`components/RepositoryNotifications.tsx should render itself & its child
         >
           <button
             class="h-full hover:text-green-500 focus:outline-none"
-            title="Mark Repository as Done"
+            title="Mark repository as done"
             type="button"
           >
             <svg
-              aria-label="Mark Repository as Done"
+              aria-label="Mark repository as done"
               class="octicon octicon-check"
               fill="currentColor"
               focusable="false"
@@ -48,11 +48,11 @@ exports[`components/RepositoryNotifications.tsx should render itself & its child
           </button>
           <button
             class="h-full hover:text-green-500 focus:outline-none"
-            title="Mark Repository as Read"
+            title="Mark repository as read"
             type="button"
           >
             <svg
-              aria-label="Mark Repository as Read"
+              aria-label="Mark repository as read"
               class="octicon octicon-read"
               fill="currentColor"
               focusable="false"
@@ -121,11 +121,11 @@ exports[`components/RepositoryNotifications.tsx should render itself & its child
       >
         <button
           class="h-full hover:text-green-500 focus:outline-none"
-          title="Mark Repository as Done"
+          title="Mark repository as done"
           type="button"
         >
           <svg
-            aria-label="Mark Repository as Done"
+            aria-label="Mark repository as done"
             class="octicon octicon-check"
             fill="currentColor"
             focusable="false"
@@ -142,11 +142,11 @@ exports[`components/RepositoryNotifications.tsx should render itself & its child
         </button>
         <button
           class="h-full hover:text-green-500 focus:outline-none"
-          title="Mark Repository as Read"
+          title="Mark repository as read"
           type="button"
         >
           <svg
-            aria-label="Mark Repository as Read"
+            aria-label="Mark repository as read"
             class="octicon octicon-read"
             fill="currentColor"
             focusable="false"
@@ -281,11 +281,11 @@ exports[`components/RepositoryNotifications.tsx should toggle repository notific
         >
           <button
             class="h-full hover:text-green-500 focus:outline-none"
-            title="Mark Repository as Done"
+            title="Mark repository as done"
             type="button"
           >
             <svg
-              aria-label="Mark Repository as Done"
+              aria-label="Mark repository as done"
               class="octicon octicon-check"
               fill="currentColor"
               focusable="false"
@@ -302,11 +302,11 @@ exports[`components/RepositoryNotifications.tsx should toggle repository notific
           </button>
           <button
             class="h-full hover:text-green-500 focus:outline-none"
-            title="Mark Repository as Read"
+            title="Mark repository as read"
             type="button"
           >
             <svg
-              aria-label="Mark Repository as Read"
+              aria-label="Mark repository as read"
               class="octicon octicon-read"
               fill="currentColor"
               focusable="false"
@@ -377,11 +377,11 @@ exports[`components/RepositoryNotifications.tsx should toggle repository notific
         >
           <button
             class="h-full hover:text-green-500 focus:outline-none"
-            title="Mark Repository as Done"
+            title="Mark repository as done"
             type="button"
           >
             <svg
-              aria-label="Mark Repository as Done"
+              aria-label="Mark repository as done"
               class="octicon octicon-check"
               fill="currentColor"
               focusable="false"
@@ -398,11 +398,11 @@ exports[`components/RepositoryNotifications.tsx should toggle repository notific
           </button>
           <button
             class="h-full hover:text-green-500 focus:outline-none"
-            title="Mark Repository as Read"
+            title="Mark repository as read"
             type="button"
           >
             <svg
-              aria-label="Mark Repository as Read"
+              aria-label="Mark repository as read"
               class="octicon octicon-read"
               fill="currentColor"
               focusable="false"
@@ -480,11 +480,11 @@ exports[`components/RepositoryNotifications.tsx should toggle repository notific
       >
         <button
           class="h-full hover:text-green-500 focus:outline-none"
-          title="Mark Repository as Done"
+          title="Mark repository as done"
           type="button"
         >
           <svg
-            aria-label="Mark Repository as Done"
+            aria-label="Mark repository as done"
             class="octicon octicon-check"
             fill="currentColor"
             focusable="false"
@@ -501,11 +501,11 @@ exports[`components/RepositoryNotifications.tsx should toggle repository notific
         </button>
         <button
           class="h-full hover:text-green-500 focus:outline-none"
-          title="Mark Repository as Read"
+          title="Mark repository as read"
           type="button"
         >
           <svg
-            aria-label="Mark Repository as Read"
+            aria-label="Mark repository as read"
             class="octicon octicon-read"
             fill="currentColor"
             focusable="false"
@@ -640,11 +640,11 @@ exports[`components/RepositoryNotifications.tsx should use default repository ic
         >
           <button
             class="h-full hover:text-green-500 focus:outline-none"
-            title="Mark Repository as Done"
+            title="Mark repository as done"
             type="button"
           >
             <svg
-              aria-label="Mark Repository as Done"
+              aria-label="Mark repository as done"
               class="octicon octicon-check"
               fill="currentColor"
               focusable="false"
@@ -661,11 +661,11 @@ exports[`components/RepositoryNotifications.tsx should use default repository ic
           </button>
           <button
             class="h-full hover:text-green-500 focus:outline-none"
-            title="Mark Repository as Read"
+            title="Mark repository as read"
             type="button"
           >
             <svg
-              aria-label="Mark Repository as Read"
+              aria-label="Mark repository as read"
               class="octicon octicon-read"
               fill="currentColor"
               focusable="false"
@@ -743,11 +743,11 @@ exports[`components/RepositoryNotifications.tsx should use default repository ic
       >
         <button
           class="h-full hover:text-green-500 focus:outline-none"
-          title="Mark Repository as Done"
+          title="Mark repository as done"
           type="button"
         >
           <svg
-            aria-label="Mark Repository as Done"
+            aria-label="Mark repository as done"
             class="octicon octicon-check"
             fill="currentColor"
             focusable="false"
@@ -764,11 +764,11 @@ exports[`components/RepositoryNotifications.tsx should use default repository ic
         </button>
         <button
           class="h-full hover:text-green-500 focus:outline-none"
-          title="Mark Repository as Read"
+          title="Mark repository as read"
           type="button"
         >
           <svg
-            aria-label="Mark Repository as Read"
+            aria-label="Mark repository as read"
             class="octicon octicon-read"
             fill="currentColor"
             focusable="false"
