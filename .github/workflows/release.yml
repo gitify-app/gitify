@@ -21,6 +21,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
+      - run: pnpm clean
       - run: pnpm install
       - run: pnpm build
         env:
@@ -52,6 +53,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
+      - run: pnpm clean
       - run: pnpm install
       - run: pnpm build
         env:
@@ -77,6 +79,7 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'pnpm'
+      - run: pnpm clean
       - run: pnpm install
       - run: pnpm build
         env:
