@@ -45,15 +45,16 @@ export const NotificationRow: FC<INotificationRow> = ({
   const [showAsRead, setShowAsRead] = useState(false);
 
   const handleNotification = useCallback(() => {
+    console.log('HERE');
     setAnimateExit(!settings.delayNotificationState);
     setShowAsRead(settings.delayNotificationState);
 
     openNotification(notification);
 
     if (settings.markAsDoneOnOpen) {
-      markNotificationsAsRead([notification]);
-    } else {
       markNotificationsAsDone([notification]);
+    } else {
+      markNotificationsAsRead([notification]);
     }
   }, [
     notification,
