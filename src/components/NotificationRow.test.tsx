@@ -185,7 +185,7 @@ describe('components/NotificationRow.tsx', () => {
       expect(markNotificationsAsDone).toHaveBeenCalledTimes(1);
     });
 
-    it('should mark a notification as read', () => {
+    it('should mark notifications as read', () => {
       const markNotificationsAsRead = jest.fn();
 
       const props = {
@@ -204,11 +204,11 @@ describe('components/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTitle('Mark as Read'));
+      fireEvent.click(screen.getByTitle('Mark as read'));
       expect(markNotificationsAsRead).toHaveBeenCalledTimes(1);
     });
 
-    it('should mark a notification as done', () => {
+    it('should mark notifications as done', () => {
       const markNotificationsAsDone = jest.fn();
 
       const props = {
@@ -224,7 +224,7 @@ describe('components/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTitle('Mark as Done'));
+      fireEvent.click(screen.getByTitle('Mark as done'));
       expect(markNotificationsAsDone).toHaveBeenCalledTimes(1);
     });
 

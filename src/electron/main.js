@@ -17,32 +17,25 @@ const { autoUpdater } = require('electron-updater');
 const { updateElectronApp } = require('update-electron-app');
 
 log.initialize();
-// Tray Icons
-const idleIcon = path.resolve(
-  `${__dirname}/../../assets/images/tray-idleTemplate.png`,
-);
-const idleUpdateAvailableIcon = path.resolve(
-  `${__dirname}/../../assets/images/tray-idle-update.png`,
-);
-const idleAlternateIcon = path.resolve(
-  `${__dirname}/../../assets/images/tray-idle-white.png`,
-);
-const idleAlternateUpdateAvailableIcon = path.resolve(
-  `${__dirname}/../../assets/images/tray-idle-white-update.png`,
-);
-const activeIcon = path.resolve(
-  `${__dirname}/../../assets/images/tray-active.png`,
-);
-const activeUpdateAvailableIcon = path.resolve(
-  `${__dirname}/../../assets/images/tray-active-update.png`,
-);
 
+// Tray Icons
+const idleIcon = getIconPath('tray-idleTemplate.png');
+const idleUpdateIcon = getIconPath('tray-idle-update.png');
+const idleAlternateIcon = getIconPath('tray-idle-white.png');
+const idleAlternateUpdateIcon = getIconPath('tray-idle-white-update.png');
+const activeIcon = getIconPath('tray-active.png');
+const activeUpdateIcon = getIconPath('tray-active-update.png');
+
+/**
+ * @type {Electron.BrowserWindowConstructorOptions}
+ */
 const browserWindowOpts = {
   width: 500,
   height: 400,
   minWidth: 500,
   minHeight: 400,
   resizable: false,
+  skipTaskbar: true, // Hide the app from the Windows taskbar
   webPreferences: {
     enableRemoteModule: true,
     nodeIntegration: true,
@@ -117,7 +110,7 @@ const mb = menubar({
   index: `file://${__dirname}/index.html`,
   browserWindow: browserWindowOpts,
   preloadWindow: true,
-  showDockIcon: false,
+  showDockIcon: false, // Hide the app from the macOS dock
 });
 
 let shouldUseAlternateIdleIcon = false;
@@ -192,9 +185,7 @@ app.whenReady().then(async () => {
   ipc.on('gitify:icon-active', () => {
     if (!mb.tray.isDestroyed()) {
       mb.tray.setImage(
-        updateAvailableMenuItem.visible
-          ? activeUpdateAvailableIcon
-          : activeIcon,
+        updateAvailableMenuItem.visible ? activeUpdateIcon : activeIcon,
       );
     }
   });
@@ -204,12 +195,12 @@ app.whenReady().then(async () => {
       if (shouldUseAlternateIdleIcon) {
         mb.tray.setImage(
           updateAvailableMenuItem.visible
-            ? idleAlternateUpdateAvailableIcon
+            ? idleAlternateUpdateIcon
             : idleAlternateIcon,
         );
       } else {
         mb.tray.setImage(
-          updateAvailableMenuItem.visible ? idleUpdateAvailableIcon : idleIcon,
+          updateAvailableMenuItem.visible ? idleUpdateIcon : idleIcon,
         );
       }
     }
@@ -307,4 +298,8 @@ function resetApp() {
     mb.window.webContents.send('gitify:reset-app');
     mb.app.quit();
   }
+}
+
+function getIconPath(iconName) {
+  return path.resolve(__dirname, '../../assets/images', iconName);
 }

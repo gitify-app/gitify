@@ -145,11 +145,11 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
         >
           <button
             class="h-full hover:text-green-500 focus:outline-none"
-            title="Mark as Done"
+            title="Mark as done"
             type="button"
           >
             <svg
-              aria-label="Mark as Done"
+              aria-label="Mark as done"
               class="octicon octicon-check"
               fill="currentColor"
               focusable="false"
@@ -166,11 +166,11 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           </button>
           <button
             class="h-full hover:text-green-500 focus:outline-none"
-            title="Mark as Read"
+            title="Mark as read"
             type="button"
           >
             <svg
-              aria-label="Mark as Read"
+              aria-label="Mark as read"
               class="octicon octicon-read"
               fill="currentColor"
               focusable="false"
@@ -351,11 +351,11 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
       >
         <button
           class="h-full hover:text-green-500 focus:outline-none"
-          title="Mark as Done"
+          title="Mark as done"
           type="button"
         >
           <svg
-            aria-label="Mark as Done"
+            aria-label="Mark as done"
             class="octicon octicon-check"
             fill="currentColor"
             focusable="false"
@@ -372,11 +372,11 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
         </button>
         <button
           class="h-full hover:text-green-500 focus:outline-none"
-          title="Mark as Read"
+          title="Mark as read"
           type="button"
         >
           <svg
-            aria-label="Mark as Read"
+            aria-label="Mark as read"
             class="octicon octicon-read"
             fill="currentColor"
             focusable="false"
@@ -597,11 +597,11 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
         >
           <button
             class="h-full hover:text-green-500 focus:outline-none"
-            title="Mark as Done"
+            title="Mark as done"
             type="button"
           >
             <svg
-              aria-label="Mark as Done"
+              aria-label="Mark as done"
               class="octicon octicon-check"
               fill="currentColor"
               focusable="false"
@@ -618,11 +618,11 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
           </button>
           <button
             class="h-full hover:text-green-500 focus:outline-none"
-            title="Mark as Read"
+            title="Mark as read"
             type="button"
           >
             <svg
-              aria-label="Mark as Read"
+              aria-label="Mark as read"
               class="octicon octicon-read"
               fill="currentColor"
               focusable="false"
@@ -786,11 +786,11 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
       >
         <button
           class="h-full hover:text-green-500 focus:outline-none"
-          title="Mark as Done"
+          title="Mark as done"
           type="button"
         >
           <svg
-            aria-label="Mark as Done"
+            aria-label="Mark as done"
             class="octicon octicon-check"
             fill="currentColor"
             focusable="false"
@@ -807,11 +807,11 @@ exports[`components/NotificationRow.tsx should render itself & its children - gr
         </button>
         <button
           class="h-full hover:text-green-500 focus:outline-none"
-          title="Mark as Read"
+          title="Mark as read"
           type="button"
         >
           <svg
-            aria-label="Mark as Read"
+            aria-label="Mark as read"
             class="octicon octicon-read"
             fill="currentColor"
             focusable="false"
@@ -1032,11 +1032,11 @@ exports[`components/NotificationRow.tsx should render itself & its children - hi
         >
           <button
             class="h-full hover:text-green-500 focus:outline-none"
-            title="Mark as Done"
+            title="Mark as done"
             type="button"
           >
             <svg
-              aria-label="Mark as Done"
+              aria-label="Mark as done"
               class="octicon octicon-check"
               fill="currentColor"
               focusable="false"
@@ -1053,11 +1053,11 @@ exports[`components/NotificationRow.tsx should render itself & its children - hi
           </button>
           <button
             class="h-full hover:text-green-500 focus:outline-none"
-            title="Mark as Read"
+            title="Mark as read"
             type="button"
           >
             <svg
-              aria-label="Mark as Read"
+              aria-label="Mark as read"
               class="octicon octicon-read"
               fill="currentColor"
               focusable="false"
@@ -1221,11 +1221,11 @@ exports[`components/NotificationRow.tsx should render itself & its children - hi
       >
         <button
           class="h-full hover:text-green-500 focus:outline-none"
-          title="Mark as Done"
+          title="Mark as done"
           type="button"
         >
           <svg
-            aria-label="Mark as Done"
+            aria-label="Mark as done"
             class="octicon octicon-check"
             fill="currentColor"
             focusable="false"
@@ -1242,11 +1242,11 @@ exports[`components/NotificationRow.tsx should render itself & its children - hi
         </button>
         <button
           class="h-full hover:text-green-500 focus:outline-none"
-          title="Mark as Read"
+          title="Mark as read"
           type="button"
         >
           <svg
-            aria-label="Mark as Read"
+            aria-label="Mark as read"
             class="octicon octicon-read"
             fill="currentColor"
             focusable="false"

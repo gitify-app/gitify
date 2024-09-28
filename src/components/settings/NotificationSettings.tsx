@@ -78,7 +78,7 @@ export const NotificationSettings: FC = () => {
         }
         tooltip={
           <div>
-            <strong>Mark as Done</strong> feature is supported in GitHub Cloud
+            <strong>Mark as done</strong> feature is supported in GitHub Cloud
             and GitHub Enterprise Server 3.13 or later.
           </div>
         }
@@ -92,7 +92,7 @@ export const NotificationSettings: FC = () => {
         }
         tooltip={
           <div>
-            <strong>Mark as Done</strong> feature is supported in GitHub Cloud
+            <strong>Mark as done</strong> feature is supported in GitHub Cloud
             and GitHub Enterprise Server 3.13 or later.
           </div>
         }
