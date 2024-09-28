@@ -1,14 +1,9 @@
-// @ts-check
-
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
+const webpack = require('webpack');
 
 /**
- * @typedef {import('webpack').Configuration} WebpackConfig
- */
-
-/**
- * @type {WebpackConfig}
+ * @type {webpack.Configuration}
  */
 const config = merge(common, {
   mode: 'production',

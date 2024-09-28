@@ -1,14 +1,8 @@
-// @ts-check
-
 const path = require('node:path');
 const webpack = require('webpack');
 
 /**
- * @typedef {import('webpack').Configuration} WebpackConfig
- */
-
-/**
- * @type {WebpackConfig}
+ * @type {webpack.Configuration}
  */
 const config = {
   mode: 'development',
