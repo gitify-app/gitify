@@ -108,11 +108,9 @@ interface AppContextState {
   globalError: GitifyError;
   removeAccountNotifications: (account: Account) => Promise<void>;
   fetchNotifications: () => Promise<void>;
-  markNotificationRead: (notification: Notification) => Promise<void>;
-  markNotificationDone: (notification: Notification) => Promise<void>;
+  markNotificationsAsRead: (notifications: Notification[]) => Promise<void>;
+  markNotificationsAsDone: (notifications: Notification[]) => Promise<void>;
   unsubscribeNotification: (notification: Notification) => Promise<void>;
-  markRepoNotificationsRead: (notification: Notification) => Promise<void>;
-  markRepoNotificationsDone: (notification: Notification) => Promise<void>;
 
   settings: SettingsState;
   clearFilters: () => void;
@@ -131,11 +129,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     notifications,
     globalError,
     status,
-    markNotificationRead,
-    markNotificationDone,
+    markNotificationsAsRead,
+    markNotificationsAsDone,
     unsubscribeNotification,
-    markRepoNotificationsRead,
-    markRepoNotificationsDone,
   } = useNotifications();
 
   useEffect(() => {
@@ -291,34 +287,22 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     [auth, settings, fetchNotifications],
   );
 
-  const markNotificationReadWithAccounts = useCallback(
-    async (notification: Notification) =>
-      await markNotificationRead({ auth, settings }, notification),
-    [auth, settings, markNotificationRead],
+  const markNotificationsAsReadWithAccounts = useCallback(
+    async (notifications: Notification[]) =>
+      await markNotificationsAsRead({ auth, settings }, notifications),
+    [auth, settings, markNotificationsAsRead],
   );
 
-  const markNotificationDoneWithAccounts = useCallback(
-    async (notification: Notification) =>
-      await markNotificationDone({ auth, settings }, notification),
-    [auth, settings, markNotificationDone],
+  const markNotificationsAsDoneWithAccounts = useCallback(
+    async (notifications: Notification[]) =>
+      await markNotificationsAsDone({ auth, settings }, notifications),
+    [auth, settings, markNotificationsAsDone],
   );
 
   const unsubscribeNotificationWithAccounts = useCallback(
     async (notification: Notification) =>
       await unsubscribeNotification({ auth, settings }, notification),
     [auth, settings, unsubscribeNotification],
-  );
-
-  const markRepoNotificationsReadWithAccounts = useCallback(
-    async (notification: Notification) =>
-      await markRepoNotificationsRead({ auth, settings }, notification),
-    [auth, settings, markRepoNotificationsRead],
-  );
-
-  const markRepoNotificationsDoneWithAccounts = useCallback(
-    async (notification: Notification) =>
-      await markRepoNotificationsDone({ auth, settings }, notification),
-    [auth, settings, markRepoNotificationsDone],
   );
 
   return (
@@ -335,11 +319,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
         status,
         globalError,
         fetchNotifications: fetchNotificationsWithAccounts,
-        markNotificationRead: markNotificationReadWithAccounts,
-        markNotificationDone: markNotificationDoneWithAccounts,
+        markNotificationsAsRead: markNotificationsAsReadWithAccounts,
+        markNotificationsAsDone: markNotificationsAsDoneWithAccounts,
         unsubscribeNotification: unsubscribeNotificationWithAccounts,
-        markRepoNotificationsRead: markRepoNotificationsReadWithAccounts,
-        markRepoNotificationsDone: markRepoNotificationsDoneWithAccounts,
 
         settings,
         clearFilters,

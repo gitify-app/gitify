@@ -12,39 +12,28 @@ import {
   ignoreNotificationThreadSubscription,
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
-  markRepositoryNotificationsAsRead,
 } from '../utils/api/client';
-import { getAccountUUID } from '../utils/auth/utils';
 import { isMarkAsDoneFeatureSupported } from '../utils/helpers';
 import {
   getAllNotifications,
   setTrayIconColor,
   triggerNativeNotifications,
 } from '../utils/notifications';
-import { removeNotification } from '../utils/remove-notification';
-import { removeNotifications } from '../utils/remove-notifications';
+import { removeNotifications } from '../utils/notifications/remove';
 
 interface NotificationsState {
   notifications: AccountNotifications[];
   removeAccountNotifications: (account: Account) => Promise<void>;
   fetchNotifications: (state: GitifyState) => Promise<void>;
-  markNotificationRead: (
+  markNotificationsAsRead: (
     state: GitifyState,
-    notification: Notification,
+    notifications: Notification[],
   ) => Promise<void>;
-  markNotificationDone: (
+  markNotificationsAsDone: (
     state: GitifyState,
-    notification: Notification,
+    notifications: Notification[],
   ) => Promise<void>;
   unsubscribeNotification: (
-    state: GitifyState,
-    notification: Notification,
-  ) => Promise<void>;
-  markRepoNotificationsRead: (
-    state: GitifyState,
-    notification: Notification,
-  ) => Promise<void>;
-  markRepoNotificationsDone: (
     state: GitifyState,
     notification: Notification,
   ) => Promise<void>;
@@ -108,20 +97,24 @@ export const useNotifications = (): NotificationsState => {
     [notifications],
   );
 
-  const markNotificationRead = useCallback(
-    async (state: GitifyState, notification: Notification) => {
+  const markNotificationsAsRead = useCallback(
+    async (state: GitifyState, readNotifications: Notification[]) => {
       setStatus('loading');
 
       try {
-        await markNotificationThreadAsRead(
-          notification.id,
-          notification.account.hostname,
-          notification.account.token,
+        await Promise.all(
+          readNotifications.map((notification) =>
+            markNotificationThreadAsRead(
+              notification.id,
+              notification.account.hostname,
+              notification.account.token,
+            ),
+          ),
         );
 
-        const updatedNotifications = removeNotification(
+        const updatedNotifications = removeNotifications(
           state.settings,
-          notification,
+          readNotifications,
           notifications,
         );
 
@@ -136,29 +129,33 @@ export const useNotifications = (): NotificationsState => {
     [notifications],
   );
 
-  const markNotificationDone = useCallback(
-    async (state: GitifyState, notification: Notification) => {
+  const markNotificationsAsDone = useCallback(
+    async (state: GitifyState, doneNotifications: Notification[]) => {
       setStatus('loading');
 
       try {
-        if (isMarkAsDoneFeatureSupported(notification.account)) {
-          await markNotificationThreadAsDone(
-            notification.id,
-            notification.account.hostname,
-            notification.account.token,
+        if (isMarkAsDoneFeatureSupported(doneNotifications[0].account)) {
+          await Promise.all(
+            doneNotifications.map((notification) =>
+              markNotificationThreadAsDone(
+                notification.id,
+                notification.account.hostname,
+                notification.account.token,
+              ),
+            ),
           );
         }
 
-        const updatedNotifications = removeNotification(
+        const updatedNotifications = removeNotifications(
           state.settings,
-          notification,
+          doneNotifications,
           notifications,
         );
 
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
       } catch (err) {
-        log.error('Error occurred while marking notification as done', err);
+        log.error('Error occurred while marking notifications as done', err);
       }
 
       setStatus('success');
@@ -178,9 +175,9 @@ export const useNotifications = (): NotificationsState => {
         );
 
         if (state.settings.markAsDoneOnUnsubscribe) {
-          await markNotificationDone(state, notification);
+          await markNotificationsAsDone(state, [notification]);
         } else {
-          await markNotificationRead(state, notification);
+          await markNotificationsAsRead(state, [notification]);
         }
       } catch (err) {
         log.error(
@@ -191,88 +188,7 @@ export const useNotifications = (): NotificationsState => {
 
       setStatus('success');
     },
-    [markNotificationRead],
-  );
-
-  const markRepoNotificationsRead = useCallback(
-    async (state: GitifyState, notification: Notification) => {
-      setStatus('loading');
-
-      const repoSlug = notification.repository.full_name;
-      const hostname = notification.account.hostname;
-
-      try {
-        await markRepositoryNotificationsAsRead(
-          repoSlug,
-          hostname,
-          notification.account.token,
-        );
-
-        const updatedNotifications = removeNotifications(
-          state.settings,
-          notification,
-          notifications,
-        );
-
-        setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
-      } catch (err) {
-        log.error(
-          'Error occurred while marking repository notifications as read',
-          err,
-        );
-      }
-
-      setStatus('success');
-    },
-    [notifications],
-  );
-
-  const markRepoNotificationsDone = useCallback(
-    async (state: GitifyState, notification: Notification) => {
-      setStatus('loading');
-
-      const repoSlug = notification.repository.full_name;
-
-      try {
-        const accountIndex = notifications.findIndex(
-          (accountNotifications) =>
-            getAccountUUID(accountNotifications.account) ===
-            getAccountUUID(notification.account),
-        );
-
-        if (accountIndex !== -1) {
-          const notificationsToRemove = notifications[
-            accountIndex
-          ].notifications.filter(
-            (notification) => notification.repository.full_name === repoSlug,
-          );
-
-          await Promise.all(
-            notificationsToRemove.map((notification) =>
-              markNotificationDone(state, notification),
-            ),
-          );
-        }
-
-        const updatedNotifications = removeNotifications(
-          state.settings,
-          notification,
-          notifications,
-        );
-
-        setNotifications(updatedNotifications);
-        setTrayIconColor(updatedNotifications);
-      } catch (err) {
-        log.error(
-          'Error occurred while marking repository notifications as done',
-          err,
-        );
-      }
-
-      setStatus('success');
-    },
-    [notifications, markNotificationDone],
+    [markNotificationsAsRead, markNotificationsAsDone],
   );
 
   return {
@@ -282,10 +198,8 @@ export const useNotifications = (): NotificationsState => {
 
     removeAccountNotifications,
     fetchNotifications,
-    markNotificationRead,
-    markNotificationDone,
+    markNotificationsAsRead,
+    markNotificationsAsDone,
     unsubscribeNotification,
-    markRepoNotificationsRead,
-    markRepoNotificationsDone,
   };
 };

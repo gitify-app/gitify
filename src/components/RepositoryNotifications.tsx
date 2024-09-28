@@ -26,7 +26,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
   repoName,
   repoNotifications,
 }) => {
-  const { settings, markRepoNotificationsRead, markRepoNotificationsDone } =
+  const { settings, markNotificationsAsRead, markNotificationsAsDone } =
     useContext(AppContext);
   const [animateExit, setAnimateExit] = useState(false);
   const [showAsRead, setShowAsRead] = useState(false);
@@ -91,7 +91,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
                   event.stopPropagation();
                   setAnimateExit(!settings.delayNotificationState);
                   setShowAsRead(settings.delayNotificationState);
-                  markRepoNotificationsDone(repoNotifications[0]);
+                  markNotificationsAsDone(repoNotifications);
                 }}
               />
             )}
@@ -104,7 +104,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
                 event.stopPropagation();
                 setAnimateExit(!settings.delayNotificationState);
                 setShowAsRead(settings.delayNotificationState);
-                markRepoNotificationsRead(repoNotifications[0]);
+                markNotificationsAsRead(repoNotifications);
               }}
             />
             <InteractionButton

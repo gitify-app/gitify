@@ -37,8 +37,8 @@ export const NotificationRow: FC<INotificationRow> = ({
 }: INotificationRow) => {
   const {
     settings,
-    markNotificationRead,
-    markNotificationDone,
+    markNotificationsAsRead,
+    markNotificationsAsDone,
     unsubscribeNotification,
   } = useContext(AppContext);
   const [animateExit, setAnimateExit] = useState(false);
@@ -51,11 +51,16 @@ export const NotificationRow: FC<INotificationRow> = ({
     openNotification(notification);
 
     if (settings.markAsDoneOnOpen) {
-      markNotificationDone(notification);
+      markNotificationsAsDone([notification]);
     } else {
-      markNotificationRead(notification);
+      markNotificationsAsRead([notification]);
     }
-  }, [notification, markNotificationDone, markNotificationRead, settings]);
+  }, [
+    notification,
+    markNotificationsAsRead,
+    markNotificationsAsDone,
+    settings,
+  ]);
 
   const unsubscribeFromThread = (event: MouseEvent<HTMLElement>) => {
     // Don't trigger onClick of parent element.
@@ -137,7 +142,7 @@ export const NotificationRow: FC<INotificationRow> = ({
               onClick={() => {
                 setAnimateExit(!settings.delayNotificationState);
                 setShowAsRead(settings.delayNotificationState);
-                markNotificationDone(notification);
+                markNotificationsAsDone([notification]);
               }}
             />
           )}
@@ -148,7 +153,7 @@ export const NotificationRow: FC<INotificationRow> = ({
             onClick={() => {
               setAnimateExit(!settings.delayNotificationState);
               setShowAsRead(settings.delayNotificationState);
-              markNotificationRead(notification);
+              markNotificationsAsRead([notification]);
             }}
           />
           <InteractionButton

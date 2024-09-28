@@ -345,8 +345,8 @@ describe('hooks/useNotifications.ts', () => {
     });
   });
 
-  describe('markNotificationRead', () => {
-    it('should mark a notification as read with success', async () => {
+  describe('markNotificationsAsRead', () => {
+    it('should mark notifications as read with success', async () => {
       nock('https://api.github.com/')
         .patch(`/notifications/threads/${id}`)
         .reply(200);
@@ -354,7 +354,9 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markNotificationRead(mockState, mockSingleNotification);
+        result.current.markNotificationsAsRead(mockState, [
+          mockSingleNotification,
+        ]);
       });
 
       await waitFor(() => {
@@ -364,7 +366,7 @@ describe('hooks/useNotifications.ts', () => {
       expect(result.current.notifications.length).toBe(0);
     });
 
-    it('should mark a notification as read with failure', async () => {
+    it('should mark notifications as read with failure', async () => {
       nock('https://api.github.com/')
         .patch(`/notifications/threads/${id}`)
         .reply(400);
@@ -372,7 +374,9 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markNotificationRead(mockState, mockSingleNotification);
+        result.current.markNotificationsAsRead(mockState, [
+          mockSingleNotification,
+        ]);
       });
 
       await waitFor(() => {
@@ -384,8 +388,8 @@ describe('hooks/useNotifications.ts', () => {
     });
   });
 
-  describe('markNotificationDone', () => {
-    it('should mark a notification as done with success', async () => {
+  describe('markNotificationsAsDone', () => {
+    it('should mark notifications as done with success', async () => {
       nock('https://api.github.com/')
         .delete(`/notifications/threads/${id}`)
         .reply(200);
@@ -393,7 +397,9 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markNotificationDone(mockState, mockSingleNotification);
+        result.current.markNotificationsAsDone(mockState, [
+          mockSingleNotification,
+        ]);
       });
 
       await waitFor(() => {
@@ -403,7 +409,7 @@ describe('hooks/useNotifications.ts', () => {
       expect(result.current.notifications.length).toBe(0);
     });
 
-    it('should mark a notification as done with failure', async () => {
+    it('should mark notifications as done with failure', async () => {
       nock('https://api.github.com/')
         .delete(`/notifications/threads/${id}`)
         .reply(400);
@@ -411,7 +417,9 @@ describe('hooks/useNotifications.ts', () => {
       const { result } = renderHook(() => useNotifications());
 
       act(() => {
-        result.current.markNotificationDone(mockState, mockSingleNotification);
+        result.current.markNotificationsAsDone(mockState, [
+          mockSingleNotification,
+        ]);
       });
 
       await waitFor(() => {
@@ -512,97 +520,6 @@ describe('hooks/useNotifications.ts', () => {
 
       expect(result.current.notifications.length).toBe(0);
       expect(logErrorSpy).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('markRepoNotificationsRead', () => {
-    const repoSlug = 'gitify-app/notifications-test';
-
-    it('should mark repository notifications as read with success', async () => {
-      nock('https://api.github.com/')
-        .put(`/repos/${repoSlug}/notifications`)
-        .reply(200);
-
-      const { result } = renderHook(() => useNotifications());
-
-      act(() => {
-        result.current.markRepoNotificationsRead(
-          mockState,
-          mockSingleNotification,
-        );
-      });
-
-      await waitFor(() => {
-        expect(result.current.status).toBe('success');
-      });
-
-      expect(result.current.notifications.length).toBe(0);
-    });
-
-    it('should mark repository notifications as read with failure', async () => {
-      nock('https://api.github.com/')
-        .put(`/repos/${repoSlug}/notifications`)
-        .reply(400);
-
-      const { result } = renderHook(() => useNotifications());
-
-      act(() => {
-        result.current.markRepoNotificationsRead(
-          mockState,
-          mockSingleNotification,
-        );
-      });
-
-      await waitFor(() => {
-        expect(result.current.status).toBe('success');
-      });
-
-      expect(result.current.notifications.length).toBe(0);
-      expect(logErrorSpy).toHaveBeenCalledTimes(1);
-    });
-  });
-
-  describe('markRepoNotificationsDone', () => {
-    it('should mark repository notifications as done with success', async () => {
-      nock('https://api.github.com/')
-        .delete(`/notifications/threads/${id}`)
-        .reply(200);
-
-      const { result } = renderHook(() => useNotifications());
-
-      act(() => {
-        result.current.markRepoNotificationsDone(
-          mockState,
-          mockSingleNotification,
-        );
-      });
-
-      await waitFor(() => {
-        expect(result.current.status).toBe('success');
-      });
-
-      expect(result.current.notifications.length).toBe(0);
-    });
-
-    it('should mark repository notifications as done with failure', async () => {
-      nock('https://api.github.com/')
-        .delete(`/notifications/threads/${id}`)
-        .reply(400);
-
-      const { result } = renderHook(() => useNotifications());
-
-      act(() => {
-        result.current.markRepoNotificationsDone(
-          mockState,
-          mockSingleNotification,
-        );
-      });
-
-      await waitFor(() => {
-        expect(result.current.status).toBe('success');
-      });
-
-      expect(result.current.notifications.length).toBe(0);
     });
   });
 });

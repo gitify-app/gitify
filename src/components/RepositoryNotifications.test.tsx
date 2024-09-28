@@ -2,10 +2,7 @@ import { act, fireEvent, render, screen } from '@testing-library/react';
 import { mockGitHubCloudAccount, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
 import type { Link } from '../types';
-import {
-  mockGitHubNotifications,
-  mockSingleNotification,
-} from '../utils/api/__mocks__/response-mocks';
+import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
 import * as comms from '../utils/comms';
 import { RepositoryNotifications } from './RepositoryNotifications';
 
@@ -14,8 +11,8 @@ jest.mock('./NotificationRow', () => ({
 }));
 
 describe('components/RepositoryNotifications.tsx', () => {
-  const markRepoNotificationsRead = jest.fn();
-  const markRepoNotificationsDone = jest.fn();
+  const markNotificationsAsRead = jest.fn();
+  const markNotificationsAsDone = jest.fn();
 
   const props = {
     account: mockGitHubCloudAccount,
@@ -58,7 +55,7 @@ describe('components/RepositoryNotifications.tsx', () => {
   it('should mark a repo as read', () => {
     render(
       <AppContext.Provider
-        value={{ settings: { ...mockSettings }, markRepoNotificationsRead }}
+        value={{ settings: { ...mockSettings }, markNotificationsAsRead }}
       >
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
@@ -66,15 +63,15 @@ describe('components/RepositoryNotifications.tsx', () => {
 
     fireEvent.click(screen.getByTitle('Mark repository as read'));
 
-    expect(markRepoNotificationsRead).toHaveBeenCalledWith(
-      mockSingleNotification,
+    expect(markNotificationsAsRead).toHaveBeenCalledWith(
+      mockGitHubNotifications,
     );
   });
 
   it('should mark a repo as done', () => {
     render(
       <AppContext.Provider
-        value={{ settings: { ...mockSettings }, markRepoNotificationsDone }}
+        value={{ settings: { ...mockSettings }, markNotificationsAsDone }}
       >
         <RepositoryNotifications {...props} />
       </AppContext.Provider>,
@@ -82,8 +79,8 @@ describe('components/RepositoryNotifications.tsx', () => {
 
     fireEvent.click(screen.getByTitle('Mark repository as done'));
 
-    expect(markRepoNotificationsDone).toHaveBeenCalledWith(
-      mockSingleNotification,
+    expect(markNotificationsAsDone).toHaveBeenCalledWith(
+      mockGitHubNotifications,
     );
   });
 
