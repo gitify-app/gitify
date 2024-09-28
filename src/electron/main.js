@@ -26,9 +26,6 @@ const idleAlternateUpdateIcon = getIconPath('tray-idle-white-update.png');
 const activeIcon = getIconPath('tray-active.png');
 const activeUpdateIcon = getIconPath('tray-active-update.png');
 
-/**
- * @type {Electron.BrowserWindowConstructorOptions}
- */
 const browserWindowOpts = {
   width: 500,
   height: 400,
