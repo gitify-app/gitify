@@ -133,7 +133,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
               alt="🔥"
               class="emoji"
               draggable="false"
-              src="/mocked/dir/name/twemoji/1f525.svg"
+              src="/mocked/dir/name/assets/twemoji/1f525.svg"
             />
           </span>
         </div>
@@ -279,7 +279,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
             alt="🔥"
             class="emoji"
             draggable="false"
-            src="/mocked/dir/name/twemoji/1f525.svg"
+            src="/mocked/dir/name/assets/twemoji/1f525.svg"
           />
         </span>
       </div>
@@ -1814,7 +1814,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
               alt="🎊"
               class="emoji"
               draggable="false"
-              src="/mocked/dir/name/twemoji/1f38a.svg"
+              src="/mocked/dir/name/assets/twemoji/1f38a.svg"
             />
           </span>
         </div>
@@ -1955,7 +1955,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
             alt="🎊"
             class="emoji"
             draggable="false"
-            src="/mocked/dir/name/twemoji/1f38a.svg"
+            src="/mocked/dir/name/assets/twemoji/1f38a.svg"
           />
         </span>
       </div>

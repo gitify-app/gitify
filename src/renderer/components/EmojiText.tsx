@@ -26,7 +26,12 @@ export const EmojiText: FC<IEmojiText> = ({ text }) => {
           _options: TwemojiOptions,
           _variant: string,
         ) => {
-          return path.join(getDirectoryPath(), 'twemoji', `${icon}.svg`);
+          return path.join(
+            getDirectoryPath(),
+            'assets',
+            'twemoji',
+            `${icon}.svg`,
+          );
         },
       });
     }
