@@ -71,13 +71,7 @@
     "appId": "com.electron.gitify",
     "copyright": "Copyright © 2024 Gitify Team",
     "asar": true,
-    "files": [
-      "build/**/*",
-      "assets/**/*",
-      "node_modules/**/*",
-      "package.json",
-      "LICENSE"
-    ],
+    "files": ["build/**/*", "node_modules/**/*", "package.json", "LICENSE"],
     "mac": {
       "category": "public.app-category.developer-tools",
       "icon": "assets/images/app-icon.icns",
