@@ -26,7 +26,8 @@ jobs:
         env:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
-      - run: pnpm make:macos --publish onTagOrDraft
+      - run: pnpm prepare:remove-source-maps
+      - run: pnpm package:macos --publish onTagOrDraft
         env:
           APPLEID_USERNAME: ${{ secrets.appleid_username }}
           APPLEID_PASSWORD: ${{ secrets.appleid_password }}
@@ -38,7 +39,9 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Gitify-release-mac
-          path: dist/
+          path: |
+            dist/*
+            !dist/**/*.dmg
           overwrite: true
 
   release-windows:
@@ -57,9 +60,10 @@ jobs:
         env:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
-      - run: pnpm make:win --publish onTagOrDraft
+      - run: pnpm package:win --publish onTagOrDraft
         env:
           GH_TOKEN: ${{ secrets.github_token }}
+      - run: pnpm prepare:remove-source-maps
       - uses: actions/upload-artifact@v4
         with:
           name: Gitify-release-win
@@ -82,9 +86,10 @@ jobs:
         env:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
-      - run: pnpm make:linux --publish onTagOrDraft
+      - run: pnpm package:linux --publish onTagOrDraft
         env:
           GH_TOKEN: ${{ secrets.github_token }}
+      - run: pnpm prepare:remove-source-maps
       - uses: actions/upload-artifact@v4
         with:
           name: Gitify-release-linux

@@ -1,0 +1,72 @@
+html,
+body,
+#root {
+  height: 100%;
+  -webkit-user-select: none;
+}
+
+html::-webkit-scrollbar,
+div.flex-grow::-webkit-scrollbar {
+  width: 10px;
+}
+
+html::-webkit-scrollbar-thumb,
+div.flex-grow::-webkit-scrollbar-thumb {
+  background-color: #c1c1c1;
+  border-radius: 10px;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+div.flex-grow::-webkit-scrollbar-thumb:hover {
+  background-color: #a8a8a8;
+  border-radius: 10px;
+}
+
+html.dark::-webkit-scrollbar-track,
+html.dark div.flex-grow::-webkit-scrollbar-track {
+  background-color: #090e15;
+}
+
+html.dark::-webkit-scrollbar-thumb,
+html.dark div.flex-grow::-webkit-scrollbar-thumb {
+  background-color: #24292e;
+}
+
+html.dark::-webkit-scrollbar-thumb:hover,
+html.dark div.flex-grow::-webkit-scrollbar-thumb:hover {
+  background-color: #3a3f44;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  margin: 0;
+  cursor: default;
+}
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  position: fixed;
+  top: 0;
+  left: 50px;
+  z-index: 1031;
+  background: #203354;
+
+  width: 100%;
+  height: 2px;
+}
+
+/**
+ * Set emoji size according to surrounding text.
+ * Ref: https://github.com/jdecked/twemoji?tab=readme-ov-file#inline-styles
+ */
+img.emoji {
+  height: 1em;
+  width: 1em;
+  margin: 0 0.05em 0 0.1em;
+  vertical-align: -0.1em;
+}

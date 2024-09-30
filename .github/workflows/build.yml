@@ -22,7 +22,8 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm build
-      - run: pnpm make:macos --publish=never -c.mac.identity=null
+      - run: pnpm prepare:remove-source-maps
+      - run: pnpm package:macos --publish=never -c.mac.identity=null
         env:
           CSC_LINK: ${{ secrets.mac_certs }}
           CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
@@ -31,7 +32,9 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Gitify-dist-mac
-          path: dist/
+          path: |
+            dist/*
+            !dist/**/*.dmg
           overwrite: true
 
   build-windows:
@@ -47,7 +50,8 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm build
-      - run: pnpm make:win --publish=never
+      - run: pnpm prepare:remove-source-maps
+      - run: pnpm package:win --publish=never
       - name: Clean up builds
         run: Remove-Item dist/win-unpacked -Recurse
       - uses: actions/upload-artifact@v4
@@ -69,7 +73,8 @@ jobs:
           cache: 'pnpm'
       - run: pnpm install
       - run: pnpm build
-      - run: pnpm make:linux --publish=never
+      - run: pnpm prepare:remove-source-maps
+      - run: pnpm package:linux --publish=never
       - name: Clean up builds
         run: rm -rfv dist/linux-unpacked
       - uses: actions/upload-artifact@v4
