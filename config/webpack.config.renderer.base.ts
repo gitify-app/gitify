@@ -63,17 +63,17 @@ const configuration: webpack.Configuration = {
 
     new CopyWebpackPlugin({
       patterns: [
-        // Copy Image Assets
+        // Image Assets
         {
           from: webpackPaths.assetsImagesPath,
           to: 'assets/images',
         },
-        // Copy Image Assets
+        // Sound Assets
         {
           from: webpackPaths.assetsSoundsPath,
           to: 'assets/sounds',
         },
-        // Copy Twemoji SVGs to the build directory
+        // Twemoji SVGs for Emojis
         {
           from: path.join(
             webpackPaths.nodeModulesPath,
@@ -81,7 +81,7 @@ const configuration: webpack.Configuration = {
             'dist',
             'svg',
           ),
-          to: 'twemoji', // Output to dist/twemoji
+          to: 'twemoji',
         },
       ],
     }),
