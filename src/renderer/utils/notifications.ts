@@ -1,3 +1,4 @@
+import path from 'node:path';
 import log from 'electron-log';
 import type {
   AccountNotifications,
@@ -103,7 +104,9 @@ export const raiseNativeNotification = (notifications: Notification[]) => {
 };
 
 export const raiseSoundNotification = () => {
-  const audio = new Audio('assets/sounds/clearly.mp3');
+  const audio = new Audio(
+    path.resolve(__dirname, '..', 'assets', 'sounds', 'clearly.mp3'),
+  );
   audio.volume = 0.2;
   audio.play();
 };

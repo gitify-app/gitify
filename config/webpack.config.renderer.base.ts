@@ -61,19 +61,9 @@ const configuration: webpack.Configuration = {
       isBrowser: false,
     }),
 
+    // Twemoji SVGs for Emoji parsing
     new CopyWebpackPlugin({
       patterns: [
-        // Image Assets
-        {
-          from: webpackPaths.assetsImagesPath,
-          to: 'assets/images',
-        },
-        // Sound Assets
-        {
-          from: webpackPaths.assetsSoundsPath,
-          to: 'assets/sounds',
-        },
-        // Twemoji SVGs for Emojis
         {
           from: path.join(
             webpackPaths.nodeModulesPath,

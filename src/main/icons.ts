@@ -11,5 +11,5 @@ export const activeIcon = getIconPath('tray-active.png');
 export const activeUpdateIcon = getIconPath('tray-active-update.png');
 
 function getIconPath(iconName: string) {
-  return path.resolve(__dirname, '../assets/images', iconName);
+  return path.resolve(__dirname, '..', 'assets', 'images', iconName);
 }

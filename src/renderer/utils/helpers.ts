@@ -209,7 +209,3 @@ export function getFilterCount(settings: SettingsState): number {
 
   return count;
 }
-
-export function getDirectoryPath(): string {
-  return `${__dirname}`;
-}

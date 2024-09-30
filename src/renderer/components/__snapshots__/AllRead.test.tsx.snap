@@ -16,7 +16,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children 1`]
               alt="🎊"
               class="emoji"
               draggable="false"
-              src="/mocked/dir/name/assets/twemoji/1f38a.svg"
+              src="assets/twemoji/1f38a.svg"
             />
           </span>
         </div>
@@ -40,7 +40,7 @@ exports[`renderer/components/AllRead.tsx should render itself & its children 1`]
             alt="🎊"
             class="emoji"
             draggable="false"
-            src="/mocked/dir/name/assets/twemoji/1f38a.svg"
+            src="assets/twemoji/1f38a.svg"
           />
         </span>
       </div>
