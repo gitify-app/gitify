@@ -11,8 +11,6 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
-global.ResizeObserver = require('resize-observer-polyfill');
-
 describe('renderer/routes/components/settings/SettingsFooter.tsx', () => {
   let originalEnv: NodeJS.ProcessEnv;
 

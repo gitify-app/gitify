@@ -87,7 +87,7 @@
       "notarize": false,
       "target": {
         "target": "default",
-        "arch": ["universal"]
+        "arch": ["universal", "arm64", "x64"]
       },
       "hardenedRuntime": true,
       "entitlements": "assets/entitlements.mac.plist",
@@ -167,7 +167,6 @@
     "postcss": "8.4.47",
     "postcss-loader": "8.1.1",
     "react-final-form": "6.5.9",
-    "resize-observer-polyfill": "1.5.1",
     "rimraf": "6.0.1",
     "tailwind-merge": "2.5.2",
     "tailwindcss": "3.4.13",
