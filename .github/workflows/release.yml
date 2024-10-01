@@ -39,7 +39,9 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Gitify-release-mac
-          path: dist
+          path: |
+            dist/*
+            !dist/**/*.dmg
           overwrite: true
 
   release-windows:

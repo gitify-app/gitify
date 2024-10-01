@@ -32,7 +32,9 @@ jobs:
       - uses: actions/upload-artifact@v4
         with:
           name: Gitify-dist-mac
-          path: dist
+          path: |
+            dist/*
+            !dist/**/*.dmg
           overwrite: true
 
   build-windows:
