@@ -25,7 +25,7 @@ export const EmojiText: FC<IEmojiText> = ({ text }) => {
           _options: TwemojiOptions,
           _variant: string,
         ) => {
-          return path.join('assets', 'twemoji', `${icon}.svg`);
+          return path.join('images', 'twemoji', `${icon}.svg`);
         },
       });
     }

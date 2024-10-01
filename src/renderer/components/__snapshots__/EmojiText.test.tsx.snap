@@ -10,7 +10,7 @@ exports[`renderer/components/Emoji.tsx should render 1`] = `
           alt="🍺"
           class="emoji"
           draggable="false"
-          src="assets/twemoji/1f37a.svg"
+          src="images/twemoji/1f37a.svg"
         />
       </span>
     </div>
@@ -21,7 +21,7 @@ exports[`renderer/components/Emoji.tsx should render 1`] = `
         alt="🍺"
         class="emoji"
         draggable="false"
-        src="assets/twemoji/1f37a.svg"
+        src="images/twemoji/1f37a.svg"
       />
     </span>
   </div>,

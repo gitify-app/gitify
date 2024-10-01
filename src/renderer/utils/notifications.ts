@@ -10,6 +10,7 @@ import { listNotificationsForAuthenticatedUser } from './api/client';
 import { determineFailureType } from './api/errors';
 import { getAccountUUID } from './auth/utils';
 import { hideWindow, showWindow, updateTrayIcon } from './comms';
+import { Constants } from './constants';
 import { openNotification } from './links';
 import { isWindows } from './platform';
 import { getGitifySubjectDetails } from './subject';
@@ -105,7 +106,13 @@ export const raiseNativeNotification = (notifications: Notification[]) => {
 
 export const raiseSoundNotification = () => {
   const audio = new Audio(
-    path.resolve(__dirname, '..', 'assets', 'sounds', 'clearly.mp3'),
+    path.join(
+      __dirname,
+      '..',
+      'assets',
+      'sounds',
+      Constants.NOTIFICATION_SOUND,
+    ),
   );
   audio.volume = 0.2;
   audio.play();

@@ -16,7 +16,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children 1`] = 
               alt="🔥"
               class="emoji"
               draggable="false"
-              src="assets/twemoji/1f525.svg"
+              src="images/twemoji/1f525.svg"
             />
           </span>
         </div>
@@ -45,7 +45,7 @@ exports[`renderer/components/Oops.tsx should render itself & its children 1`] = 
             alt="🔥"
             class="emoji"
             draggable="false"
-            src="assets/twemoji/1f525.svg"
+            src="images/twemoji/1f525.svg"
           />
         </span>
       </div>

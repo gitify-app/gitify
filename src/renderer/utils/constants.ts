@@ -2,6 +2,13 @@ import type { Link } from '../types';
 import type { ClientID, ClientSecret, Hostname } from '../types';
 
 export const Constants = {
+  REPO_SLUG: 'gitify-app/gitify',
+
+  // Storage
+  STORAGE_KEY: 'gitify-storage',
+
+  NOTIFICATION_SOUND: 'clearly.mp3',
+
   // GitHub OAuth
   AUTH_SCOPE: ['read:user', 'notifications', 'repo'],
 
@@ -13,11 +20,6 @@ export const Constants = {
 
   GITHUB_API_BASE_URL: 'https://api.github.com',
   GITHUB_API_GRAPHQL_URL: 'https://api.github.com/graphql',
-
-  REPO_SLUG: 'gitify-app/gitify',
-
-  // Storage
-  STORAGE_KEY: 'gitify-storage',
 
   ALL_READ_EMOJIS: ['🎉', '🎊', '🥳', '👏', '🙌', '😎', '🏖️', '🚀', '✨', '🏆'],
 
