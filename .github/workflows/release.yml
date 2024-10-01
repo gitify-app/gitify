@@ -58,10 +58,10 @@ jobs:
         env:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
+      - run: pnpm prepare:remove-source-maps
       - run: pnpm package:win --publish onTagOrDraft
         env:
           GH_TOKEN: ${{ secrets.github_token }}
-      - run: pnpm prepare:remove-source-maps
       - uses: actions/upload-artifact@v4
         with:
           name: Gitify-release-win
@@ -84,10 +84,10 @@ jobs:
         env:
           OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
           OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
+      - run: pnpm prepare:remove-source-maps
       - run: pnpm package:linux --publish onTagOrDraft
         env:
           GH_TOKEN: ${{ secrets.github_token }}
-      - run: pnpm prepare:remove-source-maps
       - uses: actions/upload-artifact@v4
         with:
           name: Gitify-release-linux
