@@ -134,7 +134,7 @@
     "update-electron-app": "3.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.2",
+    "@biomejs/biome": "1.9.3",
     "@discordapp/twemoji": "15.1.0",
     "@electron/notarize": "2.5.0",
     "@primer/octicons-react": "19.11.0",
@@ -142,7 +142,7 @@
     "@types/jest": "29.5.13",
     "@types/node": "20.16.10",
     "@types/nprogress": "0.2.3",
-    "@types/react": "18.3.10",
+    "@types/react": "18.3.11",
     "@types/react-router-dom": "5.3.3",
     "autoprefixer": "10.4.20",
     "axios": "1.7.7",
@@ -179,7 +179,7 @@
     "webpack-cli": "5.1.4",
     "webpack-merge": "6.0.1"
   },
-  "packageManager": "pnpm@9.11.0",
+  "packageManager": "pnpm@9.12.0",
   "lint-staged": {
     "*": "biome check --fix --no-errors-on-unmatched",
     "*.{js,ts,tsx}": "pnpm test -- --findRelatedTests -u --passWithNoTests"
