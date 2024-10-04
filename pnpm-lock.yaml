@@ -1145,10 +1145,6 @@ packages:
     resolution: {integrity: sha512-upp+biKpN/XZMLim7aguUyW8s0FUpDvOtK6sbanMFDAMBzpHDqdhgVYm6zc9HJ6nWo7u2Lxk60i2M6Jd3aiNrA==}
     engines: {node: '>=12.0.0'}
 
-  builder-util-runtime@9.2.5:
-    resolution: {integrity: sha512-HjIDfhvqx/8B3TDN4GbABQcgpewTU4LMRTQPkVpKYV3lsuxEJoIfvg09GyWTNmfVNSUAYf+fbTN//JX4TH20pg==}
-    engines: {node: '>=12.0.0'}
-
   builder-util@24.13.1:
     resolution: {integrity: sha512-NhbCSIntruNDTOVI9fdXz0dihaqX2YuE1D6zZMrwiErzH4ELZHE6mdiB40wEgZNprDia+FghRFgKoAqMZRRjSA==}
 
@@ -5305,13 +5301,6 @@ snapshots:
       - supports-color
 
   builder-util-runtime@9.2.4:
-    dependencies:
-      debug: 4.3.4
-      sax: 1.3.0
-    transitivePeerDependencies:
-      - supports-color
-
-  builder-util-runtime@9.2.5:
     dependencies:
       debug: 4.3.4
       sax: 1.3.0
