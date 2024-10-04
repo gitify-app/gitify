@@ -1,6 +1,3 @@
-# Mac Files
-.DS_Store
-
 # Build files
 dist/
 build/
@@ -23,3 +20,6 @@ npm-debug.log*
 # Temporary folders
 tmp/
 temp/
+
+# Mac Files
+.DS_Store

@@ -1,19 +1,18 @@
 {
   "compilerOptions": {
-    "module": "es6",
-    "moduleResolution": "Bundler",
+    "incremental": true,
     "target": "es2022",
-    "outDir": "./build/",
-    "sourceMap": true,
-    "noImplicitAny": false,
-    "noUnusedLocals": true,
+    "module": "commonjs",
+    "lib": ["dom", "es2022"],
     "jsx": "react-jsx",
-    "allowJs": true,
-    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
     "esModuleInterop": true,
-    "types": ["jest"],
+    "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "noUnusedLocals": true,
     "skipLibCheck": true,
-    "checkJs": true
+    "outDir": "./build/"
   },
   "include": ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"]
 }
