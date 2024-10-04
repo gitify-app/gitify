@@ -126,7 +126,7 @@
   "dependencies": {
     "@electron/remote": "2.1.2",
     "electron-log": "5.2.0",
-    "electron-updater": "6.3.4",
+    "electron-updater": "6.3.9",
     "menubar": "9.5.0",
     "react": "18.3.1",
     "react-dom": "18.3.1",
