@@ -122,7 +122,8 @@
       "owner": "gitify-app",
       "repo": "gitify"
     },
-    "afterSign": "scripts/notarize.js"
+    "afterSign": "scripts/notarize.js",
+    "afterPack": "scripts/remove-unused-locales.js"
   },
   "dependencies": {
     "@electron/remote": "2.1.2",
