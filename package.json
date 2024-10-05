@@ -79,6 +79,7 @@
       "node_modules/**/*",
       "package.json"
     ],
+    "electronLanguages": ["en"],
     "mac": {
       "category": "public.app-category.developer-tools",
       "icon": "assets/images/app-icon.icns",
