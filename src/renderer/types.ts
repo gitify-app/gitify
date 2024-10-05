@@ -184,3 +184,8 @@ export enum Size {
   LARGE = 18,
   XLARGE = 20,
 }
+
+export type Chevron = {
+  icon: FC<OcticonProps>;
+  label: string;
+};
