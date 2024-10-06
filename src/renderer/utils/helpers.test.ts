@@ -5,6 +5,11 @@ import {
   mockPersonalAccessTokenAccount,
 } from '../__mocks__/state-mocks';
 
+import {
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from '@primer/octicons-react';
 import log from 'electron-log';
 import { defaultSettings } from '../context/App';
 import type { Hostname, Link, SettingsState } from '../types';
@@ -19,6 +24,7 @@ import {
   formatNotificationUpdatedAt,
   generateGitHubWebUrl,
   generateNotificationReferrerId,
+  getChevronDetails,
   getFilterCount,
   getPlatformFromHostname,
   isEnterpriseServerHost,
@@ -627,6 +633,25 @@ describe('renderer/utils/helpers.ts', () => {
         hideBots: true,
       } as SettingsState;
       expect(getFilterCount(settings)).toBe(1);
+    });
+  });
+
+  describe('getChevronDetails', () => {
+    it('should return correct chevron details', () => {
+      expect(getChevronDetails(true, true, 'account')).toEqual({
+        icon: ChevronDownIcon,
+        label: 'Hide account notifications',
+      });
+
+      expect(getChevronDetails(true, false, 'account')).toEqual({
+        icon: ChevronRightIcon,
+        label: 'Show account notifications',
+      });
+
+      expect(getChevronDetails(false, false, 'account')).toEqual({
+        icon: ChevronLeftIcon,
+        label: 'No notifications for account',
+      });
     });
   });
 });

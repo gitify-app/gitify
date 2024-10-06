@@ -1,7 +1,12 @@
+import {
+  ChevronDownIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
+} from '@primer/octicons-react';
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
 import log from 'electron-log';
 import { defaultSettings } from '../context/App';
-import type { Account, Hostname, Link, SettingsState } from '../types';
+import type { Account, Chevron, Hostname, Link, SettingsState } from '../types';
 import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
@@ -208,4 +213,29 @@ export function getFilterCount(settings: SettingsState): number {
   }
 
   return count;
+}
+
+export function getChevronDetails(
+  hasNotifications: boolean,
+  isVisible: boolean,
+  type: 'account' | 'repository',
+): Chevron {
+  if (!hasNotifications) {
+    return {
+      icon: ChevronLeftIcon,
+      label: `No notifications for ${type}`,
+    };
+  }
+
+  if (isVisible) {
+    return {
+      icon: ChevronDownIcon,
+      label: `Hide ${type} notifications`,
+    };
+  }
+
+  return {
+    icon: ChevronRightIcon,
+    label: `Show ${type} notifications`,
+  };
 }

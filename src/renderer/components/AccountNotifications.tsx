@@ -1,7 +1,4 @@
 import {
-  ChevronDownIcon,
-  ChevronLeftIcon,
-  ChevronRightIcon,
   FeedPersonIcon,
   GitPullRequestIcon,
   IssueOpenedIcon,
@@ -11,6 +8,7 @@ import { AppContext } from '../context/App';
 import { type Account, type GitifyError, Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
+import { getChevronDetails } from '../utils/helpers';
 import {
   openAccountProfile,
   openGitHubIssues,
@@ -63,19 +61,11 @@ export const AccountNotifications: FC<IAccountNotifications> = (
     setShowAccountNotifications(!showAccountNotifications);
   };
 
-  const ChevronIcon =
-    notifications.length === 0
-      ? ChevronLeftIcon
-      : showAccountNotifications
-        ? ChevronDownIcon
-        : ChevronRightIcon;
-
-  const toggleAccountNotificationsLabel =
-    notifications.length === 0
-      ? 'No notifications for account'
-      : showAccountNotifications
-        ? 'Hide account notifications'
-        : 'Show account notifications';
+  const Chevron = getChevronDetails(
+    hasNotifications,
+    showAccountNotifications,
+    'account',
+  );
 
   const isGroupByRepository = settings.groupBy === 'REPOSITORY';
 
@@ -136,8 +126,8 @@ export const AccountNotifications: FC<IAccountNotifications> = (
               }}
             />
             <InteractionButton
-              title={toggleAccountNotificationsLabel}
-              icon={ChevronIcon}
+              title={Chevron.label}
+              icon={Chevron.icon}
               size={Size.SMALL}
               onClick={toggleAccountNotifications}
             />
