@@ -5,6 +5,7 @@ const config: Config = {
   setupFiles: ['<rootDir>/src/renderer/__helpers__/setupEnvVars.js'],
   testEnvironment: 'jsdom',
   collectCoverage: true,
+  collectCoverageFrom: ['src/**/*', '!**/__snapshots__/**'],
   moduleNameMapper: {
     // Force CommonJS build for http adapter to be available.
     // via https://github.com/axios/axios/issues/5101#issuecomment-1276572468
