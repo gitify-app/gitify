@@ -1,10 +1,14 @@
 const path = require('node:path');
 const fs = require('node:fs');
+const { AfterPackContext } = require('electron-builder');
 
 const packageJson = require('../package.json');
 const electronLanguages = packageJson.build.electronLanguages;
 
-exports.default = async (context) => {
+/**
+ * @param {AfterPackContext} context
+ */
+const removeLocales = async (context) => {
   const appName = context.packager.appInfo.productFilename;
   const appOutDir = context.appOutDir;
   const platform = context.electronPlatformName;
@@ -39,3 +43,5 @@ exports.default = async (context) => {
     }
   }
 };
+
+exports.default = removeLocales;
