@@ -5,7 +5,7 @@ import type {
   GitifyState,
   SettingsState,
 } from '../types';
-import { Notification } from '../typesGitHub';
+import { type GitifySubject, Notification } from '../typesGitHub';
 import { listNotificationsForAuthenticatedUser } from './api/client';
 import { determineFailureType } from './api/errors';
 import { getAccountUUID } from './auth/utils';
@@ -183,8 +183,16 @@ export async function enrichNotifications(
 
   const enrichedNotifications = await Promise.all(
     notifications.map(async (notification: Notification) => {
-      const additionalSubjectDetails =
-        await getGitifySubjectDetails(notification);
+      let additionalSubjectDetails: GitifySubject = {};
+
+      try {
+        additionalSubjectDetails = await getGitifySubjectDetails(notification);
+      } catch (error) {
+        log.warn(
+          `Error occurred while enriching notification ${notification.subject.title} for repository ${notification.repository.full_name}. Continuing with base notification`,
+          error,
+        );
+      }
 
       return {
         ...notification,
