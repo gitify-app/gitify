@@ -1,4 +1,5 @@
 const { notarize } = require('@electron/notarize');
+const { AfterPackContext } = require('electron-builder');
 
 const packageJson = require('../package.json');
 const appBundleId = packageJson.build.appId;
@@ -8,6 +9,9 @@ function logNotarizingProgress(msg) {
   console.log(`  • notarizing        ${msg}`);
 }
 
+/**
+ * @param {AfterPackContext} context
+ */
 const notarizeApp = async (context) => {
   const { electronPlatformName, appOutDir } = context;
   const appName = context.packager.appInfo.productFilename;
