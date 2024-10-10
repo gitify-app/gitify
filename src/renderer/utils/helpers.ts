@@ -123,7 +123,8 @@ export async function generateGitHubWebUrl(
 ): Promise<Link> {
   const url = new URL(notification.repository.html_url);
 
-  // FIXME: upstream API is returning broken API URLs for Discussion types
+  // FIXME upstream GitHub API has started returning subject urls for Discussion notification types,
+  // however these URLs are broken.  Temporarily downgrading to use discussion lookup process.
   if (notification.subject.type === 'Discussion') {
     notification.subject.url = null;
     notification.subject.latest_comment_url = null;
