@@ -7,6 +7,8 @@ import { merge } from 'webpack-merge';
 import baseConfig from './webpack.config.common';
 import webpackPaths from './webpack.paths';
 
+import { EMOJI_CODE_POINTS } from '../src/renderer/utils/emojis';
+
 const configuration: webpack.Configuration = {
   devtool: 'inline-source-map',
 
@@ -72,6 +74,12 @@ const configuration: webpack.Configuration = {
             'svg',
           ),
           to: 'images/twemoji',
+          // Only copy the SVGs for the emojis we use
+          filter: (resourcePath) => {
+            return EMOJI_CODE_POINTS.some((svg) =>
+              resourcePath.endsWith(`/${svg}.svg`),
+            );
+          },
         },
       ],
     }),
