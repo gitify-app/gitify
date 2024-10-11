@@ -18,8 +18,8 @@ importers:
         specifier: 6.3.9
         version: 6.3.9
       menubar:
-        specifier: 9.5.0
-        version: 9.5.0(electron@32.2.0)
+        specifier: 9.5.1
+        version: 9.5.1(electron@32.2.0)
       react:
         specifier: 18.3.1
         version: 18.3.1
@@ -2628,10 +2628,10 @@ packages:
   mdn-data@2.0.30:
     resolution: {integrity: sha512-GaqWWShW4kv/G9IEucWScBx9G1/vsFZZJUO+tD26M8J8z3Kw5RDQjaoZe03YAClgeS/SWPOcb4nkFBTEi5DUEA==}
 
-  menubar@9.5.0:
-    resolution: {integrity: sha512-gAzkurX/8Hfvo6ehJ6yyb8HD1q4glZUXFV4VynVhAbnpob6m4rj6jk5OmONibxALNZ2FEBVqAgBBtBSTU5N7Jw==}
+  menubar@9.5.1:
+    resolution: {integrity: sha512-swfgKal+DTgJINay36X+LGBSqyFKS4d9FyJ2w0s/4MtO7/UGplEZqluLTnq4xgLNxNjMWhXycOELP+rRYpTagA==}
     peerDependencies:
-      electron: '>=9.0.0 <32.0.0'
+      electron: '>=9.0.0 <33.0.0'
 
   merge-stream@2.0.0:
     resolution: {integrity: sha512-abv/qOcuPfk3URPfDzmZU1LKmuw8kT+0nIHvKrKgFrwifol/doWcdA4ZqsWQ8ENrFKkd67Mfpo/LovbIUsbt3w==}
@@ -7129,7 +7129,7 @@ snapshots:
 
   mdn-data@2.0.30: {}
 
-  menubar@9.5.0(electron@32.2.0):
+  menubar@9.5.1(electron@32.2.0):
     dependencies:
       electron: 32.2.0
       electron-positioner: 4.1.0
