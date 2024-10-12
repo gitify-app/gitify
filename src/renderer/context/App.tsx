@@ -45,7 +45,6 @@ import {
 import { Constants } from '../utils/constants';
 import { getNotificationCount } from '../utils/notifications';
 import { clearState, loadState, saveState } from '../utils/storage';
-import { setTheme } from '../utils/theme';
 import { zoomPercentageToLevel } from '../utils/zoom';
 
 export const defaultAuth: AuthState = {
@@ -137,10 +136,6 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     restoreSettings();
   }, []);
-
-  useEffect(() => {
-    setTheme(settings.theme);
-  }, [settings.theme]);
 
   // biome-ignore lint/correctness/useExhaustiveDependencies: We only want fetchNotifications to be called for account changes
   useEffect(() => {

@@ -7,12 +7,13 @@ import {
   PaintbrushIcon,
   TagIcon,
 } from '@primer/octicons-react';
+import { useTheme } from '@primer/react';
+import type { ColorModeWithAuto } from '@primer/react/lib/ThemeProvider';
 import { ipcRenderer, webFrame } from 'electron';
 import { type FC, useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
-import { setTheme } from '../../utils/theme';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
 import { Button } from '../buttons/Button';
 import { Checkbox } from '../fields/Checkbox';
@@ -23,6 +24,7 @@ let timeout: NodeJS.Timeout;
 const DELAY = 200;
 
 export const AppearanceSettings: FC = () => {
+  const { setColorMode } = useTheme();
   const { auth, settings, updateSetting } = useContext(AppContext);
   const [zoomPercentage, setZoomPercentage] = useState(
     zoomLevelToPercentage(webFrame.getZoomLevel()),
@@ -31,10 +33,10 @@ export const AppearanceSettings: FC = () => {
   useEffect(() => {
     ipcRenderer.on('gitify:update-theme', (_, updatedTheme: Theme) => {
       if (settings.theme === Theme.SYSTEM) {
-        setTheme(updatedTheme);
+        setColorMode(updatedTheme === 'DARK' ? 'night' : 'day');
       }
     });
-  }, [settings.theme]);
+  }, [settings.theme, setColorMode]);
 
   window.addEventListener('resize', () => {
     // clear the timeout
@@ -60,6 +62,20 @@ export const AppearanceSettings: FC = () => {
           { label: 'Dark', value: Theme.DARK },
         ]}
         onChange={(evt) => {
+          let mode: ColorModeWithAuto;
+          switch (evt.target.value) {
+            case Theme.LIGHT:
+              mode = 'day';
+              break;
+            case Theme.DARK:
+              mode = 'night';
+              break;
+            default:
+              mode = 'auto';
+              break;
+          }
+
+          setColorMode(mode);
           updateSetting('theme', evt.target.value as Theme);
         }}
       />
