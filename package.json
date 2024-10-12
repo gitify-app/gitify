@@ -1,6 +1,6 @@
 {
   "name": "gitify",
-  "version": "5.16.0",
+  "version": "5.16.1",
   "description": "GitHub notifications on your menu bar.",
   "main": "build/main.js",
   "scripts": {
