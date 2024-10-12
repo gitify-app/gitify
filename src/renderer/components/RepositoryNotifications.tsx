@@ -1,4 +1,5 @@
-import { CheckIcon, MarkGithubIcon, ReadIcon } from '@primer/octicons-react';
+import { CheckIcon, ReadIcon } from '@primer/octicons-react';
+import { Avatar } from '@primer/react';
 import { type FC, type MouseEvent, useContext, useState } from 'react';
 import { AppContext } from '../context/App';
 import { Opacity, Size } from '../types';
@@ -12,7 +13,6 @@ import { openRepository } from '../utils/links';
 import { HoverGroup } from './HoverGroup';
 import { NotificationRow } from './NotificationRow';
 import { InteractionButton } from './buttons/InteractionButton';
-import { AvatarIcon } from './icons/AvatarIcon';
 
 interface IRepositoryNotifications {
   repoNotifications: Notification[];
@@ -50,18 +50,13 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
       >
         <div
           className={cn(
-            'flex flex-1 gap-3 items-center truncate text-sm font-medium',
+            'flex flex-1 gap-3 items-center truncate text-sm font-medium pl-0.5',
             animateExit &&
               'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
             showAsRead ? Opacity.READ : Opacity.MEDIUM,
           )}
         >
-          <AvatarIcon
-            title={repoName}
-            url={avatarUrl}
-            size={Size.XSMALL}
-            defaultIcon={MarkGithubIcon}
-          />
+          <Avatar src={avatarUrl} title={repoName} size={Size.MEDIUM} />
           <span
             className="cursor-pointer truncate"
             onClick={(event: MouseEvent<HTMLElement>) => {

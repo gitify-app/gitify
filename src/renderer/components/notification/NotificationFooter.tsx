@@ -1,4 +1,5 @@
 import { FeedPersonIcon, MarkGithubIcon } from '@primer/octicons-react';
+import { Avatar } from '@primer/react';
 import type { FC, MouseEvent } from 'react';
 import { IconColor, Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
@@ -6,7 +7,6 @@ import { cn } from '../../utils/cn';
 import { formatNotificationUpdatedAt } from '../../utils/helpers';
 import { openUserProfile } from '../../utils/links';
 import { formatReason } from '../../utils/reason';
-import { AvatarIcon } from '../icons/AvatarIcon';
 import { Pills } from './Pills';
 
 interface INotificationFooter {
@@ -39,13 +39,13 @@ export const NotificationFooter: FC<INotificationFooter> = ({
             event.stopPropagation();
             openUserProfile(notification.subject.user);
           }}
-          className="flex-shrink-0"
+          className="flex-shrink-0 pl-1"
         >
-          <AvatarIcon
+          <Avatar
+            src={notification.subject.user.avatar_url}
             title={notification.subject.user.login}
-            url={notification.subject.user.avatar_url}
-            size={Size.XSMALL}
-            defaultIcon={FeedPersonIcon}
+            size={Size.SMALL}
+            // square={notification.subject.user.type !== 'User'}
           />
         </button>
       ) : (

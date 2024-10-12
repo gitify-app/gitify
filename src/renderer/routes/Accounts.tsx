@@ -1,5 +1,4 @@
 import {
-  FeedPersonIcon,
   KeyIcon,
   MarkGithubIcon,
   PersonIcon,
@@ -10,19 +9,18 @@ import {
   SyncIcon,
 } from '@primer/octicons-react';
 
+import { Avatar, Button, Tooltip } from '@primer/react';
 import log from 'electron-log';
 import { type FC, useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
-import { AuthMethodIcon } from '../components/icons/AuthMethodIcon';
-import { AvatarIcon } from '../components/icons/AvatarIcon';
-import { PlatformIcon } from '../components/icons/PlatformIcon';
 import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import { type Account, IconColor, Size } from '../types';
 import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
 import { cn } from '../utils/cn';
 import { updateTrayIcon, updateTrayTitle } from '../utils/comms';
+import { getAuthMethodIcon, getPlatformIcon } from '../utils/icons';
 import {
   openAccountProfile,
   openDeveloperSettings,
@@ -72,111 +70,115 @@ export const AccountsRoute: FC = () => {
       <Header icon={PersonIcon}>Accounts</Header>
       <div className="flex-grow overflow-x-auto px-8">
         <div className="mt-4 flex flex-col text-sm">
-          {auth.accounts.map((account, i) => (
-            <div
-              key={getAccountUUID(account)}
-              className="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-2 dark:bg-gray-sidebar"
-            >
-              <div className="ml-2 text-xs">
-                <div>
-                  <button
-                    type="button"
-                    className="flex flex-1 gap-2 items-center justify-center mb-1 cursor-pointer text-sm font-semibold"
-                    title="Open Profile"
-                    onClick={() => openAccountProfile(account)}
-                  >
-                    <AvatarIcon
-                      title={account.user.login}
-                      url={account.user.avatar}
-                      size={Size.MEDIUM}
-                      defaultIcon={FeedPersonIcon}
-                    />
-                    @{account.user.login}
-                    <span
-                      hidden={!account.user?.name}
-                      className="text-xs font-medium italic"
+          {auth.accounts.map((account, i) => {
+            const authMethodIcon = getAuthMethodIcon(account.method);
+            const platformIcon = getPlatformIcon(account.platform);
+
+            return (
+              <div
+                key={getAccountUUID(account)}
+                className="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-2 dark:bg-gray-sidebar"
+              >
+                <div className="ml-2 text-xs">
+                  <div>
+                    <button
+                      type="button"
+                      className="flex flex-1 gap-2 items-center justify-center mb-1 cursor-pointer text-sm font-semibold"
+                      title="Open Profile"
+                      onClick={() => openAccountProfile(account)}
                     >
-                      ({account.user?.name})
-                    </span>
-                  </button>
+                      <Avatar
+                        src={account.user.avatar}
+                        title={account.user.login}
+                        size={Size.MEDIUM}
+                      />
+                      @{account.user.login}
+                      <span
+                        hidden={!account.user?.name}
+                        className="text-xs font-medium italic"
+                      >
+                        ({account.user?.name})
+                      </span>
+                    </button>
+                  </div>
+                  <div>
+                    <Tooltip text="Open Host" direction="e">
+                      <Button
+                        leadingVisual={platformIcon}
+                        size="small"
+                        onClick={() => openHost(account.hostname)}
+                      >
+                        {account.hostname}
+                      </Button>
+                    </Tooltip>
+                  </div>
+                  <div>
+                    <Tooltip text="Open Developer Settings" direction="e">
+                      <Button
+                        leadingVisual={authMethodIcon}
+                        size="small"
+                        onClick={() => openDeveloperSettings(account)}
+                      >
+                        {account.method}
+                      </Button>
+                    </Tooltip>
+                  </div>
                 </div>
                 <div>
                   <button
                     type="button"
-                    className="mb-1 ml-1 cursor-pointer align-middle"
-                    title="Open Host"
-                    onClick={() => openHost(account.hostname)}
+                    className={cn(BUTTON_CLASS_NAME, 'px-0', 'cursor-default')}
+                    title="Primary account"
+                    hidden={i !== 0}
                   >
-                    <PlatformIcon type={account.platform} size={Size.XSMALL} />
-                    {account.hostname}
+                    <StarFillIcon
+                      size={Size.XLARGE}
+                      className={IconColor.YELLOW}
+                      aria-label="Primary account"
+                    />
                   </button>
-                </div>
-                <div>
                   <button
                     type="button"
-                    className="ml-1 cursor-pointer align-middle"
-                    title="Open Developer Settings"
-                    onClick={() => openDeveloperSettings(account)}
+                    className={cn(BUTTON_CLASS_NAME, 'px-0')}
+                    title="Set as primary account"
+                    onClick={() => setAsPrimaryAccount(account)}
+                    hidden={i === 0}
                   >
-                    <AuthMethodIcon type={account.method} size={Size.XSMALL} />
-                    {account.method}
+                    <StarIcon
+                      size={Size.XLARGE}
+                      className={IconColor.YELLOW}
+                      aria-label="Set as primary account"
+                    />
+                  </button>
+                  <button
+                    type="button"
+                    className={cn(BUTTON_CLASS_NAME, 'px-0')}
+                    title={`Refresh ${account.user.login}`}
+                    onClick={async () => {
+                      await refreshAccount(account);
+                      navigate('/accounts', { replace: true });
+                    }}
+                  >
+                    <SyncIcon
+                      size={Size.XLARGE}
+                      aria-label={`Refresh ${account.user.login}`}
+                    />
+                  </button>
+                  <button
+                    type="button"
+                    className={cn(BUTTON_CLASS_NAME, 'px-0')}
+                    title={`Logout ${account.user.login}`}
+                    onClick={() => logoutAccount(account)}
+                  >
+                    <SignOutIcon
+                      size={Size.XLARGE}
+                      aria-label={`Logout ${account.user.login}`}
+                    />
                   </button>
                 </div>
               </div>
-              <div>
-                <button
-                  type="button"
-                  className={cn(BUTTON_CLASS_NAME, 'px-0', 'cursor-default')}
-                  title="Primary account"
-                  hidden={i !== 0}
-                >
-                  <StarFillIcon
-                    size={Size.XLARGE}
-                    className={IconColor.YELLOW}
-                    aria-label="Primary account"
-                  />
-                </button>
-                <button
-                  type="button"
-                  className={cn(BUTTON_CLASS_NAME, 'px-0')}
-                  title="Set as primary account"
-                  onClick={() => setAsPrimaryAccount(account)}
-                  hidden={i === 0}
-                >
-                  <StarIcon
-                    size={Size.XLARGE}
-                    className={IconColor.YELLOW}
-                    aria-label="Set as primary account"
-                  />
-                </button>
-                <button
-                  type="button"
-                  className={cn(BUTTON_CLASS_NAME, 'px-0')}
-                  title={`Refresh ${account.user.login}`}
-                  onClick={async () => {
-                    await refreshAccount(account);
-                    navigate('/accounts', { replace: true });
-                  }}
-                >
-                  <SyncIcon
-                    size={Size.XLARGE}
-                    aria-label={`Refresh ${account.user.login}`}
-                  />
-                </button>
-                <button
-                  type="button"
-                  className={cn(BUTTON_CLASS_NAME, 'px-0')}
-                  title={`Logout ${account.user.login}`}
-                  onClick={() => logoutAccount(account)}
-                >
-                  <SignOutIcon
-                    size={Size.XLARGE}
-                    aria-label={`Logout ${account.user.login}`}
-                  />
-                </button>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 

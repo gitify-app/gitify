@@ -1,4 +1,5 @@
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
+import { CircleOcticon } from '@primer/react';
 import {
   type FC,
   type MouseEvent,
@@ -100,9 +101,9 @@ export const NotificationRow: FC<INotificationRow> = ({
         className={cn('mr-3 flex items-center justify-center', iconColor)}
         title={notificationType}
       >
-        <NotificationIcon
+        <CircleOcticon
+          icon={NotificationIcon}
           size={groupByDate ? Size.XLARGE : Size.MEDIUM}
-          aria-label={notification.subject.type}
         />
       </div>
 

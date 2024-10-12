@@ -1,8 +1,7 @@
 import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
+import { IconButton, Tooltip } from '@primer/react';
 import { type FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BUTTON_CLASS_NAME } from '../../styles/gitify';
-import { Size } from '../../types';
 import { getAppVersion, quitApp } from '../../utils/comms';
 import { openGitifyReleaseNotes } from '../../utils/links';
 
@@ -34,25 +33,25 @@ export const SettingsFooter: FC = () => {
         </div>
       </button>
       <div>
-        <button
-          type="button"
-          className={BUTTON_CLASS_NAME}
-          title="Accounts"
-          onClick={() => {
-            navigate('/accounts');
-          }}
-        >
-          <PersonIcon size={Size.LARGE} aria-label="Accounts" />
-        </button>
+        <Tooltip text="Accounts" direction="n">
+          <IconButton
+            icon={PersonIcon}
+            aria-label="Accounts"
+            onClick={() => {
+              navigate('/accounts');
+            }}
+          />
+        </Tooltip>
 
-        <button
-          type="button"
-          className={BUTTON_CLASS_NAME}
-          title="Quit Gitify"
-          onClick={quitApp}
-        >
-          <XCircleIcon size={Size.LARGE} aria-label="Quit Gitify" />
-        </button>
+        <Tooltip text="Quit Gitify" direction="n">
+          <IconButton
+            icon={XCircleIcon}
+            aria-label="Quit Gitify"
+            onClick={() => {
+              quitApp();
+            }}
+          />
+        </Tooltip>
       </div>
     </div>
   );

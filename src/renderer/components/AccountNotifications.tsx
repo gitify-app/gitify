@@ -1,8 +1,5 @@
-import {
-  FeedPersonIcon,
-  GitPullRequestIcon,
-  IssueOpenedIcon,
-} from '@primer/octicons-react';
+import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
+import { Avatar } from '@primer/react';
 import { type FC, type MouseEvent, useContext, useMemo, useState } from 'react';
 import { AppContext } from '../context/App';
 import { type Account, type GitifyError, Opacity, Size } from '../types';
@@ -20,8 +17,6 @@ import { NotificationRow } from './NotificationRow';
 import { Oops } from './Oops';
 import { RepositoryNotifications } from './RepositoryNotifications';
 import { InteractionButton } from './buttons/InteractionButton';
-import { AvatarIcon } from './icons/AvatarIcon';
-import { PlatformIcon } from './icons/PlatformIcon';
 
 interface IAccountNotifications {
   account: Account;
@@ -92,19 +87,17 @@ export const AccountNotifications: FC<IAccountNotifications> = (
                 openAccountProfile(account);
               }}
             >
-              <div className="flex">
-                <AvatarIcon
+              <div className="flex items-center ml-0.5">
+                <Avatar
+                  src={account.user.avatar}
                   title={account.user.login}
-                  url={account.user.avatar}
                   size={Size.SMALL}
-                  defaultIcon={FeedPersonIcon}
                 />
-                <span className="ml-2">@{account.user.login}</span>
+                <span className="ml-2.5">@{account.user.login}</span>
               </div>
             </button>
           </div>
           <HoverGroup>
-            <PlatformIcon type={account.platform} size={Size.SMALL} />
             <InteractionButton
               title="My Issues"
               icon={IssueOpenedIcon}

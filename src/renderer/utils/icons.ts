@@ -1,5 +1,6 @@
 import {
   AlertIcon,
+  AppsIcon,
   CheckIcon,
   CommentDiscussionIcon,
   CommentIcon,
@@ -16,10 +17,14 @@ import {
   IssueDraftIcon,
   IssueOpenedIcon,
   IssueReopenedIcon,
+  KeyIcon,
   MailIcon,
+  MarkGithubIcon,
   type OcticonProps,
+  PersonIcon,
   QuestionIcon,
   RocketIcon,
+  ServerIcon,
   SkipIcon,
   StopIcon,
   TagIcon,
@@ -28,6 +33,7 @@ import {
 import type { FC } from 'react';
 import { IconColor, type PullRequestApprovalIcon } from '../types';
 import type { GitifyPullRequestReview, Subject } from '../typesGitHub';
+import type { AuthMethod, PlatformType } from './auth/types';
 
 export function getNotificationTypeIcon(subject: Subject): FC<OcticonProps> {
   switch (subject.type) {
@@ -150,5 +156,27 @@ export function getPullRequestReviewIcon(
       };
     default:
       return null;
+  }
+}
+
+export function getAuthMethodIcon(method: AuthMethod): FC<OcticonProps> | null {
+  switch (method) {
+    case 'GitHub App':
+      return AppsIcon;
+    case 'OAuth App':
+      return PersonIcon;
+    default:
+      return KeyIcon;
+  }
+}
+
+export function getPlatformIcon(
+  platform: PlatformType,
+): FC<OcticonProps> | null {
+  switch (platform) {
+    case 'GitHub Enterprise Server':
+      return ServerIcon;
+    default:
+      return MarkGithubIcon;
   }
 }

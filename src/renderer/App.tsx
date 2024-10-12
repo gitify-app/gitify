@@ -16,6 +16,8 @@ import { LoginWithOAuthAppRoute } from './routes/LoginWithOAuthApp';
 import { LoginWithPersonalAccessTokenRoute } from './routes/LoginWithPersonalAccessToken';
 import { NotificationsRoute } from './routes/Notifications';
 import { SettingsRoute } from './routes/Settings';
+
+import { BaseStyles, ThemeProvider } from '@primer/react';
 import './App.css';
 
 function RequireAuth({ children }) {
@@ -31,56 +33,60 @@ function RequireAuth({ children }) {
 
 export const App = () => {
   return (
-    <AppProvider>
-      <Router>
-        <div className="flex h-full overflow-y-auto flex-col pl-14">
-          <Loading />
-          <Sidebar />
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <RequireAuth>
-                  <NotificationsRoute />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="/filters"
-              element={
-                <RequireAuth>
-                  <FiltersRoute />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="/settings"
-              element={
-                <RequireAuth>
-                  <SettingsRoute />
-                </RequireAuth>
-              }
-            />
-            <Route
-              path="/accounts"
-              element={
-                <RequireAuth>
-                  <AccountsRoute />
-                </RequireAuth>
-              }
-            />
-            <Route path="/login" element={<LoginRoute />} />
-            <Route
-              path="/login-personal-access-token"
-              element={<LoginWithPersonalAccessTokenRoute />}
-            />
-            <Route
-              path="/login-oauth-app"
-              element={<LoginWithOAuthAppRoute />}
-            />
-          </Routes>
-        </div>
-      </Router>
-    </AppProvider>
+    <ThemeProvider>
+      <BaseStyles>
+        <AppProvider>
+          <Router>
+            <div className="flex h-full overflow-y-auto flex-col pl-14">
+              <Loading />
+              <Sidebar />
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    <RequireAuth>
+                      <NotificationsRoute />
+                    </RequireAuth>
+                  }
+                />
+                <Route
+                  path="/filters"
+                  element={
+                    <RequireAuth>
+                      <FiltersRoute />
+                    </RequireAuth>
+                  }
+                />
+                <Route
+                  path="/settings"
+                  element={
+                    <RequireAuth>
+                      <SettingsRoute />
+                    </RequireAuth>
+                  }
+                />
+                <Route
+                  path="/accounts"
+                  element={
+                    <RequireAuth>
+                      <AccountsRoute />
+                    </RequireAuth>
+                  }
+                />
+                <Route path="/login" element={<LoginRoute />} />
+                <Route
+                  path="/login-personal-access-token"
+                  element={<LoginWithPersonalAccessTokenRoute />}
+                />
+                <Route
+                  path="/login-oauth-app"
+                  element={<LoginWithOAuthAppRoute />}
+                />
+              </Routes>
+            </div>
+          </Router>
+        </AppProvider>
+      </BaseStyles>
+    </ThemeProvider>
   );
 };

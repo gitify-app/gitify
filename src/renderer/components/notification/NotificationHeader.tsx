@@ -1,11 +1,10 @@
-import { MarkGithubIcon } from '@primer/octicons-react';
+import { Avatar } from '@primer/react';
 import { type FC, type MouseEvent, useContext } from 'react';
 import { AppContext } from '../../context/App';
 import { Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { cn } from '../../utils/cn';
 import { openRepository } from '../../utils/links';
-import { AvatarIcon } from '../icons/AvatarIcon';
 
 interface INotificationHeader {
   notification: Notification;
@@ -30,12 +29,7 @@ export const NotificationHeader: FC<INotificationHeader> = ({
         )}
       >
         <span>
-          <AvatarIcon
-            title={repoSlug}
-            url={repoAvatarUrl}
-            size={Size.XSMALL}
-            defaultIcon={MarkGithubIcon}
-          />
+          <Avatar src={repoAvatarUrl} title={repoSlug} size={Size.SMALL} />
         </span>
         <span
           title={repoSlug}
