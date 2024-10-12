@@ -29,6 +29,6 @@ export function convertTextToEmojiImgHtml(text: string): string {
 }
 
 function extractSvgFilename(imgHtml: string): string {
-  const srcMatch = imgHtml.match(/src="(.*)"/);
+  const srcMatch = /src="(.*)"/.exec(imgHtml);
   return path.basename(srcMatch[1]);
 }
