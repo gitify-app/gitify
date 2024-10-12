@@ -1,6 +1,9 @@
-import twemoji from '@discordapp/twemoji';
+import path from 'node:path';
+import twemoji, { type TwemojiOptions } from '@discordapp/twemoji';
 import { Constants } from './constants';
 import { Errors } from './errors';
+
+const EMOJI_FORMAT = 'svg';
 
 const ALL_EMOJIS = [
   ...Constants.ALL_READ_EMOJIS,
@@ -11,6 +14,21 @@ const ALL_EMOJIS = [
   ...Errors.UNKNOWN.emojis,
 ];
 
-export const EMOJI_CODE_POINTS = ALL_EMOJIS.map((emoji) =>
-  twemoji.convert.toCodePoint(emoji),
-);
+export const ALL_EMOJI_SVG_FILENAMES = ALL_EMOJIS.map((emoji) => {
+  const imgHtml = convertTextToEmojiImgHtml(emoji);
+  return extractSvgFilename(imgHtml);
+});
+
+export function convertTextToEmojiImgHtml(text: string): string {
+  return twemoji.parse(text, {
+    folder: EMOJI_FORMAT,
+    callback: (icon: string, _options: TwemojiOptions) => {
+      return path.join('images', 'twemoji', `${icon}.${EMOJI_FORMAT}`);
+    },
+  });
+}
+
+function extractSvgFilename(imgHtml: string): string {
+  const srcMatch = imgHtml.match(/src="(.*)"/);
+  return path.basename(srcMatch[1]);
+}

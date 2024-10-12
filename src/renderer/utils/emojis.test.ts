@@ -1,8 +1,8 @@
-import { EMOJI_CODE_POINTS } from './emojis';
+import { ALL_EMOJI_SVG_FILENAMES } from './emojis';
 
 describe('renderer/utils/emojis.ts', () => {
-  it('emoji code points', () => {
-    expect(EMOJI_CODE_POINTS).toHaveLength(20);
-    expect(EMOJI_CODE_POINTS).toMatchSnapshot();
+  it('emoji svg filenames', () => {
+    expect(ALL_EMOJI_SVG_FILENAMES).toHaveLength(20);
+    expect(ALL_EMOJI_SVG_FILENAMES).toMatchSnapshot();
   });
 });
