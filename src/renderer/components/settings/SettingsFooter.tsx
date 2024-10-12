@@ -1,5 +1,5 @@
 import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
-import { IconButton, Tooltip } from '@primer/react';
+import { Button, IconButton, Stack, Tooltip } from '@primer/react';
 import { type FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAppVersion, quitApp } from '../../utils/comms';
@@ -21,18 +21,16 @@ export const SettingsFooter: FC = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-between bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker">
-      <button
-        type="button"
-        className="cursor-pointer font-semibold"
-        title="View release notes"
-        onClick={() => openGitifyReleaseNotes(appVersion)}
-      >
-        <div className="flex items-center gap-1">
-          <span aria-label="app-version">Gitify {appVersion}</span>
-        </div>
-      </button>
-      <div>
+    <div className="flex items-center justify-between bg-gray-200 px-4 py-1 text-sm dark:bg-gray-darker">
+      <Stack direction={'horizontal'}>
+        <Tooltip text="View release notes" direction="n">
+          <Button onClick={() => openGitifyReleaseNotes(appVersion)}>
+            Gitify {appVersion}
+          </Button>
+        </Tooltip>
+      </Stack>
+
+      <Stack direction={'horizontal'} gap={'normal'}>
         <Tooltip text="Accounts" direction="n">
           <IconButton
             icon={PersonIcon}
@@ -43,7 +41,7 @@ export const SettingsFooter: FC = () => {
           />
         </Tooltip>
 
-        <Tooltip text="Quit Gitify" direction="n">
+        <Tooltip text="Quit Gitify" direction="nw">
           <IconButton
             icon={XCircleIcon}
             aria-label="Quit Gitify"
@@ -52,7 +50,7 @@ export const SettingsFooter: FC = () => {
             }}
           />
         </Tooltip>
-      </div>
+      </Stack>
     </div>
   );
 };

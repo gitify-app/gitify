@@ -1,5 +1,5 @@
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
-import { Avatar } from '@primer/react';
+import { Avatar, Button, Stack, Text, Tooltip } from '@primer/react';
 import { type FC, type MouseEvent, useContext, useState } from 'react';
 import { AppContext } from '../context/App';
 import { Opacity, Size } from '../types';
@@ -45,28 +45,38 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
   return (
     <>
       <div
-        className="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
+        className="group flex justify-between bg-gray-100 py-1.5 dark:bg-gray-darker dark:text-white"
         onClick={toggleRepositoryNotifications}
       >
         <div
           className={cn(
-            'flex flex-1 gap-3 items-center truncate text-sm font-medium pl-0.5',
+            'flex flex-1 gap-3 items-center truncate text-sm font-medium',
             animateExit &&
               'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
             showAsRead ? Opacity.READ : Opacity.MEDIUM,
           )}
         >
-          <Avatar src={avatarUrl} title={repoName} size={Size.MEDIUM} />
-          <span
-            className="cursor-pointer truncate"
-            onClick={(event: MouseEvent<HTMLElement>) => {
-              // Don't trigger onClick of parent element.
-              event.stopPropagation();
-              openRepository(repoNotifications[0].repository);
-            }}
-          >
-            {repoName}
-          </span>
+          <Tooltip text="Open repository" direction="e">
+            <Button
+              variant="invisible"
+              alignContent="center"
+              count={repoNotifications.length}
+              onClick={(event: MouseEvent<HTMLElement>) => {
+                // Don't trigger onClick of parent element.
+                event.stopPropagation();
+                openRepository(repoNotifications[0].repository);
+              }}
+            >
+              <Stack
+                direction={'horizontal'}
+                gap={'condensed'}
+                align={'center'}
+              >
+                <Avatar src={avatarUrl} title={repoName} size={Size.MEDIUM} />
+                <Text>{repoName}</Text>
+              </Stack>
+            </Button>
+          </Tooltip>
         </div>
 
         {!animateExit && (

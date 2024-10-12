@@ -9,16 +9,23 @@ import {
   SyncIcon,
 } from '@primer/octicons-react';
 
-import { Avatar, Button, Tooltip } from '@primer/react';
+import {
+  Avatar,
+  Button,
+  CircleOcticon,
+  IconButton,
+  Stack,
+  Text,
+  Tooltip,
+} from '@primer/react';
 import log from 'electron-log';
 import { type FC, useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
 import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
-import { type Account, IconColor, Size } from '../types';
+import { type Account, Size } from '../types';
 import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
-import { cn } from '../utils/cn';
 import { updateTrayIcon, updateTrayTitle } from '../utils/comms';
 import { getAuthMethodIcon, getPlatformIcon } from '../utils/icons';
 import {
@@ -79,103 +86,75 @@ export const AccountsRoute: FC = () => {
                 key={getAccountUUID(account)}
                 className="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-2 dark:bg-gray-sidebar"
               >
-                <div className="ml-2 text-xs">
-                  <div>
-                    <button
-                      type="button"
-                      className="flex flex-1 gap-2 items-center justify-center mb-1 cursor-pointer text-sm font-semibold"
-                      title="Open Profile"
-                      onClick={() => openAccountProfile(account)}
-                    >
-                      <Avatar
-                        src={account.user.avatar}
-                        title={account.user.login}
-                        size={Size.MEDIUM}
-                      />
-                      @{account.user.login}
-                      <span
-                        hidden={!account.user?.name}
-                        className="text-xs font-medium italic"
+                <Stack direction={'vertical'} gap={'condensed'}>
+                  <Tooltip text="Open profile" direction="ne">
+                    <Button onClick={() => openAccountProfile(account)}>
+                      <Stack
+                        direction={'horizontal'}
+                        gap={'condensed'}
+                        align={'center'}
                       >
-                        ({account.user?.name})
-                      </span>
-                    </button>
-                  </div>
-                  <div>
-                    <Tooltip text="Open Host" direction="e">
+                        <Avatar
+                          src={account.user.avatar}
+                          title={account.user.login}
+                          size={Size.SMALL}
+                        />
+                        <Text>@{account.user.login}</Text>
+                        <Text as="p" sx={{ hidden: !account.user?.name }}>
+                          ({account.user?.name})
+                        </Text>
+                      </Stack>
+                    </Button>
+                  </Tooltip>
+
+                  <Stack direction={'vertical'} className="ml-2">
+                    <Tooltip text="Open Host" direction="ne">
                       <Button
                         leadingVisual={platformIcon}
                         size="small"
+                        variant="invisible"
                         onClick={() => openHost(account.hostname)}
                       >
                         {account.hostname}
                       </Button>
                     </Tooltip>
-                  </div>
-                  <div>
-                    <Tooltip text="Open Developer Settings" direction="e">
+
+                    <Tooltip text="Open Developer Settings" direction="ne">
                       <Button
                         leadingVisual={authMethodIcon}
                         size="small"
+                        variant="invisible"
                         onClick={() => openDeveloperSettings(account)}
                       >
                         {account.method}
                       </Button>
                     </Tooltip>
-                  </div>
-                </div>
-                <div>
-                  <button
-                    type="button"
-                    className={cn(BUTTON_CLASS_NAME, 'px-0', 'cursor-default')}
-                    title="Primary account"
-                    hidden={i !== 0}
-                  >
-                    <StarFillIcon
-                      size={Size.XLARGE}
-                      className={IconColor.YELLOW}
-                      aria-label="Primary account"
-                    />
-                  </button>
-                  <button
-                    type="button"
-                    className={cn(BUTTON_CLASS_NAME, 'px-0')}
-                    title="Set as primary account"
+                  </Stack>
+                </Stack>
+                <Stack direction={'horizontal'} gap={'condensed'}>
+                  <IconButton
+                    icon={i === 0 ? StarFillIcon : StarIcon}
+                    aria-label={
+                      i === 0 ? 'Primary account' : 'Set as primary account'
+                    }
+                    variant={i === 0 ? 'primary' : 'default'}
                     onClick={() => setAsPrimaryAccount(account)}
-                    hidden={i === 0}
-                  >
-                    <StarIcon
-                      size={Size.XLARGE}
-                      className={IconColor.YELLOW}
-                      aria-label="Set as primary account"
-                    />
-                  </button>
-                  <button
-                    type="button"
-                    className={cn(BUTTON_CLASS_NAME, 'px-0')}
-                    title={`Refresh ${account.user.login}`}
+                  />
+                  <IconButton
+                    icon={SyncIcon}
+                    aria-label={`Refresh ${account.user.login}`}
                     onClick={async () => {
                       await refreshAccount(account);
                       navigate('/accounts', { replace: true });
                     }}
-                  >
-                    <SyncIcon
-                      size={Size.XLARGE}
-                      aria-label={`Refresh ${account.user.login}`}
-                    />
-                  </button>
-                  <button
-                    type="button"
-                    className={cn(BUTTON_CLASS_NAME, 'px-0')}
-                    title={`Logout ${account.user.login}`}
+                  />
+                  <IconButton
+                    icon={SignOutIcon}
+                    aria-label={`Logout ${account.user.login}`}
+                    variant="danger"
                     onClick={() => logoutAccount(account)}
-                  >
-                    <SignOutIcon
-                      size={Size.XLARGE}
-                      aria-label={`Logout ${account.user.login}`}
-                    />
-                  </button>
-                </div>
+                  />
+                </Stack>
               </div>
             );
           })}

@@ -1,5 +1,5 @@
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
-import { Avatar } from '@primer/react';
+import { Avatar, Button, Stack, Text, Tooltip } from '@primer/react';
 import { type FC, type MouseEvent, useContext, useMemo, useState } from 'react';
 import { AppContext } from '../context/App';
 import { type Account, type GitifyError, Opacity, Size } from '../types';
@@ -69,7 +69,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
       {showAccountHeader && (
         <div
           className={cn(
-            'group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white',
+            'group flex items-center justify-between py-1.5 text-sm font-semibold dark:text-white',
             props.error
               ? 'bg-red-300 dark:bg-red-500'
               : 'bg-gray-300 dark:bg-gray-darkest',
@@ -77,26 +77,31 @@ export const AccountNotifications: FC<IAccountNotifications> = (
           )}
           onClick={toggleAccountNotifications}
         >
-          <div className="flex">
-            <button
-              type="button"
-              title="Open Profile"
+          <Tooltip text="Open profile" direction="e">
+            <Button
+              variant="invisible"
+              alignContent="center"
+              count={notifications.length}
               onClick={(event: MouseEvent<HTMLElement>) => {
                 // Don't trigger onClick of parent element.
                 event.stopPropagation();
                 openAccountProfile(account);
               }}
             >
-              <div className="flex items-center ml-0.5">
+              <Stack
+                direction={'horizontal'}
+                gap={'condensed'}
+                align={'center'}
+              >
                 <Avatar
                   src={account.user.avatar}
                   title={account.user.login}
                   size={Size.SMALL}
                 />
-                <span className="ml-2.5">@{account.user.login}</span>
-              </div>
-            </button>
-          </div>
+                <Text>@{account.user.login}</Text>
+              </Stack>
+            </Button>
+          </Tooltip>
           <HoverGroup>
             <InteractionButton
               title="My Issues"
