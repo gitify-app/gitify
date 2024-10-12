@@ -30,6 +30,5 @@ export function convertTextToEmojiImgHtml(text: string): string {
 
 function extractSvgFilename(imgHtml: string): string {
   const srcMatch = imgHtml.match(/src="(.*)"/);
-  const filenameMatch = srcMatch[1].match(/([a-z0-9\-]+\.svg$)/);
-  return filenameMatch[1];
+  return path.basename(srcMatch[1]);
 }
