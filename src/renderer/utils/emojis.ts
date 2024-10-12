@@ -29,5 +29,7 @@ export function convertTextToEmojiImgHtml(text: string): string {
 }
 
 function extractSvgFilename(imgHtml: string): string {
-  return imgHtml.match(/src="images\/twemoji\/(.*)"/)[1];
+  const srcMatch = imgHtml.match(/src="(.*)"/);
+  const filenameMatch = srcMatch[1].match(/\/([a-z0-9\-]+\.svg)/);
+  return filenameMatch[1];
 }
