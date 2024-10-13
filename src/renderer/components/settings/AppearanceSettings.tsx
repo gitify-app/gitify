@@ -15,10 +15,10 @@ import {
 } from '@primer/octicons-react';
 import { Button, ButtonGroup, IconButton, useTheme } from '@primer/react';
 import type { ColorModeWithAuto } from '@primer/react/lib/ThemeProvider';
-
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
+import { setTheme } from '../../utils/theme';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
@@ -37,7 +37,8 @@ export const AppearanceSettings: FC = () => {
   useEffect(() => {
     ipcRenderer.on('gitify:update-theme', (_, updatedTheme: Theme) => {
       if (settings.theme === Theme.SYSTEM) {
-        setColorMode(updatedTheme === 'DARK' ? 'night' : 'day');
+        setTheme(updatedTheme);
+        setColorMode(updatedTheme === Theme.LIGHT ? 'light' : 'dark');
       }
     });
   }, [settings.theme, setColorMode]);
@@ -80,8 +81,10 @@ export const AppearanceSettings: FC = () => {
               break;
           }
 
-          setColorMode(mode);
           updateSetting('theme', evt.target.value as Theme);
+
+          setColorMode(mode);
+          setTheme(evt.target.value as Theme);
         }}
       />
 
