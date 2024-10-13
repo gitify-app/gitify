@@ -76,14 +76,14 @@ export const Sidebar: FC = () => {
     <div className="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar">
       <div className="flex flex-1 flex-col">
         <Stack
-          direction={'vertical'}
-          align={'center'}
-          gap={'condensed'}
-          padding={'normal'}
+          direction="vertical"
+          align="center"
+          gap="condensed"
+          padding="normal"
         >
           <Button
-            aria-label={'Home'}
-            size={'small'}
+            aria-label="Home"
+            size="small"
             variant="invisible"
             onClick={() => navigate('/', { replace: true })}
           >
@@ -93,21 +93,23 @@ export const Sidebar: FC = () => {
           <Button
             aria-label={`${notificationsCount} unread notifications`}
             leadingVisual={BellIcon}
-            size={'small'}
+            size="small"
             variant={notificationsCount > 0 ? 'primary' : 'invisible'}
             count={isLoggedIn ? notificationsCount : null}
             onClick={() => openGitHubNotifications(primaryAccountHostname)}
           />
 
           {/* TODO - explore https://primer.style/components/selectpanel/react/alpha/ for a better UI for filters */}
-          <Button
-            aria-label="Filters"
-            leadingVisual={FilterIcon}
-            size={'small'}
-            variant={filterCount > 0 ? 'primary' : 'invisible'}
-            count={filterCount}
-            onClick={() => toggleFilters()}
-          />
+          {isLoggedIn && (
+            <Button
+              aria-label="Filters"
+              leadingVisual={FilterIcon}
+              size="small"
+              variant={filterCount > 0 ? 'primary' : 'invisible'}
+              count={filterCount}
+              onClick={() => toggleFilters()}
+            />
+          )}
 
           <IconButton
             aria-label="My issues"
@@ -129,10 +131,10 @@ export const Sidebar: FC = () => {
       </div>
 
       <Stack
-        direction={'vertical'}
-        align={'center'}
-        gap={'condensed'}
-        padding={'normal'}
+        direction="vertical"
+        align="center"
+        gap="condensed"
+        padding="normal"
       >
         {isLoggedIn && (
           <>
@@ -150,7 +152,7 @@ export const Sidebar: FC = () => {
             <IconButton
               aria-label="Settings"
               icon={GearIcon}
-              size={'small'}
+              size="small"
               variant="invisible"
               tooltipDirection="e"
               onClick={() => toggleSettings()}

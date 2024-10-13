@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { ArrowLeftIcon, type Icon } from '@primer/octicons-react';
 
-import { CircleOcticon, Heading, IconButton, Stack } from '@primer/react';
+import { Heading, IconButton, Octicon, Stack } from '@primer/react';
 import { AppContext } from '../context/App';
 import { Size } from '../types';
 
@@ -20,7 +20,7 @@ export const Header: FC<IHeader> = (props: IHeader) => {
 
   return (
     <div className="mx-6 mt-2 py-2">
-      <Stack direction={'horizontal'} justify={'space-between'}>
+      <Stack direction="horizontal" justify="space-between">
         <IconButton
           aria-label="Go Back"
           variant="invisible"
@@ -34,8 +34,8 @@ export const Header: FC<IHeader> = (props: IHeader) => {
           }}
         />
 
-        <Stack direction={'horizontal'} align={'center'} gap={'condensed'}>
-          <CircleOcticon icon={props.icon} size={Size.LARGE} />
+        <Stack direction="horizontal" align="center" gap="condensed">
+          <Octicon icon={props.icon} size={Size.LARGE} />
           <Heading
             sx={{
               fontSize: 3,

@@ -24,7 +24,7 @@ export const SettingsFooter: FC = () => {
 
   return (
     <div className="flex items-center justify-between bg-gray-200 px-4 py-1 text-sm dark:bg-gray-darker">
-      <Stack direction={'horizontal'}>
+      <Stack direction="horizontal">
         <Tooltip text="View release notes" direction="n">
           <Button onClick={() => openGitifyReleaseNotes(appVersion)}>
             Gitify {appVersion}
@@ -32,7 +32,7 @@ export const SettingsFooter: FC = () => {
         </Tooltip>
       </Stack>
 
-      <Stack direction={'horizontal'} gap={'normal'}>
+      <Stack direction="horizontal" gap="normal">
         <Tooltip text="Accounts" direction="n">
           <IconButton
             aria-label="Accounts"

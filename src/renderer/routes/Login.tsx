@@ -30,10 +30,10 @@ export const LoginRoute: FC = () => {
   }, [loginWithGitHubApp]);
 
   return (
-    <Stack direction={'vertical'} align={'center'}>
+    <Stack direction="vertical" align="center">
       <LogoIcon size={Size.LARGE} isDark />
 
-      <Stack align={'center'} gap={'none'}>
+      <Stack align="center" gap="none">
         <Heading
           sx={{
             fontSize: 4,
@@ -50,12 +50,12 @@ export const LoginRoute: FC = () => {
         </Heading>
       </Stack>
 
-      <Stack align={'center'} gap={'condensed'}>
+      <Stack align="center" gap="condensed">
         <Text>Login with</Text>
 
         <Button
           leadingVisual={MarkGithubIcon}
-          variant={'primary'}
+          variant="primary"
           onClick={() => loginUser()}
         >
           GitHub

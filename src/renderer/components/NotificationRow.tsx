@@ -7,7 +7,7 @@ import {
 } from 'react';
 
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
-import { Octicon, Tooltip } from '@primer/react';
+import { IconButton, Octicon, Tooltip } from '@primer/react';
 
 import { AppContext } from '../context/App';
 import { Opacity, Size } from '../types';
@@ -23,7 +23,6 @@ import {
 } from '../utils/icons';
 import { openNotification } from '../utils/links';
 import { HoverGroup } from './HoverGroup';
-import { InteractionButton } from './buttons/InteractionButton';
 import { NotificationFooter } from './notification/NotificationFooter';
 import { NotificationHeader } from './notification/NotificationHeader';
 
@@ -132,10 +131,11 @@ export const NotificationRow: FC<INotificationRow> = ({
       {!animateExit && (
         <HoverGroup>
           {isMarkAsDoneFeatureSupported(notification.account) && (
-            <InteractionButton
-              title="Mark as done"
+            <IconButton
+              aria-label="Mark as done"
               icon={CheckIcon}
-              size={Size.MEDIUM}
+              size="small"
+              variant="invisible"
               onClick={() => {
                 setAnimateExit(!settings.delayNotificationState);
                 setShowAsRead(settings.delayNotificationState);
@@ -143,20 +143,24 @@ export const NotificationRow: FC<INotificationRow> = ({
               }}
             />
           )}
-          <InteractionButton
-            title="Mark as read"
+
+          <IconButton
+            aria-label="Mark as read"
             icon={ReadIcon}
-            size={Size.SMALL}
+            size="small"
+            variant="invisible"
             onClick={() => {
               setAnimateExit(!settings.delayNotificationState);
               setShowAsRead(settings.delayNotificationState);
               markNotificationsAsRead([notification]);
             }}
           />
-          <InteractionButton
-            title="Unsubscribe from Thread"
+
+          <IconButton
+            aria-label="Unsubscribe from thread"
             icon={BellSlashIcon}
-            size={Size.SMALL}
+            size="small"
+            variant="invisible"
             onClick={unsubscribeFromThread}
           />
         </HoverGroup>

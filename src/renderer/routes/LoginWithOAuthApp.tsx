@@ -4,18 +4,12 @@ import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
 
 import { BookIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
+import { Button, Stack, Text, Tooltip } from '@primer/react';
 
 import { Header } from '../components/Header';
-import { Button } from '../components/buttons/Button';
 import { FieldInput } from '../components/fields/FieldInput';
 import { AppContext } from '../context/App';
-import {
-  type ClientID,
-  type ClientSecret,
-  type Hostname,
-  Size,
-  type Token,
-} from '../types';
+import type { ClientID, ClientSecret, Hostname, Token } from '../types';
 import type { LoginOAuthAppOptions } from '../utils/auth/types';
 import {
   getNewOAuthAppURL,
@@ -23,6 +17,7 @@ import {
   isValidHostname,
   isValidToken,
 } from '../utils/auth/utils';
+import { openExternalLink } from '../utils/comms';
 import { Constants } from '../utils/constants';
 
 interface IValues {
@@ -76,19 +71,24 @@ export const LoginWithOAuthAppRoute: FC = () => {
           label="Hostname"
           placeholder="github.company.com"
           helpText={
-            <div className="mb-1">
-              <Button
-                label="Create new OAuth App"
-                disabled={!values.hostname}
-                icon={{ icon: PersonIcon, size: Size.XSMALL }}
-                url={getNewOAuthAppURL(values.hostname)}
-                size="xs"
-              >
-                Create new OAuth App
-              </Button>
-              <span className="mx-1">on GitHub then paste your</span>
-              <span className="italic">client id and client secret</span> below.
-            </div>
+            <Stack direction="vertical" gap="condensed">
+              <Stack direction="horizontal" align="center" gap="condensed">
+                <Button
+                  size="small"
+                  leadingVisual={PersonIcon}
+                  disabled={!values.hostname}
+                  onClick={() =>
+                    openExternalLink(getNewOAuthAppURL(values.hostname))
+                  }
+                >
+                  Create new OAuth App
+                </Button>
+                <Text>on GitHub then paste your</Text>
+              </Stack>
+              <Text>
+                <Text as="i">client id and client secret</Text> below.
+              </Text>
+            </Stack>
           }
         />
 
@@ -100,29 +100,28 @@ export const LoginWithOAuthAppRoute: FC = () => {
           placeholder="ABC123DEF456"
         />
 
-        <div className="flex items-end justify-between">
-          <Button
-            name="Docs"
-            label="GitHub Docs"
-            className="mt-2"
-            icon={{ icon: BookIcon, size: Size.XSMALL }}
-            url={Constants.GITHUB_DOCS.OAUTH_URL}
-            size="xs"
-          >
-            Docs
-          </Button>
+        <Stack direction="horizontal" justify="space-between" align="center">
+          <Tooltip text="GitHub documentation">
+            <Button
+              size="small"
+              leadingVisual={BookIcon}
+              onClick={() => openExternalLink(Constants.GITHUB_DOCS.OAUTH_URL)}
+            >
+              Docs
+            </Button>
+          </Tooltip>
 
-          <Button
-            name="Login"
-            label="Login"
-            className="mt-2 px-4 py-2 !text-sm"
-            icon={{ icon: SignInIcon, size: Size.MEDIUM }}
-            disabled={submitting || pristine}
-            type="submit"
-          >
-            Login
-          </Button>
-        </div>
+          <Tooltip text="Login">
+            <Button
+              variant="primary"
+              leadingVisual={SignInIcon}
+              disabled={submitting || pristine}
+              type="submit"
+            >
+              Login
+            </Button>
+          </Tooltip>
+        </Stack>
       </form>
     );
   };

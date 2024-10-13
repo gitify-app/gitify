@@ -1,7 +1,14 @@
 import { type FC, type MouseEvent, useContext, useMemo, useState } from 'react';
 
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
-import { Avatar, Button, Stack, Text, Tooltip } from '@primer/react';
+import {
+  Avatar,
+  Button,
+  IconButton,
+  Stack,
+  Text,
+  Tooltip,
+} from '@primer/react';
 
 import { AppContext } from '../context/App';
 import { type Account, type GitifyError, Size } from '../types';
@@ -18,7 +25,6 @@ import { HoverGroup } from './HoverGroup';
 import { NotificationRow } from './NotificationRow';
 import { Oops } from './Oops';
 import { RepositoryNotifications } from './RepositoryNotifications';
-import { InteractionButton } from './buttons/InteractionButton';
 
 interface IAccountNotifications {
   account: Account;
@@ -89,11 +95,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
                 openAccountProfile(account);
               }}
             >
-              <Stack
-                direction={'horizontal'}
-                gap={'condensed'}
-                align={'center'}
-              >
+              <Stack direction="horizontal" gap="condensed" align="center">
                 <Avatar src={account.user.avatar} size={Size.MEDIUM} />
                 <Text>@{account.user.login}</Text>
               </Stack>
@@ -101,10 +103,11 @@ export const AccountNotifications: FC<IAccountNotifications> = (
           </Tooltip>
 
           <HoverGroup>
-            <InteractionButton
-              title="My Issues"
+            <IconButton
+              aria-label="My Issues"
               icon={IssueOpenedIcon}
-              size={Size.SMALL}
+              size="small"
+              variant="invisible"
               onClick={(event: MouseEvent<HTMLElement>) => {
                 // Don't trigger onClick of parent element.
                 event.stopPropagation();
@@ -112,10 +115,11 @@ export const AccountNotifications: FC<IAccountNotifications> = (
               }}
             />
 
-            <InteractionButton
-              title="My Pull Requests"
+            <IconButton
+              aria-label="My Pull Requests"
               icon={GitPullRequestIcon}
-              size={Size.SMALL}
+              size="small"
+              variant="invisible"
               onClick={(event: MouseEvent<HTMLElement>) => {
                 // Don't trigger onClick of parent element.
                 event.stopPropagation();
@@ -123,10 +127,11 @@ export const AccountNotifications: FC<IAccountNotifications> = (
               }}
             />
 
-            <InteractionButton
-              title={Chevron.label}
+            <IconButton
+              aria-label={Chevron.label}
               icon={Chevron.icon}
-              size={Size.SMALL}
+              size="small"
+              variant="invisible"
               onClick={toggleAccountNotifications}
             />
           </HoverGroup>

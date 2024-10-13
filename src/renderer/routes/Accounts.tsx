@@ -3,9 +3,9 @@ import { type FC, useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import {
-  ChevronUpIcon,
   KeyIcon,
   MarkGithubIcon,
+  PersonAddIcon,
   PersonIcon,
   SignOutIcon,
   StarFillIcon,
@@ -87,13 +87,13 @@ export const AccountsRoute: FC = () => {
                 key={getAccountUUID(account)}
                 className="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-2 dark:bg-gray-sidebar"
               >
-                <Stack direction={'vertical'} gap={'none'}>
+                <Stack direction="vertical" gap="none">
                   <Tooltip text="Open profile" direction="e">
                     <Button onClick={() => openAccountProfile(account)}>
                       <Stack
-                        direction={'horizontal'}
-                        gap={'condensed'}
-                        align={'center'}
+                        direction="horizontal"
+                        gap="condensed"
+                        align="center"
                       >
                         <Avatar src={account.user.avatar} size={Size.XLARGE} />
                         <Text>@{account.user.login}</Text>
@@ -126,7 +126,8 @@ export const AccountsRoute: FC = () => {
                     </Tooltip>
                   </ActionList>
                 </Stack>
-                <Stack direction={'horizontal'} gap={'condensed'}>
+
+                <Stack direction="horizontal" gap="condensed">
                   <IconButton
                     icon={i === 0 ? StarFillIcon : StarIcon}
                     aria-label={
@@ -159,7 +160,7 @@ export const AccountsRoute: FC = () => {
       <div className="flex items-center justify-end bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker">
         <ActionMenu>
           <ActionMenu.Anchor>
-            <Button leadingVisual={ChevronUpIcon}>Add new account</Button>
+            <Button leadingVisual={PersonAddIcon}>Add new account</Button>
           </ActionMenu.Anchor>
 
           <ActionMenu.Overlay width="medium">

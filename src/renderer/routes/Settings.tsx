@@ -1,7 +1,7 @@
 import { type FC, useContext } from 'react';
 
 import { GearIcon } from '@primer/octicons-react';
-import { Button } from '@primer/react';
+import { Button, Stack } from '@primer/react';
 
 import { Header } from '../components/Header';
 import { AppearanceSettings } from '../components/settings/AppearanceSettings';
@@ -20,21 +20,23 @@ export const SettingsRoute: FC = () => {
           Settings
         </Header>
 
-        <div className="flex flex-col flex-grow overflow-x-auto px-8 gap-3">
-          <AppearanceSettings />
-          <NotificationSettings />
-          <SystemSettings />
+        <div className="overflow-x-auto px-8 pb-4">
+          <Stack direction="vertical" gap="spacious">
+            <AppearanceSettings />
+            <NotificationSettings />
+            <SystemSettings />
 
-          <Button
-            variant="danger"
-            onClick={() => {
-              confirm(
-                'Please confirm that you want to reset all settings to the Gitify defaults?',
-              ) && resetSettings();
-            }}
-          >
-            Reset settings
-          </Button>
+            <Button
+              variant="danger"
+              onClick={() => {
+                confirm(
+                  'Please confirm that you want to reset all settings to the Gitify defaults?',
+                ) && resetSettings();
+              }}
+            >
+              Reset settings
+            </Button>
+          </Stack>
         </div>
 
         <SettingsFooter />

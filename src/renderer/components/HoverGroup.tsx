@@ -9,7 +9,7 @@ interface IHoverGroup {
 export const HoverGroup: FC<IHoverGroup> = ({ children }: IHoverGroup) => {
   return (
     <div className="opacity-0 transition-opacity group-hover:opacity-80">
-      <Stack direction={'horizontal'} align={'center'} gap={'none'}>
+      <Stack direction="horizontal" align="center" gap="none">
         {children}
       </Stack>
     </div>

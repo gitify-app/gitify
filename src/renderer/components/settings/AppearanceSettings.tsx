@@ -4,20 +4,22 @@ import { type FC, useContext, useEffect, useState } from 'react';
 import {
   CheckIcon,
   CommentIcon,
+  DashIcon,
   GitPullRequestIcon,
   IssueClosedIcon,
   MilestoneIcon,
   PaintbrushIcon,
+  PlusIcon,
   TagIcon,
+  XCircleIcon,
 } from '@primer/octicons-react';
-import { useTheme } from '@primer/react';
+import { Button, ButtonGroup, IconButton, useTheme } from '@primer/react';
 import type { ColorModeWithAuto } from '@primer/react/lib/ThemeProvider';
 
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
-import { Button } from '../buttons/Button';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
 import { Legend } from './Legend';
@@ -54,6 +56,7 @@ export const AppearanceSettings: FC = () => {
   return (
     <fieldset>
       <Legend icon={PaintbrushIcon}>Appearance</Legend>
+
       <RadioGroup
         name="theme"
         label="Theme:"
@@ -81,6 +84,7 @@ export const AppearanceSettings: FC = () => {
           updateSetting('theme', evt.target.value as Theme);
         }}
       />
+
       <div className="flex items-center mt-3 mb-2 text-sm">
         <label
           htmlFor="Zoom"
@@ -88,41 +92,39 @@ export const AppearanceSettings: FC = () => {
         >
           Zoom:
         </label>
-        <Button
-          label="Zoom Out"
-          onClick={() =>
-            zoomPercentage > 0 &&
-            webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage - 10))
-          }
-          className="rounded-r-none"
-          size="inline"
-        >
-          -
-        </Button>
-        <span className="flex w-16 h-5 items-center justify-center rounded-none border border-gray-300 bg-transparent text-xs text-gray-700 dark:text-gray-200">
-          {zoomPercentage.toFixed(0)}%
-        </span>
-        <Button
-          label="Zoom In"
-          onClick={() =>
-            zoomPercentage < 120 &&
-            webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage + 10))
-          }
-          className="rounded-none"
-          size="inline"
-        >
-          +
-        </Button>
-        <Button
-          label="Reset Zoom"
-          onClick={() => webFrame.setZoomLevel(0)}
-          variant="destructive"
-          className="rounded-l-none"
-          size="inline"
-        >
-          X
-        </Button>
+
+        <ButtonGroup>
+          <IconButton
+            aria-label="Zoom out"
+            icon={DashIcon}
+            size="small"
+            onClick={() =>
+              zoomPercentage > 0 &&
+              webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage - 10))
+            }
+          />
+          <Button aria-label="Zoom Percentage" size="small" disabled>
+            {zoomPercentage.toFixed(0)}%
+          </Button>
+          <IconButton
+            aria-label="Zoom in"
+            icon={PlusIcon}
+            size="small"
+            onClick={() =>
+              zoomPercentage < 120 &&
+              webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage + 10))
+            }
+          />
+          <IconButton
+            aria-label="Reset zoom level"
+            icon={XCircleIcon}
+            size="small"
+            variant="danger"
+            onClick={() => webFrame.setZoomLevel(0)}
+          />
+        </ButtonGroup>
       </div>
+
       <Checkbox
         name="detailedNotifications"
         label="Detailed notifications"
@@ -144,6 +146,7 @@ export const AppearanceSettings: FC = () => {
           </div>
         }
       />
+
       <Checkbox
         name="showPills"
         label="Show notification metric pills"
@@ -179,6 +182,7 @@ export const AppearanceSettings: FC = () => {
           </div>
         }
       />
+
       <Checkbox
         name="showNumber"
         label="Show number"
@@ -214,6 +218,7 @@ export const AppearanceSettings: FC = () => {
           </div>
         }
       />
+
       <Checkbox
         name="showAccountHeader"
         label="Show account header"

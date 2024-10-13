@@ -1,7 +1,14 @@
 import { type FC, type MouseEvent, useContext, useState } from 'react';
 
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
-import { Avatar, Button, Stack, Text, Tooltip } from '@primer/react';
+import {
+  Avatar,
+  Button,
+  IconButton,
+  Stack,
+  Text,
+  Tooltip,
+} from '@primer/react';
 
 import { AppContext } from '../context/App';
 import { Opacity, Size } from '../types';
@@ -14,7 +21,6 @@ import {
 import { openRepository } from '../utils/links';
 import { HoverGroup } from './HoverGroup';
 import { NotificationRow } from './NotificationRow';
-import { InteractionButton } from './buttons/InteractionButton';
 
 interface IRepositoryNotifications {
   repoNotifications: Notification[];
@@ -69,11 +75,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
                 openRepository(repoNotifications[0].repository);
               }}
             >
-              <Stack
-                direction={'horizontal'}
-                gap={'condensed'}
-                align={'center'}
-              >
+              <Stack direction="horizontal" gap="condensed" align="center">
                 <Avatar src={avatarUrl} size={Size.LARGE} />
                 <Text>{repoName}</Text>
               </Stack>
@@ -84,10 +86,11 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
         {!animateExit && (
           <HoverGroup>
             {isMarkAsDoneFeatureSupported(repoNotifications[0].account) && (
-              <InteractionButton
-                title="Mark repository as done"
+              <IconButton
+                aria-label="Mark repository as done"
                 icon={CheckIcon}
-                size={Size.MEDIUM}
+                size="small"
+                variant="invisible"
                 onClick={(event: MouseEvent<HTMLElement>) => {
                   // Don't trigger onClick of parent element.
                   event.stopPropagation();
@@ -97,10 +100,12 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
                 }}
               />
             )}
-            <InteractionButton
-              title="Mark repository as read"
+
+            <IconButton
+              aria-label="Mark repository as read"
               icon={ReadIcon}
-              size={Size.SMALL}
+              size="small"
+              variant="invisible"
               onClick={(event: MouseEvent<HTMLElement>) => {
                 // Don't trigger onClick of parent element.
                 event.stopPropagation();
@@ -109,10 +114,12 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
                 markNotificationsAsRead(repoNotifications);
               }}
             />
-            <InteractionButton
-              title={Chevron.label}
+
+            <IconButton
+              aria-label={Chevron.label}
               icon={Chevron.icon}
-              size={Size.SMALL}
+              size="small"
+              variant="invisible"
               onClick={toggleRepositoryNotifications}
             />
           </HoverGroup>
