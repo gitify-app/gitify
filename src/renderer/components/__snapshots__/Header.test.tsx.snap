@@ -6,39 +6,29 @@ exports[`renderer/components/Header.tsx should render itself & its children 1`] 
   "baseElement": <body>
     <div>
       <div
-        class="mx-8 mt-2 flex items-center justify-between py-2"
+        class="mx-6 mt-2 py-2"
       >
-        <button
-          class="focus:outline-none"
-          title="Go Back"
-          type="button"
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          data-align="stretch"
+          data-direction="horizontal"
+          data-justify="space-between"
+          data-padding="none"
+          data-wrap="nowrap"
         >
-          <svg
-            aria-label="Go Back"
-            class="hover:text-gray-400"
-            fill="currentColor"
-            focusable="false"
-            height="20"
-            role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-            viewBox="0 0 16 16"
-            width="20"
-          >
-            <path
-              d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
-            />
-          </svg>
-        </button>
-        <h3
-          class="text-lg font-semibold flex items-center"
-        >
-          <legend
-            class="mb-1 mt-2 font-semibold flex items-center"
-            id="test-header"
+          <button
+            aria-describedby=":r1:-loading-announcement"
+            aria-labelledby=":r0:"
+            class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+            data-component="IconButton"
+            data-loading="false"
+            data-no-visuals="true"
+            sx="[object Object]"
+            type="button"
           >
             <svg
               aria-hidden="true"
-              class="mr-2"
+              class="octicon octicon-arrow-left"
               fill="currentColor"
               focusable="false"
               height="16"
@@ -47,50 +37,78 @@ exports[`renderer/components/Header.tsx should render itself & its children 1`] 
               width="16"
             >
               <path
+                d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
+              />
+            </svg>
+          </button>
+          <span
+            aria-hidden="true"
+            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+            data-direction="e"
+            id=":r0:"
+            popover="auto"
+          >
+            Go Back
+          </span>
+          <div
+            class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+            data-align="center"
+            data-direction="horizontal"
+            data-gap="condensed"
+            data-justify="start"
+            data-padding="none"
+            data-wrap="nowrap"
+          >
+            <svg
+              aria-hidden="true"
+              class="Octicon-sc-9kayk9-0"
+              fill="currentColor"
+              focusable="false"
+              height="18"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              viewBox="0 0 16 16"
+              width="18"
+            >
+              <path
                 d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
               />
             </svg>
-            Test Header
-          </legend>
-        </h3>
+            <h2
+              class="Heading__StyledHeading-sc-1c1dgg0-0 iLDWTC"
+              sx="[object Object]"
+            >
+              Test Header
+            </h2>
+          </div>
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="mx-8 mt-2 flex items-center justify-between py-2"
+      class="mx-6 mt-2 py-2"
     >
-      <button
-        class="focus:outline-none"
-        title="Go Back"
-        type="button"
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+        data-align="stretch"
+        data-direction="horizontal"
+        data-justify="space-between"
+        data-padding="none"
+        data-wrap="nowrap"
       >
-        <svg
-          aria-label="Go Back"
-          class="hover:text-gray-400"
-          fill="currentColor"
-          focusable="false"
-          height="20"
-          role="img"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-          viewBox="0 0 16 16"
-          width="20"
-        >
-          <path
-            d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
-          />
-        </svg>
-      </button>
-      <h3
-        class="text-lg font-semibold flex items-center"
-      >
-        <legend
-          class="mb-1 mt-2 font-semibold flex items-center"
-          id="test-header"
+        <button
+          aria-describedby=":r1:-loading-announcement"
+          aria-labelledby=":r0:"
+          class="types__StyledButton-sc-ws60qy-0 ggqBNv"
+          data-component="IconButton"
+          data-loading="false"
+          data-no-visuals="true"
+          sx="[object Object]"
+          type="button"
         >
           <svg
             aria-hidden="true"
-            class="mr-2"
+            class="octicon octicon-arrow-left"
             fill="currentColor"
             focusable="false"
             height="16"
@@ -99,12 +117,50 @@ exports[`renderer/components/Header.tsx should render itself & its children 1`] 
             width="16"
           >
             <path
+              d="M7.78 12.53a.75.75 0 0 1-1.06 0L2.47 8.28a.75.75 0 0 1 0-1.06l4.25-4.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042L4.81 7h7.44a.75.75 0 0 1 0 1.5H4.81l2.97 2.97a.75.75 0 0 1 0 1.06Z"
+            />
+          </svg>
+        </button>
+        <span
+          aria-hidden="true"
+          class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
+          data-direction="e"
+          id=":r0:"
+          popover="auto"
+        >
+          Go Back
+        </span>
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="condensed"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <svg
+            aria-hidden="true"
+            class="Octicon-sc-9kayk9-0"
+            fill="currentColor"
+            focusable="false"
+            height="18"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            viewBox="0 0 16 16"
+            width="18"
+          >
+            <path
               d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
             />
           </svg>
-          Test Header
-        </legend>
-      </h3>
+          <h2
+            class="Heading__StyledHeading-sc-1c1dgg0-0 iLDWTC"
+            sx="[object Object]"
+          >
+            Test Header
+          </h2>
+        </div>
+      </div>
     </div>
   </div>,
   "debug": [Function],

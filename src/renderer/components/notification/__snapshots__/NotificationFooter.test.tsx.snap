@@ -8,17 +8,17 @@ exports[`renderer/components/notification/NotificationFooter.tsx security alerts
       <div
         class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
       >
-        <button
-          class="flex-shrink-0"
-          title="View User Profile"
-          type="button"
-        >
-          <img
-            alt="gitify-app's avatar"
-            class="rounded-full object-cover size-4"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-          />
-        </button>
+        <img
+          alt=""
+          class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+          data-component="Avatar"
+          height="14"
+          size="14"
+          src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+          sx="[object Object]"
+          title="View profile: gitify-app"
+          width="14"
+        />
         <div
           title="You're watching the repository."
         >
@@ -84,17 +84,17 @@ exports[`renderer/components/notification/NotificationFooter.tsx security alerts
     <div
       class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
     >
-      <button
-        class="flex-shrink-0"
-        title="View User Profile"
-        type="button"
-      >
-        <img
-          alt="gitify-app's avatar"
-          class="rounded-full object-cover size-4"
-          src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-        />
-      </button>
+      <img
+        alt=""
+        class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+        data-component="Avatar"
+        height="14"
+        size="14"
+        src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+        sx="[object Object]"
+        title="View profile: gitify-app"
+        width="14"
+      />
       <div
         title="You're watching the repository."
       >
@@ -217,17 +217,17 @@ exports[`renderer/components/notification/NotificationFooter.tsx security alerts
       <div
         class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
       >
-        <button
-          class="flex-shrink-0"
-          title="View User Profile"
-          type="button"
-        >
-          <img
-            alt="gitify-app's avatar"
-            class="rounded-full object-cover size-4"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-          />
-        </button>
+        <img
+          alt=""
+          class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+          data-component="Avatar"
+          height="14"
+          size="14"
+          src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+          sx="[object Object]"
+          title="View profile: gitify-app"
+          width="14"
+        />
         <div
           title="You're watching the repository."
         >
@@ -293,17 +293,17 @@ exports[`renderer/components/notification/NotificationFooter.tsx security alerts
     <div
       class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
     >
-      <button
-        class="flex-shrink-0"
-        title="View User Profile"
-        type="button"
-      >
-        <img
-          alt="gitify-app's avatar"
-          class="rounded-full object-cover size-4"
-          src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-        />
-      </button>
+      <img
+        alt=""
+        class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+        data-component="Avatar"
+        height="14"
+        size="14"
+        src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+        sx="[object Object]"
+        title="View profile: gitify-app"
+        width="14"
+      />
       <div
         title="You're watching the repository."
       >
@@ -645,17 +645,17 @@ exports[`renderer/components/notification/NotificationFooter.tsx should render i
       <div
         class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
       >
-        <button
-          class="flex-shrink-0"
-          title="View User Profile"
-          type="button"
-        >
-          <img
-            alt="gitify-app's avatar"
-            class="rounded-full object-cover size-4"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-          />
-        </button>
+        <img
+          alt=""
+          class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+          data-component="Avatar"
+          height="14"
+          size="14"
+          src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+          sx="[object Object]"
+          title="View profile: gitify-app"
+          width="14"
+        />
         <div
           title="You're watching the repository."
         >
@@ -721,17 +721,17 @@ exports[`renderer/components/notification/NotificationFooter.tsx should render i
     <div
       class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
     >
-      <button
-        class="flex-shrink-0"
-        title="View User Profile"
-        type="button"
-      >
-        <img
-          alt="gitify-app's avatar"
-          class="rounded-full object-cover size-4"
-          src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-        />
-      </button>
+      <img
+        alt=""
+        class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+        data-component="Avatar"
+        height="14"
+        size="14"
+        src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+        sx="[object Object]"
+        title="View profile: gitify-app"
+        width="14"
+      />
       <div
         title="You're watching the repository."
       >
@@ -854,17 +854,17 @@ exports[`renderer/components/notification/NotificationFooter.tsx should render i
       <div
         class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
       >
-        <button
-          class="flex-shrink-0"
-          title="View User Profile"
-          type="button"
-        >
-          <img
-            alt="gitify-app's avatar"
-            class="rounded-full object-cover size-4"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-          />
-        </button>
+        <img
+          alt=""
+          class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+          data-component="Avatar"
+          height="14"
+          size="14"
+          src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+          sx="[object Object]"
+          title="View profile: gitify-app"
+          width="14"
+        />
         <div
           title="You're watching the repository."
         >
@@ -930,17 +930,17 @@ exports[`renderer/components/notification/NotificationFooter.tsx should render i
     <div
       class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
     >
-      <button
-        class="flex-shrink-0"
-        title="View User Profile"
-        type="button"
-      >
-        <img
-          alt="gitify-app's avatar"
-          class="rounded-full object-cover size-4"
-          src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-        />
-      </button>
+      <img
+        alt=""
+        class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+        data-component="Avatar"
+        height="14"
+        size="14"
+        src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+        sx="[object Object]"
+        title="View profile: gitify-app"
+        width="14"
+      />
       <div
         title="You're watching the repository."
       >

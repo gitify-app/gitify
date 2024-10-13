@@ -30,6 +30,14 @@ window.localStorage = {
 
 window.alert = jest.fn();
 
+if (typeof CSS === 'undefined') {
+  global.CSS = {};
+}
+
+if (!CSS.supports) {
+  CSS.supports = () => false; // You can customize the return value based on your tests
+}
+
 module.exports = {
   ipcRenderer: {
     send: jest.fn(),
