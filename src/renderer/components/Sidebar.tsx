@@ -11,9 +11,8 @@ import {
   XCircleIcon,
 } from '@primer/octicons-react';
 
-import { Button, IconButton, Stack } from '@primer/react';
+import { IconButton, Stack } from '@primer/react';
 import { AppContext } from '../context/App';
-import { Size } from '../types';
 import { quitApp } from '../utils/comms';
 import { Constants } from '../utils/constants';
 import { getFilterCount } from '../utils/helpers';
@@ -81,32 +80,32 @@ export const Sidebar: FC = () => {
           gap="condensed"
           padding="normal"
         >
-          <Button
+          <IconButton
             aria-label="Home"
+            icon={LogoIcon}
             size="small"
             variant="invisible"
+            tooltipDirection="e"
             onClick={() => navigate('/', { replace: true })}
-          >
-            <LogoIcon size={Size.SMALL} />
-          </Button>
+          />
 
-          <Button
+          <IconButton
             aria-label={`${notificationsCount} unread notifications`}
-            leadingVisual={BellIcon}
+            icon={BellIcon}
             size="small"
             variant={notificationsCount > 0 ? 'primary' : 'invisible'}
-            count={isLoggedIn ? notificationsCount : null}
+            tooltipDirection="e"
             onClick={() => openGitHubNotifications(primaryAccountHostname)}
           />
 
           {/* TODO - explore https://primer.style/components/selectpanel/react/alpha/ for a better UI for filters */}
           {isLoggedIn && (
-            <Button
-              aria-label="Filters"
-              leadingVisual={FilterIcon}
+            <IconButton
+              aria-label="Filter notifications"
+              icon={FilterIcon}
               size="small"
               variant={filterCount > 0 ? 'primary' : 'invisible'}
-              count={filterCount}
+              tooltipDirection="e"
               onClick={() => toggleFilters()}
             />
           )}
