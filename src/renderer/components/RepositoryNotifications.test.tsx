@@ -61,7 +61,7 @@ describe('renderer/components/RepositoryNotifications.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTitle('Mark repository as read'));
+    fireEvent.click(screen.getByLabelText('Mark repository as read'));
 
     expect(markNotificationsAsRead).toHaveBeenCalledWith(
       mockGitHubNotifications,
@@ -77,7 +77,7 @@ describe('renderer/components/RepositoryNotifications.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTitle('Mark repository as done'));
+    fireEvent.click(screen.getByLabelText('Mark repository as done'));
 
     expect(markNotificationsAsDone).toHaveBeenCalledWith(
       mockGitHubNotifications,
@@ -100,7 +100,7 @@ describe('renderer/components/RepositoryNotifications.tsx', () => {
       render(<RepositoryNotifications {...props} />);
     });
 
-    fireEvent.click(screen.getByTitle('Hide repository notifications'));
+    fireEvent.click(screen.getByLabelText('Hide repository notifications'));
 
     const tree = render(<RepositoryNotifications {...props} />);
     expect(tree).toMatchSnapshot();

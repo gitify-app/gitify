@@ -144,7 +144,7 @@ describe('renderer/routes/components/settings/SettingsFooter.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTitle('Quit Gitify'));
+    fireEvent.click(screen.getByLabelText('Quit Gitify'));
     expect(quitAppMock).toHaveBeenCalledTimes(1);
   });
 });
