@@ -4,7 +4,7 @@ import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
 
 import { BookIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
-import { Button, Stack, Text, Tooltip } from '@primer/react';
+import { Box, Button, Stack, Text, Tooltip } from '@primer/react';
 
 import { Header } from '../components/Header';
 import { FieldInput } from '../components/fields/FieldInput';
@@ -56,7 +56,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
     const { handleSubmit, submitting, pristine, values } = formProps;
 
     return (
-      <form onSubmit={handleSubmit}>
+      <Box as="form">
         <FieldInput
           name="hostname"
           label="Hostname"
@@ -111,13 +111,14 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               variant="primary"
               leadingVisual={SignInIcon}
               disabled={submitting || pristine}
+              onClick={() => handleSubmit()}
               type="submit"
             >
               Login
             </Button>
           </Tooltip>
         </Stack>
-      </form>
+      </Box>
     );
   };
 
