@@ -6,17 +6,37 @@ exports[`renderer/components/HoverGroup.tsx should render 1`] = `
   "baseElement": <body>
     <div>
       <div
-        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
+        class="opacity-0 transition-opacity group-hover:opacity-80"
       >
-        Hover Group
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          data-align="center"
+          data-direction="horizontal"
+          data-gap="none"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          Hover Group
+        </div>
       </div>
     </div>
   </body>,
   "container": <div>
     <div
-      class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
+      class="opacity-0 transition-opacity group-hover:opacity-80"
     >
-      Hover Group
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+        data-align="center"
+        data-direction="horizontal"
+        data-gap="none"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
+      >
+        Hover Group
+      </div>
     </div>
   </div>,
   "debug": [Function],

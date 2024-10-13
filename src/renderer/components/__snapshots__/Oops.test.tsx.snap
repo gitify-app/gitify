@@ -6,7 +6,53 @@ exports[`renderer/components/Oops.tsx should render itself & its children 1`] = 
   "baseElement": <body>
     <div>
       <div
-        class="flex flex-1 flex-col items-center justify-center p-4"
+        class="flex flex-1 flex-col items-center justify-center min-h-screen"
+      >
+        <div
+          class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+          data-align="center"
+          data-direction="vertical"
+          data-justify="start"
+          data-padding="none"
+          data-wrap="nowrap"
+        >
+          <div
+            class="mt-2 mb-5 text-5xl"
+          >
+            <span>
+              <img
+                alt="🔥"
+                class="emoji"
+                draggable="false"
+                src="images/twemoji/1f525.svg"
+              />
+            </span>
+          </div>
+          <div
+            class="mb-2 text-xl font-semibold"
+          >
+            Error title
+          </div>
+          <div
+            class="mb-2 text-center"
+          >
+            Error description
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>,
+  "container": <div>
+    <div
+      class="flex flex-1 flex-col items-center justify-center min-h-screen"
+    >
+      <div
+        class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+        data-align="center"
+        data-direction="vertical"
+        data-justify="start"
+        data-padding="none"
+        data-wrap="nowrap"
       >
         <div
           class="mt-2 mb-5 text-5xl"
@@ -30,34 +76,6 @@ exports[`renderer/components/Oops.tsx should render itself & its children 1`] = 
         >
           Error description
         </div>
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="flex flex-1 flex-col items-center justify-center p-4"
-    >
-      <div
-        class="mt-2 mb-5 text-5xl"
-      >
-        <span>
-          <img
-            alt="🔥"
-            class="emoji"
-            draggable="false"
-            src="images/twemoji/1f525.svg"
-          />
-        </span>
-      </div>
-      <div
-        class="mb-2 text-xl font-semibold"
-      >
-        Error title
-      </div>
-      <div
-        class="mb-2 text-center"
-      >
-        Error description
       </div>
     </div>
   </div>,
