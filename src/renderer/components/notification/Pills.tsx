@@ -1,16 +1,16 @@
+import { type FC, useContext } from 'react';
+
 import {
   CommentIcon,
   IssueClosedIcon,
   MilestoneIcon,
   TagIcon,
 } from '@primer/octicons-react';
-import { type FC, useContext } from 'react';
-import { IconColor } from '../../types';
-import type { Notification } from '../../typesGitHub';
-
-import { getPullRequestReviewIcon } from '../../utils/icons';
 
 import { AppContext } from '../../context/App';
+import { IconColor } from '../../types';
+import type { Notification } from '../../typesGitHub';
+import { getPullRequestReviewIcon } from '../../utils/icons';
 import { PillButton } from '../buttons/PillButton';
 
 interface IPills {

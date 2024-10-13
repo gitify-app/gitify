@@ -1,8 +1,10 @@
+import { type FC, type MouseEvent, useContext, useMemo, useState } from 'react';
+
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
 import { Avatar, Button, Stack, Text, Tooltip } from '@primer/react';
-import { type FC, type MouseEvent, useContext, useMemo, useState } from 'react';
+
 import { AppContext } from '../context/App';
-import { type Account, type GitifyError, Opacity, Size } from '../types';
+import { type Account, type GitifyError, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
 import { getChevronDetails } from '../utils/helpers';
@@ -69,15 +71,14 @@ export const AccountNotifications: FC<IAccountNotifications> = (
       {showAccountHeader && (
         <div
           className={cn(
-            'group flex items-center justify-between py-1.5 text-sm font-semibold dark:text-white',
+            'group flex items-center justify-between pr-3 py-1.5 text-sm font-semibold dark:text-white',
             props.error
               ? 'bg-red-300 dark:bg-red-500'
               : 'bg-gray-300 dark:bg-gray-darkest',
-            Opacity.LOW,
           )}
           onClick={toggleAccountNotifications}
         >
-          <Tooltip text="Open profile" direction="e">
+          <Tooltip text="Open profile" direction="s">
             <Button
               variant="invisible"
               alignContent="center"
@@ -93,15 +94,12 @@ export const AccountNotifications: FC<IAccountNotifications> = (
                 gap={'condensed'}
                 align={'center'}
               >
-                <Avatar
-                  src={account.user.avatar}
-                  title={account.user.login}
-                  size={Size.SMALL}
-                />
+                <Avatar src={account.user.avatar} size={Size.MEDIUM} />
                 <Text>@{account.user.login}</Text>
               </Stack>
             </Button>
           </Tooltip>
+
           <HoverGroup>
             <InteractionButton
               title="My Issues"
@@ -113,6 +111,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
                 openGitHubIssues(account.hostname);
               }}
             />
+
             <InteractionButton
               title="My Pull Requests"
               icon={GitPullRequestIcon}
@@ -123,6 +122,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
                 openGitHubPulls(account.hostname);
               }}
             />
+
             <InteractionButton
               title={Chevron.label}
               icon={Chevron.icon}

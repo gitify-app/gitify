@@ -1,16 +1,17 @@
+import { type FC, useContext } from 'react';
+
 import {
   FeedPersonIcon,
   FilterIcon,
   FilterRemoveIcon,
   NoteIcon,
 } from '@primer/octicons-react';
-import { type FC, useContext } from 'react';
+import { Button, Tooltip } from '@primer/react';
+
 import { Header } from '../components/Header';
 import { Checkbox } from '../components/fields/Checkbox';
 import { Legend } from '../components/settings/Legend';
 import { AppContext } from '../context/App';
-import { BUTTON_CLASS_NAME } from '../styles/gitify';
-import { Size } from '../types';
 import type { Reason } from '../typesGitHub';
 import { FORMATTED_REASONS, formatReason } from '../utils/reason';
 
@@ -87,22 +88,15 @@ export const FiltersRoute: FC = () => {
         </fieldset>
       </div>
 
-      <div className="flex items-center justify-between bg-gray-200 px-3 py-1 text-sm dark:bg-gray-darker">
-        <div>
-          <button
-            type="button"
-            className={BUTTON_CLASS_NAME}
-            title="Clear filters"
-            onClick={clearFilters}
+      <div className="flex items-center justify-end bg-gray-200 px-3 py-1 text-sm dark:bg-gray-darker">
+        <Tooltip text="Clear all filters" direction="n">
+          <Button
+            leadingVisual={FilterRemoveIcon}
+            onClick={() => clearFilters()}
           >
-            <FilterRemoveIcon
-              size={Size.LARGE}
-              className="mr-2"
-              aria-label="Clear filters"
-            />
             Clear filters
-          </button>
-        </div>
+          </Button>
+        </Tooltip>
       </div>
     </div>
   );

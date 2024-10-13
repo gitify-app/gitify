@@ -1,8 +1,10 @@
-import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
 import log from 'electron-log';
 import { type FC, useCallback, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from '../components/buttons/Button';
+
+import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
+import { Button, Heading, Stack, Text } from '@primer/react';
+
 import { LogoIcon } from '../components/icons/LogoIcon';
 import { AppContext } from '../context/App';
 import { Size } from '../types';
@@ -19,50 +21,60 @@ export const LoginRoute: FC = () => {
     }
   }, [isLoggedIn]);
 
-  const loginUser = useCallback(async () => {
+  const loginUser = useCallback(() => {
     try {
-      await loginWithGitHubApp();
+      loginWithGitHubApp();
     } catch (err) {
       log.error('Auth: failed to login with GitHub', err);
     }
   }, [loginWithGitHubApp]);
 
   return (
-    <div className="flex flex-1 flex-col items-center justify-center p-4">
+    <Stack direction={'vertical'} align={'center'}>
       <LogoIcon size={Size.LARGE} isDark />
 
-      <div className="my-4 px-2.5 py-1.5 text-center font-semibold">
-        GitHub Notifications <br /> on your menu bar.
-      </div>
+      <Stack align={'center'} gap={'none'}>
+        <Heading
+          sx={{
+            fontSize: 4,
+          }}
+        >
+          GitHub Notifications
+        </Heading>
+        <Heading
+          sx={{
+            fontSize: 3,
+          }}
+        >
+          on your menu bar
+        </Heading>
+      </Stack>
 
-      <div className="text-center text-sm font-semibold italic">Login with</div>
+      <Stack align={'center'} gap={'condensed'}>
+        <Text>Login with</Text>
 
-      <Button
-        name="GitHub"
-        icon={{ icon: MarkGithubIcon }}
-        label="Login with GitHub"
-        className="mt-2 py-2"
-        onClick={() => loginUser()}
-      >
-        GitHub
-      </Button>
+        <Button
+          leadingVisual={MarkGithubIcon}
+          variant={'primary'}
+          onClick={() => loginUser()}
+        >
+          GitHub
+        </Button>
 
-      <Button
-        icon={{ icon: KeyIcon }}
-        label="Login with Personal Access Token"
-        className="mt-2 py-2"
-        onClick={() => navigate('/login-personal-access-token')}
-      >
-        Personal Access Token
-      </Button>
-      <Button
-        icon={{ icon: PersonIcon }}
-        label="Login with OAuth App"
-        className="mt-2 py-2"
-        onClick={() => navigate('/login-oauth-app')}
-      >
-        OAuth App
-      </Button>
-    </div>
+        <Button
+          leadingVisual={KeyIcon}
+          onClick={() => navigate('/login-personal-access-token')}
+        >
+          Personal Access Token
+        </Button>
+
+        <Button
+          leadingVisual={PersonIcon}
+          onClick={() => navigate('/login-oauth-app')}
+        >
+          OAuth App
+        </Button>
+      </Stack>
+    </Stack>
   );
 };

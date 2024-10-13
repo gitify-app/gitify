@@ -1,4 +1,5 @@
 import { type FC, useMemo } from 'react';
+
 import type { GitifyError } from '../types';
 import { EmojiText } from './EmojiText';
 

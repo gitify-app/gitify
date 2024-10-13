@@ -1,7 +1,9 @@
-import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
-import { Button, IconButton, Stack, Tooltip } from '@primer/react';
 import { type FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
+import { Button, IconButton, Stack, Tooltip } from '@primer/react';
+
 import { getAppVersion, quitApp } from '../../utils/comms';
 import { openGitifyReleaseNotes } from '../../utils/links';
 
@@ -33,8 +35,8 @@ export const SettingsFooter: FC = () => {
       <Stack direction={'horizontal'} gap={'normal'}>
         <Tooltip text="Accounts" direction="n">
           <IconButton
-            icon={PersonIcon}
             aria-label="Accounts"
+            icon={PersonIcon}
             onClick={() => {
               navigate('/accounts');
             }}
@@ -43,8 +45,9 @@ export const SettingsFooter: FC = () => {
 
         <Tooltip text="Quit Gitify" direction="nw">
           <IconButton
-            icon={XCircleIcon}
             aria-label="Quit Gitify"
+            variant="danger"
+            icon={XCircleIcon}
             onClick={() => {
               quitApp();
             }}

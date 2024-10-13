@@ -1,6 +1,8 @@
+import { type FC, type MouseEvent, useContext, useState } from 'react';
+
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { Avatar, Button, Stack, Text, Tooltip } from '@primer/react';
-import { type FC, type MouseEvent, useContext, useState } from 'react';
+
 import { AppContext } from '../context/App';
 import { Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
@@ -45,7 +47,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
   return (
     <>
       <div
-        className="group flex justify-between bg-gray-100 py-1.5 dark:bg-gray-darker dark:text-white"
+        className="group flex justify-between bg-gray-100 pr-3 py-1.5 dark:bg-gray-darker dark:text-white"
         onClick={toggleRepositoryNotifications}
       >
         <div
@@ -72,7 +74,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
                 gap={'condensed'}
                 align={'center'}
               >
-                <Avatar src={avatarUrl} title={repoName} size={Size.MEDIUM} />
+                <Avatar src={avatarUrl} size={Size.LARGE} />
                 <Text>{repoName}</Text>
               </Stack>
             </Button>

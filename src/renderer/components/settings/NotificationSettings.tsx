@@ -1,5 +1,7 @@
-import { BellIcon } from '@primer/octicons-react';
 import { type FC, type MouseEvent, useContext } from 'react';
+
+import { BellIcon } from '@primer/octicons-react';
+
 import { AppContext } from '../../context/App';
 import { GroupBy } from '../../types';
 import { openGitHubParticipatingDocs } from '../../utils/links';

@@ -1,3 +1,6 @@
+import { ipcRenderer, webFrame } from 'electron';
+import { type FC, useContext, useEffect, useState } from 'react';
+
 import {
   CheckIcon,
   CommentIcon,
@@ -9,8 +12,7 @@ import {
 } from '@primer/octicons-react';
 import { useTheme } from '@primer/react';
 import type { ColorModeWithAuto } from '@primer/react/lib/ThemeProvider';
-import { ipcRenderer, webFrame } from 'electron';
-import { type FC, useContext, useEffect, useState } from 'react';
+
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';

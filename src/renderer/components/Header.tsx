@@ -1,9 +1,11 @@
-import { ArrowLeftIcon, type Icon } from '@primer/octicons-react';
 import { type FC, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { ArrowLeftIcon, type Icon } from '@primer/octicons-react';
+
+import { CircleOcticon, Heading, IconButton, Stack } from '@primer/react';
 import { AppContext } from '../context/App';
 import { Size } from '../types';
-import { Legend } from './settings/Legend';
 
 interface IHeader {
   icon: Icon;
@@ -17,28 +19,32 @@ export const Header: FC<IHeader> = (props: IHeader) => {
   const { fetchNotifications } = useContext(AppContext);
 
   return (
-    <div className="mx-8 mt-2 flex items-center justify-between py-2">
-      <button
-        type="button"
-        className="focus:outline-none"
-        title="Go Back"
-        onClick={() => {
-          navigate(-1);
-          if (props.fetchOnBack) {
-            fetchNotifications();
-          }
-        }}
-      >
-        <ArrowLeftIcon
-          size={Size.XLARGE}
-          className="hover:text-gray-400"
+    <div className="mx-6 mt-2 py-2">
+      <Stack direction={'horizontal'} justify={'space-between'}>
+        <IconButton
           aria-label="Go Back"
+          variant="invisible"
+          tooltipDirection="e"
+          icon={ArrowLeftIcon}
+          onClick={() => {
+            navigate(-1);
+            if (props.fetchOnBack) {
+              fetchNotifications();
+            }
+          }}
         />
-      </button>
 
-      <h3 className="text-lg font-semibold flex items-center">
-        <Legend icon={props.icon}>{props.children}</Legend>
-      </h3>
+        <Stack direction={'horizontal'} align={'center'} gap={'condensed'}>
+          <CircleOcticon icon={props.icon} size={Size.LARGE} />
+          <Heading
+            sx={{
+              fontSize: 3,
+            }}
+          >
+            {props.children}
+          </Heading>
+        </Stack>
+      </Stack>
     </div>
   );
 };

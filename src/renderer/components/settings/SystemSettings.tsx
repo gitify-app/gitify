@@ -1,5 +1,7 @@
-import { DeviceDesktopIcon } from '@primer/octicons-react';
 import { type FC, useContext } from 'react';
+
+import { DeviceDesktopIcon } from '@primer/octicons-react';
+
 import { AppContext } from '../../context/App';
 import { OpenPreference } from '../../types';
 import { Constants } from '../../utils/constants';

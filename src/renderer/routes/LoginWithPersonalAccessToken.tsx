@@ -1,8 +1,10 @@
-import { BookIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
 import log from 'electron-log';
 import { type FC, useCallback, useContext, useState } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
+
+import { BookIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
+
 import { Header } from '../components/Header';
 import { Button } from '../components/buttons/Button';
 import { FieldInput } from '../components/fields/FieldInput';

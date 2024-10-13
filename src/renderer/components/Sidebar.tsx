@@ -1,3 +1,6 @@
+import { type FC, useContext, useMemo } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+
 import {
   BellIcon,
   FilterIcon,
@@ -7,8 +10,8 @@ import {
   SyncIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
-import { type FC, useContext, useMemo } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+
+import { Button, IconButton, Stack } from '@primer/react';
 import { AppContext } from '../context/App';
 import { Size } from '../types';
 import { quitApp } from '../utils/comms';
@@ -20,7 +23,6 @@ import {
   openGitHubPulls,
 } from '../utils/links';
 import { getNotificationCount } from '../utils/notifications';
-import { SidebarButton } from './buttons/SidebarButton';
 import { LogoIcon } from './icons/LogoIcon';
 
 export const Sidebar: FC = () => {
@@ -72,74 +74,101 @@ export const Sidebar: FC = () => {
 
   return (
     <div className="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar">
-      <div className="flex flex-1 flex-col items-center py-4">
-        <button
-          type="button"
-          className="mx-auto my-3 cursor-pointer outline-none"
-          title="Home"
-          onClick={() => navigate('/', { replace: true })}
+      <div className="flex flex-1 flex-col">
+        <Stack
+          direction={'vertical'}
+          align={'center'}
+          gap={'condensed'}
+          padding={'normal'}
         >
-          <LogoIcon size={Size.SMALL} aria-label="Open Gitify" />
-        </button>
+          <Button
+            aria-label={'Home'}
+            size={'small'}
+            variant="invisible"
+            onClick={() => navigate('/', { replace: true })}
+          >
+            <LogoIcon size={Size.SMALL} />
+          </Button>
 
-        <SidebarButton
-          title={`${notificationsCount} unread notifications`}
-          metric={isLoggedIn ? notificationsCount : null}
-          icon={BellIcon}
-          onClick={() => openGitHubNotifications(primaryAccountHostname)}
-        />
+          <Button
+            aria-label={`${notificationsCount} unread notifications`}
+            leadingVisual={BellIcon}
+            size={'small'}
+            variant={notificationsCount > 0 ? 'primary' : 'invisible'}
+            count={isLoggedIn ? notificationsCount : null}
+            onClick={() => openGitHubNotifications(primaryAccountHostname)}
+          />
 
-        <SidebarButton
-          title="My issues"
-          icon={IssueOpenedIcon}
-          onClick={() => openGitHubIssues(primaryAccountHostname)}
-        />
+          {/* TODO - explore https://primer.style/components/selectpanel/react/alpha/ for a better UI for filters */}
+          <Button
+            aria-label="Filters"
+            leadingVisual={FilterIcon}
+            size={'small'}
+            variant={filterCount > 0 ? 'primary' : 'invisible'}
+            count={filterCount}
+            onClick={() => toggleFilters()}
+          />
 
-        <SidebarButton
-          title="My pull requests"
-          icon={GitPullRequestIcon}
-          onClick={() => openGitHubPulls(primaryAccountHostname)}
-        />
+          <IconButton
+            aria-label="My issues"
+            icon={IssueOpenedIcon}
+            size="small"
+            variant="invisible"
+            tooltipDirection="e"
+            onClick={() => openGitHubIssues(primaryAccountHostname)}
+          />
+          <IconButton
+            aria-label="My pull requests"
+            icon={GitPullRequestIcon}
+            size="small"
+            variant="invisible"
+            tooltipDirection="e"
+            onClick={() => openGitHubPulls(primaryAccountHostname)}
+          />
+        </Stack>
       </div>
 
-      <div className="px-3 py-4">
+      <Stack
+        direction={'vertical'}
+        align={'center'}
+        gap={'condensed'}
+        padding={'normal'}
+      >
         {isLoggedIn && (
           <>
-            <SidebarButton
-              title="Refresh notifications"
+            <IconButton
+              aria-label="Refresh notifications"
               icon={SyncIcon}
-              size={Size.MEDIUM}
+              size="small"
+              variant="invisible"
+              tooltipDirection="e"
               loading={status === 'loading'}
               disabled={status === 'loading'}
               onClick={() => refreshNotifications()}
             />
 
-            <SidebarButton
-              title="Filters"
-              icon={FilterIcon}
-              size={Size.MEDIUM}
-              metric={filterCount}
-              onClick={() => toggleFilters()}
-            />
-
-            <SidebarButton
-              title="Settings"
+            <IconButton
+              aria-label="Settings"
               icon={GearIcon}
-              size={Size.MEDIUM}
+              size={'small'}
+              variant="invisible"
+              tooltipDirection="e"
               onClick={() => toggleSettings()}
             />
           </>
         )}
 
         {!isLoggedIn && (
-          <SidebarButton
-            title="Quit Gitify"
+          <IconButton
+            aria-label="Quit Gitify"
             icon={XCircleIcon}
-            size={Size.MEDIUM}
+            size="small"
+            variant="invisible"
+            tooltipDirection="e"
             onClick={() => quitApp()}
           />
         )}
-      </div>
+      </Stack>
     </div>
   );
 };

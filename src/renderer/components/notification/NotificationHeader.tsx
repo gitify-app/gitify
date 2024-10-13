@@ -1,5 +1,7 @@
-import { Avatar } from '@primer/react';
 import { type FC, type MouseEvent, useContext } from 'react';
+
+import { Avatar } from '@primer/react';
+
 import { AppContext } from '../../context/App';
 import { Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';

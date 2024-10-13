@@ -1,5 +1,3 @@
-import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
-import { CircleOcticon } from '@primer/react';
 import {
   type FC,
   type MouseEvent,
@@ -7,6 +5,10 @@ import {
   useContext,
   useState,
 } from 'react';
+
+import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
+import { Octicon, Tooltip } from '@primer/react';
+
 import { AppContext } from '../context/App';
 import { Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
@@ -85,8 +87,6 @@ export const NotificationRow: FC<INotificationRow> = ({
   const notificationTitle =
     `${notification.subject.title} ${notificationNumber}`.trim();
 
-  const groupByDate = settings.groupBy === 'DATE';
-
   return (
     <div
       id={notification.id}
@@ -97,14 +97,10 @@ export const NotificationRow: FC<INotificationRow> = ({
         (isRead || showAsRead) && Opacity.READ,
       )}
     >
-      <div
-        className={cn('mr-3 flex items-center justify-center', iconColor)}
-        title={notificationType}
-      >
-        <CircleOcticon
-          icon={NotificationIcon}
-          size={groupByDate ? Size.XLARGE : Size.MEDIUM}
-        />
+      <div className={cn('mr-3 flex items-center justify-center', iconColor)}>
+        <Tooltip text={notificationType} direction="e">
+          <Octicon icon={NotificationIcon} size={Size.LARGE} />
+        </Tooltip>
       </div>
 
       <div

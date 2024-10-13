@@ -1,29 +1,30 @@
+import log from 'electron-log';
+import { type FC, useCallback, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import {
+  ChevronUpIcon,
   KeyIcon,
   MarkGithubIcon,
   PersonIcon,
-  PlusIcon,
   SignOutIcon,
   StarFillIcon,
   StarIcon,
   SyncIcon,
 } from '@primer/octicons-react';
-
 import {
+  ActionList,
+  ActionMenu,
   Avatar,
   Button,
-  CircleOcticon,
   IconButton,
   Stack,
   Text,
   Tooltip,
 } from '@primer/react';
-import log from 'electron-log';
-import { type FC, useCallback, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+
 import { Header } from '../components/Header';
 import { AppContext } from '../context/App';
-import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import { type Account, Size } from '../types';
 import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
 import { updateTrayIcon, updateTrayTitle } from '../utils/comms';
@@ -78,58 +79,52 @@ export const AccountsRoute: FC = () => {
       <div className="flex-grow overflow-x-auto px-8">
         <div className="mt-4 flex flex-col text-sm">
           {auth.accounts.map((account, i) => {
-            const authMethodIcon = getAuthMethodIcon(account.method);
-            const platformIcon = getPlatformIcon(account.platform);
+            const AuthMethodIcon = getAuthMethodIcon(account.method);
+            const PlatformIcon = getPlatformIcon(account.platform);
 
             return (
               <div
                 key={getAccountUUID(account)}
                 className="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-2 dark:bg-gray-sidebar"
               >
-                <Stack direction={'vertical'} gap={'condensed'}>
-                  <Tooltip text="Open profile" direction="ne">
+                <Stack direction={'vertical'} gap={'none'}>
+                  <Tooltip text="Open profile" direction="e">
                     <Button onClick={() => openAccountProfile(account)}>
                       <Stack
                         direction={'horizontal'}
                         gap={'condensed'}
                         align={'center'}
                       >
-                        <Avatar
-                          src={account.user.avatar}
-                          title={account.user.login}
-                          size={Size.SMALL}
-                        />
+                        <Avatar src={account.user.avatar} size={Size.XLARGE} />
                         <Text>@{account.user.login}</Text>
-                        <Text as="p" sx={{ hidden: !account.user?.name }}>
-                          ({account.user?.name})
-                        </Text>
+                        <Text as="i">({account.user?.name})</Text>
                       </Stack>
                     </Button>
                   </Tooltip>
 
-                  <Stack direction={'vertical'} className="ml-2">
-                    <Tooltip text="Open Host" direction="ne">
-                      <Button
-                        leadingVisual={platformIcon}
-                        size="small"
-                        variant="invisible"
-                        onClick={() => openHost(account.hostname)}
+                  <ActionList variant="inset">
+                    <Tooltip text="Open Host" direction="e">
+                      <ActionList.Item
+                        onSelect={() => openHost(account.hostname)}
                       >
+                        <ActionList.LeadingVisual>
+                          <PlatformIcon />
+                        </ActionList.LeadingVisual>
                         {account.hostname}
-                      </Button>
+                      </ActionList.Item>
                     </Tooltip>
 
-                    <Tooltip text="Open Developer Settings" direction="ne">
-                      <Button
-                        leadingVisual={authMethodIcon}
-                        size="small"
-                        variant="invisible"
-                        onClick={() => openDeveloperSettings(account)}
+                    <Tooltip text="Open Developer Settings" direction="e">
+                      <ActionList.Item
+                        onSelect={() => openDeveloperSettings(account)}
                       >
+                        <ActionList.LeadingVisual>
+                          <AuthMethodIcon />
+                        </ActionList.LeadingVisual>
                         {account.method}
-                      </Button>
+                      </ActionList.Item>
                     </Tooltip>
-                  </Stack>
+                  </ActionList>
                 </Stack>
                 <Stack direction={'horizontal'} gap={'condensed'}>
                   <IconButton
@@ -161,43 +156,37 @@ export const AccountsRoute: FC = () => {
         </div>
       </div>
 
-      <div className="flex items-center justify-between bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker">
-        <div className="font-semibold italic">Add new account</div>
-        <div>
-          <button
-            type="button"
-            className={BUTTON_CLASS_NAME}
-            title="Login with GitHub"
-            onClick={loginWithGitHub}
-          >
-            <MarkGithubIcon
-              size={Size.LARGE}
-              aria-label="Login with GitHub App"
-            />
-            <PlusIcon size={Size.SMALL} className="mb-2 ml-1" />
-          </button>
-          <button
-            type="button"
-            className={BUTTON_CLASS_NAME}
-            title="Login with Personal Access Token"
-            onClick={loginWithPersonalAccessToken}
-          >
-            <KeyIcon
-              size={Size.LARGE}
-              aria-label="Login with Personal Access Token"
-            />
-            <PlusIcon size={Size.SMALL} className="mb-2 ml-1" />
-          </button>
-          <button
-            type="button"
-            className={BUTTON_CLASS_NAME}
-            title="Login with OAuth App"
-            onClick={loginWithOAuthApp}
-          >
-            <PersonIcon size={Size.XLARGE} aria-label="Login with OAuth App" />
-            <PlusIcon size={Size.SMALL} className="mb-2" />
-          </button>
-        </div>
+      <div className="flex items-center justify-end bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker">
+        <ActionMenu>
+          <ActionMenu.Anchor>
+            <Button leadingVisual={ChevronUpIcon}>Add new account</Button>
+          </ActionMenu.Anchor>
+
+          <ActionMenu.Overlay width="medium">
+            <ActionList>
+              <ActionList.Item onSelect={() => loginWithGitHub()}>
+                <ActionList.LeadingVisual>
+                  <MarkGithubIcon />
+                </ActionList.LeadingVisual>
+                Login with GitHub
+              </ActionList.Item>
+
+              <ActionList.Item onSelect={() => loginWithPersonalAccessToken()}>
+                <ActionList.LeadingVisual>
+                  <KeyIcon />
+                </ActionList.LeadingVisual>
+                Login with Personal Access Token
+              </ActionList.Item>
+
+              <ActionList.Item onSelect={() => loginWithOAuthApp()}>
+                <ActionList.LeadingVisual>
+                  <PersonIcon />
+                </ActionList.LeadingVisual>
+                Login with OAuth App{' '}
+              </ActionList.Item>
+            </ActionList>
+          </ActionMenu.Overlay>
+        </ActionMenu>
       </div>
     </div>
   );

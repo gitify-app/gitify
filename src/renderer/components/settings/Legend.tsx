@@ -1,5 +1,6 @@
-import type { Icon } from '@primer/octicons-react';
 import type { FC } from 'react';
+
+import type { Icon } from '@primer/octicons-react';
 
 interface ILegend {
   icon: Icon;

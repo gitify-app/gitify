@@ -1,6 +1,8 @@
+import type { FC, MouseEvent } from 'react';
+
 import { FeedPersonIcon, MarkGithubIcon } from '@primer/octicons-react';
 import { Avatar } from '@primer/react';
-import type { FC, MouseEvent } from 'react';
+
 import { IconColor, Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { cn } from '../../utils/cn';
@@ -31,23 +33,17 @@ export const NotificationFooter: FC<INotificationFooter> = ({
       )}
     >
       {notification.subject.user ? (
-        <button
-          type="button"
-          title="View User Profile"
+        <Avatar
+          src={notification.subject.user.avatar_url}
+          title={`View profile: ${notification.subject.user.login}`}
+          size={Size.SMALL}
+          square={notification.subject.user.type !== 'User'}
           onClick={(event: MouseEvent<HTMLElement>) => {
             // Don't trigger onClick of parent element.
             event.stopPropagation();
             openUserProfile(notification.subject.user);
           }}
-          className="flex-shrink-0 pl-1"
-        >
-          <Avatar
-            src={notification.subject.user.avatar_url}
-            title={notification.subject.user.login}
-            size={Size.SMALL}
-            // square={notification.subject.user.type !== 'User'}
-          />
-        </button>
+        />
       ) : (
         <div>
           {notification.subject.type === 'RepositoryDependabotAlertsThread' ||

@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+
 import { Size } from '../../types';
 import { cn } from '../../utils/cn';
 

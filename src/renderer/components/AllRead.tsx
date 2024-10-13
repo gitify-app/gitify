@@ -1,4 +1,5 @@
 import { type FC, useMemo } from 'react';
+
 import { Constants } from '../utils/constants';
 import { EmojiText } from './EmojiText';
 
