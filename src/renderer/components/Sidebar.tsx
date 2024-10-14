@@ -87,6 +87,7 @@ export const Sidebar: FC = () => {
             variant="invisible"
             tooltipDirection="e"
             onClick={() => navigate('/', { replace: true })}
+            data-testid="sidebar-home"
           />
 
           <IconButton
@@ -96,6 +97,7 @@ export const Sidebar: FC = () => {
             variant={notificationsCount > 0 ? 'primary' : 'invisible'}
             tooltipDirection="e"
             onClick={() => openGitHubNotifications(primaryAccountHostname)}
+            data-testid="sidebar-notifications"
           />
 
           {/* TODO - explore https://primer.style/components/selectpanel/react/alpha/ for a better UI for filters */}
@@ -107,6 +109,7 @@ export const Sidebar: FC = () => {
               variant={filterCount > 0 ? 'primary' : 'invisible'}
               tooltipDirection="e"
               onClick={() => toggleFilters()}
+              data-testid="sidebar-filter-notifications"
             />
           )}
 
@@ -117,6 +120,7 @@ export const Sidebar: FC = () => {
             variant="invisible"
             tooltipDirection="e"
             onClick={() => openGitHubIssues(primaryAccountHostname)}
+            data-testid="sidebar-my-issues"
           />
           <IconButton
             aria-label="My pull requests"
@@ -125,6 +129,7 @@ export const Sidebar: FC = () => {
             variant="invisible"
             tooltipDirection="e"
             onClick={() => openGitHubPulls(primaryAccountHostname)}
+            data-testid="sidebar-my-pull-requests"
           />
         </Stack>
       </div>
@@ -146,6 +151,7 @@ export const Sidebar: FC = () => {
               loading={status === 'loading'}
               disabled={status === 'loading'}
               onClick={() => refreshNotifications()}
+              data-testid="sidebar-refresh"
             />
 
             <IconButton
@@ -155,6 +161,7 @@ export const Sidebar: FC = () => {
               variant="invisible"
               tooltipDirection="e"
               onClick={() => toggleSettings()}
+              data-testid="sidebar-settings"
             />
           </>
         )}
@@ -167,6 +174,7 @@ export const Sidebar: FC = () => {
             variant="invisible"
             tooltipDirection="e"
             onClick={() => quitApp()}
+            data-testid="sidebar-quit"
           />
         )}
       </Stack>
