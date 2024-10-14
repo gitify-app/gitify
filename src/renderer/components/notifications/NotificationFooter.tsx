@@ -27,30 +27,28 @@ export const NotificationFooter: FC<INotificationFooter> = ({
 
   return (
     <div className="flex flex-wrap items-center gap-1">
-      <div className="mb-1">
-        {notification.subject.user ? (
-          <Avatar
-            title={`View profile: ${notification.subject.user.login}`}
-            src={notification.subject.user.avatar_url}
-            size={Size.SMALL}
-            onClick={(event: MouseEvent<HTMLElement>) => {
-              // Don't trigger onClick of parent element.
-              event.stopPropagation();
-              openUserProfile(notification.subject.user);
-            }}
-            data-testid="view-profile"
-          />
-        ) : (
-          <div>
-            {notification.subject.type === 'RepositoryDependabotAlertsThread' ||
-            notification.subject.type === 'RepositoryVulnerabilityAlert' ? (
-              <MarkGithubIcon size={Size.SMALL} />
-            ) : (
-              <FeedPersonIcon size={Size.SMALL} className={IconColor.GRAY} />
-            )}
-          </div>
-        )}
-      </div>
+      {notification.subject.user ? (
+        <Avatar
+          title={`View profile: ${notification.subject.user.login}`}
+          src={notification.subject.user.avatar_url}
+          size={Size.SMALL}
+          onClick={(event: MouseEvent<HTMLElement>) => {
+            // Don't trigger onClick of parent element.
+            event.stopPropagation();
+            openUserProfile(notification.subject.user);
+          }}
+          data-testid="view-profile"
+        />
+      ) : (
+        <span>
+          {notification.subject.type === 'RepositoryDependabotAlertsThread' ||
+          notification.subject.type === 'RepositoryVulnerabilityAlert' ? (
+            <MarkGithubIcon size={Size.SMALL} />
+          ) : (
+            <FeedPersonIcon size={Size.SMALL} className={IconColor.GRAY} />
+          )}
+        </span>
+      )}
       <span
         className={cn('text-xs capitalize', Opacity.MEDIUM)}
         title={reason.description}

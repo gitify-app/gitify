@@ -53,7 +53,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
   return (
     <>
       <div
-        className="group flex justify-between bg-gray-100 pr-3 py-1.5 dark:bg-gray-darker dark:text-white"
+        className="group flex justify-between bg-gray-100 pl-3 pr-1 py-0.5 dark:bg-gray-darker dark:text-white"
         onClick={toggleRepositoryNotifications}
       >
         <div
@@ -61,7 +61,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
             'flex flex-1 gap-3 items-center truncate text-sm font-medium',
             animateExit &&
               'translate-x-full opacity-0 transition duration-[350ms] ease-in-out',
-            showAsRead ? Opacity.READ : Opacity.MEDIUM,
+            showAsRead && Opacity.READ,
           )}
         >
           <Tooltip text="Open repository" direction="e">

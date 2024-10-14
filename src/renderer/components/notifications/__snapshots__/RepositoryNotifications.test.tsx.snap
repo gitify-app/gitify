@@ -6,10 +6,10 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
   "baseElement": <body>
     <div>
       <div
-        class="group flex justify-between bg-gray-100 pr-3 py-1.5 dark:bg-gray-darker dark:text-white"
+        class="group flex justify-between bg-gray-100 pl-3 pr-1 py-0.5 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
+          class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
         >
           <span
             aria-label="Open repository"
@@ -214,10 +214,10 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should re
   </body>,
   "container": <div>
     <div
-      class="group flex justify-between bg-gray-100 pr-3 py-1.5 dark:bg-gray-darker dark:text-white"
+      class="group flex justify-between bg-gray-100 pl-3 pr-1 py-0.5 dark:bg-gray-darker dark:text-white"
     >
       <div
-        class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
+        class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
       >
         <span
           aria-label="Open repository"
@@ -479,10 +479,10 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
   "baseElement": <body>
     <div>
       <div
-        class="group flex justify-between bg-gray-100 pr-3 py-1.5 dark:bg-gray-darker dark:text-white"
+        class="group flex justify-between bg-gray-100 pl-3 pr-1 py-0.5 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
+          class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
         >
           <span
             aria-label="Open repository"
@@ -680,10 +680,10 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
     </div>
     <div>
       <div
-        class="group flex justify-between bg-gray-100 pr-3 py-1.5 dark:bg-gray-darker dark:text-white"
+        class="group flex justify-between bg-gray-100 pl-3 pr-1 py-0.5 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
+          class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
         >
           <span
             aria-label="Open repository"
@@ -888,10 +888,10 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should to
   </body>,
   "container": <div>
     <div
-      class="group flex justify-between bg-gray-100 pr-3 py-1.5 dark:bg-gray-darker dark:text-white"
+      class="group flex justify-between bg-gray-100 pl-3 pr-1 py-0.5 dark:bg-gray-darker dark:text-white"
     >
       <div
-        class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
+        class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
       >
         <span
           aria-label="Open repository"
@@ -1153,10 +1153,10 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
   "baseElement": <body>
     <div>
       <div
-        class="group flex justify-between bg-gray-100 pr-3 py-1.5 dark:bg-gray-darker dark:text-white"
+        class="group flex justify-between bg-gray-100 pl-3 pr-1 py-0.5 dark:bg-gray-darker dark:text-white"
       >
         <div
-          class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
+          class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
         >
           <span
             aria-label="Open repository"
@@ -1361,10 +1361,10 @@ exports[`renderer/components/notifications/RepositoryNotifications.tsx should us
   </body>,
   "container": <div>
     <div
-      class="group flex justify-between bg-gray-100 pr-3 py-1.5 dark:bg-gray-darker dark:text-white"
+      class="group flex justify-between bg-gray-100 pl-3 pr-1 py-0.5 dark:bg-gray-darker dark:text-white"
     >
       <div
-        class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
+        class="flex flex-1 gap-3 items-center truncate text-sm font-medium"
       >
         <span
           aria-label="Open repository"

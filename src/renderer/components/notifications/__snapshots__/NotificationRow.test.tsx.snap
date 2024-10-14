@@ -6,7 +6,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   "baseElement": <body>
     <div>
       <div
-        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+        class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -93,22 +93,18 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           <div
             class="flex flex-wrap items-center gap-1"
           >
-            <div
-              class="mb-1"
-            >
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-                data-component="Avatar"
-                data-testid="view-profile"
-                height="14"
-                size="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
-                title="View profile: gitify-app"
-                width="14"
-              />
-            </div>
+            <img
+              alt=""
+              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+              data-component="Avatar"
+              data-testid="view-profile"
+              height="14"
+              size="14"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+              sx="[object Object]"
+              title="View profile: gitify-app"
+              width="14"
+            />
             <span
               class="text-xs capitalize opacity-80"
               title="You're watching the repository."
@@ -324,7 +320,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   </body>,
   "container": <div>
     <div
-      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+      class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -411,22 +407,18 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         <div
           class="flex flex-wrap items-center gap-1"
         >
-          <div
-            class="mb-1"
-          >
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-              data-component="Avatar"
-              data-testid="view-profile"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              title="View profile: gitify-app"
-              width="14"
-            />
-          </div>
+          <img
+            alt=""
+            class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+            data-component="Avatar"
+            data-testid="view-profile"
+            height="14"
+            size="14"
+            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+            sx="[object Object]"
+            title="View profile: gitify-app"
+            width="14"
+          />
           <span
             class="text-xs capitalize opacity-80"
             title="You're watching the repository."
@@ -699,7 +691,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   "baseElement": <body>
     <div>
       <div
-        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+        class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -750,22 +742,18 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           <div
             class="flex flex-wrap items-center gap-1"
           >
-            <div
-              class="mb-1"
-            >
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-                data-component="Avatar"
-                data-testid="view-profile"
-                height="14"
-                size="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
-                title="View profile: gitify-app"
-                width="14"
-              />
-            </div>
+            <img
+              alt=""
+              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+              data-component="Avatar"
+              data-testid="view-profile"
+              height="14"
+              size="14"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+              sx="[object Object]"
+              title="View profile: gitify-app"
+              width="14"
+            />
             <span
               class="text-xs capitalize opacity-80"
               title="You're watching the repository."
@@ -981,7 +969,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   </body>,
   "container": <div>
     <div
-      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+      class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -1032,22 +1020,18 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         <div
           class="flex flex-wrap items-center gap-1"
         >
-          <div
-            class="mb-1"
-          >
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-              data-component="Avatar"
-              data-testid="view-profile"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              title="View profile: gitify-app"
-              width="14"
-            />
-          </div>
+          <img
+            alt=""
+            class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+            data-component="Avatar"
+            data-testid="view-profile"
+            height="14"
+            size="14"
+            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+            sx="[object Object]"
+            title="View profile: gitify-app"
+            width="14"
+          />
           <span
             class="text-xs capitalize opacity-80"
             title="You're watching the repository."
@@ -1320,7 +1304,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   "baseElement": <body>
     <div>
       <div
-        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+        class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -1371,22 +1355,18 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           <div
             class="flex flex-wrap items-center gap-1"
           >
-            <div
-              class="mb-1"
-            >
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-                data-component="Avatar"
-                data-testid="view-profile"
-                height="14"
-                size="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
-                title="View profile: gitify-app"
-                width="14"
-              />
-            </div>
+            <img
+              alt=""
+              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+              data-component="Avatar"
+              data-testid="view-profile"
+              height="14"
+              size="14"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+              sx="[object Object]"
+              title="View profile: gitify-app"
+              width="14"
+            />
             <span
               class="text-xs capitalize opacity-80"
               title="You're watching the repository."
@@ -1602,7 +1582,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
   </body>,
   "container": <div>
     <div
-      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+      class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -1653,22 +1633,18 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         <div
           class="flex flex-wrap items-center gap-1"
         >
-          <div
-            class="mb-1"
-          >
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-              data-component="Avatar"
-              data-testid="view-profile"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              title="View profile: gitify-app"
-              width="14"
-            />
-          </div>
+          <img
+            alt=""
+            class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+            data-component="Avatar"
+            data-testid="view-profile"
+            height="14"
+            size="14"
+            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+            sx="[object Object]"
+            title="View profile: gitify-app"
+            width="14"
+          />
           <span
             class="text-xs capitalize opacity-80"
             title="You're watching the repository."

@@ -6,7 +6,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-3 py-1.5 text-sm font-semibold dark:text-white bg-red-300 dark:bg-red-500"
+        class="group flex items-center justify-between pl-3 pr-1 py-0.5 text-sm font-semibold dark:text-white bg-red-300 dark:bg-red-500"
       >
         <span
           aria-label="Open profile"
@@ -247,7 +247,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-3 py-1.5 text-sm font-semibold dark:text-white bg-red-300 dark:bg-red-500"
+      class="group flex items-center justify-between pl-3 pr-1 py-0.5 text-sm font-semibold dark:text-white bg-red-300 dark:bg-red-500"
     >
       <span
         aria-label="Open profile"
@@ -545,7 +545,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+        class="group flex items-center justify-between pl-3 pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
       >
         <span
           aria-label="Open profile"
@@ -748,7 +748,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         </div>
       </div>
       <div
-        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+        class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -835,22 +835,18 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <div
             class="flex flex-wrap items-center gap-1"
           >
-            <div
-              class="mb-1"
-            >
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-                data-component="Avatar"
-                data-testid="view-profile"
-                height="14"
-                size="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
-                title="View profile: gitify-app"
-                width="14"
-              />
-            </div>
+            <img
+              alt=""
+              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+              data-component="Avatar"
+              data-testid="view-profile"
+              height="14"
+              size="14"
+              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+              sx="[object Object]"
+              title="View profile: gitify-app"
+              width="14"
+            />
             <span
               class="text-xs capitalize opacity-80"
               title="You're watching the repository."
@@ -1063,7 +1059,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         </div>
       </div>
       <div
-        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+        class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="148827438"
       >
         <div
@@ -1150,26 +1146,22 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <div
             class="flex flex-wrap items-center gap-1"
           >
-            <div
-              class="mb-1"
-            >
-              <div>
-                <svg
-                  aria-hidden="true"
-                  class="text-gray-500 dark:text-gray-300"
-                  fill="currentColor"
-                  focusable="false"
-                  height="14"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                  viewBox="0 0 16 16"
-                  width="14"
-                >
-                  <path
-                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                  />
-                </svg>
-              </div>
-            </div>
+            <span>
+              <svg
+                aria-hidden="true"
+                class="text-gray-500 dark:text-gray-300"
+                fill="currentColor"
+                focusable="false"
+                height="14"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                viewBox="0 0 16 16"
+                width="14"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                />
+              </svg>
+            </span>
             <span
               class="text-xs capitalize opacity-80"
               title="You created the thread."
@@ -1314,7 +1306,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+      class="group flex items-center justify-between pl-3 pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
     >
       <span
         aria-label="Open profile"
@@ -1517,7 +1509,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       </div>
     </div>
     <div
-      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+      class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -1604,22 +1596,18 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         <div
           class="flex flex-wrap items-center gap-1"
         >
-          <div
-            class="mb-1"
-          >
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-              data-component="Avatar"
-              data-testid="view-profile"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              title="View profile: gitify-app"
-              width="14"
-            />
-          </div>
+          <img
+            alt=""
+            class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+            data-component="Avatar"
+            data-testid="view-profile"
+            height="14"
+            size="14"
+            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+            sx="[object Object]"
+            title="View profile: gitify-app"
+            width="14"
+          />
           <span
             class="text-xs capitalize opacity-80"
             title="You're watching the repository."
@@ -1832,7 +1820,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
       </div>
     </div>
     <div
-      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+      class="group flex border-b border-gray-100 bg-white pl-3 pr-1 py-1.5 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="148827438"
     >
       <div
@@ -1919,26 +1907,22 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         <div
           class="flex flex-wrap items-center gap-1"
         >
-          <div
-            class="mb-1"
-          >
-            <div>
-              <svg
-                aria-hidden="true"
-                class="text-gray-500 dark:text-gray-300"
-                fill="currentColor"
-                focusable="false"
-                height="14"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                viewBox="0 0 16 16"
-                width="14"
-              >
-                <path
-                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                />
-              </svg>
-            </div>
-          </div>
+          <span>
+            <svg
+              aria-hidden="true"
+              class="text-gray-500 dark:text-gray-300"
+              fill="currentColor"
+              focusable="false"
+              height="14"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              viewBox="0 0 16 16"
+              width="14"
+            >
+              <path
+                d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+              />
+            </svg>
+          </span>
           <span
             class="text-xs capitalize opacity-80"
             title="You created the thread."
@@ -2140,7 +2124,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+        class="group flex items-center justify-between pl-3 pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
       >
         <span
           aria-label="Open profile"
@@ -2349,7 +2333,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+      class="group flex items-center justify-between pl-3 pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
     >
       <span
         aria-label="Open profile"
@@ -2615,7 +2599,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+        class="group flex items-center justify-between pl-3 pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
       >
         <span
           aria-label="Open profile"
@@ -2851,7 +2835,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+      class="group flex items-center justify-between pl-3 pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
     >
       <span
         aria-label="Open profile"
@@ -3144,7 +3128,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pr-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+        class="group flex items-center justify-between pl-3 pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
       >
         <span
           aria-label="Open profile"
@@ -3349,7 +3333,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
     </div>
     <div>
       <div
-        class="group flex items-center justify-between pr-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+        class="group flex items-center justify-between pl-3 pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
       >
         <span
           aria-label="Open profile"
@@ -3558,7 +3542,7 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should toggl
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pr-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
+      class="group flex items-center justify-between pl-3 pr-1 py-0.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest"
     >
       <span
         aria-label="Open profile"
