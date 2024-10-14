@@ -970,6 +970,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       aria-haspopup="true"
       class="types__StyledButton-sc-ws60qy-0 bBRiTk"
       data-loading="false"
+      data-testid="account-add-new"
       id=":r19:"
       sx="[object Object]"
       tabindex="0"

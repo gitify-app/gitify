@@ -37,7 +37,7 @@ export const App = () => {
       <BaseStyles>
         <AppProvider>
           <Router>
-            <div className="flex h-full overflow-y-auto flex-col pl-14">
+            <div className="flex h-full overflow-y-auto flex-col pl-10">
               <Loading />
               <Sidebar />
               <Routes>

@@ -257,6 +257,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
+      fireEvent.click(screen.getByTestId('account-add-new'));
       fireEvent.click(screen.getByTestId('account-add-github'));
 
       expect(mockLoginWithGitHubApp).toHaveBeenCalled();
@@ -278,6 +279,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
+      fireEvent.click(screen.getByTestId('account-add-new'));
       fireEvent.click(screen.getByTestId('account-add-pat'));
 
       expect(mockNavigate).toHaveBeenNthCalledWith(
@@ -305,6 +307,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
+      fireEvent.click(screen.getByTestId('account-add-new'));
       fireEvent.click(screen.getByTestId('account-add-oauth-app'));
 
       expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app', {

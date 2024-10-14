@@ -72,7 +72,7 @@ export const Sidebar: FC = () => {
   }, [settings]);
 
   return (
-    <div className="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar">
+    <div className="fixed left-10 -ml-10 flex h-full w-10 flex-col overflow-y-auto bg-gray-sidebar">
       <div className="flex flex-1 flex-col">
         <Stack
           direction="vertical"

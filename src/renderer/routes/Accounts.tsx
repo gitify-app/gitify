@@ -168,7 +168,9 @@ export const AccountsRoute: FC = () => {
       <div className="flex items-center justify-end bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker">
         <ActionMenu>
           <ActionMenu.Anchor>
-            <Button leadingVisual={PersonAddIcon}>Add new account</Button>
+            <Button leadingVisual={PersonAddIcon} data-testid="account-add-new">
+              Add new account
+            </Button>
           </ActionMenu.Anchor>
 
           <ActionMenu.Overlay width="medium">

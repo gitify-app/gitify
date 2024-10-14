@@ -6,7 +6,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   "baseElement": <body>
     <div>
       <div
-        class="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar"
+        class="fixed left-10 -ml-10 flex h-full w-10 flex-col overflow-y-auto bg-gray-sidebar"
       >
         <div
           class="flex flex-1 flex-col"
@@ -245,7 +245,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   </body>,
   "container": <div>
     <div
-      class="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar"
+      class="fixed left-10 -ml-10 flex h-full w-10 flex-col overflow-y-auto bg-gray-sidebar"
     >
       <div
         class="flex flex-1 flex-col"
@@ -541,7 +541,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   "baseElement": <body>
     <div>
       <div
-        class="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar"
+        class="fixed left-10 -ml-10 flex h-full w-10 flex-col overflow-y-auto bg-gray-sidebar"
       >
         <div
           class="flex flex-1 flex-col"
@@ -780,7 +780,7 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
   </body>,
   "container": <div>
     <div
-      class="fixed left-14 -ml-14 flex h-full w-14 flex-col overflow-y-auto bg-gray-sidebar"
+      class="fixed left-10 -ml-10 flex h-full w-10 flex-col overflow-y-auto bg-gray-sidebar"
     >
       <div
         class="flex flex-1 flex-col"
