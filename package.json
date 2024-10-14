@@ -156,7 +156,7 @@
     "css-minimizer-webpack-plugin": "7.0.0",
     "date-fns": "4.1.0",
     "electron": "32.2.0",
-    "electron-builder": "25.1.7",
+    "electron-builder": "25.1.8",
     "final-form": "4.20.10",
     "graphql-tag": "2.12.6",
     "html-webpack-plugin": "5.6.0",
