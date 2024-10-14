@@ -4,7 +4,7 @@ const config: Config = {
   preset: 'ts-jest',
   setupFiles: [
     '<rootDir>/src/renderer/__helpers__/setupEnvVars.js',
-    '<rootDir>/jest.setup.js',
+    '<rootDir>/src/renderer/__helpers__/setupCSSJest.js',
   ],
   testEnvironment: 'jsdom',
   collectCoverage: true,

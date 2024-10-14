@@ -7,8 +7,10 @@ import type {
   SubjectType,
 } from '../typesGitHub';
 import {
+  getAuthMethodIcon,
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
+  getPlatformIcon,
   getPullRequestReviewIcon,
 } from './icons';
 
@@ -19,6 +21,7 @@ describe('renderer/utils/icons.ts', () => {
         createSubjectMock({ type: 'CheckSuite', state: null }),
       ).displayName,
     ).toBe('RocketIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -27,6 +30,7 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('StopIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -35,6 +39,7 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('XIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -43,6 +48,7 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('SkipIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -51,37 +57,45 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('CheckIcon');
+
     expect(
       getNotificationTypeIcon(createSubjectMock({ type: 'Commit' }))
         .displayName,
     ).toBe('GitCommitIcon');
+
     expect(
       getNotificationTypeIcon(createSubjectMock({ type: 'Discussion' }))
         .displayName,
     ).toBe('CommentDiscussionIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({ type: 'Discussion', state: 'DUPLICATE' }),
       ).displayName,
     ).toBe('DiscussionDuplicateIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({ type: 'Discussion', state: 'OUTDATED' }),
       ).displayName,
     ).toBe('DiscussionOutdatedIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({ type: 'Discussion', state: 'RESOLVED' }),
       ).displayName,
     ).toBe('DiscussionClosedIcon');
+
     expect(
       getNotificationTypeIcon(createSubjectMock({ type: 'Issue' })).displayName,
     ).toBe('IssueOpenedIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({ type: 'Issue', state: 'draft' }),
       ).displayName,
     ).toBe('IssueDraftIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -90,6 +104,7 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('IssueClosedIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -98,6 +113,7 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('IssueClosedIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -106,6 +122,7 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('SkipIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -114,10 +131,12 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('IssueReopenedIcon');
+
     expect(
       getNotificationTypeIcon(createSubjectMock({ type: 'PullRequest' }))
         .displayName,
     ).toBe('GitPullRequestIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -126,6 +145,7 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('GitPullRequestDraftIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -134,6 +154,7 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('GitPullRequestClosedIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -142,6 +163,7 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('GitMergeIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -149,6 +171,7 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('TagIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -156,6 +179,7 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('AlertIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -163,6 +187,7 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('MailIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -170,6 +195,7 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('AlertIcon');
+
     expect(
       getNotificationTypeIcon(
         createSubjectMock({
@@ -177,6 +203,7 @@ describe('renderer/utils/icons.ts', () => {
         }),
       ).displayName,
     ).toBe('RocketIcon');
+
     expect(getNotificationTypeIcon(createSubjectMock({})).displayName).toBe(
       'QuestionIcon',
     );
@@ -192,6 +219,7 @@ describe('renderer/utils/icons.ts', () => {
           }),
         ),
       ).toMatchSnapshot();
+
       expect(
         getNotificationTypeIconColor(
           createSubjectMock({
@@ -209,6 +237,7 @@ describe('renderer/utils/icons.ts', () => {
           }),
         ),
       ).toMatchSnapshot();
+
       expect(
         getNotificationTypeIconColor(
           createSubjectMock({
@@ -217,6 +246,7 @@ describe('renderer/utils/icons.ts', () => {
           }),
         ),
       ).toMatchSnapshot();
+
       expect(
         getNotificationTypeIconColor(
           createSubjectMock({
@@ -231,32 +261,41 @@ describe('renderer/utils/icons.ts', () => {
       expect(
         getNotificationTypeIconColor(createSubjectMock({ state: 'ANSWERED' })),
       ).toMatchSnapshot();
+
       expect(
         getNotificationTypeIconColor(createSubjectMock({ state: 'closed' })),
       ).toMatchSnapshot();
+
       expect(
         getNotificationTypeIconColor(createSubjectMock({ state: 'completed' })),
       ).toMatchSnapshot();
+
       expect(
         getNotificationTypeIconColor(createSubjectMock({ state: 'draft' })),
       ).toMatchSnapshot();
+
       expect(
         getNotificationTypeIconColor(createSubjectMock({ state: 'merged' })),
       ).toMatchSnapshot();
+
       expect(
         getNotificationTypeIconColor(
           createSubjectMock({ state: 'not_planned' }),
         ),
       ).toMatchSnapshot();
+
       expect(
         getNotificationTypeIconColor(createSubjectMock({ state: 'open' })),
       ).toMatchSnapshot();
+
       expect(
         getNotificationTypeIconColor(createSubjectMock({ state: 'reopened' })),
       ).toMatchSnapshot();
+
       expect(
         getNotificationTypeIconColor(createSubjectMock({ state: 'RESOLVED' })),
       ).toMatchSnapshot();
+
       expect(
         getNotificationTypeIconColor(
           createSubjectMock({
@@ -358,6 +397,20 @@ describe('renderer/utils/icons.ts', () => {
 
       expect(getPullRequestReviewIcon(mockReviewMultipleReviewer)).toBeNull();
     });
+  });
+
+  describe('getAuthMethodIcon', () => {
+    expect(getAuthMethodIcon('GitHub App')).toMatchSnapshot();
+
+    expect(getAuthMethodIcon('OAuth App')).toMatchSnapshot();
+
+    expect(getAuthMethodIcon('Personal Access Token')).toMatchSnapshot();
+  });
+
+  describe('getPlatformIcon', () => {
+    expect(getPlatformIcon('GitHub Cloud')).toMatchSnapshot();
+
+    expect(getPlatformIcon('GitHub Enterprise Server')).toMatchSnapshot();
   });
 });
 
