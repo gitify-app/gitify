@@ -12,8 +12,8 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
         role="tooltip"
       >
         <a
-          aria-label="view-repository"
           class="Link__StyledLink-sc-14289xe-0 iOXuai"
+          data-testid="view-repository"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -52,8 +52,8 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
       role="tooltip"
     >
       <a
-        aria-label="view-repository"
         class="Link__StyledLink-sc-14289xe-0 iOXuai"
+        data-testid="view-repository"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"

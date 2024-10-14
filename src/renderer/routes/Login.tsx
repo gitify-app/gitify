@@ -57,6 +57,7 @@ export const LoginRoute: FC = () => {
           leadingVisual={MarkGithubIcon}
           variant="primary"
           onClick={() => loginUser()}
+          data-testid="login-github"
         >
           GitHub
         </Button>
@@ -64,6 +65,7 @@ export const LoginRoute: FC = () => {
         <Button
           leadingVisual={KeyIcon}
           onClick={() => navigate('/login-personal-access-token')}
+          data-testid="login-pat"
         >
           Personal Access Token
         </Button>
@@ -71,6 +73,7 @@ export const LoginRoute: FC = () => {
         <Button
           leadingVisual={PersonIcon}
           onClick={() => navigate('/login-oauth-app')}
+          data-testid="login-oauth-app"
         >
           OAuth App
         </Button>

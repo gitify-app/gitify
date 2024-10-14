@@ -19,9 +19,9 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           >
             <img
               alt=""
-              aria-label="view-profile"
               class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
               data-component="Avatar"
+              data-testid="view-profile"
               height="14"
               size="14"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -108,9 +108,9 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         >
           <img
             alt=""
-            aria-label="view-profile"
             class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
             data-component="Avatar"
+            data-testid="view-profile"
             height="14"
             size="14"
             src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -254,9 +254,9 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
           >
             <img
               alt=""
-              aria-label="view-profile"
               class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
               data-component="Avatar"
+              data-testid="view-profile"
               height="14"
               size="14"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -343,9 +343,9 @@ exports[`renderer/components/notifications/NotificationFooter.tsx security alert
         >
           <img
             alt=""
-            aria-label="view-profile"
             class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
             data-component="Avatar"
+            data-testid="view-profile"
             height="14"
             size="14"
             src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -720,9 +720,9 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           >
             <img
               alt=""
-              aria-label="view-profile"
               class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
               data-component="Avatar"
+              data-testid="view-profile"
               height="14"
               size="14"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -809,9 +809,9 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         >
           <img
             alt=""
-            aria-label="view-profile"
             class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
             data-component="Avatar"
+            data-testid="view-profile"
             height="14"
             size="14"
             src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -955,9 +955,9 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
           >
             <img
               alt=""
-              aria-label="view-profile"
               class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
               data-component="Avatar"
+              data-testid="view-profile"
               height="14"
               size="14"
               src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
@@ -1044,9 +1044,9 @@ exports[`renderer/components/notifications/NotificationFooter.tsx should render 
         >
           <img
             alt=""
-            aria-label="view-profile"
             class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
             data-component="Avatar"
+            data-testid="view-profile"
             height="14"
             size="14"
             src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"

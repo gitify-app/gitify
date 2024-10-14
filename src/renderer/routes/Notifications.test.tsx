@@ -5,7 +5,7 @@ import { AppContext } from '../context/App';
 import { Errors } from '../utils/errors';
 import { NotificationsRoute } from './Notifications';
 
-jest.mock('../components/AccountNotifications', () => ({
+jest.mock('../components/notifications/AccountNotifications', () => ({
   AccountNotifications: () => <p>AccountNotifications</p>,
 }));
 

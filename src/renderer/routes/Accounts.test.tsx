@@ -73,7 +73,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByLabelText('Go Back'));
+      fireEvent.click(screen.getByTestId('header-nav-back'));
       expect(mockNavigate).toHaveBeenNthCalledWith(1, -1);
     });
   });
@@ -101,7 +101,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Open Profile'));
+      fireEvent.click(screen.getByTestId('account-profile'));
 
       expect(openAccountProfileMock).toHaveBeenCalledTimes(1);
       expect(openAccountProfileMock).toHaveBeenCalledWith(
@@ -131,7 +131,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Open Host'));
+      fireEvent.click(screen.getByTestId('account-host'));
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
       expect(openExternalLinkMock).toHaveBeenCalledWith('https://github.com');
@@ -159,7 +159,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Open Developer Settings'));
+      fireEvent.click(screen.getByTestId('account-developer-settings'));
 
       expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
       expect(openExternalLinkMock).toHaveBeenCalledWith(
@@ -187,7 +187,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Refresh octocat'));
+      fireEvent.click(screen.getByTestId('account-refresh'));
 
       expect(apiRequestAuthMock).toHaveBeenCalledTimes(1);
       expect(apiRequestAuthMock).toHaveBeenCalledWith(
@@ -225,7 +225,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Logout octocat'));
+      fireEvent.click(screen.getByTestId('account-logout'));
 
       expect(logoutFromAccountMock).toHaveBeenCalledTimes(1);
 
@@ -257,7 +257,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Login with GitHub'));
+      fireEvent.click(screen.getByTestId('account-add-github'));
 
       expect(mockLoginWithGitHubApp).toHaveBeenCalled();
     });
@@ -278,7 +278,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Login with Personal Access Token'));
+      fireEvent.click(screen.getByTestId('account-add-pat'));
 
       expect(mockNavigate).toHaveBeenNthCalledWith(
         1,
@@ -305,7 +305,7 @@ describe('renderer/routes/Accounts.tsx', () => {
         );
       });
 
-      fireEvent.click(screen.getByTitle('Login with OAuth App'));
+      fireEvent.click(screen.getByTestId('account-add-oauth-app'));
 
       expect(mockNavigate).toHaveBeenNthCalledWith(1, '/login-oauth-app', {
         replace: true,

@@ -23,6 +23,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
+            data-testid="header-nav-back"
             sx="[object Object]"
             type="button"
           >
@@ -103,6 +104,7 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
+          data-testid="header-nav-back"
           sx="[object Object]"
           type="button"
         >

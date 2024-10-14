@@ -110,8 +110,8 @@ export const NotificationRow: FC<INotificationRow> = ({
 
         <div
           className="flex gap-1 items-center mb-1 truncate text-sm"
-          role="main"
           title={notificationTitle}
+          data-testid="notification-row"
         >
           <span className="truncate">{notification.subject.title}</span>
           <span
@@ -141,6 +141,7 @@ export const NotificationRow: FC<INotificationRow> = ({
                 setShowAsRead(settings.delayNotificationState);
                 markNotificationsAsDone([notification]);
               }}
+              data-testid="notification-mark-as-done"
             />
           )}
 
@@ -154,6 +155,7 @@ export const NotificationRow: FC<INotificationRow> = ({
               setShowAsRead(settings.delayNotificationState);
               markNotificationsAsRead([notification]);
             }}
+            data-testid="notification-mark-as-read"
           />
 
           <IconButton
@@ -162,6 +164,7 @@ export const NotificationRow: FC<INotificationRow> = ({
             size="small"
             variant="invisible"
             onClick={unsubscribeFromThread}
+            data-testid="notification-unsubscribe-from-thread"
           />
         </HoverGroup>
       )}

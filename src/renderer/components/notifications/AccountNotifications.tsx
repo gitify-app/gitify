@@ -94,6 +94,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
                 event.stopPropagation();
                 openAccountProfile(account);
               }}
+              data-testid="account-profile"
             >
               <Stack direction="horizontal" align="center" gap="condensed">
                 <Avatar src={account.user.avatar} size={Size.MEDIUM} />
@@ -113,6 +114,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
                 event.stopPropagation();
                 openGitHubIssues(account.hostname);
               }}
+              data-testid="account-issues"
             />
 
             <IconButton
@@ -125,6 +127,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
                 event.stopPropagation();
                 openGitHubPulls(account.hostname);
               }}
+              data-testid="account-pull-requests"
             />
 
             <IconButton
@@ -133,6 +136,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
               size="small"
               variant="invisible"
               onClick={toggleAccountNotifications}
+              data-testid="account-toggle"
             />
           </HoverGroup>
         </div>

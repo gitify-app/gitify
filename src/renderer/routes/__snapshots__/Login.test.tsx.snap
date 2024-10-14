@@ -97,6 +97,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             aria-describedby=":r0:-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 bBXWFS"
             data-loading="false"
+            data-testid="login-github"
             sx="[object Object]"
             type="button"
           >
@@ -136,6 +137,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             aria-describedby=":r1:-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 bBRiTk"
             data-loading="false"
+            data-testid="login-pat"
             sx="[object Object]"
             type="button"
           >
@@ -175,6 +177,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
             aria-describedby=":r2:-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 bBRiTk"
             data-loading="false"
+            data-testid="login-oauth-app"
             sx="[object Object]"
             type="button"
           >
@@ -307,6 +310,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
           aria-describedby=":r0:-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 bBXWFS"
           data-loading="false"
+          data-testid="login-github"
           sx="[object Object]"
           type="button"
         >
@@ -346,6 +350,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
           aria-describedby=":r1:-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 bBRiTk"
           data-loading="false"
+          data-testid="login-pat"
           sx="[object Object]"
           type="button"
         >
@@ -385,6 +390,7 @@ exports[`renderer/routes/Login.tsx should render itself & its children 1`] = `
           aria-describedby=":r2:-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 bBRiTk"
           data-loading="false"
+          data-testid="login-oauth-app"
           sx="[object Object]"
           type="button"
         >

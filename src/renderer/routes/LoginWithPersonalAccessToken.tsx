@@ -4,7 +4,7 @@ import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
 
 import { BookIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
-import { Box, Button, Stack, Text, Tooltip } from '@primer/react';
+import { Button, Stack, Text, Tooltip } from '@primer/react';
 
 import { FieldInput } from '../components/fields/FieldInput';
 import { Header } from '../components/primitives/Header';
@@ -56,7 +56,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
     const { handleSubmit, submitting, pristine, values } = formProps;
 
     return (
-      <Box as="form">
+      <form onSubmit={handleSubmit}>
         <FieldInput
           name="hostname"
           label="Hostname"
@@ -74,6 +74,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
                   onClick={() =>
                     openExternalLink(getNewTokenURL(values.hostname))
                   }
+                  data-testid="login-create-token"
                 >
                   Generate a PAT
                 </Button>
@@ -101,6 +102,7 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               size="small"
               leadingVisual={BookIcon}
               onClick={() => openExternalLink(Constants.GITHUB_DOCS.PAT_URL)}
+              data-testid="login-docs"
             >
               Docs
             </Button>
@@ -111,14 +113,14 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
               variant="primary"
               leadingVisual={SignInIcon}
               disabled={submitting || pristine}
-              onClick={() => handleSubmit()}
               type="submit"
+              data-testid="login-submit"
             >
               Login
             </Button>
           </Tooltip>
         </Stack>
-      </Box>
+      </form>
     );
   };
 

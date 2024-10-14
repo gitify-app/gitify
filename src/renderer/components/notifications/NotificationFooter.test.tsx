@@ -149,7 +149,7 @@ describe('renderer/components/notifications/NotificationFooter.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByLabelText('view-profile'));
+    fireEvent.click(screen.getByTestId('view-profile'));
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
       props.notification.subject.user.html_url,

@@ -33,6 +33,7 @@ export const SettingsRoute: FC = () => {
                   'Please confirm that you want to reset all settings to the Gitify defaults?',
                 ) && resetSettings();
               }}
+              data-testid="settings-reset"
             >
               Reset settings
             </Button>

@@ -32,6 +32,7 @@ export const Header: FC<IHeader> = (props: IHeader) => {
               fetchNotifications();
             }
           }}
+          data-testid="header-nav-back"
         />
 
         <Stack direction="horizontal" align="center" gap="condensed">

@@ -5,8 +5,7 @@ import {
   mockSettings,
 } from '../../__mocks__/state-mocks';
 import { AppContext } from '../../context/App';
-import { GroupBy, type Link } from '../../types';
-import type { UserType } from '../../typesGitHub';
+import { GroupBy } from '../../types';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import * as comms from '../../utils/comms';
 import * as links from '../../utils/links';
@@ -101,7 +100,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByRole('main'));
+      fireEvent.click(screen.getByTestId('notification-row'));
       expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(markNotificationsAsRead).toHaveBeenCalledTimes(1);
     });
@@ -130,7 +129,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByRole('main'));
+      fireEvent.click(screen.getByTestId('notification-row'));
       expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(markNotificationsAsRead).toHaveBeenCalledTimes(1);
     });
@@ -155,7 +154,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByRole('main'));
+      fireEvent.click(screen.getByTestId('notification-row'));
       expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(markNotificationsAsRead).toHaveBeenCalledTimes(1);
     });
@@ -180,7 +179,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByRole('main'));
+      fireEvent.click(screen.getByTestId('notification-row'));
       expect(links.openNotification).toHaveBeenCalledTimes(1);
       expect(markNotificationsAsDone).toHaveBeenCalledTimes(1);
     });
@@ -204,7 +203,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTitle('Mark as read'));
+      fireEvent.click(screen.getByTestId('notification-mark-as-read'));
       expect(markNotificationsAsRead).toHaveBeenCalledTimes(1);
     });
 
@@ -224,7 +223,7 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTitle('Mark as done'));
+      fireEvent.click(screen.getByTestId('notification-mark-as-done'));
       expect(markNotificationsAsDone).toHaveBeenCalledTimes(1);
     });
 
@@ -245,47 +244,10 @@ describe('renderer/components/notifications/NotificationRow.tsx', () => {
           </AppContext.Provider>
         </AppContext.Provider>,
       );
-      fireEvent.click(screen.getByTitle('Unsubscribe from Thread'));
+      fireEvent.click(
+        screen.getByTestId('notification-unsubscribe-from-thread'),
+      );
       expect(unsubscribeNotification).toHaveBeenCalledTimes(1);
-    });
-
-    it('should open notification user profile', () => {
-      const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
-
-      const props = {
-        notification: {
-          ...mockSingleNotification,
-          subject: {
-            ...mockSingleNotification.subject,
-            user: {
-              login: 'some-user',
-              html_url: 'https://github.com/some-user' as Link,
-              avatar_url:
-                'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
-              type: 'User' as UserType,
-            },
-            reviews: null,
-          },
-        },
-        account: mockGitHubCloudAccount,
-      };
-
-      render(
-        <AppContext.Provider
-          value={{
-            settings: { ...mockSettings },
-            auth: mockAuth,
-          }}
-        >
-          <NotificationRow {...props} />
-        </AppContext.Provider>,
-      );
-
-      fireEvent.click(screen.getByTitle('View User Profile'));
-      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-      expect(openExternalLinkMock).toHaveBeenCalledWith(
-        props.notification.subject.user.html_url,
-      );
     });
   });
 });

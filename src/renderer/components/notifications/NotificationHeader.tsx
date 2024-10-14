@@ -25,13 +25,13 @@ export const NotificationHeader: FC<INotificationHeader> = ({
     groupByDate && (
       <Tooltip text={`View repository: ${repoSlug}`} direction="se">
         <Link
-          aria-label="view-repository"
           muted
           onClick={(event: MouseEvent<HTMLElement>) => {
             // Don't trigger onClick of parent element.
             event.stopPropagation();
             openRepository(notification.repository);
           }}
+          data-testid="view-repository"
         >
           <Stack direction="horizontal" align="center" gap="condensed">
             <Avatar src={repoAvatarUrl} size={Size.SMALL} />

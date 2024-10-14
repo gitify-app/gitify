@@ -93,6 +93,7 @@ export const FiltersRoute: FC = () => {
           <Button
             leadingVisual={FilterRemoveIcon}
             onClick={() => clearFilters()}
+            data-testid="filters-clear"
           >
             Clear filters
           </Button>

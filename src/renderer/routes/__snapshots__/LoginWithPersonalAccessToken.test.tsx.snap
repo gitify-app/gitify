@@ -23,6 +23,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             data-component="IconButton"
             data-loading="false"
             data-no-visuals="true"
+            data-testid="header-nav-back"
             sx="[object Object]"
             type="button"
           >
@@ -85,9 +86,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
       <div
         class="px-8"
       >
-        <form
-          class="Box-sc-g0xbh4-0"
-        >
+        <form>
           <div
             class="mb-4"
           >
@@ -136,6 +135,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                     class="types__StyledButton-sc-ws60qy-0 bBRiTk"
                     data-loading="false"
                     data-size="small"
+                    data-testid="login-create-token"
                     sx="[object Object]"
                     type="button"
                   >
@@ -222,6 +222,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 class="types__StyledButton-sc-ws60qy-0 bBRiTk"
                 data-loading="false"
                 data-size="small"
+                data-testid="login-docs"
                 sx="[object Object]"
                 type="button"
               >
@@ -268,6 +269,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                 aria-describedby=":r6:-loading-announcement"
                 class="types__StyledButton-sc-ws60qy-0 bBXWFS"
                 data-loading="false"
+                data-testid="login-submit"
                 disabled=""
                 sx="[object Object]"
                 type="submit"
@@ -329,6 +331,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
           data-component="IconButton"
           data-loading="false"
           data-no-visuals="true"
+          data-testid="header-nav-back"
           sx="[object Object]"
           type="button"
         >
@@ -391,9 +394,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
     <div
       class="px-8"
     >
-      <form
-        class="Box-sc-g0xbh4-0"
-      >
+      <form>
         <div
           class="mb-4"
         >
@@ -442,6 +443,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
                   class="types__StyledButton-sc-ws60qy-0 bBRiTk"
                   data-loading="false"
                   data-size="small"
+                  data-testid="login-create-token"
                   sx="[object Object]"
                   type="button"
                 >
@@ -528,6 +530,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               class="types__StyledButton-sc-ws60qy-0 bBRiTk"
               data-loading="false"
               data-size="small"
+              data-testid="login-docs"
               sx="[object Object]"
               type="button"
             >
@@ -574,6 +577,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               aria-describedby=":r6:-loading-announcement"
               class="types__StyledButton-sc-ws60qy-0 bBXWFS"
               data-loading="false"
+              data-testid="login-submit"
               disabled=""
               sx="[object Object]"
               type="submit"

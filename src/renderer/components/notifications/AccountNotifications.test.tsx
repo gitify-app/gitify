@@ -111,7 +111,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTitle('Open Profile'));
+    fireEvent.click(screen.getByTestId('account-profile'));
 
     expect(openAccountProfileMock).toHaveBeenCalledTimes(1);
     expect(openAccountProfileMock).toHaveBeenCalledWith(mockGitHubCloudAccount);
@@ -137,7 +137,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTitle('My Issues'));
+    fireEvent.click(screen.getByTestId('account-issues'));
 
     expect(openMyIssuesMock).toHaveBeenCalledTimes(1);
     expect(openMyIssuesMock).toHaveBeenCalledWith(
@@ -165,7 +165,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTitle('My Pull Requests'));
+    fireEvent.click(screen.getByTestId('account-pull-requests'));
 
     expect(openPullRequestsMock).toHaveBeenCalledTimes(1);
     expect(openPullRequestsMock).toHaveBeenCalledWith(
@@ -189,7 +189,7 @@ describe('renderer/components/notifications/AccountNotifications.tsx', () => {
       );
     });
 
-    fireEvent.click(screen.getByTitle('Hide account notifications'));
+    fireEvent.click(screen.getByTestId('account-toggle'));
 
     const tree = render(
       <AppContext.Provider value={{ settings: mockSettings }}>

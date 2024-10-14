@@ -80,6 +80,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
                   onClick={() =>
                     openExternalLink(getNewOAuthAppURL(values.hostname))
                   }
+                  data-testid="login-create-oauth-app"
                 >
                   Create new OAuth App
                 </Button>
@@ -106,6 +107,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
               size="small"
               leadingVisual={BookIcon}
               onClick={() => openExternalLink(Constants.GITHUB_DOCS.OAUTH_URL)}
+              data-testid="login-docs"
             >
               Docs
             </Button>
@@ -117,6 +119,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
               leadingVisual={SignInIcon}
               disabled={submitting || pristine}
               type="submit"
+              data-testid="login-submit"
             >
               Login
             </Button>

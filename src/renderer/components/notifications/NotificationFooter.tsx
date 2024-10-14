@@ -34,7 +34,6 @@ export const NotificationFooter: FC<INotificationFooter> = ({
             direction="ne"
           >
             <Avatar
-              aria-label="view-profile"
               src={notification.subject.user.avatar_url}
               size={Size.SMALL}
               onClick={(event: MouseEvent<HTMLElement>) => {
@@ -42,6 +41,7 @@ export const NotificationFooter: FC<INotificationFooter> = ({
                 event.stopPropagation();
                 openUserProfile(notification.subject.user);
               }}
+              data-testid="view-profile"
             />
           </Tooltip>
         ) : (

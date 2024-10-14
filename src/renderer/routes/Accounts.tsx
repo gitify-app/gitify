@@ -89,7 +89,10 @@ export const AccountsRoute: FC = () => {
               >
                 <Stack direction="vertical" gap="none">
                   <Tooltip text="Open profile" direction="e">
-                    <Button onClick={() => openAccountProfile(account)}>
+                    <Button
+                      onClick={() => openAccountProfile(account)}
+                      data-testid="account-profile"
+                    >
                       <Stack
                         direction="horizontal"
                         gap="condensed"
@@ -106,6 +109,7 @@ export const AccountsRoute: FC = () => {
                     <Tooltip text="Open Host" direction="e">
                       <ActionList.Item
                         onSelect={() => openHost(account.hostname)}
+                        data-testid="account-host"
                       >
                         <ActionList.LeadingVisual>
                           <PlatformIcon />
@@ -117,6 +121,7 @@ export const AccountsRoute: FC = () => {
                     <Tooltip text="Open Developer Settings" direction="e">
                       <ActionList.Item
                         onSelect={() => openDeveloperSettings(account)}
+                        data-testid="account-developer-settings"
                       >
                         <ActionList.LeadingVisual>
                           <AuthMethodIcon />
@@ -135,6 +140,7 @@ export const AccountsRoute: FC = () => {
                     }
                     variant={i === 0 ? 'primary' : 'default'}
                     onClick={() => setAsPrimaryAccount(account)}
+                    data-testid="account-set-primary"
                   />
                   <IconButton
                     icon={SyncIcon}
@@ -143,12 +149,14 @@ export const AccountsRoute: FC = () => {
                       await refreshAccount(account);
                       navigate('/accounts', { replace: true });
                     }}
+                    data-testid="account-refresh"
                   />
                   <IconButton
                     icon={SignOutIcon}
                     aria-label={`Logout ${account.user.login}`}
                     variant="danger"
                     onClick={() => logoutAccount(account)}
+                    data-testid="account-logout"
                   />
                 </Stack>
               </div>
@@ -165,25 +173,34 @@ export const AccountsRoute: FC = () => {
 
           <ActionMenu.Overlay width="medium">
             <ActionList>
-              <ActionList.Item onSelect={() => loginWithGitHub()}>
+              <ActionList.Item
+                onSelect={() => loginWithGitHub()}
+                data-testid="account-add-github"
+              >
                 <ActionList.LeadingVisual>
                   <MarkGithubIcon />
                 </ActionList.LeadingVisual>
                 Login with GitHub
               </ActionList.Item>
 
-              <ActionList.Item onSelect={() => loginWithPersonalAccessToken()}>
+              <ActionList.Item
+                onSelect={() => loginWithPersonalAccessToken()}
+                data-testid="account-add-pat"
+              >
                 <ActionList.LeadingVisual>
                   <KeyIcon />
                 </ActionList.LeadingVisual>
                 Login with Personal Access Token
               </ActionList.Item>
 
-              <ActionList.Item onSelect={() => loginWithOAuthApp()}>
+              <ActionList.Item
+                onSelect={() => loginWithOAuthApp()}
+                data-testid="account-add-oauth-app"
+              >
                 <ActionList.LeadingVisual>
                   <PersonIcon />
                 </ActionList.LeadingVisual>
-                Login with OAuth App{' '}
+                Login with OAuth App
               </ActionList.Item>
             </ActionList>
           </ActionMenu.Overlay>

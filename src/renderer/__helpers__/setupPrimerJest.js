@@ -5,3 +5,9 @@ if (typeof CSS === 'undefined') {
 if (!CSS.supports) {
   CSS.supports = () => true;
 }
+
+global.ResizeObserver = class {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+};

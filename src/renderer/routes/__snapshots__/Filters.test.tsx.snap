@@ -23,6 +23,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         data-component="IconButton"
         data-loading="false"
         data-no-visuals="true"
+        data-testid="header-nav-back"
         sx="[object Object]"
         type="button"
       >
@@ -840,6 +841,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
         aria-describedby=":r3:-loading-announcement"
         class="types__StyledButton-sc-ws60qy-0 bBRiTk"
         data-loading="false"
+        data-testid="filters-clear"
         sx="[object Object]"
         type="button"
       >

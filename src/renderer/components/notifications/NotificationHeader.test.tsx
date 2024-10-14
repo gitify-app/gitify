@@ -58,7 +58,7 @@ describe('renderer/components/notifications/NotificationHeader.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByLabelText('view-repository'));
+    fireEvent.click(screen.getByTestId('view-repository'));
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
       props.notification.repository.html_url,
