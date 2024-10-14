@@ -6,6 +6,9 @@ import {
   Routes,
   useLocation,
 } from 'react-router-dom';
+
+import { BaseStyles, ThemeProvider } from '@primer/react';
+
 import { Loading } from './components/Loading';
 import { Sidebar } from './components/Sidebar';
 import { AppContext, AppProvider } from './context/App';
@@ -17,7 +20,6 @@ import { LoginWithPersonalAccessTokenRoute } from './routes/LoginWithPersonalAcc
 import { NotificationsRoute } from './routes/Notifications';
 import { SettingsRoute } from './routes/Settings';
 
-import { BaseStyles, ThemeProvider } from '@primer/react';
 import './App.css';
 
 function RequireAuth({ children }) {

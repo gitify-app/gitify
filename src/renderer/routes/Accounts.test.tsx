@@ -6,6 +6,9 @@ import {
   waitFor,
 } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+
+import { BaseStyles, ThemeProvider } from '@primer/react';
+
 import {
   mockAuth,
   mockGitHubAppAccount,
@@ -17,7 +20,6 @@ import { AppContext } from '../context/App';
 import * as apiRequests from '../utils/api/request';
 import * as comms from '../utils/comms';
 import * as links from '../utils/links';
-
 import { AccountsRoute } from './Accounts';
 
 const mockNavigate = jest.fn();
@@ -243,17 +245,21 @@ describe('renderer/routes/Accounts.tsx', () => {
 
       await act(async () => {
         render(
-          <AppContext.Provider
-            value={{
-              auth: { accounts: [mockOAuthAccount] },
-              settings: mockSettings,
-              loginWithGitHubApp: mockLoginWithGitHubApp,
-            }}
-          >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
+          <ThemeProvider>
+            <BaseStyles>
+              <AppContext.Provider
+                value={{
+                  auth: { accounts: [mockOAuthAccount] },
+                  settings: mockSettings,
+                  loginWithGitHubApp: mockLoginWithGitHubApp,
+                }}
+              >
+                <MemoryRouter>
+                  <AccountsRoute />
+                </MemoryRouter>
+              </AppContext.Provider>
+            </BaseStyles>
+          </ThemeProvider>,
         );
       });
 
@@ -266,16 +272,20 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('should show login with personal access token', async () => {
       await act(async () => {
         render(
-          <AppContext.Provider
-            value={{
-              auth: { accounts: [mockOAuthAccount] },
-              settings: mockSettings,
-            }}
-          >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
+          <ThemeProvider>
+            <BaseStyles>
+              <AppContext.Provider
+                value={{
+                  auth: { accounts: [mockOAuthAccount] },
+                  settings: mockSettings,
+                }}
+              >
+                <MemoryRouter>
+                  <AccountsRoute />
+                </MemoryRouter>
+              </AppContext.Provider>
+            </BaseStyles>
+          </ThemeProvider>,
         );
       });
 
@@ -294,16 +304,20 @@ describe('renderer/routes/Accounts.tsx', () => {
     it('should show login with oauth app', async () => {
       await act(async () => {
         render(
-          <AppContext.Provider
-            value={{
-              auth: { accounts: [mockPersonalAccessTokenAccount] },
-              settings: mockSettings,
-            }}
-          >
-            <MemoryRouter>
-              <AccountsRoute />
-            </MemoryRouter>
-          </AppContext.Provider>,
+          <ThemeProvider>
+            <BaseStyles>
+              <AppContext.Provider
+                value={{
+                  auth: { accounts: [mockPersonalAccessTokenAccount] },
+                  settings: mockSettings,
+                }}
+              >
+                <MemoryRouter>
+                  <AccountsRoute />
+                </MemoryRouter>
+              </AppContext.Provider>
+            </BaseStyles>
+          </ThemeProvider>,
         );
       });
 
