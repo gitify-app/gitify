@@ -11,8 +11,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
         id=":r0:"
         role="tooltip"
       >
-        <a
-          class="Link__StyledLink-sc-14289xe-0 iOXuai"
+        <div
           data-testid="view-repository"
         >
           <div
@@ -40,7 +39,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
               gitify-app/notifications-test
             </span>
           </div>
-        </a>
+        </div>
       </span>
     </div>
   </body>,
@@ -51,8 +50,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
       id=":r0:"
       role="tooltip"
     >
-      <a
-        class="Link__StyledLink-sc-14289xe-0 iOXuai"
+      <div
         data-testid="view-repository"
       >
         <div
@@ -80,7 +78,7 @@ exports[`renderer/components/notifications/NotificationHeader.tsx should render 
             gitify-app/notifications-test
           </span>
         </div>
-      </a>
+      </div>
     </span>
   </div>,
   "debug": [Function],

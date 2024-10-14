@@ -1,7 +1,7 @@
 import type { FC, MouseEvent } from 'react';
 
 import { FeedPersonIcon, MarkGithubIcon } from '@primer/octicons-react';
-import { Avatar, Tooltip } from '@primer/react';
+import { Avatar } from '@primer/react';
 
 import { IconColor, Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
@@ -29,21 +29,17 @@ export const NotificationFooter: FC<INotificationFooter> = ({
     <div className="flex flex-wrap items-center gap-1">
       <div className="mb-1">
         {notification.subject.user ? (
-          <Tooltip
-            text={`View profile: ${notification.subject.user.login}`}
-            direction="ne"
-          >
-            <Avatar
-              src={notification.subject.user.avatar_url}
-              size={Size.SMALL}
-              onClick={(event: MouseEvent<HTMLElement>) => {
-                // Don't trigger onClick of parent element.
-                event.stopPropagation();
-                openUserProfile(notification.subject.user);
-              }}
-              data-testid="view-profile"
-            />
-          </Tooltip>
+          <Avatar
+            title={`View profile: ${notification.subject.user.login}`}
+            src={notification.subject.user.avatar_url}
+            size={Size.SMALL}
+            onClick={(event: MouseEvent<HTMLElement>) => {
+              // Don't trigger onClick of parent element.
+              event.stopPropagation();
+              openUserProfile(notification.subject.user);
+            }}
+            data-testid="view-profile"
+          />
         ) : (
           <div>
             {notification.subject.type === 'RepositoryDependabotAlertsThread' ||

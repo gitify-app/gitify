@@ -1,6 +1,6 @@
 import { type FC, type MouseEvent, useContext } from 'react';
 
-import { Avatar, Link, Stack, Tooltip } from '@primer/react';
+import { Avatar, Stack, Tooltip } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { Size } from '../../types';
@@ -24,8 +24,7 @@ export const NotificationHeader: FC<INotificationHeader> = ({
   return (
     groupByDate && (
       <Tooltip text={`View repository: ${repoSlug}`} direction="se">
-        <Link
-          muted
+        <div
           onClick={(event: MouseEvent<HTMLElement>) => {
             // Don't trigger onClick of parent element.
             event.stopPropagation();
@@ -37,7 +36,7 @@ export const NotificationHeader: FC<INotificationHeader> = ({
             <Avatar src={repoAvatarUrl} size={Size.SMALL} />
             <span className="text-xs font-medium">{repoSlug}</span>
           </Stack>
-        </Link>
+        </div>
       </Tooltip>
     )
   );

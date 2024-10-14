@@ -84,7 +84,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
           )}
           onClick={toggleAccountNotifications}
         >
-          <Tooltip text="Open profile" direction="s">
+          <Tooltip text="Open profile" direction="e">
             <Button
               variant="invisible"
               alignContent="center"
