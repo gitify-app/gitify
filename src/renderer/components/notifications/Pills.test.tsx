@@ -5,7 +5,7 @@ import type { Milestone } from '../../typesGitHub';
 import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
 import { Pills } from './Pills';
 
-describe('renderer/components/notification/Pills.tsx', () => {
+describe('renderer/components/notifications/Pills.tsx', () => {
   describe('showPills disabled', () => {
     it('should not render any pills when showPills is disabled', async () => {
       const mockNotification = mockSingleNotification;

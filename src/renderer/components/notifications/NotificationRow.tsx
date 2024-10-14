@@ -9,22 +9,22 @@ import {
 import { BellSlashIcon, CheckIcon, ReadIcon } from '@primer/octicons-react';
 import { IconButton, Octicon, Tooltip } from '@primer/react';
 
-import { AppContext } from '../context/App';
-import { Opacity, Size } from '../types';
-import type { Notification } from '../typesGitHub';
-import { cn } from '../utils/cn';
+import { AppContext } from '../../context/App';
+import { Opacity, Size } from '../../types';
+import type { Notification } from '../../typesGitHub';
+import { cn } from '../../utils/cn';
 import {
   formatForDisplay,
   isMarkAsDoneFeatureSupported,
-} from '../utils/helpers';
+} from '../../utils/helpers';
 import {
   getNotificationTypeIcon,
   getNotificationTypeIconColor,
-} from '../utils/icons';
-import { openNotification } from '../utils/links';
-import { HoverGroup } from './HoverGroup';
-import { NotificationFooter } from './notification/NotificationFooter';
-import { NotificationHeader } from './notification/NotificationHeader';
+} from '../../utils/icons';
+import { openNotification } from '../../utils/links';
+import { HoverGroup } from '../primitives/HoverGroup';
+import { NotificationFooter } from './NotificationFooter';
+import { NotificationHeader } from './NotificationHeader';
 
 interface INotificationRow {
   notification: Notification;

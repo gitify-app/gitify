@@ -6,7 +6,7 @@ import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks
 import * as comms from '../../utils/comms';
 import { NotificationHeader } from './NotificationHeader';
 
-describe('renderer/components/notification/NotificationHeader.tsx', () => {
+describe('renderer/components/notifications/NotificationHeader.tsx', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -58,7 +58,7 @@ describe('renderer/components/notification/NotificationHeader.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTitle(props.notification.repository.full_name));
+    fireEvent.click(screen.getByLabelText('view-repository'));
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
       props.notification.repository.html_url,

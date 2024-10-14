@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderer/components/NotificationRow.tsx should render itself & its children - group by date 1`] = `
+exports[`renderer/components/notifications/NotificationRow.tsx should render itself & its children - group by date 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -40,29 +40,43 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
         <div
           class="flex-1 truncate cursor-pointer"
         >
-          <div
-            class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
+          <span
+            aria-label="View repository: gitify-app/notifications-test"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-se"
+            id=":r1:"
+            role="tooltip"
           >
-            <span>
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-                data-component="Avatar"
-                height="14"
-                size="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
-                title="gitify-app/notifications-test"
-                width="14"
-              />
-            </span>
-            <span
-              class="cursor-pointer truncate opacity-90"
-              title="gitify-app/notifications-test"
+            <a
+              aria-label="view-repository"
+              class="Link__StyledLink-sc-14289xe-0 iOXuai"
             >
-              gitify-app/notifications-test
-            </span>
-          </div>
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt=""
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+                <span
+                  class="text-xs font-medium"
+                >
+                  gitify-app/notifications-test
+                </span>
+              </div>
+            </a>
+          </span>
           <div
             class="flex gap-1 items-center mb-1 truncate text-sm"
             role="main"
@@ -78,29 +92,42 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             />
           </div>
           <div
-            class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
+            class="flex flex-wrap items-center gap-1"
           >
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-              data-component="Avatar"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              title="View profile: gitify-app"
-              width="14"
-            />
             <div
+              class="mb-1"
+            >
+              <span
+                aria-label="View profile: gitify-app"
+                class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-ne"
+                id=":r2:"
+                role="tooltip"
+              >
+                <img
+                  alt=""
+                  aria-label="view-profile"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+              </span>
+            </div>
+            <span
+              class="text-xs capitalize opacity-80"
               title="You're watching the repository."
             >
               Updated
-            </div>
-            <div
+            </span>
+            <span
+              class="text-xs capitalize opacity-80"
               title="gitify-app updated 7 years ago"
             >
               7 years ago
-            </div>
+            </span>
             <div
               class="flex"
             >
@@ -164,8 +191,8 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r2:-loading-announcement"
-              aria-labelledby=":r1:"
+              aria-describedby=":r4:-loading-announcement"
+              aria-labelledby=":r3:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -193,14 +220,14 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":r1:"
+              id=":r3:"
               popover="auto"
             >
               Mark as done
             </span>
             <button
-              aria-describedby=":r4:-loading-announcement"
-              aria-labelledby=":r3:"
+              aria-describedby=":r6:-loading-announcement"
+              aria-labelledby=":r5:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -228,14 +255,14 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":r3:"
+              id=":r5:"
               popover="auto"
             >
               Mark as read
             </span>
             <button
-              aria-describedby=":r6:-loading-announcement"
-              aria-labelledby=":r5:"
+              aria-describedby=":r8:-loading-announcement"
+              aria-labelledby=":r7:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -263,7 +290,7 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":r5:"
+              id=":r7:"
               popover="auto"
             >
               Unsubscribe from thread
@@ -309,29 +336,43 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
       <div
         class="flex-1 truncate cursor-pointer"
       >
-        <div
-          class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
+        <span
+          aria-label="View repository: gitify-app/notifications-test"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-se"
+          id=":r1:"
+          role="tooltip"
         >
-          <span>
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-              data-component="Avatar"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              title="gitify-app/notifications-test"
-              width="14"
-            />
-          </span>
-          <span
-            class="cursor-pointer truncate opacity-90"
-            title="gitify-app/notifications-test"
+          <a
+            aria-label="view-repository"
+            class="Link__StyledLink-sc-14289xe-0 iOXuai"
           >
-            gitify-app/notifications-test
-          </span>
-        </div>
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <img
+                alt=""
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                data-component="Avatar"
+                height="14"
+                size="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                sx="[object Object]"
+                width="14"
+              />
+              <span
+                class="text-xs font-medium"
+              >
+                gitify-app/notifications-test
+              </span>
+            </div>
+          </a>
+        </span>
         <div
           class="flex gap-1 items-center mb-1 truncate text-sm"
           role="main"
@@ -347,29 +388,42 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           />
         </div>
         <div
-          class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
+          class="flex flex-wrap items-center gap-1"
         >
-          <img
-            alt=""
-            class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-            data-component="Avatar"
-            height="14"
-            size="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            sx="[object Object]"
-            title="View profile: gitify-app"
-            width="14"
-          />
           <div
+            class="mb-1"
+          >
+            <span
+              aria-label="View profile: gitify-app"
+              class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-ne"
+              id=":r2:"
+              role="tooltip"
+            >
+              <img
+                alt=""
+                aria-label="view-profile"
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                data-component="Avatar"
+                height="14"
+                size="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                sx="[object Object]"
+                width="14"
+              />
+            </span>
+          </div>
+          <span
+            class="text-xs capitalize opacity-80"
             title="You're watching the repository."
           >
             Updated
-          </div>
-          <div
+          </span>
+          <span
+            class="text-xs capitalize opacity-80"
             title="gitify-app updated 7 years ago"
           >
             7 years ago
-          </div>
+          </span>
           <div
             class="flex"
           >
@@ -433,8 +487,8 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r2:-loading-announcement"
-            aria-labelledby=":r1:"
+            aria-describedby=":r4:-loading-announcement"
+            aria-labelledby=":r3:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -462,14 +516,14 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":r1:"
+            id=":r3:"
             popover="auto"
           >
             Mark as done
           </span>
           <button
-            aria-describedby=":r4:-loading-announcement"
-            aria-labelledby=":r3:"
+            aria-describedby=":r6:-loading-announcement"
+            aria-labelledby=":r5:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -497,14 +551,14 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":r3:"
+            id=":r5:"
             popover="auto"
           >
             Mark as read
           </span>
           <button
-            aria-describedby=":r6:-loading-announcement"
-            aria-labelledby=":r5:"
+            aria-describedby=":r8:-loading-announcement"
+            aria-labelledby=":r7:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -532,7 +586,7 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":r5:"
+            id=":r7:"
             popover="auto"
           >
             Unsubscribe from thread
@@ -595,7 +649,7 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
 }
 `;
 
-exports[`renderer/components/NotificationRow.tsx should render itself & its children - group by repositories 1`] = `
+exports[`renderer/components/notifications/NotificationRow.tsx should render itself & its children - group by repositories 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -610,7 +664,7 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           <span
             aria-label="Open Issue"
             class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-e"
-            id=":r7:"
+            id=":r9:"
             role="tooltip"
           >
             <svg
@@ -650,29 +704,42 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             />
           </div>
           <div
-            class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
+            class="flex flex-wrap items-center gap-1"
           >
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-              data-component="Avatar"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              title="View profile: gitify-app"
-              width="14"
-            />
             <div
+              class="mb-1"
+            >
+              <span
+                aria-label="View profile: gitify-app"
+                class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-ne"
+                id=":ra:"
+                role="tooltip"
+              >
+                <img
+                  alt=""
+                  aria-label="view-profile"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+              </span>
+            </div>
+            <span
+              class="text-xs capitalize opacity-80"
               title="You're watching the repository."
             >
               Updated
-            </div>
-            <div
+            </span>
+            <span
+              class="text-xs capitalize opacity-80"
               title="gitify-app updated 7 years ago"
             >
               7 years ago
-            </div>
+            </span>
             <div
               class="flex"
             >
@@ -736,8 +803,8 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r9:-loading-announcement"
-              aria-labelledby=":r8:"
+              aria-describedby=":rc:-loading-announcement"
+              aria-labelledby=":rb:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -765,14 +832,14 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":r8:"
+              id=":rb:"
               popover="auto"
             >
               Mark as done
             </span>
             <button
-              aria-describedby=":rb:-loading-announcement"
-              aria-labelledby=":ra:"
+              aria-describedby=":re:-loading-announcement"
+              aria-labelledby=":rd:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -800,14 +867,14 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":ra:"
+              id=":rd:"
               popover="auto"
             >
               Mark as read
             </span>
             <button
-              aria-describedby=":rd:-loading-announcement"
-              aria-labelledby=":rc:"
+              aria-describedby=":rg:-loading-announcement"
+              aria-labelledby=":rf:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -835,7 +902,7 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":rc:"
+              id=":rf:"
               popover="auto"
             >
               Unsubscribe from thread
@@ -856,7 +923,7 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
         <span
           aria-label="Open Issue"
           class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-e"
-          id=":r7:"
+          id=":r9:"
           role="tooltip"
         >
           <svg
@@ -896,29 +963,42 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           />
         </div>
         <div
-          class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
+          class="flex flex-wrap items-center gap-1"
         >
-          <img
-            alt=""
-            class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-            data-component="Avatar"
-            height="14"
-            size="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            sx="[object Object]"
-            title="View profile: gitify-app"
-            width="14"
-          />
           <div
+            class="mb-1"
+          >
+            <span
+              aria-label="View profile: gitify-app"
+              class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-ne"
+              id=":ra:"
+              role="tooltip"
+            >
+              <img
+                alt=""
+                aria-label="view-profile"
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                data-component="Avatar"
+                height="14"
+                size="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                sx="[object Object]"
+                width="14"
+              />
+            </span>
+          </div>
+          <span
+            class="text-xs capitalize opacity-80"
             title="You're watching the repository."
           >
             Updated
-          </div>
-          <div
+          </span>
+          <span
+            class="text-xs capitalize opacity-80"
             title="gitify-app updated 7 years ago"
           >
             7 years ago
-          </div>
+          </span>
           <div
             class="flex"
           >
@@ -982,8 +1062,8 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r9:-loading-announcement"
-            aria-labelledby=":r8:"
+            aria-describedby=":rc:-loading-announcement"
+            aria-labelledby=":rb:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -1011,14 +1091,14 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":r8:"
+            id=":rb:"
             popover="auto"
           >
             Mark as done
           </span>
           <button
-            aria-describedby=":rb:-loading-announcement"
-            aria-labelledby=":ra:"
+            aria-describedby=":re:-loading-announcement"
+            aria-labelledby=":rd:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -1046,14 +1126,14 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":ra:"
+            id=":rd:"
             popover="auto"
           >
             Mark as read
           </span>
           <button
-            aria-describedby=":rd:-loading-announcement"
-            aria-labelledby=":rc:"
+            aria-describedby=":rg:-loading-announcement"
+            aria-labelledby=":rf:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -1081,7 +1161,7 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":rc:"
+            id=":rf:"
             popover="auto"
           >
             Unsubscribe from thread
@@ -1144,7 +1224,7 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
 }
 `;
 
-exports[`renderer/components/NotificationRow.tsx should render itself & its children - hide numbers 1`] = `
+exports[`renderer/components/notifications/NotificationRow.tsx should render itself & its children - hide numbers 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -1159,7 +1239,7 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           <span
             aria-label="Open Issue"
             class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-e"
-            id=":re:"
+            id=":rh:"
             role="tooltip"
           >
             <svg
@@ -1199,29 +1279,42 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             />
           </div>
           <div
-            class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
+            class="flex flex-wrap items-center gap-1"
           >
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-              data-component="Avatar"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              title="View profile: gitify-app"
-              width="14"
-            />
             <div
+              class="mb-1"
+            >
+              <span
+                aria-label="View profile: gitify-app"
+                class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-ne"
+                id=":ri:"
+                role="tooltip"
+              >
+                <img
+                  alt=""
+                  aria-label="view-profile"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+              </span>
+            </div>
+            <span
+              class="text-xs capitalize opacity-80"
               title="You're watching the repository."
             >
               Updated
-            </div>
-            <div
+            </span>
+            <span
+              class="text-xs capitalize opacity-80"
               title="gitify-app updated 7 years ago"
             >
               7 years ago
-            </div>
+            </span>
             <div
               class="flex"
             >
@@ -1285,8 +1378,8 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":rg:-loading-announcement"
-              aria-labelledby=":rf:"
+              aria-describedby=":rk:-loading-announcement"
+              aria-labelledby=":rj:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -1314,14 +1407,14 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":rf:"
+              id=":rj:"
               popover="auto"
             >
               Mark as done
             </span>
             <button
-              aria-describedby=":ri:-loading-announcement"
-              aria-labelledby=":rh:"
+              aria-describedby=":rm:-loading-announcement"
+              aria-labelledby=":rl:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -1349,14 +1442,14 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":rh:"
+              id=":rl:"
               popover="auto"
             >
               Mark as read
             </span>
             <button
-              aria-describedby=":rk:-loading-announcement"
-              aria-labelledby=":rj:"
+              aria-describedby=":ro:-loading-announcement"
+              aria-labelledby=":rn:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -1384,7 +1477,7 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":rj:"
+              id=":rn:"
               popover="auto"
             >
               Unsubscribe from thread
@@ -1405,7 +1498,7 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
         <span
           aria-label="Open Issue"
           class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-e"
-          id=":re:"
+          id=":rh:"
           role="tooltip"
         >
           <svg
@@ -1445,29 +1538,42 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           />
         </div>
         <div
-          class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
+          class="flex flex-wrap items-center gap-1"
         >
-          <img
-            alt=""
-            class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-            data-component="Avatar"
-            height="14"
-            size="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            sx="[object Object]"
-            title="View profile: gitify-app"
-            width="14"
-          />
           <div
+            class="mb-1"
+          >
+            <span
+              aria-label="View profile: gitify-app"
+              class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-ne"
+              id=":ri:"
+              role="tooltip"
+            >
+              <img
+                alt=""
+                aria-label="view-profile"
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                data-component="Avatar"
+                height="14"
+                size="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                sx="[object Object]"
+                width="14"
+              />
+            </span>
+          </div>
+          <span
+            class="text-xs capitalize opacity-80"
             title="You're watching the repository."
           >
             Updated
-          </div>
-          <div
+          </span>
+          <span
+            class="text-xs capitalize opacity-80"
             title="gitify-app updated 7 years ago"
           >
             7 years ago
-          </div>
+          </span>
           <div
             class="flex"
           >
@@ -1531,8 +1637,8 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":rg:-loading-announcement"
-            aria-labelledby=":rf:"
+            aria-describedby=":rk:-loading-announcement"
+            aria-labelledby=":rj:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -1560,14 +1666,14 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":rf:"
+            id=":rj:"
             popover="auto"
           >
             Mark as done
           </span>
           <button
-            aria-describedby=":ri:-loading-announcement"
-            aria-labelledby=":rh:"
+            aria-describedby=":rm:-loading-announcement"
+            aria-labelledby=":rl:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -1595,14 +1701,14 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":rh:"
+            id=":rl:"
             popover="auto"
           >
             Mark as read
           </span>
           <button
-            aria-describedby=":rk:-loading-announcement"
-            aria-labelledby=":rj:"
+            aria-describedby=":ro:-loading-announcement"
+            aria-labelledby=":rn:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -1630,7 +1736,7 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":rj:"
+            id=":rn:"
             popover="auto"
           >
             Unsubscribe from thread

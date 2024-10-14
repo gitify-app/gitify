@@ -1,5 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[` 1`] = `
+{
+  "$$typeof": Symbol(react.forward_ref),
+  "render": [Function],
+}
+`;
+
+exports[` 2`] = `
+{
+  "$$typeof": Symbol(react.forward_ref),
+  "render": [Function],
+}
+`;
+
+exports[` 3`] = `
+{
+  "$$typeof": Symbol(react.forward_ref),
+  "render": [Function],
+}
+`;
+
+exports[` 4`] = `
+{
+  "$$typeof": Symbol(react.forward_ref),
+  "render": [Function],
+}
+`;
+
+exports[` 5`] = `
+{
+  "$$typeof": Symbol(react.forward_ref),
+  "render": [Function],
+}
+`;
+
 exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for check suite 1`] = `"text-gray-500 dark:text-gray-300"`;
 
 exports[`renderer/utils/icons.ts getNotificationTypeIconColor should format the notification color for check suite 2`] = `"text-red-500"`;

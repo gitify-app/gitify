@@ -1,16 +1,19 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { mockGitHubCloudAccount, mockSettings } from '../__mocks__/state-mocks';
-import { AppContext } from '../context/App';
-import type { Link } from '../types';
-import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
-import * as comms from '../utils/comms';
+import {
+  mockGitHubCloudAccount,
+  mockSettings,
+} from '../../__mocks__/state-mocks';
+import { AppContext } from '../../context/App';
+import type { Link } from '../../types';
+import { mockGitHubNotifications } from '../../utils/api/__mocks__/response-mocks';
+import * as comms from '../../utils/comms';
 import { RepositoryNotifications } from './RepositoryNotifications';
 
 jest.mock('./NotificationRow', () => ({
   NotificationRow: () => <div>NotificationRow</div>,
 }));
 
-describe('renderer/components/RepositoryNotifications.tsx', () => {
+describe('renderer/components/notifications/RepositoryNotifications.tsx', () => {
   const markNotificationsAsRead = jest.fn();
   const markNotificationsAsDone = jest.fn();
 

@@ -22,7 +22,7 @@ import { setTheme } from '../../utils/theme';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
-import { Legend } from './Legend';
+import { Legend } from '../primitives/Legend';
 
 let timeout: NodeJS.Timeout;
 const DELAY = 200;

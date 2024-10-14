@@ -3,16 +3,16 @@ import {
   mockAuth,
   mockGitHubCloudAccount,
   mockSettings,
-} from '../__mocks__/state-mocks';
-import { AppContext } from '../context/App';
-import { GroupBy, type Link } from '../types';
-import type { UserType } from '../typesGitHub';
-import { mockSingleNotification } from '../utils/api/__mocks__/response-mocks';
-import * as comms from '../utils/comms';
-import * as links from '../utils/links';
+} from '../../__mocks__/state-mocks';
+import { AppContext } from '../../context/App';
+import { GroupBy, type Link } from '../../types';
+import type { UserType } from '../../typesGitHub';
+import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks';
+import * as comms from '../../utils/comms';
+import * as links from '../../utils/links';
 import { NotificationRow } from './NotificationRow';
 
-describe('renderer/components/NotificationRow.tsx', () => {
+describe('renderer/components/notifications/NotificationRow.tsx', () => {
   jest.spyOn(links, 'openNotification');
   jest.spyOn(comms, 'openExternalLink').mockImplementation();
 

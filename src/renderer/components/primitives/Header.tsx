@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { ArrowLeftIcon, type Icon } from '@primer/octicons-react';
 
 import { Heading, IconButton, Octicon, Stack } from '@primer/react';
-import { AppContext } from '../context/App';
-import { Size } from '../types';
+import { AppContext } from '../../context/App';
+import { Size } from '../../types';
 
 interface IHeader {
   icon: Icon;

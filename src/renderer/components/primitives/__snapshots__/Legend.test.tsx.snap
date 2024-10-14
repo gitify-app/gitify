@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderer/routes/components/settings/Legend.tsx should render the legend 1`] = `
+exports[`renderer/routes/components/primitives/Legend.tsx should render the legend 1`] = `
 <div>
   <legend
     class="mb-1 mt-2 font-semibold flex items-center"

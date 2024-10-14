@@ -8,9 +8,9 @@ import {
 } from '@primer/octicons-react';
 import { Button, Tooltip } from '@primer/react';
 
-import { Header } from '../components/Header';
 import { Checkbox } from '../components/fields/Checkbox';
-import { Legend } from '../components/settings/Legend';
+import { Header } from '../components/primitives/Header';
+import { Legend } from '../components/primitives/Legend';
 import { AppContext } from '../context/App';
 import type { Reason } from '../typesGitHub';
 import { FORMATTED_REASONS, formatReason } from '../utils/reason';

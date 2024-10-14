@@ -1,11 +1,10 @@
 import { type FC, type MouseEvent, useContext } from 'react';
 
-import { Avatar } from '@primer/react';
+import { Avatar, Link, Stack, Tooltip } from '@primer/react';
 
 import { AppContext } from '../../context/App';
-import { Opacity, Size } from '../../types';
+import { Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
-import { cn } from '../../utils/cn';
 import { openRepository } from '../../utils/links';
 
 interface INotificationHeader {
@@ -24,27 +23,22 @@ export const NotificationHeader: FC<INotificationHeader> = ({
 
   return (
     groupByDate && (
-      <div
-        className={cn(
-          'mb-1 flex items-center gap-1 text-xs font-medium',
-          Opacity.MEDIUM,
-        )}
-      >
-        <span>
-          <Avatar src={repoAvatarUrl} title={repoSlug} size={Size.SMALL} />
-        </span>
-        <span
-          title={repoSlug}
-          className="cursor-pointer truncate opacity-90"
+      <Tooltip text={`View repository: ${repoSlug}`} direction="se">
+        <Link
+          aria-label="view-repository"
+          muted
           onClick={(event: MouseEvent<HTMLElement>) => {
             // Don't trigger onClick of parent element.
             event.stopPropagation();
             openRepository(notification.repository);
           }}
         >
-          {repoSlug}
-        </span>
-      </div>
+          <Stack direction="horizontal" align="center" gap="condensed">
+            <Avatar src={repoAvatarUrl} size={Size.SMALL} />
+            <span className="text-xs font-medium">{repoSlug}</span>
+          </Stack>
+        </Link>
+      </Tooltip>
     )
   );
 };

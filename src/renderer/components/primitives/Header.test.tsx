@@ -1,6 +1,6 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
 import { fireEvent, render, screen } from '@testing-library/react';
-import { AppContext } from '../context/App';
+import { AppContext } from '../../context/App';
 import { Header } from './Header';
 
 const mockNavigate = jest.fn();
@@ -9,7 +9,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockNavigate,
 }));
 
-describe('renderer/components/Header.tsx', () => {
+describe('renderer/components/primitives/Header.tsx', () => {
   const fetchNotifications = jest.fn();
 
   afterEach(() => {

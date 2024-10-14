@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderer/components/AccountNotifications.tsx should render itself - account error 1`] = `
+exports[`renderer/components/notifications/AccountNotifications.tsx should render itself - account error 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -11,11 +11,11 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
         <span
           aria-label="Open profile"
           class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-s"
-          id=":r16:"
+          id=":r19:"
           role="tooltip"
         >
           <button
-            aria-describedby=":r17:-loading-announcement"
+            aria-describedby=":r1a:-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-loading="false"
             data-no-visuals="true"
@@ -94,8 +94,8 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r19:-loading-announcement"
-              aria-labelledby=":r18:"
+              aria-describedby=":r1c:-loading-announcement"
+              aria-labelledby=":r1b:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -126,14 +126,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":r18:"
+              id=":r1b:"
               popover="auto"
             >
               My Issues
             </span>
             <button
-              aria-describedby=":r1b:-loading-announcement"
-              aria-labelledby=":r1a:"
+              aria-describedby=":r1e:-loading-announcement"
+              aria-labelledby=":r1d:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -161,14 +161,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":r1a:"
+              id=":r1d:"
               popover="auto"
             >
               My Pull Requests
             </span>
             <button
-              aria-describedby=":r1d:-loading-announcement"
-              aria-labelledby=":r1c:"
+              aria-describedby=":r1g:-loading-announcement"
+              aria-labelledby=":r1f:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -196,7 +196,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":r1c:"
+              id=":r1f:"
               popover="auto"
             >
               No notifications for account
@@ -248,11 +248,11 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
       <span
         aria-label="Open profile"
         class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-s"
-        id=":r16:"
+        id=":r19:"
         role="tooltip"
       >
         <button
-          aria-describedby=":r17:-loading-announcement"
+          aria-describedby=":r1a:-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 ggqBNv"
           data-loading="false"
           data-no-visuals="true"
@@ -331,8 +331,8 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r19:-loading-announcement"
-            aria-labelledby=":r18:"
+            aria-describedby=":r1c:-loading-announcement"
+            aria-labelledby=":r1b:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -363,14 +363,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":r18:"
+            id=":r1b:"
             popover="auto"
           >
             My Issues
           </span>
           <button
-            aria-describedby=":r1b:-loading-announcement"
-            aria-labelledby=":r1a:"
+            aria-describedby=":r1e:-loading-announcement"
+            aria-labelledby=":r1d:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -398,14 +398,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":r1a:"
+            id=":r1d:"
             popover="auto"
           >
             My Pull Requests
           </span>
           <button
-            aria-describedby=":r1d:-loading-announcement"
-            aria-labelledby=":r1c:"
+            aria-describedby=":r1g:-loading-announcement"
+            aria-labelledby=":r1f:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -433,7 +433,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":r1c:"
+            id=":r1f:"
             popover="auto"
           >
             No notifications for account
@@ -531,7 +531,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
 }
 `;
 
-exports[`renderer/components/AccountNotifications.tsx should render itself - group notifications by date 1`] = `
+exports[`renderer/components/notifications/AccountNotifications.tsx should render itself - group notifications by date 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -770,29 +770,43 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
         <div
           class="flex-1 truncate cursor-pointer"
         >
-          <div
-            class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
+          <span
+            aria-label="View repository: gitify-app/notifications-test"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-se"
+            id=":rh:"
+            role="tooltip"
           >
-            <span>
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-                data-component="Avatar"
-                height="14"
-                size="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
-                title="gitify-app/notifications-test"
-                width="14"
-              />
-            </span>
-            <span
-              class="cursor-pointer truncate opacity-90"
-              title="gitify-app/notifications-test"
+            <a
+              aria-label="view-repository"
+              class="Link__StyledLink-sc-14289xe-0 iOXuai"
             >
-              gitify-app/notifications-test
-            </span>
-          </div>
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt=""
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+                <span
+                  class="text-xs font-medium"
+                >
+                  gitify-app/notifications-test
+                </span>
+              </div>
+            </a>
+          </span>
           <div
             class="flex gap-1 items-center mb-1 truncate text-sm"
             role="main"
@@ -808,29 +822,42 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             />
           </div>
           <div
-            class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
+            class="flex flex-wrap items-center gap-1"
           >
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-              data-component="Avatar"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              title="View profile: gitify-app"
-              width="14"
-            />
             <div
+              class="mb-1"
+            >
+              <span
+                aria-label="View profile: gitify-app"
+                class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-ne"
+                id=":ri:"
+                role="tooltip"
+              >
+                <img
+                  alt=""
+                  aria-label="view-profile"
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+              </span>
+            </div>
+            <span
+              class="text-xs capitalize opacity-80"
               title="You're watching the repository."
             >
               Updated
-            </div>
-            <div
+            </span>
+            <span
+              class="text-xs capitalize opacity-80"
               title="gitify-app updated 7 years ago"
             >
               7 years ago
-            </div>
+            </span>
             <div
               class="flex"
             >
@@ -894,8 +921,8 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":ri:-loading-announcement"
-              aria-labelledby=":rh:"
+              aria-describedby=":rk:-loading-announcement"
+              aria-labelledby=":rj:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -923,14 +950,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":rh:"
+              id=":rj:"
               popover="auto"
             >
               Mark as done
             </span>
             <button
-              aria-describedby=":rk:-loading-announcement"
-              aria-labelledby=":rj:"
+              aria-describedby=":rm:-loading-announcement"
+              aria-labelledby=":rl:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -958,14 +985,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":rj:"
+              id=":rl:"
               popover="auto"
             >
               Mark as read
             </span>
             <button
-              aria-describedby=":rm:-loading-announcement"
-              aria-labelledby=":rl:"
+              aria-describedby=":ro:-loading-announcement"
+              aria-labelledby=":rn:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -993,7 +1020,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":rl:"
+              id=":rn:"
               popover="auto"
             >
               Unsubscribe from thread
@@ -1011,7 +1038,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <span
             aria-label=" Issue"
             class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-e"
-            id=":rn:"
+            id=":rp:"
             role="tooltip"
           >
             <svg
@@ -1036,29 +1063,43 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
         <div
           class="flex-1 truncate cursor-pointer"
         >
-          <div
-            class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
+          <span
+            aria-label="View repository: gitify-app/notifications-test"
+            class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-se"
+            id=":rq:"
+            role="tooltip"
           >
-            <span>
-              <img
-                alt=""
-                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-                data-component="Avatar"
-                height="14"
-                size="14"
-                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-                sx="[object Object]"
-                title="gitify-app/notifications-test"
-                width="14"
-              />
-            </span>
-            <span
-              class="cursor-pointer truncate opacity-90"
-              title="gitify-app/notifications-test"
+            <a
+              aria-label="view-repository"
+              class="Link__StyledLink-sc-14289xe-0 iOXuai"
             >
-              gitify-app/notifications-test
-            </span>
-          </div>
+              <div
+                class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+                data-align="center"
+                data-direction="horizontal"
+                data-gap="condensed"
+                data-justify="start"
+                data-padding="none"
+                data-wrap="nowrap"
+              >
+                <img
+                  alt=""
+                  class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                  data-component="Avatar"
+                  height="14"
+                  size="14"
+                  src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                  sx="[object Object]"
+                  width="14"
+                />
+                <span
+                  class="text-xs font-medium"
+                >
+                  gitify-app/notifications-test
+                </span>
+              </div>
+            </a>
+          </span>
           <div
             class="flex gap-1 items-center mb-1 truncate text-sm"
             role="main"
@@ -1074,34 +1115,40 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             />
           </div>
           <div
-            class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
+            class="flex flex-wrap items-center gap-1"
           >
-            <div>
-              <svg
-                aria-hidden="true"
-                class="text-gray-500 dark:text-gray-300"
-                fill="currentColor"
-                focusable="false"
-                height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                viewBox="0 0 16 16"
-                width="16"
-              >
-                <path
-                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                />
-              </svg>
-            </div>
             <div
+              class="mb-1"
+            >
+              <div>
+                <svg
+                  aria-hidden="true"
+                  class="text-gray-500 dark:text-gray-300"
+                  fill="currentColor"
+                  focusable="false"
+                  height="14"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  viewBox="0 0 16 16"
+                  width="14"
+                >
+                  <path
+                    d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <span
+              class="text-xs capitalize opacity-80"
               title="You created the thread."
             >
               Authored
-            </div>
-            <div
+            </span>
+            <span
+              class="text-xs capitalize opacity-80"
               title="Updated 7 years ago"
             >
               7 years ago
-            </div>
+            </span>
             <div
               class="flex"
             />
@@ -1120,8 +1167,8 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":rp:-loading-announcement"
-              aria-labelledby=":ro:"
+              aria-describedby=":rs:-loading-announcement"
+              aria-labelledby=":rr:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -1149,14 +1196,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":ro:"
+              id=":rr:"
               popover="auto"
             >
               Mark as done
             </span>
             <button
-              aria-describedby=":rr:-loading-announcement"
-              aria-labelledby=":rq:"
+              aria-describedby=":ru:-loading-announcement"
+              aria-labelledby=":rt:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -1184,14 +1231,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":rq:"
+              id=":rt:"
               popover="auto"
             >
               Mark as read
             </span>
             <button
-              aria-describedby=":rt:-loading-announcement"
-              aria-labelledby=":rs:"
+              aria-describedby=":r10:-loading-announcement"
+              aria-labelledby=":rv:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -1219,7 +1266,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":rs:"
+              id=":rv:"
               popover="auto"
             >
               Unsubscribe from thread
@@ -1464,29 +1511,43 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
       <div
         class="flex-1 truncate cursor-pointer"
       >
-        <div
-          class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
+        <span
+          aria-label="View repository: gitify-app/notifications-test"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-se"
+          id=":rh:"
+          role="tooltip"
         >
-          <span>
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-              data-component="Avatar"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              title="gitify-app/notifications-test"
-              width="14"
-            />
-          </span>
-          <span
-            class="cursor-pointer truncate opacity-90"
-            title="gitify-app/notifications-test"
+          <a
+            aria-label="view-repository"
+            class="Link__StyledLink-sc-14289xe-0 iOXuai"
           >
-            gitify-app/notifications-test
-          </span>
-        </div>
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <img
+                alt=""
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                data-component="Avatar"
+                height="14"
+                size="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                sx="[object Object]"
+                width="14"
+              />
+              <span
+                class="text-xs font-medium"
+              >
+                gitify-app/notifications-test
+              </span>
+            </div>
+          </a>
+        </span>
         <div
           class="flex gap-1 items-center mb-1 truncate text-sm"
           role="main"
@@ -1502,29 +1563,42 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           />
         </div>
         <div
-          class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
+          class="flex flex-wrap items-center gap-1"
         >
-          <img
-            alt=""
-            class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-            data-component="Avatar"
-            height="14"
-            size="14"
-            src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-            sx="[object Object]"
-            title="View profile: gitify-app"
-            width="14"
-          />
           <div
+            class="mb-1"
+          >
+            <span
+              aria-label="View profile: gitify-app"
+              class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-ne"
+              id=":ri:"
+              role="tooltip"
+            >
+              <img
+                alt=""
+                aria-label="view-profile"
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                data-component="Avatar"
+                height="14"
+                size="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                sx="[object Object]"
+                width="14"
+              />
+            </span>
+          </div>
+          <span
+            class="text-xs capitalize opacity-80"
             title="You're watching the repository."
           >
             Updated
-          </div>
-          <div
+          </span>
+          <span
+            class="text-xs capitalize opacity-80"
             title="gitify-app updated 7 years ago"
           >
             7 years ago
-          </div>
+          </span>
           <div
             class="flex"
           >
@@ -1588,8 +1662,8 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":ri:-loading-announcement"
-            aria-labelledby=":rh:"
+            aria-describedby=":rk:-loading-announcement"
+            aria-labelledby=":rj:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -1617,14 +1691,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":rh:"
+            id=":rj:"
             popover="auto"
           >
             Mark as done
           </span>
           <button
-            aria-describedby=":rk:-loading-announcement"
-            aria-labelledby=":rj:"
+            aria-describedby=":rm:-loading-announcement"
+            aria-labelledby=":rl:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -1652,14 +1726,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":rj:"
+            id=":rl:"
             popover="auto"
           >
             Mark as read
           </span>
           <button
-            aria-describedby=":rm:-loading-announcement"
-            aria-labelledby=":rl:"
+            aria-describedby=":ro:-loading-announcement"
+            aria-labelledby=":rn:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -1687,7 +1761,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":rl:"
+            id=":rn:"
             popover="auto"
           >
             Unsubscribe from thread
@@ -1705,7 +1779,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
         <span
           aria-label=" Issue"
           class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-e"
-          id=":rn:"
+          id=":rp:"
           role="tooltip"
         >
           <svg
@@ -1730,29 +1804,43 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
       <div
         class="flex-1 truncate cursor-pointer"
       >
-        <div
-          class="mb-1 flex items-center gap-1 text-xs font-medium opacity-80"
+        <span
+          aria-label="View repository: gitify-app/notifications-test"
+          class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-se"
+          id=":rq:"
+          role="tooltip"
         >
-          <span>
-            <img
-              alt=""
-              class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
-              data-component="Avatar"
-              height="14"
-              size="14"
-              src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
-              sx="[object Object]"
-              title="gitify-app/notifications-test"
-              width="14"
-            />
-          </span>
-          <span
-            class="cursor-pointer truncate opacity-90"
-            title="gitify-app/notifications-test"
+          <a
+            aria-label="view-repository"
+            class="Link__StyledLink-sc-14289xe-0 iOXuai"
           >
-            gitify-app/notifications-test
-          </span>
-        </div>
+            <div
+              class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
+              data-align="center"
+              data-direction="horizontal"
+              data-gap="condensed"
+              data-justify="start"
+              data-padding="none"
+              data-wrap="nowrap"
+            >
+              <img
+                alt=""
+                class="Avatar__StyledAvatar-sc-2lv0r8-0 eDEFRX"
+                data-component="Avatar"
+                height="14"
+                size="14"
+                src="https://avatars.githubusercontent.com/u/133795385?s=200&v=4"
+                sx="[object Object]"
+                width="14"
+              />
+              <span
+                class="text-xs font-medium"
+              >
+                gitify-app/notifications-test
+              </span>
+            </div>
+          </a>
+        </span>
         <div
           class="flex gap-1 items-center mb-1 truncate text-sm"
           role="main"
@@ -1768,34 +1856,40 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           />
         </div>
         <div
-          class="flex flex-wrap items-center gap-1 text-xs capitalize opacity-80"
+          class="flex flex-wrap items-center gap-1"
         >
-          <div>
-            <svg
-              aria-hidden="true"
-              class="text-gray-500 dark:text-gray-300"
-              fill="currentColor"
-              focusable="false"
-              height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-              viewBox="0 0 16 16"
-              width="16"
-            >
-              <path
-                d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-              />
-            </svg>
-          </div>
           <div
+            class="mb-1"
+          >
+            <div>
+              <svg
+                aria-hidden="true"
+                class="text-gray-500 dark:text-gray-300"
+                fill="currentColor"
+                focusable="false"
+                height="14"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                viewBox="0 0 16 16"
+                width="14"
+              >
+                <path
+                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+                />
+              </svg>
+            </div>
+          </div>
+          <span
+            class="text-xs capitalize opacity-80"
             title="You created the thread."
           >
             Authored
-          </div>
-          <div
+          </span>
+          <span
+            class="text-xs capitalize opacity-80"
             title="Updated 7 years ago"
           >
             7 years ago
-          </div>
+          </span>
           <div
             class="flex"
           />
@@ -1814,8 +1908,8 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":rp:-loading-announcement"
-            aria-labelledby=":ro:"
+            aria-describedby=":rs:-loading-announcement"
+            aria-labelledby=":rr:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -1843,14 +1937,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":ro:"
+            id=":rr:"
             popover="auto"
           >
             Mark as done
           </span>
           <button
-            aria-describedby=":rr:-loading-announcement"
-            aria-labelledby=":rq:"
+            aria-describedby=":ru:-loading-announcement"
+            aria-labelledby=":rt:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -1878,14 +1972,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":rq:"
+            id=":rt:"
             popover="auto"
           >
             Mark as read
           </span>
           <button
-            aria-describedby=":rt:-loading-announcement"
-            aria-labelledby=":rs:"
+            aria-describedby=":r10:-loading-announcement"
+            aria-labelledby=":rv:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -1913,7 +2007,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":rs:"
+            id=":rv:"
             popover="auto"
           >
             Unsubscribe from thread
@@ -1976,7 +2070,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
 }
 `;
 
-exports[`renderer/components/AccountNotifications.tsx should render itself - group notifications by repositories 1`] = `
+exports[`renderer/components/notifications/AccountNotifications.tsx should render itself - group notifications by repositories 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -2443,7 +2537,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
 }
 `;
 
-exports[`renderer/components/AccountNotifications.tsx should render itself - no notifications 1`] = `
+exports[`renderer/components/notifications/AccountNotifications.tsx should render itself - no notifications 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -2454,11 +2548,11 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
         <span
           aria-label="Open profile"
           class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-s"
-          id=":ru:"
+          id=":r11:"
           role="tooltip"
         >
           <button
-            aria-describedby=":rv:-loading-announcement"
+            aria-describedby=":r12:-loading-announcement"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-loading="false"
             data-no-visuals="true"
@@ -2537,8 +2631,8 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
             data-wrap="nowrap"
           >
             <button
-              aria-describedby=":r11:-loading-announcement"
-              aria-labelledby=":r10:"
+              aria-describedby=":r14:-loading-announcement"
+              aria-labelledby=":r13:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -2569,14 +2663,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":r10:"
+              id=":r13:"
               popover="auto"
             >
               My Issues
             </span>
             <button
-              aria-describedby=":r13:-loading-announcement"
-              aria-labelledby=":r12:"
+              aria-describedby=":r16:-loading-announcement"
+              aria-labelledby=":r15:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -2604,14 +2698,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":r12:"
+              id=":r15:"
               popover="auto"
             >
               My Pull Requests
             </span>
             <button
-              aria-describedby=":r15:-loading-announcement"
-              aria-labelledby=":r14:"
+              aria-describedby=":r18:-loading-announcement"
+              aria-labelledby=":r17:"
               class="types__StyledButton-sc-ws60qy-0 ggqBNv"
               data-component="IconButton"
               data-loading="false"
@@ -2639,7 +2733,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
               aria-hidden="true"
               class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
               data-direction="s"
-              id=":r14:"
+              id=":r17:"
               popover="auto"
             >
               No notifications for account
@@ -2686,11 +2780,11 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
       <span
         aria-label="Open profile"
         class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-s"
-        id=":ru:"
+        id=":r11:"
         role="tooltip"
       >
         <button
-          aria-describedby=":rv:-loading-announcement"
+          aria-describedby=":r12:-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 ggqBNv"
           data-loading="false"
           data-no-visuals="true"
@@ -2769,8 +2863,8 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r11:-loading-announcement"
-            aria-labelledby=":r10:"
+            aria-describedby=":r14:-loading-announcement"
+            aria-labelledby=":r13:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -2801,14 +2895,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":r10:"
+            id=":r13:"
             popover="auto"
           >
             My Issues
           </span>
           <button
-            aria-describedby=":r13:-loading-announcement"
-            aria-labelledby=":r12:"
+            aria-describedby=":r16:-loading-announcement"
+            aria-labelledby=":r15:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -2836,14 +2930,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":r12:"
+            id=":r15:"
             popover="auto"
           >
             My Pull Requests
           </span>
           <button
-            aria-describedby=":r15:-loading-announcement"
-            aria-labelledby=":r14:"
+            aria-describedby=":r18:-loading-announcement"
+            aria-labelledby=":r17:"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -2871,7 +2965,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
             aria-hidden="true"
             class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
             data-direction="s"
-            id=":r14:"
+            id=":r17:"
             popover="auto"
           >
             No notifications for account
@@ -2908,428 +3002,6 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
           No new notifications
         </div>
       </div>
-    </div>
-  </div>,
-  "debug": [Function],
-  "findAllByAltText": [Function],
-  "findAllByDisplayValue": [Function],
-  "findAllByLabelText": [Function],
-  "findAllByPlaceholderText": [Function],
-  "findAllByRole": [Function],
-  "findAllByTestId": [Function],
-  "findAllByText": [Function],
-  "findAllByTitle": [Function],
-  "findByAltText": [Function],
-  "findByDisplayValue": [Function],
-  "findByLabelText": [Function],
-  "findByPlaceholderText": [Function],
-  "findByRole": [Function],
-  "findByTestId": [Function],
-  "findByText": [Function],
-  "findByTitle": [Function],
-  "getAllByAltText": [Function],
-  "getAllByDisplayValue": [Function],
-  "getAllByLabelText": [Function],
-  "getAllByPlaceholderText": [Function],
-  "getAllByRole": [Function],
-  "getAllByTestId": [Function],
-  "getAllByText": [Function],
-  "getAllByTitle": [Function],
-  "getByAltText": [Function],
-  "getByDisplayValue": [Function],
-  "getByLabelText": [Function],
-  "getByPlaceholderText": [Function],
-  "getByRole": [Function],
-  "getByTestId": [Function],
-  "getByText": [Function],
-  "getByTitle": [Function],
-  "queryAllByAltText": [Function],
-  "queryAllByDisplayValue": [Function],
-  "queryAllByLabelText": [Function],
-  "queryAllByPlaceholderText": [Function],
-  "queryAllByRole": [Function],
-  "queryAllByTestId": [Function],
-  "queryAllByText": [Function],
-  "queryAllByTitle": [Function],
-  "queryByAltText": [Function],
-  "queryByDisplayValue": [Function],
-  "queryByLabelText": [Function],
-  "queryByPlaceholderText": [Function],
-  "queryByRole": [Function],
-  "queryByTestId": [Function],
-  "queryByText": [Function],
-  "queryByTitle": [Function],
-  "rerender": [Function],
-  "unmount": [Function],
-}
-`;
-
-exports[`renderer/components/AccountNotifications.tsx should toggle account notifications visibility 1`] = `
-{
-  "asFragment": [Function],
-  "baseElement": <body>
-    <div>
-      <div
-        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
-      >
-        <div
-          class="flex"
-        >
-          <button
-            title="Open Profile"
-            type="button"
-          >
-            <div
-              class="flex"
-            >
-              <img
-                alt="octocat's avatar"
-                class="rounded-full object-cover size-5"
-                src="https://avatars.githubusercontent.com/u/583231?v=4"
-              />
-              <span
-                class="ml-2"
-              >
-                @
-                octocat
-              </span>
-            </div>
-          </button>
-        </div>
-        <div
-          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
-        >
-          <span
-            class="mr-1"
-            title="GitHub Cloud"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-mark-github"
-              fill="currentColor"
-              focusable="false"
-              height="14"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-              viewBox="0 0 16 16"
-              width="14"
-            >
-              <path
-                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
-              />
-            </svg>
-          </span>
-          <button
-            class="h-full hover:text-green-500 focus:outline-none"
-            title="My Issues"
-            type="button"
-          >
-            <svg
-              aria-label="My Issues"
-              class="octicon octicon-issue-opened"
-              fill="currentColor"
-              focusable="false"
-              height="14"
-              role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-              viewBox="0 0 16 16"
-              width="14"
-            >
-              <path
-                d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-              />
-              <path
-                d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-              />
-            </svg>
-          </button>
-          <button
-            class="h-full hover:text-green-500 focus:outline-none"
-            title="My Pull Requests"
-            type="button"
-          >
-            <svg
-              aria-label="My Pull Requests"
-              class="octicon octicon-git-pull-request"
-              fill="currentColor"
-              focusable="false"
-              height="14"
-              role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-              viewBox="0 0 16 16"
-              width="14"
-            >
-              <path
-                d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
-              />
-            </svg>
-          </button>
-          <button
-            class="h-full hover:text-green-500 focus:outline-none"
-            title="Show account notifications"
-            type="button"
-          >
-            <svg
-              aria-label="Show account notifications"
-              class="octicon octicon-chevron-right"
-              fill="currentColor"
-              focusable="false"
-              height="14"
-              role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-              viewBox="0 0 12 12"
-              width="14"
-            >
-              <path
-                d="M4.7 10c-.2 0-.4-.1-.5-.2-.3-.3-.3-.8 0-1.1L6.9 6 4.2 3.3c-.3-.3-.3-.8 0-1.1.3-.3.8-.3 1.1 0l3.3 3.2c.3.3.3.8 0 1.1L5.3 9.7c-.2.2-.4.3-.6.3Z"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-    </div>
-    <div>
-      <div
-        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
-      >
-        <div
-          class="flex"
-        >
-          <button
-            title="Open Profile"
-            type="button"
-          >
-            <div
-              class="flex"
-            >
-              <img
-                alt="octocat's avatar"
-                class="rounded-full object-cover size-5"
-                src="https://avatars.githubusercontent.com/u/583231?v=4"
-              />
-              <span
-                class="ml-2"
-              >
-                @
-                octocat
-              </span>
-            </div>
-          </button>
-        </div>
-        <div
-          class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
-        >
-          <span
-            class="mr-1"
-            title="GitHub Cloud"
-          >
-            <svg
-              aria-hidden="true"
-              class="octicon octicon-mark-github"
-              fill="currentColor"
-              focusable="false"
-              height="14"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-              viewBox="0 0 16 16"
-              width="14"
-            >
-              <path
-                d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
-              />
-            </svg>
-          </span>
-          <button
-            class="h-full hover:text-green-500 focus:outline-none"
-            title="My Issues"
-            type="button"
-          >
-            <svg
-              aria-label="My Issues"
-              class="octicon octicon-issue-opened"
-              fill="currentColor"
-              focusable="false"
-              height="14"
-              role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-              viewBox="0 0 16 16"
-              width="14"
-            >
-              <path
-                d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-              />
-              <path
-                d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-              />
-            </svg>
-          </button>
-          <button
-            class="h-full hover:text-green-500 focus:outline-none"
-            title="My Pull Requests"
-            type="button"
-          >
-            <svg
-              aria-label="My Pull Requests"
-              class="octicon octicon-git-pull-request"
-              fill="currentColor"
-              focusable="false"
-              height="14"
-              role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-              viewBox="0 0 16 16"
-              width="14"
-            >
-              <path
-                d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
-              />
-            </svg>
-          </button>
-          <button
-            class="h-full hover:text-green-500 focus:outline-none"
-            title="Hide account notifications"
-            type="button"
-          >
-            <svg
-              aria-label="Hide account notifications"
-              class="octicon octicon-chevron-down"
-              fill="currentColor"
-              focusable="false"
-              height="14"
-              role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-              viewBox="0 0 12 12"
-              width="14"
-            >
-              <path
-                d="M6 8.825c-.2 0-.4-.1-.5-.2l-3.3-3.3c-.3-.3-.3-.8 0-1.1.3-.3.8-.3 1.1 0l2.7 2.7 2.7-2.7c.3-.3.8-.3 1.1 0 .3.3.3.8 0 1.1l-3.2 3.2c-.2.2-.4.3-.6.3Z"
-              />
-            </svg>
-          </button>
-        </div>
-      </div>
-      <div>
-        Repository Notifications
-      </div>
-    </div>
-  </body>,
-  "container": <div>
-    <div
-      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
-    >
-      <div
-        class="flex"
-      >
-        <button
-          title="Open Profile"
-          type="button"
-        >
-          <div
-            class="flex"
-          >
-            <img
-              alt="octocat's avatar"
-              class="rounded-full object-cover size-5"
-              src="https://avatars.githubusercontent.com/u/583231?v=4"
-            />
-            <span
-              class="ml-2"
-            >
-              @
-              octocat
-            </span>
-          </div>
-        </button>
-      </div>
-      <div
-        class="flex items-center justify-center gap-2 opacity-0 transition-opacity group-hover:opacity-80"
-      >
-        <span
-          class="mr-1"
-          title="GitHub Cloud"
-        >
-          <svg
-            aria-hidden="true"
-            class="octicon octicon-mark-github"
-            fill="currentColor"
-            focusable="false"
-            height="14"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-            viewBox="0 0 16 16"
-            width="14"
-          >
-            <path
-              d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"
-            />
-          </svg>
-        </span>
-        <button
-          class="h-full hover:text-green-500 focus:outline-none"
-          title="My Issues"
-          type="button"
-        >
-          <svg
-            aria-label="My Issues"
-            class="octicon octicon-issue-opened"
-            fill="currentColor"
-            focusable="false"
-            height="14"
-            role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-            viewBox="0 0 16 16"
-            width="14"
-          >
-            <path
-              d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3Z"
-            />
-            <path
-              d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM1.5 8a6.5 6.5 0 1 0 13 0 6.5 6.5 0 0 0-13 0Z"
-            />
-          </svg>
-        </button>
-        <button
-          class="h-full hover:text-green-500 focus:outline-none"
-          title="My Pull Requests"
-          type="button"
-        >
-          <svg
-            aria-label="My Pull Requests"
-            class="octicon octicon-git-pull-request"
-            fill="currentColor"
-            focusable="false"
-            height="14"
-            role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-            viewBox="0 0 16 16"
-            width="14"
-          >
-            <path
-              d="M1.5 3.25a2.25 2.25 0 1 1 3 2.122v5.256a2.251 2.251 0 1 1-1.5 0V5.372A2.25 2.25 0 0 1 1.5 3.25Zm5.677-.177L9.573.677A.25.25 0 0 1 10 .854V2.5h1A2.5 2.5 0 0 1 13.5 5v5.628a2.251 2.251 0 1 1-1.5 0V5a1 1 0 0 0-1-1h-1v1.646a.25.25 0 0 1-.427.177L7.177 3.427a.25.25 0 0 1 0-.354ZM3.75 2.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm0 9.5a.75.75 0 1 0 0 1.5.75.75 0 0 0 0-1.5Zm8.25.75a.75.75 0 1 0 1.5 0 .75.75 0 0 0-1.5 0Z"
-            />
-          </svg>
-        </button>
-        <button
-          class="h-full hover:text-green-500 focus:outline-none"
-          title="Hide account notifications"
-          type="button"
-        >
-          <svg
-            aria-label="Hide account notifications"
-            class="octicon octicon-chevron-down"
-            fill="currentColor"
-            focusable="false"
-            height="14"
-            role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-            viewBox="0 0 12 12"
-            width="14"
-          >
-            <path
-              d="M6 8.825c-.2 0-.4-.1-.5-.2l-3.3-3.3c-.3-.3-.3-.8 0-1.1.3-.3.8-.3 1.1 0l2.7 2.7 2.7-2.7c.3-.3.8-.3 1.1 0 .3.3.3.8 0 1.1l-3.2 3.2c-.2.2-.4.3-.6.3Z"
-            />
-          </svg>
-        </button>
-      </div>
-    </div>
-    <div>
-      Repository Notifications
     </div>
   </div>,
   "debug": [Function],

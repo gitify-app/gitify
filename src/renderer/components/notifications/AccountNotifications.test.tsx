@@ -1,17 +1,20 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
-import { mockGitHubCloudAccount, mockSettings } from '../__mocks__/state-mocks';
-import { ensureStableEmojis } from '../__mocks__/utils';
-import { AppContext } from '../context/App';
-import { GroupBy } from '../types';
-import { mockGitHubNotifications } from '../utils/api/__mocks__/response-mocks';
-import * as links from '../utils/links';
+import {
+  mockGitHubCloudAccount,
+  mockSettings,
+} from '../../__mocks__/state-mocks';
+import { ensureStableEmojis } from '../../__mocks__/utils';
+import { AppContext } from '../../context/App';
+import { GroupBy } from '../../types';
+import { mockGitHubNotifications } from '../../utils/api/__mocks__/response-mocks';
+import * as links from '../../utils/links';
 import { AccountNotifications } from './AccountNotifications';
 
 jest.mock('./RepositoryNotifications', () => ({
   RepositoryNotifications: () => <div>Repository Notifications</div>,
 }));
 
-describe('renderer/components/AccountNotifications.tsx', () => {
+describe('renderer/components/notifications/AccountNotifications.tsx', () => {
   beforeEach(() => {
     ensureStableEmojis();
   });

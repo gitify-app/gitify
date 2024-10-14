@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { BookIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
 import { Button, Stack, Text, Tooltip } from '@primer/react';
 
-import { Header } from '../components/Header';
 import { FieldInput } from '../components/fields/FieldInput';
+import { Header } from '../components/primitives/Header';
 import { AppContext } from '../context/App';
 import type { ClientID, ClientSecret, Hostname, Token } from '../types';
 import type { LoginOAuthAppOptions } from '../utils/auth/types';

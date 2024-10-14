@@ -3,7 +3,7 @@ import { type FC, useContext } from 'react';
 import { GearIcon } from '@primer/octicons-react';
 import { Button, Stack } from '@primer/react';
 
-import { Header } from '../components/Header';
+import { Header } from '../components/primitives/Header';
 import { AppearanceSettings } from '../components/settings/AppearanceSettings';
 import { NotificationSettings } from '../components/settings/NotificationSettings';
 import { SettingsFooter } from '../components/settings/SettingsFooter';

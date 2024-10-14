@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renderer/components/notification/Pills.tsx comment pills should render when 1 comment 1`] = `
+exports[`renderer/components/notifications/Pills.tsx comment pills should render when 1 comment 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -253,7 +253,7 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
 }
 `;
 
-exports[`renderer/components/notification/Pills.tsx comment pills should render when more than 1 comments 1`] = `
+exports[`renderer/components/notifications/Pills.tsx comment pills should render when more than 1 comments 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -506,7 +506,7 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
 }
 `;
 
-exports[`renderer/components/notification/Pills.tsx comment pills should render when no comments 1`] = `
+exports[`renderer/components/notifications/Pills.tsx comment pills should render when no comments 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -715,7 +715,7 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
 }
 `;
 
-exports[`renderer/components/notification/Pills.tsx label pills should render labels pill 1`] = `
+exports[`renderer/components/notifications/Pills.tsx label pills should render labels pill 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -1016,7 +1016,7 @@ exports[`renderer/components/notification/Pills.tsx label pills should render la
 }
 `;
 
-exports[`renderer/components/notification/Pills.tsx linked issue pills should render issues pill when linked to multiple issues/prs 1`] = `
+exports[`renderer/components/notifications/Pills.tsx linked issue pills should render issues pill when linked to multiple issues/prs 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -1225,7 +1225,7 @@ exports[`renderer/components/notification/Pills.tsx linked issue pills should re
 }
 `;
 
-exports[`renderer/components/notification/Pills.tsx linked issue pills should render issues pill when linked to one issue/pr 1`] = `
+exports[`renderer/components/notifications/Pills.tsx linked issue pills should render issues pill when linked to one issue/pr 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -1434,7 +1434,7 @@ exports[`renderer/components/notification/Pills.tsx linked issue pills should re
 }
 `;
 
-exports[`renderer/components/notification/Pills.tsx milestone pills should render closed milestone pill 1`] = `
+exports[`renderer/components/notifications/Pills.tsx milestone pills should render closed milestone pill 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -1777,7 +1777,7 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
 }
 `;
 
-exports[`renderer/components/notification/Pills.tsx milestone pills should render open milestone pill 1`] = `
+exports[`renderer/components/notifications/Pills.tsx milestone pills should render open milestone pill 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>
@@ -2120,7 +2120,7 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
 }
 `;
 
-exports[`renderer/components/notification/Pills.tsx showPills disabled should not render any pills when showPills is disabled 1`] = `
+exports[`renderer/components/notifications/Pills.tsx showPills disabled should not render any pills when showPills is disabled 1`] = `
 {
   "asFragment": [Function],
   "baseElement": <body>

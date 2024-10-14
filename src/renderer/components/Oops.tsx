@@ -2,8 +2,8 @@ import { type FC, useMemo } from 'react';
 
 import { Stack } from '@primer/react';
 import type { GitifyError } from '../types';
-import { EmojiText } from './EmojiText';
 import { Centered } from './primitives/Centered';
+import { EmojiText } from './primitives/EmojiText';
 
 interface IOops {
   error: GitifyError;

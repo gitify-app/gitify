@@ -1,8 +1,8 @@
 import { type FC, useContext, useMemo } from 'react';
 
-import { AccountNotifications } from '../components/AccountNotifications';
 import { AllRead } from '../components/AllRead';
 import { Oops } from '../components/Oops';
+import { AccountNotifications } from '../components/notifications/AccountNotifications';
 import { AppContext } from '../context/App';
 import { getAccountUUID } from '../utils/auth/utils';
 import { Errors } from '../utils/errors';

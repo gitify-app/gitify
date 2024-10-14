@@ -10,20 +10,20 @@ import {
   Tooltip,
 } from '@primer/react';
 
-import { AppContext } from '../context/App';
-import { type Account, type GitifyError, Size } from '../types';
-import type { Notification } from '../typesGitHub';
-import { cn } from '../utils/cn';
-import { getChevronDetails } from '../utils/helpers';
+import { AppContext } from '../../context/App';
+import { type Account, type GitifyError, Size } from '../../types';
+import type { Notification } from '../../typesGitHub';
+import { cn } from '../../utils/cn';
+import { getChevronDetails } from '../../utils/helpers';
 import {
   openAccountProfile,
   openGitHubIssues,
   openGitHubPulls,
-} from '../utils/links';
-import { AllRead } from './AllRead';
-import { HoverGroup } from './HoverGroup';
+} from '../../utils/links';
+import { AllRead } from '../AllRead';
+import { Oops } from '../Oops';
+import { HoverGroup } from '../primitives/HoverGroup';
 import { NotificationRow } from './NotificationRow';
-import { Oops } from './Oops';
 import { RepositoryNotifications } from './RepositoryNotifications';
 
 interface IAccountNotifications {
@@ -95,7 +95,7 @@ export const AccountNotifications: FC<IAccountNotifications> = (
                 openAccountProfile(account);
               }}
             >
-              <Stack direction="horizontal" gap="condensed" align="center">
+              <Stack direction="horizontal" align="center" gap="condensed">
                 <Avatar src={account.user.avatar} size={Size.MEDIUM} />
                 <Text>@{account.user.login}</Text>
               </Stack>

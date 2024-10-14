@@ -10,7 +10,7 @@ import { mockSingleNotification } from '../../utils/api/__mocks__/response-mocks
 import * as comms from '../../utils/comms';
 import { NotificationFooter } from './NotificationFooter';
 
-describe('renderer/components/notification/NotificationFooter.tsx', () => {
+describe('renderer/components/notifications/NotificationFooter.tsx', () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
@@ -149,7 +149,7 @@ describe('renderer/components/notification/NotificationFooter.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTitle('View User Profile'));
+    fireEvent.click(screen.getByLabelText('view-profile'));
     expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
     expect(openExternalLinkMock).toHaveBeenCalledWith(
       props.notification.subject.user.html_url,

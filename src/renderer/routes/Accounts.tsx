@@ -23,7 +23,7 @@ import {
   Tooltip,
 } from '@primer/react';
 
-import { Header } from '../components/Header';
+import { Header } from '../components/primitives/Header';
 import { AppContext } from '../context/App';
 import { type Account, Size } from '../types';
 import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
