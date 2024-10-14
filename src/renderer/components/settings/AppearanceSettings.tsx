@@ -13,8 +13,9 @@ import {
   TagIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
-import { Button, ButtonGroup, IconButton, useTheme } from '@primer/react';
+import { Button, ButtonGroup, Tooltip, useTheme } from '@primer/react';
 import type { ColorModeWithAuto } from '@primer/react/lib/ThemeProvider';
+
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
@@ -97,34 +98,46 @@ export const AppearanceSettings: FC = () => {
         </label>
 
         <ButtonGroup>
-          <IconButton
-            aria-label="Zoom out"
-            icon={DashIcon}
+          <Button
             size="small"
             onClick={() =>
               zoomPercentage > 0 &&
               webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage - 10))
             }
-          />
-          <Button aria-label="Zoom Percentage" size="small" disabled>
+            data-testid="settings-zoom-out"
+          >
+            <Tooltip text="Zoom out">
+              <DashIcon size={Size.SMALL} />
+            </Tooltip>
+          </Button>
+
+          <Button aria-label="Zoom percentage" size="small" disabled>
             {zoomPercentage.toFixed(0)}%
           </Button>
-          <IconButton
-            aria-label="Zoom in"
-            icon={PlusIcon}
+
+          <Button
             size="small"
             onClick={() =>
               zoomPercentage < 120 &&
               webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage + 10))
             }
-          />
-          <IconButton
-            aria-label="Reset zoom level"
-            icon={XCircleIcon}
+            data-testid="settings-zoom-in"
+          >
+            <Tooltip text="Zoom in">
+              <PlusIcon size={Size.SMALL} />
+            </Tooltip>
+          </Button>
+
+          <Button
             size="small"
             variant="danger"
             onClick={() => webFrame.setZoomLevel(0)}
-          />
+            data-testid="settings-zoom-reset"
+          >
+            <Tooltip text="Reset zoom">
+              <XCircleIcon size={Size.SMALL} />
+            </Tooltip>
+          </Button>
         </ButtonGroup>
       </div>
 

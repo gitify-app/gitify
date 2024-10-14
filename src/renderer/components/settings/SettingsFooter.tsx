@@ -26,7 +26,10 @@ export const SettingsFooter: FC = () => {
     <div className="flex items-center justify-between bg-gray-200 px-4 py-1 text-sm dark:bg-gray-darker">
       <Stack direction="horizontal">
         <Tooltip text="View release notes" direction="n">
-          <Button onClick={() => openGitifyReleaseNotes(appVersion)}>
+          <Button
+            onClick={() => openGitifyReleaseNotes(appVersion)}
+            data-testid="settings-release-notes"
+          >
             Gitify {appVersion}
           </Button>
         </Tooltip>
@@ -40,6 +43,7 @@ export const SettingsFooter: FC = () => {
             onClick={() => {
               navigate('/accounts');
             }}
+            data-testid="settings-accounts"
           />
         </Tooltip>
 
@@ -51,6 +55,7 @@ export const SettingsFooter: FC = () => {
             onClick={() => {
               quitApp();
             }}
+            data-testid="settings-quit"
           />
         </Tooltip>
       </Stack>
