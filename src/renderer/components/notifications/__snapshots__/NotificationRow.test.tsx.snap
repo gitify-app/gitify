@@ -179,7 +179,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           </div>
         </div>
         <div
-          class="opacity-0 transition-opacity group-hover:opacity-80"
+          class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -478,7 +478,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         </div>
       </div>
       <div
-        class="opacity-0 transition-opacity group-hover:opacity-80"
+        class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -797,7 +797,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           </div>
         </div>
         <div
-          class="opacity-0 transition-opacity group-hover:opacity-80"
+          class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -1059,7 +1059,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         </div>
       </div>
       <div
-        class="opacity-0 transition-opacity group-hover:opacity-80"
+        class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -1378,7 +1378,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
           </div>
         </div>
         <div
-          class="opacity-0 transition-opacity group-hover:opacity-80"
+          class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
         >
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
@@ -1640,7 +1640,7 @@ exports[`renderer/components/notifications/NotificationRow.tsx should render its
         </div>
       </div>
       <div
-        class="opacity-0 transition-opacity group-hover:opacity-80"
+        class="flex items-center justify-center opacity-0 transition-opacity group-hover:opacity-80"
       >
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
