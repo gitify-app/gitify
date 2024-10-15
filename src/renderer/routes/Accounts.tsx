@@ -77,7 +77,7 @@ export const AccountsRoute: FC = () => {
     <div className="flex h-screen flex-col" data-testid="accounts">
       <Header icon={PersonIcon}>Accounts</Header>
       <div className="flex-grow overflow-x-auto px-8">
-        <div className="mt-4 flex flex-col text-sm">
+        <div className="mt-4 flex flex-col">
           {auth.accounts.map((account, i) => {
             const AuthMethodIcon = getAuthMethodIcon(account.method);
             const PlatformIcon = getPlatformIcon(account.platform);
@@ -85,10 +85,10 @@ export const AccountsRoute: FC = () => {
             return (
               <div
                 key={getAccountUUID(account)}
-                className="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-2 dark:bg-gray-sidebar"
+                className="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gray-sidebar"
               >
                 <Stack direction="vertical" gap="none">
-                  <Tooltip text="Open profile" direction="e">
+                  <Tooltip text="Open profile" direction="se">
                     <Button
                       onClick={() => openAccountProfile(account)}
                       data-testid="account-profile"
@@ -100,64 +100,70 @@ export const AccountsRoute: FC = () => {
                       >
                         <Avatar src={account.user.avatar} size={Size.XLARGE} />
                         <Text>@{account.user.login}</Text>
-                        <Text as="i">({account.user?.name})</Text>
+                        <span className="text-xs italic">
+                          ({account.user?.name})
+                        </span>
                       </Stack>
                     </Button>
                   </Tooltip>
 
-                  <ActionList variant="inset">
-                    <Tooltip text="Open Host" direction="e">
-                      <ActionList.Item
-                        onSelect={() => openHost(account.hostname)}
-                        data-testid="account-host"
-                      >
-                        <ActionList.LeadingVisual>
-                          <PlatformIcon />
-                        </ActionList.LeadingVisual>
-                        {account.hostname}
-                      </ActionList.Item>
-                    </Tooltip>
+                  <Stack direction="horizontal" gap="condensed" align="start">
+                    <Stack direction="vertical" gap="none">
+                      <ActionList variant="inset">
+                        <Tooltip text="Open Host" direction="e">
+                          <ActionList.Item
+                            onSelect={() => openHost(account.hostname)}
+                            data-testid="account-host"
+                          >
+                            <ActionList.LeadingVisual>
+                              <PlatformIcon />
+                            </ActionList.LeadingVisual>
+                            <span className="text-xs">{account.hostname}</span>
+                          </ActionList.Item>
+                        </Tooltip>
 
-                    <Tooltip text="Open Developer Settings" direction="e">
-                      <ActionList.Item
-                        onSelect={() => openDeveloperSettings(account)}
-                        data-testid="account-developer-settings"
-                      >
-                        <ActionList.LeadingVisual>
-                          <AuthMethodIcon />
-                        </ActionList.LeadingVisual>
-                        {account.method}
-                      </ActionList.Item>
-                    </Tooltip>
-                  </ActionList>
-                </Stack>
+                        <Tooltip text="Open Developer Settings" direction="e">
+                          <ActionList.Item
+                            onSelect={() => openDeveloperSettings(account)}
+                            data-testid="account-developer-settings"
+                          >
+                            <ActionList.LeadingVisual>
+                              <AuthMethodIcon />
+                            </ActionList.LeadingVisual>
+                            <span className="text-xs">{account.method}</span>
+                          </ActionList.Item>
+                        </Tooltip>
+                      </ActionList>
+                    </Stack>
 
-                <Stack direction="horizontal" gap="condensed">
-                  <IconButton
-                    icon={i === 0 ? StarFillIcon : StarIcon}
-                    aria-label={
-                      i === 0 ? 'Primary account' : 'Set as primary account'
-                    }
-                    variant={i === 0 ? 'primary' : 'default'}
-                    onClick={() => setAsPrimaryAccount(account)}
-                    data-testid="account-set-primary"
-                  />
-                  <IconButton
-                    icon={SyncIcon}
-                    aria-label={`Refresh ${account.user.login}`}
-                    onClick={async () => {
-                      await refreshAccount(account);
-                      navigate('/accounts', { replace: true });
-                    }}
-                    data-testid="account-refresh"
-                  />
-                  <IconButton
-                    icon={SignOutIcon}
-                    aria-label={`Logout ${account.user.login}`}
-                    variant="danger"
-                    onClick={() => logoutAccount(account)}
-                    data-testid="account-logout"
-                  />
+                    <Stack direction="horizontal" gap="condensed">
+                      <IconButton
+                        icon={i === 0 ? StarFillIcon : StarIcon}
+                        aria-label={
+                          i === 0 ? 'Primary account' : 'Set as primary account'
+                        }
+                        variant={i === 0 ? 'primary' : 'default'}
+                        onClick={() => setAsPrimaryAccount(account)}
+                        data-testid="account-set-primary"
+                      />
+                      <IconButton
+                        icon={SyncIcon}
+                        aria-label={`Refresh ${account.user.login}`}
+                        onClick={async () => {
+                          await refreshAccount(account);
+                          navigate('/accounts', { replace: true });
+                        }}
+                        data-testid="account-refresh"
+                      />
+                      <IconButton
+                        icon={SignOutIcon}
+                        aria-label={`Logout ${account.user.login}`}
+                        variant="danger"
+                        onClick={() => logoutAccount(account)}
+                        data-testid="account-logout"
+                      />
+                    </Stack>
+                  </Stack>
                 </Stack>
               </div>
             );
