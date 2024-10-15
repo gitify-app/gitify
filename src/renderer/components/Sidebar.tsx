@@ -15,7 +15,7 @@ import { IconButton, Stack } from '@primer/react';
 import { AppContext } from '../context/App';
 import { quitApp } from '../utils/comms';
 import { Constants } from '../utils/constants';
-import { getFilterCount } from '../utils/helpers';
+import { hasFiltersSet } from '../utils/filters';
 import {
   openGitHubIssues,
   openGitHubNotifications,
@@ -67,10 +67,6 @@ export const Sidebar: FC = () => {
     return getNotificationCount(notifications);
   }, [notifications]);
 
-  const filterCount = useMemo(() => {
-    return getFilterCount(settings);
-  }, [settings]);
-
   return (
     <div className="fixed left-12 -ml-12 flex h-full w-12 flex-col overflow-y-auto bg-gray-sidebar">
       <div className="flex flex-1 flex-col">
@@ -113,7 +109,7 @@ export const Sidebar: FC = () => {
               description="Filter notifications"
               unsafeDisableTooltip={false}
               size="small"
-              variant={filterCount > 0 ? 'primary' : 'invisible'}
+              variant={hasFiltersSet(settings) ? 'primary' : 'invisible'}
               tooltipDirection="e"
               onClick={() => toggleFilters()}
               data-testid="sidebar-filter-notifications"

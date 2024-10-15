@@ -5,8 +5,7 @@ import {
 } from '@primer/octicons-react';
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
 import log from 'electron-log';
-import { defaultSettings } from '../context/App';
-import type { Account, Chevron, Hostname, Link, SettingsState } from '../types';
+import type { Account, Chevron, Hostname, Link } from '../types';
 import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
@@ -204,23 +203,6 @@ export function formatNotificationUpdatedAt(
   } catch (e) {}
 
   return '';
-}
-
-export function getFilterCount(settings: SettingsState): number {
-  let count = 0;
-
-  if (settings.filterReasons.length !== defaultSettings.filterReasons.length) {
-    count += settings.filterReasons.length;
-  }
-
-  if (
-    settings.detailedNotifications &&
-    settings.hideBots !== defaultSettings.hideBots
-  ) {
-    count += 1;
-  }
-
-  return count;
 }
 
 export function getChevronDetails(

@@ -11,8 +11,7 @@ import {
   ChevronRightIcon,
 } from '@primer/octicons-react';
 import log from 'electron-log';
-import { defaultSettings } from '../context/App';
-import type { Hostname, Link, SettingsState } from '../types';
+import type { Hostname, Link } from '../types';
 import type { SubjectType } from '../typesGitHub';
 import {
   mockGraphQLResponse,
@@ -25,7 +24,6 @@ import {
   generateGitHubWebUrl,
   generateNotificationReferrerId,
   getChevronDetails,
-  getFilterCount,
   getPlatformFromHostname,
   isEnterpriseServerHost,
   isMarkAsDoneFeatureSupported,
@@ -611,28 +609,6 @@ describe('renderer/utils/helpers.ts', () => {
 
         expect(formatNotificationUpdatedAt(notification)).toBe('');
       });
-    });
-  });
-
-  describe('filter count', () => {
-    it('default filter settings', () => {
-      expect(getFilterCount(defaultSettings)).toBe(0);
-    });
-
-    it('non-default reason filters', () => {
-      const settings = {
-        ...defaultSettings,
-        filterReasons: ['subscribed', 'manual'],
-      } as SettingsState;
-      expect(getFilterCount(settings)).toBe(2);
-    });
-
-    it('non-default bot filters', () => {
-      const settings = {
-        ...defaultSettings,
-        hideBots: true,
-      } as SettingsState;
-      expect(getFilterCount(settings)).toBe(1);
     });
   });
 
