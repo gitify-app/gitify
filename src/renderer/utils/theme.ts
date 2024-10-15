@@ -1,7 +1,6 @@
 import { Theme } from '../types';
 
 // TODO - Replace fully with Octicon primer theme provider
-
 export function getTheme(): Theme {
   if (document.querySelector('html').classList.contains('dark')) {
     return Theme.DARK;
