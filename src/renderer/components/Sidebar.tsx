@@ -81,8 +81,10 @@ export const Sidebar: FC = () => {
           padding="normal"
         >
           <IconButton
-            aria-label="Home"
             icon={LogoIcon}
+            aria-label="Gitify"
+            description="Home"
+            unsafeDisableTooltip={false}
             size="small"
             variant="invisible"
             tooltipDirection="e"
@@ -91,45 +93,56 @@ export const Sidebar: FC = () => {
           />
 
           <IconButton
-            aria-label={`${notificationsCount} unread notifications`}
             icon={BellIcon}
+            aria-label="Notifications"
+            description={`${notificationsCount} unread notifications`}
+            unsafeDisableTooltip={false}
             size="small"
             variant={notificationsCount > 0 ? 'primary' : 'invisible'}
             tooltipDirection="e"
             onClick={() => openGitHubNotifications(primaryAccountHostname)}
             data-testid="sidebar-notifications"
+            sx={{ color: 'white' }}
           />
 
           {/* TODO - explore https://primer.style/components/selectpanel/react/alpha/ for a better UI for filters */}
           {isLoggedIn && (
             <IconButton
-              aria-label="Filter notifications"
               icon={FilterIcon}
+              aria-label="Filters"
+              description="Filter notifications"
+              unsafeDisableTooltip={false}
               size="small"
               variant={filterCount > 0 ? 'primary' : 'invisible'}
               tooltipDirection="e"
               onClick={() => toggleFilters()}
               data-testid="sidebar-filter-notifications"
+              sx={{ color: 'white' }}
             />
           )}
 
           <IconButton
-            aria-label="My issues"
             icon={IssueOpenedIcon}
+            aria-label="My issues"
+            unsafeDisableTooltip={false}
             size="small"
             variant="invisible"
             tooltipDirection="e"
             onClick={() => openGitHubIssues(primaryAccountHostname)}
             data-testid="sidebar-my-issues"
+            sx={{ color: 'white' }}
           />
+
           <IconButton
-            aria-label="My pull requests"
             icon={GitPullRequestIcon}
+            aria-label="My pull requests"
+            unsafeDisableTooltip={false}
             size="small"
             variant="invisible"
             tooltipDirection="e"
             onClick={() => openGitHubPulls(primaryAccountHostname)}
             data-testid="sidebar-my-pull-requests"
+            sx={{ color: 'white' }}
           />
         </Stack>
       </div>
@@ -143,8 +156,10 @@ export const Sidebar: FC = () => {
         {isLoggedIn && (
           <>
             <IconButton
-              aria-label="Refresh notifications"
               icon={SyncIcon}
+              aria-label="Refresh"
+              description="Refresh notifications"
+              unsafeDisableTooltip={false}
               size="small"
               variant="invisible"
               tooltipDirection="e"
@@ -152,29 +167,34 @@ export const Sidebar: FC = () => {
               disabled={status === 'loading'}
               onClick={() => refreshNotifications()}
               data-testid="sidebar-refresh"
+              sx={{ color: 'white' }}
             />
 
             <IconButton
-              aria-label="Settings"
               icon={GearIcon}
+              aria-label="Settings"
+              unsafeDisableTooltip={false}
               size="small"
               variant="invisible"
               tooltipDirection="e"
               onClick={() => toggleSettings()}
               data-testid="sidebar-settings"
+              sx={{ color: 'white' }}
             />
           </>
         )}
 
         {!isLoggedIn && (
           <IconButton
-            aria-label="Quit Gitify"
             icon={XCircleIcon}
+            aria-label="Quit Gitify"
+            unsafeDisableTooltip={false}
             size="small"
             variant="invisible"
             tooltipDirection="e"
             onClick={() => quitApp()}
             data-testid="sidebar-quit"
+            sx={{ color: 'white' }}
           />
         )}
       </Stack>

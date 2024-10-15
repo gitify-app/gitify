@@ -69,7 +69,7 @@ export const FiltersRoute: FC = () => {
         <fieldset className="mb-3">
           <Legend icon={NoteIcon}>Reason</Legend>
           <span className="text-xs italic">
-            Note: if no reasons are selected, all notifications will be shown.
+            Note: If no reasons are selected, all notifications will be shown.
           </span>
           {Object.keys(FORMATTED_REASONS).map((reason: Reason) => {
             return (

@@ -179,7 +179,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       <span
         class="text-xs italic"
       >
-        Note: if no reasons are selected, all notifications will be shown.
+        Note: If no reasons are selected, all notifications will be shown.
       </span>
       <div
         class="mt-3 mb-2 text-sm"
