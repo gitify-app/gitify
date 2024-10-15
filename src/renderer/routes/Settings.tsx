@@ -1,6 +1,9 @@
-import { GearIcon } from '@primer/octicons-react';
 import { type FC, useContext } from 'react';
-import { Header } from '../components/Header';
+
+import { GearIcon } from '@primer/octicons-react';
+import { Button, Stack } from '@primer/react';
+
+import { Header } from '../components/primitives/Header';
 import { AppearanceSettings } from '../components/settings/AppearanceSettings';
 import { NotificationSettings } from '../components/settings/NotificationSettings';
 import { SettingsFooter } from '../components/settings/SettingsFooter';
@@ -11,28 +14,34 @@ export const SettingsRoute: FC = () => {
   const { resetSettings } = useContext(AppContext);
 
   return (
-    <div className="flex h-screen flex-col" data-testid="settings">
-      <Header fetchOnBack icon={GearIcon}>
-        Settings
-      </Header>
+    <>
+      <div className="flex h-screen flex-col" data-testid="settings">
+        <Header fetchOnBack icon={GearIcon}>
+          Settings
+        </Header>
 
-      <div className="flex flex-col flex-grow overflow-x-auto px-8 gap-3">
-        <AppearanceSettings />
-        <NotificationSettings />
-        <SystemSettings />
-        <button
-          type="button"
-          onClick={() => {
-            confirm('Are you sure you want to reset all settings?') &&
-              resetSettings();
-          }}
-          className="text-sm hover:underline mb-4 hover:cursor-pointer"
-        >
-          Restore settings to their defaults
-        </button>
+        <div className="overflow-x-auto px-8 pb-4">
+          <Stack direction="vertical" gap="spacious">
+            <AppearanceSettings />
+            <NotificationSettings />
+            <SystemSettings />
+
+            <Button
+              variant="danger"
+              onClick={() => {
+                confirm(
+                  'Please confirm that you want to reset all settings to the Gitify defaults?',
+                ) && resetSettings();
+              }}
+              data-testid="settings-reset"
+            >
+              Reset settings
+            </Button>
+          </Stack>
+        </div>
+
+        <SettingsFooter />
       </div>
-
-      <SettingsFooter />
-    </div>
+    </>
   );
 };

@@ -1,5 +1,8 @@
-import type { Icon } from '@primer/octicons-react';
 import type { FC } from 'react';
+
+import type { Icon } from '@primer/octicons-react';
+import { Octicon, Stack, Text } from '@primer/react';
+
 import { type IconColor, Size } from '../../types';
 
 export interface IPillButton {
@@ -17,12 +20,10 @@ export const PillButton: FC<IPillButton> = (props: IPillButton) => {
       type="button"
       className="flex gap-1 items-center m-0.5 rounded-full bg-gray-100 px-1 text-xxs hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700"
     >
-      <props.icon
-        size={Size.XSMALL}
-        className={props.color}
-        aria-label={props.title}
-      />
-      {props.metric}
+      <Stack direction="horizontal" align="center" gap="condensed">
+        <Octicon icon={props.icon} size={Size.XSMALL} className={props.color} />
+        {props.metric && <Text>{props.metric}</Text>}
+      </Stack>
     </button>
   );
 };

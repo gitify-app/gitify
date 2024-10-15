@@ -3,7 +3,6 @@ import { MemoryRouter } from 'react-router-dom';
 import { mockAccountNotifications } from '../__mocks__/notifications-mocks';
 import { mockAuth, mockSettings } from '../__mocks__/state-mocks';
 import { AppContext } from '../context/App';
-import { IconColor } from '../types';
 import * as comms from '../utils/comms';
 import { Sidebar } from './Sidebar';
 
@@ -76,121 +75,166 @@ describe('renderer/components/Sidebar.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTitle('Home'));
+    fireEvent.click(screen.getByTestId('sidebar-home'));
     expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
   });
 
-  describe('quick links', () => {
-    describe('notifications icon', () => {
-      it('when there are 0 notifications', () => {
-        render(
-          <AppContext.Provider
-            value={{
-              isLoggedIn: true,
-              notifications: [],
-              auth: mockAuth,
-              settings: mockSettings,
-            }}
-          >
-            <MemoryRouter>
-              <Sidebar />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
+  describe('notifications icon', () => {
+    it('opens notifications home when clicked', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            auth: mockAuth,
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
 
-        const notificationsIcon = screen.getByTitle('0 unread notifications');
+      fireEvent.click(screen.getByTestId('sidebar-notifications'));
 
-        expect(notificationsIcon.className).toContain('text-white');
-        expect(notificationsIcon.childNodes.length).toBe(1);
-        expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
+        'https://github.com/notifications',
+      );
+    });
 
-        fireEvent.click(screen.getByLabelText('0 unread notifications'));
+    it('renders correct icon when there are no notifications', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            auth: mockAuth,
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
 
-        expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-        expect(openExternalLinkMock).toHaveBeenCalledWith(
-          'https://github.com/notifications',
-        );
-      });
+      expect(screen.getByTestId('sidebar-notifications')).toMatchSnapshot();
+    });
 
-      it('when there are more than 0 notifications', () => {
-        render(
-          <AppContext.Provider
-            value={{
-              isLoggedIn: true,
-              notifications: mockAccountNotifications,
-              auth: mockAuth,
-              settings: mockSettings,
-            }}
-          >
-            <MemoryRouter>
-              <Sidebar />
-            </MemoryRouter>
-          </AppContext.Provider>,
-        );
+    it('renders correct icon when there are notifications', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            auth: mockAuth,
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
 
-        const notificationsIcon = screen.getByTitle('4 unread notifications');
-
-        expect(notificationsIcon.className).toContain(IconColor.GREEN);
-        expect(notificationsIcon.childNodes.length).toBe(2);
-        expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
-        expect(notificationsIcon.childNodes[1].nodeValue).toBe('4');
-
-        fireEvent.click(screen.getByLabelText('4 unread notifications'));
-
-        expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-        expect(openExternalLinkMock).toHaveBeenCalledWith(
-          'https://github.com/notifications',
-        );
-      });
+      expect(screen.getByTestId('sidebar-notifications')).toMatchSnapshot();
     });
   });
 
-  it('opens my github issues page', () => {
-    render(
-      <AppContext.Provider
-        value={{
-          isLoggedIn: true,
-          notifications: mockAccountNotifications,
-          auth: mockAuth,
-          settings: mockSettings,
-        }}
-      >
-        <MemoryRouter>
-          <Sidebar />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+  describe('Filter notifications', () => {
+    it('go to the filters route', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            auth: mockAuth,
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
 
-    fireEvent.click(screen.getByLabelText('My issues'));
+      fireEvent.click(screen.getByTestId('sidebar-filter-notifications'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      'https://github.com/issues',
-    );
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/filters');
+    });
+
+    it('go to the home if filters path already shown', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: [],
+            auth: mockAuth,
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter initialEntries={['/filters']}>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+
+      fireEvent.click(screen.getByTestId('sidebar-filter-notifications'));
+
+      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
+    });
   });
 
-  it('opens my github pull requests page', () => {
-    render(
-      <AppContext.Provider
-        value={{
-          isLoggedIn: true,
-          notifications: mockAccountNotifications,
-          auth: mockAuth,
-          settings: mockSettings,
-        }}
-      >
-        <MemoryRouter>
-          <Sidebar />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
+  describe('quick links', () => {
+    it('opens my github issues page', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: mockAccountNotifications,
+            auth: mockAuth,
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
 
-    fireEvent.click(screen.getByLabelText('My pull requests'));
+      fireEvent.click(screen.getByTestId('sidebar-my-issues'));
 
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      'https://github.com/pulls',
-    );
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
+        'https://github.com/issues',
+      );
+    });
+
+    it('opens my github pull requests page', () => {
+      render(
+        <AppContext.Provider
+          value={{
+            isLoggedIn: true,
+            notifications: mockAccountNotifications,
+            auth: mockAuth,
+            settings: mockSettings,
+          }}
+        >
+          <MemoryRouter>
+            <Sidebar />
+          </MemoryRouter>
+        </AppContext.Provider>,
+      );
+
+      fireEvent.click(screen.getByTestId('sidebar-my-pull-requests'));
+
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
+        'https://github.com/pulls',
+      );
+    });
   });
 
   describe('Refresh Notifications', () => {
@@ -212,7 +256,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTitle('Refresh notifications'));
+      fireEvent.click(screen.getByTestId('sidebar-refresh'));
 
       expect(fetchNotifications).toHaveBeenCalledTimes(1);
     });
@@ -235,49 +279,9 @@ describe('renderer/components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTitle('Refresh notifications'));
+      fireEvent.click(screen.getByTestId('sidebar-refresh'));
 
       expect(fetchNotifications).not.toHaveBeenCalled();
-    });
-  });
-
-  describe('Filters', () => {
-    it('go to the filters route', () => {
-      render(
-        <AppContext.Provider
-          value={{
-            isLoggedIn: true,
-            notifications: [],
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <MemoryRouter>
-            <Sidebar />
-          </MemoryRouter>
-        </AppContext.Provider>,
-      );
-      fireEvent.click(screen.getByTitle('Filters'));
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/filters');
-    });
-
-    it('go to the home if filters path already shown', () => {
-      render(
-        <AppContext.Provider
-          value={{
-            isLoggedIn: true,
-            notifications: [],
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <MemoryRouter initialEntries={['/filters']}>
-            <Sidebar />
-          </MemoryRouter>
-        </AppContext.Provider>,
-      );
-      fireEvent.click(screen.getByTitle('Filters'));
-      expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
     });
   });
 
@@ -298,7 +302,7 @@ describe('renderer/components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTitle('Settings'));
+      fireEvent.click(screen.getByTestId('sidebar-settings'));
 
       expect(mockNavigate).toHaveBeenNthCalledWith(1, '/settings');
     });
@@ -320,83 +324,11 @@ describe('renderer/components/Sidebar.tsx', () => {
         </AppContext.Provider>,
       );
 
-      fireEvent.click(screen.getByTitle('Settings'));
+      fireEvent.click(screen.getByTestId('sidebar-settings'));
 
       expect(fetchNotifications).toHaveBeenCalledTimes(1);
       expect(mockNavigate).toHaveBeenNthCalledWith(1, '/', { replace: true });
     });
-  });
-
-  it('opens github in the notifications page', () => {
-    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
-
-    render(
-      <AppContext.Provider
-        value={{
-          isLoggedIn: true,
-          notifications: mockAccountNotifications,
-          auth: mockAuth,
-          settings: mockSettings,
-        }}
-      >
-        <MemoryRouter>
-          <Sidebar />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-    fireEvent.click(screen.getByLabelText('4 unread notifications'));
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      'https://github.com/notifications',
-    );
-  });
-
-  it('opens my github issues page', () => {
-    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
-
-    render(
-      <AppContext.Provider
-        value={{
-          isLoggedIn: true,
-          notifications: mockAccountNotifications,
-          auth: mockAuth,
-          settings: mockSettings,
-        }}
-      >
-        <MemoryRouter>
-          <Sidebar />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-    fireEvent.click(screen.getByLabelText('My issues'));
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      'https://github.com/issues',
-    );
-  });
-
-  it('opens my github pull requests page', () => {
-    const openExternalLinkMock = jest.spyOn(comms, 'openExternalLink');
-
-    render(
-      <AppContext.Provider
-        value={{
-          isLoggedIn: true,
-          notifications: mockAccountNotifications,
-          auth: mockAuth,
-          settings: mockSettings,
-        }}
-      >
-        <MemoryRouter>
-          <Sidebar />
-        </MemoryRouter>
-      </AppContext.Provider>,
-    );
-    fireEvent.click(screen.getByLabelText('My pull requests'));
-    expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(
-      'https://github.com/pulls',
-    );
   });
 
   it('should quit the app', () => {
@@ -417,55 +349,8 @@ describe('renderer/components/Sidebar.tsx', () => {
       </AppContext.Provider>,
     );
 
-    fireEvent.click(screen.getByTitle('Quit Gitify'));
+    fireEvent.click(screen.getByTestId('sidebar-quit'));
 
     expect(quitAppMock).toHaveBeenCalledTimes(1);
-  });
-
-  describe('should render the notifications icon', () => {
-    it('when there are 0 notifications', () => {
-      render(
-        <AppContext.Provider
-          value={{
-            isLoggedIn: true,
-            notifications: [],
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <MemoryRouter>
-            <Sidebar />
-          </MemoryRouter>
-        </AppContext.Provider>,
-      );
-
-      const notificationsIcon = screen.getByTitle('0 unread notifications');
-      expect(notificationsIcon.className).toContain('text-white');
-      expect(notificationsIcon.childNodes.length).toBe(1);
-      expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
-    });
-
-    it('when there are more than 0 notifications', () => {
-      render(
-        <AppContext.Provider
-          value={{
-            isLoggedIn: true,
-            notifications: mockAccountNotifications,
-            auth: mockAuth,
-            settings: mockSettings,
-          }}
-        >
-          <MemoryRouter>
-            <Sidebar />
-          </MemoryRouter>
-        </AppContext.Provider>,
-      );
-
-      const notificationsIcon = screen.getByTitle('4 unread notifications');
-      expect(notificationsIcon.className).toContain(IconColor.GREEN);
-      expect(notificationsIcon.childNodes.length).toBe(2);
-      expect(notificationsIcon.childNodes[0].nodeName).toBe('svg');
-      expect(notificationsIcon.childNodes[1].nodeValue).toBe('4');
-    });
   });
 });

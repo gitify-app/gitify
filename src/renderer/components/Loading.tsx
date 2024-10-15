@@ -1,5 +1,7 @@
-import NProgress from 'nprogress';
 import { type FC, useContext, useEffect } from 'react';
+
+import NProgress from 'nprogress';
+
 import { AppContext } from '../context/App';
 
 export const Loading: FC = () => {
