@@ -1146,22 +1146,20 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           <div
             class="flex flex-wrap items-center gap-1"
           >
-            <span>
-              <svg
-                aria-hidden="true"
-                class="text-gray-500 dark:text-gray-300"
-                fill="currentColor"
-                focusable="false"
-                height="14"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-                viewBox="0 0 16 16"
-                width="14"
-              >
-                <path
-                  d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-                />
-              </svg>
-            </span>
+            <svg
+              aria-hidden="true"
+              class="text-gray-500 dark:text-gray-300"
+              fill="currentColor"
+              focusable="false"
+              height="14"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              viewBox="0 0 16 16"
+              width="14"
+            >
+              <path
+                d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+              />
+            </svg>
             <span
               class="text-xs capitalize opacity-80"
               title="You created the thread."
@@ -1907,22 +1905,20 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
         <div
           class="flex flex-wrap items-center gap-1"
         >
-          <span>
-            <svg
-              aria-hidden="true"
-              class="text-gray-500 dark:text-gray-300"
-              fill="currentColor"
-              focusable="false"
-              height="14"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
-              viewBox="0 0 16 16"
-              width="14"
-            >
-              <path
-                d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
-              />
-            </svg>
-          </span>
+          <svg
+            aria-hidden="true"
+            class="text-gray-500 dark:text-gray-300"
+            fill="currentColor"
+            focusable="false"
+            height="14"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            viewBox="0 0 16 16"
+            width="14"
+          >
+            <path
+              d="M8 16A8 8 0 1 1 8 0a8 8 0 0 1 0 16Zm.847-8.145a2.502 2.502 0 1 0-1.694 0C5.471 8.261 4 9.775 4 11c0 .395.145.995 1 .995h6c.855 0 1-.6 1-.995 0-1.224-1.47-2.74-3.153-3.145Z"
+            />
+          </svg>
           <span
             class="text-xs capitalize opacity-80"
             title="You created the thread."

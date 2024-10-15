@@ -40,14 +40,14 @@ export const NotificationFooter: FC<INotificationFooter> = ({
           data-testid="view-profile"
         />
       ) : (
-        <span>
+        <>
           {notification.subject.type === 'RepositoryDependabotAlertsThread' ||
           notification.subject.type === 'RepositoryVulnerabilityAlert' ? (
             <MarkGithubIcon size={Size.SMALL} />
           ) : (
             <FeedPersonIcon size={Size.SMALL} className={IconColor.GRAY} />
           )}
-        </span>
+        </>
       )}
       <span
         className={cn('text-xs capitalize', Opacity.MEDIUM)}
