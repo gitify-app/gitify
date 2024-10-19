@@ -136,7 +136,7 @@
     "update-electron-app": "3.0.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "1.9.3",
+    "@biomejs/biome": "1.9.4",
     "@discordapp/twemoji": "15.1.0",
     "@electron/notarize": "2.5.0",
     "@primer/octicons-react": "19.12.0",
