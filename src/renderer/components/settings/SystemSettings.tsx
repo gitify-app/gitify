@@ -1,12 +1,14 @@
-import { DeviceDesktopIcon } from '@primer/octicons-react';
 import { type FC, useContext } from 'react';
+
+import { DeviceDesktopIcon } from '@primer/octicons-react';
+
 import { AppContext } from '../../context/App';
 import { OpenPreference } from '../../types';
 import { Constants } from '../../utils/constants';
 import { isLinux, isMacOS } from '../../utils/platform';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
-import { Legend } from './Legend';
+import { Legend } from '../primitives/Legend';
 
 export const SystemSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);
