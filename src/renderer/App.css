@@ -3,7 +3,6 @@ body,
 #root {
   height: 100%;
   -webkit-user-select: none;
-  scrollbar-gutter: stable;
 }
 
 html::-webkit-scrollbar,
