@@ -6,7 +6,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pl-3 pr-4 py-1.5 text-sm font-semibold dark:text-white bg-red-300 dark:bg-red-500 opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-red-300 dark:bg-red-500 opacity-70"
       >
         <div
           class="flex"
@@ -152,7 +152,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pl-3 pr-4 py-1.5 text-sm font-semibold dark:text-white bg-red-300 dark:bg-red-500 opacity-70"
+      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-red-300 dark:bg-red-500 opacity-70"
     >
       <div
         class="flex"
@@ -355,7 +355,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pl-3 pr-4 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
       >
         <div
           class="flex"
@@ -472,7 +472,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
         </div>
       </div>
       <div
-        class="group flex border-b border-gray-100 bg-white pl-3 pr-4 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="138661096"
       >
         <div
@@ -675,7 +675,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
         </div>
       </div>
       <div
-        class="group flex border-b border-gray-100 bg-white pl-3 pr-4 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+        class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
         id="148827438"
       >
         <div
@@ -841,7 +841,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pl-3 pr-4 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
+      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
     >
       <div
         class="flex"
@@ -958,7 +958,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
       </div>
     </div>
     <div
-      class="group flex border-b border-gray-100 bg-white pl-3 pr-4 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="138661096"
     >
       <div
@@ -1161,7 +1161,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
       </div>
     </div>
     <div
-      class="group flex border-b border-gray-100 bg-white pl-3 pr-4 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
+      class="group flex border-b border-gray-100 bg-white px-3 py-2 hover:bg-gray-100 dark:border-gray-darker dark:bg-gray-dark dark:text-white dark:hover:bg-gray-darker"
       id="148827438"
     >
       <div
@@ -1384,7 +1384,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pl-3 pr-4 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
       >
         <div
           class="flex"
@@ -1507,7 +1507,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pl-3 pr-4 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
+      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
     >
       <div
         class="flex"
@@ -1687,7 +1687,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pl-3 pr-4 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
       >
         <div
           class="flex"
@@ -1828,7 +1828,7 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pl-3 pr-4 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
+      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
     >
       <div
         class="flex"
@@ -2026,7 +2026,7 @@ exports[`renderer/components/AccountNotifications.tsx should toggle account noti
   "baseElement": <body>
     <div>
       <div
-        class="group flex items-center justify-between pl-3 pr-4 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
       >
         <div
           class="flex"
@@ -2145,7 +2145,7 @@ exports[`renderer/components/AccountNotifications.tsx should toggle account noti
     </div>
     <div>
       <div
-        class="group flex items-center justify-between pl-3 pr-4 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
+        class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
       >
         <div
           class="flex"
@@ -2268,7 +2268,7 @@ exports[`renderer/components/AccountNotifications.tsx should toggle account noti
   </body>,
   "container": <div>
     <div
-      class="group flex items-center justify-between pl-3 pr-4 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
+      class="group flex items-center justify-between px-3 py-1.5 text-sm font-semibold dark:text-white bg-gray-300 dark:bg-gray-darkest opacity-70"
     >
       <div
         class="flex"

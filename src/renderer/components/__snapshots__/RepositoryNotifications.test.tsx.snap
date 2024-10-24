@@ -6,7 +6,7 @@ exports[`renderer/components/RepositoryNotifications.tsx should render itself & 
   "baseElement": <body>
     <div>
       <div
-        class="group flex justify-between bg-gray-100 pl-3 pr-4 py-1.5 dark:bg-gray-darker dark:text-white"
+        class="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
       >
         <div
           class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
@@ -100,7 +100,7 @@ exports[`renderer/components/RepositoryNotifications.tsx should render itself & 
   </body>,
   "container": <div>
     <div
-      class="group flex justify-between bg-gray-100 pl-3 pr-4 py-1.5 dark:bg-gray-darker dark:text-white"
+      class="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
     >
       <div
         class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
@@ -251,7 +251,7 @@ exports[`renderer/components/RepositoryNotifications.tsx should toggle repositor
   "baseElement": <body>
     <div>
       <div
-        class="group flex justify-between bg-gray-100 pl-3 pr-4 py-1.5 dark:bg-gray-darker dark:text-white"
+        class="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
       >
         <div
           class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
@@ -347,7 +347,7 @@ exports[`renderer/components/RepositoryNotifications.tsx should toggle repositor
     </div>
     <div>
       <div
-        class="group flex justify-between bg-gray-100 pl-3 pr-4 py-1.5 dark:bg-gray-darker dark:text-white"
+        class="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
       >
         <div
           class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
@@ -450,7 +450,7 @@ exports[`renderer/components/RepositoryNotifications.tsx should toggle repositor
   </body>,
   "container": <div>
     <div
-      class="group flex justify-between bg-gray-100 pl-3 pr-4 py-1.5 dark:bg-gray-darker dark:text-white"
+      class="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
     >
       <div
         class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
@@ -610,7 +610,7 @@ exports[`renderer/components/RepositoryNotifications.tsx should use default repo
   "baseElement": <body>
     <div>
       <div
-        class="group flex justify-between bg-gray-100 pl-3 pr-4 py-1.5 dark:bg-gray-darker dark:text-white"
+        class="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
       >
         <div
           class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"
@@ -713,7 +713,7 @@ exports[`renderer/components/RepositoryNotifications.tsx should use default repo
   </body>,
   "container": <div>
     <div
-      class="group flex justify-between bg-gray-100 pl-3 pr-4 py-1.5 dark:bg-gray-darker dark:text-white"
+      class="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
     >
       <div
         class="flex flex-1 gap-3 items-center truncate text-sm font-medium opacity-80"

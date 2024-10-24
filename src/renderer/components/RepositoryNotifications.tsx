@@ -45,7 +45,7 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
   return (
     <>
       <div
-        className="group flex justify-between bg-gray-100 pl-3 pr-4 py-1.5 dark:bg-gray-darker dark:text-white"
+        className="group flex justify-between bg-gray-100 px-3 py-1.5 dark:bg-gray-darker dark:text-white"
         onClick={toggleRepositoryNotifications}
       >
         <div
