@@ -74,6 +74,7 @@ describe('renderer/routes/Settings.tsx', () => {
     });
 
     fireEvent.click(screen.getByTestId('settings-reset'));
+    fireEvent.click(screen.getByText('Reset'));
 
     expect(resetSettings).toHaveBeenCalled();
   });
@@ -98,6 +99,7 @@ describe('renderer/routes/Settings.tsx', () => {
     });
 
     fireEvent.click(screen.getByTestId('settings-reset'));
+    fireEvent.click(screen.getByText('Cancel'));
 
     expect(resetSettings).not.toHaveBeenCalled();
   });
