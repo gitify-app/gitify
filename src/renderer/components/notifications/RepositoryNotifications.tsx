@@ -1,14 +1,7 @@
 import { type FC, type MouseEvent, useContext, useState } from 'react';
 
 import { CheckIcon, ReadIcon } from '@primer/octicons-react';
-import {
-  Avatar,
-  Button,
-  IconButton,
-  Stack,
-  Text,
-  Tooltip,
-} from '@primer/react';
+import { Avatar, Button, IconButton, Stack, Text } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { Opacity, Size } from '../../types';
@@ -64,23 +57,22 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
             showAsRead && Opacity.READ,
           )}
         >
-          <Tooltip text="Open repository" direction="e">
-            <Button
-              variant="invisible"
-              alignContent="center"
-              count={repoNotifications.length}
-              onClick={(event: MouseEvent<HTMLElement>) => {
-                // Don't trigger onClick of parent element.
-                event.stopPropagation();
-                openRepository(repoNotifications[0].repository);
-              }}
-            >
-              <Stack direction="horizontal" gap="condensed" align="center">
-                <Avatar src={avatarUrl} size={Size.LARGE} />
-                <Text>{repoName}</Text>
-              </Stack>
-            </Button>
-          </Tooltip>
+          <Button
+            title="Open repository"
+            variant="invisible"
+            alignContent="center"
+            count={repoNotifications.length}
+            onClick={(event: MouseEvent<HTMLElement>) => {
+              // Don't trigger onClick of parent element.
+              event.stopPropagation();
+              openRepository(repoNotifications[0].repository);
+            }}
+          >
+            <Stack direction="horizontal" gap="condensed" align="center">
+              <Avatar src={avatarUrl} size={Size.LARGE} />
+              <Text>{repoName}</Text>
+            </Stack>
+          </Button>
         </div>
 
         {!animateExit && (

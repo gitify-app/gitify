@@ -1,14 +1,7 @@
 import { type FC, type MouseEvent, useContext, useMemo, useState } from 'react';
 
 import { GitPullRequestIcon, IssueOpenedIcon } from '@primer/octicons-react';
-import {
-  Avatar,
-  Button,
-  IconButton,
-  Stack,
-  Text,
-  Tooltip,
-} from '@primer/react';
+import { Avatar, Button, IconButton, Stack, Text } from '@primer/react';
 
 import { AppContext } from '../../context/App';
 import { type Account, type GitifyError, Size } from '../../types';
@@ -84,24 +77,23 @@ export const AccountNotifications: FC<IAccountNotifications> = (
           )}
           onClick={toggleAccountNotifications}
         >
-          <Tooltip text="Open profile" direction="e">
-            <Button
-              variant="invisible"
-              alignContent="center"
-              count={notifications.length}
-              onClick={(event: MouseEvent<HTMLElement>) => {
-                // Don't trigger onClick of parent element.
-                event.stopPropagation();
-                openAccountProfile(account);
-              }}
-              data-testid="account-profile"
-            >
-              <Stack direction="horizontal" align="center" gap="condensed">
-                <Avatar src={account.user.avatar} size={Size.MEDIUM} />
-                <Text>@{account.user.login}</Text>
-              </Stack>
-            </Button>
-          </Tooltip>
+          <Button
+            title="Open account profile"
+            variant="invisible"
+            alignContent="center"
+            count={notifications.length}
+            onClick={(event: MouseEvent<HTMLElement>) => {
+              // Don't trigger onClick of parent element.
+              event.stopPropagation();
+              openAccountProfile(account);
+            }}
+            data-testid="account-profile"
+          >
+            <Stack direction="horizontal" align="center" gap="condensed">
+              <Avatar src={account.user.avatar} size={Size.MEDIUM} />
+              <Text>@{account.user.login}</Text>
+            </Stack>
+          </Button>
 
           <HoverGroup>
             <IconButton
