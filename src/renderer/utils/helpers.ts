@@ -6,7 +6,7 @@ import {
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
 import log from 'electron-log';
 import type { Account, Chevron, Hostname, Link } from '../types';
-import type { Notification } from '../typesGitHub';
+import type { Notification, UserType } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
 import { Constants } from './constants';
@@ -228,4 +228,8 @@ export function getChevronDetails(
     icon: ChevronRightIcon,
     label: `Show ${type} notifications`,
   };
+}
+
+export function isNonHumanUser(type: UserType): boolean {
+  return type !== 'User';
 }

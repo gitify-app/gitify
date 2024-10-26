@@ -20,7 +20,6 @@ import {
   IconButton,
   Stack,
   Text,
-  Tooltip,
 } from '@primer/react';
 
 import { Header } from '../components/primitives/Header';
@@ -88,51 +87,54 @@ export const AccountsRoute: FC = () => {
                 className="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gray-sidebar"
               >
                 <Stack direction="vertical" gap="none">
-                  <Tooltip text="Open profile" direction="se">
-                    <Button
-                      onClick={() => openAccountProfile(account)}
-                      data-testid="account-profile"
+                  <Button
+                    title="Open account profile"
+                    onClick={() => openAccountProfile(account)}
+                    data-testid="account-profile"
+                    sx={{ width: 'fit-content' }}
+                  >
+                    <Stack
+                      direction="horizontal"
+                      gap="condensed"
+                      align="center"
                     >
-                      <Stack
-                        direction="horizontal"
-                        gap="condensed"
-                        align="center"
-                      >
-                        <Avatar src={account.user.avatar} size={Size.XLARGE} />
-                        <Text>@{account.user.login}</Text>
-                        <span className="text-xs italic">
-                          ({account.user?.name})
-                        </span>
-                      </Stack>
-                    </Button>
-                  </Tooltip>
+                      <Avatar src={account.user.avatar} size={Size.XLARGE} />
+                      <Text>@{account.user.login}</Text>
+                      <span className="text-xs italic">
+                        ({account.user?.name})
+                      </span>
+                    </Stack>
+                  </Button>
 
-                  <Stack direction="horizontal" gap="condensed" align="start">
+                  <Stack
+                    direction="horizontal"
+                    gap="condensed"
+                    align="start"
+                    justify="space-between"
+                  >
                     <Stack direction="vertical" gap="none">
                       <ActionList variant="inset">
-                        <Tooltip text="Open Host" direction="e">
-                          <ActionList.Item
-                            onSelect={() => openHost(account.hostname)}
-                            data-testid="account-host"
-                          >
-                            <ActionList.LeadingVisual>
-                              <PlatformIcon />
-                            </ActionList.LeadingVisual>
-                            <span className="text-xs">{account.hostname}</span>
-                          </ActionList.Item>
-                        </Tooltip>
+                        <ActionList.Item
+                          title="Open host"
+                          onSelect={() => openHost(account.hostname)}
+                          data-testid="account-host"
+                        >
+                          <ActionList.LeadingVisual>
+                            <PlatformIcon />
+                          </ActionList.LeadingVisual>
+                          <span className="text-xs">{account.hostname}</span>
+                        </ActionList.Item>
 
-                        <Tooltip text="Open Developer Settings" direction="e">
-                          <ActionList.Item
-                            onSelect={() => openDeveloperSettings(account)}
-                            data-testid="account-developer-settings"
-                          >
-                            <ActionList.LeadingVisual>
-                              <AuthMethodIcon />
-                            </ActionList.LeadingVisual>
-                            <span className="text-xs">{account.method}</span>
-                          </ActionList.Item>
-                        </Tooltip>
+                        <ActionList.Item
+                          title="Open developer settings"
+                          onSelect={() => openDeveloperSettings(account)}
+                          data-testid="account-developer-settings"
+                        >
+                          <ActionList.LeadingVisual>
+                            <AuthMethodIcon />
+                          </ActionList.LeadingVisual>
+                          <span className="text-xs">{account.method}</span>
+                        </ActionList.Item>
                       </ActionList>
                     </Stack>
 

@@ -10,6 +10,7 @@ import { cn } from '../../utils/cn';
 import {
   getChevronDetails,
   isMarkAsDoneFeatureSupported,
+  isNonHumanUser,
 } from '../../utils/helpers';
 import { openRepository } from '../../utils/links';
 import { HoverGroup } from '../primitives/HoverGroup';
@@ -69,7 +70,13 @@ export const RepositoryNotifications: FC<IRepositoryNotifications> = ({
             }}
           >
             <Stack direction="horizontal" gap="condensed" align="center">
-              <Avatar src={avatarUrl} size={Size.LARGE} />
+              <Avatar
+                src={avatarUrl}
+                size={Size.LARGE}
+                square={isNonHumanUser(
+                  repoNotifications[0].repository.owner.type,
+                )}
+              />
               <Text>{repoName}</Text>
             </Stack>
           </Button>

@@ -27,6 +27,7 @@ import {
   getPlatformFromHostname,
   isEnterpriseServerHost,
   isMarkAsDoneFeatureSupported,
+  isNonHumanUser,
 } from './helpers';
 
 describe('renderer/utils/helpers.ts', () => {
@@ -629,5 +630,11 @@ describe('renderer/utils/helpers.ts', () => {
         label: 'No notifications for account',
       });
     });
+  });
+
+  it('isNonHumanUser', () => {
+    expect(isNonHumanUser('User')).toBe(false);
+    expect(isNonHumanUser('Bot')).toBe(true);
+    expect(isNonHumanUser('Organization')).toBe(true);
   });
 });

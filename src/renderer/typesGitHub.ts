@@ -248,7 +248,7 @@ export interface Owner {
   repos_url: Link;
   events_url: Link;
   received_events_url: Link;
-  type: string;
+  type: UserType;
   site_admin: boolean;
 }
 
