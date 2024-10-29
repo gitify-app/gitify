@@ -143,7 +143,7 @@
     "@primer/react": "36.27.0",
     "@testing-library/react": "16.0.1",
     "@types/jest": "29.5.14",
-    "@types/node": "20.17.0",
+    "@types/node": "22.8.2",
     "@types/nprogress": "0.2.3",
     "@types/react": "18.3.12",
     "@types/react-router-dom": "5.3.3",
@@ -182,7 +182,7 @@
     "webpack-cli": "5.1.4",
     "webpack-merge": "6.0.1"
   },
-  "packageManager": "pnpm@9.12.2",
+  "packageManager": "pnpm@9.12.3",
   "lint-staged": {
     "*": "biome check --fix --no-errors-on-unmatched",
     "*.{js,ts,tsx}": "pnpm test -- --findRelatedTests -u --passWithNoTests"
