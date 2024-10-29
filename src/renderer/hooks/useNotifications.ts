@@ -103,13 +103,24 @@ export const useNotifications = (): NotificationsState => {
 
       try {
         await Promise.all(
-          readNotifications.map((notification) =>
-            markNotificationThreadAsRead(
-              notification.id,
-              notification.account.hostname,
-              notification.account.token,
-            ),
-          ),
+          readNotifications.map((notification) => {
+            if (
+              isMarkAsDoneFeatureSupported(readNotifications[0].account) &&
+              state.settings.markAsDoneOnOpen
+            ) {
+              markNotificationThreadAsDone(
+                notification.id,
+                notification.account.hostname,
+                notification.account.token,
+              );
+            } else {
+              markNotificationThreadAsRead(
+                notification.id,
+                notification.account.hostname,
+                notification.account.token,
+              );
+            }
+          }),
         );
 
         const updatedNotifications = removeNotifications(
@@ -174,7 +185,10 @@ export const useNotifications = (): NotificationsState => {
           notification.account.token,
         );
 
-        if (state.settings.markAsDoneOnUnsubscribe) {
+        if (
+          isMarkAsDoneFeatureSupported(notification.account) &&
+          state.settings.markAsDoneOnUnsubscribe
+        ) {
           await markNotificationsAsDone(state, [notification]);
         } else {
           await markNotificationsAsRead(state, [notification]);

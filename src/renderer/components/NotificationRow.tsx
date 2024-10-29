@@ -50,7 +50,10 @@ export const NotificationRow: FC<INotificationRow> = ({
 
     openNotification(notification);
 
-    if (settings.markAsDoneOnOpen) {
+    if (
+      isMarkAsDoneFeatureSupported(notification.account) &&
+      settings.markAsDoneOnOpen
+    ) {
       markNotificationsAsDone([notification]);
     } else {
       markNotificationsAsRead([notification]);
