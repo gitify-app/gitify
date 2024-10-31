@@ -231,5 +231,5 @@ export function getChevronDetails(
 }
 
 export function isNonHumanUser(type: UserType): boolean {
-  return type !== 'User';
+  return type === 'Bot' || type === 'Organization' || type === 'Mannequin';
 }
