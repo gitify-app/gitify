@@ -22,7 +22,7 @@ exports[`renderer/utils/api/client.ts headNotifications should fetch notificatio
 {
   "Accept": "application/json",
   "Authorization": "token token-123-456",
-  "Cache-Control": "",
+  "Cache-Control": "no-cache",
   "Content-Type": "application/json",
 }
 `;
@@ -76,7 +76,7 @@ exports[`renderer/utils/api/client.ts listNotificationsForAuthenticatedUser shou
 {
   "Accept": "application/json",
   "Authorization": "token 1234568790",
-  "Cache-Control": "",
+  "Cache-Control": "no-cache",
   "Content-Type": "application/json",
 }
 `;
