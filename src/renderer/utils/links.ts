@@ -1,5 +1,5 @@
 import type { Account, Hostname, Link } from '../types';
-import type { Notification, Repository, SubjectUser } from '../typesGitHub';
+import type { Notification, SubjectUser } from '../typesGitHub';
 import { getDeveloperSettingsURL } from './auth/utils';
 import { openExternalLink } from './comms';
 import { Constants } from './constants';
@@ -46,10 +46,6 @@ export function openHost(hostname: Hostname) {
 export function openDeveloperSettings(account: Account) {
   const url = getDeveloperSettingsURL(account);
   openExternalLink(url);
-}
-
-export function openRepository(repository: Repository) {
-  openExternalLink(repository.html_url);
 }
 
 export async function openNotification(notification: Notification) {

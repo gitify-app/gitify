@@ -1,7 +1,6 @@
 import { partialMockUser } from '../__mocks__/partial-mocks';
 import { mockGitHubCloudAccount } from '../__mocks__/state-mocks';
 import type { Hostname, Link } from '../types';
-import type { Repository } from '../typesGitHub';
 import { mockSingleNotification } from './api/__mocks__/response-mocks';
 import * as authUtils from './auth/utils';
 import * as comms from './comms';
@@ -17,7 +16,6 @@ import {
   openGitifyReleaseNotes,
   openHost,
   openNotification,
-  openRepository,
   openUserProfile,
 } from './links';
 
@@ -88,19 +86,9 @@ describe('renderer/utils/links.ts', () => {
     expect(openExternalLinkMock).toHaveBeenCalledWith(mockSettingsURL);
   });
 
-  it('openRepository', () => {
-    const mockHtmlUrl = 'https://github.com/gitify-app/gitify';
-
-    const repo = {
-      html_url: mockHtmlUrl,
-    } as Repository;
-
-    openRepository(repo);
-    expect(openExternalLinkMock).toHaveBeenCalledWith(mockHtmlUrl);
-  });
-
   it('openNotification', async () => {
-    const mockNotificationUrl = mockSingleNotification.repository.html_url;
+    const mockNotificationUrl = mockSingleNotification.repository
+      .html_url as Link;
     jest
       .spyOn(helpers, 'generateGitHubWebUrl')
       .mockResolvedValue(mockNotificationUrl);
