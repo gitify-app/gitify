@@ -118,8 +118,8 @@ importers:
         specifier: 2.9.2
         version: 2.9.2(webpack@5.96.1)
       nock:
-        specifier: 13.5.5
-        version: 13.5.5
+        specifier: 13.5.6
+        version: 13.5.6
       nprogress:
         specifier: 0.2.0
         version: 0.2.0
@@ -2775,8 +2775,8 @@ packages:
   no-case@3.0.4:
     resolution: {integrity: sha512-fgAN3jGAh+RoxUGZHTSOLJIqUc2wmoBwGR4tbpNAKmmovFoWq0OdRkb0VkldReO2a2iBT/OEulG9XSUc10r3zg==}
 
-  nock@13.5.5:
-    resolution: {integrity: sha512-XKYnqUrCwXC8DGG1xX4YH5yNIrlh9c065uaMZZHUoeUUINTOyt+x/G+ezYk0Ft6ExSREVIs+qBJDK503viTfFA==}
+  nock@13.5.6:
+    resolution: {integrity: sha512-o2zOYiCpzRqSzPj0Zt/dQ/DqZeYoaQ7TUonc/xUPjCGl9WeHpNbxgVvOquXYAaJzI0M9BXV3HTzG0p8IUAbBTQ==}
     engines: {node: '>= 10.13'}
 
   node-abi@3.67.0:
@@ -7285,7 +7285,7 @@ snapshots:
       lower-case: 2.0.2
       tslib: 2.6.2
 
-  nock@13.5.5:
+  nock@13.5.6:
     dependencies:
       debug: 4.3.4
       json-stringify-safe: 5.0.1
