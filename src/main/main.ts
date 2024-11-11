@@ -1,15 +1,9 @@
 import { app, globalShortcut, ipcMain as ipc, nativeTheme } from 'electron';
 import log from 'electron-log';
 import { menubar } from 'menubar';
+
 import { onFirstRunMaybe } from './first-run';
-import {
-  activeIcon,
-  activeUpdateIcon,
-  idleAlternateIcon,
-  idleAlternateUpdateIcon,
-  idleIcon,
-  idleUpdateIcon,
-} from './icons';
+import { TrayIcons } from './icons';
 import MenuBuilder from './menu';
 import Updater from './updater';
 
@@ -30,7 +24,7 @@ const browserWindowOpts = {
 };
 
 const mb = menubar({
-  icon: idleIcon,
+  icon: TrayIcons.idle,
   index: `file://${__dirname}/index.html`,
   browserWindow: browserWindowOpts,
   preloadWindow: true,
@@ -115,8 +109,8 @@ app.whenReady().then(async () => {
     if (!mb.tray.isDestroyed()) {
       mb.tray.setImage(
         menuBuilder.isUpdateAvailableMenuVisible()
-          ? activeUpdateIcon
-          : activeIcon,
+          ? TrayIcons.activeUpdateIcon
+          : TrayIcons.active,
       );
     }
   });
@@ -126,14 +120,14 @@ app.whenReady().then(async () => {
       if (shouldUseAlternateIdleIcon) {
         mb.tray.setImage(
           menuBuilder.isUpdateAvailableMenuVisible()
-            ? idleAlternateUpdateIcon
-            : idleAlternateIcon,
+            ? TrayIcons.idleAlternateUpdateIcon
+            : TrayIcons.idleAlternate,
         );
       } else {
         mb.tray.setImage(
           menuBuilder.isUpdateAvailableMenuVisible()
-            ? idleUpdateIcon
-            : idleIcon,
+            ? TrayIcons.idleUpdateIcon
+            : TrayIcons.idle,
         );
       }
     }
