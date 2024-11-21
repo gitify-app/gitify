@@ -552,9 +552,9 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
               Updated
             </div>
             <div
-              title="gitify-app updated 7 years ago"
+              title="gitify-app updated 8 years ago"
             >
-              7 years ago
+              8 years ago
             </div>
             <div
               class="flex"
@@ -760,9 +760,9 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
               Authored
             </div>
             <div
-              title="Updated 7 years ago"
+              title="Updated 8 years ago"
             >
-              7 years ago
+              8 years ago
             </div>
             <div
               class="flex"
@@ -1038,9 +1038,9 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             Updated
           </div>
           <div
-            title="gitify-app updated 7 years ago"
+            title="gitify-app updated 8 years ago"
           >
-            7 years ago
+            8 years ago
           </div>
           <div
             class="flex"
@@ -1246,9 +1246,9 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             Authored
           </div>
           <div
-            title="Updated 7 years ago"
+            title="Updated 8 years ago"
           >
-            7 years ago
+            8 years ago
           </div>
           <div
             class="flex"
