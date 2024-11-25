@@ -170,7 +170,7 @@
     "postcss-loader": "8.1.1",
     "react-final-form": "6.5.9",
     "rimraf": "6.0.1",
-    "tailwind-merge": "2.5.4",
+    "tailwind-merge": "2.5.5",
     "tailwindcss": "3.4.15",
     "terser-webpack-plugin": "5.3.10",
     "ts-jest": "29.2.5",
