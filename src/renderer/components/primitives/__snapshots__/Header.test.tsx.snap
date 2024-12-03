@@ -17,8 +17,8 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
           data-wrap="nowrap"
         >
           <button
-            aria-describedby=":r1:-loading-announcement"
-            aria-labelledby=":r0:"
+            aria-describedby=":r0:-loading-announcement"
+            aria-labelledby="Go Back"
             class="types__StyledButton-sc-ws60qy-0 ggqBNv"
             data-component="IconButton"
             data-loading="false"
@@ -42,15 +42,6 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
               />
             </svg>
           </button>
-          <span
-            aria-hidden="true"
-            class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
-            data-direction="e"
-            id=":r0:"
-            popover="auto"
-          >
-            Go Back
-          </span>
           <div
             class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
             data-align="center"
@@ -98,8 +89,8 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
         data-wrap="nowrap"
       >
         <button
-          aria-describedby=":r1:-loading-announcement"
-          aria-labelledby=":r0:"
+          aria-describedby=":r0:-loading-announcement"
+          aria-labelledby="Go Back"
           class="types__StyledButton-sc-ws60qy-0 ggqBNv"
           data-component="IconButton"
           data-loading="false"
@@ -123,15 +114,6 @@ exports[`renderer/components/primitives/Header.tsx should render itself & its ch
             />
           </svg>
         </button>
-        <span
-          aria-hidden="true"
-          class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
-          data-direction="e"
-          id=":r0:"
-          popover="auto"
-        >
-          Go Back
-        </span>
         <div
           class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
           data-align="center"

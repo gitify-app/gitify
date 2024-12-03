@@ -17,8 +17,8 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       data-wrap="nowrap"
     >
       <button
-        aria-describedby=":r1:-loading-announcement"
-        aria-labelledby=":r0:"
+        aria-describedby=":r0:-loading-announcement"
+        aria-labelledby="Go Back"
         class="types__StyledButton-sc-ws60qy-0 ggqBNv"
         data-component="IconButton"
         data-loading="false"
@@ -42,15 +42,6 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
           />
         </svg>
       </button>
-      <span
-        aria-hidden="true"
-        class="Tooltip__StyledTooltip-sc-e45c7z-0 gdnrwk"
-        data-direction="e"
-        id=":r0:"
-        popover="auto"
-      >
-        Go Back
-      </span>
       <div
         class="Stack__StyledStack-sc-x3xa2i-0 dStkQv"
         data-align="center"
@@ -205,7 +196,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             class="ButtonGroup-sc-1gxhls1-0 hUffXB"
           >
             <button
-              aria-describedby=":r2:-loading-announcement"
+              aria-describedby=":r1:-loading-announcement"
               class="types__StyledButton-sc-ws60qy-0 bBRiTk"
               data-loading="false"
               data-no-visuals="true"
@@ -225,7 +216,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   <span
                     aria-label="Zoom out"
                     class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-n"
-                    id=":r3:"
+                    id=":r2:"
                     role="tooltip"
                   >
                     <svg
@@ -247,7 +238,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </span>
             </button>
             <button
-              aria-describedby=":r4:-loading-announcement"
+              aria-describedby=":r3:-loading-announcement"
               aria-label="Zoom percentage"
               class="types__StyledButton-sc-ws60qy-0 bBRiTk"
               data-loading="false"
@@ -271,7 +262,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </span>
             </button>
             <button
-              aria-describedby=":r5:-loading-announcement"
+              aria-describedby=":r4:-loading-announcement"
               class="types__StyledButton-sc-ws60qy-0 bBRiTk"
               data-loading="false"
               data-no-visuals="true"
@@ -291,7 +282,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   <span
                     aria-label="Zoom in"
                     class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-n"
-                    id=":r6:"
+                    id=":r5:"
                     role="tooltip"
                   >
                     <svg
@@ -313,7 +304,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
               </span>
             </button>
             <button
-              aria-describedby=":r7:-loading-announcement"
+              aria-describedby=":r6:-loading-announcement"
               class="types__StyledButton-sc-ws60qy-0 fxwkNN"
               data-loading="false"
               data-no-visuals="true"
@@ -333,7 +324,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
                   <span
                     aria-label="Reset zoom"
                     class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-n"
-                    id=":r8:"
+                    id=":r7:"
                     role="tooltip"
                   >
                     <svg
@@ -1084,7 +1075,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       data-wrap="nowrap"
     >
       <button
-        aria-describedby=":r9:-loading-announcement"
+        aria-describedby=":r8:-loading-announcement"
         class="types__StyledButton-sc-ws60qy-0 eMwPlY"
         data-loading="false"
         data-no-visuals="true"
@@ -1120,11 +1111,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       <span
         aria-label="View release notes"
         class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-n"
-        id=":ra:"
+        id=":r9:"
         role="tooltip"
       >
         <button
-          aria-describedby=":rb:-loading-announcement"
+          aria-describedby=":ra:-loading-announcement"
           class="types__StyledButton-sc-ws60qy-0 bBRiTk"
           data-loading="false"
           data-no-visuals="true"
@@ -1159,11 +1150,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       <span
         aria-label="Accounts"
         class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-n"
-        id=":rc:"
+        id=":rb:"
         role="tooltip"
       >
         <button
-          aria-describedby=":rd:-loading-announcement"
+          aria-describedby=":rc:-loading-announcement"
           aria-label="Accounts"
           class="types__StyledButton-sc-ws60qy-0 bBRiTk"
           data-component="IconButton"
@@ -1192,11 +1183,11 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
       <span
         aria-label="Quit Gitify"
         class="Tooltip__TooltipBase-sc-17tf59c-0 rtmEP tooltipped-nw"
-        id=":re:"
+        id=":rd:"
         role="tooltip"
       >
         <button
-          aria-describedby=":rf:-loading-announcement"
+          aria-describedby=":re:-loading-announcement"
           aria-label="Quit Gitify"
           class="types__StyledButton-sc-ws60qy-0 fxwkNN"
           data-component="IconButton"
