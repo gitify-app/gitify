@@ -88,7 +88,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               Hostname
             </label>
             <input
-              class="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
+              class="mb-2 block w-full appearance-none rounded border bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800 border-gray-500"
               id="hostname"
               name="hostname"
               placeholder="github.company.com"
@@ -186,7 +186,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
               Token
             </label>
             <input
-              class="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
+              class="mb-2 block w-full appearance-none rounded border bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800 border-red-500"
               id="token"
               name="token"
               placeholder="The 40 characters token generated on GitHub"
@@ -387,7 +387,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             Hostname
           </label>
           <input
-            class="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
+            class="mb-2 block w-full appearance-none rounded border bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800 border-gray-500"
             id="hostname"
             name="hostname"
             placeholder="github.company.com"
@@ -485,7 +485,7 @@ exports[`renderer/routes/LoginWithPersonalAccessToken.tsx renders correctly 1`] 
             Token
           </label>
           <input
-            class="mb-2 block w-full appearance-none rounded border border-red-500 bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800"
+            class="mb-2 block w-full appearance-none rounded border bg-gray-100 px-4 py-1.5 text-sm focus:bg-gray-200 focus:outline-none dark:text-gray-800 border-red-500"
             id="token"
             name="token"
             placeholder="The 40 characters token generated on GitHub"
