@@ -22,7 +22,7 @@ export const Header: FC<IHeader> = (props: IHeader) => {
     <div className="mx-6 mt-2 py-2">
       <Stack direction="horizontal" justify="space-between">
         <IconButton
-          aria-label="Go Back"
+          aria-labelledby="Go Back"
           variant="invisible"
           tooltipDirection="e"
           icon={ArrowLeftIcon}
