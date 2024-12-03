@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import os from 'node:os';
-import { dialog } from 'electron';
+import path from 'node:path';
+import { dialog, shell } from 'electron';
 import log from 'electron-log';
 import type { Menubar } from 'menubar';
 
@@ -34,4 +35,15 @@ export function resetApp(mb: Menubar) {
     mb.window.webContents.send('gitify:reset-app');
     mb.app.quit();
   }
+}
+
+export function openLogsDirectory() {
+  const logDirectory = path.dirname(log.transports.file?.getFile()?.path);
+
+  if (!logDirectory) {
+    log.error('Could not find log directory!');
+    return;
+  }
+
+  shell.openPath(logDirectory);
 }

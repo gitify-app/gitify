@@ -837,9 +837,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </span>
             <span
               class="text-xs capitalize opacity-80"
-              title="gitify-app updated 7 years ago"
+              title="gitify-app updated 8 years ago"
             >
-              7 years ago
+              8 years ago
             </span>
             <div
               class="flex"
@@ -1150,9 +1150,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
             </span>
             <span
               class="text-xs capitalize opacity-80"
-              title="Updated 7 years ago"
+              title="Updated 8 years ago"
             >
-              7 years ago
+              8 years ago
             </span>
             <div
               class="flex"
@@ -1590,9 +1590,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </span>
           <span
             class="text-xs capitalize opacity-80"
-            title="gitify-app updated 7 years ago"
+            title="gitify-app updated 8 years ago"
           >
-            7 years ago
+            8 years ago
           </span>
           <div
             class="flex"
@@ -1903,9 +1903,9 @@ exports[`renderer/components/notifications/AccountNotifications.tsx should rende
           </span>
           <span
             class="text-xs capitalize opacity-80"
-            title="Updated 7 years ago"
+            title="Updated 8 years ago"
           >
-            7 years ago
+            8 years ago
           </span>
           <div
             class="flex"

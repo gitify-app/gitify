@@ -94,6 +94,7 @@ function shouldRequestWithNoCache(url: string) {
 
   switch (parsedUrl.pathname) {
     case '/notifications':
+    case '/api/v3/notifications':
       return true;
     default:
       return false;

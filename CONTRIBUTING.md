@@ -12,11 +12,11 @@ pnpm install
 
 ### Development
 
-Optional: If you prefer to use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion).
-
-```shell
-OAUTH_CLIENT_ID="123" OAUTH_CLIENT_SECRET="456789" pnpm build
-```
+> [!TIP]
+> _Optional: If you prefer to use your own OAuth credentials, you can do so by passing them as environment variables when bundling the app. This is optional as the app has some default "development" keys (use at your own discretion)._
+> ```shell
+> OAUTH_CLIENT_ID="123" OAUTH_CLIENT_SECRET="456789" pnpm build
+> ```
 
 To watch for changes (`webpack`) in the `src` directory:
 

@@ -1,7 +1,7 @@
 import { Menu, MenuItem } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import type { Menubar } from 'menubar';
-import { resetApp, takeScreenshot } from './utils';
+import { openLogsDirectory, resetApp, takeScreenshot } from './utils';
 
 export default class MenuBuilder {
   private checkForUpdatesMenuItem: MenuItem;
@@ -58,6 +58,10 @@ export default class MenuBuilder {
             label: 'Take Screenshot',
             accelerator: 'CommandOrControl+S',
             click: () => takeScreenshot(this.menubar),
+          },
+          {
+            label: 'View Application Logs',
+            click: () => openLogsDirectory(),
           },
           {
             label: 'Reset App',
