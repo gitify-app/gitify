@@ -86,85 +86,112 @@ export const AccountsRoute: FC = () => {
                 key={getAccountUUID(account)}
                 className="rounded-md bg-gray-100 p-2 pb-0 dark:bg-gray-sidebar"
               >
-                <Stack direction="vertical" gap="none">
-                  <Button
-                    title="Open account profile"
-                    onClick={() => openAccountProfile(account)}
-                    data-testid="account-profile"
-                    sx={{ width: 'fit-content' }}
-                  >
-                    <Stack
-                      direction="horizontal"
-                      gap="condensed"
-                      align="center"
-                    >
-                      <Avatar src={account.user.avatar} size={Size.XLARGE} />
-                      <Text>@{account.user.login}</Text>
-                      <span className="text-xs italic">
-                        ({account.user?.name})
-                      </span>
-                    </Stack>
-                  </Button>
+                <Stack
+                  direction="horizontal"
+                  gap="condensed"
+                  align="center"
+                  justify="space-between"
+                >
+                  <Stack direction="vertical" gap="none">
+                    <div className="pb-2">
+                      <Button
+                        title="Open account profile"
+                        onClick={() => openAccountProfile(account)}
+                        data-testid="account-profile"
+                      >
+                        <Stack
+                          direction="horizontal"
+                          gap="condensed"
+                          align="center"
+                        >
+                          <Avatar
+                            src={account.user.avatar}
+                            size={Size.XLARGE}
+                          />
+                          <Text>@{account.user.login}</Text>
+                        </Stack>
+                      </Button>
+                    </div>
 
-                  <Stack
-                    direction="horizontal"
-                    gap="condensed"
-                    align="start"
-                    justify="space-between"
-                  >
-                    <Stack direction="vertical" gap="none">
-                      <ActionList variant="inset">
-                        <ActionList.Item
+                    <div className="pb-2 pl-4">
+                      <Stack direction="vertical" gap="condensed">
+                        <div hidden={!account.user.name}>
+                          <Stack
+                            direction="horizontal"
+                            gap="condensed"
+                            align="center"
+                          >
+                            <PersonIcon />
+                            <span className="text-xs">
+                              {account.user?.name}
+                            </span>
+                          </Stack>
+                        </div>
+
+                        <button
                           title="Open host"
-                          onSelect={() => openHost(account.hostname)}
+                          type="button"
+                          onClick={() => openHost(account.hostname)}
                           data-testid="account-host"
                         >
-                          <ActionList.LeadingVisual>
+                          <Stack
+                            direction="horizontal"
+                            gap="condensed"
+                            align="center"
+                          >
                             <PlatformIcon />
-                          </ActionList.LeadingVisual>
-                          <span className="text-xs">{account.hostname}</span>
-                        </ActionList.Item>
+                            <span className="text-xs">{account.hostname}</span>
+                          </Stack>
+                        </button>
 
-                        <ActionList.Item
+                        <button
                           title="Open developer settings"
-                          onSelect={() => openDeveloperSettings(account)}
+                          type="button"
+                          onClick={() => openDeveloperSettings(account)}
                           data-testid="account-developer-settings"
                         >
-                          <ActionList.LeadingVisual>
+                          <Stack
+                            direction="horizontal"
+                            gap="condensed"
+                            align="center"
+                          >
                             <AuthMethodIcon />
-                          </ActionList.LeadingVisual>
-                          <span className="text-xs">{account.method}</span>
-                        </ActionList.Item>
-                      </ActionList>
-                    </Stack>
+                            <span className="text-xs">{account.method}</span>
+                          </Stack>
+                        </button>
+                      </Stack>
+                    </div>
+                  </Stack>
 
-                    <Stack direction="horizontal" gap="condensed">
-                      <IconButton
-                        icon={i === 0 ? StarFillIcon : StarIcon}
-                        aria-label={
-                          i === 0 ? 'Primary account' : 'Set as primary account'
-                        }
-                        variant={i === 0 ? 'primary' : 'default'}
-                        onClick={() => setAsPrimaryAccount(account)}
-                        data-testid="account-set-primary"
-                      />
-                      <IconButton
-                        icon={SyncIcon}
-                        aria-label={`Refresh ${account.user.login}`}
-                        onClick={async () => {
-                          await refreshAccount(account);
-                          navigate('/accounts', { replace: true });
-                        }}
-                        data-testid="account-refresh"
-                      />
-                      <IconButton
-                        icon={SignOutIcon}
-                        aria-label={`Logout ${account.user.login}`}
-                        variant="danger"
-                        onClick={() => logoutAccount(account)}
-                        data-testid="account-logout"
-                      />
-                    </Stack>
+                  <Stack direction="horizontal" gap="condensed">
+                    <IconButton
+                      icon={i === 0 ? StarFillIcon : StarIcon}
+                      aria-label={
+                        i === 0 ? 'Primary account' : 'Set as primary account'
+                      }
+                      variant={i === 0 ? 'primary' : 'default'}
+                      onClick={() => setAsPrimaryAccount(account)}
+                      size="small"
+                      data-testid="account-set-primary"
+                    />
+                    <IconButton
+                      icon={SyncIcon}
+                      aria-label={`Refresh ${account.user.login}`}
+                      onClick={async () => {
+                        await refreshAccount(account);
+                        navigate('/accounts', { replace: true });
+                      }}
+                      size="small"
+                      data-testid="account-refresh"
+                    />
+                    <IconButton
+                      icon={SignOutIcon}
+                      aria-label={`Logout ${account.user.login}`}
+                      variant="danger"
+                      onClick={() => logoutAccount(account)}
+                      size="small"
+                      data-testid="account-logout"
+                    />
                   </Stack>
                 </Stack>
               </div>
