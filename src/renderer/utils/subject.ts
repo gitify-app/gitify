@@ -10,9 +10,12 @@ import type {
   Notification,
   PullRequest,
   PullRequestReview,
+  PullRequestReviewState,
   PullRequestStateType,
+  StateType,
   SubjectUser,
   User,
+  UserType,
   WorkflowRunAttributes,
 } from '../typesGitHub';
 import {
@@ -224,7 +227,7 @@ async function getGitifySubjectForIssue(
 
   return {
     number: issue.number,
-    state: issue.state_reason ?? issue.state,
+    state: issue.state_reason ?? (issue.state as StateType),
     user: getSubjectUser([issueCommentUser, issue.user]),
     comments: issue.comments,
     labels: issue.labels?.map((label) => label.name) ?? [],
@@ -313,7 +316,7 @@ export async function getLatestReviewForReviewers(
 
     if (!reviewerFound) {
       reviewers.push({
-        state: prReview.state,
+        state: prReview.state as PullRequestReviewState,
         users: [prReview.user.login],
       });
     } else {
@@ -421,9 +424,9 @@ export function getSubjectUser(users: User[]): SubjectUser {
     if (user) {
       subjectUser = {
         login: user.login,
-        html_url: user.html_url,
-        avatar_url: user.avatar_url,
-        type: user.type,
+        html_url: user.html_url as Link,
+        avatar_url: user.avatar_url as Link,
+        type: user.type as UserType,
       };
 
       return subjectUser;

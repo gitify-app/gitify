@@ -19,7 +19,7 @@ export const mockNotificationUser: User = {
   id: 123456789,
   node_id: 'MDQ6VXNlcjE=',
   avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4' as Link,
-  gravatar_url: '' as Link,
+  gravatar_id: '',
   url: 'https://api.github.com/users/octocat' as Link,
   html_url: 'https://github.com/octocat' as Link,
   followers_url: 'https://api.github.com/users/octocat/followers' as Link,

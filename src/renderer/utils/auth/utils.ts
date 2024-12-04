@@ -100,7 +100,7 @@ export async function getUserData(
     id: response.id,
     login: response.login,
     name: response.name,
-    avatar: response.avatar_url,
+    avatar: response.avatar_url as Link,
   };
 }
 
@@ -162,7 +162,7 @@ export async function refreshAccount(account: Account): Promise<Account> {
       id: res.data.id,
       login: res.data.login,
       name: res.data.name,
-      avatar: res.data.avatar_url,
+      avatar: res.data.avatar_url as Link,
     };
 
     // Refresh platform version

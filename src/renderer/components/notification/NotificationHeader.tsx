@@ -1,10 +1,10 @@
 import { MarkGithubIcon } from '@primer/octicons-react';
 import { type FC, type MouseEvent, useContext } from 'react';
 import { AppContext } from '../../context/App';
-import { Opacity, Size } from '../../types';
+import { type Link, Opacity, Size } from '../../types';
 import type { Notification } from '../../typesGitHub';
 import { cn } from '../../utils/cn';
-import { openRepository } from '../../utils/links';
+import { openExternalLink } from '../../utils/comms';
 import { AvatarIcon } from '../icons/AvatarIcon';
 
 interface INotificationHeader {
@@ -43,7 +43,7 @@ export const NotificationHeader: FC<INotificationHeader> = ({
           onClick={(event: MouseEvent<HTMLElement>) => {
             // Don't trigger onClick of parent element.
             event.stopPropagation();
-            openRepository(notification.repository);
+            openExternalLink(notification.repository.html_url as Link);
           }}
         >
           {repoSlug}
