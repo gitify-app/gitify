@@ -144,7 +144,7 @@
     "@types/jest": "29.5.14",
     "@types/node": "22.10.1",
     "@types/nprogress": "0.2.3",
-    "@types/react": "18.3.12",
+    "@types/react": "18.3.13",
     "@types/react-router-dom": "5.3.3",
     "autoprefixer": "10.4.20",
     "axios": "1.7.8",
