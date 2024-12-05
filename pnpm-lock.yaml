@@ -43,8 +43,8 @@ importers:
         specifier: 2.5.0
         version: 2.5.0
       '@primer/octicons-react':
-        specifier: 19.12.0
-        version: 19.12.0(react@18.3.1)
+        specifier: 19.13.0
+        version: 19.13.0(react@18.3.1)
       '@testing-library/react':
         specifier: 16.0.1
         version: 16.0.1(@testing-library/dom@10.0.0)(@types/react-dom@18.2.22)(@types/react@18.3.13)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
@@ -605,8 +605,8 @@ packages:
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
 
-  '@primer/octicons-react@19.12.0':
-    resolution: {integrity: sha512-xnVzFmeWqqiiv9XYZ0hrlytAlCrSZ+HM3JrRzmD/LiPgdyEhyG/qb/ewMukiDoF9Ckwy4rkd1zuDd3KAx4DIAw==}
+  '@primer/octicons-react@19.13.0':
+    resolution: {integrity: sha512-EhE/d7SenURyL24iz8+2ZgZtMbT2vYvDzl/e2lAznxcYa2uhP8CWbKCKy2dqW/FPf4ZREGcvN+fecsjqIi8KVQ==}
     engines: {node: '>=8'}
     peerDependencies:
       react: '>=16.3'
@@ -4666,7 +4666,7 @@ snapshots:
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@primer/octicons-react@19.12.0(react@18.3.1)':
+  '@primer/octicons-react@19.13.0(react@18.3.1)':
     dependencies:
       react: 18.3.1
 
