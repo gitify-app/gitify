@@ -22,6 +22,7 @@ import type {
   Release,
   UserDetails,
 } from '../../typesGitHub';
+import { isAnsweredDiscussionFeatureSupported } from '../helpers';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
 import { apiRequestAuth } from './request';
@@ -244,6 +245,9 @@ export async function searchDiscussions(
         firstDiscussions: 1,
         lastComments: 1,
         lastReplies: 1,
+        includeIsAnswered: isAnsweredDiscussionFeatureSupported(
+          notification.account,
+        ),
       },
     },
   );
