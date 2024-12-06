@@ -1,28 +1,35 @@
+import { ipcRenderer, webFrame } from 'electron';
+import { type FC, useContext, useEffect, useState } from 'react';
+
 import {
   CheckIcon,
   CommentIcon,
+  DashIcon,
   GitPullRequestIcon,
   IssueClosedIcon,
   MilestoneIcon,
   PaintbrushIcon,
+  PlusIcon,
   TagIcon,
+  XCircleIcon,
 } from '@primer/octicons-react';
-import { ipcRenderer, webFrame } from 'electron';
-import { type FC, useContext, useEffect, useState } from 'react';
+import { Button, ButtonGroup, Tooltip, useTheme } from '@primer/react';
+import type { ColorModeWithAuto } from '@primer/react/lib/ThemeProvider';
+
 import { AppContext } from '../../context/App';
 import { Size, Theme } from '../../types';
 import { hasMultipleAccounts } from '../../utils/auth/utils';
 import { setTheme } from '../../utils/theme';
 import { zoomLevelToPercentage, zoomPercentageToLevel } from '../../utils/zoom';
-import { Button } from '../buttons/Button';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
-import { Legend } from './Legend';
+import { Legend } from '../primitives/Legend';
 
 let timeout: NodeJS.Timeout;
 const DELAY = 200;
 
 export const AppearanceSettings: FC = () => {
+  const { setColorMode } = useTheme();
   const { auth, settings, updateSetting } = useContext(AppContext);
   const [zoomPercentage, setZoomPercentage] = useState(
     zoomLevelToPercentage(webFrame.getZoomLevel()),
@@ -32,9 +39,10 @@ export const AppearanceSettings: FC = () => {
     ipcRenderer.on('gitify:update-theme', (_, updatedTheme: Theme) => {
       if (settings.theme === Theme.SYSTEM) {
         setTheme(updatedTheme);
+        setColorMode(updatedTheme === Theme.LIGHT ? 'light' : 'dark');
       }
     });
-  }, [settings.theme]);
+  }, [settings.theme, setColorMode]);
 
   window.addEventListener('resize', () => {
     // clear the timeout
@@ -50,6 +58,7 @@ export const AppearanceSettings: FC = () => {
   return (
     <fieldset>
       <Legend icon={PaintbrushIcon}>Appearance</Legend>
+
       <RadioGroup
         name="theme"
         label="Theme:"
@@ -60,9 +69,26 @@ export const AppearanceSettings: FC = () => {
           { label: 'Dark', value: Theme.DARK },
         ]}
         onChange={(evt) => {
+          let mode: ColorModeWithAuto;
+          switch (evt.target.value) {
+            case Theme.LIGHT:
+              mode = 'day';
+              break;
+            case Theme.DARK:
+              mode = 'night';
+              break;
+            default:
+              mode = 'auto';
+              break;
+          }
+
           updateSetting('theme', evt.target.value as Theme);
+
+          setColorMode(mode);
+          setTheme(evt.target.value as Theme);
         }}
       />
+
       <div className="flex items-center mt-3 mb-2 text-sm">
         <label
           htmlFor="Zoom"
@@ -70,41 +96,51 @@ export const AppearanceSettings: FC = () => {
         >
           Zoom:
         </label>
-        <Button
-          label="Zoom Out"
-          onClick={() =>
-            zoomPercentage > 0 &&
-            webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage - 10))
-          }
-          className="rounded-r-none"
-          size="inline"
-        >
-          -
-        </Button>
-        <span className="flex w-16 h-5 items-center justify-center rounded-none border border-gray-300 bg-transparent text-xs text-gray-700 dark:text-gray-200">
-          {zoomPercentage.toFixed(0)}%
-        </span>
-        <Button
-          label="Zoom In"
-          onClick={() =>
-            zoomPercentage < 120 &&
-            webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage + 10))
-          }
-          className="rounded-none"
-          size="inline"
-        >
-          +
-        </Button>
-        <Button
-          label="Reset Zoom"
-          onClick={() => webFrame.setZoomLevel(0)}
-          variant="destructive"
-          className="rounded-l-none"
-          size="inline"
-        >
-          X
-        </Button>
+
+        <ButtonGroup>
+          <Button
+            size="small"
+            onClick={() =>
+              zoomPercentage > 0 &&
+              webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage - 10))
+            }
+            data-testid="settings-zoom-out"
+          >
+            <Tooltip text="Zoom out">
+              <DashIcon size={Size.SMALL} />
+            </Tooltip>
+          </Button>
+
+          <Button aria-label="Zoom percentage" size="small" disabled>
+            {zoomPercentage.toFixed(0)}%
+          </Button>
+
+          <Button
+            size="small"
+            onClick={() =>
+              zoomPercentage < 120 &&
+              webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage + 10))
+            }
+            data-testid="settings-zoom-in"
+          >
+            <Tooltip text="Zoom in">
+              <PlusIcon size={Size.SMALL} />
+            </Tooltip>
+          </Button>
+
+          <Button
+            size="small"
+            variant="danger"
+            onClick={() => webFrame.setZoomLevel(0)}
+            data-testid="settings-zoom-reset"
+          >
+            <Tooltip text="Reset zoom">
+              <XCircleIcon size={Size.SMALL} />
+            </Tooltip>
+          </Button>
+        </ButtonGroup>
       </div>
+
       <Checkbox
         name="detailedNotifications"
         label="Detailed notifications"
@@ -126,6 +162,7 @@ export const AppearanceSettings: FC = () => {
           </div>
         }
       />
+
       <Checkbox
         name="showPills"
         label="Show notification metric pills"
@@ -161,6 +198,7 @@ export const AppearanceSettings: FC = () => {
           </div>
         }
       />
+
       <Checkbox
         name="showNumber"
         label="Show number"
@@ -196,6 +234,7 @@ export const AppearanceSettings: FC = () => {
           </div>
         }
       />
+
       <Checkbox
         name="showAccountHeader"
         label="Show account header"

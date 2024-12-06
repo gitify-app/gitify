@@ -11,8 +11,7 @@ import {
   ChevronRightIcon,
 } from '@primer/octicons-react';
 import log from 'electron-log';
-import { defaultSettings } from '../context/App';
-import type { Hostname, Link, SettingsState } from '../types';
+import type { Hostname, Link } from '../types';
 import type { SubjectType } from '../typesGitHub';
 import {
   mockGraphQLResponse,
@@ -25,10 +24,10 @@ import {
   generateGitHubWebUrl,
   generateNotificationReferrerId,
   getChevronDetails,
-  getFilterCount,
   getPlatformFromHostname,
   isEnterpriseServerHost,
   isMarkAsDoneFeatureSupported,
+  isNonHumanUser,
 } from './helpers';
 
 describe('renderer/utils/helpers.ts', () => {
@@ -614,28 +613,6 @@ describe('renderer/utils/helpers.ts', () => {
     });
   });
 
-  describe('filter count', () => {
-    it('default filter settings', () => {
-      expect(getFilterCount(defaultSettings)).toBe(0);
-    });
-
-    it('non-default reason filters', () => {
-      const settings = {
-        ...defaultSettings,
-        filterReasons: ['subscribed', 'manual'],
-      } as SettingsState;
-      expect(getFilterCount(settings)).toBe(2);
-    });
-
-    it('non-default bot filters', () => {
-      const settings = {
-        ...defaultSettings,
-        hideBots: true,
-      } as SettingsState;
-      expect(getFilterCount(settings)).toBe(1);
-    });
-  });
-
   describe('getChevronDetails', () => {
     it('should return correct chevron details', () => {
       expect(getChevronDetails(true, true, 'account')).toEqual({
@@ -653,5 +630,13 @@ describe('renderer/utils/helpers.ts', () => {
         label: 'No notifications for account',
       });
     });
+  });
+
+  it('isNonHumanUser', () => {
+    expect(isNonHumanUser('User')).toBe(false);
+    expect(isNonHumanUser('EnterpriseUserAccount')).toBe(false);
+    expect(isNonHumanUser('Bot')).toBe(true);
+    expect(isNonHumanUser('Organization')).toBe(true);
+    expect(isNonHumanUser('Mannequin')).toBe(true);
   });
 });

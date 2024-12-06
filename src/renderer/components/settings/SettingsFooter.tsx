@@ -1,8 +1,9 @@
-import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
 import { type FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BUTTON_CLASS_NAME } from '../../styles/gitify';
-import { Size } from '../../types';
+
+import { PersonIcon, XCircleIcon } from '@primer/octicons-react';
+import { Button, IconButton, Stack, Tooltip } from '@primer/react';
+
 import { getAppVersion, quitApp } from '../../utils/comms';
 import { openGitifyReleaseNotes } from '../../utils/links';
 
@@ -22,38 +23,42 @@ export const SettingsFooter: FC = () => {
   }, []);
 
   return (
-    <div className="flex items-center justify-between bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker">
-      <button
-        type="button"
-        className="cursor-pointer font-semibold"
-        title="View release notes"
-        onClick={() => openGitifyReleaseNotes(appVersion)}
-      >
-        <div className="flex items-center gap-1">
-          <span aria-label="app-version">Gitify {appVersion}</span>
-        </div>
-      </button>
-      <div>
-        <button
-          type="button"
-          className={BUTTON_CLASS_NAME}
-          title="Accounts"
-          onClick={() => {
-            navigate('/accounts');
-          }}
-        >
-          <PersonIcon size={Size.LARGE} aria-label="Accounts" />
-        </button>
+    <div className="flex items-center justify-between bg-gray-200 px-4 py-1 text-sm dark:bg-gray-darker">
+      <Stack direction="horizontal">
+        <Tooltip text="View release notes" direction="n">
+          <Button
+            onClick={() => openGitifyReleaseNotes(appVersion)}
+            data-testid="settings-release-notes"
+          >
+            Gitify {appVersion}
+          </Button>
+        </Tooltip>
+      </Stack>
 
-        <button
-          type="button"
-          className={BUTTON_CLASS_NAME}
-          title="Quit Gitify"
-          onClick={quitApp}
-        >
-          <XCircleIcon size={Size.LARGE} aria-label="Quit Gitify" />
-        </button>
-      </div>
+      <Stack direction="horizontal" gap="normal">
+        <Tooltip text="Accounts" direction="n">
+          <IconButton
+            aria-label="Accounts"
+            icon={PersonIcon}
+            onClick={() => {
+              navigate('/accounts');
+            }}
+            data-testid="settings-accounts"
+          />
+        </Tooltip>
+
+        <Tooltip text="Quit Gitify" direction="nw">
+          <IconButton
+            aria-label="Quit Gitify"
+            variant="danger"
+            icon={XCircleIcon}
+            onClick={() => {
+              quitApp();
+            }}
+            data-testid="settings-quit"
+          />
+        </Tooltip>
+      </Stack>
     </div>
   );
 };

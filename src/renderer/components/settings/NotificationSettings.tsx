@@ -1,11 +1,13 @@
-import { BellIcon } from '@primer/octicons-react';
 import { type FC, type MouseEvent, useContext } from 'react';
+
+import { BellIcon } from '@primer/octicons-react';
+
 import { AppContext } from '../../context/App';
 import { GroupBy } from '../../types';
 import { openGitHubParticipatingDocs } from '../../utils/links';
 import { Checkbox } from '../fields/Checkbox';
 import { RadioGroup } from '../fields/RadioGroup';
-import { Legend } from './Legend';
+import { Legend } from '../primitives/Legend';
 
 export const NotificationSettings: FC = () => {
   const { settings, updateSetting } = useContext(AppContext);

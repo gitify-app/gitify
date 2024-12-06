@@ -90,7 +90,7 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
     });
 
     await act(async () => {
-      fireEvent.click(screen.getByLabelText('Zoom Out'));
+      fireEvent.click(screen.getByTestId('settings-zoom-out'));
       await zoomTimeout();
     });
 
@@ -98,7 +98,7 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
     expect(updateSetting).toHaveBeenCalledWith('zoomPercentage', 90);
 
     await act(async () => {
-      fireEvent.click(screen.getByLabelText('Zoom Out'));
+      fireEvent.click(screen.getByTestId('settings-zoom-out'));
       await zoomTimeout();
 
       expect(updateSetting).toHaveBeenCalledTimes(2);
@@ -106,7 +106,7 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
     });
 
     await act(async () => {
-      fireEvent.click(screen.getByLabelText('Zoom In'));
+      fireEvent.click(screen.getByTestId('settings-zoom-in'));
       await zoomTimeout();
 
       expect(updateSetting).toHaveBeenCalledTimes(3);
@@ -114,7 +114,7 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
     });
 
     await act(async () => {
-      fireEvent.click(screen.getByLabelText('Reset Zoom'));
+      fireEvent.click(screen.getByTestId('settings-zoom-reset'));
       await zoomTimeout();
 
       expect(updateSetting).toHaveBeenCalledTimes(4);
@@ -139,8 +139,6 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
       );
     });
 
-    await screen.findByLabelText('Detailed notifications');
-
     fireEvent.click(screen.getByLabelText('Detailed notifications'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
@@ -164,8 +162,6 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
       );
     });
 
-    await screen.findByLabelText('Show notification metric pills');
-
     fireEvent.click(screen.getByLabelText('Show notification metric pills'));
 
     expect(updateSetting).toHaveBeenCalledTimes(1);
@@ -188,8 +184,6 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
         </AppContext.Provider>,
       );
     });
-
-    await screen.findByLabelText('Show number');
 
     fireEvent.click(screen.getByLabelText('Show number'));
 
@@ -215,8 +209,6 @@ describe('renderer/routes/components/settings/AppearanceSettings.tsx', () => {
         </AppContext.Provider>,
       );
     });
-
-    await screen.findByLabelText('Show account header');
 
     fireEvent.click(screen.getByLabelText('Show account header'));
 
