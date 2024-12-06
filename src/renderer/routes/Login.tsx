@@ -36,20 +36,8 @@ export const LoginRoute: FC = () => {
         <LogoIcon size={Size.LARGE} isDark />
 
         <Stack align="center" gap="none">
-          <Heading
-            sx={{
-              fontSize: 4,
-            }}
-          >
-            GitHub Notifications
-          </Heading>
-          <Heading
-            sx={{
-              fontSize: 3,
-            }}
-          >
-            on your menu bar
-          </Heading>
+          <Heading sx={{ fontSize: 4 }}>GitHub Notifications</Heading>
+          <Heading sx={{ fontSize: 3 }}>on your menu bar</Heading>
         </Stack>
 
         <Stack align="center" gap="condensed">

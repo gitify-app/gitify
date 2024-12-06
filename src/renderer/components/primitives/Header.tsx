@@ -37,13 +37,7 @@ export const Header: FC<IHeader> = (props: IHeader) => {
 
         <Stack direction="horizontal" align="center" gap="condensed">
           <Octicon icon={props.icon} size={Size.LARGE} />
-          <Heading
-            sx={{
-              fontSize: 3,
-            }}
-          >
-            {props.children}
-          </Heading>
+          <Heading sx={{ fontSize: 3 }}>{props.children}</Heading>
         </Stack>
       </Stack>
     </div>
