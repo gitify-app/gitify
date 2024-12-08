@@ -47,7 +47,7 @@ importers:
         version: 19.13.0(react@19.0.0)
       '@testing-library/react':
         specifier: 16.1.0
-        version: 16.1.0(@testing-library/dom@10.0.0)(@types/react-dom@19.0.0)(@types/react@19.0.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
+        version: 16.1.0(@testing-library/dom@10.0.0)(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       '@types/jest':
         specifier: 29.5.14
         version: 29.5.14
@@ -58,11 +58,11 @@ importers:
         specifier: 0.2.3
         version: 0.2.3
       '@types/react':
-        specifier: 19.0.0
-        version: 19.0.0
+        specifier: 19.0.1
+        version: 19.0.1
       '@types/react-dom':
-        specifier: 19.0.0
-        version: 19.0.0
+        specifier: 19.0.1
+        version: 19.0.1
       '@types/react-router-dom':
         specifier: 5.3.3
         version: 5.3.3
@@ -762,8 +762,8 @@ packages:
   '@types/plist@3.0.5':
     resolution: {integrity: sha512-E6OCaRmAe4WDmWNsL/9RMqdkkzDCY1etutkflWk4c+AcjDU07Pcz1fQwTX0TQz+Pxqn9i4L1TU3UFpjnrcDgxA==}
 
-  '@types/react-dom@19.0.0':
-    resolution: {integrity: sha512-1KfiQKsH1o00p9m5ag12axHQSb3FOU9H20UTrujVSkNhuCrRHiQWFqgEnTNK5ZNfnzZv8UWrnXVqCmCF9fgY3w==}
+  '@types/react-dom@19.0.1':
+    resolution: {integrity: sha512-hljHij7MpWPKF6u5vojuyfV0YA4YURsQG7KT6SzV0Zs2BXAtgdTxG6A229Ub/xiWV4w/7JL8fi6aAyjshH4meA==}
 
   '@types/react-router-dom@5.3.3':
     resolution: {integrity: sha512-kpqnYK4wcdm5UaWI3fLcELopqLrHgLqNsdpHauzlQktfkHL3npOSwtj1Uz9oKBAzs7lFtVkV8j83voAz2D8fhw==}
@@ -771,8 +771,8 @@ packages:
   '@types/react-router@5.1.20':
     resolution: {integrity: sha512-jGjmu/ZqS7FjSH6owMcD5qpq19+1RS9DeVRqfl1FeBMxTDQAGwlMWOcs52NDoXaNKyG3d1cYQFMs9rCrb88o9Q==}
 
-  '@types/react@19.0.0':
-    resolution: {integrity: sha512-MY3oPudxvMYyesqs/kW1Bh8y9VqSmf+tzqw3ae8a9DZW68pUe3zAdHeI1jc6iAysuRdACnVknHP8AhwD4/dxtg==}
+  '@types/react@19.0.1':
+    resolution: {integrity: sha512-YW6614BDhqbpR5KtUYzTA+zlA7nayzJRA9ljz9CQoxthR0sDisYZLuvSMsil36t4EH/uAt8T52Xb4sVw17G+SQ==}
 
   '@types/responselike@1.0.3':
     resolution: {integrity: sha512-H/+L+UkTV33uf49PH5pCAUBVPNj2nDBXTN+qS1dOwyyg24l3CcicicCA7ca+HMvJBZcFgl5r8e+RR6elsb4Lyw==}
@@ -4697,15 +4697,15 @@ snapshots:
       lz-string: 1.5.0
       pretty-format: 27.5.1
 
-  '@testing-library/react@16.1.0(@testing-library/dom@10.0.0)(@types/react-dom@19.0.0)(@types/react@19.0.0)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
+  '@testing-library/react@16.1.0(@testing-library/dom@10.0.0)(@types/react-dom@19.0.1)(@types/react@19.0.1)(react-dom@19.0.0(react@19.0.0))(react@19.0.0)':
     dependencies:
       '@babel/runtime': 7.24.1
       '@testing-library/dom': 10.0.0
       react: 19.0.0
       react-dom: 19.0.0(react@19.0.0)
     optionalDependencies:
-      '@types/react': 19.0.0
-      '@types/react-dom': 19.0.0
+      '@types/react': 19.0.1
+      '@types/react-dom': 19.0.1
 
   '@tootallnate/once@2.0.0': {}
 
@@ -4826,22 +4826,22 @@ snapshots:
       xmlbuilder: 15.1.1
     optional: true
 
-  '@types/react-dom@19.0.0':
+  '@types/react-dom@19.0.1':
     dependencies:
-      '@types/react': 19.0.0
+      '@types/react': 19.0.1
 
   '@types/react-router-dom@5.3.3':
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 19.0.0
+      '@types/react': 19.0.1
       '@types/react-router': 5.1.20
 
   '@types/react-router@5.1.20':
     dependencies:
       '@types/history': 4.7.11
-      '@types/react': 19.0.0
+      '@types/react': 19.0.1
 
-  '@types/react@19.0.0':
+  '@types/react@19.0.1':
     dependencies:
       csstype: 3.1.3
 
