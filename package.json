@@ -182,7 +182,7 @@
     "webpack-cli": "5.1.4",
     "webpack-merge": "6.0.1"
   },
-  "packageManager": "pnpm@9.14.4",
+  "packageManager": "pnpm@9.15.0",
   "lint-staged": {
     "*": "biome check --fix --no-errors-on-unmatched",
     "*.{js,ts,tsx}": "pnpm test -- --findRelatedTests -u --passWithNoTests"
