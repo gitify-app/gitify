@@ -22,7 +22,7 @@ import type {
   Release,
   UserDetails,
 } from '../../typesGitHub';
-import { isAnsweredDiscussionFeatureSupported } from '../helpers';
+import { isAnsweredDiscussionFeatureSupported } from '../features';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
 import { apiRequestAuth } from './request';
