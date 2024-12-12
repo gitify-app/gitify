@@ -1,9 +1,5 @@
 import type { AxiosPromise, AxiosResponse } from 'axios';
-import {
-  mockGitHubCloudAccount,
-  mockGitHubEnterpriseServerAccount,
-  mockPersonalAccessTokenAccount,
-} from '../__mocks__/state-mocks';
+import { mockPersonalAccessTokenAccount } from '../__mocks__/state-mocks';
 
 import {
   ChevronDownIcon,
@@ -19,6 +15,7 @@ import {
   mockSingleNotification,
 } from './api/__mocks__/response-mocks';
 import * as apiRequests from './api/request';
+
 import {
   formatForDisplay,
   formatNotificationUpdatedAt,
@@ -27,9 +24,7 @@ import {
   getChevronDetails,
   getFilterCount,
   getPlatformFromHostname,
-  isAnsweredDiscussionFeatureSupported,
   isEnterpriseServerHost,
-  isMarkAsDoneFeatureSupported,
 } from './helpers';
 
 describe('renderer/utils/helpers.ts', () => {
@@ -66,92 +61,6 @@ describe('renderer/utils/helpers.ts', () => {
     it('should return false for non-enterprise host', () => {
       expect(isEnterpriseServerHost('github.com' as Hostname)).toBe(false);
       expect(isEnterpriseServerHost('api.github.com' as Hostname)).toBe(false);
-    });
-  });
-
-  describe('isMarkAsDoneFeatureSupported', () => {
-    it('should return true for GitHub Cloud', () => {
-      expect(isMarkAsDoneFeatureSupported(mockGitHubCloudAccount)).toBe(true);
-    });
-
-    it('should return false for GitHub Enterprise Server < v3.13', () => {
-      const account = {
-        ...mockGitHubEnterpriseServerAccount,
-        version: '3.12.0',
-      };
-
-      expect(isMarkAsDoneFeatureSupported(account)).toBe(false);
-    });
-
-    it('should return true for GitHub Enterprise Server >= v3.13', () => {
-      const account = {
-        ...mockGitHubEnterpriseServerAccount,
-        version: '3.13.3',
-      };
-
-      expect(isMarkAsDoneFeatureSupported(account)).toBe(true);
-    });
-
-    it('should return false for GitHub Enterprise Server when partial version available', () => {
-      const account = {
-        ...mockGitHubEnterpriseServerAccount,
-        version: '3',
-      };
-
-      expect(isMarkAsDoneFeatureSupported(account)).toBe(false);
-    });
-
-    it('should return false for GitHub Enterprise Server when no version available', () => {
-      const account = {
-        ...mockGitHubEnterpriseServerAccount,
-        version: null,
-      };
-
-      expect(isMarkAsDoneFeatureSupported(account)).toBe(false);
-    });
-  });
-
-  describe('isAnsweredDiscussionFeatureSupported', () => {
-    it('should return true for GitHub Cloud', () => {
-      expect(isAnsweredDiscussionFeatureSupported(mockGitHubCloudAccount)).toBe(
-        true,
-      );
-    });
-
-    it('should return false for GitHub Enterprise Server < v3.12', () => {
-      const account = {
-        ...mockGitHubEnterpriseServerAccount,
-        version: '3.11.0',
-      };
-
-      expect(isAnsweredDiscussionFeatureSupported(account)).toBe(false);
-    });
-
-    it('should return true for GitHub Enterprise Server >= v3.12', () => {
-      const account = {
-        ...mockGitHubEnterpriseServerAccount,
-        version: '3.12.3',
-      };
-
-      expect(isAnsweredDiscussionFeatureSupported(account)).toBe(true);
-    });
-
-    it('should return false for GitHub Enterprise Server when partial version available', () => {
-      const account = {
-        ...mockGitHubEnterpriseServerAccount,
-        version: '3',
-      };
-
-      expect(isAnsweredDiscussionFeatureSupported(account)).toBe(false);
-    });
-
-    it('should return false for GitHub Enterprise Server when no version available', () => {
-      const account = {
-        ...mockGitHubEnterpriseServerAccount,
-        version: null,
-      };
-
-      expect(isMarkAsDoneFeatureSupported(account)).toBe(false);
     });
   });
 

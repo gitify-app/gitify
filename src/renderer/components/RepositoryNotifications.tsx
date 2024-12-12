@@ -4,10 +4,8 @@ import { AppContext } from '../context/App';
 import { Opacity, Size } from '../types';
 import type { Notification } from '../typesGitHub';
 import { cn } from '../utils/cn';
-import {
-  getChevronDetails,
-  isMarkAsDoneFeatureSupported,
-} from '../utils/helpers';
+import { isMarkAsDoneFeatureSupported } from '../utils/features';
+import { getChevronDetails } from '../utils/helpers';
 import { openRepository } from '../utils/links';
 import { HoverGroup } from './HoverGroup';
 import { NotificationRow } from './NotificationRow';

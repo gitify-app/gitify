@@ -13,7 +13,7 @@ import {
   markNotificationThreadAsDone,
   markNotificationThreadAsRead,
 } from '../utils/api/client';
-import { isMarkAsDoneFeatureSupported } from '../utils/helpers';
+import { isMarkAsDoneFeatureSupported } from '../utils/features';
 import {
   getAllNotifications,
   setTrayIconColor,
