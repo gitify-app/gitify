@@ -1,3 +1,4 @@
+import semver from 'semver';
 import type { Account } from '../types';
 import { isEnterpriseServerHost } from './helpers';
 
@@ -10,8 +11,7 @@ import { isEnterpriseServerHost } from './helpers';
 export function isMarkAsDoneFeatureSupported(account: Account): boolean {
   if (isEnterpriseServerHost(account.hostname)) {
     if (account.version) {
-      const version = account?.version.split('.').map(Number);
-      return version[0] >= 3 && version[1] >= 13;
+      return semver.gte(semver.coerce(account.version), '3.13.0');
     }
 
     return false;
@@ -30,8 +30,7 @@ export function isAnsweredDiscussionFeatureSupported(
 ): boolean {
   if (isEnterpriseServerHost(account.hostname)) {
     if (account.version) {
-      const version = account?.version.split('.').map(Number);
-      return version[0] >= 3 && version[1] >= 12;
+      return semver.gte(semver.coerce(account.version), '3.12.0');
     }
 
     return false;
