@@ -1,6 +1,7 @@
 import { BrowserWindow } from '@electron/remote';
 import { format } from 'date-fns';
 import log from 'electron-log';
+import semver from 'semver';
 import type {
   Account,
   AuthCode,
@@ -165,13 +166,22 @@ export async function refreshAccount(account: Account): Promise<Account> {
       avatar: res.data.avatar_url,
     };
 
-    // Refresh platform version
-    account.version = res.headers['x-github-enterprise-version'] ?? 'latest';
+    account.version = extractHostVersion(
+      res.headers['x-github-enterprise-version'],
+    );
   } catch (error) {
     log.error('Failed to refresh account', error);
   }
 
   return account;
+}
+
+export function extractHostVersion(version: string | null): string {
+  if (version) {
+    return semver.valid(semver.coerce(version));
+  }
+
+  return 'latest';
 }
 
 export function getDeveloperSettingsURL(account: Account): Link {

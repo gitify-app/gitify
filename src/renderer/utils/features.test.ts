@@ -26,19 +26,10 @@ describe('renderer/utils/features.ts', () => {
     it('should return true for GitHub Enterprise Server >= v3.13', () => {
       const account = {
         ...mockGitHubEnterpriseServerAccount,
-        version: '3.13.3',
+        version: '3.13.0',
       };
 
       expect(isMarkAsDoneFeatureSupported(account)).toBe(true);
-    });
-
-    it('should return false for GitHub Enterprise Server when partial version available', () => {
-      const account = {
-        ...mockGitHubEnterpriseServerAccount,
-        version: '3',
-      };
-
-      expect(isMarkAsDoneFeatureSupported(account)).toBe(false);
     });
 
     it('should return false for GitHub Enterprise Server when no version available', () => {
@@ -70,19 +61,10 @@ describe('renderer/utils/features.ts', () => {
     it('should return true for GitHub Enterprise Server >= v3.12', () => {
       const account = {
         ...mockGitHubEnterpriseServerAccount,
-        version: '3.12.3',
+        version: '3.12.0',
       };
 
       expect(isAnsweredDiscussionFeatureSupported(account)).toBe(true);
-    });
-
-    it('should return false for GitHub Enterprise Server when partial version available', () => {
-      const account = {
-        ...mockGitHubEnterpriseServerAccount,
-        version: '3',
-      };
-
-      expect(isAnsweredDiscussionFeatureSupported(account)).toBe(false);
     });
 
     it('should return false for GitHub Enterprise Server when no version available', () => {

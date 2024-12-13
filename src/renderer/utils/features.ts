@@ -11,7 +11,7 @@ import { isEnterpriseServerHost } from './helpers';
 export function isMarkAsDoneFeatureSupported(account: Account): boolean {
   if (isEnterpriseServerHost(account.hostname)) {
     if (account.version) {
-      return semver.gte(semver.coerce(account.version), '3.13.0');
+      return semver.gte(account.version, '3.13.0');
     }
 
     return false;
@@ -30,7 +30,7 @@ export function isAnsweredDiscussionFeatureSupported(
 ): boolean {
   if (isEnterpriseServerHost(account.hostname)) {
     if (account.version) {
-      return semver.gte(semver.coerce(account.version), '3.12.0');
+      return semver.gte(account.version, '3.12.0');
     }
 
     return false;
