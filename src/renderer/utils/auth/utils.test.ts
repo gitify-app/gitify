@@ -253,6 +253,30 @@ describe('renderer/utils/auth/utils.ts', () => {
     });
   });
 
+  it('extractHostVersion', () => {
+    expect(auth.extractHostVersion(null)).toBe('latest');
+
+    expect(auth.extractHostVersion('foo')).toBe(null);
+
+    expect(auth.extractHostVersion('3')).toBe('3.0.0');
+
+    expect(auth.extractHostVersion('3.15')).toBe('3.15.0');
+
+    expect(auth.extractHostVersion('3.15.0')).toBe('3.15.0');
+
+    expect(auth.extractHostVersion('3.15.0-beta1')).toBe('3.15.0');
+
+    expect(auth.extractHostVersion('enterprise-server@3')).toBe('3.0.0');
+
+    expect(auth.extractHostVersion('enterprise-server@3.15')).toBe('3.15.0');
+
+    expect(auth.extractHostVersion('enterprise-server@3.15.0')).toBe('3.15.0');
+
+    expect(auth.extractHostVersion('enterprise-server@3.15.0-beta1')).toBe(
+      '3.15.0',
+    );
+  });
+
   it('getDeveloperSettingsURL', () => {
     expect(
       auth.getDeveloperSettingsURL({

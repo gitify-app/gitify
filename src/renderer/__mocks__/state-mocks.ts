@@ -50,6 +50,7 @@ export const mockGitHubCloudAccount: Account = {
   token: 'token-123-456' as Token,
   hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
   user: mockGitifyUser,
+  version: 'latest',
 };
 
 export const mockGitHubEnterpriseServerAccount: Account = {
