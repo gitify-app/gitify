@@ -1,8 +1,10 @@
 import { TextDecoder, TextEncoder } from 'node:util';
 
 // Prevent "ReferenceError: TextEncoder is not defined" or "ReferenceError: TextDecoder is not defined" errors
-global.TextEncoder = TextEncoder;
-global.TextDecoder = TextDecoder;
+if (!global.TextEncoder || !global.TextDecoder) {
+  global.TextEncoder = TextEncoder;
+  global.TextDecoder = TextDecoder;
+} 
 
 // Mock OAuth client ID and secret
 process.env.OAUTH_CLIENT_ID = 'FAKE_CLIENT_ID_123';
