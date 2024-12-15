@@ -4,7 +4,7 @@ import { TextDecoder, TextEncoder } from 'node:util';
 if (!global.TextEncoder || !global.TextDecoder) {
   global.TextEncoder = TextEncoder;
   global.TextDecoder = TextDecoder;
-} 
+}
 
 // Mock OAuth client ID and secret
 process.env.OAUTH_CLIENT_ID = 'FAKE_CLIENT_ID_123';
