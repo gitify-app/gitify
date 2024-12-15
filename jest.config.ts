@@ -2,7 +2,7 @@ import type { Config } from 'jest';
 
 const config: Config = {
   preset: 'ts-jest',
-  setupFiles: ['<rootDir>/src/renderer/__helpers__/setupEnvVars.js'],
+  setupFiles: ['<rootDir>/src/renderer/__helpers__/jest.setup.ts'],
   testEnvironment: 'jsdom',
   collectCoverage: true,
   collectCoverageFrom: ['src/**/*', '!**/__snapshots__/**'],
