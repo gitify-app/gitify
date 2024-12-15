@@ -7,11 +7,13 @@ exports[`renderer/components/icons/AvatarIcon.tsx should render default extra sm
     <div>
       <svg
         aria-hidden="true"
-        class="text-gray-500 dark:text-gray-300"
+        class="octicon octicon-mark-github text-gray-500 dark:text-gray-300"
+        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="16"
-        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
         viewBox="0 0 16 16"
         width="16"
       >
@@ -24,11 +26,13 @@ exports[`renderer/components/icons/AvatarIcon.tsx should render default extra sm
   "container": <div>
     <svg
       aria-hidden="true"
-      class="text-gray-500 dark:text-gray-300"
+      class="octicon octicon-mark-github text-gray-500 dark:text-gray-300"
+      display="inline-block"
       fill="currentColor"
       focusable="false"
       height="16"
-      style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+      overflow="visible"
+      style="vertical-align: text-bottom;"
       viewBox="0 0 16 16"
       width="16"
     >
@@ -98,11 +102,13 @@ exports[`renderer/components/icons/AvatarIcon.tsx should render default medium i
     <div>
       <svg
         aria-hidden="true"
-        class="text-gray-500 dark:text-gray-300"
+        class="octicon octicon-mark-github text-gray-500 dark:text-gray-300"
+        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="24"
-        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
         viewBox="0 0 24 24"
         width="24"
       >
@@ -115,11 +121,13 @@ exports[`renderer/components/icons/AvatarIcon.tsx should render default medium i
   "container": <div>
     <svg
       aria-hidden="true"
-      class="text-gray-500 dark:text-gray-300"
+      class="octicon octicon-mark-github text-gray-500 dark:text-gray-300"
+      display="inline-block"
       fill="currentColor"
       focusable="false"
       height="24"
-      style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+      overflow="visible"
+      style="vertical-align: text-bottom;"
       viewBox="0 0 24 24"
       width="24"
     >
@@ -189,11 +197,13 @@ exports[`renderer/components/icons/AvatarIcon.tsx should render default small ic
     <div>
       <svg
         aria-hidden="true"
-        class="text-gray-500 dark:text-gray-300"
+        class="octicon octicon-mark-github text-gray-500 dark:text-gray-300"
+        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="20"
-        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
         viewBox="0 0 16 16"
         width="20"
       >
@@ -206,11 +216,13 @@ exports[`renderer/components/icons/AvatarIcon.tsx should render default small ic
   "container": <div>
     <svg
       aria-hidden="true"
-      class="text-gray-500 dark:text-gray-300"
+      class="octicon octicon-mark-github text-gray-500 dark:text-gray-300"
+      display="inline-block"
       fill="currentColor"
       focusable="false"
       height="20"
-      style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+      overflow="visible"
+      style="vertical-align: text-bottom;"
       viewBox="0 0 16 16"
       width="20"
     >

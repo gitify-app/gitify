@@ -33,11 +33,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should render itself & 
             <svg
               aria-label="Mark repository as done"
               class="octicon octicon-check"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -54,11 +56,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should render itself & 
             <svg
               aria-label="Mark repository as read"
               class="octicon octicon-read"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -75,11 +79,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should render itself & 
             <svg
               aria-label="Hide repository notifications"
               class="octicon octicon-chevron-down"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 12 12"
               width="14"
             >
@@ -127,11 +133,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should render itself & 
           <svg
             aria-label="Mark repository as done"
             class="octicon octicon-check"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -148,11 +156,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should render itself & 
           <svg
             aria-label="Mark repository as read"
             class="octicon octicon-read"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -169,11 +179,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should render itself & 
           <svg
             aria-label="Hide repository notifications"
             class="octicon octicon-chevron-down"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 12 12"
             width="14"
           >
@@ -258,11 +270,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should toggle repositor
         >
           <svg
             aria-hidden="true"
-            class="text-gray-500 dark:text-gray-300"
+            class="octicon octicon-mark-github text-gray-500 dark:text-gray-300"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -287,11 +301,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should toggle repositor
             <svg
               aria-label="Mark repository as done"
               class="octicon octicon-check"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -308,11 +324,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should toggle repositor
             <svg
               aria-label="Mark repository as read"
               class="octicon octicon-read"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -329,11 +347,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should toggle repositor
             <svg
               aria-label="Show repository notifications"
               class="octicon octicon-chevron-right"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 12 12"
               width="14"
             >
@@ -354,11 +374,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should toggle repositor
         >
           <svg
             aria-hidden="true"
-            class="text-gray-500 dark:text-gray-300"
+            class="octicon octicon-mark-github text-gray-500 dark:text-gray-300"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -383,11 +405,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should toggle repositor
             <svg
               aria-label="Mark repository as done"
               class="octicon octicon-check"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -404,11 +428,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should toggle repositor
             <svg
               aria-label="Mark repository as read"
               class="octicon octicon-read"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -425,11 +451,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should toggle repositor
             <svg
               aria-label="Hide repository notifications"
               class="octicon octicon-chevron-down"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 12 12"
               width="14"
             >
@@ -457,11 +485,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should toggle repositor
       >
         <svg
           aria-hidden="true"
-          class="text-gray-500 dark:text-gray-300"
+          class="octicon octicon-mark-github text-gray-500 dark:text-gray-300"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -486,11 +516,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should toggle repositor
           <svg
             aria-label="Mark repository as done"
             class="octicon octicon-check"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -507,11 +539,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should toggle repositor
           <svg
             aria-label="Mark repository as read"
             class="octicon octicon-read"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -528,11 +562,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should toggle repositor
           <svg
             aria-label="Hide repository notifications"
             class="octicon octicon-chevron-down"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 12 12"
             width="14"
           >
@@ -617,11 +653,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should use default repo
         >
           <svg
             aria-hidden="true"
-            class="text-gray-500 dark:text-gray-300"
+            class="octicon octicon-mark-github text-gray-500 dark:text-gray-300"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -646,11 +684,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should use default repo
             <svg
               aria-label="Mark repository as done"
               class="octicon octicon-check"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -667,11 +707,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should use default repo
             <svg
               aria-label="Mark repository as read"
               class="octicon octicon-read"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -688,11 +730,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should use default repo
             <svg
               aria-label="Hide repository notifications"
               class="octicon octicon-chevron-down"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 12 12"
               width="14"
             >
@@ -720,11 +764,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should use default repo
       >
         <svg
           aria-hidden="true"
-          class="text-gray-500 dark:text-gray-300"
+          class="octicon octicon-mark-github text-gray-500 dark:text-gray-300"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -749,11 +795,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should use default repo
           <svg
             aria-label="Mark repository as done"
             class="octicon octicon-check"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -770,11 +818,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should use default repo
           <svg
             aria-label="Mark repository as read"
             class="octicon octicon-read"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -791,11 +841,13 @@ exports[`renderer/components/RepositoryNotifications.tsx should use default repo
           <svg
             aria-label="Hide repository notifications"
             class="octicon octicon-chevron-down"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 12 12"
             width="14"
           >
