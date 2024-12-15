@@ -175,7 +175,7 @@
     "semver": "7.6.3",
     "tailwind-merge": "2.5.5",
     "tailwindcss": "3.4.16",
-    "terser-webpack-plugin": "5.3.10",
+    "terser-webpack-plugin": "5.3.11",
     "ts-jest": "29.2.5",
     "ts-loader": "9.5.1",
     "ts-node": "10.9.2",
