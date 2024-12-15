@@ -13,11 +13,13 @@ exports[`renderer/components/buttons/InteractionButton.tsx should render 1`] = `
         <svg
           aria-label="Mock Interaction Button"
           class="octicon octicon-mark-github"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="14"
+          overflow="visible"
           role="img"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="14"
         >
@@ -37,11 +39,13 @@ exports[`renderer/components/buttons/InteractionButton.tsx should render 1`] = `
       <svg
         aria-label="Mock Interaction Button"
         class="octicon octicon-mark-github"
+        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="14"
+        overflow="visible"
         role="img"
-        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+        style="vertical-align: text-bottom;"
         viewBox="0 0 16 16"
         width="14"
       >

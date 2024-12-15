@@ -15,12 +15,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
     >
       <svg
         aria-label="Go Back"
-        class="hover:text-gray-400"
+        class="octicon octicon-arrow-left hover:text-gray-400"
+        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="20"
+        overflow="visible"
         role="img"
-        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+        style="vertical-align: text-bottom;"
         viewBox="0 0 16 16"
         width="20"
       >
@@ -38,11 +40,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       >
         <svg
           aria-hidden="true"
-          class="mr-2"
+          class="octicon octicon-filter mr-2"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -66,11 +70,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       >
         <svg
           aria-hidden="true"
-          class="mr-2"
+          class="octicon octicon-feed-person mr-2"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -106,11 +112,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -133,11 +141,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       >
         <svg
           aria-hidden="true"
-          class="mr-2"
+          class="octicon octicon-note mr-2"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -178,11 +188,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -221,11 +233,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -264,11 +278,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -307,11 +323,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -350,11 +368,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -393,11 +413,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -436,11 +458,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -479,11 +503,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -522,11 +548,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -565,11 +593,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -608,11 +638,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -651,11 +683,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -694,11 +728,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -737,11 +773,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -780,11 +818,13 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
               >
                 <svg
                   aria-hidden="true"
-                  class="ml-1 text-blue-500"
+                  class="octicon octicon-question ml-1 text-blue-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -810,12 +850,14 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
       >
         <svg
           aria-label="Clear filters"
-          class="mr-2"
+          class="octicon octicon-filter-remove mr-2"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="18"
+          overflow="visible"
           role="img"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="18"
         >
@@ -857,11 +899,13 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
         >
           <svg
             aria-hidden="true"
-            class="ml-1 text-blue-500"
+            class="octicon octicon-question ml-1 text-blue-500"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -903,11 +947,13 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
         >
           <svg
             aria-hidden="true"
-            class="ml-1 text-blue-500"
+            class="octicon octicon-question ml-1 text-blue-500"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -949,11 +995,13 @@ exports[`renderer/routes/Filters.tsx Users section should be able to toggle the 
         >
           <svg
             aria-hidden="true"
-            class="ml-1 text-blue-500"
+            class="octicon octicon-question ml-1 text-blue-500"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -997,11 +1045,13 @@ exports[`renderer/routes/Filters.tsx Users section should not be able to toggle 
         >
           <svg
             aria-hidden="true"
-            class="ml-1 text-blue-500"
+            class="octicon octicon-question ml-1 text-blue-500"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >
