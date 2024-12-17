@@ -1,6 +1,10 @@
 import { TextDecoder, TextEncoder } from 'node:util';
 
-// Prevent "ReferenceError: TextEncoder is not defined" or "ReferenceError: TextDecoder is not defined" errors
+/**
+ * Prevent the following errors with jest:
+ * - ReferenceError: TextEncoder is not defined
+ * - ReferenceError: TextDecoder is not defined
+ */
 if (!global.TextEncoder || !global.TextDecoder) {
   global.TextEncoder = TextEncoder;
   global.TextDecoder = TextDecoder;
