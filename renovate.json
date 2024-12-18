@@ -20,6 +20,11 @@
       "matchDatasources": ["npm"],
       "minimumReleaseAge": "7 days",
       "internalChecksFilter": "strict"
+    },
+    {
+      "description": "Remove word `dependency` from commit messages and PR titles",
+      "matchDatasources": ["npm"],
+      "commitMessageTopic": "{{depName}}"
     }
   ]
 }
