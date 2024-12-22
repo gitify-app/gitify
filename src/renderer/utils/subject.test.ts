@@ -1160,6 +1160,10 @@ describe('renderer/utils/subject.ts', () => {
           type: 'Issue',
           url: 'https://api.github.com/repos/gitify-app/notifications-test/issues/1' as Link,
         });
+        const mockRepository = {
+          full_name: 'gitify-app/notifications-test',
+        } as Repository;
+        mockNotification.repository = mockRepository;
 
         nock('https://api.github.com')
           .get('/repos/gitify-app/notifications-test/issues/1')
@@ -1168,7 +1172,8 @@ describe('renderer/utils/subject.ts', () => {
         await getGitifySubjectDetails(mockNotification);
 
         expect(logErrorSpy).toHaveBeenCalledWith(
-          'Error occurred while fetching details for Issue notification: This issue will throw an error',
+          '[getGitifySubjectDetails]: failed to fetch details for notification for',
+          '[Issue]: This issue will throw an error for repository gitify-app/notifications-test',
           mockError,
         );
       });

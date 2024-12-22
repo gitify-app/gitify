@@ -50,7 +50,8 @@ export async function getGitifySubjectDetails(
     }
   } catch (err) {
     log.error(
-      `Error occurred while fetching details for ${notification.subject.type} notification: ${notification.subject.title}`,
+      '[getGitifySubjectDetails]: failed to fetch details for notification for',
+      `[${notification.subject.type}]: ${notification.subject.title} for repository ${notification.repository.full_name}`,
       err,
     );
   }

@@ -156,15 +156,15 @@ export async function getAllNotifications(
             notifications: notifications,
             error: null,
           };
-        } catch (error) {
+        } catch (err) {
           log.error(
-            'Error occurred while fetching account notifications',
-            error,
+            '[getAllNotifications]: error occurred while fetching account notifications',
+            err,
           );
           return {
             account: accountNotifications.account,
             notifications: [],
-            error: determineFailureType(error),
+            error: determineFailureType(err),
           };
         }
       }),
@@ -187,11 +187,13 @@ export async function enrichNotifications(
 
       try {
         additionalSubjectDetails = await getGitifySubjectDetails(notification);
-      } catch (error) {
-        log.warn(
-          `Error occurred while enriching notification ${notification.subject.title} for repository ${notification.repository.full_name}. Continuing with base notification`,
-          error,
+      } catch (err) {
+        log.error(
+          '[enrichNotifications] failed to enrich notification details for',
+          `[${notification.subject.type}]: ${notification.subject.title} for repository ${notification.repository.full_name}`,
+          err,
         );
+        log.warn('Continuing with base notification details');
       }
 
       return {
