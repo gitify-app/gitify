@@ -152,8 +152,13 @@ export async function generateGitHubWebUrl(
     }
   } catch (err) {
     log.error(
-      'Error occurred while attempting to get a specific notification URL.  Will fall back to defaults',
+      '[generateGitHubWebUrl]: failed to resolve specific notification html url for',
+      `[${notification.subject.type}]: ${notification.subject.title} for repository ${notification.repository.full_name}`,
       err,
+    );
+    log.warn(
+      'Will fall back to opening repository root url for',
+      notification.repository.full_name,
     );
   }
 

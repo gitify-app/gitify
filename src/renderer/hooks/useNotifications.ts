@@ -121,7 +121,10 @@ export const useNotifications = (): NotificationsState => {
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
       } catch (err) {
-        log.error('Error occurred while marking notification as read', err);
+        log.error(
+          '[markNotificationsAsRead]: Error occurred while marking notifications as read',
+          err,
+        );
       }
 
       setStatus('success');
@@ -155,7 +158,10 @@ export const useNotifications = (): NotificationsState => {
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
       } catch (err) {
-        log.error('Error occurred while marking notifications as done', err);
+        log.error(
+          '[markNotificationsAsDone]: error occurred while marking notifications as done',
+          err,
+        );
       }
 
       setStatus('success');
@@ -181,7 +187,7 @@ export const useNotifications = (): NotificationsState => {
         }
       } catch (err) {
         log.error(
-          'Error occurred while unsubscribing from notification thread',
+          '[unsubscribeNotification]: error occurred while unsubscribing from notification thread',
           err,
         );
       }

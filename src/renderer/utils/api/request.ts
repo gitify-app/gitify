@@ -72,9 +72,9 @@ export async function apiRequestAuth(
 
       nextUrl = getNextURLFromLinkHeader(response);
     }
-  } catch (error) {
-    log.error('API request failed:', error);
-    throw error;
+  } catch (err) {
+    log.error('[apiRequestAuth]: API request failed:', err);
+    throw err;
   }
 
   return {

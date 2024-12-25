@@ -217,7 +217,11 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
     const response = (await apiRequestAuth(url, 'GET', token)).data;
     return response.html_url;
   } catch (err) {
-    log.error('Error occurred while fetching notification html url', err);
+    log.error(
+      '[getHtmlUrl]: error occurred while fetching html url for',
+      url,
+      err,
+    );
   }
 }
 
@@ -268,7 +272,8 @@ export async function getLatestDiscussion(
     );
   } catch (err) {
     log.error(
-      'Error occurred while fetching notification latest discussion',
+      '[getLatestDiscussion]: failed to fetch latest discussion for notification',
+      `[${notification.subject.type}]: ${notification.subject.title} for repository ${notification.repository.full_name}`,
       err,
     );
   }
