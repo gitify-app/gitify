@@ -170,9 +170,13 @@ export async function refreshAccount(account: Account): Promise<Account> {
       res.headers['x-github-enterprise-version'],
     );
 
-    account.hasRequiredScopes = res.headers['x-oauth-scopes']
-      .split(',')
-      .includes(Constants.AUTH_SCOPE);
+    const accountScopes = res.headers['x-oauth-scopes']
+      ?.split(',')
+      .map((scope) => scope.trim());
+
+    account.hasRequiredScopes = Constants.AUTH_SCOPE.every((scope) =>
+      accountScopes.includes(scope),
+    );
   } catch (err) {
     log.error(
       '[refreshAccount]: failed to refresh account for user',
