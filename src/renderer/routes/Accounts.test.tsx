@@ -58,6 +58,10 @@ describe('renderer/routes/Accounts.tsx', () => {
     });
 
     it('should render with PAT scopes warning', async () => {
+      const openExternalLinkMock = jest
+        .spyOn(comms, 'openExternalLink')
+        .mockImplementation();
+
       await act(async () => {
         render(
           <AppContext.Provider
@@ -83,6 +87,13 @@ describe('renderer/routes/Accounts.tsx', () => {
       });
 
       expect(screen.getByTestId('accounts')).toMatchSnapshot();
+
+      fireEvent.click(screen.getByLabelText('missing-scopes'));
+
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
+        'https://github.com/settings/tokens',
+      );
     });
 
     it('should go back by pressing the icon', async () => {
