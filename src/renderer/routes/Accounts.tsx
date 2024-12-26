@@ -160,7 +160,10 @@ export const AccountsRoute: FC = () => {
                     await refreshAccount(account);
                     navigate('/accounts', { replace: true });
 
-                    // typically the above completes very quickly, so add an artificial delay to allow the spinner to do a few loops
+                    /**
+                     * Typically the above refresh API call completes very quickly,
+                     * so we add an brief artificial delay to allow the icon to spin a few times
+                     */
                     setTimeout(() => {
                       button.classList.remove('animate-spin');
                     }, 500);
