@@ -172,7 +172,7 @@ export async function refreshAccount(account: Account): Promise<Account> {
 
     const accountScopes = res.headers['x-oauth-scopes']
       ?.split(',')
-      .map((scope) => scope.trim());
+      .map((scope: string) => scope.trim());
 
     account.hasRequiredScopes = Constants.AUTH_SCOPE.every((scope) =>
       accountScopes.includes(scope),

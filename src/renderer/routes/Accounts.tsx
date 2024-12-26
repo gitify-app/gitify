@@ -111,8 +111,9 @@ export const AccountsRoute: FC = () => {
                   >
                     <button
                       type="button"
-                      className="cursor-default"
-                      title={`This account is missing one or more required scopes: \n\t- ${Constants.AUTH_SCOPE.join('\n\t- ')}`}
+                      className="cursor-pointer"
+                      title={`This account is missing one or more required scopes: \n  - ${Constants.AUTH_SCOPE.join('\n  - ')}`}
+                      onClick={() => openDeveloperSettings(account)}
                     >
                       <AlertFillIcon
                         size={Size.XSMALL}
