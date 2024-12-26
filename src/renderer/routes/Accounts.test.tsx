@@ -57,6 +57,34 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(screen.getByTestId('accounts')).toMatchSnapshot();
     });
 
+    it('should render with PAT scopes warning', async () => {
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [
+                  {
+                    ...mockPersonalAccessTokenAccount,
+                    hasRequiredScopes: false,
+                  },
+                  mockOAuthAccount,
+                  mockGitHubAppAccount,
+                ],
+              },
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <AccountsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      expect(screen.getByTestId('accounts')).toMatchSnapshot();
+    });
+
     it('should go back by pressing the icon', async () => {
       await act(async () => {
         render(
