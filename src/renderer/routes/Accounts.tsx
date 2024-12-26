@@ -166,7 +166,7 @@ export const AccountsRoute: FC = () => {
                      */
                     setTimeout(() => {
                       button.classList.remove('animate-spin');
-                    }, 500);
+                    }, 250);
                   }}
                 >
                   <SyncIcon
