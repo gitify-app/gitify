@@ -207,36 +207,36 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="detailedNotifications"
             >
               Detailed notifications
-              <span
-                aria-label="tooltip-detailedNotifications"
-                class="relative"
-                id="tooltip-detailedNotifications"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-detailedNotifications"
+              class="relative"
+              id="tooltip-detailedNotifications"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -253,36 +253,36 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="showPills"
             >
               Show notification metric pills
-              <span
-                aria-label="tooltip-showPills"
-                class="relative"
-                id="tooltip-showPills"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-showPills"
+              class="relative"
+              id="tooltip-showPills"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -299,36 +299,36 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="showNumber"
             >
               Show number
-              <span
-                aria-label="tooltip-showNumber"
-                class="relative"
-                id="tooltip-showNumber"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-showNumber"
+              class="relative"
+              id="tooltip-showNumber"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -346,7 +346,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
@@ -454,36 +454,36 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="fetchAllNotifications"
             >
               Fetch all notifications
-              <span
-                aria-label="tooltip-fetchAllNotifications"
-                class="relative"
-                id="tooltip-fetchAllNotifications"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-fetchAllNotifications"
+              class="relative"
+              id="tooltip-fetchAllNotifications"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -499,36 +499,36 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="showOnlyParticipating"
             >
               Show only participating
-              <span
-                aria-label="tooltip-showOnlyParticipating"
-                class="relative"
-                id="tooltip-showOnlyParticipating"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-showOnlyParticipating"
+              class="relative"
+              id="tooltip-showOnlyParticipating"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -544,36 +544,36 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="markAsDoneOnOpen"
             >
               Mark as done on open
-              <span
-                aria-label="tooltip-markAsDoneOnOpen"
-                class="relative"
-                id="tooltip-markAsDoneOnOpen"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-markAsDoneOnOpen"
+              class="relative"
+              id="tooltip-markAsDoneOnOpen"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -589,36 +589,36 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="markAsDoneOnUnsubscribe"
             >
               Mark as done on unsubscribe
-              <span
-                aria-label="tooltip-markAsDoneOnUnsubscribe"
-                class="relative"
-                id="tooltip-markAsDoneOnUnsubscribe"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-markAsDoneOnUnsubscribe"
+              class="relative"
+              id="tooltip-markAsDoneOnUnsubscribe"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -634,36 +634,36 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="delayNotificationState"
             >
               Delay notification state
-              <span
-                aria-label="tooltip-delayNotificationState"
-                class="relative"
-                id="tooltip-delayNotificationState"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-delayNotificationState"
+              class="relative"
+              id="tooltip-delayNotificationState"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -763,36 +763,36 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="keyboardShortcutEnabled"
             >
               Enable keyboard shortcut
-              <span
-                aria-label="tooltip-keyboardShortcutEnabled"
-                class="relative"
-                id="tooltip-keyboardShortcutEnabled"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-keyboardShortcutEnabled"
+              class="relative"
+              id="tooltip-keyboardShortcutEnabled"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -808,7 +808,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
@@ -832,7 +832,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
@@ -856,7 +856,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
@@ -879,36 +879,36 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="useAlternateIdleIcon"
             >
               Use alternate idle icon
-              <span
-                aria-label="tooltip-useAlternateIdleIcon"
-                class="relative"
-                id="tooltip-useAlternateIdleIcon"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-useAlternateIdleIcon"
+              class="relative"
+              id="tooltip-useAlternateIdleIcon"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -924,7 +924,7 @@ exports[`renderer/routes/Settings.tsx should render itself & its children 1`] = 
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"

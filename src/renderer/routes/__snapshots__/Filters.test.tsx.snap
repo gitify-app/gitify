@@ -98,36 +98,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="hideBots"
             >
               Hide notifications from Bot accounts
-              <span
-                aria-label="tooltip-hideBots"
-                class="relative"
-                id="tooltip-hideBots"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-hideBots"
+              class="relative"
+              id="tooltip-hideBots"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -174,36 +174,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="approval_requested"
             >
               Approval Requested
-              <span
-                aria-label="tooltip-approval_requested"
-                class="relative"
-                id="tooltip-approval_requested"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-approval_requested"
+              class="relative"
+              id="tooltip-approval_requested"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -219,36 +219,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="assign"
             >
               Assigned
-              <span
-                aria-label="tooltip-assign"
-                class="relative"
-                id="tooltip-assign"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-assign"
+              class="relative"
+              id="tooltip-assign"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -264,36 +264,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="author"
             >
               Authored
-              <span
-                aria-label="tooltip-author"
-                class="relative"
-                id="tooltip-author"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-author"
+              class="relative"
+              id="tooltip-author"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -309,36 +309,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="ci_activity"
             >
               Workflow Run Completed
-              <span
-                aria-label="tooltip-ci_activity"
-                class="relative"
-                id="tooltip-ci_activity"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-ci_activity"
+              class="relative"
+              id="tooltip-ci_activity"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -354,36 +354,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="comment"
             >
               Commented
-              <span
-                aria-label="tooltip-comment"
-                class="relative"
-                id="tooltip-comment"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-comment"
+              class="relative"
+              id="tooltip-comment"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -399,36 +399,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="invitation"
             >
               Invitation Received
-              <span
-                aria-label="tooltip-invitation"
-                class="relative"
-                id="tooltip-invitation"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-invitation"
+              class="relative"
+              id="tooltip-invitation"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -444,36 +444,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="manual"
             >
               Updated
-              <span
-                aria-label="tooltip-manual"
-                class="relative"
-                id="tooltip-manual"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-manual"
+              class="relative"
+              id="tooltip-manual"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -489,36 +489,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="member_feature_requested"
             >
               Member Feature Requested
-              <span
-                aria-label="tooltip-member_feature_requested"
-                class="relative"
-                id="tooltip-member_feature_requested"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-member_feature_requested"
+              class="relative"
+              id="tooltip-member_feature_requested"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -534,36 +534,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="mention"
             >
               Mentioned
-              <span
-                aria-label="tooltip-mention"
-                class="relative"
-                id="tooltip-mention"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-mention"
+              class="relative"
+              id="tooltip-mention"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -579,36 +579,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="review_requested"
             >
               Review Requested
-              <span
-                aria-label="tooltip-review_requested"
-                class="relative"
-                id="tooltip-review_requested"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-review_requested"
+              class="relative"
+              id="tooltip-review_requested"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -624,36 +624,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="security_advisory_credit"
             >
               Security Advisory Credit Received
-              <span
-                aria-label="tooltip-security_advisory_credit"
-                class="relative"
-                id="tooltip-security_advisory_credit"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-security_advisory_credit"
+              class="relative"
+              id="tooltip-security_advisory_credit"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -669,36 +669,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="security_alert"
             >
               Security Alert Received
-              <span
-                aria-label="tooltip-security_alert"
-                class="relative"
-                id="tooltip-security_alert"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-security_alert"
+              class="relative"
+              id="tooltip-security_alert"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -714,36 +714,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="state_change"
             >
               State Changed
-              <span
-                aria-label="tooltip-state_change"
-                class="relative"
-                id="tooltip-state_change"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-state_change"
+              class="relative"
+              id="tooltip-state_change"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -759,36 +759,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="subscribed"
             >
               Updated
-              <span
-                aria-label="tooltip-subscribed"
-                class="relative"
-                id="tooltip-subscribed"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-subscribed"
+              class="relative"
+              id="tooltip-subscribed"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -804,36 +804,36 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
               for="team_mention"
             >
               Team Mentioned
-              <span
-                aria-label="tooltip-team_mention"
-                class="relative"
-                id="tooltip-team_mention"
-              >
-                <svg
-                  aria-hidden="true"
-                  class="octicon octicon-question ml-1 text-blue-500"
-                  display="inline-block"
-                  fill="currentColor"
-                  focusable="false"
-                  height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
-                  viewBox="0 0 16 16"
-                  width="16"
-                >
-                  <path
-                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-                  />
-                </svg>
-              </span>
             </label>
+            <span
+              aria-label="tooltip-team_mention"
+              class="relative"
+              id="tooltip-team_mention"
+            >
+              <svg
+                aria-hidden="true"
+                class="octicon octicon-question ml-1 text-blue-500"
+                display="inline-block"
+                fill="currentColor"
+                focusable="false"
+                height="16"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+                />
+              </svg>
+            </span>
           </div>
         </div>
       </div>
@@ -844,7 +844,7 @@ exports[`renderer/routes/Filters.tsx General should render itself & its children
   >
     <div>
       <button
-        class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
+        class="flex items-center hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
         title="Clear filters"
         type="button"
       >
@@ -885,36 +885,36 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
       type="checkbox"
     />
     <div
-      class="ml-3"
+      class="flex items-center ml-3"
     >
       <label
         class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
         for="mention"
       >
         Mentioned
-        <span
-          aria-label="tooltip-mention"
-          class="relative"
-          id="tooltip-mention"
-        >
-          <svg
-            aria-hidden="true"
-            class="octicon octicon-question ml-1 text-blue-500"
-            display="inline-block"
-            fill="currentColor"
-            focusable="false"
-            height="16"
-            overflow="visible"
-            style="vertical-align: text-bottom;"
-            viewBox="0 0 16 16"
-            width="16"
-          >
-            <path
-              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-            />
-          </svg>
-        </span>
       </label>
+      <span
+        aria-label="tooltip-mention"
+        class="relative"
+        id="tooltip-mention"
+      >
+        <svg
+          aria-hidden="true"
+          class="octicon octicon-question ml-1 text-blue-500"
+          display="inline-block"
+          fill="currentColor"
+          focusable="false"
+          height="16"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+          />
+        </svg>
+      </span>
     </div>
   </div>
 </div>
@@ -933,36 +933,36 @@ exports[`renderer/routes/Filters.tsx Reasons section should be able to toggle re
       type="checkbox"
     />
     <div
-      class="ml-3"
+      class="flex items-center ml-3"
     >
       <label
         class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
         for="mention"
       >
         Mentioned
-        <span
-          aria-label="tooltip-mention"
-          class="relative"
-          id="tooltip-mention"
-        >
-          <svg
-            aria-hidden="true"
-            class="octicon octicon-question ml-1 text-blue-500"
-            display="inline-block"
-            fill="currentColor"
-            focusable="false"
-            height="16"
-            overflow="visible"
-            style="vertical-align: text-bottom;"
-            viewBox="0 0 16 16"
-            width="16"
-          >
-            <path
-              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-            />
-          </svg>
-        </span>
       </label>
+      <span
+        aria-label="tooltip-mention"
+        class="relative"
+        id="tooltip-mention"
+      >
+        <svg
+          aria-hidden="true"
+          class="octicon octicon-question ml-1 text-blue-500"
+          display="inline-block"
+          fill="currentColor"
+          focusable="false"
+          height="16"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+          />
+        </svg>
+      </span>
     </div>
   </div>
 </div>
@@ -981,36 +981,36 @@ exports[`renderer/routes/Filters.tsx Users section should be able to toggle the 
       type="checkbox"
     />
     <div
-      class="ml-3"
+      class="flex items-center ml-3"
     >
       <label
         class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
         for="hideBots"
       >
         Hide notifications from Bot accounts
-        <span
-          aria-label="tooltip-hideBots"
-          class="relative"
-          id="tooltip-hideBots"
-        >
-          <svg
-            aria-hidden="true"
-            class="octicon octicon-question ml-1 text-blue-500"
-            display="inline-block"
-            fill="currentColor"
-            focusable="false"
-            height="16"
-            overflow="visible"
-            style="vertical-align: text-bottom;"
-            viewBox="0 0 16 16"
-            width="16"
-          >
-            <path
-              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-            />
-          </svg>
-        </span>
       </label>
+      <span
+        aria-label="tooltip-hideBots"
+        class="relative"
+        id="tooltip-hideBots"
+      >
+        <svg
+          aria-hidden="true"
+          class="octicon octicon-question ml-1 text-blue-500"
+          display="inline-block"
+          fill="currentColor"
+          focusable="false"
+          height="16"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+          />
+        </svg>
+      </span>
     </div>
   </div>
 </div>
@@ -1030,7 +1030,7 @@ exports[`renderer/routes/Filters.tsx Users section should not be able to toggle 
       type="checkbox"
     />
     <div
-      class="ml-3"
+      class="flex items-center ml-3"
     >
       <label
         class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
@@ -1038,29 +1038,29 @@ exports[`renderer/routes/Filters.tsx Users section should not be able to toggle 
         style="text-decoration: line-through;"
       >
         Hide notifications from Bot accounts
-        <span
-          aria-label="tooltip-hideBots"
-          class="relative"
-          id="tooltip-hideBots"
-        >
-          <svg
-            aria-hidden="true"
-            class="octicon octicon-question ml-1 text-blue-500"
-            display="inline-block"
-            fill="currentColor"
-            focusable="false"
-            height="16"
-            overflow="visible"
-            style="vertical-align: text-bottom;"
-            viewBox="0 0 16 16"
-            width="16"
-          >
-            <path
-              d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
-            />
-          </svg>
-        </span>
       </label>
+      <span
+        aria-label="tooltip-hideBots"
+        class="relative"
+        id="tooltip-hideBots"
+      >
+        <svg
+          aria-hidden="true"
+          class="octicon octicon-question ml-1 text-blue-500"
+          display="inline-block"
+          fill="currentColor"
+          focusable="false"
+          height="16"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
+          viewBox="0 0 16 16"
+          width="16"
+        >
+          <path
+            d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8Zm8-6.5a6.5 6.5 0 1 0 0 13 6.5 6.5 0 0 0 0-13ZM6.92 6.085h.001a.749.749 0 1 1-1.342-.67c.169-.339.436-.701.849-.977C6.845 4.16 7.369 4 8 4a2.756 2.756 0 0 1 1.637.525c.503.377.863.965.863 1.725 0 .448-.115.83-.329 1.15-.205.307-.47.513-.692.662-.109.072-.22.138-.313.195l-.006.004a6.24 6.24 0 0 0-.26.16.952.952 0 0 0-.276.245.75.75 0 0 1-1.248-.832c.184-.264.42-.489.692-.661.103-.067.207-.132.313-.195l.007-.004c.1-.061.182-.11.258-.161a.969.969 0 0 0 .277-.245C8.96 6.514 9 6.427 9 6.25a.612.612 0 0 0-.262-.525A1.27 1.27 0 0 0 8 5.5c-.369 0-.595.09-.74.187a1.01 1.01 0 0 0-.34.398ZM9 11a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
+          />
+        </svg>
+      </span>
     </div>
   </div>
 </div>

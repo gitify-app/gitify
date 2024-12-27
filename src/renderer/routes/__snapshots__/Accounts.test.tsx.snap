@@ -94,7 +94,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           </div>
           <div>
             <button
-              class="mb-1 ml-1 cursor-pointer align-middle"
+              class="flex items-center mb-1 ml-1 cursor-pointer align-middle"
               title="Open Host"
               type="button"
             >
@@ -124,7 +124,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           </div>
           <div>
             <button
-              class="ml-1 cursor-pointer align-middle"
+              class="flex items-center ml-1 cursor-pointer align-middle"
               title="Open Developer Settings"
               type="button"
             >
@@ -279,7 +279,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           </div>
           <div>
             <button
-              class="mb-1 ml-1 cursor-pointer align-middle"
+              class="flex items-center mb-1 ml-1 cursor-pointer align-middle"
               title="Open Host"
               type="button"
             >
@@ -309,7 +309,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           </div>
           <div>
             <button
-              class="ml-1 cursor-pointer align-middle"
+              class="flex items-center ml-1 cursor-pointer align-middle"
               title="Open Developer Settings"
               type="button"
             >
@@ -464,7 +464,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           </div>
           <div>
             <button
-              class="mb-1 ml-1 cursor-pointer align-middle"
+              class="flex items-center mb-1 ml-1 cursor-pointer align-middle"
               title="Open Host"
               type="button"
             >
@@ -494,7 +494,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           </div>
           <div>
             <button
-              class="ml-1 cursor-pointer align-middle"
+              class="flex items-center ml-1 cursor-pointer align-middle"
               title="Open Developer Settings"
               type="button"
             >
@@ -629,9 +629,11 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
     >
       Add new account
     </div>
-    <div>
+    <div
+      class="flex items-center"
+    >
       <button
-        class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
+        class="flex items-center hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
         title="Login with GitHub"
         type="button"
       >
@@ -670,7 +672,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         </svg>
       </button>
       <button
-        class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
+        class="flex items-center hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
         title="Login with Personal Access Token"
         type="button"
       >
@@ -709,7 +711,7 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         </svg>
       </button>
       <button
-        class="hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
+        class="flex items-center hover:text-gray-500 py-1 px-2 my-1 mx-2 focus:outline-none"
         title="Login with OAuth App"
         type="button"
       >

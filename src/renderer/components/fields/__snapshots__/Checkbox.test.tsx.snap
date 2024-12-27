@@ -18,7 +18,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render 1`] = `
             type="checkbox"
           />
           <div
-            class="ml-3"
+            class="flex items-center ml-3"
           >
             <label
               class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
@@ -50,7 +50,7 @@ exports[`renderer/components/fields/Checkbox.tsx should render 1`] = `
           type="checkbox"
         />
         <div
-          class="ml-3"
+          class="flex items-center ml-3"
         >
           <label
             class="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
