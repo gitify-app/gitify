@@ -153,9 +153,20 @@ export const AccountsRoute: FC = () => {
                   type="button"
                   className={cn(BUTTON_CLASS_NAME, 'px-0')}
                   title={`Refresh ${account.user.login}`}
-                  onClick={async () => {
+                  onClick={async (e) => {
+                    const button = e.currentTarget;
+                    button.classList.add('animate-spin');
+
                     await refreshAccount(account);
                     navigate('/accounts', { replace: true });
+
+                    /**
+                     * Typically the above refresh API call completes very quickly,
+                     * so we add an brief artificial delay to allow the icon to spin a few times
+                     */
+                    setTimeout(() => {
+                      button.classList.remove('animate-spin');
+                    }, 500);
                   }}
                 >
                   <SyncIcon
