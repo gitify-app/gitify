@@ -8,13 +8,11 @@ exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / 
 >
   <svg
     aria-hidden="true"
-    class="octicon octicon-question ml-1 text-blue-500"
-    display="inline-block"
+    class="ml-1 text-blue-500"
     fill="currentColor"
     focusable="false"
     height="16"
-    overflow="visible"
-    style="vertical-align: text-bottom;"
+    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
     viewBox="0 0 16 16"
     width="16"
   >
@@ -42,13 +40,11 @@ exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / 
 >
   <svg
     aria-hidden="true"
-    class="octicon octicon-question ml-1 text-blue-500"
-    display="inline-block"
+    class="ml-1 text-blue-500"
     fill="currentColor"
     focusable="false"
     height="16"
-    overflow="visible"
-    style="vertical-align: text-bottom;"
+    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
     viewBox="0 0 16 16"
     width="16"
   >
@@ -71,13 +67,11 @@ exports[`renderer/components/fields/Tooltip.tsx should render 1`] = `
       >
         <svg
           aria-hidden="true"
-          class="octicon octicon-question ml-1 text-blue-500"
-          display="inline-block"
+          class="ml-1 text-blue-500"
           fill="currentColor"
           focusable="false"
           height="16"
-          overflow="visible"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -96,13 +90,11 @@ exports[`renderer/components/fields/Tooltip.tsx should render 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="octicon octicon-question ml-1 text-blue-500"
-        display="inline-block"
+        class="ml-1 text-blue-500"
         fill="currentColor"
         focusable="false"
         height="16"
-        overflow="visible"
-        style="vertical-align: text-bottom;"
+        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
         viewBox="0 0 16 16"
         width="16"
       >

@@ -13,13 +13,11 @@ exports[`renderer/components/buttons/SidebarButton.tsx should render - with spec
         <svg
           aria-label="Mock Sidebar Button"
           class="octicon octicon-mark-github"
-          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -39,13 +37,11 @@ exports[`renderer/components/buttons/SidebarButton.tsx should render - with spec
       <svg
         aria-label="Mock Sidebar Button"
         class="octicon octicon-mark-github"
-        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="16"
-        overflow="visible"
         role="img"
-        style="vertical-align: text-bottom;"
+        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
         viewBox="0 0 16 16"
         width="16"
       >
@@ -122,13 +118,11 @@ exports[`renderer/components/buttons/SidebarButton.tsx should render with metric
         <svg
           aria-label="Mock Sidebar Button"
           class="octicon octicon-mark-github"
-          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -149,13 +143,11 @@ exports[`renderer/components/buttons/SidebarButton.tsx should render with metric
       <svg
         aria-label="Mock Sidebar Button"
         class="octicon octicon-mark-github"
-        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="12"
-        overflow="visible"
         role="img"
-        style="vertical-align: text-bottom;"
+        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
         viewBox="0 0 16 16"
         width="12"
       >
@@ -233,13 +225,11 @@ exports[`renderer/components/buttons/SidebarButton.tsx should render without met
         <svg
           aria-label="Mock Sidebar Button"
           class="octicon octicon-mark-github"
-          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -259,13 +249,11 @@ exports[`renderer/components/buttons/SidebarButton.tsx should render without met
       <svg
         aria-label="Mock Sidebar Button"
         class="octicon octicon-mark-github"
-        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="12"
-        overflow="visible"
         role="img"
-        style="vertical-align: text-bottom;"
+        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
         viewBox="0 0 16 16"
         width="12"
       >

@@ -16,14 +16,12 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
           >
             <svg
               aria-label="Go Back"
-              class="octicon octicon-arrow-left hover:text-gray-400"
-              display="inline-block"
+              class="hover:text-gray-400"
               fill="currentColor"
               focusable="false"
               height="20"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="20"
             >
@@ -41,13 +39,11 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-person mr-2"
-                display="inline-block"
+                class="mr-2"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -94,13 +90,11 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                   >
                     <svg
                       aria-hidden="true"
-                      class="octicon octicon-person mr-2"
-                      display="inline-block"
+                      class="mr-2"
                       fill="currentColor"
                       focusable="false"
                       height="12"
-                      overflow="visible"
-                      style="vertical-align: text-bottom;"
+                      style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                       viewBox="0 0 16 16"
                       width="12"
                     >
@@ -171,13 +165,11 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-book mr-2"
-                  display="inline-block"
+                  class="mr-2"
                   fill="currentColor"
                   focusable="false"
                   height="12"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                   viewBox="0 0 16 16"
                   width="12"
                 >
@@ -197,13 +189,11 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  class="octicon octicon-sign-in mr-2"
-                  display="inline-block"
+                  class="mr-2"
                   fill="currentColor"
                   focusable="false"
                   height="16"
-                  overflow="visible"
-                  style="vertical-align: text-bottom;"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                   viewBox="0 0 16 16"
                   width="16"
                 >
@@ -231,14 +221,12 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
         >
           <svg
             aria-label="Go Back"
-            class="octicon octicon-arrow-left hover:text-gray-400"
-            display="inline-block"
+            class="hover:text-gray-400"
             fill="currentColor"
             focusable="false"
             height="20"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="20"
           >
@@ -256,13 +244,11 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
           >
             <svg
               aria-hidden="true"
-              class="octicon octicon-person mr-2"
-              display="inline-block"
+              class="mr-2"
               fill="currentColor"
               focusable="false"
               height="16"
-              overflow="visible"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -309,13 +295,11 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    class="octicon octicon-person mr-2"
-                    display="inline-block"
+                    class="mr-2"
                     fill="currentColor"
                     focusable="false"
                     height="12"
-                    overflow="visible"
-                    style="vertical-align: text-bottom;"
+                    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                     viewBox="0 0 16 16"
                     width="12"
                   >
@@ -386,13 +370,11 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-book mr-2"
-                display="inline-block"
+                class="mr-2"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -412,13 +394,11 @@ exports[`renderer/routes/LoginWithOAuthApp.tsx renders correctly 1`] = `
             >
               <svg
                 aria-hidden="true"
-                class="octicon octicon-sign-in mr-2"
-                display="inline-block"
+                class="mr-2"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                overflow="visible"
-                style="vertical-align: text-bottom;"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                 viewBox="0 0 16 16"
                 width="16"
               >

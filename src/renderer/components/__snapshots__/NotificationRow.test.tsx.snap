@@ -16,13 +16,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           <svg
             aria-label="Issue"
             class="octicon octicon-issue-opened"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="20"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="20"
           >
@@ -102,14 +100,12 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
               >
                 <svg
                   aria-label="octocat approved these changes"
-                  class="octicon octicon-check text-green-500"
-                  display="inline-block"
+                  class="text-green-500"
                   fill="currentColor"
                   focusable="false"
                   height="12"
-                  overflow="visible"
                   role="img"
-                  style="vertical-align: text-bottom;"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                   viewBox="0 0 16 16"
                   width="12"
                 >
@@ -126,14 +122,12 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
               >
                 <svg
                   aria-label="gitify-app requested changes"
-                  class="octicon octicon-file-diff text-red-500"
-                  display="inline-block"
+                  class="text-red-500"
                   fill="currentColor"
                   focusable="false"
                   height="12"
-                  overflow="visible"
                   role="img"
-                  style="vertical-align: text-bottom;"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                   viewBox="0 0 16 16"
                   width="12"
                 >
@@ -157,13 +151,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             <svg
               aria-label="Mark as done"
               class="octicon octicon-check"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -180,13 +172,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             <svg
               aria-label="Mark as read"
               class="octicon octicon-read"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -203,13 +193,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             <svg
               aria-label="Unsubscribe from Thread"
               class="octicon octicon-bell-slash"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -234,13 +222,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
         <svg
           aria-label="Issue"
           class="octicon octicon-issue-opened"
-          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="20"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="20"
         >
@@ -320,14 +306,12 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             >
               <svg
                 aria-label="octocat approved these changes"
-                class="octicon octicon-check text-green-500"
-                display="inline-block"
+                class="text-green-500"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                overflow="visible"
                 role="img"
-                style="vertical-align: text-bottom;"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -344,14 +328,12 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             >
               <svg
                 aria-label="gitify-app requested changes"
-                class="octicon octicon-file-diff text-red-500"
-                display="inline-block"
+                class="text-red-500"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                overflow="visible"
                 role="img"
-                style="vertical-align: text-bottom;"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -375,13 +357,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           <svg
             aria-label="Mark as done"
             class="octicon octicon-check"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -398,13 +378,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           <svg
             aria-label="Mark as read"
             class="octicon octicon-read"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -421,13 +399,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           <svg
             aria-label="Unsubscribe from Thread"
             class="octicon octicon-bell-slash"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -509,13 +485,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           <svg
             aria-label="Issue"
             class="octicon octicon-issue-opened"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -578,14 +552,12 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
               >
                 <svg
                   aria-label="octocat approved these changes"
-                  class="octicon octicon-check text-green-500"
-                  display="inline-block"
+                  class="text-green-500"
                   fill="currentColor"
                   focusable="false"
                   height="12"
-                  overflow="visible"
                   role="img"
-                  style="vertical-align: text-bottom;"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                   viewBox="0 0 16 16"
                   width="12"
                 >
@@ -602,14 +574,12 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
               >
                 <svg
                   aria-label="gitify-app requested changes"
-                  class="octicon octicon-file-diff text-red-500"
-                  display="inline-block"
+                  class="text-red-500"
                   fill="currentColor"
                   focusable="false"
                   height="12"
-                  overflow="visible"
                   role="img"
-                  style="vertical-align: text-bottom;"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                   viewBox="0 0 16 16"
                   width="12"
                 >
@@ -633,13 +603,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             <svg
               aria-label="Mark as done"
               class="octicon octicon-check"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -656,13 +624,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             <svg
               aria-label="Mark as read"
               class="octicon octicon-read"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -679,13 +645,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             <svg
               aria-label="Unsubscribe from Thread"
               class="octicon octicon-bell-slash"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -710,13 +674,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
         <svg
           aria-label="Issue"
           class="octicon octicon-issue-opened"
-          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -779,14 +741,12 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             >
               <svg
                 aria-label="octocat approved these changes"
-                class="octicon octicon-check text-green-500"
-                display="inline-block"
+                class="text-green-500"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                overflow="visible"
                 role="img"
-                style="vertical-align: text-bottom;"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -803,14 +763,12 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             >
               <svg
                 aria-label="gitify-app requested changes"
-                class="octicon octicon-file-diff text-red-500"
-                display="inline-block"
+                class="text-red-500"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                overflow="visible"
                 role="img"
-                style="vertical-align: text-bottom;"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -834,13 +792,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           <svg
             aria-label="Mark as done"
             class="octicon octicon-check"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -857,13 +813,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           <svg
             aria-label="Mark as read"
             class="octicon octicon-read"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -880,13 +834,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           <svg
             aria-label="Unsubscribe from Thread"
             class="octicon octicon-bell-slash"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -968,13 +920,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           <svg
             aria-label="Issue"
             class="octicon octicon-issue-opened"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -1037,14 +987,12 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
               >
                 <svg
                   aria-label="octocat approved these changes"
-                  class="octicon octicon-check text-green-500"
-                  display="inline-block"
+                  class="text-green-500"
                   fill="currentColor"
                   focusable="false"
                   height="12"
-                  overflow="visible"
                   role="img"
-                  style="vertical-align: text-bottom;"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                   viewBox="0 0 16 16"
                   width="12"
                 >
@@ -1061,14 +1009,12 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
               >
                 <svg
                   aria-label="gitify-app requested changes"
-                  class="octicon octicon-file-diff text-red-500"
-                  display="inline-block"
+                  class="text-red-500"
                   fill="currentColor"
                   focusable="false"
                   height="12"
-                  overflow="visible"
                   role="img"
-                  style="vertical-align: text-bottom;"
+                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                   viewBox="0 0 16 16"
                   width="12"
                 >
@@ -1092,13 +1038,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             <svg
               aria-label="Mark as done"
               class="octicon octicon-check"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -1115,13 +1059,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             <svg
               aria-label="Mark as read"
               class="octicon octicon-read"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -1138,13 +1080,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             <svg
               aria-label="Unsubscribe from Thread"
               class="octicon octicon-bell-slash"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -1169,13 +1109,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
         <svg
           aria-label="Issue"
           class="octicon octicon-issue-opened"
-          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -1238,14 +1176,12 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             >
               <svg
                 aria-label="octocat approved these changes"
-                class="octicon octicon-check text-green-500"
-                display="inline-block"
+                class="text-green-500"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                overflow="visible"
                 role="img"
-                style="vertical-align: text-bottom;"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -1262,14 +1198,12 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
             >
               <svg
                 aria-label="gitify-app requested changes"
-                class="octicon octicon-file-diff text-red-500"
-                display="inline-block"
+                class="text-red-500"
                 fill="currentColor"
                 focusable="false"
                 height="12"
-                overflow="visible"
                 role="img"
-                style="vertical-align: text-bottom;"
+                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -1293,13 +1227,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           <svg
             aria-label="Mark as done"
             class="octicon octicon-check"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -1316,13 +1248,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           <svg
             aria-label="Mark as read"
             class="octicon octicon-read"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -1339,13 +1269,11 @@ exports[`renderer/components/NotificationRow.tsx should render itself & its chil
           <svg
             aria-label="Unsubscribe from Thread"
             class="octicon octicon-bell-slash"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="14"
           >
