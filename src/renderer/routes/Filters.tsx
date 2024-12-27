@@ -12,6 +12,7 @@ import { AppContext } from '../context/App';
 import { BUTTON_CLASS_NAME } from '../styles/gitify';
 import { Size } from '../types';
 import type { Reason } from '../typesGitHub';
+import { cn } from '../utils/cn';
 import { FORMATTED_REASONS, formatReason } from '../utils/reason';
 
 export const FiltersRoute: FC = () => {
@@ -91,7 +92,7 @@ export const FiltersRoute: FC = () => {
         <div>
           <button
             type="button"
-            className={BUTTON_CLASS_NAME}
+            className={cn('flex items-center', BUTTON_CLASS_NAME)}
             title="Clear filters"
             onClick={clearFilters}
           >

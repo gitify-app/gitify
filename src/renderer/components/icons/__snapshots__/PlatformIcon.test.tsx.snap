@@ -12,10 +12,12 @@ exports[`renderer/components/icons/PlatformIcon.tsx should render GitHub Cloud i
         <svg
           aria-hidden="true"
           class="octicon octicon-mark-github"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -34,10 +36,12 @@ exports[`renderer/components/icons/PlatformIcon.tsx should render GitHub Cloud i
       <svg
         aria-hidden="true"
         class="octicon octicon-mark-github"
+        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="16"
-        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
         viewBox="0 0 16 16"
         width="16"
       >
@@ -113,10 +117,12 @@ exports[`renderer/components/icons/PlatformIcon.tsx should render GitHub Enterpr
         <svg
           aria-hidden="true"
           class="octicon octicon-server"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -135,10 +141,12 @@ exports[`renderer/components/icons/PlatformIcon.tsx should render GitHub Enterpr
       <svg
         aria-hidden="true"
         class="octicon octicon-server"
+        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="16"
-        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
         viewBox="0 0 16 16"
         width="16"
       >
