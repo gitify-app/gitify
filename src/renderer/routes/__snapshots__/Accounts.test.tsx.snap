@@ -15,12 +15,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
     >
       <svg
         aria-label="Go Back"
-        class="hover:text-gray-400"
+        class="octicon octicon-arrow-left hover:text-gray-400"
+        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="20"
+        overflow="visible"
         role="img"
-        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+        style="vertical-align: text-bottom;"
         viewBox="0 0 16 16"
         width="20"
       >
@@ -38,11 +40,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
       >
         <svg
           aria-hidden="true"
-          class="mr-2"
+          class="octicon octicon-person mr-2"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -101,10 +105,12 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 <svg
                   aria-hidden="true"
                   class="octicon octicon-mark-github"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="12"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="12"
                 >
@@ -129,10 +135,12 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 <svg
                   aria-hidden="true"
                   class="octicon octicon-key"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="12"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="12"
                 >
@@ -153,12 +161,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           >
             <svg
               aria-label="Primary account"
-              class="text-yellow-500 dark:text-yellow-300"
+              class="octicon octicon-star-fill text-yellow-500 dark:text-yellow-300"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="20"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="20"
             >
@@ -175,12 +185,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           >
             <svg
               aria-label="Set as primary account"
-              class="text-yellow-500 dark:text-yellow-300"
+              class="octicon octicon-star text-yellow-500 dark:text-yellow-300"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="20"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="20"
             >
@@ -197,11 +209,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <svg
               aria-label="Refresh octocat"
               class="octicon octicon-sync"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="20"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="20"
             >
@@ -218,11 +232,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <svg
               aria-label="Logout octocat"
               class="octicon octicon-sign-out"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="20"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="20"
             >
@@ -274,10 +290,12 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 <svg
                   aria-hidden="true"
                   class="octicon octicon-server"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="12"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="12"
                 >
@@ -302,10 +320,12 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 <svg
                   aria-hidden="true"
                   class="octicon octicon-person"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="12"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="12"
                 >
@@ -327,12 +347,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           >
             <svg
               aria-label="Primary account"
-              class="text-yellow-500 dark:text-yellow-300"
+              class="octicon octicon-star-fill text-yellow-500 dark:text-yellow-300"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="20"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="20"
             >
@@ -348,12 +370,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           >
             <svg
               aria-label="Set as primary account"
-              class="text-yellow-500 dark:text-yellow-300"
+              class="octicon octicon-star text-yellow-500 dark:text-yellow-300"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="20"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="20"
             >
@@ -370,11 +394,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <svg
               aria-label="Refresh octocat"
               class="octicon octicon-sync"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="20"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="20"
             >
@@ -391,11 +417,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <svg
               aria-label="Logout octocat"
               class="octicon octicon-sign-out"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="20"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="20"
             >
@@ -447,10 +475,12 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 <svg
                   aria-hidden="true"
                   class="octicon octicon-mark-github"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="12"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="12"
                 >
@@ -475,10 +505,12 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
                 <svg
                   aria-hidden="true"
                   class="octicon octicon-apps"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="12"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  overflow="visible"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="12"
                 >
@@ -500,12 +532,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           >
             <svg
               aria-label="Primary account"
-              class="text-yellow-500 dark:text-yellow-300"
+              class="octicon octicon-star-fill text-yellow-500 dark:text-yellow-300"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="20"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="20"
             >
@@ -521,12 +555,14 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
           >
             <svg
               aria-label="Set as primary account"
-              class="text-yellow-500 dark:text-yellow-300"
+              class="octicon octicon-star text-yellow-500 dark:text-yellow-300"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="20"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="20"
             >
@@ -543,11 +579,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <svg
               aria-label="Refresh octocat"
               class="octicon octicon-sync"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="20"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="20"
             >
@@ -564,11 +602,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
             <svg
               aria-label="Logout octocat"
               class="octicon octicon-sign-out"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="20"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="20"
             >
@@ -598,11 +638,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         <svg
           aria-label="Login with GitHub App"
           class="octicon octicon-mark-github"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="18"
+          overflow="visible"
           role="img"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="18"
         >
@@ -612,11 +654,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         </svg>
         <svg
           aria-hidden="true"
-          class="mb-2 ml-1"
+          class="octicon octicon-plus mb-2 ml-1"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="14"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="14"
         >
@@ -633,11 +677,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         <svg
           aria-label="Login with Personal Access Token"
           class="octicon octicon-key"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="18"
+          overflow="visible"
           role="img"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="18"
         >
@@ -647,11 +693,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         </svg>
         <svg
           aria-hidden="true"
-          class="mb-2 ml-1"
+          class="octicon octicon-plus mb-2 ml-1"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="14"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="14"
         >
@@ -668,11 +716,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         <svg
           aria-label="Login with OAuth App"
           class="octicon octicon-person"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="20"
+          overflow="visible"
           role="img"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="20"
         >
@@ -682,11 +732,13 @@ exports[`renderer/routes/Accounts.tsx General should render itself & its childre
         </svg>
         <svg
           aria-hidden="true"
-          class="mb-2"
+          class="octicon octicon-plus mb-2"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="14"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="14"
         >
