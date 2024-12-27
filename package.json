@@ -139,7 +139,7 @@
     "@biomejs/biome": "1.9.4",
     "@discordapp/twemoji": "15.1.0",
     "@electron/notarize": "2.5.0",
-    "@primer/octicons-react": "19.13.0",
+    "@primer/octicons-react": "19.14.0",
     "@testing-library/react": "16.1.0",
     "@types/jest": "29.5.14",
     "@types/node": "22.10.2",

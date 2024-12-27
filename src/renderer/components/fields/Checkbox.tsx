@@ -24,7 +24,7 @@ export const Checkbox: FC<ICheckbox> = (props: ICheckbox) => {
           disabled={props.disabled}
         />
 
-        <div className="ml-3">
+        <div className="flex items-center ml-3">
           <label
             htmlFor={props.name}
             className="font-medium text-gray-700 dark:text-gray-200 cursor-pointer"
@@ -33,10 +33,10 @@ export const Checkbox: FC<ICheckbox> = (props: ICheckbox) => {
             }
           >
             {props.label}
-            {props.tooltip && (
-              <Tooltip name={`tooltip-${props.name}`} tooltip={props.tooltip} />
-            )}
           </label>
+          {props.tooltip && (
+            <Tooltip name={`tooltip-${props.name}`} tooltip={props.tooltip} />
+          )}
         </div>
       </div>
 

@@ -103,7 +103,7 @@ export const AccountsRoute: FC = () => {
                 <div>
                   <button
                     type="button"
-                    className="mb-1 ml-1 cursor-pointer align-middle"
+                    className="flex items-center mb-1 ml-1 cursor-pointer align-middle"
                     title="Open Host"
                     onClick={() => openHost(account.hostname)}
                   >
@@ -114,7 +114,7 @@ export const AccountsRoute: FC = () => {
                 <div>
                   <button
                     type="button"
-                    className="ml-1 cursor-pointer align-middle"
+                    className="flex items-center ml-1 cursor-pointer align-middle"
                     title="Open Developer Settings"
                     onClick={() => openDeveloperSettings(account)}
                   >
@@ -193,10 +193,10 @@ export const AccountsRoute: FC = () => {
 
       <div className="flex items-center justify-between bg-gray-200 px-8 py-1 text-sm dark:bg-gray-darker">
         <div className="font-semibold italic">Add new account</div>
-        <div>
+        <div className="flex items-center">
           <button
             type="button"
-            className={BUTTON_CLASS_NAME}
+            className={cn('flex items-center', BUTTON_CLASS_NAME)}
             title="Login with GitHub"
             onClick={loginWithGitHub}
           >
@@ -208,7 +208,7 @@ export const AccountsRoute: FC = () => {
           </button>
           <button
             type="button"
-            className={BUTTON_CLASS_NAME}
+            className={cn('flex items-center', BUTTON_CLASS_NAME)}
             title="Login with Personal Access Token"
             onClick={loginWithPersonalAccessToken}
           >
@@ -220,7 +220,7 @@ export const AccountsRoute: FC = () => {
           </button>
           <button
             type="button"
-            className={BUTTON_CLASS_NAME}
+            className={cn('flex items-center', BUTTON_CLASS_NAME)}
             title="Login with OAuth App"
             onClick={loginWithOAuthApp}
           >

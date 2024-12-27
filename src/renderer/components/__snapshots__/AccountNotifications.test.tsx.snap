@@ -42,10 +42,12 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
             <svg
               aria-hidden="true"
               class="octicon octicon-mark-github"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -62,11 +64,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
             <svg
               aria-label="My Issues"
               class="octicon octicon-issue-opened"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -86,11 +90,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
             <svg
               aria-label="My Pull Requests"
               class="octicon octicon-git-pull-request"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -107,11 +113,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
             <svg
               aria-label="No notifications for account"
               class="octicon octicon-chevron-left"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 12 12"
               width="14"
             >
@@ -188,10 +196,12 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
           <svg
             aria-hidden="true"
             class="octicon octicon-mark-github"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -208,11 +218,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
           <svg
             aria-label="My Issues"
             class="octicon octicon-issue-opened"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -232,11 +244,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
           <svg
             aria-label="My Pull Requests"
             class="octicon octicon-git-pull-request"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -253,11 +267,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - acc
           <svg
             aria-label="No notifications for account"
             class="octicon octicon-chevron-left"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 12 12"
             width="14"
           >
@@ -391,10 +407,12 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             <svg
               aria-hidden="true"
               class="octicon octicon-mark-github"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -411,11 +429,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             <svg
               aria-label="My Issues"
               class="octicon octicon-issue-opened"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -435,11 +455,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             <svg
               aria-label="My Pull Requests"
               class="octicon octicon-git-pull-request"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -456,11 +478,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             <svg
               aria-label="Hide account notifications"
               class="octicon octicon-chevron-down"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 12 12"
               width="14"
             >
@@ -482,11 +506,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-label="Issue"
             class="octicon octicon-issue-opened"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="20"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="20"
           >
@@ -566,12 +592,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
               >
                 <svg
                   aria-label="octocat approved these changes"
-                  class="text-green-500"
+                  class="octicon octicon-check text-green-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="12"
+                  overflow="visible"
                   role="img"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="12"
                 >
@@ -588,12 +616,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
               >
                 <svg
                   aria-label="gitify-app requested changes"
-                  class="text-red-500"
+                  class="octicon octicon-file-diff text-red-500"
+                  display="inline-block"
                   fill="currentColor"
                   focusable="false"
                   height="12"
+                  overflow="visible"
                   role="img"
-                  style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                  style="vertical-align: text-bottom;"
                   viewBox="0 0 16 16"
                   width="12"
                 >
@@ -617,11 +647,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             <svg
               aria-label="Mark as done"
               class="octicon octicon-check"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -638,11 +670,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             <svg
               aria-label="Mark as read"
               class="octicon octicon-read"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -659,11 +693,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             <svg
               aria-label="Unsubscribe from Thread"
               class="octicon octicon-bell-slash"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -685,11 +721,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-label="Issue"
             class="octicon octicon-issue-opened"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="20"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="20"
           >
@@ -741,11 +779,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             <div>
               <svg
                 aria-hidden="true"
-                class="text-gray-500 dark:text-gray-300"
+                class="octicon octicon-feed-person text-gray-500 dark:text-gray-300"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="16"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                overflow="visible"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="16"
               >
@@ -780,11 +820,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             <svg
               aria-label="Mark as done"
               class="octicon octicon-check"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -801,11 +843,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             <svg
               aria-label="Mark as read"
               class="octicon octicon-read"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -822,11 +866,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             <svg
               aria-label="Unsubscribe from Thread"
               class="octicon octicon-bell-slash"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -877,10 +923,12 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-hidden="true"
             class="octicon octicon-mark-github"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -897,11 +945,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-label="My Issues"
             class="octicon octicon-issue-opened"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -921,11 +971,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-label="My Pull Requests"
             class="octicon octicon-git-pull-request"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -942,11 +994,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-label="Hide account notifications"
             class="octicon octicon-chevron-down"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 12 12"
             width="14"
           >
@@ -968,11 +1022,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
         <svg
           aria-label="Issue"
           class="octicon octicon-issue-opened"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="20"
+          overflow="visible"
           role="img"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="20"
         >
@@ -1052,12 +1108,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             >
               <svg
                 aria-label="octocat approved these changes"
-                class="text-green-500"
+                class="octicon octicon-check text-green-500"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="12"
+                overflow="visible"
                 role="img"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -1074,12 +1132,14 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             >
               <svg
                 aria-label="gitify-app requested changes"
-                class="text-red-500"
+                class="octicon octicon-file-diff text-red-500"
+                display="inline-block"
                 fill="currentColor"
                 focusable="false"
                 height="12"
+                overflow="visible"
                 role="img"
-                style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+                style="vertical-align: text-bottom;"
                 viewBox="0 0 16 16"
                 width="12"
               >
@@ -1103,11 +1163,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-label="Mark as done"
             class="octicon octicon-check"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -1124,11 +1186,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-label="Mark as read"
             class="octicon octicon-read"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -1145,11 +1209,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-label="Unsubscribe from Thread"
             class="octicon octicon-bell-slash"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -1171,11 +1237,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
         <svg
           aria-label="Issue"
           class="octicon octicon-issue-opened"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="20"
+          overflow="visible"
           role="img"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="20"
         >
@@ -1227,11 +1295,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <div>
             <svg
               aria-hidden="true"
-              class="text-gray-500 dark:text-gray-300"
+              class="octicon octicon-feed-person text-gray-500 dark:text-gray-300"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -1266,11 +1336,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-label="Mark as done"
             class="octicon octicon-check"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -1287,11 +1359,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-label="Mark as read"
             class="octicon octicon-read"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -1308,11 +1382,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-label="Unsubscribe from Thread"
             class="octicon octicon-bell-slash"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -1420,10 +1496,12 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             <svg
               aria-hidden="true"
               class="octicon octicon-mark-github"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -1440,11 +1518,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             <svg
               aria-label="My Issues"
               class="octicon octicon-issue-opened"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -1464,11 +1544,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             <svg
               aria-label="My Pull Requests"
               class="octicon octicon-git-pull-request"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -1485,11 +1567,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
             <svg
               aria-label="Hide account notifications"
               class="octicon octicon-chevron-down"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 12 12"
               width="14"
             >
@@ -1543,10 +1627,12 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-hidden="true"
             class="octicon octicon-mark-github"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -1563,11 +1649,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-label="My Issues"
             class="octicon octicon-issue-opened"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -1587,11 +1675,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-label="My Pull Requests"
             class="octicon octicon-git-pull-request"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -1608,11 +1698,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - gro
           <svg
             aria-label="Hide account notifications"
             class="octicon octicon-chevron-down"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 12 12"
             width="14"
           >
@@ -1723,10 +1815,12 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
             <svg
               aria-hidden="true"
               class="octicon octicon-mark-github"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -1743,11 +1837,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
             <svg
               aria-label="My Issues"
               class="octicon octicon-issue-opened"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -1767,11 +1863,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
             <svg
               aria-label="My Pull Requests"
               class="octicon octicon-git-pull-request"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -1788,11 +1886,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
             <svg
               aria-label="No notifications for account"
               class="octicon octicon-chevron-left"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 12 12"
               width="14"
             >
@@ -1864,10 +1964,12 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
           <svg
             aria-hidden="true"
             class="octicon octicon-mark-github"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -1884,11 +1986,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
           <svg
             aria-label="My Issues"
             class="octicon octicon-issue-opened"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -1908,11 +2012,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
           <svg
             aria-label="My Pull Requests"
             class="octicon octicon-git-pull-request"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -1929,11 +2035,13 @@ exports[`renderer/components/AccountNotifications.tsx should render itself - no 
           <svg
             aria-label="No notifications for account"
             class="octicon octicon-chevron-left"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 12 12"
             width="14"
           >
@@ -2062,10 +2170,12 @@ exports[`renderer/components/AccountNotifications.tsx should toggle account noti
             <svg
               aria-hidden="true"
               class="octicon octicon-mark-github"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -2082,11 +2192,13 @@ exports[`renderer/components/AccountNotifications.tsx should toggle account noti
             <svg
               aria-label="My Issues"
               class="octicon octicon-issue-opened"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -2106,11 +2218,13 @@ exports[`renderer/components/AccountNotifications.tsx should toggle account noti
             <svg
               aria-label="My Pull Requests"
               class="octicon octicon-git-pull-request"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -2127,11 +2241,13 @@ exports[`renderer/components/AccountNotifications.tsx should toggle account noti
             <svg
               aria-label="Show account notifications"
               class="octicon octicon-chevron-right"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 12 12"
               width="14"
             >
@@ -2181,10 +2297,12 @@ exports[`renderer/components/AccountNotifications.tsx should toggle account noti
             <svg
               aria-hidden="true"
               class="octicon octicon-mark-github"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              overflow="visible"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -2201,11 +2319,13 @@ exports[`renderer/components/AccountNotifications.tsx should toggle account noti
             <svg
               aria-label="My Issues"
               class="octicon octicon-issue-opened"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -2225,11 +2345,13 @@ exports[`renderer/components/AccountNotifications.tsx should toggle account noti
             <svg
               aria-label="My Pull Requests"
               class="octicon octicon-git-pull-request"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 16 16"
               width="14"
             >
@@ -2246,11 +2368,13 @@ exports[`renderer/components/AccountNotifications.tsx should toggle account noti
             <svg
               aria-label="Hide account notifications"
               class="octicon octicon-chevron-down"
+              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="14"
+              overflow="visible"
               role="img"
-              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+              style="vertical-align: text-bottom;"
               viewBox="0 0 12 12"
               width="14"
             >
@@ -2304,10 +2428,12 @@ exports[`renderer/components/AccountNotifications.tsx should toggle account noti
           <svg
             aria-hidden="true"
             class="octicon octicon-mark-github"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            overflow="visible"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -2324,11 +2450,13 @@ exports[`renderer/components/AccountNotifications.tsx should toggle account noti
           <svg
             aria-label="My Issues"
             class="octicon octicon-issue-opened"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -2348,11 +2476,13 @@ exports[`renderer/components/AccountNotifications.tsx should toggle account noti
           <svg
             aria-label="My Pull Requests"
             class="octicon octicon-git-pull-request"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 16 16"
             width="14"
           >
@@ -2369,11 +2499,13 @@ exports[`renderer/components/AccountNotifications.tsx should toggle account noti
           <svg
             aria-label="Hide account notifications"
             class="octicon octicon-chevron-down"
+            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="14"
+            overflow="visible"
             role="img"
-            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+            style="vertical-align: text-bottom;"
             viewBox="0 0 12 12"
             width="14"
           >

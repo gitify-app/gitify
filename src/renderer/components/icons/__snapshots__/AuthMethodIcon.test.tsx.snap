@@ -12,10 +12,12 @@ exports[`renderer/components/icons/AuthMethodIcon.tsx should render GitHub App i
         <svg
           aria-hidden="true"
           class="octicon octicon-apps"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -34,10 +36,12 @@ exports[`renderer/components/icons/AuthMethodIcon.tsx should render GitHub App i
       <svg
         aria-hidden="true"
         class="octicon octicon-apps"
+        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="16"
-        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
         viewBox="0 0 16 16"
         width="16"
       >
@@ -113,10 +117,12 @@ exports[`renderer/components/icons/AuthMethodIcon.tsx should render OAuth App ic
         <svg
           aria-hidden="true"
           class="octicon octicon-person"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -135,10 +141,12 @@ exports[`renderer/components/icons/AuthMethodIcon.tsx should render OAuth App ic
       <svg
         aria-hidden="true"
         class="octicon octicon-person"
+        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="16"
-        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
         viewBox="0 0 16 16"
         width="16"
       >
@@ -214,10 +222,12 @@ exports[`renderer/components/icons/AuthMethodIcon.tsx should render Personal Acc
         <svg
           aria-hidden="true"
           class="octicon octicon-key"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -236,10 +246,12 @@ exports[`renderer/components/icons/AuthMethodIcon.tsx should render Personal Acc
       <svg
         aria-hidden="true"
         class="octicon octicon-key"
+        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="16"
-        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
         viewBox="0 0 16 16"
         width="16"
       >

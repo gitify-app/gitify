@@ -8,11 +8,13 @@ exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / 
 >
   <svg
     aria-hidden="true"
-    class="ml-1 text-blue-500"
+    class="octicon octicon-question ml-1 text-blue-500"
+    display="inline-block"
     fill="currentColor"
     focusable="false"
     height="16"
-    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+    overflow="visible"
+    style="vertical-align: text-bottom;"
     viewBox="0 0 16 16"
     width="16"
   >
@@ -21,7 +23,7 @@ exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / 
     />
   </svg>
   <div
-    class="absolute z-10 w-60 rounded border border-gray-300 bg-white p-2 shadow dark:bg-gray-sidebar"
+    class="absolute left-[-80px] z-10 w-60 rounded border border-gray-300 bg-white p-2 shadow dark:bg-gray-sidebar"
   >
     <div
       class="text-left text-xs text-gray-700 dark:text-white"
@@ -40,11 +42,13 @@ exports[`renderer/components/fields/Tooltip.tsx should display on mouse enter / 
 >
   <svg
     aria-hidden="true"
-    class="ml-1 text-blue-500"
+    class="octicon octicon-question ml-1 text-blue-500"
+    display="inline-block"
     fill="currentColor"
     focusable="false"
     height="16"
-    style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+    overflow="visible"
+    style="vertical-align: text-bottom;"
     viewBox="0 0 16 16"
     width="16"
   >
@@ -67,11 +71,13 @@ exports[`renderer/components/fields/Tooltip.tsx should render 1`] = `
       >
         <svg
           aria-hidden="true"
-          class="ml-1 text-blue-500"
+          class="octicon octicon-question ml-1 text-blue-500"
+          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+          overflow="visible"
+          style="vertical-align: text-bottom;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -90,11 +96,13 @@ exports[`renderer/components/fields/Tooltip.tsx should render 1`] = `
     >
       <svg
         aria-hidden="true"
-        class="ml-1 text-blue-500"
+        class="octicon octicon-question ml-1 text-blue-500"
+        display="inline-block"
         fill="currentColor"
         focusable="false"
         height="16"
-        style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
+        overflow="visible"
+        style="vertical-align: text-bottom;"
         viewBox="0 0 16 16"
         width="16"
       >
