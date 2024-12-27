@@ -15,14 +15,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
         >
           <svg
             aria-label="Linked to issues #1, #2"
-            class="octicon octicon-issue-closed text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -42,14 +40,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
         >
           <svg
             aria-label="octocat approved these changes"
-            class="octicon octicon-check text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -66,14 +62,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
         >
           <svg
             aria-label="gitify-app requested changes"
-            class="octicon octicon-file-diff text-red-500"
-            display="inline-block"
+            class="text-red-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -90,14 +84,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
         >
           <svg
             aria-label="1 comment"
-            class="octicon octicon-comment text-gray-500 dark:text-gray-300"
-            display="inline-block"
+            class="text-gray-500 dark:text-gray-300"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -121,14 +113,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
       >
         <svg
           aria-label="Linked to issues #1, #2"
-          class="octicon octicon-issue-closed text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -148,14 +138,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
       >
         <svg
           aria-label="octocat approved these changes"
-          class="octicon octicon-check text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -172,14 +160,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
       >
         <svg
           aria-label="gitify-app requested changes"
-          class="octicon octicon-file-diff text-red-500"
-          display="inline-block"
+          class="text-red-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -196,14 +182,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
       >
         <svg
           aria-label="1 comment"
-          class="octicon octicon-comment text-gray-500 dark:text-gray-300"
-          display="inline-block"
+          class="text-gray-500 dark:text-gray-300"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -284,14 +268,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
         >
           <svg
             aria-label="Linked to issues #1, #2"
-            class="octicon octicon-issue-closed text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -311,14 +293,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
         >
           <svg
             aria-label="octocat approved these changes"
-            class="octicon octicon-check text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -335,14 +315,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
         >
           <svg
             aria-label="gitify-app requested changes"
-            class="octicon octicon-file-diff text-red-500"
-            display="inline-block"
+            class="text-red-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -359,14 +337,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
         >
           <svg
             aria-label="2 comments"
-            class="octicon octicon-comment text-gray-500 dark:text-gray-300"
-            display="inline-block"
+            class="text-gray-500 dark:text-gray-300"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -390,14 +366,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
       >
         <svg
           aria-label="Linked to issues #1, #2"
-          class="octicon octicon-issue-closed text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -417,14 +391,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
       >
         <svg
           aria-label="octocat approved these changes"
-          class="octicon octicon-check text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -441,14 +413,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
       >
         <svg
           aria-label="gitify-app requested changes"
-          class="octicon octicon-file-diff text-red-500"
-          display="inline-block"
+          class="text-red-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -465,14 +435,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
       >
         <svg
           aria-label="2 comments"
-          class="octicon octicon-comment text-gray-500 dark:text-gray-300"
-          display="inline-block"
+          class="text-gray-500 dark:text-gray-300"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -553,14 +521,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
         >
           <svg
             aria-label="Linked to issues #1, #2"
-            class="octicon octicon-issue-closed text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -580,14 +546,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
         >
           <svg
             aria-label="octocat approved these changes"
-            class="octicon octicon-check text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -604,14 +568,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
         >
           <svg
             aria-label="gitify-app requested changes"
-            class="octicon octicon-file-diff text-red-500"
-            display="inline-block"
+            class="text-red-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -635,14 +597,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
       >
         <svg
           aria-label="Linked to issues #1, #2"
-          class="octicon octicon-issue-closed text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -662,14 +622,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
       >
         <svg
           aria-label="octocat approved these changes"
-          class="octicon octicon-check text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -686,14 +644,12 @@ exports[`renderer/components/notification/Pills.tsx comment pills should render 
       >
         <svg
           aria-label="gitify-app requested changes"
-          class="octicon octicon-file-diff text-red-500"
-          display="inline-block"
+          class="text-red-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -774,14 +730,12 @@ exports[`renderer/components/notification/Pills.tsx label pills should render la
         >
           <svg
             aria-label="Linked to issues #1, #2"
-            class="octicon octicon-issue-closed text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -801,14 +755,12 @@ exports[`renderer/components/notification/Pills.tsx label pills should render la
         >
           <svg
             aria-label="octocat approved these changes"
-            class="octicon octicon-check text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -825,14 +777,12 @@ exports[`renderer/components/notification/Pills.tsx label pills should render la
         >
           <svg
             aria-label="gitify-app requested changes"
-            class="octicon octicon-file-diff text-red-500"
-            display="inline-block"
+            class="text-red-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -849,14 +799,12 @@ exports[`renderer/components/notification/Pills.tsx label pills should render la
         >
           <svg
             aria-label="2 comments"
-            class="octicon octicon-comment text-gray-500 dark:text-gray-300"
-            display="inline-block"
+            class="text-gray-500 dark:text-gray-300"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -875,14 +823,12 @@ exports[`renderer/components/notification/Pills.tsx label pills should render la
           <svg
             aria-label="🏷️ enhancement
 🏷️ good-first-issue"
-            class="octicon octicon-tag text-gray-500 dark:text-gray-300"
-            display="inline-block"
+            class="text-gray-500 dark:text-gray-300"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -906,14 +852,12 @@ exports[`renderer/components/notification/Pills.tsx label pills should render la
       >
         <svg
           aria-label="Linked to issues #1, #2"
-          class="octicon octicon-issue-closed text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -933,14 +877,12 @@ exports[`renderer/components/notification/Pills.tsx label pills should render la
       >
         <svg
           aria-label="octocat approved these changes"
-          class="octicon octicon-check text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -957,14 +899,12 @@ exports[`renderer/components/notification/Pills.tsx label pills should render la
       >
         <svg
           aria-label="gitify-app requested changes"
-          class="octicon octicon-file-diff text-red-500"
-          display="inline-block"
+          class="text-red-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -981,14 +921,12 @@ exports[`renderer/components/notification/Pills.tsx label pills should render la
       >
         <svg
           aria-label="2 comments"
-          class="octicon octicon-comment text-gray-500 dark:text-gray-300"
-          display="inline-block"
+          class="text-gray-500 dark:text-gray-300"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -1007,14 +945,12 @@ exports[`renderer/components/notification/Pills.tsx label pills should render la
         <svg
           aria-label="🏷️ enhancement
 🏷️ good-first-issue"
-          class="octicon octicon-tag text-gray-500 dark:text-gray-300"
-          display="inline-block"
+          class="text-gray-500 dark:text-gray-300"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -1095,14 +1031,12 @@ exports[`renderer/components/notification/Pills.tsx linked issue pills should re
         >
           <svg
             aria-label="Linked to issues #1, #2"
-            class="octicon octicon-issue-closed text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1122,14 +1056,12 @@ exports[`renderer/components/notification/Pills.tsx linked issue pills should re
         >
           <svg
             aria-label="octocat approved these changes"
-            class="octicon octicon-check text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1146,14 +1078,12 @@ exports[`renderer/components/notification/Pills.tsx linked issue pills should re
         >
           <svg
             aria-label="gitify-app requested changes"
-            class="octicon octicon-file-diff text-red-500"
-            display="inline-block"
+            class="text-red-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1177,14 +1107,12 @@ exports[`renderer/components/notification/Pills.tsx linked issue pills should re
       >
         <svg
           aria-label="Linked to issues #1, #2"
-          class="octicon octicon-issue-closed text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -1204,14 +1132,12 @@ exports[`renderer/components/notification/Pills.tsx linked issue pills should re
       >
         <svg
           aria-label="octocat approved these changes"
-          class="octicon octicon-check text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -1228,14 +1154,12 @@ exports[`renderer/components/notification/Pills.tsx linked issue pills should re
       >
         <svg
           aria-label="gitify-app requested changes"
-          class="octicon octicon-file-diff text-red-500"
-          display="inline-block"
+          class="text-red-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -1316,14 +1240,12 @@ exports[`renderer/components/notification/Pills.tsx linked issue pills should re
         >
           <svg
             aria-label="Linked to issue #1"
-            class="octicon octicon-issue-closed text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1343,14 +1265,12 @@ exports[`renderer/components/notification/Pills.tsx linked issue pills should re
         >
           <svg
             aria-label="octocat approved these changes"
-            class="octicon octicon-check text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1367,14 +1287,12 @@ exports[`renderer/components/notification/Pills.tsx linked issue pills should re
         >
           <svg
             aria-label="gitify-app requested changes"
-            class="octicon octicon-file-diff text-red-500"
-            display="inline-block"
+            class="text-red-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1398,14 +1316,12 @@ exports[`renderer/components/notification/Pills.tsx linked issue pills should re
       >
         <svg
           aria-label="Linked to issue #1"
-          class="octicon octicon-issue-closed text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -1425,14 +1341,12 @@ exports[`renderer/components/notification/Pills.tsx linked issue pills should re
       >
         <svg
           aria-label="octocat approved these changes"
-          class="octicon octicon-check text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -1449,14 +1363,12 @@ exports[`renderer/components/notification/Pills.tsx linked issue pills should re
       >
         <svg
           aria-label="gitify-app requested changes"
-          class="octicon octicon-file-diff text-red-500"
-          display="inline-block"
+          class="text-red-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -1537,14 +1449,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
         >
           <svg
             aria-label="Linked to issues #1, #2"
-            class="octicon octicon-issue-closed text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1564,14 +1474,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
         >
           <svg
             aria-label="octocat approved these changes"
-            class="octicon octicon-check text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1588,14 +1496,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
         >
           <svg
             aria-label="gitify-app requested changes"
-            class="octicon octicon-file-diff text-red-500"
-            display="inline-block"
+            class="text-red-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1612,14 +1518,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
         >
           <svg
             aria-label="2 comments"
-            class="octicon octicon-comment text-gray-500 dark:text-gray-300"
-            display="inline-block"
+            class="text-gray-500 dark:text-gray-300"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1638,14 +1542,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
           <svg
             aria-label="🏷️ enhancement
 🏷️ good-first-issue"
-            class="octicon octicon-tag text-gray-500 dark:text-gray-300"
-            display="inline-block"
+            class="text-gray-500 dark:text-gray-300"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1662,14 +1564,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
         >
           <svg
             aria-label="Milestone 1"
-            class="octicon octicon-milestone text-red-500"
-            display="inline-block"
+            class="text-red-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1692,14 +1592,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
       >
         <svg
           aria-label="Linked to issues #1, #2"
-          class="octicon octicon-issue-closed text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -1719,14 +1617,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
       >
         <svg
           aria-label="octocat approved these changes"
-          class="octicon octicon-check text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -1743,14 +1639,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
       >
         <svg
           aria-label="gitify-app requested changes"
-          class="octicon octicon-file-diff text-red-500"
-          display="inline-block"
+          class="text-red-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -1767,14 +1661,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
       >
         <svg
           aria-label="2 comments"
-          class="octicon octicon-comment text-gray-500 dark:text-gray-300"
-          display="inline-block"
+          class="text-gray-500 dark:text-gray-300"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -1793,14 +1685,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
         <svg
           aria-label="🏷️ enhancement
 🏷️ good-first-issue"
-          class="octicon octicon-tag text-gray-500 dark:text-gray-300"
-          display="inline-block"
+          class="text-gray-500 dark:text-gray-300"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -1817,14 +1707,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
       >
         <svg
           aria-label="Milestone 1"
-          class="octicon octicon-milestone text-red-500"
-          display="inline-block"
+          class="text-red-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -1904,14 +1792,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
         >
           <svg
             aria-label="Linked to issues #1, #2"
-            class="octicon octicon-issue-closed text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1931,14 +1817,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
         >
           <svg
             aria-label="octocat approved these changes"
-            class="octicon octicon-check text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1955,14 +1839,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
         >
           <svg
             aria-label="gitify-app requested changes"
-            class="octicon octicon-file-diff text-red-500"
-            display="inline-block"
+            class="text-red-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1979,14 +1861,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
         >
           <svg
             aria-label="2 comments"
-            class="octicon octicon-comment text-gray-500 dark:text-gray-300"
-            display="inline-block"
+            class="text-gray-500 dark:text-gray-300"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -2005,14 +1885,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
           <svg
             aria-label="🏷️ enhancement
 🏷️ good-first-issue"
-            class="octicon octicon-tag text-gray-500 dark:text-gray-300"
-            display="inline-block"
+            class="text-gray-500 dark:text-gray-300"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -2029,14 +1907,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
         >
           <svg
             aria-label="Milestone 1"
-            class="octicon octicon-milestone text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -2059,14 +1935,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
       >
         <svg
           aria-label="Linked to issues #1, #2"
-          class="octicon octicon-issue-closed text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -2086,14 +1960,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
       >
         <svg
           aria-label="octocat approved these changes"
-          class="octicon octicon-check text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -2110,14 +1982,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
       >
         <svg
           aria-label="gitify-app requested changes"
-          class="octicon octicon-file-diff text-red-500"
-          display="inline-block"
+          class="text-red-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -2134,14 +2004,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
       >
         <svg
           aria-label="2 comments"
-          class="octicon octicon-comment text-gray-500 dark:text-gray-300"
-          display="inline-block"
+          class="text-gray-500 dark:text-gray-300"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -2160,14 +2028,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
         <svg
           aria-label="🏷️ enhancement
 🏷️ good-first-issue"
-          class="octicon octicon-tag text-gray-500 dark:text-gray-300"
-          display="inline-block"
+          class="text-gray-500 dark:text-gray-300"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >
@@ -2184,14 +2050,12 @@ exports[`renderer/components/notification/Pills.tsx milestone pills should rende
       >
         <svg
           aria-label="Milestone 1"
-          class="octicon octicon-milestone text-green-500"
-          display="inline-block"
+          class="text-green-500"
           fill="currentColor"
           focusable="false"
           height="12"
-          overflow="visible"
           role="img"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="12"
         >

@@ -39,14 +39,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx security alerts
           >
             <svg
               aria-label="octocat approved these changes"
-              class="octicon octicon-check text-green-500"
-              display="inline-block"
+              class="text-green-500"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -63,14 +61,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx security alerts
           >
             <svg
               aria-label="gitify-app requested changes"
-              class="octicon octicon-file-diff text-red-500"
-              display="inline-block"
+              class="text-red-500"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -119,14 +115,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx security alerts
         >
           <svg
             aria-label="octocat approved these changes"
-            class="octicon octicon-check text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -143,14 +137,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx security alerts
         >
           <svg
             aria-label="gitify-app requested changes"
-            class="octicon octicon-file-diff text-red-500"
-            display="inline-block"
+            class="text-red-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -256,14 +248,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx security alerts
           >
             <svg
               aria-label="octocat approved these changes"
-              class="octicon octicon-check text-green-500"
-              display="inline-block"
+              class="text-green-500"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -280,14 +270,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx security alerts
           >
             <svg
               aria-label="gitify-app requested changes"
-              class="octicon octicon-file-diff text-red-500"
-              display="inline-block"
+              class="text-red-500"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -336,14 +324,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx security alerts
         >
           <svg
             aria-label="octocat approved these changes"
-            class="octicon octicon-check text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -360,14 +346,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx security alerts
         >
           <svg
             aria-label="gitify-app requested changes"
-            class="octicon octicon-file-diff text-red-500"
-            display="inline-block"
+            class="text-red-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -446,12 +430,10 @@ exports[`renderer/components/notification/NotificationFooter.tsx should default 
           <svg
             aria-hidden="true"
             class="octicon octicon-mark-github"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            overflow="visible"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -480,14 +462,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx should default 
           >
             <svg
               aria-label="octocat approved these changes"
-              class="octicon octicon-check text-green-500"
-              display="inline-block"
+              class="text-green-500"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -504,14 +484,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx should default 
           >
             <svg
               aria-label="gitify-app requested changes"
-              class="octicon octicon-file-diff text-red-500"
-              display="inline-block"
+              class="text-red-500"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -533,12 +511,10 @@ exports[`renderer/components/notification/NotificationFooter.tsx should default 
         <svg
           aria-hidden="true"
           class="octicon octicon-mark-github"
-          display="inline-block"
           fill="currentColor"
           focusable="false"
           height="16"
-          overflow="visible"
-          style="vertical-align: text-bottom;"
+          style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
           viewBox="0 0 16 16"
           width="16"
         >
@@ -567,14 +543,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx should default 
         >
           <svg
             aria-label="octocat approved these changes"
-            class="octicon octicon-check text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -591,14 +565,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx should default 
         >
           <svg
             aria-label="gitify-app requested changes"
-            class="octicon octicon-file-diff text-red-500"
-            display="inline-block"
+            class="text-red-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -704,14 +676,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx should render i
           >
             <svg
               aria-label="octocat approved these changes"
-              class="octicon octicon-check text-green-500"
-              display="inline-block"
+              class="text-green-500"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -728,14 +698,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx should render i
           >
             <svg
               aria-label="gitify-app requested changes"
-              class="octicon octicon-file-diff text-red-500"
-              display="inline-block"
+              class="text-red-500"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -784,14 +752,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx should render i
         >
           <svg
             aria-label="octocat approved these changes"
-            class="octicon octicon-check text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -808,14 +774,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx should render i
         >
           <svg
             aria-label="gitify-app requested changes"
-            class="octicon octicon-file-diff text-red-500"
-            display="inline-block"
+            class="text-red-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -921,14 +885,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx should render i
           >
             <svg
               aria-label="octocat approved these changes"
-              class="octicon octicon-check text-green-500"
-              display="inline-block"
+              class="text-green-500"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -945,14 +907,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx should render i
           >
             <svg
               aria-label="gitify-app requested changes"
-              class="octicon octicon-file-diff text-red-500"
-              display="inline-block"
+              class="text-red-500"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -1001,14 +961,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx should render i
         >
           <svg
             aria-label="octocat approved these changes"
-            class="octicon octicon-check text-green-500"
-            display="inline-block"
+            class="text-green-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -1025,14 +983,12 @@ exports[`renderer/components/notification/NotificationFooter.tsx should render i
         >
           <svg
             aria-label="gitify-app requested changes"
-            class="octicon octicon-file-diff text-red-500"
-            display="inline-block"
+            class="text-red-500"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >

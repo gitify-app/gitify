@@ -69,13 +69,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-label="4 unread notifications"
               class="octicon octicon-bell"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -92,13 +90,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-label="My issues"
               class="octicon octicon-issue-opened"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -118,13 +114,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-label="My pull requests"
               class="octicon octicon-git-pull-request"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -145,13 +139,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-label="Quit Gitify"
               class="octicon octicon-x-circle"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -229,13 +221,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <svg
             aria-label="4 unread notifications"
             class="octicon octicon-bell"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -252,13 +242,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <svg
             aria-label="My issues"
             class="octicon octicon-issue-opened"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -278,13 +266,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <svg
             aria-label="My pull requests"
             class="octicon octicon-git-pull-request"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -305,13 +291,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <svg
             aria-label="Quit Gitify"
             class="octicon octicon-x-circle"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="16"
           >
@@ -446,13 +430,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-label="4 unread notifications"
               class="octicon octicon-bell"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -469,13 +451,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-label="My issues"
               class="octicon octicon-issue-opened"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -495,13 +475,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-label="My pull requests"
               class="octicon octicon-git-pull-request"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="12"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="12"
             >
@@ -522,13 +500,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
             <svg
               aria-label="Quit Gitify"
               class="octicon octicon-x-circle"
-              display="inline-block"
               fill="currentColor"
               focusable="false"
               height="16"
-              overflow="visible"
               role="img"
-              style="vertical-align: text-bottom;"
+              style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
               viewBox="0 0 16 16"
               width="16"
             >
@@ -606,13 +582,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <svg
             aria-label="4 unread notifications"
             class="octicon octicon-bell"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -629,13 +603,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <svg
             aria-label="My issues"
             class="octicon octicon-issue-opened"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -655,13 +627,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <svg
             aria-label="My pull requests"
             class="octicon octicon-git-pull-request"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="12"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="12"
           >
@@ -682,13 +652,11 @@ exports[`renderer/components/Sidebar.tsx should render itself & its children (lo
           <svg
             aria-label="Quit Gitify"
             class="octicon octicon-x-circle"
-            display="inline-block"
             fill="currentColor"
             focusable="false"
             height="16"
-            overflow="visible"
             role="img"
-            style="vertical-align: text-bottom;"
+            style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
             viewBox="0 0 16 16"
             width="16"
           >

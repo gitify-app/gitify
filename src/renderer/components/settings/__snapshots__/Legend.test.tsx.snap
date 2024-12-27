@@ -8,13 +8,11 @@ exports[`renderer/routes/components/settings/Legend.tsx should render the legend
   >
     <svg
       aria-hidden="true"
-      class="octicon octicon-person-fill mr-2"
-      display="inline-block"
+      class="mr-2"
       fill="currentColor"
       focusable="false"
       height="16"
-      overflow="visible"
-      style="vertical-align: text-bottom;"
+      style="display: inline-block; user-select: none; vertical-align: text-bottom; overflow: visible;"
       viewBox="0 0 16 16"
       width="16"
     >
