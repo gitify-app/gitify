@@ -6,7 +6,6 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from '@primer/octicons-react';
-import log from 'electron-log';
 import { defaultSettings } from '../context/App';
 import type { Hostname, Link, SettingsState } from '../types';
 import type { SubjectType } from '../typesGitHub';
@@ -15,6 +14,7 @@ import {
   mockSingleNotification,
 } from './api/__mocks__/response-mocks';
 import * as apiRequests from './api/request';
+import * as logger from './logger';
 
 import {
   formatForDisplay,
@@ -487,7 +487,7 @@ describe('renderer/utils/helpers.ts', () => {
       });
 
       it('defaults when exception handled during specialized html enrichment process', async () => {
-        const logErrorSpy = jest.spyOn(log, 'error').mockImplementation();
+        const logErrorSpy = jest.spyOn(logger, 'logError').mockImplementation();
 
         const subject = {
           title: 'generate github web url unit tests',

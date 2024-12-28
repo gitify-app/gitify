@@ -1,5 +1,4 @@
 import type { AxiosPromise } from 'axios';
-import log from 'electron-log';
 import { print } from 'graphql/language/printer';
 import type {
   Account,
@@ -23,6 +22,7 @@ import type {
   UserDetails,
 } from '../../typesGitHub';
 import { isAnsweredDiscussionFeatureSupported } from '../features';
+import { logError } from '../logger';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
 import { apiRequestAuth } from './request';
@@ -217,9 +217,9 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
     const response = (await apiRequestAuth(url, 'GET', token)).data;
     return response.html_url;
   } catch (err) {
-    log.error(
-      '[getHtmlUrl]: error occurred while fetching html url for',
-      url,
+    logError(
+      'getHtmlUrl',
+      `error occurred while fetching html url for ${url}`,
       err,
     );
   }
@@ -271,10 +271,11 @@ export async function getLatestDiscussion(
       )[0] ?? null
     );
   } catch (err) {
-    log.error(
-      '[getLatestDiscussion]: failed to fetch latest discussion for notification',
-      `[${notification.subject.type}]: ${notification.subject.title} for repository ${notification.repository.full_name}`,
+    logError(
+      'getLatestDiscussion',
+      'failed to fetch latest discussion for notification',
       err,
+      notification,
     );
   }
 }

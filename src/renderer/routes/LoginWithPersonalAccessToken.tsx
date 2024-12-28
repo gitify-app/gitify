@@ -1,5 +1,4 @@
 import { BookIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
-import log from 'electron-log';
 import { type FC, useCallback, useContext, useState } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +14,7 @@ import {
   isValidToken,
 } from '../utils/auth/utils';
 import { Constants } from '../utils/constants';
+import { logError } from '../utils/logger';
 
 interface IValues {
   token?: Token;
@@ -129,7 +129,11 @@ export const LoginWithPersonalAccessTokenRoute: FC = () => {
         );
         navigate(-1);
       } catch (err) {
-        log.error('Auth: failed to login with personal access token', err);
+        logError(
+          'loginWithPersonalAccessToken',
+          'Failed to login with PAT',
+          err,
+        );
         setIsValidToken(false);
       }
     },

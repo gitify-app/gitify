@@ -1,5 +1,4 @@
 import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
-import log from 'electron-log';
 import { type FC, useCallback, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../components/buttons/Button';
@@ -7,6 +6,7 @@ import { LogoIcon } from '../components/icons/LogoIcon';
 import { AppContext } from '../context/App';
 import { Size } from '../types';
 import { showWindow } from '../utils/comms';
+import { logError } from '../utils/logger';
 
 export const LoginRoute: FC = () => {
   const navigate = useNavigate();
@@ -23,7 +23,7 @@ export const LoginRoute: FC = () => {
     try {
       await loginWithGitHubApp();
     } catch (err) {
-      log.error('Auth: failed to login with GitHub', err);
+      logError('loginWithGitHubApp', 'failed to login with GitHub', err);
     }
   }, [loginWithGitHubApp]);
 

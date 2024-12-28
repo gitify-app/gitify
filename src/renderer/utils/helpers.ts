@@ -11,6 +11,7 @@ import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
 import { Constants } from './constants';
+import { logError } from './logger';
 import {
   getCheckSuiteAttributes,
   getLatestDiscussionComment,
@@ -151,11 +152,13 @@ export async function generateGitHubWebUrl(
       }
     }
   } catch (err) {
-    log.error(
-      '[generateGitHubWebUrl]: failed to resolve specific notification html url for',
-      `[${notification.subject.type}]: ${notification.subject.title} for repository ${notification.repository.full_name}`,
+    logError(
+      'generateGitHubWebUrl',
+      'Failed to resolve specific notification html url for',
       err,
+      notification,
     );
+
     log.warn(
       'Will fall back to opening repository root url for',
       notification.repository.full_name,

@@ -1,6 +1,5 @@
 import { BrowserWindow } from '@electron/remote';
 import { format } from 'date-fns';
-import log from 'electron-log';
 import semver from 'semver';
 import type {
   Account,
@@ -17,6 +16,7 @@ import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
 import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
+import { logError } from '../logger';
 import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
 
 // TODO - Refactor our OAuth2 flow to use system browser and local app gitify://callback - see #485 #561 #654
@@ -178,9 +178,9 @@ export async function refreshAccount(account: Account): Promise<Account> {
       accountScopes.includes(scope),
     );
   } catch (err) {
-    log.error(
-      '[refreshAccount]: failed to refresh account for user',
-      account.user.login,
+    logError(
+      'refreshAccount',
+      `failed to refresh account for user ${account.user.login}`,
       err,
     );
   }

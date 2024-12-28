@@ -2,7 +2,6 @@ import { act, renderHook, waitFor } from '@testing-library/react';
 import axios, { AxiosError } from 'axios';
 import nock from 'nock';
 
-import log from 'electron-log';
 import {
   mockAuth,
   mockGitHubCloudAccount,
@@ -14,10 +13,11 @@ import {
   mockSingleNotification,
 } from '../utils/api/__mocks__/response-mocks';
 import { Errors } from '../utils/errors';
+import * as logger from '../utils/logger';
 import { useNotifications } from './useNotifications';
 
 describe('renderer/hooks/useNotifications.ts', () => {
-  const logErrorSpy = jest.spyOn(log, 'error').mockImplementation();
+  const logErrorSpy = jest.spyOn(logger, 'logError').mockImplementation();
 
   beforeEach(() => {
     // axios will default to using the XHR adapter which can't be intercepted

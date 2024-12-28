@@ -11,7 +11,6 @@ import {
   SyncIcon,
 } from '@primer/octicons-react';
 
-import log from 'electron-log';
 import { type FC, useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../components/Header';
@@ -30,6 +29,7 @@ import {
   openDeveloperSettings,
   openHost,
 } from '../utils/links';
+import { logError } from '../utils/logger';
 import { saveState } from '../utils/storage';
 
 export const AccountsRoute: FC = () => {
@@ -57,7 +57,7 @@ export const AccountsRoute: FC = () => {
     try {
       await loginWithGitHubApp();
     } catch (err) {
-      log.error('Auth: failed to login with GitHub', err);
+      logError('loginWithGitHub', 'failed to login with GitHub', err);
     }
   }, []);
 
