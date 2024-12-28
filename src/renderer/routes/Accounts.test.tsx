@@ -57,6 +57,45 @@ describe('renderer/routes/Accounts.tsx', () => {
       expect(screen.getByTestId('accounts')).toMatchSnapshot();
     });
 
+    it('should render with PAT scopes warning', async () => {
+      const openExternalLinkMock = jest
+        .spyOn(comms, 'openExternalLink')
+        .mockImplementation();
+
+      await act(async () => {
+        render(
+          <AppContext.Provider
+            value={{
+              auth: {
+                accounts: [
+                  {
+                    ...mockPersonalAccessTokenAccount,
+                    hasRequiredScopes: false,
+                  },
+                  mockOAuthAccount,
+                  mockGitHubAppAccount,
+                ],
+              },
+              settings: mockSettings,
+            }}
+          >
+            <MemoryRouter>
+              <AccountsRoute />
+            </MemoryRouter>
+          </AppContext.Provider>,
+        );
+      });
+
+      expect(screen.getByTestId('accounts')).toMatchSnapshot();
+
+      fireEvent.click(screen.getByLabelText('missing-scopes'));
+
+      expect(openExternalLinkMock).toHaveBeenCalledTimes(1);
+      expect(openExternalLinkMock).toHaveBeenCalledWith(
+        'https://github.com/settings/tokens',
+      );
+    });
+
     it('should go back by pressing the icon', async () => {
       await act(async () => {
         render(

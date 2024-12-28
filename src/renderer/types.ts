@@ -50,6 +50,7 @@ export interface Account {
   hostname: Hostname;
   token: Token;
   user: GitifyUser | null;
+  hasRequiredScopes?: boolean;
 }
 
 export type SettingsValue =

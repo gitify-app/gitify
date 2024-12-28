@@ -1,4 +1,5 @@
 import {
+  AlertFillIcon,
   FeedPersonIcon,
   KeyIcon,
   MarkGithubIcon,
@@ -23,6 +24,7 @@ import { type Account, IconColor, Size } from '../types';
 import { getAccountUUID, refreshAccount } from '../utils/auth/utils';
 import { cn } from '../utils/cn';
 import { updateTrayIcon, updateTrayTitle } from '../utils/comms';
+import { Constants } from '../utils/constants';
 import {
   openAccountProfile,
   openDeveloperSettings,
@@ -78,7 +80,7 @@ export const AccountsRoute: FC = () => {
               className="mb-4 flex items-center justify-between rounded-md bg-gray-100 p-2 dark:bg-gray-sidebar"
             >
               <div className="ml-2 text-xs">
-                <div>
+                <div className="flex flex-1 items-center gap-2">
                   <button
                     type="button"
                     className="flex flex-1 gap-2 items-center justify-center mb-1 cursor-pointer text-sm font-semibold"
@@ -99,6 +101,23 @@ export const AccountsRoute: FC = () => {
                       ({account.user?.name})
                     </span>
                   </button>
+
+                  {account.hasRequiredScopes === false && (
+                    <span className="text-xs font-medium italic">
+                      <button
+                        type="button"
+                        className="cursor-pointer"
+                        title={`This account is missing one or more required scopes: \n  - ${Constants.AUTH_SCOPE.join('\n  - ')}`}
+                        aria-label="missing-scopes"
+                        onClick={() => openDeveloperSettings(account)}
+                      >
+                        <AlertFillIcon
+                          size={Size.XSMALL}
+                          className={IconColor.RED}
+                        />
+                      </button>
+                    </span>
+                  )}
                 </div>
                 <div>
                   <button
