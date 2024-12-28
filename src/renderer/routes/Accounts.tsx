@@ -102,23 +102,22 @@ export const AccountsRoute: FC = () => {
                     </span>
                   </button>
 
-                  {account.method === 'Personal Access Token' &&
-                    account.hasRequiredScopes === false && (
-                      <span className="text-xs font-medium italic">
-                        <button
-                          type="button"
-                          className="cursor-pointer"
-                          title={`This account is missing one or more required scopes: \n  - ${Constants.AUTH_SCOPE.join('\n  - ')}`}
-                          aria-label="missing-scopes"
-                          onClick={() => openDeveloperSettings(account)}
-                        >
-                          <AlertFillIcon
-                            size={Size.XSMALL}
-                            className={IconColor.RED}
-                          />
-                        </button>
-                      </span>
-                    )}
+                  {account.hasRequiredScopes === false && (
+                    <span className="text-xs font-medium italic">
+                      <button
+                        type="button"
+                        className="cursor-pointer"
+                        title={`This account is missing one or more required scopes: \n  - ${Constants.AUTH_SCOPE.join('\n  - ')}`}
+                        aria-label="missing-scopes"
+                        onClick={() => openDeveloperSettings(account)}
+                      >
+                        <AlertFillIcon
+                          size={Size.XSMALL}
+                          className={IconColor.RED}
+                        />
+                      </button>
+                    </span>
+                  )}
                 </div>
                 <div>
                   <button

@@ -43,6 +43,7 @@ export const mockOAuthAccount: Account = {
   token: '1234568790' as Token,
   hostname: 'github.gitify.io' as Hostname,
   user: mockGitifyUser,
+  hasRequiredScopes: true,
 };
 
 export const mockGitHubCloudAccount: Account = {
@@ -52,6 +53,7 @@ export const mockGitHubCloudAccount: Account = {
   hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
   user: mockGitifyUser,
   version: 'latest',
+  hasRequiredScopes: true,
 };
 
 export const mockGitHubEnterpriseServerAccount: Account = {
@@ -60,6 +62,7 @@ export const mockGitHubEnterpriseServerAccount: Account = {
   token: '1234568790' as Token,
   hostname: 'github.gitify.io' as Hostname,
   user: mockGitifyUser,
+  hasRequiredScopes: true,
 };
 
 export const mockGitHubAppAccount: Account = {
@@ -68,6 +71,7 @@ export const mockGitHubAppAccount: Account = {
   token: '987654321' as Token,
   hostname: Constants.DEFAULT_AUTH_OPTIONS.hostname,
   user: mockGitifyUser,
+  hasRequiredScopes: true,
 };
 
 export const mockAuth: AuthState = {
