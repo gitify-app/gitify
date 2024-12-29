@@ -1,11 +1,11 @@
 import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
+import * as logger from '../../../shared/logger';
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
   mockToken,
 } from '../../__mocks__/state-mocks';
 import type { Hostname, Link, SettingsState, Token } from '../../types';
-import * as logger from '../logger';
 import {
   getAuthenticatedUser,
   getHtmlUrl,

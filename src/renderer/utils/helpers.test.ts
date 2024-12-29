@@ -6,6 +6,7 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from '@primer/octicons-react';
+import * as logger from '../../shared/logger';
 import { defaultSettings } from '../context/App';
 import type { Hostname, Link, SettingsState } from '../types';
 import type { SubjectType } from '../typesGitHub';
@@ -14,7 +15,6 @@ import {
   mockSingleNotification,
 } from './api/__mocks__/response-mocks';
 import * as apiRequests from './api/request';
-import * as logger from './logger';
 
 import {
   formatForDisplay,

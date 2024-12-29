@@ -2,6 +2,8 @@ import { BookIcon, KeyIcon, SignInIcon } from '@primer/octicons-react';
 import { type FC, useCallback, useContext, useState } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
+
+import { logError } from '../../shared/logger';
 import { Header } from '../components/Header';
 import { Button } from '../components/buttons/Button';
 import { FieldInput } from '../components/fields/FieldInput';
@@ -14,7 +16,6 @@ import {
   isValidToken,
 } from '../utils/auth/utils';
 import { Constants } from '../utils/constants';
-import { logError } from '../utils/logger';
 
 interface IValues {
   token?: Token;

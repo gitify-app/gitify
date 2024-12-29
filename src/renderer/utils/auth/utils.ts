@@ -1,6 +1,8 @@
 import { BrowserWindow } from '@electron/remote';
 import { format } from 'date-fns';
 import semver from 'semver';
+
+import { logError } from '../../../shared/logger';
 import type {
   Account,
   AuthCode,
@@ -16,7 +18,6 @@ import { getAuthenticatedUser } from '../api/client';
 import { apiRequest } from '../api/request';
 import { Constants } from '../constants';
 import { getPlatformFromHostname } from '../helpers';
-import { logError } from '../logger';
 import type { AuthMethod, AuthResponse, AuthTokenResponse } from './types';
 
 // TODO - Refactor our OAuth2 flow to use system browser and local app gitify://callback - see #485 #561 #654

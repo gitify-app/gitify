@@ -1,5 +1,6 @@
 import log from 'electron-log';
-import type { Notification } from '../typesGitHub';
+
+import type { Notification } from '../renderer/typesGitHub';
 
 function logMessage(
   // biome-ignore lint/suspicious/noExplicitAny: <explanation>
@@ -43,7 +44,7 @@ export function logWarn(
 export function logError(
   type: string,
   message: string,
-  err: Error,
+  err?: Error,
   notification?: Notification,
 ) {
   logMessage(log.error, type, message, err, notification);

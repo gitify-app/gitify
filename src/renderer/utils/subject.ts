@@ -1,3 +1,4 @@
+import { logError } from '../../shared/logger';
 import type { Link } from '../types';
 import type {
   CheckSuiteAttributes,
@@ -24,7 +25,6 @@ import {
   getPullRequestReviews,
   getRelease,
 } from './api/client';
-import { logError } from './logger';
 
 export async function getGitifySubjectDetails(
   notification: Notification,

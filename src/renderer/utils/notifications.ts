@@ -1,4 +1,6 @@
 import path from 'node:path';
+
+import { logError, logWarn } from '../../shared/logger';
 import type {
   AccountNotifications,
   GitifyState,
@@ -11,7 +13,6 @@ import { getAccountUUID } from './auth/utils';
 import { hideWindow, showWindow, updateTrayIcon } from './comms';
 import { Constants } from './constants';
 import { openNotification } from './links';
-import { logError, logWarn } from './logger';
 import { isWindows } from './platform';
 import { getGitifySubjectDetails } from './subject';
 

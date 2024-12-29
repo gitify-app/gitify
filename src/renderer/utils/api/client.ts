@@ -1,5 +1,7 @@
 import type { AxiosPromise } from 'axios';
 import { print } from 'graphql/language/printer';
+
+import { logError } from '../../../shared/logger';
 import type {
   Account,
   Hostname,
@@ -22,7 +24,6 @@ import type {
   UserDetails,
 } from '../../typesGitHub';
 import { isAnsweredDiscussionFeatureSupported } from '../features';
-import { logError } from '../logger';
 import { QUERY_SEARCH_DISCUSSIONS } from './graphql/discussions';
 import { formatAsGitHubSearchSyntax } from './graphql/utils';
 import { apiRequestAuth } from './request';

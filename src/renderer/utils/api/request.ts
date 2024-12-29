@@ -3,8 +3,9 @@ import axios, {
   type AxiosPromise,
   type Method,
 } from 'axios';
+
+import { logError } from '../../../shared/logger';
 import type { Link, Token } from '../../types';
-import { logError } from '../logger';
 import { getNextURLFromLinkHeader } from './utils';
 
 /**

@@ -1,4 +1,6 @@
 import { useCallback, useState } from 'react';
+
+import { logError } from '../../shared/logger';
 import type {
   Account,
   AccountNotifications,
@@ -13,7 +15,6 @@ import {
   markNotificationThreadAsRead,
 } from '../utils/api/client';
 import { isMarkAsDoneFeatureSupported } from '../utils/features';
-import { logError } from '../utils/logger';
 import {
   getAllNotifications,
   setTrayIconColor,

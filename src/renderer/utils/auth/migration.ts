@@ -1,6 +1,6 @@
+import { logInfo } from '../../../shared/logger';
 import type { Account, AuthState } from '../../types';
 import { Constants } from '../constants';
-import { logInfo } from '../logger';
 import { loadState, saveState } from '../storage';
 import { getUserData } from './utils';
 

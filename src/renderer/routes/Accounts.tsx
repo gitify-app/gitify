@@ -10,9 +10,10 @@ import {
   StarIcon,
   SyncIcon,
 } from '@primer/octicons-react';
-
 import { type FC, useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { logError } from '../../shared/logger';
 import { Header } from '../components/Header';
 import { AuthMethodIcon } from '../components/icons/AuthMethodIcon';
 import { AvatarIcon } from '../components/icons/AvatarIcon';
@@ -29,7 +30,6 @@ import {
   openDeveloperSettings,
   openHost,
 } from '../utils/links';
-import { logError } from '../utils/logger';
 import { saveState } from '../utils/storage';
 
 export const AccountsRoute: FC = () => {

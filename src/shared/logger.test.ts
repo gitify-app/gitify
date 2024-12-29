@@ -1,5 +1,6 @@
 import log from 'electron-log';
-import { mockSingleNotification } from './api/__mocks__/response-mocks';
+
+import { mockSingleNotification } from '../renderer/utils/api/__mocks__/response-mocks';
 import { logError, logInfo, logWarn } from './logger';
 
 describe('renderer/utils/logger.ts', () => {

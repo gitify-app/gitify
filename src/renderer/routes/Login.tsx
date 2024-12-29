@@ -1,12 +1,13 @@
 import { KeyIcon, MarkGithubIcon, PersonIcon } from '@primer/octicons-react';
 import { type FC, useCallback, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { logError } from '../../shared/logger';
 import { Button } from '../components/buttons/Button';
 import { LogoIcon } from '../components/icons/LogoIcon';
 import { AppContext } from '../context/App';
 import { Size } from '../types';
 import { showWindow } from '../utils/comms';
-import { logError } from '../utils/logger';
 
 export const LoginRoute: FC = () => {
   const navigate = useNavigate();
