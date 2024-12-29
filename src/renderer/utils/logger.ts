@@ -9,24 +9,19 @@ function logMessage(
   err?: Error,
   notification?: Notification,
 ) {
-  if (notification && err) {
-    logFunction(
-      `[${type}]:`,
-      message,
-      `[${notification.subject.type}]: ${notification.subject.title} for repository ${notification.repository.full_name}`,
-      err,
-    );
-  } else if (notification) {
-    logFunction(
-      `[${type}]:`,
-      message,
+  const args: (string | Error)[] = [`[${type}]:`, message];
+
+  if (notification) {
+    args.push(
       `[${notification.subject.type}]: ${notification.subject.title} for repository ${notification.repository.full_name}`,
     );
-  } else if (err) {
-    logFunction(`[${type}]:`, message, err);
-  } else {
-    logFunction(`[${type}]:`, message);
   }
+
+  if (err) {
+    args.push(err);
+  }
+
+  logFunction(...args);
 }
 
 export function logInfo(
