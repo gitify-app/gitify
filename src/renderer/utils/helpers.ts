@@ -4,14 +4,13 @@ import {
   ChevronRightIcon,
 } from '@primer/octicons-react';
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
-import log from 'electron-log';
 import { defaultSettings } from '../context/App';
 import type { Chevron, Hostname, Link, SettingsState } from '../types';
 import type { Notification } from '../typesGitHub';
 import { getHtmlUrl, getLatestDiscussion } from './api/client';
 import type { PlatformType } from './auth/types';
 import { Constants } from './constants';
-import { logError } from './logger';
+import { logError, logWarn } from './logger';
 import {
   getCheckSuiteAttributes,
   getLatestDiscussionComment,
@@ -159,9 +158,9 @@ export async function generateGitHubWebUrl(
       notification,
     );
 
-    log.warn(
-      'Will fall back to opening repository root url for',
-      notification.repository.full_name,
+    logWarn(
+      'generateGitHubWebUrl',
+      `Falling back to repository root url: ${notification.repository.full_name}`,
     );
   }
 
