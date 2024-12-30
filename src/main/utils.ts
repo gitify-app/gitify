@@ -43,7 +43,11 @@ export function openLogsDirectory() {
   const logDirectory = path.dirname(log.transports.file?.getFile()?.path);
 
   if (!logDirectory) {
-    logError('openLogsDirectory', 'Could not find log directory!');
+    logError(
+      'openLogsDirectory',
+      'Could not find log directory!',
+      new Error('Directory not found'),
+    );
     return;
   }
 

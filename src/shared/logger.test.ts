@@ -21,7 +21,7 @@ describe('renderer/utils/logger.ts', () => {
       logInfo('foo', 'bar');
 
       expect(logInfoSpy).toHaveBeenCalledTimes(1);
-      expect(logInfoSpy).toHaveBeenCalledWith('[foo]:', 'bar');
+      expect(logInfoSpy).toHaveBeenCalledWith('[foo]', 'bar');
     });
 
     it('log info with notification', () => {
@@ -29,9 +29,9 @@ describe('renderer/utils/logger.ts', () => {
 
       expect(logInfoSpy).toHaveBeenCalledTimes(1);
       expect(logInfoSpy).toHaveBeenCalledWith(
-        '[foo]:',
+        '[foo]',
         'bar',
-        '[Issue]: I am a robot and this is a test! for repository gitify-app/notifications-test',
+        '[Issue >> gitify-app/notifications-test >> I am a robot and this is a test!]',
       );
     });
   });
@@ -41,7 +41,7 @@ describe('renderer/utils/logger.ts', () => {
       logWarn('foo', 'bar');
 
       expect(logWarnSpy).toHaveBeenCalledTimes(1);
-      expect(logWarnSpy).toHaveBeenCalledWith('[foo]:', 'bar');
+      expect(logWarnSpy).toHaveBeenCalledWith('[foo]', 'bar');
     });
 
     it('log warn with notification', () => {
@@ -49,9 +49,9 @@ describe('renderer/utils/logger.ts', () => {
 
       expect(logWarnSpy).toHaveBeenCalledTimes(1);
       expect(logWarnSpy).toHaveBeenCalledWith(
-        '[foo]:',
+        '[foo]',
         'bar',
-        '[Issue]: I am a robot and this is a test! for repository gitify-app/notifications-test',
+        '[Issue >> gitify-app/notifications-test >> I am a robot and this is a test!]',
       );
     });
   });
@@ -61,7 +61,7 @@ describe('renderer/utils/logger.ts', () => {
       logError('foo', 'bar', mockError);
 
       expect(logErrorSpy).toHaveBeenCalledTimes(1);
-      expect(logErrorSpy).toHaveBeenCalledWith('[foo]:', 'bar', mockError);
+      expect(logErrorSpy).toHaveBeenCalledWith('[foo]', 'bar', mockError);
     });
 
     it('log error with notification', () => {
@@ -69,9 +69,9 @@ describe('renderer/utils/logger.ts', () => {
 
       expect(logErrorSpy).toHaveBeenCalledTimes(1);
       expect(logErrorSpy).toHaveBeenCalledWith(
-        '[foo]:',
+        '[foo]',
         'bar',
-        '[Issue]: I am a robot and this is a test! for repository gitify-app/notifications-test',
+        '[Issue >> gitify-app/notifications-test >> I am a robot and this is a test!]',
         mockError,
       );
     });

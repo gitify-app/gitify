@@ -10,11 +10,11 @@ function logMessage(
   err?: Error,
   notification?: Notification,
 ) {
-  const args: (string | Error)[] = [`[${type}]:`, message];
+  const args: (string | Error)[] = [`[${type}]`, message];
 
   if (notification) {
     args.push(
-      `[${notification.subject.type}]: ${notification.subject.title} for repository ${notification.repository.full_name}`,
+      `[${notification.subject.type} >> ${notification.repository.full_name} >> ${notification.subject.title}]`,
     );
   }
 
@@ -44,7 +44,7 @@ export function logWarn(
 export function logError(
   type: string,
   message: string,
-  err?: Error,
+  err: Error,
   notification?: Notification,
 ) {
   logMessage(log.error, type, message, err, notification);
