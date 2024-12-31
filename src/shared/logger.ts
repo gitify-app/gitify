@@ -2,29 +2,6 @@ import log from 'electron-log';
 
 import type { Notification } from '../renderer/typesGitHub';
 
-function logMessage(
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  logFunction: (...params: any[]) => void,
-  type: string,
-  message: string,
-  err?: Error,
-  notification?: Notification,
-) {
-  const args: (string | Error)[] = [`[${type}]`, message];
-
-  if (notification) {
-    args.push(
-      `[${notification.subject.type} >> ${notification.repository.full_name} >> ${notification.subject.title}]`,
-    );
-  }
-
-  if (err) {
-    args.push(err);
-  }
-
-  logFunction(...args);
-}
-
 export function logInfo(
   type: string,
   message: string,
@@ -48,4 +25,27 @@ export function logError(
   notification?: Notification,
 ) {
   logMessage(log.error, type, message, err, notification);
+}
+
+function logMessage(
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
+  logFunction: (...params: any[]) => void,
+  type: string,
+  message: string,
+  err?: Error,
+  notification?: Notification,
+) {
+  const args: (string | Error)[] = [`[${type}]`, message];
+
+  if (notification) {
+    args.push(
+      `[${notification.subject.type} >> ${notification.repository.full_name} >> ${notification.subject.title}]`,
+    );
+  }
+
+  if (err) {
+    args.push(err);
+  }
+
+  logFunction(...args);
 }
