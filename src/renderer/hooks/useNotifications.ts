@@ -1,5 +1,6 @@
-import log from 'electron-log';
 import { useCallback, useState } from 'react';
+
+import { logError } from '../../shared/logger';
 import type {
   Account,
   AccountNotifications,
@@ -121,8 +122,9 @@ export const useNotifications = (): NotificationsState => {
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
       } catch (err) {
-        log.error(
-          '[markNotificationsAsRead]: Error occurred while marking notifications as read',
+        logError(
+          'markNotificationsAsRead',
+          'Error occurred while marking notifications as read',
           err,
         );
       }
@@ -158,8 +160,9 @@ export const useNotifications = (): NotificationsState => {
         setNotifications(updatedNotifications);
         setTrayIconColor(updatedNotifications);
       } catch (err) {
-        log.error(
-          '[markNotificationsAsDone]: error occurred while marking notifications as done',
+        logError(
+          'markNotificationsAsDone',
+          'Error occurred while marking notifications as done',
           err,
         );
       }
@@ -186,9 +189,11 @@ export const useNotifications = (): NotificationsState => {
           await markNotificationsAsRead(state, [notification]);
         }
       } catch (err) {
-        log.error(
-          '[unsubscribeNotification]: error occurred while unsubscribing from notification thread',
+        logError(
+          'unsubscribeNotification',
+          'Error occurred while unsubscribing from notification thread',
           err,
+          notification,
         );
       }
 

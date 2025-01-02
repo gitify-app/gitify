@@ -1,7 +1,8 @@
 import { BrowserWindow } from '@electron/remote';
 import { format } from 'date-fns';
-import log from 'electron-log';
 import semver from 'semver';
+
+import { logError } from '../../../shared/logger';
 import type {
   Account,
   AuthCode,
@@ -178,9 +179,9 @@ export async function refreshAccount(account: Account): Promise<Account> {
       accountScopes.includes(scope),
     );
   } catch (err) {
-    log.error(
-      '[refreshAccount]: failed to refresh account for user',
-      account.user.login,
+    logError(
+      'refreshAccount',
+      `failed to refresh account for user ${account.user.login}`,
       err,
     );
   }

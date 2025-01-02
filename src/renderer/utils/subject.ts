@@ -1,4 +1,4 @@
-import log from 'electron-log';
+import { logError } from '../../shared/logger';
 import type { Link } from '../types';
 import type {
   CheckSuiteAttributes,
@@ -49,10 +49,11 @@ export async function getGitifySubjectDetails(
         return null;
     }
   } catch (err) {
-    log.error(
-      '[getGitifySubjectDetails]: failed to fetch details for notification for',
-      `[${notification.subject.type}]: ${notification.subject.title} for repository ${notification.repository.full_name}`,
+    logError(
+      'getGitifySubjectDetails',
+      'failed to fetch details for notification for',
       err,
+      notification,
     );
   }
 }

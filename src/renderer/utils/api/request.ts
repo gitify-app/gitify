@@ -3,7 +3,8 @@ import axios, {
   type AxiosPromise,
   type Method,
 } from 'axios';
-import log from 'electron-log';
+
+import { logError } from '../../../shared/logger';
 import type { Link, Token } from '../../types';
 import { getNextURLFromLinkHeader } from './utils';
 
@@ -73,7 +74,8 @@ export async function apiRequestAuth(
       nextUrl = getNextURLFromLinkHeader(response);
     }
   } catch (err) {
-    log.error('[apiRequestAuth]: API request failed:', err);
+    logError('apiRequestAuth', 'API request failed:', err);
+
     throw err;
   }
 

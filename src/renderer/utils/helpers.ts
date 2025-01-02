@@ -4,7 +4,8 @@ import {
   ChevronRightIcon,
 } from '@primer/octicons-react';
 import { formatDistanceToNowStrict, parseISO } from 'date-fns';
-import log from 'electron-log';
+
+import { logError, logWarn } from '../../shared/logger';
 import { defaultSettings } from '../context/App';
 import type { Chevron, Hostname, Link, SettingsState } from '../types';
 import type { Notification } from '../typesGitHub';
@@ -151,14 +152,16 @@ export async function generateGitHubWebUrl(
       }
     }
   } catch (err) {
-    log.error(
-      '[generateGitHubWebUrl]: failed to resolve specific notification html url for',
-      `[${notification.subject.type}]: ${notification.subject.title} for repository ${notification.repository.full_name}`,
+    logError(
+      'generateGitHubWebUrl',
+      'Failed to resolve specific notification html url for',
       err,
+      notification,
     );
-    log.warn(
-      'Will fall back to opening repository root url for',
-      notification.repository.full_name,
+
+    logWarn(
+      'generateGitHubWebUrl',
+      `Falling back to repository root url: ${notification.repository.full_name}`,
     );
   }
 

@@ -1,5 +1,6 @@
 import path from 'node:path';
-import log from 'electron-log';
+
+import { logError, logWarn } from '../../shared/logger';
 import type {
   AccountNotifications,
   GitifyState,
@@ -157,10 +158,12 @@ export async function getAllNotifications(
             error: null,
           };
         } catch (err) {
-          log.error(
-            '[getAllNotifications]: error occurred while fetching account notifications',
+          logError(
+            'getAllNotifications',
+            'error occurred while fetching account notifications',
             err,
           );
+
           return {
             account: accountNotifications.account,
             notifications: [],
@@ -188,12 +191,17 @@ export async function enrichNotifications(
       try {
         additionalSubjectDetails = await getGitifySubjectDetails(notification);
       } catch (err) {
-        log.error(
-          '[enrichNotifications] failed to enrich notification details for',
-          `[${notification.subject.type}]: ${notification.subject.title} for repository ${notification.repository.full_name}`,
+        logError(
+          'enrichNotifications',
+          'failed to enrich notification details for',
           err,
+          notification,
         );
-        log.warn('Continuing with base notification details');
+
+        logWarn(
+          'enrichNotifications',
+          'Continuing with base notification details',
+        );
       }
 
       return {

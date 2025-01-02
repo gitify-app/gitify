@@ -5,6 +5,8 @@ import { dialog, shell } from 'electron';
 import log from 'electron-log';
 import type { Menubar } from 'menubar';
 
+import { logError, logInfo } from '../shared/logger';
+
 export function takeScreenshot(mb: Menubar) {
   const date = new Date();
   const dateStr = date.toISOString().replace(/:/g, '-');
@@ -12,7 +14,7 @@ export function takeScreenshot(mb: Menubar) {
   const capturedPicFilePath = `${os.homedir()}/${dateStr}-gitify-screenshot.png`;
   mb.window.capturePage().then((img) => {
     fs.writeFile(capturedPicFilePath, img.toPNG(), () =>
-      log.info(`Screenshot saved ${capturedPicFilePath}`),
+      logInfo('takeScreenshot', `Screenshot saved ${capturedPicFilePath}`),
     );
   });
 }
@@ -41,7 +43,11 @@ export function openLogsDirectory() {
   const logDirectory = path.dirname(log.transports.file?.getFile()?.path);
 
   if (!logDirectory) {
-    log.error('Could not find log directory!');
+    logError(
+      'openLogsDirectory',
+      'Could not find log directory!',
+      new Error('Directory not found'),
+    );
     return;
   }
 

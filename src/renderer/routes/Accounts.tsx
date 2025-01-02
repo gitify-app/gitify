@@ -10,10 +10,10 @@ import {
   StarIcon,
   SyncIcon,
 } from '@primer/octicons-react';
-
-import log from 'electron-log';
 import { type FC, useCallback, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import { logError } from '../../shared/logger';
 import { Header } from '../components/Header';
 import { AuthMethodIcon } from '../components/icons/AuthMethodIcon';
 import { AvatarIcon } from '../components/icons/AvatarIcon';
@@ -57,7 +57,7 @@ export const AccountsRoute: FC = () => {
     try {
       await loginWithGitHubApp();
     } catch (err) {
-      log.error('Auth: failed to login with GitHub', err);
+      logError('loginWithGitHub', 'failed to login with GitHub', err);
     }
   }, []);
 

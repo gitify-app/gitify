@@ -1,8 +1,9 @@
 import { BookIcon, PersonIcon, SignInIcon } from '@primer/octicons-react';
-import log from 'electron-log';
 import { type FC, useCallback, useContext } from 'react';
 import { Form, type FormRenderProps } from 'react-final-form';
 import { useNavigate } from 'react-router-dom';
+
+import { logError } from '../../shared/logger';
 import { Header } from '../components/Header';
 import { Button } from '../components/buttons/Button';
 import { FieldInput } from '../components/fields/FieldInput';
@@ -131,7 +132,7 @@ export const LoginWithOAuthAppRoute: FC = () => {
         await loginWithOAuthApp(data as LoginOAuthAppOptions);
         navigate(-1);
       } catch (err) {
-        log.error('Auth: Failed to login with oauth app', err);
+        logError('loginWithOAuthApp', 'Failed to login with OAuth App', err);
       }
     },
     [loginWithOAuthApp],

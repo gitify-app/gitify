@@ -31,7 +31,7 @@ const mockDiscussionAuthor: DiscussionAuthor = {
   avatar_url: 'https://avatars.githubusercontent.com/u/123456789?v=4' as Link,
   type: 'User',
 };
-import log from 'electron-log';
+import * as logger from '../../shared/logger';
 
 describe('renderer/utils/subject.ts', () => {
   beforeEach(() => {
@@ -1152,7 +1152,7 @@ describe('renderer/utils/subject.ts', () => {
 
     describe('Error', () => {
       it('catches error and logs message', async () => {
-        const logErrorSpy = jest.spyOn(log, 'error').mockImplementation();
+        const logErrorSpy = jest.spyOn(logger, 'logError').mockImplementation();
 
         const mockError = new Error('Test error');
         const mockNotification = partialMockNotification({
@@ -1172,9 +1172,10 @@ describe('renderer/utils/subject.ts', () => {
         await getGitifySubjectDetails(mockNotification);
 
         expect(logErrorSpy).toHaveBeenCalledWith(
-          '[getGitifySubjectDetails]: failed to fetch details for notification for',
-          '[Issue]: This issue will throw an error for repository gitify-app/notifications-test',
+          'getGitifySubjectDetails',
+          'failed to fetch details for notification for',
           mockError,
+          mockNotification,
         );
       });
     });

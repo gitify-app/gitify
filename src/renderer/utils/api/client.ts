@@ -1,6 +1,7 @@
 import type { AxiosPromise } from 'axios';
-import log from 'electron-log';
 import { print } from 'graphql/language/printer';
+
+import { logError } from '../../../shared/logger';
 import type {
   Account,
   Hostname,
@@ -217,9 +218,9 @@ export async function getHtmlUrl(url: Link, token: Token): Promise<string> {
     const response = (await apiRequestAuth(url, 'GET', token)).data;
     return response.html_url;
   } catch (err) {
-    log.error(
-      '[getHtmlUrl]: error occurred while fetching html url for',
-      url,
+    logError(
+      'getHtmlUrl',
+      `error occurred while fetching html url for ${url}`,
       err,
     );
   }
@@ -271,10 +272,11 @@ export async function getLatestDiscussion(
       )[0] ?? null
     );
   } catch (err) {
-    log.error(
-      '[getLatestDiscussion]: failed to fetch latest discussion for notification',
-      `[${notification.subject.type}]: ${notification.subject.title} for repository ${notification.repository.full_name}`,
+    logError(
+      'getLatestDiscussion',
+      'failed to fetch latest discussion for notification',
       err,
+      notification,
     );
   }
 }

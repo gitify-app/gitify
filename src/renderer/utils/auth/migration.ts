@@ -1,4 +1,4 @@
-import log from 'electron-log';
+import { logInfo } from '../../../shared/logger';
 import type { Account, AuthState } from '../../types';
 import { Constants } from '../constants';
 import { loadState, saveState } from '../storage';
@@ -16,7 +16,10 @@ export async function migrateAuthenticatedAccounts() {
     return;
   }
 
-  log.info('Account Migration: Commencing authenticated accounts migration');
+  logInfo(
+    'migrateAuthenticatedAccounts',
+    'Commencing authenticated accounts migration',
+  );
 
   const migratedAccounts = await convertAccounts(existing.auth);
 
@@ -24,7 +27,11 @@ export async function migrateAuthenticatedAccounts() {
     auth: { ...existing.auth, accounts: migratedAccounts },
     settings: existing.settings,
   });
-  log.info('Account Migration: Authenticated accounts migration complete');
+
+  logInfo(
+    'migrateAuthenticatedAccounts',
+    'Authenticated accounts migration complete',
+  );
 }
 
 export function hasAccountsToMigrate(existingAuthState: AuthState): boolean {

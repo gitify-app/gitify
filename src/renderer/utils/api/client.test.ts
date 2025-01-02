@@ -1,5 +1,5 @@
 import axios, { type AxiosPromise, type AxiosResponse } from 'axios';
-import log from 'electron-log';
+import * as logger from '../../../shared/logger';
 import {
   mockGitHubCloudAccount,
   mockGitHubEnterpriseServerAccount,
@@ -268,7 +268,7 @@ describe('renderer/utils/api/client.ts', () => {
     });
 
     it('should handle error', async () => {
-      const logErrorSpy = jest.spyOn(log, 'error').mockImplementation();
+      const logErrorSpy = jest.spyOn(logger, 'logError').mockImplementation();
 
       const apiRequestAuthMock = jest.spyOn(apiRequests, 'apiRequestAuth');
 
