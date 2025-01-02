@@ -201,7 +201,8 @@ export function getDeveloperSettingsURL(account: Account): Link {
 
   switch (account.method) {
     case 'GitHub App':
-      settingsURL.pathname = '/settings/apps';
+      settingsURL.pathname =
+        '/settings/connections/applications/27a352516d3341cee376';
       break;
     case 'OAuth App':
       settingsURL.pathname = '/settings/developers';

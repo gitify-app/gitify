@@ -283,7 +283,9 @@ describe('renderer/utils/auth/utils.ts', () => {
         hostname: 'github.com' as Hostname,
         method: 'GitHub App',
       } as Account),
-    ).toBe('https://github.com/settings/apps');
+    ).toBe(
+      'https://github.com/settings/connections/applications/27a352516d3341cee376',
+    );
 
     expect(
       auth.getDeveloperSettingsURL({
