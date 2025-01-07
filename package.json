@@ -142,9 +142,9 @@
     "@primer/octicons-react": "19.14.0",
     "@testing-library/react": "16.1.0",
     "@types/jest": "29.5.14",
-    "@types/node": "22.10.3",
+    "@types/node": "22.10.5",
     "@types/nprogress": "0.2.3",
-    "@types/react": "19.0.2",
+    "@types/react": "19.0.3",
     "@types/react-dom": "19.0.2",
     "@types/react-router-dom": "5.3.3",
     "@types/semver": "7.5.8",
@@ -157,7 +157,7 @@
     "css-loader": "7.1.2",
     "css-minimizer-webpack-plugin": "7.0.0",
     "date-fns": "4.1.0",
-    "electron": "33.2.1",
+    "electron": "33.3.1",
     "electron-builder": "25.1.8",
     "final-form": "4.20.10",
     "graphql-tag": "2.12.6",
@@ -184,7 +184,7 @@
     "webpack-cli": "6.0.1",
     "webpack-merge": "6.0.1"
   },
-  "packageManager": "pnpm@9.15.2",
+  "packageManager": "pnpm@9.15.3",
   "lint-staged": {
     "*": "biome check --fix --no-errors-on-unmatched",
     "*.{js,ts,tsx}": "pnpm test -- --findRelatedTests -u --passWithNoTests"
