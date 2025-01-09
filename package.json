@@ -144,7 +144,7 @@
     "@types/jest": "29.5.14",
     "@types/node": "22.10.5",
     "@types/nprogress": "0.2.3",
-    "@types/react": "19.0.3",
+    "@types/react": "19.0.4",
     "@types/react-dom": "19.0.2",
     "@types/react-router-dom": "5.3.3",
     "@types/semver": "7.5.8",
