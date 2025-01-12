@@ -177,7 +177,7 @@
     "tailwindcss": "3.4.17",
     "terser-webpack-plugin": "5.3.11",
     "ts-jest": "29.2.5",
-    "ts-loader": "9.5.1",
+    "ts-loader": "9.5.2",
     "ts-node": "10.9.2",
     "typescript": "5.7.3",
     "webpack": "5.97.1",
