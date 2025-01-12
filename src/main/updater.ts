@@ -34,7 +34,7 @@ export default class Updater {
 
     autoUpdater.on('download-progress', (progressObj) => {
       this.menubar.tray.setToolTip(
-        `Gitify\nDownloaded: ${progressObj.percent} %`,
+        `Gitify\nDownloading update: ${progressObj.percent} %`,
       );
     });
 
