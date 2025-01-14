@@ -1,4 +1,4 @@
-name: Build App
+name: CI
 
 on:
   push:
@@ -9,9 +9,42 @@ on:
       - main
 
 jobs:
+  lint-app:
+    name: Lint (biomejs)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm lint:check
+
+  run-unit-tests:
+    name: Run Tests
+    runs-on: macos-latest
+    needs: lint-app
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v3
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'pnpm'
+      - run: pnpm install
+      - run: pnpm tsc --noEmit
+      - run: pnpm test -- --coverage --runInBand --verbose
+      - name: Coveralls
+        uses: coverallsapp/github-action@v2
+
   build-macos:
     name: Build macOS (electron-builder)
     runs-on: macos-latest
+    needs: run-unit-tests
 
     steps:
       - uses: actions/checkout@v4
@@ -38,6 +71,7 @@ jobs:
   build-windows:
     name: Build Windows (electron-builder)
     runs-on: windows-latest
+    needs: run-unit-tests
 
     steps:
       - uses: actions/checkout@v4
@@ -61,6 +95,7 @@ jobs:
   build-linux:
     name: Build Linux (electron-builder)
     runs-on: ubuntu-latest
+    needs: run-unit-tests
 
     steps:
       - uses: actions/checkout@v4

@@ -1,8 +1,15 @@
-name: Validators
+name: Triage PR
 
 on:
   pull_request:
-    types: [opened, edited, synchronize, reopened]
+    types: [opened, edited, synchronize, ready_for_review]
+    branches: [main]
+
+permissions:
+  contents: read # the config file
+  pull-requests: write # for labeling pull requests (on: pull_request_target or on: pull_request)
+  statuses: write # to generate status
+  checks: write # to generate status
 
 jobs:
   pr-lint:
@@ -28,18 +35,9 @@ jobs:
             if (!match.groups.subject) {
               core.setFailed('Missing subject in PR title');
             }
-
-  renovate:
-    name: Validate Renovate config
+              
+  labeler:
+    name: Auto-label PR
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: .nvmrc
-      - uses: pnpm/action-setup@v3
-        with:
-          run_install: false
-      - run: pnpm install --global renovate
-      - name: Validate Renovate config
-        run: renovate-config-validator
+      - uses: fuxingloh/multi-labeler@v4
