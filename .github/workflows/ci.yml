@@ -1,4 +1,4 @@
-name: Build App
+name: CI
 
 on:
   push:
@@ -9,9 +9,20 @@ on:
       - main
 
 jobs:
+  lint:
+    name: Lint App
+    uses: ./.github/workflows/lint.yml
+
+  tests:
+    name: Tests
+    uses: ./.github/workflows/test.yml
+    needs: lint
+
   build-macos:
     name: Build macOS (electron-builder)
     runs-on: macos-latest
+    needs: tests
+    if: ${{ !startsWith(github.head_ref, 'release/v') }}
 
     steps:
       - uses: actions/checkout@v4
@@ -38,6 +49,8 @@ jobs:
   build-windows:
     name: Build Windows (electron-builder)
     runs-on: windows-latest
+    needs: tests
+    if: ${{ !startsWith(github.head_ref, 'release/v') }}
 
     steps:
       - uses: actions/checkout@v4
@@ -61,6 +74,8 @@ jobs:
   build-linux:
     name: Build Linux (electron-builder)
     runs-on: ubuntu-latest
+    needs: tests
+    if: ${{ !startsWith(github.head_ref, 'release/v') }}
 
     steps:
       - uses: actions/checkout@v4

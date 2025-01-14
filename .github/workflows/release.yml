@@ -1,4 +1,4 @@
-name: Release App
+name: Release
 
 on:
   push:
@@ -10,9 +10,19 @@ permissions:
   contents: write
 
 jobs:
+  lint:
+    name: Lint App
+    uses: ./.github/workflows/lint.yml
+
+  tests:
+    name: Tests
+    uses: ./.github/workflows/test.yml
+    needs: lint
+   
   release-macos:
     name: Publish macOS (electron-builder)
     runs-on: macos-latest
+    needs: tests
 
     steps:
       - uses: actions/checkout@v4
@@ -45,6 +55,7 @@ jobs:
   release-windows:
     name: Publish Windows (electron-builder)
     runs-on: windows-latest
+    needs: tests
 
     steps:
       - uses: actions/checkout@v4
@@ -71,6 +82,7 @@ jobs:
   release-linux:
     name: Publish Linux (electron-builder)
     runs-on: ubuntu-latest
+    needs: tests
 
     steps:
       - uses: actions/checkout@v4
