@@ -9,25 +9,19 @@ on:
       - main
 
 jobs:
-  prepare:
-    name: Prepare
-    runs-on: ubuntu-latest
-    if: ${{ !startsWith(github.head_ref, 'release/v') }}
-
   lint:
     name: Lint App
     uses: ./.github/workflows/lint.yml
-    needs: prepare
+    if: ${{ !startsWith(github.head_ref, 'release/v') }}
 
   tests:
     name: Tests
     uses: ./.github/workflows/test.yml
     needs: lint
+    if: ${{ !startsWith(github.head_ref, 'release/v') }}
 
   build:
     name: Build
     uses: ./.github/workflows/build.yml
     needs: tests
-
-
-    
+    if: ${{ !startsWith(github.head_ref, 'release/v') }}    
