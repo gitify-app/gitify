@@ -6,8 +6,7 @@ on:
       - main
       - 'release/v**'
   pull_request:
-    branches:
-      - main
+    branches-ignore: 'release/v**'
 
 jobs:
   lint:
