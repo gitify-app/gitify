@@ -2,7 +2,8 @@ name: Website
 
 on:
   push:
-    tags: 'v*'
+    tags: 
+      - v*
   workflow_dispatch: # For manually verify website deployment
 
 jobs:
