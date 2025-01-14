@@ -15,7 +15,7 @@ jobs:
     uses: ./.github/workflows/test.yml
     needs: lint
 
-  release:
+  publish:
     name: Publish
     uses: ./.github/workflows/publish.yml
     needs: tests
