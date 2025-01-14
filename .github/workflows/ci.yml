@@ -23,12 +23,14 @@ jobs:
     uses: ./.github/workflows/build.yml
     needs: tests
     if: ${{ !startsWith(github.head_ref, 'release/v') }}
+    secrets: inherit
 
   release:
     name: Release
     uses: ./.github/workflows/release.yml
     needs: tests
     if: ${{ startsWith(github.head_ref, 'release/v') }}
+    secrets: inherit
     permissions: 
       contents: write
 
