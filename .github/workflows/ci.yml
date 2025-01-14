@@ -4,15 +4,20 @@ on:
   push:
     branches:
       - main
-      - release/v**
   pull_request:
-    branches-ignore:
-      - release/v*.*.* # macOS code-signing only works on `push` events, not `pull_request` events
+    branches:
+      - main
 
 jobs:
+  prepare:
+    name: Prepare
+    runs-on: ubuntu-latest
+    if: ${{ !startsWith(github.head_ref, 'release/v') }}
+
   lint:
     name: Lint App
     uses: ./.github/workflows/lint.yml
+    needs: prepare
 
   tests:
     name: Tests
@@ -23,14 +28,6 @@ jobs:
     name: Build
     uses: ./.github/workflows/build.yml
     needs: tests
-    if: ${{ !startsWith(github.head_ref, 'release/v') }}
 
-  release:
-    name: Release
-    uses: ./.github/workflows/release.yml
-    needs: tests
-    if: ${{ startsWith(github.head_ref, 'release/v') }}
-    permissions: 
-      contents: write
 
     

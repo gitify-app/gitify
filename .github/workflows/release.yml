@@ -1,93 +1,23 @@
 name: Release
 
-on: 
-  workflow_call:
-  workflow_dispatch: # For manually running release process to verify code-signing of artifacts
-
-permissions:
-  contents: write
+on:
+  push:
+    branches:
+      - release/v*.*.*
 
 jobs:
-  release-macos:
-    name: Publish macOS (electron-builder)
-    runs-on: macos-latest
+  lint:
+    name: Lint App
+    uses: ./.github/workflows/lint.yml
 
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm build
-        env:
-          OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
-          OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
-      - run: pnpm prepare:remove-source-maps
-      - run: pnpm package:macos --publish onTagOrDraft
-        env:
-          APPLEID_USERNAME: ${{ secrets.appleid_username }}
-          APPLEID_PASSWORD: ${{ secrets.appleid_password }}
-          APPLEID_TEAM_ID: ${{ secrets.appleid_teamid }}
-          CSC_LINK: ${{ secrets.mac_certs }}
-          CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
-          GH_TOKEN: ${{ secrets.github_token }}
-          NOTARIZE: true
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Gitify-release-mac
-          path: dist/
-          overwrite: true
+  tests:
+    name: Tests
+    uses: ./.github/workflows/test.yml
+    needs: lint
 
-  release-windows:
-    name: Publish Windows (electron-builder)
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm build
-        env:
-          OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
-          OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
-      - run: pnpm prepare:remove-source-maps
-      - run: pnpm package:win --publish onTagOrDraft
-        env:
-          GH_TOKEN: ${{ secrets.github_token }}
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Gitify-release-win
-          path: dist/
-          overwrite: true
-
-  release-linux:
-    name: Publish Linux (electron-builder)
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm build
-        env:
-          OAUTH_CLIENT_ID: ${{ secrets.oauth_client_id }}
-          OAUTH_CLIENT_SECRET: ${{ secrets.oauth_client_secret }}
-      - run: pnpm prepare:remove-source-maps
-      - run: pnpm package:linux --publish onTagOrDraft
-        env:
-          GH_TOKEN: ${{ secrets.github_token }}
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Gitify-release-linux
-          path: dist/
-          overwrite: true
+  release:
+    name: Release
+    uses: ./.github/workflows/release.yml
+    needs: tests
+    permissions: 
+      contents: write 
