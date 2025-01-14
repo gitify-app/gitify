@@ -10,21 +10,21 @@ on:
 
 jobs:
   lint:
-    name: Lint App
+    name: 🔍 Lint App
     uses: ./.github/workflows/lint.yml
 
   tests:
-    name: Tests
+    name: 🧪 Tests
     uses: ./.github/workflows/test.yml
     needs: lint
 
   build:
-    name: Build
+    name: 🏗️ Build
     uses: ./.github/workflows/build.yml
     needs: tests
 
   release:
-    name: Release
+    name: 🚀 Release
     uses: ./.github/workflows/release.yml
     needs: tests
     permissions: 
