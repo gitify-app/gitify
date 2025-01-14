@@ -2,8 +2,13 @@ name: Triage PR
 
 on:
   pull_request:
-    types: [opened, edited, synchronize, ready_for_review]
-    branches: [main]
+    types: 
+      - opened
+      - edited
+      - synchronize
+      - ready_for_review
+    branches: 
+      - main
 
 permissions:
   contents: read # the config file
