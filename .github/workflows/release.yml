@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     branches:
-      - release/v*.*.*
+      - release/v*.*.* # macOS code-signing only works on `push` events and not `pull_request` events
 
 jobs:
   lint:
