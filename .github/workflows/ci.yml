@@ -6,8 +6,8 @@ on:
       - main
       - release/v**
   pull_request:
-    branches-ignore: 
-      - release/v** # macOS code-signing only works on `push` events, not `pull_request` events
+    branches-ignore:
+      - release/v*.*.* # macOS code-signing only works on `push` events, not `pull_request` events
 
 jobs:
   lint:
