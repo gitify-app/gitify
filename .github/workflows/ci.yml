@@ -12,88 +12,21 @@ jobs:
   lint:
     name: Lint App
     uses: ./.github/workflows/lint.yml
-    if: ${{ !startsWith(github.head_ref, 'release/v') }}
 
   tests:
     name: Tests
     uses: ./.github/workflows/test.yml
     needs: lint
-    if: ${{ !startsWith(github.head_ref, 'release/v') }}
 
-  build-macos:
-    name: Build macOS (electron-builder)
-    runs-on: macos-latest
+  build:
+    name: Build
+    uses: ./.github/workflows/build.yml
     needs: tests
-    if: ${{ !startsWith(github.head_ref, 'release/v') }}
 
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm build
-      - run: pnpm prepare:remove-source-maps
-      - run: pnpm package:macos --publish=never -c.mac.identity=null
-        env:
-          CSC_LINK: ${{ secrets.mac_certs }}
-          CSC_KEY_PASSWORD: ${{ secrets.mac_certs_password }}
-      - name: Clean up builds
-        run: rm -rfv dist/mac-universal
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Gitify-dist-mac
-          path: dist/
-          overwrite: true
-
-  build-windows:
-    name: Build Windows (electron-builder)
-    runs-on: windows-latest
+  release:
+    name: Release
+    uses: ./.github/workflows/release.yml
     needs: tests
-    if: ${{ !startsWith(github.head_ref, 'release/v') }}
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm build
-      - run: pnpm prepare:remove-source-maps
-      - run: pnpm package:win --publish=never
-      - name: Clean up builds
-        run: Remove-Item dist/win-unpacked -Recurse
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Gitify-dist-win
-          path: dist
-          overwrite: true
-
-  build-linux:
-    name: Build Linux (electron-builder)
-    runs-on: ubuntu-latest
-    needs: tests
-    if: ${{ !startsWith(github.head_ref, 'release/v') }}
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v3
-      - uses: actions/setup-node@v4
-        with:
-          node-version-file: '.nvmrc'
-          cache: 'pnpm'
-      - run: pnpm install
-      - run: pnpm build
-      - run: pnpm prepare:remove-source-maps
-      - run: pnpm package:linux --publish=never
-      - name: Clean up builds
-        run: rm -rfv dist/linux-unpacked
-      - uses: actions/upload-artifact@v4
-        with:
-          name: Gitify-dist-linux
-          path: dist
-          overwrite: true
+    permissions: 
+      contents: write
+    

@@ -1,28 +1,17 @@
 name: Release
 
-on:
-  push:
-    branches:
-      - 'release/v**'
-  workflow_dispatch: # For manually running release process to verify codesigning of artifacts
+on: 
+  workflow_call:
+  workflow_dispatch: # For manually running release process to verify code-signing of artifacts
 
 permissions:
   contents: write
 
 jobs:
-  lint:
-    name: Lint App
-    uses: ./.github/workflows/lint.yml
-
-  tests:
-    name: Tests
-    uses: ./.github/workflows/test.yml
-    needs: lint
-   
   release-macos:
     name: Publish macOS (electron-builder)
     runs-on: macos-latest
-    needs: tests
+    if: ${{ startsWith(github.head_ref, 'release/v') }}
 
     steps:
       - uses: actions/checkout@v4
@@ -55,7 +44,7 @@ jobs:
   release-windows:
     name: Publish Windows (electron-builder)
     runs-on: windows-latest
-    needs: tests
+    if: ${{ startsWith(github.head_ref, 'release/v') }}
 
     steps:
       - uses: actions/checkout@v4
@@ -82,7 +71,7 @@ jobs:
   release-linux:
     name: Publish Linux (electron-builder)
     runs-on: ubuntu-latest
-    needs: tests
+    if: ${{ startsWith(github.head_ref, 'release/v') }}
 
     steps:
       - uses: actions/checkout@v4
