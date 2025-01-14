@@ -30,3 +30,4 @@ jobs:
     name: Build
     uses: ./.github/workflows/build.yml
     needs: tests
+    secrets: inherit

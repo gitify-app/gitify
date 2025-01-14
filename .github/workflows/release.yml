@@ -19,5 +19,6 @@ jobs:
     name: Publish
     uses: ./.github/workflows/publish.yml
     needs: tests
+    secrets: inherit
     permissions: 
       contents: write 
