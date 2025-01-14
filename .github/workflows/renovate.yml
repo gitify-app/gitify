@@ -5,10 +5,10 @@ on:
     branches:
       - main
     paths:
-      - 'renovate.json'
+      - renovate.json
   pull_request:
     paths:
-      - 'renovate.json'
+      - renovate.json
 
 jobs:
   renovate-config-validator:
