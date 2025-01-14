@@ -21,29 +21,53 @@ export default class Updater {
 
     autoUpdater.on('checking-for-update', () => {
       logInfo('auto updater', 'Checking for update');
-      this.menuBuilder.setCheckForUpdatesMenuEnabled(false);
-    });
 
-    autoUpdater.on('error', (err) => {
-      logError('auto updater', 'Error checking for update', err);
-      this.menuBuilder.setCheckForUpdatesMenuEnabled(true);
+      this.menuBuilder.setCheckForUpdatesMenuEnabled(false);
     });
 
     autoUpdater.on('update-available', () => {
       logInfo('auto updater', 'New update available');
-      menuBuilder.setUpdateAvailableMenuEnabled(true);
+
       this.menubar.tray.setToolTip('Gitify\nA new update is available');
+      menuBuilder.setUpdateAvailableMenuEnabled(true);
+    });
+
+    autoUpdater.on('download-progress', (progressObj) => {
+      this.menubar.tray.setToolTip(
+        `Gitify\nDownloading update: ${progressObj.percent} %`,
+      );
     });
 
     autoUpdater.on('update-downloaded', () => {
       logInfo('auto updater', 'Update downloaded');
-      menuBuilder.setUpdateReadyForInstallMenuEnabled(true);
+
       this.menubar.tray.setToolTip('Gitify\nA new update is ready to install');
+      menuBuilder.setUpdateReadyForInstallMenuEnabled(true);
     });
 
     autoUpdater.on('update-not-available', () => {
       logInfo('auto updater', 'Update not available');
-      this.menuBuilder.setCheckForUpdatesMenuEnabled(true);
+
+      this.resetState();
     });
+
+    autoUpdater.on('update-cancelled', () => {
+      logInfo('auto updater', 'Update cancelled');
+
+      this.resetState();
+    });
+
+    autoUpdater.on('error', (err) => {
+      logError('auto updater', 'Error checking for update', err);
+
+      this.resetState();
+    });
+  }
+
+  private resetState() {
+    this.menubar.tray.setToolTip('Gitify');
+    this.menuBuilder.setCheckForUpdatesMenuEnabled(true);
+    this.menuBuilder.setUpdateAvailableMenuEnabled(false);
+    this.menuBuilder.setUpdateReadyForInstallMenuEnabled(false);
   }
 }

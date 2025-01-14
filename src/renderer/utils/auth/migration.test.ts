@@ -1,6 +1,7 @@
 import axios from 'axios';
-import log from 'electron-log';
 import nock from 'nock';
+
+import * as logger from '../../../shared/logger';
 import { mockGitifyUser, mockToken } from '../../__mocks__/state-mocks';
 import type { AuthState, Hostname } from '../../types';
 import { Constants } from '../constants';
@@ -21,7 +22,7 @@ describe('renderer/utils/auth/migration.ts', () => {
 
   describe('migrateAuthenticatedAccounts', () => {
     it('migrate and save legacy accounts', async () => {
-      const logInfoSpy = jest.spyOn(log, 'info').mockImplementation();
+      const logInfoSpy = jest.spyOn(logger, 'logInfo').mockImplementation();
       jest.spyOn(localStorage.__proto__, 'getItem').mockReturnValueOnce(
         JSON.stringify({
           auth: {
