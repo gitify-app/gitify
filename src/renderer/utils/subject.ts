@@ -92,6 +92,7 @@ function getCheckSuiteStatus(statusDisplayName: string): CheckSuiteStatus {
     case 'cancelled':
       return 'cancelled';
     case 'failed':
+    case 'failed at startup':
       return 'failure';
     case 'skipped':
       return 'skipped';

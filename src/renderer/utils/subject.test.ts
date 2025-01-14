@@ -70,6 +70,20 @@ describe('renderer/utils/subject.ts', () => {
         });
       });
 
+      it('failed at startup check suite state', async () => {
+        const mockNotification = partialMockNotification({
+          title: 'Demo workflow run failed at startup for main branch',
+          type: 'CheckSuite',
+        });
+
+        const result = await getGitifySubjectDetails(mockNotification);
+
+        expect(result).toEqual({
+          state: 'failure',
+          user: null,
+        });
+      });
+
       it('multiple attempts failed check suite state', async () => {
         const mockNotification = partialMockNotification({
           title: 'Demo workflow run, Attempt #3 failed for main branch',
