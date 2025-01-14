@@ -3,7 +3,7 @@ name: Update Website
 on:
   push:
     tags: 'v*'
-  workflow_dispatch: # For manually verify
+  workflow_dispatch: # For manually verify website deployment
 
 jobs:
   redeploy-website:
