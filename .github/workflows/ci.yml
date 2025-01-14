@@ -27,6 +27,8 @@ jobs:
   release:
     name: Release
     uses: ./.github/workflows/release.yml
-    needs: build
+    needs: tests
+    permissions: 
+      contents: write
     if: ${{ startsWith(github.head_ref, 'release/v') }}
     
