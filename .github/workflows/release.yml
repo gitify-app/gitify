@@ -11,7 +11,6 @@ jobs:
   release-macos:
     name: Publish macOS (electron-builder)
     runs-on: macos-latest
-    if: ${{ startsWith(github.head_ref, 'release/v') }}
 
     steps:
       - uses: actions/checkout@v4
@@ -44,7 +43,6 @@ jobs:
   release-windows:
     name: Publish Windows (electron-builder)
     runs-on: windows-latest
-    if: ${{ startsWith(github.head_ref, 'release/v') }}
 
     steps:
       - uses: actions/checkout@v4
@@ -71,7 +69,6 @@ jobs:
   release-linux:
     name: Publish Linux (electron-builder)
     runs-on: ubuntu-latest
-    if: ${{ startsWith(github.head_ref, 'release/v') }}
 
     steps:
       - uses: actions/checkout@v4

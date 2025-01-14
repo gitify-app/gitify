@@ -22,11 +22,14 @@ jobs:
     name: Build
     uses: ./.github/workflows/build.yml
     needs: tests
+    if: ${{ !startsWith(github.head_ref, 'release/v') }}
 
   release:
     name: Release
     uses: ./.github/workflows/release.yml
     needs: tests
+    if: ${{ startsWith(github.head_ref, 'release/v') }}
     permissions: 
       contents: write
+
     
