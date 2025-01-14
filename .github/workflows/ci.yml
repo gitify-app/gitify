@@ -12,13 +12,11 @@ jobs:
   lint:
     name: Lint App
     uses: ./.github/workflows/lint.yml
-    if: ${{ !startsWith(github.head_ref, 'release/v') }}
 
   tests:
     name: Tests
     uses: ./.github/workflows/test.yml
     needs: lint
-    if: ${{ !startsWith(github.head_ref, 'release/v') }}
 
   build:
     name: Build
