@@ -142,7 +142,7 @@
     "@primer/octicons-react": "19.14.0",
     "@testing-library/react": "16.1.0",
     "@types/jest": "29.5.14",
-    "@types/node": "22.10.6",
+    "@types/node": "22.10.7",
     "@types/nprogress": "0.2.3",
     "@types/react": "19.0.7",
     "@types/react-dom": "19.0.3",
