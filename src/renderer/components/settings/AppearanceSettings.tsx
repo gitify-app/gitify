@@ -13,7 +13,7 @@ import {
   TagIcon,
   XCircleIcon,
 } from '@primer/octicons-react';
-import { Button, ButtonGroup, Tooltip, useTheme } from '@primer/react';
+import { Button, ButtonGroup, IconButton, useTheme } from '@primer/react';
 import type { ColorModeWithAuto } from '@primer/react/lib/ThemeProvider';
 
 import { AppContext } from '../../context/App';
@@ -98,46 +98,43 @@ export const AppearanceSettings: FC = () => {
         </label>
 
         <ButtonGroup>
-          <Button
+          <IconButton
+            aria-label="Zoom out"
             size="small"
+            icon={DashIcon}
+            unsafeDisableTooltip={true}
             onClick={() =>
               zoomPercentage > 0 &&
               webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage - 10))
             }
             data-testid="settings-zoom-out"
-          >
-            <Tooltip text="Zoom out">
-              <DashIcon size={Size.SMALL} />
-            </Tooltip>
-          </Button>
+          />
 
           <Button aria-label="Zoom percentage" size="small" disabled>
             {zoomPercentage.toFixed(0)}%
           </Button>
 
-          <Button
+          <IconButton
+            aria-label="Zoom in"
             size="small"
+            icon={PlusIcon}
+            unsafeDisableTooltip={true}
             onClick={() =>
               zoomPercentage < 120 &&
               webFrame.setZoomLevel(zoomPercentageToLevel(zoomPercentage + 10))
             }
             data-testid="settings-zoom-in"
-          >
-            <Tooltip text="Zoom in">
-              <PlusIcon size={Size.SMALL} />
-            </Tooltip>
-          </Button>
+          />
 
-          <Button
+          <IconButton
+            aria-label="Reset zoom"
             size="small"
             variant="danger"
+            icon={XCircleIcon}
+            unsafeDisableTooltip={true}
             onClick={() => webFrame.setZoomLevel(0)}
             data-testid="settings-zoom-reset"
-          >
-            <Tooltip text="Reset zoom">
-              <XCircleIcon size={Size.SMALL} />
-            </Tooltip>
-          </Button>
+          />
         </ButtonGroup>
       </div>
 
