@@ -21,55 +21,53 @@ export const SettingsRoute: FC = () => {
   }, [resetSettings]);
 
   return (
-    <>
-      <div className="flex h-screen flex-col" data-testid="settings">
-        <Header fetchOnBack icon={GearIcon}>
-          Settings
-        </Header>
+    <div className="flex h-screen flex-col" data-testid="settings">
+      <Header fetchOnBack icon={GearIcon}>
+        Settings
+      </Header>
 
-        <div className="overflow-x-auto px-8 pb-4">
-          <Stack direction="vertical" gap="spacious">
-            <AppearanceSettings />
-            <NotificationSettings />
-            <SystemSettings />
-          </Stack>
-          <Stack align="center">
-            <Button
-              variant="danger"
-              onClick={() => setIsOpen(!isOpen)}
-              data-testid="settings-reset"
-              sx={{ width: '200px' }} // Set the width of the button
+      <div className="overflow-x-auto px-8 pb-4">
+        <Stack direction="vertical" gap="spacious">
+          <AppearanceSettings />
+          <NotificationSettings />
+          <SystemSettings />
+        </Stack>
+        <Stack align="center">
+          <Button
+            variant="danger"
+            onClick={() => setIsOpen(!isOpen)}
+            data-testid="settings-reset"
+            sx={{ width: '200px' }} // Set the width of the button
+          >
+            Reset Settings
+          </Button>
+          {isOpen && (
+            <Dialog
+              title="Reset Settings"
+              width="large"
+              onClose={onDialogClose}
+              footerButtons={[
+                {
+                  buttonType: 'default',
+                  content: 'Cancel',
+                  onClick: onDialogClose,
+                },
+                {
+                  buttonType: 'danger',
+                  content: 'Reset',
+                  onClick: onDialogProceed,
+                },
+              ]}
+              data-testid="reset-dialog"
             >
-              Reset Settings
-            </Button>
-            {isOpen && (
-              <Dialog
-                title="Reset Settings"
-                width="large"
-                onClose={onDialogClose}
-                footerButtons={[
-                  {
-                    buttonType: 'default',
-                    content: 'Cancel',
-                    onClick: onDialogClose,
-                  },
-                  {
-                    buttonType: 'danger',
-                    content: 'Reset',
-                    onClick: onDialogProceed,
-                  },
-                ]}
-                data-testid="reset-dialog"
-              >
-                Please confirm that you want to reset all settings to the{' '}
-                <strong>Gitify defaults</strong>
-              </Dialog>
-            )}
-          </Stack>
-        </div>
-
-        <SettingsFooter />
+              Please confirm that you want to reset all settings to the{' '}
+              <strong>Gitify defaults</strong>
+            </Dialog>
+          )}
+        </Stack>
       </div>
-    </>
+
+      <SettingsFooter />
+    </div>
   );
 };

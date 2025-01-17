@@ -39,6 +39,7 @@ export const FiltersRoute: FC = () => {
       <Header fetchOnBack={true} icon={FilterIcon}>
         Filters
       </Header>
+
       <div className="flex-grow overflow-x-auto px-8">
         <fieldset className="mb-3">
           <Legend icon={FeedPersonIcon}>Users</Legend>
